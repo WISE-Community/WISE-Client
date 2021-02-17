@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ConfigService } from '../../../../../wise5/services/configService';
-import { TeacherProjectService } from '../../../../../wise5/services/teacherProjectService';
+import { ConfigService } from '../../../assets/wise5/services/configService';
+import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
   selector: 'edit-component-rubric',

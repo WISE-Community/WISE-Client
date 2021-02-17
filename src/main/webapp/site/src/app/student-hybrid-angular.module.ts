@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 
-import { createStudentAngularJSModule } from '../../../wise5/vle/student-angular-js-module';
+import { createStudentAngularJSModule } from '../assets/wise5/vle/student-angular-js-module';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { setUpLocationSync } from '@angular/router/upgrade';
-import { ProjectService } from '../../../wise5/services/projectService';
-import { VLEProjectService } from '../../../wise5/vle/vleProjectService';
+import { ProjectService } from '../assets/wise5/services/projectService';
+import { VLEProjectService } from '../assets/wise5/vle/vleProjectService';
 import { PossibleScoreComponent } from './possible-score/possible-score.component';
 import { CommonModule } from '@angular/common';
-import { StudentDataService } from '../../../wise5/services/studentDataService';
+import { StudentDataService } from '../assets/wise5/services/studentDataService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ChooseBranchPathDialogComponent } from './preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { DataService } from './services/data.service';
 import { AngularJSModule } from './common-hybrid-angular.module';
-import { NavItemComponent } from '../../../wise5/vle/nav-item/nav-item.component';
-import { ComponentAnnotationsComponent } from '../../../wise5/directives/componentAnnotations/component-annotations.component';
+import { NavItemComponent } from '../assets/wise5/vle/nav-item/nav-item.component';
+import { ComponentAnnotationsComponent } from '../assets/wise5/directives/componentAnnotations/component-annotations.component';
 import { MomentModule } from 'ngx-moment';
 
 @NgModule({

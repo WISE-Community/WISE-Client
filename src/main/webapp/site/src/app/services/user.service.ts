@@ -90,7 +90,7 @@ export class UserService {
     if (credentials.recaptchaResponse != null) {
       httpParams = httpParams.set('g-recaptcha-response', credentials.recaptchaResponse);
     }
-    const logInURL = `${this.configService.getContextPath()}/j_acegi_security_check`;
+    const logInURL = `${this.configService.getContextPath()}/api/j_acegi_security_check`;
     this.http
       .post(logInURL, httpParams, { headers: headers, responseType: 'text' })
       .subscribe((response) => {

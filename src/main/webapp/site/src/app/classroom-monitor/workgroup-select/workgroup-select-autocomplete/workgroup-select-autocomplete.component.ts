@@ -1,12 +1,12 @@
 'use strict';
 
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ConfigService } from '../../../../../../wise5/services/configService';
-import { TeacherDataService } from '../../../../../../wise5/services/teacherDataService';
 import { WorkgroupSelectComponent } from '../workgroup-select.component';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
+import { ConfigService } from '../../../../assets/wise5/services/configService';
+import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
 
 @Component({
   selector: 'workgroup-select-autocomplete',

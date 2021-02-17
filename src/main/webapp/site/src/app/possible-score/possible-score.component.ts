@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProjectService } from '../../../../wise5/services/projectService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
 
 @Component({
   selector: 'possible-score',

@@ -1,9 +1,9 @@
-import { UtilService } from '../../../../../../wise5/services/utilService';
-import { TeacherDataService } from '../../../../../../wise5/services/teacherDataService';
-import { ConfigService } from '../../../../../../wise5/services/configService';
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { TeacherProjectService } from '../../../../../../wise5/services/teacherProjectService';
+import { ConfigService } from '../../../../assets/wise5/services/configService';
+import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
+import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
+import { UtilService } from '../../../../assets/wise5/services/utilService';
 
 @Component({
   selector: 'choose-new-component-location',

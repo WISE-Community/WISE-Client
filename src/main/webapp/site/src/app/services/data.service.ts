@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Subject } from 'rxjs';
-import { ProjectService } from '../../../../wise5/services/projectService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
 
 @Injectable({
   providedIn: 'root'

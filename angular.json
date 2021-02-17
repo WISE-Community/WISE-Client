@@ -4,31 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "wise": {
-      "i18n": {
-        "locales": {
-          "es": {
-            "translation": "src/main/webapp/site/src/locale/messages.es.xlf",
-            "baseHref": "/"
-          },
-          "pt": {
-            "translation": "src/main/webapp/site/src/locale/messages.pt.xlf",
-            "baseHref": "/"
-          },
-          "tr": {
-            "translation": "src/main/webapp/site/src/locale/messages.tr.xlf",
-            "baseHref": "/"
-          },
-          "zh-Hans": {
-            "translation": "src/main/webapp/site/src/locale/messages.zh-Hans.xlf",
-            "baseHref": "/"
-          },
-          "zh-Hant": {
-            "translation": "src/main/webapp/site/src/locale/messages.zh-Hant.xlf",
-            "baseHref": "/"
-          }
-        }
-      },
-      "root": "src/main/webapp/site",
+      "root": "src/main/webapp",
       "sourceRoot": "src/main/webapp/site/src",
       "projectType": "application",
       "architect": {

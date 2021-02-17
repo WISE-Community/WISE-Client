@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TeacherProjectService } from '../../../../../wise5/services/teacherProjectService';
+import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
   selector: 'step-info',

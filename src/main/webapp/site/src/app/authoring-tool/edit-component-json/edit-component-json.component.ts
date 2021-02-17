@@ -1,10 +1,10 @@
 import * as angular from 'angular';
 import { Component, Input } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { NotificationService } from '../../../../../wise5/services/notificationService';
-import { TeacherProjectService } from '../../../../../wise5/services/teacherProjectService';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { NotificationService } from '../../../assets/wise5/services/notificationService';
+import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
   selector: 'edit-component-json',

@@ -1,8 +1,8 @@
-import { UtilService } from '../../../../../../wise5/services/utilService';
-import { ConfigService } from '../../../../../../wise5/services/configService';
-import { TeacherDataService } from '../../../../../../wise5/services/teacherDataService';
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ConfigService } from '../../../../assets/wise5/services/configService';
+import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
+import { UtilService } from '../../../../assets/wise5/services/utilService';
 
 @Component({
   selector: 'choose-new-component',
@@ -73,19 +73,15 @@ export class ChooseNewComponent {
   }
 
   chooseLocation() {
-    this.upgrade.$injector
-      .get('$state')
-      .go('root.at.project.node.add-component.choose-location', {
-        componentType: this.selectedComponentType
-      });
+    this.upgrade.$injector.get('$state').go('root.at.project.node.add-component.choose-location', {
+      componentType: this.selectedComponentType
+    });
   }
 
   cancel() {
-    this.upgrade.$injector
-      .get('$state')
-      .go('root.at.project.node', {
-        projectId: this.ConfigService.getProjectId(),
-        nodeId: this.TeacherDataService.getCurrentNodeId()
-      });
+    this.upgrade.$injector.get('$state').go('root.at.project.node', {
+      projectId: this.ConfigService.getProjectId(),
+      nodeId: this.TeacherDataService.getCurrentNodeId()
+    });
   }
 }

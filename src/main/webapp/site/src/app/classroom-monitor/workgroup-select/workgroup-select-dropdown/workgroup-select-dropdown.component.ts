@@ -1,8 +1,8 @@
 'use strict';
 
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ConfigService } from '../../../../../../wise5/services/configService';
-import { TeacherDataService } from '../../../../../../wise5/services/teacherDataService';
+import { ConfigService } from '../../../../assets/wise5/services/configService';
+import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
 import { WorkgroupSelectComponent } from '../workgroup-select.component';
 
 @Component({

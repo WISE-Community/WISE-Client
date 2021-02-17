@@ -1,5 +1,5 @@
-import { NodeService } from '../../../../../wise5/services/nodeService';
-import { TeacherProjectService } from '../../../../../wise5/services/teacherProjectService';
+import { NodeService } from '../../../assets/wise5/services/nodeService';
+import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 export class EditAdvancedComponentAngularJSController {
   authoringComponentContent: any;

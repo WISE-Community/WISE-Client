@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AnnotationService } from '../../../../../wise5/services/annotationService';
-import { TeacherDataService } from '../../../../../wise5/services/teacherDataService';
+import { AnnotationService } from '../../../assets/wise5/services/annotationService';
+import { TeacherDataService } from '../../../assets/wise5/services/teacherDataService';
 
 @Component({
   selector: 'component-new-work-badge',

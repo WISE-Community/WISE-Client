@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AchievementService } from '../../../../../wise5/services/achievementService';
-import { AnnotationService } from '../../../../../wise5/services/annotationService';
-import { MilestoneService } from '../../../../../wise5/services/milestoneService';
-import { TeacherDataService } from '../../../../../wise5/services/teacherDataService';
+import { AchievementService } from '../../../assets/wise5/services/achievementService';
+import { AnnotationService } from '../../../assets/wise5/services/annotationService';
+import { MilestoneService } from '../../../assets/wise5/services/milestoneService';
+import { TeacherDataService } from '../../../assets/wise5/services/teacherDataService';
 
 @Component({
   selector: 'milestones',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigService } from '../../../../../../wise5/services/configService';
-import { TeacherProjectService } from '../../../../../../wise5/services/teacherProjectService';
+import { ConfigService } from '../../../../assets/wise5/services/configService';
+import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
 
 @Component({
   styleUrls: ['choose-import-step-location.component.scss'],

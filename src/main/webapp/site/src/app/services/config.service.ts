@@ -7,7 +7,7 @@ import { Announcement } from '../domain/announcement';
 @Injectable()
 export class ConfigService {
   private userConfigUrl = '/api/user/config';
-  private announcementUrl = '/announcement';
+  private announcementUrl = '/api/announcement';
   private config$: BehaviorSubject<Config> = new BehaviorSubject<Config>(null);
   private timeDiff: number = 0;
 

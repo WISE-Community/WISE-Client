@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { TeacherProjectService } from '../../../../../wise5/services/teacherProjectService';
+import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
   selector: 'edit-component-max-score',

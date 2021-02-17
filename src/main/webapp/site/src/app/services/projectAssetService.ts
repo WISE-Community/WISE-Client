@@ -1,13 +1,13 @@
 'use strict';
 
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ConfigService } from '../../../../wise5/services/configService';
 import { Injectable } from '@angular/core';
-import { UtilService } from '../../../../wise5/services/utilService';
-import { ProjectService } from '../../../../wise5/services/projectService';
 import { map } from 'rxjs/operators';
 import { forkJoin, BehaviorSubject } from 'rxjs';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ConfigService } from '../../assets/wise5/services/configService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { UtilService } from '../../assets/wise5/services/utilService';
 
 @Injectable()
 export class ProjectAssetService {

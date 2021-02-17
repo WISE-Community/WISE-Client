@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { TeacherProjectService } from '../../../../../wise5/services/teacherProjectService';
-import { UtilService } from '../../../../../wise5/services/utilService';
+import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
+import { UtilService } from '../../../assets/wise5/services/utilService';
 
 @Component({
   selector: 'component-select',
