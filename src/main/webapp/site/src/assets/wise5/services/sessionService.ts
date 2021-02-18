@@ -49,7 +49,9 @@ export class SessionService {
   }
 
   logOut() {
-    window.location.href = this.ConfigService.getSessionLogOutURL();
+    this.http.get(this.ConfigService.getSessionLogOutURL()).subscribe(() => {
+      window.location.href = '/';
+    });
   }
 
   initializeSession() {

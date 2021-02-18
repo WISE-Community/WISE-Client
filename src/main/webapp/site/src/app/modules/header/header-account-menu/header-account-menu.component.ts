@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ConfigService } from '../../../services/config.service';
 import { User } from '../../../domain/user';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-header-account-menu',
@@ -17,7 +18,7 @@ export class HeaderAccountMenuComponent implements OnInit {
   isPreviousAdmin: boolean = false;
   logOutURL: string;
 
-  constructor(private configService: ConfigService) {
+  constructor(private configService: ConfigService, private http: HttpClient) {
     this.configService = configService;
   }
 
@@ -50,6 +51,8 @@ export class HeaderAccountMenuComponent implements OnInit {
   }
 
   logOut() {
-    window.location.href = this.logOutURL;
+    this.http.get(this.logOutURL).subscribe(() => {
+      window.location.href = '/';
+    });
   }
 }
