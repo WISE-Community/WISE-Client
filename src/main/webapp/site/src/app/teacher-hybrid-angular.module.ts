@@ -59,6 +59,8 @@ import { EmbeddedAuthoring } from '../assets/wise5/components/embedded/embedded-
 import { GraphAuthoring } from '../assets/wise5/components/graph/graph-authoring/graph-authoring.component';
 import { AudioOscillatorAuthoring } from '../assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component';
 import { AnimationAuthoring } from '../assets/wise5/components/animation/animation-authoring/animation-authoring.component';
+import { OpenResponseGrading } from '../assets/wise5/components/openResponse/open-response-grading/open-response-grading.component';
+import { MultipleChoiceGrading } from '../assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component';
 
 @NgModule({
   declarations: [
@@ -91,9 +93,11 @@ import { AnimationAuthoring } from '../assets/wise5/components/animation/animati
     MilestonesComponent,
     MilestoneReportDataComponent,
     MultipleChoiceAuthoring,
+    MultipleChoiceGrading,
     NavItemProgressComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
+    OpenResponseGrading,
     OpenResponseAuthoring,
     OutsideUrlAuthoring,
     RubricAuthoringComponent,

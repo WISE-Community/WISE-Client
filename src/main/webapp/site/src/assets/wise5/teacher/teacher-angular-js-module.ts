@@ -59,7 +59,9 @@ import '../authoringTool/importStep/importStepModule';
 import '../components/label/labelAuthoringComponentModule';
 import '../components/match/matchAuthoringComponentModule';
 import '../components/multipleChoice/multipleChoiceAuthoringComponentModule';
+import '../components/multipleChoice/multipleChoiceGradingComponentModule';
 import '../components/openResponse/openResponseAuthoringComponentModule';
+import '../components/openResponse/openResponseGradingComponentModule';
 import '../components/outsideURL/outsideURLAuthoringComponentModule';
 import '../components/summary/summaryAuthoringComponentModule';
 import '../components/table/tableAuthoringComponentModule';
@@ -86,9 +88,11 @@ angular
     'labelAuthoringComponentModule',
     'matchAuthoringComponentModule',
     'multipleChoiceAuthoringComponentModule',
+    'multipleChoiceGradingComponentModule',
     'ngAnimate',
     'ngFileSaver',
     'openResponseAuthoringComponentModule',
+    'openResponseGradingComponentModule',
     'outsideURLAuthoringComponentModule',
     'structureAuthoringModule',
     'tableAuthoringComponentModule',
