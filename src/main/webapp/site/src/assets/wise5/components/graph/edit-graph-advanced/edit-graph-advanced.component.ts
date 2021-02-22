@@ -169,5 +169,6 @@ export const EditGraphAdvancedComponent = {
     componentId: '@'
   },
   controller: EditGraphAdvancedController,
-  templateUrl: 'wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html'
+  templateUrl:
+    'assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html'
 };

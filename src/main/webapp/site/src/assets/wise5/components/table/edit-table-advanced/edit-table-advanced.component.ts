@@ -140,5 +140,6 @@ export const EditTableAdvancedComponent = {
     componentId: '@'
   },
   controller: EditTableAdvancedController,
-  templateUrl: 'wise5/components/table/edit-table-advanced/edit-table-advanced.component.html'
+  templateUrl:
+    'assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html'
 };

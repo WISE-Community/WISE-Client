@@ -385,5 +385,5 @@ export const EditOpenResponseAdvancedComponent = {
   },
   controller: EditOpenResponseAdvancedController,
   templateUrl:
-    'wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html'
+    'assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html'
 };

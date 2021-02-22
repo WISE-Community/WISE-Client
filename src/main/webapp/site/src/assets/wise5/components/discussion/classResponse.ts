@@ -10,7 +10,7 @@ const ClassResponse = {
     studentdatachanged: '&',
     isdisabled: '<'
   },
-  templateUrl: 'wise5/components/discussion/classResponse.html',
+  templateUrl: 'assets/wise5/components/discussion/classResponse.html',
   controller: 'ClassResponseController as classResponseCtrl'
 };
 

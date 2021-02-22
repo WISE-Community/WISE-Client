@@ -144,5 +144,5 @@ export const EditConceptMapAdvancedComponent = {
   },
   controller: EditConceptMapAdvancedController,
   templateUrl:
-    'wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html'
+    'assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html'
 };

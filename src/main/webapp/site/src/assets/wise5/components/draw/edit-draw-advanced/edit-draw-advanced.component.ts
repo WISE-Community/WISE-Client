@@ -54,5 +54,5 @@ export const EditDrawAdvancedComponent = {
     componentId: '@'
   },
   controller: EditDrawAdvancedController,
-  templateUrl: 'wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html'
+  templateUrl: 'assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html'
 };

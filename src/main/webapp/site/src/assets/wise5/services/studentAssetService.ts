@@ -54,10 +54,10 @@ export class StudentAssetService {
                 asset.iconURL = asset.url;
               } else if (this.isAudio(asset)) {
                 asset.type = 'audio';
-                asset.iconURL = 'wise5/vle/notebook/audio.png';
+                asset.iconURL = 'assets/wise5/vle/notebook/audio.png';
               } else {
                 asset.type = 'file';
-                asset.iconURL = 'wise5/vle/notebook/file.png';
+                asset.iconURL = 'assets/wise5/vle/notebook/file.png';
               }
               this.allAssets.push(asset);
             }
@@ -213,10 +213,10 @@ export class StudentAssetService {
                 copiedAsset.iconURL = copiedAsset.url;
               } else if (this.isAudio(copiedAsset)) {
                 copiedAsset.type = 'audio';
-                copiedAsset.iconURL = 'wise5/vle/notebook/audio.png';
+                copiedAsset.iconURL = 'assets/wise5/vle/notebook/audio.png';
               } else {
                 copiedAsset.type = 'file';
-                copiedAsset.iconURL = 'wise5/vle/notebook/file.png';
+                copiedAsset.iconURL = 'assets/wise5/vle/notebook/file.png';
               }
               return copiedAsset;
             }

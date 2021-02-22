@@ -11,5 +11,5 @@ export const EditAnimationAdvancedComponent = {
   },
   controller: EditAnimationAdvancedController,
   templateUrl:
-    'wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html'
+    'assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html'
 };

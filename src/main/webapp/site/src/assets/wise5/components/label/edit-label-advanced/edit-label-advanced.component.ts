@@ -54,5 +54,6 @@ export const EditLabelAdvancedComponent = {
     componentId: '@'
   },
   controller: EditLabelAdvancedController,
-  templateUrl: 'wise5/components/label/edit-label-advanced/edit-label-advanced.component.html'
+  templateUrl:
+    'assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html'
 };

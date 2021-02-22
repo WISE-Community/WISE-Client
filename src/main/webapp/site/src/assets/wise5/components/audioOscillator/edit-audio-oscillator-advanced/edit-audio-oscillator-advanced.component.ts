@@ -11,5 +11,5 @@ export const EditAudioOscillatorAdvancedComponent = {
   },
   controller: EditAudioOscillatorAdvancedController,
   templateUrl:
-    'wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html'
+    'assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html'
 };

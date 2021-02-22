@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ConfigService } from '../../../../wise5/services/configService';
-import { SpaceService } from '../../../../wise5/services/spaceService';
-import { UtilService } from '../../../../wise5/services/utilService';
-import { SessionService } from '../../../../wise5/services/sessionService';
-import { TeacherProjectService } from '../../../../wise5/services/teacherProjectService';
+import { ConfigService } from '../../assets/wise5/services/configService';
+import { SpaceService } from '../../assets/wise5/services/spaceService';
+import { UtilService } from '../../assets/wise5/services/utilService';
+import { SessionService } from '../../assets/wise5/services/sessionService';
+import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 let service: SpaceService;
 let teacherProjectService: TeacherProjectService;
 

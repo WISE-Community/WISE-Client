@@ -24,5 +24,5 @@ export const EditEmbeddedAdvancedComponent = {
   },
   controller: EditEmbeddedAdvancedController,
   templateUrl:
-    'wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html'
+    'assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html'
 };

@@ -1,11 +1,11 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ConfigService } from '../../../../wise5/services/configService';
+import { ConfigService } from '../../assets/wise5/services/configService';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ProjectService } from '../../../../wise5/services/projectService';
-import { UtilService } from '../../../../wise5/services/utilService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { UtilService } from '../../assets/wise5/services/utilService';
 import { ProjectAssetService } from './projectAssetService';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { SessionService } from '../../../../wise5/services/sessionService';
+import { SessionService } from '../../assets/wise5/services/sessionService';
 let service: ProjectAssetService;
 let configService: ConfigService;
 let http: HttpTestingController;

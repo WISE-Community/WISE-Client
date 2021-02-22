@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { TeacherProjectService } from '../../../../wise5/services/teacherProjectService';
-import { ConfigService } from '../../../../wise5/services/configService';
-import { UtilService } from '../../../../wise5/services/utilService';
+import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
+import { ConfigService } from '../../assets/wise5/services/configService';
+import { UtilService } from '../../assets/wise5/services/utilService';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServiceSpec.project.json';
-import { SessionService } from '../../../../wise5/services/sessionService';
+import { SessionService } from '../../assets/wise5/services/sessionService';
 let service: TeacherProjectService;
 let configService: ConfigService;
 let sessionService: SessionService;

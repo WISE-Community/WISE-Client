@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ConfigService } from '../../../../wise5/services/configService';
+import { ConfigService } from '../../assets/wise5/services/configService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import sampleConfig1 from './sampleData/sample_config_1.json';

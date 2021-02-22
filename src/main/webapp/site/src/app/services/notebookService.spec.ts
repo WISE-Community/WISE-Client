@@ -1,19 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { NotebookService } from '../../../../wise5/services/notebookService';
-import { ConfigService } from '../../../../wise5/services/configService';
-import { UtilService } from '../../../../wise5/services/utilService';
-import { ProjectService } from '../../../../wise5/services/projectService';
-import { StudentAssetService } from '../../../../wise5/services/studentAssetService';
-import { StudentDataService } from '../../../../wise5/services/studentDataService';
-import { AnnotationService } from '../../../../wise5/services/annotationService';
-import { TagService } from '../../../../wise5/services/tagService';
+import { NotebookService } from '../../assets/wise5/services/notebookService';
+import { ConfigService } from '../../assets/wise5/services/configService';
+import { UtilService } from '../../assets/wise5/services/utilService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
+import { StudentDataService } from '../../assets/wise5/services/studentDataService';
+import { AnnotationService } from '../../assets/wise5/services/annotationService';
+import { TagService } from '../../assets/wise5/services/tagService';
 import demoNotebookItems_import from './sampleData/sample_notebookItems.json';
 import demoNotebooksByWorkgroupId_import from './sampleData/sample_notebooksByWorkgroup.json';
 import demoPublicNotebookItems_import from './sampleData/sample_publicNotebookItems.json';
 import demoProject_import from './sampleData/curriculum/Demo.project.json';
-import { SessionService } from '../../../../wise5/services/sessionService';
+import { SessionService } from '../../assets/wise5/services/sessionService';
 
 let http: HttpTestingController;
 let configService: ConfigService;

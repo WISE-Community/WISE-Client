@@ -8,5 +8,6 @@ export const EditSummaryAdvancedComponent = {
     componentId: '@'
   },
   controller: EditSummaryAdvancedController,
-  templateUrl: 'wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.html'
+  templateUrl:
+    'assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.html'
 };

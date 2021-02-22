@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-import { TableService } from '../../../../wise5/components/table/tableService';
+import { TableService } from '../../assets/wise5/components/table/tableService';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { StudentAssetService } from '../../../../wise5/services/studentAssetService';
+import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ConfigService } from '../../../../wise5/services/configService';
-import { StudentDataService } from '../../../../wise5/services/studentDataService';
-import { AnnotationService } from '../../../../wise5/services/annotationService';
-import { ProjectService } from '../../../../wise5/services/projectService';
-import { UtilService } from '../../../../wise5/services/utilService';
-import { TagService } from '../../../../wise5/services/tagService';
-import { SessionService } from '../../../../wise5/services/sessionService';
+import { ConfigService } from '../../assets/wise5/services/configService';
+import { StudentDataService } from '../../assets/wise5/services/studentDataService';
+import { AnnotationService } from '../../assets/wise5/services/annotationService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { UtilService } from '../../assets/wise5/services/utilService';
+import { TagService } from '../../assets/wise5/services/tagService';
+import { SessionService } from '../../assets/wise5/services/sessionService';
 
 let service: TableService;
 

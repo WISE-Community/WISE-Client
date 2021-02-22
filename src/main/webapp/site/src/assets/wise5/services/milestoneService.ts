@@ -512,7 +512,7 @@ export class MilestoneService {
     this.upgrade.$injector.get('$mdDialog').show({
       parent: angular.element(document.body),
       templateUrl:
-        'wise5/classroomMonitor/classroomMonitorComponents/milestones/milestoneDetailsDialog/milestoneDetailsDialog.html',
+        'assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestoneDetailsDialog/milestoneDetailsDialog.html',
       controller: MilestoneDetailsDialog,
       controllerAs: '$ctrl',
       fullscreen: true,

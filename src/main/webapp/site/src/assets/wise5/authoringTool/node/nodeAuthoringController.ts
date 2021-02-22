@@ -599,7 +599,7 @@ class NodeAuthoringController {
 
   showComponentAdvancedAuthoring(component: any) {
     this.$mdDialog.show({
-      templateUrl: 'wise5/authoringTool/components/edit-component-advanced.html',
+      templateUrl: 'assets/wise5/authoringTool/components/edit-component-advanced.html',
       controller: [
         '$scope',
         '$mdDialog',

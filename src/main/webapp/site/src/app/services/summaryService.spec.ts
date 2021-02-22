@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { SummaryService } from '../../../../wise5/components/summary/summaryService';
+import { SummaryService } from '../../assets/wise5/components/summary/summaryService';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { StudentDataService } from '../../../../wise5/services/studentDataService';
-import { UtilService } from '../../../../wise5/services/utilService';
+import { StudentDataService } from '../../assets/wise5/services/studentDataService';
+import { UtilService } from '../../assets/wise5/services/utilService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ConfigService } from '../../../../wise5/services/configService';
-import { AnnotationService } from '../../../../wise5/services/annotationService';
-import { ProjectService } from '../../../../wise5/services/projectService';
-import { TagService } from '../../../../wise5/services/tagService';
-import { SessionService } from '../../../../wise5/services/sessionService';
+import { ConfigService } from '../../assets/wise5/services/configService';
+import { AnnotationService } from '../../assets/wise5/services/annotationService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { TagService } from '../../assets/wise5/services/tagService';
+import { SessionService } from '../../assets/wise5/services/sessionService';
 
 let service;
 const summaryAllowedComponentTypes = [

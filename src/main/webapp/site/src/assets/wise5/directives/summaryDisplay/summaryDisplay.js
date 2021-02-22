@@ -948,7 +948,7 @@ const SummaryDisplay = {
     customLabelColors: '<',
     doRender: '='
   },
-  templateUrl: 'wise5/directives/summaryDisplay/summaryDisplay.html',
+  templateUrl: 'assets/wise5/directives/summaryDisplay/summaryDisplay.html',
   controller: SummaryDisplayController,
   controllerAs: 'summaryDisplayCtrl'
 };

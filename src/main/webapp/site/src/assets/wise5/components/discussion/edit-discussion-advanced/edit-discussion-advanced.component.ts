@@ -29,5 +29,5 @@ export const EditDiscussionAdvancedComponent = {
   },
   controller: EditDiscussionAdvancedController,
   templateUrl:
-    'wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html'
+    'assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html'
 };

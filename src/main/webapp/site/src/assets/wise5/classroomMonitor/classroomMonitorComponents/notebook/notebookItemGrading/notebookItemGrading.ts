@@ -261,7 +261,7 @@ const NotebookItemGrading = {
     notebookItem: '<'
   },
   templateUrl:
-    'wise5/classroomMonitor/classroomMonitorComponents/notebook/notebookItemGrading/notebookItemGrading.html',
+    'assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebookItemGrading/notebookItemGrading.html',
   controller: NotebookItemGradingController
 };
 

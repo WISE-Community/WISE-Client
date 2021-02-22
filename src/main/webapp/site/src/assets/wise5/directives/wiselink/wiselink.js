@@ -99,7 +99,7 @@ const Wiselink = {
     linkClass: '@',
     type: '@'
   },
-  templateUrl: 'wise5/directives/wiselink/wiselink.html',
+  templateUrl: 'assets/wise5/directives/wiselink/wiselink.html',
   controller: WiselinkController,
   controllerAs: 'wiselinkCtrl'
 };

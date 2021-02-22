@@ -57,7 +57,7 @@ const NotebookWorkgroupGrading = {
     onUpdateExpand: '&'
   },
   templateUrl:
-    'wise5/classroomMonitor/classroomMonitorComponents/notebook/notebookWorkgroupGrading/notebookWorkgroupGrading.html',
+    'assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebookWorkgroupGrading/notebookWorkgroupGrading.html',
   controller: NotebookWorkgroupGradingController,
   controllerAs: '$ctrl'
 };

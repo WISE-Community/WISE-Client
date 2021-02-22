@@ -1335,7 +1335,7 @@ export class TeacherProjectService extends ProjectService {
       target: target
     };
     return this.upgrade.$injector.get('$mdDialog').show({
-      templateUrl: 'wise5/authoringTool/wiseLink/wiseLinkAuthoring.html',
+      templateUrl: 'assets/wise5/authoringTool/wiseLink/wiseLinkAuthoring.html',
       controller: 'WISELinkAuthoringController',
       controllerAs: 'wiseLinkAuthoringController',
       $stateParams: stateParams,

@@ -35,7 +35,7 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.choose', {
           url: '/choose',
-          templateUrl: 'wise5/authoringTool/structure/chooseStructure.html',
+          templateUrl: 'assets/wise5/authoringTool/structure/chooseStructure.html',
           controller: 'ChooseStructureController',
           controllerAs: 'chooseStructureController',
           params: {
@@ -44,7 +44,7 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.configure', {
           url: '/configure',
-          templateUrl: 'wise5/authoringTool/structure/configureStructure.html',
+          templateUrl: 'assets/wise5/authoringTool/structure/configureStructure.html',
           controller: 'ConfigureStructureController',
           controllerAs: 'configureStructureController',
           abstract: true,
@@ -54,7 +54,7 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.jigsaw', {
           url: '/jigsaw',
-          templateUrl: 'wise5/authoringTool/structure/jigsaw/jigsaw.html',
+          templateUrl: 'assets/wise5/authoringTool/structure/jigsaw/jigsaw.html',
           controller: 'JigsawController',
           controllerAs: 'jigsawController',
           params: {
@@ -63,7 +63,7 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.guidance-choice', {
           url: '/guidance-choice',
-          templateUrl: 'wise5/authoringTool/structure/guidanceChoice/guidanceChoice.html',
+          templateUrl: 'assets/wise5/authoringTool/structure/guidanceChoice/guidanceChoice.html',
           controller: 'GuidanceChoiceController',
           controllerAs: 'guidanceChoiceController',
           params: {
@@ -73,7 +73,7 @@ const structureAuthoringModule = angular
         .state('root.at.project.structure.self-directed-investigation', {
           url: '/self-directed-investigation',
           templateUrl:
-            'wise5/authoringTool/structure/selfDirectedInvestigation/selfDirectedInvestigation.html',
+            'assets/wise5/authoringTool/structure/selfDirectedInvestigation/selfDirectedInvestigation.html',
           controller: 'SelfDirectedInvestigationController',
           controllerAs: 'selfDirectedInvestigationController',
           params: {
@@ -83,7 +83,7 @@ const structureAuthoringModule = angular
         .state('root.at.project.structure.peer-review-and-revision', {
           url: '/peer-review-and-revision',
           templateUrl:
-            'wise5/authoringTool/structure/peerReviewAndRevision/peerReviewAndRevision.html',
+            'assets/wise5/authoringTool/structure/peerReviewAndRevision/peerReviewAndRevision.html',
           controller: 'PeerReviewAndRevisionController',
           controllerAs: 'peerReviewAndRevisionController',
           params: {
@@ -92,7 +92,7 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.ki-cycle-using-oer', {
           url: '/ki-cycle-using-oer',
-          templateUrl: 'wise5/authoringTool/structure/kiCycleUsingOER/kiCycleUsingOER.html',
+          templateUrl: 'assets/wise5/authoringTool/structure/kiCycleUsingOER/kiCycleUsingOER.html',
           controller: 'KICycleUsingOERController',
           controllerAs: 'kiCycleUsingOERController',
           params: {
@@ -108,7 +108,7 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.automated-assessment.choose-item', {
           url: '/choose-item',
-          templateUrl: 'wise5/authoringTool/structure/automatedAssessment/choose-item.html',
+          templateUrl: 'assets/wise5/authoringTool/structure/automatedAssessment/choose-item.html',
           controller: 'AutomatedAssessmentChooseItemController',
           controllerAs: '$ctrl',
           params: {
@@ -117,7 +117,8 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.automated-assessment.configure', {
           url: '/configure',
-          templateUrl: 'wise5/authoringTool/structure/automatedAssessment/configure-item.html',
+          templateUrl:
+            'assets/wise5/authoringTool/structure/automatedAssessment/configure-item.html',
           controller: 'AutomatedAssessmentConfigureController',
           controllerAs: '$ctrl',
           params: {
@@ -127,7 +128,7 @@ const structureAuthoringModule = angular
         })
         .state('root.at.project.structure.location', {
           url: '/location',
-          templateUrl: 'wise5/authoringTool/structure/chooseStructureLocation.html',
+          templateUrl: 'assets/wise5/authoringTool/structure/chooseStructureLocation.html',
           controller: 'ChooseStructureLocationController',
           controllerAs: 'chooseStructureLocationController',
           params: {

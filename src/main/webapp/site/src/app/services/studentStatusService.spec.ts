@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { AnnotationService } from '../../../../wise5/services/annotationService';
-import { StudentStatusService } from '../../../../wise5/services/studentStatusService';
-import { ConfigService } from '../../../../wise5/services/configService';
+import { AnnotationService } from '../../assets/wise5/services/annotationService';
+import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
+import { ConfigService } from '../../assets/wise5/services/configService';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { ProjectService } from '../../../../wise5/services/projectService';
-import { UtilService } from '../../../../wise5/services/utilService';
-import { SessionService } from '../../../../wise5/services/sessionService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { UtilService } from '../../assets/wise5/services/utilService';
+import { SessionService } from '../../assets/wise5/services/sessionService';
 
 let configService: ConfigService;
 let service: StudentStatusService;

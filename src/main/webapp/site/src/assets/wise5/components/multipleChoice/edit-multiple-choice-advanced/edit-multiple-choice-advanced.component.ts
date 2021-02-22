@@ -76,5 +76,5 @@ export const EditMultipleChoiceAdvancedComponent = {
   },
   controller: EditMultipleChoiceAdvancedController,
   templateUrl:
-    'wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html'
+    'assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html'
 };

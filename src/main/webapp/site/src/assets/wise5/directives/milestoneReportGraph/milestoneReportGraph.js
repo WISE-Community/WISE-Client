@@ -115,7 +115,7 @@ const MilestoneReportGraph = {
     barColor: '@',
     data: '<'
   },
-  templateUrl: 'wise5/directives/milestoneReportGraph/milestoneReportGraph.html',
+  templateUrl: 'assets/wise5/directives/milestoneReportGraph/milestoneReportGraph.html',
   controller: MilestoneReportGraphController,
   controllerAs: 'milestoneReportGraphCtrl'
 };

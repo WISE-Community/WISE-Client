@@ -5,7 +5,7 @@ import { UtilService } from '../../services/utilService';
 abstract class ConfigureStructureController {
   $translate: any;
   structure: any;
-  structureDir: string = 'wise5/authoringTool/structure';
+  structureDir: string = 'assets/wise5/authoringTool/structure';
   groupsPath: string;
   nodesPath: string;
 

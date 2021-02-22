@@ -1,10 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigService } from '../../../../wise5/services/configService';
-import { ProjectService } from '../../../../wise5/services/projectService';
-import { SessionService } from '../../../../wise5/services/sessionService';
-import { UtilService } from '../../../../wise5/services/utilService';
+import { ConfigService } from '../../assets/wise5/services/configService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { SessionService } from '../../assets/wise5/services/sessionService';
+import { UtilService } from '../../assets/wise5/services/utilService';
 
 import { DataService } from './data.service';
 

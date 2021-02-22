@@ -7,7 +7,7 @@ webfontloader.load({
         webfontloader.load({
           custom: {
             families: ['Roboto:300,400,500,700,400italic'],
-            urls: ['wise5/style/fonts/roboto/roboto.css']
+            urls: ['assets/wise5/style/fonts/roboto/roboto.css']
           }
         });
         break;
@@ -15,7 +15,7 @@ webfontloader.load({
         webfontloader.load({
           custom: {
             families: ['Material Icons'],
-            urls: ['wise5/style/fonts/material-icons/material-icons.css']
+            urls: ['assets/wise5/style/fonts/material-icons/material-icons.css']
           }
         });
         break;

@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { ProjectService } from '../../../../wise5/services/projectService';
-import { ConfigService } from '../../../../wise5/services/configService';
-import { UtilService } from '../../../../wise5/services/utilService';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { ConfigService } from '../../assets/wise5/services/configService';
+import { UtilService } from '../../assets/wise5/services/utilService';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import oneBranchTwoPathsProjectJSON_import from './sampleData/curriculum/OneBranchTwoPaths.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import twoStepsProjectJSON_import from './sampleData/curriculum/TwoSteps.project.json';
-import { SessionService } from '../../../../wise5/services/sessionService';
+import { SessionService } from '../../assets/wise5/services/sessionService';
 const projectIdDefault = 1;
 const projectBaseURL = 'http://localhost:8080/curriculum/12345/';
 const projectURL = projectBaseURL + 'project.json';
@@ -183,7 +183,7 @@ function shouldGetDefaultThemePathWhenThemeIsNotDefinedInTheProject() {
   it('should get default theme path when theme is not defined in the project', () => {
     spyOn(configService, 'getConfigParam').and.returnValue(wiseBaseURL);
     service.setProject(scootersProjectJSON);
-    const expectedThemePath = wiseBaseURL + '/wise5/themes/default';
+    const expectedThemePath = wiseBaseURL + '/assets/wise5/themes/default';
     const actualThemePath = service.getThemePath();
     expect(configService.getConfigParam).toHaveBeenCalledWith('wiseBaseURL');
     expect(actualThemePath).toEqual(expectedThemePath);
@@ -195,7 +195,7 @@ function shouldGetProjectThemePathWhenThemeIsDefinedInTheProject() {
     spyOn(configService, 'getConfigParam').and.returnValue(wiseBaseURL);
     service.setProject(demoProjectJSON);
     const demoProjectTheme = demoProjectJSON.theme; // Demo Project has a theme defined
-    const expectedThemePath = wiseBaseURL + '/wise5/themes/' + demoProjectTheme;
+    const expectedThemePath = wiseBaseURL + '/assets/wise5/themes/' + demoProjectTheme;
     const actualThemePath = service.getThemePath();
     expect(configService.getConfigParam).toHaveBeenCalledWith('wiseBaseURL');
     expect(actualThemePath).toEqual(expectedThemePath);
