@@ -97,7 +97,7 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   downloadProject() {
-    window.location.href = `${this.ConfigService.getWISEBaseURL()}/project/export/${
+    window.location.href = `${this.ConfigService.getWISEBaseURL()}/api/project/export/${
       this.projectId
     }`;
   }
