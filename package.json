@@ -134,6 +134,7 @@
   },
   "scripts": {
     "build-dev": "node node_modules/concurrently/bin/concurrently.js \"ng build wise --watch\" \"ng test --source-map=false --karma-config src/main/webapp/site/karma.conf.js --browsers ChromeHeadlessNoSandbox\"",
+    "serve-dev": "node ./node_modules/@angular/cli/bin/ng serve --host 0.0.0.0",
     "build-prod": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build wise --configuration=production; gulp rename-styles-bundle",
     "build-prod-es": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build wise --configuration=production-es; gulp rename-styles-bundle",
     "build-prod-pt": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build wise --configuration=production-pt; gulp rename-styles-bundle",
