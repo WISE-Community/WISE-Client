@@ -17,6 +17,7 @@ export class HeaderAccountMenuComponent implements OnInit {
   role: string = '';
   isPreviousAdmin: boolean = false;
   logOutURL: string;
+  switchToOriginalUserURL = '/api/logout/impersonate';
 
   constructor(private configService: ConfigService, private http: HttpClient) {
     this.configService = configService;
@@ -32,7 +33,7 @@ export class HeaderAccountMenuComponent implements OnInit {
 
   ngOnChanges(changes) {
     if (changes.user) {
-      let user = changes.user.currentValue;
+      const user = changes.user.currentValue;
       if (user) {
         this.firstName = user.firstName;
         this.lastName = user.lastName;
@@ -47,7 +48,9 @@ export class HeaderAccountMenuComponent implements OnInit {
   }
 
   switchToOriginalUser() {
-    (<HTMLFormElement>document.getElementById('switchBackToOriginalUserForm')).submit();
+    this.http.post(this.switchToOriginalUserURL, {}).subscribe(() => {
+      window.location.href = '/teacher';
+    });
   }
 
   logOut() {
