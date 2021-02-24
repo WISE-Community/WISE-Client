@@ -139,7 +139,7 @@ class ProjectInfoController {
 
   setFeaturedProjectIcon(projectIcon) {
     this.ProjectService.setFeaturedProjectIcon(projectIcon).then(() => {
-      this.projectIcon = 'assets/wise5/authoringTool/projectIcons/' + projectIcon;
+      this.projectIcon = `projectIcons/${projectIcon}`;
       this.showProjectIcon();
       this.closeEditProjectIconMode();
     });
