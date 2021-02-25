@@ -153,7 +153,7 @@ describe('EditProfileComponent', () => {
     const testBedUserService = TestBed.get(UserService);
     const user = component.user;
     user.isGoogleUser = true;
-    spyOn(testBedUserService, 'getUser').and.returnValue(of(user))
+    spyOn(testBedUserService, 'getUser').and.returnValue(of(user));
     component.getUser();
     fixture.detectChanges();
     expect(component.editProfileFormGroup.get('email').disabled).toBe(true);

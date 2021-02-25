@@ -158,8 +158,31 @@ const WorkgroupComponentRevisions = {
                         </h3>
                         <div style="padding: 20px;">
                             <ng-content ng-switch="item.componentState.componentType">
-                              <div ng-switch-when="MultipleChoice|OpenResponse" ng-switch-when-separator="|" class="component__content" layout="row" layout-wrap>
+                              <div ng-switch-when="Draw|Label|Match|MultipleChoice|OpenResponse" ng-switch-when-separator="|" class="component__content" layout="row" layout-wrap>
                                   <div flex="100" flex-gt-sm="66" layout="column" class="component--grading__response">
+                                      <draw-grading
+                                          ng-if="item.componentState.componentType === 'Draw'"
+                                          node-id="{{::$ctrl.nodeId}}"
+                                          component-id="{{::$ctrl.componentId}}"
+                                          component-state="{{ item.componentState }}"
+                                          workgroup-id="::$ctrl.workgroupId"
+                                          is-revision="true">
+                                      </draw-grading>
+                                      <label-grading
+                                          ng-if="item.componentState.componentType === 'Label'"
+                                          node-id="{{::$ctrl.nodeId}}"
+                                          component-id="{{::$ctrl.componentId}}"
+                                          component-state="{{ item.componentState }}"
+                                          workgroup-id="::$ctrl.workgroupId"
+                                          is-revision="true">
+                                      </label-grading>
+                                      <match-grading
+                                          ng-if="item.componentState.componentType === 'Match'"
+                                          node-id="{{::$ctrl.nodeId}}"
+                                          component-id="{{::$ctrl.componentId}}"
+                                          component-state="{{ item.componentState }}"
+                                          workgroup-id="::$ctrl.workgroupId">
+                                      </match-grading>
                                       <multiple-choice-grading
                                           ng-if="item.componentState.componentType === 'MultipleChoice'"
                                           node-id="{{::$ctrl.nodeId}}"
