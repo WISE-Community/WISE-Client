@@ -28,10 +28,10 @@ const replace = require('gulp-replace');
 // -----------------------------------------------------------------------------
 
 const sassOptions = { style: 'compact' };
-const paths = ['./src/main/webapp/wise5/style/**/*.scss',
-  './src/main/webapp/wise5/themes/*/style/**/*.scss'];
-const sitePaths = ['./src/main/webapp/site/src/**/*.ts',
-  './src/main/webapp/site/src/**/*.html'
+const paths = ['./src/assets/wise5/style/**/*.scss',
+  './src/assets/wise5/themes/*/style/**/*.scss'];
+const sitePaths = ['./src/**/*.ts',
+  './src/**/*.html'
 ];
 
 // -----------------------------------------------------------------------------
@@ -99,24 +99,24 @@ gulp.task('update-i18n', gulp.series(function() {
 
   // update WISE5 i18n files
   const wise5_i18n_folders = [
-    './src/main/webapp/wise5/i18n/',
-    './src/main/webapp/wise5/authoringTool/i18n/',
-    './src/main/webapp/wise5/classroomMonitor/i18n/',
-    './src/main/webapp/wise5/vle/i18n/',
-    './src/main/webapp/wise5/components/animation/i18n/',
-    './src/main/webapp/wise5/components/audioOscillator/i18n/',
-    './src/main/webapp/wise5/components/conceptMap/i18n/',
-    './src/main/webapp/wise5/components/discussion/i18n/',
-    './src/main/webapp/wise5/components/draw/i18n/',
-    './src/main/webapp/wise5/components/embedded/i18n/',
-    './src/main/webapp/wise5/components/graph/i18n/',
-    './src/main/webapp/wise5/components/html/i18n/',
-    './src/main/webapp/wise5/components/label/i18n/',
-    './src/main/webapp/wise5/components/match/i18n/',
-    './src/main/webapp/wise5/components/multipleChoice/i18n/',
-    './src/main/webapp/wise5/components/openResponse/i18n/',
-    './src/main/webapp/wise5/components/outsideURL/i18n/',
-    './src/main/webapp/wise5/components/table/i18n/'
+    './src/assets/wise5/i18n/',
+    './src/assets/wise5/authoringTool/i18n/',
+    './src/assets/wise5/classroomMonitor/i18n/',
+    './src/assets/wise5/vle/i18n/',
+    './src/assets/wise5/components/animation/i18n/',
+    './src/assets/wise5/components/audioOscillator/i18n/',
+    './src/assets/wise5/components/conceptMap/i18n/',
+    './src/assets/wise5/components/discussion/i18n/',
+    './src/assets/wise5/components/draw/i18n/',
+    './src/assets/wise5/components/embedded/i18n/',
+    './src/assets/wise5/components/graph/i18n/',
+    './src/assets/wise5/components/html/i18n/',
+    './src/assets/wise5/components/label/i18n/',
+    './src/assets/wise5/components/match/i18n/',
+    './src/assets/wise5/components/multipleChoice/i18n/',
+    './src/assets/wise5/components/openResponse/i18n/',
+    './src/assets/wise5/components/outsideURL/i18n/',
+    './src/assets/wise5/components/table/i18n/'
   ];
   let updatedAtLeasetOneI18NFile = false;
   wise5_i18n_folders.map(function(i18n_folder) {
@@ -166,11 +166,11 @@ gulp.task('update-i18n', gulp.series(function() {
 }));
 
 gulp.task('rename-styles-bundle', (done) => {
-  const statsJSON = JSON.parse(fs.readFileSync('./src/main/webapp/site/dist/stats.json'));
+  const statsJSON = JSON.parse(fs.readFileSync('./dist/stats.json'));
   const siteStylesPath = statsJSON.assetsByChunkName.siteStyles[0];
-  gulp.src('./src/main/webapp/site/dist/*.js')
+  gulp.src('./dist/*.js')
     .pipe(replace('siteStyles.css', siteStylesPath))
-    .pipe(gulp.dest('./src/main/webapp/site/dist'));
+    .pipe(gulp.dest('./dist'));
   done();
 });
 
