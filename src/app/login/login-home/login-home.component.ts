@@ -108,7 +108,7 @@ export class LoginHomeComponent implements OnInit {
   getRedirectUrl(social: string): string {
     let redirectUrl = '';
     if (social === 'google') {
-      redirectUrl = `${this.configService.getContextPath()}/google-login`;
+      redirectUrl = `${this.configService.getContextPath()}/api/google-login`;
     } else {
       redirectUrl = this.userService.getRedirectUrl();
     }

@@ -12,6 +12,6 @@ export class RegisterGoogleUserAlreadyExistsComponent implements OnInit {
   ngOnInit() {}
 
   public socialSignIn(socialPlatform: string) {
-    window.location.href = `${this.configService.getContextPath()}/google-login`;
+    window.location.href = `${this.configService.getContextPath()}/api/google-login`;
   }
 }

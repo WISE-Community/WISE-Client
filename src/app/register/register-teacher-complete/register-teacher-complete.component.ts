@@ -10,7 +10,7 @@ import { ConfigService } from '../../services/config.service';
 export class RegisterTeacherCompleteComponent implements OnInit {
   username: string;
   isUsingGoogleId: boolean;
-  googleLogInURL = `${this.configService.getContextPath()}/google-login`;
+  googleLogInURL = `${this.configService.getContextPath()}/api/google-login`;
 
   constructor(
     private router: Router,
