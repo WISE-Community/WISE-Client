@@ -1,12 +1,12 @@
 version: 0.0
 os: linux
 files:
-  - source: /wise.war
-    destination: /home/ubuntu/build-folder
+  - source: dist
+    destination: /usr/share/nginx/html/wise-client
 hooks:
   BeforeInstall:
-    - location: beforeInstall.sh
+    - location: scripts/beforeInstall.sh
       runas: root
   AfterInstall:
-    - location: afterInstall.sh
+    - location: scripts/afterInstall.sh
       runas: root
