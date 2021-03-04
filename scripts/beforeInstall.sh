@@ -2,16 +2,15 @@
 
 export HOME=/home/ubuntu
 export WISE_BUILD_FILES=$HOME/wise-build-files
-export CATALINA_HOME=/var/lib/tomcat9
 
 sudo -u ubuntu -g ubuntu touch $HOME/deploy.log
 exec &>> $HOME/deploy.log
 
 echo "Starting deployment at $(date)"
 
-if [[ $DEPLOYMENT_GROUP_NAME == "qa-deployment-group" ]]; then
+if [[ $DEPLOYMENT_GROUP_NAME == "qa-wise-client-deployment-group" ]]; then
     env="qa"
-elif [[ $DEPLOYMENT_GROUP_NAME == "prod-deployment-group" ]]; then
+elif [[ $DEPLOYMENT_GROUP_NAME == "prod-wise-client-deployment-group" ]]; then
     env="prod"
 fi
 
@@ -42,9 +41,6 @@ sed 's/gzip on;/gzip on;\n        gzip_types text\/plain text\/xml image\/gif im
 echo "Copying WISE Nginx config file to Nginx sites-enabled folder"
 rm -f /etc/nginx/sites-enabled/*
 cp $WISE_BUILD_FILES/$env/client/wise.conf /etc/nginx/sites-enabled/wise.conf
-
-echo "Create /usr/share/nginx/html/wise-client folder"
-mkdir /usr/share/nginx/html/wise-client
 
 echo "Restart Nginx"
 systemctl restart nginx
