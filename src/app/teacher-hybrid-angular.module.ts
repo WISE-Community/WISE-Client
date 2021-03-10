@@ -64,6 +64,7 @@ import { MultipleChoiceGrading } from '../assets/wise5/components/multipleChoice
 import { MatchGrading } from '../assets/wise5/components/match/match-grading/match-grading.component';
 import { LabelGrading } from '../assets/wise5/components/label/label-grading/label-grading.component';
 import { DrawGrading } from '../assets/wise5/components/draw/draw-grading/draw-grading.component';
+import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { DrawGrading } from '../assets/wise5/components/draw/draw-grading/draw-g
     StepInfoComponent,
     SummaryAuthoring,
     TableAuthoring,
+    TableGrading,
     WorkgroupInfoComponent,
     WorkgroupNodeScoreComponent,
     WorkgroupSelectAutocompleteComponent,
