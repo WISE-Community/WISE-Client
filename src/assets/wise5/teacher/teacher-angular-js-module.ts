@@ -68,6 +68,7 @@ import '../components/openResponse/openResponseGradingComponentModule';
 import '../components/outsideURL/outsideURLAuthoringComponentModule';
 import '../components/summary/summaryAuthoringComponentModule';
 import '../components/table/tableAuthoringComponentModule';
+import '../components/table/tableGradingComponentModule';
 
 angular
   .module('teacher', [
@@ -101,7 +102,8 @@ angular
     'openResponseGradingComponentModule',
     'outsideURLAuthoringComponentModule',
     'structureAuthoringModule',
-    'tableAuthoringComponentModule'
+    'tableAuthoringComponentModule',
+    'tableGradingComponentModule'
   ])
   .service('MilestoneService', downgradeInjectable(MilestoneService))
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
