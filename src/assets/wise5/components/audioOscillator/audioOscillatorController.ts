@@ -106,28 +106,17 @@ class AudioOscillatorController extends ComponentController {
     this.setParametersFromComponentContent();
     const componentState = this.$scope.componentState;
 
-    if (this.isStudentMode()) {
-      if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
-        this.handleConnectedComponents();
-      } else if (
-        this.AudioOscillatorService.componentStateHasStudentWork(
-          componentState,
-          this.componentContent
-        )
-      ) {
-        this.setStudentWork(componentState);
-      } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-        this.handleConnectedComponents();
-      }
-    } else {
-      if (
-        this.AudioOscillatorService.componentStateHasStudentWork(
-          componentState,
-          this.componentContent
-        )
-      ) {
-        this.setStudentWork(componentState);
-      }
+    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    } else if (
+      this.AudioOscillatorService.componentStateHasStudentWork(
+        componentState,
+        this.componentContent
+      )
+    ) {
+      this.setStudentWork(componentState);
+    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
     }
 
     if (this.hasMaxSubmitCount() && !this.hasSubmitsLeft()) {
