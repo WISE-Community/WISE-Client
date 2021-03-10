@@ -64,6 +64,7 @@ import { MultipleChoiceGrading } from '../assets/wise5/components/multipleChoice
 import { MatchGrading } from '../assets/wise5/components/match/match-grading/match-grading.component';
 import { LabelGrading } from '../assets/wise5/components/label/label-grading/label-grading.component';
 import { DrawGrading } from '../assets/wise5/components/draw/draw-grading/draw-grading.component';
+import { AudioOscillatorGrading } from '../assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component';
 import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
 
 @NgModule({
@@ -72,6 +73,7 @@ import { TableGrading } from '../assets/wise5/components/table/table-grading/tab
     AlertStatusCornerComponent,
     AnimationAuthoring,
     AudioOscillatorAuthoring,
+    AudioOscillatorGrading,
     ChooseImportStepComponent,
     ChooseImportStepLocationComponent,
     ChooseNewComponent,

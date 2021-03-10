@@ -7161,6 +7161,41 @@
           <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="8753a270abbecc917891dd3d7dc315e8cd96f840" datatype="html">
+        <source>Frequencies Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="36b948190c1d09ffe66ca7eaa9ac33b047088ce6" datatype="html">
+        <source>Frequencies Played Sorted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8e91eced3cef5ca841d92a8ba8c962988370db95" datatype="html">
+        <source>Number of Frequencies Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a6d4e749589a8487922daf71057ee0d99d571906" datatype="html">
+        <source>Minimum Frequency Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2c29ab22017adf00451b4c72328381b548a40856" datatype="html">
+        <source>Maximum Frequency Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="64216e7ef99605d9f05614beb1919360ee012177" datatype="html">
         <source>Import Step(s)</source>
         <context-group purpose="location">
