@@ -26,7 +26,7 @@ apt-get install awscli -y
 
 echo "Downloading files from wise-build-files S3 bucket"
 sudo -u ubuntu -g ubuntu mkdir $WISE_BUILD_FILES
-sudo -u ubuntu -g ubuntu aws s3 sync s3://wise-build-files $WISE_BUILD_FILES
+sudo -u ubuntu -g ubuntu aws s3 sync --exclude "legacy.war" s3://wise-build-files $WISE_BUILD_FILES
 chmod u+x $WISE_BUILD_FILES/sync.sh
 
 echo "Installing Nginx"
