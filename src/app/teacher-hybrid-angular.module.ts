@@ -65,6 +65,7 @@ import { MatchGrading } from '../assets/wise5/components/match/match-grading/mat
 import { LabelGrading } from '../assets/wise5/components/label/label-grading/label-grading.component';
 import { DrawGrading } from '../assets/wise5/components/draw/draw-grading/draw-grading.component';
 import { AudioOscillatorGrading } from '../assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component';
+import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import { AudioOscillatorGrading } from '../assets/wise5/components/audioOscillat
     StepInfoComponent,
     SummaryAuthoring,
     TableAuthoring,
+    TableGrading,
     WorkgroupInfoComponent,
     WorkgroupNodeScoreComponent,
     WorkgroupSelectAutocompleteComponent,

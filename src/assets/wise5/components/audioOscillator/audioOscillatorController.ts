@@ -124,22 +124,16 @@ class AudioOscillatorController extends ComponentController {
     }
 
     this.disableComponentIfNecessary();
-
-    if (!this.isGradingMode() && !this.isGradingRevisionMode()) {
-      this.initializeAudioContext();
-      this.drawOscilloscopeGridAfterTimeout();
-    }
-
+    this.initializeAudioContext();
+    this.drawOscilloscopeGridAfterTimeout();
     this.initializeScopeGetComponentState(this.$scope, 'audioOscillatorController');
     this.broadcastDoneRenderingComponent();
   }
 
   ngOnDestroy() {
     super.ngOnDestroy();
-    if (!this.isGradingMode()) {
-      this.stop();
-      this.audioContext.close();
-    }
+    this.stop();
+    this.audioContext.close();
   }
 
   initializeDefaultSettings() {
