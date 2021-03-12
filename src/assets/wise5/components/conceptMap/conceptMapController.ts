@@ -158,21 +158,8 @@ class ConceptMapController extends ComponentController {
 
     this.initialize();
 
-    if (this.isGradingMode() || this.isGradingRevisionMode()) {
-      const componentState = this.$scope.componentState;
-      if (componentState) {
-        if (this.mode === 'gradingRevision') {
-          this.setIdsWithNodeIdComponentIdWorkgroupIdComponentStateIdPrefix(componentState);
-        } else {
-          this.setIdsWithNodeIdComponentIdWorkgroupIdComponentStateId(componentState);
-        }
-      } else {
-        this.setIdsWithNodeIdComponentIdWorkgroupId();
-      }
-    } else {
-      this.availableNodes = this.componentContent.nodes;
-      this.availableLinks = this.componentContent.links;
-    }
+    this.availableNodes = this.componentContent.nodes;
+    this.availableLinks = this.componentContent.links;
 
     /*
      * Call the initializeSVG() after a timeout so that angular has a
@@ -215,56 +202,6 @@ class ConceptMapController extends ComponentController {
     this.setConceptMapContainerId(this.nodeId, this.componentId);
     this.setSelectNodeBarId(this.nodeId, this.componentId);
     this.setFeedbackContainerId(this.nodeId, this.componentId);
-  }
-
-  setIdsWithNodeIdComponentIdWorkgroupId() {
-    this.setSVGId(this.nodeId, this.componentId, this.workgroupId);
-    this.setConceptMapContainerId(this.nodeId, this.componentId, this.workgroupId);
-    this.setSelectNodeBarId(this.nodeId, this.componentId, this.workgroupId);
-    this.setFeedbackContainerId(this.nodeId, this.componentId, this.workgroupId);
-  }
-
-  setIdsWithNodeIdComponentIdWorkgroupIdComponentStateId(componentState) {
-    this.setSVGId(this.nodeId, this.componentId, this.workgroupId, componentState.id);
-    this.setConceptMapContainerId(
-      this.nodeId,
-      this.componentId,
-      this.workgroupId,
-      componentState.id
-    );
-    this.setSelectNodeBarId(this.nodeId, this.componentId, this.workgroupId, componentState.id);
-    this.setFeedbackContainerId(this.nodeId, this.componentId, this.workgroupId, componentState.id);
-  }
-
-  setIdsWithNodeIdComponentIdWorkgroupIdComponentStateIdPrefix(componentState) {
-    this.setSVGId(
-      this.nodeId,
-      this.componentId,
-      this.workgroupId,
-      componentState.id,
-      'gradingRevision_'
-    );
-    this.setConceptMapContainerId(
-      this.nodeId,
-      this.componentId,
-      this.workgroupId,
-      componentState.id,
-      'gradingRevision_'
-    );
-    this.setSelectNodeBarId(
-      this.nodeId,
-      this.componentId,
-      this.workgroupId,
-      componentState.id,
-      'gradingRevision_'
-    );
-    this.setFeedbackContainerId(
-      this.nodeId,
-      this.componentId,
-      this.workgroupId,
-      componentState.id,
-      'gradingRevision_'
-    );
   }
 
   setSVGId(nodeId, componentId, workgroupId = null, componentStateId = null, prefix = '') {
@@ -1381,16 +1318,11 @@ class ConceptMapController extends ComponentController {
   }
 
   moveLinkTextToFront() {
-    for (let link of this.links) {
-      link.moveTextGroupToFront();
-    }
+    this.ConceptMapService.moveLinkTextToFront(this.links);
   }
 
   moveNodesToFront() {
-    for (let node of this.nodes) {
-      const group = node.getGroup();
-      group.front();
-    }
+    this.ConceptMapService.moveNodesToFront(this.nodes);
   }
 
   addNode(node) {
