@@ -638,38 +638,16 @@ export class ConceptMapService extends ComponentService {
     }
   }
 
-  /**
-   * Move the link text group to the front
-   */
-  moveLinkTextToFront(links: any[]) {
-    // loop through all the links
-    for (let l = 0; l < links.length; l++) {
-      const link = links[l];
-
-      if (link != null) {
-        // move the link text group to the front
-        link.moveTextGroupToFront();
-      }
+  moveLinkTextToFront(links: any[]): void {
+    for (const link of links) {
+      link.moveTextGroupToFront();
     }
   }
 
-  /**
-   * Move the nodes to the front so that they show up above links
-   */
-  moveNodesToFront(nodes: any[]) {
-    // loop through all the nodes
-    for (let n = 0; n < nodes.length; n++) {
-      const node = nodes[n];
-
-      if (node != null) {
-        // get a node group
-        const group = node.getGroup();
-
-        if (group != null) {
-          // move the node group to the front
-          group.front();
-        }
-      }
+  moveNodesToFront(nodes: any[]): void {
+    for (const node of nodes) {
+      const group = node.getGroup();
+      group.front();
     }
   }
 

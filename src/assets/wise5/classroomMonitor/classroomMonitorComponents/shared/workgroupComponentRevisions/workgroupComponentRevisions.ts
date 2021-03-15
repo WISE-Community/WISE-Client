@@ -158,7 +158,7 @@ const WorkgroupComponentRevisions = {
                         </h3>
                         <div style="padding: 20px;">
                             <ng-content ng-switch="item.componentState.componentType">
-                              <div ng-switch-when="AudioOscillator|Draw|Label|Match|MultipleChoice|OpenResponse|Table" ng-switch-when-separator="|" class="component__content" layout="row" layout-wrap>
+                              <div ng-switch-when="AudioOscillator|ConceptMap|Draw|Label|Match|MultipleChoice|OpenResponse|Table" ng-switch-when-separator="|" class="component__content" layout="row" layout-wrap>
                                   <div flex="100" flex-gt-sm="66" layout="column" class="component--grading__response">
                                       <audio-oscillator-grading
                                           ng-if="item.componentState.componentType === 'AudioOscillator'"
@@ -167,6 +167,14 @@ const WorkgroupComponentRevisions = {
                                           component-state="{{ item.componentState }}"
                                           workgroup-id="::$ctrl.workgroupId">
                                       </audio-oscillator-grading>
+                                      <concept-map-grading
+                                          ng-if="item.componentState.componentType === 'ConceptMap'"
+                                          node-id="{{::$ctrl.nodeId}}"
+                                          component-id="{{::$ctrl.componentId}}"
+                                          component-state="{{ item.componentState }}"
+                                          workgroup-id="::$ctrl.workgroupId"
+                                          is-revision="true">
+                                      </concept-map-grading>
                                       <draw-grading
                                           ng-if="item.componentState.componentType === 'Draw'"
                                           node-id="{{::$ctrl.nodeId}}"

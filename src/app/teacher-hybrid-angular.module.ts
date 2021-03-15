@@ -66,6 +66,7 @@ import { LabelGrading } from '../assets/wise5/components/label/label-grading/lab
 import { DrawGrading } from '../assets/wise5/components/draw/draw-grading/draw-grading.component';
 import { AudioOscillatorGrading } from '../assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component';
 import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
+import { ConceptMapGrading } from '../assets/wise5/components/conceptMap/concept-map-grading/concept-map-grading.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { TableGrading } from '../assets/wise5/components/table/table-grading/tab
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
     ConceptMapAuthoring,
+    ConceptMapGrading,
     DrawAuthoring,
     DrawGrading,
     DiscussionAuthoring,

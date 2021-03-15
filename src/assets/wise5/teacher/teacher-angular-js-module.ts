@@ -48,6 +48,7 @@ import '../components/audioOscillator/audioOscillatorAuthoringComponentModule';
 import '../components/audioOscillator/audioOscillatorGradingComponentModule';
 import '../authoringTool/components/authoringToolComponents';
 import '../components/conceptMap/conceptMapAuthoringComponentModule';
+import '../components/conceptMap/conceptMapGradingComponentModule';
 import '../components/discussion/discussionAuthoringComponentModule';
 import '../components/draw/drawAuthoringComponentModule';
 import '../components/draw/drawGradingComponentModule';
@@ -84,6 +85,7 @@ angular
     'authoringTool.components',
     'classroomMonitor.components',
     'conceptMapAuthoringComponentModule',
+    'conceptMapGradingComponentModule',
     'discussionAuthoringComponentModule',
     'drawAuthoringComponentModule',
     'drawGradingComponentModule',
