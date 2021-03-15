@@ -2,17 +2,12 @@
 
 export HOME=/home/ubuntu
 export WISE_BUILD_FILES=$HOME/wise-build-files
+export env=prod
 
 sudo -u ubuntu -g ubuntu touch $HOME/deploy.log
 exec &>> $HOME/deploy.log
 
 echo "Starting deployment at $(date)"
-
-if [[ $DEPLOYMENT_GROUP_NAME == "qa-wise-client-deployment-group" ]]; then
-    env="qa"
-elif [[ $DEPLOYMENT_GROUP_NAME == "prod-wise-client-deployment-group" ]]; then
-    env="prod"
-fi
 
 echo "Updating Ubuntu"
 apt-get update
@@ -26,7 +21,7 @@ apt-get install awscli -y
 
 echo "Downloading files from wise-build-files S3 bucket"
 sudo -u ubuntu -g ubuntu mkdir $WISE_BUILD_FILES
-sudo -u ubuntu -g ubuntu aws s3 sync s3://wise-build-files $WISE_BUILD_FILES
+sudo -u ubuntu -g ubuntu aws s3 sync --exclude "legacy.war" s3://wise-build-files $WISE_BUILD_FILES
 chmod u+x $WISE_BUILD_FILES/sync.sh
 
 echo "Installing Nginx"
