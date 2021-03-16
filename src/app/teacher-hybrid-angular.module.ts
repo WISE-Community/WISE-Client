@@ -67,6 +67,7 @@ import { DrawGrading } from '../assets/wise5/components/draw/draw-grading/draw-g
 import { AudioOscillatorGrading } from '../assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component';
 import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
 import { ConceptMapGrading } from '../assets/wise5/components/conceptMap/concept-map-grading/concept-map-grading.component';
+import { DiscussionGrading } from '../assets/wise5/components/discussion/discussion-grading/discussion-grading.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { ConceptMapGrading } from '../assets/wise5/components/conceptMap/concept
     DrawAuthoring,
     DrawGrading,
     DiscussionAuthoring,
+    DiscussionGrading,
     EditComponentRubricComponent,
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
