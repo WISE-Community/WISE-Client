@@ -151,16 +151,6 @@ class DiscussionController extends ComponentController {
         }
       }
       this.disableComponentIfNecessary();
-    } else if (this.isGradingMode() || this.isGradingRevisionMode()) {
-      if (this.DiscussionService.workgroupHasWorkForComponent(this.workgroupId, this.componentId)) {
-        const componentIds = this.getGradingComponentIds();
-        const componentStates = this.DiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
-          componentIds,
-          this.workgroupId
-        );
-        const annotations = this.getInappropriateFlagAnnotationsByComponentStates(componentStates);
-        this.setClassResponses(componentStates, annotations);
-      }
     }
     this.initializeScopeGetComponentState();
     this.registerStudentWorkReceivedListener();
@@ -192,16 +182,6 @@ class DiscussionController extends ComponentController {
       return isImportWorkMode;
     }
     return false;
-  }
-
-  getGradingComponentIds() {
-    const connectedComponentIds = [this.componentId];
-    if (this.componentContent.connectedComponents != null) {
-      for (const connectedComponent of this.componentContent.connectedComponents) {
-        connectedComponentIds.push(connectedComponent.componentId);
-      }
-    }
-    return connectedComponentIds;
   }
 
   handleSubmitButtonClicked(componentStateReplyingTo: any = null): void {
@@ -514,270 +494,47 @@ class DiscussionController extends ComponentController {
     return this.componentContent.gateClassmateResponses;
   }
 
-  setClassResponses(componentStates, annotations = []) {
-    this.classResponses = [];
-    componentStates = componentStates.sort(this.sortByServerSaveTime);
-    for (const componentState of componentStates) {
-      if (componentState.studentData.isSubmit) {
-        const latestInappropriateFlagAnnotation = this.getLatestInappropriateFlagAnnotationByStudentWorkId(
-          annotations,
-          componentState.id
-        );
-        this.setUsernames(componentState);
-        componentState.replies = [];
-        if (this.isGradingMode() || this.isGradingRevisionMode()) {
-          if (latestInappropriateFlagAnnotation != null) {
-            /*
-             * Set the inappropriate flag annotation into the component state. This is used for the
-             * grading tool to determine whether to show the 'Delete' button or the 'Undo Delete'
-             * button.
-             */
-            componentState.latestInappropriateFlagAnnotation = latestInappropriateFlagAnnotation;
-          }
-          this.classResponses.push(componentState);
-        } else if (this.isStudentMode()) {
-          if (
-            latestInappropriateFlagAnnotation != null &&
-            latestInappropriateFlagAnnotation.data != null &&
-            latestInappropriateFlagAnnotation.data.action === 'Delete'
-          ) {
-            // do not show this post because the teacher has deleted it
-          } else {
-            this.classResponses.push(componentState);
-          }
-        }
-      }
-    }
-    this.processResponses(this.classResponses);
+  setClassResponses(componentStates: any[], annotations: any[] = []): void {
+    const isStudentMode = true;
+    this.classResponses = this.DiscussionService.getClassResponses(
+      componentStates,
+      annotations,
+      isStudentMode
+    );
+    this.responsesMap = this.DiscussionService.getResponsesMap(this.classResponses);
+    this.topLevelResponses = this.DiscussionService.getLevel1Responses(
+      this.classResponses,
+      this.componentId,
+      this.workgroupId
+    );
     this.retrievedClassmateResponses = true;
   }
 
-  sortByServerSaveTime(componentState1, componentState2) {
-    if (componentState1.serverSaveTime < componentState2.serverSaveTime) {
-      return -1;
-    } else if (componentState1.serverSaveTime > componentState2.serverSaveTime) {
-      return 1;
-    }
-    return 0;
-  }
-
-  getUserIdsDisplay(workgroupId) {
-    const userIdsDisplay = [];
-    for (const userId of this.ConfigService.getUserIdsByWorkgroupId(workgroupId)) {
-      userIdsDisplay.push(`Student ${userId}`);
-    }
-    return userIdsDisplay.join(', ');
-  }
-
-  getLatestInappropriateFlagAnnotationByStudentWorkId(annotations = [], studentWorkId) {
-    for (const annotation of annotations.sort(this.sortByServerSaveTime).reverse()) {
-      if (studentWorkId === annotation.studentWorkId && annotation.type === 'inappropriateFlag') {
-        return annotation;
-      }
-    }
-    return null;
-  }
-
-  processResponses(componentStates) {
-    for (const componentState of componentStates) {
-      this.responsesMap[componentState.id] = componentState;
-    }
-    for (const componentState of componentStates) {
-      const componentStateIdReplyingTo = componentState.studentData.componentStateIdReplyingTo;
-      if (componentStateIdReplyingTo) {
-        if (
-          this.responsesMap[componentStateIdReplyingTo] &&
-          this.responsesMap[componentStateIdReplyingTo].replies
-        ) {
-          this.responsesMap[componentStateIdReplyingTo].replies.push(componentState);
-        }
-      }
-    }
-    this.topLevelResponses = this.getLevel1Responses();
-  }
-
-  threadHasPostFromThisComponentAndWorkgroupId(componentState) {
-    const thisComponentId = this.componentId;
-    const thisWorkgroupId = this.workgroupId;
-    return (componentState) => {
-      if (
-        componentState.componentId === thisComponentId &&
-        componentState.workgroupId === thisWorkgroupId
-      ) {
-        return true;
-      }
-      for (const replyComponentState of componentState.replies) {
-        if (
-          replyComponentState.componentId === thisComponentId &&
-          replyComponentState.workgroupId === thisWorkgroupId
-        ) {
-          return true;
-        }
-      }
-      return false;
-    };
-  }
-
-  setUsernames(componentState) {
-    const workgroupId = componentState.workgroupId;
-    const usernames = this.ConfigService.getUsernamesByWorkgroupId(workgroupId);
-    if (usernames.length > 0) {
-      componentState.usernames = usernames
-        .map(function (obj) {
-          return obj.name;
-        })
-        .join(', ');
-    } else if (componentState.usernamesArray != null) {
-      componentState.usernames = componentState.usernamesArray
-        .map(function (obj) {
-          return obj.name;
-        })
-        .join(', ');
-    } else {
-      componentState.usernames = this.getUserIdsDisplay(workgroupId);
-    }
-  }
-
-  addClassResponse(componentState) {
+  addClassResponse(componentState: any): void {
     if (componentState.studentData.isSubmit) {
-      this.setUsernames(componentState);
+      this.DiscussionService.setUsernames(componentState);
       componentState.replies = [];
       this.classResponses.push(componentState);
-      this.processResponses([componentState]);
-    }
-  }
-
-  /**
-   * Get the level 1 responses which are posts that are not a reply to another response.
-   * @return an array of responses that are not a reply to another response
-   */
-  getLevel1Responses() {
-    const allResponses = [];
-    const oddResponses = [];
-    const evenResponses = [];
-    for (const [index, classResponse] of Object.entries(this.classResponses)) {
-      if (classResponse.studentData.componentStateIdReplyingTo == null) {
-        if (
-          (this.isGradingMode() || this.isGradingRevisionMode()) &&
-          !this.threadHasPostFromThisComponentAndWorkgroupId(classResponse)
-        ) {
-          continue;
-        }
-        if (Number(index) % 2 === 0) {
-          evenResponses.push(classResponse);
-        } else {
-          oddResponses.push(classResponse);
-        }
-        allResponses.push(classResponse);
-      }
-    }
-    return {
-      all: allResponses.reverse(),
-      col1: oddResponses.reverse(),
-      col2: evenResponses.reverse()
-    };
-  }
-
-  /**
-   * The teacher has clicked the delete button to delete a post. We won't
-   * actually delete the student work, we'll just create an inappropriate
-   * flag annotation which prevents the students in the class from seeing
-   * the post.
-   * @param componentState the student component state the teacher wants to
-   * delete.
-   */
-  deleteButtonClicked(componentState: any): void {
-    const toWorkgroupId = componentState.workgroupId;
-    const userInfo = this.ConfigService.getUserInfoByWorkgroupId(toWorkgroupId);
-    const periodId = userInfo.periodId;
-    const teacherUserInfo = this.ConfigService.getMyUserInfo();
-    const fromWorkgroupId = teacherUserInfo.workgroupId;
-    const runId = this.ConfigService.getRunId();
-    const nodeId = this.nodeId;
-    const componentId = this.componentId;
-    const studentWorkId = componentState.id;
-    const data = {
-      action: 'Delete'
-    };
-    const annotation = this.AnnotationService.createInappropriateFlagAnnotation(
-      runId,
-      periodId,
-      nodeId,
-      componentId,
-      fromWorkgroupId,
-      toWorkgroupId,
-      studentWorkId,
-      data
-    );
-    this.AnnotationService.saveAnnotation(annotation).then(() => {
-      const componentStates = this.DiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
-        this.getGradingComponentIds(),
+      this.addResponseToResponsesMap(this.responsesMap, componentState);
+      this.topLevelResponses = this.DiscussionService.getLevel1Responses(
+        this.classResponses,
+        this.componentId,
         this.workgroupId
       );
-      const annotations = this.getInappropriateFlagAnnotationsByComponentStates(componentStates);
-      this.setClassResponses(componentStates, annotations);
-    });
+    }
   }
 
-  /**
-   * The teacher has clicked the 'Undo Delete' button to undo a previous
-   * deletion of a post. This function will create an inappropriate flag
-   * annotation with the action set to 'Undo Delete'. This will make the
-   * post visible to the students.
-   * @param componentState the student component state the teacher wants to
-   * show again.
-   */
-  undoDeleteButtonClicked(componentState: any): any {
-    const toWorkgroupId = componentState.workgroupId;
-    const userInfo = this.ConfigService.getUserInfoByWorkgroupId(toWorkgroupId);
-    const periodId = userInfo.periodId;
-    const teacherUserInfo = this.ConfigService.getMyUserInfo();
-    const fromWorkgroupId = teacherUserInfo.workgroupId;
-    const runId = this.ConfigService.getRunId();
-    const nodeId = this.nodeId;
-    const componentId = this.componentId;
-    const studentWorkId = componentState.id;
-    const data = {
-      action: 'Undo Delete'
-    };
-    const annotation = this.AnnotationService.createInappropriateFlagAnnotation(
-      runId,
-      periodId,
-      nodeId,
-      componentId,
-      fromWorkgroupId,
-      toWorkgroupId,
-      studentWorkId,
-      data
-    );
-    this.AnnotationService.saveAnnotation(annotation).then(() => {
-      const componentStates = this.DiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
-        this.getGradingComponentIds(),
-        this.workgroupId
-      );
-      const annotations = this.getInappropriateFlagAnnotationsByComponentStates(componentStates);
-      this.setClassResponses(componentStates, annotations);
-    });
-  }
-
-  /**
-   * Get the inappropriate flag annotations for these component states
-   * @param componentStates an array of component states
-   * @return an array of inappropriate flag annotations that are associated
-   * with the component states
-   */
-  getInappropriateFlagAnnotationsByComponentStates(componentStates = []) {
-    const annotations = [];
-    for (const componentState of componentStates) {
-      const latestInappropriateFlagAnnotation = this.AnnotationService.getLatestAnnotationByStudentWorkIdAndType(
-        componentState.id,
-        'inappropriateFlag'
-      );
-      if (latestInappropriateFlagAnnotation != null) {
-        annotations.push(latestInappropriateFlagAnnotation);
+  addResponseToResponsesMap(responsesMap: any, componentState: any): void {
+    responsesMap[componentState.id] = componentState;
+    const componentStateIdReplyingTo = componentState.studentData.componentStateIdReplyingTo;
+    if (componentStateIdReplyingTo) {
+      if (
+        responsesMap[componentStateIdReplyingTo] &&
+        responsesMap[componentStateIdReplyingTo].replies
+      ) {
+        responsesMap[componentStateIdReplyingTo].replies.push(componentState);
       }
     }
-    return annotations;
   }
 }
 

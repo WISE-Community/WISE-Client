@@ -151,6 +151,7 @@ export class EmptyComponent {}
     VLEProjectService
   ],
   exports: [
+    ClassResponse,
     CommonModule,
     EditorModule,
     FlexLayoutModule,

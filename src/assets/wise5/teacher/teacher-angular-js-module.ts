@@ -50,6 +50,7 @@ import '../authoringTool/components/authoringToolComponents';
 import '../components/conceptMap/conceptMapAuthoringComponentModule';
 import '../components/conceptMap/conceptMapGradingComponentModule';
 import '../components/discussion/discussionAuthoringComponentModule';
+import '../components/discussion/discussionGradingComponentModule';
 import '../components/draw/drawAuthoringComponentModule';
 import '../components/draw/drawGradingComponentModule';
 import '../components/embedded/embeddedAuthoringComponentModule';
@@ -87,6 +88,7 @@ angular
     'conceptMapAuthoringComponentModule',
     'conceptMapGradingComponentModule',
     'discussionAuthoringComponentModule',
+    'discussionGradingComponentModule',
     'drawAuthoringComponentModule',
     'drawGradingComponentModule',
     'embeddedAuthoringComponentModule',

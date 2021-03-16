@@ -226,4 +226,155 @@ export class DiscussionService extends ComponentService {
     const attachments = componentState.studentData.attachments;
     return attachments != null && attachments.length > 0;
   }
+
+  threadHasPostFromComponentAndWorkgroupId(
+    componentState: any,
+    componentId: string,
+    workgroupId: number
+  ): any {
+    if (componentState.componentId === componentId && componentState.workgroupId === workgroupId) {
+      return true;
+    }
+    for (const replyComponentState of componentState.replies) {
+      if (
+        replyComponentState.componentId === componentId &&
+        replyComponentState.workgroupId === workgroupId
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getLatestInappropriateFlagAnnotationByStudentWorkId(
+    annotations: any[] = [],
+    studentWorkId: number
+  ): any {
+    for (const annotation of annotations.sort(this.UtilService.sortByServerSaveTime).reverse()) {
+      if (studentWorkId === annotation.studentWorkId && annotation.type === 'inappropriateFlag') {
+        return annotation;
+      }
+    }
+    return null;
+  }
+
+  getClassResponses(
+    componentStates: any[],
+    annotations = [],
+    isStudentMode: boolean = false
+  ): any[] {
+    const classResponses = [];
+    componentStates = componentStates.sort(this.UtilService.sortByServerSaveTime);
+    for (const componentState of componentStates) {
+      if (componentState.studentData.isSubmit) {
+        componentState.replies = [];
+        this.setUsernames(componentState);
+        const latestInappropriateFlagAnnotation = this.getLatestInappropriateFlagAnnotationByStudentWorkId(
+          annotations,
+          componentState.id
+        );
+        if (isStudentMode) {
+          if (
+            latestInappropriateFlagAnnotation == null ||
+            !this.isInappropriateFlagDeleteAnnotation(latestInappropriateFlagAnnotation)
+          ) {
+            classResponses.push(componentState);
+          }
+        } else {
+          if (latestInappropriateFlagAnnotation != null) {
+            componentState.latestInappropriateFlagAnnotation = latestInappropriateFlagAnnotation;
+          }
+          classResponses.push(componentState);
+        }
+      }
+    }
+    return classResponses;
+  }
+
+  isInappropriateFlagDeleteAnnotation(annotation: any): boolean {
+    return annotation.data.action === 'Delete';
+  }
+
+  setUsernames(componentState: any): void {
+    const workgroupId = componentState.workgroupId;
+    const usernames = this.ConfigService.getUsernamesByWorkgroupId(workgroupId);
+    if (usernames.length > 0) {
+      componentState.usernames = usernames
+        .map(function (obj) {
+          return obj.name;
+        })
+        .join(', ');
+    } else if (componentState.usernamesArray != null) {
+      componentState.usernames = componentState.usernamesArray
+        .map(function (obj) {
+          return obj.name;
+        })
+        .join(', ');
+    } else {
+      componentState.usernames = this.getUserIdsDisplay(workgroupId);
+    }
+  }
+
+  getUserIdsDisplay(workgroupId: number): string {
+    const userIdsDisplay = [];
+    for (const userId of this.ConfigService.getUserIdsByWorkgroupId(workgroupId)) {
+      userIdsDisplay.push(`Student ${userId}`);
+    }
+    return userIdsDisplay.join(', ');
+  }
+
+  getResponsesMap(componentStates: any[]): any {
+    const responsesMap: any = {};
+    for (const componentState of componentStates) {
+      responsesMap[componentState.id] = componentState;
+    }
+    for (const componentState of componentStates) {
+      const componentStateIdReplyingTo = componentState.studentData.componentStateIdReplyingTo;
+      if (componentStateIdReplyingTo) {
+        if (
+          responsesMap[componentStateIdReplyingTo] &&
+          responsesMap[componentStateIdReplyingTo].replies
+        ) {
+          responsesMap[componentStateIdReplyingTo].replies.push(componentState);
+        }
+      }
+    }
+    return responsesMap;
+  }
+
+  /**
+   * Get the level 1 responses which are posts that are not a reply to another response.
+   * @return an object containing responses that are not a reply to another response
+   */
+  getLevel1Responses(
+    classResponses: any[],
+    componentId: string,
+    workgroupId: number,
+    isGradingMode: boolean = false
+  ): any {
+    const allResponses = [];
+    const oddResponses = [];
+    const evenResponses = [];
+    for (const [index, classResponse] of Object.entries(classResponses)) {
+      if (classResponse.studentData.componentStateIdReplyingTo == null) {
+        if (
+          isGradingMode &&
+          !this.threadHasPostFromComponentAndWorkgroupId(classResponse, componentId, workgroupId)
+        ) {
+          continue;
+        }
+        if (Number(index) % 2 === 0) {
+          evenResponses.push(classResponse);
+        } else {
+          oddResponses.push(classResponse);
+        }
+        allResponses.push(classResponse);
+      }
+    }
+    return {
+      all: allResponses.reverse(),
+      col1: oddResponses.reverse(),
+      col2: evenResponses.reverse()
+    };
+  }
 }
