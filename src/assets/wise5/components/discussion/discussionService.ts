@@ -6,7 +6,6 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../services/studentDataService';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { AnnotationService } from '../../services/annotationService';
 
 @Injectable()
 export class DiscussionService extends ComponentService {
@@ -15,7 +14,6 @@ export class DiscussionService extends ComponentService {
   constructor(
     private upgrade: UpgradeModule,
     private http: HttpClient,
-    private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
