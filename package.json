@@ -81,7 +81,7 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@locl/cli": "0.0.1-beta.7",
-    "@ngtools/webpack": "~10.0.0",
+    "@ngtools/webpack": "10.1.2",
     "@types/dom-mediacapture-record": "^1.0.6",
     "@types/jasmine": "^3.5.10",
     "@types/jasminewd2": "^2.0.8",
@@ -147,7 +147,7 @@
     "watch-sass": "npm rebuild node-sass && node ./node_modules/gulp/bin/gulp.js",
     "update-i18n": "node ./node_modules/gulp/bin/gulp.js update-i18n",
     "compile-sass": "node ./node_modules/gulp/bin/gulp.js compile-sass",
-    "test": "ng test wise --source-map=false --karma-config karma.conf.js --browsers ChromeHeadlessNoSandbox --watch=false",
+    "test": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng test wise --source-map=false --browsers ChromeHeadlessNoSandbox --watch=false",
     "test-e2e-comment": "test-e2e assumes wise is already running.",
     "test-e2e": "node ./node_modules/protractor/bin/protractor src/assets/wise5/test-e2e/conf.js",
     "extract-i18n": "ng xi18n"
