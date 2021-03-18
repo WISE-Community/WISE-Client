@@ -1079,7 +1079,11 @@ class GraphController extends ComponentController {
           enabled: this.isLegendEnabled
         },
         tooltip: {
-          formatter: this.createTooltipFormatter()
+          formatter: this.GraphService.createTooltipFormatter(
+            xAxis,
+            yAxis,
+            this.componentContent.roundValuesTo
+          )
         },
         chart: {
           width: this.width,
