@@ -503,4 +503,24 @@ export class GraphService extends ComponentService {
   pointHasCustomTooltip(point: any): boolean {
     return point.tooltip != null && point.tooltip !== '';
   }
+
+  getPlotBandsFromTrials(trials: any[]): any[] {
+    let trialPlotBands = [];
+    for (const trial of trials) {
+      if (trial.show && trial.xAxis != null && trial.xAxis.plotBands != null) {
+        trialPlotBands = trialPlotBands.concat(trial.xAxis.plotBands);
+      }
+    }
+    return trialPlotBands;
+  }
+
+  getSeriesFromTrials(trials: any[]): any[] {
+    let series = [];
+    for (const trial of trials) {
+      if (trial.show) {
+        series = series.concat(trial.series);
+      }
+    }
+    return series;
+  }
 }

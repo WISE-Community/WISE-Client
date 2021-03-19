@@ -45,7 +45,9 @@ export class GraphGrading extends ComponentGrading {
     this.roundValuesTo = this.componentContent.roundValuesTo;
     this.xAxis = this.getXAxis(this.componentContent, this.componentState);
     this.yAxis = this.getYAxis(this.componentContent, this.componentState);
-    this.xAxis.plotBands = this.getPlotBandsFromTrials(this.componentState.studentData.trials);
+    this.xAxis.plotBands = this.GraphService.getPlotBandsFromTrials(
+      this.componentState.studentData.trials
+    );
     this.drawGraph(this.componentState);
   }
 
@@ -65,18 +67,8 @@ export class GraphGrading extends ComponentGrading {
     }
   }
 
-  getPlotBandsFromTrials(trials: any[]): any[] {
-    let trialPlotBands = [];
-    for (const trial of trials) {
-      if (trial.show && trial.xAxis != null && trial.xAxis.plotBands != null) {
-        trialPlotBands = trialPlotBands.concat(trial.xAxis.plotBands);
-      }
-    }
-    return trialPlotBands;
-  }
-
   drawGraph(componentState: any): void {
-    const series = this.getSeriesFromTrials(componentState.studentData.trials);
+    const series = this.GraphService.getSeriesFromTrials(componentState.studentData.trials);
     this.enableMouseTrackingOnAllSeries(series);
     this.options = this.createOptions(
       this.graphType,
@@ -91,16 +83,6 @@ export class GraphGrading extends ComponentGrading {
       this.yAxis,
       series
     );
-  }
-
-  getSeriesFromTrials(trials: any[]): any[] {
-    let series = [];
-    for (const trial of trials) {
-      if (trial.show) {
-        series = series.concat(trial.series);
-      }
-    }
-    return series;
   }
 
   enableMouseTrackingOnAllSeries(series: any[]): void {

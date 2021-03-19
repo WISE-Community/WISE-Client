@@ -912,8 +912,8 @@ class GraphController extends ComponentController {
     this.setupXAxisLimitSpacerWidth();
     let series = null;
     if (this.isTrialsEnabled()) {
-      series = this.getSeriesFromTrials(this.trials);
-      this.xAxis.plotBands = this.getPlotBandsFromTrials(this.trials);
+      series = this.GraphService.getSeriesFromTrials(this.trials);
+      this.xAxis.plotBands = this.GraphService.getPlotBandsFromTrials(this.trials);
     } else {
       series = this.getSeries();
     }
@@ -983,26 +983,6 @@ class GraphController extends ComponentController {
     } else {
       this.xAxisLimitSpacerWidth = 0;
     }
-  }
-
-  getSeriesFromTrials(trials) {
-    let series = [];
-    for (const trial of trials) {
-      if (trial.show) {
-        series = series.concat(trial.series);
-      }
-    }
-    return series;
-  }
-
-  getPlotBandsFromTrials(trials) {
-    let trialPlotBands = [];
-    for (const trial of trials) {
-      if (trial.show && trial.xAxis != null && trial.xAxis.plotBands != null) {
-        trialPlotBands = trialPlotBands.concat(trial.xAxis.plotBands);
-      }
-    }
-    return trialPlotBands;
   }
 
   refreshSeriesIds(series) {
