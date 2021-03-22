@@ -11,7 +11,7 @@ class WorkgroupItemController {
   expand: any;
   hasAlert: boolean;
   hasNewAlert: boolean;
-  hiddenComponents: any = [];
+  hiddenComponents: string[] = [];
   maxScore: number;
   nodeHasWork: boolean;
   nodeId: string;

@@ -1,6 +1,7 @@
 'use strict';
 
 import * as angular from 'angular';
+import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
 class StepItemController {
   $translate: any;
@@ -17,12 +18,19 @@ class StepItemController {
   statusClass: string;
   statusText: string;
   title: string;
+  components: any[];
 
-  static $inject = ['$filter'];
+  static $inject = ['$filter', 'ProjectService'];
 
-  constructor($filter: any) {
+  constructor($filter: any, private ProjectService: TeacherProjectService) {
     this.$translate = $filter('translate');
     this.statusText = '';
+  }
+
+  $onInit() {
+    this.components = this.ProjectService.getComponentsByNodeId(this.nodeId).filter((component) => {
+      return this.ProjectService.componentHasWork(component);
+    });
   }
 
   $onChanges(changesObj) {
@@ -118,11 +126,19 @@ const StepItem = {
         </button>
       </md-subheader>
       <md-list-item ng-if="$ctrl.expand && !$ctrl.disabled" class="grading__item-container">
-        <workgroup-node-grading workgroup-id="::$ctrl.workgroupId"
-                                class="workgroup-node-grading"
-                                node-id="{{ ::$ctrl.nodeId }}"
-                                hidden-components="[]"
-                                flex></workgroup-node-grading>
+          <div class="grading__item" style="width:100%">
+            <div id="component_{{::component.id}}_{{::$ctrl.workgroupId}}" class="component component--grading" ng-repeat='component in $ctrl.components'>
+              <h3 class="accent-1 md-body-2 gray-lightest-bg component__header">
+                {{ $index+1 + '. ' + $ctrl.getComponentTypeLabel(component.type) }}&nbsp;
+                <component-new-work-badge [component-id]="component.id"
+                                          [workgroup-id]="$ctrl.workgroupId"
+                                          [node-id]="$ctrl.nodeId"></component-new-work-badge>
+              </h3>
+              <workgroup-component-grading component-id="component.id"
+                  workgroup-id="$ctrl.workgroupId"
+                  node-id="$ctrl.nodeId"></workgroup-component-grading>
+            </div>
+          </div>
       </md-list-item>
     </div>`
 };

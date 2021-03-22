@@ -1,5 +1,6 @@
 'use strict';
 
+import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
@@ -9,15 +10,18 @@ class WorkgroupComponentGradingController {
   latestComponentState: any;
   nodeId: string;
   workgroupId: number;
+  teacherWorkgroupId: number;
 
-  static $inject = ['ProjectService', 'TeacherDataService'];
+  static $inject = ['ConfigService', 'ProjectService', 'TeacherDataService'];
 
   constructor(
+    private ConfigService: ConfigService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService
   ) {}
 
   $onInit() {
+    this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
     this.component = this.ProjectService.getComponentByNodeIdAndComponentId(
       this.nodeId,
       this.componentId
