@@ -342,4 +342,168 @@ export class GraphService extends ComponentService {
   getSeriesColor(index: number): string {
     return this.seriesColors[index];
   }
+
+  createTooltipFormatter(xAxis: any, yAxis: any, roundValuesTo: string): any {
+    const thisGraphService = this;
+    return function () {
+      let text = '';
+      if (thisGraphService.isLimitXAxisType(xAxis)) {
+        text = thisGraphService.getSeriesText(this.series);
+        const xText = thisGraphService.getAxisTextForLimitGraph(
+          this.series,
+          this.x,
+          'xAxis',
+          xAxis,
+          roundValuesTo
+        );
+        const yText = thisGraphService.getAxisTextForLimitGraph(
+          this.series,
+          this.y,
+          'yAxis',
+          yAxis,
+          roundValuesTo
+        );
+        text += thisGraphService.combineXTextAndYText(xText, yText);
+      } else if (thisGraphService.isCategoriesXAxisType(xAxis)) {
+        text = thisGraphService.getSeriesText(this.series);
+        const xText = thisGraphService.getXTextForCategoriesGraph(
+          this.point,
+          this.x,
+          xAxis,
+          roundValuesTo
+        );
+        const yText = thisGraphService.getYTextForCategoriesGraph(this.y, roundValuesTo);
+        text += xText + ' ' + yText;
+      }
+      if (thisGraphService.pointHasCustomTooltip(this.point)) {
+        text += '<br/>' + this.point.tooltip;
+      }
+      return text;
+    };
+  }
+
+  isLimitXAxisType(xAxis: any): boolean {
+    return xAxis.type === 'limits' || xAxis.type == null;
+  }
+
+  isCategoriesXAxisType(xAxis: any): boolean {
+    return xAxis.type === 'categories';
+  }
+
+  getSeriesText(series: any): string {
+    let text = '';
+    if (series.name !== '') {
+      text = '<b>' + series.name + '</b><br/>';
+    }
+    return text;
+  }
+
+  getAxisTextForLimitGraph(
+    series: any,
+    num: number,
+    axisName: string,
+    axisObj: any,
+    roundValuesTo: string
+  ): string {
+    let text = `${this.performRounding(num, roundValuesTo)}`;
+    const axisUnits = this.getAxisUnits(series, axisName, axisObj);
+    if (axisUnits != null && axisUnits !== '') {
+      text += ' ' + axisUnits;
+    }
+    return text;
+  }
+
+  combineXTextAndYText(xText: string, yText: string): string {
+    let text = xText;
+    if (xText !== '') {
+      text += ', ';
+    }
+    text += yText;
+    return text;
+  }
+
+  getXTextForCategoriesGraph(point: any, x: number, xAxis: any, roundValuesTo: string): any {
+    const category = this.getCategoryByIndex(point.index, xAxis);
+    if (category != null) {
+      return category;
+    } else {
+      return this.performRounding(x, roundValuesTo);
+    }
+  }
+
+  getCategoryByIndex(index: number, xAxis: any): string {
+    if (xAxis != null && xAxis.categories != null && index < xAxis.categories.length) {
+      return xAxis.categories[index];
+    }
+    return null;
+  }
+
+  getYTextForCategoriesGraph(y: number, roundValuesTo: string) {
+    return this.performRounding(y, roundValuesTo);
+  }
+
+  performRounding(number: number, roundValuesTo: string): number {
+    if (roundValuesTo === 'integer') {
+      number = this.roundToNearestInteger(number);
+    } else if (roundValuesTo === 'tenth') {
+      number = this.roundToNearestTenth(number);
+    } else if (roundValuesTo === 'hundredth') {
+      number = this.roundToNearestHundredth(number);
+    }
+    return number;
+  }
+
+  roundToNearestInteger(x): number {
+    return Math.round(parseFloat(x));
+  }
+
+  roundToNearestTenth(x): number {
+    return this.roundToNearest(x, 10);
+  }
+
+  roundToNearestHundredth(x): number {
+    return this.roundToNearest(x, 100);
+  }
+
+  roundToNearest(x: any, divisor: number): number {
+    return Math.round(parseFloat(x) * divisor) / divisor;
+  }
+
+  getAxisUnits(series: any, axisName: string, axisObj: any): string {
+    if (
+      series[axisName] != null &&
+      series[axisName].userOptions != null &&
+      series[axisName].userOptions.units != null
+    ) {
+      return series[axisName].userOptions.units;
+    } else if (axisObj.units != null) {
+      return axisObj.units;
+    } else {
+      return '';
+    }
+  }
+
+  pointHasCustomTooltip(point: any): boolean {
+    return point.tooltip != null && point.tooltip !== '';
+  }
+
+  getPlotBandsFromTrials(trials: any[]): any[] {
+    let trialPlotBands = [];
+    for (const trial of trials) {
+      if (trial.show && trial.xAxis != null && trial.xAxis.plotBands != null) {
+        trialPlotBands = trialPlotBands.concat(trial.xAxis.plotBands);
+      }
+    }
+    return trialPlotBands;
+  }
+
+  getSeriesFromTrials(trials: any[]): any[] {
+    let series = [];
+    for (const trial of trials) {
+      if (trial.show) {
+        series = series.concat(trial.series);
+      }
+    }
+    return series;
+  }
 }

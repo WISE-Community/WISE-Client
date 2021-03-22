@@ -138,7 +138,7 @@ const WorkgroupNodeGrading = {
                     </h3>
                     <ng-content ng-switch="::component.type">
                       {{latestComponentState = $ctrl.getLatestComponentStateByWorkgroupIdAndComponentId($ctrl.workgroupId, component.id); ""}}
-                      <div ng-switch-when="AudioOscillator|ConceptMap|Discussion|Draw|Label|Match|MultipleChoice|OpenResponse|Table" ng-switch-when-separator="|" class="component__content" layout="row" layout-wrap>
+                      <div ng-switch-when="AudioOscillator|ConceptMap|Discussion|Draw|Graph|Label|Match|MultipleChoice|OpenResponse|Table" ng-switch-when-separator="|" class="component__content" layout="row" layout-wrap>
                         <div flex="100" flex-gt-sm="66" layout="column" class="component--grading__response">
                           <ng-content ng-if="latestComponentState != null && latestComponentState !== ''">
                             <audio-oscillator-grading
@@ -166,6 +166,12 @@ const WorkgroupNodeGrading = {
                                 component-id="{{::component.id}}"
                                 component-state="{{latestComponentState}}">
                             </draw-grading>
+                            <graph-grading
+                                ng-if="component.type === 'Graph'"
+                                node-id="{{::$ctrl.nodeId}}"
+                                component-id="{{::component.id}}"
+                                component-state="{{latestComponentState}}">
+                            </graph-grading>
                             <label-grading
                                 ng-if="component.type === 'Label'"
                                 node-id="{{::$ctrl.nodeId}}"

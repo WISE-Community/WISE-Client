@@ -912,8 +912,8 @@ class GraphController extends ComponentController {
     this.setupXAxisLimitSpacerWidth();
     let series = null;
     if (this.isTrialsEnabled()) {
-      series = this.getSeriesFromTrials(this.trials);
-      this.xAxis.plotBands = this.getPlotBandsFromTrials(this.trials);
+      series = this.GraphService.getSeriesFromTrials(this.trials);
+      this.xAxis.plotBands = this.GraphService.getPlotBandsFromTrials(this.trials);
     } else {
       series = this.getSeries();
     }
@@ -983,26 +983,6 @@ class GraphController extends ComponentController {
     } else {
       this.xAxisLimitSpacerWidth = 0;
     }
-  }
-
-  getSeriesFromTrials(trials) {
-    let series = [];
-    for (const trial of trials) {
-      if (trial.show) {
-        series = series.concat(trial.series);
-      }
-    }
-    return series;
-  }
-
-  getPlotBandsFromTrials(trials) {
-    let trialPlotBands = [];
-    for (const trial of trials) {
-      if (trial.show && trial.xAxis != null && trial.xAxis.plotBands != null) {
-        trialPlotBands = trialPlotBands.concat(trial.xAxis.plotBands);
-      }
-    }
-    return trialPlotBands;
   }
 
   refreshSeriesIds(series) {
@@ -1079,7 +1059,11 @@ class GraphController extends ComponentController {
           enabled: this.isLegendEnabled
         },
         tooltip: {
-          formatter: this.createTooltipFormatter()
+          formatter: this.GraphService.createTooltipFormatter(
+            xAxis,
+            yAxis,
+            this.componentContent.roundValuesTo
+          )
         },
         chart: {
           width: this.width,
@@ -1134,84 +1118,12 @@ class GraphController extends ComponentController {
     return chartConfig;
   }
 
-  createTooltipFormatter() {
-    const thisGraphController = this;
-    return function () {
-      let text = '';
-      if (thisGraphController.isLimitXAxisType(thisGraphController.xAxis)) {
-        text = thisGraphController.getSeriesText(this.series);
-        const xText = thisGraphController.getXTextForLimitGraph(this.series, this.x);
-        const yText = thisGraphController.getYTextForLimitGraph(this.series, this.y);
-        text += thisGraphController.combineXTextAndYText(xText, yText);
-      } else if (thisGraphController.isCategoriesXAxisType(thisGraphController.xAxis)) {
-        text = thisGraphController.getSeriesText(this.series);
-        const xText = thisGraphController.getXTextForCategoriesGraph(this.point, this.x);
-        const yText = thisGraphController.getYTextForCategoriesGraph(this.y);
-        text += xText + ' ' + yText;
-      }
-      if (thisGraphController.pointHasCustomTooltip(this.point)) {
-        text += '<br/>' + this.point.tooltip;
-      }
-      return text;
-    };
-  }
-
-  getXAxisUnits(series) {
-    if (
-      series.xAxis != null &&
-      series.xAxis.userOptions != null &&
-      series.xAxis.userOptions.units != null
-    ) {
-      return series.xAxis.userOptions.units;
-    } else {
-      return '';
-    }
-  }
-
-  getYAxisUnits(series) {
-    if (
-      series.yAxis != null &&
-      series.yAxis.userOptions != null &&
-      series.yAxis.userOptions.units != null
-    ) {
-      return series.yAxis.userOptions.units;
-    } else {
-      return '';
-    }
-  }
-
   isLimitXAxisType(xAxis) {
     return xAxis.type === 'limits' || xAxis.type == null;
   }
 
   isCategoriesXAxisType(xAxis) {
     return xAxis.type === 'categories';
-  }
-
-  getSeriesText(series) {
-    let text = '';
-    if (series.name !== '') {
-      text = '<b>' + series.name + '</b><br/>';
-    }
-    return text;
-  }
-
-  getXTextForLimitGraph(series, x) {
-    let text = this.performRounding(x);
-    let xAxisUnits = this.getXAxisUnits(series);
-    if (xAxisUnits != null && xAxisUnits !== '') {
-      text += ' ' + xAxisUnits;
-    }
-    return text;
-  }
-
-  getYTextForLimitGraph(series, y) {
-    let text = this.performRounding(y);
-    let yAxisUnits = this.getYAxisUnits(this.series);
-    if (yAxisUnits != null && yAxisUnits !== '') {
-      text += ' ' + yAxisUnits;
-    }
-    return text;
   }
 
   combineXTextAndYText(xText, yText) {
@@ -1221,19 +1133,6 @@ class GraphController extends ComponentController {
     }
     text += yText;
     return text;
-  }
-
-  getXTextForCategoriesGraph(point, x) {
-    const category = this.getCategoryByIndex(point.index);
-    if (category != null) {
-      return category;
-    } else {
-      return this.performRounding(x);
-    }
-  }
-
-  getYTextForCategoriesGraph(y) {
-    return this.performRounding(y);
   }
 
   pointHasCustomTooltip(point) {
@@ -2725,38 +2624,8 @@ class GraphController extends ComponentController {
     return this.uploadedFileName;
   }
 
-  /**
-   * Round the number according to the authoring settings
-   * @param number a number
-   * @return the rounded number
-   */
-  performRounding(number) {
-    if (this.componentContent.roundValuesTo === 'integer') {
-      number = this.roundToNearestInteger(number);
-    } else if (this.componentContent.roundValuesTo === 'tenth') {
-      number = this.roundToNearestTenth(number);
-    } else if (this.componentContent.roundValuesTo === 'hundredth') {
-      number = this.roundToNearestHundredth(number);
-    }
-    return number;
-  }
-
-  roundToNearestInteger(x) {
-    x = parseFloat(x);
-    x = Math.round(x);
-    return x;
-  }
-
-  roundToNearestTenth(x) {
-    x = parseFloat(x);
-    x = Math.round(x * 10) / 10;
-    return x;
-  }
-
-  roundToNearestHundredth(x) {
-    x = parseFloat(x);
-    x = Math.round(x * 100) / 100;
-    return x;
+  performRounding(number: number): number {
+    return this.GraphService.performRounding(number, this.componentContent.roundValuesTo);
   }
 
   /**
@@ -3224,17 +3093,6 @@ class GraphController extends ComponentController {
 
   trialCheckboxClicked() {
     this.addNextComponentStateToUndoStack = true;
-  }
-
-  getCategoryByIndex(index) {
-    if (
-      this.componentContent.xAxis != null &&
-      this.componentContent.xAxis.categories != null &&
-      index < this.componentContent.xAxis.categories.length
-    ) {
-      return this.componentContent.xAxis.categories[index];
-    }
-    return null;
   }
 
   isMousePlotLineOn() {

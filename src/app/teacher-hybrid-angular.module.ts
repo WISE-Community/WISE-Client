@@ -68,6 +68,8 @@ import { AudioOscillatorGrading } from '../assets/wise5/components/audioOscillat
 import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
 import { ConceptMapGrading } from '../assets/wise5/components/conceptMap/concept-map-grading/concept-map-grading.component';
 import { DiscussionGrading } from '../assets/wise5/components/discussion/discussion-grading/discussion-grading.component';
+import { GraphGrading } from '../assets/wise5/components/graph/graph-grading/graph-grading.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -97,6 +99,7 @@ import { DiscussionGrading } from '../assets/wise5/components/discussion/discuss
     EditOutsideUrlAdvancedComponent,
     EmbeddedAuthoring,
     GraphAuthoring,
+    GraphGrading,
     HtmlAuthoring,
     LabelAuthoring,
     LabelGrading,
@@ -127,7 +130,7 @@ import { DiscussionGrading } from '../assets/wise5/components/discussion/discuss
     WiseAuthoringTinymceEditorComponent,
     WorkgroupNodeStatusComponent
   ],
-  imports: [AngularJSModule],
+  imports: [AngularJSModule, HighchartsChartModule],
   providers: [
     { provide: DataService, useExisting: TeacherDataService },
     MilestoneService,
