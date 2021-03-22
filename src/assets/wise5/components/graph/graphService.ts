@@ -404,7 +404,7 @@ export class GraphService extends ComponentService {
     axisName: string,
     axisObj: any,
     roundValuesTo: string
-  ) {
+  ): string {
     let text = `${this.performRounding(num, roundValuesTo)}`;
     const axisUnits = this.getAxisUnits(series, axisName, axisObj);
     if (axisUnits != null && axisUnits !== '') {
@@ -469,7 +469,7 @@ export class GraphService extends ComponentService {
     return Math.round(parseFloat(x) * divisor) / divisor;
   }
 
-  getAxisUnits(series: any, axisName: string, axisObj: any) {
+  getAxisUnits(series: any, axisName: string, axisObj: any): string {
     if (
       series[axisName] != null &&
       series[axisName].userOptions != null &&

@@ -43,27 +43,19 @@ export class GraphGrading extends ComponentGrading {
     }
     this.backgroundImage = this.componentContent.backgroundImage;
     this.roundValuesTo = this.componentContent.roundValuesTo;
-    this.xAxis = this.getXAxis(this.componentContent, this.componentState);
-    this.yAxis = this.getYAxis(this.componentContent, this.componentState);
+    this.xAxis = this.getAxis('xAxis', this.componentContent, this.componentState);
+    this.yAxis = this.getAxis('yAxis', this.componentContent, this.componentState);
     this.xAxis.plotBands = this.GraphService.getPlotBandsFromTrials(
       this.componentState.studentData.trials
     );
     this.drawGraph(this.componentState);
   }
 
-  getXAxis(componentContent: any, componentState: any): any {
-    if (componentState.studentData.xAxis != null) {
-      return componentState.studentData.xAxis;
+  getAxis(axisName: string, componentContent: any, componentState: any): any {
+    if (componentState.studentData[axisName] != null) {
+      return componentState.studentData[axisName];
     } else {
-      return componentContent.xAxis;
-    }
-  }
-
-  getYAxis(componentContent: any, componentState: any): any {
-    if (componentState.studentData.yAxis != null) {
-      return componentState.studentData.yAxis;
-    } else {
-      return componentContent.yAxis;
+      return componentContent[axisName];
     }
   }
 

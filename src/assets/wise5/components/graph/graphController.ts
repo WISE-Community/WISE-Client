@@ -1135,19 +1135,6 @@ class GraphController extends ComponentController {
     return text;
   }
 
-  getXTextForCategoriesGraph(point, x) {
-    const category = this.getCategoryByIndex(point.index);
-    if (category != null) {
-      return category;
-    } else {
-      return this.performRounding(x);
-    }
-  }
-
-  getYTextForCategoriesGraph(y) {
-    return this.performRounding(y);
-  }
-
   pointHasCustomTooltip(point) {
     return point.tooltip != null && point.tooltip !== '';
   }
@@ -3106,17 +3093,6 @@ class GraphController extends ComponentController {
 
   trialCheckboxClicked() {
     this.addNextComponentStateToUndoStack = true;
-  }
-
-  getCategoryByIndex(index) {
-    if (
-      this.componentContent.xAxis != null &&
-      this.componentContent.xAxis.categories != null &&
-      index < this.componentContent.xAxis.categories.length
-    ) {
-      return this.componentContent.xAxis.categories[index];
-    }
-    return null;
   }
 
   isMousePlotLineOn() {
