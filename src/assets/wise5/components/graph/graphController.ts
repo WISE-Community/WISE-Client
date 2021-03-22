@@ -1118,84 +1118,12 @@ class GraphController extends ComponentController {
     return chartConfig;
   }
 
-  createTooltipFormatter() {
-    const thisGraphController = this;
-    return function () {
-      let text = '';
-      if (thisGraphController.isLimitXAxisType(thisGraphController.xAxis)) {
-        text = thisGraphController.getSeriesText(this.series);
-        const xText = thisGraphController.getXTextForLimitGraph(this.series, this.x);
-        const yText = thisGraphController.getYTextForLimitGraph(this.series, this.y);
-        text += thisGraphController.combineXTextAndYText(xText, yText);
-      } else if (thisGraphController.isCategoriesXAxisType(thisGraphController.xAxis)) {
-        text = thisGraphController.getSeriesText(this.series);
-        const xText = thisGraphController.getXTextForCategoriesGraph(this.point, this.x);
-        const yText = thisGraphController.getYTextForCategoriesGraph(this.y);
-        text += xText + ' ' + yText;
-      }
-      if (thisGraphController.pointHasCustomTooltip(this.point)) {
-        text += '<br/>' + this.point.tooltip;
-      }
-      return text;
-    };
-  }
-
-  getXAxisUnits(series) {
-    if (
-      series.xAxis != null &&
-      series.xAxis.userOptions != null &&
-      series.xAxis.userOptions.units != null
-    ) {
-      return series.xAxis.userOptions.units;
-    } else {
-      return '';
-    }
-  }
-
-  getYAxisUnits(series) {
-    if (
-      series.yAxis != null &&
-      series.yAxis.userOptions != null &&
-      series.yAxis.userOptions.units != null
-    ) {
-      return series.yAxis.userOptions.units;
-    } else {
-      return '';
-    }
-  }
-
   isLimitXAxisType(xAxis) {
     return xAxis.type === 'limits' || xAxis.type == null;
   }
 
   isCategoriesXAxisType(xAxis) {
     return xAxis.type === 'categories';
-  }
-
-  getSeriesText(series) {
-    let text = '';
-    if (series.name !== '') {
-      text = '<b>' + series.name + '</b><br/>';
-    }
-    return text;
-  }
-
-  getXTextForLimitGraph(series, x) {
-    let text = this.performRounding(x);
-    let xAxisUnits = this.getXAxisUnits(series);
-    if (xAxisUnits != null && xAxisUnits !== '') {
-      text += ' ' + xAxisUnits;
-    }
-    return text;
-  }
-
-  getYTextForLimitGraph(series, y) {
-    let text = this.performRounding(y);
-    let yAxisUnits = this.getYAxisUnits(this.series);
-    if (yAxisUnits != null && yAxisUnits !== '') {
-      text += ' ' + yAxisUnits;
-    }
-    return text;
   }
 
   combineXTextAndYText(xText, yText) {
@@ -2709,38 +2637,8 @@ class GraphController extends ComponentController {
     return this.uploadedFileName;
   }
 
-  /**
-   * Round the number according to the authoring settings
-   * @param number a number
-   * @return the rounded number
-   */
-  performRounding(number) {
-    if (this.componentContent.roundValuesTo === 'integer') {
-      number = this.roundToNearestInteger(number);
-    } else if (this.componentContent.roundValuesTo === 'tenth') {
-      number = this.roundToNearestTenth(number);
-    } else if (this.componentContent.roundValuesTo === 'hundredth') {
-      number = this.roundToNearestHundredth(number);
-    }
-    return number;
-  }
-
-  roundToNearestInteger(x) {
-    x = parseFloat(x);
-    x = Math.round(x);
-    return x;
-  }
-
-  roundToNearestTenth(x) {
-    x = parseFloat(x);
-    x = Math.round(x * 10) / 10;
-    return x;
-  }
-
-  roundToNearestHundredth(x) {
-    x = parseFloat(x);
-    x = Math.round(x * 100) / 100;
-    return x;
+  performRounding(number: number): number {
+    return this.GraphService.performRounding(number, this.componentContent.roundValuesTo);
   }
 
   /**

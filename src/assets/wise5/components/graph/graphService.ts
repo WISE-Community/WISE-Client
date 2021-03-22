@@ -349,15 +349,17 @@ export class GraphService extends ComponentService {
       let text = '';
       if (thisGraphService.isLimitXAxisType(xAxis)) {
         text = thisGraphService.getSeriesText(this.series);
-        const xText = thisGraphService.getXTextForLimitGraph(
+        const xText = thisGraphService.getAxisTextForLimitGraph(
           this.series,
           this.x,
+          'xAxis',
           xAxis,
           roundValuesTo
         );
-        const yText = thisGraphService.getYTextForLimitGraph(
+        const yText = thisGraphService.getAxisTextForLimitGraph(
           this.series,
           this.y,
+          'yAxis',
           yAxis,
           roundValuesTo
         );
@@ -396,20 +398,17 @@ export class GraphService extends ComponentService {
     return text;
   }
 
-  getXTextForLimitGraph(series: any, x: number, xAxis: any, roundValuesTo: string) {
-    let text = `${this.performRounding(x, roundValuesTo)}`;
-    const xAxisUnits = this.getXAxisUnits(series, xAxis);
-    if (xAxisUnits != null && xAxisUnits !== '') {
-      text += ' ' + xAxisUnits;
-    }
-    return text;
-  }
-
-  getYTextForLimitGraph(series: any, y: number, yAxis: any, roundValuesTo: string) {
-    let text = `${this.performRounding(y, roundValuesTo)}`;
-    const yAxisUnits = this.getYAxisUnits(series, yAxis);
-    if (yAxisUnits != null && yAxisUnits !== '') {
-      text += ' ' + yAxisUnits;
+  getAxisTextForLimitGraph(
+    series: any,
+    num: number,
+    axisName: string,
+    axisObj: any,
+    roundValuesTo: string
+  ) {
+    let text = `${this.performRounding(num, roundValuesTo)}`;
+    const axisUnits = this.getAxisUnits(series, axisName, axisObj);
+    if (axisUnits != null && axisUnits !== '') {
+      text += ' ' + axisUnits;
     }
     return text;
   }
@@ -455,46 +454,30 @@ export class GraphService extends ComponentService {
   }
 
   roundToNearestInteger(x): number {
-    x = parseFloat(x);
-    x = Math.round(x);
-    return x;
+    return Math.round(parseFloat(x));
   }
 
   roundToNearestTenth(x): number {
-    x = parseFloat(x);
-    x = Math.round(x * 10) / 10;
-    return x;
+    return this.roundToNearest(x, 10);
   }
 
   roundToNearestHundredth(x): number {
-    x = parseFloat(x);
-    x = Math.round(x * 100) / 100;
-    return x;
+    return this.roundToNearest(x, 100);
   }
 
-  getXAxisUnits(series: any, xAxis: any): string {
-    if (
-      series.xAxis != null &&
-      series.xAxis.userOptions != null &&
-      series.xAxis.userOptions.units != null
-    ) {
-      return series.xAxis.userOptions.units;
-    } else if (xAxis.units != null) {
-      return xAxis.units;
-    } else {
-      return '';
-    }
+  roundToNearest(x: any, divisor: number): number {
+    return Math.round(parseFloat(x) * divisor) / divisor;
   }
 
-  getYAxisUnits(series: any, yAxis: any): string {
+  getAxisUnits(series: any, axisName: string, axisObj: any) {
     if (
-      series.yAxis != null &&
-      series.yAxis.userOptions != null &&
-      series.yAxis.userOptions.units != null
+      series[axisName] != null &&
+      series[axisName].userOptions != null &&
+      series[axisName].userOptions.units != null
     ) {
-      return series.yAxis.userOptions.units;
-    } else if (yAxis.units != null) {
-      return yAxis.units;
+      return series[axisName].userOptions.units;
+    } else if (axisObj.units != null) {
+      return axisObj.units;
     } else {
       return '';
     }
