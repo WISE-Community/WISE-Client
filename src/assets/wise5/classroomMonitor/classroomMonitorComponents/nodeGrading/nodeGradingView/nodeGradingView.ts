@@ -17,7 +17,7 @@ class NodeGradingViewController {
   $translate: any;
   canViewStudentNames: boolean;
   componentId: string = null;
-  hiddenComponents: any;
+  hiddenComponents: any = [];
   isExpandAll: boolean;
   maxScore: any;
   milestone: any;

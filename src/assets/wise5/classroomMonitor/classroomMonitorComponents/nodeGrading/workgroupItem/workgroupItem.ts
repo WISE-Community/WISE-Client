@@ -6,11 +6,12 @@ import * as angular from 'angular';
 class WorkgroupItemController {
   $translate: any;
   componentId: string;
+  components: any[];
   disabled: any;
   expand: any;
   hasAlert: boolean;
   hasNewAlert: boolean;
-  hiddenComponents: any;
+  hiddenComponents: any = [];
   maxScore: number;
   nodeHasWork: boolean;
   nodeId: string;
@@ -31,13 +32,12 @@ class WorkgroupItemController {
     this.nodeHasWork = this.ProjectService.nodeHasWork(this.nodeId);
     this.statusText = '';
     this.update();
+    this.components = this.ProjectService.getComponentsByNodeId(this.nodeId).filter((component) => {
+      return this.ProjectService.componentHasWork(component);
+    });
   }
 
   $onChanges(changesObj) {
-    if (changesObj.hiddenComponents) {
-      this.hiddenComponents = angular.copy(changesObj.hiddenComponents.currentValue);
-    }
-
     if (changesObj.maxScore) {
       this.maxScore =
         typeof changesObj.maxScore.currentValue === 'number' ? changesObj.maxScore.currentValue : 0;
@@ -52,6 +52,10 @@ class WorkgroupItemController {
     }
 
     this.update();
+  }
+
+  isComponentVisible(componentId: string): boolean {
+    return !this.hiddenComponents.includes(componentId);
   }
 
   update() {
@@ -136,11 +140,21 @@ const WorkgroupItem = {
                 </button>
             </md-subheader>
             <md-list-item ng-if="$ctrl.expand && !$ctrl.disabled" class="grading__item-container">
-                <workgroup-node-grading workgroup-id="::$ctrl.workgroupId"
-                                        class="workgroup-node-grading"
-                                        node-id="{{::$ctrl.nodeId}}"
-                                        hidden-components="$ctrl.hiddenComponents"
-                                        flex></workgroup-node-grading>
+                <div class="grading__item" style="width:100%">
+                  <div id="component_{{::component.id}}_{{::$ctrl.workgroupId}}" class="component component--grading" ng-repeat='component in $ctrl.components'>
+                    <div ng-show="$ctrl.isComponentVisible(component.id)">
+                      <h3 class="accent-1 md-body-2 gray-lightest-bg component__header">
+                        {{ $index+1 + '. ' + $ctrl.getComponentTypeLabel(component.type) }}&nbsp;
+                        <component-new-work-badge [component-id]="component.id"
+                                                  [workgroup-id]="$ctrl.workgroupId"
+                                                  [node-id]="$ctrl.nodeId"></component-new-work-badge>
+                      </h3>
+                      <workgroup-component-grading component-id="component.id"
+                          workgroup-id="$ctrl.workgroupId"
+                          node-id="$ctrl.nodeId"></workgroup-component-grading>
+                    </div>
+                  </div>
+                </div>
             </md-list-item>
         </div>`
 };
