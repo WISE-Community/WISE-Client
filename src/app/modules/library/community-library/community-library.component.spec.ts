@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommunityLibraryComponent } from './community-library.component';
 import { fakeAsyncResponse } from '../../../student/student-run-list/student-run-list.component.spec';
 import { LibraryService } from '../../../services/library.service';
@@ -23,7 +23,7 @@ describe('CommunityLibraryComponent', () => {
   let component: CommunityLibraryComponent;
   let fixture: ComponentFixture<CommunityLibraryComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [OverlayModule, MatDialogModule],
       declarations: [CommunityLibraryComponent],

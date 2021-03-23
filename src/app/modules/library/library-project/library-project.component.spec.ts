@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LibraryProjectComponent } from './library-project.component';
 import { LibraryProject } from '../libraryProject';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -12,7 +12,7 @@ describe('LibraryProjectComponent', () => {
   let component: LibraryProjectComponent;
   let fixture: ComponentFixture<LibraryProjectComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LibraryProjectComponent],
       imports: [BrowserAnimationsModule, RouterTestingModule, OverlayModule, MatDialogModule],

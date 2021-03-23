@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TeacherService } from '../teacher.service';
 import { CreateRunDialogComponent } from './create-run-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';

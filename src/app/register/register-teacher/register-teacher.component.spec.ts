@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterTeacherComponent } from './register-teacher.component';
 import { TeacherService } from '../../teacher/teacher.service';
 import { AuthService } from 'angularx-social-login';
@@ -33,7 +33,7 @@ describe('RegisterTeacherComponent', () => {
   let component: RegisterTeacherComponent;
   let fixture: ComponentFixture<RegisterTeacherComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterTeacherComponent],
       imports: [RouterTestingModule],

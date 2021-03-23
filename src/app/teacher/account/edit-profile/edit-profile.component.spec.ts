@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EditProfileComponent } from './edit-profile.component';
 import { UserService } from '../../../services/user.service';
 import { Teacher } from '../../../domain/teacher';

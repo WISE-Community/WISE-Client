@@ -85,9 +85,10 @@ export function getAuthServiceConfigs(configService: ConfigService) {
     MatSnackBarModule,
     MatDialogModule,
     RouterModule.forRoot([], {
-      scrollPositionRestoration: 'enabled',
-      anchorScrolling: 'enabled'
-    })
+    scrollPositionRestoration: 'enabled',
+    anchorScrolling: 'enabled',
+    relativeLinkResolution: 'legacy'
+})
   ],
   providers: [
     ConfigService,

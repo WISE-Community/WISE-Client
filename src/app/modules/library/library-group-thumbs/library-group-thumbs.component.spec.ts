@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LibraryGroupThumbsComponent } from './library-group-thumbs.component';
 import { LibraryGroup } from '../libraryGroup';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -7,7 +7,7 @@ describe('LibraryGroupThumbsComponent', () => {
   let component: LibraryGroupThumbsComponent;
   let fixture: ComponentFixture<LibraryGroupThumbsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [LibraryGroupThumbsComponent],

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EditRunWarningDialogComponent } from './edit-run-warning-dialog.component';
 import { ConfigService } from '../../services/config.service';
 import {

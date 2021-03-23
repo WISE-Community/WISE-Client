@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ForgotTeacherPasswordVerifyComponent } from './forgot-teacher-password-verify.component';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';

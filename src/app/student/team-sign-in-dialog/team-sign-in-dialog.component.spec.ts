@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TeamSignInDialogComponent } from './team-sign-in-dialog.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -80,7 +80,7 @@ describe('TeamSignInDialogComponent', () => {
     ]
   };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TeamSignInDialogComponent],
       imports: [RouterTestingModule],
