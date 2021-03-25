@@ -38,6 +38,7 @@ class WorkgroupItemController {
     this.statusText = '';
     this.update();
     if (this.componentId) {
+      this.hiddenComponents = [];
       const component =
           this.ProjectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId);
       if (this.ProjectService.componentHasWork(component)) {
