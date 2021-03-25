@@ -2,6 +2,7 @@
 
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import * as angular from 'angular';
+import { UtilService } from '../../../../services/utilService';
 
 class WorkgroupItemController {
   $translate: any;
@@ -22,9 +23,13 @@ class WorkgroupItemController {
   statusClass: any;
   statusText: string;
   workgroupId: number;
-  static $inject = ['$filter', 'ProjectService'];
+  static $inject = ['$filter', 'ProjectService', 'UtilService'];
 
-  constructor($filter: any, private ProjectService: TeacherProjectService) {
+  constructor(
+    $filter: any,
+    private ProjectService: TeacherProjectService,
+    private UtilService: UtilService
+  ) {
     this.$translate = $filter('translate');
   }
 
@@ -56,6 +61,10 @@ class WorkgroupItemController {
 
   isComponentVisible(componentId: string): boolean {
     return !this.hiddenComponents.includes(componentId);
+  }
+
+  getComponentTypeLabel(componentType) {
+    return this.UtilService.getComponentTypeLabel(componentType);
   }
 
   update() {
