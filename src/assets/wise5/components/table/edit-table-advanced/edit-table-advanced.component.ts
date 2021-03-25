@@ -50,18 +50,17 @@ class EditTableAdvancedController extends EditAdvancedComponentAngularJSControll
   }
 
   getNumTableColumns(componentContent: any): number {
-    const tableData = componentContent.tableData;
-    const firstRow = tableData[0];
-    return firstRow.length;
+    return this.getTableDataFirstRow(componentContent).length;
   }
 
   getColumnNames(componentContent: any): string[] {
-    const columnNames: string[] = [];
-    const firstRow = componentContent.tableData[0];
-    for (const cell of firstRow) {
-      columnNames.push(cell.text);
-    }
-    return columnNames;
+    return this.getTableDataFirstRow(componentContent).map((cell: any): string => {
+      return cell.text;
+    });
+  }
+
+  getTableDataFirstRow(componentContent: any): any[] {
+    return componentContent.tableData[0];
   }
 
   toggleDataExplorer(): void {
