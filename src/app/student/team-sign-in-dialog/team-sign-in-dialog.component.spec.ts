@@ -6,7 +6,7 @@ import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Config } from '../../domain/config';
-import { AuthService } from 'angularx-social-login';
+import { SocialAuthService } from 'angularx-social-login';
 import { User } from '../../domain/user';
 import { StudentService } from '../student.service';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -80,21 +80,23 @@ describe('TeamSignInDialogComponent', () => {
     ]
   };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [TeamSignInDialogComponent],
-      imports: [RouterTestingModule],
-      providers: [
-        { provide: AuthService, useClass: MockAuthService },
-        { provide: ConfigService, useClass: MockConfigService },
-        { provide: MAT_DIALOG_DATA, useValue: { run: runObj } },
-        { provide: MatDialogRef, useValue: {} },
-        { provide: UserService, useClass: MockUserService },
-        { provide: StudentService, useClass: MockStudentService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TeamSignInDialogComponent],
+        imports: [RouterTestingModule],
+        providers: [
+          { provide: SocialAuthService, useClass: MockAuthService },
+          { provide: ConfigService, useClass: MockConfigService },
+          { provide: MAT_DIALOG_DATA, useValue: { run: runObj } },
+          { provide: MatDialogRef, useValue: {} },
+          { provide: UserService, useClass: MockUserService },
+          { provide: StudentService, useClass: MockStudentService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeamSignInDialogComponent);
