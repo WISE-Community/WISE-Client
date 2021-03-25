@@ -7,7 +7,7 @@ import { UtilService } from '../../../../services/utilService';
 class WorkgroupItemController {
   $translate: any;
   componentId: string;
-  components: any[];
+  components: any[] = [];
   disabled: any;
   expand: any;
   hasAlert: boolean;
@@ -37,9 +37,19 @@ class WorkgroupItemController {
     this.nodeHasWork = this.ProjectService.nodeHasWork(this.nodeId);
     this.statusText = '';
     this.update();
-    this.components = this.ProjectService.getComponentsByNodeId(this.nodeId).filter((component) => {
-      return this.ProjectService.componentHasWork(component);
-    });
+    if (this.componentId) {
+      const component =
+          this.ProjectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId);
+      if (this.ProjectService.componentHasWork(component)) {
+        this.components.push(component);
+      }
+    } else {
+      this.components = this.ProjectService.getComponentsByNodeId(this.nodeId).filter(
+        (component) => {
+          return this.ProjectService.componentHasWork(component);
+        }
+      );
+    }
   }
 
   $onChanges(changesObj) {
