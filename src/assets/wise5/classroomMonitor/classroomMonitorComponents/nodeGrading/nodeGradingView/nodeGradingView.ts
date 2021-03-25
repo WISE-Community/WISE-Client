@@ -13,11 +13,10 @@ import { Subscription } from 'rxjs';
 import { Directive } from '@angular/core';
 
 @Directive()
-class NodeGradingViewController {
+export class NodeGradingViewController {
   $translate: any;
   canViewStudentNames: boolean;
-  componentId: string = null;
-  hiddenComponents: any;
+  hiddenComponents: any = [];
   isExpandAll: boolean;
   maxScore: any;
   milestone: any;
@@ -48,7 +47,6 @@ class NodeGradingViewController {
 
   static $inject = [
     '$filter',
-    '$scope',
     'AnnotationService',
     'ConfigService',
     'MilestoneService',
@@ -60,16 +58,15 @@ class NodeGradingViewController {
   ];
 
   constructor(
-    private $filter: any,
-    private $scope: any,
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
-    private MilestoneService: MilestoneService,
-    private NodeService: NodeService,
-    private NotificationService: NotificationService,
-    private ProjectService: TeacherProjectService,
-    private StudentStatusService: StudentStatusService,
-    private TeacherDataService: TeacherDataService
+    protected $filter: any,
+    protected AnnotationService: AnnotationService,
+    protected ConfigService: ConfigService,
+    protected MilestoneService: MilestoneService,
+    protected NodeService: NodeService,
+    protected NotificationService: NotificationService,
+    protected ProjectService: TeacherProjectService,
+    protected StudentStatusService: StudentStatusService,
+    protected TeacherDataService: TeacherDataService
   ) {
     this.$translate = this.$filter('translate');
   }
@@ -79,29 +76,16 @@ class NodeGradingViewController {
     this.nodeHasWork = this.ProjectService.nodeHasWork(this.nodeId);
     this.sort = this.TeacherDataService.nodeGradingSort;
     this.nodeContent = this.ProjectService.getNodeById(this.nodeId);
-    if (this.milestone && this.milestone.componentId) {
-      this.componentId = this.milestone.componentId;
-      this.hiddenComponents = this.getHiddenComponents();
-    } else {
-      this.milestoneReport = this.MilestoneService.getMilestoneReportByNodeId(this.nodeId);
-    }
+    this.milestoneReport = this.MilestoneService.getMilestoneReportByNodeId(this.nodeId);
+    this.retrieveStudentData();
+    this.subscribeToEvents();
+  }
 
-    // TODO: add loading indicator
-    this.TeacherDataService.retrieveStudentDataByNodeId(this.nodeId).then((result) => {
-      this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
-      this.workgroups = this.ConfigService.getClassmateUserInfos();
-      this.workgroupsById = {}; // object that will hold workgroup names, statuses, scores, notifications, etc.
-      this.workVisibilityById = {}; // object that specifies whether student work is visible for each workgroup
-      this.workgroupInViewById = {}; // object that holds whether the workgroup is in view or not
-      const permissions = this.ConfigService.getPermissions();
-      this.canViewStudentNames = permissions.canViewStudentNames;
-      this.setWorkgroupsById();
-      this.numRubrics = this.ProjectService.getNumberOfRubricsByNodeId(this.nodeId);
+  $onDestroy() {
+    this.unsubscribeAll();
+  }
 
-      // scroll to the top of the page when the page loads
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
-    });
-
+  subscribeToEvents() {
     this.projectSavedSubscription = this.ProjectService.projectSaved$.subscribe(() => {
       this.maxScore = this.getMaxScore();
     });
@@ -129,37 +113,37 @@ class NodeGradingViewController {
     );
 
     this.studentWorkReceivedSubscription = this.TeacherDataService.studentWorkReceived$.subscribe(
-      (args: any) => {
-        const studentWork = args.studentWork;
-        if (studentWork != null) {
-          const workgroupId = studentWork.workgroupId;
-          const nodeId = studentWork.nodeId;
-          if (nodeId === this.nodeId && this.workgroupsById[workgroupId]) {
-            this.updateWorkgroup(workgroupId);
-          }
+      ({ studentWork }) => {
+        const workgroupId = studentWork.workgroupId;
+        const nodeId = studentWork.nodeId;
+        if (nodeId === this.nodeId && this.workgroupsById[workgroupId]) {
+          this.updateWorkgroup(workgroupId);
         }
       }
     );
 
     this.currentPeriodChangedSubscription = this.TeacherDataService.currentPeriodChanged$.subscribe(
       () => {
-        if (!this.milestone) {
-          this.milestoneReport = this.MilestoneService.getMilestoneReportByNodeId(this.nodeId);
-        }
+        this.milestoneReport = this.MilestoneService.getMilestoneReportByNodeId(this.nodeId);
       }
     );
-
-    if (!this.isDisplayInMilestone()) {
-      this.saveNodeGradingViewDisplayedEvent();
-    }
-
-    this.$scope.$on('$destroy', () => {
-      this.ngOnDestroy();
-    });
   }
 
-  ngOnDestroy() {
-    this.unsubscribeAll();
+  retrieveStudentData() {
+    this.TeacherDataService.retrieveStudentDataByNodeId(this.nodeId).then((result) => {
+      this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
+      this.workgroups = this.ConfigService.getClassmateUserInfos();
+      this.workgroupsById = {}; // object that will hold workgroup names, statuses, scores, notifications, etc.
+      this.workVisibilityById = {}; // object that specifies whether student work is visible for each workgroup
+      this.workgroupInViewById = {}; // object that holds whether the workgroup is in view or not
+      const permissions = this.ConfigService.getPermissions();
+      this.canViewStudentNames = permissions.canViewStudentNames;
+      this.setWorkgroupsById();
+      this.numRubrics = this.ProjectService.getNumberOfRubricsByNodeId(this.nodeId);
+
+      // scroll to the top of the page when the page loads
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
   }
 
   unsubscribeAll() {
@@ -189,34 +173,8 @@ class NodeGradingViewController {
     );
   }
 
-  isDisplayInMilestone() {
-    return this.milestone != null;
-  }
-
   getMaxScore() {
-    if (this.componentId) {
-      const component = this.ProjectService.getComponentByNodeIdAndComponentId(
-        this.nodeId,
-        this.componentId
-      );
-      if (component && component.maxScore) {
-        return component.maxScore;
-      } else {
-        return 0;
-      }
-    } else {
-      return this.ProjectService.getMaxScoreForNode(this.nodeId);
-    }
-  }
-
-  getHiddenComponents() {
-    const hiddenComponents = [];
-    for (const component of this.nodeContent.components) {
-      if (component.id !== this.componentId) {
-        hiddenComponents.push(component.id);
-      }
-    }
-    return hiddenComponents;
+    return this.ProjectService.getMaxScoreForNode(this.nodeId);
   }
 
   /**
@@ -292,14 +250,7 @@ class NodeGradingViewController {
         if (!this.ProjectService.nodeHasWork(this.nodeId)) {
           isCompleted = nodeStatus.isVisited;
         }
-        if (this.componentId) {
-          for (const workgroup of this.milestone.workgroups) {
-            if (workgroup.workgroupId === workgroupId) {
-              isCompleted = workgroup.completed;
-              break;
-            }
-          }
-        } else if (latestWorkTime) {
+        if (latestWorkTime) {
           isCompleted = nodeStatus.isCompleted;
         }
       }
@@ -352,20 +303,8 @@ class NodeGradingViewController {
    * @param workgroupId a workgroup ID number
    * @returns Number score value (defaults to -1 if workgroup has no score)
    */
-  getScoreByWorkgroupId(workgroupId) {
-    let score = null;
-    if (this.componentId) {
-      const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
-        this.nodeId,
-        this.componentId,
-        workgroupId
-      );
-      if (latestScoreAnnotation) {
-        score = this.AnnotationService.getScoreValueFromScoreAnnotation(latestScoreAnnotation);
-      }
-    } else {
-      score = this.AnnotationService.getScore(workgroupId, this.nodeId);
-    }
+  getScoreByWorkgroupId(workgroupId: number): number {
+    const score = this.AnnotationService.getScore(workgroupId, this.nodeId);
     return typeof score === 'number' ? score : -1;
   }
 
@@ -387,7 +326,7 @@ class NodeGradingViewController {
       status = -1;
     } else if (isCompleted) {
       status = 2;
-    } else if (!this.componentId && hasWork) {
+    } else if (hasWork) {
       status = 1;
     }
 
@@ -480,9 +419,6 @@ class NodeGradingViewController {
       }
     }
     this.isExpandAll = true;
-    if (this.isDisplayInMilestone()) {
-      this.saveMilestoneStudentWorkExpandCollapseAllEvent('MilestoneStudentWorkExpandAllClicked');
-    }
   }
 
   collapseAll() {
@@ -490,58 +426,10 @@ class NodeGradingViewController {
       this.workVisibilityById[workgroup.workgroupId] = false;
     }
     this.isExpandAll = false;
-    if (this.isDisplayInMilestone()) {
-      this.saveMilestoneStudentWorkExpandCollapseAllEvent('MilestoneStudentWorkCollapseAllClicked');
-    }
-  }
-
-  saveMilestoneStudentWorkExpandCollapseAllEvent(event) {
-    const context = 'ClassroomMonitor',
-      nodeId = null,
-      componentId = null,
-      componentType = null,
-      category = 'Navigation',
-      data = { milestoneId: this.milestone.id };
-    this.TeacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
-    );
   }
 
   onUpdateExpand(workgroupId, isExpanded) {
     this.workVisibilityById[workgroupId] = isExpanded;
-    if (this.isDisplayInMilestone()) {
-      this.saveMilestoneWorkgroupItemViewedEvent(workgroupId, isExpanded);
-    }
-  }
-
-  saveMilestoneWorkgroupItemViewedEvent(workgroupId, isExpanded) {
-    let event = '';
-    if (isExpanded) {
-      event = 'MilestoneStudentWorkOpened';
-    } else {
-      event = 'MilestoneStudentWorkClosed';
-    }
-    const context = 'ClassroomMonitor',
-      nodeId = null,
-      componentId = null,
-      componentType = null,
-      category = 'Navigation',
-      data = { milestoneId: this.milestone.id, workgroupId: workgroupId };
-    this.TeacherDataService.saveEvent(
-      context,
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      data
-    );
   }
 
   onUpdateHiddenComponents(value) {
@@ -568,8 +456,7 @@ class NodeGradingViewController {
 
 const NodeGradingView = {
   bindings: {
-    nodeId: '<',
-    milestone: '<'
+    nodeId: '<'
   },
   controller: NodeGradingViewController,
   templateUrl:

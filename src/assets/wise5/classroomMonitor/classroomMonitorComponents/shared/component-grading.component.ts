@@ -13,7 +13,7 @@ export abstract class ComponentGrading {
   componentState: any;
 
   @Input()
-  isRevision: any = false;
+  isRevision: boolean = false;
 
   componentContent: any;
 
@@ -25,6 +25,5 @@ export abstract class ComponentGrading {
       this.nodeId,
       this.componentId
     );
-    this.isRevision = this.isRevision === 'true';
   }
 }

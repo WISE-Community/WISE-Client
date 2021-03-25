@@ -173,7 +173,7 @@ const WorkgroupComponentRevisions = {
                                           component-id="{{::$ctrl.componentId}}"
                                           component-state="{{ item.componentState }}"
                                           workgroup-id="{{::$ctrl.workgroupId}}"
-                                          is-revision="true">
+                                          [is-revision]="true">
                                       </concept-map-grading>
                                       <discussion-grading
                                           ng-if="item.componentState.componentType === 'Discussion'"
@@ -188,7 +188,7 @@ const WorkgroupComponentRevisions = {
                                           component-id="{{::$ctrl.componentId}}"
                                           component-state="{{ item.componentState }}"
                                           workgroup-id="{{::$ctrl.workgroupId}}"
-                                          is-revision="true">
+                                          [is-revision]="true">
                                       </draw-grading>
                                       <graph-grading
                                           ng-if="item.componentState.componentType === 'Graph'"
@@ -196,7 +196,7 @@ const WorkgroupComponentRevisions = {
                                           component-id="{{::$ctrl.componentId}}"
                                           component-state="{{ item.componentState }}"
                                           workgroup-id="::$ctrl.workgroupId"
-                                          is-revision="true">
+                                          [is-revision]="true">
                                       </graph-grading>
                                       <label-grading
                                           ng-if="item.componentState.componentType === 'Label'"
@@ -204,7 +204,7 @@ const WorkgroupComponentRevisions = {
                                           component-id="{{::$ctrl.componentId}}"
                                           component-state="{{ item.componentState }}"
                                           workgroup-id="{{::$ctrl.workgroupId}}"
-                                          is-revision="true">
+                                          [is-revision]="true">
                                       </label-grading>
                                       <match-grading
                                           ng-if="item.componentState.componentType === 'Match'"
