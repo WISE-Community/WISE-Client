@@ -65,8 +65,8 @@ class NodeInfoController {
         if (this.isDisabled) {
           component.isDisabled = true;
         }
-        component.hasWork = this.ProjectService.componentHasWork(component);
-        if (component.hasWork) {
+        component.isStudentWorkGenerated = this.ProjectService.componentHasWork(component);
+        if (component.isStudentWorkGenerated) {
           assessmentItemIndex++;
           component.assessmentItemIndex = assessmentItemIndex;
         }
@@ -137,7 +137,7 @@ const NodeInfo = {
             <md-card-content>
                 <div id="component_{{::component.id}}" ng-repeat='component in ::$ctrl.components' class="component">
                     <md-divider class="divider divider--dashed" ng-if="!$first"></md-divider>
-                    <h3 ng-if="component.hasWork"
+                    <h3 ng-if="component.isStudentWorkGenerated"
                         class="accent-1 md-body-2 gray-lightest-bg
                             component__header">
                         {{ component.assessmentItemIndex + '. ' + $ctrl.getComponentTypeLabel(component.type) }}&nbsp;

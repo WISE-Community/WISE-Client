@@ -102,18 +102,10 @@ class EmbeddedController extends ComponentController {
     this.notebookConfig = this.NotebookService.getNotebookConfig();
     this.componentStateId = null;
     this.annotationsToSave = [];
-    this.embeddedApplicationIFrameId = 'componentApp_' + this.componentId;
+    this.embeddedApplicationIFrameId = this.EmbeddedService.getEmbeddedApplicationIframeId(
+      this.componentId
+    );
     this.componentType = this.componentContent.type;
-
-    if (this.isGradingMode() || this.isGradingRevisionMode()) {
-      const componentState = this.$scope.componentState;
-      if (componentState != null) {
-        this.embeddedApplicationIFrameId = 'componentApp_' + componentState.id;
-        if (this.isGradingRevisionMode()) {
-          this.embeddedApplicationIFrameId = 'componentApp_gradingRevision_' + componentState.id;
-        }
-      }
-    }
 
     this.setURL(this.componentContent.url);
 
@@ -180,7 +172,7 @@ class EmbeddedController extends ComponentController {
       } else if (messageEventData.messageType === 'studentWork') {
         this.handleStudentWorkMessage(messageEventData);
       } else if (messageEventData.messageType === 'applicationInitialized') {
-        this.handleApplicationInitializedMessage(messageEventData);
+        this.handleApplicationInitializedMessage();
       } else if (messageEventData.messageType === 'componentDirty') {
         this.handleComponentDirtyMessage(messageEventData);
       } else if (messageEventData.messageType === 'componentSubmitDirty') {
@@ -190,13 +182,13 @@ class EmbeddedController extends ComponentController {
       } else if (messageEventData.messageType === 'getStudentWork') {
         this.handleGetStudentWorkMessage(messageEventData);
       } else if (messageEventData.messageType === 'getLatestStudentWork') {
-        this.handleGetLatestStudentWorkMessage(messageEventData);
+        this.handleGetLatestStudentWorkMessage();
       } else if (messageEventData.messageType === 'getParameters') {
-        this.handleGetParametersMessage(messageEventData);
+        this.handleGetParametersMessage();
       } else if (messageEventData.messageType === 'getProjectPath') {
-        this.handleGetProjectPathMessage(messageEventData);
+        this.handleGetProjectPathMessage();
       } else if (messageEventData.messageType === 'getLatestAnnotations') {
-        this.handleGetLatestAnnotationsMessage(messageEventData);
+        this.handleGetLatestAnnotationsMessage();
       }
     };
   }
@@ -245,7 +237,7 @@ class EmbeddedController extends ComponentController {
     });
   }
 
-  handleApplicationInitializedMessage(messageEventData) {
+  handleApplicationInitializedMessage() {
     this.sendLatestWorkToApplication();
     this.processLatestStudentWork();
     ($('#' + this.embeddedApplicationIFrameId) as any).iFrameResize({ scrolling: true });
@@ -284,57 +276,31 @@ class EmbeddedController extends ComponentController {
     this.sendMessageToApplication(message);
   }
 
-  handleGetLatestStudentWorkMessage(messageEventData) {
-    const latestComponentState = this.getLatestStudentWork();
-    const message = {
-      messageType: 'latestStudentWork',
-      latestStudentWork: latestComponentState
-    };
-    this.sendMessageToApplication(message);
+  handleGetLatestStudentWorkMessage(): void {
+    this.sendMessageToApplication(
+      this.EmbeddedService.createLatestStudentWorkMessage(this.getLatestStudentWork())
+    );
   }
 
-  handleGetParametersMessage(messageEventData) {
-    let parameters: any = {};
-    if (this.componentContent.parameters != null) {
-      parameters = this.UtilService.makeCopyOfJSONObject(this.componentContent.parameters);
-    }
-    parameters.nodeId = this.nodeId;
-    parameters.componentId = this.componentId;
-    const message = {
-      messageType: 'parameters',
-      parameters: parameters
-    };
-    this.sendMessageToApplication(message);
-  }
-
-  handleGetProjectPathMessage(messageEventData) {
-    const message = {
-      messageType: 'projectPath',
-      projectPath: this.ConfigService.getConfigParam('projectBaseURL'),
-      projectAssetsPath: this.ConfigService.getConfigParam('projectBaseURL') + 'assets'
-    };
-    this.sendMessageToApplication(message);
-  }
-
-  handleGetLatestAnnotationsMessage(messageEventData) {
-    const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
+  handleGetParametersMessage(): void {
+    this.EmbeddedService.handleGetParametersMessage(
+      this.embeddedApplicationIFrameId,
       this.nodeId,
       this.componentId,
-      this.ConfigService.getWorkgroupId(),
-      'any'
+      this.componentContent
     );
-    const latestCommentAnnotation = this.AnnotationService.getLatestCommentAnnotation(
+  }
+
+  handleGetProjectPathMessage(): void {
+    this.sendMessageToApplication(this.EmbeddedService.createProjectPathMessage());
+  }
+
+  handleGetLatestAnnotationsMessage(): void {
+    this.EmbeddedService.handleGetLatestAnnotationsMessage(
+      this.embeddedApplicationIFrameId,
       this.nodeId,
-      this.componentId,
-      this.ConfigService.getWorkgroupId(),
-      'any'
+      this.componentId
     );
-    const message = {
-      messageType: 'latestAnnotations',
-      latestScoreAnnotation: latestScoreAnnotation,
-      latestCommentAnnotation: latestCommentAnnotation
-    };
-    this.sendMessageToApplication(message);
   }
 
   registerStudentWorkSavedToServerListener() {
@@ -429,10 +395,8 @@ class EmbeddedController extends ComponentController {
     this.sendMessageToApplication(message);
   }
 
-  sendMessageToApplication(message) {
-    (window.document.getElementById(
-      this.embeddedApplicationIFrameId
-    ) as HTMLIFrameElement).contentWindow.postMessage(message, '*');
+  sendMessageToApplication(message: any): void {
+    this.EmbeddedService.sendMessageToApplication(this.embeddedApplicationIFrameId, message);
   }
 
   /**

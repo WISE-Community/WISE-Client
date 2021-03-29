@@ -70,6 +70,7 @@ import { ConceptMapGrading } from '../assets/wise5/components/conceptMap/concept
 import { DiscussionGrading } from '../assets/wise5/components/discussion/discussion-grading/discussion-grading.component';
 import { GraphGrading } from '../assets/wise5/components/graph/graph-grading/graph-grading.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     EditHTMLAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EmbeddedAuthoring,
+    EmbeddedGrading,
     GraphAuthoring,
     GraphGrading,
     HtmlAuthoring,
