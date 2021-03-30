@@ -39,7 +39,7 @@ export class NodeGradingViewController {
   teacherWorkgroupId: number;
   workgroupInViewById: any = {}; // whether the workgroup is in view or not
   workgroups: any;
-  workgroupsById: any = {}; // workgroup names, statuses, scores, notifications, etc.
+  workgroupsById: any = {};
   workVisibilityById: any = {}; // whether student work is visible for each workgroup
   annotationReceivedSubscription: Subscription;
   studentWorkReceivedSubscription: Subscription;
@@ -213,7 +213,7 @@ export class NodeGradingViewController {
   }
 
   getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {
-    const status: CompletionStatus = {
+    const completionStatus: CompletionStatus = {
       isCompleted: false,
       isVisible: false,
       latestWorkTime: null,
@@ -223,18 +223,20 @@ export class NodeGradingViewController {
     if (studentStatus != null) {
       const nodeStatus = studentStatus.nodeStatuses[this.nodeId];
       if (nodeStatus) {
-        status.isVisible = nodeStatus.isVisible;
-        status.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId); // TODO: store this info in the nodeStatus so we don't have to calculate every time?
-        status.latestAnnotationTime = this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
+        completionStatus.isVisible = nodeStatus.isVisible;
+        completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId); // TODO: store this info in the nodeStatus so we don't have to calculate every time?
+        completionStatus.latestAnnotationTime = this.getLatestAnnotationTimeByWorkgroupId(
+          workgroupId
+        );
         if (!this.ProjectService.nodeHasWork(this.nodeId)) {
-          status.isCompleted = nodeStatus.isVisited;
+          completionStatus.isCompleted = nodeStatus.isVisited;
         }
-        if (status.latestWorkTime) {
-          status.isCompleted = nodeStatus.isCompleted;
+        if (completionStatus.latestWorkTime) {
+          completionStatus.isCompleted = nodeStatus.isCompleted;
         }
       }
     }
-    return status;
+    return completionStatus;
   }
 
   getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
