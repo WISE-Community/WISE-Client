@@ -25,6 +25,7 @@ class AnimationController extends ComponentController {
   millisecondsPerDataTime: number;
   lastBroadcastTime: number;
   speedSliderValue: number;
+  numTimesPlayClicked: number = 0;
 
   static $inject = [
     '$filter',
@@ -104,37 +105,18 @@ class AnimationController extends ComponentController {
     this.setSpeed(3);
     this.initializeCoordinates();
 
-    if (this.isStudentMode()) {
-      this.isPromptVisible = true;
-      this.isSaveButtonVisible = this.componentContent.showSaveButton;
-      this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    } else if (this.isGradingMode()) {
-      if (componentState != null) {
-        this.svgId = 'svg_' + this.nodeId + '_' + this.componentId + '_' + componentState.id;
-      } else {
-        this.svgId = 'svg_' + this.nodeId + '_' + this.componentId + '_' + this.workgroupId;
-      }
+    this.isPromptVisible = true;
+    this.isSaveButtonVisible = this.componentContent.showSaveButton;
+    this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
 
-      this.isPromptVisible = true;
-      this.isSaveButtonVisible = false;
-      this.isSubmitButtonVisible = false;
-      this.isDisabled = true;
-    }
-
-    if (this.isStudentMode()) {
-      if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
-        this.handleConnectedComponents();
-      } else if (
-        this.AnimationService.componentStateHasStudentWork(componentState, this.componentContent)
-      ) {
-        this.setStudentWork(componentState);
-      } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-        this.handleConnectedComponents();
-      }
-    } else {
-      if (componentState != null) {
-        this.setStudentWork(componentState);
-      }
+    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    } else if (
+      this.AnimationService.componentStateHasStudentWork(componentState, this.componentContent)
+    ) {
+      this.setStudentWork(componentState);
+    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
     }
 
     if (this.hasMaxSubmitCount() && !this.hasSubmitsLeft()) {
@@ -941,15 +923,12 @@ class AnimationController extends ComponentController {
    * Populate the student work into the component.
    * @param {object} componentState The component state to populate into the component.
    */
-  setStudentWork(componentState) {
-    const studentData = componentState.studentData;
-    if (studentData != null) {
-      const submitCounter = studentData.submitCounter;
-      if (submitCounter != null) {
-        this.submitCounter = submitCounter;
-      }
-      this.processLatestStudentWork();
+  setStudentWork(componentState: any): void {
+    this.submitCounter = componentState.studentData.submitCounter;
+    if (componentState.studentData.numTimesPlayClicked != null) {
+      this.numTimesPlayClicked = componentState.studentData.numTimesPlayClicked;
     }
+    this.processLatestStudentWork();
   }
 
   confirmSubmit(numberOfSubmitsLeft) {
@@ -991,6 +970,7 @@ class AnimationController extends ComponentController {
     const deferred = this.$q.defer();
     const componentState: any = this.NodeService.createNewComponentState();
     const studentData = {
+      numTimesPlayClicked: this.numTimesPlayClicked,
       submitCounter: this.submitCounter
     };
     componentState.studentData = studentData;
@@ -1052,9 +1032,14 @@ class AnimationController extends ComponentController {
   }
 
   playButtonClicked() {
+    this.incrementNumTimesPlayClicked();
     this.setAnimationStateToPlaying();
     this.startAnimation();
     this.studentDataChanged();
+  }
+
+  incrementNumTimesPlayClicked() {
+    this.numTimesPlayClicked++;
   }
 
   pauseButtonClicked() {

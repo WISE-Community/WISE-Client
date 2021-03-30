@@ -70,12 +70,14 @@ import { ConceptMapGrading } from '../assets/wise5/components/conceptMap/concept
 import { DiscussionGrading } from '../assets/wise5/components/discussion/discussion-grading/discussion-grading.component';
 import { GraphGrading } from '../assets/wise5/components/graph/graph-grading/graph-grading.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { AnimationGrading } from '../assets/wise5/components/animation/animation-grading/animation-grading.component';
 
 @NgModule({
   declarations: [
     AdvancedProjectAuthoringComponent,
     AlertStatusCornerComponent,
     AnimationAuthoring,
+    AnimationGrading,
     AudioOscillatorAuthoring,
     AudioOscillatorGrading,
     ChooseImportStepComponent,

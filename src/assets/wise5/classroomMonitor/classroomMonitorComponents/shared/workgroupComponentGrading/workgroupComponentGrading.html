@@ -1,11 +1,17 @@
 <ng-content ng-switch="::$ctrl.component.type">
-  <div ng-switch-when="AudioOscillator|ConceptMap|Discussion|Draw|Graph|Label|Match|MultipleChoice|OpenResponse|Table"
+  <div ng-switch-when="Animation|AudioOscillator|ConceptMap|Discussion|Draw|Graph|Label|Match|MultipleChoice|OpenResponse|Table"
       ng-switch-when-separator="|"
       class="component__content"
       layout="row"
       layout-wrap>
     <div flex="100" flex-gt-sm="66" layout="column" class="component--grading__response">
       <ng-content ng-if="$ctrl.latestComponentState != null && $ctrl.latestComponentState !== ''">
+        <animation-grading
+            ng-if="$ctrl.component.type === 'Animation'"
+            node-id="{{::$ctrl.nodeId}}"
+            component-id="{{::$ctrl.component.id}}"
+            component-state="{{$ctrl.latestComponentState}}">
+        </animation-grading>
         <audio-oscillator-grading
             ng-if="$ctrl.component.type === 'AudioOscillator'"
             node-id="{{::$ctrl.nodeId}}"

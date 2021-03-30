@@ -44,6 +44,7 @@ import { EditComponentWidthComponent } from '../../../app/authoring-tool/edit-co
 import '../classroomMonitor/classroomMonitorComponents';
 import '../authoringTool/structure/structureAuthoringModule';
 import '../components/animation/animationAuthoringComponentModule';
+import '../components/animation/animationGradingComponentModule';
 import '../components/audioOscillator/audioOscillatorAuthoringComponentModule';
 import '../components/audioOscillator/audioOscillatorGradingComponentModule';
 import '../authoringTool/components/authoringToolComponents';
@@ -82,6 +83,7 @@ angular
     'editRubricModule',
     'summaryAuthoringComponentModule',
     'animationAuthoringComponentModule',
+    'animationGradingComponentModule',
     'audioOscillatorAuthoringComponentModule',
     'audioOscillatorGradingComponentModule',
     'authoringTool.components',
