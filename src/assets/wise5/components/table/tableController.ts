@@ -26,6 +26,7 @@ class TableController extends ComponentController {
   dataExplorerSeries: any[];
   columnNames: string[];
   dataExplorerXColumn: number;
+  dataExplorerColumnToIsDisabled: any = {};
 
   static $inject = [
     '$filter',
@@ -152,6 +153,9 @@ class TableController extends ComponentController {
       } else {
         this.repopulateDataExplorerData(componentState);
       }
+      if (this.componentContent.dataExplorerDataToColumn != null) {
+        this.setDataExplorerDataToColumn();
+      }
     }
 
     // check if the student has used up all of their submits
@@ -266,6 +270,23 @@ class TableController extends ComponentController {
       return deferred.promise;
     }.bind(this);
 
+    if (
+      this.isDataExplorerEnabled &&
+      this.componentContent.dataExplorerDataToColumn != null &&
+      this.isAllDataExplorerSeriesSpecified()
+    ) {
+      // All the data explorer series have been fixed to display a specific column so we will call
+      // studentDataChanged() immediately to generate the table student data which will then be sent
+      // to the graph component so the graph can immediately be displayed. If we did not do this,
+      // the graph may not ever be displayed since it requires the student to change the table data.
+      // If all the data explorer series have been fixed to display a specific column and all the
+      // table data cells are not editable by the student, the student may not ever be able to
+      // change the table to generate table data to be sent to the graph.
+      setTimeout(() => {
+        this.studentDataChanged();
+      }, 1000);
+    }
+
     this.broadcastDoneRenderingComponent();
   }
 
@@ -276,10 +297,114 @@ class TableController extends ComponentController {
       this.dataExplorerGraphType = this.dataExplorerGraphTypes[0].value;
     }
     this.isDataExplorerScatterPlotRegressionLineEnabled = this.componentContent.isDataExplorerScatterPlotRegressionLineEnabled;
-    if (this.componentContent.numDataExplorerYAxis > 1) {
-      this.dataExplorerYAxisLabels = Array(this.componentContent.numDataExplorerYAxis).fill('');
-    }
+    this.dataExplorerYAxisLabels = Array(this.componentContent.numDataExplorerYAxis).fill('');
     this.dataExplorerSeriesParams = this.componentContent.dataExplorerSeriesParams;
+  }
+
+  setDataExplorerDataToColumn(): void {
+    for (let index = 0; index < this.dataExplorerSeries.length; index++) {
+      const xColumn = this.getDataExplorerXDataColumn();
+      if (xColumn != null) {
+        this.setXDataToColumn(index, xColumn);
+      }
+      const yColumn = this.getDataExplorerYDataColumn(index + 1);
+      if (yColumn != null) {
+        this.setYDataToColumn(index, yColumn);
+      }
+    }
+  }
+
+  setXDataToColumn(dataExplorerSeriesIndex: number, columnIndex: number): void {
+    this.dataExplorerSeries[dataExplorerSeriesIndex].xColumn = columnIndex;
+    this.dataExplorerXColumn = columnIndex;
+    this.setDataExplorerXColumnIsDisabled();
+    if (this.isDataExplorerXAxisLabelEmpty()) {
+      this.updateDataExplorerXAxisLabel(columnIndex);
+    }
+  }
+
+  isDataExplorerXAxisLabelEmpty(): boolean {
+    return this.dataExplorerXAxisLabel == null || this.dataExplorerXAxisLabel === '';
+  }
+
+  updateDataExplorerXAxisLabel(columnIndex: number): void {
+    this.dataExplorerXAxisLabel = this.getColumnName(columnIndex);
+  }
+
+  setYDataToColumn(dataExplorerSeriesIndex: number, columnIndex: number): void {
+    this.dataExplorerSeries[dataExplorerSeriesIndex].yColumn = columnIndex;
+    this.dataExplorerSeries[dataExplorerSeriesIndex].name = this.getColumnName(columnIndex);
+    this.setDataExplorerYColumnIsDisabled(dataExplorerSeriesIndex + 1);
+    if (this.isDataExplorerYAxisLabelEmpty(dataExplorerSeriesIndex)) {
+      this.updateDataExplorerYAxisLabel(dataExplorerSeriesIndex, columnIndex);
+    }
+  }
+
+  isDataExplorerYAxisLabelEmpty(dataExplorerSeriesIndex: number): boolean {
+    let yAxisLabel = '';
+    if (this.isDataExplorerOneYAxis()) {
+      yAxisLabel = this.dataExplorerYAxisLabel;
+    } else {
+      yAxisLabel = this.dataExplorerYAxisLabels[
+        this.dataExplorerSeriesParams[dataExplorerSeriesIndex].yAxis
+      ];
+    }
+    return yAxisLabel == null || yAxisLabel === '';
+  }
+
+  updateDataExplorerYAxisLabel(dataExplorerSeriesIndex: number, columnIndex: number): void {
+    const columnName = this.getColumnName(columnIndex);
+    if (this.isDataExplorerOneYAxis()) {
+      this.dataExplorerYAxisLabel = columnName;
+    } else {
+      const yAxisIndex = this.dataExplorerSeries[dataExplorerSeriesIndex].yAxis;
+      this.setDataExplorerYAxisLabelWithMultipleYAxes(yAxisIndex, columnName);
+    }
+  }
+
+  isAllDataExplorerSeriesSpecified(): boolean {
+    for (const singleSeries of this.dataExplorerSeries) {
+      if (singleSeries.xColumn == null || singleSeries.yColumn == null) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  getDataExplorerXDataColumn(): number {
+    return this.getDataExplorerDataToColumn('x');
+  }
+
+  /**
+   * @param ySeriesNumber (1 indexed)
+   * @return The column index (0 indexed)
+   */
+  getDataExplorerYDataColumn(ySeriesNumber: number): number {
+    if (ySeriesNumber === 1) {
+      return this.getDataExplorerDataToColumn('y');
+    } else {
+      return this.getDataExplorerDataToColumn(`y${ySeriesNumber}`);
+    }
+  }
+
+  /**
+   * @param dataLabel The data label such as x, y, y2, y3, etc.
+   * @return The column index (0 indexed)
+   */
+  getDataExplorerDataToColumn(dataLabel: string): number {
+    return this.componentContent.dataExplorerDataToColumn[dataLabel];
+  }
+
+  setDataExplorerXColumnIsDisabled(): void {
+    this.dataExplorerColumnToIsDisabled['x'] = true;
+  }
+
+  setDataExplorerYColumnIsDisabled(yColumnNumber: number): void {
+    if (yColumnNumber === 1) {
+      this.dataExplorerColumnToIsDisabled['y'] = true;
+    } else {
+      this.dataExplorerColumnToIsDisabled[`y${yColumnNumber}`] = true;
+    }
   }
 
   registerStudentWorkSavedToServerListener() {
@@ -446,6 +571,9 @@ class TableController extends ComponentController {
           this.dataExplorerYAxisLabels = null;
         }
         this.createDataExplorerSeries();
+        if (this.componentContent.dataExplorerDataToColumn != null) {
+          this.setDataExplorerDataToColumn();
+        }
       }
       this.studentDataChanged();
     }
@@ -1107,6 +1235,7 @@ class TableController extends ComponentController {
   studentDataChanged() {
     if (this.isDataExplorerEnabled) {
       this.updateColumnNames();
+      this.updateDataExplorerSeriesNames();
     }
     this.setIsDirtyAndBroadcast();
     this.setIsSubmitDirtyAndBroadcast();
@@ -1116,36 +1245,45 @@ class TableController extends ComponentController {
   }
 
   updateColumnNames() {
-    this.columnNames = [];
     const firstRow = this.tableData[0];
-    for (const cell of firstRow) {
-      this.columnNames.push(cell.text);
+    this.columnNames = firstRow.map((cell: any): string => {
+      return cell.text;
+    });
+  }
+
+  updateDataExplorerSeriesNames() {
+    for (const singleSeries of this.dataExplorerSeries) {
+      if (singleSeries.yColumn != null) {
+        singleSeries.name = this.columnNames[singleSeries.yColumn];
+      }
     }
   }
 
-  getColumnName(index) {
-    return this.columnNames[index];
+  /**
+   * @param columnIndex (0 indexed)
+   */
+  getColumnName(columnIndex: number): string {
+    return this.columnNames[columnIndex];
   }
 
   dataExplorerXColumnChanged() {
-    for (const singleDataExplorerSeries of this.dataExplorerSeries) {
-      singleDataExplorerSeries.xColumn = this.dataExplorerXColumn;
+    for (const singleSeries of this.dataExplorerSeries) {
+      singleSeries.xColumn = this.dataExplorerXColumn;
     }
-    this.dataExplorerXAxisLabel = this.getColumnName(this.dataExplorerXColumn);
+    if (this.isDataExplorerXAxisLabelEmpty()) {
+      this.updateDataExplorerXAxisLabel(this.dataExplorerXColumn);
+    }
     this.studentDataChanged();
   }
 
   dataExplorerYColumnChanged(index) {
     const yColumn = this.dataExplorerSeries[index].yColumn;
     this.dataExplorerSeries[index].name = this.columnNames[yColumn];
-    if (this.isDataExplorerOneYAxis()) {
-      this.dataExplorerYAxisLabel = this.getDataExplorerYAxisLabelWhenOneYAxis();
-    } else {
+    if (!this.isDataExplorerOneYAxis()) {
       this.setDataExplorerSeriesYAxis(index);
-      const yAxisIndex = this.dataExplorerSeries[index].yAxis;
-      if (yAxisIndex != null && yAxisIndex < this.componentContent.numDataExplorerYAxis) {
-        this.setDataExplorerYAxisLabelWithMultipleYAxes(yAxisIndex, this.getColumnName(yColumn));
-      }
+    }
+    if (this.isDataExplorerYAxisLabelEmpty(index)) {
+      this.updateDataExplorerYAxisLabel(index, yColumn);
     }
     this.studentDataChanged();
   }
@@ -1172,8 +1310,12 @@ class TableController extends ComponentController {
     return yAxisLabel;
   }
 
-  setDataExplorerYAxisLabelWithMultipleYAxes(index, label) {
-    this.dataExplorerYAxisLabels[this.dataExplorerSeries[index].yAxis] = label;
+  /**
+   * @param yAxisIndex (0 indexed)
+   * @param label The axis label.
+   */
+  setDataExplorerYAxisLabelWithMultipleYAxes(yAxisIndex: number, label: string): void {
+    this.dataExplorerYAxisLabels[yAxisIndex] = label;
   }
 
   setDataExplorerSeriesYAxis(index) {

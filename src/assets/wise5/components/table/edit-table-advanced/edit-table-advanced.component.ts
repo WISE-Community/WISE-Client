@@ -5,6 +5,8 @@ class EditTableAdvancedController extends EditAdvancedComponentAngularJSControll
   isDataExplorerScatterPlotEnabled: boolean;
   isDataExplorerLineGraphEnabled: boolean;
   isDataExplorerBarGraphEnabled: boolean;
+  numColumns: number;
+  columnNames: string[] = [];
 
   $onInit(): void {
     super.$onInit();
@@ -12,6 +14,8 @@ class EditTableAdvancedController extends EditAdvancedComponentAngularJSControll
       this.repopulateDataExplorerGraphTypes();
       this.initializeDataExplorerSeriesParams();
     }
+    this.numColumns = this.getNumTableColumns(this.authoringComponentContent);
+    this.columnNames = this.getColumnNames(this.authoringComponentContent);
   }
 
   initializeDataExplorerSeriesParams(): void {
@@ -43,6 +47,20 @@ class EditTableAdvancedController extends EditAdvancedComponentAngularJSControll
         this.isDataExplorerBarGraphEnabled = true;
       }
     }
+  }
+
+  getNumTableColumns(componentContent: any): number {
+    return this.getTableDataFirstRow(componentContent).length;
+  }
+
+  getColumnNames(componentContent: any): string[] {
+    return this.getTableDataFirstRow(componentContent).map((cell: any): string => {
+      return cell.text;
+    });
+  }
+
+  getTableDataFirstRow(componentContent: any): any[] {
+    return componentContent.tableData[0];
   }
 
   toggleDataExplorer(): void {
