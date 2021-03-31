@@ -1,9 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterStudentComponent } from './register-student.component';
 import { Observable } from 'rxjs';
-import { StudentService } from '../../student/student.service';
 import { UserService } from '../../services/user.service';
-import { AuthService } from 'angularx-social-login';
+import { SocialAuthService } from 'angularx-social-login';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Config } from '../../domain/config';
 import { ConfigService } from '../../services/config.service';
@@ -32,19 +31,20 @@ export class MockConfigService {
 describe('RegisterStudentComponent', () => {
   let component: RegisterStudentComponent;
   let fixture: ComponentFixture<RegisterStudentComponent>;
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [RegisterStudentComponent],
-      imports: [RouterTestingModule],
-      providers: [
-        { provide: StudentService, useClass: MockStudentService },
-        { provide: UserService, useClass: MockUserService },
-        { provide: AuthService, useClass: MockAuthService },
-        { provide: ConfigService, useClass: MockConfigService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [RegisterStudentComponent],
+        imports: [RouterTestingModule],
+        providers: [
+          { provide: UserService, useClass: MockUserService },
+          { provide: SocialAuthService, useClass: MockAuthService },
+          { provide: ConfigService, useClass: MockConfigService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterStudentComponent);

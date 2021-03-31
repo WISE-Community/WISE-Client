@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { Component } from '@angular/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -86,15 +86,15 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the app', async(() => {
+  it('should create the app', waitForAsync(() => {
     expect(component).toBeTruthy();
   }));
 
-  it(`should have as title 'app'`, async(() => {
+  it(`should have as title 'app'`, waitForAsync(() => {
     expect(component.title).toEqual('app');
   }));
 
-  it(`should show announcement banner and hide when dismissed`, async(() => {
+  it(`should show announcement banner and hide when dismissed`, waitForAsync(() => {
     component.hasAnnouncement = true;
     fixture.detectChanges();
     const shadowRoot: DocumentFragment = fixture.debugElement.nativeElement;
@@ -104,7 +104,7 @@ describe('AppComponent', () => {
     expect(shadowRoot.querySelector('app-announcement')).toBeFalsy();
   }));
 
-  it(`should set Google Analytics tracking code`, async(() => {
+  it(`should set Google Analytics tracking code`, waitForAsync(() => {
     expect(component.googleAnalyticsId).toEqual('UA-XXXXXX-1');
   }));
 });

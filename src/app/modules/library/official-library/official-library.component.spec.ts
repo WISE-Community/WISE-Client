@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { OfficialLibraryComponent } from './official-library.component';
 import { fakeAsyncResponse } from '../../../student/student-run-list/student-run-list.component.spec';
 import { LibraryService } from '../../../services/library.service';
@@ -25,7 +25,7 @@ export class MockLibraryService {
 describe('OfficialLibraryComponent', () => {
   let component: OfficialLibraryComponent;
   let fixture: ComponentFixture<OfficialLibraryComponent>;
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [OverlayModule, MatDialogModule],
       declarations: [OfficialLibraryComponent],

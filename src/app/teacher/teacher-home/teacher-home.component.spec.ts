@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { defer, Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { TeacherService } from '../teacher.service';
@@ -106,7 +106,7 @@ describe('TeacherHomeComponent', () => {
   let component: TeacherHomeComponent;
   let fixture: ComponentFixture<TeacherHomeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TeacherHomeComponent],
       imports: [RouterTestingModule],

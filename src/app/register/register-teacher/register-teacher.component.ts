@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
+import { SocialAuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { Router } from '@angular/router';
-import { TeacherService } from '../../teacher/teacher.service';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
 
@@ -15,8 +14,7 @@ export class RegisterTeacherComponent implements OnInit {
   isGoogleAuthenticationEnabled: boolean = false;
 
   constructor(
-    private socialAuthService: AuthService,
-    private teacherService: TeacherService,
+    private socialAuthService: SocialAuthService,
     private userService: UserService,
     private configService: ConfigService,
     private router: Router
