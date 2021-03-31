@@ -8,6 +8,7 @@ import { WorkgroupItemController } from '../../nodeGrading/workgroupItem/workgro
 class MilestoneWorkgroupItemController extends WorkgroupItemController {
   $translate: any;
   locations: any[];
+  changeInScore: any;
   componentId: string;
   components: any[] = [];
   disabled: any;
@@ -15,6 +16,7 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
   hasAlert: boolean;
   hasNewAlert: boolean;
   hiddenComponents: string[] = [];
+  initialScore: any;
   maxScore: number;
   nodeId: string;
   onUpdateExpand: any;
@@ -59,6 +61,11 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
       this.hasNewAlert = workgroupData.hasNewAlert;
       this.status = workgroupData.completionStatus;
       this.score = workgroupData.score >= 0 ? workgroupData.score : '-';
+      this.initialScore = workgroupData.initialScore >= 0 ? workgroupData.initialScore : '-';
+      this.changeInScore =
+        workgroupData.score != -1 && workgroupData.initialScore != -1
+          ? workgroupData.score - workgroupData.initialScore
+          : '-';
     }
 
     this.update();

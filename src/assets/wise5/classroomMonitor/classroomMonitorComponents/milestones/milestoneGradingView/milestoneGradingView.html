@@ -39,13 +39,47 @@
             arrow_drop_up
           </md-icon>
         </md-button>
-        <md-button class="table--list__thead__link" flex="20" layout="row"
+        <md-button ng-if="$ctrl.milestone.report.locations.length == 1"
+                   class="table--list__thead__link" flex="20" layout="row"
                    layout-align="center center" ng-click="$ctrl.setSort('score')"
                    aria-label="{{::'sortByScore' | translate}}">
           <span translate="score"></span>
           <md-icon ng-if="$ctrl.sort === 'score' || $ctrl.sort === '-score'"
                    class="text-light table--list__thead__sort" md-theme="default"
                    ng-class="{'table--list__thead__sort--reverse': $ctrl.sort === '-score'}">
+            arrow_drop_up
+          </md-icon>
+        </md-button>
+        <md-button ng-if="$ctrl.milestone.report.locations.length > 1"
+          class="table--list__thead__link" flex="20" layout="row"
+          layout-align="center center" ng-click="$ctrl.setSort('initialScore')"
+          aria-label="{{::'sortByInital' | translate}}">
+          <span translate="initial"></span>
+          <md-icon ng-if="$ctrl.sort === 'initialScore' || $ctrl.sort === '-initialScore'"
+                    class="text-light table--list__thead__sort" md-theme="default"
+                    ng-class="{'table--list__thead__sort--reverse': $ctrl.sort === '-initialScore'}">
+            arrow_drop_up
+          </md-icon>
+        </md-button>
+        <md-button ng-if="$ctrl.milestone.report.locations.length > 1"
+          class="table--list__thead__link" flex="20" layout="row"
+          layout-align="center center" ng-click="$ctrl.setSort('score')"
+          aria-label="{{::'sortByRevised' | translate}}">
+          <span translate="revised"></span>
+          <md-icon ng-if="$ctrl.sort === 'score' || $ctrl.sort === '-score'"
+                    class="text-light table--list__thead__sort" md-theme="default"
+                    ng-class="{'table--list__thead__sort--reverse': $ctrl.sort === '-score'}">
+            arrow_drop_up
+          </md-icon>
+        </md-button>
+        <md-button ng-if="$ctrl.milestone.report.locations.length > 1"
+          class="table--list__thead__link" flex="20" layout="row"
+          layout-align="center center" ng-click="$ctrl.setSort('changeInScore')"
+          aria-label="{{::'sortByChangeInScore' | translate}}">
+          <span translate="changeInScore"></span>
+          <md-icon ng-if="$ctrl.sort === 'changeInScore' || $ctrl.sort === '-changeInScore'"
+                    class="text-light table--list__thead__sort" md-theme="default"
+                    ng-class="{'table--list__thead__sort--reverse': $ctrl.sort === '-changeInScore'}">
             arrow_drop_up
           </md-icon>
         </md-button>
