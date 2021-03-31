@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HeaderAccountMenuComponent } from './header-account-menu.component';
 import { User } from '../../../domain/user';
 import { MatMenuModule } from '@angular/material/menu';
@@ -26,7 +26,7 @@ describe('HeaderAccountMenuComponent', () => {
   let component: HeaderAccountMenuComponent;
   let fixture: ComponentFixture<HeaderAccountMenuComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [HeaderAccountMenuComponent],
       imports: [HttpClientTestingModule, MatMenuModule],

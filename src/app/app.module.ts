@@ -11,9 +11,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import {
   SocialLoginModule,
-  AuthServiceConfig,
   GoogleLoginProvider,
-  LoginOpt
+  SocialAuthServiceConfig
 } from 'angularx-social-login';
 
 import { AppComponent } from './app.component';
@@ -45,21 +44,23 @@ export function initialize(
 }
 
 export function getAuthServiceConfigs(configService: ConfigService) {
-  const autServiceConfig: AuthServiceConfig = new AuthServiceConfig([]);
-  const googleLoginOptions: LoginOpt = {
+  const authServiceConfig: SocialAuthServiceConfig = {
+    providers: []
+  };
+  const googleLoginOptions = {
     prompt: 'select_account'
   };
   configService.getConfig().subscribe((config) => {
     if (config != null) {
       if (configService.getGoogleClientId() != null) {
-        autServiceConfig.providers.set(
-          GoogleLoginProvider.PROVIDER_ID,
-          new GoogleLoginProvider(configService.getGoogleClientId(), googleLoginOptions)
-        );
+        authServiceConfig.providers.push({
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(configService.getGoogleClientId(), googleLoginOptions)
+        });
       }
     }
   });
-  return autServiceConfig;
+  return authServiceConfig;
 }
 
 @NgModule({
@@ -86,7 +87,8 @@ export function getAuthServiceConfigs(configService: ConfigService) {
     MatDialogModule,
     RouterModule.forRoot([], {
       scrollPositionRestoration: 'enabled',
-      anchorScrolling: 'enabled'
+      anchorScrolling: 'enabled',
+      relativeLinkResolution: 'legacy'
     })
   ],
   providers: [
@@ -101,7 +103,7 @@ export function getAuthServiceConfigs(configService: ConfigService) {
       multi: true
     },
     {
-      provide: AuthServiceConfig,
+      provide: 'SocialAuthServiceConfig',
       useFactory: getAuthServiceConfigs,
       deps: [ConfigService]
     },

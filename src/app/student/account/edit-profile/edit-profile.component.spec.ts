@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EditProfileComponent } from './edit-profile.component';
 import { User } from '../../../domain/user';
 import { Observable, BehaviorSubject } from 'rxjs';

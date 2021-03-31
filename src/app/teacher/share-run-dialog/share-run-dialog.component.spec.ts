@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ShareRunDialogComponent } from './share-run-dialog.component';
 import { Observable } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -73,7 +73,7 @@ describe('ShareRunDialogComponent', () => {
   let component: ShareRunDialogComponent;
   let fixture: ComponentFixture<ShareRunDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ShareRunDialogComponent],
       imports: [BrowserAnimationsModule, MatAutocompleteModule, MatSnackBarModule, MatTableModule],

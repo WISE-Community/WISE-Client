@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TeacherFaqComponent } from './teacher-faq.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -24,7 +24,7 @@ describe('TeacherFaqComponent', () => {
   let component: TeacherFaqComponent;
   let fixture: ComponentFixture<TeacherFaqComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TeacherFaqComponent],
       providers: [{ provide: ConfigService, useClass: MockConfigService }],

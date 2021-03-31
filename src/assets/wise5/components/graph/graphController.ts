@@ -434,9 +434,6 @@ class GraphController extends ComponentController {
         }
       }
     }
-    if (this.GraphService.isMultipleYAxes(this.yAxis)) {
-      this.setAllSeriesColorsToMatchYAxes(this.activeTrial.series);
-    }
   }
 
   isSingleYAxis(yAxis) {

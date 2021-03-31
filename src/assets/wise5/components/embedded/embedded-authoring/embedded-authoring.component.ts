@@ -8,6 +8,7 @@ import { ComponentAuthoring } from '../../../authoringTool/components/component-
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { EmbeddedService } from '../embeddedService';
 
 @Component({
   selector: 'embedded-authoring',
@@ -21,6 +22,7 @@ export class EmbeddedAuthoring extends ComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
+    private EmbeddedService: EmbeddedService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
@@ -35,7 +37,9 @@ export class EmbeddedAuthoring extends ComponentAuthoring {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.embeddedApplicationIFrameId = 'componentApp_' + this.componentId;
+    this.embeddedApplicationIFrameId = this.EmbeddedService.getEmbeddedApplicationIframeId(
+      this.componentId
+    );
   }
 
   ngOnDestroy(): void {

@@ -9138,15 +9138,15 @@
           <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="35fa7bf86df2c1b28cda5dd5452cf036ce96bd37" datatype="html">
-        <source>X Column</source>
+      <trans-unit id="1f826b1c6da05cd044cca5f00cf8f7ee5270d1f9" datatype="html">
+        <source>X Data</source>
         <context-group purpose="location">
           <context context-type="sourcefile">assets/wise5/components/table/table-grading/table-grading.component.html</context>
           <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="bed094103adb333647feb0104f6ef45566c11545" datatype="html">
-        <source>Y Column <x id="INTERPOLATION" equiv-text="{{i + 1}}"/></source>
+      <trans-unit id="967a05fa93ce8900222661f7beb6c08924b3a857" datatype="html">
+        <source>Y Data <x id="INTERPOLATION" equiv-text="{{dataExplorerSeries.length &gt; 1 ? (i + 1) : &apos;&apos;}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">assets/wise5/components/table/table-grading/table-grading.component.html</context>
           <context context-type="linenumber">46</context>
@@ -9159,11 +9159,18 @@
           <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="484e9a22dbb7f73c463535f204e1f221b6cbdacb" datatype="html">
+        <source>Y Axis Label</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="f15f150caaef41e4e915900660dae93b053ec897" datatype="html">
         <source>Y Axis <x id="INTERPOLATION" equiv-text="{{i + 1}}"/> Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">assets/wise5/components/table/table-grading/table-grading.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f9c52903219e583ddefb23cd102d2057504ac980" datatype="html">

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LoginHomeComponent } from './login-home.component';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
@@ -35,7 +35,7 @@ export class MockConfigService {
 describe('LoginHomeComponent', () => {
   let component: LoginHomeComponent;
   let fixture: ComponentFixture<LoginHomeComponent>;
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LoginHomeComponent],
       imports: [HttpClientTestingModule, RouterTestingModule, RecaptchaModule],

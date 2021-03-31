@@ -71,6 +71,7 @@ import { DiscussionGrading } from '../assets/wise5/components/discussion/discuss
 import { GraphGrading } from '../assets/wise5/components/graph/graph-grading/graph-grading.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { AnimationGrading } from '../assets/wise5/components/animation/animation-grading/animation-grading.component';
+import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { AnimationGrading } from '../assets/wise5/components/animation/animation
     EditHTMLAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EmbeddedAuthoring,
+    EmbeddedGrading,
     GraphAuthoring,
     GraphGrading,
     HtmlAuthoring,

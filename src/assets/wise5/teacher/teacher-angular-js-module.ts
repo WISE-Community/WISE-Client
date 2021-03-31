@@ -55,6 +55,7 @@ import '../components/discussion/discussionGradingComponentModule';
 import '../components/draw/drawAuthoringComponentModule';
 import '../components/draw/drawGradingComponentModule';
 import '../components/embedded/embeddedAuthoringComponentModule';
+import '../components/embedded/embeddedGradingComponentModule';
 import '../components/graph/graphAuthoringComponentModule';
 import '../components/graph/graphGradingComponentModule';
 import '../components/html/htmlAuthoringComponentModule';
@@ -95,6 +96,7 @@ angular
     'drawAuthoringComponentModule',
     'drawGradingComponentModule',
     'embeddedAuthoringComponentModule',
+    'embeddedGradingComponentModule',
     'graphAuthoringComponentModule',
     'graphGradingComponentModule',
     'htmlAuthoringComponentModule',
