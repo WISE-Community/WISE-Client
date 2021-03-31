@@ -1,5 +1,5 @@
 <ng-content ng-switch="::$ctrl.component.type">
-  <div ng-switch-when="AudioOscillator|ConceptMap|Discussion|Draw|Graph|Label|Match|MultipleChoice|OpenResponse|Table"
+  <div ng-switch-when="AudioOscillator|ConceptMap|Discussion|Draw|Embedded|Graph|Label|Match|MultipleChoice|OpenResponse|Table"
       ng-switch-when-separator="|"
       class="component__content"
       layout="row"
@@ -31,6 +31,12 @@
             component-id="{{::$ctrl.component.id}}"
             component-state="{{$ctrl.latestComponentState}}">
         </draw-grading>
+        <embedded-grading
+            ng-if="$ctrl.component.type === 'Embedded'"
+            node-id="{{::$ctrl.nodeId}}"
+            component-id="{{::$ctrl.component.id}}"
+            component-state="{{$ctrl.latestComponentState}}">
+        </embedded-grading>
         <graph-grading
             ng-if="$ctrl.component.type === 'Graph'"
             node-id="{{::$ctrl.nodeId}}"

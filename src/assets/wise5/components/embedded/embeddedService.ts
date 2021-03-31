@@ -8,16 +8,28 @@ import { Injectable } from '@angular/core';
 import { UtilService } from '../../services/utilService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../services/studentDataService';
+import { ConfigService } from '../../services/configService';
+import { AnnotationService } from '../../services/annotationService';
 
 @Injectable()
 export class EmbeddedService extends ComponentService {
+  defaultWidth: string = '100%';
+  defaultHeight: string = '600px';
+  iframePrefix: string = 'embedded-application-iframe-';
+
   constructor(
     private upgrade: UpgradeModule,
+    protected AnnotationService: AnnotationService,
+    protected ConfigService: ConfigService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
     super(StudentDataService, UtilService);
+  }
+
+  getEmbeddedApplicationIframeId(componentId: string): string {
+    return `${this.iframePrefix}-${componentId}`;
   }
 
   getComponentTypeLabel() {
@@ -77,8 +89,8 @@ export class EmbeddedService extends ComponentService {
     return false;
   }
 
-  componentHasWork(component: any) {
-    return false;
+  componentHasWork(component: any): boolean {
+    return component.hasWork;
   }
 
   componentStateHasStudentWork(componentState: any, componentContent: any) {
@@ -105,7 +117,8 @@ export class EmbeddedService extends ComponentService {
   }
 
   getModelElement(componentId: string) {
-    const iframe = $('#componentApp_' + componentId);
+    const iframeId = this.getEmbeddedApplicationIframeId(componentId);
+    const iframe = $(`#${iframeId}`);
     if (iframe != null && iframe.length > 0) {
       const modelElement: any = iframe.contents().find('html');
       if (modelElement != null && modelElement.length > 0) {
@@ -113,5 +126,69 @@ export class EmbeddedService extends ComponentService {
       }
     }
     return null;
+  }
+
+  sendMessageToApplication(iframeId: string, message: any): void {
+    (window.document.getElementById(iframeId) as HTMLIFrameElement).contentWindow.postMessage(
+      message,
+      '*'
+    );
+  }
+
+  handleGetParametersMessage(
+    iframeId: string,
+    nodeId: string,
+    componentId: string,
+    componentContent: any
+  ): void {
+    let parameters: any = {};
+    if (componentContent.parameters != null) {
+      parameters = this.UtilService.makeCopyOfJSONObject(componentContent.parameters);
+    }
+    parameters.nodeId = nodeId;
+    parameters.componentId = componentId;
+    const message = {
+      messageType: 'parameters',
+      parameters: parameters
+    };
+    this.sendMessageToApplication(iframeId, message);
+  }
+
+  handleGetLatestAnnotationsMessage(iframeId: string, nodeId: string, componentId: string): void {
+    const workgroupId = this.ConfigService.getWorkgroupId();
+    const type = 'any';
+    const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
+      nodeId,
+      componentId,
+      workgroupId,
+      type
+    );
+    const latestCommentAnnotation = this.AnnotationService.getLatestCommentAnnotation(
+      nodeId,
+      componentId,
+      workgroupId,
+      type
+    );
+    const message = {
+      messageType: 'latestAnnotations',
+      latestScoreAnnotation: latestScoreAnnotation,
+      latestCommentAnnotation: latestCommentAnnotation
+    };
+    this.sendMessageToApplication(iframeId, message);
+  }
+
+  createLatestStudentWorkMessage(componentState: any): any {
+    return {
+      messageType: 'latestStudentWork',
+      latestStudentWork: componentState
+    };
+  }
+
+  createProjectPathMessage(): any {
+    return {
+      messageType: 'projectPath',
+      projectPath: this.ConfigService.getConfigParam('projectBaseURL'),
+      projectAssetsPath: this.ConfigService.getConfigParam('projectBaseURL') + 'assets'
+    };
   }
 }
