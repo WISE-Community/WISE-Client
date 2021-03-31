@@ -1,4 +1,4 @@
-import { async, TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { StudentService } from './student.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -12,7 +12,7 @@ describe('StudentService', () => {
     });
   });
 
-  it('should be created', async(
+  it('should be created', waitForAsync(
     inject(
       [StudentService, HttpTestingController],
       (service: StudentService, backend: HttpTestingController) => {

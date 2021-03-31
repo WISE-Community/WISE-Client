@@ -44,6 +44,7 @@ import { EditComponentWidthComponent } from '../../../app/authoring-tool/edit-co
 import '../classroomMonitor/classroomMonitorComponents';
 import '../authoringTool/structure/structureAuthoringModule';
 import '../components/animation/animationAuthoringComponentModule';
+import '../components/animation/animationGradingComponentModule';
 import '../components/audioOscillator/audioOscillatorAuthoringComponentModule';
 import '../components/audioOscillator/audioOscillatorGradingComponentModule';
 import '../authoringTool/components/authoringToolComponents';
@@ -54,6 +55,7 @@ import '../components/discussion/discussionGradingComponentModule';
 import '../components/draw/drawAuthoringComponentModule';
 import '../components/draw/drawGradingComponentModule';
 import '../components/embedded/embeddedAuthoringComponentModule';
+import '../components/embedded/embeddedGradingComponentModule';
 import '../components/graph/graphAuthoringComponentModule';
 import '../components/graph/graphGradingComponentModule';
 import '../components/html/htmlAuthoringComponentModule';
@@ -82,6 +84,7 @@ angular
     'editRubricModule',
     'summaryAuthoringComponentModule',
     'animationAuthoringComponentModule',
+    'animationGradingComponentModule',
     'audioOscillatorAuthoringComponentModule',
     'audioOscillatorGradingComponentModule',
     'authoringTool.components',
@@ -93,6 +96,7 @@ angular
     'drawAuthoringComponentModule',
     'drawGradingComponentModule',
     'embeddedAuthoringComponentModule',
+    'embeddedGradingComponentModule',
     'graphAuthoringComponentModule',
     'graphGradingComponentModule',
     'htmlAuthoringComponentModule',

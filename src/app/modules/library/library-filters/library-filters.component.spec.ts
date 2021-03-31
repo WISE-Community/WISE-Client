@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LibraryFiltersComponent } from './library-filters.component';
 import { LibraryService } from '../../../services/library.service';
 import sampleLibraryProjects from '../sampleLibraryProjects';
@@ -53,13 +53,13 @@ describe('LibraryFiltersComponent', () => {
     expect(component.peOptions.length).toBe(3);
   });
 
-  it('should call LibraryService.setFilterValues when the search value changes', async(() => {
+  it('should call LibraryService.setFilterValues when the search value changes', waitForAsync(() => {
     const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
     component.searchUpdated('photo');
     expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
   }));
 
-  it('should call LibraryService.setFilterValues when a filter value changes', async(() => {
+  it('should call LibraryService.setFilterValues when a filter value changes', waitForAsync(() => {
     const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
     component.filterUpdated(['Earth Sciences', 'Physical Sciences'], 'discipline');
     expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();

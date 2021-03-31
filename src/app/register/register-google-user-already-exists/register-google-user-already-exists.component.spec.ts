@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterGoogleUserAlreadyExistsComponent } from './register-google-user-already-exists.component';
 import { ConfigService } from '../../services/config.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -8,7 +8,7 @@ describe('RegisterGoogleUserAlreadyExistsComponent', () => {
   let component: RegisterGoogleUserAlreadyExistsComponent;
   let fixture: ComponentFixture<RegisterGoogleUserAlreadyExistsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterGoogleUserAlreadyExistsComponent],
       imports: [HttpClientTestingModule],

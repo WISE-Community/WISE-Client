@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TimelineItemComponent } from './timeline-item.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
@@ -6,7 +6,7 @@ describe('TimelineItemComponent', () => {
   let component: TimelineItemComponent;
   let fixture: ComponentFixture<TimelineItemComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TimelineItemComponent],
       schemas: [NO_ERRORS_SCHEMA]

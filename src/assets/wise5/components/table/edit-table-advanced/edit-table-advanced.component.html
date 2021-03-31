@@ -31,7 +31,7 @@
              ng-change='$ctrl.componentChanged()'/>
     </md-input-container>
   </div>
-  <div style='border: 1px solid black'>
+  <div style='border: 1px solid black; padding: 16px;'>
     <p>{{ ::'table.dataExplorer' | translate }}</p>
     <div>
       <md-checkbox class='md-primary'
@@ -110,6 +110,32 @@
             ng-change='$ctrl.componentChanged()'>
           {{ ::'table.canStudentEditAxisLabels' | translate }}
         </md-checkbox>
+      </div>
+      <div>
+        <p>Fix Data to Table Column <span><md-icon>help</md-icon><md-tooltip style="height: auto" md-direction="right">You can author x or y data to always use a specific table column.<br/>The student will not be able to change the table column for that<br/>x or y data. If you want the student to be able to choose the table<br/>column, you can leave the select option blank for that x or y data.</md-tooltip></span></p>
+        <md-input-container style="width: 150px; margin-right: 20px;">
+          <label>X Data</label>
+          <md-select ng-model="$ctrl.authoringComponentContent.dataExplorerDataToColumn['x']"
+              ng-change="$ctrl.componentChanged()">
+            <md-option ng-value="">(Allow student to select)</md-option>
+            <md-option ng-repeat="columnName in $ctrl.columnNames track by $index"
+                ng-value="{{$index}}">
+              {{ columnName === '' ? '(Table Column ' + ($index + 1) + ')' : columnName }}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container style="width: 150px; margin-right: 20px;"
+            ng-repeat="y in [].constructor($ctrl.authoringComponentContent.numDataExplorerSeries) track by $index">
+          <label>Y Data {{ ($ctrl.authoringComponentContent.numDataExplorerSeries > 1 ? $index + 1 : '') }}</label>
+          <md-select ng-model="$ctrl.authoringComponentContent.dataExplorerDataToColumn['y' + ($index > 0 ? ($index + 1) : '')]"
+              ng-change="$ctrl.componentChanged()">
+            <md-option ng-value="">(Allow student to select)</md-option>
+            <md-option ng-repeat="columnName in $ctrl.columnNames track by $index"
+                ng-value="{{$index}}">
+              {{ columnName === '' ? '(Table Column ' + ($index + 1) + ')' : columnName }}
+            </md-option>
+          </md-select>
+        </md-input-container>
       </div>
     </div>
   </div>

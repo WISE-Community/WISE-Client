@@ -1464,7 +1464,7 @@ export class TeacherProjectService extends ProjectService {
    */
   cleanupComponent(component) {
     delete component.checked;
-    delete component.hasWork;
+    delete component.isStudentWorkGenerated;
   }
 
   /**

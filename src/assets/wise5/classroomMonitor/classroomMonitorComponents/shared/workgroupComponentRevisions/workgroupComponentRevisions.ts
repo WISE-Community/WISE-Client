@@ -158,8 +158,15 @@ const WorkgroupComponentRevisions = {
                         </h3>
                         <div style="padding: 20px;">
                             <ng-content ng-switch="item.componentState.componentType">
-                              <div ng-switch-when="AudioOscillator|ConceptMap|Discussion|Draw|Graph|Label|Match|MultipleChoice|OpenResponse|Table" ng-switch-when-separator="|" class="component__content" layout="row" layout-wrap>
+                              <div ng-switch-when="Animation|AudioOscillator|ConceptMap|Discussion|Draw|Embedded|Graph|Label|Match|MultipleChoice|OpenResponse|Table" ng-switch-when-separator="|" class="component__content" layout="row" layout-wrap>
                                   <div flex="100" flex-gt-sm="66" layout="column" class="component--grading__response">
+                                      <animation-grading
+                                          ng-if="item.componentState.componentType === 'Animation'"
+                                          node-id="{{::$ctrl.nodeId}}"
+                                          component-id="{{::$ctrl.componentId}}"
+                                          component-state="{{ item.componentState }}"
+                                          workgroup-id="{{::$ctrl.workgroupId}}">
+                                      </animation-grading>
                                       <audio-oscillator-grading
                                           ng-if="item.componentState.componentType === 'AudioOscillator'"
                                           node-id="{{::$ctrl.nodeId}}"
@@ -190,6 +197,14 @@ const WorkgroupComponentRevisions = {
                                           workgroup-id="{{::$ctrl.workgroupId}}"
                                           [is-revision]="true">
                                       </draw-grading>
+                                      <embedded-grading
+                                          ng-if="item.componentState.componentType === 'Embedded'"
+                                          node-id="{{::$ctrl.nodeId}}"
+                                          component-id="{{::$ctrl.componentId}}"
+                                          component-state="{{ item.componentState }}"
+                                          workgroup-id="{{::$ctrl.workgroupId}}"
+                                          [is-revision]="true">
+                                      </embedded-grading>
                                       <graph-grading
                                           ng-if="item.componentState.componentType === 'Graph'"
                                           node-id="{{::$ctrl.nodeId}}"

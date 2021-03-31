@@ -886,6 +886,10 @@ export class TeacherDataService extends DataService {
     return this.currentPeriod;
   }
 
+  getCurrentPeriodId() {
+    return this.currentPeriod.periodId;
+  }
+
   getPeriods() {
     return this.periods;
   }
