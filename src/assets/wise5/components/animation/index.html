@@ -13,106 +13,72 @@
     }
   </style>
   <div>
-    <div ng-switch='::animationController.mode'>
-      <div ng-switch-when='grading'
-          layout='row'
-          layout-wrap>
-        <div flex='100'
-            flex-gt-sm='66'
-            layout='column'
-            class='component--grading__response'>
-          <div class='component--grading__response__content'>
-
+    <md-input-container class='input-container input-container--open-response md-block md-no-float'>
+      <label class='input-label md-no-float'
+          ng-disabled='animationController.isDisabled'
+          ng-if='animationController.isPromptVisible'>
+        <compile data='animationController.getPrompt()'></compile>
+        <possible-score [max-score]='animationController.componentContent.maxScore'></possible-score>
+      </label>
+      <md-button class='regularButton md-raised md-primary'
+          ng-click='animationController.playButtonClicked()'
+          ng-show='animationController.animationState == "stopped"'
+          ng-disabled='animationController.isDisabled'>
+        <md-icon>play_arrow</md-icon>
+        <md-tooltip>{{ ::'animation.play' | translate }}</md-tooltip>
+      </md-button>
+      <md-button class='regularButton md-raised md-primary'
+          ng-click='animationController.pauseButtonClicked()'
+          ng-show='animationController.animationState == "playing"'
+          ng-disabled='animationController.isDisabled'>
+        <md-icon>pause</md-icon>
+        <md-tooltip>{{ ::'animation.pause' | translate }}</md-tooltip>
+      </md-button>
+      <md-button class='regularButton md-raised md-primary'
+          ng-click='animationController.resumeButtonClicked()'
+          ng-show='animationController.animationState == "paused"'
+          ng-disabled='animationController.isDisabled'>
+        <md-icon>play_arrow</md-icon>
+        <md-tooltip>{{ ::'animation.resume' | translate }}</md-tooltip>
+      </md-button>
+      <md-button class='regularButton md-raised md-primary'
+          ng-click='animationController.resetButtonClicked()'
+          ng-disabled='animationController.isDisabled'>
+        <md-icon>replay</md-icon>
+        <md-tooltip>{{ ::'animation.reset' | translate }}</md-tooltip>
+      </md-button>
+      <span style='display: inline-block;'>
+        <md-slider-container style='width: 100px;'
+                             ng-disabled='animationController.isDisabled'>
+          <div style='margin-right: 35px'>
+            {{ ::'animation.slower' | translate }}
           </div>
-          <span flex></span>
-          <component-revisions-info node-id='animationController.nodeId'
-              component-id='animationController.componentId'
-              to-workgroup-id='workgroupId'
-              component-state-id='componentState.id'>
-          </component-revisions-info>
-        </div>
-        <div flex='100'
-            flex-gt-sm='33'
-            class='component--grading__annotations'>
-          <component-grading node-id='animationController.nodeId'
-              component-id='animationController.componentId'
-              max-score='animationController.componentContent.maxScore'
-              from-workgroup-id='teacherWorkgroupId'
-              to-workgroup-id='workgroupId'
-              component-state-id='componentState.id'
-              active='true'>
-          </component-grading>
-        </div>
-      </div>
-      <div ng-switch-default>
-        <md-input-container class='input-container input-container--open-response md-block md-no-float'>
-          <label class='input-label md-no-float'
-              ng-disabled='animationController.isDisabled'
-              ng-if='animationController.isPromptVisible'>
-            <compile data='animationController.getPrompt()'></compile>
-            <possible-score [max-score]='animationController.componentContent.maxScore'></possible-score>
-          </label>
-          <md-button class='regularButton md-raised md-primary'
-              ng-click='animationController.playButtonClicked()'
-              ng-show='animationController.animationState == "stopped"'
-              ng-disabled='animationController.isDisabled'>
-            <md-icon>play_arrow</md-icon>
-            <md-tooltip>{{ ::'animation.play' | translate }}</md-tooltip>
-          </md-button>
-          <md-button class='regularButton md-raised md-primary'
-              ng-click='animationController.pauseButtonClicked()'
-              ng-show='animationController.animationState == "playing"'
-              ng-disabled='animationController.isDisabled'>
-            <md-icon>pause</md-icon>
-            <md-tooltip>{{ ::'animation.pause' | translate }}</md-tooltip>
-          </md-button>
-          <md-button class='regularButton md-raised md-primary'
-              ng-click='animationController.resumeButtonClicked()'
-              ng-show='animationController.animationState == "paused"'
-              ng-disabled='animationController.isDisabled'>
-            <md-icon>play_arrow</md-icon>
-            <md-tooltip>{{ ::'animation.resume' | translate }}</md-tooltip>
-          </md-button>
-          <md-button class='regularButton md-raised md-primary'
-              ng-click='animationController.resetButtonClicked()'
-              ng-disabled='animationController.isDisabled'>
-            <md-icon>replay</md-icon>
-            <md-tooltip>{{ ::'animation.reset' | translate }}</md-tooltip>
-          </md-button>
-          <span style='display: inline-block;'>
-            <md-slider-container style='width: 100px;'
-                                 ng-disabled='animationController.isDisabled'>
-              <div style='margin-right: 35px'>
-                {{ ::'animation.slower' | translate }}
-              </div>
-              <md-slider ng-model='animationController.speedSliderValue'
-                  aria-label='slider'
-                  ng-change='animationController.speedSliderChanged()'
-                  min='1'
-                  max='5'>
-              </md-slider>
-              <div>
-                {{ ::'animation.faster' | translate }}
-              </div>
-            </md-slider-container>
-          </span>
-          <br/>
-          <svg id='{{::animationController.svgId}}'
-              width='{{animationController.width}}'
-              height='{{animationController.height}}'
-              ng-style='{"background-image": animationController.componentContent.background != null ? "url(" + animationController.componentContent.background + ")" : "",
-              "background-size": animationController.backgroundSize,
-              "background-repeat": "no-repeat",
-              "border": "1px solid black",
-              "-moz-user-select": "none",
-              "-webkit-user-select": "none",
-              "-ms-user-select":"none",
-              "user-select":"none",
-              "-o-user-select":"none"}'>
-          </svg>
-        </md-input-container>
-      </div>
-    </div>
+          <md-slider ng-model='animationController.speedSliderValue'
+              aria-label='slider'
+              ng-change='animationController.speedSliderChanged()'
+              min='1'
+              max='5'>
+          </md-slider>
+          <div>
+            {{ ::'animation.faster' | translate }}
+          </div>
+        </md-slider-container>
+      </span>
+      <br/>
+      <svg id='{{::animationController.svgId}}'
+          width='{{animationController.width}}'
+          height='{{animationController.height}}'
+          ng-style='{"background-image": animationController.componentContent.background != null ? "url(" + animationController.componentContent.background + ")" : "",
+          "background-size": animationController.backgroundSize,
+          "background-repeat": "no-repeat",
+          "border": "1px solid black",
+          "-moz-user-select": "none",
+          "-webkit-user-select": "none",
+          "-ms-user-select":"none",
+          "user-select":"none",
+          "-o-user-select":"none"}'>
+      </svg>
+    </md-input-container>
     <div class='component__actions'
         ng-if='animationController.isStudentAttachmentEnabled'
         layout='row'
@@ -168,7 +134,7 @@
         </span>
       </span>
     </div>
-    <component-annotations ng-if='::animationController.mode === "student"'
+    <component-annotations
         [annotations]='animationController.latestAnnotations'
         [max-score]='animationController.componentContent.maxScore'>
     </component-annotations>
