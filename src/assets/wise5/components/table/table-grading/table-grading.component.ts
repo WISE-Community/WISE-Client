@@ -11,6 +11,7 @@ export class TableGrading extends ComponentGrading {
   dataExplorerGraphType: string;
   dataExplorerSeries: any[];
   dataExplorerXAxisLabel: string;
+  dataExplorerYAxisLabel: string;
   dataExplorerYAxisLabels: string[];
   xColumnIndex: number;
   columnNames: string[] = [];
@@ -27,6 +28,7 @@ export class TableGrading extends ComponentGrading {
       this.dataExplorerGraphType = studentData.dataExplorerGraphType;
       this.dataExplorerSeries = studentData.dataExplorerSeries;
       this.dataExplorerXAxisLabel = studentData.dataExplorerXAxisLabel;
+      this.dataExplorerYAxisLabel = studentData.dataExplorerYAxisLabel;
       this.dataExplorerYAxisLabels = studentData.dataExplorerYAxisLabels;
       this.xColumnIndex = this.calculateXColumnIndex(this.componentState);
       this.columnNames = this.calculateColumnNames(this.componentState);

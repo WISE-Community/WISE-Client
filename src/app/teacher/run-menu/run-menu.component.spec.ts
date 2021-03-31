@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RunMenuComponent } from './run-menu.component';
 import { TeacherService } from '../teacher.service';
 import { Project } from '../../domain/project';
@@ -60,7 +60,7 @@ describe('RunMenuComponent', () => {
   let component: RunMenuComponent;
   let fixture: ComponentFixture<RunMenuComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [MatMenuModule, RouterTestingModule],
       declarations: [RunMenuComponent],

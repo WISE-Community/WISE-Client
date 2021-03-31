@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
 import { LibraryProjectMenuComponent } from './library-project-menu.component';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { Project } from '../../../domain/project';
@@ -47,7 +47,7 @@ describe('LibraryProjectMenuComponent', () => {
   let component: LibraryProjectMenuComponent;
   let fixture: ComponentFixture<LibraryProjectMenuComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [MatMenuModule, MatDialogModule],
       declarations: [LibraryProjectMenuComponent],

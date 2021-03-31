@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShareProjectDialogComponent } from './share-project-dialog.component';
 import { TeacherService } from '../../../teacher/teacher.service';
@@ -50,7 +50,7 @@ describe('ShareProjectDialogComponent', () => {
   let component: ShareProjectDialogComponent;
   let fixture: ComponentFixture<ShareProjectDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ShareProjectDialogComponent],
       imports: [BrowserAnimationsModule, MatAutocompleteModule, MatSnackBarModule, MatTableModule],

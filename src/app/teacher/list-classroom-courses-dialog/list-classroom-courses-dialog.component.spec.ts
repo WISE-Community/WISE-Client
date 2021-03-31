@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ListClassroomCoursesDialogComponent } from './list-classroom-courses-dialog.component';
 import { TeacherService } from '../teacher.service';
 import { UserService } from '../../services/user.service';
@@ -35,7 +35,7 @@ describe('ListClassroomCoursesDialogComponent', () => {
   let component: ListClassroomCoursesDialogComponent;
   let fixture: ComponentFixture<ListClassroomCoursesDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, MatCheckboxModule, OverlayModule, MatDialogModule],
       declarations: [ListClassroomCoursesDialogComponent],

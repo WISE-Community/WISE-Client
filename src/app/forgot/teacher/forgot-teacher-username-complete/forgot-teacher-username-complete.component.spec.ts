@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { configureTestSuite } from 'ng-bullet';
 import { ForgotTeacherUsernameCompleteComponent } from './forgot-teacher-username-complete.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';

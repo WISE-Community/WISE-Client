@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HomePageProjectLibraryComponent } from './home-page-project-library.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibraryService } from '../../../services/library.service';
@@ -11,7 +11,7 @@ export class MockLibraryService {
 describe('HomePageProjectLibraryComponent', () => {
   let component: HomePageProjectLibraryComponent;
   let fixture: ComponentFixture<HomePageProjectLibraryComponent>;
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [HomePageProjectLibraryComponent],

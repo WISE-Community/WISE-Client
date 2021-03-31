@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AddProjectDialogComponent } from './add-project-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentService } from '../student.service';

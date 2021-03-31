@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { UseWithClassWarningDialogComponent } from './use-with-class-warning-dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -15,7 +15,7 @@ describe('UseWithClassWarningDialogComponent', () => {
     title: 'This is a test'
   };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [UseWithClassWarningDialogComponent],
       providers: [
