@@ -34,13 +34,12 @@ class NavItemController {
   nodeHasWork: boolean;
   nodeId: string;
   nodeTitle: string;
-  parentGroupId: string;
-  previousNode: any;
+  parentGroupId: string = null;
   rubricIconClass: string;
   rubricIconLabel: string;
   rubricIconName: string;
   showPosition: any;
-  workgroupsOnNodeData: any;
+  workgroupsOnNodeData: any = [];
   currentPeriodChangedSubscription: Subscription;
   studentStatusReceivedSubscription: Subscription;
 
@@ -48,7 +47,6 @@ class NavItemController {
     '$element',
     '$filter',
     '$mdToast',
-    '$rootScope',
     '$scope',
     'AnnotationService',
     'ConfigService',
@@ -63,7 +61,6 @@ class NavItemController {
     private $element: any,
     $filter: any,
     private $mdToast: any,
-    private $rootScope: any,
     private $scope: any,
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
@@ -73,15 +70,6 @@ class NavItemController {
     private TeacherDataService: TeacherDataService,
     private TeacherWebSocketService: TeacherWebSocketService
   ) {
-    this.$element = $element;
-    this.$rootScope = $rootScope;
-    this.AnnotationService = AnnotationService;
-    this.ConfigService = ConfigService;
-    this.NotificationService = NotificationService;
-    this.ProjectService = ProjectService;
-    this.StudentStatusService = StudentStatusService;
-    this.TeacherDataService = TeacherDataService;
-    this.TeacherWebSocketService = TeacherWebSocketService;
     this.$translate = $filter('translate');
   }
 
@@ -89,26 +77,21 @@ class NavItemController {
     this.item = this.ProjectService.idToNode[this.nodeId];
     this.isGroup = this.ProjectService.isGroupNode(this.nodeId);
     this.nodeHasWork = this.ProjectService.nodeHasWork(this.nodeId);
-
     this.nodeTitle = this.showPosition
       ? this.ProjectService.nodeIdToNumber[this.nodeId] + ': ' + this.item.title
       : this.item.title;
     this.currentNode = this.TeacherDataService.currentNode;
-    this.previousNode = null;
     this.isCurrentNode = this.currentNode.id === this.nodeId;
     this.currentPeriod = this.TeacherDataService.getCurrentPeriod();
     this.currentWorkgroup = this.TeacherDataService.getCurrentWorkgroup();
     this.setCurrentNodeStatus();
     this.maxScore = this.ProjectService.getMaxScoreForNode(this.nodeId);
-    this.workgroupsOnNodeData = [];
     this.icon = this.ProjectService.getNodeIconByNodeId(this.nodeId);
-    this.parentGroupId = null;
-    var parentGroup = this.ProjectService.getParentGroup(this.nodeId);
+    const parentGroup = this.ProjectService.getParentGroup(this.nodeId);
     if (parentGroup != null) {
       this.parentGroupId = parentGroup.id;
     }
     this.setWorkgroupsOnNodeData();
-    this.alertNotifications = [];
     this.getAlertNotifications();
     this.hasRubrics = this.ProjectService.getNumberOfRubricsByNodeId(this.nodeId) > 0;
     this.alertIconLabel = this.$translate('HAS_ALERTS_NEW');
@@ -117,37 +100,43 @@ class NavItemController {
     this.rubricIconLabel = this.$translate('STEP_HAS_RUBRICS_TIPS');
     this.rubricIconClass = 'info';
     this.rubricIconName = 'info';
+    this.watchCurrentNode();
+    this.watchExpanded();
+    this.subscribeStudentStatusReceived();
+    this.subscribeCurrentPeriodChanged();
+  }
 
+  $onDestroy() {
+    this.currentPeriodChangedSubscription.unsubscribe();
+    this.studentStatusReceivedSubscription.unsubscribe();
+  }
+
+  watchCurrentNode(): void {
     this.$scope.$watch(
       () => {
         return this.TeacherDataService.currentNode;
       },
       (newNode, oldNode) => {
         this.currentNode = newNode;
-        this.previousNode = oldNode;
         this.isCurrentNode = this.nodeId === newNode.id;
         let isPrev = false;
-
         if (this.ProjectService.isApplicationNode(newNode.id)) {
           return;
         }
-
         if (oldNode) {
           isPrev = this.nodeId === oldNode.id;
-
           if (this.TeacherDataService.previousStep) {
             this.$scope.$parent.isPrevStep =
               this.nodeId === this.TeacherDataService.previousStep.id;
           }
-
           if (isPrev && !this.isGroup) {
             this.zoomToElement();
           }
         }
 
         if (this.isGroup) {
-          let prevNodeisGroup = !oldNode || this.ProjectService.isGroupNode(oldNode.id);
-          let prevNodeIsDescendant = this.ProjectService.isNodeDescendentOfGroup(
+          const prevNodeisGroup = !oldNode || this.ProjectService.isGroupNode(oldNode.id);
+          const prevNodeIsDescendant = this.ProjectService.isNodeDescendentOfGroup(
             oldNode,
             this.item
           );
@@ -172,7 +161,9 @@ class NavItemController {
         }
       }
     );
+  }
 
+  watchExpanded(): void {
     this.$scope.$watch(
       () => {
         return this.expanded;
@@ -181,7 +172,9 @@ class NavItemController {
         this.$scope.$parent.itemExpanded = value;
       }
     );
+  }
 
+  subscribeStudentStatusReceived(): void {
     this.studentStatusReceivedSubscription = this.StudentStatusService.studentStatusReceived$.subscribe(
       () => {
         this.setWorkgroupsOnNodeData();
@@ -189,7 +182,9 @@ class NavItemController {
         this.getAlertNotifications();
       }
     );
+  }
 
+  subscribeCurrentPeriodChanged(): void {
     this.currentPeriodChangedSubscription = this.TeacherDataService.currentPeriodChanged$.subscribe(
       ({ currentPeriod }) => {
         this.currentPeriod = currentPeriod;
@@ -197,27 +192,14 @@ class NavItemController {
         this.getAlertNotifications();
       }
     );
-
-    this.$scope.$on('$destroy', () => {
-      this.ngOnDestroy();
-    });
   }
 
-  ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
-    this.currentPeriodChangedSubscription.unsubscribe();
-    this.studentStatusReceivedSubscription.unsubscribe();
-  }
-
-  zoomToElement() {
+  zoomToElement(): void {
     setTimeout(() => {
       // smooth scroll to expanded group's page location
-      let top = this.$element[0].offsetTop;
-      let location = this.isGroup ? top - 32 : top - 80;
-      let delay = 350;
+      const top = this.$element[0].offsetTop;
+      const location = this.isGroup ? top - 32 : top - 80;
+      const delay = 350;
       $('#content').animate(
         {
           scrollTop: location
@@ -228,26 +210,27 @@ class NavItemController {
     }, 500);
   }
 
-  itemClicked(event) {
-    let previousNode = this.TeacherDataService.currentNode;
-    let currentNode = this.ProjectService.getNodeById(this.nodeId);
+  itemClicked(): void {
     if (this.isGroup) {
-      this.expanded = !this.expanded;
-      if (this.expanded) {
-        if (this.isCurrentNode) {
-          this.zoomToElement();
-        } else {
-          this.TeacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
-        }
-      }
+      this.groupItemClicked();
     } else {
       this.TeacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
     }
   }
 
+  groupItemClicked(): void {
+    this.expanded = !this.expanded;
+    if (this.expanded) {
+      if (this.isCurrentNode) {
+        this.zoomToElement();
+      } else {
+        this.TeacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
+      }
+    }
+  }
+
   isLocked(): boolean {
-    const node = this.ProjectService.getNodeById(this.nodeId);
-    const constraints = node.constraints;
+    const constraints = this.ProjectService.getNodeById(this.nodeId).constraints;
     if (constraints == null) {
       return false;
     } else {
@@ -281,10 +264,10 @@ class NavItemController {
     return false;
   }
 
-  toggleLockNode() {
+  toggleLockNode(): void {
     const node = this.ProjectService.getNodeById(this.nodeId);
     const isLocked = this.isLocked();
-    if (this.isLocked()) {
+    if (this.isLocked) {
       this.unlockNode(node);
     } else {
       this.lockNode(node);
@@ -295,7 +278,7 @@ class NavItemController {
     });
   }
 
-  showToggleLockNodeConfirmation(isLocked: boolean) {
+  showToggleLockNodeConfirmation(isLocked: boolean): void {
     let message = '';
     if (isLocked) {
       message = this.$translate('lockNodeConfirmation', {
@@ -311,7 +294,7 @@ class NavItemController {
     this.$mdToast.show(this.$mdToast.simple().textContent(message).hideDelay(5000));
   }
 
-  unlockNode(node: any) {
+  unlockNode(node: any): void {
     if (this.isShowingAllPeriods()) {
       this.unlockNodeForAllPeriods(node);
     } else {
@@ -322,7 +305,7 @@ class NavItemController {
     }
   }
 
-  lockNode(node: any) {
+  lockNode(node: any): void {
     if (this.isShowingAllPeriods()) {
       this.lockNodeForAllPeriods(node);
     } else {
@@ -333,13 +316,13 @@ class NavItemController {
     }
   }
 
-  unlockNodeForAllPeriods(node: any) {
+  unlockNodeForAllPeriods(node: any): void {
     for (const period of this.TeacherDataService.getPeriods()) {
       this.ProjectService.removeTeacherRemovalConstraint(node, period.periodId);
     }
   }
 
-  lockNodeForAllPeriods(node: any) {
+  lockNodeForAllPeriods(node: any): void {
     for (const period of this.TeacherDataService.getPeriods()) {
       if (period.periodId !== -1 && !this.isLockedForPeriod(node.constraints, period.periodId)) {
         this.ProjectService.addTeacherRemovalConstraint(node, period.periodId);
@@ -351,7 +334,7 @@ class NavItemController {
     return this.TeacherDataService.getCurrentPeriod().periodId === -1;
   }
 
-  sendNodeToClass(node: any) {
+  sendNodeToClass(node: any): void {
     if (this.isShowingAllPeriods()) {
       this.sendNodeToAllPeriods(node);
     } else {
@@ -359,7 +342,7 @@ class NavItemController {
     }
   }
 
-  sendNodeToAllPeriods(node: any) {
+  sendNodeToAllPeriods(node: any): void {
     for (const period of this.TeacherDataService.getPeriods()) {
       if (period.periodId !== -1) {
         this.sendNodeToPeriod(node, period.periodId);
@@ -367,101 +350,64 @@ class NavItemController {
     }
   }
 
-  sendNodeToPeriod(node: any, periodId: number) {
+  sendNodeToPeriod(node: any, periodId: number): void {
     this.TeacherWebSocketService.sendNodeToClass(periodId, node);
   }
 
-  /**
-   * Get the node title
-   * @param nodeId get the title for this node
-   * @returns the title for the node
-   */
-  getNodeTitle(nodeId) {
-    var node = this.ProjectService.idToNode[nodeId];
-    var title = null;
-    if (node != null) {
-      title = node.title;
-    }
-    return title;
+  getNodeCompletion(): number {
+    return this.StudentStatusService.getNodeCompletion(
+      this.nodeId,
+      this.currentPeriod.periodId,
+      null,
+      true
+    ).completionPct;
   }
 
-  /**
-   * Get the node description
-   * @param nodeId get the description for this node
-   * @returns the description for the node
-   */
-  getNodeDescription(nodeId) {
-    var node = this.ProjectService.idToNode[nodeId];
-    var description = null;
-    if (node != null) {
-      description = node.description;
-    }
-    return description;
-  }
-
-  /**
-   * Get the percentage of the node that the class or period has completed
-   * @returns the percentage of the node that the class or period has completed
-   */
-  getNodeCompletion() {
-    let periodId = this.currentPeriod.periodId;
-    return this.StudentStatusService.getNodeCompletion(this.nodeId, periodId, null, true)
-      .completionPct;
-  }
-
-  /**
-   * Get the average score for the node
-   * @returns the average score for the node
-   */
-  getNodeAverageScore() {
-    let workgroupId = this.currentWorkgroup ? this.currentWorkgroup.workgroupId : null;
+  getNodeAverageScore(): any {
+    const workgroupId = this.currentWorkgroup ? this.currentWorkgroup.workgroupId : null;
     if (workgroupId) {
       return this.AnnotationService.getScore(workgroupId, this.nodeId);
     } else {
-      let periodId = this.currentPeriod.periodId;
-      return this.StudentStatusService.getNodeAverageScore(this.nodeId, periodId);
+      return this.StudentStatusService.getNodeAverageScore(
+        this.nodeId,
+        this.currentPeriod.periodId
+      );
     }
   }
 
-  getWorkgroupIdsOnNode() {
-    let periodId = this.currentPeriod.periodId;
-    return this.StudentStatusService.getWorkgroupIdsOnNode(this.nodeId, periodId);
+  getWorkgroupIdsOnNode(): any[] {
+    return this.StudentStatusService.getWorkgroupIdsOnNode(
+      this.nodeId,
+      this.currentPeriod.periodId
+    );
   }
 
-  setWorkgroupsOnNodeData() {
-    let workgroupIdsOnNode = this.getWorkgroupIdsOnNode();
+  setWorkgroupsOnNodeData(): void {
     this.workgroupsOnNodeData = [];
-
-    let n = workgroupIdsOnNode.length;
-    for (let i = 0; i < n; i++) {
-      let id = workgroupIdsOnNode[i];
-
-      let usernames = this.ConfigService.getDisplayUsernamesByWorkgroupId(id);
-      let avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(id);
+    for (const workgroupId of this.getWorkgroupIdsOnNode()) {
       this.workgroupsOnNodeData.push({
-        workgroupId: id,
-        usernames: usernames,
-        avatarColor: avatarColor
+        workgroupId: workgroupId,
+        usernames: this.ConfigService.getDisplayUsernamesByWorkgroupId(workgroupId),
+        avatarColor: this.ConfigService.getAvatarColorForWorkgroupId(workgroupId)
       });
     }
   }
 
-  setCurrentNodeStatus() {
+  setCurrentNodeStatus(): void {
     if (this.currentWorkgroup) {
-      let studentStatus = this.StudentStatusService.getStudentStatusForWorkgroupId(
+      const studentStatus = this.StudentStatusService.getStudentStatusForWorkgroupId(
         this.currentWorkgroup.workgroupId
       );
       this.currentNodeStatus = studentStatus.nodeStatuses[this.nodeId];
     }
   }
 
-  getAlertNotifications() {
-    const args = {
+  getAlertNotifications(): void {
+    this.alertNotifications = this.NotificationService.getAlertNotifications({
       nodeId: this.nodeId,
       periodId: this.currentPeriod.periodId,
       toWorkgroupId: this.currentWorkgroup ? this.currentWorkgroup.workgroupId : null
-    };
-    this.alertNotifications = this.NotificationService.getAlertNotifications(args);
+    });
     this.hasAlert = this.alertNotifications.length > 0;
     this.newAlert = this.hasNewAlert();
   }
@@ -475,7 +421,7 @@ class NavItemController {
     return false;
   }
 
-  getPeriodLabel() {
+  getPeriodLabel(): string {
     return this.isShowingAllPeriods()
       ? this.$translate('allPeriods')
       : this.$translate('periodLabel', { name: this.currentPeriod.periodName });
