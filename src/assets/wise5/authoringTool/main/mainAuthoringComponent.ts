@@ -7,7 +7,7 @@ import { UtilService } from '../../services/utilService';
 import * as angular from 'angular';
 import * as $ from 'jquery';
 
-class AuthoringToolMainController {
+class MainAuthoringController {
   $translate;
   errorCreatingProjectTimeout: any;
   icons: any;
@@ -25,7 +25,6 @@ class AuthoringToolMainController {
     '$filter',
     '$location',
     '$mdDialog',
-    '$rootScope',
     '$state',
     '$timeout',
     'ConfigService',
@@ -39,7 +38,6 @@ class AuthoringToolMainController {
     $filter: any,
     private $location: any,
     private $mdDialog: any,
-    private $rootScope: any,
     private $state: any,
     private $timeout: any,
     private ConfigService: ConfigService,
@@ -47,18 +45,12 @@ class AuthoringToolMainController {
     private TeacherDataService: TeacherDataService,
     private UtilService: UtilService
   ) {
-    this.$mdDialog = $mdDialog;
-    this.$rootScope = $rootScope;
-    this.$state = $state;
-    this.$timeout = $timeout;
-    this.ConfigService = ConfigService;
-    this.ProjectService = ProjectService;
-    this.TeacherDataService = TeacherDataService;
-    this.UtilService = UtilService;
     this.$translate = $filter('translate');
+  }
+
+  $onInit() {
     this.projects = this.ConfigService.getConfigParam('projects');
     this.sharedProjects = this.ConfigService.getConfigParam('sharedProjects');
-
     this.is_rtl = $('html').attr('dir') == 'rtl';
     this.icons = { prev: 'arrow_back', next: 'arrow_forward' };
     if (this.is_rtl) {
@@ -245,4 +237,7 @@ class AuthoringToolMainController {
   }
 }
 
-export default AuthoringToolMainController;
+export const MainAuthoringComponent = {
+  templateUrl: `/wise5/authoringTool/main/mainAuthoring.html`,
+  controller: MainAuthoringController
+};

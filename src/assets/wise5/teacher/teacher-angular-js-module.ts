@@ -11,7 +11,7 @@ import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherWebSocketService } from '../services/teacherWebSocketService';
 import { AdvancedProjectAuthoringComponent } from '../authoringTool/advanced/advanced-project-authoring.component';
 import AuthoringToolController from '../authoringTool/authoringToolController';
-import AuthoringToolMainController from '../authoringTool/main/authoringToolMainController';
+import { MainAuthoringComponent } from '../authoringTool/main/mainAuthoringComponent';
 import AuthorNotebookController from '../authoringTool/notebook/authorNotebookController';
 import ClassroomMonitorController from '../classroomMonitor/classroomMonitorController';
 import DataExportController from '../classroomMonitor/dataExport/dataExportController';
@@ -28,7 +28,7 @@ import { NodeAdvancedPathAuthoringComponent } from '../authoringTool/node/advanc
 import NodeAuthoringController from '../authoringTool/node/nodeAuthoringController';
 import NotebookGradingController from '../classroomMonitor/notebook/notebookGradingController';
 import ProjectAssetController from '../authoringTool/asset/projectAssetController';
-import ProjectController from '../authoringTool/project/projectController';
+import { ProjectAuthoringComponent } from '../authoringTool/project/projectAuthoringComponent';
 import ProjectInfoController from '../authoringTool/info/projectInfoController';
 import { RubricAuthoringComponent } from '../authoringTool/rubric/rubric-authoring.component';
 import StudentGradingController from '../classroomMonitor/studentGrading/studentGradingController';
@@ -173,7 +173,7 @@ angular
     }) as angular.IDirectiveFactory
   )
   .controller('AuthoringToolController', AuthoringToolController)
-  .controller('AuthoringToolMainController', AuthoringToolMainController)
+  .component('mainAuthoringComponent', MainAuthoringComponent)
   .controller('AuthorNotebookController', AuthorNotebookController)
   .controller('ClassroomMonitorController', ClassroomMonitorController)
   .controller('DataExportController', DataExportController)
@@ -187,7 +187,7 @@ angular
   .controller('NodeAuthoringController', NodeAuthoringController)
   .controller('NotebookGradingController', NotebookGradingController)
   .controller('ProjectAssetController', ProjectAssetController)
-  .controller('ProjectController', ProjectController)
+  .component('projectAuthoringComponent', ProjectAuthoringComponent)
   .controller('ProjectInfoController', ProjectInfoController)
   .directive(
     'rubricAuthoringComponent',
@@ -216,9 +216,7 @@ angular
         })
         .state('root.at.main', {
           url: '/home',
-          templateUrl: '/assets/wise5/authoringTool/main/main.html',
-          controller: 'AuthoringToolMainController',
-          controllerAs: 'authoringToolMainController',
+          component: 'mainAuthoringComponent',
           resolve: {
             config: [
               'ConfigService',
@@ -238,9 +236,7 @@ angular
         })
         .state('root.at.project', {
           url: '/unit/:projectId',
-          templateUrl: '/assets/wise5/authoringTool/project/project.html',
-          controller: 'ProjectController',
-          controllerAs: 'projectController',
+          component: 'projectAuthoringComponent',
           resolve: {
             projectConfig: [
               'ConfigService',
