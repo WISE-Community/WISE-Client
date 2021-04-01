@@ -7,6 +7,7 @@ import WorkgroupItem from './workgroupItem/workgroupItem';
 import * as angular from 'angular';
 import { WorkgroupInfoComponent } from './workgroupInfo/workgroup-info.component';
 import { downgradeComponent } from '@angular/upgrade/static';
+import MilestoneWorkgroupItem from '../milestones/milestoneWorkgroupItem/milestoneWorkgroupItem';
 
 const NodeGrading = angular
   .module('nodeGrading', [])
@@ -20,6 +21,7 @@ const NodeGrading = angular
     'workgroupInfo',
     downgradeComponent({ component: WorkgroupInfoComponent }) as angular.IDirectiveFactory
   )
-  .component('workgroupItem', WorkgroupItem);
+  .component('workgroupItem', WorkgroupItem)
+  .component('milestoneWorkgroupItem', MilestoneWorkgroupItem);
 
 export default NodeGrading;

@@ -4,7 +4,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import * as angular from 'angular';
 import { UtilService } from '../../../../services/utilService';
 
-class WorkgroupItemController {
+export class WorkgroupItemController {
   $translate: any;
   componentId: string;
   components: any[] = [];
@@ -27,8 +27,8 @@ class WorkgroupItemController {
 
   constructor(
     $filter: any,
-    private ProjectService: TeacherProjectService,
-    private UtilService: UtilService
+    protected ProjectService: TeacherProjectService,
+    protected UtilService: UtilService
   ) {
     this.$translate = $filter('translate');
   }
@@ -39,8 +39,10 @@ class WorkgroupItemController {
     this.update();
     if (this.componentId) {
       this.hiddenComponents = [];
-      const component =
-          this.ProjectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId);
+      const component = this.ProjectService.getComponentByNodeIdAndComponentId(
+        this.nodeId,
+        this.componentId
+      );
       if (this.ProjectService.componentHasWork(component)) {
         this.components.push(component);
       }

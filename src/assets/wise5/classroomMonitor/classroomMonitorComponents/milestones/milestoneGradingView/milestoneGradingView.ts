@@ -8,6 +8,7 @@ import { StudentStatusService } from '../../../../services/studentStatusService'
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NodeGradingViewController } from '../../nodeGrading/nodeGradingView/nodeGradingView';
+import * as angular from 'angular';
 
 @Directive()
 class MilestoneGradingViewController extends NodeGradingViewController {
@@ -37,6 +38,13 @@ class MilestoneGradingViewController extends NodeGradingViewController {
       StudentStatusService,
       TeacherDataService
     );
+    const additionalSortOrder = {
+      initialScore: ['-isVisible', 'initialScore', 'workgroupId'],
+      '-initialScore': ['-isVisible', '-initialScore', 'workgroupId'],
+      changeInScore: ['-isVisible', 'changeInScore', 'workgroupId'],
+      '-changeInScore': ['-isVisible', '-changeInScore', 'workgroupId']
+    };
+    this.sortOrder = { ...this.sortOrder, ...additionalSortOrder };
   }
 
   $onInit() {
@@ -48,11 +56,15 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     this.saveNodeGradingViewDisplayedEvent();
   }
 
-  getScoreByWorkgroupId(workgroupId: number): number {
+  getScoreByWorkgroupId(
+    workgroupId: number,
+    nodeId: string = this.nodeId,
+    componentId: string = this.componentId
+  ): number {
     let score = null;
     const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
-      this.nodeId,
-      this.componentId,
+      nodeId,
+      componentId,
       workgroupId
     );
     if (latestScoreAnnotation) {
@@ -92,6 +104,31 @@ class MilestoneGradingViewController extends NodeGradingViewController {
   onUpdateExpand(workgroupId: number, isExpanded: boolean): void {
     super.onUpdateExpand(workgroupId, isExpanded);
     this.saveMilestoneWorkgroupItemViewedEvent(workgroupId, isExpanded);
+  }
+
+  updateWorkgroup(workgroupId, init = false) {
+    super.updateWorkgroup(workgroupId, init);
+    const workgroup = this.workgroupsById[workgroupId];
+    workgroup.score = this.getScoreByWorkgroupId(workgroupId);
+    if (this.milestone.report.locations.length > 1) {
+      const firstLocation = this.milestone.report.locations[0];
+      workgroup.initialScore = this.getScoreByWorkgroupId(
+        workgroupId,
+        firstLocation.nodeId,
+        firstLocation.componentId
+      );
+      workgroup.changeInScore = this.getChangeInScore(workgroup.initialScore, workgroup.score);
+    }
+    if (!init) {
+      this.workgroupsById[workgroupId] = angular.copy(workgroup);
+    }
+  }
+
+  getChangeInScore(initialScore: number, revisedScore: number): number {
+    if (initialScore != -1 && revisedScore != -1) {
+      return revisedScore - initialScore;
+    }
+    return -10000; // this hack ensures that this score appears as the lowest score
   }
 
   saveMilestoneWorkgroupItemViewedEvent(workgroupId, isExpanded) {
