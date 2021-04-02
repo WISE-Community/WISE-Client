@@ -110,35 +110,19 @@ class ComponentController {
         ? true
         : this.componentContent.showAddToNotebookButton;
 
-    if (this.isStudentMode()) {
-      this.isPromptVisible = true;
-      this.isSaveButtonVisible = this.componentContent.showSaveButton;
-      this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-      if (!this.ConfigService.isRunActive()) {
-        this.isDisabled = true;
-      }
-    } else if (this.isGradingMode()) {
-      this.isPromptVisible = false;
-      this.isSaveButtonVisible = false;
-      this.isSubmitButtonVisible = false;
-      this.isDisabled = true;
-    } else if (this.isGradingRevisionMode()) {
-      this.isPromptVisible = false;
-      this.isSaveButtonVisible = false;
-      this.isSubmitButtonVisible = false;
+    this.isPromptVisible = true;
+    this.isSaveButtonVisible = this.componentContent.showSaveButton;
+    this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
+    if (!this.ConfigService.isRunActive()) {
       this.isDisabled = true;
     }
 
-    if (this.isStudentMode() || this.isGradingMode() || this.isGradingRevisionMode()) {
+    if (!this.isAuthoringComponentPreviewMode()) {
       this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
         this.nodeId,
         this.componentId,
         this.workgroupId
       );
-    }
-
-    if (this.isGradingMode() || this.isGradingRevisionMode()) {
-      this.showAddToNotebookButton = false;
     }
 
     this.registerListeners();
@@ -163,18 +147,6 @@ class ComponentController {
         }
       }
     );
-  }
-
-  isStudentMode() {
-    return this.mode === 'student';
-  }
-
-  isGradingMode() {
-    return this.mode === 'grading';
-  }
-
-  isGradingRevisionMode() {
-    return this.mode === 'gradingRevision';
   }
 
   isAuthoringComponentPreviewMode() {
@@ -676,7 +648,7 @@ class ComponentController {
         this.setStudentWork(componentState);
         this.setParentStudentWorkIdToCurrentStudentWork(studentWorkId);
         this.NotebookService.setNotesVisible(false);
-        this.NotebookService.setInsertMode({insertMode: false});
+        this.NotebookService.setInsertMode({ insertMode: false });
       }
     });
   }

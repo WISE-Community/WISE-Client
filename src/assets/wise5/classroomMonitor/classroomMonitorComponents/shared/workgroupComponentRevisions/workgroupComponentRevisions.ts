@@ -157,123 +157,124 @@ const WorkgroupComponentRevisions = {
                             <span ng-if="$first"> (Latest)</span>
                         </h3>
                         <div style="padding: 20px;">
-                            <ng-content ng-switch="item.componentState.componentType">
-                              <div ng-switch-when="Animation|AudioOscillator|ConceptMap|Discussion|Draw|Embedded|Graph|Label|Match|MultipleChoice|OpenResponse|Table" ng-switch-when-separator="|" class="component__content" layout="row" layout-wrap>
-                                  <div flex="100" flex-gt-sm="66" layout="column" class="component--grading__response">
-                                      <animation-grading
-                                          ng-if="item.componentState.componentType === 'Animation'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}">
-                                      </animation-grading>
-                                      <audio-oscillator-grading
-                                          ng-if="item.componentState.componentType === 'AudioOscillator'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}">
-                                      </audio-oscillator-grading>
-                                      <concept-map-grading
-                                          ng-if="item.componentState.componentType === 'ConceptMap'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}"
-                                          [is-revision]="true">
-                                      </concept-map-grading>
-                                      <discussion-grading
-                                          ng-if="item.componentState.componentType === 'Discussion'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}">
-                                      </discussion-grading>
-                                      <draw-grading
-                                          ng-if="item.componentState.componentType === 'Draw'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}"
-                                          [is-revision]="true">
-                                      </draw-grading>
-                                      <embedded-grading
-                                          ng-if="item.componentState.componentType === 'Embedded'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}"
-                                          [is-revision]="true">
-                                      </embedded-grading>
-                                      <graph-grading
-                                          ng-if="item.componentState.componentType === 'Graph'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="::$ctrl.workgroupId"
-                                          [is-revision]="true">
-                                      </graph-grading>
-                                      <label-grading
-                                          ng-if="item.componentState.componentType === 'Label'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}"
-                                          [is-revision]="true">
-                                      </label-grading>
-                                      <match-grading
-                                          ng-if="item.componentState.componentType === 'Match'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}">
-                                      </match-grading>
-                                      <multiple-choice-grading
-                                          ng-if="item.componentState.componentType === 'MultipleChoice'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}">
-                                      </multiple-choice-grading>
-                                      <open-response-grading
-                                          ng-if="item.componentState.componentType === 'OpenResponse'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}">
-                                      </open-response-grading>
-                                      <table-grading
-                                          ng-if="item.componentState.componentType === 'Table'"
-                                          node-id="{{::$ctrl.nodeId}}"
-                                          component-id="{{::$ctrl.componentId}}"
-                                          component-state="{{ item.componentState }}"
-                                          workgroup-id="{{::$ctrl.workgroupId}}">
-                                      </table-grading>
-                                      <component-revisions-info
-                                          node-id="::$ctrl.nodeId"
-                                          component-id="::$ctrl.componentId"
-                                          to-workgroup-id="::$ctrl.workgroupId"
-                                          component-state="item.componentState"
-                                          active='false'>
-                                      </component-revisions-info>
-                                  </div>
-                                  <div flex="100" flex-gt-sm="33" class="component--grading__annotations">
-                                    <component-grading node-id="::$ctrl.nodeId"
+                            <div class="component__content" layout="row" layout-wrap>
+                                <div flex="100" flex-gt-sm="66" layout="column" class="component--grading__response">
+                                    <animation-grading
+                                        ng-if="item.componentState.componentType === 'Animation'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </animation-grading>
+                                    <audio-oscillator-grading
+                                        ng-if="item.componentState.componentType === 'AudioOscillator'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </audio-oscillator-grading>
+                                    <concept-map-grading
+                                        ng-if="item.componentState.componentType === 'ConceptMap'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </concept-map-grading>
+                                    <discussion-grading
+                                        ng-if="item.componentState.componentType === 'Discussion'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </discussion-grading>
+                                    <draw-grading
+                                        ng-if="item.componentState.componentType === 'Draw'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </draw-grading>
+                                    <embedded-grading
+                                        ng-if="item.componentState.componentType === 'Embedded'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </embedded-grading>
+                                    <graph-grading
+                                        ng-if="item.componentState.componentType === 'Graph'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="::$ctrl.workgroupId"
+                                        [is-revision]="true">
+                                    </graph-grading>
+                                    <label-grading
+                                        ng-if="item.componentState.componentType === 'Label'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </label-grading>
+                                    <match-grading
+                                        ng-if="item.componentState.componentType === 'Match'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </match-grading>
+                                    <multiple-choice-grading
+                                        ng-if="item.componentState.componentType === 'MultipleChoice'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </multiple-choice-grading>
+                                    <open-response-grading
+                                        ng-if="item.componentState.componentType === 'OpenResponse'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </open-response-grading>
+                                    <table-grading
+                                        ng-if="item.componentState.componentType === 'Table'"
+                                        node-id="{{::$ctrl.nodeId}}"
+                                        component-id="{{::$ctrl.componentId}}"
+                                        component-state="{{ item.componentState }}"
+                                        workgroup-id="{{::$ctrl.workgroupId}}"
+                                        [is-revision]="true">
+                                    </table-grading>
+                                    <component-revisions-info
+                                        node-id="::$ctrl.nodeId"
                                         component-id="::$ctrl.componentId"
-                                        max-score="componentContent.maxScore"
-                                        from-workgroup-id="::$ctrl.fromWorkgroupId"
-                                        to-workgroup-id="$ctrl.workgroupId"
-                                        component-state-id="item.componentState.id"
-                                        show-all-annotations="true"
-                                        is-disabled="true">
-                                    </component-grading>
-                                  </div>
-                              </div>
-                              <component ng-switch-default
-                                         component-state="{{ item.componentState }}"
-                                         workgroup-id="::$ctrl.workgroupId"
-                                         mode="gradingRevision">
-                            </ng-content>
+                                        to-workgroup-id="::$ctrl.workgroupId"
+                                        component-state="item.componentState"
+                                        active='false'>
+                                    </component-revisions-info>
+                                </div>
+                                <div flex="100" flex-gt-sm="33" class="component--grading__annotations">
+                                  <component-grading node-id="::$ctrl.nodeId"
+                                      component-id="::$ctrl.componentId"
+                                      max-score="componentContent.maxScore"
+                                      from-workgroup-id="::$ctrl.fromWorkgroupId"
+                                      to-workgroup-id="$ctrl.workgroupId"
+                                      component-state-id="item.componentState.id"
+                                      show-all-annotations="true"
+                                      is-disabled="true">
+                                  </component-grading>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </md-list-item>

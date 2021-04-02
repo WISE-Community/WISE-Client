@@ -89,69 +89,67 @@ class DiscussionController extends ComponentController {
     this.topLevelResponses = [];
     this.responsesMap = {};
     this.retrievedClassmateResponses = false;
-    if (this.isStudentMode()) {
-      if (this.ConfigService.isPreview()) {
-        let componentStates = [];
-        if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-          for (const connectedComponent of this.componentContent.connectedComponents) {
-            componentStates = componentStates.concat(
-              this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
-                connectedComponent.nodeId,
-                connectedComponent.componentId
-              )
-            );
-          }
-          if (this.isConnectedComponentImportWorkMode()) {
-            componentStates = componentStates.concat(
-              this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
-                this.nodeId,
-                this.componentId
-              )
-            );
-          }
-        } else {
-          componentStates = this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
-            this.nodeId,
-            this.componentId
+    if (this.ConfigService.isPreview()) {
+      let componentStates = [];
+      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+        for (const connectedComponent of this.componentContent.connectedComponents) {
+          componentStates = componentStates.concat(
+            this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
+              connectedComponent.nodeId,
+              connectedComponent.componentId
+            )
           );
         }
-        this.setClassResponses(componentStates);
+        if (this.isConnectedComponentImportWorkMode()) {
+          componentStates = componentStates.concat(
+            this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
+              this.nodeId,
+              this.componentId
+            )
+          );
+        }
       } else {
-        if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-          const retrieveWorkFromTheseComponents = [];
-          for (const connectedComponent of this.componentContent.connectedComponents) {
-            retrieveWorkFromTheseComponents.push({
-              nodeId: connectedComponent.nodeId,
-              componentId: connectedComponent.componentId
-            });
-          }
-          if (this.isConnectedComponentImportWorkMode()) {
-            retrieveWorkFromTheseComponents.push({
-              nodeId: this.nodeId,
-              componentId: this.componentId
-            });
-          }
-          this.getClassmateResponses(retrieveWorkFromTheseComponents);
-        } else {
-          if (this.isClassmateResponsesGated()) {
-            const componentState = this.$scope.componentState;
-            if (componentState != null) {
-              if (
-                this.DiscussionService.componentStateHasStudentWork(
-                  componentState,
-                  this.componentContent
-                )
-              ) {
-                this.getClassmateResponses();
-              }
+        componentStates = this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
+          this.nodeId,
+          this.componentId
+        );
+      }
+      this.setClassResponses(componentStates);
+    } else {
+      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+        const retrieveWorkFromTheseComponents = [];
+        for (const connectedComponent of this.componentContent.connectedComponents) {
+          retrieveWorkFromTheseComponents.push({
+            nodeId: connectedComponent.nodeId,
+            componentId: connectedComponent.componentId
+          });
+        }
+        if (this.isConnectedComponentImportWorkMode()) {
+          retrieveWorkFromTheseComponents.push({
+            nodeId: this.nodeId,
+            componentId: this.componentId
+          });
+        }
+        this.getClassmateResponses(retrieveWorkFromTheseComponents);
+      } else {
+        if (this.isClassmateResponsesGated()) {
+          const componentState = this.$scope.componentState;
+          if (componentState != null) {
+            if (
+              this.DiscussionService.componentStateHasStudentWork(
+                componentState,
+                this.componentContent
+              )
+            ) {
+              this.getClassmateResponses();
             }
-          } else {
-            this.getClassmateResponses();
           }
+        } else {
+          this.getClassmateResponses();
         }
       }
-      this.disableComponentIfNecessary();
     }
+    this.disableComponentIfNecessary();
     this.initializeScopeGetComponentState();
     this.registerStudentWorkReceivedListener();
     this.initializeWatchMdMedia();
