@@ -168,22 +168,7 @@ class GraphController extends ComponentController {
     this.applyHighchartsPlotLinesLabelFix();
     this.initializeComponentContentParams();
     const componentState = this.$scope.componentState;
-    if (this.isStudentMode()) {
-      this.initializeStudentMode(componentState);
-    } else if (this.mode === 'grading' || this.mode === 'gradingRevision') {
-      this.initializeGradingMode(componentState);
-    } else {
-      this.isResetSeriesButtonVisible = true;
-      this.isSelectSeriesVisible = true;
-      this.backgroundImage = this.componentContent.backgroundImage;
-      this.newTrial();
-    }
-    if (
-      !this.isStudentMode() &&
-      this.GraphService.componentStateHasStudentWork(componentState, this.componentContent)
-    ) {
-      this.setStudentWork(componentState);
-    }
+    this.initializeStudentMode(componentState);
     this.initialComponentState = componentState;
     this.previousComponentState = componentState;
     if (!this.canSubmit()) {
@@ -274,18 +259,6 @@ class GraphController extends ComponentController {
       this.setStudentWork(componentState);
     } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
       this.handleConnectedComponents();
-    }
-  }
-
-  initializeGradingMode(componentState) {
-    this.isResetSeriesButtonVisible = false;
-    this.isSelectSeriesVisible = false;
-    if (componentState != null) {
-      if (this.mode === 'gradingRevision') {
-        this.chartId = 'chart_gradingRevision_' + componentState.id;
-      } else {
-        this.chartId = 'chart_' + componentState.id;
-      }
     }
   }
 
@@ -927,15 +900,13 @@ class GraphController extends ComponentController {
     if (this.plotLines != null) {
       this.xAxis.plotLines = this.plotLines;
     }
-    const zoomType = this.getZoomType();
     this.chartConfig = this.createChartConfig(
       deferred,
       this.title,
       this.subtitle,
       this.xAxis,
       this.yAxis,
-      series,
-      zoomType
+      series
     );
     if (this.componentContent.useCustomLegend) {
       // use a timeout so the graph has a chance to render before we set the custom legend
@@ -1035,10 +1006,6 @@ class GraphController extends ComponentController {
     }
   }
 
-  getZoomType() {
-    return this.mode === 'grading' || this.mode === 'gradingRevision' ? 'xy' : null;
-  }
-
   clearChartConfig() {
     this.chartConfig = {
       chart: {
@@ -1049,7 +1016,7 @@ class GraphController extends ComponentController {
     };
   }
 
-  createChartConfig(deferred, title, subtitle, xAxis, yAxis, series, zoomType) {
+  createChartConfig(deferred, title, subtitle, xAxis, yAxis, series) {
     const chartConfig = {
       options: {
         legend: {
@@ -1066,7 +1033,6 @@ class GraphController extends ComponentController {
           width: this.width,
           height: this.height,
           type: this.graphType,
-          zoomType: zoomType,
           plotBackgroundImage: this.backgroundImage,
           events: {
             load: function () {

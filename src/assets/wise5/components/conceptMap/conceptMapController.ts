@@ -290,33 +290,21 @@ class ConceptMapController extends ComponentController {
     this.setupSVG();
     let componentState = this.$scope.componentState;
 
-    if (this.isStudentMode()) {
-      if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
-        this.handleConnectedComponents();
-      } else if (
-        this.ConceptMapService.componentStateHasStudentWork(componentState, this.componentContent)
-      ) {
-        componentState = this.ProjectService.injectAssetPaths(componentState);
-        this.setStudentWork(componentState);
-      } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-        this.handleConnectedComponents();
-      } else if (
-        !this.ConceptMapService.componentStateHasStudentWork(
-          componentState,
-          this.componentContent
-        ) &&
-        this.componentContentHasStarterConceptMap()
-      ) {
-        const conceptMapData = this.componentContent.starterConceptMap;
-        this.populateConceptMapData(conceptMapData);
-      }
-    } else {
-      if (componentState == null) {
-        this.populateStarterConceptMap();
-      } else {
-        componentState = this.ProjectService.injectAssetPaths(componentState);
-        this.setStudentWork(componentState);
-      }
+    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    } else if (
+      this.ConceptMapService.componentStateHasStudentWork(componentState, this.componentContent)
+    ) {
+      componentState = this.ProjectService.injectAssetPaths(componentState);
+      this.setStudentWork(componentState);
+    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    } else if (
+      !this.ConceptMapService.componentStateHasStudentWork(componentState, this.componentContent) &&
+      this.componentContentHasStarterConceptMap()
+    ) {
+      const conceptMapData = this.componentContent.starterConceptMap;
+      this.populateConceptMapData(conceptMapData);
     }
 
     if (this.hasMaxSubmitCount() && !this.hasSubmitsLeft()) {
