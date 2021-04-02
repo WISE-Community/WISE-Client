@@ -25,7 +25,7 @@ import { NodeAdvancedConstraintAuthoringComponent } from '../authoringTool/node/
 import { NodeAdvancedGeneralAuthoringComponent } from '../authoringTool/node/advanced/general/node-advanced-general-authoring.component';
 import { NodeAdvancedJsonAuthoringComponent } from '../authoringTool/node/advanced/json/node-advanced-json-authoring.component';
 import { NodeAdvancedPathAuthoringComponent } from '../authoringTool/node/advanced/path/node-advanced-path-authoring.component';
-import NodeAuthoringController from '../authoringTool/node/nodeAuthoringController';
+import { NodeAuthoringComponent } from '../authoringTool/node/nodeAuthoringComponent';
 import NotebookGradingController from '../classroomMonitor/notebook/notebookGradingController';
 import ProjectAssetController from '../authoringTool/asset/projectAssetController';
 import { ProjectAuthoringComponent } from '../authoringTool/project/projectAuthoringComponent';
@@ -184,7 +184,7 @@ angular
     'milestones',
     downgradeComponent({ component: MilestonesComponent }) as angular.IDirectiveFactory
   )
-  .controller('NodeAuthoringController', NodeAuthoringController)
+  .component('nodeAuthoringComponent', NodeAuthoringComponent)
   .controller('NotebookGradingController', NotebookGradingController)
   .controller('ProjectAssetController', ProjectAssetController)
   .component('projectAuthoringComponent', ProjectAuthoringComponent)
@@ -277,9 +277,7 @@ angular
         })
         .state('root.at.project.node', {
           url: '/node/:nodeId',
-          templateUrl: '/assets/wise5/authoringTool/node/node.html',
-          controller: 'NodeAuthoringController',
-          controllerAs: 'nodeAuthoringController',
+          component: 'nodeAuthoringComponent',
           resolve: {},
           params: {
             newComponents: []

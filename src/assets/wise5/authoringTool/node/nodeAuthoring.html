@@ -1,0 +1,201 @@
+<style>
+  .bodyDiv {
+    margin-left: 10px;
+  }
+  .criteriaContent {
+    margin-left: 30px;
+  }
+</style>
+<div ui-view></div>
+<div ng-if="$ctrl.$state.current.name == 'root.at.project.node'">
+<div style='background-color: white; position: sticky; top: 17px; z-index: 2;'>
+  <div layout="row" layout-wrap>
+    <md-button id='backToProjectButton' class='topButton md-raised md-primary'
+        ng-click='$ctrl.close()'
+        ng-disabled='$ctrl.insertComponentMode'>
+      <md-icon>arrow_back</md-icon>
+      <md-tooltip md-direction='top'
+          class='projectButtonTooltip'
+          ng-if='$ctrl.showStepButtons'>
+        {{ ::'backToProjectView' | translate }}
+      </md-tooltip>
+      <md-tooltip md-direction='top'
+          class='projectButtonTooltip'
+          ng-if='!$ctrl.showStepButtons'>
+        {{ ::'backToStepView' | translate }}
+      </md-tooltip>
+    </md-button>
+    <md-button id='addComponentButton'
+        ng-if='$ctrl.showStepButtons && !projectController.isGroupNode($ctrl.node.id)'
+        class='topButton md-raised md-primary'
+        ng-click='$ctrl.addComponent()'
+        ng-disabled='$ctrl.getSelectedComponentIds().length != 0 || $ctrl.insertComponentMode'>
+      <md-icon>add</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'addNewComponent' | translate }}</md-tooltip>
+    </md-button>
+    <md-button id='importComponentButton'
+        ng-if='$ctrl.showStepButtons && !projectController.isGroupNode($ctrl.node.id)'
+        class='topButton md-raised md-primary'
+        ng-click='$ctrl.importComponent()'
+        ng-disabled='$ctrl.getSelectedComponentIds().length != 0 || $ctrl.insertComponentMode'>
+      <md-icon>system_update_alt</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'importComponent' | translate }}</md-tooltip>
+    </md-button>
+    <md-button id='moveComponentButton'
+        ng-if='$ctrl.showStepButtons && !projectController.isGroupNode($ctrl.node.id)'
+        class='topButton md-raised md-primary'
+        ng-click='$ctrl.moveButtonClicked()'
+        ng-disabled='$ctrl.insertComponentMode'>
+      <md-icon>redo</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'move' | translate }}</md-tooltip>
+    </md-button>
+    <md-button id='copyComponentButton'
+        ng-if='$ctrl.showStepButtons && !projectController.isGroupNode($ctrl.node.id)'
+        class='topButton md-raised md-primary'
+        ng-click='$ctrl.copyButtonClicked()'
+        ng-disabled='$ctrl.insertComponentMode'>
+      <md-icon>content_copy</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'copy' | translate }}</md-tooltip>
+    </md-button>
+    <md-button id='deleteComponentButton'
+        ng-if='$ctrl.showStepButtons && !projectController.isGroupNode($ctrl.node.id)'
+        class='topButton md-raised md-primary'
+        ng-click='$ctrl.deleteButtonClicked()'
+        ng-disabled='$ctrl.insertComponentMode'>
+      <md-icon>delete</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'DELETE' | translate }}</md-tooltip>
+    </md-button>
+    <md-button id='editStepRubricButton' class='topButton md-raised md-primary'
+        ng-click='$ctrl.editRubric()'
+        ng-disabled='$ctrl.getSelectedComponentIds().length != 0 || $ctrl.insertComponentMode'
+        ng-if='$ctrl.showStepButtons'>
+      <md-icon>message</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'editStepRubric' | translate }}</md-tooltip>
+    </md-button>
+    <md-button id='stepAdvancedButton' class='topButton md-raised md-primary'
+        ng-click='$ctrl.showAdvancedView()'
+        ng-disabled='$ctrl.getSelectedComponentIds().length != 0 || $ctrl.insertComponentMode'
+        ng-if='$ctrl.showStepButtons'>
+      <md-icon>build</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'ADVANCED' | translate }}</md-tooltip>
+    </md-button>
+    <md-button id='stepUndoButton' class='topButton md-raised md-primary' ng-click='$ctrl.undo()'
+        ng-if='!projectController.isGroupNode($ctrl.node.id) && $ctrl.showStepButtons'
+        ng-disabled='$ctrl.getSelectedComponentIds().length != 0 || $ctrl.undoStack.length == 0 || $ctrl.insertComponentMode'>
+      <md-icon>undo</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'undo' | translate }}</md-tooltip>
+    </md-button>
+    <span flex></span>
+    <md-button id='stepPreviewButton' class='topButton md-raised md-primary' ng-click='$ctrl.previewStepInNewWindow()'
+        ng-if='!projectController.isGroupNode($ctrl.node.id)'
+        ng-disabled='$ctrl.showEditTransitions || $ctrl.insertComponentMode'>
+      <md-icon>visibility</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'previewStep' | translate }}</md-tooltip>
+    </md-button>
+    <md-button id='stepPreviewWithouConstraintsButton' class='topButton md-raised md-primary' ng-click="$ctrl.previewStepWithoutConstraintsInNewWindow()"
+        ng-if='!projectController.isGroupNode($ctrl.node.id)'
+        ng-disabled='$ctrl.showEditTransitions || $ctrl.insertComponentMode'>
+      <md-icon>visibility_off</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'previewStepWithoutConstraints' | translate }}</md-tooltip>
+    </md-button>
+  </div>
+  <div ng-if='$ctrl.insertComponentMode' layout='row' style='margin-left: 10px; height:50px'>
+    <div layout='row'>
+      <h6 translate="chooseNewLocation"></h6>
+    </div>
+    <div layout='row'>
+      <md-button class='createButton md-raised md-primary'
+          ng-click='$ctrl.cancelInsertClicked()'
+          aria-label="{{ ::'CANCEL' | translate }}"
+          translate="CANCEL"></md-button>
+    </div>
+  </div>
+</div>
+<!-- input for changing the step title -->
+<div ng-if='$ctrl.showComponents && !$ctrl.insertComponentMode'>
+  <div layout='row' style='margin-left: 10px; max-height: 60px;'>
+    <div layout='row' style='margin-top: 18px; margin-right: 10px;'>
+      <h6 ng-if="!projectController.isGroupNode($ctrl.node.id)">{{ ::'stepTitle' | translate }} {{ $ctrl.nodePosition }}:</h6>
+      <h6 ng-if="projectController.isGroupNode($ctrl.node.id)">{{ ::'activityTitle' | translate }} {{ $ctrl.nodePosition }}:</h6>
+    </div>
+    <div layout='row'>
+      <md-input-container style="width:500px">
+        <input ng-model='$ctrl.node.title'
+            ng-change='$ctrl.authoringViewNodeChanged()'
+            ng-model-options='{ debounce: 500 }'
+            aria-label='{{ ::"title" | translate }}'
+            size='60'/>
+      </md-input-container>
+    </div>
+  </div>
+</div>
+<div style='margin-left: 45px;' ng-if='$ctrl.insertComponentMode'>
+  <md-button class='moveComponentButton md-raised md-primary'
+      ng-click='$ctrl.insertComponentAsFirst()'>
+    <md-icon>keyboard_backspace</md-icon>
+    <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'insertAsFirstComponent' | translate }}</md-tooltip>
+  </md-button>
+  <span style='font-weight:bold; margin-right:10px'>{{ ::'insertAsFirstComponent' | translate }}</span>
+</div>
+<div style='margin-left: 45px; margin-top: 45px; font-size: 1em; font-weight: bold;' ng-if='$ctrl.showComponents &&
+   $ctrl.components.length === 0 && !$ctrl.insertComponentMode && $ctrl.node.type != "group"''>
+   <em>{{ ::'stepHasNoComponents' | translate }}</em>
+</div>
+<div ng-repeat='(componentIndex, component) in $ctrl.components'
+    class='component md-padding'
+    style='padding: 0; margin: 0 16px;'
+    ng-if='$ctrl.showComponents'>
+  <div id='{{component.id}}' layout='row'>
+    <div style='margin-top: 15px; width: 300px;'>
+      <md-checkbox ng-model='$ctrl.componentsToChecked[component.id]'
+          ng-disabled='$ctrl.insertComponentMode'
+          class='md-primary'>
+        <span style='font-weight:bold; margin-right:10px'>{{(componentIndex + 1)}}. {{::$ctrl.getComponentTypeLabel(component.type)}}</span>
+      </md-checkbox>
+    </div>
+    <div ng-if='!$ctrl.insertComponentMode && $ctrl.showComponentAuthoringViews'>
+      <md-input-container style='margin-top: 0; margin-right: 20px; width: 150px; height: 40px;'>
+        <md-button class='topButton md-raised md-primary'
+            ng-click='$ctrl.showComponentAdvancedAuthoring(component)'>
+          <md-icon>build</md-icon>
+          <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'ADVANCED' | translate }}</md-tooltip>
+        </md-button>
+      </md-input-container>
+    </div>
+  </div>
+  <div style='height: 30px; margin-top: 10px; margin-left: 30px;' ng-if='$ctrl.insertComponentMode'>
+    <md-button class='moveComponentButton md-raised md-primary'
+        style='margin-top: 0;'
+        ng-click='$ctrl.insertComponentAfter(component.id)'>
+      <md-icon>keyboard_backspace</md-icon>
+      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::"insertAfter" | translate }}</md-tooltip>
+    </md-button>
+  </div>
+  <div ng-if="$ctrl.showComponentAuthoringViews">
+    <ng-content ng-switch="::component.type">
+      <animation-authoring ng-switch-when="Animation" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></animation-authoring>
+      <audio-oscillator-authoring ng-switch-when="AudioOscillator" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></audio-oscillator-authoring>
+      <concept-map-authoring ng-switch-when="ConceptMap" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></concept-map-authoring>
+      <discussion-authoring ng-switch-when="Discussion" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></discussion-authoring>
+      <draw-authoring ng-switch-when="Draw" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></draw-authoring>
+      <embedded-authoring ng-switch-when="Embedded" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></embedded-authoring>
+      <graph-authoring ng-switch-when="Graph" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></graph-authoring>
+      <html-authoring ng-switch-when="HTML" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></html-authoring>
+      <label-authoring ng-switch-when="Label" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></label-authoring>
+      <match-authoring ng-switch-when="Match" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></match-authoring>
+      <multiple-choice-authoring ng-switch-when="MultipleChoice" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></multiple-choice-authoring>
+      <open-response-authoring ng-switch-when="OpenResponse" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></open-response-authoring>
+      <outside-url-authoring ng-switch-when="OutsideURL" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></outside-url-authoring>
+      <summary-authoring ng-switch-when="Summary" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></summary-authoring>
+      <table-authoring ng-switch-when="Table" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></table-authoring>
+    </ng-content>
+    <div ng-style='{"border": "5px solid black"}'>
+      <div ng-style='{"padding-top": "20px", "padding-left": "20px"}'>
+        <h5>{{ ::'studentPreview' | translate }}</h5>
+      </div>
+      <preview-component node-id='{{$ctrl.nodeId}}' component-content='component'/>
+    </div>
+    <md-divider ng-if='!$last'></md-divider>
+  </div>
+</div>
+</div>

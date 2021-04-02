@@ -48,7 +48,6 @@ class NodeAuthoringController {
     '$filter',
     '$injector',
     '$mdDialog',
-    '$scope',
     '$state',
     '$stateParams',
     '$timeout',
@@ -62,10 +61,9 @@ class NodeAuthoringController {
 
   constructor(
     private $anchorScroll: any,
-    private $filter: any,
+    $filter: any,
     private $injector: any,
     private $mdDialog: any,
-    private $scope: any,
     private $state: any,
     private $stateParams: any,
     private $timeout: any,
@@ -76,9 +74,12 @@ class NodeAuthoringController {
     private TeacherDataService: TeacherDataService,
     private UtilService: UtilService
   ) {
-    this.$translate = this.$filter('translate');
-    this.projectId = $stateParams.projectId;
-    this.nodeId = $stateParams.nodeId;
+    this.$translate = $filter('translate');
+  }
+
+  $onInit() {
+    this.projectId = this.$stateParams.projectId;
+    this.nodeId = this.$stateParams.nodeId;
     this.TeacherDataService.setCurrentNodeByNodeId(this.nodeId);
     this.node = this.ProjectService.getNodeById(this.nodeId);
     this.nodePosition = this.ProjectService.getNodePositionById(this.nodeId);
@@ -124,23 +125,12 @@ class NodeAuthoringController {
     } else {
       this.scrollToTopOfPage();
     }
-
-    this.$scope.$on('$destroy', () => {
-      this.ngOnDestroy();
-    });
-  }
-
-  $onInit() {
     this.nodeChangedSubscription = this.ProjectService.nodeChanged$.subscribe((doParseProject) => {
       this.authoringViewNodeChanged(doParseProject);
     });
   }
 
-  ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
+  $onDestroy() {
     this.componentShowSubmitButtonValueChangedSubscription.unsubscribe();
     this.nodeChangedSubscription.unsubscribe();
   }
@@ -275,10 +265,9 @@ class NodeAuthoringController {
   getSelectedComponentIds() {
     const selectedComponents = [];
     if (this.components != null) {
-      for (let component of this.components) {
+      for (const component of this.components) {
         if (component != null && component.id != null) {
-          let checked = this.componentsToChecked[component.id];
-          if (checked) {
+          if (this.componentsToChecked[component.id]) {
             selectedComponents.push(component.id);
           }
         }
@@ -301,14 +290,13 @@ class NodeAuthoringController {
    * ]
    */
   getSelectedComponentNumbersAndTypes() {
-    let selectedComponents = [];
+    const selectedComponents = [];
     if (this.components != null) {
       for (let c = 0; c < this.components.length; c++) {
-        let component = this.components[c];
+        const component = this.components[c];
         if (component != null && component.id != null) {
-          let checked = this.componentsToChecked[component.id];
-          if (checked) {
-            let componentNumberAndType = c + 1 + '. ' + component.type;
+          if (this.componentsToChecked[component.id]) {
+            const componentNumberAndType = c + 1 + '. ' + component.type;
             selectedComponents.push(componentNumberAndType);
           }
         }
@@ -348,11 +336,6 @@ class NodeAuthoringController {
       alert(this.$translate('pleaseSelectAComponentToDeleteAndThenClickTheDeleteButtonAgain'));
     } else {
       this.scrollToTopOfPage();
-
-      /*
-       * hide all the component authoring so that the author only sees the
-       * component numbers and component types
-       */
       this.hideComponentAuthoring();
 
       /*
@@ -466,17 +449,16 @@ class NodeAuthoringController {
    * components at the beginning of the step.
    */
   handleCopyComponent(componentId = null) {
-    let newComponents = [];
-    let selectedComponentIds = this.getSelectedComponentIds();
-    let componentsCopied = this.getComponentObjectsForEventData(selectedComponentIds);
-    newComponents = this.ProjectService.copyComponentAndInsert(
+    const selectedComponentIds = this.getSelectedComponentIds();
+    const componentsCopied = this.getComponentObjectsForEventData(selectedComponentIds);
+    const newComponents = this.ProjectService.copyComponentAndInsert(
       this.nodeId,
       selectedComponentIds,
       componentId
     );
     for (let c = 0; c < componentsCopied.length; c++) {
-      let componentCopied = componentsCopied[c];
-      let newComponent = newComponents[c];
+      const componentCopied = componentsCopied[c];
+      const newComponent = newComponents[c];
       componentCopied.fromComponentId = componentCopied.componentId;
       componentCopied.toComponentId = newComponent.id;
       delete componentCopied.componentId;
@@ -524,7 +506,7 @@ class NodeAuthoringController {
          */
         this.$timeout(() => {
           if (newComponents != null && newComponents.length > 0) {
-            let componentElement = $('#' + newComponents[0].id);
+            const componentElement = $('#' + newComponents[0].id);
             if (componentElement != null) {
               $('#content').animate(
                 {
@@ -581,17 +563,16 @@ class NodeAuthoringController {
    */
   getComponentObjectsForEventData(componentIds) {
     const componentObjects = [];
-    for (let componentId of componentIds) {
+    for (const componentId of componentIds) {
       const component = this.ProjectService.getComponentByNodeIdAndComponentId(
         this.nodeId,
         componentId
       );
       if (component != null) {
-        const tempComponent = {
+        componentObjects.push({
           componentId: component.id,
           type: component.type
-        };
-        componentObjects.push(tempComponent);
+        });
       }
     }
     return componentObjects;
@@ -621,4 +602,7 @@ class NodeAuthoringController {
   }
 }
 
-export default NodeAuthoringController;
+export const NodeAuthoringComponent = {
+  templateUrl: `/wise5/authoringTool/node/nodeAuthoring.html`,
+  controller: NodeAuthoringController
+};
