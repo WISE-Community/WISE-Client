@@ -11,7 +11,7 @@ import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherWebSocketService } from '../services/teacherWebSocketService';
 import { AdvancedProjectAuthoringComponent } from '../authoringTool/advanced/advanced-project-authoring.component';
 import AuthoringToolController from '../authoringTool/authoringToolController';
-import AuthoringToolMainController from '../authoringTool/main/authoringToolMainController';
+import { MainAuthoringComponent } from '../authoringTool/main/mainAuthoringComponent';
 import AuthorNotebookController from '../authoringTool/notebook/authorNotebookController';
 import ClassroomMonitorController from '../classroomMonitor/classroomMonitorController';
 import DataExportController from '../classroomMonitor/dataExport/dataExportController';
@@ -25,10 +25,10 @@ import { NodeAdvancedConstraintAuthoringComponent } from '../authoringTool/node/
 import { NodeAdvancedGeneralAuthoringComponent } from '../authoringTool/node/advanced/general/node-advanced-general-authoring.component';
 import { NodeAdvancedJsonAuthoringComponent } from '../authoringTool/node/advanced/json/node-advanced-json-authoring.component';
 import { NodeAdvancedPathAuthoringComponent } from '../authoringTool/node/advanced/path/node-advanced-path-authoring.component';
-import NodeAuthoringController from '../authoringTool/node/nodeAuthoringController';
+import { NodeAuthoringComponent } from '../authoringTool/node/nodeAuthoringComponent';
 import NotebookGradingController from '../classroomMonitor/notebook/notebookGradingController';
 import ProjectAssetController from '../authoringTool/asset/projectAssetController';
-import ProjectController from '../authoringTool/project/projectController';
+import { ProjectAuthoringComponent } from '../authoringTool/project/projectAuthoringComponent';
 import ProjectInfoController from '../authoringTool/info/projectInfoController';
 import { RubricAuthoringComponent } from '../authoringTool/rubric/rubric-authoring.component';
 import StudentGradingController from '../classroomMonitor/studentGrading/studentGradingController';
@@ -173,7 +173,7 @@ angular
     }) as angular.IDirectiveFactory
   )
   .controller('AuthoringToolController', AuthoringToolController)
-  .controller('AuthoringToolMainController', AuthoringToolMainController)
+  .component('mainAuthoringComponent', MainAuthoringComponent)
   .controller('AuthorNotebookController', AuthorNotebookController)
   .controller('ClassroomMonitorController', ClassroomMonitorController)
   .controller('DataExportController', DataExportController)
@@ -184,10 +184,10 @@ angular
     'milestones',
     downgradeComponent({ component: MilestonesComponent }) as angular.IDirectiveFactory
   )
-  .controller('NodeAuthoringController', NodeAuthoringController)
+  .component('nodeAuthoringComponent', NodeAuthoringComponent)
   .controller('NotebookGradingController', NotebookGradingController)
   .controller('ProjectAssetController', ProjectAssetController)
-  .controller('ProjectController', ProjectController)
+  .component('projectAuthoringComponent', ProjectAuthoringComponent)
   .controller('ProjectInfoController', ProjectInfoController)
   .directive(
     'rubricAuthoringComponent',
@@ -216,9 +216,7 @@ angular
         })
         .state('root.at.main', {
           url: '/home',
-          templateUrl: '/assets/wise5/authoringTool/main/main.html',
-          controller: 'AuthoringToolMainController',
-          controllerAs: 'authoringToolMainController',
+          component: 'mainAuthoringComponent',
           resolve: {
             config: [
               'ConfigService',
@@ -238,9 +236,7 @@ angular
         })
         .state('root.at.project', {
           url: '/unit/:projectId',
-          templateUrl: '/assets/wise5/authoringTool/project/project.html',
-          controller: 'ProjectController',
-          controllerAs: 'projectController',
+          component: 'projectAuthoringComponent',
           resolve: {
             projectConfig: [
               'ConfigService',
@@ -281,9 +277,7 @@ angular
         })
         .state('root.at.project.node', {
           url: '/node/:nodeId',
-          templateUrl: '/assets/wise5/authoringTool/node/node.html',
-          controller: 'NodeAuthoringController',
-          controllerAs: 'nodeAuthoringController',
+          component: 'nodeAuthoringComponent',
           resolve: {},
           params: {
             newComponents: []

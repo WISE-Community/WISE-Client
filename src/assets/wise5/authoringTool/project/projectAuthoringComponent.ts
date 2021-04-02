@@ -8,7 +8,7 @@ import * as angular from 'angular';
 import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
 
-class ProjectController {
+class ProjectAuthoringController {
   $translate: any;
   createGroupTitle: string;
   projectId: number;
@@ -19,7 +19,6 @@ class ProjectController {
   projectTitle: string;
   showCreateGroup: boolean = false;
   showCreateNode: boolean = false;
-
   inactiveGroupNodes: any[];
   inactiveStepNodes: any[];
   inactiveNodes: any[];
@@ -60,7 +59,6 @@ class ProjectController {
   static $inject = [
     '$filter',
     '$mdDialog',
-    '$scope',
     '$state',
     '$stomp',
     '$timeout',
@@ -75,7 +73,6 @@ class ProjectController {
   constructor(
     $filter,
     private $mdDialog,
-    private $scope,
     private $state,
     private $stomp,
     private $timeout,
@@ -87,10 +84,9 @@ class ProjectController {
     private UtilService: UtilService
   ) {
     this.$translate = $filter('translate');
-    this.ConfigService = ConfigService;
-    this.ProjectService = ProjectService;
-    this.TeacherDataService = TeacherDataService;
-    this.UtilService = UtilService;
+  }
+
+  $onInit() {
     this.projectId = this.ConfigService.getProjectId();
     this.runId = this.ConfigService.getRunId();
     this.items = this.ProjectService.idToOrder;
@@ -140,16 +136,13 @@ class ProjectController {
      */
     this.$mdDialog.hide();
 
-    this.$scope.$on('$destroy', () => {
-      this.endProjectAuthoringSession();
-    });
-
     this.$window.onbeforeunload = (event) => {
       this.endProjectAuthoringSession();
     };
   }
 
   $onDestroy() {
+    this.endProjectAuthoringSession();
     this.refreshProjectSubscription.unsubscribe();
     this.scrollToBottomOfPageSubscription.unsubscribe();
   }
@@ -313,7 +306,6 @@ class ProjectController {
           nodeId: newNode.id,
           title: this.ProjectService.getNodePositionAndTitleByNodeId(newNode.id)
         };
-
         if (this.ProjectService.isGroupNode(newNode.id)) {
           this.saveEvent('activityCreated', 'Authoring', nodeCreatedEventData);
         } else {
@@ -591,7 +583,6 @@ class ProjectController {
         }
       }
     }
-
     return selectedItemTypes;
   }
 
@@ -916,8 +907,7 @@ class ProjectController {
   }
 
   getNumberOfConstraintsOnNode(nodeId) {
-    const constraints = this.ProjectService.getConstraintsOnNode(nodeId);
-    return constraints.length;
+    return this.ProjectService.getConstraintsOnNode(nodeId).length;
   }
 
   getConstraintDescriptions(nodeId) {
@@ -956,4 +946,7 @@ class ProjectController {
   }
 }
 
-export default ProjectController;
+export const ProjectAuthoringComponent = {
+  templateUrl: `/wise5/authoringTool/project/projectAuthoring.html`,
+  controller: ProjectAuthoringController
+};
