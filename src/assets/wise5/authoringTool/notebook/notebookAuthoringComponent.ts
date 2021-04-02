@@ -5,7 +5,7 @@ import { SpaceService } from '../../services/spaceService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { UtilService } from '../../services/utilService';
 
-class AuthorNotebookController {
+class NotebookAuthoringController {
   $translate: any;
   isPublicNotebookEnabled: boolean;
   projectId: number;
@@ -22,15 +22,18 @@ class AuthorNotebookController {
   ];
 
   constructor(
-    $filter,
-    $stateParams,
+    $filter: any,
+    private $stateParams: any,
     private ConfigService: ConfigService,
     private ProjectService: TeacherProjectService,
     private SpaceService: SpaceService,
     private UtilService: UtilService
   ) {
     this.$translate = $filter('translate');
-    this.projectId = $stateParams.projectId;
+  }
+
+  $onInit() {
+    this.projectId = this.$stateParams.projectId;
     this.project = this.ProjectService.project;
     this.reportIdToAuthoringNote = {};
 
@@ -47,7 +50,6 @@ class AuthorNotebookController {
 
     this.initializeStudentNotesAuthoring();
     this.initializeTeacherNotesAuthoring();
-
     this.isPublicNotebookEnabled = this.ProjectService.isSpaceExists('public');
   }
 
@@ -111,10 +113,9 @@ class AuthorNotebookController {
   reportStarterTextChanged(reportId) {
     const note = this.getReportNote(reportId);
     const authoringNote = this.getAuthoringReportNote(reportId);
-    let html = authoringNote.html;
-    html = this.ConfigService.removeAbsoluteAssetPaths(html);
-    html = this.UtilService.insertWISELinks(html);
-    note.content = html;
+    note.content = this.UtilService.insertWISELinks(
+      this.ConfigService.removeAbsoluteAssetPaths(authoringNote.html)
+    );
     this.save();
   }
 
@@ -139,4 +140,7 @@ class AuthorNotebookController {
   }
 }
 
-export default AuthorNotebookController;
+export const NotebookAuthoringComponent = {
+  templateUrl: `/wise5/authoringTool/notebook/notebookAuthoring.html`,
+  controller: NotebookAuthoringController
+};

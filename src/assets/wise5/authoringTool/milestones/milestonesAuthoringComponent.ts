@@ -34,6 +34,21 @@ class MilestonesAuthoringController {
     private UtilService: UtilService
   ) {
     this.$translate = this.$filter('translate');
+  }
+
+  $onInit() {
+    this.project = this.ProjectService.project;
+    this.idToOrder = this.ProjectService.idToOrder;
+    this.nodeIds = this.getStepNodeIds();
+    if (this.project.achievements == null) {
+      this.initializeMilestones();
+    }
+    this.milestoneIds = this.getMilestoneIds();
+    this.milestoneSatisfyCriteriaIds = this.getMilestoneSatisfyCriteriaIds();
+    this.reportIds = this.getReportIds();
+    this.templateIds = this.getTemplateIds();
+    this.templateSatisfyCriteriaIds = this.getTemplateSatisfyCriteriaIds();
+    this.populateIdToExpanded();
     this.availableSatisfyCriteriaFunctions = [
       {
         value: 'percentOfScoresLessThan',
@@ -56,21 +71,6 @@ class MilestonesAuthoringController {
         text: this.$translate('percentOfScoresEqualTo')
       }
     ];
-  }
-
-  $onInit() {
-    this.project = this.ProjectService.project;
-    this.idToOrder = this.ProjectService.idToOrder;
-    this.nodeIds = this.getStepNodeIds();
-    if (this.project.achievements == null) {
-      this.initializeMilestones();
-    }
-    this.milestoneIds = this.getMilestoneIds();
-    this.milestoneSatisfyCriteriaIds = this.getMilestoneSatisfyCriteriaIds();
-    this.reportIds = this.getReportIds();
-    this.templateIds = this.getTemplateIds();
-    this.templateSatisfyCriteriaIds = this.getTemplateSatisfyCriteriaIds();
-    this.populateIdToExpanded();
   }
 
   initializeMilestones() {
@@ -464,4 +464,7 @@ class MilestonesAuthoringController {
   }
 }
 
-export default MilestonesAuthoringController;
+export const MilestonesAuthoringComponent = {
+  templateUrl: `/wise5/authoringTool/milestones/milestonesAuthoring.html`,
+  controller: MilestonesAuthoringController
+};

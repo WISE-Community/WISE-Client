@@ -5,7 +5,7 @@ import { ConfigService } from '../../services/configService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import * as $ from 'jquery';
 
-class ProjectAssetController {
+export class ProjectAssetAuthoringController {
   $translate: any;
   projectId: number;
   projectAssets: any;
@@ -36,10 +36,8 @@ class ProjectAssetController {
   static $inject = [
     '$filter',
     '$mdDialog',
-    '$rootScope',
     '$state',
     '$stateParams',
-    '$scope',
     '$timeout',
     'ConfigService',
     'ProjectAssetService',
@@ -49,16 +47,17 @@ class ProjectAssetController {
   constructor(
     $filter: any,
     private $mdDialog: any,
-    private $rootScope: any,
     private $state: any,
     private $stateParams: any,
-    private $scope: any,
     private $timeout: any,
     private ConfigService: ConfigService,
     private ProjectAssetService: ProjectAssetService,
     private UtilService: UtilService
   ) {
     this.$translate = $filter('translate');
+  }
+
+  $onInit() {
     this.projectId = this.$stateParams.projectId;
     this.totalFileSize = 0;
     this.totalUnusedFilesSize = 0;
@@ -69,27 +68,21 @@ class ProjectAssetController {
       if (stateParams.isPopup != null) {
         this.isPopup = true;
       }
-
       if (stateParams.projectId != null) {
         this.projectId = stateParams.projectId;
       }
-
       if (stateParams.nodeId != null) {
         this.nodeId = stateParams.nodeId;
       }
-
       if (stateParams.componentId != null) {
         this.componentId = stateParams.componentId;
       }
-
       if (stateParams.target != null) {
         this.target = stateParams.target;
       }
-
       if (stateParams.targetObject != null) {
         this.targetObject = stateParams.targetObject;
       }
-
       if (stateParams.allowedFileTypes != null) {
         this.allowedFileTypes = this.$stateParams.allowedFileTypes;
       }
@@ -120,13 +113,9 @@ class ProjectAssetController {
     if (this.ProjectAssetService.isProjectAssetsAvailable()) {
       this.ProjectAssetService.calculateAssetUsage();
     }
-
-    this.$scope.$on('$destroy', () => {
-      this.unsubscribeAll();
-    });
   }
 
-  unsubscribeAll() {
+  $onDestory() {
     this.getProjectAssetsSubscription.unsubscribe();
     this.getTotalFileSizeSubscription.unsubscribe();
     this.getTotalUnusedFileSizeSubscription.unsubscribe();
@@ -172,10 +161,6 @@ class ProjectAssetController {
     return 0;
   }
 
-  /**
-   * Delete an asset from the project after confirming with the user
-   * @param assetItem the asset to delete
-   */
   deleteAsset(assetItem) {
     const message = `${this.$translate('areYouSureYouWantToDeleteThisFile')}\n\n${
       assetItem.fileName
@@ -201,11 +186,6 @@ class ProjectAssetController {
     this.$mdDialog.hide(params);
   }
 
-  /**
-   * Upload all the small files. If there are any large files, we will confirm with the author
-   * that they want to upload those files.
-   * @param files An array of file objects.
-   */
   uploadAssetItems(files) {
     let performUploadOfAllFiles = true;
     const largeAndSmallFiles = this.separateLargeAndSmallFiles(files);
@@ -341,4 +321,7 @@ class ProjectAssetController {
   }
 }
 
-export default ProjectAssetController;
+export const ProjectAssetAuthoringComponent = {
+  templateUrl: `/wise5/authoringTool/asset/assetAuthoring.html`,
+  controller: ProjectAssetAuthoringController
+};

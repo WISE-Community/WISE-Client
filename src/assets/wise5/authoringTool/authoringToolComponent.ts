@@ -10,15 +10,7 @@ import { TeacherProjectService } from '../services/teacherProjectService';
 
 @Directive()
 class AuthoringToolController {
-  $anchorScroll: any;
-  $filter: any;
-  $mdDialog: any;
-  $rootScope: any;
-  $scope: any;
-  $state: any;
-  $transitions: any;
   $translate: any;
-  $timeout: any;
   currentViewName: string;
   isMenuOpen: boolean = false;
   logoPath: string;
@@ -30,11 +22,6 @@ class AuthoringToolController {
   showStepTools: boolean = false;
   showToolbar: boolean = true;
   views: any;
-  ConfigService: ConfigService;
-  NotificationService: NotificationService;
-  ProjectService: TeacherProjectService;
-  SessionService: SessionService;
-  TeacherDataService: TeacherDataService;
   errorSavingProjectSubscription: Subscription;
   notAllowedToEditThisProjectSubscription: Subscription;
   notLoggedInProjectNotSavedSubscription: Subscription;
@@ -46,8 +33,6 @@ class AuthoringToolController {
     '$anchorScroll',
     '$filter',
     '$mdDialog',
-    '$rootScope',
-    '$scope',
     '$state',
     '$transitions',
     '$timeout',
@@ -59,35 +44,23 @@ class AuthoringToolController {
   ];
 
   constructor(
-    $anchorScroll,
+    private $anchorScroll: any,
     $filter,
-    $mdDialog,
-    $rootScope,
-    $scope,
-    $state,
-    $transitions,
-    $timeout,
-    ConfigService,
-    NotificationService,
-    ProjectService,
-    SessionService,
-    TeacherDataService
+    private $mdDialog: any,
+    private $state: any,
+    private $transitions: any,
+    private $timeout: any,
+    private ConfigService: ConfigService,
+    private NotificationService: NotificationService,
+    private ProjectService: TeacherProjectService,
+    private SessionService: SessionService,
+    private TeacherDataService: TeacherDataService
   ) {
-    this.$anchorScroll = $anchorScroll;
-    this.$filter = $filter;
-    this.$mdDialog = $mdDialog;
-    this.$rootScope = $rootScope;
-    this.$scope = $scope;
-    this.$state = $state;
-    this.$transitions = $transitions;
-    this.$timeout = $timeout;
-    this.$translate = this.$filter('translate');
-    this.ConfigService = ConfigService;
-    this.NotificationService = NotificationService;
-    this.ProjectService = ProjectService;
-    this.SessionService = SessionService;
-    this.TeacherDataService = TeacherDataService;
-    this.logoPath = ProjectService.getThemePath() + '/images/WISE-logo-ffffff.svg';
+    this.$translate = $filter('translate');
+  }
+
+  $onInit() {
+    this.logoPath = this.ProjectService.getThemePath() + '/images/WISE-logo-ffffff.svg';
     this.views = {
       'root.at.project': {
         id: 'projectHomeButton',
@@ -226,7 +199,7 @@ class AuthoringToolController {
     };
     this.processUI();
 
-    $transitions.onSuccess({}, ($transition) => {
+    this.$transitions.onSuccess({}, ($transition) => {
       this.isMenuOpen = false;
       this.processUI();
       if ($transition.name === 'root.at.main') {
@@ -300,17 +273,9 @@ class AuthoringToolController {
         this.setGlobalMessage(this.$translate('notAllowedToEditThisProject'), false, null);
       }, 1000);
     }
-
-    this.$scope.$on('$destroy', () => {
-      this.ngOnDestroy();
-    });
   }
 
-  ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
+  $onDestroy() {
     this.errorSavingProjectSubscription.unsubscribe();
     this.notAllowedToEditThisProjectSubscription.unsubscribe();
     this.notLoggedInProjectNotSavedSubscription.unsubscribe();
@@ -407,4 +372,7 @@ class AuthoringToolController {
   }
 }
 
-export default AuthoringToolController;
+export const AuthoringToolComponent = {
+  templateUrl: `/wise5/authoringTool/authoringTool.html`,
+  controller: AuthoringToolController
+};
