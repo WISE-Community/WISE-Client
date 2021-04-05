@@ -49,8 +49,13 @@ class PreviewComponentController {
 
   compileComponent() {
     this.$scope.componentContent = this.ProjectService.injectAssetPaths(this.componentContent);
-    const componentHTML = `<div class="component__wrapper">
-          <div ng-include="::componentTemplatePath" class="component__content component__content--{{::type}}"></div>
+    const componentHTML = `<div ng-switch="type" class="component__wrapper">
+          <div ng-switch-when="HTML" ng-switch-when-separator="|">
+            <html-student ng-if="type === 'HTML'" [node-id]="nodeId" [component-content]="componentContent"></html-student>
+          </div>
+          <div ng-switch-default>
+            <div ng-include="::componentTemplatePath" class="component__content component__content--{{::type}}"></div>
+          </div>
         </div>`;
     this.$element.html(componentHTML);
     this.$compile(this.$element.contents())(this.$scope);
