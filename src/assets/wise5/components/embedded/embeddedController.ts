@@ -152,11 +152,8 @@ class EmbeddedController extends ComponentController {
 
   ngOnDestroy() {
     super.ngOnDestroy();
-    this.$window.removeEventListener('message', this.messageEventListener);
-  }
-
-  unsubscribeAll() {
     this.siblingComponentStudentDataChangedSubscription.unsubscribe();
+    this.$window.removeEventListener('message', this.messageEventListener);
   }
 
   setWidthAndHeight(width, height) {

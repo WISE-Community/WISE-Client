@@ -186,10 +186,6 @@ class GraphController extends ComponentController {
 
   ngOnDestroy() {
     super.ngOnDestroy();
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.deleteKeyPressedSubscription.unsubscribe();
   }
 

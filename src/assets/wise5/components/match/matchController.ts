@@ -190,10 +190,7 @@ class MatchController extends ComponentController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
+    super.ngOnDestroy();
     if (this.notebookUpdatedSubscription != null) {
       this.notebookUpdatedSubscription.unsubscribe();
     }
