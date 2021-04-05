@@ -1,14 +1,17 @@
 'use strict';
 
 import * as angular from 'angular';
-import { downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { HTMLService } from './htmlService';
-import HTMLController from './htmlController';
+import { HtmlStudent } from './html-student/html-student.component';
 
 const htmlComponentModule = angular
   .module('htmlComponentModule', [])
   .service('HTMLService', downgradeInjectable(HTMLService))
-  .controller('HTMLController', HTMLController)
+  .directive(
+    'htmlStudent',
+    downgradeComponent({ component: HtmlStudent }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {
