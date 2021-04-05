@@ -51,10 +51,6 @@ export class LabelAuthoring extends ComponentAuthoring {
 
   ngOnDestroy() {
     super.ngOnDestroy();
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.numberInputChangeSubscription.unsubscribe();
     this.textInputChangeSubscription.unsubscribe();
   }

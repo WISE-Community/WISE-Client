@@ -156,7 +156,8 @@ class DiscussionController extends ComponentController {
     this.broadcastDoneRenderingComponent();
   }
 
-  unsubscribeAll() {
+  ngOnDestroy() {
+    super.ngOnDestroy();
     this.studentWorkReceivedSubscription.unsubscribe();
   }
 

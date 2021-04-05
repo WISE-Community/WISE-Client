@@ -63,10 +63,6 @@ export class TableAuthoring extends ComponentAuthoring {
 
   ngOnDestroy() {
     super.ngOnDestroy();
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.numColumnsChangeSubscription.unsubscribe();
     this.numRowsChangeSubscription.unsubscribe();
     this.globalCellSizeChangeSubscription.unsubscribe();

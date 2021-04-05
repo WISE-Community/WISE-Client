@@ -81,10 +81,6 @@ class ComponentGradingController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.annotationSavedToServerSubscription.unsubscribe();
   }
 
