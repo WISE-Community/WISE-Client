@@ -10,14 +10,14 @@ import { StudentStatusService } from '../services/studentStatusService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherWebSocketService } from '../services/teacherWebSocketService';
 import { AdvancedProjectAuthoringComponent } from '../authoringTool/advanced/advanced-project-authoring.component';
-import AuthoringToolController from '../authoringTool/authoringToolController';
+import { AuthoringToolComponent } from '../authoringTool/authoringToolComponent';
 import { MainAuthoringComponent } from '../authoringTool/main/mainAuthoringComponent';
-import AuthorNotebookController from '../authoringTool/notebook/authorNotebookController';
+import { NotebookAuthoringComponent } from '../authoringTool/notebook/notebookAuthoringComponent';
 import ClassroomMonitorController from '../classroomMonitor/classroomMonitorController';
 import DataExportController from '../classroomMonitor/dataExport/dataExportController';
 import ExportController from '../classroomMonitor/dataExport/exportController';
 import ExportVisitsController from '../classroomMonitor/dataExport/exportVisitsController';
-import MilestonesAuthoringController from '../authoringTool/milestones/milestonesAuthoringController';
+import { MilestonesAuthoringComponent } from '../authoringTool/milestones/milestonesAuthoringComponent';
 import { MilestonesComponent } from '../../../app/classroom-monitor/milestones/milestones.component';
 import { NodeAdvancedAuthoringComponent } from '../authoringTool/node/advanced/node-advanced-authoring.component';
 import { NodeAdvancedBranchAuthoringComponent } from '../authoringTool/node/advanced/branch/node-advanced-branch-authoring.component';
@@ -27,9 +27,12 @@ import { NodeAdvancedJsonAuthoringComponent } from '../authoringTool/node/advanc
 import { NodeAdvancedPathAuthoringComponent } from '../authoringTool/node/advanced/path/node-advanced-path-authoring.component';
 import { NodeAuthoringComponent } from '../authoringTool/node/nodeAuthoringComponent';
 import NotebookGradingController from '../classroomMonitor/notebook/notebookGradingController';
-import ProjectAssetController from '../authoringTool/asset/projectAssetController';
+import {
+  ProjectAssetAuthoringController,
+  ProjectAssetAuthoringComponent
+} from '../authoringTool/asset/projectAssetAuthoringComponent';
 import { ProjectAuthoringComponent } from '../authoringTool/project/projectAuthoringComponent';
-import ProjectInfoController from '../authoringTool/info/projectInfoController';
+import { ProjectInfoAuthoringComponent } from '../authoringTool/info/projectInfoAuthoringComponent';
 import { RubricAuthoringComponent } from '../authoringTool/rubric/rubric-authoring.component';
 import StudentGradingController from '../classroomMonitor/studentGrading/studentGradingController';
 import StudentProgressController from '../classroomMonitor/studentProgress/studentProgressController';
@@ -172,23 +175,24 @@ angular
       component: WiseAuthoringTinymceEditorComponent
     }) as angular.IDirectiveFactory
   )
-  .controller('AuthoringToolController', AuthoringToolController)
+  .component('authoringToolComponent', AuthoringToolComponent)
   .component('mainAuthoringComponent', MainAuthoringComponent)
-  .controller('AuthorNotebookController', AuthorNotebookController)
+  .component('notebookAuthoringComponent', NotebookAuthoringComponent)
   .controller('ClassroomMonitorController', ClassroomMonitorController)
   .controller('DataExportController', DataExportController)
   .controller('ExportController', ExportController)
   .controller('ExportVisitsController', ExportVisitsController)
-  .controller('MilestonesAuthoringController', MilestonesAuthoringController)
+  .component('milestonesAuthoringComponent', MilestonesAuthoringComponent)
   .directive(
     'milestones',
     downgradeComponent({ component: MilestonesComponent }) as angular.IDirectiveFactory
   )
   .component('nodeAuthoringComponent', NodeAuthoringComponent)
   .controller('NotebookGradingController', NotebookGradingController)
-  .controller('ProjectAssetController', ProjectAssetController)
+  .component('projectAssetAuthoringComponent', ProjectAssetAuthoringComponent)
+  .controller('ProjectAssetAuthoringController', ProjectAssetAuthoringController)
   .component('projectAuthoringComponent', ProjectAuthoringComponent)
-  .controller('ProjectInfoController', ProjectInfoController)
+  .component('projectInfoAuthoringComponent', ProjectInfoAuthoringComponent)
   .directive(
     'rubricAuthoringComponent',
     downgradeComponent({ component: RubricAuthoringComponent }) as angular.IDirectiveFactory
@@ -209,10 +213,7 @@ angular
         .state('root.at', {
           url: '/edit',
           abstract: true,
-          templateUrl: '/assets/wise5/authoringTool/authoringTool.html',
-          controller: 'AuthoringToolController',
-          controllerAs: 'authoringToolController',
-          resolve: {}
+          component: 'authoringToolComponent'
         })
         .state('root.at.main', {
           url: '/home',
@@ -309,17 +310,11 @@ angular
         })
         .state('root.at.project.asset', {
           url: '/asset',
-          templateUrl: '/assets/wise5/authoringTool/asset/asset.html',
-          controller: 'ProjectAssetController',
-          controllerAs: 'projectAssetController',
-          resolve: {}
+          component: 'projectAssetAuthoringComponent'
         })
         .state('root.at.project.info', {
           url: '/info',
-          templateUrl: '/assets/wise5/authoringTool/info/info.html',
-          controller: 'ProjectInfoController',
-          controllerAs: 'projectInfoController',
-          resolve: {}
+          component: 'projectInfoAuthoringComponent'
         })
         .state('root.at.project.advanced', {
           url: '/advanced',
@@ -331,17 +326,11 @@ angular
         })
         .state('root.at.project.notebook', {
           url: '/notebook',
-          templateUrl: '/assets/wise5/authoringTool/notebook/notebookAuthoring.html',
-          controller: 'AuthorNotebookController',
-          controllerAs: 'authorNotebookController',
-          resolve: {}
+          component: 'notebookAuthoringComponent'
         })
         .state('root.at.project.milestones', {
           url: '/milestones',
-          templateUrl: '/assets/wise5/authoringTool/milestones/milestonesAuthoring.html',
-          controller: 'MilestonesAuthoringController',
-          controllerAs: 'milestonesAuthoringController',
-          resolve: {}
+          component: 'milestonesAuthoringComponent'
         })
         .state('root.cm', {
           url: '/manage/unit/:runId',

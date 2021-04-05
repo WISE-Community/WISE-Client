@@ -46,7 +46,7 @@ export class EditComponentJsonComponent {
     });
   }
 
-  ngOnDestory() {
+  ngOnDestroy() {
     this.jsonChangedSubscription.unsubscribe();
     this.nodeChangedSubscription.unsubscribe();
   }

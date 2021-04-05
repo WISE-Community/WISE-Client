@@ -11,18 +11,18 @@
   <br/>
   <md-select md-theme="at"
          class="node-select md-subhead"
-         ng-model="wiseLinkAuthoringController.wiseLinkNodeId"
+         ng-model="$ctrl.wiseLinkNodeId"
          placeholder="{{ ::'chooseAStep' | translate }}"
-         ng-change="wiseLinkAuthoringController.wiseLinkNodeIdChanged()"
+         ng-change="$ctrl.wiseLinkNodeIdChanged()"
          style="width:600px">
-    <md-option ng-repeat="item in wiseLinkAuthoringController.items | toArray | orderBy : 'order'"
+    <md-option ng-repeat="item in $ctrl.items | toArray | orderBy : 'order'"
            ng-if="item.$key != 'group0'"
            value="{{ item.$key }}"
-           ng-class="{'node-select-option--group': wiseLinkAuthoringController.isGroupNode(item.$key), 'node-select-option--node': !wiseLinkAuthoringController.isGroupNode(item.$key)}">
+           ng-class="{'node-select-option--group': $ctrl.isGroupNode(item.$key), 'node-select-option--node': !$ctrl.isGroupNode(item.$key)}">
       <span layout="row" layout-align="start center">
         <span class="node-select__text">
-          {{ ::wiseLinkAuthoringController.getNodePositionById(item.$key) + ': '}}
-          {{ ::wiseLinkAuthoringController.getNodeTitleByNodeId(item.$key) }}
+          {{ ::$ctrl.getNodePositionById(item.$key) + ': '}}
+          {{ ::$ctrl.getNodeTitleByNodeId(item.$key) }}
           ({{item.$key}})
         </span>
       </span>
@@ -30,11 +30,11 @@
   </md-select>
   <md-select md-theme="at"
       class="node-select md-subhead"
-      ng-model="wiseLinkAuthoringController.wiseLinkComponentId"
+      ng-model="$ctrl.wiseLinkComponentId"
       placeholder="{{ ::'chooseAComponentOptional' | translate }}"
       style="width:600px">
     <md-option
-        ng-repeat="(componentIndex, component) in wiseLinkAuthoringController.getComponentsByNodeId(wiseLinkAuthoringController.wiseLinkNodeId)"
+        ng-repeat="(componentIndex, component) in $ctrl.getComponentsByNodeId($ctrl.wiseLinkNodeId)"
         value="{{ component.id }}">
       <span layout="row" layout-align="start center">
         <span class="node-select__text">{{componentIndex + 1}}. {{component.type}}</span>
@@ -43,24 +43,20 @@
   </md-select>
   <br/>
 
-  <md-radio-group ng-model="wiseLinkAuthoringController.wiseLinkType" class="md-primary">
+  <md-radio-group ng-model="$ctrl.wiseLinkType" class="md-primary">
     <md-radio-button value="link">{{ ::'link' | translate }}</md-radio-button>
     <md-radio-button value="button">{{ ::'button' | translate }}</md-radio-button>
   </md-radio-group>
   <md-input-container>
     <label>{{ ::'setLinkText' | translate }}</label>
-    <input ng-model="wiseLinkAuthoringController.wiseLinkText"
-         ng-model-options='{ debounce: 500 }'
-         size="50"/>
+    <input ng-model="$ctrl.wiseLinkText" ng-model-options='{ debounce: 500 }' size="50"/>
   </md-input-container>
   <br/>
 
-  <md-button class="md-raised md-primary"
-         ng-click="wiseLinkAuthoringController.createWISELink()">
+  <md-button class="md-raised md-primary" ng-click="$ctrl.createWISELink()">
      <span>{{ ::'create' | translate }}</span>
   </md-button>
-  <md-button class="md-raised"
-         ng-click="wiseLinkAuthoringController.cancelWISELinkAuthoring()">
+  <md-button class="md-raised" ng-click="$ctrl.cancelWISELinkAuthoring()">
     <span>{{ ::'CANCEL' | translate }}</span>
   </md-button>
 </div>

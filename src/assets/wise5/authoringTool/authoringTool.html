@@ -8,31 +8,25 @@
 </style>
 
 <div class="app-styles" disable-delete-keypress
-    ng-mousemove='authoringToolController.mouseMoved()'
+    ng-mousemove='$ctrl.mouseMoved()'
     role="main" layout="column" layout-fill md-theme="at">
-  <at-top-bar logo-path="{{::authoringToolController.logoPath}}"
-       project-id="authoringToolController.projectId"
-       project-title="authoringToolController.projectTitle"
-       run-id="authoringToolController.runId"
-       run-code="authoringToolController.runCode"></at-top-bar>
-  <at-toolbar ng-if="authoringToolController.showToolbar"
-       number-project="authoringToolController.numberProject"
-       show-step-tools="authoringToolController.showStepTools"
-       view-name="authoringToolController.currentViewName"
-       on-menu-toggle="authoringToolController.toggleMenu()"></at-toolbar>
-  <md-sidenav md-component-id="monitorSidenav"
-        md-is-open="authoringToolController.isMenuOpen"
-        md-whiteframe="4">
-    <at-main-menu state="authoringToolController.$state"
-        views="authoringToolController.views"></at-main-menu>
+  <at-top-bar logo-path="{{::$ctrl.logoPath}}"
+       project-id="$ctrl.projectId"
+       project-title="$ctrl.projectTitle"
+       run-id="$ctrl.runId"
+       run-code="$ctrl.runCode"></at-top-bar>
+  <at-toolbar ng-if="$ctrl.showToolbar"
+       number-project="$ctrl.numberProject"
+       show-step-tools="$ctrl.showStepTools"
+       view-name="$ctrl.currentViewName"
+       on-menu-toggle="$ctrl.toggleMenu()"></at-toolbar>
+  <md-sidenav md-component-id="monitorSidenav" md-is-open="$ctrl.isMenuOpen" md-whiteframe="4">
+    <at-main-menu state="$ctrl.$state" views="$ctrl.views"></at-main-menu>
   </md-sidenav>
   <md-content id="content" flex role="main" layout="column" class="l-main"
-      ng-class="{ 'l-main--with-toolbar': authoringToolController.showToolbar }"
+      ng-class="{ 'l-main--with-toolbar': $ctrl.showToolbar }"
       flex role="main">
     <div ui-view></div>
   </md-content>
-  <side-menu ng-if="authoringToolController.showToolbar"
-      state="authoringToolController.$state"
-      views="authoringToolController.views"></side-menu>
-  </side-menu>
+  <side-menu ng-if="$ctrl.showToolbar" state="$ctrl.$state" views="$ctrl.views"></side-menu>
 </div>
