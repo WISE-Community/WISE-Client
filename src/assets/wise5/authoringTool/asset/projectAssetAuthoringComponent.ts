@@ -115,7 +115,7 @@ export class ProjectAssetAuthoringController {
     }
   }
 
-  $onDestory() {
+  $onDestroy() {
     this.getProjectAssetsSubscription.unsubscribe();
     this.getTotalFileSizeSubscription.unsubscribe();
     this.getTotalUnusedFileSizeSubscription.unsubscribe();
