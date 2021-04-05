@@ -96,6 +96,14 @@ class ChooseStructureLocationController {
     });
   }
 
+  getNodeTitleByNodeId(nodeId: string): string {
+    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  }
+
+  getNodePositionById(nodeId: string): string {
+    return this.ProjectService.getNodePositionById(nodeId);
+  }
+
   cancel() {
     this.$state.go('root.at.project');
   }
