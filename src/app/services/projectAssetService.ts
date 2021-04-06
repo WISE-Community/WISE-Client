@@ -235,9 +235,9 @@ export class ProjectAssetService {
 
   openAssetChooser(params: any) {
     return this.upgrade.$injector.get('$mdDialog').show({
-      templateUrl: 'assets/wise5/authoringTool/asset/asset.html',
-      controller: 'ProjectAssetController',
-      controllerAs: 'projectAssetController',
+      templateUrl: 'assets/wise5/authoringTool/asset/assetAuthoring.html',
+      controller: 'ProjectAssetAuthoringController',
+      controllerAs: '$ctrl',
       $stateParams: params,
       clickOutsideToClose: true,
       escapeToClose: true

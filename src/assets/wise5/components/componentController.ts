@@ -184,10 +184,6 @@ class ComponentController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.nodeSubmitClickedSubscription.unsubscribe();
     this.annotationSavedToServerSubscription.unsubscribe();
     this.studentWorkSavedToServerSubscription.unsubscribe();

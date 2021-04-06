@@ -27,7 +27,7 @@ $new-note-bottom: 24px;
 
   .notes-wrapper {
     flex: 1 1 0%;
-    overflow: hidden;
+    overflow: auto;
   }
 
   .notes {

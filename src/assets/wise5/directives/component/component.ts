@@ -82,8 +82,13 @@ const Component = {
   },
   scope: true,
   controller: ComponentController,
-  template: `<div class="component__wrapper">
-          <div ng-include="::componentTemplatePath" class="component__content component__content--{{::type}}"></div>
+  template: `<div ng-switch="type" class="component__wrapper">
+          <div ng-switch-when="HTML" ng-switch-when-separator="|">
+            <html-student ng-if="type === 'HTML'" [node-id]="nodeId" [component-content]="componentContent"></html-student>
+          </div>
+          <div ng-switch-default>
+            <div ng-include="::componentTemplatePath" class="component__content component__content--{{::type}}"></div>
+          </div>
         </div>`
 };
 

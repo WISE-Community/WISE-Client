@@ -4,7 +4,7 @@ import { ProjectAssetService } from '../../../../app/services/projectAssetServic
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 
-class ProjectInfoController {
+class ProjectInfoAuthoringController {
   $translate: any;
   isEditingProjectIcon: boolean = false;
   isShowProjectIcon: boolean = false;
@@ -18,8 +18,6 @@ class ProjectInfoController {
   static $inject = [
     '$filter',
     '$mdDialog',
-    '$rootScope',
-    '$scope',
     '$timeout',
     'ConfigService',
     'ProjectAssetService',
@@ -29,14 +27,15 @@ class ProjectInfoController {
   constructor(
     $filter,
     private $mdDialog: any,
-    private $rootScope: any,
-    private $scope: any,
     private $timeout: any,
     private ConfigService: ConfigService,
     private ProjectAssetService: ProjectAssetService,
     private ProjectService: TeacherProjectService
   ) {
     this.$translate = $filter('translate');
+  }
+
+  $onInit() {
     this.metadata = this.ProjectService.getProjectMetadata();
     this.metadataAuthoring = JSON.parse(
       this.ConfigService.getConfigParam('projectMetadataSettings')
@@ -47,7 +46,7 @@ class ProjectInfoController {
 
   processMetadata() {
     if (this.metadataAuthoring != null) {
-      for (let field of this.metadataAuthoring.fields) {
+      for (const field of this.metadataAuthoring.fields) {
         this.processMetadataAuthoringField(field);
       }
     }
@@ -85,11 +84,10 @@ class ProjectInfoController {
   }
 
   // returns the choice text that is appropriate for user's locale
-  getMetadataChoiceText(choice) {
+  getMetadataChoiceText(choice: string): string {
     let choiceText = choice;
-    let userLocale = this.ConfigService.getLocale();
-    let i18nMapping = this.metadataAuthoring.i18n;
-    let i18nMappingContainingChoiceTextArray = Object.values(i18nMapping).filter(
+    const i18nMapping = this.metadataAuthoring.i18n;
+    const i18nMappingContainingChoiceTextArray = Object.values(i18nMapping).filter(
       (onei18nMapping) => {
         return Object.values(onei18nMapping).indexOf(choice) != -1;
       }
@@ -99,7 +97,8 @@ class ProjectInfoController {
       i18nMappingContainingChoiceTextArray.length > 0
     ) {
       // shouldn't be more than one, but if so, use the first one we find
-      let i18nMappingContainingChoiceText = i18nMappingContainingChoiceTextArray[0];
+      const i18nMappingContainingChoiceText = i18nMappingContainingChoiceTextArray[0];
+      const userLocale = this.ConfigService.getLocale();
       if (i18nMappingContainingChoiceText[userLocale] != null) {
         choiceText = i18nMappingContainingChoiceText[userLocale];
       }
@@ -114,10 +113,10 @@ class ProjectInfoController {
     );
   }
 
-  metadataCheckboxClicked(metadataField, choice) {
+  metadataCheckboxClicked(metadataField) {
     const checkedChoices = [];
     for (const choice of metadataField.choices) {
-      let isChoiceChecked = metadataField.choicesMapping[choice];
+      const isChoiceChecked = metadataField.choicesMapping[choice];
       if (isChoiceChecked) {
         checkedChoices.push(this.getMetadataChoiceText(choice));
       }
@@ -230,4 +229,7 @@ class ProjectInfoController {
   }
 }
 
-export default ProjectInfoController;
+export const ProjectInfoAuthoringComponent = {
+  templateUrl: `/wise5/authoringTool/info/infoAuthoring.html`,
+  controller: ProjectInfoAuthoringController
+};
