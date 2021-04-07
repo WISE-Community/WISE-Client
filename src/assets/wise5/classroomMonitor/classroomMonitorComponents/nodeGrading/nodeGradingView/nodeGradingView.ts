@@ -366,7 +366,7 @@ export class NodeGradingViewController {
   }
 
   showReport($event) {
-    this.MilestoneService.showMilestoneDetails(this.milestoneReport, $event, true);
+    this.MilestoneService.showMilestoneDetails(this.milestoneReport, $event);
   }
 }
 
