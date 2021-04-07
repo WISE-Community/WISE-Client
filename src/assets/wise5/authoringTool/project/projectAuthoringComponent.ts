@@ -18,7 +18,6 @@ class ProjectAuthoringController {
   nodeId: string;
   projectTitle: string;
   showCreateGroup: boolean = false;
-  showCreateNode: boolean = false;
   inactiveGroupNodes: any[];
   inactiveStepNodes: any[];
   inactiveNodes: any[];
@@ -26,7 +25,6 @@ class ProjectAuthoringController {
   insertNodeMode: boolean;
   idToNode: any;
   copyMode: boolean;
-  createNodeTitle: string;
   createMode: boolean;
   nodeToAdd: any;
   projectScriptFilename: string;
@@ -244,14 +242,6 @@ class ProjectAuthoringController {
     this.showCreateGroup = false;
     this.createGroupTitle = '';
     this.insertGroupMode = true;
-    this.createMode = true;
-  }
-
-  createNode() {
-    this.nodeToAdd = this.ProjectService.createNode(this.createNodeTitle);
-    this.showCreateNode = false;
-    this.createNodeTitle = '';
-    this.insertNodeMode = true;
     this.createMode = true;
   }
 
@@ -601,8 +591,8 @@ class ProjectAuthoringController {
   }
 
   creatNewActivityClicked() {
-    this.createGroupTitle = '';
-    this.toggleView('createGroup');
+    this.clearGroupTitle();
+    this.toggleGroupView();
     if (this.showCreateGroup) {
       this.$timeout(() => {
         $('#createGroupTitle').focus();
@@ -610,14 +600,8 @@ class ProjectAuthoringController {
     }
   }
 
-  createNewStepClicked() {
-    this.createNodeTitle = '';
-    this.toggleView('createNode');
-    if (this.showCreateNode) {
-      this.$timeout(() => {
-        $('#createNodeTitle').focus();
-      });
-    }
+  createNewStep() {
+    this.$state.go('root.at.project.add-node.choose-node');
   }
 
   addStructure() {
@@ -701,25 +685,16 @@ class ProjectAuthoringController {
   }
 
   showProjectView() {
-    this.clearNodeAndGroupTitle();
+    this.clearGroupTitle();
     this.showCreateGroup = false;
-    this.showCreateNode = false;
   }
 
-  toggleView(view) {
-    this.clearNodeAndGroupTitle();
-    if (view === 'createGroup') {
-      this.showCreateGroup = !this.showCreateGroup;
-      this.showCreateNode = false;
-    } else if (view === 'createNode') {
-      this.showCreateGroup = false;
-      this.showCreateNode = !this.showCreateNode;
-    }
+  toggleGroupView() {
+    this.showCreateGroup = !this.showCreateGroup;
   }
 
-  clearNodeAndGroupTitle() {
+  clearGroupTitle() {
     this.createGroupTitle = '';
-    this.createNodeTitle = '';
   }
 
   goBackToProjectList() {
