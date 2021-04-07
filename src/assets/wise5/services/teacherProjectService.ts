@@ -2406,7 +2406,7 @@ export class TeacherProjectService extends ProjectService {
     const node = this.getNodeById(nodeId);
     const service = this.upgrade.$injector.get(componentType + 'Service');
     const component = service.createComponent();
-    if (service.componentHasWork()) {
+    if (service.componentHasWork(component)) {
       if (node.showSaveButton == false) {
         if (this.doesAnyComponentInNodeShowSubmitButton(node.id)) {
           component.showSaveButton = true;
@@ -2428,7 +2428,7 @@ export class TeacherProjectService extends ProjectService {
     const node = this.getNodeById(nodeId);
     for (const component of node.components) {
       const service = this.upgrade.$injector.get(component.type + 'Service');
-      if (service != null && service.componentHasWork()) {
+      if (service != null && service.componentHasWork(component)) {
         return true;
       }
     }
