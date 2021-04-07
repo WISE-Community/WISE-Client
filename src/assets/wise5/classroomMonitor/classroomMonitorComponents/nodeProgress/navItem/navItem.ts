@@ -267,7 +267,7 @@ class NavItemController {
   toggleLockNode(): void {
     const node = this.ProjectService.getNodeById(this.nodeId);
     const isLocked = this.isLocked();
-    if (this.isLocked) {
+    if (isLocked) {
       this.unlockNode(node);
     } else {
       this.lockNode(node);
