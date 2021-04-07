@@ -63,6 +63,7 @@ import '../components/graph/graphAuthoringComponentModule';
 import '../components/graph/graphGradingComponentModule';
 import '../components/html/htmlAuthoringComponentModule';
 import '../authoringTool/addComponent/addComponentModule';
+import '../authoringTool/addNode/addNodeModule';
 import '../authoringTool/node/editRubric/editRubricModule';
 import '../authoringTool/importComponent/importComponentModule';
 import '../authoringTool/importStep/importStepModule';
@@ -84,6 +85,7 @@ angular
     'common',
     'angular-inview',
     'addComponentModule',
+    'addNodeModule',
     'editRubricModule',
     'summaryAuthoringComponentModule',
     'animationAuthoringComponentModule',

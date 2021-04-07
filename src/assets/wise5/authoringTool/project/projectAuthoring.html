@@ -104,7 +104,7 @@
               </md-button>
               <md-button id='createNewStepButton'
                   class='topButton md-raised md-primary'
-                  ng-click='$ctrl.createNewStepClicked()'
+                  ng-click='$ctrl.createNewStep()'
                   ng-disabled='$ctrl.insertGroupMode || $ctrl.insertNodeMode || $ctrl.stepNodeSelected || $ctrl.activityNodeSelected'>
                 <md-icon>add_box</md-icon>
                 <md-tooltip md-direction='top' class='projectButtonTooltip'>
@@ -205,26 +205,6 @@
                 </md-button>
               </div>
             </div>
-            <div ng-if='$ctrl.showCreateNode' layout='row' style='height:50;'>
-              <div layout='row'>
-                <md-input-container style="width: 500px;">
-                  <label translate="stepTitle"></label>
-                  <input id='createNodeTitle'
-                       ng-model='$ctrl.createNodeTitle'
-                       ng-keyup='$event.keyCode == 13 && $ctrl.createNode()'/>
-                </md-input-container>
-              </div>
-              <div layout='row' style='margin-top: 8px;'>
-                <md-button id="createNodeCreateButton" class='createButton md-raised md-primary' ng-click='$ctrl.createNode()'>
-                  <md-icon>check</md-icon>
-                  <md-tooltip md-direction="top" class="projectButtonTooltip">{{ ::"create" | translate }}</md-tooltip>
-                </md-button>
-                <md-button id="createNodeCancelButton" class='createButton md-raised md-primary' ng-click='$ctrl.showProjectView()'>
-                  <md-icon>close</md-icon>
-                  <md-tooltip md-direction="top" class="projectButtonTooltip">{{ ::"CANCEL" | translate }}</md-tooltip>
-                </md-button>
-              </div>
-            </div>
             <div ng-if='$ctrl.insertGroupMode || $ctrl.insertNodeMode' layout='row' style='height:50'>
               <div layout='row'>
                 <h6 translate="chooseNewLocation"></h6>
@@ -252,7 +232,7 @@
                        ng-model='item.checked'
                        ng-change='$ctrl.projectItemClicked(item.$key)'
                        class='check'
-                       ng-disabled='$ctrl.showCreateGroup || $ctrl.showCreateNode || $ctrl.insertNodeMode || $ctrl.insertGroupMode || ($ctrl.isGroupNode(item.$key) && $ctrl.stepNodeSelected) || (!$ctrl.isGroupNode(item.$key) && $ctrl.activityNodeSelected)'
+                       ng-disabled='$ctrl.showCreateGroup || $ctrl.insertNodeMode || $ctrl.insertGroupMode || ($ctrl.isGroupNode(item.$key) && $ctrl.stepNodeSelected) || (!$ctrl.isGroupNode(item.$key) && $ctrl.activityNodeSelected)'
                        aria-label='{{::$ctrl.getNodePositionById(item.$key)}} {{::$ctrl.getNodeTitleByNodeId(item.$key)}}'>
                   </md-checkbox>
                 </div>
@@ -312,7 +292,7 @@
                          ng-model='inactiveNode.checked'
                          ng-change='$ctrl.projectItemClicked(inactiveNode.id)'
                          class='check'
-                         ng-disabled='$ctrl.showCreateGroup || $ctrl.showCreateNode || $ctrl.insertNodeMode || $ctrl.insertGroupMode || $ctrl.stepNodeSelected'
+                         ng-disabled='$ctrl.showCreateGroup || $ctrl.insertNodeMode || $ctrl.insertGroupMode || $ctrl.stepNodeSelected'
                          aria-label='{{::$ctrl.getNodeTitleByNodeId(inactiveNode.id)}}'>
                     </md-checkbox>
                   </div>
@@ -352,7 +332,7 @@
                            ng-model='$ctrl.idToNode[inactiveChildId].checked'
                            ng-change='$ctrl.projectItemClicked(inactiveChildId)'
                            class='check'
-                           ng-disabled='$ctrl.showCreateGroup || $ctrl.showCreateNode || $ctrl.insertNodeMode || $ctrl.insertGroupMode || $ctrl.activityNodeSelected'
+                           ng-disabled='$ctrl.showCreateGroup || $ctrl.insertNodeMode || $ctrl.insertGroupMode || $ctrl.activityNodeSelected'
                            aria-label='{{::$ctrl.getNodeTitleByNodeId(inactiveChildId.id)}}'>
                       </md-checkbox>
                     </div>
@@ -403,7 +383,7 @@
                          ng-model='inactiveNode.checked'
                          ng-change='$ctrl.projectItemClicked(inactiveNode.id)'
                          class='check'
-                         ng-disabled='$ctrl.showCreateGroup || $ctrl.showCreateNode || $ctrl.insertNodeMode || $ctrl.insertGroupMode || $ctrl.activityNodeSelected'
+                         ng-disabled='$ctrl.showCreateGroup || $ctrl.insertNodeMode || $ctrl.insertGroupMode || $ctrl.activityNodeSelected'
                          aria-label='{{::$ctrl.getNodeTitleByNodeId(inactiveNode.id)}}'>
                     </md-checkbox>
                   </div>
