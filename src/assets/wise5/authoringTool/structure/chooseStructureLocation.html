@@ -5,13 +5,12 @@
   <div
     id="{{::group.$key}}"
     layout="row"
-    ng-class="groupHeader"
-    ng-style='::{"background-color": projectController.getStepBackgroundColor(group.$key)}'>
+    ng-class="groupHeader">
     <div layout="row" class="projectItemTitleDiv">
       <div layout="row">
         <h6 style="display:inline; cursor:pointer;" ng-if="::group.order !== 0">
-          {{::projectController.getNodePositionById(group.$key)}}:
-          {{::projectController.getNodeTitleByNodeId(group.$key)}}
+          {{::chooseStructureLocationController.getNodePositionById(group.$key)}}:
+          {{::chooseStructureLocationController.getNodeTitleByNodeId(group.$key)}}
         </h6>
       </div>
       <div layout="row">
