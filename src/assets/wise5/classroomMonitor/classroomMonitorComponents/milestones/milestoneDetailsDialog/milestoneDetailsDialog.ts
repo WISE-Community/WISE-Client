@@ -6,7 +6,6 @@ export class MilestoneDetailsDialog {
     '$mdDialog',
     '$event',
     'milestone',
-    'hideStudentWork',
     'TeacherDataService'
   ];
 
@@ -15,7 +14,6 @@ export class MilestoneDetailsDialog {
     private $mdDialog,
     private $event,
     private milestone,
-    private hideStudentWork,
     private TeacherDataService
   ) {}
 

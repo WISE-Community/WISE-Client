@@ -573,7 +573,7 @@ export class MilestoneService {
     projectAchievement.isReportAvailable = reportAvailable;
   }
 
-  showMilestoneDetails(milestone: any, $event: any, hideStudentWork: boolean = false) {
+  showMilestoneDetails(milestone: any, $event: any) {
     this.upgrade.$injector.get('$mdDialog').show({
       parent: angular.element(document.body),
       templateUrl:
@@ -587,8 +587,7 @@ export class MilestoneService {
       escapeToClose: true,
       locals: {
         $event: $event,
-        milestone: milestone,
-        hideStudentWork: hideStudentWork
+        milestone: milestone
       }
     });
   }

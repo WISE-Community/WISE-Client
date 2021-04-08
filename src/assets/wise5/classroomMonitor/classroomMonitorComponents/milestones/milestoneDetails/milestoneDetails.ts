@@ -148,7 +148,6 @@ class MilestoneDetailsController {
 const MilestoneDetails = {
   bindings: {
     milestone: '<',
-    hideStudentWork: '<',
     onShowWorkgroup: '&',
     onVisitNodeGrading: '&'
   },
@@ -198,12 +197,7 @@ const MilestoneDetails = {
           <compile data="$ctrl.milestone.generatedReport"></compile>
         </div>
       </section>
-      <section ng-if="$ctrl.hideStudentWork && $ctrl.milestone.generatedRecommendations && $ctrl.milestone.isReportAvailable"
-               class="milestone-details__section md-whiteframe-1dp">
-        <div class="milestone-details__header primary md-body-2 gray-lightest-bg">{{ ::'recommendations' | translate }}</div>
-        <compile data="$ctrl.milestone.generatedRecommendations"></compile>
-      </section>
-      <section ng-if="!$ctrl.hideStudentWork" class="md-whiteframe-1dp gray-lightest-bg">
+      <section class="md-whiteframe-1dp gray-lightest-bg">
         <div ng-if="$ctrl.milestone.generatedRecommendations && $ctrl.milestone.isReportAvailable">
           <md-tabs md-dynamic-height>
             <md-tab label="{{ ::'recommendations' | translate }}" md-on-select="$ctrl.saveTabSelectedEvent('MilestoneRecommendationTabSelected')">
@@ -219,7 +213,7 @@ const MilestoneDetails = {
           </md-tabs>
         </div>
         <div ng-if="!$ctrl.milestone.generatedRecommendations && $ctrl.milestone.isReportAvailable"
-                 class="milestone-details__section md-whiteframe-1dp">
+            class="milestone-details__section md-whiteframe-1dp">
           <div class="milestone-details__header primary md-body-2 gray-lightest-bg">{{ ::'studentWork' | translate }}</div>
           <milestone-grading-view milestone="$ctrl.milestone"></milestone-grading-view>
         </div>
