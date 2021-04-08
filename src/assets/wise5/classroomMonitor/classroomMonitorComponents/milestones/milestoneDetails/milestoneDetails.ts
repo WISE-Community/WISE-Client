@@ -148,7 +148,6 @@ class MilestoneDetailsController {
 const MilestoneDetails = {
   bindings: {
     milestone: '<',
-    hideStudentWork: '<',
     onShowWorkgroup: '&',
     onVisitNodeGrading: '&'
   },
@@ -201,7 +200,7 @@ const MilestoneDetails = {
       <section class="md-whiteframe-1dp gray-lightest-bg">
         <div ng-if="$ctrl.milestone.generatedRecommendations && $ctrl.milestone.isReportAvailable">
           <md-tabs md-dynamic-height>
-            <md-tab label="{{ ::'recommendations' | translate }}"md-on-select="$ctrl.saveTabSelectedEvent('MilestoneRecommendationTabSelected')">
+            <md-tab label="{{ ::'recommendations' | translate }}" md-on-select="$ctrl.saveTabSelectedEvent('MilestoneRecommendationTabSelected')">
               <div class="milestone-details__section">
                 <compile data="$ctrl.milestone.generatedRecommendations"></compile>
               </div>
