@@ -1,13 +1,18 @@
 import * as angular from 'angular';
 import { downgradeComponent } from '@angular/upgrade/static';
-import { ChooseNewNode } from './choose-new-node/choose-new-node.component';
+import { AddYourOwnNode } from './add-your-own-node/add-your-own-node.component';
 import { ChooseNewNodeLocation } from './choose-new-node-location/choose-new-node-location.component';
+import { ChooseNewNodeTemplate } from './choose-new-node-template/choose-new-node-template.component';
 
 export default angular
   .module('addNodeModule', ['ui.router'])
   .directive(
-    'chooseNewNode',
-    downgradeComponent({ component: ChooseNewNode }) as angular.IDirectiveFactory
+    'addYourOwnNode',
+    downgradeComponent({ component: AddYourOwnNode }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'chooseNewNodeTemplate',
+    downgradeComponent({ component: ChooseNewNodeTemplate }) as angular.IDirectiveFactory
   )
   .directive(
     'chooseNewNodeLocation',
@@ -22,9 +27,13 @@ export default angular
           abstract: true,
           resolve: {}
         })
-        .state('root.at.project.add-node.choose-node', {
-          url: '/choose-node',
-          component: 'chooseNewNode',
+        .state('root.at.project.add-node.choose-template', {
+          url: '/choose-template',
+          component: 'chooseNewNodeTemplate'
+        })
+        .state('root.at.project.add-node.add-your-own', {
+          url: '/add-your-own',
+          component: 'addYourOwnNode',
           params: {
             title: ''
           }

@@ -2,9 +2,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
-  templateUrl: 'choose-new-node.component.html'
+  templateUrl: 'add-your-own-node.component.html'
 })
-export class ChooseNewNode {
+export class AddYourOwnNode {
   title: string;
 
   constructor(private upgrade: UpgradeModule) {}
