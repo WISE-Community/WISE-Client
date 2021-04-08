@@ -11,7 +11,7 @@ export class ChooseNewNodeTemplate {
       label: $localize`Automated Assessment`,
       description: $localize`Automated Assessment Description`,
       icon: 'fact_check',
-      route: 'root.at.project.structure.automated-assessment.choose-item'
+      route: 'root.at.project.add-node.automated-assessment.choose-item'
     },
     {
       label: $localize`Create Your Own`,

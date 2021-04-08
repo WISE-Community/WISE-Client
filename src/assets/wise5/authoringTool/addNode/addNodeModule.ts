@@ -3,9 +3,13 @@ import { downgradeComponent } from '@angular/upgrade/static';
 import { AddYourOwnNode } from './add-your-own-node/add-your-own-node.component';
 import { ChooseNewNodeLocation } from './choose-new-node-location/choose-new-node-location.component';
 import { ChooseNewNodeTemplate } from './choose-new-node-template/choose-new-node-template.component';
+import AutomatedAssessmentChooseItemController from './automatedAssessment/automatedAssessmentChooseItemController';
+import AutomatedAssessmentConfigureController from './automatedAssessment/automatedAssessmentConfigureController';
 
 export default angular
   .module('addNodeModule', ['ui.router'])
+  .controller('AutomatedAssessmentChooseItemController', AutomatedAssessmentChooseItemController)
+  .controller('AutomatedAssessmentConfigureController', AutomatedAssessmentConfigureController)
   .directive(
     'addYourOwnNode',
     downgradeComponent({ component: AddYourOwnNode }) as angular.IDirectiveFactory
@@ -43,6 +47,32 @@ export default angular
           component: 'chooseNewNodeLocation',
           params: {
             title: ''
+          }
+        })
+        .state('root.at.project.add-node.automated-assessment', {
+          url: '/automated-assessment',
+          abstract: true,
+          params: {
+            structure: null
+          }
+        })
+        .state('root.at.project.add-node.automated-assessment.choose-item', {
+          url: '/choose-item',
+          templateUrl: 'assets/wise5/authoringTool/addNode/automatedAssessment/choose-item.html',
+          controller: 'AutomatedAssessmentChooseItemController',
+          controllerAs: '$ctrl',
+          params: {
+            structure: null
+          }
+        })
+        .state('root.at.project.add-node.automated-assessment.configure', {
+          url: '/configure',
+          templateUrl: 'assets/wise5/authoringTool/addNode/automatedAssessment/configure-item.html',
+          controller: 'AutomatedAssessmentConfigureController',
+          controllerAs: '$ctrl',
+          params: {
+            node: null,
+            importFromProjectId: null
           }
         });
     }

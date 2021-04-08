@@ -20,6 +20,10 @@ export class AddYourOwnNode {
     });
   }
 
+  back() {
+    this.upgrade.$injector.get('$state').go('root.at.project.add-node.choose-template');
+  }
+
   cancel() {
     this.upgrade.$injector.get('$state').go('root.at.project');
   }
