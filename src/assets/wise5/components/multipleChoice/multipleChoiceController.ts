@@ -1,17 +1,21 @@
 'use strict';
 
 import * as angular from 'angular';
+import { Subscription } from 'rxjs';
 import ComponentController from '../componentController';
+import { ComponentService } from '../componentService';
 import { MultipleChoiceService } from './multipleChoiceService';
 
 class MultipleChoiceController extends ComponentController {
   $q: any;
   MultipleChoiceService: MultipleChoiceService;
+  ComponentService: ComponentService;
   componentHasCorrectAnswer: boolean;
   studentChoices: any[];
   isCorrect: boolean;
   isLatestComponentStateSubmit: boolean;
   showFeedback: boolean;
+  requestComponentStateSubscription: Subscription;
 
   static $inject = [
     '$filter',
@@ -22,6 +26,7 @@ class MultipleChoiceController extends ComponentController {
     '$scope',
     'AnnotationService',
     'AudioRecorderService',
+    'ComponentService',
     'ConfigService',
     'MultipleChoiceService',
     'NodeService',
@@ -42,6 +47,7 @@ class MultipleChoiceController extends ComponentController {
     $scope,
     AnnotationService,
     AudioRecorderService,
+    ComponentService,
     ConfigService,
     MultipleChoiceService,
     NodeService,
@@ -72,6 +78,7 @@ class MultipleChoiceController extends ComponentController {
     );
     this.$q = $q;
     this.MultipleChoiceService = MultipleChoiceService;
+    this.ComponentService = ComponentService;
 
     // holds the ids of the choices the student has chosen
     this.studentChoices = [];
@@ -145,49 +152,56 @@ class MultipleChoiceController extends ComponentController {
     }
 
     this.disableComponentIfNecessary();
-
-    /**
-     * Get the component state from this component. The parent node will
-     * call this function to obtain the component state when it needs to
-     * save student data.
-     * @param isSubmit boolean whether the request is coming from a submit
-     * action (optional; default is false)
-     * @return a promise of a component state containing the student data
-     */
-    this.$scope.getComponentState = function (isSubmit) {
-      const deferred = this.$q.defer();
-      let getState = false;
-      let action = 'change';
-
-      if (isSubmit) {
-        if (this.$scope.multipleChoiceController.isSubmitDirty) {
-          getState = true;
-          action = 'submit';
-        }
-      } else {
-        if (this.$scope.multipleChoiceController.isDirty) {
-          getState = true;
-          action = 'save';
-        }
-      }
-
-      if (getState) {
-        // create a component state populated with the student data
-        this.$scope.multipleChoiceController.createComponentState(action).then((componentState) => {
-          deferred.resolve(componentState);
-        });
-      } else {
-        /*
-         * the student does not have any unsaved changes in this component
-         * so we don't need to save a component state for this component.
-         * we will immediately resolve the promise here.
-         */
-        deferred.resolve();
-      }
-
-      return deferred.promise;
-    }.bind(this);
+    this.subscribeToRequestComponentState();
     this.broadcastDoneRenderingComponent();
+  }
+
+  subscribeToRequestComponentState(): void {
+    this.requestComponentStateSubscription = this.ComponentService.requestComponentStateSource$.subscribe(
+      (data) => {
+        this.ComponentService.sendComponentState(this.getComponentStateWrapper(data));
+      }
+    );
+  }
+
+  getComponentStateWrapper(data: any): any {
+    let componentStatePromise: any = null;
+    if (this.isMatchingComponentAndShouldSave(data)) {
+      componentStatePromise = this.createComponentState(this.getAction(data));
+    }
+    return this.createComponentStateWrapper(this.nodeId, this.componentId, componentStatePromise);
+  }
+
+  isMatchingComponentAndShouldSave(data: any): boolean {
+    return (
+      data.nodeId === this.nodeId &&
+      data.componentId === this.componentId &&
+      (this.isDirty || data.isSubmit)
+    );
+  }
+
+  getAction(data: any): string {
+    let action = 'save';
+    if (data.isSubmit) {
+      action = 'submit';
+    }
+    return action;
+  }
+
+  createComponentStateWrapper(
+    nodeId: string,
+    componentId: string,
+    componentStatePromise: any
+  ): any {
+    return {
+      nodeId: nodeId,
+      componentId: componentId,
+      componentStatePromise: componentStatePromise
+    };
+  }
+
+  $onDestroy(): void {
+    this.requestComponentStateSubscription.unsubscribe();
   }
 
   handleNodeSubmit() {

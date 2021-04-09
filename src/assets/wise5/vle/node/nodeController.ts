@@ -11,6 +11,8 @@ import { Subscription } from 'rxjs';
 import { SessionService } from '../../services/sessionService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Directive } from '@angular/core';
+import { ComponentService } from '../../components/componentService';
+import { filter, take } from 'rxjs/operators';
 
 @Directive()
 class NodeController {
@@ -50,6 +52,7 @@ class NodeController {
     '$state',
     '$timeout',
     'AnnotationService',
+    'ComponentService',
     'ConfigService',
     'NodeService',
     'ProjectService',
@@ -67,6 +70,7 @@ class NodeController {
     private $state: any,
     private $timeout: any,
     private AnnotationService: AnnotationService,
+    private ComponentService: ComponentService,
     private ConfigService: ConfigService,
     private NodeService: NodeService,
     private ProjectService: VLEProjectService,
@@ -695,124 +699,148 @@ class NodeController {
   /**
    * Loop through this node's components and get/create component states
    * @param isAutoSave whether the component states were auto saved
-   * @param componentId (optional) the component id of the component
-   * that triggered the save
+   * @param componentId (optional) the component id of the component that triggered the save
    * @param isSubmit (optional) whether this is a submission or not
    * @returns an array of promises that will return component states
    */
-  createComponentStates(isAutoSave, componentId, isSubmit) {
-    let components = [];
-    let componentStatePromises = [];
+  createComponentStates(
+    isAutoSave: boolean = false,
+    componentId: string,
+    isSubmit: boolean = false
+  ): any {
+    const components = this.getComponentsToSave(componentId);
+    const componentStatePromises = this.getComponentStatePromises(components, isAutoSave, isSubmit);
+    return this.$q.all(componentStatePromises).then((componentStatesFromComponents: any[]) => {
+      return componentStatesFromComponents.filter((componentState: any) => componentState != null);
+    });
+  }
+
+  getComponentsToSave(componentId: string): any {
     if (componentId) {
+      const components = [];
       const component = this.getComponentById(componentId);
       if (component) {
         components.push(component);
       }
+      return components;
     } else {
-      components = this.getComponents();
+      return this.getComponents();
     }
+  }
 
-    if (components.length) {
-      const runId = this.ConfigService.getRunId();
-      const periodId = this.ConfigService.getPeriodId();
-      const workgroupId = this.ConfigService.getWorkgroupId();
-      const nodeId = this.nodeId;
-      for (const component of components) {
-        if (component != null) {
-          const tempComponentId = component.id;
-          const componentType = component.type;
-          const childScope = this.componentToScope[tempComponentId];
-          if (childScope != null) {
-            if (childScope.getComponentState) {
-              const componentStatePromise = this.getComponentStateFromChildScope(
-                childScope,
-                runId,
-                periodId,
-                workgroupId,
-                nodeId,
-                componentId,
-                tempComponentId,
-                componentType,
-                isAutoSave,
-                isSubmit
-              );
-              componentStatePromises.push(componentStatePromise);
-            }
-          }
-        }
+  getComponentStatePromises(
+    components: any[],
+    isAutoSave: boolean = false,
+    isSubmit: boolean = false
+  ): any[] {
+    const componentStatePromises = [];
+    for (const component of components) {
+      const componentId = component.id;
+      const componentType = component.type;
+      if (componentType === 'MultipleChoice') {
+        componentStatePromises.push(
+          this.getComponentStatePromiseFromService(this.nodeId, componentId, isAutoSave, isSubmit)
+        );
+      } else {
+        componentStatePromises.push(
+          this.getComponentStatePromiseFromChildScope(componentId, isAutoSave, isSubmit)
+        );
       }
     }
-    return this.$q.all(componentStatePromises).then((componentStatesFromComponents) => {
-      return componentStatesFromComponents.filter((componentState) => componentState != null);
+    return componentStatePromises;
+  }
+
+  getComponentStatePromiseFromService(
+    nodeId: string,
+    componentId: string,
+    isAutoSave: boolean = false,
+    isSubmit: boolean = false
+  ): any {
+    const componentStatePromise = this.getComponentStatePromise(
+      nodeId,
+      componentId,
+      isAutoSave,
+      isSubmit
+    );
+    this.ComponentService.requestComponentState(nodeId, componentId, isSubmit);
+    return componentStatePromise;
+  }
+
+  getComponentStatePromiseFromChildScope(
+    componentId: string,
+    isAutoSave: boolean = false,
+    isSubmit: boolean = false
+  ): any {
+    const childScope = this.componentToScope[componentId];
+    if (childScope != null) {
+      if (childScope.getComponentState) {
+        return this.getComponentStateFromChildScope(childScope, isAutoSave, isSubmit);
+      }
+    }
+    return null;
+  }
+
+  getComponentStatePromise(
+    nodeId: string,
+    componentId: string,
+    isAutoSave: boolean = false,
+    isSubmit: boolean = false
+  ): any {
+    return new Promise((resolve) => {
+      this.ComponentService.sendComponentStateSource$
+        .pipe(
+          filter((data: any) => {
+            return data.nodeId === nodeId && data.componentId === componentId;
+          }),
+          take(1)
+        )
+        .toPromise()
+        .then((data: any) => {
+          this.resolveComponentStatePromise(
+            resolve,
+            data.componentStatePromise,
+            isAutoSave,
+            isSubmit
+          );
+        });
     });
   }
 
-  /**
-   * Get the component state from the child scope
-   * @param childScope the child scope
-   * @param runId the run id
-   * @param periodId the period id
-   * @param workgroupId the workgroup id
-   * @param nodeId the node id
-   * @param componentId the component id that has triggered the save
-   * @param tempComponentId the component id of the component we are obtaining
-   * a component state for
-   * @param componentType the component type
-   * @param isAutoSave whether this save was triggered by an auto save
-   * @param isSubmit whether this save was triggered by a submit
-   */
-  getComponentStateFromChildScope(
-    childScope,
-    runId,
-    periodId,
-    workgroupId,
-    nodeId,
-    componentId,
-    tempComponentId,
-    componentType,
-    isAutoSave,
-    isSubmit
-  ) {
-    return childScope.getComponentState(isSubmit).then((componentState) => {
+  resolveComponentStatePromise(
+    resolve: any,
+    componentStatePromise: any,
+    isAutoSave: boolean = false,
+    isSubmit: boolean = false
+  ): void {
+    if (componentStatePromise == null) {
+      resolve(null);
+    } else {
+      componentStatePromise.then((componentState: any) => {
+        this.injectAdditionalComponentStateFields(componentState, isAutoSave, isSubmit);
+        resolve(componentState);
+      });
+    }
+  }
+
+  getComponentStateFromChildScope(childScope: any, isAutoSave: boolean, isSubmit: boolean): any {
+    return childScope.getComponentState(isSubmit).then((componentState: any) => {
       if (componentState != null) {
-        componentState.runId = runId;
-        componentState.periodId = periodId;
-        componentState.workgroupId = workgroupId;
-        componentState.nodeId = this.nodeId;
-        componentState.componentId = tempComponentId;
-        componentState.componentType = componentType;
-        if (componentId == null) {
-          /*
-           * the node has triggered the save so all the components will
-           * either have isAutoSave set to true or false; if this is a
-           * submission, all the components will have isSubmit set to true
-           */
-          componentState.isAutoSave = isAutoSave;
-          if (isSubmit) {
-            if (componentState.isSubmit == null) {
-              componentState.isSubmit = true;
-            }
-          }
-        } else {
-          /*
-           * a component has triggered the save so only that component will
-           * have isAutoSave set to false; if this is a submission,
-           * component will have isSubmit set to true
-           */
-
-          if (componentId === tempComponentId) {
-            componentState.isAutoSave = false;
-
-            if (isSubmit) {
-              if (componentState.isSubmit == null) {
-                componentState.isSubmit = true;
-              }
-            }
-          }
-        }
+        this.injectAdditionalComponentStateFields(componentState, isAutoSave, isSubmit);
         return componentState;
       }
     });
+  }
+
+  injectAdditionalComponentStateFields(
+    componentState: any,
+    isAutoSave: boolean = false,
+    isSubmit: boolean = false
+  ): any {
+    componentState.runId = this.ConfigService.getRunId();
+    componentState.periodId = this.ConfigService.getPeriodId();
+    componentState.workgroupId = this.ConfigService.getWorkgroupId();
+    componentState.isAutoSave = isAutoSave === true;
+    componentState.isSubmit = isSubmit === true;
   }
 
   /**
