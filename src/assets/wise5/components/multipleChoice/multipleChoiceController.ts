@@ -1,17 +1,20 @@
 'use strict';
 
 import * as angular from 'angular';
+import { Subscription } from 'rxjs';
 import ComponentController from '../componentController';
+import { ComponentService } from '../componentService';
+import { ComponentStateRequest } from '../ComponentStateRequest';
+import { ComponentStateWrapper } from '../ComponentStateWrapper';
 import { MultipleChoiceService } from './multipleChoiceService';
 
 class MultipleChoiceController extends ComponentController {
-  $q: any;
-  MultipleChoiceService: MultipleChoiceService;
   componentHasCorrectAnswer: boolean;
   studentChoices: any[];
   isCorrect: boolean;
   isLatestComponentStateSubmit: boolean;
   showFeedback: boolean;
+  requestComponentStateSubscription: Subscription;
 
   static $inject = [
     '$filter',
@@ -22,6 +25,7 @@ class MultipleChoiceController extends ComponentController {
     '$scope',
     'AnnotationService',
     'AudioRecorderService',
+    'ComponentService',
     'ConfigService',
     'MultipleChoiceService',
     'NodeService',
@@ -37,13 +41,14 @@ class MultipleChoiceController extends ComponentController {
     $filter,
     $injector,
     $mdDialog,
-    $q,
+    protected $q: any,
     $rootScope,
     $scope,
     AnnotationService,
     AudioRecorderService,
+    private ComponentService: ComponentService,
     ConfigService,
-    MultipleChoiceService,
+    private MultipleChoiceService: MultipleChoiceService,
     NodeService,
     NotebookService,
     NotificationService,
@@ -70,9 +75,6 @@ class MultipleChoiceController extends ComponentController {
       StudentDataService,
       UtilService
     );
-    this.$q = $q;
-    this.MultipleChoiceService = MultipleChoiceService;
-
     // holds the ids of the choices the student has chosen
     this.studentChoices = [];
 
@@ -145,49 +147,46 @@ class MultipleChoiceController extends ComponentController {
     }
 
     this.disableComponentIfNecessary();
-
-    /**
-     * Get the component state from this component. The parent node will
-     * call this function to obtain the component state when it needs to
-     * save student data.
-     * @param isSubmit boolean whether the request is coming from a submit
-     * action (optional; default is false)
-     * @return a promise of a component state containing the student data
-     */
-    this.$scope.getComponentState = function (isSubmit) {
-      const deferred = this.$q.defer();
-      let getState = false;
-      let action = 'change';
-
-      if (isSubmit) {
-        if (this.$scope.multipleChoiceController.isSubmitDirty) {
-          getState = true;
-          action = 'submit';
-        }
-      } else {
-        if (this.$scope.multipleChoiceController.isDirty) {
-          getState = true;
-          action = 'save';
-        }
-      }
-
-      if (getState) {
-        // create a component state populated with the student data
-        this.$scope.multipleChoiceController.createComponentState(action).then((componentState) => {
-          deferred.resolve(componentState);
-        });
-      } else {
-        /*
-         * the student does not have any unsaved changes in this component
-         * so we don't need to save a component state for this component.
-         * we will immediately resolve the promise here.
-         */
-        deferred.resolve();
-      }
-
-      return deferred.promise;
-    }.bind(this);
+    this.subscribeToRequestComponentState();
     this.broadcastDoneRenderingComponent();
+  }
+
+  subscribeToRequestComponentState(): void {
+    this.requestComponentStateSubscription = this.ComponentService.requestComponentStateSource$.subscribe(
+      (request: ComponentStateRequest) => {
+        if (this.isForThisComponent(request)) {
+          this.ComponentService.sendComponentState(this.getComponentStateWrapper(request));
+        }
+      }
+    );
+  }
+
+  getComponentStateWrapper(request: ComponentStateRequest): ComponentStateWrapper {
+    return {
+      nodeId: this.nodeId,
+      componentId: this.componentId,
+      componentStatePromise: this.getComponentStatePromise(request)
+    };
+  }
+
+  getComponentStatePromise(request: ComponentStateRequest): Promise<any> {
+    if (this.shouldCreateComponentState(request)) {
+      return this.createComponentState(this.getAction(request));
+    } else {
+      return Promise.resolve(null);
+    }
+  }
+
+  shouldCreateComponentState(request: ComponentStateRequest): boolean {
+    return this.isDirty || request.isSubmit;
+  }
+
+  getAction(request: ComponentStateRequest): string {
+    return request.isSubmit ? 'submit' : 'save';
+  }
+
+  $onDestroy(): void {
+    this.requestComponentStateSubscription.unsubscribe();
   }
 
   handleNodeSubmit() {
@@ -634,7 +633,7 @@ class MultipleChoiceController extends ComponentController {
    * e.g. 'submit', 'save', 'change'
    * @return a promise that will return a component state
    */
-  createComponentState(action) {
+  createComponentState(action: string): Promise<any> {
     // create a new component state
     const componentState: any = this.NodeService.createNewComponentState();
 

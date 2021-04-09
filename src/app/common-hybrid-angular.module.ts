@@ -68,6 +68,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { ClassResponse } from '../assets/wise5/components/discussion/class-response/class-response.component';
+import { ComponentService } from '../assets/wise5/components/componentService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -123,6 +124,7 @@ export class EmptyComponent {}
     AudioOscillatorService,
     AudioRecorderService,
     ConceptMapService,
+    ComponentService,
     ConfigService,
     CRaterService,
     DiscussionService,
