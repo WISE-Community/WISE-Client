@@ -39,6 +39,7 @@ export default angular
           url: '/add-your-own',
           component: 'addYourOwnNode',
           params: {
+            initialComponents: [],
             title: ''
           }
         })
@@ -46,6 +47,7 @@ export default angular
           url: '/choose-location',
           component: 'chooseNewNodeLocation',
           params: {
+            initialComponents: [],
             title: ''
           }
         })

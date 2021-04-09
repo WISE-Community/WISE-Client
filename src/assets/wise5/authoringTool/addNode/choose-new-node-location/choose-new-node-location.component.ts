@@ -29,9 +29,19 @@ export class ChooseNewNodeLocation {
     } else {
       this.ProjectService.createNodeAfter(newNode, nodeId);
     }
+    this.addInitialComponents(
+      newNode.id,
+      this.upgrade.$injector.get('$stateParams').initialComponents
+    );
     this.save(newNode.id).then(() => {
       this.goToNode(newNode.id);
     });
+  }
+
+  addInitialComponents(nodeId: string, components: string[]) {
+    for (const component of components.reverse()) {
+      this.ProjectService.createComponent(nodeId, component);
+    }
   }
 
   save(newNodeId: string) {

@@ -4,6 +4,37 @@
     <input #titleField autofocus matInput type='text' [(ngModel)]='title'>
   </mat-form-field>
 </div>
+<h5 i18n>Select components to add to your new step (optional):</h5>
+<div fxLayout="row" fxLayoutAlign="start start">
+  <span *ngIf="initialComponents.length == 0" class="no-components" i18n>
+    No components
+  </span>
+  <span *ngIf="initialComponents.length > 0" cdkDropList class="initial-components" (cdkDropListDropped)="drop($event)">
+    <span class="selected-component-box" *ngFor="let component of initialComponents; let i=index;" cdkDrag
+        fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <span class="drag-handle" cdkDragHandle>
+        <mat-icon>menu</mat-icon>
+      </span>
+      <span>{{component}}</span>
+      <span fxFlex></span>
+      <button mat-button class="delete" (click)="deleteComponent(i)"><mat-icon>close</mat-icon></button>
+    </span>
+  </span>
+  <span fxLayout="column" fxLayoutAlign="start start">
+    <span fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="8px">
+      <button *ngFor="let component of components"
+            class="mat-card component"
+            (click)="addComponent(component)">
+        <mat-card-content>
+          <mat-card-title>
+            {{component}}
+          </mat-card-title>
+        </mat-card-content>
+      </button>
+    </span>
+    <span i18n>*You can always add or remove content later by editing the step.</span>
+  </span>
+</div>
 <hr>
 <div fxLayout="row">
   <button mat-button class="mat-primary" (click)="back()" aria-label="back" i18n>Back</button>
