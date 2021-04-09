@@ -491,6 +491,14 @@
           <context context-type="sourcefile">app/authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/authoringTool/addNode/choose-new-node/choose-new-node.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/authoringTool/addNode/choose-new-node-location/choose-new-node-location.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="71c77bb8cecdf11ec3eead24dd1ba506573fa9cd" datatype="html">
         <source>Submit</source>
@@ -5657,6 +5665,20 @@
           <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="74b04b602d4148d1cb5de4da90c0e91ec9bae5ac" datatype="html">
+        <source>Choose a Branch Path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="33587ab40a459dc3058a184e39bfa93737fbbd67" datatype="html">
+        <source>Note: This chooser screen is only available in preview mode. Students will not see this screen in a classroom run and will instead be assigned a branch path automatically. Once you have chosen a branch, complete the current step and then click the Next arrow.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">
         <source>Expand or collapse lesson content</source>
         <context-group purpose="location">
@@ -5713,20 +5735,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/possible-score/possible-score.component.html</context>
           <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="74b04b602d4148d1cb5de4da90c0e91ec9bae5ac" datatype="html">
-        <source>Choose a Branch Path</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="33587ab40a459dc3058a184e39bfa93737fbbd67" datatype="html">
-        <source>Note: This chooser screen is only available in preview mode. Students will not see this screen in a classroom run and will instead be assigned a branch path automatically. Once you have chosen a branch, complete the current step and then click the Next arrow.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component.html</context>
-          <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7a4dcc3f14029f6e71021bc396effab868353ad5" datatype="html">
@@ -7266,6 +7274,10 @@
           <context context-type="sourcefile">app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">27</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/authoringTool/addNode/choose-new-node/choose-new-node.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="e8c21747e8604f974b3ed6ecf6089306b7cc0aae" datatype="html">
         <source>Choose a location for the imported steps</source>
@@ -7280,6 +7292,10 @@
           <context context-type="sourcefile">app/authoring-tool/import-step/choose-import-step-location/choose-import-step-location.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/authoringTool/addNode/choose-new-node-location/choose-new-node-location.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="1e9b22a987b26586870bb920525f8062d24c6267" datatype="html">
         <source>Insert After</source>
@@ -7289,6 +7305,10 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/authoringTool/addNode/choose-new-node-location/choose-new-node-location.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
@@ -7322,6 +7342,20 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component.html</context>
           <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="891f639ffcf9d31aea80ea7e8e428a6597b059b3" datatype="html">
+        <source>Step Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/authoringTool/addNode/choose-new-node/choose-new-node.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fe47acba6a2b6d343c4568432b800629bb8dd638" datatype="html">
+        <source>Choose a location for the new step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/authoringTool/addNode/choose-new-node-location/choose-new-node-location.component.html</context>
+          <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
       <trans-unit id="92159486420caf44d25e4f85cb0ed4f105d9c854" datatype="html">
@@ -7890,15 +7924,28 @@
           <context context-type="linenumber">108</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="42af1e0ce1740f993819b4236600e5379dc30f3e" datatype="html">
+        <source>
+    <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
+      Saves Student Work
+       
+      <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>help<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
+    <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="b2a497bce327b6c20cc9969b0bad0b1470fcccd5" datatype="html">
         <source>Reload Model</source>
         <context-group purpose="location">
           <context context-type="sourcefile">assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="650a3523bea71be4f81a70e915e09dcea7181b00" datatype="html">
