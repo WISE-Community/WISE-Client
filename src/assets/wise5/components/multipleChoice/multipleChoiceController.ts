@@ -4,12 +4,11 @@ import * as angular from 'angular';
 import { Subscription } from 'rxjs';
 import ComponentController from '../componentController';
 import { ComponentService } from '../componentService';
+import { ComponentStateRequest } from '../ComponentStateRequest';
+import { ComponentStateWrapper } from '../ComponentStateWrapper';
 import { MultipleChoiceService } from './multipleChoiceService';
 
 class MultipleChoiceController extends ComponentController {
-  $q: any;
-  MultipleChoiceService: MultipleChoiceService;
-  ComponentService: ComponentService;
   componentHasCorrectAnswer: boolean;
   studentChoices: any[];
   isCorrect: boolean;
@@ -42,14 +41,14 @@ class MultipleChoiceController extends ComponentController {
     $filter,
     $injector,
     $mdDialog,
-    $q,
+    protected $q: any,
     $rootScope,
     $scope,
     AnnotationService,
     AudioRecorderService,
-    ComponentService,
+    private ComponentService: ComponentService,
     ConfigService,
-    MultipleChoiceService,
+    private MultipleChoiceService: MultipleChoiceService,
     NodeService,
     NotebookService,
     NotificationService,
@@ -76,10 +75,6 @@ class MultipleChoiceController extends ComponentController {
       StudentDataService,
       UtilService
     );
-    this.$q = $q;
-    this.MultipleChoiceService = MultipleChoiceService;
-    this.ComponentService = ComponentService;
-
     // holds the ids of the choices the student has chosen
     this.studentChoices = [];
 
@@ -158,46 +153,36 @@ class MultipleChoiceController extends ComponentController {
 
   subscribeToRequestComponentState(): void {
     this.requestComponentStateSubscription = this.ComponentService.requestComponentStateSource$.subscribe(
-      (data) => {
-        this.ComponentService.sendComponentState(this.getComponentStateWrapper(data));
+      (request: ComponentStateRequest) => {
+        if (this.isForThisComponent(request)) {
+          this.ComponentService.sendComponentState(this.getComponentStateWrapper(request));
+        }
       }
     );
   }
 
-  getComponentStateWrapper(data: any): any {
-    let componentStatePromise: any = null;
-    if (this.isMatchingComponentAndShouldSave(data)) {
-      componentStatePromise = this.createComponentState(this.getAction(data));
-    }
-    return this.createComponentStateWrapper(this.nodeId, this.componentId, componentStatePromise);
-  }
-
-  isMatchingComponentAndShouldSave(data: any): boolean {
-    return (
-      data.nodeId === this.nodeId &&
-      data.componentId === this.componentId &&
-      (this.isDirty || data.isSubmit)
-    );
-  }
-
-  getAction(data: any): string {
-    let action = 'save';
-    if (data.isSubmit) {
-      action = 'submit';
-    }
-    return action;
-  }
-
-  createComponentStateWrapper(
-    nodeId: string,
-    componentId: string,
-    componentStatePromise: any
-  ): any {
+  getComponentStateWrapper(request: ComponentStateRequest): ComponentStateWrapper {
     return {
-      nodeId: nodeId,
-      componentId: componentId,
-      componentStatePromise: componentStatePromise
+      nodeId: this.nodeId,
+      componentId: this.componentId,
+      componentStatePromise: this.getComponentStatePromise(request)
     };
+  }
+
+  getComponentStatePromise(request: ComponentStateRequest): Promise<any> {
+    if (this.shouldCreateComponentState(request)) {
+      return this.createComponentState(this.getAction(request));
+    } else {
+      return Promise.resolve(null);
+    }
+  }
+
+  shouldCreateComponentState(request: ComponentStateRequest): boolean {
+    return this.isDirty || request.isSubmit;
+  }
+
+  getAction(request: ComponentStateRequest): string {
+    return request.isSubmit ? 'submit' : 'save';
   }
 
   $onDestroy(): void {
@@ -648,7 +633,7 @@ class MultipleChoiceController extends ComponentController {
    * e.g. 'submit', 'save', 'change'
    * @return a promise that will return a component state
    */
-  createComponentState(action) {
+  createComponentState(action: string): Promise<any> {
     // create a new component state
     const componentState: any = this.NodeService.createNewComponentState();
 

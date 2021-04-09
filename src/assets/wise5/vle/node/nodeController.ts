@@ -13,6 +13,7 @@ import { StudentAssetService } from '../../services/studentAssetService';
 import { Directive } from '@angular/core';
 import { ComponentService } from '../../components/componentService';
 import { filter, take } from 'rxjs/operators';
+import { ComponentStateWrapper } from '../../components/ComponentStateWrapper';
 
 @Directive()
 class NodeController {
@@ -755,7 +756,7 @@ class NodeController {
     componentId: string,
     isAutoSave: boolean = false,
     isSubmit: boolean = false
-  ): any {
+  ): Promise<any> {
     const componentStatePromise = this.getComponentStatePromise(
       nodeId,
       componentId,
@@ -770,7 +771,7 @@ class NodeController {
     componentId: string,
     isAutoSave: boolean = false,
     isSubmit: boolean = false
-  ): any {
+  ): Promise<any> {
     const childScope = this.componentToScope[componentId];
     if (childScope != null) {
       if (childScope.getComponentState) {
@@ -785,7 +786,7 @@ class NodeController {
     componentId: string,
     isAutoSave: boolean = false,
     isSubmit: boolean = false
-  ): any {
+  ): Promise<any> {
     return new Promise((resolve) => {
       this.ComponentService.sendComponentStateSource$
         .pipe(
@@ -795,10 +796,10 @@ class NodeController {
           take(1)
         )
         .toPromise()
-        .then((data: any) => {
+        .then((componentStateWrapper: ComponentStateWrapper) => {
           this.resolveComponentStatePromise(
             resolve,
-            data.componentStatePromise,
+            componentStateWrapper.componentStatePromise,
             isAutoSave,
             isSubmit
           );
@@ -808,18 +809,18 @@ class NodeController {
 
   resolveComponentStatePromise(
     resolve: any,
-    componentStatePromise: any,
+    componentStatePromise: Promise<any>,
     isAutoSave: boolean = false,
     isSubmit: boolean = false
   ): void {
-    if (componentStatePromise == null) {
-      resolve(null);
-    } else {
-      componentStatePromise.then((componentState: any) => {
+    componentStatePromise.then((componentState: any) => {
+      if (componentState == null) {
+        resolve(null);
+      } else {
         this.injectAdditionalComponentStateFields(componentState, isAutoSave, isSubmit);
         resolve(componentState);
-      });
-    }
+      }
+    });
   }
 
   getComponentStateFromChildScope(childScope: any, isAutoSave: boolean, isSubmit: boolean): any {
