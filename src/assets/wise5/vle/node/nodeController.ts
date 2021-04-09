@@ -742,6 +742,7 @@ class NodeController {
         componentStatePromises.push(
           this.getComponentStatePromiseFromService(this.nodeId, componentId, isAutoSave, isSubmit)
         );
+        this.ComponentService.requestComponentState(this.nodeId, componentId, isSubmit);
       } else {
         componentStatePromises.push(
           this.getComponentStatePromiseFromChildScope(componentId, isAutoSave, isSubmit)
@@ -763,7 +764,6 @@ class NodeController {
       isAutoSave,
       isSubmit
     );
-    this.ComponentService.requestComponentState(nodeId, componentId, isSubmit);
     return componentStatePromise;
   }
 
