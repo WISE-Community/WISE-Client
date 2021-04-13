@@ -48,9 +48,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     this.studentChoices = [];
     this.isCorrect = null;
     this.isLatestComponentStateSubmit = false;
-    this.isSaveButtonVisible = this.componentContent.showSaveButton;
-    this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    this.isSaveOrSubmitButtonVisible = this.isSaveButtonVisible || this.isSubmitButtonVisible;
     this.choices = this.UtilService.makeCopyOfJSONObject(this.componentContent.choices);
     this.componentHasCorrectAnswer = this.hasCorrectChoices();
     this.showFeedback = this.componentContent.showFeedback;
@@ -198,10 +195,8 @@ export class MultipleChoiceStudent extends ComponentStudent {
   addOrRemoveFromStudentChoices(choiceId: string): void {
     const index = this.studentChoices.indexOf(choiceId);
     if (index == -1) {
-      // the choice was not previously checked so we will add the choice id to the array
       this.studentChoices.push(choiceId);
     } else {
-      // the choice was previously checked so we will remove the choice id from the array
       this.studentChoices.splice(index, 1);
     }
   }
@@ -281,7 +276,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
   }
 
   hideAllFeedback(): void {
-    for (const choice of this.getChoices()) {
+    for (const choice of this.choices) {
       choice.showFeedback = false;
     }
   }
@@ -296,7 +291,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   checkSingleAnswer(): void {
     let isCorrect = false;
-    for (const choice of this.getChoices()) {
+    for (const choice of this.choices) {
       if (this.componentHasCorrectAnswer) {
         if (choice.isCorrect && this.isChecked(choice.id)) {
           isCorrect = true;
@@ -311,13 +306,9 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   checkMultipleAnswer(): void {
     let isAllCorrect = true;
-    for (const choice of this.getChoices()) {
+    for (const choice of this.choices) {
       if (this.componentHasCorrectAnswer) {
-        if (this.isStudentChoiceValueCorrect(choice)) {
-          isAllCorrect = isAllCorrect && true;
-        } else {
-          isAllCorrect = false;
-        }
+        isAllCorrect &&= this.isStudentChoiceValueCorrect(choice);
       }
       this.displayFeedbackOnChoiceIfNecessary(choice);
     }
@@ -463,10 +454,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   getChoiceType(): string {
     return this.componentContent.choiceType;
-  }
-
-  getChoices(): any[] {
-    return this.choices;
   }
 
   /**

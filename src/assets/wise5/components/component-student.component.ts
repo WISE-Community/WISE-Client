@@ -48,6 +48,7 @@ export abstract class ComponentStudent {
   annotationSavedToServerSubscription: Subscription;
   nodeSubmitClickedSubscription: Subscription;
   studentWorkSavedToServerSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -62,6 +63,9 @@ export abstract class ComponentStudent {
     this.componentId = this.componentContent.id;
     this.componentType = this.componentContent.type;
     this.prompt = this.componentContent.prompt;
+    this.isSaveButtonVisible = this.componentContent.showSaveButton;
+    this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
+    this.isSaveOrSubmitButtonVisible = this.isSaveButtonVisible || this.isSubmitButtonVisible;
     if (!this.isAuthoringComponentPreviewMode()) {
       this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
         this.nodeId,
@@ -69,46 +73,46 @@ export abstract class ComponentStudent {
         this.workgroupId
       );
     }
-    this.registerListeners();
-    this.subscribeToRequestComponentState();
+    this.subscribeToSubscriptions();
   }
 
   ngOnDestroy(): void {
-    this.annotationSavedToServerSubscription.unsubscribe();
-    this.nodeSubmitClickedSubscription.unsubscribe();
-    this.requestComponentStateSubscription.unsubscribe();
-    this.studentWorkSavedToServerSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   isAuthoringComponentPreviewMode(): boolean {
     return this.mode === 'authoringComponentPreview';
   }
 
-  registerListeners(): void {
-    this.annotationSavedToServerSubscription = this.AnnotationService.annotationSavedToServer$.subscribe(
-      ({ annotation }) => {
-        if (this.isEventTargetThisComponent(annotation)) {
+  subscribeToSubscriptions(): void {
+    this.subscribeToAnnotationSavedToServer();
+    this.subscribeToNodeSubmitClicked();
+    this.subscribeToStudentWorkSavedToServer();
+    this.subscribeToRequestComponentState();
+  }
+
+  subscribeToAnnotationSavedToServer() {
+    this.subscriptions.add(
+      this.AnnotationService.annotationSavedToServer$.subscribe(({ annotation }) => {
+        if (this.isForThisComponent(annotation)) {
           this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
             this.nodeId,
             this.componentId,
             this.workgroupId
           );
         }
-      }
+      })
     );
+  }
 
-    this.nodeSubmitClickedSubscription = this.NodeService.nodeSubmitClicked$.subscribe(
-      ({ nodeId }) => {
+  subscribeToNodeSubmitClicked() {
+    this.subscriptions.add(
+      this.NodeService.nodeSubmitClicked$.subscribe(({ nodeId }) => {
         if (this.nodeId === nodeId) {
           this.handleNodeSubmit();
         }
-      }
+      })
     );
-    this.registerStudentWorkSavedToServerListener();
-  }
-
-  isEventTargetThisComponent(args: any): boolean {
-    return this.isForThisComponent(args);
   }
 
   isForThisComponent(object: any) {
@@ -119,11 +123,11 @@ export abstract class ComponentStudent {
     this.isSubmit = true;
   }
 
-  registerStudentWorkSavedToServerListener(): void {
-    this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-      (args: any) => {
+  subscribeToStudentWorkSavedToServer(): void {
+    this.subscriptions.add(
+      this.StudentDataService.studentWorkSavedToServer$.subscribe((args: any) => {
         this.handleStudentWorkSavedToServer(args);
-      }
+      })
     );
   }
 
@@ -165,12 +169,14 @@ export abstract class ComponentStudent {
   handleStudentWorkSavedToServerAdditionalProcessing(args: any): void {}
 
   subscribeToRequestComponentState(): void {
-    this.requestComponentStateSubscription = this.ComponentService.requestComponentStateSource$.subscribe(
-      (request: ComponentStateRequest) => {
-        if (this.isForThisComponent(request)) {
-          this.ComponentService.sendComponentState(this.getComponentStateWrapper(request));
+    this.subscriptions.add(
+      this.ComponentService.requestComponentStateSource$.subscribe(
+        (request: ComponentStateRequest) => {
+          if (this.isForThisComponent(request)) {
+            this.ComponentService.sendComponentState(this.getComponentStateWrapper(request));
+          }
         }
-      }
+      )
     );
   }
 
@@ -225,7 +231,7 @@ export abstract class ComponentStudent {
     const connectedComponents = this.componentContent.connectedComponents;
     if (connectedComponents != null) {
       const componentStates = [];
-      for (let connectedComponent of connectedComponents) {
+      for (const connectedComponent of connectedComponents) {
         const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
           connectedComponent.nodeId,
           connectedComponent.componentId
@@ -245,7 +251,7 @@ export abstract class ComponentStudent {
     }
   }
 
-  createMergedComponentState(componentStates): any {
+  createMergedComponentState(componentStates: any[]): any {
     return componentStates[0];
   }
 
@@ -276,7 +282,6 @@ export abstract class ComponentStudent {
   submit(submitTriggeredBy = null): void {
     if (this.getIsSubmitDirty()) {
       let isPerformSubmit = true;
-
       if (this.hasMaxSubmitCount()) {
         const numberOfSubmitsLeft = this.getNumberOfSubmitsLeft();
 
@@ -288,7 +293,6 @@ export abstract class ComponentStudent {
           }
         }
       }
-
       if (isPerformSubmit) {
         this.performSubmit(submitTriggeredBy);
       } else {
@@ -449,10 +453,10 @@ export abstract class ComponentStudent {
       this.nodeId,
       this.componentId
     );
-
     if (latestComponentState) {
-      const serverSaveTime = latestComponentState.serverSaveTime;
-      const clientSaveTime = this.ConfigService.convertToClientTimestamp(serverSaveTime);
+      const clientSaveTime = this.ConfigService.convertToClientTimestamp(
+        latestComponentState.serverSaveTime
+      );
       if (latestComponentState.isSubmit) {
         this.setIsSubmitDirty(false);
         this.emitComponentSubmitDirty(false);

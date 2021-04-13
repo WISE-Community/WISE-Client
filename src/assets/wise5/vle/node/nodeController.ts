@@ -1036,10 +1036,6 @@ class NodeController {
       this.nodeUnloaded(this.nodeId);
     });
   }
-
-  childComponentStudentDataChanged() {
-    console.log('childComponentStudentDataChanged');
-  }
 }
 
 export default NodeController;
