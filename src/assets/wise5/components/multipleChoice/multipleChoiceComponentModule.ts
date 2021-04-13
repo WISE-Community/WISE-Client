@@ -1,14 +1,17 @@
 'use strict';
 
 import * as angular from 'angular';
-import { downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { MultipleChoiceService } from './multipleChoiceService';
-import MultipleChoiceController from './multipleChoiceController';
+import { MultipleChoiceStudent } from './multiple-choice-student/multiple-choice-student.component';
 
 let multipleChoiceComponentModule = angular
   .module('multipleChoiceComponentModule', ['pascalprecht.translate'])
   .service('MultipleChoiceService', downgradeInjectable(MultipleChoiceService))
-  .controller('MultipleChoiceController', MultipleChoiceController)
+  .directive(
+    'multipleChoiceStudent',
+    downgradeComponent({ component: MultipleChoiceStudent }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {

@@ -1,0 +1,106 @@
+<div class="main-div">
+  <div [ngSwitch]="choiceType">
+    <div class="prompt-div">
+      <label *ngIf="isPromptVisible">
+        <span [innerHTML]="prompt"></span>
+      </label>
+      <possible-score [maxScore]="componentContent.maxScore"></possible-score>
+    </div>
+    <mat-radio-group *ngSwitchCase="'radio'"
+        [(ngModel)]="studentChoices"
+        (ngModelChange)="studentDataChanged()">
+      <div *ngFor="let choice of choices">
+        <mat-radio-button
+            aria-label="choice.text"
+            color="primary"
+            [value]="choice.id"
+            (click)="radioChoiceSelected(choice.id)"
+            [disabled]="isDisabled">
+          <span [innerHTML]="choice.text">
+          </span>
+          <span *ngIf="showFeedback && choice.showFeedback"
+              [ngClass]="{'success': componentHasCorrectAnswer && choice.isCorrect, 'warn': componentHasCorrectAnswer && !choice.isCorrect, 'info': !componentHasCorrectAnswer}">
+              {{ choice.feedbackToShow }}
+          </span>
+        </mat-radio-button>
+      </div>
+    </mat-radio-group>
+    <div *ngSwitchCase="'checkbox'">
+      <div *ngFor="let choice of choices">
+        <mat-checkbox
+            aria-label="choice.text"
+            color="primary"
+            [checked]="choice.isChecked"
+            (click)="checkboxClicked(choice.id)"
+            [disabled]="isDisabled">
+          <span [innerHTML]="choice.text">
+          </span>
+          <span *ngIf="choice.showFeedback"
+              [ngClass]="{'success': componentHasCorrectAnswer && choice.isCorrect, 'warn': componentHasCorrectAnswer && !choice.isCorrect, 'info': !componentHasCorrectAnswer}">
+              {{ choice.feedbackToShow }}
+          </span>
+        </mat-checkbox>
+      </div>
+    </div>
+    <div class="attempts-left-message"
+        *ngIf="componentHasCorrectAnswer && componentContent.maxSubmitCount != null && componentContent.maxSubmitCount === 1"
+        i18n>
+      You have used {{ submitCounter }} of {{ componentContent.maxSubmitCount}} attempt
+    </div>
+    <div class="attempts-left-message"
+        *ngIf="componentHasCorrectAnswer && componentContent.maxSubmitCount != null && componentContent.maxSubmitCount > 1"
+        i18n>
+      You have used {{ submitCounter }} of {{ componentContent.maxSubmitCount }} attempts
+    </div>
+    <div *ngIf="!isLatestComponentStateSubmit || !componentHasCorrectAnswer || !showFeedback">
+      <br/>
+    </div>
+    <div *ngIf="componentHasCorrectAnswer && isLatestComponentStateSubmit && showFeedback && isCorrect != null && isCorrect"
+        class="correct-text"
+        i18n>
+      Correct
+    </div>
+    <div *ngIf="componentHasCorrectAnswer && isLatestComponentStateSubmit && showFeedback && isCorrect != null && !isCorrect"
+        class="incorrect-text"
+        i18n>
+      Incorrect
+    </div>
+  </div>
+  <div *ngIf="isSaveOrSubmitButtonVisible"
+      fxLayout="row"
+      fxLayoutAlign="start center">
+    <button *ngIf="isSaveButtonVisible"
+        mat-button
+        class="mat-primary mat-raised-button save-button"
+        (click)="saveButtonClicked()"
+        [disabled]="isDisabled || !isDirty"
+        aria-label="Save"
+        i18n-aria-label
+        i18n>
+      Save
+    </button>
+    <button *ngIf="isSubmitButtonVisible"
+        mat-button
+        class="mat-primary mat-raised-button submit-button"
+        (click)="submitButtonClicked()"
+        [disabled]="isSubmitButtonDisabled || isDisabled || !isSubmitDirty"
+        aria-label="Submit"
+        i18n-aria-label
+        i18n>
+      Submit
+    </button>
+    <span *ngIf="saveMessage.text"
+      class="component__actions__info save-message">
+        {{ saveMessage.text }}
+        <span class="component__actions__more"
+            matTooltip="{{ saveMessage.time | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"
+            matTooltipPosition="above">
+          {{ saveMessage.time | amTimeAgo }}
+        </span>
+    </span>
+  </div>
+  <component-annotations *ngIf="mode === 'student'"
+      [annotations]="latestAnnotations"
+      [maxScore]="componentContent.maxScore">
+  </component-annotations>
+</div>

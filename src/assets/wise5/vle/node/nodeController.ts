@@ -913,7 +913,10 @@ class NodeController {
                     ) {
                       let connectedComponent = this.getComponentById(connectedComponentId);
                       let componentScope = this.componentToScope[tempComponentId];
-                      if (componentScope.handleConnectedComponentStudentDataChanged != null) {
+                      if (
+                        componentScope != null &&
+                        componentScope.handleConnectedComponentStudentDataChanged != null
+                      ) {
                         componentScope.handleConnectedComponentStudentDataChanged(
                           connectedComponent,
                           connectedComponentParams,
@@ -930,7 +933,10 @@ class NodeController {
                     if (connectedComponentId === changedComponentId) {
                       let connectedComponent = this.getComponentById(connectedComponentId);
                       let componentScope = this.componentToScope[tempComponentId];
-                      if (componentScope.handleConnectedComponentStudentDataChanged != null) {
+                      if (
+                        componentScope != null &&
+                        componentScope.handleConnectedComponentStudentDataChanged != null
+                      ) {
                         componentScope.handleConnectedComponentStudentDataChanged(
                           connectedComponent,
                           connectedComponentParams,
@@ -949,7 +955,10 @@ class NodeController {
                     if (connectedComponentId === changedComponentId) {
                       let connectedComponent = this.getComponentById(connectedComponentId);
                       let componentScope = this.componentToScope[tempComponentId];
-                      if (componentScope.handleConnectedComponentStudentDataChanged != null) {
+                      if (
+                        componentScope != null &&
+                        componentScope.handleConnectedComponentStudentDataChanged != null
+                      ) {
                         componentScope.handleConnectedComponentStudentDataChanged(
                           connectedComponent,
                           connectedComponentParams,
