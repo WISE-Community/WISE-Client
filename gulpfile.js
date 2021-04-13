@@ -76,19 +76,6 @@ gulp.task('watch-sass', gulp.series('set-watch', function(done) {
     });
 }));
 
-gulp.task('site-i18n', (cb) => {
-  console.log('[ng xi18n] Generating messages start...');
-  exec('ng xi18n', (err, stdout, stderr) => {
-    console.log('[ng xi18n] Generating messages complete!');
-    console.log('[npm run ngx-extractor] Generating messages start...');
-    exec('npm run ngx-extractor', (err, stdout, stderr) => {
-      console.log('[npm run ngx-extractor] Generating messages complete!');
-      cb(err);
-    });
-    cb(err);
-  });
-});
-
 // -----------------------------------------------------------------------------
 // merge i18n json files
 // Removes extra keys from foreignLocale
