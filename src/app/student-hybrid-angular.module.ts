@@ -17,9 +17,16 @@ import { AngularJSModule } from './common-hybrid-angular.module';
 import { NavItemComponent } from '../assets/wise5/vle/nav-item/nav-item.component';
 import { ComponentAnnotationsComponent } from '../assets/wise5/directives/componentAnnotations/component-annotations.component';
 import { HtmlStudent } from '../assets/wise5/components/html/html-student/html-student.component';
+import { MultipleChoiceStudent } from '../assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component';
 
 @NgModule({
-  declarations: [ComponentAnnotationsComponent, HtmlStudent, NavItemComponent, PossibleScoreComponent],
+  declarations: [
+    ComponentAnnotationsComponent,
+    HtmlStudent,
+    MultipleChoiceStudent,
+    NavItemComponent,
+    PossibleScoreComponent
+  ],
   imports: [AngularJSModule],
   providers: [
     { provide: DataService, useExisting: StudentDataService },

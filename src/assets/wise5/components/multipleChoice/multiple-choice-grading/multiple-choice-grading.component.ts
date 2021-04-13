@@ -26,6 +26,7 @@ export class MultipleChoiceGrading extends ComponentGrading {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.componentContent = this.ProjectService.injectAssetPaths(this.componentContent);
     if (this.MultipleChoiceService.isRadio(this.componentContent)) {
       const studentChoiceIds = this.getChoiceIds(this.componentState.studentData.studentChoices);
       this.studentChoiceId = studentChoiceIds[0];

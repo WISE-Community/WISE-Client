@@ -135,4 +135,13 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
       this.componentChanged();
     }
   }
+
+  reloadPreview() {
+    // modify the authoringComponentContent to trigger the preview reloading
+    this.authoringComponentContent.reloadTime = new Date();
+    setTimeout(() => {
+      // remove the field we previously used to trigger the reload
+      delete this.authoringComponentContent.reloadTime;
+    });
+  }
 }
