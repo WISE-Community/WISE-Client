@@ -17,7 +17,6 @@ export abstract class ComponentAuthoring {
   promptChange: Subject<string> = new Subject<string>();
   allowedConnectedComponentTypes: string[];
   authoringComponentContent: any;
-  componentChangedSubscription: Subscription;
   componentContent: any;
   idToOrder: any;
   isDirty: boolean = false;
@@ -27,21 +26,14 @@ export abstract class ComponentAuthoring {
   isSubmitDirty: boolean = false;
   showAdvancedAuthoring: boolean = false;
   submitCounter: number = 0;
-  starterStateResponseSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService
-  ) {
-    this.promptChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe((prompt: string) => {
-        this.authoringComponentContent.prompt = prompt;
-        this.componentChanged();
-      });
-  }
+  ) {}
 
   ngOnInit() {
     this.authoringComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
@@ -50,21 +42,30 @@ export abstract class ComponentAuthoring {
     );
     this.resetUI();
     this.idToOrder = this.ProjectService.idToOrder;
-    this.componentChangedSubscription = this.ProjectService.componentChanged$.subscribe(() => {
-      this.componentChanged();
-    });
-    this.starterStateResponseSubscription = this.NodeService.starterStateResponse$.subscribe(
-      (args: any) => {
+    this.subscriptions.add(
+      this.ProjectService.componentChanged$.subscribe(() => {
+        this.componentChanged();
+      })
+    );
+    this.subscriptions.add(
+      this.NodeService.starterStateResponse$.subscribe((args: any) => {
         if (this.isForThisComponent(args)) {
           this.saveStarterState(args.starterState);
         }
-      }
+      })
+    );
+    this.subscriptions.add(
+      this.promptChange
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe((prompt: string) => {
+          this.authoringComponentContent.prompt = prompt;
+          this.componentChanged();
+        })
     );
   }
 
   ngOnDestroy() {
-    this.componentChangedSubscription.unsubscribe();
-    this.starterStateResponseSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   promptChanged(prompt: string): void {

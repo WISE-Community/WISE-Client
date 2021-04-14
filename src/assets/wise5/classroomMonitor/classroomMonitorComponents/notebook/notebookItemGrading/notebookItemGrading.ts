@@ -1,6 +1,7 @@
 'use strict';
 
 import { Directive } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ConfigService } from '../../../../services/configService';
 import { NotebookService } from '../../../../services/notebookService';
@@ -28,7 +29,7 @@ class NotebookItemGradingController {
   score: any;
   toWorkgroupId: number;
   usernames: string;
-  annotationSavedToServerSubscription: any;
+  annotationSavedToServerSubscription: Subscription;
 
   static $inject = [
     '$scope',
@@ -63,10 +64,6 @@ class NotebookItemGradingController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.annotationSavedToServerSubscription.unsubscribe();
   }
 

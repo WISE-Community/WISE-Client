@@ -5,6 +5,7 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import * as $ from 'jquery';
 import * as angular from 'angular';
 import { Directive } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Directive()
 class StudentGradingToolsController {
@@ -16,7 +17,7 @@ class StudentGradingToolsController {
   prevId: any;
   workgroupId: number;
   workgroups: any;
-  currentPeriodChangedSubscription: any;
+  currentPeriodChangedSubscription: Subscription;
 
   static $inject = ['$scope', '$state', 'orderByFilter', 'ConfigService', 'TeacherDataService'];
 
@@ -45,10 +46,6 @@ class StudentGradingToolsController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.currentPeriodChangedSubscription.unsubscribe();
   }
 

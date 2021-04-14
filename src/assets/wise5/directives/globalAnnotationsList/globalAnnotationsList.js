@@ -1,5 +1,7 @@
 "use strict";
 
+import { Subscription } from 'rxjs';
+
 class GlobalAnnotationsListController {
     constructor($rootScope,
                 $scope,
@@ -13,6 +15,7 @@ class GlobalAnnotationsListController {
         this.AnnotationService = AnnotationService;
         this.ProjectService = ProjectService;
         this.StudentDataService = StudentDataService;
+        this.subscriptions = new Subscription();
 
         this.$translate = this.$filter('translate');
 
@@ -22,15 +25,15 @@ class GlobalAnnotationsListController {
             this.setModel();
         }
 
-        this.annotationSavedToServerSubscription =
+        this.subscriptions.add(
                 this.AnnotationService.annotationSavedToServer$.subscribe(() => {
             this.setModel();
-        });
+        }));
 
-        this.nodeStatusesChangedSubscription =
+        this.subscriptions.add(
                 this.StudentDataService.nodeStatusesChanged$.subscribe(() => {
             this.setModel();
-        });
+        }));
 
         this.$scope.$on('$destroy', () => {
           this.ngOnDestroy();
@@ -38,12 +41,7 @@ class GlobalAnnotationsListController {
     };
 
     ngOnDestroy() {
-        this.unsubscribeAll();
-    }
-
-    unsubscribeAll() {
-        this.annotationSavedToServerSubscription.unsubscribe();
-        this.nodeStatusesChangedSubscription.unsubscribe();
+        this.subscriptions.unsubscribe();
     }
 
     setModel() {

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
@@ -42,9 +42,6 @@ export class OutsideUrlAuthoring extends ComponentAuthoring {
   urlChange: Subject<string> = new Subject<string>();
   widthChange: Subject<string> = new Subject<string>();
   heightChange: Subject<string> = new Subject<string>();
-  urlChangedSubscription: Subscription;
-  widthChangedSubscription: Subscription;
-  heightChangedSubscription: Subscription;
 
   constructor(
     protected ConfigService: ConfigService,
@@ -68,29 +65,23 @@ export class OutsideUrlAuthoring extends ComponentAuthoring {
       );
       this.filteredOpenEducationalResources = this.allOpenEducationalResources;
     });
-    this.urlChangedSubscription = this.urlChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe((url: string) => {
+    this.subscriptions.add(
+      this.urlChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe((url: string) => {
         this.authoringComponentContent.url = url;
         this.authoringComponentContent.info = null;
         this.componentChanged();
-      });
-    this.widthChangedSubscription = this.widthChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.widthChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
-    this.heightChangedSubscription = this.heightChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.heightChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
-  }
-
-  ngOnDestroy() {
-    this.urlChangedSubscription.unsubscribe();
-    this.widthChangedSubscription.unsubscribe();
-    this.heightChangedSubscription.unsubscribe();
+      })
+    );
   }
 
   chooseOpenEducationalResource(openEducationalResource: any): void {

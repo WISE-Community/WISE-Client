@@ -4,6 +4,7 @@ import { UtilService } from '../../services/utilService';
 import { ConfigService } from '../../services/configService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import * as $ from 'jquery';
+import { Subscription } from 'rxjs';
 
 export class ProjectAssetAuthoringController {
   $translate: any;
@@ -29,9 +30,7 @@ export class ProjectAssetAuthoringController {
   assetIsImage: boolean;
   assetIsVideo: boolean;
   allowedFileTypes: string[] = ['any'];
-  getProjectAssetsSubscription: any;
-  getTotalFileSizeSubscription: any;
-  getTotalUnusedFileSizeSubscription: any;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
     '$filter',
@@ -88,26 +87,26 @@ export class ProjectAssetAuthoringController {
       }
     }
 
-    this.getProjectAssetsSubscription = this.ProjectAssetService.getProjectAssets().subscribe(
-      (projectAssets) => {
+    this.subscriptions.add(
+      this.ProjectAssetService.getProjectAssets().subscribe((projectAssets) => {
         if (projectAssets != null) {
           this.projectAssets = projectAssets;
           this.sortAssets(this.assetSortBy);
           this.projectAssetTotalSizeMax = this.ProjectAssetService.totalSizeMax;
         }
-      }
+      })
     );
 
-    this.getTotalFileSizeSubscription = this.ProjectAssetService.getTotalFileSize().subscribe(
-      (totalFileSize) => {
+    this.subscriptions.add(
+      this.ProjectAssetService.getTotalFileSize().subscribe((totalFileSize) => {
         this.setTotalFileSize(totalFileSize);
-      }
+      })
     );
 
-    this.getTotalUnusedFileSizeSubscription = this.ProjectAssetService.getTotalUnusedFileSize().subscribe(
-      (totalUnusedFilesSize) => {
+    this.subscriptions.add(
+      this.ProjectAssetService.getTotalUnusedFileSize().subscribe((totalUnusedFilesSize) => {
         this.setTotalUnusedFilesSize(totalUnusedFilesSize);
-      }
+      })
     );
 
     if (this.ProjectAssetService.isProjectAssetsAvailable()) {
@@ -116,9 +115,7 @@ export class ProjectAssetAuthoringController {
   }
 
   $onDestroy() {
-    this.getProjectAssetsSubscription.unsubscribe();
-    this.getTotalFileSizeSubscription.unsubscribe();
-    this.getTotalUnusedFileSizeSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   assetSortByChanged() {
@@ -246,19 +243,21 @@ export class ProjectAssetAuthoringController {
   }
 
   uploadAssets(files) {
-    this.ProjectAssetService.uploadAssets(files).subscribe(
-      ({ success, error, assetDirectoryInfo }) => {
-        if (success.length > 0) {
-          this.showUploadedFiles(success);
+    this.subscriptions.add(
+      this.ProjectAssetService.uploadAssets(files).subscribe(
+        ({ success, error, assetDirectoryInfo }) => {
+          if (success.length > 0) {
+            this.showUploadedFiles(success);
+          }
+          if (error.length > 0) {
+            this.showError(error);
+          }
+          this.projectAssets = assetDirectoryInfo;
+          if (this.hasTarget()) {
+            this.chooseAsset({ fileName: files[0].name, fileSize: files[0].size });
+          }
         }
-        if (error.length > 0) {
-          this.showError(error);
-        }
-        this.projectAssets = assetDirectoryInfo;
-        if (this.hasTarget()) {
-          this.chooseAsset({ fileName: files[0].name, fileSize: files[0].size });
-        }
-      }
+      )
     );
   }
 

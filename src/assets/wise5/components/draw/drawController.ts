@@ -10,10 +10,6 @@ window['EventEmitter2'] = EventEmitter2;
 import { DrawService } from './drawService';
 
 class DrawController extends ComponentController {
-  $injector: any;
-  $q: any;
-  $timeout: any;
-  DrawService: DrawService;
   isResetButtonVisible: boolean;
   notebookConfig: any;
   drawingTool: any;
@@ -51,11 +47,11 @@ class DrawController extends ComponentController {
     $q,
     $rootScope,
     $scope,
-    $timeout,
+    private $timeout: any,
     AnnotationService,
     AudioRecorderService,
     ConfigService,
-    DrawService,
+    private DrawService: DrawService,
     NodeService,
     NotebookService,
     NotificationService,
@@ -82,11 +78,6 @@ class DrawController extends ComponentController {
       StudentDataService,
       UtilService
     );
-    this.$injector = $injector;
-    this.$q = $q;
-    this.$timeout = $timeout;
-    this.DrawService = DrawService;
-
     this.isResetButtonVisible = false;
     this.notebookConfig = this.NotebookService.getNotebookConfig();
     this.drawingTool = null;

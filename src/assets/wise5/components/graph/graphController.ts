@@ -6,7 +6,6 @@ import ComponentController from '../componentController';
 import canvg from 'canvg';
 import html2canvas from 'html2canvas';
 import * as covariance from 'compute-covariance';
-import { Subscription } from 'rxjs';
 import { Directive } from '@angular/core';
 
 @Directive()
@@ -61,7 +60,6 @@ class GraphController extends ComponentController {
   lastDropTime: number;
   isResetSeriesButtonVisible: boolean;
   previousTrialIdsToShow: any[];
-  deleteKeyPressedSubscription: Subscription;
 
   static $inject = [
     '$filter',
@@ -184,11 +182,6 @@ class GraphController extends ComponentController {
     });
   }
 
-  ngOnDestroy() {
-    super.ngOnDestroy();
-    this.deleteKeyPressedSubscription.unsubscribe();
-  }
-
   applyHighchartsPlotLinesLabelFix() {
     Highcharts.wrap(Highcharts.Axis.prototype, 'getPlotLinePath', function (proceed) {
       var path = proceed.apply(this, Array.prototype.slice.call(arguments, 1));
@@ -288,9 +281,11 @@ class GraphController extends ComponentController {
   }
 
   initializeDeleteKeyPressedListener() {
-    this.deleteKeyPressedSubscription = this.StudentDataService.deleteKeyPressed$.subscribe(() => {
-      this.handleDeleteKeyPressed();
-    });
+    this.subscriptions.add(
+      this.StudentDataService.deleteKeyPressed$.subscribe(() => {
+        this.handleDeleteKeyPressed();
+      })
+    );
   }
 
   initializeFileUploadChanged() {

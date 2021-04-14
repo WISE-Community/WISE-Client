@@ -5,7 +5,7 @@ import { ComponentAuthoring } from '../../../authoringTool/components/component-
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 
@@ -18,9 +18,6 @@ export class LabelAuthoring extends ComponentAuthoring {
   numberInputChange: Subject<number> = new Subject<number>();
   textInputChange: Subject<string> = new Subject<string>();
 
-  numberInputChangeSubscription: Subscription;
-  textInputChangeSubscription: Subscription;
-
   constructor(
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
@@ -28,16 +25,16 @@ export class LabelAuthoring extends ComponentAuthoring {
     protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.numberInputChangeSubscription = this.numberInputChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+    this.subscriptions.add(
+      this.numberInputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
-    this.textInputChangeSubscription = this.textInputChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.textInputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
+      })
+    );
   }
 
   ngOnInit() {
@@ -47,12 +44,6 @@ export class LabelAuthoring extends ComponentAuthoring {
       // true in the authoring so that the "Enable Dots" checkbox is checked.
       this.authoringComponentContent.enableCircles = true;
     }
-  }
-
-  ngOnDestroy() {
-    super.ngOnDestroy();
-    this.numberInputChangeSubscription.unsubscribe();
-    this.textInputChangeSubscription.unsubscribe();
   }
 
   addLabel(): void {

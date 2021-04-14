@@ -25,9 +25,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
   label: any;
   selectedTabIndex = 0;
   title: string;
-  insertModeSubscription: Subscription;
-  notebookUpdatedSubscription: Subscription;
-  publicNotebookItemsRetrievedSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     ConfigService: ConfigService,
@@ -45,8 +43,8 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     this.addSpacesToGroups();
     this.hasPrivateNotes = this.isHasPrivateNotes();
 
-    this.notebookUpdatedSubscription = this.NotebookService.notebookUpdated$.subscribe(
-      ({ notebookItem }) => {
+    this.subscriptions.add(
+      this.NotebookService.notebookUpdated$.subscribe(({ notebookItem }) => {
         if (
           (notebookItem.groups == null || notebookItem.groups.length === 0) &&
           notebookItem.type === 'note'
@@ -57,37 +55,33 @@ export class NotebookNotesComponent extends NotebookParentComponent {
           this.updatePublicNotebookNote(notebookItem);
         }
         this.hasPrivateNotes = this.isHasPrivateNotes();
-      }
+      })
     );
 
-    this.insertModeSubscription = this.NotebookService.insertMode$.subscribe((args) => {
-      this.insertArgs = args;
-      if (args.visibleSpace) {
-        this.selectedTabIndex = args.visibleSpace === 'public' ? 1 : 0;
-      }
-    });
+    this.subscriptions.add(
+      this.NotebookService.insertMode$.subscribe((args) => {
+        this.insertArgs = args;
+        if (args.visibleSpace) {
+          this.selectedTabIndex = args.visibleSpace === 'public' ? 1 : 0;
+        }
+      })
+    );
 
-    this.publicNotebookItemsRetrievedSubscription = this.NotebookService.publicNotebookItemsRetrieved$.subscribe(
-      () => {
+    this.subscriptions.add(
+      this.NotebookService.publicNotebookItemsRetrieved$.subscribe(() => {
         for (const group of this.groups) {
           if (group.name !== 'private') {
             group.items = this.NotebookService.publicNotebookItems[group.name];
           }
         }
-      }
+      })
     );
 
     this.NotebookService.retrievePublicNotebookItems('public');
   }
 
   ngOnDestroy(): void {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll(): void {
-    this.notebookUpdatedSubscription.unsubscribe();
-    this.insertModeSubscription.unsubscribe();
-    this.publicNotebookItemsRetrievedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   isHasPrivateNotes(): boolean {

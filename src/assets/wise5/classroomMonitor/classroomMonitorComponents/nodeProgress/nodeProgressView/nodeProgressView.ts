@@ -1,6 +1,7 @@
 'use strict';
 
 import { Directive } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { StudentStatusService } from '../../../../services/studentStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
@@ -16,8 +17,7 @@ class NodeProgressViewController {
   nodeId: string;
   rootNode: any;
   showRubricButton: boolean;
-  currentNodeChangedSubscription: any;
-  currentWorkgroupChangedSubscription: any;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
     '$filter',
@@ -47,12 +47,7 @@ class NodeProgressViewController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
-    this.currentNodeChangedSubscription.unsubscribe();
-    this.currentWorkgroupChangedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   $onInit() {
@@ -93,8 +88,8 @@ class NodeProgressViewController {
       this.showRubricButton = true;
     }
 
-    this.currentNodeChangedSubscription = this.TeacherDataService.currentNodeChanged$.subscribe(
-      ({ currentNode }) => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
         this.nodeId = currentNode.id;
         this.TeacherDataService.setCurrentNode(currentNode);
         if (this.isGroupNode(this.nodeId)) {
@@ -103,13 +98,13 @@ class NodeProgressViewController {
           this.$scope.currentgroupid = this.currentGroupId;
         }
         this.$state.go('root.cm.unit.node', { nodeId: this.nodeId });
-      }
+      })
     );
 
-    this.currentWorkgroupChangedSubscription = this.TeacherDataService.currentWorkgroupChanged$.subscribe(
-      ({ currentWorkgroup }) => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
         this.currentWorkgroup = currentWorkgroup;
-      }
+      })
     );
 
     this.$transitions.onSuccess({}, ($transition) => {

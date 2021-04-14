@@ -6,6 +6,7 @@ import { SessionService } from '../../../../services/sessionService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NotificationService } from '../../../../services/notificationService';
 import { Directive } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Directive()
 class TopBarController {
@@ -23,11 +24,10 @@ class TopBarController {
   themePath: string;
   userInfo: any;
   workgroupId: number;
-  notificationChangedSubscription: any;
+  notificationChangedSubscription: Subscription;
 
   static $inject = [
     '$filter',
-    '$rootScope',
     '$scope',
     '$state',
     'ConfigService',
@@ -39,7 +39,6 @@ class TopBarController {
 
   constructor(
     $filter: any,
-    private $rootScope: any,
     private $scope: any,
     private $state: any,
     private ConfigService: ConfigService,
@@ -62,17 +61,12 @@ class TopBarController {
     );
     this.themePath = this.ProjectService.getThemePath();
     this.contextPath = this.ConfigService.getContextPath();
-
     this.$scope.$on('$destroy', () => {
       this.ngOnDestroy();
     });
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.notificationChangedSubscription.unsubscribe();
   }
 

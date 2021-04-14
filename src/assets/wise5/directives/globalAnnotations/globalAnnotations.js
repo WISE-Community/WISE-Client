@@ -1,6 +1,9 @@
 "use strict";
 
+import { Subscription } from 'rxjs';
+
 class GlobalAnnotationsController {
+
     constructor($filter,
                 $mdDialog,
                 $rootScope,
@@ -25,17 +28,18 @@ class GlobalAnnotationsController {
             this.setModel();
         }
 
-        this.annotationSavedToServerSubscription =
+        this.subscriptions = new Subscription();
+        this.subscriptions.add(
                 this.AnnotationService.annotationSavedToServer$.subscribe(() => {
             this.setModel();
-        });
+        }));
 
-        this.nodeStatusesChangedSubscription =
+        this.subscriptions.add(
                 this.StudentDataService.nodeStatusesChanged$.subscribe(() => {
             this.setModel();
-        });
+        }));
 
-        this.displayGlobalAnnotationsSubscription =
+        this.subscriptions.add(
                 this.AnnotationService.displayGlobalAnnotations$.subscribe(() => {
             this.$timeout(() => {
                 /* waiting slightly here to make sure the #globalMsgTrigger is
@@ -43,7 +47,7 @@ class GlobalAnnotationsController {
                  */
                 this.show();
             }, 300);
-        });
+        }));
 
         this.$scope.$on('$destroy', () => {
           this.ngOnDestroy();
@@ -51,13 +55,7 @@ class GlobalAnnotationsController {
     };
 
     ngOnDestroy() {
-        this.unsubscribeAll();
-    }
-
-    unsubscribeAll() {
-        this.annotationSavedToServerSubscription.unsubscribe();
-        this.nodeStatusesChangedSubscription.unsubscribe();
-        this.displayGlobalAnnotationsSubscription.unsubscribe();
+        this.subscriptions.unsubscribe();
     }
 
     setModel() {

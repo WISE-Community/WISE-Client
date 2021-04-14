@@ -20,16 +20,10 @@ class NodeController {
   $translate: any;
   autoSaveInterval: any;
   autoSaveIntervalId: any;
-  componentDirtySubscription: Subscription;
-  componentSaveTriggeredSubscription: Subscription;
-  componentStudentDataSubscription: Subscription;
-  componentSubmitDirtySubscription: Subscription;
-  componentSubmitTriggeredSubscription: Subscription;
   componentToScope: any;
   dirtyComponentIds: any;
   dirtySubmitComponentIds: any;
   endedAndLockedMessage: string;
-  exitSubscription: Subscription;
   isDisabled: boolean;
   isEndedAndLocked: boolean;
   mode: any;
@@ -40,8 +34,8 @@ class NodeController {
   rubric: any;
   rubricTour: any;
   saveMessage: any;
-  showRubricSubscription: Subscription;
   submit: any;
+  subscriptions: Subscription = new Subscription();
   teacherWorkgroupId: number;
   workgroupId: number;
 
@@ -182,27 +176,27 @@ class NodeController {
       }
     }
 
-    this.componentSaveTriggeredSubscription = this.StudentDataService.componentSaveTriggered$.subscribe(
-      ({ nodeId, componentId }) => {
+    this.subscriptions.add(
+      this.StudentDataService.componentSaveTriggered$.subscribe(({ nodeId, componentId }) => {
         if (this.nodeId == nodeId && this.nodeContainsComponent(componentId)) {
           const isAutoSave = false;
           this.createAndSaveComponentData(isAutoSave, componentId);
         }
-      }
+      })
     );
 
-    this.componentSubmitTriggeredSubscription = this.StudentDataService.componentSubmitTriggered$.subscribe(
-      ({ nodeId, componentId }) => {
+    this.subscriptions.add(
+      this.StudentDataService.componentSubmitTriggered$.subscribe(({ nodeId, componentId }) => {
         if (this.nodeId == nodeId && this.nodeContainsComponent(componentId)) {
           const isAutoSave = false;
           const isSubmit = true;
           this.createAndSaveComponentData(isAutoSave, componentId, isSubmit);
         }
-      }
+      })
     );
 
-    this.componentStudentDataSubscription = this.StudentDataService.componentStudentData$.subscribe(
-      (componentStudentData: any) => {
+    this.subscriptions.add(
+      this.StudentDataService.componentStudentData$.subscribe((componentStudentData: any) => {
         const componentId = componentStudentData.componentId;
         const componentState = componentStudentData.componentState;
         if (componentState.nodeId == null) {
@@ -217,34 +211,36 @@ class NodeController {
         }
         this.notifyConnectedParts(componentId, componentState);
         this.NodeService.broadcastSiblingComponentStudentDataChanged(componentStudentData);
-      }
+      })
     );
 
-    this.componentDirtySubscription = this.StudentDataService.componentDirty$.subscribe(
-      ({ componentId, isDirty }) => {
+    this.subscriptions.add(
+      this.StudentDataService.componentDirty$.subscribe(({ componentId, isDirty }) => {
         const index = this.dirtyComponentIds.indexOf(componentId);
         if (isDirty && index === -1) {
           this.dirtyComponentIds.push(componentId);
         } else if (!isDirty && index > -1) {
           this.dirtyComponentIds.splice(index, 1);
         }
-      }
+      })
     );
 
-    this.componentSubmitDirtySubscription = this.StudentDataService.componentSubmitDirty$.subscribe(
-      ({ componentId, isDirty }) => {
+    this.subscriptions.add(
+      this.StudentDataService.componentSubmitDirty$.subscribe(({ componentId, isDirty }) => {
         const index = this.dirtySubmitComponentIds.indexOf(componentId);
         if (isDirty && index === -1) {
           this.dirtySubmitComponentIds.push(componentId);
         } else if (!isDirty && index > -1) {
           this.dirtySubmitComponentIds.splice(index, 1);
         }
-      }
+      })
     );
 
-    this.showRubricSubscription = this.NodeService.showRubric$.subscribe((id: string) => {
-      this.showRubric(id);
-    });
+    this.subscriptions.add(
+      this.NodeService.showRubric$.subscribe((id: string) => {
+        this.showRubric(id);
+      })
+    );
 
     const script = this.nodeContent.script;
     if (script != null) {
@@ -267,17 +263,7 @@ class NodeController {
     ) {
       this.NodeService.evaluateTransitionLogic();
     }
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
-    this.componentDirtySubscription.unsubscribe();
-    this.componentSaveTriggeredSubscription.unsubscribe();
-    this.componentStudentDataSubscription.unsubscribe();
-    this.componentSubmitDirtySubscription.unsubscribe();
-    this.componentSubmitTriggeredSubscription.unsubscribe();
-    this.exitSubscription.unsubscribe();
-    this.showRubricSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   createRubricTour() {
@@ -1031,10 +1017,12 @@ class NodeController {
   }
 
   registerExitListener() {
-    this.exitSubscription = this.SessionService.exit$.subscribe(() => {
-      this.stopAutoSaveInterval();
-      this.nodeUnloaded(this.nodeId);
-    });
+    this.subscriptions.add(
+      this.SessionService.exit$.subscribe(() => {
+        this.stopAutoSaveInterval();
+        this.nodeUnloaded(this.nodeId);
+      })
+    );
   }
 }
 
