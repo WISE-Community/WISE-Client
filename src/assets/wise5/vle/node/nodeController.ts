@@ -879,6 +879,22 @@ class NodeController {
    * @param componentState the new component state
    */
   notifyConnectedParts(changedComponentId, componentState) {
+    for (const subscribingComponent of this.getComponents()) {
+      if (subscribingComponent.connectedComponents != null) {
+        for (const publishingComponent of subscribingComponent.connectedComponents) {
+          if (
+            publishingComponent.nodeId === componentState.nodeId &&
+            publishingComponent.componentId === componentState.componentId
+          ) {
+            this.ComponentService.notifyConnectedComponents(
+              this.nodeId,
+              subscribingComponent.id,
+              componentState
+            );
+          }
+        }
+      }
+    }
     if (changedComponentId != null && componentState != null) {
       let components = this.getComponents();
       if (components != null) {

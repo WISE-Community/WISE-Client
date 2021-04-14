@@ -87,6 +87,7 @@ export abstract class ComponentStudent {
   subscribeToSubscriptions(): void {
     this.subscribeToAnnotationSavedToServer();
     this.subscribeToNodeSubmitClicked();
+    this.subscribeToNotifyConnectedComponents();
     this.subscribeToStudentWorkSavedToServer();
     this.subscribeToRequestComponentState();
   }
@@ -113,6 +114,22 @@ export abstract class ComponentStudent {
         }
       })
     );
+  }
+
+  subscribeToNotifyConnectedComponents(): void {
+    this.subscriptions.add(
+      this.ComponentService.notifyConnectedComponentSource$.subscribe(
+        ({ nodeId, componentId, componentState }) => {
+          if (this.nodeId === nodeId && this.componentId === componentId) {
+            this.processConnectedComponentState(componentState);
+          }
+        }
+      )
+    );
+  }
+
+  processConnectedComponentState(componentState: any): void {
+    // overridden by children
   }
 
   isForThisComponent(object: any) {

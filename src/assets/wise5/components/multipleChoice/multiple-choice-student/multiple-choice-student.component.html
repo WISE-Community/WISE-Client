@@ -28,11 +28,11 @@
     <div *ngSwitchCase="'checkbox'">
       <div *ngFor="let choice of choices">
         <mat-checkbox
-            aria-label="choice.text"
-            color="primary"
-            [checked]="choice.isChecked"
+            [(ngModel)]="choice.isChecked"
             (click)="checkboxClicked(choice.id)"
-            [disabled]="isDisabled">
+            [disabled]="isDisabled"
+            aria-label="choice.text"
+            color="primary">
           <span [innerHTML]="choice.text">
           </span>
           <span *ngIf="choice.showFeedback"

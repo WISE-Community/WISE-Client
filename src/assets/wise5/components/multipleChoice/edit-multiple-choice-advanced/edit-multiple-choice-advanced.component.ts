@@ -6,6 +6,8 @@ import { UtilService } from '../../../services/utilService';
 class EditMultipleChoiceAdvancedController extends EditAdvancedComponentAngularJSController {
   allowedConnectedComponentTypes = ['MultipleChoice'];
 
+  static $inject = ['NodeService', 'ProjectService', 'UtilService'];
+
   constructor(
     protected NodeService: NodeService,
     protected ProjectService: TeacherProjectService,

@@ -13,6 +13,8 @@ export class ComponentService {
   public requestComponentStateSource$ = this.requestComponentStateSource.asObservable();
   private sendComponentStateSource = new Subject<ComponentStateWrapper>();
   public sendComponentStateSource$ = this.sendComponentStateSource.asObservable();
+  private notifyConnectedComponentSource = new Subject<any>();
+  public notifyConnectedComponentSource$ = this.notifyConnectedComponentSource.asObservable();
 
   constructor(
     protected StudentDataService: StudentDataService,
@@ -29,6 +31,14 @@ export class ComponentService {
 
   sendComponentState(componentStateWrapper: ComponentStateWrapper): void {
     this.sendComponentStateSource.next(componentStateWrapper);
+  }
+
+  notifyConnectedComponents(nodeId: string, componentId: string, componentState: any): void {
+    this.notifyConnectedComponentSource.next({
+      nodeId: nodeId,
+      componentId: componentId,
+      componentState: componentState
+    });
   }
 
   /**
