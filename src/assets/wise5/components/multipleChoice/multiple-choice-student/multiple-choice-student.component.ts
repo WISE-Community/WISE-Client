@@ -55,12 +55,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
     if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
       this.handleConnectedComponents();
-    } else if (
-      this.MultipleChoiceService.componentStateHasStudentWork(
-        this.componentState,
-        this.componentContent
-      )
-    ) {
+    } else if (this.componentStateHasStudentWork(this.componentState, this.componentContent)) {
       this.setStudentWork(this.componentState);
     } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
       this.handleConnectedComponents();
@@ -77,6 +72,28 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
     this.disableComponentIfNecessary();
     this.broadcastDoneRenderingComponent();
+  }
+
+  componentStateHasStudentWork(componentState: any, componentContent: any): boolean {
+    return this.MultipleChoiceService.componentStateHasStudentWork(
+      componentState,
+      componentContent
+    );
+  }
+
+  handleConnectedComponents(): void {
+    for (const connectedComponent of this.componentContent.connectedComponents) {
+      const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+        connectedComponent.nodeId,
+        connectedComponent.componentId
+      );
+      if (componentState != null) {
+        this.processConnectedComponentState(componentState);
+      }
+      if (connectedComponent.type === 'showWork') {
+        this.isDisabled = true;
+      }
+    }
   }
 
   handleNodeSubmit(): void {
@@ -114,9 +131,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   setIsCheckedOnStudentChoices(studentChoices: string[]): void {
     for (const choice of this.choices) {
-      if (studentChoices.includes(choice.id)) {
-        choice.isChecked = true;
-      }
+      choice.isChecked = studentChoices.includes(choice.id);
     }
   }
 
@@ -164,7 +179,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     if (this.isDisabled) {
       return;
     }
-    this.studentDataChanged();
     if (this.mode === 'student') {
       const category = 'StudentInteraction';
       const event = 'choiceSelected';
@@ -476,5 +490,10 @@ export class MultipleChoiceStudent extends ComponentStudent {
       };
     }
     return mergedComponentState;
+  }
+
+  processConnectedComponentState(componentState: any): void {
+    this.setStudentWork(componentState);
+    this.studentDataChanged();
   }
 }
