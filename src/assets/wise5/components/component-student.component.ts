@@ -120,7 +120,7 @@ export abstract class ComponentStudent {
     this.subscriptions.add(
       this.ComponentService.notifyConnectedComponentSource$.subscribe(
         ({ nodeId, componentId, componentState }) => {
-          if (this.nodeId === nodeId && this.componentId === componentId) {
+          if (nodeId === this.nodeId && componentId === this.componentId) {
             this.processConnectedComponentState(componentState);
           }
         }
