@@ -33,7 +33,11 @@ export class ComponentService {
     this.sendComponentStateSource.next(componentStateWrapper);
   }
 
-  notifyConnectedComponents(nodeId: string, componentId: string, componentState: any): void {
+  notifyConnectedComponentSubscribers(
+    nodeId: string,
+    componentId: string,
+    componentState: any
+  ): void {
     this.notifyConnectedComponentSource.next({
       nodeId: nodeId,
       componentId: componentId,
