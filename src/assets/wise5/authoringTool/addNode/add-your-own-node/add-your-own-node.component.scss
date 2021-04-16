@@ -1,45 +1,46 @@
-.component {
-  margin: 8px;
-  border: 1px solid transparent;
-  cursor: pointer;
-}
+@import '~@angular/material/theming';
 
-.no-components {
-  width: 800px;
-  height: 250px;
-  background-color: lightgray;
+$border-color: #dddddd;
+$transform: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+
+.title-field {
+  width: 360px;
+  max-width: 100%;
 }
 
 .initial-components {
-  width: 800px;
-  max-width: 100%;
-  border: solid 1px #ccc;
-  min-height: 60px;
-  display: block;
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
+  padding: 8px;
+  margin: 4px;
 }
 
-.selected-component-box {
-  padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  background: white;
-  font-size: 14px;
+.component-list {
+  border: 1px solid $border-color;
+}
+
+.component-list-item {
+  background-color: white;
+  border-bottom: 1px solid $border-color;
+  cursor: move;
+  padding: 0 8px;
+
+  &:last-of-type {
+    border-bottom: 0 none;
+  }
+}
+
+.component-type {
+  padding: 4px;
+  
+  button {
+    text-transform: none;
+  }
 }
 
 .cdk-drag-preview {
   box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  border: 0 none;
+  @include mat-elevation-transition;
+  @include mat-elevation(4);
 }
 
 .cdk-drag-placeholder {
@@ -47,25 +48,9 @@
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: $transform;
 }
 
-.selected-component-box:last-child {
-  border: none;
-}
-
-.drag-handle {
-  width: 24px;
-  height: 24px;
-  color: #ccc;
-  cursor: move;
-}
-
-.delete {
-  color: #ccc;
-  cursor: pointer;
-}
-
-.initial-components.cdk-drop-list-dragging .selected-component-box:not(.cdk-drag-placeholder) {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+.component-list.cdk-drop-list-dragging .component-list-item:not(.cdk-drag-placeholder) {
+  transition: $transform;
 }

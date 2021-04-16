@@ -38,9 +38,9 @@ export class ChooseNewNodeLocation {
     });
   }
 
-  addInitialComponents(nodeId: string, components: string[]) {
+  addInitialComponents(nodeId: string, components: any[]) {
     for (const component of components.reverse()) {
-      this.ProjectService.createComponent(nodeId, component);
+      this.ProjectService.createComponent(nodeId, component.type);
     }
   }
 
