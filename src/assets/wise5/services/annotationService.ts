@@ -277,42 +277,23 @@ export class AnnotationService {
     this.annotations = annotations;
   }
 
-  /**
-   * Get the total score for a workgroup
-   * @param annotations an array of annotations
-   * @param workgroupId the workgroup id
-   */
-  getTotalScore(annotations, workgroupId) {
+  getTotalScoreForWorkgroup(annotations = [], workgroupId = -1) {
     let totalScore = 0;
-    const scoresFound = [];
-
-    if (annotations != null && workgroupId != null) {
-      for (let a = annotations.length - 1; a >= 0; a--) {
-        const annotation = annotations[a];
-        if (annotation != null && annotation.toWorkgroupId == workgroupId) {
-          if (annotation.type === 'score' || annotation.type === 'autoScore') {
-            const nodeId = annotation.nodeId;
-            const componentId = annotation.componentId;
-            const data = annotation.data;
-            if (this.ProjectService.isActive(nodeId)) {
-              const scoreFound = nodeId + '-' + componentId;
-              if (scoresFound.indexOf(scoreFound) == -1) {
-                if (data != null) {
-                  const value = data.value;
-                  if (!isNaN(value)) {
-                    if (totalScore == null) {
-                      totalScore = value;
-                    } else {
-                      totalScore += value;
-                    }
-
-                    /*
-                     * remember that we have found a score for this component
-                     * so that we don't double count it if the teacher scored
-                     * the component more than once
-                     */
-                    scoresFound.push(scoreFound);
-                  }
+    const scoresFound = []; // to prevent double counting if teacher scored component multiple times
+    for (const annotation of this.sortByNewestToOldest(annotations)) {
+      if (annotation.toWorkgroupId === workgroupId) {
+        if (this.isScoreOrAutoScore(annotation)) {
+          const nodeId = annotation.nodeId;
+          const componentId = annotation.componentId;
+          if (this.ProjectService.shouldIncludeInTotalScore(nodeId, componentId)) {
+            const scoreFound = `${nodeId}-${componentId}`;
+            if (!scoresFound.includes(scoreFound)) {
+              const data = annotation.data;
+              if (data != null) {
+                const value = data.value;
+                if (typeof value === 'number') {
+                  totalScore += value;
+                  scoresFound.push(scoreFound);
                 }
               }
             }
@@ -323,61 +304,21 @@ export class AnnotationService {
     return totalScore;
   }
 
-  /**
-   * Get the score for a workgroup for a node
-   * @param workgroupId the workgroup id
-   * @param nodeId the node id
-   * @returns the score for a workgroup for a node
-   */
-  getScore(workgroupId, nodeId) {
-    let score = null;
+  sortByNewestToOldest(annotations = []) {
+    return annotations.sort((a, b) => {
+      return b.clientSaveTime - a.clientSaveTime;
+    });
+  }
 
-    /*
-     * an array to keep track of the components that we have obtained a
-     * score for. we do not want to double count components if the student
-     * has received a score multiple times for a node from the teacher.
-     */
-    const scoresFound = [];
-    const annotations = this.annotations;
+  isScoreOrAutoScore(annotation: any): boolean {
+    return annotation.type === 'score' || annotation.type === 'autoScore';
+  }
 
-    if (workgroupId != null && nodeId != null) {
-      for (let a = annotations.length - 1; a >= 0; a--) {
-        const annotation = annotations[a];
-        if (annotation != null && annotation.toWorkgroupId == workgroupId) {
-          if (annotation.type === 'score' || annotation.type === 'autoScore') {
-            const tempNodeId = annotation.nodeId;
-            if (nodeId == tempNodeId) {
-              const tempComponentId = annotation.componentId;
-              if (this.componentExists(tempNodeId, tempComponentId)) {
-                const data = annotation.data;
-                const scoreFound = tempNodeId + '-' + tempComponentId;
-                if (scoresFound.indexOf(scoreFound) == -1) {
-                  if (data != null) {
-                    const value = data.value;
-                    if (!isNaN(value)) {
-                      if (score == null) {
-                        score = value;
-                      } else {
-                        score += value;
-                      }
-
-                      /*
-                       * remember that we have found a score for this component
-                       * so that we don't double count it if the teacher scored
-                       * the component more than once
-                       */
-                      scoresFound.push(scoreFound);
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    return score;
+  getTotalNodeScoreForWorkgroup(workgroupId: number, nodeId: string) {
+    const annotationsForNode = this.annotations.filter((annotation) => {
+      return annotation.nodeId === nodeId;
+    });
+    return this.getTotalScoreForWorkgroup(annotationsForNode, workgroupId);
   }
 
   componentExists(nodeId, componentId) {
@@ -671,7 +612,7 @@ export class AnnotationService {
         annotation.nodeId === nodeId &&
         annotation.componentId === componentId &&
         this.UtilService.isMatchingPeriods(annotation.periodId, periodId) &&
-        (annotation.type === 'score' || annotation.type === 'autoScore')
+        this.isScoreOrAutoScore(annotation)
       ) {
         return true;
       }

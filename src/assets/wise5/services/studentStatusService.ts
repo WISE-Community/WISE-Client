@@ -277,7 +277,7 @@ export class StudentStatusService {
           let workgroupId = studentStatus.workgroupId;
 
           // get the workgroups score on the node
-          let score = this.AnnotationService.getScore(workgroupId, nodeId);
+          let score = this.AnnotationService.getTotalNodeScoreForWorkgroup(workgroupId, nodeId);
 
           if (score != null) {
             // increment the counter of students with a score for this node

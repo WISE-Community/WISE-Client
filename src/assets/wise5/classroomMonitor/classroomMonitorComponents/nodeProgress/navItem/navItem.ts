@@ -366,7 +366,7 @@ class NavItemController {
   getNodeAverageScore(): any {
     const workgroupId = this.currentWorkgroup ? this.currentWorkgroup.workgroupId : null;
     if (workgroupId) {
-      return this.AnnotationService.getScore(workgroupId, this.nodeId);
+      return this.AnnotationService.getTotalNodeScoreForWorkgroup(workgroupId, this.nodeId);
     } else {
       return this.StudentStatusService.getNodeAverageScore(
         this.nodeId,

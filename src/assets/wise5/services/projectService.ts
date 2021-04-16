@@ -2064,17 +2064,19 @@ export class ProjectService {
    * @returns the max score for the node which can be null or a number
    * if null, author/teacher has not set a max score for the node
    */
-  getMaxScoreForNode(nodeId) {
+  getMaxScoreForNode(nodeId: string) {
     let maxScore = null;
     if (!this.isGroupNode(nodeId)) {
       const node = this.getNodeById(nodeId);
-      for (let component of node.components) {
-        const componentMaxScore = component.maxScore;
-        if (typeof componentMaxScore == 'number') {
-          if (maxScore == null) {
-            maxScore = componentMaxScore;
-          } else {
-            maxScore += componentMaxScore;
+      for (const component of node.components) {
+        if (!component.excludeFromTotalScore) {
+          const componentMaxScore = component.maxScore;
+          if (typeof componentMaxScore == 'number') {
+            if (maxScore == null) {
+              maxScore = componentMaxScore;
+            } else {
+              maxScore += componentMaxScore;
+            }
           }
         }
       }
@@ -2082,14 +2084,9 @@ export class ProjectService {
     return maxScore;
   }
 
-  /**
-   * Get the max score for a component
-   * @param nodeId get the max score from a component in this node
-   * @param componentId get the max score from this component
-   */
-  getMaxScoreForComponent(nodeId, componentId) {
+  getMaxScoreForComponent(nodeId: string, componentId: string) {
     const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
-    if (component != null) {
+    if (component != null && !component.excludeFromTotalScore) {
       return component.maxScore;
     }
     return null;
@@ -2460,6 +2457,13 @@ export class ProjectService {
     for (const constraint of constraints) {
       constraint.active = true;
     }
+  }
+
+  shouldIncludeInTotalScore(nodeId: string, componentId: string): boolean {
+    return (
+      this.isActive(nodeId) &&
+      !this.getComponentByNodeIdAndComponentId(nodeId, componentId).excludeFromTotalScore
+    );
   }
 
   /**

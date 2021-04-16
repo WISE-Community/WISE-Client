@@ -1412,7 +1412,7 @@ export class StudentDataService extends DataService {
   getTotalScore() {
     const annotations = this.studentData.annotations;
     const workgroupId = this.ConfigService.getWorkgroupId();
-    return this.AnnotationService.getTotalScore(annotations, workgroupId);
+    return this.AnnotationService.getTotalScoreForWorkgroup(annotations, workgroupId);
   }
 
   getProjectCompletion() {
