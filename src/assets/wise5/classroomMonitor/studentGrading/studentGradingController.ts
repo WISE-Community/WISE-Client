@@ -42,12 +42,7 @@ class StudentGradingController {
   sort: any;
   totalScore: number;
   workgroupId: number;
-  annotationReceivedSubscription: Subscription;
-  studentWorkReceivedSubscription: Subscription;
-  currentWorkgroupChangedSubscription: Subscription;
-  notificationChangedSubscription: Subscription;
-  currentPeriodChangedSubscription: Subscription;
-  projectSavedSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
     '$filter',
@@ -81,13 +76,15 @@ class StudentGradingController {
     this.$scope.$mdMedia = $mdMedia;
     this.$translate = $filter('translate');
 
-    this.projectSavedSubscription = this.ProjectService.projectSaved$.subscribe(() => {
-      this.maxScore = this.StudentStatusService.getMaxScoreForWorkgroupId(this.workgroupId);
-      this.setNodesById();
-    });
+    this.subscriptions.add(
+      this.ProjectService.projectSaved$.subscribe(() => {
+        this.maxScore = this.StudentStatusService.getMaxScoreForWorkgroupId(this.workgroupId);
+        this.setNodesById();
+      })
+    );
 
-    this.notificationChangedSubscription = this.NotificationService.notificationChanged$.subscribe(
-      (notification) => {
+    this.subscriptions.add(
+      this.NotificationService.notificationChanged$.subscribe((notification) => {
         if (notification.type === 'CRaterResult') {
           // TODO: expand to encompass other notification types that should be shown to teacher
           let workgroupId = notification.toWorkgroupId;
@@ -96,22 +93,22 @@ class StudentGradingController {
             this.updateNode(nodeId);
           }
         }
-      }
+      })
     );
 
-    this.annotationReceivedSubscription = this.AnnotationService.annotationReceived$.subscribe(
-      ({ annotation }) => {
+    this.subscriptions.add(
+      this.AnnotationService.annotationReceived$.subscribe(({ annotation }) => {
         const workgroupId = annotation.toWorkgroupId;
         const nodeId = annotation.nodeId;
         if (workgroupId === this.workgroupId && this.nodesById[nodeId]) {
           this.totalScore = this.TeacherDataService.getTotalScoreByWorkgroupId(workgroupId);
           this.updateNode(nodeId);
         }
-      }
+      })
     );
 
-    this.studentWorkReceivedSubscription = this.TeacherDataService.studentWorkReceived$.subscribe(
-      (args: any) => {
+    this.subscriptions.add(
+      this.TeacherDataService.studentWorkReceived$.subscribe((args: any) => {
         const studentWork = args.studentWork;
         if (studentWork != null) {
           let workgroupId = studentWork.workgroupId;
@@ -120,22 +117,22 @@ class StudentGradingController {
             this.updateNode(nodeId);
           }
         }
-      }
+      })
     );
 
-    this.currentWorkgroupChangedSubscription = this.TeacherDataService.currentWorkgroupChanged$.subscribe(
-      ({ currentWorkgroup }) => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
         if (currentWorkgroup != null) {
           let workgroupId = currentWorkgroup.workgroupId;
           if (this.workgroupId !== workgroupId) {
             this.$state.go('root.cm.team', { workgroupId: workgroupId });
           }
         }
-      }
+      })
     );
 
-    this.currentPeriodChangedSubscription = this.TeacherDataService.currentPeriodChanged$.subscribe(
-      ({ currentPeriod }) => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         let periodId = currentPeriod.periodId;
         let currentWorkgroup = this.TeacherDataService.getCurrentWorkgroup();
         if (!currentWorkgroup) {
@@ -150,7 +147,7 @@ class StudentGradingController {
             }
           }
         }
-      }
+      })
     );
 
     this.$scope.$on('$destroy', () => {
@@ -177,16 +174,7 @@ class StudentGradingController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
-    this.annotationReceivedSubscription.unsubscribe();
-    this.currentPeriodChangedSubscription.unsubscribe();
-    this.studentWorkReceivedSubscription.unsubscribe();
-    this.currentWorkgroupChangedSubscription.unsubscribe();
-    this.notificationChangedSubscription.unsubscribe();
-    this.projectSavedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   $onInit() {

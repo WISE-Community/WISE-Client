@@ -43,10 +43,6 @@ class StepToolsController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.currentNodeChangedSubscription.unsubscribe();
   }
 

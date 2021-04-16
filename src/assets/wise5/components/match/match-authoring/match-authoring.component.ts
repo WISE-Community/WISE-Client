@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
@@ -16,12 +16,8 @@ import { MatchService } from '../matchService';
 })
 export class MatchAuthoring extends ComponentAuthoring {
   defaultSourceBucketId: string = '0';
-
   inputChange: Subject<string> = new Subject<string>();
   feedbackChange: Subject<string> = new Subject<string>();
-
-  inputChangeSubscription: Subscription;
-  feedbackChangeSubscription: Subscription;
 
   constructor(
     protected ConfigService: ConfigService,
@@ -32,22 +28,17 @@ export class MatchAuthoring extends ComponentAuthoring {
     protected UtilService: UtilService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.inputChangeSubscription = this.inputChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+    this.subscriptions.add(
+      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
-    this.feedbackChangeSubscription = this.feedbackChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.feedbackChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.turnOnSubmitButtonIfFeedbackExists();
         this.componentChanged();
-      });
-  }
-
-  ngOnDestroy() {
-    this.inputChangeSubscription.unsubscribe();
-    this.feedbackChangeSubscription.unsubscribe();
+      })
+    );
   }
 
   turnOnSubmitButtonIfFeedbackExists() {

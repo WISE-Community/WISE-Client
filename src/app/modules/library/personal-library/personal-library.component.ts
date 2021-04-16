@@ -15,9 +15,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   filteredProjects: LibraryProject[] = [];
   personalProjects: LibraryProject[] = [];
   sharedProjects: LibraryProject[] = [];
-  personalLibraryProjectsSourceSubscription: Subscription;
-  sharedLibraryProjectsSourceSubscription: Subscription;
-  newProjectSourceSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   constructor(libraryService: LibraryService, private dialog: MatDialog) {
     super(libraryService);
@@ -25,33 +23,35 @@ export class PersonalLibraryComponent extends LibraryComponent {
   }
 
   ngOnInit() {
-    this.personalLibraryProjectsSourceSubscription = this.libraryService.personalLibraryProjectsSource$.subscribe(
-      (personalProjects: LibraryProject[]) => {
-        this.personalProjects = personalProjects;
-        this.updateProjects();
-      }
+    this.subscriptions.add(
+      this.libraryService.personalLibraryProjectsSource$.subscribe(
+        (personalProjects: LibraryProject[]) => {
+          this.personalProjects = personalProjects;
+          this.updateProjects();
+        }
+      )
     );
-    this.sharedLibraryProjectsSourceSubscription = this.libraryService.sharedLibraryProjectsSource$.subscribe(
-      (sharedProjects: LibraryProject[]) => {
-        this.sharedProjects = sharedProjects;
-        this.updateProjects();
-      }
+    this.subscriptions.add(
+      this.libraryService.sharedLibraryProjectsSource$.subscribe(
+        (sharedProjects: LibraryProject[]) => {
+          this.sharedProjects = sharedProjects;
+          this.updateProjects();
+        }
+      )
     );
-    this.newProjectSourceSubscription = this.libraryService.newProjectSource$.subscribe(
-      (project) => {
+    this.subscriptions.add(
+      this.libraryService.newProjectSource$.subscribe((project) => {
         if (project) {
           project.isHighlighted = true;
           this.projects.unshift(project);
           this.filterUpdated();
         }
-      }
+      })
     );
   }
 
   ngOnDestroy() {
-    this.personalLibraryProjectsSourceSubscription.unsubscribe();
-    this.sharedLibraryProjectsSourceSubscription.unsubscribe();
-    this.newProjectSourceSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   combinePersonalAndSharedProjects() {

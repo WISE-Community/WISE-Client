@@ -1,5 +1,7 @@
 "use strict";
 
+import { Subscription } from 'rxjs';
+
 class StepToolsCtrl {
     constructor($scope,
                 NodeService,
@@ -24,16 +26,17 @@ class StepToolsCtrl {
         this.idToOrder = this.ProjectService.idToOrder;
 
         this.updateModel();
+        this.subscriptions = new Subscription();
 
-        this.currentNodeChangedSubscription = this.StudentDataService.currentNodeChanged$
+        this.subscriptions.add(this.StudentDataService.currentNodeChanged$
                 .subscribe(() => {
             this.updateModel();
-        });
+        }));
 
-        this.nodeStatusesChangedSubscription = 
+        this.subscriptions.add(
                 this.StudentDataService.nodeStatusesChanged$.subscribe(() => {
             this.updateModel();
-        });
+        }));
 
         this.$scope.$on('$destroy', () => {
             this.ngOnDestroy();
@@ -41,12 +44,7 @@ class StepToolsCtrl {
     }
 
     ngOnDestroy() {
-        this.unsubscribeAll();
-    }
-
-    unsubscribeAll() {
-        this.currentNodeChangedSubscription.unsubscribe();
-        this.currentNodeChangedSubscription.unsubscribe();
+        this.subscriptions.unsubscribe();
     }
 
     /*toggleStepNav() {

@@ -12,13 +12,12 @@ import { StudentDataService } from '../../services/studentDataService';
 })
 export class NavItemComponent {
   currentNode: any;
-  currentNodeChangedSubscription: Subscription;
   expanded: boolean = false;
   isCurrentNode: boolean;
   isGroup: boolean;
   isPrevStep: boolean = false;
   item: any;
-  navItemExpandedSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   @Input()
   nodeId: string;
@@ -45,60 +44,61 @@ export class NavItemComponent {
       : this.item.title;
     this.currentNode = this.StudentDataService.currentNode;
     this.isCurrentNode = this.currentNode.id === this.nodeId;
-    this.navItemExpandedSubscription = this.StudentDataService.navItemIsExpanded$.subscribe(
-      ({ nodeId, isExpanded }) => {
+    this.subscriptions.add(
+      this.StudentDataService.navItemIsExpanded$.subscribe(({ nodeId, isExpanded }) => {
         if (nodeId === this.nodeId) {
           this.expanded = isExpanded;
         }
-      }
+      })
     );
-    this.currentNodeChangedSubscription = this.StudentDataService.currentNodeChanged$.subscribe(
-      ({ previousNode: oldNode, currentNode: newNode }) => {
-        this.currentNode = newNode;
-        this.isCurrentNode = this.nodeId === newNode.id;
-        let isPrev = false;
-        if (this.ProjectService.isApplicationNode(newNode.id)) {
-          return;
-        }
-        if (oldNode) {
-          isPrev = this.nodeId === oldNode.id;
-          if (this.StudentDataService.previousStep) {
-            this.isPrevStep = this.nodeId === this.StudentDataService.previousStep.id;
+    this.subscriptions.add(
+      this.StudentDataService.currentNodeChanged$.subscribe(
+        ({ previousNode: oldNode, currentNode: newNode }) => {
+          this.currentNode = newNode;
+          this.isCurrentNode = this.nodeId === newNode.id;
+          let isPrev = false;
+          if (this.ProjectService.isApplicationNode(newNode.id)) {
+            return;
           }
-        }
-        if (this.isGroup) {
-          let prevNodeisGroup = !oldNode || this.ProjectService.isGroupNode(oldNode.id);
-          let prevNodeIsDescendant = this.ProjectService.isNodeDescendentOfGroup(
-            oldNode,
-            this.item
-          );
-          if (this.isCurrentNode) {
-            this.expanded = true;
-            this.StudentDataService.setNavItemExpanded(this.nodeId, this.expanded);
-            if (prevNodeisGroup || !prevNodeIsDescendant) {
-              this.zoomToElement();
+          if (oldNode) {
+            isPrev = this.nodeId === oldNode.id;
+            if (this.StudentDataService.previousStep) {
+              this.isPrevStep = this.nodeId === this.StudentDataService.previousStep.id;
             }
-          } else {
-            if (!prevNodeisGroup) {
-              if (prevNodeIsDescendant) {
-                this.expanded = true;
-              } else {
-                this.expanded = false;
+          }
+          if (this.isGroup) {
+            let prevNodeisGroup = !oldNode || this.ProjectService.isGroupNode(oldNode.id);
+            let prevNodeIsDescendant = this.ProjectService.isNodeDescendentOfGroup(
+              oldNode,
+              this.item
+            );
+            if (this.isCurrentNode) {
+              this.expanded = true;
+              this.StudentDataService.setNavItemExpanded(this.nodeId, this.expanded);
+              if (prevNodeisGroup || !prevNodeIsDescendant) {
+                this.zoomToElement();
+              }
+            } else {
+              if (!prevNodeisGroup) {
+                if (prevNodeIsDescendant) {
+                  this.expanded = true;
+                } else {
+                  this.expanded = false;
+                }
               }
             }
-          }
-        } else {
-          if (isPrev && this.ProjectService.isNodeDescendentOfGroup(this.item, newNode)) {
-            this.zoomToElement();
+          } else {
+            if (isPrev && this.ProjectService.isNodeDescendentOfGroup(this.item, newNode)) {
+              this.zoomToElement();
+            }
           }
         }
-      }
+      )
     );
   }
 
   ngOnDestroy() {
-    this.currentNodeChangedSubscription.unsubscribe();
-    this.navItemExpandedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   zoomToElement() {

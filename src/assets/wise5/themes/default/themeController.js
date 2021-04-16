@@ -1,5 +1,7 @@
 'use strict';
 
+import { Subscription } from 'rxjs';
+
 class ThemeController {
   constructor(
     $scope,
@@ -32,6 +34,7 @@ class ThemeController {
     this.$mdToast = $mdToast;
     this.$mdComponentRegistry = $mdComponentRegistry;
     this.$translate = this.$filter('translate');
+    this.subscriptions = new Subscription();
 
     // TODO: set these variables dynamically from theme settings
     this.layoutView = 'list'; // 'list' or 'card'
@@ -79,13 +82,13 @@ class ThemeController {
     this.setLayoutState();
 
     // update layout state when current node changes
-    this.currentNodeChangedSubscription = this.StudentDataService.currentNodeChanged$
+    this.subscriptions.add(this.StudentDataService.currentNodeChanged$
         .subscribe(() => {
       this.currentNode = this.StudentDataService.getCurrentNode();
       this.setLayoutState();
-    });
+    }));
 
-    this.nodeClickLockedSubscription = 
+    this.subscriptions.add(
         this.StudentDataService.nodeClickLocked$.subscribe(({ nodeId }) => {
       let message = this.$translate('sorryYouCannotViewThisItemYet');
       const node = this.ProjectService.getNodeById(nodeId);
@@ -97,7 +100,7 @@ class ThemeController {
         if (constraints != null && constraints.length > 0) {
           // get the node title the student is trying to go to
           const nodeTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
-          message = 
+          message =
             `<p>
               ${this.$translate('toVisitNodeTitleYouNeedTo', { nodeTitle: nodeTitle })}
             </p>
@@ -127,18 +130,18 @@ class ThemeController {
           .ariaLabel(this.$translate('itemLocked'))
           .ok(this.$translate('ok'))
       );
-    });
+    }));
 
-    this.serverConnectionStatusSubscription = 
+    this.subscriptions.add(
         this.NotificationService.serverConnectionStatus$.subscribe((isConnected) => {
       if (isConnected) {
         this.handleServerReconnect();
       } else {
         this.handleServerDisconnect();
       }
-    });
+    }));
 
-    this.showStudentAssetsSubscription = 
+    this.subscriptions.add(
         this.StudentAssetService.showStudentAssets$.subscribe(({ componentController, $event }) => {
       const studentAssetDialogTemplateUrl = this.themePath + '/templates/studentAssetDialog.html';
       const studentAssetTemplateUrl = this.themePath + '/studentAsset/studentAsset.html';
@@ -160,10 +163,10 @@ class ThemeController {
         };
       }
       StudentAssetDialogController.$inject = ['$scope', '$mdDialog', 'componentController'];
-    });
+    }));
 
     // handle request for notification dismiss codes
-    this.viewCurrentAmbientNotificationSubscription = 
+    this.subscriptions.add(
         this.NotificationService.viewCurrentAmbientNotification$.subscribe((args) => {
 
       let notification = args.notification;
@@ -289,7 +292,7 @@ class ThemeController {
         event,
         eventData
       );
-    });
+    }));
 
     this.$scope.$on('$destroy', () => {
       this.ngOnDestroy();
@@ -297,15 +300,7 @@ class ThemeController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
-    this.currentNodeChangedSubscription.unsubscribe();
-    this.nodeClickLockedSubscription.unsubscribe();
-    this.serverConnectionStatusSubscription.unsubscribe();
-    this.showStudentAssetsSubscription.unsubscribe();
-    this.viewCurrentAmbientNotificationSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   /**

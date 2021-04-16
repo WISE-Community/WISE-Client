@@ -7,7 +7,7 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
@@ -45,12 +45,6 @@ export class DrawAuthoring extends ComponentAuthoring {
   canvasHeightChange: Subject<string> = new Subject<string>();
   stampImageChange: Subject<string> = new Subject<string>();
 
-  inputChangeSubscription: Subscription;
-  backgroundImageChangeSubscription: Subscription;
-  canvasWidthChangeSubscription: Subscription;
-  canvasHeightChangeSubscription: Subscription;
-  stampImageChangeSubscription: Subscription;
-
   constructor(
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
@@ -58,31 +52,31 @@ export class DrawAuthoring extends ComponentAuthoring {
     protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.inputChangeSubscription = this.inputChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+    this.subscriptions.add(
+      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
-    this.backgroundImageChangeSubscription = this.backgroundImageChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.backgroundImageChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.updateStarterDrawDataBackgroundAndSave();
-      });
-    this.canvasWidthChangeSubscription = this.canvasWidthChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.canvasWidthChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.canvasWidthChanged();
-      });
-    this.canvasHeightChangeSubscription = this.canvasHeightChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.canvasHeightChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.canvasHeightChanged();
-      });
-    this.stampImageChangeSubscription = this.stampImageChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.stampImageChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.updateAuthoringComponentContentStampsAndSave();
-      });
+      })
+    );
   }
 
   ngOnInit() {
@@ -90,14 +84,6 @@ export class DrawAuthoring extends ComponentAuthoring {
     this.stamps = this.convertStampStringsToStampObjects(
       this.authoringComponentContent.stamps.Stamps
     );
-  }
-
-  ngOnDestroy() {
-    this.inputChangeSubscription.unsubscribe();
-    this.backgroundImageChangeSubscription.unsubscribe();
-    this.canvasWidthChangeSubscription.unsubscribe();
-    this.canvasHeightChangeSubscription.unsubscribe();
-    this.stampImageChangeSubscription.unsubscribe();
   }
 
   enableAllTools(doEnable: boolean) {

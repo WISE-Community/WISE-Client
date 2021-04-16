@@ -8,11 +8,6 @@ import { Directive } from '@angular/core';
 
 @Directive()
 class EmbeddedController extends ComponentController {
-  $q: any;
-  $sce: any;
-  $timeout: any;
-  $window: any;
-  EmbeddedService: EmbeddedService;
   url: string;
   maxWidth: number;
   maxHeight: number;
@@ -24,7 +19,6 @@ class EmbeddedController extends ComponentController {
   height: string;
   messageEventListener: any;
   studentData: any;
-  siblingComponentStudentDataChangedSubscription: any;
 
   static $inject = [
     '$filter',
@@ -34,7 +28,6 @@ class EmbeddedController extends ComponentController {
     '$rootScope',
     '$scope',
     '$sce',
-    '$timeout',
     '$window',
     'AnnotationService',
     'AudioRecorderService',
@@ -56,13 +49,12 @@ class EmbeddedController extends ComponentController {
     $q,
     $rootScope,
     $scope,
-    $sce,
-    $timeout,
-    $window,
+    private $sce: any,
+    private $window: any,
     AnnotationService,
     AudioRecorderService,
     ConfigService,
-    EmbeddedService,
+    private EmbeddedService: EmbeddedService,
     NodeService,
     NotebookService,
     NotificationService,
@@ -89,11 +81,6 @@ class EmbeddedController extends ComponentController {
       StudentDataService,
       UtilService
     );
-    this.$q = $q;
-    this.$sce = $sce;
-    this.$timeout = $timeout;
-    this.$window = $window;
-    this.EmbeddedService = EmbeddedService;
     this.componentType = null;
     this.url = null;
     this.setWidthAndHeight(this.componentContent.width, this.componentContent.height);
@@ -134,8 +121,8 @@ class EmbeddedController extends ComponentController {
      * Watch for siblingComponentStudentDataChanged which occurs when the student data has changed
      * for another component in this step.
      */
-    this.siblingComponentStudentDataChangedSubscription = this.NodeService.siblingComponentStudentDataChanged$.subscribe(
-      (args: any) => {
+    this.subscriptions.add(
+      this.NodeService.siblingComponentStudentDataChanged$.subscribe((args: any) => {
         if (this.isEventTargetThisComponent(args)) {
           const message = {
             messageType: 'siblingComponentStudentDataChanged',
@@ -143,7 +130,7 @@ class EmbeddedController extends ComponentController {
           };
           this.sendMessageToApplication(message);
         }
-      }
+      })
     );
 
     this.initializeMessageEventListener();
@@ -152,7 +139,6 @@ class EmbeddedController extends ComponentController {
 
   ngOnDestroy() {
     super.ngOnDestroy();
-    this.siblingComponentStudentDataChangedSubscription.unsubscribe();
     this.$window.removeEventListener('message', this.messageEventListener);
   }
 
@@ -301,8 +287,8 @@ class EmbeddedController extends ComponentController {
   }
 
   registerStudentWorkSavedToServerListener() {
-    this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-      (args: any) => {
+    this.subscriptions.add(
+      this.StudentDataService.studentWorkSavedToServer$.subscribe((args: any) => {
         const componentState = args.studentWork;
         if (this.isForThisComponent(componentState)) {
           this.isDirty = false;
@@ -334,7 +320,7 @@ class EmbeddedController extends ComponentController {
           };
           this.sendMessageToApplication(message);
         }
-      }
+      })
     );
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
@@ -17,8 +17,6 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
   allowedConnectedComponentTypes = ['MultipleChoice'];
   choiceTextChange: Subject<string> = new Subject<string>();
   feedbackTextChange: Subject<string> = new Subject<string>();
-  choiceTextChangeSubscription: Subscription;
-  feedbackTextChangeSubscription: Subscription;
 
   constructor(
     protected ConfigService: ConfigService,
@@ -28,21 +26,16 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
     protected UtilService: UtilService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.choiceTextChangeSubscription = this.choiceTextChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+    this.subscriptions.add(
+      this.choiceTextChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
-    this.feedbackTextChangeSubscription = this.feedbackTextChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.feedbackTextChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.choiceTextChangeSubscription.unsubscribe();
-    this.feedbackTextChangeSubscription.unsubscribe();
+      })
+    );
   }
 
   feedbackChanged(): void {

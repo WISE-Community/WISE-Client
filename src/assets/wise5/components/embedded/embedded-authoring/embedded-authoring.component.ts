@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
@@ -18,7 +18,6 @@ import { EmbeddedService } from '../embeddedService';
 export class EmbeddedAuthoring extends ComponentAuthoring {
   embeddedApplicationIFrameId: string;
   inputChange: Subject<string> = new Subject<string>();
-  inputChangeSubscription: Subscription;
 
   constructor(
     protected ConfigService: ConfigService,
@@ -28,11 +27,6 @@ export class EmbeddedAuthoring extends ComponentAuthoring {
     protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.inputChangeSubscription = this.inputChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
-        this.componentChanged();
-      });
   }
 
   ngOnInit(): void {
@@ -40,11 +34,11 @@ export class EmbeddedAuthoring extends ComponentAuthoring {
     this.embeddedApplicationIFrameId = this.EmbeddedService.getEmbeddedApplicationIframeId(
       this.componentId
     );
-  }
-
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
-    this.inputChangeSubscription.unsubscribe();
+    this.subscriptions.add(
+      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
+        this.componentChanged();
+      })
+    );
   }
 
   assetSelected({ nodeId, componentId, assetItem, target }): void {

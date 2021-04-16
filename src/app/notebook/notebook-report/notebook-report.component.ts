@@ -29,9 +29,7 @@ export class NotebookReportComponent extends NotebookParentComponent {
   reportItem: any;
   reportItemContent: any;
   saveTime: number = null;
-  notebookItemAnnotationReceivedSubscription: Subscription;
-  showReportAnnotationsSubscription: Subscription;
-  mediaObserverSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     private AnnotationService: AnnotationService,
@@ -64,8 +62,8 @@ export class NotebookReportComponent extends NotebookParentComponent {
     this.startAutoSaveInterval();
     this.isAddNoteButtonAvailable = this.isNoteEnabled();
 
-    this.notebookItemAnnotationReceivedSubscription = this.NotebookService.notebookItemAnnotationReceived$.subscribe(
-      ({ annotation }: any) => {
+    this.subscriptions.add(
+      this.NotebookService.notebookItemAnnotationReceived$.subscribe(({ annotation }: any) => {
         if (annotation.localNotebookItemId === this.reportId) {
           this.hasNewAnnotation = true;
           this.latestAnnotations = this.AnnotationService.getLatestNotebookItemAnnotations(
@@ -74,11 +72,11 @@ export class NotebookReportComponent extends NotebookParentComponent {
           );
           this.hasAnnotation = this.calculateHasAnnotation(this.latestAnnotations);
         }
-      }
+      })
     );
 
-    this.showReportAnnotationsSubscription = this.NotebookService.showReportAnnotations$.subscribe(
-      () => {
+    this.subscriptions.add(
+      this.NotebookService.showReportAnnotations$.subscribe(() => {
         if (this.collapsed) {
           this.toggleCollapse();
         }
@@ -91,25 +89,21 @@ export class NotebookReportComponent extends NotebookParentComponent {
             500
           );
         }, 500);
-      }
+      })
     );
 
-    this.mediaObserverSubscription = this.mediaObserver.media$.subscribe((change: MediaChange) => {
-      if (change.mqAlias == 'xs' && !this.collapsed) {
-        this.collapsed = true;
-        this.fullscreen();
-      }
-    });
+    this.subscriptions.add(
+      this.mediaObserver.media$.subscribe((change: MediaChange) => {
+        if (change.mqAlias == 'xs' && !this.collapsed) {
+          this.collapsed = true;
+          this.fullscreen();
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll(): void {
-    this.notebookItemAnnotationReceivedSubscription.unsubscribe();
-    this.showReportAnnotationsSubscription.unsubscribe();
-    this.mediaObserverSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   setReportItem() {

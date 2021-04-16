@@ -43,13 +43,7 @@ class ComponentController {
   showAddToNotebookButton: boolean;
   latestAnnotations: any;
   isJSONStringChanged: boolean;
-  annotationSavedToServerSubscription: Subscription;
-  nodeSubmitClickedSubscription: Subscription;
-  audioRecordedSubscription: Subscription;
-  notebookItemChosenSubscription: Subscription;
-  snipImageSubscription: Subscription;
-  studentWorkSavedToServerSubscription: Subscription;
-  starterStateRequestSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     protected $filter: any,
@@ -130,22 +124,22 @@ class ComponentController {
   }
 
   $onInit() {
-    this.snipImageSubscription = this.ProjectService.snipImage$.subscribe(
-      ({ target, componentId }) => {
+    this.subscriptions.add(
+      this.ProjectService.snipImage$.subscribe(({ target, componentId }) => {
         if (componentId === this.componentId) {
           const imageObject = this.UtilService.getImageObjectFromImageElement(target);
           if (imageObject != null) {
             this.NotebookService.addNote(imageObject);
           }
         }
-      }
+      })
     );
-    this.starterStateRequestSubscription = this.NodeService.starterStateRequest$.subscribe(
-      (args: any) => {
+    this.subscriptions.add(
+      this.NodeService.starterStateRequest$.subscribe((args: any) => {
         if (this.isForThisComponent(args)) {
           this.generateStarterState();
         }
-      }
+      })
     );
   }
 
@@ -158,8 +152,8 @@ class ComponentController {
   }
 
   registerListeners() {
-    this.annotationSavedToServerSubscription = this.AnnotationService.annotationSavedToServer$.subscribe(
-      ({ annotation }) => {
+    this.subscriptions.add(
+      this.AnnotationService.annotationSavedToServer$.subscribe(({ annotation }) => {
         if (this.isEventTargetThisComponent(annotation)) {
           this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
             this.nodeId,
@@ -167,15 +161,15 @@ class ComponentController {
             this.workgroupId
           );
         }
-      }
+      })
     );
 
-    this.nodeSubmitClickedSubscription = this.NodeService.nodeSubmitClicked$.subscribe(
-      ({ nodeId }) => {
+    this.subscriptions.add(
+      this.NodeService.nodeSubmitClicked$.subscribe(({ nodeId }) => {
         if (this.nodeId === nodeId) {
           this.handleNodeSubmit();
         }
-      }
+      })
     );
     this.registerStudentWorkSavedToServerListener();
     this.$scope.$on('$destroy', () => {
@@ -184,17 +178,7 @@ class ComponentController {
   }
 
   ngOnDestroy() {
-    this.nodeSubmitClickedSubscription.unsubscribe();
-    this.annotationSavedToServerSubscription.unsubscribe();
-    this.studentWorkSavedToServerSubscription.unsubscribe();
-    if (this.audioRecordedSubscription != null) {
-      this.audioRecordedSubscription.unsubscribe();
-    }
-    if (this.notebookItemChosenSubscription != null) {
-      this.notebookItemChosenSubscription.unsubscribe();
-    }
-    this.snipImageSubscription.unsubscribe();
-    this.starterStateRequestSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   initializeScopeGetComponentState(scope, childControllerName) {
@@ -260,10 +244,10 @@ class ComponentController {
   }
 
   registerStudentWorkSavedToServerListener() {
-    this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-      (args: any) => {
+    this.subscriptions.add(
+      this.StudentDataService.studentWorkSavedToServer$.subscribe((args: any) => {
         this.handleStudentWorkSavedToServer(args);
-      }
+      })
     );
   }
 
@@ -785,19 +769,19 @@ class ComponentController {
   }
 
   registerNotebookItemChosenListener() {
-    this.notebookItemChosenSubscription = this.NotebookService.notebookItemChosen$.subscribe(
-      ({ requester, notebookItem }) => {
+    this.subscriptions.add(
+      this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
         if (requester === `${this.nodeId}-${this.componentId}`) {
           const studentWorkId = notebookItem.content.studentWorkIds[0];
           this.importWorkByStudentWorkId(studentWorkId);
         }
-      }
+      })
     );
   }
 
   registerAudioRecordedListener() {
-    this.audioRecordedSubscription = this.AudioRecorderService.audioRecorded$.subscribe(
-      ({ requester, audioFile }) => {
+    this.subscriptions.add(
+      this.AudioRecorderService.audioRecorded$.subscribe(({ requester, audioFile }) => {
         if (requester === `${this.nodeId}-${this.componentId}`) {
           this.StudentAssetService.uploadAsset(audioFile).then((studentAsset) => {
             this.attachStudentAsset(studentAsset).then(() => {
@@ -805,7 +789,7 @@ class ComponentController {
             });
           });
         }
-      }
+      })
     );
   }
 

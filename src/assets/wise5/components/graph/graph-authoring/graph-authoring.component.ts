@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
@@ -129,7 +129,6 @@ export class GraphAuthoring extends ComponentAuthoring {
   enableMultipleYAxes: boolean = false;
   numYAxes: number = 0;
   inputChange: Subject<string> = new Subject<string>();
-  inputChangeSubscription: Subscription;
 
   constructor(
     protected ConfigService: ConfigService,
@@ -149,16 +148,11 @@ export class GraphAuthoring extends ComponentAuthoring {
       this.numYAxes = this.authoringComponentContent.yAxis.length;
     }
     this.addAnyMissingYAxisFieldsToAllYAxes(this.authoringComponentContent.yAxis);
-    this.inputChangeSubscription = this.inputChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+    this.subscriptions.add(
+      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
-  }
-
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
-    this.inputChangeSubscription.unsubscribe();
+      })
+    );
   }
 
   isMultipleYAxesEnabled(): boolean {

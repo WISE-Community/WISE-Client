@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AchievementService } from '../../../assets/wise5/services/achievementService';
 import { AnnotationService } from '../../../assets/wise5/services/annotationService';
 import { MilestoneService } from '../../../assets/wise5/services/milestoneService';
@@ -11,9 +12,7 @@ import { TeacherDataService } from '../../../assets/wise5/services/teacherDataSe
 })
 export class MilestonesComponent {
   milestones: any[];
-  annotationReceivedSubscription: any;
-  currentPeriodChangedSubscription: any;
-  newStudentAchievementSubscription: any;
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     private AchievementService: AchievementService,
@@ -24,24 +23,24 @@ export class MilestonesComponent {
 
   ngOnInit() {
     this.loadProjectMilestones();
-    this.newStudentAchievementSubscription = this.AchievementService.newStudentAchievement$.subscribe(
-      (args: any) => {
+    this.subscriptions.add(
+      this.AchievementService.newStudentAchievement$.subscribe((args: any) => {
         const studentAchievement = args.studentAchievement;
         this.AchievementService.addOrUpdateStudentAchievement(studentAchievement);
         this.updateMilestoneStatus(studentAchievement.achievementId);
-      }
+      })
     );
 
-    this.currentPeriodChangedSubscription = this.TeacherDataService.currentPeriodChanged$.subscribe(
-      () => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentPeriodChanged$.subscribe(() => {
         for (const milestone of this.milestones) {
           this.updateMilestoneStatus(milestone.id);
         }
-      }
+      })
     );
 
-    this.annotationReceivedSubscription = this.AnnotationService.annotationReceived$.subscribe(
-      ({ annotation }) => {
+    this.subscriptions.add(
+      this.AnnotationService.annotationReceived$.subscribe(({ annotation }) => {
         for (const milestone of this.milestones) {
           if (
             milestone.nodeId === annotation.nodeId &&
@@ -50,14 +49,12 @@ export class MilestonesComponent {
             this.updateMilestoneStatus(milestone.id);
           }
         }
-      }
+      })
     );
   }
 
   ngOnDestroy() {
-    this.annotationReceivedSubscription.unsubscribe();
-    this.currentPeriodChangedSubscription.unsubscribe();
-    this.newStudentAchievementSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   loadProjectMilestones() {

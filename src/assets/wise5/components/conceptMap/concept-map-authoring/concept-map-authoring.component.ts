@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
@@ -20,7 +20,6 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
   availableNodes: any[];
   availableLinks: any[];
   inputChange: Subject<string> = new Subject<string>();
-  inputChangeSubscription: Subscription;
 
   constructor(
     private ConceptMapService: ConceptMapService,
@@ -31,27 +30,21 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
     protected UtilService: UtilService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.inputChangeSubscription = this.inputChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+    this.subscriptions.add(
+      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
+      })
+    );
   }
 
   ngOnInit() {
     super.ngOnInit();
-
     this.availableNodes = this.componentContent.nodes;
     this.availableLinks = this.componentContent.links;
-
     if (this.componentContent.showNodeLabels == null) {
       this.componentContent.showNodeLabels = true;
       this.authoringComponentContent.showNodeLabels = true;
     }
-  }
-
-  ngOnDestroy() {
-    this.inputChangeSubscription.unsubscribe();
   }
 
   moveNodeUpButtonClicked(index: number): void {

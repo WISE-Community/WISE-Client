@@ -14,10 +14,6 @@ class WiselinkController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     if (this.currentNodeChangedSubscription != null) {
       this.currentNodeChangedSubscription.unsubscribe();
     }

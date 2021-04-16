@@ -29,8 +29,7 @@ export class WiseTinymceEditorComponent {
   openNotebook: EventEmitter<string> = new EventEmitter<string>();
 
   private debouncer: Subject<string> = new Subject<string>();
-  private debouncerSubscription: Subscription;
-  private notebookItemChosenSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   protected aValidAttributes: string =
     'a[href|download|referrerpolicy|rel|target|type|style|' +
@@ -83,19 +82,21 @@ export class WiseTinymceEditorComponent {
   protected toolbarGroups: any;
 
   constructor(private NotebookService: NotebookService) {
-    this.debouncerSubscription = this.debouncer.pipe(debounceTime(1000)).subscribe((value) => {
-      this.modelChange.emit(value);
-    });
+    this.subscriptions.add(
+      this.debouncer.pipe(debounceTime(1000)).subscribe((value) => {
+        this.modelChange.emit(value);
+      })
+    );
   }
 
   ngOnInit(): void {
     if (this.isAddNoteButtonAvailable) {
-      this.notebookItemChosenSubscription = this.NotebookService.notebookItemChosen$.subscribe(
-        ({ requester, notebookItem }) => {
+      this.subscriptions.add(
+        this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
           if (requester === 'report') {
             this.insertWISENote(notebookItem);
           }
-        }
+        })
       );
       this.addPluginName('wisenote');
       this.initializeInsertWISENotePlugin();
@@ -211,10 +212,7 @@ export class WiseTinymceEditorComponent {
   }
 
   ngOnDestroy(): void {
-    this.debouncerSubscription.unsubscribe();
-    if (this.notebookItemChosenSubscription != null) {
-      this.notebookItemChosenSubscription.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
   onChange(event: any): void {

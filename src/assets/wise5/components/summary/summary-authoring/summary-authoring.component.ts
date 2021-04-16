@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
@@ -22,7 +22,6 @@ export class SummaryAuthoring extends ComponentAuthoring {
   isPieChartAllowed: boolean = true;
   stepNodesDetails: string[];
   inputChange: Subject<string> = new Subject<string>();
-  inputChangeSubscription: Subscription;
 
   constructor(
     protected ConfigService: ConfigService,
@@ -34,11 +33,11 @@ export class SummaryAuthoring extends ComponentAuthoring {
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
     this.stepNodesDetails = this.ProjectService.getStepNodesDetailsInOrder();
-    this.inputChangeSubscription = this.inputChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+    this.subscriptions.add(
+      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
+      })
+    );
   }
 
   ngOnInit(): void {
@@ -46,11 +45,6 @@ export class SummaryAuthoring extends ComponentAuthoring {
     this.updateStudentDataTypeOptionsIfNecessary();
     this.updateHasCorrectAnswerIfNecessary();
     this.updateChartTypeOptionsIfNecessary();
-  }
-
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
-    this.inputChangeSubscription.unsubscribe();
   }
 
   summaryNodeIdChanged(): void {
