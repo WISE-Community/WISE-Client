@@ -1,4 +1,4 @@
-import ConfigureStructureController from '../configureStructureController';
+import ConfigureStructureController from '../../structure/configureStructureController';
 
 export default class AutomatedAssessmentConfigureController extends ConfigureStructureController {
   node: any;
@@ -11,20 +11,10 @@ export default class AutomatedAssessmentConfigureController extends ConfigureStr
     '$state',
     '$stateParams',
     '$scope',
-    'UtilService',
-    'ProjectService'
+    'UtilService'
   ];
 
-  constructor(
-    $filter,
-    $http,
-    $rootScope,
-    $state,
-    $stateParams,
-    $scope,
-    UtilService,
-    ProjectService
-  ) {
+  constructor($filter, $http, $rootScope, $state, $stateParams, $scope, UtilService) {
     super($filter, $http, $rootScope, $state, $stateParams, $scope, UtilService);
   }
 

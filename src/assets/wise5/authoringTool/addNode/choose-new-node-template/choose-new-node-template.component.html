@@ -1,0 +1,19 @@
+<h5 i18n>Start from scratch or choose a step template:</h5>
+<div fxLayout="row wrap" fxLayout.xs="column">
+  <div class="template" fxFlex.sm="50" fxFlex.md="33" fxFlex.gt-md="25" 
+      *ngFor="let template of templates">
+    <mat-card>
+      <h6 class="center mat-subheading-2">{{template.label}}</h6>
+      <mat-card-content fxLayoutAlign="center center">
+        <mat-icon class="mat-48 text">{{ template.icon }}</mat-icon>
+      </mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="start center">
+        <button mat-raised-button color="primary" (click)="chooseTemplate(template)" fxFlex i18n>
+          Select
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<button mat-button class='mat-primary' (click)='cancel()' i18n>Cancel</button>

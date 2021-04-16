@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import '../assets/wise5/teacher/teacher-angular-js-module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AlertStatusCornerComponent } from './classroom-monitor/alert-status-corner/alert-status-corner.component';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { setUpLocationSync } from '@angular/router/upgrade';
@@ -22,8 +23,9 @@ import { ManageStudentsComponent } from '../assets/wise5/classroomMonitor/manage
 import { AdvancedProjectAuthoringComponent } from '../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { ChooseNewComponent } from './authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { ChooseNewComponentLocation } from './authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component';
-import { ChooseNewNode } from '../assets/wise5/authoringTool/addNode/choose-new-node/choose-new-node.component';
+import { AddYourOwnNode } from '../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
 import { ChooseNewNodeLocation } from '../assets/wise5/authoringTool/addNode/choose-new-node-location/choose-new-node-location.component';
+import { ChooseNewNodeTemplate } from '../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { ChooseImportStepComponent } from './authoring-tool/import-step/choose-import-step/choose-import-step.component';
 import { ChooseImportStepLocationComponent } from './authoring-tool/import-step/choose-import-step-location/choose-import-step-location.component';
 import { ComponentNewWorkBadgeComponent } from './classroom-monitor/component-new-work-badge/component-new-work-badge.component';
@@ -78,6 +80,7 @@ import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-gr
 
 @NgModule({
   declarations: [
+    AddYourOwnNode,
     AdvancedProjectAuthoringComponent,
     AlertStatusCornerComponent,
     AnimationAuthoring,
@@ -88,8 +91,8 @@ import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-gr
     ChooseImportStepLocationComponent,
     ChooseNewComponent,
     ChooseNewComponentLocation,
-    ChooseNewNode,
     ChooseNewNodeLocation,
+    ChooseNewNodeTemplate,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
     ConceptMapAuthoring,
@@ -140,7 +143,7 @@ import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-gr
     WiseAuthoringTinymceEditorComponent,
     WorkgroupNodeStatusComponent
   ],
-  imports: [AngularJSModule, HighchartsChartModule],
+  imports: [AngularJSModule, HighchartsChartModule, DragDropModule],
   providers: [
     { provide: DataService, useExisting: TeacherDataService },
     MilestoneService,
