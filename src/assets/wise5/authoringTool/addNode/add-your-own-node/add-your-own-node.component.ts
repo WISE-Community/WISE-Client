@@ -6,7 +6,7 @@ import { UtilService } from '../../../services/utilService';
 
 @Component({
   styleUrls: ['add-your-own-node.component.scss'],
-  templateUrl: 'add-your-own-node.component.html',
+  templateUrl: 'add-your-own-node.component.html'
 })
 export class AddYourOwnNode {
   addNodeFormGroup: FormGroup = this.fb.group({
@@ -68,7 +68,8 @@ export class AddYourOwnNode {
     this.upgrade.$injector.get('$state').go('root.at.project.add-node.choose-template');
   }
 
-  cancel() {
+  cancel(event: Event) {
     this.upgrade.$injector.get('$state').go('root.at.project');
+    event.preventDefault();
   }
 }
