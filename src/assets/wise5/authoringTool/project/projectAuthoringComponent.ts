@@ -601,7 +601,7 @@ class ProjectAuthoringController {
   }
 
   createNewStep() {
-    this.$state.go('root.at.project.add-node.choose-node');
+    this.$state.go('root.at.project.add-node.choose-template');
   }
 
   addStructure() {
