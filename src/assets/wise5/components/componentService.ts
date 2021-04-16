@@ -1,17 +1,48 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { StudentDataService } from '../services/studentDataService';
 import { UtilService } from '../services/utilService';
+import { ComponentStateRequest } from './ComponentStateRequest';
+import { ComponentStateWrapper } from './ComponentStateWrapper';
 
 @Injectable()
 export class ComponentService {
+  private requestComponentStateSource = new Subject<ComponentStateRequest>();
+  public requestComponentStateSource$ = this.requestComponentStateSource.asObservable();
+  private sendComponentStateSource = new Subject<ComponentStateWrapper>();
+  public sendComponentStateSource$ = this.sendComponentStateSource.asObservable();
+  private notifyConnectedComponentSource = new Subject<any>();
+  public notifyConnectedComponentSource$ = this.notifyConnectedComponentSource.asObservable();
+
   constructor(
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
-  ) {
-    this.StudentDataService = StudentDataService;
-    this.UtilService = UtilService;
+  ) {}
+
+  requestComponentState(nodeId: string, componentId: string, isSubmit: boolean = false): void {
+    this.requestComponentStateSource.next({
+      nodeId: nodeId,
+      componentId: componentId,
+      isSubmit: isSubmit
+    });
+  }
+
+  sendComponentState(componentStateWrapper: ComponentStateWrapper): void {
+    this.sendComponentStateSource.next(componentStateWrapper);
+  }
+
+  notifyConnectedComponentSubscribers(
+    nodeId: string,
+    componentId: string,
+    componentState: any
+  ): void {
+    this.notifyConnectedComponentSource.next({
+      nodeId: nodeId,
+      componentId: componentId,
+      componentState: componentState
+    });
   }
 
   /**

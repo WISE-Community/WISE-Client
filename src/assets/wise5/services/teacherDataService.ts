@@ -188,7 +188,7 @@ export class TeacherDataService extends DataService {
     const params = new HttpParams().set('exportType', exportType);
     const options = { params: params };
     return this.http
-      .get(`/teacher/notebook/run/${this.ConfigService.getRunId()}`, options)
+      .get(this.ConfigService.getConfigParam('notebookURL'), options)
       .toPromise()
       .then((data: any) => {
         return data;
