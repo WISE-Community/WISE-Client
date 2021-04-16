@@ -31,12 +31,6 @@ class ChooseStructureController {
         description: translate('kiOER.description'),
         icon: 'autorenew',
         route: 'root.at.project.structure.ki-cycle-using-oer'
-      },
-      {
-        label: translate('automatedAssessment.label'),
-        description: translate('automatedAssessment.description'),
-        icon: 'fact_check',
-        route: 'root.at.project.structure.automated-assessment.choose-item'
       }
     ];
   }

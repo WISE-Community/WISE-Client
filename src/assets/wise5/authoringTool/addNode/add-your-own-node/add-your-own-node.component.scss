@@ -1,0 +1,56 @@
+@import '~@angular/material/theming';
+
+$border-color: #dddddd;
+$transform: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+
+.title-field {
+  width: 360px;
+  max-width: 100%;
+}
+
+.initial-components {
+  padding: 8px;
+  margin: 4px;
+}
+
+.component-list {
+  border: 1px solid $border-color;
+}
+
+.component-list-item {
+  background-color: white;
+  border-bottom: 1px solid $border-color;
+  cursor: move;
+  padding: 0 8px;
+
+  &:last-of-type {
+    border-bottom: 0 none;
+  }
+}
+
+.component-type {
+  padding: 4px;
+  
+  button {
+    text-transform: none;
+  }
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border: 0 none;
+  @include mat-elevation-transition;
+  @include mat-elevation(4);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: $transform;
+}
+
+.component-list.cdk-drop-list-dragging .component-list-item:not(.cdk-drag-placeholder) {
+  transition: $transform;
+}

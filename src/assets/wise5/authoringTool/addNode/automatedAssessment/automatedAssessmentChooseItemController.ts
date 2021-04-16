@@ -1,4 +1,4 @@
-import ConfigureStructureController from '../configureStructureController';
+import ConfigureStructureController from '../../structure/configureStructureController';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 export default class AutomatedAssessmentChooseItemController extends ConfigureStructureController {
@@ -53,8 +53,12 @@ export default class AutomatedAssessmentChooseItemController extends ConfigureSt
     window.open(`${this.project.previewProjectURL}/${node.id}`);
   }
 
+  back() {
+    this.$state.go('root.at.project.add-node.choose-template');
+  }
+
   next() {
-    this.$state.go('root.at.project.structure.automated-assessment.configure', {
+    this.$state.go('root.at.project.add-node.automated-assessment.configure', {
       importFromProjectId: this.automatedAssessmentProjectId,
       node: this.node
     });

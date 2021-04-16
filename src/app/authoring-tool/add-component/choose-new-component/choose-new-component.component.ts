@@ -22,47 +22,20 @@ export class ChooseNewComponent {
 
   ngOnInit() {
     this.componentTypes = [
-      {
-        type: 'Animation',
-        name: this.UtilService.getComponentTypeLabel('Animation')
-      },
-      {
-        type: 'AudioOscillator',
-        name: this.UtilService.getComponentTypeLabel('AudioOscillator')
-      },
-      {
-        type: 'ConceptMap',
-        name: this.UtilService.getComponentTypeLabel('ConceptMap')
-      },
-      {
-        type: 'Discussion',
-        name: this.UtilService.getComponentTypeLabel('Discussion')
-      },
+      { type: 'Animation', name: this.UtilService.getComponentTypeLabel('Animation') },
+      { type: 'AudioOscillator', name: this.UtilService.getComponentTypeLabel('AudioOscillator') },
+      { type: 'ConceptMap', name: this.UtilService.getComponentTypeLabel('ConceptMap') },
+      { type: 'Discussion', name: this.UtilService.getComponentTypeLabel('Discussion') },
       { type: 'Draw', name: this.UtilService.getComponentTypeLabel('Draw') },
-      {
-        type: 'Embedded',
-        name: this.UtilService.getComponentTypeLabel('Embedded')
-      },
+      { type: 'Embedded', name: this.UtilService.getComponentTypeLabel('Embedded') },
       { type: 'Graph', name: this.UtilService.getComponentTypeLabel('Graph') },
-      { type: 'HTML', name: this.UtilService.getComponentTypeLabel('HTML') },
       { type: 'Label', name: this.UtilService.getComponentTypeLabel('Label') },
       { type: 'Match', name: this.UtilService.getComponentTypeLabel('Match') },
-      {
-        type: 'MultipleChoice',
-        name: this.UtilService.getComponentTypeLabel('MultipleChoice')
-      },
-      {
-        type: 'OpenResponse',
-        name: this.UtilService.getComponentTypeLabel('OpenResponse')
-      },
-      {
-        type: 'OutsideURL',
-        name: this.UtilService.getComponentTypeLabel('OutsideURL')
-      },
-      {
-        type: 'Summary',
-        name: this.UtilService.getComponentTypeLabel('Summary')
-      },
+      { type: 'MultipleChoice', name: this.UtilService.getComponentTypeLabel('MultipleChoice') },
+      { type: 'OpenResponse', name: this.UtilService.getComponentTypeLabel('OpenResponse') },
+      { type: 'OutsideURL', name: this.UtilService.getComponentTypeLabel('OutsideURL') },
+      { type: 'HTML', name: this.UtilService.getComponentTypeLabel('HTML') },
+      { type: 'Summary', name: this.UtilService.getComponentTypeLabel('Summary') },
       { type: 'Table', name: this.UtilService.getComponentTypeLabel('Table') }
     ];
     this.selectedComponentType = this.upgrade.$injector.get('$stateParams').componentType;
