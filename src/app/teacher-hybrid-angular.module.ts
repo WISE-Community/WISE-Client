@@ -37,6 +37,7 @@ import { NodeAdvancedJsonAuthoringComponent } from '../assets/wise5/authoringToo
 import { WorkgroupInfoComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component';
 import { NodeAdvancedGeneralAuthoringComponent } from '../assets/wise5/authoringTool/node/advanced/general/node-advanced-general-authoring.component';
 import { WiseAuthoringTinymceEditorComponent } from '../assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
+import { EditComponentExcludeFromTotalScoreComponent } from './authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
 import { EditComponentJsonComponent } from './authoring-tool/edit-component-json/edit-component-json.component';
 import { EditComponentMaxScoreComponent } from './authoring-tool/edit-component-max-score/edit-component-max-score.component';
 import { EditComponentRubricComponent } from './authoring-tool/edit-component-rubric/edit-component-rubric.component';
@@ -100,6 +101,7 @@ import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-gr
     DrawGrading,
     DiscussionAuthoring,
     DiscussionGrading,
+    EditComponentExcludeFromTotalScoreComponent,
     EditComponentRubricComponent,
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,

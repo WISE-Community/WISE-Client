@@ -384,7 +384,7 @@ class StudentGradingController {
    * @returns Number score value (defaults to -1 if node has no score)
    */
   getNodeScoreByNodeId(nodeId) {
-    let score = this.AnnotationService.getScore(this.workgroupId, nodeId);
+    const score = this.AnnotationService.getTotalNodeScoreForWorkgroup(this.workgroupId, nodeId);
     return typeof score === 'number' ? score : -1;
   }
 

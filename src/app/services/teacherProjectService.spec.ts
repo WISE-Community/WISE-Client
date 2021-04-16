@@ -413,7 +413,7 @@ function shouldReturnTheMaxScoreOfTheProject() {
   it('should return the max score of the project', () => {
     service.setProject(demoProjectJSON);
     const demoProjectMaxScoreActual = service.getMaxScore();
-    expect(demoProjectMaxScoreActual).toBeNull();
+    expect(demoProjectMaxScoreActual).toEqual(9);
     service.setProject(scootersProjectJSON);
     const scootersProjectMaxScoreExpected = 18;
     const scootersProjectMaxScoreActual = service.getMaxScore();

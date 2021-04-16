@@ -254,7 +254,7 @@ export class NodeGradingViewController {
   }
 
   getScoreByWorkgroupId(workgroupId: number): number {
-    const score = this.AnnotationService.getScore(workgroupId, this.nodeId);
+    const score = this.AnnotationService.getTotalNodeScoreForWorkgroup(workgroupId, this.nodeId);
     return typeof score === 'number' ? score : -1;
   }
 
