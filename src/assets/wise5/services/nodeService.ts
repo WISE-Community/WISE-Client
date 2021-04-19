@@ -835,6 +835,10 @@ export class NodeService {
         transition: 'background-color 3s ease-in-out',
         'background-color': originalBackgroundColor
       });
+      setTimeout(() => {
+        // ensures the highlight works for the second time linking to this same step
+        componentElement.css('transition', '');
+      }, 4000);
     }, 500);
   }
 
