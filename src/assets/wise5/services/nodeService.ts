@@ -830,22 +830,11 @@ export class NodeService {
       const componentElement = $('#component_' + componentId);
       const originalBackgroundColor = componentElement.css('backgroundColor');
       componentElement.css('background-color', '#FFFF9C');
-      $('#content').animate(
-        {
-          scrollTop: componentElement.prop('offsetTop')
-        },
-        1000
-      );
-
+      $('#content').animate({ scrollTop: componentElement.prop('offsetTop') }, 1000);
       componentElement.css({
         transition: 'background-color 3s ease-in-out',
         'background-color': originalBackgroundColor
       });
-
-      // we need this to remove the transition animation so the highlight works again next time
-      setTimeout(() => {
-        componentElement.css('transition', '');
-      }, 4000);
     }, 500);
   }
 
