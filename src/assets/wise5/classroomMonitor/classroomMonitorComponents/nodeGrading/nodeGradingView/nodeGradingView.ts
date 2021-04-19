@@ -41,11 +41,7 @@ export class NodeGradingViewController {
   workgroups: any;
   workgroupsById: any = {};
   workVisibilityById: any = {}; // whether student work is visible for each workgroup
-  annotationReceivedSubscription: Subscription;
-  studentWorkReceivedSubscription: Subscription;
-  notificationChangedSubscription: Subscription;
-  currentPeriodChangedSubscription: Subscription;
-  projectSavedSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
     '$filter',
@@ -84,16 +80,18 @@ export class NodeGradingViewController {
   }
 
   $onDestroy() {
-    this.unsubscribeAll();
+    this.subscriptions.unsubscribe();
   }
 
   subscribeToEvents() {
-    this.projectSavedSubscription = this.ProjectService.projectSaved$.subscribe(() => {
-      this.maxScore = this.getMaxScore();
-    });
+    this.subscriptions.add(
+      this.ProjectService.projectSaved$.subscribe(() => {
+        this.maxScore = this.getMaxScore();
+      })
+    );
 
-    this.notificationChangedSubscription = this.NotificationService.notificationChanged$.subscribe(
-      (notification) => {
+    this.subscriptions.add(
+      this.NotificationService.notificationChanged$.subscribe((notification) => {
         if (notification.type === 'CRaterResult') {
           // TODO: expand to encompass other notification types that should be shown to teacher
           const workgroupId = notification.toWorkgroupId;
@@ -101,31 +99,31 @@ export class NodeGradingViewController {
             this.updateWorkgroup(workgroupId);
           }
         }
-      }
+      })
     );
 
-    this.annotationReceivedSubscription = this.AnnotationService.annotationReceived$.subscribe(
-      ({ annotation }) => {
+    this.subscriptions.add(
+      this.AnnotationService.annotationReceived$.subscribe(({ annotation }) => {
         const workgroupId = annotation.toWorkgroupId;
         if (annotation.nodeId === this.nodeId && this.workgroupsById[workgroupId]) {
           this.updateWorkgroup(workgroupId);
         }
-      }
+      })
     );
 
-    this.studentWorkReceivedSubscription = this.TeacherDataService.studentWorkReceived$.subscribe(
-      ({ studentWork }) => {
+    this.subscriptions.add(
+      this.TeacherDataService.studentWorkReceived$.subscribe(({ studentWork }) => {
         const workgroupId = studentWork.workgroupId;
         if (studentWork.nodeId === this.nodeId && this.workgroupsById[workgroupId]) {
           this.updateWorkgroup(workgroupId);
         }
-      }
+      })
     );
 
-    this.currentPeriodChangedSubscription = this.TeacherDataService.currentPeriodChanged$.subscribe(
-      () => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentPeriodChanged$.subscribe(() => {
         this.milestoneReport = this.MilestoneService.getMilestoneReportByNodeId(this.nodeId);
-      }
+      })
     );
   }
 
@@ -138,14 +136,6 @@ export class NodeGradingViewController {
       this.numRubrics = this.ProjectService.getNumberOfRubricsByNodeId(this.nodeId);
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
-  }
-
-  unsubscribeAll() {
-    this.annotationReceivedSubscription.unsubscribe();
-    this.currentPeriodChangedSubscription.unsubscribe();
-    this.studentWorkReceivedSubscription.unsubscribe();
-    this.notificationChangedSubscription.unsubscribe();
-    this.projectSavedSubscription.unsubscribe();
   }
 
   saveNodeGradingViewDisplayedEvent() {
@@ -264,7 +254,7 @@ export class NodeGradingViewController {
   }
 
   getScoreByWorkgroupId(workgroupId: number): number {
-    const score = this.AnnotationService.getScore(workgroupId, this.nodeId);
+    const score = this.AnnotationService.getTotalNodeScoreForWorkgroup(workgroupId, this.nodeId);
     return typeof score === 'number' ? score : -1;
   }
 

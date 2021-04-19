@@ -38,6 +38,7 @@ import StudentGradingController from '../classroomMonitor/studentGrading/student
 import StudentProgressController from '../classroomMonitor/studentProgress/studentProgressController';
 import WISELinkAuthoringController from '../authoringTool/wiseLink/wiseLinkAuthoringController';
 import { WiseAuthoringTinymceEditorComponent } from '../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
+import { EditComponentExcludeFromTotalScoreComponent } from '../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
 import { EditComponentJsonComponent } from '../../../app/authoring-tool/edit-component-json/edit-component-json.component';
 import { EditComponentMaxScoreComponent } from '../../../app/authoring-tool/edit-component-max-score/edit-component-max-score.component';
 import { EditComponentRubricComponent } from '../../../app/authoring-tool/edit-component-rubric/edit-component-rubric.component';
@@ -129,6 +130,12 @@ angular
   .factory('StudentStatusService', downgradeInjectable(StudentStatusService))
   .service('TeacherDataService', downgradeInjectable(TeacherDataService))
   .service('TeacherWebSocketService', downgradeInjectable(TeacherWebSocketService))
+  .directive(
+    'editComponentExcludeFromTotalScore',
+    downgradeComponent({
+      component: EditComponentExcludeFromTotalScoreComponent
+    }) as angular.IDirectiveFactory
+  )
   .directive(
     'editComponentJson',
     downgradeComponent({ component: EditComponentJsonComponent }) as angular.IDirectiveFactory

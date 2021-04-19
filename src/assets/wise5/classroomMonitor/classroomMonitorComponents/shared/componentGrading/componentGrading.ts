@@ -7,6 +7,7 @@ import { UtilService } from '../../../../services/utilService';
 import * as angular from 'angular';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { Directive } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Directive()
 class ComponentGradingController {
@@ -29,7 +30,7 @@ class ComponentGradingController {
   score: number;
   showAllAnnotations: boolean;
   toWorkgroupId: number;
-  annotationSavedToServerSubscription: any;
+  annotationSavedToServerSubscription: Subscription;
 
   static $inject = [
     '$filter',
@@ -51,13 +52,6 @@ class ComponentGradingController {
     private TeacherDataService: TeacherDataService,
     private UtilService: UtilService
   ) {
-    this.$scope = $scope;
-    this.$timeout = $timeout;
-    this.AnnotationService = AnnotationService;
-    this.ConfigService = ConfigService;
-    this.ProjectService = ProjectService;
-    this.TeacherDataService = TeacherDataService;
-    this.UtilService = UtilService;
     this.$translate = $filter('translate');
 
     this.annotationSavedToServerSubscription = this.AnnotationService.annotationSavedToServer$.subscribe(
@@ -86,7 +80,6 @@ class ComponentGradingController {
 
   $onInit() {
     this.runId = this.ConfigService.getRunId();
-
     const permissions = this.ConfigService.getPermissions();
     this.canGradeStudentWork = permissions.canGradeStudentWork;
     this.canAuthorProject = permissions.canAuthorProject;

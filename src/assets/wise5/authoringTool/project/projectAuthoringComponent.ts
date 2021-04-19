@@ -34,8 +34,7 @@ class ProjectAuthoringController {
   metadata: any;
   moveMode: boolean;
   projectURL: string;
-  refreshProjectSubscription: Subscription;
-  scrollToBottomOfPageSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   /*
    * The colors for the branch path steps. The colors are from
@@ -115,14 +114,16 @@ class ProjectAuthoringController {
       }
     });
 
-    this.refreshProjectSubscription = this.ProjectService.refreshProject$.subscribe(() => {
-      this.refreshProject();
-    });
+    this.subscriptions.add(
+      this.ProjectService.refreshProject$.subscribe(() => {
+        this.refreshProject();
+      })
+    );
 
-    this.scrollToBottomOfPageSubscription = this.ProjectService.scrollToBottomOfPage$.subscribe(
-      () => {
+    this.subscriptions.add(
+      this.ProjectService.scrollToBottomOfPage$.subscribe(() => {
         this.scrollToBottomOfPage();
-      }
+      })
     );
 
     this.saveEvent('projectOpened', 'Navigation');
@@ -141,8 +142,7 @@ class ProjectAuthoringController {
 
   $onDestroy() {
     this.endProjectAuthoringSession();
-    this.refreshProjectSubscription.unsubscribe();
-    this.scrollToBottomOfPageSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   endProjectAuthoringSession() {
@@ -601,7 +601,7 @@ class ProjectAuthoringController {
   }
 
   createNewStep() {
-    this.$state.go('root.at.project.add-node.choose-node');
+    this.$state.go('root.at.project.add-node.choose-template');
   }
 
   addStructure() {

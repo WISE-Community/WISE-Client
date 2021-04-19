@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from '../../services/configService';
 import { StudentStatusService } from '../../services/studentStatusService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { TeacherWebSocketService } from '../../services/teacherWebSocketService';
 
 @Directive()
 class StudentProgressController {
@@ -27,44 +26,39 @@ class StudentProgressController {
   students: any;
   teacherWorkgroupId: number;
   teams: any;
-  studentStatusReceivedSubscription: Subscription;
-  currentWorkgroupChangedSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
-    '$rootScope',
     '$scope',
     '$state',
     'ConfigService',
     'StudentStatusService',
-    'TeacherDataService',
-    'TeacherWebSocketService'
+    'TeacherDataService'
   ];
 
   constructor(
-    private $rootScope: any,
     private $scope: any,
     private $state: any,
     private ConfigService: ConfigService,
     private StudentStatusService: StudentStatusService,
-    private TeacherDataService: TeacherDataService,
-    private TeacherWebSocketService: TeacherWebSocketService
+    private TeacherDataService: TeacherDataService
   ) {
     this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
     this.sort = this.TeacherDataService.studentProgressSort;
     this.permissions = this.ConfigService.getPermissions();
     this.students = [];
     this.initializeStudents();
-    this.studentStatusReceivedSubscription = this.StudentStatusService.studentStatusReceived$.subscribe(
-      (args) => {
+    this.subscriptions.add(
+      this.StudentStatusService.studentStatusReceived$.subscribe((args) => {
         const studentStatus = args.studentStatus;
         const workgroupId = studentStatus.workgroupId;
         this.updateTeam(workgroupId);
-      }
+      })
     );
-    this.currentWorkgroupChangedSubscription = this.TeacherDataService.currentWorkgroupChanged$.subscribe(
-      ({ currentWorkgroup }) => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
         this.currentWorkgroup = currentWorkgroup;
-      }
+      })
     );
     const context = 'ClassroomMonitor',
       nodeId = null,
@@ -88,12 +82,7 @@ class StudentProgressController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
-    this.studentStatusReceivedSubscription.unsubscribe();
-    this.currentWorkgroupChangedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   getCurrentNodeForWorkgroupId(workgroupId) {

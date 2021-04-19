@@ -63,10 +63,6 @@ export class NotebookItemComponent {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll(): void {
     this.notebookUpdatedSubscription.unsubscribe();
   }
 

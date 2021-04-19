@@ -9,6 +9,7 @@ import { SessionService } from '../services/sessionService';
 import * as angular from 'angular';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { Directive } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Directive()
 class ClassroomMonitorController {
@@ -36,9 +37,7 @@ class ClassroomMonitorController {
   themePath: string;
   views: any;
   workgroupId: number;
-  serverConnectionStatusSubscription: any;
-  showSessionWarningSubscription: any;
-  reportFullscreenSubscription: any;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
     '$filter',
@@ -143,49 +142,53 @@ class ClassroomMonitorController {
     });
     this.connectionLostShown = false;
 
-    this.showSessionWarningSubscription = this.SessionService.showSessionWarning$.subscribe(() => {
-      const confirm = $mdDialog
-        .confirm()
-        .parent(angular.element(document.body))
-        .theme('cm')
-        .title(this.$translate('SESSION_TIMEOUT'))
-        .content(this.$translate('SESSION_TIMEOUT_MESSAGE'))
-        .ariaLabel(this.$translate('SESSION_TIMEOUT'))
-        .ok(this.$translate('YES'))
-        .cancel(this.$translate('NO'));
-      $mdDialog.show(confirm).then(
-        () => {
-          this.SessionService.closeWarningAndRenewSession();
-        },
-        () => {
-          this.logOut();
-        }
-      );
-    });
+    this.subscriptions.add(
+      this.SessionService.showSessionWarning$.subscribe(() => {
+        const confirm = $mdDialog
+          .confirm()
+          .parent(angular.element(document.body))
+          .theme('cm')
+          .title(this.$translate('SESSION_TIMEOUT'))
+          .content(this.$translate('SESSION_TIMEOUT_MESSAGE'))
+          .ariaLabel(this.$translate('SESSION_TIMEOUT'))
+          .ok(this.$translate('YES'))
+          .cancel(this.$translate('NO'));
+        $mdDialog.show(confirm).then(
+          () => {
+            this.SessionService.closeWarningAndRenewSession();
+          },
+          () => {
+            this.logOut();
+          }
+        );
+      })
+    );
 
-    this.SessionService.logOut$.subscribe(() => {
-      this.logOut();
-    });
+    this.subscriptions.add(
+      this.SessionService.logOut$.subscribe(() => {
+        this.logOut();
+      })
+    );
 
     $transitions.onSuccess({}, ($transition) => {
       this.menuOpen = false;
       this.processUI();
     });
 
-    this.serverConnectionStatusSubscription = this.NotificationService.serverConnectionStatus$.subscribe(
-      (isConnected: boolean) => {
+    this.subscriptions.add(
+      this.NotificationService.serverConnectionStatus$.subscribe((isConnected: boolean) => {
         if (isConnected) {
           this.handleServerReconnect();
         } else {
           this.handleServerDisconnect();
         }
-      }
+      })
     );
 
-    this.reportFullscreenSubscription = this.NotebookService.reportFullScreen$.subscribe(
-      (full: boolean) => {
+    this.subscriptions.add(
+      this.NotebookService.reportFullScreen$.subscribe((full: boolean) => {
         this.reportFullscreen = full;
-      }
+      })
     );
 
     // TODO: make dynamic, set somewhere like in config?
@@ -229,13 +232,7 @@ class ClassroomMonitorController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
-    this.serverConnectionStatusSubscription.unsubscribe();
-    this.showSessionWarningSubscription.unsubscribe();
-    this.reportFullscreenSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   /**

@@ -1,6 +1,7 @@
 'use strict';
 
 import { Directive } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { NotificationService } from '../../../../services/notificationService';
 
 @Directive()
@@ -8,23 +9,20 @@ class ToolbarController {
   globalMessage: string;
   isJSONValid: boolean = null;
   onMenuToggle: any;
-  NotificationService: NotificationService;
-  setGlobalMessageSubscription: any;
-  setIsJSONValidSubscription: any;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = ['$scope', 'NotificationService'];
 
-  constructor(private $scope, NotificationService: NotificationService) {
-    this.NotificationService = NotificationService;
-    this.setGlobalMessageSubscription = this.NotificationService.setGlobalMessage$.subscribe(
-      ({ globalMessage }) => {
+  constructor(private $scope, private NotificationService: NotificationService) {
+    this.subscriptions.add(
+      this.NotificationService.setGlobalMessage$.subscribe(({ globalMessage }) => {
         this.globalMessage = globalMessage;
-      }
+      })
     );
-    this.setIsJSONValidSubscription = this.NotificationService.setIsJSONValid$.subscribe(
-      ({ isJSONValid }) => {
+    this.subscriptions.add(
+      this.NotificationService.setIsJSONValid$.subscribe(({ isJSONValid }) => {
         this.isJSONValid = isJSONValid;
-      }
+      })
     );
     this.$scope.$on('$destroy', () => {
       this.ngOnDestroy();
@@ -32,12 +30,7 @@ class ToolbarController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
-    this.setGlobalMessageSubscription.unsubscribe();
-    this.setIsJSONValidSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   toggleMenu() {

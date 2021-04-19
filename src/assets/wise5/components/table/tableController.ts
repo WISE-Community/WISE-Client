@@ -6,8 +6,6 @@ import ComponentController from '../componentController';
 import { TableService } from './tableService';
 
 class TableController extends ComponentController {
-  $q: any;
-  TableService: TableService;
   tableData: any;
   isResetTableButtonVisible: boolean;
   notebookConfig: any;
@@ -64,7 +62,7 @@ class TableController extends ComponentController {
     ProjectService,
     StudentAssetService,
     StudentDataService,
-    TableService,
+    private TableService: TableService,
     UtilService
   ) {
     super(
@@ -85,9 +83,6 @@ class TableController extends ComponentController {
       StudentDataService,
       UtilService
     );
-    this.$q = $q;
-    this.TableService = TableService;
-
     // holds the the table data
     this.tableData = null;
 
@@ -408,8 +403,8 @@ class TableController extends ComponentController {
   }
 
   registerStudentWorkSavedToServerListener() {
-    this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-      (args: any) => {
+    this.subscriptions.add(
+      this.StudentDataService.studentWorkSavedToServer$.subscribe((args: any) => {
         const componentState = args.studentWork;
         if (this.isForThisComponent(componentState)) {
           this.isDirty = false;
@@ -507,7 +502,7 @@ class TableController extends ComponentController {
             }
           }
         }
-      }
+      })
     );
   }
 

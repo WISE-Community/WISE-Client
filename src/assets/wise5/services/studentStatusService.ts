@@ -270,14 +270,14 @@ export class StudentStatusService {
     let numStudentsWithScore = 0;
     const studentStatuses = this.studentStatuses;
 
-    for (let studentStatus of studentStatuses) {
+    for (const studentStatus of studentStatuses) {
       if (studentStatus != null) {
         if (periodId === -1 || periodId === studentStatus.periodId) {
           // the period matches the one we are looking for
-          let workgroupId = studentStatus.workgroupId;
+          const workgroupId = studentStatus.workgroupId;
 
           // get the workgroups score on the node
-          let score = this.AnnotationService.getScore(workgroupId, nodeId);
+          const score = this.AnnotationService.getTotalNodeScoreForWorkgroup(workgroupId, nodeId);
 
           if (score != null) {
             // increment the counter of students with a score for this node

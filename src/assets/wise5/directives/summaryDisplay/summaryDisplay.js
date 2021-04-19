@@ -35,10 +35,6 @@ class SummaryDisplayController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.studentWorkSavedToServerSubscription.unsubscribe();
   }
 

@@ -1,6 +1,7 @@
 'use strict';
 
 import { Directive } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { StudentStatusService } from '../../../../services/studentStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
@@ -11,7 +12,7 @@ class PeriodSelectController {
   currentPeriod: any;
   periods: any;
   rootNodeId: string;
-  currentPeriodChangedSubscription: any;
+  currentPeriodChangedSubscription: Subscription;
   static $inject = [
     '$filter',
     '$scope',
@@ -27,14 +28,9 @@ class PeriodSelectController {
     private StudentStatusService: StudentStatusService,
     private TeacherDataService: TeacherDataService
   ) {
-    this.ProjectService = ProjectService;
-    this.StudentStatusService = StudentStatusService;
-    this.TeacherDataService = TeacherDataService;
     this.$translate = $filter('translate');
-
-    let startNodeId = this.ProjectService.getStartNodeId();
+    const startNodeId = this.ProjectService.getStartNodeId();
     this.rootNodeId = this.ProjectService.getRootNode(startNodeId).id;
-
     this.currentPeriod = null;
     this.periods = [];
     this.initializePeriods();
@@ -49,10 +45,6 @@ class PeriodSelectController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.currentPeriodChangedSubscription.unsubscribe();
   }
 

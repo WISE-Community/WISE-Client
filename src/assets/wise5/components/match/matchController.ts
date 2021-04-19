@@ -7,10 +7,6 @@ import { MatchService } from './matchService';
 
 @Directive()
 class MatchController extends ComponentController {
-  $mdMedia: any;
-  $q: any;
-  dragulaService: any;
-  MatchService: MatchService;
   choices: any[];
   buckets: any[];
   isCorrect: boolean;
@@ -25,13 +21,11 @@ class MatchController extends ComponentController {
   sourceBucket: any;
   privateNotebookItems: any[];
   autoScroll: any;
-  notebookUpdatedSubscription: any;
 
   static $inject = [
     '$filter',
     '$injector',
     '$mdDialog',
-    '$mdMedia',
     '$q',
     '$rootScope',
     '$scope',
@@ -53,15 +47,14 @@ class MatchController extends ComponentController {
     $filter,
     $injector,
     $mdDialog,
-    $mdMedia,
     $q,
     $rootScope,
     $scope,
     AnnotationService,
     AudioRecorderService,
     ConfigService,
-    dragulaService,
-    MatchService,
+    private dragulaService: any,
+    private MatchService: MatchService,
     NodeService,
     NotebookService,
     NotificationService,
@@ -88,12 +81,7 @@ class MatchController extends ComponentController {
       StudentDataService,
       UtilService
     );
-    this.$q = $q;
-    this.dragulaService = dragulaService;
-    this.MatchService = MatchService;
-    this.$mdMedia = $mdMedia;
     this.autoScroll = require('dom-autoscroller');
-
     this.choices = [];
     this.buckets = [];
     this.isCorrect = null;
@@ -106,9 +94,7 @@ class MatchController extends ComponentController {
     this.hasCorrectAnswer = false;
     this.isLatestComponentStateSubmit = false;
     this.sourceBucket = null;
-
     this.privateNotebookItems = [];
-
     this.isPromptVisible = true;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
@@ -117,11 +103,13 @@ class MatchController extends ComponentController {
       this.privateNotebookItems = allPrivateNotebookItems.filter((note) => {
         return note.serverDeleteTime == null;
       });
-      this.notebookUpdatedSubscription = this.NotebookService.notebookUpdated$.subscribe((args) => {
-        if (args.notebookItem.type === 'note') {
-          this.addNotebookItemToSourceBucket(args.notebookItem);
-        }
-      });
+      this.subscriptions.add(
+        this.NotebookService.notebookUpdated$.subscribe((args) => {
+          if (args.notebookItem.type === 'note') {
+            this.addNotebookItemToSourceBucket(args.notebookItem);
+          }
+        })
+      );
     }
 
     this.hasCorrectAnswer = this.hasCorrectChoices();
@@ -187,13 +175,6 @@ class MatchController extends ComponentController {
     };
 
     this.broadcastDoneRenderingComponent();
-  }
-
-  ngOnDestroy() {
-    super.ngOnDestroy();
-    if (this.notebookUpdatedSubscription != null) {
-      this.notebookUpdatedSubscription.unsubscribe();
-    }
   }
 
   addNotebookItemToSourceBucket(notebookItem) {

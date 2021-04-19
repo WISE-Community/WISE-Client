@@ -17,8 +17,7 @@ class StepToolsController {
   nodeId: string;
   prevId: any;
   projectId: number;
-  currentNodeChangedSubscription: Subscription;
-  projectChangedSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
     '$scope',
@@ -51,28 +50,25 @@ class StepToolsController {
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
     this.idToOrder = this.ProjectService.idToOrder;
     this.updateModel();
-    this.currentNodeChangedSubscription = this.TeacherDataService.currentNodeChanged$.subscribe(
-      () => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentNodeChanged$.subscribe(() => {
         this.updateModel();
-      }
+      })
     );
-    this.projectChangedSubscription = this.ProjectService.projectChanged$.subscribe(() => {
-      this.projectId = this.ConfigService.getProjectId();
-      this.idToOrder = this.ProjectService.idToOrder;
-      this.updateModel();
-    });
+    this.subscriptions.add(
+      this.ProjectService.projectChanged$.subscribe(() => {
+        this.projectId = this.ConfigService.getProjectId();
+        this.idToOrder = this.ProjectService.idToOrder;
+        this.updateModel();
+      })
+    );
     this.$scope.$on('$destroy', () => {
       this.ngOnDestroy();
     });
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
-    this.currentNodeChangedSubscription.unsubscribe();
-    this.projectChangedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   nodeIdChanged() {

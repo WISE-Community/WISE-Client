@@ -36,17 +36,11 @@ class VLEController {
   reportFullscreen: boolean = false;
   themePath: string;
   totalScore: any;
-  currentNodeChangedSubscription: Subscription;
-  showSessionWarningSubscription: Subscription;
-  notificationChangedSubscription: Subscription;
-  notesVisibleSubscription: Subscription;
-  pauseScreenSubscription: Subscription;
-  reportFullscreenSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
     '$anchorScroll',
     '$scope',
-    '$rootScope',
     '$filter',
     '$mdDialog',
     '$mdMenu',
@@ -65,7 +59,6 @@ class VLEController {
   constructor(
     private $anchorScroll: any,
     private $scope: any,
-    private $rootScope: any,
     private $filter: any,
     private $mdDialog: any,
     private $mdMenu: any,
@@ -80,13 +73,6 @@ class VLEController {
     private SessionService: SessionService,
     private StudentDataService: StudentDataService
   ) {
-    this.AnnotationService = AnnotationService;
-    this.ConfigService = ConfigService;
-    this.NotebookService = NotebookService;
-    this.NotificationService = NotificationService;
-    this.ProjectService = ProjectService;
-    this.SessionService = SessionService;
-    this.StudentDataService = StudentDataService;
     this.$translate = this.$filter('translate');
     this.$window.onbeforeunload = () => {
       this.SessionService.broadcastExit();
@@ -131,31 +117,35 @@ class VLEController {
       });
     }
 
-    this.showSessionWarningSubscription = this.SessionService.showSessionWarning$.subscribe(() => {
-      const confirm = $mdDialog
-        .confirm()
-        .parent(angular.element(document.body))
-        .title(this.$translate('SESSION_TIMEOUT'))
-        .content(this.$translate('SESSION_TIMEOUT_MESSAGE'))
-        .ariaLabel(this.$translate('SESSION_TIMEOUT'))
-        .ok(this.$translate('YES'))
-        .cancel(this.$translate('NO'));
-      $mdDialog.show(confirm).then(
-        () => {
-          this.SessionService.closeWarningAndRenewSession();
-        },
-        () => {
-          this.logOut();
-        }
-      );
-    });
+    this.subscriptions.add(
+      this.SessionService.showSessionWarning$.subscribe(() => {
+        const confirm = $mdDialog
+          .confirm()
+          .parent(angular.element(document.body))
+          .title(this.$translate('SESSION_TIMEOUT'))
+          .content(this.$translate('SESSION_TIMEOUT_MESSAGE'))
+          .ariaLabel(this.$translate('SESSION_TIMEOUT'))
+          .ok(this.$translate('YES'))
+          .cancel(this.$translate('NO'));
+        $mdDialog.show(confirm).then(
+          () => {
+            this.SessionService.closeWarningAndRenewSession();
+          },
+          () => {
+            this.logOut();
+          }
+        );
+      })
+    );
 
-    this.SessionService.logOut$.subscribe(() => {
-      this.logOut();
-    });
+    this.subscriptions.add(
+      this.SessionService.logOut$.subscribe(() => {
+        this.logOut();
+      })
+    );
 
-    this.currentNodeChangedSubscription = this.StudentDataService.currentNodeChanged$.subscribe(
-      ({ previousNode }) => {
+    this.subscriptions.add(
+      this.StudentDataService.currentNodeChanged$.subscribe(({ previousNode }) => {
         let currentNode = this.StudentDataService.getCurrentNode();
         let currentNodeId = currentNode.id;
 
@@ -201,7 +191,7 @@ class VLEController {
             eventData
           );
         }
-      }
+      })
     );
 
     this.$transitions.onSuccess({}, ($transition) => {
@@ -211,33 +201,35 @@ class VLEController {
     this.notifications = this.NotificationService.notifications;
     this.newNotifications = this.getNewNotifications();
 
-    this.notificationChangedSubscription = this.NotificationService.notificationChanged$.subscribe(
-      () => {
+    this.subscriptions.add(
+      this.NotificationService.notificationChanged$.subscribe(() => {
         // update new notifications
         this.notifications = this.NotificationService.notifications;
         this.newNotifications = this.getNewNotifications();
-      }
+      })
     );
 
-    this.pauseScreenSubscription = this.StudentDataService.pauseScreen$.subscribe(
-      (doPause: boolean) => {
+    this.subscriptions.add(
+      this.StudentDataService.pauseScreen$.subscribe((doPause: boolean) => {
         if (doPause) {
           this.pauseScreen();
         } else {
           this.unPauseScreen();
         }
-      }
+      })
     );
 
-    this.notesVisibleSubscription =
-        this.NotebookService.notesVisible$.subscribe((notesVisible: boolean) => {
-      this.notesVisible = notesVisible;
-    });
+    this.subscriptions.add(
+      this.NotebookService.notesVisible$.subscribe((notesVisible: boolean) => {
+        this.notesVisible = notesVisible;
+      })
+    );
 
-    this.reportFullscreenSubscription =
-        this.NotebookService.reportFullScreen$.subscribe((full: boolean) => {
-      this.reportFullscreen = full;
-    });
+    this.subscriptions.add(
+      this.NotebookService.reportFullScreen$.subscribe((full: boolean) => {
+        this.reportFullscreen = full;
+      })
+    );
 
     // Make sure if we drop something on the page we don't navigate away
     // https://developer.mozilla.org/En/DragDrop/Drag_Operations#drop
@@ -311,14 +303,7 @@ class VLEController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
-    this.currentNodeChangedSubscription.unsubscribe();
-    this.showSessionWarningSubscription.unsubscribe();
-    this.notificationChangedSubscription.unsubscribe();
-    this.pauseScreenSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   goHome() {

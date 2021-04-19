@@ -40,8 +40,7 @@ class NavItemController {
   rubricIconName: string;
   showPosition: any;
   workgroupsOnNodeData: any = [];
-  currentPeriodChangedSubscription: Subscription;
-  studentStatusReceivedSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
     '$element',
@@ -107,8 +106,7 @@ class NavItemController {
   }
 
   $onDestroy() {
-    this.currentPeriodChangedSubscription.unsubscribe();
-    this.studentStatusReceivedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   watchCurrentNode(): void {
@@ -175,22 +173,22 @@ class NavItemController {
   }
 
   subscribeStudentStatusReceived(): void {
-    this.studentStatusReceivedSubscription = this.StudentStatusService.studentStatusReceived$.subscribe(
-      () => {
+    this.subscriptions.add(
+      this.StudentStatusService.studentStatusReceived$.subscribe(() => {
         this.setWorkgroupsOnNodeData();
         this.setCurrentNodeStatus();
         this.getAlertNotifications();
-      }
+      })
     );
   }
 
   subscribeCurrentPeriodChanged(): void {
-    this.currentPeriodChangedSubscription = this.TeacherDataService.currentPeriodChanged$.subscribe(
-      ({ currentPeriod }) => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         this.currentPeriod = currentPeriod;
         this.setWorkgroupsOnNodeData();
         this.getAlertNotifications();
-      }
+      })
     );
   }
 
@@ -366,7 +364,7 @@ class NavItemController {
   getNodeAverageScore(): any {
     const workgroupId = this.currentWorkgroup ? this.currentWorkgroup.workgroupId : null;
     if (workgroupId) {
-      return this.AnnotationService.getScore(workgroupId, this.nodeId);
+      return this.AnnotationService.getTotalNodeScoreForWorkgroup(workgroupId, this.nodeId);
     } else {
       return this.StudentStatusService.getNodeAverageScore(
         this.nodeId,

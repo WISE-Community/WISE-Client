@@ -40,8 +40,7 @@ class NodeAuthoringController {
   showComponents: boolean = true;
   showStepButtons: boolean = true;
   undoStack: any[] = [];
-  componentShowSubmitButtonValueChangedSubscription: Subscription;
-  nodeChangedSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
     '$anchorScroll',
@@ -93,8 +92,8 @@ class NodeAuthoringController {
     this.originalNodeCopy = this.UtilService.makeCopyOfJSONObject(this.node);
     this.currentNodeCopy = this.UtilService.makeCopyOfJSONObject(this.node);
 
-    this.componentShowSubmitButtonValueChangedSubscription = this.NodeService.componentShowSubmitButtonValueChanged$.subscribe(
-      ({ showSubmitButton }) => {
+    this.subscriptions.add(
+      this.NodeService.componentShowSubmitButtonValueChanged$.subscribe(({ showSubmitButton }) => {
         if (showSubmitButton) {
           this.node.showSaveButton = false;
           this.node.showSubmitButton = false;
@@ -109,7 +108,7 @@ class NodeAuthoringController {
           }
         }
         this.authoringViewNodeChanged();
-      }
+      })
     );
 
     const data = {
@@ -125,14 +124,15 @@ class NodeAuthoringController {
     } else {
       this.scrollToTopOfPage();
     }
-    this.nodeChangedSubscription = this.ProjectService.nodeChanged$.subscribe((doParseProject) => {
-      this.authoringViewNodeChanged(doParseProject);
-    });
+    this.subscriptions.add(
+      this.ProjectService.nodeChanged$.subscribe((doParseProject) => {
+        this.authoringViewNodeChanged(doParseProject);
+      })
+    );
   }
 
   $onDestroy() {
-    this.componentShowSubmitButtonValueChangedSubscription.unsubscribe();
-    this.nodeChangedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   previewStepInNewWindow() {

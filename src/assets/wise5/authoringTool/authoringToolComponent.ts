@@ -22,12 +22,7 @@ class AuthoringToolController {
   showStepTools: boolean = false;
   showToolbar: boolean = true;
   views: any;
-  errorSavingProjectSubscription: Subscription;
-  notAllowedToEditThisProjectSubscription: Subscription;
-  notLoggedInProjectNotSavedSubscription: Subscription;
-  projectSavedSubscription: Subscription;
-  savingProjectSubscription: Subscription;
-  showSessionWarningSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   static $inject = [
     '$anchorScroll',
@@ -207,61 +202,71 @@ class AuthoringToolController {
       }
     });
 
-    this.showSessionWarningSubscription = this.SessionService.showSessionWarning$.subscribe(() => {
-      const confirm = this.$mdDialog
-        .confirm()
-        .parent(angular.element(document.body))
-        .theme('at')
-        .title(this.$translate('sessionTimeout'))
-        .content(this.$translate('autoLogoutMessage'))
-        .ariaLabel(this.$translate('sessionTimeout'))
-        .ok(this.$translate('yes'))
-        .cancel(this.$translate('no'));
-      this.$mdDialog.show(confirm).then(
-        () => {
-          this.SessionService.closeWarningAndRenewSession();
-        },
-        () => {
-          this.logOut();
-        }
-      );
-    });
-
-    this.SessionService.logOut$.subscribe(() => {
-      this.logOut();
-    });
-
-    this.savingProjectSubscription = this.ProjectService.savingProject$.subscribe(() => {
-      this.setGlobalMessage(this.$translate('saving'), true, null);
-    });
-
-    this.projectSavedSubscription = this.ProjectService.projectSaved$.subscribe(() => {
-      /*
-       * Wait half a second before changing the message to 'Saved' so that
-       * the 'Saving...' message stays up long enough for the author to
-       * see that the project is saving. If we don't perform this wait,
-       * it will always say 'Saved' and authors may wonder whether the
-       * project ever gets saved.
-       */
-      this.$timeout(() => {
-        this.setGlobalMessage(this.$translate('SAVED'), false, new Date().getTime());
-      }, 500);
-    });
-
-    this.errorSavingProjectSubscription = this.ProjectService.errorSavingProject$.subscribe(() => {
-      this.setGlobalMessage(this.$translate('errorSavingProject'), false, null);
-    });
-
-    this.notLoggedInProjectNotSavedSubscription = this.ProjectService.notLoggedInProjectNotSaved$.subscribe(
-      () => {
-        this.setGlobalMessage(this.$translate('notLoggedInProjectNotSaved'), false, null);
-      }
+    this.subscriptions.add(
+      this.SessionService.showSessionWarning$.subscribe(() => {
+        const confirm = this.$mdDialog
+          .confirm()
+          .parent(angular.element(document.body))
+          .theme('at')
+          .title(this.$translate('sessionTimeout'))
+          .content(this.$translate('autoLogoutMessage'))
+          .ariaLabel(this.$translate('sessionTimeout'))
+          .ok(this.$translate('yes'))
+          .cancel(this.$translate('no'));
+        this.$mdDialog.show(confirm).then(
+          () => {
+            this.SessionService.closeWarningAndRenewSession();
+          },
+          () => {
+            this.logOut();
+          }
+        );
+      })
     );
 
-    this.notAllowedToEditThisProjectSubscription = this.ProjectService.notAllowedToEditThisProject$.subscribe(
-      () => {
+    this.subscriptions.add(
+      this.SessionService.logOut$.subscribe(() => {
+        this.logOut();
+      })
+    );
+
+    this.subscriptions.add(
+      this.ProjectService.savingProject$.subscribe(() => {
+        this.setGlobalMessage(this.$translate('saving'), true, null);
+      })
+    );
+
+    this.subscriptions.add(
+      this.ProjectService.projectSaved$.subscribe(() => {
+        /*
+         * Wait half a second before changing the message to 'Saved' so that
+         * the 'Saving...' message stays up long enough for the author to
+         * see that the project is saving. If we don't perform this wait,
+         * it will always say 'Saved' and authors may wonder whether the
+         * project ever gets saved.
+         */
+        this.$timeout(() => {
+          this.setGlobalMessage(this.$translate('SAVED'), false, new Date().getTime());
+        }, 500);
+      })
+    );
+
+    this.subscriptions.add(
+      this.ProjectService.errorSavingProject$.subscribe(() => {
+        this.setGlobalMessage(this.$translate('errorSavingProject'), false, null);
+      })
+    );
+
+    this.subscriptions.add(
+      this.ProjectService.notLoggedInProjectNotSaved$.subscribe(() => {
+        this.setGlobalMessage(this.$translate('notLoggedInProjectNotSaved'), false, null);
+      })
+    );
+
+    this.subscriptions.add(
+      this.ProjectService.notAllowedToEditThisProject$.subscribe(() => {
         this.setGlobalMessage(this.$translate('notAllowedToEditThisProject'), false, null);
-      }
+      })
     );
 
     if (this.$state.current.name === 'root.at.main') {
@@ -276,12 +281,7 @@ class AuthoringToolController {
   }
 
   $onDestroy() {
-    this.errorSavingProjectSubscription.unsubscribe();
-    this.notAllowedToEditThisProjectSubscription.unsubscribe();
-    this.notLoggedInProjectNotSavedSubscription.unsubscribe();
-    this.projectSavedSubscription.unsubscribe();
-    this.savingProjectSubscription.unsubscribe();
-    this.showSessionWarningSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   /**

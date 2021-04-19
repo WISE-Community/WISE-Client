@@ -2,15 +2,10 @@
 
 import ComponentController from '../componentController';
 import { DiscussionService } from './discussionService';
-import { NotificationService } from '../../services/notificationService';
 import { Directive } from '@angular/core';
 
 @Directive()
 class DiscussionController extends ComponentController {
-  $mdMedia: any;
-  $q: any;
-  DiscussionService: DiscussionService;
-  NotificationService: NotificationService;
   studentResponse: string;
   newResponse: string;
   classResponses: any[];
@@ -18,7 +13,6 @@ class DiscussionController extends ComponentController {
   responsesMap: any;
   retrievedClassmateResponses: boolean;
   componentStateIdReplyingTo: any;
-  studentWorkReceivedSubscription: any;
 
   static $inject = [
     '$filter',
@@ -45,13 +39,13 @@ class DiscussionController extends ComponentController {
     $filter,
     $injector,
     $mdDialog,
-    $q,
+    $q: any,
     $rootScope,
     $scope,
     AnnotationService,
     AudioRecorderService,
     ConfigService,
-    DiscussionService,
+    private DiscussionService: DiscussionService,
     NodeService,
     NotebookService,
     NotificationService,
@@ -59,7 +53,7 @@ class DiscussionController extends ComponentController {
     StudentAssetService,
     StudentDataService,
     UtilService,
-    $mdMedia
+    private $mdMedia: any
   ) {
     super(
       $filter,
@@ -79,10 +73,6 @@ class DiscussionController extends ComponentController {
       StudentDataService,
       UtilService
     );
-    this.$q = $q;
-    this.DiscussionService = DiscussionService;
-    this.NotificationService = NotificationService;
-    this.$mdMedia = $mdMedia;
     this.studentResponse = '';
     this.newResponse = '';
     this.classResponses = [];
@@ -156,11 +146,6 @@ class DiscussionController extends ComponentController {
     this.broadcastDoneRenderingComponent();
   }
 
-  ngOnDestroy() {
-    super.ngOnDestroy();
-    this.studentWorkReceivedSubscription.unsubscribe();
-  }
-
   isConnectedComponentShowWorkMode() {
     if (this.UtilService.hasConnectedComponent(this.componentContent)) {
       let isShowWorkMode = true;
@@ -220,8 +205,8 @@ class DiscussionController extends ComponentController {
   }
 
   registerStudentWorkSavedToServerListener() {
-    this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-      (args: any) => {
+    this.subscriptions.add(
+      this.StudentDataService.studentWorkSavedToServer$.subscribe((args: any) => {
         const componentState = args.studentWork;
         if (this.isWorkFromThisComponent(componentState)) {
           if (this.isClassmateResponsesGated() && !this.retrievedClassmateResponses) {
@@ -233,7 +218,7 @@ class DiscussionController extends ComponentController {
           this.sendPostToStudentsInThread(componentState);
         }
         this.isSubmit = null;
-      }
+      })
     );
   }
 
@@ -344,8 +329,8 @@ class DiscussionController extends ComponentController {
   }
 
   registerStudentWorkReceivedListener() {
-    this.studentWorkReceivedSubscription = this.StudentDataService.studentWorkReceived$.subscribe(
-      (componentState) => {
+    this.subscriptions.add(
+      this.StudentDataService.studentWorkReceived$.subscribe((componentState) => {
         if (
           (this.isWorkFromThisComponent(componentState) ||
             this.isWorkFromConnectedComponent(componentState)) &&
@@ -354,7 +339,7 @@ class DiscussionController extends ComponentController {
         ) {
           this.addClassResponse(componentState);
         }
-      }
+      })
     );
   }
 

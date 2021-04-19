@@ -63,6 +63,8 @@ describe('ProjectService', () => {
   getAllPaths();
   consolidatePaths();
   getParentGroup();
+  getMaxScoreForComponent();
+  getMaxScoreForNode();
   // TODO: add test for service.getFlattenedProjectAsNodeIds()
   // TODO: add test for service.consumePathsUntilNodeId()
   // TODO: add test for service.getFirstNodeIdInPathAtIndex()
@@ -486,5 +488,41 @@ function getParentGroup() {
     it('should get the parent group of an inactive node', () => {
       expect(service.getParentGroup('node3').id).toEqual('group2');
     });
+  });
+}
+
+function getMaxScoreForNode() {
+  describe('getMaxScoreForNode()', () => {
+    getMaxScoreForNode_noExcludedComponents_returnSumOfComponentMaxScores();
+    getMaxScoreForNode_excludeComponentFromTotalScore_returnExcludedScore();
+  });
+}
+
+function getMaxScoreForNode_noExcludedComponents_returnSumOfComponentMaxScores() {
+  it('should return sum of all component max scores', () => {
+    service.setProject(demoProjectJSON);
+    expect(service.getMaxScoreForNode('node10')).toEqual(9);
+  });
+}
+
+function getMaxScoreForNode_excludeComponentFromTotalScore_returnExcludedScore() {
+  it('should return sum of component max scores that are not excluded', () => {
+    service.setProject(demoProjectJSON);
+    service.getComponentByNodeIdAndComponentId('node10', '2upmb3om1q').excludeFromTotalScore = true;
+    expect(service.getMaxScoreForNode('node10')).toEqual(6);
+  });
+}
+
+function getMaxScoreForComponent() {
+  describe('getMaxScoreForComponent()', () => {
+    getMaxScoreForComponent_excludeFromTotalScore_returnNull();
+  });
+}
+
+function getMaxScoreForComponent_excludeFromTotalScore_returnNull() {
+  it('should return null if component is excluded from total score', () => {
+    service.setProject(demoProjectJSON);
+    service.getComponentByNodeIdAndComponentId('node2', '7edwu1p29b').excludeFromTotalScore = true;
+    expect(service.getMaxScoreForComponent('node2', '7edwu1p29b')).toBeNull();
   });
 }

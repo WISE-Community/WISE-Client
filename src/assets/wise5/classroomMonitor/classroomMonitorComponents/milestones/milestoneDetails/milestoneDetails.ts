@@ -47,10 +47,6 @@ class MilestoneDetailsController {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.currentPeriodChangedSubscription.unsubscribe();
   }
 

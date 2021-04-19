@@ -40,10 +40,6 @@ export class ComponentNewWorkBadgeComponent {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.annotationSavedToServerSubscription.unsubscribe();
   }
 

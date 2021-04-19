@@ -25,10 +25,16 @@ export class ChooseImportStepLocationComponent {
       this.upgrade.$injector.get('$stateParams').importFromProjectId,
       this.ConfigService.getProjectId(),
       nodeIdToInsertInsideOrAfter
-    ).then(() => {
+    ).then((newNodes: any[]) => {
       this.ProjectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
         this.ProjectService.refreshProject();
-        this.upgrade.$injector.get('$state').go('root.at.project');
+        if (newNodes.length === 1) {
+          this.upgrade.$injector
+            .get('$state')
+            .go('root.at.project.node', { nodeId: newNodes[0].id });
+        } else {
+          this.upgrade.$injector.get('$state').go('root.at.project');
+        }
       });
     });
   }

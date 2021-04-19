@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
@@ -22,11 +22,6 @@ export class TableAuthoring extends ComponentAuthoring {
   globalCellSizeChange: Subject<number> = new Subject<number>();
   inputChange: Subject<string> = new Subject<string>();
 
-  numColumnsChangeSubscription: Subscription;
-  numRowsChangeSubscription: Subscription;
-  globalCellSizeChangeSubscription: Subscription;
-  inputChangeSubscription: Subscription;
-
   constructor(
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
@@ -34,39 +29,31 @@ export class TableAuthoring extends ComponentAuthoring {
     protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.numColumnsChangeSubscription = this.numColumnsChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+    this.subscriptions.add(
+      this.numColumnsChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.tableNumColumnsChanged();
-      });
-    this.numRowsChangeSubscription = this.numRowsChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.numRowsChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.tableNumRowsChanged();
-      });
-    this.globalCellSizeChangeSubscription = this.globalCellSizeChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.globalCellSizeChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
-    this.inputChangeSubscription = this.inputChange
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+      })
+    );
+    this.subscriptions.add(
+      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
-      });
+      })
+    );
   }
 
   ngOnInit() {
     super.ngOnInit();
     this.columnCellSizes = this.parseColumnCellSizes(this.componentContent);
-  }
-
-  ngOnDestroy() {
-    super.ngOnDestroy();
-    this.numColumnsChangeSubscription.unsubscribe();
-    this.numRowsChangeSubscription.unsubscribe();
-    this.globalCellSizeChangeSubscription.unsubscribe();
-    this.inputChangeSubscription.unsubscribe();
   }
 
   tableNumRowsChanged(): void {

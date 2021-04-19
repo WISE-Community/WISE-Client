@@ -16,12 +16,11 @@ export class EditComponentJsonComponent {
   componentContentJSONString: string;
   @Input()
   componentId: string;
-  nodeChangedSubscription: Subscription;
   @Input()
   nodeId: string;
   showJSONAuthoring: boolean = false;
   jsonChanged: Subject<string> = new Subject<string>();
-  jsonChangedSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     private upgrade: UpgradeModule,
@@ -31,24 +30,25 @@ export class EditComponentJsonComponent {
 
   ngOnInit() {
     this.setComponentContentJsonString();
-    this.jsonChangedSubscription = this.jsonChanged
-      .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
+    this.subscriptions.add(
+      this.jsonChanged.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         if (this.isJSONValid()) {
           this.rememberRecentValidJSON();
           this.NotificationService.showJSONValidMessage();
         } else {
           this.NotificationService.showJSONInvalidMessage();
         }
-      });
-    this.nodeChangedSubscription = this.ProjectService.nodeChanged$.subscribe(() => {
-      this.setComponentContentJsonString();
-    });
+      })
+    );
+    this.subscriptions.add(
+      this.ProjectService.nodeChanged$.subscribe(() => {
+        this.setComponentContentJsonString();
+      })
+    );
   }
 
   ngOnDestroy() {
-    this.jsonChangedSubscription.unsubscribe();
-    this.nodeChangedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   setComponentContentJsonString() {

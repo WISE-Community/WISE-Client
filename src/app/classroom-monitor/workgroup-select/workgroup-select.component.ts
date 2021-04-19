@@ -1,6 +1,7 @@
 'use strict';
 
 import { Directive, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { TeacherDataService } from '../../../assets/wise5/services/teacherDataService';
 
@@ -12,8 +13,7 @@ export class WorkgroupSelectComponent {
   periodId: number;
   selectedItem: any;
   workgroups: any;
-  currentPeriodChangedSubscription: any;
-  currentWorkgroupChangedSubscription: any;
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     protected ConfigService: ConfigService,
@@ -24,25 +24,24 @@ export class WorkgroupSelectComponent {
     this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
     this.periodId = this.TeacherDataService.getCurrentPeriod().periodId;
     this.setWorkgroups();
-    this.currentWorkgroupChangedSubscription = this.TeacherDataService.currentWorkgroupChanged$.subscribe(
-      ({ currentWorkgroup }) => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
         if (currentWorkgroup != null) {
           this.setWorkgroups();
         }
-      }
+      })
     );
-    this.currentPeriodChangedSubscription = this.TeacherDataService.currentPeriodChanged$.subscribe(
-      ({ currentPeriod }) => {
+    this.subscriptions.add(
+      this.TeacherDataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         this.periodId = currentPeriod.periodId;
         this.setWorkgroups();
         this.currentPeriodChanged();
-      }
+      })
     );
   }
 
   ngOnDestroy() {
-    this.currentPeriodChangedSubscription.unsubscribe();
-    this.currentWorkgroupChangedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   setWorkgroups() {}

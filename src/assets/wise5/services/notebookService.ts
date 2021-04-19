@@ -7,8 +7,7 @@ import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 import { StudentAssetService } from './studentAssetService';
 import { StudentDataService } from './studentDataService';
-import { UtilService } from './utilService';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 @Injectable()
 export class NotebookService {
@@ -53,7 +52,7 @@ export class NotebookService {
   reports = [];
   publicNotebookItems = {};
   notebooksByWorkgroup = {};
-  notebookItemAnnotationReceivedSubscription: any;
+  notebookItemAnnotationReceivedSubscription: Subscription;
   private notebookItemAnnotationReceivedSource: Subject<boolean> = new Subject<boolean>();
   public notebookItemAnnotationReceived$ = this.notebookItemAnnotationReceivedSource.asObservable();
   private notebookItemChosenSource: Subject<any> = new Subject<any>();
@@ -77,8 +76,7 @@ export class NotebookService {
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
     private StudentAssetService: StudentAssetService,
-    private StudentDataService: StudentDataService,
-    private UtilService: UtilService
+    private StudentDataService: StudentDataService
   ) {
     this.notebookItemAnnotationReceivedSubscription = this.StudentDataService.notebookItemAnnotationReceived$.subscribe(
       (args: any) => {
@@ -88,10 +86,6 @@ export class NotebookService {
   }
 
   ngOnDestroy() {
-    this.unsubscribeAll();
-  }
-
-  unsubscribeAll() {
     this.notebookItemAnnotationReceivedSubscription.unsubscribe();
   }
 
@@ -107,7 +101,7 @@ export class NotebookService {
     file: any = null,
     text: string = null,
     studentWorkIds: number[] = null,
-    isEditTextEnabled: boolean= true,
+    isEditTextEnabled: boolean = true,
     isFileUploadEnabled: boolean = true
   ) {
     const note = null;
@@ -123,10 +117,7 @@ export class NotebookService {
     );
   }
 
-  editNote(
-    note: any,
-    isEditMode: boolean = true
-  ) {
+  editNote(note: any, isEditMode: boolean = true) {
     const file = null;
     const noteText = null;
     const isEditTextEnabled = true;

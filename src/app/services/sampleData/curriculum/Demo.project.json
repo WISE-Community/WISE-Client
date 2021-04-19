@@ -628,12 +628,14 @@
         {
           "id": "yhrumlct2t",
           "prompt": "What is your favorite type of food?",
-          "type": "OpenResponse"
+          "type": "OpenResponse",
+          "maxScore": 1
         },
         {
           "id": "2upmb3om1q",
           "prompt": "What is your favorite type of chocolate?",
           "type": "MultipleChoice",
+          "maxScore": 3,
           "choiceType": "radio",
           "choices": [
             {
@@ -657,7 +659,8 @@
         {
           "id": "srof14u22x",
           "prompt": "What is your favorite movie?",
-          "type": "OpenResponse"
+          "type": "OpenResponse",
+          "maxScore": 5
         },
         {
           "id": "cjv5kq5290",

@@ -926,10 +926,10 @@ export class TeacherDataService extends DataService {
     this.setCurrentNodeByNodeId(nodeId);
   }
 
-  getTotalScoreByWorkgroupId(workgroupId) {
+  getTotalScoreByWorkgroupId(workgroupId: number) {
     if (this.studentData.annotationsToWorkgroupId != null) {
       const annotations = this.studentData.annotationsToWorkgroupId[workgroupId];
-      return this.AnnotationService.getTotalScore(annotations, workgroupId);
+      return this.AnnotationService.getTotalScoreForWorkgroup(annotations, workgroupId);
     }
     return null;
   }
