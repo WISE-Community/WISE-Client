@@ -292,54 +292,33 @@ export class UtilService {
     return html;
   }
 
-  replaceWISELinksHelper(html, regex) {
-    let wiseLinkRegEx = new RegExp(regex);
+  replaceWISELinksHelper(html: string, regex: string): string {
+    const wiseLinkRegEx = new RegExp(regex);
     let wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
     while (wiseLinkRegExMatchResult != null) {
-      let wiseLinkHTML = wiseLinkRegExMatchResult[0];
-      let nodeId = this.getWISELinkNodeId(wiseLinkHTML);
-      let componentId = this.getWISELinkComponentId(wiseLinkHTML);
-      let componentHTML = '';
-      if (componentId != null && componentId != '') {
-        componentHTML = "component-id='" + componentId + "'";
+      const wiseLinkHTML = wiseLinkRegExMatchResult[0];
+      const nodeId = this.getWISELinkNodeId(wiseLinkHTML);
+      const componentId = this.getWISELinkComponentId(wiseLinkHTML);
+      const type = this.getWISELinkType(wiseLinkHTML);
+      const linkText = this.getWISELinkLinkText(wiseLinkHTML);
+      let newElement = '';
+      const onclickString = `document.getElementById('html').dispatchEvent(new CustomEvent('wiselinkclicked', { detail: { nodeId: '${nodeId}', componentId: '${componentId}' } })); return false;`;
+      if (type === 'link') {
+        newElement = `<a wiselink="true" onclick="${onclickString}">${linkText}</a>`;
+      } else if (type === 'button') {
+        newElement = `<button wiselink="true" onclick="${onclickString}">${linkText}</button>`;
       }
-      let type = this.getWISELinkType(wiseLinkHTML);
-      let linkText = this.getWISELinkLinkText(wiseLinkHTML);
-      let newElement = null;
-      if (type == 'link') {
-        newElement =
-          "<a href='#' wiselink='true' node-id='" +
-          nodeId +
-          "' " +
-          componentHTML +
-          '>' +
-          linkText +
-          '</a>';
-      } else if (type == 'button') {
-        newElement =
-          "<button wiselink='true' node-id='" +
-          nodeId +
-          "' " +
-          componentHTML +
-          '>' +
-          linkText +
-          '</button>';
-      } else {
-        newElement =
-          "<a href='#' wiselink='true' node-id='" +
-          nodeId +
-          "' " +
-          componentHTML +
-          '>' +
-          linkText +
-          '</a>';
-      }
-      if (newElement != null) {
-        html = html.replace(wiseLinkHTML, newElement);
-      }
+      html = html.replace(wiseLinkHTML, newElement);
       wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
     }
     return html;
+  }
+
+  replaceDivReference(html: string, componentId: string): string {
+    return html.replace(
+      /document\.getElementById\('html'\)/g,
+      `document.getElementById('html-${componentId}')`
+    );
   }
 
   /**

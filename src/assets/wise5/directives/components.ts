@@ -10,7 +10,6 @@ import GlobalAnnotationsList from './globalAnnotationsList/globalAnnotationsList
 import ListenForDeleteKeypress from './listenForDeleteKeypress/listenForDeleteKeypress';
 import MilestoneReportGraph from './milestoneReportGraph/milestoneReportGraph';
 import SummaryDisplay from './summaryDisplay/summaryDisplay';
-import Wiselink from './wiselink/wiselink';
 import Sticky from './sticky/sticky';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { NodeIconComponent } from '../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
@@ -40,7 +39,6 @@ Components.directive(
   downgradeComponent({ component: PossibleScoreComponent }) as angular.IDirectiveFactory
 );
 Components.component('summaryDisplay', SummaryDisplay);
-Components.component('wiselink', Wiselink);
 Components.directive('sticky', Sticky);
 
 export default Components;
