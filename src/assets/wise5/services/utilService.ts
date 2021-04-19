@@ -302,16 +302,23 @@ export class UtilService {
       const type = this.getWISELinkType(wiseLinkHTML);
       const linkText = this.getWISELinkLinkText(wiseLinkHTML);
       let newElement = '';
-      const onclickString = `window.dispatchEvent(new CustomEvent('wiselinkclicked', { detail: { nodeId: '${nodeId}', componentId: '${componentId}' } })); return false;`;
+      const onclickString = `document.getElementById('html').dispatchEvent(new CustomEvent('wiselinkclicked', { detail: { nodeId: '${nodeId}', componentId: '${componentId}' } })); return false;`;
       if (type === 'link') {
-        newElement = `<a onclick="${onclickString}">${linkText}</a>`;
+        newElement = `<a wiselink="true" onclick="${onclickString}">${linkText}</a>`;
       } else if (type === 'button') {
-        newElement = `<button onclick="${onclickString}">${linkText}</button>`;
+        newElement = `<button wiselink="true" onclick="${onclickString}">${linkText}</button>`;
       }
       html = html.replace(wiseLinkHTML, newElement);
       wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
     }
     return html;
+  }
+
+  replaceDivReference(html: string, componentId: string): string {
+    return html.replace(
+      /document\.getElementById\('html'\)/g,
+      `document.getElementById('html-${componentId}')`
+    );
   }
 
   /**
