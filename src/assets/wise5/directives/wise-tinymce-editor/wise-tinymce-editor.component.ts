@@ -64,6 +64,7 @@ export class WiseTinymceEditorComponent {
     'nonbreaking',
     'noneditable',
     'pagebreak',
+    'paste',
     'preview',
     'print',
     'quickbars',
@@ -148,7 +149,8 @@ export class WiseTinymceEditorComponent {
           title: $localize`File`,
           items: 'preview wordcount | print'
         }
-      }
+      },
+      paste_block_drop: true
     };
   }
 
