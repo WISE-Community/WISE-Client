@@ -190,8 +190,8 @@ class OpenResponseController extends ComponentController {
       this.setStudentWork(componentState);
     }
 
-    if (!this.canSubmit()) {
-      this.isSubmitButtonDisabled = true;
+    if (this.hasMaxSubmitCountAndNoSubmitsLeft()) {
+      this.isDisabled = true;
     }
 
     this.disableComponentIfNecessary();
@@ -257,6 +257,13 @@ class OpenResponseController extends ComponentController {
     }
 
     this.broadcastDoneRenderingComponent();
+  }
+
+  performSubmit(submitTriggeredBy: string): void {
+    super.performSubmit(submitTriggeredBy);
+    if (this.hasMaxSubmitCountAndNoSubmitsLeft()) {
+      this.isDisabled = true;
+    }
   }
 
   handleNodeSubmit() {
