@@ -238,6 +238,7 @@
   "makeThisNodeNotVisitable": "Make this node not visitable",
   "manageAssets": "Manage Assets",
   "maxPathsVisitable": "Max paths visitable",
+  "maxSubmitsNote": "Students will not be able to change their work after using all their submits",
   "merge": "Merge",
   "milestone": "Milestone",
   "milestoneDescription": "Milestone Description",

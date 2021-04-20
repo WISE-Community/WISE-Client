@@ -665,6 +665,10 @@ class ComponentController {
     return !this.hasMaxSubmitCount() || this.hasSubmitsLeft();
   }
 
+  hasMaxSubmitCountAndNoSubmitsLeft() {
+    return this.hasMaxSubmitCount() && !this.hasSubmitsLeft();
+  }
+
   hasMaxSubmitCount() {
     return this.getMaxSubmitCount() != null;
   }
