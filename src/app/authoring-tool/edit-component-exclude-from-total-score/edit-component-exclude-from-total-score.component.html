@@ -1,7 +1,7 @@
 <mat-checkbox class="mat-primary"
     color="primary"
     [(ngModel)]="authoringComponentContent.excludeFromTotalScore"
-    (change)="excludeFromTotalScoreChanged.next($event)"
+    (change)="inputChanged.next($event)"
     i18n>
   Do not count score on this activity towards the total score
 </mat-checkbox>
