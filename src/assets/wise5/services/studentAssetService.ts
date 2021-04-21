@@ -261,6 +261,6 @@ export class StudentAssetService {
       nodeId: nodeId,
       componentId: componentId,
       asset: asset
-    } as StudentAssetRequest);
+    });
   }
 }
