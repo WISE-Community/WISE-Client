@@ -141,6 +141,7 @@ class DiscussionController extends ComponentController {
     }
     this.disableComponentIfNecessary();
     this.initializeScopeGetComponentState();
+    this.subscribeToAttachStudentAsset();
     this.registerStudentWorkReceivedListener();
     this.initializeWatchMdMedia();
     this.broadcastDoneRenderingComponent();
@@ -326,6 +327,16 @@ class DiscussionController extends ComponentController {
         }
       }
     }
+  }
+
+  subscribeToAttachStudentAsset() {
+    this.subscriptions.add(
+      this.StudentAssetService.attachStudentAsset$.subscribe((data) => {
+        if (this.isForThisComponent(data)) {
+          this.attachStudentAsset(data.asset);
+        }
+      })
+    );
   }
 
   registerStudentWorkReceivedListener() {

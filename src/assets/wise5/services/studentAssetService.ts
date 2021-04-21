@@ -13,6 +13,8 @@ export class StudentAssetService {
   audioFileExtensions = ['wav', 'mp3', 'ogg', 'm4a', 'm4p', 'raw', 'aiff', 'webm'];
   private showStudentAssetsSource: Subject<any> = new Subject<any>();
   public showStudentAssets$: Observable<any> = this.showStudentAssetsSource.asObservable();
+  private attachStudentAssetSource: Subject<any> = new Subject<any>();
+  public attachStudentAsset$: Observable<any> = this.attachStudentAssetSource.asObservable();
 
   constructor(
     private upgrade: UpgradeModule,
@@ -251,5 +253,13 @@ export class StudentAssetService {
 
   broadcastShowStudentAssets(args: any) {
     this.showStudentAssetsSource.next(args);
+  }
+
+  broadcastAttachStudentAsset(nodeId: string, componentId: string, asset: any): void {
+    this.attachStudentAssetSource.next({
+      nodeId: nodeId,
+      componentId: componentId,
+      asset: asset
+    });
   }
 }

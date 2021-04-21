@@ -502,6 +502,8 @@ class NodeController {
 
     this.StudentAssetService.broadcastShowStudentAssets({
       componentController: componentController,
+      nodeId: this.nodeId,
+      componentId: componentId,
       $event: $event
     });
   }

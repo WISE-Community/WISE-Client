@@ -9,7 +9,9 @@ const studentAssetModule = angular
       scope: {
         filter: '=',
         templateUrl: '=',
-        componentController: '='
+        componentController: '=',
+        nodeId: '=',
+        componentId: '='
       },
       template: '<ng-include src="::studentAssetController.getTemplateUrl()"></ng-include>',
       controller: 'StudentAssetController',
