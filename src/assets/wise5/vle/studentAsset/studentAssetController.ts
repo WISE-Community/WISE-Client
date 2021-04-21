@@ -95,14 +95,12 @@ class StudentAssetController {
         this.componentId,
         studentAsset
       );
-    } else {
-      if (this.componentController != null) {
-        // If the student asset dialog is a part of a component (e.g. attaching image to OR or Discussion)
-        // Also attach the file(s) to the componentstate's attachments
-        this.componentController.attachStudentAsset(studentAsset);
-        // TODO: add some kind of unobtrusive confirmation to let student know that the student asset has been added to current component
-        $event.stopPropagation(); // prevents parent student asset list item from getting the onclick event so this item won't be re-selected.
-      }
+    } else if (this.componentController != null) {
+      // If the student asset dialog is a part of a component (e.g. attaching image to OR or Discussion)
+      // Also attach the file(s) to the componentstate's attachments
+      this.componentController.attachStudentAsset(studentAsset);
+      // TODO: add some kind of unobtrusive confirmation to let student know that the student asset has been added to current component
+      $event.stopPropagation(); // prevents parent student asset list item from getting the onclick event so this item won't be re-selected.
     }
   }
 }
