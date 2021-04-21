@@ -69,11 +69,7 @@ class StudentAssetController {
     if (files != null) {
       for (const file of files) {
         this.StudentAssetService.uploadAsset(file).then((studentAsset) => {
-          if (this.componentController != null) {
-            // If the student asset dialog is a part of a component (e.g. attaching image to OR or Discussion)
-            // Also attach the file(s) to the componentstate's attachments
-            this.componentController.attachStudentAsset(studentAsset);
-          }
+          this.attachStudentAsset(studentAsset);
           this.studentAssets = this.StudentAssetService.allAssets;
         });
       }
@@ -85,6 +81,11 @@ class StudentAssetController {
   }
 
   attachStudentAssetToComponent($event, studentAsset) {
+    this.attachStudentAsset(studentAsset);
+    $event.stopPropagation(); // prevents parent student asset list item from getting the onclick event so this item won't be re-selected.
+  }
+
+  attachStudentAsset(studentAsset: any): void {
     const component = this.ProjectService.getComponentByNodeIdAndComponentId(
       this.nodeId,
       this.componentId
@@ -99,8 +100,6 @@ class StudentAssetController {
       // If the student asset dialog is a part of a component (e.g. attaching image to OR or Discussion)
       // Also attach the file(s) to the componentstate's attachments
       this.componentController.attachStudentAsset(studentAsset);
-      // TODO: add some kind of unobtrusive confirmation to let student know that the student asset has been added to current component
-      $event.stopPropagation(); // prevents parent student asset list item from getting the onclick event so this item won't be re-selected.
     }
   }
 }

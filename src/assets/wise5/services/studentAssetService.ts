@@ -5,6 +5,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { Observable, Subject } from 'rxjs';
+import { StudentAssetRequest } from '../vle/studentAsset/StudentAssetRequest';
 
 @Injectable()
 export class StudentAssetService {
@@ -13,8 +14,8 @@ export class StudentAssetService {
   audioFileExtensions = ['wav', 'mp3', 'ogg', 'm4a', 'm4p', 'raw', 'aiff', 'webm'];
   private showStudentAssetsSource: Subject<any> = new Subject<any>();
   public showStudentAssets$: Observable<any> = this.showStudentAssetsSource.asObservable();
-  private attachStudentAssetSource: Subject<any> = new Subject<any>();
-  public attachStudentAsset$: Observable<any> = this.attachStudentAssetSource.asObservable();
+  private attachStudentAssetSource: Subject<StudentAssetRequest> = new Subject<StudentAssetRequest>();
+  public attachStudentAsset$: Observable<StudentAssetRequest> = this.attachStudentAssetSource.asObservable();
 
   constructor(
     private upgrade: UpgradeModule,
@@ -260,6 +261,6 @@ export class StudentAssetService {
       nodeId: nodeId,
       componentId: componentId,
       asset: asset
-    });
+    } as StudentAssetRequest);
   }
 }
