@@ -57,7 +57,7 @@ export class ComponentAnnotationsComponent {
         }
       }
     );
-    this.wiseLinkCommunicatorId = `wise-link-communicator-component-annotations-${this.componentId}`;
+    this.wiseLinkCommunicatorId = `wise-link-communicator-component-annotations-${this.nodeId}-${this.componentId}`;
   }
 
   ngAfterViewInit() {

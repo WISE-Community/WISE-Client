@@ -40,7 +40,7 @@ export class HtmlStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.wiseLinkCommunicatorId = `wise-link-communicator-html-student-${this.componentId}`;
+    this.wiseLinkCommunicatorId = `wise-link-communicator-html-student-${this.nodeId}-${this.componentId}`;
     this.broadcastDoneRenderingComponent();
   }
 
