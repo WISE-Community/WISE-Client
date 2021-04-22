@@ -1,8 +1,10 @@
 'use strict';
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
+import { WiseLinkService } from '../../../../app/services/wiseLinkService';
 import { ConfigService } from '../../services/configService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../../vle/vleProjectService';
@@ -15,25 +17,35 @@ import { VLEProjectService } from '../../vle/vleProjectService';
 export class ComponentAnnotationsComponent {
   @Input()
   annotations: any;
-  maxScoreDisplay: string;
-  nodeId: string = null;
-  componentId: string = null;
-  latestAnnotationTime: any = null;
-  isNew: boolean;
-  label: string = '';
 
   @Input()
   maxScore: string;
+
+  @Input()
+  nodeId: string;
+
+  @Input()
+  componentId: string;
+
+  comment: SafeHtml;
   icon: string = 'person';
-  showScore: boolean = true;
+  isNew: boolean;
+  label: string = '';
+  latestAnnotationTime: any = null;
+  maxScoreDisplay: string;
   showComment: boolean = true;
+  showScore: boolean = true;
   studentWorkSavedToServerSubscription: Subscription;
+  wiseLinkClickedHandler: any;
+  wiseLinkCommunicator: any;
+  wiseLinkCommunicatorId: string;
 
   constructor(
     private upgrade: UpgradeModule,
     private ConfigService: ConfigService,
     private ProjectService: VLEProjectService,
-    private StudentDataService: StudentDataService
+    private StudentDataService: StudentDataService,
+    private WiseLinkService: WiseLinkService
   ) {}
 
   ngOnInit() {
@@ -45,32 +57,86 @@ export class ComponentAnnotationsComponent {
         }
       }
     );
+    this.wiseLinkCommunicatorId = `wise-link-communicator-component-annotations-${this.componentId}`;
   }
 
-  ngOnChanges() {
+  ngAfterViewInit() {
     this.processAnnotations();
+    this.wiseLinkCommunicator = document.getElementById(this.wiseLinkCommunicatorId);
+    if (this.wiseLinkCommunicator != null) {
+      this.wiseLinkClickedHandler = this.WiseLinkService.createWiseLinkClickedHandler(this.nodeId);
+      this.WiseLinkService.addWiseLinkClickedListener(
+        this.wiseLinkCommunicator,
+        this.wiseLinkClickedHandler
+      );
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.annotations.isFirstChange()) {
+      this.processAnnotations();
+    }
   }
 
   ngOnDestroy() {
     this.studentWorkSavedToServerSubscription.unsubscribe();
+    if (this.wiseLinkClickedHandler != null) {
+      this.wiseLinkCommunicator.removeEventListener('wiselinkclicked', this.wiseLinkClickedHandler);
+    }
   }
 
-  processAnnotations() {
+  processAnnotations(): void {
     if (this.annotations.comment || this.annotations.score) {
-      this.nodeId = this.annotations.comment
-        ? this.annotations.comment.nodeId
-        : this.annotations.score.nodeId;
-      this.componentId = this.annotations.comment
-        ? this.annotations.comment.componentId
-        : this.annotations.score.nodeId;
-      this.showScore =
-        this.annotations.score != null &&
-        this.ProjectService.displayAnnotation(this.annotations.score);
-      this.showComment =
-        this.annotations.comment != null &&
-        this.ProjectService.displayAnnotation(this.annotations.comment);
+      this.nodeId = this.getNodeId(this.annotations);
+      this.componentId = this.getComponentId(this.annotations);
+      this.showScore = this.isShowScore(this.annotations);
+      this.showComment = this.isShowComment(this.annotations);
+      if (this.showComment) {
+        this.comment = this.getCommentHtml(this.annotations.comment);
+      }
       this.setLabelAndIcon();
     }
+  }
+
+  getNodeId(annotations: any): string {
+    return this.hasCommentAnnotation(annotations)
+      ? annotations.comment.nodeId
+      : annotations.score.nodeId;
+  }
+
+  getComponentId(annotations: any): string {
+    return this.hasCommentAnnotation(annotations)
+      ? annotations.comment.componentId
+      : annotations.score.nodeId;
+  }
+
+  isShowScore(annotations: any): boolean {
+    return (
+      this.hasScoreAnnotation(annotations) &&
+      this.ProjectService.displayAnnotation(annotations.score)
+    );
+  }
+
+  isShowComment(annotations: any): boolean {
+    return (
+      this.hasCommentAnnotation(annotations) &&
+      this.ProjectService.displayAnnotation(this.annotations.comment)
+    );
+  }
+
+  hasCommentAnnotation(annotations: any): boolean {
+    return annotations.comment != null;
+  }
+
+  hasScoreAnnotation(annotations: any): boolean {
+    return annotations.score != null;
+  }
+
+  getCommentHtml(commentAnnotation: any): SafeHtml {
+    return this.WiseLinkService.generateHtmlWithWiseLink(
+      commentAnnotation.data.value,
+      this.wiseLinkCommunicatorId
+    );
   }
 
   getLatestAnnotation() {
