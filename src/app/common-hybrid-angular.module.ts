@@ -69,6 +69,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { ClassResponse } from '../assets/wise5/components/discussion/class-response/class-response.component';
 import { ComponentService } from '../assets/wise5/components/componentService';
+import { WiseLinkService } from './services/wiseLinkService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -150,7 +151,8 @@ export class EmptyComponent {}
     TagService,
     { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
     UtilService,
-    VLEProjectService
+    VLEProjectService,
+    WiseLinkService
   ],
   exports: [
     ClassResponse,

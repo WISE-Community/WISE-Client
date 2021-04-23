@@ -233,7 +233,7 @@ export class UtilService {
     if (nodeIdRegExResult != null) {
       return nodeIdRegExResult[1];
     }
-    return null;
+    return '';
   }
 
   /**
@@ -248,7 +248,7 @@ export class UtilService {
     if (componentIdRegExResult != null) {
       return componentIdRegExResult[1];
     }
-    return null;
+    return '';
   }
 
   /**
@@ -302,11 +302,11 @@ export class UtilService {
       const type = this.getWISELinkType(wiseLinkHTML);
       const linkText = this.getWISELinkLinkText(wiseLinkHTML);
       let newElement = '';
-      const onclickString = `document.getElementById('html').dispatchEvent(new CustomEvent('wiselinkclicked', { detail: { nodeId: '${nodeId}', componentId: '${componentId}' } })); return false;`;
-      if (type === 'link') {
-        newElement = `<a wiselink="true" onclick="${onclickString}">${linkText}</a>`;
-      } else if (type === 'button') {
+      const onclickString = `document.getElementById('replace-with-unique-id').dispatchEvent(new CustomEvent('wiselinkclicked', { detail: { nodeId: '${nodeId}', componentId: '${componentId}' } })); return false;`;
+      if (type === 'button') {
         newElement = `<button wiselink="true" onclick="${onclickString}">${linkText}</button>`;
+      } else {
+        newElement = `<a wiselink="true" onclick="${onclickString}">${linkText}</a>`;
       }
       html = html.replace(wiseLinkHTML, newElement);
       wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
@@ -314,10 +314,10 @@ export class UtilService {
     return html;
   }
 
-  replaceDivReference(html: string, componentId: string): string {
+  replaceDivReference(html: string, newString: string): string {
     return html.replace(
-      /document\.getElementById\('html'\)/g,
-      `document.getElementById('html-${componentId}')`
+      /document\.getElementById\('replace-with-unique-id'\)/g,
+      `document.getElementById('${newString}')`
     );
   }
 

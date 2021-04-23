@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SafeHtml } from '@angular/platform-browser';
+import { WiseLinkService } from '../../../../../app/services/wiseLinkService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -14,7 +15,8 @@ import { ComponentService } from '../../componentService';
 })
 export class HtmlStudent extends ComponentStudent {
   html: SafeHtml = '';
-  htmlDiv: any;
+  wiseLinkCommunicatorId: string;
+  wiseLinkCommunicator: any;
   wiseLinkClickedHandler: any;
 
   constructor(
@@ -22,9 +24,9 @@ export class HtmlStudent extends ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
-    private sanitizer: DomSanitizer,
     protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected UtilService: UtilService,
+    private WiseLinkService: WiseLinkService
   ) {
     super(
       AnnotationService,
@@ -38,59 +40,26 @@ export class HtmlStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.html = this.sanitizer.bypassSecurityTrustHtml(
-      this.UtilService.replaceDivReference(
-        this.UtilService.replaceWISELinks(this.componentContent.html),
-        this.componentId
-      )
-    );
-    if (!this.isAuthoringComponentPreviewMode()) {
-      this.setupWiseLinkClickedListener();
-    }
+    this.wiseLinkCommunicatorId = `wise-link-communicator-html-student-${this.nodeId}-${this.componentId}`;
     this.broadcastDoneRenderingComponent();
   }
 
   ngAfterViewInit() {
-    this.htmlDiv = document.getElementById(`html-${this.componentId}`);
-    this.htmlDiv.addEventListener('wiselinkclicked', this.wiseLinkClickedHandler);
-  }
-
-  setupWiseLinkClickedListener(): void {
-    // Create the wiseLinkClickedHandler and keep a reference to it so we can remove the event
-    // listener in ngOnDestroy. The removeEventListener matches the event name and callback function
-    // to remove the listener. If we use an anonymous function, it won't be able to remove the
-    // event listener.
-    this.wiseLinkClickedHandler = this.createWiseLinkClickedHandler();
-  }
-
-  createWiseLinkClickedHandler(): any {
-    return (event: CustomEvent) => {
-      this.followLink(event.detail.nodeId, event.detail.componentId);
-    };
+    this.wiseLinkCommunicator = document.getElementById(this.wiseLinkCommunicatorId);
+    this.wiseLinkClickedHandler = this.WiseLinkService.createWiseLinkClickedHandler(this.nodeId);
+    this.WiseLinkService.addWiseLinkClickedListener(
+      this.wiseLinkCommunicator,
+      this.wiseLinkClickedHandler
+    );
+    this.html = this.WiseLinkService.generateHtmlWithWiseLink(
+      this.componentContent.html,
+      this.wiseLinkCommunicatorId
+    );
   }
 
   ngOnDestroy(): void {
     if (this.wiseLinkClickedHandler != null) {
-      this.htmlDiv.removeEventListener('wiselinkclicked', this.wiseLinkClickedHandler);
+      this.wiseLinkCommunicator.removeEventListener('wiselinkclicked', this.wiseLinkClickedHandler);
     }
-  }
-
-  followLink(nodeId: string, componentId: string): void {
-    if (this.isLinkToComponentInStep(nodeId)) {
-      this.NodeService.scrollToComponentAndHighlight(componentId);
-    } else {
-      this.goToNode(nodeId, componentId);
-    }
-  }
-
-  isLinkToComponentInStep(nodeId: string): boolean {
-    return nodeId === this.nodeId;
-  }
-
-  goToNode(nodeId: string, componentId: string): void {
-    if (componentId !== '') {
-      this.NodeService.registerScrollToComponent(componentId);
-    }
-    this.StudentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nodeId);
   }
 }
