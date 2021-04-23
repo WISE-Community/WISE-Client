@@ -107,7 +107,7 @@ export class ComponentAnnotationsComponent {
   getComponentId(annotations: any): string {
     return this.hasCommentAnnotation(annotations)
       ? annotations.comment.componentId
-      : annotations.score.nodeId;
+      : annotations.score.componentId;
   }
 
   isShowScore(annotations: any): boolean {
