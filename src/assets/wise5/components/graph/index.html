@@ -170,8 +170,11 @@
         </span>
       </div>
       <component-annotations
-                   [annotations]='graphController.latestAnnotations'
-                   [max-score]='graphController.componentContent.maxScore'></component-annotations>
+          [annotations]='graphController.latestAnnotations'
+          [max-score]='graphController.componentContent.maxScore'
+          [node-id]='graphController.nodeId'
+          [component-id]='graphController.componentId'>
+      </component-annotations>
       <div style="display:none">
         <canvas id="{{::graphController.hiddenCanvasId}}"></canvas>
       </div>

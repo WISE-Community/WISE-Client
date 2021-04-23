@@ -63,13 +63,11 @@ export class ComponentAnnotationsComponent {
   ngAfterViewInit() {
     this.processAnnotations();
     this.wiseLinkCommunicator = document.getElementById(this.wiseLinkCommunicatorId);
-    if (this.wiseLinkCommunicator != null) {
-      this.wiseLinkClickedHandler = this.WiseLinkService.createWiseLinkClickedHandler(this.nodeId);
-      this.WiseLinkService.addWiseLinkClickedListener(
-        this.wiseLinkCommunicator,
-        this.wiseLinkClickedHandler
-      );
-    }
+    this.wiseLinkClickedHandler = this.WiseLinkService.createWiseLinkClickedHandler(this.nodeId);
+    this.WiseLinkService.addWiseLinkClickedListener(
+      this.wiseLinkCommunicator,
+      this.wiseLinkClickedHandler
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -80,9 +78,7 @@ export class ComponentAnnotationsComponent {
 
   ngOnDestroy() {
     this.studentWorkSavedToServerSubscription.unsubscribe();
-    if (this.wiseLinkClickedHandler != null) {
-      this.wiseLinkCommunicator.removeEventListener('wiselinkclicked', this.wiseLinkClickedHandler);
-    }
+    this.wiseLinkCommunicator.removeEventListener('wiselinkclicked', this.wiseLinkClickedHandler);
   }
 
   processAnnotations(): void {
