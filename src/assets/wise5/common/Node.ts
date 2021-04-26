@@ -1,10 +1,18 @@
 export class Node {
   icons: any;
+  icon: any;
   id: string;
   title: string;
   type: string;
 
   getIcon(): any {
+    if (this.icon == null) {
+      this.setIcon();
+    }
+    return this.icon;
+  }
+
+  setIcon(): void {
     const defaultIcon = {
       color: 'rgba(0,0,0,0.54)',
       type: 'font',
@@ -22,6 +30,6 @@ export class Node {
     if (!icon.imgSrc) {
       icon.type = 'font';
     }
-    return icon;
+    this.icon = icon;
   }
 }

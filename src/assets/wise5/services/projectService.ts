@@ -27,6 +27,7 @@ export class ProjectService {
   inactiveStepNodes: any[];
   isNodeAffectedByConstraintResult: any = {};
   metadata: any;
+  nodes: any = {};
   nodeCount: number = 0;
   nodeIdToNumber: any = {};
   nodeIdToIsInBranchPath: any = {};
@@ -650,7 +651,13 @@ export class ProjectService {
   }
 
   getNode(nodeId: string): Node {
-    return Object.assign(new Node(), this.getNodeById(nodeId));
+    if (this.nodes.hasOwnProperty(nodeId)) {
+      return this.nodes[nodeId];
+    } else {
+      const node = Object.assign(new Node(), this.getNodeById(nodeId));
+      this.nodes[nodeId] = node;
+      return node;
+    }
   }
 
   /**
