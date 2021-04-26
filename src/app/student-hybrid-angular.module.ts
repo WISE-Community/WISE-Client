@@ -18,12 +18,14 @@ import { NavItemComponent } from '../assets/wise5/vle/nav-item/nav-item.componen
 import { ComponentAnnotationsComponent } from '../assets/wise5/directives/componentAnnotations/component-annotations.component';
 import { HtmlStudent } from '../assets/wise5/components/html/html-student/html-student.component';
 import { MultipleChoiceStudent } from '../assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component';
+import { OutsideUrlStudent } from '../assets/wise5/components/outsideURL/outside-url-student/outside-url-student.component';
 
 @NgModule({
   declarations: [
     ComponentAnnotationsComponent,
     HtmlStudent,
     MultipleChoiceStudent,
+    OutsideUrlStudent,
     NavItemComponent,
     PossibleScoreComponent
   ],
