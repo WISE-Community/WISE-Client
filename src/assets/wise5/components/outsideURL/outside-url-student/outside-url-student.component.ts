@@ -54,7 +54,7 @@ export class OutsideUrlStudent extends ComponentStudent {
     if (this.hasInfo(componentContent)) {
       return this.sanitizer.bypassSecurityTrustResourceUrl(componentContent.info);
     } else {
-      return this.sanitizer.bypassSecurityTrustResourceUrl(componentContent.url);
+      return this.getURL(componentContent);
     }
   }
 
