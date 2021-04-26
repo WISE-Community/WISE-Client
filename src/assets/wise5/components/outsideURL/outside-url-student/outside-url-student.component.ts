@@ -51,19 +51,23 @@ export class OutsideUrlStudent extends ComponentStudent {
   }
 
   getInfoUrl(componentContent: any): SafeUrl {
-    if (componentContent.info == null || componentContent.info === '') {
-      return this.sanitizer.bypassSecurityTrustResourceUrl(componentContent.url);
-    } else {
+    if (this.hasInfo(componentContent)) {
       return this.sanitizer.bypassSecurityTrustResourceUrl(componentContent.info);
+    } else {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(componentContent.url);
     }
   }
 
   getInfoString(componentContent: any): string {
-    if (componentContent.info == null || componentContent.info === '') {
-      return componentContent.url;
-    } else {
+    if (this.hasInfo(componentContent)) {
       return componentContent.info;
+    } else {
+      return componentContent.url;
     }
+  }
+
+  hasInfo(componentContent: any): boolean {
+    return componentContent.info != null && componentContent.info !== '';
   }
 
   getWidth(componentContent: any): string {
