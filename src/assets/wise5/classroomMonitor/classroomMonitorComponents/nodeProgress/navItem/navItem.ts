@@ -85,7 +85,7 @@ class NavItemController {
     this.currentWorkgroup = this.TeacherDataService.getCurrentWorkgroup();
     this.setCurrentNodeStatus();
     this.maxScore = this.ProjectService.getMaxScoreForNode(this.nodeId);
-    this.icon = this.ProjectService.getNodeIconByNodeId(this.nodeId);
+    this.icon = this.ProjectService.getNode(this.nodeId).getIcon();
     const parentGroup = this.ProjectService.getParentGroup(this.nodeId);
     if (parentGroup != null) {
       this.parentGroupId = parentGroup.id;

@@ -39,7 +39,7 @@ class NodeInfoController {
   $onInit() {
     this.nodeContent = this.getNodeContent();
     this.components = this.getComponents();
-    this.color = this.ProjectService.getNodeIconByNodeId(this.nodeId).color;
+    this.color = this.ProjectService.getNode(this.nodeId).getIcon().color;
   }
 
   getNodeContent() {

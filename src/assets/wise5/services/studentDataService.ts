@@ -397,7 +397,7 @@ export class StudentDataService extends DataService {
   }
 
   updateNodeStatusIcon(nodeId) {
-    this.nodeStatuses[nodeId].icon = this.ProjectService.getNodeIconByNodeId(nodeId);
+    this.nodeStatuses[nodeId].icon = this.ProjectService.getNode(nodeId).getIcon();
   }
 
   updateNodeStatusTimestamps(nodeId) {
