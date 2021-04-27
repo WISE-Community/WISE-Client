@@ -230,6 +230,6 @@ class ProjectInfoAuthoringController {
 }
 
 export const ProjectInfoAuthoringComponent = {
-  templateUrl: `/wise5/authoringTool/info/infoAuthoring.html`,
+  templateUrl: `/assets/wise5/authoringTool/info/infoAuthoring.html`,
   controller: ProjectInfoAuthoringController
 };

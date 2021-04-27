@@ -769,6 +769,6 @@ class NodeAdvancedBranchAuthoringController {
 }
 
 export const NodeAdvancedBranchAuthoringComponent = {
-  templateUrl: `/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html`,
+  templateUrl: `/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html`,
   controller: NodeAdvancedBranchAuthoringController
 };

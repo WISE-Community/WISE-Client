@@ -35,7 +35,6 @@ export class ProjectAssetAuthoringController {
   static $inject = [
     '$filter',
     '$mdDialog',
-    '$state',
     '$stateParams',
     '$timeout',
     'ConfigService',
@@ -46,7 +45,6 @@ export class ProjectAssetAuthoringController {
   constructor(
     $filter: any,
     private $mdDialog: any,
-    private $state: any,
     private $stateParams: any,
     private $timeout: any,
     private ConfigService: ConfigService,
@@ -57,34 +55,28 @@ export class ProjectAssetAuthoringController {
   }
 
   $onInit() {
-    this.projectId = this.$stateParams.projectId;
     this.totalFileSize = 0;
     this.totalUnusedFilesSize = 0;
     this.unusedFilesPercentage = 0;
 
-    if (this.$stateParams != null) {
-      const stateParams = this.$stateParams;
-      if (stateParams.isPopup != null) {
-        this.isPopup = true;
-      }
-      if (stateParams.projectId != null) {
-        this.projectId = stateParams.projectId;
-      }
-      if (stateParams.nodeId != null) {
-        this.nodeId = stateParams.nodeId;
-      }
-      if (stateParams.componentId != null) {
-        this.componentId = stateParams.componentId;
-      }
-      if (stateParams.target != null) {
-        this.target = stateParams.target;
-      }
-      if (stateParams.targetObject != null) {
-        this.targetObject = stateParams.targetObject;
-      }
-      if (stateParams.allowedFileTypes != null) {
-        this.allowedFileTypes = this.$stateParams.allowedFileTypes;
-      }
+    const stateParams = this.$stateParams;
+    if (stateParams.isPopup != null) {
+      this.isPopup = true;
+    }
+    if (stateParams.nodeId != null) {
+      this.nodeId = stateParams.nodeId;
+    }
+    if (stateParams.componentId != null) {
+      this.componentId = stateParams.componentId;
+    }
+    if (stateParams.target != null) {
+      this.target = stateParams.target;
+    }
+    if (stateParams.targetObject != null) {
+      this.targetObject = stateParams.targetObject;
+    }
+    if (stateParams.allowedFileTypes != null) {
+      this.allowedFileTypes = this.$stateParams.allowedFileTypes;
     }
 
     this.subscriptions.add(
@@ -301,14 +293,6 @@ export class ProjectAssetAuthoringController {
     }
   }
 
-  exit() {
-    if (this.isPopup) {
-      this.$mdDialog.hide();
-    } else {
-      this.$state.go('root.at.project', { projectId: this.projectId });
-    }
-  }
-
   setTotalFileSize(totalFileSize) {
     this.totalFileSize = totalFileSize;
     this.projectAssetUsagePercentage = this.ProjectAssetService.getAssetUsagePercentage();
@@ -321,6 +305,9 @@ export class ProjectAssetAuthoringController {
 }
 
 export const ProjectAssetAuthoringComponent = {
-  templateUrl: `/wise5/authoringTool/asset/assetAuthoring.html`,
-  controller: ProjectAssetAuthoringController
+  templateUrl: `/assets/wise5/authoringTool/asset/assetAuthoring.html`,
+  controller: ProjectAssetAuthoringController,
+  bindings: {
+    projectId: '<'
+  }
 };

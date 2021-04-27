@@ -46,6 +46,6 @@ class EditRubricComponentController {
 }
 
 export const EditRubricComponent = {
-  templateUrl: `/wise5/authoringTool/node/editRubric/edit-rubric.component.html`,
+  templateUrl: `/assets/wise5/authoringTool/node/editRubric/edit-rubric.component.html`,
   controller: EditRubricComponentController
 };

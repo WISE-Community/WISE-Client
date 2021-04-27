@@ -104,6 +104,6 @@ class ChooseComponentLocationController {
 }
 
 export const ChooseComponentLocation = {
-  templateUrl: `/wise5/authoringTool/importComponent/choose-component-location.component.html`,
+  templateUrl: `/assets/wise5/authoringTool/importComponent/choose-component-location.component.html`,
   controller: ChooseComponentLocationController
 };

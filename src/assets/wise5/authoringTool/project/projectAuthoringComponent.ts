@@ -12,7 +12,6 @@ class ProjectAuthoringController {
   $translate: any;
   createGroupTitle: string;
   projectId: number;
-  runId: number;
   items: any;
   nodeIds: [];
   nodeId: string;
@@ -84,8 +83,6 @@ class ProjectAuthoringController {
   }
 
   $onInit() {
-    this.projectId = this.ConfigService.getProjectId();
-    this.runId = this.ConfigService.getRunId();
     this.items = this.ProjectService.idToOrder;
     this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds();
     this.inactiveGroupNodes = this.ProjectService.getInactiveGroupNodes();
@@ -163,14 +160,6 @@ class ProjectAuthoringController {
     this.previewProject(false);
   }
 
-  viewProjectAssets() {
-    this.$state.go('root.at.project.asset', { projectId: this.projectId });
-  }
-
-  viewNotebookSettings() {
-    this.$state.go('root.at.project.notebook', { projectId: this.projectId });
-  }
-
   showOtherConcurrentAuthors(authors) {
     const myUsername = this.ConfigService.getMyUsername();
     authors.splice(authors.indexOf(myUsername), 1);
@@ -195,10 +184,6 @@ class ProjectAuthoringController {
     }
   }
 
-  closeProject() {
-    this.$state.go('root.at.main');
-  }
-
   getNodePositionById(nodeId) {
     return this.ProjectService.getNodePositionById(nodeId);
   }
@@ -218,23 +203,17 @@ class ProjectAuthoringController {
   nodeClicked(nodeId) {
     this.unselectAllItems();
     this.TeacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
-    this.$state.go('root.at.project.node', { projectId: this.projectId, nodeId: nodeId });
+    this.$state.go('root.at.project.node', { nodeId: nodeId });
   }
 
   constraintIconClicked(nodeId) {
     this.TeacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nodeId);
-    this.$state.go('root.at.project.node.advanced.constraint', {
-      projectId: this.projectId,
-      nodeId: nodeId
-    });
+    this.$state.go('root.at.project.node.advanced.constraint', { nodeId: nodeId });
   }
 
   branchIconClicked(nodeId) {
     this.TeacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nodeId);
-    this.$state.go('root.at.project.node.advanced.path', {
-      projectId: this.projectId,
-      nodeId: nodeId
-    });
+    this.$state.go('root.at.project.node.advanced.path', { nodeId: nodeId });
   }
 
   createGroup() {
@@ -665,19 +644,15 @@ class ProjectAuthoringController {
   }
 
   importStep() {
-    this.$state.go('root.at.project.import-step.choose-step', { projectId: this.projectId });
+    this.$state.go('root.at.project.import-step.choose-step');
   }
 
   editProjectRubric() {
-    this.$state.go('root.at.project.rubric', {
-      projectId: this.projectId
-    });
+    this.$state.go('root.at.project.rubric');
   }
 
   goToAdvancedAuthoring() {
-    this.$state.go('root.at.project.advanced', {
-      projectId: this.projectId
-    });
+    this.$state.go('root.at.project.advanced');
   }
 
   isNodeInAnyBranchPath(nodeId) {
@@ -922,6 +897,9 @@ class ProjectAuthoringController {
 }
 
 export const ProjectAuthoringComponent = {
-  templateUrl: `/wise5/authoringTool/project/projectAuthoring.html`,
-  controller: ProjectAuthoringController
+  templateUrl: `/assets/wise5/authoringTool/project/projectAuthoring.html`,
+  controller: ProjectAuthoringController,
+  bindings: {
+    projectId: '<'
+  }
 };

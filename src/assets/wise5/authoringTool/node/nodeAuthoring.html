@@ -26,7 +26,7 @@
       </md-tooltip>
     </md-button>
     <md-button id='addComponentButton'
-        ng-if='$ctrl.showStepButtons && !projectController.isGroupNode($ctrl.node.id)'
+        ng-if='$ctrl.showStepButtons && !$ctrl.node.isGroup()'
         class='topButton md-raised md-primary'
         ng-click='$ctrl.addComponent()'
         ng-disabled='$ctrl.getSelectedComponentIds().length != 0 || $ctrl.insertComponentMode'>
@@ -34,7 +34,7 @@
       <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'addNewComponent' | translate }}</md-tooltip>
     </md-button>
     <md-button id='importComponentButton'
-        ng-if='$ctrl.showStepButtons && !projectController.isGroupNode($ctrl.node.id)'
+        ng-if='$ctrl.showStepButtons && !$ctrl.node.isGroup()'
         class='topButton md-raised md-primary'
         ng-click='$ctrl.importComponent()'
         ng-disabled='$ctrl.getSelectedComponentIds().length != 0 || $ctrl.insertComponentMode'>
@@ -42,7 +42,7 @@
       <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'importComponent' | translate }}</md-tooltip>
     </md-button>
     <md-button id='moveComponentButton'
-        ng-if='$ctrl.showStepButtons && !projectController.isGroupNode($ctrl.node.id)'
+        ng-if='$ctrl.showStepButtons && !$ctrl.node.isGroup()'
         class='topButton md-raised md-primary'
         ng-click='$ctrl.moveButtonClicked()'
         ng-disabled='$ctrl.insertComponentMode'>
@@ -50,7 +50,7 @@
       <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'move' | translate }}</md-tooltip>
     </md-button>
     <md-button id='copyComponentButton'
-        ng-if='$ctrl.showStepButtons && !projectController.isGroupNode($ctrl.node.id)'
+        ng-if='$ctrl.showStepButtons && !$ctrl.node.isGroup()'
         class='topButton md-raised md-primary'
         ng-click='$ctrl.copyButtonClicked()'
         ng-disabled='$ctrl.insertComponentMode'>
@@ -58,7 +58,7 @@
       <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'copy' | translate }}</md-tooltip>
     </md-button>
     <md-button id='deleteComponentButton'
-        ng-if='$ctrl.showStepButtons && !projectController.isGroupNode($ctrl.node.id)'
+        ng-if='$ctrl.showStepButtons && !$ctrl.node.isGroup()'
         class='topButton md-raised md-primary'
         ng-click='$ctrl.deleteButtonClicked()'
         ng-disabled='$ctrl.insertComponentMode'>
@@ -80,20 +80,20 @@
       <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'ADVANCED' | translate }}</md-tooltip>
     </md-button>
     <md-button id='stepUndoButton' class='topButton md-raised md-primary' ng-click='$ctrl.undo()'
-        ng-if='!projectController.isGroupNode($ctrl.node.id) && $ctrl.showStepButtons'
+        ng-if='!$ctrl.node.isGroup() && $ctrl.showStepButtons'
         ng-disabled='$ctrl.getSelectedComponentIds().length != 0 || $ctrl.undoStack.length == 0 || $ctrl.insertComponentMode'>
       <md-icon>undo</md-icon>
       <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'undo' | translate }}</md-tooltip>
     </md-button>
     <span flex></span>
     <md-button id='stepPreviewButton' class='topButton md-raised md-primary' ng-click='$ctrl.previewStepInNewWindow()'
-        ng-if='!projectController.isGroupNode($ctrl.node.id)'
+        ng-if='!$ctrl.node.isGroup()'
         ng-disabled='$ctrl.showEditTransitions || $ctrl.insertComponentMode'>
       <md-icon>visibility</md-icon>
       <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'previewStep' | translate }}</md-tooltip>
     </md-button>
     <md-button id='stepPreviewWithouConstraintsButton' class='topButton md-raised md-primary' ng-click="$ctrl.previewStepWithoutConstraintsInNewWindow()"
-        ng-if='!projectController.isGroupNode($ctrl.node.id)'
+        ng-if='!$ctrl.node.isGroup()'
         ng-disabled='$ctrl.showEditTransitions || $ctrl.insertComponentMode'>
       <md-icon>visibility_off</md-icon>
       <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'previewStepWithoutConstraints' | translate }}</md-tooltip>
@@ -115,12 +115,12 @@
 <div ng-if='$ctrl.showComponents && !$ctrl.insertComponentMode'>
   <div layout='row' style='margin-left: 10px; max-height: 60px;'>
     <div layout='row' style='margin-top: 18px; margin-right: 10px;'>
-      <h6 ng-if="!projectController.isGroupNode($ctrl.node.id)">{{ ::'stepTitle' | translate }} {{ $ctrl.nodePosition }}:</h6>
-      <h6 ng-if="projectController.isGroupNode($ctrl.node.id)">{{ ::'activityTitle' | translate }} {{ $ctrl.nodePosition }}:</h6>
+      <h6 ng-if="!$ctrl.node.isGroup()">{{ ::'stepTitle' | translate }} {{ $ctrl.nodePosition }}:</h6>
+      <h6 ng-if="$ctrl.node.isGroup()">{{ ::'activityTitle' | translate }} {{ $ctrl.nodePosition }}:</h6>
     </div>
     <div layout='row'>
       <md-input-container style="width:500px">
-        <input ng-model='$ctrl.node.title'
+        <input ng-model='$ctrl.nodeJson.title'
             ng-change='$ctrl.authoringViewNodeChanged()'
             ng-model-options='{ debounce: 500 }'
             aria-label='{{ ::"title" | translate }}'
@@ -138,7 +138,7 @@
   <span style='font-weight:bold; margin-right:10px'>{{ ::'insertAsFirstComponent' | translate }}</span>
 </div>
 <div style='margin-left: 45px; margin-top: 45px; font-size: 1em; font-weight: bold;' ng-if='$ctrl.showComponents &&
-   $ctrl.components.length === 0 && !$ctrl.insertComponentMode && $ctrl.node.type != "group"''>
+   $ctrl.components.length === 0 && !$ctrl.insertComponentMode && !$ctrl.node.isGroup()'>
    <em>{{ ::'stepHasNoComponents' | translate }}</em>
 </div>
 <div ng-repeat='(componentIndex, component) in $ctrl.components'

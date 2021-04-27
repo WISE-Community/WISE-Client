@@ -32,4 +32,8 @@ export class Node {
     }
     this.icon = icon;
   }
+
+  isGroup(): boolean {
+    return this.type === 'group';
+  }
 }

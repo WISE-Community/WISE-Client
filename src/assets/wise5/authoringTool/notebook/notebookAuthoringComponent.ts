@@ -141,6 +141,6 @@ class NotebookAuthoringController {
 }
 
 export const NotebookAuthoringComponent = {
-  templateUrl: `/wise5/authoringTool/notebook/notebookAuthoring.html`,
+  templateUrl: `/assets/wise5/authoringTool/notebook/notebookAuthoring.html`,
   controller: NotebookAuthoringController
 };

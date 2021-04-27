@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 import { NotificationService } from '../../services/notificationService';
 import { Subscription } from 'rxjs';
 import { Directive } from '@angular/core';
+import { Node } from '../../common/Node';
 
 @Directive()
 class NodeAuthoringController {
@@ -28,7 +29,8 @@ class NodeAuthoringController {
   insertComponentMode: boolean = false;
   items: any[];
   moveComponentMode: boolean = false;
-  node: any;
+  node: Node;
+  nodeJson: any;
   nodeCopy: any = null;
   nodeId: string;
   nodePosition: any;
@@ -77,10 +79,9 @@ class NodeAuthoringController {
   }
 
   $onInit() {
-    this.projectId = this.$stateParams.projectId;
-    this.nodeId = this.$stateParams.nodeId;
+    this.nodeId = this.node.id;
     this.TeacherDataService.setCurrentNodeByNodeId(this.nodeId);
-    this.node = this.ProjectService.getNodeById(this.nodeId);
+    this.nodeJson = this.ProjectService.getNodeById(this.nodeId);
     this.nodePosition = this.ProjectService.getNodePositionById(this.nodeId);
     this.components = this.ProjectService.getComponentsByNodeId(this.nodeId);
 
@@ -89,22 +90,22 @@ class NodeAuthoringController {
      * session in case we need to roll back if the user decides to
      * cancel/revert all the changes.
      */
-    this.originalNodeCopy = this.UtilService.makeCopyOfJSONObject(this.node);
-    this.currentNodeCopy = this.UtilService.makeCopyOfJSONObject(this.node);
+    this.originalNodeCopy = this.UtilService.makeCopyOfJSONObject(this.nodeJson);
+    this.currentNodeCopy = this.UtilService.makeCopyOfJSONObject(this.nodeJson);
 
     this.subscriptions.add(
       this.NodeService.componentShowSubmitButtonValueChanged$.subscribe(({ showSubmitButton }) => {
         if (showSubmitButton) {
-          this.node.showSaveButton = false;
-          this.node.showSubmitButton = false;
-          this.ProjectService.turnOnSaveButtonForAllComponents(this.node);
+          this.nodeJson.showSaveButton = false;
+          this.nodeJson.showSubmitButton = false;
+          this.ProjectService.turnOnSaveButtonForAllComponents(this.nodeJson);
         } else {
-          if (this.ProjectService.doesAnyComponentInNodeShowSubmitButton(this.node.id)) {
-            this.ProjectService.turnOnSaveButtonForAllComponents(this.node);
+          if (this.ProjectService.doesAnyComponentInNodeShowSubmitButton(this.nodeJson.id)) {
+            this.ProjectService.turnOnSaveButtonForAllComponents(this.nodeJson);
           } else {
-            this.node.showSaveButton = true;
-            this.node.showSubmitButton = false;
-            this.ProjectService.turnOffSaveButtonForAllComponents(this.node);
+            this.nodeJson.showSaveButton = true;
+            this.nodeJson.showSubmitButton = false;
+            this.ProjectService.turnOffSaveButtonForAllComponents(this.nodeJson);
           }
         }
         this.authoringViewNodeChanged();
@@ -114,7 +115,7 @@ class NodeAuthoringController {
     const data = {
       title: this.ProjectService.getNodePositionAndTitleByNodeId(this.nodeId)
     };
-    if (this.ProjectService.isGroupNode(this.nodeId)) {
+    if (this.node.isGroup()) {
       this.saveEvent('activityViewOpened', 'Navigation', data);
     } else {
       this.saveEvent('stepViewOpened', 'Navigation', data);
@@ -188,7 +189,7 @@ class NodeAuthoringController {
    */
   authoringViewNodeChanged(parseProject = false) {
     this.undoStack.push(this.currentNodeCopy);
-    this.currentNodeCopy = this.UtilService.makeCopyOfJSONObject(this.node);
+    this.currentNodeCopy = this.UtilService.makeCopyOfJSONObject(this.nodeJson);
     if (parseProject) {
       this.ProjectService.parseProject();
       this.items = this.ProjectService.idToOrder;
@@ -203,7 +204,7 @@ class NodeAuthoringController {
       if (confirm(this.$translate('confirmUndoLastChange'))) {
         const nodePreviousVersion = this.undoStack.pop();
         this.ProjectService.replaceNode(this.nodeId, nodePreviousVersion);
-        this.node = this.ProjectService.getNodeById(this.nodeId);
+        this.nodeJson = this.ProjectService.getNodeById(this.nodeId);
         this.components = this.ProjectService.getComponentsByNodeId(this.nodeId);
         this.ProjectService.saveProject();
       }
@@ -386,12 +387,12 @@ class NodeAuthoringController {
   checkIfNeedToShowNodeSaveOrNodeSubmitButtons() {
     if (!this.ProjectService.doesAnyComponentInNodeShowSubmitButton(this.nodeId)) {
       if (this.ProjectService.doesAnyComponentHaveWork(this.nodeId)) {
-        this.node.showSaveButton = true;
-        this.node.showSubmitButton = false;
+        this.nodeJson.showSaveButton = true;
+        this.nodeJson.showSubmitButton = false;
         this.hideAllComponentSaveButtons();
       } else {
-        this.node.showSaveButton = false;
-        this.node.showSubmitButton = false;
+        this.nodeJson.showSaveButton = false;
+        this.nodeJson.showSubmitButton = false;
       }
     }
   }
@@ -603,6 +604,10 @@ class NodeAuthoringController {
 }
 
 export const NodeAuthoringComponent = {
-  templateUrl: `/wise5/authoringTool/node/nodeAuthoring.html`,
-  controller: NodeAuthoringController
+  templateUrl: `/assets/wise5/authoringTool/node/nodeAuthoring.html`,
+  controller: NodeAuthoringController,
+  bindings: {
+    node: '<',
+    projectId: '<'
+  }
 };
