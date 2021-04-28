@@ -95,7 +95,6 @@ describe('ProjectService', () => {
   // TODO: add test for service.insertNodeInsideOnlyUpdateTransitions()
   // MARK: Tests for Node and Group Id functions
   // TODO: add test for service.getNodePositionAndTitleByNodeId()
-  // TODO: add test for service.getNodeIconByNodeId()
   // TODO: add test for service.moveNodesInside()
   // TODO: add test for service.moveNodesAfter()
   // TODO: add test for service.deconsteNode()

@@ -101,6 +101,8 @@
   </div>
   <component-annotations *ngIf="mode === 'student'"
       [annotations]="latestAnnotations"
-      [maxScore]="componentContent.maxScore">
+      [maxScore]="componentContent.maxScore"
+      [nodeId]="nodeId"
+      [componentId]="componentId">
   </component-annotations>
 </div>

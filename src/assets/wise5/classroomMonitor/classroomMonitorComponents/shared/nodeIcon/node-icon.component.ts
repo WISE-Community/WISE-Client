@@ -30,7 +30,7 @@ export class NodeIconComponent {
   ngOnChanges() {
     this.isGroup = this.ProjectService.isGroupNode(this.nodeId);
     if (this.icon == null) {
-      this.icon = this.ProjectService.getNodeIconByNodeId(this.nodeId);
+      this.icon = this.ProjectService.getNode(this.nodeId).getIcon();
     }
     if (this.size) {
       this.sizeClass = `mat-${this.size}`;

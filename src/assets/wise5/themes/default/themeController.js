@@ -142,7 +142,7 @@ class ThemeController {
     }));
 
     this.subscriptions.add(
-        this.StudentAssetService.showStudentAssets$.subscribe(({ componentController, $event }) => {
+        this.StudentAssetService.showStudentAssets$.subscribe(({ componentController, nodeId, componentId, $event }) => {
       const studentAssetDialogTemplateUrl = this.themePath + '/templates/studentAssetDialog.html';
       const studentAssetTemplateUrl = this.themePath + '/studentAsset/studentAsset.html';
       this.$mdDialog.show({
@@ -151,18 +151,22 @@ class ThemeController {
         templateUrl: studentAssetDialogTemplateUrl,
         locals: {
           studentAssetTemplateUrl: studentAssetTemplateUrl,
-          componentController: componentController
+          componentController: componentController,
+          nodeId: nodeId,
+          componentId: componentId
         },
         controller: StudentAssetDialogController
       });
-      function StudentAssetDialogController($scope, $mdDialog, componentController) {
+      function StudentAssetDialogController($scope, $mdDialog, componentController, nodeId, componentId) {
         $scope.studentAssetTemplateUrl = studentAssetTemplateUrl;
         $scope.componentController = componentController;
+        $scope.nodeId = nodeId;
+        $scope.componentId = componentId;
         $scope.closeDialog = function() {
           $mdDialog.hide();
         };
       }
-      StudentAssetDialogController.$inject = ['$scope', '$mdDialog', 'componentController'];
+      StudentAssetDialogController.$inject = ['$scope', '$mdDialog', 'componentController', 'nodeId', 'componentId'];
     }));
 
     // handle request for notification dismiss codes

@@ -3,6 +3,7 @@
 import ComponentController from '../componentController';
 import { DiscussionService } from './discussionService';
 import { Directive } from '@angular/core';
+import { StudentAssetRequest } from '../../vle/studentAsset/StudentAssetRequest';
 
 @Directive()
 class DiscussionController extends ComponentController {
@@ -141,6 +142,7 @@ class DiscussionController extends ComponentController {
     }
     this.disableComponentIfNecessary();
     this.initializeScopeGetComponentState();
+    this.subscribeToAttachStudentAsset();
     this.registerStudentWorkReceivedListener();
     this.initializeWatchMdMedia();
     this.broadcastDoneRenderingComponent();
@@ -326,6 +328,18 @@ class DiscussionController extends ComponentController {
         }
       }
     }
+  }
+
+  subscribeToAttachStudentAsset() {
+    this.subscriptions.add(
+      this.StudentAssetService.attachStudentAsset$.subscribe(
+        (studentAssetRequest: StudentAssetRequest) => {
+          if (this.isForThisComponent(studentAssetRequest)) {
+            this.attachStudentAsset(studentAssetRequest.asset);
+          }
+        }
+      )
+    );
   }
 
   registerStudentWorkReceivedListener() {
