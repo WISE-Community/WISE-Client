@@ -150,7 +150,8 @@ export class WiseTinymceEditorComponent {
           items: 'preview wordcount | print'
         }
       },
-      paste_block_drop: true
+      paste_block_drop: true,
+      skin_url: '/assets/tinymce/wise'
     };
   }
 
