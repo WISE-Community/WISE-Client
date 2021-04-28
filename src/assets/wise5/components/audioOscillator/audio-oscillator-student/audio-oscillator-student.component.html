@@ -8,7 +8,7 @@
     <mat-form-field *ngIf="oscillatorTypes.length > 1" class="oscillator-type">
       <mat-label i18n>Oscillator Type</mat-label>
       <mat-select [(ngModel)]="oscillatorType"
-          (ngModelChange)="oscillatorTypeChanged()"
+          (ngModelChange)="refreshOscilloscope()"
           [disabled]="isDisabled">
         <mat-option *ngFor="let oscillatorType of oscillatorTypes"
             [value]="oscillatorType">
@@ -21,7 +21,7 @@
       <input matInput
           type="number"
           [(ngModel)]="frequency"
-          (ngModelChange)="frequencyChanged()"
+          (ngModelChange)="refreshOscilloscope()"
           [disabled]="isDisabled"/>
     </mat-form-field>
     <button

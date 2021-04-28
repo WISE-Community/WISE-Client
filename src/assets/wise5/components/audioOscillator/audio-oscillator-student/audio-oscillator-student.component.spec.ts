@@ -20,6 +20,8 @@ export class MockService {}
 
 let component: AudioOscillatorStudent;
 let fixture: ComponentFixture<AudioOscillatorStudent>;
+let existingStudentData: any;
+let newStudentData: any;
 
 describe('AudioOscillatorStudent', () => {
   configureTestSuite(() => {
@@ -57,6 +59,8 @@ describe('AudioOscillatorStudent', () => {
     };
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
+    existingStudentData = {};
+    newStudentData = {};
     fixture.detectChanges();
   });
 
@@ -127,12 +131,8 @@ function addFrequencyPlayed() {
 
 function mergeFrequenciesPlayed() {
   it('should merge frequencies played', () => {
-    const existingStudentData = {
-      frequenciesPlayed: [100]
-    };
-    const newStudentData = {
-      frequenciesPlayed: [200]
-    };
+    existingStudentData.frequenciesPlayed = [100];
+    newStudentData.frequenciesPlayed = [200];
     component.mergeFrequenciesPlayed(existingStudentData, newStudentData);
     expect(existingStudentData.frequenciesPlayed.length).toEqual(2);
     expect(existingStudentData.frequenciesPlayed[0]).toEqual(100);
@@ -142,13 +142,8 @@ function mergeFrequenciesPlayed() {
 
 function mergeFrequenciesPlayedSorted() {
   it('should merge frequencies played sorted', () => {
-    const existingStudentData = {
-      frequenciesPlayed: [100, 200],
-      frequenciesPlayedSorted: [100, 200]
-    };
-    const newStudentData = {
-      frequenciesPlayed: [300]
-    };
+    existingStudentData.frequenciesPlayedSorted = [100, 300];
+    newStudentData.frequenciesPlayedSorted = [200];
     component.mergeFrequenciesPlayedSorted(existingStudentData, newStudentData);
     expect(existingStudentData.frequenciesPlayedSorted.length).toEqual(3);
     expect(existingStudentData.frequenciesPlayedSorted[0]).toEqual(100);
@@ -159,38 +154,38 @@ function mergeFrequenciesPlayedSorted() {
 
 function mergeNumberOfFrequenciesPlayed() {
   it('should merge the number of frequencies played', () => {
-    const existingStudentData = {
-      numberOfFrequenciesPlayed: 1
-    };
-    const newStudentData = {
-      numberOfFrequenciesPlayed: 2
-    };
+    existingStudentData.numberOfFrequenciesPlayed = 1;
+    newStudentData.numberOfFrequenciesPlayed = 2;
     component.mergeNumberOfFrequenciesPlayed(existingStudentData, newStudentData);
     expect(existingStudentData.numberOfFrequenciesPlayed).toEqual(3);
   });
 }
 
 function mergeMinFrequencyPlayed() {
+  it('should merge min frequency played when there was no previous min frequency', () => {
+    existingStudentData.minFrequencyPlayed = null;
+    newStudentData.minFrequencyPlayed = 100;
+    component.mergeMinFrequencyPlayed(existingStudentData, newStudentData);
+    expect(existingStudentData.minFrequencyPlayed).toEqual(100);
+  });
   it('should merge min frequency played', () => {
-    const existingStudentData = {
-      minFrequencyPlayed: 200
-    };
-    const newStudentData = {
-      minFrequencyPlayed: 100
-    };
+    existingStudentData.minFrequencyPlayed = 200;
+    newStudentData.minFrequencyPlayed = 100;
     component.mergeMinFrequencyPlayed(existingStudentData, newStudentData);
     expect(existingStudentData.minFrequencyPlayed).toEqual(100);
   });
 }
 
 function mergeMaxFrequencyPlayed() {
+  it('should merge max frequency played when there was no previous max frequency', () => {
+    existingStudentData.maxFrequencyPlayed = null;
+    newStudentData.maxFrequencyPlayed = 200;
+    component.mergeMaxFrequencyPlayed(existingStudentData, newStudentData);
+    expect(existingStudentData.maxFrequencyPlayed).toEqual(200);
+  });
   it('should merge max frequency played', () => {
-    const existingStudentData = {
-      maxFrequencyPlayed: 100
-    };
-    const newStudentData = {
-      maxFrequencyPlayed: 200
-    };
+    existingStudentData.maxFrequencyPlayed = 100;
+    newStudentData.maxFrequencyPlayed = 200;
     component.mergeMaxFrequencyPlayed(existingStudentData, newStudentData);
     expect(existingStudentData.maxFrequencyPlayed).toEqual(200);
   });

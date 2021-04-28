@@ -138,37 +138,49 @@ export class AudioOscillatorStudent extends ComponentStudent {
     componentState.componentType = 'AudioOscillator';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
-    componentState.studentData = {
-      frequenciesPlayed: this.frequenciesPlayed,
-      frequenciesPlayedSorted: this.frequenciesPlayedSorted,
-      numberOfFrequenciesPlayed: this.numberOfFrequenciesPlayed,
-      minFrequencyPlayed: this.minFrequencyPlayed,
-      maxFrequencyPlayed: this.maxFrequencyPlayed,
-      submitCounter: this.submitCounter
-    };
-
-    const promise = new Promise((resolve, reject) => {
+    componentState.studentData = this.createStudentData(
+      this.frequenciesPlayed,
+      this.frequenciesPlayedSorted,
+      this.numberOfFrequenciesPlayed,
+      this.minFrequencyPlayed,
+      this.maxFrequencyPlayed,
+      this.submitCounter
+    );
+    return new Promise((resolve, reject) => {
       this.createComponentStateAdditionalProcessing(
         { resolve: resolve, reject: reject },
         componentState,
         action
       );
     });
-    return promise;
+  }
+
+  createStudentData(
+    frequenciesPlayed: number[] = [],
+    frequenciesPlayedSorted: number[] = [],
+    numberOfFrequenciesPlayed: number = 0,
+    minFrequencyPlayed: number = null,
+    maxFrequencyPlayed: number = null,
+    submitCounter: number = 0
+  ): any {
+    return {
+      frequenciesPlayed: frequenciesPlayed,
+      frequenciesPlayedSorted: frequenciesPlayedSorted,
+      numberOfFrequenciesPlayed: numberOfFrequenciesPlayed,
+      minFrequencyPlayed: minFrequencyPlayed,
+      maxFrequencyPlayed: maxFrequencyPlayed,
+      submitCounter: submitCounter
+    };
   }
 
   togglePlay(): void {
-    if (this.isAudioPlaying()) {
+    if (this.isPlaying) {
       this.stop();
       this.setButtonTextToPlay();
     } else {
       this.play();
       this.setButtonTextToStop();
     }
-  }
-
-  isAudioPlaying(): boolean {
-    return this.isPlaying;
   }
 
   setButtonTextToPlay(): void {
@@ -337,7 +349,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
   }
 
   isDrawAgain(): boolean {
-    return !this.stopAfterGoodDraw || (this.stopAfterGoodDraw && !this.goodDraw);
+    return !this.stopAfterGoodDraw || !this.goodDraw;
   }
 
   drawOscilloscopeGrid(): void {
@@ -404,16 +416,9 @@ export class AudioOscillatorStudent extends ComponentStudent {
     ctx.lineTo(width, y);
   }
 
-  oscillatorTypeChanged(): void {
+  refreshOscilloscope(): void {
     this.drawOscilloscopeGrid();
-    if (this.isAudioPlaying()) {
-      this.restartPlayer();
-    }
-  }
-
-  frequencyChanged(): void {
-    this.drawOscilloscopeGrid();
-    if (this.isAudioPlaying()) {
+    if (this.isPlaying) {
       this.restartPlayer();
     }
   }
@@ -429,11 +434,11 @@ export class AudioOscillatorStudent extends ComponentStudent {
    * @return A component state with the merged student responses.
    */
   createMergedComponentState(componentStates: any[]): any {
-    const mergedComponentState: any = this.NodeService.createNewComponentState();
-    const mergedStudentData = {};
+    const mergedStudentData = this.createStudentData();
     for (const componentState of componentStates) {
       this.mergeStudentData(mergedStudentData, componentState.studentData);
     }
+    const mergedComponentState: any = this.NodeService.createNewComponentState();
     mergedComponentState.studentData = mergedStudentData;
     return mergedComponentState;
   }
@@ -454,34 +459,22 @@ export class AudioOscillatorStudent extends ComponentStudent {
   }
 
   mergeFrequenciesPlayed(existingStudentData: any, newStudentData: any): void {
-    if (existingStudentData.frequenciesPlayed == null) {
-      existingStudentData.frequenciesPlayed = newStudentData.frequenciesPlayed;
-    } else {
-      existingStudentData.frequenciesPlayed = existingStudentData.frequenciesPlayed.concat(
-        newStudentData.frequenciesPlayed
-      );
-    }
+    existingStudentData.frequenciesPlayed = existingStudentData.frequenciesPlayed.concat(
+      newStudentData.frequenciesPlayed
+    );
   }
 
   mergeFrequenciesPlayedSorted(existingStudentData: any, newStudentData: any): void {
-    if (existingStudentData.frequenciesPlayedSorted == null) {
-      existingStudentData.frequenciesPlayedSorted = newStudentData.frequenciesPlayedSorted;
-    } else {
-      const frequenciesPlayedSorted = this.UtilService.makeCopyOfJSONObject(
-        existingStudentData.frequenciesPlayed.concat(newStudentData.frequenciesPlayed)
-      );
-      frequenciesPlayedSorted.sort();
-      existingStudentData.frequenciesPlayedSorted = frequenciesPlayedSorted;
-    }
+    const frequenciesPlayedSorted = this.UtilService.makeCopyOfJSONObject(
+      existingStudentData.frequenciesPlayedSorted.concat(newStudentData.frequenciesPlayedSorted)
+    );
+    frequenciesPlayedSorted.sort();
+    existingStudentData.frequenciesPlayedSorted = frequenciesPlayedSorted;
   }
 
   mergeNumberOfFrequenciesPlayed(existingStudentData: any, newStudentData: any): void {
-    if (existingStudentData.numberOfFrequenciesPlayed == null) {
-      existingStudentData.numberOfFrequenciesPlayed = newStudentData.numberOfFrequenciesPlayed;
-    } else {
-      existingStudentData.numberOfFrequenciesPlayed =
-        existingStudentData.numberOfFrequenciesPlayed + newStudentData.numberOfFrequenciesPlayed;
-    }
+    existingStudentData.numberOfFrequenciesPlayed =
+      existingStudentData.numberOfFrequenciesPlayed + newStudentData.numberOfFrequenciesPlayed;
   }
 
   mergeMinFrequencyPlayed(existingStudentData: any, newStudentData: any): void {
