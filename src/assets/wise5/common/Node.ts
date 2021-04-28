@@ -1,7 +1,11 @@
 export class Node {
+  components: any[] = [];
   icons: any;
   icon: any;
   id: string;
+  rubric: any;
+  showSaveButton: boolean;
+  showSubmitButton: boolean;
   title: string;
   type: string;
 
@@ -35,5 +39,13 @@ export class Node {
 
   isGroup(): boolean {
     return this.type === 'group';
+  }
+
+  getComponent(componentId: string): any {
+    return this.components.find((component) => component.id === componentId);
+  }
+
+  hasComponent(componentId: string): boolean {
+    return this.components.some((component) => component.id === componentId);
   }
 }
