@@ -292,6 +292,17 @@ export abstract class ComponentStudent {
       nodeId: this.nodeId,
       componentId: this.componentId
     });
+    if (this.isAuthoringComponentPreviewMode()) {
+      this.saveForAuthoringPreviewMode('save');
+    }
+  }
+
+  saveForAuthoringPreviewMode(action: string): void {
+    this.createComponentState(action).then((componentState: any) => {
+      this.StudentDataService.setDummyIdIntoLocalId(componentState);
+      this.StudentDataService.setDummyServerSaveTimeIntoLocalServerSaveTime(componentState);
+      this.handleStudentWorkSavedToServer({ studentWork: componentState });
+    });
   }
 
   submitButtonClicked(): void {
@@ -358,6 +369,9 @@ export abstract class ComponentStudent {
 
     if (submitTriggeredBy == null || submitTriggeredBy === 'componentSubmitButton') {
       this.emitComponentSubmitTriggered();
+      if (this.isAuthoringComponentPreviewMode()) {
+        this.saveForAuthoringPreviewMode('submit');
+      }
     }
   }
 
