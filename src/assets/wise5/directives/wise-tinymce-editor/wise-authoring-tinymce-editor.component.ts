@@ -15,8 +15,8 @@ declare let tinymce: any;
 })
 export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorComponent {
   protected toolbar: string = `undo redo | fontselect | formatselect | fontsizeselect |
-    bold italic underline | forecolor backcolor | alignment numlist bullist |
-    image media link wiselink | emoticons removeformat fullscreen`;
+    bold italic underline | image media link wiselink | forecolor backcolor | alignment numlist bullist |
+    emoticons removeformat fullscreen`;
   protected toolbarGroups: any = {
     alignment: {
       icon: 'align-left',
