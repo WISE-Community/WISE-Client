@@ -1,0 +1,81 @@
+<div class="main-div">
+  <div class="prompt"
+      *ngIf="isPromptVisible">
+    <span [innerHTML]="prompt"></span>
+    <possible-score [maxScore]="componentContent.maxScore"></possible-score>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start center" class="interaction-div">
+    <mat-form-field *ngIf="oscillatorTypes.length > 1" class="oscillator-type">
+      <mat-label i18n>Oscillator Type</mat-label>
+      <mat-select [(ngModel)]="oscillatorType"
+          (ngModelChange)="oscillatorTypeChanged()"
+          [disabled]="isDisabled">
+        <mat-option *ngFor="let oscillatorType of oscillatorTypes"
+            [value]="oscillatorType">
+          {{oscillatorType}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="frequency">
+      <mat-label i18n>Frequency (Hz)</mat-label>
+      <input matInput
+          type="number"
+          [(ngModel)]="frequency"
+          (ngModelChange)="frequencyChanged()"
+          [disabled]="isDisabled"/>
+    </mat-form-field>
+    <button
+        mat-button
+        class="mat-primary mat-raised-button"
+        (click)="togglePlay()"
+        [disabled]="isDisabled"
+        matTooltip="{{playStopButtonText}}"
+        matTooltipPosition="above">
+      <mat-icon *ngIf="!isPlaying">play_arrow</mat-icon>
+      <mat-icon *ngIf="isPlaying">stop</mat-icon>
+    </button>
+  </div>
+  <canvas id="{{oscilloscopeId}}"
+      width={{oscilloscopeWidth}}
+      height={{oscilloscopeHeight}}
+      class="oscillator-canvas">
+  </canvas>
+  <div *ngIf="isSaveOrSubmitButtonVisible"
+     class="component-content__actions"
+     fxLayout="row"
+     fxLayoutAlign="start center">
+    <button
+        *ngIf="isSaveButtonVisible"
+        mat-button
+        class="mat-primary mat-raised-button save-button"
+        (click)="saveButtonClicked()"
+        [disabled]="isDisabled || !isDirty"
+        i18n>
+      Save
+    </button>
+    <button
+        *ngIf="isSubmitButtonVisible"
+        mat-button
+        class="mat-primary mat-raised-button submit-button"
+        (click)="submitButtonClicked()"
+        [disabled]="isDisabled || !isSubmitDirty || isSubmitButtonDisabled"
+        i18n>
+      Submit
+    </button>
+    <span *ngIf="saveMessage.text"
+        class="component__actions__info save-message">
+        {{ saveMessage.text }}
+      <span class="component__actions__more"
+          matTooltip="{{ saveMessage.time | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"
+          matTooltipPosition="above">
+        {{ saveMessage.time | amTimeAgo }}
+      </span>
+    </span>
+  </div>
+  <component-annotations *ngIf="mode === 'student'"
+      [annotations]="latestAnnotations"
+      [maxScore]="componentContent.maxScore"
+      [nodeId]="nodeId"
+      [componentId]="componentId">
+  </component-annotations>
+</div>

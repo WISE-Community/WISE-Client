@@ -26,6 +26,7 @@ export abstract class ComponentStudent {
   @Input()
   workgroupId: number;
 
+  attachments: any[];
   componentId: string;
   componentType: string;
   prompt: string;
@@ -38,6 +39,7 @@ export abstract class ComponentStudent {
   isSubmit: boolean = false;
   isDirty: boolean = false;
   isDisabled: boolean = false;
+  isStudentAttachmentEnabled: boolean = false;
   submitCounter: number = 0;
   latestAnnotations: any;
   saveMessage = {
