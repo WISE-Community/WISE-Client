@@ -2,10 +2,15 @@ import { Node } from '../../../common/Node';
 
 class NodeAdvancedAuthoringController {
   node: Node;
+  isGroupNode: boolean;
 
   static $inject = ['$state'];
 
   constructor(private $state: any) {}
+
+  $onInit() {
+    this.isGroupNode = this.node.isGroup();
+  }
 
   goBack() {
     this.$state.go('root.at.project.node', { nodeId: this.node.id });

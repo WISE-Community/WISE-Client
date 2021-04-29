@@ -27,6 +27,7 @@ class NodeAuthoringController {
     'tag'
   ];
   insertComponentMode: boolean = false;
+  isGroupNode: boolean;
   items: any[];
   moveComponentMode: boolean = false;
   node: Node;
@@ -80,6 +81,7 @@ class NodeAuthoringController {
 
   $onInit() {
     this.nodeId = this.node.id;
+    this.isGroupNode = this.node.isGroup();
     this.TeacherDataService.setCurrentNodeByNodeId(this.nodeId);
     this.nodeJson = this.ProjectService.getNodeById(this.nodeId);
     this.nodePosition = this.ProjectService.getNodePositionById(this.nodeId);
@@ -115,7 +117,7 @@ class NodeAuthoringController {
     const data = {
       title: this.ProjectService.getNodePositionAndTitleByNodeId(this.nodeId)
     };
-    if (this.node.isGroup()) {
+    if (this.isGroupNode) {
       this.saveEvent('activityViewOpened', 'Navigation', data);
     } else {
       this.saveEvent('stepViewOpened', 'Navigation', data);
