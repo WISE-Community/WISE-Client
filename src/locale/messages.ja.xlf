@@ -878,7 +878,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">51</context>
         </context-group>
-        <target state="needs-translation">Preview Step</target>
+        <target state="translated">ステップのプレビュー</target>
       </trans-unit>
       <trans-unit id="d81f00c85d3b507f3e3d78bfc617a2c66e028391" datatype="html">
         <source>New</source>
@@ -1048,7 +1048,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Return to WISE Home</target>
+        <target state="translated">ホームに戻る</target>
       </trans-unit>
       <trans-unit id="3fdb49f59b7dbcd4ef2e9a4fdff71007b32b2933" datatype="html">
         <source>Contact WISE</source>
@@ -1368,7 +1368,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">Other</target>
+        <target state="translated">他</target>
       </trans-unit>
       <trans-unit id="862335120638232941" datatype="html">
         <source>Student Management</source>
@@ -1720,7 +1720,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">212</context>
         </context-group>
-        <target state="needs-translation">Join for free</target>
+        <target state="translated">無料登録</target>
       </trans-unit>
       <trans-unit id="bef13b264d9f1244392852666ac27791c9a5979f" datatype="html">
         <source>Forgot Username or Password</source>
@@ -1740,7 +1740,7 @@
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">Student</target>
+        <target state="translated">学生</target>
       </trans-unit>
       <trans-unit id="9b59fedafe883c50e868d884b7a0faeca8f2ccc9" datatype="html">
         <source>Look up username or reset password for a student account</source>
@@ -1816,7 +1816,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit/edit.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Password</target>
+        <target state="translated">パスワード</target>
       </trans-unit>
       <trans-unit id="5ead54400cc272b882d8fb68895f8cf558d8edd7" datatype="html">
         <source>Password required</source>
@@ -4700,7 +4700,7 @@
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">Student Home</target>
+        <target state="translated">生徒ホーム</target>
       </trans-unit>
       <trans-unit id="4c42d0c12ddaebc2efdfc00bbf1d714bf385f278" datatype="html">
         <source>Teacher Home</source>
@@ -4712,7 +4712,7 @@
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Teacher Home</target>
+        <target state="translated">教師ホーム</target>
       </trans-unit>
       <trans-unit id="d3781ad331fdd0bc9055c45a41664ac467de63af" datatype="html">
         <source>Edit Profile</source>
@@ -4760,7 +4760,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
-        <target state="needs-translation">Help</target>
+        <target state="translated">ヘルプ</target>
       </trans-unit>
       <trans-unit id="640eec093c685babaa3265137215e3cc92ad704d" datatype="html">
         <source>Sign Out</source>
@@ -4768,7 +4768,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">86</context>
         </context-group>
-        <target state="needs-translation">Sign Out</target>
+        <target state="translated">ログアウト</target>
       </trans-unit>
       <trans-unit id="17f37e96c7b8059b23c07791dca1bdb3f3f6853f" datatype="html">
         <source>Welcome <x id="INTERPOLATION" equiv-text="{{ user.firstName }}"/>!</source>
@@ -4816,7 +4816,7 @@
           <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="needs-translation">Main menu</target>
+        <target state="translated">メインメニュー</target>
       </trans-unit>
       <trans-unit id="481add1796f59f7dfdcfb8e69283dd39230d67e9" datatype="html">
         <source>Community Built</source>
@@ -4940,7 +4940,7 @@
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
           <context context-type="linenumber">36</context>
         </context-group>
-        <target state="needs-translation">Reset</target>
+        <target state="translated">リセット</target>
       </trans-unit>
       <trans-unit id="e2f5ddbb1c62ee08bb0cc5a18ecba95e1e621760" datatype="html">
         <source>Discipline</source>
@@ -5076,7 +5076,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">75</context>
         </context-group>
-        <target state="needs-translation">More</target>
+        <target state="translated">詳細</target>
       </trans-unit>
       <trans-unit id="01b7fa43a3428af3967f5ddeb02a21315ec636e4" datatype="html">
         <source>View License</source>
@@ -5108,7 +5108,7 @@
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Preview</target>
+        <target state="translated">プレビュー</target>
       </trans-unit>
       <trans-unit id="3563179927132287246" datatype="html">
         <source>License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.</source>
@@ -5132,7 +5132,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">編集</target>
       </trans-unit>
       <trans-unit id="0bd8b27f60a1f098a53e06328426d818e3508ff9" datatype="html">
         <source>Share</source>
@@ -5368,7 +5368,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">Find a teacher</target>
+        <target state="translated">先生を検索</target>
       </trans-unit>
       <trans-unit id="39e715b9ebc52d3b9c9a0b629419034bf1610efa" datatype="html">
         <source>Teacher is already on shared list.</source>
@@ -5504,7 +5504,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Close menu</target>
+        <target state="translated">メニューを閉じる</target>
       </trans-unit>
       <trans-unit id="c0b05f996bb39c9db400e2ec0d5506b75d464af0" datatype="html">
         <source>WISE Home</source>
@@ -5672,7 +5672,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">147</context>
         </context-group>
-        <target state="needs-translation">Unlink Google Account</target>
+        <target state="translated">Google アカウントの連携を解除</target>
       </trans-unit>
       <trans-unit id="8666615009060969246" datatype="html">
         <source>Password changed.</source>
@@ -5680,7 +5680,7 @@
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.ts</context>
           <context context-type="linenumber">77</context>
         </context-group>
-        <target state="needs-translation">Password changed.</target>
+        <target state="translated">パスワードを変更しました</target>
       </trans-unit>
       <trans-unit id="4580988005648117665" datatype="html">
         <source>Search</source>
@@ -5704,7 +5704,7 @@
           <context context-type="sourcefile">src/app/modules/shared/select-menu/select-menu.component.ts</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Select an option</target>
+        <target state="translated">オプションを選択</target>
       </trans-unit>
       <trans-unit id="5d9fa1b5819208cfbc678e570f4bd34144bcfe81" datatype="html">
         <source>To remove the link to your Google account, you will be asked to create a WISE password. In the future, you&apos;ll sign in to WISE using your username and password.</source>
@@ -5840,7 +5840,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
           <context context-type="linenumber">129</context>
         </context-group>
-        <target state="needs-translation">cancel</target>
+        <target state="translated">取消</target>
       </trans-unit>
       <trans-unit id="7a4dcc3f14029f6e71021bc396effab868353ad5" datatype="html">
         <source>You haven&apos;t created any <x id="INTERPOLATION" equiv-text="{{label.plural}}"/> yet.</source>
@@ -6826,7 +6826,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
-        <target state="needs-translation">Country</target>
+        <target state="translated">国名</target>
       </trans-unit>
       <trans-unit id="ef20a8366401a5c10bb1b459b34d40d828dba200" datatype="html">
         <source>Country required</source>
@@ -6922,7 +6922,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
           <context context-type="linenumber">20</context>
         </context-group>
-        <target state="needs-translation">Elementary School</target>
+        <target state="translated">小学校</target>
       </trans-unit>
       <trans-unit id="4661798863210162530" datatype="html">
         <source>Middle School</source>
@@ -6934,7 +6934,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Middle School</target>
+        <target state="translated">中学校</target>
       </trans-unit>
       <trans-unit id="5560057304612443507" datatype="html">
         <source>High School</source>
@@ -6946,7 +6946,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">High School</target>
+        <target state="translated">高校</target>
       </trans-unit>
       <trans-unit id="1400655560633958921" datatype="html">
         <source>College</source>
@@ -7014,7 +7014,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">112</context>
         </context-group>
-        <target state="needs-translation">Language</target>
+        <target state="translated">言語</target>
       </trans-unit>
       <trans-unit id="cabad35c321f1c28ef7c11f848cd458bb934e304" datatype="html">
         <source>Language required</source>
@@ -7186,7 +7186,7 @@
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">Add unit</target>
+        <target state="translated">ユニットを追加</target>
       </trans-unit>
       <trans-unit id="dbe6d72ccb1cef61c338292357b793077b7ed08a" datatype="html">
         <source>Teacher:</source>
@@ -7270,7 +7270,7 @@
           <context context-type="sourcefile">src/app/student/student-run-list-item/student-run-list-item.component.html</context>
           <context context-type="linenumber">71</context>
         </context-group>
-        <target state="needs-translation">Launch</target>
+        <target state="translated">開く</target>
       </trans-unit>
       <trans-unit id="385a5a4a2c1453ee22b0ab14da5cd4fb83df0ee5" datatype="html">
         <source>Review Work</source>
@@ -9976,7 +9976,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-grading/discussion-grading.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Student</target>
+        <target state="translated">学生</target>
       </trans-unit>
       <trans-unit id="1ddab39a5de0dc854ff4562b74800e78df85302e" datatype="html">
         <source>Enable All Tools</source>
