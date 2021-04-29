@@ -10,7 +10,9 @@
       <component-annotations
           class='annotations--inside'
           [annotations]='discussionController.latestAnnotations'
-          [max-score]='::discussionController.componentContent.maxScore'>
+          [max-score]='::discussionController.componentContent.maxScore'
+          [node-id]='discussionController.nodeId'
+          [component-id]='discussionController.componentId'>
       </component-annotations>
       <div layout='row'>
         <div class='discussion-posts' flex>

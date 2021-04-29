@@ -43,7 +43,10 @@
       </div>
       <component-annotations
           [annotations]='embeddedController.latestAnnotations'
-          [max-score]='embeddedController.componentContent.maxScore'></component-annotations>
+          [max-score]='embeddedController.componentContent.maxScore'
+          [node-id]='embeddedController.nodeId'
+          [component-id]='embeddedController.componentId'>
+      </component-annotations>
     </div>
   </div>
 </div>

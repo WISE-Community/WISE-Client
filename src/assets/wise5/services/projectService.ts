@@ -7,6 +7,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionService } from './sessionService';
 import { Observable, Subject } from 'rxjs';
+import { Node } from '../common/Node';
 
 @Injectable()
 export class ProjectService {
@@ -26,6 +27,7 @@ export class ProjectService {
   inactiveStepNodes: any[];
   isNodeAffectedByConstraintResult: any = {};
   metadata: any;
+  nodes: any = {};
   nodeCount: number = 0;
   nodeIdToNumber: any = {};
   nodeIdToIsInBranchPath: any = {};
@@ -648,6 +650,16 @@ export class ProjectService {
     return null;
   }
 
+  getNode(nodeId: string): Node {
+    if (this.nodes.hasOwnProperty(nodeId)) {
+      return this.nodes[nodeId];
+    } else {
+      const node = Object.assign(new Node(), this.getNodeById(nodeId));
+      this.nodes[nodeId] = node;
+      return node;
+    }
+  }
+
   /**
    * Returns the title of the node with the nodeId
    * Return null if nodeId param is null or the specified node does not exist in the project.
@@ -676,36 +688,6 @@ export class ProjectService {
       }
     }
     return null;
-  }
-
-  getNodeIconByNodeId(nodeId) {
-    const node = this.getNodeById(nodeId);
-    let nodeIcon = null;
-    if (node != null) {
-      // set defaults (TODO: get from configService?)
-      nodeIcon = {
-        color: 'rgba(0,0,0,0.54)',
-        type: 'font',
-        fontSet: 'material-icons',
-        fontName: node.type === 'group' ? 'explore' : 'school',
-        imgSrc: '',
-        imgAlt: 'node icon'
-      };
-
-      // TODO: check for different statuses
-      const icons = node.icons;
-      if (!!icons && !!icons.default) {
-        const icon = icons.default;
-        nodeIcon = $.extend(true, nodeIcon, icon);
-      }
-
-      // check for empty image source
-      if (!nodeIcon.imgSrc) {
-        // revert to font icon
-        nodeIcon.type = 'font';
-      }
-    }
-    return nodeIcon;
   }
 
   getParentGroup(nodeId = ''): any {

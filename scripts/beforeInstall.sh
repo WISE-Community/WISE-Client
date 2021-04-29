@@ -29,6 +29,7 @@ apt-get install nginx -y
 
 echo "Adding ip to nginx.conf"
 sed 's/http {/http {\n        add_header ip $server_addr;/' -i /etc/nginx/nginx.conf
+sed 's/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\n        ##\n        # Browser preferred language detection \(does NOT require AcceptLanguageModule\)\n        ##\n\n        map \$http_accept_language \$accept_language {\n                ~\*\^tr tr;\n                ~\*\^es es;\n                ~\*\^pt pt;\n                ~\*\^ja ja;\n                ~\*\^zh-Hans zh-Hans;\n                ~\*\^zh-Hant zh-Hant;\n                ~\*\^zh-CN zh-Hans;\n                ~\*\^zh-TW zh-Hant;\n        }/' -i /etc/nginx/nginx.conf
 
 echo "Adding gzip_types to nginx.conf"
 sed 's/gzip on;/gzip on;\n        gzip_types text\/plain text\/xml image\/gif image\/jpeg image\/png image\/svg+xml application\/json application\/javascript application\/x-javascript text\/javascript text\/css;/' -i /etc/nginx/nginx.conf

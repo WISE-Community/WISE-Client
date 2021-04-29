@@ -236,17 +236,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     this.isCorrect = null;
     this.hideAllFeedback();
     super.saveButtonClicked();
-    if (this.isAuthoringComponentPreviewMode()) {
-      this.saveForAuthoringPreviewMode('save');
-    }
-  }
-
-  saveForAuthoringPreviewMode(action: string): void {
-    this.createComponentState(action).then((componentState: any) => {
-      this.StudentDataService.setDummyIdIntoLocalId(componentState);
-      this.StudentDataService.setDummyServerSaveTimeIntoLocalServerSaveTime(componentState);
-      this.handleStudentWorkSavedToServer({ studentWork: componentState });
-    });
   }
 
   /**

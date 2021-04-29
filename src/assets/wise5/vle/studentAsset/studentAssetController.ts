@@ -3,6 +3,7 @@
 import { ConfigService } from '../../services/configService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { SessionService } from '../../services/sessionService';
+import { ProjectService } from '../../services/projectService';
 
 class StudentAssetController {
   $translate: any;
@@ -13,12 +14,15 @@ class StudentAssetController {
   mode: string;
   studentAssets: any;
   templateUrl: string;
+  nodeId: string;
+  componentId: string;
 
   static $inject = [
     '$filter',
     '$rootScope',
     '$scope',
     'ConfigService',
+    'ProjectService',
     'SessionService',
     'StudentAssetService'
   ];
@@ -28,6 +32,7 @@ class StudentAssetController {
     private $rootScope: any,
     $scope: any,
     private ConfigService: ConfigService,
+    private ProjectService: ProjectService,
     private SessionService: SessionService,
     private StudentAssetService: StudentAssetService
   ) {
@@ -64,11 +69,7 @@ class StudentAssetController {
     if (files != null) {
       for (const file of files) {
         this.StudentAssetService.uploadAsset(file).then((studentAsset) => {
-          if (this.componentController != null) {
-            // If the student asset dialog is a part of a component (e.g. attaching image to OR or Discussion)
-            // Also attach the file(s) to the componentstate's attachments
-            this.componentController.attachStudentAsset(studentAsset);
-          }
+          this.attachStudentAsset(studentAsset);
           this.studentAssets = this.StudentAssetService.allAssets;
         });
       }
@@ -80,12 +81,25 @@ class StudentAssetController {
   }
 
   attachStudentAssetToComponent($event, studentAsset) {
-    if (this.componentController != null) {
+    this.attachStudentAsset(studentAsset);
+    $event.stopPropagation(); // prevents parent student asset list item from getting the onclick event so this item won't be re-selected.
+  }
+
+  attachStudentAsset(studentAsset: any): void {
+    const component = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
+    if (component.type === 'Discussion') {
+      this.StudentAssetService.broadcastAttachStudentAsset(
+        this.nodeId,
+        this.componentId,
+        studentAsset
+      );
+    } else if (this.componentController != null) {
       // If the student asset dialog is a part of a component (e.g. attaching image to OR or Discussion)
       // Also attach the file(s) to the componentstate's attachments
       this.componentController.attachStudentAsset(studentAsset);
-      // TODO: add some kind of unobtrusive confirmation to let student know that the student asset has been added to current component
-      $event.stopPropagation(); // prevents parent student asset list item from getting the onclick event so this item won't be re-selected.
     }
   }
 }
