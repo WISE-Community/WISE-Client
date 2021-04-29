@@ -19,9 +19,11 @@ import { ComponentAnnotationsComponent } from '../assets/wise5/directives/compon
 import { HtmlStudent } from '../assets/wise5/components/html/html-student/html-student.component';
 import { MultipleChoiceStudent } from '../assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component';
 import { OutsideUrlStudent } from '../assets/wise5/components/outsideURL/outside-url-student/outside-url-student.component';
+import { AudioOscillatorStudent } from '../assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component';
 
 @NgModule({
   declarations: [
+    AudioOscillatorStudent,
     ComponentAnnotationsComponent,
     HtmlStudent,
     MultipleChoiceStudent,
