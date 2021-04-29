@@ -59,10 +59,11 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
-              "statsJson": true,
+              "statsJson": false,
               "extractCss": true,
               "namedChunks": true,
               "aot": true,
+              "localize": true,
               "extractLicenses": true,
               "vendorChunk": true,
               "buildOptimizer": true,
@@ -75,140 +76,23 @@
               "outputPath": "dist/",
               "baseHref": "/"
             },
-            "production-es": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": true,
-              "statsJson": true,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "outputPath": "dist/",
-              "i18nFile": "src/locale/messages.es.xlf",
-              "i18nLocale": "es"
+            "es": {
+              "localize": ["es"]
             },
-            "production-pt": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": true,
-              "statsJson": true,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "outputPath": "dist/",
-              "i18nFile": "src/locale/messages.pt.xlf",
-              "i18nLocale": "pt"
+            "ja": {
+              "localize": ["ja"]
             },
-            "production-tr": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": true,
-              "statsJson": true,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "outputPath": "dist/",
-              "i18nFile": "src/locale/messages.tr.xlf",
-              "i18nLocale": "tr"
+            "pt": {
+              "localize": ["pt"]
             },
-            "production-zh-Hans": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": true,
-              "statsJson": true,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "outputPath": "dist/",
-              "i18nFile": "src/locale/messages.zh-Hans.xlf",
-              "i18nLocale": "zh-Hans"
+            "tr": {
+              "localize": ["tr"]
             },
-            "production-zh-Hant": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": true,
-              "statsJson": true,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "outputPath": "dist/",
-              "i18nFile": "src/locale/messages.zh-Hant.xlf",
-              "i18nLocale": "zh-Hant"
+            "zh-Hans": {
+              "localize": ["zh-Hans"]
+            },
+            "zh-Hant": {
+              "localize": ["zh-Hant"]
             }
           }
         },
@@ -223,6 +107,9 @@
             },
             "es": {
               "browserTarget": "wise:build:es"
+            },
+            "ja": {
+              "browserTarget": "wise:build:ja"
             },
             "pt": {
               "browserTarget": "wise:build:pt"
@@ -277,6 +164,20 @@
               "**/node_modules/**"
             ]
           }
+        }
+      },
+      "i18n": {
+        "sourceLocale": {
+          "code": "en-US",
+          "baseHref": "/"
+        },
+        "locales": {
+          "es": "src/locale/messages.es.xlf",
+          "ja": "src/locale/messages.ja.xlf",
+          "pt": "src/locale/messages.pt.xlf",
+          "tr": "src/locale/messages.tr.xlf",
+          "zh-Hans": "src/locale/messages.zh-Hans.xlf",
+          "zh-Hant": "src/locale/messages.zh-Hant.xlf"
         }
       }
     },

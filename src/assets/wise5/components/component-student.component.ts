@@ -26,6 +26,7 @@ export abstract class ComponentStudent {
   @Input()
   workgroupId: number;
 
+  attachments: any[];
   componentId: string;
   componentType: string;
   prompt: string;
@@ -38,6 +39,7 @@ export abstract class ComponentStudent {
   isSubmit: boolean = false;
   isDirty: boolean = false;
   isDisabled: boolean = false;
+  isStudentAttachmentEnabled: boolean = false;
   submitCounter: number = 0;
   latestAnnotations: any;
   saveMessage = {
@@ -290,6 +292,17 @@ export abstract class ComponentStudent {
       nodeId: this.nodeId,
       componentId: this.componentId
     });
+    if (this.isAuthoringComponentPreviewMode()) {
+      this.saveForAuthoringPreviewMode('save');
+    }
+  }
+
+  saveForAuthoringPreviewMode(action: string): void {
+    this.createComponentState(action).then((componentState: any) => {
+      this.StudentDataService.setDummyIdIntoLocalId(componentState);
+      this.StudentDataService.setDummyServerSaveTimeIntoLocalServerSaveTime(componentState);
+      this.handleStudentWorkSavedToServer({ studentWork: componentState });
+    });
   }
 
   submitButtonClicked(): void {
@@ -356,6 +369,9 @@ export abstract class ComponentStudent {
 
     if (submitTriggeredBy == null || submitTriggeredBy === 'componentSubmitButton') {
       this.emitComponentSubmitTriggered();
+      if (this.isAuthoringComponentPreviewMode()) {
+        this.saveForAuthoringPreviewMode('submit');
+      }
     }
   }
 

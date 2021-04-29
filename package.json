@@ -134,12 +134,7 @@
   "scripts": {
     "build-dev": "node node_modules/concurrently/bin/concurrently.js \"ng build wise --watch\" \"ng test --source-map=false --karma-config karma.conf.js --browsers ChromeHeadlessNoSandbox\"",
     "serve-dev": "node ./node_modules/@angular/cli/bin/ng serve --hmr --host 0.0.0.0",
-    "build-prod": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build wise --configuration=production; gulp rename-styles-bundle",
-    "build-prod-es": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build wise --configuration=production-es; gulp rename-styles-bundle",
-    "build-prod-pt": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build wise --configuration=production-pt; gulp rename-styles-bundle",
-    "build-prod-tr": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build wise --configuration=production-tr; gulp rename-styles-bundle",
-    "build-prod-hans": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build wise --configuration=production-zh-Hans; gulp rename-styles-bundle",
-    "build-prod-hant": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build wise --configuration=production-zh-Hant; gulp rename-styles-bundle",
+    "build-prod": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod; gulp copy-site-styles",
     "bundle-report": "node ./node_modules/webpack-bundle-analyzer/lib/bin/analyzer.js dist/stats.json",
     "prettier-format": "prettier --config .prettierrc 'src' --write",
     "watch-all-wise5": "node node_modules/concurrently/bin/concurrently.js \"node ./node_modules/gulp/bin/gulp.js\" \"npm run test-wise5-watch\"",

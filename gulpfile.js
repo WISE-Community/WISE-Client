@@ -152,15 +152,13 @@ gulp.task('update-i18n', gulp.series(function() {
   done();
 }));
 
-gulp.task('rename-styles-bundle', (done) => {
-  const statsJSON = JSON.parse(fs.readFileSync('./dist/stats.json'));
-  const siteStylesPath = statsJSON.assetsByChunkName.siteStyles[0];
-  gulp.src('./dist/*.js')
-    .pipe(replace('siteStyles.css', siteStylesPath))
-    .pipe(gulp.dest('./dist'));
+gulp.task('copy-site-styles', (done) => {
+  gulp.src('./dist/en-US/siteStyles*.css')
+    .pipe(rename('siteStyles.css'))
+    .pipe(gulp.dest('./dist/en-US/'));
   done();
-});
 
+});
 
 // -----------------------------------------------------------------------------
 // Default task

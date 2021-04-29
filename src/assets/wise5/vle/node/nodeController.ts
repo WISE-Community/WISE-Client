@@ -21,6 +21,7 @@ class NodeController {
   autoSaveInterval: any;
   autoSaveIntervalId: any;
   componentToScope: any;
+  convertedComponents: string[] = ['AudioOscillator', 'MultipleChoice'];
   dirtyComponentIds: any;
   dirtySubmitComponentIds: any;
   endedAndLockedMessage: string;
@@ -726,7 +727,7 @@ class NodeController {
     for (const component of components) {
       const componentId = component.id;
       const componentType = component.type;
-      if (componentType === 'MultipleChoice') {
+      if (this.convertedComponents.includes(componentType)) {
         componentStatePromises.push(
           this.getComponentStatePromiseFromService(this.nodeId, componentId, isAutoSave, isSubmit)
         );

@@ -8494,8 +8494,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">49,50</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6f911a6432e479c1a50aefedbf94e480d7067def" datatype="html">
-        <source>Starting Frequencey</source>
+      <trans-unit id="f491f7aaf73a13ed942584461a28b134f06dbed0" datatype="html">
+        <source>Starting Frequency (Hz)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
           <context context-type="linenumber">53</context>
@@ -8557,25 +8557,75 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="9c2c8ec247988ec539f153bfa59000811c7cbf89" datatype="html">
+        <source>Oscillator Type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="abf667ffefffda6607c19873644cadf7b64e6852" datatype="html">
+        <source>Frequency (Hz)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
+          <context context-type="linenumber">80,81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="134d4dcbdf14d91b4d88bd9e920f3f0c91eebb43" datatype="html">
+        <source> Submit </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
+          <context context-type="linenumber">63,64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
+          <context context-type="linenumber">90,91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8564202903947049539" datatype="html">
+        <source>Play</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
+          <context context-type="linenumber">187</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3133539296286953705" datatype="html">
+        <source>Stop</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
+          <context context-type="linenumber">191</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6333335057236774263" datatype="html">
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">439</context>
+          <context context-type="linenumber">455</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6643018309880261465" datatype="html">
         <source>Auto Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">443</context>
+          <context context-type="linenumber">459</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1612722476211621614" datatype="html">
         <source>Submitted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">447</context>
+          <context context-type="linenumber">463</context>
         </context-group>
       </trans-unit>
       <trans-unit id="495b53dee6164e1c3ec7d95ee3527bb23b62a8c2" datatype="html">
@@ -10240,20 +10290,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
           <context context-type="linenumber">52,54</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
-        <source> Save </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">80,81</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="134d4dcbdf14d91b4d88bd9e920f3f0c91eebb43" datatype="html">
-        <source> Submit </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">90,91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2839735751687486837" datatype="html">

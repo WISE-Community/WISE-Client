@@ -6,24 +6,23 @@ import { tap } from 'rxjs/operators';
 import { RunInfo } from './run-info';
 import { Student } from '../domain/student';
 import { StudentRun } from './student-run';
-import { Run } from '../domain/run';
 
 @Injectable()
 export class StudentService {
-  private runsUrl = 'api/student/runs';
-  private runInfoUrl = 'api/student/run/info';
-  private runInfoByIdUrl = 'api/student/run/info-by-id';
-  private addRunUrl = 'api/student/run/register';
-  private launchRunUrl = 'api/student/run/launch';
-  private registerUrl = 'api/student/register';
-  private securityQuestionsUrl = 'api/student/register/questions';
-  private updateProfileUrl = 'api/student/profile/update';
-  private teacherListUrl = 'api/student/teacher-list';
-  private usernameSearchUrl = 'api/student/forgot/username/search';
-  private getSecurityQuestionUrl = 'api/student/forgot/password/security-question';
-  private checkSecurityAnswerUrl = 'api/student/forgot/password/security-question';
-  private changePasswordUrl = 'api/student/forgot/password/change';
-  private canBeAddedToWorkgroupUrl = 'api/student/can-be-added-to-workgroup';
+  private runsUrl = '/api/student/runs';
+  private runInfoUrl = '/api/student/run/info';
+  private runInfoByIdUrl = '/api/student/run/info-by-id';
+  private addRunUrl = '/api/student/run/register';
+  private launchRunUrl = '/api/student/run/launch';
+  private registerUrl = '/api/student/register';
+  private securityQuestionsUrl = '/api/student/register/questions';
+  private updateProfileUrl = '/api/student/profile/update';
+  private teacherListUrl = '/api/student/teacher-list';
+  private usernameSearchUrl = '/api/student/forgot/username/search';
+  private getSecurityQuestionUrl = '/api/student/forgot/password/security-question';
+  private checkSecurityAnswerUrl = '/api/student/forgot/password/security-question';
+  private changePasswordUrl = '/api/student/forgot/password/change';
+  private canBeAddedToWorkgroupUrl = '/api/student/can-be-added-to-workgroup';
 
   private newRunSource = new Subject<StudentRun>();
   newRunSource$ = this.newRunSource.asObservable();
