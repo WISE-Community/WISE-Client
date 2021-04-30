@@ -1,14 +1,17 @@
 'use strict';
 
 import * as angular from 'angular';
-import { downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { AudioOscillatorService } from './audioOscillatorService';
-import AudioOscillatorController from './audioOscillatorController';
+import { AudioOscillatorStudent } from './audio-oscillator-student/audio-oscillator-student.component';
 
 let audioOscillatorComponentModule = angular
   .module('audioOscillatorComponentModule', ['pascalprecht.translate'])
   .service('AudioOscillatorService', downgradeInjectable(AudioOscillatorService))
-  .controller('AudioOscillatorController', AudioOscillatorController)
+  .directive(
+    'audioOscillatorStudent',
+    downgradeComponent({ component: AudioOscillatorStudent }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {

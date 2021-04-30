@@ -121,11 +121,11 @@ export class WiseTinymceEditorComponent {
       content_css: '/siteStyles.css',
       media_live_embeds: true,
       extended_valid_elements: this.extendedValidElements,
-      font_formats: `Roboto=Roboto,Helvetica Neue,sans-serif; Arial=arial,helvetica,sans-serif;
-        Arial Black=arial black,avant garde; Comic Sans MS=comic sans ms,sans-serif;
-        Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica;
-        Impact=impact,chicago; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco;
-        Times New Roman=times new roman,times; Verdana=verdana,geneva`,
+      font_formats: `Roboto=Roboto,Helvetica Neue,sans-serif; Raleway=Raleway,sans-serif;
+        Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; 
+        Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; 
+        Helvetica=helvetica; Impact=impact,chicago; Tahoma=tahoma,arial,helvetica,sans-serif; 
+        Terminal=terminal,monaco; Times New Roman=times new roman,times; Verdana=verdana,geneva`,
       plugins: this.plugins,
       quickbars_insert_toolbar: false,
       default_link_target: '_blank',
@@ -150,7 +150,8 @@ export class WiseTinymceEditorComponent {
           items: 'preview wordcount | print'
         }
       },
-      paste_block_drop: true
+      paste_block_drop: true,
+      skin_url: '/assets/tinymce/wise'
     };
   }
 
