@@ -414,6 +414,6 @@ class NodeAdvancedConstraintAuthoringController {
 }
 
 export const NodeAdvancedConstraintAuthoringComponent = {
-  templateUrl: `/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html`,
+  templateUrl: `/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html`,
   controller: NodeAdvancedConstraintAuthoringController
 };

@@ -238,6 +238,6 @@ class MainAuthoringController {
 }
 
 export const MainAuthoringComponent = {
-  templateUrl: `/wise5/authoringTool/main/mainAuthoring.html`,
+  templateUrl: `/assets/wise5/authoringTool/main/mainAuthoring.html`,
   controller: MainAuthoringController
 };

@@ -465,6 +465,6 @@ class MilestonesAuthoringController {
 }
 
 export const MilestonesAuthoringComponent = {
-  templateUrl: `/wise5/authoringTool/milestones/milestonesAuthoring.html`,
+  templateUrl: `/assets/wise5/authoringTool/milestones/milestonesAuthoring.html`,
   controller: MilestonesAuthoringController
 };

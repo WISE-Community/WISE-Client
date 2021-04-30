@@ -267,6 +267,13 @@ angular
                 return ProjectService.retrieveProject();
               }
             ],
+            projectId: [
+              'ConfigService',
+              'projectConfig',
+              (ConfigService, projectConfig) => {
+                return ConfigService.getProjectId();
+              }
+            ],
             projectAssets: [
               'ProjectAssetService',
               'projectConfig',
@@ -288,7 +295,15 @@ angular
         .state('root.at.project.node', {
           url: '/node/:nodeId',
           component: 'nodeAuthoringComponent',
-          resolve: {},
+          resolve: {
+            node: [
+              'ProjectService',
+              '$stateParams',
+              (ProjectService, $stateParams) => {
+                return ProjectService.getNode($stateParams.nodeId);
+              }
+            ]
+          },
           params: {
             newComponents: []
           }

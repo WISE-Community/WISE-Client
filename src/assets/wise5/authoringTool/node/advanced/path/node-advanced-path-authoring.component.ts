@@ -263,6 +263,6 @@ class NodeAdvancedPathAuthoringController {
 }
 
 export const NodeAdvancedPathAuthoringComponent = {
-  templateUrl: `/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html`,
+  templateUrl: `/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html`,
   controller: NodeAdvancedPathAuthoringController
 };

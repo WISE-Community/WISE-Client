@@ -373,6 +373,6 @@ class AuthoringToolController {
 }
 
 export const AuthoringToolComponent = {
-  templateUrl: `/wise5/authoringTool/authoringTool.html`,
+  templateUrl: `/assets/wise5/authoringTool/authoringTool.html`,
   controller: AuthoringToolController
 };
