@@ -280,7 +280,8 @@ export class AnnotationService {
   getTotalScoreForWorkgroup(annotations = [], workgroupId = -1) {
     let totalScore = 0;
     const scoresFound = []; // to prevent double counting if teacher scored component multiple times
-    for (const annotation of this.sortByNewestToOldest(annotations)) {
+    for (let i = annotations.length - 1; i >= 0; i--) {
+      const annotation = annotations[i];
       if (annotation.toWorkgroupId === workgroupId) {
         if (this.isScoreOrAutoScore(annotation)) {
           const nodeId = annotation.nodeId;
@@ -302,12 +303,6 @@ export class AnnotationService {
       }
     }
     return totalScore;
-  }
-
-  sortByNewestToOldest(annotations = []) {
-    return annotations.sort((a, b) => {
-      return b.clientSaveTime - a.clientSaveTime;
-    });
   }
 
   isScoreOrAutoScore(annotation: any): boolean {
