@@ -1,4 +1,5 @@
 import { Directive, Input } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
@@ -29,7 +30,7 @@ export abstract class ComponentStudent {
   attachments: any[];
   componentId: string;
   componentType: string;
-  prompt: string;
+  prompt: SafeHtml;
   isPromptVisible: boolean = true;
   isSaveButtonVisible: boolean = false;
   isSubmitButtonVisible: boolean = false;
@@ -57,6 +58,7 @@ export abstract class ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
+    protected sanitizer: DomSanitizer,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {}
@@ -64,7 +66,7 @@ export abstract class ComponentStudent {
   ngOnInit(): void {
     this.componentId = this.componentContent.id;
     this.componentType = this.componentContent.type;
-    this.prompt = this.componentContent.prompt;
+    this.prompt = this.sanitizer.bypassSecurityTrustHtml(this.componentContent.prompt);
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.isSaveOrSubmitButtonVisible = this.isSaveButtonVisible || this.isSubmitButtonVisible;
