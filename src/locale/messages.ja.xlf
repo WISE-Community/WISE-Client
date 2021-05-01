@@ -810,7 +810,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-location/choose-new-node-location.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Insert As First Step</target>
+        <target state="translated">最初のステップとして挿入</target>
       </trans-unit>
       <trans-unit id="64216e7ef99605d9f05614beb1919360ee012177" datatype="html">
         <source>Import Step(s)</source>
@@ -898,7 +898,7 @@
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">New</target>
+        <target state="translated">新規</target>
       </trans-unit>
       <trans-unit id="92159486420caf44d25e4f85cb0ed4f105d9c854" datatype="html">
         <source>Assessment items to show</source>
@@ -1376,7 +1376,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">152</context>
         </context-group>
-        <target state="needs-translation">Student Management</target>
+        <target state="translated">生徒管理</target>
       </trans-unit>
       <trans-unit id="7735613040574061081" datatype="html">
         <source>Need Help with Authoring</source>
@@ -1680,7 +1680,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">190</context>
         </context-group>
-        <target state="needs-translation">Pause student screens</target>
+        <target state="translated">生徒の画面を一時停止</target>
       </trans-unit>
       <trans-unit id="b062a147b8e789096be63da3fb5db00eb7e15304" datatype="html">
         <source>Share and collaborate with colleagues</source>
@@ -1728,7 +1728,7 @@
           <context context-type="sourcefile">src/app/forgot/forgot-home/forgot-home.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Forgot Username or Password</target>
+        <target state="translated">ユーザー名またはパスワードを忘れた</target>
       </trans-unit>
       <trans-unit id="61727bf4fa2cb34dc5bdf598b6cb917d0c44ac86" datatype="html">
         <source>Student</source>
@@ -1976,7 +1976,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-complete/forgot-teacher-password-complete.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Password Changed</target>
+        <target state="translated">パスワードを変更しました</target>
       </trans-unit>
       <trans-unit id="2784275ed58bc0769631888b08b14612543c64ec" datatype="html">
         <source>Your password has been successfully changed. Click the button below to sign in.</source>
@@ -2084,7 +2084,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Username</target>
+        <target state="translated">ユーザー名</target>
       </trans-unit>
       <trans-unit id="fa35e72aac432810b1ffca368a2e203c894d28eb" datatype="html">
         <source>Username required</source>
@@ -2096,7 +2096,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Username required</target>
+        <target state="translated">ユーザー名が必要です</target>
       </trans-unit>
       <trans-unit id="c69eedb9000f33dbc7e6fc00e2cbdb830c83f214" datatype="html">
         <source>Forgot Student Username</source>
@@ -2148,7 +2148,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">First Name</target>
+        <target state="translated">名前</target>
       </trans-unit>
       <trans-unit id="dfb446b53f5c04e99f7deed2f454d3e959e1d324" datatype="html">
         <source>First Name required</source>
@@ -2200,7 +2200,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Last Name</target>
+        <target state="translated">姓</target>
       </trans-unit>
       <trans-unit id="17de8a2f90413b5c8a6d622d9cfa4c5eda8bb742" datatype="html">
         <source>Last Name required</source>
@@ -2236,7 +2236,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <target state="needs-translation">Birthday (Month)</target>
+        <target state="translated">誕生日 (月)</target>
       </trans-unit>
       <trans-unit id="53b5f38b420c0d1f9b62a0b34612ed28a20d37d8" datatype="html">
         <source>Month required</source>
@@ -3432,7 +3432,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">Student Management</target>
+        <target state="translated">生徒管理</target>
       </trans-unit>
       <trans-unit id="54cfeaed1219be5235387bc1c1e2d6e1ec4f4a22" datatype="html">
         <source>Project Management</source>
@@ -4632,7 +4632,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">76</context>
         </context-group>
-        <target state="needs-translation">ETS</target>
+        <target state="translated">ETS</target>
       </trans-unit>
       <trans-unit id="8f885baf51f23ab4c81a547cd984d9355bea0239" datatype="html" approved="yes">
         <source>Concord Consortium</source>
@@ -4648,7 +4648,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">88</context>
         </context-group>
-        <target state="needs-translation">SAIL (Scalable Architecture for Interactive Learning)</target>
+        <target state="translated">SAIL(インタラクティブ学習のためのスケーラブルアーキテクチャ)</target>
       </trans-unit>
       <trans-unit id="ffac91e3ed3d3f9238f218aaa135735f55daec60" datatype="html">
         <source>©1996-<x id="INTERPOLATION" equiv-text="{{time | amDateFormat:&apos;YYYY&apos;}}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</source>
@@ -4656,7 +4656,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">94</context>
         </context-group>
-        <target state="needs-translation">©1996-<x id="INTERPOLATION" equiv-text="{{time | amDateFormat:'YYYY'}}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</target>
+        <target state="translated">©1996-<x id="INTERPOLATION" equiv-text="{{time | amDateFormat:'YYYY'}}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</target>
       </trans-unit>
       <trans-unit id="d222f6ff9f7e28fdb4e8b2af47898446cf2eafe4" datatype="html">
         <source>Account Menu</source>
@@ -4668,7 +4668,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Account Menu</target>
+        <target state="translated">アカウントメニュー</target>
       </trans-unit>
       <trans-unit id="879fef27271d8247d791381cf1f9bb0eb8974166" datatype="html">
         <source>Account avatar</source>
@@ -4688,7 +4688,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Switch back to original user</target>
+        <target state="translated">元のユーザーに戻る</target>
       </trans-unit>
       <trans-unit id="c4e3e4170654ee5a353d29a0c34b8008cd25a635" datatype="html">
         <source>Student Home</source>
@@ -4748,7 +4748,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">Admin Tools</target>
+        <target state="translated">管理者ツール</target>
       </trans-unit>
       <trans-unit id="85b79c9064aed1ead31ace985f31aa1363f6bdaf" datatype="html">
         <source>Help</source>
@@ -4864,7 +4864,7 @@
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Copy Unit</target>
+        <target state="translated">ユニットをコピー</target>
       </trans-unit>
       <trans-unit id="2883a2c78d97119d2ab3002336e04da6657a7dfd" datatype="html">
         <source>(Unit ID: <x id="INTERPOLATION" equiv-text="{{ data.project.id }}"/>)</source>
@@ -4892,7 +4892,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Copy</target>
+        <target state="translated">コピー</target>
       </trans-unit>
       <trans-unit id="4568352014425961102" datatype="html">
         <source>There was an error trying to copy the project. Please refresh the page and try again.</source>
@@ -5012,7 +5012,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
-        <target state="needs-translation">Legacy Unit</target>
+        <target state="translated">レガシーユニット</target>
       </trans-unit>
       <trans-unit id="c38ef07814e33a674bada9fe331ffd114cec319d" datatype="html">
         <source>Discipline:</source>
@@ -5324,7 +5324,7 @@
           <context context-type="sourcefile">src/app/modules/library/share-project-dialog/share-project-dialog.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Share Unit</target>
+        <target state="translated">ユニットを共有</target>
       </trans-unit>
       <trans-unit id="a40392824621859bfd694580f1bb21debbc50eb0" datatype="html">
         <source>(Unit ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</source>
@@ -5436,7 +5436,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
-        <target state="needs-translation">Edit Unit Content</target>
+        <target state="translated">ユニットを編集</target>
       </trans-unit>
       <trans-unit id="8dd413cee2228118c536f503709329a4d1a395e2" datatype="html">
         <source>Done</source>
@@ -5512,7 +5512,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">WISE Home</target>
+        <target state="translated">ホーム</target>
       </trans-unit>
       <trans-unit id="1ae3dcf96b494406b6fd6fbd2f15f7259553bf4d" datatype="html">
         <source>Current Password</source>
@@ -5548,7 +5548,7 @@
           <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">New Password</target>
+        <target state="translated">新しいパスワード</target>
       </trans-unit>
       <trans-unit id="ae26b4e37fa94304d1fa1b0c46b10ad979bcecfa" datatype="html">
         <source>New Password required</source>
@@ -5560,7 +5560,7 @@
           <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">New Password required</target>
+        <target state="translated">新しいパスワードが必要です</target>
       </trans-unit>
       <trans-unit id="b81fbd1b5d0723eba41870071d02065674bdd565" datatype="html">
         <source>Confirm New Password</source>
@@ -6838,7 +6838,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">86</context>
         </context-group>
-        <target state="needs-translation">Country required</target>
+        <target state="translated">国を入力してください</target>
       </trans-unit>
       <trans-unit id="2f3ba3fa63119eb68067c64a34cf1ff37b8e790a" datatype="html">
         <source>School Name</source>
@@ -6850,7 +6850,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">91</context>
         </context-group>
-        <target state="needs-translation">School Name</target>
+        <target state="translated">学校名</target>
       </trans-unit>
       <trans-unit id="804ee3edbc2df4841b73e55dfee3f0a2217e09ce" datatype="html">
         <source>School Name required</source>
@@ -6958,7 +6958,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">College</target>
+        <target state="translated">大学</target>
       </trans-unit>
       <trans-unit id="223846e3b440a5bf278a46411d71586ac79cc6ec" datatype="html">
         <source>- or -</source>
@@ -7070,7 +7070,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit/edit.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">Account Info</target>
+        <target state="translated">アカウント</target>
       </trans-unit>
       <trans-unit id="36a606470097ddf0c32a250c8a902441729ca8ca" datatype="html">
         <source>Add Unit</source>
@@ -7082,7 +7082,7 @@
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Add Unit</target>
+        <target state="translated">ユニットを追加</target>
       </trans-unit>
       <trans-unit id="190a0caf6ddac8b5347008c55791abc9e26655d8" datatype="html">
         <source>Access Code</source>
@@ -7090,7 +7090,7 @@
           <context context-type="sourcefile">src/app/student/add-project-dialog/add-project-dialog.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Access Code</target>
+        <target state="translated">アクセスコード</target>
       </trans-unit>
       <trans-unit id="7064e250d464079d38eeeb1f35293ff374673d7f" datatype="html">
         <source>Invalid Access Code</source>
