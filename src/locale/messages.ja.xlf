@@ -36,7 +36,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">27</context>
         </context-group>
-        <target state="needs-translation">WISE teacher workshop 2018</target>
+        <target state="translated">WISE教員ワークショップ 2018</target>
       </trans-unit>
       <trans-unit id="70ff1cc8f851490c4cb6237ec6991ef6a644d4e4" datatype="html">
         <source>WISE student and teacher</source>
@@ -44,7 +44,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <target state="needs-translation">WISE student and teacher</target>
+        <target state="translated">WISEの生徒と教師</target>
       </trans-unit>
       <trans-unit id="2b4a83d9816a80170d470f0cbe714553f33450ae" datatype="html">
         <source>WISE teacher workshop design</source>
@@ -52,7 +52,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">50</context>
         </context-group>
-        <target state="needs-translation">WISE teacher workshop design</target>
+        <target state="translated">WISE教員ワークショップのデザイン</target>
       </trans-unit>
       <trans-unit id="cf46260d6f44d44d379d124ec8df098441107eb5" datatype="html">
         <source>Marcia at WISE workshop</source>
@@ -854,7 +854,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Library Units</target>
+        <target state="translated">ライブラリのユニット</target>
       </trans-unit>
       <trans-unit id="38d584510075ce8ab505c1081beb607c36898b2b" datatype="html">
         <source>Choose the step(s) that you want to import, then click next.</source>
@@ -870,7 +870,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
-        <target state="needs-translation">Preview Unit</target>
+        <target state="translated">ユニットをプレビュー</target>
       </trans-unit>
       <trans-unit id="0fb1aad24bc0920a8c5e9d43e320e261dbca3f09" datatype="html">
         <source>Preview Step</source>
@@ -1920,7 +1920,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.html</context>
           <context context-type="linenumber">37</context>
         </context-group>
-        <target state="needs-translation">Create New Account</target>
+        <target state="translated">アカウント登録</target>
       </trans-unit>
       <trans-unit id="8384809960328910876" datatype="html">
         <source>Password cannot be blank. Please try again.</source>
@@ -5172,7 +5172,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="needs-translation">Unit Details</target>
+        <target state="translated">ユニットの詳細</target>
       </trans-unit>
       <trans-unit id="1160916388490317189" datatype="html">
         <source>Show:</source>
@@ -5188,7 +5188,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Next page</target>
+        <target state="translated">次ページ</target>
       </trans-unit>
       <trans-unit id="3629960544875360046" datatype="html">
         <source>Previous page</source>
@@ -5196,7 +5196,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Previous page</target>
+        <target state="translated">前ページ</target>
       </trans-unit>
       <trans-unit id="4131502629887927598" datatype="html">
         <source>0 of <x id="total" equiv-text="length"/></source>
@@ -6518,7 +6518,7 @@
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Create WISE Account</target>
+        <target state="translated">アカウント作成</target>
       </trans-unit>
       <trans-unit id="de4f0be5b99420e05b27c9fc347488dd6babca71" datatype="html">
         <source>Students can view and complete WISE lessons offered by teachers.</source>
@@ -6546,7 +6546,7 @@
           <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Your WISE account has been created!</target>
+        <target state="translated">アカウントが作成されました。</target>
       </trans-unit>
       <trans-unit id="5aef459db579dd07ae9bc8685beccbac4fc1f7a8" datatype="html">
         <source> Your username is: <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;mat-title&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{username}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>. </source>
@@ -7374,7 +7374,7 @@
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
           <context context-type="linenumber">70</context>
         </context-group>
-        <target state="needs-translation">Launch Unit</target>
+        <target state="translated">ユニットを開始</target>
       </trans-unit>
       <trans-unit id="3975065711327151501" datatype="html">
         <source>A teacher cannot be added as a team member.</source>
@@ -7894,7 +7894,7 @@
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">Unit Info</target>
+        <target state="translated">ユニットの詳細</target>
       </trans-unit>
       <trans-unit id="c182679b176fe796dea0ffeba15359edec6fffbc" datatype="html">
         <source>Share Access</source>
@@ -11432,7 +11432,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
           <context context-type="linenumber">140</context>
         </context-group>
-        <target state="needs-translation">Reload Preview</target>
+        <target state="translated">プレビューをリロード</target>
       </trans-unit>
       <trans-unit id="93ef924fce15086a2b9c5ccde9972618b1caea4d" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount}}"/> attempt </source>
