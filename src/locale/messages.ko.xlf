@@ -9410,13 +9410,13 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation"> Sawtooth </target>
       </trans-unit>
-      <trans-unit id="6f911a6432e479c1a50aefedbf94e480d7067def" datatype="html">
-        <source>Starting Frequencey</source>
+      <trans-unit id="f491f7aaf73a13ed942584461a28b134f06dbed0" datatype="html">
+        <source>Starting Frequency (Hz)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="needs-translation">Starting Frequencey</target>
+        <target state="needs-translation">Starting Frequency (Hz)</target>
       </trans-unit>
       <trans-unit id="584114dd79e680cb2262384fe8fc40c40149e9b3" datatype="html">
         <source>Oscillator Width (Pixels)</source>
@@ -9482,11 +9482,67 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Maximum Frequency Played</target>
       </trans-unit>
+      <trans-unit id="9c2c8ec247988ec539f153bfa59000811c7cbf89" datatype="html">
+        <source>Oscillator Type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <target state="needs-translation">Oscillator Type</target>
+      </trans-unit>
+      <trans-unit id="abf667ffefffda6607c19873644cadf7b64e6852" datatype="html">
+        <source>Frequency (Hz)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <target state="needs-translation">Frequency (Hz)</target>
+      </trans-unit>
+      <trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
+          <context context-type="linenumber">80,81</context>
+        </context-group>
+        <target state="needs-translation"> Save </target>
+      </trans-unit>
+      <trans-unit id="134d4dcbdf14d91b4d88bd9e920f3f0c91eebb43" datatype="html">
+        <source> Submit </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
+          <context context-type="linenumber">63,64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
+          <context context-type="linenumber">90,91</context>
+        </context-group>
+        <target state="needs-translation"> Submit </target>
+      </trans-unit>
+      <trans-unit id="8564202903947049539" datatype="html">
+        <source>Play</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
+          <context context-type="linenumber">187</context>
+        </context-group>
+        <target state="needs-translation">Play</target>
+      </trans-unit>
+      <trans-unit id="3133539296286953705" datatype="html">
+        <source>Stop</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
+          <context context-type="linenumber">191</context>
+        </context-group>
+        <target state="needs-translation">Stop</target>
+      </trans-unit>
       <trans-unit id="6333335057236774263" datatype="html">
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">439</context>
+          <context context-type="linenumber">455</context>
         </context-group>
         <target state="needs-translation">Saved</target>
       </trans-unit>
@@ -9494,7 +9550,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Auto Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">443</context>
+          <context context-type="linenumber">459</context>
         </context-group>
         <target state="needs-translation">Auto Saved</target>
       </trans-unit>
@@ -9502,7 +9558,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Submitted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">447</context>
+          <context context-type="linenumber">463</context>
         </context-group>
         <target state="needs-translation">Submitted</target>
       </trans-unit>
@@ -11394,22 +11450,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempts </target>
       </trans-unit>
-      <trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
-        <source> Save </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">80,81</context>
-        </context-group>
-        <target state="needs-translation"> Save </target>
-      </trans-unit>
-      <trans-unit id="134d4dcbdf14d91b4d88bd9e920f3f0c91eebb43" datatype="html">
-        <source> Submit </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">90,91</context>
-        </context-group>
-        <target state="needs-translation"> Submit </target>
-      </trans-unit>
       <trans-unit id="2839735751687486837" datatype="html">
         <source>Are you sure you want to delete this scoring rule?
 
@@ -11657,6 +11697,14 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
           <context context-type="linenumber">37</context>
         </context-group>
         <target state="needs-translation">Engineering, Technology, and Applications of Science</target>
+      </trans-unit>
+      <trans-unit id="33b44c02a99fed76ddc01396becd04353c98b725" datatype="html">
+        <source>Credit: <x id="INTERPOLATION" equiv-text="{{infoString}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-student/outside-url-student.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Credit: <x id="INTERPOLATION" equiv-text="{{infoString}}"/></target>
       </trans-unit>
       <trans-unit id="b7476b3f8bc67f93405690b807d8751371cdf7ed" datatype="html">
         <source> Choose the step and component to show the summary data for:
@@ -12090,7 +12138,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>Insert from Notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">163</context>
         </context-group>
         <target state="needs-translation">Insert from Notebook</target>
       </trans-unit>
@@ -12098,7 +12146,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>Insert note +</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">163</context>
+          <context context-type="linenumber">164</context>
         </context-group>
         <target state="needs-translation">Insert note +</target>
       </trans-unit>
@@ -12106,7 +12154,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>Image from notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">190</context>
         </context-group>
         <target state="needs-translation">Image from notebook</target>
       </trans-unit>
