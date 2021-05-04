@@ -14,28 +14,29 @@ import { Directive } from '@angular/core';
 import { ComponentService } from '../../components/componentService';
 import { filter, take } from 'rxjs/operators';
 import { ComponentStateWrapper } from '../../components/ComponentStateWrapper';
+import { Node } from '../../common/Node';
 
 @Directive()
 class NodeController {
   $translate: any;
-  autoSaveInterval: any;
+  autoSaveInterval: number = 60000; // in milliseconds;
   autoSaveIntervalId: any;
   componentToScope: any;
   convertedComponents: string[] = ['AudioOscillator', 'MultipleChoice'];
-  dirtyComponentIds: any;
-  dirtySubmitComponentIds: any;
+  dirtyComponentIds: any = [];
+  dirtySubmitComponentIds: any = [];
   endedAndLockedMessage: string;
   isDisabled: boolean;
   isEndedAndLocked: boolean;
   mode: any;
+  node: Node;
   nodeContent: any;
   nodeId: string;
   nodeStatus: any;
-  nodeTitle: string;
   rubric: any;
   rubricTour: any;
   saveMessage: any;
-  submit: any;
+  submit: boolean = false;
   subscriptions: Subscription = new Subscription();
   teacherWorkgroupId: number;
   workgroupId: number;
@@ -76,14 +77,9 @@ class NodeController {
     private UtilService: UtilService
   ) {
     this.$translate = $filter('translate');
-    this.autoSaveInterval = 60000; // in milliseconds
-    this.nodeId = null;
-    this.nodeContent = null;
-    this.nodeStatus = null;
-    this.nodeTitle = null;
-    this.dirtyComponentIds = [];
-    this.dirtySubmitComponentIds = [];
-    this.submit = false;
+  }
+
+  $onInit() {
     this.workgroupId = this.ConfigService.getWorkgroupId();
     this.teacherWorkgroupId = this.ConfigService.getTeacherWorkgroupId();
     this.isDisabled = !this.ConfigService.isRunActive();
@@ -107,79 +103,67 @@ class NodeController {
 
     this.rubric = null;
     this.mode = this.ConfigService.getMode();
+    this.nodeId = this.StudentDataService.getCurrentNodeId();
+    this.node = this.ProjectService.getNode(this.nodeId);
+    this.nodeContent = this.ProjectService.getNodeById(this.nodeId);
+    this.nodeStatus = this.StudentDataService.nodeStatuses[this.nodeId];
+    this.startAutoSaveInterval();
+    this.registerExitListener();
 
     if (
-      this.StudentDataService.getCurrentNode() &&
-      this.ProjectService.isApplicationNode(this.StudentDataService.getCurrentNodeId())
+      this.NodeService.currentNodeHasTransitionLogic() &&
+      this.NodeService.evaluateTransitionLogicOn('enterNode')
     ) {
-      const currentNode = this.StudentDataService.getCurrentNode();
-      if (currentNode != null) {
-        this.nodeId = currentNode.id;
+      this.NodeService.evaluateTransitionLogic();
+    }
+
+    // set save message with last save/submission
+    // for now, we'll use the latest component state (since we don't currently keep track of node-level saves)
+    // TODO: use node states once we implement node state saving
+    const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      this.nodeId
+    );
+    if (latestComponentState) {
+      const latestClientSaveTime = latestComponentState.clientSaveTime;
+      if (latestComponentState.isSubmit) {
+        this.setSubmittedMessage(latestClientSaveTime);
+      } else {
+        this.setSavedMessage(latestClientSaveTime);
       }
+    }
 
-      this.nodeContent = this.ProjectService.getNodeById(this.nodeId);
-      this.nodeTitle = this.ProjectService.getNodeTitleByNodeId(this.nodeId);
-      this.nodeStatus = this.StudentDataService.nodeStatuses[this.nodeId];
-      this.startAutoSaveInterval();
-      this.registerExitListener();
+    const nodeId = this.nodeId;
+    const componentId = null;
+    const componentType = null;
+    const category = 'Navigation';
+    const event = 'nodeEntered';
+    const eventData = {
+      nodeId: nodeId
+    };
+    this.StudentDataService.saveVLEEvent(
+      nodeId,
+      componentId,
+      componentType,
+      category,
+      event,
+      eventData
+    );
 
-      if (
-        this.NodeService.currentNodeHasTransitionLogic() &&
-        this.NodeService.evaluateTransitionLogicOn('enterNode')
-      ) {
-        this.NodeService.evaluateTransitionLogic();
-      }
+    this.rubric = this.node.rubric;
+    this.createRubricTour();
 
-      // set save message with last save/submission
-      // for now, we'll use the latest component state (since we don't currently keep track of node-level saves)
-      // TODO: use node states once we implement node state saving
-      const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-        this.nodeId
-      );
-      if (latestComponentState) {
-        const latestClientSaveTime = latestComponentState.clientSaveTime;
-        if (latestComponentState.isSubmit) {
-          this.setSubmittedMessage(latestClientSaveTime);
-        } else {
-          this.setSavedMessage(latestClientSaveTime);
-        }
-      }
-
-      const nodeId = this.nodeId;
-      const componentId = null;
-      const componentType = null;
-      const category = 'Navigation';
-      const event = 'nodeEntered';
-      const eventData = {
-        nodeId: nodeId
-      };
-      this.StudentDataService.saveVLEEvent(
-        nodeId,
-        componentId,
-        componentType,
-        category,
-        event,
-        eventData
-      );
-
-      if (this.nodeContent != null) {
-        this.rubric = this.nodeContent.rubric;
-        this.createRubricTour();
-      }
-
-      if (
-        this.$state != null &&
-        this.$state.params != null &&
-        this.$state.params.componentId != null
-      ) {
-        const componentId = this.$state.params.componentId;
-        this.scrollAndHighlightComponent(componentId);
-      }
+    if (
+      this.$state != null &&
+      this.$state.params != null &&
+      this.$state.params.componentId != null
+    ) {
+      const componentId = this.$state.params.componentId;
+      this.scrollAndHighlightComponent(componentId);
     }
 
     this.subscriptions.add(
       this.StudentDataService.componentSaveTriggered$.subscribe(({ nodeId, componentId }) => {
-        if (this.nodeId == nodeId && this.nodeContainsComponent(componentId)) {
+        if (nodeId == this.node.id && this.node.hasComponent(componentId)) {
           const isAutoSave = false;
           this.createAndSaveComponentData(isAutoSave, componentId);
         }
@@ -188,7 +172,7 @@ class NodeController {
 
     this.subscriptions.add(
       this.StudentDataService.componentSubmitTriggered$.subscribe(({ nodeId, componentId }) => {
-        if (this.nodeId == nodeId && this.nodeContainsComponent(componentId)) {
+        if (nodeId == this.node.id && this.node.hasComponent(componentId)) {
           const isAutoSave = false;
           const isSubmit = true;
           this.createAndSaveComponentData(isAutoSave, componentId, isSubmit);
@@ -309,8 +293,7 @@ class NodeController {
     }
 
     // add tour bubbles for each of the component rubrics
-    const components = this.getComponents();
-    for (let component of components) {
+    for (const component of this.getComponents()) {
       if (component.rubric) {
         const thisTarget = '#rubric_' + component.id;
         const content = this.UtilService.insertWISELinks(
@@ -334,7 +317,7 @@ class NodeController {
     if (this.rubricTour) {
       let step = -1;
       let index = 0;
-      if (this.nodeId === id) {
+      if (id === this.nodeId) {
         step = index;
       }
 
@@ -342,9 +325,7 @@ class NodeController {
         if (this.rubric) {
           index++;
         }
-
-        const components = this.getComponents();
-        for (let component of components) {
+        for (const component of this.getComponents()) {
           if (component.rubric) {
             if (component.id === id) {
               step = index;
@@ -521,47 +502,17 @@ class NodeController {
     this.createAndSaveComponentData(isAutoSave, null, isSubmit);
   }
 
-  getComponents() {
-    let components = null;
-    if (this.nodeContent != null) {
-      components = this.nodeContent.components;
-    }
-    if (components != null && this.isDisabled) {
-      for (const component of components) {
+  getComponents(): any[] {
+    return this.node.components.map((component) => {
+      if (this.isDisabled) {
         component.isDisabled = true;
       }
-    }
-    return components;
-  }
-
-  getComponentById(componentId) {
-    for (const component of this.getComponents()) {
-      if (component.id === componentId) {
-        return component;
-      }
-    }
-    return null;
-  }
-
-  nodeContainsComponent(componentId) {
-    for (const component of this.getComponents()) {
-      if (component.id === componentId) {
-        return true;
-      }
-    }
-    return false;
+      return component;
+    });
   }
 
   getComponentTemplatePath(componentType) {
     return this.NodeService.getComponentTemplatePath(componentType);
-  }
-
-  showSaveButton() {
-    return this.nodeContent != null && this.nodeContent.showSaveButton;
-  }
-
-  showSubmitButton() {
-    return this.nodeContent != null && this.nodeContent.showSubmitButton;
   }
 
   setSavedMessage(time) {
@@ -708,7 +659,7 @@ class NodeController {
   getComponentsToSave(componentId: string): any {
     if (componentId) {
       const components = [];
-      const component = this.getComponentById(componentId);
+      const component = this.node.getComponent(componentId);
       if (component) {
         components.push(component);
       }
@@ -916,7 +867,7 @@ class NodeController {
                       connectedNodeId == this.nodeId &&
                       connectedComponentId === changedComponentId
                     ) {
-                      let connectedComponent = this.getComponentById(connectedComponentId);
+                      let connectedComponent = this.node.getComponent(connectedComponentId);
                       let componentScope = this.componentToScope[tempComponentId];
                       if (
                         componentScope != null &&
@@ -936,7 +887,7 @@ class NodeController {
                      */
                     let connectedComponentId = componentId;
                     if (connectedComponentId === changedComponentId) {
-                      let connectedComponent = this.getComponentById(connectedComponentId);
+                      let connectedComponent = this.node.getComponent(connectedComponentId);
                       let componentScope = this.componentToScope[tempComponentId];
                       if (
                         componentScope != null &&
@@ -958,7 +909,7 @@ class NodeController {
                      */
                     let connectedComponentId = id;
                     if (connectedComponentId === changedComponentId) {
-                      let connectedComponent = this.getComponentById(connectedComponentId);
+                      let connectedComponent = this.node.getComponent(connectedComponentId);
                       let componentScope = this.componentToScope[tempComponentId];
                       if (
                         componentScope != null &&
@@ -981,24 +932,11 @@ class NodeController {
     }
   }
 
-  getComponentStateByComponentId(componentId) {
-    if (componentId != null) {
-      return this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-        this.nodeId,
-        componentId
-      );
-    }
-    return null;
-  }
-
-  getComponentStateByNodeIdAndComponentId(nodeId, componentId) {
-    if (nodeId != null && componentId != null) {
-      return this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-        nodeId,
-        componentId
-      );
-    }
-    return null;
+  getComponentStateByComponentId(componentId: string): any {
+    return this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      this.nodeId,
+      componentId
+    );
   }
 
   nodeUnloaded(nodeId) {
@@ -1023,13 +961,10 @@ class NodeController {
   }
 
   getSubmitDirty() {
-    const components = this.getComponents();
-    if (components != null) {
-      for (const component of components) {
-        const latestState = this.getComponentStateByComponentId(component.id);
-        if (latestState && !latestState.isSubmit) {
-          return true;
-        }
+    for (const component of this.getComponents()) {
+      const latestState = this.getComponentStateByComponentId(component.id);
+      if (latestState && !latestState.isSubmit) {
+        return true;
       }
     }
     return false;
