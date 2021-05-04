@@ -109,18 +109,14 @@ export class UtilService {
    * @param imageElement an image element (<img src='abc.jpg'/>)
    * @returns an image object
    */
-  getImageObjectFromImageElement(imageElement) {
-    let imageObject = null;
-    if (imageElement != null) {
-      const canvas = document.createElement('canvas');
-      canvas.width = imageElement.naturalWidth;
-      canvas.height = imageElement.naturalHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(imageElement, 0, 0);
-      const dataURL = canvas.toDataURL('image/png');
-      imageObject = this.getImageObjectFromBase64String(dataURL);
-    }
-    return imageObject;
+  getImageObjectFromImageElement(imageElement: any): any {
+    const canvas = document.createElement('canvas');
+    canvas.width = imageElement.naturalWidth;
+    canvas.height = imageElement.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(imageElement, 0, 0);
+    const dataURL = canvas.toDataURL('image/png');
+    return this.getImageObjectFromBase64String(dataURL);
   }
 
   isImage(fileName: string): boolean {
