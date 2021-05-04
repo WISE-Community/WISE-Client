@@ -96,10 +96,7 @@ export class NotebookService {
 
   createSnipImageHandler(): any {
     return (event: CustomEvent) => {
-      const imageObject = this.UtilService.getImageObjectFromImageElement(event.detail.target);
-      if (imageObject != null) {
-        this.addNote(imageObject);
-      }
+      this.addNote(this.UtilService.getImageObjectFromImageElement(event.detail.target));
     };
   }
 
