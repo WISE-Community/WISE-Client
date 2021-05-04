@@ -51,8 +51,11 @@ export class ComponentAnnotationsComponent {
   ngOnInit() {
     this.maxScoreDisplay = parseInt(this.maxScore) > 0 ? '/' + this.maxScore : '';
     this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-      ({ studentWork }) => {
-        if (studentWork.nodeId === this.nodeId && studentWork.componentId === this.componentId) {
+      (componentState) => {
+        if (
+          componentState.nodeId === this.nodeId &&
+          componentState.componentId === this.componentId
+        ) {
           this.isNew = false;
         }
       }

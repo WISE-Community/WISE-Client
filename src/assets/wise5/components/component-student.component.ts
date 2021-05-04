@@ -144,14 +144,13 @@ export abstract class ComponentStudent {
 
   subscribeToStudentWorkSavedToServer(): void {
     this.subscriptions.add(
-      this.StudentDataService.studentWorkSavedToServer$.subscribe((args: any) => {
-        this.handleStudentWorkSavedToServer(args);
+      this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
+        this.handleStudentWorkSavedToServer(componentState);
       })
     );
   }
 
-  handleStudentWorkSavedToServer(args: any): void {
-    const componentState = args.studentWork;
+  handleStudentWorkSavedToServer(componentState: any): void {
     if (this.isForThisComponent(componentState)) {
       this.setIsDirty(false);
       this.emitComponentDirty(this.getIsDirty());
@@ -172,7 +171,7 @@ export abstract class ComponentStudent {
         this.setSavedMessage(clientSaveTime);
       }
     }
-    this.handleStudentWorkSavedToServerAdditionalProcessing(args);
+    this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
   }
 
   getIsDirty(): boolean {
@@ -185,7 +184,7 @@ export abstract class ComponentStudent {
     }
   }
 
-  handleStudentWorkSavedToServerAdditionalProcessing(args: any): void {}
+  handleStudentWorkSavedToServerAdditionalProcessing(componentState: any): void {}
 
   subscribeToRequestComponentState(): void {
     this.subscriptions.add(

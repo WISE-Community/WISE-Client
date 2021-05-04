@@ -245,14 +245,13 @@ class ComponentController {
 
   registerStudentWorkSavedToServerListener() {
     this.subscriptions.add(
-      this.StudentDataService.studentWorkSavedToServer$.subscribe((args: any) => {
-        this.handleStudentWorkSavedToServer(args);
+      this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
+        this.handleStudentWorkSavedToServer(componentState);
       })
     );
   }
 
-  handleStudentWorkSavedToServer(args: any) {
-    const componentState = args.studentWork;
+  handleStudentWorkSavedToServer(componentState: any) {
     if (this.isForThisComponent(componentState)) {
       this.setIsDirty(false);
       this.emitComponentDirty(this.getIsDirty());
@@ -273,10 +272,10 @@ class ComponentController {
         this.setSavedMessage(clientSaveTime);
       }
     }
-    this.handleStudentWorkSavedToServerAdditionalProcessing(args);
+    this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
   }
 
-  handleStudentWorkSavedToServerAdditionalProcessing(args: any) {}
+  handleStudentWorkSavedToServerAdditionalProcessing(componentState: any) {}
 
   handleNodeSubmit() {
     this.isSubmit = true;

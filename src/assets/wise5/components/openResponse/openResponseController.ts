@@ -830,8 +830,7 @@ class OpenResponseController extends ComponentController {
   snipButtonClicked($event) {
     if (this.isDirty) {
       const studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-        (args: any) => {
-          const componentState = args.studentWork;
+        (componentState: any) => {
           if (
             componentState &&
             this.nodeId === componentState.nodeId &&

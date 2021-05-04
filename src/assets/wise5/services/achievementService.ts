@@ -287,12 +287,12 @@ export class AchievementService {
    */
   createStudentWorkSavedListener(projectAchievement) {
     this.debugOutput('registering ' + projectAchievement.id);
-    return this.StudentDataService.studentWorkSavedToServer$.subscribe((args: any) => {
+    return this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
       this.debugOutput(
         'createStudentWorkSavedListener checking ' +
           projectAchievement.id +
           ' completed ' +
-          args.nodeId
+          componentState.nodeId
       );
       if (!this.isStudentAchievementExists(projectAchievement.id)) {
         if (this.isAchievementCompletedByStudent(projectAchievement)) {
