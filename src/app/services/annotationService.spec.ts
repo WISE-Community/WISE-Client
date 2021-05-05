@@ -66,9 +66,9 @@ function getTotalScore() {
 }
 
 function getTotalScore_noAnnotationForWorkgroup_return0() {
-  it('should return 0 when no annotations for workgroup', () => {
-    expect(service.getTotalScoreForWorkgroup([], WORKGROUP_1)).toEqual(0);
-    expect(service.getTotalScoreForWorkgroup(annotations, WORKGROUP_3)).toEqual(0);
+  it('should return null when no annotations for workgroup', () => {
+    expect(service.getTotalScoreForWorkgroup([], WORKGROUP_1)).toBeNull();
+    expect(service.getTotalScoreForWorkgroup(annotations, WORKGROUP_3)).toBeNull();
   });
 }
 
@@ -85,7 +85,7 @@ function getTotalScore_omitInActiveNodes() {
       return node.id !== 'node2';
     });
     expect(service.getTotalScoreForWorkgroup(annotations, WORKGROUP_1)).toEqual(2);
-    expect(service.getTotalScoreForWorkgroup(annotations, WORKGROUP_2)).toEqual(0);
+    expect(service.getTotalScoreForWorkgroup(annotations, WORKGROUP_2)).toBeNull();
   });
 }
 
