@@ -607,7 +607,7 @@ export class ProjectService {
         return matchedString.replace(
           '<img',
           `<img onclick=\\"window.dispatchEvent(new CustomEvent('snip-image', ` +
-            `{ detail: { target: this } }))\\" style=\\"cursor: pointer;\\"`
+            `{ detail: { target: this } }))\\" snip`
         );
       });
     }
