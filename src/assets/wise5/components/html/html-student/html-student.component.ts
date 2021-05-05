@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { WiseLinkService } from '../../../../../app/services/wiseLinkService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -24,6 +24,7 @@ export class HtmlStudent extends ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
+    protected sanitizer: DomSanitizer,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService,
     private WiseLinkService: WiseLinkService
@@ -33,6 +34,7 @@ export class HtmlStudent extends ComponentStudent {
       ComponentService,
       ConfigService,
       NodeService,
+      sanitizer,
       StudentDataService,
       UtilService
     );

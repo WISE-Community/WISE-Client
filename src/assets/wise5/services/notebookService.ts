@@ -8,6 +8,7 @@ import { ProjectService } from './projectService';
 import { StudentAssetService } from './studentAssetService';
 import { StudentDataService } from './studentDataService';
 import { Subject, Subscription } from 'rxjs';
+import { UtilService } from './utilService';
 
 @Injectable()
 export class NotebookService {
@@ -53,6 +54,7 @@ export class NotebookService {
   publicNotebookItems = {};
   notebooksByWorkgroup = {};
   notebookItemAnnotationReceivedSubscription: Subscription;
+  snipImageHandler: any;
   private notebookItemAnnotationReceivedSource: Subject<boolean> = new Subject<boolean>();
   public notebookItemAnnotationReceived$ = this.notebookItemAnnotationReceivedSource.asObservable();
   private notebookItemChosenSource: Subject<any> = new Subject<any>();
@@ -76,17 +78,31 @@ export class NotebookService {
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
     private StudentAssetService: StudentAssetService,
-    private StudentDataService: StudentDataService
+    private StudentDataService: StudentDataService,
+    private UtilService: UtilService
   ) {
     this.notebookItemAnnotationReceivedSubscription = this.StudentDataService.notebookItemAnnotationReceived$.subscribe(
       (args: any) => {
         this.notebookItemAnnotationReceivedSource.next(args);
       }
     );
+    this.addSnipImageListener();
   }
 
-  ngOnDestroy() {
+  addSnipImageListener(): void {
+    this.snipImageHandler = this.createSnipImageHandler();
+    window.addEventListener('snip-image', this.snipImageHandler);
+  }
+
+  createSnipImageHandler(): any {
+    return (event: CustomEvent) => {
+      this.addNote(this.UtilService.getImageObjectFromImageElement(event.detail.target));
+    };
+  }
+
+  ngOnDestroy(): void {
     this.notebookItemAnnotationReceivedSubscription.unsubscribe();
+    window.removeEventListener('snip-image', this.snipImageHandler);
   }
 
   getStudentNotebookConfig() {

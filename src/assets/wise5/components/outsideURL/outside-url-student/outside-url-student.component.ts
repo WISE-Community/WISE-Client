@@ -24,7 +24,7 @@ export class OutsideUrlStudent extends ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
-    private sanitizer: DomSanitizer,
+    protected sanitizer: DomSanitizer,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
@@ -33,6 +33,7 @@ export class OutsideUrlStudent extends ComponentStudent {
       ComponentService,
       ConfigService,
       NodeService,
+      sanitizer,
       StudentDataService,
       UtilService
     );

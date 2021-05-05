@@ -1,6 +1,7 @@
 'use strict';
 
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -30,6 +31,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
     protected ConfigService: ConfigService,
     private MultipleChoiceService: MultipleChoiceService,
     protected NodeService: NodeService,
+    protected sanitizer: DomSanitizer,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
@@ -38,6 +40,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
       ComponentService,
       ConfigService,
       NodeService,
+      sanitizer,
       StudentDataService,
       UtilService
     );

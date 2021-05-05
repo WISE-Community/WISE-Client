@@ -603,18 +603,11 @@ export class ProjectService {
       const imgMatcher = new RegExp('<img.*?src=\\\\?[\'"](.*?)\\\\?[\'"].*?>', 'gi');
 
       // replace all instances that match
-      contentString = contentString.replace(imgMatcher, (matchedString, matchGroup1) => {
-        /*
-         * insert the ng-click attribute
-         * Before: <img src="some-image.png"/>
-         * After:
-         * <img ng-click="this.$ctrl.ProjectService.broadcastSnipImage(
-         *      { target: $event.target, componentId: 'abcdefghij' })" src="some-image.png"/>
-         */
+      contentString = contentString.replace(imgMatcher, (matchedString) => {
         return matchedString.replace(
-          'img',
-          `img ng-click=\\"this.$ctrl.ProjectService.broadcastSnipImage(` +
-            `{ target: $event.target, componentId: '${componentId}' })\\"`
+          '<img',
+          `<img onclick=\\"window.dispatchEvent(new CustomEvent('snip-image', ` +
+            `{ detail: { target: this } }))\\" style=\\"cursor: pointer;\\"`
         );
       });
     }
