@@ -1005,15 +1005,15 @@ export class StudentDataService extends DataService {
             this.setRemoteServerSaveTimeIntoLocalServerSaveTime(savedStudentWork, localStudentWork);
           }
           this.clearRequestToken(localStudentWork);
-          this.broadcastStudentWorkSavedToServer({ studentWork: localStudentWork });
+          this.broadcastStudentWorkSavedToServer(localStudentWork);
           break;
         }
       }
     }
   }
 
-  broadcastStudentWorkSavedToServer(args: any) {
-    this.studentWorkSavedToServerSource.next(args);
+  broadcastStudentWorkSavedToServer(componentState: any) {
+    this.studentWorkSavedToServerSource.next(componentState);
   }
 
   isMatchingRequestToken(localObj, remoteObj) {

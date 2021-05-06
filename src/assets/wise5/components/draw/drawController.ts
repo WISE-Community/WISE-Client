@@ -112,8 +112,7 @@ class DrawController extends ComponentController {
     this.broadcastDoneRenderingComponent();
   }
 
-  handleStudentWorkSavedToServerAdditionalProcessing(args: any) {
-    let componentState = args.studentWork;
+  handleStudentWorkSavedToServerAdditionalProcessing(componentState: any) {
     if (
       this.isForThisComponent(componentState) &&
       this.ProjectService.isConnectedComponent(
@@ -540,8 +539,7 @@ class DrawController extends ComponentController {
   snipButtonClicked($event) {
     if (this.isDirty) {
       const studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-        (args: any) => {
-          const componentState = args.studentWork;
+        (componentState: any) => {
           if (this.isForThisComponent(componentState)) {
             this.snipDrawing($event, componentState.id);
             studentWorkSavedToServerSubscription.unsubscribe();

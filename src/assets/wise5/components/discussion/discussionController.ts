@@ -208,8 +208,7 @@ class DiscussionController extends ComponentController {
 
   registerStudentWorkSavedToServerListener() {
     this.subscriptions.add(
-      this.StudentDataService.studentWorkSavedToServer$.subscribe((args: any) => {
-        const componentState = args.studentWork;
+      this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
         if (this.isWorkFromThisComponent(componentState)) {
           if (this.isClassmateResponsesGated() && !this.retrievedClassmateResponses) {
             this.getClassmateResponses();

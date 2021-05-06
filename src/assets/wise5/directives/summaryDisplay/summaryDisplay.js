@@ -123,11 +123,11 @@ class SummaryDisplayController {
       this.renderDisplay();
     };
     this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$
-        .subscribe((args) => {
+        .subscribe((componentState) => {
       if (
         this.doRender &&
-        this.nodeId === args.studentWork.nodeId &&
-        this.componentId === args.studentWork.componentId
+        componentState.nodeId === this.nodeId &&
+        componentState.componentId === this.componentId
       ) {
         this.renderDisplay();
       }
