@@ -44,6 +44,7 @@ import { EditComponentMaxScoreComponent } from '../../../app/authoring-tool/edit
 import { EditComponentRubricComponent } from '../../../app/authoring-tool/edit-component-rubric/edit-component-rubric.component';
 import { EditComponentTagsComponent } from '../../../app/authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from '../../../app/authoring-tool/edit-component-width/edit-component-width.component';
+import { StepToolsComponent } from '../common/stepTools/step-tools.component';
 
 import '../classroomMonitor/classroomMonitorComponents';
 import '../authoringTool/structure/structureAuthoringModule';
@@ -177,6 +178,10 @@ angular
     downgradeComponent({
       component: AdvancedProjectAuthoringComponent
     }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'stepTools',
+    downgradeComponent({ component: StepToolsComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'wiseAuthoringTinymceEditor',
