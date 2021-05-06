@@ -66,7 +66,7 @@ export class WorkgroupItemController {
       this.hasAlert = workgroupData.hasAlert;
       this.hasNewAlert = workgroupData.hasNewAlert;
       this.status = workgroupData.completionStatus;
-      this.score = workgroupData.score >= 0 ? workgroupData.score : '-';
+      this.score = workgroupData.score != null ? workgroupData.score : '-';
     }
 
     this.update();

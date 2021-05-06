@@ -43,6 +43,8 @@ export class TeacherDataService extends DataService {
   ) {
     super(upgrade, ProjectService);
     this.studentData = {
+      annotationsByNodeId: {},
+      annotationsToWorkgroupId: {},
       componentStatesByWorkgroupId: {},
       componentStatesByNodeId: {},
       componentStatesByComponentId: {}
@@ -463,17 +465,11 @@ export class TeacherDataService extends DataService {
 
   processAnnotations(annotations) {
     this.studentData.annotations = annotations;
-    this.initializeAnnotationsDataStructures();
     for (const annotation of annotations) {
       this.addAnnotationToAnnotationsToWorkgroupId(annotation);
       this.addAnnotationToAnnotationsByNodeId(annotation);
     }
     this.AnnotationService.setAnnotations(this.studentData.annotations);
-  }
-
-  initializeAnnotationsDataStructures() {
-    this.studentData.annotationsToWorkgroupId = {};
-    this.studentData.annotationsByNodeId = {};
   }
 
   addAnnotationToAnnotationsToWorkgroupId(annotation) {
@@ -927,11 +923,9 @@ export class TeacherDataService extends DataService {
   }
 
   getTotalScoreByWorkgroupId(workgroupId: number) {
-    if (this.studentData.annotationsToWorkgroupId != null) {
-      const annotations = this.studentData.annotationsToWorkgroupId[workgroupId];
-      return this.AnnotationService.getTotalScoreForWorkgroup(annotations, workgroupId);
-    }
-    return null;
+    return this.AnnotationService.getTotalScore(
+      this.studentData.annotationsToWorkgroupId[workgroupId]
+    );
   }
 
   isAnyPeriodPaused() {

@@ -60,10 +60,10 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
       this.hasAlert = workgroupData.hasAlert;
       this.hasNewAlert = workgroupData.hasNewAlert;
       this.status = workgroupData.completionStatus;
-      this.score = workgroupData.score >= 0 ? workgroupData.score : '-';
-      this.initialScore = workgroupData.initialScore >= 0 ? workgroupData.initialScore : '-';
+      this.score = workgroupData.score != null ? workgroupData.score : '-';
+      this.initialScore = workgroupData.initialScore != null ? workgroupData.initialScore : '-';
       this.changeInScore =
-        workgroupData.score != -1 && workgroupData.initialScore != -1
+        workgroupData.score != null && workgroupData.initialScore != null
           ? workgroupData.score - workgroupData.initialScore
           : '-';
     }

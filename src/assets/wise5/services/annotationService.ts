@@ -277,34 +277,28 @@ export class AnnotationService {
     this.annotations = annotations;
   }
 
-  getTotalScoreForWorkgroup(annotations = [], workgroupId = -1) {
-    let totalScore = 0;
-    let hasScore = false;
+  getTotalScore(annotations = []) {
+    let totalScore: number = null;
     const scoresFound = []; // to prevent double counting if teacher scored component multiple times
-    for (let i = annotations.length - 1; i >= 0; i--) {
-      const annotation = annotations[i];
-      if (annotation.toWorkgroupId === workgroupId) {
-        if (this.isScoreOrAutoScore(annotation)) {
-          const nodeId = annotation.nodeId;
-          const componentId = annotation.componentId;
-          if (this.ProjectService.shouldIncludeInTotalScore(nodeId, componentId)) {
-            const scoreFound = `${nodeId}-${componentId}`;
-            if (!scoresFound.includes(scoreFound)) {
-              const data = annotation.data;
-              if (data != null) {
-                const value = data.value;
-                if (typeof value === 'number') {
-                  hasScore = true;
-                  totalScore += value;
-                  scoresFound.push(scoreFound);
-                }
-              }
-            }
-          }
-        }
+    const scoreAnnotations = this.getScoreAnnotations(annotations);
+    for (let i = scoreAnnotations.length - 1; i >= 0; i--) {
+      const annotation = scoreAnnotations[i];
+      const component = `${annotation.nodeId}-${annotation.componentId}`;
+      if (!scoresFound.includes(component)) {
+        totalScore += annotation.data.value;
+        scoresFound.push(component);
       }
     }
-    return hasScore ? totalScore : null;
+    return totalScore;
+  }
+
+  getScoreAnnotations(annotations = []) {
+    return annotations.filter((annotation) => {
+      return (
+        this.isScoreOrAutoScore(annotation) &&
+        this.ProjectService.shouldIncludeInTotalScore(annotation.nodeId, annotation.componentId)
+      );
+    });
   }
 
   isScoreOrAutoScore(annotation: any): boolean {
@@ -312,10 +306,10 @@ export class AnnotationService {
   }
 
   getTotalNodeScoreForWorkgroup(workgroupId: number, nodeId: string) {
-    const annotationsForNode = this.annotations.filter((annotation) => {
-      return annotation.nodeId === nodeId;
+    const annotationsForNodeAndWorkgroup = this.annotations.filter((annotation) => {
+      return annotation.nodeId === nodeId && annotation.toWorkgroupId === workgroupId;
     });
-    return this.getTotalScoreForWorkgroup(annotationsForNode, workgroupId);
+    return this.getTotalScore(annotationsForNodeAndWorkgroup);
   }
 
   componentExists(nodeId, componentId) {

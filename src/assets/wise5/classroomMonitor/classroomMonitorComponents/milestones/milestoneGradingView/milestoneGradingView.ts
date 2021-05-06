@@ -70,7 +70,7 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     if (latestScoreAnnotation) {
       score = this.AnnotationService.getScoreValueFromScoreAnnotation(latestScoreAnnotation);
     }
-    return typeof score === 'number' ? score : -1;
+    return score;
   }
 
   expandAll(): void {

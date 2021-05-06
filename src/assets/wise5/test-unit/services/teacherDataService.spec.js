@@ -394,7 +394,6 @@ function shouldAddAnnotationToAnnotationsToWorkgroupId() {
       toWorkgroupId: workgroupId1,
       nodeId: nodeId1
     };
-    TeacherDataService.initializeAnnotationsDataStructures();
     TeacherDataService.addAnnotationToAnnotationsToWorkgroupId(annotation1);
     const annotations = TeacherDataService.studentData.annotationsToWorkgroupId[workgroupId1];
     expect(annotations.length).toEqual(1);
@@ -411,7 +410,6 @@ function shouldAddAnnotationToAnnotationsByNodeId() {
       toWorkgroupId: workgroupId1,
       nodeId: nodeId1
     };
-    TeacherDataService.initializeAnnotationsDataStructures();
     TeacherDataService.addAnnotationToAnnotationsByNodeId(annotation1);
     const annotations = TeacherDataService.studentData.annotationsByNodeId[nodeId1];
     expect(annotations.length).toEqual(1);
@@ -720,7 +718,7 @@ function shouldInjectRevisionCounterWhenFromDifferentComponents() {
 }
 
 function shouldInjectRevisionCounterWhenSomeFromDifferentComponents() {
-  it(`should inject revision counter into component states when some of the component states are 
+  it(`should inject revision counter into component states when some of the component states are
   different components`, () => {
     const workgroupId = 1;
     const componentState1 = {
