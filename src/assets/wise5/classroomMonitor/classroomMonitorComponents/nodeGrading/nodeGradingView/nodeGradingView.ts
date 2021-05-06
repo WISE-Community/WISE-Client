@@ -187,7 +187,10 @@ export class NodeGradingViewController {
     const completionStatus = this.getCompletionStatusByWorkgroupId(workgroupId);
     workgroup.isVisible = completionStatus.isVisible ? 1 : 0;
     workgroup.completionStatus = this.getWorkgroupCompletionStatus(completionStatus);
-    workgroup.score = this.getScoreByWorkgroupId(workgroupId);
+    workgroup.score = this.AnnotationService.getTotalNodeScoreForWorkgroup(
+      workgroupId,
+      this.nodeId
+    );
     if (!init) {
       this.workgroupsById[workgroupId] = angular.copy(workgroup);
     }
@@ -251,11 +254,6 @@ export class NodeGradingViewController {
       }
     }
     return null;
-  }
-
-  getScoreByWorkgroupId(workgroupId: number): number {
-    const score = this.AnnotationService.getTotalNodeScoreForWorkgroup(workgroupId, this.nodeId);
-    return typeof score === 'number' ? score : -1;
   }
 
   /**
