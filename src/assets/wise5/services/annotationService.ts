@@ -279,6 +279,7 @@ export class AnnotationService {
 
   getTotalScoreForWorkgroup(annotations = [], workgroupId = -1) {
     let totalScore = 0;
+    let hasScore = false;
     const scoresFound = []; // to prevent double counting if teacher scored component multiple times
     for (let i = annotations.length - 1; i >= 0; i--) {
       const annotation = annotations[i];
@@ -293,6 +294,7 @@ export class AnnotationService {
               if (data != null) {
                 const value = data.value;
                 if (typeof value === 'number') {
+                  hasScore = true;
                   totalScore += value;
                   scoresFound.push(scoreFound);
                 }
@@ -302,7 +304,7 @@ export class AnnotationService {
         }
       }
     }
-    return totalScore;
+    return hasScore ? totalScore : null;
   }
 
   isScoreOrAutoScore(annotation: any): boolean {
