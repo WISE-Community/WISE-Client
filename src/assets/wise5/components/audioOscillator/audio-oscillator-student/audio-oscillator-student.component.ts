@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
@@ -44,7 +47,10 @@ export class AudioOscillatorStudent extends ComponentStudent {
     private AudioOscillatorService: AudioOscillatorService,
     protected NodeService: NodeService,
     protected sanitizer: DomSanitizer,
+    protected NotebookService: NotebookService,
+    protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
@@ -52,8 +58,11 @@ export class AudioOscillatorStudent extends ComponentStudent {
       ComponentService,
       ConfigService,
       NodeService,
+      NotebookService,
       sanitizer,
+      StudentAssetService,
       StudentDataService,
+      upgrade,
       UtilService
     );
   }

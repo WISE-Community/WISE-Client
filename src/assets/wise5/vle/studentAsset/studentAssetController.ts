@@ -16,6 +16,7 @@ class StudentAssetController {
   templateUrl: string;
   nodeId: string;
   componentId: string;
+  convertedComponents: string[] = ['Discussion', 'Label'];
 
   static $inject = [
     '$filter',
@@ -90,7 +91,7 @@ class StudentAssetController {
       this.nodeId,
       this.componentId
     );
-    if (component.type === 'Discussion') {
+    if (this.convertedComponents.includes(component.type)) {
       this.StudentAssetService.broadcastAttachStudentAsset(
         this.nodeId,
         this.componentId,
