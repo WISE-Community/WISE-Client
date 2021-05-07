@@ -1,0 +1,68 @@
+$margin-spacing: 20px;
+
+.main-div {
+  margin-left: 10px;
+}
+
+.prompt {
+  margin-bottom: $margin-spacing;
+}
+
+.input-wrapper {
+  min-height: 60px;
+  max-width: 800px;
+}
+
+.add-button {
+  margin-right: $margin-spacing;
+}
+
+.label-text-input-div {
+  min-width: 400px;
+  margin-right: $margin-spacing;
+}
+
+.label-text-input {
+  width: 100%;
+}
+
+.delete-button {
+  margin-right: $margin-spacing;
+}
+
+.add-to-notebook-button {
+  margin-right: $margin-spacing;
+}
+
+.upload-button {
+  margin-right: $margin-spacing;
+}
+
+.reset-button {
+  margin-right: $margin-spacing;
+}
+
+.label-canvas-container {
+  margin-top: 10px;
+  margin-bottom: $margin-spacing;
+}
+
+.label-canvas {
+  border: 1px solid black;
+}
+
+.save-button {
+  margin-right: 10px;
+  min-width: 88px;
+}
+
+.submit-button {
+  margin-left: 10px;
+  margin-right: 10px;
+  min-width: 88px;
+}
+
+.save-message {
+  font-size: 13px;
+  letter-spacing: .02em;
+}

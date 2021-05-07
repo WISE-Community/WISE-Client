@@ -1,0 +1,130 @@
+<div class="main-div">
+  <div class="prompt"
+      *ngIf="isPromptVisible">
+    <span [innerHTML]="prompt"></span>
+    <possible-score [maxScore]="componentContent.maxScore"></possible-score>
+  </div>
+  <div class="input-wrapper" fxLayout="row wrap" fxLayoutAlign="start center">
+    <button
+        *ngIf="isAddNewLabelButtonVisible && !createLabelMode"
+        mat-button
+        class="mat-primary mat-raised-button add-button"
+        (click)="addNewLabel()"
+        [disabled]="isDisabled"
+        matTooltip="Add New Label"
+        matTooltipPosition="above"
+        i18n-matTooltip>
+      <mat-icon>add</mat-icon>
+    </button>
+    <div class="label-text-input-div">
+      <mat-form-field *ngIf="editLabelMode" class="label-text-input">
+        <mat-label i18n>Label Text</mat-label>
+        <input matInput
+            id="editLabelTextInput-{{componentId}}"
+            #editLabelTextInput
+            type="text"
+            [(ngModel)]="selectedLabel.textString"
+            (ngModelChange)="selectedLabelTextChanged(selectedLabel, selectedLabel.text, selectedLabel.textString)"
+            [disabled]="isDisabled">
+      </mat-form-field>
+    </div>
+    <button
+        mat-button
+        class="mat-primary mat-raised-button delete-button"
+        (click)="deleteLabelButtonClicked()"
+        *ngIf="!isDisabled && selectedLabel != null && selectedLabel.canDelete"
+        [disabled]="isDisabled"
+        matTooltip="Delete"
+        matTooltipPosition="above"
+        i18n-matTooltip>
+      <mat-icon>delete</mat-icon>
+    </button>
+    <span style="flex-grow: 1;"></span>
+    <button
+        mat-button
+        class="mat-primary mat-raised-button add-to-notebook-button"
+        (click)="snipImage($event)"
+        *ngIf="isShowAddToNotebookButton"
+        [disabled]="isDisabled"
+        matTooltip="Add to Notebook"
+        matTooltipPosition="above"
+        i18n-matTooltip>
+      <mat-icon>note_add</mat-icon>
+    </button>
+    <br/>
+    <button
+        *ngIf="componentContent.enableStudentUploadBackground && backgroundImage == null"
+        mat-button
+        class="mat-primary mat-raised-button upload-button"
+        (click)="showStudentAssets()"
+        matTooltip="Upload Background Image"
+        matTooltipPosition="above"
+        i18n-matTooltip>
+      <mat-icon>attach_file</mat-icon>
+    </button>
+    <button
+        *ngIf="componentContent.enableStudentUploadBackground && backgroundImage != null"
+        mat-button
+        class="mat-primary mat-raised-button upload-button"
+        (click)="deleteBackgroundImage()"
+        matTooltip="Delete Background Image"
+        matTooltipPosition="above"
+        i18n-matTooltip>
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+    <button
+        mat-button
+        class="mat-primary mat-raised-button reset-button"
+        (click)="resetButtonClicked()"
+        *ngIf="isResetButtonVisible"
+        [disabled]="isDisabled"
+        matTooltip="Reset"
+        matTooltipPosition="above"
+        i18n-matTooltip>
+        <mat-icon>restore</mat-icon>
+    </button>
+  </div>
+  <div id="canvasParent_{{canvasId}}" class="label-canvas-container">
+    <canvas id="{{canvasId}}"
+        class="label-canvas"
+        width="800"
+        height="600">
+    </canvas>
+  </div>
+  <div *ngIf="isSaveOrSubmitButtonVisible"
+      class="component__actions"
+      fxLayout="row"
+      fxLayoutAlign="start center">
+    <button
+        *ngIf="isSaveButtonVisible"
+        mat-button
+        class="mat-primary mat-raised-button save-button"
+        (click)="saveButtonClicked()"
+        [disabled]="isDisabled || !isDirty">
+      Save
+    </button>
+    <button
+        *ngIf="isSubmitButtonVisible"
+        mat-button
+        class="mat-primary mat-raised-button submit-button"
+        (click)="submitButtonClicked()"
+        [disabled]="isDisabled || !isSubmitDirty || isSubmitButtonDisabled">
+      Submit
+    </button>
+    <span *ngIf="saveMessage.text"
+        class="component__actions__info save-message">
+      {{saveMessage.text}}
+      <span class="component__actions__more"
+          matTooltip="{{ saveMessage.time | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"
+          matTooltipPosition="above">
+        {{ saveMessage.time | amTimeAgo }}
+      </span>
+    </span>
+  </div>
+  <component-annotations *ngIf="mode === 'student'"
+      [annotations]="latestAnnotations"
+      [maxScore]="componentContent.maxScore"
+      [nodeId]="nodeId"
+      [componentId]="componentId">
+  </component-annotations>
+</div>

@@ -46,7 +46,7 @@
     "cssnano": "^4.1.10",
     "dom-autoscroller": "^2.3.4",
     "eventemitter2": "^5.0.1",
-    "fabric": "^3.6.3",
+    "fabric": "^3.6.6",
     "highcharts": "^9.0.1",
     "highcharts-angular": "^2.10.0",
     "hopscotch": "^0.3.1",
