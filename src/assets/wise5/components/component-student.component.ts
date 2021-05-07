@@ -570,8 +570,6 @@ export abstract class ComponentStudent {
         controller: GenerateImageDialog,
         controllerAs: '$ctrl',
         locals: {
-          nodeId: componentState.nodeId,
-          componentId: componentState.componentId,
           componentState: componentState
         }
       })

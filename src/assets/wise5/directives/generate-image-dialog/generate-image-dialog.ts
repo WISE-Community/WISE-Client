@@ -1,12 +1,11 @@
+import { Subscription } from 'rxjs';
+
 export class GenerateImageDialog {
   destroyDoneRenderingComponentListenerTimeout: any;
-  doneRenderingComponentSubscription: any;
+  doneRenderingComponentSubscription: Subscription;
 
   static $inject = [
-    '$scope',
     '$mdDialog',
-    'nodeId',
-    'componentId',
     'componentState',
     'NodeService',
     'ConceptMapService',
@@ -17,10 +16,7 @@ export class GenerateImageDialog {
   ];
 
   constructor(
-    private $scope,
     private $mdDialog,
-    private nodeId,
-    private componentId,
     private componentState,
     private NodeService,
     private ConceptMapService,
@@ -28,23 +24,19 @@ export class GenerateImageDialog {
     private EmbeddedService,
     private GraphService,
     private TableService
-  ) {
-    $scope.nodeId = nodeId;
-    $scope.componentId = componentId;
-    $scope.componentState = componentState;
+  ) {}
+
+  $onInit() {
     this.subscribeToDoneRenderingComponent();
     this.setDestroyTimeout();
-    $scope.closeDialog = function () {
-      $mdDialog.hide();
-    };
   }
 
   subscribeToDoneRenderingComponent(): void {
     this.doneRenderingComponentSubscription = this.NodeService.doneRenderingComponent$.subscribe(
       ({ nodeId, componentId }) => {
         if (
-          this.componentState.nodeId == nodeId &&
-          this.componentState.componentId == componentId
+          nodeId == this.componentState.nodeId &&
+          componentId == this.componentState.componentId
         ) {
           setTimeout(() => {
             this.generateImage();
@@ -55,8 +47,7 @@ export class GenerateImageDialog {
   }
 
   generateImage() {
-    const componentService = this.getComponentService(this.componentState.componentType);
-    componentService
+    this.getComponentService(this.componentState.componentType)
       .generateImageFromRenderedComponentState(this.componentState)
       .then((image: any) => {
         clearTimeout(this.destroyDoneRenderingComponentListenerTimeout);

@@ -20,20 +20,16 @@ import { UpgradeModule } from '@angular/upgrade/static';
 })
 export class LabelStudent extends ComponentStudent {
   backgroundImage: string;
-  canCreateLabels: boolean = true;
   canvas: any;
   canvasHeight: number = 600;
   canvasId: string;
   canvasWidth: number = 800;
-  createLabelMode: boolean = false;
   circleZIndex: number = 2;
   disabled: boolean;
   editLabelMode: boolean = false;
   enableCircles: boolean = true;
   ENTER_KEY_CODE: number = 13;
   isAddNewLabelButtonVisible: boolean = true;
-  isCancelButtonVisible: boolean = false;
-  isPromptVisible: boolean = true;
   isResetButtonVisible: boolean = true;
   isShowAddToNotebookButton: boolean = false;
   labels: any[] = [];
@@ -79,7 +75,7 @@ export class LabelStudent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     this.enableFabricTextPadding();
-    this.canvasId = 'canvas_' + this.nodeId + '_' + this.componentId;
+    this.canvasId = `canvas_${this.nodeId}_${this.componentId}`;
     this.initializeComponent(this.componentContent);
     this.isShowAddToNotebookButton = this.isAddToNotebookEnabled();
     this.broadcastDoneRenderingComponent();
@@ -119,7 +115,6 @@ export class LabelStudent extends ComponentStudent {
     }
     if (this.isDisabled) {
       this.isAddNewLabelButtonVisible = false;
-      this.canCreateLabels = false;
       this.isResetButtonVisible = false;
     }
   }
@@ -143,7 +138,7 @@ export class LabelStudent extends ComponentStudent {
     }
     this.initializeStudentWork(this.componentContent, this.componentState);
     if (
-      this.getBackgroundImage() == null &&
+      this.backgroundImage == null &&
       this.componentContent.backgroundImage != null &&
       this.componentContent.backgroundImage !== ''
     ) {
@@ -424,7 +419,7 @@ export class LabelStudent extends ComponentStudent {
     const componentState: any = this.NodeService.createNewComponentState();
     const studentData: any = this.createStudentData(
       this.getLabelData(),
-      this.getBackgroundImage(),
+      this.backgroundImage,
       this.submitCounter,
       this.getStudentDataVersion()
     );
@@ -458,8 +453,6 @@ export class LabelStudent extends ComponentStudent {
   }
 
   createLabelOnCanvas(): void {
-    this.createLabelMode = false;
-    this.isCancelButtonVisible = false;
     const newLabelLocation = this.getNewLabelLocation();
     const canEdit = true;
     const canDelete = true;
@@ -502,12 +495,12 @@ export class LabelStudent extends ComponentStudent {
   }
 
   getNextPointLocation(): any {
-    const unoccupiedPointLocation = this.getUnoccupiedPointLocation();
-    if (unoccupiedPointLocation == null) {
-      return { pointX: this.NEW_LABEL_X_LOCATION, pointY: this.NEW_LABEL_Y_LOCATION };
-    } else {
-      return unoccupiedPointLocation;
-    }
+    return (
+      this.getUnoccupiedPointLocation() || {
+        pointX: this.NEW_LABEL_X_LOCATION,
+        pointY: this.NEW_LABEL_Y_LOCATION
+      }
+    );
   }
 
   getNextTextLocation(pointX: number, pointY: number): any {
@@ -573,14 +566,6 @@ export class LabelStudent extends ComponentStudent {
     this.canvas.setBackgroundImage(backgroundImagePath, this.canvas.renderAll.bind(this.canvas));
   }
 
-  /**
-   * Get the background image path
-   * @returns the background image path
-   */
-  getBackgroundImage(): string {
-    return this.backgroundImage;
-  }
-
   createKeydownListener(): void {
     window.addEventListener(
       'keydown',
@@ -592,11 +577,9 @@ export class LabelStudent extends ComponentStudent {
   }
 
   keyPressed(e: any): void {
-    const keyCode = e.keyCode;
-    if (keyCode === this.ENTER_KEY_CODE) {
+    if (e.keyCode === this.ENTER_KEY_CODE) {
       if (this.selectedLabel != null) {
-        // There is a selected label so we will treat the enter keypress as the intention of
-        // submitting any changes to the label text.
+        // treat the enter keypress as the intention of submitting any changes to the label text.
         this.unselectAll();
         this.canvas.renderAll();
       }
@@ -859,10 +842,6 @@ export class LabelStudent extends ComponentStudent {
     return null;
   }
 
-  /**
-   * Create an image from a component state and set the image as the background.
-   * @param componentState A component state.
-   */
   setComponentStateAsBackgroundImage(componentState: any): void {
     this.generateImageFromComponentState(componentState).then((image: any) => {
       this.setBackgroundImage(image.url);

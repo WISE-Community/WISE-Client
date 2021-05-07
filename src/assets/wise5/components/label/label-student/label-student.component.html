@@ -1,12 +1,11 @@
 <div class="main-div">
-  <div class="prompt"
-      *ngIf="isPromptVisible">
+  <div class="prompt">
     <span [innerHTML]="prompt"></span>
     <possible-score [maxScore]="componentContent.maxScore"></possible-score>
   </div>
   <div class="input-wrapper" fxLayout="row wrap" fxLayoutAlign="start center">
     <button
-        *ngIf="isAddNewLabelButtonVisible && !createLabelMode"
+        *ngIf="isAddNewLabelButtonVisible"
         mat-button
         class="mat-primary mat-raised-button add-button"
         (click)="addNewLabel()"
