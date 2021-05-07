@@ -9526,7 +9526,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Play</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">190</context>
         </context-group>
         <target state="needs-translation">Play</target>
       </trans-unit>
@@ -9534,7 +9534,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Stop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">191</context>
+          <context context-type="linenumber">194</context>
         </context-group>
         <target state="needs-translation">Stop</target>
       </trans-unit>
@@ -9542,7 +9542,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">455</context>
+          <context context-type="linenumber">457</context>
         </context-group>
         <target state="needs-translation">Saved</target>
       </trans-unit>
@@ -9550,7 +9550,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Auto Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">459</context>
+          <context context-type="linenumber">461</context>
         </context-group>
         <target state="needs-translation">Auto Saved</target>
       </trans-unit>
@@ -9558,7 +9558,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Submitted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">463</context>
+          <context context-type="linenumber">465</context>
         </context-group>
         <target state="needs-translation">Submitted</target>
       </trans-unit>
@@ -12162,7 +12162,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>Notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <target state="needs-translation">Notebook</target>
       </trans-unit>
@@ -12170,7 +12170,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>note</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <target state="needs-translation">note</target>
       </trans-unit>
@@ -12178,7 +12178,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <target state="needs-translation">notes</target>
       </trans-unit>
@@ -12186,7 +12186,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>Manage Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <target state="needs-translation">Manage Notes</target>
       </trans-unit>
@@ -12194,7 +12194,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <target state="needs-translation">report</target>
       </trans-unit>
@@ -12202,7 +12202,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>reports</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target state="needs-translation">reports</target>
       </trans-unit>
@@ -12210,7 +12210,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>Report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <target state="needs-translation">Report</target>
       </trans-unit>
