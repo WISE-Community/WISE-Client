@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../services/teacherProjectService';
 import { ProjectAssetService } from '../../../app/services/projectAssetService';
 import { SpaceService } from '../services/spaceService';
 import { StudentStatusService } from '../services/studentStatusService';
+import { DataExportService } from '../services/dataExportService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherWebSocketService } from '../services/teacherWebSocketService';
 import { AdvancedProjectAuthoringComponent } from '../authoringTool/advanced/advanced-project-authoring.component';
@@ -123,6 +124,7 @@ angular
     'tableAuthoringComponentModule',
     'tableGradingComponentModule'
   ])
+  .service('DataExportService', downgradeInjectable(DataExportService))
   .service('MilestoneService', downgradeInjectable(MilestoneService))
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
   .factory('ProjectAssetService', downgradeInjectable(ProjectAssetService))

@@ -2,6 +2,7 @@
 
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
+import { DataExportService } from '../../services/dataExportService';
 import { MatchService } from '../../components/match/matchService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
@@ -47,6 +48,7 @@ class DataExportController {
     '$state',
     'AnnotationService',
     'ConfigService',
+    'DataExportService',
     'FileSaver',
     'MatchService',
     'ProjectService',
@@ -61,6 +63,7 @@ class DataExportController {
     private $state: any,
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
+    private DataExportService: DataExportService,
     private FileSaver: any,
     private MatchService: MatchService,
     private ProjectService: TeacherProjectService,
@@ -147,7 +150,7 @@ class DataExportController {
    */
   exportStudentWork(exportType) {
     this.showDownloadingExportMessage();
-    var selectedNodes = null;
+    var selectedNodes = [];
     var selectedNodesMap = null;
     if (this.exportStepSelectionType === 'exportSelectSteps') {
       selectedNodes = this.getSelectedNodesToExport();
@@ -158,7 +161,7 @@ class DataExportController {
         selectedNodesMap = this.getSelectedNodesMap(selectedNodes);
       }
     }
-    this.TeacherDataService.getExport('allStudentWork', selectedNodes).then((result) => {
+    this.DataExportService.retrieveStudentDataExport(selectedNodes).then((result) => {
       var workgroups = this.ConfigService.getClassmateUserInfosSortedByWorkgroupId();
       var runId = this.ConfigService.getRunId();
       var rows = [];
@@ -1224,7 +1227,7 @@ class DataExportController {
 
   exportNotebookItems(exportType) {
     this.showDownloadingExportMessage();
-    this.TeacherDataService.getExport(exportType).then((result) => {
+    this.DataExportService.retrieveNotebookExport(exportType).then((result) => {
       const notebookItems = result;
       const columnNames = [
         'ID',
@@ -1339,7 +1342,7 @@ class DataExportController {
 
   exportNotifications() {
     this.showDownloadingExportMessage();
-    this.TeacherDataService.getExport('notifications').then((result) => {
+    this.DataExportService.retrieveNotificationsExport().then((result) => {
       const notifications = result;
       const columnNames = [
         'ID',
@@ -1451,7 +1454,7 @@ class DataExportController {
 
   exportStudentAssets() {
     this.showDownloadingExportMessage();
-    this.TeacherDataService.getExport('studentAssets').then(() => {
+    this.DataExportService.retrieveStudentAssetsExport().then(() => {
       this.hideDownloadingExportMessage();
     });
   }
@@ -1637,7 +1640,7 @@ class DataExportController {
    */
   exportOneWorkgroupPerRow() {
     this.showDownloadingExportMessage();
-    var selectedNodes = null;
+    var selectedNodes = [];
 
     /*
      * holds the mappings from nodeid or nodeid-componentid to a boolean
@@ -1657,7 +1660,7 @@ class DataExportController {
       }
     }
 
-    this.TeacherDataService.getExport('oneWorkgroupPerRow', selectedNodes).then((result) => {
+    this.DataExportService.retrieveOneWorkgroupPerRowExport(selectedNodes).then((result) => {
       var rows = [];
       var projectId = this.ConfigService.getProjectId();
       var projectTitle = this.ProjectService.getProjectTitle();
@@ -2394,7 +2397,7 @@ class DataExportController {
 
   exportRawData() {
     this.showDownloadingExportMessage();
-    var selectedNodes = null;
+    var selectedNodes = [];
 
     /*
      * holds the mappings from nodeid or nodeid-componentid to a boolean
@@ -2413,7 +2416,7 @@ class DataExportController {
         selectedNodesMap = this.getSelectedNodesMap(selectedNodes);
       }
     }
-    this.TeacherDataService.getExport('rawData', selectedNodes).then((result) => {
+    this.DataExportService.retrieveRawDataExport(selectedNodes).then((result) => {
       var runId = this.ConfigService.getRunId();
       var data: any = {};
       var workgroups = this.ConfigService.getClassmateUserInfosSortedByWorkgroupId();
@@ -2586,7 +2589,7 @@ class DataExportController {
   exportDiscussionComponent(nodeId, component) {
     this.showDownloadingExportMessage();
     const components = this.getComponentsParam(nodeId, component.id);
-    this.TeacherDataService.getExport('allStudentWork', components).then((result) => {
+    this.DataExportService.retrieveStudentDataExport(components).then((result) => {
       const columnNames = [];
       const columnNameToNumber = {};
       let rows = [
@@ -2836,7 +2839,7 @@ class DataExportController {
    */
   exportMatchComponent(nodeId: string, component: any) {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.TeacherDataService.getExport('allStudentWork', components).then((result: any) => {
+    this.DataExportService.retrieveStudentDataExport(components).then((result: any) => {
       this.generateMatchComponentExport(nodeId, component);
     });
   }
