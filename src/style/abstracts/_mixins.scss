@@ -194,6 +194,10 @@
       padding: 4px 8px 4px 0;
     }
   }
+
+  img[snip] {
+    cursor: pointer;
+  }
 }
 
 // Define a custom mixin that takes in the current material theme and colors
