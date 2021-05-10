@@ -2,7 +2,6 @@
 
 import { ComponentSelectComponent } from '../../../../../app/classroom-monitor/component-select/component-select.component';
 import NodeGradingView from './nodeGradingView/nodeGradingView';
-import StepTools from './stepTools/stepTools';
 import WorkgroupItem from './workgroupItem/workgroupItem';
 import * as angular from 'angular';
 import { WorkgroupInfoComponent } from './workgroupInfo/workgroup-info.component';
@@ -16,7 +15,6 @@ const NodeGrading = angular
     'componentSelect',
     downgradeComponent({ component: ComponentSelectComponent }) as angular.IDirectiveFactory
   )
-  .component('cmStepTools', StepTools)
   .directive(
     'workgroupInfo',
     downgradeComponent({ component: WorkgroupInfoComponent }) as angular.IDirectiveFactory

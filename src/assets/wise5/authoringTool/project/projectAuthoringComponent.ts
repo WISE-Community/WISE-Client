@@ -92,7 +92,6 @@ class ProjectAuthoringController {
     this.projectScriptFilename = this.ProjectService.getProjectScriptFilename();
     this.stepNodeSelected = false;
     this.activityNodeSelected = false;
-    this.TeacherDataService.setCurrentNode(null);
     this.metadata = this.ProjectService.getProjectMetadata();
     this.subscribeToCurrentAuthors(this.projectId).then(() => {
       this.ProjectService.notifyAuthorProjectBegin(this.projectId);
@@ -202,17 +201,16 @@ class ProjectAuthoringController {
 
   nodeClicked(nodeId) {
     this.unselectAllItems();
-    this.TeacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.nodeId);
-    this.$state.go('root.at.project.node', { nodeId: nodeId });
+    this.TeacherDataService.setCurrentNodeByNodeId(nodeId);
   }
 
   constraintIconClicked(nodeId) {
-    this.TeacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nodeId);
+    this.TeacherDataService.setCurrentNodeByNodeId(nodeId);
     this.$state.go('root.at.project.node.advanced.constraint', { nodeId: nodeId });
   }
 
   branchIconClicked(nodeId) {
-    this.TeacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nodeId);
+    this.TeacherDataService.setCurrentNodeByNodeId(nodeId);
     this.$state.go('root.at.project.node.advanced.path', { nodeId: nodeId });
   }
 

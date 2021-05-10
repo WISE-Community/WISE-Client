@@ -155,7 +155,6 @@ class NodeAuthoringController {
 
   close() {
     this.TeacherDataService.setCurrentNode(null);
-    this.$state.go('root.at.project', { projectId: this.projectId });
     this.scrollToTopOfPage();
   }
 
