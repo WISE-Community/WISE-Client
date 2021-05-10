@@ -269,6 +269,16 @@ class AuthoringToolController {
       })
     );
 
+    this.subscriptions.add(
+      this.TeacherDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
+        if (currentNode) {
+          this.$state.go('root.at.project.node', { nodeId: currentNode.id });
+        } else {
+          this.$state.go('root.at.project', { projectId: this.projectId });
+        }
+      })
+    );
+
     if (this.$state.current.name === 'root.at.main') {
       this.saveEvent('projectListViewed', 'Navigation');
     }

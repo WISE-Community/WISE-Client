@@ -1,4 +1,4 @@
-<div class="main-div">
+<div class="main-div" #main>
   <div [ngSwitch]="choiceType">
     <div class="prompt-div">
       <label *ngIf="isPromptVisible">
@@ -66,39 +66,16 @@
       Incorrect
     </div>
   </div>
-  <div *ngIf="isSaveOrSubmitButtonVisible"
-      fxLayout="row"
-      fxLayoutAlign="start center">
-    <button *ngIf="isSaveButtonVisible"
-        mat-button
-        class="mat-primary mat-raised-button save-button"
-        (click)="saveButtonClicked()"
-        [disabled]="isDisabled || !isDirty"
-        aria-label="Save"
-        i18n-aria-label
-        i18n>
-      Save
-    </button>
-    <button *ngIf="isSubmitButtonVisible"
-        mat-button
-        class="mat-primary mat-raised-button submit-button"
-        (click)="submitButtonClicked()"
-        [disabled]="isSubmitButtonDisabled || isDisabled || !isSubmitDirty"
-        aria-label="Submit"
-        i18n-aria-label
-        i18n>
-      Submit
-    </button>
-    <span *ngIf="saveMessage.text"
-      class="component__actions__info save-message">
-        {{ saveMessage.text }}
-        <span class="component__actions__more"
-            matTooltip="{{ saveMessage.time | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"
-            matTooltipPosition="above">
-          {{ saveMessage.time | amTimeAgo }}
-        </span>
-    </span>
-  </div>
+  <component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
+      [isDirty]="isDirty"
+      [isDisabled]="isDisabled"
+      [isSaveButtonVisible]="isSaveButtonVisible"
+      [isSubmitButtonVisible]="isSubmitButtonVisible"
+      [isSubmitDirty]="isSubmitDirty"
+      [saveMessage]="saveMessage"
+      (saveButtonClicked)="saveButtonClicked($event)"
+      (submitButtonClicked)="submitButtonClicked($event)">
+  </component-save-submit-buttons>
   <component-annotations *ngIf="mode === 'student'"
       [annotations]="latestAnnotations"
       [maxScore]="componentContent.maxScore"

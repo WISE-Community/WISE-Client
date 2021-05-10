@@ -77,6 +77,7 @@ import { GraphGrading } from '../assets/wise5/components/graph/graph-grading/gra
 import { HighchartsChartModule } from 'highcharts-angular';
 import { AnimationGrading } from '../assets/wise5/components/animation/animation-grading/animation-grading.component';
 import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
+import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-gr
     RubricAuthoringComponent,
     StatusIconComponent,
     StepInfoComponent,
+    StepToolsComponent,
     SummaryAuthoring,
     TableAuthoring,
     TableGrading,
