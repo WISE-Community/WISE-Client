@@ -5,14 +5,18 @@
       i18n-aria-label
       [disabled]="!prevId"
       (click)="goToPrevNode()"
-      matTooltip="Previous Step" i18n-matTooltip matTooltipPosition="below">
+      matTooltip="Previous Step"
+      i18n-matTooltip
+      matTooltipPosition="below">
     <mat-icon>{{icons.prev}}</mat-icon>
   </button>
   <node-icon *ngIf="nodeId" [nodeId]="nodeId" size="18"></node-icon>&nbsp;
   <mat-select id="stepSelectMenu"
       class="mat-button notice-bg-bg"
       aria-label="Select a Step"
+      i18n-aria-label
       placeholder="Select a Step"
+      i18n-placeholder
       [(ngModel)]="nodeId"
       (selectionChange)="nodeChanged()">
     <mat-select-trigger>
@@ -38,7 +42,9 @@
       i18n-aria-label
       [disabled]="!nextId"
       (click)="goToNextNode()"
-      matTooltip="Next Step" i18n-matTooltip matTooltipPosition="below">
+      matTooltip="Next Step"
+      i18n-matTooltip
+      matTooltipPosition="below">
     <mat-icon>{{icons.next}}</mat-icon>
   </button>
 </div>

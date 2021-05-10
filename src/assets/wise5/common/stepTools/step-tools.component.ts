@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Directionality } from '@angular/cdk/bidi';
 import { Subscription } from 'rxjs';
 import { NodeService } from '../../services/nodeService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -10,7 +11,6 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
   encapsulation: ViewEncapsulation.None
 })
 export class StepToolsComponent {
-  is_rtl: boolean;
   icons: any;
   nextId: any;
   nodeIds: string[];
@@ -19,6 +19,7 @@ export class StepToolsComponent {
   subscriptions: Subscription = new Subscription();
 
   constructor(
+    private dir: Directionality,
     private NodeService: NodeService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService
@@ -28,10 +29,10 @@ export class StepToolsComponent {
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
     this.calculateNodeIds();
     this.updateModel();
-    this.is_rtl = $('html').attr('dir') === 'rtl';
-    this.icons = { prev: 'chevron_left', next: 'chevron_right' };
-    if (this.is_rtl) {
+    if (this.dir.value === 'rtl') {
       this.icons = { prev: 'chevron_right', next: 'chevron_left' };
+    } else {
+      this.icons = { prev: 'chevron_left', next: 'chevron_right' };
     }
     this.subscriptions.add(
       this.TeacherDataService.currentNodeChanged$.subscribe(() => {
