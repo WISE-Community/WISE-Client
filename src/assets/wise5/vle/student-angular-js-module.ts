@@ -9,6 +9,7 @@ import VLEController from '../vle/vleController';
 import { VLEProjectService } from '../vle/vleProjectService';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { ComponentAnnotationsComponent } from '../directives/componentAnnotations/component-annotations.component';
+import { ComponentSaveSubmitButtons } from '../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { NotebookLauncherComponent } from '../../../../src/app/notebook/notebook-launcher/notebook-launcher.component';
 
 export function createStudentAngularJSModule(type = 'preview') {
@@ -37,6 +38,10 @@ export function createStudentAngularJSModule(type = 'preview') {
     .directive(
       'componentAnnotations',
       downgradeComponent({ component: ComponentAnnotationsComponent }) as angular.IDirectiveFactory
+    )
+    .directive(
+      'componentSaveSubmitButtons',
+      downgradeComponent({ component: ComponentSaveSubmitButtons }) as angular.IDirectiveFactory
     )
     .config([
       '$stateProvider',
