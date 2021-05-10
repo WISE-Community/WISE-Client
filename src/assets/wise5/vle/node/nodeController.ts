@@ -22,7 +22,7 @@ class NodeController {
   autoSaveInterval: number = 60000; // in milliseconds;
   autoSaveIntervalId: any;
   componentToScope: any;
-  convertedComponents: string[] = ['AudioOscillator', 'MultipleChoice'];
+  convertedComponents: string[] = ['AudioOscillator', 'Label', 'MultipleChoice'];
   dirtyComponentIds: any = [];
   dirtySubmitComponentIds: any = [];
   endedAndLockedMessage: string;

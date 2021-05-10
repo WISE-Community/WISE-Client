@@ -99,72 +99,6 @@ export class TeacherDataService extends DataService {
     this.AnnotationService.broadcastAnnotationReceived({ annotation: annotation });
   }
 
-  /**
-   * Get the data for the export and generate the csv file that will be downloaded
-   * @param exportType the type of export
-   */
-  getExport(exportType, selectedNodes = []): any {
-    if (this.isStudentWorkExport(exportType)) {
-      return this.retrieveStudentDataExport(selectedNodes);
-    } else if (this.isNotebookExport(exportType)) {
-      return this.retrieveNotebookExport(exportType);
-    } else if (this.isNotificationsExport(exportType)) {
-      return this.retrieveNotificationsExport();
-    } else if (this.isExportStudentAssets(exportType)) {
-      return this.retrieveStudentAssetsExport();
-    } else if (this.isExportOneWorkgroupPerRow(exportType)) {
-      return this.retrieveOneWorkgroupPerRowExport(selectedNodes);
-    } else if (this.isExportRawData(exportType)) {
-      return this.retrieveRawDataExport(selectedNodes);
-    }
-  }
-
-  getExportURL(runId, exportType) {
-    return this.ConfigService.getConfigParam('runDataExportURL') + `/${runId}/${exportType}`;
-  }
-
-  isStudentWorkExport(exportType) {
-    return exportType === 'allStudentWork' || exportType === 'latestStudentWork';
-  }
-
-  isEventExport(exportType) {
-    return exportType === 'events';
-  }
-
-  isNotebookExport(exportType) {
-    return exportType === 'latestNotebookItems' || exportType === 'allNotebookItems';
-  }
-
-  isNotificationsExport(exportType) {
-    return exportType === 'notifications';
-  }
-
-  isExportStudentAssets(exportType) {
-    return exportType === 'studentAssets';
-  }
-
-  isExportOneWorkgroupPerRow(exportType) {
-    return exportType === 'oneWorkgroupPerRow';
-  }
-
-  isExportRawData(exportType) {
-    return exportType === 'rawData';
-  }
-
-  retrieveStudentDataExport(selectedNodes) {
-    let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('getStudentWork', 'true')
-      .set('getEvents', 'false')
-      .set('getAnnotations', 'true');
-    if (selectedNodes != null) {
-      for (const selectedNode of selectedNodes) {
-        params = params.append('components', JSON.stringify(selectedNode));
-      }
-    }
-    return this.retrieveStudentData(params);
-  }
-
   retrieveEventsExport(includeStudentEvents, includeTeacherEvents, includeNames) {
     const params = new HttpParams()
       .set('runId', this.ConfigService.getRunId())
@@ -184,62 +118,6 @@ export class TeacherDataService extends DataService {
       .then((data: any) => {
         return this.handleStudentDataResponse(data);
       });
-  }
-
-  retrieveNotebookExport(exportType) {
-    const params = new HttpParams().set('exportType', exportType);
-    const options = { params: params };
-    return this.http
-      .get(this.ConfigService.getConfigParam('notebookURL'), options)
-      .toPromise()
-      .then((data: any) => {
-        return data;
-      });
-  }
-
-  retrieveNotificationsExport() {
-    const url = this.getExportURL(this.ConfigService.getRunId(), 'notifications');
-    return this.http
-      .get(url)
-      .toPromise()
-      .then((data: any) => {
-        return data;
-      });
-  }
-
-  retrieveOneWorkgroupPerRowExport(selectedNodes) {
-    let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('getStudentWork', 'true')
-      .set('getEvents', 'true')
-      .set('getAnnotations', 'true');
-    if (selectedNodes != null) {
-      for (const selectedNode of selectedNodes) {
-        params = params.append('components', JSON.stringify(selectedNode));
-      }
-    }
-    return this.retrieveStudentData(params);
-  }
-
-  retrieveStudentAssetsExport() {
-    window.location.href = this.getExportURL(this.ConfigService.getRunId(), 'studentAssets');
-    return new Promise((resolve) => {
-      resolve([]);
-    });
-  }
-
-  retrieveRawDataExport(selectedNodes) {
-    let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('getStudentWork', 'true')
-      .set('getEvents', 'true')
-      .set('getAnnotations', 'true');
-    if (selectedNodes != null) {
-      for (const selectedNode of selectedNodes) {
-        params = params.append('components', JSON.stringify(selectedNode));
-      }
-    }
-    return this.retrieveStudentData(params);
   }
 
   saveEvent(context, nodeId, componentId, componentType, category, event, data) {

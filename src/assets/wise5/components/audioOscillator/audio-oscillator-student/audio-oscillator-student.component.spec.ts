@@ -7,8 +7,10 @@ import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
+import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
@@ -34,8 +36,10 @@ describe('AudioOscillatorStudent', () => {
         ComponentService,
         ConfigService,
         { provide: NodeService, useClass: MockService },
+        { provide: NotebookService, useClass: MockService },
         ProjectService,
         SessionService,
+        StudentAssetService,
         StudentDataService,
         TagService,
         UtilService

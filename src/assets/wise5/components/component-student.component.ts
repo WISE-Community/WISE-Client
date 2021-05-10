@@ -1,11 +1,16 @@
 import { Directive, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
+import { GenerateImageDialog } from '../directives/generate-image-dialog/generate-image-dialog';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NodeService } from '../services/nodeService';
+import { NotebookService } from '../services/notebookService';
+import { StudentAssetService } from '../services/studentAssetService';
 import { StudentDataService } from '../services/studentDataService';
 import { UtilService } from '../services/utilService';
+import { StudentAssetRequest } from '../vle/studentAsset/StudentAssetRequest';
 import { ComponentService } from './componentService';
 import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
@@ -27,7 +32,7 @@ export abstract class ComponentStudent {
   @Input()
   workgroupId: number;
 
-  attachments: any[];
+  attachments: any[] = [];
   componentId: string;
   componentType: string;
   prompt: SafeHtml;
@@ -47,6 +52,7 @@ export abstract class ComponentStudent {
     text: '',
     time: ''
   };
+  showAddToNotebookButton: boolean;
   requestComponentStateSubscription: Subscription;
   annotationSavedToServerSubscription: Subscription;
   nodeSubmitClickedSubscription: Subscription;
@@ -58,8 +64,11 @@ export abstract class ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
     protected sanitizer: DomSanitizer,
+    protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {}
 
@@ -77,6 +86,10 @@ export abstract class ComponentStudent {
         this.workgroupId
       );
     }
+    this.showAddToNotebookButton =
+      this.componentContent.showAddToNotebookButton == null
+        ? true
+        : this.componentContent.showAddToNotebookButton;
     this.subscribeToSubscriptions();
   }
 
@@ -92,6 +105,7 @@ export abstract class ComponentStudent {
     this.subscribeToAnnotationSavedToServer();
     this.subscribeToNodeSubmitClicked();
     this.subscribeToNotifyConnectedComponents();
+    this.subscribeToAttachStudentAsset();
     this.subscribeToStudentWorkSavedToServer();
     this.subscribeToRequestComponentState();
   }
@@ -143,6 +157,34 @@ export abstract class ComponentStudent {
   handleNodeSubmit(): void {
     this.isSubmit = true;
   }
+
+  subscribeToAttachStudentAsset() {
+    this.subscriptions.add(
+      this.StudentAssetService.attachStudentAsset$.subscribe(
+        (studentAssetRequest: StudentAssetRequest) => {
+          if (this.isForThisComponent(studentAssetRequest)) {
+            this.copyAndAttachStudentAsset(studentAssetRequest.asset);
+          }
+        }
+      )
+    );
+  }
+
+  copyAndAttachStudentAsset(studentAsset: any): any {
+    this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset: any) => {
+      const attachment = {
+        studentAssetId: copiedAsset.id,
+        iconURL: copiedAsset.iconURL,
+        url: copiedAsset.url,
+        type: copiedAsset.type
+      };
+      this.attachments.push(attachment);
+      this.attachStudentAsset(copiedAsset);
+      this.studentDataChanged();
+    });
+  }
+
+  attachStudentAsset(studentAsset: any): void {}
 
   subscribeToStudentWorkSavedToServer(): void {
     this.subscriptions.add(
@@ -513,5 +555,49 @@ export abstract class ComponentStudent {
      * the promise immediately
      */
     promise.resolve(componentState);
+  }
+
+  /**
+   * Render the component state and then generate an image from it.
+   * @param componentState The component state to render.
+   * @return A promise that will return an image.
+   */
+  generateImageFromComponentState(componentState: any): any {
+    return this.upgrade.$injector
+      .get('$mdDialog')
+      .show({
+        templateUrl: 'assets/wise5/directives/generate-image-dialog/generate-image-dialog.html',
+        controller: GenerateImageDialog,
+        controllerAs: '$ctrl',
+        locals: {
+          componentState: componentState
+        }
+      })
+      .then((image: any) => {
+        return image;
+      });
+  }
+
+  isAddToNotebookEnabled() {
+    return (
+      this.isNotebookEnabled() &&
+      this.isStudentNoteClippingEnabled() &&
+      this.showAddToNotebookButton
+    );
+  }
+
+  isNotebookEnabled() {
+    return this.NotebookService.isNotebookEnabled();
+  }
+
+  isStudentNoteClippingEnabled() {
+    return this.NotebookService.isStudentNoteClippingEnabled();
+  }
+
+  showStudentAssets() {
+    this.StudentAssetService.broadcastShowStudentAssets({
+      nodeId: this.nodeId,
+      componentId: this.componentId
+    });
   }
 }
