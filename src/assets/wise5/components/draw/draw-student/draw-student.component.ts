@@ -1,5 +1,5 @@
 import { fabric } from 'fabric';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
@@ -13,12 +13,12 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { DrawService } from '../drawService';
-// import 'drawing-tool/dist/drawing-tool.css';
 
 @Component({
   selector: 'draw-student',
   templateUrl: 'draw-student.component.html',
-  styleUrls: ['draw-student.component.scss', 'drawing-tool.scss']
+  styleUrls: ['draw-student.component.scss', 'drawing-tool.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DrawStudent extends ComponentStudent {
   drawingTool: any;
