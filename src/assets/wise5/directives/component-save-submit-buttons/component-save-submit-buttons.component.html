@@ -1,0 +1,24 @@
+<div class="component__actions" fxLayout="row" fxLayoutAlign="start center">
+  <button *ngIf="isSaveButtonVisible"
+      mat-button
+      class="mat-primary mat-raised-button save-button"
+      (click)="save()"
+      [disabled]="isDisabled || !isDirty"
+      aria-label="Save"
+      i18n-aria-label
+      i18n>Save</button>
+  <button *ngIf="isSubmitButtonVisible"
+      mat-button
+      class="mat-primary mat-raised-button submit-button"
+      (click)="submit()"
+      [disabled]="isSubmitButtonDisabled || isDisabled || !isSubmitDirty"
+      aria-label="Submit"
+      i18n-aria-label
+      i18n>Submit</button>
+  <span *ngIf="saveMessage.text" class="component__actions__info save-message">
+    {{ saveMessage.text }}
+    <span class="component__actions__more"
+        matTooltip="{{ saveMessage.time | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"
+        matTooltipPosition="above">{{ saveMessage.time | amTimeAgo }}</span>
+  </span>
+</div>
