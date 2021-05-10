@@ -21,11 +21,13 @@ import { MultipleChoiceStudent } from '../assets/wise5/components/multipleChoice
 import { OutsideUrlStudent } from '../assets/wise5/components/outsideURL/outside-url-student/outside-url-student.component';
 import { AudioOscillatorStudent } from '../assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component';
 import { LabelStudent } from '../assets/wise5/components/label/label-student/label-student.component';
+import { DrawStudent } from '../assets/wise5/components/draw/draw-student/draw-student.component';
 
 @NgModule({
   declarations: [
     AudioOscillatorStudent,
     ComponentAnnotationsComponent,
+    DrawStudent,
     HtmlStudent,
     LabelStudent,
     MultipleChoiceStudent,

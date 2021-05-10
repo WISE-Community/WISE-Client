@@ -13,6 +13,8 @@ import { Injectable } from '@angular/core';
 import { StudentDataService } from '../../services/studentDataService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { UtilService } from '../../services/utilService';
+// import DrawingTool from 'drawing-tool';
+// import 'drawing-tool/dist/drawing-tool.css';
 
 @Injectable()
 export class DrawService extends ComponentService {
@@ -168,8 +170,7 @@ export class DrawService extends ComponentService {
     drawingToolId: string,
     stamps: any = {},
     width: number = 800,
-    height: number = 600,
-    isHideDrawingTools: boolean = false
+    height: number = 600
   ): any {
     const drawingTool = new DrawingTool('#' + drawingToolId, {
       stamps: stamps,
@@ -177,35 +178,35 @@ export class DrawService extends ComponentService {
       width: width,
       height: height
     });
-    let state = null;
-    $('#set-background').on('click', () => {
-      drawingTool.setBackgroundImage($('#background-src').val());
-    });
-    $('#resize-background').on('click', () => {
-      drawingTool.resizeBackgroundToCanvas();
-    });
-    $('#resize-canvas').on('click', () => {
-      drawingTool.resizeCanvasToBackground();
-    });
-    $('#shrink-background').on('click', () => {
-      drawingTool.shrinkBackgroundToCanvas();
-    });
-    $('#clear').on('click', () => {
-      drawingTool.clear(true);
-    });
-    $('#save').on('click', () => {
-      state = drawingTool.save();
-      $('#load').removeAttr('disabled');
-    });
-    $('#load').on('click', () => {
-      if (state === null) return;
-      drawingTool.load(state);
-    });
-    if (isHideDrawingTools) {
-      $('#' + drawingToolId)
-        .find('.dt-tools')
-        .hide();
-    }
+    // let state = null;
+    // $('#set-background').on('click', () => {
+    //   drawingTool.setBackgroundImage($('#background-src').val());
+    // });
+    // $('#resize-background').on('click', () => {
+    //   drawingTool.resizeBackgroundToCanvas();
+    // });
+    // $('#resize-canvas').on('click', () => {
+    //   drawingTool.resizeCanvasToBackground();
+    // });
+    // $('#shrink-background').on('click', () => {
+    //   drawingTool.shrinkBackgroundToCanvas();
+    // });
+    // $('#clear').on('click', () => {
+    //   drawingTool.clear(true);
+    // });
+    // $('#save').on('click', () => {
+    //   state = drawingTool.save();
+    //   $('#load').removeAttr('disabled');
+    // });
+    // $('#load').on('click', () => {
+    //   if (state === null) return;
+    //   drawingTool.load(state);
+    // });
+    // if (isHideDrawingTools) {
+    //   $('#' + drawingToolId)
+    //     .find('.dt-tools')
+    //     .hide();
+    // }
     return drawingTool;
   }
 }

@@ -44,8 +44,7 @@ export class DrawGrading extends ComponentGrading {
       this.drawingToolId,
       this.componentContent.stamps,
       this.componentContent.width,
-      this.componentContent.height,
-      isHideDrawingTools
+      this.componentContent.height
     );
     this.drawingTool.canvas.removeListeners();
   }

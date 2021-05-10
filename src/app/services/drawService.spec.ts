@@ -271,13 +271,7 @@ function initializeDrawingTool() {
     const width: number = 400;
     const height: number = 300;
     const isHideDrawingTools: boolean = false;
-    const drawingTool = service.initializeDrawingTool(
-      drawingToolId,
-      stamps,
-      width,
-      height,
-      isHideDrawingTools
-    );
+    const drawingTool = service.initializeDrawingTool(drawingToolId, stamps, width, height);
     expect(drawingTool).not.toBeNull();
     expect(drawingTool.options.stamps).toEqual(stamps);
     expect(drawingTool.canvas.width).toEqual(width);
