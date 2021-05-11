@@ -22,9 +22,11 @@ import { OutsideUrlStudent } from '../assets/wise5/components/outsideURL/outside
 import { AudioOscillatorStudent } from '../assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component';
 import { LabelStudent } from '../assets/wise5/components/label/label-student/label-student.component';
 import { ComponentSaveSubmitButtons } from '../assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { AddToNotebookButton } from '../assets/wise5/directives/add-to-notebook-button/add-to-notebook-button.component';
 
 @NgModule({
   declarations: [
+    AddToNotebookButton,
     AudioOscillatorStudent,
     ComponentAnnotationsComponent,
     ComponentSaveSubmitButtons,
