@@ -4,8 +4,7 @@
   </style>
   <div>
     <md-input-container class='input-container input-container--open-response md-block md-no-float'>
-      <label class='input-label md-no-float' ng-disabled='openResponseController.isDisabled'
-           ng-if='::openResponseController.isPromptVisible'>
+      <label class='input-label md-no-float' ng-disabled='openResponseController.isDisabled'>
         <compile id='prompt' data='::openResponseController.getPrompt()'></compile>
         <possible-score [max-score]='openResponseController.componentContent.maxScore'></possible-score>
       </label>

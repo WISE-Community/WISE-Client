@@ -1,8 +1,5 @@
 <div class="main-div">
-  <div class="prompt">
-    <span [innerHTML]="prompt"></span>
-    <possible-score [maxScore]="componentContent.maxScore"></possible-score>
-  </div>
+  <component-header [componentContent]="componentContent"></component-header>
   <div class="input-wrapper" fxLayout="row wrap" fxLayoutAlign="start center">
     <button
         *ngIf="isAddNewLabelButtonVisible"
