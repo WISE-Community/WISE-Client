@@ -1212,44 +1212,6 @@ export class TeacherProjectService extends ProjectService {
     return node;
   }
 
-  getLibraryProjects() {
-    return this.http
-      .get(this.ConfigService.getConfigParam('getLibraryProjectsURL'))
-      .toPromise()
-      .then((projects) => {
-        return projects;
-      });
-  }
-
-  sortAndFilterUniqueLibraryProjects(libraryProjects) {
-    const flatProjectList = libraryProjects
-      .map((grade) => {
-        return grade.children;
-      })
-      .flat();
-    return this.filterUniqueProjects(flatProjectList).sort(this.sortByProjectIdDescending);
-  }
-
-  filterUniqueProjects(projects) {
-    const uniqueProjects = [];
-    const filteredProjects = {};
-    for (const project of projects) {
-      if (filteredProjects[project.id] == null) {
-        filteredProjects[project.id] = project;
-        uniqueProjects.push(project);
-      }
-    }
-    return uniqueProjects;
-  }
-
-  sortByProjectIdDescending(project1, project2) {
-    if (project1.id > project2.id) {
-      return -1;
-    } else {
-      return 1;
-    }
-  }
-
   getAutomatedAssessmentProjectId(): number {
     return this.ConfigService.getConfigParam('automatedAssessmentProjectId') || -1;
   }
