@@ -1,4 +1,4 @@
-<div>
-  <span [innerHTML]="prompt"></span>
+<div class="component-header" fxLayout="row wrap" fxLayoutGap="4px">
+  <div *ngIf="componentContent.prompt" [innerHTML]="prompt" class="prompt"></div>
   <possible-score [maxScore]="componentContent.maxScore"></possible-score>
 </div>

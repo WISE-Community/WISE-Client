@@ -3,6 +3,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'component-header',
+  styleUrls: ['component-header.component.scss'],
   templateUrl: 'component-header.component.html'
 })
 export class ComponentHeader {
