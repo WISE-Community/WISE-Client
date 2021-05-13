@@ -4,8 +4,7 @@
   </style>
   <md-input-container class='input-container md-block input-container--open-response input-container--component md-no-float'>
     <label class='input-label md-no-float'
-           ng-disabled='conceptMapController.isDisabled'
-           ng-if='conceptMapController.isPromptVisible'>
+           ng-disabled='conceptMapController.isDisabled'>
       <compile data='conceptMapController.getPrompt()'></compile>
     </label>
     <possible-score [max-score]='conceptMapController.componentContent.maxScore'></possible-score>

@@ -95,7 +95,6 @@ class MatchController extends ComponentController {
     this.isLatestComponentStateSubmit = false;
     this.sourceBucket = null;
     this.privateNotebookItems = [];
-    this.isPromptVisible = true;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     if (this.shouldImportPrivateNotes()) {

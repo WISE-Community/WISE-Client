@@ -10,7 +10,6 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { LabelService } from '../labelService';
 import { StudentAssetService } from '../../../services/studentAssetService';
-import { DomSanitizer } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
@@ -52,7 +51,6 @@ export class LabelStudent extends ComponentStudent {
     private LabelService: LabelService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
-    protected sanitizer: DomSanitizer,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected upgrade: UpgradeModule,
@@ -64,7 +62,6 @@ export class LabelStudent extends ComponentStudent {
       ConfigService,
       NodeService,
       NotebookService,
-      sanitizer,
       StudentAssetService,
       StudentDataService,
       upgrade,

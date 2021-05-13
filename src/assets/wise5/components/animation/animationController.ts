@@ -105,7 +105,6 @@ class AnimationController extends ComponentController {
     this.setSpeed(3);
     this.initializeCoordinates();
 
-    this.isPromptVisible = true;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
 

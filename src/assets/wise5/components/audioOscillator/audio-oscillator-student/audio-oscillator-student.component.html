@@ -1,9 +1,5 @@
 <div class="main-div">
-  <div class="prompt"
-      *ngIf="isPromptVisible">
-    <span [innerHTML]="prompt"></span>
-    <possible-score [maxScore]="componentContent.maxScore"></possible-score>
-  </div>
+  <component-header [componentContent]="componentContent"></component-header>
   <div fxLayout="row wrap" fxLayoutAlign="start center" class="interaction-div">
     <mat-form-field *ngIf="oscillatorTypes.length > 1" class="oscillator-type">
       <mat-label i18n>Oscillator Type</mat-label>
