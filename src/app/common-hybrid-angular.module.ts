@@ -6,6 +6,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { UtilService } from '../assets/wise5/services/utilService';
 import { ConfigService } from '../assets/wise5/services/configService';
 import { ProjectService } from '../assets/wise5/services/projectService';
+import { ProjectLibraryService } from '../assets/wise5/services/projectLibraryService';
 import { VLEProjectService } from '../assets/wise5/vle/vleProjectService';
 import { CRaterService } from '../assets/wise5/services/cRaterService';
 import { SessionService } from '../assets/wise5/services/sessionService';
@@ -143,6 +144,7 @@ export class EmptyComponent {}
     NotificationService,
     OutsideURLService,
     OpenResponseService,
+    ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,
     StudentAssetService,

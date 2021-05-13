@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../../../assets/wise5/services/configService';
+import { ProjectLibraryService } from '../../../../assets/wise5/services/projectLibraryService';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
 
 @Component({
@@ -21,6 +22,7 @@ export class ChooseImportStepComponent {
   constructor(
     private upgrade: UpgradeModule,
     private ConfigService: ConfigService,
+    private ProjectLibraryService: ProjectLibraryService,
     private ProjectService: TeacherProjectService
   ) {
     this.$state = this.upgrade.$injector.get('$state');
@@ -28,8 +30,8 @@ export class ChooseImportStepComponent {
 
   ngOnInit() {
     this.myProjectsList = this.ConfigService.getAuthorableProjects();
-    this.ProjectService.getLibraryProjects().then((libraryProjects) => {
-      this.libraryProjectsList = this.ProjectService.sortAndFilterUniqueLibraryProjects(
+    this.ProjectLibraryService.getLibraryProjects().then((libraryProjects) => {
+      this.libraryProjectsList = this.ProjectLibraryService.sortAndFilterUniqueProjects(
         libraryProjects
       );
     });
