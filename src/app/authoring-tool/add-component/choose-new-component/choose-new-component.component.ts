@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigService } from '../../../../assets/wise5/services/configService';
-import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
 import { UtilService } from '../../../../assets/wise5/services/utilService';
 
 @Component({
@@ -10,34 +8,13 @@ import { UtilService } from '../../../../assets/wise5/services/utilService';
   templateUrl: 'choose-new-component.component.html'
 })
 export class ChooseNewComponent {
-  componentTypes: any;
+  componentTypes: any[];
   selectedComponentType: string;
 
-  constructor(
-    private upgrade: UpgradeModule,
-    private ConfigService: ConfigService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
-  ) {}
+  constructor(private upgrade: UpgradeModule, private UtilService: UtilService) {}
 
   ngOnInit() {
-    this.componentTypes = [
-      { type: 'Animation', name: this.UtilService.getComponentTypeLabel('Animation') },
-      { type: 'AudioOscillator', name: this.UtilService.getComponentTypeLabel('AudioOscillator') },
-      { type: 'ConceptMap', name: this.UtilService.getComponentTypeLabel('ConceptMap') },
-      { type: 'Discussion', name: this.UtilService.getComponentTypeLabel('Discussion') },
-      { type: 'Draw', name: this.UtilService.getComponentTypeLabel('Draw') },
-      { type: 'Embedded', name: this.UtilService.getComponentTypeLabel('Embedded') },
-      { type: 'Graph', name: this.UtilService.getComponentTypeLabel('Graph') },
-      { type: 'Label', name: this.UtilService.getComponentTypeLabel('Label') },
-      { type: 'Match', name: this.UtilService.getComponentTypeLabel('Match') },
-      { type: 'MultipleChoice', name: this.UtilService.getComponentTypeLabel('MultipleChoice') },
-      { type: 'OpenResponse', name: this.UtilService.getComponentTypeLabel('OpenResponse') },
-      { type: 'OutsideURL', name: this.UtilService.getComponentTypeLabel('OutsideURL') },
-      { type: 'HTML', name: this.UtilService.getComponentTypeLabel('HTML') },
-      { type: 'Summary', name: this.UtilService.getComponentTypeLabel('Summary') },
-      { type: 'Table', name: this.UtilService.getComponentTypeLabel('Table') }
-    ];
+    this.componentTypes = this.UtilService.getComponentTypes();
     this.selectedComponentType = this.upgrade.$injector.get('$stateParams').componentType;
   }
 
@@ -53,8 +30,7 @@ export class ChooseNewComponent {
 
   cancel() {
     this.upgrade.$injector.get('$state').go('root.at.project.node', {
-      projectId: this.ConfigService.getProjectId(),
-      nodeId: this.TeacherDataService.getCurrentNodeId()
+      nodeId: this.upgrade.$injector.get('$stateParams').nodeId
     });
   }
 }

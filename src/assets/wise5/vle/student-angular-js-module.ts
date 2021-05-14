@@ -9,6 +9,7 @@ import VLEController from '../vle/vleController';
 import { VLEProjectService } from '../vle/vleProjectService';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { ComponentAnnotationsComponent } from '../directives/componentAnnotations/component-annotations.component';
+import { ComponentHeader } from '../directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { NotebookLauncherComponent } from '../../../../src/app/notebook/notebook-launcher/notebook-launcher.component';
 import { AddToNotebookButton } from '../directives/add-to-notebook-button/add-to-notebook-button.component';
@@ -43,6 +44,10 @@ export function createStudentAngularJSModule(type = 'preview') {
     .directive(
       'componentAnnotations',
       downgradeComponent({ component: ComponentAnnotationsComponent }) as angular.IDirectiveFactory
+    )
+    .directive(
+      'componentHeader',
+      downgradeComponent({ component: ComponentHeader }) as angular.IDirectiveFactory
     )
     .directive(
       'componentSaveSubmitButtons',

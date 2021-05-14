@@ -5,6 +5,7 @@ import '../common-angular-js-module';
 import { MilestoneService } from '../services/milestoneService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { ProjectAssetService } from '../../../app/services/projectAssetService';
+import { ProjectLibraryService } from '../services/projectLibraryService';
 import { SpaceService } from '../services/spaceService';
 import { StudentStatusService } from '../services/studentStatusService';
 import { DataExportService } from '../services/dataExportService';
@@ -127,6 +128,7 @@ angular
   ])
   .service('DataExportService', downgradeInjectable(DataExportService))
   .service('MilestoneService', downgradeInjectable(MilestoneService))
+  .service('ProjectLibraryService', downgradeInjectable(ProjectLibraryService))
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
   .factory('ProjectAssetService', downgradeInjectable(ProjectAssetService))
   .factory('SpaceService', downgradeInjectable(SpaceService))

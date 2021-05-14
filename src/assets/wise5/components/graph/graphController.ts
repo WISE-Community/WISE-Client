@@ -1639,10 +1639,6 @@ class GraphController extends ComponentController {
     }
   }
 
-  showPrompt() {
-    return this.isPromptVisible === true;
-  }
-
   showResetGraphButton() {
     return this.isResetGraphButtonVisible === true;
   }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -46,7 +45,6 @@ export class AudioOscillatorStudent extends ComponentStudent {
     protected ConfigService: ConfigService,
     private AudioOscillatorService: AudioOscillatorService,
     protected NodeService: NodeService,
-    protected sanitizer: DomSanitizer,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
@@ -59,7 +57,6 @@ export class AudioOscillatorStudent extends ComponentStudent {
       ConfigService,
       NodeService,
       NotebookService,
-      sanitizer,
       StudentAssetService,
       StudentDataService,
       upgrade,
