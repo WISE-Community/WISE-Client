@@ -752,7 +752,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
@@ -4946,7 +4946,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <target state="translated">重置</target>
       </trans-unit>
@@ -9538,7 +9538,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Oscillator Type</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">5</context>
         </context-group>
         <target state="needs-translation">Oscillator Type</target>
       </trans-unit>
@@ -9546,7 +9546,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Frequency (Hz)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target state="needs-translation">Frequency (Hz)</target>
       </trans-unit>
@@ -9554,7 +9554,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Play</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">196</context>
         </context-group>
         <target state="needs-translation">Play</target>
       </trans-unit>
@@ -9562,7 +9562,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Stop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">200</context>
         </context-group>
         <target state="needs-translation">Stop</target>
       </trans-unit>
@@ -9570,7 +9570,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">498</context>
+          <context context-type="linenumber">495</context>
         </context-group>
         <target state="needs-translation">Saved</target>
       </trans-unit>
@@ -9578,7 +9578,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Auto Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">502</context>
+          <context context-type="linenumber">499</context>
         </context-group>
         <target state="needs-translation">Auto Saved</target>
       </trans-unit>
@@ -9586,7 +9586,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Submitted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">506</context>
+          <context context-type="linenumber">503</context>
         </context-group>
         <target state="needs-translation">Submitted</target>
       </trans-unit>
@@ -11126,7 +11126,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">730</context>
+          <context context-type="linenumber">727</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this label?
 
@@ -11152,7 +11152,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Add New Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <target state="needs-translation">Add New Label</target>
       </trans-unit>
@@ -11160,7 +11160,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Label Text</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <target state="needs-translation">Label Text</target>
       </trans-unit>
@@ -11168,7 +11168,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Add to Notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <target state="needs-translation">Add to Notebook</target>
       </trans-unit>
@@ -11176,7 +11176,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Upload Background Image</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <target state="needs-translation">Upload Background Image</target>
       </trans-unit>
@@ -11184,7 +11184,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Delete Background Image</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="needs-translation">Delete Background Image</target>
       </trans-unit>
@@ -11192,7 +11192,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>A New Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">464</context>
+          <context context-type="linenumber">461</context>
         </context-group>
         <target state="needs-translation">A New Label</target>
       </trans-unit>
@@ -11200,7 +11200,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset to the initial state?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">852</context>
+          <context context-type="linenumber">849</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset to the initial state?</target>
       </trans-unit>
@@ -11208,7 +11208,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to delete the background image?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">917</context>
+          <context context-type="linenumber">914</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the background image?</target>
       </trans-unit>
@@ -11432,7 +11432,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">61,62</context>
+          <context context-type="linenumber">56,57</context>
         </context-group>
         <target state="needs-translation"> Correct </target>
       </trans-unit>
@@ -11448,7 +11448,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">66,67</context>
+          <context context-type="linenumber">61,62</context>
         </context-group>
         <target state="needs-translation"> Incorrect </target>
       </trans-unit>
@@ -11534,7 +11534,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount}}"/> attempt </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">47,49</context>
+          <context context-type="linenumber">42,44</context>
         </context-group>
         <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount}}"/> attempt </target>
       </trans-unit>
@@ -11542,7 +11542,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempts </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">52,54</context>
+          <context context-type="linenumber">47,49</context>
         </context-group>
         <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempts </target>
       </trans-unit>
