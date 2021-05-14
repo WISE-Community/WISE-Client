@@ -1,9 +1,7 @@
 <button mat-button
-    class="mat-primary mat-raised-button"
+    class="mat-accent mat-button"
     [disabled]="isDisabled"
     (click)="addToNotebook()"
-    matTooltip="Add to Notebook"
-    matTooltipPosition="above"
     i18n-matTooltip>
-  <mat-icon>note_add</mat-icon>
+  <mat-icon>note_add</mat-icon>&nbsp;<ng-container i18n>Add to Notebook</ng-container>
 </button>
