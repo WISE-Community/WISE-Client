@@ -49,7 +49,6 @@ describe('TeacherProjectService', () => {
   testDeleteTransition();
   testGetNodeIdAfter();
   testCreateNodeAfter();
-  shouldGetTheNodeIdAndComponentIdObjects();
   shouldGetTheBranchLetter();
   lockNode();
   unlockNode();
@@ -221,45 +220,6 @@ function testCreateNodeAfter() {
       expect(newNode.transitionLogic.transitions[0].to).toEqual('node20');
       expect(service.getNodeIdAfter('node19')).toEqual('node1000');
     });
-  });
-}
-
-function shouldGetTheNodeIdAndComponentIdObjects() {
-  it('should get the node id and component id objects', () => {
-    const project = {
-      nodes: [
-        {
-          id: 'node1',
-          components: [
-            {
-              id: 'node1component1'
-            }
-          ]
-        },
-        {
-          id: 'node2',
-          components: [
-            {
-              id: 'node2component1'
-            },
-            {
-              id: 'node2component2'
-            }
-          ]
-        }
-      ]
-    };
-    service.setProject(project);
-    let nodeIdAndComponentIds = service.getNodeIdsAndComponentIds('node1');
-    expect(nodeIdAndComponentIds.length).toEqual(1);
-    expect(nodeIdAndComponentIds[0].nodeId).toEqual('node1');
-    expect(nodeIdAndComponentIds[0].componentId).toEqual('node1component1');
-    nodeIdAndComponentIds = service.getNodeIdsAndComponentIds('node2');
-    expect(nodeIdAndComponentIds.length).toEqual(2);
-    expect(nodeIdAndComponentIds[0].nodeId).toEqual('node2');
-    expect(nodeIdAndComponentIds[0].componentId).toEqual('node2component1');
-    expect(nodeIdAndComponentIds[1].nodeId).toEqual('node2');
-    expect(nodeIdAndComponentIds[1].componentId).toEqual('node2component2');
   });
 }
 
