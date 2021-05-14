@@ -36,17 +36,10 @@
       <mat-icon>delete</mat-icon>
     </button>
     <span style="flex-grow: 1;"></span>
-    <button
-        mat-button
-        class="mat-primary mat-raised-button add-to-notebook-button"
-        (click)="snipImage($event)"
-        *ngIf="isShowAddToNotebookButton"
-        [disabled]="isDisabled"
-        matTooltip="Add to Notebook"
-        matTooltipPosition="above"
-        i18n-matTooltip>
-      <mat-icon>note_add</mat-icon>
-    </button>
+    <add-to-notebook-button *ngIf="isShowAddToNotebookButton"
+        class="add-to-notebook-button"
+        [isDisabled]="isDisabled"
+        (snipImage)="snipImage()"></add-to-notebook-button>
     <br/>
     <button
         *ngIf="componentContent.enableStudentUploadBackground && backgroundImage == null"
