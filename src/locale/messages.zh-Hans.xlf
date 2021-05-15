@@ -4946,7 +4946,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <target state="translated">重新设置</target>
       </trans-unit>
@@ -11126,7 +11126,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">727</context>
+          <context context-type="linenumber">714</context>
         </context-group>
         <target state="translated">您确定要删除此标签吗？
 
@@ -11164,19 +11164,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <target state="needs-translation">Label Text</target>
       </trans-unit>
-      <trans-unit id="4e270813457170b43f357a1593877efa8829d79a" datatype="html">
-        <source>Add to Notebook</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-        <target state="needs-translation">Add to Notebook</target>
-      </trans-unit>
       <trans-unit id="58a5686b8ceaee99cd9e3c1ad7b85c3fd6a30aa1" datatype="html">
         <source>Upload Background Image</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <target state="needs-translation">Upload Background Image</target>
       </trans-unit>
@@ -11184,7 +11176,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Delete Background Image</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <target state="needs-translation">Delete Background Image</target>
       </trans-unit>
@@ -11200,7 +11192,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Are you sure you want to reset to the initial state?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">849</context>
+          <context context-type="linenumber">836</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset to the initial state?</target>
       </trans-unit>
@@ -11208,7 +11200,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Are you sure you want to delete the background image?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">914</context>
+          <context context-type="linenumber">901</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the background image?</target>
       </trans-unit>
@@ -12197,6 +12189,14 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
           <context context-type="linenumber">20</context>
         </context-group>
         <target state="translated">(无)</target>
+      </trans-unit>
+      <trans-unit id="4e270813457170b43f357a1593877efa8829d79a" datatype="html">
+        <source>Add to Notebook</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/add-to-notebook-button/add-to-notebook-button.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <target state="needs-translation">Add to Notebook</target>
       </trans-unit>
       <trans-unit id="13914f9fe459520b280fb4e82a4c44812a6d74ad" datatype="html">
         <source>Score: <x id="INTERPOLATION" equiv-text="{{annotations.score.data.value}}"/><x id="INTERPOLATION_1" equiv-text="{{maxScoreDisplay}}"/></source>
