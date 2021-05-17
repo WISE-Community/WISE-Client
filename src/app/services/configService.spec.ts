@@ -7,6 +7,10 @@ let service: ConfigService;
 let http: HttpTestingController;
 
 let configJSON;
+let studentUserId = 2;
+let studentWorkgroupId = 200;
+let teacherUserId = 1;
+let teacherWorkgroupId = 100;
 
 describe('ConfigService', () => {
   beforeEach(() => {
@@ -35,6 +39,7 @@ describe('ConfigService', () => {
   getPeriodIdGivenWorkgroupId();
   calculateIsRunActive();
   isEndedAndLocked();
+  isTeacherIdentifyingId();
 });
 
 function retrieveConfig() {
@@ -224,5 +229,37 @@ function isEndedAndLocked_EndTimeInPastAndLocked_ReturnEndedAndLocked() {
   it('should calculate is ended and locked when end time is in the past and locked', () => {
     configJSON.isLockedAfterEndDate = true;
     expectIsEndedAndLocked(new Date(2020, 4, 30), true);
+  });
+}
+
+function isTeacherIdentifyingId() {
+  describe('isTeacherIdentifyingId', () => {
+    beforeEach(() => {
+      service.setConfig({
+        userInfo: {
+          myUserInfo: {
+            myClassInfo: {
+              teacherUserInfo: {
+                userId: teacherUserId,
+                workgroupId: teacherWorkgroupId
+              },
+              sharedTeacherUserInfos: []
+            }
+          }
+        }
+      });
+    });
+    it('should check if a workgroup id is a teacher workgroup id when it is', () => {
+      expect(service.isTeacherIdentifyingId('workgroupId', teacherWorkgroupId)).toEqual(true);
+    });
+    it('should check if a workgroup id is a teacher workgroup id when it is not', () => {
+      expect(service.isTeacherIdentifyingId('workgroupId', studentWorkgroupId)).toEqual(false);
+    });
+    it('should check if a user id is a teacher user id when it is', () => {
+      expect(service.isTeacherIdentifyingId('userId', teacherUserId)).toEqual(true);
+    });
+    it('should check if a user id is a teacher user id when it is not', () => {
+      expect(service.isTeacherIdentifyingId('userId', studentUserId)).toEqual(false);
+    });
   });
 }
