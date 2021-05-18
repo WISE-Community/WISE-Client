@@ -819,17 +819,32 @@ class DataExportController {
   }
 
   handleExportEventsCallback(events: any[]): void {
-    this.DataExportService.processEvents(events);
     const rows = [];
     const columnNames = this.getEventsColumnNames();
     const columnNameToNumber = this.getColumnNameToNumber(columnNames);
     rows.push(this.createHeaderRow(columnNames));
     let rowCounter = 1;
     if (this.includeStudentEvents) {
-      rowCounter = this.addStudentEvents(rows, rowCounter, columnNames, columnNameToNumber);
+      rowCounter = this.addStudentEvents(
+        rows,
+        rowCounter,
+        columnNames,
+        columnNameToNumber,
+        this.DataExportService.getStudentEvents(events).sort(
+          this.UtilService.sortByWorkgroupIdAndServerSaveTime
+        )
+      );
     }
     if (this.includeTeacherEvents) {
-      rowCounter = this.addTeacherEvents(rows, rowCounter, columnNames, columnNameToNumber);
+      rowCounter = this.addTeacherEvents(
+        rows,
+        rowCounter,
+        columnNames,
+        columnNameToNumber,
+        this.DataExportService.getTeacherEvents(events).sort(
+          this.UtilService.sortByUserIdAndServerSaveTime
+        )
+      );
     }
     const fileName = this.ConfigService.getRunId() + '_events.csv';
     this.generateCSVFile(rows, fileName);
@@ -888,14 +903,19 @@ class DataExportController {
     return headerRow;
   }
 
-  addStudentEvents(rows, rowCounter, columnNames, columnNameToNumber) {
+  addStudentEvents(
+    rows: any[],
+    rowCounter: number,
+    columnNames: string[],
+    columnNameToNumber: any,
+    events: any[]
+  ): number {
     const workgroups = this.ConfigService.getClassmateUserInfosSortedByWorkgroupId();
     for (const workgroup of workgroups) {
       const workgroupId = workgroup.workgroupId;
       const periodName = workgroup.periodName;
       const userInfo = this.ConfigService.getUserInfoByWorkgroupId(workgroupId);
       const extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
-      const events = this.DataExportService.getStudentEventsByWorkgroupId(workgroupId);
       for (const event of events) {
         const row = this.createStudentEventExportRow(
           columnNames,
@@ -922,21 +942,10 @@ class DataExportController {
     rows: any[],
     rowCounter: number,
     columnNames: any,
-    columnNameToNumber: any
+    columnNameToNumber: any,
+    events: any[]
   ): number {
-    const userInfo = this.ConfigService.getTeacherUserInfo();
-    rowCounter = this.addTeacherEvent(rows, rowCounter, columnNames, columnNameToNumber, userInfo);
-    const sharedTeacherUserInfos = this.ConfigService.getSharedTeacherUserInfos();
-    for (const sharedTeacherUserInfo of sharedTeacherUserInfos) {
-      rowCounter = this.addTeacherEvent(
-        rows,
-        rowCounter,
-        columnNames,
-        columnNameToNumber,
-        sharedTeacherUserInfo
-      );
-    }
-    return rowCounter;
+    return this.addTeacherEvent(rows, rowCounter, columnNames, columnNameToNumber, events);
   }
 
   addTeacherEvent(
@@ -944,18 +953,16 @@ class DataExportController {
     rowCounter: number,
     columnNames: any,
     columnNameToNumber: any,
-    userInfo: any
+    events: any[]
   ): number {
-    const username = this.getTeacherUsername(userInfo);
-    const events = this.DataExportService.getTeacherEventsByUserId(userInfo.userId);
     for (const event of events) {
       const row = this.createTeacherEventExportRow(
         columnNames,
         columnNameToNumber,
         rowCounter,
-        userInfo.workgroupId,
-        userInfo.userId,
-        username,
+        event.workgroupId,
+        event.userId,
+        this.ConfigService.getTeacherUsername(event.userId),
         event
       );
       rows.push(row);

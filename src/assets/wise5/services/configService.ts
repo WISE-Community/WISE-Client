@@ -588,13 +588,21 @@ export class ConfigService {
     if (teacherUserInfo[fieldName] === value) {
       return true;
     }
-    const sharedTeacherUserInfos = this.getSharedTeacherUserInfos();
-    for (const sharedTeacherUserInfo of sharedTeacherUserInfos) {
-      if (sharedTeacherUserInfo[fieldName] === value) {
-        return true;
+    return this.getSharedTeacherUserInfos().some((userInfo: any) => {
+      return userInfo[fieldName] === value;
+    });
+  }
+
+  getTeacherUsername(userId: number): string {
+    const teacherUserInfo = this.getTeacherUserInfo();
+    if (teacherUserInfo.userId === userId) {
+      return teacherUserInfo.username;
+    }
+    for (const sharedTeacherUserInfo of this.getSharedTeacherUserInfos()) {
+      if (sharedTeacherUserInfo.userId === userId) {
+        return sharedTeacherUserInfo.username;
       }
     }
-    return false;
   }
 
   /**

@@ -7,10 +7,10 @@ let service: ConfigService;
 let http: HttpTestingController;
 
 let configJSON;
-let studentUserId = 2;
-let studentWorkgroupId = 200;
-let teacherUserId = 1;
-let teacherWorkgroupId = 100;
+const studentUserId = 2;
+const studentWorkgroupId = 200;
+const teacherUserId = 1;
+const teacherWorkgroupId = 100;
 
 describe('ConfigService', () => {
   beforeEach(() => {

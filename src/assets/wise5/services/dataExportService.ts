@@ -6,9 +6,6 @@ import { UtilService } from './utilService';
 
 @Injectable()
 export class DataExportService {
-  studentEventsByWorkgroupId: any;
-  teacherEventsByUserId: any;
-
   constructor(
     private ConfigService: ConfigService,
     private http: HttpClient,
@@ -49,21 +46,16 @@ export class DataExportService {
       });
   }
 
-  processEvents(events: any[]): void {
-    this.initializeEventsDataStructures();
-    events.sort(this.UtilService.sortByServerSaveTime);
-    for (const event of events) {
-      if (this.isStudentEvent(event)) {
-        this.addStudentEvent(event);
-      } else {
-        this.addTeacherEvent(event);
-      }
-    }
+  getStudentEvents(events: any[]): any[] {
+    return events.filter((event: any) => {
+      return this.isStudentEvent(event);
+    });
   }
 
-  initializeEventsDataStructures(): void {
-    this.studentEventsByWorkgroupId = new Map();
-    this.teacherEventsByUserId = new Map();
+  getTeacherEvents(events: any[]): any[] {
+    return events.filter((event: any) => {
+      return this.isTeacherEvent(event);
+    });
   }
 
   isStudentEvent(event: any): boolean {
@@ -75,30 +67,6 @@ export class DataExportService {
       this.ConfigService.isTeacherWorkgroupId(event.workgroupId) ||
       this.ConfigService.isTeacherUserId(event.userId)
     );
-  }
-
-  addTeacherEvent(event: any): void {
-    const userId = event.userId;
-    if (!this.teacherEventsByUserId.has(userId)) {
-      this.teacherEventsByUserId.set(userId, []);
-    }
-    this.teacherEventsByUserId.get(userId).push(event);
-  }
-
-  addStudentEvent(event: any): void {
-    const workgroupId = event.workgroupId;
-    if (!this.studentEventsByWorkgroupId.has(workgroupId)) {
-      this.studentEventsByWorkgroupId.set(workgroupId, []);
-    }
-    this.studentEventsByWorkgroupId.get(workgroupId).push(event);
-  }
-
-  getStudentEventsByWorkgroupId(workgroupId: number): any[] {
-    return this.studentEventsByWorkgroupId.get(workgroupId);
-  }
-
-  getTeacherEventsByUserId(userId: number): any[] {
-    return this.teacherEventsByUserId.get(userId);
   }
 
   retrieveNotebookExport(exportType: string): Promise<any> {
