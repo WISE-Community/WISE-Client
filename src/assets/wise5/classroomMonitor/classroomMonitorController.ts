@@ -77,10 +77,8 @@ class ClassroomMonitorController {
     this.projectId = this.ConfigService.getProjectId();
     this.runId = this.ConfigService.getRunId();
     this.runCode = this.ConfigService.getRunCode();
-    if (this.NotebookService.isNotebookEnabled()) {
-      this.notebookConfig = this.NotebookService.getTeacherNotebookConfig();
-      this.reportEnabled = this.notebookConfig.enabled;
-    }
+    this.notebookConfig = this.NotebookService.getTeacherNotebookConfig();
+    this.reportEnabled = this.notebookConfig.enabled;
     this.enableProjectAchievements = this.ProjectService.getAchievements().isEnabled;
     this.views = {
       'root.cm.dashboard': {
