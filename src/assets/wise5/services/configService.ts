@@ -603,6 +603,7 @@ export class ConfigService {
         return sharedTeacherUserInfo.username;
       }
     }
+    return null;
   }
 
   /**
