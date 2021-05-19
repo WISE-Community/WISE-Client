@@ -3125,13 +3125,23 @@ class DataExportController {
     );
     for (const bucket of matchComponentState.studentData.buckets) {
       for (const item of bucket.items) {
-        row[columnNameToNumber[item.id]] = bucket.value;
+        row[columnNameToNumber[item.id]] = this.getBucketValueById(component, bucket.id);
         if (this.includeCorrectnessColumns && this.MatchService.hasCorrectAnswer(component)) {
           this.setCorrectnessValue(row, columnNameToNumber, item);
         }
       }
     }
     return row;
+  }
+
+  getBucketValueById(component: any, id: string): string {
+    if (id === '0') {
+      return component.choicesLabel ? component.choicesLabel : 'Choices';
+    }
+    const bucket = component.buckets.find((bucket: any) => {
+      return bucket.id === id;
+    });
+    return bucket ? bucket.value : '';
   }
 
   /**
