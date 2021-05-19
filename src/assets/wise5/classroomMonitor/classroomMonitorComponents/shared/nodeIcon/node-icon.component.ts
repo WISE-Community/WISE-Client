@@ -1,7 +1,7 @@
 'use strict';
 
 import { ProjectService } from '../../../../services/projectService';
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'node-icon',
@@ -27,9 +27,9 @@ export class NodeIconComponent {
 
   constructor(private ProjectService: ProjectService) {}
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     this.isGroup = this.ProjectService.isGroupNode(this.nodeId);
-    if (this.icon == null) {
+    if (changes.icon == null) {
       this.icon = this.ProjectService.getNode(this.nodeId).getIcon();
     }
     if (this.size) {

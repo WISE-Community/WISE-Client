@@ -189,6 +189,10 @@
     min-height: $toolbar-height;
   }
 
+  .select-panel-full-height {
+    max-height: 80vh;
+  }
+
   td {
     &.mat-cell, &.mat-footer-cell, &.mat-header-cell {
       padding: 4px 8px 4px 0;
