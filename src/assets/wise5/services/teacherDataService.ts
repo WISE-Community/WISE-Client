@@ -100,27 +100,6 @@ export class TeacherDataService extends DataService {
     this.AnnotationService.broadcastAnnotationReceived({ annotation: annotation });
   }
 
-  retrieveEventsExport(includeStudentEvents, includeTeacherEvents, includeNames) {
-    const params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('getStudentWork', 'false')
-      .set('getAnnotations', 'false')
-      .set('getEvents', 'false')
-      .set('includeStudentEvents', includeStudentEvents + '')
-      .set('includeTeacherEvents', includeTeacherEvents + '')
-      .set('includeNames', includeNames + '');
-    const options = {
-      params: params
-    };
-    const url = this.ConfigService.getConfigParam('runDataExportURL') + '/events';
-    return this.http
-      .get(url, options)
-      .toPromise()
-      .then((data: any) => {
-        return this.handleStudentDataResponse(data);
-      });
-  }
-
   saveEvent(context, nodeId, componentId, componentType, category, event, data) {
     const newEvent = this.createEvent(
       context,
