@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentGrading } from '../../../classroomMonitor/classroomMonitorComponents/shared/component-grading.component';
+import { ProjectService } from '../../../services/projectService';
 
 @Component({
   selector: 'table-grading',
@@ -18,6 +19,10 @@ export class TableGrading extends ComponentGrading {
   minCellSize: number = 3;
   cellSizeToPixelsMultiplier: number = 10;
   noneText: string = $localize`(None)`;
+
+  constructor(protected ProjectService: ProjectService) {
+    super(ProjectService);
+  }
 
   ngOnInit(): void {
     super.ngOnInit();

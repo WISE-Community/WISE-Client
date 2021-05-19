@@ -25,7 +25,7 @@ describe('TableGrading', () => {
     const componentContent = {
       isDataExplorerEnabled: false
     };
-    spyOn(TestBed.get(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
+    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
       componentContent
     );
     component = fixture.componentInstance;
