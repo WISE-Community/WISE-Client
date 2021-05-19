@@ -21,8 +21,6 @@ describe('UtilService', () => {
   getIntersectOfArraysTests();
   isValidJSONStringTests();
   trimToLength();
-  sortByWorkgroupIdAndServerSaveTime();
-  sortByUserIdAndServerSaveTime();
 });
 
 function generateKeyTests() {
@@ -224,67 +222,4 @@ function trimToLength() {
       expect(service.trimToLength('123456789', 7)).toEqual('1234...');
     });
   });
-}
-
-function sortByWorkgroupIdAndServerSaveTime() {
-  describe('sortByWorkgroupIdAndServerSaveTime', () => {
-    it('should sort by workgroup id and server save time', () => {
-      const workgroupId1 = 1;
-      const workgroupId2 = 2;
-      const object1 = createWorkgroupIdServerSaveTimeObject(workgroupId2, 4000);
-      const object2 = createWorkgroupIdServerSaveTimeObject(workgroupId1, 3000);
-      const object3 = createWorkgroupIdServerSaveTimeObject(workgroupId2, 5000);
-      const object4 = createWorkgroupIdServerSaveTimeObject(workgroupId2, 1000);
-      const object5 = createWorkgroupIdServerSaveTimeObject(workgroupId1, 2000);
-      const objects = [object1, object2, object3, object4, object5];
-      const expectedSortedObjects = [object5, object2, object4, object1, object3];
-      expectObjectsToBeSorted(
-        objects,
-        expectedSortedObjects,
-        service.sortByWorkgroupIdAndServerSaveTime
-      );
-    });
-  });
-}
-
-function createWorkgroupIdServerSaveTimeObject(workgroupId: number, serverSaveTime: number): any {
-  return {
-    workgroupId: workgroupId,
-    serverSaveTime: serverSaveTime
-  };
-}
-
-function sortByUserIdAndServerSaveTime() {
-  describe('sortByUserIdAndServerSaveTime', () => {
-    it('should sort by user id and server save time', () => {
-      const userId1 = 1;
-      const userId2 = 2;
-      const object1 = createUserIdServerSaveTimeObject(userId2, 4000);
-      const object2 = createUserIdServerSaveTimeObject(userId1, 3000);
-      const object3 = createUserIdServerSaveTimeObject(userId2, 5000);
-      const object4 = createUserIdServerSaveTimeObject(userId2, 1000);
-      const object5 = createUserIdServerSaveTimeObject(userId1, 2000);
-      const objects = [object1, object2, object3, object4, object5];
-      const expectedSortedObjects = [object5, object2, object4, object1, object3];
-      expectObjectsToBeSorted(
-        objects,
-        expectedSortedObjects,
-        service.sortByUserIdAndServerSaveTime
-      );
-    });
-  });
-}
-
-function createUserIdServerSaveTimeObject(userId: number, serverSaveTime: number): any {
-  return {
-    userId: userId,
-    serverSaveTime: serverSaveTime
-  };
-}
-
-function expectObjectsToBeSorted(objects: any[], sortedObjects: any[], sortFunction: any): void {
-  objects.sort(sortFunction);
-  for (let i = 0; i < objects.length; i++) {
-    expect(objects[i]).toEqual(sortedObjects[i]);
-  }
 }

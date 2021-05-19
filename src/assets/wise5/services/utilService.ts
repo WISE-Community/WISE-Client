@@ -368,24 +368,6 @@ export class UtilService {
     }
   }
 
-  sortByWorkgroupIdAndServerSaveTime(object1: any, object2: any): number {
-    const workgroupIdDiff = object1.workgroupId - object2.workgroupId;
-    if (workgroupIdDiff === 0) {
-      return object1.serverSaveTime - object2.serverSaveTime;
-    } else {
-      return workgroupIdDiff;
-    }
-  }
-
-  sortByUserIdAndServerSaveTime(object1: any, object2: any): number {
-    const userIdDiff = object1.userId - object2.userId;
-    if (userIdDiff === 0) {
-      return object1.serverSaveTime - object2.serverSaveTime;
-    } else {
-      return userIdDiff;
-    }
-  }
-
   /**
    * Convert milliseconds since the epoch to a pretty printed date time
    * @param milliseconds the milliseconds since the epoch

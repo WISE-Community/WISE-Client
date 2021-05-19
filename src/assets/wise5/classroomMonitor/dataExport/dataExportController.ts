@@ -831,7 +831,7 @@ class DataExportController {
         columnNames,
         columnNameToNumber,
         this.DataExportService.getStudentEvents(events).sort(
-          this.UtilService.sortByWorkgroupIdAndServerSaveTime
+          this.sortByFields('workgroupId', 'serverSaveTime')
         )
       );
     }
@@ -842,13 +842,23 @@ class DataExportController {
         columnNames,
         columnNameToNumber,
         this.DataExportService.getTeacherEvents(events).sort(
-          this.UtilService.sortByUserIdAndServerSaveTime
+          this.sortByFields('userId', 'serverSaveTime')
         )
       );
     }
     const fileName = this.ConfigService.getRunId() + '_events.csv';
     this.generateCSVFile(rows, fileName);
     this.hideDownloadingExportMessage();
+  }
+
+  sortByFields(field1: string, field2: string): any {
+    return (object1: any, object2: any): number => {
+      if (object1[field1] !== object2[field1]) {
+        return object1[field1] - object2[field1];
+      } else {
+        return object1[field2] - object2[field2];
+      }
+    };
   }
 
   getEventsColumnNames() {
@@ -969,14 +979,6 @@ class DataExportController {
       rowCounter++;
     }
     return rowCounter;
-  }
-
-  getTeacherUsername(userInfo) {
-    let username = '';
-    if (this.includeNames) {
-      username = userInfo.username;
-    }
-    return username;
   }
 
   /**
