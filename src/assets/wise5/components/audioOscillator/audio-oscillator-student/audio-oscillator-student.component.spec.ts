@@ -63,6 +63,9 @@ describe('AudioOscillatorStudent', () => {
     };
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
+    spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
+      return true;
+    });
     existingStudentData = {};
     newStudentData = {};
     fixture.detectChanges();

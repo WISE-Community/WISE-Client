@@ -28,6 +28,23 @@ export class DrawStudent extends ComponentStudent {
   parentStudentWorkIds: number[] = null;
   isResetButtonVisible: boolean = true;
   showCopyPublicNotebookItemButton: boolean = false;
+  toolFieldToLabel: any = {
+    select: 'Select tool',
+    line: 'Line tool (click and hold to show available line types)',
+    shape: 'Basic shape tool (click and hold to show available shapes)',
+    freeHand: 'Free hand drawing tool',
+    text: 'Text tool (click and hold to show available font sizes)',
+    stamp: 'Stamp tool (click and hold to show available categories)',
+    strokeColor: 'Stroke color (click and hold to show available colors)',
+    fillColor: 'Fill color (click and hold to show available colors)',
+    clone: 'Clone tool',
+    strokeWidth: 'Stroke width (click and hold to show available options)',
+    sendBack: 'Send selected objects to back',
+    sendForward: 'Send selected objects to front',
+    undo: 'Undo',
+    redo: 'Redo',
+    delete: 'Delete selected objects'
+  };
   width: number = 800;
 
   constructor(
@@ -58,111 +75,99 @@ export class DrawStudent extends ComponentStudent {
     );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
-    this.drawingToolId = `drawingtool_${this.nodeId}_${this.componentId}`;
+    this.drawingToolId = this.DrawService.getDrawingToolId(this.nodeId, this.componentId);
     this.showCopyPublicNotebookItemButton = this.ProjectService.isSpaceExists('public');
     if (this.isDisabled) {
       this.isResetButtonVisible = false;
     }
+    this.subscribeToNotebookItemChosen();
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.initializeDrawingTool();
-    });
+  ngAfterViewInit(): void {
+    this.initializeDrawingTool();
   }
 
-  handleStudentWorkSavedToServerAdditionalProcessing(componentState: any) {
-    if (
-      this.isForThisComponent(componentState) &&
-      this.ProjectService.isConnectedComponent(
-        this.nodeId,
-        this.componentId,
-        componentState.componentId
-      )
-    ) {
-      // Fix me
-      // const connectedComponentParams: any = this.ProjectService.getConnectedComponentParams(
-      //   this.componentContent,
-      //   componentState.componentId
-      // );
-      // if (connectedComponentParams != null) {
-      //   if (
-      //     connectedComponentParams.updateOn === 'save' ||
-      //     (connectedComponentParams.updateOn === 'submit' && componentState.isSubmit)
-      //   ) {
-      //     let performUpdate = false;
-      //     /*
-      //      * make a copy of the component state so we don't accidentally
-      //      * change any values in the referenced object
-      //      */
-      //     componentState = this.UtilService.makeCopyOfJSONObject(componentState);
-      //     if (this.isCanvasEmpty()) {
-      //       performUpdate = true;
-      //     } else {
-      //       // the student has drawn on the canvas so we will ask them if they want to update it
-      //       if (confirm($localize`Do you want to update the connected drawing?`)) {
-      //         performUpdate = true;
-      //       }
-      //     }
-      //     if (performUpdate) {
-      //       if (!connectedComponentParams.includeBackground) {
-      //         this.DrawService.removeBackgroundFromComponentState(componentState);
-      //       }
-      //       this.setDrawData(componentState);
-      //       this.$scope.drawController.isDirty = true;
-      //       this.$scope.drawController.isSubmitDirty = true;
-      //     }
-      //     /*
-      //      * remember the component state and connected component params
-      //      * in case we need to use them again later
-      //      */
-      //     this.latestConnectedComponentState = componentState;
-      //     this.latestConnectedComponentParams = connectedComponentParams;
-      //   }
-      // }
-    }
-  }
-
-  handleNodeSubmit() {
+  handleNodeSubmit(): void {
     this.submit('nodeSubmitButton');
   }
 
-  initializeDrawingTool() {
+  initializeDrawingTool(): void {
     this.drawingTool = this.DrawService.initializeDrawingTool(
       this.drawingToolId,
       this.componentContent.stamps,
       this.width,
       this.height
     );
-    const componentState = this.componentState;
-    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
-      this.handleConnectedComponents();
-    } else if (
-      this.DrawService.componentStateHasStudentWork(componentState, this.componentContent)
-    ) {
-      this.setStudentWork(componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-      this.handleConnectedComponents();
-    } else if (
-      componentState == null ||
-      !this.DrawService.componentStateHasStudentWork(componentState, this.componentContent)
-    ) {
-      if (this.componentContent.starterDrawData != null) {
-        this.drawingTool.load(this.componentContent.starterDrawData);
-      }
-      if (this.componentContent.background != null) {
-        this.drawingTool.setBackgroundImage(this.componentContent.background);
-      }
-    }
+    this.initializeStudentData();
+    this.disableComponentIfNecessary();
+    this.setDrawingChangedListener();
+    this.setToolChangedListener();
+    this.setUpTools();
 
     if (this.hasMaxSubmitCount() && this.hasSubmitsLeft()) {
       this.isSubmitButtonDisabled = true;
     }
 
-    this.disableComponentIfNecessary();
+    if (this.isDisabled) {
+      this.drawingTool.canvas.removeListeners();
+    }
+  }
 
+  initializeStudentData(): void {
+    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    } else if (
+      this.DrawService.componentStateHasStudentWork(this.componentState, this.componentContent)
+    ) {
+      this.setStudentWork(this.componentState);
+    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    } else if (this.isStarterDrawDataAvailable()) {
+      this.drawingTool.load(this.componentContent.starterDrawData);
+    }
+    if (
+      !this.DrawService.componentStateHasStudentWork(this.componentState, this.componentContent)
+    ) {
+      this.setAuthoredBackgroundIfNeeded();
+    }
+  }
+
+  setAuthoredBackgroundIfNeeded() {
+    if (this.isAuthoredBackgroundAvailable()) {
+      this.setAuthoredBackgroundAfterTimeout();
+    }
+  }
+
+  isStarterDrawDataAvailable(): boolean {
+    return this.componentContent.starterDrawData != null;
+  }
+
+  isAuthoredBackgroundAvailable(): boolean {
+    return this.componentContent.background != null && this.componentContent.background !== '';
+  }
+
+  setAuthoredBackgroundIfAvailable(): void {
+    if (this.isAuthoredBackgroundAvailable()) {
+      this.setBackgroundImage(this.componentContent.background);
+    }
+  }
+
+  setBackgroundImage(image: string): void {
+    this.drawingTool.setBackgroundImage(image);
+  }
+
+  setAuthoredBackgroundAfterTimeout(): void {
+    // set the background after a timeout to make sure it gets set after the draw data is set.
+    // if we don't do this, the background may not overwrite the existing background that is already
+    // in the draw data.
+    setTimeout(() => {
+      this.setAuthoredBackgroundIfAvailable();
+    }, 500);
+  }
+
+  setDrawingChangedListener(): void {
     /*
      * Wait before we start listening for the drawing:changed event. We need to wait
      * because the calls above to this.drawingTool.setBackgroundImage() will cause
@@ -172,11 +177,15 @@ export class DrawStudent extends ComponentStudent {
      * event occurs in response to the student changing the drawing and this timeout
      * will help make sure of that.
      */
-    // setTimeout(() => {
-    //   this.drawingTool.on('drawing:changed', this.studentDataChanged());
-    // }, 500);
+    setTimeout(() => {
+      this.drawingTool.on('drawing:changed', () => {
+        this.studentDataChanged();
+      });
+    }, 500);
+  }
 
-    this.drawingTool.on('tool:changed', (toolName) => {
+  setToolChangedListener(): void {
+    this.drawingTool.on('tool:changed', (toolName: string) => {
       const category = 'Tool';
       const event = 'toolSelected';
       const data = {
@@ -184,206 +193,59 @@ export class DrawStudent extends ComponentStudent {
       };
       this.StudentDataService.saveComponentEvent(this, category, event, data);
     });
-
-    this.setupTools();
-
-    if (this.isDisabled) {
-      this.drawingTool.canvas.removeListeners();
-    }
   }
 
-  handleConnectedComponentsPostProcess() {
-    if (this.componentContent.background != null) {
-      this.drawingTool.setBackgroundImage(this.componentContent.background);
-    }
+  handleConnectedComponentsPostProcess(): void {
+    this.setAuthoredBackgroundIfAvailable();
   }
 
   /**
-   * Setup the tools that we will make available to the student
+   * Setup the tools that we will make available to the student.
    */
-  setupTools() {
+  setUpTools(): void {
     const tools = this.componentContent.tools;
-    if (tools == null) {
-      // we will display all the tools
+    const drawingTool = $('#' + this.drawingToolId);
+    const toolFields = Object.keys(tools);
+    for (const toolField of toolFields) {
+      this.setUpTool(drawingTool, tools, toolField, this.getToolFieldLabel(toolField));
+    }
+    if (this.isDisabled) {
+      this.hideAllTools();
+    }
+  }
+
+  getToolFieldLabel(toolField: string): string {
+    return this.toolFieldToLabel[toolField];
+  }
+
+  setUpTool(drawingTool: any, tools: any, fieldName: string, title: string): void {
+    if (tools[fieldName]) {
+      drawingTool.find(`[title="${title}"]`).show();
     } else {
-      // we will only display the tools the authored specified to show
-      const drawingTool = $('#' + this.drawingToolId);
-      this.setupSelectTool(drawingTool, tools);
-      this.setupLineTool(drawingTool, tools);
-      this.setupShapeTool(drawingTool, tools);
-      this.setupFreeHandTool(drawingTool, tools);
-      this.setupTextTool(drawingTool, tools);
-      this.setupStampTool(drawingTool, tools);
-      this.setupCloneTool(drawingTool, tools);
-      this.setupStrokeColorTool(drawingTool, tools);
-      this.setupFillColorTool(drawingTool, tools);
-      this.setupStrokeWidthTool(drawingTool, tools);
-      this.setupSendBackTool(drawingTool, tools);
-      this.setupSendForwardTool(drawingTool, tools);
-      this.setupUndoTool(drawingTool, tools);
-      this.setupRedoTool(drawingTool, tools);
-      this.setupDeleteTool(drawingTool, tools);
-      if (this.isDisabled) {
-        drawingTool.find('.dt-tools').hide();
-      }
+      drawingTool.find(`[title="${title}"]`).hide();
     }
   }
 
-  setupSelectTool(drawingTool, tools) {
-    const selectTitle = $localize`Select tool`;
-    if (tools.select) {
-      drawingTool.find('[title="' + selectTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + selectTitle + '"]').hide();
-    }
+  hideAllTools() {
+    $('#' + this.drawingToolId)
+      .find('.dt-tools')
+      .hide();
   }
 
-  setupLineTool(drawingTool, tools) {
-    const lineTitle = $localize`Line tool (click and hold to show available line types)`;
-    if (tools.line) {
-      drawingTool.find('[title="' + lineTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + lineTitle + '"]').hide();
-    }
+  setStudentWork(componentState: any): void {
+    this.setDrawData(componentState);
+    this.processLatestStudentWork();
   }
 
-  setupShapeTool(drawingTool, tools) {
-    const shapeTitle = $localize`Basic shape tool (click and hold to show available shapes)`;
-    if (tools.shape) {
-      drawingTool.find('[title="' + shapeTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + shapeTitle + '"]').hide();
-    }
-  }
-
-  setupFreeHandTool(drawingTool, tools) {
-    const freeHandTitle = $localize`Free hand drawing tool`;
-    if (tools.freeHand) {
-      drawingTool.find('[title="' + freeHandTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + freeHandTitle + '"]').hide();
-    }
-  }
-
-  setupTextTool(drawingTool, tools) {
-    const textTitle = $localize`Text tool (click and hold to show available font sizes)`;
-    if (tools.text) {
-      drawingTool.find('[title="' + textTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + textTitle + '"]').hide();
-    }
-  }
-
-  setupStampTool(drawingTool, tools) {
-    const stampTitle = $localize`Stamp tool (click and hold to show available categories)`;
-    if (tools.stamp) {
-      drawingTool.find('[title="' + stampTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + stampTitle + '"]').hide();
-    }
-  }
-
-  setupCloneTool(drawingTool, tools) {
-    const cloneTitle = $localize`Clone tool`;
-    if (tools.clone) {
-      drawingTool.find('[title="' + cloneTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + cloneTitle + '"]').hide();
-    }
-  }
-
-  setupStrokeColorTool(drawingTool, tools) {
-    const strokeColorTitle = $localize`Stroke color (click and hold to show available colors)`;
-    if (tools.strokeColor) {
-      drawingTool.find('[title="' + strokeColorTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + strokeColorTitle + '"]').hide();
-    }
-  }
-
-  setupFillColorTool(drawingTool, tools) {
-    const fillColorTitle = $localize`Fill color (click and hold to show available colors)`;
-    if (tools.fillColor) {
-      drawingTool.find('[title="' + fillColorTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + fillColorTitle + '"]').hide();
-    }
-  }
-
-  setupStrokeWidthTool(drawingTool, tools) {
-    const strokeWidthTitle = $localize`Stroke width (click and hold to show available options)`;
-    if (tools.strokeWidth) {
-      drawingTool.find('[title="' + strokeWidthTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + strokeWidthTitle + '"]').hide();
-    }
-  }
-
-  setupSendBackTool(drawingTool, tools) {
-    const sendBackTitle = $localize`Send selected objects to back`;
-    if (tools.sendBack) {
-      drawingTool.find('[title="' + sendBackTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + sendBackTitle + '"]').hide();
-    }
-  }
-
-  setupSendForwardTool(drawingTool, tools) {
-    const sendForwardTitle = $localize`Send selected objects to front`;
-    if (tools.sendForward) {
-      drawingTool.find('[title="' + sendForwardTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + sendForwardTitle + '"]').hide();
-    }
-  }
-
-  setupUndoTool(drawingTool, tools) {
-    const undoTitle = $localize`Undo`;
-    if (tools.undo) {
-      drawingTool.find('[title="' + undoTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + undoTitle + '"]').hide();
-    }
-  }
-
-  setupRedoTool(drawingTool, tools) {
-    const redoTitle = $localize`Redo`;
-    if (tools.redo) {
-      drawingTool.find('[title="' + redoTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + redoTitle + '"]').hide();
-    }
-  }
-
-  setupDeleteTool(drawingTool, tools) {
-    const deleteTitle = $localize`Delete selected objects`;
-    if (tools.delete) {
-      drawingTool.find('[title="' + deleteTitle + '"]').show();
-    } else {
-      drawingTool.find('[title="' + deleteTitle + '"]').hide();
-    }
-  }
-
-  setStudentWork(componentState) {
-    if (componentState != null) {
-      this.setDrawData(componentState);
-      this.processLatestStudentWork();
-    }
-  }
-
-  resetButtonClicked() {
+  resetDrawing(): void {
     if (confirm($localize`Are you sure you want to clear your drawing?`)) {
       this.drawingTool.clear();
       if (this.UtilService.hasConnectedComponent(this.componentContent)) {
         this.handleConnectedComponents();
-      } else if (this.latestConnectedComponentState) {
-        this.setDrawData(this.latestConnectedComponentState);
       } else if (this.componentContent.starterDrawData != null) {
         this.drawingTool.load(this.componentContent.starterDrawData);
       }
-      if (this.componentContent.background != null && this.componentContent.background != '') {
-        this.drawingTool.setBackgroundImage(this.componentContent.background);
-      }
+      this.setAuthoredBackgroundIfAvailable();
       this.parentStudentWorkIds = null;
     }
   }
@@ -394,20 +256,8 @@ export class DrawStudent extends ComponentStudent {
    * e.g. 'submit', 'save', 'change'
    * @return a promise that will return a component state
    */
-  createComponentState(action) {
-    const componentState: any = this.NodeService.createNewComponentState();
-    const studentData: any = {};
-    const studentDataJSONString = this.getDrawData();
-    studentData.drawData = studentDataJSONString;
-    studentData.submitCounter = this.submitCounter;
-    if (this.parentStudentWorkIds != null) {
-      studentData.parentStudentWorkIds = this.parentStudentWorkIds;
-    }
-    componentState.isSubmit = this.isSubmit;
-    componentState.studentData = studentData;
-    componentState.componentType = 'Draw';
-    componentState.nodeId = this.nodeId;
-    componentState.componentId = this.componentId;
+  createComponentState(action: string): Promise<any> {
+    const componentState = this.createComponentStateObject();
     this.isSubmit = false;
     return new Promise((resolve, reject) => {
       this.createComponentStateAdditionalProcessing(
@@ -418,50 +268,91 @@ export class DrawStudent extends ComponentStudent {
     });
   }
 
+  createComponentStateObject() {
+    const componentState: any = this.NodeService.createNewComponentState();
+    const studentData: any = {
+      drawData: this.getDrawData(),
+      submitCounter: this.submitCounter
+    };
+    if (this.parentStudentWorkIds != null) {
+      studentData.parentStudentWorkIds = this.parentStudentWorkIds;
+    }
+    componentState.studentData = studentData;
+    componentState.isSubmit = this.isSubmit;
+    componentState.componentType = 'Draw';
+    componentState.nodeId = this.nodeId;
+    componentState.componentId = this.componentId;
+    return componentState;
+  }
+
+  handleStudentWorkSavedToServerAdditionalProcessing(componentState: any): void {
+    if (this.isComponentStateFromConnectedComponent(componentState)) {
+      const connectedComponent: any = this.ProjectService.getConnectedComponentParams(
+        this.componentContent,
+        componentState.componentId
+      );
+      if (this.isUpdateImmediately(connectedComponent, componentState) && this.isPerformUpdate()) {
+        switch (componentState.componentType) {
+          case 'Draw':
+            componentState = this.UtilService.makeCopyOfJSONObject(componentState);
+            this.setDrawData(componentState);
+            this.setAuthoredBackgroundIfNeeded();
+            break;
+          case 'ConceptMap':
+          case 'Embedded':
+          case 'Graph':
+          case 'Label':
+          case 'Table':
+            this.importWorkAsBackground(componentState);
+        }
+        this.studentDataChanged();
+      }
+    }
+  }
+
+  isUpdateImmediately(connectedComponent: any, componentState: any): boolean {
+    return (
+      connectedComponent.updateOn === 'save' ||
+      (connectedComponent.updateOn === 'submit' && componentState.isSubmit)
+    );
+  }
+
+  isComponentStateFromConnectedComponent(componentState: any): boolean {
+    return this.ProjectService.isConnectedComponent(
+      this.nodeId,
+      this.componentId,
+      componentState.componentId
+    );
+  }
+
+  isPerformUpdate(): boolean {
+    return this.isCanvasEmpty() || confirm($localize`Do you want to update the connected drawing?`);
+  }
+
   /**
-   * Add student asset images as objects in the drawing canvas
+   * Add student asset image as object in the drawing canvas
    * @param studentAsset
    */
-  attachStudentAsset(studentAsset) {
-    this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
-      fabric.Image.fromURL(copiedAsset.url, (oImg) => {
-        oImg.scaleToWidth(200); // set max width and have height scale proportionally
-        // TODO: center image or put them at mouse position? Wasn't straight-forward, tried below but had issues...
-        //oImg.setLeft((this.drawingTool.canvas.width / 2) - (oImg.width / 2));  // center image vertically and horizontally
-        //oImg.setTop((this.drawingTool.canvas.height / 2) - (oImg.height / 2));
-        //oImg.center();
-        oImg.studentAssetId = copiedAsset.id; // keep track of this asset id
-        this.drawingTool.canvas.add(oImg); // add copied asset image to canvas
-      });
+  attachStudentAsset(studentAsset: any): void {
+    fabric.Image.fromURL(studentAsset.url, (oImg: any) => {
+      oImg.scaleToWidth(this.width);
+      oImg.studentAssetId = studentAsset.id;
+      this.setBackgroundImage(studentAsset.url);
     });
   }
 
-  getDrawData() {
+  getDrawData(): any {
     return this.drawingTool.save();
   }
 
-  /**
-   * Get the image object representation of the student data
-   * @returns an image object
-   */
-  getImageObject() {
-    if (this.drawingTool != null && this.drawingTool.canvas != null) {
-      const canvasBase64Image = this.drawingTool.canvas.toDataURL('image/png');
-      return this.UtilService.getImageObjectFromBase64String(canvasBase64Image);
+  setDrawData(componentState: any): void {
+    const studentData = componentState.studentData;
+    if (studentData.submitCounter != null) {
+      this.submitCounter = studentData.submitCounter;
     }
-    return null;
-  }
-
-  setDrawData(componentState) {
-    if (componentState != null) {
-      const studentData = componentState.studentData;
-      if (studentData.submitCounter != null) {
-        this.submitCounter = studentData.submitCounter;
-      }
-      const drawData = studentData.drawData;
-      if (drawData != null && drawData != '' && drawData != '{}') {
-        this.drawingTool.load(drawData);
-      }
+    const drawData = studentData.drawData;
+    if (drawData != null && drawData != '' && drawData != '{}') {
+      this.drawingTool.load(drawData);
     }
   }
 
@@ -469,51 +360,47 @@ export class DrawStudent extends ComponentStudent {
    * Check if the student has drawn anything
    * @returns whether the canvas is empty
    */
-  isCanvasEmpty() {
-    if (this.drawingTool != null && this.drawingTool.canvas != null) {
-      const objects = this.drawingTool.canvas.getObjects();
-      if (objects != null && objects.length > 0) {
-        return false;
-      }
-    }
-    return true;
+  isCanvasEmpty(): boolean {
+    const objects = this.drawingTool.canvas.getObjects();
+    return objects == null || objects.length === 0;
   }
 
-  /**
-   * Snip the drawing by converting it to an image
-   * @param $event the click event
-   */
-  snipDrawing($event, studentWorkId) {
-    // let canvas = angular.element(
-    //   document.querySelector('#drawingtool_' + this.nodeId + '_' + this.componentId + ' canvas')
-    // );
-    let canvas: any = $(`#drawing-tool-${this.nodeId}-${this.componentId}`);
-    if (canvas != null && canvas.length > 0) {
-      canvas = canvas[0];
-      const canvasBase64Image = canvas.toDataURL('image/png');
-      const imageObject = this.UtilService.getImageObjectFromBase64String(canvasBase64Image);
-      const noteText = null;
-      this.NotebookService.addNote(imageObject, noteText, [studentWorkId]);
-    }
-  }
-
-  snipButtonClicked($event) {
+  addToNotebook(): void {
     if (this.isDirty) {
       const studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
         (componentState: any) => {
           if (this.isForThisComponent(componentState)) {
-            this.snipDrawing($event, componentState.id);
+            this.addNoteWithImage(componentState.id);
             studentWorkSavedToServerSubscription.unsubscribe();
           }
         }
       );
       this.saveButtonClicked();
     } else {
-      const studentWork = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
         this.nodeId,
         this.componentId
       );
-      this.snipDrawing($event, studentWork.id);
+      this.addNoteWithImage(componentState.id);
+    }
+  }
+
+  addNoteWithImage(componentStateId: number) {
+    const image = this.generateImageFromCanvas();
+    this.NotebookService.addNote(image, null, [componentStateId]);
+  }
+
+  generateImageFromCanvas(): any {
+    const canvasBase64Image = this.getCanvas().toDataURL('image/png');
+    return this.UtilService.getImageObjectFromBase64String(canvasBase64Image);
+  }
+
+  getCanvas(): any {
+    const canvas: any = $(`#${this.drawingToolId} canvas`);
+    if (canvas != null && canvas.length > 0) {
+      return canvas[0];
+    } else {
+      return null;
     }
   }
 
@@ -522,66 +409,70 @@ export class DrawStudent extends ComponentStudent {
    * @param componentStates an array of component states
    * @return a component state with the merged student responses
    */
-  createMergedComponentState(componentStates) {
-    const mergedComponentState: any = this.NodeService.createNewComponentState();
-    if (componentStates != null) {
-      let allDrawCanvasObjects = [];
-      let firstDrawData = {};
-      for (let c = 0; c < componentStates.length; c++) {
-        const componentState = componentStates[c];
-        if (componentState.componentType == 'Draw') {
-          const studentData = componentState.studentData;
-          const drawData = studentData.drawData;
-          const drawDataJSON = JSON.parse(drawData);
-          if (
-            drawDataJSON != null &&
-            drawDataJSON.canvas != null &&
-            drawDataJSON.canvas.objects != null
-          ) {
-            if (c == 0) {
-              firstDrawData = drawDataJSON;
-            }
-            allDrawCanvasObjects = allDrawCanvasObjects.concat(drawDataJSON.canvas.objects);
+  createMergedComponentState(componentStates: any[]): any {
+    const allDrawCanvasObjects = [];
+    for (const componentState of componentStates) {
+      switch (componentState.componentType) {
+        case 'Draw':
+          allDrawCanvasObjects.push(...this.getDrawCanvasObjects(componentState));
+          const backgroundImage = this.getDrawCanvasBackground(componentState);
+          if (backgroundImage != null) {
+            this.setBackgroundImage(backgroundImage);
           }
-        } else if (
-          componentState.componentType == 'Graph' ||
-          componentState.componentType == 'ConceptMap' ||
-          componentState.componentType == 'Embedded' ||
-          componentState.componentType == 'Label' ||
-          componentState.componentType == 'Table'
-        ) {
-          const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-            this.componentContent,
-            componentState
-          );
-          if (connectedComponent.importWorkAsBackground === true) {
-            this.setComponentStateAsBackgroundImage(componentState);
-          }
-        }
-      }
-      if (allDrawCanvasObjects != null) {
-        const drawData: any = firstDrawData;
-        if (drawData.canvas != null && drawData.canvas.objects != null) {
-          drawData.canvas.objects = allDrawCanvasObjects;
-        }
-        mergedComponentState.studentData = {};
-        mergedComponentState.studentData.drawData = JSON.stringify(drawData);
+          break;
+        case 'ConceptMap':
+        case 'Embedded':
+        case 'Graph':
+        case 'Label':
+        case 'Table':
+          this.importWorkAsBackground(componentState);
       }
     }
-    return mergedComponentState;
+    return this.createComponentStateWithCanvasObjects(allDrawCanvasObjects);
   }
 
-  /**
-   * Create an image from a component state and set the image as the background.
-   * @param componentState A component state.
-   */
-  setComponentStateAsBackgroundImage(componentState) {
-    this.generateImageFromComponentState(componentState).then((image) => {
-      this.drawingTool.setBackgroundImage(image.url);
+  createComponentStateWithCanvasObjects(canvasObjects: any[]): any {
+    const drawData: any = JSON.parse(this.getDrawData());
+    drawData.canvas.objects = canvasObjects;
+    const componentState: any = this.NodeService.createNewComponentState();
+    componentState.studentData = {
+      drawData: JSON.stringify(drawData)
+    };
+    return componentState;
+  }
+
+  getDrawCanvasObjects(componentState: any): any[] {
+    const studentData = componentState.studentData;
+    const drawDataJSON = JSON.parse(studentData.drawData);
+    return drawDataJSON.canvas.objects;
+  }
+
+  getDrawCanvasBackground(componentState: any): string {
+    const studentData = componentState.studentData;
+    const drawDataJSON = JSON.parse(studentData.drawData);
+    if (drawDataJSON.canvas.backgroundImage != null) {
+      return drawDataJSON.canvas.backgroundImage.src;
+    }
+    return null;
+  }
+
+  importWorkAsBackground(componentState: any): void {
+    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
+      this.componentContent,
+      componentState
+    );
+    if (connectedComponent.importWorkAsBackground) {
+      this.setComponentStateAsBackgroundImage(componentState);
+    }
+  }
+
+  setComponentStateAsBackgroundImage(componentState: any): void {
+    this.generateImageFromComponentState(componentState).then((image: any) => {
+      this.setBackgroundImage(image.url);
     });
   }
 
-  generateStarterState() {
+  generateStarterState(): void {
     this.NodeService.respondStarterState({
       nodeId: this.nodeId,
       componentId: this.componentId,

@@ -28,6 +28,15 @@
   </button>
 </div>
 <div>
+  <mat-checkbox
+      color="primary"
+      [(ngModel)]="authoringComponentContent.isStudentAttachmentEnabled"
+      (ngModelChange)="componentChanged()"
+      i18n>
+    Allow student to upload background image
+  </mat-checkbox>
+</div>
+<div>
   <mat-form-field class="canvas-dimension-container">
     <mat-label>Canvas Width (Optional)</mat-label>
     <input matInput
@@ -66,7 +75,7 @@
   <mat-icon>check_box_outline_blank</mat-icon>
 </button>
 <div fxLayout="row wrap">
-  <div class="toolsDiv">
+  <div class="tools-div">
     <mat-checkbox
         color="primary"
         [(ngModel)]="authoringComponentContent.tools.select"
@@ -99,7 +108,7 @@
       Free Hand Tool
     </mat-checkbox>
   </div>
-  <div class="toolsDiv">
+  <div class="tools-div">
     <mat-checkbox
         color="primary"
         [(ngModel)]="authoringComponentContent.tools.text"
@@ -132,7 +141,7 @@
       Stroke Color Tool
     </mat-checkbox>
   </div>
-  <div class="toolsDiv">
+  <div class="tools-div">
     <mat-checkbox
         color="primary"
         [(ngModel)]="authoringComponentContent.tools.fillColor"
@@ -165,7 +174,7 @@
       Send Forward Tool
     </mat-checkbox>
   </div>
-  <div class="toolsDiv">
+  <div class="tools-div">
     <mat-checkbox
         color="primary"
         [(ngModel)]="authoringComponentContent.tools.undo"

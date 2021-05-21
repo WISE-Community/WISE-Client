@@ -12,6 +12,7 @@ export class GenerateImageDialog {
     'DrawService',
     'EmbeddedService',
     'GraphService',
+    'LabelService',
     'TableService'
   ];
 
@@ -23,6 +24,7 @@ export class GenerateImageDialog {
     private DrawService,
     private EmbeddedService,
     private GraphService,
+    private LabelService,
     private TableService
   ) {}
 
@@ -40,7 +42,7 @@ export class GenerateImageDialog {
         ) {
           setTimeout(() => {
             this.generateImage();
-          }, 1000);
+          }, 2000);
         }
       }
     );
@@ -76,6 +78,8 @@ export class GenerateImageDialog {
         return this.EmbeddedService;
       case 'Graph':
         return this.GraphService;
+      case 'Label':
+        return this.LabelService;
       case 'Table':
         return this.TableService;
     }

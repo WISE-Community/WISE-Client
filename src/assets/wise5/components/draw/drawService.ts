@@ -61,6 +61,10 @@ export class DrawService extends ComponentService {
     return component;
   }
 
+  getDrawingToolId(nodeId: string, componentId: string): string {
+    return `drawing-tool-${nodeId}-${componentId}`;
+  }
+
   isCompleted(
     component: any,
     componentStates: any[],

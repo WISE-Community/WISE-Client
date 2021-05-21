@@ -1,16 +1,17 @@
+$margin-spacing: 20px;
 
-.save-button {
-  margin-right: 10px;
-  min-width: 88px;
-}
-
-.submit-button {
+.main-div {
   margin-left: 10px;
-  margin-right: 10px;
-  min-width: 88px;
 }
 
-.save-message {
-  font-size: 13px;
-  letter-spacing: .02em;
+.buttons-div {
+  margin-bottom: $margin-spacing
+}
+
+.top-button {
+  margin-right: $margin-spacing
+}
+
+.drawing-tool-div {
+  margin-bottom: $margin-spacing;
 }

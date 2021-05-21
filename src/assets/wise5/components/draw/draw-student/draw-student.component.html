@@ -1,62 +1,54 @@
-<style>
-  .toolsDiv {
-    padding: 10px 10px 10px 10px;
-  }
-</style>
-<div flex>
+<div class="main-div">
   <div class="prompt">
     <span [innerHTML]="prompt"></span>
     <possible-score [maxScore]="componentContent.maxScore"></possible-score>
   </div>
-  <div class="component__actions"
-      fxLayout="row">
-    <button *ngIf="isStudentAttachmentEnabled"
+  <div class="component__actions buttons-div"
+      fxLayout="row wrap">
+    <button
+        *ngIf="showCopyPublicNotebookItemButton"
         mat-button
-        class="mat-primary mat-raised-button"
-        (click)="nodeController.showStudentAssets($event, component.id, isDisabled)"
+        class="mat-primary mat-raised-button top-button"
+        (click)="copyPublicNotebookItemButtonClicked()"
         [disabled]="isDisabled"
-        matTooltip="Insert File"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+        i18n>
+      <mat-icon>file_download</mat-icon>
+      Import Classmate Work
+    </button>
+    <button
+        *ngIf="isShowAddToNotebookButton"
+        mat-button
+        class="mat-primary mat-raised-button top-button"
+        (click)="addToNotebook()"
+        [disabled]="isDisabled"
+        i18n>
+      <mat-icon>note_add</mat-icon>
+      Add to Notebook
+    </button>
+    <button
+        *ngIf="isStudentAttachmentEnabled"
+        mat-button
+        class="mat-primary mat-raised-button top-button"
+        (click)="showStudentAssets()"
+        [disabled]="isDisabled"
+        i18n>
       <mat-icon>image</mat-icon>
+      Upload Background Image
+    </button>
+    <button
+        *ngIf="isResetButtonVisible"
+        mat-button
+        class="mat-primary mat-raised-button top-button"
+        (click)="resetDrawing()"
+        [disabled]="isDisabled"
+        i18n>
+        <mat-icon>restore</mat-icon>
+        Reset
     </button>
   </div>
-  <button
-      *ngIf="isResetButtonVisible"
-      mat-button
-      class="mat-primary mat-raised-button"
-      (click)="resetButtonClicked()"
-      [disabled]="isDisabled"
-      matTooltip="Reset"
-      matTooltipPosition="above"
-      i18n-matTooltip>
-      <mat-icon>restore</mat-icon>
-  </button>
-  <button
-      *ngIf="isAddToNotebookEnabled()"
-      mat-button
-      class="mat-primary mat-raised-button"
-      (click)="snipButtonClicked($event)"
-      [disabled]="isDisabled"
-      matTooltip="Add to Notebook"
-      matTooltipPosition="above"
-      i18n-matTooltip>
-    <mat-icon>note_add</mat-icon>
-  </button>
-  <button class="md-accent md-primary"
-      *ngIf="showCopyPublicNotebookItemButton"
-      (click)="copyPublicNotebookItemButtonClicked($event)"
-      [disabled]="isDisabled"
-      matTooltip="Import Classmate Work"
-      matTooltipPosition="above"
-      i18n-matTooltip>
-    <mat-icon>file_download</mat-icon>
-  </button>
-  <div data-drop="true"
-      jqyoui-droppable="{onDrop: 'dropCallback(item, $index)'}">
-    <div id="{{drawingToolId}}"></div>
-  </div>
-  <component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
+  <div id="{{drawingToolId}}" class="drawing-tool-div"></div>
+  <component-save-submit-buttons
+      *ngIf="isSaveOrSubmitButtonVisible"
       [isDirty]="isDirty"
       [isDisabled]="isDisabled"
       [isSaveButtonVisible]="isSaveButtonVisible"
@@ -66,7 +58,8 @@
       (saveButtonClicked)="saveButtonClicked($event)"
       (submitButtonClicked)="submitButtonClicked($event)">
   </component-save-submit-buttons>
-  <component-annotations *ngIf="mode === 'student'"
+  <component-annotations
+      *ngIf="mode === 'student'"
       [annotations]="latestAnnotations"
       [maxScore]="componentContent.maxScore"
       [nodeId]="nodeId"

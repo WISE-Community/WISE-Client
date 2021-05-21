@@ -31,7 +31,6 @@ export class LabelStudent extends ComponentStudent {
   ENTER_KEY_CODE: number = 13;
   isAddNewLabelButtonVisible: boolean = true;
   isResetButtonVisible: boolean = true;
-  isShowAddToNotebookButton: boolean = false;
   labels: any[] = [];
   lineZIndex: number = 0;
   NEW_LABEL_X_LOCATION: number = 80;
@@ -77,12 +76,11 @@ export class LabelStudent extends ComponentStudent {
     this.enableFabricTextPadding();
     this.canvasId = `canvas_${this.nodeId}_${this.componentId}`;
     this.initializeComponent(this.componentContent);
-    this.isShowAddToNotebookButton = this.isAddToNotebookEnabled();
-    this.broadcastDoneRenderingComponent();
   }
 
   ngAfterViewInit(): void {
     this.setupCanvas();
+    this.broadcastDoneRenderingComponent();
   }
 
   enableFabricTextPadding(): void {
