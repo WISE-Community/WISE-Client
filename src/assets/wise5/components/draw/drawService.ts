@@ -13,8 +13,6 @@ import { Injectable } from '@angular/core';
 import { StudentDataService } from '../../services/studentDataService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { UtilService } from '../../services/utilService';
-// import DrawingTool from 'drawing-tool';
-// import 'drawing-tool/dist/drawing-tool.css';
 
 @Injectable()
 export class DrawService extends ComponentService {

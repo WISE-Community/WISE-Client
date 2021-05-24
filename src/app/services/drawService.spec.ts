@@ -44,6 +44,7 @@ describe('DrawService', () => {
   isStarterDrawDataExists();
   isStudentDrawDataDifferentFromStarterData();
   initializeDrawingTool();
+  setUpTools();
 });
 
 function createComponentState(drawData: string, isSubmit: boolean = false) {
@@ -270,11 +271,54 @@ function initializeDrawingTool() {
     const stamps = {};
     const width: number = 400;
     const height: number = 300;
-    const isHideDrawingTools: boolean = false;
     const drawingTool = service.initializeDrawingTool(drawingToolId, stamps, width, height);
     expect(drawingTool).not.toBeNull();
     expect(drawingTool.options.stamps).toEqual(stamps);
     expect(drawingTool.canvas.width).toEqual(width);
     expect(drawingTool.canvas.height).toEqual(height);
   });
+}
+
+function setUpTools() {
+  it('should set up only specific tools', () => {
+    const expectedValues = [
+      { name: 'select', isVisible: true },
+      { name: 'line', isVisible: true },
+      { name: 'shape', isVisible: true },
+      { name: 'freeHand', isVisible: false },
+      { name: 'text', isVisible: false },
+      { name: 'stamp', isVisible: false },
+      { name: 'strokeColor', isVisible: false },
+      { name: 'fillColor', isVisible: false },
+      { name: 'clone', isVisible: false },
+      { name: 'strokeWidth', isVisible: false },
+      { name: 'sendBack', isVisible: false },
+      { name: 'sendForward', isVisible: false },
+      { name: 'undo', isVisible: false },
+      { name: 'redo', isVisible: false },
+      { name: 'delete', isVisible: false }
+    ];
+    const tools = {};
+    for (const expectedValue of expectedValues) {
+      tools[expectedValue.name] = expectedValue.isVisible;
+    }
+    const drawingToolId = service.getDrawingToolId('node1', 'component1');
+    createDrawingToolDiv(drawingToolId);
+    service.initializeDrawingTool(drawingToolId, {});
+    service.setUpTools(drawingToolId, tools, false);
+    for (const expectedValue of expectedValues) {
+      expectToolToBeVisible(drawingToolId, expectedValue.name, expectedValue.isVisible);
+    }
+  });
+}
+
+function createDrawingToolDiv(drawingToolId: string): void {
+  const drawingToolDiv = document.createElement('div');
+  drawingToolDiv.setAttribute('id', drawingToolId);
+  document.body.appendChild(drawingToolDiv);
+}
+
+function expectToolToBeVisible(drawingToolId: string, name: string, isVisible: boolean): void {
+  const label = service.getToolFieldLabel(name);
+  expect($(`#${drawingToolId}`).find(`[title="${label}"]`).is(':visible')).toEqual(isVisible);
 }

@@ -98,7 +98,6 @@ describe('DrawStudent', () => {
   getCanvas();
   setDrawData();
   isCanvasEmpty();
-  setUpTools();
   resetDrawing();
   createComponentStateObject();
   createComponentStateWithCanvasObjects();
@@ -218,42 +217,6 @@ function checkCanvasEmpty(getObjectsReturnValue: any[], expectedIsEmptyValue: bo
   const isEmpty = component.isCanvasEmpty();
   expect(component.drawingTool.canvas.getObjects).toHaveBeenCalled();
   expect(isEmpty).toEqual(expectedIsEmptyValue);
-}
-
-function setUpTools() {
-  it('should set up only specific tools', () => {
-    const expectedValues = [
-      { name: 'select', isVisible: true },
-      { name: 'line', isVisible: true },
-      { name: 'shape', isVisible: true },
-      { name: 'freeHand', isVisible: false },
-      { name: 'text', isVisible: false },
-      { name: 'stamp', isVisible: false },
-      { name: 'strokeColor', isVisible: false },
-      { name: 'fillColor', isVisible: false },
-      { name: 'clone', isVisible: false },
-      { name: 'strokeWidth', isVisible: false },
-      { name: 'sendBack', isVisible: false },
-      { name: 'sendForward', isVisible: false },
-      { name: 'undo', isVisible: false },
-      { name: 'redo', isVisible: false },
-      { name: 'delete', isVisible: false }
-    ];
-    for (const expectedValue of expectedValues) {
-      component.componentContent.tools[expectedValue.name] = expectedValue.isVisible;
-    }
-    component.setUpTools();
-    for (const expectedValue of expectedValues) {
-      expectToolToBeVisible(expectedValue.name, expectedValue.isVisible);
-    }
-  });
-}
-
-function expectToolToBeVisible(name: string, isVisible: boolean): void {
-  const label = component.getToolFieldLabel(name);
-  expect($(`#${component.drawingToolId}`).find(`[title="${label}"]`).is(':visible')).toEqual(
-    isVisible
-  );
 }
 
 function resetDrawing() {
