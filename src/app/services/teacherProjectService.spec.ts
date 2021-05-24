@@ -25,21 +25,6 @@ const projectURL = projectBaseURL + 'project.json';
 const registerNewProjectURL = 'http://localhost:8080/wise/project/new';
 const saveProjectURL = 'http://localhost:8080/wise/project/save/' + projectIdDefault;
 const wiseBaseURL = '/wise';
-const getLibraryProjectsURL = '/api/project/library';
-const libraryProjects = [
-  {
-    children: [
-      { id: 3, name: 'three' },
-      { id: 1, name: 'one' }
-    ]
-  },
-  {
-    children: [
-      { id: 2, name: 'two' },
-      { id: 1, name: 'one' }
-    ]
-  }
-];
 
 describe('TeacherProjectService', () => {
   beforeEach(() => {
@@ -47,11 +32,11 @@ describe('TeacherProjectService', () => {
       imports: [HttpClientTestingModule, UpgradeModule],
       providers: [TeacherProjectService, ConfigService, SessionService, UtilService]
     });
-    http = TestBed.get(HttpTestingController);
-    service = TestBed.get(TeacherProjectService);
-    configService = TestBed.get(ConfigService);
-    sessionService = TestBed.get(SessionService);
-    utilService = TestBed.get(UtilService);
+    http = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(TeacherProjectService);
+    configService = TestBed.inject(ConfigService);
+    sessionService = TestBed.inject(SessionService);
+    utilService = TestBed.inject(UtilService);
     spyOn(utilService, 'broadcastEventInRootScope');
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
     scootersProjectJSON = JSON.parse(JSON.stringify(scootersProjectJSON_import));
@@ -64,10 +49,6 @@ describe('TeacherProjectService', () => {
   testDeleteTransition();
   testGetNodeIdAfter();
   testCreateNodeAfter();
-  getLibraryProjects();
-  sortAndFilterUniqueLibraryProjects();
-  filterUniqueProjects();
-  shouldGetTheNodeIdAndComponentIdObjects();
   shouldGetTheBranchLetter();
   lockNode();
   unlockNode();
@@ -132,8 +113,6 @@ function createConfigServiceGetConfigParamSpy() {
       return saveProjectURL;
     } else if (param === 'wiseBaseURL') {
       return wiseBaseURL;
-    } else if (param === 'getLibraryProjectsURL') {
-      return getLibraryProjectsURL;
     }
   });
 }
@@ -241,89 +220,6 @@ function testCreateNodeAfter() {
       expect(newNode.transitionLogic.transitions[0].to).toEqual('node20');
       expect(service.getNodeIdAfter('node19')).toEqual('node1000');
     });
-  });
-}
-
-function getLibraryProjects() {
-  describe('getLibraryProjects', () => {
-    it('should get the library projects', () => {
-      createConfigServiceGetConfigParamSpy();
-      const result = service.getLibraryProjects();
-      http.expectOne(getLibraryProjectsURL).flush(libraryProjects);
-      result.then((projects) => {
-        expect(projects).toEqual(libraryProjects);
-      });
-    });
-  });
-}
-
-function sortAndFilterUniqueLibraryProjects() {
-  describe('sortAndFilterUniqueLibraryProjects', () => {
-    it('should filter and sort library projects', () => {
-      const result = service.sortAndFilterUniqueLibraryProjects(libraryProjects);
-      expect(result).toEqual([
-        { id: 3, name: 'three' },
-        { id: 2, name: 'two' },
-        { id: 1, name: 'one' }
-      ]);
-    });
-  });
-}
-
-function filterUniqueProjects() {
-  describe('filterUniqueProjects', () => {
-    it('should filter unique projects based on id', () => {
-      const nonUniqueProjects = [
-        { id: 3, name: 'three' },
-        { id: 1, name: 'one' },
-        { id: 2, name: 'two' },
-        { id: 1, name: 'one' }
-      ];
-      const uniqueProjects = service.filterUniqueProjects(nonUniqueProjects);
-      expect(uniqueProjects.length).toEqual(3);
-      expect(uniqueProjects[0].id).toEqual(3);
-      expect(uniqueProjects[1].id).toEqual(1);
-      expect(uniqueProjects[2].id).toEqual(2);
-    });
-  });
-}
-
-function shouldGetTheNodeIdAndComponentIdObjects() {
-  it('should get the node id and component id objects', () => {
-    const project = {
-      nodes: [
-        {
-          id: 'node1',
-          components: [
-            {
-              id: 'node1component1'
-            }
-          ]
-        },
-        {
-          id: 'node2',
-          components: [
-            {
-              id: 'node2component1'
-            },
-            {
-              id: 'node2component2'
-            }
-          ]
-        }
-      ]
-    };
-    service.setProject(project);
-    let nodeIdAndComponentIds = service.getNodeIdsAndComponentIds('node1');
-    expect(nodeIdAndComponentIds.length).toEqual(1);
-    expect(nodeIdAndComponentIds[0].nodeId).toEqual('node1');
-    expect(nodeIdAndComponentIds[0].componentId).toEqual('node1component1');
-    nodeIdAndComponentIds = service.getNodeIdsAndComponentIds('node2');
-    expect(nodeIdAndComponentIds.length).toEqual(2);
-    expect(nodeIdAndComponentIds[0].nodeId).toEqual('node2');
-    expect(nodeIdAndComponentIds[0].componentId).toEqual('node2component1');
-    expect(nodeIdAndComponentIds[1].nodeId).toEqual('node2');
-    expect(nodeIdAndComponentIds[1].componentId).toEqual('node2component2');
   });
 }
 

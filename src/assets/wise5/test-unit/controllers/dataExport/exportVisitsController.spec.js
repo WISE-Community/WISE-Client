@@ -86,9 +86,9 @@ describe('ExportVisitsController', () => {
   createRowWithEmptyCells_ShouldReturnArrayWithEmptyValues();
   getNodeIdsBetweenLastVisit_ShouldReturnAStringOfStepNumbers();
   getStepNumbersBetweenLastVisit_ShouldReturnAStringOfStepNumbers();
-  addUserCells_WithOneStudentNotIncludingNames_ShouldSetTheWISEID();
-  addUserCells_WithOneStudentIncludingNames_ShouldSetTheWISEIDAndStudentName();
-  addUserCells_WithMultipleStudentsIncludingNames_ShouldSetTheWISEIDAndStudentNames();
+  addUserCells_WithOneStudentNotIncludingNames_ShouldSetTheUserID();
+  addUserCells_WithOneStudentIncludingNames_ShouldSetTheUserIDAndStudentName();
+  addUserCells_WithMultipleStudentsIncludingNames_ShouldSetTheUserIDAndStudentNames();
   getVisitDuration_ShouldGetTheTimeDifferenceBetweenEventsInSeconds();
   getColumnNumber_ShouldReturnTheColumnNumber();
   incrementRowCounter_ShouldIncrementRowCounterBy1();
@@ -884,7 +884,7 @@ function getStepNumbersBetweenLastVisit_ShouldReturnAStringOfStepNumbers() {
   });
 }
 
-function addUserCells_WithOneStudentNotIncludingNames_ShouldSetTheWISEID() {
+function addUserCells_WithOneStudentNotIncludingNames_ShouldSetTheUserID() {
   it('addUserCells with one student should set the wise id', () => {
     const userInfo = { users: [{ id: 100, name: 'Spongebob Squarepants' }] };
     spyOn(ConfigService, 'getUserInfoByWorkgroupId').and.returnValue(userInfo);
@@ -896,7 +896,7 @@ function addUserCells_WithOneStudentNotIncludingNames_ShouldSetTheWISEID() {
   });
 }
 
-function addUserCells_WithOneStudentIncludingNames_ShouldSetTheWISEIDAndStudentName() {
+function addUserCells_WithOneStudentIncludingNames_ShouldSetTheUserIDAndStudentName() {
   it('addUserCells with one student including names should set the wise id and student name', () => {
     const userInfo = { users: [{ id: 1000, name: 'Spongebob Squarepants' }] };
     spyOn(ConfigService, 'getUserInfoByWorkgroupId').and.returnValue(userInfo);
@@ -910,7 +910,7 @@ function addUserCells_WithOneStudentIncludingNames_ShouldSetTheWISEIDAndStudentN
   });
 }
 
-function addUserCells_WithMultipleStudentsIncludingNames_ShouldSetTheWISEIDAndStudentNames() {
+function addUserCells_WithMultipleStudentsIncludingNames_ShouldSetTheUserIDAndStudentNames() {
   it('addUserCells with multiple students including names should set the wise id and student names', () => {
     const userInfo = {
       users: [

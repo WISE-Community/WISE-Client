@@ -10,6 +10,7 @@ import { TeacherWebSocketService } from './teacherWebSocketService';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
+import { Node } from '../common/Node';
 
 @Injectable()
 export class TeacherDataService extends DataService {
@@ -37,7 +38,7 @@ export class TeacherDataService extends DataService {
     private http: HttpClient,
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
-    ProjectService: TeacherProjectService,
+    protected ProjectService: TeacherProjectService,
     private TeacherWebSocketService: TeacherWebSocketService,
     private UtilService: UtilService
   ) {
@@ -97,27 +98,6 @@ export class TeacherDataService extends DataService {
     this.studentData.annotationsByNodeId[nodeId].push(annotation);
     this.AnnotationService.setAnnotations(this.studentData.annotations);
     this.AnnotationService.broadcastAnnotationReceived({ annotation: annotation });
-  }
-
-  retrieveEventsExport(includeStudentEvents, includeTeacherEvents, includeNames) {
-    const params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('getStudentWork', 'false')
-      .set('getAnnotations', 'false')
-      .set('getEvents', 'false')
-      .set('includeStudentEvents', includeStudentEvents + '')
-      .set('includeTeacherEvents', includeTeacherEvents + '')
-      .set('includeNames', includeNames + '');
-    const options = {
-      params: params
-    };
-    const url = this.ConfigService.getConfigParam('runDataExportURL') + '/events';
-    return this.http
-      .get(url, options)
-      .toPromise()
-      .then((data: any) => {
-        return this.handleStudentDataResponse(data);
-      });
   }
 
   saveEvent(context, nodeId, componentId, componentType, category, event, data) {
@@ -196,27 +176,24 @@ export class TeacherDataService extends DataService {
     return newEvent;
   }
 
-  retrieveStudentDataByNodeId(nodeId) {
+  retrieveStudentDataForNode(node: Node): Promise<any> {
     let params = new HttpParams()
       .set('runId', this.ConfigService.getRunId())
       .set('getStudentWork', 'true')
       .set('getAnnotations', 'false')
       .set('getEvents', 'false');
-    const components = this.getAllRelatedComponents(nodeId);
-    for (const component of components) {
+    for (const component of this.getAllRelatedComponents(node)) {
       params = params.append('components', JSON.stringify(component));
     }
     return this.retrieveStudentData(params);
   }
 
-  getAllRelatedComponents(nodeId) {
-    const components = (<TeacherProjectService>this.ProjectService).getNodeIdsAndComponentIds(
-      nodeId
-    );
-    return components.concat(this.getConnectedComponentsIfNecessary(components));
+  getAllRelatedComponents(node: Node): any {
+    const components = node.getNodeIdComponentIds();
+    return components.concat(this.getConnectedComponentsWithRequiredStudentData(components));
   }
 
-  getConnectedComponentsIfNecessary(components) {
+  getConnectedComponentsWithRequiredStudentData(components): any {
     const connectedComponents = [];
     for (const component of components) {
       const componentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
@@ -277,7 +254,7 @@ export class TeacherDataService extends DataService {
     });
   }
 
-  retrieveStudentData(params) {
+  retrieveStudentData(params): Promise<any> {
     const url = this.ConfigService.getConfigParam('teacherDataURL');
     const options = {
       params: params
@@ -473,29 +450,15 @@ export class TeacherDataService extends DataService {
   }
 
   getComponentStatesByWorkgroupId(workgroupId) {
-    const componentStatesByWorkgroupId = this.studentData.componentStatesByWorkgroupId[workgroupId];
-    if (componentStatesByWorkgroupId != null) {
-      return componentStatesByWorkgroupId;
-    } else {
-      return [];
-    }
+    return this.studentData.componentStatesByWorkgroupId[workgroupId] || [];
   }
 
   getComponentStatesByNodeId(nodeId) {
-    const componentStatesByNodeId = this.studentData.componentStatesByNodeId[nodeId];
-    if (componentStatesByNodeId != null) {
-      return componentStatesByNodeId;
-    } else {
-      return [];
-    }
+    return this.studentData.componentStatesByNodeId[nodeId] || [];
   }
 
   getComponentStatesByComponentId(componentId) {
-    const componentStatesByComponentId = this.studentData.componentStatesByComponentId[componentId];
-    if (componentStatesByComponentId != null) {
-      return componentStatesByComponentId;
-    }
-    return [];
+    return this.studentData.componentStatesByComponentId[componentId] || [];
   }
 
   getComponentStatesByComponentIds(componentIds) {
@@ -609,21 +572,11 @@ export class TeacherDataService extends DataService {
   }
 
   getEventsByWorkgroupId(workgroupId) {
-    const eventsByWorkgroupId = this.studentData.eventsByWorkgroupId[workgroupId];
-    if (eventsByWorkgroupId != null) {
-      return eventsByWorkgroupId;
-    } else {
-      return [];
-    }
+    return this.studentData.eventsByWorkgroupId[workgroupId] || [];
   }
 
   getEventsByNodeId(nodeId) {
-    const eventsByNodeId = this.studentData.eventsByNodeId[nodeId];
-    if (eventsByNodeId != null) {
-      return eventsByNodeId;
-    } else {
-      return [];
-    }
+    return this.studentData.eventsByNodeId[nodeId] || [];
   }
 
   getEventsByWorkgroupIdAndNodeId(workgroupId, nodeId) {
@@ -647,22 +600,12 @@ export class TeacherDataService extends DataService {
     return event.nodeId === nodeId && event.event === eventType;
   }
 
-  getAnnotationsToWorkgroupId(workgroupId) {
-    const annotationsToWorkgroupId = this.studentData.annotationsToWorkgroupId[workgroupId];
-    if (annotationsToWorkgroupId != null) {
-      return annotationsToWorkgroupId;
-    } else {
-      return [];
-    }
+  getAnnotationsToWorkgroupId(workgroupId: number) {
+    return this.studentData.annotationsToWorkgroupId[workgroupId] || [];
   }
 
-  getAnnotationsByNodeId(nodeId) {
-    const annotationsByNodeId = this.studentData.annotationsByNodeId[nodeId];
-    if (annotationsByNodeId != null) {
-      return annotationsByNodeId;
-    } else {
-      return [];
-    }
+  getAnnotationsByNodeId(nodeId: string) {
+    return this.studentData.annotationsByNodeId[nodeId] || [];
   }
 
   getAnnotationsByNodeIdAndPeriodId(nodeId, periodId) {
@@ -793,9 +736,6 @@ export class TeacherDataService extends DataService {
     return this.currentStep;
   }
 
-  /**
-   * @param nodeId the node id of the new current node
-   */
   endCurrentNodeAndSetCurrentNodeByNodeId(nodeId) {
     this.setCurrentNodeByNodeId(nodeId);
   }
@@ -807,19 +747,16 @@ export class TeacherDataService extends DataService {
   }
 
   isAnyPeriodPaused() {
-    for (const period of this.getPeriods()) {
-      if (period.paused) {
-        return true;
-      }
-    }
-    return false;
+    return this.getPeriods().some((period) => {
+      return period.paused;
+    });
   }
 
-  isPeriodPaused(periodId) {
+  isPeriodPaused(periodId: number): boolean {
     if (periodId === -1) {
       return this.isAllPeriodsPaused();
     } else {
-      return this.isSpecificPeriodPaused(periodId);
+      return this.getPeriodById(periodId).paused;
     }
   }
 
@@ -834,13 +771,10 @@ export class TeacherDataService extends DataService {
     return numPausedPeriods === periods.length;
   }
 
-  isSpecificPeriodPaused(periodId) {
-    for (const period of this.getPeriods()) {
-      if (period.periodId === periodId) {
-        return period.paused;
-      }
-    }
-    return false;
+  getPeriodById(periodId: number): any {
+    return this.getPeriods().find((period) => {
+      return period.periodId === periodId;
+    });
   }
 
   /**

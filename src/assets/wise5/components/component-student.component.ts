@@ -1,5 +1,5 @@
 import { Directive, Input } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SafeHtml } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
 import { GenerateImageDialog } from '../directives/generate-image-dialog/generate-image-dialog';
@@ -36,7 +36,6 @@ export abstract class ComponentStudent {
   componentId: string;
   componentType: string;
   prompt: SafeHtml;
-  isPromptVisible: boolean = true;
   isSaveButtonVisible: boolean = false;
   isShowAddToNotebookButton: boolean = false;
   isSubmitButtonVisible: boolean = false;
@@ -67,7 +66,6 @@ export abstract class ComponentStudent {
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
-    protected sanitizer: DomSanitizer,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected upgrade: UpgradeModule,
@@ -77,7 +75,6 @@ export abstract class ComponentStudent {
   ngOnInit(): void {
     this.componentId = this.componentContent.id;
     this.componentType = this.componentContent.type;
-    this.prompt = this.sanitizer.bypassSecurityTrustHtml(this.componentContent.prompt);
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.isSaveOrSubmitButtonVisible = this.isSaveButtonVisible || this.isSubmitButtonVisible;

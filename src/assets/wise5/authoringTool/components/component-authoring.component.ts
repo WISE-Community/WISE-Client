@@ -20,7 +20,6 @@ export abstract class ComponentAuthoring {
   componentContent: any;
   idToOrder: any;
   isDirty: boolean = false;
-  isPromptVisible: boolean = true;
   isSaveButtonVisible: boolean;
   isSubmitButtonVisible: boolean;
   isSubmitDirty: boolean = false;

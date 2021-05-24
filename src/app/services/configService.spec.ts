@@ -7,6 +7,14 @@ let service: ConfigService;
 let http: HttpTestingController;
 
 let configJSON;
+const studentUserId = 3;
+const studentWorkgroupId = 300;
+const teacherUserId = 1;
+const teacherUserId2 = 2;
+const teacherUsername = 'Spongebob';
+const teacherUsername2 = 'Patrick';
+const teacherWorkgroupId = 101;
+const teacherWorkgroupId2 = 102;
 
 describe('ConfigService', () => {
   beforeEach(() => {
@@ -20,8 +28,27 @@ describe('ConfigService', () => {
       startTime: new Date(2020, 4, 10).getTime(),
       endTime: new Date(2020, 4, 20).getTime(),
       timestampDiff: 0,
-      isLockedAfterEndDate: false
+      isLockedAfterEndDate: false,
+      userInfo: {
+        myUserInfo: {
+          myClassInfo: {
+            teacherUserInfo: {
+              userId: teacherUserId,
+              username: teacherUsername,
+              workgroupId: teacherWorkgroupId
+            },
+            sharedTeacherUserInfos: [
+              {
+                userId: teacherUserId2,
+                username: teacherUsername2,
+                workgroupId: teacherWorkgroupId2
+              }
+            ]
+          }
+        }
+      }
     };
+    service.setConfig(configJSON);
   });
 
   retrieveConfig();
@@ -35,6 +62,8 @@ describe('ConfigService', () => {
   getPeriodIdGivenWorkgroupId();
   calculateIsRunActive();
   isEndedAndLocked();
+  isTeacherIdentifyingId();
+  getTeacherUsername();
 });
 
 function retrieveConfig() {
@@ -224,5 +253,36 @@ function isEndedAndLocked_EndTimeInPastAndLocked_ReturnEndedAndLocked() {
   it('should calculate is ended and locked when end time is in the past and locked', () => {
     configJSON.isLockedAfterEndDate = true;
     expectIsEndedAndLocked(new Date(2020, 4, 30), true);
+  });
+}
+
+function isTeacherIdentifyingId() {
+  describe('isTeacherIdentifyingId', () => {
+    it('should check if a workgroup id is a teacher workgroup id when it is', () => {
+      expect(service.isTeacherIdentifyingId('workgroupId', teacherWorkgroupId)).toEqual(true);
+    });
+    it('should check if a workgroup id is a teacher workgroup id when it is not', () => {
+      expect(service.isTeacherIdentifyingId('workgroupId', studentWorkgroupId)).toEqual(false);
+    });
+    it('should check if a user id is a teacher user id when it is', () => {
+      expect(service.isTeacherIdentifyingId('userId', teacherUserId)).toEqual(true);
+    });
+    it('should check if a user id is a teacher user id when it is not', () => {
+      expect(service.isTeacherIdentifyingId('userId', studentUserId)).toEqual(false);
+    });
+  });
+}
+
+function getTeacherUsername() {
+  describe('getTeacherUsername', () => {
+    it('should get teacher username', () => {
+      expect(service.getTeacherUsername(teacherUserId)).toEqual(teacherUsername);
+    });
+    it('should get shared teacher username', () => {
+      expect(service.getTeacherUsername(teacherUserId2)).toEqual(teacherUsername2);
+    });
+    it('should return null when there is no teacher with the given user id', () => {
+      expect(service.getTeacherUsername(studentUserId)).toEqual(null);
+    });
   });
 }

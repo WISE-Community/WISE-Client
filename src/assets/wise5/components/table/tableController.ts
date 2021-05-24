@@ -101,7 +101,6 @@ class TableController extends ComponentController {
       this.initializeDataExplorer();
     }
 
-    this.isPromptVisible = true;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.isResetTableButtonVisible = true;

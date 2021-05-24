@@ -49,6 +49,7 @@ class MilestoneGradingViewController extends NodeGradingViewController {
 
   $onInit() {
     this.nodeId = this.milestone.nodeId;
+    this.node = this.ProjectService.getNode(this.nodeId);
     this.componentId = this.milestone.componentId;
     this.maxScore = this.getMaxScore();
     this.retrieveStudentData();

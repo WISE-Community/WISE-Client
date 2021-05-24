@@ -41,6 +41,12 @@ export class Node {
     return this.type === 'group';
   }
 
+  getNodeIdComponentIds(): any {
+    return this.components.map((component) => {
+      return { nodeId: this.id, componentId: component.id };
+    });
+  }
+
   getComponent(componentId: string): any {
     return this.components.find((component) => component.id === componentId);
   }

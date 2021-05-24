@@ -59,6 +59,7 @@ describe('LabelStudent', () => {
       width: 800,
       height: 600
     };
+    spyOn(component, 'giveFocusToLabelTextInput').and.callFake(() => {});
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {

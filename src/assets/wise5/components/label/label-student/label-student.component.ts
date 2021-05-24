@@ -10,7 +10,6 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { LabelService } from '../labelService';
 import { StudentAssetService } from '../../../services/studentAssetService';
-import { DomSanitizer } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
@@ -51,7 +50,6 @@ export class LabelStudent extends ComponentStudent {
     private LabelService: LabelService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
-    protected sanitizer: DomSanitizer,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected upgrade: UpgradeModule,
@@ -63,7 +61,6 @@ export class LabelStudent extends ComponentStudent {
       ConfigService,
       NodeService,
       NotebookService,
-      sanitizer,
       StudentAssetService,
       StudentDataService,
       upgrade,
@@ -701,26 +698,13 @@ export class LabelStudent extends ComponentStudent {
     canvas.remove(label.text);
   }
 
-  /**
-   * Get the image object representation of the student data
-   * @returns an image object
-   */
-  getImageObject(): any {
+  getStudentDataImageObject(): any {
     const base64String = this.canvas.toDataURL('image/png');
     return this.UtilService.getImageObjectFromBase64String(base64String);
   }
 
-  /**
-   * Snip the labels by converting the canvas to an image.
-   */
   snipImage(): void {
-    const canvasResults: any = $(`#${this.canvasId}`);
-    if (canvasResults.length > 0) {
-      const canvas = canvasResults[0];
-      const base64String = canvas.toDataURL('image/png');
-      const imageObject = this.UtilService.getImageObjectFromBase64String(base64String);
-      this.NotebookService.addNote(imageObject);
-    }
+    this.NotebookService.addNote(this.getStudentDataImageObject());
   }
 
   deleteLabelButtonClicked(): void {

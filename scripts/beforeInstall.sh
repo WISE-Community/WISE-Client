@@ -2,7 +2,6 @@
 
 export HOME=/home/ubuntu
 export WISE_BUILD_FILES=$HOME/wise-build-files
-export env=prod
 
 sudo -u ubuntu -g ubuntu touch $HOME/deploy.log
 exec &>> $HOME/deploy.log
@@ -36,7 +35,7 @@ sed 's/gzip on;/gzip on;\n        gzip_types text\/plain text\/xml image\/gif im
 
 echo "Copying WISE Nginx config file to Nginx sites-enabled folder"
 rm -f /etc/nginx/sites-enabled/*
-cp $WISE_BUILD_FILES/$env/client/wise.conf /etc/nginx/sites-enabled/wise.conf
+cp $WISE_BUILD_FILES/client/wise.conf /etc/nginx/sites-enabled/wise.conf
 
 echo "Restart Nginx"
 systemctl restart nginx
@@ -45,13 +44,11 @@ echo "Copying .vimrc file to the ubuntu home folder"
 sudo -u ubuntu -g ubuntu cp $WISE_BUILD_FILES/.vimrc $HOME/.vimrc
 
 echo "Appending text to .bashrc"
-cat $WISE_BUILD_FILES/append-to-bashrc.txt >> ~/.bashrc
-cat $WISE_BUILD_FILES/$env/append-to-bashrc.txt >> ~/.bashrc
+cat $WISE_BUILD_FILES/client/append-to-bashrc.txt >> ~/.bashrc
 source ~/.bashrc
 
 echo "Copying message of the day file to update-motd.d folder to display notes on login"
-cp $WISE_BUILD_FILES/99-notes /etc/update-motd.d/99-notes
-cat $WISE_BUILD_FILES/$env/append-to-99-notes.txt >> /etc/update-motd.d/99-notes
+cp $WISE_BUILD_FILES/client/99-notes /etc/update-motd.d/99-notes
 chmod 755 /etc/update-motd.d/99-notes
 
 echo "Installing tree"

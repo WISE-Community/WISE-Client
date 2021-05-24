@@ -4,10 +4,6 @@ $margin-spacing: 20px;
   margin-left: 10px;
 }
 
-.prompt {
-  margin-bottom: $margin-spacing;
-}
-
 .input-wrapper {
   min-height: 60px;
   max-width: 800px;
@@ -18,7 +14,7 @@ $margin-spacing: 20px;
 }
 
 .label-text-input-div {
-  min-width: 400px;
+  width: 300px;
   margin-right: $margin-spacing;
 }
 

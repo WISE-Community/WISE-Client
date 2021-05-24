@@ -575,6 +575,37 @@ export class ConfigService {
     return !this.isRunOwner(workgroupId) && !this.isRunSharedTeacher();
   }
 
+  isTeacherWorkgroupId(workgroupId: number): boolean {
+    return this.isTeacherIdentifyingId('workgroupId', workgroupId);
+  }
+
+  isTeacherUserId(userId: number): boolean {
+    return this.isTeacherIdentifyingId('userId', userId);
+  }
+
+  isTeacherIdentifyingId(fieldName: string, value: number): boolean {
+    const teacherUserInfo = this.getTeacherUserInfo();
+    if (teacherUserInfo[fieldName] === value) {
+      return true;
+    }
+    return this.getSharedTeacherUserInfos().some((userInfo: any) => {
+      return userInfo[fieldName] === value;
+    });
+  }
+
+  getTeacherUsername(userId: number): string {
+    const teacherUserInfo = this.getTeacherUserInfo();
+    if (teacherUserInfo.userId === userId) {
+      return teacherUserInfo.username;
+    }
+    for (const sharedTeacherUserInfo of this.getSharedTeacherUserInfos()) {
+      if (sharedTeacherUserInfo.userId === userId) {
+        return sharedTeacherUserInfo.username;
+      }
+    }
+    return null;
+  }
+
   /**
    * Check if the workgroup is the owner of the run
    * @param workgroupId the workgroup id
@@ -813,21 +844,6 @@ export class ConfigService {
     html = html.replace(assetsDirectoryPathIncludingHostRegEx, '');
     html = html.replace(assetsDirectoryPathNotIncludingHostRegEx, '');
     return html;
-  }
-
-  /**
-   * Get the WISE IDs for a workgroup
-   * @param workgroupId get the WISE IDs for this workgroup
-   * @return an array of WISE IDs
-   */
-  getWISEIds(workgroupId) {
-    if (workgroupId != null) {
-      const userInfo = this.getUserInfoByWorkgroupId(workgroupId);
-      if (userInfo != null) {
-        return userInfo.userIds;
-      }
-    }
-    return [];
   }
 
   /**

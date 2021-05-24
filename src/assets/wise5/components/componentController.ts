@@ -32,7 +32,6 @@ class ComponentController {
   saveMessage: any;
   isStudentAttachmentEnabled: boolean;
   isStudentAudioRecordingEnabled: boolean;
-  isPromptVisible: boolean;
   isSaveButtonVisible: boolean;
   isSubmitButtonVisible: boolean;
   isSubmitButtonDisabled: boolean;
@@ -88,7 +87,6 @@ class ComponentController {
     this.isStudentAttachmentEnabled = this.componentContent.isStudentAttachmentEnabled;
     this.isStudentAudioRecordingEnabled =
       this.componentContent.isStudentAudioRecordingEnabled || false;
-    this.isPromptVisible = true;
     this.isSaveButtonVisible = false;
     this.isSubmitButtonVisible = false;
     this.isSubmitButtonDisabled = false;
@@ -104,7 +102,6 @@ class ComponentController {
         ? true
         : this.componentContent.showAddToNotebookButton;
 
-    this.isPromptVisible = true;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     if (!this.ConfigService.isRunActive()) {

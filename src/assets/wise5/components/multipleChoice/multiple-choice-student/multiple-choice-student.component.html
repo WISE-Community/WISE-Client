@@ -1,11 +1,6 @@
 <div class="main-div" #main>
   <div [ngSwitch]="choiceType">
-    <div class="prompt-div">
-      <label *ngIf="isPromptVisible">
-        <span [innerHTML]="prompt"></span>
-      </label>
-      <possible-score [maxScore]="componentContent.maxScore"></possible-score>
-    </div>
+    <component-header [componentContent]="componentContent"></component-header>
     <mat-radio-group *ngSwitchCase="'radio'"
         [(ngModel)]="studentChoices"
         (ngModelChange)="studentDataChanged()">

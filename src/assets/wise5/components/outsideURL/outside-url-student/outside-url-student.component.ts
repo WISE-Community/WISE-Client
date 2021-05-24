@@ -40,7 +40,6 @@ export class OutsideUrlStudent extends ComponentStudent {
       ConfigService,
       NodeService,
       NotebookService,
-      sanitizer,
       StudentAssetService,
       StudentDataService,
       upgrade,

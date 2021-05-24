@@ -7,4 +7,13 @@ angular
   .directive(
     'manageStudentsComponent',
     downgradeComponent({ component: ManageStudentsComponent }) as angular.IDirectiveFactory
-  );
+  )
+  .config([
+    '$stateProvider',
+    ($stateProvider) => {
+      $stateProvider.state('root.cm.manageStudents', {
+        url: '/manageStudents',
+        component: 'manageStudentsComponent'
+      });
+    }
+  ]);
