@@ -17,7 +17,7 @@ import { DrawService } from '../drawService';
 @Component({
   selector: 'draw-student',
   templateUrl: 'draw-student.component.html',
-  styleUrls: ['draw-student.component.scss', 'drawing-tool.scss'],
+  styleUrls: ['draw-student.component.scss', '../drawing-tool.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class DrawStudent extends ComponentStudent {
@@ -28,23 +28,6 @@ export class DrawStudent extends ComponentStudent {
   parentStudentWorkIds: number[] = null;
   isResetButtonVisible: boolean = true;
   showCopyPublicNotebookItemButton: boolean = false;
-  toolFieldToLabel: any = {
-    select: 'Select tool',
-    line: 'Line tool (click and hold to show available line types)',
-    shape: 'Basic shape tool (click and hold to show available shapes)',
-    freeHand: 'Free hand drawing tool',
-    text: 'Text tool (click and hold to show available font sizes)',
-    stamp: 'Stamp tool (click and hold to show available categories)',
-    strokeColor: 'Stroke color (click and hold to show available colors)',
-    fillColor: 'Fill color (click and hold to show available colors)',
-    clone: 'Clone tool',
-    strokeWidth: 'Stroke width (click and hold to show available options)',
-    sendBack: 'Send selected objects to back',
-    sendForward: 'Send selected objects to front',
-    undo: 'Undo',
-    redo: 'Redo',
-    delete: 'Delete selected objects'
-  };
   width: number = 800;
 
   constructor(
@@ -201,33 +184,7 @@ export class DrawStudent extends ComponentStudent {
    * Setup the tools that we will make available to the student.
    */
   setUpTools(): void {
-    const tools = this.componentContent.tools;
-    const drawingTool = $('#' + this.drawingToolId);
-    const toolFields = Object.keys(tools);
-    for (const toolField of toolFields) {
-      this.setUpTool(drawingTool, tools, toolField, this.getToolFieldLabel(toolField));
-    }
-    if (this.isDisabled) {
-      this.hideAllTools();
-    }
-  }
-
-  getToolFieldLabel(toolField: string): string {
-    return this.toolFieldToLabel[toolField];
-  }
-
-  setUpTool(drawingTool: any, tools: any, fieldName: string, title: string): void {
-    if (tools[fieldName]) {
-      drawingTool.find(`[title="${title}"]`).show();
-    } else {
-      drawingTool.find(`[title="${title}"]`).hide();
-    }
-  }
-
-  hideAllTools() {
-    $('#' + this.drawingToolId)
-      .find('.dt-tools')
-      .hide();
+    this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, this.isDisabled);
   }
 
   setStudentWork(componentState: any): void {
