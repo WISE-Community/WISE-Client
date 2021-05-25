@@ -23,6 +23,7 @@ import { AudioOscillatorStudent } from '../assets/wise5/components/audioOscillat
 import { LabelStudent } from '../assets/wise5/components/label/label-student/label-student.component';
 import { ComponentHeader } from '../assets/wise5/directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { DrawStudent } from '../assets/wise5/components/draw/draw-student/draw-student.component';
 import { AddToNotebookButton } from '../assets/wise5/directives/add-to-notebook-button/add-to-notebook-button.component';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { AddToNotebookButton } from '../assets/wise5/directives/add-to-notebook-
     ComponentAnnotationsComponent,
     ComponentHeader,
     ComponentSaveSubmitButtons,
+    DrawStudent,
     HtmlStudent,
     LabelStudent,
     MultipleChoiceStudent,

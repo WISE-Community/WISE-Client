@@ -19,12 +19,27 @@ class EditDrawAdvancedController extends EditAdvancedComponentAngularJSControlle
       connectedComponent.componentId = allowedComponent.id;
       connectedComponent.type = 'importWork';
       this.setImportWorkAsBackgroundIfApplicable(connectedComponent);
+      this.setUpdateOnIfApplicable(connectedComponent);
     }
+  }
+
+  setUpdateOnIfApplicable(connectedComponent) {
+    if (connectedComponent.nodeId === this.nodeId) {
+      connectedComponent.updateOn = 'submit';
+    } else {
+      delete connectedComponent.updateOn;
+    }
+  }
+
+  connectedComponentNodeIdChanged(connectedComponent) {
+    super.connectedComponentNodeIdChanged(connectedComponent);
+    this.setUpdateOnIfApplicable(connectedComponent);
   }
 
   connectedComponentComponentIdChanged(connectedComponent) {
     connectedComponent.type = 'importWork';
     this.setImportWorkAsBackgroundIfApplicable(connectedComponent);
+    this.setUpdateOnIfApplicable(connectedComponent);
     this.componentChanged();
   }
 

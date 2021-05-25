@@ -37,6 +37,7 @@ export abstract class ComponentStudent {
   componentType: string;
   prompt: SafeHtml;
   isSaveButtonVisible: boolean = false;
+  isShowAddToNotebookButton: boolean = false;
   isSubmitButtonVisible: boolean = false;
   isSaveOrSubmitButtonVisible: boolean = false;
   isSubmitButtonDisabled: boolean = false;
@@ -47,6 +48,7 @@ export abstract class ComponentStudent {
   isStudentAttachmentEnabled: boolean = false;
   submitCounter: number = 0;
   latestAnnotations: any;
+  parentStudentWorkIds: any[];
   saveMessage = {
     text: '',
     time: ''
@@ -87,6 +89,8 @@ export abstract class ComponentStudent {
       this.componentContent.showAddToNotebookButton == null
         ? true
         : this.componentContent.showAddToNotebookButton;
+    this.isStudentAttachmentEnabled = this.componentContent.isStudentAttachmentEnabled;
+    this.isShowAddToNotebookButton = this.isAddToNotebookEnabled();
     this.subscribeToSubscriptions();
   }
 
@@ -101,8 +105,10 @@ export abstract class ComponentStudent {
   subscribeToSubscriptions(): void {
     this.subscribeToAnnotationSavedToServer();
     this.subscribeToNodeSubmitClicked();
+    this.subscribeToNotebookItemChosen();
     this.subscribeToNotifyConnectedComponents();
     this.subscribeToAttachStudentAsset();
+    this.subscribeToStarterStateRequest();
     this.subscribeToStudentWorkSavedToServer();
     this.subscribeToRequestComponentState();
   }
@@ -143,6 +149,32 @@ export abstract class ComponentStudent {
     );
   }
 
+  subscribeToNotebookItemChosen() {
+    this.subscriptions.add(
+      this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
+        if (requester === `${this.nodeId}-${this.componentId}`) {
+          const studentWorkId = notebookItem.content.studentWorkIds[0];
+          this.importWorkByStudentWorkId(studentWorkId);
+        }
+      })
+    );
+  }
+
+  importWorkByStudentWorkId(studentWorkId: number): void {
+    this.StudentDataService.getStudentWorkById(studentWorkId).then((componentState) => {
+      if (componentState != null) {
+        this.setStudentWork(componentState);
+        this.setParentStudentWorkIdToCurrentStudentWork(studentWorkId);
+        this.NotebookService.setNotesVisible(false);
+        this.NotebookService.setInsertMode({ insertMode: false });
+      }
+    });
+  }
+
+  setParentStudentWorkIdToCurrentStudentWork(studentWorkId: number): void {
+    this.parentStudentWorkIds = [studentWorkId];
+  }
+
   processConnectedComponentState(componentState: any): void {
     // overridden by children
   }
@@ -166,6 +198,18 @@ export abstract class ComponentStudent {
       )
     );
   }
+
+  subscribeToStarterStateRequest() {
+    this.subscriptions.add(
+      this.NodeService.starterStateRequest$.subscribe((args: any) => {
+        if (this.isForThisComponent(args)) {
+          this.generateStarterState();
+        }
+      })
+    );
+  }
+
+  generateStarterState() {}
 
   copyAndAttachStudentAsset(studentAsset: any): any {
     this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset: any) => {
@@ -583,6 +627,17 @@ export abstract class ComponentStudent {
     );
   }
 
+  copyPublicNotebookItem() {
+    this.NotebookService.setInsertMode({
+      nodeId: this.nodeId,
+      componentId: this.componentId,
+      insertMode: true,
+      requester: this.nodeId + '-' + this.componentId,
+      visibleSpace: 'public'
+    });
+    this.NotebookService.setNotesVisible(true);
+  }
+
   isNotebookEnabled() {
     return this.NotebookService.isNotebookEnabled();
   }
@@ -597,4 +652,22 @@ export abstract class ComponentStudent {
       componentId: this.componentId
     });
   }
+
+  importWorkAsBackground(componentState: any): void {
+    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
+      this.componentContent,
+      componentState
+    );
+    if (connectedComponent.importWorkAsBackground) {
+      this.setComponentStateAsBackgroundImage(componentState);
+    }
+  }
+
+  setComponentStateAsBackgroundImage(componentState: any): void {
+    this.generateImageFromComponentState(componentState).then((image: any) => {
+      this.setBackgroundImage(image.url);
+    });
+  }
+
+  setBackgroundImage(image: string): void {}
 }

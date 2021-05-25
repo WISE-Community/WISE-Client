@@ -6,7 +6,7 @@ import * as fabric from 'fabric';
 window['fabric'] = fabric.fabric;
 import * as EventEmitter2 from 'eventemitter2';
 window['EventEmitter2'] = EventEmitter2;
-import DrawingTool from '../../lib/drawingTool/drawing-tool';
+import DrawingTool from 'drawing-tool';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
@@ -16,6 +16,24 @@ import { UtilService } from '../../services/utilService';
 
 @Injectable()
 export class DrawService extends ComponentService {
+  toolFieldToLabel: any = {
+    select: 'Select tool',
+    line: 'Line tool (click and hold to show available line types)',
+    shape: 'Basic shape tool (click and hold to show available shapes)',
+    freeHand: 'Free hand drawing tool',
+    text: 'Text tool (click and hold to show available font sizes)',
+    stamp: 'Stamp tool (click and hold to show available categories)',
+    strokeColor: 'Stroke color (click and hold to show available colors)',
+    fillColor: 'Fill color (click and hold to show available colors)',
+    clone: 'Clone tool',
+    strokeWidth: 'Stroke width (click and hold to show available options)',
+    sendBack: 'Send selected objects to back',
+    sendForward: 'Send selected objects to front',
+    undo: 'Undo',
+    redo: 'Redo',
+    delete: 'Delete selected objects'
+  };
+
   constructor(
     private upgrade: UpgradeModule,
     private StudentAssetService: StudentAssetService,
@@ -57,6 +75,10 @@ export class DrawService extends ComponentService {
       delete: true
     };
     return component;
+  }
+
+  getDrawingToolId(nodeId: string, componentId: string): string {
+    return `drawing-tool-${nodeId}-${componentId}`;
   }
 
   isCompleted(
@@ -156,56 +178,46 @@ export class DrawService extends ComponentService {
   }
 
   getDrawingToolCanvas(nodeId: string, componentId: string) {
-    const id = `#drawingtool_${nodeId}_${componentId} canvas`;
-    const canvas = angular.element(document.querySelector(id));
-    if (canvas != null && canvas.length > 0) {
-      return canvas[0];
-    }
-    return null;
+    return angular.element(
+      document.querySelector(`#${this.getDrawingToolId(nodeId, componentId)} canvas`)
+    )[0];
   }
 
   initializeDrawingTool(
     drawingToolId: string,
     stamps: any = {},
     width: number = 800,
-    height: number = 600,
-    isHideDrawingTools: boolean = false
+    height: number = 600
   ): any {
-    const drawingTool = new DrawingTool('#' + drawingToolId, {
+    return new DrawingTool(`#${drawingToolId}`, {
       stamps: stamps,
       parseSVG: true,
       width: width,
       height: height
     });
-    let state = null;
-    $('#set-background').on('click', () => {
-      drawingTool.setBackgroundImage($('#background-src').val());
-    });
-    $('#resize-background').on('click', () => {
-      drawingTool.resizeBackgroundToCanvas();
-    });
-    $('#resize-canvas').on('click', () => {
-      drawingTool.resizeCanvasToBackground();
-    });
-    $('#shrink-background').on('click', () => {
-      drawingTool.shrinkBackgroundToCanvas();
-    });
-    $('#clear').on('click', () => {
-      drawingTool.clear(true);
-    });
-    $('#save').on('click', () => {
-      state = drawingTool.save();
-      $('#load').removeAttr('disabled');
-    });
-    $('#load').on('click', () => {
-      if (state === null) return;
-      drawingTool.load(state);
-    });
-    if (isHideDrawingTools) {
-      $('#' + drawingToolId)
-        .find('.dt-tools')
-        .hide();
+  }
+
+  setUpTools(drawingToolId: string, tools: any, isDisabled: boolean): void {
+    if (isDisabled) {
+      this.hideAllTools(drawingToolId);
+    } else {
+      const drawingTool = $(`#${drawingToolId}`);
+      for (const toolName of Object.keys(tools)) {
+        const isShowTool = tools[toolName];
+        this.toggleToolVisibility(drawingTool, isShowTool, this.toolFieldToLabel[toolName]);
+      }
     }
-    return drawingTool;
+  }
+
+  toggleToolVisibility(drawingTool: any, isShowTool: boolean, title: string): void {
+    if (isShowTool) {
+      drawingTool.find(`[title="${title}"]`).show();
+    } else {
+      drawingTool.find(`[title="${title}"]`).hide();
+    }
+  }
+
+  hideAllTools(drawingToolId: string): void {
+    $(`#${drawingToolId}`).find('.dt-tools').hide();
   }
 }

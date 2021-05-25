@@ -96,6 +96,20 @@
             </md-option>
           </md-select>
         </md-input-container>
+        <md-input-container
+            ng-if='connectedComponent.nodeId === $ctrl.nodeId'
+            style='margin-right: 20; min-width: 80px;'>
+          <label>{{ ::'updateOn' | translate }}</label>
+          <md-select ng-model='connectedComponent.updateOn'
+                     ng-change='$ctrl.componentChanged()'>
+            <md-option value='submit'>
+              {{ ::'SUBMIT' | translate }}
+            </md-option>
+            <md-option value='save'>
+              {{ ::'SAVE' | translate }}
+            </md-option>
+          </md-select>
+        </md-input-container>
         <span flex></span>
         <md-input-container style='margin-left: 20;'>
           <md-button class='topButton md-raised md-primary'

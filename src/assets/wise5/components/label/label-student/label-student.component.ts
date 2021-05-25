@@ -30,7 +30,6 @@ export class LabelStudent extends ComponentStudent {
   ENTER_KEY_CODE: number = 13;
   isAddNewLabelButtonVisible: boolean = true;
   isResetButtonVisible: boolean = true;
-  isShowAddToNotebookButton: boolean = false;
   labels: any[] = [];
   lineZIndex: number = 0;
   NEW_LABEL_X_LOCATION: number = 80;
@@ -74,12 +73,11 @@ export class LabelStudent extends ComponentStudent {
     this.enableFabricTextPadding();
     this.canvasId = `canvas_${this.nodeId}_${this.componentId}`;
     this.initializeComponent(this.componentContent);
-    this.isShowAddToNotebookButton = this.isAddToNotebookEnabled();
-    this.broadcastDoneRenderingComponent();
   }
 
   ngAfterViewInit(): void {
     this.setupCanvas();
+    this.broadcastDoneRenderingComponent();
   }
 
   enableFabricTextPadding(): void {
@@ -758,7 +756,7 @@ export class LabelStudent extends ComponentStudent {
         case 'Embedded':
         case 'Graph':
         case 'Table':
-          this.mergeBackgroundGeneratingComponentState(componentState);
+          this.importWorkAsBackground(componentState);
       }
     }
     return componentStateTo;
@@ -804,16 +802,6 @@ export class LabelStudent extends ComponentStudent {
     }
   }
 
-  mergeBackgroundGeneratingComponentState(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
-    );
-    if (connectedComponent.importWorkAsBackground) {
-      this.setComponentStateAsBackgroundImage(componentState);
-    }
-  }
-
   getConnectedComponentForComponentState(componentState: any): any {
     for (const connectedComponent of this.componentContent.connectedComponents) {
       if (
@@ -824,12 +812,6 @@ export class LabelStudent extends ComponentStudent {
       }
     }
     return null;
-  }
-
-  setComponentStateAsBackgroundImage(componentState: any): void {
-    this.generateImageFromComponentState(componentState).then((image: any) => {
-      this.setBackgroundImage(image.url);
-    });
   }
 
   resetButtonClicked(): void {
