@@ -319,6 +319,6 @@ function createDrawingToolDiv(drawingToolId: string): void {
 }
 
 function expectToolToBeVisible(drawingToolId: string, name: string, isVisible: boolean): void {
-  const label = service.getToolFieldLabel(name);
+  const label = service.toolFieldToLabel[name];
   expect($(`#${drawingToolId}`).find(`[title="${label}"]`).is(':visible')).toEqual(isVisible);
 }

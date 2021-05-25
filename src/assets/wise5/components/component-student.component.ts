@@ -627,7 +627,7 @@ export abstract class ComponentStudent {
     );
   }
 
-  copyPublicNotebookItemButtonClicked() {
+  copyPublicNotebookItem() {
     this.NotebookService.setInsertMode({
       nodeId: this.nodeId,
       componentId: this.componentId,
@@ -652,4 +652,22 @@ export abstract class ComponentStudent {
       componentId: this.componentId
     });
   }
+
+  importWorkAsBackground(componentState: any): void {
+    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
+      this.componentContent,
+      componentState
+    );
+    if (connectedComponent.importWorkAsBackground) {
+      this.setComponentStateAsBackgroundImage(componentState);
+    }
+  }
+
+  setComponentStateAsBackgroundImage(componentState: any): void {
+    this.generateImageFromComponentState(componentState).then((image: any) => {
+      this.setBackgroundImage(image.url);
+    });
+  }
+
+  setBackgroundImage(image: string): void {}
 }

@@ -1,30 +1,23 @@
 <div class="main-div">
-  <div class="prompt">
-    <span [innerHTML]="prompt"></span>
-    <possible-score [maxScore]="componentContent.maxScore"></possible-score>
-  </div>
+  <component-header [componentContent]="componentContent"></component-header>
   <div class="component__actions buttons-div"
       fxLayout="row wrap">
     <button
         *ngIf="showCopyPublicNotebookItemButton"
         mat-button
         class="mat-primary mat-raised-button top-button"
-        (click)="copyPublicNotebookItemButtonClicked()"
+        (click)="copyPublicNotebookItem()"
         [disabled]="isDisabled"
         i18n>
       <mat-icon>file_download</mat-icon>
       Import Classmate Work
     </button>
-    <button
+    <add-to-notebook-button
         *ngIf="isShowAddToNotebookButton"
-        mat-button
-        class="mat-primary mat-raised-button top-button"
-        (click)="addToNotebook()"
-        [disabled]="isDisabled"
-        i18n>
-      <mat-icon>note_add</mat-icon>
-      Add to Notebook
-    </button>
+        class="add-to-notebook-button top-button"
+        [isDisabled]="isDisabled"
+        (snipImage)="addToNotebook()">
+    </add-to-notebook-button>
     <button
         *ngIf="isStudentAttachmentEnabled"
         mat-button

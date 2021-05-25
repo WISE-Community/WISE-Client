@@ -62,28 +62,9 @@ describe('DrawStudent', () => {
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
     component.nodeId = 'node1';
-    component.componentContent = {
-      id: 'component1',
-      type: 'Draw',
-      prompt: 'Draw some shapes.',
-      tools: {
-        select: true,
-        line: true,
-        shape: true,
-        freeHand: true,
-        text: true,
-        stamp: true,
-        strokeColor: true,
-        fillColor: true,
-        clone: true,
-        strokeWidth: true,
-        sendBack: true,
-        sendForward: true,
-        undo: true,
-        redo: true,
-        delete: true
-      }
-    };
+    component.componentContent = TestBed.inject(DrawService).createComponent();
+    component.componentContent.id = 'component1';
+    component.componentContent.prompt = 'Draw some shapes.';
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {

@@ -6,7 +6,7 @@ import * as fabric from 'fabric';
 window['fabric'] = fabric.fabric;
 import * as EventEmitter2 from 'eventemitter2';
 window['EventEmitter2'] = EventEmitter2;
-import DrawingTool from '../../lib/drawingTool/drawing-tool';
+import DrawingTool from 'drawing-tool';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
@@ -178,12 +178,9 @@ export class DrawService extends ComponentService {
   }
 
   getDrawingToolCanvas(nodeId: string, componentId: string) {
-    const id = `#drawingtool_${nodeId}_${componentId} canvas`;
-    const canvas = angular.element(document.querySelector(id));
-    if (canvas != null && canvas.length > 0) {
-      return canvas[0];
-    }
-    return null;
+    return angular.element(
+      document.querySelector(`#${this.getDrawingToolId(nodeId, componentId)} canvas`)
+    )[0];
   }
 
   initializeDrawingTool(
@@ -201,26 +198,23 @@ export class DrawService extends ComponentService {
   }
 
   setUpTools(drawingToolId: string, tools: any, isDisabled: boolean): void {
-    const drawingTool = $(`#${drawingToolId}`);
-    for (const toolName of Object.keys(tools)) {
-      const isShowTool = tools[toolName];
-      this.setUpTool(drawingTool, isShowTool, this.getToolFieldLabel(toolName));
-    }
     if (isDisabled) {
       this.hideAllTools(drawingToolId);
+    } else {
+      const drawingTool = $(`#${drawingToolId}`);
+      for (const toolName of Object.keys(tools)) {
+        const isShowTool = tools[toolName];
+        this.toggleToolVisibility(drawingTool, isShowTool, this.toolFieldToLabel[toolName]);
+      }
     }
   }
 
-  setUpTool(drawingTool: any, isShowTool: boolean, title: string): void {
+  toggleToolVisibility(drawingTool: any, isShowTool: boolean, title: string): void {
     if (isShowTool) {
       drawingTool.find(`[title="${title}"]`).show();
     } else {
       drawingTool.find(`[title="${title}"]`).hide();
     }
-  }
-
-  getToolFieldLabel(toolField: string): string {
-    return this.toolFieldToLabel[toolField];
   }
 
   hideAllTools(drawingToolId: string): void {

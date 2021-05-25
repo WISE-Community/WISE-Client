@@ -756,7 +756,7 @@ export class LabelStudent extends ComponentStudent {
         case 'Embedded':
         case 'Graph':
         case 'Table':
-          this.mergeBackgroundGeneratingComponentState(componentState);
+          this.importWorkAsBackground(componentState);
       }
     }
     return componentStateTo;
@@ -802,16 +802,6 @@ export class LabelStudent extends ComponentStudent {
     }
   }
 
-  mergeBackgroundGeneratingComponentState(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
-    );
-    if (connectedComponent.importWorkAsBackground) {
-      this.setComponentStateAsBackgroundImage(componentState);
-    }
-  }
-
   getConnectedComponentForComponentState(componentState: any): any {
     for (const connectedComponent of this.componentContent.connectedComponents) {
       if (
@@ -822,12 +812,6 @@ export class LabelStudent extends ComponentStudent {
       }
     }
     return null;
-  }
-
-  setComponentStateAsBackgroundImage(componentState: any): void {
-    this.generateImageFromComponentState(componentState).then((image: any) => {
-      this.setBackgroundImage(image.url);
-    });
   }
 
   resetButtonClicked(): void {

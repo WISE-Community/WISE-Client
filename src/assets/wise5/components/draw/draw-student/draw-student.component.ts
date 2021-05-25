@@ -1,6 +1,5 @@
 import { fabric } from 'fabric';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -85,7 +84,7 @@ export class DrawStudent extends ComponentStudent {
     this.disableComponentIfNecessary();
     this.setDrawingChangedListener();
     this.setToolChangedListener();
-    this.setUpTools();
+    this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, this.isDisabled);
 
     if (this.hasMaxSubmitCount() && this.hasSubmitsLeft()) {
       this.isSubmitButtonDisabled = true;
@@ -94,6 +93,8 @@ export class DrawStudent extends ComponentStudent {
     if (this.isDisabled) {
       this.drawingTool.canvas.removeListeners();
     }
+
+    this.broadcastDoneRenderingComponent();
   }
 
   initializeStudentData(): void {
@@ -103,21 +104,21 @@ export class DrawStudent extends ComponentStudent {
       this.DrawService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
       this.setStudentWork(this.componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-      this.handleConnectedComponents();
-    } else if (this.isStarterDrawDataAvailable()) {
-      this.drawingTool.load(this.componentContent.starterDrawData);
+    } else {
+      this.loadConnectedComponentOrStarterDrawDataIfAvailable();
     }
     if (
       !this.DrawService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
-      this.setAuthoredBackgroundIfNeeded();
+      this.setAuthoredBackgroundIfAvailable(true);
     }
   }
 
-  setAuthoredBackgroundIfNeeded() {
-    if (this.isAuthoredBackgroundAvailable()) {
-      this.setAuthoredBackgroundAfterTimeout();
+  loadConnectedComponentOrStarterDrawDataIfAvailable(): void {
+    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    } else if (this.isStarterDrawDataAvailable()) {
+      this.drawingTool.load(this.componentContent.starterDrawData);
     }
   }
 
@@ -125,18 +126,18 @@ export class DrawStudent extends ComponentStudent {
     return this.componentContent.starterDrawData != null;
   }
 
-  isAuthoredBackgroundAvailable(): boolean {
-    return this.componentContent.background != null && this.componentContent.background !== '';
-  }
-
-  setAuthoredBackgroundIfAvailable(): void {
+  setAuthoredBackgroundIfAvailable(useTimeout: boolean = false): void {
     if (this.isAuthoredBackgroundAvailable()) {
-      this.setBackgroundImage(this.componentContent.background);
+      if (useTimeout) {
+        this.setAuthoredBackgroundAfterTimeout();
+      } else {
+        this.setBackgroundImage(this.componentContent.background);
+      }
     }
   }
 
-  setBackgroundImage(image: string): void {
-    this.drawingTool.setBackgroundImage(image);
+  isAuthoredBackgroundAvailable(): boolean {
+    return this.componentContent.background != null && this.componentContent.background !== '';
   }
 
   setAuthoredBackgroundAfterTimeout(): void {
@@ -144,8 +145,12 @@ export class DrawStudent extends ComponentStudent {
     // if we don't do this, the background may not overwrite the existing background that is already
     // in the draw data.
     setTimeout(() => {
-      this.setAuthoredBackgroundIfAvailable();
+      this.setBackgroundImage(this.componentContent.background);
     }, 500);
+  }
+
+  setBackgroundImage(image: string): void {
+    this.drawingTool.setBackgroundImage(image);
   }
 
   setDrawingChangedListener(): void {
@@ -180,13 +185,6 @@ export class DrawStudent extends ComponentStudent {
     this.setAuthoredBackgroundIfAvailable();
   }
 
-  /**
-   * Setup the tools that we will make available to the student.
-   */
-  setUpTools(): void {
-    this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, this.isDisabled);
-  }
-
   setStudentWork(componentState: any): void {
     this.setDrawData(componentState);
     this.processLatestStudentWork();
@@ -195,12 +193,8 @@ export class DrawStudent extends ComponentStudent {
   resetDrawing(): void {
     if (confirm($localize`Are you sure you want to clear your drawing?`)) {
       this.drawingTool.clear();
-      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-        this.handleConnectedComponents();
-      } else if (this.componentContent.starterDrawData != null) {
-        this.drawingTool.load(this.componentContent.starterDrawData);
-      }
-      this.setAuthoredBackgroundIfAvailable();
+      this.loadConnectedComponentOrStarterDrawDataIfAvailable();
+      this.setAuthoredBackgroundIfAvailable(true);
       this.parentStudentWorkIds = null;
     }
   }
@@ -251,7 +245,7 @@ export class DrawStudent extends ComponentStudent {
           case 'Draw':
             componentState = this.UtilService.makeCopyOfJSONObject(componentState);
             this.setDrawData(componentState);
-            this.setAuthoredBackgroundIfNeeded();
+            this.setAuthoredBackgroundIfAvailable(true);
             break;
           case 'ConceptMap':
           case 'Embedded':
@@ -351,12 +345,7 @@ export class DrawStudent extends ComponentStudent {
   }
 
   getCanvas(): any {
-    const canvas: any = $(`#${this.drawingToolId} canvas`);
-    if (canvas != null && canvas.length > 0) {
-      return canvas[0];
-    } else {
-      return null;
-    }
+    return $(`#${this.drawingToolId} canvas`)[0];
   }
 
   /**
@@ -409,22 +398,6 @@ export class DrawStudent extends ComponentStudent {
       return drawDataJSON.canvas.backgroundImage.src;
     }
     return null;
-  }
-
-  importWorkAsBackground(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
-    );
-    if (connectedComponent.importWorkAsBackground) {
-      this.setComponentStateAsBackgroundImage(componentState);
-    }
-  }
-
-  setComponentStateAsBackgroundImage(componentState: any): void {
-    this.generateImageFromComponentState(componentState).then((image: any) => {
-      this.setBackgroundImage(image.url);
-    });
   }
 
   generateStarterState(): void {
