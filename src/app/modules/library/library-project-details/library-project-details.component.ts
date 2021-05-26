@@ -1,13 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LibraryService } from '../../../services/library.service';
+import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
 import { CreateRunDialogComponent } from '../../../teacher/create-run-dialog/create-run-dialog.component';
 import { UseWithClassWarningDialogComponent } from '../../../teacher/use-with-class-warning-dialog/use-with-class-warning-dialog.component';
 import { NGSSStandards } from '../ngssStandards';
 import { Project } from '../../../domain/project';
 import { ParentProject } from '../../../domain/parentProject';
-import { Router } from '@angular/router';
 import { ConfigService } from '../../../services/config.service';
 
 @Component({
@@ -29,17 +28,25 @@ export class LibraryProjectDetailsComponent implements OnInit {
   parentAuthorsString: string = '';
   more: boolean = false;
   isCopy: boolean = false;
+  discourseURL: string = '';
+  discourseCategoryURL: string = '';
+  topics: any[] = [];
+  postCount: number = 0;
+  hasMoreTopics: boolean = false;
 
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<LibraryProjectDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private configService: ConfigService,
-    private libraryService: LibraryService,
-    private userService: UserService
+    private userService: UserService,
+    private http: HttpClient
   ) {
-    this.isTeacher = userService.isTeacher();
-    this.isRunProject = data.isRunProject;
+  }
+
+  ngOnInit() {
+    this.isTeacher = this.userService.isTeacher();
+    this.isRunProject = this.data.isRunProject;
     if (this.data.project) {
       this.project = new Project(this.data.project);
       const numParents = this.data.project.metadata.parentProjects
@@ -52,10 +59,34 @@ export class LibraryProjectDetailsComponent implements OnInit {
       }
       this.setNGSS();
       this.setLicenseInfo();
+      this.setDiscussion();
     }
   }
 
-  ngOnInit() {}
+  setDiscussion() {
+    const discourseCategoryURL = this.project.metadata.discourseCategoryURL;
+    if (discourseCategoryURL) {
+      this.http
+        .get(`${discourseCategoryURL}.json?order=latest`)
+        .subscribe(({ topic_list, users }: any) => {
+          if (topic_list.topics) {
+            this.topics = topic_list.topics;
+            this.postCount = this.countPosts();
+            this.discourseURL = discourseCategoryURL.match(/(.+)\/c\/.+/)[1];
+            this.discourseCategoryURL = discourseCategoryURL;
+            this.hasMoreTopics = topic_list.more_topics_url ? true : false;
+          }
+        });
+    }
+  }
+
+  countPosts(): number {
+    let postCount = 0;
+    this.topics.forEach((topic) => {
+      postCount += topic.posts_count;
+    });
+    return postCount;
+  }
 
   onClose(): void {
     this.dialogRef.close();

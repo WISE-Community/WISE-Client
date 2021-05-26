@@ -25,7 +25,7 @@
                               [isRun]="isRunProject"></app-library-project-menu>
   </div>
   <div class="info-block">
-    <div class="library-project-details__info">
+    <div class="details">
       <p *ngIf="project.wiseVersion === 4"
          class="warn"
          fxLayout="row"
@@ -51,14 +51,30 @@
         <ng-container *ngFor="let dcia of ngss.dciArrangements; let isLast=last">
           <a href="{{ ngssWebUrl }}{{ dcia.id }}" target="_blank">{{ dcia.id }} {{ dcia.name }}</a>
           <ng-container *ngIf="dcia.children.length">
-            (<ng-container *ngFor="let pe of dcia.children; let isLastChild=last"><a class="library-project-details__pe" href="{{ ngssWebUrl }}{{ pe.id }}"
-                                                                                     target="_blank" matTooltip="{{ pe.name }}"
-                                                                                     [matTooltipPosition]="'above'">{{ pe.id }}</a>{{ isLastChild ? '' : ', ' }}</ng-container>)
+            (<ng-container *ngFor="let pe of dcia.children; let isLastChild=last"><a class="pe" href="{{ ngssWebUrl }}{{ pe.id }}"
+                target="_blank" matTooltip="{{ pe.name }}"
+                [matTooltipPosition]="'above'">{{ pe.id }}</a>{{ isLastChild ? '' : ', ' }}</ng-container>)
           </ng-container>{{ isLast ? '' : ' / ' }}
         </ng-container>
       </p>
     </div>
-    <div class="library-project-details__license notice-bg-bg mat-caption secondary-text">
+    <ng-container *ngIf="discourseCategoryURL">
+      <mat-divider></mat-divider>
+      <div class="discuss" fxLayoutAlign="start center">
+        <mat-icon>forum</mat-icon>&nbsp;
+        <a href="{{ project.metadata.discourseCategoryURL }}" target="_blank">
+          <strong i18n>Discuss ({{ postCount }}{{ hasMoreTopics ? '+' : '' }})</strong>
+        </a>
+      </div>
+      <ul class="topics" *ngIf="topics.length">
+        <li *ngFor="let topic of topics.slice(0, 3)">
+          <a href="{{discourseURL}}/t/{{topic.slug}}/{{topic.id}}" target="_blank" i18n>
+            {{ topic.title }}
+          </a>
+        </li>
+      </ul>
+    </ng-container>
+    <div class="license notice-bg-bg mat-caption secondary-text">
       <img src="../../../../assets/img/by-sa.png" alt="CC BY-SA"/>&nbsp;
       <span *ngIf="!isCopy" [ngSwitch]="authorsString.length">
         <ng-container *ngSwitchCase="0" i18n><a href="{{project.uri}}" target="_blank">This unit</a> is licensed under <a href="{{licenseUrl}}" target="_blank">CC BY-SA</a>.</ng-container>
@@ -80,11 +96,12 @@
   </div>
 </div>
 <div mat-dialog-actions
-     fxLayout="row"
-     fxLayout.xs="column"
+     fxLayout.gt-sm="row"
+     fxLayout="column"
      fxLayoutAlign="end"
-     fxLayoutGap="8px">
-  <button mat-button cdkFocusRegionstart (click)="onClose()" i18n>Close</button>
+     fxLayoutGap="8px"
+     fxLayoutGap.gt-sm="16px">
+  <button mat-button cdkFocusInitial (click)="onClose()" i18n>Close</button>
   <button *ngIf="isTeacher && !isRunProject && project.wiseVersion !== 4"
           mat-flat-button
           color="accent"
