@@ -164,7 +164,7 @@ class ComponentController {
     this.subscriptions.add(
       this.NodeService.nodeSubmitClicked$.subscribe(({ nodeId }) => {
         if (this.nodeId === nodeId) {
-          this.handleNodeSubmit();
+          this.submit('nodeSubmitButton');
         }
       })
     );
@@ -274,10 +274,6 @@ class ComponentController {
 
   handleStudentWorkSavedToServerAdditionalProcessing(componentState: any) {}
 
-  handleNodeSubmit() {
-    this.isSubmit = true;
-  }
-
   getPrompt() {
     return this.componentContent.prompt;
   }
@@ -302,12 +298,10 @@ class ComponentController {
    * e.g. 'componentSubmitButton' or 'nodeSubmitButton'
    */
   submit(submitTriggeredBy = null) {
-    if (this.getIsSubmitDirty()) {
+    if (this.isSubmitDirty) {
       let isPerformSubmit = true;
-
       if (this.hasMaxSubmitCount()) {
         const numberOfSubmitsLeft = this.getNumberOfSubmitsLeft();
-
         if (this.hasSubmitMessage()) {
           isPerformSubmit = this.confirmSubmit(numberOfSubmitsLeft);
         } else {
@@ -316,7 +310,6 @@ class ComponentController {
           }
         }
       }
-
       if (isPerformSubmit) {
         this.performSubmit(submitTriggeredBy);
       } else {
@@ -444,10 +437,6 @@ class ComponentController {
 
   setIsSubmitDirty(isDirty) {
     this.isSubmitDirty = isDirty;
-  }
-
-  getIsSubmitDirty() {
-    return this.isSubmitDirty;
   }
 
   emitComponentDirty(isDirty) {

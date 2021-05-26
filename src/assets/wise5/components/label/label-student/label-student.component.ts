@@ -114,10 +114,6 @@ export class LabelStudent extends ComponentStudent {
     }
   }
 
-  handleNodeSubmit(): void {
-    this.submit('nodeSubmitButton');
-  }
-
   setupCanvas(): void {
     this.canvas = this.LabelService.initializeCanvas(
       this.canvasId,

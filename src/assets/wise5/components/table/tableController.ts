@@ -504,10 +504,6 @@ class TableController extends ComponentController {
     );
   }
 
-  handleNodeSubmit() {
-    this.submit('nodeSubmitButton');
-  }
-
   /**
    * Get a copy of the table data
    * @param tableData the table data to copy

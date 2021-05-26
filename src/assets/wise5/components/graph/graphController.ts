@@ -580,10 +580,6 @@ class GraphController extends ComponentController {
     }
   }
 
-  handleNodeSubmit() {
-    this.submit('nodeSubmitButton');
-  }
-
   setupMouseMoveListener() {
     if (!this.setupMouseMoveListenerDone) {
       /*

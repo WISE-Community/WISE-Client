@@ -282,10 +282,6 @@ class ConceptMapController extends ComponentController {
     }
   }
 
-  handleNodeSubmit() {
-    this.submit('nodeSubmitButton');
-  }
-
   initializeSVG() {
     this.setupSVG();
     let componentState = this.$scope.componentState;

@@ -235,10 +235,6 @@ class MatchController extends ComponentController {
       });
   }
 
-  handleNodeSubmit() {
-    this.submit('nodeSubmitButton');
-  }
-
   setStudentWork(componentState) {
     const studentData = componentState.studentData;
     const componentStateBuckets = studentData.buckets;

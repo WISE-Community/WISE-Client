@@ -105,10 +105,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     }
   }
 
-  handleNodeSubmit(): void {
-    this.submit('nodeSubmitButton');
-  }
-
   setStudentWork(componentState: any): void {
     if (componentState != null) {
       const studentData = componentState.studentData;
