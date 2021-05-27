@@ -59,33 +59,7 @@ export class LibraryProjectDetailsComponent implements OnInit {
       }
       this.setNGSS();
       this.setLicenseInfo();
-      this.setDiscussion();
     }
-  }
-
-  setDiscussion() {
-    const discourseCategoryURL = this.project.metadata.discourseCategoryURL;
-    if (discourseCategoryURL) {
-      this.http
-        .get(`${discourseCategoryURL}.json?order=latest`)
-        .subscribe(({ topic_list, users }: any) => {
-          if (topic_list.topics) {
-            this.topics = topic_list.topics;
-            this.postCount = this.countPosts();
-            this.discourseURL = discourseCategoryURL.match(/(.+)\/c\/.+/)[1];
-            this.discourseCategoryURL = discourseCategoryURL;
-            this.hasMoreTopics = topic_list.more_topics_url ? true : false;
-          }
-        });
-    }
-  }
-
-  countPosts(): number {
-    let postCount = 0;
-    this.topics.forEach((topic) => {
-      postCount += topic.posts_count;
-    });
-    return postCount;
   }
 
   onClose(): void {
