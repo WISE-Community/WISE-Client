@@ -106,10 +106,6 @@ export class AudioOscillatorStudent extends ComponentStudent {
     this.audioContext = new AudioContext();
   }
 
-  handleNodeSubmit(): void {
-    this.submit('nodeSubmitButton');
-  }
-
   setParametersFromComponentContent(): void {
     this.frequency = this.componentContent.startingFrequency;
     this.oscillatorTypes = this.componentContent.oscillatorTypes;

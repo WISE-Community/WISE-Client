@@ -264,10 +264,6 @@ class OpenResponseController extends ComponentController {
     }
   }
 
-  handleNodeSubmit() {
-    this.submit('nodeSubmitButton');
-  }
-
   /**
    * Populate the student work into the component
    * @param componentState the component state to populate into the component

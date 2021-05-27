@@ -184,10 +184,6 @@ class AnimationController extends ComponentController {
     );
   }
 
-  handleNodeSubmit() {
-    this.submit('nodeSubmitButton');
-  }
-
   initializeCoordinates() {
     if (this.componentContent.widthInPixels != null && this.componentContent.widthInPixels != '') {
       this.width = this.componentContent.widthInPixels;

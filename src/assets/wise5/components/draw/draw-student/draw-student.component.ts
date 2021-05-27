@@ -69,10 +69,6 @@ export class DrawStudent extends ComponentStudent {
     this.initializeDrawingTool();
   }
 
-  handleNodeSubmit(): void {
-    this.submit('nodeSubmitButton');
-  }
-
   initializeDrawingTool(): void {
     this.drawingTool = this.DrawService.initializeDrawingTool(
       this.drawingToolId,

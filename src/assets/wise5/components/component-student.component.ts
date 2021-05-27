@@ -131,7 +131,7 @@ export abstract class ComponentStudent {
     this.subscriptions.add(
       this.NodeService.nodeSubmitClicked$.subscribe(({ nodeId }) => {
         if (this.nodeId === nodeId) {
-          this.handleNodeSubmit();
+          this.submit('nodeSubmitButton');
         }
       })
     );
@@ -181,10 +181,6 @@ export abstract class ComponentStudent {
 
   isForThisComponent(object: any) {
     return this.nodeId === object.nodeId && this.componentId === object.componentId;
-  }
-
-  handleNodeSubmit(): void {
-    this.isSubmit = true;
   }
 
   subscribeToAttachStudentAsset() {
@@ -394,11 +390,10 @@ export abstract class ComponentStudent {
   }
 
   submit(submitTriggeredBy = null): void {
-    if (this.getIsSubmitDirty()) {
+    if (this.isSubmitDirty) {
       let isPerformSubmit = true;
       if (this.hasMaxSubmitCount()) {
         const numberOfSubmitsLeft = this.getNumberOfSubmitsLeft();
-
         if (this.hasSubmitMessage()) {
           isPerformSubmit = this.confirmSubmit(numberOfSubmitsLeft);
         } else {
@@ -413,10 +408,6 @@ export abstract class ComponentStudent {
         this.setIsSubmit(false);
       }
     }
-  }
-
-  getIsSubmitDirty(): boolean {
-    return this.isSubmitDirty;
   }
 
   hasMaxSubmitCount(): boolean {
