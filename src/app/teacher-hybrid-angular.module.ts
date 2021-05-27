@@ -78,6 +78,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { AnimationGrading } from '../assets/wise5/components/animation/animation-grading/animation-grading.component';
 import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
 import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
+import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 
 @NgModule({
   declarations: [
@@ -127,6 +128,7 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
     NavItemProgressComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
+    NodeIconChooserDialog,
     OpenResponseGrading,
     OpenResponseAuthoring,
     OutsideUrlAuthoring,

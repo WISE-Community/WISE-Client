@@ -1,0 +1,42 @@
+<h2 mat-dialog-title i18n>Choose Step Icon and Color</h2>
+<mat-dialog-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+  <span i18n>Preview:</span>
+  <div *ngIf="newNodeIcon.type === 'font'"
+      style="background-color: {{ newNodeIcon.color }}"
+      class="{{ node.isGroup() ? 'avatar--square ' : '' }} avatar">
+    <mat-icon class="mat-18 material-icons">{{ newNodeIcon.fontName }}</mat-icon>
+  </div>
+  <img *ngIf="newNodeIcon.type === 'img'"
+      class="{{ node.isGroup() ? 'avatar--square ' : '' }} mat-18 avatar"
+      [src]="newNodeIcon.imgSrc"
+      alt="newNodeIcon.imgAlt" />
+  <div>
+    <span i18n>Icons:</span>
+    <span *ngFor="let fontName of fontNames">
+      <mat-icon class="fontNameChoice" (click)="chooseFontName(fontName)">{{ fontName }}</mat-icon>
+    </span>
+  </div>
+  <div>
+    <span i18n>Colors:</span>
+    <span *ngFor="let color of colors"
+        class="colorChoice"
+        (click)="chooseFontColor(color)"
+        style="background-color: {{color}}"></span>
+  </div>
+  <div>
+    <span i18n>KI Icons:</span>
+    <span *ngFor="let kiIcon of kiIcons">
+      <img class="{{ node.isGroup() ? 'avatar--square ' : '' }} mat-18 avatar kiChoice"
+          [src]="kiIcon.imgSrc"
+          [alt]="kiIcon.imgAlt"
+          (click)="chooseKIIcon(kiIcon)" />
+    </span>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Cancel</button>
+  <button mat-button class="mat-raised-button mat-primary"
+      (click)="save()"
+      aria-label="save"
+      i18n>Save</button>
+</mat-dialog-actions>

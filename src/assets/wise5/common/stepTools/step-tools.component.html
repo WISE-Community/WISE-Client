@@ -10,7 +10,8 @@
       matTooltipPosition="below">
     <mat-icon>{{icons.prev}}</mat-icon>
   </button>
-  <node-icon *ngIf="nodeId" [nodeId]="nodeId" size="18"></node-icon>&nbsp;
+  <node-icon *ngIf="nodeId" [nodeId]="nodeId" size="18" (click)="openNodeIconChooserDialog()">
+  </node-icon>&nbsp;
   <mat-select id="stepSelectMenu"
       class="mat-button notice-bg-bg"
       [panelClass]="'select-panel-full-height'"
