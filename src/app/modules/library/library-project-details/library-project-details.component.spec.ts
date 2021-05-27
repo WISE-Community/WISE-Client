@@ -40,12 +40,6 @@ describe('LibraryProjectDetailsComponent', () => {
   let component: LibraryProjectDetailsComponent;
   let fixture: ComponentFixture<LibraryProjectDetailsComponent>;
   let http: HttpTestingController;
-  const sampleDiscourseResponse = {
-    users: [],
-    topic_list: {
-      topics: [{ id: 1, posts_count: 2 }, { id: 2, posts_count: 2 }, { id: 3, posts_count: 4 }]
-    }
-  };
 
   configureTestSuite(() => {
     TestBed.configureTestingModule({
@@ -140,15 +134,5 @@ describe('LibraryProjectDetailsComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.textContent).toContain('is a copy of Photosynthesis');
-  });
-
-  it('should show discussion links and post count', () => {
-    http = TestBed.inject(HttpTestingController);
-    const discourseCategoryURL = 'http://localhost:9292/c/sample-category/1';
-    component.project.metadata.discourseCategoryURL = discourseCategoryURL;
-    component.setDiscussion();
-    http.expectOne(`${discourseCategoryURL}.json?order=latest`).flush(sampleDiscourseResponse);
-    expect(component.topics.length).toEqual(3);
-    expect(component.postCount).toEqual(8);
   });
 });
