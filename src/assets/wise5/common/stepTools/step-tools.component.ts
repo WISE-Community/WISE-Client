@@ -4,8 +4,6 @@ import { Subscription } from 'rxjs';
 import { NodeService } from '../../services/nodeService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { MatDialog } from '@angular/material/dialog';
-import { NodeIconChooserDialog } from '../node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 import { Node } from '../Node';
 
 @Component({
@@ -23,7 +21,6 @@ export class StepToolsComponent {
   subscriptions: Subscription = new Subscription();
 
   constructor(
-    public dialog: MatDialog,
     private dir: Directionality,
     private NodeService: NodeService,
     private ProjectService: TeacherProjectService,
@@ -90,13 +87,6 @@ export class StepToolsComponent {
   goToNextNode() {
     this.NodeService.goToNextNode().then((nodeId: string) => {
       this.nodeId = nodeId;
-    });
-  }
-
-  openNodeIconChooserDialog() {
-    this.dialog.open(NodeIconChooserDialog, {
-      data: { node: this.node },
-      panelClass: 'mat-dialog--md'
     });
   }
 }

@@ -111,8 +111,8 @@
     </div>
   </div>
 </div>
-<!-- input for changing the step title -->
-<div ng-if='$ctrl.showComponents && !$ctrl.insertComponentMode'>
+<div ng-if='$ctrl.showComponents && !$ctrl.insertComponentMode' layout="row">
+  <node-icon node-id="{{$ctrl.nodeId}}" can-edit="{{true}}" size="18"></node-icon>
   <div layout='row' style='margin-left: 10px; max-height: 60px;'>
     <div layout='row' style='margin-top: 18px; margin-right: 10px;'>
       <h6 ng-if="!$ctrl.isGroupNode">{{ ::'stepTitle' | translate }} {{ $ctrl.nodePosition }}:</h6>
