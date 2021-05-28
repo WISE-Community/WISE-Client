@@ -264,7 +264,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
@@ -4463,6 +4463,13 @@
           <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2133f444f222b8ac645f3b0c53c2b30dfa15e6d0" datatype="html">
+        <source>Discuss (<x id="INTERPOLATION" equiv-text="{{postCount}}"/><x id="INTERPOLATION_1" equiv-text="{{hasMoreTopics ? &apos;+&apos; : &apos;&apos;}}"/>)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/discourse-category-activity/discourse-category-activity.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="891537ceca296c8821e5edf088b3e9cc5c6f17c9" datatype="html">
         <source>Explore suggested WISE curricula for the given grade levels or search for specific units that address your needs.</source>
         <context-group purpose="location">
@@ -4592,49 +4599,49 @@
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is licensed under <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="88440ddf34ab09a19c9f781fe3d93f2cbbd0630c" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is licensed under <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION" equiv-text="{{authorsString}}"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="19812b33be1cdeaa076d46cad963bf90e2fd2eb0" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{parentProject.uri}}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{parentProject.title}}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="41476bcc74edf123139f9d304fc569c7a066b386" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{parentProject.uri}}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{parentProject.title}}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION_1" equiv-text="{{parentAuthorsString}}"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ac0f81713a84217c9bd1d9bb460245d8190b073f" datatype="html">
         <source>More</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="01b7fa43a3428af3967f5ddeb02a21315ec636e4" datatype="html">
         <source>View License</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="053c99466a9288207400b49f2ca907192b5bd44d" datatype="html">
         <source>Use with Class</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">95</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
@@ -4645,7 +4652,7 @@
         <source>Preview</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">100</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
@@ -4656,7 +4663,7 @@
         <source>License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="77bd1ad738d92e35036a6caa0afba8152299876b" datatype="html">
@@ -10927,7 +10934,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
         <source>(None)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4e270813457170b43f357a1593877efa8829d79a" datatype="html">

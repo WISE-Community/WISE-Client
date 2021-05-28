@@ -125,8 +125,11 @@
     @include mat-elevation(3);
   
     &:hover, &:focus {
-      outline: none;
       @include mat-elevation(4);
+    }
+
+    &:hover {
+      outline: none;
     }
   }
 
