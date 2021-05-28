@@ -1,7 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { LibraryProjectDetailsComponent } from './library-project-details.component';
 import { UserService } from '../../../services/user.service';
 import { Project } from '../../../domain/project';
@@ -39,12 +38,10 @@ const parentProject = new ParentProject({
 describe('LibraryProjectDetailsComponent', () => {
   let component: LibraryProjectDetailsComponent;
   let fixture: ComponentFixture<LibraryProjectDetailsComponent>;
-  let http: HttpTestingController;
 
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [LibraryProjectDetailsComponent],
-      imports: [HttpClientTestingModule],
       providers: [
         { provide: UserService, useClass: MockUserService },
         { provide: ConfigService, useClass: MockConfigService },

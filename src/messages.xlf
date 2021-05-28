@@ -4470,13 +4470,6 @@
           <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="14d1207130f659790fe921283a25582a14a77196" datatype="html">
-        <source> <x id="INTERPOLATION" equiv-text="{{ topic.title }}"/> </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/discourse-category-activity/discourse-category-activity.component.html</context>
-          <context context-type="linenumber">11,13</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="891537ceca296c8821e5edf088b3e9cc5c6f17c9" datatype="html">
         <source>Explore suggested WISE curricula for the given grade levels or search for specific units that address your needs.</source>
         <context-group purpose="location">
@@ -4670,7 +4663,7 @@
         <source>License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="77bd1ad738d92e35036a6caa0afba8152299876b" datatype="html">

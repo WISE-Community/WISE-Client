@@ -11,31 +11,27 @@ export class DiscourseCategoryActivityComponent {
   categoryURL: string = '';
 
   discourseBaseUrl: string = '';
-  discourseCategoryURL: string = '';
   hasMoreTopics: boolean = false;
+  isValidCategoryURL: boolean = false;
   postCount: number = 0;
   topics: any[] = [];
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    if (this.categoryURL) {
-      this.retrieveCategory();
-    }
+    this.retrieveCategory();
   }
 
   retrieveCategory(): void {
-    this.http
-      .get(`${this.categoryURL}.json?order=latest`)
-      .subscribe(({ topic_list, users }: any) => {
-        if (topic_list.topics) {
-          this.topics = topic_list.topics;
-          this.postCount = this.countPosts();
-          this.discourseBaseUrl = this.categoryURL.match(/(.+)\/c\/.+/)[1];
-          this.hasMoreTopics = topic_list.more_topics_url ? true : false;
-          this.discourseCategoryURL = this.categoryURL;
-        }
-      });
+    this.http.get(`${this.categoryURL}.json?order=latest`).subscribe(({ topic_list }: any) => {
+      if (topic_list.topics) {
+        this.isValidCategoryURL = true;
+        this.topics = topic_list.topics;
+        this.postCount = this.countPosts();
+        this.discourseBaseUrl = this.categoryURL.match(/(.+)\/c\/.+/)[1];
+        this.hasMoreTopics = topic_list.more_topics_url ? true : false;
+      }
+    });
   }
 
   countPosts(): number {

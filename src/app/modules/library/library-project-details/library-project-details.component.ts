@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
 import { CreateRunDialogComponent } from '../../../teacher/create-run-dialog/create-run-dialog.component';
 import { UseWithClassWarningDialogComponent } from '../../../teacher/use-with-class-warning-dialog/use-with-class-warning-dialog.component';
@@ -29,7 +28,6 @@ export class LibraryProjectDetailsComponent implements OnInit {
   more: boolean = false;
   isCopy: boolean = false;
   discourseURL: string = '';
-  discourseCategoryURL: string = '';
   topics: any[] = [];
   postCount: number = 0;
   hasMoreTopics: boolean = false;
@@ -39,10 +37,8 @@ export class LibraryProjectDetailsComponent implements OnInit {
     public dialogRef: MatDialogRef<LibraryProjectDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private configService: ConfigService,
-    private userService: UserService,
-    private http: HttpClient
-  ) {
-  }
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.isTeacher = this.userService.isTeacher();
