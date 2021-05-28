@@ -1,0 +1,800 @@
+import { Component } from '@angular/core';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../services/configService';
+import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { StudentAssetService } from '../../../services/studentAssetService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { UtilService } from '../../../services/utilService';
+import { ComponentStudent } from '../../component-student.component';
+import { ComponentService } from '../../componentService';
+import { MatchService } from '../matchService';
+import { DragulaService } from 'ng2-dragula';
+import { MatDialog } from '@angular/material/dialog';
+import { AddMatchChoiceDialog } from './add-match-choice-dialog/add-match-choice-dialog';
+
+@Component({
+  selector: 'match-student',
+  templateUrl: 'match-student.component.html',
+  styleUrls: ['match-student.component.scss']
+})
+export class MatchStudent extends ComponentStudent {
+  autoScroll: any;
+  buckets: any[] = [];
+  bucketStyle: string = '';
+  bucketWidth: number = 100;
+  choices: any[] = [];
+  choiceStyle: any = '';
+  dragulaId: string;
+  hasCorrectAnswer: boolean = false;
+  isCorrect: boolean = false;
+  isHorizontal: boolean = false;
+  isLatestComponentStateSubmit: boolean = false;
+  numChoiceColumns: number = 1;
+  privateNotebookItems: any[] = [];
+  sourceBucket: any;
+  sourceBucketId: string = '0';
+
+  constructor(
+    protected AnnotationService: AnnotationService,
+    protected ComponentService: ComponentService,
+    protected ConfigService: ConfigService,
+    private dialog: MatDialog,
+    private dragulaService: DragulaService,
+    private MatchService: MatchService,
+    protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
+    protected StudentAssetService: StudentAssetService,
+    protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
+    protected UtilService: UtilService
+  ) {
+    super(
+      AnnotationService,
+      ComponentService,
+      ConfigService,
+      NodeService,
+      NotebookService,
+      StudentAssetService,
+      StudentDataService,
+      upgrade,
+      UtilService
+    );
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.dragulaId = `match-dragula-${this.nodeId}-${this.componentId}`;
+    this.autoScroll = require('dom-autoscroller');
+    this.isHorizontal = this.componentContent.horizontal;
+    this.isSaveButtonVisible = this.componentContent.showSaveButton;
+    this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
+    this.hasCorrectAnswer = this.hasCorrectChoices();
+    if (this.shouldImportPrivateNotes()) {
+      this.importPrivateNotes();
+    }
+    this.initializeChoices();
+    this.initializeBuckets();
+    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    } else if (
+      this.MatchService.componentStateHasStudentWork(this.componentState, this.componentContent)
+    ) {
+      this.setStudentWork(this.componentState);
+    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    }
+    if (this.componentState != null && this.componentState.isSubmit) {
+      this.isLatestComponentStateSubmit = true;
+    }
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
+      this.isSubmitButtonDisabled = true;
+    }
+    this.disableComponentIfNecessary();
+    this.broadcastDoneRenderingComponent();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.isDisabled) {
+      this.dragulaService.destroy(this.dragulaId);
+    } else {
+      this.registerDragListeners();
+    }
+  }
+
+  importPrivateNotes(): void {
+    const allPrivateNotebookItems = this.NotebookService.getPrivateNotebookItems();
+    this.privateNotebookItems = allPrivateNotebookItems.filter((note) => {
+      return note.serverDeleteTime == null;
+    });
+    this.subscriptions.add(
+      this.NotebookService.notebookUpdated$.subscribe((args) => {
+        if (args.notebookItem.type === 'note') {
+          this.addNotebookItemToSourceBucket(args.notebookItem);
+        }
+      })
+    );
+  }
+
+  addNotebookItemToSourceBucket(notebookItem: any): void {
+    const choice = this.createChoiceFromNotebookItem(notebookItem);
+    this.choices.push(choice);
+    const sourceBucket = this.getSourceBucket();
+    sourceBucket.items.push(choice);
+  }
+
+  registerDragListeners(): void {
+    const drake = this.dragulaService.find(this.dragulaId).drake;
+    this.registerDropListener(drake);
+    this.showVisualIndicatorWhileDragging(drake);
+    this.registerAutoScroll(drake);
+  }
+
+  registerDropListener(drake: any): void {
+    drake.on('drop', () => {
+      this.studentDataChanged();
+    });
+  }
+
+  showVisualIndicatorWhileDragging(drake: any): void {
+    drake
+      .on('over', (el, container, source) => {
+        if (source !== container) {
+          container.className += ' match-bucket__contents--over';
+        }
+      })
+      .on('out', (el, container, source) => {
+        if (source !== container) {
+          container.className = container.className.replace('match-bucket__contents--over', '');
+        }
+      });
+  }
+
+  registerAutoScroll(drake: any): void {
+    this.autoScroll([document.querySelector('#content')], {
+      margin: 30,
+      pixels: 50,
+      scrollWhenOutside: true,
+      autoScroll: function () {
+        return this.down && drake.dragging;
+      }
+    });
+  }
+
+  setStudentWork(componentState: any): void {
+    this.addComponentStateChoicesToBuckets(componentState);
+    if (componentState.studentData.submitCounter != null) {
+      this.submitCounter = componentState.studentData.submitCounter;
+    }
+    this.processPreviousStudentWork();
+  }
+
+  addComponentStateChoicesToBuckets(componentState: any): void {
+    this.clearSourceBucketChoices();
+    const bucketIds = this.getBucketIds();
+    const choiceIds = this.getChoiceIds();
+    for (const componentStateBucket of componentState.studentData.buckets) {
+      if (bucketIds.includes(componentStateBucket.id)) {
+        const bucket = this.MatchService.getBucketById(componentStateBucket.id, this.buckets);
+        for (const componentStateChoice of componentStateBucket.items) {
+          this.addChoiceToBucket(componentStateChoice, bucket);
+          const choiceLocation = choiceIds.indexOf(componentStateChoice.id);
+          if (choiceLocation != -1) {
+            choiceIds.splice(choiceLocation, 1);
+          }
+        }
+      }
+    }
+    const sourceBucket = this.getSourceBucket();
+    for (const choiceId of choiceIds) {
+      this.addAuthoredChoiceToBucket(choiceId, sourceBucket);
+    }
+  }
+
+  getSourceBucket(): any {
+    return this.MatchService.getBucketById(this.sourceBucketId, this.buckets);
+  }
+
+  clearSourceBucketChoices(): void {
+    const sourceBucket = this.getSourceBucket();
+    sourceBucket.items = [];
+  }
+
+  isAuthoredChoice(choiceId: string): boolean {
+    return this.getChoiceIds().includes(choiceId);
+  }
+
+  addChoiceToBucket(choice: any, bucket: any): void {
+    const choiceId = choice.id;
+    if (this.isAuthoredChoice(choiceId)) {
+      this.addAuthoredChoiceToBucket(choiceId, bucket);
+    } else {
+      // This choice was created by the student
+      bucket.items.push(choice);
+    }
+  }
+
+  addAuthoredChoiceToBucket(choiceId: string, bucket: any): void {
+    bucket.items.push(this.MatchService.getChoiceById(choiceId, this.choices));
+  }
+
+  /**
+   * Get the latest submitted componentState and display feedback for choices that haven't changed
+   * since. This will also determine if submit is dirty.
+   */
+  processPreviousStudentWork(): void {
+    const latestComponentState = this.getLatestComponentState();
+    if (latestComponentState == null) {
+      return;
+    }
+    const clientSaveTime = this.getClientSaveTime(latestComponentState);
+    if (latestComponentState.isSubmit) {
+      this.setGeneralComponentStatus(latestComponentState.isCorrect, false, clientSaveTime);
+      this.checkAnswer();
+    } else {
+      const latestSubmitComponentState = this.getLatestSubmitComponentState();
+      if (latestSubmitComponentState != null) {
+        this.showFeedbackOnUnchangedChoices(latestSubmitComponentState);
+      } else {
+        this.setGeneralComponentStatus(null, false, clientSaveTime);
+      }
+    }
+  }
+
+  setGeneralComponentStatus(
+    isCorrect: boolean,
+    isSubmitDirty: boolean,
+    clientSaveTime: number
+  ): void {
+    this.isCorrect = isCorrect;
+    this.setIsSubmitDirty(isSubmitDirty);
+    this.setSavedMessage(clientSaveTime);
+  }
+
+  getLatestComponentState(): any {
+    return this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
+  }
+
+  getLatestSubmitComponentState(): any {
+    return this.StudentDataService.getLatestSubmitComponentState(this.nodeId, this.componentId);
+  }
+
+  processDirtyStudentWork(): void {
+    const latestSubmitComponentState = this.getLatestSubmitComponentState();
+    if (latestSubmitComponentState != null) {
+      this.showFeedbackOnUnchangedChoices(latestSubmitComponentState);
+    } else {
+      const latestComponentState = this.getLatestComponentState();
+      if (latestComponentState != null) {
+        this.isCorrect = null;
+        this.setIsSubmitDirty(true);
+        this.setSavedMessage(latestComponentState.clientSaveTime);
+      }
+    }
+  }
+
+  showFeedbackOnUnchangedChoices(latestSubmitComponentState: any): void {
+    const choicesThatChangedSinceLastSubmit = this.getChoicesThatChangedSinceLastSubmit(
+      latestSubmitComponentState
+    );
+    if (choicesThatChangedSinceLastSubmit.length > 0) {
+      this.setIsSubmitDirty(true);
+    } else {
+      this.setIsSubmitDirty(false);
+    }
+    this.checkAnswer(choicesThatChangedSinceLastSubmit);
+  }
+
+  setIsSubmitDirty(isSubmitDirty: boolean): void {
+    this.isSubmitDirty = isSubmitDirty;
+    this.StudentDataService.broadcastComponentSubmitDirty({
+      componentId: this.componentId,
+      isDirty: isSubmitDirty
+    });
+  }
+
+  getBucketIds(): string[] {
+    return this.getIds(this.buckets);
+  }
+
+  getChoiceIds(): string[] {
+    return this.getIds(this.choices);
+  }
+
+  getIds(objects: any[]): string[] {
+    return objects.map((object) => {
+      return object.id;
+    });
+  }
+
+  getChoicesThatChangedSinceLastSubmit(latestSubmitComponentState: any): any[] {
+    const choicesThatChanged = [];
+    const previousBuckets = latestSubmitComponentState.studentData.buckets;
+    for (const currentBucket of this.buckets) {
+      const currentBucketChoiceIds = this.getIds(currentBucket.items);
+      const previousBucket = this.MatchService.getBucketById(currentBucket.id, previousBuckets);
+      const previousBucketChoiceIds = this.getIds(previousBucket.items);
+      for (
+        let currentChoiceIndex = 0;
+        currentChoiceIndex < currentBucketChoiceIds.length;
+        currentChoiceIndex++
+      ) {
+        if (
+          this.isChoiceChanged(previousBucketChoiceIds, currentBucketChoiceIds, currentChoiceIndex)
+        ) {
+          choicesThatChanged.push(currentBucketChoiceIds[currentChoiceIndex]);
+        }
+      }
+    }
+    return choicesThatChanged;
+  }
+
+  isChoiceChanged(
+    previousBucketChoiceIds: string[],
+    currentBucketChoiceIds: string[],
+    currentChoiceIndex: number
+  ): boolean {
+    const currentBucketChoiceId = currentBucketChoiceIds[currentChoiceIndex];
+    return (
+      !previousBucketChoiceIds.includes(currentBucketChoiceId) ||
+      (this.isAuthorHasSpecifiedACorrectPosition(currentBucketChoiceId) &&
+        this.choicePositionHasChangedInBucket(
+          previousBucketChoiceIds,
+          currentBucketChoiceId,
+          currentChoiceIndex
+        ))
+    );
+  }
+
+  choicePositionHasChangedInBucket(
+    previousBucketChoiceIds: string[],
+    currentChoiceId: string,
+    currentChoiceIndex: number
+  ): boolean {
+    return currentChoiceIndex != previousBucketChoiceIds.indexOf(currentChoiceId);
+  }
+
+  getChoices(): any[] {
+    return this.choices;
+  }
+
+  initializeChoices(): void {
+    this.choices = this.componentContent.choices;
+    if (this.shouldImportPrivateNotes()) {
+      for (const privateNotebookItem of this.privateNotebookItems) {
+        if (privateNotebookItem.type === 'note') {
+          this.choices.push(this.createChoiceFromNotebookItem(privateNotebookItem));
+        }
+      }
+    }
+  }
+
+  shouldImportPrivateNotes(): boolean {
+    return this.isNotebookEnabled() && this.componentContent.importPrivateNotes;
+  }
+
+  createChoiceFromNotebookItem(notebookItem: any): any {
+    let value = notebookItem.content.text;
+    for (const attachment of notebookItem.content.attachments) {
+      value += `<br/><img src="${attachment.iconURL}"/>`;
+    }
+    return {
+      id: notebookItem.localNotebookItemId,
+      value: value,
+      type: 'choice'
+    };
+  }
+
+  initializeBuckets(): void {
+    this.buckets = [];
+    this.setBucketWidth();
+    this.setNumChoiceColumns();
+    this.setChoiceStyle();
+    this.setBucketStyle();
+    this.sourceBucket = this.createSourceBucket();
+    for (const choice of this.getChoices()) {
+      this.sourceBucket.items.push(choice);
+    }
+    this.buckets.push(this.sourceBucket);
+    for (const bucket of this.componentContent.buckets) {
+      bucket.items = [];
+      this.buckets.push(bucket);
+    }
+  }
+
+  createSourceBucket(): any {
+    return {
+      id: this.sourceBucketId,
+      value: this.getSourceBucketLabel(),
+      type: 'bucket',
+      items: []
+    };
+  }
+
+  getSourceBucketLabel(): string {
+    return this.componentContent.choicesLabel
+      ? this.componentContent.choicesLabel
+      : $localize`Choices`;
+  }
+
+  setBucketWidth(): void {
+    if (this.isHorizontal) {
+      this.bucketWidth = 100;
+    } else {
+      if (typeof this.componentContent.bucketWidth === 'number') {
+        this.bucketWidth = this.componentContent.bucketWidth;
+      } else {
+        let n = this.componentContent.buckets.length;
+        if (n % 3 === 0 || n > 4) {
+          this.bucketWidth = Math.round(100 / 3);
+        } else if (n % 2 === 0) {
+          this.bucketWidth = 100 / 2;
+        }
+      }
+    }
+  }
+
+  setNumChoiceColumns(): void {
+    if (this.isHorizontal) {
+      this.numChoiceColumns = 1;
+    } else {
+      if (typeof this.componentContent.bucketWidth === 'number') {
+        this.numChoiceColumns = Math.round(100 / this.componentContent.bucketWidth);
+      } else {
+        let n = this.componentContent.buckets.length;
+        if (n % 3 === 0 || n > 4) {
+          this.numChoiceColumns = 3;
+        } else if (n % 2 === 0) {
+          this.numChoiceColumns = 2;
+        }
+      }
+      if (typeof this.componentContent.choiceColumns === 'number') {
+        this.numChoiceColumns = this.componentContent.choiceColumns;
+      }
+    }
+  }
+
+  setChoiceStyle(): void {
+    this.choiceStyle = {
+      '-moz-column-count': this.numChoiceColumns,
+      '-webkit-column-count': this.numChoiceColumns,
+      'column-count': this.numChoiceColumns
+    };
+  }
+
+  setBucketStyle(): void {
+    if (this.bucketWidth === 100) {
+      this.bucketStyle = this.choiceStyle;
+    }
+  }
+
+  getBuckets(): any[] {
+    return this.buckets;
+  }
+
+  /**
+   * Create a deep copy of the array of buckets.
+   */
+  getCopyOfBuckets(): any[] {
+    return JSON.parse(JSON.stringify(this.getBuckets()));
+  }
+
+  /**
+   * Check if the student has answered correctly and show feedback.
+   * @param {array} choiceIds to not show feedback for. This is used in the scenario where the
+   * student submits and feedback for all the choices are displayed. Then the student moves a choice
+   * to a different bucket but does not submit. They leave the step and then come back. At this
+   * point, we want to show the feedback for all the choices that the student has not moved since
+   * the submit. We do not want to show the feedback for the choice that the student moved after the
+   * submit because that would let them receive feedback without submitting.
+   */
+  checkAnswer(choiceIdsExcludedFromFeedback = []): void {
+    let isCorrect = true;
+    for (const bucket of this.getBuckets()) {
+      const bucketId = bucket.id;
+      const items = bucket.items;
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const position = i + 1;
+        const choiceId = item.id;
+        if (choiceIdsExcludedFromFeedback.includes(choiceId)) {
+          item.feedback = null;
+        } else {
+          const isChoiceCorrect = this.checkAnswerAndDisplayFeedback(
+            bucketId,
+            item,
+            position,
+            this.hasCorrectAnswer
+          );
+          isCorrect &&= isChoiceCorrect;
+        }
+      }
+    }
+
+    if (this.hasCorrectAnswer) {
+      this.isCorrect = isCorrect;
+    } else {
+      this.isCorrect = null;
+    }
+  }
+
+  checkAnswerAndDisplayFeedback(
+    bucketId: string,
+    choice: any,
+    position: number,
+    hasCorrectAnswer: boolean
+  ): boolean {
+    const feedbackObject = this.getFeedbackObject(bucketId, choice.id);
+    choice.feedback = this.getFeedback(feedbackObject, hasCorrectAnswer, position);
+    const isCorrect = this.getCorrectness(feedbackObject, hasCorrectAnswer, position);
+    choice.isCorrect = isCorrect;
+    if (this.doesPositionMatter(feedbackObject.position)) {
+      choice.isIncorrectPosition = !this.isCorrectPosition(feedbackObject, position);
+    }
+    return isCorrect;
+  }
+
+  getFeedback(feedbackObject: any, hasCorrectAnswer: boolean, position: number): string {
+    if (this.doesPositionMatter(feedbackObject.position)) {
+      return this.getPositionFeedback(feedbackObject, position);
+    } else {
+      return this.getNonPositionFeedback(feedbackObject, hasCorrectAnswer);
+    }
+  }
+
+  doesPositionMatter(feedbackPosition: number): boolean {
+    return this.componentContent.ordered && feedbackPosition != null;
+  }
+
+  getPositionFeedback(feedbackObject: any, position: number): string {
+    if (this.isCorrectPosition(feedbackObject, position)) {
+      return feedbackObject.feedback;
+    } else {
+      return this.getIncorrectPositionFeedback(feedbackObject);
+    }
+  }
+
+  getIncorrectPositionFeedback(feedbackObject: any): string {
+    const incorrectPositionFeedback = feedbackObject.incorrectPositionFeedback;
+    if (incorrectPositionFeedback == null || incorrectPositionFeedback === '') {
+      return $localize`Correct bucket but wrong position`;
+    } else {
+      return incorrectPositionFeedback;
+    }
+  }
+
+  getNonPositionFeedback(feedbackObject: any, hasCorrectAnswer: boolean): string {
+    let feedbackText = '';
+    if (feedbackObject.feedback === '' && hasCorrectAnswer) {
+      if (feedbackObject.isCorrect) {
+        feedbackText = $localize`Correct`;
+      } else {
+        feedbackText = $localize`Incorrect`;
+      }
+    } else {
+      feedbackText = feedbackObject.feedback;
+    }
+    return feedbackText;
+  }
+
+  getCorrectness(feedbackObject: any, hasCorrectAnswer: boolean, position: number): boolean {
+    if (!hasCorrectAnswer) {
+      return null;
+    } else if (this.doesPositionMatter(feedbackObject.position)) {
+      return this.isCorrectPosition(feedbackObject, position);
+    } else {
+      return feedbackObject.isCorrect;
+    }
+  }
+
+  isCorrectPosition(feedbackObject: any, position: number): boolean {
+    return position === feedbackObject.position;
+  }
+
+  getAllFeedback(): any[] {
+    return this.componentContent.feedback;
+  }
+
+  getFeedbackObject(bucketId: string, choiceId: string): any {
+    for (const bucketFeedback of this.getAllFeedback()) {
+      if (bucketFeedback.bucketId === bucketId) {
+        for (const choiceFeedback of bucketFeedback.choices) {
+          if (choiceFeedback.choiceId === choiceId) {
+            return choiceFeedback;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  studentDataChanged(): void {
+    this.isCorrect = null;
+    this.isLatestComponentStateSubmit = false;
+    super.studentDataChanged();
+  }
+
+  /**
+   * Create a new component state populated with the student data
+   * @param action the action that is triggering creating of this component state
+   * e.g. 'submit', 'save', 'change'
+   * @return a promise that will return a component state
+   */
+  createComponentState(action: string): Promise<any> {
+    if (action === 'submit') {
+      this.checkAnswer();
+      this.isLatestComponentStateSubmit = true;
+    } else {
+      this.clearFeedback();
+      this.processDirtyStudentWork();
+      this.isLatestComponentStateSubmit = false;
+    }
+    const componentState = this.createComponentStateObject(action);
+    this.isSubmit = false;
+    return new Promise((resolve, reject) => {
+      this.createComponentStateAdditionalProcessing(
+        { resolve: resolve, reject: reject },
+        componentState,
+        action
+      );
+    });
+  }
+
+  createComponentStateObject(action: string): any {
+    const componentState: any = this.NodeService.createNewComponentState();
+    componentState.componentType = 'Match';
+    componentState.nodeId = this.nodeId;
+    componentState.componentId = this.componentId;
+    componentState.isSubmit = this.isSubmit;
+    const studentData: any = {
+      buckets: this.getCopyOfBuckets(),
+      submitCounter: this.submitCounter
+    };
+    if (action === 'submit' && this.hasCorrectAnswer) {
+      studentData.isCorrect = this.isCorrect;
+    }
+    componentState.studentData = studentData;
+    return componentState;
+  }
+
+  hasCorrectChoices(): boolean {
+    for (const bucket of this.componentContent.feedback) {
+      for (const choice of bucket.choices) {
+        if (choice.isCorrect) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  clearFeedback(): void {
+    for (const choice of this.getChoices()) {
+      choice.isCorrect = null;
+      choice.isIncorrectPosition = null;
+      choice.feedback = null;
+    }
+  }
+
+  isAuthorHasSpecifiedACorrectBucket(choiceId: string): boolean {
+    for (const bucket of this.getAllFeedback()) {
+      for (const choice of bucket.choices) {
+        if (choice.choiceId === choiceId) {
+          if (choice.isCorrect) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Returns true if the choice has been authored to have a correct position
+   * @param {string} choiceId the choice id
+   * @return {boolean} whether the choice has a correct position in any bucket
+   */
+  isAuthorHasSpecifiedACorrectPosition(choiceId: string): boolean {
+    for (const bucket of this.getAllFeedback()) {
+      for (const choice of bucket.choices) {
+        if (choice.choiceId === choiceId) {
+          if (choice.position != null) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  createMergedComponentState(componentStates: any[]): any[] {
+    const mergedBuckets = [];
+    for (const componentState of componentStates) {
+      for (const bucket of componentState.studentData.buckets) {
+        this.mergeBucket(mergedBuckets, bucket);
+      }
+    }
+    const mergedComponentState: any = this.NodeService.createNewComponentState();
+    mergedComponentState.studentData = {
+      buckets: mergedBuckets
+    };
+    return mergedComponentState;
+  }
+
+  /**
+   * Merge a bucket into the array of buckets. If the bucket id already exists in the array, merge
+   * the choices in the bucket. If the bucket does not already exist in the array, add the bucket.
+   * The array of buckets will be modified.
+   * @param {array} buckets an array of buckets
+   * @param {object} bucket the bucket
+   * @return {array} an array of buckets
+   */
+  mergeBucket(buckets: any[], bucket: any): any[] {
+    let bucketFound = false;
+    for (const tempBucket of buckets) {
+      if (tempBucket.id == bucket.id) {
+        bucketFound = true;
+        tempBucket.items = this.mergeChoices(tempBucket.items, bucket.items);
+      }
+    }
+    if (!bucketFound) {
+      buckets.push(bucket);
+    }
+    return buckets;
+  }
+
+  /**
+   * Merge two arrays of choices.
+   * @param {array} choices1 an array of choice objects
+   * @param {array} choices2 an array of choice objects
+   * @return {array} A new array of unique choice objects
+   */
+  mergeChoices(choices1: any[], choices2: any[]): any[] {
+    const mergedChoices = choices1.slice();
+    const choices1Ids = this.getIds(choices1);
+    for (const choice2 of choices2) {
+      if (!choices1Ids.includes(choice2.id)) {
+        mergedChoices.push(choice2);
+      }
+    }
+    return mergedChoices;
+  }
+
+  addChoice(): void {
+    this.dialog
+      .open(AddMatchChoiceDialog, {
+        width: '400px'
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        const newChoice = {
+          id: this.UtilService.generateKey(10),
+          value: result,
+          type: 'choice',
+          studentCreated: true
+        };
+        this.sourceBucket.items.push(newChoice);
+        this.studentDataChanged();
+      });
+  }
+
+  deleteChoice(choice: any): void {
+    if (confirm($localize`Are you sure you want to delete this choice?`)) {
+      for (const bucket of this.getBuckets()) {
+        const items = bucket.items;
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          if (item.id == choice.id) {
+            items.splice(i, 1);
+          }
+        }
+      }
+      this.studentDataChanged();
+    }
+  }
+}

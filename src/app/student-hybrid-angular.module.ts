@@ -25,9 +25,13 @@ import { ComponentHeader } from '../assets/wise5/directives/component-header/com
 import { ComponentSaveSubmitButtons } from '../assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { DrawStudent } from '../assets/wise5/components/draw/draw-student/draw-student.component';
 import { AddToNotebookButton } from '../assets/wise5/directives/add-to-notebook-button/add-to-notebook-button.component';
+import { MatchStudent } from '../assets/wise5/components/match/match-student/match-student.component';
+import { DragulaModule } from 'ng2-dragula';
+import { AddMatchChoiceDialog } from '../assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog';
 
 @NgModule({
   declarations: [
+    AddMatchChoiceDialog,
     AddToNotebookButton,
     AudioOscillatorStudent,
     ComponentAnnotationsComponent,
@@ -36,12 +40,13 @@ import { AddToNotebookButton } from '../assets/wise5/directives/add-to-notebook-
     DrawStudent,
     HtmlStudent,
     LabelStudent,
+    MatchStudent,
     MultipleChoiceStudent,
     OutsideUrlStudent,
     NavItemComponent,
     PossibleScoreComponent
   ],
-  imports: [AngularJSModule],
+  imports: [AngularJSModule, DragulaModule],
   providers: [
     { provide: DataService, useExisting: StudentDataService },
     { provide: ProjectService, useExisting: VLEProjectService },

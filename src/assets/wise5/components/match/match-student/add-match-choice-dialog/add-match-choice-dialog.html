@@ -1,0 +1,8 @@
+<p i18n>Enter Choice Text</p>
+<mat-form-field style="width: 100%">
+  <input matInput [(ngModel)]="choiceText" (keydown.enter)="enterPressed()">
+</mat-form-field>
+<div fxLayout="row" fxLayoutAlign="end start">
+  <button mat-button (click)="cancel()" i18n>Cancel</button>
+  <button mat-button [mat-dialog-close]="choiceText" i18n>OK</button>
+</div>
