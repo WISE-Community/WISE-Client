@@ -502,7 +502,10 @@ export class MatchStudent extends ComponentStudent {
         const item = items[i];
         const position = i + 1;
         const choiceId = item.id;
-        if (choiceIdsExcludedFromFeedback.includes(choiceId)) {
+        if (
+          choiceIdsExcludedFromFeedback.includes(choiceId) ||
+          this.getFeedbackObject(bucketId, choiceId) == null
+        ) {
           item.feedback = null;
         } else {
           const isChoiceCorrect = this.checkAnswerAndDisplayFeedback(

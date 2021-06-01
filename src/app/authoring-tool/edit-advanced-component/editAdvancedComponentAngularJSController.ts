@@ -56,9 +56,12 @@ export class EditAdvancedComponentAngularJSController {
     if (numberOfAllowedComponents === 1) {
       connectedComponent.componentId = allowedComponent.id;
       connectedComponent.type = 'importWork';
+      this.afterComponentIdChanged(connectedComponent);
     }
     this.automaticallySetConnectedComponentTypeIfPossible(connectedComponent);
   }
+
+  afterComponentIdChanged(connectedComponent: any): void {}
 
   connectedComponentTypeChanged(connectedComponent: any): void {
     this.componentChanged();
@@ -73,6 +76,7 @@ export class EditAdvancedComponentAngularJSController {
 
   connectedComponentComponentIdChanged(connectedComponent: any): void {
     this.automaticallySetConnectedComponentTypeIfPossible(connectedComponent);
+    this.afterComponentIdChanged(connectedComponent);
     this.componentChanged();
   }
 
