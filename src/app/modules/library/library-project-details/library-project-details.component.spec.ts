@@ -1,5 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LibraryProjectDetailsComponent } from './library-project-details.component';
@@ -7,20 +6,11 @@ import { UserService } from '../../../services/user.service';
 import { Project } from '../../../domain/project';
 import { NGSSStandards } from '../ngssStandards';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { LibraryService } from '../../../services/library.service';
 import { ConfigService } from '../../../services/config.service';
 import { ParentProject } from '../../../domain/parentProject';
 import { configureTestSuite } from 'ng-bullet';
 
-// @Component({ selector: 'app-library-project-menu', template: '' })
-// export class LibraryProjectMenuStubComponent {
-//   @Input()
-//   project: Project;
-// }
-
 export class MockMatDialog {}
-
-export class MockLibraryService {}
 
 export class MockUserService {
   isTeacher(): Observable<boolean> {
@@ -53,7 +43,6 @@ describe('LibraryProjectDetailsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [LibraryProjectDetailsComponent],
       providers: [
-        { provide: LibraryService, useClass: MockLibraryService },
         { provide: UserService, useClass: MockUserService },
         { provide: ConfigService, useClass: MockConfigService },
         { provide: MatDialogRef, useValue: {} },
