@@ -63,7 +63,7 @@ let notebookItemImageName: string;
 let notebookItemText: string;
 let starterBucketLabel = 'Starter Choices';
 
-fdescribe('MatchStudent', () => {
+describe('MatchStudent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
