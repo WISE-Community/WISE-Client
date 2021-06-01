@@ -24,10 +24,15 @@ export class StudentStatusService {
       .get(`/api/teacher/run/${this.ConfigService.getRunId()}/student-status`)
       .toPromise()
       .then((studentStatuses: any) => {
+        const workgroups = this.ConfigService.getClassmateUserInfos();
         for (const studentStatus of studentStatuses) {
           const parsedStatus = JSON.parse(studentStatus.status);
-          parsedStatus.postTimestamp = studentStatus.timestamp;
-          this.studentStatuses.push(parsedStatus);
+          if (workgroups.find(workgroup => {
+            return workgroup.workgroupId === studentStatus.workgroupId;
+          })) {
+            parsedStatus.postTimestamp = studentStatus.timestamp;
+            this.studentStatuses.push(parsedStatus);
+          }
         }
         return this.studentStatuses;
       });
