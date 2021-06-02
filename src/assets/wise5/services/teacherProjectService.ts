@@ -1216,6 +1216,10 @@ export class TeacherProjectService extends ProjectService {
     return this.ConfigService.getConfigParam('automatedAssessmentProjectId') || -1;
   }
 
+  getSimulationProjectId(): number {
+    return this.ConfigService.getConfigParam('simulationProjectId') || -1;
+  }
+
   /**
    * Get the branch letter in the node position string if the node is in a branch path
    * @param nodeId the node id we want the branch letter for
