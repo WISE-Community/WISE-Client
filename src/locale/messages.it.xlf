@@ -20,7 +20,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">About Us</target>
+        <target state="translated">Chi siamo</target>
       </trans-unit>
       <trans-unit id="ffc2518d2bc8ccd34f05251329883a6d0642a4ca" datatype="html">
         <source>WISE is the product of more than 25 years of research on teaching and learning with educational technologies</source>
@@ -28,7 +28,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
-        <target state="needs-translation">WISE is the product of more than 25 years of research on teaching and learning with educational technologies</target>
+        <target state="translated">WISE è un prodotto con più di 25 anni di ricerca nell'insegnamento e l'apprendimento attraverso le tecnologie educative</target>
       </trans-unit>
       <trans-unit id="876f7d4b1a4c8c619cbe4c0b32d0d1bf3219d4e8" datatype="html">
         <source>WISE teacher workshop 2018</source>
@@ -36,7 +36,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">27</context>
         </context-group>
-        <target state="needs-translation">WISE teacher workshop 2018</target>
+        <target state="translated">Workshop insegnanti WISE 2018</target>
       </trans-unit>
       <trans-unit id="70ff1cc8f851490c4cb6237ec6991ef6a644d4e4" datatype="html">
         <source>WISE student and teacher</source>
@@ -44,7 +44,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <target state="needs-translation">WISE student and teacher</target>
+        <target state="translated">Studente e insegnante WISE</target>
       </trans-unit>
       <trans-unit id="2b4a83d9816a80170d470f0cbe714553f33450ae" datatype="html">
         <source>WISE teacher workshop design</source>
@@ -68,7 +68,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">60</context>
         </context-group>
-        <target state="needs-translation">Based on Research, Refined Through Practice</target>
+        <target state="translated">Basato sulla ricerca, perfezionato con la pratica</target>
       </trans-unit>
       <trans-unit id="fd1c49d6e3e02db68fe37f6c2d12cf7d1658f200" datatype="html">
         <source>Through our collaborations with teachers, administrators, technology designers, and education researchers, we have refined a set of principles which guide the design of all WISE curriculum materials and tools.</source>
@@ -76,7 +76,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">61</context>
         </context-group>
-        <target state="needs-translation">Through our collaborations with teachers, administrators, technology designers, and education researchers, we have refined a set of principles which guide the design of all WISE curriculum materials and tools.</target>
+        <target state="translated">Attraverso la nostra collaborazione con insegnati, dirigenti, progettisti informativi e ricercatori nell'apprendimento, abbiamo perfezionato una serie di principi che accompagnano la progettazione di tutti i materiali e gli strumenti dei corsi WISE.</target>
       </trans-unit>
       <trans-unit id="93d7310ae0cdb74d49573a47634d9a7b1c771462" datatype="html">
         <source>This means that when implementing WISE units, you can be assured that what you&apos;re using is grown from a solid foundation, advised by real teachers&apos; experiences, and tested in classrooms with real students.</source>
@@ -92,7 +92,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">Our Research + Team</target>
+        <target state="translated">La nostra ricerca + Team</target>
       </trans-unit>
       <trans-unit id="2430d9c22ccaf6b5daf94c0135b02f753ca6b185" datatype="html">
         <source>Knowledge Integration</source>
@@ -100,7 +100,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">77</context>
         </context-group>
-        <target state="needs-translation">Knowledge Integration</target>
+        <target state="translated">Integrazione delle conoscenze</target>
       </trans-unit>
       <trans-unit id="1a90e48699c691ba54728351e4be72af77b280ce" datatype="html">
         <source>As students grapple with multiple conflicting and confusing ideas, research has shown that instruction is most effective when student views are used as a starting point for scientific investigations.</source>
@@ -108,7 +108,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">78</context>
         </context-group>
-        <target state="needs-translation">As students grapple with multiple conflicting and confusing ideas, research has shown that instruction is most effective when student views are used as a starting point for scientific investigations.</target>
+        <target state="translated">Mentre gli studenti sono alle prese con svariate idee contrastanti e confusionarie, la ricerca ha dimostrato che l'apprendimento è più efficace quando il punto di vista degli studenti è usato come punto di partenza per l'approfondimento scientifico.</target>
       </trans-unit>
       <trans-unit id="e40dc97986107e694a5c5860f0fbf5bd0ddadeae" datatype="html">
         <source>The KI Processes:</source>
@@ -184,7 +184,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">110</context>
         </context-group>
-        <target state="needs-translation">~ WISE Goals ~</target>
+        <target state="translated">~ Obiettivi di WISE ~</target>
       </trans-unit>
       <trans-unit id="a8c4f4b7ff2dc03b066549737367901b95c1f556" datatype="html">
         <source>Make Science Meaningful</source>
@@ -200,7 +200,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">125</context>
         </context-group>
-        <target state="needs-translation">WISE units introduce students to complex science concepts through personally and socially relevant topics. Each unit uses a classroom-tested pattern of instruction that values the ideas students bring with them, helps them connect new information to their personal experiences, and integrates their ideas into a coherent understanding of science.</target>
+        <target state="translated">I corsi di WISE introducono gli studenti a concetti scientifici complessi attraverso tematiche personalmente e socialmente rilevanti. Ogni unità utilizza modelli di insegnamento testati in classe che valorizzano le idee degli studenti, li aiutano a collegare le nuove informazioni alle loro esperienze personali e integrano le loro idee in una comprensione coerente della scienza.</target>
       </trans-unit>
       <trans-unit id="ae2bc001ed6c6fb5416b490b7c6dbe2260697024" datatype="html">
         <source>Support Diverse Learners</source>
@@ -216,7 +216,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">131</context>
         </context-group>
-        <target state="needs-translation">Individual students differ in their experiences, interests, and abilities. WISE provides a variety of tools, activity patterns, and instructional scaffolds that afford multiple ways for expressing and assessing understanding. That way, no students' abilities go unrecognized, and all have the chance to succeed.</target>
+        <target state="translated">Ogni singolo studente ha differenti esperienze, interessi e abilità. WISE offre una varietà di strumenti, attività e basi per l'apprendimento che sostengono numerosi modi di esprimere e verificare la loro comprensione. In questo modo, vengono riconosciute le abilità di tutti studenti e tutti hanno la possibilità di riuscire.</target>
       </trans-unit>
       <trans-unit id="92bb340c07c783bf551cd704462f3d7efa15f8a4" datatype="html">
         <source>Increase Participation in Science</source>
@@ -240,7 +240,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">150</context>
         </context-group>
-        <target state="needs-translation">Accessible to All</target>
+        <target state="translated">Accessibile a tutti</target>
       </trans-unit>
       <trans-unit id="416ce0bcfd9bbe81b9ccc34d764504df4c8088d1" datatype="html">
         <source>WISE is <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>free<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>open source<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsists on generous support from the National Science Foundation, which means it&apos;s available to anyone with an internet connection. Driven by an active community of developers, WISE is continually being expanded and improved. Bring science inquiry into the classroom, the museum, the after-school, or the home-school environment!</source>
@@ -308,7 +308,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <target state="needs-translation">Close</target>
+        <target state="translated">Chiudi</target>
       </trans-unit>
       <trans-unit id="ea4d9fe61420a3fce81cf54c4c615e3c19c646a6" datatype="html">
         <source>Dismiss</source>
@@ -316,7 +316,7 @@
           <context context-type="sourcefile">src/app/announcement/announcement.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">Dismiss</target>
+        <target state="translated">Annulla</target>
       </trans-unit>
       <trans-unit id="69410cfd03d0c317234765d99d86c2c9e88bb915" datatype="html">
         <source>Back to Top</source>
@@ -324,7 +324,7 @@
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Back to Top</target>
+        <target state="translated">Torna all'inizio</target>
       </trans-unit>
       <trans-unit id="1fa4d608488f8c688cef3cac8f93e5e2e43a39de" datatype="html">
         <source>Choose New Location</source>
@@ -332,7 +332,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Choose New Location</target>
+        <target state="translated">Scegli nuova posizione</target>
       </trans-unit>
       <trans-unit id="d0feb44b6358f108a58480afa4b903c34031a110" datatype="html">
         <source>Insert As First Component</source>
@@ -344,7 +344,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">Insert As First Component</target>
+        <target state="translated">Inserisci come primo componente</target>
       </trans-unit>
       <trans-unit id="1e9b22a987b26586870bb920525f8062d24c6267" datatype="html">
         <source>Insert After</source>
@@ -360,7 +360,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-location/choose-new-node-location.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Insert After</target>
+        <target state="translated">Inserisci dopo</target>
       </trans-unit>
       <trans-unit id="cda31dbd724cf5f4fa7a4274d9120651490c8a8c" datatype="html">
         <source>Back</source>
@@ -372,7 +372,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">Back</target>
+        <target state="translated">Indietro</target>
       </trans-unit>
       <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
         <source>Cancel</source>
@@ -444,7 +444,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Cancel</target>
+        <target state="translated">Annulla</target>
       </trans-unit>
       <trans-unit id="1bf58cf720f3aa0e4a6f06d2a84183b552f3f3c6" datatype="html">
         <source>Click the new component type you want to add</source>
@@ -472,7 +472,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
-        <target state="needs-translation">Next</target>
+        <target state="translated">Successivo</target>
       </trans-unit>
       <trans-unit id="8885984788303127081" datatype="html">
         <source>Are you sure you want to delete this connected component?</source>
@@ -534,7 +534,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-max-score/edit-component-max-score.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Max Score</target>
+        <target state="translated">Punteggio massimo</target>
       </trans-unit>
       <trans-unit id="7affaae0e14529c0192d5a4bfabd6fcb1ea27529" datatype="html">
         <source>Rubric</source>
@@ -558,7 +558,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-tags/edit-component-tags.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Tags</target>
+        <target state="translated">Tag</target>
       </trans-unit>
       <trans-unit id="d9a6d2f30e57a02a6b36a7773c39a3791c42ae9c" datatype="html">
         <source>Add Tag</source>
@@ -604,7 +604,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">237</context>
+          <context context-type="linenumber">246</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -720,15 +720,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">260</context>
+          <context context-type="linenumber">269</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">263</context>
+          <context context-type="linenumber">272</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">288</context>
+          <context context-type="linenumber">297</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -992,7 +992,7 @@
           <context context-type="sourcefile">src/app/classroom-monitor/workgroup-select/workgroup-select-dropdown/workgroup-select-dropdown.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Find a student</target>
+        <target state="translated">Cerca studente</target>
       </trans-unit>
       <trans-unit id="99ee4faa69cd2ea8e3678c1f557c0ff1f05aae46" datatype="html">
         <source>Clear</source>
@@ -1020,7 +1020,7 @@
           <context context-type="sourcefile">src/app/classroom-monitor/workgroup-select/workgroup-select-dropdown/workgroup-select-dropdown.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Select a team</target>
+        <target state="translated">Scegli un team</target>
       </trans-unit>
       <trans-unit id="efe5fca15b5face6a63bdc02ac969840b57eafff" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{workgroup.displayNames}}"/> (Team <x id="INTERPOLATION_1" equiv-text="{{workgroup.workgroupId}}"/>)</source>
@@ -1028,7 +1028,7 @@
           <context context-type="sourcefile">src/app/classroom-monitor/workgroup-select/workgroup-select-dropdown/workgroup-select-dropdown.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{workgroup.displayNames}}"/> (Team <x id="INTERPOLATION_1" equiv-text="{{workgroup.workgroupId}}"/>)</target>
+        <target state="translated"><x id="INTERPOLATION" equiv-text="{{workgroup.displayNames}}"/> (Team <x id="INTERPOLATION_1" equiv-text="{{workgroup.workgroupId}}"/>)</target>
       </trans-unit>
       <trans-unit id="4c00c8f929591b166c1e22e74a414a4dd42ff00b" datatype="html">
         <source>Thank you for contacting WISE!</source>
@@ -1036,7 +1036,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">Thank you for contacting WISE!</target>
+        <target state="translated">Grazie per averci contattato!</target>
       </trans-unit>
       <trans-unit id="708d809914d6b7756b27dd0e9a0233e8ee4e070a" datatype="html">
         <source>Your message has been sent. We will get back to you as soon as possible.</source>
@@ -1044,7 +1044,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Your message has been sent. We will get back to you as soon as possible.</target>
+        <target state="translated">Il tuo messaggio è stato inviato. Ti risponderemo il prima possibile.</target>
       </trans-unit>
       <trans-unit id="09f91390d13a08363b46a6cc623a4765f29d3992" datatype="html">
         <source>Return to WISE Home</source>
@@ -1052,7 +1052,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Return to WISE Home</target>
+        <target state="translated">Torna alla home WISE</target>
       </trans-unit>
       <trans-unit id="3fdb49f59b7dbcd4ef2e9a4fdff71007b32b2933" datatype="html">
         <source>Contact WISE</source>
@@ -1112,7 +1112,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">355</context>
         </context-group>
-        <target state="needs-translation">Name</target>
+        <target state="translated">Nome</target>
       </trans-unit>
       <trans-unit id="4f25015c69f7e23714c642e14a711938efeab311" datatype="html">
         <source>Name required</source>
@@ -1120,7 +1120,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="needs-translation">Name required</target>
+        <target state="translated">Nome obbligatorio</target>
       </trans-unit>
       <trans-unit id="244aae9346da82b0922506c2d2581373a15641cc" datatype="html">
         <source>Email</source>
@@ -1144,7 +1144,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">50</context>
         </context-group>
-        <target state="needs-translation">Email</target>
+        <target state="translated">Email</target>
       </trans-unit>
       <trans-unit id="234ce1f48e2e7c754873c9728092e878e08cf71d" datatype="html">
         <source>Email required</source>
@@ -1164,7 +1164,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">Email required</target>
+        <target state="translated">Email obbligatoria</target>
       </trans-unit>
       <trans-unit id="7a69cf8e716fe0458fffe8b8a67948dfeb2b3eb6" datatype="html">
         <source>Invalid Email</source>
@@ -1172,7 +1172,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
-        <target state="needs-translation">Invalid Email</target>
+        <target state="translated">Email non valida</target>
       </trans-unit>
       <trans-unit id="6237ff3a29d96a2418eb0007bebc0be1dda21cdd" datatype="html">
         <source>Teacher</source>
@@ -1188,7 +1188,7 @@
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">Teacher</target>
+        <target state="translated">Insegnante</target>
       </trans-unit>
       <trans-unit id="f24b47c26f17b04695929c82f78baeafbbd1f599" datatype="html">
         <source>Teacher required</source>
@@ -1196,7 +1196,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">52</context>
         </context-group>
-        <target state="needs-translation">Teacher required</target>
+        <target state="translated">Insegnante obbligatorio</target>
       </trans-unit>
       <trans-unit id="712648c55b8f81cc494ffeff1c304f275dcafc61" datatype="html">
         <source>Issue Type</source>
@@ -1220,7 +1220,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">68</context>
         </context-group>
-        <target state="needs-translation">Project Name</target>
+        <target state="translated">Nome progetto</target>
       </trans-unit>
       <trans-unit id="a8233de047500bf0f0d9f9f1712ddb071501a283" datatype="html">
         <source>Summary</source>
@@ -1244,7 +1244,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">87</context>
         </context-group>
-        <target state="needs-translation">Description</target>
+        <target state="translated">Descrizione</target>
       </trans-unit>
       <trans-unit id="7491b1ebfc5dd457492a5c481e2d2254216dc1fc" datatype="html">
         <source>Description required</source>
@@ -1252,7 +1252,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">95</context>
         </context-group>
-        <target state="needs-translation">Description required</target>
+        <target state="translated">Descrizione obbligatoria</target>
       </trans-unit>
       <trans-unit id="5d9f08dc105485d86dacb30c4f2a3ac7ab951843" datatype="html">
         <source>Sorry, there was a problem submitting the form. Please try again.</source>
@@ -1260,7 +1260,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">104</context>
         </context-group>
-        <target state="needs-translation">Sorry, there was a problem submitting the form. Please try again.</target>
+        <target state="translated">Spiacenti, si è verificato un problema durante l'invio del modulo. Riprova.</target>
       </trans-unit>
       <trans-unit id="71c77bb8cecdf11ec3eead24dd1ba506573fa9cd" datatype="html">
         <source>Submit</source>
@@ -1304,7 +1304,7 @@
           <context context-type="sourcefile">src/assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="needs-translation">Submit</target>
+        <target state="translated">Invia</target>
       </trans-unit>
       <trans-unit id="6178733511992894634" datatype="html">
         <source>Trouble Signing In</source>
@@ -1316,7 +1316,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">149</context>
         </context-group>
-        <target state="needs-translation">Trouble Signing In</target>
+        <target state="translated">Problemi di accesso</target>
       </trans-unit>
       <trans-unit id="6892681827231609313" datatype="html">
         <source>Need Help Using WISE</source>
@@ -1372,7 +1372,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">Other</target>
+        <target state="translated">Altro</target>
       </trans-unit>
       <trans-unit id="862335120638232941" datatype="html">
         <source>Student Management</source>
@@ -1396,7 +1396,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">WISE Features</target>
+        <target state="translated">Funzionalità WISE</target>
       </trans-unit>
       <trans-unit id="ddf8132cf62ce6ac16351585c35e306e6971af4b" datatype="html">
         <source>A powerful online platform for designing, developing, and implementing science inquiry units</source>
@@ -1420,7 +1420,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">WISE students</target>
+        <target state="translated">Studenti WISE</target>
       </trans-unit>
       <trans-unit id="3c7d295a97553e2107807061d481f221cee12704" datatype="html">
         <source>WISE students collaborate to:</source>
@@ -1724,7 +1724,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">212</context>
         </context-group>
-        <target state="needs-translation">Join for free</target>
+        <target state="translated">Iscriviti gratis</target>
       </trans-unit>
       <trans-unit id="bef13b264d9f1244392852666ac27791c9a5979f" datatype="html">
         <source>Forgot Username or Password</source>
@@ -1732,7 +1732,7 @@
           <context context-type="sourcefile">src/app/forgot/forgot-home/forgot-home.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Forgot Username or Password</target>
+        <target state="translated">Password o nome utente dimenticati</target>
       </trans-unit>
       <trans-unit id="61727bf4fa2cb34dc5bdf598b6cb917d0c44ac86" datatype="html">
         <source>Student</source>
@@ -1744,7 +1744,7 @@
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">Student</target>
+        <target state="translated">Studente</target>
       </trans-unit>
       <trans-unit id="9b59fedafe883c50e868d884b7a0faeca8f2ccc9" datatype="html">
         <source>Look up username or reset password for a student account</source>
@@ -1776,7 +1776,7 @@
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="needs-translation">Change Password</target>
+        <target state="translated">Cambia password</target>
       </trans-unit>
       <trans-unit id="c32ef07f8803a223a83ed17024b38e8d82292407" datatype="html">
         <source>Password</source>
@@ -1820,7 +1820,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit/edit.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Password</target>
+        <target state="translated">Password</target>
       </trans-unit>
       <trans-unit id="5ead54400cc272b882d8fb68895f8cf558d8edd7" datatype="html">
         <source>Password required</source>
@@ -1840,7 +1840,7 @@
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">125</context>
         </context-group>
-        <target state="needs-translation">Password required</target>
+        <target state="translated">Password obbligatoria</target>
       </trans-unit>
       <trans-unit id="c1b7e6d75ff4285c7636c67e5ef259629b81725b" datatype="html">
         <source>Confirm Password</source>
@@ -1860,7 +1860,7 @@
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">130</context>
         </context-group>
-        <target state="needs-translation">Confirm Password</target>
+        <target state="translated">Conferma password</target>
       </trans-unit>
       <trans-unit id="4b4b336ca43da85eee55391d95fbc03d921353b5" datatype="html">
         <source>Confirm Password required</source>
@@ -1888,7 +1888,7 @@
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">137</context>
         </context-group>
-        <target state="needs-translation">Confirm Password required</target>
+        <target state="translated">Conferma password obbligatoria</target>
       </trans-unit>
       <trans-unit id="8017fdbaf670dcefd48842920617824337d762f7" datatype="html">
         <source>Create New Account</source>
@@ -1924,7 +1924,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.html</context>
           <context context-type="linenumber">37</context>
         </context-group>
-        <target state="needs-translation">Create New Account</target>
+        <target state="translated">Crea nuovo account</target>
       </trans-unit>
       <trans-unit id="8384809960328910876" datatype="html">
         <source>Password cannot be blank. Please try again.</source>
@@ -1940,7 +1940,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.ts</context>
           <context context-type="linenumber">94</context>
         </context-group>
-        <target state="needs-translation">Passwords do not match. Please try again.</target>
+        <target state="translated">Le password non corrispondono. Riprova.</target>
       </trans-unit>
       <trans-unit id="324815643617845517" datatype="html">
         <source>Password is invalid. Please try a different password.</source>
@@ -1948,7 +1948,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.ts</context>
           <context context-type="linenumber">98</context>
         </context-group>
-        <target state="needs-translation">Password is invalid. Please try a different password.</target>
+        <target state="translated">Password non valida. Prova con una password differente.</target>
       </trans-unit>
       <trans-unit id="7389211279729440739" datatype="html">
         <source>An error occurred. Please try again.</source>
@@ -1968,7 +1968,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
           <context context-type="linenumber">149</context>
         </context-group>
-        <target state="needs-translation">An error occurred. Please try again.</target>
+        <target state="translated">Si è verificato un errore. Riprova.</target>
       </trans-unit>
       <trans-unit id="3979fc2476b643d89e8a9f38d1bbc3014c4a4891" datatype="html">
         <source>Password Changed</source>
@@ -1980,7 +1980,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-complete/forgot-teacher-password-complete.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Password Changed</target>
+        <target state="translated">Password cambiata</target>
       </trans-unit>
       <trans-unit id="2784275ed58bc0769631888b08b14612543c64ec" datatype="html">
         <source>Your password has been successfully changed. Click the button below to sign in.</source>
@@ -1992,7 +1992,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-complete/forgot-teacher-password-complete.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Your password has been successfully changed. Click the button below to sign in.</target>
+        <target state="translated">La tua password è stata modificata correttamente. Fai clic qui sotto per accedere.</target>
       </trans-unit>
       <trans-unit id="ba4f24bf9bf3dc4db3d6bc1b8b63339295f0b806" datatype="html">
         <source>Sign In</source>
@@ -2020,7 +2020,7 @@
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
           <context context-type="linenumber">49</context>
         </context-group>
-        <target state="needs-translation">Sign In</target>
+        <target state="translated">Accedi</target>
       </trans-unit>
       <trans-unit id="8994fda971a6de5ac8b393ab5f86aed5e914de4a" datatype="html">
         <source>Answer Security Question</source>
@@ -2028,7 +2028,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Answer Security Question</target>
+        <target state="translated">Domanda di sicurezza</target>
       </trans-unit>
       <trans-unit id="36a316cb26f14955dcbc311d9f6f326a079df159" datatype="html">
         <source>Answer required</source>
@@ -2036,7 +2036,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">Answer required</target>
+        <target state="translated">Risposta obbligatoria</target>
       </trans-unit>
       <trans-unit id="18036423310428495" datatype="html">
         <source>Incorrect answer, please try again. If you can&apos;t remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.</source>
@@ -2044,7 +2044,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.ts</context>
           <context context-type="linenumber">70</context>
         </context-group>
-        <target state="needs-translation">Incorrect answer, please try again. If you can't remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.</target>
+        <target state="translated">Risposta non corretta, riprova. Se non riesci a ricordare la risposta alla domanda di sicurezza, chiedi al tuo insegnante di cambiare la tua password oppure scrivici per aiutarti.</target>
       </trans-unit>
       <trans-unit id="6244139ed5734258736685c4d638b4fac1b04bbb" datatype="html">
         <source>Forgot Student Password</source>
@@ -2052,7 +2052,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Forgot Student Password</target>
+        <target state="translated">Password studente dimenticata</target>
       </trans-unit>
       <trans-unit id="08c74dc9762957593b91f6eb5d65efdfc975bf48" datatype="html">
         <source>Username</source>
@@ -2088,7 +2088,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Username</target>
+        <target state="translated">Nome utente</target>
       </trans-unit>
       <trans-unit id="fa35e72aac432810b1ffca368a2e203c894d28eb" datatype="html">
         <source>Username required</source>
@@ -2100,7 +2100,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Username required</target>
+        <target state="translated">Nome utente obbligatorio</target>
       </trans-unit>
       <trans-unit id="c69eedb9000f33dbc7e6fc00e2cbdb830c83f214" datatype="html">
         <source>Forgot Student Username</source>
@@ -2112,7 +2112,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Forgot Student Username</target>
+        <target state="translated">Nome utente dimenticato</target>
       </trans-unit>
       <trans-unit id="2305544855268461756" datatype="html">
         <source>We could not find that username. Please make sure you are typing it correctly and try again. If you have forgotten your username, please use the forgot username option below.</source>
@@ -2124,7 +2124,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">We could not find that username. Please make sure you are typing it correctly and try again. If you have forgotten your username, please use the forgot username option below.</target>
+        <target state="translated">Non siamo riusciti a trovare questo nome utente. Assicurati di averlo scritto correttamente e riprova. Se hai dimenticato il tuo nome utente, fai clic su Nome utente dimenticato qui sotto.</target>
       </trans-unit>
       <trans-unit id="c83b838d845690bcb897f775f53b5316535306dc" datatype="html">
         <source>First Name</source>
@@ -2152,7 +2152,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">First Name</target>
+        <target state="translated">Nome</target>
       </trans-unit>
       <trans-unit id="dfb446b53f5c04e99f7deed2f454d3e959e1d324" datatype="html">
         <source>First Name required</source>
@@ -2176,7 +2176,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">First Name required</target>
+        <target state="translated">Nome obbligatorio</target>
       </trans-unit>
       <trans-unit id="166b2cc65003221ff5f3ec05d5baca41e6821396" datatype="html">
         <source>Last Name</source>
@@ -2204,7 +2204,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Last Name</target>
+        <target state="translated">Cognome</target>
       </trans-unit>
       <trans-unit id="17de8a2f90413b5c8a6d622d9cfa4c5eda8bb742" datatype="html">
         <source>Last Name required</source>
@@ -2228,7 +2228,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">Last Name required</target>
+        <target state="translated">Cognome obbligatorio</target>
       </trans-unit>
       <trans-unit id="4b7e7f2459572a6ee907c22976119464ae2556bf" datatype="html">
         <source>Birthday (Month)</source>
@@ -2240,7 +2240,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <target state="needs-translation">Birthday (Month)</target>
+        <target state="translated">Data di nascita (mese)</target>
       </trans-unit>
       <trans-unit id="53b5f38b420c0d1f9b62a0b34612ed28a20d37d8" datatype="html">
         <source>Month required</source>
@@ -2252,7 +2252,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
           <context context-type="linenumber">52</context>
         </context-group>
-        <target state="needs-translation">Month required</target>
+        <target state="translated">Mese obbligatorio</target>
       </trans-unit>
       <trans-unit id="e3945fcac2b828a12bd531c748cf8bd08b04498c" datatype="html">
         <source>Birthday (Day)</source>
@@ -2264,7 +2264,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
           <context context-type="linenumber">57</context>
         </context-group>
-        <target state="needs-translation">Birthday (Day)</target>
+        <target state="translated">Data di nascita (giorno)</target>
       </trans-unit>
       <trans-unit id="c086edf00fc75cb05dc70186d7c2b60ddc8a7cb4" datatype="html">
         <source>Day required</source>
@@ -2276,7 +2276,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
           <context context-type="linenumber">63</context>
         </context-group>
-        <target state="needs-translation">Day required</target>
+        <target state="translated">Giorno obbligatorio</target>
       </trans-unit>
       <trans-unit id="7e892ba15f2c6c17e83510e273b3e10fc32ea016" datatype="html">
         <source>Search</source>
@@ -2288,7 +2288,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Search</target>
+        <target state="translated">Cerca</target>
       </trans-unit>
       <trans-unit id="7528317085219048471" datatype="html">
         <source>01 (Jan)</source>
@@ -2300,7 +2300,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">01 (Jan)</target>
+        <target state="translated">01 (gen)</target>
       </trans-unit>
       <trans-unit id="4169826993694069540" datatype="html">
         <source>02 (Feb)</source>
@@ -2312,7 +2312,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">02 (Feb)</target>
+        <target state="translated">02 (feb)</target>
       </trans-unit>
       <trans-unit id="7397319183527150382" datatype="html">
         <source>03 (Mar)</source>
@@ -2324,7 +2324,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">26</context>
         </context-group>
-        <target state="needs-translation">03 (Mar)</target>
+        <target state="translated">03 (mar)</target>
       </trans-unit>
       <trans-unit id="4401053003272735439" datatype="html">
         <source>04 (Apr)</source>
@@ -2336,7 +2336,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">27</context>
         </context-group>
-        <target state="needs-translation">04 (Apr)</target>
+        <target state="translated">04 (apr)</target>
       </trans-unit>
       <trans-unit id="6130957074030941355" datatype="html">
         <source>05 (May)</source>
@@ -2348,7 +2348,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">05 (May)</target>
+        <target state="translated">05 (mag)</target>
       </trans-unit>
       <trans-unit id="3119348605846865468" datatype="html">
         <source>06 (Jun)</source>
@@ -2360,7 +2360,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">06 (Jun)</target>
+        <target state="translated">06 (giu)</target>
       </trans-unit>
       <trans-unit id="1295628669066090543" datatype="html">
         <source>07 (Jul)</source>
@@ -2372,7 +2372,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="needs-translation">07 (Jul)</target>
+        <target state="translated">07 (lug)</target>
       </trans-unit>
       <trans-unit id="3813724417684413959" datatype="html">
         <source>08 (Aug)</source>
@@ -2384,7 +2384,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">31</context>
         </context-group>
-        <target state="needs-translation">08 (Aug)</target>
+        <target state="translated">08 (ago)</target>
       </trans-unit>
       <trans-unit id="7039612753083856396" datatype="html">
         <source>09 (Sep)</source>
@@ -2396,7 +2396,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">32</context>
         </context-group>
-        <target state="needs-translation">09 (Sep)</target>
+        <target state="translated">09 (set)</target>
       </trans-unit>
       <trans-unit id="5206495968805205248" datatype="html">
         <source>10 (Oct)</source>
@@ -2408,7 +2408,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">33</context>
         </context-group>
-        <target state="needs-translation">10 (Oct)</target>
+        <target state="translated">10 (ott)</target>
       </trans-unit>
       <trans-unit id="5271095457941077047" datatype="html">
         <source>11 (Nov)</source>
@@ -2420,7 +2420,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">34</context>
         </context-group>
-        <target state="needs-translation">11 (Nov)</target>
+        <target state="translated">11 (nov)</target>
       </trans-unit>
       <trans-unit id="7367027577282611263" datatype="html">
         <source>12 (Dec)</source>
@@ -2432,7 +2432,7 @@
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
           <context context-type="linenumber">35</context>
         </context-group>
-        <target state="needs-translation">12 (Dec)</target>
+        <target state="translated">12 (dic)</target>
       </trans-unit>
       <trans-unit id="8342090111716136539" datatype="html">
         <source>We did not find any usernames that match the information you provided. Please make sure you entered your information correctly. If you can&apos;t find your account, ask a teacher for help or contact us for assistance.</source>
@@ -2440,7 +2440,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
           <context context-type="linenumber">101</context>
         </context-group>
-        <target state="needs-translation">We did not find any usernames that match the information you provided. Please make sure you entered your information correctly. If you can't find your account, ask a teacher for help or contact us for assistance.</target>
+        <target state="translated">Non abbiamo trovato nomi utente corrispondenti alle informazioni fornite. Assicurati di aver inserito correttamente le tue informazioni. Se non riesci a ritrovare il tuo account, chiedi aiuto a un insegnante o contattaci per l'assistenza.</target>
       </trans-unit>
       <trans-unit id="2728844381564590456" datatype="html">
         <source>We found a username that matches. Select it to log in. If this username is not yours, ask a teacher for help or contact us for assistance.</source>
@@ -2448,7 +2448,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
           <context context-type="linenumber">106</context>
         </context-group>
-        <target state="needs-translation">We found a username that matches. Select it to log in. If this username is not yours, ask a teacher for help or contact us for assistance.</target>
+        <target state="translated">Abbiamo trovato un nome utente che corrisponde. Selezionalo per accedere. Se questo nome utente non è tuo, chiedi aiuto a un insegnante o contattaci per assistenza.</target>
       </trans-unit>
       <trans-unit id="5966595713291556325" datatype="html">
         <source>We found multiple usernames that match. If one of these is yours, select it to log in. If you can&apos;t find your account, ask a teacher for help or contact us for assistance.</source>
@@ -2948,7 +2948,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">92</context>
         </context-group>
-        <target state="needs-translation">Teacher FAQ</target>
+        <target state="translated">FAQ Insegnanti</target>
       </trans-unit>
       <trans-unit id="d8f48c61abfa7f1be0a4b4c00eca42c3c29f35be" datatype="html">
         <source>Questions from teachers.</source>
@@ -2964,7 +2964,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">94</context>
         </context-group>
-        <target state="needs-translation">Questions from teachers.</target>
+        <target state="translated">Domande dagli insegnanti.</target>
       </trans-unit>
       <trans-unit id="419c84ee97b4daf0f91e70af256dc7a4e8e11de8" datatype="html">
         <source>Student FAQ</source>
@@ -2980,7 +2980,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">242</context>
         </context-group>
-        <target state="needs-translation">Student FAQ</target>
+        <target state="translated">FAQ Studenti</target>
       </trans-unit>
       <trans-unit id="5eef4cac2276bc97a3b1cc8a29b21436112bdaab" datatype="html">
         <source>Questions from students.</source>
@@ -2996,7 +2996,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">244</context>
         </context-group>
-        <target state="needs-translation">Questions from students.</target>
+        <target state="translated">Domande dagli studenti.</target>
       </trans-unit>
       <trans-unit id="0b66532dc98434ee7c1a4b609e3f3a7d49c23d60" datatype="html">
         <source>Information for new users.</source>
@@ -3012,7 +3012,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">235</context>
         </context-group>
-        <target state="needs-translation">Information for new users.</target>
+        <target state="translated">Informazioni per i nuovi utenti.</target>
       </trans-unit>
       <trans-unit id="3ba2943f558468dbbc717d0d93b708c05640f297" datatype="html">
         <source>Student Frequently Asked Questions</source>
@@ -3020,7 +3020,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Student Frequently Asked Questions</target>
+        <target state="translated">Domande frequenti degli studenti</target>
       </trans-unit>
       <trans-unit id="632476f072cc8007d0fd769265b1dd21675f9b19" datatype="html">
         <source>Table of Contents</source>
@@ -3036,7 +3036,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Table of Contents</target>
+        <target state="translated">Sommario</target>
       </trans-unit>
       <trans-unit id="a266982867e61e43775b42a9d5f471fb904dbd2a" datatype="html">
         <source>General Questions</source>
@@ -3056,7 +3056,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">General Questions</target>
+        <target state="translated">Domande generali</target>
       </trans-unit>
       <trans-unit id="2173d6b13460bce2ea12ea198696c4e5634a4b74" datatype="html">
         <source>Technical Questions</source>
@@ -3076,7 +3076,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">188</context>
         </context-group>
-        <target state="needs-translation">Technical Questions</target>
+        <target state="translated">Domande tecniche</target>
       </trans-unit>
       <trans-unit id="cd11af56485642817d523589aaf166abc6e0d1e2" datatype="html">
         <source>How do I create an account?</source>
@@ -3088,7 +3088,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="needs-translation">How do I create an account?</target>
+        <target state="translated">Come creo un account?</target>
       </trans-unit>
       <trans-unit id="64649250206d05fcf6402616f25611f8282e964c" datatype="html">
         <source>Go to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/join&quot; target=&quot;_blank&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> page.</source>
@@ -3100,7 +3100,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Go to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/join&quot; target=&quot;_blank&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> page.</target>
+        <target state="translated">Vai alla pagina <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/join&quot; target=&quot;_blank&quot;&gt;"/>Registrati<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
       </trans-unit>
       <trans-unit id="6f352eaa805d09d80fce681e63d73b007a681142" datatype="html">
         <source>Click on <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/join/student&quot; target=&quot;_blank&quot;&gt;"/>Student<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
@@ -3108,7 +3108,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Click on <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/join/student&quot; target=&quot;_blank&quot;&gt;"/>Student<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
+        <target state="translated">Fai clic su <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/join/student&quot; target=&quot;_blank&quot;&gt;"/>Studente<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
       </trans-unit>
       <trans-unit id="ae21d5a7a66ab2122f138b30d6aec4e8538ee94c" datatype="html">
         <source>I forgot my username, how can I find it?</source>
@@ -3116,7 +3116,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">I forgot my username, how can I find it?</target>
+        <target state="translated">Ho dimenticato il mio nome utente, come posso ritrovarlo?</target>
       </trans-unit>
       <trans-unit id="1219a9794a1c01bab8fc1601bb58ce0a86310b93" datatype="html">
         <source>Go to the forgot username page and follow the instructions to retrieve your username.</source>
@@ -3124,7 +3124,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Go to the forgot username page and follow the instructions to retrieve your username.</target>
+        <target state="translated">Vai alla pagina Nome utente dimenticato e segui le istruzioni per recuperare il tuo nome utente.</target>
       </trans-unit>
       <trans-unit id="7a8b3b1d4ba29026aabcd075b48e4de18bf81ecf" datatype="html">
         <source>I forgot my password, how can I change it?</source>
@@ -3132,7 +3132,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">I forgot my password, how can I change it?</target>
+        <target state="translated">Ho dimenticato la mia password, come posso cambiarla?</target>
       </trans-unit>
       <trans-unit id="aa17e4de65d75d06e18b88dc9abca8177b575dac" datatype="html">
         <source>Go to the forgot password page and follow the instructions to reset your password.</source>
@@ -3140,7 +3140,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Go to the forgot password page and follow the instructions to reset your password.</target>
+        <target state="translated">Vai alla pagina Password dimenticato e segui le istruzioni per reimpostare la tua password.</target>
       </trans-unit>
       <trans-unit id="c4672e4b6ec584927ff0957152d61090c5eabb13" datatype="html">
         <source>How do I start working on a project?</source>
@@ -3156,7 +3156,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">In order to start working on a project you must obtain an Access Code from your teacher. Once you have an Access Code, follow the directions below.</target>
+        <target state="translated">Per iniziare a lavorare su un progetto è necessario ottenere un Codice di Accesso dal proprio insegnante. Una volta ottenuto, segui le istruzioni qui sotto.</target>
       </trans-unit>
       <trans-unit id="6ad63a4282b7f50738ef1f9293cc8d44bb81a3b0" datatype="html">
         <source>Log into WISE with your student account.</source>
@@ -3164,7 +3164,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="needs-translation">Log into WISE with your student account.</target>
+        <target state="translated">Accedi a WISE con il tuo account studente.</target>
       </trans-unit>
       <trans-unit id="bb5b64fcfcf15dfdc125061775f9a1a5396735c9" datatype="html">
         <source>Click on the &quot;Add Unit&quot; button at the top right of the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/student&quot; target=&quot;_blank&quot;&gt;"/>Student Home Page<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
@@ -3172,7 +3172,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
-        <target state="needs-translation">Click on the "Add Unit" button at the top right of the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/student&quot; target=&quot;_blank&quot;&gt;"/>Student Home Page<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
+        <target state="translated">Fai clic su "Aggiungi unità" in alto a destra della <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/student&quot; target=&quot;_blank&quot;&gt;"/>Homepage Studente<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
       </trans-unit>
       <trans-unit id="318e90549e03b7a6a6fc59f3253708f3b9ed94ce" datatype="html">
         <source>Enter the Access Code from your teacher.</source>
@@ -3180,7 +3180,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">32</context>
         </context-group>
-        <target state="needs-translation">Enter the Access Code from your teacher.</target>
+        <target state="translated">Inserisci il codice di accesso del tuo insegnante.</target>
       </trans-unit>
       <trans-unit id="a90b66044c387d48ea596e638c46df2e1d8e38f2" datatype="html">
         <source>Choose your period.</source>
@@ -3196,7 +3196,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
-        <target state="needs-translation">Click "Add".</target>
+        <target state="translated">Fai clic su "Aggiungi".</target>
       </trans-unit>
       <trans-unit id="29a187acf9e3654fbc3bc2f34dc7b8490c2c3085" datatype="html">
         <source>The run will be added to your list of runs.</source>
@@ -3212,7 +3212,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">36</context>
         </context-group>
-        <target state="needs-translation">Click "Launch" to open the project.</target>
+        <target state="translated">Fare clic su "Avvia" per aprire il progetto.</target>
       </trans-unit>
       <trans-unit id="46598f80db6ba570e88591e090b9480a1a06bc57" datatype="html">
         <source>I chose the wrong period, how can I change it?</source>
@@ -3240,7 +3240,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">189</context>
         </context-group>
-        <target state="needs-translation">The WISE web site won't load on my web browser. What do I do?</target>
+        <target state="translated">Il sito web WISE non si carica sul mio browser. Che cosa faccio?</target>
       </trans-unit>
       <trans-unit id="af71879ff4b2c7e9d79167d67a8558c4fd64ee09" datatype="html">
         <source>You can try <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.wikihow.com/Clear-Your-Browser&apos;s-Cache&quot; target=&quot;_blank&quot;&gt;"/>clearing your browser cache<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and then reloading the WISE web site.</source>
@@ -3252,7 +3252,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">191</context>
         </context-group>
-        <target state="needs-translation">You can try <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.wikihow.com/Clear-Your-Browser's-Cache&quot; target=&quot;_blank&quot;&gt;"/>clearing your browser cache<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and then reloading the WISE web site.</target>
+        <target state="translated">Puoi provare a <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.wikihow.com/Clear-Your-Browser's-Cache&quot; target=&quot;_blank&quot;&gt;"/>svuotare la cache del browser<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> e ricaricare il sito web di WISE.</target>
       </trans-unit>
       <trans-unit id="2b8d27d2ef531e0cdf597e90b8c80e339d679ad3" datatype="html">
         <source>You can try using a different web browser. We recommend using Chrome or Firefox.</source>
@@ -3264,7 +3264,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">192</context>
         </context-group>
-        <target state="needs-translation">You can try using a different web browser. We recommend using Chrome or Firefox.</target>
+        <target state="translated">Puoi provare a utilizzare un browser diverso. Ti consigliamo di utilizzare Chrome o Firefox.</target>
       </trans-unit>
       <trans-unit id="72d03fe604d9ac13e9a9b1a46d1421fdc4284eca" datatype="html">
         <source>What if I have trouble logging in?</source>
@@ -3276,7 +3276,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">199</context>
         </context-group>
-        <target state="needs-translation">What if I have trouble logging in?</target>
+        <target state="translated">Cosa succede se ho problemi di accesso?</target>
       </trans-unit>
       <trans-unit id="ef91b6733f15c82512f30d911641bc4b2076879c" datatype="html">
         <source>If you do not remember your username or password click the Lost Username or Password link and follow the instructions. </source>
@@ -3288,7 +3288,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">201</context>
         </context-group>
-        <target state="needs-translation">If you do not remember your username or password click the Lost Username or Password link and follow the instructions. </target>
+        <target state="translated">Se non ricordi il tuo nome utente o la tua password clicca sul link Nome utente o Password dimenticati e segui le istruzioni. </target>
       </trans-unit>
       <trans-unit id="df6ec49a683a1c798d509516f3b73dd1befb6a62" datatype="html">
         <source>Can I use WISE in another language?</source>
@@ -3300,7 +3300,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">203</context>
         </context-group>
-        <target state="needs-translation">Can I use WISE in another language?</target>
+        <target state="translated">Posso usare WISE in un'altra lingua?</target>
       </trans-unit>
       <trans-unit id="5e6b10e07638120f23c5e8bf743c1fed409876c7" datatype="html">
         <source>Yes!</source>
@@ -3312,7 +3312,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">204</context>
         </context-group>
-        <target state="needs-translation">Yes!</target>
+        <target state="translated">Si!</target>
       </trans-unit>
       <trans-unit id="2c78c51700ea174231b7fb84a2d51a96f5b5ed78" datatype="html">
         <source>Sign into WISE with your student account.</source>
@@ -3320,7 +3320,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">Sign into WISE with your student account.</target>
+        <target state="translated">Accedi a WISE con il tuo account studente.</target>
       </trans-unit>
       <trans-unit id="cd761cded422c423fa11257b80da3e4ecff46339" datatype="html">
         <source>Click on your account icon at the top right of the page. This should open a drop down with options.</source>
@@ -3332,7 +3332,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">207</context>
         </context-group>
-        <target state="needs-translation">Click on your account icon at the top right of the page. This should open a drop down with options.</target>
+        <target state="translated">Clicca sull'icona del tuo account in alto a destra della pagina. Questo dovrebbe aprire un menu a discesa con le opzioni.</target>
       </trans-unit>
       <trans-unit id="a8484540c88600524e3d99bffc641f5588cc4ecc" datatype="html">
         <source>Click the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/student/profile/edit&quot; target=&quot;_blank&quot;&gt;"/>&quot;Edit Profile&quot;<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> option.</source>
@@ -3344,7 +3344,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">208</context>
         </context-group>
-        <target state="needs-translation">Click the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/student/profile/edit&quot; target=&quot;_blank&quot;&gt;"/>"Edit Profile"<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> option.</target>
+        <target state="translated">Fai clic sull'opzione <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/student/profile/edit&quot; target=&quot;_blank&quot;&gt;"/>"Modifica profilo"<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
       </trans-unit>
       <trans-unit id="9d5b98a0d8b80864e5e2382f9c2f056f8b9393e5" datatype="html">
         <source>Near the bottom there will be a &quot;Language&quot; setting.</source>
@@ -3368,7 +3368,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">210</context>
         </context-group>
-        <target state="needs-translation">Change the language to the language of your choice.</target>
+        <target state="translated">Cambia la lingua a tua scelta.</target>
       </trans-unit>
       <trans-unit id="ecbda85dab67998ada82c4efd82ffb9bf4bc39d2" datatype="html">
         <source>Note 1: If your language is not listed as an option, or you&apos;d like to help us improve the translation, please contact us and we&apos;ll help you get started!</source>
@@ -3480,7 +3480,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">Click on "Teacher".</target>
+        <target state="translated">Fai clic su "Insegnante".</target>
       </trans-unit>
       <trans-unit id="0fb9b3530d8d70b28d4ab1ca863c04ec01db3dff" datatype="html">
         <source>How do I use a unit with my class?</source>
@@ -3916,7 +3916,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">112</context>
         </context-group>
-        <target state="needs-translation">Click on the project.</target>
+        <target state="translated">Fai clic sul progetto.</target>
       </trans-unit>
       <trans-unit id="7c669c5c1a3a10743f60933f238fa21a6e23b1e0" datatype="html">
         <source>This will display a popup that displays information about the project.</source>
@@ -4268,7 +4268,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">52</context>
         </context-group>
-        <target state="needs-translation">Sign up for free!</target>
+        <target state="translated">Iscriviti gratis!</target>
       </trans-unit>
       <trans-unit id="da6aa9950c74cadd85a3bf26272f34f28d8338c8" datatype="html">
         <source>Connect</source>
@@ -4300,7 +4300,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
-        <target state="needs-translation">WISE on Twitter</target>
+        <target state="translated">WISE su Twitter</target>
       </trans-unit>
       <trans-unit id="540452d4091ec883af6967b28abf89f2ac0c853d" datatype="html">
         <source>WISE on Github</source>
@@ -4312,7 +4312,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">WISE on Github</target>
+        <target state="translated">WISE su Github</target>
       </trans-unit>
       <trans-unit id="1d0974afae70914072a4fbf19e53328e517bae73" datatype="html">
         <source>News</source>
@@ -4332,7 +4332,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">News</target>
+        <target state="translated">Novità</target>
       </trans-unit>
       <trans-unit id="34dc5c906ca725ffe2bfacaa6983bfdc30561ddb" datatype="html">
         <source>Learn what&apos;s new in the WISE community.</source>
@@ -4340,7 +4340,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">80</context>
         </context-group>
-        <target state="needs-translation">Learn what's new in the WISE community.</target>
+        <target state="translated">Scopri cosa c'è di nuovo nella comunità WISE.</target>
       </trans-unit>
       <trans-unit id="53c1019d0a23e95290e125bf93e34257eaadb8b6" datatype="html">
         <source>Help + FAQs</source>
@@ -4352,7 +4352,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="needs-translation">Help + FAQs</target>
+        <target state="translated">Supporto + FAQ</target>
       </trans-unit>
       <trans-unit id="ba44ee280d91539e6c5892dccbb8556bcce235be" datatype="html">
         <source>View tutorials and common questions.</source>
@@ -4372,7 +4372,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="needs-translation">Contact Us</target>
+        <target state="translated">Contattaci</target>
       </trans-unit>
       <trans-unit id="c2e1e231feb67c7dd4f5e748cce6c1c46fbdf9cf" datatype="html">
         <source>Want to get in touch? Send us a message.</source>
@@ -4380,7 +4380,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">88</context>
         </context-group>
-        <target state="needs-translation">Want to get in touch? Send us a message.</target>
+        <target state="translated">Vuoi contattarci? Inviaci un messaggio.</target>
       </trans-unit>
       <trans-unit id="3220280128711469703" datatype="html">
         <source>WISE students in classroom</source>
@@ -4444,7 +4444,7 @@
           <context context-type="sourcefile">src/app/http-error.interceptor.ts</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">An error occurred: </target>
+        <target state="translated">Si è verificato un errore: </target>
       </trans-unit>
       <trans-unit id="8903463267282596576" datatype="html">
         <source>Backend returned code <x id="status" equiv-text="err.status"/>, body was: <x id="error" equiv-text="err.error"/></source>
@@ -4528,7 +4528,7 @@
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
           <context context-type="linenumber">60</context>
         </context-group>
-        <target state="needs-translation">Sign in with Google</target>
+        <target state="translated">Accedi con Google</target>
       </trans-unit>
       <trans-unit id="cabe636014527fb69951e0f36b7aec9697e00c71" datatype="html">
         <source>Forgot username or password?</source>
@@ -4536,7 +4536,7 @@
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
           <context context-type="linenumber">61</context>
         </context-group>
-        <target state="needs-translation">Forgot username or password?</target>
+        <target state="translated">Hai dimenticato il nome utente o la password?</target>
       </trans-unit>
       <trans-unit id="acd82db1a5e5f81b87f6a6b1639f028a4d106d49" datatype="html">
         <source>WISE logo</source>
@@ -4548,7 +4548,7 @@
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">WISE logo</target>
+        <target state="translated">Logo WISE</target>
       </trans-unit>
       <trans-unit id="e19fcf996343543e13789f17b550ab0c08124b5c" datatype="html">
         <source>Create Account</source>
@@ -4572,7 +4572,7 @@
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">151</context>
         </context-group>
-        <target state="needs-translation">Create Account</target>
+        <target state="translated">Crea account</target>
       </trans-unit>
       <trans-unit id="6cdb1fea93d77c07950c0c76c6e0ad79ebbef084" datatype="html">
         <source>Features</source>
@@ -4588,7 +4588,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Features</target>
+        <target state="translated">Funzionalità</target>
       </trans-unit>
       <trans-unit id="3d469f0ca2f579eedee96edd4ef40883f65e77aa" datatype="html">
         <source>Privacy + Use</source>
@@ -4628,7 +4628,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">72</context>
         </context-group>
-        <target state="needs-translation">UC Berkeley</target>
+        <target state="translated">UC Berkeley</target>
       </trans-unit>
       <trans-unit id="180dea6fe6590f8a3fb1ff508b793ef0b2feed4b" datatype="html">
         <source>ETS</source>
@@ -4672,7 +4672,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Account Menu</target>
+        <target state="translated">Menu account</target>
       </trans-unit>
       <trans-unit id="879fef27271d8247d791381cf1f9bb0eb8974166" datatype="html">
         <source>Account avatar</source>
@@ -4684,7 +4684,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">Account avatar</target>
+        <target state="translated">Avatar account</target>
       </trans-unit>
       <trans-unit id="c48210e0360714d757f8286144200648dc140e30" datatype="html">
         <source>Switch back to original user</source>
@@ -4704,7 +4704,7 @@
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">Student Home</target>
+        <target state="translated">Home studente</target>
       </trans-unit>
       <trans-unit id="4c42d0c12ddaebc2efdfc00bbf1d714bf385f278" datatype="html">
         <source>Teacher Home</source>
@@ -4716,7 +4716,7 @@
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Teacher Home</target>
+        <target state="translated">Home insegnante</target>
       </trans-unit>
       <trans-unit id="d3781ad331fdd0bc9055c45a41664ac467de63af" datatype="html">
         <source>Edit Profile</source>
@@ -4736,7 +4736,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit/edit.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Edit Profile</target>
+        <target state="translated">Modifica profilo</target>
       </trans-unit>
       <trans-unit id="ea7254c3121598c9cfd72210e1336473441546e3" datatype="html">
         <source>Researcher Tools</source>
@@ -4744,7 +4744,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="needs-translation">Researcher Tools</target>
+        <target state="translated">Strumenti ricercatore</target>
       </trans-unit>
       <trans-unit id="593d1ae1c4b71457eda8476df2bb52624a3c6e74" datatype="html">
         <source>Admin Tools</source>
@@ -4752,7 +4752,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">Admin Tools</target>
+        <target state="translated">Strumenti amministratore</target>
       </trans-unit>
       <trans-unit id="85b79c9064aed1ead31ace985f31aa1363f6bdaf" datatype="html">
         <source>Help</source>
@@ -4764,7 +4764,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
-        <target state="needs-translation">Help</target>
+        <target state="translated">Supporto</target>
       </trans-unit>
       <trans-unit id="640eec093c685babaa3265137215e3cc92ad704d" datatype="html">
         <source>Sign Out</source>
@@ -4772,7 +4772,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">86</context>
         </context-group>
-        <target state="needs-translation">Sign Out</target>
+        <target state="translated">Disconnettiti</target>
       </trans-unit>
       <trans-unit id="17f37e96c7b8059b23c07791dca1bdb3f3f6853f" datatype="html">
         <source>Welcome <x id="INTERPOLATION" equiv-text="{{ user.firstName }}"/>!</source>
@@ -4784,7 +4784,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-links/header-links.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Welcome <x id="INTERPOLATION" equiv-text="{{ user.firstName }}"/>!</target>
+        <target state="translated">Benvenuto <x id="INTERPOLATION" equiv-text="{{ user.firstName }}"/>!</target>
       </trans-unit>
       <trans-unit id="ab8be185fd77636da821443e6071c033ebc47a59" datatype="html">
         <source>Research <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>call_made<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
@@ -4804,7 +4804,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-signin/header-signin.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> or <x id="START_LINK_1" equiv-text="&lt;a routerLink=&quot;/login&quot;&gt;"/>Sign In<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Registrati<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> o <x id="START_LINK_1" equiv-text="&lt;a routerLink=&quot;/login&quot;&gt;"/>Accedi<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
       </trans-unit>
       <trans-unit id="470b3fb4b02529d4f9f25850711632271fd27508" datatype="html">
         <source>WISE header logo</source>
@@ -5044,7 +5044,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <target state="needs-translation">Features:</target>
+        <target state="translated">Funzionalità:</target>
       </trans-unit>
       <trans-unit id="4a074ee53886e04659f3cec8ec30b94ce5ce717c" datatype="html">
         <source>NGSS Performance Expectations: </source>
@@ -5124,7 +5124,7 @@
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Preview</target>
+        <target state="translated">Anteprima</target>
       </trans-unit>
       <trans-unit id="3563179927132287246" datatype="html">
         <source>License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.</source>
@@ -5148,7 +5148,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Modifica</target>
       </trans-unit>
       <trans-unit id="0bd8b27f60a1f098a53e06328426d818e3508ff9" datatype="html">
         <source>Share</source>
@@ -5156,7 +5156,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Share</target>
+        <target state="translated">Condividi</target>
       </trans-unit>
       <trans-unit id="4bad40355890bcbe1b4003d9fd0632beeffd6580" datatype="html">
         <source>Show project details</source>
@@ -5164,7 +5164,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Show project details</target>
+        <target state="translated">Mostra dettagli progetto</target>
       </trans-unit>
       <trans-unit id="53c647ed0bda0187e7653c35e0856deea80c268b" datatype="html">
         <source>(ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</source>
@@ -5172,7 +5172,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">(ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</target>
+        <target state="translated">(ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</target>
       </trans-unit>
       <trans-unit id="e3ae8640f4d05cb4f78a31cfbf18d5701f41d57e" datatype="html">
         <source>Shared by <x id="INTERPOLATION" equiv-text="{{ project.owner.displayName }}"/></source>
@@ -5180,7 +5180,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">Shared by <x id="INTERPOLATION" equiv-text="{{ project.owner.displayName }}"/></target>
+        <target state="translated">Condiviso da <x id="INTERPOLATION" equiv-text="{{ project.owner.displayName }}"/></target>
       </trans-unit>
       <trans-unit id="7189355262232159449" datatype="html">
         <source>Unit Details</source>
@@ -5188,7 +5188,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="needs-translation">Unit Details</target>
+        <target state="translated">Dettagli unità</target>
       </trans-unit>
       <trans-unit id="1160916388490317189" datatype="html">
         <source>Show:</source>
@@ -5204,7 +5204,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Next page</target>
+        <target state="translated">Pagina successiva</target>
       </trans-unit>
       <trans-unit id="3629960544875360046" datatype="html">
         <source>Previous page</source>
@@ -5212,7 +5212,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Previous page</target>
+        <target state="translated">Pagina precedente</target>
       </trans-unit>
       <trans-unit id="4131502629887927598" datatype="html">
         <source>0 of <x id="total" equiv-text="length"/></source>
@@ -5220,7 +5220,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">0 of <x id="total" equiv-text="length"/></target>
+        <target state="translated">0 di <x id="total" equiv-text="length"/></target>
       </trans-unit>
       <trans-unit id="2448240847827519051" datatype="html">
         <source><x id="start" equiv-text="startIndex"/> - <x id="end" equiv-text="endIndex"/> of <x id="total" equiv-text="length"/></source>
@@ -5228,7 +5228,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation"><x id="start" equiv-text="startIndex"/> - <x id="end" equiv-text="endIndex"/> of <x id="total" equiv-text="length"/></target>
+        <target state="translated"><x id="start" equiv-text="startIndex"/> - <x id="end" equiv-text="endIndex"/> di <x id="total" equiv-text="length"/></target>
       </trans-unit>
       <trans-unit id="5080207bff284204adb9544ae12ef39917aa74ae" datatype="html">
         <source>WISE Tested</source>
@@ -5236,7 +5236,7 @@
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">WISE Tested</target>
+        <target state="translated">Testato con WISE</target>
       </trans-unit>
       <trans-unit id="babd041c8f47bf5bb8dcabfc02d9904a8e363c9c" datatype="html">
         <source>The &quot;WISE Tested&quot; library contains curricula developed by the WISE team.</source>
@@ -5244,7 +5244,7 @@
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">The "WISE Tested" library contains curricula developed by the WISE team.</target>
+        <target state="translated">La libreria "Testato con WISE" contiene corsi sviluppati dal team WISE.</target>
       </trans-unit>
       <trans-unit id="cda4813957412f125af0b3c464de60460ca0fe2f" datatype="html">
         <source>Each of the units in this collection has been designed and iteratively refined through a partnership of university-based education researchers and science teachers. They have all been implemeneted and tested in real classrooms and have shown proven learning gains.</source>
@@ -5268,7 +5268,7 @@
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">unit(s)</target>
+        <target state="translated">unità</target>
       </trans-unit>
       <trans-unit id="73da064756ecee7cf3d056dc8a0b99f0f39863b6" datatype="html">
         <source>What is WISE Tested?</source>
@@ -5276,7 +5276,7 @@
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">What is WISE Tested?</target>
+        <target state="translated">Che cos’è Testato con WISE?</target>
       </trans-unit>
       <trans-unit id="35f92c76101a5f5b5010e09dedea982832cf1e87" datatype="html">
         <source>The &quot;My Units&quot; library contains curriculum units that you own or that have been shared with you by other WISE users.</source>
@@ -5300,7 +5300,7 @@
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">What are My Units?</target>
+        <target state="translated">Cosa sono Le mie unità?</target>
       </trans-unit>
       <trans-unit id="329cfb58bde439dc1f1839ebf205991382a9a2de" datatype="html">
         <source>No owned or shared units found.</source>
@@ -5356,7 +5356,7 @@
           <context context-type="sourcefile">src/app/teacher/use-with-class-warning-dialog/use-with-class-warning-dialog.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">(Unit ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</target>
+        <target state="translated">(ID Unità: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</target>
       </trans-unit>
       <trans-unit id="e37f493e816aac1bba5e9c25e50efb4ea9e357cf" datatype="html">
         <source>Sharing a curriculum unit allows other WISE teachers to use it with their own students and optionally edit the unit&apos;s content.</source>
@@ -5384,7 +5384,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">Find a teacher</target>
+        <target state="translated">Cerca un insegnante</target>
       </trans-unit>
       <trans-unit id="39e715b9ebc52d3b9c9a0b629419034bf1610efa" datatype="html">
         <source>Teacher is already on shared list.</source>
@@ -5408,7 +5408,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">57</context>
         </context-group>
-        <target state="needs-translation">Revoke</target>
+        <target state="translated">Revoca</target>
       </trans-unit>
       <trans-unit id="70f45880fce6ac5d8e468e25e82aefbba8098cfe" datatype="html">
         <source>Permissions</source>
@@ -5420,7 +5420,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">62</context>
         </context-group>
-        <target state="needs-translation">Permissions</target>
+        <target state="translated">Permessi</target>
       </trans-unit>
       <trans-unit id="e4c62e79146aa053669046c6d0d40e889049f8a1" datatype="html">
         <source>Owner. Full permissions.</source>
@@ -5452,7 +5452,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
-        <target state="needs-translation">Edit Unit Content</target>
+        <target state="translated">Modifica contenuto unità</target>
       </trans-unit>
       <trans-unit id="8dd413cee2228118c536f503709329a4d1a395e2" datatype="html">
         <source>Done</source>
@@ -5480,7 +5480,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">102</context>
         </context-group>
-        <target state="needs-translation">Done</target>
+        <target state="translated">Fatto</target>
       </trans-unit>
       <trans-unit id="4d4b87e130f67964a35a56bdd05df593406fcc17" datatype="html">
         <source>Teacher unit library navigation</source>
@@ -5496,7 +5496,7 @@
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">WISE Tested</target>
+        <target state="translated">Testato con WISE</target>
       </trans-unit>
       <trans-unit id="4827877614369437209" datatype="html">
         <source>Community Built</source>
@@ -5704,7 +5704,7 @@
           <context context-type="sourcefile">src/app/modules/shared/search-bar/search-bar.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Search</target>
+        <target state="translated">Cerca</target>
       </trans-unit>
       <trans-unit id="7f32abe3fc638f65c0d3eb269d478ee49ad41ebe" datatype="html">
         <source>more</source>
@@ -5824,7 +5824,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
           <context context-type="linenumber">106</context>
         </context-group>
-        <target state="needs-translation">Cancel</target>
+        <target state="translated">Annulla</target>
       </trans-unit>
       <trans-unit id="5416386898703427966" datatype="html">
         <source>Are you sure you want to revive this <x id="PH" equiv-text="this.label.singular"/>?</source>
@@ -5964,7 +5964,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">277</context>
+          <context context-type="linenumber">286</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
@@ -7164,7 +7164,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">204</context>
+          <context context-type="linenumber">213</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -8984,15 +8984,15 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">227</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">225</context>
+          <context context-type="linenumber">234</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">228</context>
+          <context context-type="linenumber">237</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -9060,7 +9060,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">249</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
@@ -9100,7 +9100,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">252</context>
+          <context context-type="linenumber">261</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
@@ -9562,7 +9562,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Play</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">192</context>
         </context-group>
         <target state="needs-translation">Play</target>
       </trans-unit>
@@ -9570,7 +9570,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Stop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">200</context>
+          <context context-type="linenumber">196</context>
         </context-group>
         <target state="needs-translation">Stop</target>
       </trans-unit>
@@ -9578,7 +9578,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">495</context>
+          <context context-type="linenumber">530</context>
         </context-group>
         <target state="needs-translation">Saved</target>
       </trans-unit>
@@ -9586,7 +9586,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Auto Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">499</context>
+          <context context-type="linenumber">534</context>
         </context-group>
         <target state="needs-translation">Auto Saved</target>
       </trans-unit>
@@ -9594,7 +9594,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Submitted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">503</context>
+          <context context-type="linenumber">538</context>
         </context-group>
         <target state="needs-translation">Submitted</target>
       </trans-unit>
@@ -9678,7 +9678,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <target state="needs-translation">Canvas Height (Optional)</target>
       </trans-unit>
@@ -10068,13 +10068,21 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-grading/discussion-grading.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Student</target>
+        <target state="translated">Studente</target>
+      </trans-unit>
+      <trans-unit id="fa8877ba0986b7bb88ec902a4a0dab94371354c0" datatype="html">
+        <source> Allow student to upload background image </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+        <target state="needs-translation"> Allow student to upload background image </target>
       </trans-unit>
       <trans-unit id="1ddab39a5de0dc854ff4562b74800e78df85302e" datatype="html">
         <source>Enable All Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <target state="needs-translation">Enable All Tools</target>
       </trans-unit>
@@ -10082,7 +10090,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Enable All</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <target state="needs-translation">Enable All</target>
       </trans-unit>
@@ -10090,7 +10098,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Disable All Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <target state="needs-translation">Disable All Tools</target>
       </trans-unit>
@@ -10098,7 +10106,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Disable All</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target state="needs-translation">Disable All</target>
       </trans-unit>
@@ -10106,7 +10114,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Select Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">75,76</context>
+          <context context-type="linenumber">84,85</context>
         </context-group>
         <target state="needs-translation"> Select Tool </target>
       </trans-unit>
@@ -10114,7 +10122,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Line Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">83,84</context>
+          <context context-type="linenumber">92,93</context>
         </context-group>
         <target state="needs-translation"> Line Tool </target>
       </trans-unit>
@@ -10122,7 +10130,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Shape Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">91,92</context>
+          <context context-type="linenumber">100,101</context>
         </context-group>
         <target state="needs-translation"> Shape Tool </target>
       </trans-unit>
@@ -10130,7 +10138,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Free Hand Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">99,100</context>
+          <context context-type="linenumber">108,109</context>
         </context-group>
         <target state="needs-translation"> Free Hand Tool </target>
       </trans-unit>
@@ -10138,7 +10146,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Text Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">108,109</context>
+          <context context-type="linenumber">117,118</context>
         </context-group>
         <target state="needs-translation"> Text Tool </target>
       </trans-unit>
@@ -10146,7 +10154,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Stamp Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">116,117</context>
+          <context context-type="linenumber">125,126</context>
         </context-group>
         <target state="needs-translation"> Stamp Tool </target>
       </trans-unit>
@@ -10154,7 +10162,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Clone Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">124,125</context>
+          <context context-type="linenumber">133,134</context>
         </context-group>
         <target state="needs-translation"> Clone Tool </target>
       </trans-unit>
@@ -10162,7 +10170,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Stroke Color Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">132,133</context>
+          <context context-type="linenumber">141,142</context>
         </context-group>
         <target state="needs-translation"> Stroke Color Tool </target>
       </trans-unit>
@@ -10170,7 +10178,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Fill Color Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">141,142</context>
+          <context context-type="linenumber">150,151</context>
         </context-group>
         <target state="needs-translation"> Fill Color Tool </target>
       </trans-unit>
@@ -10178,7 +10186,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Stroke Width Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">149,150</context>
+          <context context-type="linenumber">158,159</context>
         </context-group>
         <target state="needs-translation"> Stroke Width Tool </target>
       </trans-unit>
@@ -10186,7 +10194,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Send Back Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">157,158</context>
+          <context context-type="linenumber">166,167</context>
         </context-group>
         <target state="needs-translation"> Send Back Tool </target>
       </trans-unit>
@@ -10194,7 +10202,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Send Forward Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">165,166</context>
+          <context context-type="linenumber">174,175</context>
         </context-group>
         <target state="needs-translation"> Send Forward Tool </target>
       </trans-unit>
@@ -10202,7 +10210,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Undo Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">174,175</context>
+          <context context-type="linenumber">183,184</context>
         </context-group>
         <target state="needs-translation"> Undo Tool </target>
       </trans-unit>
@@ -10210,7 +10218,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Redo Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">182,183</context>
+          <context context-type="linenumber">191,192</context>
         </context-group>
         <target state="needs-translation"> Redo Tool </target>
       </trans-unit>
@@ -10218,7 +10226,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Delete Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">190,191</context>
+          <context context-type="linenumber">199,200</context>
         </context-group>
         <target state="needs-translation"> Delete Tool </target>
       </trans-unit>
@@ -10226,7 +10234,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Stamps</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">205</context>
         </context-group>
         <target state="needs-translation">Stamps</target>
       </trans-unit>
@@ -10234,7 +10242,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Add Stamp</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">201</context>
+          <context context-type="linenumber">210</context>
         </context-group>
         <target state="needs-translation">Add Stamp</target>
       </trans-unit>
@@ -10242,7 +10250,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>above</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">250</context>
+          <context context-type="linenumber">259</context>
         </context-group>
         <target state="needs-translation">above</target>
       </trans-unit>
@@ -10250,7 +10258,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Save Starter Drawing</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">274</context>
+          <context context-type="linenumber">283</context>
         </context-group>
         <target state="needs-translation">Save Starter Drawing</target>
       </trans-unit>
@@ -10258,7 +10266,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Delete Starter Drawing</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">285</context>
+          <context context-type="linenumber">294</context>
         </context-group>
         <target state="needs-translation">Delete Starter Drawing</target>
       </trans-unit>
@@ -10289,6 +10297,46 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <target state="needs-translation">Are you sure you want to delete this stamp?
 
 <x id="PH" equiv-text="this.authoringComponentContent.stamps.Stamps[index]"/></target>
+      </trans-unit>
+      <trans-unit id="dffaf8f57d090d184cf323d929d4ec1959bf08a0" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>file_download<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Import Classmate Work </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>file_download<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Import Classmate Work </target>
+      </trans-unit>
+      <trans-unit id="d679e94521ab2288e0ab0307c50ac85bea6ca401" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>image<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Upload Background Image </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
+          <context context-type="linenumber">28,30</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>image<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Upload Background Image </target>
+      </trans-unit>
+      <trans-unit id="a4ca5913db14fa4626ca68068d3d925e72f2b35c" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>restore<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Reset </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
+          <context context-type="linenumber">38,40</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>restore<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Reset </target>
+      </trans-unit>
+      <trans-unit id="1183673564143200427" datatype="html">
+        <source>Are you sure you want to clear your drawing?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
+          <context context-type="linenumber">190</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to clear your drawing?</target>
+      </trans-unit>
+      <trans-unit id="7020890278107204483" datatype="html">
+        <source>Do you want to update the connected drawing?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
+          <context context-type="linenumber">274</context>
+        </context-group>
+        <target state="needs-translation">Do you want to update the connected drawing?</target>
       </trans-unit>
       <trans-unit id="1d3911009f4b8bea155d7d4f87812066abaa614b" datatype="html">
         <source>Model File Name</source>
@@ -11134,7 +11182,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">714</context>
+          <context context-type="linenumber">708</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this label?
 
@@ -11192,7 +11240,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>A New Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">461</context>
+          <context context-type="linenumber">455</context>
         </context-group>
         <target state="needs-translation">A New Label</target>
       </trans-unit>
@@ -11200,7 +11248,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset to the initial state?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">836</context>
+          <context context-type="linenumber">814</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset to the initial state?</target>
       </trans-unit>
@@ -11208,7 +11256,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to delete the background image?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">901</context>
+          <context context-type="linenumber">879</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the background image?</target>
       </trans-unit>
