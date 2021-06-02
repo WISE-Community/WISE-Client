@@ -604,7 +604,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">237</context>
+          <context context-type="linenumber">246</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -720,15 +720,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">260</context>
+          <context context-type="linenumber">269</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">263</context>
+          <context context-type="linenumber">272</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">288</context>
+          <context context-type="linenumber">297</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -5964,7 +5964,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">277</context>
+          <context context-type="linenumber">286</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
@@ -7164,7 +7164,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">204</context>
+          <context context-type="linenumber">213</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -8984,15 +8984,15 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">227</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">225</context>
+          <context context-type="linenumber">234</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">228</context>
+          <context context-type="linenumber">237</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -9060,7 +9060,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">249</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
@@ -9100,7 +9100,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">252</context>
+          <context context-type="linenumber">261</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
@@ -9562,7 +9562,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Play</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">192</context>
         </context-group>
         <target state="needs-translation">Play</target>
       </trans-unit>
@@ -9570,7 +9570,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Stop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">200</context>
+          <context context-type="linenumber">196</context>
         </context-group>
         <target state="needs-translation">Stop</target>
       </trans-unit>
@@ -9578,7 +9578,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">495</context>
+          <context context-type="linenumber">530</context>
         </context-group>
         <target state="needs-translation">Saved</target>
       </trans-unit>
@@ -9586,7 +9586,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Auto Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">499</context>
+          <context context-type="linenumber">534</context>
         </context-group>
         <target state="needs-translation">Auto Saved</target>
       </trans-unit>
@@ -9594,7 +9594,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Submitted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">503</context>
+          <context context-type="linenumber">538</context>
         </context-group>
         <target state="needs-translation">Submitted</target>
       </trans-unit>
@@ -9678,7 +9678,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <target state="needs-translation">Canvas Height (Optional)</target>
       </trans-unit>
@@ -10070,11 +10070,19 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Student</target>
       </trans-unit>
+      <trans-unit id="fa8877ba0986b7bb88ec902a4a0dab94371354c0" datatype="html">
+        <source> Allow student to upload background image </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+        <target state="needs-translation"> Allow student to upload background image </target>
+      </trans-unit>
       <trans-unit id="1ddab39a5de0dc854ff4562b74800e78df85302e" datatype="html">
         <source>Enable All Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <target state="needs-translation">Enable All Tools</target>
       </trans-unit>
@@ -10082,7 +10090,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Enable All</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <target state="needs-translation">Enable All</target>
       </trans-unit>
@@ -10090,7 +10098,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Disable All Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <target state="needs-translation">Disable All Tools</target>
       </trans-unit>
@@ -10098,7 +10106,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Disable All</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target state="needs-translation">Disable All</target>
       </trans-unit>
@@ -10106,7 +10114,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Select Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">75,76</context>
+          <context context-type="linenumber">84,85</context>
         </context-group>
         <target state="needs-translation"> Select Tool </target>
       </trans-unit>
@@ -10114,7 +10122,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Line Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">83,84</context>
+          <context context-type="linenumber">92,93</context>
         </context-group>
         <target state="needs-translation"> Line Tool </target>
       </trans-unit>
@@ -10122,7 +10130,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Shape Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">91,92</context>
+          <context context-type="linenumber">100,101</context>
         </context-group>
         <target state="needs-translation"> Shape Tool </target>
       </trans-unit>
@@ -10130,7 +10138,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Free Hand Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">99,100</context>
+          <context context-type="linenumber">108,109</context>
         </context-group>
         <target state="needs-translation"> Free Hand Tool </target>
       </trans-unit>
@@ -10138,7 +10146,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Text Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">108,109</context>
+          <context context-type="linenumber">117,118</context>
         </context-group>
         <target state="needs-translation"> Text Tool </target>
       </trans-unit>
@@ -10146,7 +10154,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Stamp Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">116,117</context>
+          <context context-type="linenumber">125,126</context>
         </context-group>
         <target state="needs-translation"> Stamp Tool </target>
       </trans-unit>
@@ -10154,7 +10162,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Clone Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">124,125</context>
+          <context context-type="linenumber">133,134</context>
         </context-group>
         <target state="needs-translation"> Clone Tool </target>
       </trans-unit>
@@ -10162,7 +10170,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Stroke Color Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">132,133</context>
+          <context context-type="linenumber">141,142</context>
         </context-group>
         <target state="needs-translation"> Stroke Color Tool </target>
       </trans-unit>
@@ -10170,7 +10178,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Fill Color Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">141,142</context>
+          <context context-type="linenumber">150,151</context>
         </context-group>
         <target state="needs-translation"> Fill Color Tool </target>
       </trans-unit>
@@ -10178,7 +10186,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Stroke Width Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">149,150</context>
+          <context context-type="linenumber">158,159</context>
         </context-group>
         <target state="needs-translation"> Stroke Width Tool </target>
       </trans-unit>
@@ -10186,7 +10194,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Send Back Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">157,158</context>
+          <context context-type="linenumber">166,167</context>
         </context-group>
         <target state="needs-translation"> Send Back Tool </target>
       </trans-unit>
@@ -10194,7 +10202,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Send Forward Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">165,166</context>
+          <context context-type="linenumber">174,175</context>
         </context-group>
         <target state="needs-translation"> Send Forward Tool </target>
       </trans-unit>
@@ -10202,7 +10210,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Undo Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">174,175</context>
+          <context context-type="linenumber">183,184</context>
         </context-group>
         <target state="needs-translation"> Undo Tool </target>
       </trans-unit>
@@ -10210,7 +10218,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Redo Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">182,183</context>
+          <context context-type="linenumber">191,192</context>
         </context-group>
         <target state="needs-translation"> Redo Tool </target>
       </trans-unit>
@@ -10218,7 +10226,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Delete Tool </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">190,191</context>
+          <context context-type="linenumber">199,200</context>
         </context-group>
         <target state="needs-translation"> Delete Tool </target>
       </trans-unit>
@@ -10226,7 +10234,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Stamps</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">205</context>
         </context-group>
         <target state="needs-translation">Stamps</target>
       </trans-unit>
@@ -10234,7 +10242,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Add Stamp</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">201</context>
+          <context context-type="linenumber">210</context>
         </context-group>
         <target state="needs-translation">Add Stamp</target>
       </trans-unit>
@@ -10242,7 +10250,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>above</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">250</context>
+          <context context-type="linenumber">259</context>
         </context-group>
         <target state="needs-translation">above</target>
       </trans-unit>
@@ -10250,7 +10258,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Save Starter Drawing</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">274</context>
+          <context context-type="linenumber">283</context>
         </context-group>
         <target state="needs-translation">Save Starter Drawing</target>
       </trans-unit>
@@ -10258,7 +10266,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Delete Starter Drawing</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">285</context>
+          <context context-type="linenumber">294</context>
         </context-group>
         <target state="needs-translation">Delete Starter Drawing</target>
       </trans-unit>
@@ -10289,6 +10297,46 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <target state="needs-translation">Are you sure you want to delete this stamp?
 
 <x id="PH" equiv-text="this.authoringComponentContent.stamps.Stamps[index]"/></target>
+      </trans-unit>
+      <trans-unit id="dffaf8f57d090d184cf323d929d4ec1959bf08a0" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>file_download<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Import Classmate Work </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>file_download<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Import Classmate Work </target>
+      </trans-unit>
+      <trans-unit id="d679e94521ab2288e0ab0307c50ac85bea6ca401" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>image<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Upload Background Image </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
+          <context context-type="linenumber">28,30</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>image<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Upload Background Image </target>
+      </trans-unit>
+      <trans-unit id="a4ca5913db14fa4626ca68068d3d925e72f2b35c" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>restore<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Reset </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
+          <context context-type="linenumber">38,40</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>restore<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Reset </target>
+      </trans-unit>
+      <trans-unit id="1183673564143200427" datatype="html">
+        <source>Are you sure you want to clear your drawing?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
+          <context context-type="linenumber">190</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to clear your drawing?</target>
+      </trans-unit>
+      <trans-unit id="7020890278107204483" datatype="html">
+        <source>Do you want to update the connected drawing?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
+          <context context-type="linenumber">274</context>
+        </context-group>
+        <target state="needs-translation">Do you want to update the connected drawing?</target>
       </trans-unit>
       <trans-unit id="1d3911009f4b8bea155d7d4f87812066abaa614b" datatype="html">
         <source>Model File Name</source>
@@ -11134,7 +11182,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">714</context>
+          <context context-type="linenumber">708</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this label?
 
@@ -11192,7 +11240,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>A New Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">461</context>
+          <context context-type="linenumber">455</context>
         </context-group>
         <target state="needs-translation">A New Label</target>
       </trans-unit>
@@ -11200,7 +11248,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset to the initial state?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">836</context>
+          <context context-type="linenumber">814</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset to the initial state?</target>
       </trans-unit>
@@ -11208,7 +11256,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to delete the background image?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">901</context>
+          <context context-type="linenumber">879</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the background image?</target>
       </trans-unit>
