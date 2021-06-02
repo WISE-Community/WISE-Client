@@ -17,16 +17,8 @@
               <div style="display: flex; align-items: center;">
                 <div [innerHTML]="buckets[0].value" class="starter-bucket-label"></div>
                 <div *ngIf="componentContent.canCreateChoices">
-                  <button
-                      mat-button
-                      class="mat-primary mat-raised-button"
-                      (click)="addChoice()"
-                      [disabled]="isDisabled"
-                      matTooltip="Add Choice"
-                      matTooltipPosition="above"
-                      i18n-matTooltip>
-                    <mat-icon>add</mat-icon>
-                  </button>
+                  <add-choice-button [isDiabled]="isDisabled" (onClick)="addChoice()">
+                  </add-choice-button>
                 </div>
               </div>
             </mat-card-title>
@@ -36,39 +28,11 @@
                 [ngStyle]="choiceStyle"
                 [dragula]="dragulaId"
                 [(dragulaModel)]="buckets[0].items">
-              <div class="match-bucket__item"
-                  *ngFor="let item of buckets[0].items">
-                <mat-list-item class="match-bucket__item__contents">
-                  <div class="md-list-item-text">
-                    <div fxLayout="row" fxLayoutAlign="start center">
-                      <span class="match-bucket__item__contents__text" [innerHTML]="item.value">
-                      </span>
-                      <span flex></span>
-                      <button
-                          *ngIf="item.studentCreated"
-                          (click)="deleteChoice(item)"
-                          [disabled]="isDisabled">
-                        <mat-icon>clear</mat-icon>
-                      </button>
-                      <mat-icon>open_with</mat-icon>
-                    </div>
-                    <p class="match-feedback md-body-2"
-                        *ngIf="item.feedback"
-                        [ngClass]="{'success-bg': !hasCorrectAnswer || item.isCorrect, 'info-bg': item.isIncorrectPosition, 'warn-bg': hasCorrectAnswer && !item.isCorrect}">
-                      <mat-icon *ngIf="hasCorrectAnswer && item.isCorrect">
-                        check
-                      </mat-icon>
-                      <mat-icon *ngIf="hasCorrectAnswer && item.isIncorrectPosition">
-                        warning
-                      </mat-icon>
-                      <mat-icon *ngIf="hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition">
-                        clear
-                      </mat-icon>
-                      <span [innerHTML]="item.feedback">
-                      </span>
-                    </p>
-                  </div>
-                </mat-list-item>
+              <div class="match-bucket__item" *ngFor="let item of buckets[0].items">
+                <match-choice-item [item]="item"
+                    [hasCorrectAnswer]="hasCorrectAnswer"
+                    [isDisabled]="isDisabled"
+                    (onDeleteChoice)="deleteChoice(item)"></match-choice-item>
               </div>
             </mat-list>
           </mat-card-content>
@@ -93,39 +57,11 @@
                   ng-style="bucketStyle"
                   [dragula]="dragulaId"
                   [(dragulaModel)]="bucket.items">
-                <div class="match-bucket__item"
-                    *ngFor="let item of bucket.items">
-                  <mat-list-item class="match-bucket__item__contents">
-                    <div class="md-list-item-text">
-                      <div fxLayout="row" fxLayoutAlign="start center">
-                        <span class="match-bucket__item__contents__text" [innerHTML]="item.value">
-                        </span>
-                        <span flex></span>
-                        <button
-                            *ngIf="item.studentCreated"
-                            (click)="deleteChoice(item)"
-                            [disabled]="isDisabled">
-                          <mat-icon>clear</mat-icon>
-                        </button>
-                        <mat-icon>open_with</mat-icon>
-                      </div>
-                      <p class="match-feedback md-body-2"
-                          *ngIf="item.feedback"
-                          [ngClass]="{'success-bg': !hasCorrectAnswer || item.isCorrect, 'info-bg': item.isIncorrectPosition, 'warn-bg': hasCorrectAnswer && !item.isCorrect}">
-                        <mat-icon *ngIf="hasCorrectAnswer && item.isCorrect">
-                          check
-                        </mat-icon>
-                        <mat-icon *ngIf="hasCorrectAnswer && item.isIncorrectPosition">
-                          warning
-                        </mat-icon>
-                        <mat-icon *ngIf="hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition">
-                          clear
-                        </mat-icon>
-                        <span [innerHTML]="item.feedback">
-                        </span>
-                      </p>
-                    </div>
-                  </mat-list-item>
+                <div class="match-bucket__item" *ngFor="let item of bucket.items">
+                  <match-choice-item [item]="item"
+                    [hasCorrectAnswer]="hasCorrectAnswer"
+                    [isDisabled]="isDisabled"
+                    (onDeleteChoice)="deleteChoice(item)"></match-choice-item>
                 </div>
               </mat-list>
             </mat-card-content>
@@ -134,30 +70,11 @@
       </div>
     </div>
   </div>
-  <div>
-    <div *ngIf="componentContent.maxSubmitCount" class="submit-counter-message">
-      <div class="md-caption"
-          *ngIf="hasCorrectAnswer && componentContent.maxSubmitCount != null && componentContent.maxSubmitCount == 1">
-        You have used {{submitCounter}} of {{componentContent.maxSubmitCount}} attempt
-      </div>
-      <div class="md-caption"
-          *ngIf="hasCorrectAnswer && componentContent.maxSubmitCount != null && componentContent.maxSubmitCount > 1">
-        You have used {{submitCounter}} of {{componentContent.maxSubmitCount}} attempts
-      </div>
-    </div>
-    <div *ngIf="hasCorrectAnswer" class="correctness-message">
-      <div *ngIf="isLatestComponentStateSubmit && hasCorrectAnswer && isCorrect"
-          class="correct-text"
-          i18n>
-        Correct
-      </div>
-      <div *ngIf="isLatestComponentStateSubmit && hasCorrectAnswer && !isCorrect"
-          class="incorrect-text"
-          i18n>
-        Incorrect
-      </div>
-    </div>
-  </div>
+  <match-feedback-section [componentContent]="componentContent"
+      [hasCorrectAnswer]="hasCorrectAnswer"
+      [isCorrect]="isCorrect"
+      [isLatestComponentStateSubmit]="isLatestComponentStateSubmit"
+      [submitCounter]="submitCounter"></match-feedback-section>
   <component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
       [isDirty]="isDirty"
       [isDisabled]="isDisabled"

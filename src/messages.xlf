@@ -10149,8 +10149,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-choice-button/add-choice-button.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="aa1d01780e052e3bdf4b75b89f5a805af5b9e100" datatype="html">
@@ -10187,6 +10187,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
           <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/delete-choice-button/delete-choice-button.component.html</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1bc6e061f99432db1b8eec4ff9950d9a1d4db009" datatype="html">
@@ -10284,6 +10288,25 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">213</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="dd47639ddf809c34e020cdf44474dd5513bb9387" datatype="html">
+        <source>Reload Preview</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
+          <context context-type="linenumber">230</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
+          <context context-type="linenumber">233</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
+          <context context-type="linenumber">140</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="2258610804716750608" datatype="html">
         <source>Are you sure you want to delete this choice?</source>
         <context-group purpose="location">
@@ -10335,6 +10358,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">105,106</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
           <context context-type="linenumber">44,45</context>
         </context-group>
@@ -10348,6 +10375,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-grading/match-grading.component.html</context>
           <context context-type="linenumber">110,111</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
+          <context context-type="linenumber">21,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
@@ -10365,18 +10396,18 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6e533bbdba0c2fed11b7c240f7b2a17bd2aafcca" datatype="html">
-        <source> Correct </source>
+      <trans-unit id="7d6852cb38f878d14551036525634a38a7b53bb4" datatype="html">
+        <source> You have used <x id="INTERPOLATION" equiv-text="{{submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.html</context>
-          <context context-type="linenumber">152,153</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
+          <context context-type="linenumber">4,6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3e5d8e662ba46eac85413a7ffbe0bca1760cbeff" datatype="html">
-        <source> Incorrect </source>
+      <trans-unit id="07e0aefeeaceb6763739ab26b5374ba92bda02d2" datatype="html">
+        <source> You have used <x id="INTERPOLATION" equiv-text="{{submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempts </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.html</context>
-          <context context-type="linenumber">157,158</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
+          <context context-type="linenumber">8,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5222638645205059452" datatype="html">
@@ -10455,17 +10486,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
           <context context-type="linenumber">90</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="dd47639ddf809c34e020cdf44474dd5513bb9387" datatype="html">
-        <source>Reload Preview</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">137</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="93ef924fce15086a2b9c5ccde9972618b1caea4d" datatype="html">

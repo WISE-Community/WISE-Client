@@ -24,22 +24,30 @@ import { LabelStudent } from '../assets/wise5/components/label/label-student/lab
 import { ComponentHeader } from '../assets/wise5/directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { DrawStudent } from '../assets/wise5/components/draw/draw-student/draw-student.component';
+import { AddChoiceButton } from '../assets/wise5/components/match/match-student/add-choice-button/add-choice-button.component';
 import { AddToNotebookButton } from '../assets/wise5/directives/add-to-notebook-button/add-to-notebook-button.component';
+import { DeleteChoiceButton } from '../assets/wise5/components/match/match-student/delete-choice-button/delete-choice-button.component';
 import { MatchStudent } from '../assets/wise5/components/match/match-student/match-student.component';
+import { MatchChoiceItem } from '../assets/wise5/components/match/match-student/match-choice-item/match-choice-item.component';
+import { MatchFeedbackSection } from '../assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component';
 import { DragulaModule } from 'ng2-dragula';
 import { AddMatchChoiceDialog } from '../assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog';
 
 @NgModule({
   declarations: [
+    AddChoiceButton,
     AddMatchChoiceDialog,
     AddToNotebookButton,
     AudioOscillatorStudent,
     ComponentAnnotationsComponent,
     ComponentHeader,
     ComponentSaveSubmitButtons,
+    DeleteChoiceButton,
     DrawStudent,
     HtmlStudent,
     LabelStudent,
+    MatchChoiceItem,
+    MatchFeedbackSection,
     MatchStudent,
     MultipleChoiceStudent,
     OutsideUrlStudent,

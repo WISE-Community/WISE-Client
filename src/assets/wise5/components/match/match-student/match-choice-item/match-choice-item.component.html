@@ -1,0 +1,22 @@
+<mat-list-item class="match-bucket__item__contents">
+  <div class="md-list-item-text">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <span class="match-bucket__item__contents__text" [innerHTML]="item.value"></span>
+      <span flex></span>
+      <delete-choice-button *ngIf="item.studentCreated"
+          [disabled]="isDisabled"
+          (onClick)="onDeleteChoice.next()"></delete-choice-button>
+      <mat-icon>open_with</mat-icon>
+    </div>
+    <p class="match-feedback md-body-2"
+        *ngIf="item.feedback"
+        [ngClass]="{'success-bg': !hasCorrectAnswer || item.isCorrect, 'info-bg': item.isIncorrectPosition, 'warn-bg': hasCorrectAnswer && !item.isCorrect}">
+      <mat-icon *ngIf="hasCorrectAnswer && item.isCorrect">check</mat-icon>
+      <mat-icon *ngIf="hasCorrectAnswer && item.isIncorrectPosition">warning</mat-icon>
+      <mat-icon *ngIf="hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition">
+        clear
+      </mat-icon>
+      <span [innerHTML]="item.feedback"></span>
+    </p>
+  </div>
+</mat-list-item>
