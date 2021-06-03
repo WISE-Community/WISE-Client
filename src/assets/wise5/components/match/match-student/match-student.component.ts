@@ -392,7 +392,8 @@ export class MatchStudent extends ComponentStudent {
     this.setNumChoiceColumns();
     this.setChoiceStyle();
     this.setBucketStyle();
-    this.sourceBucket = this.createSourceBucket(Array.from(this.choices));
+    this.sourceBucket = this.createSourceBucket();
+    this.sourceBucket.items = this.sourceBucket.items.concat(this.choices);
     this.buckets.push(this.sourceBucket);
     for (const bucket of this.componentContent.buckets) {
       bucket.items = [];
@@ -400,12 +401,12 @@ export class MatchStudent extends ComponentStudent {
     }
   }
 
-  createSourceBucket(items: any[]): any {
+  createSourceBucket(): any {
     return {
       id: this.sourceBucketId,
       value: this.getSourceBucketLabel(),
       type: 'bucket',
-      items: items
+      items: []
     };
   }
 
