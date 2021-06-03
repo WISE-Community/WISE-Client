@@ -72,6 +72,7 @@ import { ClassResponse } from '../assets/wise5/components/discussion/class-respo
 import { ComponentService } from '../assets/wise5/components/componentService';
 import { WiseLinkService } from './services/wiseLinkService';
 import { DataExportService } from '../assets/wise5/services/dataExportService';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -168,6 +169,7 @@ export class EmptyComponent {}
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatChipsModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,

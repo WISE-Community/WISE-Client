@@ -409,7 +409,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1bf58cf720f3aa0e4a6f06d2a84183b552f3f3c6" datatype="html">
@@ -5406,7 +5406,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
@@ -7859,74 +7859,134 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6ec524cee9256203d695515fc53479d009f126f1" datatype="html">
-        <source>Choose Step Icon and Color</source>
+      <trans-unit id="62e1beba9923edcf84ff44961835d1c0679b6593" datatype="html">
+        <source>Choose an Icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="061b4b16122614945f20af650849260f463132d1" datatype="html">
-        <source>Preview:</source>
+      <trans-unit id="058b73757ea9dc14dee9cb48d52bf312fbb8ab15" datatype="html">
+        <source>Selected icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="48b9684fc84090b0eb459068d9672a0d5d7e227d" datatype="html">
-        <source>Icons:</source>
+      <trans-unit id="a6e387339a2abd61abf2b56ad6cfd20ddd021d63" datatype="html">
+        <source>Icon:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="9775465eefe058a382ec98f56c4db0164d375241" datatype="html">
-        <source>Colors:</source>
+      <trans-unit id="f1993aed50b7b852dbfdf30251700358629cdfba" datatype="html">
+        <source>Select an icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="aed55ccd4631018b562a2e1557e5eaa74403f348" datatype="html">
-        <source>KI Icons:</source>
+      <trans-unit id="a9a04bdddc742bd46da1688298bed9eb88150ecc" datatype="html">
+        <source>Color:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bbd4bc95804c43a418dd9000b245630328f1a6ba" datatype="html">
+        <source>Select a color</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e1a39ccab5eb7939e4d5f1dd1e4b605459067649" datatype="html">
+        <source>Or use a Knowledge Integration (KI) icon:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="037789bb1dae9f2a1b3d8c9c318172a030258d22" datatype="html">
+        <source>Select a KI icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5760105370370371133" datatype="html">
         <source>Knowledge Integration elicit ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9027810240090135692" datatype="html">
+        <source>Elicit Ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5060022891098618470" datatype="html">
         <source>Knowledge Integration discover ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6987978600862806678" datatype="html">
+        <source>Discover Ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6027324852341840147" datatype="html">
         <source>Knowledge Integration distinguish ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7803830506994696188" datatype="html">
-        <source>Knowledge Integration connect ideas</source>
+      <trans-unit id="5003353968126431012" datatype="html">
+        <source>Distinguish Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5284841868972566661" datatype="html">
+        <source>Knowledge Integration connect ideas and reflect</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1055307563609433839" datatype="html">
+        <source>Connect Ideas &amp; Reflect</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1395167530251175410" datatype="html">
         <source>Knowledge Integration cycle</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4840904011085648831" datatype="html">
+        <source>KI Cycle</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9ba24bf3c65fed6e59c2d2264be8d104f370a69c" datatype="html">
@@ -7944,29 +8004,29 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Select a Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="336bb34dbee61b667deb8c5d2f94d7b7451e3eb8" datatype="html">
         <source> Select a Step </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">29,30</context>
+          <context context-type="linenumber">28,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8b28432b6c78dfa3fb0a921ff13c63faa06457fe" datatype="html">
         <source>Next Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6bc7f2c14cb3141e690735b278591defe07c68fb" datatype="html">
