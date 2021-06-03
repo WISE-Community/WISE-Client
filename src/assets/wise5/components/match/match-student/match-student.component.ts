@@ -359,10 +359,6 @@ export class MatchStudent extends ComponentStudent {
     return currentChoiceIndex != previousBucketChoiceIds.indexOf(currentChoiceId);
   }
 
-  getChoices(): any[] {
-    return this.choices;
-  }
-
   initializeChoices(): void {
     this.choices = this.componentContent.choices;
     if (this.shouldImportPrivateNotes()) {
@@ -396,10 +392,7 @@ export class MatchStudent extends ComponentStudent {
     this.setNumChoiceColumns();
     this.setChoiceStyle();
     this.setBucketStyle();
-    this.sourceBucket = this.createSourceBucket();
-    for (const choice of this.getChoices()) {
-      this.sourceBucket.items.push(choice);
-    }
+    this.sourceBucket = this.createSourceBucket(Array.from(this.choices));
     this.buckets.push(this.sourceBucket);
     for (const bucket of this.componentContent.buckets) {
       bucket.items = [];
@@ -407,12 +400,12 @@ export class MatchStudent extends ComponentStudent {
     }
   }
 
-  createSourceBucket(): any {
+  createSourceBucket(items: any[]): any {
     return {
       id: this.sourceBucketId,
       value: this.getSourceBucketLabel(),
       type: 'bucket',
-      items: []
+      items: items
     };
   }
 
@@ -473,15 +466,8 @@ export class MatchStudent extends ComponentStudent {
     }
   }
 
-  getBuckets(): any[] {
-    return this.buckets;
-  }
-
-  /**
-   * Create a deep copy of the array of buckets.
-   */
-  getCopyOfBuckets(): any[] {
-    return JSON.parse(JSON.stringify(this.getBuckets()));
+  getDeepCopyOfBuckets(): any[] {
+    return JSON.parse(JSON.stringify(this.buckets));
   }
 
   /**
@@ -495,7 +481,7 @@ export class MatchStudent extends ComponentStudent {
    */
   checkAnswer(choiceIdsExcludedFromFeedback = []): void {
     let isCorrect = true;
-    for (const bucket of this.getBuckets()) {
+    for (const bucket of this.buckets) {
       const bucketId = bucket.id;
       const items = bucket.items;
       for (let i = 0; i < items.length; i++) {
@@ -655,7 +641,7 @@ export class MatchStudent extends ComponentStudent {
     componentState.componentId = this.componentId;
     componentState.isSubmit = this.isSubmit;
     const studentData: any = {
-      buckets: this.getCopyOfBuckets(),
+      buckets: this.getDeepCopyOfBuckets(),
       submitCounter: this.submitCounter
     };
     if (action === 'submit' && this.hasCorrectAnswer) {
@@ -677,7 +663,7 @@ export class MatchStudent extends ComponentStudent {
   }
 
   clearFeedback(): void {
-    for (const choice of this.getChoices()) {
+    for (const choice of this.choices) {
       choice.isCorrect = null;
       choice.isIncorrectPosition = null;
       choice.feedback = null;
