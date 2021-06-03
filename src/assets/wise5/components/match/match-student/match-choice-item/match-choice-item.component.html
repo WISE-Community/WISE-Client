@@ -4,8 +4,10 @@
       <span class="match-bucket__item__contents__text" [innerHTML]="item.value"></span>
       <span flex></span>
       <delete-choice-button *ngIf="item.studentCreated"
+          [buckets]="buckets"
           [disabled]="isDisabled"
-          (onClick)="onDeleteChoice.next()"></delete-choice-button>
+          [item]="item"
+          (onItemDeleted)="onStudentDataChanged.next()"></delete-choice-button>
       <mat-icon>open_with</mat-icon>
     </div>
     <p class="match-feedback md-body-2"

@@ -6,11 +6,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class MatchChoiceItem {
   @Input()
+  buckets: any;
+
+  @Input()
   isDisabled: boolean;
 
   @Input()
   item: any;
 
   @Output()
-  onDeleteChoice = new EventEmitter();
+  onStudentDataChanged = new EventEmitter();
 }

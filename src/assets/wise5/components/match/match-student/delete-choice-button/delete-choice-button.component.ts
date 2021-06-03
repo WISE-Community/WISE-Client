@@ -6,8 +6,28 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class DeleteChoiceButton {
   @Input()
+  buckets: any;
+
+  @Input()
   isDisabled: boolean;
 
+  @Input()
+  item: any;
+
   @Output()
-  onClick = new EventEmitter();
+  onItemDeleted = new EventEmitter();
+
+  deleteChoice(): void {
+    if (confirm($localize`Are you sure you want to delete this choice?`)) {
+      for (const bucket of this.buckets) {
+        const items = bucket.items;
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].id === this.item.id) {
+            items.splice(i, 1);
+          }
+        }
+      }
+      this.onItemDeleted.next();
+    }
+  }
 }

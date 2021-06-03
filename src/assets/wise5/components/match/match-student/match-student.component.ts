@@ -785,19 +785,4 @@ export class MatchStudent extends ComponentStudent {
         this.studentDataChanged();
       });
   }
-
-  deleteChoice(choice: any): void {
-    if (confirm($localize`Are you sure you want to delete this choice?`)) {
-      for (const bucket of this.getBuckets()) {
-        const items = bucket.items;
-        for (let i = 0; i < items.length; i++) {
-          const item = items[i];
-          if (item.id == choice.id) {
-            items.splice(i, 1);
-          }
-        }
-      }
-      this.studentDataChanged();
-    }
-  }
 }

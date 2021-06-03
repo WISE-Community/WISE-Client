@@ -179,7 +179,6 @@ describe('MatchStudent', () => {
   getFeedbackObject();
   mergeBucket();
   mergeChoices();
-  deleteChoice();
 });
 
 function createBucket(id: string, value: string, choices: any[]): any {
@@ -680,17 +679,6 @@ function mergeChoices() {
       expect(mergedChoices[0].id).toEqual(choiceId1);
       expect(mergedChoices[1].id).toEqual(choiceId2);
       expect(mergedChoices[2].id).toEqual(choiceId3);
-    });
-  });
-}
-
-function deleteChoice() {
-  describe('deleteChoice', () => {
-    it('should delete a choice', () => {
-      spyOn(window, 'confirm').and.returnValue(true);
-      expect(component.sourceBucket.items.length).toEqual(3);
-      component.deleteChoice(choice1);
-      expect(component.sourceBucket.items.length).toEqual(2);
     });
   });
 }
