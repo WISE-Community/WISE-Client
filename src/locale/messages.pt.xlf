@@ -122,11 +122,11 @@
         <source>Elicit Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">91</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
@@ -134,27 +134,23 @@
         </context-group>
         <target state="needs-translation">Elicit Ideas</target>
       </trans-unit>
-      <trans-unit id="cba3bcc252b9f7b980c934ce394a1345eebfd970" datatype="html">
-        <source>Add Ideas</source>
+      <trans-unit id="fe0d0081b4a9791d74f26b46fc8345ad8a3c78de" datatype="html">
+        <source>Discover Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">96</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-        <target state="translated">Acrescente Ideias</target>
+        <target state="needs-translation">Discover Ideas</target>
       </trans-unit>
       <trans-unit id="6f2168a4a47a1e6fa5d58a4334c7b67805dd3fe0" datatype="html">
         <source>Distinguish Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">103</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">105</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
@@ -162,27 +158,23 @@
         </context-group>
         <target state="translated">Faça a Distinção entre Ideias</target>
       </trans-unit>
-      <trans-unit id="b85ab229e72d6560e6193e30a362083ce7e12da6" datatype="html">
-        <source>Connect Ideas</source>
+      <trans-unit id="cd755b466131777a8842f833087a9aa103d26e89" datatype="html">
+        <source>Connect Ideas and Reflect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">110</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">112</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <target state="translated">Relacione Ideias</target>
+        <target state="needs-translation">Connect Ideas and Reflect</target>
       </trans-unit>
       <trans-unit id="e85808e27272fa3c1d2dfaf998ce12ca205e5fbd" datatype="html">
         <source>~ WISE Goals ~</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <target state="needs-translation">~ WISE Goals ~</target>
       </trans-unit>
@@ -190,7 +182,7 @@
         <source>Make Science Meaningful</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <target state="needs-translation">Make Science Meaningful</target>
       </trans-unit>
@@ -198,7 +190,7 @@
         <source>WISE units introduce students to complex science concepts through personally and socially relevant topics. Each unit uses a classroom-tested pattern of instruction that values the ideas students bring with them, helps them connect new information to their personal experiences, and integrates their ideas into a coherent understanding of science.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <target state="needs-translation">WISE units introduce students to complex science concepts through personally and socially relevant topics. Each unit uses a classroom-tested pattern of instruction that values the ideas students bring with them, helps them connect new information to their personal experiences, and integrates their ideas into a coherent understanding of science.</target>
       </trans-unit>
@@ -206,7 +198,7 @@
         <source>Support Diverse Learners</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <target state="needs-translation">Support Diverse Learners</target>
       </trans-unit>
@@ -214,7 +206,7 @@
         <source>Individual students differ in their experiences, interests, and abilities. WISE provides a variety of tools, activity patterns, and instructional scaffolds that afford multiple ways for expressing and assessing understanding. That way, no students&apos; abilities go unrecognized, and all have the chance to succeed.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <target state="needs-translation">Individual students differ in their experiences, interests, and abilities. WISE provides a variety of tools, activity patterns, and instructional scaffolds that afford multiple ways for expressing and assessing understanding. That way, no students' abilities go unrecognized, and all have the chance to succeed.</target>
       </trans-unit>
@@ -222,7 +214,7 @@
         <source>Increase Participation in Science</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">155</context>
         </context-group>
         <target state="needs-translation">Increase Participation in Science</target>
       </trans-unit>
@@ -230,7 +222,7 @@
         <source>WISE gives more teachers and students the opportunity to do inquiry-based science. Our units make difficult concepts accessible both for teachers to teach and students to learn. WISE curricula help students see themselves as capable of doing science and realize that, no matter their backgrounds, science can be a potential career.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">156</context>
         </context-group>
         <target state="needs-translation">WISE gives more teachers and students the opportunity to do inquiry-based science. Our units make difficult concepts accessible both for teachers to teach and students to learn. WISE curricula help students see themselves as capable of doing science and realize that, no matter their backgrounds, science can be a potential career.</target>
       </trans-unit>
@@ -238,7 +230,7 @@
         <source>Accessible to All</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">162</context>
         </context-group>
         <target state="needs-translation">Accessible to All</target>
       </trans-unit>
@@ -246,7 +238,7 @@
         <source>WISE is <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>free<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>open source<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsists on generous support from the National Science Foundation, which means it&apos;s available to anyone with an internet connection. Driven by an active community of developers, WISE is continually being expanded and improved. Bring science inquiry into the classroom, the museum, the after-school, or the home-school environment!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">163</context>
         </context-group>
         <target state="needs-translation">WISE is <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>free<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>open source<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsists on generous support from the National Science Foundation, which means it's available to anyone with an internet connection. Driven by an active community of developers, WISE is continually being expanded and improved. Bring science inquiry into the classroom, the museum, the after-school, or the home-school environment!</target>
       </trans-unit>
@@ -254,7 +246,7 @@
         <source>WISE on student computer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">172</context>
         </context-group>
         <target state="needs-translation">WISE on student computer</target>
       </trans-unit>
@@ -262,7 +254,7 @@
         <source>WISE researcher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">177</context>
         </context-group>
         <target state="needs-translation">WISE researcher</target>
       </trans-unit>
@@ -270,7 +262,7 @@
         <source>WISE teachers and researcher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">182</context>
         </context-group>
         <target state="needs-translation">WISE teachers and researcher</target>
       </trans-unit>
@@ -278,7 +270,7 @@
         <source>WISE developers and teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">187</context>
         </context-group>
         <target state="needs-translation">WISE developers and teacher</target>
       </trans-unit>
@@ -443,6 +435,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.html</context>
           <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <target state="needs-translation">Cancel</target>
       </trans-unit>
@@ -4230,6 +4226,22 @@
         </context-group>
         <target state="needs-translation">We strongly recommend one computer for every two students. Research shows that students benefit from working together as a team of two.</target>
       </trans-unit>
+      <trans-unit id="cba3bcc252b9f7b980c934ce394a1345eebfd970" datatype="html">
+        <source>Add Ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <target state="translated">Acrescente Ideias</target>
+      </trans-unit>
+      <trans-unit id="b85ab229e72d6560e6193e30a362083ce7e12da6" datatype="html">
+        <source>Connect Ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <target state="translated">Relacione Ideias</target>
+      </trans-unit>
       <trans-unit id="6ce56d323684d1af10f44ca44809177cef1412eb" datatype="html">
         <source>Integrated science learning and teaching with technology</source>
         <context-group purpose="location">
@@ -5961,6 +5973,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
           <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">84</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
@@ -8715,6 +8731,162 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">4</context>
         </context-group>
         <target state="needs-translation">(Team <x id="INTERPOLATION" equiv-text="{{workgroupId}}"/>)</target>
+      </trans-unit>
+      <trans-unit id="058b73757ea9dc14dee9cb48d52bf312fbb8ab15" datatype="html">
+        <source>Selected icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <target state="needs-translation">Selected icon</target>
+      </trans-unit>
+      <trans-unit id="62e1beba9923edcf84ff44961835d1c0679b6593" datatype="html">
+        <source>Choose an Icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <target state="needs-translation">Choose an Icon</target>
+      </trans-unit>
+      <trans-unit id="a6e387339a2abd61abf2b56ad6cfd20ddd021d63" datatype="html">
+        <source>Icon:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <target state="needs-translation">Icon:</target>
+      </trans-unit>
+      <trans-unit id="f1993aed50b7b852dbfdf30251700358629cdfba" datatype="html">
+        <source>Select an icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation">Select an icon</target>
+      </trans-unit>
+      <trans-unit id="a9a04bdddc742bd46da1688298bed9eb88150ecc" datatype="html">
+        <source>Color:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <target state="needs-translation">Color:</target>
+      </trans-unit>
+      <trans-unit id="bbd4bc95804c43a418dd9000b245630328f1a6ba" datatype="html">
+        <source>Select a color</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <target state="needs-translation">Select a color</target>
+      </trans-unit>
+      <trans-unit id="e1a39ccab5eb7939e4d5f1dd1e4b605459067649" datatype="html">
+        <source>Or use a Knowledge Integration (KI) icon:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <target state="needs-translation">Or use a Knowledge Integration (KI) icon:</target>
+      </trans-unit>
+      <trans-unit id="c80f9758aa49779d616f8d163a2ac735e8bb0485" datatype="html">
+        <source>More about WISE and Knowledge Integration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <target state="needs-translation">More about WISE and Knowledge Integration</target>
+      </trans-unit>
+      <trans-unit id="037789bb1dae9f2a1b3d8c9c318172a030258d22" datatype="html">
+        <source>Select a KI icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+        <target state="needs-translation">Select a KI icon</target>
+      </trans-unit>
+      <trans-unit id="5760105370370371133" datatype="html">
+        <source>Knowledge Integration elicit ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+        <target state="needs-translation">Knowledge Integration elicit ideas</target>
+      </trans-unit>
+      <trans-unit id="9027810240090135692" datatype="html">
+        <source>Elicit Ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <target state="needs-translation">Elicit Ideas</target>
+      </trans-unit>
+      <trans-unit id="5060022891098618470" datatype="html">
+        <source>Knowledge Integration discover ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+        <target state="needs-translation">Knowledge Integration discover ideas</target>
+      </trans-unit>
+      <trans-unit id="6987978600862806678" datatype="html">
+        <source>Discover Ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+        <target state="needs-translation">Discover Ideas</target>
+      </trans-unit>
+      <trans-unit id="6027324852341840147" datatype="html">
+        <source>Knowledge Integration distinguish ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+        <target state="needs-translation">Knowledge Integration distinguish ideas</target>
+      </trans-unit>
+      <trans-unit id="5003353968126431012" datatype="html">
+        <source>Distinguish Ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+        <target state="translated">Faça a Distinção entre Ideias</target>
+      </trans-unit>
+      <trans-unit id="5284841868972566661" datatype="html">
+        <source>Knowledge Integration connect ideas and reflect</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <target state="needs-translation">Knowledge Integration connect ideas and reflect</target>
+      </trans-unit>
+      <trans-unit id="1055307563609433839" datatype="html">
+        <source>Connect Ideas &amp; Reflect</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+        <target state="needs-translation">Connect Ideas &amp; Reflect</target>
+      </trans-unit>
+      <trans-unit id="1395167530251175410" datatype="html">
+        <source>Knowledge Integration cycle</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+        <target state="needs-translation">Knowledge Integration cycle</target>
+      </trans-unit>
+      <trans-unit id="4840904011085648831" datatype="html">
+        <source>KI Cycle</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+        <target state="needs-translation">KI Cycle</target>
       </trans-unit>
       <trans-unit id="9ba24bf3c65fed6e59c2d2264be8d104f370a69c" datatype="html">
         <source>Previous Step</source>
