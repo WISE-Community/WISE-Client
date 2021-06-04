@@ -111,9 +111,20 @@
     </div>
   </div>
 </div>
-<div ng-if='$ctrl.showComponents && !$ctrl.insertComponentMode' layout="row">
+<div ng-if='$ctrl.showComponents && !$ctrl.insertComponentMode' layout="row" layout-margin>
   <node-icon node-id="{{$ctrl.nodeId}}" can-edit="{{true}}" size="18"></node-icon>
-  <div layout='row' style='margin-left: 10px; max-height: 60px;'>
+  <div>
+    <md-input-container style="margin-bottom: 0;">
+      <label ng-if="!$ctrl.isGroupNode">{{ ::'stepTitle' | translate }} {{ $ctrl.nodePosition }}:</label>
+      <label ng-if="$ctrl.isGroupNode">{{ ::'activityTitle' | translate }} {{ $ctrl.nodePosition }}:</label>
+      <input ng-model='$ctrl.nodeJson.title'
+          ng-change='$ctrl.authoringViewNodeChanged()'
+          ng-model-options='{ debounce: 500 }'
+          aria-label='{{ ::"title" | translate }}'
+          size='60' />
+    </md-input-container>
+  </div>
+  <!-- <div layout='row' style='margin-left: 10px; max-height: 60px;'>
     <div layout='row' style='margin-top: 18px; margin-right: 10px;'>
       <h6 ng-if="!$ctrl.isGroupNode">{{ ::'stepTitle' | translate }} {{ $ctrl.nodePosition }}:</h6>
       <h6 ng-if="$ctrl.isGroupNode">{{ ::'activityTitle' | translate }} {{ $ctrl.nodePosition }}:</h6>
@@ -127,7 +138,7 @@
             size='60'/>
       </md-input-container>
     </div>
-  </div>
+  </div> -->
 </div>
 <div style='margin-left: 45px;' ng-if='$ctrl.insertComponentMode'>
   <md-button class='moveComponentButton md-raised md-primary'

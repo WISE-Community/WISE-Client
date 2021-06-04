@@ -57,7 +57,7 @@ export class NodeIconComponent {
   openNodeIconChooserDialog() {
     this.dialog.open(NodeIconChooserDialog, {
       data: { node: this.node },
-      panelClass: 'mat-dialog--lg'
+      panelClass: 'mat-dialog--md'
     });
   }
 }

@@ -1,4 +1,4 @@
-<span class="{{ canEdit ? 'editable' : '' }}" (click)="canEdit && openNodeIconChooserDialog()">
+<ng-template #iconContent>
   <img *ngIf="isImage()"
       class="{{ isGroup ? 'avatar--square ' : '' }}{{ customClass }} {{ sizeClass }} avatar"
       [src]="icon.imgSrc"
@@ -8,4 +8,21 @@
       class="{{ isGroup ? 'avatar--square ' : '' }}{{ customClass }} avatar">
     <mat-icon class="{{ sizeClass }} {{ icon.fontSet }}">{{ icon.fontName }}</mat-icon>
   </div>
-</span>
+</ng-template>
+
+<button *ngIf="canEdit"
+    mat-button
+    matTooltip="Choose an Icon"
+    matTooltipPosition="above"
+    class="mat-form-field-appearance-fill"
+    (click)="openNodeIconChooserDialog()">
+  <div class="mat-form-field-flex"
+      fxLayout="row"
+      fxLayoutAlign="center"
+      fxLayoutGap="4px">
+    <ng-container *ngTemplateOutlet="iconContent"></ng-container>
+  </div>
+</button>
+<ng-container *ngIf="!canEdit">
+  <ng-container *ngTemplateOutlet="iconContent"></ng-container>
+</ng-container>
