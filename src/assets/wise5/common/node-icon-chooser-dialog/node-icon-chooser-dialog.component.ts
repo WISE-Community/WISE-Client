@@ -26,7 +26,9 @@ export class NodeIconChooserDialog {
     '#E91E63',
     '#D50000',
     '#F57C00',
-    '#FBC02D'
+    '#FBC02D',
+    '#795548',
+    '#757575'
   ];
 
   fontNames = [

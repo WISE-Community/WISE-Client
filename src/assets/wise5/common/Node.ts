@@ -18,12 +18,11 @@ export class Node {
 
   setIcon(): void {
     const defaultIcon = {
-      color: 'rgba(0,0,0,0.54)',
+      color: '#757575',
       type: 'font',
       fontSet: 'material-icons',
       fontName: this.type === 'group' ? 'explore' : 'school',
-      imgSrc: '',
-      imgAlt: 'node icon'
+      imgSrc: ''
     };
     let icon;
     if (this.icons != null && this.icons.default != null) {

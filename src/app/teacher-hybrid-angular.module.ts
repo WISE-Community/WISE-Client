@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import '../assets/wise5/teacher/teacher-angular-js-module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -147,7 +148,7 @@ import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-
     WiseAuthoringTinymceEditorComponent,
     WorkgroupNodeStatusComponent
   ],
-  imports: [AngularJSModule, HighchartsChartModule, DragDropModule],
+  imports: [AngularJSModule, HighchartsChartModule, DragDropModule, RouterModule],
   providers: [
     { provide: DataService, useExisting: TeacherDataService },
     MilestoneService,

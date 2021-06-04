@@ -11,13 +11,25 @@ const node1 = {
   icon: {
     type: 'img',
     imgAlt: 'KI connect ideas',
-    imgSrc: 'wise5/themes/default/nodeIcons/ki-color-connect.svg'
+    imgSrc: 'assets/img/icons/ki-color-connect.svg'
   }
 };
 
 const elicitKIIcon = {
-  imgAlt: 'KI elicit ideas',
-  imgSrc: 'wise5/themes/default/nodeIcons/ki-color-elicit.svg'
+  selected: true,
+  source: {
+    value: {
+      imgAlt: 'KI elicit ideas',
+      imgSrc: 'assets/img/icons/ki-color-elicit.svg'
+    }
+  }
+};
+
+const schoolIcon = {
+  selected: true,
+  source: {
+    value: 'school'
+  }
 };
 
 class MockProjectService {
@@ -55,7 +67,7 @@ describe('NodeIconChooserDialog', () => {
 function chooseFontName() {
   describe('chooseFontName()', () => {
     it('should set type to font and set fontname', () => {
-      component.chooseFontName('school');
+      component.chooseFontName(schoolIcon);
       expect(component.newNodeIcon.type).toEqual('font');
       expect(component.newNodeIcon.fontName).toEqual('school');
     });
@@ -68,9 +80,7 @@ function chooseKIIcon() {
       component.chooseKIIcon(elicitKIIcon);
       expect(component.newNodeIcon.type).toEqual('img');
       expect(component.newNodeIcon.imgAlt).toEqual('KI elicit ideas');
-      expect(component.newNodeIcon.imgSrc).toEqual(
-        'wise5/themes/default/nodeIcons/ki-color-elicit.svg'
-      );
+      expect(component.newNodeIcon.imgSrc).toEqual('assets/img/icons/ki-color-elicit.svg');
     });
   });
 }
