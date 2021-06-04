@@ -15,7 +15,7 @@ function getNodeIcon() {
 function getNodeIcon_noIconSpecified_returnDefaultIcon() {
   it('should return default icon if icon is not set', () => {
     const icon = new Node().getIcon();
-    expect(icon.color).toEqual('rgba(0,0,0,0.54)');
+    expect(icon.color).toEqual('#757575');
     expect(icon.type).toEqual('font');
   });
 }

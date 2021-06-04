@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import '../assets/wise5/teacher/teacher-angular-js-module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -78,6 +79,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { AnimationGrading } from '../assets/wise5/components/animation/animation-grading/animation-grading.component';
 import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
 import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
+import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 
 @NgModule({
   declarations: [
@@ -127,6 +129,7 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
     NavItemProgressComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
+    NodeIconChooserDialog,
     OpenResponseGrading,
     OpenResponseAuthoring,
     OutsideUrlAuthoring,
@@ -145,7 +148,7 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
     WiseAuthoringTinymceEditorComponent,
     WorkgroupNodeStatusComponent
   ],
-  imports: [AngularJSModule, HighchartsChartModule, DragDropModule],
+  imports: [AngularJSModule, HighchartsChartModule, DragDropModule, RouterModule],
   providers: [
     { provide: DataService, useExisting: TeacherDataService },
     MilestoneService,
