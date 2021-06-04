@@ -3,7 +3,6 @@ import { AngularJSModule } from '../../../../../app/common-hybrid-angular.module
 import { AddChoiceButton } from './add-choice-button/add-choice-button.component';
 import { AddMatchChoiceDialog } from './add-match-choice-dialog/add-match-choice-dialog';
 import { DeleteChoiceButton } from './delete-choice-button/delete-choice-button.component';
-import { DragulaModule } from 'ng2-dragula';
 import { MatchChoiceItem } from './match-choice-item/match-choice-item.component';
 import { MatchFeedbackSection } from './match-feedback-section/match-feedback-section.component';
 import { MatchStudent } from './match-student.component';
@@ -18,6 +17,6 @@ import { StudentComponentModule } from '../../../../../app/student/student.compo
     MatchFeedbackSection,
     MatchStudent
   ],
-  imports: [AngularJSModule, DragulaModule, StudentComponentModule]
+  imports: [AngularJSModule, StudentComponentModule]
 })
 export class MatchStudentModule {}

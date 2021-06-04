@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import '../assets/wise5/teacher/teacher-angular-js-module';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AlertStatusCornerComponent } from './classroom-monitor/alert-status-corner/alert-status-corner.component';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { setUpLocationSync } from '@angular/router/upgrade';
@@ -145,7 +144,7 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
     WiseAuthoringTinymceEditorComponent,
     WorkgroupNodeStatusComponent
   ],
-  imports: [AngularJSModule, HighchartsChartModule, DragDropModule],
+  imports: [AngularJSModule, HighchartsChartModule],
   providers: [
     { provide: DataService, useExisting: TeacherDataService },
     MilestoneService,
