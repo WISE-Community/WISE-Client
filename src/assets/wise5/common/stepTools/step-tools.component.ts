@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { NodeService } from '../../services/nodeService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { Node } from '../Node';
 
 @Component({
   styleUrls: ['step-tools.component.scss'],
@@ -13,6 +14,7 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 export class StepToolsComponent {
   icons: any;
   nextId: any;
+  node: Node;
   nodeIds: string[];
   nodeId: string;
   prevId: any;
@@ -26,7 +28,6 @@ export class StepToolsComponent {
   ) {}
 
   ngOnInit() {
-    this.nodeId = this.TeacherDataService.getCurrentNodeId();
     this.calculateNodeIds();
     this.updateModel();
     if (this.dir.value === 'rtl') {
@@ -56,6 +57,7 @@ export class StepToolsComponent {
 
   updateModel() {
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
+    this.node = this.ProjectService.getNode(this.nodeId);
     if (this.nodeId == null) {
       this.prevId = null;
       this.nextId = null;

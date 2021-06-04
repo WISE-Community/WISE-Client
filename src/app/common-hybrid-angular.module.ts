@@ -73,6 +73,7 @@ import { ComponentService } from '../assets/wise5/components/componentService';
 import { WiseLinkService } from './services/wiseLinkService';
 import { DataExportService } from '../assets/wise5/services/dataExportService';
 import { DragulaService } from 'ng2-dragula';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -170,6 +171,7 @@ export class EmptyComponent {}
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatChipsModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,

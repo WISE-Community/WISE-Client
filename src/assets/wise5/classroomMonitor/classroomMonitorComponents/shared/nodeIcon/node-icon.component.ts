@@ -2,6 +2,9 @@
 
 import { ProjectService } from '../../../../services/projectService';
 import { Component, Input, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NodeIconChooserDialog } from '../../../../common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
+import { Node } from '../../../../common/Node';
 
 @Component({
   selector: 'node-icon',
@@ -9,6 +12,9 @@ import { Component, Input, SimpleChanges } from '@angular/core';
   styleUrls: ['node-icon.component.scss']
 })
 export class NodeIconComponent {
+  @Input()
+  canEdit: boolean = false;
+
   @Input()
   customClass: string;
 
@@ -20,15 +26,18 @@ export class NodeIconComponent {
   @Input()
   nodeId: string;
 
+  node: Node;
+
   @Input()
   size: any;
 
   sizeClass: any;
 
-  constructor(private ProjectService: ProjectService) {}
+  constructor(public dialog: MatDialog, private ProjectService: ProjectService) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    this.isGroup = this.ProjectService.isGroupNode(this.nodeId);
+    this.node = this.ProjectService.getNode(this.nodeId);
+    this.isGroup = this.node.isGroup();
     if (changes.icon == null) {
       this.icon = this.ProjectService.getNode(this.nodeId).getIcon();
     }
@@ -43,5 +52,12 @@ export class NodeIconComponent {
 
   isImage() {
     return this.icon.type === 'img';
+  }
+
+  openNodeIconChooserDialog() {
+    this.dialog.open(NodeIconChooserDialog, {
+      data: { node: this.node },
+      panelClass: 'mat-dialog--md'
+    });
   }
 }
