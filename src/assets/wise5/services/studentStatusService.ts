@@ -19,23 +19,29 @@ export class StudentStatusService {
   ) {}
 
   retrieveStudentStatuses() {
-    this.studentStatuses = [];
     return this.http
       .get(`/api/teacher/run/${this.ConfigService.getRunId()}/student-status`)
-      .toPromise()
-      .then((studentStatuses: any) => {
-        const workgroups = this.ConfigService.getClassmateUserInfos();
-        for (const studentStatus of studentStatuses) {
-          const parsedStatus = JSON.parse(studentStatus.status);
-          if (workgroups.find(workgroup => {
-            return workgroup.workgroupId === studentStatus.workgroupId;
-          })) {
-            parsedStatus.postTimestamp = studentStatus.timestamp;
-            this.studentStatuses.push(parsedStatus);
-          }
-        }
+      .subscribe((studentStatuses: any[]) => {
+        this.studentStatuses = this.parseStudentStatuses(studentStatuses);
         return this.studentStatuses;
       });
+  }
+
+  private parseStudentStatuses(studentStatuses: any[]): any[] {
+    const parsedStatuses = [];
+    const workgroups = this.ConfigService.getClassmateUserInfos();
+    for (const studentStatus of studentStatuses) {
+      if (
+        workgroups.find((workgroup) => {
+          return workgroup.workgroupId === studentStatus.workgroupId;
+        })
+      ) {
+        const parsedStatus = JSON.parse(studentStatus.status);
+        parsedStatus.postTimestamp = studentStatus.timestamp;
+        parsedStatuses.push(parsedStatus);
+      }
+    }
+    return parsedStatuses;
   }
 
   getStudentStatuses() {
