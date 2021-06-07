@@ -255,7 +255,7 @@ export class StudentStatusService {
     }
 
     // generate the percentage number rounded down to the nearest integer
-    let completionPercentage = numTotal > 0 ? Math.floor((100 * numCompleted) / numTotal) : 0;
+    let completionPercentage = numTotal > 0 ? Math.round((100 * numCompleted) / numTotal) : 0;
 
     return {
       completedItems: numCompleted,
