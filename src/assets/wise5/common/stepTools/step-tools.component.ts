@@ -12,7 +12,7 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 })
 export class StepToolsComponent {
   @Input()
-  showNonWork: boolean = true;
+  onlyShowStepsWithWork: boolean = false;
 
   icons: any;
   nextId: any;
@@ -50,10 +50,10 @@ export class StepToolsComponent {
 
   calculateNodeIds() {
     this.nodeIds = Object.keys(this.ProjectService.idToOrder);
-    if (!this.showNonWork) {
-      this.nodeIds = this.nodeIds.filter(nodeId => {
-        return this.isGroupNode(nodeId) || this.nodeHasWork(nodeId);
-      })
+    if (this.onlyShowStepsWithWork) {
+      this.nodeIds = this.nodeIds.filter((nodeId) => {
+        return this.isGroupNode(nodeId) || this.ProjectService.nodeHasWork(nodeId);
+      });
     }
     this.nodeIds.shift(); // remove the 'group0' master root node from consideration
   }
@@ -79,10 +79,6 @@ export class StepToolsComponent {
 
   getNodePositionAndTitleByNodeId(nodeId: string) {
     return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
-  }
-
-  nodeHasWork(nodeId: string) {
-    return this.ProjectService.nodeHasWork(nodeId);
   }
 
   isGroupNode(nodeId: string) {
