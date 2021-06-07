@@ -82,7 +82,7 @@ export class StepToolsComponent {
   }
 
   nodeHasWork(nodeId: string) {
-    return this.isGroupNode(nodeId) ? true : this.ProjectService.nodeHasWork(nodeId);
+    return this.ProjectService.nodeHasWork(nodeId);
   }
 
   isGroupNode(nodeId: string) {
