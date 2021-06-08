@@ -116,6 +116,7 @@ class EditConceptMapAdvancedController extends EditAdvancedComponentAngularJSCon
 
   connectedComponentComponentIdChanged(connectedComponent: any): void {
     this.automaticallySetConnectedComponentTypeIfPossible(connectedComponent);
+    this.afterComponentIdChanged(connectedComponent);
     this.setImportWorkAsBackgroundIfApplicable(connectedComponent);
     this.componentChanged();
   }
@@ -134,6 +135,25 @@ class EditConceptMapAdvancedController extends EditAdvancedComponentAngularJSCon
       delete connectedComponent.importWorkAsBackground;
     }
     this.componentChanged();
+  }
+
+  afterComponentIdChanged(connectedComponent: any): void {
+    const nodeId = connectedComponent.nodeId;
+    const componentId = connectedComponent.componentId;
+    if (this.ProjectService.getComponentType(nodeId, componentId) === 'ConceptMap') {
+      if (
+        confirm(
+          `Do you want to copy the nodes and links from the connected component?\n\nWarning: This will delete all existing nodes and links in this component.`
+        )
+      ) {
+        const connectedComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+          nodeId,
+          componentId
+        );
+        this.authoringComponentContent.nodes = connectedComponentContent.nodes;
+        this.authoringComponentContent.links = connectedComponentContent.links;
+      }
+    }
   }
 }
 

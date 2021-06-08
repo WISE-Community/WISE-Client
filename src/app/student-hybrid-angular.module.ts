@@ -25,6 +25,8 @@ import { ComponentHeader } from '../assets/wise5/directives/component-header/com
 import { ComponentSaveSubmitButtons } from '../assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { DrawStudent } from '../assets/wise5/components/draw/draw-student/draw-student.component';
 import { AddToNotebookButton } from '../assets/wise5/directives/add-to-notebook-button/add-to-notebook-button.component';
+import { ConceptMapStudent } from '../assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component';
+import { HtmlDialog } from '../assets/wise5/directives/html-dialog/html-dialog';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { AddToNotebookButton } from '../assets/wise5/directives/add-to-notebook-
     ComponentAnnotationsComponent,
     ComponentHeader,
     ComponentSaveSubmitButtons,
+    ConceptMapStudent,
     DrawStudent,
+    HtmlDialog,
     HtmlStudent,
     LabelStudent,
     MultipleChoiceStudent,

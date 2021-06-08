@@ -1,0 +1,58 @@
+.main-div {
+  margin-left: 20px;
+}
+
+.main-concept-map-div {
+  margin-bottom: 20px;
+}
+
+.top-buttons {
+  margin-bottom: 20px;
+}
+
+.top-button {
+  margin-right: 20px;
+}
+
+.side-node-bar {
+  border: 1px solid black;
+}
+
+.side-node-container {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+}
+
+.concept-map-svg {
+  border: 1px solid black;
+  background-repeat: no-repeat;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+}
+
+.link-type-chooser {
+  width: 300px;
+  position: relative;
+  left: 60%;
+  top: -650px;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
+  z-index: 10000;
+  padding: 16px;
+}
+
+.link-radio-choice {
+  margin: 8px;
+}
+
+.link-color {
+  width: 30px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 4px;
+}

@@ -11,12 +11,14 @@ import { Injectable } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
+import { NodeService } from '../../services/nodeService';
 
 @Injectable()
 export class ConceptMapService extends ComponentService {
   constructor(
     private upgrade: UpgradeModule,
     private ConfigService: ConfigService,
+    private NodeService: NodeService,
     private StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -30,6 +32,14 @@ export class ConceptMapService extends ComponentService {
 
   getTranslation(key: string) {
     return this.upgrade.$injector.get('$filter')('translate')(key);
+  }
+
+  getSVGId(nodeId: string, componentId: string): string {
+    return this.getElementId('svg', nodeId, componentId);
+  }
+
+  getElementId(prefix: string, nodeId: string, componentId: string): string {
+    return `${prefix}-${nodeId}-${componentId}`;
   }
 
   createComponent() {
@@ -49,6 +59,20 @@ export class ConceptMapService extends ComponentService {
     component.showAutoFeedback = false;
     component.showNodeLabels = true;
     return component;
+  }
+
+  createComponentStateObject(): any {
+    const componentState = this.NodeService.createNewComponentState();
+    componentState.studentData = {
+      conceptMapData: {
+        background: null,
+        backgroundPath: null,
+        links: [],
+        nodes: [],
+        stretchBackground: null
+      }
+    };
+    return componentState;
   }
 
   isCompleted(
@@ -742,7 +766,7 @@ export class ConceptMapService extends ComponentService {
         height = 600;
       }
 
-      const draw = SVG(svgElement);
+      const draw: any = SVG(svgElement);
       draw.width(width);
       draw.height(height);
 
@@ -1113,7 +1137,9 @@ export class ConceptMapService extends ComponentService {
     return new Promise((resolve, reject) => {
       // get the svg element. this will obtain an array.
       let svgElement = angular.element(
-        document.querySelector('#svg_' + componentState.nodeId + '_' + componentState.componentId)
+        document.querySelector(
+          `#${this.getSVGId(componentState.nodeId, componentState.componentId)}`
+        )
       );
 
       if (svgElement != null && svgElement.length > 0) {
