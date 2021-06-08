@@ -17,6 +17,7 @@ import './table/tableAuthoringComponentModule';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { EditComponentJsonComponent } from '../../../app/authoring-tool/edit-component-json/edit-component-json.component';
 import { EditComponentMaxScoreComponent } from '../../../app/authoring-tool/edit-component-max-score/edit-component-max-score.component';
+import { EditComponentPrompt } from '../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { EditComponentRubricComponent } from '../../../app/authoring-tool/edit-component-rubric/edit-component-rubric.component';
 import { EditComponentTagsComponent } from '../../../app/authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from '../../../app/authoring-tool/edit-component-width/edit-component-width.component';
@@ -51,6 +52,10 @@ export default angular
   .directive(
     'editComponentJson',
     downgradeComponent({ component: EditComponentJsonComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editComponentPrompt',
+    downgradeComponent({ component: EditComponentPrompt }) as angular.IDirectiveFactory
   )
   .directive(
     'editComponentRubric',

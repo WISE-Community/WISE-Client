@@ -1,11 +1,5 @@
-<mat-form-field class="prompt">
-  <mat-label i18n>Prompt</mat-label>
-  <textarea matInput
-      [ngModel]="authoringComponentContent.prompt"
-      (ngModelChange)="promptChanged($event)"
-      cdkTextareaAutosize>
-  </textarea>
-</mat-form-field>
+<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+   (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <div fxLayout="row">
   <mat-form-field class="dimension-input">
     <mat-label i18n>Width (Pixels)</mat-label>

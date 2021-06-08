@@ -1,11 +1,5 @@
-<mat-form-field class="prompt">
-  <mat-label i18n>Prompt</mat-label>
-  <textarea matInput
-      [ngModel]="authoringComponentContent.prompt"
-      (ngModelChange)="promptChanged($event)"
-      cdkTextareaAutosize>
-  </textarea>
-</mat-form-field>
+<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+   (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <span i18n>Oscillator Types</span>
 <span *ngIf="authoringComponentContent.oscillatorTypes == null || authoringComponentContent.oscillatorTypes.length === 0"
     class="no-oscillator-type-message"

@@ -1,14 +1,6 @@
 <div fxLayout="column" fxLayoutGap="16px">
-  <mat-form-field class="prompt">
-    <mat-label i18n>Prompt</mat-label>
-    <textarea matInput
-        [ngModel]="authoringComponentContent.prompt"
-        (ngModelChange)="promptChanged($event)"
-        placeholder="Enter Prompt Here"
-        i18n-placeholder
-        cdkTextareaAutosize>
-    </textarea>
-  </mat-form-field>
+  <edit-component-prompt [prompt]="authoringComponentContent.prompt"
+     (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
     <div fxLayoutGap="8px">
       <mat-form-field class="background">
