@@ -143,7 +143,7 @@ class EditConceptMapAdvancedController extends EditAdvancedComponentAngularJSCon
     if (this.ProjectService.getComponentType(nodeId, componentId) === 'ConceptMap') {
       if (
         confirm(
-          `Do you want to copy the nodes and links from the connected component?\n\nWarning: This will delete all existing nodes and links in this component.`
+          $localize`Do you want to copy the nodes and links from the connected component?\n\nWarning: This will delete all existing nodes and links in this component.`
         )
       ) {
         const connectedComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
