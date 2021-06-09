@@ -179,13 +179,8 @@
 </div>
 <br/>
 <edit-component-save-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-save-button>
-<div>
-<md-checkbox class='md-primary'
-            ng-model='$ctrl.authoringComponentContent.showSubmitButton'
-            ng-change='$ctrl.componentChanged()'>
- {{ ::'SHOW_SUBMIT_BUTTON' | translate }}
-</md-checkbox>
-</div>
+<br/>
+<edit-component-submit-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-submit-button>
 <div>
 <md-checkbox class='md-primary'
             ng-if='$ctrl.isNotebookEnabled()'
