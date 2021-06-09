@@ -19,6 +19,7 @@ import { EditComponentJsonComponent } from '../../../app/authoring-tool/edit-com
 import { EditComponentMaxScoreComponent } from '../../../app/authoring-tool/edit-component-max-score/edit-component-max-score.component';
 import { EditComponentPrompt } from '../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { EditComponentRubricComponent } from '../../../app/authoring-tool/edit-component-rubric/edit-component-rubric.component';
+import { EditComponentSaveButtonComponent } from '../../../app/authoring-tool/edit-component-save-button/edit-component-save-button.component';
 import { EditComponentTagsComponent } from '../../../app/authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from '../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 import { EditComponentExcludeFromTotalScoreComponent } from '../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
@@ -60,6 +61,10 @@ export default angular
   .directive(
     'editComponentRubric',
     downgradeComponent({ component: EditComponentRubricComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editComponentSaveButton',
+    downgradeComponent({ component: EditComponentSaveButtonComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'editComponentTags',

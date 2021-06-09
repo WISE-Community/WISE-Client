@@ -1,10 +1,4 @@
-<div>
-  <md-checkbox class='md-primary'
-               ng-model='$ctrl.authoringComponentContent.showSaveButton'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'SHOW_SAVE_BUTTON' | translate }}
-  </md-checkbox>
-</div>
+<edit-component-save-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-save-button>
 <div>
   <md-checkbox class='md-primary'
                ng-model='$ctrl.authoringComponentContent.showSubmitButton'

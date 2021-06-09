@@ -43,6 +43,7 @@ import { EditComponentJsonComponent } from './authoring-tool/edit-component-json
 import { EditComponentMaxScoreComponent } from './authoring-tool/edit-component-max-score/edit-component-max-score.component';
 import { EditComponentPrompt } from './authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { EditComponentRubricComponent } from './authoring-tool/edit-component-rubric/edit-component-rubric.component';
+import { EditComponentSaveButtonComponent } from './authoring-tool/edit-component-save-button/edit-component-save-button.component';
 import { EditComponentTagsComponent } from './authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from './authoring-tool/edit-component-width/edit-component-width.component';
 import { RubricAuthoringComponent } from '../assets/wise5/authoringTool/rubric/rubric-authoring.component';
@@ -111,6 +112,7 @@ import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-
     EditComponentMaxScoreComponent,
     EditComponentPrompt,
     EditComponentTagsComponent,
+    EditComponentSaveButtonComponent,
     EditComponentWidthComponent,
     EditHTMLAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
