@@ -135,6 +135,7 @@ class NodeAuthoringController {
   }
 
   $onDestroy() {
+    this.TeacherDataService.setCurrentNode(null);
     this.subscriptions.unsubscribe();
   }
 
