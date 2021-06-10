@@ -1,24 +1,17 @@
-<div>
-  <div *ngIf="componentContent.maxSubmitCount" class="submit-counter-message">
-    <div class="md-caption"
-        *ngIf="hasCorrectAnswer && componentContent.maxSubmitCount != null && componentContent.maxSubmitCount == 1" i18n>
-      You have used {{submitCounter}} of {{componentContent.maxSubmitCount}} attempt
-    </div>
-    <div class="md-caption"
-        *ngIf="hasCorrectAnswer && componentContent.maxSubmitCount != null && componentContent.maxSubmitCount > 1" i18n>
-      You have used {{submitCounter}} of {{componentContent.maxSubmitCount}} attempts
-    </div>
-  </div>
-  <div *ngIf="hasCorrectAnswer" class="correctness-message">
-    <div *ngIf="isLatestComponentStateSubmit && hasCorrectAnswer && isCorrect"
-        class="correct-text"
-        i18n>
-      Correct
-    </div>
-    <div *ngIf="isLatestComponentStateSubmit && hasCorrectAnswer && !isCorrect"
-        class="incorrect-text"
-        i18n>
-      Incorrect
-    </div>
-  </div>
-</div>
+<p *ngIf="hasCorrectAnswer && componentContent.maxSubmitCount != null"
+    class="mat-caption info"
+    i18n>
+  You have used {{submitCounter}} of {{componentContent.maxSubmitCount}} {componentContent.maxSubmitCount, plural, =1 {attempt} other {attempts}}.
+</p>
+<ng-container *ngIf="hasCorrectAnswer">
+  <p *ngIf="isLatestComponentStateSubmit && hasCorrectAnswer && isCorrect"
+      class="success mat-body-2"
+      i18n>
+    Correct
+  </p>
+  <p *ngIf="isLatestComponentStateSubmit && hasCorrectAnswer && !isCorrect"
+      class="warn mat-body-2"
+      i18n>
+    Incorrect
+  </p>
+</ng-container>
