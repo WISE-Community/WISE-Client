@@ -17,7 +17,7 @@ import { AddMatchChoiceDialog } from './add-match-choice-dialog/add-match-choice
 @Component({
   selector: 'match-student',
   templateUrl: 'match-student.component.html',
-  styleUrls: ['match-student.component.scss'],
+  styleUrls: ['match-student.component.scss']
 })
 export class MatchStudent extends ComponentStudent {
   autoScroll: any;
@@ -476,7 +476,7 @@ export class MatchStudent extends ComponentStudent {
 
   getFeedback(feedbackObject: any, hasCorrectAnswer: boolean, position: number): string {
     if (this.doesPositionMatter(feedbackObject.position)) {
-      return this.getPositionFeedback(feedbackObject, position);
+      return this.getPositionFeedback(feedbackObject, position, hasCorrectAnswer);
     } else {
       return this.getNonPositionFeedback(feedbackObject, hasCorrectAnswer);
     }
@@ -486,9 +486,11 @@ export class MatchStudent extends ComponentStudent {
     return this.componentContent.ordered && feedbackPosition != null;
   }
 
-  getPositionFeedback(feedbackObject: any, position: number): string {
+  getPositionFeedback(feedbackObject: any, position: number, hasCorrectAnswer: boolean): string {
     if (this.isCorrectPosition(feedbackObject, position)) {
-      return feedbackObject.feedback;
+      return feedbackObject.feedback
+        ? feedbackObject.feedback
+        : this.getNonPositionFeedback(feedbackObject, hasCorrectAnswer);
     } else {
       return this.getIncorrectPositionFeedback(feedbackObject);
     }
