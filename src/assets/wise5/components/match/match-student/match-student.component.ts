@@ -703,18 +703,20 @@ export class MatchStudent extends ComponentStudent {
   addChoice(): void {
     this.dialog
       .open(AddMatchChoiceDialog, {
-        width: '400px'
+        panelClass: 'mat-dialog--sm'
       })
       .afterClosed()
       .subscribe((result) => {
-        const newChoice = {
-          id: this.UtilService.generateKey(10),
-          value: result,
-          type: 'choice',
-          studentCreated: true
-        };
-        this.sourceBucket.items.push(newChoice);
-        this.studentDataChanged();
+        if (result) {
+          const newChoice = {
+            id: this.UtilService.generateKey(10),
+            value: result,
+            type: 'choice',
+            studentCreated: true
+          };
+          this.sourceBucket.items.push(newChoice);
+          this.studentDataChanged();
+        }
       });
   }
 }
