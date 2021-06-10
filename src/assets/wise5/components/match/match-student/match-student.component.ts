@@ -17,7 +17,7 @@ import { AddMatchChoiceDialog } from './add-match-choice-dialog/add-match-choice
 @Component({
   selector: 'match-student',
   templateUrl: 'match-student.component.html',
-  styleUrls: ['match-student.component.scss']
+  styleUrls: ['match-student.component.scss'],
 })
 export class MatchStudent extends ComponentStudent {
   autoScroll: any;
@@ -142,12 +142,12 @@ export class MatchStudent extends ComponentStudent {
     drake
       .on('over', (el, container, source) => {
         if (source !== container) {
-          container.className += ' match-bucket__contents--over';
+          container.className += ' primary-bg';
         }
       })
       .on('out', (el, container, source) => {
         if (source !== container) {
-          container.className = container.className.replace('match-bucket__contents--over', '');
+          container.className = container.className.replace('primary-bg', '');
         }
       });
   }
@@ -388,10 +388,6 @@ export class MatchStudent extends ComponentStudent {
 
   initializeBuckets(): void {
     this.buckets = [];
-    this.setBucketWidth();
-    this.setNumChoiceColumns();
-    this.setChoiceStyle();
-    this.setBucketStyle();
     this.sourceBucket = this.createSourceBucket();
     this.sourceBucket.items = this.sourceBucket.items.concat(this.choices);
     this.buckets.push(this.sourceBucket);
@@ -414,57 +410,6 @@ export class MatchStudent extends ComponentStudent {
     return this.componentContent.choicesLabel
       ? this.componentContent.choicesLabel
       : $localize`Choices`;
-  }
-
-  setBucketWidth(): void {
-    if (this.isHorizontal) {
-      this.bucketWidth = 100;
-    } else {
-      if (typeof this.componentContent.bucketWidth === 'number') {
-        this.bucketWidth = this.componentContent.bucketWidth;
-      } else {
-        let n = this.componentContent.buckets.length;
-        if (n % 3 === 0 || n > 4) {
-          this.bucketWidth = Math.round(100 / 3);
-        } else if (n % 2 === 0) {
-          this.bucketWidth = 100 / 2;
-        }
-      }
-    }
-  }
-
-  setNumChoiceColumns(): void {
-    if (this.isHorizontal) {
-      this.numChoiceColumns = 1;
-    } else {
-      if (typeof this.componentContent.bucketWidth === 'number') {
-        this.numChoiceColumns = Math.round(100 / this.componentContent.bucketWidth);
-      } else {
-        let n = this.componentContent.buckets.length;
-        if (n % 3 === 0 || n > 4) {
-          this.numChoiceColumns = 3;
-        } else if (n % 2 === 0) {
-          this.numChoiceColumns = 2;
-        }
-      }
-      if (typeof this.componentContent.choiceColumns === 'number') {
-        this.numChoiceColumns = this.componentContent.choiceColumns;
-      }
-    }
-  }
-
-  setChoiceStyle(): void {
-    this.choiceStyle = {
-      '-moz-column-count': this.numChoiceColumns,
-      '-webkit-column-count': this.numChoiceColumns,
-      'column-count': this.numChoiceColumns
-    };
-  }
-
-  setBucketStyle(): void {
-    if (this.bucketWidth === 100) {
-      this.bucketStyle = this.choiceStyle;
-    }
   }
 
   getDeepCopyOfBuckets(): any[] {

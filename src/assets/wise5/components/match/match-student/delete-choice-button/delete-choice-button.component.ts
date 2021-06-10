@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'delete-choice-button',
-  templateUrl: 'delete-choice-button.component.html'
+  templateUrl: 'delete-choice-button.component.html',
+  styleUrls: ['delete-choice-button.component.scss']
 })
 export class DeleteChoiceButton {
   @Input()

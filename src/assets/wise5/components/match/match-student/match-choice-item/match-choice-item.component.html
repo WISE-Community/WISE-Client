@@ -1,24 +1,26 @@
-<mat-list-item class="match-bucket__item__contents">
-  <div class="md-list-item-text">
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <span class="match-bucket__item__contents__text" [innerHTML]="item.value"></span>
-      <span flex></span>
-      <delete-choice-button *ngIf="item.studentCreated"
-          [buckets]="buckets"
-          [disabled]="isDisabled"
-          [item]="item"
-          (onItemDeleted)="onStudentDataChanged.next()"></delete-choice-button>
-      <mat-icon>open_with</mat-icon>
-    </div>
-    <p class="match-feedback md-body-2"
-        *ngIf="item.feedback"
-        [ngClass]="{'success-bg': !hasCorrectAnswer || item.isCorrect, 'info-bg': item.isIncorrectPosition, 'warn-bg': hasCorrectAnswer && !item.isCorrect}">
-      <mat-icon *ngIf="hasCorrectAnswer && item.isCorrect">check</mat-icon>
-      <mat-icon *ngIf="hasCorrectAnswer && item.isIncorrectPosition">warning</mat-icon>
-      <mat-icon *ngIf="hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition">
-        clear
-      </mat-icon>
-      <span [innerHTML]="item.feedback"></span>
-    </p>
+
+<mat-card>
+  <div fxLayout="row" fxLayoutGap="4px">
+    <mat-icon class="text-disabled ">drag_indicator</mat-icon>
+    <div class="item-content" [innerHTML]="item.value"></div>
+    <span fxFlex></span>
+    <delete-choice-button *ngIf="item.studentCreated"
+        [buckets]="buckets"
+        [disabled]="isDisabled"
+        [item]="item"
+        (onItemDeleted)="onStudentDataChanged.next()"></delete-choice-button>
   </div>
-</mat-list-item>
+  <div *ngIf="item.feedback"
+      class="feedback mat-small text-secondary-bg"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="4px" 
+      [ngClass]="{'success-bg': item.isCorrect,
+          'info-bg': item.isIncorrectPosition,
+          'warn-bg': hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition}">
+    <mat-icon class="mat-18" *ngIf="item.isCorrect">check</mat-icon>
+    <mat-icon class="mat-18" *ngIf="hasCorrectAnswer && item.isIncorrectPosition">warning</mat-icon>
+    <mat-icon class="mat-18" *ngIf="hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition">clear</mat-icon>
+    <div [innerHTML]="item.feedback"></div> 
+</div>
+</mat-card>
