@@ -564,6 +564,22 @@
         </context-group>
         <target state="translated">编辑组件量规</target>
       </trans-unit>
+      <trans-unit id="1ed69d000acff31ce5ce22f33377917f04c749cd" datatype="html">
+        <source>Show Save Button</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-save-button/edit-component-save-button.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <target state="needs-translation">Show Save Button</target>
+      </trans-unit>
+      <trans-unit id="3df6db370732e67462023f736a6c47a9d5730661" datatype="html">
+        <source>Show Submit Button</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-submit-button/edit-component-submit-button.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <target state="needs-translation">Show Submit Button</target>
+      </trans-unit>
       <trans-unit id="cafc87479686947e2590b9f588a88040aeaf660b" datatype="html">
         <source>Tags</source>
         <context-group purpose="location">
