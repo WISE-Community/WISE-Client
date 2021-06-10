@@ -5,7 +5,7 @@ import NotebookWorkgroupGrading from './notebookWorkgroupGrading/notebookWorkgro
 import * as angular from 'angular';
 
 const Notebook = angular
-  .module('notebook', [])
+  .module('notebookGrading', [])
   .component('notebookItemGrading', NotebookItemGrading)
   .component('notebookWorkgroupGrading', NotebookWorkgroupGrading);
 
