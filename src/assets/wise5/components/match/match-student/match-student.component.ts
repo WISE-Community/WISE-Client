@@ -601,7 +601,7 @@ export class MatchStudent extends ComponentStudent {
     componentState.componentId = this.componentId;
     componentState.isSubmit = this.isSubmit;
     const studentData: any = {
-      buckets: this.getDeepCopyOfBuckets(),
+      buckets: this.removeStatusFromBucketItems(this.getDeepCopyOfBuckets()),
       submitCounter: this.submitCounter
     };
     if (action === 'submit' && this.hasCorrectAnswer) {
@@ -609,6 +609,15 @@ export class MatchStudent extends ComponentStudent {
     }
     componentState.studentData = studentData;
     return componentState;
+  }
+
+  removeStatusFromBucketItems(buckets: any): any {
+    for (const bucket of buckets) {
+      for (const item of bucket.items) {
+        delete item.status;
+      }
+    }
+    return buckets;
   }
 
   hasCorrectChoices(): boolean {
