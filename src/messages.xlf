@@ -10444,8 +10444,8 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">49,50</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="148e354b0437e7c96b1478d6bf11203207acee63" datatype="html">
-        <source>Add choice</source>
+      <trans-unit id="0f72a164f5a5d10d1fbdeeb84ac80a63c04b7e1b" datatype="html">
+        <source>Add item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-choice-button/add-choice-button.component.html</context>
           <context context-type="linenumber">6</context>
@@ -10465,8 +10465,8 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="039ba2be4fc38b7a69699f1c65ecf3635e60771d" datatype="html">
-        <source>Delete choice</source>
+      <trans-unit id="a7d56850122574ce933b94051d73d65817e8369b" datatype="html">
+        <source>Delete item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/delete-choice-button/delete-choice-button.component.html</context>
           <context context-type="linenumber">4</context>

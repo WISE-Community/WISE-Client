@@ -34,7 +34,10 @@
   -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
   break-inside: avoid;
-  cursor: move;
+
+  &:not(.disabled) {
+    cursor: move;
+  }
 }
 
 .target {
