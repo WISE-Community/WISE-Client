@@ -2,7 +2,6 @@ import './lib/jquery/jquery-global';
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { AchievementService } from './services/achievementService';
-import * as angularDragula from 'angular-dragula';
 import 'angular-file-saver';
 import 'ng-file-upload';
 import 'angular-inview';
@@ -79,7 +78,6 @@ import './components/discussion/class-response/classResponseComponentModule';
 
 angular
   .module('common', [
-    angularDragula(angular),
     'angularMoment',
     'angular-toArrayFilter',
     'animationComponentModule',
