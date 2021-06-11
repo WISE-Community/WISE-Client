@@ -1,13 +1,5 @@
-<mat-form-field class="prompt-input-container">
-  <mat-label i18n>Prompt</mat-label>
-  <textarea matInput
-      [(ngModel)]="authoringComponentContent.prompt"
-      (ngModelChange)="inputChange.next($event)"
-      placeholder="Enter Prompt Here"
-      i18n-placeholder
-      cdkTextareaAutosize>
-</textarea>
-</mat-form-field>
+<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+   (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <div fxLayout="row" fxLayoutAlign="start center">
   <mat-form-field class="background-input-container">
     <mat-label i18n>Background Image (Optional)</mat-label>

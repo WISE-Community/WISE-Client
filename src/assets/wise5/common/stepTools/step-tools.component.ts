@@ -1,9 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { Subscription } from 'rxjs';
 import { NodeService } from '../../services/nodeService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { Node } from '../Node';
 
 @Component({
   styleUrls: ['step-tools.component.scss'],
@@ -11,8 +12,12 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
   encapsulation: ViewEncapsulation.None
 })
 export class StepToolsComponent {
+  @Input()
+  onlyShowStepsWithWork: boolean = false;
+
   icons: any;
   nextId: any;
+  node: Node;
   nodeIds: string[];
   nodeId: string;
   prevId: any;
@@ -26,7 +31,6 @@ export class StepToolsComponent {
   ) {}
 
   ngOnInit() {
-    this.nodeId = this.TeacherDataService.getCurrentNodeId();
     this.calculateNodeIds();
     this.updateModel();
     if (this.dir.value === 'rtl') {
@@ -47,6 +51,11 @@ export class StepToolsComponent {
 
   calculateNodeIds() {
     this.nodeIds = Object.keys(this.ProjectService.idToOrder);
+    if (this.onlyShowStepsWithWork) {
+      this.nodeIds = this.nodeIds.filter((nodeId) => {
+        return this.isGroupNode(nodeId) || this.ProjectService.nodeHasWork(nodeId);
+      });
+    }
     this.nodeIds.shift(); // remove the 'group0' master root node from consideration
   }
 
@@ -56,6 +65,7 @@ export class StepToolsComponent {
 
   updateModel() {
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
+    this.node = this.ProjectService.getNode(this.nodeId);
     if (this.nodeId == null) {
       this.prevId = null;
       this.nextId = null;

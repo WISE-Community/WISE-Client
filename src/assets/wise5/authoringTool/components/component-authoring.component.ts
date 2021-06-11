@@ -133,4 +133,13 @@ export abstract class ComponentAuthoring {
   getComponentByNodeIdAndComponentId(nodeId: string, componentId: string) {
     return this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
   }
+
+  reloadPreview() {
+    // modify the authoringComponentContent to trigger the preview reloading
+    this.authoringComponentContent.reloadTime = new Date();
+    setTimeout(() => {
+      // remove the field we previously used to trigger the reload
+      delete this.authoringComponentContent.reloadTime;
+    });
+  }
 }

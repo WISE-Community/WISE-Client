@@ -251,7 +251,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
   submit(submitTriggeredBy: string): void {
     if (this.isSubmitDirty) {
       let performSubmit = true;
-      if (this.hasMaxSubmitCount() && this.hasUsedAllSubmits()) {
+      if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
         performSubmit = false;
       }
 
@@ -260,7 +260,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
         this.isCorrect = null;
         this.hideAllFeedback();
         this.incrementSubmitCounter();
-        if (this.hasMaxSubmitCount() && this.hasUsedAllSubmits()) {
+        if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
           this.disableAllInput();
           this.disableSubmitButton();
         }

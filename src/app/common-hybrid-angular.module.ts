@@ -54,13 +54,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MomentModule } from 'ngx-moment';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
-import { WiseTinymceEditorComponent } from '../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
-import { NotebookParentComponent } from './notebook/notebook-parent/notebook-parent.component';
-import { NotebookItemComponent } from './notebook/notebook-item/notebook-item.component';
-import { NotebookLauncherComponent } from './notebook/notebook-launcher/notebook-launcher.component';
-import { NotebookNotesComponent } from './notebook/notebook-notes/notebook-notes.component';
-import { NotebookReportComponent } from './notebook/notebook-report/notebook-report.component';
-import { NotebookReportAnnotationsComponent } from './notebook/notebook-report-annotations/notebook-report-annotations.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -72,6 +65,9 @@ import { ClassResponse } from '../assets/wise5/components/discussion/class-respo
 import { ComponentService } from '../assets/wise5/components/componentService';
 import { WiseLinkService } from './services/wiseLinkService';
 import { DataExportService } from '../assets/wise5/services/dataExportService';
+import { DragulaService } from 'ng2-dragula';
+import { MatChipsModule } from '@angular/material/chips';
+import { NotebookModule } from './notebook/notebook.module';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -82,14 +78,7 @@ export class EmptyComponent {}
     EmptyComponent,
     HelpIconComponent,
     NodeIconComponent,
-    NodeStatusIcon,
-    NotebookParentComponent,
-    NotebookItemComponent,
-    NotebookLauncherComponent,
-    NotebookNotesComponent,
-    NotebookReportComponent,
-    NotebookReportAnnotationsComponent,
-    WiseTinymceEditorComponent
+    NodeStatusIcon
   ],
   imports: [
     UpgradeModule,
@@ -117,6 +106,7 @@ export class EmptyComponent {}
     MatSlideToggleModule,
     MatTooltipModule,
     MomentModule,
+    NotebookModule,
     ReactiveFormsModule,
     RouterModule.forChild([{ path: '**', component: EmptyComponent }])
   ],
@@ -132,6 +122,7 @@ export class EmptyComponent {}
     CRaterService,
     DataExportService,
     DiscussionService,
+    DragulaService,
     DrawService,
     EmbeddedService,
     GraphService,
@@ -153,7 +144,6 @@ export class EmptyComponent {}
     SummaryService,
     TableService,
     TagService,
-    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
     UtilService,
     VLEProjectService,
     WiseLinkService
@@ -168,6 +158,7 @@ export class EmptyComponent {}
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatChipsModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,

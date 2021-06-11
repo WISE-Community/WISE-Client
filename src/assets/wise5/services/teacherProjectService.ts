@@ -475,26 +475,10 @@ export class TeacherProjectService extends ProjectService {
       })
       .toPromise()
       .then((selectedNodes: any) => {
-        const inactiveNodes = this.getInactiveNodes();
-        const newNodes = [];
-        const newNodeIds = [];
-        for (const selectedNode of selectedNodes) {
-          const tempNode = this.UtilService.makeCopyOfJSONObject(selectedNode);
-          if (this.isNodeIdUsed(tempNode.id)) {
-            const nextAvailableNodeId = this.getNextAvailableNodeId(newNodeIds);
-            tempNode.id = nextAvailableNodeId;
-          }
-          const tempComponents = tempNode.components;
-          for (const tempComponent of tempComponents) {
-            if (this.isComponentIdUsed(tempComponent.id)) {
-              // we are already using the component id so we will need to change it
-              tempComponent.id = this.getUnusedComponentId();
-            }
-          }
-          tempNode.constraints = [];
-          newNodes.push(tempNode);
-          newNodeIds.push(tempNode.id);
-        }
+        const oldToNewIds = this.getOldToNewIds(selectedNodes);
+        const newNodes = selectedNodes.map((selectedNode: any) => {
+          return this.replaceOldIds(selectedNode, oldToNewIds);
+        });
 
         if (nodeIdToInsertInsideOrAfter == null) {
           /*
@@ -508,6 +492,7 @@ export class TeacherProjectService extends ProjectService {
            * inactive nodes section. In the latter case we do this by
            * setting nodeIdToInsertInsideOrAfter to 'inactiveSteps'.
            */
+          const inactiveNodes = this.getInactiveNodes();
           if (inactiveNodes != null && inactiveNodes.length > 0) {
             nodeIdToInsertInsideOrAfter = inactiveNodes[inactiveNodes.length - 1];
           } else {
@@ -543,6 +528,38 @@ export class TeacherProjectService extends ProjectService {
         }
         return newNodes;
       });
+  }
+
+  getOldToNewIds(nodes: any[]): Map<string, string> {
+    const newNodeIds = [];
+    const newComponentIds = [];
+    const oldToNewIds = new Map();
+    for (const node of nodes) {
+      const newNodeId = this.getNextAvailableNodeId(newNodeIds);
+      oldToNewIds.set(node.id, newNodeId);
+      newNodeIds.push(newNodeId);
+      for (const component of node.components) {
+        const newComponentId = this.getUnusedComponentId(newComponentIds);
+        oldToNewIds.set(component.id, newComponentId);
+        newComponentIds.push(newComponentId);
+      }
+    }
+    return oldToNewIds;
+  }
+
+  replaceOldIds(node: any, oldToNewIds: Map<string, string>): any {
+    let nodeString = JSON.stringify(node);
+    for (const oldId of Array.from(oldToNewIds.keys()).reverse()) {
+      const newId = oldToNewIds.get(oldId);
+      nodeString = this.replaceIds(nodeString, oldId, newId);
+    }
+    return JSON.parse(nodeString);
+  }
+
+  replaceIds(nodeString: string, oldId: string, newId: string): string {
+    nodeString = nodeString.replace(new RegExp(`\"${oldId}\"`, 'g'), `"${newId}"`);
+    nodeString = nodeString.replace(new RegExp(`${oldId}Constraint`, 'g'), `${newId}Constraint`);
+    return nodeString;
   }
 
   /**
