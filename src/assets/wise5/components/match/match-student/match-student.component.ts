@@ -448,6 +448,7 @@ export class MatchStudent extends ComponentStudent {
           );
           isCorrect &&= isChoiceCorrect;
         }
+        this.setItemStatus(item);
       }
     }
 
@@ -472,6 +473,17 @@ export class MatchStudent extends ComponentStudent {
       choice.isIncorrectPosition = !this.isCorrectPosition(feedbackObject, position);
     }
     return isCorrect;
+  }
+
+  setItemStatus(item: any): void {
+    item.status = '';
+    if (item.isCorrect) {
+      item.status = 'correct';
+    } else if (item.isIncorrectPosition) {
+      item.status = 'warn';
+    } else if (this.hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition) {
+      item.status = 'incorrect';
+    }
   }
 
   getFeedback(feedbackObject: any, hasCorrectAnswer: boolean, position: number): string {

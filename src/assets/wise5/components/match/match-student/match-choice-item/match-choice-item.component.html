@@ -15,12 +15,10 @@
       fxLayout="row"
       fxLayoutAlign="start center"
       fxLayoutGap="4px" 
-      [ngClass]="{'success-bg': item.isCorrect,
-          'info-bg': item.isIncorrectPosition,
-          'warn-bg': hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition}">
-    <mat-icon class="mat-18" *ngIf="item.isCorrect">check</mat-icon>
-    <mat-icon class="mat-18" *ngIf="hasCorrectAnswer && item.isIncorrectPosition">warning</mat-icon>
-    <mat-icon class="mat-18" *ngIf="hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition">clear</mat-icon>
+      [ngClass]="{'success-bg': item.status === 'correct',
+          'info-bg': item.status === 'warn',
+          'warn-bg': item.status === 'incorrect'}">
+    <match-status-icon *ngIf="item.status" [status]="item.status"></match-status-icon>
     <div [innerHTML]="item.feedback"></div> 
 </div>
 </mat-card>

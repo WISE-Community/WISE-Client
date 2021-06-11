@@ -6,6 +6,7 @@ import { DeleteChoiceButton } from './delete-choice-button/delete-choice-button.
 import { DragulaModule } from 'ng2-dragula';
 import { MatchChoiceItem } from './match-choice-item/match-choice-item.component';
 import { MatchFeedbackSection } from './match-feedback-section/match-feedback-section.component';
+import { MatchStatusIcon } from './match-status-icon/match-status-icon.component';
 import { MatchStudent } from './match-student.component';
 import { StudentComponentModule } from '../../../../../app/student/student.component.module';
 
@@ -16,6 +17,7 @@ import { StudentComponentModule } from '../../../../../app/student/student.compo
     DeleteChoiceButton,
     MatchChoiceItem,
     MatchFeedbackSection,
+    MatchStatusIcon,
     MatchStudent
   ],
   imports: [AngularJSModule, DragulaModule, StudentComponentModule]
