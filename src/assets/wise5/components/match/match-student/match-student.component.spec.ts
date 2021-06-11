@@ -276,7 +276,9 @@ function createChoiceFromNotebookItem() {
       const choice = component.createChoiceFromNotebookItem(notebookItem);
       expect(choice.id).toEqual(notebookItemId);
       expect(choice.type).toEqual('choice');
-      expect(choice.value).toEqual(`${notebookItemText}<br/><img src="${notebookItemImageName}"/>`);
+      expect(choice.value).toEqual(
+        `${notebookItemText}<div><img src="${notebookItemImageName}" alt="image from note"/></div>`
+      );
     });
   });
 }

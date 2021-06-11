@@ -377,7 +377,7 @@ export class MatchStudent extends ComponentStudent {
   createChoiceFromNotebookItem(notebookItem: any): any {
     let value = notebookItem.content.text;
     for (const attachment of notebookItem.content.attachments) {
-      value += `<br/><img src="${attachment.iconURL}"/>`;
+      value += `<div><img src="${attachment.iconURL}" alt="image from note"/></div>`;
     }
     return {
       id: notebookItem.localNotebookItemId,
