@@ -1,12 +1,20 @@
-<p i18n>Enter Choice Text</p>
-<mat-form-field style="width: 100%">
-  <input matInput [(ngModel)]="choiceText" (keydown.enter)="enterPressed()">
-</mat-form-field>
-<div fxLayout="row" fxLayoutAlign="end start">
-  <button mat-button (click)="cancel()" i18n>Cancel</button>
-  <button mat-flat-button
-      color="primary"
-      [mat-dialog-close]="choiceText"
-      [disabled]="!choiceText"
-      i18n>OK</button>
-</div>
+<form role="form" [formGroup]="addChoiceFormGroup" (submit)="save()">
+  <p i18n>Enter Item Text</p>
+  <mat-form-field style="width: 100%">
+    <input matInput
+        id="choiceText"
+        name="choiceText"
+        formControlName="choiceText"
+        (keydown.enter)="save()">
+    <mat-error *ngIf="addChoiceFormGroup.controls['choiceText'].hasError('required')"
+        i18n>Item Text required</mat-error>
+  </mat-form-field>
+  <div fxLayout="row" fxLayoutAlign="end start">
+    <button mat-button mat-dialog-close i18n>Cancel</button>
+    <button mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="!addChoiceFormGroup.valid"
+        i18n>OK</button>
+  </div>
+</form>

@@ -1,20 +1,22 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'add-match-choice-dialog',
   templateUrl: 'add-match-choice-dialog.html'
 })
 export class AddMatchChoiceDialog {
-  choiceText: string;
+  addChoiceFormGroup: FormGroup = this.fb.group({
+    choiceText: new FormControl('', [Validators.required])
+  });
 
-  constructor(private dialogRef: MatDialogRef<AddMatchChoiceDialog>) {}
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AddMatchChoiceDialog>) {}
 
-  enterPressed(): void {
-    this.dialogRef.close(this.choiceText);
-  }
-
-  cancel(): void {
-    this.dialogRef.close();
+  save(): void {
+    const choiceText: string = this.addChoiceFormGroup.get('choiceText').value;
+    if (choiceText) {
+      this.dialogRef.close(choiceText);
+    }
   }
 }

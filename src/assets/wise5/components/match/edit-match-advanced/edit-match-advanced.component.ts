@@ -23,7 +23,7 @@ class EditMatchAdvancedController extends EditAdvancedComponentAngularJSControll
   afterComponentIdChanged(connectedComponent: any): void {
     if (
       confirm(
-        `Do you want to copy the choices and buckets from the connected component?\n\nWarning: This will delete all existing choices and buckets in this component.`
+        $localize`Do you want to copy the choices and buckets from the connected component?\n\nWarning: This will delete all existing choices and buckets in this component.`
       )
     ) {
       const connectedComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
