@@ -697,7 +697,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
@@ -4525,7 +4525,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e2f5ddbb1c62ee08bb0cc5a18ecba95e1e621760" datatype="html">
@@ -8779,14 +8779,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Oscillator Type</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="abf667ffefffda6607c19873644cadf7b64e6852" datatype="html">
         <source>Frequency (Hz)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8564202903947049539" datatype="html">
@@ -9439,25 +9439,25 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">264</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="dffaf8f57d090d184cf323d929d4ec1959bf08a0" datatype="html">
+      <trans-unit id="3ee6d14ea15f70683272c9df8c3aff6457182928" datatype="html">
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>file_download<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Import Classmate Work </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
-          <context context-type="linenumber">12,14</context>
+          <context context-type="linenumber">11,13</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="d679e94521ab2288e0ab0307c50ac85bea6ca401" datatype="html">
+      <trans-unit id="74806bc167fb1570c29a28231e6c1c8acbf6a6b8" datatype="html">
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>image<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Upload Background Image </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
-          <context context-type="linenumber">28,30</context>
+          <context context-type="linenumber">27,29</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a4ca5913db14fa4626ca68068d3d925e72f2b35c" datatype="html">
+      <trans-unit id="2befc43e9fdcd8413955c2b61b865fe603c56ad9" datatype="html">
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>restore<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Reset </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
-          <context context-type="linenumber">38,40</context>
+          <context context-type="linenumber">37,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1183673564143200427" datatype="html">
@@ -10241,28 +10241,28 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Add New Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f7d4cd42c1994704c0cc162c8c491897ea62fef4" datatype="html">
         <source>Label Text</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="58a5686b8ceaee99cd9e3c1ad7b85c3fd6a30aa1" datatype="html">
         <source>Upload Background Image</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a34cc48491622c29efdffcda963e97a750f1e02b" datatype="html">
         <source>Delete Background Image</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2518624267018648120" datatype="html">
@@ -10513,10 +10513,6 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
           <context context-type="linenumber">44,45</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">56,57</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="49a3371af0eb58f02e541105eb395340048527ec" datatype="html">
         <source> Incorrect </source>
@@ -10527,10 +10523,6 @@ Warning: This will delete all existing choices and buckets in this component.</s
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
           <context context-type="linenumber">49,50</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">61,62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="148e354b0437e7c96b1478d6bf11203207acee63" datatype="html">
@@ -10589,12 +10581,20 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
           <context context-type="linenumber">10,11</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="d4d6f1510d16638d79a0e793a0ac8a11b2231a8f" datatype="html">
         <source> Incorrect </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
           <context context-type="linenumber">15,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
+          <context context-type="linenumber">60,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3db39135c783da4bb320d5826f4de893f62c7e1b" datatype="html">
@@ -10689,18 +10689,18 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="93ef924fce15086a2b9c5ccde9972618b1caea4d" datatype="html">
+      <trans-unit id="15a55678173547662c25708af440a302696f5a0c" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount}}"/> attempt </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">41,43</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="740b24ce40efa4dbf1c2fac997ca6f7980401ba2" datatype="html">
+      <trans-unit id="305089568f85e84d60510cb5b6c271a953033049" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempts </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">47,49</context>
+          <context context-type="linenumber">46,48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2839735751687486837" datatype="html">

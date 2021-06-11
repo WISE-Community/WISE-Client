@@ -1,5 +1,9 @@
 @import '~style/abstracts/variables', '~style/abstracts/functions', '~style/abstracts/mixins';
 
+.match {
+  margin: 0 -4px;
+}
+
 .bucket {
   border-radius: $button-border-radius;
   margin: 4px;
@@ -48,4 +52,5 @@
 component-save-submit-buttons {
   display: block;
   margin-top: 16px;
+  margin-bottom: 8px;
 }
