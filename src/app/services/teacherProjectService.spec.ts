@@ -41,6 +41,11 @@ describe('TeacherProjectService', () => {
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
     scootersProjectJSON = JSON.parse(JSON.stringify(scootersProjectJSON_import));
     teacherProjectJSON = JSON.parse(JSON.stringify(teacherProjctJSON_import));
+    service.project = {
+      nodes: [],
+      inactiveNodes: []
+    };
+    service.applicationNodes = [];
   });
   registerNewProject();
   isNodeIdUsed();
@@ -85,6 +90,9 @@ describe('TeacherProjectService', () => {
   shouldNotSaveProjectWhenTheUserDoesNotHavePermissionToEditTheProject();
   shouldSaveProject();
   getStepNodesDetailsInOrder();
+  getOldToNewIds();
+  replaceOldIds();
+  replaceIds();
 });
 
 function createNormalSpy() {
@@ -894,4 +902,91 @@ function expectStepNodeDetail(
 ) {
   expect(stepNodesDetailsInOrder[index].nodeId).toEqual(expectedNodeId);
   expect(stepNodesDetailsInOrder[index].nodePositionAndTitle).toEqual(expectedPositionAndTitle);
+}
+
+function getOldToNewIds() {
+  describe('getOldToNewIds', () => {
+    it('should get mappings of old ids to new ids', () => {
+      const nodes = [
+        createNodeWithComponent('node1', 'component1'),
+        createNodeWithComponent('node2', 'component2'),
+        createNodeWithComponent('node3', 'component3')
+      ];
+      service.applicationNodes = nodes;
+      service.project = {
+        nodes: nodes,
+        inactiveNodes: []
+      };
+      const oldToNewIds = service.getOldToNewIds(nodes);
+      expect(oldToNewIds.get('node1')).toEqual('node4');
+      expect(oldToNewIds.get('node2')).toEqual('node5');
+      expect(oldToNewIds.get('node3')).toEqual('node6');
+      expect(oldToNewIds.get('component1')).not.toEqual('component1');
+      expect(oldToNewIds.get('component2')).not.toEqual('component2');
+      expect(oldToNewIds.get('component3')).not.toEqual('component3');
+    });
+  });
+}
+
+function createNodeWithComponent(nodeId: string, componentId: string): any {
+  return {
+    id: nodeId,
+    components: [{ id: componentId }]
+  };
+}
+
+function replaceOldIds() {
+  describe('replaceOldIds', () => {
+    it('should replace old ids', () => {
+      const node = {
+        connectedComponents: [
+          createConnectedComponentObject('node1', 'abc1'),
+          createConnectedComponentObject('node2', 'abc2'),
+          createConnectedComponentObject('node3', 'abc3'),
+          createConnectedComponentObject('node1', 'abc3')
+        ]
+      };
+      const oldToNewIds = new Map();
+      oldToNewIds.set('node1', 'node10');
+      oldToNewIds.set('node2', 'node11');
+      oldToNewIds.set('abc3', 'def3');
+      const updatedNode = service.replaceOldIds(node, oldToNewIds);
+      const expectedConnectedComponents = [
+        createConnectedComponentObject('node10', 'abc1'),
+        createConnectedComponentObject('node11', 'abc2'),
+        createConnectedComponentObject('node3', 'def3'),
+        createConnectedComponentObject('node10', 'def3')
+      ];
+      for (let c = 0; c < updatedNode.connectedComponents.length; c++) {
+        expect(updatedNode.connectedComponents[c].nodeId).toEqual(
+          expectedConnectedComponents[c].nodeId
+        );
+        expect(updatedNode.connectedComponents[c].componentId).toEqual(
+          expectedConnectedComponents[c].componentId
+        );
+      }
+    });
+  });
+}
+
+function createConnectedComponentObject(nodeId: string, componentId: string): any {
+  return {
+    nodeId: nodeId,
+    componentId: componentId
+  };
+}
+
+function replaceIds() {
+  describe('replaceIds', () => {
+    it('should replace ids in a string', () => {
+      const string = '{ "id": "node1", "constraints": [{ "id": "node1Constraint1" }] }';
+      const expectedString = '{ "id": "node10", "constraints": [{ "id": "node10Constraint1" }] }';
+      expect(service.replaceIds(string, 'node1', 'node10')).toEqual(expectedString);
+    });
+    it('should replace all instances of the ids in a string', () => {
+      const string = '"node1", "node1", "node2", "node10", "node11", "node11"';
+      const expectedString = '"node10", "node10", "node2", "node10", "node11", "node11"';
+      expect(service.replaceIds(string, 'node1', 'node10')).toEqual(expectedString);
+    });
+  });
 }
