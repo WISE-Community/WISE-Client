@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { Subscription } from 'rxjs';
 import { NodeService } from '../../services/nodeService';
@@ -12,6 +12,9 @@ import { Node } from '../Node';
   encapsulation: ViewEncapsulation.None
 })
 export class StepToolsComponent {
+  @Input()
+  onlyShowStepsWithWork: boolean = false;
+
   icons: any;
   nextId: any;
   node: Node;
@@ -48,6 +51,11 @@ export class StepToolsComponent {
 
   calculateNodeIds() {
     this.nodeIds = Object.keys(this.ProjectService.idToOrder);
+    if (this.onlyShowStepsWithWork) {
+      this.nodeIds = this.nodeIds.filter((nodeId) => {
+        return this.isGroupNode(nodeId) || this.ProjectService.nodeHasWork(nodeId);
+      });
+    }
     this.nodeIds.shift(); // remove the 'group0' master root node from consideration
   }
 
