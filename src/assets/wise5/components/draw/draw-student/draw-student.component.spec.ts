@@ -82,6 +82,7 @@ describe('DrawStudent', () => {
   resetDrawing();
   createComponentStateObject();
   createComponentStateWithCanvasObjects();
+  setWidthAndHeight();
 });
 
 function createComponentState(objects: any[]): any {
@@ -230,4 +231,26 @@ function createComponentStateWithCanvasObjects() {
     expect(drawData.canvas.objects.length).toEqual(1);
     expect(drawData.canvas.objects[0].type).toEqual('rect');
   });
+}
+
+function setWidthAndHeight() {
+  it('should set the width and height', () => {
+    expectWidthAndHeight(400, 300, 400, 300);
+  });
+  it('should set the width and height when they are null', () => {
+    expectWidthAndHeight(null, null, 800, 600);
+  });
+}
+
+function expectWidthAndHeight(
+  componentContentWidth: number,
+  componentContentHeight: number,
+  expectedWidth: number,
+  expectedHeight: number
+): void {
+  component.componentContent.width = componentContentWidth;
+  component.componentContent.height = componentContentHeight;
+  component.setWidthAndHeight();
+  expect(component.width).toEqual(expectedWidth);
+  expect(component.height).toEqual(expectedHeight);
 }
