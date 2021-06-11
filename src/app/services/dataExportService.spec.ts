@@ -4,6 +4,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { AchievementService } from '../../assets/wise5/services/achievementService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
+import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 import { DataExportService } from '../../assets/wise5/services/dataExportService';
 import { NotificationService } from '../../assets/wise5/services/notificationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -29,6 +30,7 @@ describe('DataExportService', () => {
         AchievementService,
         AnnotationService,
         ConfigService,
+        CopyNodesService,
         DataExportService,
         NotificationService,
         ProjectService,

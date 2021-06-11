@@ -9,6 +9,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { SessionService } from './sessionService';
+import { CopyNodesService } from './copyNodesService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -35,6 +36,7 @@ export class TeacherProjectService extends ProjectService {
     protected upgrade: UpgradeModule,
     protected http: HttpClient,
     protected ConfigService: ConfigService,
+    protected CopyNodesService: CopyNodesService,
     protected SessionService: SessionService,
     protected UtilService: UtilService
   ) {
@@ -448,86 +450,11 @@ export class TeacherProjectService extends ProjectService {
     return newNodes;
   }
 
-  /**
-   * Copy the nodes into the project
-   * @param selectedNodes the nodes to import
-   * @param fromProjectId copy the nodes from this project
-   * @param toProjectId copy the nodes into this project
-   * @param nodeIdToInsertInsideOrAfter If this is a group, we will make the
-   * new step the first step in the group. If this is a step, we will place
-   * the new step after it.
-   */
-  copyNodes(selectedNodes, fromProjectId, toProjectId, nodeIdToInsertInsideOrAfter) {
-    /*
-     * Make the request to import the steps. This will copy the asset files
-     * and change file names if necessary. If an asset file with the same
-     * name exists in both projects we will check if their content is the
-     * same. If the content is the same we don't need to copy the file. If
-     * the content is different, we need to make a copy of the file with a
-     * new name and change all the references in the steps to use the new
-     * name.
-     */
-    return this.http
-      .post(this.ConfigService.getConfigParam('importStepsURL'), {
-        steps: angular.toJson(selectedNodes),
-        fromProjectId: fromProjectId,
-        toProjectId: toProjectId
-      })
-      .toPromise()
-      .then((selectedNodes: any) => {
-        const oldToNewIds = this.getOldToNewIds(selectedNodes);
-        const newNodes = selectedNodes.map((selectedNode: any) => {
-          return this.replaceOldIds(selectedNode, oldToNewIds);
-        });
-
-        if (nodeIdToInsertInsideOrAfter == null) {
-          /*
-           * the place to put the new node has not been specified so we
-           * will place it in the inactive steps section
-           */
-
-          /*
-           * Insert the node after the last inactive node. If there
-           * are no inactive nodes it will just be placed in the
-           * inactive nodes section. In the latter case we do this by
-           * setting nodeIdToInsertInsideOrAfter to 'inactiveSteps'.
-           */
-          const inactiveNodes = this.getInactiveNodes();
-          if (inactiveNodes != null && inactiveNodes.length > 0) {
-            nodeIdToInsertInsideOrAfter = inactiveNodes[inactiveNodes.length - 1];
-          } else {
-            nodeIdToInsertInsideOrAfter = 'inactiveSteps';
-          }
-        }
-
-        for (const newNode of newNodes) {
-          if (this.isGroupNode(nodeIdToInsertInsideOrAfter)) {
-            this.createNodeInside(newNode, nodeIdToInsertInsideOrAfter);
-          } else {
-            this.createNodeAfter(newNode, nodeIdToInsertInsideOrAfter);
-          }
-
-          /*
-           * Update the nodeIdToInsertInsideOrAfter so that when we are
-           * importing multiple steps, the steps get placed in the correct
-           * order.
-           *
-           * Example
-           * We are importing nodeA and nodeB and want to place them after
-           * nodeX. Therefore we want the order to be
-           *
-           * nodeX
-           * nodeA
-           * nodeB
-           *
-           * This means after we add nodeA, we must update
-           * nodeIdToInsertInsideOrAfter to be nodeA so that when we add
-           * nodeB, it will be placed after nodeA.
-           */
-          nodeIdToInsertInsideOrAfter = newNode.id;
-        }
-        return newNodes;
-      });
+  getNewNodeIds(nodes: any[]): any[] {
+    const oldToNewIds = this.getOldToNewIds(nodes);
+    return nodes.map((node: any) => {
+      return this.replaceOldIds(node, oldToNewIds);
+    });
   }
 
   getOldToNewIds(nodes: any[]): Map<string, string> {
@@ -891,21 +818,11 @@ export class TeacherProjectService extends ProjectService {
       newComponentIds.push(newComponentId);
     }
 
-    /*
-     * Make the request to import the components. This will copy the asset files
-     * and change file names if necessary. If an asset file with the same
-     * name exists in both projects we will check if their content is the
-     * same. If the content is the same we don't need to copy the file. If
-     * the content is different, we need to make a copy of the file with a
-     * new name and change all the references in the steps to use the new
-     * name.
-     */
-    return this.http
-      .post(this.ConfigService.getConfigParam('importStepsURL'), {
-        steps: angular.toJson(newComponents),
-        fromProjectId: importProjectId,
-        toProjectId: this.ConfigService.getConfigParam('projectId')
-      })
+    return this.CopyNodesService.copyNodes(
+      newComponents,
+      importProjectId,
+      this.ConfigService.getConfigParam('projectId')
+    )
       .toPromise()
       .then((newComponents: any) => {
         const node = this.getNodeById(nodeId);
