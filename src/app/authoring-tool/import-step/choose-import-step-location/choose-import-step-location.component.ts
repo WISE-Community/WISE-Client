@@ -29,7 +29,7 @@ export class ChooseImportStepLocationComponent {
       this.upgrade.$injector.get('$stateParams').importFromProjectId,
       this.ConfigService.getProjectId()
     ).subscribe((copiedNodes: any[]) => {
-      const nodesWithNewNodeIds = this.ProjectService.getNewNodeIds(copiedNodes);
+      const nodesWithNewNodeIds = this.ProjectService.getNodesWithNewNodeIds(copiedNodes);
       this.InsertNodesService.insertNodes(nodesWithNewNodeIds, nodeIdToInsertInsideOrAfter);
       this.ProjectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
         this.ProjectService.refreshProject();
