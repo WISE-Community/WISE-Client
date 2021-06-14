@@ -33,9 +33,7 @@ export class GradingEditComponentMaxScoreComponent {
     this.maxScore = this.ProjectService.getMaxScoreForComponent(this.nodeId, this.componentId) || 0;
     this.subscriptions.add(
       this.maxScoreChanged.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        if (this.maxScore >= 0) {
-          this.saveMaxScore();
-        }
+        this.saveMaxScore();
       })
     );
   }
@@ -45,9 +43,11 @@ export class GradingEditComponentMaxScoreComponent {
   }
 
   saveMaxScore() {
-    const maxScore = this.UtilService.convertStringToNumber(this.maxScore);
-    this.ProjectService.setMaxScoreForComponent(this.nodeId, this.componentId, maxScore);
-    this.ProjectService.saveProject();
-    this.maxScore = this.maxScore || 0;
+    if (this.maxScore >= 0) {
+      const maxScore = this.UtilService.convertStringToNumber(this.maxScore);
+      this.ProjectService.setMaxScoreForComponent(this.nodeId, this.componentId, maxScore);
+      this.ProjectService.saveProject();
+      this.maxScore = this.maxScore || 0;
+    }
   }
 }

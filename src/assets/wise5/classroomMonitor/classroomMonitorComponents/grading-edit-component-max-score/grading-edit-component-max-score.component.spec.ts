@@ -46,7 +46,8 @@ describe('GradingEditComponentMaxScoreComponent', () => {
 
 function saveMaxScore() {
   describe('saveMaxScore()', () => {
-    it('should save 0 or greater value', () => {
+    it('should save null, 0 or greater value', () => {
+      shouldSave(null);
       shouldSave(0);
       shouldSave(11);
     });
