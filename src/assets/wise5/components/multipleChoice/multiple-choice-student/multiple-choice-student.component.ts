@@ -6,6 +6,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
+import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
@@ -19,13 +20,14 @@ import { MultipleChoiceService } from '../multipleChoiceService';
   styleUrls: ['multiple-choice-student.component.scss']
 })
 export class MultipleChoiceStudent extends ComponentStudent {
-  componentHasCorrectAnswer: boolean;
-  studentChoices: any;
-  isCorrect: boolean;
-  isLatestComponentStateSubmit: boolean;
-  showFeedback: boolean;
   choices: any[];
   choiceType: string;
+  componentHasCorrectAnswer: boolean;
+  isCorrect: boolean;
+  isLatestComponentStateSubmit: boolean;
+  originalComponentContent: any;
+  showFeedback: boolean;
+  studentChoices: any;
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -34,6 +36,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
     private MultipleChoiceService: MultipleChoiceService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected upgrade: UpgradeModule,
@@ -61,6 +64,10 @@ export class MultipleChoiceStudent extends ComponentStudent {
     this.componentHasCorrectAnswer = this.hasCorrectChoices();
     this.showFeedback = this.componentContent.showFeedback;
     this.choiceType = this.getChoiceType();
+    this.originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
 
     if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
       this.handleConnectedComponents();
@@ -452,7 +459,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
   }
 
   getChoiceById(choiceId: string): any {
-    for (const choice of this.componentContent.choices) {
+    for (const choice of this.originalComponentContent.choices) {
       if (choice.id === choiceId) {
         return choice;
       }

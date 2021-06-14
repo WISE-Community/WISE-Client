@@ -89,7 +89,10 @@ describe('MatchStudent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MatchStudent);
-    spyOn(TestBed.get(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({});
+    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
+      score: 0,
+      comment: ''
+    });
     component = fixture.componentInstance;
     component.nodeId = nodeId;
     choice1 = createChoice(choiceId1, choiceValue1);
@@ -98,7 +101,7 @@ describe('MatchStudent', () => {
     bucket1 = createBucket(bucketId1, bucketValue1, []);
     bucket2 = createBucket(bucketId2, bucketValue2, []);
     bucket3 = createBucket(bucketId3, bucketValue3, []);
-    component.componentContent = {
+    const componentContent = {
       id: componentId,
       type: 'Match',
       prompt: 'Put the choices in the buckets.',
@@ -128,6 +131,10 @@ describe('MatchStudent', () => {
         ])
       ]
     };
+    component.componentContent = componentContent;
+    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
+      JSON.parse(JSON.stringify(componentContent))
+    );
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
@@ -179,6 +186,8 @@ describe('MatchStudent', () => {
   getFeedbackObject();
   mergeBucket();
   mergeChoices();
+  getValueById();
+  getCleanedValue();
 });
 
 function createBucket(id: string, value: string, choices: any[]): any {
@@ -681,6 +690,35 @@ function mergeChoices() {
       expect(mergedChoices[0].id).toEqual(choiceId1);
       expect(mergedChoices[1].id).toEqual(choiceId2);
       expect(mergedChoices[2].id).toEqual(choiceId3);
+    });
+  });
+}
+
+function getValueById() {
+  describe('getValueById', () => {
+    it('should get value by id', () => {
+      expect(component.getValueById(component.componentContent, choiceId1)).toEqual(choiceValue1);
+      expect(component.getValueById(component.componentContent, bucketId1)).toEqual(bucketValue1);
+    });
+  });
+}
+
+function getCleanedValue() {
+  describe('getCleanedValue', () => {
+    it('should get cleaned value', () => {
+      const choiceValue = '<img src="choice1.png"/>';
+      const bucketValue = '<img src="bucket1.png"/>';
+      const componentContent = component.componentContent;
+      componentContent.choices[0].value = choiceValue;
+      componentContent.buckets[0].value = bucketValue;
+      component.originalComponentContent = JSON.parse(JSON.stringify(componentContent));
+      component.componentContent = TestBed.inject(ProjectService).injectClickToSnipImage(
+        component.componentContent
+      );
+      expect(component.componentContent.choices[0].value).toContain('onclick');
+      expect(component.componentContent.buckets[0].value).toContain('onclick');
+      expect(component.getCleanedValue(component.componentContent.choices[0])).toEqual(choiceValue);
+      expect(component.getCleanedValue(component.componentContent.buckets[0])).toEqual(bucketValue);
     });
   });
 }
