@@ -23,7 +23,7 @@ export class ChooseNewNodeTemplate {
     {
       label: $localize`Simulation`,
       description: $localize`Add an existing simulation`,
-      icon: 'personal_video',
+      icon: 'video_settings',
       route: 'root.at.project.add-node.simulation.choose-item'
     }
   ];
