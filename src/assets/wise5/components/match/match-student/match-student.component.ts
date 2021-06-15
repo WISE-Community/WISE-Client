@@ -33,7 +33,6 @@ export class MatchStudent extends ComponentStudent {
   isHorizontal: boolean = false;
   isLatestComponentStateSubmit: boolean = false;
   numChoiceColumns: number = 1;
-  originalComponentContent: any;
   privateNotebookItems: any[] = [];
   sourceBucket: any;
   sourceBucketId: string = '0';
@@ -74,10 +73,6 @@ export class MatchStudent extends ComponentStudent {
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.hasCorrectAnswer = this.hasCorrectChoices();
-    this.originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
     if (this.shouldImportPrivateNotes()) {
       this.importPrivateNotes();
     }
@@ -608,7 +603,10 @@ export class MatchStudent extends ComponentStudent {
     componentState.componentId = this.componentId;
     componentState.isSubmit = this.isSubmit;
     const studentData: any = {
-      buckets: this.cleanBuckets(this.getDeepCopyOfBuckets()),
+      buckets: this.cleanBuckets(
+        this.ProjectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId),
+        this.getDeepCopyOfBuckets()
+      ),
       submitCounter: this.submitCounter
     };
     if (action === 'submit' && this.hasCorrectAnswer) {
@@ -618,24 +616,19 @@ export class MatchStudent extends ComponentStudent {
     return componentState;
   }
 
-  cleanBuckets(buckets: any): any {
+  cleanBuckets(originalComponentContent: any, buckets: any): any {
     for (const bucket of buckets) {
-      bucket.value = this.getCleanedValue(bucket);
+      bucket.value = this.getCleanedValue(originalComponentContent, bucket);
       for (const item of bucket.items) {
-        item.value = this.getCleanedValue(item);
+        item.value = this.getCleanedValue(originalComponentContent, item);
         delete item.status;
       }
     }
     return buckets;
   }
 
-  getCleanedValue(matchObj: any): string {
-    const value = this.getValueById(this.originalComponentContent, matchObj.id);
-    if (value == null) {
-      return matchObj.value;
-    } else {
-      return value;
-    }
+  getCleanedValue(originalComponentContent: any, matchObj: any): string {
+    return this.getValueById(originalComponentContent, matchObj.id) ?? matchObj.value;
   }
 
   getValueById(componentContent: any, id: string): string {

@@ -711,14 +711,18 @@ function getCleanedValue() {
       const componentContent = component.componentContent;
       componentContent.choices[0].value = choiceValue;
       componentContent.buckets[0].value = bucketValue;
-      component.originalComponentContent = JSON.parse(JSON.stringify(componentContent));
+      const originalComponentContent = JSON.parse(JSON.stringify(componentContent));
       component.componentContent = TestBed.inject(ProjectService).injectClickToSnipImage(
         component.componentContent
       );
       expect(component.componentContent.choices[0].value).toContain('onclick');
       expect(component.componentContent.buckets[0].value).toContain('onclick');
-      expect(component.getCleanedValue(component.componentContent.choices[0])).toEqual(choiceValue);
-      expect(component.getCleanedValue(component.componentContent.buckets[0])).toEqual(bucketValue);
+      expect(
+        component.getCleanedValue(originalComponentContent, component.componentContent.choices[0])
+      ).toEqual(choiceValue);
+      expect(
+        component.getCleanedValue(originalComponentContent, component.componentContent.buckets[0])
+      ).toEqual(bucketValue);
     });
   });
 }
