@@ -616,6 +616,11 @@ export class MatchStudent extends ComponentStudent {
     return componentState;
   }
 
+  /**
+   * @param originalComponentContent The component content that has not had any additional content
+   * injected into it such as onclick attributes and absolute asset paths.
+   * @param buckets
+   */
   cleanBuckets(originalComponentContent: any, buckets: any): any {
     for (const bucket of buckets) {
       bucket.value = this.getCleanedValue(originalComponentContent, bucket);
@@ -627,6 +632,11 @@ export class MatchStudent extends ComponentStudent {
     return buckets;
   }
 
+  /**
+   * @param originalComponentContent The component content that has not had any additional content
+   * injected into it such as onclick attributes and absolute asset paths.
+   * @param matchObj
+   */
   getCleanedValue(originalComponentContent: any, matchObj: any): string {
     return this.getValueById(originalComponentContent, matchObj.id) ?? matchObj.value;
   }

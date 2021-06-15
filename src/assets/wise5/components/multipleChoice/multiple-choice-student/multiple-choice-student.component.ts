@@ -64,10 +64,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     this.componentHasCorrectAnswer = this.hasCorrectChoices();
     this.showFeedback = this.componentContent.showFeedback;
     this.choiceType = this.getChoiceType();
-    this.originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
 
     if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
       this.handleConnectedComponents();
@@ -148,8 +144,12 @@ export class MultipleChoiceStudent extends ComponentStudent {
   }
 
   showFeedbackForChoiceIds(choiceIds: string[]): void {
+    const originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
     for (const choiceId of choiceIds) {
-      const choiceObject = this.getChoiceById(choiceId);
+      const choiceObject = this.getChoiceById(originalComponentContent, choiceId);
       if (choiceObject != null) {
         choiceObject.showFeedback = true;
         choiceObject.feedbackToShow = choiceObject.feedback;
@@ -414,7 +414,11 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   getStudentChosenRadioChoice(): any[] {
     const studentChoiceObjects = [];
-    const choiceObject = this.getChoiceById(this.studentChoices);
+    const originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
+    const choiceObject = this.getChoiceById(originalComponentContent, this.studentChoices);
     if (choiceObject != null) {
       const studentChoiceObject = {
         id: choiceObject.id,
@@ -427,8 +431,12 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   getStudentChosenCheckboxChoice(): any[] {
     const studentChoiceObjects = [];
+    const originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
     for (const studentChoiceId of this.studentChoices) {
-      const choiceObject = this.getChoiceById(studentChoiceId);
+      const choiceObject = this.getChoiceById(originalComponentContent, studentChoiceId);
       if (choiceObject != null) {
         const studentChoiceObject = {
           id: choiceObject.id,
@@ -458,8 +466,13 @@ export class MultipleChoiceStudent extends ComponentStudent {
     return false;
   }
 
-  getChoiceById(choiceId: string): any {
-    for (const choice of this.originalComponentContent.choices) {
+  /**
+   * @param originalComponentContent The component content that has not had any additional content
+   * injected into it such as onclick attributes and absolute asset paths.
+   * @param choiceId
+   */
+  getChoiceById(originalComponentContent: any, choiceId: string): any {
+    for (const choice of originalComponentContent.choices) {
       if (choice.id === choiceId) {
         return choice;
       }

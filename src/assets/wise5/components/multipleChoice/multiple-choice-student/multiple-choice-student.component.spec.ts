@@ -38,6 +38,7 @@ const feedback2 = 'This is not A, this is B';
 const feedback3 = 'This is not A, this is C';
 let fixture: ComponentFixture<MultipleChoiceStudent>;
 const nodeId = 'node1';
+let originalComponentContent;
 
 describe('MultipleChoiceStudent', () => {
   configureTestSuite(() => {
@@ -70,7 +71,7 @@ describe('MultipleChoiceStudent', () => {
     });
     component = fixture.componentInstance;
     component.nodeId = nodeId;
-    const componentContent = {
+    originalComponentContent = {
       id: componentId,
       type: 'MultipleChoice',
       prompt: 'Choose A',
@@ -80,10 +81,7 @@ describe('MultipleChoiceStudent', () => {
         createComponentContentChoice(choiceId3, choiceText3, feedback3, false)
       ]
     };
-    component.componentContent = componentContent;
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
-    );
+    component.componentContent = JSON.parse(JSON.stringify(originalComponentContent));
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
@@ -118,9 +116,15 @@ function getChoiceById() {
         component.componentContent
       );
       expect(component.componentContent.choices[2].text).toContain('onclick');
-      expect(component.getChoiceById(choiceId1).text).toEqual(choiceText1);
-      expect(component.getChoiceById(choiceId2).text).toEqual(choiceText2);
-      expect(component.getChoiceById(choiceId3).text).toEqual(choiceText3);
+      expect(component.getChoiceById(originalComponentContent, choiceId1).text).toEqual(
+        choiceText1
+      );
+      expect(component.getChoiceById(originalComponentContent, choiceId2).text).toEqual(
+        choiceText2
+      );
+      expect(component.getChoiceById(originalComponentContent, choiceId3).text).toEqual(
+        choiceText3
+      );
     });
   });
 }
