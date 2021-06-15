@@ -2494,18 +2494,10 @@ export class TeacherProjectService extends ProjectService {
     return maxScore;
   }
 
-  /**
-   * Set the max score for a component
-   * @param nodeId set the max score from a component in this node
-   * @param componentId set the max score from this component
-   * @param maxScore set it to this maxScore
-   */
-  setMaxScoreForComponent(nodeId, componentId, maxScore) {
-    if (nodeId != null && componentId != null && maxScore != null && typeof maxScore === 'number') {
-      let component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
-      if (component != null) {
-        component.maxScore = maxScore;
-      }
+  setMaxScoreForComponent(nodeId: string, componentId: string, maxScore: number): void {
+    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    if (component != null) {
+      component.maxScore = maxScore;
     }
   }
 
