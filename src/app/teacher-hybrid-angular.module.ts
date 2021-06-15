@@ -47,6 +47,7 @@ import { EditComponentSaveButtonComponent } from './authoring-tool/edit-componen
 import { EditComponentSubmitButtonComponent } from './authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentTagsComponent } from './authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from './authoring-tool/edit-component-width/edit-component-width.component';
+import { GradingEditComponentMaxScoreComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/grading-edit-component-max-score/grading-edit-component-max-score.component';
 import { RubricAuthoringComponent } from '../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { NavItemProgressComponent } from './classroom-monitor/nav-item-progress/nav-item-progress.component';
 import { WorkgroupSelectDropdownComponent } from './classroom-monitor/workgroup-select/workgroup-select-dropdown/workgroup-select-dropdown.component';
@@ -122,6 +123,7 @@ import { InsertNodesService } from '../assets/wise5/services/insertNodesService'
     EditOutsideUrlAdvancedComponent,
     EmbeddedAuthoring,
     EmbeddedGrading,
+    GradingEditComponentMaxScoreComponent,
     GraphAuthoring,
     GraphGrading,
     HtmlAuthoring,

@@ -1,55 +1,53 @@
-<div class="main-div">
-  <component-header [componentContent]="componentContent"></component-header>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" class="interaction-div">
-    <mat-form-field *ngIf="oscillatorTypes.length > 1" class="oscillator-type">
-      <mat-label i18n>Oscillator Type</mat-label>
-      <mat-select [(ngModel)]="oscillatorType"
-          (ngModelChange)="refreshOscilloscope()"
-          [disabled]="isDisabled">
-        <mat-option *ngFor="let oscillatorType of oscillatorTypes"
-            [value]="oscillatorType">
-          {{oscillatorType}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="frequency">
-      <mat-label i18n>Frequency (Hz)</mat-label>
-      <input matInput
-          type="number"
-          [(ngModel)]="frequency"
-          (ngModelChange)="refreshOscilloscope()"
-          [disabled]="isDisabled"/>
-    </mat-form-field>
-    <button
-        mat-button
-        class="mat-primary mat-raised-button"
-        (click)="togglePlay()"
-        [disabled]="isDisabled"
-        matTooltip="{{playStopButtonText}}"
-        matTooltipPosition="above">
-      <mat-icon *ngIf="!isPlaying">play_arrow</mat-icon>
-      <mat-icon *ngIf="isPlaying">stop</mat-icon>
-    </button>
-  </div>
-  <canvas id="{{oscilloscopeId}}"
-      width={{oscilloscopeWidth}}
-      height={{oscilloscopeHeight}}
-      class="oscillator-canvas">
-  </canvas>
-  <component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
-      [isDirty]="isDirty"
-      [isDisabled]="isDisabled"
-      [isSaveButtonVisible]="isSaveButtonVisible"
-      [isSubmitButtonVisible]="isSubmitButtonVisible"
-      [isSubmitDirty]="isSubmitDirty"
-      [saveMessage]="saveMessage"
-      (saveButtonClicked)="saveButtonClicked($event)"
-      (submitButtonClicked)="submitButtonClicked($event)">
-  </component-save-submit-buttons>
-  <component-annotations *ngIf="mode === 'student'"
-      [annotations]="latestAnnotations"
-      [maxScore]="componentContent.maxScore"
-      [nodeId]="nodeId"
-      [componentId]="componentId">
-  </component-annotations>
+<component-header [componentContent]="componentContent"></component-header>
+<div fxLayout="row wrap" fxLayoutAlign="start center" class="interaction-div">
+  <mat-form-field *ngIf="oscillatorTypes.length > 1" class="oscillator-type">
+    <mat-label i18n>Oscillator Type</mat-label>
+    <mat-select [(ngModel)]="oscillatorType"
+        (ngModelChange)="refreshOscilloscope()"
+        [disabled]="isDisabled">
+      <mat-option *ngFor="let oscillatorType of oscillatorTypes"
+          [value]="oscillatorType">
+        {{oscillatorType}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="frequency">
+    <mat-label i18n>Frequency (Hz)</mat-label>
+    <input matInput
+        type="number"
+        [(ngModel)]="frequency"
+        (ngModelChange)="refreshOscilloscope()"
+        [disabled]="isDisabled"/>
+  </mat-form-field>
+  <button
+      mat-button
+      class="mat-primary mat-raised-button"
+      (click)="togglePlay()"
+      [disabled]="isDisabled"
+      matTooltip="{{playStopButtonText}}"
+      matTooltipPosition="above">
+    <mat-icon *ngIf="!isPlaying">play_arrow</mat-icon>
+    <mat-icon *ngIf="isPlaying">stop</mat-icon>
+  </button>
 </div>
+<canvas id="{{oscilloscopeId}}"
+    width={{oscilloscopeWidth}}
+    height={{oscilloscopeHeight}}
+    class="oscillator-canvas">
+</canvas>
+<component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    [saveMessage]="saveMessage"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)">
+</component-save-submit-buttons>
+<component-annotations *ngIf="mode === 'student'"
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId">
+</component-annotations>

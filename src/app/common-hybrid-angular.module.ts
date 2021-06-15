@@ -65,6 +65,7 @@ import { ClassResponse } from '../assets/wise5/components/discussion/class-respo
 import { ComponentService } from '../assets/wise5/components/componentService';
 import { WiseLinkService } from './services/wiseLinkService';
 import { DataExportService } from '../assets/wise5/services/dataExportService';
+import { DragulaService } from 'ng2-dragula';
 import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
 
@@ -121,6 +122,7 @@ export class EmptyComponent {}
     CRaterService,
     DataExportService,
     DiscussionService,
+    DragulaService,
     DrawService,
     EmbeddedService,
     GraphService,

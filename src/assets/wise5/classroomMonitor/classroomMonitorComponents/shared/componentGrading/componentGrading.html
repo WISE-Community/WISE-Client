@@ -18,17 +18,9 @@
                    ng-model-options="{ debounce: 1000 }">
         </md-input-container>
         <span> / </span>
-        <md-input-container class="md-no-float annotations--grading__score__max" layout="row" layout-align="start-center">
-            <label class="input-label md-no-float annotations--grading__score__label">{{ ::'MAX' | translate }}</label>
-            <input aria-label="{{ ::'MAX_SCORE' | translate }}"
-                   type="number"
-                   placeholder="0"
-                   min="0"
-                   ng-model="$ctrl.maxScore"
-                   ng-disabled="$ctrl.isDisabled || !$ctrl.canAuthorProject"
-                   ng-change="$ctrl.updateMaxScore()"
-                   ng-model-options="{ debounce: 1000 }">
-        </md-input-container>
+        <grading-edit-component-max-score [node-id]="$ctrl.nodeId"
+            [component-id]="$ctrl.componentId"
+            [disabled]="$ctrl.isDisabled || !$ctrl.canAuthorProject"></grading-edit-component-max-score>
     </div>
     <div ng-show="$ctrl.edit || !$ctrl.showAutoComment()" class="annotations--grading__item">
         <md-input-container class="input-container md-block md-no-float" flex>
@@ -74,14 +66,9 @@
                        ng-disabled="true">
             </md-input-container>
             <span> / </span>
-            <md-input-container class="md-no-float annotations--grading__score__max" layout="row" layout-align="start-center">
-                <label class="input-label md-no-float annotations--grading__score__label">{{ ::'MAX' | translate }}</label>
-                <input aria-label="{{ ::'MAX_SCORE' | translate }}"
-                       type="number"
-                       placeholder="0"
-                       ng-model="$ctrl.maxScore"
-                       ng-disabled="true">
-            </md-input-container>
+            <grading-edit-component-max-score [node-id]="$ctrl.nodeId"
+                [component-id]="$ctrl.componentId"
+                [disabled]="true"></grading-edit-component-max-score>
         </div>
         <div ng-if="$ctrl.latestAnnotations.comment" class="annotations--grading__item">
             <md-input-container class="input-container md-block md-no-float"
@@ -113,14 +100,9 @@
                        ng-disabled="true">
             </md-input-container>
             <span> / </span>
-            <md-input-container class="md-no-float annotations--grading__score__max" layout="row" layout-align="start-center">
-                <label class="input-label md-no-float annotations--grading__score__label">{{ ::'MAX' | translate }}</label>
-                <input aria-label="{{ ::'MAX_SCORE' | translate }}"
-                       type="number"
-                       placeholder="0"
-                       ng-model="$ctrl.maxScore"
-                       ng-disabled="true">
-            </md-input-container>
+            <grading-edit-component-max-score [node-id]="$ctrl.nodeId"
+              [component-id]="$ctrl.componentId"
+              [disabled]="true"></grading-edit-component-max-score>
         </div>
         <div class="annotations--grading__item annotations--grading__auto-comment" ng-if="$ctrl.latestAnnotations.autoComment">
             <div class="heavy md-no-float">{{ ::'AUTO_COMMENT' | translate }}:</div>

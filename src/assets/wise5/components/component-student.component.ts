@@ -51,7 +51,7 @@ export abstract class ComponentStudent {
   parentStudentWorkIds: any[];
   saveMessage = {
     text: '',
-    time: ''
+    time: null
   };
   showAddToNotebookButton: boolean;
   requestComponentStateSubscription: Subscription;
@@ -418,6 +418,10 @@ export abstract class ComponentStudent {
     return this.getNumberOfSubmitsLeft() <= 0;
   }
 
+  hasMaxSubmitCountAndUsedAllSubmits() {
+    return this.hasMaxSubmitCount() && this.hasUsedAllSubmits();
+  }
+
   getNumberOfSubmitsLeft(): number {
     return this.getMaxSubmitCount() - this.submitCounter;
   }
@@ -521,20 +525,20 @@ export abstract class ComponentStudent {
     this.setSaveText('', null);
   }
 
-  setSaveText(message: string, time: string): void {
+  setSaveText(message: string, time: number): void {
     this.saveMessage.text = message;
     this.saveMessage.time = time;
   }
 
-  setSavedMessage(time: string): void {
+  setSavedMessage(time: number): void {
     this.setSaveText($localize`Saved`, time);
   }
 
-  setAutoSavedMessage(time: string): void {
+  setAutoSavedMessage(time: number): void {
     this.setSaveText($localize`Auto Saved`, time);
   }
 
-  setSubmittedMessage(time: string): void {
+  setSubmittedMessage(time: number): void {
     this.setSaveText($localize`Submitted`, time);
   }
 
@@ -661,4 +665,8 @@ export abstract class ComponentStudent {
   }
 
   setBackgroundImage(image: string): void {}
+
+  getClientSaveTime(componentState: any): number {
+    return this.ConfigService.convertToClientTimestamp(componentState.serverSaveTime);
+  }
 }
