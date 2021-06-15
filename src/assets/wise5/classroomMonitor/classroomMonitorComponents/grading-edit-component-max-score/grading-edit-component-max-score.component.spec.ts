@@ -8,6 +8,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ConfigService } from '../../../services/configService';
 import { SessionService } from '../../../services/sessionService';
+import { CopyNodesService } from '../../../services/copyNodesService';
 
 let component: GradingEditComponentMaxScoreComponent;
 let fixture: ComponentFixture<GradingEditComponentMaxScoreComponent>;
@@ -24,6 +25,7 @@ describe('GradingEditComponentMaxScoreComponent', () => {
       declarations: [GradingEditComponentMaxScoreComponent],
       providers: [
         { provide: ConfigService, useClass: MockService },
+        CopyNodesService,
         { provide: SessionService, useClass: MockService },
         TeacherProjectService,
         UtilService
