@@ -6,6 +6,7 @@ import { SpaceService } from '../../assets/wise5/services/spaceService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
+import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 let service: SpaceService;
 let teacherProjectService: TeacherProjectService;
 
@@ -13,7 +14,14 @@ describe('SpaceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [ConfigService, TeacherProjectService, SessionService, SpaceService, UtilService]
+      providers: [
+        ConfigService,
+        CopyNodesService,
+        TeacherProjectService,
+        SessionService,
+        SpaceService,
+        UtilService
+      ]
     });
     teacherProjectService = TestBed.get(TeacherProjectService);
     service = TestBed.get(SpaceService);

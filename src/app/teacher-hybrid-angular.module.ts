@@ -84,6 +84,8 @@ import { AnimationGrading } from '../assets/wise5/components/animation/animation
 import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
 import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
 import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
+import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
+import { InsertNodesService } from '../assets/wise5/services/insertNodesService';
 
 @NgModule({
   declarations: [
@@ -158,7 +160,9 @@ import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-
   ],
   imports: [AngularJSModule, HighchartsChartModule, DragDropModule, RouterModule],
   providers: [
+    CopyNodesService,
     { provide: DataService, useExisting: TeacherDataService },
+    InsertNodesService,
     MilestoneService,
     ProjectAssetService,
     SpaceService,
