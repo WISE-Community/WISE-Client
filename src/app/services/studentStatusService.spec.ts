@@ -25,9 +25,9 @@ describe('StudentStatusService', () => {
         UtilService
       ]
     });
-    http = TestBed.get(HttpTestingController);
-    service = TestBed.get(StudentStatusService);
-    configService = TestBed.get(ConfigService);
+    http = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(StudentStatusService);
+    configService = TestBed.inject(ConfigService);
   });
   retrieveStudentStatuses();
 });
@@ -40,16 +40,29 @@ function retrieveStudentStatuses() {
 
 function retrieveStudentStatuses_SetStudentStatuses() {
   it('retrieve and set student statuses for current run', () => {
-    const currentRunId = 1;
+    const runId = 1;
+    const workgroup2Id = 2;
     const statusPostTimestamp = 12345;
-    spyOn(configService, 'getRunId').and.returnValue(currentRunId);
-    const retrieveStudentStatusesURL = `/api/teacher/run/${currentRunId}/student-status`;
-    const statusesExpected = [
-      { timestamp: statusPostTimestamp, status: `{"runId":${currentRunId}}` }
-    ];
-    service.retrieveStudentStatuses().then((response) => {
-      expect(response.length).toEqual(1);
-    });
-    http.expectOne(retrieveStudentStatusesURL).flush(statusesExpected);
+    const workgroupsInRun = [{ workgroupId: workgroup2Id }];
+    spyOn(configService, 'getRunId').and.returnValue(runId);
+    spyOn(configService, 'getClassmateUserInfos').and.returnValue(workgroupsInRun);
+    service.retrieveStudentStatuses();
+    http.expectOne(`/api/teacher/run/${runId}/student-status`).flush([
+      {
+        status: `{"runId": ${runId}, "workgroupId": ${workgroup2Id}}`,
+        timestamp: statusPostTimestamp,
+        workgroupId: workgroup2Id
+      },
+      {
+        status: -1,
+        timestamp: -1,
+        workgroupId: -1
+      }
+    ]);
+    expect(configService.getRunId).toHaveBeenCalled();
+    expect(configService.getClassmateUserInfos).toHaveBeenCalled();
+    expect(service.studentStatuses.length).toEqual(1);
+    expect(service.studentStatuses[0].workgroupId).toEqual(workgroup2Id);
+    expect(service.studentStatuses[0].postTimestamp).toEqual(statusPostTimestamp);
   });
 }

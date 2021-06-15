@@ -5,7 +5,6 @@ import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { UtilService } from '../../../../services/utilService';
 import * as angular from 'angular';
-import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { Directive } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -23,7 +22,6 @@ class ComponentGradingController {
   fromWorkgroupId: number;
   latestAnnotations: any;
   latestAnnotationTime: any;
-  maxScore: any;
   nodeId: string;
   periodId: number;
   runId: number;
@@ -38,7 +36,6 @@ class ComponentGradingController {
     '$timeout',
     'AnnotationService',
     'ConfigService',
-    'ProjectService',
     'TeacherDataService',
     'UtilService'
   ];
@@ -48,7 +45,6 @@ class ComponentGradingController {
     private $timeout: any,
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
-    private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService,
     private UtilService: UtilService
   ) {
@@ -64,10 +60,6 @@ class ComponentGradingController {
         }
       }
     );
-
-    this.$scope.$on('projectSaved', (event, args) => {
-      this.maxScore = this.ProjectService.getMaxScoreForComponent(this.nodeId, this.componentId);
-    });
 
     this.$scope.$on('$destroy', () => {
       this.ngOnDestroy();
@@ -90,11 +82,6 @@ class ComponentGradingController {
   }
 
   $onChanges(changes) {
-    if (changes.maxScore) {
-      this.maxScore =
-        typeof changes.maxScore.currentValue === 'number' ? changes.maxScore.currentValue : 0;
-    }
-
     this.componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
       this.toWorkgroupId,
       this.componentId
@@ -292,28 +279,6 @@ class ComponentGradingController {
   }
 
   /**
-   * Save the maxScore of this component to the server
-   */
-  updateMaxScore() {
-    if (
-      this.runId != null &&
-      this.periodId != null &&
-      this.nodeId != null &&
-      this.componentId != null
-    ) {
-      // get the new maxScore
-      let maxScore = this.maxScore;
-      // convert to number if possible
-      maxScore = this.UtilService.convertStringToNumber(maxScore);
-
-      if (typeof maxScore === 'number' && maxScore >= 0) {
-        this.ProjectService.setMaxScoreForComponent(this.nodeId, this.componentId, maxScore);
-        this.ProjectService.saveProject();
-      }
-    }
-  }
-
-  /**
    * Shows (or hides) the teacher comment field when user wants to override an automated comment
    */
   editComment() {
@@ -348,7 +313,6 @@ const ComponentGrading = {
     componentStateId: '<',
     isDisabled: '<',
     fromWorkgroupId: '<',
-    maxScore: '<',
     nodeId: '<',
     showAllAnnotations: '<',
     toWorkgroupId: '<'

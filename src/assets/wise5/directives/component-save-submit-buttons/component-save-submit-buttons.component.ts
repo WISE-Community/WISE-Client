@@ -16,6 +16,9 @@ export class ComponentSaveSubmitButtons {
   isSaveButtonVisible: boolean;
 
   @Input()
+  isSubmitButtonDisabled: boolean;
+
+  @Input()
   isSubmitButtonVisible: boolean;
 
   @Input()

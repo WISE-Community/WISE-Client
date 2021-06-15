@@ -1,80 +1,78 @@
-<div class="main-div" #main>
-  <div [ngSwitch]="choiceType">
-    <component-header [componentContent]="componentContent"></component-header>
-    <mat-radio-group *ngSwitchCase="'radio'"
-        [(ngModel)]="studentChoices"
-        (ngModelChange)="studentDataChanged()">
-      <div *ngFor="let choice of choices">
-        <mat-radio-button
-            aria-label="choice.text"
-            color="primary"
-            [value]="choice.id"
-            (click)="radioChoiceSelected(choice.id)"
-            [disabled]="isDisabled">
-          <span [innerHTML]="choice.text">
-          </span>
-          <span *ngIf="showFeedback && choice.showFeedback"
-              [ngClass]="{'success': componentHasCorrectAnswer && choice.isCorrect, 'warn': componentHasCorrectAnswer && !choice.isCorrect, 'info': !componentHasCorrectAnswer}">
-              {{ choice.feedbackToShow }}
-          </span>
-        </mat-radio-button>
-      </div>
-    </mat-radio-group>
-    <div *ngSwitchCase="'checkbox'">
-      <div *ngFor="let choice of choices">
-        <mat-checkbox
-            [(ngModel)]="choice.isChecked"
-            (click)="checkboxClicked(choice.id)"
-            [disabled]="isDisabled"
-            aria-label="choice.text"
-            color="primary">
-          <span [innerHTML]="choice.text">
-          </span>
-          <span *ngIf="choice.showFeedback"
-              [ngClass]="{'success': componentHasCorrectAnswer && choice.isCorrect, 'warn': componentHasCorrectAnswer && !choice.isCorrect, 'info': !componentHasCorrectAnswer}">
-              {{ choice.feedbackToShow }}
-          </span>
-        </mat-checkbox>
-      </div>
+<div [ngSwitch]="choiceType">
+  <component-header [componentContent]="componentContent"></component-header>
+  <mat-radio-group *ngSwitchCase="'radio'"
+      [(ngModel)]="studentChoices"
+      (ngModelChange)="studentDataChanged()">
+    <div *ngFor="let choice of choices">
+      <mat-radio-button
+          aria-label="choice.text"
+          color="primary"
+          [value]="choice.id"
+          (click)="radioChoiceSelected(choice.id)"
+          [disabled]="isDisabled">
+        <span [innerHTML]="choice.text">
+        </span>
+        <span *ngIf="showFeedback && choice.showFeedback"
+            [ngClass]="{'success': componentHasCorrectAnswer && choice.isCorrect, 'warn': componentHasCorrectAnswer && !choice.isCorrect, 'info': !componentHasCorrectAnswer}">
+            {{ choice.feedbackToShow }}
+        </span>
+      </mat-radio-button>
     </div>
-    <div class="attempts-left-message"
-        *ngIf="componentHasCorrectAnswer && componentContent.maxSubmitCount != null && componentContent.maxSubmitCount === 1"
-        i18n>
-      You have used {{ submitCounter }} of {{ componentContent.maxSubmitCount}} attempt
-    </div>
-    <div class="attempts-left-message"
-        *ngIf="componentHasCorrectAnswer && componentContent.maxSubmitCount != null && componentContent.maxSubmitCount > 1"
-        i18n>
-      You have used {{ submitCounter }} of {{ componentContent.maxSubmitCount }} attempts
-    </div>
-    <div *ngIf="!isLatestComponentStateSubmit || !componentHasCorrectAnswer || !showFeedback">
-      <br/>
-    </div>
-    <div *ngIf="componentHasCorrectAnswer && isLatestComponentStateSubmit && showFeedback && isCorrect != null && isCorrect"
-        class="correct-text"
-        i18n>
-      Correct
-    </div>
-    <div *ngIf="componentHasCorrectAnswer && isLatestComponentStateSubmit && showFeedback && isCorrect != null && !isCorrect"
-        class="incorrect-text"
-        i18n>
-      Incorrect
+  </mat-radio-group>
+  <div *ngSwitchCase="'checkbox'">
+    <div *ngFor="let choice of choices">
+      <mat-checkbox
+          [(ngModel)]="choice.isChecked"
+          (click)="checkboxClicked(choice.id)"
+          [disabled]="isDisabled"
+          aria-label="choice.text"
+          color="primary">
+        <span [innerHTML]="choice.text">
+        </span>
+        <span *ngIf="choice.showFeedback"
+            [ngClass]="{'success': componentHasCorrectAnswer && choice.isCorrect, 'warn': componentHasCorrectAnswer && !choice.isCorrect, 'info': !componentHasCorrectAnswer}">
+            {{ choice.feedbackToShow }}
+        </span>
+      </mat-checkbox>
     </div>
   </div>
-  <component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
-      [isDirty]="isDirty"
-      [isDisabled]="isDisabled"
-      [isSaveButtonVisible]="isSaveButtonVisible"
-      [isSubmitButtonVisible]="isSubmitButtonVisible"
-      [isSubmitDirty]="isSubmitDirty"
-      [saveMessage]="saveMessage"
-      (saveButtonClicked)="saveButtonClicked($event)"
-      (submitButtonClicked)="submitButtonClicked($event)">
-  </component-save-submit-buttons>
-  <component-annotations *ngIf="mode === 'student'"
-      [annotations]="latestAnnotations"
-      [maxScore]="componentContent.maxScore"
-      [nodeId]="nodeId"
-      [componentId]="componentId">
-  </component-annotations>
+  <div class="attempts-left-message"
+      *ngIf="componentHasCorrectAnswer && componentContent.maxSubmitCount != null && componentContent.maxSubmitCount === 1"
+      i18n>
+    You have used {{ submitCounter }} of {{ componentContent.maxSubmitCount}} attempt
+  </div>
+  <div class="attempts-left-message"
+      *ngIf="componentHasCorrectAnswer && componentContent.maxSubmitCount != null && componentContent.maxSubmitCount > 1"
+      i18n>
+    You have used {{ submitCounter }} of {{ componentContent.maxSubmitCount }} attempts
+  </div>
+  <div *ngIf="!isLatestComponentStateSubmit || !componentHasCorrectAnswer || !showFeedback">
+    <br/>
+  </div>
+  <div *ngIf="componentHasCorrectAnswer && isLatestComponentStateSubmit && showFeedback && isCorrect != null && isCorrect"
+      class="correct-text"
+      i18n>
+    Correct
+  </div>
+  <div *ngIf="componentHasCorrectAnswer && isLatestComponentStateSubmit && showFeedback && isCorrect != null && !isCorrect"
+      class="incorrect-text"
+      i18n>
+    Incorrect
+  </div>
 </div>
+<component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    [saveMessage]="saveMessage"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)">
+</component-save-submit-buttons>
+<component-annotations *ngIf="mode === 'student'"
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId">
+</component-annotations>

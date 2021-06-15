@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { UtilService } from '../../../assets/wise5/services/utilService';

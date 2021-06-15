@@ -70,6 +70,7 @@ export class DrawStudent extends ComponentStudent {
   }
 
   initializeDrawingTool(): void {
+    this.setWidthAndHeight();
     this.drawingTool = this.DrawService.initializeDrawingTool(
       this.drawingToolId,
       this.componentContent.stamps,
@@ -91,6 +92,15 @@ export class DrawStudent extends ComponentStudent {
     }
 
     this.broadcastDoneRenderingComponent();
+  }
+
+  setWidthAndHeight(): void {
+    if (this.componentContent.width != null) {
+      this.width = this.componentContent.width;
+    }
+    if (this.componentContent.height != null) {
+      this.height = this.componentContent.height;
+    }
   }
 
   initializeStudentData(): void {

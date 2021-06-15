@@ -41,9 +41,13 @@ import { WiseAuthoringTinymceEditorComponent } from '../assets/wise5/directives/
 import { EditComponentExcludeFromTotalScoreComponent } from './authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
 import { EditComponentJsonComponent } from './authoring-tool/edit-component-json/edit-component-json.component';
 import { EditComponentMaxScoreComponent } from './authoring-tool/edit-component-max-score/edit-component-max-score.component';
+import { EditComponentPrompt } from './authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { EditComponentRubricComponent } from './authoring-tool/edit-component-rubric/edit-component-rubric.component';
+import { EditComponentSaveButtonComponent } from './authoring-tool/edit-component-save-button/edit-component-save-button.component';
+import { EditComponentSubmitButtonComponent } from './authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentTagsComponent } from './authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from './authoring-tool/edit-component-width/edit-component-width.component';
+import { GradingEditComponentMaxScoreComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/grading-edit-component-max-score/grading-edit-component-max-score.component';
 import { RubricAuthoringComponent } from '../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { NavItemProgressComponent } from './classroom-monitor/nav-item-progress/nav-item-progress.component';
 import { WorkgroupSelectDropdownComponent } from './classroom-monitor/workgroup-select/workgroup-select-dropdown/workgroup-select-dropdown.component';
@@ -80,6 +84,8 @@ import { AnimationGrading } from '../assets/wise5/components/animation/animation
 import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
 import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
 import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
+import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
+import { InsertNodesService } from '../assets/wise5/services/insertNodesService';
 
 @NgModule({
   declarations: [
@@ -108,12 +114,16 @@ import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-
     EditComponentRubricComponent,
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
+    EditComponentPrompt,
     EditComponentTagsComponent,
+    EditComponentSaveButtonComponent,
+    EditComponentSubmitButtonComponent,
     EditComponentWidthComponent,
     EditHTMLAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EmbeddedAuthoring,
     EmbeddedGrading,
+    GradingEditComponentMaxScoreComponent,
     GraphAuthoring,
     GraphGrading,
     HtmlAuthoring,
@@ -150,7 +160,9 @@ import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-
   ],
   imports: [AngularJSModule, HighchartsChartModule, DragDropModule, RouterModule],
   providers: [
+    CopyNodesService,
     { provide: DataService, useExisting: TeacherDataService },
+    InsertNodesService,
     MilestoneService,
     ProjectAssetService,
     SpaceService,

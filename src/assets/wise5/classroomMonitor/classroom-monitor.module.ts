@@ -25,7 +25,7 @@ export default angular
     'milestones',
     'nodeGrading',
     'nodeProgress',
-    'notebook',
+    'notebookGrading',
     'studentGrading',
     'studentProgress'
   ])

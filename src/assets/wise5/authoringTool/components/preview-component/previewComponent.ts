@@ -50,7 +50,7 @@ class PreviewComponentController {
   compileComponent() {
     this.$scope.componentContent = this.ProjectService.injectAssetPaths(this.componentContent);
     const componentHTML = `<div ng-switch="type" class="component__wrapper">
-          <div ng-switch-when="AudioOscillator|ConceptMap|Draw|HTML|Label|MultipleChoice|OutsideURL" ng-switch-when-separator="|">
+          <div ng-switch-when="AudioOscillator|ConceptMap|Draw|HTML|Label|Match|MultipleChoice|OutsideURL" ng-switch-when-separator="|">
             <audio-oscillator-student ng-if="type === 'AudioOscillator'"
                 [node-id]="nodeId"
                 [component-content]="componentContent"
@@ -76,6 +76,11 @@ class PreviewComponentController {
                 [component-content]="componentContent"
                 [mode]="mode">
             </label-student>
+            <match-student ng-if="type === 'Match'"
+                [node-id]="nodeId"
+                [component-content]="componentContent"
+                [mode]="mode">
+            </match-student>
             <multiple-choice-student ng-if="type === 'MultipleChoice'"
                 [node-id]="nodeId"
                 [component-content]="componentContent"

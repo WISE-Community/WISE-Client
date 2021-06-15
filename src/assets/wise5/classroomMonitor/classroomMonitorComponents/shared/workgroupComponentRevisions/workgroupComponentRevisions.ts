@@ -266,7 +266,6 @@ const WorkgroupComponentRevisions = {
                                 <div flex="100" flex-gt-sm="33" class="component--grading__annotations">
                                   <component-grading node-id="::$ctrl.nodeId"
                                       component-id="::$ctrl.componentId"
-                                      max-score="componentContent.maxScore"
                                       from-workgroup-id="::$ctrl.fromWorkgroupId"
                                       to-workgroup-id="$ctrl.workgroupId"
                                       component-state-id="item.componentState.id"

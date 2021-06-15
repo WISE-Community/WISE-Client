@@ -27,6 +27,7 @@ class NodeController {
     'ConceptMap',
     'Draw',
     'Label',
+    'Match',
     'MultipleChoice'
   ];
   dirtyComponentIds: any = [];
