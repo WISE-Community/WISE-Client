@@ -13,6 +13,7 @@ import { MatchService } from '../matchService';
 import { DragulaService } from 'ng2-dragula';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMatchChoiceDialog } from './add-match-choice-dialog/add-match-choice-dialog';
+import { ProjectService } from '../../../services/projectService';
 
 @Component({
   selector: 'match-student',
@@ -45,6 +46,7 @@ export class MatchStudent extends ComponentStudent {
     private MatchService: MatchService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected upgrade: UpgradeModule,
@@ -601,7 +603,10 @@ export class MatchStudent extends ComponentStudent {
     componentState.componentId = this.componentId;
     componentState.isSubmit = this.isSubmit;
     const studentData: any = {
-      buckets: this.removeStatusFromBucketItems(this.getDeepCopyOfBuckets()),
+      buckets: this.cleanBuckets(
+        this.ProjectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId),
+        this.getDeepCopyOfBuckets()
+      ),
       submitCounter: this.submitCounter
     };
     if (action === 'submit' && this.hasCorrectAnswer) {
@@ -611,13 +616,43 @@ export class MatchStudent extends ComponentStudent {
     return componentState;
   }
 
-  removeStatusFromBucketItems(buckets: any): any {
+  /**
+   * @param originalComponentContent The component content that has not had any additional content
+   * injected into it such as onclick attributes and absolute asset paths.
+   * @param buckets
+   */
+  cleanBuckets(originalComponentContent: any, buckets: any): any {
     for (const bucket of buckets) {
+      bucket.value = this.getCleanedValue(originalComponentContent, bucket);
       for (const item of bucket.items) {
+        item.value = this.getCleanedValue(originalComponentContent, item);
         delete item.status;
       }
     }
     return buckets;
+  }
+
+  /**
+   * @param originalComponentContent The component content that has not had any additional content
+   * injected into it such as onclick attributes and absolute asset paths.
+   * @param matchObj
+   */
+  getCleanedValue(originalComponentContent: any, matchObj: any): string {
+    return this.getValueById(originalComponentContent, matchObj.id) ?? matchObj.value;
+  }
+
+  getValueById(componentContent: any, id: string): string {
+    for (const bucket of componentContent.buckets) {
+      if (bucket.id === id) {
+        return bucket.value;
+      }
+    }
+    for (const choice of componentContent.choices) {
+      if (choice.id === id) {
+        return choice.value;
+      }
+    }
+    return null;
   }
 
   hasCorrectChoices(): boolean {
