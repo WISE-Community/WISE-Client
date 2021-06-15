@@ -47,6 +47,7 @@ import { EditComponentSaveButtonComponent } from './authoring-tool/edit-componen
 import { EditComponentSubmitButtonComponent } from './authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentTagsComponent } from './authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from './authoring-tool/edit-component-width/edit-component-width.component';
+import { GradingEditComponentMaxScoreComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/grading-edit-component-max-score/grading-edit-component-max-score.component';
 import { RubricAuthoringComponent } from '../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { NavItemProgressComponent } from './classroom-monitor/nav-item-progress/nav-item-progress.component';
 import { WorkgroupSelectDropdownComponent } from './classroom-monitor/workgroup-select/workgroup-select-dropdown/workgroup-select-dropdown.component';
@@ -83,6 +84,8 @@ import { AnimationGrading } from '../assets/wise5/components/animation/animation
 import { EmbeddedGrading } from '../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
 import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
 import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
+import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
+import { InsertNodesService } from '../assets/wise5/services/insertNodesService';
 
 @NgModule({
   declarations: [
@@ -120,6 +123,7 @@ import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-
     EditOutsideUrlAdvancedComponent,
     EmbeddedAuthoring,
     EmbeddedGrading,
+    GradingEditComponentMaxScoreComponent,
     GraphAuthoring,
     GraphGrading,
     HtmlAuthoring,
@@ -156,7 +160,9 @@ import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-
   ],
   imports: [AngularJSModule, HighchartsChartModule, DragDropModule, RouterModule],
   providers: [
+    CopyNodesService,
     { provide: DataService, useExisting: TeacherDataService },
+    InsertNodesService,
     MilestoneService,
     ProjectAssetService,
     SpaceService,
