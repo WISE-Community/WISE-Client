@@ -620,19 +620,19 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">212</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">201</context>
+          <context context-type="linenumber">215</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
@@ -676,19 +676,19 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">139</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">223</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">212</context>
+          <context context-type="linenumber">226</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -736,19 +736,19 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">146</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">149</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">219</context>
+          <context context-type="linenumber">233</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">222</context>
+          <context context-type="linenumber">236</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
@@ -9084,7 +9084,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">87</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
@@ -9128,15 +9128,15 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">95</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">98</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
@@ -9766,7 +9766,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Background Image (Optional)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
@@ -9778,19 +9778,27 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Background Image (Optional)</target>
       </trans-unit>
-      <trans-unit id="d63d6215608fa83637b7cfc6dc6a4d92b6ad11ef" datatype="html">
-        <source> Stretch Background </source>
+      <trans-unit id="8826edcfc6401bd828595e349d2a560cf84e8613" datatype="html">
+        <source> Stretch background to fit </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">25,26</context>
         </context-group>
-        <target state="needs-translation"> Stretch Background </target>
+        <target state="needs-translation"> Stretch background to fit </target>
+      </trans-unit>
+      <trans-unit id="d23ca7ec1129194cd7886fb73832a19ce4e00354" datatype="html">
+        <source> Allow student to upload background image </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+        <target state="needs-translation"> Allow student to upload background image </target>
       </trans-unit>
       <trans-unit id="24a6439d05a766062a67a2c2797c3d46e0b14cb1" datatype="html">
         <source>Canvas Width (Optional)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <target state="needs-translation">Canvas Width (Optional)</target>
       </trans-unit>
@@ -9798,7 +9806,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Canvas Height (Optional)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
@@ -9810,7 +9818,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Nodes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <target state="needs-translation">Nodes</target>
       </trans-unit>
@@ -9818,11 +9826,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Add Node</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <target state="needs-translation">Add Node</target>
       </trans-unit>
@@ -9830,7 +9838,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>There are no nodes. Click the &quot;Add Node&quot; button to add a node.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <target state="needs-translation">There are no nodes. Click the "Add Node" button to add a node.</target>
       </trans-unit>
@@ -9838,7 +9846,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Node Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <target state="needs-translation">Node Label</target>
       </trans-unit>
@@ -9846,7 +9854,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Width</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">105</context>
         </context-group>
         <target state="needs-translation">Width</target>
       </trans-unit>
@@ -9854,7 +9862,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Height</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">112</context>
         </context-group>
         <target state="needs-translation">Height</target>
       </trans-unit>
@@ -9862,15 +9870,23 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Show Node Labels </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">153,154</context>
+          <context context-type="linenumber">161,162</context>
         </context-group>
         <target state="needs-translation"> Show Node Labels </target>
+      </trans-unit>
+      <trans-unit id="4e2806322b1ecd0fc052b3d8ece2985eeb8f5708" datatype="html">
+        <source>Links Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
+          <context context-type="linenumber">167</context>
+        </context-group>
+        <target state="needs-translation">Links Title</target>
       </trans-unit>
       <trans-unit id="dc60677d5a906e69f38a5cf9da7f2eb03931bea0" datatype="html">
         <source>Links</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">173</context>
         </context-group>
         <target state="needs-translation">Links</target>
       </trans-unit>
@@ -9878,11 +9894,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Add Link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">163</context>
+          <context context-type="linenumber">177</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">166</context>
+          <context context-type="linenumber">180</context>
         </context-group>
         <target state="needs-translation">Add Link</target>
       </trans-unit>
@@ -9890,7 +9906,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>There are no links. Click the &quot;Add Link&quot; button to add a link.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">186</context>
         </context-group>
         <target state="needs-translation">There are no links. Click the "Add Link" button to add a link.</target>
       </trans-unit>
@@ -9898,7 +9914,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Link Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">181</context>
+          <context context-type="linenumber">195</context>
         </context-group>
         <target state="needs-translation">Link Label</target>
       </trans-unit>
@@ -9906,7 +9922,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Color</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">201</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -9934,7 +9950,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>(Optional) Create a starting state for the concept map by editing the &quot;Student Preview&quot; below and then saving here:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">234</context>
+          <context context-type="linenumber">248</context>
         </context-group>
         <target state="needs-translation">(Optional) Create a starting state for the concept map by editing the "Student Preview" below and then saving here:</target>
       </trans-unit>
@@ -9942,11 +9958,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Save Starter Concept Map</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">252</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">241</context>
+          <context context-type="linenumber">255</context>
         </context-group>
         <target state="needs-translation">Save Starter Concept Map</target>
       </trans-unit>
@@ -9954,11 +9970,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Delete Starter Concept Map</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">248</context>
+          <context context-type="linenumber">262</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">251</context>
+          <context context-type="linenumber">265</context>
         </context-group>
         <target state="needs-translation">Delete Starter Concept Map</target>
       </trans-unit>
@@ -10004,6 +10020,118 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the starter concept map?</target>
       </trans-unit>
+      <trans-unit id="c741e919cae3e4e5d7a6e43da8926bb99b1fd780" datatype="html">
+        <source> Reset </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <target state="needs-translation"> Reset </target>
+      </trans-unit>
+      <trans-unit id="58a5686b8ceaee99cd9e3c1ad7b85c3fd6a30aa1" datatype="html">
+        <source>Upload Background Image</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <target state="needs-translation">Upload Background Image</target>
+      </trans-unit>
+      <trans-unit id="a34cc48491622c29efdffcda963e97a750f1e02b" datatype="html">
+        <source>Delete Background Image</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <target state="needs-translation">Delete Background Image</target>
+      </trans-unit>
+      <trans-unit id="17a9d3860d9ad593dd09a9f934e03999d9e76a7a" datatype="html">
+        <source> Cancel </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
+          <context context-type="linenumber">93,94</context>
+        </context-group>
+        <target state="needs-translation"> Cancel </target>
+      </trans-unit>
+      <trans-unit id="7aafd81526e4dbfbfe16413c3e1350f66939ec96" datatype="html">
+        <source> Delete </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
+          <context context-type="linenumber">103,104</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
+          <context context-type="linenumber">95,96</context>
+        </context-group>
+        <target state="needs-translation"> Delete </target>
+      </trans-unit>
+      <trans-unit id="7802320941175374074" datatype="html">
+        <source>You have no more chances to receive feedback on your answer.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
+          <context context-type="linenumber">333</context>
+        </context-group>
+        <target state="needs-translation">You have no more chances to receive feedback on your answer.</target>
+      </trans-unit>
+      <trans-unit id="1088900768760788337" datatype="html">
+        <source>You have 1 chance to receive feedback on your answer so this should be your best work.
+
+Are you ready to receive feedback on this answer?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
+          <context context-type="linenumber">336</context>
+        </context-group>
+        <target state="needs-translation">You have 1 chance to receive feedback on your answer so this should be your best work.
+
+Are you ready to receive feedback on this answer?</target>
+      </trans-unit>
+      <trans-unit id="1556483130839173989" datatype="html">
+        <source>You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this this should be your best work.
+
+Are you ready to receive feedback on this answer?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
+          <context context-type="linenumber">339</context>
+        </context-group>
+        <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this this should be your best work.
+
+Are you ready to receive feedback on this answer?</target>
+      </trans-unit>
+      <trans-unit id="7123653594948067002" datatype="html">
+        <source>Score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
+          <context context-type="linenumber">405</context>
+        </context-group>
+        <target state="needs-translation">Score</target>
+      </trans-unit>
+      <trans-unit id="8429316238784832901" datatype="html">
+        <source>Feedback</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
+          <context context-type="linenumber">414</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
+          <context context-type="linenumber">422</context>
+        </context-group>
+        <target state="needs-translation">Feedback</target>
+      </trans-unit>
+      <trans-unit id="2353574516166744013" datatype="html">
+        <source>Are you sure you want to reset your work?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
+          <context context-type="linenumber">1420</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to reset your work?</target>
+      </trans-unit>
       <trans-unit id="2777000704090097811" datatype="html">
         <source>Should</source>
         <context-group purpose="location">
@@ -10045,6 +10173,18 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
 
 Rule Name: <x id="PH" equiv-text="ruleName"/>
 Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
+      </trans-unit>
+      <trans-unit id="8909210792984597158" datatype="html">
+        <source>Do you want to copy the nodes and links from the connected component?
+
+Warning: This will delete all existing nodes and links in this component.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
+          <context context-type="linenumber">146</context>
+        </context-group>
+        <target state="needs-translation">Do you want to copy the nodes and links from the connected component?
+
+Warning: This will delete all existing nodes and links in this component.</target>
       </trans-unit>
       <trans-unit id="f1affa088d785794802225dbc56ee2ff3d785f87" datatype="html">
         <source>Post attachment</source>
@@ -10109,14 +10249,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="linenumber">63</context>
         </context-group>
         <target state="needs-translation">Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>)</target>
-      </trans-unit>
-      <trans-unit id="7aafd81526e4dbfbfe16413c3e1350f66939ec96" datatype="html">
-        <source> Delete </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">95,96</context>
-        </context-group>
-        <target state="needs-translation"> Delete </target>
       </trans-unit>
       <trans-unit id="49ab78663d368b2e86c7b44c46e10636f5c0d6eb" datatype="html">
         <source>Students will not see this post</source>
@@ -10450,7 +10582,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to clear your drawing?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">200</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to clear your drawing?</target>
       </trans-unit>
@@ -10458,7 +10590,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Do you want to update the connected drawing?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
-          <context context-type="linenumber">274</context>
+          <context context-type="linenumber">284</context>
         </context-group>
         <target state="needs-translation">Do you want to update the connected drawing?</target>
       </trans-unit>
@@ -11344,22 +11476,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Label Text</target>
       </trans-unit>
-      <trans-unit id="58a5686b8ceaee99cd9e3c1ad7b85c3fd6a30aa1" datatype="html">
-        <source>Upload Background Image</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
-        <target state="needs-translation">Upload Background Image</target>
-      </trans-unit>
-      <trans-unit id="a34cc48491622c29efdffcda963e97a750f1e02b" datatype="html">
-        <source>Delete Background Image</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
-        <target state="needs-translation">Delete Background Image</target>
-      </trans-unit>
       <trans-unit id="2518624267018648120" datatype="html">
         <source>A New Label</source>
         <context-group purpose="location">
@@ -11592,7 +11708,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">412</context>
+          <context context-type="linenumber">414</context>
         </context-group>
         <target state="needs-translation">Choices</target>
       </trans-unit>
@@ -11734,7 +11850,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">514</context>
+          <context context-type="linenumber">516</context>
         </context-group>
         <target state="needs-translation">Correct bucket but wrong position</target>
       </trans-unit>
@@ -11742,7 +11858,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Correct</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">524</context>
+          <context context-type="linenumber">526</context>
         </context-group>
         <target state="needs-translation">Correct</target>
       </trans-unit>
@@ -11750,7 +11866,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Incorrect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">526</context>
+          <context context-type="linenumber">528</context>
         </context-group>
         <target state="needs-translation">Incorrect</target>
       </trans-unit>
