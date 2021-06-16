@@ -949,7 +949,7 @@ class AnimationController extends ComponentController {
   studentDataChanged() {
     this.setIsDirty(true);
     this.emitComponentDirty(true);
-    this.setIsSubmit(true);
+    this.setIsSubmitDirty(true);
     this.emitComponentSubmitDirty(true);
     this.clearSaveText();
     this.createComponentStateAndBroadcast('change');
@@ -970,18 +970,21 @@ class AnimationController extends ComponentController {
     };
     componentState.studentData = studentData;
     componentState.isSubmit = this.getIsSubmit();
-
-    /*
-     * Reset the isSubmit value so that the next component state
-     * doesn't maintain the same value.
-     */
-    this.setIsSubmit(false);
+    if (this.isSubmit && this.hasDefaultFeedback()) {
+      this.addDefaultFeedback(componentState);
+    }
 
     /*
      * Perform any additional processing that is required before returning
      * the component state.
      */
     this.createComponentStateAdditionalProcessing(deferred, componentState, action);
+
+    /*
+     * Reset the isSubmit value so that the next component state
+     * doesn't maintain the same value.
+     */
+    this.setIsSubmit(false);
 
     return deferred.promise;
   }

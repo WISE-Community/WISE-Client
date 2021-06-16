@@ -414,16 +414,16 @@ class OpenResponseController extends ComponentController {
     );
 
     /*
-     * reset the isSubmit value so that the next component state
-     * doesn't maintain the same value
-     */
-    this.isSubmit = false;
-
-    /*
      * perform any additional processing that is required before returning
      * the component state
      */
     this.createComponentStateAdditionalProcessing(deferred, componentState, action);
+
+    /*
+     * reset the isSubmit value so that the next component state
+     * doesn't maintain the same value
+     */
+    this.isSubmit = false;
 
     return deferred.promise;
   }
@@ -714,6 +714,9 @@ class OpenResponseController extends ComponentController {
         deferred.resolve(componentState);
       });
     } else {
+      if (this.isSubmit && this.hasDefaultFeedback()) {
+        this.addDefaultFeedback(componentState);
+      }
       /*
        * we don't need to perform any additional processing so we can resolve
        * the promise immediately

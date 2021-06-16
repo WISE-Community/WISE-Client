@@ -66,6 +66,10 @@
              ng-change='$ctrl.componentChanged()'/>
     </md-input-container>
   </div>
+  <edit-component-default-feedback
+      ng-if="$ctrl.authoringComponentContent.showSubmitButton"
+      [authoring-component-content]="$ctrl.authoringComponentContent">
+  </edit-component-default-feedback>
   <div>
     <md-checkbox class='md-primary'
                  ng-model='$ctrl.authoringComponentContent.useCustomLegend'

@@ -20,6 +20,10 @@
              ng-change='$ctrl.componentChanged()'/>
     </md-input-container>
   </div>
+  <edit-component-default-feedback
+      ng-if="$ctrl.authoringComponentContent.showSubmitButton"
+      [authoring-component-content]="$ctrl.authoringComponentContent">
+  </edit-component-default-feedback>
   <div style='border: 1px solid black; padding: 16px;'>
     <p>{{ ::'table.dataExplorer' | translate }}</p>
     <div>

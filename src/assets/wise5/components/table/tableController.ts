@@ -646,6 +646,10 @@ class TableController extends ComponentController {
     // set the component id
     componentState.componentId = this.componentId;
 
+    if (this.isSubmit && this.hasDefaultFeedback()) {
+      this.addDefaultFeedback(componentState);
+    }
+
     /*
      * reset the isSubmit value so that the next component state
      * doesn't maintain the same value

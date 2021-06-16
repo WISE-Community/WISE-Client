@@ -86,6 +86,7 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
 import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
 import { InsertNodesService } from '../assets/wise5/services/insertNodesService';
+import { EditComponentDefaultFeedback } from './authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { InsertNodesService } from '../assets/wise5/services/insertNodesService'
     DrawGrading,
     DiscussionAuthoring,
     DiscussionGrading,
+    EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentRubricComponent,
     EditComponentJsonComponent,

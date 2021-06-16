@@ -669,4 +669,41 @@ export abstract class ComponentStudent {
   getClientSaveTime(componentState: any): number {
     return this.ConfigService.convertToClientTimestamp(componentState.serverSaveTime);
   }
+
+  addDefaultFeedback(componentState: any): void {
+    const defaultFeedback = this.getDefaultFeedback(this.submitCounter);
+    if (defaultFeedback != null) {
+      componentState.annotations = [this.createDefaultFeedbackAnnotation(defaultFeedback)];
+    }
+  }
+
+  hasDefaultFeedback(): boolean {
+    return (
+      this.componentContent.defaultFeedback != null &&
+      this.componentContent.defaultFeedback.length > 0
+    );
+  }
+
+  getDefaultFeedback(submitCount: number): string {
+    return this.componentContent.defaultFeedback[submitCount - 1];
+  }
+
+  createDefaultFeedbackAnnotation(feedbackText: string): any {
+    const defaultFeedbackAnnotationData: any = {
+      autoGrader: 'defaultFeedback',
+      value: feedbackText
+    };
+    return this.createAutoCommentAnnotation(defaultFeedbackAnnotationData);
+  }
+
+  createAutoCommentAnnotation(data: any): any {
+    return this.AnnotationService.createAutoCommentAnnotation(
+      this.ConfigService.getRunId(),
+      this.ConfigService.getPeriodId(),
+      this.nodeId,
+      this.componentId,
+      this.ConfigService.getWorkgroupId(),
+      data
+    );
+  }
 }

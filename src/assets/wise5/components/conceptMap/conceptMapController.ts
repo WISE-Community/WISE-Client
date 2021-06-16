@@ -645,6 +645,8 @@ class ConceptMapController extends ComponentController {
           );
           componentState.annotations.push(commentAnnotation);
         }
+      } else if (this.hasDefaultFeedback()) {
+        this.addDefaultFeedback(componentState);
       }
     }
 

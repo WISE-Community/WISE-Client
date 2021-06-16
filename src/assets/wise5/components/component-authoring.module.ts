@@ -25,6 +25,7 @@ import { EditComponentTagsComponent } from '../../../app/authoring-tool/edit-com
 import { EditComponentWidthComponent } from '../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 import { EditComponentExcludeFromTotalScoreComponent } from '../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
 import WISELinkAuthoringController from '../authoringTool/wiseLink/wiseLinkAuthoringController';
+import { EditComponentDefaultFeedback } from '../../../app/authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
 
 export default angular
   .module('componentAuthoringModule', [
@@ -50,6 +51,10 @@ export default angular
     downgradeComponent({
       component: EditComponentExcludeFromTotalScoreComponent
     }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editComponentDefaultFeedback',
+    downgradeComponent({ component: EditComponentDefaultFeedback }) as angular.IDirectiveFactory
   )
   .directive(
     'editComponentJson',
