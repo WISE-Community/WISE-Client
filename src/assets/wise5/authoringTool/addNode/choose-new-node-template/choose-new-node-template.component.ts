@@ -19,6 +19,12 @@ export class ChooseNewNodeTemplate {
       description: $localize`Automated Assessment Description`,
       icon: 'fact_check',
       route: 'root.at.project.add-node.automated-assessment.choose-item'
+    },
+    {
+      label: $localize`Simulation`,
+      description: $localize`Add an existing simulation`,
+      icon: 'video_settings',
+      route: 'root.at.project.add-node.simulation.choose-item'
     }
   ];
 

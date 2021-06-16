@@ -666,6 +666,14 @@ export abstract class ComponentStudent {
 
   setBackgroundImage(image: string): void {}
 
+  hasMaxScore(): boolean {
+    return this.componentContent.maxScore != null && this.componentContent.maxScore !== '';
+  }
+
+  getMaxScore(): number {
+    return this.componentContent.maxScore;
+  }
+
   getClientSaveTime(componentState: any): number {
     return this.ConfigService.convertToClientTimestamp(componentState.serverSaveTime);
   }
