@@ -1,28 +1,36 @@
 <div fxLayout="column" fxLayoutGap="16px">
   <edit-component-prompt [prompt]="authoringComponentContent.prompt"
-     (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-    <div fxLayoutGap="8px">
-      <mat-form-field class="background">
-        <mat-label i18n>Background Image (Optional)</mat-label>
-        <input matInput
-            [(ngModel)]="authoringComponentContent.background"
-            (ngModelChange)="inputChange.next($event)" />
-      </mat-form-field>
-      <button mat-raised-button
-          color="primary"
-          (click)="chooseAsset('background')"
-          matTooltip="Choose an Image"
-          matTooltipPosition="above"
-          i18n-matTooltip>
-        <mat-icon>insert_photo</mat-icon>
-      </button>
-    </div>
+      (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
+  <div fxLayoutGap="16px">
+    <mat-form-field class="background">
+      <mat-label i18n>Background Image (Optional)</mat-label>
+      <input matInput
+          [(ngModel)]="authoringComponentContent.background"
+          (ngModelChange)="inputChange.next($event)" />
+    </mat-form-field>
+    <button mat-raised-button
+        color="primary"
+        (click)="chooseAsset('background')"
+        matTooltip="Choose an Image"
+        matTooltipPosition="above"
+        i18n-matTooltip>
+      <mat-icon>insert_photo</mat-icon>
+    </button>
+  </div>
+  <div>
     <mat-checkbox color="primary"
         [(ngModel)]="authoringComponentContent.stretchBackground"
         (ngModelChange)="componentChanged()"
         i18n>
-      Stretch Background
+      Stretch background to fit
+    </mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox color="primary"
+        [(ngModel)]="authoringComponentContent.isStudentAttachmentEnabled"
+        (ngModelChange)="componentChanged()"
+        i18n>
+      Allow student to upload background image
     </mat-checkbox>
   </div>
   <div class="canvas-dimension" fxLayout="row wrap" fxLayoutGap="8px">
@@ -155,6 +163,12 @@
     </div>
   </div>
   <div class="add-content" fxLayout="column" fxLayoutGap="16px">
+    <mat-form-field class="links-title">
+      <mat-label i18n>Links Title</mat-label>
+      <input matInput
+          [(ngModel)]="authoringComponentContent.linksTitle"
+          (ngModelChange)="inputChange.next($event)"/>
+    </mat-form-field>
     <div fxLayoutAlign="start center" fxLayoutGap="16px">
       <span i18n>Links</span>
       <button mat-raised-button

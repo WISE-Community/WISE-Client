@@ -63,7 +63,7 @@ class ConceptMapNode {
     this.showLabel = showLabel;
 
     // create the svg image object
-    this.image = this.draw.image(this.filePath, width, height);
+    this.image = this.draw.image(this.filePath).size(width, height);
 
     // remember the width
     this.width = width;

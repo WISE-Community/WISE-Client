@@ -20,13 +20,17 @@ import { OutsideUrlStudent } from '../assets/wise5/components/outsideURL/outside
 import { AudioOscillatorStudent } from '../assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component';
 import { LabelStudent } from '../assets/wise5/components/label/label-student/label-student.component';
 import { DrawStudent } from '../assets/wise5/components/draw/draw-student/draw-student.component';
+import { ConceptMapStudent } from '../assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component';
+import { HtmlDialog } from '../assets/wise5/directives/html-dialog/html-dialog';
 import { MatchStudentModule } from '../assets/wise5/components/match/match-student/match-student.module';
 import { StudentComponentModule } from './student/student.component.module';
 
 @NgModule({
   declarations: [
     AudioOscillatorStudent,
+    ConceptMapStudent,
     DrawStudent,
+    HtmlDialog,
     HtmlStudent,
     LabelStudent,
     MultipleChoiceStudent,
