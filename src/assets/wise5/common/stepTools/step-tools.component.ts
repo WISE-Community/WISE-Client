@@ -43,6 +43,11 @@ export class StepToolsComponent {
         this.updateModel();
       })
     );
+    this.subscriptions.add(
+      this.ProjectService.projectChanged$.subscribe(() => {
+        this.calculateNodeIds();
+      })
+    );
   }
 
   ngOnDestroy() {
