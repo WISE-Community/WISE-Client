@@ -63,16 +63,16 @@ function addDefaultFeedback() {
       expect(component.authoringComponentContent.defaultFeedback).toBeUndefined();
       component.addDefaultFeedback();
       expect(component.authoringComponentContent.defaultFeedback).not.toBeNull();
-      expect(component.authoringComponentContent.defaultFeedback.length).toEqual(1);
-      expect(component.authoringComponentContent.defaultFeedback[0]).toEqual('');
+      expectArrayEquals(component.authoringComponentContent.defaultFeedback, ['']);
     });
     it('should add a default feedback when there is existing default feedback', () => {
       component.addDefaultFeedback();
-      expect(component.authoringComponentContent.defaultFeedback.length).toEqual(4);
-      expect(component.authoringComponentContent.defaultFeedback[0]).toEqual(feedback1);
-      expect(component.authoringComponentContent.defaultFeedback[1]).toEqual(feedback2);
-      expect(component.authoringComponentContent.defaultFeedback[2]).toEqual(feedback3);
-      expect(component.authoringComponentContent.defaultFeedback[3]).toEqual('');
+      expectArrayEquals(component.authoringComponentContent.defaultFeedback, [
+        feedback1,
+        feedback2,
+        feedback3,
+        ''
+      ]);
     });
   });
 }
@@ -81,10 +81,11 @@ function moveDefaultFeedbackUp() {
   describe('moveDefaultFeedbackUp', () => {
     it('should move a default feedback up', () => {
       component.moveDefaultFeedbackUp(1);
-      expect(component.authoringComponentContent.defaultFeedback.length).toEqual(3);
-      expect(component.authoringComponentContent.defaultFeedback[0]).toEqual(feedback2);
-      expect(component.authoringComponentContent.defaultFeedback[1]).toEqual(feedback1);
-      expect(component.authoringComponentContent.defaultFeedback[2]).toEqual(feedback3);
+      expectArrayEquals(component.authoringComponentContent.defaultFeedback, [
+        feedback2,
+        feedback1,
+        feedback3
+      ]);
     });
   });
 }
@@ -93,10 +94,11 @@ function moveDefaultFeedbackDown() {
   describe('moveDefaultFeedbackUp', () => {
     it('should move a default feedback down', () => {
       component.moveDefaultFeedbackDown(1);
-      expect(component.authoringComponentContent.defaultFeedback.length).toEqual(3);
-      expect(component.authoringComponentContent.defaultFeedback[0]).toEqual(feedback1);
-      expect(component.authoringComponentContent.defaultFeedback[1]).toEqual(feedback3);
-      expect(component.authoringComponentContent.defaultFeedback[2]).toEqual(feedback2);
+      expectArrayEquals(component.authoringComponentContent.defaultFeedback, [
+        feedback1,
+        feedback3,
+        feedback2
+      ]);
     });
   });
 }
@@ -106,9 +108,17 @@ function deleteDefaultFeedback() {
     it('should delete a default feedback', () => {
       spyOn(window, 'confirm').and.returnValue(true);
       component.deleteDefaultFeedback(1);
-      expect(component.authoringComponentContent.defaultFeedback.length).toEqual(2);
-      expect(component.authoringComponentContent.defaultFeedback[0]).toEqual(feedback1);
-      expect(component.authoringComponentContent.defaultFeedback[1]).toEqual(feedback3);
+      expectArrayEquals(component.authoringComponentContent.defaultFeedback, [
+        feedback1,
+        feedback3
+      ]);
     });
+  });
+}
+
+function expectArrayEquals(a: string[], b: string[]): void {
+  expect(a.length).toEqual(b.length);
+  a.forEach((val, index) => {
+    expect(val).toEqual(b[index]);
   });
 }
