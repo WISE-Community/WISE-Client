@@ -198,6 +198,10 @@
         ng-model-options='{ debounce: 1000 }'
         ng-change='$ctrl.componentChanged()'/>
 </md-input-container>
+<edit-component-default-feedback
+    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
+    [authoring-component-content]="$ctrl.authoringComponentContent">
+</edit-component-default-feedback>
 <span style="display: inline;">
   <md-icon>help</md-icon>
   <md-tooltip md-direction="right">{{ ::'maxSubmitsNote' | translate }}</md-tooltip>

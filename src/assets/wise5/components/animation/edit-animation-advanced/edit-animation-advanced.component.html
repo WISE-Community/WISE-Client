@@ -11,6 +11,10 @@
            ng-change='$ctrl.componentChanged()'/>
   </md-input-container>
 </div>
+<edit-component-default-feedback
+    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
+    [authoring-component-content]="$ctrl.authoringComponentContent">
+</edit-component-default-feedback>
 <div layout="column" layout-align="start start">
   <edit-component-max-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-max-score>
   <edit-component-exclude-from-total-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-exclude-from-total-score>

@@ -419,6 +419,9 @@ export class LabelStudent extends ComponentStudent {
     componentState.componentType = 'Label';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
+    if (this.isSubmit && this.hasDefaultFeedback()) {
+      this.addDefaultFeedback(componentState);
+    }
     this.isSubmit = false;
     return new Promise((resolve, reject) => {
       this.createComponentStateAdditionalProcessing(

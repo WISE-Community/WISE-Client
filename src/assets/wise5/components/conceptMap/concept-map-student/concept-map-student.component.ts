@@ -458,6 +458,8 @@ export class ConceptMapStudent extends ComponentStudent {
       this.isSubmit = false;
       if (this.hasAutoFeedbackScore() || this.hasAutoFeedbackText()) {
         this.addAnnotations(componentState);
+      } else if (this.hasDefaultFeedback()) {
+        this.addDefaultFeedback(componentState);
       }
     }
     return componentState;

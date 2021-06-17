@@ -613,6 +613,9 @@ export class MatchStudent extends ComponentStudent {
       studentData.isCorrect = this.isCorrect;
     }
     componentState.studentData = studentData;
+    if (this.isSubmit && this.hasDefaultFeedback()) {
+      this.addDefaultFeedback(componentState);
+    }
     return componentState;
   }
 

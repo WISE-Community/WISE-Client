@@ -348,6 +348,9 @@ class EmbeddedController extends ComponentController {
     }
     if (this.isSubmit) {
       componentState.isSubmit = this.isSubmit;
+      if (this.hasDefaultFeedback()) {
+        this.addDefaultFeedback(componentState);
+      }
       this.isSubmit = false;
     }
     if (this.annotationsToSave.length !== 0) {
