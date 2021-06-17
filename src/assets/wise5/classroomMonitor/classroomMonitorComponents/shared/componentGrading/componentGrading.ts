@@ -295,16 +295,6 @@ class ComponentGradingController {
       }, 100);
     }
   }
-
-  /**
-   * Focuses the score input when user wants to override an automated score
-   * @param an angular trigger event
-   */
-  editScore($event) {
-    angular
-      .element(document.querySelector('#scoreInput_' + this.componentId + '_' + this.toWorkgroupId))
-      .focus();
-  }
 }
 
 const ComponentGrading = {

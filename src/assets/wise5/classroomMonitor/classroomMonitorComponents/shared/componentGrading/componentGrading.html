@@ -1,22 +1,15 @@
 <div ng-if="!$ctrl.showAllAnnotations" class="annotations--grading">
     <div class="annotations--grading__score annotations--grading__item" layout="row" layout-align="start-center">
-        <md-input-container class="md-no-float" layout="row" layout-align="start-center">
-            <label class="input-label md-no-float annotations--grading__score__label">
-                <span ng-if="$ctrl.latestAnnotations.score.type === 'autoScore'">{{ ::'AUTO_SCORE' | translate }}
-                    <span ng-if="!$ctrl.isDisabled">
-                        (<a ng-click="$ctrl.editScore($event)">{{ ::'EDIT' | translate }}</a>)
-                    </span>:</span>
-                <span ng-if="$ctrl.latestAnnotations.score.type !== 'autoScore'">{{ ::'ITEM_SCORE' | translate }}:</span>
-            </label>
-            <input id="{{ 'scoreInput_' + $ctrl.componentId + '_' + $ctrl.toWorkgroupId }}"
-                   type="number"
-                   placeholder="0"
-                   min="0"
-                   ng-model="$ctrl.score"
-                   ng-disabled="$ctrl.isDisabled || !$ctrl.canGradeStudentWork"
-                   ng-change="$ctrl.postAnnotation('score')"
-                   ng-model-options="{ debounce: 1000 }">
-        </md-input-container>
+        <edit-component-score
+            [component-id]="$ctrl.componentId"
+            [component-state-id]="$ctrl.componentStateId"
+            [disabled]="$ctrl.isDisabled || !$ctrl.canGradeStudentWork"
+            [from-workgroup-id]="$ctrl.fromWorkgroupId"
+            [latest-annotation-score]="$ctrl.latestAnnotations.score"
+            [node-id]="$ctrl.nodeId"
+            [period-id]="$ctrl.periodId"
+            [run-id]="$ctrl.runId"
+            [to-workgroup-id]="$ctrl.toWorkgroupId"></edit-component-score>
         <span> / </span>
         <grading-edit-component-max-score [node-id]="$ctrl.nodeId"
             [component-id]="$ctrl.componentId"
@@ -57,14 +50,16 @@
         <div ng-if="$ctrl.latestAnnotations.score"
              class="annotations--grading__item annotations--grading__score"
              layout="row" layout-align="start-center">
-            <md-input-container class="md-no-float" layout="row" layout-align="start-center">
-                <label class="input-label md-no-float annotations--grading__score__label">{{ ::'TEACHER_SCORE' | translate }}:</label>
-                <input type="number"
-                       placeholder="0"
-                       min="0"
-                       ng-model="$ctrl.latestAnnotations.score.data.value"
-                       ng-disabled="true">
-            </md-input-container>
+            <edit-component-score
+                [component-id]="$ctrl.componentId"
+                [component-state-id]="$ctrl.componentStateId"
+                [disabled]="true"
+                [from-workgroup-id]="$ctrl.fromWorkgroupId"
+                [latest-annotation-score]="$ctrl.latestAnnotations.score"
+                [node-id]="$ctrl.nodeId"
+                [period-id]="$ctrl.periodId"
+                [run-id]="$ctrl.runId"
+                [to-workgroup-id]="$ctrl.toWorkgroupId"></edit-component-score>
             <span> / </span>
             <grading-edit-component-max-score [node-id]="$ctrl.nodeId"
                 [component-id]="$ctrl.componentId"
@@ -91,18 +86,20 @@
         <div ng-if="$ctrl.latestAnnotations.autoScore"
              class="annotations--grading__item annotations--grading__score"
              layout="row" layout-align="start-center">
-            <md-input-container class="md-no-float" layout="row" layout-align="start-center">
-                <label class="input-label md-no-float annotations--grading__score__label">{{ ::'AUTO_SCORE' | translate }}:</label>
-                <input type="number"
-                       placeholder="0"
-                       min="0"
-                       ng-model="$ctrl.latestAnnotations.autoScore.data.value"
-                       ng-disabled="true">
-            </md-input-container>
+            <edit-component-score
+                [component-id]="$ctrl.componentId"
+                [component-state-id]="$ctrl.componentStateId"
+                [disabled]="true"
+                [from-workgroup-id]="$ctrl.fromWorkgroupId"
+                [latest-annotation-score]="$ctrl.latestAnnotations.autoScore"
+                [node-id]="$ctrl.nodeId"
+                [period-id]="$ctrl.periodId"
+                [run-id]="$ctrl.runId"
+                [to-workgroup-id]="$ctrl.toWorkgroupId"></edit-component-score>
             <span> / </span>
             <grading-edit-component-max-score [node-id]="$ctrl.nodeId"
-              [component-id]="$ctrl.componentId"
-              [disabled]="true"></grading-edit-component-max-score>
+                [component-id]="$ctrl.componentId"
+                [disabled]="true"></grading-edit-component-max-score>
         </div>
         <div class="annotations--grading__item annotations--grading__auto-comment" ng-if="$ctrl.latestAnnotations.autoComment">
             <div class="heavy md-no-float">{{ ::'AUTO_COMMENT' | translate }}:</div>

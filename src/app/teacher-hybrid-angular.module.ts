@@ -44,6 +44,7 @@ import { EditComponentMaxScoreComponent } from './authoring-tool/edit-component-
 import { EditComponentPrompt } from './authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { EditComponentRubricComponent } from './authoring-tool/edit-component-rubric/edit-component-rubric.component';
 import { EditComponentSaveButtonComponent } from './authoring-tool/edit-component-save-button/edit-component-save-button.component';
+import { EditComponentScoreComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component';
 import { EditComponentSubmitButtonComponent } from './authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentTagsComponent } from './authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from './authoring-tool/edit-component-width/edit-component-width.component';
@@ -119,6 +120,7 @@ import { EditComponentDefaultFeedback } from './authoring-tool/edit-advanced-com
     EditComponentPrompt,
     EditComponentTagsComponent,
     EditComponentSaveButtonComponent,
+    EditComponentScoreComponent,
     EditComponentSubmitButtonComponent,
     EditComponentWidthComponent,
     EditHTMLAdvancedComponent,

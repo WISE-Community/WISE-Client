@@ -1,0 +1,21 @@
+<span fxLayout="row" fxLayoutAlign="start center">
+  <label class="input-label md-no-float annotations--grading__score__label">
+    <span *ngIf="isAutoScore">
+      <span i18n>Auto Score</span>
+      <span *ngIf="!disabled">(<a (click)="focusScoreInput()" i18n>Edit</a>)</span>
+      :
+    </span>
+    <span *ngIf="!isAutoScore && disabled" i18n>Teacher Score:</span>
+    <span *ngIf="!isAutoScore && !disabled" i18n>Item Score:</span>
+  </label>
+  <mat-form-field>
+    <input #scoreInput
+        matInput
+        type="number"
+        min="0"
+        [ngModel]="score"
+        [disabled]="disabled"
+        (ngModelChange)="scoreChanged.next($event)">
+  </mat-form-field>
+</span>
+
