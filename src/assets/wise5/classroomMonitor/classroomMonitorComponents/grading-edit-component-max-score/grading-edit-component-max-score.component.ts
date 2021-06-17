@@ -17,7 +17,6 @@ export class GradingEditComponentMaxScoreComponent {
   @Input()
   disabled: boolean;
 
-  @Input()
   maxScore: number;
 
   maxScoreChanged: Subject<string> = new Subject<string>();
