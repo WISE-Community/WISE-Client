@@ -3,7 +3,6 @@
 import { AnnotationService } from '../../../../services/annotationService';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
-import { UtilService } from '../../../../services/utilService';
 import * as angular from 'angular';
 import { Directive } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -33,20 +32,16 @@ class ComponentGradingController {
   static $inject = [
     '$filter',
     '$scope',
-    '$timeout',
     'AnnotationService',
     'ConfigService',
-    'TeacherDataService',
-    'UtilService'
+    'TeacherDataService'
   ];
   constructor(
     $filter: any,
     private $scope: any,
-    private $timeout: any,
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {
     this.$translate = $filter('translate');
 
@@ -226,73 +221,12 @@ class ComponentGradingController {
     return time;
   }
 
-  /**
-   * Save the annotation to the server
-   * @param type String to indicate which type of annotation to post
-   */
-  postAnnotation(type) {
-    if (
-      this.runId != null &&
-      this.periodId != null &&
-      this.nodeId != null &&
-      this.componentId != null &&
-      this.toWorkgroupId != null &&
-      type
-    ) {
-      let clientSaveTime = new Date().getTime();
-      let fromWorkgroupId = this.ConfigService.getWorkgroupId();
-      let value = null;
-      if (type === 'score') {
-        value = this.score;
-        value = this.UtilService.convertStringToNumber(value);
-      } else if (type === 'comment') {
-        value = this.comment;
-      }
-
-      if (
-        (type === 'comment' && value) ||
-        (type === 'score' && typeof value === 'number' && value >= 0)
-      ) {
-        const data = {
-          value: value
-        };
-        const localNotebookItemId = null; // we're not grading notebook item in this view.
-        const notebookItemId = null; // we're not grading notebook item in this view.
-        const annotation = this.AnnotationService.createAnnotation(
-          this.annotationId,
-          this.runId,
-          this.periodId,
-          this.fromWorkgroupId,
-          this.toWorkgroupId,
-          this.nodeId,
-          this.componentId,
-          this.componentStateId,
-          localNotebookItemId,
-          notebookItemId,
-          type,
-          data,
-          clientSaveTime
-        );
-        this.AnnotationService.saveAnnotation(annotation).then((result) => {});
-      }
-    }
-  }
-
-  /**
-   * Shows (or hides) the teacher comment field when user wants to override an automated comment
-   */
-  editComment() {
+  toggleEditComment() {
     this.edit = !this.edit;
-
     if (this.edit) {
-      let componentId = this.componentId;
-      let toWorkgroupId = this.toWorkgroupId;
-      // if we're showing the comment field, focus it
-      this.$timeout(() => {
-        angular
-          .element(document.querySelector('#commentInput_' + componentId + '_' + toWorkgroupId))
-          .focus();
-      }, 100);
+      angular
+        .element(document.querySelector(`#commentInput_${this.componentId}_${this.toWorkgroupId}`))
+        .focus();
     }
   }
 }
