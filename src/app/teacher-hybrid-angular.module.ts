@@ -38,6 +38,8 @@ import { NodeAdvancedJsonAuthoringComponent } from '../assets/wise5/authoringToo
 import { WorkgroupInfoComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component';
 import { NodeAdvancedGeneralAuthoringComponent } from '../assets/wise5/authoringTool/node/advanced/general/node-advanced-general-authoring.component';
 import { WiseAuthoringTinymceEditorComponent } from '../assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
+import { EditComponentCommentComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-comment/edit-component-comment.component';
+import { EditComponentDefaultFeedback } from './authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
 import { EditComponentExcludeFromTotalScoreComponent } from './authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
 import { EditComponentJsonComponent } from './authoring-tool/edit-component-json/edit-component-json.component';
 import { EditComponentMaxScoreComponent } from './authoring-tool/edit-component-max-score/edit-component-max-score.component';
@@ -87,7 +89,6 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
 import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
 import { InsertNodesService } from '../assets/wise5/services/insertNodesService';
-import { EditComponentDefaultFeedback } from './authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { EditComponentDefaultFeedback } from './authoring-tool/edit-advanced-com
     DrawGrading,
     DiscussionAuthoring,
     DiscussionGrading,
+    EditComponentCommentComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentRubricComponent,
