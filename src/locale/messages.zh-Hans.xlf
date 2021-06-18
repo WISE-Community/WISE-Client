@@ -8832,6 +8832,22 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="translated">编辑项目量规</target>
       </trans-unit>
+      <trans-unit id="1de4bc95785a34afe2f48becbf8fbb591cf39b5f" datatype="html">
+        <source>Teacher Comment:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-comment/edit-component-comment.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <target state="needs-translation">Teacher Comment:</target>
+      </trans-unit>
+      <trans-unit id="b197b48f991d6781c56d1948050b437a9d81cb78" datatype="html">
+        <source>Enter comment here</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-comment/edit-component-comment.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <target state="needs-translation">Enter comment here</target>
+      </trans-unit>
       <trans-unit id="2471906abf7baa724640a079ab3d084a78462ba2" datatype="html">
         <source>Auto Score</source>
         <context-group purpose="location">
