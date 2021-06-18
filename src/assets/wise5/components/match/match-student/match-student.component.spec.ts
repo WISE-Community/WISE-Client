@@ -140,6 +140,7 @@ describe('MatchStudent', () => {
     });
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     spyOn(component, 'studentDataChanged').and.callFake(() => {});
+    spyOn(component, 'registerAutoScroll').and.callFake(() => {});
     componentStateChoice1 = createChoice(choiceId1, choiceValue1);
     componentStateChoice2 = createChoice(choiceId2, choiceValue2);
     componentStateChoice3 = createChoice(choiceId3, choiceValue3);
