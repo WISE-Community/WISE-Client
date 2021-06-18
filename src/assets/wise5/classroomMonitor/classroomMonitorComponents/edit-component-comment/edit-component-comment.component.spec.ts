@@ -40,8 +40,10 @@ function saveComment() {
         annotationService,
         'createAnnotation'
       ).and.callFake(() => {});
-      const saveAnnotationSpy = spyOn(annotationService, 'saveAnnotation').and.callFake(() => {});
-      component.saveComment('New comment from teacher');
+      const saveAnnotationSpy = spyOn(annotationService, 'saveAnnotation').and.callFake(() => {
+        return new Promise(() => {});
+      });
+      component.saveComment();
       expect(createAnnotationSpy).toHaveBeenCalled();
       expect(saveAnnotationSpy).toHaveBeenCalled();
     });

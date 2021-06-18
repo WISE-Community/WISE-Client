@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { AnnotationService } from '../../../services/annotationService';
 
 @Component({
@@ -20,6 +20,7 @@ export class EditComponentCommentComponent {
   @Input() toWorkgroupId: number;
 
   commentChanged: Subject<string> = new Subject<string>();
+  isDirty: boolean;
   subscriptions: Subscription = new Subscription();
 
   constructor(private AnnotationService: AnnotationService) {}
@@ -27,18 +28,25 @@ export class EditComponentCommentComponent {
   ngOnInit() {
     this.subscriptions.add(
       this.commentChanged
-        .pipe(debounceTime(5000), distinctUntilChanged())
-        .subscribe((newComment) => {
-          this.saveComment(newComment);
+        .pipe(
+          tap(() => this.setIsDirty(true)),
+          debounceTime(5000),
+          distinctUntilChanged()
+        )
+        .subscribe(() => {
+          this.saveComment();
         })
     );
   }
 
   ngOnDestroy() {
+    if (this.isDirty) {
+      this.saveComment();
+    }
     this.subscriptions.unsubscribe();
   }
 
-  saveComment(comment: string) {
+  saveComment() {
     const annotation = this.AnnotationService.createAnnotation(
       null,
       this.runId,
@@ -51,9 +59,13 @@ export class EditComponentCommentComponent {
       null,
       null,
       'comment',
-      { value: comment },
+      { value: this.comment },
       new Date().getTime()
     );
-    this.AnnotationService.saveAnnotation(annotation);
+    this.AnnotationService.saveAnnotation(annotation).then(() => this.setIsDirty(false));
+  }
+
+  setIsDirty(isDirty: boolean) {
+    this.isDirty = isDirty;
   }
 }

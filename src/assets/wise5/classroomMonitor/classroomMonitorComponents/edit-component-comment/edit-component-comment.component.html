@@ -6,7 +6,8 @@
       placeholder="Enter comment here"
       i18n-placeholder
       rows="1"
-      [ngModel]="comment"
+      cdkTextareaAutosize
+      [(ngModel)]="comment"
       [disabled]="disabled"
       (ngModelChange)="commentChanged.next($event)"></textarea>
 </mat-form-field>
