@@ -36,6 +36,8 @@ export class HeroSectionComponent {
 
   @ContentChild('taglineTemplate', { static: false }) taglineRef: TemplateRef<any>;
 
+  @ContentChild('sideTemplate', { static: false }) sideRef: TemplateRef<any>;
+
   @ViewChild('bgRef') bgRef: ElementRef;
 
   bgStyle: SafeStyle;
