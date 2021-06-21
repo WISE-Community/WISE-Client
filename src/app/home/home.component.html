@@ -81,9 +81,11 @@
         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center stretch"
              fxLayoutAlign.xs="center center" fxLayoutGap="32px" fxLayoutGap.sm="24px"
              fxLayoutGap.gt-sm="32px">
-          <app-call-to-action fxFlex fxFlex.gt-xs="33" icon="record_voice_over" iconColor="accent-1"
-                              i18n-headline headline="News" i18n-content
-                              content="Learn what's new in the WISE community." destination="/news">
+          <app-call-to-action fxFlex fxFlex.gt-xs="33" icon="forum" iconColor="accent-1"
+                              i18n-headline headline="Community" i18n-content
+                              content="Join us! Discuss all things WISE."
+                              destination="https://wise-discuss.berkeley.edu" linkTarget="_self"
+                              [isOutsideLink]="true">
           </app-call-to-action>
           <app-call-to-action fxFlex fxFlex.gt-xs="33" icon="live_help" iconColor="accent-2"
                               i18n-headline headline="Help + FAQs" i18n-content
