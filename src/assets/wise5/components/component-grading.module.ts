@@ -1,5 +1,6 @@
 import { downgradeComponent } from '@angular/upgrade/static';
 import * as angular from 'angular';
+import { EditComponentAnnotationsComponent } from '../classroomMonitor/classroomMonitorComponents/edit-component-annotations/edit-component-annotations.component';
 import { EditComponentCommentComponent } from '../classroomMonitor/classroomMonitorComponents/edit-component-comment/edit-component-comment.component';
 import { EditComponentScoreComponent } from '../classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component';
 import { GradingEditComponentMaxScoreComponent } from '../classroomMonitor/classroomMonitorComponents/grading-edit-component-max-score/grading-edit-component-max-score.component';
@@ -31,6 +32,12 @@ export default angular
     'openResponseGradingComponentModule',
     'tableGradingComponentModule'
   ])
+  .directive(
+    'editComponentAnnotations',
+    downgradeComponent({
+      component: EditComponentAnnotationsComponent
+    }) as angular.IDirectiveFactory
+  )
   .directive(
     'editComponentComment',
     downgradeComponent({
