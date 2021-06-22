@@ -82,7 +82,7 @@
   <div *ngIf="hasAutoAnnotations()" class="annotations--grading">
       <div *ngIf="latestAnnotations.autoScore"
            class="annotations--grading__item annotations--grading__score"
-           layout="row" fxLayoutAlign="start center">
+           fxLayout="row" fxLayoutAlign="start center">
           <edit-component-score
               [componentId]="componentId"
               [componentStateId]="componentStateId"
