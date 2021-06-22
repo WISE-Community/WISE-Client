@@ -18,8 +18,9 @@
     </ng-template>
     <ng-template #sideTemplate>
       <discourse-latest-news [@bounceIn]="{value: '*', params: {duration: '1.25s', delay: '3500ms'}}"
-          discourseURL="https://wise-discuss.berkeley.edu/"
-          category="c/news-announcements/7">
+          baseUrl="https://wise-discuss.berkeley.edu"
+          category="c/news-announcements/7"
+          queryString="order=latest">
       </discourse-latest-news>
     </ng-template>
   </app-hero-section>

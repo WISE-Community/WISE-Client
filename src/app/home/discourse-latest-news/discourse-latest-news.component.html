@@ -6,9 +6,9 @@
   </h2>
   <ul>
     <ng-container *ngFor="let topic of topics; let last = last; let index = index;">
-      <li *ngIf="!xsScreen || index === 1"
+      <li *ngIf="!xsScreen || index === 0"
           [ngClass]="{'mat-small': xsScreen, 'mat-body-1': !xsScreen}">
-        <a href="{{discourseURL}}/t/{{topic.slug}}/{{topic.id}}">
+        <a href="{{baseUrl}}/t/{{topic.slug}}/{{topic.id}}">
           {{topic.title}}
         </a>
         <ng-container *ngIf="smallScreen"> • </ng-container>
@@ -16,6 +16,6 @@
     </ng-container>
   </ul>
   <div [ngClass]="{'mat-small': xsScreen, 'mat-body-1': !xsScreen}">
-    <a href="{{discourseURL}}/{{category}}" i18n>More news</a>
+    <a href="{{baseUrl}}/{{category}}" i18n>More news</a>
   </div>
 </div>

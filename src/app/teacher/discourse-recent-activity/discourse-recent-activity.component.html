@@ -4,14 +4,14 @@
       <mat-icon>groups</mat-icon>
       <span i18n>Latest from the WISE Community</span>
     </h3>
-    <a mat-icon-button color="primary" href="{{discourseURL}}/session/sso" target="_blank"
+    <a mat-icon-button color="primary" href="{{baseUrl}}/session/sso" target="_blank"
        aria-label-i18n aria-label="Visit the WISE Community">
       <mat-icon>launch</mat-icon>
     </a>
   </div>
   <ul>
     <li *ngFor="let topic of topics">
-      <a class="mat-body-1" href="{{discourseURL}}/t/{{topic.slug}}/{{topic.id}}" target="_blank">
+      <a class="mat-body-1" href="{{baseUrl}}/t/{{topic.slug}}/{{topic.id}}" target="_blank">
         {{topic.title}}
       </a>
       <span class="secondary-text mat-caption">

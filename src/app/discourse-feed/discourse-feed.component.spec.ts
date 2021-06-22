@@ -1,9 +1,9 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { DiscourseLatestNewsComponent } from './discourse-latest-news.component';
+import { DiscourseFeedComponent } from './discourse-feed.component';
 
-describe('DiscourseLatestNewsComponent', () => {
-  let component: DiscourseLatestNewsComponent;
+describe('DiscourseFeedComponent', () => {
+  let component: DiscourseFeedComponent;
   let http: HttpTestingController;
   const sampleLatestResponse = {
     users: [],
@@ -15,18 +15,19 @@ describe('DiscourseLatestNewsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [DiscourseLatestNewsComponent]
+      providers: [DiscourseFeedComponent]
     });
-    component = TestBed.inject(DiscourseLatestNewsComponent);
+    component = TestBed.inject(DiscourseFeedComponent);
     http = TestBed.inject(HttpTestingController);
   });
 
   it('should create and show 3 latest topics', () => {
-    component.discourseURL = 'http://localhost:9292';
+    component.baseUrl = 'http://localhost:9292';
     component.category = 'c/news/1';
+    component.queryString = 'order=latest';
     component.ngOnInit();
     http
-      .expectOne(`${component.discourseURL}/${component.category}.json?order=latest`)
+      .expectOne(`${component.baseUrl}/${component.category}.json?${component.queryString}`)
       .flush(sampleLatestResponse);
     expect(component.topics.length).toEqual(3);
   });
