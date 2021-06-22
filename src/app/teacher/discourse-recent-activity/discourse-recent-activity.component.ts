@@ -8,7 +8,4 @@ import { DiscourseFeedComponent } from '../../discourse-feed/discourse-feed.comp
   styleUrls: ['discourse-recent-activity.component.scss']
 })
 export class DiscourseRecentActivityComponent extends DiscourseFeedComponent {
-  constructor(protected http: HttpClient) {
-    super(http);
-  }
 }
