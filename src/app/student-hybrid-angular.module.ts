@@ -24,12 +24,14 @@ import { ConceptMapStudent } from '../assets/wise5/components/conceptMap/concept
 import { HtmlDialog } from '../assets/wise5/directives/html-dialog/html-dialog';
 import { MatchStudentModule } from '../assets/wise5/components/match/match-student/match-student.module';
 import { StudentComponentModule } from './student/student.component.module';
+import { EmbeddedStudent } from '../assets/wise5/components/embedded/embedded-student/embedded-student.component';
 
 @NgModule({
   declarations: [
     AudioOscillatorStudent,
     ConceptMapStudent,
     DrawStudent,
+    EmbeddedStudent,
     HtmlDialog,
     HtmlStudent,
     LabelStudent,
