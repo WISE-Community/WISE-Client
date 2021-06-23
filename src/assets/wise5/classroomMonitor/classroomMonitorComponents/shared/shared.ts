@@ -1,6 +1,5 @@
 'use strict';
 
-import ComponentGrading from './componentGrading/componentGrading';
 import { ComponentNewWorkBadgeComponent } from '../../../../../app/classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import ComponentRevisionsInfo from './componentRevisionsInfo/componentRevisionsInfo';
 import MainMenu from './mainMenu/mainMenu';
@@ -27,7 +26,6 @@ const Shared = angular
     'alertStatusCorner',
     downgradeComponent({ component: AlertStatusCornerComponent }) as angular.IDirectiveFactory
   )
-  .component('componentGrading', ComponentGrading)
   .directive(
     'componentNewWorkBadge',
     downgradeComponent({ component: ComponentNewWorkBadgeComponent }) as angular.IDirectiveFactory
