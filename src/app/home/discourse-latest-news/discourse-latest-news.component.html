@@ -5,7 +5,7 @@
     <ng-container i18n>What's New?</ng-container>&nbsp;
   </h2>
   <ul>
-    <ng-container *ngFor="let topic of topics; let last = last; let index = index;">
+    <ng-container *ngFor="let topic of topics; let index = index;">
       <li *ngIf="!xsScreen || index === 0"
           [ngClass]="{'mat-small': xsScreen, 'mat-body-1': !xsScreen}">
         <a href="{{baseUrl}}/t/{{topic.slug}}/{{topic.id}}">

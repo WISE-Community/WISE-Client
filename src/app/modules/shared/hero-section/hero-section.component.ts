@@ -2,7 +2,6 @@ import {
   Component,
   ContentChild,
   Input,
-  OnInit,
   TemplateRef,
   ViewEncapsulation,
   ViewChild,

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { DiscourseFeedComponent } from '../../discourse-feed/discourse-feed.component';
 
