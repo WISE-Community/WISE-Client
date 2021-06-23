@@ -23,6 +23,7 @@
         <li class="item"
             [ngClass]="{'disabled': isDisabled}"
             cdkDrag
+            [cdkDragDisabled]="isDisabled"
             (cdkDragEntered)="dragEnter($event)"
             (cdkDragExited)="dragExit($event)"
             *ngFor="let item of buckets[0].items">
@@ -59,6 +60,7 @@
           <li class="item"
               [ngClass]="{'disabled': isDisabled}"
               cdkDrag
+              [cdkDragDisabled]="isDisabled"
               (cdkDragEntered)="dragEnter($event)"
               (cdkDragExited)="dragExit($event)"
               *ngFor="let item of bucket.items">

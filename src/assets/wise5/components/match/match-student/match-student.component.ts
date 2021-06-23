@@ -94,10 +94,7 @@ export class MatchStudent extends ComponentStudent {
     if (this.componentState != null && this.componentState.isSubmit) {
       this.isLatestComponentStateSubmit = true;
     }
-    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
-      this.isDisabled = true;
-      this.isSubmitButtonDisabled = true;
-    }
+    this.tryDisableComponent();
     this.disableComponentIfNecessary();
     this.broadcastDoneRenderingComponent();
   }
@@ -465,6 +462,7 @@ export class MatchStudent extends ComponentStudent {
     if (this.doesPositionMatter(feedbackObject.position)) {
       choice.isIncorrectPosition = !this.isCorrectPosition(feedbackObject, position);
     }
+    this.tryDisableComponent();
     return isCorrect;
   }
 
