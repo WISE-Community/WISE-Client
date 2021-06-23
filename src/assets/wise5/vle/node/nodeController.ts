@@ -23,6 +23,7 @@ class NodeController {
   autoSaveIntervalId: any;
   componentToScope: any;
   convertedComponents: string[] = [
+    'Animation',
     'AudioOscillator',
     'ConceptMap',
     'Draw',

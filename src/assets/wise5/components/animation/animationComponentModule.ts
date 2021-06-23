@@ -1,14 +1,17 @@
 'use strict';
 
 import * as angular from 'angular';
-import { downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { AnimationService } from './animationService';
-import AnimationController from './animationController';
+import { AnimationStudent } from './animation-student/animation-student.component';
 
 const animationComponentModule = angular
   .module('animationComponentModule', ['pascalprecht.translate'])
   .service('AnimationService', downgradeInjectable(AnimationService))
-  .controller('AnimationController', AnimationController)
+  .directive(
+    'animationStudent',
+    downgradeComponent({ component: AnimationStudent }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {

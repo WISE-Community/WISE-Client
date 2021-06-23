@@ -4592,6 +4592,10 @@
           <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
           <context context-type="linenumber">69</context>
         </context-group>
@@ -8739,6 +8743,77 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="9b00b4b718d67ef6351bba15acd4ad0f2bc47927" datatype="html">
+        <source>Play</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b2838c6165a9672a17db188f4dd9676574353dd8" datatype="html">
+        <source>Pause</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4cd979821c89535df23df1c8ac8f260673610d90" datatype="html">
+        <source>Resume</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="45ecdd9890d65d28ef6b5a9a36cc6f2095a8225e" datatype="html">
+        <source>Slower</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="efc5c59dbef99e972ec6f6cd7bfc6a1550d2a051" datatype="html">
+        <source>Faster</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="21ed03fef3e880bd5bc2c36b26d8c6c0b6399c59" datatype="html">
+        <source>Add File</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7589669206989444799" datatype="html">
+        <source>You do not have any more chances to receive feedback on your answer.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.ts</context>
+          <context context-type="linenumber">900</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4965414112249568013" datatype="html">
+        <source>You have 1 chance to receive feedback on your answer so this this should be your best work.
+
+Are you ready to receive feedback on this answer?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.ts</context>
+          <context context-type="linenumber">903</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1556483130839173989" datatype="html">
+        <source>You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this this should be your best work.
+
+Are you ready to receive feedback on this answer?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.ts</context>
+          <context context-type="linenumber">907</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
+          <context context-type="linenumber">339</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4ef67b5c60d20815a15d316e469e88c0ca9b6950" datatype="html">
         <source>Oscillator Types</source>
         <context-group purpose="location">
@@ -8877,21 +8952,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">534</context>
+          <context context-type="linenumber">538</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6643018309880261465" datatype="html">
         <source>Auto Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">538</context>
+          <context context-type="linenumber">542</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1612722476211621614" datatype="html">
         <source>Submitted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">542</context>
+          <context context-type="linenumber">546</context>
         </context-group>
       </trans-unit>
       <trans-unit id="818444ddcd112e756ab725357dcfb238b9257324" datatype="html">
@@ -9183,15 +9258,6 @@ Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
           <context context-type="linenumber">336</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1556483130839173989" datatype="html">
-        <source>You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this this should be your best work.
-
-Are you ready to receive feedback on this answer?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">339</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7123653594948067002" datatype="html">
