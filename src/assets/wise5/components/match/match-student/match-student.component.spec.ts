@@ -4,7 +4,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
-import { DragulaService } from 'ng2-dragula';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -73,7 +72,6 @@ describe('MatchStudent', () => {
         MatchService,
         ComponentService,
         ConfigService,
-        DragulaService,
         { provide: NodeService, useClass: MockNodeService },
         { provide: NotebookService, useClass: MockService },
         ProjectService,
@@ -141,8 +139,8 @@ describe('MatchStudent', () => {
       return true;
     });
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
-    spyOn(component, 'registerDragListeners').and.callFake(() => {});
     spyOn(component, 'studentDataChanged').and.callFake(() => {});
+    spyOn(component, 'registerAutoScroll').and.callFake(() => {});
     componentStateChoice1 = createChoice(choiceId1, choiceValue1);
     componentStateChoice2 = createChoice(choiceId2, choiceValue2);
     componentStateChoice3 = createChoice(choiceId3, choiceValue3);

@@ -10,10 +10,16 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { MatchService } from '../matchService';
-import { DragulaService } from 'ng2-dragula';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMatchChoiceDialog } from './add-match-choice-dialog/add-match-choice-dialog';
 import { ProjectService } from '../../../services/projectService';
+import {
+  CdkDragDrop,
+  CdkDragEnter,
+  CdkDragExit,
+  moveItemInArray,
+  transferArrayItem
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'match-student',
@@ -27,7 +33,6 @@ export class MatchStudent extends ComponentStudent {
   bucketWidth: number = 100;
   choices: any[] = [];
   choiceStyle: any = '';
-  dragulaId: string;
   hasCorrectAnswer: boolean = false;
   isCorrect: boolean = false;
   isHorizontal: boolean = false;
@@ -42,7 +47,6 @@ export class MatchStudent extends ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     private dialog: MatDialog,
-    private dragulaService: DragulaService,
     private MatchService: MatchService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
@@ -67,8 +71,8 @@ export class MatchStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.dragulaId = `match-dragula-${this.nodeId}-${this.componentId}`;
     this.autoScroll = require('dom-autoscroller');
+    this.registerAutoScroll();
     this.isHorizontal = this.componentContent.horizontal;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
@@ -90,20 +94,9 @@ export class MatchStudent extends ComponentStudent {
     if (this.componentState != null && this.componentState.isSubmit) {
       this.isLatestComponentStateSubmit = true;
     }
-    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
-      this.isDisabled = true;
-      this.isSubmitButtonDisabled = true;
-    }
+    this.tryDisableComponent();
     this.disableComponentIfNecessary();
     this.broadcastDoneRenderingComponent();
-  }
-
-  ngAfterViewInit(): void {
-    if (this.isDisabled) {
-      this.dragulaService.destroy(this.dragulaId);
-    } else {
-      this.registerDragListeners();
-    }
   }
 
   importPrivateNotes(): void {
@@ -127,40 +120,35 @@ export class MatchStudent extends ComponentStudent {
     sourceBucket.items.push(choice);
   }
 
-  registerDragListeners(): void {
-    const drake = this.dragulaService.find(this.dragulaId).drake;
-    this.registerDropListener(drake);
-    this.showVisualIndicatorWhileDragging(drake);
-    this.registerAutoScroll(drake);
+  dragEnter(event: CdkDragEnter) {
+    event.container.element.nativeElement.classList.add('primary-bg');
   }
 
-  registerDropListener(drake: any): void {
-    drake.on('drop', () => {
-      this.studentDataChanged();
-    });
+  dragExit(event: CdkDragExit) {
+    event.container.element.nativeElement.classList.remove('primary-bg');
   }
 
-  showVisualIndicatorWhileDragging(drake: any): void {
-    drake
-      .on('over', (el, container, source) => {
-        if (source !== container) {
-          container.className += ' primary-bg';
-        }
-      })
-      .on('out', (el, container, source) => {
-        if (source !== container) {
-          container.className = container.className.replace('primary-bg', '');
-        }
-      });
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+    event.container.element.nativeElement.classList.remove('primary-bg');
+    this.studentDataChanged();
   }
 
-  registerAutoScroll(drake: any): void {
+  registerAutoScroll(): void {
     this.autoScroll([document.querySelector('#content')], {
       margin: 30,
-      pixels: 50,
       scrollWhenOutside: true,
       autoScroll: function () {
-        return this.down && drake.dragging;
+        return this.down;
       }
     });
   }
@@ -474,6 +462,7 @@ export class MatchStudent extends ComponentStudent {
     if (this.doesPositionMatter(feedbackObject.position)) {
       choice.isIncorrectPosition = !this.isCorrectPosition(feedbackObject, position);
     }
+    this.tryDisableComponent();
     return isCorrect;
   }
 

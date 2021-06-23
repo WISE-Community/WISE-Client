@@ -418,6 +418,13 @@ export abstract class ComponentStudent {
     return this.getNumberOfSubmitsLeft() <= 0;
   }
 
+  tryDisableComponent(): void {
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
+      this.isSubmitButtonDisabled = true;
+    }
+  }
+
   hasMaxSubmitCountAndUsedAllSubmits() {
     return this.hasMaxSubmitCount() && this.hasUsedAllSubmits();
   }
