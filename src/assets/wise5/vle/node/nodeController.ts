@@ -26,6 +26,7 @@ class NodeController {
     'AudioOscillator',
     'ConceptMap',
     'Draw',
+    'Embedded',
     'Label',
     'Match',
     'MultipleChoice'

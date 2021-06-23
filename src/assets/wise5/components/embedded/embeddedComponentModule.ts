@@ -1,14 +1,17 @@
 'use strict';
 
 import * as angular from 'angular';
-import { downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { EmbeddedService } from './embeddedService';
-import EmbeddedController from './embeddedController';
+import { EmbeddedStudent } from './embedded-student/embedded-student.component';
 
 const embeddedComponentModule = angular
   .module('embeddedComponentModule', ['pascalprecht.translate'])
   .service('EmbeddedService', downgradeInjectable(EmbeddedService))
-  .controller('EmbeddedController', EmbeddedController)
+  .directive(
+    'embeddedStudent',
+    downgradeComponent({ component: EmbeddedStudent }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {

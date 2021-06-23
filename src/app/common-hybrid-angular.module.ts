@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { UpgradeModule } from '@angular/upgrade/static';
 import { UtilService } from '../assets/wise5/services/utilService';
 import { ConfigService } from '../assets/wise5/services/configService';
@@ -65,7 +65,6 @@ import { ClassResponse } from '../assets/wise5/components/discussion/class-respo
 import { ComponentService } from '../assets/wise5/components/componentService';
 import { WiseLinkService } from './services/wiseLinkService';
 import { DataExportService } from '../assets/wise5/services/dataExportService';
-import { DragulaService } from 'ng2-dragula';
 import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
 
@@ -83,6 +82,7 @@ export class EmptyComponent {}
   imports: [
     UpgradeModule,
     CommonModule,
+    DragDropModule,
     EditorModule,
     FlexLayoutModule,
     FormsModule,
@@ -122,7 +122,6 @@ export class EmptyComponent {}
     CRaterService,
     DataExportService,
     DiscussionService,
-    DragulaService,
     DrawService,
     EmbeddedService,
     GraphService,
@@ -151,6 +150,7 @@ export class EmptyComponent {}
   exports: [
     ClassResponse,
     CommonModule,
+    DragDropModule,
     EditorModule,
     FlexLayoutModule,
     FormsModule,
