@@ -9,6 +9,7 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 
 @Component({
   selector: 'edit-component-annotations',
+  styles: ['.disabled-text { color: gray; }'],
   templateUrl: 'edit-component-annotations.component.html'
 })
 export class EditComponentAnnotationsComponent {
