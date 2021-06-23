@@ -422,6 +422,13 @@ export abstract class ComponentStudent {
     return this.getNumberOfSubmitsLeft() <= 0;
   }
 
+  tryDisableComponent(): void {
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
+      this.isSubmitButtonDisabled = true;
+    }
+  }
+
   hasMaxSubmitCountAndUsedAllSubmits() {
     return this.hasMaxSubmitCount() && this.hasUsedAllSubmits();
   }
@@ -708,6 +715,17 @@ export abstract class ComponentStudent {
     return this.createAutoCommentAnnotation(defaultFeedbackAnnotationData);
   }
 
+  createAutoScoreAnnotation(data: any): any {
+    return this.AnnotationService.createAutoScoreAnnotation(
+      this.ConfigService.getRunId(),
+      this.ConfigService.getPeriodId(),
+      this.nodeId,
+      this.componentId,
+      this.ConfigService.getWorkgroupId(),
+      data
+    );
+  }
+
   createAutoCommentAnnotation(data: any): any {
     return this.AnnotationService.createAutoCommentAnnotation(
       this.ConfigService.getRunId(),
@@ -717,5 +735,13 @@ export abstract class ComponentStudent {
       this.ConfigService.getWorkgroupId(),
       data
     );
+  }
+
+  updateLatestScoreAnnotation(annotation: any): void {
+    this.latestAnnotations.score = annotation;
+  }
+
+  updateLatestCommentAnnotation(annotation: any): void {
+    this.latestAnnotations.comment = annotation;
   }
 }

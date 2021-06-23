@@ -1,6 +1,6 @@
 <span fxLayout="row" fxLayoutAlign="start center">
   <label class="input-label md-no-float annotations--grading__score__label">
-    <span *ngIf="isAutoScore">
+    <span *ngIf="isAutoScore" fxLayout fxLayoutGap="4px">
       <span i18n>Auto Score</span>
       <span *ngIf="!disabled">(<a (click)="focusScoreInput()" i18n>Edit</a>)</span>
       :

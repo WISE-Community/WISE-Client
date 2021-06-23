@@ -25,6 +25,7 @@ import { HtmlDialog } from '../assets/wise5/directives/html-dialog/html-dialog';
 import { MatchStudentModule } from '../assets/wise5/components/match/match-student/match-student.module';
 import { StudentComponentModule } from './student/student.component.module';
 import { AnimationStudent } from '../assets/wise5/components/animation/animation-student/animation-student.component';
+import { EmbeddedStudent } from '../assets/wise5/components/embedded/embedded-student/embedded-student.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AnimationStudent } from '../assets/wise5/components/animation/animation
     AudioOscillatorStudent,
     ConceptMapStudent,
     DrawStudent,
+    EmbeddedStudent,
     HtmlDialog,
     HtmlStudent,
     LabelStudent,
