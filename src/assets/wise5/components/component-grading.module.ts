@@ -1,5 +1,6 @@
 import { downgradeComponent } from '@angular/upgrade/static';
 import * as angular from 'angular';
+import { ComponentStateInfoComponent } from '../classroomMonitor/classroomMonitorComponents/component-state-info/component-state-info.component';
 import { EditComponentAnnotationsComponent } from '../classroomMonitor/classroomMonitorComponents/edit-component-annotations/edit-component-annotations.component';
 import { EditComponentCommentComponent } from '../classroomMonitor/classroomMonitorComponents/edit-component-comment/edit-component-comment.component';
 import { EditComponentScoreComponent } from '../classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component';
@@ -32,6 +33,12 @@ export default angular
     'openResponseGradingComponentModule',
     'tableGradingComponentModule'
   ])
+  .directive(
+    'componentStateInfo',
+    downgradeComponent({
+      component: ComponentStateInfoComponent
+    }) as angular.IDirectiveFactory
+  )
   .directive(
     'editComponentAnnotations',
     downgradeComponent({

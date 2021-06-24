@@ -255,13 +255,12 @@ const WorkgroupComponentRevisions = {
                                         workgroup-id="{{::$ctrl.workgroupId}}"
                                         [is-revision]="true">
                                     </table-grading>
-                                    <component-revisions-info
-                                        node-id="::$ctrl.nodeId"
-                                        component-id="::$ctrl.componentId"
-                                        to-workgroup-id="::$ctrl.workgroupId"
-                                        component-state="item.componentState"
-                                        active='false'>
-                                    </component-revisions-info>
+                                    <div class="component__actions__info component--grading__actions__info md-caption">
+                                      <component-state-info
+                                          [component-state]="item.componentState"
+                                          [is-active]="false">
+                                      </component-state-info>
+                                    </div>
                                 </div>
                                 <div flex="100" flex-gt-sm="33" class="component--grading__annotations">
                                   <edit-component-annotations
