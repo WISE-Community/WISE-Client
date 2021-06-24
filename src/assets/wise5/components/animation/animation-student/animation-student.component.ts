@@ -1,296 +1,221 @@
-'use strict';
+import { Component } from '@angular/core';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../services/configService';
+import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { StudentAssetService } from '../../../services/studentAssetService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { UtilService } from '../../../services/utilService';
+import { ComponentStudent } from '../../component-student.component';
+import { ComponentService } from '../../componentService';
+import { AnimationService } from '../animationService';
 
-import ComponentController from '../componentController';
-import { AnimationService } from './animationService';
-import { AnnotationService } from '../../services/annotationService';
-import 'svg.js';
-
-class AnimationController extends ComponentController {
-  $q: any;
-  $timeout: any;
-  AnimationService: AnimationService;
-  width: number;
-  height: number;
-  pixelsPerXUnit: number;
-  pixelsPerYUnit: number;
-  dataXOriginInPixels: number;
-  dataYOriginInPixels: number;
-  idToSVGObject: any;
-  idToWhetherAuthoredObjectIsAnimating: any;
-  svgId: string;
+@Component({
+  selector: 'animation-student',
+  templateUrl: 'animation-student.component.html',
+  styleUrls: ['animation-student.component.scss']
+})
+export class AnimationStudent extends ComponentStudent {
+  animationState: any = 'stopped';
+  coordinateSystem: string = 'screen';
   draw: any;
-  animationState: any;
-  coordinateSystem: string;
-  timerText: any;
-  millisecondsPerDataTime: number;
+  dataXOriginInPixels: number = 0;
+  dataYOriginInPixels: number = 0;
+  height: number = 600;
+  idToSVGObject: any = {};
+  idToWhetherAuthoredObjectIsAnimating: any = {};
   lastBroadcastTime: number;
-  speedSliderValue: number;
+  millisecondsPerDataTime: number;
   numTimesPlayClicked: number = 0;
-
-  static $inject = [
-    '$filter',
-    '$injector',
-    '$mdDialog',
-    '$q',
-    '$rootScope',
-    '$scope',
-    '$timeout',
-    'AnimationService',
-    'AnnotationService',
-    'AudioRecorderService',
-    'ConfigService',
-    'NodeService',
-    'NotebookService',
-    'NotificationService',
-    'ProjectService',
-    'StudentAssetService',
-    'StudentDataService',
-    'UtilService'
-  ];
+  pixelsPerXUnit: number = 1;
+  pixelsPerYUnit: number = 1;
+  speedSliderValue: number = 3;
+  speedToMillisecondsPerDataTime = {
+    1: 10000,
+    2: 1000,
+    3: 100,
+    4: 10,
+    5: 1
+  };
+  svgId: string;
+  timerText: any;
+  width: number = 800;
 
   constructor(
-    $filter,
-    $injector,
-    $mdDialog,
-    $q,
-    $rootScope,
-    $scope,
-    $timeout,
-    AnimationService,
-    AnnotationService,
-    AudioRecorderService,
-    ConfigService,
-    NodeService,
-    NotebookService,
-    NotificationService,
-    ProjectService,
-    StudentAssetService,
-    StudentDataService,
-    UtilService
+    protected AnnotationService: AnnotationService,
+    protected ComponentService: ComponentService,
+    protected ConfigService: ConfigService,
+    private AnimationService: AnimationService,
+    protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
+    protected StudentAssetService: StudentAssetService,
+    protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
+    protected UtilService: UtilService
   ) {
     super(
-      $filter,
-      $injector,
-      $mdDialog,
-      $q,
-      $rootScope,
-      $scope,
       AnnotationService,
-      AudioRecorderService,
+      ComponentService,
       ConfigService,
       NodeService,
       NotebookService,
-      NotificationService,
-      ProjectService,
       StudentAssetService,
       StudentDataService,
+      upgrade,
       UtilService
     );
-    this.$q = $q;
-    this.$timeout = $timeout;
-    this.AnimationService = AnimationService;
+  }
 
-    this.width = 800;
-    this.height = 600;
-    this.pixelsPerXUnit = 1;
-    this.pixelsPerYUnit = 1;
-    this.dataXOriginInPixels = 0;
-    this.dataYOriginInPixels = 0;
-    this.idToSVGObject = {};
-    this.idToWhetherAuthoredObjectIsAnimating = {};
-    const componentState = this.$scope.componentState;
-    this.svgId = 'svg_' + this.nodeId + '_' + this.componentId;
-    this.setAnimationStateToStopped();
-    this.setCoordinateSystemToScreen();
-    this.setSpeed(3);
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.svgId = this.AnimationService.getSvgId(this.nodeId, this.componentId);
     this.initializeCoordinates();
-
-    this.isSaveButtonVisible = this.componentContent.showSaveButton;
-    this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
 
     if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
       this.handleConnectedComponents();
     } else if (
-      this.AnimationService.componentStateHasStudentWork(componentState, this.componentContent)
+      this.AnimationService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
-      this.setStudentWork(componentState);
+      this.setStudentWork(this.componentState);
     } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
       this.handleConnectedComponents();
     }
 
-    if (this.hasMaxSubmitCount() && !this.hasSubmitsLeft()) {
-      this.disableSubmitButton();
-    }
-
     this.disableComponentIfNecessary();
-
-    this.setupSVGAfterTimeout();
-
-    /**
-     * A connected component has changed its student data so we will
-     * perform any necessary changes to this component.
-     * @param {object} connectedComponent The connected component content.
-     * @param {object} connectedComponentParams The params to determine what to
-     * do with the connected component data such as 'importWork' or 'showWork'.
-     * @param {object} componentState The student data from the connected
-     * component that has changed.
-     */
-    this.$scope.handleConnectedComponentStudentDataChanged = (
-      connectedComponent,
-      connectedComponentParams,
-      componentState
-    ) => {
-      if (connectedComponent.type === 'Graph') {
-        this.updateObjectDatasFromDataSourceComponentState(componentState);
-      }
-    };
-
-    this.initializeScopeGetComponentState(this.$scope, 'animationController');
     this.broadcastDoneRenderingComponent();
   }
 
-  setAnimationState(state) {
+  ngAfterViewInit(): void {
+    this.setupSVG();
+  }
+
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+  }
+
+  setAnimationState(state: string): void {
     this.animationState = state;
   }
 
-  setAnimationStateToPlaying() {
+  setAnimationStateToPlaying(): void {
     this.setAnimationState('playing');
   }
 
-  setAnimationStateToPaused() {
+  setAnimationStateToPaused(): void {
     this.setAnimationState('paused');
   }
 
-  setAnimationStateToStopped() {
+  setAnimationStateToStopped(): void {
     this.setAnimationState('stopped');
   }
 
-  setCoordinateSystem(coordinateSystem) {
+  setCoordinateSystem(coordinateSystem: string): void {
     this.coordinateSystem = coordinateSystem;
   }
 
-  setCoordinateSystemToScreen() {
+  setCoordinateSystemToScreen(): void {
     this.setCoordinateSystem('screen');
   }
 
-  setCoordinateSystemToCartesian() {
+  setCoordinateSystemToCartesian(): void {
     this.setCoordinateSystem('cartesian');
   }
 
-  hasStudentUsedAllSubmits() {
-    return (
-      this.componentContent.maxSubmitCount != null &&
-      this.submitCounter >= this.componentContent.maxSubmitCount
-    );
+  initializeCoordinates(): void {
+    this.initializeWidthValues();
+    this.initializeHeightValues();
+    this.initializeDataXOrigin();
+    this.initializeDataYOrigin();
+    this.initializeCoordinateSystem();
   }
 
-  initializeCoordinates() {
-    if (this.componentContent.widthInPixels != null && this.componentContent.widthInPixels != '') {
+  initializeWidthValues(): void {
+    if (this.componentContent.widthInPixels != null && this.componentContent.widthInPixels !== '') {
       this.width = this.componentContent.widthInPixels;
       this.pixelsPerXUnit =
         this.componentContent.widthInPixels / this.componentContent.widthInUnits;
     }
+  }
 
+  initializeHeightValues(): void {
     if (
       this.componentContent.heightInPixels != null &&
-      this.componentContent.heightInPixels != ''
+      this.componentContent.heightInPixels !== ''
     ) {
       this.height = this.componentContent.heightInPixels;
       this.pixelsPerYUnit =
         this.componentContent.heightInPixels / this.componentContent.heightInUnits;
     }
+  }
 
+  initializeDataXOrigin(): void {
     if (
       this.componentContent.dataXOriginInPixels != null &&
-      this.componentContent.dataXOriginInPixels != ''
+      this.componentContent.dataXOriginInPixels !== ''
     ) {
       this.dataXOriginInPixels = this.componentContent.dataXOriginInPixels;
     }
+  }
 
+  initializeDataYOrigin(): void {
     if (
       this.componentContent.dataYOriginInPixels != null &&
-      this.componentContent.dataYOriginInPixels != ''
+      this.componentContent.dataYOriginInPixels !== ''
     ) {
       this.dataYOriginInPixels = this.componentContent.dataYOriginInPixels;
     }
+  }
 
+  initializeCoordinateSystem(): void {
     if (
       this.componentContent.coordinateSystem != null &&
-      this.componentContent.coordinateSystem != ''
+      this.componentContent.coordinateSystem !== ''
     ) {
       this.coordinateSystem = this.componentContent.coordinateSystem;
     }
   }
 
-  /*
-   * Call the setupSVG() function after a timeout so that angular has a
-   * chance to set the svg element id before we start using it. If we
-   * don't wait for the timeout, the svg id won't be set when we try
-   * to start referencing the svg element.
-   */
-  setupSVGAfterTimeout() {
-    this.$timeout(() => {
-      this.setupSVG();
-    });
-  }
-
-  setupSVG() {
+  setupSVG(): void {
     this.draw = SVG(this.svgId);
     this.createSVGObjects();
     this.updateObjectDatasFromDataSources();
   }
 
-  createSVGObjects() {
-    for (let object of this.componentContent.objects) {
-      const id = object.id;
-      const type = object.type;
+  createSVGObjects(): void {
+    for (const object of this.componentContent.objects) {
       let svgObject = null;
-
-      if (type == 'image') {
+      const type = object.type;
+      if (type === 'image') {
         svgObject = this.createSVGImage(object.image, object.width, object.height);
-      } else if (type == 'text') {
+      } else if (type === 'text') {
         svgObject = this.createSVGText(object.text);
       }
 
+      const id = object.id;
       this.addIdToSVGObject(id, svgObject);
       this.addIdToWhetherAuthoredObjectIsAnimating(id, false);
       this.initializeObjectPosition(object);
     }
   }
 
-  createSVGImage(image, width, height) {
+  createSVGImage(image: string, width: number, height: number): any {
     return this.draw.image(image, width, height);
   }
 
-  createSVGText(text) {
+  createSVGText(text: string): any {
     if (text == null) {
       text = '';
     }
     return this.draw.text(text);
   }
 
-  addIdToSVGObject(id, svgObject) {
+  addIdToSVGObject(id: string, svgObject: any): void {
     this.idToSVGObject[id] = svgObject;
   }
 
-  addIdToWhetherAuthoredObjectIsAnimating(id, isAnimating) {
+  addIdToWhetherAuthoredObjectIsAnimating(id: string, isAnimating: boolean): void {
     this.idToWhetherAuthoredObjectIsAnimating[id] = isAnimating;
-  }
-
-  initializeObjectImages() {
-    let objects = this.componentContent.objects;
-    for (let object of objects) {
-      if (object.type == 'image') {
-        const svgObject = this.idToSVGObject[object.id];
-        svgObject.load(object.image);
-      }
-    }
-  }
-
-  initializeObjectPositions() {
-    for (let object of this.componentContent.objects) {
-      this.initializeObjectPosition(object);
-    }
   }
 
   /**
@@ -298,7 +223,7 @@ class AnimationController extends ComponentController {
    * @param {integer} x An x value in data units.
    * @return {integer} The x value converted to a pixel coordinate.
    */
-  dataXToPixelX(x) {
+  dataXToPixelX(x: number): number {
     if (x == null) {
       return this.dataXOriginInPixels;
     } else {
@@ -311,7 +236,7 @@ class AnimationController extends ComponentController {
    * @param {integer} y A y value in data units.
    * @return {integer} The y value converted to a pixel coordinate.
    */
-  dataYToPixelY(y) {
+  dataYToPixelY(y: number): number {
     if (y == null) {
       return this.dataYOriginInPixels;
     } else {
@@ -319,21 +244,18 @@ class AnimationController extends ComponentController {
     }
   }
 
-  initializeObjectPosition(authoredObject) {
-    let x = this.getPixelXForAuthoredObject(authoredObject);
+  initializeObjectPosition(authoredObject: any): void {
+    const x = this.getPixelXForAuthoredObject(authoredObject);
     let y = this.getPixelYForAuthoredObject(authoredObject);
-
     if (this.isUsingCartesianCoordinateSystem()) {
       y = this.convertToCartesianCoordinateSystem(y);
     }
 
-    let id = authoredObject.id;
-    let svgObject = this.getSVGObject(id);
+    const svgObject = this.getSVGObject(authoredObject.id);
     this.setPositionOfSVGObject(svgObject, x, y);
 
     if (this.authoredObjectHasData(authoredObject)) {
       const data = authoredObject.data;
-
       if (this.hasDataPointAtTimeZero(data)) {
         const firstDataPoint = data[0];
         this.setPositionFromDataPoint(svgObject, firstDataPoint);
@@ -341,35 +263,31 @@ class AnimationController extends ComponentController {
     }
   }
 
-  getPixelXForAuthoredObject(authoredObject) {
+  getPixelXForAuthoredObject(authoredObject: any): number {
     const dataX = authoredObject.dataX;
     const pixelX = authoredObject.pixelX;
-    let x = 0;
     if (dataX != null) {
-      x = this.dataXToPixelX(dataX);
+      return this.dataXToPixelX(dataX);
     } else if (pixelX != null) {
-      x = pixelX;
+      return pixelX;
     }
-    return x;
   }
 
-  getPixelYForAuthoredObject(authoredObject) {
+  getPixelYForAuthoredObject(authoredObject: any): number {
     const dataY = authoredObject.dataY;
     const pixelY = authoredObject.pixelY;
-    let y = 0;
     if (dataY != null) {
-      y = this.dataYToPixelY(dataY);
+      return this.dataYToPixelY(dataY);
     } else if (pixelY != null) {
-      y = pixelY;
+      return pixelY;
     }
-    return y;
   }
 
-  getSVGObject(id) {
+  getSVGObject(id: string): any {
     return this.idToSVGObject[id];
   }
 
-  hasDataPointAtTimeZero(data) {
+  hasDataPointAtTimeZero(data: any[]): boolean {
     const firstDataPoint = data[0];
     if (firstDataPoint != null && firstDataPoint.t === 0) {
       return true;
@@ -378,7 +296,7 @@ class AnimationController extends ComponentController {
     }
   }
 
-  setPositionFromDataPoint(svgObject, dataPoint) {
+  setPositionFromDataPoint(svgObject: any, dataPoint: any): void {
     let dataPointX = dataPoint.x;
     let dataPointY = dataPoint.y;
     if (dataPointX != null && dataPointX != '' && typeof dataPointX != 'undefined') {
@@ -397,42 +315,53 @@ class AnimationController extends ComponentController {
     }
   }
 
-  setPositionOfSVGObject(svgObject, x, y) {
+  setPositionOfSVGObject(svgObject: any, x: number, y: number): void {
     svgObject.attr({ x: x, y: y });
   }
 
-  setXPositionOfSVGObject(svgObject, x) {
+  setXPositionOfSVGObject(svgObject: any, x: number) {
     svgObject.attr('x', x);
   }
 
-  setYPositionOfSVGObject(svgObject, y) {
+  setYPositionOfSVGObject(svgObject: any, y: number) {
     svgObject.attr('y', y);
   }
 
   startAnimation() {
     this.initializeObjectImages();
     this.initializeObjectPositions();
-    for (let authoredObject of this.componentContent.objects) {
+    for (const authoredObject of this.componentContent.objects) {
       this.animateObject(authoredObject);
     }
   }
 
-  /**
-   * @param {integer} time
-   */
-  showTimeInSVG(time) {
+  initializeObjectImages(): void {
+    for (const object of this.componentContent.objects) {
+      if (object.type === 'image') {
+        const svgObject = this.idToSVGObject[object.id];
+        svgObject.load(object.image);
+      }
+    }
+  }
+
+  initializeObjectPositions(): void {
+    for (const object of this.componentContent.objects) {
+      this.initializeObjectPosition(object);
+    }
+  }
+
+  showTimeInSVG(time: number): void {
     if (this.timerText == null) {
       this.initializeTimerText();
     }
 
     this.setTimerText(time + '');
-
     const x = this.getTimerTextX(time);
     const y = 0;
     this.setTimerPosition(x, y);
   }
 
-  initializeTimerText() {
+  initializeTimerText(): void {
     this.timerText = this.draw.text('0').attr({ fill: '#f03' });
   }
 
@@ -441,23 +370,23 @@ class AnimationController extends ComponentController {
    * @param {number} time The time in seconds.
    * @returns {number} The x pixel coordinate.
    */
-  getTimerTextX(time) {
+  getTimerTextX(time: number): number {
     const width = this.width;
 
     // set the x position near the top right of the svg div
     let x = width - 30;
 
-    if (time >= 10) {
+    if (time >= 100) {
+      // shift the text to the left if there are three digits
+      x = width - 46;
+    } else if (time >= 10) {
       // shift the text a little to the left if there are two digits
       x = width - 38;
-    } else if (time >= 100) {
-      // shift the text a little more to the left if there are three digits
-      x = width - 46;
     }
     return x;
   }
 
-  setTimerText(text) {
+  setTimerText(text: string): void {
     this.timerText.text(text);
   }
 
@@ -465,19 +394,19 @@ class AnimationController extends ComponentController {
    * @param {integer} x The x pixel coordinate.
    * @param {integer} y The y pixel coordinate.
    */
-  setTimerPosition(x, y) {
+  setTimerPosition(x: number, y: number): void {
     this.timerText.attr({ x: x, y: y });
   }
 
-  updateObjectDatasFromDataSources() {
-    for (let object of this.componentContent.objects) {
+  updateObjectDatasFromDataSources(): void {
+    for (const object of this.componentContent.objects) {
       if (this.authoredObjectHasDataSource(object)) {
         this.updateObjectDataFromDataSource(object);
       }
     }
   }
 
-  updateObjectDataFromDataSource(object) {
+  updateObjectDataFromDataSource(object: any): void {
     const dataSource = object.dataSource;
     const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
       dataSource.nodeId,
@@ -493,7 +422,11 @@ class AnimationController extends ComponentController {
     }
   }
 
-  updateObjectDatasFromDataSourceComponentState(componentState) {
+  processConnectedComponentState(componentState: any): void {
+    this.updateObjectDatasFromDataSourceComponentState(componentState);
+  }
+
+  updateObjectDatasFromDataSourceComponentState(componentState: any): void {
     for (const object of this.componentContent.objects) {
       if (
         this.authoredObjectHasDataSource(object) &&
@@ -504,7 +437,7 @@ class AnimationController extends ComponentController {
     }
   }
 
-  isComponentStateFromDataSource(componentState, dataSource) {
+  isComponentStateFromDataSource(componentState: any, dataSource: any): boolean {
     if (
       dataSource != null &&
       dataSource.nodeId == componentState.nodeId &&
@@ -516,27 +449,26 @@ class AnimationController extends ComponentController {
     }
   }
 
-  updateObjectDataFromDataSourceComponentState(object, componentState) {
-    if (componentState.componentType == 'Graph') {
+  updateObjectDataFromDataSourceComponentState(object: any, componentState: any): void {
+    if (componentState.componentType === 'Graph') {
       this.setDataFromGraphComponentState(object, componentState);
     }
   }
 
-  setDataFromGraphComponentState(object, componentState) {
+  setDataFromGraphComponentState(object: any, componentState: any): void {
     object.data = this.getDataFromDataSourceComponentState(object.dataSource, componentState);
   }
 
-  setDataFromTableComponentState(object, componentState) {
+  setDataFromTableComponentState(object: any, componentState: any): void {
     // TODO
   }
 
-  getDataFromDataSourceComponentState(dataSource, componentState) {
+  getDataFromDataSourceComponentState(dataSource: any, componentState: any): any {
     const trialIndex = dataSource.trialIndex;
     const seriesIndex = dataSource.seriesIndex;
     const tColumnIndex = dataSource.tColumnIndex;
     const xColumnIndex = dataSource.xColumnIndex;
     const yColumnIndex = dataSource.yColumnIndex;
-
     const trial = this.getTrialFromComponentState(componentState, trialIndex);
     const singleSeries = this.getSeriesFromTrial(trial, seriesIndex);
     const seriesData = this.getDataFromSeries(singleSeries);
@@ -548,7 +480,7 @@ class AnimationController extends ComponentController {
     );
   }
 
-  getTrialFromComponentState(componentState, trialIndex) {
+  getTrialFromComponentState(componentState: any, trialIndex: number): any {
     let trial = null;
     const studentData = componentState.studentData;
     if (studentData.trials != null) {
@@ -557,15 +489,20 @@ class AnimationController extends ComponentController {
     return trial;
   }
 
-  getSeriesFromTrial(trial, seriesIndex) {
+  getSeriesFromTrial(trial: any, seriesIndex: number): any {
     return trial.series[seriesIndex];
   }
 
-  getDataFromSeries(series) {
+  getDataFromSeries(series: any): any {
     return series.data;
   }
 
-  convertSeriesDataToAnimationData(seriesData, tColumnIndex, xColumnIndex, yColumnIndex) {
+  convertSeriesDataToAnimationData(
+    seriesData: any[],
+    tColumnIndex: number,
+    xColumnIndex: number,
+    yColumnIndex: number
+  ): any {
     const data = [];
 
     for (const seriesDataPoint of seriesData) {
@@ -588,19 +525,19 @@ class AnimationController extends ComponentController {
     return data;
   }
 
-  animateObject(authoredObject) {
+  animateObject(authoredObject: any): void {
     if (this.authoredObjectHasData(authoredObject)) {
-      let id = authoredObject.id;
-      let data = authoredObject.data;
-      let svgObject = this.idToSVGObject[id];
+      const id = authoredObject.id;
+      const data = authoredObject.data;
+      const svgObject = this.idToSVGObject[id];
       let animateObject = null;
 
       for (let d = 0; d < data.length; d++) {
-        let currentDataPoint = data[d];
-        let nextDataPoint = data[d + 1];
-        let image = currentDataPoint.image;
-        let t = currentDataPoint.t;
-        let xPixel = this.dataXToPixelX(currentDataPoint.x);
+        const currentDataPoint = data[d];
+        const nextDataPoint = data[d + 1];
+        const image = currentDataPoint.image;
+        const t = currentDataPoint.t;
+        const xPixel = this.dataXToPixelX(currentDataPoint.x);
         let yPixel = this.dataYToPixelY(currentDataPoint.y);
         if (this.isUsingCartesianCoordinateSystem()) {
           yPixel = this.convertToCartesianCoordinateSystem(yPixel);
@@ -634,7 +571,7 @@ class AnimationController extends ComponentController {
             nextYPixel = this.convertToCartesianCoordinateSystem(nextYPixel);
           }
 
-          let tDiff = this.calculateTimeDiff(t, nextT);
+          const tDiff = this.calculateTimeDiff(t, nextT);
           animateObject = this.updatePositionOfSVGObject(
             svgObject,
             animateObject,
@@ -650,16 +587,13 @@ class AnimationController extends ComponentController {
     }
   }
 
-  setInitialPositionOfSVGObject(t, svgObject, xPixel, yPixel) {
+  setInitialPositionOfSVGObject(t: number, svgObject: any, xPixel: number, yPixel: number): any {
     let animateObject = null;
-
     if (t == 0) {
       svgObject.attr({ x: xPixel, y: yPixel });
     } else {
-      /*
-       * The first data point is not at time 0 so we will need to wait some time
-       * before we set the position of the object.
-       */
+      // The first data point is not at time 0 so we will need to wait some time before we set the
+      // position of the object.
       const thisAnimationController = this;
       animateObject = svgObject
         .animate(t * this.millisecondsPerDataTime)
@@ -671,11 +605,17 @@ class AnimationController extends ComponentController {
           this.attr({ x: xPixel, y: yPixel });
         });
     }
-
     return animateObject;
   }
 
-  updatePositionOfSVGObject(svgObject, animateObject, t, tDiff, nextXPixel, nextYPixel) {
+  updatePositionOfSVGObject(
+    svgObject: any,
+    animateObject: any,
+    t: number,
+    tDiff: number,
+    nextXPixel: number,
+    nextYPixel: number
+  ): any {
     // move the image to the next position in the given amount of time
     const thisAnimationController = this;
     return svgObject
@@ -687,29 +627,27 @@ class AnimationController extends ComponentController {
       });
   }
 
-  animationCompletedPostProcessing(id, animateObject) {
+  animationCompletedPostProcessing(id: string, animateObject: any): void {
     animateObject.afterAll(() => {
       this.idToWhetherAuthoredObjectIsAnimating[id] = false;
-      this.checkIfAllAnimatingIsDone();
+      this.checkIfCanStop();
     });
   }
 
   updateImageOfSVGObject(
-    image,
-    animateObject,
-    svgObject,
-    authoredObject,
-    currentDataPoint,
-    nextDataPoint
-  ) {
-    if (image != null && image != '') {
+    image: string,
+    animateObject: any,
+    svgObject: any,
+    authoredObject: any,
+    currentDataPoint: any,
+    nextDataPoint: any
+  ): any {
+    if (image != null && image !== '') {
       this.updateSVGObjectImage(image, svgObject, animateObject);
     } else if (nextDataPoint != null) {
-      /*
-       * There is a next data point so we will see if we can determine what
-       * image to show based upon the movement of the object.
-       */
-      let dynamicallyCalculatedImage = this.getImageBasedOnMovement(
+      // There is a next data point so we will see if we can determine what image to show based upon
+      // the movement of the object.
+      const dynamicallyCalculatedImage = this.getImageBasedOnMovement(
         authoredObject,
         currentDataPoint,
         nextDataPoint
@@ -721,7 +659,7 @@ class AnimationController extends ComponentController {
     return animateObject;
   }
 
-  updateSVGObjectImage(image, svgObject, animateObject) {
+  updateSVGObjectImage(image: string, svgObject: any, animateObject: any): any {
     if (animateObject == null) {
       // change the image immediately
       svgObject.load(image);
@@ -734,7 +672,7 @@ class AnimationController extends ComponentController {
     return animateObject;
   }
 
-  calculateTimeDiff(currentTime, futureTime) {
+  calculateTimeDiff(currentTime: number, futureTime: number): number {
     if (futureTime == null) {
       return 0;
     } else {
@@ -742,18 +680,18 @@ class AnimationController extends ComponentController {
     }
   }
 
-  isFirstDataPoint(d) {
+  isFirstDataPoint(d: number): boolean {
     return d == 0;
   }
 
-  isLastDataPoint(data, d) {
+  isLastDataPoint(data: number[], d: number): boolean {
     return d == data.length - 1;
   }
 
   /**
    * @param {number} t The time in seconds.
    */
-  displayAndBroadcastTime(t) {
+  displayAndBroadcastTime(t: number): void {
     const displayTime = this.truncateToOneDecimalPlace(t);
     this.showTimeInSVG(displayTime);
 
@@ -769,18 +707,17 @@ class AnimationController extends ComponentController {
   /**
    * @param {number} timeInSeconds
    */
-  truncateToOneDecimalPlace(timeInSeconds) {
+  truncateToOneDecimalPlace(timeInSeconds: number): number {
     return Math.floor(timeInSeconds * 10) / 10;
   }
 
   /**
-   * Check if we want to broadcast the time. We want to make sure we don't
-   * broadcast the time too frequently because that may slow down the student's
-   * computer significantly. We will wait 100 milliseconds before each
-   * broadcast.
+   * Check if we want to broadcast the time. We want to make sure we don't broadcast the time too
+   * frequently because that may slow down the student's computer significantly. We will wait 100
+   * milliseconds before each broadcast.
    * @returns {boolean}
    */
-  isPerformBroadcast() {
+  isPerformBroadcast(): boolean {
     let currentTime = new Date().getTime();
 
     if (this.lastBroadcastTime == null || currentTime - this.lastBroadcastTime > 100) {
@@ -790,7 +727,7 @@ class AnimationController extends ComponentController {
     }
   }
 
-  broadcastTime(t) {
+  broadcastTime(t: number): void {
     const componentState = {
       t: t
     };
@@ -809,56 +746,96 @@ class AnimationController extends ComponentController {
    * @param {object} currentDataPoint Contains x and y fields.
    * @param {object} extDataPoint Contains x and y fields.
    */
-  getImageBasedOnMovement(authoredObject, currentDataPoint, nextDataPoint) {
-    if (
-      this.isYDataPointSame(currentDataPoint, nextDataPoint) &&
-      !this.isXDataPointSame(currentDataPoint, nextDataPoint)
-    ) {
+  getImageBasedOnMovement(authoredObject: any, currentDataPoint: any, nextDataPoint: any): string {
+    if (this.isObjectMovingOnlyInXDirection(currentDataPoint, nextDataPoint)) {
       return this.getImageMovingInX(authoredObject, currentDataPoint, nextDataPoint);
-    } else if (
-      this.isXDataPointSame(currentDataPoint, nextDataPoint) &&
-      !this.isYDataPointSame(currentDataPoint, nextDataPoint)
-    ) {
+    } else if (this.isObjectMovingOnlyInYDirection(currentDataPoint, nextDataPoint)) {
       return this.getImageMovingInY(authoredObject, currentDataPoint, nextDataPoint);
     }
     return null;
   }
 
-  isXDataPointSame(currentDataPoint, nextDataPoint) {
+  isObjectMovingOnlyInXDirection(currentDataPoint: any, nextDataPoint: any): boolean {
+    return (
+      this.isYDataPointSame(currentDataPoint, nextDataPoint) &&
+      !this.isXDataPointSame(currentDataPoint, nextDataPoint)
+    );
+  }
+
+  isObjectMovingOnlyInYDirection(currentDataPoint: any, nextDataPoint: any): boolean {
+    return (
+      this.isXDataPointSame(currentDataPoint, nextDataPoint) &&
+      !this.isYDataPointSame(currentDataPoint, nextDataPoint)
+    );
+  }
+
+  isXDataPointSame(currentDataPoint: any, nextDataPoint: any): boolean {
     return currentDataPoint.x == nextDataPoint.x;
   }
 
-  isYDataPointSame(currentDataPoint, nextDataPoint) {
+  isYDataPointSame(currentDataPoint: any, nextDataPoint: any): boolean {
     return currentDataPoint.y == nextDataPoint.y;
   }
 
-  getImageMovingInX(authoredObject, currentDataPoint, nextDataPoint) {
-    if (currentDataPoint.x < nextDataPoint.x) {
+  getImageMovingInX(authoredObject: any, currentDataPoint: any, nextDataPoint: any): string {
+    if (this.isMovingRight(currentDataPoint, nextDataPoint)) {
       return this.getImageMovingRight(authoredObject);
-    } else if (currentDataPoint.x > nextDataPoint.x) {
+    } else if (this.isMovingLeft(currentDataPoint, nextDataPoint)) {
       return this.getImageMovingLeft(authoredObject);
     }
     return null;
   }
 
-  getImageMovingInY(authoredObject, currentDataPoint, nextDataPoint) {
-    if (currentDataPoint.y < nextDataPoint.y) {
-      if (this.isUsingCartesianCoordinateSystem()) {
-        return this.getImageMovingUp(authoredObject);
-      } else {
-        return this.getImageMovingDown(authoredObject);
-      }
-    } else if (currentDataPoint.y > nextDataPoint.y) {
-      if (this.isUsingCartesianCoordinateSystem()) {
-        return this.getImageMovingDown(authoredObject);
-      } else {
-        return this.getImageMovingUp(authoredObject);
-      }
+  getImageMovingInY(authoredObject: any, currentDataPoint: any, nextDataPoint: any): string {
+    if (this.isYIncreasing(currentDataPoint, nextDataPoint)) {
+      return this.getImageYIncreasing(authoredObject);
+    } else if (this.isYDecreasing(currentDataPoint, nextDataPoint)) {
+      return this.getImageYDecreasing(authoredObject);
     }
     return null;
   }
 
-  getImageMovingUp(authoredObject) {
+  isMovingRight(currentDataPoint: any, nextDataPoint: any): boolean {
+    return this.isFieldIncreasing(currentDataPoint, nextDataPoint, 'x');
+  }
+
+  isMovingLeft(currentDataPoint: any, nextDataPoint: any): boolean {
+    return this.isFieldDecreasing(currentDataPoint, nextDataPoint, 'x');
+  }
+
+  isYIncreasing(currentDataPoint: any, nextDataPoint: any): boolean {
+    return this.isFieldIncreasing(currentDataPoint, nextDataPoint, 'y');
+  }
+
+  isYDecreasing(currentDataPoint: any, nextDataPoint: any): boolean {
+    return this.isFieldDecreasing(currentDataPoint, nextDataPoint, 'y');
+  }
+
+  isFieldIncreasing(currentDataPoint: any, nextDataPoint: any, fieldName: string): boolean {
+    return currentDataPoint[fieldName] < nextDataPoint[fieldName];
+  }
+
+  isFieldDecreasing(currentDataPoint: any, nextDataPoint: any, fieldName: string): boolean {
+    return currentDataPoint[fieldName] > nextDataPoint[fieldName];
+  }
+
+  getImageYIncreasing(authoredObject: any): any {
+    if (this.isUsingCartesianCoordinateSystem()) {
+      return this.getImageMovingUp(authoredObject);
+    } else {
+      return this.getImageMovingDown(authoredObject);
+    }
+  }
+
+  getImageYDecreasing(authoredObject: any): any {
+    if (this.isUsingCartesianCoordinateSystem()) {
+      return this.getImageMovingDown(authoredObject);
+    } else {
+      return this.getImageMovingUp(authoredObject);
+    }
+  }
+
+  getImageMovingUp(authoredObject: any): string {
     if (authoredObject.imageMovingUp != null && authoredObject.imageMovingUp != '') {
       return authoredObject.imageMovingUp;
     } else {
@@ -866,7 +843,7 @@ class AnimationController extends ComponentController {
     }
   }
 
-  getImageMovingDown(authoredObject) {
+  getImageMovingDown(authoredObject: any): string {
     if (authoredObject.imageMovingDown != null && authoredObject.imageMovingDown != '') {
       return authoredObject.imageMovingDown;
     } else {
@@ -874,7 +851,7 @@ class AnimationController extends ComponentController {
     }
   }
 
-  getImageMovingLeft(authoredObject) {
+  getImageMovingLeft(authoredObject: any): string {
     if (authoredObject.imageMovingLeft != null && authoredObject.imageMovingLeft != '') {
       return authoredObject.imageMovingLeft;
     } else {
@@ -882,7 +859,7 @@ class AnimationController extends ComponentController {
     }
   }
 
-  getImageMovingRight(authoredObject) {
+  getImageMovingRight(authoredObject: any): string {
     if (authoredObject.imageMovingRight != null && authoredObject.imageMovingRight != '') {
       return authoredObject.imageMovingRight;
     } else {
@@ -890,23 +867,14 @@ class AnimationController extends ComponentController {
     }
   }
 
-  /**
-   * Check if all svg objects are done animating. If there are no svg objects
-   * animating, we will set the animationState to 'stopped'.
-   */
-  checkIfAllAnimatingIsDone() {
+  checkIfCanStop(): void {
     if (!this.areAnyObjectsAnimating()) {
       this.setAnimationStateToStopped();
-
-      // perform a digest after a timeout so that the buttons update
-      this.$timeout(() => {
-        this.$scope.$digest();
-      });
     }
   }
 
-  areAnyObjectsAnimating() {
-    for (let object of this.componentContent.objects) {
+  areAnyObjectsAnimating(): boolean {
+    for (const object of this.componentContent.objects) {
       if (this.idToWhetherAuthoredObjectIsAnimating[object.id]) {
         return true;
       }
@@ -926,27 +894,23 @@ class AnimationController extends ComponentController {
     this.processLatestStudentWork();
   }
 
-  confirmSubmit(numberOfSubmitsLeft) {
+  confirmSubmit(numberOfSubmitsLeft: number): boolean {
     let isPerformSubmit = false;
-
     if (numberOfSubmitsLeft <= 0) {
-      alert(this.$translate('animation.youHaveNoMoreChances'));
+      alert($localize`You do not have any more chances to receive feedback on your answer.`);
     } else if (numberOfSubmitsLeft == 1) {
       isPerformSubmit = confirm(
-        this.$translate('animation.youHaveOneChance', { numberOfSubmitsLeft: numberOfSubmitsLeft })
+        $localize`You have 1 chance to receive feedback on your answer so this this should be your best work.\n\nAre you ready to receive feedback on this answer?`
       );
     } else if (numberOfSubmitsLeft > 1) {
       isPerformSubmit = confirm(
-        this.$translate('animation.youHaveMultipleChances', {
-          numberOfSubmitsLeft: numberOfSubmitsLeft
-        })
+        $localize`You have ${numberOfSubmitsLeft} chances to receive feedback on your answer so this this should be your best work.\n\nAre you ready to receive feedback on this answer?`
       );
     }
-
     return isPerformSubmit;
   }
 
-  studentDataChanged() {
+  studentDataChanged(): void {
     this.setIsDirty(true);
     this.emitComponentDirty(true);
     this.setIsSubmitDirty(true);
@@ -961,39 +925,43 @@ class AnimationController extends ComponentController {
    * e.g. 'submit', 'save', 'change'.
    * @return {promise} A promise that will return a component state.
    */
-  createComponentState(action) {
-    const deferred = this.$q.defer();
+  createComponentState(action: string): Promise<any> {
+    const componentState = this.createComponentStateObject();
+    this.setIsSubmit(false);
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
+      this.isSubmitButtonDisabled = true;
+    }
+    return new Promise((resolve, reject) => {
+      this.createComponentStateAdditionalProcessing(
+        { resolve: resolve, reject: reject },
+        componentState,
+        action
+      );
+    });
+  }
+
+  createComponentStateObject(): any {
     const componentState: any = this.NodeService.createNewComponentState();
+    componentState.nodeId = this.nodeId;
+    componentState.componentId = this.componentId;
     const studentData = {
       numTimesPlayClicked: this.numTimesPlayClicked,
       submitCounter: this.submitCounter
     };
     componentState.studentData = studentData;
-    componentState.isSubmit = this.getIsSubmit();
+    componentState.isSubmit = this.isSubmit;
     if (this.isSubmit && this.hasDefaultFeedback()) {
       this.addDefaultFeedback(componentState);
     }
-
-    /*
-     * Perform any additional processing that is required before returning
-     * the component state.
-     */
-    this.createComponentStateAdditionalProcessing(deferred, componentState, action);
-
-    /*
-     * Reset the isSubmit value so that the next component state
-     * doesn't maintain the same value.
-     */
-    this.setIsSubmit(false);
-
-    return deferred.promise;
+    return componentState;
   }
 
   /**
    * @param {object} data The annotation data.
    * @returns {object} The auto score annotation.
    */
-  createAutoScoreAnnotation(data) {
+  createAutoScoreAnnotation(data: any): any {
     const runId = this.ConfigService.getRunId();
     const periodId = this.ConfigService.getPeriodId();
     const nodeId = this.nodeId;
@@ -1013,7 +981,7 @@ class AnimationController extends ComponentController {
    * @param {object} data The annotation data.
    * @returns {object} The auto comment annotation.
    */
-  createAutoCommentAnnotation(data) {
+  createAutoCommentAnnotation(data: any): any {
     const runId = this.ConfigService.getRunId();
     const periodId = this.ConfigService.getPeriodId();
     const nodeId = this.nodeId;
@@ -1029,84 +997,69 @@ class AnimationController extends ComponentController {
     );
   }
 
-  playButtonClicked() {
+  playButtonClicked(): void {
     this.incrementNumTimesPlayClicked();
     this.setAnimationStateToPlaying();
     this.startAnimation();
     this.studentDataChanged();
   }
 
-  incrementNumTimesPlayClicked() {
+  incrementNumTimesPlayClicked(): void {
     this.numTimesPlayClicked++;
   }
 
-  pauseButtonClicked() {
+  pauseButtonClicked(): void {
     this.setAnimationStateToPaused();
-    for (let object of this.componentContent.objects) {
-      let id = object.id;
-      let svgObject = this.idToSVGObject[id];
+    for (const object of this.componentContent.objects) {
+      const svgObject = this.idToSVGObject[object.id];
       svgObject.pause();
     }
   }
 
-  resumeButtonClicked() {
+  resumeButtonClicked(): void {
     this.setAnimationStateToPlaying();
-
-    for (let object of this.componentContent.objects) {
-      let id = object.id;
-      let svgObject = this.idToSVGObject[id];
-      /*
-       * Check if the object still needs to be animated or
-       * if it has already finished performing all of its
-       * animation. We only need to play it if it still
-       * has more animating.
-       */
+    for (const object of this.componentContent.objects) {
+      const id = object.id;
+      const svgObject = this.idToSVGObject[id];
+      // Check if the object still needs to be animated or if it has already finished performing all
+      // of its animation. We only need to play it if it still has more animating.
       if (this.idToWhetherAuthoredObjectIsAnimating[id]) {
         svgObject.play();
       }
     }
   }
 
-  resetButtonClicked() {
+  resetButtonClicked(): void {
     this.setAnimationStateToStopped();
 
-    for (let object of this.componentContent.objects) {
-      let id = object.id;
-      let svgObject = this.idToSVGObject[id];
-      let jumpToEnd = true;
-      let clearQueue = true;
-
-      /*
-       * Check if the object still needs to be animated or
-       * if it has already finished performing all of its
-       * animation. We only need to play it if it still
-       * has more animating.
-       */
+    for (const object of this.componentContent.objects) {
+      const id = object.id;
+      const svgObject = this.idToSVGObject[id];
+      // Check if the object still needs to be animated or if it has already finished performing all
+      // of its animation. We only need to play it if it still has more animating.
       if (this.idToWhetherAuthoredObjectIsAnimating[id]) {
-        /*
-         * We need to play it in case it is currently paused.
-         * There is a minor bug in the animation library
-         * which is caused if you pause an animation and
-         * then stop the animation. Then if you try to play the
-         * animation, the animation will not play. We avoid
-         * this problem by making sure the object animation
-         * is playing when we stop it.
-         */
+        // We need to play it in case it is currently paused. There is a minor bug in the animation
+        // library which is caused if you pause an animation and then stop the animation. Then if
+        // you try to play the animation, the animation will not play. We avoid this problem by
+        // making sure the object animation is playing when we stop it.
         svgObject.play();
       }
+
+      const jumpToEnd = true;
+      const clearQueue = true;
 
       // stop the object from animating
       svgObject.stop(jumpToEnd, clearQueue);
     }
 
-    this.$timeout(() => {
+    setTimeout(() => {
       this.displayAndBroadcastTime(0);
       this.initializeObjectImages();
       this.initializeObjectPositions();
     }, 100);
   }
 
-  isUsingCartesianCoordinateSystem() {
+  isUsingCartesianCoordinateSystem(): boolean {
     return this.coordinateSystem == 'cartesian';
   }
 
@@ -1115,37 +1068,24 @@ class AnimationController extends ComponentController {
    * @param {integer} y the pixel y value in the screen coordinate system
    * @return {integer} the pixel y value in the cartesian coordinate system
    */
-  convertToCartesianCoordinateSystem(y) {
+  convertToCartesianCoordinateSystem(y: number): number {
     return this.height - y;
   }
 
-  speedSliderChanged() {
-    this.setSpeed(this.speedSliderValue);
+  speedSliderChanged(speedValue: number): void {
+    this.setSpeed(speedValue);
     this.resetButtonClicked();
   }
 
-  setSpeed(speedSliderValue) {
-    this.speedSliderValue = speedSliderValue;
-    if (speedSliderValue == 1) {
-      this.millisecondsPerDataTime = 10000;
-    } else if (speedSliderValue == 2) {
-      this.millisecondsPerDataTime = 1000;
-    } else if (speedSliderValue == 3) {
-      this.millisecondsPerDataTime = 100;
-    } else if (speedSliderValue == 4) {
-      this.millisecondsPerDataTime = 10;
-    } else if (speedSliderValue == 5) {
-      this.millisecondsPerDataTime = 1;
-    }
+  setSpeed(speedSliderValue: number): void {
+    this.millisecondsPerDataTime = this.speedToMillisecondsPerDataTime[speedSliderValue];
   }
 
-  authoredObjectHasData(authoredObject) {
+  authoredObjectHasData(authoredObject: any): boolean {
     return authoredObject.data != null && authoredObject.data.length > 0;
   }
 
-  authoredObjectHasDataSource(authoredObject) {
+  authoredObjectHasDataSource(authoredObject: any): boolean {
     return authoredObject.dataSource != null;
   }
 }
-
-export default AnimationController;

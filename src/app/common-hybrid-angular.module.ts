@@ -67,6 +67,7 @@ import { WiseLinkService } from './services/wiseLinkService';
 import { DataExportService } from '../assets/wise5/services/dataExportService';
 import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -101,6 +102,7 @@ export class EmptyComponent {}
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSliderModule,
     MatTabsModule,
     MatToolbarModule,
     MatSlideToggleModule,
@@ -170,9 +172,10 @@ export class EmptyComponent {}
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
     MatTabsModule,
     MatToolbarModule,
-    MatSlideToggleModule,
     MatTooltipModule,
     MomentModule,
     NodeIconComponent,

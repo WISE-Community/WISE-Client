@@ -91,6 +91,10 @@ export abstract class ComponentStudent {
         : this.componentContent.showAddToNotebookButton;
     this.isStudentAttachmentEnabled = this.componentContent.isStudentAttachmentEnabled;
     this.isShowAddToNotebookButton = this.isAddToNotebookEnabled();
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
+      this.isSubmitButtonDisabled = true;
+    }
     this.subscribeToSubscriptions();
   }
 

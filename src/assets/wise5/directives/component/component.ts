@@ -83,9 +83,16 @@ const Component = {
   scope: true,
   controller: ComponentController,
   template: `<div ng-switch="type" class="component__wrapper">
-          <div ng-switch-when="AudioOscillator|ConceptMap|Draw|Embedded|HTML|Label|Match|MultipleChoice|OutsideURL"
+          <div ng-switch-when="Animation|AudioOscillator|ConceptMap|Draw|Embedded|HTML|Label|Match|MultipleChoice|OutsideURL"
               ng-switch-when-separator="|"
               class="component__content">
+            <animation-student ng-if="type === 'Animation'"
+                [node-id]="nodeId"
+                [component-content]="componentContent"
+                [component-state]="componentState"
+                [workgroup-id]="workgroupId"
+                [mode]="mode">
+            </animation-student>
             <audio-oscillator-student ng-if="type === 'AudioOscillator'"
                 [node-id]="nodeId"
                 [component-content]="componentContent"
