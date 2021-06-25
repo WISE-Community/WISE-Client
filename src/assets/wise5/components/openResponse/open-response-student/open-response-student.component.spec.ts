@@ -38,7 +38,7 @@ let fixture: ComponentFixture<OpenResponseStudent>;
 const nodeId = 'node1';
 const response = 'Hello World';
 
-fdescribe('OpenResponseStudent', () => {
+describe('OpenResponseStudent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       imports: [
