@@ -1,0 +1,135 @@
+<component-header [componentContent]="componentContent"></component-header>
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
+  <button
+      mat-button
+      color="primary"
+      (click)="snipButtonClicked($event)"
+      *ngIf="isAddToNotebookEnabled()"
+      [disabled]="isDisabled"
+      i18n>
+    <mat-icon>note_add</mat-icon>
+    Add to Notebook
+  </button>
+  <button
+      mat-button
+      color="primary"
+      (click)="copyPublicNotebookItemButtonClicked()"
+      *ngIf="isPublicSpaceExist"
+      [disabled]="isDisabled"
+      i18n>
+    <mat-icon>file_download</mat-icon>
+    Import Classmate Work
+  </button>
+</div>
+<div class="student-response-wrapper" [ngClass]="{'input-wrapper--richtext': isRichTextEnabled}">
+  <textarea *ngIf="isRichTextEnabled && !isDisabled"
+        [(ngModel)]="studentResponse"
+        (ngModelChange)="studentDataChanged()"
+        [disabled]="isDisabled">
+  </textarea>
+  <div *ngIf="isRichTextEnabled && isDisabled"
+      class="input--textarea input--textarea--disabled">
+    <span [innerHTML]="studentResponse"></span>
+  </div>
+  <textarea
+      *ngIf="!isRichTextEnabled"
+      class="student-response"
+      [(ngModel)]="studentResponse"
+      (ngModelChange)="studentDataChanged()"
+      [disabled]="isDisabled"
+      md-no-autogrow>
+  </textarea>
+</div>
+<div *ngIf="isStudentAttachmentEnabled" fxLayout="row wrap" fxLayoutAlign="start center">
+  <div>
+    <button
+        mat-button
+        color="primary"
+        (click)="showStudentAssets()"
+        [disabled]="isDisabled">
+      <mat-icon>image</mat-icon>
+      <span i18n>Add File</span>
+    </button>
+  </div>
+  <div *ngFor="let attachment of attachments">
+    <div *ngIf="attachment.type !== 'audio'">
+      <img [src]="attachment.iconURL" />
+      <button
+          mat-button
+          color="primary"
+          (click)="removeAttachment(attachment)" title="Remove file"
+          [disabled]="isDisabled">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="isStudentAudioRecordingEnabled"
+    class="recording-div"
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="20px">
+  <button
+      mat-button
+      color="primary"
+      *ngIf="!isRecordingAudio"
+      (click)="startRecordingAudio($event, componentId, isDisabled)"
+      [disabled]="isDisabled">
+    <mat-icon>mic</mat-icon>
+    <span i18n>Record Response</span>
+  </button>
+  <button
+      mat-button
+      color="primary"
+      *ngIf="isRecordingAudio"
+      (click)="stopRecordingAudio($event, componentId, isDisabled)"
+      [disabled]="isDisabled">
+    <mat-icon>stop</mat-icon>
+    <span i18n>Stop Recording</span>
+  </button>
+  <span
+      *ngIf="isRecordingAudio"
+      class="text-secondary"
+      i18n>
+    Recording Time Left: {{ getAudioRecordingTimeLeft() }}
+  </span>
+  <div *ngFor="let attachment of attachments"
+       fxLayout="row" fxLayoutAlign="start center">
+    <div *ngIf="attachment.type === 'audio'"
+        fxLayout="row" fxLayoutAlign="start center">
+      <audio controls>
+        <source [src]="attachment.url | safeUrl" type="audio/webm">
+      </audio>
+      <button
+          mat-button
+          color="primary"
+          (click)="removeAudioAttachment(attachment)"
+          aria-label="Delete Recording"
+          i18n-aria-label
+          [disabled]="isDisabled"
+          matTooltip="Delete Recording"
+          matTooltipPosition="above"
+          i18n-matTooltip>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<component-save-submit-buttons
+    *ngIf="isSaveOrSubmitButtonVisible"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    [saveMessage]="saveMessage"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)">
+</component-save-submit-buttons>
+<component-annotations
+    *ngIf="mode === 'student'"
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId">
+</component-annotations>

@@ -30,7 +30,8 @@ class NodeController {
     'Embedded',
     'Label',
     'Match',
-    'MultipleChoice'
+    'MultipleChoice',
+    'OpenResponse'
   ];
   dirtyComponentIds: any = [];
   dirtySubmitComponentIds: any = [];

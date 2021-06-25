@@ -26,6 +26,8 @@ import { MatchStudentModule } from '../assets/wise5/components/match/match-stude
 import { StudentComponentModule } from './student/student.component.module';
 import { AnimationStudent } from '../assets/wise5/components/animation/animation-student/animation-student.component';
 import { EmbeddedStudent } from '../assets/wise5/components/embedded/embedded-student/embedded-student.component';
+import { OpenResponseStudent } from '../assets/wise5/components/openResponse/open-response-student/open-response-student.component';
+import { SafeUrl } from '../assets/wise5/directives/safeUrl/safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -38,8 +40,10 @@ import { EmbeddedStudent } from '../assets/wise5/components/embedded/embedded-st
     HtmlStudent,
     LabelStudent,
     MultipleChoiceStudent,
+    OpenResponseStudent,
     OutsideUrlStudent,
-    NavItemComponent
+    NavItemComponent,
+    SafeUrl
   ],
   imports: [AngularJSModule, MatchStudentModule, StudentComponentModule],
   providers: [

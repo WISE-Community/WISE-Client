@@ -419,8 +419,9 @@ export class ConceptMapStudent extends ComponentStudent {
   showFeedbackInPopup(feedbackText: string): void {
     this.dialog.open(HtmlDialog, {
       data: {
-        title: $localize`Feedback`,
-        content: feedbackText
+        content: feedbackText,
+        isShowCloseButton: true,
+        title: $localize`Feedback`
       }
     });
   }
