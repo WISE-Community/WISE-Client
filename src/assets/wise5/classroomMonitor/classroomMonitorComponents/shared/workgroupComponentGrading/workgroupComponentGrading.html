@@ -7,74 +7,74 @@
           ng-if="$ctrl.component.type === 'Animation'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </animation-grading>
       <audio-oscillator-grading
           ng-if="$ctrl.component.type === 'AudioOscillator'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </audio-oscillator-grading>
       <concept-map-grading
           ng-if="$ctrl.component.type === 'ConceptMap'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </concept-map-grading>
       <discussion-grading
           ng-if="$ctrl.component.type === 'Discussion'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}"
+          [component-state]="$ctrl.latestComponentState"
           workgroup-id="{{::$ctrl.workgroupId}}">
       </discussion-grading>
       <draw-grading
           ng-if="$ctrl.component.type === 'Draw'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </draw-grading>
       <embedded-grading
           ng-if="$ctrl.component.type === 'Embedded'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </embedded-grading>
       <graph-grading
           ng-if="$ctrl.component.type === 'Graph'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </graph-grading>
       <label-grading
           ng-if="$ctrl.component.type === 'Label'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </label-grading>
       <match-grading
           ng-if="$ctrl.component.type === 'Match'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </match-grading>
       <multiple-choice-grading
           ng-if="$ctrl.component.type === 'MultipleChoice'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </multiple-choice-grading>
       <open-response-grading
           ng-if="$ctrl.component.type === 'OpenResponse'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </open-response-grading>
       <table-grading
           ng-if="$ctrl.component.type === 'Table'"
           node-id="{{::$ctrl.nodeId}}"
           component-id="{{::$ctrl.component.id}}"
-          component-state="{{$ctrl.latestComponentState}}">
+          [component-state]="$ctrl.latestComponentState">
       </table-grading>
       <span flex></span>
       <div class="component__actions__info component--grading__actions__info md-caption" layout="row">

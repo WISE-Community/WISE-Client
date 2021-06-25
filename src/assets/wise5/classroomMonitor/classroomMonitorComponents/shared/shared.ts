@@ -10,7 +10,6 @@ import { StatusIconComponent } from '../../../../../app/classroom-monitor/status
 import Toolbar from './toolbar/toolbar';
 import TopBar from './topBar/topBar';
 import WorkgroupComponentGrading from './workgroupComponentGrading/workgroupComponentGrading';
-import WorkgroupComponentRevisions from './workgroupComponentRevisions/workgroupComponentRevisions';
 import { WorkgroupNodeStatusComponent } from '../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { WorkgroupSelectAutocompleteComponent } from '../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 import { WorkgroupSelectDropdownComponent } from '../../../../../app/classroom-monitor/workgroup-select/workgroup-select-dropdown/workgroup-select-dropdown.component';
@@ -41,7 +40,6 @@ const Shared = angular
   .component('cmToolbar', Toolbar)
   .component('cmTopBar', TopBar)
   .component('workgroupComponentGrading', WorkgroupComponentGrading)
-  .component('workgroupComponentRevisions', WorkgroupComponentRevisions)
   .directive(
     'workgroupNodeScore',
     downgradeComponent({ component: WorkgroupNodeScoreComponent }) as angular.IDirectiveFactory

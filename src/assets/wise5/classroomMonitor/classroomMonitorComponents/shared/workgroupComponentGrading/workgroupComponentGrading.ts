@@ -56,11 +56,12 @@ class WorkgroupComponentGradingController {
             </md-toolbar>
             <md-dialog-content>
               <div class="md-dialog-content gray-lighter-bg">
-                <workgroup-component-revisions component-states="componentStates"
-                    node-id="{{ nodeId }}"
-                    component-id="{{ componentId }}"
-                    from-workgroup-id="{{ fromWorkgroupId }}"
-                    workgroup-id="{{ workgroupId }}"></workgroup-component-revisions>
+                <view-component-revisions
+                    [component-states]="componentStates"
+                    [node-id]="nodeId"
+                    [component-id]="componentId"
+                    [from-workgroup-id]="fromWorkgroupId"
+                    [workgroup-id]="workgroupId"></view-component-revisions>
               </div>
             </md-dialog-content>
             <md-dialog-actions layout="row" layout-align="end center">
