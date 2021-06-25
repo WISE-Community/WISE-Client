@@ -8840,6 +8840,22 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Edit Unit Rubric</target>
       </trans-unit>
+      <trans-unit id="c01908e4fc24012a2f6f8ff170cc4cd3293807e2" datatype="html">
+        <source>Submitted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-state-info/component-state-info.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <target state="needs-translation">Submitted</target>
+      </trans-unit>
+      <trans-unit id="52b56d5859b56a3a1bfe56ce67dfd5e93b21e960" datatype="html">
+        <source>Saved</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-state-info/component-state-info.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <target state="needs-translation">Saved</target>
+      </trans-unit>
       <trans-unit id="694e14160d51abf2460c07f4d2592dac127e1f2f" datatype="html">
         <source>Auto Comment</source>
         <context-group purpose="location">
