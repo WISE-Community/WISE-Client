@@ -30,6 +30,7 @@ import { ChooseImportStepComponent } from './authoring-tool/import-step/choose-i
 import { ChooseImportStepLocationComponent } from './authoring-tool/import-step/choose-import-step-location/choose-import-step-location.component';
 import { ComponentNewWorkBadgeComponent } from './classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import { ComponentSelectComponent } from './classroom-monitor/component-select/component-select.component';
+import { ComponentStateInfoComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/component-state-info/component-state-info.component';
 import { StatusIconComponent } from './classroom-monitor/status-icon/status-icon.component';
 import { StepInfoComponent } from './classroom-monitor/step-info/step-info.component';
 import { AngularJSModule } from './common-hybrid-angular.module';
@@ -107,6 +108,7 @@ import { InsertNodesService } from '../assets/wise5/services/insertNodesService'
     ChooseNewNodeTemplate,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
+    ComponentStateInfoComponent,
     ConceptMapAuthoring,
     ConceptMapGrading,
     DrawAuthoring,

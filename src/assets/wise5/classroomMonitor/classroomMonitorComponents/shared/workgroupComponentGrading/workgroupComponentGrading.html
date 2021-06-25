@@ -77,14 +77,17 @@
           component-state="{{$ctrl.latestComponentState}}">
       </table-grading>
       <span flex></span>
-      <component-revisions-info node-id="::$ctrl.nodeId"
-          component-id="::$ctrl.component.id"
-          from-workgroup-id="::$ctrl.teacherWorkgroupId"
-          to-workgroup-id="::$ctrl.workgroupId"
-          component-state="$ctrl.latestComponentState"
-          active='true'>
-      </component-revisions-info>
+      <div class="component__actions__info component--grading__actions__info md-caption" layout="row">
+        <component-state-info [component-state]="$ctrl.latestComponentState" [is-active]="true">
+        </component-state-info>
+        <span ng-if="$ctrl.componentStates.length > 1">
+          &nbsp;&#8226;&nbsp;<a ng-click="$ctrl.showRevisions($event)">{{ 'seeRevisions' | translate }}</a>
+        </span>
+      </div>
     </ng-content>
+    <div ng-if="$ctrl.componentStates.length === 0" class="component__actions__info component--grading__actions__info md-caption">
+      {{ ::'TEAM_HAS_NOT_SAVED_ANY_WORK' | translate }}
+    </div>
   </div>
   <div flex="100" flex-gt-sm="33" class="component--grading__annotations">
     <edit-component-annotations
