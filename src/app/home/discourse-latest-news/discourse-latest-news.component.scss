@@ -31,8 +31,11 @@
 }
 
 ul {
-  list-style-type: none;
   padding: 0;
+
+  @media (min-width: breakpoint('md.min')) {
+    padding: 0 0 0 16px;
+  }
 }
 
 li {
@@ -42,6 +45,7 @@ li {
 
   @media (max-width: breakpoint('sm.max')) {
     display: inline;
+    list-style-type: none;
   }
 
   @media (min-width: breakpoint('md.min')) {
