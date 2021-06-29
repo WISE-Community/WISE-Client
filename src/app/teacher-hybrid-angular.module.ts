@@ -90,6 +90,7 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
 import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
 import { InsertNodesService } from '../assets/wise5/services/insertNodesService';
+import { ViewComponentRevisionsComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +160,7 @@ import { InsertNodesService } from '../assets/wise5/services/insertNodesService'
     SummaryAuthoring,
     TableAuthoring,
     TableGrading,
+    ViewComponentRevisionsComponent,
     WorkgroupInfoComponent,
     WorkgroupNodeScoreComponent,
     WorkgroupSelectAutocompleteComponent,
