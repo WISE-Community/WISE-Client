@@ -791,7 +791,7 @@ class NodeController {
     componentState.periodId = this.ConfigService.getPeriodId();
     componentState.workgroupId = this.ConfigService.getWorkgroupId();
     componentState.isAutoSave = isAutoSave === true;
-    componentState.isSubmit = isSubmit === true;
+    componentState.isSubmit ??= isSubmit;
   }
 
   /**
