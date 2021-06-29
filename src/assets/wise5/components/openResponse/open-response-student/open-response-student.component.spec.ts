@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
+import { of } from 'rxjs';
 import { AnnotationService } from '../../../services/annotationService';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { ConfigService } from '../../../services/configService';
@@ -239,9 +240,7 @@ function createComponentStateAdditionalProcessing() {
         spyOn(TestBed.inject(OpenResponseService), 'isCompleted').and.returnValue(true);
         spyOn(component, 'isCRaterScoreOnSubmit').and.returnValue(true);
         spyOn(TestBed.inject(CRaterService), 'makeCRaterScoringRequest').and.returnValue(
-          Promise.resolve({
-            score: 1
-          })
+          of({ score: 1 })
         );
         component.isSubmit = true;
         component.createComponentState('submit').then((componentState: any) => {
