@@ -225,7 +225,25 @@ export abstract class ComponentStudent {
     });
   }
 
-  attachStudentAsset(studentAsset: any): void {}
+  attachStudentAsset(studentAsset: any): any {
+    return this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
+      const attachment = {
+        studentAssetId: copiedAsset.id,
+        iconURL: copiedAsset.iconURL,
+        url: copiedAsset.url,
+        type: copiedAsset.type
+      };
+      this.attachments.push(attachment);
+      this.studentDataChanged();
+    });
+  }
+
+  removeAttachment(attachment: any): void {
+    if (this.attachments.indexOf(attachment) !== -1) {
+      this.attachments.splice(this.attachments.indexOf(attachment), 1);
+      this.studentDataChanged();
+    }
+  }
 
   subscribeToStudentWorkSavedToServer(): void {
     this.subscriptions.add(
@@ -743,5 +761,27 @@ export abstract class ComponentStudent {
 
   updateLatestCommentAnnotation(annotation: any): void {
     this.latestAnnotations.comment = annotation;
+  }
+
+  registerNotebookItemChosenListener(): void {
+    this.subscriptions.add(
+      this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
+        if (requester === `${this.nodeId}-${this.componentId}`) {
+          const studentWorkId = notebookItem.content.studentWorkIds[0];
+          this.importWorkByStudentWorkId(studentWorkId);
+        }
+      })
+    );
+  }
+
+  copyPublicNotebookItemButtonClicked(): void {
+    this.NotebookService.setInsertMode({
+      nodeId: this.nodeId,
+      componentId: this.componentId,
+      insertMode: true,
+      requester: this.nodeId + '-' + this.componentId,
+      visibleSpace: 'public'
+    });
+    this.NotebookService.setNotesVisible(true);
   }
 }

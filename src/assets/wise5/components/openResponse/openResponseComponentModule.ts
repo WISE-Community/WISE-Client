@@ -1,14 +1,17 @@
 'use strict';
 
 import * as angular from 'angular';
-import { downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { OpenResponseService } from './openResponseService';
-import OpenResponseController from './openResponseController';
+import { OpenResponseStudent } from './open-response-student/open-response-student.component';
 
 const openResponseComponentModule = angular
   .module('openResponseComponentModule', ['pascalprecht.translate'])
   .service('OpenResponseService', downgradeInjectable(OpenResponseService))
-  .controller('OpenResponseController', OpenResponseController)
+  .directive(
+    'openResponseStudent',
+    downgradeComponent({ component: OpenResponseStudent }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {

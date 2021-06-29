@@ -83,7 +83,7 @@ const Component = {
   scope: true,
   controller: ComponentController,
   template: `<div ng-switch="type" class="component__wrapper">
-          <div ng-switch-when="Animation|AudioOscillator|ConceptMap|Draw|Embedded|HTML|Label|Match|MultipleChoice|OutsideURL"
+          <div ng-switch-when="Animation|AudioOscillator|ConceptMap|Draw|Embedded|HTML|Label|Match|MultipleChoice|OpenResponse|OutsideURL"
               ng-switch-when-separator="|"
               class="component__content">
             <animation-student ng-if="type === 'Animation'"
@@ -147,6 +147,13 @@ const Component = {
                 [workgroup-id]="workgroupId"
                 [mode]="mode">
             </multiple-choice-student>
+            <open-response-student ng-if="type === 'OpenResponse'"
+                [node-id]="nodeId"
+                [component-content]="componentContent"
+                [component-state]="componentState"
+                [workgroup-id]="workgroupId"
+                [mode]="mode">
+            </open-response-student>
             <outside-url-student ng-if="type === 'OutsideURL'"
                 [node-id]="nodeId"
                 [component-content]="componentContent"
