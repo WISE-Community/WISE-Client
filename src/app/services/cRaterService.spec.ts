@@ -40,7 +40,7 @@ function makeCRaterScoringRequest() {
       const itemId = 'ColdBeverage1Sub';
       const responseId = 1;
       const studentData = 'Hello World.';
-      service.makeCRaterScoringRequest(itemId, responseId, studentData);
+      service.makeCRaterScoringRequest(itemId, responseId, studentData).subscribe();
       http.expectOne({
         url:
           `/c-rater/score?itemId=${itemId}&responseId=${responseId}` +
