@@ -384,7 +384,7 @@ export class OpenResponseStudent extends ComponentStudent {
       const cRaterResponseId = new Date().getTime();
       const dialogRef = this.dialog.open(HtmlDialog, {
         data: {
-          content: $localize`Please wait, we are scoring your work...`,
+          content: $localize`We are scoring your work...`,
           isShowCloseButton: false,
           title: $localize`Please Wait`
         }
