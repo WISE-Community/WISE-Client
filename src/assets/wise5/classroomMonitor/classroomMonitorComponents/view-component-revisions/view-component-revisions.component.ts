@@ -1,8 +1,9 @@
 import * as moment from 'moment';
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'view-component-revisions.component',
@@ -10,25 +11,32 @@ import { TeacherDataService } from '../../../services/teacherDataService';
   templateUrl: 'view-component-revisions.component.html'
 })
 export class ViewComponentRevisionsComponent {
-  @Input() componentId: string;
-  @Input() componentStates: any = [];
-  @Input() fromWorkgroupId: number;
-  @Input() nodeId: string;
-  @Input() workgroupId: number;
-
+  componentId: string;
+  componentStates: any = [];
+  fromWorkgroupId: number;
   increment: number = 5;
+  nodeId: string;
   numRevisionsShown: number = 5;
   revisions: any = {};
   revisionsSorted: any[];
   totalRevisions: number;
+  usernames: string[];
+  workgroupId: number;
 
   constructor(
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
-    private TeacherDataService: TeacherDataService
+    private TeacherDataService: TeacherDataService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit() {
+    this.componentId = this.data.componentId;
+    this.componentStates = this.data.componentStates;
+    this.fromWorkgroupId = this.data.fromWorkgroupId;
+    this.nodeId = this.data.nodeId;
+    this.workgroupId = this.data.workgroupId;
+    this.usernames = this.ConfigService.getDisplayNamesByWorkgroupId(this.workgroupId);
     this.populateData();
   }
 
