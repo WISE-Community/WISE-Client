@@ -91,6 +91,7 @@ import { NodeIconChooserDialog } from '../assets/wise5/common/node-icon-chooser-
 import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
 import { InsertNodesService } from '../assets/wise5/services/insertNodesService';
 import { ViewComponentRevisionsComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component';
+import { WorkgroupComponentGradingComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component';
 
 @NgModule({
   declarations: [
@@ -161,6 +162,7 @@ import { ViewComponentRevisionsComponent } from '../assets/wise5/classroomMonito
     TableAuthoring,
     TableGrading,
     ViewComponentRevisionsComponent,
+    WorkgroupComponentGradingComponent,
     WorkgroupInfoComponent,
     WorkgroupNodeScoreComponent,
     WorkgroupSelectAutocompleteComponent,
