@@ -1,0 +1,26 @@
+.mat-form-field-wrapper {
+  padding-bottom: 0px;
+  font-weight: 500;
+}
+
+.mat-form-field-appearance-fill {
+  mat-select-trigger {
+    margin-right: 8px;
+  }
+  .mat-form-field-underline {
+    display: none;
+  }
+  .mat-form-field-infix {
+    border-top: 0px;
+    width: auto;
+  }
+  .mat-form-field-flex {
+    padding-top: 0px;
+  }
+  .mat-select-arrow-wrapper {
+    display: inherit;
+  }
+  .mat-select-value {
+    display: inherit;
+  }
+}
