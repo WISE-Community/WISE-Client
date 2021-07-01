@@ -300,6 +300,10 @@
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
         <target state="needs-translation">Close</target>
       </trans-unit>
       <trans-unit id="ea4d9fe61420a3fce81cf54c4c615e3c19c646a6" datatype="html">
@@ -8924,13 +8928,37 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">(Team <x id="INTERPOLATION" equiv-text="{{workgroupId}}"/>)</target>
       </trans-unit>
+      <trans-unit id="6c372513ec53879a9eeffbd96670484f6cc52269" datatype="html">
+        <source>Revisions for <x id="INTERPOLATION" equiv-text="{{usernames}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <target state="needs-translation">Revisions for <x id="INTERPOLATION" equiv-text="{{usernames}}"/></target>
+      </trans-unit>
       <trans-unit id="f0c5f6f270e70cbe063b5368fcf48f9afc1abd9b" datatype="html">
         <source>Show more</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <target state="needs-translation">Show more</target>
+      </trans-unit>
+      <trans-unit id="149546eb32bc1b69012afcd34945c180f0790dbf" datatype="html">
+        <source> Team has not saved any work </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
+          <context context-type="linenumber">78,79</context>
+        </context-group>
+        <target state="needs-translation"> Team has not saved any work </target>
+      </trans-unit>
+      <trans-unit id="1a68048cfcd964c630f4316c43db20f0b8e3a80d" datatype="html">
+        <source>See revisions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+        <target state="needs-translation">See revisions</target>
       </trans-unit>
       <trans-unit id="058b73757ea9dc14dee9cb48d52bf312fbb8ab15" datatype="html">
         <source>Selected icon</source>
