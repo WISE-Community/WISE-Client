@@ -92,6 +92,7 @@ import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
 import { InsertNodesService } from '../assets/wise5/services/insertNodesService';
 import { ViewComponentRevisionsComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component';
 import { WorkgroupComponentGradingComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component';
+import { SelectPeriodComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 
 @NgModule({
   declarations: [
@@ -155,6 +156,7 @@ import { WorkgroupComponentGradingComponent } from '../assets/wise5/classroomMon
     OpenResponseAuthoring,
     OutsideUrlAuthoring,
     RubricAuthoringComponent,
+    SelectPeriodComponent,
     StatusIconComponent,
     StepInfoComponent,
     StepToolsComponent,
