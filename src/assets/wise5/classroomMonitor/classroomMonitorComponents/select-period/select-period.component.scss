@@ -15,10 +15,11 @@
     width: auto;
   }
   .mat-form-field-flex {
-    padding-top: 0px;
+    padding-top: 5px !important;
+    height: 32px;
   }
-  .mat-select-arrow-wrapper {
-    display: inherit;
+  .mat-select-arrow {
+    margin-top: 14px;
   }
   .mat-select-value {
     display: inherit;
