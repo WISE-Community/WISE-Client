@@ -8928,6 +8928,62 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="translated">(团队 <x id="INTERPOLATION" equiv-text="{{workgroupId}}"/>)</target>
       </trans-unit>
+      <trans-unit id="4fc1ce64a0242febe825d1737eb8b0da1f5c3865" datatype="html">
+        <source>All Periods</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <target state="needs-translation">All Periods</target>
+      </trans-unit>
+      <trans-unit id="cdfc3eab890fa0d259f52a903ff9233f6fbef716" datatype="html">
+        <source>Period: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <target state="needs-translation">Period: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/></target>
+      </trans-unit>
+      <trans-unit id="8696bee691864cb6fa43175d75ed7e91b1e980ae" datatype="html">
+        <source>0 teams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <target state="needs-translation">0 teams</target>
+      </trans-unit>
+      <trans-unit id="183d5532753330e0aa0e6492f2595d24ec36b254" datatype="html">
+        <source>1 team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <target state="needs-translation">1 team</target>
+      </trans-unit>
+      <trans-unit id="6b8e9026aa61cc49d6342e833d13fee9f468c19c" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{period.numWorkgroupsInPeriod}}"/> teams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{period.numWorkgroupsInPeriod}}"/> teams</target>
+      </trans-unit>
+      <trans-unit id="1775311053456611668" datatype="html">
+        <source>All Periods</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <target state="needs-translation">All Periods</target>
+      </trans-unit>
+      <trans-unit id="6933068701447776492" datatype="html">
+        <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <target state="needs-translation">Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></target>
+      </trans-unit>
       <trans-unit id="6c372513ec53879a9eeffbd96670484f6cc52269" datatype="html">
         <source>Revisions for <x id="INTERPOLATION" equiv-text="{{usernames}}"/></source>
         <context-group purpose="location">
