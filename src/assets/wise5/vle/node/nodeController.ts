@@ -31,7 +31,8 @@ class NodeController {
     'Label',
     'Match',
     'MultipleChoice',
-    'OpenResponse'
+    'OpenResponse',
+    'Table'
   ];
   dirtyComponentIds: any = [];
   dirtySubmitComponentIds: any = [];

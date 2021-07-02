@@ -28,6 +28,7 @@ import { AnimationStudent } from '../assets/wise5/components/animation/animation
 import { EmbeddedStudent } from '../assets/wise5/components/embedded/embedded-student/embedded-student.component';
 import { OpenResponseStudent } from '../assets/wise5/components/openResponse/open-response-student/open-response-student.component';
 import { SafeUrl } from '../assets/wise5/directives/safeUrl/safe-url.pipe';
+import { TableStudent } from '../assets/wise5/components/table/table-student/table-student.component';
 
 @NgModule({
   declarations: [
@@ -40,10 +41,11 @@ import { SafeUrl } from '../assets/wise5/directives/safeUrl/safe-url.pipe';
     HtmlStudent,
     LabelStudent,
     MultipleChoiceStudent,
+    NavItemComponent,
     OpenResponseStudent,
     OutsideUrlStudent,
-    NavItemComponent,
-    SafeUrl
+    SafeUrl,
+    TableStudent
   ],
   imports: [AngularJSModule, MatchStudentModule, StudentComponentModule],
   providers: [
