@@ -127,6 +127,7 @@ describe('TableStudent', () => {
   getXFromDataPoint();
   getYAxisForDataExplorerSeries();
   getYFromDataPoint();
+  handleConnectedComponents();
   handleStudentWorkSavedToServer();
   initializeDataExplorer();
   isAllDataExplorerSeriesSpecified();
@@ -298,27 +299,50 @@ function expectRowObjectValues(row: any[], expectedObjectValues: any[]) {
   }
 }
 
+function createTableComponentState(data: any[]): any {
+  return {
+    componentType: 'Table',
+    studentData: {
+      tableData: data
+    }
+  };
+}
+
+function createGraphComponentState(data: any[]): any {
+  return {
+    componentType: 'Graph',
+    studentData: {
+      trials: [
+        {
+          series: [
+            {
+              data: data
+            }
+          ]
+        }
+      ],
+      version: 2
+    }
+  };
+}
+
+function createEmbeddedComponentState(data: any[]): any {
+  return {
+    componentType: 'Embedded',
+    studentData: {
+      tableData: data
+    }
+  };
+}
+
 function setGraphDataIntoTableData() {
   describe('setGraphDataIntoTableData', () => {
     it('should set graph data into table data', () => {
-      const componentState = {
-        studentData: {
-          trials: [
-            {
-              series: [
-                {
-                  data: [
-                    ['0', '0'],
-                    ['1', '10'],
-                    ['2', '20']
-                  ]
-                }
-              ]
-            }
-          ],
-          version: 2
-        }
-      };
+      const componentState = createGraphComponentState([
+        ['0', '0'],
+        ['1', '10'],
+        ['2', '20']
+      ]);
       component.setGraphDataIntoTableData(componentState, null);
       const expectedTableData = createTableData([
         ['Time', 'Position', 'Speed'],
@@ -561,6 +585,56 @@ function setDataExplorerYColumnIsDisabled() {
       delete component.dataExplorerColumnToIsDisabled['y2'];
       component.setDataExplorerYColumnIsDisabled(2);
       expect(component.dataExplorerColumnToIsDisabled['y2']).toEqual(true);
+    });
+  });
+}
+
+function handleConnectedComponents() {
+  describe('handleConnectedComponents', () => {
+    it('should handle table connected component', () => {
+      spyOn(component, 'getConnectedComponentsAndTheirComponentStates').and.returnValue([
+        {
+          connectedComponent: {},
+          componentState: createTableComponentState(testTableData)
+        }
+      ]);
+      component.tableData = null;
+      component.handleConnectedComponents();
+      expectTableDataEquals(component.tableData, testTableData, true);
+    });
+    it('should handle graph connected component', () => {
+      spyOn(component, 'getConnectedComponentsAndTheirComponentStates').and.returnValue([
+        {
+          connectedComponent: {},
+          componentState: createGraphComponentState([
+            ['0', '0'],
+            ['1', '10'],
+            ['2', '20']
+          ])
+        }
+      ]);
+      component.handleConnectedComponents();
+      const expectedTableData = createTableData([
+        ['Time', 'Position', 'Speed'],
+        ['0', '0', '0'],
+        ['1', '10', '10'],
+        ['2', '20', '10']
+      ]);
+      expectTableDataEquals(component.tableData, expectedTableData, true);
+    });
+    it('should handle embedded connected component', () => {
+      const tableData = createTableData([
+        ['Time', 'Position'],
+        ['100', '200']
+      ]);
+      spyOn(component, 'getConnectedComponentsAndTheirComponentStates').and.returnValue([
+        {
+          connectedComponent: {},
+          componentState: createEmbeddedComponentState(tableData)
+        }
+      ]);
+      component.handleConnectedComponents();
+      expectTableDataEquals(component.tableData, tableData, true);
     });
   });
 }

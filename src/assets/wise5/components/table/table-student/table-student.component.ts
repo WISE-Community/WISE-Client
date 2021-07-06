@@ -915,26 +915,42 @@ export class TableStudent extends ComponentStudent {
 
   handleConnectedComponents() {
     let isStudentDataChanged = false;
-    const connectedComponentsAndTheirComponentStates = this.getConnectedComponentsAndTheirComponentStates();
-    for (const connectedComponentAndComponentState of connectedComponentsAndTheirComponentStates) {
+    for (const connectedComponentAndComponentState of this.getConnectedComponentsAndTheirComponentStates()) {
       const connectedComponent = connectedComponentAndComponentState.connectedComponent;
       const componentState = connectedComponentAndComponentState.componentState;
       if (componentState != null) {
-        if (connectedComponent.type === 'showWork') {
-          this.tableData = componentState.studentData.tableData;
-          this.isDisabled = true;
-        } else {
-          if (connectedComponent.action === 'append') {
-            this.appendComponentState(componentState, connectedComponent);
-          } else {
-            this.mergeComponentState(componentState);
-          }
+        switch (componentState.componentType) {
+          case 'Table':
+            this.importTableComponentState(componentState, connectedComponent);
+            isStudentDataChanged = true;
+            break;
+          case 'Graph':
+            this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
+            this.setGraphDataIntoTableData(componentState, connectedComponent);
+            isStudentDataChanged = true;
+            break;
+          case 'Embedded':
+            this.setStudentWork(componentState);
+            isStudentDataChanged = true;
+            break;
         }
-        isStudentDataChanged = true;
       }
     }
     if (isStudentDataChanged) {
       this.studentDataChanged();
+    }
+  }
+
+  importTableComponentState(componentState: any, connectedComponent: any): void {
+    if (connectedComponent.type === 'showWork') {
+      this.tableData = componentState.studentData.tableData;
+      this.isDisabled = true;
+    } else {
+      if (connectedComponent.action === 'append') {
+        this.appendComponentState(componentState, connectedComponent);
+      } else {
+        this.mergeComponentState(componentState);
+      }
     }
   }
 
