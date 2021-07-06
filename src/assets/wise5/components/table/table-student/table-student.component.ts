@@ -131,16 +131,8 @@ export class TableStudent extends ComponentStudent {
       }
     }
 
-    // check if the student has used up all of their submits
-    if (
-      this.componentContent.maxSubmitCount != null &&
-      this.submitCounter >= this.componentContent.maxSubmitCount
-    ) {
-      /*
-       * the student has used up all of their chances to submit so we
-       * will disable the submit button
-       */
-      this.isSubmitButtonDisabled = true;
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
     }
 
     this.disableComponentIfNecessary();
@@ -443,6 +435,9 @@ export class TableStudent extends ComponentStudent {
     }
 
     this.isSubmit = false;
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
+    }
 
     return new Promise((resolve, reject) => {
       this.createComponentStateAdditionalProcessing(
