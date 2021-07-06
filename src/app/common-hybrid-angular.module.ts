@@ -68,6 +68,7 @@ import { DataExportService } from '../assets/wise5/services/dataExportService';
 import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
 import { MatSliderModule } from '@angular/material/slider';
+import { setUpLocationSync } from '@angular/router/upgrade';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -184,3 +185,8 @@ export class EmptyComponent {}
   ]
 })
 export class AngularJSModule {}
+
+export function bootstrapAngularJSModule(upgrade: UpgradeModule, moduleType: string) {
+  upgrade.bootstrap(document.body, [moduleType]);
+  setUpLocationSync(upgrade);
+}
