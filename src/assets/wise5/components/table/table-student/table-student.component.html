@@ -30,7 +30,7 @@
     Import Data
   </button>
 </div>
-<table [id]="tableId">
+<table [id]="tableId" class="table">
   <tr *ngFor="let row of getTableDataRows()">
     <td *ngFor="let cell of row" class="table-cell">
       <mat-form-field
