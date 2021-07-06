@@ -41,7 +41,7 @@ const testTableData = createTableData([
   ['20', '200', '10']
 ]);
 
-fdescribe('TableStudent', () => {
+describe('TableStudent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       imports: [BrowserModule, HttpClientTestingModule, NoopAnimationsModule, UpgradeModule],
