@@ -1575,14 +1575,6 @@ export class ConceptMapStudent extends ComponentStudent {
     });
   }
 
-  getElementById(id: string, getFirstResult: boolean = false): any {
-    if (getFirstResult) {
-      return $(`#${id}`)[0];
-    } else {
-      return $(`#${id}`);
-    }
-  }
-
   attachStudentAsset(studentAsset: any): void {
     this.setBackground(studentAsset.url, false);
   }

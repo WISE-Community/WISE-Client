@@ -16,7 +16,7 @@ class StudentAssetController {
   templateUrl: string;
   nodeId: string;
   componentId: string;
-  convertedComponents: string[] = ['ConceptMap', 'Discussion', 'Draw', 'Label'];
+  convertedComponents: string[] = ['ConceptMap', 'Discussion', 'Draw', 'Label', 'Table'];
 
   static $inject = [
     '$filter',

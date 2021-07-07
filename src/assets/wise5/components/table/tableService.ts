@@ -88,6 +88,10 @@ export class TableService extends ComponentService {
     return component;
   }
 
+  getTableId(nodeId: string, componentId: string): string {
+    return `table-${nodeId}-${componentId}`;
+  }
+
   isCompleted(component, componentStates, componentEvents, nodeEvents, node) {
     if (!this.componentHasEditableCells(component)) {
       /*

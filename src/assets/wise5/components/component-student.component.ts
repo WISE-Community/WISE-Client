@@ -784,4 +784,12 @@ export abstract class ComponentStudent {
     });
     this.NotebookService.setNotesVisible(true);
   }
+
+  getElementById(id: string, getFirstResult: boolean = false): any {
+    if (getFirstResult) {
+      return $(`#${id}`)[0];
+    } else {
+      return $(`#${id}`);
+    }
+  }
 }
