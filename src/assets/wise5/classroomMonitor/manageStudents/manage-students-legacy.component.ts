@@ -5,10 +5,10 @@ import { ConfigService } from '../../services/configService';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
-  selector: 'manage-students',
-  templateUrl: 'manage-students.html'
+  selector: 'manage-students-legacy',
+  templateUrl: 'manage-students-legacy.html'
 })
-export class ManageStudentsComponent {
+export class ManageStudentsLegacyComponent {
   iframeSrc: SafeResourceUrl;
 
   constructor(private configService: ConfigService, private sanitizer: DomSanitizer) {}

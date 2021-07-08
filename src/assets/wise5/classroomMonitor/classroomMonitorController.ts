@@ -79,7 +79,8 @@ class ClassroomMonitorController {
     this.runCode = this.ConfigService.getRunCode();
     if (this.NotebookService.isNotebookEnabled('teacherNotebook')) {
       this.notebookConfig = this.NotebookService.getTeacherNotebookConfig();
-      this.reportEnabled = this.notebookConfig.enabled && this.notebookConfig.itemTypes.report.enabled;
+      this.reportEnabled =
+        this.notebookConfig.enabled && this.notebookConfig.itemTypes.report.enabled;
     }
     this.enableProjectAchievements = this.ProjectService.getAchievements().isEnabled;
     this.views = {
@@ -115,6 +116,12 @@ class ClassroomMonitorController {
         active: true
       },
       'root.cm.manageStudents': {
+        name: this.$translate('manageStudents'),
+        icon: 'face',
+        type: 'primary',
+        active: true
+      },
+      'root.cm.manageStudentsLegacy': {
         name: this.$translate('manageStudents'),
         icon: 'face',
         type: 'primary',

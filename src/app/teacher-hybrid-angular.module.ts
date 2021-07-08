@@ -19,7 +19,8 @@ import { MilestoneService } from '../assets/wise5/services/milestoneService';
 import { WorkgroupNodeScoreComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/workgroupNodeScore/workgroup-node-score.component';
 import { WorkgroupNodeStatusComponent } from './classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { NavItemScoreComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/navItemScore/nav-item-score.component';
-import { ManageStudentsComponent } from '../assets/wise5/classroomMonitor/manageStudents/manage-students-component';
+import { ManageStudentsComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students/manage-students.component';
+import { ManageStudentsLegacyComponent } from '../assets/wise5/classroomMonitor/manageStudents/manage-students-legacy.component';
 import { AdvancedProjectAuthoringComponent } from '../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { ChooseNewComponent } from './authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { ChooseNewComponentLocation } from './authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component';
@@ -93,6 +94,8 @@ import { InsertNodesService } from '../assets/wise5/services/insertNodesService'
 import { ViewComponentRevisionsComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component';
 import { WorkgroupComponentGradingComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component';
 import { SelectPeriodComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
+import { TeamInfoComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/team-info/team-info.component';
+import { UserInfoComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/user-info/user-info.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +145,7 @@ import { SelectPeriodComponent } from '../assets/wise5/classroomMonitor/classroo
     LabelAuthoring,
     LabelGrading,
     ManageStudentsComponent,
+    ManageStudentsLegacyComponent,
     MatchAuthoring,
     MatchGrading,
     MilestonesComponent,
@@ -163,6 +167,8 @@ import { SelectPeriodComponent } from '../assets/wise5/classroomMonitor/classroo
     SummaryAuthoring,
     TableAuthoring,
     TableGrading,
+    TeamInfoComponent,
+    UserInfoComponent,
     ViewComponentRevisionsComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupInfoComponent,
