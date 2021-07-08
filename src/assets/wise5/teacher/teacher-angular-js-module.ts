@@ -2,7 +2,10 @@ import '../lib/jquery/jquery-global';
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import '../common-angular-js-module';
+import { CopyProjectService } from '../services/copyProjectService';
+import { DeleteNodeService } from '../services/deleteNodeService';
 import { MilestoneService } from '../services/milestoneService';
+import { MoveNodesService } from '../services/moveNodesService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { SpaceService } from '../services/spaceService';
 import { StudentStatusService } from '../services/studentStatusService';
@@ -15,7 +18,10 @@ import '../authoringTool/authoring-tool.module';
 
 angular
   .module('teacher', ['common', 'angular-inview', 'authoringTool', 'classroomMonitor', 'ngAnimate'])
+  .factory('CopyProjectService', downgradeInjectable(CopyProjectService))
+  .factory('DeleteNodeService', downgradeInjectable(DeleteNodeService))
   .factory('MilestoneService', downgradeInjectable(MilestoneService))
+  .factory('MoveNodesService', downgradeInjectable(MoveNodesService))
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
   .factory('SpaceService', downgradeInjectable(SpaceService))
   .factory('StudentStatusService', downgradeInjectable(StudentStatusService))
