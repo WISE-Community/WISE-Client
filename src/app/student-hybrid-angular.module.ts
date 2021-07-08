@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 
 import { createStudentAngularJSModule } from '../assets/wise5/vle/student-angular-js-module';
+import { bootstrapAngularJSModule } from './common-hybrid-angular.module';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { setUpLocationSync } from '@angular/router/upgrade';
 import { ProjectService } from '../assets/wise5/services/projectService';
 import { VLEProjectService } from '../assets/wise5/vle/vleProjectService';
 import { CommonModule } from '@angular/common';
@@ -63,6 +63,7 @@ export class StudentAngularJSModule {}
 })
 export class StudentVLEAngularJSModule {
   constructor(upgrade: UpgradeModule) {
+    createStudentAngularJSModule('vle');
     bootstrapAngularJSModule(upgrade, 'vle');
   }
 }
@@ -72,12 +73,7 @@ export class StudentVLEAngularJSModule {
 })
 export class PreviewAngularJSModule {
   constructor(upgrade: UpgradeModule) {
+    createStudentAngularJSModule('preview');
     bootstrapAngularJSModule(upgrade, 'preview');
   }
-}
-
-function bootstrapAngularJSModule(upgrade: UpgradeModule, moduleType: string) {
-  createStudentAngularJSModule(moduleType);
-  upgrade.bootstrap(document.body, [moduleType]);
-  setUpLocationSync(upgrade);
 }
