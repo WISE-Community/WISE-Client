@@ -13,7 +13,10 @@ import { TeacherWebSocketService } from '../assets/wise5/services/teacherWebSock
 import { DataService } from './services/data.service';
 import { MilestoneService } from '../assets/wise5/services/milestoneService';
 import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
+import { CopyProjectService } from '../assets/wise5/services/copyProjectService';
+import { DeleteNodeService } from '../assets/wise5/services/deleteNodeService';
 import { InsertNodesService } from '../assets/wise5/services/insertNodesService';
+import { MoveNodesService } from '../assets/wise5/services/moveNodesService';
 import { AuthoringToolModule } from './teacher/authoring-tool.module';
 import { ClassroomMonitorModule } from './teacher/classroom-monitor.module';
 import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
@@ -23,9 +26,12 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
   imports: [AngularJSModule, AuthoringToolModule, ClassroomMonitorModule],
   providers: [
     CopyNodesService,
+    CopyProjectService,
     { provide: DataService, useExisting: TeacherDataService },
+    DeleteNodeService,
     InsertNodesService,
     MilestoneService,
+    MoveNodesService,
     ProjectAssetService,
     SpaceService,
     StudentStatusService,

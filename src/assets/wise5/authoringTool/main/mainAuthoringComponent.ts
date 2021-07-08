@@ -1,6 +1,7 @@
 'use strict';
 
 import { ConfigService } from '../../services/configService';
+import { CopyProjectService } from '../../services/copyProjectService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
@@ -28,6 +29,7 @@ class MainAuthoringController {
     '$state',
     '$timeout',
     'ConfigService',
+    'CopyProjectService',
     'ProjectService',
     'TeacherDataService',
     'UtilService'
@@ -41,6 +43,7 @@ class MainAuthoringController {
     private $state: any,
     private $timeout: any,
     private ConfigService: ConfigService,
+    private CopyProjectService: CopyProjectService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService,
     private UtilService: UtilService
@@ -78,12 +81,18 @@ class MainAuthoringController {
       'areYouSureYouWantToCopyThisProject'
     )}\n\n${projectInfo}`;
     if (confirm(confirmCopyMessage)) {
-      this.ProjectService.copyProject(projectId).then((project: any) => {
-        this.showCopyingProjectMessage();
-        this.saveEvent('projectCopied', 'Authoring', {}, project.id);
-        this.highlightProject(project.id);
-        this.$mdDialog.hide();
-      });
+      this.showCopyingProjectMessage();
+      this.CopyProjectService.copyProject(projectId).subscribe(
+        (project: any) => {
+          this.saveEvent('projectCopied', 'Authoring', {}, project.id);
+          this.highlightProject(project.id);
+          this.$mdDialog.hide();
+        },
+        () => {
+          alert($localize`There was an error copying this project. Please contact WISE staff.`);
+          this.$mdDialog.hide();
+        }
+      );
     }
   }
 
