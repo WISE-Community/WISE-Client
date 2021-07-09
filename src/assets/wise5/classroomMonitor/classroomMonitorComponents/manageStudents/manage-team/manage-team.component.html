@@ -1,0 +1,6 @@
+<span class="name" i18n>Team {{team.workgroupId}}</span>
+<ul class="users" fxLayout="column" fxLayoutGap="8px">
+  <li class="user" *ngFor="let user of team.users" i18n>
+    <manage-user [user]="user"></manage-user>
+  </li>
+</ul>
