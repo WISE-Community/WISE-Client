@@ -3,10 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../../services/configService';
-import { PeriodInfoComponent } from './period-info.component';
+import { ManagePeriodComponent } from './manage-period.component';
 
-let fixture: ComponentFixture<PeriodInfoComponent>;
-let component: PeriodInfoComponent;
+let fixture: ComponentFixture<ManagePeriodComponent>;
+let component: ManagePeriodComponent;
 let configService: ConfigService;
 const classmateUserInfos = [
   {
@@ -18,17 +18,17 @@ const classmateUserInfos = [
   { workgroupId: 5, periodId: 1, users: [{ username: 'student0101' }] }
 ];
 
-describe('PeriodInfo', () => {
+describe('ManagePeriod', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      declarations: [PeriodInfoComponent],
+      declarations: [ManagePeriodComponent],
       providers: [ConfigService, UpgradeModule]
     });
     configService = TestBed.inject(ConfigService);
   });
   beforeEach(() => {
-    fixture = TestBed.createComponent(PeriodInfoComponent);
+    fixture = TestBed.createComponent(ManagePeriodComponent);
     component = fixture.componentInstance;
     component.period = {
       periodId: 1,

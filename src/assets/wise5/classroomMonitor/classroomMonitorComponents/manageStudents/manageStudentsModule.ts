@@ -2,9 +2,9 @@ import * as angular from 'angular';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { ManageStudentsComponent } from './manage-students/manage-students.component';
 import { ManageStudentsLegacyComponent } from '../../manageStudents/manage-students-legacy.component';
-import { PeriodInfoComponent } from './period-info/period-info.component';
-import { TeamInfoComponent } from './team-info/team-info.component';
-import { UserInfoComponent } from './user-info/user-info.component';
+import { ManagePeriodComponent } from './manage-period/manage-period.component';
+import { ManageTeamComponent } from './manage-team/manage-team.component';
+import { ManageUserComponent } from './manage-user/manage-user.component';
 
 angular
   .module('manageStudents', [])
@@ -17,16 +17,16 @@ angular
     downgradeComponent({ component: ManageStudentsLegacyComponent }) as angular.IDirectiveFactory
   )
   .directive(
-    'periodInfoComponent',
-    downgradeComponent({ component: PeriodInfoComponent }) as angular.IDirectiveFactory
+    'managePeriodComponent',
+    downgradeComponent({ component: ManagePeriodComponent }) as angular.IDirectiveFactory
   )
   .directive(
-    'teamInfoComponent',
-    downgradeComponent({ component: TeamInfoComponent }) as angular.IDirectiveFactory
+    'manageTeamComponent',
+    downgradeComponent({ component: ManageTeamComponent }) as angular.IDirectiveFactory
   )
   .directive(
-    'userInfoComponent',
-    downgradeComponent({ component: UserInfoComponent }) as angular.IDirectiveFactory
+    'manageUserComponent',
+    downgradeComponent({ component: ManageUserComponent }) as angular.IDirectiveFactory
   )
   .config([
     '$stateProvider',

@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
 
 @Component({
-  selector: 'period-info',
-  styleUrls: ['period-info.component.scss'],
-  templateUrl: 'period-info.component.html'
+  selector: 'manage-period',
+  styleUrls: ['manage-period.component.scss'],
+  templateUrl: 'manage-period.component.html'
 })
-export class PeriodInfoComponent {
+export class ManagePeriodComponent {
   @Input() period: any;
 
   students: Set<any> = new Set();

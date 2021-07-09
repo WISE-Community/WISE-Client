@@ -2,5 +2,5 @@
   <span *ngIf="period.periodId === -1" i18n>
     Managing students in all periods is not currently supported. Please choose a specific period.
   </span>
-  <period-info *ngIf="period.periodId !== -1" [period]="period"></period-info>
+  <manage-period *ngIf="period.periodId !== -1" [period]="period"></manage-period>
 </div>

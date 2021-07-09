@@ -8042,6 +8042,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="ce93f96b96d28611b56bf06f5e248bd195cafd42" datatype="html">
+        <source> Period <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/> <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;md-subhead&quot;&gt;"/>Students: <x id="INTERPOLATION_1" equiv-text="{{students.size}}"/> | Teams: <x id="INTERPOLATION_2" equiv-text="{{teams.size}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-period/manage-period.component.html</context>
+          <context context-type="linenumber">2,4</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="aaea40b48d6391b2d7d409e743652d5015b3fbc6" datatype="html">
         <source> Managing students in all periods is not currently supported. Please choose a specific period. </source>
         <context-group purpose="location">
@@ -8049,31 +8056,24 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">3,4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ce93f96b96d28611b56bf06f5e248bd195cafd42" datatype="html">
-        <source> Period <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/> <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;md-subhead&quot;&gt;"/>Students: <x id="INTERPOLATION_1" equiv-text="{{students.size}}"/> | Teams: <x id="INTERPOLATION_2" equiv-text="{{teams.size}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/period-info/period-info.component.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="22cfba8fc2f79bbd7abb937ad8f2cf922d6c7937" datatype="html">
         <source>Team <x id="INTERPOLATION" equiv-text="{{team.workgroupId}}"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/team-info/team-info.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="cec1117301ff51f94706cae580e81b5d5da1120c" datatype="html">
-        <source><x id="START_TAG_USER_INFO" ctype="x-user_info" equiv-text="&lt;user-info [user]=&quot;user&quot;&gt;"/><x id="CLOSE_TAG_USER_INFO" ctype="x-user_info" equiv-text="&lt;/user-info&gt;"/></source>
+      <trans-unit id="20331dea6d1730722706722bf72ab5f033021c1c" datatype="html">
+        <source><x id="START_TAG_MANAGE_USER" ctype="x-manage_user" equiv-text="&lt;manage-user [user]=&quot;user&quot;&gt;"/><x id="CLOSE_TAG_MANAGE_USER" ctype="x-manage_user" equiv-text="&lt;/manage-user&gt;"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/team-info/team-info.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="eb9bd705cf6d767d3b534606e6cab396c2456b47" datatype="html">
         <source>User: <x id="INTERPOLATION" equiv-text="{{user.name}}"/> (<x id="INTERPOLATION_1" equiv-text="{{user.username}}"/>)</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/user-info/user-info.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
