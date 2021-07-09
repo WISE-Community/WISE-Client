@@ -2,6 +2,7 @@ import * as angular from 'angular';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { ManageStudentsComponent } from './manage-students/manage-students.component';
 import { ManageStudentsLegacyComponent } from '../../manageStudents/manage-students-legacy.component';
+import { PeriodInfoComponent } from './period-info/period-info.component';
 import { TeamInfoComponent } from './team-info/team-info.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 
@@ -14,6 +15,10 @@ angular
   .directive(
     'manageStudentsLegacyComponent',
     downgradeComponent({ component: ManageStudentsLegacyComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'periodInfoComponent',
+    downgradeComponent({ component: PeriodInfoComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'teamInfoComponent',

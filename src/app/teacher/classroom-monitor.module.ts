@@ -6,6 +6,7 @@ import { EditComponentScoreComponent } from '../../assets/wise5/classroomMonitor
 import { GradingEditComponentMaxScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/grading-edit-component-max-score/grading-edit-component-max-score.component';
 import { ManageStudentsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students/manage-students.component';
 import { ManageStudentsLegacyComponent } from '../../assets/wise5/classroomMonitor/manageStudents/manage-students-legacy.component';
+import { PeriodInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/period-info/period-info.component';
 import { TeamInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/team-info/team-info.component';
 import { UserInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/user-info/user-info.component';
 import { WorkgroupInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component';
@@ -43,6 +44,7 @@ import { MilestoneReportDataComponent } from './milestone/milestone-report-data/
     MilestonesComponent,
     MilestoneReportDataComponent,
     NavItemProgressComponent,
+    PeriodInfoComponent,
     SelectPeriodComponent,
     StatusIconComponent,
     StepInfoComponent,
