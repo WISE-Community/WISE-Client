@@ -586,52 +586,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Import components from a project. Also import asset files that are
-   * referenced in any of those components.
-   * @param components an array of component objects that we are importing
-   * @param importProjectId the id of the project we are importing from
-   * @param nodeId the node we are adding the components to
-   * @param insertAfterComponentId insert the components after this component id
-   * @return an array of the new components
-   */
-  importComponents(components, importProjectId, nodeId, insertAfterComponentId) {
-    const newComponents = [];
-    const newComponentIds = [];
-    for (const component of components) {
-      const newComponent = this.UtilService.makeCopyOfJSONObject(component);
-      let newComponentId = newComponent.id;
-      if (this.isComponentIdUsed(newComponentId)) {
-        newComponentId = this.getUnusedComponentId(newComponentIds);
-        newComponent.id = newComponentId;
-      }
-      newComponents.push(newComponent);
-      newComponentIds.push(newComponentId);
-    }
-
-    return this.CopyNodesService.copyNodes(
-      newComponents,
-      importProjectId,
-      this.ConfigService.getConfigParam('projectId')
-    )
-      .toPromise()
-      .then((newComponents: any) => {
-        const node = this.getNodeById(nodeId);
-        let insertPosition = 0;
-        if (insertAfterComponentId == null) {
-          insertPosition = 0;
-        } else {
-          insertPosition =
-            this.getComponentPositionByNodeIdAndComponentId(nodeId, insertAfterComponentId) + 1;
-        }
-        for (const newComponent of newComponents) {
-          node.components.splice(insertPosition, 0, newComponent);
-          insertPosition += 1;
-        }
-        return newComponents;
-      });
-  }
-
-  /**
    * Delete a component from a node
    * @param nodeId the node id containing the node
    * @param componentId the component id
