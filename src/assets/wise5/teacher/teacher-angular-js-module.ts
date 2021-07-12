@@ -5,6 +5,7 @@ import '../common-angular-js-module';
 import { CopyComponentService } from '../services/copyComponentService';
 import { CopyProjectService } from '../services/copyProjectService';
 import { DeleteNodeService } from '../services/deleteNodeService';
+import { ImportComponentService } from '../services/importComponentService';
 import { InsertComponentService } from '../services/insertComponentService';
 import { MilestoneService } from '../services/milestoneService';
 import { MoveNodesService } from '../services/moveNodesService';
@@ -23,6 +24,7 @@ angular
   .factory('CopyComponentService', downgradeInjectable(CopyComponentService))
   .factory('CopyProjectService', downgradeInjectable(CopyProjectService))
   .factory('DeleteNodeService', downgradeInjectable(DeleteNodeService))
+  .factory('ImportComponentService', downgradeInjectable(ImportComponentService))
   .factory('InsertComponentService', downgradeInjectable(InsertComponentService))
   .factory('MilestoneService', downgradeInjectable(MilestoneService))
   .factory('MoveNodesService', downgradeInjectable(MoveNodesService))

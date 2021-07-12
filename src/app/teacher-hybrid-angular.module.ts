@@ -16,6 +16,7 @@ import { CopyComponentService } from '../assets/wise5/services/copyComponentServ
 import { CopyNodesService } from '../assets/wise5/services/copyNodesService';
 import { CopyProjectService } from '../assets/wise5/services/copyProjectService';
 import { DeleteNodeService } from '../assets/wise5/services/deleteNodeService';
+import { ImportComponentService } from '../assets/wise5/services/importComponentService';
 import { InsertComponentService } from '../assets/wise5/services/insertComponentService';
 import { InsertNodesService } from '../assets/wise5/services/insertNodesService';
 import { MoveNodesService } from '../assets/wise5/services/moveNodesService';
@@ -32,6 +33,7 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
     CopyProjectService,
     { provide: DataService, useExisting: TeacherDataService },
     DeleteNodeService,
+    ImportComponentService,
     InsertComponentService,
     InsertNodesService,
     MilestoneService,
