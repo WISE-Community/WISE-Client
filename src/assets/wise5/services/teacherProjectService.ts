@@ -565,21 +565,6 @@ export class TeacherProjectService extends ProjectService {
     }
   }
 
-  /**
-   * Get the previous node
-   * @param nodeId get the node id that comes before this one
-   * @return the node id that comes before
-   */
-  getPreviousNodeId(nodeId) {
-    const flattenedNodeIds = this.getFlattenedProjectAsNodeIds();
-    const indexOfNodeId = flattenedNodeIds.indexOf(nodeId);
-    if (indexOfNodeId !== -1) {
-      const indexOfPreviousNodeId = indexOfNodeId - 1;
-      return flattenedNodeIds[indexOfPreviousNodeId];
-    }
-    return null;
-  }
-
   setProjectScriptFilename(scriptFilename) {
     this.project.script = scriptFilename;
   }
@@ -598,54 +583,6 @@ export class TeacherProjectService extends ProjectService {
    */
   nodeHasRubric(nodeId) {
     return this.getNumberOfRubricsByNodeId(nodeId) > 0;
-  }
-
-  /**
-   * Copy a component and insert it into the step
-   * @param nodeId we are copying a component in this node
-   * @param componentIds the components to copy
-   * @param insertAfterComponentId Which component to place the new components
-   * after. If this is null, we will put the new components at the beginning.
-   * @return an array of the new components
-   */
-  copyComponentAndInsert(nodeId, componentIds, insertAfterComponentId) {
-    const node = this.getNodeById(nodeId);
-    const newComponents = [];
-    const newComponentIds = [];
-    for (const componentId of componentIds) {
-      const newComponent = this.copyComponent(nodeId, componentId, newComponentIds);
-      newComponents.push(newComponent);
-      newComponentIds.push(newComponent.id);
-    }
-
-    let insertPosition = 0;
-    if (insertAfterComponentId == null) {
-      insertPosition = 0; // place the new components at the beginning
-    } else {
-      insertPosition =
-        this.getComponentPositionByNodeIdAndComponentId(nodeId, insertAfterComponentId) + 1;
-    }
-
-    for (const newComponent of newComponents) {
-      node.components.splice(insertPosition, 0, newComponent);
-      insertPosition += 1;
-    }
-    return newComponents;
-  }
-
-  /**
-   * Copy a component
-   * @param nodeId the node id
-   * @param componentId the compnent id
-   * @param componentIdsToSkip component ids that we can't use for our new
-   * component
-   * @return a new component object
-   */
-  copyComponent(nodeId, componentId, componentIdsToSkip) {
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
-    const newComponent = this.UtilService.makeCopyOfJSONObject(component);
-    newComponent.id = this.getUnusedComponentId(componentIdsToSkip);
-    return newComponent;
   }
 
   /**
