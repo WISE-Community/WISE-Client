@@ -372,13 +372,13 @@ export class MultipleChoiceStudent extends ComponentStudent {
       if (this.isCorrect != null) {
         studentData.isCorrect = this.isCorrect;
       }
-    }
-
-    if (action === 'submit') {
       if (this.isSubmit) {
         componentState.isSubmit = this.isSubmit;
         this.isSubmit = false;
         this.isLatestComponentStateSubmit = true;
+        if (this.hasDefaultFeedback()) {
+          this.addDefaultFeedback(componentState);
+        }
       }
     } else if (action === 'save') {
       this.isLatestComponentStateSubmit = false;

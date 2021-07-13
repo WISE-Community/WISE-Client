@@ -419,8 +419,9 @@ export class ConceptMapStudent extends ComponentStudent {
   showFeedbackInPopup(feedbackText: string): void {
     this.dialog.open(HtmlDialog, {
       data: {
-        title: $localize`Feedback`,
-        content: feedbackText
+        content: feedbackText,
+        isShowCloseButton: true,
+        title: $localize`Feedback`
       }
     });
   }
@@ -458,6 +459,8 @@ export class ConceptMapStudent extends ComponentStudent {
       this.isSubmit = false;
       if (this.hasAutoFeedbackScore() || this.hasAutoFeedbackText()) {
         this.addAnnotations(componentState);
+      } else if (this.hasDefaultFeedback()) {
+        this.addDefaultFeedback(componentState);
       }
     }
     return componentState;
@@ -1570,14 +1573,6 @@ export class ConceptMapStudent extends ComponentStudent {
       componentId: this.componentId,
       starterState: this.getConceptMapData()
     });
-  }
-
-  getElementById(id: string, getFirstResult: boolean = false): any {
-    if (getFirstResult) {
-      return $(`#${id}`)[0];
-    } else {
-      return $(`#${id}`);
-    }
   }
 
   attachStudentAsset(studentAsset: any): void {

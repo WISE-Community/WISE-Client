@@ -209,15 +209,6 @@ export class TeacherProjectService extends ProjectService {
     });
   }
 
-  copyProject(projectId) {
-    return this.http
-      .post(`${this.ConfigService.getConfigParam('copyProjectURL')}/${projectId}`, null)
-      .toPromise()
-      .then((newProject) => {
-        return newProject;
-      });
-  }
-
   /**
    * Registers a new project having the projectJSON content with the server.
    * Returns a new project id if the project is successfully registered.
@@ -288,144 +279,6 @@ export class TeacherProjectService extends ProjectService {
       showSubmitButton: false,
       components: []
     };
-  }
-
-  /**
-   * Move nodes inside a group node
-   * @param nodeIds the node ids to move
-   * @param nodeId the node id of the group we are moving the nodes inside
-   */
-  moveNodesInside(nodeIds, nodeId) {
-    const movedNodes = [];
-
-    for (let n = 0; n < nodeIds.length; n++) {
-      const tempNodeId = nodeIds[n];
-      const tempNode = this.getNodeById(tempNodeId);
-      movedNodes.push(tempNode);
-
-      const movingNodeIsActive = this.isActive(tempNodeId);
-      const stationaryNodeIsActive = this.isActive(nodeId);
-
-      if (movingNodeIsActive && stationaryNodeIsActive) {
-        this.removeNodeIdFromTransitions(tempNodeId);
-        this.removeNodeIdFromGroups(tempNodeId);
-
-        if (n == 0) {
-          /*
-           * this is the first node we are moving so we will insert it
-           * into the beginning of the group
-           */
-          this.insertNodeInsideOnlyUpdateTransitions(tempNodeId, nodeId);
-          this.insertNodeInsideInGroups(tempNodeId, nodeId);
-        } else {
-          /*
-           * this is not the first node we are moving so we will insert
-           * it after the node we previously inserted
-           */
-          this.insertNodeAfterInTransitions(tempNode, nodeId);
-          this.insertNodeAfterInGroups(tempNodeId, nodeId);
-        }
-      } else if (movingNodeIsActive && !stationaryNodeIsActive) {
-        this.removeNodeIdFromTransitions(tempNodeId);
-        this.removeNodeIdFromGroups(tempNodeId);
-
-        if (n == 0) {
-          /*
-           * this is the first node we are moving so we will insert it
-           * into the beginning of the group
-           */
-          this.moveFromActiveToInactiveInsertInside(tempNode, nodeId);
-        } else {
-          /*
-           * this is not the first node we are moving so we will insert
-           * it after the node we previously inserted
-           */
-          this.moveToInactive(tempNode, nodeId);
-        }
-      } else if (!movingNodeIsActive && stationaryNodeIsActive) {
-        this.moveToActive(tempNode);
-
-        if (n == 0) {
-          /*
-           * this is the first node we are moving so we will insert it
-           * into the beginning of the group
-           */
-          this.insertNodeInsideOnlyUpdateTransitions(tempNodeId, nodeId);
-          this.insertNodeInsideInGroups(tempNodeId, nodeId);
-        } else {
-          /*
-           * this is not the first node we are moving so we will insert
-           * it after the node we previously inserted
-           */
-          this.insertNodeAfterInTransitions(tempNode, nodeId);
-          this.insertNodeAfterInGroups(tempNodeId, nodeId);
-        }
-      } else if (!movingNodeIsActive && !stationaryNodeIsActive) {
-        this.removeNodeIdFromTransitions(tempNodeId);
-        this.removeNodeIdFromGroups(tempNodeId);
-
-        if (n == 0) {
-          /*
-           * this is the first node we are moving so we will insert it
-           * into the beginning of the group
-           */
-          this.moveFromInactiveToInactiveInsertInside(tempNode, nodeId);
-        } else {
-          /*
-           * this is not the first node we are moving so we will insert
-           * it after the node we previously inserted
-           */
-          this.moveInactiveNodeToInactiveSection(tempNode, nodeId);
-        }
-      }
-
-      /*
-       * remember the node id so we can put the next node (if any)
-       * after this one
-       */
-      nodeId = tempNode.id;
-    }
-    return movedNodes;
-  }
-
-  /**
-   * Move nodes after a certain node id
-   * @param nodeIds the node ids to move
-   * @param nodeId the node id we will put the moved nodes after
-   */
-  moveNodesAfter(nodeIds, nodeId) {
-    const movedNodes = [];
-
-    for (let tempNodeId of nodeIds) {
-      const node = this.getNodeById(tempNodeId);
-      movedNodes.push(node);
-
-      const movingNodeIsActive = this.isActive(tempNodeId);
-      const stationaryNodeIsActive = this.isActive(nodeId);
-
-      if (movingNodeIsActive && stationaryNodeIsActive) {
-        this.removeNodeIdFromTransitions(tempNodeId);
-        this.removeNodeIdFromGroups(tempNodeId);
-        this.insertNodeAfterInGroups(tempNodeId, nodeId);
-        this.insertNodeAfterInTransitions(node, nodeId);
-      } else if (movingNodeIsActive && !stationaryNodeIsActive) {
-        this.removeNodeIdFromTransitions(tempNodeId);
-        this.removeNodeIdFromGroups(tempNodeId);
-        this.moveToInactive(node, nodeId);
-      } else if (!movingNodeIsActive && stationaryNodeIsActive) {
-        this.moveToActive(node);
-        this.insertNodeAfterInGroups(tempNodeId, nodeId);
-        this.insertNodeAfterInTransitions(node, nodeId);
-      } else if (!movingNodeIsActive && !stationaryNodeIsActive) {
-        this.removeNodeIdFromTransitions(tempNodeId);
-        this.removeNodeIdFromGroups(tempNodeId);
-        this.moveInactiveNodeToInactiveSection(node, nodeId);
-      }
-
-      // remember the node id so we can put the next node (if any) after this one
-      nodeId = node.id;
-    }
-    return movedNodes;
   }
 
   /**
@@ -712,21 +565,6 @@ export class TeacherProjectService extends ProjectService {
     }
   }
 
-  /**
-   * Get the previous node
-   * @param nodeId get the node id that comes before this one
-   * @return the node id that comes before
-   */
-  getPreviousNodeId(nodeId) {
-    const flattenedNodeIds = this.getFlattenedProjectAsNodeIds();
-    const indexOfNodeId = flattenedNodeIds.indexOf(nodeId);
-    if (indexOfNodeId !== -1) {
-      const indexOfPreviousNodeId = indexOfNodeId - 1;
-      return flattenedNodeIds[indexOfPreviousNodeId];
-    }
-    return null;
-  }
-
   setProjectScriptFilename(scriptFilename) {
     this.project.script = scriptFilename;
   }
@@ -745,100 +583,6 @@ export class TeacherProjectService extends ProjectService {
    */
   nodeHasRubric(nodeId) {
     return this.getNumberOfRubricsByNodeId(nodeId) > 0;
-  }
-
-  /**
-   * Copy a component and insert it into the step
-   * @param nodeId we are copying a component in this node
-   * @param componentIds the components to copy
-   * @param insertAfterComponentId Which component to place the new components
-   * after. If this is null, we will put the new components at the beginning.
-   * @return an array of the new components
-   */
-  copyComponentAndInsert(nodeId, componentIds, insertAfterComponentId) {
-    const node = this.getNodeById(nodeId);
-    const newComponents = [];
-    const newComponentIds = [];
-    for (const componentId of componentIds) {
-      const newComponent = this.copyComponent(nodeId, componentId, newComponentIds);
-      newComponents.push(newComponent);
-      newComponentIds.push(newComponent.id);
-    }
-
-    let insertPosition = 0;
-    if (insertAfterComponentId == null) {
-      insertPosition = 0; // place the new components at the beginning
-    } else {
-      insertPosition =
-        this.getComponentPositionByNodeIdAndComponentId(nodeId, insertAfterComponentId) + 1;
-    }
-
-    for (const newComponent of newComponents) {
-      node.components.splice(insertPosition, 0, newComponent);
-      insertPosition += 1;
-    }
-    return newComponents;
-  }
-
-  /**
-   * Copy a component
-   * @param nodeId the node id
-   * @param componentId the compnent id
-   * @param componentIdsToSkip component ids that we can't use for our new
-   * component
-   * @return a new component object
-   */
-  copyComponent(nodeId, componentId, componentIdsToSkip) {
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
-    const newComponent = this.UtilService.makeCopyOfJSONObject(component);
-    newComponent.id = this.getUnusedComponentId(componentIdsToSkip);
-    return newComponent;
-  }
-
-  /**
-   * Import components from a project. Also import asset files that are
-   * referenced in any of those components.
-   * @param components an array of component objects that we are importing
-   * @param importProjectId the id of the project we are importing from
-   * @param nodeId the node we are adding the components to
-   * @param insertAfterComponentId insert the components after this component id
-   * @return an array of the new components
-   */
-  importComponents(components, importProjectId, nodeId, insertAfterComponentId) {
-    const newComponents = [];
-    const newComponentIds = [];
-    for (const component of components) {
-      const newComponent = this.UtilService.makeCopyOfJSONObject(component);
-      let newComponentId = newComponent.id;
-      if (this.isComponentIdUsed(newComponentId)) {
-        newComponentId = this.getUnusedComponentId(newComponentIds);
-        newComponent.id = newComponentId;
-      }
-      newComponents.push(newComponent);
-      newComponentIds.push(newComponentId);
-    }
-
-    return this.CopyNodesService.copyNodes(
-      newComponents,
-      importProjectId,
-      this.ConfigService.getConfigParam('projectId')
-    )
-      .toPromise()
-      .then((newComponents: any) => {
-        const node = this.getNodeById(nodeId);
-        let insertPosition = 0;
-        if (insertAfterComponentId == null) {
-          insertPosition = 0;
-        } else {
-          insertPosition =
-            this.getComponentPositionByNodeIdAndComponentId(nodeId, insertAfterComponentId) + 1;
-        }
-        for (const newComponent of newComponents) {
-          node.components.splice(insertPosition, 0, newComponent);
-          insertPosition += 1;
-        }
-        return newComponents;
-      });
   }
 
   /**
@@ -1103,11 +847,6 @@ export class TeacherProjectService extends ProjectService {
         }
       }
     }
-  }
-
-  moveInactiveNodeToInactiveSection(node, nodeIdToInsertAfter) {
-    this.removeNodeFromInactiveNodes(node.id);
-    this.addInactiveNodeInsertAfter(node, nodeIdToInsertAfter);
   }
 
   addNodeToGroup(node, group) {
@@ -1787,127 +1526,6 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
-   * Delete a node from the project and update transitions.
-   *
-   * If we are deleting the project start node id, we will need to change it to the
-   * next logical node id that will be used as the project start.
-   *
-   * @param nodeId the node id to delete from the project. It can be a step or an activity.
-   */
-  deleteNode(nodeId) {
-    const parentGroup = this.getParentGroup(nodeId);
-    if (parentGroup != null && parentGroup.startId === nodeId) {
-      this.setGroupStartIdToNextChildId(parentGroup);
-    }
-    if (this.isProjectStartNodeIdOrContainsProjectStartNodeId(nodeId)) {
-      this.updateProjectStartNodeIdToNextLogicalNode(nodeId);
-    }
-    if (this.isGroupNode(nodeId)) {
-      this.removeChildNodes(nodeId);
-    }
-    this.removeNodeIdFromTransitions(nodeId);
-    this.removeNodeIdFromGroups(nodeId);
-    this.removeNodeIdFromNodes(nodeId);
-  }
-
-  updateProjectStartNodeIdToNextLogicalNode(nodeId) {
-    if (this.isGroupNode(nodeId)) {
-      this.updateProjectStartNodeIdToNextLogicalNodeForRemovingGroup(nodeId);
-    } else {
-      this.updateProjectStartNodeIdToNextLogicalNodeForRemovingStep(nodeId);
-    }
-  }
-
-  /**
-   * Set the startNodeId of the specified group to the first node of the next group.
-   * If the next group doesn't have any nodes, startNodeId should point
-   * to the next group.
-   */
-  updateProjectStartNodeIdToNextLogicalNodeForRemovingGroup(nodeId) {
-    const transitions = this.getTransitionsByFromNodeId(nodeId);
-    if (transitions.length == 0) {
-      this.setStartNodeId('group0');
-    } else {
-      let nextNodeId = transitions[0].to;
-      if (this.isGroupNode(nextNodeId)) {
-        const nextGroupStartId = this.getGroupStartId(nextNodeId);
-        if (nextGroupStartId == null) {
-          this.setStartNodeId(nextNodeId);
-        } else {
-          this.setStartNodeId(nextGroupStartId);
-        }
-      } else {
-        this.setStartNodeId(nextNodeId);
-      }
-    }
-  }
-
-  /**
-   * Set the startNodeId to the next node in the transitions.
-   * If there are no transitions, set it to the parent group of the node.
-   */
-  updateProjectStartNodeIdToNextLogicalNodeForRemovingStep(nodeId) {
-    const transitions = this.getTransitionsByFromNodeId(nodeId);
-    const parentGroupId = this.getParentGroupId(nodeId);
-    if (transitions.length == 0) {
-      this.setStartNodeId(parentGroupId);
-    } else {
-      let nextNodeId = transitions[0].to;
-      if (this.isNodeInGroup(nextNodeId, parentGroupId)) {
-        this.setStartNodeId(nextNodeId);
-      } else {
-        this.setStartNodeId(this.getParentGroupId(nodeId));
-      }
-    }
-  }
-
-  setGroupStartIdToNextChildId(group) {
-    let hasSetNewStartId = false;
-    const transitions = this.getTransitionsByFromNodeId(group.startId);
-    if (transitions.length > 0) {
-      const transition = transitions[0];
-      const toNodeId = transition.to;
-      if (this.isNodeInGroup(toNodeId, group.id)) {
-        group.startId = toNodeId;
-        hasSetNewStartId = true;
-      }
-    }
-
-    if (!hasSetNewStartId) {
-      group.startId = '';
-    }
-  }
-
-  removeChildNodes(groupId) {
-    const group = this.getNodeById(groupId);
-    for (let i = 0; i < group.ids.length; i++) {
-      const childId = group.ids[i];
-      this.removeNodeIdFromTransitions(childId);
-      this.removeNodeIdFromGroups(childId);
-      this.removeNodeIdFromNodes(childId);
-      i--; // so it won't skip the next element
-    }
-  }
-
-  isProjectStartNodeIdOrContainsProjectStartNodeId(nodeId) {
-    return (
-      this.getStartNodeId() === nodeId ||
-      (this.isGroupNode(nodeId) && this.containsStartNodeId(nodeId))
-    );
-  }
-
-  containsStartNodeId(groupId) {
-    const group = this.getNodeById(groupId);
-    const projectStartNodeId = this.getStartNodeId();
-    for (let childId of group.ids) {
-      if (childId === projectStartNodeId) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
    * Update the transitions to handle removing a node
    * @param nodeId the node id to remove
    */
@@ -2230,36 +1848,6 @@ export class TeacherProjectService extends ProjectService {
     } else {
       group.startId = '';
     }
-  }
-
-  /**
-   * Remove the node from the array of nodes
-   * @param nodeId the node id to remove
-   */
-  removeNodeIdFromNodes(nodeId) {
-    const nodes = this.project.nodes;
-    for (let n = 0; n < nodes.length; n++) {
-      const node = nodes[n];
-      if (node != null) {
-        if (nodeId === node.id) {
-          nodes.splice(n, 1);
-        }
-      }
-    }
-
-    const inactiveNodes = this.project.inactiveNodes;
-    if (inactiveNodes != null) {
-      for (let i = 0; i < inactiveNodes.length; i++) {
-        const inactiveNode = inactiveNodes[i];
-        if (inactiveNode != null) {
-          if (nodeId === inactiveNode.id) {
-            inactiveNodes.splice(i, 1);
-          }
-        }
-      }
-    }
-
-    this.idToNode[nodeId] = null;
   }
 
   /**

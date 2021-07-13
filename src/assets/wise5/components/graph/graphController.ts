@@ -1601,6 +1601,9 @@ class GraphController extends ComponentController {
     componentState.componentType = 'Graph';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
+    if (this.isSubmit && this.hasDefaultFeedback()) {
+      this.addDefaultFeedback(componentState);
+    }
     this.isSubmit = false;
     this.createComponentStateAdditionalProcessing(deferred, componentState, action);
     return deferred.promise;

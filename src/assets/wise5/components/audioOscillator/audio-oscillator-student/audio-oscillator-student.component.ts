@@ -151,6 +151,9 @@ export class AudioOscillatorStudent extends ComponentStudent {
       this.maxFrequencyPlayed,
       this.submitCounter
     );
+    if (this.isSubmit && this.hasDefaultFeedback()) {
+      this.addDefaultFeedback(componentState);
+    }
     return new Promise((resolve, reject) => {
       this.createComponentStateAdditionalProcessing(
         { resolve: resolve, reject: reject },

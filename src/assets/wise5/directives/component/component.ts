@@ -83,9 +83,16 @@ const Component = {
   scope: true,
   controller: ComponentController,
   template: `<div ng-switch="type" class="component__wrapper">
-          <div ng-switch-when="AudioOscillator|ConceptMap|Draw|HTML|Label|Match|MultipleChoice|OutsideURL"
+          <div ng-switch-when="Animation|AudioOscillator|ConceptMap|Draw|Embedded|HTML|Label|Match|MultipleChoice|OpenResponse|OutsideURL|Table"
               ng-switch-when-separator="|"
               class="component__content">
+            <animation-student ng-if="type === 'Animation'"
+                [node-id]="nodeId"
+                [component-content]="componentContent"
+                [component-state]="componentState"
+                [workgroup-id]="workgroupId"
+                [mode]="mode">
+            </animation-student>
             <audio-oscillator-student ng-if="type === 'AudioOscillator'"
                 [node-id]="nodeId"
                 [component-content]="componentContent"
@@ -107,6 +114,13 @@ const Component = {
                 [workgroup-id]="workgroupId"
                 [mode]="mode">
             </draw-student>
+            <embedded-student ng-if="type === 'Embedded'"
+                [node-id]="nodeId"
+                [component-content]="componentContent"
+                [component-state]="componentState"
+                [workgroup-id]="workgroupId"
+                [mode]="mode">
+            </embedded-student>
             <html-student ng-if="type === 'HTML'"
                 [node-id]="nodeId"
                 [component-content]="componentContent"
@@ -133,11 +147,25 @@ const Component = {
                 [workgroup-id]="workgroupId"
                 [mode]="mode">
             </multiple-choice-student>
+            <open-response-student ng-if="type === 'OpenResponse'"
+                [node-id]="nodeId"
+                [component-content]="componentContent"
+                [component-state]="componentState"
+                [workgroup-id]="workgroupId"
+                [mode]="mode">
+            </open-response-student>
             <outside-url-student ng-if="type === 'OutsideURL'"
                 [node-id]="nodeId"
                 [component-content]="componentContent"
                 [mode]="mode">
             </outside-url-student>
+            <table-student ng-if="type === 'Table'"
+                [node-id]="nodeId"
+                [component-content]="componentContent"
+                [component-state]="componentState"
+                [workgroup-id]="workgroupId"
+                [mode]="mode">
+            </table-student>
           </div>
           <div ng-switch-default>
             <div ng-include="::componentTemplatePath" class="component__content component__content--{{::type}}"></div>

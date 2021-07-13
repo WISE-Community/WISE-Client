@@ -30,7 +30,7 @@ describe('TableGrading', () => {
     );
     component = fixture.componentInstance;
     component.componentContent = {};
-    component.componentState = '{ "studentData": { "tableData": [] } }';
+    component.componentState = { studentData: { tableData: [] } };
     fixture.detectChanges();
     component.componentContent = { globalCellSize: 10 };
   });

@@ -204,8 +204,8 @@ export class ComponentAnnotationsComponent {
     const latest = this.getLatestAnnotation();
     if (latest) {
       if (latest.type === 'autoComment' || latest.type === 'autoScore') {
-        this.label = this.upgrade.$injector.get('$filter')('translate')('automatedFeedbackLabel');
-        this.icon = 'keyboard';
+        this.label = this.upgrade.$injector.get('$filter')('translate')('FEEDBACK');
+        this.icon = 'message';
       } else {
         this.label = this.upgrade.$injector.get('$filter')('translate')('teacherFeedbackLabel');
         this.icon = 'person';

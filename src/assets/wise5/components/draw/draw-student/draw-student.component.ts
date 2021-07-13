@@ -237,6 +237,9 @@ export class DrawStudent extends ComponentStudent {
     componentState.componentType = 'Draw';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
+    if (this.isSubmit && this.hasDefaultFeedback()) {
+      this.addDefaultFeedback(componentState);
+    }
     return componentState;
   }
 

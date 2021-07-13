@@ -1,7 +1,9 @@
 'use strict';
 
-import { TeacherProjectService } from '../../services/teacherProjectService';
 import { ConfigService } from '../../services/configService';
+import { DeleteNodeService } from '../../services/deleteNodeService';
+import { MoveNodesService } from '../../services/moveNodesService';
+import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
 import * as angular from 'angular';
@@ -61,6 +63,8 @@ class ProjectAuthoringController {
     '$transitions',
     '$window',
     'ConfigService',
+    'DeleteNodeService',
+    'MoveNodesService',
     'ProjectService',
     'TeacherDataService',
     'UtilService'
@@ -75,6 +79,8 @@ class ProjectAuthoringController {
     private $transitions,
     private $window,
     private ConfigService: ConfigService,
+    private DeleteNodeService: DeleteNodeService,
+    private MoveNodesService: MoveNodesService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService,
     private UtilService: UtilService
@@ -311,9 +317,9 @@ class ProjectAuthoringController {
 
       let newNodes = [];
       if (moveTo === 'inside') {
-        newNodes = this.ProjectService.moveNodesInside(selectedNodeIds, nodeId);
+        newNodes = this.MoveNodesService.moveNodesInsideGroup(selectedNodeIds, nodeId);
       } else if (moveTo === 'after') {
-        newNodes = this.ProjectService.moveNodesAfter(selectedNodeIds, nodeId);
+        newNodes = this.MoveNodesService.moveNodesAfter(selectedNodeIds, nodeId);
       } else {
         // an unspecified moveTo was provided
         return;
@@ -481,7 +487,7 @@ class ProjectAuthoringController {
       } else {
         stepsDeleted.push(tempNode);
       }
-      this.ProjectService.deleteNode(nodeId);
+      this.DeleteNodeService.deleteNode(nodeId);
     }
     if (deletedStartNodeId) {
       this.updateStartNodeId();

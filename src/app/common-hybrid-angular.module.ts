@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { UpgradeModule } from '@angular/upgrade/static';
 import { UtilService } from '../assets/wise5/services/utilService';
 import { ConfigService } from '../assets/wise5/services/configService';
@@ -65,9 +65,10 @@ import { ClassResponse } from '../assets/wise5/components/discussion/class-respo
 import { ComponentService } from '../assets/wise5/components/componentService';
 import { WiseLinkService } from './services/wiseLinkService';
 import { DataExportService } from '../assets/wise5/services/dataExportService';
-import { DragulaService } from 'ng2-dragula';
 import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
+import { MatSliderModule } from '@angular/material/slider';
+import { setUpLocationSync } from '@angular/router/upgrade';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -83,6 +84,7 @@ export class EmptyComponent {}
   imports: [
     UpgradeModule,
     CommonModule,
+    DragDropModule,
     EditorModule,
     FlexLayoutModule,
     FormsModule,
@@ -101,6 +103,7 @@ export class EmptyComponent {}
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSliderModule,
     MatTabsModule,
     MatToolbarModule,
     MatSlideToggleModule,
@@ -122,7 +125,6 @@ export class EmptyComponent {}
     CRaterService,
     DataExportService,
     DiscussionService,
-    DragulaService,
     DrawService,
     EmbeddedService,
     GraphService,
@@ -151,6 +153,7 @@ export class EmptyComponent {}
   exports: [
     ClassResponse,
     CommonModule,
+    DragDropModule,
     EditorModule,
     FlexLayoutModule,
     FormsModule,
@@ -170,9 +173,10 @@ export class EmptyComponent {}
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
     MatTabsModule,
     MatToolbarModule,
-    MatSlideToggleModule,
     MatTooltipModule,
     MomentModule,
     NodeIconComponent,
@@ -181,3 +185,8 @@ export class EmptyComponent {}
   ]
 })
 export class AngularJSModule {}
+
+export function bootstrapAngularJSModule(upgrade: UpgradeModule, moduleType: string) {
+  upgrade.bootstrap(document.body, [moduleType]);
+  setUpLocationSync(upgrade);
+}

@@ -150,7 +150,7 @@ const MilestoneDetails = {
   template: `<div class="milestone-details">
       <section class="milestone-details__section md-whiteframe-1dp">
         <div layout="row" layout-align="start center">
-          <period-select custom-class="'md-no-underline md-button toolbar__select'"></period-select>
+          <select-period></select-period>
           <span flex></span>
           <div layout="row" layout-align="start center">
             <md-progress-linear class="milestone-details__progress" md-mode="determinate" value="{{ $ctrl.milestone.percentageCompleted }}"></md-progress-linear>

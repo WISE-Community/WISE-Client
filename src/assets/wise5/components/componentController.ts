@@ -848,6 +848,32 @@ class ComponentController {
   }
 
   generateStarterState() {}
+
+  addDefaultFeedback(componentState: any): void {
+    const defaultFeedback = this.getDefaultFeedback(this.submitCounter);
+    if (defaultFeedback != null) {
+      componentState.annotations = [this.createDefaultFeedbackAnnotation(defaultFeedback)];
+    }
+  }
+
+  hasDefaultFeedback(): boolean {
+    return (
+      this.componentContent.defaultFeedback != null &&
+      this.componentContent.defaultFeedback.length > 0
+    );
+  }
+
+  getDefaultFeedback(submitCount: number): string {
+    return this.componentContent.defaultFeedback[submitCount - 1];
+  }
+
+  createDefaultFeedbackAnnotation(feedbackText: string): any {
+    const defaultFeedbackAnnotationData: any = {
+      autoGrader: 'defaultFeedback',
+      value: feedbackText
+    };
+    return this.createAutoCommentAnnotation(defaultFeedbackAnnotationData);
+  }
 }
 
 export default ComponentController;

@@ -1,0 +1,34 @@
+<div class="main-div">
+  <add-to-notebook-button
+      *ngIf="isShowAddToNotebookButton"
+      [isDisabled]="isDisabled"
+      (snipImage)="snipModel()">
+  </add-to-notebook-button>
+  <br/>
+  <div style="width: {{width}}; height: {{height}};">
+    <iframe
+        [id]="embeddedApplicationIFrameId"
+        [src]="url"
+        (load)="iframeLoaded()"
+        class="embedded-content__iframe iframe">
+    </iframe>
+  </div>
+</div>
+<component-save-submit-buttons
+    *ngIf="isSaveOrSubmitButtonVisible"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    [saveMessage]="saveMessage"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)">
+</component-save-submit-buttons>
+<component-annotations
+    *ngIf="mode === 'student'"
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId">
+</component-annotations>

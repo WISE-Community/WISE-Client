@@ -91,6 +91,10 @@ export abstract class ComponentStudent {
         : this.componentContent.showAddToNotebookButton;
     this.isStudentAttachmentEnabled = this.componentContent.isStudentAttachmentEnabled;
     this.isShowAddToNotebookButton = this.isAddToNotebookEnabled();
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
+      this.isSubmitButtonDisabled = true;
+    }
     this.subscribeToSubscriptions();
   }
 
@@ -221,7 +225,25 @@ export abstract class ComponentStudent {
     });
   }
 
-  attachStudentAsset(studentAsset: any): void {}
+  attachStudentAsset(studentAsset: any): any {
+    return this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
+      const attachment = {
+        studentAssetId: copiedAsset.id,
+        iconURL: copiedAsset.iconURL,
+        url: copiedAsset.url,
+        type: copiedAsset.type
+      };
+      this.attachments.push(attachment);
+      this.studentDataChanged();
+    });
+  }
+
+  removeAttachment(attachment: any): void {
+    if (this.attachments.indexOf(attachment) !== -1) {
+      this.attachments.splice(this.attachments.indexOf(attachment), 1);
+      this.studentDataChanged();
+    }
+  }
 
   subscribeToStudentWorkSavedToServer(): void {
     this.subscriptions.add(
@@ -416,6 +438,13 @@ export abstract class ComponentStudent {
 
   hasUsedAllSubmits(): boolean {
     return this.getNumberOfSubmitsLeft() <= 0;
+  }
+
+  tryDisableComponent(): void {
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
+      this.isSubmitButtonDisabled = true;
+    }
   }
 
   hasMaxSubmitCountAndUsedAllSubmits() {
@@ -676,5 +705,91 @@ export abstract class ComponentStudent {
 
   getClientSaveTime(componentState: any): number {
     return this.ConfigService.convertToClientTimestamp(componentState.serverSaveTime);
+  }
+
+  addDefaultFeedback(componentState: any): void {
+    const defaultFeedback = this.getDefaultFeedback(this.submitCounter);
+    if (defaultFeedback != null) {
+      componentState.annotations = [this.createDefaultFeedbackAnnotation(defaultFeedback)];
+    }
+  }
+
+  hasDefaultFeedback(): boolean {
+    return (
+      this.componentContent.defaultFeedback != null &&
+      this.componentContent.defaultFeedback.length > 0
+    );
+  }
+
+  getDefaultFeedback(submitCount: number): string {
+    return this.componentContent.defaultFeedback[submitCount - 1];
+  }
+
+  createDefaultFeedbackAnnotation(feedbackText: string): any {
+    const defaultFeedbackAnnotationData: any = {
+      autoGrader: 'defaultFeedback',
+      value: feedbackText
+    };
+    return this.createAutoCommentAnnotation(defaultFeedbackAnnotationData);
+  }
+
+  createAutoScoreAnnotation(data: any): any {
+    return this.AnnotationService.createAutoScoreAnnotation(
+      this.ConfigService.getRunId(),
+      this.ConfigService.getPeriodId(),
+      this.nodeId,
+      this.componentId,
+      this.ConfigService.getWorkgroupId(),
+      data
+    );
+  }
+
+  createAutoCommentAnnotation(data: any): any {
+    return this.AnnotationService.createAutoCommentAnnotation(
+      this.ConfigService.getRunId(),
+      this.ConfigService.getPeriodId(),
+      this.nodeId,
+      this.componentId,
+      this.ConfigService.getWorkgroupId(),
+      data
+    );
+  }
+
+  updateLatestScoreAnnotation(annotation: any): void {
+    this.latestAnnotations.score = annotation;
+  }
+
+  updateLatestCommentAnnotation(annotation: any): void {
+    this.latestAnnotations.comment = annotation;
+  }
+
+  registerNotebookItemChosenListener(): void {
+    this.subscriptions.add(
+      this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
+        if (requester === `${this.nodeId}-${this.componentId}`) {
+          const studentWorkId = notebookItem.content.studentWorkIds[0];
+          this.importWorkByStudentWorkId(studentWorkId);
+        }
+      })
+    );
+  }
+
+  copyPublicNotebookItemButtonClicked(): void {
+    this.NotebookService.setInsertMode({
+      nodeId: this.nodeId,
+      componentId: this.componentId,
+      insertMode: true,
+      requester: this.nodeId + '-' + this.componentId,
+      visibleSpace: 'public'
+    });
+    this.NotebookService.setNotesVisible(true);
+  }
+
+  getElementById(id: string, getFirstResult: boolean = false): any {
+    if (getFirstResult) {
+      return $(`#${id}`)[0];
+    } else {
+      return $(`#${id}`);
+    }
   }
 }
