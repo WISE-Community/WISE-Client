@@ -28,10 +28,12 @@ import { WorkgroupSelectDropdownComponent } from '../classroom-monitor/workgroup
 import { AngularJSModule } from '../common-hybrid-angular.module';
 import { ComponentGradingModule } from './component-grading.module';
 import { MilestoneReportDataComponent } from './milestone/milestone-report-data/milestone-report-data.component';
+import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component';
 
 @NgModule({
   declarations: [
     AlertStatusCornerComponent,
+    ChangeTeamPeriodDialogComponent,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
     ComponentStateInfoComponent,
