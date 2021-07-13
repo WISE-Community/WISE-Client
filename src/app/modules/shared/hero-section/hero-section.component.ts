@@ -2,7 +2,6 @@ import {
   Component,
   ContentChild,
   Input,
-  OnInit,
   TemplateRef,
   ViewEncapsulation,
   ViewChild,
@@ -35,6 +34,8 @@ export class HeroSectionComponent {
   tagline: string;
 
   @ContentChild('taglineTemplate', { static: false }) taglineRef: TemplateRef<any>;
+
+  @ContentChild('sideTemplate', { static: false }) sideRef: TemplateRef<any>;
 
   @ViewChild('bgRef') bgRef: ElementRef;
 

@@ -2,19 +2,26 @@
   <app-hero-section [imgSrc]="hero.imgSrc" [imgSources]="hero.imgSources" 
                     [imgDescription]="hero.imgDescription">
     <ng-template #headlineTemplate>
-      <div class="accent-2">
+      <div class="accent-2" fxLayoutGap="8px" fxLayoutGap.gt-xs="16px">
         <mat-icon [@jackInTheBox]="{value: '*', params: {delay: '1s'}}" svgIcon="ki-elicit"
                   i18n-aria-label aria-label="Elicit Ideas"></mat-icon>
-        <mat-icon [@bounceIn]="{value: '*', params: {delay: '1500ms'}}" svgIcon="ki-add"
+        <mat-icon [@bounceIn]="{value: '*', params: {delay: '1250ms'}}" svgIcon="ki-add"
                   i18n-aria-label aria-label="Add Ideas"></mat-icon>
-        <mat-icon [@rotateIn]="{value: '*', params: {delay: '2s'}}" svgIcon="ki-distinguish"
+        <mat-icon [@rotateIn]="{value: '*', params: {delay: '1500ms'}}" svgIcon="ki-distinguish"
                   i18n-aria-label aria-label="Distinguish Ideas"></mat-icon>
-        <mat-icon [@flipInY]="{value: '*', params: {delay: '2500ms'}}" svgIcon="ki-connect"
-                  i18n-aria-label aria-label="Connect Ideas"></mat-icon>
+        <mat-icon [@flipInY]="{value: '*', params: {delay: '2s'}}" svgIcon="ki-connect"
+                  i18n-aria-label aria-label="Connect Ideas and Reflect"></mat-icon>
       </div>
     </ng-template>
     <ng-template #taglineTemplate>
-      <div [@flipInX]="{value: '*', params: {delay: '3500ms'}}" i18n>Integrated science learning and teaching with technology</div>
+      <div [@flipInX]="{value: '*', params: {delay: '2750ms'}}" i18n>Integrated science learning and teaching with technology</div>
+    </ng-template>
+    <ng-template #sideTemplate>
+      <discourse-latest-news [@bounceIn]="{value: '*', params: {duration: '1.25s', delay: '3500ms'}}"
+          baseUrl="https://wise-discuss.berkeley.edu"
+          category="c/news-announcements/7"
+          queryString="order=latest">
+      </discourse-latest-news>
     </ng-template>
   </app-hero-section>
   <section class="section">
@@ -75,9 +82,11 @@
         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center stretch"
              fxLayoutAlign.xs="center center" fxLayoutGap="32px" fxLayoutGap.sm="24px"
              fxLayoutGap.gt-sm="32px">
-          <app-call-to-action fxFlex fxFlex.gt-xs="33" icon="record_voice_over" iconColor="accent-1"
-                              i18n-headline headline="News" i18n-content
-                              content="Learn what's new in the WISE community." destination="/news">
+          <app-call-to-action fxFlex fxFlex.gt-xs="33" icon="forum" iconColor="accent-1"
+                              i18n-headline headline="Community" i18n-content
+                              content="Join us! Discuss all things WISE."
+                              destination="https://wise-discuss.berkeley.edu" linkTarget="_self"
+                              [isOutsideLink]="true">
           </app-call-to-action>
           <app-call-to-action fxFlex fxFlex.gt-xs="33" icon="live_help" iconColor="accent-2"
                               i18n-headline headline="Help + FAQs" i18n-content
