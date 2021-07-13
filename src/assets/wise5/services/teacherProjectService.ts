@@ -9,7 +9,6 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { SessionService } from './sessionService';
-import { CopyNodesService } from './copyNodesService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -36,7 +35,6 @@ export class TeacherProjectService extends ProjectService {
     protected upgrade: UpgradeModule,
     protected http: HttpClient,
     protected ConfigService: ConfigService,
-    protected CopyNodesService: CopyNodesService,
     protected SessionService: SessionService,
     protected UtilService: UtilService
   ) {
@@ -281,28 +279,6 @@ export class TeacherProjectService extends ProjectService {
     };
   }
 
-  /**
-   * Copy nodes and put them after a certain node id
-   * @param nodeIds the node ids to copy
-   * @param nodeId the node id we will put the copied nodes after
-   */
-  copyNodesInside(nodeIds, nodeId) {
-    const newNodes = [];
-    for (let n = 0; n < nodeIds.length; n++) {
-      const newNode = this.copyNode(nodeIds[n]);
-      const newNodeId = newNode.id;
-      if (n == 0) {
-        this.createNodeInside(newNode, nodeId);
-      } else {
-        this.createNodeAfter(newNode, nodeId);
-      }
-      nodeId = newNodeId;
-      this.parseProject();
-      newNodes.push(newNode);
-    }
-    return newNodes;
-  }
-
   getNodesWithNewIds(nodes: any[]): any[] {
     const oldToNewIds = this.getOldToNewIds(nodes);
     return nodes.map((node: any) => {
@@ -378,24 +354,6 @@ export class TeacherProjectService extends ProjectService {
       this.insertNodeAfterInGroups(newNode.id, nodeId);
       this.insertNodeAfterInTransitions(newNode, nodeId);
     }
-  }
-
-  /**
-   * Copy nodes and put them after a certain node id
-   * @param nodeIds the node ids to copy
-   * @param nodeId the node id we will put the copied nodes after
-   */
-  copyNodesAfter(nodeIds, nodeId) {
-    const newNodes = [];
-    for (const nodeIdToCopy of nodeIds) {
-      const newNode = this.copyNode(nodeIdToCopy);
-      const newNodeId = newNode.id;
-      this.createNodeAfter(newNode, nodeId);
-      nodeId = newNodeId; // remember the node id so we can put the next node (if any) after this one
-      this.parseProject();
-      newNodes.push(newNode);
-    }
-    return newNodes;
   }
 
   isInactive(nodeId) {
@@ -1502,27 +1460,6 @@ export class TeacherProjectService extends ProjectService {
     return this.project.inactiveNodes.map((node) => {
       return node.id;
     });
-  }
-
-  /**
-   * Copy the node with the specified nodeId
-   * @param nodeId the node id to copy
-   * @return copied node
-   */
-  copyNode(nodeId) {
-    const node = this.getNodeById(nodeId);
-    const nodeCopy = this.UtilService.makeCopyOfJSONObject(node);
-    nodeCopy.id = this.getNextAvailableNodeId();
-    nodeCopy.transitionLogic = {}; // clear transition logic
-    nodeCopy.constraints = []; // clear constraints
-
-    const newComponentIds = [];
-    for (let component of nodeCopy.components) {
-      const newComponentId = this.getUnusedComponentId(newComponentIds);
-      newComponentIds.push(newComponentId);
-      component.id = newComponentId;
-    }
-    return nodeCopy;
   }
 
   /**
