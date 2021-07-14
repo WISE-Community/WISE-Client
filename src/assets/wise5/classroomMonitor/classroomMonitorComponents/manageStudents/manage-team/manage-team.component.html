@@ -1,7 +1,7 @@
 <span fxLayout="row">
   <span class="name" i18n>Team {{team.workgroupId}}</span>
   <span fxFlex></span>
-  <a class="changePeriodLink" (click)="changePeriod()" i18n>Change Period</a>
+  <a *ngIf="canChangePeriod" class="changePeriodLink" (click)="changePeriod()" i18n>Change Period</a>
 </span>
 <ul class="users" fxLayout="column" fxLayoutGap="8px">
   <li class="user" *ngFor="let user of team.users" i18n>
