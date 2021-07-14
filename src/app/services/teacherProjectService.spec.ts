@@ -8,7 +8,6 @@ import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServiceSpec.project.json';
 import { SessionService } from '../../assets/wise5/services/sessionService';
-import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 let service: TeacherProjectService;
 let configService: ConfigService;
 let utilService: UtilService;
@@ -30,13 +29,7 @@ describe('TeacherProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [
-        TeacherProjectService,
-        ConfigService,
-        CopyNodesService,
-        SessionService,
-        UtilService
-      ]
+      providers: [TeacherProjectService, ConfigService, SessionService, UtilService]
     });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(TeacherProjectService);

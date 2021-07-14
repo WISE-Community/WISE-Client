@@ -3,6 +3,7 @@ import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import '../common-angular-js-module';
 import { CopyComponentService } from '../services/copyComponentService';
+import { CopyNodesService } from '../services/copyNodesService';
 import { CopyProjectService } from '../services/copyProjectService';
 import { DeleteNodeService } from '../services/deleteNodeService';
 import { ImportComponentService } from '../services/importComponentService';
@@ -22,6 +23,7 @@ import '../authoringTool/authoring-tool.module';
 angular
   .module('teacher', ['common', 'angular-inview', 'authoringTool', 'classroomMonitor', 'ngAnimate'])
   .factory('CopyComponentService', downgradeInjectable(CopyComponentService))
+  .factory('CopyNodesService', downgradeInjectable(CopyNodesService))
   .factory('CopyProjectService', downgradeInjectable(CopyProjectService))
   .factory('DeleteNodeService', downgradeInjectable(DeleteNodeService))
   .factory('ImportComponentService', downgradeInjectable(ImportComponentService))
