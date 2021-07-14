@@ -1,84 +1,64 @@
-'use strict';
+import { Component } from '@angular/core';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../services/configService';
+import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { ProjectService } from '../../../services/projectService';
+import { StudentAssetService } from '../../../services/studentAssetService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { UtilService } from '../../../services/utilService';
+import { ComponentStudent } from '../../component-student.component';
+import { ComponentService } from '../../componentService';
 
-import * as angular from 'angular';
-import ComponentController from '../componentController';
-import { SummaryService } from './summaryService';
-
-class SummaryController extends ComponentController {
-  SummaryService: SummaryService;
+@Component({
+  selector: 'summary-student',
+  templateUrl: 'summary-student.component.html',
+  styleUrls: ['summary-student.component.scss']
+})
+export class SummaryStudent extends ComponentStudent {
+  chartType: string;
+  customLabelColors: any[];
+  highlightCorrectAnswer: boolean;
+  isShowDisplay: boolean;
+  isStudent: boolean;
+  otherPrompt: string;
+  otherStepTitle: string;
+  periodId: number;
+  prompt: string;
+  source: string;
+  studentDataType: string;
   summaryNodeId: string;
   summaryComponentId: string;
-  studentDataType: string;
-  chartType: string;
-  prompt: string;
-  highlightCorrectAnswer: boolean;
-  warningMessage: string;
-  otherPrompt: string;
-  isStudent: boolean;
-  otherStepTitle: string;
-  isShowDisplay: boolean;
-  periodId: number;
-  source: string;
-  customLabelColors: any[];
-
-  static $inject = [
-    '$filter',
-    '$injector',
-    '$mdDialog',
-    '$q',
-    '$rootScope',
-    '$scope',
-    'AnnotationService',
-    'AudioRecorderService',
-    'ConfigService',
-    'NodeService',
-    'NotebookService',
-    'NotificationService',
-    'ProjectService',
-    'StudentAssetService',
-    'StudentDataService',
-    'SummaryService',
-    'UtilService'
-  ];
+  warningMessage: string = '';
 
   constructor(
-    $filter,
-    $injector,
-    $mdDialog,
-    $q,
-    $rootScope,
-    $scope,
-    AnnotationService,
-    AudioRecorderService,
-    ConfigService,
-    NodeService,
-    NotebookService,
-    NotificationService,
-    ProjectService,
-    StudentAssetService,
-    StudentDataService,
-    SummaryService,
-    UtilService
+    protected AnnotationService: AnnotationService,
+    protected ComponentService: ComponentService,
+    protected ConfigService: ConfigService,
+    protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
+    private ProjectService: ProjectService,
+    protected StudentAssetService: StudentAssetService,
+    protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
+    protected UtilService: UtilService
   ) {
     super(
-      $filter,
-      $injector,
-      $mdDialog,
-      $q,
-      $rootScope,
-      $scope,
       AnnotationService,
-      AudioRecorderService,
+      ComponentService,
       ConfigService,
       NodeService,
       NotebookService,
-      NotificationService,
-      ProjectService,
       StudentAssetService,
       StudentDataService,
+      upgrade,
       UtilService
     );
-    this.SummaryService = SummaryService;
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
     this.summaryNodeId = this.componentContent.summaryNodeId;
     this.summaryComponentId = this.componentContent.summaryComponentId;
     this.studentDataType = this.componentContent.studentDataType;
@@ -87,7 +67,6 @@ class SummaryController extends ComponentController {
     this.highlightCorrectAnswer = this.componentContent.highlightCorrectAnswer;
     this.source = this.componentContent.source;
     this.customLabelColors = this.componentContent.customLabelColors;
-    this.warningMessage = '';
     if (this.componentContent.showPromptFromOtherComponent) {
       this.otherPrompt = this.getOtherPrompt(this.summaryNodeId, this.summaryComponentId);
     }
@@ -102,6 +81,10 @@ class SummaryController extends ComponentController {
       this.warningMessage = this.getWarningMessage();
     }
     this.setPeriodIdIfNecessary();
+  }
+
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 
   getOtherPrompt(nodeId, componentId) {
@@ -154,23 +137,19 @@ class SummaryController extends ComponentController {
   }
 
   getWarningMessageForSourceSelf() {
-    let messageTranslationKey = '';
     if (this.isRequirementToSeeSummarySubmitWork()) {
-      messageTranslationKey = 'summary.youMustSubmitWorkToViewSelfSummary';
+      return $localize`You must submit work on "${this.otherStepTitle}" to view the summary.`;
     } else if (this.isRequirementToSeeSummaryCompleteComponent()) {
-      messageTranslationKey = 'summary.youMustCompleteToViewSelfSummary';
+      return $localize`You must complete "${this.otherStepTitle}" to view the summary.`;
     }
-    return this.$translate(messageTranslationKey, { stepTitle: this.otherStepTitle });
   }
 
   getWarningMessageForSourceClass() {
-    let messageTranslationKey = '';
     if (this.isRequirementToSeeSummarySubmitWork()) {
-      messageTranslationKey = 'summary.youMustSubmitWorkToViewClassSummary';
+      return $localize`You must submit work on "${this.otherStepTitle}" to view the class summary.`;
     } else if (this.isRequirementToSeeSummaryCompleteComponent()) {
-      messageTranslationKey = 'summary.youMustCompleteToViewClassSummary';
+      return $localize`You must complete "${this.otherStepTitle}" to view the class summary.`;
     }
-    return this.$translate(messageTranslationKey, { stepTitle: this.otherStepTitle });
   }
 
   isRequirementToSeeSummarySubmitWork() {
@@ -230,5 +209,3 @@ class SummaryController extends ComponentController {
     }
   }
 }
-
-export default SummaryController;

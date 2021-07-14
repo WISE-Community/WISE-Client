@@ -1,46 +1,79 @@
-'use strict';
+import * as Highcharts from 'highcharts';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { Subscription } from 'rxjs';
+import { AnnotationService } from '../../services/annotationService';
+import { ConfigService } from '../../services/configService';
+import { ProjectService } from '../../services/projectService';
+import { StudentDataService } from '../../services/studentDataService';
+import { UtilService } from '../../services/utilService';
 
-class SummaryDisplayController {
+@Component({
+  selector: 'summary-display',
+  templateUrl: 'summary-display.component.html',
+  styleUrls: ['summary-display.component.scss']
+})
+export class SummaryDisplay {
+  chartConfig: any;
+  colors = {
+    palette: [
+      '#1a237e',
+      '#701e82',
+      '#aa187b',
+      '#d72c6c',
+      '#f65158',
+      '#ff7d43',
+      '#ffab32',
+      '#fdd835',
+      '#ffee58',
+      '#ade563',
+      '#50d67f',
+      '#00c29d',
+      '#00aab3',
+      '#0090bc',
+      '#0074b4',
+      '#01579b'
+    ],
+    singleHue: 'rgb(170, 24, 123)',
+    correct: '#00C853',
+    incorrect: '#C62828'
+  };
+  dataService: any = null;
+  defaultMaxScore: number = 5;
+  hasCorrectness: boolean = false;
+  Highcharts: typeof Highcharts = Highcharts;
+  maxScore: number = 5;
+  numDummySamples: number;
+  numResponses: number;
+  otherComponent: any;
+  otherComponentType: string;
+  percentResponded: number;
+  studentWorkSavedToServerSubscription: Subscription;
+  totalWorkgroups: number;
+
+  @Input() nodeId: string;
+  @Input() componentId: string;
+  @Input() highlightCorrectAnswer: boolean;
+  @Input() studentDataType: string;
+  @Input() source: string;
+  @Input() periodId: number;
+  @Input() chartType: string;
+  @Input() hasWarning: boolean;
+  @Input() warningMessage: string;
+  @Input() customLabelColors: any[];
+  @Input() doRender: boolean;
+
   constructor(
-    $filter,
-    $injector,
-    $q,
-    $rootScope,
-    $scope,
-    AnnotationService,
-    ConfigService,
-    ProjectService,
-    StudentDataService,
-    UtilService
-  ) {
-    this.$filter = $filter;
-    this.$injector = $injector;
-    this.$q = $q;
-    this.$rootScope = $rootScope;
-    this.$scope = $scope;
-    this.AnnotationService = AnnotationService;
-    this.ConfigService = ConfigService;
-    this.ProjectService = ProjectService;
-    this.StudentDataService = StudentDataService;
-    this.UtilService = UtilService;
-    this.$translate = this.$filter('translate');
-    this.defaultMaxScore = 5;
-    this.maxScore = this.defaultMaxScore;
-    this.dataService = null;
-    this.hasCorrectness = false;
+    private AnnotationService: AnnotationService,
+    private ConfigService: ConfigService,
+    private ProjectService: ProjectService,
+    private StudentDataService: StudentDataService,
+    private upgrade: UpgradeModule,
+    private UtilService: UtilService
+  ) {}
 
-    this.$scope.$on('$destroy', () => {
-      this.ngOnDestroy();
-    });
-  }
-
-  ngOnDestroy() {
-    this.studentWorkSavedToServerSubscription.unsubscribe();
-  }
-
-  $onInit() {
+  ngOnInit() {
     this.setNumDummySamples();
-    this.initializeColors();
     this.initializeOtherComponent();
     this.initializeDataService();
     this.initializePeriodId();
@@ -51,30 +84,8 @@ class SummaryDisplayController {
     }
   }
 
-  initializeColors() {
-    this.colors = {
-      palette: [
-        '#1a237e',
-        '#701e82',
-        '#aa187b',
-        '#d72c6c',
-        '#f65158',
-        '#ff7d43',
-        '#ffab32',
-        '#fdd835',
-        '#ffee58',
-        '#ade563',
-        '#50d67f',
-        '#00c29d',
-        '#00aab3',
-        '#0090bc',
-        '#0074b4',
-        '#01579b'
-      ],
-      singleHue: 'rgb(170, 24, 123)',
-      correct: '#00C853',
-      incorrect: '#c62828'
-    };
+  ngOnDestroy() {
+    this.studentWorkSavedToServerSubscription.unsubscribe();
   }
 
   setNumDummySamples() {
@@ -99,9 +110,9 @@ class SummaryDisplayController {
 
   initializeDataService() {
     if (this.isVLEPreview() || this.isStudentRun()) {
-      this.dataService = this.$injector.get('StudentDataService');
+      this.dataService = this.upgrade.$injector.get('StudentDataService');
     } else if (this.isClassroomMonitor() || this.isAuthoringPreview()) {
-      this.dataService = this.$injector.get('TeacherDataService');
+      this.dataService = this.upgrade.$injector.get('TeacherDataService');
     }
   }
 
@@ -118,20 +129,23 @@ class SummaryDisplayController {
   }
 
   initializeChangeListeners() {
-    this.$onChanges = changes => {
-      this.initializeColors();
-      this.renderDisplay();
-    };
-    this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$
-        .subscribe((componentState) => {
-      if (
-        this.doRender &&
-        componentState.nodeId === this.nodeId &&
-        componentState.componentId === this.componentId
-      ) {
-        this.renderDisplay();
+    this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
+      (componentState) => {
+        if (
+          this.doRender &&
+          componentState.nodeId === this.nodeId &&
+          componentState.componentId === this.componentId
+        ) {
+          this.renderDisplay();
+        }
       }
-    });
+    );
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.doRender.firstChange) {
+      this.renderDisplay();
+    }
   }
 
   isVLEPreview() {
@@ -170,9 +184,7 @@ class SummaryDisplayController {
 
   displaySourceSelfMessageToTeacher() {
     this.doRender = false;
-    this.warningMessage = this.$translate(
-      'summary.theStudentWillSeeAGraphOfTheirIndividualDataHere'
-    );
+    this.warningMessage = $localize`The student will see a graph of their individual data here.`;
     this.hasWarning = true;
   }
 
@@ -187,18 +199,13 @@ class SummaryDisplayController {
 
   getResponseForSelf() {
     if (this.isVLEPreview() || this.isStudentRun()) {
-      return this.getLatestComponentStateForWorkgroup();
+      return this.dataService.getLatestComponentStateByNodeIdAndComponentId(
+        this.nodeId,
+        this.componentId
+      );
     } else if (this.isAuthoringPreview()) {
       return this.createDummyComponentState(this.otherComponent);
     }
-  }
-
-  getLatestComponentStateForWorkgroup() {
-    return this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId,
-      this.workgroupId
-    );
   }
 
   renderClassResponses() {
@@ -213,11 +220,11 @@ class SummaryDisplayController {
     if (this.isVLEPreview()) {
       return this.getDummyStudentScoresForVLEPreview(nodeId, componentId);
     } else if (this.isAuthoringPreview()) {
-      return this.getDummyStudentScoresForAuthoringPreview(nodeId, componentId);
+      return this.getDummyStudentScoresForAuthoringPreview();
     } else if (this.isStudentRun()) {
       return this.dataService
         .getClassmateScores(nodeId, componentId, periodId)
-        .then(annotations => {
+        .then((annotations) => {
           return this.filterLatestScoreAnnotations(annotations);
         });
     } else if (this.isClassroomMonitor()) {
@@ -264,7 +271,7 @@ class SummaryDisplayController {
 
   renderClassScores() {
     this.setMaxScore(this.otherComponent);
-    this.getScores(this.nodeId, this.componentId, this.periodId).then(annotations => {
+    this.getScores(this.nodeId, this.componentId, this.periodId).then((annotations) => {
       this.processScoreAnnotations(annotations);
     });
   }
@@ -281,7 +288,7 @@ class SummaryDisplayController {
     if (this.isVLEPreview()) {
       return this.getDummyStudentWorkForVLEPreview(nodeId, componentId);
     } else if (this.isAuthoringPreview()) {
-      return this.getDummyStudentWorkForAuthoringPreview(nodeId, componentId);
+      return this.getDummyStudentWorkForAuthoringPreview();
     } else if (this.isStudentRun()) {
       return this.dataService.getClassmateStudentWork(nodeId, componentId, periodId);
     } else if (this.isClassroomMonitor()) {
@@ -312,7 +319,7 @@ class SummaryDisplayController {
   }
 
   convertObjectToArray(obj) {
-    return Object.keys(obj).map(key => {
+    return Object.keys(obj).map((key) => {
       return obj[key];
     });
   }
@@ -347,12 +354,11 @@ class SummaryDisplayController {
   }
 
   resolveData(data) {
-    const deferred = this.$q.defer();
-    // We need to set a delay otherwise the graph won't render properly
-    setTimeout(() => {
-      deferred.resolve(data);
-    }, 1);
-    return deferred.promise;
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(data);
+      });
+    });
   }
 
   createDummyComponentStates() {
@@ -485,7 +491,7 @@ class SummaryDisplayController {
       .trim()
       .toLowerCase()
       .split(' ')
-      .map(word => {
+      .map((word) => {
         if (word.length > 0) {
           return word[0].toUpperCase() + word.substr(1);
         } else {
@@ -499,7 +505,7 @@ class SummaryDisplayController {
     const data = [];
     for (const key of Object.keys(summaryData)) {
       const count = summaryData[key];
-      const dataPoint = this.createDataPoint(key, count);
+      const dataPoint = this.createDataPoint(key, count, null);
       data.push(dataPoint);
     }
     return data;
@@ -587,11 +593,7 @@ class SummaryDisplayController {
       const color = this.getDataPointColor(choice);
       let text = choice.text;
       if (this.highlightCorrectAnswer && this.chartType === 'pie') {
-        text =
-          text +
-          ' (' +
-          (choice.isCorrect ? this.$translate('CORRECT') : this.$translate('INCORRECT')) +
-          ')';
+        text = text + ' (' + (choice.isCorrect ? $localize`Correct` : $localize`Incorrect`) + ')';
       }
       const dataPoint = this.createDataPoint(text, count, color);
       data.push(dataPoint);
@@ -620,7 +622,7 @@ class SummaryDisplayController {
     return color;
   }
 
-  createDataPoint(name, y, color) {
+  createDataPoint(name, y, color = null) {
     if (color) {
       return {
         name: name,
@@ -671,7 +673,7 @@ class SummaryDisplayController {
     let total = 0;
     for (let scoreValue = 1; scoreValue <= this.maxScore; scoreValue++) {
       const count = this.getSummaryDataCount(summaryData, scoreValue);
-      const dataPoint = this.createDataPoint(scoreValue, count);
+      const dataPoint = this.createDataPoint(scoreValue, count, null);
       data.push(dataPoint);
       total += count;
     }
@@ -689,7 +691,7 @@ class SummaryDisplayController {
   }
 
   createSeries(data) {
-    const series = [
+    const series: any[] = [
       {
         data: data,
         dataLabels: {
@@ -701,11 +703,11 @@ class SummaryDisplayController {
       series[0].showInLegend = false;
       series.push(
         {
-          name: this.$translate('CORRECT'),
+          name: $localize`Correct`,
           color: this.colors.correct
         },
         {
-          name: this.$translate('INCORRECT'),
+          name: $localize`Incorrect`,
           color: this.colors.incorrect
         }
       );
@@ -727,26 +729,14 @@ class SummaryDisplayController {
 
   getGraphTitleForClass() {
     if (this.isStudentDataTypeResponses()) {
-      return (
-        this.$translate('CLASS_RESPONSES') +
-        ' | ' +
-        this.$translate('PERCENT_OF_CLASS_RESPONDED', {
-          totalResponses: this.numResponses,
-          totalTeams: this.totalWorkgroups,
-          percentResponded: this.percentResponded
-        })
-      );
+      return $localize`Class Responses` + ' | ' + this.getPercentOfClassRespondedText();
     } else if (this.isStudentDataTypeScores()) {
-      return (
-        this.$translate('CLASS_SCORES') +
-        ' | ' +
-        this.$translate('PERCENT_OF_CLASS_RESPONDED', {
-          totalResponses: this.numResponses,
-          totalTeams: this.totalWorkgroups,
-          percentResponded: this.percentResponded
-        })
-      );
+      return $localize`Class Scores` + ' | ' + this.getPercentOfClassRespondedText();
     }
+  }
+
+  getPercentOfClassRespondedText(): string {
+    return $localize`${this.percentResponded}% Responded (${this.numResponses}/${this.totalWorkgroups})`;
   }
 
   getChartColors() {
@@ -800,85 +790,85 @@ class SummaryDisplayController {
   }
 
   createChartConfig(chartType, title, xAxisType, total, series, colors) {
-    const thisSummaryDisplay = this;
+    const thisSummaryDisplay: any = this;
     thisSummaryDisplay.total = total;
-    const chartConfig = {
-      options: {
-        colors: colors,
-        chart: {
-          type: chartType,
-          style: {
-            fontFamily: 'Roboto,Helvetica Neue,sans-serif'
+    const fontFamily = 'Roboto,Helvetica Neue,sans-serif';
+    const options: any = {
+      chart: {
+        type: chartType
+      },
+      colors: colors,
+      credits: {
+        enabled: false
+      },
+      exporting: {
+        enabled: false
+      },
+      legend: {
+        enabled: false
+      },
+      plotOptions: {
+        series: {
+          colorByPoint: true,
+          dataLabels: {
+            formatter: function () {
+              if (chartType === 'pie') {
+                const pct = Math.round((this.y / this.total) * 100);
+                return this.key + ': ' + pct + '%';
+              } else {
+                return this.y;
+              }
+            },
+            style: { fontSize: '12px' }
           }
         },
-        legend: {
-          enabled: false
-        },
-        tooltip: {
-          formatter: function(s, point) {
-            if (chartType === 'pie') {
-              return '<b>' + this.key + '</b>: ' + this.y;
-            } else {
-              const pct = Math.round((this.y / thisSummaryDisplay.total) * 100);
-              return '<b>' + this.key + '</b>: ' + pct + '%';
-            }
-          }
-        },
-        exporting: {
-          enabled: false
-        },
-        credits: {
-          enabled: false
-        },
-        plotOptions: {
-          series: {
-            colorByPoint: true,
-            dataLabels: {
-              formatter: function() {
-                if (chartType === 'pie') {
-                  const pct = Math.round((this.y / this.total) * 100);
-                  return this.key + ': ' + pct + '%';
-                } else {
-                  return this.y;
-                }
-              },
-              style: { fontSize: '12px' }
-            }
-          },
-          column: {
-            maxPointWidth: 80
-          }
+        column: {
+          maxPointWidth: 80
         }
       },
+      series: series,
       title: {
         text: title,
-        style: { fontSize: '16px', fontWeight: '500' }
+        style: {
+          fontFamily: fontFamily,
+          fontSize: '16px',
+          fontWeight: '500'
+        }
+      },
+      tooltip: {
+        formatter: function (s, point) {
+          if (chartType === 'pie') {
+            return '<b>' + this.key + '</b>: ' + this.y;
+          } else {
+            const pct = Math.round((this.y / thisSummaryDisplay.total) * 100);
+            return '<b>' + this.key + '</b>: ' + pct + '%';
+          }
+        }
       },
       xAxis: {
         type: xAxisType,
         labels: {
-          style: { fontSize: '14px' }
+          style: { fontFamily: fontFamily, fontSize: '14px' }
         }
       },
       yAxis: {
         title: {
-          text: this.$translate('COUNT'),
-          style: { fontSize: '14px' }
+          text: $localize`Count`,
+          style: { fontFamily: fontFamily, fontSize: '14px' }
         }
-      },
-      series: series
+      }
     };
     if (this.highlightCorrectAnswer) {
-      chartConfig.options.legend.enabled = true;
-      chartConfig.options.plotOptions.series.colorByPoint = false;
-      chartConfig.options.plotOptions.series.grouping = false;
-      chartConfig.options.plotOptions.series.events = {
-        legendItemClick: function() {
+      options.legend.enabled = true;
+      options.plotOptions.series.colorByPoint = false;
+      options.plotOptions.series.grouping = false;
+      options.plotOptions.series.events = {
+        legendItemClick: function () {
           return false;
         }
       };
     }
-    return chartConfig;
+    return options;
   }
 
   calculateCountsAndPercentage(dataCount) {
@@ -916,37 +906,3 @@ class SummaryDisplayController {
     return this.source === 'allPeriods';
   }
 }
-
-SummaryDisplayController.$inject = [
-  '$filter',
-  '$injector',
-  '$q',
-  '$rootScope',
-  '$scope',
-  'AnnotationService',
-  'ConfigService',
-  'ProjectService',
-  'StudentDataService',
-  'UtilService'
-];
-
-const SummaryDisplay = {
-  bindings: {
-    nodeId: '<',
-    componentId: '<',
-    highlightCorrectAnswer: '<',
-    studentDataType: '<',
-    source: '<',
-    periodId: '<',
-    chartType: '<',
-    hasWarning: '<',
-    warningMessage: '<',
-    customLabelColors: '<',
-    doRender: '='
-  },
-  templateUrl: 'assets/wise5/directives/summaryDisplay/summaryDisplay.html',
-  controller: SummaryDisplayController,
-  controllerAs: 'summaryDisplayCtrl'
-};
-
-export default SummaryDisplay;

@@ -158,15 +158,19 @@ const NodeInfo = {
                     </md-card>
                     <div ng-if='$ctrl.isResponsesSummaryAvailableForComponentType(component.type)'>
                         <summary-display ng-if='component.type === "MultipleChoice"'
-                                node-id='::$ctrl.nodeId' component-id='::component.id'
-                                period-id='$ctrl.periodId' student-data-type='"responses"'
-                                highlight-correct-answer='$ctrl.componentHasCorrectAnswer(component)'>
+                                [node-id]='::$ctrl.nodeId' [component-id]='::component.id'
+                                [period-id]='$ctrl.periodId' [student-data-type]='"responses"'
+                                [highlight-correct-answer]='$ctrl.componentHasCorrectAnswer(component)'
+                                [chart-type]='"column"'
+                                [do-render]='true'>
                         </summary-display>
                     </div>
                     <div ng-if='$ctrl.isScoresSummaryAvailableForComponentType(component.type) &&
                             $ctrl.componentHasScoreAnnotation(component.id)'>
-                        <summary-display node-id='::$ctrl.nodeId' component-id='::component.id'
-                                period-id='$ctrl.periodId' student-data-type='"scores"'>
+                        <summary-display [node-id]='::$ctrl.nodeId' [component-id]='::component.id'
+                                [period-id]='$ctrl.periodId' [student-data-type]='"scores"'
+                                [chart-type]='"column"'
+                                [do-render]='true'>
                         </summary-display>
                     </div>
                 </div>
