@@ -2,7 +2,8 @@
   <mat-card-content>
     <p *ngIf="hasWarning" class="warn center">{{warningMessage}}</p>
     <div *ngIf="doRender && chartConfig != null">
-      <highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig"></highcharts-chart>
+      <highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig" class="highcharts-chart">
+      </highcharts-chart>
     </div>
   </mat-card-content>
 </mat-card>
