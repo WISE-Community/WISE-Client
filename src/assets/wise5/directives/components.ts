@@ -9,12 +9,12 @@ import GlobalAnnotations from './globalAnnotations/globalAnnotations';
 import GlobalAnnotationsList from './globalAnnotationsList/globalAnnotationsList';
 import ListenForDeleteKeypress from './listenForDeleteKeypress/listenForDeleteKeypress';
 import MilestoneReportGraph from './milestoneReportGraph/milestoneReportGraph';
-import SummaryDisplay from './summaryDisplay/summaryDisplay';
 import Sticky from './sticky/sticky';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { NodeIconComponent } from '../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
 import { MilestoneReportDataComponent } from '../../../app/teacher/milestone/milestone-report-data/milestone-report-data.component';
 import { PossibleScoreComponent } from '../../../app/possible-score/possible-score.component';
+import { SummaryDisplay } from './summaryDisplay/summary-display.component';
 
 const Components = angular.module('components', []);
 
@@ -38,7 +38,10 @@ Components.directive(
   'possibleScore',
   downgradeComponent({ component: PossibleScoreComponent }) as angular.IDirectiveFactory
 );
-Components.component('summaryDisplay', SummaryDisplay);
+Components.directive(
+  'summaryDisplay',
+  downgradeComponent({ component: SummaryDisplay }) as angular.IDirectiveFactory
+);
 Components.directive('sticky', Sticky);
 
 export default Components;
