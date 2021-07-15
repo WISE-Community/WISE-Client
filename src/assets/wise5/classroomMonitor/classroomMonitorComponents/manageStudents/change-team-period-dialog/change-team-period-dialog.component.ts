@@ -11,6 +11,7 @@ import { ConfigService } from '../../../../services/configService';
   encapsulation: ViewEncapsulation.None
 })
 export class ChangeTeamPeriodDialogComponent {
+  canViewStudentNames: boolean;
   selectPeriodForm: FormGroup = new FormGroup({
     period: new FormControl('', Validators.required)
   });
@@ -26,6 +27,7 @@ export class ChangeTeamPeriodDialogComponent {
   ) {}
 
   ngOnInit(): void {
+    this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
     this.periods = this.ConfigService.getPeriods().filter((period) => {
       return period.periodId != -1 && period.periodId != this.team.periodId;
     });

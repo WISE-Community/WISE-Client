@@ -2,6 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { By } from '@angular/platform-browser';
 import { ConfigService } from '../../../../services/configService';
 
 import { ChangeTeamPeriodDialogComponent } from './change-team-period-dialog.component';
@@ -9,6 +10,9 @@ import { ChangeTeamPeriodDialogComponent } from './change-team-period-dialog.com
 class ConfigServiceStub {
   getPeriods() {
     return [{ periodId: -1 }, { periodId: 1 }, { periodId: 2 }];
+  }
+  getPermissions() {
+    return { canViewStudentNames: true };
   }
   getRunId() {
     return 123;
@@ -22,10 +26,9 @@ const team = {
 };
 
 let component: ChangeTeamPeriodDialogComponent;
+let fixture: ComponentFixture<ChangeTeamPeriodDialogComponent>;
 let http: HttpTestingController;
 describe('ChangeTeamPeriodDialogComponent', () => {
-  let fixture: ComponentFixture<ChangeTeamPeriodDialogComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ChangeTeamPeriodDialogComponent],
@@ -45,6 +48,7 @@ describe('ChangeTeamPeriodDialogComponent', () => {
   });
   ngOnInit_filterPeriods();
   changePeriod_makeRequestToChangePeriod();
+  showStudentNames();
 });
 
 function ngOnInit_filterPeriods() {
@@ -69,4 +73,23 @@ function changePeriod_makeRequestToChangePeriod() {
       http.verify();
     });
   });
+}
+
+function showStudentNames() {
+  describe('student names', () => {
+    it('should be displayed if user has canViewStudentNames permission', () => {
+      component.canViewStudentNames = true;
+      fixture.detectChanges();
+      expect(getStudentNamesElement()).toBeTruthy();
+    });
+    it('should not be displayed if user does not have canViewStudentNames permission', () => {
+      component.canViewStudentNames = false;
+      fixture.detectChanges();
+      expect(getStudentNamesElement()).toBeFalsy();
+    });
+  });
+}
+
+function getStudentNamesElement() {
+  return fixture.debugElement.query(By.css('.studentNames'));
 }

@@ -1,6 +1,11 @@
 <h1 mat-dialog-title i18n>Change Period</h1>
 <div mat-dialog-content class="info-block">
-  <div i18n>Select a new period for team {{team.workgroupId}} - {{team.username.replace(":", ", ")}}</div>
+  <div>
+    <span i18n>Select a new period for team {{team.workgroupId}}</span>
+    <span *ngIf="canViewStudentNames" class="studentNames">
+       - {{team.username.replace(":", ", ")}}
+    </span>
+  </div>
   <br/>
   <form [formGroup]="selectPeriodForm">
     <mat-form-field appearance="fill" class="change-team-period-form-field">
