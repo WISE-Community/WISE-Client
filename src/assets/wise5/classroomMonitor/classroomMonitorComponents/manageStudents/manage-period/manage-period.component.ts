@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
 
 @Component({
@@ -10,11 +11,28 @@ export class ManagePeriodComponent {
   @Input() period: any;
 
   students: Set<any> = new Set();
+  subscriptions: Subscription = new Subscription();
   teams: Set<any> = new Set();
 
   constructor(private ConfigService: ConfigService) {}
 
   ngOnChanges() {
+    this.initialize();
+  }
+
+  ngOnInit() {
+    this.subscriptions.add(
+      this.ConfigService.configRetrieved$.subscribe(() => {
+        this.initialize();
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
+  initialize() {
     this.initializeTeams();
     this.initializeStudents();
   }

@@ -3,10 +3,13 @@
 import { Injectable } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class ConfigService {
   public config: any = null;
+  private configRetrievedSource: Subject<any> = new Subject<any>();
+  public configRetrieved$: Observable<any> = this.configRetrievedSource.asObservable();
 
   constructor(private upgrade: UpgradeModule, private http: HttpClient) {}
 
@@ -64,7 +67,7 @@ export class ConfigService {
             myUserInfo.workgroupId = Math.floor(100 * Math.random()) + 1;
           }
         }
-
+        this.configRetrievedSource.next(configJSON);
         return configJSON;
       });
   }
