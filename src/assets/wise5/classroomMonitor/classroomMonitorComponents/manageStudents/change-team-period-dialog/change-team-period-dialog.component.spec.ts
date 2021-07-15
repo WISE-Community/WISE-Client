@@ -22,6 +22,7 @@ class ConfigServiceStub {
 const team = {
   periodId: 1,
   username: 'Oski Bear (oskib0101)',
+  users: [{ id: 500 }],
   workgroupId: 10
 };
 
@@ -77,19 +78,19 @@ function changePeriod_makeRequestToChangePeriod() {
 
 function showStudentNames() {
   describe('student names', () => {
-    it('should be displayed if user has canViewStudentNames permission', () => {
+    it('should display usernames if user has canViewStudentNames permission', () => {
       component.canViewStudentNames = true;
       fixture.detectChanges();
-      expect(getStudentNamesElement()).toBeTruthy();
+      expect(getStudentNames()).toContain('Oski Bear (oskib0101)');
     });
-    it('should not be displayed if user does not have canViewStudentNames permission', () => {
+    it('should display Student Id if user does not have canViewStudentNames permission', () => {
       component.canViewStudentNames = false;
       fixture.detectChanges();
-      expect(getStudentNamesElement()).toBeFalsy();
+      expect(getStudentNames()).toContain('Student 500');
     });
   });
 }
 
-function getStudentNamesElement() {
-  return fixture.debugElement.query(By.css('.studentNames'));
+function getStudentNames() {
+  return fixture.debugElement.query(By.css('.studentNames')).nativeElement.textContent;
 }
