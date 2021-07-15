@@ -273,8 +273,8 @@ export abstract class ComponentStudent {
       } else {
         this.setSavedMessage(clientSaveTime);
       }
+      this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
     }
-    this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
   }
 
   getIsDirty(): boolean {

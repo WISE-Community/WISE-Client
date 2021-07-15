@@ -29,12 +29,14 @@ import { EmbeddedStudent } from '../assets/wise5/components/embedded/embedded-st
 import { OpenResponseStudent } from '../assets/wise5/components/openResponse/open-response-student/open-response-student.component';
 import { SafeUrl } from '../assets/wise5/directives/safeUrl/safe-url.pipe';
 import { TableStudent } from '../assets/wise5/components/table/table-student/table-student.component';
+import { DiscussionStudent } from '../assets/wise5/components/discussion/discussion-student/discussion-student.component';
 
 @NgModule({
   declarations: [
     AnimationStudent,
     AudioOscillatorStudent,
     ConceptMapStudent,
+    DiscussionStudent,
     DrawStudent,
     EmbeddedStudent,
     HtmlDialog,
