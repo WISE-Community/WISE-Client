@@ -11,14 +11,14 @@
               <div flex layout="row" layout-align="start center">
                   <workgroup-info [has-alert]="$ctrl.hasAlert" [has-new-alert]="$ctrl.hasNewAlert" [has-new-work]="$ctrl.hasNewWork" [usernames]="$ctrl.workgroupData.displayNames" [workgroup-id]="$ctrl.workgroupId"></workgroup-info>
               </div>
-              <div flex="30" layout="row" layout-align="center center">
+              <div ng-if="$ctrl.locations.length == 1" flex="30" layout="row" layout-align="center center">
                   <workgroup-node-status [status-text]="$ctrl.statusText" [status-class]="$ctrl.statusClass"></workgroup-node-status>
               </div>
               <div ng-if="$ctrl.showScore && $ctrl.locations.length > 1" flex="10" layout="row" layout-align="center center">
-                <workgroup-node-score [score]="$ctrl.initialScore" [max-score]="$ctrl.maxScore"></workgroup-node-score>
+                <workgroup-node-score [score]="$ctrl.initialScore" [max-score]="$ctrl.firstComponentMaxScore"></workgroup-node-score>
               </div>
               <div ng-if="$ctrl.showScore" flex="{{$ctrl.locations.length > 1 ? 10 : 20}}" layout="row" layout-align="center center">
-                <workgroup-node-score [score]="$ctrl.score" [max-score]="$ctrl.maxScore"></workgroup-node-score>
+                <workgroup-node-score [score]="$ctrl.score" [max-score]="$ctrl.lastComponentMaxScore"></workgroup-node-score>
               </div>
               <div ng-if="$ctrl.showScore && $ctrl.locations.length > 1" flex="10" layout="row" layout-align="center center">
                 <span class="md-display-1" ng-class="{'success': $ctrl.changeInScore > 0, 'warn': $ctrl.changeInScore < 0}">
@@ -33,7 +33,7 @@
         <div id="component_{{::$ctrl.firstComponentId}}_{{::$ctrl.workgroupId}}" class="component component--grading">
           <div>
             <h3 class="accent-1 md-body-2 gray-lightest-bg component__header">
-              {{ $ctrl.getComponentTypeLabel($ctrl.firstComponent.type) }}&nbsp;
+              {{ ::"STEP_POSITION_DISPLAY" | translate: { position: $ctrl.getNodePosition($ctrl.firstNodeId) } }} ({{ $ctrl.getComponentTypeLabel($ctrl.firstComponent.type) }})&nbsp;
               <component-new-work-badge [component-id]="$ctrl.firstComponentId"
                                         [workgroup-id]="$ctrl.workgroupId"
                                         [node-id]="$ctrl.firstNodeId"></component-new-work-badge>
@@ -41,6 +41,19 @@
             <workgroup-component-grading [component-id]="$ctrl.firstComponentId"
                 [workgroup-id]="$ctrl.workgroupId"
                 [node-id]="$ctrl.firstNodeId"></workgroup-component-grading>
+          </div>
+        </div>
+        <div ng-if="$ctrl.locations.length > 1" id="component_{{::$ctrl.lastComponentId}}_{{::$ctrl.workgroupId}}" class="component component--grading">
+          <div>
+            <h3 class="accent-1 md-body-2 gray-lightest-bg component__header">
+              {{ ::"STEP_POSITION_DISPLAY" | translate: { position: $ctrl.getNodePosition($ctrl.lastNodeId) } }} ({{ $ctrl.getComponentTypeLabel($ctrl.lastComponent.type) }})&nbsp;
+              <component-new-work-badge [component-id]="$ctrl.lastComponentId"
+                                        [workgroup-id]="$ctrl.workgroupId"
+                                        [node-id]="$ctrl.lastNodeId"></component-new-work-badge>
+            </h3>
+            <workgroup-component-grading [component-id]="$ctrl.lastComponentId"
+                [workgroup-id]="$ctrl.workgroupId"
+                [node-id]="$ctrl.lastNodeId"></workgroup-component-grading>
           </div>
         </div>
       </div>

@@ -29,7 +29,8 @@
             arrow_drop_up
           </md-icon>
         </md-button>
-        <md-button class="table--list__thead__link" flex="30"
+        <md-button ng-if="$ctrl.milestone.report.locations.length == 1"
+                   class="table--list__thead__link" flex="30"
                    layout="row" layout-align="center center" ng-click="$ctrl.setSort('status')"
                    aria-label="{{::'sortByCompletion' | translate}}">
           <span translate="status"></span>
@@ -91,7 +92,6 @@
     <milestone-workgroup-item ng-repeat="workgroup in $ctrl.workgroupsById | toArray | orderBy:$ctrl.getOrderBy()"
         ng-if="$ctrl.isWorkgroupShown(workgroup)"
         expand="$ctrl.workVisibilityById[workgroup.$key]"
-        max-score="$ctrl.maxScore"
         show-score="true"
         locations="$ctrl.milestone.report.locations"
         workgroup-id="::workgroup.workgroupId"

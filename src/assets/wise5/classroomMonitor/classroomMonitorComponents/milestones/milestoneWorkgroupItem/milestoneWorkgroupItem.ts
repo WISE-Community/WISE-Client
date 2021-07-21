@@ -15,12 +15,14 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
   firstComponent: any;
   firstComponentId: string;
   firstNodeId: string;
+  firstComponentMaxScore: number;
   hasAlert: boolean;
   hasNewAlert: boolean;
   initialScore: any;
   lastComponent: any;
   lastComponentId: string;
   lastNodeId: string;
+  lastComponentMaxScore: number;
   maxScore: number;
   onUpdateExpand: any;
   score: any;
@@ -48,6 +50,10 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
       this.firstNodeId,
       this.firstComponentId
     );
+    this.firstComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+      this.firstNodeId,
+      this.firstComponentId
+    );
     if (this.locations.length > 1) {
       const lastLocation = this.locations[this.locations.length - 1];
       this.lastNodeId = lastLocation.nodeId;
@@ -56,6 +62,12 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
         this.lastNodeId,
         this.lastComponentId
       );
+      this.lastComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+        this.lastNodeId,
+        this.lastComponentId
+      );
+    } else {
+      this.lastComponentMaxScore = this.firstComponentMaxScore;
     }
   }
 
@@ -83,6 +95,10 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
 
   getComponentTypeLabel(componentType) {
     return this.UtilService.getComponentTypeLabel(componentType);
+  }
+
+  getNodePosition(nodeId: string): string {
+    return this.ProjectService.getNodePositionById(nodeId);
   }
 
   update() {
@@ -127,7 +143,6 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
 const MilestoneWorkgroupItem = {
   bindings: {
     expand: '<',
-    maxScore: '<',
     locations: '<',
     showScore: '<',
     workgroupId: '<',

@@ -124,6 +124,7 @@
   "SIGN_OUT": "Sign Out",
   "STEP_HAS_RUBRICS_TIPS": "Step has rubrics/teaching tips",
   "STEP_INFO": "Step Info",
+  "STEP_POSITION_DISPLAY": "Step {{position}}",
   "STUDENT_DATA_SERVICE_SAVE_COMPONENT_EVENT_COMPONENT_CATEGORY_EVENT_ERROR": "StudentDataService.saveComponentEvent: component, category, event args must not be null",
   "STUDENT_DATA_SERVICE_SAVE_COMPONENT_EVENT_NODE_ID_COMPONENT_ID_COMPONENT_TYPE_ERROR": "StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null",
   "STUDENT_DATA_SERVICE_SAVE_VLE_EVENT_CATEGORY_EVENT_ERROR": "StudentDataService.saveVLEEvent: category and event args must not be null",
