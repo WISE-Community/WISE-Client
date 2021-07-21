@@ -3,8 +3,20 @@
   <span fxFlex></span>
   <a *ngIf="canChangePeriod" class="changePeriodLink" (click)="changePeriod()" i18n>Change Period</a>
 </span>
-<ul class="users" fxLayout="column" fxLayoutGap="8px">
-  <li class="user" *ngFor="let user of team.users" i18n>
+<ul cdkDropList
+    [cdkDropListData]="team.users"
+    [cdkDropListEnterPredicate]="canDrop"
+    (cdkDropListDropped)="drop($event)"
+    class="users"
+    fxLayout="column"
+    fxLayoutGap="8px">
+  <li cdkDrag
+      [cdkDragData]="team.workgroupId"
+      (cdkDragEntered)="dragEnter($event)"
+      (cdkDragExited)="dragExit($event)"
+      class="user"
+      *ngFor="let user of team.users"
+      i18n>
     <manage-user [user]="user"></manage-user>
   </li>
 </ul>
