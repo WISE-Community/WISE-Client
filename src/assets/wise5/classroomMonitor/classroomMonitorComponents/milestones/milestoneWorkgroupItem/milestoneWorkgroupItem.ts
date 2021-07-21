@@ -9,16 +9,19 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
   $translate: any;
   locations: any[];
   changeInScore: any;
-  componentId: string;
   components: any[] = [];
   disabled: any;
   expand: any;
+  firstComponent: any;
+  firstComponentId: string;
+  firstNodeId: string;
   hasAlert: boolean;
   hasNewAlert: boolean;
-  hiddenComponents: string[] = [];
   initialScore: any;
+  lastComponent: any;
+  lastComponentId: string;
+  lastNodeId: string;
   maxScore: number;
-  nodeId: string;
   onUpdateExpand: any;
   score: any;
   showScore: boolean;
@@ -39,14 +42,21 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
   $onInit() {
     this.statusText = '';
     this.update();
-    this.componentId = this.locations[this.locations.length - 1].componentId;
-    this.nodeId = this.locations[this.locations.length - 1].nodeId;
-    this.hiddenComponents = [];
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
+    this.firstComponentId = this.locations[0].componentId;
+    this.firstNodeId = this.locations[0].nodeId;
+    this.firstComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.firstNodeId,
+      this.firstComponentId
     );
-    this.components.push(component);
+    if (this.locations.length > 1) {
+      const lastLocation = this.locations[this.locations.length - 1];
+      this.lastNodeId = lastLocation.nodeId;
+      this.lastComponentId = lastLocation.componentId;
+      this.lastComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
+        this.lastNodeId,
+        this.lastComponentId
+      );
+    }
   }
 
   $onChanges(changesObj) {
@@ -69,10 +79,6 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
     }
 
     this.update();
-  }
-
-  isComponentVisible(componentId: string): boolean {
-    return !this.hiddenComponents.includes(componentId);
   }
 
   getComponentTypeLabel(componentType) {
@@ -126,7 +132,6 @@ const MilestoneWorkgroupItem = {
     showScore: '<',
     workgroupId: '<',
     workgroupData: '<',
-    hiddenComponents: '<',
     onUpdateExpand: '&'
   },
   controller: MilestoneWorkgroupItemController,

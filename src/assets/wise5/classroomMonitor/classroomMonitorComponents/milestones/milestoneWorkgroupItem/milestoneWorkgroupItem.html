@@ -30,17 +30,17 @@
   </md-subheader>
   <md-list-item ng-if="$ctrl.expand && !$ctrl.disabled" class="grading__item-container">
       <div class="grading__item" style="width:100%">
-        <div id="component_{{::component.id}}_{{::$ctrl.workgroupId}}" class="component component--grading" ng-repeat='component in $ctrl.components'>
-          <div ng-show="$ctrl.isComponentVisible(component.id)">
+        <div id="component_{{::$ctrl.firstComponentId}}_{{::$ctrl.workgroupId}}" class="component component--grading">
+          <div>
             <h3 class="accent-1 md-body-2 gray-lightest-bg component__header">
-              {{ $index+1 + '. ' + $ctrl.getComponentTypeLabel(component.type) }}&nbsp;
-              <component-new-work-badge [component-id]="component.id"
+              {{ $ctrl.getComponentTypeLabel($ctrl.firstComponent.type) }}&nbsp;
+              <component-new-work-badge [component-id]="$ctrl.firstComponentId"
                                         [workgroup-id]="$ctrl.workgroupId"
-                                        [node-id]="$ctrl.nodeId"></component-new-work-badge>
+                                        [node-id]="$ctrl.firstNodeId"></component-new-work-badge>
             </h3>
-            <workgroup-component-grading [component-id]="$ctrl.componentId"
+            <workgroup-component-grading [component-id]="$ctrl.firstComponentId"
                 [workgroup-id]="$ctrl.workgroupId"
-                [node-id]="$ctrl.nodeId"></workgroup-component-grading>
+                [node-id]="$ctrl.firstNodeId"></workgroup-component-grading>
           </div>
         </div>
       </div>

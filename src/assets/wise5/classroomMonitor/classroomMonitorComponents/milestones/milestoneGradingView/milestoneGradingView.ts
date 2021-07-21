@@ -12,6 +12,8 @@ import * as angular from 'angular';
 
 @Directive()
 class MilestoneGradingViewController extends NodeGradingViewController {
+  firstNodePosition: string;
+  lastNodePosition: string;
   milestone: any;
   nodeId: string;
   componentId: string;
@@ -55,6 +57,18 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     this.retrieveStudentData();
     this.subscribeToEvents();
     this.saveNodeGradingViewDisplayedEvent();
+    this.getNodePositions();
+  }
+
+  private getNodePositions() {
+    if (this.milestone.report.locations.length > 1) {
+      this.firstNodePosition = this.ProjectService.getNodePositionById(
+        this.milestone.report.locations[0].nodeId
+      );
+      this.lastNodePosition = this.ProjectService.getNodePositionById(
+        this.milestone.report.locations[1].nodeId
+      );
+    }
   }
 
   getScoreByWorkgroupId(
