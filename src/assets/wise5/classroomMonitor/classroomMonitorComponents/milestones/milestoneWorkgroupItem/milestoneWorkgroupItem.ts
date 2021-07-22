@@ -33,6 +33,7 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
   statusText: string;
   subscriptions: Subscription = new Subscription();
   workgroupId: number;
+
   static $inject = ['$filter', 'ProjectService', 'UtilService'];
 
   constructor(
@@ -46,6 +47,14 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
   $onInit() {
     this.statusText = '';
     this.update();
+    this.initLastLocation();
+    if (this.locations.length > 1) {
+      this.initFirstLocation();
+    }
+    this.subscribeToEvents();
+  }
+
+  private initLastLocation() {
     const lastLocation = this.locations[this.locations.length - 1];
     this.lastNodeId = lastLocation.nodeId;
     this.lastComponentId = lastLocation.componentId;
@@ -57,20 +66,20 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
       this.lastNodeId,
       this.lastComponentId
     );
-    if (this.locations.length > 1) {
-      const firstLocation = this.locations[0];
-      this.firstComponentId = firstLocation.componentId;
-      this.firstNodeId = firstLocation.nodeId;
-      this.firstComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
-        this.firstNodeId,
-        this.firstComponentId
-      );
-      this.firstComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
-        this.firstNodeId,
-        this.firstComponentId
-      );
-    }
-    this.subscribeToEvents();
+  }
+
+  private initFirstLocation() {
+    const firstLocation = this.locations[0];
+    this.firstComponentId = firstLocation.componentId;
+    this.firstNodeId = firstLocation.nodeId;
+    this.firstComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.firstNodeId,
+      this.firstComponentId
+    );
+    this.firstComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+      this.firstNodeId,
+      this.firstComponentId
+    );
   }
 
   subscribeToEvents() {
@@ -103,8 +112,11 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
           ? workgroupData.score - workgroupData.initialScore
           : '-';
     }
-
     this.update();
+  }
+
+  $onDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   getComponentTypeLabel(componentType) {
