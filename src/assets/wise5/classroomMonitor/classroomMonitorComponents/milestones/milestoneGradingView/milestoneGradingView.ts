@@ -67,6 +67,20 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     this.getNodePositions();
   }
 
+  subscribeToEvents() {
+    super.subscribeToEvents();
+    if (this.milestone.report.locations.length > 1) {
+      this.subscriptions.add(
+        this.AnnotationService.annotationReceived$.subscribe(({ annotation }) => {
+          const workgroupId = annotation.toWorkgroupId;
+          if (annotation.nodeId === this.firstNodeId && this.workgroupsById[workgroupId]) {
+            this.updateWorkgroup(workgroupId);
+          }
+        })
+      );
+    }
+  }
+
   retrieveStudentData() {
     const firstNode = this.ProjectService.getNode(this.firstNodeId);
     super.retrieveStudentData(firstNode);

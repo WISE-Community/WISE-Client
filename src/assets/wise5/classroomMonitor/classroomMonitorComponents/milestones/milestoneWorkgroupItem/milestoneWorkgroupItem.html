@@ -30,7 +30,7 @@
   </md-subheader>
   <md-list-item ng-if="$ctrl.expand && !$ctrl.disabled" class="grading__item-container">
       <div class="grading__item" style="width:100%">
-        <div id="component_{{::$ctrl.firstComponentId}}_{{::$ctrl.workgroupId}}" class="component component--grading">
+        <div ng-if="$ctrl.locations.length > 1" id="component_{{::$ctrl.firstComponentId}}_{{::$ctrl.workgroupId}}" class="component component--grading">
           <div>
             <h3 class="accent-1 md-body-2 gray-lightest-bg component__header">
               {{ ::"STEP_POSITION_DISPLAY" | translate: { position: $ctrl.getNodePosition($ctrl.firstNodeId) } }} ({{ $ctrl.getComponentTypeLabel($ctrl.firstComponent.type) }})&nbsp;
@@ -43,7 +43,7 @@
                 [node-id]="$ctrl.firstNodeId"></workgroup-component-grading>
           </div>
         </div>
-        <div ng-if="$ctrl.locations.length > 1" id="component_{{::$ctrl.lastComponentId}}_{{::$ctrl.workgroupId}}" class="component component--grading">
+        <div id="component_{{::$ctrl.lastComponentId}}_{{::$ctrl.workgroupId}}" class="component component--grading">
           <div>
             <h3 class="accent-1 md-body-2 gray-lightest-bg component__header">
               {{ ::"STEP_POSITION_DISPLAY" | translate: { position: $ctrl.getNodePosition($ctrl.lastNodeId) } }} ({{ $ctrl.getComponentTypeLabel($ctrl.lastComponent.type) }})&nbsp;

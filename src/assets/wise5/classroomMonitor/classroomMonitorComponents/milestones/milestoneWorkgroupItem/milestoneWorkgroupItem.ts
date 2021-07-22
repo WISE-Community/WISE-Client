@@ -4,6 +4,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import * as angular from 'angular';
 import { UtilService } from '../../../../services/utilService';
 import { WorkgroupItemController } from '../../nodeGrading/workgroupItem/workgroupItem';
+import { Subscription } from 'rxjs';
 
 class MilestoneWorkgroupItemController extends WorkgroupItemController {
   $translate: any;
@@ -30,6 +31,7 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
   status: any;
   statusClass: any;
   statusText: string;
+  subscriptions: Subscription = new Subscription();
   workgroupId: number;
   static $inject = ['$filter', 'ProjectService', 'UtilService'];
 
@@ -44,39 +46,51 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
   $onInit() {
     this.statusText = '';
     this.update();
-    this.firstComponentId = this.locations[0].componentId;
-    this.firstNodeId = this.locations[0].nodeId;
-    this.firstComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.firstNodeId,
-      this.firstComponentId
+    const lastLocation = this.locations[this.locations.length - 1];
+    this.lastNodeId = lastLocation.nodeId;
+    this.lastComponentId = lastLocation.componentId;
+    this.lastComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.lastNodeId,
+      this.lastComponentId
     );
-    this.firstComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
-      this.firstNodeId,
-      this.firstComponentId
+    this.lastComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+      this.lastNodeId,
+      this.lastComponentId
     );
     if (this.locations.length > 1) {
-      const lastLocation = this.locations[this.locations.length - 1];
-      this.lastNodeId = lastLocation.nodeId;
-      this.lastComponentId = lastLocation.componentId;
-      this.lastComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
-        this.lastNodeId,
-        this.lastComponentId
+      const firstLocation = this.locations[0];
+      this.firstComponentId = firstLocation.componentId;
+      this.firstNodeId = firstLocation.nodeId;
+      this.firstComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
+        this.firstNodeId,
+        this.firstComponentId
       );
-      this.lastComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
-        this.lastNodeId,
-        this.lastComponentId
+      this.firstComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+        this.firstNodeId,
+        this.firstComponentId
       );
-    } else {
-      this.lastComponentMaxScore = this.firstComponentMaxScore;
     }
+    this.subscribeToEvents();
+  }
+
+  subscribeToEvents() {
+    this.subscriptions.add(
+      this.ProjectService.projectSaved$.subscribe(() => {
+        this.lastComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+          this.lastNodeId,
+          this.lastComponentId
+        );
+        if (this.locations.length > 1) {
+          this.firstComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+            this.firstNodeId,
+            this.firstComponentId
+          );
+        }
+      })
+    );
   }
 
   $onChanges(changesObj) {
-    if (changesObj.maxScore) {
-      this.maxScore =
-        typeof changesObj.maxScore.currentValue === 'number' ? changesObj.maxScore.currentValue : 0;
-    }
-
     if (changesObj.workgroupData) {
       let workgroupData = angular.copy(changesObj.workgroupData.currentValue);
       this.hasAlert = workgroupData.hasAlert;
