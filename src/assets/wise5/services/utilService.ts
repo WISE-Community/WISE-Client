@@ -323,10 +323,22 @@ export class UtilService {
    * @return text without html tags and new lines
    */
   removeHTMLTags(html = '') {
-    let text = html.replace(/<\/?[^>]+(>|$)/g, ' ');
-    text = text.replace(/\n/g, ' ');
-    text = text.replace(/\r/g, ' ');
-    return text;
+    let text = this.replaceImgTagWithFileName(html);
+    text = text.replace(/<\/?[^>]+(>|$)/g, ' ');
+    return this.removeNewLines(text);
+  }
+
+  removeNewLines(html = '') {
+    let text = html.replace(/\n/g, ' ');
+    return text.replace(/\r/g, ' ');
+  }
+
+  /**
+   * Replace img tags with the src value.
+   * Example: <img src="computer.png"/> will be replaced with computer.png.
+   */
+  replaceImgTagWithFileName(html = '') {
+    return html.replace(/<img.*?src=["'](.*?)["'].*?>/g, '$1');
   }
 
   /**
