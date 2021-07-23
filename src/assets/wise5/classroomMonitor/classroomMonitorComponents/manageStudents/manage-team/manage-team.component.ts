@@ -48,6 +48,10 @@ export class ManageTeamComponent {
     event.container.element.nativeElement.classList.remove('primary-bg');
   }
 
+  canDrop(drag: CdkDrag, drop: CdkDropList): boolean {
+    return drop.data.length < 3;
+  }
+
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer !== event.container) {
       this.dialog
@@ -60,10 +64,6 @@ export class ManageTeamComponent {
           event.container.element.nativeElement.classList.remove('primary-bg');
         });
     }
-  }
-
-  canDrop(drag: CdkDrag, drop: CdkDropList) {
-    return drop.data.length < 3;
   }
 
   private moveUser(event: CdkDragDrop<string[]>) {

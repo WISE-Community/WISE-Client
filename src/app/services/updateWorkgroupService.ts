@@ -6,7 +6,7 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 export class UpdateWorkgroupService {
   constructor(private ConfigService: ConfigService, private http: HttpClient) {}
 
-  moveMember(userId: string, workgroupIdFrom, workgroupIdTo) {
+  moveMember(userId: number, workgroupIdFrom: number, workgroupIdTo: number) {
     return this.http.post(
       `/api/teacher/run/${this.ConfigService.getRunId()}/workgroup/move-user/${userId}`,
       {

@@ -18,6 +18,7 @@ import { AuthoringToolModule } from './teacher/authoring-tool.module';
 import { ClassroomMonitorModule } from './teacher/classroom-monitor.module';
 import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
 import { UpdateWorkgroupService } from './services/updateWorkgroupService';
+import { GetWorkgroupService } from './services/getWorkgroupService';
 
 @NgModule({
   declarations: [StepToolsComponent],
@@ -25,6 +26,7 @@ import { UpdateWorkgroupService } from './services/updateWorkgroupService';
   providers: [
     CopyNodesService,
     { provide: DataService, useExisting: TeacherDataService },
+    GetWorkgroupService,
     InsertNodesService,
     MilestoneService,
     ProjectAssetService,
