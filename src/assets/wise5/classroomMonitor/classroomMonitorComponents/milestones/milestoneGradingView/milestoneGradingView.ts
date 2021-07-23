@@ -12,6 +12,10 @@ import * as angular from 'angular';
 
 @Directive()
 class MilestoneGradingViewController extends NodeGradingViewController {
+  firstNodeId: string;
+  firstNodePosition: string;
+  lastNodeId: string;
+  lastNodePosition: string;
   milestone: any;
   nodeId: string;
   componentId: string;
@@ -50,11 +54,47 @@ class MilestoneGradingViewController extends NodeGradingViewController {
   $onInit() {
     this.nodeId = this.milestone.nodeId;
     this.node = this.ProjectService.getNode(this.nodeId);
+    if (this.milestone.report.locations.length > 1) {
+      this.firstNodeId = this.milestone.report.locations[0].nodeId;
+      this.lastNodeId = this.milestone.report.locations[
+        this.milestone.report.locations.length - 1
+      ].nodeId;
+    }
     this.componentId = this.milestone.componentId;
-    this.maxScore = this.getMaxScore();
     this.retrieveStudentData();
     this.subscribeToEvents();
     this.saveNodeGradingViewDisplayedEvent();
+    this.getNodePositions();
+  }
+
+  subscribeToEvents() {
+    super.subscribeToEvents();
+    if (this.milestone.report.locations.length > 1) {
+      this.subscriptions.add(
+        this.AnnotationService.annotationReceived$.subscribe(({ annotation }) => {
+          const workgroupId = annotation.toWorkgroupId;
+          if (annotation.nodeId === this.firstNodeId && this.workgroupsById[workgroupId]) {
+            this.updateWorkgroup(workgroupId);
+          }
+        })
+      );
+    }
+  }
+
+  retrieveStudentData() {
+    const firstNode = this.ProjectService.getNode(this.firstNodeId);
+    super.retrieveStudentData(firstNode);
+    if (this.milestone.report.locations.length > 1) {
+      const lastNode = this.ProjectService.getNode(this.lastNodeId);
+      super.retrieveStudentData(lastNode);
+    }
+  }
+
+  private getNodePositions() {
+    if (this.milestone.report.locations.length > 1) {
+      this.firstNodePosition = this.ProjectService.getNodePositionById(this.firstNodeId);
+      this.lastNodePosition = this.ProjectService.getNodePositionById(this.lastNodeId);
+    }
   }
 
   getScoreByWorkgroupId(

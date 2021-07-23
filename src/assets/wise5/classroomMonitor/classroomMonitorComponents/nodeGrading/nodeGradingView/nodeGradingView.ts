@@ -130,13 +130,13 @@ export class NodeGradingViewController {
     );
   }
 
-  retrieveStudentData() {
-    this.TeacherDataService.retrieveStudentDataForNode(this.node).then(() => {
+  retrieveStudentData(node = this.node) {
+    this.TeacherDataService.retrieveStudentDataForNode(node).then(() => {
       this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
       this.workgroups = this.ConfigService.getClassmateUserInfos();
       this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
       this.setWorkgroupsById();
-      this.numRubrics = this.ProjectService.getNumberOfRubricsByNodeId(this.nodeId);
+      this.numRubrics = this.ProjectService.getNumberOfRubricsByNodeId(node.id);
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
   }
@@ -160,8 +160,8 @@ export class NodeGradingViewController {
     );
   }
 
-  getMaxScore() {
-    return this.ProjectService.getMaxScoreForNode(this.nodeId);
+  getMaxScore(nodeId = this.nodeId) {
+    return this.ProjectService.getMaxScoreForNode(nodeId);
   }
 
   setWorkgroupsById() {
