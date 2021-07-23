@@ -1,185 +1,130 @@
-'use strict';
-
-import * as angular from 'angular';
-import * as Highcharts from '../../lib/highcharts/highcharts.src';
-import ComponentController from '../componentController';
-import canvg from 'canvg';
-import html2canvas from 'html2canvas';
+import { Component } from '@angular/core';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../services/configService';
+import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { ProjectService } from '../../../services/projectService';
+import { StudentAssetService } from '../../../services/studentAssetService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { UtilService } from '../../../services/utilService';
+import { ComponentStudent } from '../../component-student.component';
+import { ComponentService } from '../../componentService';
+import { GraphService } from '../graphService';
+import * as Highcharts from 'highcharts';
+import HC_exporting from 'highcharts/modules/exporting';
 import * as covariance from 'compute-covariance';
-import { Directive } from '@angular/core';
+import canvg from 'canvg';
 
-@Directive()
-class GraphController extends ComponentController {
-  $q: any;
-  $timeout: any;
-  GraphService: any;
-  chartConfig: any;
-  graphType: string = null;
-  series: any[] = [];
-  seriesMarkers: string[] = ['circle', 'square', 'diamond', 'triangle', 'triangle-down', 'circle'];
+const Draggable = require('highcharts/modules/draggable-points.js');
+Draggable(Highcharts);
+HC_exporting(Highcharts);
+
+@Component({
+  selector: 'graph-student',
+  templateUrl: 'graph-student.component.html',
+  styleUrls: ['graph-student.component.scss']
+})
+export class GraphStudent extends ComponentStudent {
   activeSeries: any = null;
-  isResetGraphButtonVisible: boolean = false;
-  isSelectSeriesVisible: boolean = false;
-  notebookConfig: any = this.NotebookService.getNotebookConfig();
-  hideAllTrialsOnNewTrial: boolean = true;
-  showUndoButton: boolean = false;
-  isLegendEnabled: boolean = true;
-  hasCustomLegendBeenSet: boolean = false;
-  showTrialSelect: boolean = true;
-  chartId: string = 'chart1';
-  width: number = null;
-  height: number = null;
-  trials: any[] = [];
   activeTrial: any = null;
-  trialIdsToShow: any[] = [];
-  selectedTrialsText: string = '';
-  studentDataVersion: number = 2;
+  addNextComponentStateToUndoStack: boolean = false;
+  backgroundImage: string = null;
   canCreateNewTrials: boolean = false;
   canDeleteTrials: boolean = false;
-  uploadedFileName: string = null;
-  backgroundImage: string = null;
-  mouseOverPoints: any[] = [];
-  initialComponentState: any = null;
-  previousComponentState: any = null;
-  undoStack: any[] = [];
-  addNextComponentStateToUndoStack: boolean = false;
-  hiddenCanvasId: string;
-  dataExplorerColors: string[];
-  title: string;
-  subtitle: string;
-  xAxis: any;
-  yAxis: any;
-  plotLines: any[];
-  rectangle: any;
-  yAxisLocked: boolean;
-  setupMouseMoveListenerDone: boolean;
-  mouseDown: boolean;
+  chartCallback: any;
+  chartConfig: any;
+  chartId: string = 'chart1';
+  dataExplorerColors: string[] = ['blue', 'orange', 'purple', 'black', 'green'];
   fileName: string;
-  lastSavedMouseMoveTimestamp: number;
-  xAxisLimitSpacerWidth: number;
+  graphType: string;
+  hasCustomLegendBeenSet: boolean = false;
+  height: number = null;
+  hiddenCanvasId: string = 'hiddenCanvas_' + this.componentId;
+  hideAllTrialsOnNewTrial: boolean = true;
+  Highcharts: typeof Highcharts = Highcharts;
+  initialComponentState: any = null;
+  isLegendEnabled: boolean = true;
+  isResetGraphButtonVisible: boolean = false;
+  isResetSeriesButtonVisible: boolean = false;
+  isSelectSeriesVisible: boolean = false;
   lastDropTime: number;
-  isResetSeriesButtonVisible: boolean;
-  previousTrialIdsToShow: any[];
-
-  static $inject = [
-    '$filter',
-    '$injector',
-    '$mdDialog',
-    '$q',
-    '$rootScope',
-    '$scope',
-    '$timeout',
-    'AnnotationService',
-    'AudioRecorderService',
-    'ConfigService',
-    'GraphService',
-    'NodeService',
-    'NotebookService',
-    'NotificationService',
-    'ProjectService',
-    'StudentAssetService',
-    'StudentDataService',
-    'UtilService'
-  ];
+  lastSavedMouseMoveTimestamp: number;
+  mouseDown: boolean = false;
+  mouseOverPoints: any[] = [];
+  notebookConfig: any = this.NotebookService.getNotebookConfig();
+  plotLines: any[];
+  previousComponentState: any;
+  previousTrialIdsToShow: string[];
+  rectangle: any;
+  series: any[] = [];
+  seriesMarkers: string[] = ['circle', 'square', 'diamond', 'triangle', 'triangle-down', 'circle'];
+  setupMouseMoveListenerDone: boolean = false;
+  showTrialSelect: boolean = true;
+  showUndoButton: boolean = false;
+  studentDataVersion: number = 2;
+  subtitle: string;
+  title: string;
+  trialIdsToShow: string[] = [];
+  trials: any[] = [];
+  undoStack: any = [];
+  updateFlag: boolean = false;
+  uploadedFileName: string = null;
+  width: number = null;
+  xAxis: any;
+  xAxisLimitSpacerWidth: number;
+  yAxis: any;
+  yAxisLocked: boolean;
 
   constructor(
-    $filter,
-    $injector,
-    $mdDialog,
-    $q,
-    $rootScope,
-    $scope,
-    $timeout,
-    AnnotationService,
-    AudioRecorderService,
-    ConfigService,
-    GraphService,
-    NodeService,
-    NotebookService,
-    NotificationService,
-    ProjectService,
-    StudentAssetService,
-    StudentDataService,
-    UtilService
+    protected AnnotationService: AnnotationService,
+    protected ComponentService: ComponentService,
+    protected ConfigService: ConfigService,
+    private GraphService: GraphService,
+    protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
+    private ProjectService: ProjectService,
+    protected StudentAssetService: StudentAssetService,
+    protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
+    protected UtilService: UtilService
   ) {
     super(
-      $filter,
-      $injector,
-      $mdDialog,
-      $q,
-      $rootScope,
-      $scope,
       AnnotationService,
-      AudioRecorderService,
+      ComponentService,
       ConfigService,
       NodeService,
       NotebookService,
-      NotificationService,
-      ProjectService,
       StudentAssetService,
       StudentDataService,
+      upgrade,
       UtilService
     );
-    this.$q = $q;
-    this.$timeout = $timeout;
-    this.GraphService = GraphService;
-    this.graphType = null;
-    this.series = [];
-    this.seriesMarkers = ['circle', 'square', 'diamond', 'triangle', 'triangle-down', 'circle'];
-    this.activeSeries = null;
-    this.isResetGraphButtonVisible = false;
-    this.isSelectSeriesVisible = false;
-    this.notebookConfig = this.NotebookService.getNotebookConfig();
-    this.hideAllTrialsOnNewTrial = true;
-    this.showUndoButton = false;
-    this.isLegendEnabled = true;
-    this.hasCustomLegendBeenSet = false;
-    this.showTrialSelect = true;
-    this.chartId = 'chart1';
-    this.width = null;
-    this.height = null;
-    this.trials = [];
-    this.activeTrial = null;
-    this.trialIdsToShow = [];
-    this.selectedTrialsText = '';
-    this.studentDataVersion = 2;
-    this.canCreateNewTrials = false;
-    this.canDeleteTrials = false;
-    this.uploadedFileName = null;
-    this.backgroundImage = null;
-    this.mouseOverPoints = [];
-    this.initialComponentState = null;
-    /*
-     * An array to store the component states for the student to undo.
-     * The undoStack will contain the component states from the current
-     * visit except for the current component state.
-     */
-    this.undoStack = [];
-    /*
-     * whether to add the next component state created in
-     * studentDataChanged() to the undoStack
-     */
-    this.addNextComponentStateToUndoStack = false;
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
     this.chartId = 'chart_' + this.componentId;
     this.hiddenCanvasId = 'hiddenCanvas_' + this.componentId;
     this.dataExplorerColors = ['blue', 'orange', 'purple', 'black', 'green'];
     this.applyHighchartsPlotLinesLabelFix();
     this.initializeComponentContentParams();
-    const componentState = this.$scope.componentState;
-    this.initializeStudentMode(componentState);
-    this.initialComponentState = componentState;
-    this.previousComponentState = componentState;
+    this.initializeStudentMode(this.componentState);
+    this.initialComponentState = this.componentState;
+    this.previousComponentState = this.componentState;
     if (!this.canSubmit()) {
       this.isSubmitButtonDisabled = true;
     }
     this.disableComponentIfNecessary();
-    this.initializeHandleConnectedComponentStudentDataChanged();
     this.initializeDeleteKeyPressedListener();
-    this.initializeFileUploadChanged();
-    this.initializeScopeGetComponentState(this.$scope, 'graphController');
+    this.chartCallback = this.createChartCallback();
     this.drawGraph().then(() => {
       this.broadcastDoneRenderingComponent();
     });
+  }
+
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 
   applyHighchartsPlotLinesLabelFix() {
@@ -251,33 +196,22 @@ class GraphController extends ComponentController {
     }
   }
 
-  initializeHandleConnectedComponentStudentDataChanged() {
-    this.$scope.handleConnectedComponentStudentDataChanged = (
-      connectedComponent,
-      connectedComponentParams,
+  processConnectedComponentState(componentState: any): void {
+    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
+      this.componentContent,
       componentState
-    ) => {
-      const componentType = connectedComponent.type;
-      if (componentType === 'Table') {
-        this.handleTableConnectedComponentStudentDataChanged(
-          connectedComponent,
-          connectedComponentParams,
-          componentState
-        );
-      } else if (componentType === 'Embedded') {
-        this.handleEmbeddedConnectedComponentStudentDataChanged(
-          connectedComponent,
-          connectedComponentParams,
-          componentState
-        );
-      } else if (componentType === 'Animation') {
-        this.handleAnimationConnectedComponentStudentDataChanged(
-          connectedComponent,
-          connectedComponentParams,
-          componentState
-        );
-      }
-    };
+    );
+    const componentType = this.ProjectService.getComponentType(
+      connectedComponent.nodeId,
+      connectedComponent.componentId
+    );
+    if (componentType === 'Table') {
+      this.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+    } else if (componentType === 'Embedded') {
+      this.handleEmbeddedConnectedComponentStudentDataChanged(connectedComponent, componentState);
+    } else if (componentType === 'Animation') {
+      this.handleAnimationConnectedComponentStudentDataChanged(connectedComponent, componentState);
+    }
   }
 
   initializeDeleteKeyPressedListener() {
@@ -288,28 +222,24 @@ class GraphController extends ComponentController {
     );
   }
 
-  initializeFileUploadChanged() {
-    this.$scope.fileUploadChanged = (element) => {
-      const activeSeriesData = this.activeSeries.data;
-      let overwrite = true;
-      if (activeSeriesData.length > 0) {
-        if (!confirm(this.$translate('graph.areYouSureYouWantToOverwriteTheCurrentLineData'))) {
-          overwrite = false;
-        }
+  fileUploadChanged(event) {
+    const activeSeriesData = this.activeSeries.data;
+    let overwrite = true;
+    if (activeSeriesData.length > 0) {
+      if (!confirm($localize`Are you sure you want to overwrite the current line data?`)) {
+        overwrite = false;
       }
-      if (overwrite) {
-        this.uploadFileAndReadContent(element);
-      }
-      /*
-       * clear the file input element value so that onchange() will be
-       * called again if the student wants to upload the same file again
-       */
-      element.value = null;
-    };
+    }
+    if (overwrite) {
+      this.uploadFileAndReadContent(event);
+    }
+    // clear the file input value so that onchange() will be called again if the student wants to
+    // upload the same file again
+    event.srcElement.value = null;
   }
 
-  uploadFileAndReadContent(element) {
-    const files = element.files;
+  uploadFileAndReadContent(event) {
+    const files = event.target.files;
     const reader: any = new FileReader();
     reader.onload = () => {
       const fileContent = reader.result;
@@ -323,18 +253,14 @@ class GraphController extends ComponentController {
     this.StudentAssetService.uploadAsset(files[0]);
   }
 
-  handleTableConnectedComponentStudentDataChanged(
-    connectedComponent,
-    connectedComponentParams,
-    componentState
-  ) {
+  handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState) {
     const studentData = componentState.studentData;
     if (studentData.isDataExplorerEnabled) {
       this.handleDataExplorer(studentData);
     } else {
       const rows = studentData.tableData;
-      const data = this.convertRowDataToSeriesData(rows, connectedComponentParams);
-      let seriesIndex = connectedComponentParams.seriesIndex;
+      const data = this.convertRowDataToSeriesData(rows, connectedComponent);
+      let seriesIndex = connectedComponent.seriesIndex;
       if (seriesIndex == null) {
         seriesIndex = 0;
       }
@@ -558,22 +484,14 @@ class GraphController extends ComponentController {
     return data;
   }
 
-  handleEmbeddedConnectedComponentStudentDataChanged(
-    connectedComponent,
-    connectedComponentParams,
-    componentState
-  ) {
+  handleEmbeddedConnectedComponentStudentDataChanged(connectedComponent, componentState) {
     componentState = this.UtilService.makeCopyOfJSONObject(componentState);
     const studentData = componentState.studentData;
-    this.processConnectedComponentStudentData(studentData, connectedComponentParams);
+    this.processConnectedComponentStudentData(studentData, connectedComponent);
     this.studentDataChanged();
   }
 
-  handleAnimationConnectedComponentStudentDataChanged(
-    connectedComponent,
-    connectedComponentParams,
-    componentState
-  ) {
+  handleAnimationConnectedComponentStudentDataChanged(connectedComponent, componentState) {
     if (componentState.t != null) {
       this.setVerticalPlotLine(componentState.t);
       this.drawGraph();
@@ -582,24 +500,23 @@ class GraphController extends ComponentController {
 
   setupMouseMoveListener() {
     if (!this.setupMouseMoveListenerDone) {
-      /*
-       * Remove all existing listeners on the chart div to make sure we don't
-       * bind a listener multiple times.
-       */
-      angular.element(document.querySelector(`#${this.chartId}`)).unbind();
-      angular.element(document.querySelector(`#${this.chartId}`)).bind('mousedown', (e) => {
+      const chart = $(`#${this.chartId}`);
+      // Remove all existing listeners on the chart div to make sure we don't bind the same listener
+      // multiple times.
+      chart.off();
+      chart.on('mousedown', (e) => {
         this.mouseDown = true;
         this.mouseDownEventOccurred(e);
       });
-      angular.element(document.querySelector(`#${this.chartId}`)).bind('mouseup', (e) => {
+      chart.on('mouseup', (e) => {
         this.mouseDown = false;
       });
-      angular.element(document.querySelector(`#${this.chartId}`)).bind('mousemove', (e) => {
+      chart.on('mousemove', (e) => {
         if (this.mouseDown) {
           this.mouseDownEventOccurred(e);
         }
       });
-      angular.element(document.querySelector(`#${this.chartId}`)).bind('mouseleave', (e) => {
+      chart.on('mouseleave', (e) => {
         this.mouseDown = false;
       });
       this.setupMouseMoveListenerDone = true;
@@ -725,12 +642,12 @@ class GraphController extends ComponentController {
   }
 
   convertToXPixels(graphUnitValue) {
-    const chart = this.getChartById(this.chartId);
+    const chart: any = this.getChartById(this.chartId);
     return chart.xAxis[0].translate(graphUnitValue);
   }
 
   convertToYPixels(graphUnitValue) {
-    const chart = this.getChartById(this.chartId);
+    const chart: any = this.getChartById(this.chartId);
     return chart.yAxis[0].translate(graphUnitValue);
   }
 
@@ -838,31 +755,31 @@ class GraphController extends ComponentController {
    * @param useTimeout whether to call the drawGraphHelper() function in a timeout callback
    */
   drawGraph(useTimeout: boolean = false) {
-    const deferred = this.$q.defer();
-    if (useTimeout) {
-      /*
-       * Clear the chart config so that the graph is completely refreshed. We need to do this
-       * otherwise all the series will react to mouseover but we only want the active series to
-       * react to mouseover.
-       */
-      this.clearChartConfig();
-      /*
-       * Call the setup graph helper after a timeout. this is required so that the graph is
-       * completely refreshed so that only the active series will react to mouseover.
-       */
-      this.$timeout(() => {
-        this.drawGraphHelper(deferred);
-      });
-    } else {
-      this.drawGraphHelper(deferred);
-    }
-    return deferred.promise;
+    return new Promise((resolve, reject) => {
+      if (useTimeout) {
+        /*
+         * Clear the chart config so that the graph is completely refreshed. We need to do this
+         * otherwise all the series will react to mouseover but we only want the active series to
+         * react to mouseover.
+         */
+        this.clearChartConfig();
+        /*
+         * Call the setup graph helper after a timeout. this is required so that the graph is
+         * completely refreshed so that only the active series will react to mouseover.
+         */
+        setTimeout(() => {
+          this.drawGraphHelper(resolve);
+        });
+      } else {
+        this.drawGraphHelper(resolve);
+      }
+    });
   }
 
   /**
-   * @param deferred A promise that should be resolved after the graph is done rendering.
+   * @param resolve A promise that should be resolved after the graph is done rendering.
    */
-  drawGraphHelper(deferred) {
+  drawGraphHelper(resolve) {
     this.turnOffXAxisDecimals();
     this.turnOffYAxisDecimals();
     this.copyXAxisPlotBandsFromComponentContent();
@@ -887,8 +804,16 @@ class GraphController extends ComponentController {
     if (this.plotLines != null) {
       this.xAxis.plotLines = this.plotLines;
     }
+    // Make a copy of the series so when the highcharts-chart modifies the series it won't modify
+    // our original series in our trials. There was a problem that occurred when there were two
+    // trials and the student hides the first trial which would cause the the data points in the
+    // second trial to be written to the first trial. Making a copy of the series prevents this
+    // problem. I think this problem occurs because highcharts-chart was expecting two series so
+    // when we hide the first trial (and the first series), it moves the second series (from the
+    // second trial) to the first series.
+    series = this.UtilService.makeCopyOfJSONObject(series);
     this.chartConfig = this.createChartConfig(
-      deferred,
+      resolve,
       this.title,
       this.subtitle,
       this.xAxis,
@@ -897,11 +822,10 @@ class GraphController extends ComponentController {
     );
     if (this.componentContent.useCustomLegend) {
       // use a timeout so the graph has a chance to render before we set the custom legend
-      this.$timeout(() => {
+      setTimeout(() => {
         this.setCustomLegend();
       });
     }
-    return deferred.promise;
   }
 
   turnOffXAxisDecimals() {
@@ -964,12 +888,15 @@ class GraphController extends ComponentController {
 
   setSingleSeriesFields(singleSeries, canAllSeriesMouseTrack) {
     if (singleSeries.canEdit && this.isActiveSeries(singleSeries)) {
+      singleSeries.dragDrop = {
+        draggableX: true,
+        draggableY: true
+      };
       if (this.graphType === 'line' || this.graphType === 'scatter') {
-        singleSeries.draggableX = true;
+        singleSeries.dragDrop.draggableX = true;
       } else if (this.graphType === 'column') {
-        singleSeries.draggableX = false;
+        singleSeries.dragDrop.draggableX = false;
       }
-      singleSeries.draggableY = true;
       singleSeries.cursor = 'move';
       singleSeries.stickyTracking = false;
       singleSeries.shared = false;
@@ -977,8 +904,12 @@ class GraphController extends ComponentController {
       singleSeries.enableMouseTracking = true;
       this.showUndoButton = true;
     } else {
-      singleSeries.draggableX = false;
-      singleSeries.draggableY = false;
+      singleSeries.dragDrop = {
+        draggableX: false,
+        draggableY: false
+      };
+      delete singleSeries.cursor;
+      singleSeries.cursor = 'auto';
       singleSeries.stickyTracking = false;
       singleSeries.shared = false;
       singleSeries.allowPointSelect = false;
@@ -1003,50 +934,52 @@ class GraphController extends ComponentController {
     };
   }
 
-  createChartConfig(deferred, title, subtitle, xAxis, yAxis, series) {
+  createChartConfig(resolve, title, subtitle, xAxis, yAxis, series) {
     const chartConfig = {
-      options: {
-        legend: {
-          enabled: this.isLegendEnabled
-        },
-        tooltip: {
-          formatter: this.GraphService.createTooltipFormatter(
-            xAxis,
-            yAxis,
-            this.componentContent.roundValuesTo
-          )
-        },
-        chart: {
-          width: this.width,
-          height: this.height,
-          type: this.graphType,
-          plotBackgroundImage: this.backgroundImage,
+      legend: {
+        enabled: this.isLegendEnabled
+      },
+      tooltip: {
+        formatter: this.GraphService.createTooltipFormatter(
+          xAxis,
+          yAxis,
+          this.componentContent.roundValuesTo
+        )
+      },
+      chart: {
+        width: this.width,
+        height: this.height,
+        type: this.graphType,
+        plotBackgroundImage: this.backgroundImage,
+        events: {
+          load: function () {
+            resolve(this);
+          },
+          click: this.createGraphClickHandler()
+        }
+      },
+      exporting: {
+        buttons: {
+          contextButton: {
+            enabled: false
+          }
+        }
+      },
+      plotOptions: {
+        series: {
+          dragSensitivity: 10,
+          stickyTracking: false,
           events: {
-            load: function () {
-              deferred.resolve(this);
-            },
-            click: this.createGraphClickHandler()
-          }
-        },
-        plotOptions: {
-          series: {
-            dragSensitivity: 10,
-            stickyTracking: false,
+            legendItemClick: this.createLegendItemClickHandler()
+          },
+          dragDrop: {
+            draggableX: true,
+            draggableY: true
+          },
+          point: {
             events: {
-              legendItemClick: this.createLegendItemClickHandler()
-            },
-            point: {
-              events: {
-                drag: this.createPointDragEventHandler(),
-                drop: this.createPointDropEventHandler()
-              }
-            }
-          }
-        },
-        exporting: {
-          buttons: {
-            contextButton: {
-              enabled: false
+              drag: this.createPointDragEventHandler(),
+              drop: this.createPointDropEventHandler()
             }
           }
         }
@@ -1062,8 +995,7 @@ class GraphController extends ComponentController {
       },
       xAxis: xAxis,
       yAxis: yAxis,
-      loading: false,
-      func: this.createGraphCallbackHandler()
+      loading: false
     };
     return chartConfig;
   }
@@ -1121,7 +1053,9 @@ class GraphController extends ComponentController {
         for (const singleSeries of series) {
           if (activeSeriesId === singleSeries.options.id && !singleSeries.visible) {
             // the series is not visible so we will not add the point
-            alert(this.$translate('graph.studentAddingPointToHiddenSeriesMessage'));
+            alert(
+              $localize`The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.`
+            );
             return;
           }
         }
@@ -1133,7 +1067,9 @@ class GraphController extends ComponentController {
       } else {
         if (!this.isMousePlotLineOn()) {
           // the student is trying to add a point to a series that can't be edited
-          alert(this.$translate('graph.youCanNotEditThisSeriesPleaseChooseASeriesThatCanBeEdited'));
+          alert(
+            $localize`You can not edit this series. Please choose a series that can be edited.`
+          );
         }
       }
     }
@@ -1211,10 +1147,10 @@ class GraphController extends ComponentController {
     };
   }
 
-  createGraphCallbackHandler() {
+  createChartCallback() {
     const thisGraphController = this;
-    return function (chart) {
-      thisGraphController.$timeout(function () {
+    return (chart) => {
+      setTimeout(() => {
         thisGraphController.showXPlotLineIfOn('Drag Me');
         thisGraphController.showYPlotLineIfOn('Drag Me');
         if (
@@ -1225,7 +1161,7 @@ class GraphController extends ComponentController {
           thisGraphController.setupMouseMoveListener();
         }
         chart.reflow();
-      }, 1000);
+      });
     };
   }
 
@@ -1284,7 +1220,27 @@ class GraphController extends ComponentController {
       data[x] = y;
     } else {
       data.push([x, y]);
+      data.sort(this.sortPoints);
+      series.data = this.makePointsUnique(data);
     }
+  }
+
+  sortPoints(pointA: any, pointB: any): number {
+    return pointA[0] - pointB[0];
+  }
+
+  makePointsUnique(points: any[]): any[] {
+    const xValuesFound = {};
+    const uniquePoints = points.filter((point) => {
+      const xValue = point[0];
+      if (xValuesFound[xValue] == null) {
+        xValuesFound[xValue] = true;
+        return true;
+      } else {
+        return false;
+      }
+    });
+    return uniquePoints;
   }
 
   /**
@@ -1425,11 +1381,9 @@ class GraphController extends ComponentController {
     let confirmMessage = '';
     const seriesName = this.activeSeries.name;
     if (seriesName === '') {
-      confirmMessage = this.$translate('graph.areYouSureYouWantToResetTheSeries');
+      confirmMessage = $localize`Are you sure you want to reset the series?`;
     } else {
-      confirmMessage = this.$translate('graph.areYouSureYouWantToResetTheNamedSeries', {
-        seriesName: seriesName
-      });
+      confirmMessage = $localize`Are you sure you want to reset the "${seriesName}" series?`;
     }
     if (confirm(confirmMessage)) {
       this.resetSeriesHelper();
@@ -1549,7 +1503,7 @@ class GraphController extends ComponentController {
        * listeners can initialize before this and are then able to process
        * this componentStudentDataChanged event
        */
-      this.$timeout(() => {
+      setTimeout(() => {
         this.emitComponentStudentDataChanged(componentState);
       }, 1000);
     });
@@ -1562,7 +1516,6 @@ class GraphController extends ComponentController {
    * @return a promise that will return a component state
    */
   createComponentState(action) {
-    const deferred = this.$q.defer();
     const componentState = this.NodeService.createNewComponentState();
     const studentData: any = {};
     studentData.version = this.studentDataVersion;
@@ -1605,8 +1558,13 @@ class GraphController extends ComponentController {
       this.addDefaultFeedback(componentState);
     }
     this.isSubmit = false;
-    this.createComponentStateAdditionalProcessing(deferred, componentState, action);
-    return deferred.promise;
+    return new Promise((resolve, reject) => {
+      this.createComponentStateAdditionalProcessing(
+        { resolve: resolve, reject: reject },
+        componentState,
+        action
+      );
+    });
   }
 
   /**
@@ -1623,14 +1581,18 @@ class GraphController extends ComponentController {
         this.nodeId,
         this.componentId
       );
-      let allPromises = [];
+      const allPromises = [];
       for (const additionalProcessingFunction of additionalProcessingFunctions) {
-        const defer = this.$q.defer();
-        const promise = defer.promise;
+        const promise = new Promise((resolve, reject) => {
+          additionalProcessingFunction(
+            { resolve: resolve, reject: reject },
+            componentState,
+            action
+          );
+        });
         allPromises.push(promise);
-        additionalProcessingFunction(defer, componentState, action);
       }
-      this.$q.all(allPromises).then(() => {
+      Promise.all(allPromises).then(() => {
         deferred.resolve(componentState);
       });
     } else {
@@ -1676,25 +1638,25 @@ class GraphController extends ComponentController {
    * @return a promise that will return all the trials from the classmates
    */
   getTrialsFromClassmates(nodeId, componentId, periodId) {
-    const deferred = this.$q.defer();
-    this.StudentDataService.getClassmateStudentWork(nodeId, componentId, periodId).then(
-      (componentStates) => {
-        const promises = [];
-        for (const componentState of componentStates) {
-          promises.push(this.getTrialsFromComponentState(nodeId, componentId, componentState));
-        }
-        this.$q.all(promises).then((promiseResults) => {
-          const mergedTrials = [];
-          for (const trials of promiseResults) {
-            for (const trial of trials) {
-              mergedTrials.push(trial);
-            }
+    return new Promise((resolve, reject) => {
+      this.StudentDataService.getClassmateStudentWork(nodeId, componentId, periodId).then(
+        (componentStates) => {
+          const promises = [];
+          for (const componentState of componentStates) {
+            promises.push(this.getTrialsFromComponentState(nodeId, componentId, componentState));
           }
-          deferred.resolve(mergedTrials);
-        });
-      }
-    );
-    return deferred.promise;
+          Promise.all(promises).then((promiseResults) => {
+            const mergedTrials = [];
+            for (const trials of promiseResults) {
+              for (const trial of trials) {
+                mergedTrials.push(trial);
+              }
+            }
+            resolve(mergedTrials);
+          });
+        }
+      );
+    });
   }
 
   /**
@@ -1709,7 +1671,6 @@ class GraphController extends ComponentController {
    * @return a promise that will return the trials from the component state
    */
   getTrialsFromComponentState(nodeId, componentId, componentState) {
-    const deferred = this.$q.defer();
     const mergedTrials = [];
     const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
     const studentData = componentState.studentData;
@@ -1733,8 +1694,7 @@ class GraphController extends ComponentController {
         }
       }
     }
-    deferred.resolve(mergedTrials);
-    return deferred.promise;
+    return Promise.resolve(mergedTrials);
   }
 
   /**
@@ -1881,7 +1841,7 @@ class GraphController extends ComponentController {
 
   getChartById(chartId) {
     for (const chart of Highcharts.charts) {
-      if (chart != null && chart.renderTo.id === chartId) {
+      if (chart != null && (chart as any).renderTo.id === chartId) {
         return chart;
       }
     }
@@ -1891,8 +1851,7 @@ class GraphController extends ComponentController {
   handleDeleteKeyPressed() {
     const series = this.activeSeries;
     if (this.canEdit(series)) {
-      const chart = this.getChartById(this.chartId);
-      const selectedPoints = chart.getSelectedPoints();
+      const selectedPoints = this.getSelectedPoints();
       let index = null;
       if (selectedPoints.length > 0) {
         const indexesToDelete = [];
@@ -1925,6 +1884,11 @@ class GraphController extends ComponentController {
         this.studentDataChanged();
       }
     }
+  }
+
+  getSelectedPoints() {
+    const chart = this.getChartById(this.chartId);
+    return chart.getSelectedPoints();
   }
 
   isActiveSeries(series) {
@@ -1965,7 +1929,7 @@ class GraphController extends ComponentController {
     }
     const series = this.UtilService.makeCopyOfJSONObject(this.componentContent.series);
     const trial = {
-      name: this.$translate('graph.trial') + ' ' + (maxTrialNumber + 1),
+      name: $localize`Trial` + ' ' + (maxTrialNumber + 1),
       series: series,
       show: true,
       id: this.UtilService.generateKey(10)
@@ -2018,7 +1982,6 @@ class GraphController extends ComponentController {
     this.setTrialIdsToShow();
     this.addNextComponentStateToUndoStack = true;
     this.studentDataChanged();
-    this.selectedTrialsText = this.getSelectedTrialsText();
   }
 
   makeHighestTrialActive() {
@@ -2094,7 +2057,6 @@ class GraphController extends ComponentController {
      * is called.
      */
     this.previousTrialIdsToShow = this.UtilService.makeCopyOfJSONObject(this.trialIdsToShow);
-    this.selectedTrialsText = this.getSelectedTrialsText();
   }
 
   showOrHideTrials(trialIdsToShow) {
@@ -2154,17 +2116,7 @@ class GraphController extends ComponentController {
       }
     }
     this.trialIdsToShow = idsToShow;
-  }
-
-  getSelectedTrialsText() {
-    if (this.trialIdsToShow.length === 1) {
-      const id = this.trialIdsToShow[0];
-      return this.getTrialById(id).name;
-    } else if (this.trialIdsToShow.length > 1) {
-      return this.trialIdsToShow.length + ' ' + this.$translate('graph.trialsShown');
-    } else {
-      return this.$translate('graph.selectTrialsToShow');
-    }
+    this.previousTrialIdsToShow = idsToShow;
   }
 
   /**
@@ -2388,7 +2340,7 @@ class GraphController extends ComponentController {
       if (this.isAddSeries(params, s)) {
         newTrial.series.push(this.copySeries(series[s]));
         if (params.highlightLatestPoint) {
-          this.$timeout(() => {
+          setTimeout(() => {
             this.highlightPointOnX(studentData.trial.id, studentData.xPointToHighlight);
           }, 1);
         }
@@ -2538,8 +2490,8 @@ class GraphController extends ComponentController {
     }
   }
 
-  snipGraph($event) {
-    const chart = this.getChartById(this.chartId);
+  snipGraph() {
+    const chart: any = this.getChartById(this.chartId);
     const svgString = chart.getSVG();
     const hiddenCanvas: any = document.getElementById(this.hiddenCanvasId);
     canvg(hiddenCanvas, svgString, {
@@ -2607,14 +2559,6 @@ class GraphController extends ComponentController {
       zIndex: 5
     };
     this.plotLines = [plotLine];
-    /*
-     * Call $apply() so that the red plot line position gets updated. If we
-     * don't call this, the line position won't get updated unless the student
-     * moves their mouse around which forces angular to update.
-     */
-    this.$timeout(() => {
-      this.$scope.$apply();
-    });
   }
 
   /**
@@ -2652,11 +2596,9 @@ class GraphController extends ComponentController {
      * wait for all the promises to resolve because we may need to request the classmate work from
      * the server
      */
-    this.$q
-      .all(promises)
-      .then(
-        this.handleConnectedComponentPromiseResults(connectedComponentBackgroundImage, isReset)
-      );
+    Promise.all(promises).then(
+      this.handleConnectedComponentPromiseResults(connectedComponentBackgroundImage, isReset)
+    );
   }
 
   handleShowClassmateWorkConnectedComponent(connectedComponent, promises) {
@@ -2807,7 +2749,7 @@ class GraphController extends ComponentController {
   addTrialFromThisComponentIfNecessary(mergedTrials, trialCount, activeTrialIndex) {
     if (this.componentContent.series.length > 0) {
       const trial = this.createNewTrial(this.UtilService.generateKey(10));
-      trial.name = this.$translate('graph.trial') + ' ' + trialCount;
+      trial.name = $localize`Trial` + ' ' + trialCount;
       trial.series = this.UtilService.makeCopyOfJSONObject(this.componentContent.series);
       mergedTrials.push(trial);
       if (this.canEditTrial(trial)) {
@@ -2834,7 +2776,7 @@ class GraphController extends ComponentController {
    * the connected component student data.
    */
   handleConnectedComponentsHelper(newComponentState, isReset) {
-    let mergedComponentState = this.$scope.componentState;
+    let mergedComponentState = this.componentState;
     let firstTime = true;
     if (
       mergedComponentState == null ||
@@ -3204,5 +3146,3 @@ class GraphController extends ComponentController {
     }
   }
 }
-
-export default GraphController;

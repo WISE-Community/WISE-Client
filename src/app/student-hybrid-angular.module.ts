@@ -32,6 +32,7 @@ import { TableStudent } from '../assets/wise5/components/table/table-student/tab
 import { SummaryStudent } from '../assets/wise5/components/summary/summary-student/summary-student.component';
 import { SummaryDisplay } from '../assets/wise5/directives/summaryDisplay/summary-display.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { GraphStudent } from '../assets/wise5/components/graph/graph-student/graph-student.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     ConceptMapStudent,
     DrawStudent,
     EmbeddedStudent,
+    GraphStudent,
     HtmlDialog,
     HtmlStudent,
     LabelStudent,

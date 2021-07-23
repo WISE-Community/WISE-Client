@@ -28,6 +28,7 @@ class NodeController {
     'ConceptMap',
     'Draw',
     'Embedded',
+    'Graph',
     'Label',
     'Match',
     'MultipleChoice',
