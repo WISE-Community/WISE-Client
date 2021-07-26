@@ -2,6 +2,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
+import { of } from 'rxjs';
+import { GetWorkgroupService } from '../../../../../../app/services/getWorkgroupService';
 import { ConfigService } from '../../../../services/configService';
 import { ManagePeriodComponent } from './manage-period.component';
 
@@ -23,7 +25,7 @@ describe('ManagePeriod', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [ManagePeriodComponent],
-      providers: [ConfigService, UpgradeModule]
+      providers: [ConfigService, GetWorkgroupService, UpgradeModule]
     });
     configService = TestBed.inject(ConfigService);
   });
@@ -36,29 +38,37 @@ describe('ManagePeriod', () => {
     };
     fixture.detectChanges();
   });
-  initializeTeams();
-  initializeStudents();
+  initTeams();
+  initStudents();
 });
 
-function initializeTeams() {
-  describe('initializeTeams', () => {
-    it('should initialize teams that are in this period', () => {
+function initTeams() {
+  describe('initTeams', () => {
+    it('should initialize teams that are in this period including empty teams', () => {
       spyOn(configService, 'getClassmateUserInfos').and.returnValue(classmateUserInfos);
       spyOn(configService, 'getDisplayUsernamesByWorkgroupId').and.returnValue('student one');
-      component.initializeTeams();
-      expect(component.teams.size).toEqual(2);
-      const teamsArray = Array.from(component.teams);
+      const allWorkgroupsInPeriodSpy = spyOn(
+        TestBed.inject(GetWorkgroupService),
+        'getAllWorkgroupsInPeriod'
+      ).and.callFake((periodId: number) => {
+        return of([{ id: 5 }, { id: 7 }, { id: 8 }]);
+      });
+      component.initTeams();
+      expect(component.teams.size).toEqual(3);
+      const teamsArray = Array.from(component.teams.values());
       expect(teamsArray[0].workgroupId).toEqual(5);
       expect(teamsArray[1].workgroupId).toEqual(7);
+      expect(teamsArray[2].workgroupId).toEqual(8);
+      expect(allWorkgroupsInPeriodSpy).toHaveBeenCalled();
     });
   });
 }
 
-function initializeStudents() {
-  describe('initializeStudents', () => {
+function initStudents() {
+  describe('initStudents', () => {
     it('should initialize students that are in this period', () => {
       spyOn(configService, 'getClassmateUserInfos').and.returnValue(classmateUserInfos);
-      component.initializeStudents();
+      component.initStudents();
       expect(component.students.size).toEqual(3);
     });
   });

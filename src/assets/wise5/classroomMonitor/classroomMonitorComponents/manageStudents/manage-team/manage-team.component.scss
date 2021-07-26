@@ -6,8 +6,14 @@
   border: 1px dotted red;
   padding: 4px;
   list-style-type: none;
+  cursor: move;
 }
 
 .users {
+  min-height: 30px;
   padding-left: 0px;
+}
+
+.cdk-drag-placeholder {
+  opacity: .4;
 }

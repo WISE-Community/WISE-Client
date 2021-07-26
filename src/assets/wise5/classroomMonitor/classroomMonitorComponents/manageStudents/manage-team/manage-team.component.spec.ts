@@ -2,12 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
 import { configureTestSuite } from 'ng-bullet';
+import { UpdateWorkgroupService } from '../../../../../../app/services/updateWorkgroupService';
 import { ConfigService } from '../../../../services/configService';
 import { ManageTeamComponent } from './manage-team.component';
 
 class ConfigServiceStub {
   getPermissions() {}
 }
+
+class UpdateWorkgroupServiceStub {}
 
 let configService: ConfigService;
 let fixture: ComponentFixture<ManageTeamComponent>;
@@ -19,6 +22,7 @@ describe('ManageTeamComponent', () => {
       declarations: [ManageTeamComponent],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
+        { provide: UpdateWorkgroupService, useClass: UpdateWorkgroupServiceStub },
         { provide: MatDialog, useValue: {} }
       ]
     });

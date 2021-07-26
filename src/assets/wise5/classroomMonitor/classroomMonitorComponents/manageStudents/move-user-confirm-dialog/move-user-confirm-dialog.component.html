@@ -1,0 +1,10 @@
+<h1 mat-dialog-title i18n>Move Student</h1>
+<mat-dialog-content aria-label="Move Student" cdkFocusRegionStart>
+  <p i18n>Warning: removing a student from a team will result in the student losing all the work they completed with that team.</p>
+  <p i18n>If you are moving a student to a new team, they will adopt the work of the new team.</p>
+  <p i18n>Are you sure you want to continue?</p>
+</mat-dialog-content>
+<mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
+  <button mat-button [mat-dialog-close]="false" i18n>Cancel</button>
+  <button mat-button mat-primary color="primary" [mat-dialog-close]="true" i18n>Confirm</button>
+</mat-dialog-actions>
