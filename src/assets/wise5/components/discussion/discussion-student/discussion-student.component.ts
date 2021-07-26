@@ -1,85 +1,63 @@
-'use strict';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../services/configService';
+import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { NotificationService } from '../../../services/notificationService';
+import { StudentAssetService } from '../../../services/studentAssetService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { UtilService } from '../../../services/utilService';
+import { StudentAssetRequest } from '../../../vle/studentAsset/StudentAssetRequest';
+import { ComponentStudent } from '../../component-student.component';
+import { ComponentService } from '../../componentService';
+import { ComponentStateRequest } from '../../ComponentStateRequest';
+import { DiscussionService } from '../discussionService';
 
-import ComponentController from '../componentController';
-import { DiscussionService } from './discussionService';
-import { Directive } from '@angular/core';
-import { StudentAssetRequest } from '../../vle/studentAsset/StudentAssetRequest';
-
-@Directive()
-class DiscussionController extends ComponentController {
-  studentResponse: string;
-  newResponse: string;
-  classResponses: any[];
-  topLevelResponses: any;
-  responsesMap: any;
-  retrievedClassmateResponses: boolean;
-  componentStateIdReplyingTo: any;
-
-  static $inject = [
-    '$filter',
-    '$injector',
-    '$mdDialog',
-    '$q',
-    '$rootScope',
-    '$scope',
-    'AnnotationService',
-    'AudioRecorderService',
-    'ConfigService',
-    'DiscussionService',
-    'NodeService',
-    'NotebookService',
-    'NotificationService',
-    'ProjectService',
-    'StudentAssetService',
-    'StudentDataService',
-    'UtilService',
-    '$mdMedia'
-  ];
+@Component({
+  selector: 'discussion-student',
+  templateUrl: 'discussion-student.component.html',
+  styleUrls: ['discussion-student.component.scss'],
+  encapsulation: ViewEncapsulation.None
+})
+export class DiscussionStudent extends ComponentStudent {
+  classResponses: any[] = [];
+  componentStateIdReplyingTo: number;
+  newResponse: string = '';
+  responsesMap: any = {};
+  retrievedClassmateResponses: boolean = false;
+  studentResponse: string = '';
+  topLevelResponses: any = {};
 
   constructor(
-    $filter,
-    $injector,
-    $mdDialog,
-    $q: any,
-    $rootScope,
-    $scope,
-    AnnotationService,
-    AudioRecorderService,
-    ConfigService,
+    protected AnnotationService: AnnotationService,
+    protected ComponentService: ComponentService,
+    protected ConfigService: ConfigService,
     private DiscussionService: DiscussionService,
-    NodeService,
-    NotebookService,
-    NotificationService,
-    ProjectService,
-    StudentAssetService,
-    StudentDataService,
-    UtilService,
-    private $mdMedia: any
+    protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
+    private NotificationService: NotificationService,
+    protected StudentAssetService: StudentAssetService,
+    protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
+    protected UtilService: UtilService
   ) {
     super(
-      $filter,
-      $injector,
-      $mdDialog,
-      $q,
-      $rootScope,
-      $scope,
       AnnotationService,
-      AudioRecorderService,
+      ComponentService,
       ConfigService,
       NodeService,
       NotebookService,
-      NotificationService,
-      ProjectService,
       StudentAssetService,
       StudentDataService,
+      upgrade,
       UtilService
     );
-    this.studentResponse = '';
-    this.newResponse = '';
-    this.classResponses = [];
-    this.topLevelResponses = [];
-    this.responsesMap = {};
-    this.retrievedClassmateResponses = false;
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+
     if (this.ConfigService.isPreview()) {
       let componentStates = [];
       if (this.UtilService.hasConnectedComponent(this.componentContent)) {
@@ -124,7 +102,7 @@ class DiscussionController extends ComponentController {
         this.getClassmateResponses(retrieveWorkFromTheseComponents);
       } else {
         if (this.isClassmateResponsesGated()) {
-          const componentState = this.$scope.componentState;
+          const componentState = this.componentState;
           if (componentState != null) {
             if (
               this.DiscussionService.componentStateHasStudentWork(
@@ -141,11 +119,12 @@ class DiscussionController extends ComponentController {
       }
     }
     this.disableComponentIfNecessary();
-    this.initializeScopeGetComponentState();
-    this.subscribeToAttachStudentAsset();
     this.registerStudentWorkReceivedListener();
-    this.initializeWatchMdMedia();
     this.broadcastDoneRenderingComponent();
+  }
+
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 
   isConnectedComponentShowWorkMode() {
@@ -189,38 +168,16 @@ class DiscussionController extends ComponentController {
     });
   }
 
-  initializeScopeGetComponentState() {
-    this.$scope.getComponentState = () => {
-      const deferred = this.$q.defer();
-      if (this.$scope.discussionController.isDirty && this.$scope.discussionController.isSubmit) {
-        const action = 'submit';
-        this.$scope.discussionController.createComponentState(action).then((componentState) => {
-          this.$scope.discussionController.clearComponentValues();
-          this.$scope.discussionController.isDirty = false;
-          deferred.resolve(componentState);
-        });
-      } else {
-        deferred.resolve();
-      }
-      return deferred.promise;
-    };
-  }
-
-  registerStudentWorkSavedToServerListener() {
-    this.subscriptions.add(
-      this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
-        if (this.isWorkFromThisComponent(componentState)) {
-          if (this.isClassmateResponsesGated() && !this.retrievedClassmateResponses) {
-            this.getClassmateResponses();
-          } else {
-            this.addClassResponse(componentState);
-          }
-          this.disableComponentIfNecessary();
-          this.sendPostToStudentsInThread(componentState);
-        }
-        this.isSubmit = null;
-      })
-    );
+  handleStudentWorkSavedToServerAdditionalProcessing(componentState: any): void {
+    this.clearComponentValues();
+    if (this.isClassmateResponsesGated() && !this.retrievedClassmateResponses) {
+      this.getClassmateResponses();
+    } else {
+      this.addClassResponse(componentState);
+    }
+    this.disableComponentIfNecessary();
+    this.sendPostToStudentsInThread(componentState);
+    this.isSubmit = null;
   }
 
   sendPostToStudentsInThread(componentState) {
@@ -238,9 +195,7 @@ class DiscussionController extends ComponentController {
             return obj.name;
           })
           .join(', ');
-        const notificationMessage = this.$translate('discussion.repliedToADiscussionYouWereIn', {
-          usernames: usernames
-        });
+        const notificationMessage = $localize`${usernames} replied to a discussion you were in!`;
         const workgroupsNotifiedSoFar = [];
         if (this.responsesMap[componentStateIdReplyingTo] != null) {
           this.sendPostToThreadCreator(
@@ -378,17 +333,6 @@ class DiscussionController extends ComponentController {
     return false;
   }
 
-  initializeWatchMdMedia() {
-    this.$scope.$watch(
-      () => {
-        return this.$mdMedia('gt-sm');
-      },
-      (md) => {
-        this.$scope.mdScreen = md;
-      }
-    );
-  }
-
   getClassmateResponses(components = [{ nodeId: this.nodeId, componentId: this.componentId }]) {
     const runId = this.ConfigService.getRunId();
     const periodId = this.ConfigService.getPeriodId();
@@ -456,9 +400,13 @@ class DiscussionController extends ComponentController {
         this.isDirty = false;
       }
     }
-    const deferred = this.$q.defer();
-    this.createComponentStateAdditionalProcessing(deferred, componentState, action);
-    return deferred.promise;
+    return new Promise((resolve, reject) => {
+      this.createComponentStateAdditionalProcessing(
+        { resolve: resolve, reject: reject },
+        componentState,
+        action
+      );
+    });
   }
 
   clearComponentValues() {
@@ -533,6 +481,8 @@ class DiscussionController extends ComponentController {
       }
     }
   }
-}
 
-export default DiscussionController;
+  shouldCreateComponentState(request: ComponentStateRequest): boolean {
+    return this.isDirty && request.isSubmit;
+  }
+}
