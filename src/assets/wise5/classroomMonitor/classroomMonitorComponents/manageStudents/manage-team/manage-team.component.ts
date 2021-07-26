@@ -79,6 +79,9 @@ export class ManageTeamComponent {
         event.previousIndex,
         event.currentIndex
       );
+      this.ConfigService.retrieveConfig(
+        `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
+      );
     });
   }
 }
