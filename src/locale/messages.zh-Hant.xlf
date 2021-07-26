@@ -9343,6 +9343,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">87</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
@@ -10669,6 +10673,46 @@ Warning: This will delete all existing nodes and links in this component.</targe
           <context context-type="linenumber">21</context>
         </context-group>
         <target state="translated">學生</target>
+      </trans-unit>
+      <trans-unit id="589d24cbc7062742ed7fac343fb76c5207631490" datatype="html">
+        <source>Share with class...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <target state="needs-translation">Share with class...</target>
+      </trans-unit>
+      <trans-unit id="b87e7abf15926adeca15e38e887a4c21121c9587" datatype="html">
+        <source>Remove file</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <target state="needs-translation">Remove file</target>
+      </trans-unit>
+      <trans-unit id="c648889391b76acac6870869f928f33920241c76" datatype="html">
+        <source>Add picture</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <target state="needs-translation">Add picture</target>
+      </trans-unit>
+      <trans-unit id="cf52ff0f4f9dc792b81e652fc6f0c2e83d14d56b" datatype="html">
+        <source> Post </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
+          <context context-type="linenumber">75,76</context>
+        </context-group>
+        <target state="needs-translation"> Post </target>
+      </trans-unit>
+      <trans-unit id="3210146777760299474" datatype="html">
+        <source><x id="PH" equiv-text="usernames"/> replied to a discussion you were in!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.ts</context>
+          <context context-type="linenumber">198</context>
+        </context-group>
+        <target state="needs-translation"><x id="PH" equiv-text="usernames"/> replied to a discussion you were in!</target>
       </trans-unit>
       <trans-unit id="fa8877ba0986b7bb88ec902a4a0dab94371354c0" datatype="html">
         <source> Allow student to upload background image </source>
