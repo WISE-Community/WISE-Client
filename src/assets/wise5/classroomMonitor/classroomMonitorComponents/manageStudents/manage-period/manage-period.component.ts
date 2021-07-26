@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { ConfigService } from '../../../../services/configService';
 import { GetWorkgroupService } from '../../../../../../app/services/getWorkgroupService';
 
@@ -13,11 +14,13 @@ export class ManagePeriodComponent {
 
   students: Set<any> = new Set();
   subscriptions: Subscription = new Subscription();
+  emptyTeams: Map<number, any> = new Map();
   teams: Map<number, any> = new Map();
 
   constructor(
     private ConfigService: ConfigService,
-    private GetWorkgroupService: GetWorkgroupService
+    private GetWorkgroupService: GetWorkgroupService,
+    private WorkgroupService: WorkgroupService
   ) {}
 
   ngOnChanges() {
@@ -42,22 +45,8 @@ export class ManagePeriodComponent {
   }
 
   initTeams() {
-    this.teams.clear();
-    for (const workgroup of this.getWorkgroupsSortedById()) {
-      if (workgroup.periodId === this.period.periodId) {
-        workgroup.displayNames = this.ConfigService.getDisplayUsernamesByWorkgroupId(
-          workgroup.workgroupId
-        );
-        this.teams.set(workgroup.workgroupId, workgroup);
-      }
-    }
+    this.teams = this.WorkgroupService.getWorkgroupsInPeriod(this.period.periodId);
     this.initEmptyTeams();
-  }
-
-  private getWorkgroupsSortedById() {
-    return this.ConfigService.getClassmateUserInfos().sort((a, b) => {
-      return a.workgroupId - b.workgroupId;
-    });
   }
 
   private initEmptyTeams() {
@@ -67,7 +56,7 @@ export class ManagePeriodComponent {
           if (!this.teams.has(workgroup.id)) {
             workgroup.workgroupId = workgroup.id;
             workgroup.users = [];
-            this.teams.set(workgroup.id, workgroup);
+            this.emptyTeams.set(workgroup.id, workgroup);
           }
         }
       }

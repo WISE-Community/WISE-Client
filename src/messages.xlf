@@ -408,6 +408,10 @@
           <context context-type="linenumber">27</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
           <context context-type="linenumber">83</context>
         </context-group>
@@ -8085,6 +8089,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component.html</context>
           <context context-type="linenumber">33</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="3ee7b8fcc267b39c4ec8d3dd9cb8075134ae032c" datatype="html">
         <source>Period <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/></source>
@@ -8118,7 +8126,35 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source><x id="START_TAG_MANAGE_USER" ctype="x-manage_user" equiv-text="&lt;manage-user [user]=&quot;user&quot;&gt;"/><x id="CLOSE_TAG_MANAGE_USER" ctype="x-manage_user" equiv-text="&lt;/manage-user&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8e728195d4eb16b80063b74eecea8f498762d1ef" datatype="html">
+        <source>Move Student</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="599f5341af259f02b18c2669a41e0bc9e57faf84" datatype="html">
+        <source>Warning: removing a student from a team will result in the student losing all the work they completed with that team.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="03be49ff81ed4b15c1e93acab253dbb3efc2c6cf" datatype="html">
+        <source>If you are moving a student to a new team, they will adopt the work of the new team.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7d1dcf2a9146caac0581329acf94806ec69a89a5" datatype="html">
+        <source>Are you sure you want to continue?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f9c52903219e583ddefb23cd102d2057504ac980" datatype="html">
@@ -8167,14 +8203,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6933068701447776492" datatype="html">
         <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6c372513ec53879a9eeffbd96670484f6cc52269" datatype="html">
