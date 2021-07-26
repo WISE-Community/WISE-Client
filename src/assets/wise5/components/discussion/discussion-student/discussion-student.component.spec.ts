@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
@@ -40,7 +39,7 @@ let saveNotificationToServerSpy;
 describe('DiscussionStudent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserModule, HttpClientTestingModule, NoopAnimationsModule, UpgradeModule],
+      imports: [BrowserModule, HttpClientTestingModule, UpgradeModule],
       declarations: [DiscussionStudent],
       providers: [
         AnnotationService,
