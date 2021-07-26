@@ -29,7 +29,8 @@
             arrow_drop_up
           </md-icon>
         </md-button>
-        <md-button class="table--list__thead__link" flex="30"
+        <md-button ng-if="$ctrl.milestone.report.locations.length == 1"
+                   class="table--list__thead__link" flex="30"
                    layout="row" layout-align="center center" ng-click="$ctrl.setSort('status')"
                    aria-label="{{::'sortByCompletion' | translate}}">
           <span translate="status"></span>
@@ -53,8 +54,9 @@
         <md-button ng-if="$ctrl.milestone.report.locations.length > 1"
           class="table--list__thead__link" flex="10" layout="row"
           layout-align="center center" ng-click="$ctrl.setSort('initialScore')"
-          aria-label="{{::'sortByInital' | translate}}">
-          <span translate="initial"></span>
+          aria-label="{{::'sortByNodeScoreTooltip' | translate: { nodePosition: $ctrl.firstNodePosition } }}">
+          <md-tooltip md-direction="top">{{::'sortByNodeScoreTooltip' | translate: { nodePosition: $ctrl.firstNodePosition } }}</md-tooltip>
+          <span>{{$ctrl.firstNodePosition}}</span>
           <md-icon ng-if="$ctrl.sort === 'initialScore' || $ctrl.sort === '-initialScore'"
                     class="text-light table--list__thead__sort" md-theme="default"
                     ng-class="{'table--list__thead__sort--reverse': $ctrl.sort === '-initialScore'}">
@@ -64,8 +66,9 @@
         <md-button ng-if="$ctrl.milestone.report.locations.length > 1"
           class="table--list__thead__link" flex="10" layout="row"
           layout-align="center center" ng-click="$ctrl.setSort('score')"
-          aria-label="{{::'sortByRevised' | translate}}">
-          <span translate="revised"></span>
+          aria-label="{{::'sortByNodeScoreTooltip' | translate: { nodePosition: $ctrl.lastNodePosition } }}">
+          <md-tooltip md-direction="top">{{::'sortByNodeScoreTooltip' | translate: { nodePosition: $ctrl.lastNodePosition } }}</md-tooltip>
+          <span>{{$ctrl.lastNodePosition}}</span>
           <md-icon ng-if="$ctrl.sort === 'score' || $ctrl.sort === '-score'"
                     class="text-light table--list__thead__sort" md-theme="default"
                     ng-class="{'table--list__thead__sort--reverse': $ctrl.sort === '-score'}">
@@ -76,6 +79,7 @@
           class="table--list__thead__link" flex="10" layout="row"
           layout-align="center center" ng-click="$ctrl.setSort('changeInScore')"
           aria-label="{{::'sortByChangeInScore' | translate}}">
+          <md-tooltip md-direction="top">{{::'sortByChangeInScore' | translate }}</md-tooltip>
           <span translate="changeInScore"></span>
           <md-icon ng-if="$ctrl.sort === 'changeInScore' || $ctrl.sort === '-changeInScore'"
                     class="text-light table--list__thead__sort" md-theme="default"
@@ -88,7 +92,6 @@
     <milestone-workgroup-item ng-repeat="workgroup in $ctrl.workgroupsById | toArray | orderBy:$ctrl.getOrderBy()"
         ng-if="$ctrl.isWorkgroupShown(workgroup)"
         expand="$ctrl.workVisibilityById[workgroup.$key]"
-        max-score="$ctrl.maxScore"
         show-score="true"
         locations="$ctrl.milestone.report.locations"
         workgroup-id="::workgroup.workgroupId"

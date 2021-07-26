@@ -33,6 +33,7 @@ class NodeController {
     'Match',
     'MultipleChoice',
     'OpenResponse',
+    'Summary',
     'Table'
   ];
   dirtyComponentIds: any = [];

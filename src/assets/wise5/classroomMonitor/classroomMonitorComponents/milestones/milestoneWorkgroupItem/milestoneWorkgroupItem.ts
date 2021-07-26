@@ -4,28 +4,36 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import * as angular from 'angular';
 import { UtilService } from '../../../../services/utilService';
 import { WorkgroupItemController } from '../../nodeGrading/workgroupItem/workgroupItem';
+import { Subscription } from 'rxjs';
 
 class MilestoneWorkgroupItemController extends WorkgroupItemController {
   $translate: any;
   locations: any[];
   changeInScore: any;
-  componentId: string;
   components: any[] = [];
   disabled: any;
   expand: any;
+  firstComponent: any;
+  firstComponentId: string;
+  firstNodeId: string;
+  firstComponentMaxScore: number;
   hasAlert: boolean;
   hasNewAlert: boolean;
-  hiddenComponents: string[] = [];
   initialScore: any;
+  lastComponent: any;
+  lastComponentId: string;
+  lastNodeId: string;
+  lastComponentMaxScore: number;
   maxScore: number;
-  nodeId: string;
   onUpdateExpand: any;
   score: any;
   showScore: boolean;
   status: any;
   statusClass: any;
   statusText: string;
+  subscriptions: Subscription = new Subscription();
   workgroupId: number;
+
   static $inject = ['$filter', 'ProjectService', 'UtilService'];
 
   constructor(
@@ -39,22 +47,59 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
   $onInit() {
     this.statusText = '';
     this.update();
-    this.componentId = this.locations[this.locations.length - 1].componentId;
-    this.nodeId = this.locations[this.locations.length - 1].nodeId;
-    this.hiddenComponents = [];
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
+    this.initLastLocation();
+    if (this.locations.length > 1) {
+      this.initFirstLocation();
+    }
+    this.subscribeToEvents();
+  }
+
+  private initLastLocation() {
+    const lastLocation = this.locations[this.locations.length - 1];
+    this.lastNodeId = lastLocation.nodeId;
+    this.lastComponentId = lastLocation.componentId;
+    this.lastComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.lastNodeId,
+      this.lastComponentId
     );
-    this.components.push(component);
+    this.lastComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+      this.lastNodeId,
+      this.lastComponentId
+    );
+  }
+
+  private initFirstLocation() {
+    const firstLocation = this.locations[0];
+    this.firstComponentId = firstLocation.componentId;
+    this.firstNodeId = firstLocation.nodeId;
+    this.firstComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.firstNodeId,
+      this.firstComponentId
+    );
+    this.firstComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+      this.firstNodeId,
+      this.firstComponentId
+    );
+  }
+
+  subscribeToEvents() {
+    this.subscriptions.add(
+      this.ProjectService.projectSaved$.subscribe(() => {
+        this.lastComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+          this.lastNodeId,
+          this.lastComponentId
+        );
+        if (this.locations.length > 1) {
+          this.firstComponentMaxScore = this.ProjectService.getMaxScoreForComponent(
+            this.firstNodeId,
+            this.firstComponentId
+          );
+        }
+      })
+    );
   }
 
   $onChanges(changesObj) {
-    if (changesObj.maxScore) {
-      this.maxScore =
-        typeof changesObj.maxScore.currentValue === 'number' ? changesObj.maxScore.currentValue : 0;
-    }
-
     if (changesObj.workgroupData) {
       let workgroupData = angular.copy(changesObj.workgroupData.currentValue);
       this.hasAlert = workgroupData.hasAlert;
@@ -67,16 +112,19 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
           ? workgroupData.score - workgroupData.initialScore
           : '-';
     }
-
     this.update();
   }
 
-  isComponentVisible(componentId: string): boolean {
-    return !this.hiddenComponents.includes(componentId);
+  $onDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   getComponentTypeLabel(componentType) {
     return this.UtilService.getComponentTypeLabel(componentType);
+  }
+
+  getNodePosition(nodeId: string): string {
+    return this.ProjectService.getNodePositionById(nodeId);
   }
 
   update() {
@@ -121,12 +169,10 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
 const MilestoneWorkgroupItem = {
   bindings: {
     expand: '<',
-    maxScore: '<',
     locations: '<',
     showScore: '<',
     workgroupId: '<',
     workgroupData: '<',
-    hiddenComponents: '<',
     onUpdateExpand: '&'
   },
   controller: MilestoneWorkgroupItemController,

@@ -10992,12 +10992,28 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
           <context context-type="linenumber">515</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
+          <context context-type="linenumber">596</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
+          <context context-type="linenumber">706</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="2496818939481806999" datatype="html">
         <source>Incorrect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
           <context context-type="linenumber">517</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
+          <context context-type="linenumber">596</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
+          <context context-type="linenumber">710</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5ed696b8da9ac51f371a34f2a89a753b9e18e3c0" datatype="html">
@@ -11563,6 +11579,34 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">181</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3556872137858469937" datatype="html">
+        <source>You must submit work on &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the summary.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
+          <context context-type="linenumber">141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3834814461916183420" datatype="html">
+        <source>You must complete &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the summary.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1745852243024604075" datatype="html">
+        <source>You must submit work on &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the class summary.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
+          <context context-type="linenumber">149</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8412691431688558361" datatype="html">
+        <source>You must complete &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the class summary.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="b169576ab898458aa823e09c1e7f3397f8f011a0" datatype="html">
         <source>Columns</source>
         <context-group purpose="location">
@@ -11829,6 +11873,41 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.html</context>
           <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="866753876041645935" datatype="html">
+        <source>The student will see a graph of their individual data here.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
+          <context context-type="linenumber">187</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2142002953999044695" datatype="html">
+        <source>Class Responses</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
+          <context context-type="linenumber">732</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="489297649750722424" datatype="html">
+        <source>Class Scores</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
+          <context context-type="linenumber">734</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4270887249744454870" datatype="html">
+        <source><x id="PH" equiv-text="this.percentResponded"/>% Responded (<x id="PH_1" equiv-text="this.numResponses"/>/<x id="PH_2" equiv-text="this.totalWorkgroups"/>)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
+          <context context-type="linenumber">739</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8177873832400820695" datatype="html">
+        <source>Count</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
+          <context context-type="linenumber">856</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8560978883976627945" datatype="html">

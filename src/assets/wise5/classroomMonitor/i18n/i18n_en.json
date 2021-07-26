@@ -205,6 +205,7 @@
   "sortByChangeInScore": "Sort by change in score",
   "sortByCompletion": "Sort by completion",
   "sortByLocation": "Sort by location",
+  "sortByNodeScoreTooltip": "Sort by score on Step {{nodePosition}}",
   "sortByNumberOfNotes": "Sort by number of notes",
   "sortByReportStatus": "Sort by report status",
   "sortByRevised": "Sort by revised score",
