@@ -26,6 +26,7 @@ class NodeController {
     'Animation',
     'AudioOscillator',
     'ConceptMap',
+    'Discussion',
     'Draw',
     'Embedded',
     'Graph',
