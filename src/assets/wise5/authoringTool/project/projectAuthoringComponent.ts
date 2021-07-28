@@ -635,20 +635,13 @@ class ProjectAuthoringController {
   }
 
   refreshProject() {
-    /*
-     * Use a timeout before we refresh the project in order to allow the
-     * spinning progress indicator to show up before the browser starts
-     * blocking/freezing.
-     */
-    this.$timeout(() => {
-      this.ProjectService.parseProject();
-      this.items = this.ProjectService.idToOrder;
-      this.inactiveGroupNodes = this.ProjectService.getInactiveGroupNodes();
-      this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
-      this.inactiveNodes = this.ProjectService.getInactiveNodes();
-      this.idToNode = this.ProjectService.getIdToNode();
-      this.unselectAllItems();
-    });
+    this.ProjectService.parseProject();
+    this.items = this.ProjectService.idToOrder;
+    this.inactiveGroupNodes = this.ProjectService.getInactiveGroupNodes();
+    this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
+    this.inactiveNodes = this.ProjectService.getInactiveNodes();
+    this.idToNode = this.ProjectService.getIdToNode();
+    this.unselectAllItems();
   }
 
   importStep() {
