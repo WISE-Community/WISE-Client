@@ -8062,7 +8062,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4693296a32d61d8ff2306dc5915b3626ed7206c9" datatype="html">
@@ -8126,7 +8126,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source><x id="START_TAG_MANAGE_USER" ctype="x-manage_user" equiv-text="&lt;manage-user [user]=&quot;user&quot;&gt;"/><x id="CLOSE_TAG_MANAGE_USER" ctype="x-manage_user" equiv-text="&lt;/manage-user&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8e728195d4eb16b80063b74eecea8f498762d1ef" datatype="html">
@@ -8168,35 +8168,35 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cdfc3eab890fa0d259f52a903ff9233f6fbef716" datatype="html">
         <source>Period: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8696bee691864cb6fa43175d75ed7e91b1e980ae" datatype="html">
         <source>0 teams</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="183d5532753330e0aa0e6492f2595d24ec36b254" datatype="html">
         <source>1 team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6b8e9026aa61cc49d6342e833d13fee9f468c19c" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{period.numWorkgroupsInPeriod}}"/> teams</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1775311053456611668" datatype="html">

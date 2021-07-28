@@ -1,7 +1,10 @@
 <span fxLayout="row">
   <span class="name" i18n>Team {{team.workgroupId}}</span>
   <span fxFlex></span>
-  <a *ngIf="canChangePeriod" class="changePeriodLink" (click)="changePeriod()" i18n>Change Period</a>
+  <a *ngIf="canChangePeriod && team.users.length > 0"
+      class="changePeriodLink"
+      (click)="changePeriod()"
+      i18n>Change Period</a>
 </span>
 <ul cdkDropList
     [cdkDropListData]="team.users"

@@ -4,13 +4,15 @@
     <span class="md-subhead" i18n>Students: {{students.size}} | Teams: {{teams.size}}</span>
   </h2>
 </div>
-<ul class="teams" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px" cdkDropListGroup>
-  <li class="team" *ngFor="let team of teams.values()">
-    <manage-team [team]="team"></manage-team>
-  </li>
-</ul>
-<ul class="teams" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px" cdkDropListGroup>
-  <li class="team" *ngFor="let team of emptyTeams.values()">
-    <manage-team [team]="team"></manage-team>
-  </li>
-</ul>
+<div cdkDropListGroup>
+  <ul class="teams" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <li class="team" *ngFor="let team of teams.values()">
+      <manage-team [team]="team"></manage-team>
+    </li>
+  </ul>
+  <ul class="teams" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <li class="team" *ngFor="let team of emptyTeams.values()">
+      <manage-team [team]="team"></manage-team>
+    </li>
+  </ul>
+</div>

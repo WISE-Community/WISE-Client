@@ -50,6 +50,7 @@ export class ManagePeriodComponent {
   }
 
   private initEmptyTeams() {
+    this.emptyTeams.clear();
     this.GetWorkgroupService.getAllWorkgroupsInPeriod(this.period.periodId).subscribe(
       (workgroups: any[]) => {
         for (const workgroup of workgroups) {
