@@ -31,7 +31,7 @@ describe('ManageTeamComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ManageTeamComponent);
     component = fixture.componentInstance;
-    component.team = { workgroupId: 3 };
+    component.team = { workgroupId: 3, users: [{ id: 1 }] };
   });
   changePeriodLinkVisible();
 });
@@ -45,6 +45,12 @@ function changePeriodLinkVisible() {
     });
     it('should not appear when user does not have GradeStudentWork permission', () => {
       spyOnCanGradeStudentWork(false);
+      fixture.detectChanges();
+      expect(getChangePeriodLink()).toBeFalsy();
+    });
+    it('should not appear when there are no members', () => {
+      component.team.users = [];
+      spyOnCanGradeStudentWork(true);
       fixture.detectChanges();
       expect(getChangePeriodLink()).toBeFalsy();
     });

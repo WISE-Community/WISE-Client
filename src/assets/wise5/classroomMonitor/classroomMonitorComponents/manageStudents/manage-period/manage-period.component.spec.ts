@@ -4,30 +4,32 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
 import { of } from 'rxjs';
 import { GetWorkgroupService } from '../../../../../../app/services/getWorkgroupService';
+import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { ConfigService } from '../../../../services/configService';
 import { ManagePeriodComponent } from './manage-period.component';
+import classmateUserInfos from '../../../../../../app/services/sampleData/sample_classmateUserInfos.json';
 
 let fixture: ComponentFixture<ManagePeriodComponent>;
 let component: ManagePeriodComponent;
 let configService: ConfigService;
-const classmateUserInfos = [
-  {
-    workgroupId: 7,
-    periodId: 1,
-    users: [{ username: 'student0103' }, { username: 'student0104' }]
-  },
-  { workgroupId: 6, periodId: 2, users: [{ username: 'student0102' }] },
-  { workgroupId: 5, periodId: 1, users: [{ username: 'student0101' }] }
-];
+let workgroupService: WorkgroupService;
+const workgroupsInPeriod = new Map<number, any>();
+workgroupsInPeriod.set(5, { workgroupId: 5, periodId: 1, users: [{ username: 'student0101' }] });
+workgroupsInPeriod.set(7, {
+  workgroupId: 7,
+  periodId: 1,
+  users: [{ username: 'student0103' }, { username: 'student0104' }]
+});
 
 describe('ManagePeriod', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [ManagePeriodComponent],
-      providers: [ConfigService, GetWorkgroupService, UpgradeModule]
+      providers: [ConfigService, GetWorkgroupService, UpgradeModule, WorkgroupService]
     });
     configService = TestBed.inject(ConfigService);
+    workgroupService = TestBed.inject(WorkgroupService);
   });
   beforeEach(() => {
     fixture = TestBed.createComponent(ManagePeriodComponent);
@@ -45,8 +47,7 @@ describe('ManagePeriod', () => {
 function initTeams() {
   describe('initTeams', () => {
     it('should initialize teams that are in this period including empty teams', () => {
-      spyOn(configService, 'getClassmateUserInfos').and.returnValue(classmateUserInfos);
-      spyOn(configService, 'getDisplayUsernamesByWorkgroupId').and.returnValue('student one');
+      spyOn(workgroupService, 'getWorkgroupsInPeriod').and.returnValue(workgroupsInPeriod);
       const allWorkgroupsInPeriodSpy = spyOn(
         TestBed.inject(GetWorkgroupService),
         'getAllWorkgroupsInPeriod'
@@ -54,11 +55,13 @@ function initTeams() {
         return of([{ id: 5 }, { id: 7 }, { id: 8 }]);
       });
       component.initTeams();
-      expect(component.teams.size).toEqual(3);
+      expect(component.teams.size).toEqual(2);
       const teamsArray = Array.from(component.teams.values());
       expect(teamsArray[0].workgroupId).toEqual(5);
       expect(teamsArray[1].workgroupId).toEqual(7);
-      expect(teamsArray[2].workgroupId).toEqual(8);
+      expect(component.emptyTeams.size).toEqual(1);
+      const emptyTeamsArray = Array.from(component.emptyTeams.values());
+      expect(emptyTeamsArray[0].workgroupId).toEqual(8);
       expect(allWorkgroupsInPeriodSpy).toHaveBeenCalled();
     });
   });

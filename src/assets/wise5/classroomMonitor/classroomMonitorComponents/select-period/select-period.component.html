@@ -2,9 +2,7 @@
   <mat-select [(value)]="selectedPeriodId"
     (selectionChange)="currentPeriodChanged()">
     <mat-select-trigger>{{selectedPeriodText}}</mat-select-trigger>
-    <mat-option *ngFor="let period of periods"
-        [value]="period.periodId"
-        [disabled]="!period.numWorkgroupsInPeriod">
+    <mat-option *ngFor="let period of periods" [value]="period.periodId">
       <span *ngIf="period.periodId === -1" i18n>All Periods</span>
       <span *ngIf="period.periodId != -1" i18n>Period: {{period.periodName}}</span>
       <span class="text-secondary">

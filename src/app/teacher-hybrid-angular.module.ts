@@ -19,6 +19,7 @@ import { ClassroomMonitorModule } from './teacher/classroom-monitor.module';
 import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
 import { UpdateWorkgroupService } from './services/updateWorkgroupService';
 import { GetWorkgroupService } from './services/getWorkgroupService';
+import { WorkgroupService } from './services/workgroup.service';
 
 @NgModule({
   declarations: [StepToolsComponent],
@@ -36,7 +37,8 @@ import { GetWorkgroupService } from './services/getWorkgroupService';
     TeacherDataService,
     TeacherProjectService,
     TeacherWebSocketService,
-    UpdateWorkgroupService
+    UpdateWorkgroupService,
+    WorkgroupService
   ]
 })
 export class TeacherAngularJSModule {
