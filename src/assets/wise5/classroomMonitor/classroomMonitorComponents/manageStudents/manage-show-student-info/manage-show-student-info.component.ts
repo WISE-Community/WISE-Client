@@ -14,10 +14,14 @@ export class ManageShowStudentInfo {
   constructor(
     protected dialog: MatDialog,
     private ConfigService: ConfigService,
+    private http: HttpClient,
     @Inject(MAT_DIALOG_DATA) public user: any
   ) {}
 
   ngOnInit() {
     this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
+    this.http.get(`/api/user/info/${this.user.id}`).subscribe((userInfo) => {
+      Object.assign(this.user, userInfo);
+    });
   }
 }

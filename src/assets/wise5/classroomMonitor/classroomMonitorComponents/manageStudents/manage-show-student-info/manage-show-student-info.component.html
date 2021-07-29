@@ -1,31 +1,31 @@
-<h1 class="mat-dialog-title" i18n>
-    <span>Student Information</span>
-    <span class="md-subhead"> {{user.name}}</span>
+<h1 class="mat-dialog-title">
+  <span i18n>Student Information</span>
+  <span class="md-subhead" *ngIf="canViewStudentNames">({{user.name}})</span>
 </h1>
 <div mat-dialog-content class="info-block">
-    <table style="width: 100%">
-        <tr>
-            <td>Student ID:</td>
-            <td>{{user.id}}</td>
-        </tr>
-        <tr *ngIf="canViewStudentNames">
-            <td>Username:</td>
-            <td>{{user.username}}</td>
-        </tr>
-        <tr>
-            <td>Recently logged in:</td>
-        </tr>
-        <tr>
-            <td>Registered date:</td>
-        </tr>
-        <tr>
-            <td>Logins:</td>
-        </tr>
-
-    </table>
-        
-        <span *ngIf="canViewStudentNames" class="studentNames"></span>
-    </div>
+  <table style="width: 100%">
+    <tr>
+      <td class="key" i18n>Student ID</td>
+      <td>{{user.id}}</td>
+    </tr>
+    <tr *ngIf="canViewStudentNames">
+      <td class="key" i18n>Username</td>
+      <td>{{user.username}}</td>
+    </tr>
+    <tr>
+      <td class="key" i18n>Most Recent Login</td>
+      <td>{{ user.lastLoginTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}</td>
+    </tr>
+    <tr>
+      <td class="key" i18n>Registration Date</td>
+      <td>{{ user.signUpTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}</td>
+    </tr>
+    <tr>
+      <td class="key" i18n>Number of Logins</td>
+      <td>{{user.numberOfLogins}}</td>
+    </tr>
+  </table>
+</div>
 <div mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
-    <button mat-button mat-dialog-close i18n>Cancel</button>
+  <button mat-button mat-dialog-close i18n>Cancel</button>
 </div>
