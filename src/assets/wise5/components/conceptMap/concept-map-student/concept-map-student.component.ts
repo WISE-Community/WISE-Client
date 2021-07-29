@@ -33,6 +33,7 @@ export class ConceptMapStudent extends ComponentStudent {
   availableLinks: any[] = [];
   background: any;
   backgroundSize: string;
+  backgroundUrl: string = '';
   componentStateId: number;
   componentTypesCanImportAsBackground: string[] = ['Draw', 'Embedded', 'Graph', 'Label', 'Table'];
   conceptMapContainerId: string;
@@ -1494,7 +1495,7 @@ export class ConceptMapStudent extends ComponentStudent {
       }
     }
     if (this.isBackgroundAvailable(this.componentContent)) {
-      const conceptMapData = componentStateToMergeInto.studentData.conceptMapdata;
+      const conceptMapData = componentStateToMergeInto.studentData.conceptMapData;
       conceptMapData.backgroundPath = this.componentContent.background;
       conceptMapData.stretchBackground = this.componentContent.stretchBackground;
     }
@@ -1555,8 +1556,21 @@ export class ConceptMapStudent extends ComponentStudent {
 
   setBackground(backgroundPath: string, stretchBackground: boolean): void {
     this.background = backgroundPath;
+    this.setBackgroundUrl(backgroundPath);
     this.stretchBackground = stretchBackground;
-    if (stretchBackground) {
+    this.setBackgroundSize(stretchBackground);
+  }
+
+  setBackgroundUrl(backgroundPath: string): void {
+    if (backgroundPath == null || backgroundPath === '') {
+      this.backgroundUrl = '';
+    } else {
+      this.backgroundUrl = `url("${backgroundPath}")`;
+    }
+  }
+
+  setBackgroundSize(isStretchBackground: boolean): void {
+    if (isStretchBackground) {
       this.backgroundSize = '100% 100%';
     } else {
       this.backgroundSize = '';
