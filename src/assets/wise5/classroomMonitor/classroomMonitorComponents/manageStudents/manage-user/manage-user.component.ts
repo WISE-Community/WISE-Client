@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
+import { ManageShowStudentInfo } from '../manage-show-student-info/manage-show-student-info.component';
 
 @Component({
   selector: 'manage-user',
@@ -10,9 +12,16 @@ export class ManageUserComponent {
 
   canViewStudentNames: boolean;
 
-  constructor(private ConfigService: ConfigService) {}
+  constructor(private dialog: MatDialog, private ConfigService: ConfigService) {}
 
   ngOnInit() {
     this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
+  }
+
+  viewUserInfo() {
+    this.dialog.open(ManageShowStudentInfo, {
+      data: this.user,
+      panelClass: 'mat-dialog--md'
+    });
   }
 }

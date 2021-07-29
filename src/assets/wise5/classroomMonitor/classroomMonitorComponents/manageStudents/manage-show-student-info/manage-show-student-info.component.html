@@ -1,0 +1,31 @@
+<h1 class="mat-dialog-title" i18n>
+    <span>Student Information</span>
+    <span class="md-subhead"> {{user.name}}</span>
+</h1>
+<div mat-dialog-content class="info-block">
+    <table style="width: 100%">
+        <tr>
+            <td>Student ID:</td>
+            <td>{{user.id}}</td>
+        </tr>
+        <tr *ngIf="canViewStudentNames">
+            <td>Username:</td>
+            <td>{{user.username}}</td>
+        </tr>
+        <tr>
+            <td>Recently logged in:</td>
+        </tr>
+        <tr>
+            <td>Registered date:</td>
+        </tr>
+        <tr>
+            <td>Logins:</td>
+        </tr>
+
+    </table>
+        
+        <span *ngIf="canViewStudentNames" class="studentNames"></span>
+    </div>
+<div mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
+    <button mat-button mat-dialog-close i18n>Cancel</button>
+</div>
