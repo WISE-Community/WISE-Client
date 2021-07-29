@@ -2,17 +2,36 @@
 <p translate="simulation.description"></p>
 <hr>
 <h6 translate="simulation.chooseSimulationItem"></h6>
+<md-input-container>
+  <label>Subjects</label>
+  <md-select ng-model="$ctrl.selectedSubjects" ng-change="$ctrl.filter()" multiple>
+    <md-option ng-value="subject" ng-repeat="subject in $ctrl.subjects">{{subject}}</md-option>
+  </md-select>
+</md-input-container>
+<md-input-container>
+  <label>Search</label>
+  <input ng-model="$ctrl.searchText" ng-change="$ctrl.filter()"></input>
+</md-input-container>
+<button mat-button
+          ng-click="$ctrl.clearFilters()"
+          ng-if="$ctrl.searchText || $ctrl.selectedSubjects.length"
+          class="clear-button"
+          aria-label="Clear All">
+   <md-icon>clear</md-icon>
+   <md-tooltip md-direction="top">Clear All</md-tooltip>
+</button>
+<span>{{$ctrl.getNumItemsFound()}} item(s) found</span>
 <md-radio-group ng-model="$ctrl.selectedNodeId">
-  <div ng-repeat="item in $ctrl.projectItems"
-       ng-class="::{'groupHeader': item.node.type == 'group', 'stepHeader': item.node.type != 'group'}">
-    <div ng-if="item.order != 0 && item.node.type == 'group'">
-      {{item.node.title}}:
+  <div ng-repeat="node in $ctrl.filteredNodes"
+       ng-class="::{'groupHeader': node.type == 'group', 'stepHeader': node.type != 'group'}">
+    <div ng-if="node.type == 'group'">
+      {{node.title}}:
     </div>
-    <div layout="row" layout-align="start center" ng-if="item.order != 0 && item.node.type != 'group'">
-      <md-radio-button ng-value="item.node" style="margin-bottom: 0;">
-        <span class="bold">{{item.node.title}}</span>
+    <div layout="row" layout-align="start center" ng-if="node.type != 'group'">
+      <md-radio-button ng-value="node" style="margin-bottom: 0;">
+        <span class="bold">{{node.title}}</span>
       </md-radio-button>
-      <md-button class="regularButton md-raised md-primary" ng-click="$ctrl.previewNode(item.node)"
+      <md-button class="regularButton md-raised md-primary" ng-click="$ctrl.previewNode(node)"
                  aria-label="{{ ::'previewStep' | translate }}">
         <md-icon>visibility</md-icon>
         <md-tooltip md-direction="top" class="projectButtonTooltip">
