@@ -1,6 +1,6 @@
 <h1 class="mat-dialog-title">
-  <span i18n>Student Information</span>
-  <span class="md-subhead" *ngIf="canViewStudentNames">({{user.name}})</span>
+  <span class="md-subhead" *ngIf="canViewStudentNames">{{user.name}}</span>
+  <span class="md-subhead" *ngIf="!canViewStudentNames" i18n>Student {{user.id}}</span>
 </h1>
 <div mat-dialog-content class="info-block">
   <table style="width: 100%">
@@ -27,5 +27,5 @@
   </table>
 </div>
 <div mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
-  <button mat-button mat-dialog-close i18n>Cancel</button>
+  <button mat-button mat-dialog-close i18n>Close</button>
 </div>
