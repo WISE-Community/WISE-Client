@@ -29,6 +29,7 @@ class NodeController {
     'Discussion',
     'Draw',
     'Embedded',
+    'Graph',
     'Label',
     'Match',
     'MultipleChoice',
