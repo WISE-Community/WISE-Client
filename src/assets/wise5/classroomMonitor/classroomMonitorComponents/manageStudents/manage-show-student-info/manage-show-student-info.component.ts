@@ -5,10 +5,9 @@ import { ConfigService } from '../../../../services/configService';
 
 @Component({
   selector: 'manage-show-student-info',
-  templateUrl: './manage-show-student-info.component.html',
-  styleUrls: ['./manage-show-student-info.component.scss']
+  templateUrl: './manage-show-student-info.component.html'
 })
-export class ManageShowStudentInfo {
+export class ManageShowStudentInfoComponent {
   canViewStudentNames: boolean;
 
   constructor(

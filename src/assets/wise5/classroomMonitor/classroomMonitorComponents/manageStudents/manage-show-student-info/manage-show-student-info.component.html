@@ -1,31 +1,33 @@
 <h1 class="mat-dialog-title">
-  <span class="md-subhead" *ngIf="canViewStudentNames">{{user.name}}</span>
-  <span class="md-subhead" *ngIf="!canViewStudentNames" i18n>Student {{user.id}}</span>
+  <span class="username" *ngIf="canViewStudentNames">{{user.name}}</span>
+  <span *ngIf="!canViewStudentNames" i18n>Student {{user.id}}</span>
 </h1>
-<div mat-dialog-content class="info-block">
-  <table style="width: 100%">
-    <tr>
-      <td class="key" i18n>Student ID</td>
-      <td>{{user.id}}</td>
-    </tr>
-    <tr *ngIf="canViewStudentNames">
-      <td class="key" i18n>Username</td>
-      <td>{{user.username}}</td>
-    </tr>
-    <tr>
-      <td class="key" i18n>Most Recent Login</td>
-      <td>{{ user.lastLoginTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}</td>
-    </tr>
-    <tr>
-      <td class="key" i18n>Registration Date</td>
-      <td>{{ user.signUpTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}</td>
-    </tr>
-    <tr>
-      <td class="key" i18n>Number of Logins</td>
-      <td>{{user.numberOfLogins}}</td>
-    </tr>
-  </table>
-</div>
-<div mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="8px">
+<div mat-dialog-content>
+  <div class="info-block">
+    <table style="width: 100%">
+      <tr>
+        <strong i18n>Student ID</strong>
+        <td>{{user.id}}</td>
+      </tr>
+      <tr class="username" *ngIf="canViewStudentNames">
+        <strong>Username</strong>
+        <td>{{user.username}}</td>
+      </tr>
+      <tr>
+        <strong i18n>Most Recent Login</strong>
+        <td>{{ user.lastLoginTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}</td>
+      </tr>
+      <tr>
+        <strong i18n>Registration Date</strong>
+        <td>{{ user.signUpTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}</td>
+      </tr>
+      <tr>
+        <strong i18n>Number of Logins</strong>
+        <td>{{user.numberOfLogins}}</td>
+      </tr>
+    </table>
+    </div>
+  </div>
+<div mat-dialog-actions fxLayoutAlign="end">
   <button mat-button mat-dialog-close i18n>Close</button>
 </div>
