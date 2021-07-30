@@ -30,6 +30,7 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
 import { ComponentGradingModule } from './component-grading.module';
 import { MilestoneReportDataComponent } from './milestone/milestone-report-data/milestone-report-data.component';
 import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component';
+import { ManageShowStudentInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMon
     EditComponentScoreComponent,
     GradingEditComponentMaxScoreComponent,
     ManagePeriodComponent,
+    ManageShowStudentInfoComponent,
     ManageStudentsComponent,
     ManageStudentsLegacyComponent,
     ManageTeamComponent,
