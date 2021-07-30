@@ -1,10 +1,15 @@
-.team {
-  border: 2px solid black;
-  padding: 4px;
-  margin: 4px;
-  list-style-type: none;
+@import '~style/abstracts/variables';
+
+h2, .mat-display-1 {
+  margin-bottom: 12px;
 }
 
-.teams {
-  padding-left: 0px;
+h3 {
+  padding: 0 8px;
+  margin-bottom: 8px;
+}
+
+.period-info {
+  font-family: $heading-font-family;
+  line-height: 1.85;
 }

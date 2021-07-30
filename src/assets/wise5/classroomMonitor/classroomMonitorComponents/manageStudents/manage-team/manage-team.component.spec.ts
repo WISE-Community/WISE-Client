@@ -8,6 +8,7 @@ import { ManageTeamComponent } from './manage-team.component';
 
 class ConfigServiceStub {
   getPermissions() {}
+  getAvatarColorForWorkgroupId() {}
 }
 
 class UpdateWorkgroupServiceStub {}
@@ -66,5 +67,5 @@ function spyOnCanGradeStudentWork(canGrade: boolean) {
 }
 
 function getChangePeriodLink() {
-  return fixture.debugElement.query(By.css('.changePeriodLink'));
+  return fixture.debugElement.query(By.css('.change-period'));
 }

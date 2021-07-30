@@ -1,25 +1,31 @@
-<span fxLayout="row">
-  <span class="name" i18n>Team {{team.workgroupId}}</span>
-  <span fxFlex></span>
-  <a *ngIf="canChangePeriod && team.users.length > 0"
-      class="changePeriodLink"
-      (click)="changePeriod()"
-      i18n>Change Period</a>
-</span>
-<ul cdkDropList
-    [cdkDropListData]="team.users"
-    [cdkDropListEnterPredicate]="canDrop"
-    (cdkDropListDropped)="drop($event)"
-    class="users"
-    fxLayout="column"
-    fxLayoutGap="8px">
-  <li cdkDrag
-      [cdkDragData]="team.workgroupId"
-      (cdkDragEntered)="dragEnter($event)"
-      (cdkDragExited)="dragExit($event)"
-      class="user"
-      *ngFor="let user of team.users"
-      i18n>
-    <manage-user [user]="user"></manage-user>
-  </li>
-</ul>
+<mat-card class="team notice-bg-bg" [class]="{'disabled-text': team.users.length === 0}">
+  <div class="mat-card-title" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <mat-icon class="mat-24 secondary-text"
+        [ngStyle]="{'color': team.users.length ? avatarColor : ''}">account_circle</mat-icon>
+    <h4 class="mat-body-2" i18n>Team {{team.workgroupId}}</h4>
+    <span fxFlex></span>
+    <span class="mat-small">
+      <a *ngIf="canChangePeriod" class="change-period" href="#" (click)="changePeriod($event)" i18n>Change Period</a>
+      <span *ngIf="this.team.users.length === 0">No students</span>
+    </span>
+  </div>
+  <mat-card-content>
+    <ul id="team-{{team.workgroupId}}"
+        cdkDropList
+        [cdkDropListConnectedTo]="connectedTeams"
+        [cdkDropListData]="team.users"
+        [cdkDropListEnterPredicate]="canDrop"
+        (cdkDropListDropped)="drop($event)"
+        class="users">
+      <ng-container *ngFor="let user of team.users">
+        <li cdkDrag
+            [cdkDragData]="team.workgroupId"
+            (cdkDragEntered)="dragEnter($event)"
+            (cdkDragExited)="dragExit($event)"
+            [cdkDragPreviewContainer]="'parent'">
+          <manage-user class="user control-bg-bg mat-elevation-z1" [user]="user"></manage-user>
+        </li>
+      </ng-container>
+    </ul>
+  </mat-card-content>
+</mat-card>

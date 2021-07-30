@@ -8,6 +8,7 @@ import { ManagePeriodComponent } from '../../assets/wise5/classroomMonitor/class
 import { ManageStudentsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students/manage-students.component';
 import { ManageStudentsLegacyComponent } from '../../assets/wise5/classroomMonitor/manageStudents/manage-students-legacy.component';
 import { ManageTeamComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component';
+import { ManageTeamsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-teams/manage-teams.component';
 import { ManageUserComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component';
 import { MoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { WorkgroupInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component';
@@ -46,6 +47,7 @@ import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMon
     ManageStudentsComponent,
     ManageStudentsLegacyComponent,
     ManageTeamComponent,
+    ManageTeamsComponent,
     ManageUserComponent,
     MilestonesComponent,
     MilestoneReportDataComponent,

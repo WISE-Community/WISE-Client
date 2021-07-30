@@ -1,2 +1,2 @@
-<span class="username" *ngIf="canViewStudentNames">{{user.name}} ({{user.username}})</span>
-<span class="username" *ngIf="!canViewStudentNames" i18n>Student {{user.id}}</span>
+<span class="username" *ngIf="canViewStudentNames"><strong>{{user.name}}</strong> ({{user.username}})</span>
+<span class="username" *ngIf="!canViewStudentNames"><strong i8n>Student {{user.id}}</strong></span>
