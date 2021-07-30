@@ -10,4 +10,12 @@
       </mat-select>
     </mat-form-field>
   </div>
+  <div *ngIf="parameter.type === 'input'">
+    <mat-form-field>
+      <mat-label>{{parameter.name}}</mat-label>
+      <input matInput
+          [(ngModel)]="parameterValues[parameter.key]"
+          (ngModelChange)="inputChanged.next($event)"/>
+    </mat-form-field>
+  </div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 class UrlParameter {
   name: string;
@@ -23,10 +25,32 @@ export class AuthorUrlParametersComponent implements OnInit {
   @Output()
   generatedUrl: EventEmitter<string> = new EventEmitter();
 
-  urlWithoutParameters: string;
+  inputChanged: Subject<any> = new Subject<any>();
+  inputChangedSubscription: Subscription;
   parameterValues: any = {};
+  urlWithoutParameters: string;
 
   ngOnInit(): void {
+    this.initializeInputChangedSubscription();
+    this.initializeDefaultParameterValues();
+    this.initializeParameterValuesFromUrl();
+  }
+
+  initializeInputChangedSubscription(): void {
+    this.inputChangedSubscription = this.inputChanged
+      .pipe(debounceTime(1000), distinctUntilChanged())
+      .subscribe(() => {
+        this.generateUrlParameters();
+      });
+  }
+
+  initializeDefaultParameterValues(): void {
+    for (const parameter of this.parameters) {
+      this.parameterValues[parameter.key] = '';
+    }
+  }
+
+  initializeParameterValuesFromUrl(): void {
     this.urlWithoutParameters = this.url.split('?')[0];
     const parametersString = this.url.split('?')[1];
     const parametersKeyValueStrings = parametersString.split('&');
@@ -34,17 +58,23 @@ export class AuthorUrlParametersComponent implements OnInit {
       const keyValue = parameterKeyValueString.split('=');
       const key = keyValue[0];
       const value = keyValue[1];
-      this.parameterValues[key] = value;
+      this.parameterValues[key] = value ?? '';
     }
   }
 
-  generateUrlParameters() {
+  ngOnDestroy(): void {
+    this.inputChangedSubscription.unsubscribe();
+  }
+
+  generateUrlParameters(): void {
     let urlParameters = '';
     for (const parameterKey in this.parameterValues) {
-      if (urlParameters != '') {
-        urlParameters += '&';
+      if (this.parameterValues[parameterKey] !== '') {
+        if (urlParameters != '') {
+          urlParameters += '&';
+        }
+        urlParameters += `${parameterKey}=${this.parameterValues[parameterKey]}`;
       }
-      urlParameters += `${parameterKey}=${this.parameterValues[parameterKey]}`;
     }
     if (urlParameters === '') {
       this.generatedUrl.emit(`${this.urlWithoutParameters}`);
