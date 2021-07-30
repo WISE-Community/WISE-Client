@@ -1,2 +1,6 @@
-<span class="username" *ngIf="canViewStudentNames"><strong>{{user.name}}</strong> ({{user.username}})</span>
-<span class="username" *ngIf="!canViewStudentNames"><strong i8n>Student {{user.id}}</strong></span>
+<div fxLayout="row" fxLayoutGap="4px">
+  <span class="username" *ngIf="canViewStudentNames"><strong>{{user.name}}</strong> ({{user.username}})</span>
+  <span class="username" *ngIf="!canViewStudentNames" i18n><strong i8n>Student {{user.id}}</strong></span>
+  <span fxFlex></span>
+  <a class="userInfoLink" href="#" (click)="viewUserInfo($event)" i18n>Info</a>
+</div>

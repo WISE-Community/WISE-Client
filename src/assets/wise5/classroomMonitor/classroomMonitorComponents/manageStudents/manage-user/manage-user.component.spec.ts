@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
 import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../../services/configService';
@@ -16,7 +17,10 @@ describe('ManageUserComponent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [ManageUserComponent],
-      providers: [{ provide: ConfigService, useClass: ConfigServiceStub }]
+      providers: [
+        { provide: ConfigService, useClass: ConfigServiceStub },
+        { provide: MatDialog, useValue: {} }
+      ]
     });
     configService = TestBed.inject(ConfigService);
   });
