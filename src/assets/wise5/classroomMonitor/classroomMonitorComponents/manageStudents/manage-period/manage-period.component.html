@@ -1,11 +1,17 @@
 <mat-card class="period" cdkDropListGroup>
-  <h2 class="mat-display-1 accent-1"
-      fxLayout="row wrap"
-      fxLayoutAlign="start end"
-      fxLayoutGap="8px">
-    <span i18n>Period {{period.periodName}}</span>
-    <span class="mat-body-1 period-info" i18n>Students: {{students.size}} | Teams: {{teams.size}}</span>
-  </h2>
+  <div class="period-header" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <h2 class="mat-display-1 accent-1"
+        fxLayout="row wrap"
+        fxLayoutAlign="start end"
+        fxLayoutGap="8px">
+      <span i18n>Period {{period.periodName}}</span>
+      <span class="mat-body-1 period-info" i18n>
+        Students: {{students.size}} | Teams: {{teams.size}}
+      </span>
+    </h2>
+    <span fxFlex></span>
+    <span class="info mat-small">Tip: Drag student to change teams</span>
+  </div>
   <manage-teams [teams]="teams"></manage-teams>
   <ng-container *ngIf="emptyTeams.size > 0">
     <h3 class="mat-body-2 secondary-text">Inactive Teams</h3>

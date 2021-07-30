@@ -8117,14 +8117,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Period <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-period/manage-period.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6a2db88ef87383c0408204b7e000a4b550bde2eb" datatype="html">
-        <source>Students: <x id="INTERPOLATION" equiv-text="{{students.size}}"/> | Teams: <x id="INTERPOLATION_1" equiv-text="{{teams.size}}"/></source>
+      <trans-unit id="fb9afd2d75a06297a21925ee9cb13cf36939fee9" datatype="html">
+        <source> Students: <x id="INTERPOLATION" equiv-text="{{students.size}}"/> | Teams: <x id="INTERPOLATION_1" equiv-text="{{teams.size}}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-period/manage-period.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">8,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="75f9b43ad69228e55dc9547a3e1f5da0ae73c3b3" datatype="html">
@@ -8155,11 +8155,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="10810fc850c7a9726902c0344fd954b2d0a448c8" datatype="html">
+      <trans-unit id="18a18981a0b4618a8888d020351aa6629d9f9fd3" datatype="html">
         <source> Managing students in all periods is not currently supported. Please choose a specific period. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students/manage-students.component.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="linenumber">5,6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="22cfba8fc2f79bbd7abb937ad8f2cf922d6c7937" datatype="html">
