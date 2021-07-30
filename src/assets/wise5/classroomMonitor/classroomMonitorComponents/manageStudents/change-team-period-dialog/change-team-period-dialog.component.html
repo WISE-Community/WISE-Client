@@ -2,14 +2,15 @@
 <div mat-dialog-content class="mat-dialog-content mat-dialog-content--scroll">
   <p class="mat-body-1">
     <span i18n>Select a new period for Team {{team.workgroupId}}</span>
-    <span *ngIf="canViewStudentNames" class="studentNames">
-       - {{team.username.replace(":", ", ")}}
+    <span *ngIf="canViewStudentNames" class="student-names">
+       - {{team.username.replace(":", ", ")}}:
     </span>
-    <span *ngIf="!canViewStudentNames" class="studentNames">
+    <span *ngIf="!canViewStudentNames" class="student-names">
       <span *ngFor="let user of team.users; last as isLast; first as isFirst">
         <span *ngIf="isFirst"> - </span>
         <span i18n>Student {{user.id}}</span>
         <span *ngIf="!isLast">, </span>
+        <span *ngIf="isLast">:</span>
       </span>
     </span>
   </p>

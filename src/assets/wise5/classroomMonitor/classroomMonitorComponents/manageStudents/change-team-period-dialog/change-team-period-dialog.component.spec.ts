@@ -92,5 +92,5 @@ function showStudentNames() {
 }
 
 function getStudentNames() {
-  return fixture.debugElement.query(By.css('.studentNames')).nativeElement.textContent;
+  return fixture.debugElement.query(By.css('.student-names')).nativeElement.textContent;
 }

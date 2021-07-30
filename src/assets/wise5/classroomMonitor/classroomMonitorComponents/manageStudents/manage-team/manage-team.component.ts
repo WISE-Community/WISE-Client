@@ -12,6 +12,7 @@ import {
   transferArrayItem
 } from '@angular/cdk/drag-drop';
 import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'manage-team',
@@ -28,13 +29,14 @@ export class ManageTeamComponent {
   constructor(
     private dialog: MatDialog,
     private ConfigService: ConfigService,
-    private UpdateWorkgroupService: UpdateWorkgroupService
+    private UpdateWorkgroupService: UpdateWorkgroupService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
     this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.team.workgroupId);
-    this.canChangePeriod = this.ConfigService.getPermissions().canGradeStudentWork
-        && this.team.users.length > 0;
+    this.canChangePeriod =
+      this.ConfigService.getPermissions().canGradeStudentWork && this.team.users.length > 0;
   }
 
   changePeriod(event: Event) {
@@ -96,6 +98,7 @@ export class ManageTeamComponent {
       this.ConfigService.retrieveConfig(
         `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
       );
+      this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
     });
   }
 }
