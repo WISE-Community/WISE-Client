@@ -3,11 +3,11 @@
       flex>
     <class-response *ngFor="let componentState of topLevelResponses.all"
         [response]="componentState"
-        [numreplies]="componentState.replies.length"
+        [numReplies]="componentState.replies.length"
         [mode]="'grading'"
         (deleteButtonClicked)="deleteButtonClicked($event)"
         (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
-        [isdisabled]="true"
+        [isDisabled]="true"
         class="post">
     </class-response>
   </div>

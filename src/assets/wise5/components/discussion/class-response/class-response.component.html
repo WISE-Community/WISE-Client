@@ -120,7 +120,7 @@
     <mat-divider></mat-divider>
   </div>
   <div class="new-reply" fxLayout="row"
-    *ngIf="mode === 'student' && !isdisabled">
+    *ngIf="mode === 'student' && !isDisabled">
     <textarea class="new-reply-input" 
         [(ngModel)]="response.replyText"
         (keyup)="replyEntered($event)"

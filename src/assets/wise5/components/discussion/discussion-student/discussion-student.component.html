@@ -80,12 +80,12 @@
         <class-response
             *ngFor="let componentState of topLevelResponses.all"
             [response]="componentState"
-            [numreplies]="componentState.replies.length"
+            [numReplies]="componentState.replies.length"
             (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
             [mode]="mode"
             (deleteButtonClicked)="deleteButtonClicked($event)"
             (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
-            [isdisabled]="isDisabled"
+            [isDisabled]="isDisabled"
             class="post">
         </class-response>
       </div>
@@ -93,12 +93,12 @@
         <class-response
             *ngFor="let componentState of topLevelResponses.col2"
             [response]="componentState"
-            [numreplies]="componentState.replies.length"
+            [numReplies]="componentState.replies.length"
             (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
             [mode]="mode"
             (deleteButtonClicked)="deleteButtonClicked($event)"
             (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
-            [isdisabled]="isDisabled"
+            [isDisabled]="isDisabled"
             class="post">
         </class-response>
       </div>
@@ -107,12 +107,12 @@
       <class-response
           *ngFor="let componentState of topLevelResponses.col1"
           [response]="componentState"
-          [numreplies]="componentState.replies.length"
+          [numReplies]="componentState.replies.length"
           (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
           [mode]="mode"
           (deleteButtonClicked)="deleteButtonClicked($event)"
           (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
-          [isdisabled]="isDisabled"
+          [isDisabled]="isDisabled"
           class="post"
           style="display: block;">
       </class-response>
