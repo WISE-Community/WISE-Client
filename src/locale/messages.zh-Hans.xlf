@@ -11628,6 +11628,174 @@ Warning: This will delete all existing nodes and links in this component.</targe
         </context-group>
         <target state="translated">您确定要减少 Y 轴的数量吗？</target>
       </trans-unit>
+      <trans-unit id="333efdfe657eaa396d260b684c0c230fe2f704df" datatype="html">
+        <source>Select trials to show</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <target state="needs-translation">Select trials to show</target>
+      </trans-unit>
+      <trans-unit id="81006171467450abe4b7a3a3606a0ce97ee57475" datatype="html">
+        <source>Delete trial</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <target state="needs-translation">Delete trial</target>
+      </trans-unit>
+      <trans-unit id="949d13e2c890d8ec693f29cbdc7db2a396216c3c" datatype="html">
+        <source>Select trial to edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <target state="needs-translation">Select trial to edit</target>
+      </trans-unit>
+      <trans-unit id="6848879d2a7f41e043d43e679820707be0059ca6" datatype="html">
+        <source>Select series to edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <target state="needs-translation">Select series to edit</target>
+      </trans-unit>
+      <trans-unit id="a4c3f8bfcd9b4f595b57c5179f1da52e3f55e098" datatype="html">
+        <source>Reset Series</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <target state="needs-translation">Reset Series</target>
+      </trans-unit>
+      <trans-unit id="4f26c54d5c3edadf92756d7d3ce466dde1f01e2a" datatype="html">
+        <source>Undo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <target state="needs-translation">Undo</target>
+      </trans-unit>
+      <trans-unit id="f0713700b6b573bfab6c943ce4a474208630fdaf" datatype="html">
+        <source>New Trial</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+        <target state="needs-translation">New Trial</target>
+      </trans-unit>
+      <trans-unit id="12716eec523ab886f1070509a9e483810d6035b6" datatype="html">
+        <source>Reset Graph</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+        <target state="needs-translation">Reset Graph</target>
+      </trans-unit>
+      <trans-unit id="4e270813457170b43f357a1593877efa8829d79a" datatype="html">
+        <source>Add to Notebook</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/add-to-notebook-button/add-to-notebook-button.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <target state="needs-translation">Add to Notebook</target>
+      </trans-unit>
+      <trans-unit id="379f07df38b42d031cebe9c616411f3d69ea12f7" datatype="html">
+        <source>Import Data</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+        <target state="needs-translation">Import Data</target>
+      </trans-unit>
+      <trans-unit id="50328c89c8ad81e3efa2e975ae572d8e39edd7d5" datatype="html">
+        <source>Y Max</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">133</context>
+        </context-group>
+        <target state="needs-translation">Y Max</target>
+      </trans-unit>
+      <trans-unit id="bf582d1d152a4217206a0b8c2e55d3c2945a96c6" datatype="html">
+        <source>Y Min</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+        <target state="needs-translation">Y Min</target>
+      </trans-unit>
+      <trans-unit id="44aee40cba13c077bc2ef1336f3662f6e308485f" datatype="html">
+        <source>X Min</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">169</context>
+        </context-group>
+        <target state="needs-translation">X Min</target>
+      </trans-unit>
+      <trans-unit id="072b9d4dd9efd7b4d6a5e56d85702e9a08064393" datatype="html">
+        <source>X Max</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.html</context>
+          <context context-type="linenumber">179</context>
+        </context-group>
+        <target state="needs-translation">X Max</target>
+      </trans-unit>
+      <trans-unit id="1064973145610124516" datatype="html">
+        <source>Are you sure you want to overwrite the current line data?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
+          <context context-type="linenumber">229</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to overwrite the current line data?</target>
+      </trans-unit>
+      <trans-unit id="6882380861047606832" datatype="html">
+        <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
+          <context context-type="linenumber">1057</context>
+        </context-group>
+        <target state="needs-translation">The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</target>
+      </trans-unit>
+      <trans-unit id="2852989551014711458" datatype="html">
+        <source>You can not edit this series. Please choose a series that can be edited.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
+          <context context-type="linenumber">1071</context>
+        </context-group>
+        <target state="needs-translation">You can not edit this series. Please choose a series that can be edited.</target>
+      </trans-unit>
+      <trans-unit id="7053114367342967943" datatype="html">
+        <source>Are you sure you want to reset the series?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
+          <context context-type="linenumber">1384</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to reset the series?</target>
+      </trans-unit>
+      <trans-unit id="7889560203726829643" datatype="html">
+        <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
+          <context context-type="linenumber">1386</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to reset the "<x id="PH" equiv-text="seriesName"/>" series?</target>
+      </trans-unit>
+      <trans-unit id="6999515396807067782" datatype="html">
+        <source>Trial</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
+          <context context-type="linenumber">1932</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
+          <context context-type="linenumber">2752</context>
+        </context-group>
+        <target state="needs-translation">Trial</target>
+      </trans-unit>
       <trans-unit id="b8c5c01ab5965f003ba27c1aad429045431ba260" datatype="html">
         <source>Background Image</source>
         <context-group purpose="location">
@@ -13257,14 +13425,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">132</context>
         </context-group>
         <target state="needs-translation">Y Axis <x id="INTERPOLATION" equiv-text="{{yAxisIndex + 1}}"/> Label</target>
-      </trans-unit>
-      <trans-unit id="4e270813457170b43f357a1593877efa8829d79a" datatype="html">
-        <source>Add to Notebook</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/add-to-notebook-button/add-to-notebook-button.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-        <target state="needs-translation">Add to Notebook</target>
       </trans-unit>
       <trans-unit id="13914f9fe459520b280fb4e82a4c44812a6d74ad" datatype="html">
         <source>Score: <x id="INTERPOLATION" equiv-text="{{annotations.score.data.value}}"/><x id="INTERPOLATION_1" equiv-text="{{maxScoreDisplay}}"/></source>
