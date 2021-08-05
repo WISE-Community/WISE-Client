@@ -3,4 +3,5 @@
   <span class="username" *ngIf="!canViewStudentNames" i18n><strong i8n>Student {{user.id}}</strong></span>
   <span fxFlex></span>
   <a class="userInfoLink" href="#" (click)="viewUserInfo($event)" i18n>Info</a>
+  <a class="removeUserLInk" href="#" (click)="removeUser($event)" i18n>Remove</a>
 </div>
