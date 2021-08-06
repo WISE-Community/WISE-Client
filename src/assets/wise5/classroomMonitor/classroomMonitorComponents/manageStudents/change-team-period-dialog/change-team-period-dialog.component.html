@@ -1,19 +1,14 @@
 <h2 mat-dialog-title i18n>Change Period</h2>
 <div mat-dialog-content class="mat-dialog-content mat-dialog-content--scroll">
-  <p class="mat-body-1">
-    <span i18n>Select a new period for Team {{team.workgroupId}}</span>
-    <span *ngIf="canViewStudentNames" class="student-names">
-       - {{team.username.replace(":", ", ")}}:
-    </span>
-    <span *ngIf="!canViewStudentNames" class="student-names">
-      <span *ngFor="let user of team.users; last as isLast; first as isFirst">
-        <span *ngIf="isFirst"> - </span>
-        <span i18n>Student {{user.id}}</span>
-        <span *ngIf="!isLast">, </span>
-        <span *ngIf="isLast">:</span>
-      </span>
-    </span>
-  </p>
+  <div class="mat-body-1">
+    <span i18n>Select a new period for <strong>Team {{team.workgroupId}}</strong>:</span>
+    <ul class="mat-small">
+      <li *ngFor="let user of team.users; last as isLast; first as isFirst">
+        <span *ngIf="canViewStudentNames">{{user.name}} ({{user.username}})</span>
+        <span *ngIf="!canViewStudentNames" i18n>Student {{user.id}}</span>
+      </li>
+    </ul>
+  </div>
   <form [formGroup]="selectPeriodForm">
     <mat-form-field appearance="fill" class="change-team-period-form-field">
       <mat-label i18n>Choose Period</mat-label>
