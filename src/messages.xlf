@@ -8155,6 +8155,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="d113c720fc49df13f98478b6d16d0b484854ac15" datatype="html">
+        <source>Tip: Drag a student to change teams within current period.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students/manage-students.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="22cfba8fc2f79bbd7abb937ad8f2cf922d6c7937" datatype="html">
         <source>Team <x id="INTERPOLATION" equiv-text="{{team.workgroupId}}"/></source>
         <context-group purpose="location">
