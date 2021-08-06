@@ -1,10 +1,10 @@
 <div class="view-content view-content--with-sidemenu">
   <div class="l-constrained">
     <div class="md-padding">
-      <span *ngIf="period.periodId === -1" i18n>
-        Managing students in all periods is not currently supported. Please choose a specific period.
-      </span>
-      <manage-period *ngIf="period.periodId !== -1" [period]="period"></manage-period>
+      <p class="info">Tip: Drag a student to change teams within current period.</p>
+      <ng-container *ngFor="let period of periods">
+        <manage-period *ngIf="period.periodId !== -1" [period]="period"></manage-period>
+      </ng-container>
     </div>
   </div>
 </div>
