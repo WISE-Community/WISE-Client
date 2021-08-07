@@ -12,6 +12,7 @@ import { GetWorkgroupService } from '../../../../../../app/services/getWorkgroup
 export class ManagePeriodComponent {
   @Input() period: any;
 
+  autoScroll: any;
   students: Set<any> = new Set();
   subscriptions: Subscription = new Subscription();
   emptyTeams: Map<number, any> = new Map();
@@ -28,6 +29,8 @@ export class ManagePeriodComponent {
   }
 
   ngOnInit() {
+    this.autoScroll = require('dom-autoscroller');
+    this.registerAutoScroll();
     this.subscriptions.add(
       this.ConfigService.configRetrieved$.subscribe(() => {
         this.init();
@@ -73,5 +76,15 @@ export class ManagePeriodComponent {
         }
       }
     }
+  }
+
+  registerAutoScroll(): void {
+    this.autoScroll([document.querySelector('#content')], {
+      margin: 30,
+      scrollWhenOutside: true,
+      autoScroll: function () {
+        return this.down;
+      }
+    });
   }
 }
