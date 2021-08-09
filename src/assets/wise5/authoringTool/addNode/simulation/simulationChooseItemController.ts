@@ -16,7 +16,7 @@ export default class SimulationChooseItemController extends ConfigureStructureCo
   filteredNodes: SimulationNode[] = [];
   project: any;
   projectItems: any;
-  searchText: string;
+  searchText: string = '';
   selectedNodeId: string;
   simulationProjectId: number;
   selectedSubjects: string[] = [];
