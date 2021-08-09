@@ -8183,6 +8183,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="406a3b0511483e31076d1b0a968c377c91e6163c" datatype="html">
+        <source>No students</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="513458985182639179" datatype="html">
         <source>Moved student to Team <x id="PH" equiv-text="this.team.workgroupId"/>.</source>
         <context-group purpose="location">
