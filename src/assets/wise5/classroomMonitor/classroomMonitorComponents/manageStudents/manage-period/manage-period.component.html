@@ -1,18 +1,20 @@
-<div class="content-head accent-1">
-  <h2 class="content-head__item">
-    <span i18n>Period {{period.periodName}}</span>
-    <span class="md-subhead" i18n>Students: {{students.size}} | Teams: {{teams.size}}</span>
-  </h2>
-</div>
-<div cdkDropListGroup>
-  <ul class="teams" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
-    <li class="team" *ngFor="let team of teams.values()">
-      <manage-team [team]="team"></manage-team>
-    </li>
-  </ul>
-  <ul class="teams" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
-    <li class="team" *ngFor="let team of emptyTeams.values()">
-      <manage-team [team]="team"></manage-team>
-    </li>
-  </ul>
-</div>
+<mat-card class="period" cdkDropListGroup>
+  <div class="period-header" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <h2 class="mat-display-1 accent-1"
+        fxLayout="row wrap"
+        fxLayoutAlign="start end"
+        fxLayoutGap="8px">
+      <span i18n>Period {{period.periodName}}</span>
+      <span class="mat-body-1 period-info" i18n>
+        Students: {{students.size}} | Teams: {{teams.size}}
+      </span>
+    </h2>
+    <span fxFlex></span>
+    <span class="info mat-small" i18n>Tip: Drag student to change teams</span>
+  </div>
+  <manage-teams [teams]="teams"></manage-teams>
+  <ng-container *ngIf="emptyTeams.size > 0">
+    <h3 class="mat-body-2 secondary-text" i18n>Empty Teams</h3>
+    <manage-teams [teams]="emptyTeams"></manage-teams>
+  </ng-container>
+</mat-card>

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { configureTestSuite } from 'ng-bullet';
 import { UpdateWorkgroupService } from '../../../../../../app/services/updateWorkgroupService';
@@ -8,6 +9,7 @@ import { ManageTeamComponent } from './manage-team.component';
 
 class ConfigServiceStub {
   getPermissions() {}
+  getAvatarColorForWorkgroupId() {}
 }
 
 class UpdateWorkgroupServiceStub {}
@@ -20,6 +22,7 @@ describe('ManageTeamComponent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [ManageTeamComponent],
+      imports: [MatSnackBarModule],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: UpdateWorkgroupService, useClass: UpdateWorkgroupServiceStub },
@@ -66,5 +69,5 @@ function spyOnCanGradeStudentWork(canGrade: boolean) {
 }
 
 function getChangePeriodLink() {
-  return fixture.debugElement.query(By.css('.changePeriodLink'));
+  return fixture.debugElement.query(By.css('.change-period'));
 }

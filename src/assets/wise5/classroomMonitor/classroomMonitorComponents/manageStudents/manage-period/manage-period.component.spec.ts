@@ -38,6 +38,7 @@ describe('ManagePeriod', () => {
       periodId: 1,
       periodName: '1'
     };
+    spyOn(component, 'registerAutoScroll').and.callFake(() => {});
     fixture.detectChanges();
   });
   initTeams();

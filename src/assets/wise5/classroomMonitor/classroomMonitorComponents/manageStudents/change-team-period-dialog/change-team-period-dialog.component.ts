@@ -3,6 +3,7 @@ import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'change-team-period-dialog',
@@ -23,7 +24,8 @@ export class ChangeTeamPeriodDialogComponent {
     protected dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public team: any,
     protected http: HttpClient,
-    protected ConfigService: ConfigService
+    protected ConfigService: ConfigService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -42,12 +44,20 @@ export class ChangeTeamPeriodDialogComponent {
         }/change-period`,
         this.selectedPeriod.periodId
       )
-      .subscribe(() => {
-        this.isChangingPeriod = false;
-        this.ConfigService.retrieveConfig(
-          `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
-        );
-        this.dialog.closeAll();
-      });
+      .subscribe(
+        (response) => {
+          this.isChangingPeriod = false;
+          this.ConfigService.retrieveConfig(
+            `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
+          );
+          this.snackBar.open(
+            $localize`Moved Team ${this.team.workgroupId} to Period ${this.selectedPeriod.periodName}.`
+          );
+          this.dialog.closeAll();
+        },
+        (err) => {
+          this.isChangingPeriod = false;
+        }
+      );
   }
 }

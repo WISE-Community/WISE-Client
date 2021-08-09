@@ -2,6 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { ConfigService } from '../../../../services/configService';
 
@@ -17,12 +18,14 @@ class ConfigServiceStub {
   getRunId() {
     return 123;
   }
+  retrieveConfig() {
+    return {};
+  }
 }
 
 const team = {
   periodId: 1,
-  username: 'Oski Bear (oskib0101)',
-  users: [{ id: 500 }],
+  users: [{ id: 500, username: 'oskib0101', name: 'Oski Bear' }],
   workgroupId: 10
 };
 
@@ -33,7 +36,7 @@ describe('ChangeTeamPeriodDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ChangeTeamPeriodDialogComponent],
-      imports: [HttpClientTestingModule, MatDialogModule],
+      imports: [HttpClientTestingModule, MatDialogModule, MatSnackBarModule],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: MAT_DIALOG_DATA, useValue: team }
@@ -92,5 +95,5 @@ function showStudentNames() {
 }
 
 function getStudentNames() {
-  return fixture.debugElement.query(By.css('.studentNames')).nativeElement.textContent;
+  return fixture.debugElement.query(By.css('.student-names')).nativeElement.textContent;
 }

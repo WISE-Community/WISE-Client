@@ -12,6 +12,7 @@ import {
   transferArrayItem
 } from '@angular/cdk/drag-drop';
 import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'manage-team',
@@ -20,23 +21,29 @@ import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move
 })
 export class ManageTeamComponent {
   @Input() team: any;
+  @Input() connectedTeams: string[];
 
+  avatarColor: string;
   canChangePeriod: boolean;
 
   constructor(
     private dialog: MatDialog,
     private ConfigService: ConfigService,
-    private UpdateWorkgroupService: UpdateWorkgroupService
+    private UpdateWorkgroupService: UpdateWorkgroupService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
-    this.canChangePeriod = this.ConfigService.getPermissions().canGradeStudentWork;
+    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.team.workgroupId);
+    this.canChangePeriod =
+      this.ConfigService.getPermissions().canGradeStudentWork && this.team.users.length > 0;
   }
 
-  changePeriod() {
+  changePeriod(event: Event) {
+    event.preventDefault();
     this.dialog.open(ChangeTeamPeriodDialogComponent, {
       data: this.team,
-      panelClass: 'mat-dialog--md'
+      panelClass: 'mat-dialog--sm'
     });
   }
 
@@ -53,16 +60,25 @@ export class ManageTeamComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
+    const containerEl = event.container.element.nativeElement;
+    const itemEl = event.item.element.nativeElement;
     if (event.previousContainer !== event.container) {
+      itemEl.style.opacity = '.4';
       this.dialog
-        .open(MoveUserConfirmDialogComponent)
+        .open(MoveUserConfirmDialogComponent, {
+          panelClass: 'mat-dialog--sm'
+        })
         .afterClosed()
         .subscribe((doMoveUser: boolean) => {
           if (doMoveUser) {
             this.moveUser(event);
           }
-          event.container.element.nativeElement.classList.remove('primary-bg');
+          containerEl.classList.remove('primary-bg');
+          itemEl.style.opacity = '1';
         });
+    } else {
+      containerEl.classList.remove('primary-bg');
+      itemEl.style.opacity = '1';
     }
   }
 
@@ -82,6 +98,7 @@ export class ManageTeamComponent {
       this.ConfigService.retrieveConfig(
         `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
       );
+      this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
     });
   }
 }
