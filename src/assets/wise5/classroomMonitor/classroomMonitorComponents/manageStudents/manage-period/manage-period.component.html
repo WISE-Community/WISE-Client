@@ -9,11 +9,10 @@
         Students: {{students.size}} | Teams: {{teams.size}}
       </span>
     </h2>
-    <span fxFlex></span>
   </div>
   <manage-teams [teams]="teams"></manage-teams>
   <ng-container *ngIf="emptyTeams.size > 0">
-    <h3 class="mat-body-2 secondary-text">Inactive Teams</h3>
+    <h3 class="mat-body-2 secondary-text" i18n>Empty Teams</h3>
     <manage-teams [teams]="emptyTeams"></manage-teams>
   </ng-container>
 </mat-card>

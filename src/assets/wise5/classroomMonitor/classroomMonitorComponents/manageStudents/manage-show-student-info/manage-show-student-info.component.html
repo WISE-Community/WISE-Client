@@ -4,25 +4,25 @@
 </h1>
 <div mat-dialog-content>
   <div class="info-block">
-    <table style="width: 100%">
+    <table>
       <tr>
-        <strong i18n>Student ID</strong>
+        <td><strong i18n>Student ID</strong></td>
         <td>{{user.id}}</td>
       </tr>
       <tr class="username" *ngIf="canViewStudentNames">
-        <strong>Username</strong>
+        <td><strong i18n>Username</strong></td>
         <td>{{user.username}}</td>
       </tr>
       <tr>
-        <strong i18n>Most Recent Login</strong>
+        <td><strong i18n>Most Recent Login</strong></td>
         <td>{{ user.lastLoginTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}</td>
       </tr>
       <tr>
-        <strong i18n>Registration Date</strong>
+        <td><strong i18n>Registration Date</strong></td>
         <td>{{ user.signUpTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}</td>
       </tr>
       <tr>
-        <strong i18n>Number of Logins</strong>
+        <td><strong i18n>Number of Logins</strong></td>
         <td>{{user.numberOfLogins}}</td>
       </tr>
     </table>

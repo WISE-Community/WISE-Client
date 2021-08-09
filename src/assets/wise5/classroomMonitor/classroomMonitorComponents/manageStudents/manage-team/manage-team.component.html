@@ -6,7 +6,7 @@
     <span fxFlex></span>
     <span class="mat-small">
       <a *ngIf="canChangePeriod" class="change-period" href="#" (click)="changePeriod($event)" i18n>Change Period</a>
-      <span *ngIf="this.team.users.length === 0">No students</span>
+      <span *ngIf="this.team.users.length === 0" i18n>No students</span>
     </span>
   </div>
   <mat-card-content>

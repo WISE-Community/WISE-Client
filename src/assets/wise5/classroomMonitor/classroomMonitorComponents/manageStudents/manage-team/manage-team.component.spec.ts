@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { configureTestSuite } from 'ng-bullet';
 import { UpdateWorkgroupService } from '../../../../../../app/services/updateWorkgroupService';
@@ -21,6 +22,7 @@ describe('ManageTeamComponent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [ManageTeamComponent],
+      imports: [MatSnackBarModule],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: UpdateWorkgroupService, useClass: UpdateWorkgroupServiceStub },
