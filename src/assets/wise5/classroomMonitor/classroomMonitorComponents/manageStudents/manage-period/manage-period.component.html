@@ -10,11 +10,11 @@
       </span>
     </h2>
     <span fxFlex></span>
-    <span class="info mat-small">Tip: Drag student to change teams</span>
+    <span class="info mat-small" i18n>Tip: Drag student to change teams</span>
   </div>
   <manage-teams [teams]="teams"></manage-teams>
   <ng-container *ngIf="emptyTeams.size > 0">
-    <h3 class="mat-body-2 secondary-text">Inactive Teams</h3>
+    <h3 class="mat-body-2 secondary-text" i18n>Empty Teams</h3>
     <manage-teams [teams]="emptyTeams"></manage-teams>
   </ng-container>
 </mat-card>
