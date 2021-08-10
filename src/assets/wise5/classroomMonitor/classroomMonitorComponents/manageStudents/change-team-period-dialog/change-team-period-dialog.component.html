@@ -4,8 +4,8 @@
     <span i18n>Select a new period for <strong>Team {{team.workgroupId}}</strong>:</span>
     <ul class="student-names mat-small">
       <li *ngFor="let user of team.users; last as isLast; first as isFirst">
-        <span *ngIf="canViewStudentNames">{{user.name}} ({{user.username}})</span>
-        <span *ngIf="!canViewStudentNames" i18n>Student {{user.id}}</span>
+        <ng-container *ngIf="canViewStudentNames">{{user.name}} ({{user.username}})</ng-container>
+        <ng-container *ngIf="!canViewStudentNames" i18n>Student {{user.id}}</ng-container>
       </li>
     </ul>
   </div>
