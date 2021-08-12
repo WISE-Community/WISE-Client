@@ -5,6 +5,7 @@ import { ConfigService } from '../../../../services/configService';
 
 @Component({
   selector: 'manage-show-student-info',
+  styleUrls: ['./manage-show-student-info.component.scss'],
   templateUrl: './manage-show-student-info.component.html'
 })
 export class ManageShowStudentInfoComponent {

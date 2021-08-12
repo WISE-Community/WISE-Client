@@ -2,7 +2,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MomentModule } from 'ngx-moment';
-import { By } from '@angular/platform-browser';
 import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../../services/configService';
 import { ManageShowStudentInfoComponent } from './manage-show-student-info.component';
