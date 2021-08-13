@@ -2,6 +2,7 @@
   <span class="username" *ngIf="canViewStudentNames"><strong>{{user.name}}</strong> ({{user.username}})</span>
   <span class="username" *ngIf="!canViewStudentNames" i18n><strong i8n>Student {{user.id}}</strong></span>
   <span fxFlex></span>
+  <a *ngIf="!isGoogleUser" href="#" (click)="changePassword($event)" i18n>Change Password</a>
   <a class="userInfoLink" href="#" (click)="viewUserInfo($event)" i18n>Info</a>
   <a class="removeUserLInk" href="#" (click)="removeUser($event)" i18n>Remove</a>
 </div>
