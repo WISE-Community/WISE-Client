@@ -17,7 +17,7 @@ export default class SimulationChooseItemController extends ConfigureStructureCo
   project: any;
   projectItems: any;
   searchText: string = '';
-  selectedNodeId: string;
+  selectedNode: string;
   simulationProjectId: number;
   selectedSubjects: string[] = [];
   subjects: string[] = [];
@@ -58,9 +58,11 @@ export default class SimulationChooseItemController extends ConfigureStructureCo
       this.projectItems = nodeOrderOfProject.nodes.slice(1); // remove root node from consideration
       const allSubjects: string[] = [];
       this.projectItems.forEach((item) => {
-        const simulationNode = new SimulationNode(item.node);
-        this.allNodes.push(simulationNode);
-        allSubjects.push(...simulationNode.metadata.subjects);
+        if (item.node.type !== 'group') {
+          const simulationNode = new SimulationNode(item.node);
+          this.allNodes.push(simulationNode);
+          allSubjects.push(...simulationNode.metadata.subjects);
+        }
       });
       this.filteredNodes = this.allNodes;
       this.subjects = Array.from(new Set(allSubjects)).sort();
@@ -117,7 +119,11 @@ export default class SimulationChooseItemController extends ConfigureStructureCo
   next(): void {
     this.$state.go('root.at.project.import-step.choose-location', {
       importFromProjectId: this.simulationProjectId,
-      selectedNodes: [this.selectedNodeId]
+      selectedNodes: [this.selectedNode]
     });
+  }
+
+  itemSelected(item: any) {
+    this.selectedNode = item;
   }
 }
