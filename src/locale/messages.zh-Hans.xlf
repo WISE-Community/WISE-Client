@@ -8690,6 +8690,10 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.html</context>
           <context context-type="linenumber">12,13</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/card-selector/card-selector.component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
         <target state="translated"> 选择 </target>
       </trans-unit>
       <trans-unit id="2220610653030603731" datatype="html">
@@ -8724,21 +8728,21 @@
         </context-group>
         <target state="translated">自动评估描述</target>
       </trans-unit>
-      <trans-unit id="4635453384629622126" datatype="html">
-        <source>Simulation</source>
+      <trans-unit id="6013229483538709548" datatype="html">
+        <source>Interactive Simulation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.ts</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">Simulation</target>
+        <target state="needs-translation">Interactive Simulation</target>
       </trans-unit>
-      <trans-unit id="7497801942238490989" datatype="html">
-        <source>Add an existing simulation</source>
+      <trans-unit id="3682992588117847800" datatype="html">
+        <source>Add an existing interactive simulation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.ts</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Add an existing simulation</target>
+        <target state="needs-translation">Add an existing interactive simulation</target>
       </trans-unit>
       <trans-unit id="44fcb249525dd82d1fd32cae51412bcda7ffd765" datatype="html">
         <source>Back to Unit Plan</source>
@@ -8819,6 +8823,38 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <target state="translated">JSON文件内容无效。无效的 JSON文件 将不会被保存。
 点击 "确定" 返回到最后一个有效的JSON文件。
 点击 “取消” 将保留该无效的JSON文件以便您可以修复它。</target>
+      </trans-unit>
+      <trans-unit id="f79611b9cc78f612ae8cc2cce08ff9f14581aeb3" datatype="html">
+        <source>Selected</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/card-selector/card-selector.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <target state="translated">已选择</target>
+      </trans-unit>
+      <trans-unit id="d6422b50d71b3a41af5f34306ed72b7ff28d8e4b" datatype="html">
+        <source> Preview </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/card-selector/card-selector.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+        <target state="needs-translation"> Preview </target>
+      </trans-unit>
+      <trans-unit id="f871b41bfbdb193507cce2cd848c2d02bde77a03" datatype="html">
+        <source>No results found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/card-selector/card-selector.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <target state="translated">未找到任何结果</target>
       </trans-unit>
       <trans-unit id="2544043210306731906" datatype="html">
         <source>There was an error copying this project. Please contact WISE staff.</source>
@@ -9934,7 +9970,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">339</context>
+          <context context-type="linenumber">340</context>
         </context-group>
         <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this this should be your best work.
 
@@ -10432,7 +10468,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></source>
         <source>You have no more chances to receive feedback on your answer.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">333</context>
+          <context context-type="linenumber">334</context>
         </context-group>
         <target state="needs-translation">You have no more chances to receive feedback on your answer.</target>
       </trans-unit>
@@ -10442,7 +10478,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></source>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">336</context>
+          <context context-type="linenumber">337</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
@@ -10456,7 +10492,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">405</context>
+          <context context-type="linenumber">406</context>
         </context-group>
         <target state="needs-translation">Score</target>
       </trans-unit>
@@ -10464,11 +10500,11 @@ Are you ready to receive feedback on this answer?</target>
         <source>Feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">414</context>
+          <context context-type="linenumber">415</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">424</context>
+          <context context-type="linenumber">425</context>
         </context-group>
         <target state="translated">反馈</target>
       </trans-unit>
@@ -10476,7 +10512,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Are you sure you want to reset your work?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">1423</context>
+          <context context-type="linenumber">1424</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset your work?</target>
       </trans-unit>
@@ -10974,7 +11010,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
         <source>Are you sure you want to clear your drawing?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
-          <context context-type="linenumber">200</context>
+          <context context-type="linenumber">205</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to clear your drawing?</target>
       </trans-unit>
@@ -10982,7 +11018,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
         <source>Do you want to update the connected drawing?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.ts</context>
-          <context context-type="linenumber">287</context>
+          <context context-type="linenumber">292</context>
         </context-group>
         <target state="needs-translation">Do you want to update the connected drawing?</target>
       </trans-unit>
@@ -12822,14 +12858,6 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="translated">找到 <x id="INTERPOLATION" equiv-text="{{filteredOpenEducationalResources.length}}"/> 项目</target>
       </trans-unit>
-      <trans-unit id="f79611b9cc78f612ae8cc2cce08ff9f14581aeb3" datatype="html">
-        <source>Selected</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
-          <context context-type="linenumber">61</context>
-        </context-group>
-        <target state="translated">已选择</target>
-      </trans-unit>
       <trans-unit id="ba65c88ed27b83f0ebc4a924bbf41de7fdad9dd0" datatype="html">
         <source> Info </source>
         <context-group purpose="location">
@@ -12845,14 +12873,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">79,80</context>
         </context-group>
         <target state="translated"> 选择 </target>
-      </trans-unit>
-      <trans-unit id="f871b41bfbdb193507cce2cd848c2d02bde77a03" datatype="html">
-        <source>No results found</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
-          <context context-type="linenumber">85</context>
-        </context-group>
-        <target state="translated">未找到任何结果</target>
       </trans-unit>
       <trans-unit id="801b98c6f02fe3b32f6afa3ee854c99ed83474e6" datatype="html">
         <source>URL</source>
