@@ -1,17 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CardSelectorComponent } from './card-selector.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
 
+class Item {
+  id: string;
+  constructor(id: string) {
+    this.id = id;
+  }
+}
+
 describe('CardSelectorComponent', () => {
   let component: CardSelectorComponent;
   let fixture: ComponentFixture<CardSelectorComponent>;
-  let item1: any;
-  let item2: any;
-  let item3: any;
-  let items: any[] = [];
+  let item1: Item;
+  let item2: Item;
+  let item3: Item;
+  let items: Item[] = [];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -23,9 +29,9 @@ describe('CardSelectorComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CardSelectorComponent);
     component = fixture.componentInstance;
-    item1 = createItem('item1');
-    item2 = createItem('item2');
-    item3 = createItem('item3');
+    item1 = new Item('item1');
+    item2 = new Item('item2');
+    item3 = new Item('item3');
     items = [item1, item2, item3];
     component.items = items;
     fixture.detectChanges();
@@ -53,7 +59,3 @@ describe('CardSelectorComponent', () => {
     expect(noResultsDiv).not.toBeNull();
   });
 });
-
-function createItem(id: string) {
-  return { id: id };
-}
