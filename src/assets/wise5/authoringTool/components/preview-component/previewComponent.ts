@@ -1,4 +1,3 @@
-import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 
 class PreviewComponentController {
@@ -8,21 +7,17 @@ class PreviewComponentController {
   nodeId: string;
   updateInterval: any;
 
-  static $inject = ['$scope', '$compile', '$element', 'NodeService', 'ProjectService'];
+  static $inject = ['$scope', '$compile', '$element', 'ProjectService'];
 
   constructor(
     private $scope: any,
     private $compile: any,
     private $element: any,
-    private NodeService: NodeService,
     private ProjectService: ProjectService
   ) {}
 
   $onInit() {
     this.$scope.mode = 'authoringComponentPreview';
-    this.$scope.componentTemplatePath = this.NodeService.getComponentTemplatePath(
-      this.componentContent.type
-    );
     this.$scope.nodeId = this.nodeId;
     this.$scope.type = this.componentContent.type;
     this.compileComponent();
@@ -127,9 +122,6 @@ class PreviewComponentController {
                 [component-content]="componentContent"
                 [mode]="mode">
             </table-student>
-          </div>
-          <div ng-switch-default>
-            <div ng-include="::componentTemplatePath" class="component__content component__content--{{::type}}"></div>
           </div>
         </div>`;
     this.$element.html(componentHTML);

@@ -1,5 +1,4 @@
 import { ConfigService } from '../../services/configService';
-import { NodeService } from '../../services/nodeService';
 import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
@@ -16,7 +15,6 @@ class ComponentController {
   static $inject = [
     '$scope',
     'ConfigService',
-    'NodeService',
     'NotebookService',
     'ProjectService',
     'StudentDataService'
@@ -25,7 +23,6 @@ class ComponentController {
   constructor(
     private $scope: any,
     private ConfigService: ConfigService,
-    private NodeService: NodeService,
     private NotebookService: NotebookService,
     private ProjectService: ProjectService,
     private StudentDataService: StudentDataService
@@ -58,9 +55,6 @@ class ComponentController {
       componentContent = this.ProjectService.injectClickToSnipImage(componentContent);
     }
 
-    this.$scope.componentTemplatePath = this.NodeService.getComponentTemplatePath(
-      componentContent.type
-    );
     this.$scope.componentContent = componentContent;
     this.$scope.componentState = this.componentState;
     this.$scope.nodeId = this.nodeId;
@@ -187,9 +181,6 @@ const Component = {
                 [workgroup-id]="workgroupId"
                 [mode]="mode">
             </table-student>
-          </div>
-          <div ng-switch-default>
-            <div ng-include="::componentTemplatePath" class="component__content component__content--{{::type}}"></div>
           </div>
         </div>`
 };
