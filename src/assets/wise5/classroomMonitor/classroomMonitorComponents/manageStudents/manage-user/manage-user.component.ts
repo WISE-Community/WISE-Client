@@ -8,6 +8,7 @@ import { RemoveUserConfirmDialogComponent } from '../remove-user-confirm-dialog/
 
 @Component({
   selector: 'manage-user',
+  styleUrls: ['manage-user.component.scss'],
   templateUrl: 'manage-user.component.html'
 })
 export class ManageUserComponent {
@@ -53,7 +54,7 @@ export class ManageUserComponent {
     const runId = this.ConfigService.getRunId();
     const studentId = this.user.id;
     this.http.delete(`/api/teacher/run/${runId}/student/${studentId}/remove`).subscribe(() => {
-      this.snackBar.open($localize`Removed ${this.user.name} (${this.user.username}) from run.`);
+      this.snackBar.open($localize`Removed ${this.user.name} (${this.user.username}) from unit.`);
       this.ConfigService.retrieveConfig(`/api/config/classroomMonitor/${runId}`);
     });
   }
