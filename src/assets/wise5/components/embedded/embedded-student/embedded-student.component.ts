@@ -102,7 +102,6 @@ export class EmbeddedStudent extends ComponentStudent {
     );
     this.componentType = this.componentContent.type;
     this.setURL(this.componentContent.url);
-    this.subscribeToSiblingComponentStudentDataChanged();
     this.initializeMessageEventListener();
     this.broadcastDoneRenderingComponent();
   }
@@ -119,20 +118,6 @@ export class EmbeddedStudent extends ComponentStudent {
     if (height != null) {
       this.height = `${height}px`;
     }
-  }
-
-  subscribeToSiblingComponentStudentDataChanged(): void {
-    this.subscriptions.add(
-      this.NodeService.siblingComponentStudentDataChanged$.subscribe((args: any) => {
-        if (this.isForThisComponent(args)) {
-          const message = {
-            messageType: 'siblingComponentStudentDataChanged',
-            componentState: args.componentState
-          };
-          this.sendMessageToApplication(message);
-        }
-      })
-    );
   }
 
   initializeMessageEventListener(): void {

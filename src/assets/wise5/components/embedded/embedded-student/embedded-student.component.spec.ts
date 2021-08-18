@@ -90,7 +90,6 @@ describe('EmbeddedStudent', () => {
       return true;
     });
     spyOn(component, 'subscribeToNotebookItemChosen').and.callFake(() => {});
-    spyOn(component, 'subscribeToSiblingComponentStudentDataChanged').and.callFake(() => {});
     spyOn(component, 'studentDataChanged').and.callFake(() => {});
     fixture.detectChanges();
   });
