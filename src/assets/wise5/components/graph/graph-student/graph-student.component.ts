@@ -2692,57 +2692,59 @@ export class GraphStudent extends ComponentStudent {
 
   handleConnectedComponentPromiseResults(connectedComponentBackgroundImage, isReset) {
     return (promiseResults) => {
-      /*
-       * First we will accumulate all the trials into one new component state and then we will
-       * perform connected component processing.
-       */
-      const mergedTrials = [];
-      /*
-       * Loop through all the promise results. There will be a promise result for each component we
-       * are importing from. Each promiseResult is an array of trials or an image url.
-       */
-      let trialCount = 0;
-      let activeTrialIndex = 0;
-      let activeSeriesIndex = 0;
-      for (const promiseResult of promiseResults) {
-        if (promiseResult instanceof Array) {
-          const trials = promiseResult;
-          for (const trial of trials) {
-            if (this.canEditTrial(trial)) {
-              activeTrialIndex = trialCount;
+      if (promiseResults.length > 0) {
+        /*
+         * First we will accumulate all the trials into one new component state and then we will
+         * perform connected component processing.
+         */
+        const mergedTrials = [];
+        /*
+         * Loop through all the promise results. There will be a promise result for each component we
+         * are importing from. Each promiseResult is an array of trials or an image url.
+         */
+        let trialCount = 0;
+        let activeTrialIndex = 0;
+        let activeSeriesIndex = 0;
+        for (const promiseResult of promiseResults) {
+          if (promiseResult instanceof Array) {
+            const trials = promiseResult;
+            for (const trial of trials) {
+              if (this.canEditTrial(trial)) {
+                activeTrialIndex = trialCount;
+              }
+              mergedTrials.push(trial);
+              trialCount++;
             }
-            mergedTrials.push(trial);
-            trialCount++;
+          } else if (typeof promiseResult === 'string') {
+            connectedComponentBackgroundImage = promiseResult;
           }
-        } else if (typeof promiseResult === 'string') {
-          connectedComponentBackgroundImage = promiseResult;
         }
+        if (this.isTrialsEnabled()) {
+          activeTrialIndex = this.addTrialFromThisComponentIfNecessary(
+            mergedTrials,
+            trialCount,
+            activeTrialIndex
+          );
+        }
+        let newComponentState = this.NodeService.createNewComponentState();
+        newComponentState.studentData = {
+          trials: mergedTrials,
+          activeTrialIndex: activeTrialIndex,
+          activeSeriesIndex: activeSeriesIndex,
+          version: 2
+        };
+        if (
+          this.componentContent.backgroundImage != null &&
+          this.componentContent.backgroundImage !== ''
+        ) {
+          newComponentState.studentData.backgroundImage = this.componentContent.backgroundImage;
+        } else if (connectedComponentBackgroundImage != null) {
+          newComponentState.studentData.backgroundImage = connectedComponentBackgroundImage;
+        }
+        newComponentState = this.handleConnectedComponentsHelper(newComponentState, isReset);
+        this.setStudentWork(newComponentState);
+        this.studentDataChanged();
       }
-      if (this.isTrialsEnabled()) {
-        activeTrialIndex = this.addTrialFromThisComponentIfNecessary(
-          mergedTrials,
-          trialCount,
-          activeTrialIndex
-        );
-      }
-      let newComponentState = this.NodeService.createNewComponentState();
-      newComponentState.studentData = {
-        trials: mergedTrials,
-        activeTrialIndex: activeTrialIndex,
-        activeSeriesIndex: activeSeriesIndex,
-        version: 2
-      };
-      if (
-        this.componentContent.backgroundImage != null &&
-        this.componentContent.backgroundImage !== ''
-      ) {
-        newComponentState.studentData.backgroundImage = this.componentContent.backgroundImage;
-      } else if (connectedComponentBackgroundImage != null) {
-        newComponentState.studentData.backgroundImage = connectedComponentBackgroundImage;
-      }
-      newComponentState = this.handleConnectedComponentsHelper(newComponentState, isReset);
-      this.setStudentWork(newComponentState);
-      this.studentDataChanged();
     };
   }
 
