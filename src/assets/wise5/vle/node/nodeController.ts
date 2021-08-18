@@ -202,7 +202,6 @@ class NodeController {
           }
         }
         this.notifyConnectedParts(componentId, componentState);
-        this.NodeService.broadcastSiblingComponentStudentDataChanged(componentStudentData);
       })
     );
 
