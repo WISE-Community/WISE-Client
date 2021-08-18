@@ -32,6 +32,7 @@ import { ComponentGradingModule } from './component-grading.module';
 import { MilestoneReportDataComponent } from './milestone/milestone-report-data/milestone-report-data.component';
 import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component';
 import { ManageShowStudentInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component';
+import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ManageShowStudentInfoComponent } from '../../assets/wise5/classroomMoni
     MilestoneReportDataComponent,
     MoveUserConfirmDialogComponent,
     NavItemProgressComponent,
+    RemoveUserConfirmDialogComponent,
     SelectPeriodComponent,
     StatusIconComponent,
     StepInfoComponent,
