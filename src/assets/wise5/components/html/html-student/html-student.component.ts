@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SafeHtml } from '@angular/platform-browser';
+import { UpgradeModule } from '@angular/upgrade/static';
 import { WiseLinkService } from '../../../../../app/services/wiseLinkService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
@@ -24,8 +27,10 @@ export class HtmlStudent extends ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
-    protected sanitizer: DomSanitizer,
+    protected NotebookService: NotebookService,
+    protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
     protected UtilService: UtilService,
     private WiseLinkService: WiseLinkService
   ) {
@@ -34,8 +39,10 @@ export class HtmlStudent extends ComponentStudent {
       ComponentService,
       ConfigService,
       NodeService,
-      sanitizer,
+      NotebookService,
+      StudentAssetService,
       StudentDataService,
+      upgrade,
       UtilService
     );
   }

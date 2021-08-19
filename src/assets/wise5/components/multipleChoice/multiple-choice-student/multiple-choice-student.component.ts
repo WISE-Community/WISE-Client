@@ -1,10 +1,13 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { ProjectService } from '../../../services/projectService';
+import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
@@ -17,13 +20,14 @@ import { MultipleChoiceService } from '../multipleChoiceService';
   styleUrls: ['multiple-choice-student.component.scss']
 })
 export class MultipleChoiceStudent extends ComponentStudent {
-  componentHasCorrectAnswer: boolean;
-  studentChoices: any;
-  isCorrect: boolean;
-  isLatestComponentStateSubmit: boolean;
-  showFeedback: boolean;
   choices: any[];
   choiceType: string;
+  componentHasCorrectAnswer: boolean;
+  isCorrect: boolean;
+  isLatestComponentStateSubmit: boolean;
+  originalComponentContent: any;
+  showFeedback: boolean;
+  studentChoices: any;
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -31,8 +35,11 @@ export class MultipleChoiceStudent extends ComponentStudent {
     protected ConfigService: ConfigService,
     private MultipleChoiceService: MultipleChoiceService,
     protected NodeService: NodeService,
-    protected sanitizer: DomSanitizer,
+    protected NotebookService: NotebookService,
+    private ProjectService: ProjectService,
+    protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
@@ -40,8 +47,10 @@ export class MultipleChoiceStudent extends ComponentStudent {
       ComponentService,
       ConfigService,
       NodeService,
-      sanitizer,
+      NotebookService,
+      StudentAssetService,
       StudentDataService,
+      upgrade,
       UtilService
     );
   }
@@ -99,10 +108,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     }
   }
 
-  handleNodeSubmit(): void {
-    this.submit('nodeSubmitButton');
-  }
-
   setStudentWork(componentState: any): void {
     if (componentState != null) {
       const studentData = componentState.studentData;
@@ -139,8 +144,12 @@ export class MultipleChoiceStudent extends ComponentStudent {
   }
 
   showFeedbackForChoiceIds(choiceIds: string[]): void {
+    const originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
     for (const choiceId of choiceIds) {
-      const choiceObject = this.getChoiceById(choiceId);
+      const choiceObject = this.getChoiceById(originalComponentContent, choiceId);
       if (choiceObject != null) {
         choiceObject.showFeedback = true;
         choiceObject.feedbackToShow = choiceObject.feedback;
@@ -249,7 +258,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
   submit(submitTriggeredBy: string): void {
     if (this.isSubmitDirty) {
       let performSubmit = true;
-      if (this.hasMaxSubmitCount() && this.hasUsedAllSubmits()) {
+      if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
         performSubmit = false;
       }
 
@@ -258,7 +267,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
         this.isCorrect = null;
         this.hideAllFeedback();
         this.incrementSubmitCounter();
-        if (this.hasMaxSubmitCount() && this.hasUsedAllSubmits()) {
+        if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
           this.disableAllInput();
           this.disableSubmitButton();
         }
@@ -363,13 +372,13 @@ export class MultipleChoiceStudent extends ComponentStudent {
       if (this.isCorrect != null) {
         studentData.isCorrect = this.isCorrect;
       }
-    }
-
-    if (action === 'submit') {
       if (this.isSubmit) {
         componentState.isSubmit = this.isSubmit;
         this.isSubmit = false;
         this.isLatestComponentStateSubmit = true;
+        if (this.hasDefaultFeedback()) {
+          this.addDefaultFeedback(componentState);
+        }
       }
     } else if (action === 'save') {
       this.isLatestComponentStateSubmit = false;
@@ -405,7 +414,11 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   getStudentChosenRadioChoice(): any[] {
     const studentChoiceObjects = [];
-    const choiceObject = this.getChoiceById(this.studentChoices);
+    const originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
+    const choiceObject = this.getChoiceById(originalComponentContent, this.studentChoices);
     if (choiceObject != null) {
       const studentChoiceObject = {
         id: choiceObject.id,
@@ -418,8 +431,12 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   getStudentChosenCheckboxChoice(): any[] {
     const studentChoiceObjects = [];
+    const originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
     for (const studentChoiceId of this.studentChoices) {
-      const choiceObject = this.getChoiceById(studentChoiceId);
+      const choiceObject = this.getChoiceById(originalComponentContent, studentChoiceId);
       if (choiceObject != null) {
         const studentChoiceObject = {
           id: choiceObject.id,
@@ -449,8 +466,13 @@ export class MultipleChoiceStudent extends ComponentStudent {
     return false;
   }
 
-  getChoiceById(choiceId: string): any {
-    for (const choice of this.componentContent.choices) {
+  /**
+   * @param originalComponentContent The component content that has not had any additional content
+   * injected into it such as onclick attributes and absolute asset paths.
+   * @param choiceId
+   */
+  getChoiceById(originalComponentContent: any, choiceId: string): any {
+    for (const choice of originalComponentContent.choices) {
       if (choice.id === choiceId) {
         return choice;
       }

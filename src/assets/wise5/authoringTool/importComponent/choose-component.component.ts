@@ -1,6 +1,7 @@
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { ConfigService } from '../../services/configService';
 import { TeacherDataService } from '../../services/teacherDataService';
+import { ProjectLibraryService } from '../../services/projectLibraryService';
 
 class ChooseComponentController {
   importLibraryProjectId: number;
@@ -12,11 +13,18 @@ class ChooseComponentController {
   libraryProjectsList: any = [];
   myProjectsList: any = [];
 
-  static $inject = ['$state', 'ConfigService', 'ProjectService', 'TeacherDataService'];
+  static $inject = [
+    '$state',
+    'ConfigService',
+    'ProjectLibraryService',
+    'ProjectService',
+    'TeacherDataService'
+  ];
 
   constructor(
     private $state: any,
     private ConfigService: ConfigService,
+    private ProjectLibraryService: ProjectLibraryService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService
   ) {}
@@ -29,8 +37,8 @@ class ChooseComponentController {
     this.importProjectId = null;
     this.importProject = null;
     this.myProjectsList = this.ConfigService.getAuthorableProjects();
-    this.ProjectService.getLibraryProjects().then((libraryProjects) => {
-      this.libraryProjectsList = this.ProjectService.sortAndFilterUniqueLibraryProjects(
+    this.ProjectLibraryService.getLibraryProjects().then((libraryProjects) => {
+      this.libraryProjectsList = this.ProjectLibraryService.sortAndFilterUniqueProjects(
         libraryProjects
       );
     });

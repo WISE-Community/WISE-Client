@@ -136,15 +136,15 @@ function createStudentEventExportRow() {
   const columnNameToNumber = dataExportController.getColumnNameToNumber(columnNames);
   const rowCounter = 10;
   const workgroupId = 100;
-  const wiseId1 = 1000;
-  const wiseId2 = null;
-  const wiseId3 = null;
+  const userId1 = 1000;
+  const userId2 = null;
+  const userId3 = null;
   const studentName1 = 'Spongebob Squarepants';
   const studentName2 = null;
   const studentName3 = null;
   const periodName = '5';
   const event = { event: 'nodeEntered', data: { nodeId: 'node1' } };
-  const row = dataExportController.createStudentEventExportRow(columnNames, columnNameToNumber, rowCounter, workgroupId, wiseId1, wiseId2, wiseId3, studentName1, studentName2, studentName3, periodName, event);
+  const row = dataExportController.createStudentEventExportRow(columnNames, columnNameToNumber, rowCounter, workgroupId, userId1, userId2, userId3, studentName1, studentName2, studentName3, periodName, event);
   return { row, columnNameToNumber };
 }
 
@@ -153,9 +153,9 @@ function createTeacherEventExportRow() {
   const columnNameToNumber = dataExportController.getColumnNameToNumber(columnNames);
   const rowCounter = 10;
   const workgroupId = 100;
-  const wiseId = 1000;
+  const userId = 1000;
   const username = 'Mrs. Puff';
   const event = { event: 'nodeGradingViewDisplayed', data: { nodeId: 'node1' } };
-  const row = dataExportController.createTeacherEventExportRow(columnNames, columnNameToNumber, rowCounter, workgroupId, wiseId, username, event);
+  const row = dataExportController.createTeacherEventExportRow(columnNames, columnNameToNumber, rowCounter, workgroupId, userId, username, event);
   return { row, columnNameToNumber };
 }

@@ -5,6 +5,7 @@ import ExportController from './exportController';
 import { ConfigService } from '../../services/configService';
 import { UtilService } from '../../services/utilService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { DataExportService } from '../../services/dataExportService';
 
 class ExportVisitsController extends ExportController {
   project: any;
@@ -30,6 +31,7 @@ class ExportVisitsController extends ExportController {
     '$filter',
     '$state',
     'ConfigService',
+    'DataExportService',
     'ProjectService',
     'FileSaver',
     'TeacherDataService',
@@ -40,6 +42,7 @@ class ExportVisitsController extends ExportController {
     private $filter: any,
     private $state: any,
     private ConfigService: ConfigService,
+    private DataExportService: DataExportService,
     private ProjectService: TeacherProjectService,
     FileSaver: any,
     private TeacherDataService: TeacherDataService,
@@ -94,11 +97,11 @@ class ExportVisitsController extends ExportController {
     this.columnNames = [
       '#',
       'Workgroup ID',
-      'WISE ID 1',
+      'User ID 1',
       'Student Name 1',
-      'WISE ID 2',
+      'User ID 2',
       'Student Name 2',
-      'WISE ID 3',
+      'User ID 3',
       'Student Name 3',
       'Run ID',
       'Project ID',
@@ -125,11 +128,11 @@ class ExportVisitsController extends ExportController {
     this.columnExplanations = [
       { name: '#', explanation: this.$translate('columnExplanationRowNumber') },
       { name: 'Workgroup ID', explanation: this.$translate('columnExplanationWorkgroupID') },
-      { name: 'WISE ID 1', explanation: this.$translate('columnExplanationWISEID1') },
+      { name: 'User ID 1', explanation: this.$translate('columnExplanationUserID1') },
       { name: 'Student Name 1', explanation: this.$translate('columnExplanationStudentName1') },
-      { name: 'WISE ID 2', explanation: this.$translate('columnExplanationWISEID2') },
+      { name: 'User ID 2', explanation: this.$translate('columnExplanationUserID2') },
       { name: 'Student Name 2', explanation: this.$translate('columnExplanationStudentName2') },
-      { name: 'WISE ID 3', explanation: this.$translate('columnExplanationWISEID3') },
+      { name: 'User ID 3', explanation: this.$translate('columnExplanationUserID3') },
       { name: 'Student Name 3', explanation: this.$translate('columnExplanationStudentName3') },
       { name: 'Run ID', explanation: this.$translate('columnExplanationRunID') },
       { name: 'Project ID', explanation: this.$translate('columnExplanationProjectID') },
@@ -217,12 +220,12 @@ class ExportVisitsController extends ExportController {
     this.checkedItems = this.getCheckedItems();
     const includeStudentEvents = true;
     const includeTeacherEvents = false;
-    this.TeacherDataService.retrieveEventsExport(
+    this.DataExportService.retrieveEventsExport(
       includeStudentEvents,
       includeTeacherEvents,
       this.includeStudentNames
-    ).then((response) => {
-      this.handleExportCallback(response);
+    ).then((events: any) => {
+      this.handleExportCallback(events);
     });
   }
 
@@ -236,14 +239,14 @@ class ExportVisitsController extends ExportController {
     return checkedItems;
   }
 
-  handleExportCallback(response: any) {
-    let events = this.sortEvents(response.events);
-    this.deletedSteps = this.getDeletedSteps(events);
-    events = this.cleanEvents(events);
+  handleExportCallback(events: any[]) {
+    let sortedEvents = this.sortEvents(events);
+    this.deletedSteps = this.getDeletedSteps(sortedEvents);
+    sortedEvents = this.cleanEvents(sortedEvents);
     this.initializeWorkgroupIdNodeIdToVisitCounter(this.nodes);
     let previousEnteredEvent = null;
     let rows = [];
-    for (const event of events) {
+    for (const event of sortedEvents) {
       if (this.isStepEnteredEvent(event)) {
         if (previousEnteredEvent != null) {
           rows.push(this.createVisit(previousEnteredEvent, null, rows));
@@ -486,7 +489,7 @@ class ExportVisitsController extends ExportController {
   }
 
   addSingleUserCells(row: any[], studentNumber: number, user: any) {
-    this.setCellInRow(row, `WISE ID ${studentNumber}`, user.id);
+    this.setCellInRow(row, `User ID ${studentNumber}`, user.id);
     if (this.includeStudentNames) {
       this.setCellInRow(row, `Student Name ${studentNumber}`, user.name);
     }

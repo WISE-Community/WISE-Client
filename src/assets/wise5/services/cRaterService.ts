@@ -3,6 +3,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class CRaterService {
@@ -15,7 +16,11 @@ export class CRaterService {
    * @param studentData the student data
    * @returns a promise that returns the result of the CRater request
    */
-  makeCRaterScoringRequest(cRaterItemId: string, cRaterResponseId: number, studentData: any) {
+  makeCRaterScoringRequest(
+    cRaterItemId: string,
+    cRaterResponseId: number,
+    studentData: any
+  ): Observable<any> {
     const url = this.ConfigService.getCRaterRequestURL() + '/score';
     const params = new HttpParams()
       .set('itemId', cRaterItemId)
@@ -24,12 +29,7 @@ export class CRaterService {
     const options = {
       params: params
     };
-    return this.http
-      .get(url, options)
-      .toPromise()
-      .then((response) => {
-        return response;
-      });
+    return this.http.get(url, options);
   }
 
   /**

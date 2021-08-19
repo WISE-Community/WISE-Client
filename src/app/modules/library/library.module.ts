@@ -47,6 +47,7 @@ import {
 import { ShareProjectDialogComponent } from './share-project-dialog/share-project-dialog.component';
 import { CopyProjectDialogComponent } from './copy-project-dialog/copy-project-dialog.component';
 import { LibraryPaginatorIntl } from './libraryPaginatorIntl';
+import { DiscourseCategoryActivityComponent } from './discourse-category-activity/discourse-category-activity.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -96,7 +97,8 @@ const materialModules = [
     PersonalLibraryComponent,
     PersonalLibraryDetailsComponent,
     ShareProjectDialogComponent,
-    CopyProjectDialogComponent
+    CopyProjectDialogComponent,
+    DiscourseCategoryActivityComponent
   ],
   exports: [
     HomePageProjectLibraryComponent,

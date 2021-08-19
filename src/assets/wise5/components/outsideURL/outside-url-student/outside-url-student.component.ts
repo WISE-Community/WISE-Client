@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
@@ -24,8 +27,11 @@ export class OutsideUrlStudent extends ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
     protected sanitizer: DomSanitizer,
+    protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
@@ -33,8 +39,10 @@ export class OutsideUrlStudent extends ComponentStudent {
       ComponentService,
       ConfigService,
       NodeService,
-      sanitizer,
+      NotebookService,
+      StudentAssetService,
       StudentDataService,
+      upgrade,
       UtilService
     );
   }

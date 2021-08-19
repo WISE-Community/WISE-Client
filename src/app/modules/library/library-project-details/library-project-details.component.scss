@@ -7,7 +7,7 @@
 }
 
 .info-block {
-  margin: 16px 0 8px;
+  margin: 16px 0 0;
   padding: 12px;
   overflow: hidden;
 }
@@ -36,17 +36,23 @@
   margin-bottom: 2px;
 }
 
-.library-project-details__info {
+.mat-dialog-actions {
+  .mat-button, .mat-button-base {
+    margin-left: 0;
+  }
+}
+
+.details {
   > p, div {
     margin: 0 0 12px;
   }
 }
 
-.library-project-details__pe {
+.pe {
   display: inline-block;
 }
 
-.library-project-details__license {
+.license {
   margin: 0 -12px -12px;
   padding: 12px;
 
@@ -56,4 +62,9 @@
     margin-bottom: 2px;
     vertical-align: middle;
   }
+}
+
+discourse-category-activity {
+  margin-bottom: 12px;
+  display: block;
 }

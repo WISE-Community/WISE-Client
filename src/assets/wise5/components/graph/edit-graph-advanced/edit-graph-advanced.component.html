@@ -45,20 +45,9 @@
       {{ ::'graph.hideTrialSelect' | translate }}
     </md-checkbox>
   </div>
-  <div>
-    <md-checkbox class='md-primary'
-                 ng-model='$ctrl.authoringComponentContent.showSaveButton'
-                 ng-change='$ctrl.componentChanged()'>
-      {{ ::'SHOW_SAVE_BUTTON' | translate }}
-    </md-checkbox>
-  </div>
-  <div>
-    <md-checkbox class='md-primary'
-                 ng-model='$ctrl.authoringComponentContent.showSubmitButton'
-                 ng-change='$ctrl.componentChanged()'>
-      {{ ::'SHOW_SUBMIT_BUTTON' | translate }}
-    </md-checkbox>
-  </div>
+  <edit-component-save-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-save-button>
+  <br/>
+  <edit-component-submit-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-submit-button>
   <div>
     <md-checkbox class='md-primary'
                  ng-if='$ctrl.isNotebookEnabled()'
@@ -77,6 +66,10 @@
              ng-change='$ctrl.componentChanged()'/>
     </md-input-container>
   </div>
+  <edit-component-default-feedback
+      ng-if="$ctrl.authoringComponentContent.showSubmitButton"
+      [authoring-component-content]="$ctrl.authoringComponentContent">
+  </edit-component-default-feedback>
   <div>
     <md-checkbox class='md-primary'
                  ng-model='$ctrl.authoringComponentContent.useCustomLegend'

@@ -1,11 +1,16 @@
 import { Directive, Input } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SafeHtml } from '@angular/platform-browser';
+import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
+import { GenerateImageDialog } from '../directives/generate-image-dialog/generate-image-dialog';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NodeService } from '../services/nodeService';
+import { NotebookService } from '../services/notebookService';
+import { StudentAssetService } from '../services/studentAssetService';
 import { StudentDataService } from '../services/studentDataService';
 import { UtilService } from '../services/utilService';
+import { StudentAssetRequest } from '../vle/studentAsset/StudentAssetRequest';
 import { ComponentService } from './componentService';
 import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
@@ -27,12 +32,12 @@ export abstract class ComponentStudent {
   @Input()
   workgroupId: number;
 
-  attachments: any[];
+  attachments: any[] = [];
   componentId: string;
   componentType: string;
   prompt: SafeHtml;
-  isPromptVisible: boolean = true;
   isSaveButtonVisible: boolean = false;
+  isShowAddToNotebookButton: boolean = false;
   isSubmitButtonVisible: boolean = false;
   isSaveOrSubmitButtonVisible: boolean = false;
   isSubmitButtonDisabled: boolean = false;
@@ -43,10 +48,12 @@ export abstract class ComponentStudent {
   isStudentAttachmentEnabled: boolean = false;
   submitCounter: number = 0;
   latestAnnotations: any;
+  parentStudentWorkIds: any[];
   saveMessage = {
     text: '',
-    time: ''
+    time: null
   };
+  showAddToNotebookButton: boolean;
   requestComponentStateSubscription: Subscription;
   annotationSavedToServerSubscription: Subscription;
   nodeSubmitClickedSubscription: Subscription;
@@ -58,15 +65,16 @@ export abstract class ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
-    protected sanitizer: DomSanitizer,
+    protected NotebookService: NotebookService,
+    protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
+    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {}
 
   ngOnInit(): void {
     this.componentId = this.componentContent.id;
     this.componentType = this.componentContent.type;
-    this.prompt = this.sanitizer.bypassSecurityTrustHtml(this.componentContent.prompt);
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.isSaveOrSubmitButtonVisible = this.isSaveButtonVisible || this.isSubmitButtonVisible;
@@ -76,6 +84,16 @@ export abstract class ComponentStudent {
         this.componentId,
         this.workgroupId
       );
+    }
+    this.showAddToNotebookButton =
+      this.componentContent.showAddToNotebookButton == null
+        ? true
+        : this.componentContent.showAddToNotebookButton;
+    this.isStudentAttachmentEnabled = this.componentContent.isStudentAttachmentEnabled;
+    this.isShowAddToNotebookButton = this.isAddToNotebookEnabled();
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
+      this.isSubmitButtonDisabled = true;
     }
     this.subscribeToSubscriptions();
   }
@@ -91,7 +109,10 @@ export abstract class ComponentStudent {
   subscribeToSubscriptions(): void {
     this.subscribeToAnnotationSavedToServer();
     this.subscribeToNodeSubmitClicked();
+    this.subscribeToNotebookItemChosen();
     this.subscribeToNotifyConnectedComponents();
+    this.subscribeToAttachStudentAsset();
+    this.subscribeToStarterStateRequest();
     this.subscribeToStudentWorkSavedToServer();
     this.subscribeToRequestComponentState();
   }
@@ -114,7 +135,7 @@ export abstract class ComponentStudent {
     this.subscriptions.add(
       this.NodeService.nodeSubmitClicked$.subscribe(({ nodeId }) => {
         if (this.nodeId === nodeId) {
-          this.handleNodeSubmit();
+          this.submit('nodeSubmitButton');
         }
       })
     );
@@ -132,6 +153,32 @@ export abstract class ComponentStudent {
     );
   }
 
+  subscribeToNotebookItemChosen() {
+    this.subscriptions.add(
+      this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
+        if (requester === `${this.nodeId}-${this.componentId}`) {
+          const studentWorkId = notebookItem.content.studentWorkIds[0];
+          this.importWorkByStudentWorkId(studentWorkId);
+        }
+      })
+    );
+  }
+
+  importWorkByStudentWorkId(studentWorkId: number): void {
+    this.StudentDataService.getStudentWorkById(studentWorkId).then((componentState) => {
+      if (componentState != null) {
+        this.setStudentWork(componentState);
+        this.setParentStudentWorkIdToCurrentStudentWork(studentWorkId);
+        this.NotebookService.setNotesVisible(false);
+        this.NotebookService.setInsertMode({ insertMode: false });
+      }
+    });
+  }
+
+  setParentStudentWorkIdToCurrentStudentWork(studentWorkId: number): void {
+    this.parentStudentWorkIds = [studentWorkId];
+  }
+
   processConnectedComponentState(componentState: any): void {
     // overridden by children
   }
@@ -140,8 +187,62 @@ export abstract class ComponentStudent {
     return this.nodeId === object.nodeId && this.componentId === object.componentId;
   }
 
-  handleNodeSubmit(): void {
-    this.isSubmit = true;
+  subscribeToAttachStudentAsset() {
+    this.subscriptions.add(
+      this.StudentAssetService.attachStudentAsset$.subscribe(
+        (studentAssetRequest: StudentAssetRequest) => {
+          if (this.isForThisComponent(studentAssetRequest)) {
+            this.copyAndAttachStudentAsset(studentAssetRequest.asset);
+          }
+        }
+      )
+    );
+  }
+
+  subscribeToStarterStateRequest() {
+    this.subscriptions.add(
+      this.NodeService.starterStateRequest$.subscribe((args: any) => {
+        if (this.isForThisComponent(args)) {
+          this.generateStarterState();
+        }
+      })
+    );
+  }
+
+  generateStarterState() {}
+
+  copyAndAttachStudentAsset(studentAsset: any): any {
+    this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset: any) => {
+      const attachment = {
+        studentAssetId: copiedAsset.id,
+        iconURL: copiedAsset.iconURL,
+        url: copiedAsset.url,
+        type: copiedAsset.type
+      };
+      this.attachments.push(attachment);
+      this.attachStudentAsset(copiedAsset);
+      this.studentDataChanged();
+    });
+  }
+
+  attachStudentAsset(studentAsset: any): any {
+    return this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
+      const attachment = {
+        studentAssetId: copiedAsset.id,
+        iconURL: copiedAsset.iconURL,
+        url: copiedAsset.url,
+        type: copiedAsset.type
+      };
+      this.attachments.push(attachment);
+      this.studentDataChanged();
+    });
+  }
+
+  removeAttachment(attachment: any): void {
+    if (this.attachments.indexOf(attachment) !== -1) {
+      this.attachments.splice(this.attachments.indexOf(attachment), 1);
+      this.studentDataChanged();
+    }
   }
 
   subscribeToStudentWorkSavedToServer(): void {
@@ -172,8 +273,8 @@ export abstract class ComponentStudent {
       } else {
         this.setSavedMessage(clientSaveTime);
       }
+      this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
     }
-    this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
   }
 
   getIsDirty(): boolean {
@@ -311,11 +412,10 @@ export abstract class ComponentStudent {
   }
 
   submit(submitTriggeredBy = null): void {
-    if (this.getIsSubmitDirty()) {
+    if (this.isSubmitDirty) {
       let isPerformSubmit = true;
       if (this.hasMaxSubmitCount()) {
         const numberOfSubmitsLeft = this.getNumberOfSubmitsLeft();
-
         if (this.hasSubmitMessage()) {
           isPerformSubmit = this.confirmSubmit(numberOfSubmitsLeft);
         } else {
@@ -332,16 +432,23 @@ export abstract class ComponentStudent {
     }
   }
 
-  getIsSubmitDirty(): boolean {
-    return this.isSubmitDirty;
-  }
-
   hasMaxSubmitCount(): boolean {
     return this.getMaxSubmitCount() != null;
   }
 
   hasUsedAllSubmits(): boolean {
     return this.getNumberOfSubmitsLeft() <= 0;
+  }
+
+  tryDisableComponent(): void {
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
+      this.isSubmitButtonDisabled = true;
+    }
+  }
+
+  hasMaxSubmitCountAndUsedAllSubmits() {
+    return this.hasMaxSubmitCount() && this.hasUsedAllSubmits();
   }
 
   getNumberOfSubmitsLeft(): number {
@@ -447,20 +554,20 @@ export abstract class ComponentStudent {
     this.setSaveText('', null);
   }
 
-  setSaveText(message: string, time: string): void {
+  setSaveText(message: string, time: number): void {
     this.saveMessage.text = message;
     this.saveMessage.time = time;
   }
 
-  setSavedMessage(time: string): void {
+  setSavedMessage(time: number): void {
     this.setSaveText($localize`Saved`, time);
   }
 
-  setAutoSavedMessage(time: string): void {
+  setAutoSavedMessage(time: number): void {
     this.setSaveText($localize`Auto Saved`, time);
   }
 
-  setSubmittedMessage(time: string): void {
+  setSubmittedMessage(time: number): void {
     this.setSaveText($localize`Submitted`, time);
   }
 
@@ -513,5 +620,176 @@ export abstract class ComponentStudent {
      * the promise immediately
      */
     promise.resolve(componentState);
+  }
+
+  /**
+   * Render the component state and then generate an image from it.
+   * @param componentState The component state to render.
+   * @return A promise that will return an image.
+   */
+  generateImageFromComponentState(componentState: any): any {
+    return this.upgrade.$injector
+      .get('$mdDialog')
+      .show({
+        templateUrl: 'assets/wise5/directives/generate-image-dialog/generate-image-dialog.html',
+        controller: GenerateImageDialog,
+        controllerAs: '$ctrl',
+        locals: {
+          componentState: componentState
+        }
+      })
+      .then((image: any) => {
+        return image;
+      });
+  }
+
+  isAddToNotebookEnabled() {
+    return (
+      this.isNotebookEnabled() &&
+      this.isStudentNoteClippingEnabled() &&
+      this.showAddToNotebookButton
+    );
+  }
+
+  copyPublicNotebookItem() {
+    this.NotebookService.setInsertMode({
+      nodeId: this.nodeId,
+      componentId: this.componentId,
+      insertMode: true,
+      requester: this.nodeId + '-' + this.componentId,
+      visibleSpace: 'public'
+    });
+    this.NotebookService.setNotesVisible(true);
+  }
+
+  isNotebookEnabled() {
+    return this.NotebookService.isNotebookEnabled();
+  }
+
+  isStudentNoteClippingEnabled() {
+    return this.NotebookService.isStudentNoteClippingEnabled();
+  }
+
+  showStudentAssets() {
+    this.StudentAssetService.broadcastShowStudentAssets({
+      nodeId: this.nodeId,
+      componentId: this.componentId
+    });
+  }
+
+  importWorkAsBackground(componentState: any): void {
+    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
+      this.componentContent,
+      componentState
+    );
+    if (connectedComponent.importWorkAsBackground) {
+      this.setComponentStateAsBackgroundImage(componentState);
+    }
+  }
+
+  setComponentStateAsBackgroundImage(componentState: any): void {
+    this.generateImageFromComponentState(componentState).then((image: any) => {
+      this.setBackgroundImage(image.url);
+    });
+  }
+
+  setBackgroundImage(image: string): void {}
+
+  hasMaxScore(): boolean {
+    return this.componentContent.maxScore != null && this.componentContent.maxScore !== '';
+  }
+
+  getMaxScore(): number {
+    return this.componentContent.maxScore;
+  }
+
+  getClientSaveTime(componentState: any): number {
+    return this.ConfigService.convertToClientTimestamp(componentState.serverSaveTime);
+  }
+
+  addDefaultFeedback(componentState: any): void {
+    const defaultFeedback = this.getDefaultFeedback(this.submitCounter);
+    if (defaultFeedback != null) {
+      componentState.annotations = [this.createDefaultFeedbackAnnotation(defaultFeedback)];
+    }
+  }
+
+  hasDefaultFeedback(): boolean {
+    return (
+      this.componentContent.defaultFeedback != null &&
+      this.componentContent.defaultFeedback.length > 0
+    );
+  }
+
+  getDefaultFeedback(submitCount: number): string {
+    return this.componentContent.defaultFeedback[submitCount - 1];
+  }
+
+  createDefaultFeedbackAnnotation(feedbackText: string): any {
+    const defaultFeedbackAnnotationData: any = {
+      autoGrader: 'defaultFeedback',
+      value: feedbackText
+    };
+    return this.createAutoCommentAnnotation(defaultFeedbackAnnotationData);
+  }
+
+  createAutoScoreAnnotation(data: any): any {
+    return this.AnnotationService.createAutoScoreAnnotation(
+      this.ConfigService.getRunId(),
+      this.ConfigService.getPeriodId(),
+      this.nodeId,
+      this.componentId,
+      this.ConfigService.getWorkgroupId(),
+      data
+    );
+  }
+
+  createAutoCommentAnnotation(data: any): any {
+    return this.AnnotationService.createAutoCommentAnnotation(
+      this.ConfigService.getRunId(),
+      this.ConfigService.getPeriodId(),
+      this.nodeId,
+      this.componentId,
+      this.ConfigService.getWorkgroupId(),
+      data
+    );
+  }
+
+  updateLatestScoreAnnotation(annotation: any): void {
+    this.latestAnnotations.score = annotation;
+  }
+
+  updateLatestCommentAnnotation(annotation: any): void {
+    this.latestAnnotations.comment = annotation;
+  }
+
+  registerNotebookItemChosenListener(): void {
+    this.subscriptions.add(
+      this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
+        if (requester === `${this.nodeId}-${this.componentId}`) {
+          const studentWorkId = notebookItem.content.studentWorkIds[0];
+          this.importWorkByStudentWorkId(studentWorkId);
+        }
+      })
+    );
+  }
+
+  copyPublicNotebookItemButtonClicked(): void {
+    this.NotebookService.setInsertMode({
+      nodeId: this.nodeId,
+      componentId: this.componentId,
+      insertMode: true,
+      requester: this.nodeId + '-' + this.componentId,
+      visibleSpace: 'public'
+    });
+    this.NotebookService.setNotesVisible(true);
+  }
+
+  getElementById(id: string, getFirstResult: boolean = false): any {
+    if (getFirstResult) {
+      return $(`#${id}`)[0];
+    } else {
+      return $(`#${id}`);
+    }
   }
 }

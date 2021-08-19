@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ComponentGrading } from '../../../classroomMonitor/classroomMonitorComponents/shared/component-grading.component';
 import { ProjectService } from '../../../services/projectService';
 import { DrawService } from '../drawService';
@@ -6,7 +6,8 @@ import { DrawService } from '../drawService';
 @Component({
   selector: 'draw-grading',
   templateUrl: 'draw-grading.component.html',
-  styleUrls: ['draw-grading.component.scss']
+  styleUrls: ['draw-grading.component.scss', '../drawing-tool.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DrawGrading extends ComponentGrading {
   drawingToolId: string;
@@ -19,11 +20,11 @@ export class DrawGrading extends ComponentGrading {
   ngOnInit(): void {
     super.ngOnInit();
     this.drawingToolId = this.getDrawingToolId();
-    // wait for angular to completely render the html before we initialize the canvas
-    setTimeout(() => {
-      this.initializeDrawingTool();
-      this.setStudentWork();
-    });
+  }
+
+  ngAfterViewInit(): void {
+    this.initializeDrawingTool();
+    this.setStudentWork();
   }
 
   getDrawingToolId(): string {
@@ -39,14 +40,13 @@ export class DrawGrading extends ComponentGrading {
   }
 
   initializeDrawingTool(): void {
-    const isHideDrawingTools: boolean = true;
     this.drawingTool = this.DrawService.initializeDrawingTool(
       this.drawingToolId,
       this.componentContent.stamps,
       this.componentContent.width,
-      this.componentContent.height,
-      isHideDrawingTools
+      this.componentContent.height
     );
+    this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, false);
     this.drawingTool.canvas.removeListeners();
   }
 

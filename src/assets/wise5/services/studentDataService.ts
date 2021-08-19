@@ -960,10 +960,23 @@ export class StudentDataService extends DataService {
       events: events,
       annotations: annotations
     };
+    this.copyClientSaveTimeToServerSaveTime(savedStudentDataResponse);
     this.handleSaveToServerSuccess(savedStudentDataResponse);
     const deferred = this.upgrade.$injector.get('$q').defer();
     deferred.resolve(savedStudentDataResponse);
     return deferred.promise;
+  }
+
+  copyClientSaveTimeToServerSaveTime(studentDataResponse: any): void {
+    for (const studentWork of studentDataResponse.studentWorkList) {
+      studentWork.serverSaveTime = studentWork.clientSaveTime;
+    }
+    for (const event of studentDataResponse.events) {
+      event.serverSaveTime = event.clientSaveTime;
+    }
+    for (const annotation of studentDataResponse.annotations) {
+      annotation.serverSaveTime = annotation.clientSaveTime;
+    }
   }
 
   handleSaveToServerSuccess(savedStudentDataResponse) {

@@ -25,12 +25,12 @@ describe('TableGrading', () => {
     const componentContent = {
       isDataExplorerEnabled: false
     };
-    spyOn(TestBed.get(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
+    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
       componentContent
     );
     component = fixture.componentInstance;
     component.componentContent = {};
-    component.componentState = '{ "studentData": { "tableData": [] } }';
+    component.componentState = { studentData: { tableData: [] } };
     fixture.detectChanges();
     component.componentContent = { globalCellSize: 10 };
   });

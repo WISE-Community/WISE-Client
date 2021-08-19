@@ -323,10 +323,22 @@ export class UtilService {
    * @return text without html tags and new lines
    */
   removeHTMLTags(html = '') {
-    let text = html.replace(/<\/?[^>]+(>|$)/g, ' ');
-    text = text.replace(/\n/g, ' ');
-    text = text.replace(/\r/g, ' ');
-    return text;
+    let text = this.replaceImgTagWithFileName(html);
+    text = text.replace(/<\/?[^>]+(>|$)/g, ' ');
+    return this.removeNewLines(text);
+  }
+
+  removeNewLines(html = '') {
+    let text = html.replace(/\n/g, ' ');
+    return text.replace(/\r/g, ' ');
+  }
+
+  /**
+   * Replace img tags with the src value.
+   * Example: <img src="computer.png"/> will be replaced with computer.png.
+   */
+  replaceImgTagWithFileName(html = '') {
+    return html.replace(/<img.*?src=["'](.*?)["'].*?>/g, '$1');
   }
 
   /**
@@ -381,6 +393,26 @@ export class UtilService {
       return date.toDateString() + ' ' + date.toLocaleTimeString();
     }
     return '';
+  }
+
+  getComponentTypes(): any[] {
+    return [
+      { type: 'Animation', name: this.getComponentTypeLabel('Animation') },
+      { type: 'AudioOscillator', name: this.getComponentTypeLabel('AudioOscillator') },
+      { type: 'ConceptMap', name: this.getComponentTypeLabel('ConceptMap') },
+      { type: 'Discussion', name: this.getComponentTypeLabel('Discussion') },
+      { type: 'Draw', name: this.getComponentTypeLabel('Draw') },
+      { type: 'Embedded', name: this.getComponentTypeLabel('Embedded') },
+      { type: 'Graph', name: this.getComponentTypeLabel('Graph') },
+      { type: 'Label', name: this.getComponentTypeLabel('Label') },
+      { type: 'Match', name: this.getComponentTypeLabel('Match') },
+      { type: 'MultipleChoice', name: this.getComponentTypeLabel('MultipleChoice') },
+      { type: 'OpenResponse', name: this.getComponentTypeLabel('OpenResponse') },
+      { type: 'OutsideURL', name: this.getComponentTypeLabel('OutsideURL') },
+      { type: 'HTML', name: this.getComponentTypeLabel('HTML') },
+      { type: 'Summary', name: this.getComponentTypeLabel('Summary') },
+      { type: 'Table', name: this.getComponentTypeLabel('Table') }
+    ];
   }
 
   getComponentTypeLabel(componentType) {

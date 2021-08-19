@@ -177,20 +177,10 @@
  </button>
 </div>
 </div>
-<div>
-<md-checkbox class='md-primary'
-            ng-model='$ctrl.authoringComponentContent.showSaveButton'
-            ng-change='$ctrl.componentChanged()'>
- {{ ::'SHOW_SAVE_BUTTON' | translate }}
-</md-checkbox>
-</div>
-<div>
-<md-checkbox class='md-primary'
-            ng-model='$ctrl.authoringComponentContent.showSubmitButton'
-            ng-change='$ctrl.componentChanged()'>
- {{ ::'SHOW_SUBMIT_BUTTON' | translate }}
-</md-checkbox>
-</div>
+<br/>
+<edit-component-save-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-save-button>
+<br/>
+<edit-component-submit-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-submit-button>
 <div>
 <md-checkbox class='md-primary'
             ng-if='$ctrl.isNotebookEnabled()'
@@ -208,6 +198,10 @@
         ng-model-options='{ debounce: 1000 }'
         ng-change='$ctrl.componentChanged()'/>
 </md-input-container>
+<edit-component-default-feedback
+    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
+    [authoring-component-content]="$ctrl.authoringComponentContent">
+</edit-component-default-feedback>
 <span style="display: inline;">
   <md-icon>help</md-icon>
   <md-tooltip md-direction="right">{{ ::'maxSubmitsNote' | translate }}</md-tooltip>

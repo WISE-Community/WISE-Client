@@ -2,10 +2,6 @@
 
 $notice-bg: map-get($default-colors, notice-bg);
 
-.prompt {
-  width: 100%;
-}
-
 .background {
   max-width: 100%;
   width: 360px;
@@ -44,6 +40,10 @@ $notice-bg: map-get($default-colors, notice-bg);
 
 .node-dimension {
   max-width: 80px;
+}
+
+.links-title {
+  width: 60%;
 }
 
 .starter-concept-map {

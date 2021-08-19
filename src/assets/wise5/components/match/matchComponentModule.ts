@@ -1,14 +1,17 @@
 'use strict';
 
 import * as angular from 'angular';
-import { downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { MatchService } from './matchService';
-import MatchController from './matchController';
+import { MatchStudent } from './match-student/match-student.component';
 
 let matchComponentModule = angular
   .module('matchComponentModule', ['pascalprecht.translate'])
   .service('MatchService', downgradeInjectable(MatchService))
-  .controller('MatchController', MatchController)
+  .directive(
+    'matchStudent',
+    downgradeComponent({ component: MatchStudent }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {

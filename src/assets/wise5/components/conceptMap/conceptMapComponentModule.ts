@@ -1,14 +1,17 @@
 'use strict';
 
 import * as angular from 'angular';
-import { downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { ConceptMapService } from './conceptMapService';
-import ConceptMapController from './conceptMapController';
+import { ConceptMapStudent } from './concept-map-student/concept-map-student.component';
 
 let conceptMapComponentModule = angular
   .module('conceptMapComponentModule', ['pascalprecht.translate'])
   .service('ConceptMapService', downgradeInjectable(ConceptMapService))
-  .controller('ConceptMapController', ConceptMapController)
+  .directive(
+    'conceptMapStudent',
+    downgradeComponent({ component: ConceptMapStudent }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {

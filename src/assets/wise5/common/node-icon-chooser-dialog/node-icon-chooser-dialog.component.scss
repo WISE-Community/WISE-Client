@@ -1,0 +1,36 @@
+@import
+  '~@angular/material/theming',
+  '~style/abstracts/functions',
+  '~style/abstracts/variables';
+
+@mixin selected {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+.preview-icon {
+  color: #ffffff;
+}
+
+.mat-chip {
+  cursor: pointer;
+}
+
+.icon-choice {
+  padding: 6px;
+  border-radius: $button-border-radius;
+}
+
+.icon-choice, .ki-choice {
+  &.mat-chip-selected {
+    @include selected;
+  }
+}
+
+.color-choice {
+  width: 32px;
+
+  &.mat-chip-selected {
+    border: 4px solid #000000;
+  }
+}

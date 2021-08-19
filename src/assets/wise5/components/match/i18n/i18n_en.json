@@ -14,7 +14,7 @@
   "match.incorrectPositionFeedback": "Incorrect Position Feedback",
   "match.position": "Position",
   "match.showPrivateNotesAsChoices": "Show Private Notes As Choices",
-  "match.showSourceBucketOnTheLeftAndTargetBucketsOnTheRight": "Show Source Bucket on the Left and Target Buckets on the Right",
+  "match.showSourceBucketOnTheLeftAndTargetBucketsOnTheRight": "Show Source and Target Buckets Side-by-Side",
   "match.sourceBucketName": "Source Bucket Name (this is where all the choices initially show up)",
   "match.studentCanCreateChoices": "Student Can Create Choices",
   "match.targetBucketName": "Target Bucket Name",

@@ -51,35 +51,8 @@ class ChooseStructureLocationController {
 
   injectUniqueIds(structure) {
     structure.group.id = this.ProjectService.getNextAvailableGroupId();
-    const newNodeIds = [];
-    const oldToNewNodeIds = {};
-    for (const node of structure.nodes) {
-      const oldNodeId = node.id;
-      const newNodeId = this.ProjectService.getNextAvailableNodeId(newNodeIds);
-      oldToNewNodeIds[oldNodeId] = newNodeId;
-      newNodeIds.push(newNodeId);
-    }
-    return this.replaceOldNodeIds(structure, oldToNewNodeIds);
-  }
-
-  replaceOldNodeIds(structure, oldToNewNodeIds) {
-    let structureJSONString = JSON.stringify(structure);
-    for (const oldNodeId of Object.keys(oldToNewNodeIds).reverse()) {
-      const newNodeId = oldToNewNodeIds[oldNodeId];
-      structureJSONString = this.replaceNodeIds(structureJSONString, oldNodeId, newNodeId);
-      structureJSONString = this.replaceConstraintIds(structureJSONString, oldNodeId, newNodeId);
-    }
-    return JSON.parse(structureJSONString);
-  }
-
-  replaceNodeIds(structureJSONString, oldNodeId, newNodeId) {
-    const regex = new RegExp(`\"${oldNodeId}\"`, 'g');
-    return structureJSONString.replace(regex, `"${newNodeId}"`);
-  }
-
-  replaceConstraintIds(structureJSONString, oldNodeId, newNodeId) {
-    const regex = new RegExp(`\"${oldNodeId}Constraint`, 'g');
-    return structureJSONString.replace(regex, `"${newNodeId}Constraint`);
+    const oldToNewIds = this.ProjectService.getOldToNewIds(structure.nodes);
+    return this.ProjectService.replaceOldIds(structure, oldToNewIds);
   }
 
   addStepsToGroup(group) {

@@ -21,8 +21,21 @@ class NodeController {
   $translate: any;
   autoSaveInterval: number = 60000; // in milliseconds;
   autoSaveIntervalId: any;
-  componentToScope: any;
-  convertedComponents: string[] = ['AudioOscillator', 'MultipleChoice'];
+  workComponents: string[] = [
+    'Animation',
+    'AudioOscillator',
+    'ConceptMap',
+    'Discussion',
+    'Draw',
+    'Embedded',
+    'Graph',
+    'Label',
+    'Match',
+    'MultipleChoice',
+    'OpenResponse',
+    'Summary',
+    'Table'
+  ];
   dirtyComponentIds: any = [];
   dirtySubmitComponentIds: any = [];
   endedAndLockedMessage: string;
@@ -89,12 +102,6 @@ class NodeController {
       const endDate = this.ConfigService.getPrettyEndDate();
       this.endedAndLockedMessage = this.$translate('endedAndLockedMessage', { endDate: endDate });
     }
-
-    /*
-     * an object that holds the mappings with the key being the component
-     * and the value being the scope object from the child controller
-     */
-    this.componentToScope = {};
 
     this.saveMessage = {
       text: '',
@@ -195,7 +202,6 @@ class NodeController {
           }
         }
         this.notifyConnectedParts(componentId, componentState);
-        this.NodeService.broadcastSiblingComponentStudentDataChanged(componentStudentData);
       })
     );
 
@@ -439,19 +445,6 @@ class NodeController {
     hopscotch.getCurrTour().customData.$ctrl.rubricTour.steps[index].viewed = true;
   }
 
-  /**
-   * The function that child component controllers will call to register
-   * themselves with this node
-   * @param childScope the child scope object
-   * @param component the component content for the component
-   */
-  registerComponentController(childScope, component) {
-    if (childScope != null && component != null) {
-      const componentId = component.id;
-      this.componentToScope[componentId] = childScope;
-    }
-  }
-
   isShowNodeRubric() {
     return this.rubric != null && this.rubric != '' && this.mode === 'preview';
   }
@@ -463,32 +456,6 @@ class NodeController {
   setStudentWork() {}
 
   importWork() {}
-
-  showStudentAssets($event, componentId) {
-    const childScope = this.componentToScope[componentId];
-
-    // TODO: generalize for other controllers
-    let componentController = null;
-
-    if (childScope.openResponseController) {
-      componentController = childScope.openResponseController;
-    } else if (childScope.drawController) {
-      componentController = childScope.drawController;
-    } else if (childScope.discussionController) {
-      componentController = childScope.discussionController;
-    } else if (childScope.tableController) {
-      componentController = childScope.tableController;
-    } else if (childScope.graphController) {
-      componentController = childScope.graphController;
-    }
-
-    this.StudentAssetService.broadcastShowStudentAssets({
-      componentController: componentController,
-      nodeId: this.nodeId,
-      componentId: componentId,
-      $event: $event
-    });
-  }
 
   saveButtonClicked() {
     const isAutoSave = false;
@@ -678,15 +645,11 @@ class NodeController {
     for (const component of components) {
       const componentId = component.id;
       const componentType = component.type;
-      if (this.convertedComponents.includes(componentType)) {
+      if (this.workComponents.includes(componentType)) {
         componentStatePromises.push(
           this.getComponentStatePromiseFromService(this.nodeId, componentId, isAutoSave, isSubmit)
         );
         this.ComponentService.requestComponentState(this.nodeId, componentId, isSubmit);
-      } else {
-        componentStatePromises.push(
-          this.getComponentStatePromiseFromChildScope(componentId, isAutoSave, isSubmit)
-        );
       }
     }
     return componentStatePromises;
@@ -705,20 +668,6 @@ class NodeController {
       isSubmit
     );
     return componentStatePromise;
-  }
-
-  getComponentStatePromiseFromChildScope(
-    componentId: string,
-    isAutoSave: boolean = false,
-    isSubmit: boolean = false
-  ): Promise<any> {
-    const childScope = this.componentToScope[componentId];
-    if (childScope != null) {
-      if (childScope.getComponentState) {
-        return this.getComponentStateFromChildScope(childScope, isAutoSave, isSubmit);
-      }
-    }
-    return null;
   }
 
   getComponentStatePromise(
@@ -763,15 +712,6 @@ class NodeController {
     });
   }
 
-  getComponentStateFromChildScope(childScope: any, isAutoSave: boolean, isSubmit: boolean): any {
-    return childScope.getComponentState(isSubmit).then((componentState: any) => {
-      if (componentState != null) {
-        this.injectAdditionalComponentStateFields(componentState, isAutoSave, isSubmit);
-        return componentState;
-      }
-    });
-  }
-
   injectAdditionalComponentStateFields(
     componentState: any,
     isAutoSave: boolean = false,
@@ -781,7 +721,7 @@ class NodeController {
     componentState.periodId = this.ConfigService.getPeriodId();
     componentState.workgroupId = this.ConfigService.getWorkgroupId();
     componentState.isAutoSave = isAutoSave === true;
-    componentState.isSubmit = isSubmit === true;
+    componentState.isSubmit ??= isSubmit;
   }
 
   /**
@@ -831,101 +771,6 @@ class NodeController {
               component.id,
               componentState
             );
-          }
-        }
-      }
-    }
-    if (changedComponentId != null && componentState != null) {
-      let components = this.getComponents();
-      if (components != null) {
-        /*
-         * loop through all the components and look for components
-         * that are listening for the given component id to change.
-         * only notify components that are listening for changes
-         * from the specific component id.
-         */
-        for (let tempComponent of components) {
-          if (tempComponent != null) {
-            let tempComponentId = tempComponent.id;
-            let connectedComponents = tempComponent.connectedComponents;
-            if (connectedComponents != null) {
-              for (let connectedComponentParams of connectedComponents) {
-                if (connectedComponentParams != null) {
-                  let nodeId = connectedComponentParams.nodeId;
-                  let componentId = connectedComponentParams.componentId;
-
-                  /*
-                   * get the id which is the old field that we used to store
-                   * the component id in. this is here to maintain backwards
-                   * compatibility.
-                   */
-                  let id = connectedComponentParams.id;
-                  if (nodeId != null && componentId != null) {
-                    let connectedComponentId = componentId;
-                    let connectedNodeId = nodeId;
-                    if (
-                      connectedNodeId == this.nodeId &&
-                      connectedComponentId === changedComponentId
-                    ) {
-                      let connectedComponent = this.node.getComponent(connectedComponentId);
-                      let componentScope = this.componentToScope[tempComponentId];
-                      if (
-                        componentScope != null &&
-                        componentScope.handleConnectedComponentStudentDataChanged != null
-                      ) {
-                        componentScope.handleConnectedComponentStudentDataChanged(
-                          connectedComponent,
-                          connectedComponentParams,
-                          componentState
-                        );
-                      }
-                    }
-                  } else if (componentId != null) {
-                    /*
-                     * the node id was not provided but the component id was provided
-                     * so we will assume the component id is in the current node
-                     */
-                    let connectedComponentId = componentId;
-                    if (connectedComponentId === changedComponentId) {
-                      let connectedComponent = this.node.getComponent(connectedComponentId);
-                      let componentScope = this.componentToScope[tempComponentId];
-                      if (
-                        componentScope != null &&
-                        componentScope.handleConnectedComponentStudentDataChanged != null
-                      ) {
-                        componentScope.handleConnectedComponentStudentDataChanged(
-                          connectedComponent,
-                          connectedComponentParams,
-                          componentState
-                        );
-                      }
-                    }
-                  } else if (id != null) {
-                    /*
-                     * the node id and component id were not provided but the
-                     * id was provided which is the old field we used to set
-                     * the component id in. this is here to maintain backwards
-                     * compatibility.
-                     */
-                    let connectedComponentId = id;
-                    if (connectedComponentId === changedComponentId) {
-                      let connectedComponent = this.node.getComponent(connectedComponentId);
-                      let componentScope = this.componentToScope[tempComponentId];
-                      if (
-                        componentScope != null &&
-                        componentScope.handleConnectedComponentStudentDataChanged != null
-                      ) {
-                        componentScope.handleConnectedComponentStudentDataChanged(
-                          connectedComponent,
-                          connectedComponentParams,
-                          componentState
-                        );
-                      }
-                    }
-                  }
-                }
-              }
-            }
           }
         }
       }

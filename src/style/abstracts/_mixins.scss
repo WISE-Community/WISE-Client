@@ -125,8 +125,11 @@
     @include mat-elevation(3);
   
     &:hover, &:focus {
-      outline: none;
       @include mat-elevation(4);
+    }
+
+    &:hover {
+      outline: none;
     }
   }
 
@@ -187,6 +190,10 @@
 
   .mat-toolbar-multiple-rows {
     min-height: $toolbar-height;
+  }
+
+  .select-panel-full-height {
+    max-height: 80vh;
   }
 
   td {
@@ -309,6 +316,10 @@
 
       .#{$key}-bg {
         background-color: $value;
+      }
+
+      .#{$key}-border {
+        border-color: $value;
       }
   }
 }

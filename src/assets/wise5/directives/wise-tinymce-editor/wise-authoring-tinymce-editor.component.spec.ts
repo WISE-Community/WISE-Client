@@ -4,6 +4,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
+import { CopyNodesService } from '../../services/copyNodesService';
 import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
@@ -25,6 +26,7 @@ describe('WiseAuthoringTinymceEditorComponent', () => {
       providers: [
         AnnotationService,
         ConfigService,
+        CopyNodesService,
         NotebookService,
         ProjectAssetService,
         ProjectService,

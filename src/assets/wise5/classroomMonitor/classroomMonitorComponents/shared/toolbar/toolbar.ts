@@ -35,10 +35,10 @@ const Toolbar = {
                     <md-tooltip md-direction="bottom">{{ ::'mainMenu' | translate }}</md-tooltip>
                 </md-button>
                 <span class="toolbar__title" ng-if="$ctrl.showTitle">{{ $ctrl.viewName }}</span>
-                <cm-step-tools ng-if="$ctrl.showStepTools" show-position="$ctrl.numberProject"></cm-step-tools>
+                <step-tools ng-if="$ctrl.showStepTools" [only-show-steps-with-work]="true"></step-tools>
                 <student-grading-tools ng-if="$ctrl.showTeamTools" workgroup-id="$ctrl.workgroupId"></student-grading-tools>
                 <span flex></span>
-                <period-select ng-if="$ctrl.showPeriodSelect" custom-class="'md-no-underline md-button toolbar__select'"></period-select>
+                <select-period ng-if="$ctrl.showPeriodSelect"></select-period>
             </div>
         </md-toolbar>`
 };

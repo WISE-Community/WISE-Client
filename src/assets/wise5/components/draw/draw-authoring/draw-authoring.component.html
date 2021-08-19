@@ -1,13 +1,5 @@
-<mat-form-field class="prompt-input-container">
-  <mat-label i18n>Prompt</mat-label>
-  <textarea matInput
-      [(ngModel)]="authoringComponentContent.prompt"
-      (ngModelChange)="inputChange.next($event)"
-      placeholder="Enter Prompt Here"
-      i18n-placeholder
-      cdkTextareaAutosize>
-</textarea>
-</mat-form-field>
+<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+   (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <div fxLayout="row" fxLayoutAlign="start center">
   <mat-form-field class="background-input-container">
     <mat-label i18n>Background Image (Optional)</mat-label>
@@ -26,6 +18,15 @@
       i18n-aria-label>
     <mat-icon>insert_photo</mat-icon>
   </button>
+</div>
+<div>
+  <mat-checkbox
+      color="primary"
+      [(ngModel)]="authoringComponentContent.isStudentAttachmentEnabled"
+      (ngModelChange)="componentChanged()"
+      i18n>
+    Allow student to upload background image
+  </mat-checkbox>
 </div>
 <div>
   <mat-form-field class="canvas-dimension-container">
@@ -66,7 +67,7 @@
   <mat-icon>check_box_outline_blank</mat-icon>
 </button>
 <div fxLayout="row wrap">
-  <div class="toolsDiv">
+  <div class="tools-div">
     <mat-checkbox
         color="primary"
         [(ngModel)]="authoringComponentContent.tools.select"
@@ -99,7 +100,7 @@
       Free Hand Tool
     </mat-checkbox>
   </div>
-  <div class="toolsDiv">
+  <div class="tools-div">
     <mat-checkbox
         color="primary"
         [(ngModel)]="authoringComponentContent.tools.text"
@@ -132,7 +133,7 @@
       Stroke Color Tool
     </mat-checkbox>
   </div>
-  <div class="toolsDiv">
+  <div class="tools-div">
     <mat-checkbox
         color="primary"
         [(ngModel)]="authoringComponentContent.tools.fillColor"
@@ -165,7 +166,7 @@
       Send Forward Tool
     </mat-checkbox>
   </div>
-  <div class="toolsDiv">
+  <div class="tools-div">
     <mat-checkbox
         color="primary"
         [(ngModel)]="authoringComponentContent.tools.undo"

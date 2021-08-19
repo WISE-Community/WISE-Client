@@ -1,5 +1,4 @@
 import { ConfigService } from '../../services/configService';
-import { NodeService } from '../../services/nodeService';
 import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
@@ -16,7 +15,6 @@ class ComponentController {
   static $inject = [
     '$scope',
     'ConfigService',
-    'NodeService',
     'NotebookService',
     'ProjectService',
     'StudentDataService'
@@ -25,7 +23,6 @@ class ComponentController {
   constructor(
     private $scope: any,
     private ConfigService: ConfigService,
-    private NodeService: NodeService,
     private NotebookService: NotebookService,
     private ProjectService: ProjectService,
     private StudentDataService: StudentDataService
@@ -58,9 +55,6 @@ class ComponentController {
       componentContent = this.ProjectService.injectClickToSnipImage(componentContent);
     }
 
-    this.$scope.componentTemplatePath = this.NodeService.getComponentTemplatePath(
-      componentContent.type
-    );
     this.$scope.componentContent = componentContent;
     this.$scope.componentState = this.componentState;
     this.$scope.nodeId = this.nodeId;
@@ -83,35 +77,107 @@ const Component = {
   scope: true,
   controller: ComponentController,
   template: `<div ng-switch="type" class="component__wrapper">
-          <div ng-switch-when="AudioOscillator|HTML|MultipleChoice|OutsideURL" ng-switch-when-separator="|">
-            <audio-oscillator-student ng-if="type === 'AudioOscillator'"
-                [node-id]="nodeId"
-                [component-content]="componentContent"
-                [component-state]="componentState"
-                [workgroup-id]="workgroupId"
-                [mode]="mode">
-            </audio-oscillator-student>
-            <html-student ng-if="type === 'HTML'"
-                [node-id]="nodeId"
-                [component-content]="componentContent"
-                [mode]="mode">
-            </html-student>
-            <multiple-choice-student ng-if="type === 'MultipleChoice'"
-                [node-id]="nodeId"
-                [component-content]="componentContent"
-                [component-state]="componentState"
-                [workgroup-id]="workgroupId"
-                [mode]="mode">
-            </multiple-choice-student>
-            <outside-url-student ng-if="type === 'OutsideURL'"
-                [node-id]="nodeId"
-                [component-content]="componentContent"
-                [mode]="mode">
-            </outside-url-student>
-          </div>
-          <div ng-switch-default>
-            <div ng-include="::componentTemplatePath" class="component__content component__content--{{::type}}"></div>
-          </div>
+          <animation-student ng-switch-when="Animation"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </animation-student>
+          <audio-oscillator-student ng-switch-when="AudioOscillator"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </audio-oscillator-student>
+          <concept-map-student ng-switch-when="ConceptMap"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </concept-map-student>
+          <discussion-student ng-switch-when="Discussion"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </discussion-student>
+          <draw-student ng-switch-when="Draw"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </draw-student>
+          <embedded-student ng-switch-when="Embedded"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </embedded-student>
+          <graph-student ng-switch-when="Graph"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </graph-student>
+          <html-student ng-switch-when="HTML"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [mode]="mode">
+          </html-student>
+          <label-student ng-switch-when="Label"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </label-student>
+          <match-student ng-switch-when="Match"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </match-student>
+          <multiple-choice-student ng-switch-when="MultipleChoice"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </multiple-choice-student>
+          <open-response-student ng-switch-when="OpenResponse"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </open-response-student>
+          <outside-url-student ng-switch-when="OutsideURL"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [mode]="mode">
+          </outside-url-student>
+          <summary-student ng-switch-when="Summary"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </summary-student>
+          <table-student ng-switch-when="Table"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </table-student>
         </div>`
 };
 

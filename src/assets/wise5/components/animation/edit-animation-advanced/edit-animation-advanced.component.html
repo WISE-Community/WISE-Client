@@ -1,17 +1,6 @@
-<div>
-  <md-checkbox class='md-primary'
-               ng-model='$ctrl.authoringComponentContent.showSaveButton'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'SHOW_SAVE_BUTTON' | translate }}
-  </md-checkbox>
-</div>
-<div>
-  <md-checkbox class='md-primary'
-               ng-model='$ctrl.authoringComponentContent.showSubmitButton'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'SHOW_SUBMIT_BUTTON' | translate }}
-  </md-checkbox>
-</div>
+<edit-component-save-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-save-button>
+<br/>
+<edit-component-submit-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-submit-button>
 <div>
   <md-input-container style='margin-right: 20px; width: 150px; height: 25px;'
                       ng-if='$ctrl.authoringComponentContent.showSubmitButton'>
@@ -22,6 +11,10 @@
            ng-change='$ctrl.componentChanged()'/>
   </md-input-container>
 </div>
+<edit-component-default-feedback
+    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
+    [authoring-component-content]="$ctrl.authoringComponentContent">
+</edit-component-default-feedback>
 <div layout="column" layout-align="start start">
   <edit-component-max-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-max-score>
   <edit-component-exclude-from-total-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-exclude-from-total-score>

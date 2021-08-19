@@ -10,7 +10,6 @@ import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServ
 import { SessionService } from '../../assets/wise5/services/sessionService';
 let service: TeacherProjectService;
 let configService: ConfigService;
-let sessionService: SessionService;
 let utilService: UtilService;
 let http: HttpTestingController;
 let demoProjectJSON: any;
@@ -25,21 +24,6 @@ const projectURL = projectBaseURL + 'project.json';
 const registerNewProjectURL = 'http://localhost:8080/wise/project/new';
 const saveProjectURL = 'http://localhost:8080/wise/project/save/' + projectIdDefault;
 const wiseBaseURL = '/wise';
-const getLibraryProjectsURL = '/api/project/library';
-const libraryProjects = [
-  {
-    children: [
-      { id: 3, name: 'three' },
-      { id: 1, name: 'one' }
-    ]
-  },
-  {
-    children: [
-      { id: 2, name: 'two' },
-      { id: 1, name: 'one' }
-    ]
-  }
-];
 
 describe('TeacherProjectService', () => {
   beforeEach(() => {
@@ -47,15 +31,19 @@ describe('TeacherProjectService', () => {
       imports: [HttpClientTestingModule, UpgradeModule],
       providers: [TeacherProjectService, ConfigService, SessionService, UtilService]
     });
-    http = TestBed.get(HttpTestingController);
-    service = TestBed.get(TeacherProjectService);
-    configService = TestBed.get(ConfigService);
-    sessionService = TestBed.get(SessionService);
-    utilService = TestBed.get(UtilService);
+    http = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(TeacherProjectService);
+    configService = TestBed.inject(ConfigService);
+    utilService = TestBed.inject(UtilService);
     spyOn(utilService, 'broadcastEventInRootScope');
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
     scootersProjectJSON = JSON.parse(JSON.stringify(scootersProjectJSON_import));
     teacherProjectJSON = JSON.parse(JSON.stringify(teacherProjctJSON_import));
+    service.project = {
+      nodes: [],
+      inactiveNodes: []
+    };
+    service.applicationNodes = [];
   });
   registerNewProject();
   isNodeIdUsed();
@@ -64,10 +52,6 @@ describe('TeacherProjectService', () => {
   testDeleteTransition();
   testGetNodeIdAfter();
   testCreateNodeAfter();
-  getLibraryProjects();
-  sortAndFilterUniqueLibraryProjects();
-  filterUniqueProjects();
-  shouldGetTheNodeIdAndComponentIdObjects();
   shouldGetTheBranchLetter();
   lockNode();
   unlockNode();
@@ -85,18 +69,7 @@ describe('TeacherProjectService', () => {
   shouldBeAbleToInsertAStepNodeInsideAGroupNode();
   shouldBeAbleToInsertAGroupNodeInsideAGroupNode();
   shouldNotBeAbleToInsertAStepNodeInsideAStepNode();
-  shouldDeleteAStepFromTheProject();
-  shouldDeleteAnInactiveStepFromTheProject();
-  shouldDeleteAStepThatIsTheStartIdOfTheProject();
-  shouldDeleteAStepThatIsTheLastStepOfTheProject();
-  shouldDeleteAStepThatIsTheStartIdOfAnAactivityThatIsNotTheFirstActivity();
-  shouldDeleteTheFirstActivityFromTheProject();
-  shouldDeleteAnActivityInTheMiddleOfTheProject();
-  shouldDeleteTheLastActivityFromTheProject();
   getUniqueAuthors();
-  deleteActivityWithBranching();
-  deleteTheLastStepInAnActivity();
-  deleteAllStepsInAnActivity();
   addCurrentUserToAuthors_CM_shouldAddUserInfo();
   getNodeIds();
   getInactiveNodeIds();
@@ -104,6 +77,9 @@ describe('TeacherProjectService', () => {
   shouldNotSaveProjectWhenTheUserDoesNotHavePermissionToEditTheProject();
   shouldSaveProject();
   getStepNodesDetailsInOrder();
+  getOldToNewIds();
+  replaceOldIds();
+  replaceIds();
 });
 
 function createNormalSpy() {
@@ -132,8 +108,6 @@ function createConfigServiceGetConfigParamSpy() {
       return saveProjectURL;
     } else if (param === 'wiseBaseURL') {
       return wiseBaseURL;
-    } else if (param === 'getLibraryProjectsURL') {
-      return getLibraryProjectsURL;
     }
   });
 }
@@ -241,89 +215,6 @@ function testCreateNodeAfter() {
       expect(newNode.transitionLogic.transitions[0].to).toEqual('node20');
       expect(service.getNodeIdAfter('node19')).toEqual('node1000');
     });
-  });
-}
-
-function getLibraryProjects() {
-  describe('getLibraryProjects', () => {
-    it('should get the library projects', () => {
-      createConfigServiceGetConfigParamSpy();
-      const result = service.getLibraryProjects();
-      http.expectOne(getLibraryProjectsURL).flush(libraryProjects);
-      result.then((projects) => {
-        expect(projects).toEqual(libraryProjects);
-      });
-    });
-  });
-}
-
-function sortAndFilterUniqueLibraryProjects() {
-  describe('sortAndFilterUniqueLibraryProjects', () => {
-    it('should filter and sort library projects', () => {
-      const result = service.sortAndFilterUniqueLibraryProjects(libraryProjects);
-      expect(result).toEqual([
-        { id: 3, name: 'three' },
-        { id: 2, name: 'two' },
-        { id: 1, name: 'one' }
-      ]);
-    });
-  });
-}
-
-function filterUniqueProjects() {
-  describe('filterUniqueProjects', () => {
-    it('should filter unique projects based on id', () => {
-      const nonUniqueProjects = [
-        { id: 3, name: 'three' },
-        { id: 1, name: 'one' },
-        { id: 2, name: 'two' },
-        { id: 1, name: 'one' }
-      ];
-      const uniqueProjects = service.filterUniqueProjects(nonUniqueProjects);
-      expect(uniqueProjects.length).toEqual(3);
-      expect(uniqueProjects[0].id).toEqual(3);
-      expect(uniqueProjects[1].id).toEqual(1);
-      expect(uniqueProjects[2].id).toEqual(2);
-    });
-  });
-}
-
-function shouldGetTheNodeIdAndComponentIdObjects() {
-  it('should get the node id and component id objects', () => {
-    const project = {
-      nodes: [
-        {
-          id: 'node1',
-          components: [
-            {
-              id: 'node1component1'
-            }
-          ]
-        },
-        {
-          id: 'node2',
-          components: [
-            {
-              id: 'node2component1'
-            },
-            {
-              id: 'node2component2'
-            }
-          ]
-        }
-      ]
-    };
-    service.setProject(project);
-    let nodeIdAndComponentIds = service.getNodeIdsAndComponentIds('node1');
-    expect(nodeIdAndComponentIds.length).toEqual(1);
-    expect(nodeIdAndComponentIds[0].nodeId).toEqual('node1');
-    expect(nodeIdAndComponentIds[0].componentId).toEqual('node1component1');
-    nodeIdAndComponentIds = service.getNodeIdsAndComponentIds('node2');
-    expect(nodeIdAndComponentIds.length).toEqual(2);
-    expect(nodeIdAndComponentIds[0].nodeId).toEqual('node2');
-    expect(nodeIdAndComponentIds[0].componentId).toEqual('node2component1');
-    expect(nodeIdAndComponentIds[1].nodeId).toEqual('node2');
-    expect(nodeIdAndComponentIds[1].componentId).toEqual('node2component2');
   });
 }
 
@@ -581,112 +472,6 @@ function shouldNotBeAbleToInsertAStepNodeInsideAStepNode() {
   });
 }
 
-function shouldDeleteAStepFromTheProject() {
-  it('should delete a step from the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getNodes().length).toEqual(54);
-    expect(service.getNodeById('node5')).not.toBeNull();
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node4'), 'node5')).toBeTruthy();
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node5'), 'node6')).toBeTruthy();
-    expect(service.getNodesWithTransitionToNodeId('node6').length).toEqual(1);
-    service.deleteNode('node5');
-    expect(service.getNodes().length).toEqual(53);
-    expect(service.getNodeById('node5')).toBeNull();
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node4'), 'node6')).toBeTruthy();
-    expect(service.getNodesWithTransitionToNodeId('node6').length).toEqual(1);
-  });
-}
-
-function shouldDeleteAnInactiveStepFromTheProject() {
-  it('should delete an inactive step from the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getInactiveNodes().length).toEqual(1);
-    expect(service.getNodeById('node789')).not.toBeNull();
-    service.deleteNode('node789');
-    expect(service.getInactiveNodes().length).toEqual(0);
-    expect(service.getNodeById('node789')).toBeNull();
-  });
-}
-
-function shouldDeleteAStepThatIsTheStartIdOfTheProject() {
-  it('should delete a step that is the start id of the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getStartNodeId()).toEqual('node1');
-    expect(service.getNodesWithTransitionToNodeId('node2').length).toEqual(1);
-    service.deleteNode('node1');
-    expect(service.getStartNodeId()).toEqual('node2');
-    expect(service.getNodesWithTransitionToNodeId('node2').length).toEqual(0);
-  });
-}
-
-function shouldDeleteAStepThatIsTheLastStepOfTheProject() {
-  it('should delete a step that is the last step of the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getTransitionsByFromNodeId('node802').length).toEqual(1);
-    expect(
-      service.nodeHasTransitionToNodeId(service.getNodeById('node802'), 'node803')
-    ).toBeTruthy();
-    service.deleteNode('node803');
-    expect(service.getTransitionsByFromNodeId('node802').length).toEqual(0);
-    expect(
-      service.nodeHasTransitionToNodeId(service.getNodeById('node802'), 'node803')
-    ).toBeFalsy();
-  });
-}
-
-function shouldDeleteAStepThatIsTheStartIdOfAnAactivityThatIsNotTheFirstActivity() {
-  it('should delete a step that is the start id of an activity that is not the first activity', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getGroupStartId('group2')).toEqual('node20');
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node19'), 'node20')).toBeTruthy();
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node20'), 'node21')).toBeTruthy();
-    service.deleteNode('node20');
-    expect(service.getGroupStartId('group2')).toEqual('node21');
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node19'), 'node21')).toBeTruthy();
-  });
-}
-
-function shouldDeleteTheFirstActivityFromTheProject() {
-  it('should delete the first activity from the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getGroupStartId('group0')).toEqual('group1');
-    expect(service.getStartNodeId()).toEqual('node1');
-    expect(service.getNodes().length).toEqual(54);
-    expect(service.getNodesWithTransitionToNodeId('node20').length).toEqual(1);
-    service.deleteNode('group1');
-    expect(service.getNodeById('group1')).toBeNull();
-    expect(service.getGroupStartId('group0')).toEqual('group2');
-    expect(service.getStartNodeId()).toEqual('node20');
-    expect(service.getNodes().length).toEqual(34);
-    expect(service.getNodesWithTransitionToNodeId('node20').length).toEqual(0);
-  });
-}
-
-function shouldDeleteAnActivityInTheMiddleOfTheProject() {
-  it('should delete an activity that is in the middle of the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('group2'), 'group3')).toBeTruthy();
-    expect(service.getNodes().length).toEqual(54);
-    service.deleteNode('group3');
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('group2'), 'group3')).toBeFalsy();
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('group2'), 'group4')).toBeTruthy();
-    expect(service.getNodes().length).toEqual(51);
-  });
-}
-
-function shouldDeleteTheLastActivityFromTheProject() {
-  it('should delete the last activity from the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('group4'), 'group5')).toBeTruthy();
-    expect(service.getTransitionsByFromNodeId('group4').length).toEqual(1);
-    expect(service.getNodes().length).toEqual(54);
-    service.deleteNode('group5');
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('group4'), 'group5')).toBeFalsy();
-    expect(service.getTransitionsByFromNodeId('group4').length).toEqual(0);
-    expect(service.getNodes().length).toEqual(48);
-  });
-}
-
 function insertNodeAfterInTransitions() {
   it('should be able to insert a step node after another step node', () => {
     expectInsertNodeAfterInTransition('node1', 'node2');
@@ -753,71 +538,6 @@ function getUniqueAuthors() {
       expect(uniqueAuthors[2].firstName).toEqual('c');
       expect(uniqueAuthors[2].lastName).toEqual('c');
     });
-  });
-}
-
-function deleteActivityWithBranching() {
-  it(`should delete an activity with branching and is also the first activity in the project
-      and properly set the project start node id`, () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getStartNodeId()).toEqual('node1');
-    service.deleteNode('group1');
-    expect(service.getStartNodeId()).toEqual('node20');
-  });
-
-  it(`should delete an activity in the middle of the project with branching and properly remove
-      transitions from remaining steps`, () => {
-    service.setProject(demoProjectJSON);
-    const node19 = service.getNodeById('node19');
-    const node19Transitions = node19.transitionLogic.transitions;
-    expect(node19Transitions.length).toEqual(1);
-    expect(node19Transitions[0].to).toEqual('node20');
-    service.deleteNode('group2');
-    expect(node19Transitions.length).toEqual(1);
-    expect(node19Transitions[0].to).toEqual('node790');
-  });
-
-  it(`should delete an activity at the end of the project with branching and properly remove
-      transitions from remaining steps`, () => {
-    service.setProject(demoProjectJSON);
-    const node798 = service.getNodeById('node798');
-    const node798Transitions = node798.transitionLogic.transitions;
-    expect(node798Transitions.length).toEqual(1);
-    expect(node798Transitions[0].to).toEqual('node799');
-    service.deleteNode('group5');
-    expect(node798Transitions.length).toEqual(0);
-  });
-}
-
-function deleteTheLastStepInAnActivity() {
-  it(`should delete the last step in an activity in the middle of the project and set previous
-      step to transition to the first step of the next activity`, () => {
-    service.setProject(demoProjectJSON);
-    const node790Transitions = service.getTransitionsByFromNodeId('node790');
-    expect(node790Transitions.length).toEqual(1);
-    expect(
-      service.nodeHasTransitionToNodeId(service.getNodeById('node790'), 'node791')
-    ).toBeTruthy();
-    service.deleteNode('node791');
-    expect(node790Transitions.length).toEqual(1);
-    expect(
-      service.nodeHasTransitionToNodeId(service.getNodeById('node790'), 'node792')
-    ).toBeTruthy();
-  });
-}
-
-function deleteAllStepsInAnActivity() {
-  it(`should delete all steps in an activity in the middle of the project and set previous step
-      to transition to activity`, () => {
-    service.setProject(demoProjectJSON);
-    const node34 = service.getNodeById('node34');
-    const node34Transitions = node34.transitionLogic.transitions;
-    expect(node34Transitions.length).toEqual(1);
-    expect(node34Transitions[0].to).toEqual('node790');
-    service.deleteNode('node790');
-    service.deleteNode('node791');
-    expect(node34Transitions.length).toEqual(1);
-    expect(node34Transitions[0].to).toEqual('group3');
   });
 }
 
@@ -998,4 +718,91 @@ function expectStepNodeDetail(
 ) {
   expect(stepNodesDetailsInOrder[index].nodeId).toEqual(expectedNodeId);
   expect(stepNodesDetailsInOrder[index].nodePositionAndTitle).toEqual(expectedPositionAndTitle);
+}
+
+function getOldToNewIds() {
+  describe('getOldToNewIds', () => {
+    it('should get mappings of old ids to new ids', () => {
+      const nodes = [
+        createNodeWithComponent('node1', 'component1'),
+        createNodeWithComponent('node2', 'component2'),
+        createNodeWithComponent('node3', 'component3')
+      ];
+      service.applicationNodes = nodes;
+      service.project = {
+        nodes: nodes,
+        inactiveNodes: []
+      };
+      const oldToNewIds = service.getOldToNewIds(nodes);
+      expect(oldToNewIds.get('node1')).toEqual('node4');
+      expect(oldToNewIds.get('node2')).toEqual('node5');
+      expect(oldToNewIds.get('node3')).toEqual('node6');
+      expect(oldToNewIds.get('component1')).not.toEqual('component1');
+      expect(oldToNewIds.get('component2')).not.toEqual('component2');
+      expect(oldToNewIds.get('component3')).not.toEqual('component3');
+    });
+  });
+}
+
+function createNodeWithComponent(nodeId: string, componentId: string): any {
+  return {
+    id: nodeId,
+    components: [{ id: componentId }]
+  };
+}
+
+function replaceOldIds() {
+  describe('replaceOldIds', () => {
+    it('should replace old ids', () => {
+      const node = {
+        connectedComponents: [
+          createConnectedComponentObject('node1', 'abc1'),
+          createConnectedComponentObject('node2', 'abc2'),
+          createConnectedComponentObject('node3', 'abc3'),
+          createConnectedComponentObject('node1', 'abc3')
+        ]
+      };
+      const oldToNewIds = new Map();
+      oldToNewIds.set('node1', 'node10');
+      oldToNewIds.set('node2', 'node11');
+      oldToNewIds.set('abc3', 'def3');
+      const updatedNode = service.replaceOldIds(node, oldToNewIds);
+      const expectedConnectedComponents = [
+        createConnectedComponentObject('node10', 'abc1'),
+        createConnectedComponentObject('node11', 'abc2'),
+        createConnectedComponentObject('node3', 'def3'),
+        createConnectedComponentObject('node10', 'def3')
+      ];
+      for (let c = 0; c < updatedNode.connectedComponents.length; c++) {
+        expect(updatedNode.connectedComponents[c].nodeId).toEqual(
+          expectedConnectedComponents[c].nodeId
+        );
+        expect(updatedNode.connectedComponents[c].componentId).toEqual(
+          expectedConnectedComponents[c].componentId
+        );
+      }
+    });
+  });
+}
+
+function createConnectedComponentObject(nodeId: string, componentId: string): any {
+  return {
+    nodeId: nodeId,
+    componentId: componentId
+  };
+}
+
+function replaceIds() {
+  describe('replaceIds', () => {
+    it('should replace ids in a string', () => {
+      const string = '{ "id": "node1", "constraints": [{ "id": "node1Constraint1" }] }';
+      const expectedString = '{ "id": "node10", "constraints": [{ "id": "node10Constraint1" }] }';
+      expect(service.replaceIds(string, 'node1', 'node10')).toEqual(expectedString);
+    });
+    it('should replace all instances of the ids in a string', () => {
+      const string = '"node1", "node1", "node2", "node10", "node11", "node11"';
+      const expectedString = '"node10", "node10", "node2", "node10", "node11", "node11"';
+      expect(service.replaceIds(string, 'node1', 'node10')).toEqual(expectedString);
+    });
+  });
 }

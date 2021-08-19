@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { Directive } from '@angular/core';
 import { Notification } from '../../../../../../app/domain/notification';
 import { CompletionStatus } from '../../shared/CompletionStatus';
+import { Node } from '../../../../common/Node';
 
 @Directive()
 export class NodeGradingViewController {
@@ -23,6 +24,7 @@ export class NodeGradingViewController {
   maxScore: any;
   milestone: any;
   milestoneReport: any;
+  node: Node;
   nodeContent: any = null;
   nodeHasWork: boolean;
   nodeId: string;
@@ -71,6 +73,7 @@ export class NodeGradingViewController {
 
   $onInit() {
     this.maxScore = this.getMaxScore();
+    this.node = this.ProjectService.getNode(this.nodeId);
     this.nodeHasWork = this.ProjectService.nodeHasWork(this.nodeId);
     this.sort = this.TeacherDataService.nodeGradingSort;
     this.nodeContent = this.ProjectService.getNodeById(this.nodeId);
@@ -127,13 +130,13 @@ export class NodeGradingViewController {
     );
   }
 
-  retrieveStudentData() {
-    this.TeacherDataService.retrieveStudentDataByNodeId(this.nodeId).then((result) => {
+  retrieveStudentData(node = this.node) {
+    this.TeacherDataService.retrieveStudentDataForNode(node).then(() => {
       this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
       this.workgroups = this.ConfigService.getClassmateUserInfos();
       this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
       this.setWorkgroupsById();
-      this.numRubrics = this.ProjectService.getNumberOfRubricsByNodeId(this.nodeId);
+      this.numRubrics = this.ProjectService.getNumberOfRubricsByNodeId(node.id);
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
   }
@@ -157,8 +160,8 @@ export class NodeGradingViewController {
     );
   }
 
-  getMaxScore() {
-    return this.ProjectService.getMaxScoreForNode(this.nodeId);
+  getMaxScore(nodeId = this.nodeId) {
+    return this.ProjectService.getMaxScoreForNode(nodeId);
   }
 
   setWorkgroupsById() {

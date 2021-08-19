@@ -16,7 +16,7 @@ export class TeacherHomeComponent implements OnInit {
 
   user: User = new User();
   authoringToolLink: string = '';
-  isDiscourseEnabled: boolean;
+  discourseUrl: string;
   tabLinks: any[] = [
     { path: 'schedule', label: $localize`Class Schedule` },
     { path: 'library', label: $localize`Unit Library` }
@@ -34,7 +34,7 @@ export class TeacherHomeComponent implements OnInit {
     this.configService.getConfig().subscribe((config) => {
       if (config != null) {
         this.authoringToolLink = `${this.configService.getContextPath()}/teacher/edit/home`;
-        this.isDiscourseEnabled = this.configService.getDiscourseURL() != null;
+        this.discourseUrl = this.configService.getDiscourseURL();
       }
     });
   }

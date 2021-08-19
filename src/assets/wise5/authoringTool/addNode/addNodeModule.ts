@@ -5,11 +5,14 @@ import { ChooseNewNodeLocation } from './choose-new-node-location/choose-new-nod
 import { ChooseNewNodeTemplate } from './choose-new-node-template/choose-new-node-template.component';
 import AutomatedAssessmentChooseItemController from './automatedAssessment/automatedAssessmentChooseItemController';
 import AutomatedAssessmentConfigureController from './automatedAssessment/automatedAssessmentConfigureController';
+import SimulationChooseItemController from './simulation/simulationChooseItemController';
+import { CardSelectorComponent } from '../components/card-selector/card-selector.component';
 
 export default angular
   .module('addNodeModule', ['ui.router'])
   .controller('AutomatedAssessmentChooseItemController', AutomatedAssessmentChooseItemController)
   .controller('AutomatedAssessmentConfigureController', AutomatedAssessmentConfigureController)
+  .controller('SimulationChooseItemController', SimulationChooseItemController)
   .directive(
     'addYourOwnNode',
     downgradeComponent({ component: AddYourOwnNode }) as angular.IDirectiveFactory
@@ -17,6 +20,10 @@ export default angular
   .directive(
     'chooseNewNodeTemplate',
     downgradeComponent({ component: ChooseNewNodeTemplate }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'cardSelector',
+    downgradeComponent({ component: CardSelectorComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'chooseNewNodeLocation',
@@ -76,6 +83,16 @@ export default angular
             node: null,
             importFromProjectId: null
           }
+        })
+        .state('root.at.project.add-node.simulation', {
+          url: '/simulation',
+          abstract: true
+        })
+        .state('root.at.project.add-node.simulation.choose-item', {
+          url: '/choose-item',
+          templateUrl: 'assets/wise5/authoringTool/addNode/simulation/choose-item.html',
+          controller: 'SimulationChooseItemController',
+          controllerAs: '$ctrl'
         });
     }
   ]);

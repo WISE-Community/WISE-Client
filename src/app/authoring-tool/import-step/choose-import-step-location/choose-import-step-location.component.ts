@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../../../assets/wise5/services/configService';
+import { CopyNodesService } from '../../../../assets/wise5/services/copyNodesService';
+import { InsertNodesService } from '../../../../assets/wise5/services/insertNodesService';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
 
 @Component({
@@ -13,25 +15,28 @@ export class ChooseImportStepLocationComponent {
   constructor(
     private upgrade: UpgradeModule,
     private ConfigService: ConfigService,
+    private CopyNodesService: CopyNodesService,
+    private InsertNodesService: InsertNodesService,
     private ProjectService: TeacherProjectService
   ) {
     this.nodeIds = Object.keys(this.ProjectService.idToOrder);
     this.nodeIds.shift(); // remove the 'group0' master root node from consideration
   }
 
-  importSelectedNodes(nodeIdToInsertInsideOrAfter) {
-    this.ProjectService.copyNodes(
+  importSelectedNodes(nodeIdToInsertInsideOrAfter: string) {
+    this.CopyNodesService.copyNodes(
       this.upgrade.$injector.get('$stateParams').selectedNodes,
       this.upgrade.$injector.get('$stateParams').importFromProjectId,
-      this.ConfigService.getProjectId(),
-      nodeIdToInsertInsideOrAfter
-    ).then((newNodes: any[]) => {
+      this.ConfigService.getProjectId()
+    ).subscribe((copiedNodes: any[]) => {
+      const nodesWithNewNodeIds = this.ProjectService.getNodesWithNewIds(copiedNodes);
+      this.InsertNodesService.insertNodes(nodesWithNewNodeIds, nodeIdToInsertInsideOrAfter);
       this.ProjectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
         this.ProjectService.refreshProject();
-        if (newNodes.length === 1) {
+        if (nodesWithNewNodeIds.length === 1) {
           this.upgrade.$injector
             .get('$state')
-            .go('root.at.project.node', { nodeId: newNodes[0].id });
+            .go('root.at.project.node', { nodeId: nodesWithNewNodeIds[0].id });
         } else {
           this.upgrade.$injector.get('$state').go('root.at.project');
         }

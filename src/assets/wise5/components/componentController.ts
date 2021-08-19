@@ -32,7 +32,6 @@ class ComponentController {
   saveMessage: any;
   isStudentAttachmentEnabled: boolean;
   isStudentAudioRecordingEnabled: boolean;
-  isPromptVisible: boolean;
   isSaveButtonVisible: boolean;
   isSubmitButtonVisible: boolean;
   isSubmitButtonDisabled: boolean;
@@ -88,7 +87,6 @@ class ComponentController {
     this.isStudentAttachmentEnabled = this.componentContent.isStudentAttachmentEnabled;
     this.isStudentAudioRecordingEnabled =
       this.componentContent.isStudentAudioRecordingEnabled || false;
-    this.isPromptVisible = true;
     this.isSaveButtonVisible = false;
     this.isSubmitButtonVisible = false;
     this.isSubmitButtonDisabled = false;
@@ -104,7 +102,6 @@ class ComponentController {
         ? true
         : this.componentContent.showAddToNotebookButton;
 
-    this.isPromptVisible = true;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     if (!this.ConfigService.isRunActive()) {
@@ -120,7 +117,6 @@ class ComponentController {
     }
 
     this.registerListeners();
-    this.registerComponentWithParentNode();
   }
 
   $onInit() {
@@ -167,7 +163,7 @@ class ComponentController {
     this.subscriptions.add(
       this.NodeService.nodeSubmitClicked$.subscribe(({ nodeId }) => {
         if (this.nodeId === nodeId) {
-          this.handleNodeSubmit();
+          this.submit('nodeSubmitButton');
         }
       })
     );
@@ -227,15 +223,6 @@ class ComponentController {
     return assetsDirectoryPath + '/' + fileName;
   }
 
-  registerComponentWithParentNode() {
-    if (this.$scope.$parent.nodeController != null) {
-      this.$scope.$parent.nodeController.registerComponentController(
-        this.$scope,
-        this.componentContent
-      );
-    }
-  }
-
   broadcastDoneRenderingComponent() {
     this.NodeService.broadcastDoneRenderingComponent({
       nodeId: this.nodeId,
@@ -277,10 +264,6 @@ class ComponentController {
 
   handleStudentWorkSavedToServerAdditionalProcessing(componentState: any) {}
 
-  handleNodeSubmit() {
-    this.isSubmit = true;
-  }
-
   getPrompt() {
     return this.componentContent.prompt;
   }
@@ -305,12 +288,10 @@ class ComponentController {
    * e.g. 'componentSubmitButton' or 'nodeSubmitButton'
    */
   submit(submitTriggeredBy = null) {
-    if (this.getIsSubmitDirty()) {
+    if (this.isSubmitDirty) {
       let isPerformSubmit = true;
-
       if (this.hasMaxSubmitCount()) {
         const numberOfSubmitsLeft = this.getNumberOfSubmitsLeft();
-
         if (this.hasSubmitMessage()) {
           isPerformSubmit = this.confirmSubmit(numberOfSubmitsLeft);
         } else {
@@ -319,7 +300,6 @@ class ComponentController {
           }
         }
       }
-
       if (isPerformSubmit) {
         this.performSubmit(submitTriggeredBy);
       } else {
@@ -447,10 +427,6 @@ class ComponentController {
 
   setIsSubmitDirty(isDirty) {
     this.isSubmitDirty = isDirty;
-  }
-
-  getIsSubmitDirty() {
-    return this.isSubmitDirty;
   }
 
   emitComponentDirty(isDirty) {
@@ -862,6 +838,32 @@ class ComponentController {
   }
 
   generateStarterState() {}
+
+  addDefaultFeedback(componentState: any): void {
+    const defaultFeedback = this.getDefaultFeedback(this.submitCounter);
+    if (defaultFeedback != null) {
+      componentState.annotations = [this.createDefaultFeedbackAnnotation(defaultFeedback)];
+    }
+  }
+
+  hasDefaultFeedback(): boolean {
+    return (
+      this.componentContent.defaultFeedback != null &&
+      this.componentContent.defaultFeedback.length > 0
+    );
+  }
+
+  getDefaultFeedback(submitCount: number): string {
+    return this.componentContent.defaultFeedback[submitCount - 1];
+  }
+
+  createDefaultFeedbackAnnotation(feedbackText: string): any {
+    const defaultFeedbackAnnotationData: any = {
+      autoGrader: 'defaultFeedback',
+      value: feedbackText
+    };
+    return this.createAutoCommentAnnotation(defaultFeedbackAnnotationData);
+  }
 }
 
 export default ComponentController;

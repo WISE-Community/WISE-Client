@@ -1,13 +1,5 @@
-<mat-form-field class="prompt">
-  <mat-label i18n>Prompt</mat-label>
-  <textarea matInput
-      [ngModel]="authoringComponentContent.prompt"
-      (ngModelChange)="promptChanged($event)"
-      placeholder="Enter Prompt Here"
-      i18n-placeholder
-      cdkTextareaAutosize>
-</textarea>
-</mat-form-field>
+<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+   (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <div class="section">
   <span i18n>Choices</span>
   <button mat-raised-button

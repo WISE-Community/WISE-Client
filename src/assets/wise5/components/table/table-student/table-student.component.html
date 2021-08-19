@@ -1,0 +1,160 @@
+<component-header [componentContent]="componentContent"></component-header>
+<div class="top-buttons" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+  <button
+      mat-button
+      color="accent"
+      *ngIf="showResetTableButton()"
+      (click)="resetTable()"
+      [disabled]="isDisabled">
+    <mat-icon>restore</mat-icon>
+    Reset
+  </button>
+  <button
+      mat-button
+      color="accent"
+      *ngIf="isAddToNotebookEnabled()"
+      (click)="snipTable()"
+      [disabled]="isDisabled"
+      i18n>
+    <mat-icon>note_add</mat-icon>
+    Add to Notebook
+  </button>
+  <button
+      mat-button
+      color="accent"
+      *ngIf="isStudentAttachmentEnabled"
+      (click)="showStudentAssets()"
+      [disabled]="isDisabled"
+      i18n>
+    <mat-icon>image</mat-icon>
+    Import Data
+  </button>
+</div>
+<table [id]="tableId" class="table">
+  <tr *ngFor="let row of getTableDataRows()">
+    <td *ngFor="let cell of row" class="table-cell">
+      <mat-form-field
+          style="min-width: {{cell.size || componentContent.globalCellSize}}em; max-width: {{cell.size || componentContent.globalCellSize}}em">
+        <input
+            matInput
+            type="text"
+            [(ngModel)]="cell.text"
+            (ngModelChange)="studentDataChanged()"
+            [disabled]="!cell.editable || isDisabled"
+            aria-label="Text"/>
+      </mat-form-field>
+    </td>
+  </tr>
+</table>
+<div *ngIf="isDataExplorerEnabled">
+  <br/>
+  <mat-form-field
+      *ngIf="componentContent.dataExplorerGraphTypes.length > 1"
+      class="data-explorer-select">
+    <mat-label i18n>Graph Type</mat-label>
+    <mat-select
+        [(ngModel)]="dataExplorerGraphType"
+        (ngModelChange)="studentDataChanged()">
+      <mat-option
+          *ngFor="let dataExplorerGraphType of dataExplorerGraphTypes"
+          [value]="dataExplorerGraphType.value">
+        <span>{{dataExplorerGraphType.name}}</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br/>
+  <p i18n>Choose the table data you want to graph:</p>
+  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <mat-form-field class="data-explorer-select">
+      <mat-label i18n>X Data</mat-label>
+      <mat-select
+          [(ngModel)]="dataExplorerXColumn"
+          (ngModelChange)="dataExplorerXColumnChanged(xColumn)"
+          [disabled]="dataExplorerColumnToIsDisabled['x']">
+        <mat-option [value]="" i18n>(None)</mat-option>
+        <mat-option
+            *ngFor="let columnName of columnNames; index as columnIndex"
+            [value]="columnIndex">
+          <span>{{columnName}}</span>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field
+        *ngFor="let singleDataExplorerSeries of dataExplorerSeries; index as seriesIndex"
+        class="data-explorer-select">
+      <mat-label i18n>Y Data {{ dataExplorerSeries.length > 1 ? seriesIndex + 1 : ""}}</mat-label>
+      <mat-select
+          [(ngModel)]="singleDataExplorerSeries.yColumn"
+          (ngModelChange)="dataExplorerYColumnChanged(seriesIndex)"
+          [disabled]="dataExplorerColumnToIsDisabled['y' + (seriesIndex > 0 ? seriesIndex + 1 : '')]">
+        <mat-option [value]="" i18n>(None)</mat-option>
+        <mat-option
+            *ngFor="let columnName of columnNames; index as columnIndex"
+            [value]="columnIndex">
+          <span>{{columnName}}</span>
+        </mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+  <div
+      *ngIf="componentContent.isDataExplorerAxisLabelsEditable"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      fxLayoutGap="20px">
+    <mat-form-field class="data-explorer-select">
+      <mat-label i18n>X Axis Label</mat-label>
+      <input
+          matInput
+          [(ngModel)]="dataExplorerXAxisLabel"
+          (ngModelChange)="studentDataChanged()"
+          placeholder="Enter Text Here"
+          i18n-placeholder/>
+    </mat-form-field>
+    <mat-form-field
+        *ngFor="componentContent.numDataExplorerYAxis === 1"
+        class="data-explorer-select">
+      <mat-label i18n>Y Axis Label</mat-label>
+      <input
+          matInput
+          [(ngModel)]="dataExplorerYAxisLabel"
+          (ngModelChange)="studentDataChanged()"
+          placeholder="Enter Text Here"
+          i18n-placeholder/>
+    </mat-form-field>
+    <div
+        *ngIf="componentContent.numDataExplorerYAxis > 1"
+        fxLayout="row wrap"
+        fxLayoutAlign="start center"
+        fxLayoutGap="20px">
+      <mat-form-field
+          *ngFor="let x of [].constructor(dataExplorerYAxisLabels.length); index as yAxisIndex"
+          class="data-explorer-select">
+        <mat-label i18n>Y Axis {{yAxisIndex + 1}} Label</mat-label>
+        <input
+            matInput
+            [(ngModel)]="dataExplorerYAxisLabels[yAxisIndex]"
+            (ngModelChange)="studentDataChanged()"
+            placeholder="Enter Text Here"
+            i18n-placeholder/>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+<component-save-submit-buttons
+    *ngIf="isSaveOrSubmitButtonVisible"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    [saveMessage]="saveMessage"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)">
+</component-save-submit-buttons>
+<component-annotations
+    *ngIf="mode === 'student'"
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId">
+</component-annotations>

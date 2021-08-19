@@ -1,11 +1,12 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { UpgradeModule } from '@angular/upgrade/static';
 import { UtilService } from '../assets/wise5/services/utilService';
 import { ConfigService } from '../assets/wise5/services/configService';
 import { ProjectService } from '../assets/wise5/services/projectService';
+import { ProjectLibraryService } from '../assets/wise5/services/projectLibraryService';
 import { VLEProjectService } from '../assets/wise5/vle/vleProjectService';
 import { CRaterService } from '../assets/wise5/services/cRaterService';
 import { SessionService } from '../assets/wise5/services/sessionService';
@@ -53,13 +54,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MomentModule } from 'ngx-moment';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
-import { WiseTinymceEditorComponent } from '../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
-import { NotebookParentComponent } from './notebook/notebook-parent/notebook-parent.component';
-import { NotebookItemComponent } from './notebook/notebook-item/notebook-item.component';
-import { NotebookLauncherComponent } from './notebook/notebook-launcher/notebook-launcher.component';
-import { NotebookNotesComponent } from './notebook/notebook-notes/notebook-notes.component';
-import { NotebookReportComponent } from './notebook/notebook-report/notebook-report.component';
-import { NotebookReportAnnotationsComponent } from './notebook/notebook-report-annotations/notebook-report-annotations.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -70,6 +64,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ClassResponse } from '../assets/wise5/components/discussion/class-response/class-response.component';
 import { ComponentService } from '../assets/wise5/components/componentService';
 import { WiseLinkService } from './services/wiseLinkService';
+import { DataExportService } from '../assets/wise5/services/dataExportService';
+import { MatChipsModule } from '@angular/material/chips';
+import { NotebookModule } from './notebook/notebook.module';
+import { MatSliderModule } from '@angular/material/slider';
+import { setUpLocationSync } from '@angular/router/upgrade';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -80,18 +79,12 @@ export class EmptyComponent {}
     EmptyComponent,
     HelpIconComponent,
     NodeIconComponent,
-    NodeStatusIcon,
-    NotebookParentComponent,
-    NotebookItemComponent,
-    NotebookLauncherComponent,
-    NotebookNotesComponent,
-    NotebookReportComponent,
-    NotebookReportAnnotationsComponent,
-    WiseTinymceEditorComponent
+    NodeStatusIcon
   ],
   imports: [
     UpgradeModule,
     CommonModule,
+    DragDropModule,
     EditorModule,
     FlexLayoutModule,
     FormsModule,
@@ -110,11 +103,13 @@ export class EmptyComponent {}
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSliderModule,
     MatTabsModule,
     MatToolbarModule,
     MatSlideToggleModule,
     MatTooltipModule,
     MomentModule,
+    NotebookModule,
     ReactiveFormsModule,
     RouterModule.forChild([{ path: '**', component: EmptyComponent }])
   ],
@@ -128,6 +123,7 @@ export class EmptyComponent {}
     ComponentService,
     ConfigService,
     CRaterService,
+    DataExportService,
     DiscussionService,
     DrawService,
     EmbeddedService,
@@ -141,6 +137,7 @@ export class EmptyComponent {}
     NotificationService,
     OutsideURLService,
     OpenResponseService,
+    ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,
     StudentAssetService,
@@ -149,7 +146,6 @@ export class EmptyComponent {}
     SummaryService,
     TableService,
     TagService,
-    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
     UtilService,
     VLEProjectService,
     WiseLinkService
@@ -157,6 +153,7 @@ export class EmptyComponent {}
   exports: [
     ClassResponse,
     CommonModule,
+    DragDropModule,
     EditorModule,
     FlexLayoutModule,
     FormsModule,
@@ -164,6 +161,7 @@ export class EmptyComponent {}
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatChipsModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
@@ -175,9 +173,10 @@ export class EmptyComponent {}
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
     MatTabsModule,
     MatToolbarModule,
-    MatSlideToggleModule,
     MatTooltipModule,
     MomentModule,
     NodeIconComponent,
@@ -186,3 +185,8 @@ export class EmptyComponent {}
   ]
 })
 export class AngularJSModule {}
+
+export function bootstrapAngularJSModule(upgrade: UpgradeModule, moduleType: string) {
+  upgrade.bootstrap(document.body, [moduleType]);
+  setUpLocationSync(upgrade);
+}

@@ -1,14 +1,17 @@
 'use strict';
 
 import * as angular from 'angular';
-import { downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { LabelService } from './labelService';
-import LabelController from './labelController';
+import { LabelStudent } from './label-student/label-student.component';
 
 let labelComponentModule = angular
   .module('labelComponentModule', ['pascalprecht.translate'])
   .service('LabelService', downgradeInjectable(LabelService))
-  .controller('LabelController', LabelController)
+  .directive(
+    'labelStudent',
+    downgradeComponent({ component: LabelStudent }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {
