@@ -1163,7 +1163,6 @@ export class GraphStudent extends ComponentStudent {
         }
         chart.reflow();
         this.isLoaded = true;
-
       }, 500);
     };
   }
