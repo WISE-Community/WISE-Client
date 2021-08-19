@@ -3,7 +3,15 @@
       *ngIf="canViewStudentNames"><strong>{{user.name}}</strong> ({{user.username}})</span>
   <span class="username" *ngIf="!canViewStudentNames" i18n><strong i8n>Student {{user.id}}</strong></span>
   <span fxFlex></span>
-  <a *ngIf="!isGoogleUser" href="#" (click)="changePassword($event)" i18n>Change Password</a>
+  <button *ngIf="!isGoogleUser"
+      class="userInfoLink"
+      mat-icon-button
+      matTooltip="Change student password"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      (click)="changePassword($event)">
+    <mat-icon class="text-secondary">vpn_key</mat-icon>
+  </button>
   <button class="userInfoLink"
       mat-icon-button
       matTooltip="View student info"
