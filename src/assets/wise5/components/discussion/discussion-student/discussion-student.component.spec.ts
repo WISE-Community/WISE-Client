@@ -105,7 +105,6 @@ describe('DiscussionStudent', () => {
   getClassmateResponses();
   isConnectedComponentImportWorkMode();
   isConnectedComponentShowWorkMode();
-  isWorkFromConnectedComponent();
   sendPostToStudentsInThread();
   sendPostToThreadCreator();
   sendPostToThreadRepliers();
@@ -305,33 +304,6 @@ function getClassmateResponses() {
         });
       })
     );
-  });
-}
-
-function isWorkFromConnectedComponent() {
-  describe('isWorkFromConnectedComponent', () => {
-    beforeEach(() => {
-      component.componentContent.connectedComponents = [
-        {
-          nodeId: 'node2',
-          componentId: 'component2'
-        }
-      ];
-    });
-    it('should check if work is from a connected component when it is', () => {
-      const componentState = {
-        nodeId: 'node2',
-        componentId: 'component2'
-      };
-      expect(component.isWorkFromConnectedComponent(componentState)).toEqual(true);
-    });
-    it('should check if work is from a connected component when it is not', () => {
-      const componentState = {
-        nodeId: 'node3',
-        componentId: 'component3'
-      };
-      expect(component.isWorkFromConnectedComponent(componentState)).toEqual(false);
-    });
   });
 }
 

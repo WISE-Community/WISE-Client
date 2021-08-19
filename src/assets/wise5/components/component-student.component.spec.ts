@@ -48,6 +48,7 @@ describe('ComponentStudent', () => {
     });
   });
   submit();
+  isFromConnectedComponent();
 });
 
 let performSubmitSpy;
@@ -98,5 +99,32 @@ function submit_maxSubmitCountReached_ShouldNotPerformSubmit() {
     component.submit('nodeSubmitButtonClicked');
     expect(performSubmitSpy).not.toHaveBeenCalledWith('nodeSubmitButtonClicked');
     expect(component.isSubmit).toEqual(false);
+  });
+}
+
+function isFromConnectedComponent() {
+  describe('isFromConnectedComponent()', () => {
+    beforeEach(() => {
+      component.componentContent.connectedComponents = [
+        {
+          nodeId: 'node2',
+          componentId: 'component2'
+        }
+      ];
+    });
+    it('should check if work is from a connected component when it is', () => {
+      const componentState = {
+        nodeId: 'node2',
+        componentId: 'component2'
+      };
+      expect(component.isFromConnectedComponent(componentState)).toEqual(true);
+    });
+    it('should check if work is from a connected component when it is not', () => {
+      const componentState = {
+        nodeId: 'node3',
+        componentId: 'component3'
+      };
+      expect(component.isFromConnectedComponent(componentState)).toEqual(false);
+    });
   });
 }

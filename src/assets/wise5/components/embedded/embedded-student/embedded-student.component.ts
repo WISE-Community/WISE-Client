@@ -600,4 +600,14 @@ export class EmbeddedStudent extends ComponentStudent {
     };
     this.sendMessageToApplication(message);
   }
+
+  connectedComponentStudentDataSaved() {
+    if (this.isHandleConnectedComponentAfterConnectedComponentStudentDataSaved()) {
+      const message = {
+        messageType: 'componentState',
+        componentState: this.componentState
+      };
+      this.sendMessageToApplication(message);
+    }
+  }
 }
