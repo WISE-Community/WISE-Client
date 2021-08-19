@@ -16,10 +16,16 @@
   width: 80px;
 }
 
-.highcharts-div {
+.highcharts-container {
   width: 100%;
+  margin-top: 16px;
 }
 
 .canvas-div {
   display: none;
+}
+
+highcharts-chart {
+  display: block;
+  width: 100%;
 }
