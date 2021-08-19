@@ -2,8 +2,13 @@
   margin-bottom: 8px;
 }
 
+.table-container {
+  overflow-x: auto;
+  margin-top: 16px;
+  padding: 8px 0;
+}
+
 .table {
-  margin-bottom: 16px;
   border-spacing: 0;
   border-collapse: collapse;
 }
