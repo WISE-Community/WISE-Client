@@ -28,7 +28,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
-        <target state="needs-translation">WISE is the product of more than 25 years of research on teaching and learning with educational technologies</target>
+        <target state="translated">WISE eğitim teknolojileri ile öğretme ve öğrenme üzerine 25 yılı aşkın süren araştırmaların ürünüdür</target>
       </trans-unit>
       <trans-unit id="876f7d4b1a4c8c619cbe4c0b32d0d1bf3219d4e8" datatype="html">
         <source>WISE teacher workshop 2018</source>
@@ -68,7 +68,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">60</context>
         </context-group>
-        <target state="needs-translation">Based on Research, Refined Through Practice</target>
+        <target state="translated">Araştırmaya Dayalı, Uygulamayla İyileştirilmiş</target>
       </trans-unit>
       <trans-unit id="fd1c49d6e3e02db68fe37f6c2d12cf7d1658f200" datatype="html">
         <source>Through our collaborations with teachers, administrators, technology designers, and education researchers, we have refined a set of principles which guide the design of all WISE curriculum materials and tools.</source>
@@ -212,7 +212,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">143</context>
         </context-group>
-        <target state="needs-translation">Individual students differ in their experiences, interests, and abilities. WISE provides a variety of tools, activity patterns, and instructional scaffolds that afford multiple ways for expressing and assessing understanding. That way, no students' abilities go unrecognized, and all have the chance to succeed.</target>
+        <target state="translated">Bireysel öğrenciler deneyimleri, ilgi alanları ve yetenekleri bakımından farklılık gösterir. WISE, anlamayı ifade etmek ve değerlendirmek için birden fazla yol sağlayan çeşitli araçlar, etkinlik kalıpları ve öğrenme desteği sağlar. Bu şekilde, hiçbir öğrencinin yeteneği fark edilmeden kalmaz ve hepsinin başarılı olma şansı olur.</target>
       </trans-unit>
       <trans-unit id="92bb340c07c783bf551cd704462f3d7efa15f8a4" datatype="html">
         <source>Increase Participation in Science</source>
@@ -1576,7 +1576,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">74</context>
         </context-group>
-        <target state="needs-translation">WISE engages students in the methods of real scientists and engineers. We take a multidisciplinary approach so that students learn inquiry through activities that emphasize essential skills in reading, writing, and multimedia literacy. Many of our units are also project-based and feature hands-on design challenges.</target>
+        <target state="translated">WISE, öğrencilerin gerçek bilim adamları ve mühendislerin yöntemlerini kullanarak çalışmalarını sağlar. Biz öğrencilerin okuma, yazma ve multimedya okuryazarlığındaki temel becerileri vurgulayan etkinlikler aracılığıyla sorgulamayı öğrenmeleri için çok disiplinli bir yaklaşım benimsiyoruz. Ünitelerimizin çoğu aynı zamanda proje tabanlıdır ve uygulamalı tasarım zorlukları içerir.</target>
       </trans-unit>
       <trans-unit id="7681bdf7430711347073032e83e99c10be4f4e7b" datatype="html">
         <source>With WISE inquiry units, students not only learn skills that prepare them to be successful in STEM. They also learn skills necessary to be responsible, critical thinking citizens.</source>
@@ -1600,7 +1600,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">87</context>
         </context-group>
-        <target state="needs-translation">WISE offers a growing collection of curriculum units that address key conceptual difficulties students encounter in science. Units are carefully crafted to supplement teachers' core curricular scope and sequence and are iteratively refined through classroom-based research.</target>
+        <target state="translated">WISE, öğrencilerin bilimde karşılaştıkları temel kavramsal güçlükleri ele alan genişleyen bir öğretim programı ünitelerinden oluşan koleksiyon sunar. Üniteler, öğretmenlerin temel öğretim programı kapsamını ve sırasını desteklemek için özenle hazırlanmış ve sınıf temelli araştırmalar yoluyla sürekli olarak gözden geçirilmiştir.</target>
       </trans-unit>
       <trans-unit id="09ce791db454a957cfc6658b0c198962ea7cac6c" datatype="html">
         <source>WISE units support the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org&quot; target=&quot;_blank&quot;&gt;"/>Next Generation Science Standards (NGSS)<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>, encourage <x id="START_LINK_1" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org/three-dimensions&quot; target=&quot;_blank&quot;&gt;"/>3-dimensional learning<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>, and can be adapted to address local standards.</source>
@@ -1664,7 +1664,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">137</context>
         </context-group>
-        <target state="needs-translation">WISE thermodynamics insulator model</target>
+        <target state="translated">WISE termodinamik izolatör modeli</target>
       </trans-unit>
       <trans-unit id="4382ac8d5db5536ce6c46dfe9e65a4d2b47fb2b4" datatype="html">
         <source>Powerful Learning Technologies</source>
@@ -3032,7 +3032,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">92</context>
         </context-group>
-        <target state="needs-translation">Teacher FAQ</target>
+        <target state="translated">Öğretmenler için SSS</target>
       </trans-unit>
       <trans-unit id="d8f48c61abfa7f1be0a4b4c00eca42c3c29f35be" datatype="html">
         <source>Questions from teachers.</source>
@@ -3064,7 +3064,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">242</context>
         </context-group>
-        <target state="needs-translation">Student FAQ</target>
+        <target state="translated">Öğrenciler için SSS</target>
       </trans-unit>
       <trans-unit id="5eef4cac2276bc97a3b1cc8a29b21436112bdaab" datatype="html">
         <source>Questions from students.</source>
@@ -3232,7 +3232,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">27</context>
         </context-group>
-        <target state="needs-translation">How do I start working on a project?</target>
+        <target state="translated">Bir proje üzerinde çalışmaya nasıl başlarım?</target>
       </trans-unit>
       <trans-unit id="f9da1cef9bd9138c03ae216c3043cbad817aa47e" datatype="html">
         <source>In order to start working on a project you must obtain an Access Code from your teacher. Once you have an Access Code, follow the directions below.</source>
@@ -3296,7 +3296,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">36</context>
         </context-group>
-        <target state="needs-translation">Click "Launch" to open the project.</target>
+        <target state="translated">Projeyi açmak için "Başlat"a tıklayın.</target>
       </trans-unit>
       <trans-unit id="46598f80db6ba570e88591e090b9480a1a06bc57" datatype="html">
         <source>I chose the wrong period, how can I change it?</source>
@@ -3324,7 +3324,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">189</context>
         </context-group>
-        <target state="needs-translation">The WISE web site won't load on my web browser. What do I do?</target>
+        <target state="translated">WISE web sitesi web tarayıcımda yüklenmiyor. Ne yapabilirim?</target>
       </trans-unit>
       <trans-unit id="af71879ff4b2c7e9d79167d67a8558c4fd64ee09" datatype="html">
         <source>You can try <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.wikihow.com/Clear-Your-Browser&apos;s-Cache&quot; target=&quot;_blank&quot;&gt;"/>clearing your browser cache<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and then reloading the WISE web site.</source>
@@ -3348,7 +3348,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">192</context>
         </context-group>
-        <target state="needs-translation">You can try using a different web browser. We recommend using Chrome or Firefox.</target>
+        <target state="translated">Farklı bir web tarayıcısı kullanmayı deneyebilirsiniz. Chrome veya Firefox kullanmanızı öneririz.</target>
       </trans-unit>
       <trans-unit id="72d03fe604d9ac13e9a9b1a46d1421fdc4284eca" datatype="html">
         <source>What if I have trouble logging in?</source>
@@ -3416,7 +3416,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">207</context>
         </context-group>
-        <target state="needs-translation">Click on your account icon at the top right of the page. This should open a drop down with options.</target>
+        <target state="translated">Sayfanın sağ üst köşesindeki hesap simgenize tıklayın. Bu seçeneklerle birlikte bir açılır menü açacaktır.</target>
       </trans-unit>
       <trans-unit id="a8484540c88600524e3d99bffc641f5588cc4ecc" datatype="html">
         <source>Click the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/student/profile/edit&quot; target=&quot;_blank&quot;&gt;"/>&quot;Edit Profile&quot;<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> option.</source>
@@ -3440,7 +3440,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">209</context>
         </context-group>
-        <target state="needs-translation">Near the bottom there will be a "Language" setting.</target>
+        <target state="translated">Alt kısımda bir "Dil" ayarı olacaktır.</target>
       </trans-unit>
       <trans-unit id="c417c54228188e09e2d307c2fc450f226a1526d0" datatype="html">
         <source>Change the language to the language of your choice.</source>
@@ -3452,7 +3452,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">210</context>
         </context-group>
-        <target state="needs-translation">Change the language to the language of your choice.</target>
+        <target state="translated">Dili seçmek istediğiniz dile değiştirin.</target>
       </trans-unit>
       <trans-unit id="ecbda85dab67998ada82c4efd82ffb9bf4bc39d2" datatype="html">
         <source>Note 1: If your language is not listed as an option, or you&apos;d like to help us improve the translation, please contact us and we&apos;ll help you get started!</source>
@@ -3464,7 +3464,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">211</context>
         </context-group>
-        <target state="needs-translation">Note 1: If your language is not listed as an option, or you'd like to help us improve the translation, please contact us and we'll help you get started!</target>
+        <target state="translated">Not 1: Diliniz bir seçenek olarak listelenmemişse veya çeviriyi iyileştirmemize yardımcı olmak istiyorsanız, lütfen bizimle iletişime geçin, başlamanıza yardımcı olalım!</target>
       </trans-unit>
       <trans-unit id="1448c0c68b74d5beeb0c1ed5408a9b6f116138a9" datatype="html">
         <source>Note 2: Changing the language will change the language of the website but will not change the language of the projects. Projects must be independently translated which means that if you want to use a project in another language, you must translate it yourself or find a version of the project that has been translated by someone else.</source>
@@ -3476,7 +3476,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">212</context>
         </context-group>
-        <target state="needs-translation">Note 2: Changing the language will change the language of the website but will not change the language of the projects. Projects must be independently translated which means that if you want to use a project in another language, you must translate it yourself or find a version of the project that has been translated by someone else.</target>
+        <target state="translated">Not 2: Dilin değiştirilmesi web sitesinin dilini değiştirecek ancak projelerin dilini değiştirmeyecektir. Projeler bağımsız olarak çevrilmelidir, yani bir projeyi başka bir dilde kullanmak istiyorsanız, onu kendiniz çevirmeniz veya projenin başka biri tarafından çevrilmiş bir sürümünü bulmanız gerekir.</target>
       </trans-unit>
       <trans-unit id="b2be95339aa5b283ab35ea9703f365133eae1b67" datatype="html">
         <source>Who do I contact when I have a problem I can&apos;t solve?</source>
@@ -3488,7 +3488,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">214</context>
         </context-group>
-        <target state="needs-translation">Who do I contact when I have a problem I can't solve?</target>
+        <target state="translated">Çözemediğim bir problem yaşadığımda kiminle iletişime geçeceğim?</target>
       </trans-unit>
       <trans-unit id="f0bf08ca7362c92db6be004201f0d9e142a61532" datatype="html">
         <source>The <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/contact&quot; target=&quot;_blank&quot;&gt;"/>Contact WISE form<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> will send an email to the WISE technology group. You can find a link to the form at the bottom of the home page. Be sure to include as much information as you can about the problem. We will respond as quickly as we can.</source>
@@ -3572,7 +3572,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">How do I use a unit with my class?</target>
+        <target state="translated">Bir üniteyi sınıfımda nasıl kullanırım?</target>
       </trans-unit>
       <trans-unit id="3576f8940d17f62b1c8f4fbed932067ac0fdb673" datatype="html">
         <source>Should I register my students for WISE or have them do it themselves?</source>
@@ -3580,7 +3580,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">39</context>
         </context-group>
-        <target state="needs-translation">Should I register my students for WISE or have them do it themselves?</target>
+        <target state="translated">Öğrencilerimi WISE'a kayıt mı ettirmeliyim yoksa kendilerinin yapmasını mı sağlamalıyım?</target>
       </trans-unit>
       <trans-unit id="2c8b400fdc35436d28c9cccdaeb20ce10a03c8d7" datatype="html">
         <source>WISE makes student registration simple and intuitive -- direct your students to the register page by having them go to the WISE home page and clicking the &quot;Register&quot; link at the upper right. They should be able to register in 10 minutes or less. However, you can also opt to pre-register all of your students and provide them with a copy of their username/password on their first day in the project run.</source>
@@ -3588,7 +3588,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">40</context>
         </context-group>
-        <target state="needs-translation">WISE makes student registration simple and intuitive -- direct your students to the register page by having them go to the WISE home page and clicking the "Register" link at the upper right. They should be able to register in 10 minutes or less. However, you can also opt to pre-register all of your students and provide them with a copy of their username/password on their first day in the project run.</target>
+        <target state="translated">WISE, öğrenci kaydını basit ve kullanılması kolay hale getirir -- öğrencilerinizi WISE ana sayfasına gitmeleri ve sağ üstteki "Kayıt Ol" bağlantısını tıklayarak kayıt sayfasına ulaşmaları için yönlendirin. 10 dakika veya daha kısa sürede kayıt olabilmeleri gerekir. Bununla birlikte, tüm öğrencilerinizin ön kaydını yapmayı ve proje çalıştırmasındaki ilk günlerinde onlara kullanıcı adlarının/şifrelerinin bir kopyasını vermeyi de tercih edebilirsiniz.</target>
       </trans-unit>
       <trans-unit id="90a07f702eb512ee62bff7940263f760a401a538" datatype="html">
         <source>Once a student has created a WISE account they should never need to create another one.</source>
@@ -3596,7 +3596,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">42</context>
         </context-group>
-        <target state="needs-translation">Once a student has created a WISE account they should never need to create another one.</target>
+        <target state="translated">Bir öğrenci bir WISE hesabı oluşturduktan sonra asla başka bir hesap oluşturmasına gerek yoktur.</target>
       </trans-unit>
       <trans-unit id="c7b0387a07f1ace4b34995b3990a9705117b2fb4" datatype="html">
         <source>Some teachers that pre-register prefer to give all students the same initial password, to decrease problems with students signing in. This is ok, but for security purposes, we advise that you have the students change their passwords once they log in.</source>
@@ -3604,7 +3604,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">43</context>
         </context-group>
-        <target state="needs-translation">Some teachers that pre-register prefer to give all students the same initial password, to decrease problems with students signing in. This is ok, but for security purposes, we advise that you have the students change their passwords once they log in.</target>
+        <target state="translated">Ön kayıt yaptıran bazı öğretmenler, öğrencilerin oturum açma sorunlarını azaltmak için tüm öğrencilere aynı başlangıç şifresini vermeyi tercih ediyorlar. Bu bir sorun yaratmaz, ancak güvenlik nedeniyle, öğrencilerinizin giriş yaptıktan sonra şifrelerini değiştirmelerini öneririz.</target>
       </trans-unit>
       <trans-unit id="75241afb27cf8555c0fbea2f6607b233b880ad12" datatype="html">
         <source>A student has forgotten his/her username or password. What should I do?</source>
@@ -3636,7 +3636,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">49</context>
         </context-group>
-        <target state="needs-translation">Third, if the student can't solve the problem directly, you can change their password for them using the instructions below.</target>
+        <target state="translated">Üçüncüsü, eğer öğrenci sorunu doğrudan çözemezse, aşağıdaki yönergeleri kullanarak onun için şifresini değiştirebilirsiniz.</target>
       </trans-unit>
       <trans-unit id="289c7c9faaf6520c30e7822ca87e7456179d6c98" datatype="html">
         <source>How do I change a student&apos;s password?</source>
@@ -3644,7 +3644,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">51</context>
         </context-group>
-        <target state="needs-translation">How do I change a student's password?</target>
+        <target state="translated">Bir öğrencinin şifresini nasıl değiştiririm?</target>
       </trans-unit>
       <trans-unit id="cb4e82ff9c49f15fee75a56ccd4bb3feccbcb850" datatype="html">
         <source>Sign into WISE with your teacher account.</source>
@@ -3684,7 +3684,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">206</context>
         </context-group>
-        <target state="needs-translation">Sign into WISE with your teacher account.</target>
+        <target state="translated">Öğretmen hesabınızla WISE'a giriş yapın.</target>
       </trans-unit>
       <trans-unit id="ca00e98ef0f13b9fd9899fac4169da61b2d05856" datatype="html">
         <source>Find the run in your Teacher Home Page.</source>
@@ -3776,7 +3776,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">58</context>
         </context-group>
-        <target state="needs-translation">Find the student and click "Change Password".</target>
+        <target state="translated">Öğrenciyi bulun ve "Paraloyı Değiştir"e tıklayın.</target>
       </trans-unit>
       <trans-unit id="941958bcf0217f57435b86d50e2a4806cbf5d679" datatype="html">
         <source>Alternatively, you can change the password for ALL students in the current period (the new password will be applied to all the students in the period).</source>
@@ -3800,7 +3800,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">68</context>
         </context-group>
-        <target state="needs-translation">Drag-and-drop student names to move them from one team to another. Make sure to save your changes before leaving this window.</target>
+        <target state="translated">Bir takımdan diğerine taşımak için öğrenci adlarını sürükleyip bırakın. Bu pencereden çıkmadan önce değişikliklerinizi kaydettiğinizden emin olun.</target>
       </trans-unit>
       <trans-unit id="8651e5c9fed5b42224d970458cb11046917dc6a6" datatype="html">
         <source>If you want to move students into a brand new team, click New Team, then drag 1 or more students into the new team. Save your changes.</source>
@@ -3808,7 +3808,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">69</context>
         </context-group>
-        <target state="needs-translation">If you want to move students into a brand new team, click New Team, then drag 1 or more students into the new team. Save your changes.</target>
+        <target state="translated">Öğrencileri yeni oluşturulmuş bir takıma taşımak istiyorsanız Yeni Takım'a tıklayın, ardından 1 veya daha fazla öğrenciyi yeni takıma sürükleyin. Değişikliklerinizi kaydedin.</target>
       </trans-unit>
       <trans-unit id="5418b88e19814f7ddcb2b6dbdd2d0d5adf57b556" datatype="html">
         <source>Warning 1</source>
@@ -3824,7 +3824,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">70</context>
         </context-group>
-        <target state="needs-translation">If you move Student A into an established team, student A loses all of their current work and inherits the current work of the established team.</target>
+        <target state="translated">A Öğrencisini daha önceden kurulu bir takıma taşırsanız, A öğrencisi mevcut çalışmalarının tümünü kaybeder ve kurulu takımın mevcut çalışmalarını devralır.</target>
       </trans-unit>
       <trans-unit id="9679a6f25e8483c0ebd3cadfe78df295eb1f6512" datatype="html">
         <source>Warning 2</source>
@@ -3840,7 +3840,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">71</context>
         </context-group>
-        <target state="needs-translation">If you move Student A into a newly created (blank) team, student A will lose all of their work.</target>
+        <target state="translated">A Öğrencisini yeni oluşturulan (boş) bir takıma taşırsanız, A öğrencisi tüm çalışmalarını kaybeder.</target>
       </trans-unit>
       <trans-unit id="a5c647f6fc8b21841e3c0e59c93539b2c5a2b665" datatype="html">
         <source>How do I change the period for a student?</source>
@@ -3964,7 +3964,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">101</context>
         </context-group>
-        <target state="needs-translation">Project durations vary from about 3 days to 10 days. Some projects may display an estimation of the number of hours it will take for students to complete the project.</target>
+        <target state="translated">Proje süreleri yaklaşık 3 gün ile 10 gün arasında değişmektedir. Bazı projeler, öğrencilerin projeyi tamamlaması için gereken tahmini saat süresini gösterebilir.</target>
       </trans-unit>
       <trans-unit id="3702fe4b7cd0484bfe65aaa4a1d7ecc2befd1845" datatype="html">
         <source>Can I shorten a project run to 1 or 2 days?</source>
@@ -3980,7 +3980,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">105</context>
         </context-group>
-        <target state="needs-translation">It is not recommended to shorten a project. Each project has been carefully designed to lead the student through an inquiry process and cutting it short will result in a less satisfactory educational student experience. Nevertheless, if you are under a time constraint and knowledgeable of the project topic, you could customize the project and shorten it to your specific needs.</target>
+        <target state="translated">Bir projenin kısaltılması önerilmez. Her proje, öğrenciyi bir sorgulama süreci boyunca yönlendirmek için özenle tasarlanmıştır ve kısa kesmek, daha az tatmin edici bir öğrenci eğitimi deneyimine neden olacaktır. Bununla birlikte, zaman kısıtlaması altındaysanız ve proje konusu hakkında bilginiz varsa, projeyi özelleştirebilir ve özel ihtiyaçlarınıza göre kısaltabilirsiniz.</target>
       </trans-unit>
       <trans-unit id="3024ecf162acff3ec72fe6d47aee6bf2ea097db3" datatype="html">
         <source>Where do I find out about lesson plans and standards for WISE projects?</source>
@@ -3988,7 +3988,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">107</context>
         </context-group>
-        <target state="needs-translation">Where do I find out about lesson plans and standards for WISE projects?</target>
+        <target state="translated">WISE projeleri için ders planları ve standartları nereden öğrenebilirim?</target>
       </trans-unit>
       <trans-unit id="62eba7a349fc52a73bcc8fa453b5820324eed7a6" datatype="html">
         <source>Find a project you would like to learn about.</source>
@@ -3996,7 +3996,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">111</context>
         </context-group>
-        <target state="needs-translation">Find a project you would like to learn about.</target>
+        <target state="translated">Öğrenmek istediğiniz bir proje bulun.</target>
       </trans-unit>
       <trans-unit id="4214fdac6b2b04e5afb05556b5ba647563c02b92" datatype="html">
         <source>Click on the project.</source>
@@ -4012,7 +4012,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">113</context>
         </context-group>
-        <target state="needs-translation">This will display a popup that displays information about the project.</target>
+        <target state="translated">Bu projeyle ilgili bilgileri görüntüleyen bir açılır pencereyi ekrana getirir.</target>
       </trans-unit>
       <trans-unit id="fb31dc42edfa71c489ba8d350f1ddc61c72f0bda" datatype="html">
         <source>Note: Some projects may not have much information because it is dependent on the author to provide the lesson plan and standards.</source>
@@ -4020,7 +4020,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">114</context>
         </context-group>
-        <target state="needs-translation">Note: Some projects may not have much information because it is dependent on the author to provide the lesson plan and standards.</target>
+        <target state="translated">Not: Bazı projeler, ders planı ve standartları sağlamak için yazara bağlı olduğundan fazla bilgiye sahip olmayabilir.</target>
       </trans-unit>
       <trans-unit id="0caa9631c30a1085708f8f7ac6f6b207af99c1b9" datatype="html">
         <source>How do I fit a WISE project into my curriculum?</source>
@@ -4028,7 +4028,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">116</context>
         </context-group>
-        <target state="needs-translation">How do I fit a WISE project into my curriculum?</target>
+        <target state="translated">Bir WISE projesini ders programıma nasıl yerleştiririm?</target>
       </trans-unit>
       <trans-unit id="8067ba3441dfe3495b289859b58d59b28fed36f0" datatype="html">
         <source>In general students will benefit from some pre-teaching of the topic covered in the project. It is really up to the teacher to decide where it best fits to support student learning. Many teachers use a WISE project as a capstone activity while others integrate it into their curriculum at a midpoint. Some teachers elect to use WISE projects an introductory activity for a unit, or as a summation activity for a unit.</source>
@@ -4036,7 +4036,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">118</context>
         </context-group>
-        <target state="needs-translation">In general students will benefit from some pre-teaching of the topic covered in the project. It is really up to the teacher to decide where it best fits to support student learning. Many teachers use a WISE project as a capstone activity while others integrate it into their curriculum at a midpoint. Some teachers elect to use WISE projects an introductory activity for a unit, or as a summation activity for a unit.</target>
+        <target state="translated">Genel olarak, projede yer alan konu hakkında yapılacak bazı ön öğretim uygulamaları öğrencilere fayda sağlayacaktır. Öğrenci öğrenimini desteklemek için en uygun yere karar vermek öğretmene kalmıştır. Pek çok öğretmen bir WISE projesini bitirme etkinliği olarak kullanırken, diğerleri bunu ders planlarının orta noktasına entegre etmektedir. Bazı öğretmenler ise WISE projelerini bir ünite için giriş etkinliği veya bir ünite için özetleyici bir etkinlik olarak kullanmayı seçmektedir.</target>
       </trans-unit>
       <trans-unit id="4c1a3a26df6b1a44c59f821d35521cb0dee57b8b" datatype="html">
         <source>How do I add a period after creating a run?</source>
@@ -4116,7 +4116,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">138</context>
         </context-group>
-        <target state="needs-translation">What if I run out of computer lab time but some of my students are not finished with the project?</target>
+        <target state="translated">Bilgisayar laboratuvarımdaki zamanım biterse ve bazı öğrencilerim projeyi bitirmezse ne olur?</target>
       </trans-unit>
       <trans-unit id="e42c6ee16c0475e7cd0a418736dd8da66fdde98f" datatype="html">
         <source>WISE is a web-based learning environments, so students can sign in from a computer at school or at home. This means that students can complete the project from any home or community based computer, per the teacher&apos;s discretion.</source>
@@ -4124,7 +4124,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">140</context>
         </context-group>
-        <target state="needs-translation">WISE is a web-based learning environments, so students can sign in from a computer at school or at home. This means that students can complete the project from any home or community based computer, per the teacher's discretion.</target>
+        <target state="translated">WISE web tabanlı bir öğrenme ortamıdır ve bu sayede öğrenciler okulda veya evde bir bilgisayardan oturum açabilirler. Bu öğretmenin takdirine bağlı olarak öğrencilerin projeyi herhangi bir ev veya başka bir bilgisayardan tamamlayabilecekleri anlamına gelir.</target>
       </trans-unit>
       <trans-unit id="a40fe31275b2daa3205d75bd58536d5a7830f3e6" datatype="html">
         <source>How do I review and grade student work?</source>
@@ -4132,7 +4132,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">144</context>
         </context-group>
-        <target state="needs-translation">How do I review and grade student work?</target>
+        <target state="translated">Öğrenci çalışmalarını nasıl gözden geçirir ve not veririm?</target>
       </trans-unit>
       <trans-unit id="6d1b5c10cbc1d79f81c60e7c39c78579489cbf7c" datatype="html">
         <source>Here you will be able to look at your students&apos; work.</source>
@@ -4156,7 +4156,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">151</context>
         </context-group>
-        <target state="needs-translation">Next to each student's work, you will be able to give them a score and comment.</target>
+        <target state="translated">Her öğrencinin çalışmasının yanına onlara puan verip yorum yapabileceksiniz.</target>
       </trans-unit>
       <trans-unit id="ce87a87a75de3f9a89f4ccb83b69b189c217f30b" datatype="html">
         <source>How do students see my comments and scores for their work?</source>
@@ -4164,7 +4164,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">153</context>
         </context-group>
-        <target state="needs-translation">How do students see my comments and scores for their work?</target>
+        <target state="translated">Öğrenciler çalışmalarıyla ilgili yorumlarımı ve puanlarımı nasıl görürler?</target>
       </trans-unit>
       <trans-unit id="6f1b5176d1ac687e91e947309867726178ea6075" datatype="html">
         <source>The student must sign into WISE with their student account.</source>
@@ -4172,7 +4172,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">155</context>
         </context-group>
-        <target state="needs-translation">The student must sign into WISE with their student account.</target>
+        <target state="translated">Öğrenci, öğrenci hesabıyla WISE'a giriş yapmalıdır.</target>
       </trans-unit>
       <trans-unit id="3841de15fe215a519a782c724a896d08e6629bea" datatype="html">
         <source>Open the project.</source>
@@ -4196,7 +4196,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">158</context>
         </context-group>
-        <target state="needs-translation">The comment and score will be displayed under the piece of work that was graded.</target>
+        <target state="translated">Yorum ve puan, not verilen çalışmanın altında gösterilecektir.</target>
       </trans-unit>
       <trans-unit id="f4f0bb05aa6bad172e17cce01cddc091c3abe59c" datatype="html">
         <source>What should I look for in my student&apos;s answers?</source>
@@ -4204,7 +4204,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">160</context>
         </context-group>
-        <target state="needs-translation">What should I look for in my student's answers?</target>
+        <target state="translated">Öğrencimin cevaplarında nelere dikkat etmeliyim?</target>
       </trans-unit>
       <trans-unit id="8ad1ae10ce55dbadbc0d79c5df1e0e3236a443ce" datatype="html">
         <source>The following link will give you a sample rubric for grading a step in the Mitosis and Cell Processes project. The rubric is based on our TELS Center research on how students integrate their knowledge of complex science concepts. We hope that it can give you a start in developing your own rubrics for the notes and steps you plan to grade.</source>
@@ -4228,7 +4228,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">165</context>
         </context-group>
-        <target state="needs-translation">How can I encourage my students to review the graded notes and comments I have made?</target>
+        <target state="translated">Öğrencilerimi verdiğim notları ve yaptığım yorumları gözden geçirmeye nasıl teşvik edebilirim?</target>
       </trans-unit>
       <trans-unit id="4c89f57cff7fe4aa81c04b787bcfeefa40c6ee32" datatype="html">
         <source>Many teachers find it advantageous to grade the first step or two at the end of the first day of the project run. At the beginning of class the next day they share with the whole class some sample responses and have the class critique the work.</source>
@@ -4244,7 +4244,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">169</context>
         </context-group>
-        <target state="needs-translation">How do I find time to grade all of the student work?</target>
+        <target state="translated">Tüm öğrenci çalışmalarına not vermek için nasıl zaman bulabilirim?</target>
       </trans-unit>
       <trans-unit id="aa25bf22d74c6350808bdcad5b07d6af280353b6" datatype="html">
         <source>We recommend that you go through the project and select a few steps that you think best demonstrate the students&apos; understanding of the complex concepts covered in the module and grade those steps. Then tell your students they must complete all questions but should concentrate their efforts on the key steps. We recognize that critically grading each step is very time consuming and unpractical.</source>
@@ -4252,7 +4252,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">171</context>
         </context-group>
-        <target state="needs-translation">We recommend that you go through the project and select a few steps that you think best demonstrate the students' understanding of the complex concepts covered in the module and grade those steps. Then tell your students they must complete all questions but should concentrate their efforts on the key steps. We recognize that critically grading each step is very time consuming and unpractical.</target>
+        <target state="translated">Projeyi gözden geçirmenizi ve öğrencilerin modülde yer alan karmaşık kavramları anladığını en iyi şekilde gösterdiğini düşündüğünüz birkaç adımı seçmenizi ve bu adımlara not vermenizi öneririz. Ardından öğrencilerinize tüm soruları tamamlamaları gerektiğini, ancak çabalarını temel adımlar üzerinde yoğunlaştırmaları gerektiğini söyleyin. Her adımı eleştirel olarak değerlendirmenin çok zaman alıcı ve pratik olmadığının farkındayız.</target>
       </trans-unit>
       <trans-unit id="d43085815938bf7369d9f4d71748c90955f4ac4c" datatype="html">
         <source>What is the Real Time Classroom Monitor?</source>
@@ -4300,7 +4300,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">185</context>
         </context-group>
-        <target state="needs-translation">Yes you can! This can be useful if you need to grab their attention in order to have a class discussion or to make an announcement.</target>
+        <target state="translated">Evet yapabilirsiniz! Bu, bir sınıf tartışması yapmak veya bir duyuru yapmak için öğrencilerin dikkatlerini çekmeniz gerekiyorsa yararlı olabilir.</target>
       </trans-unit>
       <trans-unit id="47fdad3268de5bb44d62ef7bf2e4b8e39c432588" datatype="html">
         <source>How many computers do I need to run WISE?</source>
@@ -4308,7 +4308,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">194</context>
         </context-group>
-        <target state="needs-translation">How many computers do I need to run WISE?</target>
+        <target state="translated">WISE'ı çalıştırmak için kaç bilgisayara ihtiyacım var?</target>
       </trans-unit>
       <trans-unit id="f12bc480c8322f1948f28e8ef2d1925c2caf9bf0" datatype="html">
         <source>We strongly recommend one computer for every two students. Research shows that students benefit from working together as a team of two.</source>
@@ -4316,7 +4316,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">196</context>
         </context-group>
-        <target state="needs-translation">We strongly recommend one computer for every two students. Research shows that students benefit from working together as a team of two.</target>
+        <target state="translated">Her iki öğrenciye bir bilgisayar olmasını şiddetle tavsiye ediyoruz. Araştırmalar, öğrencilerin iki kişilik bir ekip olarak birlikte çalışmaktan fayda sağladığını gösteriyor.</target>
       </trans-unit>
       <trans-unit id="69780389024fe4b31a860424a4ca428609fdde0f" datatype="html">
         <source>What&apos;s New?</source>
@@ -4328,7 +4328,7 @@
           <context context-type="sourcefile">src/app/news/news.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">What's New?</target>
+        <target state="translated">Ne Yenilikler Var?</target>
       </trans-unit>
       <trans-unit id="271a4b180da747cf090b0a93c54b1c5a6efb7cf9" datatype="html">
         <source>More news</source>
@@ -4336,7 +4336,7 @@
           <context context-type="sourcefile">src/app/home/discourse-latest-news/discourse-latest-news.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">More news</target>
+        <target state="translated">Daha fazla haber</target>
       </trans-unit>
       <trans-unit id="cba3bcc252b9f7b980c934ce394a1345eebfd970" datatype="html">
         <source>Add Ideas</source>
@@ -4352,7 +4352,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Integrated science learning and teaching with technology</target>
+        <target state="translated">Teknoloji ile bütünleşik fen öğrenimi ve öğretimi</target>
       </trans-unit>
       <trans-unit id="d0339bceaff58f22bba77d0231838a8df686c98e" datatype="html">
         <source>The WISE Advantage</source>
@@ -4456,7 +4456,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">87</context>
         </context-group>
-        <target state="needs-translation">Join us! Discuss all things WISE.</target>
+        <target state="translated">Bize katılın! WISE ile ilgili her şeyi tartışın.</target>
       </trans-unit>
       <trans-unit id="53c1019d0a23e95290e125bf93e34257eaadb8b6" datatype="html">
         <source>Help + FAQs</source>
@@ -4476,7 +4476,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">93</context>
         </context-group>
-        <target state="needs-translation">View tutorials and common questions.</target>
+        <target state="translated">Öğreticileri ve genel soruları görüntüleyin.</target>
       </trans-unit>
       <trans-unit id="02e9e69ddcbf93de9fd38bc4d0f312142658610d" datatype="html">
         <source>Contact Us</source>
@@ -4536,7 +4536,7 @@
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
           <context context-type="linenumber">70</context>
         </context-group>
-        <target state="needs-translation">Interactive scientific models plus hands-on activities, personalized guidance, and rich embedded assessments</target>
+        <target state="translated">Etkileşimli bilimsel modeller artı uygulamalı etkinlikler, kişiselleştirilmiş rehberlik ve zengin yerleşik değerlendirmeler</target>
       </trans-unit>
       <trans-unit id="5655885224951904964" datatype="html">
         <source>WISE students and teacher</source>
@@ -4584,7 +4584,7 @@
           <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Your Google User ID was not found in WISE.</target>
+        <target state="translated">Google Kullanıcı Kimliğiniz WISE'da bulunamadı.</target>
       </trans-unit>
       <trans-unit id="c6c31f501feef87ab274bd3a000b99eeb7434cff" datatype="html">
         <source>New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
@@ -4596,7 +4596,7 @@
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
           <context context-type="linenumber">62</context>
         </context-group>
-        <target state="needs-translation">New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <target state="translated">WISE'da yeni misiniz? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Ücretsiz katılın!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
       </trans-unit>
       <trans-unit id="263e1717422fe3b5810e9a2e55b87e477b35d1ed" datatype="html">
         <source>Sign in to WISE</source>
@@ -4612,7 +4612,7 @@
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Username and password not recognized. Please try again.</target>
+        <target state="translated">Kullanıcı adı ve parola tanınmadı. Lütfen tekrar deneyin.</target>
       </trans-unit>
       <trans-unit id="9fb7b860775d8522b9402f7e31392531ec8079d6" datatype="html">
         <source>Please try again and verify that you are not a robot.</source>
@@ -4788,7 +4788,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Account Menu</target>
+        <target state="translated">Hesap Menüsü</target>
       </trans-unit>
       <trans-unit id="879fef27271d8247d791381cf1f9bb0eb8974166" datatype="html">
         <source>Account avatar</source>
@@ -4800,7 +4800,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">Account avatar</target>
+        <target state="translated">Hesap avatarı</target>
       </trans-unit>
       <trans-unit id="c48210e0360714d757f8286144200648dc140e30" datatype="html">
         <source>Switch back to original user</source>
@@ -4808,7 +4808,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Switch back to original user</target>
+        <target state="translated">Orijinal kullanıcıya geri dön</target>
       </trans-unit>
       <trans-unit id="c4e3e4170654ee5a353d29a0c34b8008cd25a635" datatype="html">
         <source>Student Home</source>
@@ -4860,7 +4860,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="needs-translation">Researcher Tools</target>
+        <target state="translated">Araştırmacı Araçları</target>
       </trans-unit>
       <trans-unit id="593d1ae1c4b71457eda8476df2bb52624a3c6e74" datatype="html">
         <source>Admin Tools</source>
@@ -4868,7 +4868,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">Admin Tools</target>
+        <target state="translated">Yönetici Araçları</target>
       </trans-unit>
       <trans-unit id="85b79c9064aed1ead31ace985f31aa1363f6bdaf" datatype="html">
         <source>Help</source>
@@ -4928,7 +4928,7 @@
           <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">WISE header logo</target>
+        <target state="translated">WISE başlık logosu</target>
       </trans-unit>
       <trans-unit id="32b2b5a41c731dedcd41bc360ffdc42a36fe481f" datatype="html">
         <source>Main menu</source>
@@ -4976,7 +4976,7 @@
           <context context-type="sourcefile">src/app/modules/library/community-library/community-library.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
-        <target state="needs-translation">No community designed units found.</target>
+        <target state="translated">Topluluk tarafından tasarlanmış ünite bulunamadı.</target>
       </trans-unit>
       <trans-unit id="d1acaeb5fa466988ff526619702c4bf21e0a5e15" datatype="html">
         <source>Copy Unit</source>
@@ -5000,7 +5000,7 @@
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Copying creates a duplicate that will appear in “My Units”. You will be the owner and can edit the content and share the new unit with other WISE users.</target>
+        <target state="translated">Kopyalama, “Ünitelerim”de görünecek bir kopya oluşturur. Sahibi siz olacaksınız ve içeriği düzenleyebilir, yeni üniteyi diğer WISE kullanıcılarıyla paylaşabilirsiniz.</target>
       </trans-unit>
       <trans-unit id="1979da7460819153e11d2078244645d94291b69c" datatype="html">
         <source>Copy</source>
@@ -5020,7 +5020,7 @@
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.ts</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">There was an error trying to copy the project. Please refresh the page and try again.</target>
+        <target state="translated">Projeyi kopyalamaya çalışırken bir hata oluştu. Lütfen sayfayı yenileyin ve tekrar deneyin.</target>
       </trans-unit>
       <trans-unit id="2133f444f222b8ac645f3b0c53c2b30dfa15e6d0" datatype="html">
         <source>Discuss (<x id="INTERPOLATION" equiv-text="{{postCount}}"/><x id="INTERPOLATION_1" equiv-text="{{hasMoreTopics ? &apos;+&apos; : &apos;&apos;}}"/>)</source>
@@ -5028,7 +5028,7 @@
           <context context-type="sourcefile">src/app/modules/library/discourse-category-activity/discourse-category-activity.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Discuss (<x id="INTERPOLATION" equiv-text="{{postCount}}"/><x id="INTERPOLATION_1" equiv-text="{{hasMoreTopics ? '+' : ''}}"/>)</target>
+        <target state="translated">Tartışın (<x id="INTERPOLATION" equiv-text="{{postCount}}"/><x id="INTERPOLATION_1" equiv-text="{{hasMoreTopics ? '+' : ''}}"/>)</target>
       </trans-unit>
       <trans-unit id="891537ceca296c8821e5edf088b3e9cc5c6f17c9" datatype="html">
         <source>Explore suggested WISE curricula for the given grade levels or search for specific units that address your needs.</source>
@@ -5036,7 +5036,7 @@
           <context context-type="sourcefile">src/app/modules/library/home-page-project-library/home-page-project-library.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Explore suggested WISE curricula for the given grade levels or search for specific units that address your needs.</target>
+        <target state="translated">Verilen sınıf seviyeleri için önerilen WISE müfredatını keşfedin veya ihtiyaçlarınızı karşılayan belirli üniteleri arayın.</target>
       </trans-unit>
       <trans-unit id="1ada756975a68f38f92477600b2ca2864ea89533" datatype="html">
         <source>Toggle filters</source>
@@ -5044,7 +5044,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">Toggle filters</target>
+        <target state="translated">Filtreleri aç/kapat</target>
       </trans-unit>
       <trans-unit id="b8d343aa7d7ecf599df1c34a0d4ba1bdb7de759f" datatype="html">
         <source>Filter by <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.nextgenscience.org/&quot; target=&quot;_blank&quot;&gt;"/>Next Generation Science Standards<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (NGSS).</source>
@@ -5136,7 +5136,7 @@
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">This unit is from an old version of WISE that is no longer supported. Please find an alternate unit to use in the future or contact us for upgrade options.</target>
+        <target state="translated">Bu birim, artık desteklenmeyen eski bir WISE sürümünden alınmıştır. Lütfen gelecekte kullanmak için alternatif bir ünite bulun veya yükseltme seçenekleri için bizimle iletişime geçin.</target>
       </trans-unit>
       <trans-unit id="59a08e65c39e2cecb841fc7123a77756f52c8db3" datatype="html">
         <source>Legacy Unit</source>
@@ -5380,7 +5380,7 @@
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Each of the units in this collection has been designed and iteratively refined through a partnership of university-based education researchers and science teachers. They have all been implemeneted and tested in real classrooms and have shown proven learning gains.</target>
+        <target state="translated">Bu koleksiyondaki ünitelerin her biri, üniversite temelli eğitim araştırmacıları ve fen bilimleri öğretmenlerinin ortaklığıyla tasarlanmış ve sürekli olarak iyileştirilmiştir. Hepsi gerçek sınıflarda uygulanmış ve test edilmiştir ve öğrenmeyi artırdığı kanıtlanmıştır.</target>
       </trans-unit>
       <trans-unit id="e67065cfae11c998159fc6722e70e4ee76db2c8f" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/about&quot; target=&quot;_blank&quot;&gt;"/>Learn more<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> about our design process and <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://wise-research.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>check out our research and publications<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
@@ -5492,7 +5492,7 @@
           <context context-type="sourcefile">src/app/modules/library/share-project-dialog/share-project-dialog.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Sharing a curriculum unit allows other WISE teachers to use it with their own students and optionally edit the unit's content.</target>
+        <target state="translated">Bir ünite paylaşmak, diğer WISE öğretmenlerinin onu kendi öğrencileriyle kullanmalarına ve isteğe bağlı olarak birimin içeriğini düzenlemelerine olanak tanır.</target>
       </trans-unit>
       <trans-unit id="6324a3a991d13ea5359329e8ab667c8969f81e16" datatype="html">
         <source>Shared units appear in a teacher&apos;s &quot;My Units&quot; library.</source>
@@ -5524,7 +5524,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">40</context>
         </context-group>
-        <target state="needs-translation">Teacher is already on shared list.</target>
+        <target state="translated">Öğretmen zaten paylaşılan listede.</target>
       </trans-unit>
       <trans-unit id="53ea2772322e7d4d21515bb0c6dead283f8e18a5" datatype="html">
         <source>Revoke</source>
@@ -5816,7 +5816,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">147</context>
         </context-group>
-        <target state="needs-translation">Unlink Google Account</target>
+        <target state="translated">Google Hesabının Bağlantısını Kaldır</target>
       </trans-unit>
       <trans-unit id="8666615009060969246" datatype="html">
         <source>Password changed.</source>
@@ -5856,7 +5856,7 @@
           <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">To remove the link to your Google account, you will be asked to create a WISE password. In the future, you'll sign in to WISE using your username and password.</target>
+        <target state="translated">Google hesabınızın bağlantısını kaldırmak için bir WISE şifresi oluşturmanız istenecektir. Gelecekte, kullanıcı adınızı ve şifrenizi kullanarak WISE'da oturum açacaksınız.</target>
       </trans-unit>
       <trans-unit id="f021455ae88703603db9bb34ea44ab9170f37920" datatype="html">
         <source>You will no longer be able to sign in to WISE using Google. Would you like to continue?</source>
@@ -5864,7 +5864,7 @@
           <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">You will no longer be able to sign in to WISE using Google. Would you like to continue?</target>
+        <target state="translated">Artık Google'ı kullanarak WISE'de oturum açamayacaksınız. Devam etmek ister misin?</target>
       </trans-unit>
       <trans-unit id="ac10a3d9b59575640797c1a8e6aea642cf5d5e77" datatype="html">
         <source>Continue</source>
@@ -6016,7 +6016,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.ts</context>
           <context context-type="linenumber">93</context>
         </context-group>
-        <target state="needs-translation">Personal</target>
+        <target state="translated">Kişisel</target>
       </trans-unit>
       <trans-unit id="85fd3b01ce1968fbd2304a0c598d4a5676e5da03" datatype="html">
         <source> Score: <x id="INTERPOLATION" equiv-text="{{annotations.score.data.value}}"/><x id="INTERPOLATION_1" equiv-text="{{maxScoreDisplay}}"/> </source>
@@ -6226,7 +6226,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">We understand how important privacy is to our community, especially the teachers and students all over the world who use WISE resources in their educational endeavors. This policy explains what information we collect, how we use it, and what we do to keep it safe.</target>
+        <target state="translated">Gizliliğin topluluğumuz için ne kadar önemli olduğunu anlıyoruz, özellikle de eğitim çalışmalarında WISE kaynaklarını kullanan dünyanın her yerindeki öğretmenler ve öğrenciler için. Bu politika, hangi bilgileri topladığımızı, bunları nasıl kullandığımızı ve onları güvende tutmak için ne yaptığımızı açıklamaktadır.</target>
       </trans-unit>
       <trans-unit id="d8cb0bb1a320c0fdf31c9939c9e6f8deb55f3a63" datatype="html">
         <source>These Terms of Use and Privacy Policy constitute an agreement between you and the Web-based Inquiry Science Environment team that governs your use of wise.berkeley.edu and all associated services and websites (collectively &quot;WISE&quot;). The WISE team is a federally-funded research group headquartered at the University of California, Berkeley and is a non-profit organization.</source>
@@ -6250,7 +6250,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
-        <target state="needs-translation">This policy was last updated on September 8, 2017.</target>
+        <target state="translated">Bu politika en son 8 Eylül 2017 tarihinde güncellenmiştir.</target>
       </trans-unit>
       <trans-unit id="2c6ce41500d1363e6ae097bccbab4712c0943d42" datatype="html">
         <source>2. Information We Collect</source>
@@ -6274,7 +6274,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
-        <target state="needs-translation">In order to use some features of WISE, you will need to register by creating a user account. Creating an account is optional, but without an account you will not be able to create or publish curriculum projects or use WISE curricula to capture, store, review, or assess student work.</target>
+        <target state="translated">WISE'ın bazı özelliklerini kullanabilmek için bir kullanıcı hesabı oluşturarak kayıt olmanız gerekmektedir. Bir hesap oluşturmak isteğe bağlıdır, ancak bir hesap olmadan müfredat projeleri oluşturamaz veya yayınlayamaz ya da öğrenci çalışmalarını toplamak, saklamak, gözden geçirmek veya değerlendirmek için WISE müfredatını kullanamazsınız.</target>
       </trans-unit>
       <trans-unit id="75c166e888318c9399a404e476a0637d5662cac3" datatype="html">
         <source>When creating a WISE teacher account, we ask you to provide your first and last name, email address, password, city, state, country, school name, school level, and school subjects. To create a WISE student account, we ask you to provide your first and last name, birth day and month, gender, and password, and choose a security question and answer.</source>
@@ -6282,7 +6282,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">35</context>
         </context-group>
-        <target state="needs-translation">When creating a WISE teacher account, we ask you to provide your first and last name, email address, password, city, state, country, school name, school level, and school subjects. To create a WISE student account, we ask you to provide your first and last name, birth day and month, gender, and password, and choose a security question and answer.</target>
+        <target state="translated">Bir WISE öğretmen hesabı oluştururken sizden adınızı ve soyadınızı, e-posta adresinizi, şifrenizi, şehrinizi, eyaletinizi, ülkenizi, okul adınızı, okul seviyenizi ve okul ders konularınızı belirtmenizi rica ediyoruz. Bir WISE öğrenci hesabı oluşturmak için sizden adınızı ve soyadınızı, doğum gününüzü ve ayınızı, cinsiyetinizi ve şifrenizi girmenizi ve bir güvenlik sorusu ve yanıtı seçmenizi rica ediyoruz.</target>
       </trans-unit>
       <trans-unit id="c02f40b7046d211db3ea7287615181de66447ed8" datatype="html">
         <source>To help ensure unauthorized use of your account, please keep your password secret. You are solely responsible for any use of your account, even if your account is used by another person. If any use of your account violates the Terms of Use, your account may be suspended or deleted.</source>
@@ -6290,7 +6290,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">36</context>
         </context-group>
-        <target state="needs-translation">To help ensure unauthorized use of your account, please keep your password secret. You are solely responsible for any use of your account, even if your account is used by another person. If any use of your account violates the Terms of Use, your account may be suspended or deleted.</target>
+        <target state="translated">Hesabınızın yetkisiz kullanımını önlemeye yardımcı olmak için lütfen şifrenizi gizli tutun. Hesabınız başka bir kişi tarafından kullanılmış olsa bile, hesabınızın herhangi bir şekilde kullanılmasından yalnızca siz sorumlusunuz. Hesabınızın kullanılması herhangi bir şekilde Kullanım Koşullarını ihlal ederse, hesabınız askıya alınabilir veya silinebilir.</target>
       </trans-unit>
       <trans-unit id="fb6011f7bb1a29887f28e6d6347878061932492d" datatype="html">
         <source>If you believe that your account is no longer secure for any reason, please change your password. If you cannot access your account to change your password, contact us using our <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://wise.berkeley.edu/contact&quot;&gt;"/>Contact Form<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
@@ -6314,7 +6314,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">40</context>
         </context-group>
-        <target state="needs-translation">When students submit work in a WISE project run (while logged into their accounts), we save their responses to questions and any content they create within the WISE platform. Teachers can review the responses and artifacts students create in the WISE runs they own. Teachers can also grade student work and provide feedback. Scores and comments generated by teachers through the WISE platform are stored by WISE and can be viewed by the students they are sent to.</target>
+        <target state="translated">Öğrenciler bir WISE proje çalışmasında (hesaplarında oturum açmışken) çalışmalarını sunduklarında, sorulara verdikleri yanıtları ve WISE platformunda oluşturdukları her türlü içeriği kaydederiz. Öğretmenler, öğrencilerin sahip oldukları WISE çalışmalarında oluşturduğu yanıtları ve çalışmaları gözden geçirebilir. Öğretmenler ayrıca öğrencilerin çalışmalarına not verebilir ve geri bildirim sağlayabilir. WISE platformu üzerinden öğretmenlerin oluşturduğu puanlar ve yorumlar WISE tarafından saklanır ve gönderildikleri öğrenciler tarafından görüntülenebilir.</target>
       </trans-unit>
       <trans-unit id="bb40c3cb308acd01903478a7b892cf7dbf5faeb4" datatype="html">
         <source>Curriculum projects that teachers author using the WISE platform are also saved and stored on our servers and may be published to a public project library that is accessible to other WISE users or visitors (with the owner&apos;s permission). Please note: Every WISE project hosted by the WISE site (whether it is shared in a public project library or not) is viewable by anyone using the internet via the project&apos;s unique URL.</source>
@@ -6338,7 +6338,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <target state="needs-translation">Licensing</target>
+        <target state="translated">Lisanslama</target>
       </trans-unit>
       <trans-unit id="d3cee34156cc74603c393d78d45916c7f94c8a8f" datatype="html">
         <source>All projects that you create on or share to the WISE site shall be licensed under the Creative Commons Attribution-ShareAlike 4.0 license. For more information about the terms of this license, visit <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://creativecommons.org/licenses/by-sa/4.0/&quot; target=&quot;_blank&quot;&gt;"/>https://creativecommons.org/licenses/by-sa/4.0/<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>. The WISE team reserves the right to remove any content that, in the WISE team&apos;s discretion, is harmful to the community or violates the WISE Terms of Use. Harmful use includes spam or repeated commercial advertisement through projects, comments, or discussion posts, as well as inappropriate or offensive material.</source>
@@ -6354,7 +6354,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <target state="needs-translation">You may link to or include outside resources or materials in your WISE projects or in any public parts of the WISE site, but it is your responsibility to obtain any necessary permission from the original owners and include any required attribution for your use of such content. WISE will not be held responsible for the unauthorized use by a WISE account holder of any third-party content in WISE projects or on any other sections of the WISE site.</target>
+        <target state="translated">WISE projelerinize veya WISE sitesinin herkese açık bölümlerine dış kaynaklara veya materyallere bağlantı verebilir veya bunları dahil edebilirsiniz, ancak orijinal sahiplerden gerekli izinleri almak ve bu tür içeriği kullanmanız için gerekli tüm atıfları eklemek sizin sorumluluğunuzdadır. WISE hesap sahibinin herhangi bir üçüncü taraf içeriğinin WISE projelerinde veya WISE sitesinin diğer bölümlerinde yetkisiz kullanımından WISE sorumlu tutulamaz.</target>
       </trans-unit>
       <trans-unit id="716f7328f7d5fa0ca3e779de08cbb57f0e170883" datatype="html">
         <source>Auto-Generated Data</source>
@@ -6370,7 +6370,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">49</context>
         </context-group>
-        <target state="needs-translation">When students and teachers use WISE, we save event data such as mouse clicks, time spent viewing pages, and other site interactions. This data is used for research purposes and for automated analyses and tools within WISE project runs. (See ‘How We Use the Data' for more information.)</target>
+        <target state="translated">Öğrenciler ve öğretmenler WISE'ı kullandıklarında, fare tıklamaları, sayfaları görüntülemek için harcanan süre ve diğer site etkileşimleri gibi etkinlik verilerini kaydederiz. Bu veriler, araştırma amaçları ve WISE proje çalıştırmalarındaki otomatik analizler ve araçlar için kullanılır. (Daha fazla bilgi için 'Verileri Nasıl Kullanıyoruz' bölümüne bakın.)</target>
       </trans-unit>
       <trans-unit id="4f489cc30da4fa5f11f653ae52eacef505ba9170" datatype="html">
         <source>Cookies</source>
@@ -6386,7 +6386,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">52</context>
         </context-group>
-        <target state="needs-translation">When you log in, WISE will ask your browser to put a "cookie" on your computer. This allows WISE to remember that you are logged in when you go to a different page. You can delete this cookie at any time through your browser's settings.</target>
+        <target state="translated">Giriş yaptığınızda, WISE tarayıcınızdan bilgisayarınıza bir "çerez" koymasını isteyecektir. Bu, WISE'ın farklı bir sayfaya gittiğinizde oturum açtığınızı hatırlamasını sağlar. Bu çerezi istediğiniz zaman tarayıcınızın ayarlarından silebilirsiniz.</target>
       </trans-unit>
       <trans-unit id="eddb0914a7a33bdc6f8e1fb3318df254558527bf" datatype="html">
         <source>Google Analytics</source>
@@ -6402,7 +6402,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">WISE uses Google Analytics to help us understand our site usage. We use data like which pages you visit and clicks you make to help us improve the site. Information collected and processed by Google Analytics includes user IP addresses, network locations, and geographic locations. Some browsers allow you to opt-out of the Google Analytics tracking by installing add-ons for your browser.</target>
+        <target state="translated">Giriş yaptığınızda, WISE tarayıcınızdan bilgisayarınıza bir "çerez" koymasını isteyecektir. Bu, WISE'ın farklı bir sayfaya gittiğinizde oturum açtığınızı hatırlamasını sağlar. Bu çerezi istediğiniz zaman tarayıcınızın ayarlarından silebilirsiniz.</target>
       </trans-unit>
       <trans-unit id="9af481581bbddd55af685583742a16757964160e" datatype="html">
         <source>3. How We Use the Data</source>
@@ -6442,7 +6442,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">64</context>
         </context-group>
-        <target state="needs-translation">Email addresses for teacher accounts are used for communication: (a) for support, and (b) for occasional public announcements from the WISE Team. Teacher email addresses are also used to facilitate resetting of passwords.</target>
+        <target state="translated">Öğretmen hesaplarının e-posta adresleri iletişim için kullanılır: (a) destek için ve (b) WISE Ekibinden ara sıra yapılan genel duyurular için. Öğretmen e-posta adresleri ayrıca parolaların sıfırlanmasını kolaylaştırmak için de kullanılır.</target>
       </trans-unit>
       <trans-unit id="79fd12be51fabc3997ebf91056835b68468377e4" datatype="html">
         <source>We do not ask students for their email address and do not share any student personal information with outside parties. Only the students&apos; teachers can access student names and usernames within WISE (for purposes of reviewing student work, grading, sending feedback, etc). Each participating teacher will have access to his or her own students&apos; project work and will not be able to see any information from other teachers&apos; students. Teachers are also able to reset passwords for their students.</source>
@@ -9910,7 +9910,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <target state="needs-translation">Slower</target>
+        <target state="translated">Daha yavaş</target>
       </trans-unit>
       <trans-unit id="efc5c59dbef99e972ec6f6cd7bfc6a1550d2a051" datatype="html">
         <source>Faster</source>
@@ -9918,7 +9918,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">Faster</target>
+        <target state="translated">Daha hızlı</target>
       </trans-unit>
       <trans-unit id="21ed03fef3e880bd5bc2c36b26d8c6c0b6399c59" datatype="html">
         <source>Add File</source>
@@ -9946,7 +9946,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
           <context context-type="linenumber">265</context>
         </context-group>
-        <target state="needs-translation">You do not have any more chances to receive feedback on your answer.</target>
+        <target state="translated">Cevabınız hakkında geri bildirim almak için daha fazla şansınız yoktur.</target>
       </trans-unit>
       <trans-unit id="4965414112249568013" datatype="html">
         <source>You have 1 chance to receive feedback on your answer so this this should be your best work.
@@ -9956,9 +9956,9 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.ts</context>
           <context context-type="linenumber">903</context>
         </context-group>
-        <target state="needs-translation">You have 1 chance to receive feedback on your answer so this this should be your best work.
+        <target state="translated">Cevabınız hakkında geri bildirim almak için 1 şansınız var, bu yüzden bu sizin en iyi çalışmanız olmalı.
 
-Are you ready to receive feedback on this answer?</target>
+Bu yanıtla ilgili geri bildirim almaya hazır mısınız?</target>
       </trans-unit>
       <trans-unit id="1556483130839173989" datatype="html">
         <source>You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this this should be your best work.
@@ -9982,7 +9982,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Oscillator Types</target>
+        <target state="translated">Osilatör Çeşitleri</target>
       </trans-unit>
       <trans-unit id="3332b3737aa91e0e1af6e4c2e93b09228e870362" datatype="html">
         <source> (There are no oscillator types selected. Please select at least one oscillator type.)
@@ -9991,7 +9991,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
           <context context-type="linenumber">7,8</context>
         </context-group>
-        <target state="needs-translation"> (There are no oscillator types selected. Please select at least one oscillator type.)
+        <target state="translated"> (Seçilen osilatör tipi yok. Lütfen en az bir osilatör tipi seçin.)
 </target>
       </trans-unit>
       <trans-unit id="4915e52ceb9f848948be8fd512147930175f7324" datatype="html">
@@ -10032,7 +10032,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <target state="needs-translation">Starting Frequency (Hz)</target>
+        <target state="translated">Başlangıç Frekansı (Hz)</target>
       </trans-unit>
       <trans-unit id="584114dd79e680cb2262384fe8fc40c40149e9b3" datatype="html">
         <source>Oscillator Width (Pixels)</source>
@@ -10040,7 +10040,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">Oscillator Width (Pixels)</target>
+        <target state="translated">Osilatör Genişliği (Piksel)</target>
       </trans-unit>
       <trans-unit id="dd7074cd090ce1bc8c04b82d5e86dc19e550819c" datatype="html">
         <source>Oscillator Height (Pixels)</source>
@@ -10048,7 +10048,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
           <context context-type="linenumber">64</context>
         </context-group>
-        <target state="needs-translation">Oscillator Height (Pixels)</target>
+        <target state="translated">Osilatör Yüksekliği (Piksel)</target>
       </trans-unit>
       <trans-unit id="45565845bc7e8f7999ef848f155e2c7d5dbb248e" datatype="html">
         <source>Oscillator Grid Size (Pixels)</source>
@@ -10104,7 +10104,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Oscillator Type</target>
+        <target state="translated">Osilatör Tipi</target>
       </trans-unit>
       <trans-unit id="abf667ffefffda6607c19873644cadf7b64e6852" datatype="html">
         <source>Frequency (Hz)</source>
@@ -10112,7 +10112,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="needs-translation">Frequency (Hz)</target>
+        <target state="translated">Frekans (Hz)</target>
       </trans-unit>
       <trans-unit id="8564202903947049539" datatype="html">
         <source>Play</source>
@@ -10176,7 +10176,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">25,26</context>
         </context-group>
-        <target state="needs-translation"> Stretch background to fit </target>
+        <target state="translated"> Arka planı sığacak şekilde uzat </target>
       </trans-unit>
       <trans-unit id="d23ca7ec1129194cd7886fb73832a19ce4e00354" datatype="html">
         <source> Allow student to upload background image </source>
@@ -10248,7 +10248,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">105</context>
         </context-group>
-        <target state="needs-translation">Width</target>
+        <target state="translated">Genişlik</target>
       </trans-unit>
       <trans-unit id="179eb5c4a21ad324f75f723218a621d120e39d30" datatype="html">
         <source>Height</source>
@@ -10256,7 +10256,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">112</context>
         </context-group>
-        <target state="needs-translation">Height</target>
+        <target state="translated">Yükseklik</target>
       </trans-unit>
       <trans-unit id="e3b469b69eef004764c51b7a8b3efa761501ab73" datatype="html">
         <source> Show Node Labels </source>
@@ -10292,7 +10292,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">180</context>
         </context-group>
-        <target state="needs-translation">Add Link</target>
+        <target state="translated">Bağlantı Ekle</target>
       </trans-unit>
       <trans-unit id="8774f599f2e1ccb18ed0cf4536279ddce1868359" datatype="html">
         <source>There are no links. Click the &quot;Add Link&quot; button to add a link.</source>
@@ -10300,7 +10300,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">186</context>
         </context-group>
-        <target state="needs-translation">There are no links. Click the "Add Link" button to add a link.</target>
+        <target state="translated">Bağlantı yok. Bağlantı eklemek için "Bağlantı Ekle" düğmesini tıklayın.</target>
       </trans-unit>
       <trans-unit id="704ff937be1fcf12bfd12a1a85844849765d13f5" datatype="html">
         <source>Link Label</source>
@@ -10336,7 +10336,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">140</context>
         </context-group>
-        <target state="needs-translation">Color</target>
+        <target state="translated">Renk</target>
       </trans-unit>
       <trans-unit id="9fae747b3706d7f4d6b694ae273d7df2799a732c" datatype="html">
         <source>(Optional) Create a starting state for the concept map by editing the &quot;Student Preview&quot; below and then saving here:</source>
@@ -10470,7 +10470,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
           <context context-type="linenumber">334</context>
         </context-group>
-        <target state="needs-translation">You have no more chances to receive feedback on your answer.</target>
+        <target state="translated">Cevabınız hakkında geri bildirim almak için daha fazla şansınız yoktur.</target>
       </trans-unit>
       <trans-unit id="1088900768760788337" datatype="html">
         <source>You have 1 chance to receive feedback on your answer so this should be your best work.
@@ -10484,9 +10484,9 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
           <context context-type="linenumber">252</context>
         </context-group>
-        <target state="needs-translation">You have 1 chance to receive feedback on your answer so this should be your best work.
+        <target state="translated">Cevabınız hakkında geri bildirim almak için 1 şansınız var, bu yüzden bu sizin en iyi çalışmanız olmalı.
 
-Are you ready to receive feedback on this answer?</target>
+Bu yanıtla ilgili geri bildirim almaya hazır mısınız?</target>
       </trans-unit>
       <trans-unit id="7123653594948067002" datatype="html">
         <source>Score</source>
@@ -10514,7 +10514,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
           <context context-type="linenumber">1424</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to reset your work?</target>
+        <target state="translated">Çalışmanızı sıfırlamak istediğinizden emin misiniz?</target>
       </trans-unit>
       <trans-unit id="2777000704090097811" datatype="html">
         <source>Should</source>
@@ -10640,7 +10640,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
           <context context-type="linenumber">101</context>
         </context-group>
-        <target state="needs-translation">Students will not see this post</target>
+        <target state="translated">Öğrenciler bu gönderiyi görmeyecek</target>
       </trans-unit>
       <trans-unit id="02c1d5b1e28ebc2ffda15aefc9e8f281bb2d8b46" datatype="html">
         <source> Parent Deleted </source>
@@ -10684,7 +10684,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.ts</context>
           <context context-type="linenumber">116</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to show this post?</target>
+        <target state="translated">Bu yayını göstermek istediğinizden emin misiniz?</target>
       </trans-unit>
       <trans-unit id="1037affb09c3a77f83838b47e805b78b82314e6c" datatype="html">
         <source> Students can upload and use images in their posts </source>
@@ -10692,7 +10692,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
           <context context-type="linenumber">9,10</context>
         </context-group>
-        <target state="needs-translation"> Students can upload and use images in their posts </target>
+        <target state="translated"> Öğrenciler gönderilerinde resim kullanabilir ve yükleyebilir </target>
       </trans-unit>
       <trans-unit id="4b10143a37c7361d1cc9c3ffc72e792e99ffebda" datatype="html">
         <source> Students must create a post before viewing classmates&apos; posts </source>
@@ -10700,7 +10700,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
           <context context-type="linenumber">18,19</context>
         </context-group>
-        <target state="needs-translation"> Students must create a post before viewing classmates' posts </target>
+        <target state="translated"> Öğrenciler, sınıf arkadaşlarının gönderilerini görüntülemeden önce bir gönderi oluşturmalıdır </target>
       </trans-unit>
       <trans-unit id="1951089763019042037" datatype="html">
         <source>Student</source>
@@ -11204,7 +11204,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">227,228</context>
         </context-group>
-        <target state="needs-translation"> Locked </target>
+        <target state="translated"> Kilitli </target>
       </trans-unit>
       <trans-unit id="04201f9d27abd7d6f58a4328ab98063ce1072006" datatype="html">
         <source>Categories</source>
@@ -11268,7 +11268,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">182,183</context>
         </context-group>
-        <target state="needs-translation"> Locked </target>
+        <target state="translated"> Kilitli </target>
       </trans-unit>
       <trans-unit id="faae7d3155b6f12b514d5ef9e05cbd0798d770ae" datatype="html">
         <source>Left Side</source>
@@ -11784,7 +11784,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
         <source>Are you sure you want to overwrite the current line data?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">229</context>
+          <context context-type="linenumber">230</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to overwrite the current line data?</target>
       </trans-unit>
@@ -11792,7 +11792,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1057</context>
+          <context context-type="linenumber">1058</context>
         </context-group>
         <target state="needs-translation">The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</target>
       </trans-unit>
@@ -11800,7 +11800,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1071</context>
+          <context context-type="linenumber">1072</context>
         </context-group>
         <target state="needs-translation">You can not edit this series. Please choose a series that can be edited.</target>
       </trans-unit>
@@ -11808,7 +11808,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1384</context>
+          <context context-type="linenumber">1387</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset the series?</target>
       </trans-unit>
@@ -11816,7 +11816,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1386</context>
+          <context context-type="linenumber">1389</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset the "<x id="PH" equiv-text="seriesName"/>" series?</target>
       </trans-unit>
@@ -11824,13 +11824,13 @@ Warning: This will delete all existing nodes and links in this component.</targe
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1932</context>
+          <context context-type="linenumber">1935</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2752</context>
+          <context context-type="linenumber">2755</context>
         </context-group>
-        <target state="needs-translation">Trial</target>
+        <target state="translated">Deneme</target>
       </trans-unit>
       <trans-unit id="b8c5c01ab5965f003ba27c1aad429045431ba260" datatype="html">
         <source>Background Image</source>
@@ -11958,7 +11958,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">132</context>
         </context-group>
-        <target state="needs-translation">Color Palette</target>
+        <target state="translated">Renk Paleti</target>
       </trans-unit>
       <trans-unit id="b2170964421e8fb291a89d020602cc92cb4eaf56" datatype="html">
         <source> Can Student Edit Label </source>
@@ -11990,7 +11990,7 @@ Warning: This will delete all existing nodes and links in this component.</targe
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">176</context>
         </context-group>
-        <target state="needs-translation">Text Location</target>
+        <target state="translated">Metin Konumu</target>
       </trans-unit>
       <trans-unit id="b5b4ee55539c3229b8eb1f201029aeffcbbd0841" datatype="html">
         <source>Delete Label</source>
@@ -13030,7 +13030,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">67,68</context>
         </context-group>
-        <target state="needs-translation"> Bar </target>
+        <target state="translated"> Bar </target>
       </trans-unit>
       <trans-unit id="b71b92de2038584a5494ef50396896d5ef514be5" datatype="html">
         <source> Pie </source>
@@ -13038,7 +13038,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">70,71</context>
         </context-group>
-        <target state="needs-translation"> Pie </target>
+        <target state="translated"> Pasta </target>
       </trans-unit>
       <trans-unit id="728d28a16684461da6666aa5148c2869c10635ff" datatype="html">
         <source>Required to View Summary</source>
@@ -13322,7 +13322,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <target state="translated">Grafik Türü</target>
       </trans-unit>
@@ -13334,7 +13334,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <target state="needs-translation">X Data</target>
       </trans-unit>
@@ -13354,7 +13354,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <target state="translated">X Ekseninin Adı</target>
       </trans-unit>
@@ -13366,7 +13366,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">121</context>
         </context-group>
         <target state="translated">Y Ekseninin Adı</target>
       </trans-unit>
@@ -13394,11 +13394,19 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         </context-group>
         <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>image<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> Import Data </target>
       </trans-unit>
+      <trans-unit id="4dee60f2a97f5dcf1f2edbf2f44961facc5bf1ef" datatype="html">
+        <source>Cell content</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <target state="needs-translation">Cell content</target>
+      </trans-unit>
       <trans-unit id="ad6f079b302b4d968b16d3b64c56a0f0be894340" datatype="html">
         <source>Choose the table data you want to graph:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <target state="needs-translation">Choose the table data you want to graph:</target>
       </trans-unit>
@@ -13406,11 +13414,11 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>(None)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">94</context>
         </context-group>
         <target state="translated">(Hiçbiri)</target>
       </trans-unit>
@@ -13418,7 +13426,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Y Data <x id="INTERPOLATION" equiv-text="{{ dataExplorerSeries.length &gt; 1 ? seriesIndex + 1 : &quot;&quot;}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <target state="needs-translation">Y Data <x id="INTERPOLATION" equiv-text="{{ dataExplorerSeries.length &gt; 1 ? seriesIndex + 1 : &quot;&quot;}}"/></target>
       </trans-unit>
@@ -13426,15 +13434,15 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Enter Text Here</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">114</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">126</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <target state="translated">Buraya Metin Giriniz</target>
       </trans-unit>
@@ -13442,7 +13450,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Y Axis <x id="INTERPOLATION" equiv-text="{{yAxisIndex + 1}}"/> Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <target state="needs-translation">Y Axis <x id="INTERPOLATION" equiv-text="{{yAxisIndex + 1}}"/> Label</target>
       </trans-unit>
