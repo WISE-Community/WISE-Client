@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ConfigService } from '../../../../services/configService';
 
 @Component({
   selector: 'app-remove-user-confirm-dialog',
@@ -7,7 +8,16 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./remove-user-confirm-dialog.component.scss']
 })
 export class RemoveUserConfirmDialogComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public user: any) {}
+  constructor(
+    private ConfigService: ConfigService,
+    @Inject(MAT_DIALOG_DATA) public user: any
+  ) {}
+  
+  studentDisplayName: string;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.studentDisplayName = this.ConfigService.getPermissions().canViewStudentNames
+      ? `${this.user.name} (${this.user.username})`
+      : `Student ${this.user.id}`;
+  }
 }
