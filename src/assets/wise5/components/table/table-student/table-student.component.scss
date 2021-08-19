@@ -1,25 +1,32 @@
-.top-buttons {
-  margin-bottom: 10px;
+.tools {
+  margin-bottom: 8px;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 16px;
+  padding: 8px 0;
 }
 
 .table {
-  margin-bottom: 20px !important;
+  border-spacing: 0;
+  border-collapse: collapse;
 }
 
 .table-cell {
-  border: 1px solid #ccc;
-  padding-left: 8px;
-  padding-right: 8px;
+  border: 1px solid #dddddd;
+  padding: 8px;
+
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0;
+    padding-bottom: 0;
+  }
+
+  .mat-form-field-infix {
+    border-top-width: .343em;
+  }
 }
 
-.mat-form-field-wrapper {
-  margin-bottom: -0.5em !important;
-}
-
-.mat-form-field-underline {
-  background-color: #ccc !important;
-}
-
-.data-explorer-select {
-  width: 300px;
+.cell-input {
+  max-width: 100%;
 }

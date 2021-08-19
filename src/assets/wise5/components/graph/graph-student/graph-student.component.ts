@@ -45,6 +45,7 @@ export class GraphStudent extends ComponentStudent {
   Highcharts: typeof Highcharts = Highcharts;
   initialComponentState: any = null;
   isLegendEnabled: boolean = true;
+  isLoaded: boolean = false;
   isResetGraphButtonVisible: boolean = false;
   isResetSeriesButtonVisible: boolean = false;
   isSelectSeriesVisible: boolean = false;
@@ -1161,7 +1162,8 @@ export class GraphStudent extends ComponentStudent {
           thisGraphController.setupMouseMoveListener();
         }
         chart.reflow();
-      });
+        this.isLoaded = true;
+      }, 500);
     };
   }
 

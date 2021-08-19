@@ -129,7 +129,7 @@
     <div fxLayout="column"
        class="y-limit-column"
        *ngIf="!yAxisLocked">
-      <mat-form-field class="limit-input">
+      <mat-form-field class="limit-input" appearance="fill">
         <mat-label i18n>Y Max</mat-label>
         <input
             matInput
@@ -139,7 +139,7 @@
             [disabled]="isDisabled"/>
       </mat-form-field>
       <span fxFlex></span>
-      <mat-form-field class="limit-input">
+      <mat-form-field class="limit-input" appearance="fill">
         <mat-label i18n>Y Min</mat-label>
         <input
             matInput
@@ -149,7 +149,7 @@
             [disabled]="isDisabled"/>
       </mat-form-field>
     </div>
-    <div class="highcharts-div">
+    <div class="highcharts-container" [class.invisible]="!isLoaded">
       <highcharts-chart
           id="{{chartId}}"
           [Highcharts]="Highcharts"
@@ -165,7 +165,7 @@
     <div fxLayout="row"
         class="x-limit-row">
       <div class="limit-input"></div>
-      <mat-form-field class="limit-input">
+      <mat-form-field class="limit-input" appearance="fill">
         <mat-label i18n>X Min</mat-label>
         <input
             matInput
@@ -175,7 +175,7 @@
             [disabled]="isDisabled"/>
       </mat-form-field>
       <span fxFlex></span>
-      <mat-form-field class="limit-input">
+      <mat-form-field class="limit-input" appearance="fill">
         <mat-label i18n>X Max</mat-label>
         <input
             matInput
