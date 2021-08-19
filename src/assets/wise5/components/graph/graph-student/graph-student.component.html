@@ -118,7 +118,7 @@
       mat-button
       color="accent"
       *ngIf="isStudentAttachmentEnabled"
-      (click)="nodeController.showStudentAssets($event, component.id, isDisabled)"
+      (click)="showStudentAssets()"
       [disabled]="isDisabled">
     <mat-icon>image</mat-icon>
     <span i18n>Import Data</span>

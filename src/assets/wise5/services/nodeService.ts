@@ -23,8 +23,6 @@ export class NodeService {
   public componentShowSubmitButtonValueChanged$: Observable<any> = this.componentShowSubmitButtonValueChangedSource.asObservable();
   private showRubricSource: Subject<string> = new Subject<string>();
   public showRubric$: Observable<string> = this.showRubricSource.asObservable();
-  private siblingComponentStudentDataChangedSource: Subject<any> = new Subject<any>();
-  public siblingComponentStudentDataChanged$: Observable<any> = this.siblingComponentStudentDataChangedSource.asObservable();
   private starterStateRequestSource: Subject<any> = new Subject<any>();
   public starterStateRequest$: Observable<any> = this.starterStateRequestSource.asObservable();
   private starterStateResponseSource: Subject<any> = new Subject<any>();
@@ -807,10 +805,6 @@ export class NodeService {
 
   broadcastComponentShowSubmitButtonValueChanged(args: any) {
     this.componentShowSubmitButtonValueChangedSource.next(args);
-  }
-
-  broadcastSiblingComponentStudentDataChanged(args: any) {
-    this.siblingComponentStudentDataChangedSource.next(args);
   }
 
   requestStarterState(args: any) {
