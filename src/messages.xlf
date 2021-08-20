@@ -5215,7 +5215,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="8454739bcb4cf4debfd509a35e466a828ea11363" datatype="html">
-        <source><x id="TAG_IMG" ctype="image" equiv-text="&lt;img class=&quot;google-icon&quot; src=&quot;assets/img/icons/g-logo.png&quot; i18n-alt alt=&quot;Google logo&quot; /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>This account was created using Google and doesn&apos;t use a WISE password.<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <source><x id="TAG_IMG" ctype="image" equiv-text="&lt;img class=&quot;google-icon&quot; src=&quot;assets/img/icons/google-logo.svg&quot; i18n-alt alt=&quot;Google logo&quot; /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>This account was created using Google and doesn&apos;t use a WISE password.<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
           <context context-type="linenumber">61,62</context>
@@ -8126,8 +8126,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="876ec168a2400bc62545ed07aaa4f3665d4af2d6" datatype="html">
-        <source>Student Password</source>
+      <trans-unit id="f1ca7e8784d363977ca2745cb7550fb03ce54d30" datatype="html">
+        <source>New Student Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">16</context>
@@ -8165,8 +8165,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7204593656721928924" datatype="html">
-        <source>Failed to change student password. Please refresh this page and try again.</source>
+      <trans-unit id="6393419270108352075" datatype="html">
+        <source>Failed to change student password. Check values and try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
           <context context-type="linenumber">74</context>
@@ -8274,32 +8274,32 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">101</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a5cad1c9e8d6006dfebc8fa6621dcef0210ad854" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong i8n&gt;"/>Student <x id="INTERPOLATION" equiv-text="{{user.id}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+      <trans-unit id="9b83b532c3f74e3d6e25a6ba749eef54324bea48" datatype="html">
+        <source>View student info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="db832a97c58e639a3cb0592e79871d0ab07a7732" datatype="html">
+        <source>Student signs in with Google</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component.html</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cb5ce15b39de2cce06da00d7ef457c057c629741" datatype="html">
         <source>Change student password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9b83b532c3f74e3d6e25a6ba749eef54324bea48" datatype="html">
-        <source>View student info</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="70657e4a6c92b1e6e7c6a72a6ed3eedf5cbb0fe2" datatype="html">
         <source>Remove student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3255676199172660043" datatype="html">

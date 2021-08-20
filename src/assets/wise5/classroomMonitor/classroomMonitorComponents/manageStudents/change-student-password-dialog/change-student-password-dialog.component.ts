@@ -71,7 +71,7 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
         (err) => {
           this.isChangingPassword = false;
           this.snackBar.open(
-            $localize`Failed to change student password. Please refresh this page and try again.`
+            $localize`Failed to change student password. Check values and try again.`
           );
         }
       );
