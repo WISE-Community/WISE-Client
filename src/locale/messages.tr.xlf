@@ -52,7 +52,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">50</context>
         </context-group>
-        <target state="needs-translation">WISE teacher workshop design</target>
+        <target state="translated">WISE öğretmen atölyesi tasarımı</target>
       </trans-unit>
       <trans-unit id="cf46260d6f44d44d379d124ec8df098441107eb5" datatype="html">
         <source>Marcia at WISE workshop</source>
@@ -268,7 +268,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">182</context>
         </context-group>
-        <target state="needs-translation">WISE teachers and researcher</target>
+        <target state="translated">WISE öğretmenleri ve araştırmacı</target>
       </trans-unit>
       <trans-unit id="9d4d981f8068dbb230ef2048664016f5ff9c255e" datatype="html">
         <source>WISE developers and teacher</source>
@@ -276,7 +276,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">187</context>
         </context-group>
-        <target state="needs-translation">WISE developers and teacher</target>
+        <target state="translated">WISE geliştiricileri ve öğretmenleri</target>
       </trans-unit>
       <trans-unit id="f4e529ae5ffd73001d1ff4bbdeeb0a72e342e5c8" datatype="html">
         <source>Close</source>
@@ -753,7 +753,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component.html</context>
           <context context-type="linenumber">6,7</context>
         </context-group>
-        <target state="needs-translation"> Do not count score on this activity towards the total score
+        <target state="translated"> Bu aktivitedeki puanı toplam puana dahil etme
 </target>
       </trans-unit>
       <trans-unit id="7ad24bfc056ad2a41aa93fbfd75ec6765060606f" datatype="html">
@@ -886,7 +886,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step-location/choose-import-step-location.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Choose a location for the imported steps</target>
+        <target state="translated">İçe aktarılan adımlar için bir konum seçin</target>
       </trans-unit>
       <trans-unit id="2487b6259288414268ebb0273e79a0dbd975205b" datatype="html">
         <source>Insert As First Step</source>
@@ -1504,7 +1504,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">WISE students</target>
+        <target state="translated">WISE öğrencileri</target>
       </trans-unit>
       <trans-unit id="3c7d295a97553e2107807061d481f221cee12704" datatype="html">
         <source>WISE students collaborate to:</source>
@@ -1616,7 +1616,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">91</context>
         </context-group>
-        <target state="needs-translation">Design Process &amp; Goals</target>
+        <target state="translated">Tasarım süreci &amp; Hedefler</target>
       </trans-unit>
       <trans-unit id="5ba7433a2233cdf924ae0948dc017372200293e3" datatype="html">
         <source>WISE solar ovens unit</source>
@@ -1656,7 +1656,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">132</context>
         </context-group>
-        <target state="needs-translation">WISE design report</target>
+        <target state="translated">WISE tasarım raporu</target>
       </trans-unit>
       <trans-unit id="6a00767c4e60cdb9e156cced2058eaccb255c100" datatype="html">
         <source>WISE thermodynamics insulator model</source>
@@ -1704,7 +1704,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">156</context>
         </context-group>
-        <target state="needs-translation">WISE offers an extensive suite of integrated tools that help teachers plan, monitor progress, gain insights, provide feedback, and grade more efficiently. These tools are continually refined through collaborations with practicing teachers who understand the real challenges of managing modern classrooms.</target>
+        <target state="translated">WISE, öğretmenlerin planlama yapmalarına, öğrencilerin öğrenmesini izlemelerine, iç görü kazanmalarına, geri bildirim sağlamalarına ve daha verimli bir şekilde not vermelerine yardımcı olan kapsamlı bir bütünleşik araçlar paketi sunar. Bu araçlar, modern sınıfları yönetmenin gerçek zorluklarını anlayan öğretmenlerle yapılan işbirlikleri aracılığıyla sürekli olarak geliştirilir.</target>
       </trans-unit>
       <trans-unit id="4f7d6b85797f6cd6114c235b464ad7910657c631" datatype="html">
         <source>By facilitating these necessary but time-consuming tasks, teachers are free to focus on what makes them indispensable: providing quality instruction to individual students.</source>
@@ -1712,7 +1712,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">157</context>
         </context-group>
-        <target state="needs-translation">By facilitating these necessary but time-consuming tasks, teachers are free to focus on what makes them indispensable: providing quality instruction to individual students.</target>
+        <target state="translated">Bu gerekli ancak zaman alıcı görevleri kolaylaştırarak, öğretmenler asıl vazgeçilmez olan şeylere odaklanmakta özgür olurlar: Bireysel öğrencilere kaliteli eğitim sağlamak.</target>
       </trans-unit>
       <trans-unit id="794ce33c32874cf59374bff4939512bbc71585d2" datatype="html">
         <source>WISE teacher progress</source>
@@ -1736,7 +1736,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">174</context>
         </context-group>
-        <target state="needs-translation">Featured Teacher Tools:</target>
+        <target state="translated">Öne Çıkan Öğretmen Araçları:</target>
       </trans-unit>
       <trans-unit id="6acdfffcc102679870fecbf9a48a200663b14017" datatype="html">
         <source>Real-time progress monitor</source>
