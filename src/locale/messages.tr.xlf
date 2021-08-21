@@ -60,7 +60,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">Marcia at WISE workshop</target>
+        <target state="translated">Marcia WISE atölyesinde</target>
       </trans-unit>
       <trans-unit id="c0025974cf98becba943b54047f136ecdf25e5c1" datatype="html">
         <source>Based on Research, Refined Through Practice</source>
@@ -244,7 +244,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">163</context>
         </context-group>
-        <target state="needs-translation">WISE is <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>free<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>open source<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsists on generous support from the National Science Foundation, which means it's available to anyone with an internet connection. Driven by an active community of developers, WISE is continually being expanded and improved. Bring science inquiry into the classroom, the museum, the after-school, or the home-school environment!</target>
+        <target state="translated">WISE <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>ücretsiz<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> ve <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>açık kaynak kodludur<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE, Ulusal Bilim Vakfı'nın cömert desteğiyle varlığını sürdürmektedir, bu da internet bağlantısı olan herkesin kullanabileceği anlamına gelir. Aktif bir geliştirici topluluğu tarafından yönlendirilen WISE, sürekli olarak genişletilmekte ve geliştirilmektedir. Bilimsel sorgulamayı sınıfa, müzeye, okul sonrası veya ev-okul ortamına getirin!</target>
       </trans-unit>
       <trans-unit id="4ad1e5cce5dbc999f93e23e6bc9fa28d9cbb0ee1" datatype="html">
         <source>WISE on student computer</source>
@@ -252,7 +252,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">172</context>
         </context-group>
-        <target state="needs-translation">WISE on student computer</target>
+        <target state="translated">Öğrenci bilgisayarında WISE</target>
       </trans-unit>
       <trans-unit id="14a76370983f28622ac762d950962707e124e964" datatype="html">
         <source>WISE researcher</source>
@@ -830,7 +830,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-rubric/edit-component-rubric.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Edit Component Rubric</target>
+        <target state="translated">Bileşen Rubriğini Düzenle</target>
       </trans-unit>
       <trans-unit id="1ed69d000acff31ce5ce22f33377917f04c749cd" datatype="html">
         <source>Show Save Button</source>
@@ -878,7 +878,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-width/edit-component-width.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Component Width</target>
+        <target state="translated">Bileşen Genişliği</target>
       </trans-unit>
       <trans-unit id="e8c21747e8604f974b3ed6ecf6089306b7cc0aae" datatype="html">
         <source>Choose a location for the imported steps</source>
@@ -914,7 +914,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Choose a unit to import from:</target>
+        <target state="translated">İçe aktarılacak bir ünite seçin:</target>
       </trans-unit>
       <trans-unit id="c4058ff063f874b650aca76a5d972f11323bb6fb" datatype="html">
         <source>My Units</source>
@@ -934,7 +934,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Run ID</target>
+        <target state="translated">Oturum Kimliği</target>
       </trans-unit>
       <trans-unit id="325291e71ff2bb75a324c2c02e5deb1ff8600043" datatype="html">
         <source>Library Units</source>
@@ -950,7 +950,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">Choose the step(s) that you want to import, then click next.</target>
+        <target state="translated">İçe aktarmak istediğiniz adımı(ları) seçin, ardından ileriyi tıklayın.</target>
       </trans-unit>
       <trans-unit id="76176dda9f079e8ab3c78d6975eee76b8b3eddad" datatype="html">
         <source>Preview Unit</source>
