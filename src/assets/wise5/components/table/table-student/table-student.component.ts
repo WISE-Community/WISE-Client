@@ -1,88 +1,74 @@
-'use strict';
-
-import * as angular from 'angular';
 import * as html2canvas from 'html2canvas';
-import ComponentController from '../componentController';
-import { TableService } from './tableService';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../services/configService';
+import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { ProjectService } from '../../../services/projectService';
+import { StudentAssetService } from '../../../services/studentAssetService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { UtilService } from '../../../services/utilService';
+import { ComponentStudent } from '../../component-student.component';
+import { ComponentService } from '../../componentService';
+import { TableService } from '../tableService';
 
-class TableController extends ComponentController {
-  tableData: any;
-  isResetTableButtonVisible: boolean;
-  notebookConfig: any;
-  latestConnectedComponentState: any;
-  latestConnectedComponentParams: any;
-  tableId: string;
-  isDataExplorerEnabled: boolean;
-  numDataExplorerSeries: number;
+@Component({
+  selector: 'table-student',
+  templateUrl: 'table-student.component.html',
+  styleUrls: ['table-student.component.scss'],
+  encapsulation: ViewEncapsulation.None
+})
+export class TableStudent extends ComponentStudent {
+  columnNames: string[];
+  dataExplorerColumnToIsDisabled: any = {};
   dataExplorerGraphTypes: any[];
   dataExplorerGraphType: string;
-  isDataExplorerScatterPlotRegressionLineEnabled: boolean;
-  dataExplorerYAxisLabels: string[];
+  dataExplorerSeries: any[];
   dataExplorerSeriesParams: any[];
   dataExplorerXAxisLabel: string;
-  dataExplorerYAxisLabel: string;
-  dataExplorerSeries: any[];
-  columnNames: string[];
   dataExplorerXColumn: number;
-  dataExplorerColumnToIsDisabled: any = {};
-
-  static $inject = [
-    '$filter',
-    '$injector',
-    '$mdDialog',
-    '$q',
-    '$rootScope',
-    '$scope',
-    'AnnotationService',
-    'AudioRecorderService',
-    'ConfigService',
-    'NodeService',
-    'NotebookService',
-    'NotificationService',
-    'ProjectService',
-    'StudentAssetService',
-    'StudentDataService',
-    'TableService',
-    'UtilService'
-  ];
+  dataExplorerYAxisLabel: string;
+  dataExplorerYAxisLabels: string[];
+  isDataExplorerEnabled: boolean;
+  isDataExplorerScatterPlotRegressionLineEnabled: boolean;
+  isResetTableButtonVisible: boolean;
+  latestConnectedComponentParams: any;
+  latestConnectedComponentState: any;
+  notebookConfig: any;
+  numDataExplorerSeries: number;
+  tableData: any;
+  tableId: string;
 
   constructor(
-    $filter,
-    $injector,
-    $mdDialog,
-    $q,
-    $rootScope,
-    $scope,
-    AnnotationService,
-    AudioRecorderService,
-    ConfigService,
-    NodeService,
-    NotebookService,
-    NotificationService,
-    ProjectService,
-    StudentAssetService,
-    StudentDataService,
+    protected AnnotationService: AnnotationService,
+    protected ComponentService: ComponentService,
+    protected ConfigService: ConfigService,
+    protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
+    private ProjectService: ProjectService,
+    protected StudentAssetService: StudentAssetService,
+    protected StudentDataService: StudentDataService,
     private TableService: TableService,
-    UtilService
+    protected upgrade: UpgradeModule,
+    protected UtilService: UtilService
   ) {
     super(
-      $filter,
-      $injector,
-      $mdDialog,
-      $q,
-      $rootScope,
-      $scope,
       AnnotationService,
-      AudioRecorderService,
+      ComponentService,
       ConfigService,
       NodeService,
       NotebookService,
-      NotificationService,
-      ProjectService,
       StudentAssetService,
       StudentDataService,
+      upgrade,
       UtilService
     );
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+
     // holds the the table data
     this.tableData = null;
 
@@ -95,7 +81,8 @@ class TableController extends ComponentController {
     this.latestConnectedComponentState = null;
     this.latestConnectedComponentParams = null;
 
-    this.tableId = 'table_' + this.nodeId + '_' + this.componentId;
+    this.tableId = this.TableService.getTableId(this.nodeId, this.componentId);
+
     this.isDataExplorerEnabled = this.componentContent.isDataExplorerEnabled;
     if (this.isDataExplorerEnabled) {
       this.initializeDataExplorer();
@@ -105,26 +92,18 @@ class TableController extends ComponentController {
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.isResetTableButtonVisible = true;
 
-    let componentState = null;
-
-    // get the component state from the scope
-    componentState = this.$scope.componentState;
-
     if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
       // we will show work from another component
       this.handleConnectedComponents();
     } else if (
-      this.TableService.componentStateHasStudentWork(componentState, this.componentContent)
+      this.TableService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
-      /*
-       * the student has work so we will populate the work into this
-       * component
-       */
-      this.setStudentWork(componentState);
+      // the student has work so we will populate the work into this component
+      this.setStudentWork(this.componentState);
     } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
       // we will import work from another component
       this.handleConnectedComponents();
-    } else if (componentState == null) {
+    } else if (this.componentState == null) {
       // check if we need to import work
 
       if (this.UtilService.hasConnectedComponent(this.componentContent)) {
@@ -142,127 +121,21 @@ class TableController extends ComponentController {
 
     if (this.isDataExplorerEnabled) {
       this.updateColumnNames();
-      if (componentState == null) {
+      if (this.componentState == null) {
         this.createDataExplorerSeries();
       } else {
-        this.repopulateDataExplorerData(componentState);
+        this.repopulateDataExplorerData(this.componentState);
       }
       if (this.componentContent.dataExplorerDataToColumn != null) {
         this.setDataExplorerDataToColumn();
       }
     }
 
-    // check if the student has used up all of their submits
-    if (
-      this.componentContent.maxSubmitCount != null &&
-      this.submitCounter >= this.componentContent.maxSubmitCount
-    ) {
-      /*
-       * the student has used up all of their chances to submit so we
-       * will disable the submit button
-       */
-      this.isSubmitButtonDisabled = true;
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
     }
 
     this.disableComponentIfNecessary();
-
-    /**
-     * A connected component has changed its student data so we will
-     * perform any necessary changes to this component
-     * @param connectedComponent the connected component
-     * @param connectedComponentParams the connected component params
-     * @param componentState the component state from the connected
-     * component that has changed
-     */
-    this.$scope.handleConnectedComponentStudentDataChanged = function (
-      connectedComponent,
-      connectedComponentParams,
-      componentState
-    ) {
-      if (
-        connectedComponent != null &&
-        connectedComponentParams != null &&
-        componentState != null
-      ) {
-        if (connectedComponentParams.updateOn === 'change') {
-        }
-
-        // get the component type that has changed
-        const componentType = connectedComponent.type;
-
-        /*
-         * make a copy of the component state so we don't accidentally
-         * change any values in the referenced object
-         */
-        componentState = this.UtilService.makeCopyOfJSONObject(componentState);
-
-        if (componentType === 'Table') {
-          // set the table data
-          this.$scope.tableController.setStudentWork(componentState);
-
-          // the table has changed
-          this.$scope.tableController.isDirty = true;
-        } else if (componentType === 'Graph') {
-          // set the graph data into the table
-          this.$scope.tableController.setGraphDataIntoTableData(
-            componentState,
-            connectedComponentParams
-          );
-
-          // the table has changed
-          this.$scope.tableController.isDirty = true;
-        } else if (componentType === 'Embedded') {
-          this.$scope.tableController.setStudentWork(componentState);
-          this.$scope.tableController.isDirty = true;
-          this.StudentDataService.broadcastComponentSaveTriggered({
-            nodeId: this.nodeId,
-            componentId: this.componentId
-          });
-        }
-      }
-    }.bind(this);
-
-    /**
-     * Get the component state from this component. The parent node will
-     * call this function to obtain the component state when it needs to
-     * save student data.
-     * @param isSubmit boolean whether the request is coming from a submit
-     * action (optional; default is false)
-     * @return a promise of a component state containing the student data
-     */
-    this.$scope.getComponentState = function (isSubmit) {
-      const deferred = this.$q.defer();
-      let getState = false;
-      let action = 'change';
-
-      if (isSubmit) {
-        if (this.$scope.tableController.isSubmitDirty) {
-          getState = true;
-          action = 'submit';
-        }
-      } else {
-        if (this.$scope.tableController.isDirty) {
-          getState = true;
-          action = 'save';
-        }
-      }
-
-      if (getState) {
-        // create a component state populated with the student data
-        this.$scope.tableController.createComponentState(action).then((componentState) => {
-          deferred.resolve(componentState);
-        });
-      } else {
-        /*
-         * the student does not have any unsaved changes in this component
-         * so we don't need to save a component state for this component.
-         * we will immediately resolve the promise here.
-         */
-        deferred.resolve();
-      }
-
-      return deferred.promise;
-    }.bind(this);
 
     if (
       this.isDataExplorerEnabled &&
@@ -282,6 +155,10 @@ class TableController extends ComponentController {
     }
 
     this.broadcastDoneRenderingComponent();
+  }
+
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
   }
 
   initializeDataExplorer() {
@@ -401,107 +278,31 @@ class TableController extends ComponentController {
     }
   }
 
-  registerStudentWorkSavedToServerListener() {
-    this.subscriptions.add(
-      this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
-        if (this.isForThisComponent(componentState)) {
-          this.isDirty = false;
-          this.StudentDataService.broadcastComponentDirty({
-            componentId: this.componentId,
-            isDirty: false
-          });
-          const isAutoSave = componentState.isAutoSave;
-          const isSubmit = componentState.isSubmit;
-          const serverSaveTime = componentState.serverSaveTime;
-          const clientSaveTime = this.ConfigService.convertToClientTimestamp(serverSaveTime);
-          if (isSubmit) {
-            this.setSubmittedMessage(clientSaveTime);
-            this.lockIfNecessary();
-            this.isSubmitDirty = false;
-            this.StudentDataService.broadcastComponentSubmitDirty({
-              componentId: this.componentId,
-              isDirty: false
-            });
-          } else if (isAutoSave) {
-            this.setAutoSavedMessage(clientSaveTime);
-          } else {
-            this.setSavedMessage(clientSaveTime);
-          }
-        }
-
-        // check if the component state is from a connected component
-        if (
-          this.ProjectService.isConnectedComponent(
-            this.nodeId,
-            this.componentId,
-            componentState.componentId
-          )
-        ) {
-          // get the connected component params
-          const connectedComponentParams: any = this.ProjectService.getConnectedComponentParams(
-            this.componentContent,
-            componentState.componentId
-          );
-
-          if (connectedComponentParams != null) {
-            if (
-              connectedComponentParams.updateOn === 'save' ||
-              (connectedComponentParams.updateOn === 'submit' && componentState.isSubmit)
-            ) {
-              let performUpdate = false;
-
-              /*
-               * make a copy of the component state so we don't accidentally
-               * change any values in the referenced object
-               */
-              const componentStateCopy = this.UtilService.makeCopyOfJSONObject(componentState);
-
-              /*
-               * make sure the student hasn't entered any values into the
-               * table so that we don't overwrite any of their work.
-               */
-              if (this.isTableEmpty() || this.isTableReset()) {
-                /*
-                 * the student has not entered any values into the table
-                 * so we can update it
-                 */
-                performUpdate = true;
-              } else {
-                /*
-                 * the student has entered values into the table so we
-                 * will ask them if they want to update it
-                 */
-                /*
-            var answer = confirm('Do you want to update the connected table?');
-
-            if (answer) {
-              // the student answered yes
-              performUpdate = true;
-            }
-            */
-                performUpdate = true;
-              }
-
-              if (performUpdate) {
-                // set the table data
-                this.$scope.tableController.setStudentWork(componentStateCopy);
-
-                // the table has changed
-                this.$scope.tableController.isDirty = true;
-                this.$scope.tableController.isSubmitDirty = true;
-              }
-
-              /*
-               * remember the component state and connected component params
-               * in case we need to use them again later
-               */
-              this.latestConnectedComponentState = componentStateCopy;
-              this.latestConnectedComponentParams = connectedComponentParams;
-            }
-          }
-        }
-      })
-    );
+  handleStudentWorkSavedToServer(componentState: any): void {
+    if (this.isForThisComponent(componentState)) {
+      this.isDirty = false;
+      this.StudentDataService.broadcastComponentDirty({
+        componentId: this.componentId,
+        isDirty: false
+      });
+      const isAutoSave = componentState.isAutoSave;
+      const isSubmit = componentState.isSubmit;
+      const serverSaveTime = componentState.serverSaveTime;
+      const clientSaveTime = this.ConfigService.convertToClientTimestamp(serverSaveTime);
+      if (isSubmit) {
+        this.setSubmittedMessage(clientSaveTime);
+        this.lockIfNecessary();
+        this.isSubmitDirty = false;
+        this.StudentDataService.broadcastComponentSubmitDirty({
+          componentId: this.componentId,
+          isDirty: false
+        });
+      } else if (isAutoSave) {
+        this.setAutoSavedMessage(clientSaveTime);
+      } else {
+        this.setSavedMessage(clientSaveTime);
+      }
+    }
   }
 
   /**
@@ -607,14 +408,8 @@ class TableController extends ComponentController {
    * @return a promise that will return a component state
    */
   createComponentState(action) {
-    const deferred = this.$q.defer();
-
-    // create a new component state
     const componentState: any = this.NodeService.createNewComponentState();
-
     const studentData: any = {};
-
-    // insert the table data
     studentData.tableData = this.getCopyOfTableData(this.tableData);
     studentData.isDataExplorerEnabled = this.isDataExplorerEnabled;
     studentData.dataExplorerGraphType = this.dataExplorerGraphType;
@@ -628,59 +423,29 @@ class TableController extends ComponentController {
     studentData.isDataExplorerScatterPlotRegressionLineEnabled = this.isDataExplorerScatterPlotRegressionLineEnabled;
     studentData.dataExplorerSeries = this.UtilService.makeCopyOfJSONObject(this.dataExplorerSeries);
 
-    // set the submit counter
     studentData.submitCounter = this.submitCounter;
-
-    // set the flag for whether the student submitted this work
     componentState.isSubmit = this.isSubmit;
-
-    // set the student data into the component state
     componentState.studentData = studentData;
-
-    // set the component type
     componentState.componentType = 'Table';
-
-    // set the node id
     componentState.nodeId = this.nodeId;
-
-    // set the component id
     componentState.componentId = this.componentId;
 
     if (this.isSubmit && this.hasDefaultFeedback()) {
       this.addDefaultFeedback(componentState);
     }
 
-    /*
-     * reset the isSubmit value so that the next component state
-     * doesn't maintain the same value
-     */
     this.isSubmit = false;
-
-    /*
-     * perform any additional processing that is required before returning
-     * the component state
-     */
-    this.createComponentStateAdditionalProcessing(deferred, componentState, action);
-
-    return deferred.promise;
-  }
-
-  /**
-   * Create a new component state with no student data
-   * @return a component state with no student data
-   */
-  createBlankComponentState() {
-    // create a new component state
-    const componentState: any = this.NodeService.createNewComponentState();
-
-    if (componentState != null) {
-      const studentData = {};
-
-      // set the student data into the component state
-      componentState.studentData = studentData;
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.isDisabled = true;
     }
 
-    return componentState;
+    return new Promise((resolve, reject) => {
+      this.createComponentStateAdditionalProcessing(
+        { resolve: resolve, reject: reject },
+        componentState,
+        action
+      );
+    });
   }
 
   /**
@@ -853,8 +618,7 @@ class TableController extends ComponentController {
 
   /**
    * Get the data point that has the closest x value to the given argument x.
-   * @param dataPoints An array of data points. Each data point can be an object
-   * or an array.
+   * @param dataPoints An array of data points. Each data point can be an object or an array.
    * @param x The argument x.
    * @return A data point which can be an object or array.
    */
@@ -1063,8 +827,7 @@ class TableController extends ComponentController {
   }
 
   /**
-   * Check if the table is empty. The table is empty if all the
-   * cells are empty string.
+   * Check if the table is empty. The table is empty if all the cells are empty string.
    * @returns whether the table is empty
    */
   isTableEmpty() {
@@ -1137,55 +900,74 @@ class TableController extends ComponentController {
 
   /**
    * Snip the table by converting it to an image
-   * @param $event the click event
    */
-  snipTable($event) {
-    // get the table element. this will obtain an array.
-    let tableElement = angular.element(
-      document.querySelector('#table_' + this.nodeId + '_' + this.componentId)
+  snipTable() {
+    const tableElement = this.getElementById(
+      this.TableService.getTableId(this.nodeId, this.componentId),
+      true
     );
-
-    if (tableElement != null && tableElement.length > 0) {
-      // get the table element
-      tableElement = tableElement[0];
-
-      // convert the table element to a canvas element
-      html2canvas(tableElement).then((canvas) => {
-        // get the canvas as a base64 string
-        const img_b64 = canvas.toDataURL('image/png');
-
-        // get the image object
-        const imageObject = this.UtilService.getImageObjectFromBase64String(img_b64);
-
-        // create a notebook item with the image populated into it
-        this.NotebookService.addNote(imageObject);
-      });
-    }
+    html2canvas(tableElement).then((canvas: any) => {
+      const base64Image = canvas.toDataURL('image/png');
+      const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
+      this.NotebookService.addNote(imageObject);
+    });
   }
 
   handleConnectedComponents() {
     let isStudentDataChanged = false;
-    const connectedComponentsAndTheirComponentStates = this.getConnectedComponentsAndTheirComponentStates();
-    for (const connectedComponentAndComponentState of connectedComponentsAndTheirComponentStates) {
+    for (const connectedComponentAndComponentState of this.getConnectedComponentsAndTheirComponentStates()) {
       const connectedComponent = connectedComponentAndComponentState.connectedComponent;
       const componentState = connectedComponentAndComponentState.componentState;
       if (componentState != null) {
-        if (connectedComponent.type === 'showWork') {
-          this.tableData = componentState.studentData.tableData;
-          this.isDisabled = true;
-        } else {
-          if (connectedComponent.action === 'append') {
-            this.appendComponentState(componentState, connectedComponent);
-          } else {
-            this.mergeComponentState(componentState);
-          }
+        switch (componentState.componentType) {
+          case 'Table':
+            this.importTableComponentState(componentState, connectedComponent);
+            isStudentDataChanged = true;
+            break;
+          case 'Graph':
+            this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
+            this.setGraphDataIntoTableData(componentState, connectedComponent);
+            isStudentDataChanged = true;
+            break;
+          case 'Embedded':
+            this.setStudentWork(componentState);
+            isStudentDataChanged = true;
+            break;
         }
-        isStudentDataChanged = true;
       }
     }
     if (isStudentDataChanged) {
       this.studentDataChanged();
     }
+  }
+
+  importTableComponentState(componentState: any, connectedComponent: any): void {
+    if (connectedComponent.type === 'showWork') {
+      this.tableData = componentState.studentData.tableData;
+      this.isDisabled = true;
+    } else {
+      if (connectedComponent.action === 'append') {
+        this.appendComponentState(componentState, connectedComponent);
+      } else {
+        this.mergeComponentState(componentState);
+      }
+    }
+  }
+
+  getConnectedComponentsAndTheirComponentStates() {
+    const connectedComponentsAndTheirComponentStates = [];
+    for (const connectedComponent of this.componentContent.connectedComponents) {
+      const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+        connectedComponent.nodeId,
+        connectedComponent.componentId
+      );
+      const connectedComponentsAndComponentState = {
+        connectedComponent: connectedComponent,
+        componentState: this.UtilService.makeCopyOfJSONObject(componentState)
+      };
+      connectedComponentsAndTheirComponentStates.push(connectedComponentsAndComponentState);
+    }
+    return connectedComponentsAndTheirComponentStates;
   }
 
   mergeComponentState(componentState) {
@@ -1352,6 +1134,34 @@ class TableController extends ComponentController {
       this.dataExplorerXColumn = this.dataExplorerSeries[0].xColumn;
     }
   }
-}
 
-export default TableController;
+  processConnectedComponentState(componentState: any): void {
+    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
+      this.componentContent,
+      componentState
+    );
+    const componentType = this.ProjectService.getComponentType(
+      connectedComponent.nodeId,
+      connectedComponent.componentId
+    );
+    const componentStateCopy = this.UtilService.makeCopyOfJSONObject(componentState);
+    if (componentType === 'Table') {
+      this.setStudentWork(componentStateCopy);
+      this.isDirty = true;
+    } else if (componentType === 'Graph') {
+      this.setGraphDataIntoTableData(componentStateCopy, connectedComponent);
+      this.isDirty = true;
+    } else if (componentType === 'Embedded') {
+      this.setStudentWork(componentStateCopy);
+      this.isDirty = true;
+      this.StudentDataService.broadcastComponentSaveTriggered({
+        nodeId: this.nodeId,
+        componentId: this.componentId
+      });
+    }
+  }
+
+  attachStudentAsset(studentAsset: any): void {
+    // TODO: make sure the asset is a csv file then populate the csv data into the table
+  }
+}

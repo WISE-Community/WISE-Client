@@ -1,0 +1,32 @@
+.tools {
+  margin-bottom: 8px;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 16px;
+  padding: 8px 0;
+}
+
+.table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.table-cell {
+  border: 1px solid #dddddd;
+  padding: 8px;
+
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0;
+    padding-bottom: 0;
+  }
+
+  .mat-form-field-infix {
+    border-top-width: .343em;
+  }
+}
+
+.cell-input {
+  max-width: 100%;
+}

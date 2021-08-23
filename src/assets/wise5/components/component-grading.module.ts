@@ -5,6 +5,7 @@ import { EditComponentAnnotationsComponent } from '../classroomMonitor/classroom
 import { EditComponentCommentComponent } from '../classroomMonitor/classroomMonitorComponents/edit-component-comment/edit-component-comment.component';
 import { EditComponentScoreComponent } from '../classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component';
 import { GradingEditComponentMaxScoreComponent } from '../classroomMonitor/classroomMonitorComponents/grading-edit-component-max-score/grading-edit-component-max-score.component';
+import { SelectPeriodComponent } from '../classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 import { WorkgroupComponentGradingComponent } from '../classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component';
 import './animation/animationGradingComponentModule';
 import './audioOscillator/audioOscillatorGradingComponentModule';
@@ -62,6 +63,12 @@ export default angular
     'gradingEditComponentMaxScore',
     downgradeComponent({
       component: GradingEditComponentMaxScoreComponent
+    }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'selectPeriod',
+    downgradeComponent({
+      component: SelectPeriodComponent
     }) as angular.IDirectiveFactory
   )
   .directive(

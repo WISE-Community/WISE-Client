@@ -317,6 +317,10 @@
       .#{$key}-bg {
         background-color: $value;
       }
+
+      .#{$key}-border {
+        border-color: $value;
+      }
   }
 }
 

@@ -1,0 +1,31 @@
+.delete-trial-button {
+  .mat-icon {
+    margin: 0px;
+  }
+}
+
+.y-limit-column {
+  width: 80px;
+}
+
+.x-limit-row {
+  width: 100%;
+}
+
+.limit-input {
+  width: 80px;
+}
+
+.highcharts-container {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.canvas-div {
+  display: none;
+}
+
+highcharts-chart {
+  display: block;
+  width: 100%;
+}
