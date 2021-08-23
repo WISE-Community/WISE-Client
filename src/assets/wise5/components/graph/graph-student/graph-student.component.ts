@@ -2132,7 +2132,9 @@ export class GraphStudent extends ComponentStudent {
        * we do not need to look at specific fields so we will directly
        * parse the the trial data from the student data.
        */
-      this.parseLatestTrial(studentData, params);
+      if (this.hasTrial(studentData)) {
+        this.parseLatestTrial(studentData, params);
+      }
     } else {
       // we need to process specific fields in the student data
       for (const field of params.fields) {
@@ -2177,7 +2179,7 @@ export class GraphStudent extends ComponentStudent {
           }
         }
       }
-    } else if (name === 'trial') {
+    } else if (name === 'trial' && this.hasTrial(studentData)) {
       this.parseLatestTrial(studentData, params);
     } else if (name === 'trialIdsToDelete') {
       this.deleteTrialsByTrialId(studentData.trialIdsToDelete);
@@ -2250,6 +2252,12 @@ export class GraphStudent extends ComponentStudent {
       latestStudentDataTrial = studentData.trials[studentData.trials.length - 1];
     }
     return latestStudentDataTrial;
+  }
+
+  hasTrial(studentData: any): boolean {
+    return (
+      studentData.trial != null || (studentData.trials != null && studentData.trials.length > 0)
+    );
   }
 
   hideAllTrials() {
