@@ -36,7 +36,9 @@
       <td *ngFor="let cell of row"
           class="table-cell"
           style="width: {{cell.size || componentContent.globalCellSize}}em; max-width: {{cell.size || componentContent.globalCellSize}}em">
-        <mat-form-field *ngIf="cell.editable" class="cell-input" appearance="outline">
+        <mat-form-field *ngIf="cell.editable"
+            class="cell-input form-field-no-label form-field-no-hint"
+            appearance="outline">
           <input
               matInput
               type="text"
