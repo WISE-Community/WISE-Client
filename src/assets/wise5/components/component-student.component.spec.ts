@@ -18,6 +18,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 let component: ComponentStudent;
 let fixture: ComponentFixture<ComponentStudent>;
+let performSubmitSpy: jasmine.Spy;
 
 class MockService {}
 
@@ -47,25 +48,22 @@ describe('ComponentStudent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ComponentStudentImpl);
+    component = fixture.componentInstance;
+    component.componentContent = {};
+    component.isSubmitDirty = true;
+    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue(null);
+    spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(false);
+    spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
+    performSubmitSpy = spyOn(component, 'performSubmit');
+  });
   submit();
   isFromConnectedComponent();
 });
 
-let performSubmitSpy;
 function submit() {
   describe('submit()', () => {
-    beforeEach(() => {
-      fixture = TestBed.createComponent(ComponentStudentImpl);
-      component = fixture.componentInstance;
-      component.componentContent = {};
-      component.isSubmitDirty = true;
-      spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue(
-        null
-      );
-      spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(false);
-      spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
-      performSubmitSpy = spyOn(component, 'performSubmit');
-    });
     submit_maxSubmitCountDoesNotExist_ShouldPerformSubmit();
     submit_maxSubmitCountNotReached_ShouldPerformSubmit();
     submit_maxSubmitCountReached_ShouldNotPerformSubmit();

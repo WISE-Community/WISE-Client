@@ -1,9 +1,18 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
+import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -28,8 +37,21 @@ let newStudentData: any;
 describe('AudioOscillatorStudent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
-      declarations: [AudioOscillatorStudent],
+      imports: [
+        BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatTooltipModule,
+        ReactiveFormsModule,
+        UpgradeModule
+      ],
+      declarations: [AudioOscillatorStudent, ComponentHeader, PossibleScoreComponent],
       providers: [
         AnnotationService,
         AudioOscillatorService,
@@ -44,13 +66,17 @@ describe('AudioOscillatorStudent', () => {
         TagService,
         UtilService
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: []
     });
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AudioOscillatorStudent);
-    spyOn(TestBed.get(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({});
+    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
+      comment: '',
+      score: 1
+    });
+    spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
     component.nodeId = 'node1';
     component.componentContent = {
@@ -71,14 +97,17 @@ describe('AudioOscillatorStudent', () => {
     fixture.detectChanges();
   });
 
-  setFieldMinimum();
-  setStudentWork();
   addFrequencyPlayed();
+  callPlayWhenTheTogglePlayIsCalled();
   mergeFrequenciesPlayed();
   mergeFrequenciesPlayedSorted();
-  mergeNumberOfFrequenciesPlayed();
-  mergeMinFrequencyPlayed();
   mergeMaxFrequencyPlayed();
+  mergeMinFrequencyPlayed();
+  mergeNumberOfFrequenciesPlayed();
+  repopulateStudentWork();
+  setFieldMinimum();
+  setStudentWork();
+  setTheParametersFromTheComponentContent();
 });
 
 function setFieldMinimum() {
@@ -195,5 +224,37 @@ function mergeMaxFrequencyPlayed() {
     newStudentData.maxFrequencyPlayed = 200;
     component.mergeMaxFrequencyPlayed(existingStudentData, newStudentData);
     expect(existingStudentData.maxFrequencyPlayed).toEqual(200);
+  });
+}
+
+function setTheParametersFromTheComponentContent() {
+  it('should set the parameters from the component content', () => {
+    expect(component.frequency).toEqual(component.componentContent.startingFrequency);
+    expect(component.oscilloscopeWidth).toEqual(component.componentContent.oscilloscopeWidth);
+    expect(component.oscilloscopeHeight).toEqual(component.componentContent.oscilloscopeHeight);
+    expect(component.gridCellSize).toEqual(component.componentContent.gridCellSize);
+    expect(component.oscillatorTypes.length).toEqual(2);
+  });
+}
+
+function callPlayWhenTheTogglePlayIsCalled() {
+  it('should call play when the toggle play is called', () => {
+    const playSpy = spyOn(component, 'play');
+    component.togglePlay();
+    expect(playSpy).toHaveBeenCalled();
+  });
+}
+
+function repopulateStudentWork() {
+  it('should repopulate student work', () => {
+    const componentState = {
+      studentData: {
+        frequenciesPlayed: [440, 880]
+      }
+    };
+    component.setStudentWork(componentState);
+    expect(component.frequenciesPlayed.length).toEqual(2);
+    expect(component.frequenciesPlayed[0]).toEqual(440);
+    expect(component.frequenciesPlayed[1]).toEqual(880);
   });
 }
