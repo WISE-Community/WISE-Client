@@ -421,7 +421,7 @@ export class GraphStudent extends ComponentStudent {
   calculateRegressionLineData(tableData, xColumn, yColumn) {
     const xValues = this.getValuesInColumn(tableData, xColumn);
     const yValues = this.getValuesInColumn(tableData, yColumn);
-    const covarianceMatrix = this.calculateCovariance(xValues, yValues);
+    const covarianceMatrix = covariance(xValues, yValues);
     const covarianceXY = covarianceMatrix[0][1];
     const varianceX = covarianceMatrix[0][0];
     const meanY = this.UtilService.calculateMean(yValues);
@@ -444,10 +444,6 @@ export class GraphStudent extends ComponentStudent {
       [firstX, firstY],
       [secondX, secondY]
     ];
-  }
-
-  calculateCovariance(xValues: any[], yValues: any[]): any[] {
-    return covariance(xValues, yValues);
   }
 
   getValuesInColumn(tableData, columnIndex) {

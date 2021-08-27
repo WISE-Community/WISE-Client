@@ -1692,10 +1692,6 @@ function calculateRegressionLine() {
       [{ text: '2' }, { text: '20' }, { text: '200' }],
       [{ text: '3' }, { text: '30' }, { text: '300' }]
     ];
-    spyOn(component, 'calculateCovariance').and.returnValue([
-      [1, 10],
-      [10, 100]
-    ]);
     const regressionLineData = component.calculateRegressionLineData(tableData, 0, 1);
     expect(regressionLineData[0][0]).toEqual(1);
     expect(regressionLineData[0][1]).toEqual(10);
