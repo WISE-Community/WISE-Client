@@ -753,7 +753,7 @@ export class MatchStudent extends ComponentStudent {
   addChoice(): void {
     this.dialog
       .open(AddMatchChoiceDialog, {
-        panelClass: 'mat-dialog--sm'
+        panelClass: 'dialog-sm'
       })
       .afterClosed()
       .subscribe((result) => {

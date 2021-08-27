@@ -99,7 +99,7 @@ export class EditProfileComponent {
 
   unlinkGoogleAccount() {
     this.dialog.open(UnlinkGoogleAccountConfirmComponent, {
-      panelClass: 'mat-dialog--sm'
+      panelClass: 'dialog-sm'
     });
   }
 }

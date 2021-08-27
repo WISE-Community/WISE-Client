@@ -68,7 +68,7 @@ export class ShareRunCodeDialogComponent {
     this.teacherService
       .getClassroomCourses(this.userService.getUser().getValue().username)
       .subscribe((courses) => {
-        const panelClass = courses.length ? 'mat-dialog--md' : '';
+        const panelClass = courses.length ? 'dialog-md' : '';
         this.dialog.open(ListClassroomCoursesDialogComponent, {
           data: { run: this.run, courses },
           panelClass: panelClass
