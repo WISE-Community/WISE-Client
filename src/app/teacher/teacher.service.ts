@@ -309,4 +309,16 @@ export class TeacherService {
       .set('courseIds', JSON.stringify(courseIds));
     return this.http.post<any>(this.addAssignmentUrl, params, { headers });
   }
+
+  changeStudentPassword(
+    runId: number,
+    studentId: number,
+    newStudentPassword: string,
+    teacherPassword: string
+  ): Observable<any> {
+    let params = new HttpParams();
+    params = params.set('newStudentPassword', newStudentPassword);
+    params = params.set('teacherPassword', teacherPassword);
+    return this.http.post(`/api/teacher/run/${runId}/student/${studentId}/change-password`, params);
+  }
 }

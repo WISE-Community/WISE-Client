@@ -951,4 +951,8 @@ export class ConfigService {
     }
     return '';
   }
+
+  isGoogleUser() {
+    return this.getMyUserInfo().isGoogleUser;
+  }
 }
