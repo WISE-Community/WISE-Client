@@ -2,7 +2,8 @@
   <div class="mat-card-title" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
     <mat-icon class="mat-24 secondary-text"
         [ngStyle]="{'color': team.users.length ? avatarColor : ''}">account_circle</mat-icon>
-    <h4 class="mat-body-2" i18n>Team {{team.workgroupId}}</h4>
+    <h4 class="mat-body-2" *ngIf="team.workgroupId != null" i18n>Team {{team.workgroupId}}</h4>
+    <h4 class="mat-body-2" *ngIf="team.workgroupId == null" i18n>Unassigned Students (without a team)</h4>
     <span fxFlex></span>
     <span class="mat-small">
       <a *ngIf="canChangePeriod" class="change-period" href="#" (click)="changePeriod($event)" i18n>Change Period</a>

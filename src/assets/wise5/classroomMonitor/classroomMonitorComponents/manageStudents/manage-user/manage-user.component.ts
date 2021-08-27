@@ -15,20 +15,12 @@ import { RemoveUserConfirmDialogComponent } from '../remove-user-confirm-dialog/
 export class ManageUserComponent {
   @Input() user: any;
 
-  canViewStudentNames: boolean;
-  isGoogleUser: boolean;
-
   constructor(
     private dialog: MatDialog,
     private ConfigService: ConfigService,
     private http: HttpClient,
     private snackBar: MatSnackBar
   ) {}
-
-  ngOnInit() {
-    this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
-    this.isGoogleUser = this.user.isGoogleUser;
-  }
 
   viewUserInfo(event: Event) {
     event.preventDefault();

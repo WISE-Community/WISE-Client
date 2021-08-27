@@ -1,0 +1,9 @@
+<button mat-button
+    matTooltip="Create a new team"
+    i18n-matTooltip
+    matTooltipPosition="above"
+    [disabled]="isDisabled"
+    (click)="openAddTeamDialog()">
+  <mat-icon class="text-secondary">group_add</mat-icon>
+  <span i18n>New Team</span>
+</button>

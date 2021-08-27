@@ -49,6 +49,7 @@ function initTeams() {
   describe('initTeams', () => {
     it('should initialize teams that are in this period including empty teams', () => {
       spyOn(workgroupService, 'getWorkgroupsInPeriod').and.returnValue(workgroupsInPeriod);
+      spyOn(configService, 'getUsersNotInWorkgroupInPeriod').and.returnValue([]);
       const allWorkgroupsInPeriodSpy = spyOn(
         TestBed.inject(GetWorkgroupService),
         'getAllWorkgroupsInPeriod'

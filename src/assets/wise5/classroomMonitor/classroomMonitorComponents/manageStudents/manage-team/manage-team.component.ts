@@ -36,7 +36,9 @@ export class ManageTeamComponent {
   ngOnInit() {
     this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.team.workgroupId);
     this.canChangePeriod =
-      this.ConfigService.getPermissions().canGradeStudentWork && this.team.users.length > 0;
+      this.ConfigService.getPermissions().canGradeStudentWork &&
+      this.team.users.length > 0 &&
+      this.team.workgroupId != null;
   }
 
   changePeriod(event: Event) {
@@ -98,7 +100,11 @@ export class ManageTeamComponent {
       this.ConfigService.retrieveConfig(
         `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
       );
-      this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
+      if (this.team.workgroupId != null) {
+        this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
+      } else {
+        this.snackBar.open($localize`Moved student to Unassigned Students (without a team).`);
+      }
     });
   }
 }
