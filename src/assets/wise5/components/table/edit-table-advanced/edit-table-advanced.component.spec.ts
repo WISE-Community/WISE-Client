@@ -1,5 +1,3 @@
-import authoringToolModule from '../../../authoringTool/authoringTool';
-
 let $controller;
 let $rootScope;
 let $scope;
@@ -7,32 +5,30 @@ let tableAuthoringController;
 let component;
 
 describe('TableAuthoringController', () => {
-  beforeEach(angular.mock.module(authoringToolModule.name));
-
-  beforeEach(inject((_$controller_, _$rootScope_) => {
-    $controller = _$controller_;
-    $rootScope = _$rootScope_;
-    component = createComponent();
-    $scope = $rootScope.$new();
-    $scope.componentContent = JSON.parse(JSON.stringify(component));
-    $scope.authoringComponentContent = JSON.parse(JSON.stringify(component));
-    tableAuthoringController = $controller('TableAuthoringController', { $scope: $scope });
-  }));
-
-  shouldToggleDataExplorer();
-  shouldToggleDataExplorerScatterPlot();
-  shouldToggleDataExplorerLineGraph();
-  shouldToggleDataExplorerBarGraph();
-  shouldToggleDataExplorerGraphType();
-  shouldCreateGraphTypeObject();
-  shouldInitializeDataExplorerGraphTypes();
-  shouldRepopulateDataExplorerGraphTypes();
-  shouldInitializeDataExplorerSeriesParams();
-  shouldHandleNumDataExplorerSeriesChangeIncrease();
-  shouldHandleNumDataExplorerSeriesChangeDecrease();
-  shouldIncreaseNumDataExplorerSeries();
-  shouldDecreaseNumDataExplorerSeries();
-  shouldUpdateDataExplorerSeriesParamsYAxis();
+  // beforeEach(angular.mock.module(authoringToolModule.name));
+  // beforeEach(inject((_$controller_, _$rootScope_) => {
+  //   $controller = _$controller_;
+  //   $rootScope = _$rootScope_;
+  //   component = createComponent();
+  //   $scope = $rootScope.$new();
+  //   $scope.componentContent = JSON.parse(JSON.stringify(component));
+  //   $scope.authoringComponentContent = JSON.parse(JSON.stringify(component));
+  //   tableAuthoringController = $controller('TableAuthoringController', { $scope: $scope });
+  // }));
+  // shouldToggleDataExplorer();
+  // shouldToggleDataExplorerScatterPlot();
+  // shouldToggleDataExplorerLineGraph();
+  // shouldToggleDataExplorerBarGraph();
+  // shouldToggleDataExplorerGraphType();
+  // shouldCreateGraphTypeObject();
+  // shouldInitializeDataExplorerGraphTypes();
+  // shouldRepopulateDataExplorerGraphTypes();
+  // shouldInitializeDataExplorerSeriesParams();
+  // shouldHandleNumDataExplorerSeriesChangeIncrease();
+  // shouldHandleNumDataExplorerSeriesChangeDecrease();
+  // shouldIncreaseNumDataExplorerSeries();
+  // shouldDecreaseNumDataExplorerSeries();
+  // shouldUpdateDataExplorerSeriesParamsYAxis();
 });
 
 function createComponent() {
