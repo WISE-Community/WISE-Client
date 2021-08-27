@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
+import { TeacherService } from '../../../../../../app/teacher/teacher.service';
 import { passwordMatchValidator } from '../../../../../../app/modules/shared/validators/password-match.validator';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -27,8 +27,8 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
   constructor(
     private ConfigService: ConfigService,
     private dialog: MatDialog,
-    private http: HttpClient,
     private snackBar: MatSnackBar,
+    private TeacherService: TeacherService,
     @Inject(MAT_DIALOG_DATA) public user: any
   ) {}
 
@@ -42,38 +42,27 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
 
   changePassword() {
     this.isChangingPassword = true;
-    let params = new HttpParams();
-    params = params.set(
-      'newStudentPassword',
-      this.changePasswordForm.controls['newPassword'].value
-    );
-    params = params.set(
-      'teacherPassword',
+    this.TeacherService.changeStudentPassword(
+      this.ConfigService.getRunId(),
+      this.user.id,
+      this.changePasswordForm.controls['newPassword'].value,
       this.changePasswordForm.controls['teacherPassword'].value
+    ).subscribe(
+      (response) => {
+        this.isChangingPassword = false;
+        this.snackBar.open(
+          this.canViewStudentNames
+            ? $localize`Changed password for ${this.user.name} (${this.user.username}).`
+            : $localize`Changed password for Student ${this.user.id}.`
+        );
+        this.dialog.closeAll();
+      },
+      (err) => {
+        this.isChangingPassword = false;
+        this.snackBar.open(
+          $localize`Failed to change student password. Check values and try again.`
+        );
+      }
     );
-    this.http
-      .post(
-        `/api/teacher/run/${this.ConfigService.getRunId()}/student/${this.user.id}/change-password`,
-        params
-      )
-      .subscribe(
-        (response) => {
-          this.isChangingPassword = false;
-          let message = '';
-          if (this.canViewStudentNames) {
-            message = $localize`Changed password for ${this.user.name} (${this.user.username}).`;
-          } else {
-            message = $localize`Changed password for Student ${this.user.id}.`;
-          }
-          this.snackBar.open(message);
-          this.dialog.closeAll();
-        },
-        (err) => {
-          this.isChangingPassword = false;
-          this.snackBar.open(
-            $localize`Failed to change student password. Check values and try again.`
-          );
-        }
-      );
   }
 }

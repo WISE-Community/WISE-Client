@@ -12,12 +12,13 @@
     <mat-icon class="text-secondary">info</mat-icon>
   </button>
   <button *ngIf="isGoogleUser"
+      class="googleUserButton"
       mat-icon-button
       matTooltip="Student signs in with Google"
       i18n-matTooltip
       matTooltipPosition="above">
     <mat-icon class="mat-18" svgIcon="google"></mat-icon>
-</button>
+  </button>
   <button *ngIf="!isGoogleUser"
       class="userInfoLink"
       mat-icon-button
