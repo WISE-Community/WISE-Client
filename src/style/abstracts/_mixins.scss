@@ -137,7 +137,7 @@
     border-radius: $card-border-radius;
   }
 
-  .mat-dialog-content--scroll {
+  .dialog-content-scroll {
     border-bottom: 1px solid;
     border-top: 1px solid;
   }
@@ -283,7 +283,7 @@
     }
   }
 
-  .mat-dialog-content--scroll {
+  .dialog-content-scroll {
     background-color: map-get($colors, notice-bg);
     border-color: map_get($background, background);
   }

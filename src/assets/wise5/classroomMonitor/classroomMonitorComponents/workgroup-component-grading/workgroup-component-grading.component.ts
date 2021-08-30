@@ -54,7 +54,7 @@ export class WorkgroupComponentGradingComponent {
         nodeId: this.nodeId,
         componentStates: this.componentStates
       },
-      panelClass: 'mat-dialog--md'
+      panelClass: 'dialog-lg'
     });
   }
 }
