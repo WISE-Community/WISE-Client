@@ -7,7 +7,7 @@
       <div class="member-list" *ngIf="initialTeamMembers.length > 0">
         <div class="member-list-item" *ngFor="let member of initialTeamMembers; let i=index;"
             fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <show-student-info [user]="member"></show-student-info>
+          <show-student-info [user]="member" [class]="isUserInAnyWorkgroup(member) ? '' : 'warn'"></show-student-info>
           <span fxFlex></span>
           <button mat-icon-button
               (click)="deleteTeamMember(i)"
@@ -22,6 +22,7 @@
       <div fxLayout="row wrap" fxLayoutAlign="start start">
         <div class="member" *ngFor="let user of allUsersInPeriod; let i=index;">
           <button mat-stroked-button
+              [color]="isUserInAnyWorkgroup(user) ? '' : 'warn'"
               (click)="addTeamMember(user)"
               [disabled]="initialTeamMembers.length == 3 || initialTeamMembers.includes(user)">
             <show-student-info [user]="user"></show-student-info>

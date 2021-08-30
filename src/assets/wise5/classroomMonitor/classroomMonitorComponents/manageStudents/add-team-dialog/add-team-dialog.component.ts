@@ -80,7 +80,11 @@ export class AddTeamDialogComponent {
 
   private isAnyMemberInWorkgroup(): boolean {
     return this.initialTeamMembers.some((user) => {
-      return this.WorkgroupService.isUserInAnyWorkgroup(user);
+      return this.isUserInAnyWorkgroup(user);
     });
+  }
+
+  isUserInAnyWorkgroup(user: any): boolean {
+    return this.WorkgroupService.isUserInAnyWorkgroup(user);
   }
 }
