@@ -31,7 +31,7 @@
           </button>
         </div>
       </div>
-      <p class="warn mat-small" fxLayoutAlign="start center" i18n>
+      <p *ngIf="isAnyUnassignedStudent" class="warn mat-small" fxLayoutAlign="start center" i18n>
         <mat-icon color="warn" aria-label="Warning color" aira-label-18n>stop</mat-icon> = Student without a current team
       </p>
     </div>

@@ -15,21 +15,24 @@ export class AddTeamDialogComponent {
   allUsersInPeriod: any[] = [];
   initialTeamMembers: any[] = [];
   isProcessing: boolean;
+  isAnyUnassignedStudent: boolean;
 
   constructor(
     protected dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public period: any,
     private ConfigService: ConfigService,
     private snackBar: MatSnackBar,
-    private TeacherDataService: TeacherDataService,
     private WorkgroupService: WorkgroupService
   ) {}
 
   ngOnInit(): void {
-    this.allUsersInPeriod = this.ConfigService.getAllUsersInPeriod(
-      this.period.periodId
-    ).sort((userA, userB) => {
-      return userA.name.localeCompare(userB.name);
+    this.allUsersInPeriod = this.ConfigService.getAllUsersInPeriod(this.period.periodId).sort(
+      (userA, userB) => {
+        return userA.name.localeCompare(userB.name);
+      }
+    );
+    this.isAnyUnassignedStudent = this.allUsersInPeriod.some((student) => {
+      return !this.isUserInAnyWorkgroup(student);
     });
   }
 
