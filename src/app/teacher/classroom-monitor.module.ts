@@ -9,7 +9,6 @@ import { EditComponentScoreComponent } from '../../assets/wise5/classroomMonitor
 import { GradingEditComponentMaxScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/grading-edit-component-max-score/grading-edit-component-max-score.component';
 import { ManagePeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-period/manage-period.component';
 import { ManageStudentsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students/manage-students.component';
-import { ManageStudentsLegacyComponent } from '../../assets/wise5/classroomMonitor/manageStudents/manage-students-legacy.component';
 import { ManageTeamComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component';
 import { ManageTeamsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-teams/manage-teams.component';
 import { ManageUserComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component';
@@ -55,7 +54,6 @@ import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMo
     ManagePeriodComponent,
     ManageShowStudentInfoComponent,
     ManageStudentsComponent,
-    ManageStudentsLegacyComponent,
     ManageTeamComponent,
     ManageTeamsComponent,
     ManageUserComponent,

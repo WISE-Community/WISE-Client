@@ -121,12 +121,6 @@ class ClassroomMonitorController {
         type: 'primary',
         active: true
       },
-      'root.cm.manageStudentsLegacy': {
-        name: this.$translate('manageStudents'),
-        icon: 'face',
-        type: 'primary',
-        active: true
-      },
       'root.cm.notebooks': {
         name: this.$translate('studentNotebooks'),
         icon: 'chrome_reader_mode',
