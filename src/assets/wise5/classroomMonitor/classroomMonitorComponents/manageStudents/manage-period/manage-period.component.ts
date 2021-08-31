@@ -17,6 +17,7 @@ export class ManagePeriodComponent {
   subscriptions: Subscription = new Subscription();
   emptyTeams: Map<number, any> = new Map();
   teams: Map<number, any> = new Map();
+  unassignedTeam: any = { users: [] };
 
   constructor(
     private ConfigService: ConfigService,
@@ -50,6 +51,7 @@ export class ManagePeriodComponent {
   initTeams() {
     this.teams = this.WorkgroupService.getWorkgroupsInPeriod(this.period.periodId);
     this.initEmptyTeams();
+    this.initUnassignedTeam();
   }
 
   private initEmptyTeams() {
@@ -65,6 +67,12 @@ export class ManagePeriodComponent {
         }
       }
     );
+  }
+
+  private initUnassignedTeam() {
+    this.unassignedTeam = {
+      users: this.ConfigService.getUsersNotInWorkgroupInPeriod(this.period.periodId)
+    };
   }
 
   initStudents() {

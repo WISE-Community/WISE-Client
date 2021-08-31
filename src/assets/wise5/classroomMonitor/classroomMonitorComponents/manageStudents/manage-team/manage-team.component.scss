@@ -22,12 +22,16 @@ h4 {
   transition: background-color 250ms;
   border-bottom-left-radius: $card-border-radius;
   border-bottom-right-radius: $card-border-radius;
+  column-gap: 0;
 }
 
 li {
   list-style-type: none;
   cursor: move;
-  margin: 4px;
+  padding: 4px;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .user {

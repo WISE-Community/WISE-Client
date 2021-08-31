@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+import { AddTeamButtonComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-button/add-team-button.component';
+import { AddTeamDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component';
+import { ChangeStudentPasswordDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component';
 import { ComponentStateInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-state-info/component-state-info.component';
 import { EditComponentAnnotationsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-annotations/edit-component-annotations.component';
 import { EditComponentCommentComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-comment/edit-component-comment.component';
@@ -22,6 +25,7 @@ import { ComponentNewWorkBadgeComponent } from '../classroom-monitor/component-n
 import { ComponentSelectComponent } from '../classroom-monitor/component-select/component-select.component';
 import { MilestonesComponent } from '../classroom-monitor/milestones/milestones.component';
 import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress/nav-item-progress.component';
+import { ShowStudentInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/show-student-info/show-student-info.component';
 import { StatusIconComponent } from '../classroom-monitor/status-icon/status-icon.component';
 import { StepInfoComponent } from '../classroom-monitor/step-info/step-info.component';
 import { WorkgroupNodeStatusComponent } from '../classroom-monitor/workgroup-node-status/workgroup-node-status.component';
@@ -33,10 +37,11 @@ import { MilestoneReportDataComponent } from './milestone/milestone-report-data/
 import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component';
 import { ManageShowStudentInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component';
 import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component';
-import { ChangeStudentPasswordDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component';
 
 @NgModule({
   declarations: [
+    AddTeamButtonComponent,
+    AddTeamDialogComponent,
     AlertStatusCornerComponent,
     ChangeStudentPasswordDialogComponent,
     ChangeTeamPeriodDialogComponent,
@@ -60,6 +65,7 @@ import { ChangeStudentPasswordDialogComponent } from '../../assets/wise5/classro
     NavItemProgressComponent,
     RemoveUserConfirmDialogComponent,
     SelectPeriodComponent,
+    ShowStudentInfoComponent,
     StatusIconComponent,
     StepInfoComponent,
     ViewComponentRevisionsComponent,

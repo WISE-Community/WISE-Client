@@ -21,10 +21,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ManageTeamComponent {
   @Input() team: any;
-  @Input() connectedTeams: string[];
 
   avatarColor: string;
   canChangePeriod: boolean;
+  isUnassigned: boolean;
 
   constructor(
     private dialog: MatDialog,
@@ -35,8 +35,11 @@ export class ManageTeamComponent {
 
   ngOnInit() {
     this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.team.workgroupId);
+    this.isUnassigned = this.team.workgroupId == null;
     this.canChangePeriod =
-      this.ConfigService.getPermissions().canGradeStudentWork && this.team.users.length > 0;
+      this.ConfigService.getPermissions().canGradeStudentWork &&
+      this.team.users.length > 0 &&
+      !this.isUnassigned;
   }
 
   changePeriod(event: Event) {
@@ -56,7 +59,7 @@ export class ManageTeamComponent {
   }
 
   canDrop(drag: CdkDrag, drop: CdkDropList): boolean {
-    return drop.data.length < 3;
+    return !drop.element.nativeElement.classList.contains('unassigned') && drop.data.length < 3;
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -66,7 +69,8 @@ export class ManageTeamComponent {
       itemEl.style.opacity = '.4';
       this.dialog
         .open(MoveUserConfirmDialogComponent, {
-          panelClass: 'mat-dialog--sm'
+          panelClass: 'mat-dialog--sm',
+          data: event.item.data != null
         })
         .afterClosed()
         .subscribe((doMoveUser: boolean) => {
@@ -87,7 +91,8 @@ export class ManageTeamComponent {
     this.UpdateWorkgroupService.moveMember(
       user.id,
       event.item.data,
-      this.team.workgroupId
+      this.team.workgroupId,
+      this.team.periodId
     ).subscribe(() => {
       transferArrayItem(
         event.previousContainer.data,
