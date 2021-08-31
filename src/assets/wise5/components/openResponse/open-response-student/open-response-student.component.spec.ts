@@ -121,7 +121,6 @@ describe('OpenResponseStudent', () => {
   createComponentState();
   createComponentStateAdditionalProcessing();
   createMergedComponentState();
-  getResponse();
   hasAudioResponses();
   hasFeedback();
   mergeObjects();
@@ -223,15 +222,6 @@ function expectPopupToBeCalledWith(
   }
   component[functionName](submitsLeft);
   expect(popupSpy).toHaveBeenCalledWith(message);
-}
-
-function getResponse() {
-  describe('getResponse', () => {
-    it('should get response', () => {
-      component.studentResponse = response;
-      expect(component.getResponse()).toEqual(response);
-    });
-  });
 }
 
 function createComponentState() {
