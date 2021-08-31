@@ -26,7 +26,7 @@ export class ManageUserComponent {
     event.preventDefault();
     this.dialog.open(ManageShowStudentInfoComponent, {
       data: this.user,
-      panelClass: 'mat-dialog--sm'
+      panelClass: 'dialog-sm'
     });
   }
 
@@ -35,7 +35,7 @@ export class ManageUserComponent {
     this.dialog
       .open(RemoveUserConfirmDialogComponent, {
         data: this.user,
-        panelClass: 'mat-dialog--sm'
+        panelClass: 'dialog-sm'
       })
       .afterClosed()
       .subscribe((doRemoveUser: boolean) => {
@@ -58,7 +58,7 @@ export class ManageUserComponent {
     event.preventDefault();
     this.dialog.open(ChangeStudentPasswordDialogComponent, {
       data: this.user,
-      panelClass: 'mat-dialog--sm'
+      panelClass: 'dialog-sm'
     });
   }
 }

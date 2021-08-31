@@ -13,15 +13,13 @@ export class AddTeamButtonComponent {
 
   isDisabled: boolean;
 
-  constructor(
-    private dialog: MatDialog
-  ) {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit() {}
 
   openAddTeamDialog(): void {
     this.dialog.open(AddTeamDialogComponent, {
-      panelClass: 'mat-dialog--md',
+      panelClass: 'dialog-md',
       data: this.period
     });
   }

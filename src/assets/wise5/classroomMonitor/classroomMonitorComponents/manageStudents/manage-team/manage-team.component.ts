@@ -46,7 +46,7 @@ export class ManageTeamComponent {
     event.preventDefault();
     this.dialog.open(ChangeTeamPeriodDialogComponent, {
       data: this.team,
-      panelClass: 'mat-dialog--sm'
+      panelClass: 'dialog-sm'
     });
   }
 
@@ -69,7 +69,7 @@ export class ManageTeamComponent {
       itemEl.style.opacity = '.4';
       this.dialog
         .open(MoveUserConfirmDialogComponent, {
-          panelClass: 'mat-dialog--sm',
+          panelClass: 'dialog-sm',
           data: event.item.data != null
         })
         .afterClosed()
