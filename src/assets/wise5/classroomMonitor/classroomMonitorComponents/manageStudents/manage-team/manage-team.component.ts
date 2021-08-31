@@ -90,7 +90,8 @@ export class ManageTeamComponent {
     this.UpdateWorkgroupService.moveMember(
       user.id,
       event.item.data,
-      this.team.workgroupId
+      this.team.workgroupId,
+      this.team.periodId
     ).subscribe(() => {
       transferArrayItem(
         event.previousContainer.data,

@@ -16,14 +16,20 @@ export class UpdateWorkgroupService {
    * @param userId Student User ID
    * @param workgroupIdFrom Workgroup ID to move student from. -1 if student is not in a workgroup
    * @param workgroupIdTo Workgroup ID to move student to. -1 if moving student to unassigned
+   * @param periodId Period ID the student is in.
    */
-  moveMember(userId: number, workgroupIdFrom: number = -1, workgroupIdTo: number = -1) {
+  moveMember(
+    userId: number,
+    workgroupIdFrom: number = -1,
+    workgroupIdTo: number = -1,
+    periodId: number = this.TeacherDataService.getCurrentPeriodId()
+  ) {
     return this.http.post(
       `/api/teacher/run/${this.ConfigService.getRunId()}/workgroup/move-user/${userId}`,
       {
         workgroupIdFrom: workgroupIdFrom,
         workgroupIdTo: workgroupIdTo,
-        periodId: this.TeacherDataService.getCurrentPeriodId()
+        periodId: periodId
       }
     );
   }
