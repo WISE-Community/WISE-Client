@@ -69,7 +69,8 @@ export class ManageTeamComponent {
       itemEl.style.opacity = '.4';
       this.dialog
         .open(MoveUserConfirmDialogComponent, {
-          panelClass: 'mat-dialog--sm'
+          panelClass: 'mat-dialog--sm',
+          data: event.item.data != null
         })
         .afterClosed()
         .subscribe((doMoveUser: boolean) => {
