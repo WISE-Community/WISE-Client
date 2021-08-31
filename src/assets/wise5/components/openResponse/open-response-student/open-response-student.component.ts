@@ -30,11 +30,8 @@ export class OpenResponseStudent extends ComponentStudent {
   cRaterTimeout: number = 40000;
   isPublicSpaceExist: boolean = false;
   isRecordingAudio: boolean = false;
-  isRichTextEnabled: boolean = false;
   isStudentAudioRecordingEnabled: boolean = false;
-  messageDialog: any;
   studentResponse: string = '';
-  tinymceOptions: any;
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -69,41 +66,6 @@ export class OpenResponseStudent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
 
-    let themePath = this.ProjectService.getThemePath();
-
-    // TODO: make toolbar items and plugins customizable by authors (OR strip down to only special characters, support for equations)
-    // Rich text editor options
-    this.tinymceOptions = {
-      //onChange: function(e) {
-      //scope.studentDataChanged();
-      //},
-      menubar: false,
-      plugins: 'link image media autoresize', //imagetools
-      toolbar:
-        'undo redo | bold italic | superscript subscript | bullist numlist | alignleft aligncenter alignright | link image media',
-      autoresize_bottom_margin: '0',
-      autoresize_min_height: '100',
-      image_advtab: true,
-      content_css: themePath + '/style/tinymce.css',
-      setup: function (ed) {
-        ed.on('focus', function (e) {
-          $(e.target.editorContainer)
-            .addClass('input--focused')
-            .parent()
-            .addClass('input-wrapper--focused');
-          $('label[for="' + e.target.id + '"]').addClass('input-label--focused');
-        });
-
-        ed.on('blur', function (e) {
-          $(e.target.editorContainer)
-            .removeClass('input--focused')
-            .parent()
-            .removeClass('input-wrapper--focused');
-          $('label[for="' + e.target.id + '"]').removeClass('input-label--focused');
-        });
-      }
-    };
-
     if (this.mode === 'student') {
       this.isSaveButtonVisible = this.componentContent.showSaveButton;
       this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
@@ -112,9 +74,6 @@ export class OpenResponseStudent extends ComponentStudent {
       this.isSubmitButtonVisible = false;
       this.isDisabled = true;
     }
-
-    // set whether rich text is enabled
-    this.isRichTextEnabled = this.componentContent.isRichTextEnabled;
 
     if (this.mode == 'student') {
       if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
@@ -690,45 +649,6 @@ export class OpenResponseStudent extends ComponentStudent {
     );
 
     return annotation;
-  }
-
-  /**
-   * Get the number of rows for the textarea
-   */
-  getNumRows() {
-    let numRows = null;
-
-    if (this.componentContent != null) {
-      numRows = this.componentContent.numRows;
-    }
-
-    return numRows;
-  }
-
-  /**
-   * Get the number of columns for the textarea
-   */
-  getNumColumns() {
-    let numColumns = null;
-
-    if (this.componentContent != null) {
-      numColumns = this.componentContent.numColumns;
-    }
-
-    return numColumns;
-  }
-
-  /**
-   * Get the text the student typed
-   */
-  getResponse() {
-    let response = null;
-
-    if (this.studentResponse != null) {
-      response = this.studentResponse;
-    }
-
-    return response;
   }
 
   snipButtonClicked($event) {
