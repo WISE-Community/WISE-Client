@@ -29,14 +29,21 @@ import { EmbeddedStudent } from '../assets/wise5/components/embedded/embedded-st
 import { OpenResponseStudent } from '../assets/wise5/components/openResponse/open-response-student/open-response-student.component';
 import { SafeUrl } from '../assets/wise5/directives/safeUrl/safe-url.pipe';
 import { TableStudent } from '../assets/wise5/components/table/table-student/table-student.component';
+import { DiscussionStudent } from '../assets/wise5/components/discussion/discussion-student/discussion-student.component';
+import { SummaryStudent } from '../assets/wise5/components/summary/summary-student/summary-student.component';
+import { SummaryDisplay } from '../assets/wise5/directives/summaryDisplay/summary-display.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { GraphStudent } from '../assets/wise5/components/graph/graph-student/graph-student.component';
 
 @NgModule({
   declarations: [
     AnimationStudent,
     AudioOscillatorStudent,
     ConceptMapStudent,
+    DiscussionStudent,
     DrawStudent,
     EmbeddedStudent,
+    GraphStudent,
     HtmlDialog,
     HtmlStudent,
     LabelStudent,
@@ -45,9 +52,12 @@ import { TableStudent } from '../assets/wise5/components/table/table-student/tab
     OpenResponseStudent,
     OutsideUrlStudent,
     SafeUrl,
-    TableStudent
+    TableStudent,
+    NavItemComponent,
+    SummaryDisplay,
+    SummaryStudent
   ],
-  imports: [AngularJSModule, MatchStudentModule, StudentComponentModule],
+  imports: [AngularJSModule, HighchartsChartModule, MatchStudentModule, StudentComponentModule],
   providers: [
     { provide: DataService, useExisting: StudentDataService },
     { provide: ProjectService, useExisting: VLEProjectService },

@@ -7,7 +7,7 @@
   <span fxFlex></span>
   <mat-icon *ngIf="transferRunWarning" color="warn">warning</mat-icon>
 </h2>
-<div mat-dialog-content [class.mat-dialog-content--scroll]="!transferRunWarning"
+<div mat-dialog-content [class.dialog-content-scroll]="!transferRunWarning"
     *ngIf="run != null">
   <div [class.info-block]="transferRunWarning">
     <p class="mat-subheading-1 accent-1">

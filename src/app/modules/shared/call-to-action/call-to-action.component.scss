@@ -9,6 +9,7 @@
   text-align: center;
   text-transform: none;
   white-space: normal;
+  border-radius: $feature-border-radius;
 
   &:hover, &:focus {
     .cta__headline .mat-icon {
@@ -27,8 +28,8 @@
   margin: -16px -16px 16px;
   padding: 4px 12px;
   border-bottom: 1px solid;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-left-radius: $feature-border-radius;
+  border-top-right-radius: $feature-border-radius;
   font-size: 1.1em;
 
   .mat-icon {
@@ -50,4 +51,3 @@
   border: 0 none;
   height: 8px;
 }
-

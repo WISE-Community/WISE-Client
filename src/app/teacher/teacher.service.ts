@@ -45,7 +45,7 @@ export class TeacherService {
   copyProject(project: Project, dialog: MatDialog) {
     dialog.open(CopyProjectDialogComponent, {
       data: { project: project },
-      panelClass: 'mat-dialog--sm'
+      panelClass: 'dialog-sm'
     });
   }
 

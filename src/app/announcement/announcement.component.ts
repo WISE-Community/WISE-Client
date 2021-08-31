@@ -27,7 +27,7 @@ export class AnnouncementComponent {
   showAnnouncementDetails() {
     this.dialog.open(AnnouncementDialogComponent, {
       data: this.announcement,
-      panelClass: 'mat-dialog--md'
+      panelClass: 'dialog-md'
     });
   }
 }

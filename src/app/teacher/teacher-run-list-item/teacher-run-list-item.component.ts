@@ -102,7 +102,7 @@ export class TeacherRunListItemComponent implements OnInit {
   shareCode() {
     this.dialog.open(ShareRunCodeDialogComponent, {
       data: { run: this.run },
-      panelClass: 'mat-dialog--sm'
+      panelClass: 'dialog-sm'
     });
   }
 }

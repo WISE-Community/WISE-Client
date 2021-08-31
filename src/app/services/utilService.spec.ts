@@ -21,6 +21,8 @@ describe('UtilService', () => {
   getIntersectOfArraysTests();
   isValidJSONStringTests();
   trimToLength();
+  removeHTMLTags();
+  replaceImgTagWithFileName();
 });
 
 function generateKeyTests() {
@@ -220,6 +222,36 @@ function trimToLength() {
     });
     it('should trim length and add ellipses if length is longer than max length', () => {
       expect(service.trimToLength('123456789', 7)).toEqual('1234...');
+    });
+  });
+}
+
+function removeHTMLTags() {
+  describe('removeHTMLTags()', () => {
+    it('should remove html tags', () => {
+      expect(service.removeHTMLTags('<p><img src="computer.png"/></p>')).toEqual(' computer.png ');
+    });
+  });
+}
+
+function replaceImgTagWithFileName() {
+  describe('replaceImgTagWithFileName()', () => {
+    it('should replace image tag with file name when it uses double quotes', () => {
+      expect(service.replaceImgTagWithFileName('<img src="computer.png"/>')).toEqual(
+        'computer.png'
+      );
+    });
+    it('should replace image tag with file name when it uses single quotes', () => {
+      expect(service.replaceImgTagWithFileName("<img src='computer.png'/>")).toEqual(
+        'computer.png'
+      );
+    });
+    it('should replace image tag with file name when there are other attributes', () => {
+      expect(
+        service.replaceImgTagWithFileName(
+          "<img alt='Computer' src='computer.png' aria-label='Computer'/>"
+        )
+      ).toEqual('computer.png');
     });
   });
 }

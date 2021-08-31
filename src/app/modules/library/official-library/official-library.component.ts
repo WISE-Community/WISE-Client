@@ -42,7 +42,7 @@ export class OfficialLibraryComponent extends LibraryComponent {
 
   showInfo() {
     this.dialog.open(OfficialLibraryDetailsComponent, {
-      panelClass: 'mat-dialog--sm'
+      panelClass: 'dialog-sm'
     });
   }
 }

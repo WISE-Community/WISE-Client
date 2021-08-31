@@ -33,7 +33,7 @@ export class CommunityLibraryComponent extends LibraryComponent {
 
   showInfo() {
     this.dialog.open(CommunityLibraryDetailsComponent, {
-      panelClass: 'mat-dialog--sm'
+      panelClass: 'dialog-sm'
     });
   }
 }

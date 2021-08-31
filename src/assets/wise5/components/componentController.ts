@@ -117,7 +117,6 @@ class ComponentController {
     }
 
     this.registerListeners();
-    this.registerComponentWithParentNode();
   }
 
   $onInit() {
@@ -222,15 +221,6 @@ class ComponentController {
   getFullAssetPath(fileName) {
     const assetsDirectoryPath = this.ConfigService.getProjectAssetsDirectoryPath();
     return assetsDirectoryPath + '/' + fileName;
-  }
-
-  registerComponentWithParentNode() {
-    if (this.$scope.$parent.nodeController != null) {
-      this.$scope.$parent.nodeController.registerComponentController(
-        this.$scope,
-        this.componentContent
-      );
-    }
   }
 
   broadcastDoneRenderingComponent() {

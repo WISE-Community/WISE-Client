@@ -66,7 +66,12 @@ export class DrawStudent extends ComponentStudent {
   }
 
   ngAfterViewInit(): void {
-    this.initializeDrawingTool();
+    // When a draw is imported into another component as a background, it is rendered in a popup
+    // but sometimes the drawing tool in the popup is not rendered. Using a setTimeout allows the
+    // drawing tool to render in the popup consistently.
+    setTimeout(() => {
+      this.initializeDrawingTool();
+    });
   }
 
   initializeDrawingTool(): void {
