@@ -59,7 +59,7 @@ export class ManageTeamComponent {
   }
 
   canDrop(drag: CdkDrag, drop: CdkDropList): boolean {
-    return drop.data.length < 3;
+    return !drop.element.nativeElement.classList.contains('unassigned') && drop.data.length < 3;
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -101,11 +101,7 @@ export class ManageTeamComponent {
       this.ConfigService.retrieveConfig(
         `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
       );
-      if (this.team.workgroupId != null) {
-        this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
-      } else {
-        this.snackBar.open($localize`Moved student to Unassigned Students (without a team).`);
-      }
+      this.snackBar.open($localize`Moved student to Team ${this.team.workgroupId}.`);
     });
   }
 }
