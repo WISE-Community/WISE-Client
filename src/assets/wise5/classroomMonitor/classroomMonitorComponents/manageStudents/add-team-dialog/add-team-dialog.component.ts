@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 
@@ -18,6 +18,7 @@ export class AddTeamDialogComponent {
 
   constructor(
     protected dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public period: any,
     private ConfigService: ConfigService,
     private snackBar: MatSnackBar,
     private TeacherDataService: TeacherDataService,
@@ -26,7 +27,7 @@ export class AddTeamDialogComponent {
 
   ngOnInit(): void {
     this.allUsersInPeriod = this.ConfigService.getAllUsersInPeriod(
-      this.TeacherDataService.getCurrentPeriodId()
+      this.period.periodId
     ).sort((userA, userB) => {
       return userA.name.localeCompare(userB.name);
     });
@@ -66,13 +67,13 @@ export class AddTeamDialogComponent {
 
   private createTeamOnServer(): void {
     this.WorkgroupService.createWorkgroup(
-      this.TeacherDataService.getCurrentPeriodId(),
+      this.period.periodId,
       this.initialTeamMembers.map((member) => member.id)
     ).subscribe((newWorkgroupId: number) => {
       this.ConfigService.retrieveConfig(
         `/api/config/classroomMonitor/${this.ConfigService.getRunId()}`
       );
-      this.snackBar.open($localize`New team ${newWorkgroupId} has been created`);
+      this.snackBar.open($localize`New team ${newWorkgroupId} has been created.`);
       this.isProcessing = false;
       this.dialog.closeAll();
     });

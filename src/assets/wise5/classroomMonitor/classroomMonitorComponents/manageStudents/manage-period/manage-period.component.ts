@@ -17,7 +17,7 @@ export class ManagePeriodComponent {
   subscriptions: Subscription = new Subscription();
   emptyTeams: Map<number, any> = new Map();
   teams: Map<number, any> = new Map();
-  unassignedTeam: any;
+  unassignedTeam: any = { users: [] };
 
   constructor(
     private ConfigService: ConfigService,

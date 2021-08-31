@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfigService } from '../../../../services/configService';
-import { TeacherDataService } from '../../../../services/teacherDataService';
 import { AddTeamDialogComponent } from '../add-team-dialog/add-team-dialog.component';
 
 @Component({
@@ -10,23 +8,21 @@ import { AddTeamDialogComponent } from '../add-team-dialog/add-team-dialog.compo
   styleUrls: ['./add-team-button.component.scss']
 })
 export class AddTeamButtonComponent {
+  @Input()
+  period: any;
+
   isDisabled: boolean;
 
   constructor(
-    private dialog: MatDialog,
-    private ConfigService: ConfigService,
-    private TeacherDataService: TeacherDataService
+    private dialog: MatDialog
   ) {}
 
-  ngOnInit() {
-    this.isDisabled =
-      this.ConfigService.getAllUsersInPeriod(this.TeacherDataService.getCurrentPeriodId()).length ==
-      0;
-  }
+  ngOnInit() {}
 
   openAddTeamDialog(): void {
     this.dialog.open(AddTeamDialogComponent, {
-      panelClass: 'mat-dialog--md'
+      panelClass: 'mat-dialog--md',
+      data: this.period
     });
   }
 }

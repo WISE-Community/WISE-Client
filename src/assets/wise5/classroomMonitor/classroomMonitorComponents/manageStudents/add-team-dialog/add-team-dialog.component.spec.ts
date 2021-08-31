@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
@@ -35,6 +40,10 @@ let configService: ConfigService;
 let workgroupService: WorkgroupService;
 let dialog: MatDialog;
 let http: HttpClient;
+const period = {
+  periodId: 1,
+  periodName: '1'
+};
 
 describe('AddTeamDialogComponent', () => {
   beforeEach(async () => {
@@ -44,7 +53,8 @@ describe('AddTeamDialogComponent', () => {
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: TeacherDataService, useClass: TeacherDataServiceStub },
-        { provide: WorkgroupService, useClass: WorkgroupServiceStub }
+        { provide: WorkgroupService, useClass: WorkgroupServiceStub },
+        { provide: MAT_DIALOG_DATA, useValue: period }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
