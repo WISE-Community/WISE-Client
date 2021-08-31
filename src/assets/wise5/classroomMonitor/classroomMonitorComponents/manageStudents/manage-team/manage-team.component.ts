@@ -21,10 +21,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ManageTeamComponent {
   @Input() team: any;
-  @Input() connectedTeams: string[];
 
   avatarColor: string;
   canChangePeriod: boolean;
+  isUnassigned: boolean;
 
   constructor(
     private dialog: MatDialog,
@@ -35,10 +35,11 @@ export class ManageTeamComponent {
 
   ngOnInit() {
     this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.team.workgroupId);
+    this.isUnassigned = this.team.workgroupId == null;
     this.canChangePeriod =
       this.ConfigService.getPermissions().canGradeStudentWork &&
       this.team.users.length > 0 &&
-      this.team.workgroupId != null;
+      !this.isUnassigned;
   }
 
   changePeriod(event: Event) {
