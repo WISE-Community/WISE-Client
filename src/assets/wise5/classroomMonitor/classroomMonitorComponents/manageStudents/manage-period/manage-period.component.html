@@ -10,7 +10,7 @@
       </span>
     </h2>
     <span fxFlex></span>
-    <add-team-button [period]="period"></add-team-button>
+    <add-team-button *ngIf="unassignedTeam.users.length > 0 || teams.size > 0" [period]="period"></add-team-button>
   </div>
   <manage-team class="unassigned-team" *ngIf="unassignedTeam.users.length > 0" [team]="unassignedTeam"></manage-team>
   <manage-teams [teams]="teams"></manage-teams>
