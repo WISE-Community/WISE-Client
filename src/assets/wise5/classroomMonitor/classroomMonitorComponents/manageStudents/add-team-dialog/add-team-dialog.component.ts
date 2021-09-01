@@ -56,7 +56,8 @@ export class AddTeamDialogComponent {
   private createTeamAfterConfirm() {
     this.dialog
       .open(MoveUserConfirmDialogComponent, {
-        panelClass: 'dialog-sm'
+        panelClass: 'dialog-sm',
+        data: true
       })
       .afterClosed()
       .subscribe((doMoveUser: boolean) => {
