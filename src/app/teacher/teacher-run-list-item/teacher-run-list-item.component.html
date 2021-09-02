@@ -10,7 +10,7 @@
         <ng-template ngPluralCase="other" i18n>periods</ng-template>
       </ng-container>
     </span> |
-    <a *ngIf="run.project.wiseVersion !== 4" href="{{manageStudentsLink}}"
+    <a *ngIf="run.project.wiseVersion !== 4" [routerLink]="manageStudentsLink"
         [class.secondary-text]="isRunCompleted(run)">
       {{run.numStudents}}
       <ng-container [ngPlural]="run.numStudents">
@@ -29,7 +29,7 @@
     </span>
   </div>
   <div>
-    <span i18n>Access Code: {{ run.runCode }}</span> (<a [routerLink]="" 
+    <span i18n>Access Code: {{ run.runCode }}</span> (<a [routerLink]=""
         (click)="shareCode()" i18n>Share with students</a>)
   </div>
   <div *ngIf="run.shared" class="info" i18n>

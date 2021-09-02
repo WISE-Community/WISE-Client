@@ -36,6 +36,7 @@ export class SelectPeriodComponent {
     this.updateSelectedText();
     this.periods = this.TeacherDataService.getPeriods();
     this.populateNumWorkgroupsInPeriod();
+    this.tryHideAllPeriods();
     this.subscriptions.add(
       this.TeacherDataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         this.currentPeriod = currentPeriod;
@@ -61,6 +62,16 @@ export class SelectPeriodComponent {
       totalNumTeams += numTeamsInPeriod;
     }
     this.periods[0].numWorkgroupsInPeriod = totalNumTeams; // all periods
+  }
+
+  /**
+   * Don't show all periods if there is only one period in the run
+   */
+  tryHideAllPeriods() {
+    if (this.periods.length === 2) {
+      // this.periods contains all periods and the one period
+      this.periods = this.periods.slice(1);
+    }
   }
 
   getPeriodByPeriodId(periodId: number) {

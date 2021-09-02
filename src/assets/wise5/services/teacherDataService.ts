@@ -625,13 +625,11 @@ export class TeacherDataService extends DataService {
   }
 
   initializePeriods() {
-    const periods = this.ConfigService.getPeriods();
+    const periods = [...this.ConfigService.getPeriods()];
     if (this.currentPeriod == null) {
       this.setCurrentPeriod(periods[0]);
     }
-    if (periods.length > 1 && periods[0].periodId != -1) {
-      this.addAllPeriods(periods);
-    }
+    this.addAllPeriods(periods);
     let mergedPeriods = periods;
     if (this.runStatus.periods != null) {
       mergedPeriods = this.mergeConfigAndRunStatusPeriods(periods, this.runStatus.periods);
