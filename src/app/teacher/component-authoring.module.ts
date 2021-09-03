@@ -27,7 +27,20 @@ import { EditComponentSaveButtonComponent } from '../authoring-tool/edit-compone
 import { EditComponentSubmitButtonComponent } from '../authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentTagsComponent } from '../authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from '../authoring-tool/edit-component-width/edit-component-width.component';
+import { EditConnectedComponentDefaultSelectsComponent } from '../authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
+import { EditConnectedComponentsAddButtonComponent } from '../authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
+import { EditConnectedComponentComponentSelectComponent } from '../authoring-tool/edit-connected-component-component-select/edit-connected-component-component-select.component';
+import { EditConnectedComponentDeleteButtonComponent } from '../authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
+import { EditConnectedComponentNodeSelectComponent } from '../authoring-tool/edit-connected-component-node-select/edit-connected-component-node-select.component';
+import { EditConnectedComponentTypeSelectComponent } from '../authoring-tool/edit-connected-component-type-select/edit-connected-component-type-select.component';
+import { EditConnectedComponentsComponent } from '../authoring-tool/edit-connected-components/edit-connected-components.component';
 import { AngularJSModule } from '../common-hybrid-angular.module';
+import { EditConceptMapConnectedComponentsComponent } from '../../assets/wise5/components/conceptMap/edit-concept-map-connected-components/edit-concept-map-connected-components.component';
+import { EditDrawConnectedComponentsComponent } from '../../assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component';
+import { EditConnectedComponentsWithBackgroundComponent } from '../authoring-tool/edit-connected-components-with-background/edit-connected-components-with-background.component';
+import { EditGraphConnectedComponentsComponent } from '../../assets/wise5/components/graph/edit-graph-connected-components/edit-graph-connected-components.component';
+import { EditLabelConnectedComponentsComponent } from '../../assets/wise5/components/label/edit-label-connected-components/edit-label-connected-components.component';
+import { EditTableConnectedComponentsComponent } from '../../assets/wise5/components/table/edit-table-connected-components/edit-table-connected-components.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +59,21 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     EditComponentSubmitButtonComponent,
     EditComponentTagsComponent,
     EditComponentWidthComponent,
+    EditConceptMapConnectedComponentsComponent,
+    EditConnectedComponentDefaultSelectsComponent,
+    EditConnectedComponentsAddButtonComponent,
+    EditConnectedComponentsComponent,
+    EditConnectedComponentsWithBackgroundComponent,
+    EditConnectedComponentComponentSelectComponent,
+    EditConnectedComponentDeleteButtonComponent,
+    EditConnectedComponentNodeSelectComponent,
+    EditConnectedComponentTypeSelectComponent,
+    EditDrawConnectedComponentsComponent,
+    EditGraphConnectedComponentsComponent,
+    EditLabelConnectedComponentsComponent,
     EditHTMLAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
+    EditTableConnectedComponentsComponent,
     EmbeddedAuthoring,
     GraphAuthoring,
     HtmlAuthoring,
@@ -77,8 +103,21 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     EditComponentSubmitButtonComponent,
     EditComponentTagsComponent,
     EditComponentWidthComponent,
+    EditConceptMapConnectedComponentsComponent,
+    EditConnectedComponentDefaultSelectsComponent,
+    EditConnectedComponentsAddButtonComponent,
+    EditConnectedComponentsComponent,
+    EditConnectedComponentsWithBackgroundComponent,
+    EditConnectedComponentComponentSelectComponent,
+    EditConnectedComponentDeleteButtonComponent,
+    EditConnectedComponentNodeSelectComponent,
+    EditConnectedComponentTypeSelectComponent,
+    EditDrawConnectedComponentsComponent,
+    EditGraphConnectedComponentsComponent,
+    EditLabelConnectedComponentsComponent,
     EditHTMLAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
+    EditTableConnectedComponentsComponent,
     EmbeddedAuthoring,
     GraphAuthoring,
     HtmlAuthoring,

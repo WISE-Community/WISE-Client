@@ -144,4 +144,9 @@ export class EditAdvancedComponentAngularJSController {
     }
     return null;
   }
+
+  connectedComponentsChanged(connectedComponents: any[]): void {
+    this.authoringComponentContent.connectedComponents = connectedComponents;
+    this.componentChanged();
+  }
 }
