@@ -58,6 +58,8 @@ describe('ConfigService', () => {
   getPeriodIdOfStudent();
   getPeriodsInRun();
   getUsernameByWorkgroupId();
+  getAllUsersInPeriod();
+  getUsersNotInWorkgroupInPeriod();
   getTeacherWorkgroupId();
   getPeriodIdGivenWorkgroupId();
   calculateIsRunActive();
@@ -133,6 +135,26 @@ function getUsernameByWorkgroupId() {
   it('should get empty array for non-existing workgroup', () => {
     service.setConfig(sampleConfig1);
     expect(service.getStudentFirstNamesByWorkgroupId(-1).length).toEqual(0);
+  });
+}
+
+function getAllUsersInPeriod() {
+  describe('getAllUsersInPeriod()', () => {
+    it('should get all users in period', () => {
+      service.setConfig(sampleConfig1);
+      expect(service.getAllUsersInPeriod(1).length).toEqual(3);
+      expect(service.getAllUsersInPeriod(2).length).toEqual(0);
+    });
+  });
+}
+
+function getUsersNotInWorkgroupInPeriod() {
+  describe('getUsersNotInWorkgroupInPeriod()', () => {
+    it('should get all users who are not in a workgroup for a given period', () => {
+      service.setConfig(sampleConfig1);
+      expect(service.getUsersNotInWorkgroupInPeriod(1).length).toEqual(1);
+      expect(service.getUsersNotInWorkgroupInPeriod(2).length).toEqual(0);
+    });
   });
 }
 

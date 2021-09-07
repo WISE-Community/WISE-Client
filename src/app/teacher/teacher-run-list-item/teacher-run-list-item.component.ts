@@ -52,7 +52,7 @@ export class TeacherRunListItemComponent implements OnInit {
     } else {
       this.gradeAndManageLink = `${contextPath}/teacher/manage/unit/${this.run.id}`;
     }
-    this.manageStudentsLink = `${contextPath}/teacher/manage/unit/${this.run.id}/manageStudents`;
+    this.manageStudentsLink = `${contextPath}/teacher/manage/unit/${this.run.id}/manage-students`;
     if (this.run.isHighlighted) {
       this.animateDuration = '2s';
       this.animateDelay = '1s';

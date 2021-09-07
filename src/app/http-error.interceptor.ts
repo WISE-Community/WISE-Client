@@ -28,7 +28,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           );
         }
 
-        if (err.status >= 500) {
+        if (err.status >= 500 || err.status === 0) {
           this.snackBar.open($localize`An error occurred. Please refresh this page and try again.`);
         }
 
