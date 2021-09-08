@@ -8,6 +8,9 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 })
 export class EditConnectedComponentComponentSelectComponent implements OnInit {
   @Input()
+  componentId: string;
+
+  @Input()
   connectedComponent: any;
 
   @Input()

@@ -15,60 +15,6 @@ class EditMultipleChoiceAdvancedController extends EditAdvancedComponentAngularJ
   ) {
     super(NodeService, ProjectService);
   }
-
-  automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent) {
-    let numberOfAllowedComponents = 0;
-    let allowedComponent = null;
-    for (const component of this.getComponentsByNodeId(connectedComponent.nodeId)) {
-      if (
-        this.isConnectedComponentTypeAllowed(component.type) &&
-        component.id != this.componentId
-      ) {
-        numberOfAllowedComponents += 1;
-        allowedComponent = component;
-      }
-    }
-    if (numberOfAllowedComponents === 1) {
-      connectedComponent.componentId = allowedComponent.id;
-      connectedComponent.type = 'importWork';
-      this.copyChoiceTypeAndChoicesFromConnectedComponent(connectedComponent);
-    }
-  }
-
-  connectedComponentComponentIdChanged(connectedComponent) {
-    connectedComponent.type = 'importWork';
-    this.copyChoiceTypeAndChoicesFromConnectedComponent(connectedComponent);
-    this.componentChanged();
-  }
-
-  copyChoiceTypeAndChoicesFromConnectedComponent(connectedComponent) {
-    const nodeId = connectedComponent.nodeId;
-    const componentId = connectedComponent.componentId;
-    if (
-      this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId).type ===
-      'MultipleChoice'
-    ) {
-      this.copyChoiceTypeFromComponent(nodeId, componentId);
-      this.copyChoicesFromComponent(nodeId, componentId);
-    }
-  }
-
-  copyChoiceTypeFromComponent(nodeId, componentId) {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
-    this.authoringComponentContent.choiceType = component.choiceType;
-  }
-
-  copyChoicesFromComponent(nodeId, componentId) {
-    this.authoringComponentContent.choices = this.getCopyOfChoicesFromComponent(
-      nodeId,
-      componentId
-    );
-  }
-
-  getCopyOfChoicesFromComponent(nodeId, componentId) {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
-    return this.UtilService.makeCopyOfJSONObject(component.choices);
-  }
 }
 
 export const EditMultipleChoiceAdvancedComponent = {

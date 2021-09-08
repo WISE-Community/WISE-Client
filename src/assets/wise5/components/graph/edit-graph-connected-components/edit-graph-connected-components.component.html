@@ -8,6 +8,7 @@
         (connectedComponentChange)="connectedComponentNodeIdChanged(connectedComponent)">
     </edit-connected-component-node-select>
     <edit-connected-component-component-select
+        [componentId]="componentId"
         [connectedComponent]="connectedComponent"
         [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
         (connectedComponentChange)="connectedComponentComponentIdChanged(connectedComponent)">

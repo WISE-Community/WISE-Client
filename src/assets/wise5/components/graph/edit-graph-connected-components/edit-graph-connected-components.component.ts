@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../app/authoring-tool/edit-connected-components-with-background/edit-connected-components-with-background.component';
-import { ProjectService } from '../../../services/projectService';
 
 @Component({
   selector: 'edit-graph-connected-components',
@@ -12,10 +11,6 @@ import { ProjectService } from '../../../services/projectService';
 })
 export class EditGraphConnectedComponentsComponent extends EditConnectedComponentsWithBackgroundComponent {
   componentTypesThatCanImportWorkAsBackground: string[] = ['ConceptMap', 'Draw', 'Label'];
-
-  constructor(protected ProjectService: ProjectService) {
-    super(ProjectService);
-  }
 
   addConnectedComponentSeriesNumber(connectedComponent: any) {
     if (connectedComponent.seriesNumbers == null) {
@@ -60,7 +55,6 @@ export class EditGraphConnectedComponentsComponent extends EditConnectedComponen
       connectedComponent.yColumn = 1;
     }
     connectedComponent.type = 'importWork';
-    this.connectedComponentChanged();
   }
 
   connectedComponentShowClassmateWorkChanged(connectedComponent: any) {

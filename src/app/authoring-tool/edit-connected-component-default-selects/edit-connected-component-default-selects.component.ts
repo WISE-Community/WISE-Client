@@ -7,6 +7,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class EditConnectedComponentDefaultSelectsComponent implements OnInit {
   @Input()
+  componentId: string;
+
+  @Input()
   connectedComponent: any;
 
   @Input()

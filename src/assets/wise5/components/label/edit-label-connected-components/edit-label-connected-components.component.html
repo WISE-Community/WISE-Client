@@ -24,19 +24,22 @@
         <mat-label i18n>Characters Per Line</mat-label>
         <input matInput
             [(ngModel)]="connectedComponent.charactersPerLine"
-            (ngModelChange)="connectedComponentChanged()"/>
+            (ngModelChange)="connectedComponentChanged()"
+            type="number"/>
       </mat-form-field>
       <mat-form-field>
         <mat-label i18n>Space Inbetween Lines</mat-label>
         <input matInput
             [(ngModel)]="connectedComponent.spaceInbetweenLines"
-            (ngModelChange)="connectedComponentChanged()"/>
+            (ngModelChange)="connectedComponentChanged()"
+            type="number"/>
       </mat-form-field>
       <mat-form-field>
         <mat-label i18n>Font Size</mat-label>
         <input matInput
             [(ngModel)]="connectedComponent.fontSize"
-            (ngModelChange)="connectedComponentChanged()"/>
+            (ngModelChange)="connectedComponentChanged()"
+            type="number"/>
       </mat-form-field>
     </ng-container>
     <span fxFlex></span>

@@ -11,11 +11,9 @@ import { EditConnectedComponentsComponent } from '../../../../../app/authoring-t
 })
 export class EditTableConnectedComponentsComponent extends EditConnectedComponentsComponent {
   afterComponentIdChanged(connectedComponent: any) {
-    super.afterComponentIdChanged(connectedComponent);
     const connectedComponentType = this.getConnectedComponentType(connectedComponent);
     if (connectedComponentType !== 'Graph') {
       delete connectedComponent.showDataAtMouseX;
     }
-    this.connectedComponentChanged();
   }
 }

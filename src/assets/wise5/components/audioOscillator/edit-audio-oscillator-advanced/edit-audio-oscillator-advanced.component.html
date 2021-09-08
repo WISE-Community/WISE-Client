@@ -26,7 +26,8 @@
     [node-id]="$ctrl.nodeId"
     [component-id]="$ctrl.componentId"
     [allowed-connected-component-types]="$ctrl.allowedConnectedComponentTypes"
+    [component-content]="$ctrl.authoringComponentContent"
     [connected-components]="$ctrl.authoringComponentContent.connectedComponents"
-    (connected-Components-Changed)="$ctrl.connectedComponentsChanged($event)">
+    (connected-components-changed)="$ctrl.connectedComponentsChanged($event)">
 </edit-connected-components>
 <edit-component-json [node-id]="$ctrl.nodeId" [component-id]="$ctrl.componentId"></edit-component-json>

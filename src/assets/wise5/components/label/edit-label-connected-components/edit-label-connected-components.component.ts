@@ -35,6 +35,5 @@ export class EditLabelConnectedComponentsComponent extends EditConnectedComponen
     if (!this.canConnectedComponentTypeImportWorkAsBackground(connectedComponent)) {
       delete connectedComponent.importWorkAsBackground;
     }
-    this.connectedComponentChanged();
   }
 }

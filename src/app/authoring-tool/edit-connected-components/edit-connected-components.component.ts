@@ -61,8 +61,8 @@ export class EditConnectedComponentsComponent implements OnInit {
     if (numberOfAllowedComponents === 1) {
       connectedComponent.componentId = allowedComponent.id;
       connectedComponent.type = 'importWork';
-      this.afterComponentIdChanged(connectedComponent);
     }
+    this.afterComponentIdChanged(connectedComponent);
     this.automaticallySetConnectedComponentTypeIfPossible(connectedComponent);
   }
 
@@ -76,7 +76,6 @@ export class EditConnectedComponentsComponent implements OnInit {
     connectedComponent.componentId = null;
     connectedComponent.type = null;
     this.automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent);
-    this.afterComponentIdChanged(connectedComponent);
     this.connectedComponentChanged();
   }
 
@@ -118,10 +117,6 @@ export class EditConnectedComponentsComponent implements OnInit {
     this.connectedComponentsChanged.emit(this.connectedComponents);
   }
 
-  isApplicationNode(nodeId: string): boolean {
-    return this.ProjectService.isApplicationNode(nodeId);
-  }
-
   getComponentsByNodeId(nodeId: string): any[] {
     return this.ProjectService.getComponentsByNodeId(nodeId);
   }
@@ -139,5 +134,9 @@ export class EditConnectedComponentsComponent implements OnInit {
       return component.type;
     }
     return null;
+  }
+
+  connectedComponentTypeIsSpecificType(connectedComponent: any, componentType: string): boolean {
+    return this.getConnectedComponentType(connectedComponent) === componentType;
   }
 }

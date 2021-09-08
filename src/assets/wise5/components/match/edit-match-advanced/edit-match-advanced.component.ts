@@ -19,26 +19,6 @@ class EditMatchAdvancedController extends EditAdvancedComponentAngularJSControll
   isNotebookEnabled(): boolean {
     return this.NotebookService.isNotebookEnabled();
   }
-
-  afterComponentIdChanged(connectedComponent: any): void {
-    if (
-      confirm(
-        $localize`Do you want to copy the choices and buckets from the connected component?\n\nWarning: This will delete all existing choices and buckets in this component.`
-      )
-    ) {
-      const connectedComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-        connectedComponent.nodeId,
-        connectedComponent.componentId
-      );
-      this.authoringComponentContent.choices = connectedComponentContent.choices;
-      this.authoringComponentContent.buckets = connectedComponentContent.buckets;
-      this.authoringComponentContent.feedback = connectedComponentContent.feedback;
-      this.authoringComponentContent.ordered = connectedComponentContent.ordered;
-      this.authoringComponentContent.canCreateChoices = connectedComponentContent.canCreateChoices;
-      this.authoringComponentContent.importPrivateNotes =
-        connectedComponentContent.importPrivateNotes;
-    }
-  }
 }
 
 export const EditMatchAdvancedComponent = {

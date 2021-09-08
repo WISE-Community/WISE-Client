@@ -5,11 +5,12 @@
   <edit-component-rubric [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-rubric>
   <edit-component-tags [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-tags>
 </div>
-<edit-connected-components
+<edit-discussion-connected-components
     [node-id]="$ctrl.nodeId"
     [component-id]="$ctrl.componentId"
     [allowed-connected-component-types]="$ctrl.allowedConnectedComponentTypes"
+    [component-content]="$ctrl.authoringComponentContent"
     [connected-components]="$ctrl.authoringComponentContent.connectedComponents"
-    (connected-Components-Changed)="$ctrl.connectedComponentsChanged($event)">
-</edit-connected-components>
+    (connected-components-changed)="$ctrl.connectedComponentsChanged($event)">
+</edit-discussion-connected-components>
 <edit-component-json [node-id]="$ctrl.nodeId" [component-id]="$ctrl.componentId"></edit-component-json>

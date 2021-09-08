@@ -4,6 +4,7 @@
     class="connected-components-div">
   <div fxLayout="row wrap" fxLayoutGap="20px">
     <edit-connected-component-default-selects
+        [componentId]="componentId"
         [connectedComponent]="connectedComponent"
         [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
         (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"

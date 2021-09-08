@@ -2,24 +2,6 @@ import { EditAdvancedComponentAngularJSController } from '../../../../../app/aut
 
 class EditDiscussionAdvancedController extends EditAdvancedComponentAngularJSController {
   allowedConnectedComponentTypes = ['Discussion'];
-
-  connectedComponentTypeChanged(connectedComponent) {
-    this.changeAllDiscussionConnectedComponentTypesToMatch(connectedComponent.type);
-    super.connectedComponentTypeChanged(connectedComponent);
-  }
-
-  changeAllDiscussionConnectedComponentTypesToMatch(connectedComponentType) {
-    for (const connectedComponent of this.authoringComponentContent.connectedComponents) {
-      connectedComponent.type = connectedComponentType;
-    }
-  }
-
-  automaticallySetConnectedComponentTypeIfPossible(connectedComponent) {
-    if (connectedComponent.componentId != null) {
-      const firstConnectedComponent = this.authoringComponentContent.connectedComponents[0];
-      connectedComponent.type = firstConnectedComponent.type;
-    }
-  }
 }
 
 export const EditDiscussionAdvancedComponent = {
