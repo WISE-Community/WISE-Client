@@ -98,6 +98,13 @@ const Component = {
               [workgroup-id]="workgroupId"
               [mode]="mode">
           </concept-map-student>
+          <dialog-guidance-student ng-switch-when="DialogGuidance"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </dialog-guidance-student>
           <discussion-student ng-switch-when="Discussion"
               [node-id]="nodeId"
               [component-content]="componentContent"

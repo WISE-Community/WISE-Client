@@ -400,7 +400,7 @@ export class UtilService {
       { type: 'Animation', name: this.getComponentTypeLabel('Animation') },
       { type: 'AudioOscillator', name: this.getComponentTypeLabel('AudioOscillator') },
       { type: 'ConceptMap', name: this.getComponentTypeLabel('ConceptMap') },
-      { type: 'Discussion', name: this.getComponentTypeLabel('Discussion') },
+      { type: 'DialogGuidance', name: this.getComponentTypeLabel('DialogGuidance') },
       { type: 'Draw', name: this.getComponentTypeLabel('Draw') },
       { type: 'Embedded', name: this.getComponentTypeLabel('Embedded') },
       { type: 'Graph', name: this.getComponentTypeLabel('Graph') },

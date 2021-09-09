@@ -69,6 +69,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
 import { MatSliderModule } from '@angular/material/slider';
 import { setUpLocationSync } from '@angular/router/upgrade';
+import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance/dialogGuidanceService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -124,6 +125,7 @@ export class EmptyComponent {}
     ConfigService,
     CRaterService,
     DataExportService,
+    DialogGuidanceService,
     DiscussionService,
     DrawService,
     EmbeddedService,

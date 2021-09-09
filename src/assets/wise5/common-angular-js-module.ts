@@ -25,6 +25,7 @@ import { ConfigService } from './services/configService';
 import { CRaterService } from './services/cRaterService';
 import './directives/components';
 import { ComponentService } from './components/componentService';
+import './components/dialogGuidance/dialogGuidanceStudentComponentModule';
 import './components/discussion/discussionComponentModule';
 import './components/draw/drawComponentModule';
 import './components/embedded/embeddedComponentModule';
@@ -85,6 +86,7 @@ angular
     'classResponseComponentModule',
     'components',
     'conceptMapComponentModule',
+    'dialogGuidanceStudentComponentModule',
     'discussionComponentModule',
     'drawComponentModule',
     'embeddedComponentModule',
