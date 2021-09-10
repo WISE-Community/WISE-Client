@@ -1,9 +1,10 @@
 export class DialogResponse {
   text: string;
   user: string;
+  timestamp: number;
 
-  constructor(text: string, user: string) {
+  constructor(text: string, timestamp: number) {
     this.text = text;
-    this.user = user;
+    this.timestamp = timestamp;
   }
 }

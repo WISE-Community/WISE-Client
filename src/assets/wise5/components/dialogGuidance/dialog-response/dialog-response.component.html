@@ -1,2 +1,6 @@
-<p>{{response.text}}</p>
-<p>{{response.user}}</p>
+<div fxLayoutAlign="start start">
+  <mat-icon *ngIf="response.user === 'Student'">face</mat-icon>
+  <mat-icon *ngIf="response.user === 'Computer'">school</mat-icon>
+  <span>: </span>
+  <span>{{response.text}}</span>
+</div>
