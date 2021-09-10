@@ -71,6 +71,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { setUpLocationSync } from '@angular/router/upgrade';
 import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance/dialogGuidanceService';
 import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
+import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -79,6 +80,7 @@ export class EmptyComponent {}
   declarations: [
     ClassResponse,
     DialogResponseComponent,
+    DialogResponsesComponent,
     EmptyComponent,
     HelpIconComponent,
     NodeIconComponent,
@@ -158,6 +160,7 @@ export class EmptyComponent {}
     ClassResponse,
     CommonModule,
     DialogResponseComponent,
+    DialogResponsesComponent,
     DragDropModule,
     EditorModule,
     FlexLayoutModule,
