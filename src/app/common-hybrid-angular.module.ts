@@ -70,6 +70,7 @@ import { NotebookModule } from './notebook/notebook.module';
 import { MatSliderModule } from '@angular/material/slider';
 import { setUpLocationSync } from '@angular/router/upgrade';
 import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance/dialogGuidanceService';
+import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -77,6 +78,7 @@ export class EmptyComponent {}
 @NgModule({
   declarations: [
     ClassResponse,
+    DialogResponseComponent,
     EmptyComponent,
     HelpIconComponent,
     NodeIconComponent,
@@ -155,6 +157,7 @@ export class EmptyComponent {}
   exports: [
     ClassResponse,
     CommonModule,
+    DialogResponseComponent,
     DragDropModule,
     EditorModule,
     FlexLayoutModule,

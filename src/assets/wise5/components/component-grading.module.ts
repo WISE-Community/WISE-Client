@@ -10,6 +10,7 @@ import { WorkgroupComponentGradingComponent } from '../classroomMonitor/classroo
 import './animation/animationGradingComponentModule';
 import './audioOscillator/audioOscillatorGradingComponentModule';
 import './conceptMap/conceptMapGradingComponentModule';
+import './dialogGuidance/dialogGuidanceGradingComponentModule';
 import './discussion/discussionGradingComponentModule';
 import './draw/drawGradingComponentModule';
 import './embedded/embeddedGradingComponentModule';
@@ -25,6 +26,7 @@ export default angular
     'animationGradingComponentModule',
     'audioOscillatorGradingComponentModule',
     'conceptMapGradingComponentModule',
+    'dialogGuidanceGradingComponentModule',
     'discussionGradingComponentModule',
     'drawGradingComponentModule',
     'embeddedGradingComponentModule',

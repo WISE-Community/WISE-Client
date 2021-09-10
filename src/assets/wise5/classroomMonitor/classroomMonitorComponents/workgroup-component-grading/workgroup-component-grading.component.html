@@ -18,6 +18,12 @@
         [componentId]="component.id"
         [componentState]="latestComponentState">
     </concept-map-grading>
+    <dialog-guidance-grading
+        *ngIf="component.type === 'DialogGuidance'"
+        [nodeId]="nodeId"
+        [componentId]="component.id"
+        [componentState]="latestComponentState">
+    </dialog-guidance-grading>
     <discussion-grading
         *ngIf="component.type === 'Discussion'"
         [nodeId]="nodeId"
