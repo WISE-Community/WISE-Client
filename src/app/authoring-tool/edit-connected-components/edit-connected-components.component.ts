@@ -17,10 +17,10 @@ export class EditConnectedComponentsComponent implements OnInit {
   nodeId: string;
 
   @Input()
-  allowedConnectedComponentTypes: string[];
+  allowedConnectedComponentTypes: string[] = [];
 
   @Input()
-  connectedComponents: any[];
+  connectedComponents: any[] = [];
 
   @Output()
   connectedComponentsChanged: EventEmitter<any> = new EventEmitter();

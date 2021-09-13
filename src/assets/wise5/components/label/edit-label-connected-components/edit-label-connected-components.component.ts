@@ -32,8 +32,5 @@ export class EditLabelConnectedComponentsComponent extends EditConnectedComponen
       connectedComponent.spaceInbetweenLines ??= 40;
       connectedComponent.fontSize ??= 16;
     }
-    if (!this.canConnectedComponentTypeImportWorkAsBackground(connectedComponent)) {
-      delete connectedComponent.importWorkAsBackground;
-    }
   }
 }
