@@ -1,0 +1,27 @@
+$border-color: #dddddd;
+
+.initial-members {
+  padding: 8px;
+}
+
+.member-list {
+  border: 1px solid $border-color;
+}
+
+.member-list-item {
+  background-color: white;
+  border-bottom: 1px solid $border-color;
+  padding: 0 8px;
+
+  &:last-of-type {
+    border-bottom: 0 none;
+  }
+}
+
+.member {
+  padding: 4px;
+
+  button {
+    text-transform: none;
+  }
+}

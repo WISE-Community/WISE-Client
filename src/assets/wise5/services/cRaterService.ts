@@ -21,15 +21,11 @@ export class CRaterService {
     cRaterResponseId: number,
     studentData: any
   ): Observable<any> {
-    const url = this.ConfigService.getCRaterRequestURL() + '/score';
-    const params = new HttpParams()
-      .set('itemId', cRaterItemId)
-      .set('responseId', cRaterResponseId + '')
-      .set('studentData', studentData);
-    const options = {
-      params: params
-    };
-    return this.http.get(url, options);
+    return this.http.post(`${this.ConfigService.getCRaterRequestURL()}/score`, {
+      itemId: cRaterItemId,
+      responseId: cRaterResponseId,
+      responseText: studentData
+    });
   }
 
   /**
@@ -286,8 +282,8 @@ export class CRaterService {
     return this.http
       .get(url, options)
       .toPromise()
-      .then((response: any) => {
-        return response.isAvailable;
+      .then((isAvailable: boolean) => {
+        return isAvailable;
       });
   }
 }
