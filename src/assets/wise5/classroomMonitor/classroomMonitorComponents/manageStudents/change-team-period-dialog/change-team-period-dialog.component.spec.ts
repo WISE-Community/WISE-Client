@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfigService } from '../../../../services/configService';
 
 import { ChangeTeamPeriodDialogComponent } from './change-team-period-dialog.component';
@@ -36,7 +37,12 @@ describe('ChangeTeamPeriodDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ChangeTeamPeriodDialogComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, MatSnackBarModule],
+      imports: [
+        BrowserAnimationsModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        MatSnackBarModule
+      ],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: MAT_DIALOG_DATA, useValue: team }

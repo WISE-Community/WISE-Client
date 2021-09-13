@@ -10,6 +10,9 @@ import { ManageTeamComponent } from './manage-team.component';
 class ConfigServiceStub {
   getPermissions() {}
   getAvatarColorForWorkgroupId() {}
+  retrieveConfig() {
+    return {};
+  }
 }
 
 class UpdateWorkgroupServiceStub {}
@@ -29,9 +32,9 @@ describe('ManageTeamComponent', () => {
         { provide: MatDialog, useValue: {} }
       ]
     });
-    configService = TestBed.inject(ConfigService);
   });
   beforeEach(() => {
+    configService = TestBed.inject(ConfigService);
     fixture = TestBed.createComponent(ManageTeamComponent);
     component = fixture.componentInstance;
     component.team = { workgroupId: 3, users: [{ id: 1 }] };
