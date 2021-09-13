@@ -19,6 +19,7 @@ export class WorkgroupComponentGradingComponent {
   component: any;
   componentStates: any[];
   latestComponentState: any;
+  latestComponentStateId: number;
   teacherWorkgroupId: number;
 
   constructor(
@@ -43,6 +44,9 @@ export class WorkgroupComponentGradingComponent {
       this.nodeId,
       this.componentId
     );
+    if (this.latestComponentState != null) {
+      this.latestComponentStateId = this.latestComponentState.id;
+    }
   }
 
   showRevisions() {
