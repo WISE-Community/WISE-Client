@@ -26,7 +26,8 @@
             [cdkDragDisabled]="isDisabled"
             (cdkDragEntered)="dragEnter($event)"
             (cdkDragExited)="dragExit($event)"
-            *ngFor="let item of buckets[0].items">
+            *ngFor="let item of buckets[0].items; let position = index;"
+            [cdkDragData]="position">
           <match-choice-item [buckets]="buckets"
               [item]="item"
               [hasCorrectAnswer]="hasCorrectAnswer"
@@ -63,7 +64,8 @@
               [cdkDragDisabled]="isDisabled"
               (cdkDragEntered)="dragEnter($event)"
               (cdkDragExited)="dragExit($event)"
-              *ngFor="let item of bucket.items">
+              *ngFor="let item of bucket.items; let position = index;"
+              [cdkDragData]="position">
             <match-choice-item [buckets]="buckets"
                 [item]="item"
                 [hasCorrectAnswer]="hasCorrectAnswer"
