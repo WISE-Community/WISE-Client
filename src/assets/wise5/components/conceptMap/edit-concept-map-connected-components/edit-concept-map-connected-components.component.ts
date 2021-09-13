@@ -19,6 +19,7 @@ export class EditConceptMapConnectedComponentsComponent extends EditConnectedCom
   ];
 
   afterComponentIdChanged(connectedComponent: any): void {
+    super.afterComponentIdChanged(connectedComponent);
     if (this.connectedComponentTypeIsSpecificType(connectedComponent, 'ConceptMap')) {
       this.askIfWantToCopyNodesAndLinks(connectedComponent);
     }

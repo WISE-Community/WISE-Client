@@ -19,6 +19,7 @@ export class EditDrawConnectedComponentsComponent extends EditConnectedComponent
   ];
 
   afterComponentIdChanged(connectedComponent: any): void {
+    super.afterComponentIdChanged(connectedComponent);
     this.setUpdateOnIfApplicable(connectedComponent);
   }
 
