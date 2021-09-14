@@ -5,7 +5,7 @@ import { ProjectService } from '../../../services/projectService';
 @Component({
   selector: 'table-grading',
   templateUrl: 'table-grading.component.html',
-  styleUrls: ['table-grading.component.scss']
+  styleUrls: ['../table-student/table-student.component.scss']
 })
 export class TableGrading extends ComponentGrading {
   tableData: any[];

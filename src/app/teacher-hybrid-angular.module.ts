@@ -23,6 +23,9 @@ import { MoveNodesService } from '../assets/wise5/services/moveNodesService';
 import { AuthoringToolModule } from './teacher/authoring-tool.module';
 import { ClassroomMonitorModule } from './teacher/classroom-monitor.module';
 import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.component';
+import { UpdateWorkgroupService } from './services/updateWorkgroupService';
+import { GetWorkgroupService } from './services/getWorkgroupService';
+import { WorkgroupService } from './services/workgroup.service';
 
 @NgModule({
   declarations: [StepToolsComponent],
@@ -32,6 +35,7 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
     CopyNodesService,
     CopyProjectService,
     { provide: DataService, useExisting: TeacherDataService },
+    GetWorkgroupService,
     DeleteNodeService,
     ImportComponentService,
     InsertComponentService,
@@ -44,7 +48,9 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
     { provide: ProjectService, useExisting: TeacherProjectService },
     TeacherDataService,
     TeacherProjectService,
-    TeacherWebSocketService
+    TeacherWebSocketService,
+    UpdateWorkgroupService,
+    WorkgroupService
   ]
 })
 export class TeacherAngularJSModule {

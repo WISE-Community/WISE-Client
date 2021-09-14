@@ -69,6 +69,7 @@ export default angular
               'TeacherDataService',
               'config',
               (TeacherDataService, config) => {
+                TeacherDataService.currentPeriod = null;
                 return TeacherDataService.retrieveRunStatus();
               }
             ],

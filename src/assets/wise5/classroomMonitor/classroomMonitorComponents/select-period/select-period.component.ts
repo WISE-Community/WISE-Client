@@ -2,7 +2,8 @@
 
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { StudentStatusService } from '../../../services/studentStatusService';
+import { WorkgroupService } from '../../../../../app/services/workgroup.service';
+import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
@@ -21,9 +22,10 @@ export class SelectPeriodComponent {
   subscriptions: Subscription = new Subscription();
 
   constructor(
+    private ConfigService: ConfigService,
     private ProjectService: TeacherProjectService,
-    private StudentStatusService: StudentStatusService,
-    private TeacherDataService: TeacherDataService
+    private TeacherDataService: TeacherDataService,
+    private WorkgroupService: WorkgroupService
   ) {}
 
   ngOnInit() {
@@ -34,10 +36,16 @@ export class SelectPeriodComponent {
     this.updateSelectedText();
     this.periods = this.TeacherDataService.getPeriods();
     this.populateNumWorkgroupsInPeriod();
+    this.tryHideAllPeriods();
     this.subscriptions.add(
       this.TeacherDataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         this.currentPeriod = currentPeriod;
         this.updateSelectedText();
+      })
+    );
+    this.subscriptions.add(
+      this.ConfigService.configRetrieved$.subscribe(() => {
+        this.populateNumWorkgroupsInPeriod();
       })
     );
   }
@@ -47,10 +55,22 @@ export class SelectPeriodComponent {
   }
 
   populateNumWorkgroupsInPeriod() {
-    for (let i = 0; i < this.periods.length; i++) {
-      const period = this.periods[i];
-      const id = i === 0 ? -1 : period.periodId;
-      period.numWorkgroupsInPeriod = this.getNumberOfWorkgroupsInPeriod(id);
+    let totalNumTeams = 0;
+    for (const period of this.periods.slice(1)) {
+      const numTeamsInPeriod = this.getNumberOfWorkgroupsInPeriod(period.periodId);
+      period.numWorkgroupsInPeriod = numTeamsInPeriod;
+      totalNumTeams += numTeamsInPeriod;
+    }
+    this.periods[0].numWorkgroupsInPeriod = totalNumTeams; // all periods
+  }
+
+  /**
+   * Don't show all periods if there is only one period in the run
+   */
+  tryHideAllPeriods() {
+    if (this.periods.length === 2) {
+      // this.periods contains all periods and the one period
+      this.periods = this.periods.slice(1);
     }
   }
 
@@ -64,8 +84,8 @@ export class SelectPeriodComponent {
     this.TeacherDataService.setCurrentPeriod(this.getPeriodByPeriodId(this.selectedPeriodId));
   }
 
-  getNumberOfWorkgroupsInPeriod(periodId) {
-    return this.StudentStatusService.getWorkgroupIdsOnNode(this.rootNodeId, periodId).length;
+  getNumberOfWorkgroupsInPeriod(periodId: number): number {
+    return this.WorkgroupService.getWorkgroupsInPeriod(periodId).size;
   }
 
   updateSelectedText() {

@@ -1,6 +1,6 @@
-.mat-dialog-container {
+mat-dialog-container.mat-dialog-container {
   max-width: 100%;
-  padding: 16px !important;
+  padding: 16px;
 
   .mat-dialog-content {
     margin: 0 -16px;
@@ -8,29 +8,25 @@
     font-size: mat-font-size($config, body-1);
   }
 
-  .mat-dialog-content--scroll {
+  .dialog-content-scroll {
     padding-top: 16px;
     padding-bottom: 16px;
   }
 }
 
-.dialog-menu {
-  margin: -8px -8px 8px 8px;
-}
-
-.mat-dialog--sm {
+.dialog-sm {
   width: breakpoint('sm.min');
 }
 
-.mat-dialog--md {
+.dialog-md {
   width: breakpoint('md.min');
 }
 
-.mat-dialog--lg {
+.dialog-lg {
   width: breakpoint('lg.min');
 }
 
-.mat-dialog--xl {
+.dialog-xl {
   width: breakpoint('xl.min');
 }
 

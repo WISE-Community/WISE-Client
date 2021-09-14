@@ -166,7 +166,7 @@ export class DiscussionService extends ComponentService {
     return topLevelComponentStateIdsFound.indexOf(componentStateId) !== -1;
   }
 
-  getPostAndAllRepliesByComponentIds(componentIds: string[], componentStateId: string) {
+  getPostAndAllRepliesByComponentIds(componentIds: string[], componentStateId: number) {
     const postAndAllReplies = [];
     const componentStatesForComponentIds = this.TeacherDataService.getComponentStatesByComponentIds(
       componentIds

@@ -57,7 +57,6 @@ export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectCompone
   }
 
   setWorkgroups() {
-    this.workgroups = this.ConfigService.getClassmateUserInfos();
     this.filterWorkgroupsBySelectedPeriod();
     const students = this.getStudentsFromWorkgroups();
     this.workgroups = this.canViewStudentNames

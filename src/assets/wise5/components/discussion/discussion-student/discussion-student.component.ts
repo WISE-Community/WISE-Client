@@ -301,7 +301,7 @@ export class DiscussionStudent extends ComponentStudent {
       this.StudentDataService.studentWorkReceived$.subscribe((componentState) => {
         if (
           (this.isWorkFromThisComponent(componentState) ||
-            this.isWorkFromConnectedComponent(componentState)) &&
+            this.isFromConnectedComponent(componentState)) &&
           this.isWorkFromClassmate(componentState) &&
           this.retrievedClassmateResponses
         ) {
@@ -317,20 +317,6 @@ export class DiscussionStudent extends ComponentStudent {
 
   isWorkFromThisComponent(componentState) {
     return this.isForThisComponent(componentState);
-  }
-
-  isWorkFromConnectedComponent(componentState) {
-    if (this.componentContent.connectedComponents != null) {
-      for (const connectedComponent of this.componentContent.connectedComponents) {
-        if (
-          connectedComponent.nodeId === componentState.nodeId &&
-          connectedComponent.componentId === componentState.componentId
-        ) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   getClassmateResponses(components = [{ nodeId: this.nodeId, componentId: this.componentId }]) {

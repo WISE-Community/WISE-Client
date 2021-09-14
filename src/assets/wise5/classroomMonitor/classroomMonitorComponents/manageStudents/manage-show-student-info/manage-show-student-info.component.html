@@ -1,0 +1,33 @@
+<h1 class="mat-dialog-title">
+  <span class="username" *ngIf="canViewStudentNames">{{user.name}}</span>
+  <span *ngIf="!canViewStudentNames" i18n>Student {{user.id}}</span>
+</h1>
+<div mat-dialog-content>
+  <div class="info-block">
+    <table>
+      <tr>
+        <td><strong i18n>Student ID</strong></td>
+        <td>{{user.id}}</td>
+      </tr>
+      <tr class="username" *ngIf="canViewStudentNames">
+        <td><strong i18n>Username</strong></td>
+        <td>{{user.username}}</td>
+      </tr>
+      <tr>
+        <td><strong i18n>Most Recent Login</strong></td>
+        <td>{{ user.lastLoginTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}</td>
+      </tr>
+      <tr>
+        <td><strong i18n>Registration Date</strong></td>
+        <td>{{ user.signUpTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}</td>
+      </tr>
+      <tr>
+        <td><strong i18n>Number of Logins</strong></td>
+        <td>{{user.numberOfLogins}}</td>
+      </tr>
+    </table>
+    </div>
+  </div>
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button mat-dialog-close i18n>Close</button>
+</div>

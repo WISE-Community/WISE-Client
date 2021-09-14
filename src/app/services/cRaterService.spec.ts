@@ -13,9 +13,9 @@ describe('CRaterService', () => {
       imports: [HttpClientTestingModule, UpgradeModule],
       providers: [ConfigService, CRaterService]
     });
-    http = TestBed.get(HttpTestingController);
-    configService = TestBed.get(ConfigService);
-    service = TestBed.get(CRaterService);
+    http = TestBed.inject(HttpTestingController);
+    configService = TestBed.inject(ConfigService);
+    service = TestBed.inject(CRaterService);
   });
 
   makeCRaterScoringRequest();
@@ -39,13 +39,14 @@ function makeCRaterScoringRequest() {
       spyOn(configService, 'getCRaterRequestURL').and.returnValue('/c-rater');
       const itemId = 'ColdBeverage1Sub';
       const responseId = 1;
-      const studentData = 'Hello World.';
-      service.makeCRaterScoringRequest(itemId, responseId, studentData).subscribe();
-      http.expectOne({
-        url:
-          `/c-rater/score?itemId=${itemId}&responseId=${responseId}` +
-          `&studentData=${encodeURI(studentData)}`,
-        method: 'GET'
+      const responseText = 'Hello World.';
+      service.makeCRaterScoringRequest(itemId, responseId, responseText).subscribe();
+      const request = http.expectOne(`/c-rater/score`);
+      expect(request.request.method).toEqual('POST');
+      expect(request.request.body).toEqual({
+        itemId: itemId,
+        responseId: responseId,
+        responseText: responseText
       });
     });
   });

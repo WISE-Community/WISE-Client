@@ -1,0 +1,10 @@
+<div class="view-content view-content--with-sidemenu">
+  <div class="l-constrained">
+    <div class="md-padding">
+      <p class="info" i18n>Tip: Drag a student to change teams within current period.</p>
+      <ng-container *ngFor="let period of periods">
+        <manage-period *ngIf="period.periodId !== -1" [period]="period"></manage-period>
+      </ng-container>
+    </div>
+  </div>
+</div>

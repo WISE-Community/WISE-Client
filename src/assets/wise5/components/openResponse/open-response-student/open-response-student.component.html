@@ -21,18 +21,8 @@
     Import Classmate Work
   </button>
 </div>
-<div class="student-response-wrapper" [ngClass]="{'input-wrapper--richtext': isRichTextEnabled}">
-  <textarea *ngIf="isRichTextEnabled && !isDisabled"
-        [(ngModel)]="studentResponse"
-        (ngModelChange)="studentDataChanged()"
-        [disabled]="isDisabled">
-  </textarea>
-  <div *ngIf="isRichTextEnabled && isDisabled"
-      class="input--textarea input--textarea--disabled">
-    <span [innerHTML]="studentResponse"></span>
-  </div>
+<div class="student-response-wrapper">
   <textarea
-      *ngIf="!isRichTextEnabled"
       class="student-response"
       [(ngModel)]="studentResponse"
       (ngModelChange)="studentDataChanged()"

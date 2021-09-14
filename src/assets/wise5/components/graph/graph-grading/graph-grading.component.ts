@@ -6,6 +6,7 @@ import { GraphService } from '../graphService';
 
 @Component({
   selector: 'graph-grading',
+  styleUrls: ['../graph-student/graph-student.component.scss'],
   templateUrl: 'graph-grading.component.html'
 })
 export class GraphGrading extends ComponentGrading {
@@ -49,6 +50,7 @@ export class GraphGrading extends ComponentGrading {
       this.componentState.studentData.trials
     );
     this.drawGraph(this.componentState);
+
   }
 
   getAxis(axisName: string, componentContent: any, componentState: any): any {

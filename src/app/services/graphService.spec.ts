@@ -58,6 +58,8 @@ describe('GraphService', () => {
   seriesHasDataPoint();
   generateImageFromRenderedComponentState();
   getHighchartsDiv();
+  getTheSeriesFromTheTrials();
+  getTheCategoryByIndex();
 });
 
 function createComponentState(studentData: any, isSubmit: boolean = false) {
@@ -426,4 +428,70 @@ function generateImageFromRenderedComponentState() {
 
 function getHighchartsDiv() {
   // TODO
+}
+
+function getTheSeriesFromTheTrials() {
+  it('should get the series from the trials', () => {
+    const trials = [
+      {
+        name: 'Trial 1',
+        show: true,
+        series: [
+          {
+            name: 'Prediction',
+            data: [
+              [0, 0],
+              [10, 20],
+              [20, 40]
+            ]
+          },
+          {
+            name: 'Actual',
+            data: [
+              [0, 0],
+              [10, 30],
+              [20, 60]
+            ]
+          }
+        ],
+        id: 'u3ijj5vfxd'
+      },
+      {
+        name: 'Trial 2',
+        show: true,
+        series: [
+          {
+            name: 'Prediction',
+            data: [
+              [0, 0],
+              [30, 20],
+              [40, 40]
+            ]
+          },
+          {
+            name: 'Actual',
+            data: [
+              [0, 0],
+              [30, 30],
+              [40, 60]
+            ]
+          }
+        ],
+        id: 'u3ijj5vfxd'
+      }
+    ];
+    const series = service.getSeriesFromTrials(trials);
+    expect(series.length).toEqual(4);
+  });
+}
+
+function getTheCategoryByIndex() {
+  it('should get the category by index', () => {
+    const xAxis = {
+      categories: ['Computers', 'Phones', 'Pizzas']
+    };
+    expect(service.getCategoryByIndex(0, xAxis)).toEqual('Computers');
+    expect(service.getCategoryByIndex(1, xAxis)).toEqual('Phones');
+    expect(service.getCategoryByIndex(2, xAxis)).toEqual('Pizzas');
+  });
 }

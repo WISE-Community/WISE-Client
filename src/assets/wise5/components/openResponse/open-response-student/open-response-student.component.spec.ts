@@ -1,12 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
 import { of } from 'rxjs';
+import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { ComponentHeader } from '../../../directives/component-header/component-header.component';
+import { ComponentSaveSubmitButtons } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { AnnotationService } from '../../../services/annotationService';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { ConfigService } from '../../../services/configService';
@@ -43,13 +48,22 @@ describe('OpenResponseStudent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       imports: [
+        BrowserAnimationsModule,
         BrowserModule,
+        CommonModule,
+        FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
-        NoopAnimationsModule,
+        MatIconModule,
+        ReactiveFormsModule,
         UpgradeModule
       ],
-      declarations: [OpenResponseStudent],
+      declarations: [
+        ComponentHeader,
+        ComponentSaveSubmitButtons,
+        OpenResponseStudent,
+        PossibleScoreComponent
+      ],
       providers: [
         AnnotationService,
         AudioRecorderService,
@@ -67,7 +81,7 @@ describe('OpenResponseStudent', () => {
         TagService,
         UtilService
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: []
     });
   });
 
@@ -78,6 +92,7 @@ describe('OpenResponseStudent', () => {
       comment: ''
     });
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
+    spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
     component.nodeId = nodeId;
     component.componentContent = {
@@ -99,19 +114,22 @@ describe('OpenResponseStudent', () => {
     fixture.detectChanges();
   });
 
-  setStudentWork();
-  submitWithFeedback();
-  submitWithoutFeedback();
-  getResponse();
+  checkHasFeedbackWhenCRaterIsNotEnabled();
+  checkHasFeedbackWhenCRaterIsEnabledAndNotShowFeedbackOrScore();
+  checkHasFeedbackWhenCRaterIsEnabledAndShowFeedback();
+  checkHasFeedbackWhenCRaterIsEnabledAndShowScore();
   createComponentState();
   createComponentStateAdditionalProcessing();
-  snipButtonClicked();
+  createMergedComponentState();
   hasAudioResponses();
   hasFeedback();
-  createMergedComponentState();
+  mergeObjects();
   removeAudioAttachment();
   removeAudioAttachments();
-  mergeObjects();
+  setStudentWork();
+  snipButtonClicked();
+  submitWithFeedback();
+  submitWithoutFeedback();
 });
 
 function setStudentWork() {
@@ -204,15 +222,6 @@ function expectPopupToBeCalledWith(
   }
   component[functionName](submitsLeft);
   expect(popupSpy).toHaveBeenCalledWith(message);
-}
-
-function getResponse() {
-  describe('getResponse', () => {
-    it('should get response', () => {
-      component.studentResponse = response;
-      expect(component.getResponse()).toEqual(response);
-    });
-  });
 }
 
 function createComponentState() {
@@ -376,5 +385,45 @@ function mergeObjects() {
       expect(destination.height).toEqual(600);
       expect(destination.color).toEqual('blue');
     });
+  });
+}
+
+function checkHasFeedbackWhenCRaterIsNotEnabled() {
+  it('should check has feedback when crater is not enabled', () => {
+    spyOn(TestBed.inject(CRaterService), 'isCRaterEnabled').and.returnValue(false);
+    expect(component.hasFeedback()).toEqual(false);
+  });
+}
+
+function checkHasFeedbackWhenCRaterIsEnabledAndNotShowFeedbackOrScore() {
+  it('should check has feedback when crater is enabled and not show feedback or score', () => {
+    component.componentContent.cRater = {
+      showFeedback: false,
+      showScore: false
+    };
+    spyOn(TestBed.inject(CRaterService), 'isCRaterEnabled').and.returnValue(true);
+    expect(component.hasFeedback()).toEqual(false);
+  });
+}
+
+function checkHasFeedbackWhenCRaterIsEnabledAndShowFeedback() {
+  it('should check has feedback when crater is enabled and show feedback', () => {
+    component.componentContent.cRater = {
+      showFeedback: true,
+      showScore: false
+    };
+    spyOn(TestBed.inject(CRaterService), 'isCRaterEnabled').and.returnValue(true);
+    expect(component.hasFeedback()).toEqual(true);
+  });
+}
+
+function checkHasFeedbackWhenCRaterIsEnabledAndShowScore() {
+  it('should check has feedback when crater is enabled and show score', () => {
+    component.componentContent.cRater = {
+      showFeedback: false,
+      showScore: true
+    };
+    spyOn(TestBed.inject(CRaterService), 'isCRaterEnabled').and.returnValue(true);
+    expect(component.hasFeedback()).toEqual(true);
   });
 }
