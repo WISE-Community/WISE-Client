@@ -28,6 +28,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   isWaitingForComputerResponse: boolean = false;
   responses: DialogResponse[] = [];
   studentResponse: string;
+  workgroupId: number;
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -61,13 +62,18 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
         this.componentState.studentData.responses
       );
     }
+    this.workgroupId = this.ConfigService.getWorkgroupId();
   }
 
   submitStudentResponse(): void {
-    this.addStudentDialogResponse(this.studentResponse);
-    this.submitToCRater(this.studentResponse);
+    this.disableInput();
+    const response = this.studentResponse;
+    this.addStudentDialogResponse(response);
     this.clearStudentResponse();
-    this.studentDataChanged();
+    setTimeout(() => {
+      this.submitToCRater(response);
+      this.studentDataChanged();
+    }, 500);
   }
 
   clearStudentResponse(): void {
@@ -76,7 +82,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   }
 
   addStudentDialogResponse(text: string): void {
-    this.responses.push(new StudentDialogResponse(text, new Date().getTime()));
+    this.responses.push(new StudentDialogResponse(text, new Date().getTime(), this.workgroupId));
   }
 
   addDialogResponse(dialogResponse: DialogResponse): void {
@@ -109,6 +115,14 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.isWaitingForComputerResponse = false;
   }
 
+  disableInput(): void {
+    this.isDisabled = true;
+  }
+
+  enableInput(): void {
+    this.isDisabled = false;
+  }
+
   cRaterSuccessResponse(response: CRaterResponse): void {
     this.hideWaitingForComputerResponse();
     const feedbackRule: FeedbackRule = this.getFeedbackRule(response);
@@ -120,6 +134,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     );
     this.addDialogResponse(computerDialogResponse);
     this.studentDataChanged();
+    this.enableInput();
   }
 
   getFeedbackRule(response: CRaterResponse): FeedbackRule {
@@ -133,6 +148,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   cRaterErrorResponse() {
     this.hideWaitingForComputerResponse();
+    this.enableInput();
   }
 
   createComponentState(action: string): Promise<any> {

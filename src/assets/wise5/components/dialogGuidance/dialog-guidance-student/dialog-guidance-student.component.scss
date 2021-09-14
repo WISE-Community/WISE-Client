@@ -1,19 +1,10 @@
-.student-response-wrapper {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
+@import '~style/abstracts/variables', '~style/abstracts/functions';
 
-.student-response {
-  width: 99%;
-  height: 5em;
-  background-color: #f7f7f7;
-  resize: none;
+.mat-card {
   padding: 8px;
+  margin-top: 16px;
 }
 
-.student-response:focus {
-  outline: none;
-  border: 1px solid rgb(28, 140, 168);
-  border-radius: 0px !important;
-  background-color: #ffffff;
+.mat-icon-button {
+  margin-top: 2px;
 }

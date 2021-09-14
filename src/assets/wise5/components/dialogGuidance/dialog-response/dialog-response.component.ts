@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ConfigService } from '../../../services/configService';
 import { DialogResponse } from '../DialogResponse';
 
 @Component({
@@ -10,7 +11,15 @@ export class DialogResponseComponent implements OnInit {
   @Input()
   response: DialogResponse;
 
-  constructor() {}
+  avatarColor: string;
+  isStudent: boolean;
 
-  ngOnInit(): void {}
+  constructor(protected ConfigService: ConfigService) {}
+
+  ngOnInit(): void {
+    this.isStudent = this.response.user === 'Student';
+    if (this.isStudent) {
+      this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.response.workgroupId);
+    }
+  }
 }
