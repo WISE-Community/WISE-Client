@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-class UrlParameter {
+export class UrlParameter {
   name: string;
   key: string;
   description: string;
   type: string;
-  allowedValues: any[];
+  options: any[];
 }
 
 @Component({
@@ -17,10 +17,10 @@ class UrlParameter {
 })
 export class AuthorUrlParametersComponent implements OnInit {
   @Input()
-  url: string;
+  url: string = '';
 
   @Input()
-  parameters: UrlParameter[];
+  parameters: UrlParameter[] = [];
 
   @Output()
   generatedUrl: EventEmitter<string> = new EventEmitter();
@@ -36,6 +36,10 @@ export class AuthorUrlParametersComponent implements OnInit {
     this.initializeParameterValuesFromUrl();
   }
 
+  ngOnChanges(changes: any): void {
+    this.initializeParameterValuesFromUrl();
+  }
+
   initializeInputChangedSubscription(): void {
     this.inputChangedSubscription = this.inputChanged
       .pipe(debounceTime(1000), distinctUntilChanged())
@@ -45,6 +49,7 @@ export class AuthorUrlParametersComponent implements OnInit {
   }
 
   initializeDefaultParameterValues(): void {
+    this.parameters ??= [];
     for (const parameter of this.parameters) {
       this.parameterValues[parameter.key] = '';
     }
@@ -53,12 +58,14 @@ export class AuthorUrlParametersComponent implements OnInit {
   initializeParameterValuesFromUrl(): void {
     this.urlWithoutParameters = this.url.split('?')[0];
     const parametersString = this.url.split('?')[1];
-    const parametersKeyValueStrings = parametersString.split('&');
-    for (const parameterKeyValueString of parametersKeyValueStrings) {
-      const keyValue = parameterKeyValueString.split('=');
-      const key = keyValue[0];
-      const value = keyValue[1];
-      this.parameterValues[key] = value ?? '';
+    if (parametersString != null) {
+      const parametersKeyValueStrings = parametersString.split('&');
+      for (const parameterKeyValueString of parametersKeyValueStrings) {
+        const keyValue = parameterKeyValueString.split('=');
+        const key = keyValue[0];
+        const value = keyValue[1];
+        this.parameterValues[key] = value ?? '';
+      }
     }
   }
 

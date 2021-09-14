@@ -1,4 +1,5 @@
-<div *ngFor="let parameter of parameters">
+<div *ngFor="let parameter of parameters"
+    fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
   <div *ngIf="parameter.type === 'select'">
     <mat-form-field>
       <mat-label>{{parameter.name}}</mat-label>
@@ -17,5 +18,8 @@
           [(ngModel)]="parameterValues[parameter.key]"
           (ngModelChange)="inputChanged.next($event)"/>
     </mat-form-field>
+  </div>
+  <div *ngIf="parameter.description != null && parameter.description !== ''">
+    <mat-icon [matTooltip]="parameter.description" matTooltipPosition="right">help</mat-icon>
   </div>
 </div>
