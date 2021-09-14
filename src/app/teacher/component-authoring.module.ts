@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { AnimationAuthoring } from '../../assets/wise5/components/animation/animation-authoring/animation-authoring.component';
 import { AudioOscillatorAuthoring } from '../../assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component';
 import { ConceptMapAuthoring } from '../../assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component';
+import { DialogGuidanceAuthoringComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component';
+import { EditDialogGuidanceFeedbackRulesComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component';
 import { DiscussionAuthoring } from '../../assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component';
 import { DrawAuthoring } from '../../assets/wise5/components/draw/draw-authoring/draw-authoring.component';
 import { EmbeddedAuthoring } from '../../assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component';
@@ -35,6 +37,7 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     AudioOscillatorAuthoring,
     ConceptMapAuthoring,
     DrawAuthoring,
+    DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
@@ -46,6 +49,7 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     EditComponentSubmitButtonComponent,
     EditComponentTagsComponent,
     EditComponentWidthComponent,
+    EditDialogGuidanceFeedbackRulesComponent,
     EditHTMLAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EmbeddedAuthoring,

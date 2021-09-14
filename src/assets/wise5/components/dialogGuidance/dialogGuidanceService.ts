@@ -19,6 +19,8 @@ export class DialogGuidanceService extends ComponentService {
   createComponent() {
     const component: any = super.createComponent();
     component.type = 'DialogGuidance';
+    component.itemId = '';
+    component.feedbackRules = [];
     return component;
   }
 }
