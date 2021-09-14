@@ -139,7 +139,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   getFeedbackRule(response: CRaterResponse): FeedbackRule {
     for (const feedbackRule of this.componentContent.feedbackRules) {
-      if (feedbackRule.ideas[0] === response.getKIScore()) {
+      if (feedbackRule.ideas[0] === response.getDetectedIdeas()[0].name) {
         return feedbackRule;
       }
     }

@@ -1,0 +1,68 @@
+{
+  "idea1": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 1, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      {"name":"idea1", "detected": true, "characterOffsets":[]},
+      {"name":"idea2", "detected": false, "characterOffsets":[]}
+    ]
+  },
+  "idea2": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 2, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      {"name":"idea1", "detected": false, "characterOffsets":[]},
+      {"name":"idea2", "detected": true, "characterOffsets":[]}
+    ]
+  },
+  "idea3": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 3, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      {"name":"idea1", "detected": false, "characterOffsets":[]},
+      {"name":"idea3", "detected": true, "characterOffsets":[]}
+    ]
+  },
+  "idea4": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 4, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      {"name":"idea1", "detected": false, "characterOffsets":[]},
+      {"name":"idea4", "detected": true, "characterOffsets":[]}
+    ]
+  },
+  "idea5": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      {"name":"idea1", "detected": false, "characterOffsets":[]},
+      {"name":"idea5", "detected": true, "characterOffsets":[]}
+    ]
+  },
+  "default": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 3, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      {"name":"idea1", "detected": false, "characterOffsets":[]},
+      {"name":"idea3", "detected": true, "characterOffsets":[]}
+    ]
+  }
+}
