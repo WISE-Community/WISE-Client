@@ -2,15 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogGuidanceGradingComponent } from './dialog-guidance-grading.component';
 
-describe('DialogGuidanceGradingComponent', () => {
+xdescribe('DialogGuidanceGradingComponent', () => {
   let component: DialogGuidanceGradingComponent;
   let fixture: ComponentFixture<DialogGuidanceGradingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogGuidanceGradingComponent ]
-    })
-    .compileComponents();
+      declarations: [DialogGuidanceGradingComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

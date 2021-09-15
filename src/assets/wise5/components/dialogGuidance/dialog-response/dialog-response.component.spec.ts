@@ -2,15 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogResponseComponent } from './dialog-response.component';
 
-describe('DialogResponseComponent', () => {
+xdescribe('DialogResponseComponent', () => {
   let component: DialogResponseComponent;
   let fixture: ComponentFixture<DialogResponseComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogResponseComponent ]
-    })
-    .compileComponents();
+      declarations: [DialogResponseComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
