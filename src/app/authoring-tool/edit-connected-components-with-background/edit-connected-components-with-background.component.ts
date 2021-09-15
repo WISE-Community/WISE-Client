@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
 
 @Component({
@@ -11,6 +12,10 @@ import { EditConnectedComponentsComponent } from '../edit-connected-components/e
 })
 export class EditConnectedComponentsWithBackgroundComponent extends EditConnectedComponentsComponent {
   componentTypesThatCanImportWorkAsBackground: string[] = [];
+
+  constructor(protected ProjectService: ProjectService) {
+    super(ProjectService);
+  }
 
   canConnectedComponentTypeImportWorkAsBackground(connectedComponent: any): boolean {
     return this.componentTypesThatCanImportWorkAsBackground.includes(

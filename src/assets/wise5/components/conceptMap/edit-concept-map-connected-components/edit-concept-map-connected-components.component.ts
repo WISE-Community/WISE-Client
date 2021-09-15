@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProjectService } from '../../../services/projectService';
 import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../app/authoring-tool/edit-connected-components-with-background/edit-connected-components-with-background.component';
 
 @Component({
@@ -17,6 +18,10 @@ export class EditConceptMapConnectedComponentsComponent extends EditConnectedCom
     'Label',
     'Table'
   ];
+
+  constructor(protected ProjectService: ProjectService) {
+    super(ProjectService);
+  }
 
   afterComponentIdChanged(connectedComponent: any): void {
     super.afterComponentIdChanged(connectedComponent);
