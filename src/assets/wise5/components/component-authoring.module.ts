@@ -2,6 +2,7 @@ import * as angular from 'angular';
 import './animation/animationAuthoringComponentModule';
 import './audioOscillator/audioOscillatorAuthoringComponentModule';
 import './conceptMap/conceptMapAuthoringComponentModule';
+import './dialogGuidance/dialogGuidanceAuthoringComponentModule';
 import './discussion/discussionAuthoringComponentModule';
 import './draw/drawAuthoringComponentModule';
 import './embedded/embeddedAuthoringComponentModule';
@@ -41,6 +42,7 @@ export default angular
     'animationAuthoringComponentModule',
     'audioOscillatorAuthoringComponentModule',
     'conceptMapAuthoringComponentModule',
+    'dialogGuidanceAuthoringComponentModule',
     'discussionAuthoringComponentModule',
     'drawAuthoringComponentModule',
     'embeddedAuthoringComponentModule',

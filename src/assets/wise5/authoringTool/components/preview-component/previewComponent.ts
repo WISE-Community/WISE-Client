@@ -60,6 +60,11 @@ class PreviewComponentController {
               [component-content]="componentContent"
               [mode]="mode">
           </concept-map-student>
+          <dialog-guidance-student ng-switch-when="DialogGuidance"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [mode]="mode">
+          </dialog-guidance-student>
           <discussion-student ng-switch-when="Discussion"
               [node-id]="nodeId"
               [component-content]="componentContent"

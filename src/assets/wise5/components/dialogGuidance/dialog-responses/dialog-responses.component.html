@@ -1,0 +1,2 @@
+<dialog-response *ngFor="let response of responses" [response]="response"></dialog-response>
+<dialog-response *ngIf="isWaitingForComputerResponse" [response]="{text: '...'}"></dialog-response>

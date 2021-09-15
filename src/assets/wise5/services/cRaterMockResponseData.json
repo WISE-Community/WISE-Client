@@ -1,0 +1,233 @@
+{
+  "idea1": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 1, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": true, "characterOffsets":[] },
+      { "name": "idea2", "detected": false, "characterOffsets":[] }
+    ]
+  },
+  "idea2": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 2, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea2", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea3": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 3, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea3", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea4": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 4, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea4", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea4a": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 4, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea4a", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea5": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea5", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea5a": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea5a", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea6": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea6", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea7": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea7", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea7a": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea7a", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea8": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea8", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea9": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea9", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea10": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea10", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea11": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea11", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea12": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea12", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea13": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea13", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea14": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea14", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea15": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea15", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea16": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea16", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "idea17": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 5, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea17", "detected": true, "characterOffsets":[] }
+    ]
+  },
+  "default": {
+    "scores": [
+      { "id": "data", "score": 1, "realNumberScore": 0.6744 },
+      { "id": "science", "score": 0, "realNumberScore": 0.1472 },
+      { "id": "ki", "score": 3, "realNumberScore": 2.74 }
+    ],
+    "ideas": [
+      { "name": "idea1", "detected": false, "characterOffsets":[] },
+      { "name": "idea3", "detected": false, "characterOffsets":[] }
+    ]
+  }
+}
