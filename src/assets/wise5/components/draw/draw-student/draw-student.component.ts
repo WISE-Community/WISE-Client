@@ -88,10 +88,9 @@ export class DrawStudent extends ComponentStudent {
     this.setToolChangedListener();
     this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, this.isDisabled);
 
-    if (this.hasMaxSubmitCount() && this.hasSubmitsLeft()) {
-      this.isSubmitButtonDisabled = true;
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.disableSubmitButton();
     }
-
     if (this.isDisabled) {
       this.drawingTool.canvas.removeListeners();
     }
@@ -198,6 +197,7 @@ export class DrawStudent extends ComponentStudent {
 
   setStudentWork(componentState: any): void {
     this.setDrawData(componentState);
+    this.setSubmitCounter(componentState);
     this.processLatestStudentWork();
   }
 

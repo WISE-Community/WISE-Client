@@ -83,7 +83,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
       this.handleConnectedComponents();
     }
 
-    if (this.hasMaxSubmitCount() && !this.hasSubmitsLeft()) {
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableSubmitButton();
     }
 

@@ -45,6 +45,7 @@ import { EditTableConnectedComponentsComponent } from '../../assets/wise5/compon
 import { EditDiscussionConnectedComponentsComponent } from '../../assets/wise5/components/discussion/edit-discussion-connected-components/edit-discussion-connected-components.component';
 import { EditMatchConnectedComponentsComponent } from '../../assets/wise5/components/match/edit-match-connected-components/edit-match-connected-components.component';
 import { EditMultipleChoiceConnectedComponentsComponent } from '../../assets/wise5/components/multipleChoice/edit-multiple-choice-connected-components/edit-multiple-choice-connected-components.component';
+import { EditComponentMaxSubmitComponent } from '../authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { EditMultipleChoiceConnectedComponentsComponent } from '../../assets/wis
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
+    EditComponentMaxSubmitComponent,
     EditComponentPrompt,
     EditComponentRubricComponent,
     EditComponentSaveButtonComponent,
@@ -105,6 +107,7 @@ import { EditMultipleChoiceConnectedComponentsComponent } from '../../assets/wis
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
+    EditComponentMaxSubmitComponent,
     EditComponentPrompt,
     EditComponentRubricComponent,
     EditComponentSaveButtonComponent,
