@@ -19,10 +19,10 @@ describe('ShowStudentInfoComponent', () => {
       declarations: [ShowStudentInfoComponent],
       providers: [{ provide: ConfigService, useClass: ConfigServiceStub }]
     }).compileComponents();
-    configService = TestBed.inject(ConfigService);
   });
 
   beforeEach(() => {
+    configService = TestBed.inject(ConfigService);
     fixture = TestBed.createComponent(ShowStudentInfoComponent);
     component = fixture.componentInstance;
     component.user = { id: 1, name: 'oski bear', username: 'oskib0101' };

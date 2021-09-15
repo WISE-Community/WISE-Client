@@ -106,55 +106,6 @@ class EditConceptMapAdvancedController extends EditAdvancedComponentAngularJSCon
       this.componentChanged();
     }
   }
-
-  automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent: any): void {
-    super.automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent);
-    if (connectedComponent.componentId != null) {
-      this.setImportWorkAsBackgroundIfApplicable(connectedComponent);
-    }
-  }
-
-  connectedComponentComponentIdChanged(connectedComponent: any): void {
-    this.automaticallySetConnectedComponentTypeIfPossible(connectedComponent);
-    this.afterComponentIdChanged(connectedComponent);
-    this.setImportWorkAsBackgroundIfApplicable(connectedComponent);
-    this.componentChanged();
-  }
-
-  setImportWorkAsBackgroundIfApplicable(connectedComponent: any): void {
-    const componentType = this.getConnectedComponentType(connectedComponent);
-    if (['Draw', 'Embedded', 'Graph', 'Label', 'Table'].includes(componentType)) {
-      connectedComponent.importWorkAsBackground = true;
-    } else {
-      delete connectedComponent.importWorkAsBackground;
-    }
-  }
-
-  importWorkAsBackgroundClicked(connectedComponent: any): void {
-    if (!connectedComponent.importWorkAsBackground) {
-      delete connectedComponent.importWorkAsBackground;
-    }
-    this.componentChanged();
-  }
-
-  afterComponentIdChanged(connectedComponent: any): void {
-    const nodeId = connectedComponent.nodeId;
-    const componentId = connectedComponent.componentId;
-    if (this.ProjectService.getComponentType(nodeId, componentId) === 'ConceptMap') {
-      if (
-        confirm(
-          $localize`Do you want to copy the nodes and links from the connected component?\n\nWarning: This will delete all existing nodes and links in this component.`
-        )
-      ) {
-        const connectedComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-          nodeId,
-          componentId
-        );
-        this.authoringComponentContent.nodes = connectedComponentContent.nodes;
-        this.authoringComponentContent.links = connectedComponentContent.links;
-      }
-    }
-  }
 }
 
 export const EditConceptMapAdvancedComponent = {

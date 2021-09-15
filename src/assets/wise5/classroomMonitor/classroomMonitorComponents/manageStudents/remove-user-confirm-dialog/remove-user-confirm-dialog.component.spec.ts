@@ -23,15 +23,15 @@ describe('RemoveUserConfirmDialogComponent', () => {
         { provide: MAT_DIALOG_DATA, useValue: {} }
       ]
     });
-    configService = TestBed.inject(ConfigService);
   });
 
   beforeEach(() => {
+    configService = TestBed.inject(ConfigService);
     fixture = TestBed.createComponent(RemoveUserConfirmDialogComponent);
     component = fixture.componentInstance;
     component.user = { id: 1, name: 'Oski Bear', username: 'oskib0101' };
   });
-  
+
   userNameDisplay();
 });
 

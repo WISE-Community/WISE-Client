@@ -55,4 +55,9 @@ export class EmbeddedAuthoring extends ComponentAuthoring {
     iframe.src = '';
     iframe.src = src;
   }
+
+  updateUrl(url: string): void {
+    this.authoringComponentContent.url = url;
+    this.componentChanged();
+  }
 }

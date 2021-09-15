@@ -5,6 +5,7 @@ import { MomentModule } from 'ngx-moment';
 import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../../services/configService';
 import { ManageShowStudentInfoComponent } from './manage-show-student-info.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 class ConfigServiceStub {
   getPermissions() {}
@@ -20,15 +21,15 @@ describe('ManageShowStudentInfoComponent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [ManageShowStudentInfoComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, MomentModule],
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatDialogModule, MomentModule],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: MAT_DIALOG_DATA, useValue: user }
       ]
     });
-    configService = TestBed.inject(ConfigService);
   });
   beforeEach(() => {
+    configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(ManageShowStudentInfoComponent);
     component = fixture.componentInstance;

@@ -1,0 +1,16 @@
+<div fxLayout="row wrap" fxLayoutGap="20px">
+  <edit-connected-component-node-select
+      [connectedComponent]="connectedComponent"
+      (connectedComponentChange)="connectedComponentNodeIdChanged()">
+  </edit-connected-component-node-select>
+  <edit-connected-component-component-select
+      [componentId]="componentId"
+      [connectedComponent]="connectedComponent"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      (connectedComponentChange)="connectedComponentComponentIdChanged()">
+  </edit-connected-component-component-select>
+  <edit-connected-component-type-select
+      [connectedComponent]="connectedComponent"
+      (connectedComponentChange)="connectedComponentTypeChanged()">
+  </edit-connected-component-type-select>
+</div>

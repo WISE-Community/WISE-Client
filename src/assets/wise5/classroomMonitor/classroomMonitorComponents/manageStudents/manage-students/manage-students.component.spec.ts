@@ -8,7 +8,7 @@ class TeacherDataServiceStub {
   getCurrentPeriod() {}
 
   getPeriods() {
-    return [{periodId: -1}, {periodId: 1}, {periodId: 2}];
+    return [{ periodId: -1 }, { periodId: 1 }, { periodId: 2 }];
   }
 }
 
@@ -24,9 +24,9 @@ describe('ManageStudentsComponent', () => {
       imports: [HttpClientTestingModule],
       providers: [{ provide: TeacherDataService, useClass: TeacherDataServiceStub }]
     });
-    teacherDataService = TestBed.inject(TeacherDataService);
   });
   beforeEach(() => {
+    teacherDataService = TestBed.inject(TeacherDataService);
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(ManageStudentsComponent);
     component = fixture.componentInstance;
@@ -36,11 +36,11 @@ describe('ManageStudentsComponent', () => {
 
 function periodsShown() {
   it('should show single period when one period is selected', () => {
-    component.setVisiblePeriods({periodId: 1});
+    component.setVisiblePeriods({ periodId: 1 });
     expect(component.periods.length).toEqual(1);
   });
   it('should show each period when All Periods is selected', () => {
-    component.setVisiblePeriods({periodId: -1});
+    component.setVisiblePeriods({ periodId: -1 });
     expect(component.periods.length).toEqual(3);
   });
 }
