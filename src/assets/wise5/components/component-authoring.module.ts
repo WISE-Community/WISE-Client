@@ -27,6 +27,13 @@ import { EditComponentExcludeFromTotalScoreComponent } from '../../../app/author
 import WISELinkAuthoringController from '../authoringTool/wiseLink/wiseLinkAuthoringController';
 import { EditComponentDefaultFeedback } from '../../../app/authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
 import { AuthorUrlParametersComponent } from '../../../app/authoring-tool/author-url-parameters/author-url-parameters.component';
+import { EditConnectedComponentsComponent } from '../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
+import { EditConnectedComponentsAddButtonComponent } from '../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
+import { EditConnectedComponentNodeSelectComponent } from '../../../app/authoring-tool/edit-connected-component-node-select/edit-connected-component-node-select.component';
+import { EditConnectedComponentComponentSelectComponent } from '../../../app/authoring-tool/edit-connected-component-component-select/edit-connected-component-component-select.component';
+import { EditConnectedComponentTypeSelectComponent } from '../../../app/authoring-tool/edit-connected-component-type-select/edit-connected-component-type-select.component';
+import { EditConnectedComponentDeleteButtonComponent } from '../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
+import { EditConnectedComponentDefaultSelectsComponent } from '../../../app/authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
 
 export default angular
   .module('componentAuthoringModule', [
@@ -96,4 +103,44 @@ export default angular
   .directive(
     'editComponentMaxScore',
     downgradeComponent({ component: EditComponentMaxScoreComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editConnectedComponents',
+    downgradeComponent({ component: EditConnectedComponentsComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editConnectedComponentDefaultSelects',
+    downgradeComponent({
+      component: EditConnectedComponentDefaultSelectsComponent
+    }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editConnectedComponentsAddButton',
+    downgradeComponent({
+      component: EditConnectedComponentsAddButtonComponent
+    }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editConnectedComponentComponentSelect',
+    downgradeComponent({
+      component: EditConnectedComponentComponentSelectComponent
+    }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editConnectedComponentsDeleteButton',
+    downgradeComponent({
+      component: EditConnectedComponentDeleteButtonComponent
+    }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editConnectedComponentNodeSelect',
+    downgradeComponent({
+      component: EditConnectedComponentNodeSelectComponent
+    }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editConnectedComponentTypeSelect',
+    downgradeComponent({
+      component: EditConnectedComponentTypeSelectComponent
+    }) as angular.IDirectiveFactory
   );

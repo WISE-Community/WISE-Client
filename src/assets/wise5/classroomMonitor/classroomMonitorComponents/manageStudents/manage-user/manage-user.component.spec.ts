@@ -2,6 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../../services/configService';
 import { ManageUserComponent } from './manage-user.component';
@@ -10,6 +11,9 @@ class ConfigServiceStub {
   getPermissions() {}
   getRunId() {
     return 123;
+  }
+  retrieveConfig() {
+    return {};
   }
 }
 
@@ -22,15 +26,15 @@ describe('ManageUserComponent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [ManageUserComponent],
-      imports: [HttpClientTestingModule, MatSnackBarModule],
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatSnackBarModule],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: MatDialog, useValue: {} }
       ]
     });
-    configService = TestBed.inject(ConfigService);
   });
   beforeEach(() => {
+    configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(ManageUserComponent);
     component = fixture.componentInstance;
