@@ -26,6 +26,7 @@ import { EditComponentWidthComponent } from '../../../app/authoring-tool/edit-co
 import { EditComponentExcludeFromTotalScoreComponent } from '../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
 import WISELinkAuthoringController from '../authoringTool/wiseLink/wiseLinkAuthoringController';
 import { EditComponentDefaultFeedback } from '../../../app/authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
+import { AuthorUrlParametersComponent } from '../../../app/authoring-tool/author-url-parameters/author-url-parameters.component';
 import { EditConnectedComponentsComponent } from '../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 import { EditConnectedComponentsAddButtonComponent } from '../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentNodeSelectComponent } from '../../../app/authoring-tool/edit-connected-component-node-select/edit-connected-component-node-select.component';
@@ -53,6 +54,12 @@ export default angular
     'tableAuthoringComponentModule'
   ])
   .controller('WISELinkAuthoringController', WISELinkAuthoringController)
+  .directive(
+    'authorUrlParameters',
+    downgradeComponent({
+      component: AuthorUrlParametersComponent
+    }) as angular.IDirectiveFactory
+  )
   .directive(
     'editComponentExcludeFromTotalScore',
     downgradeComponent({

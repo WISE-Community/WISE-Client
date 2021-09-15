@@ -17,6 +17,7 @@ import { OutsideUrlAuthoring } from '../../assets/wise5/components/outsideURL/ou
 import { SummaryAuthoring } from '../../assets/wise5/components/summary/summary-authoring/summary-authoring.component';
 import { TableAuthoring } from '../../assets/wise5/components/table/table-authoring/table-authoring.component';
 import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
+import { AuthorUrlParametersComponent } from '../authoring-tool/author-url-parameters/author-url-parameters.component';
 import { EditComponentDefaultFeedback } from '../authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
 import { EditComponentExcludeFromTotalScoreComponent } from '../authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
 import { EditComponentJsonComponent } from '../authoring-tool/edit-component-json/edit-component-json.component';
@@ -49,6 +50,7 @@ import { EditMultipleChoiceConnectedComponentsComponent } from '../../assets/wis
   declarations: [
     AnimationAuthoring,
     AudioOscillatorAuthoring,
+    AuthorUrlParametersComponent,
     ConceptMapAuthoring,
     DrawAuthoring,
     DiscussionAuthoring,
