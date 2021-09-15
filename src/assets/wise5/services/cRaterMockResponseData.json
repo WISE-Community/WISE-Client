@@ -227,7 +227,7 @@
     ],
     "ideas": [
       { "name": "idea1", "detected": false, "characterOffsets":[] },
-      { "name": "idea3", "detected": true, "characterOffsets":[] }
+      { "name": "idea3", "detected": false, "characterOffsets":[] }
     ]
   }
 }

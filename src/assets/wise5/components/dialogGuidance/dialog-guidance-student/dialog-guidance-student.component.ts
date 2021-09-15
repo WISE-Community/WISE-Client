@@ -61,8 +61,12 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       this.responses = this.UtilService.makeCopyOfJSONObject(
         this.componentState.studentData.responses
       );
+      this.submitCounter = this.componentState.studentData.submitCounter;
     }
     this.workgroupId = this.ConfigService.getWorkgroupId();
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.disableInput();
+    }
   }
 
   submitStudentResponse(): void {
@@ -125,6 +129,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   cRaterSuccessResponse(response: CRaterResponse): void {
     this.hideWaitingForComputerResponse();
+    this.incrementSubmitCounter();
     const feedbackRule: FeedbackRule = this.getFeedbackRule(response);
     const computerDialogResponse = new ComputerDialogResponse(
       feedbackRule.feedback,
@@ -134,16 +139,24 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     );
     this.addDialogResponse(computerDialogResponse);
     this.studentDataChanged();
-    this.enableInput();
+    if (!this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.enableInput();
+    }
   }
 
   getFeedbackRule(response: CRaterResponse): FeedbackRule {
     for (const feedbackRule of this.componentContent.feedbackRules) {
-      if (feedbackRule.ideas[0] === response.getDetectedIdeas()[0].name) {
+      if (this.hasMaxSubmitCountAndUsedAllSubmits() && feedbackRule.ideas[0] === 'isFinalSubmit') {
+        return feedbackRule;
+      }
+      if (
+        response.getDetectedIdeas().length > 0 &&
+        feedbackRule.ideas[0] === response.getDetectedIdeas()[0].name
+      ) {
         return feedbackRule;
       }
     }
-    return null;
+    return this.componentContent.feedbackRules.find((rule) => rule.ideas[0] === 'default');
   }
 
   cRaterErrorResponse() {
@@ -154,11 +167,13 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   createComponentState(action: string): Promise<any> {
     const componentState: any = this.NodeService.createNewComponentState();
     componentState.studentData = {
-      responses: this.responses
+      responses: this.responses,
+      submitCounter: this.submitCounter
     };
     componentState.componentType = 'DialogGuidance';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
+    componentState.isSubmit = true;
     const promise = new Promise((resolve, reject) => {
       this.createComponentStateAdditionalProcessing(
         { resolve: resolve, reject: reject },

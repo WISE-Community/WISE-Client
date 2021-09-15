@@ -34,7 +34,7 @@ export class CRaterService {
   }
 
   private mockSpeedResponse(responseText: string): Observable<any> {
-    const found = responseText.match(/idea([a-zA-Z0-9]*)/g);
+    const found = responseText.match(/idea([a-zA-Z0-9]+)/g);
     if (found != null) {
       return of(cRaterMockResponseData[found[0]]);
     } else {
