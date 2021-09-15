@@ -175,7 +175,7 @@ export class ConceptMapStudent extends ComponentStudent {
     } else if (this.componentContentHasStarterConceptMap()) {
       this.populateConceptMapData(this.componentContent.starterConceptMap);
     }
-    if (this.hasMaxSubmitCount() && !this.hasSubmitsLeft()) {
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableSubmitButton();
     }
     if (!this.isDisabled) {

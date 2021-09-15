@@ -46,4 +46,8 @@ export class EditAdvancedComponentAngularJSController {
     this.authoringComponentContent.connectedComponents = connectedComponents;
     this.componentChanged();
   }
+
+  maxSubmitCountChanged(maxSubmitCount: number): void {
+    this.componentChanged();
+  }
 }

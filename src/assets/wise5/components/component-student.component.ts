@@ -839,4 +839,11 @@ export abstract class ComponentStudent {
     );
     return latestComponentState == null && !this.isDirty;
   }
+
+  setSubmitCounter(componentState: any): void {
+    const submitCounter = componentState?.studentData?.submitCounter;
+    if (submitCounter != null) {
+      this.submitCounter = submitCounter;
+    }
+  }
 }

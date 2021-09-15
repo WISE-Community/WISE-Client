@@ -104,6 +104,12 @@ export class EmbeddedStudent extends ComponentStudent {
     this.setURL(this.componentContent.url);
     this.initializeMessageEventListener();
     this.broadcastDoneRenderingComponent();
+    if (this.componentState != null) {
+      this.setSubmitCounter(this.componentState);
+    }
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.disableSubmitButton();
+    }
   }
 
   ngOnDestroy(): void {

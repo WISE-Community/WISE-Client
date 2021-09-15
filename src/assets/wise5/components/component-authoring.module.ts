@@ -34,6 +34,7 @@ import { EditConnectedComponentComponentSelectComponent } from '../../../app/aut
 import { EditConnectedComponentTypeSelectComponent } from '../../../app/authoring-tool/edit-connected-component-type-select/edit-connected-component-type-select.component';
 import { EditConnectedComponentDeleteButtonComponent } from '../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
 import { EditConnectedComponentDefaultSelectsComponent } from '../../../app/authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
+import { EditComponentMaxSubmitComponent } from '../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 
 export default angular
   .module('componentAuthoringModule', [
@@ -103,6 +104,10 @@ export default angular
   .directive(
     'editComponentMaxScore',
     downgradeComponent({ component: EditComponentMaxScoreComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editComponentMaxSubmit',
+    downgradeComponent({ component: EditComponentMaxSubmitComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'editConnectedComponents',
