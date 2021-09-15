@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatDialog,
   MatDialogModule,
@@ -49,7 +50,12 @@ describe('AddTeamDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AddTeamDialogComponent],
-      imports: [MatDialogModule, HttpClientTestingModule, MatSnackBarModule],
+      imports: [
+        BrowserAnimationsModule,
+        MatDialogModule,
+        HttpClientTestingModule,
+        MatSnackBarModule
+      ],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: TeacherDataService, useClass: TeacherDataServiceStub },
@@ -58,13 +64,13 @@ describe('AddTeamDialogComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+  });
+
+  beforeEach(() => {
     configService = TestBed.inject(ConfigService);
     dialog = TestBed.inject(MatDialog);
     http = TestBed.inject(HttpClient);
     workgroupService = TestBed.inject(WorkgroupService);
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(AddTeamDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

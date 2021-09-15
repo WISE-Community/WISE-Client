@@ -89,6 +89,9 @@ describe('GraphStudent', () => {
     });
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     spyOn(component, 'registerNotebookItemChosenListener').and.callFake(() => {});
+    spyOn(component, 'createChartCallback').and.callFake(() => {
+      return () => {};
+    });
     studentDataChangedSpy = spyOn(component, 'studentDataChanged');
     studentDataChangedSpy.and.callFake(() => {});
     fixture.detectChanges();
