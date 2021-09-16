@@ -28,10 +28,10 @@ describe('ManagePeriod', () => {
       declarations: [ManagePeriodComponent],
       providers: [ConfigService, GetWorkgroupService, UpgradeModule, WorkgroupService]
     });
-    configService = TestBed.inject(ConfigService);
-    workgroupService = TestBed.inject(WorkgroupService);
   });
   beforeEach(() => {
+    configService = TestBed.inject(ConfigService);
+    workgroupService = TestBed.inject(WorkgroupService);
     fixture = TestBed.createComponent(ManagePeriodComponent);
     component = fixture.componentInstance;
     component.period = {

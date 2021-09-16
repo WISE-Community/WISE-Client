@@ -40,12 +40,12 @@ describe('ChangeStudentPasswordDialogComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-    teacherService = TestBed.inject(TeacherService);
-    snackBar = TestBed.inject(MatSnackBar);
-    dialog = TestBed.inject(MatDialog);
   });
 
   beforeEach(() => {
+    teacherService = TestBed.inject(TeacherService);
+    snackBar = TestBed.inject(MatSnackBar);
+    dialog = TestBed.inject(MatDialog);
     fixture = TestBed.createComponent(ChangeStudentPasswordDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

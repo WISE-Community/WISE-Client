@@ -34,6 +34,7 @@ import { SummaryStudent } from '../assets/wise5/components/summary/summary-stude
 import { SummaryDisplay } from '../assets/wise5/directives/summaryDisplay/summary-display.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { GraphStudent } from '../assets/wise5/components/graph/graph-student/graph-student.component';
+import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,13 @@ import { GraphStudent } from '../assets/wise5/components/graph/graph-student/gra
     SummaryDisplay,
     SummaryStudent
   ],
-  imports: [AngularJSModule, HighchartsChartModule, MatchStudentModule, StudentComponentModule],
+  imports: [
+    AngularJSModule,
+    DialogGuidanceStudentModule,
+    HighchartsChartModule,
+    MatchStudentModule,
+    StudentComponentModule
+  ],
   providers: [
     { provide: DataService, useExisting: StudentDataService },
     { provide: ProjectService, useExisting: VLEProjectService },

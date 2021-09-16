@@ -37,6 +37,14 @@
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
               </concept-map-grading>
+              <dialog-guidance-grading
+                  *ngIf="revision.componentState.componentType === 'DialogGuidance'"
+                  [nodeId]="nodeId"
+                  [componentId]="componentId"
+                  [componentState]="revision.componentState"
+                  [workgroupId]="workgroupId"
+                  [isRevision]="true">
+              </dialog-guidance-grading>
               <discussion-grading
                   *ngIf="revision.componentState.componentType === 'Discussion'"
                   [nodeId]="nodeId"

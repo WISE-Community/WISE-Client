@@ -82,6 +82,9 @@ export class AnimationStudent extends ComponentStudent {
       this.handleConnectedComponents();
     }
 
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.disableSubmitButton();
+    }
     this.disableComponentIfNecessary();
     this.broadcastDoneRenderingComponent();
   }

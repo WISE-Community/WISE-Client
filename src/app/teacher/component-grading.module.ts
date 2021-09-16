@@ -3,6 +3,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { AnimationGrading } from '../../assets/wise5/components/animation/animation-grading/animation-grading.component';
 import { AudioOscillatorGrading } from '../../assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component';
 import { ConceptMapGrading } from '../../assets/wise5/components/conceptMap/concept-map-grading/concept-map-grading.component';
+import { DialogGuidanceGradingComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-grading/dialog-guidance-grading.component';
 import { DiscussionGrading } from '../../assets/wise5/components/discussion/discussion-grading/discussion-grading.component';
 import { DrawGrading } from '../../assets/wise5/components/draw/draw-grading/draw-grading.component';
 import { EmbeddedGrading } from '../../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
@@ -20,6 +21,7 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     AudioOscillatorGrading,
     ConceptMapGrading,
     DrawGrading,
+    DialogGuidanceGradingComponent,
     DiscussionGrading,
     EmbeddedGrading,
     GraphGrading,
@@ -35,6 +37,7 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     AudioOscillatorGrading,
     ConceptMapGrading,
     DrawGrading,
+    DialogGuidanceGradingComponent,
     DiscussionGrading,
     EmbeddedGrading,
     GraphGrading,
