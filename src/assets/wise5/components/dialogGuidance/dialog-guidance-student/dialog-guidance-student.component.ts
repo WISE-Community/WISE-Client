@@ -134,7 +134,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     const computerDialogResponse = new ComputerDialogResponse(
       feedbackRule.feedback,
       response.scores,
-      ['idea' + response.getKIScore()],
+      response.ideas,
       new Date().getTime()
     );
     this.addDialogResponse(computerDialogResponse);

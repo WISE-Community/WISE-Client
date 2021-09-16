@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditDialogGuidanceFeedbackRulesComponent } from './edit-dialog-guidance-feedback-rules.component';
 
 describe('EditDialogGuidanceFeedbackRulesComponent', () => {
@@ -8,9 +7,8 @@ describe('EditDialogGuidanceFeedbackRulesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditDialogGuidanceFeedbackRulesComponent ]
-    })
-    .compileComponents();
+      declarations: [EditDialogGuidanceFeedbackRulesComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,3 +1,6 @@
+import { CRaterIdea } from './CRaterIdea';
+import { CRaterScore } from './CRaterScore';
+
 export class CRaterResponse {
   scores: CRaterScore[];
   ideas: CRaterIdea[];
@@ -15,16 +18,4 @@ export class CRaterResponse {
       }
     }
   }
-}
-
-class CRaterScore {
-  id: string;
-  score: number;
-  realNumberScore: number;
-}
-
-class CRaterIdea {
-  name: string;
-  detected: boolean;
-  characterOffsets: any[];
 }
