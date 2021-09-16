@@ -608,7 +608,7 @@ export class ProjectService {
           '<img',
           `<img onclick=\\"window.dispatchEvent(new CustomEvent('snip-image', ` +
             `{ detail: { target: this } }))\\" ` +
-            `onkeypress=\\"javascript: if (event.key === 'Enter' || event.keyCode === 13 || ` + 
+            `onkeypress=\\"javascript: if (event.key === 'Enter' || event.keyCode === 13 || ` +
             `event.which === 13 ) { window.dispatchEvent(new CustomEvent('snip-image', ` +
             `{ detail: { target: this } } )) }\\" aria-label=\\"Select image to add to notebook\\" ` +
             `title=\\"Add to notebook\\" tabindex=\\"0\\" snip`
@@ -2440,7 +2440,7 @@ export class ProjectService {
 
   shouldIncludeInTotalScore(nodeId: string, componentId: string): boolean {
     return (
-      this.isActive(nodeId) &&
+      this.isNodeActive(nodeId) &&
       !this.getComponentByNodeIdAndComponentId(nodeId, componentId).excludeFromTotalScore
     );
   }
@@ -3205,6 +3205,10 @@ export class ProjectService {
     } else {
       return { name: params['tag'] };
     }
+  }
+
+  componentExists(nodeId: string, componentId: string): boolean {
+    return this.getComponentByNodeIdAndComponentId(nodeId, componentId) != null;
   }
 
   broadcastProjectChanged() {
