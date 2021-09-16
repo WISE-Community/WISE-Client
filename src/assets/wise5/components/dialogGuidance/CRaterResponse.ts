@@ -7,8 +7,14 @@ export class CRaterResponse {
 
   constructor() {}
 
-  getDetectedIdeas(): CRaterIdea[] {
-    return this.ideas.filter((idea) => idea.detected);
+  getDetectedIdeaNames(): CRaterIdea[] {
+    const detectedIdeaNames = [];
+    this.ideas.forEach((idea: CRaterIdea) => {
+      if (idea.detected) {
+        detectedIdeaNames.push(idea.name);
+      }
+    });
+    return detectedIdeaNames;
   }
 
   getKIScore() {

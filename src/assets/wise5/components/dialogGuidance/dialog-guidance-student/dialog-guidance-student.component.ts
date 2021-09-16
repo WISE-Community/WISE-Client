@@ -146,17 +146,48 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   getFeedbackRule(response: CRaterResponse): FeedbackRule {
     for (const feedbackRule of this.componentContent.feedbackRules) {
-      if (this.hasMaxSubmitCountAndUsedAllSubmits() && feedbackRule.ideas[0] === 'isFinalSubmit') {
-        return feedbackRule;
-      }
-      if (
-        response.getDetectedIdeas().length > 0 &&
-        feedbackRule.ideas[0] === response.getDetectedIdeas()[0].name
-      ) {
+      if (this.satisfiesRule(response, feedbackRule)) {
         return feedbackRule;
       }
     }
-    return this.componentContent.feedbackRules.find((rule) => rule.ideas[0] === 'default');
+    return this.getDefaultRule(this.componentContent.feedbackRules);
+  }
+
+  satisfiesRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {
+    return (
+      this.satisfiesFinalSubmitRule(feedbackRule) ||
+      this.satisfiesSecondToLastSubmitRule(feedbackRule) ||
+      this.satisfiesSpecificRule(response, feedbackRule)
+    );
+  }
+
+  satisfiesFinalSubmitRule(feedbackRule: FeedbackRule): boolean {
+    return (
+      this.hasMaxSubmitCountAndUsedAllSubmits() && FeedbackRule.isFinalSubmitRule(feedbackRule)
+    );
+  }
+
+  satisfiesSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {
+    return (
+      this.hasMaxSubmitCount() &&
+      this.isSecondToLastSubmit() &&
+      FeedbackRule.isSecondToLastSubmitRule(feedbackRule)
+    );
+  }
+
+  isSecondToLastSubmit(): boolean {
+    return this.getNumberOfSubmitsLeft() === 1;
+  }
+
+  satisfiesSpecificRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {
+    return this.UtilService.arraysContainSameValues(
+      response.getDetectedIdeaNames(),
+      feedbackRule.ideas
+    );
+  }
+
+  getDefaultRule(feedbackRules: FeedbackRule[]): FeedbackRule {
+    return feedbackRules.find((rule) => FeedbackRule.isDefaultRule(rule));
   }
 
   cRaterErrorResponse() {
