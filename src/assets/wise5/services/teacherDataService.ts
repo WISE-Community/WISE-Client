@@ -318,12 +318,19 @@ export class TeacherDataService extends DataService {
   }
 
   processAnnotations(annotations) {
-    this.studentData.annotations = annotations;
-    for (const annotation of annotations) {
+    const activeAnnotations = this.getActiveAnnototations(annotations);
+    this.studentData.annotations = activeAnnotations;
+    for (const annotation of activeAnnotations) {
       this.addAnnotationToAnnotationsToWorkgroupId(annotation);
       this.addAnnotationToAnnotationsByNodeId(annotation);
     }
     this.AnnotationService.setAnnotations(this.studentData.annotations);
+  }
+
+  getActiveAnnototations(annotations): any[] {
+    return annotations.filter((annotation) => {
+      return this.ProjectService.componentExists(annotation.nodeId, annotation.componentId);
+    });
   }
 
   addAnnotationToAnnotationsToWorkgroupId(annotation) {
