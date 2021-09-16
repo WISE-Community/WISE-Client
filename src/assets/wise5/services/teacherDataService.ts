@@ -327,12 +327,6 @@ export class TeacherDataService extends DataService {
     this.AnnotationService.setAnnotations(this.studentData.annotations);
   }
 
-  getActiveAnnototations(annotations): any[] {
-    return annotations.filter((annotation) => {
-      return this.ProjectService.componentExists(annotation.nodeId, annotation.componentId);
-    });
-  }
-
   addAnnotationToAnnotationsToWorkgroupId(annotation) {
     const annotationWorkgroupId = annotation.toWorkgroupId;
     if (!this.studentData.annotationsToWorkgroupId[annotationWorkgroupId]) {
