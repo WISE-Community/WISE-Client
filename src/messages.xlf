@@ -10057,13 +10057,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3496fb780ea3a39802891f6e1ba84b3c1ead7f53" datatype="html">
-        <source>Send response</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="c80dd9bfb0bd7a7ce89ef1140e6f35211ab711f0" datatype="html">
         <source>Student response</source>
         <context-group purpose="location">
