@@ -2,21 +2,25 @@
 <mat-card class="mat-elevation-z2">
   <dialog-responses [responses]="responses" [isWaitingForComputerResponse]="isWaitingForComputerResponse">
   </dialog-responses>
-  <div class="add-response" fxLayout="row" fxLayoutGap="8px">
+  <div *ngIf="!hasMaxSubmitCountAndUsedAllSubmits()"
+      class="add-response"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="8px">
     <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
       <textarea matInput
           cdkTextareaAutosize
           placeholder="Add response..."
+          i18n-placeholder
           [(ngModel)]="studentResponse"
           (ngModelChange)="studentResponseChanged()"
           [disabled]="isDisabled"></textarea>
     </mat-form-field>
-    <button mat-icon-button
-        aria-label="Submit response"
+    <button mat-flat-button
         color="primary"
         (click)="submitStudentResponse()"
         [disabled]="!isSubmitEnabled">
-      <mat-icon>send</mat-icon>
+      Send
     </button>
   </div>
 </mat-card>
