@@ -1,11 +1,20 @@
+import { CRaterIdea } from './CRaterIdea';
+import { CRaterScore } from './CRaterScore';
+
 export class CRaterResponse {
   scores: CRaterScore[];
   ideas: CRaterIdea[];
 
   constructor() {}
 
-  getDetectedIdeas(): CRaterIdea[] {
-    return this.ideas.filter((idea) => idea.detected);
+  getDetectedIdeaNames(): CRaterIdea[] {
+    const detectedIdeaNames = [];
+    this.ideas.forEach((idea: CRaterIdea) => {
+      if (idea.detected) {
+        detectedIdeaNames.push(idea.name);
+      }
+    });
+    return detectedIdeaNames;
   }
 
   getKIScore() {
@@ -15,16 +24,4 @@ export class CRaterResponse {
       }
     }
   }
-}
-
-class CRaterScore {
-  id: string;
-  score: number;
-  realNumberScore: number;
-}
-
-class CRaterIdea {
-  name: string;
-  detected: boolean;
-  characterOffsets: any[];
 }

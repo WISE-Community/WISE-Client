@@ -6,4 +6,16 @@ export class FeedbackRule {
     this.feedback = feedback;
     this.ideas = ideas;
   }
+
+  static isSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {
+    return feedbackRule.ideas[0] === 'isSecondToLastSubmit';
+  }
+
+  static isFinalSubmitRule(feedbackRule: FeedbackRule): boolean {
+    return feedbackRule.ideas[0] === 'isFinalSubmit';
+  }
+
+  static isDefaultRule(feedbackRule: FeedbackRule): boolean {
+    return feedbackRule.ideas[0] === 'isDefault';
+  }
 }
