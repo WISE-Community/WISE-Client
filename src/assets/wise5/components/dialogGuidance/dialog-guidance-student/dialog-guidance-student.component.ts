@@ -27,6 +27,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   isSubmitEnabled: boolean = false;
   isWaitingForComputerResponse: boolean = false;
   responses: DialogResponse[] = [];
+  studentCanRespond: boolean = true;
   studentResponse: string;
   workgroupId: number;
 
@@ -65,7 +66,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     }
     this.workgroupId = this.ConfigService.getWorkgroupId();
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
-      this.disableInput();
+      this.disableStudentResponse();
     }
   }
 
@@ -127,6 +128,10 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.isDisabled = false;
   }
 
+  disableStudentResponse(): void {
+    this.studentCanRespond = false;
+  }
+
   cRaterSuccessResponse(response: CRaterResponse): void {
     this.hideWaitingForComputerResponse();
     this.incrementSubmitCounter();
@@ -139,7 +144,9 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     );
     this.addDialogResponse(computerDialogResponse);
     this.studentDataChanged();
-    if (!this.hasMaxSubmitCountAndUsedAllSubmits()) {
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.disableStudentResponse();
+    } else {
       this.enableInput();
     }
   }

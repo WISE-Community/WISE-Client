@@ -2,7 +2,7 @@
 <mat-card class="mat-elevation-z2">
   <dialog-responses [responses]="responses" [isWaitingForComputerResponse]="isWaitingForComputerResponse">
   </dialog-responses>
-  <div *ngIf="!hasMaxSubmitCountAndUsedAllSubmits()"
+  <div *ngIf="studentCanRespond"
       class="add-response"
       fxLayout="row"
       fxLayoutAlign="start center"
