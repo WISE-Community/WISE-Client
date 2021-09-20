@@ -3,8 +3,8 @@
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { AudioOscillatorService } from './audioOscillatorService';
-import { EditAudioOscillatorAdvancedComponent } from './edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component';
 import { AudioOscillatorAuthoring } from './audio-oscillator-authoring/audio-oscillator-authoring.component';
+import { EditAudioOscillatorAdvancedComponent } from './edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component';
 
 const audioOscillatorAuthoringComponentModule = angular
   .module('audioOscillatorAuthoringComponentModule', ['pascalprecht.translate'])
@@ -13,7 +13,12 @@ const audioOscillatorAuthoringComponentModule = angular
     'audioOscillatorAuthoring',
     downgradeComponent({ component: AudioOscillatorAuthoring }) as angular.IDirectiveFactory
   )
-  .component('editAudioOscillatorAdvanced', EditAudioOscillatorAdvancedComponent)
+  .directive(
+    'editAudioOscillatorAdvanced',
+    downgradeComponent({
+      component: EditAudioOscillatorAdvancedComponent
+    }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {

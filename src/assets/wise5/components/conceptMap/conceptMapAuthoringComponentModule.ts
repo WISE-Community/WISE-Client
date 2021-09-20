@@ -14,7 +14,10 @@ const conceptMapAuthoringComponentModule = angular
     'conceptMapAuthoring',
     downgradeComponent({ component: ConceptMapAuthoring }) as angular.IDirectiveFactory
   )
-  .component('editConceptMapAdvanced', EditConceptMapAdvancedComponent)
+  .directive(
+    'editConceptMapAdvanced',
+    downgradeComponent({ component: EditConceptMapAdvancedComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'editConceptMapConnectedComponents',
     downgradeComponent({

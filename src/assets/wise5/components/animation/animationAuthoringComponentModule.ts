@@ -13,7 +13,10 @@ const animationAuthoringComponentModule = angular
     'animationAuthoring',
     downgradeComponent({ component: AnimationAuthoring }) as angular.IDirectiveFactory
   )
-  .component('editAnimationAdvanced', EditAnimationAdvancedComponent)
+  .directive(
+    'editAnimationAdvanced',
+    downgradeComponent({ component: EditAnimationAdvancedComponent }) as angular.IDirectiveFactory
+  )
   .config([
     '$translatePartialLoaderProvider',
     ($translatePartialLoaderProvider) => {

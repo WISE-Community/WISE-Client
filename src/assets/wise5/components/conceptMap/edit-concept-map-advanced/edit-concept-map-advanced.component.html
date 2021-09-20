@@ -1,125 +1,188 @@
-{{ ::'conceptMap.showAutoScore' | translate }}:
-<input type='checkbox'
-       ng-model='$ctrl.authoringComponentContent.showAutoScore'
-       ng-change='$ctrl.componentChanged()'/>
-<br/>
-{{ ::'conceptMap.showAutoFeedback' | translate }}:
-<input type='checkbox'
-       ng-model='$ctrl.authoringComponentContent.showAutoFeedback'
-       ng-change='$ctrl.componentChanged()'/>
-<br/>
-{{ ::'conceptMap.rules' | translate }}
-<div ng-repeat='rule in $ctrl.authoringComponentContent.rules'>
-  {{ ::'conceptMap.ruleName' | translate }}:
-  <input ng-model='rule.name'
-         size='30'
-         ng-change='$ctrl.componentChanged()'
-         ng-model-options='{ debounce: 1000 }'/>
-  <select ng-model='rule.not'
-          ng-change='$ctrl.componentChanged()'
-          ng-options='option.value as option.label for option in $ctrl.shouldOptions'>
-  </select>
-  {{ ::'conceptMap.contain' | translate }}
-  <select ng-model='rule.comparison'
-          ng-change='$ctrl.componentChanged()'>
-    <option value='exactly'>{{ ::'conceptMap.exactly' | translate }}</option>
-    <option value='more than'>{{ ::'conceptMap.moreThan' | translate }}</option>
-    <option value='less than'>{{ ::'conceptMap.lessThan' | translate }}</option>
-  </select>
-  <input ng-model='rule.number'
-         size='3'
-         ng-change='$ctrl.componentChanged()'/>
-  <select ng-model='rule.nodeLabel'
-          ng-change='$ctrl.componentChanged()'>
-    <option></option>
-    <option value='any'>{{ ::'conceptMap.any' | translate }}</option>
-    <option ng-repeat='node in $ctrl.authoringComponentContent.nodes'
-            value='{{node.label}}'>{{node.label}}</option>
-  </select>
-  {{ ::'conceptMap.withLink' | translate }}
-  <input type='checkbox'
-         ng-model='rule.type'
-         ng-true-value='"link"'
-         ng-false-value='"node"'
-         ng-change='$ctrl.ruleLinkCheckboxClicked($index)'/>
-  <select ng-model='rule.linkLabel'
-          ng-change='$ctrl.componentChanged()'
-          ng-if='rule.type == "link"'>
-    <option></option>
-    <option value='any'>{{ ::'conceptMap.any' | translate }}</option>
-    <option ng-repeat='link in $ctrl.authoringComponentContent.links'
-            value='{{link.label}}'>{{link.label}}</option>
-  </select>
-  <span ng-if='rule.type == "link"'>{{ ::'conceptMap.to' | translate }}</span>
-  <select ng-model='rule.otherNodeLabel'
-          ng-change='$ctrl.componentChanged()'
-          ng-if='rule.type == "link"'>
-    <option></option>
-    <option value='any'>{{ ::'conceptMap.any' | translate }}</option>
-    <option ng-repeat='node in $ctrl.authoringComponentContent.nodes'
-            value='{{node.label}}'>{{node.label}}</option>
-  </select>
-  <button ng-click="$ctrl.moveRuleUpButtonClicked($index)">{{ ::'UP' | translate }}</button>
-  <button ng-click="$ctrl.moveRuleDownButtonClicked($index)">{{ ::'DOWN' | translate }}</button>
-  <button ng-click='$ctrl.ruleDeleteButtonClicked($index)'>{{ ::'DELETE' | translate }}</button>
-  <br/>
-  <div style='text-indent: 80px'>
-    <button ng-click="$ctrl.addCategoryToRule(rule)">{{ ::'conceptMap.addCategoryOptional' | translate }}</button>
-    <span ng-repeat='category in rule.categories track by $index'>
-      <input ng-model='rule.categories[$index]'
-             ng-change='$ctrl.componentChanged()'
-             ng-model-options='{ debounce: 1000 }'/>
-      <button ng-click="$ctrl.deleteCategoryFromRule(rule, $index)">x</button>
-    </span>
+<div fxLayout="column" fxLayoutGap="8px">
+  <div>
+    <mat-checkbox
+        color="primary"
+        [(ngModel)]="authoringComponentContent.showAutoScore"
+        (ngModelChange)="componentChanged()"
+        i18n>
+      Show Auto Score
+    </mat-checkbox>
   </div>
-  <br/>
+  <div>
+    <mat-checkbox
+        color="primary"
+        [(ngModel)]="authoringComponentContent.showAutoFeedback"
+        (ngModelChange)="componentChanged()"
+        i18n>
+      Show Auto Feedback
+    </mat-checkbox>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <div i18n>Rules</div>
+    <button mat-raised-button color="primary" (click)="addRule()" i18n>
+      <mat-icon>add</mat-icon></button>
+  </div>
+  <div *ngFor="let rule of authoringComponentContent.rules; let ruleIndex = index"
+      fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px"
+      class="rule-container">
+    <mat-form-field>
+      <mat-label i18n>Rule Name</mat-label>
+      <input matInput
+          [(ngModel)]="rule.name"
+          (ngModelChange)="componentChanged()"/>
+    </mat-form-field>
+    <mat-form-field class="rule-select-container-wide">
+      <mat-label i18n>Should</mat-label>
+      <mat-select [(ngModel)]="rule.not"
+          (ngModelChange)="componentChanged()">
+        <mat-option [value]="false" i18n>should contain</mat-option>
+        <mat-option [value]="true" i18n>should not contain</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="rule-select-container">
+      <mat-label i18n>Comparison</mat-label>
+      <mat-select [(ngModel)]="rule.comparison"
+          (ngModelChange)="componentChanged()">
+        <mat-option value="exactly" i18n>exactly</mat-option>
+        <mat-option value="more than" i18n>more than</mat-option>
+        <mat-option value="less than" i18n>less than</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="rule-node-count-input">
+      <mat-label i18n>Count</mat-label>
+      <input matInput
+          type="number"
+          min="0"
+          [(ngModel)]="rule.number"
+          (ngModelChange)="componentChanged()"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n>Node</mat-label>
+      <mat-select [(ngModel)]="rule.nodeLabel"
+          (ngModelChange)="componentChanged()">
+        <mat-option></mat-option>
+        <mat-option value="any" i18n>Any</mat-option>
+        <mat-option *ngFor="let node of authoringComponentContent.nodes"
+            [value]="node.label">
+          {{node.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n>Link Connection</mat-label>
+      <mat-select [(ngModel)]="rule.type"
+          (ngModelChange)="ruleTypeChanged(ruleIndex)">
+        <mat-option value="node" i18n>with any or no link</mat-option>
+        <mat-option value="link" i18n>with specific link</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="rule.type === 'link'">
+      <mat-label i18n>Link</mat-label>
+      <mat-select [(ngModel)]="rule.linkLabel"
+          (ngModelChange)="componentChanged()">
+        <mat-option></mat-option>
+        <mat-option value="any" i18n>Any</mat-option>
+        <mat-option *ngFor="let link of authoringComponentContent.links"
+            [value]="link.label">
+          {{link.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span *ngIf="rule.type === 'link'" i18n>to</span>
+    <mat-form-field *ngIf="rule.type === 'link'">
+      <mat-label i18n>Node</mat-label>
+      <mat-select [(ngModel)]="rule.otherNodeLabel"
+          (ngModelChange)="componentChanged()">
+        <mat-option></mat-option>
+        <mat-option value="any" i18n>Any</mat-option>
+        <mat-option *ngFor="let node of authoringComponentContent.nodes"
+            [value]="node.label">
+          {{node.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <button mat-raised-button
+          color="primary"
+          (click)="moveRuleUpButtonClicked(ruleIndex)"
+          matTooltip="Move Up"
+          matTooltipPosition="above"
+          i18n-matTooltip
+          i18n>
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+      <button mat-raised-button
+          color="primary"
+          (click)="moveRuleDownButtonClicked(ruleIndex)"
+          matTooltip="Move Down"
+          matTooltipPosition="above"
+          i18n-matTooltip
+          i18n>
+        <mat-icon>arrow_downward</mat-icon>
+      </button>
+      <button mat-raised-button
+          color="primary"
+          (click)="ruleDeleteButtonClicked(ruleIndex)"
+          matTooltip="Delete"
+          matTooltipPosition="above"
+          i18n-matTooltip
+          i18n>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div fxFlex="100"></div>
+    <div fxLayout="row wrap"
+        fxLayoutAlign="start center"
+        fxLayoutGap="20px"
+        class="categories-container">
+      <div>
+        <button mat-raised-button
+            color="primary"
+            (click)="addCategoryToRule(rule)"
+            i18n>
+          Add Category (Optional)
+        </button>
+      </div>
+      <div *ngFor="let category of rule.categories; let categoryIndex = index; trackBy: customTrackBy"
+          fxLayoutGap="10px">
+        <mat-form-field>
+          <mat-label i18n>Category Name</mat-label>
+          <input matInput
+              [(ngModel)]="rule.categories[categoryIndex]"
+              (ngModelChange)="componentChanged()"/>
+        </mat-form-field>
+        <button mat-raised-button
+            color="primary"
+            (click)="deleteCategoryFromRule(rule, categoryIndex)"
+            matTooltip="Delete Catagory"
+            matTooltipPosition="above"
+            i18n-matTooltip>
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div i18n>Custom Rule Evaluator</div>
+  <div>
+    <textarea [(ngModel)]="authoringComponentContent.customRuleEvaluator"
+        (ngModelChange)="componentChanged()"
+        rows="10"
+        cols="100">
+    </textarea>
+  </div>
+  <div class="show-add-to-notebook-container">
+    <mat-checkbox *ngIf="isNotebookEnabled()"
+        color="primary"
+        [(ngModel)]="authoringComponentContent.showAddToNotebookButton"
+        (ngModelChange)="componentChanged()"
+        i18n>
+      Show Add to Notebook Button
+    </mat-checkbox>
+  </div>
 </div>
-<button ng-click='$ctrl.addRule()'>{{ ::'conceptMap.addRule' | translate }}</button>
-<br/>
-<br/>
-{{ ::'conceptMap.customRuleEvaluator' | translate }}
-<br/>
-<textarea ng-model='$ctrl.authoringComponentContent.customRuleEvaluator'
-          ng-change='$ctrl.componentChanged()'
-          rows='10'
-          cols='100'
-          ng-model-options='{ debounce: 1000 }'>
-</textarea>
-<br/>
-<br/>
-<edit-component-save-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-save-button>
-<br/>
-<edit-component-submit-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-submit-button>
-<div>
-  <md-checkbox class='md-primary'
-               ng-if='$ctrl.isNotebookEnabled()'
-               ng-model='$ctrl.authoringComponentContent.showAddToNotebookButton'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'SHOW_ADD_TO_NOTEBOOK_BUTTON' | translate }}
-  </md-checkbox>
-</div>
-<edit-component-max-submit
-    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
-    [(max-submit-count)]="$ctrl.authoringComponentContent.maxSubmitCount"
-    (max-submit-count-change)="$ctrl.maxSubmitCountChanged($event)">
-</edit-component-max-submit>
-<edit-component-default-feedback
-    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
-    [authoring-component-content]="$ctrl.authoringComponentContent">
-</edit-component-default-feedback>
-<div layout="column" layout-align="start start">
-  <edit-component-max-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-max-score>
-  <edit-component-exclude-from-total-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-exclude-from-total-score>
-  <edit-component-width [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-width>
-  <edit-component-rubric [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-rubric>
-  <edit-component-tags [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-tags>
-</div>
-<edit-concept-map-connected-components
-    [node-id]="$ctrl.nodeId"
-    [component-id]="$ctrl.componentId"
-    [allowed-connected-component-types]="$ctrl.allowedConnectedComponentTypes"
-    [component-content]="$ctrl.authoringComponentContent"
-    [connected-components]="$ctrl.authoringComponentContent.connectedComponents"
-    (connected-components-changed)="$ctrl.connectedComponentsChanged($event)">
-</edit-concept-map-connected-components>
-<edit-component-json [node-id]="$ctrl.nodeId" [component-id]="$ctrl.componentId"></edit-component-json>
+<edit-common-advanced
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+    [authoringComponentContent]="authoringComponentContent">
+</edit-common-advanced>
