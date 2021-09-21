@@ -24,14 +24,9 @@ export abstract class EditAdvancedComponentComponent {
     );
   }
 
-  setShowSubmitButtonValue(show: boolean): void {
-    if (show == null || show == false) {
-      this.authoringComponentContent.showSaveButton = false;
-      this.authoringComponentContent.showSubmitButton = false;
-    } else {
-      this.authoringComponentContent.showSaveButton = true;
-      this.authoringComponentContent.showSubmitButton = true;
-    }
+  setShowSubmitButtonValue(show: boolean = false): void {
+    this.authoringComponentContent.showSaveButton = show;
+    this.authoringComponentContent.showSubmitButton = show;
     this.NodeService.broadcastComponentShowSubmitButtonValueChanged({
       nodeId: this.nodeId,
       componentId: this.componentId,

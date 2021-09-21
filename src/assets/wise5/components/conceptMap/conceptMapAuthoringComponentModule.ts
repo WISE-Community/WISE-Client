@@ -8,7 +8,7 @@ import { ConceptMapAuthoring } from './concept-map-authoring/concept-map-authori
 import { EditConceptMapConnectedComponentsComponent } from './edit-concept-map-connected-components/edit-concept-map-connected-components.component';
 
 const conceptMapAuthoringComponentModule = angular
-  .module('conceptMapAuthoringComponentModule', ['pascalprecht.translate'])
+  .module('conceptMapAuthoringComponentModule', [])
   .service('ConceptMapService', downgradeInjectable(ConceptMapService))
   .directive(
     'conceptMapAuthoring',
@@ -23,12 +23,6 @@ const conceptMapAuthoringComponentModule = angular
     downgradeComponent({
       component: EditConceptMapConnectedComponentsComponent
     }) as angular.IDirectiveFactory
-  )
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/conceptMap/i18n');
-    }
-  ]);
+  );
 
 export default conceptMapAuthoringComponentModule;

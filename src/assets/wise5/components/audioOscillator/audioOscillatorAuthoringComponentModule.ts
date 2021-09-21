@@ -7,7 +7,7 @@ import { AudioOscillatorAuthoring } from './audio-oscillator-authoring/audio-osc
 import { EditAudioOscillatorAdvancedComponent } from './edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component';
 
 const audioOscillatorAuthoringComponentModule = angular
-  .module('audioOscillatorAuthoringComponentModule', ['pascalprecht.translate'])
+  .module('audioOscillatorAuthoringComponentModule', [])
   .service('AudioOscillatorService', downgradeInjectable(AudioOscillatorService))
   .directive(
     'audioOscillatorAuthoring',
@@ -18,12 +18,6 @@ const audioOscillatorAuthoringComponentModule = angular
     downgradeComponent({
       component: EditAudioOscillatorAdvancedComponent
     }) as angular.IDirectiveFactory
-  )
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/audioOscillator/i18n');
-    }
-  ]);
+  );
 
 export default audioOscillatorAuthoringComponentModule;
