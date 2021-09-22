@@ -561,6 +561,10 @@
           <context context-type="linenumber">215</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">238</context>
         </context-group>
@@ -619,6 +623,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">226</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -687,6 +695,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">236</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">126</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
@@ -11080,21 +11092,245 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset your work?</target>
       </trans-unit>
-      <trans-unit id="2777000704090097811" datatype="html">
+      <trans-unit id="4d5d5b4e6b3c3a79914e4c5a72054018599ac2c4" datatype="html">
+        <source> Show Auto Score </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <target state="needs-translation"> Show Auto Score </target>
+      </trans-unit>
+      <trans-unit id="938ce93515b4603b134daf42cf1325ea17ccf594" datatype="html">
+        <source> Show Auto Feedback </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+        <target state="needs-translation"> Show Auto Feedback </target>
+      </trans-unit>
+      <trans-unit id="2489eefea00931942b91f4a1ae109514b591e2e1" datatype="html">
+        <source>Rules</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <target state="needs-translation">Rules</target>
+      </trans-unit>
+      <trans-unit id="22e1b2f610135608344003f9fd38d87b64c9e0f6" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="743ec76118803d14b5695bc5915735101fd32fd6" datatype="html">
+        <source>Rule Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <target state="needs-translation">Rule Name</target>
+      </trans-unit>
+      <trans-unit id="bffe44ab461449f76ced3a1d609783dbfc404ede" datatype="html">
         <source>Should</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">35</context>
         </context-group>
-        <target state="translated">应该：</target>
+        <target state="needs-translation">Should</target>
       </trans-unit>
-      <trans-unit id="6573953678820999878" datatype="html">
-        <source>Should Not</source>
+      <trans-unit id="c2216fd04d1f069218979a131552091658db5711" datatype="html">
+        <source>should contain</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">38</context>
         </context-group>
-        <target state="translated">不应该</target>
+        <target state="needs-translation">should contain</target>
+      </trans-unit>
+      <trans-unit id="632d243f93e08bdb56cf5f30c935410370e89057" datatype="html">
+        <source>should not contain</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <target state="needs-translation">should not contain</target>
+      </trans-unit>
+      <trans-unit id="f9cece0ed974f75c69c8db7fa805c3c40f91405e" datatype="html">
+        <source>Comparison</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <target state="needs-translation">Comparison</target>
+      </trans-unit>
+      <trans-unit id="e24b46c9aa62dbd25c9fe782b5ce22f37994898b" datatype="html">
+        <source>exactly</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <target state="needs-translation">exactly</target>
+      </trans-unit>
+      <trans-unit id="7687c48bf1f418c337fcb20c46c51f2b737ab597" datatype="html">
+        <source>more than</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <target state="needs-translation">more than</target>
+      </trans-unit>
+      <trans-unit id="4af1d6466f0c5c48a00bc0bd388bc4b10176cc34" datatype="html">
+        <source>less than</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <target state="needs-translation">less than</target>
+      </trans-unit>
+      <trans-unit id="06412bce0f4fe4311193e9763666089bf9d980da" datatype="html">
+        <source>Count</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <target state="needs-translation">Count</target>
+      </trans-unit>
+      <trans-unit id="f738b840b92bf81637cc77a10cd2b2f2c6e09796" datatype="html">
+        <source>Node</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+        <target state="needs-translation">Node</target>
+      </trans-unit>
+      <trans-unit id="16d449549ab7bc61caf3d636372a4a56b5870383" datatype="html">
+        <source>Any</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+        <target state="needs-translation">Any</target>
+      </trans-unit>
+      <trans-unit id="39da225ea0669ea5e3c55c81a14ab0b38bef92ff" datatype="html">
+        <source>Link Connection</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <target state="needs-translation">Link Connection</target>
+      </trans-unit>
+      <trans-unit id="be9e4a33f32ed2cd07aa22c562a18f9515f5d57b" datatype="html">
+        <source>with any or no link</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <target state="needs-translation">with any or no link</target>
+      </trans-unit>
+      <trans-unit id="3a3329b31a5c6a48a9101d896a95590146e9fc14" datatype="html">
+        <source>with specific link</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <target state="needs-translation">with specific link</target>
+      </trans-unit>
+      <trans-unit id="e03b6cba7c88318e4f91a60a079870e8fba4bee7" datatype="html">
+        <source>Link</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+        <target state="needs-translation">Link</target>
+      </trans-unit>
+      <trans-unit id="e04356b41e0d85f3e2f7ebc72a3f75c6e1147663" datatype="html">
+        <source>to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+        <target state="needs-translation">to</target>
+      </trans-unit>
+      <trans-unit id="600856c693f5930e4d77fbc92a9caee8203fe232" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>arrow_upward<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>arrow_upward<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="7540b27c5356248e45925fefcb2d46e1b8e6b21f" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>arrow_downward<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>arrow_downward<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="12675322a4637780b8ba9d4c634221b1fe22151e" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>delete<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>delete<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="8f5ac6c3598fba7c938fcb8790adc8c32c91b998" datatype="html">
+        <source> Add Category (Optional) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">143,144</context>
+        </context-group>
+        <target state="needs-translation"> Add Category (Optional) </target>
+      </trans-unit>
+      <trans-unit id="67203c1c76c8e357c9a3ad6274221f700d1d7f3c" datatype="html">
+        <source>Category Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">149</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+        <target state="translated">类别名称</target>
+      </trans-unit>
+      <trans-unit id="79dc427d56a1bbcefb10e61a3457cf3dc2b585c8" datatype="html">
+        <source>Delete Catagory</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+        <target state="needs-translation">Delete Catagory</target>
+      </trans-unit>
+      <trans-unit id="460193163eac2e72b0d34272b5685eb378271663" datatype="html">
+        <source>Custom Rule Evaluator</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">165</context>
+        </context-group>
+        <target state="needs-translation">Custom Rule Evaluator</target>
+      </trans-unit>
+      <trans-unit id="db63f00b42b574916c695a72c97042e7dc90b60d" datatype="html">
+        <source> Show Add to Notebook Button </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">179,180</context>
+        </context-group>
+        <target state="needs-translation"> Show Add to Notebook Button </target>
       </trans-unit>
       <trans-unit id="1619150342877037073" datatype="html">
         <source>Are you sure you want to delete this rule?
@@ -11102,7 +11338,7 @@ Are you ready to receive feedback on this answer?</target>
 Rule Name: <x id="PH" equiv-text="ruleName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <target state="translated">您确定要删除此规则吗？
 
@@ -11115,7 +11351,7 @@ Rule Name: <x id="PH" equiv-text="ruleName"/>
 Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="linenumber">94</context>
         </context-group>
         <target state="translated">您确定要从此规则中删除该类别吗？
 
@@ -11961,14 +12197,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">91</context>
         </context-group>
         <target state="translated">添加类别</target>
-      </trans-unit>
-      <trans-unit id="67203c1c76c8e357c9a3ad6274221f700d1d7f3c" datatype="html">
-        <source>Category Name</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
-          <context context-type="linenumber">100</context>
-        </context-group>
-        <target state="translated">类别名称</target>
       </trans-unit>
       <trans-unit id="e9902c7e6ea85423e851fff848a85ea83272edc2" datatype="html">
         <source>Delete Category</source>
