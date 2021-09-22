@@ -16,6 +16,7 @@ import { timeout } from 'rxjs/operators';
 import { CRaterResponse } from '../CRaterResponse';
 import { ComputerDialogResponse } from '../ComputerDialogResponse';
 import { FeedbackRule } from '../FeedbackRule';
+import { DialogGuidanceFeedbackRuleEvaluator } from '../DialogGuidanceFeedbackRuleEvaluator';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -24,6 +25,7 @@ import { FeedbackRule } from '../FeedbackRule';
 })
 export class DialogGuidanceStudentComponent extends ComponentStudent {
   cRaterTimeout: number = 40000;
+  feedbackRuleEvaluator: DialogGuidanceFeedbackRuleEvaluator;
   isSubmitEnabled: boolean = false;
   isWaitingForComputerResponse: boolean = false;
   responses: DialogResponse[] = [];
@@ -68,6 +70,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     }
+    this.feedbackRuleEvaluator = new DialogGuidanceFeedbackRuleEvaluator(this);
   }
 
   submitStudentResponse(): void {
@@ -135,7 +138,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   cRaterSuccessResponse(response: CRaterResponse): void {
     this.hideWaitingForComputerResponse();
     this.incrementSubmitCounter();
-    const feedbackRule: FeedbackRule = this.getFeedbackRule(response);
+    const feedbackRule: FeedbackRule = this.feedbackRuleEvaluator.getFeedbackRule(response);
     const computerDialogResponse = new ComputerDialogResponse(
       feedbackRule.feedback,
       response.scores,
@@ -149,52 +152,6 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     } else {
       this.enableInput();
     }
-  }
-
-  getFeedbackRule(response: CRaterResponse): FeedbackRule {
-    for (const feedbackRule of this.componentContent.feedbackRules) {
-      if (this.satisfiesRule(response, feedbackRule)) {
-        return feedbackRule;
-      }
-    }
-    return this.getDefaultRule(this.componentContent.feedbackRules);
-  }
-
-  satisfiesRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {
-    return (
-      this.satisfiesFinalSubmitRule(feedbackRule) ||
-      this.satisfiesSecondToLastSubmitRule(feedbackRule) ||
-      this.satisfiesSpecificRule(response, feedbackRule)
-    );
-  }
-
-  satisfiesFinalSubmitRule(feedbackRule: FeedbackRule): boolean {
-    return (
-      this.hasMaxSubmitCountAndUsedAllSubmits() && FeedbackRule.isFinalSubmitRule(feedbackRule)
-    );
-  }
-
-  satisfiesSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {
-    return (
-      this.hasMaxSubmitCount() &&
-      this.isSecondToLastSubmit() &&
-      FeedbackRule.isSecondToLastSubmitRule(feedbackRule)
-    );
-  }
-
-  isSecondToLastSubmit(): boolean {
-    return this.getNumberOfSubmitsLeft() === 1;
-  }
-
-  satisfiesSpecificRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {
-    return this.UtilService.arraysContainSameValues(
-      response.getDetectedIdeaNames(),
-      feedbackRule.ideas
-    );
-  }
-
-  getDefaultRule(feedbackRules: FeedbackRule[]): FeedbackRule {
-    return feedbackRules.find((rule) => FeedbackRule.isDefaultRule(rule));
   }
 
   cRaterErrorResponse() {
