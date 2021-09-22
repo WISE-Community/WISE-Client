@@ -3,8 +3,5 @@
 .mat-card {
   padding: 8px;
   margin-top: 16px;
-}
-
-.mat-icon-button {
-  margin-top: 2px;
+  max-width: breakpoint('sm.min');
 }
