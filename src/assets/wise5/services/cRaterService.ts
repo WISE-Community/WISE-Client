@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { Observable, of } from 'rxjs';
-import cRaterMockResponseData from './cRaterMockResponseData.json';
 
 @Injectable()
 export class CRaterService {
@@ -34,12 +33,13 @@ export class CRaterService {
   }
 
   private mockSpeedResponse(responseText: string): Observable<any> {
-    const found = responseText.match(/idea([a-zA-Z0-9]+)/g);
-    if (found != null) {
-      return of(cRaterMockResponseData[found[0]]);
-    } else {
-      return of(cRaterMockResponseData['default']);
-    }
+    const ideasFound = responseText.match(/idea([a-zA-Z0-9]+)/g) ?? [];
+    return of({
+      scores: [],
+      ideas: ideasFound.map((idea) => {
+        return { name: idea, detected: true, characterOffsets: [] };
+      })
+    });
   }
 
   /**

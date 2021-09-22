@@ -7,7 +7,7 @@ export class CRaterResponse {
 
   constructor() {}
 
-  getDetectedIdeaNames(): CRaterIdea[] {
+  getDetectedIdeaNames(): string[] {
     const detectedIdeaNames = [];
     this.ideas.forEach((idea: CRaterIdea) => {
       if (idea.detected) {

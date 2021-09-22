@@ -29,6 +29,7 @@ import { DialogGuidanceStudentComponent } from './dialog-guidance-student/dialog
 import { DialogResponsesComponent } from './dialog-responses/dialog-responses.component';
 import { DialogGuidanceFeedbackRuleEvaluator } from './DialogGuidanceFeedbackRuleEvaluator';
 import { DialogGuidanceService } from './dialogGuidanceService';
+import { FeedbackRule } from './FeedbackRule';
 
 let component: DialogGuidanceStudentComponent;
 let evaluator: DialogGuidanceFeedbackRuleEvaluator;
@@ -44,12 +45,20 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
       feedback: 'This is a generic response that is shown on the second to last submission'
     },
     {
+      rule: ['idea1', '&&', 'idea2'],
+      feedback: 'You hit idea1 and idea2'
+    },
+    {
+      rule: ['idea2', '&&', 'idea3', '&&', 'idea4'],
+      feedback: 'You hit idea2, idea3 and idea4'
+    },
+    {
       rule: ['idea1'],
-      feedback: 'You hit idea 1'
+      feedback: 'You hit idea1'
     },
     {
       rule: ['idea2'],
-      feedback: 'You hit idea 2'
+      feedback: 'You hit idea2'
     },
     {
       rule: ['isDefault'],
@@ -107,23 +116,29 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
     fixture.detectChanges();
     evaluator = new DialogGuidanceFeedbackRuleEvaluator(component);
   });
-  matchRule();
+  matchRule_OneIdea();
+  matchRule_MultipleIdeas();
   matchNoRule_ReturnDefault();
   secondToLastSubmit();
   finalSubmit();
 });
 
-function matchRule() {
-  it('should find first rule matching rule', () => {
-    const rule = getFeedbackRuleForIdeas(['idea1']);
-    expect(rule.feedback).toContain('You hit idea 1');
+function matchRule_OneIdea() {
+  it('should find first rule matching one idea', () => {
+    expectFeedbackForMatchedIdeas(['idea1'], 'You hit idea1');
+  });
+}
+
+function matchRule_MultipleIdeas() {
+  it('should find rule matching two ideas using && operator', () => {
+    expectFeedbackForMatchedIdeas(['idea1', 'idea2'], 'You hit idea1 and idea2');
+    expectFeedbackForMatchedIdeas(['idea2', 'idea3', 'idea4'], 'You hit idea2, idea3 and idea4');
   });
 }
 
 function matchNoRule_ReturnDefault() {
   it('should return default idea when no rule is matched', () => {
-    const rule = getFeedbackRuleForIdeas([]);
-    expect(rule.feedback).toContain('default feedback');
+    expectFeedbackForMatchedIdeas([], 'default feedback');
   });
 }
 
@@ -131,8 +146,7 @@ function secondToLastSubmit() {
   it('should return second to last submit rule when there is one submit left', () => {
     component.componentContent.maxSubmitCount = 5;
     component.submitCounter = 4;
-    const rule = getFeedbackRuleForIdeas(['idea1']);
-    expect(rule.feedback).toContain('second to last submission');
+    expectFeedbackForMatchedIdeas(['idea1'], 'second to last submission');
   });
 }
 
@@ -140,12 +154,16 @@ function finalSubmit() {
   it('should return final submit rule when no more submits left', () => {
     component.componentContent.maxSubmitCount = 5;
     component.submitCounter = 5;
-    const rule = getFeedbackRuleForIdeas(['idea1']);
-    expect(rule.feedback).toContain('final submission');
+    expectFeedbackForMatchedIdeas(['idea1'], 'final submission');
   });
 }
 
-function getFeedbackRuleForIdeas(ideasString: string[]) {
+function expectFeedbackForMatchedIdeas(ideas: string[], expectedFeedback: string) {
+  const rule = getFeedbackRuleForIdeas(ideas);
+  expect(rule.feedback).toContain(expectedFeedback);
+}
+
+function getFeedbackRuleForIdeas(ideasString: string[]): FeedbackRule {
   const response = createCRaterResponse(ideasString);
   return evaluator.getFeedbackRule(response);
 }
