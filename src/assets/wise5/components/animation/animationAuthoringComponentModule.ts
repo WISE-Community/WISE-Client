@@ -7,17 +7,14 @@ import { EditAnimationAdvancedComponent } from './edit-animation-advanced/edit-a
 import { AnimationAuthoring } from './animation-authoring/animation-authoring.component';
 
 const animationAuthoringComponentModule = angular
-  .module('animationAuthoringComponentModule', ['pascalprecht.translate'])
+  .module('animationAuthoringComponentModule', [])
   .service('AnimationService', downgradeInjectable(AnimationService))
   .directive(
     'animationAuthoring',
     downgradeComponent({ component: AnimationAuthoring }) as angular.IDirectiveFactory
   )
-  .component('editAnimationAdvanced', EditAnimationAdvancedComponent)
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/animation/i18n');
-    }
-  ]);
+  .directive(
+    'editAnimationAdvanced',
+    downgradeComponent({ component: EditAnimationAdvancedComponent }) as angular.IDirectiveFactory
+  );
 export default animationAuthoringComponentModule;

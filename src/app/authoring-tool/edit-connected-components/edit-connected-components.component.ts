@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 
 @Component({
-  selector: 'app-edit-connected-components',
+  selector: 'edit-connected-components',
   templateUrl: './edit-connected-components.component.html',
   styleUrls: ['./edit-connected-components.component.scss']
 })

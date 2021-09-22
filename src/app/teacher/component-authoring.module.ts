@@ -48,6 +48,10 @@ import { EditDiscussionConnectedComponentsComponent } from '../../assets/wise5/c
 import { EditMatchConnectedComponentsComponent } from '../../assets/wise5/components/match/edit-match-connected-components/edit-match-connected-components.component';
 import { EditMultipleChoiceConnectedComponentsComponent } from '../../assets/wise5/components/multipleChoice/edit-multiple-choice-connected-components/edit-multiple-choice-connected-components.component';
 import { EditComponentMaxSubmitComponent } from '../authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
+import { EditAnimationAdvancedComponent } from '../../assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component';
+import { EditAudioOscillatorAdvancedComponent } from '../../assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component';
+import { EditCommonAdvancedComponent } from '../authoring-tool/edit-common-advanced/edit-common-advanced.component';
+import { EditConceptMapAdvancedComponent } from '../../assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +62,9 @@ import { EditComponentMaxSubmitComponent } from '../authoring-tool/edit-componen
     DrawAuthoring,
     DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
+    EditAnimationAdvancedComponent,
+    EditAudioOscillatorAdvancedComponent,
+    EditCommonAdvancedComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
@@ -69,6 +76,7 @@ import { EditComponentMaxSubmitComponent } from '../authoring-tool/edit-componen
     EditComponentSubmitButtonComponent,
     EditComponentTagsComponent,
     EditComponentWidthComponent,
+    EditConceptMapAdvancedComponent,
     EditConceptMapConnectedComponentsComponent,
     EditConnectedComponentDefaultSelectsComponent,
     EditConnectedComponentsAddButtonComponent,
@@ -107,6 +115,9 @@ import { EditComponentMaxSubmitComponent } from '../authoring-tool/edit-componen
     ConceptMapAuthoring,
     DrawAuthoring,
     DiscussionAuthoring,
+    EditAnimationAdvancedComponent,
+    EditAudioOscillatorAdvancedComponent,
+    EditCommonAdvancedComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
@@ -118,6 +129,7 @@ import { EditComponentMaxSubmitComponent } from '../authoring-tool/edit-componen
     EditComponentSubmitButtonComponent,
     EditComponentTagsComponent,
     EditComponentWidthComponent,
+    EditConceptMapAdvancedComponent,
     EditConceptMapConnectedComponentsComponent,
     EditConnectedComponentDefaultSelectsComponent,
     EditConnectedComponentsAddButtonComponent,

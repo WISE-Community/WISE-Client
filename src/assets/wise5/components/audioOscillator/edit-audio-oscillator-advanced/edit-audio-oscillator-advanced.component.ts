@@ -1,15 +1,10 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
-class EditAudioOscillatorAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  selector: 'edit-audio-oscillator-advanced',
+  templateUrl: 'edit-audio-oscillator-advanced.component.html'
+})
+export class EditAudioOscillatorAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['AudioOscillator'];
 }
-
-export const EditAudioOscillatorAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditAudioOscillatorAdvancedController,
-  templateUrl:
-    'assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html'
-};
