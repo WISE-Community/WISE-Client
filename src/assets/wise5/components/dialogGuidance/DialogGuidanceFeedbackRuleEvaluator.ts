@@ -46,7 +46,7 @@ export class DialogGuidanceFeedbackRuleEvaluator {
   }
 
   private isSpecialRule(feedbackRule: FeedbackRule): boolean {
-    return ['isFinalSubmit', 'isSecondToLastSubmit'].includes(feedbackRule.rule[0]);
+    return ['isFinalSubmit', 'isSecondToLastSubmit'].includes(feedbackRule.expression);
   }
 
   private satisfiesSpecificRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {

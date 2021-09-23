@@ -8,7 +8,7 @@ function getPostfixExpression() {
   describe('getPostfixRule()', () => {
     it('should convert rule to postfix format', () => {
       const feedbackRule = new FeedbackRule();
-      feedbackRule.rule = ['idea1', '&&', 'idea2', '&&', 'idea3'];
+      feedbackRule.expression = 'idea1 && idea2 && idea3';
       expect(feedbackRule.getPostfixExpression()).toEqual(['idea1', 'idea2', '&&', 'idea3', '&&']);
     });
   });

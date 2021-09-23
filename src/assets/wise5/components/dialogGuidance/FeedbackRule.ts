@@ -1,24 +1,24 @@
 export class FeedbackRule {
+  expression: string;
   feedback: string;
-  rule: string[];
 
   static isSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {
-    return feedbackRule.rule[0] === 'isSecondToLastSubmit';
+    return feedbackRule.expression === 'isSecondToLastSubmit';
   }
 
   static isFinalSubmitRule(feedbackRule: FeedbackRule): boolean {
-    return feedbackRule.rule[0] === 'isFinalSubmit';
+    return feedbackRule.expression === 'isFinalSubmit';
   }
 
   static isDefaultRule(feedbackRule: FeedbackRule): boolean {
-    return feedbackRule.rule[0] === 'isDefault';
+    return feedbackRule.expression === 'isDefault';
   }
 
   // uses shunting yard algorithm to get expression in postfix (reverse-polish) notation
   getPostfixExpression(): string[] {
     const result = [];
     const operatorStack = [];
-    for (const symbol of this.rule) {
+    for (const symbol of this.getExpressionAsArray()) {
       if (FeedbackRule.isOperator(symbol)) {
         while (operatorStack.length > 0) {
           const last = operatorStack[operatorStack.length - 1];
@@ -40,6 +40,10 @@ export class FeedbackRule {
       result.push(operatorStack.pop());
     }
     return result;
+  }
+
+  private getExpressionAsArray(): string[] {
+    return this.expression.replace(/ /g, '').split(/(&&)/g);
   }
 
   static isOperator(symbol: string): boolean {

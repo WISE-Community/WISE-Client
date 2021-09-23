@@ -37,31 +37,31 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
   let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
   const defaultFeedbackRules = [
     {
-      rule: ['isFinalSubmit'],
+      expression: 'isFinalSubmit',
       feedback: 'This is a generic response that is shown on a final submission'
     },
     {
-      rule: ['isSecondToLastSubmit'],
+      expression: 'isSecondToLastSubmit',
       feedback: 'This is a generic response that is shown on the second to last submission'
     },
     {
-      rule: ['idea1', '&&', 'idea2'],
+      expression: 'idea1 && idea2',
       feedback: 'You hit idea1 and idea2'
     },
     {
-      rule: ['idea2', '&&', 'idea3', '&&', 'idea4'],
+      expression: 'idea2 && idea3 && idea4',
       feedback: 'You hit idea2, idea3 and idea4'
     },
     {
-      rule: ['idea1'],
+      expression: 'idea1',
       feedback: 'You hit idea1'
     },
     {
-      rule: ['idea2'],
+      expression: 'idea2',
       feedback: 'You hit idea2'
     },
     {
-      rule: ['isDefault'],
+      expression: 'isDefault',
       feedback: 'This is a default feedback'
     }
   ];
