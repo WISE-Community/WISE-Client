@@ -11402,6 +11402,22 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Item ID</target>
       </trans-unit>
+      <trans-unit id="c50661356b4d4941e7eb9b151c65f5f5897d236e" datatype="html">
+        <source>Add response...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <target state="needs-translation">Add response...</target>
+      </trans-unit>
+      <trans-unit id="427e92e019c34109656b0e1fc9576bfb833934d9" datatype="html">
+        <source> Send </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <target state="needs-translation"> Send </target>
+      </trans-unit>
       <trans-unit id="c80dd9bfb0bd7a7ce89ef1140e6f35211ab711f0" datatype="html">
         <source>Student response</source>
         <context-group purpose="location">
