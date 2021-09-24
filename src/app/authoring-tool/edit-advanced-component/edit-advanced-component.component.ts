@@ -38,6 +38,11 @@ export abstract class EditAdvancedComponentComponent {
     return this.NotebookService.isNotebookEnabled();
   }
 
+  connectedComponentsChanged(connectedComponents: any[]): void {
+    this.authoringComponentContent.connectedComponents = connectedComponents;
+    this.componentChanged();
+  }
+
   componentChanged(): void {
     this.ProjectService.nodeChanged();
   }

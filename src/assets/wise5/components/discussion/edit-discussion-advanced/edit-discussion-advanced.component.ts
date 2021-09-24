@@ -1,15 +1,10 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
-class EditDiscussionAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  selector: 'edit-discussion-advanced',
+  templateUrl: 'edit-discussion-advanced.component.html'
+})
+export class EditDiscussionAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['Discussion'];
 }
-
-export const EditDiscussionAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditDiscussionAdvancedController,
-  templateUrl:
-    'assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html'
-};
