@@ -10285,6 +10285,20 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="c50661356b4d4941e7eb9b151c65f5f5897d236e" datatype="html">
+        <source>Add response...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="427e92e019c34109656b0e1fc9576bfb833934d9" datatype="html">
+        <source> Send </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="c80dd9bfb0bd7a7ce89ef1140e6f35211ab711f0" datatype="html">
         <source>Student response</source>
         <context-group purpose="location">
@@ -10854,11 +10868,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">118</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="fceccf95ed74959886aea7f6df0064f8210c1f67" datatype="html">
-        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+      <trans-unit id="cde707c410ff560084e775aeff43819eecd6feee" datatype="html">
+        <source>Add Y Axis Plot Line</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="41dcb6e22d963da0683b3069f66f97c04c4a75aa" datatype="html">
