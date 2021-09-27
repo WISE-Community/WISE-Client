@@ -78,21 +78,19 @@ export class DialogGuidanceFeedbackRuleEvaluator {
     termStack: string[],
     response: CRaterResponse
   ): boolean {
+    const term1 = termStack.pop();
+    const term2 = termStack.pop();
     return (
-      (term === '&&' && this.evaluateAndExpression(termStack, response)) ||
-      (term === '||' && this.evaluateOrExpression(termStack, response))
+      (term === '&&' && this.evaluateAndExpression(term1, term2, response)) ||
+      (term === '||' && this.evaluateOrExpression(term1, term2, response))
     );
   }
 
-  private evaluateAndExpression(termStack: string[], response: CRaterResponse): boolean {
-    const term1 = termStack.pop();
-    const term2 = termStack.pop();
+  private evaluateAndExpression(term1: string, term2: string, response: CRaterResponse): boolean {
     return this.evaluateTerm(term1, response) && this.evaluateTerm(term2, response);
   }
 
-  private evaluateOrExpression(termStack: string[], response: CRaterResponse): boolean {
-    const term1 = termStack.pop();
-    const term2 = termStack.pop();
+  private evaluateOrExpression(term1: string, term2: string, response: CRaterResponse): boolean {
     return this.evaluateTerm(term1, response) || this.evaluateTerm(term2, response);
   }
 
