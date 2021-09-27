@@ -14,11 +14,11 @@ export abstract class EditAdvancedComponentComponent {
   constructor(
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
-    protected ProjectService: TeacherProjectService
+    protected TeacherProjectService: TeacherProjectService
   ) {}
 
   ngOnInit() {
-    this.authoringComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+    this.authoringComponentContent = this.TeacherProjectService.getComponentByNodeIdAndComponentId(
       this.nodeId,
       this.componentId
     );
@@ -44,6 +44,6 @@ export abstract class EditAdvancedComponentComponent {
   }
 
   componentChanged(): void {
-    this.ProjectService.nodeChanged();
+    this.TeacherProjectService.nodeChanged();
   }
 }
