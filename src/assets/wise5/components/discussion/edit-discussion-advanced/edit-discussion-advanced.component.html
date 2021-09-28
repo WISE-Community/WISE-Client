@@ -1,16 +1,16 @@
-<div layout="column" layout-align="start start">
-  <edit-component-max-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-max-score>
-  <edit-component-exclude-from-total-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-exclude-from-total-score>
-  <edit-component-width [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-width>
-  <edit-component-rubric [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-rubric>
-  <edit-component-tags [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-tags>
+<div fxLayout="column" fxLayoutAlign="start start">
+  <edit-component-max-score [authoringComponentContent]="authoringComponentContent"></edit-component-max-score>
+  <edit-component-exclude-from-total-score [authoringComponentContent]="authoringComponentContent"></edit-component-exclude-from-total-score>
+  <edit-component-width [authoringComponentContent]="authoringComponentContent"></edit-component-width>
+  <edit-component-rubric [authoringComponentContent]="authoringComponentContent"></edit-component-rubric>
+  <edit-component-tags [authoringComponentContent]="authoringComponentContent"></edit-component-tags>
 </div>
 <edit-discussion-connected-components
-    [node-id]="$ctrl.nodeId"
-    [component-id]="$ctrl.componentId"
-    [allowed-connected-component-types]="$ctrl.allowedConnectedComponentTypes"
-    [component-content]="$ctrl.authoringComponentContent"
-    [connected-components]="$ctrl.authoringComponentContent.connectedComponents"
-    (connected-components-changed)="$ctrl.connectedComponentsChanged($event)">
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+    [componentContent]="authoringComponentContent"
+    [connectedComponents]="authoringComponentContent.connectedComponents"
+    (connectedComponentsChanged)="connectedComponentsChanged($event)">
 </edit-discussion-connected-components>
-<edit-component-json [node-id]="$ctrl.nodeId" [component-id]="$ctrl.componentId"></edit-component-json>
+<edit-component-json [nodeId]="nodeId" [componentId]="componentId"></edit-component-json>

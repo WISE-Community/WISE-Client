@@ -52,6 +52,11 @@ import { EditAnimationAdvancedComponent } from '../../assets/wise5/components/an
 import { EditAudioOscillatorAdvancedComponent } from '../../assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component';
 import { EditCommonAdvancedComponent } from '../authoring-tool/edit-common-advanced/edit-common-advanced.component';
 import { EditConceptMapAdvancedComponent } from '../../assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component';
+import { EditDiscussionAdvancedComponent } from '../../assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component';
+import { EditDrawAdvancedComponent } from '../../assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component';
+import { EditEmbeddedAdvancedComponent } from '../../assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component';
+import { EditComponentAddToNotebookButtonComponent } from '../authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
+import { EditGraphAdvancedComponent } from '../../assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +70,7 @@ import { EditConceptMapAdvancedComponent } from '../../assets/wise5/components/c
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
+    EditComponentAddToNotebookButtonComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
@@ -87,8 +93,12 @@ import { EditConceptMapAdvancedComponent } from '../../assets/wise5/components/c
     EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
     EditDialogGuidanceFeedbackRulesComponent,
+    EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,
+    EditDrawAdvancedComponent,
     EditDrawConnectedComponentsComponent,
+    EditEmbeddedAdvancedComponent,
+    EditGraphAdvancedComponent,
     EditGraphConnectedComponentsComponent,
     EditLabelConnectedComponentsComponent,
     EditHTMLAdvancedComponent,
@@ -118,6 +128,7 @@ import { EditConceptMapAdvancedComponent } from '../../assets/wise5/components/c
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
+    EditComponentAddToNotebookButtonComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
@@ -139,8 +150,12 @@ import { EditConceptMapAdvancedComponent } from '../../assets/wise5/components/c
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
+    EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,
+    EditDrawAdvancedComponent,
     EditDrawConnectedComponentsComponent,
+    EditEmbeddedAdvancedComponent,
+    EditGraphAdvancedComponent,
     EditGraphConnectedComponentsComponent,
     EditLabelConnectedComponentsComponent,
     EditHTMLAdvancedComponent,

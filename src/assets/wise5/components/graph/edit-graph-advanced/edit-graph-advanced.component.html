@@ -1,178 +1,170 @@
-<div>
-  <md-input-container style='width: 500px;'>
-    <label>{{ ::'graph.subtitle' | translate }}</label>
-    <input type='text'
-        ng-model='$ctrl.authoringComponentContent.subtitle'
-        ng-model-options='{ debounce: 1000 }'
-        ng-change='$ctrl.componentChanged()'/>
-  </md-input-container>
-</div>
-<div>
-  <md-checkbox class='md-primary'
-               ng-model='$ctrl.authoringComponentContent.showMouseXPlotLine'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'graph.showMouseXPlotLine' | translate }}
-  </md-checkbox>
-</div>
-<div>
-  <md-checkbox class='md-primary'
-               style='left: 40px;'
-               ng-disabled='!$ctrl.authoringComponentContent.showMouseXPlotLine'
-               ng-model='$ctrl.authoringComponentContent.highlightXRangeFromZero'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'graph.highlightXRangeFromZero' | translate }}
-  </md-checkbox>
-</div>
-<div>
-  <md-checkbox class='md-primary'
-               ng-model='$ctrl.authoringComponentContent.showMouseYPlotLine'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'graph.showMouseYPlotLine' | translate }}
-  </md-checkbox>
-</div>
-<div>
-  <md-checkbox class='md-primary'
-               ng-model='$ctrl.authoringComponentContent.saveMouseOverPoints'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'graph.saveMouseOverPoints' | translate }}
-  </md-checkbox>
-</div>
-<div>
-  <md-checkbox class='md-primary'
-               ng-model='$ctrl.authoringComponentContent.hideTrialSelect'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'graph.hideTrialSelect' | translate }}
-  </md-checkbox>
-</div>
-<edit-component-save-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-save-button>
-<br/>
-<edit-component-submit-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-submit-button>
-<div>
-  <md-checkbox class='md-primary'
-               ng-if='$ctrl.isNotebookEnabled()'
-               ng-model='$ctrl.authoringComponentContent.showAddToNotebookButton'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'SHOW_ADD_TO_NOTEBOOK_BUTTON' | translate }}
-  </md-checkbox>
-</div>
-<edit-component-max-submit
-    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
-    [(max-submit-count)]="$ctrl.authoringComponentContent.maxSubmitCount"
-    (max-submit-count-change)="$ctrl.maxSubmitCountChanged($event)">
-</edit-component-max-submit>
-<edit-component-default-feedback
-    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
-    [authoring-component-content]="$ctrl.authoringComponentContent">
-</edit-component-default-feedback>
-<div>
-  <md-checkbox class='md-primary'
-               ng-model='$ctrl.authoringComponentContent.useCustomLegend'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'graph.useCustomLegend' | translate }}
-  </md-checkbox>
-</div>
-<div>
-  <md-input-container style='width:100%'
-                      ng-if='$ctrl.authoringComponentContent.useCustomLegend'>
-    <label>{{ ::'graph.customLegend' | translate }}</label>
-    <textarea rows='1'
-              ng-model='$ctrl.authoringComponentContent.customLegend'
-              ng-change='$ctrl.componentChanged()'
-              ng-model-options='{ debounce: 1000 }'>
-    </textarea>
-  </md-input-container>
-</div>
-<div>
-  <label class='node__label--vertical-alignment'>{{ 'graph.xAxisPlotLine' | translate }}</label>
-  <md-button class='topButton md-raised md-primary'
-      ng-click='$ctrl.addXAxisPlotLine()'>
-    <md-icon>add</md-icon>
-    <md-tooltip>{{ ::'graph.addXAxisPlotLine' | translate }}</md-tooltip>
-  </md-button>
-</div>
-<div ng-repeat='plotLine in $ctrl.authoringComponentContent.xAxis.plotLines track by $index'>
-  <div flex>
-    <md-input-container style='width: 400px;'>
-      <label>{{ ::'graph.text' | translate }}</label>
-      <input type='text'
-          ng-model='plotLine.label.text'
-          ng-model-options='{ debounce: 1000 }'
-          ng-change='$ctrl.componentChanged()'/>
-    </md-input-container>
-    <md-input-container>
-      <label>{{ ::'graph.xValue' | translate }}</label>
-      <input type='text'
-          ng-model='plotLine.value'
-          ng-model-options='{ debounce: 1000 }'
-          ng-change='$ctrl.componentChanged()'/>
-    </md-input-container>
-    <md-input-container>
-      <label>{{ ::'graph.color' | translate }}</label>
-      <input type='text'
-          ng-model='plotLine.color'
-          ng-model-options='{ debounce: 1000 }'
-          ng-change='$ctrl.componentChanged()'/>
-    </md-input-container>
-    <span flex></span>
-    <md-button class='topButton md-raised md-primary'
-               ng-click='$ctrl.deleteXAxisPlotLine($index)'>
-      <md-icon>delete</md-icon>
-      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'DELETE' | translate }}</md-tooltip>
-    </md-button>
+<div fxLayout="column" fxLayoutGap="8px">
+  <div>
+    <mat-form-field class="subtitle">
+      <mat-label i18n>Subtitle</mat-label>
+      <input matInput
+          [(ngModel)]="authoringComponentContent.subtitle"
+          (ngModelChange)="componentChanged()"/>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-checkbox
+        color="primary"
+        [(ngModel)]="authoringComponentContent.showMouseXPlotLine"
+        (ngModelChange)="componentChanged()"
+        i18n>
+      Show Mouse X Plot Line
+    </mat-checkbox>
+  </div>
+  <div class="highlight-x-range-from-zero">
+    <mat-checkbox
+        color="primary"
+        [disabled]="!authoringComponentContent.showMouseXPlotLine"
+        [(ngModel)]="authoringComponentContent.highlightXRangeFromZero"
+        (ngModelChange)="componentChanged()"
+        i18n>
+      Highlight X Range From Zero
+    </mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox
+        color="primary"
+        [(ngModel)]="authoringComponentContent.showMouseYPlotLine"
+        (ngModelChange)="componentChanged()"
+        i18n>
+      Show Mouse Y Plot Line
+    </mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox
+        color="primary"
+        [(ngModel)]="authoringComponentContent.saveMouseOverPoints"
+        (ngModelChange)="componentChanged()"
+        i18n>
+      Save Mouse Over Points
+    </mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox
+        color="primary"
+        [(ngModel)]="authoringComponentContent.hideTrialSelect"
+        (ngModelChange)="componentChanged()"
+        i18n>
+      Hide Trial Select
+    </mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox
+        color="primary"
+        [(ngModel)]="authoringComponentContent.useCustomLegend"
+        (ngModelChange)="componentChanged()"
+        i18n>
+      Use Custom Legend
+    </mat-checkbox>
+  </div>
+  <div *ngIf="authoringComponentContent.useCustomLegend">
+    <mat-form-field
+        class="custom-legend">
+      <mat-label i18n>Custom Legend</mat-label>
+      <input matInput
+          [(ngModel)]="authoringComponentContent.customLegend"
+          (ngModelChange)="componentChanged()"/>
+    </mat-form-field>
+  </div>
+  <div fxLayoutGap="16px">
+    <span i18n>X Axis Plot Line</span>
+    <button mat-raised-button
+        color="primary"
+        (click)="addXAxisPlotLine()"
+        matTooltip="Add X Axis Plot Line"
+        matTooltipPosition="above"
+        i18n-matTooltip>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div *ngFor="let plotLine of authoringComponentContent.xAxis.plotLines; index as xAxisPlotLineIndex">
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+      <mat-form-field class="plot-line-text">
+        <mat-label i18n>Text</mat-label>
+        <input matInput
+            [(ngModel)]="plotLine.label.text"
+            (ngModelChange)="componentChanged()"/>
+      </mat-form-field>
+      <mat-form-field class="plot-line-value">
+        <mat-label i18n>X Value</mat-label>
+        <input matInput
+            [(ngModel)]="plotLine.value"
+            (ngModelChange)="componentChanged()"/>
+      </mat-form-field>
+      <mat-form-field class="plot-line-color">
+        <mat-label i18n>Color</mat-label>
+        <input matInput
+            [(ngModel)]="plotLine.color"
+            (ngModelChange)="componentChanged()"/>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button
+            color="primary"
+            (click)="deleteXAxisPlotLine(xAxisPlotLineIndex)"
+            matTooltip="Delete"
+            matTooltipPosition="above"
+            i18n-matTooltip>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div fxLayoutGap="16px">
+    <span i18n>Y Axis Plot Line</span>
+    <button mat-raised-button
+        color="primary"
+        (click)="addYAxisPlotLine()"
+        matTooltip="Add Y Axis Plot Line"
+        matTooltipPosition="above"
+        i18n-matTooltip>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div *ngFor="let plotLine of authoringComponentContent.yAxis.plotLines; index as yAxisPlotLineIndex">
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+      <mat-form-field class="plot-line-text">
+        <mat-label i18n>Text</mat-label>
+        <input matInput
+            [(ngModel)]="plotLine.label.text"
+            (ngModelChange)="componentChanged()"/>
+      </mat-form-field>
+      <mat-form-field class="plot-line-value">
+        <mat-label i18n>Y Value</mat-label>
+        <input matInput
+            [(ngModel)]="plotLine.value"
+            (ngModelChange)="componentChanged()"/>
+      </mat-form-field>
+      <mat-form-field class="plot-line-color">
+        <mat-label i18n>Color</mat-label>
+        <input matInput
+            [(ngModel)]="plotLine.color"
+            (ngModelChange)="componentChanged()"/>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button
+            color="primary"
+            (click)="deleteYAxisPlotLine(yAxisPlotLineIndex)"
+            matTooltip="Delete"
+            matTooltipPosition="above"
+            i18n-matTooltip>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
-<div>
-  <label class='node__label--vertical-alignment'>{{ ::'graph.yAxisPlotLine' | translate }}</label>
-  <md-button class='topButton md-raised md-primary'
-      ng-click='$ctrl.addYAxisPlotLine()'>
-    <md-icon>add</md-icon>
-    <md-tooltip>{{ ::'graph.addYAxisPlotLine' | translate }}</md-tooltip>
-  </md-button>
+<div *ngIf="isNotebookEnabled()">
+  <edit-component-add-to-notebook-button [authoringComponentContent]="authoringComponentContent">
+  </edit-component-add-to-notebook-button>
 </div>
-<div ng-repeat='plotLine in $ctrl.authoringComponentContent.yAxis.plotLines track by $index'>
-  <div flex>
-    <md-input-container style='width: 400px;'>
-      <label>{{ ::'graph.text' | translate }}</label>
-      <input type='text'
-          ng-model='plotLine.label.text'
-          ng-model-options='{ debounce: 1000 }'
-          ng-change='$ctrl.componentChanged()'/>
-    </md-input-container>
-    <md-input-container>
-      <label>{{ ::'graph.yValue' | translate }}</label>
-      <input type='text'
-          ng-model='plotLine.value'
-          ng-model-options='{ debounce: 1000 }'
-          ng-change='$ctrl.componentChanged()'/>
-    </md-input-container>
-    <md-input-container>
-      <label>{{ ::'graph.color' | translate }}</label>
-      <input type='text'
-          ng-model='plotLine.color'
-          ng-model-options='{ debounce: 1000 }'
-          ng-change='$ctrl.componentChanged()'/>
-    </md-input-container>
-    <span flex></span>
-    <md-button class='topButton md-raised md-primary'
-               ng-click='$ctrl.deleteYAxisPlotLine($index)'>
-      <md-icon>delete</md-icon>
-      <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'DELETE' | translate }}</md-tooltip>
-    </md-button>
-  </div>
-</div>
-<div layout="column" layout-align="start start">
-  <edit-component-max-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-max-score>
-  <edit-component-exclude-from-total-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-exclude-from-total-score>
-  <edit-component-width [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-width>
-  <edit-component-rubric [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-rubric>
-  <edit-component-tags [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-tags>
-</div>
-<edit-graph-connected-components
-    [node-id]="$ctrl.nodeId"
-    [component-id]="$ctrl.componentId"
-    [allowed-connected-component-types]="$ctrl.allowedConnectedComponentTypes"
-    [component-content]="$ctrl.authoringComponentContent"
-    [connected-components]="$ctrl.authoringComponentContent.connectedComponents"
-    (connected-components-changed)="$ctrl.connectedComponentsChanged($event)">
-</edit-graph-connected-components>
-<edit-component-json [node-id]="$ctrl.nodeId" [component-id]="$ctrl.componentId"></edit-component-json>
+<edit-common-advanced
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+    [authoringComponentContent]="authoringComponentContent">
+</edit-common-advanced>

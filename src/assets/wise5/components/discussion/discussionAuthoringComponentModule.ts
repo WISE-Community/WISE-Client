@@ -8,24 +8,21 @@ import { DiscussionAuthoring } from './discussion-authoring/discussion-authoring
 import { EditDiscussionConnectedComponentsComponent } from './edit-discussion-connected-components/edit-discussion-connected-components.component';
 
 const discussionAuthoringComponentModule = angular
-  .module('discussionAuthoringComponentModule', ['pascalprecht.translate'])
+  .module('discussionAuthoringComponentModule', [])
   .service('DiscussionService', downgradeInjectable(DiscussionService))
-  .component('editDiscussionAdvanced', EditDiscussionAdvancedComponent)
+  .directive(
+    'discussionAuthoring',
+    downgradeComponent({ component: DiscussionAuthoring }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editDiscussionAdvanced',
+    downgradeComponent({ component: EditDiscussionAdvancedComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'editDiscussionConnectedComponents',
     downgradeComponent({
       component: EditDiscussionConnectedComponentsComponent
     }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'discussionAuthoring',
-    downgradeComponent({ component: DiscussionAuthoring }) as angular.IDirectiveFactory
-  )
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/discussion/i18n');
-    }
-  ]);
+  );
 
 export default discussionAuthoringComponentModule;

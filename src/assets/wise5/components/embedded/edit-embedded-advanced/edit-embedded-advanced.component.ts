@@ -1,6 +1,12 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
-class EditEmbeddedAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  template: 'edit-embedded-advanced',
+  templateUrl: 'edit-embedded-advanced.component.html',
+  styleUrls: ['edit-embedded-advanced.component.scss']
+})
+export class EditEmbeddedAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = [
     'Animation',
     'AudioOscillator',
@@ -16,13 +22,3 @@ class EditEmbeddedAdvancedController extends EditAdvancedComponentAngularJSContr
     'Table'
   ];
 }
-
-export const EditEmbeddedAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditEmbeddedAdvancedController,
-  templateUrl:
-    'assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html'
-};

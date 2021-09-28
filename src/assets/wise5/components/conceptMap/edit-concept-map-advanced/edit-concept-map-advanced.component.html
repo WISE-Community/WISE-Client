@@ -170,14 +170,9 @@
         cols="100">
     </textarea>
   </div>
-  <div class="show-add-to-notebook-container">
-    <mat-checkbox *ngIf="isNotebookEnabled()"
-        color="primary"
-        [(ngModel)]="authoringComponentContent.showAddToNotebookButton"
-        (ngModelChange)="componentChanged()"
-        i18n>
-      Show Add to Notebook Button
-    </mat-checkbox>
+  <div *ngIf="isNotebookEnabled()">
+    <edit-component-add-to-notebook-button [authoringComponentContent]="authoringComponentContent">
+    </edit-component-add-to-notebook-button>
   </div>
 </div>
 <edit-common-advanced
