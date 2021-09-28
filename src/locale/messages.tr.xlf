@@ -713,6 +713,14 @@
           <context context-type="linenumber">289</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">111</context>
         </context-group>
@@ -777,6 +785,16 @@
           <context context-type="linenumber">51</context>
         </context-group>
         <target state="translated">Bu varsayılan geri bildirimi silmek istediğinizden emin misiniz?</target>
+      </trans-unit>
+      <trans-unit id="45229448ecf72c5acf7c79694e3fee30466771e1" datatype="html">
+        <source> Show Add to Notebook Button
+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+        <target state="needs-translation"> Show Add to Notebook Button
+</target>
       </trans-unit>
       <trans-unit id="702a15f8f5225300ad2cefa789efa384489289e8" datatype="html">
         <source> Do not count score on this activity towards the total score
@@ -10095,6 +10113,14 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">136</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">112</context>
         </context-group>
@@ -10893,6 +10919,14 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="linenumber">201</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">151</context>
         </context-group>
@@ -11323,14 +11357,6 @@ Bu yanıtla ilgili geri bildirim almaya hazır mısınız?</target>
           <context context-type="linenumber">165</context>
         </context-group>
         <target state="needs-translation">Custom Rule Evaluator</target>
-      </trans-unit>
-      <trans-unit id="db63f00b42b574916c695a72c97042e7dc90b60d" datatype="html">
-        <source> Show Add to Notebook Button </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">179,180</context>
-        </context-group>
-        <target state="needs-translation"> Show Add to Notebook Button </target>
       </trans-unit>
       <trans-unit id="1619150342877037073" datatype="html">
         <source>Are you sure you want to delete this rule?
@@ -11902,6 +11928,14 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Update On</target>
       </trans-unit>
+      <trans-unit id="f753799cecb5ea7e8d3c0c69851d91ce5303b08a" datatype="html">
+        <source>Model Parameters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <target state="needs-translation">Model Parameters</target>
+      </trans-unit>
       <trans-unit id="1d3911009f4b8bea155d7d4f87812066abaa614b" datatype="html">
         <source>Model File Name</source>
         <context-group purpose="location">
@@ -11961,6 +11995,118 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="linenumber">56</context>
         </context-group>
         <target state="needs-translation">Reload Model</target>
+      </trans-unit>
+      <trans-unit id="cc50767a953f7987117890731c4a78c74f735016" datatype="html">
+        <source>Subtitle</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <target state="needs-translation">Subtitle</target>
+      </trans-unit>
+      <trans-unit id="99e371be69e7e39c5b9432b1706f73ceacafac00" datatype="html">
+        <source> Show Mouse X Plot Line </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+        <target state="needs-translation"> Show Mouse X Plot Line </target>
+      </trans-unit>
+      <trans-unit id="73b517068739470f3bdb6d78f366b273ca4cbdf4" datatype="html">
+        <source> Highlight X Range From Zero </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+        <target state="needs-translation"> Highlight X Range From Zero </target>
+      </trans-unit>
+      <trans-unit id="07f4a93d1ca03e70aa6f6eb5b69f6b45cff14003" datatype="html">
+        <source> Show Mouse Y Plot Line </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+        <target state="needs-translation"> Show Mouse Y Plot Line </target>
+      </trans-unit>
+      <trans-unit id="69f3ee6dd572d1f67e9562590f9f637438def4f0" datatype="html">
+        <source> Save Mouse Over Points </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+        <target state="needs-translation"> Save Mouse Over Points </target>
+      </trans-unit>
+      <trans-unit id="b0caed3ab5cc4050598d87871ae510ace3d2fbc1" datatype="html">
+        <source> Hide Trial Select </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+        <target state="needs-translation"> Hide Trial Select </target>
+      </trans-unit>
+      <trans-unit id="c7ae88d9aa9cfd55c253bbff8539c433da3d88ee" datatype="html">
+        <source> Use Custom Legend </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">62,63</context>
+        </context-group>
+        <target state="needs-translation"> Use Custom Legend </target>
+      </trans-unit>
+      <trans-unit id="515834fcf6e9a1edf756e70b0124e974c9a7817f" datatype="html">
+        <source>Custom Legend</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+        <target state="needs-translation">Custom Legend</target>
+      </trans-unit>
+      <trans-unit id="9d8c620f4d2cf393e69a1bb793eb00bb7a284c24" datatype="html">
+        <source>X Axis Plot Line</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <target state="needs-translation">X Axis Plot Line</target>
+      </trans-unit>
+      <trans-unit id="be7961567dbce8f29988ee73ee1e881fc85fc69b" datatype="html">
+        <source>Add X Axis Plot Line</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+        <target state="needs-translation">Add X Axis Plot Line</target>
+      </trans-unit>
+      <trans-unit id="74451a08153f319be7c929aae2c6579a6def838c" datatype="html">
+        <source>X Value</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+        <target state="needs-translation">X Value</target>
+      </trans-unit>
+      <trans-unit id="f8059ed03401367653cb52747f2b3e818182a8ea" datatype="html">
+        <source>Y Axis Plot Line</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+        <target state="needs-translation">Y Axis Plot Line</target>
+      </trans-unit>
+      <trans-unit id="cde707c410ff560084e775aeff43819eecd6feee" datatype="html">
+        <source>Add Y Axis Plot Line</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+        <target state="needs-translation">Add Y Axis Plot Line</target>
+      </trans-unit>
+      <trans-unit id="41dcb6e22d963da0683b3069f66f97c04c4a75aa" datatype="html">
+        <source>Y Value</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+        <target state="needs-translation">Y Value</target>
       </trans-unit>
       <trans-unit id="507d853e717783f0857fcdfc0e0b92cd7bdf94e8" datatype="html">
         <source> Show Classmate Work </source>
