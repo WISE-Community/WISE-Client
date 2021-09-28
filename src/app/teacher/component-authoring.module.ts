@@ -57,6 +57,9 @@ import { EditDrawAdvancedComponent } from '../../assets/wise5/components/draw/ed
 import { EditEmbeddedAdvancedComponent } from '../../assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component';
 import { EditComponentAddToNotebookButtonComponent } from '../authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { EditGraphAdvancedComponent } from '../../assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component';
+import { EditLabelAdvancedComponent } from '../../assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component';
+import { EditMultipleChoiceAdvancedComponent } from '../../assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component';
+import { EditOpenResponseAdvancedComponent } from '../../assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component';
 
 @NgModule({
   declarations: [
@@ -100,10 +103,13 @@ import { EditGraphAdvancedComponent } from '../../assets/wise5/components/graph/
     EditEmbeddedAdvancedComponent,
     EditGraphAdvancedComponent,
     EditGraphConnectedComponentsComponent,
+    EditLabelAdvancedComponent,
     EditLabelConnectedComponentsComponent,
     EditHTMLAdvancedComponent,
     EditMatchConnectedComponentsComponent,
+    EditMultipleChoiceAdvancedComponent,
     EditMultipleChoiceConnectedComponentsComponent,
+    EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EditTableConnectedComponentsComponent,
     EmbeddedAuthoring,
@@ -157,10 +163,13 @@ import { EditGraphAdvancedComponent } from '../../assets/wise5/components/graph/
     EditEmbeddedAdvancedComponent,
     EditGraphAdvancedComponent,
     EditGraphConnectedComponentsComponent,
+    EditLabelAdvancedComponent,
     EditLabelConnectedComponentsComponent,
     EditHTMLAdvancedComponent,
     EditMatchConnectedComponentsComponent,
+    EditMultipleChoiceAdvancedComponent,
     EditMultipleChoiceConnectedComponentsComponent,
+    EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EditTableConnectedComponentsComponent,
     EmbeddedAuthoring,

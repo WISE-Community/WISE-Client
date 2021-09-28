@@ -1,0 +1,84 @@
+@import '~style/abstracts/variables', '~style/themes/default';
+
+$notice-bg: map-get($default-colors, notice-bg);
+
+.starter-sentence {
+  width: 80%;
+}
+
+.checkbox {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.valid {
+  color: green;
+}
+
+.invalid {
+  color: red;
+}
+
+.section-container {
+  padding: 16px;
+  border: 2px solid #dddddd;
+  border-radius: $card-border-radius;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.section-item {
+  border: 1px solid #dddddd;
+  background-color: $notice-bg;
+  border-radius: $card-border-radius;
+  padding: 8px;
+  margin-bottom: 8px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.section-label {
+  margin-bottom: 15px;
+}
+
+.scoring-rule-score {
+  width: 5%;
+}
+
+.scoring-rule-feedback-text {
+  width: 60%;
+}
+
+.previous-score {
+  width: 8%;
+}
+
+.current-score {
+  width: 8%;
+}
+
+.multiple-attempt-feedback {
+  width: 50%;
+}
+
+.notification-score {
+  width: 10%;
+}
+
+.notification-feedback {
+  width: 80%;
+}
+
+.custom-completion-criteria-step {
+  width: 30%;
+}
+
+.custom-completion-criteria-component {
+  width: 30%;
+}
+
+.custom-completion-criteria-action {
+  width: 8%;
+}

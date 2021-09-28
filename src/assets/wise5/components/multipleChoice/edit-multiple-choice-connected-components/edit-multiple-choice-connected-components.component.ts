@@ -4,7 +4,7 @@ import { ProjectService } from '../../../services/projectService';
 import { UtilService } from '../../../services/utilService';
 
 @Component({
-  selector: 'app-edit-multiple-choice-connected-components',
+  selector: 'edit-multiple-choice-connected-components',
   templateUrl:
     '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.html',
   styleUrls: [
