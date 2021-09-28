@@ -65,8 +65,8 @@ export class DialogGuidanceFeedbackRuleEvaluator {
     return true;
   }
 
-  private evaluateOperator(term: string, termStack: string[], response: CRaterResponse) {
-    if (this.evaluateOperatorExpression(term, termStack, response)) {
+  private evaluateOperator(operator: string, termStack: string[], response: CRaterResponse) {
+    if (this.evaluateOperatorExpression(operator, termStack, response)) {
       termStack.push('true');
     } else {
       termStack.push('false');
@@ -74,24 +74,31 @@ export class DialogGuidanceFeedbackRuleEvaluator {
   }
 
   private evaluateOperatorExpression(
-    term: string,
+    operator: string,
+    termStack: string[],
+    response: CRaterResponse
+  ): boolean {
+    if (['&&', '||'].includes(operator)) {
+      return this.evaluateAndOrExpression(operator, termStack, response);
+    } else {
+      return this.evaluateNotExpression(termStack, response);
+    }
+  }
+
+  private evaluateAndOrExpression(
+    operator: string,
     termStack: string[],
     response: CRaterResponse
   ): boolean {
     const term1 = termStack.pop();
     const term2 = termStack.pop();
-    return (
-      (term === '&&' && this.evaluateAndExpression(term1, term2, response)) ||
-      (term === '||' && this.evaluateOrExpression(term1, term2, response))
-    );
+    return operator === '&&'
+      ? this.evaluateTerm(term1, response) && this.evaluateTerm(term2, response)
+      : this.evaluateTerm(term1, response) || this.evaluateTerm(term2, response);
   }
 
-  private evaluateAndExpression(term1: string, term2: string, response: CRaterResponse): boolean {
-    return this.evaluateTerm(term1, response) && this.evaluateTerm(term2, response);
-  }
-
-  private evaluateOrExpression(term1: string, term2: string, response: CRaterResponse): boolean {
-    return this.evaluateTerm(term1, response) || this.evaluateTerm(term2, response);
+  private evaluateNotExpression(termStack: string[], response: CRaterResponse): boolean {
+    return !this.evaluateTerm(termStack.pop(), response);
   }
 
   private evaluateTerm(term: string, response: CRaterResponse): boolean {

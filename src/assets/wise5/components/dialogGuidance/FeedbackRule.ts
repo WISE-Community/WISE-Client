@@ -1,6 +1,7 @@
 export class FeedbackRule {
   expression: string;
   feedback: string;
+  static operatorPrecedences = { '!': 2, '&&': 1, '||': 1 };
 
   static isSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {
     return feedbackRule.expression === 'isSecondToLastSubmit';
@@ -43,11 +44,14 @@ export class FeedbackRule {
   }
 
   private getExpressionAsArray(): string[] {
-    return this.expression.replace(/ /g, '').split(/(&&|\|\|)/g);
+    return this.expression
+      .replace(/ /g, '')
+      .split(/(&&|\|\||!)/g)
+      .filter((el) => el !== '');
   }
 
   static isOperator(symbol: string): boolean {
-    return ['&&', '||'].includes(symbol);
+    return ['&&', '||', '!'].includes(symbol);
   }
 
   static isOperand(symbol: string): boolean {
@@ -63,10 +67,6 @@ export class FeedbackRule {
   }
 
   static getPrecedence(symbol: string): number {
-    if (['&&', '||'].includes(symbol)) {
-      return 1;
-    } else {
-      return 0;
-    }
+    return FeedbackRule.operatorPrecedences[symbol] ?? 0;
   }
 }

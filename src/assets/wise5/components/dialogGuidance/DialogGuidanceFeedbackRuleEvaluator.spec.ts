@@ -68,6 +68,19 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
       expression: 'idea1',
       feedback: 'You hit idea1'
     },
+
+    {
+      expression: '!idea10',
+      feedback: '!idea10'
+    },
+    {
+      expression: 'idea10 && !idea11',
+      feedback: 'idea10 && !idea11'
+    },
+    {
+      expression: '!idea11 || idea12',
+      feedback: '!idea11 || idea12'
+    },
     {
       expression: 'idea2',
       feedback: 'You hit idea2'
@@ -131,7 +144,8 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
   matchRule_OneIdea();
   matchRule_MultipleIdeasUsingAnd();
   matchRule_MultipleIdeasUsingOr();
-  matchRule_MultipleIdeasUsingOrAndAnd();
+  matchRule_MultipleIdeasUsingAndOr();
+  matchRule_MultipleIdeasUsingNotAndOr();
   matchNoRule_ReturnDefault();
   secondToLastSubmit();
   finalSubmit();
@@ -144,20 +158,20 @@ function matchRule_OneIdea() {
 }
 
 function matchRule_MultipleIdeasUsingAnd() {
-  it('should find rule matching two ideas using && (and) operator', () => {
+  it('should find rule matching two ideas using && operator', () => {
     expectFeedbackForMatchedIdeas(['idea1', 'idea2'], 'You hit idea1 and idea2');
     expectFeedbackForMatchedIdeas(['idea2', 'idea3', 'idea4'], 'You hit idea2, idea3 and idea4');
   });
 }
 
 function matchRule_MultipleIdeasUsingOr() {
-  it('should find rule matching ideas using || (or) operator', () => {
+  it('should find rule matching ideas using || operator', () => {
     expectFeedbackForMatchedIdeas(['idea5'], 'You hit idea5 or idea6');
   });
 }
 
-function matchRule_MultipleIdeasUsingOrAndAnd() {
-  it('should find rule matching ideas using combination of && (and) and || (or) operators', () => {
+function matchRule_MultipleIdeasUsingAndOr() {
+  it('should find rule matching ideas using combination of && and || operators', () => {
     expectFeedbackForMatchedIdeas(['idea7', 'idea9'], 'You hit idea7 or idea8 and idea9');
     expectFeedbackForMatchedIdeas(['idea8', 'idea9'], 'You hit idea7 or idea8 and idea9');
     expectFeedbackForMatchedIdeas(['idea7', 'idea8'], 'You hit idea7 and idea8 or idea9');
@@ -165,9 +179,17 @@ function matchRule_MultipleIdeasUsingOrAndAnd() {
   });
 }
 
+function matchRule_MultipleIdeasUsingNotAndOr() {
+  it('should find rule matching ideas using combination of !, && and || operators', () => {
+    expectFeedbackForMatchedIdeas([], '!idea10');
+    expectFeedbackForMatchedIdeas(['idea10'], 'idea10 && !idea11');
+    expectFeedbackForMatchedIdeas(['idea10', 'idea11', 'idea12'], '!idea11 || idea12');
+  });
+}
+
 function matchNoRule_ReturnDefault() {
   it('should return default idea when no rule is matched', () => {
-    expectFeedbackForMatchedIdeas([], 'default feedback');
+    expectFeedbackForMatchedIdeas(['idea10', 'idea11'], 'default feedback');
   });
 }
 
