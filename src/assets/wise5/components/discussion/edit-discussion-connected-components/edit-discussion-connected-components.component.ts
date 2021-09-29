@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 
 @Component({
-  selector: 'app-edit-discussion-connected-components',
+  selector: 'edit-discussion-connected-components',
   templateUrl:
     '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.html',
   styleUrls: [

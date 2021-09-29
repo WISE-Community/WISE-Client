@@ -1,6 +1,15 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
-class EditGraphAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  template: 'edit-graph-advanced',
+  templateUrl: 'edit-graph-advanced.component.html',
+  styleUrls: ['edit-graph-advanced.component.scss']
+})
+export class EditGraphAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = [
     'Animation',
     'ConceptMap',
@@ -10,6 +19,14 @@ class EditGraphAdvancedController extends EditAdvancedComponentAngularJSControll
     'Label',
     'Table'
   ];
+
+  constructor(
+    protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
+    protected TeacherProjectService: TeacherProjectService
+  ) {
+    super(NodeService, NotebookService, TeacherProjectService);
+  }
 
   addXAxisPlotLine(): void {
     if (this.authoringComponentContent.xAxis.plotLines == null) {
@@ -30,6 +47,7 @@ class EditGraphAdvancedController extends EditAdvancedComponentAngularJSControll
       }
     };
     this.authoringComponentContent.xAxis.plotLines.push(plotLine);
+    this.componentChanged();
   }
 
   deleteXAxisPlotLine(index: number): void {
@@ -53,6 +71,7 @@ class EditGraphAdvancedController extends EditAdvancedComponentAngularJSControll
       }
     };
     this.authoringComponentContent.yAxis.plotLines.push(plotLine);
+    this.componentChanged();
   }
 
   deleteYAxisPlotLine(index: number): void {
@@ -60,13 +79,3 @@ class EditGraphAdvancedController extends EditAdvancedComponentAngularJSControll
     this.componentChanged();
   }
 }
-
-export const EditGraphAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditGraphAdvancedController,
-  templateUrl:
-    'assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html'
-};

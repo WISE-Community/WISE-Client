@@ -101,6 +101,10 @@ export class DialogGuidanceFeedbackRuleEvaluator {
     return !this.evaluateTerm(termStack.pop(), response);
   }
 
+  private evaluateOrExpression(term1: string, term2: string, response: CRaterResponse): boolean {
+    return this.evaluateTerm(term1, response) || this.evaluateTerm(term2, response);
+  }
+
   private evaluateTerm(term: string, response: CRaterResponse): boolean {
     return term === 'true' || response.getDetectedIdeaNames().includes(term);
   }

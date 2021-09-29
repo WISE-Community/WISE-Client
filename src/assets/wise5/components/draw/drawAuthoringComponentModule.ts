@@ -8,24 +8,20 @@ import { DrawAuthoring } from './draw-authoring/draw-authoring.component';
 import { EditDrawConnectedComponentsComponent } from './edit-draw-connected-components/edit-draw-connected-components.component';
 
 const drawAuthoringComponentModule = angular
-  .module('drawAuthoringComponentModule', ['pascalprecht.translate'])
+  .module('drawAuthoringComponentModule', [])
   .service('DrawService', downgradeInjectable(DrawService))
   .directive(
     'drawAuthoring',
     downgradeComponent({ component: DrawAuthoring }) as angular.IDirectiveFactory
   )
-  .component('editDrawAdvanced', EditDrawAdvancedComponent)
+  .directive(
+    'editDrawAdvanced',
+    downgradeComponent({ component: EditDrawAdvancedComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'editDrawConnectedComponents',
     downgradeComponent({
       component: EditDrawConnectedComponentsComponent
     }) as angular.IDirectiveFactory
-  )
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/draw/i18n');
-    }
-  ]);
-
+  );
 export default drawAuthoringComponentModule;
