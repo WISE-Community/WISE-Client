@@ -14,17 +14,17 @@ export class FeedbackRule {
     return feedbackRule.expression === 'isDefault';
   }
 
-  // uses shunting yard algorithm to get expression in postfix (reverse-polish) notation
+  // uses shunting-yard algorithm to get expression in postfix (reverse-polish) notation
   getPostfixExpression(): string[] {
     const result = [];
     const operatorStack = [];
     for (const symbol of this.getExpressionAsArray()) {
       if (FeedbackRule.isOperator(symbol)) {
         while (operatorStack.length > 0) {
-          const last = operatorStack[operatorStack.length - 1];
+          const topOperatorOnStack = operatorStack[operatorStack.length - 1];
           if (
-            FeedbackRule.hasGreaterPrecedence(last, symbol) ||
-            FeedbackRule.hasSamePrecedence(last, symbol)
+            FeedbackRule.hasGreaterPrecedence(topOperatorOnStack, symbol) ||
+            FeedbackRule.hasSamePrecedence(topOperatorOnStack, symbol)
           ) {
             result.push(operatorStack.pop());
           } else {
@@ -43,11 +43,11 @@ export class FeedbackRule {
   }
 
   private getExpressionAsArray(): string[] {
-    return this.expression.replace(/ /g, '').split(/(&&)/g);
+    return this.expression.replace(/ /g, '').split(/(&&|\|\|)/g);
   }
 
   static isOperator(symbol: string): boolean {
-    return ['&&'].includes(symbol);
+    return ['&&', '||'].includes(symbol);
   }
 
   static isOperand(symbol: string): boolean {
@@ -63,7 +63,7 @@ export class FeedbackRule {
   }
 
   static getPrecedence(symbol: string): number {
-    if (['&&'].includes(symbol)) {
+    if (['&&', '||'].includes(symbol)) {
       return 1;
     } else {
       return 0;

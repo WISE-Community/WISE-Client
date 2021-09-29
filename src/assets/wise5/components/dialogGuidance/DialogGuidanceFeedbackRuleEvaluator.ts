@@ -56,13 +56,7 @@ export class DialogGuidanceFeedbackRuleEvaluator {
       if (FeedbackRule.isOperand(term)) {
         termStack.push(term);
       } else {
-        if (term === '&&') {
-          if (this.evaluateAndExpression(termStack, response)) {
-            termStack.push('true');
-          } else {
-            return false;
-          }
-        }
+        this.evaluateOperator(term, termStack, response);
       }
     }
     if (termStack.length === 1) {
@@ -71,10 +65,33 @@ export class DialogGuidanceFeedbackRuleEvaluator {
     return true;
   }
 
-  private evaluateAndExpression(termStack: string[], response: CRaterResponse): boolean {
+  private evaluateOperator(term: string, termStack: string[], response: CRaterResponse) {
+    if (this.evaluateOperatorExpression(term, termStack, response)) {
+      termStack.push('true');
+    } else {
+      termStack.push('false');
+    }
+  }
+
+  private evaluateOperatorExpression(
+    term: string,
+    termStack: string[],
+    response: CRaterResponse
+  ): boolean {
     const term1 = termStack.pop();
     const term2 = termStack.pop();
+    return (
+      (term === '&&' && this.evaluateAndExpression(term1, term2, response)) ||
+      (term === '||' && this.evaluateOrExpression(term1, term2, response))
+    );
+  }
+
+  private evaluateAndExpression(term1: string, term2: string, response: CRaterResponse): boolean {
     return this.evaluateTerm(term1, response) && this.evaluateTerm(term2, response);
+  }
+
+  private evaluateOrExpression(term1: string, term2: string, response: CRaterResponse): boolean {
+    return this.evaluateTerm(term1, response) || this.evaluateTerm(term2, response);
   }
 
   private evaluateTerm(term: string, response: CRaterResponse): boolean {

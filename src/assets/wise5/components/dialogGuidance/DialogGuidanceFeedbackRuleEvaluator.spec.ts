@@ -53,6 +53,18 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
       feedback: 'You hit idea2, idea3 and idea4'
     },
     {
+      expression: 'idea5 || idea6',
+      feedback: 'You hit idea5 or idea6'
+    },
+    {
+      expression: 'idea7 || idea8 && idea9',
+      feedback: 'You hit idea7 or idea8 and idea9'
+    },
+    {
+      expression: 'idea7 && idea8 || idea9',
+      feedback: 'You hit idea7 and idea8 or idea9'
+    },
+    {
       expression: 'idea1',
       feedback: 'You hit idea1'
     },
@@ -117,7 +129,9 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
     evaluator = new DialogGuidanceFeedbackRuleEvaluator(component);
   });
   matchRule_OneIdea();
-  matchRule_MultipleIdeas();
+  matchRule_MultipleIdeasUsingAnd();
+  matchRule_MultipleIdeasUsingOr();
+  matchRule_MultipleIdeasUsingOrAndAnd();
   matchNoRule_ReturnDefault();
   secondToLastSubmit();
   finalSubmit();
@@ -129,10 +143,25 @@ function matchRule_OneIdea() {
   });
 }
 
-function matchRule_MultipleIdeas() {
-  it('should find rule matching two ideas using && operator', () => {
+function matchRule_MultipleIdeasUsingAnd() {
+  it('should find rule matching two ideas using && (and) operator', () => {
     expectFeedbackForMatchedIdeas(['idea1', 'idea2'], 'You hit idea1 and idea2');
     expectFeedbackForMatchedIdeas(['idea2', 'idea3', 'idea4'], 'You hit idea2, idea3 and idea4');
+  });
+}
+
+function matchRule_MultipleIdeasUsingOr() {
+  it('should find rule matching ideas using || (or) operator', () => {
+    expectFeedbackForMatchedIdeas(['idea5'], 'You hit idea5 or idea6');
+  });
+}
+
+function matchRule_MultipleIdeasUsingOrAndAnd() {
+  it('should find rule matching ideas using combination of && (and) and || (or) operators', () => {
+    expectFeedbackForMatchedIdeas(['idea7', 'idea9'], 'You hit idea7 or idea8 and idea9');
+    expectFeedbackForMatchedIdeas(['idea8', 'idea9'], 'You hit idea7 or idea8 and idea9');
+    expectFeedbackForMatchedIdeas(['idea7', 'idea8'], 'You hit idea7 and idea8 or idea9');
+    expectFeedbackForMatchedIdeas(['idea9'], 'You hit idea7 and idea8 or idea9');
   });
 }
 
