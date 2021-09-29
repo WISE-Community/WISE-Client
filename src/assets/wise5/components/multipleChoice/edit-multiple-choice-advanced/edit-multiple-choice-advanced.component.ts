@@ -1,28 +1,11 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
-import { NodeService } from '../../../services/nodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
-class EditMultipleChoiceAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  template: 'edit-multiple-choice-advanced',
+  templateUrl: 'edit-multiple-choice-advanced.component.html',
+  styleUrls: ['edit-multiple-choice-advanced.component.scss']
+})
+export class EditMultipleChoiceAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['MultipleChoice'];
-
-  static $inject = ['NodeService', 'ProjectService', 'UtilService'];
-
-  constructor(
-    protected NodeService: NodeService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
-  ) {
-    super(NodeService, ProjectService);
-  }
 }
-
-export const EditMultipleChoiceAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditMultipleChoiceAdvancedController,
-  templateUrl:
-    'assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html'
-};

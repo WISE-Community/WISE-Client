@@ -8,24 +8,22 @@ import { MultipleChoiceAuthoring } from './multiple-choice-authoring/multiple-ch
 import { EditMultipleChoiceConnectedComponentsComponent } from './edit-multiple-choice-connected-components/edit-multiple-choice-connected-components.component';
 
 const multipleChoiceAuthoringComponentModule = angular
-  .module('multipleChoiceAuthoringComponentModule', ['pascalprecht.translate'])
+  .module('multipleChoiceAuthoringComponentModule', [])
   .service('MultipleChoiceService', downgradeInjectable(MultipleChoiceService))
   .directive(
-    'multipleChoiceAuthoring',
-    downgradeComponent({ component: MultipleChoiceAuthoring }) as angular.IDirectiveFactory
+    'editMultipleChoiceAdvanced',
+    downgradeComponent({
+      component: EditMultipleChoiceAdvancedComponent
+    }) as angular.IDirectiveFactory
   )
-  .component('editMultipleChoiceAdvanced', EditMultipleChoiceAdvancedComponent)
   .directive(
     'editMultipleChoiceConnectedComponents',
     downgradeComponent({
       component: EditMultipleChoiceConnectedComponentsComponent
     }) as angular.IDirectiveFactory
   )
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/multipleChoice/i18n');
-    }
-  ]);
-
+  .directive(
+    'multipleChoiceAuthoring',
+    downgradeComponent({ component: MultipleChoiceAuthoring }) as angular.IDirectiveFactory
+  );
 export default multipleChoiceAuthoringComponentModule;

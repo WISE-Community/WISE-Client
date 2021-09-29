@@ -1,6 +1,11 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
-class EditLabelAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  template: 'edit-label-advanced',
+  templateUrl: 'edit-label-advanced.component.html'
+})
+export class EditLabelAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = [
     'ConceptMap',
     'Draw',
@@ -11,13 +16,3 @@ class EditLabelAdvancedController extends EditAdvancedComponentAngularJSControll
     'Table'
   ];
 }
-
-export const EditLabelAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditLabelAdvancedController,
-  templateUrl:
-    'assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html'
-};

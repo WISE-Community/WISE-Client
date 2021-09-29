@@ -1,35 +1,44 @@
-<div>
-  <md-checkbox class='md-primary'
-      ng-model='$ctrl.authoringComponentContent.showFeedback'
-      ng-change='$ctrl.componentChanged()'>
-    {{ 'SHOW_FEEDBACK' | translate }}
-  </md-checkbox>
+<div class="show-feedback-checkbox">
+  <mat-checkbox
+      color="primary"
+      [(ngModel)]="authoringComponentContent.showFeedback"
+      (ngModelChange)="componentChanged()"
+      i18n>
+    Show Feedback
+  </mat-checkbox>
 </div>
-<edit-component-save-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-save-button>
+<edit-component-save-button [authoringComponentContent]="authoringComponentContent">
+</edit-component-save-button>
 <br/>
-<edit-component-submit-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-submit-button>
+<edit-component-submit-button [authoringComponentContent]="authoringComponentContent">
+</edit-component-submit-button>
 <edit-component-max-submit
-    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
-    [(max-submit-count)]="$ctrl.authoringComponentContent.maxSubmitCount"
-    (max-submit-count-change)="$ctrl.maxSubmitCountChanged($event)">
+    *ngIf="authoringComponentContent.showSubmitButton"
+    [(maxSubmitCount)]="authoringComponentContent.maxSubmitCount"
+    (maxSubmitCountChange)="maxSubmitCountChanged($event)">
 </edit-component-max-submit>
 <edit-component-default-feedback
-    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
-    [authoring-component-content]="$ctrl.authoringComponentContent">
+    *ngIf="authoringComponentContent.showSubmitButton"
+    [authoringComponentContent]="authoringComponentContent">
 </edit-component-default-feedback>
-<div layout="column" layout-align="start start">
-  <edit-component-max-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-max-score>
-  <edit-component-exclude-from-total-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-exclude-from-total-score>
-  <edit-component-width [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-width>
-  <edit-component-rubric [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-rubric>
-  <edit-component-tags [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-tags>
+<div fxLayout="column" fxLayoutAlign="start start">
+  <edit-component-max-score [authoringComponentContent]="authoringComponentContent">
+  </edit-component-max-score>
+  <edit-component-exclude-from-total-score [authoringComponentContent]="authoringComponentContent">
+  </edit-component-exclude-from-total-score>
+  <edit-component-width [authoringComponentContent]="authoringComponentContent">
+  </edit-component-width>
+  <edit-component-rubric [authoringComponentContent]="authoringComponentContent">
+  </edit-component-rubric>
+  <edit-component-tags [authoringComponentContent]="authoringComponentContent">
+  </edit-component-tags>
 </div>
 <edit-multiple-choice-connected-components
-    [node-id]="$ctrl.nodeId"
-    [component-id]="$ctrl.componentId"
-    [allowed-connected-component-types]="$ctrl.allowedConnectedComponentTypes"
-    [component-content]="$ctrl.authoringComponentContent"
-    [connected-components]="$ctrl.authoringComponentContent.connectedComponents"
-    (connected-Components-Changed)="$ctrl.connectedComponentsChanged($event)">
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+    [componentContent]="authoringComponentContent"
+    [connectedComponents]="authoringComponentContent.connectedComponents"
+    (connectedComponentsChanged)="connectedComponentsChanged($event)">
 </edit-multiple-choice-connected-components>
-<edit-component-json [node-id]="$ctrl.nodeId" [component-id]="$ctrl.componentId"></edit-component-json>
+<edit-component-json [nodeId]="nodeId" [componentId]="componentId"></edit-component-json>
