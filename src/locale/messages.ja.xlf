@@ -12418,6 +12418,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">406</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
         <target state="needs-translation">Y Axis</target>
       </trans-unit>
       <trans-unit id="6b5c8a1277af930044b7d1af51c1dd255330c8d2" datatype="html">
@@ -12513,6 +12517,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">329</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target state="needs-translation">Series</target>
       </trans-unit>
@@ -13265,6 +13273,22 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="linenumber">882</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the background image?</target>
+      </trans-unit>
+      <trans-unit id="43e2291ad2f3e8419aeefcc82006a294d86e3445" datatype="html">
+        <source> Student Can Create Choices </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <target state="needs-translation"> Student Can Create Choices </target>
+      </trans-unit>
+      <trans-unit id="8c68a63de4f583b88a1c98b4ba22fe0ef73663fa" datatype="html">
+        <source> Show Source and Target Buckets Side-by-Side </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+        <target state="needs-translation"> Show Source and Target Buckets Side-by-Side </target>
       </trans-unit>
       <trans-unit id="2145150118792012851" datatype="html">
         <source>Do you want to copy the choices and buckets from the connected component?
@@ -14712,6 +14736,150 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">You must complete "<x id="PH" equiv-text="this.otherStepTitle"/>" to view the class summary.</target>
       </trans-unit>
+      <trans-unit id="f7d15493b0e51d441ca4b60ff28151b6de9b9ee2" datatype="html">
+        <source> Enable Data Explorer </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <target state="needs-translation"> Enable Data Explorer </target>
+      </trans-unit>
+      <trans-unit id="c1eb80a96fb3db4672268978986d77af65724502" datatype="html">
+        <source>Allowed Graph Types:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <target state="needs-translation">Allowed Graph Types:</target>
+      </trans-unit>
+      <trans-unit id="d9811c3f5a5dbd37c34a9cb9febd756b5b25bbed" datatype="html">
+        <source> Scatter Plot </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+        <target state="needs-translation"> Scatter Plot </target>
+      </trans-unit>
+      <trans-unit id="4d2a0e8db94c238611e9fb2cfe21e9033c804540" datatype="html">
+        <source> Line Graph </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+        <target state="needs-translation"> Line Graph </target>
+      </trans-unit>
+      <trans-unit id="6803ecdcc4c6672f2088eb835bdc8beee7624ee4" datatype="html">
+        <source> Bar Graph </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+        <target state="needs-translation"> Bar Graph </target>
+      </trans-unit>
+      <trans-unit id="dbf1a52e88afc54e94898559bd0eea1ae5b211fa" datatype="html">
+        <source> Show Scatter Plot Regression Line </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+        <target state="needs-translation"> Show Scatter Plot Regression Line </target>
+      </trans-unit>
+      <trans-unit id="8719210bcb914b359bda6ee1387f3a7e09861b46" datatype="html">
+        <source>Number of Series</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <target state="needs-translation">Number of Series</target>
+      </trans-unit>
+      <trans-unit id="5630da259cb43ec9d0bbaa8a1dd644d2fef71618" datatype="html">
+        <source>Number of Y Axes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <target state="needs-translation">Number of Y Axes</target>
+      </trans-unit>
+      <trans-unit id="91d2fe5d47579f790d52928f3ecf33f2e6b38bd8" datatype="html">
+        <source>Choose the Y Axis for each Series</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+        <target state="needs-translation">Choose the Y Axis for each Series</target>
+      </trans-unit>
+      <trans-unit id="beb6e01da35914a4fa8569e7d98c45ba81046306" datatype="html">
+        <source> Can Student Edit Axis Labels </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">89,90</context>
+        </context-group>
+        <target state="needs-translation"> Can Student Edit Axis Labels </target>
+      </trans-unit>
+      <trans-unit id="d6e1844697cf81349bc9d30503a8484c16425330" datatype="html">
+        <source>Fix Data to Table Column</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+        <target state="needs-translation">Fix Data to Table Column</target>
+      </trans-unit>
+      <trans-unit id="88a9ff866e2a453c490c6eb7a7e305701f87fcca" datatype="html">
+        <source>You can author x or y data to always use a specific table column. The student will not be able to change the table column for that x or y data. If you want the student to be able to choose the table column, you can leave the select option blank for that x or y data.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <target state="needs-translation">You can author x or y data to always use a specific table column. The student will not be able to change the table column for that x or y data. If you want the student to be able to choose the table column, you can leave the select option blank for that x or y data.</target>
+      </trans-unit>
+      <trans-unit id="1f826b1c6da05cd044cca5f00cf8f7ee5270d1f9" datatype="html">
+        <source>X Data</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <target state="needs-translation">X Data</target>
+      </trans-unit>
+      <trans-unit id="2c57dd23349e236c076c19356af17d5de965d398" datatype="html">
+        <source>(Allow student to select)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+        <target state="needs-translation">(Allow student to select)</target>
+      </trans-unit>
+      <trans-unit id="a568f22b326752cf76891adfefc41560947f7689" datatype="html">
+        <source>Table Column</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+        <target state="needs-translation">Table Column</target>
+      </trans-unit>
+      <trans-unit id="2872debf9c5ceea4c74848246e8d32111d9d06fd" datatype="html">
+        <source>Y Data <x id="INTERPOLATION" equiv-text="{{ (authoringComponentContent.numDataExplorerSeries &gt; 1 ? dataExplorerSeriesIndex + 1 : &quot;&quot;) }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+        <target state="needs-translation">Y Data <x id="INTERPOLATION" equiv-text="{{ (authoringComponentContent.numDataExplorerSeries &gt; 1 ? dataExplorerSeriesIndex + 1 : &quot;&quot;) }}"/></target>
+      </trans-unit>
       <trans-unit id="1bd5e17c9582661e20763a7634ef07881e33bbd7" datatype="html">
         <source>Action</source>
         <context-group purpose="location">
@@ -14919,18 +15087,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">59</context>
         </context-group>
         <target state="needs-translation">Graph Type</target>
-      </trans-unit>
-      <trans-unit id="1f826b1c6da05cd044cca5f00cf8f7ee5270d1f9" datatype="html">
-        <source>X Data</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
-          <context context-type="linenumber">36</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">74</context>
-        </context-group>
-        <target state="needs-translation">X Data</target>
       </trans-unit>
       <trans-unit id="967a05fa93ce8900222661f7beb6c08924b3a857" datatype="html">
         <source>Y Data <x id="INTERPOLATION" equiv-text="{{dataExplorerSeries.length &gt; 1 ? (i + 1) : &apos;&apos;}}"/></source>
