@@ -60,6 +60,9 @@ import { EditGraphAdvancedComponent } from '../../assets/wise5/components/graph/
 import { EditLabelAdvancedComponent } from '../../assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component';
 import { EditMultipleChoiceAdvancedComponent } from '../../assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component';
 import { EditOpenResponseAdvancedComponent } from '../../assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component';
+import { EditMatchAdvancedComponent } from '../../assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component';
+import { EditSummaryAdvancedComponent } from '../../assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component';
+import { EditTableAdvancedComponent } from '../../assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component';
 
 @NgModule({
   declarations: [
@@ -106,11 +109,14 @@ import { EditOpenResponseAdvancedComponent } from '../../assets/wise5/components
     EditLabelAdvancedComponent,
     EditLabelConnectedComponentsComponent,
     EditHTMLAdvancedComponent,
+    EditMatchAdvancedComponent,
     EditMatchConnectedComponentsComponent,
     EditMultipleChoiceAdvancedComponent,
     EditMultipleChoiceConnectedComponentsComponent,
     EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
+    EditSummaryAdvancedComponent,
+    EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,
     EmbeddedAuthoring,
     GraphAuthoring,
@@ -166,11 +172,14 @@ import { EditOpenResponseAdvancedComponent } from '../../assets/wise5/components
     EditLabelAdvancedComponent,
     EditLabelConnectedComponentsComponent,
     EditHTMLAdvancedComponent,
+    EditMatchAdvancedComponent,
     EditMatchConnectedComponentsComponent,
     EditMultipleChoiceAdvancedComponent,
     EditMultipleChoiceConnectedComponentsComponent,
     EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
+    EditSummaryAdvancedComponent,
+    EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,
     EmbeddedAuthoring,
     GraphAuthoring,

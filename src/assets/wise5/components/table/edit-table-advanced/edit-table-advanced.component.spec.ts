@@ -1,34 +1,130 @@
-let $controller;
-let $rootScope;
-let $scope;
-let tableAuthoringController;
-let component;
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
+import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
+import { EditComponentExcludeFromTotalScoreComponent } from '../../../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
+import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
+import { EditComponentMaxScoreComponent } from '../../../../../app/authoring-tool/edit-component-max-score/edit-component-max-score.component';
+import { EditComponentRubricComponent } from '../../../../../app/authoring-tool/edit-component-rubric/edit-component-rubric.component';
+import { EditComponentSaveButtonComponent } from '../../../../../app/authoring-tool/edit-component-save-button/edit-component-save-button.component';
+import { EditComponentSubmitButtonComponent } from '../../../../../app/authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
+import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/edit-component-tags/edit-component-tags.component';
+import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
+import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
+import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../services/configService';
+import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { NotificationService } from '../../../services/notificationService';
+import { ProjectService } from '../../../services/projectService';
+import { SessionService } from '../../../services/sessionService';
+import { StudentAssetService } from '../../../services/studentAssetService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { TagService } from '../../../services/tagService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { UtilService } from '../../../services/utilService';
+import { EditTableConnectedComponentsComponent } from '../edit-table-connected-components/edit-table-connected-components.component';
+import { EditTableAdvancedComponent } from './edit-table-advanced.component';
 
-describe('TableAuthoringController', () => {
-  // beforeEach(angular.mock.module(authoringToolModule.name));
-  // beforeEach(inject((_$controller_, _$rootScope_) => {
-  //   $controller = _$controller_;
-  //   $rootScope = _$rootScope_;
-  //   component = createComponent();
-  //   $scope = $rootScope.$new();
-  //   $scope.componentContent = JSON.parse(JSON.stringify(component));
-  //   $scope.authoringComponentContent = JSON.parse(JSON.stringify(component));
-  //   tableAuthoringController = $controller('TableAuthoringController', { $scope: $scope });
-  // }));
-  // shouldToggleDataExplorer();
-  // shouldToggleDataExplorerScatterPlot();
-  // shouldToggleDataExplorerLineGraph();
-  // shouldToggleDataExplorerBarGraph();
-  // shouldToggleDataExplorerGraphType();
-  // shouldCreateGraphTypeObject();
-  // shouldInitializeDataExplorerGraphTypes();
-  // shouldRepopulateDataExplorerGraphTypes();
-  // shouldInitializeDataExplorerSeriesParams();
-  // shouldHandleNumDataExplorerSeriesChangeIncrease();
-  // shouldHandleNumDataExplorerSeriesChangeDecrease();
-  // shouldIncreaseNumDataExplorerSeries();
-  // shouldDecreaseNumDataExplorerSeries();
-  // shouldUpdateDataExplorerSeriesParamsYAxis();
+export class MockNodeService {
+  createNewComponentState() {
+    return {};
+  }
+}
+
+let component: EditTableAdvancedComponent;
+let fixture: ComponentFixture<EditTableAdvancedComponent>;
+
+describe('EditTableAdvancedComponent', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientTestingModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        UpgradeModule
+      ],
+      declarations: [
+        EditComponentAddToNotebookButtonComponent,
+        EditCommonAdvancedComponent,
+        EditComponentExcludeFromTotalScoreComponent,
+        EditComponentJsonComponent,
+        EditComponentMaxScoreComponent,
+        EditComponentRubricComponent,
+        EditComponentSaveButtonComponent,
+        EditComponentSubmitButtonComponent,
+        EditComponentTagsComponent,
+        EditComponentWidthComponent,
+        EditConnectedComponentsAddButtonComponent,
+        EditConnectedComponentsComponent,
+        EditTableAdvancedComponent,
+        EditTableConnectedComponentsComponent
+      ],
+      providers: [
+        AnnotationService,
+        ConfigService,
+        { provide: NodeService, useClass: MockNodeService },
+        NotebookService,
+        NotificationService,
+        ProjectService,
+        SessionService,
+        StudentAssetService,
+        StudentDataService,
+        TagService,
+        TeacherProjectService,
+        UtilService
+      ]
+    }).compileComponents();
+  });
+
+  beforeEach(() => {
+    spyOn(
+      TestBed.inject(TeacherProjectService),
+      'getComponentByNodeIdAndComponentId'
+    ).and.returnValue(createComponent());
+    spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);
+    spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
+      'node1',
+      'node2',
+      'node3'
+    ]);
+    fixture = TestBed.createComponent(EditTableAdvancedComponent);
+    component = fixture.componentInstance;
+    spyOn(component, 'setShowSubmitButtonValue').and.callFake(() => {});
+    spyOn(component, 'componentChanged').and.callFake(() => {});
+    fixture.detectChanges();
+  });
+
+  shouldToggleDataExplorer();
+  shouldToggleDataExplorerScatterPlot();
+  shouldToggleDataExplorerLineGraph();
+  shouldToggleDataExplorerBarGraph();
+  shouldToggleDataExplorerGraphType();
+  shouldCreateGraphTypeObject();
+  shouldInitializeDataExplorerGraphTypes();
+  shouldRepopulateDataExplorerGraphTypes();
+  shouldInitializeDataExplorerSeriesParams();
+  shouldHandleNumDataExplorerSeriesChangeIncrease();
+  shouldHandleNumDataExplorerSeriesChangeDecrease();
+  shouldIncreaseNumDataExplorerSeries();
+  shouldDecreaseNumDataExplorerSeries();
+  shouldUpdateDataExplorerSeriesParamsYAxis();
 });
 
 function createComponent() {
@@ -95,13 +191,13 @@ function createComponent() {
 
 function shouldToggleDataExplorer() {
   it('should toggle data explorer', () => {
-    spyOn(tableAuthoringController, 'componentChanged').and.callFake(() => {});
-    tableAuthoringController.authoringComponentContent.isDataExplorerEnabled = true;
-    tableAuthoringController.authoringComponentContent.dataExplorerGraphTypes = null;
-    tableAuthoringController.authoringComponentContent.numDataExplorerSeries = null;
-    tableAuthoringController.authoringComponentContent.isDataExplorerAxisLabelsEditable = null;
-    tableAuthoringController.toggleDataExplorer();
-    const authoringComponentContent = tableAuthoringController.authoringComponentContent;
+    component.authoringComponentContent.isDataExplorerEnabled = true;
+    component.authoringComponentContent.dataExplorerGraphTypes = null;
+    component.authoringComponentContent.numDataExplorerSeries = null;
+    component.authoringComponentContent.isDataExplorerAxisLabelsEditable = null;
+    component.authoringComponentContent.dataExplorerDataToColumn = null;
+    component.toggleDataExplorer();
+    const authoringComponentContent = component.authoringComponentContent;
     expect(authoringComponentContent.isDataExplorerEnabled).toEqual(true);
     expect(authoringComponentContent.dataExplorerGraphTypes.length).toEqual(1);
     expect(authoringComponentContent.dataExplorerGraphTypes[0].value).toEqual('scatter');
@@ -109,18 +205,17 @@ function shouldToggleDataExplorer() {
     expect(authoringComponentContent.isDataExplorerAxisLabelsEditable).toEqual(false);
     expect(authoringComponentContent.isDataExplorerAxisLabelsEditable).toEqual(false);
     expect(authoringComponentContent.dataExplorerSeriesParams).toEqual([{}]);
+    expect(authoringComponentContent.dataExplorerDataToColumn).toEqual({});
   });
 }
 
 function shouldToggleDataExplorerScatterPlot() {
   it('should toggle data explorer scatter plot', () => {
-    spyOn(tableAuthoringController, 'componentChanged').and.callFake(() => {});
-    const dataExplorerGraphTypes =
-      tableAuthoringController.authoringComponentContent.dataExplorerGraphTypes;
+    const dataExplorerGraphTypes = component.authoringComponentContent.dataExplorerGraphTypes;
     expect(dataExplorerGraphTypes.length).toEqual(2);
     expect(dataExplorerGraphTypes[0].value).toEqual('scatter');
     expect(dataExplorerGraphTypes[1].value).toEqual('column');
-    tableAuthoringController.dataExplorerToggleScatterPlot();
+    component.dataExplorerToggleScatterPlot();
     expect(dataExplorerGraphTypes.length).toEqual(1);
     expect(dataExplorerGraphTypes[0].value).toEqual('column');
   });
@@ -128,13 +223,11 @@ function shouldToggleDataExplorerScatterPlot() {
 
 function shouldToggleDataExplorerLineGraph() {
   it('should toggle data explorer line graph', () => {
-    spyOn(tableAuthoringController, 'componentChanged').and.callFake(() => {});
-    const dataExplorerGraphTypes =
-      tableAuthoringController.authoringComponentContent.dataExplorerGraphTypes;
+    const dataExplorerGraphTypes = component.authoringComponentContent.dataExplorerGraphTypes;
     expect(dataExplorerGraphTypes.length).toEqual(2);
     expect(dataExplorerGraphTypes[0].value).toEqual('scatter');
     expect(dataExplorerGraphTypes[1].value).toEqual('column');
-    tableAuthoringController.dataExplorerToggleLineGraph();
+    component.dataExplorerToggleLineGraph();
     expect(dataExplorerGraphTypes.length).toEqual(3);
     expect(dataExplorerGraphTypes[2].value).toEqual('line');
   });
@@ -142,13 +235,11 @@ function shouldToggleDataExplorerLineGraph() {
 
 function shouldToggleDataExplorerBarGraph() {
   it('should toggle data explorer bar graph', () => {
-    spyOn(tableAuthoringController, 'componentChanged').and.callFake(() => {});
-    const dataExplorerGraphTypes =
-      tableAuthoringController.authoringComponentContent.dataExplorerGraphTypes;
+    const dataExplorerGraphTypes = component.authoringComponentContent.dataExplorerGraphTypes;
     expect(dataExplorerGraphTypes.length).toEqual(2);
     expect(dataExplorerGraphTypes[0].value).toEqual('scatter');
     expect(dataExplorerGraphTypes[1].value).toEqual('column');
-    tableAuthoringController.dataExplorerToggleBarGraph();
+    component.dataExplorerToggleBarGraph();
     expect(dataExplorerGraphTypes.length).toEqual(1);
     expect(dataExplorerGraphTypes[0].value).toEqual('scatter');
   });
@@ -156,11 +247,9 @@ function shouldToggleDataExplorerBarGraph() {
 
 function shouldToggleDataExplorerGraphType() {
   it('should toggle data explorer graph type', () => {
-    spyOn(tableAuthoringController, 'componentChanged').and.callFake(() => {});
-    const dataExplorerGraphTypes =
-      tableAuthoringController.authoringComponentContent.dataExplorerGraphTypes;
+    const dataExplorerGraphTypes = component.authoringComponentContent.dataExplorerGraphTypes;
     expect(dataExplorerGraphTypes.length).toEqual(2);
-    tableAuthoringController.dataExplorerToggleGraphType('Hello', 'World');
+    component.dataExplorerToggleGraphType('Hello', 'World');
     expect(dataExplorerGraphTypes.length).toEqual(3);
     expect(dataExplorerGraphTypes[2].name).toEqual('Hello');
     expect(dataExplorerGraphTypes[2].value).toEqual('World');
@@ -169,7 +258,7 @@ function shouldToggleDataExplorerGraphType() {
 
 function shouldCreateGraphTypeObject() {
   it('should create graph type object', () => {
-    const graphTypeObject = tableAuthoringController.createGraphTypeObject('Hello', 'World');
+    const graphTypeObject = component.createGraphTypeObject('Hello', 'World');
     expect(graphTypeObject.name).toEqual('Hello');
     expect(graphTypeObject.value).toEqual('World');
   });
@@ -177,10 +266,9 @@ function shouldCreateGraphTypeObject() {
 
 function shouldInitializeDataExplorerGraphTypes() {
   it('should initialize data explorer graph types', () => {
-    tableAuthoringController.authoringComponentContent.dataExplorerGraphTypes = [];
-    tableAuthoringController.initializeDataExplorerGraphTypes();
-    const dataExplorerGraphTypes =
-      tableAuthoringController.authoringComponentContent.dataExplorerGraphTypes;
+    component.authoringComponentContent.dataExplorerGraphTypes = [];
+    component.initializeDataExplorerGraphTypes();
+    const dataExplorerGraphTypes = component.authoringComponentContent.dataExplorerGraphTypes;
     expect(dataExplorerGraphTypes.length).toEqual(1);
     expect(dataExplorerGraphTypes[0].name).toEqual('Scatter Plot');
     expect(dataExplorerGraphTypes[0].value).toEqual('scatter');
@@ -189,82 +277,69 @@ function shouldInitializeDataExplorerGraphTypes() {
 
 function shouldRepopulateDataExplorerGraphTypes() {
   it('should repopulate data explorer graph types', () => {
-    tableAuthoringController.isDataExplorerScatterPlotEnabled = false;
-    tableAuthoringController.isDataExplorerLineGraphEnabled = false;
-    tableAuthoringController.isDataExplorerBarGraphEnabled = false;
-    tableAuthoringController.repopulateDataExplorerGraphTypes();
-    expect(tableAuthoringController.isDataExplorerScatterPlotEnabled).toEqual(true);
-    expect(tableAuthoringController.isDataExplorerLineGraphEnabled).toEqual(false);
-    expect(tableAuthoringController.isDataExplorerBarGraphEnabled).toEqual(true);
+    component.isDataExplorerScatterPlotEnabled = false;
+    component.isDataExplorerLineGraphEnabled = false;
+    component.isDataExplorerBarGraphEnabled = false;
+    component.repopulateDataExplorerGraphTypes();
+    expect(component.isDataExplorerScatterPlotEnabled).toEqual(true);
+    expect(component.isDataExplorerLineGraphEnabled).toEqual(false);
+    expect(component.isDataExplorerBarGraphEnabled).toEqual(true);
   });
 }
 
 function shouldInitializeDataExplorerSeriesParams() {
   it('should initialize data explorer series params', () => {
-    tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams = null;
-    tableAuthoringController.authoringComponentContent.numDataExplorerSeries = 2;
-    tableAuthoringController.initializeDataExplorerSeriesParams();
-    expect(
-      tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams.length
-    ).toEqual(2);
+    component.authoringComponentContent.dataExplorerSeriesParams = null;
+    component.authoringComponentContent.numDataExplorerSeries = 2;
+    component.initializeDataExplorerSeriesParams();
+    expect(component.authoringComponentContent.dataExplorerSeriesParams.length).toEqual(2);
   });
 }
 
 function shouldHandleNumDataExplorerSeriesChangeIncrease() {
   it('should handle num data explorer series change increase', () => {
-    tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams = [{}];
-    tableAuthoringController.authoringComponentContent.numDataExplorerSeries = 2;
-    spyOn(tableAuthoringController, 'componentChanged').and.callFake(() => {});
-    tableAuthoringController.numDataExplorerSeriesChanged();
-    expect(
-      tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams.length
-    ).toEqual(2);
+    component.authoringComponentContent.dataExplorerSeriesParams = [{}];
+    component.authoringComponentContent.numDataExplorerSeries = 2;
+    component.numDataExplorerSeriesChanged();
+    expect(component.authoringComponentContent.dataExplorerSeriesParams.length).toEqual(2);
   });
 }
 
 function shouldHandleNumDataExplorerSeriesChangeDecrease() {
   it('should handle num data explorer series change decrease', () => {
-    tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams = [{}, {}, {}];
-    tableAuthoringController.authoringComponentContent.numDataExplorerSeries = 2;
-    spyOn(tableAuthoringController, 'componentChanged').and.callFake(() => {});
-    tableAuthoringController.numDataExplorerSeriesChanged();
-    expect(
-      tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams.length
-    ).toEqual(2);
+    component.authoringComponentContent.dataExplorerSeriesParams = [{}, {}, {}];
+    component.authoringComponentContent.numDataExplorerSeries = 2;
+    component.numDataExplorerSeriesChanged();
+    expect(component.authoringComponentContent.dataExplorerSeriesParams.length).toEqual(2);
   });
 }
 
 function shouldIncreaseNumDataExplorerSeries() {
   it('should increase num data explorer series', () => {
-    tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams = [{}];
-    tableAuthoringController.increaseNumDataExplorerSeries(3);
-    expect(
-      tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams.length
-    ).toEqual(3);
+    component.authoringComponentContent.dataExplorerSeriesParams = [{}];
+    component.increaseNumDataExplorerSeries(3);
+    expect(component.authoringComponentContent.dataExplorerSeriesParams.length).toEqual(3);
   });
 }
 
 function shouldDecreaseNumDataExplorerSeries() {
   it('should decrease num data explorer series', () => {
-    tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams = [{}, {}, {}];
-    tableAuthoringController.decreaseNumDataExplorerSeries(1);
-    expect(
-      tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams.length
-    ).toEqual(1);
+    component.authoringComponentContent.dataExplorerSeriesParams = [{}, {}, {}];
+    component.decreaseNumDataExplorerSeries(1);
+    expect(component.authoringComponentContent.dataExplorerSeriesParams.length).toEqual(1);
   });
 }
 
 function shouldUpdateDataExplorerSeriesParamsYAxis() {
   it('should update data explorer series params y axis', () => {
-    tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams = [
+    component.authoringComponentContent.dataExplorerSeriesParams = [
       { yAxis: 0 },
       { yAxis: 1 },
       { yAxis: 2 }
     ];
-    tableAuthoringController.authoringComponentContent.numDataExplorerYAxis = 2;
-    tableAuthoringController.updateDataExplorerSeriesParamsYAxis(1);
-    const dataExplorerSeriesParams =
-      tableAuthoringController.authoringComponentContent.dataExplorerSeriesParams;
+    component.authoringComponentContent.numDataExplorerYAxis = 2;
+    component.updateDataExplorerSeriesParamsYAxis();
+    const dataExplorerSeriesParams = component.authoringComponentContent.dataExplorerSeriesParams;
     expect(dataExplorerSeriesParams[0].yAxis).toEqual(0);
     expect(dataExplorerSeriesParams[1].yAxis).toEqual(1);
     expect(dataExplorerSeriesParams[2].yAxis).toEqual(0);

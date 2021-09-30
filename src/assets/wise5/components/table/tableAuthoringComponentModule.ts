@@ -8,24 +8,21 @@ import { TableAuthoring } from './table-authoring/table-authoring.component';
 import { EditTableConnectedComponentsComponent } from './edit-table-connected-components/edit-table-connected-components.component';
 
 const tableAuthoringComponentModule = angular
-  .module('tableAuthoringComponentModule', ['pascalprecht.translate'])
+  .module('tableAuthoringComponentModule', [])
   .service('TableService', downgradeInjectable(TableService))
   .directive(
     'tableAuthoring',
     downgradeComponent({ component: TableAuthoring }) as angular.IDirectiveFactory
   )
-  .component('editTableAdvanced', EditTableAdvancedComponent)
+  .directive(
+    'editTableAdvanced',
+    downgradeComponent({ component: EditTableAdvancedComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'editTableConnectedComponents',
     downgradeComponent({
       component: EditTableConnectedComponentsComponent
     }) as angular.IDirectiveFactory
-  )
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/table/i18n');
-    }
-  ]);
+  );
 
 export default tableAuthoringComponentModule;
