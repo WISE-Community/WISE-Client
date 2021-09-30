@@ -1,50 +1,65 @@
 <div>
-  <md-checkbox class='md-primary'
-               ng-model='$ctrl.authoringComponentContent.canCreateChoices'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'match.studentCanCreateChoices' | translate }}
-  </md-checkbox>
+  <mat-checkbox
+      color="primary"
+      class="checkbox"
+      [(ngModel)]="authoringComponentContent.canCreateChoices"
+      (ngModelChange)="componentChanged()"
+      i18n>
+    Student Can Create Choices
+  </mat-checkbox>
 </div>
 <div>
-  <md-checkbox class='md-primary'
-               ng-model='$ctrl.authoringComponentContent.horizontal'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'match.showSourceBucketOnTheLeftAndTargetBucketsOnTheRight' | translate }}
-  </md-checkbox>
+  <mat-checkbox
+      color="primary"
+      class="checkbox"
+      [(ngModel)]="authoringComponentContent.horizontal"
+      (ngModelChange)="componentChanged()"
+      i18n>
+    Show Source and Target Buckets Side-by-Side
+  </mat-checkbox>
 </div>
 <div>
-  <md-checkbox class='md-primary'
-               ng-if='$ctrl.isNotebookEnabled()'
-               ng-model='$ctrl.authoringComponentContent.importPrivateNotes'
-               ng-change='$ctrl.componentChanged()'>
-    {{ ::'match.showPrivateNotesAsChoices' | translate }}
-  </md-checkbox>
+  <mat-checkbox
+      *ngIf="isNotebookEnabled()"
+      color="primary"
+      class="checkbox"
+      [(ngModel)]="authoringComponentContent.importPrivateNotes"
+      (ngModelChange)="componentChanged()">
+    Show Private Notes As Choices
+  </mat-checkbox>
 </div>
-<edit-component-save-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-save-button>
+<edit-component-save-button [authoringComponentContent]="authoringComponentContent">
+</edit-component-save-button>
 <br/>
-<edit-component-submit-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-submit-button>
+<edit-component-submit-button [authoringComponentContent]="authoringComponentContent">
+</edit-component-submit-button>
 <edit-component-max-submit
-    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
-    [(max-submit-count)]="$ctrl.authoringComponentContent.maxSubmitCount"
-    (max-submit-count-change)="$ctrl.maxSubmitCountChanged($event)">
+    *ngIf="authoringComponentContent.showSubmitButton"
+    [(maxSubmitCount)]="authoringComponentContent.maxSubmitCount"
+    (maxSubmitCountChange)="maxSubmitCountChanged($event)">
 </edit-component-max-submit>
 <edit-component-default-feedback
-    ng-if="$ctrl.authoringComponentContent.showSubmitButton"
-    [authoring-component-content]="$ctrl.authoringComponentContent">
+    *ngIf="authoringComponentContent.showSubmitButton"
+    [authoringComponentContent]="authoringComponentContent">
 </edit-component-default-feedback>
-<div layout="column" layout-align="start start">
-  <edit-component-max-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-max-score>
-  <edit-component-exclude-from-total-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-exclude-from-total-score>
-  <edit-component-width [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-width>
-  <edit-component-rubric [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-rubric>
-  <edit-component-tags [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-tags>
+<div fxLayout="column" fxLayoutAlign="start start">
+  <edit-component-max-score [authoringComponentContent]="authoringComponentContent">
+  </edit-component-max-score>
+  <edit-component-exclude-from-total-score [authoringComponentContent]="authoringComponentContent">
+  </edit-component-exclude-from-total-score>
+  <edit-component-width [authoringComponentContent]="authoringComponentContent">
+  </edit-component-width>
+  <edit-component-rubric [authoringComponentContent]="authoringComponentContent">
+  </edit-component-rubric>
+  <edit-component-tags [authoringComponentContent]="authoringComponentContent">
+  </edit-component-tags>
 </div>
 <edit-match-connected-components
-    [node-id]="$ctrl.nodeId"
-    [component-id]="$ctrl.componentId"
-    [allowed-connected-component-types]="$ctrl.allowedConnectedComponentTypes"
-    [component-content]="$ctrl.authoringComponentContent"
-    [connected-components]="$ctrl.authoringComponentContent.connectedComponents"
-    (connected-components-changed)="$ctrl.connectedComponentsChanged($event)">
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+    [componentContent]="authoringComponentContent"
+    [connectedComponents]="authoringComponentContent.connectedComponents"
+    (connectedComponentsChanged)="connectedComponentsChanged($event)">
 </edit-match-connected-components>
-<edit-component-json [node-id]="$ctrl.nodeId" [component-id]="$ctrl.componentId"></edit-component-json>
+<edit-component-json [nodeId]="nodeId" [componentId]="componentId"></edit-component-json>
