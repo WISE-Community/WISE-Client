@@ -9,6 +9,7 @@ function getPostfixExpression() {
     it('should convert rule to postfix format', () => {
       expectPostfixExpression('idea1 && idea2 && idea3', ['idea1', 'idea2', '&&', 'idea3', '&&']);
       expectPostfixExpression('idea1 || idea2 && idea3', ['idea1', 'idea2', '||', 'idea3', '&&']);
+      expectPostfixExpression('!idea1 && !idea2', ['idea1', '!', 'idea2', '!', '&&']);
     });
   });
 }
