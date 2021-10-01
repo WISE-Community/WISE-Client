@@ -25,6 +25,7 @@ import { MockService } from '../animation/animation-student/animation-student.co
 import { ComponentService } from '../componentService';
 import { CRaterIdea } from './CRaterIdea';
 import { CRaterResponse } from './CRaterResponse';
+import { CRaterScore } from './CRaterScore';
 import { DialogGuidanceStudentComponent } from './dialog-guidance-student/dialog-guidance-student.component';
 import { DialogResponsesComponent } from './dialog-responses/dialog-responses.component';
 import { DialogGuidanceFeedbackRuleEvaluator } from './DialogGuidanceFeedbackRuleEvaluator';
@@ -43,6 +44,10 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
     {
       expression: 'isSecondToLastSubmit',
       feedback: 'This is a generic response that is shown on the second to last submission'
+    },
+    {
+      expression: 'isNonScorable',
+      feedback: 'isNonScorable'
     },
     {
       expression: 'idea1 && idea2',
@@ -149,47 +154,48 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
   matchNoRule_ReturnDefault();
   secondToLastSubmit();
   finalSubmit();
+  nonScorable();
 });
 
 function matchRule_OneIdea() {
   it('should find first rule matching one idea', () => {
-    expectFeedbackForMatchedIdeas(['idea1'], 'You hit idea1');
+    expectFeedback(['idea1'], [], 'You hit idea1');
   });
 }
 
 function matchRule_MultipleIdeasUsingAnd() {
   it('should find rule matching two ideas using && operator', () => {
-    expectFeedbackForMatchedIdeas(['idea1', 'idea2'], 'You hit idea1 and idea2');
-    expectFeedbackForMatchedIdeas(['idea2', 'idea3', 'idea4'], 'You hit idea2, idea3 and idea4');
+    expectFeedback(['idea1', 'idea2'], [], 'You hit idea1 and idea2');
+    expectFeedback(['idea2', 'idea3', 'idea4'], [], 'You hit idea2, idea3 and idea4');
   });
 }
 
 function matchRule_MultipleIdeasUsingOr() {
   it('should find rule matching ideas using || operator', () => {
-    expectFeedbackForMatchedIdeas(['idea5'], 'You hit idea5 or idea6');
+    expectFeedback(['idea5'], [], 'You hit idea5 or idea6');
   });
 }
 
 function matchRule_MultipleIdeasUsingAndOr() {
   it('should find rule matching ideas using combination of && and || operators', () => {
-    expectFeedbackForMatchedIdeas(['idea7', 'idea9'], 'You hit idea7 or idea8 and idea9');
-    expectFeedbackForMatchedIdeas(['idea8', 'idea9'], 'You hit idea7 or idea8 and idea9');
-    expectFeedbackForMatchedIdeas(['idea7', 'idea8'], 'You hit idea7 and idea8 or idea9');
-    expectFeedbackForMatchedIdeas(['idea9'], 'You hit idea7 and idea8 or idea9');
+    expectFeedback(['idea7', 'idea9'], [], 'You hit idea7 or idea8 and idea9');
+    expectFeedback(['idea8', 'idea9'], [], 'You hit idea7 or idea8 and idea9');
+    expectFeedback(['idea7', 'idea8'], [], 'You hit idea7 and idea8 or idea9');
+    expectFeedback(['idea9'], [], 'You hit idea7 and idea8 or idea9');
   });
 }
 
 function matchRule_MultipleIdeasUsingNotAndOr() {
   it('should find rule matching ideas using combination of !, && and || operators', () => {
-    expectFeedbackForMatchedIdeas([], '!idea10');
-    expectFeedbackForMatchedIdeas(['idea10'], 'idea10 && !idea11');
-    expectFeedbackForMatchedIdeas(['idea10', 'idea11', 'idea12'], '!idea11 || idea12');
+    expectFeedback([], [], '!idea10');
+    expectFeedback(['idea10'], [], 'idea10 && !idea11');
+    expectFeedback(['idea10', 'idea11', 'idea12'], [], '!idea11 || idea12');
   });
 }
 
 function matchNoRule_ReturnDefault() {
   it('should return default idea when no rule is matched', () => {
-    expectFeedbackForMatchedIdeas(['idea10', 'idea11'], 'default feedback');
+    expectFeedback(['idea10', 'idea11'], [], 'default feedback');
   });
 }
 
@@ -197,7 +203,7 @@ function secondToLastSubmit() {
   it('should return second to last submit rule when there is one submit left', () => {
     component.componentContent.maxSubmitCount = 5;
     component.submitCounter = 4;
-    expectFeedbackForMatchedIdeas(['idea1'], 'second to last submission');
+    expectFeedback(['idea1'], [], 'second to last submission');
   });
 }
 
@@ -205,27 +211,32 @@ function finalSubmit() {
   it('should return final submit rule when no more submits left', () => {
     component.componentContent.maxSubmitCount = 5;
     component.submitCounter = 5;
-    expectFeedbackForMatchedIdeas(['idea1'], 'final submission');
+    expectFeedback(['idea1'], [], 'final submission');
   });
 }
 
-function expectFeedbackForMatchedIdeas(ideas: string[], expectedFeedback: string) {
-  const rule = getFeedbackRuleForIdeas(ideas);
+function nonScorable() {
+  it('should return non-scorable rule when the item is not scorable', () => {
+    expectFeedback([], [{ id: 'nonscorable', score: 1, realNumberScore: 1 }], 'isNonScorable');
+  });
+}
+function expectFeedback(ideas: string[], scores: CRaterScore[], expectedFeedback: string) {
+  const rule = getFeedbackRule(ideas, scores);
   expect(rule.feedback).toContain(expectedFeedback);
 }
 
-function getFeedbackRuleForIdeas(ideasString: string[]): FeedbackRule {
-  const response = createCRaterResponse(ideasString);
-  return evaluator.getFeedbackRule(response);
+function getFeedbackRule(ideas: string[], scores: CRaterScore[]): FeedbackRule {
+  return evaluator.getFeedbackRule(createCRaterResponse(ideas, scores));
 }
 
-function createCRaterResponse(ideasString: string[]) {
+function createCRaterResponse(ideas: string[], scores: CRaterScore[]): CRaterResponse {
   const response = new CRaterResponse();
-  response.ideas = ideasString.map((idea) => {
+  response.ideas = ideas.map((idea) => {
     const cRaterIdea = new CRaterIdea();
     cRaterIdea.name = idea;
     cRaterIdea.detected = true;
     return cRaterIdea;
   });
+  response.scores = scores;
   return response;
 }
