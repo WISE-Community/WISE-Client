@@ -1918,7 +1918,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">174</context>
         </context-group>
-        <target state="needs-translation">Featured Teacher Tools:</target>
+        <target state="translated">Herramientas destacadas para docentes:</target>
       </trans-unit>
       <trans-unit id="6acdfffcc102679870fecbf9a48a200663b14017" datatype="html">
         <source>Real-time progress monitor</source>
@@ -1942,7 +1942,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">186</context>
         </context-group>
-        <target state="needs-translation">Automatically scored assessment items</target>
+        <target state="translated">Items de evaluación calificados automáticamente</target>
       </trans-unit>
       <trans-unit id="eff210843d034ee2569f9b96f6b643934e473a45" datatype="html">
         <source>Pause student screens</source>
@@ -1974,7 +1974,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">202</context>
         </context-group>
-        <target state="needs-translation">In development: Automated insights into student NGSS understanding + suggested classroom interventions!</target>
+        <target state="translated">En desarrollo: Información automatizada sobre la comprensión de los estudiantes de los estándares norteamericanos para las ciencias + intervenciones sugeridas para la clase!</target>
       </trans-unit>
       <trans-unit id="337a4aa817a8f5f73548041105128b973b9fb6d2" datatype="html">
         <source>Explore what WISE has to offer!</source>
@@ -3466,7 +3466,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
-        <target state="needs-translation">Click "Add".</target>
+        <target state="translated">Clic en "Agregar".</target>
       </trans-unit>
       <trans-unit id="29a187acf9e3654fbc3bc2f34dc7b8490c2c3085" datatype="html">
         <source>The run will be added to your list of runs.</source>
@@ -3474,7 +3474,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">35</context>
         </context-group>
-        <target state="needs-translation">The run will be added to your list of runs.</target>
+        <target state="translated">La ejecución será agregada a su lista de ejecuciones.</target>
       </trans-unit>
       <trans-unit id="8bd99290f700002f66521ecaeff19f420c156558" datatype="html">
         <source>Click &quot;Launch&quot; to open the project.</source>
@@ -3482,7 +3482,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">36</context>
         </context-group>
-        <target state="needs-translation">Click "Launch" to open the project.</target>
+        <target state="translated">Clic "Ejecutar" para abrir el proyecto.</target>
       </trans-unit>
       <trans-unit id="46598f80db6ba570e88591e090b9480a1a06bc57" datatype="html">
         <source>I chose the wrong period, how can I change it?</source>
@@ -3490,7 +3490,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">I chose the wrong period, how can I change it?</target>
+        <target state="translated">Elegí el período equivocado, ¿cómo lo puedo cambiar?</target>
       </trans-unit>
       <trans-unit id="06df3524151d18c0a2e261269b0b4e41282dd91d" datatype="html">
         <source>Only your teacher can change your period. Please ask them for assistance.</source>
@@ -3498,7 +3498,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">40</context>
         </context-group>
-        <target state="needs-translation">Only your teacher can change your period. Please ask them for assistance.</target>
+        <target state="translated">Solo el/la docente puede cambiar el período. Pediles que te ayuden.</target>
       </trans-unit>
       <trans-unit id="c7a7fe783c37fe2f45e8cdee103e70f13c5c7a7e" datatype="html">
         <source>The WISE web site won&apos;t load on my web browser. What do I do?</source>
@@ -3510,7 +3510,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">189</context>
         </context-group>
-        <target state="needs-translation">The WISE web site won't load on my web browser. What do I do?</target>
+        <target state="translated">El sitio web de WISE no carga en mi navegador. ¿Qué puedo hacer?</target>
       </trans-unit>
       <trans-unit id="af71879ff4b2c7e9d79167d67a8558c4fd64ee09" datatype="html">
         <source>You can try <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.wikihow.com/Clear-Your-Browser&apos;s-Cache&quot; target=&quot;_blank&quot;&gt;"/>clearing your browser cache<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and then reloading the WISE web site.</source>
