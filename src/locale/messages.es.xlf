@@ -2710,7 +2710,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
           <context context-type="linenumber">101</context>
         </context-group>
-        <target state="needs-translation">We did not find any usernames that match the information you provided. Please make sure you entered your information correctly. If you can't find your account, ask a teacher for help or contact us for assistance.</target>
+        <target state="translated">No encontramos ningún nombre de usuario que coincida con la información que proporcionó. Asegúrese de haber ingresado su información correctamente. Si no puede encontrar su cuenta, pídale ayuda a un docente o contáctenos para obtener ayuda.</target>
       </trans-unit>
       <trans-unit id="2728844381564590456" datatype="html">
         <source>We found a username that matches. Select it to log in. If this username is not yours, ask a teacher for help or contact us for assistance.</source>
@@ -2718,7 +2718,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
           <context context-type="linenumber">106</context>
         </context-group>
-        <target state="needs-translation">We found a username that matches. Select it to log in. If this username is not yours, ask a teacher for help or contact us for assistance.</target>
+        <target state="translated">Encontramos un nombre de usuario que coincide. Selecciónelo para iniciar sesión. Si este nombre de usuario no es suyo, pídale ayuda a un/a docente o contáctenos para obtener ayuda.</target>
       </trans-unit>
       <trans-unit id="5966595713291556325" datatype="html">
         <source>We found multiple usernames that match. If one of these is yours, select it to log in. If you can&apos;t find your account, ask a teacher for help or contact us for assistance.</source>
@@ -2726,7 +2726,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.ts</context>
           <context context-type="linenumber">111</context>
         </context-group>
-        <target state="needs-translation">We found multiple usernames that match. If one of these is yours, select it to log in. If you can't find your account, ask a teacher for help or contact us for assistance.</target>
+        <target state="translated">Encontramos varios nombres de usuario que coinciden. Si uno de estos es suyo, selecciónelo para iniciar sesión. Si no puede encontrar su cuenta, pídale ayuda a un/a docente o contáctenos para obtener ayuda.</target>
       </trans-unit>
       <trans-unit id="4cb7940cd7b6c30fb35a2d7d6478ee6250f1a1e9" datatype="html">
         <source>Student Forgot Username or Password</source>
@@ -2734,7 +2734,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student/forgot-student.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Student Forgot Username or Password</target>
+        <target state="translated">Estudiante olvidó nombre de usuario o contraseña</target>
       </trans-unit>
       <trans-unit id="9a0d8c396fd0398b5d49f9b509f33dce97a4f35d" datatype="html">
         <source>Look up username</source>
@@ -2786,7 +2786,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
           <context context-type="linenumber">80</context>
         </context-group>
-        <target state="needs-translation">The verification code has expired. Verification codes are valid for 10 minutes. Please go back to the Teacher Forgot Password page to generate a new one.</target>
+        <target state="translated">El código de verificación ha caducado. Los códigos de verificación son válidos por 10 minutos. Vuelva a la página de Docente Olvidé Contraseña para generar una nueva.</target>
       </trans-unit>
       <trans-unit id="861030852489811059" datatype="html">
         <source>The verification code is invalid. Please try again.</source>
@@ -2798,7 +2798,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
           <context context-type="linenumber">85</context>
         </context-group>
-        <target state="needs-translation">The verification code is invalid. Please try again.</target>
+        <target state="translated">El código de verificación es erróneo. Intenta otra vez.</target>
       </trans-unit>
       <trans-unit id="2199576463342303449" datatype="html">
         <source>You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.</source>
@@ -2810,7 +2810,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
           <context context-type="linenumber">90</context>
         </context-group>
-        <target state="needs-translation">You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.</target>
+        <target state="translated">Ha enviado un código de verificación no válido demasiadas veces. Por razones de seguridad, bloquearemos la posibilidad de cambiar su contraseña durante 10 minutos. Después de 10 minutos, regrese a la página de Docente Olvidó Contraseña para generar un nuevo código de verificación.</target>
       </trans-unit>
       <trans-unit id="7375295840965754734" datatype="html">
         <source>Password cannot be blank, please enter a password.</source>
@@ -2818,7 +2818,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
           <context context-type="linenumber">120</context>
         </context-group>
-        <target state="needs-translation">Password cannot be blank, please enter a password.</target>
+        <target state="translated">La contraseña no puede estar en blanco, ingrese una contraseña.</target>
       </trans-unit>
       <trans-unit id="4839293263479159850" datatype="html">
         <source>Passwords do not match, please try again.</source>
@@ -2826,7 +2826,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
           <context context-type="linenumber">124</context>
         </context-group>
-        <target state="needs-translation">Passwords do not match, please try again.</target>
+        <target state="translated">Las contraseñas no coinciden, intenta nuevamente.</target>
       </trans-unit>
       <trans-unit id="a4d0068934144e3f61b8e981a62e014ab0a90ebe" datatype="html">
         <source>Enter Verification Code</source>
@@ -2842,7 +2842,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">We have sent a verification code to your email. Please check your email and enter the verification code below.</target>
+        <target state="translated">Hemos enviado un código de verificación a su correo electrónico. Por favor revise su correo electrónico e ingrese el código de verificación a continuación.</target>
       </trans-unit>
       <trans-unit id="0b0c831918036f2a99b923ae0d79076409374fef" datatype="html">
         <source>Verification Code</source>
@@ -3522,7 +3522,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">191</context>
         </context-group>
-        <target state="needs-translation">You can try <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.wikihow.com/Clear-Your-Browser's-Cache&quot; target=&quot;_blank&quot;&gt;"/>clearing your browser cache<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and then reloading the WISE web site.</target>
+        <target state="translated">Puedes probar <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.wikihow.com/Clear-Your-Browser's-Cache&quot; target=&quot;_blank&quot;&gt;"/>borrar la memoria caché del navegador<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> y luego recargar el sitio web de WISE.</target>
       </trans-unit>
       <trans-unit id="2b8d27d2ef531e0cdf597e90b8c80e339d679ad3" datatype="html">
         <source>You can try using a different web browser. We recommend using Chrome or Firefox.</source>
@@ -3534,7 +3534,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">192</context>
         </context-group>
-        <target state="needs-translation">You can try using a different web browser. We recommend using Chrome or Firefox.</target>
+        <target state="translated">Probar usando un navegador diferente. Recomendamos Chrome o Firefox.</target>
       </trans-unit>
       <trans-unit id="72d03fe604d9ac13e9a9b1a46d1421fdc4284eca" datatype="html">
         <source>What if I have trouble logging in?</source>
@@ -3546,7 +3546,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">199</context>
         </context-group>
-        <target state="needs-translation">What if I have trouble logging in?</target>
+        <target state="translated">¿Qué pasa si tengo problemas para iniciar sesión?</target>
       </trans-unit>
       <trans-unit id="ef91b6733f15c82512f30d911641bc4b2076879c" datatype="html">
         <source>If you do not remember your username or password click the Lost Username or Password link and follow the instructions. </source>
@@ -3558,7 +3558,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">201</context>
         </context-group>
-        <target state="needs-translation">If you do not remember your username or password click the Lost Username or Password link and follow the instructions. </target>
+        <target state="translated">Si no recuerda su nombre de usuario o contraseña, haga clic en el enlace Nombre de usuario o contraseña perdidos y siga las instrucciones. </target>
       </trans-unit>
       <trans-unit id="df6ec49a683a1c798d509516f3b73dd1befb6a62" datatype="html">
         <source>Can I use WISE in another language?</source>
@@ -3570,7 +3570,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">203</context>
         </context-group>
-        <target state="needs-translation">Can I use WISE in another language?</target>
+        <target state="translated">¿Se puede usar WISE en otro idioma?</target>
       </trans-unit>
       <trans-unit id="5e6b10e07638120f23c5e8bf743c1fed409876c7" datatype="html">
         <source>Yes!</source>
@@ -3582,7 +3582,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">204</context>
         </context-group>
-        <target state="needs-translation">Yes!</target>
+        <target state="translated">¡Sí, claro!</target>
       </trans-unit>
       <trans-unit id="2c78c51700ea174231b7fb84a2d51a96f5b5ed78" datatype="html">
         <source>Sign into WISE with your student account.</source>
@@ -3590,7 +3590,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">Sign into WISE with your student account.</target>
+        <target state="translated">Iniciar sesión en WISE con una cuenta de estudiante.</target>
       </trans-unit>
       <trans-unit id="cd761cded422c423fa11257b80da3e4ecff46339" datatype="html">
         <source>Click on your account icon at the top right of the page. This should open a drop down with options.</source>
@@ -3602,7 +3602,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">207</context>
         </context-group>
-        <target state="needs-translation">Click on your account icon at the top right of the page. This should open a drop down with options.</target>
+        <target state="translated">Haga clic en el icono de su cuenta en la parte superior derecha de la página. Esto debería abrir un menú desplegable con opciones.</target>
       </trans-unit>
       <trans-unit id="a8484540c88600524e3d99bffc641f5588cc4ecc" datatype="html">
         <source>Click the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/student/profile/edit&quot; target=&quot;_blank&quot;&gt;"/>&quot;Edit Profile&quot;<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> option.</source>
@@ -3614,7 +3614,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">208</context>
         </context-group>
-        <target state="needs-translation">Click the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/student/profile/edit&quot; target=&quot;_blank&quot;&gt;"/>"Edit Profile"<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> option.</target>
+        <target state="translated">Clic en la opción <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/student/profile/edit&quot; target=&quot;_blank&quot;&gt;"/>"Editar Perfil"<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
       </trans-unit>
       <trans-unit id="9d5b98a0d8b80864e5e2382f9c2f056f8b9393e5" datatype="html">
         <source>Near the bottom there will be a &quot;Language&quot; setting.</source>
@@ -3626,7 +3626,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">209</context>
         </context-group>
-        <target state="needs-translation">Near the bottom there will be a "Language" setting.</target>
+        <target state="translated">Cerca del botón debería haber una configuración de "Idioma".</target>
       </trans-unit>
       <trans-unit id="c417c54228188e09e2d307c2fc450f226a1526d0" datatype="html">
         <source>Change the language to the language of your choice.</source>
@@ -3638,7 +3638,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">210</context>
         </context-group>
-        <target state="needs-translation">Change the language to the language of your choice.</target>
+        <target state="translated">Cambie el idioma a uno que usted elija.</target>
       </trans-unit>
       <trans-unit id="ecbda85dab67998ada82c4efd82ffb9bf4bc39d2" datatype="html">
         <source>Note 1: If your language is not listed as an option, or you&apos;d like to help us improve the translation, please contact us and we&apos;ll help you get started!</source>
@@ -3650,7 +3650,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">211</context>
         </context-group>
-        <target state="needs-translation">Note 1: If your language is not listed as an option, or you'd like to help us improve the translation, please contact us and we'll help you get started!</target>
+        <target state="translated">Nota 1: Si su idioma no aparece como una opción, o si desea ayudarnos a mejorar la traducción, comuníquese con nosotros y lo ayudaremos a comenzar!</target>
       </trans-unit>
       <trans-unit id="1448c0c68b74d5beeb0c1ed5408a9b6f116138a9" datatype="html">
         <source>Note 2: Changing the language will change the language of the website but will not change the language of the projects. Projects must be independently translated which means that if you want to use a project in another language, you must translate it yourself or find a version of the project that has been translated by someone else.</source>
@@ -3662,7 +3662,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">212</context>
         </context-group>
-        <target state="needs-translation">Note 2: Changing the language will change the language of the website but will not change the language of the projects. Projects must be independently translated which means that if you want to use a project in another language, you must translate it yourself or find a version of the project that has been translated by someone else.</target>
+        <target state="translated">Nota 2: Cambiar el idioma cambiará el idioma del sitio web pero no cambiará el idioma de los proyectos. Los proyectos deben traducirse de forma independiente, lo que significa que si desea utilizar un proyecto en otro idioma, debe traducirlo usted mismo o encontrar una versión del proyecto que haya sido traducida por otra persona.</target>
       </trans-unit>
       <trans-unit id="b2be95339aa5b283ab35ea9703f365133eae1b67" datatype="html">
         <source>Who do I contact when I have a problem I can&apos;t solve?</source>
@@ -3674,7 +3674,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">214</context>
         </context-group>
-        <target state="needs-translation">Who do I contact when I have a problem I can't solve?</target>
+        <target state="translated">¿A quién puedo contactar cuando tenga un problema que no puedo resolver?</target>
       </trans-unit>
       <trans-unit id="f0bf08ca7362c92db6be004201f0d9e142a61532" datatype="html">
         <source>The <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/contact&quot; target=&quot;_blank&quot;&gt;"/>Contact WISE form<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> will send an email to the WISE technology group. You can find a link to the form at the bottom of the home page. Be sure to include as much information as you can about the problem. We will respond as quickly as we can.</source>
@@ -3686,7 +3686,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">216</context>
         </context-group>
-        <target state="needs-translation">The <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/contact&quot; target=&quot;_blank&quot;&gt;"/>Contact WISE form<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> will send an email to the WISE technology group. You can find a link to the form at the bottom of the home page. Be sure to include as much information as you can about the problem. We will respond as quickly as we can.</target>
+        <target state="translated">El <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{contextPath}}/contact&quot; target=&quot;_blank&quot;&gt;"/>Formulario de Contacto con WISE<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> enviará un correo electrónico al grupo de tecnología WISE. Puede encontrar un enlace al formulario en la parte inferior de la página de inicio. Asegúrese de incluir toda la información que pueda sobre el problema. Responderemos lo antes posible.</target>
       </trans-unit>
       <trans-unit id="38e95ec15a2f0fb793f968881f7579478c680f40" datatype="html">
         <source>Teacher Frequently Asked Questions</source>
@@ -3694,7 +3694,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Teacher Frequently Asked Questions</target>
+        <target state="translated">Preguntas Más Frecuentes de Docentes</target>
       </trans-unit>
       <trans-unit id="5f9d6dd89b42bf6d4b8ad3d8dc6001ede87581c5" datatype="html">
         <source>Student Management</source>
@@ -3718,7 +3718,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">94</context>
         </context-group>
-        <target state="needs-translation">Project Management</target>
+        <target state="translated">Gestión de Proyectos</target>
       </trans-unit>
       <trans-unit id="f73ef77a670e03ed6e3d2c94dca0914611fb815b" datatype="html">
         <source>Assessment of Student Work</source>
@@ -3730,7 +3730,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">143</context>
         </context-group>
-        <target state="needs-translation">Assessment of Student Work</target>
+        <target state="translated">Evaluación del Trabajo de Estudiantes</target>
       </trans-unit>
       <trans-unit id="585cc79e4214c6ff1f17cdcee07a592faccdecab" datatype="html">
         <source>Real Time Classroom Monitor</source>
@@ -3742,7 +3742,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">174</context>
         </context-group>
-        <target state="needs-translation">Real Time Classroom Monitor</target>
+        <target state="translated">Monitor de la clase en tiempo real</target>
       </trans-unit>
       <trans-unit id="500e3831ebdee994afba617d0be7ff667d7f6432" datatype="html">
         <source>Click on &quot;Teacher&quot;.</source>
@@ -3750,7 +3750,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">Click on "Teacher".</target>
+        <target state="translated">Clic en "Docente".</target>
       </trans-unit>
       <trans-unit id="0fb9b3530d8d70b28d4ab1ca863c04ec01db3dff" datatype="html">
         <source>How do I use a unit with my class?</source>
@@ -3758,7 +3758,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">How do I use a unit with my class?</target>
+        <target state="translated">¿Cómo utilizo una Unidad con mi clase?</target>
       </trans-unit>
       <trans-unit id="3576f8940d17f62b1c8f4fbed932067ac0fdb673" datatype="html">
         <source>Should I register my students for WISE or have them do it themselves?</source>
@@ -3766,7 +3766,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">39</context>
         </context-group>
-        <target state="needs-translation">Should I register my students for WISE or have them do it themselves?</target>
+        <target state="translated">¿Debo registrar yo a mis estudiantes en WISE o debo hacer que se registren por su cuenta?</target>
       </trans-unit>
       <trans-unit id="2c8b400fdc35436d28c9cccdaeb20ce10a03c8d7" datatype="html">
         <source>WISE makes student registration simple and intuitive -- direct your students to the register page by having them go to the WISE home page and clicking the &quot;Register&quot; link at the upper right. They should be able to register in 10 minutes or less. However, you can also opt to pre-register all of your students and provide them with a copy of their username/password on their first day in the project run.</source>
@@ -3774,7 +3774,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">40</context>
         </context-group>
-        <target state="needs-translation">WISE makes student registration simple and intuitive -- direct your students to the register page by having them go to the WISE home page and clicking the "Register" link at the upper right. They should be able to register in 10 minutes or less. However, you can also opt to pre-register all of your students and provide them with a copy of their username/password on their first day in the project run.</target>
+        <target state="translated">WISE hace que el registro de estudiantes sea simple e intuitivo: dirija a sus estudiantes a la página de registro haciendo que vayan a la página de inicio de WISE y hagan clic en el enlace "Registrarse" en la parte superior derecha. Deberían poder registrarse en 10 minutos o menos. Sin embargo, también puede optar por preinscribir a todos sus estudiantes y proporcionarles una copia de su nombre de usuario / contraseña el primer día de ejecución del proyecto.</target>
       </trans-unit>
       <trans-unit id="90a07f702eb512ee62bff7940263f760a401a538" datatype="html">
         <source>Once a student has created a WISE account they should never need to create another one.</source>
@@ -3782,7 +3782,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">42</context>
         </context-group>
-        <target state="needs-translation">Once a student has created a WISE account they should never need to create another one.</target>
+        <target state="translated">Una vez que cada estudiante haya creado su cuenta en WISE nunca más deberán crear otra.</target>
       </trans-unit>
       <trans-unit id="c7b0387a07f1ace4b34995b3990a9705117b2fb4" datatype="html">
         <source>Some teachers that pre-register prefer to give all students the same initial password, to decrease problems with students signing in. This is ok, but for security purposes, we advise that you have the students change their passwords once they log in.</source>
@@ -3790,7 +3790,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">43</context>
         </context-group>
-        <target state="needs-translation">Some teachers that pre-register prefer to give all students the same initial password, to decrease problems with students signing in. This is ok, but for security purposes, we advise that you have the students change their passwords once they log in.</target>
+        <target state="translated">Hay docentes que preinscriben a sus estudiantes dándoles a todos/as la misma contraseña inicial, para disminuir los problemas con los estudiantes que inician sesión. Esto está bien, pero por motivos de seguridad, le recomendamos que les pida que cambien sus contraseñas una vez que inicien sesión.</target>
       </trans-unit>
       <trans-unit id="75241afb27cf8555c0fbea2f6607b233b880ad12" datatype="html">
         <source>A student has forgotten his/her username or password. What should I do?</source>
@@ -3798,7 +3798,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <target state="needs-translation">A student has forgotten his/her username or password. What should I do?</target>
+        <target state="translated">Un o una estudiante se olvidó su contraseña o nombre de usuario. ¿Qué debo hacer?</target>
       </trans-unit>
       <trans-unit id="bf651aa2d8a6a5afc3a142cc29e5186620753bd3" datatype="html">
         <source>First, we recommend always having students WRITE DOWN their username/password when they first register.</source>
@@ -3806,7 +3806,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <target state="needs-translation">First, we recommend always having students WRITE DOWN their username/password when they first register.</target>
+        <target state="translated">Primero, recomendamos que los y las estudiantes siempre ESCRIBAN su nombre de usuario / contraseña cuando se registren por primera vez.</target>
       </trans-unit>
       <trans-unit id="427421b70d77408e21b0462e665b63cb5765f06a" datatype="html">
         <source>Second, encourage the students to solve the problem themselves. Tell them to go to the WISE home page, click the Lost username/password link, and click the Student button. If the student can answer their security question (created at registration) they can change their password.</source>
