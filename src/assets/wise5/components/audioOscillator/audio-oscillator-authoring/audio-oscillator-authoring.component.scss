@@ -13,8 +13,21 @@
   margin-bottom: 5px !important;
 }
 
-.number-input {
-  margin-top: 10px;
+.number-input-small {
+  // margin-top: 10px;
+  // margin-bottom: 10px;
+  // margin-right: 20px;
+  // width: 15%;
+  width: 120px;
+}
+
+.number-input-medium {
+  width: 150px;
+}
+
+.frequency-amplitude-container {
+  border: 2px solid #dddddd;
+  border-radius: 6px;
+  padding: 16px;
   margin-bottom: 10px;
-  margin-right: 20px;
 }
