@@ -143,6 +143,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     component.componentContent = TestBed.inject(DialogGuidanceService).createComponent();
     component.componentContent.feedbackRules = defaultFeedbackRules;
+    component.componentContent.maxSubmitCount = 5;
     fixture.detectChanges();
     evaluator = new DialogGuidanceFeedbackRuleEvaluator(component);
   });
@@ -201,7 +202,6 @@ function matchNoRule_ReturnDefault() {
 
 function secondToLastSubmit() {
   it('should return second to last submit rule when there is one submit left', () => {
-    component.componentContent.maxSubmitCount = 5;
     component.submitCounter = 4;
     expectFeedback(['idea1'], [], 'second to last submission');
   });
@@ -209,7 +209,6 @@ function secondToLastSubmit() {
 
 function finalSubmit() {
   it('should return final submit rule when no more submits left', () => {
-    component.componentContent.maxSubmitCount = 5;
     component.submitCounter = 5;
     expectFeedback(['idea1'], [], 'final submission');
   });

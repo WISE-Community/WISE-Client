@@ -31,11 +31,9 @@ function getKIScore() {
 
 function isNonScorable() {
   describe('isNonScorable()', () => {
-    it('should return true for non-scorable item', () => {
+    it('should return true for non-scorable item and false for scorable item', () => {
       response.scores = [{ id: 'nonscorable', score: 1, realNumberScore: 1 }];
       expect(response.isNonScorable()).toBeTruthy();
-    });
-    it('should return false for scorable item', () => {
       response.scores = [{ id: 'nonscorable', score: 0, realNumberScore: 0 }];
       expect(response.isNonScorable()).toBeFalsy();
     });
