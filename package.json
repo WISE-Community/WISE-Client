@@ -90,7 +90,9 @@
     "babel-loader": "^8.1.0",
     "cheerio": "^1.0.0-rc.3",
     "clean-webpack-plugin": "^3.0.0",
+    "commitizen": "^4.2.4",
     "concurrently": "^4.1.2",
+    "cz-conventional-changelog": "^3.2.0",
     "eslint": "^5.16.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
@@ -162,5 +164,22 @@
   "bugs": {
     "url": "https://github.com/WISE-Community/WISE/issues"
   },
-  "homepage": "https://github.com/WISE-Community/WISE#readme"
+  "homepage": "https://github.com/WISE-Community/WISE#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "branches": ["develop"],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      ["@semantic-release/npm", {
+        "npmPublish": false,
+        "tarballDir": false
+      }],
+      "@semantic-release/git"
+    ]
+  }
 }
