@@ -2,8 +2,8 @@ import { CRaterIdea } from './CRaterIdea';
 import { CRaterScore } from './CRaterScore';
 
 export class CRaterResponse {
-  scores: CRaterScore[];
   ideas: CRaterIdea[];
+  scores: CRaterScore[];
 
   constructor() {}
 
@@ -23,5 +23,9 @@ export class CRaterResponse {
         return score.score;
       }
     }
+  }
+
+  isNonScorable(): boolean {
+    return this.scores.some((score) => score.id === 'nonscorable' && score.score === 1);
   }
 }
