@@ -9,6 +9,7 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { AudioOscillatorService } from '../audioOscillatorService';
 
 @Component({
   selector: 'audio-oscillator-authoring',
@@ -16,13 +17,15 @@ import { UtilService } from '../../../services/utilService';
   styleUrls: ['audio-oscillator-authoring.component.scss']
 })
 export class AudioOscillatorAuthoring extends ComponentAuthoring {
+  inputChange: Subject<string> = new Subject<string>();
+  maxAmplitude: number = this.AudioOscillatorService.maxAmplitude;
+  sawtoothChecked: boolean;
   sineChecked: boolean;
   squareChecked: boolean;
   triangleChecked: boolean;
-  sawtoothChecked: boolean;
-  inputChange: Subject<string> = new Subject<string>();
 
   constructor(
+    protected AudioOscillatorService: AudioOscillatorService,
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
@@ -35,6 +38,7 @@ export class AudioOscillatorAuthoring extends ComponentAuthoring {
   ngOnInit(): void {
     super.ngOnInit();
     this.populateCheckedOscillatorTypes();
+    this.initializeStartingAmplitude();
     this.subscriptions.add(
       this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
@@ -47,6 +51,20 @@ export class AudioOscillatorAuthoring extends ComponentAuthoring {
     this.squareChecked = this.authoringComponentContent.oscillatorTypes.includes('square');
     this.triangleChecked = this.authoringComponentContent.oscillatorTypes.includes('triangle');
     this.sawtoothChecked = this.authoringComponentContent.oscillatorTypes.includes('sawtooth');
+  }
+
+  initializeStartingAmplitude(): void {
+    this.authoringComponentContent.startingAmplitude ??= this.AudioOscillatorService.defaultStartingAmplitude;
+  }
+
+  showFrequencyInputChanged(): void {
+    this.authoringComponentContent.canStudentEditFrequency = false;
+    this.componentChanged();
+  }
+
+  showAmplitudeInputChanged(): void {
+    this.authoringComponentContent.canStudentEditAmplitude = false;
+    this.componentChanged();
   }
 
   oscillatorTypeClicked(): void {
