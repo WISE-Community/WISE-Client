@@ -152,7 +152,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WISE-Community/WISE.git"
+    "url": "git+https://github.com/WISE-Community/WISE-Client.git"
   },
   "keywords": [
     "WISE",
@@ -163,9 +163,9 @@
   "author": "",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/WISE-Community/WISE/issues"
+    "url": "https://github.com/WISE-Community/WISE-Client/issues"
   },
-  "homepage": "https://github.com/WISE-Community/WISE#readme",
+  "homepage": "https://github.com/WISE-Community/WISE-Client#readme",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
