@@ -19,10 +19,16 @@ export class DialogGuidanceFeedbackRuleEvaluator {
   }
 
   private satisfiesRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {
+    return this.isSpecialRule(feedbackRule)
+      ? this.satisfiesSpecialRule(response, feedbackRule)
+      : this.satisfiesSpecificRule(response, feedbackRule);
+  }
+
+  private satisfiesSpecialRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {
     return (
+      this.satisfiesNonScorableRule(response, feedbackRule) ||
       this.satisfiesFinalSubmitRule(feedbackRule) ||
-      this.satisfiesSecondToLastSubmitRule(feedbackRule) ||
-      (!this.isSpecialRule(feedbackRule) && this.satisfiesSpecificRule(response, feedbackRule))
+      this.satisfiesSecondToLastSubmitRule(feedbackRule)
     );
   }
 
@@ -45,8 +51,14 @@ export class DialogGuidanceFeedbackRuleEvaluator {
     return this.component.getNumberOfSubmitsLeft() === 1;
   }
 
+  private satisfiesNonScorableRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {
+    return feedbackRule.expression === 'isNonScorable' && response.isNonScorable();
+  }
+
   private isSpecialRule(feedbackRule: FeedbackRule): boolean {
-    return ['isFinalSubmit', 'isSecondToLastSubmit'].includes(feedbackRule.expression);
+    return ['isFinalSubmit', 'isSecondToLastSubmit', 'isNonScorable'].includes(
+      feedbackRule.expression
+    );
   }
 
   private satisfiesSpecificRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {

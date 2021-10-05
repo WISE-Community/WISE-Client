@@ -10,32 +10,33 @@ export class CRaterService {
   constructor(protected http: HttpClient, protected ConfigService: ConfigService) {}
 
   /**
-   * Make a CRater request to score student data
-   * @param cRaterItemId
-   * @param cRaterResponseId a randomly generated id used to keep track of the request
-   * @param studentData the student data
+   * Make a CRater request to score student response
+   * @param itemId CRater item ID
+   * @param responseId number used to keep track of this request
+   * @param responseText the student's response to CRater item
    * @returns a promise that returns the result of the CRater request
    */
   makeCRaterScoringRequest(
-    cRaterItemId: string,
-    cRaterResponseId: number,
-    studentData: any
+    itemId: string,
+    responseId: number,
+    responseText: string
   ): Observable<any> {
-    if (cRaterItemId === 'MI_SPEED_MOCK') {
-      return this.mockSpeedResponse(studentData);
+    if (itemId === 'MOCK') {
+      return this.mockResponse(responseText);
     } else {
       return this.http.post(`${this.ConfigService.getCRaterRequestURL()}/score`, {
-        itemId: cRaterItemId,
-        responseId: cRaterResponseId,
-        responseText: studentData
+        itemId: itemId,
+        responseId: responseId,
+        responseText: responseText
       });
     }
   }
 
-  private mockSpeedResponse(responseText: string): Observable<any> {
+  private mockResponse(responseText: string): Observable<any> {
     const ideasFound = responseText.match(/idea([a-zA-Z0-9]+)/g) ?? [];
+    const isNonScorable = responseText.includes('isNonScorable') ? 1 : 0;
     return of({
-      scores: [],
+      scores: [{ id: 'nonscorable', score: isNonScorable }],
       ideas: ideasFound.map((idea) => {
         return { name: idea, detected: true, characterOffsets: [] };
       })
