@@ -6,6 +6,7 @@ import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { UtilService } from '../../../services/utilService';
+import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
 import { AudioOscillatorGrading } from './audio-oscillator-grading.component';
 
 let component: AudioOscillatorGrading;
@@ -25,20 +26,22 @@ describe('AudioOscillatorGrading', () => {
     fixture = TestBed.createComponent(AudioOscillatorGrading);
     spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});
     component = fixture.componentInstance;
-    component.componentState = createComponentStateObject(
-      null,
-      null,
-      [],
-      [],
-      0,
-      0,
-      0,
-      0,
-      null,
-      null,
-      null,
-      null
-    );
+    const audioOscillatorStudentData = {
+      amplitudesPlayed: null,
+      amplitudesPlayedSorted: null,
+      numberOfAmplitudesPlayed: null,
+      numberOfUniqueAmplitudesPlayed: null,
+      minAmplitudePlayed: null,
+      maxAmplitudePlayed: null,
+      frequenciesPlayed: [],
+      frequenciesPlayedSorted: [],
+      numberOfFrequenciesPlayed: 0,
+      numberOfUniqueFrequenciesPlayed: 0,
+      minFrequencyPlayed: null,
+      maxFrequencyPlayed: null,
+      submitCounter: 0
+    };
+    component.componentState = createComponentStateObject(audioOscillatorStudentData);
     fixture.detectChanges();
   });
 
@@ -46,65 +49,9 @@ describe('AudioOscillatorGrading', () => {
   initializeAmplitudes();
 });
 
-function createComponentStateObject(
-  amplitudesPlayed: number[],
-  amplitudesPlayedSorted: number[],
-  frequenciesPlayed: number[],
-  frequenciesPlayedSorted: number[],
-  numberOfAmplitudesPlayed: number,
-  numberOfUniqueAmplitudesPlayed: number,
-  numberOfFrequenciesPlayed: number,
-  numberOfUniqueFrequenciesPlayed: number,
-  minAmplitudePlayed: number,
-  maxAmplitudePlayed: number,
-  minFrequencyPlayed: number,
-  maxFrequencyPlayed: number
-) {
+function createComponentStateObject(audioOscillatorStudentData: AudioOscillatorStudentData): any {
   return {
-    studentData: createStudentDataObject(
-      amplitudesPlayed,
-      amplitudesPlayedSorted,
-      frequenciesPlayed,
-      frequenciesPlayedSorted,
-      numberOfAmplitudesPlayed,
-      numberOfUniqueAmplitudesPlayed,
-      numberOfFrequenciesPlayed,
-      numberOfUniqueFrequenciesPlayed,
-      minAmplitudePlayed,
-      maxAmplitudePlayed,
-      minFrequencyPlayed,
-      maxFrequencyPlayed
-    )
-  };
-}
-
-function createStudentDataObject(
-  amplitudesPlayed: number[],
-  amplitudesPlayedSorted: number[],
-  frequenciesPlayed: number[],
-  frequenciesPlayedSorted: number[],
-  numberOfAmplitudesPlayed: number,
-  numberOfUniqueAmplitudesPlayed: number,
-  numberOfFrequenciesPlayed: number,
-  numberOfUniqueFrequenciesPlayed: number,
-  minAmplitudePlayed: number,
-  maxAmplitudePlayed: number,
-  minFrequencyPlayed: number,
-  maxFrequencyPlayed: number
-) {
-  return {
-    amplitudesPlayed: amplitudesPlayed,
-    amplitudesPlayedSorted: amplitudesPlayedSorted,
-    frequenciesPlayed: frequenciesPlayed,
-    frequenciesPlayedSorted: frequenciesPlayedSorted,
-    numberOfAmplitudesPlayed: numberOfAmplitudesPlayed,
-    numberOfUniqueAmplitudesPlayed: numberOfUniqueAmplitudesPlayed,
-    numberOfFrequenciesPlayed: numberOfFrequenciesPlayed,
-    numberOfUniqueFrequenciesPlayed: numberOfUniqueFrequenciesPlayed,
-    minAmplitudePlayed: minAmplitudePlayed,
-    maxAmplitudePlayed: maxAmplitudePlayed,
-    minFrequencyPlayed: minFrequencyPlayed,
-    maxFrequencyPlayed: maxFrequencyPlayed
+    studentData: audioOscillatorStudentData
   };
 }
 
@@ -116,20 +63,21 @@ function initializeFrequencies() {
     const numberOfUniqueFrequenciesPlayed = 2;
     const minFrequencyPlayed = 400;
     const maxFrequencyPlayed = 800;
-    const studentData = createStudentDataObject(
-      null,
-      null,
-      frequenciesPlayed,
-      frequenciesPlayedSorted,
-      null,
-      null,
-      numberOfFrequenciesPlayed,
-      numberOfUniqueFrequenciesPlayed,
-      null,
-      null,
-      minFrequencyPlayed,
-      maxFrequencyPlayed
-    );
+    const studentData = {
+      amplitudesPlayed: null,
+      amplitudesPlayedSorted: null,
+      numberOfAmplitudesPlayed: null,
+      numberOfUniqueAmplitudesPlayed: null,
+      minAmplitudePlayed: null,
+      maxAmplitudePlayed: null,
+      frequenciesPlayed: frequenciesPlayed,
+      frequenciesPlayedSorted: frequenciesPlayedSorted,
+      numberOfFrequenciesPlayed: numberOfFrequenciesPlayed,
+      numberOfUniqueFrequenciesPlayed: numberOfUniqueFrequenciesPlayed,
+      minFrequencyPlayed: minFrequencyPlayed,
+      maxFrequencyPlayed: maxFrequencyPlayed,
+      submitCounter: 0
+    };
     component.initializeFrequencies(studentData);
     expect(component.frequenciesPlayed).toEqual(frequenciesPlayed.join(', '));
     expect(component.frequenciesPlayedSorted).toEqual(frequenciesPlayedSorted.join(', '));
@@ -153,20 +101,21 @@ function initializeAmplitudes() {
     const numberOfUniqueAmplitudesPlayed = 2;
     const minAmplitudePlayed = 40;
     const maxAmplitudePlayed = 50;
-    const studentData = createStudentDataObject(
-      amplitudesPlayed,
-      amplitudesPlayedSorted,
-      null,
-      null,
-      numberOfAmplitudesPlayed,
-      numberOfUniqueAmplitudesPlayed,
-      null,
-      null,
-      minAmplitudePlayed,
-      maxAmplitudePlayed,
-      null,
-      null
-    );
+    const studentData = {
+      amplitudesPlayed: amplitudesPlayed,
+      amplitudesPlayedSorted: amplitudesPlayedSorted,
+      numberOfAmplitudesPlayed: numberOfAmplitudesPlayed,
+      numberOfUniqueAmplitudesPlayed: numberOfUniqueAmplitudesPlayed,
+      minAmplitudePlayed: minAmplitudePlayed,
+      maxAmplitudePlayed: maxAmplitudePlayed,
+      frequenciesPlayed: null,
+      frequenciesPlayedSorted: null,
+      numberOfFrequenciesPlayed: null,
+      numberOfUniqueFrequenciesPlayed: null,
+      minFrequencyPlayed: null,
+      maxFrequencyPlayed: null,
+      submitCounter: 0
+    };
     component.initializeAmplitudes(studentData);
     expect(component.amplitudesPlayed).toEqual(amplitudesPlayed.join(', '));
     expect(component.amplitudesPlayedSorted).toEqual(amplitudesPlayedSorted.join(', '));

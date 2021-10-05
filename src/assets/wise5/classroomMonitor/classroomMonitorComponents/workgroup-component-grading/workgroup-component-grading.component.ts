@@ -58,7 +58,7 @@ export class WorkgroupComponentGradingComponent {
         nodeId: this.nodeId,
         componentStates: this.componentStates
       },
-      panelClass: 'dialog-lg'
+      panelClass: ['app-styles', 'dialog-lg']
     });
   }
 }

@@ -82,6 +82,7 @@
     <input matInput
         type="number"
         min="0"
+        [max]="maxAmplitude"
         [(ngModel)]="authoringComponentContent.startingAmplitude"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>

@@ -8,6 +8,7 @@ import { UtilService } from '../../services/utilService';
 export class AudioOscillatorService extends ComponentService {
   defaultStartingAmplitude: number = 44;
   defaultStartingFrequency: number = 440;
+  maxAmplitude: number = 50;
 
   constructor(
     private upgrade: UpgradeModule,

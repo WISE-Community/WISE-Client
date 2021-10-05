@@ -17,11 +17,12 @@ import { AudioOscillatorService } from '../audioOscillatorService';
   styleUrls: ['audio-oscillator-authoring.component.scss']
 })
 export class AudioOscillatorAuthoring extends ComponentAuthoring {
+  inputChange: Subject<string> = new Subject<string>();
+  maxAmplitude: number = this.AudioOscillatorService.maxAmplitude;
+  sawtoothChecked: boolean;
   sineChecked: boolean;
   squareChecked: boolean;
   triangleChecked: boolean;
-  sawtoothChecked: boolean;
-  inputChange: Subject<string> = new Subject<string>();
 
   constructor(
     protected AudioOscillatorService: AudioOscillatorService,

@@ -45,7 +45,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
   // they should still be able to see and hear 20 dBSPL. If we chose a value much lower, the student
   // could set the amplitude to 0 but still see a curve in the sound wave and also still hear the
   // sound when they should not be able to see or hear anything.
-  maxDBSPL: number = 50;
+  maxDBSPL: number = this.AudioOscillatorService.maxAmplitude;
   minAmplitude: number;
   minAmplitudePlayed: number;
   minDBSPL: number = 0;
