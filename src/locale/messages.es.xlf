@@ -4162,7 +4162,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">103</context>
         </context-group>
-        <target state="needs-translation">Can I shorten a project run to 1 or 2 days?</target>
+        <target state="translated">¿Puedo acortar la duración de la ejecución del proyecto a 1 o 2 días?</target>
       </trans-unit>
       <trans-unit id="0c2c1379edf193d2ea730116d589f5e38871ffad" datatype="html">
         <source>It is not recommended to shorten a project. Each project has been carefully designed to lead the student through an inquiry process and cutting it short will result in a less satisfactory educational student experience. Nevertheless, if you are under a time constraint and knowledgeable of the project topic, you could customize the project and shorten it to your specific needs.</source>
@@ -4170,7 +4170,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">105</context>
         </context-group>
-        <target state="needs-translation">It is not recommended to shorten a project. Each project has been carefully designed to lead the student through an inquiry process and cutting it short will result in a less satisfactory educational student experience. Nevertheless, if you are under a time constraint and knowledgeable of the project topic, you could customize the project and shorten it to your specific needs.</target>
+        <target state="translated">No se recomienda acortar un proyecto. Cada proyecto ha sido cuidadosamente diseñado para guiar al estudiante a través de un proceso de indagación y si lo corta, resultará en una experiencia educativa menos satisfactoria para el estudiante. Sin embargo, si tiene limitaciones de tiempo y conoce el tema del proyecto, puede personalizar el proyecto y acortarlo a sus necesidades específicas.</target>
       </trans-unit>
       <trans-unit id="3024ecf162acff3ec72fe6d47aee6bf2ea097db3" datatype="html">
         <source>Where do I find out about lesson plans and standards for WISE projects?</source>
@@ -4178,7 +4178,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">107</context>
         </context-group>
-        <target state="needs-translation">Where do I find out about lesson plans and standards for WISE projects?</target>
+        <target state="translated">¿Dónde puedo encontrar información sobre planes de clase y estándares para proyectos WISE?</target>
       </trans-unit>
       <trans-unit id="62eba7a349fc52a73bcc8fa453b5820324eed7a6" datatype="html">
         <source>Find a project you would like to learn about.</source>
@@ -4186,7 +4186,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">111</context>
         </context-group>
-        <target state="needs-translation">Find a project you would like to learn about.</target>
+        <target state="translated">Busque un proyecto sobre el cual le gustaría saber más.</target>
       </trans-unit>
       <trans-unit id="4214fdac6b2b04e5afb05556b5ba647563c02b92" datatype="html">
         <source>Click on the project.</source>
@@ -4194,7 +4194,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">112</context>
         </context-group>
-        <target state="needs-translation">Click on the project.</target>
+        <target state="translated">Clic en el proyecto.</target>
       </trans-unit>
       <trans-unit id="7c669c5c1a3a10743f60933f238fa21a6e23b1e0" datatype="html">
         <source>This will display a popup that displays information about the project.</source>
@@ -4202,7 +4202,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">113</context>
         </context-group>
-        <target state="needs-translation">This will display a popup that displays information about the project.</target>
+        <target state="translated">Se desplegará una ventana con información sobre el proyecto.</target>
       </trans-unit>
       <trans-unit id="fb31dc42edfa71c489ba8d350f1ddc61c72f0bda" datatype="html">
         <source>Note: Some projects may not have much information because it is dependent on the author to provide the lesson plan and standards.</source>
@@ -4210,7 +4210,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">114</context>
         </context-group>
-        <target state="needs-translation">Note: Some projects may not have much information because it is dependent on the author to provide the lesson plan and standards.</target>
+        <target state="translated">Nota: Es posible que algunos proyectos no tengan mucha información porque depende del autor que proporcione el plan de clase y los estándares.</target>
       </trans-unit>
       <trans-unit id="0caa9631c30a1085708f8f7ac6f6b207af99c1b9" datatype="html">
         <source>How do I fit a WISE project into my curriculum?</source>
@@ -4218,7 +4218,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">116</context>
         </context-group>
-        <target state="needs-translation">How do I fit a WISE project into my curriculum?</target>
+        <target state="translated">¿Cómo integro un proyecto WISE al curriculum de mi materia?</target>
       </trans-unit>
       <trans-unit id="8067ba3441dfe3495b289859b58d59b28fed36f0" datatype="html">
         <source>In general students will benefit from some pre-teaching of the topic covered in the project. It is really up to the teacher to decide where it best fits to support student learning. Many teachers use a WISE project as a capstone activity while others integrate it into their curriculum at a midpoint. Some teachers elect to use WISE projects an introductory activity for a unit, or as a summation activity for a unit.</source>
@@ -4226,7 +4226,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">118</context>
         </context-group>
-        <target state="needs-translation">In general students will benefit from some pre-teaching of the topic covered in the project. It is really up to the teacher to decide where it best fits to support student learning. Many teachers use a WISE project as a capstone activity while others integrate it into their curriculum at a midpoint. Some teachers elect to use WISE projects an introductory activity for a unit, or as a summation activity for a unit.</target>
+        <target state="translated">En general, se recomienda introducir previamente el tema que se abordará en el proyecto. Realmente depende del profesor decidir dónde se integra mejor el proyecto para apoyar lograr mejores aprendizajes de los estudiantes. Muchos/as docentes utilizan un proyecto WISE como actividad final, mientras que otros/as lo integran en su plan de clases en un punto medio. Algunos docentes optan por utilizar los proyectos WISE como una actividad introductoria para una unidad o como una actividad de cierre para una unidad.</target>
       </trans-unit>
       <trans-unit id="4c1a3a26df6b1a44c59f821d35521cb0dee57b8b" datatype="html">
         <source>How do I add a period after creating a run?</source>
@@ -4234,7 +4234,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">120</context>
         </context-group>
-        <target state="needs-translation">How do I add a period after creating a run?</target>
+        <target state="translated">¿Cómo agrego un período después de haber creado una ejecución?</target>
       </trans-unit>
       <trans-unit id="154b39e56c182703eed32833f84f4e6f955cf89d" datatype="html">
         <source>On the run, click the three vertical dots to view the run options.</source>
@@ -4246,7 +4246,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">133</context>
         </context-group>
-        <target state="needs-translation">On the run, click the three vertical dots to view the run options.</target>
+        <target state="translated">En la ejecución, dar clic en los tres puntos verticales para ver las opciones de la ejecución.</target>
       </trans-unit>
       <trans-unit id="caf98385e768f00b3e1734b93aa31eaed64d7bc1" datatype="html">
         <source>Click &quot;Edit Settings&quot;.</source>
@@ -4258,7 +4258,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">134</context>
         </context-group>
-        <target state="needs-translation">Click "Edit Settings".</target>
+        <target state="translated">Clic en "Editar Configuración".</target>
       </trans-unit>
       <trans-unit id="dd80561bf8a3ed6b8c7dbc171555263c3a993121" datatype="html">
         <source>Enter a period name in the &quot;Add New Period&quot; field.</source>
@@ -4266,7 +4266,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">126</context>
         </context-group>
-        <target state="needs-translation">Enter a period name in the "Add New Period" field.</target>
+        <target state="translated">Ingrese un nombre para el período en el campo "Agregar Nuevo Período".</target>
       </trans-unit>
       <trans-unit id="df671da9712c9c220f2219c80e8eb13d8c591d09" datatype="html">
         <source>Click &quot;Add Period&quot;.</source>
@@ -4274,7 +4274,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">127</context>
         </context-group>
-        <target state="needs-translation">Click "Add Period".</target>
+        <target state="translated">Clic en "Agregar Período".</target>
       </trans-unit>
       <trans-unit id="33b8b8009eda1df67d154a725b9cd11e690a5405" datatype="html">
         <source>How do I delete a period after creating a run?</source>
@@ -4282,7 +4282,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">129</context>
         </context-group>
-        <target state="needs-translation">How do I delete a period after creating a run?</target>
+        <target state="translated">¿Cómo elimino un período después de haber creado una ejecución?</target>
       </trans-unit>
       <trans-unit id="bb7ab3ec40a26c50c521d920bb1d22eec80d5880" datatype="html">
         <source>Find the period you want to delete and click the &quot;Delete&quot; button next to it.</source>
@@ -4290,7 +4290,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">135</context>
         </context-group>
-        <target state="needs-translation">Find the period you want to delete and click the "Delete" button next to it.</target>
+        <target state="translated">Busque el período que desea eliminar y haga clic en el botón "Eliminar" al lado.</target>
       </trans-unit>
       <trans-unit id="10ea9b60d7c7d6dd481af2b5d1920d07f4e84cc5" datatype="html">
         <source>Note: You are not allowed to delete a period that has students in it.</source>
@@ -4298,7 +4298,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">136</context>
         </context-group>
-        <target state="needs-translation">Note: You are not allowed to delete a period that has students in it.</target>
+        <target state="translated">Nota: No se puede eliminar un período que tenga estudiantes dentro.</target>
       </trans-unit>
       <trans-unit id="4004c45063f2adf542a30c59d71e6a9b0b1a7587" datatype="html">
         <source>What if I run out of computer lab time but some of my students are not finished with the project?</source>
@@ -4306,7 +4306,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">138</context>
         </context-group>
-        <target state="needs-translation">What if I run out of computer lab time but some of my students are not finished with the project?</target>
+        <target state="translated">¿Qué pasa si me quedo sin tiempo para usar el laboratorio de informática pero algunos estudiantes no terminaron con el proyecto?</target>
       </trans-unit>
       <trans-unit id="e42c6ee16c0475e7cd0a418736dd8da66fdde98f" datatype="html">
         <source>WISE is a web-based learning environments, so students can sign in from a computer at school or at home. This means that students can complete the project from any home or community based computer, per the teacher&apos;s discretion.</source>
@@ -4314,7 +4314,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">140</context>
         </context-group>
-        <target state="needs-translation">WISE is a web-based learning environments, so students can sign in from a computer at school or at home. This means that students can complete the project from any home or community based computer, per the teacher's discretion.</target>
+        <target state="translated">WISE es un entorno de aprendizaje basado en la web, por lo que los estudiantes pueden iniciar sesión desde una computadora en la escuela o en casa. Esto significa que los estudiantes pueden completar el proyecto desde cualquier computadora en sus casas, en la escuela o cualquier otro lugar, según el criterio del docente.</target>
       </trans-unit>
       <trans-unit id="a40fe31275b2daa3205d75bd58536d5a7830f3e6" datatype="html">
         <source>How do I review and grade student work?</source>
@@ -4322,7 +4322,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">144</context>
         </context-group>
-        <target state="needs-translation">How do I review and grade student work?</target>
+        <target state="translated">¿Cómo evalúo y califico el trabajo de mis estudiantes?</target>
       </trans-unit>
       <trans-unit id="6d1b5c10cbc1d79f81c60e7c39c78579489cbf7c" datatype="html">
         <source>Here you will be able to look at your students&apos; work.</source>
@@ -4330,7 +4330,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">149</context>
         </context-group>
-        <target state="needs-translation">Here you will be able to look at your students' work.</target>
+        <target state="translated">Acá podrá ver el trabajo de sus estudiantes.</target>
       </trans-unit>
       <trans-unit id="ee4f7ca95b6b6fab1891ae6d1e2228eed8a81a44" datatype="html">
         <source>On the left sidebar you can choose to look at the work by step by clicking &quot;Grade By Step&quot; or you can choose to look at the work by team by clicking &quot;Grade By Team&quot;.</source>
@@ -4338,7 +4338,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">150</context>
         </context-group>
-        <target state="needs-translation">On the left sidebar you can choose to look at the work by step by clicking "Grade By Step" or you can choose to look at the work by team by clicking "Grade By Team".</target>
+        <target state="translated">En la barra lateral izquierda, puede elegir ver el trabajo por paso haciendo clic en "Calificar por paso" o puede elegir ver el trabajo por equipo haciendo clic en "Calificar por equipo".</target>
       </trans-unit>
       <trans-unit id="01d297ec79e8da8648c32bea29cc49b500480938" datatype="html">
         <source>Next to each student&apos;s work, you will be able to give them a score and comment.</source>
@@ -4346,7 +4346,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">151</context>
         </context-group>
-        <target state="needs-translation">Next to each student's work, you will be able to give them a score and comment.</target>
+        <target state="translated">Al lado del trabajo de cada estudiante podrá otorgarle una calificación y un comentario.</target>
       </trans-unit>
       <trans-unit id="ce87a87a75de3f9a89f4ccb83b69b189c217f30b" datatype="html">
         <source>How do students see my comments and scores for their work?</source>
@@ -4354,7 +4354,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">153</context>
         </context-group>
-        <target state="needs-translation">How do students see my comments and scores for their work?</target>
+        <target state="translated">¿Cómo pueden mis estudiantes ver mis comentarios y calificaciones de su trabajo?</target>
       </trans-unit>
       <trans-unit id="6f1b5176d1ac687e91e947309867726178ea6075" datatype="html">
         <source>The student must sign into WISE with their student account.</source>
@@ -4362,7 +4362,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">155</context>
         </context-group>
-        <target state="needs-translation">The student must sign into WISE with their student account.</target>
+        <target state="translated">Deben iniciar sesión en WISE con sus cuentas de estudiantes.</target>
       </trans-unit>
       <trans-unit id="3841de15fe215a519a782c724a896d08e6629bea" datatype="html">
         <source>Open the project.</source>
@@ -4370,7 +4370,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">156</context>
         </context-group>
-        <target state="needs-translation">Open the project.</target>
+        <target state="translated">Abrir el proyecto.</target>
       </trans-unit>
       <trans-unit id="fd1e6e8e6b4e2772c8bd4dece6ed05076b1a6647" datatype="html">
         <source>Go to the step that the teacher graded.</source>
@@ -4378,7 +4378,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">157</context>
         </context-group>
-        <target state="needs-translation">Go to the step that the teacher graded.</target>
+        <target state="translated">Ir al paso que el/la docente calificó.</target>
       </trans-unit>
       <trans-unit id="2f82e4eae51beaa2d83a4e717af35b409bec8993" datatype="html">
         <source>The comment and score will be displayed under the piece of work that was graded.</source>
@@ -4386,7 +4386,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">158</context>
         </context-group>
-        <target state="needs-translation">The comment and score will be displayed under the piece of work that was graded.</target>
+        <target state="translated">El comentario y la calificación se mostrarán debajo de la entrega calificada.</target>
       </trans-unit>
       <trans-unit id="f4f0bb05aa6bad172e17cce01cddc091c3abe59c" datatype="html">
         <source>What should I look for in my student&apos;s answers?</source>
@@ -4394,7 +4394,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">160</context>
         </context-group>
-        <target state="needs-translation">What should I look for in my student's answers?</target>
+        <target state="translated">¿Qué debo buscar en las respuestas de mis estudiantes?</target>
       </trans-unit>
       <trans-unit id="8ad1ae10ce55dbadbc0d79c5df1e0e3236a443ce" datatype="html">
         <source>The following link will give you a sample rubric for grading a step in the Mitosis and Cell Processes project. The rubric is based on our TELS Center research on how students integrate their knowledge of complex science concepts. We hope that it can give you a start in developing your own rubrics for the notes and steps you plan to grade.</source>
@@ -4402,7 +4402,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">162</context>
         </context-group>
-        <target state="needs-translation">The following link will give you a sample rubric for grading a step in the Mitosis and Cell Processes project. The rubric is based on our TELS Center research on how students integrate their knowledge of complex science concepts. We hope that it can give you a start in developing your own rubrics for the notes and steps you plan to grade.</target>
+        <target state="translated">El siguiente enlace le dará un ejemplo de rúbrica para calificar un paso en el proyecto Mitosis y Procesos Celulares. La rúbrica se basa en nuestra investigación del Centro TELS sobre cómo los y las estudiantes integran su conocimiento de conceptos científicos complejos. Esperamos que esto sea de ayuda para que usted pueda desarrollar sus propias rúbricas para las calificaciones y los pasos que planea calificar.</target>
       </trans-unit>
       <trans-unit id="4d5c08a9dd67d4172985bfa1e4ba5afaa90c8dd8" datatype="html">
         <source>Sample rubric for assessing student work</source>
@@ -4410,7 +4410,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">163</context>
         </context-group>
-        <target state="needs-translation">Sample rubric for assessing student work</target>
+        <target state="translated">Rúbrica de ejemplo para evaluar el trabajo de los estudiantes</target>
       </trans-unit>
       <trans-unit id="6f12118a17d16549ad4800a13e534af3c06f8196" datatype="html">
         <source>How can I encourage my students to review the graded notes and comments I have made?</source>
@@ -4418,7 +4418,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">165</context>
         </context-group>
-        <target state="needs-translation">How can I encourage my students to review the graded notes and comments I have made?</target>
+        <target state="translated">¿Cómo puedo alentar a mis estudiantes a que revisen las calificaciones y comentarios que les hice?</target>
       </trans-unit>
       <trans-unit id="4c89f57cff7fe4aa81c04b787bcfeefa40c6ee32" datatype="html">
         <source>Many teachers find it advantageous to grade the first step or two at the end of the first day of the project run. At the beginning of class the next day they share with the whole class some sample responses and have the class critique the work.</source>
@@ -4426,7 +4426,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">167</context>
         </context-group>
-        <target state="needs-translation">Many teachers find it advantageous to grade the first step or two at the end of the first day of the project run. At the beginning of class the next day they share with the whole class some sample responses and have the class critique the work.</target>
+        <target state="translated">Muchos/as docentes encuentran ventajoso calificar el primero y segundo paso al final del primer día de ejecución del proyecto. Al comienzo de la clase al día siguiente, comparten con toda la clase algunas respuestas de muestra y hacen que la clase retroalimente el trabajo de sus pares.</target>
       </trans-unit>
       <trans-unit id="15649bf7feb32472ef18cfb49d0014856da86b86" datatype="html">
         <source>How do I find time to grade all of the student work?</source>
@@ -4434,7 +4434,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">169</context>
         </context-group>
-        <target state="needs-translation">How do I find time to grade all of the student work?</target>
+        <target state="translated">¿Cómo puedo hacerme del tiempo para calificar el trabajo de mis estudiantes?</target>
       </trans-unit>
       <trans-unit id="aa25bf22d74c6350808bdcad5b07d6af280353b6" datatype="html">
         <source>We recommend that you go through the project and select a few steps that you think best demonstrate the students&apos; understanding of the complex concepts covered in the module and grade those steps. Then tell your students they must complete all questions but should concentrate their efforts on the key steps. We recognize that critically grading each step is very time consuming and unpractical.</source>
@@ -4442,7 +4442,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">171</context>
         </context-group>
-        <target state="needs-translation">We recommend that you go through the project and select a few steps that you think best demonstrate the students' understanding of the complex concepts covered in the module and grade those steps. Then tell your students they must complete all questions but should concentrate their efforts on the key steps. We recognize that critically grading each step is very time consuming and unpractical.</target>
+        <target state="translated">Le recomendamos que revise el proyecto y seleccione algunos pasos que crea que demuestran mejor la comprensión de los estudiantes de los conceptos complejos cubiertos en el módulo y califique esos pasos. Luego dígales a sus estudiantes que deben completar todas las preguntas pero que deben concentrar sus esfuerzos en los pasos clave. Reconocemos que calificar críticamente cada paso requiere mucho tiempo y es poco práctico.</target>
       </trans-unit>
       <trans-unit id="d43085815938bf7369d9f4d71748c90955f4ac4c" datatype="html">
         <source>What is the Real Time Classroom Monitor?</source>
@@ -4450,7 +4450,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">175</context>
         </context-group>
-        <target state="needs-translation">What is the Real Time Classroom Monitor?</target>
+        <target state="translated">¿Qué es el Monitor de Clase en Tiempo Real?</target>
       </trans-unit>
       <trans-unit id="29327e05e932f62505e1ff1e3719dde6df2a2503" datatype="html">
         <source>The Real Time Classroom Monitor allows teachers to view student progress in real time. Teachers will be able to see what step a student is on, how much time the student has spent on that step, and how much of the project the student has completed. All of this information will be updated immediately in real time as students work on the project.</source>
@@ -4458,7 +4458,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">177</context>
         </context-group>
-        <target state="needs-translation">The Real Time Classroom Monitor allows teachers to view student progress in real time. Teachers will be able to see what step a student is on, how much time the student has spent on that step, and how much of the project the student has completed. All of this information will be updated immediately in real time as students work on the project.</target>
+        <target state="translated">El Monitor de Clase en Tiempo Real permite a los/las docentes ver el progreso de los estudiantes en tiempo real. Los/las docentes podrán ver en qué paso se encuentra un estudiante, cuánto tiempo ha dedicado el estudiante a ese paso y cuánto del proyecto ha completado el estudiante. Toda esta información se actualizará inmediatamente en tiempo real a medida que los/las estudiantes trabajen en el proyecto.</target>
       </trans-unit>
       <trans-unit id="1afad465fed504ea4222ce6712c1431dabca3efb" datatype="html">
         <source>Does the Real Time Classroom Monitor work on a tablet like the iPad?</source>
@@ -5042,7 +5042,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit/edit.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Edit Profile</target>
+        <target state="translated">Editar Perfil</target>
       </trans-unit>
       <trans-unit id="ea7254c3121598c9cfd72210e1336473441546e3" datatype="html">
         <source>Researcher Tools</source>
@@ -5050,7 +5050,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="needs-translation">Researcher Tools</target>
+        <target state="translated">Herramientas de Investigación</target>
       </trans-unit>
       <trans-unit id="593d1ae1c4b71457eda8476df2bb52624a3c6e74" datatype="html">
         <source>Admin Tools</source>
@@ -5058,7 +5058,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">Admin Tools</target>
+        <target state="translated">Herramientas Administrativas</target>
       </trans-unit>
       <trans-unit id="85b79c9064aed1ead31ace985f31aa1363f6bdaf" datatype="html">
         <source>Help</source>
@@ -5070,7 +5070,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
-        <target state="needs-translation">Help</target>
+        <target state="translated">Ayuda</target>
       </trans-unit>
       <trans-unit id="640eec093c685babaa3265137215e3cc92ad704d" datatype="html">
         <source>Sign Out</source>
@@ -5078,7 +5078,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">86</context>
         </context-group>
-        <target state="needs-translation">Sign Out</target>
+        <target state="translated">Cerrar sesión</target>
       </trans-unit>
       <trans-unit id="17f37e96c7b8059b23c07791dca1bdb3f3f6853f" datatype="html">
         <source>Welcome <x id="INTERPOLATION" equiv-text="{{ user.firstName }}"/>!</source>
@@ -5090,7 +5090,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-links/header-links.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Welcome <x id="INTERPOLATION" equiv-text="{{ user.firstName }}"/>!</target>
+        <target state="translated">¡Te damos la bienvenida <x id="INTERPOLATION" equiv-text="{{ user.firstName }}"/>!</target>
       </trans-unit>
       <trans-unit id="692f6e6f4f6afc7f48b8194ab03e1d2155650f00" datatype="html">
         <source>Research</source>
@@ -5102,7 +5102,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">Research</target>
+        <target state="translated">Investigación</target>
       </trans-unit>
       <trans-unit id="2d1bd68dd6cbd034f0b62c1dfabf7e17ee27081c" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> or <x id="START_LINK_1" equiv-text="&lt;a routerLink=&quot;/login&quot;&gt;"/>Sign In<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
@@ -5110,7 +5110,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-signin/header-signin.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> or <x id="START_LINK_1" equiv-text="&lt;a routerLink=&quot;/login&quot;&gt;"/>Sign In<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Registrarse<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> or <x id="START_LINK_1" equiv-text="&lt;a routerLink=&quot;/login&quot;&gt;"/>Iniciar sesión<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
       </trans-unit>
       <trans-unit id="470b3fb4b02529d4f9f25850711632271fd27508" datatype="html">
         <source>WISE header logo</source>
@@ -5134,7 +5134,7 @@
           <context context-type="sourcefile">src/app/modules/library/community-library/community-library-details.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Community Built</target>
+        <target state="translated">Construida por la Comunidad</target>
       </trans-unit>
       <trans-unit id="adc984d8f77dc423434e753052fcf8b519a4d69d" datatype="html">
         <source>The &quot;Community Built&quot; library contains units that were designed and contributed by WISE community members. Want to publicly share your custom unit? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/contact&quot; target=&quot;_blank&quot;&gt;"/>Contact Us<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>!</source>
@@ -5142,7 +5142,7 @@
           <context context-type="sourcefile">src/app/modules/library/community-library/community-library-details.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">The "Community Built" library contains units that were designed and contributed by WISE community members. Want to publicly share your custom unit? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/contact&quot; target=&quot;_blank&quot;&gt;"/>Contact Us<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>!</target>
+        <target state="translated">La biblioteca "Construida por la Comunidad" contiene unidades que fueron diseñadas y compartidas por miembros de la comunidad WISE. ¿Quiere compartir públicamente su unidad personalizada?<x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/contact&quot; target=&quot;_blank&quot;&gt;"/>Contáctenos<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>!</target>
       </trans-unit>
       <trans-unit id="1f519374aa2d63b8d101da2f56f778edf9052131" datatype="html">
         <source>*Please note: While WISE staff have reviewed the units listed here, we cannot specifically vouch for their effectiveness or quality. Please examine the units carefully before using in your classrooms. Thanks!</source>
@@ -5150,7 +5150,7 @@
           <context context-type="sourcefile">src/app/modules/library/community-library/community-library-details.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">*Please note: While WISE staff have reviewed the units listed here, we cannot specifically vouch for their effectiveness or quality. Please examine the units carefully before using in your classrooms. Thanks!</target>
+        <target state="translated">* Tenga en cuenta: si bien el personal de WISE ha revisado las unidades enumeradas aquí, no podemos garantizar específicamente su efectividad o calidad. Examine las unidades cuidadosamente antes de usarlas en sus aulas. ¡Gracias!</target>
       </trans-unit>
       <trans-unit id="5fb96f87d294d558a0de557ff5cd2049b9e3d635" datatype="html">
         <source>What is Community Built?</source>
@@ -5158,7 +5158,7 @@
           <context context-type="sourcefile">src/app/modules/library/community-library/community-library.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">What is Community Built?</target>
+        <target state="translated">¿Qué significa "Construida por la Comunidad"?</target>
       </trans-unit>
       <trans-unit id="4f6276982b612e3be0a1c89c456d29506016d863" datatype="html">
         <source>No community designed units found.</source>
@@ -5166,7 +5166,7 @@
           <context context-type="sourcefile">src/app/modules/library/community-library/community-library.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
-        <target state="needs-translation">No community designed units found.</target>
+        <target state="translated">No se encontraron unidades diseñadas por la comunidad.</target>
       </trans-unit>
       <trans-unit id="d1acaeb5fa466988ff526619702c4bf21e0a5e15" datatype="html">
         <source>Copy Unit</source>
@@ -5174,7 +5174,7 @@
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Copy Unit</target>
+        <target state="translated">Copiar Unidad</target>
       </trans-unit>
       <trans-unit id="2883a2c78d97119d2ab3002336e04da6657a7dfd" datatype="html">
         <source>(Unit ID: <x id="INTERPOLATION" equiv-text="{{ data.project.id }}"/>)</source>
@@ -5182,7 +5182,7 @@
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">(Unit ID: <x id="INTERPOLATION" equiv-text="{{ data.project.id }}"/>)</target>
+        <target state="translated">(ID de Unidad: <x id="INTERPOLATION" equiv-text="{{ data.project.id }}"/>)</target>
       </trans-unit>
       <trans-unit id="459457d652be00e6fe313f88d938d4f063c3b3e0" datatype="html">
         <source>Copying creates a duplicate that will appear in “My Units”. You will be the owner and can edit the content and share the new unit with other WISE users.</source>
@@ -5190,7 +5190,7 @@
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Copying creates a duplicate that will appear in “My Units”. You will be the owner and can edit the content and share the new unit with other WISE users.</target>
+        <target state="translated">La copia crea un duplicado que aparecerá en "Mis unidades". Usted será el propietario/a y podrá editar el contenido y compartir la nueva unidad con otras personas usuarias de WISE.</target>
       </trans-unit>
       <trans-unit id="1979da7460819153e11d2078244645d94291b69c" datatype="html">
         <source>Copy</source>
@@ -5202,7 +5202,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Copy</target>
+        <target state="translated">Copiar</target>
       </trans-unit>
       <trans-unit id="4568352014425961102" datatype="html">
         <source>There was an error trying to copy the project. Please refresh the page and try again.</source>
@@ -5210,7 +5210,7 @@
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.ts</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">There was an error trying to copy the project. Please refresh the page and try again.</target>
+        <target state="translated">Hubo un error al intentar copiar el proyecto. Por favor refresque la página y pruebe nuevamente.</target>
       </trans-unit>
       <trans-unit id="2133f444f222b8ac645f3b0c53c2b30dfa15e6d0" datatype="html">
         <source>Discuss (<x id="INTERPOLATION" equiv-text="{{postCount}}"/><x id="INTERPOLATION_1" equiv-text="{{hasMoreTopics ? &apos;+&apos; : &apos;&apos;}}"/>)</source>
@@ -5218,7 +5218,7 @@
           <context context-type="sourcefile">src/app/modules/library/discourse-category-activity/discourse-category-activity.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Discuss (<x id="INTERPOLATION" equiv-text="{{postCount}}"/><x id="INTERPOLATION_1" equiv-text="{{hasMoreTopics ? '+' : ''}}"/>)</target>
+        <target state="translated">Discutir (<x id="INTERPOLATION" equiv-text="{{postCount}}"/><x id="INTERPOLATION_1" equiv-text="{{hasMoreTopics ? '+' : ''}}"/>)</target>
       </trans-unit>
       <trans-unit id="891537ceca296c8821e5edf088b3e9cc5c6f17c9" datatype="html">
         <source>Explore suggested WISE curricula for the given grade levels or search for specific units that address your needs.</source>
@@ -5226,7 +5226,7 @@
           <context context-type="sourcefile">src/app/modules/library/home-page-project-library/home-page-project-library.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Explore suggested WISE curricula for the given grade levels or search for specific units that address your needs.</target>
+        <target state="translated">Explore los planes de estudio de WISE sugeridos para los niveles de grado dados o busque unidades específicas que aborden sus necesidades.</target>
       </trans-unit>
       <trans-unit id="1ada756975a68f38f92477600b2ca2864ea89533" datatype="html">
         <source>Toggle filters</source>
@@ -5234,7 +5234,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">Toggle filters</target>
+        <target state="translated">Activar/Desactivar filtros</target>
       </trans-unit>
       <trans-unit id="b8d343aa7d7ecf599df1c34a0d4ba1bdb7de759f" datatype="html">
         <source>Filter by <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.nextgenscience.org/&quot; target=&quot;_blank&quot;&gt;"/>Next Generation Science Standards<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (NGSS).</source>
@@ -5242,7 +5242,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Filter by <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.nextgenscience.org/&quot; target=&quot;_blank&quot;&gt;"/>Next Generation Science Standards<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (NGSS).</target>
+        <target state="translated">Filtrar por <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.nextgenscience.org/&quot; target=&quot;_blank&quot;&gt;"/>Next Generation Science Standards<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (NGSS).</target>
       </trans-unit>
       <trans-unit id="06c663bf1474713f57551123a46b34318543b67d" datatype="html">
         <source>Reset</source>
@@ -5266,7 +5266,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
           <context context-type="linenumber">69</context>
         </context-group>
-        <target state="needs-translation">Reset</target>
+        <target state="translated">Resetear</target>
       </trans-unit>
       <trans-unit id="e2f5ddbb1c62ee08bb0cc5a18ecba95e1e621760" datatype="html">
         <source>Discipline</source>
@@ -5274,7 +5274,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
           <context context-type="linenumber">37</context>
         </context-group>
-        <target state="needs-translation">Discipline</target>
+        <target state="translated">Disciplina</target>
       </trans-unit>
       <trans-unit id="b26db160af51478944575eeb0137e167ab054cca" datatype="html">
         <source>DCI Arrangement</source>
@@ -5282,7 +5282,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
           <context context-type="linenumber">51</context>
         </context-group>
-        <target state="needs-translation">DCI Arrangement</target>
+        <target state="translated">Ideas Disciplinares Centrales</target>
       </trans-unit>
       <trans-unit id="b17d72cdba2d53ad1c4952c8c3ba0d70ffc7ed1d" datatype="html">
         <source>Performance Expectation</source>
@@ -5290,7 +5290,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">Performance Expectation</target>
+        <target state="translated">Expectativas de Logro</target>
       </trans-unit>
       <trans-unit id="07ab43ffb10e6bed417b203bfdc02cdda6aa1b61" datatype="html">
         <source>Grade level:</source>
@@ -5298,7 +5298,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">Grade level:</target>
+        <target state="translated">Grado/Año/Nivel:</target>
       </trans-unit>
       <trans-unit id="b7d0b2b380f3fd86cdc87454b0758c8dfe0ce49b" datatype="html">
         <source>Duration: <x id="INTERPOLATION" equiv-text="{{ project.metadata.totalTime }}"/></source>
@@ -5306,7 +5306,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="needs-translation">Duration: <x id="INTERPOLATION" equiv-text="{{ project.metadata.totalTime }}"/></target>
+        <target state="translated">Duración: <x id="INTERPOLATION" equiv-text="{{ project.metadata.totalTime }}"/></target>
       </trans-unit>
       <trans-unit id="e9459a08449fe148a8a37f309d9d5e298e4944ed" datatype="html">
         <source>Unit ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/></source>
@@ -5314,7 +5314,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">Unit ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/></target>
+        <target state="translated">ID de Unidad: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/></target>
       </trans-unit>
       <trans-unit id="2e051bd0dfb8401d47b10f0ead8571a8549a233c" datatype="html">
         <source>This unit is from an old version of WISE that is no longer supported. Please find an alternate unit to use in the future or contact us for upgrade options.</source>
@@ -5326,7 +5326,7 @@
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">This unit is from an old version of WISE that is no longer supported. Please find an alternate unit to use in the future or contact us for upgrade options.</target>
+        <target state="translated">Esta unidad es de una versión antigua de WISE que ya no es compatible. Busque una unidad alternativa para usar en el futuro o comuníquese con nosotros para conocer las opciones de actualización.</target>
       </trans-unit>
       <trans-unit id="59a08e65c39e2cecb841fc7123a77756f52c8db3" datatype="html">
         <source>Legacy Unit</source>
@@ -5338,7 +5338,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
-        <target state="needs-translation">Legacy Unit</target>
+        <target state="translated">Unidad de la versión anterior</target>
       </trans-unit>
       <trans-unit id="c38ef07814e33a674bada9fe331ffd114cec319d" datatype="html">
         <source>Discipline:</source>
@@ -5346,7 +5346,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">43</context>
         </context-group>
-        <target state="needs-translation">Discipline:</target>
+        <target state="translated">Disciplina:</target>
       </trans-unit>
       <trans-unit id="4cdcf77b0a246131946d080de95cf21fbd5516a9" datatype="html">
         <source>Features:</source>
@@ -5354,7 +5354,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <target state="needs-translation">Features:</target>
+        <target state="translated">Características:</target>
       </trans-unit>
       <trans-unit id="4a074ee53886e04659f3cec8ec30b94ce5ce717c" datatype="html">
         <source>NGSS Performance Expectations: </source>
@@ -5362,7 +5362,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">50</context>
         </context-group>
-        <target state="needs-translation">NGSS Performance Expectations: </target>
+        <target state="translated">Expectativas de logro de los NGSS: </target>
       </trans-unit>
       <trans-unit id="94481bdbeb153b8de94b4c86878ceae0e2b5359b" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is licensed under <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
@@ -5370,7 +5370,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">66</context>
         </context-group>
-        <target state="needs-translation"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is licensed under <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
+        <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>Esta unidad<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> se encuentra licenciada bajo <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
       </trans-unit>
       <trans-unit id="88440ddf34ab09a19c9f781fe3d93f2cbbd0630c" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is licensed under <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION" equiv-text="{{authorsString}}"/>.</source>
@@ -5378,7 +5378,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">67</context>
         </context-group>
-        <target state="needs-translation"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is licensed under <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION" equiv-text="{{authorsString}}"/>.</target>
+        <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>Esta unidad<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> se encuentra licenciada bajo <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION" equiv-text="{{authorsString}}"/>.</target>
       </trans-unit>
       <trans-unit id="19812b33be1cdeaa076d46cad963bf90e2fd2eb0" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{parentProject.uri}}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{parentProject.title}}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</source>
@@ -5386,7 +5386,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">70</context>
         </context-group>
-        <target state="needs-translation"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{parentProject.uri}}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{parentProject.title}}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</target>
+        <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>Esta unidad<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> es una copia de <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{parentProject.uri}}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{parentProject.title}}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (usada bajo <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</target>
       </trans-unit>
       <trans-unit id="41476bcc74edf123139f9d304fc569c7a066b386" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{parentProject.uri}}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{parentProject.title}}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION_1" equiv-text="{{parentAuthorsString}}"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</source>
@@ -5394,7 +5394,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">71</context>
         </context-group>
-        <target state="needs-translation"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{parentProject.uri}}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{parentProject.title}}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION_1" equiv-text="{{parentAuthorsString}}"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</target>
+        <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{project.uri}}&quot; target=&quot;_blank&quot;&gt;"/>Esta unidad<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> es una copia de <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{parentProject.uri}}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{parentProject.title}}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION_1" equiv-text="{{parentAuthorsString}}"/> (usada bajo <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{licenseUrl}}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</target>
       </trans-unit>
       <trans-unit id="ac0f81713a84217c9bd1d9bb460245d8190b073f" datatype="html">
         <source>More</source>
@@ -5402,7 +5402,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">77</context>
         </context-group>
-        <target state="needs-translation">More</target>
+        <target state="translated">Más</target>
       </trans-unit>
       <trans-unit id="01b7fa43a3428af3967f5ddeb02a21315ec636e4" datatype="html">
         <source>View License</source>
@@ -5410,7 +5410,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">80</context>
         </context-group>
-        <target state="needs-translation">View License</target>
+        <target state="translated">Ver Licencia</target>
       </trans-unit>
       <trans-unit id="053c99466a9288207400b49f2ca907192b5bd44d" datatype="html">
         <source>Use with Class</source>
@@ -5422,7 +5422,7 @@
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Use with Class</target>
+        <target state="translated">Usar con una Clase</target>
       </trans-unit>
       <trans-unit id="3e2a583f531f7dd9f089f68a6968e444c372c3e8" datatype="html">
         <source>Preview</source>
@@ -5434,7 +5434,7 @@
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Preview</target>
+        <target state="translated">Vista previa</target>
       </trans-unit>
       <trans-unit id="3563179927132287246" datatype="html">
         <source>License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.</source>
@@ -5442,7 +5442,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.ts</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.</target>
+        <target state="translated">La licencia se refiere al contenido original creado por los autores. Los autores son responsables del uso y la atribución de cualquier contenido de terceros vinculado o incluido en este trabajo.</target>
       </trans-unit>
       <trans-unit id="77bd1ad738d92e35036a6caa0afba8152299876b" datatype="html">
         <source>Parent ID: <x id="INTERPOLATION" equiv-text="{{ project.parentId }}"/></source>
@@ -5450,7 +5450,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Parent ID: <x id="INTERPOLATION" equiv-text="{{ project.parentId }}"/></target>
+        <target state="translated">ID Parental: <x id="INTERPOLATION" equiv-text="{{ project.parentId }}"/></target>
       </trans-unit>
       <trans-unit id="28f86ffd419b869711aa13f5e5ff54be6d70731c" datatype="html">
         <source>Edit</source>
@@ -5466,7 +5466,7 @@
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Editar</target>
       </trans-unit>
       <trans-unit id="0bd8b27f60a1f098a53e06328426d818e3508ff9" datatype="html">
         <source>Share</source>
@@ -5474,7 +5474,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Share</target>
+        <target state="translated">Compartir</target>
       </trans-unit>
       <trans-unit id="4bad40355890bcbe1b4003d9fd0632beeffd6580" datatype="html">
         <source>Show project details</source>
@@ -5482,7 +5482,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Show project details</target>
+        <target state="translated">Mostrar detalles del proyecto</target>
       </trans-unit>
       <trans-unit id="53c647ed0bda0187e7653c35e0856deea80c268b" datatype="html">
         <source>(ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</source>
@@ -5490,7 +5490,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">(ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</target>
+        <target state="translated">(ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</target>
       </trans-unit>
       <trans-unit id="e3ae8640f4d05cb4f78a31cfbf18d5701f41d57e" datatype="html">
         <source>Shared by <x id="INTERPOLATION" equiv-text="{{ project.owner.displayName }}"/></source>
@@ -5498,7 +5498,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">Shared by <x id="INTERPOLATION" equiv-text="{{ project.owner.displayName }}"/></target>
+        <target state="translated">Compartido por <x id="INTERPOLATION" equiv-text="{{ project.owner.displayName }}"/></target>
       </trans-unit>
       <trans-unit id="7189355262232159449" datatype="html">
         <source>Unit Details</source>
@@ -5506,7 +5506,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="needs-translation">Unit Details</target>
+        <target state="translated">Detalles de la Unidad</target>
       </trans-unit>
       <trans-unit id="1160916388490317189" datatype="html">
         <source>Show:</source>
@@ -5822,7 +5822,7 @@
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.ts</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">Community Built</target>
+        <target state="translated">Construida por la Comunidad</target>
       </trans-unit>
       <trans-unit id="4742841752997470251" datatype="html">
         <source>My Units</source>
@@ -6182,7 +6182,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
           <context context-type="linenumber">42</context>
         </context-group>
-        <target state="needs-translation">Select item to insert</target>
+        <target state="translated">Seleccionar un item a insertar</target>
       </trans-unit>
       <trans-unit id="5d07b8b45b941a4c76827fba39b64fc7ff7e483b" datatype="html">
         <source>Add <x id="INTERPOLATION" equiv-text="{{label.singular}}"/></source>
@@ -6190,7 +6190,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
           <context context-type="linenumber">64</context>
         </context-group>
-        <target state="needs-translation">Add <x id="INTERPOLATION" equiv-text="{{label.singular}}"/></target>
+        <target state="translated">Agregar <x id="INTERPOLATION" equiv-text="{{label.singular}}"/></target>
       </trans-unit>
       <trans-unit id="63ed080bcfe44c14dbc55c5be82e82e602eef812" datatype="html">
         <source> Team hasn&apos;t created any <x id="INTERPOLATION" equiv-text="{{label.plural}}"/> yet. </source>
@@ -6198,7 +6198,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.html</context>
           <context context-type="linenumber">75,77</context>
         </context-group>
-        <target state="needs-translation"> Team hasn't created any <x id="INTERPOLATION" equiv-text="{{label.plural}}"/> yet. </target>
+        <target state="translated"> El equipo no creó ninguna <x id="INTERPOLATION" equiv-text="{{label.plural}}"/> todavía. </target>
       </trans-unit>
       <trans-unit id="1283241409166703000" datatype="html">
         <source>Personal</source>
@@ -6206,7 +6206,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.ts</context>
           <context context-type="linenumber">93</context>
         </context-group>
-        <target state="needs-translation">Personal</target>
+        <target state="translated">Personal</target>
       </trans-unit>
       <trans-unit id="85fd3b01ce1968fbd2304a0c598d4a5676e5da03" datatype="html">
         <source> Score: <x id="INTERPOLATION" equiv-text="{{annotations.score.data.value}}"/><x id="INTERPOLATION_1" equiv-text="{{maxScoreDisplay}}"/> </source>
@@ -6214,7 +6214,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-report-annotations/notebook-report-annotations.component.html</context>
           <context context-type="linenumber">20,22</context>
         </context-group>
-        <target state="needs-translation"> Score: <x id="INTERPOLATION" equiv-text="{{annotations.score.data.value}}"/><x id="INTERPOLATION_1" equiv-text="{{maxScoreDisplay}}"/> </target>
+        <target state="translated"> Calificación: <x id="INTERPOLATION" equiv-text="{{annotations.score.data.value}}"/><x id="INTERPOLATION_1" equiv-text="{{maxScoreDisplay}}"/> </target>
       </trans-unit>
       <trans-unit id="b69db579ce83572bef4390bd17f235727ac6386d" datatype="html">
         <source>
@@ -6224,7 +6224,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-report-annotations/notebook-report-annotations.component.html</context>
           <context context-type="linenumber">27</context>
         </context-group>
-        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ latestAnnotationTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"/></target>
+        <target state="translated"><x id="INTERPOLATION" equiv-text="{{ latestAnnotationTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"/></target>
       </trans-unit>
       <trans-unit id="1700529996937824756" datatype="html">
         <source>Computer Feedback</source>
@@ -6232,7 +6232,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-report-annotations/notebook-report-annotations.component.ts</context>
           <context context-type="linenumber">64</context>
         </context-group>
-        <target state="needs-translation">Computer Feedback</target>
+        <target state="translated">Feedback de la Computadora</target>
       </trans-unit>
       <trans-unit id="4887677208798229337" datatype="html">
         <source>Teacher Feedback</source>
@@ -6240,7 +6240,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-report-annotations/notebook-report-annotations.component.ts</context>
           <context context-type="linenumber">67</context>
         </context-group>
-        <target state="needs-translation">Teacher Feedback</target>
+        <target state="translated">Feedback del Docente</target>
       </trans-unit>
       <trans-unit id="3de550daa9bf35829dbeb9099844614347d2dbc5" datatype="html">
         <source>Toggle Full Screen</source>
@@ -6248,7 +6248,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Toggle Full Screen</target>
+        <target state="translated">Cambiar/Salir a/de Pantalla Completa</target>
       </trans-unit>
       <trans-unit id="e8bcb762b48cf52fbea66ce9c4f6b970b99a80fd" datatype="html">
         <source>Collapse</source>
@@ -6256,7 +6256,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Collapse</target>
+        <target state="translated">Colapsar</target>
       </trans-unit>
       <trans-unit id="d5cec7468241d72cafd86ad1af6d55b09a6e3ae5" datatype="html">
         <source>Restore</source>
@@ -6264,7 +6264,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
           <context context-type="linenumber">32</context>
         </context-group>
-        <target state="needs-translation">Restore</target>
+        <target state="translated">Restaurar</target>
       </trans-unit>
       <trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
         <source>Save</source>
@@ -6300,7 +6300,7 @@
           <context context-type="sourcefile">src/assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Save</target>
+        <target state="translated">Guardar</target>
       </trans-unit>
       <trans-unit id="044703276ff14d0a94f05154d5bc032872465a0d" datatype="html">
         <source>Saved <x id="INTERPOLATION" equiv-text="{{ saveTime | amTimeAgo }}"/></source>
@@ -6308,7 +6308,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="needs-translation">Saved <x id="INTERPOLATION" equiv-text="{{ saveTime | amTimeAgo }}"/></target>
+        <target state="translated">Guardado <x id="INTERPOLATION" equiv-text="{{ saveTime | amTimeAgo }}"/></target>
       </trans-unit>
       <trans-unit id="70cfd60f574a2e5b823237ac05381d8d488e4c7c" datatype="html">
         <source> Team hasn&apos;t worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet. </source>
@@ -6316,7 +6316,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
           <context context-type="linenumber">75,77</context>
         </context-group>
-        <target state="needs-translation"> Team hasn't worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet. </target>
+        <target state="translated"> El equipo no ha trabajo todavía en <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> . </target>
       </trans-unit>
       <trans-unit id="1cde0ecb1655843b8b682674d1ed9ff8138073b2" datatype="html">
         <source>point</source>
@@ -6324,7 +6324,7 @@
           <context context-type="sourcefile">src/app/possible-score/possible-score.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">point</target>
+        <target state="translated">punto</target>
       </trans-unit>
       <trans-unit id="96fe69fa0552ff1362db05cebbd1ee4c0e154c8c" datatype="html">
         <source>points</source>
@@ -6332,7 +6332,7 @@
           <context context-type="sourcefile">src/app/possible-score/possible-score.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">points</target>
+        <target state="translated">puntos</target>
       </trans-unit>
       <trans-unit id="74b04b602d4148d1cb5de4da90c0e91ec9bae5ac" datatype="html">
         <source>Choose a Branch Path</source>
@@ -6340,7 +6340,7 @@
           <context context-type="sourcefile">src/app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Choose a Branch Path</target>
+        <target state="translated">Elegir un Camino de Bifurcación</target>
       </trans-unit>
       <trans-unit id="33587ab40a459dc3058a184e39bfa93737fbbd67" datatype="html">
         <source>Note: This chooser screen is only available in preview mode. Students will not see this screen in a classroom run and will instead be assigned a branch path automatically. Once you have chosen a branch, complete the current step and then click the Next arrow.</source>
@@ -6348,7 +6348,7 @@
           <context context-type="sourcefile">src/app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Note: This chooser screen is only available in preview mode. Students will not see this screen in a classroom run and will instead be assigned a branch path automatically. Once you have chosen a branch, complete the current step and then click the Next arrow.</target>
+        <target state="translated">Nota: esta pantalla de selección solo está disponible en el modo de vista previa. Los estudiantes no verán esta pantalla mientras se ejecuta en el aula y, en su lugar, se les asignará una ruta de bifurcación automáticamente. Una vez que haya elegido una rama, complete el paso actual y luego haga clic en la flecha Siguiente.</target>
       </trans-unit>
       <trans-unit id="51d583eae34e00ff68b64c83bb27a77927206e5c" datatype="html">
         <source>WISE Terms of Use &amp; Privacy Policy</source>
@@ -6356,7 +6356,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">WISE Terms of Use &amp; Privacy Policy</target>
+        <target state="translated">Términos de uso de WISE &amp; Políticas de Privacidad</target>
       </trans-unit>
       <trans-unit id="73546446e442c1b3861297089d5436ee268b4866" datatype="html">
         <source>User Agreement</source>
@@ -6364,7 +6364,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">User Agreement</target>
+        <target state="translated">Acuerdo de Usuario</target>
       </trans-unit>
       <trans-unit id="bc5c8fc1c4e71b3ee81861339adbe75a81f330bd" datatype="html">
         <source>Information We Collect</source>
@@ -6372,7 +6372,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">Information We Collect</target>
+        <target state="translated">Información que recolectamos</target>
       </trans-unit>
       <trans-unit id="3b2c25aac9bb263b63bc9310da65eb68324d83da" datatype="html">
         <source>How We Use the Data</source>
@@ -10656,19 +10656,75 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <target state="needs-translation"> Sawtooth </target>
       </trans-unit>
+      <trans-unit id="a507c06d9cbc346d9bb3c644c960230e1e0ebdc1" datatype="html">
+        <source>Frequency</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <target state="needs-translation">Frequency</target>
+      </trans-unit>
       <trans-unit id="f491f7aaf73a13ed942584461a28b134f06dbed0" datatype="html">
         <source>Starting Frequency (Hz)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <target state="needs-translation">Starting Frequency (Hz)</target>
+      </trans-unit>
+      <trans-unit id="879f3e1ff2e8f8d1e6bafed9b6408d92f46aee27" datatype="html">
+        <source> Show Frequency Input </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">64,65</context>
+        </context-group>
+        <target state="needs-translation"> Show Frequency Input </target>
+      </trans-unit>
+      <trans-unit id="a72027725d62e7fb62b0e7168d257e3074ccbf88" datatype="html">
+        <source> Allow Student to Edit Frequency </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">72,73</context>
+        </context-group>
+        <target state="needs-translation"> Allow Student to Edit Frequency </target>
+      </trans-unit>
+      <trans-unit id="e1fb643331739b9d624a2fac6b9af016db0333c8" datatype="html">
+        <source>Amplitude</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+        <target state="needs-translation">Amplitude</target>
+      </trans-unit>
+      <trans-unit id="37231843872d8de7ad47adf6a832ac2ad7b5a73a" datatype="html">
+        <source>Starting Amplitude (dB)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+        <target state="needs-translation">Starting Amplitude (dB)</target>
+      </trans-unit>
+      <trans-unit id="7bcd6394a2eab0f47f228c0c83af4df22f447c27" datatype="html">
+        <source> Show Amplitude Input </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">93,94</context>
+        </context-group>
+        <target state="needs-translation"> Show Amplitude Input </target>
+      </trans-unit>
+      <trans-unit id="267799b6a3f95111ede597b3bdfac1b68ca4755e" datatype="html">
+        <source> Allow Student to Edit Amplitude </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">102,103</context>
+        </context-group>
+        <target state="needs-translation"> Allow Student to Edit Amplitude </target>
       </trans-unit>
       <trans-unit id="584114dd79e680cb2262384fe8fc40c40149e9b3" datatype="html">
         <source>Oscillator Width (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">112</context>
         </context-group>
         <target state="needs-translation">Oscillator Width (Pixels)</target>
       </trans-unit>
@@ -10676,7 +10732,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Oscillator Height (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">120</context>
         </context-group>
         <target state="needs-translation">Oscillator Height (Pixels)</target>
       </trans-unit>
@@ -10684,15 +10740,23 @@ Are you ready to receive feedback on this answer?</target>
         <source>Oscillator Grid Size (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <target state="needs-translation">Oscillator Grid Size (Pixels)</target>
+      </trans-unit>
+      <trans-unit id="69c3a88db813e4b07df0bd518f272ac529b2c3f1" datatype="html">
+        <source>Frequencies (Hz)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <target state="needs-translation">Frequencies (Hz)</target>
       </trans-unit>
       <trans-unit id="8753a270abbecc917891dd3d7dc315e8cd96f840" datatype="html">
         <source>Frequencies Played</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <target state="needs-translation">Frequencies Played</target>
       </trans-unit>
@@ -10700,7 +10764,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Frequencies Played Sorted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <target state="needs-translation">Frequencies Played Sorted</target>
       </trans-unit>
@@ -10708,15 +10772,23 @@ Are you ready to receive feedback on this answer?</target>
         <source>Number of Frequencies Played</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <target state="needs-translation">Number of Frequencies Played</target>
+      </trans-unit>
+      <trans-unit id="8c583ceab2194fc6f80c25bdb499f72df6627c7b" datatype="html">
+        <source>Number of Unique Frequencies Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <target state="needs-translation">Number of Unique Frequencies Played</target>
       </trans-unit>
       <trans-unit id="a6d4e749589a8487922daf71057ee0d99d571906" datatype="html">
         <source>Minimum Frequency Played</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <target state="needs-translation">Minimum Frequency Played</target>
       </trans-unit>
@@ -10724,9 +10796,65 @@ Are you ready to receive feedback on this answer?</target>
         <source>Maximum Frequency Played</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="needs-translation">Maximum Frequency Played</target>
+      </trans-unit>
+      <trans-unit id="c10e82783c8291c2256b1085a680eb7b178bb43e" datatype="html">
+        <source>Amplitudes (dB)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation">Amplitudes (dB)</target>
+      </trans-unit>
+      <trans-unit id="1abd902da9e440116264c2328dcb2cfc17c47567" datatype="html">
+        <source>Amplitudes Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <target state="needs-translation">Amplitudes Played</target>
+      </trans-unit>
+      <trans-unit id="f3b52a07acc291ed420962c1d9ebe861c0f31f72" datatype="html">
+        <source>Amplitudes Played Sorted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <target state="needs-translation">Amplitudes Played Sorted</target>
+      </trans-unit>
+      <trans-unit id="d7b8ddf06b443fd47c950274e91ab0d67a005ca4" datatype="html">
+        <source>Number of Amplitudes Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <target state="needs-translation">Number of Amplitudes Played</target>
+      </trans-unit>
+      <trans-unit id="7135b8ebcec988fc9dcfe4ba600d9f01ac072bda" datatype="html">
+        <source>Number of Unique Amplitudes Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target state="needs-translation">Number of Unique Amplitudes Played</target>
+      </trans-unit>
+      <trans-unit id="54a8d34f0aa8fc9b47ee77d8f736aa20c2eeb816" datatype="html">
+        <source>Min Amplitude Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <target state="needs-translation">Min Amplitude Played</target>
+      </trans-unit>
+      <trans-unit id="3a00664d68630d99ee7c58a23a6a1e3cd83bee02" datatype="html">
+        <source>Max Amplitude Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <target state="needs-translation">Max Amplitude Played</target>
       </trans-unit>
       <trans-unit id="9c2c8ec247988ec539f153bfa59000811c7cbf89" datatype="html">
         <source>Oscillator Type</source>
@@ -10744,11 +10872,19 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <target state="needs-translation">Frequency (Hz)</target>
       </trans-unit>
+      <trans-unit id="a59391d2fb63e4438777098cb4166b3fed876056" datatype="html">
+        <source>Ampitude (dB)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation">Ampitude (dB)</target>
+      </trans-unit>
       <trans-unit id="8564202903947049539" datatype="html">
         <source>Play</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">195</context>
+          <context context-type="linenumber">280</context>
         </context-group>
         <target state="needs-translation">Play</target>
       </trans-unit>
@@ -10756,7 +10892,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Stop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">284</context>
         </context-group>
         <target state="needs-translation">Stop</target>
       </trans-unit>
