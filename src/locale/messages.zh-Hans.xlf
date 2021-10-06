@@ -10656,19 +10656,75 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <target state="translated"> 锯齿波 </target>
       </trans-unit>
+      <trans-unit id="a507c06d9cbc346d9bb3c644c960230e1e0ebdc1" datatype="html">
+        <source>Frequency</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <target state="needs-translation">Frequency</target>
+      </trans-unit>
       <trans-unit id="f491f7aaf73a13ed942584461a28b134f06dbed0" datatype="html">
         <source>Starting Frequency (Hz)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <target state="translated">起始频率 (Hz)</target>
+      </trans-unit>
+      <trans-unit id="879f3e1ff2e8f8d1e6bafed9b6408d92f46aee27" datatype="html">
+        <source> Show Frequency Input </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">64,65</context>
+        </context-group>
+        <target state="needs-translation"> Show Frequency Input </target>
+      </trans-unit>
+      <trans-unit id="a72027725d62e7fb62b0e7168d257e3074ccbf88" datatype="html">
+        <source> Allow Student to Edit Frequency </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">72,73</context>
+        </context-group>
+        <target state="needs-translation"> Allow Student to Edit Frequency </target>
+      </trans-unit>
+      <trans-unit id="e1fb643331739b9d624a2fac6b9af016db0333c8" datatype="html">
+        <source>Amplitude</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+        <target state="needs-translation">Amplitude</target>
+      </trans-unit>
+      <trans-unit id="37231843872d8de7ad47adf6a832ac2ad7b5a73a" datatype="html">
+        <source>Starting Amplitude (dB)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+        <target state="needs-translation">Starting Amplitude (dB)</target>
+      </trans-unit>
+      <trans-unit id="7bcd6394a2eab0f47f228c0c83af4df22f447c27" datatype="html">
+        <source> Show Amplitude Input </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">93,94</context>
+        </context-group>
+        <target state="needs-translation"> Show Amplitude Input </target>
+      </trans-unit>
+      <trans-unit id="267799b6a3f95111ede597b3bdfac1b68ca4755e" datatype="html">
+        <source> Allow Student to Edit Amplitude </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
+          <context context-type="linenumber">102,103</context>
+        </context-group>
+        <target state="needs-translation"> Allow Student to Edit Amplitude </target>
       </trans-unit>
       <trans-unit id="584114dd79e680cb2262384fe8fc40c40149e9b3" datatype="html">
         <source>Oscillator Width (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">112</context>
         </context-group>
         <target state="translated">波形宽度 (像素)</target>
       </trans-unit>
@@ -10676,7 +10732,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Oscillator Height (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">120</context>
         </context-group>
         <target state="translated">波形高度 (像素)</target>
       </trans-unit>
@@ -10684,15 +10740,23 @@ Are you ready to receive feedback on this answer?</target>
         <source>Oscillator Grid Size (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <target state="translated">波形网格大小 (像素)</target>
+      </trans-unit>
+      <trans-unit id="69c3a88db813e4b07df0bd518f272ac529b2c3f1" datatype="html">
+        <source>Frequencies (Hz)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <target state="needs-translation">Frequencies (Hz)</target>
       </trans-unit>
       <trans-unit id="8753a270abbecc917891dd3d7dc315e8cd96f840" datatype="html">
         <source>Frequencies Played</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <target state="translated">播放的频率</target>
       </trans-unit>
@@ -10700,7 +10764,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Frequencies Played Sorted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <target state="translated">播放频率排序</target>
       </trans-unit>
@@ -10708,15 +10772,23 @@ Are you ready to receive feedback on this answer?</target>
         <source>Number of Frequencies Played</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <target state="translated">播放频率数</target>
+      </trans-unit>
+      <trans-unit id="8c583ceab2194fc6f80c25bdb499f72df6627c7b" datatype="html">
+        <source>Number of Unique Frequencies Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <target state="needs-translation">Number of Unique Frequencies Played</target>
       </trans-unit>
       <trans-unit id="a6d4e749589a8487922daf71057ee0d99d571906" datatype="html">
         <source>Minimum Frequency Played</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <target state="translated">最低播放频率</target>
       </trans-unit>
@@ -10724,9 +10796,65 @@ Are you ready to receive feedback on this answer?</target>
         <source>Maximum Frequency Played</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="translated">最高播放频率</target>
+      </trans-unit>
+      <trans-unit id="c10e82783c8291c2256b1085a680eb7b178bb43e" datatype="html">
+        <source>Amplitudes (dB)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation">Amplitudes (dB)</target>
+      </trans-unit>
+      <trans-unit id="1abd902da9e440116264c2328dcb2cfc17c47567" datatype="html">
+        <source>Amplitudes Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <target state="needs-translation">Amplitudes Played</target>
+      </trans-unit>
+      <trans-unit id="f3b52a07acc291ed420962c1d9ebe861c0f31f72" datatype="html">
+        <source>Amplitudes Played Sorted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <target state="needs-translation">Amplitudes Played Sorted</target>
+      </trans-unit>
+      <trans-unit id="d7b8ddf06b443fd47c950274e91ab0d67a005ca4" datatype="html">
+        <source>Number of Amplitudes Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <target state="needs-translation">Number of Amplitudes Played</target>
+      </trans-unit>
+      <trans-unit id="7135b8ebcec988fc9dcfe4ba600d9f01ac072bda" datatype="html">
+        <source>Number of Unique Amplitudes Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target state="needs-translation">Number of Unique Amplitudes Played</target>
+      </trans-unit>
+      <trans-unit id="54a8d34f0aa8fc9b47ee77d8f736aa20c2eeb816" datatype="html">
+        <source>Min Amplitude Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <target state="needs-translation">Min Amplitude Played</target>
+      </trans-unit>
+      <trans-unit id="3a00664d68630d99ee7c58a23a6a1e3cd83bee02" datatype="html">
+        <source>Max Amplitude Played</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <target state="needs-translation">Max Amplitude Played</target>
       </trans-unit>
       <trans-unit id="9c2c8ec247988ec539f153bfa59000811c7cbf89" datatype="html">
         <source>Oscillator Type</source>
@@ -10744,11 +10872,19 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <target state="translated">频率 (Hz)</target>
       </trans-unit>
+      <trans-unit id="a59391d2fb63e4438777098cb4166b3fed876056" datatype="html">
+        <source>Ampitude (dB)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation">Ampitude (dB)</target>
+      </trans-unit>
       <trans-unit id="8564202903947049539" datatype="html">
         <source>Play</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">195</context>
+          <context context-type="linenumber">280</context>
         </context-group>
         <target state="translated">播放</target>
       </trans-unit>
@@ -10756,7 +10892,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Stop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">284</context>
         </context-group>
         <target state="translated">停止</target>
       </trans-unit>
