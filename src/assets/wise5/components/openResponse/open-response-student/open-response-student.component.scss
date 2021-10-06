@@ -5,10 +5,10 @@
 
 .student-response {
   width: 99%;
-  height: 5em;
+  min-height: 80px;
   background-color: #f7f7f7;
-  resize: none;
   padding: 8px;
+  overflow: hidden;
 }
 
 .student-response:focus {
