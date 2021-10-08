@@ -72,6 +72,9 @@ import { setUpLocationSync } from '@angular/router/upgrade';
 import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance/dialogGuidanceService';
 import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
+import { PeerChatService } from '../assets/wise5/components/peerChat/peerChatService';
+import { PeerChatMessageComponent } from '../assets/wise5/components/peerChat/peer-chat-message/peer-chat-message.component';
+import { PeerChatMessagesComponent } from '../assets/wise5/components/peerChat/peer-chat-messages/peer-chat-messages.component';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -84,7 +87,9 @@ export class EmptyComponent {}
     EmptyComponent,
     HelpIconComponent,
     NodeIconComponent,
-    NodeStatusIcon
+    NodeStatusIcon,
+    PeerChatMessageComponent,
+    PeerChatMessagesComponent
   ],
   imports: [
     UpgradeModule,
@@ -143,6 +148,7 @@ export class EmptyComponent {}
     NotificationService,
     OutsideURLService,
     OpenResponseService,
+    PeerChatService,
     ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,
@@ -189,6 +195,8 @@ export class EmptyComponent {}
     MomentModule,
     NodeIconComponent,
     NodeStatusIcon,
+    PeerChatMessageComponent,
+    PeerChatMessagesComponent,
     ReactiveFormsModule
   ]
 })

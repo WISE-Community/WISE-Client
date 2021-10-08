@@ -34,6 +34,7 @@ class NodeController {
     'Match',
     'MultipleChoice',
     'OpenResponse',
+    'PeerChat',
     'Summary',
     'Table'
   ];

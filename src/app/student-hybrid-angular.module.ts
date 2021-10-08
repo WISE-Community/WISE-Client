@@ -35,6 +35,7 @@ import { SummaryDisplay } from '../assets/wise5/directives/summaryDisplay/summar
 import { HighchartsChartModule } from 'highcharts-angular';
 import { GraphStudent } from '../assets/wise5/components/graph/graph-student/graph-student.component';
 import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
+import { PeerChatStudentComponent } from '../assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGu
     NavItemComponent,
     OpenResponseStudent,
     OutsideUrlStudent,
+    PeerChatStudentComponent,
     SafeUrl,
     TableStudent,
     NavItemComponent,

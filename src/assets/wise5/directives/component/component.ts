@@ -171,6 +171,13 @@ const Component = {
               [component-content]="componentContent"
               [mode]="mode">
           </outside-url-student>
+          <peer-chat-student ng-switch-when="PeerChat"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </peer-chat-student>
           <summary-student ng-switch-when="Summary"
               [node-id]="nodeId"
               [component-content]="componentContent"

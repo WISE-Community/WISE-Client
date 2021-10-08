@@ -1,0 +1,8 @@
+<component-header [componentContent]="componentContent"></component-header>
+<peer-chat-messages [peerChatMessages]="peerChatMessages"></peer-chat-messages>
+<textarea [(ngModel)]="messageText"></textarea>
+<button mat-raised-button
+    color="primary"
+    (click)="submitStudentResponse()">
+  Submit
+</button>

@@ -53,6 +53,7 @@ import { NotebookService } from './services/notebookService';
 import { NotificationService } from './services/notificationService';
 import './components/openResponse/openResponseComponentModule';
 import './components/outsideURL/outsideURLComponentModule';
+import './components/peerChat/peerChatStudentComponentModule';
 import { SessionService } from './services/sessionService';
 import './vle/studentAsset/studentAsset';
 import { StudentAssetService } from './services/studentAssetService';
@@ -105,6 +106,7 @@ angular
     'openResponseComponentModule',
     'outsideURLComponentModule',
     'pascalprecht.translate',
+    'peerChatStudentComponentModule',
     'summaryComponentModule',
     'tableComponentModule',
     'ui.router'

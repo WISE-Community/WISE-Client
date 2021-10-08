@@ -13,6 +13,7 @@ import './match/matchAuthoringComponentModule';
 import './multipleChoice/multipleChoiceAuthoringComponentModule';
 import './openResponse/openResponseAuthoringComponentModule';
 import './outsideURL/outsideURLAuthoringComponentModule';
+import './peerChat/peerChatAuthoringComponentModule';
 import './summary/summaryAuthoringComponentModule';
 import './table/tableAuthoringComponentModule';
 import { downgradeComponent } from '@angular/upgrade/static';
@@ -53,6 +54,7 @@ export default angular
     'multipleChoiceAuthoringComponentModule',
     'openResponseAuthoringComponentModule',
     'outsideURLAuthoringComponentModule',
+    'peerChatAuthoringComponentModule',
     'summaryAuthoringComponentModule',
     'tableAuthoringComponentModule'
   ])

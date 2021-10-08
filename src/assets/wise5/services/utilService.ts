@@ -410,6 +410,7 @@ export class UtilService {
       { type: 'MultipleChoice', name: this.getComponentTypeLabel('MultipleChoice') },
       { type: 'OpenResponse', name: this.getComponentTypeLabel('OpenResponse') },
       { type: 'OutsideURL', name: this.getComponentTypeLabel('OutsideURL') },
+      { type: 'PeerChat', name: this.getComponentTypeLabel('PeerChat') },
       { type: 'HTML', name: this.getComponentTypeLabel('HTML') },
       { type: 'Summary', name: this.getComponentTypeLabel('Summary') },
       { type: 'Table', name: this.getComponentTypeLabel('Table') }
