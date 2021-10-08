@@ -4466,7 +4466,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">179</context>
         </context-group>
-        <target state="needs-translation">Does the Real Time Classroom Monitor work on a tablet like the iPad?</target>
+        <target state="translated">¿Funciona el Monitor de Clase en Tiempo Real en tabletas y iPads?</target>
       </trans-unit>
       <trans-unit id="27b6112b01a06a0e3c0e0792bc1dbb38fc5b47b5" datatype="html">
         <source>Yes it does.</source>
@@ -4474,7 +4474,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">181</context>
         </context-group>
-        <target state="needs-translation">Yes it does.</target>
+        <target state="translated">Sí, funciona.</target>
       </trans-unit>
       <trans-unit id="a9d707572558962320f0d20f346be62a0ae3b4d0" datatype="html">
         <source>Can I use the Real Time Classroom Monitor to pause student screens?</source>
@@ -4482,7 +4482,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">183</context>
         </context-group>
-        <target state="needs-translation">Can I use the Real Time Classroom Monitor to pause student screens?</target>
+        <target state="translated">¿Puedo utilizar el Monitor de Clase en Tiempo Real para pausar la pantalla de mis estudiantes?</target>
       </trans-unit>
       <trans-unit id="39ff505a10ad3f65f49a01a13d66a234d3813681" datatype="html">
         <source>Yes you can! This can be useful if you need to grab their attention in order to have a class discussion or to make an announcement.</source>
@@ -4490,7 +4490,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">185</context>
         </context-group>
-        <target state="needs-translation">Yes you can! This can be useful if you need to grab their attention in order to have a class discussion or to make an announcement.</target>
+        <target state="translated">¡Sí claro que se puede! Esto puede ser útil si necesitas llamar su atención para tener una discusión en clase o hacer un anuncio.</target>
       </trans-unit>
       <trans-unit id="47fdad3268de5bb44d62ef7bf2e4b8e39c432588" datatype="html">
         <source>How many computers do I need to run WISE?</source>
@@ -4498,7 +4498,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">194</context>
         </context-group>
-        <target state="needs-translation">How many computers do I need to run WISE?</target>
+        <target state="translated">¿Cuántas computadoras necesito que estén ejecutando WISE?</target>
       </trans-unit>
       <trans-unit id="f12bc480c8322f1948f28e8ef2d1925c2caf9bf0" datatype="html">
         <source>We strongly recommend one computer for every two students. Research shows that students benefit from working together as a team of two.</source>
@@ -4506,7 +4506,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">196</context>
         </context-group>
-        <target state="needs-translation">We strongly recommend one computer for every two students. Research shows that students benefit from working together as a team of two.</target>
+        <target state="translated">Recomendamos enfáticamente una computadora por cada dos estudiantes. Las investigaciones muestran que los estudiantes se benefician de trabajar juntos en equipos de a dos.</target>
       </trans-unit>
       <trans-unit id="69780389024fe4b31a860424a4ca428609fdde0f" datatype="html">
         <source>What&apos;s New?</source>
@@ -4518,7 +4518,7 @@
           <context context-type="sourcefile">src/app/news/news.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">What's New?</target>
+        <target state="translated">¿Qué hay de nuevo?</target>
       </trans-unit>
       <trans-unit id="271a4b180da747cf090b0a93c54b1c5a6efb7cf9" datatype="html">
         <source>More news</source>
@@ -4526,7 +4526,7 @@
           <context context-type="sourcefile">src/app/home/discourse-latest-news/discourse-latest-news.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">More news</target>
+        <target state="translated">Más novedades</target>
       </trans-unit>
       <trans-unit id="cba3bcc252b9f7b980c934ce394a1345eebfd970" datatype="html">
         <source>Add Ideas</source>
@@ -4638,7 +4638,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Community</target>
+        <target state="translated">Comunidad</target>
       </trans-unit>
       <trans-unit id="be06a43d24ab1400153b57e6683d4393fed94598" datatype="html">
         <source>Join us! Discuss all things WISE.</source>
@@ -4646,7 +4646,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">87</context>
         </context-group>
-        <target state="needs-translation">Join us! Discuss all things WISE.</target>
+        <target state="translated">¡Únase! Discutamos los asuntos de WISE.</target>
       </trans-unit>
       <trans-unit id="53c1019d0a23e95290e125bf93e34257eaadb8b6" datatype="html">
         <source>Help + FAQs</source>
@@ -4694,7 +4694,7 @@
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="needs-translation">WISE students in classroom</target>
+        <target state="translated">Estudiantes WISE en el aula</target>
       </trans-unit>
       <trans-unit id="4788492906571844304" datatype="html">
         <source>WISE students building</source>
