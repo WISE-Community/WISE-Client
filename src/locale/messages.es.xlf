@@ -4726,7 +4726,7 @@
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
           <context context-type="linenumber">70</context>
         </context-group>
-        <target state="needs-translation">Interactive scientific models plus hands-on activities, personalized guidance, and rich embedded assessments</target>
+        <target state="translated">Modelos científicos interactivos más actividades prácticas, orientación personalizada y evaluaciones integradas enriquecidas</target>
       </trans-unit>
       <trans-unit id="5655885224951904964" datatype="html">
         <source>WISE students and teacher</source>
@@ -4734,7 +4734,7 @@
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
           <context context-type="linenumber">74</context>
         </context-group>
-        <target state="needs-translation">WISE students and teacher</target>
+        <target state="translated">Estudiantes y Docentes WISE</target>
       </trans-unit>
       <trans-unit id="2643991125797499080" datatype="html">
         <source>Robust teacher grading and management tools supporting individualized and customized learning</source>
@@ -4742,7 +4742,7 @@
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
           <context context-type="linenumber">86</context>
         </context-group>
-        <target state="needs-translation">Robust teacher grading and management tools supporting individualized and customized learning</target>
+        <target state="translated">Herramientas robustas de evaluación y gestión para el docente que apoyan el aprendizaje personalizado</target>
       </trans-unit>
       <trans-unit id="1934952699406892664" datatype="html">
         <source>An error occurred: </source>
@@ -4750,7 +4750,7 @@
           <context context-type="sourcefile">src/app/http-error.interceptor.ts</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">An error occurred: </target>
+        <target state="translated">Ocurrió un error: </target>
       </trans-unit>
       <trans-unit id="8903463267282596576" datatype="html">
         <source>Backend returned code <x id="status" equiv-text="err.status"/>, body was: <x id="error" equiv-text="err.error"/></source>
@@ -4758,7 +4758,7 @@
           <context context-type="sourcefile">src/app/http-error.interceptor.ts</context>
           <context context-type="linenumber">27</context>
         </context-group>
-        <target state="needs-translation">Backend returned code <x id="status" equiv-text="err.status"/>, body was: <x id="error" equiv-text="err.error"/></target>
+        <target state="translated">El código de error <x id="status" equiv-text="err.status"/>, fue: <x id="error" equiv-text="err.error"/></target>
       </trans-unit>
       <trans-unit id="6272363620327622591" datatype="html">
         <source>An error occurred. Please refresh this page and try again.</source>
@@ -4766,7 +4766,7 @@
           <context context-type="sourcefile">src/app/http-error.interceptor.ts</context>
           <context context-type="linenumber">32</context>
         </context-group>
-        <target state="needs-translation">An error occurred. Please refresh this page and try again.</target>
+        <target state="translated">Ocurrió un error. Por favor refrescar la página e intentar nuevamente.</target>
       </trans-unit>
       <trans-unit id="050473ed2d269f07090850ebf8f56f635436869e" datatype="html">
         <source>Your Google User ID was not found in WISE.</source>
@@ -4774,7 +4774,7 @@
           <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Your Google User ID was not found in WISE.</target>
+        <target state="translated">No se encontró su ID de usuario de Google dentro de WISE.</target>
       </trans-unit>
       <trans-unit id="c6c31f501feef87ab274bd3a000b99eeb7434cff" datatype="html">
         <source>New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
@@ -4786,7 +4786,7 @@
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
           <context context-type="linenumber">62</context>
         </context-group>
-        <target state="needs-translation">New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <target state="translated">¿No tienes cuenta en WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Unirse ahora<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
       </trans-unit>
       <trans-unit id="263e1717422fe3b5810e9a2e55b87e477b35d1ed" datatype="html">
         <source>Sign in to WISE</source>
@@ -4794,7 +4794,7 @@
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Sign in to WISE</target>
+        <target state="translated">Iniciar sesión en WISE</target>
       </trans-unit>
       <trans-unit id="7ed8a9be3807389db666a73b3c4fd805e773f551" datatype="html">
         <source>Username and password not recognized. Please try again.</source>
@@ -4802,7 +4802,7 @@
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Username and password not recognized. Please try again.</target>
+        <target state="translated">No se reconocen el nombre de usuario y la contraseña. Intentar nuevamente.</target>
       </trans-unit>
       <trans-unit id="9fb7b860775d8522b9402f7e31392531ec8079d6" datatype="html">
         <source>Please try again and verify that you are not a robot.</source>
@@ -4810,7 +4810,7 @@
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Please try again and verify that you are not a robot.</target>
+        <target state="translated">Intentar nuevamente y verificar que no es un robot.</target>
       </trans-unit>
       <trans-unit id="d745a22ae7b825b146ca8185126c482597f1d485" datatype="html">
         <source>Sign in with Google</source>
@@ -4834,7 +4834,7 @@
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
           <context context-type="linenumber">60</context>
         </context-group>
-        <target state="needs-translation">Sign in with Google</target>
+        <target state="translated">Iniciar sesión con Google</target>
       </trans-unit>
       <trans-unit id="cabe636014527fb69951e0f36b7aec9697e00c71" datatype="html">
         <source>Forgot username or password?</source>
@@ -4842,7 +4842,7 @@
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
           <context context-type="linenumber">61</context>
         </context-group>
-        <target state="needs-translation">Forgot username or password?</target>
+        <target state="translated">¿Olvidó su usuario o contraseña?</target>
       </trans-unit>
       <trans-unit id="acd82db1a5e5f81b87f6a6b1639f028a4d106d49" datatype="html">
         <source>WISE logo</source>
@@ -4910,7 +4910,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">52</context>
         </context-group>
-        <target state="needs-translation">Powered by <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://wise-research.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>TELS Research<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://github.com/WISE-Community&quot; target=&quot;_blank&quot;&gt;"/>WISE Open Source Technology<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>. Help us <x id="START_LINK_2" equiv-text="&lt;a href=&quot;https://crowdin.com/project/wise&quot; target=&quot;_blank&quot;&gt;"/>translate<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> WISE!</target>
+        <target state="translated">Creado por <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://wise-research.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>TELS Research<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> y <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://github.com/WISE-Community&quot; target=&quot;_blank&quot;&gt;"/>WISE Open Source Technology<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>. Ayúdenos a <x id="START_LINK_2" equiv-text="&lt;a href=&quot;https://crowdin.com/project/wise&quot; target=&quot;_blank&quot;&gt;"/>traducir<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> WISE!</target>
       </trans-unit>
       <trans-unit id="3e1904c6c60cfbdcfde26154fe8ed09b5ce0f9f4" datatype="html">
         <source>This material is based upon work supported by the National Science Foundation. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</source>
@@ -4942,7 +4942,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">76</context>
         </context-group>
-        <target state="needs-translation">ETS</target>
+        <target state="translated">ETS</target>
       </trans-unit>
       <trans-unit id="8f885baf51f23ab4c81a547cd984d9355bea0239" datatype="html">
         <source>Concord Consortium</source>
@@ -4950,7 +4950,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">82</context>
         </context-group>
-        <target state="needs-translation">Concord Consortium</target>
+        <target state="translated">Concord Consortium</target>
       </trans-unit>
       <trans-unit id="f8a12f0f1530051d1bc70b7df85a11832436cf00" datatype="html">
         <source>SAIL (Scalable Architecture for Interactive Learning)</source>
@@ -4958,7 +4958,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">88</context>
         </context-group>
-        <target state="needs-translation">SAIL (Scalable Architecture for Interactive Learning)</target>
+        <target state="translated">SAIL (Arquitectura Escalable para el Aprendizaje Interactivo)</target>
       </trans-unit>
       <trans-unit id="ffac91e3ed3d3f9238f218aaa135735f55daec60" datatype="html">
         <source>©1996-<x id="INTERPOLATION" equiv-text="{{time | amDateFormat:&apos;YYYY&apos;}}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</source>
@@ -4966,7 +4966,7 @@
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">94</context>
         </context-group>
-        <target state="needs-translation">©1996-<x id="INTERPOLATION" equiv-text="{{time | amDateFormat:'YYYY'}}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</target>
+        <target state="translated">©1996-<x id="INTERPOLATION" equiv-text="{{time | amDateFormat:'YYYY'}}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment (Entorno interactivo basado en web para la indagación en ciencias)</target>
       </trans-unit>
       <trans-unit id="d222f6ff9f7e28fdb4e8b2af47898446cf2eafe4" datatype="html">
         <source>Account Menu</source>
@@ -4978,7 +4978,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Account Menu</target>
+        <target state="translated">Menú de la cuenta</target>
       </trans-unit>
       <trans-unit id="879fef27271d8247d791381cf1f9bb0eb8974166" datatype="html">
         <source>Account avatar</source>
@@ -4990,7 +4990,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">Account avatar</target>
+        <target state="translated">Avatar de la cuenta</target>
       </trans-unit>
       <trans-unit id="c48210e0360714d757f8286144200648dc140e30" datatype="html">
         <source>Switch back to original user</source>
@@ -4998,7 +4998,7 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Switch back to original user</target>
+        <target state="translated">Volver al usuario original</target>
       </trans-unit>
       <trans-unit id="c4e3e4170654ee5a353d29a0c34b8008cd25a635" datatype="html">
         <source>Student Home</source>
@@ -5010,7 +5010,7 @@
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">Student Home</target>
+        <target state="translated">Página principal de Estudiante</target>
       </trans-unit>
       <trans-unit id="4c42d0c12ddaebc2efdfc00bbf1d714bf385f278" datatype="html">
         <source>Teacher Home</source>
@@ -5022,7 +5022,7 @@
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Teacher Home</target>
+        <target state="translated">Página principal de Docente</target>
       </trans-unit>
       <trans-unit id="d3781ad331fdd0bc9055c45a41664ac467de63af" datatype="html">
         <source>Edit Profile</source>
@@ -5514,7 +5514,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Show:</target>
+        <target state="translated">Mostrar:</target>
       </trans-unit>
       <trans-unit id="3337301694210287595" datatype="html">
         <source>Next page</source>
@@ -5522,7 +5522,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Next page</target>
+        <target state="translated">Página siguiente</target>
       </trans-unit>
       <trans-unit id="3629960544875360046" datatype="html">
         <source>Previous page</source>
@@ -5530,7 +5530,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Previous page</target>
+        <target state="translated">Página anterior</target>
       </trans-unit>
       <trans-unit id="4131502629887927598" datatype="html">
         <source>0 of <x id="total" equiv-text="length"/></source>
@@ -5538,7 +5538,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">0 of <x id="total" equiv-text="length"/></target>
+        <target state="translated">0 de <x id="total" equiv-text="length"/></target>
       </trans-unit>
       <trans-unit id="2448240847827519051" datatype="html">
         <source><x id="start" equiv-text="startIndex"/> - <x id="end" equiv-text="endIndex"/> of <x id="total" equiv-text="length"/></source>
@@ -5546,7 +5546,7 @@
           <context context-type="sourcefile">src/app/modules/library/libraryPaginatorIntl.ts</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation"><x id="start" equiv-text="startIndex"/> - <x id="end" equiv-text="endIndex"/> of <x id="total" equiv-text="length"/></target>
+        <target state="translated"><x id="start" equiv-text="startIndex"/> - <x id="end" equiv-text="endIndex"/> de <x id="total" equiv-text="length"/></target>
       </trans-unit>
       <trans-unit id="5080207bff284204adb9544ae12ef39917aa74ae" datatype="html">
         <source>WISE Tested</source>
@@ -5554,7 +5554,7 @@
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">WISE Tested</target>
+        <target state="translated">WISE Oficial</target>
       </trans-unit>
       <trans-unit id="babd041c8f47bf5bb8dcabfc02d9904a8e363c9c" datatype="html">
         <source>The &quot;WISE Tested&quot; library contains curricula developed by the WISE team.</source>
@@ -5562,7 +5562,7 @@
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">The "WISE Tested" library contains curricula developed by the WISE team.</target>
+        <target state="translated">La biblioteca "WISE Oficial" contiene planes de estudio desarrollados por el equipo de WISE.</target>
       </trans-unit>
       <trans-unit id="cda4813957412f125af0b3c464de60460ca0fe2f" datatype="html">
         <source>Each of the units in this collection has been designed and iteratively refined through a partnership of university-based education researchers and science teachers. They have all been implemeneted and tested in real classrooms and have shown proven learning gains.</source>
@@ -5814,7 +5814,7 @@
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">WISE Tested</target>
+        <target state="translated">WISE Oficial</target>
       </trans-unit>
       <trans-unit id="4827877614369437209" datatype="html">
         <source>Community Built</source>
