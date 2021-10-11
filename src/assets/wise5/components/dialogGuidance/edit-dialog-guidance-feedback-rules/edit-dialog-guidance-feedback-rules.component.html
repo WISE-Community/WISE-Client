@@ -1,45 +1,57 @@
-<h5 i18n>Feedback Rules</h5>
-<button mat-icon-button
-    matTooltip="Add a new rule"
-    i18n-matTooltip
-    matTooltipPosition="above"
-    (click)="addNewRule('beginning')">
-  <mat-icon>add_circle_outline</mat-icon>
-</button>
-<ul cdkDropList [cdkDropListData]="feedbackRules" (cdkDropListDropped)="drop($event)">
-  <ng-container *ngFor="let rule of feedbackRules; let ruleIndex = index">
-    <li cdkDrag fxLayout="row wrap" fxLayoutGap="8px">
-      <span>{{ruleIndex + 1}}.</span>
-      <span fxLayout="column" fxFlex>
-        <mat-form-field appearance="fill">
-          <mat-label i18n>Expression</mat-label>
-          <input matInput [(ngModel)]="rule.expression" (ngModelChange)='inputChanged.next()' />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label i18n>Feedback</mat-label>
-          <textarea matInput
-              [(ngModel)]="rule.feedback"
-              (ngModelChange)='inputChanged.next()'
-              i18n-placeholder
-              cdkTextareaAutosize>
-          </textarea>
-        </mat-form-field>
-      </span>
-      <button mat-icon-button
-          i18n-matTooltip
-          matTooltip="Delete this rule"
-          matTooltipPosition="above"
-          (click)="deleteRule(ruleIndex)">
-        <mat-icon>clear</mat-icon>
-      </button>
-    </li>
-  </ng-container>
-</ul>
-<button *ngIf="feedbackRules.length > 0"
-    mat-icon-button
-    matTooltip="Add a new rule at the end"
-    i18n-matTooltip
-    matTooltipPosition="above"
-    (click)="addNewRule('end')">
-  <mat-icon>add_circle_outline</mat-icon>
-</button>
+<div class="guidance-feedback-rules notice-bg-bg">
+  <h5 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <span i18n>Feedback Rules</span>
+    <button mat-icon-button
+        color="primary"
+        matTooltip="Add a new rule"
+        i18n-matTooltip
+        matTooltipPosition="above"
+        (click)="addNewRule('beginning')">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </h5>
+  <ul cdkDropList [cdkDropListData]="feedbackRules" (cdkDropListDropped)="drop($event)">
+    <ng-container *ngFor="let rule of feedbackRules; let ruleIndex = index">
+      <li cdkDrag>
+        <mat-card class="rule" fxLayout="row wrap" fxLayoutGap="8px">
+          <div class="text-secondary" fxLayout="column" fxLayoutAlign="start center">
+            <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
+            <span fxFlex></span>
+            <span class="mat-subheading-2">{{ruleIndex + 1}}</span>
+          </div>
+          <div fxLayout="column" fxFlex>
+            <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
+              <mat-label i18n>Expression</mat-label>
+              <input matInput [(ngModel)]="rule.expression" (ngModelChange)='inputChanged.next()' />
+            </mat-form-field>
+            <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
+              <mat-label i18n>Feedback</mat-label>
+              <textarea matInput
+                  [(ngModel)]="rule.feedback"
+                  (ngModelChange)='inputChanged.next()'
+                  i18n-placeholder
+                  cdkTextareaAutosize>
+                    </textarea>
+            </mat-form-field>
+          </div>
+          <button mat-icon-button
+              i18n-matTooltip
+              matTooltip="Delete rule"
+              matTooltipPosition="above"
+              (click)="deleteRule(ruleIndex)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-card>
+      </li>
+    </ng-container>
+  </ul>
+  <button *ngIf="feedbackRules.length > 0"
+      mat-icon-button
+      color="primary"
+      matTooltip="Add a new rule at the end"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      (click)="addNewRule('end')">
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</div>

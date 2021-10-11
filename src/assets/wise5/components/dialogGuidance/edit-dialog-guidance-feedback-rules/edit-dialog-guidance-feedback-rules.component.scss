@@ -1,5 +1,42 @@
+@import '~style/abstracts/variables';
+
+.guidance-feedback-rules {
+  padding: 16px;
+  border-radius: $card-border-radius;
+}
+
+h5 {
+  margin-top: 0;
+}
+
+ul {
+  padding: 0;
+}
+
 li {
   list-style-type: none;
+}
+
+.rule {
+  width: 100%;
+  padding: 12px 8px;
+  margin-bottom: 8px;
+}
+
+.rule-input {
+  &:first-of-type {
+    margin-bottom: 8px;
+  }
+}
+
+.cdk-drag-handle {
   cursor: move;
-  padding: 4px;
+}
+
+.cdk-drag-placeholder {
+  opacity: .4;
+}
+
+.mat-subheading-2 {
+  margin: 0;
 }
