@@ -19,14 +19,12 @@ li {
 
 .rule {
   width: 100%;
-  padding: 12px 8px;
+  padding: 8px;
   margin-bottom: 8px;
 }
 
 .rule-input {
-  &:first-of-type {
-    margin-bottom: 8px;
-  }
+  width: 100%;
 }
 
 .cdk-drag-handle {

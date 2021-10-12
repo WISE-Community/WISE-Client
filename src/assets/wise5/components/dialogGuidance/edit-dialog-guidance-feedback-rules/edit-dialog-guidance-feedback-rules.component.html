@@ -11,15 +11,14 @@
     </button>
   </h5>
   <ul cdkDropList [cdkDropListData]="feedbackRules" (cdkDropListDropped)="drop($event)">
-    <ng-container *ngFor="let rule of feedbackRules; let ruleIndex = index">
+    <ng-container *ngFor="let rule of feedbackRules; let ruleIndex = index; let first = first; let last = last">
       <li cdkDrag>
         <mat-card class="rule" fxLayout="row wrap" fxLayoutGap="8px">
-          <div class="text-secondary" fxLayout="column" fxLayoutAlign="start center">
-            <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
-            <span fxFlex></span>
+          <div class="text-secondary" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="22px">
             <span class="mat-subheading-2">{{ruleIndex + 1}}</span>
+            <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
           </div>
-          <div fxLayout="column" fxFlex>
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px" fxFlex>
             <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
               <mat-label i18n>Expression</mat-label>
               <input matInput [(ngModel)]="rule.expression" (ngModelChange)='inputChanged.next()' />
@@ -34,13 +33,32 @@
                     </textarea>
             </mat-form-field>
           </div>
-          <button mat-icon-button
-              i18n-matTooltip
-              matTooltip="Delete rule"
-              matTooltipPosition="above"
-              (click)="deleteRule(ruleIndex)">
-            <mat-icon>clear</mat-icon>
-          </button>
+          <div fxLayout="column" fxLayoutAlign="start center">
+            <button mat-icon-button
+                i18n-matTooltip
+                matTooltip="Delete rule"
+                matTooltipPosition="before"
+                (click)="deleteRule(ruleIndex)">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <button *ngIf="feedbackRules.length > 1"
+                [disabled]="first"
+                mat-icon-button
+                i18n-matTooltip
+                matTooltip="Move up"
+                matTooltipPosition="before"
+                (click)="moveUp(ruleIndex)">
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+            <button [disabled]="last"
+                mat-icon-button
+                i18n-matTooltip
+                matTooltip="Move down"
+                matTooltipPosition="before"
+                (click)="moveDown(ruleIndex)">
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+          </div>
         </mat-card>
       </li>
     </ng-container>

@@ -29,7 +29,19 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>): void {
-    moveItemInArray(this.feedbackRules, event.previousIndex, event.currentIndex);
+    this.moveRuleItem(event.previousIndex, event.currentIndex);
+  }
+
+  moveUp(ruleIndex: number): void {
+    this.moveRuleItem(ruleIndex, ruleIndex - 1);
+  }
+
+  moveDown(ruleIndex: number): void {
+    this.moveRuleItem(ruleIndex, ruleIndex + 1);
+  }
+
+  moveRuleItem(currentIndex: number, newIndex: number): void {
+    moveItemInArray(this.feedbackRules, currentIndex, newIndex);
     this.ProjectService.nodeChanged();
   }
 
