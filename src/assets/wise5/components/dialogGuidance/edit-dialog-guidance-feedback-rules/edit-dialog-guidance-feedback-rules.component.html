@@ -21,13 +21,13 @@
           <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px" fxFlex>
             <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
               <mat-label i18n>Expression</mat-label>
-              <input matInput [(ngModel)]="rule.expression" (ngModelChange)='inputChanged.next()' />
+              <input matInput [(ngModel)]="rule.expression" (ngModelChange)='inputChanged.next($event)' />
             </mat-form-field>
             <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
               <mat-label i18n>Feedback</mat-label>
               <textarea matInput
                   [(ngModel)]="rule.feedback"
-                  (ngModelChange)='inputChanged.next()'
+                  (ngModelChange)='inputChanged.next($event)'
                   i18n-placeholder
                   cdkTextareaAutosize>
                     </textarea>
