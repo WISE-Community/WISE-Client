@@ -3478,23 +3478,77 @@ class DataExportController {
       if (response.user === 'Student') {
         revisionCounter++;
         revisionLabel = `${this.dialogGuidanceRevisionLabel} ${revisionCounter}`;
-        row[columnNameToNumber[`${this.dialogGuidanceStudentResponseLabel} ${revisionLabel}`]] =
-          response.text;
+        this.addDialogGuidanceStudentResponseToRow(
+          row,
+          columnNameToNumber,
+          revisionLabel,
+          response.text
+        );
       } else if (response.user === 'Computer') {
-        for (const idea of response.ideas) {
-          row[
-            columnNameToNumber[`${this.dialogGuidanceIdeaLabel} ${idea.name} ${revisionLabel}`]
-          ] = idea.detected ? 1 : 0;
+        if (response.ideas != null) {
+          this.addDialogGuidanceIdeasToRow(row, columnNameToNumber, revisionLabel, response.ideas);
         }
-        for (const score of response.scores) {
-          row[columnNameToNumber[`${this.dialogGuidanceScoreLabel} ${score.id} ${revisionLabel}`]] =
-            score.score;
+        if (response.scores != null) {
+          this.addDialogGuidanceScoresToRow(
+            row,
+            columnNameToNumber,
+            revisionLabel,
+            response.scores
+          );
         }
-        row[columnNameToNumber[`${this.dialogGuidanceComputerResponseLabel} ${revisionLabel}`]] =
-          response.text;
+        this.addDialogGuidanceComputerResponseToRow(
+          row,
+          columnNameToNumber,
+          revisionLabel,
+          response.text
+        );
       }
     }
     return row;
+  }
+
+  addDialogGuidanceStudentResponseToRow(
+    row: any[],
+    columnNameToNumber: any,
+    revisionLabel: string,
+    text: string
+  ): void {
+    row[columnNameToNumber[`${this.dialogGuidanceStudentResponseLabel} ${revisionLabel}`]] = text;
+  }
+
+  addDialogGuidanceIdeasToRow(
+    row: any[],
+    columnNameToNumber: any,
+    revisionLabel: string,
+    ideas: any[]
+  ): void {
+    for (const ideaObject of ideas) {
+      row[
+        columnNameToNumber[`${this.dialogGuidanceIdeaLabel} ${ideaObject.name} ${revisionLabel}`]
+      ] = ideaObject.detected ? 1 : 0;
+    }
+  }
+
+  addDialogGuidanceScoresToRow(
+    row: any[],
+    columnNameToNumber: any,
+    revisionLabel: string,
+    scores: any[]
+  ): void {
+    for (const scoreObject of scores) {
+      row[
+        columnNameToNumber[`${this.dialogGuidanceScoreLabel} ${scoreObject.id} ${revisionLabel}`]
+      ] = scoreObject.score;
+    }
+  }
+
+  addDialogGuidanceComputerResponseToRow(
+    row: any[],
+    columnNameToNumber: any,
+    revisionLabel: string,
+    text: string
+  ): void {
+    row[columnNameToNumber[`${this.dialogGuidanceComputerResponseLabel} ${revisionLabel}`]] = text;
   }
 
   showDownloadingExportMessage() {
