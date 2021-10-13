@@ -33,6 +33,8 @@ describe('EditDialogGuidanceFeedbackRulesComponent', () => {
 
   addNewRule();
   deleteRule();
+  moveUp();
+  moveDown();
 });
 
 function addNewRule() {
@@ -56,6 +58,26 @@ function deleteRule() {
     it('should delete rule at specified index', () => {
       component.deleteRule(0);
       expectFeedbackExpressions(['idea2']);
+      expect(nodeChangedSpy).toHaveBeenCalled();
+    });
+  });
+}
+
+function moveUp() {
+  describe('moveUp()', () => {
+    it('should move rule one position up in order (towards the beginning of the rules array)', () => {
+      component.moveUp(1);
+      expectFeedbackExpressions(['idea2', 'idea1']);
+      expect(nodeChangedSpy).toHaveBeenCalled();
+    });
+  });
+}
+
+function moveDown() {
+  describe('moveDown()', () => {
+    it('should move rule one position down in order (towards the end of the rules array)', () => {
+      component.moveDown(0);
+      expectFeedbackExpressions(['idea2', 'idea1']);
       expect(nodeChangedSpy).toHaveBeenCalled();
     });
   });
