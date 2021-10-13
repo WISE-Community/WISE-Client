@@ -40,8 +40,8 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
     this.moveRuleItem(ruleIndex, ruleIndex + 1);
   }
 
-  moveRuleItem(currentIndex: number, newIndex: number): void {
-    moveItemInArray(this.feedbackRules, currentIndex, newIndex);
+  moveRuleItem(previousIndex: number, currentIndex: number): void {
+    moveItemInArray(this.feedbackRules, previousIndex, currentIndex);
     this.ProjectService.nodeChanged();
   }
 

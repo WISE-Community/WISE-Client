@@ -10,7 +10,7 @@
       <mat-icon>add_circle</mat-icon>
     </button>
   </h5>
-  <ul cdkDropList [cdkDropListData]="feedbackRules" (cdkDropListDropped)="drop($event)">
+  <ul cdkDropList [cdkDropListData]="feedbackRules" (cdkDropListDropped)="drop($event)" cdkScrollable>
     <ng-container *ngFor="let rule of feedbackRules; let ruleIndex = index; let first = first; let last = last">
       <li cdkDrag>
         <mat-card class="rule" fxLayout="row wrap" fxLayoutGap="8px">
