@@ -83,6 +83,7 @@ function createComponentContent() {
     id: 'i64ex48j1z',
     type: 'DialogGuidance',
     prompt: '',
+    feedbackRules: [],
     showSaveButton: false,
     showSubmitButton: false
   };
