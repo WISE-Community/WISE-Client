@@ -14676,7 +14676,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">32</context>
         </context-group>
-        <target state="needs-translation">Student Data Type</target>
+        <target state="translated">Öğrenci Veri Türü</target>
       </trans-unit>
       <trans-unit id="a0a2a44bfb782424826e21b4361cf4d693e437da" datatype="html">
         <source> Responses </source>
@@ -14732,7 +14732,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">62</context>
         </context-group>
-        <target state="needs-translation">Chart Type</target>
+        <target state="translated">Grafik Tipi</target>
       </trans-unit>
       <trans-unit id="a329e4b5f2d94e592dea582612ccedd868fb979f" datatype="html">
         <source> Bar </source>
@@ -15030,7 +15030,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-connected-components/edit-table-connected-components.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Merge</target>
+        <target state="translated">Birleştir</target>
       </trans-unit>
       <trans-unit id="0d03d787306410e77e4703cc6da4486836dec357" datatype="html">
         <source>Append</source>
@@ -15038,7 +15038,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-connected-components/edit-table-connected-components.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">Append</target>
+        <target state="translated">Ekle</target>
       </trans-unit>
       <trans-unit id="c93a01b0aeb9d67adcad2a85effefe92d91bd986" datatype="html">
         <source> Only Show Data At Mouse X Position </source>
@@ -15210,7 +15210,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
           <context context-type="linenumber">49</context>
         </context-group>
-        <target state="needs-translation">Cell content</target>
+        <target state="translated">Hücre içeriği</target>
       </trans-unit>
       <trans-unit id="c1ac7b8d0d0a0d2e7452433c930cef085486540c" datatype="html">
         <source>Graph Type</source>
@@ -15286,7 +15286,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
           <context context-type="linenumber">71</context>
         </context-group>
-        <target state="needs-translation">Choose the table data you want to graph:</target>
+        <target state="translated">Grafik oluşturmak istediğiniz tablo verilerini seçin:</target>
       </trans-unit>
       <trans-unit id="310b6ade177e4fb8a9f30579b05696c0122f08a6" datatype="html">
         <source>(None)</source>
@@ -15346,7 +15346,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
           <context context-type="linenumber">187</context>
         </context-group>
-        <target state="needs-translation">The student will see a graph of their individual data here.</target>
+        <target state="translated">Öğrenci burada kendi bireysel verilerinin bir grafiğini görecektir.</target>
       </trans-unit>
       <trans-unit id="2142002953999044695" datatype="html">
         <source>Class Responses</source>
@@ -15394,7 +15394,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component.ts</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">Insert WISE Link</target>
+        <target state="translated">WISE Bağlantısını Ekle</target>
       </trans-unit>
       <trans-unit id="8455204924704616723" datatype="html">
         <source>File</source>
@@ -15514,7 +15514,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Expand or collapse lesson content</target>
+        <target state="translated">Ders içeriğini genişlet veya daralt</target>
       </trans-unit>
       <trans-unit id="21b4a27510afaf13943eed74935b8a88b69725d4" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{nodeStatus.progress.completionPct}}"/>% completed</source>
