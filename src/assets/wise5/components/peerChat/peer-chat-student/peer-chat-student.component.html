@@ -1,8 +1,34 @@
 <component-header [componentContent]="componentContent"></component-header>
-<peer-chat-messages [peerChatMessages]="peerChatMessages"></peer-chat-messages>
-<textarea [(ngModel)]="messageText"></textarea>
-<button mat-raised-button
-    color="primary"
-    (click)="submitStudentResponse()">
-  Submit
-</button>
+<mat-card class="mat-elevation-z2">
+  <div *ngIf="isPeerChatWorkgroupsResponseReceived && !isPeerChatWorkgroupsAvailable"
+      fxLayoutAlign="center center"
+      i18n>
+    Peer Chat Not Available Yet
+  </div>
+  <div *ngIf="isPeerChatWorkgroupsAvailable">
+    <peer-chat-messages [peerChatMessages]="peerChatMessages" [myWorkgroupId]="myWorkgroupId">
+    </peer-chat-messages>
+    <div fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="8px">
+      <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
+        <textarea matInput
+            cdkTextareaAutosize
+            placeholder="Add response..."
+            i18n-placeholder
+            [(ngModel)]="messageText"
+            (ngModelChange)="studentResponseChanged()"
+            [disabled]="isDisabled"
+            (keypress)="studentKeyPressed($event)">
+        </textarea>
+      </mat-form-field>
+      <button mat-flat-button
+          color="primary"
+          (click)="submitStudentResponse()"
+          [disabled]="!isSubmitEnabled"
+          i18n>
+        Send
+      </button>
+    </div>
+  </div>
+</mat-card>

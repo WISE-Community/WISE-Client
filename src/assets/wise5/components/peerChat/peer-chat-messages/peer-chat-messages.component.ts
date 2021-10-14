@@ -8,6 +8,9 @@ import { PeerChatMessage } from '../PeerChatMessage';
 })
 export class PeerChatMessagesComponent implements OnInit {
   @Input()
+  myWorkgroupId: number;
+
+  @Input()
   peerChatMessages: PeerChatMessage[] = [];
 
   constructor() {}

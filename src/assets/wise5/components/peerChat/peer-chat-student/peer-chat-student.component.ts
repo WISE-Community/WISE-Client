@@ -19,8 +19,11 @@ import { PeerChatService } from '../peerChatService';
   styleUrls: ['./peer-chat-student.component.scss']
 })
 export class PeerChatStudentComponent extends ComponentStudent {
+  isPeerChatWorkgroupsResponseReceived: boolean = false;
   isPeerChatWorkgroupsAvailable: boolean = false;
+  isSubmitEnabled: boolean = false;
   messageText: string;
+  myWorkgroupId: number;
   peerChatMessages: any[] = [];
   peerChatWorkgroupIds: number[] = [];
   peerChatWorkgroups: any[] = [];
@@ -54,6 +57,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.myWorkgroupId = this.ConfigService.getWorkgroupId();
     this.requestChatWorkgroups();
   }
 
@@ -67,6 +71,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
         (err) => {
           console.log('error');
           console.log(err);
+          this.isPeerChatWorkgroupsResponseReceived = true;
           const workgroupIds = [1000, 2000];
           this.setPeerChatWorkgroups(workgroupIds);
           this.getPeerChatMessages(workgroupIds);
@@ -143,6 +148,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     );
     this.response = this.messageText;
     this.clearStudentMessage();
+    this.studentResponseChanged();
     this.emitComponentSubmitTriggered();
   }
 
@@ -172,5 +178,18 @@ export class PeerChatStudentComponent extends ComponentStudent {
       );
     });
     return promise;
+  }
+
+  studentResponseChanged(): void {
+    this.isSubmitEnabled = this.messageText.length > 0;
+  }
+
+  studentKeyPressed(event: any): void {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      if (this.isSubmitEnabled) {
+        this.submitStudentResponse();
+      }
+    }
   }
 }

@@ -1,0 +1,7 @@
+@import '~style/abstracts/variables', '~style/abstracts/functions';
+
+.mat-card {
+  padding: 8px;
+  margin-top: 16px;
+  max-width: breakpoint('sm.min');
+}

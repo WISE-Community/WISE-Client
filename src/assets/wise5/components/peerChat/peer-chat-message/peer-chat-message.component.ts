@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ConfigService } from '../../../services/configService';
 import { PeerChatMessage } from '../PeerChatMessage';
 
 @Component({
@@ -8,17 +9,24 @@ import { PeerChatMessage } from '../PeerChatMessage';
 })
 export class PeerChatMessageComponent implements OnInit {
   @Input()
+  myWorkgroupId: number;
+
+  @Input()
   peerChatMessage: PeerChatMessage;
 
+  avatarColor: string;
+  isMyMessage: boolean;
   text: string;
   timestamp: any;
   workgroupId: number;
 
-  constructor() {}
+  constructor(protected ConfigService: ConfigService) {}
 
   ngOnInit(): void {
     this.text = this.peerChatMessage.text;
     this.timestamp = new Date(this.peerChatMessage.timestamp);
     this.workgroupId = this.peerChatMessage.workgroupId;
+    this.isMyMessage = this.myWorkgroupId === this.workgroupId;
+    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.myWorkgroupId);
   }
 }
