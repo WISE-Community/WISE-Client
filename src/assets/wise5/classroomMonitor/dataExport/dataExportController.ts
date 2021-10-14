@@ -826,6 +826,7 @@ class DataExportController {
                  */
                 cell = 'Data Too Large';
               }
+              cell = cell.replace(/"/g, '""');
               cell = '"' + cell + '"';
             }
             csvString += cell + ',';
