@@ -4710,7 +4710,7 @@
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">Free, standards-aligned, and research-based inquiry curricula that address <x id="START_LINK" ctype="x-a" equiv-text="this.ngssLink.startTag"/>NGSS 3D proficiency<x id="CLOSE_LINK" ctype="x-a" equiv-text="this.ngssLink.closeTag"/></target>
+        <target state="translated">Currícula gratuita basada en indagación, alineada a los estándares <x id="START_LINK" ctype="x-a" equiv-text="this.ngssLink.startTag"/>NGSS 3D proficiency<x id="CLOSE_LINK" ctype="x-a" equiv-text="this.ngssLink.closeTag"/></target>
       </trans-unit>
       <trans-unit id="2488461351187724080" datatype="html">
         <source>WISE unit on laptop</source>
@@ -4718,7 +4718,7 @@
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
           <context context-type="linenumber">60</context>
         </context-group>
-        <target state="needs-translation">WISE unit on laptop</target>
+        <target state="translated">Unidad de WISE en laptop</target>
       </trans-unit>
       <trans-unit id="6104474954962536234" datatype="html">
         <source>Interactive scientific models plus hands-on activities, personalized guidance, and rich embedded assessments</source>
@@ -6740,7 +6740,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">82</context>
         </context-group>
-        <target state="needs-translation">You can help us protect against unauthorized access to your account by choosing a strong password and keeping your password secret at all times.</target>
+        <target state="translated">Puede ayudarnos a proteger el acceso no autorizado a su cuenta eligiendo una contraseña segura y manteniendo su contraseña en secreto en todo momento.</target>
       </trans-unit>
       <trans-unit id="5af2549b2c02c290b49d68890ec5308298eea08a" datatype="html">
         <source>6. State &amp; Federal Laws</source>
@@ -6748,7 +6748,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">86</context>
         </context-group>
-        <target state="needs-translation">6. State &amp; Federal Laws</target>
+        <target state="translated">6. Leyes Estatales &amp; Federales</target>
       </trans-unit>
       <trans-unit id="55c5e54bedb1da154bb6679ee9574546eafb6198" datatype="html">
         <source>California Privacy Rights for Minors</source>
@@ -6756,7 +6756,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">88</context>
         </context-group>
-        <target state="needs-translation">California Privacy Rights for Minors</target>
+        <target state="translated">Derechos sobre privacidad para menores de California</target>
       </trans-unit>
       <trans-unit id="07bee5a94bc5a2dd9e6ae5a3718009e22c1e2308" datatype="html">
         <source>If you live in California and are under the age of 18 or the parent or legal guardian of a student under the age of 18, you may request the removal of your information from our site. When you request removal of your information, we will remove all your personal information to the best of our ability. Please note that we may not be able to remove all de-identified information or pieces of content stored in our databases and we may not remove content that we are required to retain under applicable federal and state laws. If you would like to request removal of your or your child&apos;s content or information, please contact us at https://wise.berkeley.edu/contact for assistance or you can delete specific information from you or your child&apos;s account.</source>
