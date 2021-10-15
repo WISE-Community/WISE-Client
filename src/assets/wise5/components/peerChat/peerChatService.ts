@@ -62,4 +62,25 @@ export class PeerChatService extends ComponentService {
     const requestChatMessagesURL = '/api/peer/messages';
     return this.http.get(requestChatMessagesURL, { headers: headers, params: params });
   }
+
+  retrievePeerWorkFromComponent(
+    nodeId: string,
+    componentId: string,
+    workgroupIds: number[]
+  ): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    if (this.ConfigService.isPreview()) {
+      this.ConfigService.config.runId = 1;
+    }
+    let params = new HttpParams()
+      .set('componentId', componentId)
+      .set('nodeId', nodeId)
+      .set('periodId', this.ConfigService.getPeriodId())
+      .set('runId', this.ConfigService.getRunId());
+    workgroupIds.forEach((workgroupId: number) => {
+      params = params.append('workgroupIds', `${workgroupId}`);
+    });
+    const requestPeerWorkURL = '/api/peer/work';
+    return this.http.get(requestPeerWorkURL, { headers: headers, params: params });
+  }
 }

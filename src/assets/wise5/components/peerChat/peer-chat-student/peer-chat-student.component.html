@@ -1,4 +1,74 @@
 <component-header [componentContent]="componentContent"></component-header>
+<div *ngIf="isShowWorkFromAnotherComponent"
+    fxLayout="row wrap"
+    fxLayoutAlign="space-around center">
+  <mat-card *ngFor="let peerChatWorkgroupId of peerChatWorkgroupIds"
+      class="mat-elevation-z2 work-from-another-component">
+    <div fxLayoutAlign="start center" fxLayoutGap="10px">
+      <mat-icon class="mat-30"
+          [ngStyle]="{'color': avatarColor}"
+          aria-label="Me"
+          i18n-aria-label
+          matTooltip="Me"
+          matTooltipPosition="above"
+          i18n-matTooltip>
+        account_circle
+      </mat-icon>
+      <span>Workgroup {{ peerChatWorkgroupId }}</span>
+    </div>
+    <div *ngIf="peerWorkFromAnotherComponent[peerChatWorkgroupId] != null"
+        [ngSwitch]="peerWorkFromAnotherComponent[peerChatWorkgroupId].componentType">
+      <concept-map-grading *ngSwitchCase="'ConceptMap'"
+          [nodeId]="showWorkNodeId"
+          [componentId]="showWorkComponentId"
+          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+          [workgroupId]="peerChatWorkgroupId">
+      </concept-map-grading>
+      <draw-grading *ngSwitchCase="'Draw'"
+          [nodeId]="showWorkNodeId"
+          [componentId]="showWorkComponentId"
+          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+          [workgroupId]="peerChatWorkgroupId">
+      </draw-grading>
+      <graph-grading *ngSwitchCase="'Graph'"
+          [nodeId]="showWorkNodeId"
+          [componentId]="showWorkComponentId"
+          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+          [workgroupId]="peerChatWorkgroupId">
+      </graph-grading>
+      <label-grading *ngSwitchCase="'Label'"
+          [nodeId]="showWorkNodeId"
+          [componentId]="showWorkComponentId"
+          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+          [workgroupId]="peerChatWorkgroupId">
+      </label-grading>
+      <match-grading *ngSwitchCase="'Match'"
+          [nodeId]="showWorkNodeId"
+          [componentId]="showWorkComponentId"
+          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+          [workgroupId]="peerChatWorkgroupId">
+      </match-grading>
+      <multiple-choice-grading *ngSwitchCase="'MultipleChoice'"
+          [nodeId]="showWorkNodeId"
+          [componentId]="showWorkComponentId"
+          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+          [workgroupId]="peerChatWorkgroupId">
+      </multiple-choice-grading>
+      <open-response-grading *ngSwitchCase="'OpenResponse'"
+          [nodeId]="showWorkNodeId"
+          [componentId]="showWorkComponentId"
+          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+          [workgroupId]="peerChatWorkgroupId">
+      </open-response-grading>
+      <table-grading *ngSwitchCase="'Table'"
+          [nodeId]="showWorkNodeId"
+          [componentId]="showWorkComponentId"
+          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+          [workgroupId]="peerChatWorkgroupId">
+      </table-grading>
+    </div>
+  </mat-card>
+</div>
 <mat-card class="mat-elevation-z2">
   <div *ngIf="isPeerChatWorkgroupsResponseReceived && !isPeerChatWorkgroupsAvailable"
       fxLayoutAlign="center center"
