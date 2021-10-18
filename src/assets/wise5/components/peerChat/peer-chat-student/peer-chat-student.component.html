@@ -1,7 +1,8 @@
 <component-header [componentContent]="componentContent"></component-header>
 <div *ngIf="isShowWorkFromAnotherComponent"
     fxLayout="row wrap"
-    fxLayoutAlign="space-around center">
+    fxLayoutAlign="space-around center"
+    class="show-work-from-another-component-div">
   <mat-card *ngFor="let peerChatWorkgroupId of peerChatWorkgroupIds"
       class="mat-elevation-z2 work-from-another-component">
     <div fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -69,13 +70,19 @@
     </div>
   </mat-card>
 </div>
-<mat-card class="mat-elevation-z2">
-  <div *ngIf="isPeerChatWorkgroupsResponseReceived && !isPeerChatWorkgroupsAvailable"
-      fxLayoutAlign="center center"
-      i18n>
+<component-header *ngIf="secondPromptComponentContent"
+    [componentContent]="secondPromptComponentContent">
+</component-header>
+<div *ngIf="isPeerChatWorkgroupsResponseReceived && !isPeerChatWorkgroupsAvailable">
+  <div fxLayoutAlign="center center" i18n>
     Peer Chat Not Available Yet
   </div>
-  <div *ngIf="isPeerChatWorkgroupsAvailable">
+</div>
+<div *ngIf="isPeerChatWorkgroupsAvailable"
+    fxLayout="row wrap"
+    fxLayoutAlign="start start"
+    fxLayoutGap="20px">
+  <mat-card class="mat-elevation-z2">
     <peer-chat-messages [peerChatMessages]="peerChatMessages" [myWorkgroupId]="myWorkgroupId">
     </peer-chat-messages>
     <div fxLayout="row"
@@ -100,5 +107,15 @@
         Send
       </button>
     </div>
-  </div>
-</mat-card>
+  </mat-card>
+  <mat-card *ngIf="componentContent.questionBank.length > 0" class="question-bank-card">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="question-bank-label">
+      <mat-icon>help</mat-icon>
+      <span i18n>Question Bank</span>
+    </div>
+    <div *ngFor="let question of componentContent.questionBank"
+        class="question">
+      {{ question }}
+    </div>
+  </mat-card>
+</div>

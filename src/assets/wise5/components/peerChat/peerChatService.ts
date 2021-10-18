@@ -24,6 +24,11 @@ export class PeerChatService extends ComponentService {
   createComponent(): any {
     const component: any = super.createComponent();
     component.type = 'PeerChat';
+    component.logic = [{ name: 'random' }];
+    component.logicThresholdCount = 0;
+    component.logicThresholdPercent = 0;
+    component.maxMembershipCount = 2;
+    component.questionBank = [];
     return component;
   }
 

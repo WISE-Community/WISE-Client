@@ -33,6 +33,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   peerWorkFromAnotherComponent: any = {};
   requestTimeout: number = 10000;
   response: string;
+  secondPromptComponentContent: any;
   showWorkComponentId: string;
   showWorkNodeId: string;
 
@@ -73,6 +74,11 @@ export class PeerChatStudentComponent extends ComponentStudent {
         this.showWorkComponentId
       ) != null;
     this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.myWorkgroupId);
+    if (this.componentContent.secondPrompt != null && this.componentContent.secondPrompt != '') {
+      this.secondPromptComponentContent = {
+        prompt: this.componentContent.secondPrompt
+      };
+    }
     this.requestChatWorkgroups();
   }
 
@@ -87,7 +93,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
           console.log('error');
           console.log(err);
           this.isPeerChatWorkgroupsResponseReceived = true;
-          const workgroupIds = [1000, 2000, 3000];
+          // const workgroupIds = [1000, 2000, 3000];
+          const workgroupIds = [1000, 2000];
           this.setPeerChatWorkgroups(workgroupIds);
           if (this.isShowWorkFromAnotherComponent) {
             this.getPeerWorkFromAnotherComponent();
@@ -135,12 +142,16 @@ export class PeerChatStudentComponent extends ComponentStudent {
           componentState1.workgroupId = 1000;
           const componentState2 = JSON.parse(JSON.stringify(componentState));
           componentState2.workgroupId = 2000;
-          const componentState3 = JSON.parse(JSON.stringify(componentState));
-          componentState3.workgroupId = 3000;
+          // const componentState3 = JSON.parse(JSON.stringify(componentState));
+          // componentState3.workgroupId = 3000;
+          // this.peerWorkFromAnotherComponent = {
+          //   1000: componentState1,
+          //   2000: componentState2,
+          //   3000: componentState3
+          // };
           this.peerWorkFromAnotherComponent = {
             1000: componentState1,
-            2000: componentState2,
-            3000: componentState3
+            2000: componentState2
           };
         }
       );
