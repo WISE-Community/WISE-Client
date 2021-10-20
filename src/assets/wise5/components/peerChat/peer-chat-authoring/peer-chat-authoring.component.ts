@@ -78,15 +78,21 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   }
 
   showWorkNodeIdChanged(): void {
-    const components = this.ProjectService.getComponentsByNodeId(
-      this.authoringComponentContent.showWorkNodeId
+    this.tryUpdateComponentId(
+      this.authoringComponentContent,
+      'showWorkNodeId',
+      'showWorkComponentId'
     );
-    if (components.length === 0) {
-      delete this.authoringComponentContent.showWorkComponentId;
-    } else if (components.length === 1) {
-      this.authoringComponentContent.showWorkComponentId = components[0].id;
-    }
     this.componentChanged();
+  }
+
+  tryUpdateComponentId(object: any, nodeIdFieldName: string, componentIdFieldName: string): void {
+    const components = this.ProjectService.getComponentsByNodeId(object[nodeIdFieldName]);
+    if (components.length === 0) {
+      delete object[componentIdFieldName];
+    } else if (components.length === 1) {
+      object[componentIdFieldName] = components[0].id;
+    }
   }
 
   addLogic(): void {
@@ -103,6 +109,19 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
       this.authoringComponentContent.logic.splice(index, 1);
       this.componentChanged();
     }
+  }
+
+  logicNameChanged(logicObject: any): void {
+    if (logicObject.name === 'random') {
+      delete logicObject.nodeId;
+      delete logicObject.componentId;
+    }
+    this.componentChanged();
+  }
+
+  logicNodeIdChanged(logicObject: any): void {
+    this.tryUpdateComponentId(logicObject, 'nodeId', 'componentId');
+    this.componentChanged();
   }
 
   addQuestion(): void {
