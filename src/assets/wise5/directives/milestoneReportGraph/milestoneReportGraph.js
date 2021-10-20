@@ -105,7 +105,7 @@ class MilestoneReportGraphController {
 
   getDataFromLocations(data, locations) {
     const dataFromLocations = [];
-    locations.forEach((location) => { dataFromLocations.push(data[location]) });
+    locations.forEach((location) => { dataFromLocations.push(data[location - 1]) });
     return dataFromLocations;
   }
 
