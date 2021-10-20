@@ -78,7 +78,8 @@
           *ngIf="component.type === 'PeerChat'"
           [nodeId]="nodeId"
           [componentId]="component.id"
-          [componentState]="latestComponentState">
+          [componentState]="latestComponentState"
+          [workgroupId]="workgroupId">
       </peer-chat-grading>
       <table-grading
           *ngIf="component.type === 'Table'"

@@ -5,6 +5,7 @@ import { AudioOscillatorGrading } from '../../assets/wise5/components/audioOscil
 import { DialogGuidanceGradingComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-grading/dialog-guidance-grading.component';
 import { DiscussionGrading } from '../../assets/wise5/components/discussion/discussion-grading/discussion-grading.component';
 import { EmbeddedGrading } from '../../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
+import { PeerChatGradingComponent } from '../../assets/wise5/components/peerChat/peer-chat-grading/peer-chat-grading.component';
 import { AngularJSModule } from '../common-hybrid-angular.module';
 
 @NgModule({
@@ -13,7 +14,8 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     AudioOscillatorGrading,
     DialogGuidanceGradingComponent,
     DiscussionGrading,
-    EmbeddedGrading
+    EmbeddedGrading,
+    PeerChatGradingComponent
   ],
   imports: [AngularJSModule, HighchartsChartModule],
   exports: [
@@ -21,7 +23,8 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     AudioOscillatorGrading,
     DialogGuidanceGradingComponent,
     DiscussionGrading,
-    EmbeddedGrading
+    EmbeddedGrading,
+    PeerChatGradingComponent
   ]
 })
 export class ComponentGradingModule {}

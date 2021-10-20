@@ -27,7 +27,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   isSubmitEnabled: boolean = false;
   messageText: string;
   myWorkgroupId: number;
-  peerChatMessages: any[] = [];
+  peerChatMessages: PeerChatMessage[] = [];
   peerChatWorkgroupIds: number[] = [];
   peerChatWorkgroups: any[] = [];
   peerWorkFromAnotherComponent: any = {};
@@ -99,7 +99,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
           if (this.isShowWorkFromAnotherComponent) {
             this.getPeerWorkFromAnotherComponent();
           }
-          this.getPeerChatMessages(workgroupIds);
+          this.getPeerChatMessages(this.workgroupId);
         }
       );
   }
@@ -157,8 +157,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
       );
   }
 
-  getPeerChatMessages(workgroupIds: number[]): void {
-    this.PeerChatService.retrievePeerChatMessages(this.nodeId, this.componentId, workgroupIds)
+  getPeerChatMessages(workgroupId: number): void {
+    this.PeerChatService.retrievePeerChatMessages(this.nodeId, this.componentId, workgroupId)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         () => {
@@ -166,58 +166,18 @@ export class PeerChatStudentComponent extends ComponentStudent {
         },
         () => {
           console.log('error');
-          this.setPeerChatMessages(this.createDummyComponentStates());
+          this.setPeerChatMessages(this.PeerChatService.createDummyComponentStates());
         }
       );
-  }
-
-  createDummyComponentStates(): any[] {
-    return [
-      this.createDummyComponentState(
-        1000,
-        'PeerChat',
-        'This is workgroup id 1000 post',
-        1633731050531
-      ),
-      this.createDummyComponentState(
-        2000,
-        'PeerChat',
-        'This is workgroup id 2000 post',
-        1633731060531
-      )
-    ];
-  }
-
-  createDummyComponentState(
-    workgroupId: number,
-    componentType: string,
-    response: string,
-    timestamp: number
-  ): any {
-    return {
-      componentType: componentType,
-      studentData: {
-        attachments: [],
-        response: response
-      },
-      serverSaveTime: timestamp,
-      workgroupId: workgroupId
-    };
   }
 
   setPeerChatMessages(componentStates: any = []): void {
     this.peerChatMessages = [];
     componentStates.forEach((componentState: any) => {
-      this.peerChatMessages.push(this.convertComponentStateToPeerChatMessage(componentState));
+      this.peerChatMessages.push(
+        this.PeerChatService.convertComponentStateToPeerChatMessage(componentState)
+      );
     });
-  }
-
-  convertComponentStateToPeerChatMessage(componentState: any): PeerChatMessage {
-    return new PeerChatMessage(
-      componentState.workgroupId,
-      componentState.studentData.response,
-      componentState.serverSaveTime
-    );
   }
 
   submitStudentResponse(): void {

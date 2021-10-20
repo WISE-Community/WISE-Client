@@ -19,6 +19,7 @@ import './label/labelGradingComponentModule';
 import './match/matchGradingComponentModule';
 import './multipleChoice/multipleChoiceGradingComponentModule';
 import './openResponse/openResponseGradingComponentModule';
+import './peerChat/peerChatGradingComponentModule';
 import './table/tableGradingComponentModule';
 
 export default angular
@@ -35,6 +36,7 @@ export default angular
     'matchGradingComponentModule',
     'multipleChoiceGradingComponentModule',
     'openResponseGradingComponentModule',
+    'peerChatGradingComponentModule',
     'tableGradingComponentModule'
   ])
   .directive(
