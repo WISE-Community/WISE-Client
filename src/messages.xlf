@@ -9655,35 +9655,35 @@ Are you ready to receive feedback on this answer?</source>
         <source> Show Amplitude Input </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">93,94</context>
+          <context context-type="linenumber">94,95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="267799b6a3f95111ede597b3bdfac1b68ca4755e" datatype="html">
         <source> Allow Student to Edit Amplitude </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">102,103</context>
+          <context context-type="linenumber">103,104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="584114dd79e680cb2262384fe8fc40c40149e9b3" datatype="html">
         <source>Oscillator Width (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dd7074cd090ce1bc8c04b82d5e86dc19e550819c" datatype="html">
         <source>Oscillator Height (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="45565845bc7e8f7999ef848f155e2c7d5dbb248e" datatype="html">
         <source>Oscillator Grid Size (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="69c3a88db813e4b07df0bd518f272ac529b2c3f1" datatype="html">
@@ -10423,6 +10423,13 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-connected-components/edit-concept-map-connected-components.component.ts</context>
           <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5596810972110629301" datatype="html">
+        <source>Thanks for submitting your response.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/DialogGuidanceFeedbackRuleEvaluator.ts</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="27e0b1e650bef276e8c29dd8d547e3fc8c4f833f" datatype="html">

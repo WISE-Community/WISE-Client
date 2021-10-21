@@ -139,8 +139,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   cRaterSuccessResponse(response: CRaterResponse): void {
     this.hideWaitingForComputerResponse();
-    this.addDialogResponse(this.createComputerDialogResponse(response));
     this.submitButtonClicked();
+    this.addDialogResponse(this.createComputerDialogResponse(response));
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     } else {
@@ -148,23 +148,21 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     }
   }
 
-  createComputerDialogResponse(response: any): ComputerDialogResponse {
+  createComputerDialogResponse(response: CRaterResponse): ComputerDialogResponse {
     const feedbackRule: FeedbackRule = this.feedbackRuleEvaluator.getFeedbackRule(response);
-    if (response.scores != null) {
-      return new ComputerDialogResponseMultipleScores(
-        feedbackRule.feedback,
-        response.scores,
-        response.ideas,
-        new Date().getTime()
-      );
-    } else if (response.score != null) {
-      return new ComputerDialogResponseSingleScore(
-        feedbackRule.feedback,
-        response.score,
-        response.ideas,
-        new Date().getTime()
-      );
-    }
+    return response.scores != null
+      ? new ComputerDialogResponseMultipleScores(
+          feedbackRule.feedback,
+          response.scores,
+          response.ideas,
+          new Date().getTime()
+        )
+      : new ComputerDialogResponseSingleScore(
+          feedbackRule.feedback,
+          response.score,
+          response.ideas,
+          new Date().getTime()
+        );
   }
 
   cRaterErrorResponse() {
