@@ -17,6 +17,8 @@ import { CRaterResponse } from '../CRaterResponse';
 import { ComputerDialogResponse } from '../ComputerDialogResponse';
 import { FeedbackRule } from '../FeedbackRule';
 import { DialogGuidanceFeedbackRuleEvaluator } from '../DialogGuidanceFeedbackRuleEvaluator';
+import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseMultipleScores';
+import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -137,16 +139,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   cRaterSuccessResponse(response: CRaterResponse): void {
     this.hideWaitingForComputerResponse();
-    this.incrementSubmitCounter();
-    const feedbackRule: FeedbackRule = this.feedbackRuleEvaluator.getFeedbackRule(response);
-    const computerDialogResponse = new ComputerDialogResponse(
-      feedbackRule.feedback,
-      response.scores,
-      response.ideas,
-      new Date().getTime()
-    );
-    this.addDialogResponse(computerDialogResponse);
-    this.studentDataChanged();
+    this.addDialogResponse(this.createComputerDialogResponse(response));
+    this.submitButtonClicked();
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     } else {
@@ -154,9 +148,29 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     }
   }
 
+  createComputerDialogResponse(response: any): ComputerDialogResponse {
+    const feedbackRule: FeedbackRule = this.feedbackRuleEvaluator.getFeedbackRule(response);
+    if (response.scores != null) {
+      return new ComputerDialogResponseMultipleScores(
+        feedbackRule.feedback,
+        response.scores,
+        response.ideas,
+        new Date().getTime()
+      );
+    } else if (response.score != null) {
+      return new ComputerDialogResponseSingleScore(
+        feedbackRule.feedback,
+        response.score,
+        response.ideas,
+        new Date().getTime()
+      );
+    }
+  }
+
   cRaterErrorResponse() {
     this.hideWaitingForComputerResponse();
     this.enableInput();
+    this.saveButtonClicked();
   }
 
   createComponentState(action: string): Promise<any> {
@@ -168,7 +182,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     componentState.componentType = 'DialogGuidance';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
-    componentState.isSubmit = true;
+    componentState.isSubmit = action === 'submit';
     const promise = new Promise((resolve, reject) => {
       this.createComponentStateAdditionalProcessing(
         { resolve: resolve, reject: reject },
@@ -181,5 +195,6 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   studentResponseChanged(): void {
     this.isSubmitEnabled = this.studentResponse.length > 0;
+    this.setIsSubmitDirty(this.isSubmitDirty || this.isSubmitEnabled);
   }
 }
