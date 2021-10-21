@@ -83,7 +83,7 @@ class MilestoneReportGraphController {
     const color = this.barColor ? this.barColor : this.defaultColor;
     const step = 100 / this.data.length / 100;
     let opacity = 0;
-    for (const componentData of this.data) {
+    for (const componentData of this.getDataToGraph(this.data, this.locations)) {
       opacity += step;
       const singleSeries = {
         name: this.UtilService.trimToLength(componentData.stepTitle, 26),
@@ -93,6 +93,20 @@ class MilestoneReportGraphController {
       series.push(singleSeries);
     }
     this.series = series;
+  }
+
+  getDataToGraph(data, locations) {
+    if (locations == null) {
+      return data;
+    } else {
+      return this.getDataFromLocations(data, locations);
+    }
+  }
+
+  getDataFromLocations(data, locations) {
+    const dataFromLocations = [];
+    locations.forEach((location) => { dataFromLocations.push(data[location - 1]) });
+    return dataFromLocations;
   }
 
   getComponentSeriesData(componentData) {
@@ -120,6 +134,7 @@ MilestoneReportGraphController.$inject = ['$filter', 'UtilService'];
 const MilestoneReportGraph = {
   bindings: {
     id: '@',
+    locations: '<',
     name: '@',
     titleColor: '@',
     barColor: '@',
