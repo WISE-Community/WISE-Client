@@ -88,22 +88,19 @@ export class PeerChatService extends ComponentService {
     return this.http.get(requestChatMessagesURL, { headers: headers, params: params });
   }
 
-  createDummyComponentStates(workgroupId: number = this.ConfigService.getWorkgroupId()): any[] {
-    return [
-      this.createDummyComponentState(
-        1000,
-        'PeerChat',
-        'This is workgroup id 1000 post',
-        1633731050531
-      ),
-      this.createDummyComponentState(
-        2000,
-        'PeerChat',
-        'This is workgroup id 2000 post',
-        1633731060531
-      ),
-      this.createDummyComponentState(workgroupId, 'PeerChat', 'This is my post', 1633731060531)
-    ];
+  createDummyComponentStates(workgroupIds: number[]): any[] {
+    const componentStates = [];
+    for (const workgroupId of workgroupIds) {
+      componentStates.push(
+        this.createDummyComponentState(
+          workgroupId,
+          'PeerChat',
+          `Hello this is ${workgroupId}`,
+          new Date().getTime()
+        )
+      );
+    }
+    return componentStates;
   }
 
   createDummyComponentState(

@@ -187,6 +187,10 @@ export abstract class ComponentStudent {
     return this.nodeId === object.nodeId && this.componentId === object.componentId;
   }
 
+  isWorkFromClassmate(componentState: any): boolean {
+    return componentState.workgroupId !== this.ConfigService.getWorkgroupId();
+  }
+
   subscribeToAttachStudentAsset() {
     this.subscriptions.add(
       this.StudentAssetService.attachStudentAsset$.subscribe(

@@ -311,10 +311,6 @@ export class DiscussionStudent extends ComponentStudent {
     );
   }
 
-  isWorkFromClassmate(componentState) {
-    return componentState.workgroupId !== this.ConfigService.getWorkgroupId();
-  }
-
   isWorkFromThisComponent(componentState) {
     return this.isForThisComponent(componentState);
   }

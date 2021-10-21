@@ -14,6 +14,7 @@ import * as angular from 'angular';
 export class StudentWebSocketService {
   runId: number;
   periodId: any;
+  stomp: any;
   workgroupId: number;
 
   constructor(
@@ -24,7 +25,20 @@ export class StudentWebSocketService {
     private ProjectService: ProjectService,
     private StudentDataService: StudentDataService,
     private TagService: TagService
-  ) {}
+  ) {
+    if (this.upgrade.$injector != null) {
+      this.initializeStomp();
+    }
+  }
+
+  initializeStomp() {
+    this.stomp = this.upgrade.$injector.get('$stomp');
+    this.stomp.setDebug(() => {});
+  }
+
+  getStomp() {
+    return this.stomp;
+  }
 
   initialize() {
     this.runId = this.ConfigService.getRunId();
@@ -88,6 +102,8 @@ export class StudentWebSocketService {
           this.goToStep(message.content);
         } else if (message.type === 'goToNextNode') {
           this.goToNextStep();
+        } else if (message.type === 'classmateStudentWork') {
+          this.StudentDataService.broadcastStudentWorkReceived(message.studentWork);
         }
       });
   }
@@ -110,5 +126,9 @@ export class StudentWebSocketService {
     this.ProjectService.replaceNode(node.id, node);
     this.ProjectService.parseProject();
     this.StudentDataService.updateNodeStatuses();
+  }
+
+  sendMessageToClassmate(workgroupId: number, message: any): void {
+    this.getStomp().send(`/topic/workgroup/${workgroupId}`, message);
   }
 }
