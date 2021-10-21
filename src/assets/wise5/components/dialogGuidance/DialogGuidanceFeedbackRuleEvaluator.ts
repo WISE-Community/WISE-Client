@@ -4,6 +4,7 @@ import { FeedbackRule } from './FeedbackRule';
 
 export class DialogGuidanceFeedbackRuleEvaluator {
   component: DialogGuidanceStudentComponent;
+  defaultFeedback = $localize`Thanks for submitting your response.`;
 
   constructor(component: DialogGuidanceStudentComponent) {
     this.component = component;
@@ -122,6 +123,12 @@ export class DialogGuidanceFeedbackRuleEvaluator {
   }
 
   private getDefaultRule(feedbackRules: FeedbackRule[]): FeedbackRule {
-    return feedbackRules.find((rule) => FeedbackRule.isDefaultRule(rule));
+    return (
+      feedbackRules.find((rule) => FeedbackRule.isDefaultRule(rule)) ||
+      Object.assign(new FeedbackRule(), {
+        expression: 'isDefault',
+        feedback: this.defaultFeedback
+      })
+    );
   }
 }
