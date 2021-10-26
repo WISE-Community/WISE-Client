@@ -6764,7 +6764,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">89</context>
         </context-group>
-        <target state="needs-translation">If you live in California and are under the age of 18 or the parent or legal guardian of a student under the age of 18, you may request the removal of your information from our site. When you request removal of your information, we will remove all your personal information to the best of our ability. Please note that we may not be able to remove all de-identified information or pieces of content stored in our databases and we may not remove content that we are required to retain under applicable federal and state laws. If you would like to request removal of your or your child's content or information, please contact us at https://wise.berkeley.edu/contact for assistance or you can delete specific information from you or your child's account.</target>
+        <target state="translated">Si vive en California y es menor de 18 años o el padre o tutor legal de un estudiante menor de 18 años, puede solicitar la eliminación de su información de nuestro sitio. Cuando solicite la eliminación de su información, eliminaremos toda su información personal lo mejor que podamos. Tenga en cuenta que es posible que no podamos eliminar toda la información anónima o partes de contenido almacenadas en nuestras bases de datos y es posible que no eliminemos el contenido que debemos retener según las leyes federales y estatales aplicables. Si desea solicitar la eliminación de su contenido o información o la de su hijo, comuníquese con nosotros en https://wise.berkeley.edu/contact para obtener ayuda o puede eliminar información específica de su cuenta o la de su hijo.</target>
       </trans-unit>
       <trans-unit id="a696cb5c99995dd1420b2dd62b2c6409888b9605" datatype="html">
         <source>Family Educational Rights and Privacy Act (FERPA)</source>
@@ -6772,7 +6772,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">91</context>
         </context-group>
-        <target state="needs-translation">Family Educational Rights and Privacy Act (FERPA)</target>
+        <target state="translated">Ley de Privacidad y Derechos Educativos de la Familia (FERPA)</target>
       </trans-unit>
       <trans-unit id="d961fdb0f1ecf8986fa129281805855cee5cca75" datatype="html">
         <source>We take care to be familiar with FERPA legislation and we take all possible measures to ensure your compliance with FERPA&apos;s requirements when you use WISE. We are confident that the protection of data outlined in this document satisfies its requirements.</source>
