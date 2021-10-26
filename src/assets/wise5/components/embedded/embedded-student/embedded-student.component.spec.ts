@@ -190,13 +190,17 @@ function createComponentStateObject() {
 function handleStudentWorkMessage() {
   describe('handleStudentWorkMessage', () => {
     it('should handle student work message', () => {
+      const broadcastComponentSaveTriggeredSpy = spyOn(
+        TestBed.inject(StudentDataService),
+        'broadcastComponentSaveTriggered'
+      );
       const spongebobStudentData = createStudentDataWithNameAndAge(spongebobName, spongebobAge);
       const messageEventData = {
         studentData: spongebobStudentData
       };
       component.handleStudentWorkMessage(messageEventData);
       expect(component.studentData).toEqual(spongebobStudentData);
-      expect(component.studentDataChanged).toHaveBeenCalled();
+      expect(broadcastComponentSaveTriggeredSpy).toHaveBeenCalled();
     });
   });
 }
