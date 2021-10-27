@@ -171,7 +171,6 @@ export class EmbeddedStudent extends ComponentStudent {
     if (messageEventData.annotations != null) {
       this.setAnnotations(messageEventData.annotations);
     }
-    this.studentDataChanged();
 
     // tell the parent node that this component wants to save
     this.StudentDataService.broadcastComponentSaveTriggered({

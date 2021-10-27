@@ -11,8 +11,8 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 
 class DataExportController {
   $translate: any;
-  availableComponentAllRevisionsDataExports = ['DialogGuidance', 'Discussion', 'Match'];
-  availableComponentLatestRevisionsDataExports = ['DialogGuidance', 'Match'];
+  allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match'];
+  allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Match'];
   componentExportTooltips = {};
   componentExportDefaultColumnNames = [
     '#',
@@ -51,6 +51,13 @@ class DataExportController {
   dialogGuidanceRevisionLabel: string = 'Revision';
   dialogGuidanceScoreLabel: string = 'Score';
   dialogGuidanceStudentResponseLabel: string = 'Student Response';
+  embeddedTableKeyToValue = {
+    co2saved: 'CO2 Saved',
+    current: 'Current',
+    future: 'Future',
+    kwhsaved: 'kWh Saved',
+    minutes: 'Minutes'
+  };
   exportStepSelectionType: string = 'exportAllSteps';
   exportType: string = null; // type of export: [latestWork, allWork, events]
   includeAnnotations: boolean;
@@ -2594,27 +2601,36 @@ class DataExportController {
     return compositeId;
   }
 
-  /**
-   * Check if a component type has a specific export implemented for it.
-   * @param componentType The component type.
-   * @return Whether the component type has a specific export.
-   */
-  canExportAllRevisionsForComponentDataType(componentType: string) {
-    for (const allowedComponentType of this.availableComponentAllRevisionsDataExports) {
-      if (componentType === allowedComponentType) {
-        return true;
-      }
-    }
-    return false;
+  canExportAllRevisionsForComponent(component: any) {
+    return this.canExportForComponent(component, this.allowedComponentTypesForAllRevisions);
   }
 
-  canExportLatestRevisionsForComponentDataType(componentType: string) {
-    for (const allowedComponentType of this.availableComponentLatestRevisionsDataExports) {
-      if (componentType === allowedComponentType) {
+  canExportLatestRevisionsForComponent(component: any) {
+    return this.canExportForComponent(component, this.allowedComponentTypesForLatestRevisions);
+  }
+
+  canExportForComponent(component: any, allowedComponentTypes: string[]): boolean {
+    for (const allowedComponentType of allowedComponentTypes) {
+      if (component.type === allowedComponentType) {
         return true;
       }
     }
-    return false;
+    return this.isEmbeddedTableComponentAndCanExport(component);
+  }
+
+  isEmbeddedTableComponentAndCanExport(component: any): boolean {
+    return (
+      component.type === 'Embedded' &&
+      (this.isDevicesEmbeddedTable(component) || this.isTransporationEmbeddedTable(component))
+    );
+  }
+
+  isDevicesEmbeddedTable(component: any): boolean {
+    return component.tags != null && component.tags.includes('devices-kwh-co2-table');
+  }
+
+  isTransporationEmbeddedTable(component: any): boolean {
+    return component.tags != null && component.tags.includes('transportation-co2-table');
   }
 
   /**
@@ -2640,6 +2656,8 @@ class DataExportController {
       this.exportDiscussionComponent(nodeId, component);
     } else if (component.type === 'DialogGuidance') {
       this.exportDialogGuidanceComponent(nodeId, component);
+    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
+      this.exportEmbeddedComponent(nodeId, component);
     }
   }
 
@@ -2654,6 +2672,8 @@ class DataExportController {
       this.exportMatchComponent(nodeId, component);
     } else if (component.type === 'DialogGuidance') {
       this.exportDialogGuidanceComponent(nodeId, component);
+    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
+      this.exportEmbeddedComponent(nodeId, component);
     }
   }
 
@@ -3435,6 +3455,23 @@ class DataExportController {
         componentRevisionCounter,
         componentState
       );
+    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
+      return this.generateEmbeddedComponentWorkRow(
+        component,
+        columnNames,
+        columnNameToNumber,
+        rowCounter,
+        workgroupId,
+        userId1,
+        userId2,
+        userId3,
+        studentName1,
+        studentName2,
+        studentName3,
+        periodName,
+        componentRevisionCounter,
+        componentState
+      );
     }
   }
 
@@ -3549,6 +3586,169 @@ class DataExportController {
     text: string
   ): void {
     row[columnNameToNumber[`${this.dialogGuidanceComputerResponseLabel} ${revisionLabel}`]] = text;
+  }
+
+  exportEmbeddedComponent(nodeId: string, component: any): void {
+    const components = this.getComponentsParam(nodeId, component.id);
+    this.DataExportService.retrieveStudentDataExport(components).then((result: any) => {
+      this.generateEmbeddedComponentExport(nodeId, component);
+    });
+  }
+
+  generateEmbeddedComponentExport(nodeId: string, component: any): void {
+    const rows = this.getExportEmbeddedComponentRows(nodeId, component);
+    const fileName = this.getComponentExportFileName(nodeId, component.id, 'embedded');
+    this.generateCSVFile(rows, fileName);
+    this.hideDownloadingExportMessage();
+  }
+
+  getExportEmbeddedComponentRows(nodeId: string, component: any): string[] {
+    const columnNames = [];
+    const columnNameToNumber = {};
+    let rows = [];
+    rows.push(this.generateEmbeddedComponentHeaderRow(component, columnNames, columnNameToNumber));
+    rows = rows.concat(
+      this.generateComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
+    );
+    return rows;
+  }
+
+  generateEmbeddedComponentHeaderRow(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any
+  ): string[] {
+    this.populateEmbeddedColumnNames(component, columnNames, columnNameToNumber);
+    return columnNames;
+  }
+
+  populateEmbeddedColumnNames(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any
+  ): void {
+    for (const defaultMatchColumnName of this.componentExportDefaultColumnNames) {
+      this.addColumnNameToColumnDataStructures(
+        columnNameToNumber,
+        columnNames,
+        defaultMatchColumnName
+      );
+    }
+    const componentStates = this.TeacherDataService.getComponentStatesByComponentId(component.id);
+    const items = this.getEmbeddedTableRowItems(component, componentStates);
+    const columnKeys = this.getEmbeddedTableColumnKeys(component);
+    if (this.isEmbeddedTableComponentAndCanExport(component)) {
+      for (const item of items) {
+        columnKeys.forEach((columnKey) => {
+          this.addColumnNameToColumnDataStructures(
+            columnNameToNumber,
+            columnNames,
+            `${item} ${this.embeddedTableKeyToValue[columnKey]}`
+          );
+        });
+      }
+    }
+  }
+
+  getEmbeddedTableColumnKeys(component: any): string[] {
+    let columnKeys = [];
+    if (this.isDevicesEmbeddedTable(component)) {
+      columnKeys = ['current', 'future', 'kwhsaved', 'co2saved'];
+    } else if (this.isTransporationEmbeddedTable(component)) {
+      columnKeys = ['minutes', 'current', 'future', 'co2saved'];
+    }
+    return columnKeys;
+  }
+
+  getEmbeddedTableRowItems(component: any, componentStates: any[]): string[] {
+    if (this.isDevicesEmbeddedTable(component)) {
+      return this.getDevices(componentStates);
+    } else if (this.isTransporationEmbeddedTable(component)) {
+      return this.getTransportationMethods(componentStates);
+    }
+  }
+
+  getDevices(componentStates: any[]): string[] {
+    const devices = [];
+    for (const row of componentStates[0].studentData.tableData) {
+      devices.push(row.appliance);
+    }
+    return devices;
+  }
+
+  getTransportationMethods(componentStates: any[]): string[] {
+    const transportation = [];
+    for (const row of componentStates[0].studentData.tableData) {
+      transportation.push(row.method);
+    }
+    return transportation;
+  }
+
+  generateEmbeddedComponentWorkRow(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    rowCounter: number,
+    workgroupId: number,
+    userId1: number,
+    userId2: number,
+    userId3: number,
+    studentName1: string,
+    studentName2: string,
+    studentName3: string,
+    periodName: string,
+    componentRevisionCounter: any,
+    embeddedComponentState: any
+  ): string[] {
+    // Populate the cells in the row that contain the information about the student, project, run,
+    // step, and component.
+    const row = this.createStudentWorkExportRow(
+      columnNames,
+      columnNameToNumber,
+      rowCounter,
+      workgroupId,
+      userId1,
+      userId2,
+      userId3,
+      studentName1,
+      studentName2,
+      studentName3,
+      periodName,
+      componentRevisionCounter,
+      embeddedComponentState
+    );
+    const columnKeys = this.getEmbeddedTableColumnKeys(component);
+    for (const studentTableDataRow of embeddedComponentState.studentData.tableData) {
+      const item = this.getEmbeddedTableRowItem(component, studentTableDataRow);
+      for (const column of columnKeys) {
+        this.addEmbeddedCellsToRow(
+          row,
+          columnNameToNumber,
+          item,
+          column,
+          studentTableDataRow[column]
+        );
+      }
+    }
+    return row;
+  }
+
+  getEmbeddedTableRowItem(component: any, studentTableDataRow: any): string {
+    if (this.isDevicesEmbeddedTable(component)) {
+      return studentTableDataRow.appliance;
+    } else if (this.isTransporationEmbeddedTable(component)) {
+      return studentTableDataRow.method;
+    }
+  }
+
+  addEmbeddedCellsToRow(
+    row: any[],
+    columnNameToNumber: any,
+    device: string,
+    column: string,
+    text: string
+  ): void {
+    row[columnNameToNumber[`${device} ${this.embeddedTableKeyToValue[column]}`]] = text;
   }
 
   showDownloadingExportMessage() {

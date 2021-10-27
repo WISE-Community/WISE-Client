@@ -176,14 +176,14 @@
                        class='componentHeader'>
                       <div>
                         {{::($index + 1)}}. {{::componentItem.type}}
-                        <md-button ng-if='dataExportController.canExportAllRevisionsForComponentDataType(componentItem.type)'
+                        <md-button ng-if='dataExportController.canExportAllRevisionsForComponent(componentItem)'
                             class='md-primary md-raised exportComponentDataButton'
                             ng-click='dataExportController.exportComponentAllRevisions(projectItem.node.id, componentItem)'>
                           <md-icon>file_download</md-icon>
                           <span>{{ ::'all' | translate }}</span>
                           <md-tooltip>{{ ::'downloadAllRevisionsExport' | translate }}</md-tooltip>
                         </md-button>
-                        <md-button ng-if='dataExportController.canExportLatestRevisionsForComponentDataType(componentItem.type)'
+                        <md-button ng-if='dataExportController.canExportLatestRevisionsForComponent(componentItem)'
                             class='md-primary md-raised exportComponentDataButton'
                             ng-click='dataExportController.exportComponentLatestRevisions(projectItem.node.id, componentItem)'>
                           <md-icon>file_download</md-icon>
