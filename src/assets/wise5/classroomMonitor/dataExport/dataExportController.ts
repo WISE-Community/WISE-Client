@@ -55,7 +55,8 @@ class DataExportController {
     co2saved: 'CO2 Saved',
     current: 'Current',
     future: 'Future',
-    kwhsaved: 'kWh Saved'
+    kwhsaved: 'kWh Saved',
+    minutes: 'Minutes'
   };
   exportStepSelectionType: string = 'exportAllSteps';
   exportType: string = null; // type of export: [latestWork, allWork, events]
@@ -2614,17 +2615,22 @@ class DataExportController {
         return true;
       }
     }
-    return this.isDataSpring20201EmbeddedComponentAndCanExport(component);
+    return this.isEmbeddedTableComponentAndCanExport(component);
   }
 
-  isDataSpring20201EmbeddedComponentAndCanExport(component: any) {
-    if (
+  isEmbeddedTableComponentAndCanExport(component: any): boolean {
+    return (
       component.type === 'Embedded' &&
-      component.tags != null &&
-      component.tags.includes('DataSpring20201')
-    ) {
-      return true;
-    }
+      (this.isDevicesEmbeddedTable(component) || this.isTransporationEmbeddedTable(component))
+    );
+  }
+
+  isDevicesEmbeddedTable(component: any): boolean {
+    return component.tags != null && component.tags.includes('devices-kwh-co2-table');
+  }
+
+  isTransporationEmbeddedTable(component: any): boolean {
+    return component.tags != null && component.tags.includes('transportation-co2-table');
   }
 
   /**
@@ -2650,7 +2656,7 @@ class DataExportController {
       this.exportDiscussionComponent(nodeId, component);
     } else if (component.type === 'DialogGuidance') {
       this.exportDialogGuidanceComponent(nodeId, component);
-    } else if (this.isDataSpring20201EmbeddedComponentAndCanExport(component)) {
+    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
     }
   }
@@ -2666,7 +2672,7 @@ class DataExportController {
       this.exportMatchComponent(nodeId, component);
     } else if (component.type === 'DialogGuidance') {
       this.exportDialogGuidanceComponent(nodeId, component);
-    } else if (this.isDataSpring20201EmbeddedComponentAndCanExport(component)) {
+    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
     }
   }
@@ -3449,7 +3455,7 @@ class DataExportController {
         componentRevisionCounter,
         componentState
       );
-    } else if (this.isDataSpring20201EmbeddedComponentAndCanExport(component)) {
+    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       return this.generateEmbeddedComponentWorkRow(
         component,
         columnNames,
@@ -3629,27 +3635,53 @@ class DataExportController {
       );
     }
     const componentStates = this.TeacherDataService.getComponentStatesByComponentId(component.id);
-    const devices = this.getDevices(componentStates);
-    const columnKeys = ['current', 'future', 'co2saved', 'kwhsaved'];
-    if (this.isDataSpring20201EmbeddedComponentAndCanExport(component)) {
-      for (const device of devices) {
+    const items = this.getEmbeddedTableRowItems(component, componentStates);
+    const columnKeys = this.getEmbeddedTableColumnKeys(component);
+    if (this.isEmbeddedTableComponentAndCanExport(component)) {
+      for (const item of items) {
         columnKeys.forEach((columnKey) => {
           this.addColumnNameToColumnDataStructures(
             columnNameToNumber,
             columnNames,
-            `${device} ${this.embeddedTableKeyToValue[columnKey]}`
+            `${item} ${this.embeddedTableKeyToValue[columnKey]}`
           );
         });
       }
     }
   }
 
-  getDevices(componentStates: any): string[] {
+  getEmbeddedTableColumnKeys(component: any): string[] {
+    let columnKeys = [];
+    if (this.isDevicesEmbeddedTable(component)) {
+      columnKeys = ['current', 'future', 'kwhsaved', 'co2saved'];
+    } else if (this.isTransporationEmbeddedTable(component)) {
+      columnKeys = ['minutes', 'current', 'future', 'co2saved'];
+    }
+    return columnKeys;
+  }
+
+  getEmbeddedTableRowItems(component: any, componentStates: any[]): string[] {
+    if (this.isDevicesEmbeddedTable(component)) {
+      return this.getDevices(componentStates);
+    } else if (this.isTransporationEmbeddedTable(component)) {
+      return this.getTransportationMethods(componentStates);
+    }
+  }
+
+  getDevices(componentStates: any[]): string[] {
     const devices = [];
     for (const row of componentStates[0].studentData.tableData) {
       devices.push(row.appliance);
     }
     return devices;
+  }
+
+  getTransportationMethods(componentStates: any[]): string[] {
+    const transportation = [];
+    for (const row of componentStates[0].studentData.tableData) {
+      transportation.push(row.method);
+    }
+    return transportation;
   }
 
   generateEmbeddedComponentWorkRow(
@@ -3685,19 +3717,28 @@ class DataExportController {
       componentRevisionCounter,
       embeddedComponentState
     );
-    const columns = ['current', 'future', 'co2saved', 'kwhsaved'];
+    const columnKeys = this.getEmbeddedTableColumnKeys(component);
     for (const studentTableDataRow of embeddedComponentState.studentData.tableData) {
-      for (const column of columns) {
+      const item = this.getEmbeddedTableRowItem(component, studentTableDataRow);
+      for (const column of columnKeys) {
         this.addEmbeddedCellsToRow(
           row,
           columnNameToNumber,
-          studentTableDataRow.appliance,
+          item,
           column,
           studentTableDataRow[column]
         );
       }
     }
     return row;
+  }
+
+  getEmbeddedTableRowItem(component: any, studentTableDataRow: any): string {
+    if (this.isDevicesEmbeddedTable(component)) {
+      return studentTableDataRow.appliance;
+    } else if (this.isTransporationEmbeddedTable(component)) {
+      return studentTableDataRow.method;
+    }
   }
 
   addEmbeddedCellsToRow(
