@@ -38,14 +38,10 @@ export class PeerChatService extends ComponentService {
     if (this.ConfigService.isPreview()) {
       this.ConfigService.config.runId = 1;
     }
-    const params = new HttpParams()
-      .set('componentId', componentId)
-      .set('nodeId', nodeId)
-      .set('periodId', this.ConfigService.getPeriodId())
-      .set('runId', this.ConfigService.getRunId())
-      .set('workgroupId', this.ConfigService.getWorkgroupId());
-    const requestChatWorkgroupsURL = '/api/peer/workgroups';
-    return this.http.get(requestChatWorkgroupsURL, { headers: headers, params: params });
+    const runId = this.ConfigService.getRunId();
+    const workgroupId = this.ConfigService.getWorkgroupId();
+    const requestChatWorkgroupsURL = `/api/peer-group/run/${runId}/workgroup/${workgroupId}/node-id/${nodeId}/component-id/${componentId}`;
+    return this.http.get(requestChatWorkgroupsURL, { headers: headers });
   }
 
   retrievePeerWorkFromComponent(

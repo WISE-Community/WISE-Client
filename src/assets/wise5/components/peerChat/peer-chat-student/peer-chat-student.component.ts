@@ -103,15 +103,19 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.PeerChatService.retrievePeerChatWorkgroups(this.nodeId, this.componentId)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
-        (data: any) => {
+        (peerGroup: any) => {
           console.log('success');
-          this.requestChatWorkgroupsSuccess(data.workgroupIds);
+          this.requestChatWorkgroupsSuccess(this.getPeerGroupWorkgroupIds(peerGroup));
         },
         (err) => {
           console.log('error');
           this.requestChatWorkgroupsError();
         }
       );
+  }
+
+  getPeerGroupWorkgroupIds(peerGroup: any): number[] {
+    return peerGroup.members.map((member) => member.id);
   }
 
   requestChatWorkgroupsSuccess(workgroupIds: number[]): void {
