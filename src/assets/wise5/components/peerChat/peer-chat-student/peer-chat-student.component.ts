@@ -104,11 +104,11 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (peerGroup: any) => {
-          console.log('success');
+          console.log('success getting peer workgroups');
           this.requestChatWorkgroupsSuccess(this.getPeerGroupWorkgroupIds(peerGroup));
         },
-        (err) => {
-          console.log('error');
+        (error) => {
+          console.log('error getting peer workgroups');
           this.requestChatWorkgroupsError();
         }
       );
@@ -128,8 +128,23 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   requestChatWorkgroupsError(): void {
-    // Call the success function for now since we don't have the backend hooked up yet
-    this.requestChatWorkgroupsSuccess(this.dummyWorkgroupIds);
+    this.isPeerChatWorkgroupsResponseReceived = true;
+  }
+
+  getErrorMessage(error: any): string {
+    const errorMessageKey = this.getErrorMessageKey(error);
+    switch (errorMessageKey) {
+      case 'PeerGroupActivityThresholdNotSatisfied':
+        return $localize``;
+      case 'PeerGroupWaitingForClassmates':
+        return $localize``;
+      default:
+        return $localize``;
+    }
+  }
+
+  getErrorMessageKey(error: any): string {
+    return error.error.message;
   }
 
   getPeerChatMessages(workgroupId: number): void {
@@ -137,11 +152,11 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         () => {
-          console.log('success');
+          console.log('success getting peer chat messages');
           this.getPeerChatMessagesSuccess();
         },
         () => {
-          console.log('error');
+          console.log('error getting peer chat messages');
           this.getPeerChatMessagesError();
         }
       );
@@ -193,11 +208,11 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (data: any) => {
-          console.log('success');
+          console.log('success getting peer work from another component');
           this.getPeerWorkFromAnotherComponentSuccess();
         },
         (err) => {
-          console.log('error');
+          console.log('error getting peer work from another component');
           this.getPeerWorkFromAnotherComponentError();
         }
       );
