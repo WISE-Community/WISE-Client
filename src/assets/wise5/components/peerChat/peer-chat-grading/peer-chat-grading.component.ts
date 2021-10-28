@@ -12,6 +12,7 @@ import { PeerChatService } from '../peerChatService';
 })
 export class PeerChatGradingComponent extends ComponentGrading {
   peerChatMessages: PeerChatMessage[] = [];
+  peerGroupId: number;
   requestTimeout: number = 10000;
 
   @Input()
@@ -23,11 +24,12 @@ export class PeerChatGradingComponent extends ComponentGrading {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.retrieveChatMessages(this.workgroupId);
+    // TODO: Get the peer group id for this workgroup
+    this.retrieveChatMessages(this.peerGroupId);
   }
 
-  retrieveChatMessages(workgroupId: number): void {
-    this.PeerChatService.retrievePeerChatMessages(this.nodeId, this.componentId, workgroupId)
+  retrieveChatMessages(peerGroupId: number): void {
+    this.PeerChatService.retrievePeerChatMessages(peerGroupId)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         () => {

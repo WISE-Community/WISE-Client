@@ -65,23 +65,13 @@ export class PeerChatService extends ComponentService {
     return this.http.get(requestPeerWorkURL, { headers: headers, params: params });
   }
 
-  retrievePeerChatMessages(
-    nodeId: string,
-    componentId: string,
-    workgroupId: number
-  ): Observable<any> {
+  retrievePeerChatMessages(peerGroupId: number): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     if (this.ConfigService.isPreview()) {
       this.ConfigService.config.runId = 1;
     }
-    let params = new HttpParams()
-      .set('componentId', componentId)
-      .set('nodeId', nodeId)
-      .set('periodId', this.ConfigService.getPeriodId())
-      .set('runId', this.ConfigService.getRunId())
-      .set('workgroupId', `${workgroupId}`);
-    const requestChatMessagesURL = '/api/peer/messages';
-    return this.http.get(requestChatMessagesURL, { headers: headers, params: params });
+    const requestChatMessagesURL = `/api/peer-group/${peerGroupId}/data`;
+    return this.http.get(requestChatMessagesURL, { headers: headers });
   }
 
   createDummyComponentStates(workgroupIds: number[]): any[] {

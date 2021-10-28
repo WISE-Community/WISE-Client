@@ -14,6 +14,7 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
+import { PeerGroup } from '../PeerGroup';
 
 @Component({
   selector: 'peer-chat-student',
@@ -31,6 +32,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   peerChatMessages: PeerChatMessage[] = [];
   peerChatWorkgroupIds: number[] = [];
   peerChatWorkgroups: any[] = [];
+  peerGroupId: number;
   peerWorkFromAnotherComponent: any = {};
   requestTimeout: number = 10000;
   response: string;
@@ -105,7 +107,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .subscribe(
         (peerGroup: any) => {
           console.log('success getting peer workgroups');
-          this.requestChatWorkgroupsSuccess(this.getPeerGroupWorkgroupIds(peerGroup));
+          this.requestChatWorkgroupsSuccess(peerGroup);
         },
         (error) => {
           console.log('error getting peer workgroups');
@@ -114,48 +116,33 @@ export class PeerChatStudentComponent extends ComponentStudent {
       );
   }
 
-  getPeerGroupWorkgroupIds(peerGroup: any): number[] {
-    return peerGroup.members.map((member) => member.id);
-  }
-
-  requestChatWorkgroupsSuccess(workgroupIds: number[]): void {
+  requestChatWorkgroupsSuccess(peerGroup: PeerGroup): void {
     this.isPeerChatWorkgroupsResponseReceived = true;
-    this.setPeerChatWorkgroups(workgroupIds);
+    this.peerGroupId = peerGroup.id;
+    this.setPeerChatWorkgroups(this.getPeerGroupWorkgroupIds(peerGroup));
     if (this.isShowWorkFromAnotherComponent) {
       this.getPeerWorkFromAnotherComponent();
     }
-    this.getPeerChatMessages(this.workgroupId);
+    this.getPeerChatMessages(peerGroup.id);
+  }
+
+  getPeerGroupWorkgroupIds(peerGroup: any): number[] {
+    return peerGroup.members.map((member) => member.id);
   }
 
   requestChatWorkgroupsError(): void {
     this.isPeerChatWorkgroupsResponseReceived = true;
   }
 
-  getErrorMessage(error: any): string {
-    const errorMessageKey = this.getErrorMessageKey(error);
-    switch (errorMessageKey) {
-      case 'PeerGroupActivityThresholdNotSatisfied':
-        return $localize``;
-      case 'PeerGroupWaitingForClassmates':
-        return $localize``;
-      default:
-        return $localize``;
-    }
-  }
-
-  getErrorMessageKey(error: any): string {
-    return error.error.message;
-  }
-
-  getPeerChatMessages(workgroupId: number): void {
-    this.PeerChatService.retrievePeerChatMessages(this.nodeId, this.componentId, workgroupId)
+  getPeerChatMessages(peerGroupId: number): void {
+    this.PeerChatService.retrievePeerChatMessages(peerGroupId)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
-        () => {
+        (componentStates: any[]) => {
           console.log('success getting peer chat messages');
           this.getPeerChatMessagesSuccess();
         },
-        () => {
+        (error) => {
           console.log('error getting peer chat messages');
           this.getPeerChatMessagesError();
         }
@@ -170,8 +157,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   getPeerChatMessagesError(): void {
-    // Call the success function for now since we don't have the backend hooked up yet
-    this.getPeerChatMessagesSuccess();
+    // TODO
   }
 
   setPeerChatMessages(componentStates: any = []): void {
