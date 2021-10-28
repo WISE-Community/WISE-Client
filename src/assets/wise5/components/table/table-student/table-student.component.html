@@ -39,14 +39,14 @@
         <mat-form-field *ngIf="cell.editable"
             class="cell-input form-field-no-label form-field-no-hint"
             appearance="outline">
-          <input
+          <textarea cdkTextareaAutosize
               matInput
               type="text"
               [(ngModel)]="cell.text"
               (ngModelChange)="studentDataChanged()"
               [disabled]="isDisabled"
               i18n-aria-label
-              aria-label="Cell content" />
+              aria-label="Cell content"></textarea>
         </mat-form-field>
         <ng-container *ngIf="!cell.editable">{{cell.text}}</ng-container>
       </td>
