@@ -40,8 +40,9 @@ export class PeerChatService extends ComponentService {
     }
     const runId = this.ConfigService.getRunId();
     const workgroupId = this.ConfigService.getWorkgroupId();
-    const requestChatWorkgroupsURL = `/api/peer-group/run/${runId}/workgroup/${workgroupId}/node-id/${nodeId}/component-id/${componentId}`;
-    return this.http.get(requestChatWorkgroupsURL, { headers: headers });
+    return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}`, {
+      headers: headers
+    });
   }
 
   retrievePeerWorkFromComponent(
@@ -61,8 +62,7 @@ export class PeerChatService extends ComponentService {
     workgroupIds.forEach((workgroupId: number) => {
       params = params.append('workgroupIds', `${workgroupId}`);
     });
-    const requestPeerWorkURL = '/api/peer/work';
-    return this.http.get(requestPeerWorkURL, { headers: headers, params: params });
+    return this.http.get('/api/peer/work', { headers: headers, params: params });
   }
 
   retrievePeerChatMessages(peerGroupId: number): Observable<any> {
@@ -70,8 +70,7 @@ export class PeerChatService extends ComponentService {
     if (this.ConfigService.isPreview()) {
       this.ConfigService.config.runId = 1;
     }
-    const requestChatMessagesURL = `/api/peer-group/${peerGroupId}/data`;
-    return this.http.get(requestChatMessagesURL, { headers: headers });
+    return this.http.get(`/api/peer-group/${peerGroupId}/student-work`, { headers: headers });
   }
 
   createDummyComponentStates(workgroupIds: number[]): any[] {

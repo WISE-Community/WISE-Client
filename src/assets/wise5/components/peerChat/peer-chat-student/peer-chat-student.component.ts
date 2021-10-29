@@ -140,7 +140,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .subscribe(
         (componentStates: any[]) => {
           console.log('success getting peer chat messages');
-          this.getPeerChatMessagesSuccess();
+          this.getPeerChatMessagesSuccess(componentStates);
         },
         (error) => {
           console.log('error getting peer chat messages');
@@ -149,11 +149,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
       );
   }
 
-  getPeerChatMessagesSuccess(): void {
-    // Populate dummy peer chat messages
-    this.setPeerChatMessages(
-      this.PeerChatService.createDummyComponentStates(this.peerChatWorkgroupIds)
-    );
+  getPeerChatMessagesSuccess(componentStates): void {
+    this.setPeerChatMessages(componentStates);
   }
 
   getPeerChatMessagesError(): void {
