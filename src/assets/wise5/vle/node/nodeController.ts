@@ -536,6 +536,9 @@ class NodeController {
             componentEvents,
             componentAnnotations
           } = this.getDataArraysToSaveFromComponentStates(componentStatesFromComponents);
+          componentStates.forEach((componentState: any) => {
+            this.notifyConnectedParts(componentId, componentState);
+          });
           return this.StudentDataService.saveToServer(
             componentStates,
             componentEvents,
