@@ -34,15 +34,36 @@ export class PeerChatService extends ComponentService {
   }
 
   retrievePeerChatWorkgroups(nodeId: string, componentId: string): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     if (this.ConfigService.isPreview()) {
       this.ConfigService.config.runId = 1;
     }
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const runId = this.ConfigService.getRunId();
     const workgroupId = this.ConfigService.getWorkgroupId();
     return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}`, {
       headers: headers
     });
+  }
+
+  retrievePeerChatComponentStatesByPeerGroup(peerGroupId: number): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(`/api/peer-group/${peerGroupId}/student-work`, { headers: headers });
+  }
+
+  retrievePeerChatComponentStates(
+    nodeId: string,
+    componentId: string,
+    workgroupId: number
+  ): Observable<any> {
+    const runId = this.ConfigService.getRunId();
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    if (this.ConfigService.isPreview()) {
+      this.ConfigService.config.runId = 1;
+    }
+    return this.http.get(
+      `/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}/student-work`,
+      { headers: headers }
+    );
   }
 
   retrievePeerWorkFromComponent(
@@ -63,14 +84,6 @@ export class PeerChatService extends ComponentService {
       params = params.append('workgroupIds', `${workgroupId}`);
     });
     return this.http.get('/api/peer/work', { headers: headers, params: params });
-  }
-
-  retrievePeerChatMessages(peerGroupId: number): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    if (this.ConfigService.isPreview()) {
-      this.ConfigService.config.runId = 1;
-    }
-    return this.http.get(`/api/peer-group/${peerGroupId}/student-work`, { headers: headers });
   }
 
   createDummyComponentStates(workgroupIds: number[]): any[] {

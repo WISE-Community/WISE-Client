@@ -123,7 +123,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     if (this.isShowWorkFromAnotherComponent) {
       this.getPeerWorkFromAnotherComponent();
     }
-    this.getPeerChatMessages(peerGroup.id);
+    this.getPeerChatComponentStates(peerGroup.id);
   }
 
   getPeerGroupWorkgroupIds(peerGroup: any): number[] {
@@ -134,26 +134,26 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.isPeerChatWorkgroupsResponseReceived = true;
   }
 
-  getPeerChatMessages(peerGroupId: number): void {
-    this.PeerChatService.retrievePeerChatMessages(peerGroupId)
+  getPeerChatComponentStates(peerGroupId: number): void {
+    this.PeerChatService.retrievePeerChatComponentStatesByPeerGroup(peerGroupId)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (componentStates: any[]) => {
           console.log('success getting peer chat messages');
-          this.getPeerChatMessagesSuccess(componentStates);
+          this.getPeerChatComponentStatesSuccess(componentStates);
         },
         (error) => {
           console.log('error getting peer chat messages');
-          this.getPeerChatMessagesError();
+          this.getPeerChatComponentStatesError();
         }
       );
   }
 
-  getPeerChatMessagesSuccess(componentStates): void {
+  getPeerChatComponentStatesSuccess(componentStates: any[]): void {
     this.setPeerChatMessages(componentStates);
   }
 
-  getPeerChatMessagesError(): void {
+  getPeerChatComponentStatesError(): void {
     // TODO
   }
 

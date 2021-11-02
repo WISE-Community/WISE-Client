@@ -24,22 +24,19 @@ export class PeerChatGradingComponent extends ComponentGrading {
 
   ngOnInit(): void {
     super.ngOnInit();
-    // TODO: Get the peer group id for this workgroup
-    this.retrieveChatMessages(this.peerGroupId);
+    this.retrievePeerChatComponentStates(this.nodeId, this.componentId, this.workgroupId);
   }
 
-  retrieveChatMessages(peerGroupId: number): void {
-    this.PeerChatService.retrievePeerChatMessages(peerGroupId)
+  retrievePeerChatComponentStates(nodeId: string, componentId: string, workgroupId: number): void {
+    this.PeerChatService.retrievePeerChatComponentStates(nodeId, componentId, workgroupId)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
-        () => {
+        (componentStates: any[]) => {
           console.log('success');
+          this.setPeerChatMessages(componentStates);
         },
         () => {
           console.log('error');
-          this.setPeerChatMessages(
-            this.PeerChatService.createDummyComponentStates(this.workgroupId)
-          );
         }
       );
   }
