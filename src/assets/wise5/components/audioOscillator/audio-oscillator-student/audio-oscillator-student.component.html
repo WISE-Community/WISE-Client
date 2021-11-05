@@ -27,7 +27,8 @@
         [min]="minAmplitude"
         name="amplitude"
         [(ngModel)]="amplitude"
-        (ngModelChange)="amplitudeChanged()"
+        (change)="amplitudeChanged()"
+        (keyup)="amplitudeKeyUp($event)"
         [disabled]="isDisabled || !canStudentEditAmplitude"/>
   </mat-form-field>
   <button

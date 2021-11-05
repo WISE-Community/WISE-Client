@@ -341,6 +341,25 @@ export class AudioOscillatorStudent extends ComponentStudent {
     this.refreshOscilloscope();
   }
 
+  amplitudeKeyUp(event: any): void {
+    if (this.isNumberEvent(event)) {
+      this.amplitudeChanged();
+    }
+  }
+
+  isNumberEvent(event: any): boolean {
+    const keyCode = event.keyCode;
+    return this.isTopRowNumber(keyCode) || this.isNumPadNumber(keyCode);
+  }
+
+  isTopRowNumber(keyCode: number): boolean {
+    return 48 <= keyCode && keyCode <= 57;
+  }
+
+  isNumPadNumber(keyCode: number): boolean {
+    return 96 <= keyCode && keyCode <= 105;
+  }
+
   limitAmplitudeIfNecessary(amplitude: number): number {
     if (amplitude > this.maxAmplitude) {
       return this.maxAmplitude;
