@@ -8164,7 +8164,7 @@
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Add an assignment for this unit to Google Classroom.</target>
+        <target state="translated">Agregar una tarea para esta unidad a Google Classroom.</target>
       </trans-unit>
       <trans-unit id="513f7b099350e045450a1b47ee1987e7dc72d86b" datatype="html">
         <source>1. Choose from your Google Classroom classes</source>
@@ -8172,7 +8172,7 @@
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
-        <target state="needs-translation">1. Choose from your Google Classroom classes</target>
+        <target state="translated">1. Elegir de sus clases de Google Classroom</target>
       </trans-unit>
       <trans-unit id="5566d6863125d49ad8caf9b1264b49f343f41f44" datatype="html">
         <source> (Section <x id="INTERPOLATION" equiv-text="{{ courses[i].section }}"/>)</source>
@@ -8180,7 +8180,7 @@
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="needs-translation"> (Section <x id="INTERPOLATION" equiv-text="{{ courses[i].section }}"/>)</target>
+        <target state="translated"> (Sección <x id="INTERPOLATION" equiv-text="{{ courses[i].section }}"/>)</target>
       </trans-unit>
       <trans-unit id="20b6acf1174cff2aec4931ca70a8c1a3038695af" datatype="html">
         <source>2. Add Description</source>
@@ -8228,7 +8228,7 @@
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.ts</context>
           <context context-type="linenumber">50</context>
         </context-group>
-        <target state="needs-translation">Hi class! Please complete the "<x id="unitTitle" equiv-text="this.data.run.name"/>" WISE unit. (Access Code: <x id="accessCode" equiv-text="this.data.run.runCode"/>)</target>
+        <target state="translated">¡Hola! Por favor completen la unidad de WISE "<x id="unitTitle" equiv-text="this.data.run.name"/>". (Código de acceso: <x id="accessCode" equiv-text="this.data.run.runCode"/>)</target>
       </trans-unit>
       <trans-unit id="2719481583773153034" datatype="html">
         <source>(Section <x id="section" equiv-text="course.section"/>)</source>
@@ -8236,7 +8236,7 @@
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.ts</context>
           <context context-type="linenumber">123</context>
         </context-group>
-        <target state="needs-translation">(Section <x id="section" equiv-text="course.section"/>)</target>
+        <target state="translated">(Sección <x id="section" equiv-text="course.section"/>)</target>
       </trans-unit>
       <trans-unit id="9c83559c416a8e596b51a342566efdb2868f2404" datatype="html">
         <source>Run Menu</source>
@@ -8244,7 +8244,7 @@
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Run Menu</target>
+        <target state="translated">Menú de ejecución</target>
       </trans-unit>
       <trans-unit id="32f41f2afbd1719ea56da292e89a340d43bcf7dd" datatype="html">
         <source>Run ID: <x id="INTERPOLATION" equiv-text="{{ run.id }}"/></source>
@@ -8252,7 +8252,7 @@
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Run ID: <x id="INTERPOLATION" equiv-text="{{ run.id }}"/></target>
+        <target state="translated">Ejecutar ID: <x id="INTERPOLATION" equiv-text="{{ run.id }}"/></target>
       </trans-unit>
       <trans-unit id="3ee54b66b7f53827035c3055f228bc2bf2550dab" datatype="html">
         <source>Unit Info</source>
@@ -8292,7 +8292,7 @@
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
           <context context-type="linenumber">84</context>
         </context-group>
-        <target state="needs-translation">Edit Classroom Unit Warning</target>
+        <target state="translated">Editar aviso de la unidad de clase</target>
       </trans-unit>
       <trans-unit id="a2a99d70cee0c47626832a30636f0ede3c84c2eb" datatype="html">
         <source>Edit Settings</source>
@@ -8340,7 +8340,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
-        <target state="needs-translation">For "Period 9", just enter the number 9.</target>
+        <target state="translated">Para "Período 9", solo ingresar el número 9.</target>
       </trans-unit>
       <trans-unit id="9e52801929bc9e355f8de5c5c13ba357055d1bdf" datatype="html">
         <source>Students Per Team</source>
@@ -8356,7 +8356,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
           <context context-type="linenumber">41,42</context>
         </context-group>
-        <target state="needs-translation"> Only 1 student </target>
+        <target state="translated"> Solo 1 estudiante </target>
       </trans-unit>
       <trans-unit id="3e3d338fd6b6cce651564a6cd4868c6c31d7df26" datatype="html">
         <source> 1-3 students </source>
@@ -8364,7 +8364,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
           <context context-type="linenumber">44,45</context>
         </context-group>
-        <target state="needs-translation"> 1-3 students </target>
+        <target state="translated"> 1-3 estudiantes </target>
       </trans-unit>
       <trans-unit id="4a4f46a2dcec36bd5c8c371ceee55c2226dec27f" datatype="html">
         <source>Schedule</source>
@@ -8380,7 +8380,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
           <context context-type="linenumber">50,52</context>
         </context-group>
-        <target state="needs-translation"> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>) </target>
+        <target state="translated"> (Último acceso de estudiante: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>) </target>
       </trans-unit>
       <trans-unit id="a1c89f5496e99086127a54d08cecba1d0920397e" datatype="html">
         <source>Start date is required.</source>
@@ -8428,7 +8428,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">61</context>
         </context-group>
-        <target state="needs-translation">You do not have permission to delete periods from this unit.</target>
+        <target state="translated">No tiene permisos para eliminar períodos de esta unidad.</target>
       </trans-unit>
       <trans-unit id="9028638987976638715" datatype="html">
         <source>You do not have permission to change the number of students per team for this unit.</source>
@@ -8436,7 +8436,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">62</context>
         </context-group>
-        <target state="needs-translation">You do not have permission to change the number of students per team for this unit.</target>
+        <target state="translated">No tiene permiso para cambiar la cantidad de estudiantes por equipo para esta unidad.</target>
       </trans-unit>
       <trans-unit id="2769664721624079769" datatype="html">
         <source>You are not allowed to decrease the number of students per team because this unit already has teams with more than 1 student.</source>
@@ -8444,7 +8444,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">63</context>
         </context-group>
-        <target state="needs-translation">You are not allowed to decrease the number of students per team because this unit already has teams with more than 1 student.</target>
+        <target state="translated">No se permite disminuir el número de estudiantes por equipo porque esta unidad ya tiene equipos con más de 1 estudiante.</target>
       </trans-unit>
       <trans-unit id="1622862808392881517" datatype="html">
         <source>You do not have permission to change the dates for this unit.</source>
@@ -8452,7 +8452,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">64</context>
         </context-group>
-        <target state="needs-translation">You do not have permission to change the dates for this unit.</target>
+        <target state="translated">No tiene permisos para carmbiar la fecha de esta unidad.</target>
       </trans-unit>
       <trans-unit id="2964269861601090315" datatype="html">
         <source>End date can&apos;t be before start date.</source>
@@ -8460,7 +8460,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">End date can't be before start date.</target>
+        <target state="translated">La fecha de finalización debe ser posterior a la de inicio.</target>
       </trans-unit>
       <trans-unit id="4035307182253602220" datatype="html">
         <source>Start date can&apos;t be after end date.</source>
@@ -8468,7 +8468,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">66</context>
         </context-group>
-        <target state="needs-translation">Start date can't be after end date.</target>
+        <target state="translated">La fecha de inicio debe ser anterior a la de cierre.</target>
       </trans-unit>
       <trans-unit id="6403532161596569538" datatype="html">
         <source>You do not have permission to change whether unit is locked after end date.</source>
@@ -8476,7 +8476,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">67</context>
         </context-group>
-        <target state="needs-translation">You do not have permission to change whether unit is locked after end date.</target>
+        <target state="translated">No tiene permiso para cambiar si la unidad está bloqueada después de la fecha de finalización.</target>
       </trans-unit>
       <trans-unit id="5528736199269504039" datatype="html">
         <source>Please enter a new period name.</source>
@@ -8484,7 +8484,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">87</context>
         </context-group>
-        <target state="needs-translation">Please enter a new period name.</target>
+        <target state="translated">Por favor ingrese un nuevo nombre de período.</target>
       </trans-unit>
       <trans-unit id="4283834044503624296" datatype="html">
         <source>1-3</source>
@@ -8492,7 +8492,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">126</context>
         </context-group>
-        <target state="needs-translation">1-3</target>
+        <target state="translated">1-3</target>
       </trans-unit>
       <trans-unit id="6127373082196535001" datatype="html">
         <source>Are you sure you want to change the students per team to <x id="value" equiv-text="maxStudentsPerTeamText"/>?</source>
@@ -8500,7 +8500,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">130</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to change the students per team to <x id="value" equiv-text="maxStudentsPerTeamText"/>?</target>
+        <target state="translated">¿Seguro que quiere cambiar los estudiantes por equipo a <x id="value" equiv-text="maxStudentsPerTeamText"/>?</target>
       </trans-unit>
       <trans-unit id="7740591876616439835" datatype="html">
         <source>Are you sure you want to change the start date to <x id="date" equiv-text="formattedStartDate"/>?</source>
@@ -8508,7 +8508,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">161</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to change the start date to <x id="date" equiv-text="formattedStartDate"/>?</target>
+        <target state="translated">¿Seguro de cambiar la fecha de inicio a <x id="date" equiv-text="formattedStartDate"/>?</target>
       </trans-unit>
       <trans-unit id="6150645879410305022" datatype="html">
         <source>Are you sure you want to change the end date to <x id="date" equiv-text="formattedEndDate"/>?</source>
@@ -8516,7 +8516,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">217</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to change the end date to <x id="date" equiv-text="formattedEndDate"/>?</target>
+        <target state="translated">¿Seguro que quiere cambiar la fecha de finalización por <x id="date" equiv-text="formattedEndDate"/>?</target>
       </trans-unit>
       <trans-unit id="4810452891345359652" datatype="html">
         <source>Are you sure you want to remove the end date?</source>
@@ -8524,7 +8524,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">219</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to remove the end date?</target>
+        <target state="translated">¿Seguro que quiere eliminar la fecha de finalización?</target>
       </trans-unit>
       <trans-unit id="2262426799118056083" datatype="html">
         <source>Unit settings updated.</source>
@@ -8532,7 +8532,7 @@
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
           <context context-type="linenumber">302</context>
         </context-group>
-        <target state="needs-translation">Unit settings updated.</target>
+        <target state="translated">Se actualizó la configuración de la unidad.</target>
       </trans-unit>
       <trans-unit id="c76c2eeebe0adc81f3434495d189c56d70899cad" datatype="html">
         <source>Share with Students</source>
@@ -8540,7 +8540,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Share with Students</target>
+        <target state="translated">Compartir con estudiantes</target>
       </trans-unit>
       <trans-unit id="a4d4aee1d5818b9823e4193327a30c38f606d74b" datatype="html">
         <source>Copy this link to share with your students:</source>
@@ -8548,7 +8548,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Copy this link to share with your students:</target>
+        <target state="translated">Copiar el siguiente enlace para compartir con sus estudiantes:</target>
       </trans-unit>
       <trans-unit id="7bbddc45d6222dca137dc142330ab84c2d959aa2" datatype="html">
         <source>Students with WISE accounts can also select <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Add Unit+<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and type the Access Code:</source>
@@ -8556,7 +8556,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Students with WISE accounts can also select <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Add Unit+<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and type the Access Code:</target>
+        <target state="translated">Los estudiantes con cuenta de WISE también puede seleccionar <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Agregar Unidad+<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> y tipear el siguiente Código de Acceso:</target>
       </trans-unit>
       <trans-unit id="209863274ddac11c65a5735ed1d1e2d869f665b2" datatype="html">
         <source>Add as an assignment in Google Classroom:</source>
@@ -8564,7 +8564,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="needs-translation">Add as an assignment in Google Classroom:</target>
+        <target state="translated">Agregar como tarea en Google Classroom:</target>
       </trans-unit>
       <trans-unit id="8057745565493131709" datatype="html">
         <source>Copied to clipboard.</source>
@@ -8572,7 +8572,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.ts</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">Copied to clipboard.</target>
+        <target state="translated">Copiado al portapapeles.</target>
       </trans-unit>
       <trans-unit id="88d53bd596808b844983e5bb4ec7b23a032ab84b" datatype="html">
         <source>Share Classroom Access</source>
@@ -9336,7 +9336,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">New Student Password required</target>
+        <target state="translated">Se requiere una nueva contraseña de estudiante</target>
       </trans-unit>
       <trans-unit id="5b2a4ad87bbdf775c098839a64d666c58a87b84c" datatype="html">
         <source>Confirm New Student Password</source>
@@ -9344,7 +9344,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">Confirm New Student Password</target>
+        <target state="translated">Confirma nueva contraseña de estudiante</target>
       </trans-unit>
       <trans-unit id="370ba663153e8440ada175ce55e10ea9e20ce240" datatype="html">
         <source>Confirm New Student Password required</source>
@@ -9352,7 +9352,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">27</context>
         </context-group>
-        <target state="needs-translation">Confirm New Student Password required</target>
+        <target state="translated">Se requiere confirmar la nueva contraseña de estudiante</target>
       </trans-unit>
       <trans-unit id="1ed031ea5b7a272fbbb7e9eaf12229baa62d0c32" datatype="html">
         <source>New student passwords do not match</source>
@@ -9360,7 +9360,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">New student passwords do not match</target>
+        <target state="translated">Las nuevas contraseñas de estudiante no concuerdan</target>
       </trans-unit>
       <trans-unit id="68e710782ccb5398b3acb8844caf0b199da2c3da" datatype="html">
         <source>Confirm</source>
@@ -9372,7 +9372,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">Confirm</target>
+        <target state="translated">Confirmar</target>
       </trans-unit>
       <trans-unit id="876701614714648932" datatype="html">
         <source>Changed password for <x id="PH" equiv-text="this.user.name"/> (<x id="PH_1" equiv-text="this.user.username"/>).</source>
@@ -9380,7 +9380,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">Changed password for <x id="PH" equiv-text="this.user.name"/> (<x id="PH_1" equiv-text="this.user.username"/>).</target>
+        <target state="translated">Cambiar contraseña para <x id="PH" equiv-text="this.user.name"/> (<x id="PH_1" equiv-text="this.user.username"/>).</target>
       </trans-unit>
       <trans-unit id="194071757642374963" datatype="html">
         <source>Changed password for Student <x id="PH" equiv-text="this.user.id"/>.</source>
@@ -9388,7 +9388,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">Changed password for Student <x id="PH" equiv-text="this.user.id"/>.</target>
+        <target state="translated">Cambiar contraseña para el estudiante <x id="PH" equiv-text="this.user.id"/>.</target>
       </trans-unit>
       <trans-unit id="6393419270108352075" datatype="html">
         <source>Failed to change student password. Check values and try again.</source>
@@ -9396,7 +9396,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
           <context context-type="linenumber">63</context>
         </context-group>
-        <target state="needs-translation">Failed to change student password. Check values and try again.</target>
+        <target state="translated">No se pudo cambiar la contraseña de estudiante. Chequear los valores y probar nuevamente.</target>
       </trans-unit>
       <trans-unit id="4333d62731dc124644ca59e02aabfaa86e730714" datatype="html">
         <source>Change Period</source>
@@ -9408,7 +9408,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">Change Period</target>
+        <target state="translated">Cambiar Período</target>
       </trans-unit>
       <trans-unit id="1e897a837b2dcf4f5beb18e8f536aa0e37fe929d" datatype="html">
         <source>Select a new period for <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Team <x id="INTERPOLATION" equiv-text="{{team.workgroupId}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>:</source>
@@ -9416,7 +9416,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Select a new period for <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Team <x id="INTERPOLATION" equiv-text="{{team.workgroupId}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>:</target>
+        <target state="translated">Seleccionar nuevo período para <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Equipo <x id="INTERPOLATION" equiv-text="{{team.workgroupId}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>:</target>
       </trans-unit>
       <trans-unit id="8285337659520616942" datatype="html">
         <source>Moved Team <x id="PH" equiv-text="this.team.workgroupId"/> to Period <x id="PH_1" equiv-text="this.selectedPeriod.periodName"/>.</source>
