@@ -34,6 +34,7 @@ export class EditComponentDefaultFeedback {
       this.authoringComponentContent.defaultFeedback = [];
     }
     this.authoringComponentContent.defaultFeedback.push('');
+    this.authoringComponentContent.showSubmitButton = true;
     this.componentChanged();
   }
 
