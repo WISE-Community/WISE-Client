@@ -10,16 +10,6 @@
 </div>
 <div>
   <mat-checkbox
-      color="primary"
-      class="checkbox"
-      [(ngModel)]="authoringComponentContent.horizontal"
-      (ngModelChange)="componentChanged()"
-      i18n>
-    Show Source and Target Buckets Side-by-Side
-  </mat-checkbox>
-</div>
-<div>
-  <mat-checkbox
       *ngIf="isNotebookEnabled()"
       color="primary"
       class="checkbox"

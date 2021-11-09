@@ -3,7 +3,8 @@
     <div fxLayout="row wrap">
       <div class="match-bucket match-bucket--choices"
           fxFlex="100"
-          fxFlex.gt-sm="{{isHorizontal ? 50: 100}}">
+          fxFlex.gt-sm="{{isHorizontal ? 50: 100}}"
+          fxFlexOrder="{{isChoicesAfter ? 2 : 1}}">
         <mat-card>
           <mat-card-header>
             <mat-card-title [innerHTML]="sourceBucket.value"
@@ -47,7 +48,8 @@
       <div fxLayout="row wrap"
           fxLayoutAlign="center start"
           fxFlex="100"
-          fxFlex.gt-sm="{{isHorizontal ? 50 : 100}}">
+          fxFlex.gt-sm="{{isHorizontal ? 50 : 100}}"
+          fxFlexOrder="{{isChoicesAfter ? 1 : 2}}">
         <div *ngFor="let bucket of targetBuckets; index as bucketIndex"
             class="match-bucket"
             fxFlex="100"
