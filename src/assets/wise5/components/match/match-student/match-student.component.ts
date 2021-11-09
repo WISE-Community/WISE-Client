@@ -34,6 +34,7 @@ export class MatchStudent extends ComponentStudent {
   choices: any[] = [];
   choiceStyle: any = '';
   hasCorrectAnswer: boolean = false;
+  isChoicesAfter: boolean = false;
   isCorrect: boolean = false;
   isHorizontal: boolean = false;
   isLatestComponentStateSubmit: boolean = false;
@@ -73,6 +74,7 @@ export class MatchStudent extends ComponentStudent {
     super.ngOnInit();
     this.autoScroll = require('dom-autoscroller');
     this.registerAutoScroll();
+    this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
