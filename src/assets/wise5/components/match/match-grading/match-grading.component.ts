@@ -12,6 +12,7 @@ export class MatchGrading extends ComponentGrading {
   sourceBucket: any;
   targetBuckets: any[] = [];
   isHorizontal: boolean = false;
+  isChoicesAfter: boolean = false;
   bucketWidth: number;
   hasCorrectAnswer: boolean = false;
   isCorrect: boolean = false;
@@ -21,6 +22,7 @@ export class MatchGrading extends ComponentGrading {
     this.initializeBuckets(this.componentState.studentData.buckets);
     this.hasCorrectAnswer = this.hasCorrectChoices(this.componentContent);
     this.isCorrect = this.componentState.studentData.isCorrect;
+    this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
     this.bucketWidth = this.calculateBucketWidth(this.targetBuckets, this.isHorizontal);
   }
