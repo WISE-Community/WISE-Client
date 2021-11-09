@@ -578,11 +578,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -638,11 +638,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">156</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -746,11 +746,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">170</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -5792,7 +5792,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
@@ -7510,11 +7510,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">111</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -7922,7 +7922,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <target state="translated">起始日期</target>
       </trans-unit>
@@ -7942,7 +7942,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <target state="translated">结束日期</target>
       </trans-unit>
@@ -7962,7 +7962,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">87</context>
         </context-group>
         <target state="translated">如果项目结束日期已过且此项目被锁定，学生将不能保存新的内容。</target>
       </trans-unit>
@@ -8322,7 +8322,7 @@
         <source>Add new period</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">19</context>
         </context-group>
         <target state="translated">添加新班级</target>
       </trans-unit>
@@ -8330,7 +8330,7 @@
         <source>Add period</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <target state="translated">添加班级</target>
       </trans-unit>
@@ -8338,7 +8338,7 @@
         <source>For &quot;Period 9&quot;, just enter the number 9.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <target state="needs-translation">For "Period 9", just enter the number 9.</target>
       </trans-unit>
@@ -8346,7 +8346,7 @@
         <source>Students Per Team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target state="translated">每个小组的学生数</target>
       </trans-unit>
@@ -8354,7 +8354,7 @@
         <source> Only 1 student </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">41,42</context>
+          <context context-type="linenumber">38,39</context>
         </context-group>
         <target state="needs-translation"> Only 1 student </target>
       </trans-unit>
@@ -8362,7 +8362,7 @@
         <source> 1-3 students </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">44,45</context>
+          <context context-type="linenumber">41,42</context>
         </context-group>
         <target state="needs-translation"> 1-3 students </target>
       </trans-unit>
@@ -8370,7 +8370,7 @@
         <source>Schedule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <target state="translated">日程表</target>
       </trans-unit>
@@ -8378,7 +8378,7 @@
         <source> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">50,52</context>
+          <context context-type="linenumber">47,49</context>
         </context-group>
         <target state="needs-translation"> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>) </target>
       </trans-unit>
@@ -8386,7 +8386,7 @@
         <source>Start date is required.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <target state="translated">开始日期是必填的。</target>
       </trans-unit>
@@ -8394,7 +8394,7 @@
         <source> Lock After End Date </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">87,88</context>
+          <context context-type="linenumber">84,85</context>
         </context-group>
         <target state="translated"> 结束日期后锁定 </target>
       </trans-unit>
@@ -10122,19 +10122,19 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -10186,11 +10186,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -10226,11 +10226,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">78</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">159</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -11688,11 +11688,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">178</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">181</context>
+          <context context-type="linenumber">199</context>
         </context-group>
         <target state="translated">反馈</target>
       </trans-unit>
@@ -13514,14 +13514,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <target state="needs-translation"> Student Can Create Choices </target>
       </trans-unit>
-      <trans-unit id="8c68a63de4f583b88a1c98b4ba22fe0ef73663fa" datatype="html">
-        <source> Show Source and Target Buckets Side-by-Side </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
-          <context context-type="linenumber">18,19</context>
-        </context-group>
-        <target state="needs-translation"> Show Source and Target Buckets Side-by-Side </target>
-      </trans-unit>
       <trans-unit id="2145150118792012851" datatype="html">
         <source>Do you want to copy the choices and buckets from the connected component?
 
@@ -13534,11 +13526,27 @@ Warning: This will delete all existing choices and buckets in this component.</s
 
 Warning: This will delete all existing choices and buckets in this component.</target>
       </trans-unit>
+      <trans-unit id="8c68a63de4f583b88a1c98b4ba22fe0ef73663fa" datatype="html">
+        <source> Show Source and Target Buckets Side-by-Side </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <target state="needs-translation"> Show Source and Target Buckets Side-by-Side </target>
+      </trans-unit>
+      <trans-unit id="407cd2fc9f0a9ea384be98092666895a0b9b9891" datatype="html">
+        <source> Show Choices After Target Buckets </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+        <target state="needs-translation"> Show Choices After Target Buckets </target>
+      </trans-unit>
       <trans-unit id="e599864c0a890e5dfad60da9e9ed9f53ca9893bb" datatype="html">
         <source>Choices</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -13550,7 +13558,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Add Choice</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <target state="translated">添加选项</target>
       </trans-unit>
@@ -13558,7 +13566,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source> There are no choices. Click the &quot;Add Choice&quot; button to add a choice. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">17,18</context>
+          <context context-type="linenumber">35,36</context>
         </context-group>
         <target state="translated"> 没有选项。点击“添加选项”按钮以添加选项。 </target>
       </trans-unit>
@@ -13566,7 +13574,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Choice Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target state="translated">选项名称</target>
       </trans-unit>
@@ -13574,11 +13582,11 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Type text or choose an image</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -13590,7 +13598,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Delete Choice</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">86</context>
         </context-group>
         <target state="translated">删除选项</target>
       </trans-unit>
@@ -13598,7 +13606,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Source Bucket Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <target state="translated">源头篮子名称</target>
       </trans-unit>
@@ -13606,7 +13614,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Target Buckets</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">103</context>
         </context-group>
         <target state="translated">目标篮子</target>
       </trans-unit>
@@ -13614,7 +13622,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Add Target Bucket</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">108</context>
         </context-group>
         <target state="translated">添加目标篮子</target>
       </trans-unit>
@@ -13622,7 +13630,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source> There are no target buckets. Click the &quot;Add Target Bucket&quot; button to add a bucket. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">98,99</context>
+          <context context-type="linenumber">116,117</context>
         </context-group>
         <target state="translated"> 没有目标篮子。单击“添加目标篮子”按钮以添加一个篮子。 </target>
       </trans-unit>
@@ -13630,7 +13638,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Target Bucket Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">121</context>
         </context-group>
         <target state="translated">目标篮子名称</target>
       </trans-unit>
@@ -13638,7 +13646,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Delete Bucket</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">167</context>
         </context-group>
         <target state="translated">删除篮子</target>
       </trans-unit>
@@ -13646,7 +13654,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source> Choices need to be ordered within buckets </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">166,167</context>
+          <context context-type="linenumber">184,185</context>
         </context-group>
         <target state="translated"> 选项需要在篮子排序 </target>
       </trans-unit>
@@ -13654,7 +13662,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source> Bucket Name: <x id="INTERPOLATION" equiv-text="{{getBucketNameById(bucketFeedback.bucketId)}}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">171,173</context>
+          <context context-type="linenumber">189,191</context>
         </context-group>
         <target state="translated"> 篮子名称： <x id="INTERPOLATION" equiv-text="{{getBucketNameById(bucketFeedback.bucketId)}}"/> </target>
       </trans-unit>
@@ -13662,7 +13670,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source> Choice: <x id="INTERPOLATION" equiv-text="{{getChoiceTextById(choiceFeedback.choiceId)}}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">176,178</context>
+          <context context-type="linenumber">194,196</context>
         </context-group>
         <target state="translated"> 选项： <x id="INTERPOLATION" equiv-text="{{getChoiceTextById(choiceFeedback.choiceId)}}"/> </target>
       </trans-unit>
@@ -13670,7 +13678,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source> Is Correct </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">193,194</context>
+          <context context-type="linenumber">211,212</context>
         </context-group>
         <target state="translated"> 是正确的 </target>
       </trans-unit>
@@ -13678,7 +13686,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">216</context>
         </context-group>
         <target state="translated">位置</target>
       </trans-unit>
@@ -13686,7 +13694,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Incorrect Position Feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">205</context>
+          <context context-type="linenumber">223</context>
         </context-group>
         <target state="translated">错误的位置反馈</target>
       </trans-unit>
@@ -13718,7 +13726,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">402</context>
+          <context context-type="linenumber">404</context>
         </context-group>
         <target state="translated">选项</target>
       </trans-unit>
@@ -13726,7 +13734,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-grading/match-grading.component.html</context>
-          <context context-type="linenumber">99,101</context>
+          <context context-type="linenumber">101,103</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
@@ -13738,7 +13746,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source> Correct </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-grading/match-grading.component.html</context>
-          <context context-type="linenumber">105,106</context>
+          <context context-type="linenumber">107,108</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
@@ -13750,7 +13758,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source> Incorrect </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-grading/match-grading.component.html</context>
-          <context context-type="linenumber">110,111</context>
+          <context context-type="linenumber">112,113</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
@@ -13860,7 +13868,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">505</context>
+          <context context-type="linenumber">507</context>
         </context-group>
         <target state="needs-translation">Correct bucket but wrong position</target>
       </trans-unit>
@@ -13868,7 +13876,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Correct</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">515</context>
+          <context context-type="linenumber">517</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
@@ -13884,7 +13892,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Incorrect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">517</context>
+          <context context-type="linenumber">519</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
