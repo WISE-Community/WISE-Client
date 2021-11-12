@@ -963,32 +963,71 @@ class DataExportController {
     columnNameToNumber: any,
     events: any[]
   ): number {
-    const workgroups = this.ConfigService.getClassmateUserInfosSortedByWorkgroupId();
-    for (const workgroup of workgroups) {
-      const workgroupId = workgroup.workgroupId;
-      const periodName = workgroup.periodName;
-      const userInfo = this.ConfigService.getUserInfoByWorkgroupId(workgroupId);
-      const extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
-      for (const event of events) {
-        const row = this.createStudentEventExportRow(
+    for (const workgroup of this.ConfigService.getClassmateUserInfosSortedByWorkgroupId()) {
+      rowCounter = this.addStudentEventsForWorkgroup(
+        workgroup,
+        rows,
+        rowCounter,
+        columnNames,
+        columnNameToNumber,
+        events
+      );
+    }
+    return rowCounter;
+  }
+
+  addStudentEventsForWorkgroup(
+    workgroup: any,
+    rows: any[],
+    rowCounter: number,
+    columnNames: string[],
+    columnNameToNumber: any,
+    events: any
+  ): number {
+    for (const event of events) {
+      if (event.workgroupId === workgroup.workgroupId) {
+        rowCounter = this.addStudentEventRow(
+          workgroup,
+          rows,
+          rowCounter,
           columnNames,
           columnNameToNumber,
-          rowCounter,
-          workgroupId,
-          extractedUserIDsAndStudentNames['userId1'],
-          extractedUserIDsAndStudentNames['userId2'],
-          extractedUserIDsAndStudentNames['userId3'],
-          extractedUserIDsAndStudentNames['studentName1'],
-          extractedUserIDsAndStudentNames['studentName2'],
-          extractedUserIDsAndStudentNames['studentName3'],
-          periodName,
           event
         );
-        rows.push(row);
-        rowCounter++;
       }
     }
     return rowCounter;
+  }
+
+  addStudentEventRow(
+    workgroup: any,
+    rows: any[],
+    rowCounter: number,
+    columnNames: string[],
+    columnNameToNumber: any,
+    event: any
+  ): number {
+    const workgroupId = workgroup.workgroupId;
+    const periodName = workgroup.periodName;
+    const userInfo = this.ConfigService.getUserInfoByWorkgroupId(workgroupId);
+    const extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
+    rows.push(
+      this.createStudentEventExportRow(
+        columnNames,
+        columnNameToNumber,
+        rowCounter,
+        workgroupId,
+        extractedUserIDsAndStudentNames['userId1'],
+        extractedUserIDsAndStudentNames['userId2'],
+        extractedUserIDsAndStudentNames['userId3'],
+        extractedUserIDsAndStudentNames['studentName1'],
+        extractedUserIDsAndStudentNames['studentName2'],
+        extractedUserIDsAndStudentNames['studentName3'],
+        periodName,
+        event
+      )
+    );
+    return ++rowCounter;
   }
 
   addTeacherEvents(
