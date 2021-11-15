@@ -85,7 +85,6 @@ export class DrawStudent extends ComponentStudent {
     this.initializeStudentData();
     this.disableComponentIfNecessary();
     this.setDrawingChangedListener();
-    this.setToolChangedListener();
     this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, this.isDisabled);
 
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
@@ -178,17 +177,6 @@ export class DrawStudent extends ComponentStudent {
         this.studentDataChanged();
       });
     }, 500);
-  }
-
-  setToolChangedListener(): void {
-    this.drawingTool.on('tool:changed', (toolName: string) => {
-      const category = 'Tool';
-      const event = 'toolSelected';
-      const data = {
-        selectedToolName: toolName
-      };
-      this.StudentDataService.saveComponentEvent(this, category, event, data);
-    });
   }
 
   handleConnectedComponentsPostProcess(): void {
