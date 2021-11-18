@@ -1,0 +1,6 @@
+<div fxLayout="row wrap" fxLayoutAlign="start stretch">
+  <mat-card *ngFor="let grouping of groupings" class="peer-group-card notice-bg-bg">
+    <peer-group-grouping [grouping]="grouping" (moveWorkgroup)="emitMoveWorkgroup($event)">
+    </peer-group-grouping>
+  </mat-card>
+</div>

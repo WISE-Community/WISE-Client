@@ -5,6 +5,7 @@ import { ConfigService } from '../../../../services/configService';
 import { NodeService } from '../../../../services/nodeService';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { NotificationService } from '../../../../services/notificationService';
+import { PeerGroupService } from '../../../../services/peerGroupService';
 import { StudentStatusService } from '../../../../services/studentStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import * as angular from 'angular';
@@ -29,6 +30,7 @@ export class NodeGradingViewController {
   nodeHasWork: boolean;
   nodeId: string;
   numRubrics: number;
+  peerGroupComponentIds: string[];
   sortOrder: object = {
     team: ['-isVisible', 'workgroupId'],
     '-team': ['-isVisible', '-workgroupId'],
@@ -52,6 +54,7 @@ export class NodeGradingViewController {
     'MilestoneService',
     'NodeService',
     'NotificationService',
+    'PeerGroupService',
     'ProjectService',
     'StudentStatusService',
     'TeacherDataService'
@@ -64,6 +67,7 @@ export class NodeGradingViewController {
     protected MilestoneService: MilestoneService,
     protected NodeService: NodeService,
     protected NotificationService: NotificationService,
+    protected PeerGroupService: PeerGroupService,
     protected ProjectService: TeacherProjectService,
     protected StudentStatusService: StudentStatusService,
     protected TeacherDataService: TeacherDataService
@@ -78,6 +82,7 @@ export class NodeGradingViewController {
     this.sort = this.TeacherDataService.nodeGradingSort;
     this.nodeContent = this.ProjectService.getNodeById(this.nodeId);
     this.milestoneReport = this.MilestoneService.getMilestoneReportByNodeId(this.nodeId);
+    this.peerGroupComponentIds = this.PeerGroupService.getPeerGroupComponentIds(this.node);
     this.retrieveStudentData();
     this.subscribeToEvents();
   }
@@ -358,6 +363,14 @@ export class NodeGradingViewController {
 
   showReport($event) {
     this.MilestoneService.showMilestoneDetails(this.milestoneReport, $event);
+  }
+
+  showPeerGroupGroupings(nodeId: string, componentId: string): void {
+    this.NodeService.showPeerGroupDetails(
+      this.TeacherDataService.getCurrentPeriod().periodId,
+      nodeId,
+      componentId
+    );
   }
 }
 

@@ -1,0 +1,15 @@
+<h2 mat-dialog-title fxLayoutAlign="start center">
+  <span i18n>Move Workgroup</span>
+  <span fxFlex></span>
+  <mat-icon color="warn" i18n-aria-label aria-label="Warning">warning</mat-icon>
+</h2>
+<mat-dialog-content>
+  <div class="info-block">
+    <p *ngIf="isMovingFromPeerGroup" class="warn" i18n>Warning: Moving a workroup from a Peer Group will result in the workgroup losing all the messages they sent in that Peer Group.</p>
+    <p i18n>Are you sure you want to move this workgroup?</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="8px">
+  <button mat-flat-button color="primary" [mat-dialog-close]="false" i18n>Cancel</button>
+  <button mat-button [color]="isMovingFromPeerGroup ? 'warn' : ''" [mat-dialog-close]="true" i18n>Proceed</button>
+</mat-dialog-actions>

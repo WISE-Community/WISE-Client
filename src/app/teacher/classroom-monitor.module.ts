@@ -36,6 +36,12 @@ import { MilestoneReportDataComponent } from './milestone/milestone-report-data/
 import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component';
 import { ManageShowStudentInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component';
 import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component';
+import { PeerGroupAssignedWorkgroupsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-assigned-workgroups/peer-group-assigned-workgroups.component';
+import { PeerGroupDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component';
+import { PeerGroupGroupingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-grouping/peer-group-grouping.component';
+import { PeerGroupMoveWorkgroupConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component';
+import { PeerGroupUnassignedWorkgroupsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-unassigned-workgroups/peer-group-unassigned-workgroups.component';
+import { PeerGroupWorkgroupComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-workgroup/peer-group-workgroup.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +67,12 @@ import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMo
     MilestoneReportDataComponent,
     MoveUserConfirmDialogComponent,
     NavItemProgressComponent,
+    PeerGroupAssignedWorkgroupsComponent,
+    PeerGroupDialogComponent,
+    PeerGroupGroupingComponent,
+    PeerGroupMoveWorkgroupConfirmDialogComponent,
+    PeerGroupUnassignedWorkgroupsComponent,
+    PeerGroupWorkgroupComponent,
     RemoveUserConfirmDialogComponent,
     SelectPeriodComponent,
     ShowStudentInfoComponent,
