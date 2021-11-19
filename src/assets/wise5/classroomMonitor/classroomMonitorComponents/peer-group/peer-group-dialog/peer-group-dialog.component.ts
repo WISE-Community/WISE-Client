@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
 import { PeerGroupService } from '../../../../services/peerGroupService';
+import { ProjectService } from '../../../../services/projectService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 
 @Component({
@@ -16,8 +17,9 @@ export class PeerGroupDialogComponent implements OnInit {
 
   componentId: string;
   currentPeriodChangedSubscription: Subscription;
-  nextAvailableGroupId: number = 1;
   groupings: any[] = [];
+  nextAvailableGroupId: number = 1;
+  stepTitle: string;
   unassignedWorkgroups: any[] = [];
   workgroups: any[] = [];
 
@@ -25,6 +27,7 @@ export class PeerGroupDialogComponent implements OnInit {
     private ConfigService: ConfigService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private PeerGroupService: PeerGroupService,
+    private ProjectService: ProjectService,
     private TeacherDataService: TeacherDataService
   ) {
     this.componentId = data.componentId;
@@ -34,6 +37,7 @@ export class PeerGroupDialogComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeToPeriodChanged();
+    this.stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(this.nodeId);
     this.PeerGroupService.retrieveGroupings(this.nodeId, this.componentId).subscribe(
       (groupings: any) => {
         // TODO

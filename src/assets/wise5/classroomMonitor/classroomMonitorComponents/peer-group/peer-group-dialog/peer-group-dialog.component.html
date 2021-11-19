@@ -1,3 +1,4 @@
+<h4 class="mat-body-2" i18n>Student Groupings for Step {{ stepTitle }}</h4>
 <div>
   <select-period></select-period>
   <div fxFlex></div>
@@ -20,4 +21,7 @@
       [groupings]="groupings"
       (moveWorkgroup)="moveWorkgroup($event)">
   </peer-group-assigned-workgroups>
+</div>
+<div mat-dialog-actions class="close-div" fxLayoutAlign="end center">
+  <button mat-button mat-dialog-close i18n>Close</button>
 </div>
