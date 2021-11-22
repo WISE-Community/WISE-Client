@@ -31,7 +31,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   myWorkgroupId: number;
   peerChatMessages: PeerChatMessage[] = [];
   peerChatWorkgroupIds: number[] = [];
-  peerChatWorkgroups: any[] = [];
+  peerChatWorkgroupInfos: any = {};
   peerGroupId: number;
   peerWorkFromAnotherComponent: any = {};
   requestTimeout: number = 10000;
@@ -165,10 +165,12 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   setPeerChatWorkgroups(workgroupIds: number[]): void {
     this.peerChatWorkgroupIds = workgroupIds;
-    this.peerChatWorkgroups = [];
+    this.peerChatWorkgroupInfos = {};
     for (const workgroupId of workgroupIds) {
-      const workgroup = this.getWorkgroup(workgroupId);
-      this.peerChatWorkgroups.push(workgroup);
+      this.peerChatWorkgroupInfos[workgroupId] = {
+        avatarColor: this.getAvatarColor(workgroupId),
+        displayNames: this.getDisplayNames(workgroupId)
+      }; 
     }
     this.isPeerChatWorkgroupsAvailable = true;
   }
@@ -292,5 +294,19 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   getAvatarColor(workgroupId): string {
     return this.ConfigService.getAvatarColorForWorkgroupId(workgroupId);
+  }
+
+  getDisplayNames(workgroupId: number): string {
+    // TODO: duplciate code in DiscussionService (setUsernames); extract to ConfigService?
+    let displayNames: string = '';
+    const usernames = this.ConfigService.getUsernamesByWorkgroupId(this.workgroupId);
+    if (usernames.length > 0) {
+      displayNames = usernames
+        .map(function (obj) {
+          return obj.name;
+        })
+        .join(', ');
+    }
+    return displayNames;
   }
 }

@@ -1,6 +1,6 @@
 <div *ngIf="isPeerChatWorkgroupsResponseReceived && !isPeerChatWorkgroupsAvailable" class="notice mat-body-2" i18n>
   This Peer Chat activity is not yet available. Please check back later or wait for a notification to return.
-  <!-- TODO: Show different messages for when student has/has not completed required previous components -->
+  <!-- TODO: Show different message when student has not completed required previous component(s) -->
 </div>
 <ng-container *ngIf="isPeerChatWorkgroupsAvailable">
   <component-header [componentContent]="componentContent"></component-header>
@@ -10,74 +10,12 @@
       fxLayoutAlign.gt-sm="start start"
       fxLayoutGap="16px"
       class="previous-work">
-    <mat-card *ngFor="let peerChatWorkgroupId of peerChatWorkgroupIds"
-        fxFlex
-        fxflex.gt-sm="50"
-        class="mat-elevation-z0 notice-bg-bg">
-      <div fxLayout="row"
-          fxLayoutAlign="start center"
-          fxLayoutGap="8px">
-        <mat-icon class="mat-30"
-            [ngStyle]="{'color': getAvatarColor(peerChatWorkgroupId)}">account_circle</mat-icon>
-        <span class="mat-body-2">Workgroup {{ peerChatWorkgroupId }}:</span>
-      </div>
-      <mat-card-content class="app-bg-bg">
-        <span class="text-secondary"
-            *ngIf="peerWorkFromAnotherComponent[peerChatWorkgroupId] == null"
-            i18n>(No response)</span>
-        <ng-container *ngIf="peerWorkFromAnotherComponent[peerChatWorkgroupId] != null"
-            [ngSwitch]="peerWorkFromAnotherComponent[peerChatWorkgroupId].componentType">
-          <concept-map-grading *ngSwitchCase="'ConceptMap'"
-              [nodeId]="showWorkNodeId"
-              [componentId]="showWorkComponentId"
-              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-              [workgroupId]="peerChatWorkgroupId">
-          </concept-map-grading>
-          <draw-grading *ngSwitchCase="'Draw'"
-              [nodeId]="showWorkNodeId"
-              [componentId]="showWorkComponentId"
-              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-              [workgroupId]="peerChatWorkgroupId">
-          </draw-grading>
-          <graph-grading *ngSwitchCase="'Graph'"
-              [nodeId]="showWorkNodeId"
-              [componentId]="showWorkComponentId"
-              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-              [workgroupId]="peerChatWorkgroupId">
-          </graph-grading>
-          <label-grading *ngSwitchCase="'Label'"
-              [nodeId]="showWorkNodeId"
-              [componentId]="showWorkComponentId"
-              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-              [workgroupId]="peerChatWorkgroupId">
-          </label-grading>
-          <match-grading *ngSwitchCase="'Match'"
-              [nodeId]="showWorkNodeId"
-              [componentId]="showWorkComponentId"
-              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-              [workgroupId]="peerChatWorkgroupId">
-          </match-grading>
-          <multiple-choice-grading *ngSwitchCase="'MultipleChoice'"
-              [nodeId]="showWorkNodeId"
-              [componentId]="showWorkComponentId"
-              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-              [workgroupId]="peerChatWorkgroupId">
-          </multiple-choice-grading>
-          <open-response-grading *ngSwitchCase="'OpenResponse'"
-              [nodeId]="showWorkNodeId"
-              [componentId]="showWorkComponentId"
-              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-              [workgroupId]="peerChatWorkgroupId">
-          </open-response-grading>
-          <table-grading *ngSwitchCase="'Table'"
-              [nodeId]="showWorkNodeId"
-              [componentId]="showWorkComponentId"
-              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-              [workgroupId]="peerChatWorkgroupId">
-          </table-grading>
-        </ng-container>
-      </mat-card-content>
-    </mat-card>
+    <div *ngFor="let peerChatWorkgroupId of peerChatWorkgroupIds" fxFlex fxflex.gt-sm="50">
+      <peer-chat-previous-work [studentWork]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+          [avatarColor]="peerChatWorkgroupInfos[peerChatWorkgroupId].avatarColor"
+          [displayNames]="peerChatWorkgroupInfos[peerChatWorkgroupId].displayNames">
+      </peer-chat-previous-work>
+    </div>
   </div>
   <component-header *ngIf="secondPromptComponentContent" [componentContent]="secondPromptComponentContent">
   </component-header>
