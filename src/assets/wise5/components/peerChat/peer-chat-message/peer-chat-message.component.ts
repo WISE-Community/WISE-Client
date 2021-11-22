@@ -27,6 +27,6 @@ export class PeerChatMessageComponent implements OnInit {
     this.timestamp = new Date(this.peerChatMessage.timestamp);
     this.workgroupId = this.peerChatMessage.workgroupId;
     this.isMyMessage = this.myWorkgroupId === this.workgroupId;
-    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.myWorkgroupId);
+    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.workgroupId);
   }
 }

@@ -40,8 +40,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
   showWorkComponentId: string;
   showWorkNodeId: string;
 
-  dummyWorkgroupIds = [108, 109];
-
   constructor(
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
@@ -79,7 +77,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
         this.showWorkNodeId,
         this.showWorkComponentId
       ) != null;
-    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.myWorkgroupId);
     if (this.componentContent.secondPrompt != null && this.componentContent.secondPrompt != '') {
       this.secondPromptComponentContent = {
         prompt: this.componentContent.secondPrompt
@@ -207,7 +204,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
       this.showWorkNodeId,
       this.showWorkComponentId
     );
-    for (const workgroupId of this.peerChatWorkgroupIds) {
+    for (let workgroupId of this.peerChatWorkgroupIds) {
       const componentStateCopy = JSON.parse(JSON.stringify(componentState));
       componentStateCopy.workgroupId = workgroupId;
       this.peerWorkFromAnotherComponent[workgroupId] = componentStateCopy;
@@ -291,5 +288,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
         this.submitStudentResponse();
       }
     }
+  }
+
+  getAvatarColor(workgroupId): string {
+    return this.ConfigService.getAvatarColorForWorkgroupId(workgroupId);
   }
 }

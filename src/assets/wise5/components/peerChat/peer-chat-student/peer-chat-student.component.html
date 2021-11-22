@@ -1,121 +1,131 @@
-<component-header [componentContent]="componentContent"></component-header>
-<div *ngIf="isShowWorkFromAnotherComponent"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-around center"
-    class="show-work-from-another-component-div">
-  <mat-card *ngFor="let peerChatWorkgroupId of peerChatWorkgroupIds"
-      class="mat-elevation-z2 work-from-another-component">
-    <div fxLayoutAlign="start center" fxLayoutGap="10px">
-      <mat-icon class="mat-30"
-          [ngStyle]="{'color': avatarColor}"
-          aria-label="Me"
-          i18n-aria-label
-          matTooltip="Me"
-          matTooltipPosition="above"
-          i18n-matTooltip>
-        account_circle
-      </mat-icon>
-      <span>Workgroup {{ peerChatWorkgroupId }}</span>
-    </div>
-    <div *ngIf="peerWorkFromAnotherComponent[peerChatWorkgroupId] != null"
-        [ngSwitch]="peerWorkFromAnotherComponent[peerChatWorkgroupId].componentType">
-      <concept-map-grading *ngSwitchCase="'ConceptMap'"
-          [nodeId]="showWorkNodeId"
-          [componentId]="showWorkComponentId"
-          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-          [workgroupId]="peerChatWorkgroupId">
-      </concept-map-grading>
-      <draw-grading *ngSwitchCase="'Draw'"
-          [nodeId]="showWorkNodeId"
-          [componentId]="showWorkComponentId"
-          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-          [workgroupId]="peerChatWorkgroupId">
-      </draw-grading>
-      <graph-grading *ngSwitchCase="'Graph'"
-          [nodeId]="showWorkNodeId"
-          [componentId]="showWorkComponentId"
-          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-          [workgroupId]="peerChatWorkgroupId">
-      </graph-grading>
-      <label-grading *ngSwitchCase="'Label'"
-          [nodeId]="showWorkNodeId"
-          [componentId]="showWorkComponentId"
-          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-          [workgroupId]="peerChatWorkgroupId">
-      </label-grading>
-      <match-grading *ngSwitchCase="'Match'"
-          [nodeId]="showWorkNodeId"
-          [componentId]="showWorkComponentId"
-          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-          [workgroupId]="peerChatWorkgroupId">
-      </match-grading>
-      <multiple-choice-grading *ngSwitchCase="'MultipleChoice'"
-          [nodeId]="showWorkNodeId"
-          [componentId]="showWorkComponentId"
-          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-          [workgroupId]="peerChatWorkgroupId">
-      </multiple-choice-grading>
-      <open-response-grading *ngSwitchCase="'OpenResponse'"
-          [nodeId]="showWorkNodeId"
-          [componentId]="showWorkComponentId"
-          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-          [workgroupId]="peerChatWorkgroupId">
-      </open-response-grading>
-      <table-grading *ngSwitchCase="'Table'"
-          [nodeId]="showWorkNodeId"
-          [componentId]="showWorkComponentId"
-          [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-          [workgroupId]="peerChatWorkgroupId">
-      </table-grading>
-    </div>
-  </mat-card>
+<div *ngIf="isPeerChatWorkgroupsResponseReceived && !isPeerChatWorkgroupsAvailable" class="notice mat-body-2" i18n>
+  This Peer Chat activity is not yet available. Please check back later or wait for a notification to return.
+  <!-- TODO: Show different messages for when student has/has not completed required previous components -->
 </div>
-<component-header *ngIf="secondPromptComponentContent"
-    [componentContent]="secondPromptComponentContent">
-</component-header>
-<div *ngIf="isPeerChatWorkgroupsResponseReceived && !isPeerChatWorkgroupsAvailable">
-  <div fxLayoutAlign="center center" i18n>
-    Peer Chat Not Available Yet
+<ng-container *ngIf="isPeerChatWorkgroupsAvailable">
+  <component-header [componentContent]="componentContent"></component-header>
+  <div *ngIf="isShowWorkFromAnotherComponent"
+      fxLayout="column"
+      fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="start start"
+      fxLayoutGap="16px"
+      class="previous-work">
+    <mat-card *ngFor="let peerChatWorkgroupId of peerChatWorkgroupIds"
+        fxFlex
+        fxflex.gt-sm="50"
+        class="mat-elevation-z0 notice-bg-bg">
+      <div fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="8px">
+        <mat-icon class="mat-30"
+            [ngStyle]="{'color': getAvatarColor(peerChatWorkgroupId)}">account_circle</mat-icon>
+        <span class="mat-body-2">Workgroup {{ peerChatWorkgroupId }}:</span>
+      </div>
+      <mat-card-content class="app-bg-bg">
+        <span class="text-secondary"
+            *ngIf="peerWorkFromAnotherComponent[peerChatWorkgroupId] == null"
+            i18n>(No response)</span>
+        <ng-container *ngIf="peerWorkFromAnotherComponent[peerChatWorkgroupId] != null"
+            [ngSwitch]="peerWorkFromAnotherComponent[peerChatWorkgroupId].componentType">
+          <concept-map-grading *ngSwitchCase="'ConceptMap'"
+              [nodeId]="showWorkNodeId"
+              [componentId]="showWorkComponentId"
+              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+              [workgroupId]="peerChatWorkgroupId">
+          </concept-map-grading>
+          <draw-grading *ngSwitchCase="'Draw'"
+              [nodeId]="showWorkNodeId"
+              [componentId]="showWorkComponentId"
+              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+              [workgroupId]="peerChatWorkgroupId">
+          </draw-grading>
+          <graph-grading *ngSwitchCase="'Graph'"
+              [nodeId]="showWorkNodeId"
+              [componentId]="showWorkComponentId"
+              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+              [workgroupId]="peerChatWorkgroupId">
+          </graph-grading>
+          <label-grading *ngSwitchCase="'Label'"
+              [nodeId]="showWorkNodeId"
+              [componentId]="showWorkComponentId"
+              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+              [workgroupId]="peerChatWorkgroupId">
+          </label-grading>
+          <match-grading *ngSwitchCase="'Match'"
+              [nodeId]="showWorkNodeId"
+              [componentId]="showWorkComponentId"
+              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+              [workgroupId]="peerChatWorkgroupId">
+          </match-grading>
+          <multiple-choice-grading *ngSwitchCase="'MultipleChoice'"
+              [nodeId]="showWorkNodeId"
+              [componentId]="showWorkComponentId"
+              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+              [workgroupId]="peerChatWorkgroupId">
+          </multiple-choice-grading>
+          <open-response-grading *ngSwitchCase="'OpenResponse'"
+              [nodeId]="showWorkNodeId"
+              [componentId]="showWorkComponentId"
+              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+              [workgroupId]="peerChatWorkgroupId">
+          </open-response-grading>
+          <table-grading *ngSwitchCase="'Table'"
+              [nodeId]="showWorkNodeId"
+              [componentId]="showWorkComponentId"
+              [componentState]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
+              [workgroupId]="peerChatWorkgroupId">
+          </table-grading>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
   </div>
-</div>
-<div *ngIf="isPeerChatWorkgroupsAvailable"
-    fxLayout="row wrap"
-    fxLayoutAlign="start start"
-    fxLayoutGap="20px">
-  <mat-card class="mat-elevation-z2">
-    <peer-chat-messages [peerChatMessages]="peerChatMessages" [myWorkgroupId]="myWorkgroupId">
-    </peer-chat-messages>
-    <div fxLayout="row"
-        fxLayoutAlign="start center"
-        fxLayoutGap="8px">
-      <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
-        <textarea matInput
-            cdkTextareaAutosize
-            placeholder="Add response..."
-            i18n-placeholder
-            [(ngModel)]="messageText"
-            (ngModelChange)="studentResponseChanged()"
-            [disabled]="isDisabled"
-            (keypress)="studentKeyPressed($event)">
-        </textarea>
-      </mat-form-field>
-      <button mat-flat-button
-          color="primary"
-          (click)="submitStudentResponse()"
-          [disabled]="!isSubmitEnabled"
-          i18n>
-        Send
-      </button>
+  <component-header *ngIf="secondPromptComponentContent" [componentContent]="secondPromptComponentContent">
+  </component-header>
+  <div fxLayout="column"
+      fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="start start"
+      fxLayoutGap="16px">
+    <div *ngIf="componentContent.questionBank.length > 0"
+        fxFlex
+        fxFlex.gt-sm="40"
+        fxFlexOrder="1"
+        fxFlexOrder.gt-sm="2">
+      <mat-card class="mat-elevation-z0 primary-bg ">
+        <div class="dark-theme mat-body-2" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+          <mat-icon>help</mat-icon>
+          <span i18n>Question Bank</span>
+        </div>
+        <mat-card-content class="app-bg-bg">
+          <ul>
+            <li *ngFor="let question of componentContent.questionBank" class="question">
+              {{ question }}
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
     </div>
-  </mat-card>
-  <mat-card *ngIf="componentContent.questionBank.length > 0" class="question-bank-card">
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="question-bank-label">
-      <mat-icon>help</mat-icon>
-      <span i18n>Question Bank</span>
-    </div>
-    <div *ngFor="let question of componentContent.questionBank"
-        class="question">
-      {{ question }}
-    </div>
-  </mat-card>
-</div>
+    <mat-card class="chat-box mat-elevation-z2"
+        fxFlex
+        fxFlex.gt-sm="60"
+        fxFlexOrder="2"
+        fxFlexOrder.gt-sm="1">
+      <peer-chat-messages [peerChatMessages]="peerChatMessages" [myWorkgroupId]="myWorkgroupId"></peer-chat-messages>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
+          <textarea matInput
+              cdkTextareaAutosize
+              placeholder="Add response..."
+              i18n-placeholder
+              [(ngModel)]="messageText"
+              (ngModelChange)="studentResponseChanged()"
+              [disabled]="isDisabled"
+              (keypress)="studentKeyPressed($event)">
+          </textarea>
+        </mat-form-field>
+        <button mat-flat-button color="primary" (click)="submitStudentResponse()" [disabled]="!isSubmitEnabled" i18n>
+          Send
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</ng-container>

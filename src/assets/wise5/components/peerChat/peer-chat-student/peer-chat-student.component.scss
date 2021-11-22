@@ -1,14 +1,18 @@
-@import '~style/abstracts/variables', '~style/abstracts/functions';
+@import '~style/abstracts/variables';
 
 .mat-card {
   padding: 8px;
-  margin-top: 16px;
-  width: 100%;
-  max-width: breakpoint('sm.min');
 }
 
-.show-work-from-another-component-div {
-  margin-bottom: 20px;
+mat-card-content {
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: $button-border-radius;
+  overflow: auto;
+}
+
+.previous-work {
+  margin-bottom: 24px;
 }
 
 .work-from-another-component {
@@ -16,17 +20,19 @@
   padding: 20px;
 }
 
-.question-bank-card {
-  border: 4px solid royalblue;
-  padding: 16px;
-  margin-top: 16px;
-  max-width: 200px;
+ul {
+  padding: 0;
+  list-style-type: none;
 }
 
-.question-bank-label {
-  margin-bottom: 10px;
+li {
+  margin-bottom: 8px;
+  
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 .question {
-  margin-bottom: 10px;
+  font-style: italic;
 }
