@@ -28,19 +28,7 @@
         fxFlex.gt-sm="40"
         fxFlexOrder="1"
         fxFlexOrder.gt-sm="2">
-      <mat-card class="mat-elevation-z0 primary-bg ">
-        <div class="dark-theme mat-body-2" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-          <mat-icon>help</mat-icon>
-          <span i18n>Question Bank</span>
-        </div>
-        <mat-card-content class="app-bg-bg">
-          <ul>
-            <li *ngFor="let question of componentContent.questionBank" class="question">
-              {{ question }}
-            </li>
-          </ul>
-        </mat-card-content>
-      </mat-card>
+      <peer-chat-question-bank [questions]="componentContent.questionBank"></peer-chat-question-bank>
     </div>
     <mat-card class="chat-box mat-elevation-z2"
         fxFlex

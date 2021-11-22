@@ -10464,7 +10464,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="427e92e019c34109656b0e1fc9576bfb833934d9" datatype="html">
@@ -13246,8 +13246,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">127</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-question-bank/peer-chat-question-bank.component.html</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4188ef67a196ca21d68f20405b99fb6b2f6476c7" datatype="html">
@@ -13354,7 +13354,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Send </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
-          <context context-type="linenumber">64,65</context>
+          <context context-type="linenumber">52,53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6310961320545154131" datatype="html">
