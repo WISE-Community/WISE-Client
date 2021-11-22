@@ -73,6 +73,7 @@ import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance
 import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
 import { PeerChatService } from '../assets/wise5/components/peerChat/peerChatService';
+import { PeerChatChatBoxComponent } from '../assets/wise5/components/peerChat/peer-chat-chat-box/peer-chat-chat-box.component';
 import { PeerChatMessageComponent } from '../assets/wise5/components/peerChat/peer-chat-message/peer-chat-message.component';
 import { PeerChatMessagesComponent } from '../assets/wise5/components/peerChat/peer-chat-messages/peer-chat-messages.component';
 import { PeerChatPreviousWorkComponent } from '../assets/wise5/components/peerChat/peer-chat-previous-work/peer-chat-previous-work.component';
@@ -106,6 +107,7 @@ export class EmptyComponent {}
     NodeIconComponent,
     NodeStatusIcon,
     OpenResponseGrading,
+    PeerChatChatBoxComponent,
     PeerChatMessageComponent,
     PeerChatMessagesComponent,
     PeerChatPreviousWorkComponent,
@@ -224,6 +226,7 @@ export class EmptyComponent {}
     NodeIconComponent,
     NodeStatusIcon,
     OpenResponseGrading,
+    PeerChatChatBoxComponent,
     PeerChatMessageComponent,
     PeerChatMessagesComponent,
     PeerChatPreviousWorkComponent,

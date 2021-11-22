@@ -22,12 +22,9 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-student.component.scss']
 })
 export class PeerChatStudentComponent extends ComponentStudent {
-  avatarColor: string;
   isPeerChatWorkgroupsResponseReceived: boolean = false;
   isPeerChatWorkgroupsAvailable: boolean = false;
   isShowWorkFromAnotherComponent: boolean = false;
-  isSubmitEnabled: boolean = false;
-  messageText: string;
   myWorkgroupId: number;
   peerChatMessages: PeerChatMessage[] = [];
   peerChatWorkgroupIds: number[] = [];
@@ -170,7 +167,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
       this.peerChatWorkgroupInfos[workgroupId] = {
         avatarColor: this.getAvatarColor(workgroupId),
         displayNames: this.getDisplayNames(workgroupId)
-      }; 
+      };
     }
     this.isPeerChatWorkgroupsAvailable = true;
   }
@@ -218,25 +215,19 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.getPeerWorkFromAnotherComponentSuccess();
   }
 
-  submitStudentResponse(): void {
+  submitStudentResponse(event): void {
     const peerChatMessage = new PeerChatMessage(
       this.ConfigService.getWorkgroupId(),
-      this.messageText,
+      event,
       new Date().getTime()
     );
     this.addPeerChatMessage(peerChatMessage);
-    this.response = this.messageText;
-    this.clearStudentMessage();
-    this.studentResponseChanged();
+    this.response = event;
     this.emitComponentSubmitTriggered();
   }
 
   addPeerChatMessage(peerChatMessage: PeerChatMessage): void {
     this.peerChatMessages.push(peerChatMessage);
-  }
-
-  clearStudentMessage(): void {
-    this.messageText = '';
   }
 
   createComponentState(action: string): any {
@@ -275,19 +266,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
     for (const workgroupId of this.peerChatWorkgroupIds) {
       if (workgroupId !== this.workgroupId) {
         this.StudentWebSocketService.sendMessageToClassmate(workgroupId, message);
-      }
-    }
-  }
-
-  studentResponseChanged(): void {
-    this.isSubmitEnabled = this.messageText.length > 0;
-  }
-
-  studentKeyPressed(event: any): void {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      if (this.isSubmitEnabled) {
-        this.submitStudentResponse();
       }
     }
   }

@@ -30,28 +30,14 @@
         fxFlexOrder.gt-sm="2">
       <peer-chat-question-bank [questions]="componentContent.questionBank"></peer-chat-question-bank>
     </div>
-    <mat-card class="chat-box mat-elevation-z2"
-        fxFlex
+    <div fxFlex
         fxFlex.gt-sm="60"
         fxFlexOrder="2"
         fxFlexOrder.gt-sm="1">
-      <peer-chat-messages [peerChatMessages]="peerChatMessages" [myWorkgroupId]="myWorkgroupId"></peer-chat-messages>
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-        <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
-          <textarea matInput
-              cdkTextareaAutosize
-              placeholder="Add response..."
-              i18n-placeholder
-              [(ngModel)]="messageText"
-              (ngModelChange)="studentResponseChanged()"
-              [disabled]="isDisabled"
-              (keypress)="studentKeyPressed($event)">
-          </textarea>
-        </mat-form-field>
-        <button mat-flat-button color="primary" (click)="submitStudentResponse()" [disabled]="!isSubmitEnabled" i18n>
-          Send
-        </button>
-      </div>
-    </mat-card>
+      <peer-chat-chat-box [messages]="peerChatMessages"
+          [myWorkgroupId]="myWorkgroupId"
+          [workgroupInfos]="workgroupInfos"
+          (onSubmit)="submitStudentResponse($event)"></peer-chat-chat-box>
+    </div>
   </div>
 </ng-container>
