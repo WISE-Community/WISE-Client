@@ -15,7 +15,6 @@ import { ManageUserComponent } from '../../assets/wise5/classroomMonitor/classro
 import { MoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { WorkgroupInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component';
 import { NavItemScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/navItemScore/nav-item-score.component';
-import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 import { WorkgroupNodeScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/workgroupNodeScore/workgroup-node-score.component';
 import { ViewComponentRevisionsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component';
 import { WorkgroupComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component';
@@ -36,12 +35,8 @@ import { MilestoneReportDataComponent } from './milestone/milestone-report-data/
 import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component';
 import { ManageShowStudentInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component';
 import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component';
-import { PeerGroupAssignedWorkgroupsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-assigned-workgroups/peer-group-assigned-workgroups.component';
-import { PeerGroupDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component';
-import { PeerGroupGroupingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-grouping/peer-group-grouping.component';
-import { PeerGroupMoveWorkgroupConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component';
-import { PeerGroupUnassignedWorkgroupsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-unassigned-workgroups/peer-group-unassigned-workgroups.component';
-import { PeerGroupWorkgroupComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-workgroup/peer-group-workgroup.component';
+import { PeerGroupGradingModule } from './peer-group-grading.module';
+import { SelectPeriodModule } from './select-period.module';
 
 @NgModule({
   declarations: [
@@ -67,14 +62,7 @@ import { PeerGroupWorkgroupComponent } from '../../assets/wise5/classroomMonitor
     MilestoneReportDataComponent,
     MoveUserConfirmDialogComponent,
     NavItemProgressComponent,
-    PeerGroupAssignedWorkgroupsComponent,
-    PeerGroupDialogComponent,
-    PeerGroupGroupingComponent,
-    PeerGroupMoveWorkgroupConfirmDialogComponent,
-    PeerGroupUnassignedWorkgroupsComponent,
-    PeerGroupWorkgroupComponent,
     RemoveUserConfirmDialogComponent,
-    SelectPeriodComponent,
     ShowStudentInfoComponent,
     StatusIconComponent,
     StepInfoComponent,
@@ -87,6 +75,6 @@ import { PeerGroupWorkgroupComponent } from '../../assets/wise5/classroomMonitor
     NavItemScoreComponent,
     WorkgroupNodeStatusComponent
   ],
-  imports: [AngularJSModule, ComponentGradingModule]
+  imports: [AngularJSModule, ComponentGradingModule, PeerGroupGradingModule, SelectPeriodModule]
 })
 export class ClassroomMonitorModule {}
