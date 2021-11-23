@@ -16,6 +16,10 @@ export class PeerGroupDialogComponent implements OnInit {
   @Input() periodId: number;
 
   componentId: string;
+  componentLabel: string;
+  componentTypeToLabel: any = {
+    PeerChat: 'Peer Chat'
+  };
   currentPeriodChangedSubscription: Subscription;
   groupings: any[] = [];
   nextAvailableGroupId: number = 1;
@@ -37,6 +41,9 @@ export class PeerGroupDialogComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeToPeriodChanged();
+    this.componentLabel = this.componentTypeToLabel[
+      this.ProjectService.getComponentType(this.nodeId, this.componentId)
+    ];
     this.stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(this.nodeId);
     this.PeerGroupService.retrieveGroupings(this.nodeId, this.componentId).subscribe(
       (groupings: any) => {

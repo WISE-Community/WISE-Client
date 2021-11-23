@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Node } from '../common/Node';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 
@@ -12,7 +13,7 @@ export class PeerGroupService {
     private ProjectService: ProjectService
   ) {}
 
-  getPeerGroupComponentIds(node: any): string[] {
+  getPeerGroupComponentIds(node: Node): string[] {
     const componentIds = [];
     for (const component of node.components) {
       if (component.type === 'PeerChat') {
