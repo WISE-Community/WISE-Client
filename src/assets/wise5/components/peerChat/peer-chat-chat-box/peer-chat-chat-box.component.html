@@ -1,7 +1,8 @@
 <mat-card class="chat-box mat-elevation-z2">
   <peer-chat-messages *ngIf="messages.length > 0"
       [peerChatMessages]="messages"
-      [myWorkgroupId]="myWorkgroupId"></peer-chat-messages>
+      [myWorkgroupId]="myWorkgroupId"
+      [workgroupInfos]="workgroupInfos"></peer-chat-messages>
   <div *ngIf="isEnabled" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
     <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
       <textarea matInput

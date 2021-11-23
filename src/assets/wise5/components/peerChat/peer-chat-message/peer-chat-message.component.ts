@@ -9,12 +9,17 @@ import { PeerChatMessage } from '../PeerChatMessage';
 })
 export class PeerChatMessageComponent implements OnInit {
   @Input()
+  avatarColor: string;
+
+  @Input()
+  displayNames: string;
+  
+  @Input()
   myWorkgroupId: number;
 
   @Input()
   peerChatMessage: PeerChatMessage;
 
-  avatarColor: string;
   isMyMessage: boolean;
   text: string;
   timestamp: any;
@@ -27,6 +32,5 @@ export class PeerChatMessageComponent implements OnInit {
     this.timestamp = new Date(this.peerChatMessage.timestamp);
     this.workgroupId = this.peerChatMessage.workgroupId;
     this.isMyMessage = this.myWorkgroupId === this.workgroupId;
-    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.workgroupId);
   }
 }
