@@ -50,19 +50,25 @@ export class PeerGroupDialogComponent implements OnInit {
         // TODO
       },
       () => {
-        this.workgroups = this.ConfigService.getWorkgroupsByPeriod(this.periodId);
+        this.workgroups = this.getWorkgroupsInPeriod();
         this.setDummyGroupingsAndUnassignedWorkgroups();
       }
     );
   }
 
-  subscribeToPeriodChanged() {
+  subscribeToPeriodChanged(): void {
     this.currentPeriodChangedSubscription = this.TeacherDataService.currentPeriodChanged$.subscribe(
       ({ currentPeriod }) => {
         this.periodId = currentPeriod.periodId;
-        this.workgroups = this.ConfigService.getWorkgroupsByPeriod(this.periodId);
+        this.workgroups = this.getWorkgroupsInPeriod();
         this.setDummyGroupingsAndUnassignedWorkgroups();
       }
+    );
+  }
+
+  getWorkgroupsInPeriod(): any[] {
+    return this.ConfigService.getWorkgroupsByPeriod(this.periodId).filter(
+      (workgroup) => workgroup.workgroupId != null
     );
   }
 
@@ -144,7 +150,7 @@ export class PeerGroupDialogComponent implements OnInit {
     );
   }
 
-  removeWorkgroup(workgroupId: number, location: number) {
+  removeWorkgroup(workgroupId: number, location: number): void {
     if (location === 0) {
       this.removeWorkgroupFromUnassigned(workgroupId);
     } else {
@@ -174,7 +180,7 @@ export class PeerGroupDialogComponent implements OnInit {
     }
   }
 
-  addWorkgroupToGroup(workgroupId: number, location: number) {
+  addWorkgroupToGroup(workgroupId: number, location: number): void {
     if (location === 0) {
       this.unassignedWorkgroups.push(this.getWorkgroup(workgroupId));
     } else {
@@ -183,7 +189,7 @@ export class PeerGroupDialogComponent implements OnInit {
     }
   }
 
-  getGroup(groupId: number) {
+  getGroup(groupId: number): any {
     for (const group of this.groupings) {
       if (group.id === groupId) {
         return group;
