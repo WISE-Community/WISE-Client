@@ -100,11 +100,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (peerGroup: any) => {
-          console.log('success getting peer workgroups');
           this.requestChatWorkgroupsSuccess(peerGroup);
         },
         (error) => {
-          console.log('error getting peer workgroups');
           this.requestChatWorkgroupsError();
         }
       );
@@ -120,7 +118,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.getPeerChatComponentStates(peerGroup.id);
   }
 
-  getPeerGroupWorkgroupIds(peerGroup: any): number[] {
+  getPeerGroupWorkgroupIds(peerGroup: PeerGroup): number[] {
     return peerGroup.members.map((member) => member.id);
   }
 
@@ -133,11 +131,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (componentStates: any[]) => {
-          console.log('success getting peer chat messages');
           this.getPeerChatComponentStatesSuccess(componentStates);
         },
         (error) => {
-          console.log('error getting peer chat messages');
           this.getPeerChatComponentStatesError();
         }
       );
@@ -203,7 +199,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
       this.showWorkNodeId,
       this.showWorkComponentId
     );
-    for (let workgroupId of this.peerChatWorkgroupIds) {
+    for (const workgroupId of this.peerChatWorkgroupIds) {
       const componentStateCopy = JSON.parse(JSON.stringify(componentState));
       componentStateCopy.workgroupId = workgroupId;
       this.peerWorkFromAnotherComponent[workgroupId] = componentStateCopy;
@@ -270,7 +266,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     }
   }
 
-  getAvatarColor(workgroupId): string {
+  getAvatarColor(workgroupId: number): string {
     return this.ConfigService.getAvatarColorForWorkgroupId(workgroupId);
   }
 
