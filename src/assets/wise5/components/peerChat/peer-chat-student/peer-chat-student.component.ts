@@ -271,9 +271,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   getDisplayNames(workgroupId: number): string {
-    // TODO: duplciate code in DiscussionService (setUsernames); extract to ConfigService?
+    // TODO: duplciate code in DiscussionService (setUsernames); extract to service function
     let displayNames: string = '';
-    const usernames = this.ConfigService.getUsernamesByWorkgroupId(this.workgroupId);
+    const usernames = this.ConfigService.getUsernamesByWorkgroupId(workgroupId);
     if (usernames.length > 0) {
       displayNames = usernames
         .map(function (obj) {
