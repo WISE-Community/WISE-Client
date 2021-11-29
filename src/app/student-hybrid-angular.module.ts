@@ -36,6 +36,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { GraphStudent } from '../assets/wise5/components/graph/graph-student/graph-student.component';
 import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
 import { PeerChatStudentComponent } from '../assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component';
+import { PeerChatModule } from '../assets/wise5/components/peerChat/peer-chat.module';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { PeerChatStudentComponent } from '../assets/wise5/components/peerChat/pe
     DialogGuidanceStudentModule,
     HighchartsChartModule,
     MatchStudentModule,
+    PeerChatModule,
     StudentComponentModule
   ],
   providers: [
