@@ -58,7 +58,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
   ngOnInit() {
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
     this.node = this.ProjectService.getNodeById(this.nodeId);
-    this.nodeIds = this.ProjectService.flattenedProjectAsNodeIds;
+    this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds(true);
     this.populateBranchAuthoring();
     this.populateScoreId();
   }
