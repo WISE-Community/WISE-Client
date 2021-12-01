@@ -1,0 +1,59 @@
+<mat-card class="mat-elevation-z0 notice-bg-bg">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="mat-30" [ngStyle]="{'color': avatarColor}">account_circle</mat-icon>
+    <span class="mat-body-2">{{ displayNames }}:</span>
+  </div>
+  <mat-card-content class="app-bg-bg">
+    <span class="text-secondary" *ngIf="studentWork == null" i18n>(No response)</span>
+    <ng-container *ngIf="studentWork != null" [ngSwitch]="studentWork.componentType">
+      <concept-map-grading *ngSwitchCase="'ConceptMap'"
+          [nodeId]="studentWork.nodeId"
+          [componentId]="studentWork.componentId"
+          [componentState]="studentWork"
+          [workgroupId]="studentWork.workgroupId">
+      </concept-map-grading>
+      <draw-grading *ngSwitchCase="'Draw'"
+          [nodeId]="studentWork.nodeId"
+          [componentId]="studentWork.componentId"
+          [componentState]="studentWork"
+          [workgroupId]="studentWork.workgroupId">
+      </draw-grading>
+      <graph-grading *ngSwitchCase="'Graph'"
+          [nodeId]="studentWork.nodeId"
+          [componentId]="studentWork.componentId"
+          [componentState]="studentWork"
+          [workgroupId]="studentWork.workgroupId">
+      </graph-grading>
+      <label-grading *ngSwitchCase="'Label'"
+          [nodeId]="studentWork.nodeId"
+          [componentId]="studentWork.componentId"
+          [componentState]="studentWork"
+          [workgroupId]="studentWork.workgroupId">
+      </label-grading>
+      <match-grading *ngSwitchCase="'Match'"
+          [nodeId]="studentWork.nodeId"
+          [componentId]="studentWork.componentId"
+          [componentState]="studentWork"
+          [workgroupId]="studentWork.workgroupId">
+      </match-grading>
+      <multiple-choice-grading *ngSwitchCase="'MultipleChoice'"
+          [nodeId]="studentWork.nodeId"
+          [componentId]="studentWork.componentId"
+          [componentState]="studentWork"
+          [workgroupId]="studentWork.workgroupId">
+      </multiple-choice-grading>
+      <open-response-grading *ngSwitchCase="'OpenResponse'"
+          [nodeId]="studentWork.nodeId"
+          [componentId]="studentWork.componentId"
+          [componentState]="studentWork"
+          [workgroupId]="studentWork.workgroupId">
+      </open-response-grading>
+      <table-grading *ngSwitchCase="'Table'"
+          [nodeId]="studentWork.nodeId"
+          [componentId]="studentWork.componentId"
+          [componentState]="studentWork"
+          [workgroupId]="studentWork.workgroupId">
+      </table-grading>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

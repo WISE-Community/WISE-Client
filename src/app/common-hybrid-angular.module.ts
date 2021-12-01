@@ -73,8 +73,6 @@ import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance
 import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
 import { PeerChatService } from '../assets/wise5/components/peerChat/peerChatService';
-import { PeerChatMessageComponent } from '../assets/wise5/components/peerChat/peer-chat-message/peer-chat-message.component';
-import { PeerChatMessagesComponent } from '../assets/wise5/components/peerChat/peer-chat-messages/peer-chat-messages.component';
 import { OpenResponseGrading } from '../assets/wise5/components/openResponse/open-response-grading/open-response-grading.component';
 import { MultipleChoiceGrading } from '../assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component';
 import { ConceptMapGrading } from '../assets/wise5/components/conceptMap/concept-map-grading/concept-map-grading.component';
@@ -104,8 +102,6 @@ export class EmptyComponent {}
     NodeIconComponent,
     NodeStatusIcon,
     OpenResponseGrading,
-    PeerChatMessageComponent,
-    PeerChatMessagesComponent,
     TableGrading
   ],
   imports: [
@@ -220,8 +216,6 @@ export class EmptyComponent {}
     NodeIconComponent,
     NodeStatusIcon,
     OpenResponseGrading,
-    PeerChatMessageComponent,
-    PeerChatMessagesComponent,
     ReactiveFormsModule,
     TableGrading
   ]

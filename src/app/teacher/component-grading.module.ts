@@ -6,6 +6,7 @@ import { DialogGuidanceGradingComponent } from '../../assets/wise5/components/di
 import { DiscussionGrading } from '../../assets/wise5/components/discussion/discussion-grading/discussion-grading.component';
 import { EmbeddedGrading } from '../../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
 import { PeerChatGradingComponent } from '../../assets/wise5/components/peerChat/peer-chat-grading/peer-chat-grading.component';
+import { PeerChatModule } from '../../assets/wise5/components/peerChat/peer-chat.module';
 import { AngularJSModule } from '../common-hybrid-angular.module';
 
 @NgModule({
@@ -17,7 +18,7 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     EmbeddedGrading,
     PeerChatGradingComponent
   ],
-  imports: [AngularJSModule, HighchartsChartModule],
+  imports: [AngularJSModule, HighchartsChartModule, PeerChatModule],
   exports: [
     AnimationGrading,
     AudioOscillatorGrading,

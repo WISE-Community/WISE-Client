@@ -280,7 +280,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">155</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ea4d9fe61420a3fce81cf54c4c615e3c19c646a6" datatype="html">
@@ -886,6 +886,14 @@
           <context context-type="linenumber">390</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
@@ -899,6 +907,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">396</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">86</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
@@ -918,6 +934,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">378</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
@@ -8742,21 +8766,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Show more</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="149546eb32bc1b69012afcd34945c180f0790dbf" datatype="html">
         <source> Team has not saved any work </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
-          <context context-type="linenumber">86,87</context>
+          <context context-type="linenumber">93,94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1a68048cfcd964c630f4316c43db20f0b8e3a80d" datatype="html">
         <source>See revisions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component.html</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="058b73757ea9dc14dee9cb48d52bf312fbb8ab15" datatype="html">
@@ -9655,35 +9679,35 @@ Are you ready to receive feedback on this answer?</source>
         <source> Show Amplitude Input </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">93,94</context>
+          <context context-type="linenumber">94,95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="267799b6a3f95111ede597b3bdfac1b68ca4755e" datatype="html">
         <source> Allow Student to Edit Amplitude </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">102,103</context>
+          <context context-type="linenumber">103,104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="584114dd79e680cb2262384fe8fc40c40149e9b3" datatype="html">
         <source>Oscillator Width (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dd7074cd090ce1bc8c04b82d5e86dc19e550819c" datatype="html">
         <source>Oscillator Height (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="45565845bc7e8f7999ef848f155e2c7d5dbb248e" datatype="html">
         <source>Oscillator Grid Size (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="69c3a88db813e4b07df0bd518f272ac529b2c3f1" datatype="html">
@@ -9823,21 +9847,21 @@ Are you ready to receive feedback on this answer?</source>
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">566</context>
+          <context context-type="linenumber">570</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6643018309880261465" datatype="html">
         <source>Auto Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">570</context>
+          <context context-type="linenumber">574</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1612722476211621614" datatype="html">
         <source>Submitted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">574</context>
+          <context context-type="linenumber">578</context>
         </context-group>
       </trans-unit>
       <trans-unit id="818444ddcd112e756ab725357dcfb238b9257324" datatype="html">
@@ -10436,14 +10460,22 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Add response...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-chat-box/peer-chat-chat-box.component.html</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="427e92e019c34109656b0e1fc9576bfb833934d9" datatype="html">
         <source> Send </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-chat-box/peer-chat-chat-box.component.html</context>
+          <context context-type="linenumber">22,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c80dd9bfb0bd7a7ce89ef1140e6f35211ab711f0" datatype="html">
@@ -10457,7 +10489,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Automated guidance response</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4467968363873261907" datatype="html">
@@ -13114,6 +13146,199 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="758cc560477368488b8af4c8b702581f881fbed2" datatype="html">
+        <source>Show Work From Other Component (Optional)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="310b6ade177e4fb8a9f30579b05696c0122f08a6" datatype="html">
+        <source>(None)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9d85a9b5d7364a651b364165c47e6ac83cfe379f" datatype="html">
+        <source>Second Prompt (Optional)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a51bb2ce39d7715e05bc737ff1db2b630ab7c8af" datatype="html">
+        <source>Enter Second Prompt Here</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6253f75659909146431b0b8ab1e722961d05807b" datatype="html">
+        <source>Grouping Logic</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3fdcdc54529fdb3af326f6c54a49089ecb9bc4d8" datatype="html">
+        <source>Add Logic</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="59791d6eb791a78307615f26e49998e0827b686a" datatype="html">
+        <source>Grouping Logic Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f5d6ddf23866822ce4a21612e7e4aab5b36c5b4d" datatype="html">
+        <source>Delete Logic</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1440ff5a5169f5f2b7365695c44b6dff0f2fd5ce" datatype="html">
+        <source>Threshold Count</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a5044e2b75990016e18dbe505d6301074753feeb" datatype="html">
+        <source>Threshold Percent</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="79628c3cb5efb40551927e8a89802e3fecc8564e" datatype="html">
+        <source>Number of Workgroups Per Grouping</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="69890220efa72f501c096cd863f5f9dcf16fd321" datatype="html">
+        <source>Question Bank</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-question-bank/peer-chat-question-bank.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4188ef67a196ca21d68f20405b99fb6b2f6476c7" datatype="html">
+        <source>Add Question</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="41c1492a9607184843c5c616e1fc9a177ec199e4" datatype="html">
+        <source> There are no questions in the Question Bank
+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">138,139</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2fa3b16b569acf67b1d1a29e8083acc8d07b0595" datatype="html">
+        <source>Question</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fcd136e851e5a1529bc5fe218211eba600af39bf" datatype="html">
+        <source>Move Question Up</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4b685e418fa98f3dd90c323d8d1d8d2ddb14cb4" datatype="html">
+        <source>Move Question Down</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">161</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6253ef6a810d57c9c0e00a10cff0cc989117d199" datatype="html">
+        <source>Delete Question</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.html</context>
+          <context context-type="linenumber">169</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="378433084725731138" datatype="html">
+        <source>You are not allowed to delete this Grouping Logic because you must have at least one.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.ts</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7573168323775479211" datatype="html">
+        <source>Are you sure you want to delete this Grouping Logic?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.ts</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2774207815872923451" datatype="html">
+        <source>Are you sure you want to delete this question?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.ts</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3e4063d41615b0bdb15dd79a55e0334dabeb361f" datatype="html">
+        <source>(No response)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-previous-work/peer-chat-previous-work.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="375ead964bf5b0ae938bb0b600db793ac0d32683" datatype="html">
+        <source> This Peer Chat activity is not yet available. Please check back later or wait for a notification to return. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6310961320545154131" datatype="html">
+        <source>Peer Chat</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peerChatService.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="b7476b3f8bc67f93405690b807d8751371cdf7ed" datatype="html">
         <source> Choose the step and component to show the summary data for:
 </source>
@@ -13666,17 +13891,6 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
           <context context-type="linenumber">71</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="310b6ade177e4fb8a9f30579b05696c0122f08a6" datatype="html">
-        <source>(None)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">79</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a3e2cbd23a21040a6893d669847148041dd03868" datatype="html">

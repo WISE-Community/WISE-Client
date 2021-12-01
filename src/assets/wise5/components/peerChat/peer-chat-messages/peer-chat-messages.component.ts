@@ -13,6 +13,9 @@ export class PeerChatMessagesComponent implements OnInit {
   @Input()
   peerChatMessages: PeerChatMessage[] = [];
 
+  @Input()
+  workgroupInfos: any = {};
+
   constructor() {}
 
   ngOnInit(): void {}
