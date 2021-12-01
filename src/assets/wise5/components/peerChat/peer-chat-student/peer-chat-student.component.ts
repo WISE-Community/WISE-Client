@@ -22,9 +22,10 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-student.component.scss']
 })
 export class PeerChatStudentComponent extends ComponentStudent {
-  isPeerChatWorkgroupsResponseReceived: boolean = false;
-  isPeerChatWorkgroupsAvailable: boolean = false;
-  isShowWorkFromAnotherComponent: boolean = false;
+  errorRetrievingWorkFromAnotherComponent: boolean;
+  isPeerChatWorkgroupsResponseReceived: boolean;
+  isPeerChatWorkgroupsAvailable: boolean;
+  isShowWorkFromAnotherComponent: boolean;
   myWorkgroupId: number;
   peerChatMessages: PeerChatMessage[] = [];
   peerChatWorkgroupIds: number[] = [];
@@ -175,40 +176,22 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   getPeerWorkFromAnotherComponent(): void {
-    this.PeerChatService.retrievePeerWorkFromComponent(
+    this.PeerChatService.retrieveWorkFromAnotherComponent(
+      this.peerGroupId,
       this.nodeId,
       this.componentId,
-      this.peerChatWorkgroupIds
-    )
-      .pipe(timeout(this.requestTimeout))
-      .subscribe(
-        (data: any) => {
-          console.log('success getting peer work from another component');
-          this.getPeerWorkFromAnotherComponentSuccess();
-        },
-        (err) => {
-          console.log('error getting peer work from another component');
-          this.getPeerWorkFromAnotherComponentError();
-        }
-      );
-  }
-
-  getPeerWorkFromAnotherComponentSuccess(): void {
-    // Populate dummy work from another component for all the workgroups in the group
-    const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
       this.showWorkNodeId,
       this.showWorkComponentId
+    ).subscribe(
+      (componentStates: any[]) => {
+        for (const componentState of componentStates) {
+          this.peerWorkFromAnotherComponent[componentState.workgroupId] = componentState;
+        }
+      },
+      (err) => {
+        this.errorRetrievingWorkFromAnotherComponent = true;
+      }
     );
-    for (const workgroupId of this.peerChatWorkgroupIds) {
-      const componentStateCopy = JSON.parse(JSON.stringify(componentState));
-      componentStateCopy.workgroupId = workgroupId;
-      this.peerWorkFromAnotherComponent[workgroupId] = componentStateCopy;
-    }
-  }
-
-  getPeerWorkFromAnotherComponentError(): void {
-    // Call the success function for now since we don't have the backend hooked up yet
-    this.getPeerWorkFromAnotherComponentSuccess();
   }
 
   submitStudentResponse(event): void {

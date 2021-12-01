@@ -13,7 +13,8 @@
     <div *ngFor="let peerChatWorkgroupId of peerChatWorkgroupIds" fxFlex fxflex.gt-sm="50">
       <peer-chat-previous-work [studentWork]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
           [avatarColor]="peerChatWorkgroupInfos[peerChatWorkgroupId].avatarColor"
-          [displayNames]="peerChatWorkgroupInfos[peerChatWorkgroupId].displayNames">
+          [displayNames]="peerChatWorkgroupInfos[peerChatWorkgroupId].displayNames"
+          [errorRetrievingStudentWork]="errorRetrievingWorkFromAnotherComponent">
       </peer-chat-previous-work>
     </div>
   </div>

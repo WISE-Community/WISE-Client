@@ -4,7 +4,10 @@
     <span class="mat-body-2">{{ displayNames }}:</span>
   </div>
   <mat-card-content class="app-bg-bg">
-    <span class="text-secondary" *ngIf="studentWork == null" i18n>(No response)</span>
+    <span class="warn" *ngIf="errorRetrievingStudentWork" i18n>
+      (Error retrieving response)
+    </span>
+    <span class="text-secondary" *ngIf="!errorRetrievingStudentWork && studentWork == null" i18n>(No response)</span>
     <ng-container *ngIf="studentWork != null" [ngSwitch]="studentWork.componentType">
       <concept-map-grading *ngSwitchCase="'ConceptMap'"
           [nodeId]="studentWork.nodeId"

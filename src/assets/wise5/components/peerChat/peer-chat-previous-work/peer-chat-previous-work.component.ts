@@ -13,6 +13,9 @@ export class PeerChatPreviousWorkComponent implements OnInit {
   displayNames: string;
 
   @Input()
+  errorRetrievingStudentWork: boolean;
+
+  @Input()
   studentWork: any;
 
   constructor() {}
