@@ -1,10 +1,16 @@
+import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
 import { TagService } from '../../../../services/tagService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { UtilService } from '../../../../services/utilService';
 
-class NodeAdvancedBranchAuthoringController {
+@Component({
+  selector: 'node-advanced-branch-authoring',
+  templateUrl: 'node-advanced-branch-authoring.component.html',
+  styleUrls: ['node-advanced-branch-authoring.component.scss']
+})
+export class NodeAdvancedBranchAuthoringComponent implements OnInit {
   branchCriteria: any;
   createBranchBranches = [];
   createBranchComponentId: string;
@@ -15,55 +21,44 @@ class NodeAdvancedBranchAuthoringController {
   items: any[];
   node: any;
   nodeId: string;
+  nodeIds: string[];
   scoreId: string;
-  $translate: any;
-
-  static $inject = [
-    '$filter',
-    'ConfigService',
-    'TagService',
-    'ProjectService',
-    'TeacherDataService',
-    'UtilService'
-  ];
 
   constructor(
-    private $filter: any,
     private ConfigService: ConfigService,
     private TagService: TagService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService,
     private UtilService: UtilService
   ) {
-    this.$translate = this.$filter('translate');
     this.branchCriteria = [
       {
         value: 'workgroupId',
-        text: this.$translate('WORKGROUP_ID')
+        text: $localize`Workgroup ID`
       },
       {
         value: 'score',
-        text: this.$translate('SCORE')
+        text: $localize`Score`
       },
       {
         value: 'choiceChosen',
-        text: this.$translate('choiceChosen')
+        text: $localize`Choice Chosen`
       },
       {
         value: 'random',
-        text: this.$translate('random')
+        text: $localize`Random`
       },
       {
         value: 'tag',
-        text: this.$translate('tag')
+        text: $localize`Tag`
       }
     ];
   }
 
-  $onInit() {
+  ngOnInit() {
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
     this.node = this.ProjectService.getNodeById(this.nodeId);
-    this.items = this.ProjectService.idToOrder;
+    this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds(true);
     this.populateBranchAuthoring();
     this.populateScoreId();
   }
@@ -145,6 +140,8 @@ class NodeAdvancedBranchAuthoringController {
           this.createBranchCriterion = 'workgroupId';
         } else if (this.node.transitionLogic.howToChooseAmongAvailablePaths === 'random') {
           this.createBranchCriterion = 'random';
+        } else if (this.node.transitionLogic.howToChooseAmongAvailablePaths === 'tag') {
+          this.createBranchCriterion = 'tag';
         }
       }
     }
@@ -152,22 +149,30 @@ class NodeAdvancedBranchAuthoringController {
 
   populateScoreId(): void {
     for (const transition of this.node.transitionLogic.transitions) {
-      const scoreId = transition.criteria[0].params.scoreId;
-      if (scoreId != null) {
-        this.scoreId = scoreId;
+      if (transition.criteria != null) {
+        const scoreId = this.getScoreId(transition.criteria[0]);
+        if (scoreId != null) {
+          this.scoreId = scoreId;
+        }
       }
+    }
+  }
+
+  getScoreId(transitionCriteria: any): string {
+    if (transitionCriteria != null) {
+      return transitionCriteria?.params?.scoreId;
+    } else {
+      return null;
     }
   }
 
   createBranchNumberOfBranchesChanged() {
     if (this.createBranchNumberOfBranches === 0) {
-      alert(this.$translate('errorYouCantHave0BranchPaths'));
+      alert($localize`Error: You can't have 0 branch paths`);
       this.createBranchNumberOfBranches = this.createBranchBranches.length;
     } else if (this.createBranchNumberOfBranches < this.createBranchBranches.length) {
       const answer = confirm(
-        this.$translate('areYouSureYouWantToReduceTheNumberOfBranchesToX', {
-          createBranchNumberOfBranches: this.createBranchNumberOfBranches
-        })
+        $localize`Are you sure you want to reduce the number of branches to ${this.createBranchNumberOfBranches}?`
       );
       if (answer) {
         if (this.createBranchNumberOfBranches === 1) {
@@ -471,9 +476,9 @@ class NodeAdvancedBranchAuthoringController {
   }
 
   createBranchStepClicked(branch, item) {
-    let orderedItems = this.$filter('orderBy')(this.$filter('toArray')(branch.items), 'order');
+    const items = branch.items;
     branch.checkedItemsInBranchPath = [];
-    let checkedItemsInBranchPath = branch.checkedItemsInBranchPath;
+    const checkedItemsInBranchPath = branch.checkedItemsInBranchPath;
     branch.nodeIdsInBranch = [];
     let previousCheckedNodeId = null;
     let nodeIdAfter = null;
@@ -482,8 +487,10 @@ class NodeAdvancedBranchAuthoringController {
      * loop through all the items in order and set the transitions so that
      * the steps in a branch path transition to one after the other
      */
-    for (var i = 0; i < orderedItems.length; i++) {
-      const orderedItem = orderedItems[i];
+
+    for (let i = 0; i < this.nodeIds.length; i++) {
+      const nodeId = this.nodeIds[i];
+      const orderedItem = items[nodeId];
       if (orderedItem != null && orderedItem.checked) {
         if (previousCheckedNodeId != null) {
           const previousCheckedNode = this.ProjectService.getNodeById(previousCheckedNodeId);
@@ -504,7 +511,7 @@ class NodeAdvancedBranchAuthoringController {
         branch.nodeIdsInBranch.push(orderedItem.$key);
         previousCheckedNodeId = orderedItem.$key;
       }
-      let previousOrderedItem = orderedItems[i - 1];
+      let previousOrderedItem = items[this.nodeIds[i - 1]];
       if (previousOrderedItem != null) {
         if (previousOrderedItem.$key == item.$key) {
           /*
@@ -584,6 +591,7 @@ class NodeAdvancedBranchAuthoringController {
   }
 
   createBranchScoreChanged(branch) {
+    branch.scores = branch.scores.split(',');
     let transition = branch.transition;
     if (transition != null) {
       let scores = branch.scores;
@@ -635,7 +643,7 @@ class NodeAdvancedBranchAuthoringController {
   }
 
   removeBranchButtonClicked() {
-    if (confirm(this.$translate('areYouSureYouWantToRemoveTheBranch'))) {
+    if (confirm($localize`Are you sure you want to remove the branch?`)) {
       this.removeBranch();
     }
   }
@@ -735,7 +743,6 @@ class NodeAdvancedBranchAuthoringController {
   saveProject(parseProject = false) {
     if (parseProject) {
       this.ProjectService.parseProject();
-      this.items = this.ProjectService.idToOrder;
     }
     return this.ProjectService.saveProject();
   }
@@ -767,8 +774,3 @@ class NodeAdvancedBranchAuthoringController {
     this.saveProject();
   }
 }
-
-export const NodeAdvancedBranchAuthoringComponent = {
-  templateUrl: `/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html`,
-  controller: NodeAdvancedBranchAuthoringController
-};

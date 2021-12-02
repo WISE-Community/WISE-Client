@@ -5,6 +5,7 @@ import { ChooseNewNodeLocation } from '../../assets/wise5/authoringTool/addNode/
 import { ChooseNewNodeTemplate } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { CardSelectorComponent } from '../../assets/wise5/authoringTool/components/card-selector/card-selector.component';
+import { NodeAdvancedBranchAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component';
 import { NodeAdvancedGeneralAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/general/node-advanced-general-authoring.component';
 import { NodeAdvancedJsonAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/json/node-advanced-json-authoring.component';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
@@ -27,6 +28,7 @@ import { ComponentAuthoringModule } from './component-authoring.module';
     ChooseNewComponentLocation,
     ChooseNewNodeLocation,
     ChooseNewNodeTemplate,
+    NodeAdvancedBranchAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
     NodeIconChooserDialog,
