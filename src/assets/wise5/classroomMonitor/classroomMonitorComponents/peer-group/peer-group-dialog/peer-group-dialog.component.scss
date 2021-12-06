@@ -1,4 +1,7 @@
-.close-div {
-  padding: 0px;
-  min-height: 0px;
+peer-group-period {
+  display: block;
+
+  &:not(:first-child) {
+    margin-top: 16px;
+  }
 }
