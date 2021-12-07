@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ConfigService } from '../../../../services/configService';
 
 @Component({
   selector: 'peer-group-workgroup',
@@ -8,11 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PeerGroupWorkgroupComponent implements OnInit {
   @Input() workgroup: any;
 
+  avatarColor: string;
   workgroupUsernames: string;
 
-  constructor() {}
+  constructor(private ConfigrService: ConfigService) {}
 
   ngOnInit(): void {
-    this.workgroupUsernames = this.workgroup.username.replace(/:/g, ' and ');
+    this.workgroupUsernames = this.workgroup.displayNames;
+    this.avatarColor = this.ConfigrService.getAvatarColorForWorkgroupId(this.workgroup.workgroupId);
   }
 }

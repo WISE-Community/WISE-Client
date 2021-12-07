@@ -1,19 +1,16 @@
 @import '~style/abstracts/variables';
 
-.peer-group-card {
-  &.mat-card {
-    margin: 4px;
+.group.mat-card {
     padding: 8px 8px 0;
     box-shadow: none;
   }
 
-  .mat-card-title {
-    margin-bottom: 4px;
-  }
+.mat-card-title {
+  margin-bottom: 4px;
 }
 
-.peer-group-card-content {
-  margin-bottom: 0;
+.mat-card-content {
+  margin: 0;
 }
 
 h4 {
@@ -24,8 +21,8 @@ h4 {
   margin-right: 4px;
 }
 
-.peer-group-ul {
-  min-height: 46px;
+ul {
+  min-height: 48px;
   padding: 4px;
   margin: -4px -8px;
   transition: background-color 250ms;
@@ -34,7 +31,7 @@ h4 {
   column-gap: 0;
 }
 
-.peer-group-li {
+li {
   list-style-type: none;
   cursor: move;
   padding: 4px;

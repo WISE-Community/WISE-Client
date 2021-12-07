@@ -4,6 +4,7 @@
   <select-period></select-period>
 </h2>
 <div mat-dialog-content class="dialog-content-scroll">
+    <p class="info" i18n>Tip: Drag students to change groups for this activity.</p>
     <peer-group-period *ngFor="let period of periods"
         [nodeId]="nodeId"
         [componentId]="componentId"

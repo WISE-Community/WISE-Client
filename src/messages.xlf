@@ -280,7 +280,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
@@ -6782,8 +6782,8 @@
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="89ee531cf4e4888dc082f0f36383ea22c5c47150" datatype="html">
-        <source>This unit has ended. Please talk to your teacher.</source>
+      <trans-unit id="2ac78802200564a04e42b0c60d0283d32e04060e" datatype="html">
+        <source>This run has ended. Please talk to your teacher.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/add-project-dialog/add-project-dialog.component.html</context>
           <context context-type="linenumber">10</context>
@@ -8733,6 +8733,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="a12ba7f20727963eb3398b38f332f111c511eee4" datatype="html">
+        <source>Tip: Drag students to change groups for this activity.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="aa8af53ef82a759864d7bd58f34de5e10f6a7512" datatype="html">
         <source>Group <x id="INTERPOLATION" equiv-text="{{ grouping.id }}"/></source>
         <context-group purpose="location">
@@ -8775,11 +8782,18 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="812b7bcda82fdeaf9364e3b6a6c90c8330148ee2" datatype="html">
-        <source>Unassigned Workgroups</source>
+      <trans-unit id="516cc085017fb40ff72a02bff7ec36d346532472" datatype="html">
+        <source>Teams Without a Group</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-unassigned-workgroups/peer-group-unassigned-workgroups.component.html</context>
           <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1d97c888b0e2c614e58b7f85781b43976e021529" datatype="html">
+        <source>(Team <x id="INTERPOLATION" equiv-text="{{ workgroup.workgroupId }}"/>)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-workgroup/peer-group-workgroup.component.html</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4fc1ce64a0242febe825d1737eb8b0da1f5c3865" datatype="html">

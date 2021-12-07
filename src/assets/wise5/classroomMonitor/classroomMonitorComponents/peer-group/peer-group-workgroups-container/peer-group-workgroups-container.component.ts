@@ -37,6 +37,8 @@ export abstract class PeerGroupWorkgroupsContainerComponent implements OnInit {
           }
           this.removeBackgroundColor(event);
         });
+    } else {
+      this.removeBackgroundColor(event);
     }
   }
 

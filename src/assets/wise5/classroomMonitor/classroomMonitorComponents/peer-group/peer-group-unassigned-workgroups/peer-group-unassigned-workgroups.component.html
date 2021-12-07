@@ -1,16 +1,14 @@
-<mat-card class="peer-group-card notice-bg-bg">
+<mat-card class="group notice-bg-bg">
   <div class="mat-card-title">
-    <h4 class="mat-body-2" i18n>Unassigned Workgroups</h4>
+    <h4 class="mat-body-2" i18n>Teams Without a Group</h4>
   </div>
-  <mat-card-content class="peer-group-card-content">
-    <ul class="peer-group-ul"
-        cdkDropList
+  <mat-card-content>
+    <ul cdkDropList
         [cdkDropListData]="{ id: 0 }"
         (cdkDropListDropped)="dropWorkgroup($event)"
         [ngStyle.gt-sm]="{ columns: 2 }"
         [ngStyle.gt-md]="{ columns: 3 }">
       <li *ngFor="let workgroup of unassignedWorkgroups"
-          class="peer-group-li"
           cdkDrag
           [cdkDragData]="workgroup.workgroupId"
           (cdkDragEntered)="dragEnter($event)"
