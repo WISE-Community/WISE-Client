@@ -22,16 +22,14 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-student.component.scss']
 })
 export class PeerChatStudentComponent extends ComponentStudent {
-  avatarColor: string;
-  isPeerChatWorkgroupsResponseReceived: boolean = false;
-  isPeerChatWorkgroupsAvailable: boolean = false;
-  isShowWorkFromAnotherComponent: boolean = false;
-  isSubmitEnabled: boolean = false;
-  messageText: string;
+  errorRetrievingWorkFromAnotherComponent: boolean;
+  isPeerChatWorkgroupsResponseReceived: boolean;
+  isPeerChatWorkgroupsAvailable: boolean;
+  isShowWorkFromAnotherComponent: boolean;
   myWorkgroupId: number;
   peerChatMessages: PeerChatMessage[] = [];
   peerChatWorkgroupIds: number[] = [];
-  peerChatWorkgroups: any[] = [];
+  peerChatWorkgroupInfos: any = {};
   peerGroupId: number;
   peerWorkFromAnotherComponent: any = {};
   requestTimeout: number = 10000;
@@ -39,8 +37,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
   secondPromptComponentContent: any;
   showWorkComponentId: string;
   showWorkNodeId: string;
-
-  dummyWorkgroupIds = [108, 109];
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -79,7 +75,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
         this.showWorkNodeId,
         this.showWorkComponentId
       ) != null;
-    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.myWorkgroupId);
     if (this.componentContent.secondPrompt != null && this.componentContent.secondPrompt != '') {
       this.secondPromptComponentContent = {
         prompt: this.componentContent.secondPrompt
@@ -106,11 +101,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (peerGroup: any) => {
-          console.log('success getting peer workgroups');
           this.requestChatWorkgroupsSuccess(peerGroup);
         },
         (error) => {
-          console.log('error getting peer workgroups');
           this.requestChatWorkgroupsError();
         }
       );
@@ -126,7 +119,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.getPeerChatComponentStates(peerGroup.id);
   }
 
-  getPeerGroupWorkgroupIds(peerGroup: any): number[] {
+  getPeerGroupWorkgroupIds(peerGroup: PeerGroup): number[] {
     return peerGroup.members.map((member) => member.id);
   }
 
@@ -139,11 +132,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (componentStates: any[]) => {
-          console.log('success getting peer chat messages');
           this.getPeerChatComponentStatesSuccess(componentStates);
         },
         (error) => {
-          console.log('error getting peer chat messages');
           this.getPeerChatComponentStatesError();
         }
       );
@@ -168,10 +159,12 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   setPeerChatWorkgroups(workgroupIds: number[]): void {
     this.peerChatWorkgroupIds = workgroupIds;
-    this.peerChatWorkgroups = [];
+    this.peerChatWorkgroupInfos = {};
     for (const workgroupId of workgroupIds) {
-      const workgroup = this.getWorkgroup(workgroupId);
-      this.peerChatWorkgroups.push(workgroup);
+      this.peerChatWorkgroupInfos[workgroupId] = {
+        avatarColor: this.getAvatarColor(workgroupId),
+        displayNames: this.getDisplayNames(workgroupId)
+      };
     }
     this.isPeerChatWorkgroupsAvailable = true;
   }
@@ -183,61 +176,37 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   getPeerWorkFromAnotherComponent(): void {
-    this.PeerChatService.retrievePeerWorkFromComponent(
+    this.PeerChatService.retrieveWorkFromAnotherComponent(
+      this.peerGroupId,
       this.nodeId,
       this.componentId,
-      this.peerChatWorkgroupIds
-    )
-      .pipe(timeout(this.requestTimeout))
-      .subscribe(
-        (data: any) => {
-          console.log('success getting peer work from another component');
-          this.getPeerWorkFromAnotherComponentSuccess();
-        },
-        (err) => {
-          console.log('error getting peer work from another component');
-          this.getPeerWorkFromAnotherComponentError();
-        }
-      );
-  }
-
-  getPeerWorkFromAnotherComponentSuccess(): void {
-    // Populate dummy work from another component for all the workgroups in the group
-    const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
       this.showWorkNodeId,
       this.showWorkComponentId
+    ).subscribe(
+      (componentStates: any[]) => {
+        for (const componentState of componentStates) {
+          this.peerWorkFromAnotherComponent[componentState.workgroupId] = componentState;
+        }
+      },
+      (err) => {
+        this.errorRetrievingWorkFromAnotherComponent = true;
+      }
     );
-    for (const workgroupId of this.peerChatWorkgroupIds) {
-      const componentStateCopy = JSON.parse(JSON.stringify(componentState));
-      componentStateCopy.workgroupId = workgroupId;
-      this.peerWorkFromAnotherComponent[workgroupId] = componentStateCopy;
-    }
   }
 
-  getPeerWorkFromAnotherComponentError(): void {
-    // Call the success function for now since we don't have the backend hooked up yet
-    this.getPeerWorkFromAnotherComponentSuccess();
-  }
-
-  submitStudentResponse(): void {
+  submitStudentResponse(event): void {
     const peerChatMessage = new PeerChatMessage(
       this.ConfigService.getWorkgroupId(),
-      this.messageText,
+      event,
       new Date().getTime()
     );
     this.addPeerChatMessage(peerChatMessage);
-    this.response = this.messageText;
-    this.clearStudentMessage();
-    this.studentResponseChanged();
+    this.response = event;
     this.emitComponentSubmitTriggered();
   }
 
   addPeerChatMessage(peerChatMessage: PeerChatMessage): void {
     this.peerChatMessages.push(peerChatMessage);
-  }
-
-  clearStudentMessage(): void {
-    this.messageText = '';
   }
 
   createComponentState(action: string): any {
@@ -280,16 +249,21 @@ export class PeerChatStudentComponent extends ComponentStudent {
     }
   }
 
-  studentResponseChanged(): void {
-    this.isSubmitEnabled = this.messageText.length > 0;
+  getAvatarColor(workgroupId: number): string {
+    return this.ConfigService.getAvatarColorForWorkgroupId(workgroupId);
   }
 
-  studentKeyPressed(event: any): void {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      if (this.isSubmitEnabled) {
-        this.submitStudentResponse();
-      }
+  getDisplayNames(workgroupId: number): string {
+    // TODO: duplciate code in DiscussionService (setUsernames); extract to service function
+    let displayNames: string = '';
+    const usernames = this.ConfigService.getUsernamesByWorkgroupId(workgroupId);
+    if (usernames.length > 0) {
+      displayNames = usernames
+        .map(function (obj) {
+          return obj.name;
+        })
+        .join(', ');
     }
+    return displayNames;
   }
 }

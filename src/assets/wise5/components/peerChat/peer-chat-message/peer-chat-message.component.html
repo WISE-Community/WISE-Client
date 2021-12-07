@@ -1,31 +1,16 @@
-<div fxLayoutAlign="{{isMyMessage ? 'start' : 'end'}} start" fxLayoutGap="4px">
+<div fxLayoutAlign="start start" fxLayoutGap="4px">
   <ng-container *ngIf="isMyMessage">
-    <mat-icon class="mat-30"
-        [ngStyle]="{'color': avatarColor}"
-        aria-label="Me"
-        i18n-aria-label
-        matTooltip="Me"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+    <mat-icon class="mat-30" [ngStyle]="{'color': avatarColor}">
       account_circle
     </mat-icon>
   </ng-container>
   <ng-container *ngIf="!isMyMessage">
-    <mat-icon class="mat-30"
-        color="accent"
-        aria-label="Classmate"
-        i18n-aria-label
-        fxFlexOrder="2"
-        matTooltip="Classmate"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+    <mat-icon class="mat-30" [ngStyle]="{'color': avatarColor}">
       account_circle
     </mat-icon>
   </ng-container>
-  <div fxFlex fxLayoutAlign="{{isMyMessage ? 'start' : 'end'}}">
-    <div class="response-text"
-        [class]="{'notice-bg-bg': !isMyMessage, 'selected-bg-bg': isMyMessage}">
-      {{ text}}
-    </div>
+  <div fxFlex class="response-text" [class]="{'notice-bg-bg': !isMyMessage, 'selected-bg-bg': isMyMessage}">
+    <div class="mat-body-2">{{ displayNames }}</div>
+    <span>{{ text }}</span>
   </div>
 </div>

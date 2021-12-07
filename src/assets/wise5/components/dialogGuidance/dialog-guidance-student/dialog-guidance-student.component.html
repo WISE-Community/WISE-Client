@@ -1,6 +1,8 @@
 <component-header [componentContent]="componentContent"></component-header>
 <mat-card class="mat-elevation-z2">
-  <dialog-responses [responses]="responses" [isWaitingForComputerResponse]="isWaitingForComputerResponse">
+  <dialog-responses *ngIf="responses.length > 0"
+      [responses]="responses"
+      [isWaitingForComputerResponse]="isWaitingForComputerResponse">
   </dialog-responses>
   <div *ngIf="studentCanRespond"
       class="add-response"

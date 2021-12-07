@@ -66,24 +66,16 @@ export class PeerChatService extends ComponentService {
     );
   }
 
-  retrievePeerWorkFromComponent(
+  retrieveWorkFromAnotherComponent(
+    peerGroupId: number,
     nodeId: string,
     componentId: string,
-    workgroupIds: number[]
+    showWorkNodeId: string,
+    showWorkComponentId: string
   ): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    if (this.ConfigService.isPreview()) {
-      this.ConfigService.config.runId = 1;
-    }
-    let params = new HttpParams()
-      .set('componentId', componentId)
-      .set('nodeId', nodeId)
-      .set('periodId', this.ConfigService.getPeriodId())
-      .set('runId', this.ConfigService.getRunId());
-    workgroupIds.forEach((workgroupId: number) => {
-      params = params.append('workgroupIds', `${workgroupId}`);
-    });
-    return this.http.get('/api/peer/work', { headers: headers, params: params });
+    return this.http.get(
+      `/api/classmate/peer-chat/student-work/${peerGroupId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}`
+    );
   }
 
   createDummyComponentStates(workgroupIds: number[]): any[] {

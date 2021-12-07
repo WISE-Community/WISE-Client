@@ -10550,18 +10550,22 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Add response...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-chat-box/peer-chat-chat-box.component.html</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="427e92e019c34109656b0e1fc9576bfb833934d9" datatype="html">
         <source> Send </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-chat-box/peer-chat-chat-box.component.html</context>
+          <context context-type="linenumber">22,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c80dd9bfb0bd7a7ce89ef1140e6f35211ab711f0" datatype="html">
@@ -10575,7 +10579,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Automated guidance response</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4467968363873261907" datatype="html">
@@ -13336,8 +13340,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">127</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-question-bank/peer-chat-question-bank.component.html</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4188ef67a196ca21d68f20405b99fb6b2f6476c7" datatype="html">
@@ -13404,48 +13408,25 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="28094f38aac43d3cb6edaf98a281fe443a930b5e" datatype="html">
-        <source>Me</source>
+      <trans-unit id="428108172b4a6318cfe94c8b3aa7fbb97b30eb2c" datatype="html">
+        <source> (Error retrieving response) </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-message/peer-chat-message.component.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-message/peer-chat-message.component.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-previous-work/peer-chat-previous-work.component.html</context>
+          <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="25425e789276c52c975ffa09b25adcf5c676cdf7" datatype="html">
-        <source>Classmate</source>
+      <trans-unit id="3e4063d41615b0bdb15dd79a55e0334dabeb361f" datatype="html">
+        <source>(No response)</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-message/peer-chat-message.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-message/peer-chat-message.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-previous-work/peer-chat-previous-work.component.html</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="fb434e8704b01261704a26366692bd957c172b20" datatype="html">
-        <source> Peer Chat Not Available Yet </source>
+      <trans-unit id="375ead964bf5b0ae938bb0b600db793ac0d32683" datatype="html">
+        <source> This Peer Chat activity is not yet available. Please check back later or wait for a notification to return. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
-          <context context-type="linenumber">78,79</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a93bfb3e1753bcd8f4eafa16a3c77f0b15826372" datatype="html">
-        <source> Send </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
-          <context context-type="linenumber">107,108</context>
+          <context context-type="linenumber">2,3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6310961320545154131" datatype="html">

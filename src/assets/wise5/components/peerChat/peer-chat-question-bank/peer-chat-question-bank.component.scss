@@ -1,0 +1,29 @@
+@import '~style/abstracts/variables';
+
+.mat-card {
+  padding: 8px;
+}
+
+mat-card-content {
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: $button-border-radius;
+  overflow: auto;
+}
+
+.question {
+  font-style: italic;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  margin-bottom: 8px;
+  
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}

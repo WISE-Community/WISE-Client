@@ -1,5 +1,14 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { UpgradeModule } from '@angular/upgrade/static';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../services/configService';
+import { ProjectService } from '../../../services/projectService';
+import { SessionService } from '../../../services/sessionService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { TagService } from '../../../services/tagService';
+import { UtilService } from '../../../services/utilService';
+import { PeerChatService } from '../peerChatService';
 import { PeerChatGradingComponent } from './peer-chat-grading.component';
 
 describe('PeerChatGradingComponent', () => {
@@ -8,9 +17,19 @@ describe('PeerChatGradingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PeerChatGradingComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, UpgradeModule],
+      declarations: [PeerChatGradingComponent],
+      providers: [
+        AnnotationService,
+        ConfigService,
+        PeerChatService,
+        ProjectService,
+        SessionService,
+        StudentDataService,
+        TagService,
+        UtilService
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
