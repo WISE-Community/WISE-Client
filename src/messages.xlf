@@ -8782,8 +8782,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="516cc085017fb40ff72a02bff7ec36d346532472" datatype="html">
-        <source>Teams Without a Group</source>
+      <trans-unit id="8bf3b0baf010fe9279d91e2dd07ba3632dfce8e7" datatype="html">
+        <source>Ungrouped</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-unassigned-workgroups/peer-group-unassigned-workgroups.component.html</context>
           <context context-type="linenumber">3</context>

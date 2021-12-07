@@ -851,7 +851,7 @@ export class NodeService {
         nodeId: nodeId,
         periodId: periodId
       },
-      width: '80%'
+      panelClass: 'dialog-lg'
     });
   }
 }
