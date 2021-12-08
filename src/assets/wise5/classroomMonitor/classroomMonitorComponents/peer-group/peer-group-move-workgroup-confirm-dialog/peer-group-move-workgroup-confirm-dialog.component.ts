@@ -7,11 +7,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./peer-group-move-workgroup-confirm-dialog.component.scss']
 })
 export class PeerGroupMoveWorkgroupConfirmDialogComponent implements OnInit {
-  isMovingFromPeerGroup: boolean;
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    this.isMovingFromPeerGroup = data.isMovingFromPeerGroup;
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public isMovingFromPeerGroup: boolean) {}
 
   ngOnInit(): void {}
 }

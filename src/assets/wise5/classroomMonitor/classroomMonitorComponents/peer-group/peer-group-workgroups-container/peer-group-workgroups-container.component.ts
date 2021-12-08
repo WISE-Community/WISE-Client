@@ -22,12 +22,9 @@ export abstract class PeerGroupWorkgroupsContainerComponent implements OnInit {
 
   dropWorkgroup(event: CdkDragDrop<any>): void {
     if (event.previousContainer !== event.container) {
-      const isMovingFromPeerGroup = this.isFromAssignedContainer(event);
       this.dialog
         .open(PeerGroupMoveWorkgroupConfirmDialogComponent, {
-          data: {
-            isMovingFromPeerGroup: isMovingFromPeerGroup
-          },
+          data: this.isFromAssignedContainer(event),
           panelClass: 'dialog-sm'
         })
         .afterClosed()
