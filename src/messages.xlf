@@ -279,6 +279,10 @@
           <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
           <context context-type="linenumber">155</context>
         </context-group>
@@ -430,6 +434,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component.html</context>
           <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
@@ -3775,6 +3787,10 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
         <context-group purpose="location">
@@ -7368,6 +7384,14 @@
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="76de164da3c441addbf9b14950150aa869b00fdb" datatype="html">
         <source>Share to Google Classroom</source>
@@ -8530,6 +8554,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-period/manage-period.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-period/peer-group-period.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="fb9afd2d75a06297a21925ee9cb13cf36939fee9" datatype="html">
         <source> Students: <x id="INTERPOLATION" equiv-text="{{students.size}}"/> | Teams: <x id="INTERPOLATION_1" equiv-text="{{teams.size}}"/> </source>
@@ -8703,6 +8731,76 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>(Team <x id="INTERPOLATION" equiv-text="{{workgroupId}}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2b077437ecbac737ec20e69f17994e9cb36386f5" datatype="html">
+        <source>Groupings for <x id="INTERPOLATION" equiv-text="{{ componentLabel }}"/> in <x id="INTERPOLATION_1" equiv-text="{{ stepNumber }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a12ba7f20727963eb3398b38f332f111c511eee4" datatype="html">
+        <source>Tip: Drag students to change groups for this activity.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aa8af53ef82a759864d7bd58f34de5e10f6a7512" datatype="html">
+        <source>Group <x id="INTERPOLATION" equiv-text="{{ grouping.id }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-grouping/peer-group-grouping.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="68dd47f9321c42011c95481d3a55b20c600014d5" datatype="html">
+        <source>Change Grouping</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="83c23c9ae2e0107b7ea0c664eefd413f8186104a" datatype="html">
+        <source>Warning: If you remove students from a Peer Group, they will no longer see any contributions they made to that group.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5b91a52468ba60dd4b2a46076827d8ae5c62aea0" datatype="html">
+        <source>Are you sure you want to move this team?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f5107331eb9fdd387751866b18c225f7a569045a" datatype="html">
+        <source>Create a new group</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-period/peer-group-period.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="653539a38f21a5bf189859ce97c43e722585bcc9" datatype="html">
+        <source>New Group</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-period/peer-group-period.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8bf3b0baf010fe9279d91e2dd07ba3632dfce8e7" datatype="html">
+        <source>Ungrouped</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-unassigned-workgroups/peer-group-unassigned-workgroups.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1d97c888b0e2c614e58b7f85781b43976e021529" datatype="html">
+        <source>(Team <x id="INTERPOLATION" equiv-text="{{ workgroup.workgroupId }}"/>)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-workgroup/peer-group-workgroup.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>

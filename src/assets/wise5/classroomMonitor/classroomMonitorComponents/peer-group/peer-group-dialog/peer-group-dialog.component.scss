@@ -1,0 +1,11 @@
+peer-group-period {
+  display: block;
+
+  &:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.info {
+  text-align: end;
+}

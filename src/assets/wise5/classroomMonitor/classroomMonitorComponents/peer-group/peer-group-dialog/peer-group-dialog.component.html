@@ -1,0 +1,15 @@
+<h2 mat-dialog-title fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <span i18n>Groupings for {{ componentLabel }} in {{ stepNumber }}</span>
+  <span fxFlex fxHide.xs></span>
+  <select-period></select-period>
+</h2>
+<div mat-dialog-content class="dialog-content-scroll">
+    <p class="info" i18n>Tip: Drag students to change groups for this activity.</p>
+    <peer-group-period *ngFor="let period of periods"
+        [nodeId]="nodeId"
+        [componentId]="componentId"
+        [period]="period"></peer-group-period>
+</div>
+<div mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-button mat-dialog-close i18n>Close</button>
+</div>

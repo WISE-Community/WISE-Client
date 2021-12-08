@@ -15,7 +15,6 @@ import { ManageUserComponent } from '../../assets/wise5/classroomMonitor/classro
 import { MoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { WorkgroupInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component';
 import { NavItemScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/navItemScore/nav-item-score.component';
-import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 import { WorkgroupNodeScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/workgroupNodeScore/workgroup-node-score.component';
 import { ViewComponentRevisionsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component';
 import { WorkgroupComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component';
@@ -36,6 +35,8 @@ import { MilestoneReportDataComponent } from './milestone/milestone-report-data/
 import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component';
 import { ManageShowStudentInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component';
 import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component';
+import { PeerGroupGradingModule } from './peer-group-grading.module';
+import { SelectPeriodModule } from './select-period.module';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,6 @@ import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMo
     MoveUserConfirmDialogComponent,
     NavItemProgressComponent,
     RemoveUserConfirmDialogComponent,
-    SelectPeriodComponent,
     ShowStudentInfoComponent,
     StatusIconComponent,
     StepInfoComponent,
@@ -75,6 +75,6 @@ import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMo
     NavItemScoreComponent,
     WorkgroupNodeStatusComponent
   ],
-  imports: [AngularJSModule, ComponentGradingModule]
+  imports: [AngularJSModule, ComponentGradingModule, PeerGroupGradingModule, SelectPeriodModule]
 })
 export class ClassroomMonitorModule {}

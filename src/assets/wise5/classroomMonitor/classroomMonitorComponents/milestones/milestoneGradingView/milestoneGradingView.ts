@@ -4,6 +4,7 @@ import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { NodeService } from '../../../../services/nodeService';
 import { NotificationService } from '../../../../services/notificationService';
+import { PeerGroupService } from '../../../../services/peerGroupService';
 import { StudentStatusService } from '../../../../services/studentStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
@@ -27,6 +28,7 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     protected MilestoneService: MilestoneService,
     protected NodeService: NodeService,
     protected NotificationService: NotificationService,
+    protected PeerGroupService: PeerGroupService,
     protected ProjectService: TeacherProjectService,
     protected StudentStatusService: StudentStatusService,
     protected TeacherDataService: TeacherDataService
@@ -38,6 +40,7 @@ class MilestoneGradingViewController extends NodeGradingViewController {
       MilestoneService,
       NodeService,
       NotificationService,
+      PeerGroupService,
       ProjectService,
       StudentStatusService,
       TeacherDataService

@@ -709,6 +709,14 @@ export class TeacherDataService extends DataService {
     return this.runStatus;
   }
 
+  getVisiblePeriodsById(currentPeriodId: number): any {
+    if (currentPeriodId === -1) {
+      return this.getPeriods().slice(1);
+    } else {
+      return [this.getPeriodById(currentPeriodId)];
+    }
+  }
+
   setCurrentWorkgroup(workgroup) {
     this.currentWorkgroup = workgroup;
     this.broadcastCurrentWorkgroupChanged({ currentWorkgroup: this.currentWorkgroup });
