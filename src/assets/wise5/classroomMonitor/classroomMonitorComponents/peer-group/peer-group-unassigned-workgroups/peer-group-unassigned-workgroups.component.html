@@ -10,7 +10,7 @@
         [ngStyle.gt-md]="{ columns: 3 }">
       <li *ngFor="let workgroup of unassignedWorkgroups"
           cdkDrag
-          [cdkDragData]="workgroup.workgroupId"
+          [cdkDragData]="workgroup.id"
           (cdkDragEntered)="dragEnter($event)"
           (cdkDragExited)="dragExit($event)">
         <peer-group-workgroup [workgroup]="workgroup"></peer-group-workgroup>

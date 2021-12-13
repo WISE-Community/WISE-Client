@@ -24,58 +24,42 @@ export class PeerGroupPeriodComponent implements OnInit {
 
   ngOnChanges(): void {
     this.PeerGroupService.retrieveGroupings(this.nodeId, this.componentId).subscribe(
-      (groupings: any) => {
-        // TODO
+      ({ peerGroups, workgroupsNotInPeerGroup }) => {
+        for (const peerGroup of this.getPeerGroupsInPeriod(peerGroups, this.period.periodId)) {
+          this.addGrouping(peerGroup);
+        }
+        this.unassignedWorkgroups = this.getWorkgroupsNotInPeerGroupInPeriod(
+          workgroupsNotInPeerGroup,
+          this.period.periodId
+        );
       },
       () => {
-        // TODO: Handle error
+        // TODO
       }
     );
     this.workgroups = this.getWorkgroupsInPeriod();
-    this.setDummyGroupingsAndUnassignedWorkgroups();
+  }
+
+  getPeerGroupsInPeriod(peerGroups: any[], periodId: number): any[] {
+    return peerGroups.filter((peerGroup) => peerGroup.periodId === periodId);
+  }
+
+  getWorkgroupsNotInPeerGroupInPeriod(workgroups: any[], periodId: number): any[] {
+    return workgroups.filter((workgroup) => workgroup.periodId === periodId);
   }
 
   getWorkgroupsInPeriod(): any[] {
-    return this.ConfigService.getWorkgroupsByPeriod(this.period.periodId).filter(
-      (workgroup) => workgroup.workgroupId != null
-    );
+    const workgroups = [];
+    for (const workgroup of this.ConfigService.getWorkgroupsByPeriod(this.period.periodId)) {
+      workgroups.push({ id: workgroup.workgroupId });
+    }
+    return workgroups;
   }
 
-  setDummyGroupingsAndUnassignedWorkgroups(): void {
-    this.groupings = [];
-    this.unassignedWorkgroups = [];
-    const numUnassignedWorkgroups = this.getDummyNumUnassignedWorkgroups(this.workgroups);
-    let tempWorkgroups = [];
-    for (let w = 0; w < this.workgroups.length - numUnassignedWorkgroups; w++) {
-      tempWorkgroups.push(this.workgroups[w]);
-      if (tempWorkgroups.length >= 2) {
-        this.addGrouping(this.createGrouping(this.nextAvailableGroupId++, tempWorkgroups));
-        tempWorkgroups = [];
-      }
-    }
-    for (
-      let w = this.workgroups.length - numUnassignedWorkgroups;
-      w < this.workgroups.length;
-      w++
-    ) {
-      this.unassignedWorkgroups.push(this.workgroups[w]);
-    }
-  }
-
-  getDummyNumUnassignedWorkgroups(workgroups: any[]): number {
-    if (workgroups.length >= 4) {
-      return 2;
-    } else if (workgroups.length === 3) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  createGrouping(id: number = this.nextAvailableGroupId, workgroups: any[]): any {
+  createGrouping(id: number = this.nextAvailableGroupId, members: any[]): any {
     return {
       id: id,
-      workgroups: workgroups
+      members: members
     };
   }
 
@@ -84,30 +68,28 @@ export class PeerGroupPeriodComponent implements OnInit {
   }
 
   createNewGroup(): Subscription {
-    return this.PeerGroupService.createNewGroup(this.nodeId, this.componentId).subscribe(
+    return this.PeerGroupService.createNewGroup(
+      this.period.periodId,
+      this.nodeId,
+      this.componentId
+    ).subscribe(
       (group) => {
-        this.addGrouping(this.createGrouping(group.id, []));
+        this.addGrouping(group);
       },
       () => {
-        this.addGrouping(this.createGrouping(this.nextAvailableGroupId++, []));
+        // TODO
       }
     );
   }
 
-  moveWorkgroup(event: any): void {
+  moveWorkgroup(event: any): Subscription {
     const workgroupId = event.item.data;
     const previousLocation = event.previousContainer.data.id;
     const newLocation = event.container.data.id;
-    this.removeWorkgroup(workgroupId, previousLocation);
-    this.addWorkgroupToGroup(workgroupId, newLocation);
-    this.PeerGroupService.moveWorkgroupToGroup(
-      workgroupId,
-      newLocation,
-      this.nodeId,
-      this.componentId
-    ).subscribe(
-      () => {
-        // TODO
+    return this.PeerGroupService.moveWorkgroupToGroup(workgroupId, newLocation).subscribe(
+      (workgroup) => {
+        this.removeWorkgroup(workgroupId, previousLocation);
+        this.addWorkgroupToGroup(workgroupId, newLocation);
       },
       () => {
         // TODO
@@ -125,7 +107,7 @@ export class PeerGroupPeriodComponent implements OnInit {
 
   removeWorkgroupFromUnassigned(workgroupId: any): void {
     for (let w = 0; w < this.unassignedWorkgroups.length; w++) {
-      if (this.unassignedWorkgroups[w].workgroupId === workgroupId) {
+      if (this.unassignedWorkgroups[w].id === workgroupId) {
         this.unassignedWorkgroups.splice(w, 1);
         return;
       }
@@ -135,9 +117,9 @@ export class PeerGroupPeriodComponent implements OnInit {
   removeWorkgroupFromGroup(workgroupId: number, location: number): void {
     for (const group of this.groupings) {
       if (group.id === location) {
-        for (let w = 0; w < group.workgroups.length; w++) {
-          if (group.workgroups[w].workgroupId === workgroupId) {
-            group.workgroups.splice(w, 1);
+        for (let w = 0; w < group.members.length; w++) {
+          if (group.members[w].id === workgroupId) {
+            group.members.splice(w, 1);
             return;
           }
         }
@@ -146,11 +128,12 @@ export class PeerGroupPeriodComponent implements OnInit {
   }
 
   addWorkgroupToGroup(workgroupId: number, location: number): void {
+    const member = { id: workgroupId, periodId: this.period.periodId };
     if (location === 0) {
-      this.unassignedWorkgroups.push(this.getWorkgroup(workgroupId));
+      this.unassignedWorkgroups.push(member);
     } else {
       const group = this.getGroup(location);
-      group.workgroups.push(this.getWorkgroup(workgroupId));
+      group.members.push(member);
     }
   }
 
@@ -158,15 +141,6 @@ export class PeerGroupPeriodComponent implements OnInit {
     for (const group of this.groupings) {
       if (group.id === groupId) {
         return group;
-      }
-    }
-    return null;
-  }
-
-  getWorkgroup(workgroupId: number): any {
-    for (const workgroup of this.workgroups) {
-      if (workgroup.workgroupId === workgroupId) {
-        return workgroup;
       }
     }
     return null;
