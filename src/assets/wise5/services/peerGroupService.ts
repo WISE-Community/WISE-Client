@@ -1,17 +1,16 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Node } from '../common/Node';
 import { ConfigService } from './configService';
-import { ProjectService } from './projectService';
 
 @Injectable()
 export class PeerGroupService {
-  constructor(
-    private ConfigService: ConfigService,
-    private http: HttpClient,
-    private ProjectService: ProjectService
-  ) {}
+  runId: number;
+
+  constructor(private ConfigService: ConfigService, private http: HttpClient) {
+    this.runId = this.ConfigService.getRunId();
+  }
 
   getPeerGroupComponentIds(node: Node): string[] {
     const componentIds = [];
@@ -24,29 +23,17 @@ export class PeerGroupService {
   }
 
   retrieveGroupings(nodeId: string, componentId: string): Observable<any> {
-    const runId = this.ConfigService.getRunId();
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get(`/api/teacher/peer-group-info/${runId}/${nodeId}/${componentId}`, {
-      headers: headers
-    });
+    return this.http.get(`/api/teacher/peer-group-info/${this.runId}/${nodeId}/${componentId}`);
   }
 
   createNewGroup(periodId: number, nodeId: string, componentId: string): Observable<any> {
-    const runId = this.ConfigService.getRunId();
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(
-      `/api/peer-group/create/${runId}/${periodId}/${nodeId}/${componentId}`,
-      new HttpParams(),
-      { headers: headers }
+      `/api/peer-group/create/${this.runId}/${periodId}/${nodeId}/${componentId}`,
+      {}
     );
   }
 
   moveWorkgroupToGroup(workgroupId: number, groupId: number): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post(
-      `/api/peer-group/membership/add/${groupId}/${workgroupId}`,
-      new HttpParams(),
-      { headers: headers }
-    );
+    return this.http.post(`/api/peer-group/membership/add/${groupId}/${workgroupId}`, {});
   }
 }
