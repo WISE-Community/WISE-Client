@@ -128,8 +128,7 @@ export class PeerGroupPeriodComponent implements OnInit {
   }
 
   addWorkgroupToGroup(workgroupId: number, location: number): void {
-    const workgroup = this.getWorkgroup(workgroupId);
-    const member = { id: workgroup.id, periodId: workgroup.periodId };
+    const member = { id: workgroupId, periodId: this.period.periodId };
     if (location === 0) {
       this.unassignedWorkgroups.push(member);
     } else {
@@ -142,15 +141,6 @@ export class PeerGroupPeriodComponent implements OnInit {
     for (const group of this.groupings) {
       if (group.id === groupId) {
         return group;
-      }
-    }
-    return null;
-  }
-
-  getWorkgroup(workgroupId: number): any {
-    for (const workgroup of this.workgroups) {
-      if (workgroup.id === workgroupId) {
-        return workgroup;
       }
     }
     return null;
