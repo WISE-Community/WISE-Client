@@ -12,10 +12,12 @@ export class PeerGroupWorkgroupComponent implements OnInit {
   avatarColor: string;
   workgroupUsernames: string;
 
-  constructor(private ConfigrService: ConfigService) {}
+  constructor(private ConfigService: ConfigService) {}
 
   ngOnInit(): void {
-    this.workgroupUsernames = this.workgroup.displayNames;
-    this.avatarColor = this.ConfigrService.getAvatarColorForWorkgroupId(this.workgroup.workgroupId);
+    this.workgroupUsernames = this.ConfigService.getDisplayUsernamesByWorkgroupId(
+      this.workgroup.id
+    );
+    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.workgroup.id);
   }
 }

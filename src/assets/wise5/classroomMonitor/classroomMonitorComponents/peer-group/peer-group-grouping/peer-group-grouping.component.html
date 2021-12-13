@@ -8,10 +8,10 @@
       cdkDropList
       [cdkDropListData]="grouping"
       (cdkDropListDropped)="dropWorkgroup($event)">
-    <li *ngFor="let workgroup of grouping.workgroups"
+    <li *ngFor="let workgroup of grouping.members"
         class="peer-group-li"
         cdkDrag
-        [cdkDragData]="workgroup.workgroupId"
+        [cdkDragData]="workgroup.id"
         (cdkDragEntered)="dragEnter($event)"
         (cdkDragExited)="dragExit($event)">
       <peer-group-workgroup [workgroup]="workgroup"></peer-group-workgroup>

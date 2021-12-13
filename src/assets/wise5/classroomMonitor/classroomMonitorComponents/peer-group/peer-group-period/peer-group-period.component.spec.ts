@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { AchievementService } from '../../../../services/achievementService';
 import { AnnotationService } from '../../../../services/annotationService';
@@ -95,7 +95,10 @@ describe('PeerGroupPeriodComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerGroupPeriodComponent);
     spyOn(TestBed.inject(PeerGroupService), 'moveWorkgroupToGroup').and.callFake(() => {
-      return new Observable<any>();
+      return of({});
+    });
+    spyOn(TestBed.inject(ConfigService), 'getDisplayUsernamesByWorkgroupId').and.callFake(() => {
+      return 'Student Name Here';
     });
     component = fixture.componentInstance;
     component.period = { periodId: 1, periodName: '1' };
@@ -104,7 +107,7 @@ describe('PeerGroupPeriodComponent', () => {
     workgroup3 = createWorkgroup(3);
     workgroup4 = createWorkgroup(4);
     workgroup5 = createWorkgroup(5);
-    component.workgroups = [workgroup1, workgroup2, workgroup3, workgroup4];
+    component.workgroups = [workgroup1, workgroup2, workgroup3, workgroup4, workgroup5];
     component.unassignedWorkgroups = [workgroup5];
     grouping1 = createGrouping(1, [workgroup1, workgroup2]);
     grouping2 = createGrouping(2, [workgroup3, workgroup4]);
@@ -116,14 +119,14 @@ describe('PeerGroupPeriodComponent', () => {
   function createWorkgroup(id: number): any {
     return {
       username: '',
-      workgroupId: id
+      id: id
     };
   }
 
-  function createGrouping(id: number, workgroups: any[]): any {
+  function createGrouping(id: number, members: any[]): any {
     return {
       id: id,
-      workgroups: workgroups
+      members: members
     };
   }
 
@@ -151,33 +154,33 @@ describe('PeerGroupPeriodComponent', () => {
 
   function moveWorkgroup() {
     describe('moveWorkgroup()', () => {
-      it('should move a workgroup from unassigned to assigned', () => {
+      it('should move a workgroup from unassigned to assigned', fakeAsync(() => {
         expectGroupingWorkgroupsLength(grouping1, 2);
         const event = createEvent(5, 0, 1);
         component.moveWorkgroup(event);
         expectGroupingWorkgroupsLength(grouping1, 3);
-      });
+      }));
 
-      it('should move a workgroup from assigned to unassigned', () => {
+      it('should move a workgroup from assigned to unassigned', fakeAsync(() => {
         expectGroupingWorkgroupsLength(grouping1, 2);
         const event = createEvent(1, 1, 0);
         component.moveWorkgroup(event);
         expectGroupingWorkgroupsLength(grouping1, 1);
-      });
+      }));
 
-      it('should move a workgroup from assigned to assigned', () => {
+      it('should move a workgroup from assigned to assigned', fakeAsync(() => {
         expectGroupingWorkgroupsLength(grouping1, 2);
         expectGroupingWorkgroupsLength(grouping2, 2);
         const event = createEvent(1, 1, 2);
         component.moveWorkgroup(event);
         expectGroupingWorkgroupsLength(grouping1, 1);
         expectGroupingWorkgroupsLength(grouping2, 3);
-      });
+      }));
     });
   }
 
   function expectGroupingWorkgroupsLength(grouping: any, expectedNumWorkgroups: number): void {
-    expect(grouping.workgroups.length).toEqual(expectedNumWorkgroups);
+    expect(grouping.members.length).toEqual(expectedNumWorkgroups);
   }
 
   function createNewGroup() {

@@ -31,26 +31,20 @@ export class PeerGroupService {
     });
   }
 
-  createNewGroup(nodeId: string, componentId: string): Observable<any> {
+  createNewGroup(periodId: number, nodeId: string, componentId: string): Observable<any> {
     const runId = this.ConfigService.getRunId();
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(
-      `/api/peer-group/create/${runId}/${nodeId}/${componentId}`,
+      `/api/peer-group/create/${runId}/${periodId}/${nodeId}/${componentId}`,
       new HttpParams(),
       { headers: headers }
     );
   }
 
-  moveWorkgroupToGroup(
-    workgroupId: number,
-    groupId: number,
-    nodeId: string,
-    componentId: string
-  ): Observable<any> {
-    const runId = this.ConfigService.getRunId();
+  moveWorkgroupToGroup(workgroupId: number, groupId: number): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(
-      `/api/peer-group/move-member/${runId}/${nodeId}/${componentId}/${groupId}/${workgroupId}`,
+      `/api/peer-group/membership/add/${groupId}/${workgroupId}`,
       new HttpParams(),
       { headers: headers }
     );
