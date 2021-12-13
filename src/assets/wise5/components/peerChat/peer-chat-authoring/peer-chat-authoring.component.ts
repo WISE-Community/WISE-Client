@@ -37,6 +37,10 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     {
       value: 'maximizeDifferentIdeas',
       text: 'Maximize Different Ideas'
+    },
+    {
+      value: 'manual',
+      text: 'Manual'
     }
   ];
   nodeIds: string[];
@@ -112,7 +116,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   }
 
   logicNameChanged(logicObject: any): void {
-    if (logicObject.name === 'random') {
+    if (logicObject.name === 'random' || logicObject.name === 'manual') {
       delete logicObject.nodeId;
       delete logicObject.componentId;
     }
