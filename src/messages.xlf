@@ -3754,7 +3754,7 @@
           <context context-type="linenumber">4</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-status-icon/match-status-icon.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
@@ -12310,6 +12310,20 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">882</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="a7d56850122574ce933b94051d73d65817e8369b" datatype="html">
+        <source>Delete item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/delete-choice-button/delete-choice-button.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8927837337329146438" datatype="html">
+        <source>Are you sure you want to delete this item?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/delete-choice-button/delete-choice-button.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="43e2291ad2f3e8419aeefcc82006a294d86e3445" datatype="html">
         <source> Student Can Create Choices </source>
         <context-group purpose="location">
@@ -12540,6 +12554,20 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">49,50</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3db39135c783da4bb320d5826f4de893f62c7e1b" datatype="html">
+        <source>Correct</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b42d54000704393a3c06e5f8b668880014f6986" datatype="html">
+        <source>Incorrect</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="0f72a164f5a5d10d1fbdeeb84ac80a63c04b7e1b" datatype="html">
         <source>Add item</source>
         <context-group purpose="location">
@@ -12559,20 +12587,6 @@ Warning: This will delete all existing choices and buckets in this component.</s
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
           <context context-type="linenumber">10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a7d56850122574ce933b94051d73d65817e8369b" datatype="html">
-        <source>Delete item</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/delete-choice-button/delete-choice-button.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8927837337329146438" datatype="html">
-        <source>Are you sure you want to delete this item?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/delete-choice-button/delete-choice-button.component.ts</context>
-          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8b8ff7859cae872c69d4677ab92308d7465220cb" datatype="html">
@@ -12610,20 +12624,6 @@ Warning: This will delete all existing choices and buckets in this component.</s
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
           <context context-type="linenumber">60,61</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3db39135c783da4bb320d5826f4de893f62c7e1b" datatype="html">
-        <source>Correct</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-status-icon/match-status-icon.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8b42d54000704393a3c06e5f8b668880014f6986" datatype="html">
-        <source>Incorrect</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-status-icon/match-status-icon.component.html</context>
-          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5222638645205059452" datatype="html">

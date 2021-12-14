@@ -9,7 +9,7 @@ import { DrawGrading } from '../../assets/wise5/components/draw/draw-grading/dra
 import { EmbeddedGrading } from '../../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
 import { GraphGrading } from '../../assets/wise5/components/graph/graph-grading/graph-grading.component';
 import { LabelGrading } from '../../assets/wise5/components/label/label-grading/label-grading.component';
-import { MatchGrading } from '../../assets/wise5/components/match/match-grading/match-grading.component';
+import { MatchGradingModule } from '../../assets/wise5/components/match/match-grading/match-grading-module';
 import { MultipleChoiceGrading } from '../../assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component';
 import { OpenResponseGrading } from '../../assets/wise5/components/openResponse/open-response-grading/open-response-grading.component';
 import { TableGrading } from '../../assets/wise5/components/table/table-grading/table-grading.component';
@@ -26,12 +26,11 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     EmbeddedGrading,
     GraphGrading,
     LabelGrading,
-    MatchGrading,
     MultipleChoiceGrading,
     OpenResponseGrading,
     TableGrading
   ],
-  imports: [AngularJSModule, HighchartsChartModule],
+  imports: [AngularJSModule, HighchartsChartModule, MatchGradingModule],
   exports: [
     AnimationGrading,
     AudioOscillatorGrading,
@@ -42,7 +41,7 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     EmbeddedGrading,
     GraphGrading,
     LabelGrading,
-    MatchGrading,
+    MatchGradingModule,
     MultipleChoiceGrading,
     OpenResponseGrading,
     TableGrading
