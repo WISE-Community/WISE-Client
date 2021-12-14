@@ -4,8 +4,7 @@ import { ComponentGrading } from '../../../classroomMonitor/classroomMonitorComp
 @Component({
   selector: 'match-grading',
   templateUrl: 'match-grading.component.html',
-  styleUrls: ['match-grading.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['../match-student/match-student.component.scss', 'match-grading.component.scss']
 })
 export class MatchGrading extends ComponentGrading {
   sourceBucketId = '0';
@@ -24,7 +23,6 @@ export class MatchGrading extends ComponentGrading {
     this.isCorrect = this.componentState.studentData.isCorrect;
     this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
-    this.bucketWidth = this.calculateBucketWidth(this.targetBuckets, this.isHorizontal);
   }
 
   initializeBuckets(buckets: any[]): void {
@@ -46,22 +44,5 @@ export class MatchGrading extends ComponentGrading {
       }
     }
     return false;
-  }
-
-  calculateBucketWidth(buckets: any[], isHorizontal: boolean): number {
-    if (isHorizontal) {
-      return 100;
-    } else {
-      return this.calculateVerticalBucketWidth(buckets);
-    }
-  }
-
-  calculateVerticalBucketWidth(buckets: any[]): number {
-    const numBuckets = buckets.length;
-    if (numBuckets % 3 === 0 || numBuckets > 4) {
-      return Math.round(100 / 3);
-    } else if (numBuckets % 2 === 0) {
-      return 100 / 2;
-    }
   }
 }

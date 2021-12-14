@@ -1,190 +1,66 @@
-<div class="component--grading__response__content match-grading">
-  <div class="match-content">
-    <div fxLayout="row wrap">
-      <div class="match-bucket match-bucket--choices"
-          fxFlex="100"
-          fxFlex.gt-sm="{{isHorizontal ? 50: 100}}"
-          fxFlexOrder="{{isChoicesAfter ? 2 : 1}}">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title [innerHTML]="sourceBucket.value"
-                class="primary mat-body-2">
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="match-bucket__content">
-            <mat-list class="match-bucket__contents columns-2">
-              <div class="match-bucket__item"
-                  *ngFor="let item of sourceBucket.items">
-                <mat-list-item class="match-bucket__item__contents">
-                  <p mat-line>
-                    <span class="match-bucket__item__contents__text"
-                        [innerHTML]="item.value">
-                    </span>
-                  </p>
-                  <p class="match-feedback mat-body-2"
-                      *ngIf="item.feedback != null && item.feedback !== ''"
-                      mat-line
-                      [ngClass]="{'success-bg': !hasCorrectAnswer || item.isCorrect, 'info-bg': item.isIncorrectPosition, 'warn-bg': hasCorrectAnswer && !item.isCorrect}"
-                      fxLayoutAlign="start center">
-                    <mat-icon *ngIf="hasCorrectAnswer && item.isCorrect">
-                      check
-                    </mat-icon>
-                    <mat-icon *ngIf="hasCorrectAnswer && item.isIncorrectPosition">
-                      warning
-                    </mat-icon>
-                    <mat-icon *ngIf="hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition">
-                      clear
-                    </mat-icon>
-                    <span [innerHTML]="item.feedback">
-                    </span>
-                  </p>
-                </mat-list-item>
-              </div>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
-        <mat-divider class="match-divider {{isHorizontal ? 'match-divider--horizontal' : ''}}"></mat-divider>
-      </div>
-      <div fxLayout="row wrap"
-          fxLayoutAlign="center start"
-          fxFlex="100"
-          fxFlex.gt-sm="{{isHorizontal ? 50 : 100}}"
-          fxFlexOrder="{{isChoicesAfter ? 1 : 2}}">
-        <div *ngFor="let bucket of targetBuckets; index as bucketIndex"
-            class="match-bucket"
-            fxFlex="100"
-            fxFlex.gt-sm="{{isHorizontal ? 100 : bucketWidth}}">
-          <mat-card>
-            <mat-card-header>
-              <mat-card-title [innerHTML]="bucket.value"
-                  class="primary mat-body-2"></mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="match-bucket__content">
-              <mat-list class="match-bucket__contents">
-                <div class="match-bucket__item"
-                    *ngFor="let item of bucket.items">
-                  <mat-list-item class="match-bucket__item__contents">
-                    <p mat-line>
-                      <span class="match-bucket__item__contents__text"
-                          [innerHTML]="item.value">
-                      </span>
-                    </p>
-                    <p class="match-feedback mat-body-2"
-                        *ngIf="item.feedback != null && item.feedback !== ''"
-                        mat-line
-                        [ngClass]="{'success-bg': !hasCorrectAnswer || item.isCorrect, 'info-bg': item.isIncorrectPosition, 'warn-bg': hasCorrectAnswer && !item.isCorrect}"
-                        fxLayoutAlign="start center">
-                      <mat-icon *ngIf="hasCorrectAnswer && item.isCorrect">
-                        check
-                      </mat-icon>
-                      <mat-icon *ngIf="hasCorrectAnswer && item.isIncorrectPosition">
-                        warning
-                      </mat-icon>
-                      <mat-icon *ngIf="hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition">
-                        clear
-                      </mat-icon>
-                      <span [innerHTML]="item.feedback">
-                      </span>
-                    </p>
-                  </mat-list-item>
-                </div>
-              </mat-list>
-            </mat-card-content>
-          </mat-card>
+<div class="component--grading__response__content">
+  <div class="match" fxLayout="row wrap">
+    <div fxFlex="100"  fxFlex.gt-sm="{{isHorizontal ? 50: 100}}" fxFlexOrder="{{isChoicesAfter ? 2 : 1}}">
+      <div class="bucket selected-bg-bg" fxLayout="column" [ngStyle]="{'margin-bottom': isHorizontal ? '0' : '8px'}">
+        <div class="bucket-title" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <h3 class="mat-body-2" [innerHTML]="sourceBucket.value"></h3>
         </div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div class="md-caption"
-        *ngIf="hasCorrectAnswer && componentContent.maxSubmitCount != null"
-        i18n>
-      You have used {{componentState.studentData.submitCounter}} of {{componentContent.maxSubmitCount}} attempt(s)
-    </div>
-    <div *ngIf="hasCorrectAnswer && componentState.studentData.isCorrect === true"
-        class="success"
-        i18n>
-      Correct
-    </div>
-    <div *ngIf="hasCorrectAnswer && componentState.studentData.isCorrect === false"
-        class="warn"
-        i18n>
-      Incorrect
-    </div>
-  </div>
-</div>
-
-
-
-
-<!-- <div class="component--grading__response__content">
-  <div class="match"
-      fxLayout="row wrap">
-    <div fxFlex="100"
-        fxFlex.gt-xs="{{isHorizontal ? 50: 100}}"
-        fxFlexOrder="{{isChoicesAfter ? 2 : 1}}">
-      <div class="bucket selected-bg-bg"
-          fxLayout="column"
-          [ngStyle]="{'margin-bottom': isHorizontal ? '0' : '8px'}">
-        <div class="bucket-title"
-            fxLayout="row wrap"
-            fxLayoutAlign="start center"
-            fxLayoutGap="8px">
-          <h3 class="mat-body-2"
-              [innerHTML]="sourceBucket.value"></h3>
-        </div>
-        <ul class="items"
-            [ngStyle.gt-xs]="{columns: isHorizontal ? 1 : 2}"
-            [ngStyle.gt-md]="{columns: isHorizontal ? 1 : 3}">
+        <ul class="items" [ngStyle.gt-sm]="{columns: isHorizontal ? 1 : 2}">
           <li class="item"
-              [ngClass]="{'disabled': isDisabled}"
+              [ngClass]="{'disabled': true}"
               *ngFor="let item of sourceBucket.items; let position = index;">
             <match-choice-item [buckets]="[sourceBucket]"
                 [item]="item"
                 [hasCorrectAnswer]="hasCorrectAnswer"
-                [isDisabled]="isDisabled"></match-choice-item>
+                [isDisabled]="true"></match-choice-item>
           </li>
         </ul>
       </div>
     </div>
     <div fxLayout="column"
-        fxLayout.gt-xs="{{isHorizontal ? 'column' : 'row wrap'}}"
+        fxLayout.gt-sm="{{isHorizontal ? 'column' : 'row wrap'}}"
         fxLayoutAlign="start stretch"
         fxFlex="100"
-        fxFlex.gt-xs="{{isHorizontal ? 50 : 100}}"
+        fxFlex.gt-sm="{{isHorizontal ? 50 : 100}}"
         fxFlexOrder="{{isChoicesAfter ? 1 : 2}}">
       <div *ngFor="let bucket of targetBuckets; index as bucketIndex"
           fxLayout="column"
           fxFlex="100"
-          fxFlex.gt-xs="{{isHorizontal ? 100 : 50}}"
-          fxFlex.gt-md="{{isHorizontal ? 100 : 33.33}}">
-        <div class="bucket target notice-bg-bg"
-            fxLayout="column"
-            fxLayoutAlign="stretch">
+          fxFlex.gt-sm="{{isHorizontal ? 100 : 50}}">
+        <div class="bucket target notice-bg-bg" fxLayout="column" fxLayoutAlign="stretch">
           <div class="bucket-title"
               fxLayout="row wrap"
               fxLayoutAlign="start center"
               fxLayoutGap="8px">
-            <h3 class="mat-body-2"
-                [innerHTML]="bucket.value"></h3>
+            <h3 class="mat-body-2" [innerHTML]="bucket.value"></h3>
           </div>
           <ul class="items">
             <li class="item"
-                [ngClass]="{'disabled': isDisabled}"
+                [ngClass]="{'disabled': true}"
                 *ngFor="let item of bucket.items; let position = index;">
               <match-choice-item [buckets]="targetBuckets"
                   [item]="item"
                   [hasCorrectAnswer]="hasCorrectAnswer"
-                  [isDisabled]="isDisabled"></match-choice-item>
+                  [isDisabled]="true"></match-choice-item>
             </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <match-feedback-section [componentContent]="componentContent"
-      [hasCorrectAnswer]="hasCorrectAnswer"
-      [isCorrect]="isCorrect"
-      [isLatestComponentStateSubmit]="isLatestComponentStateSubmit"
-      [submitCounter]="submitCounter"></match-feedback-section>
-</div> -->
+  <div class="md-caption"
+      *ngIf="hasCorrectAnswer && componentContent.maxSubmitCount != null"
+      i18n>
+    You have used {{componentState.studentData.submitCounter}} of {{componentContent.maxSubmitCount}} attempt(s)
+  </div>
+  <div *ngIf="hasCorrectAnswer && componentState.studentData.isCorrect === true"
+      class="success"
+      i18n>
+    Correct
+  </div>
+  <div *ngIf="hasCorrectAnswer && componentState.studentData.isCorrect === false"
+      class="warn"
+      i18n>
+    Incorrect
+  </div>
+</div>
