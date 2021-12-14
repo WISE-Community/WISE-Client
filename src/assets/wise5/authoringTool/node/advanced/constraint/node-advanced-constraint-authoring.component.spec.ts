@@ -89,93 +89,97 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
 
   function removalCriteriaNameChanged() {
     describe('removalCriteriaNameChanged', () => {
+      let removalCriteria;
       function setRemovalCriteriaName(name: string): any {
         component.addConstraint();
-        const constraint = component.node.constraints[0];
-        const criteria = constraint.removalCriteria[0];
-        criteria.name = name;
-        component.removalCriteriaNameChanged(criteria);
-        return criteria;
+        removalCriteria = component.node.constraints[0].removalCriteria[0];
+        removalCriteria.name = name;
+        component.removalCriteriaNameChanged(removalCriteria);
+      }
+
+      function expectEmptyRemovalCriterialParamValue(...paramNames: string[]) {
+        paramNames.forEach((paramName) => {
+          expect(removalCriteria.params[paramName]).toEqual('');
+        });
+      }
+
+      function expectRemovalCriteriaNodeIdValueToEqualNode1() {
+        expect(removalCriteria.params['nodeId']).toEqual(nodeId1);
       }
 
       it('should handle removal criteria name changed to isCompleted', () => {
-        const criteria = setRemovalCriteriaName('isCompleted');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
+        setRemovalCriteriaName('isCompleted');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
       });
 
       it('should handle removal criteria name changed to score', () => {
-        const criteria = setRemovalCriteriaName('score');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
-        expect(criteria.params['componentId']).toEqual('');
-        expect(criteria.params['scores']).toEqual('');
+        setRemovalCriteriaName('score');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
+        expectEmptyRemovalCriterialParamValue('componentId', 'scores');
       });
 
       it('should handle removal criteria name changed to branch path taken', () => {
-        const criteria = setRemovalCriteriaName('branchPathTaken');
-        expect(criteria.params['fromNodeId']).toEqual('');
-        expect(criteria.params['toNodeId']).toEqual('');
+        setRemovalCriteriaName('branchPathTaken');
+        expectEmptyRemovalCriterialParamValue('fromNodeId', 'toNodeId');
       });
 
       it('should handle removal criteria name changed to choiceChosen', () => {
-        const criteria = setRemovalCriteriaName('choiceChosen');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
-        expect(criteria.params['componentId']).toEqual('');
-        expect(criteria.params['choiceIds']).toEqual('');
+        setRemovalCriteriaName('choiceChosen');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
+        expectEmptyRemovalCriterialParamValue('componentId', 'choiceIds');
       });
 
       it('should handle removal criteria name changed to isCorrect', () => {
-        const criteria = setRemovalCriteriaName('isCorrect');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
-        expect(criteria.params['componentId']).toEqual('');
+        setRemovalCriteriaName('isCorrect');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
+        expectEmptyRemovalCriterialParamValue('componentId');
       });
 
       it('should handle removal criteria name changed to usedXSubmits', () => {
-        const criteria = setRemovalCriteriaName('usedXSubmits');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
-        expect(criteria.params['componentId']).toEqual('');
-        expect(criteria.params['requiredSubmitCount']).toEqual('');
+        setRemovalCriteriaName('usedXSubmits');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
+        expectEmptyRemovalCriterialParamValue('componentId', 'requiredSubmitCount');
       });
 
       it('should handle removal criteria name changed to isVisible', () => {
-        const criteria = setRemovalCriteriaName('isVisible');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
+        setRemovalCriteriaName('isVisible');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
       });
 
       it('should handle removal criteria name changed to isVisitable', () => {
-        const criteria = setRemovalCriteriaName('isVisitable');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
+        setRemovalCriteriaName('isVisitable');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
       });
 
       it('should handle removal criteria name changed to isVisited', () => {
-        const criteria = setRemovalCriteriaName('isVisited');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
+        setRemovalCriteriaName('isVisited');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
       });
 
       it('should handle removal criteria name changed to wroteXNumberOfWords', () => {
-        const criteria = setRemovalCriteriaName('wroteXNumberOfWords');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
-        expect(criteria.params['componentId']).toEqual('');
-        expect(criteria.params['requiredNumberOfWords']).toEqual('');
+        setRemovalCriteriaName('wroteXNumberOfWords');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
+        expectEmptyRemovalCriterialParamValue('componentId', 'requiredNumberOfWords');
       });
 
       it('should handle removal criteria name changed to addXNumberOfNotesOnThisStep', () => {
-        const criteria = setRemovalCriteriaName('addXNumberOfNotesOnThisStep');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
-        expect(criteria.params['requiredNumberOfNotes']).toEqual('');
+        setRemovalCriteriaName('addXNumberOfNotesOnThisStep');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
+        expectEmptyRemovalCriterialParamValue('requiredNumberOfNotes');
       });
 
       it('should handle removal criteria name changed to fillXNumberOfRows', () => {
-        const criteria = setRemovalCriteriaName('fillXNumberOfRows');
-        expect(criteria.params['nodeId']).toEqual(nodeId1);
-        expect(criteria.params['componentId']).toEqual('');
-        expect(criteria.params['requiredNumberOfFilledRows']).toEqual(null);
-        expect(criteria.params['tableHasHeaderRow']).toEqual(true);
-        expect(criteria.params['requireAllCellsInARowToBeFilled']).toEqual(true);
+        setRemovalCriteriaName('fillXNumberOfRows');
+        expectRemovalCriteriaNodeIdValueToEqualNode1();
+        expectEmptyRemovalCriterialParamValue('componentId');
+        expect(removalCriteria.params['requiredNumberOfFilledRows']).toEqual(null);
+        expect(removalCriteria.params['tableHasHeaderRow']).toEqual(true);
+        expect(removalCriteria.params['requireAllCellsInARowToBeFilled']).toEqual(true);
       });
 
       it('should handle removal criteria name changed to teacherRemoval', () => {
-        const criteria = setRemovalCriteriaName('teacherRemoval');
-        expect(criteria.params['nodeId']).toBeUndefined();
+        setRemovalCriteriaName('teacherRemoval');
+        expect(removalCriteria.params['nodeId']).toBeUndefined();
       });
     });
   }
