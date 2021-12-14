@@ -46,7 +46,7 @@ const componentContent = {
   secondPrompt: 'Discuss. Use the Question Bank.'
 };
 
-fdescribe('PeerChatAuthoringComponent', () => {
+describe('PeerChatAuthoringComponent', () => {
   let component: PeerChatAuthoringComponent;
   let fixture: ComponentFixture<PeerChatAuthoringComponent>;
 
