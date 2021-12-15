@@ -1,277 +1,277 @@
+import { Component, OnInit } from '@angular/core';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { UtilService } from '../../../../services/utilService';
 
-class NodeAdvancedConstraintAuthoringController {
+@Component({
+  selector: 'node-advanced-constraint-authoring',
+  templateUrl: 'node-advanced-constraint-authoring.component.html',
+  styleUrls: ['node-advanced-constraint-authoring.component.scss']
+})
+export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
   constraintActions: any[];
-  items: any[];
   node: any;
   nodeId: string;
+  nodeIds: string[];
   removalConditionals: any[];
   removalCriteria: any;
-  $translate: any;
-
-  static $inject = ['$filter', '$timeout', 'ProjectService', 'TeacherDataService', 'UtilService'];
 
   constructor(
-    private $filter: any,
-    private $timeout: any,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService,
     private UtilService: UtilService
   ) {
-    this.$translate = this.$filter('translate');
     this.constraintActions = [
       {
         value: '',
-        text: this.$translate('pleaseChooseAnAction')
+        text: $localize`Please Choose an Action`
       },
       {
         value: 'makeAllNodesAfterThisNotVisitable',
-        text: this.$translate('makeAllNodesAfterThisNotVisitable')
+        text: $localize`Make all nodes after this not visitable`
       },
       {
         value: 'makeAllNodesAfterThisNotVisible',
-        text: this.$translate('makeAllNodesAfterThisNotVisible')
+        text: $localize`Make all nodes after this not visible`
       },
       {
         value: 'makeAllOtherNodesNotVisitable',
-        text: this.$translate('makeAllOtherNodesNotVisitable')
+        text: $localize`Make all other nodes not visitable`
       },
       {
         value: 'makeAllOtherNodesNotVisible',
-        text: this.$translate('makeAllOtherNodesNotVisible')
+        text: $localize`Make all other nodes not visible`
       },
       {
         value: 'makeThisNodeNotVisitable',
-        text: this.$translate('makeThisNodeNotVisitable')
+        text: $localize`Make this node not visitable`
       },
       {
         value: 'makeThisNodeNotVisible',
-        text: this.$translate('makeThisNodeNotVisible')
+        text: $localize`Make this node not visible`
       }
     ];
     this.removalConditionals = [
       {
         value: 'all',
-        text: this.$translate('all')
+        text: $localize`All`
       },
       {
         value: 'any',
-        text: this.$translate('any')
+        text: $localize`Any`
       }
     ];
     this.removalCriteria = [
       {
         value: '',
-        text: this.$translate('pleaseChooseARemovalCriteria')
+        text: $localize`Please Choose a Removal Criteria`
       },
       {
         value: 'isCompleted',
-        text: this.$translate('isCompleted'),
+        text: $localize`Is Completed`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           }
         ]
       },
       {
         value: 'score',
-        text: this.$translate('SCORE'),
+        text: $localize`Score`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           },
           {
-            value: 'component',
-            text: this.$translate('component')
+            value: 'componentId',
+            text: $localize`Component`
           },
           {
             value: 'scores',
-            text: this.$translate('scoresParens')
+            text: $localize`Score(s)`
           }
         ]
       },
       {
         value: 'branchPathTaken',
-        text: this.$translate('branchPathTaken'),
+        text: $localize`Branch Path Taken`,
         params: [
           {
             value: 'fromNodeId',
-            text: this.$translate('fromStep')
+            text: $localize`From Step`
           },
           {
             value: 'toNodeId',
-            text: this.$translate('toStep')
+            text: $localize`To Step`
           }
         ]
       },
       {
         value: 'choiceChosen',
-        text: this.$translate('choiceChosen'),
+        text: $localize`Choice Chosen`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           },
           {
             value: 'componentId',
-            text: this.$translate('component')
+            text: $localize`Component`
           },
           {
             value: 'choiceIds',
-            text: this.$translate('choices')
+            text: $localize`Choices`
           }
         ]
       },
       {
         value: 'isCorrect',
-        text: this.$translate('IS_CORRECT'),
+        text: $localize`Is Correct`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           },
           {
             value: 'componentId',
-            text: this.$translate('component')
+            text: $localize`Component`
           }
         ]
       },
       {
         value: 'usedXSubmits',
-        text: this.$translate('usedXSubmits'),
+        text: $localize`Used X Submits`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           },
           {
             value: 'componentId',
-            text: this.$translate('component')
+            text: $localize`Component`
           },
           {
             value: 'requiredSubmitCount',
-            text: this.$translate('requiredSubmitCount')
+            text: $localize`Required Submit Count`
           }
         ]
       },
       {
         value: 'isVisible',
-        text: this.$translate('isVisible'),
+        text: $localize`Is Visible`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           }
         ]
       },
       {
         value: 'isVisitable',
-        text: this.$translate('isVisitable'),
+        text: $localize`Is Visitable`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           }
         ]
       },
       {
         value: 'isVisited',
-        text: this.$translate('isVisited'),
+        text: $localize`Is Visited`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           }
         ]
       },
       {
         value: 'wroteXNumberOfWords',
-        text: this.$translate('wroteXNumberOfWords'),
+        text: $localize`Wrote X Number of Words`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           },
           {
             value: 'componentId',
-            text: this.$translate('component')
+            text: $localize`Component`
           },
           {
             value: 'requiredNumberOfWords',
-            text: this.$translate('requiredNumberOfWords')
+            text: $localize`Required Number of Words`
           }
         ]
       },
       {
         value: 'addXNumberOfNotesOnThisStep',
-        text: this.$translate('addXNumberOfNotesOnThisStep'),
+        text: $localize`Add X Number of Notes On This Step`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           },
           {
             value: 'requiredNumberOfNotes',
-            text: this.$translate('requiredNumberOfNotes')
+            text: $localize`Required Number of Notes`
           }
         ]
       },
       {
         value: 'fillXNumberOfRows',
-        text: this.$translate('fillXNumberOfRows'),
+        text: $localize`Fill X Number of Rows`,
         params: [
           {
             value: 'nodeId',
-            text: this.$translate('step')
+            text: $localize`Step`
           },
           {
             value: 'componentId',
-            text: this.$translate('component')
+            text: $localize`Component`
           },
           {
             value: 'requiredNumberOfFilledRows',
             defaultValue: null,
-            text: this.$translate('requiredNumberOfFilledRowsNotIncludingHeaderRow')
+            text: $localize`Required Number of Filled Rows (Not Including Header Row)`
           },
           {
             value: 'tableHasHeaderRow',
             defaultValue: true,
-            text: this.$translate('tableHasHeaderRow')
+            text: $localize`Table Has Header Row`
           },
           {
             value: 'requireAllCellsInARowToBeFilled',
             defaultValue: true,
-            text: this.$translate('requireAllCellsInARowToBeFilled')
+            text: $localize`Require All Cells In a Row To Be Filled`
           }
         ]
       },
       {
         value: 'teacherRemoval',
-        text: this.$translate('teacherRemoval'),
+        text: $localize`Teacher Removes Constraint`,
         params: []
       }
     ];
   }
 
-  $onInit() {
-    this.items = this.ProjectService.idToOrder;
+  ngOnInit() {
+    this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds(true);
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
     this.node = this.ProjectService.getNodeById(this.nodeId);
   }
 
-  addConstraintAndScrollToBottom() {
+  addConstraintAndScrollToBottom(): void {
     const newNodeConstraintId = this.addConstraint();
-    this.$timeout(() => {
+    setTimeout(() => {
       this.ProjectService.scrollToBottomOfPage();
       this.UtilService.temporarilyHighlightElement(newNodeConstraintId);
     });
   }
 
-  addConstraint() {
+  addConstraint(): string {
     const newNodeConstraintId = this.getNewNodeConstraintId(this.nodeId);
     const constraint = {
       id: newNodeConstraintId,
@@ -293,7 +293,7 @@ class NodeAdvancedConstraintAuthoringController {
     return newNodeConstraintId;
   }
 
-  getNewNodeConstraintId(nodeId) {
+  getNewNodeConstraintId(nodeId: string): string {
     let newNodeConstraintId = null;
     const usedConstraintIds = [];
     const node = this.ProjectService.getNodeById(nodeId);
@@ -316,8 +316,8 @@ class NodeAdvancedConstraintAuthoringController {
     return newNodeConstraintId;
   }
 
-  deleteConstraint(constraintIndex) {
-    if (confirm(this.$translate('areYouSureYouWantToDeleteThisConstraint'))) {
+  deleteConstraint(constraintIndex): void {
+    if (confirm($localize`Are you sure you want to delete this constraint?`)) {
       const node = this.ProjectService.getNodeById(this.nodeId);
       const constraints = node.constraints;
       if (constraints != null) {
@@ -327,7 +327,7 @@ class NodeAdvancedConstraintAuthoringController {
     }
   }
 
-  addRemovalCriteria(constraint) {
+  addRemovalCriteria(constraint: any): void {
     const removalCriteria = {
       name: '',
       params: {}
@@ -336,7 +336,7 @@ class NodeAdvancedConstraintAuthoringController {
     this.ProjectService.saveProject();
   }
 
-  removalCriteriaNameChanged(criteria) {
+  removalCriteriaNameChanged(criteria: any): void {
     criteria.params = {};
     const params = this.getRemovalCriteriaParamsByName(criteria.name);
     if (params != null) {
@@ -355,7 +355,7 @@ class NodeAdvancedConstraintAuthoringController {
     this.ProjectService.saveProject();
   }
 
-  getRemovalCriteriaParamsByName(name) {
+  getRemovalCriteriaParamsByName(name: string): any[] {
     for (const singleRemovalCriteria of this.removalCriteria) {
       if (singleRemovalCriteria.value === name) {
         return singleRemovalCriteria.params;
@@ -364,7 +364,7 @@ class NodeAdvancedConstraintAuthoringController {
     return [];
   }
 
-  constraintRemovalCriteriaNodeIdChanged(criteria) {
+  constraintRemovalCriteriaNodeIdChanged(criteria: any): void {
     criteria.params.componentId = '';
     this.ProjectService.saveProject();
   }
@@ -373,8 +373,8 @@ class NodeAdvancedConstraintAuthoringController {
     this.ProjectService.saveProject();
   }
 
-  deleteRemovalCriteria(constraint, removalCriteriaIndex) {
-    if (confirm(this.$translate('areYouSureYouWantToDeleteThisRemovalCriteria'))) {
+  deleteRemovalCriteria(constraint: any, removalCriteriaIndex: number): void {
+    if (confirm($localize`Are you sure you want to delete this removal criteria?`)) {
       const removalCriteria = constraint.removalCriteria;
       if (removalCriteria != null) {
         removalCriteria.splice(removalCriteriaIndex, 1);
@@ -383,11 +383,11 @@ class NodeAdvancedConstraintAuthoringController {
     }
   }
 
-  getChoicesByNodeIdAndComponentId(nodeId, componentId) {
+  getChoicesByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
     return this.ProjectService.getChoicesByNodeIdAndComponentId(nodeId, componentId);
   }
 
-  getChoiceTypeByNodeIdAndComponentId(nodeId, componentId) {
+  getChoiceTypeByNodeIdAndComponentId(nodeId: string, componentId: string): string {
     let choiceType = null;
     let component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
     if (component != null && component.choiceType != null) {
@@ -396,24 +396,24 @@ class NodeAdvancedConstraintAuthoringController {
     return choiceType;
   }
 
-  getComponentsByNodeId(nodeId) {
+  getComponentsByNodeId(nodeId: string): any[] {
     return this.ProjectService.getComponentsByNodeId(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId) {
+  getNodeTitleByNodeId(nodeId: string): string {
     return this.ProjectService.getNodeTitleByNodeId(nodeId);
   }
 
-  getNodePositionById(nodeId) {
+  getNodePositionById(nodeId: string): string {
     return this.ProjectService.getNodePositionById(nodeId);
   }
 
-  saveProject() {
+  scoresChanged(value: any, params: any): void {
+    params.scores = value.split(',');
+    this.ProjectService.saveProject();
+  }
+
+  saveProject(): void {
     this.ProjectService.saveProject();
   }
 }
-
-export const NodeAdvancedConstraintAuthoringComponent = {
-  templateUrl: `/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html`,
-  controller: NodeAdvancedConstraintAuthoringController
-};
