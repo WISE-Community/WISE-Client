@@ -36,4 +36,8 @@ export class PeerGroupService {
   moveWorkgroupToGroup(workgroupId: number, groupId: number): Observable<any> {
     return this.http.post(`/api/peer-group/membership/add/${groupId}/${workgroupId}`, {});
   }
+
+  removeWorkgroupFromGroup(workgroupId: number, groupId: number): Observable<any> {
+    return this.http.delete(`/api/peer-group/membership/${groupId}/${workgroupId}`);
+  }
 }
