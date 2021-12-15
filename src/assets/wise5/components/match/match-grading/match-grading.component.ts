@@ -17,6 +17,8 @@ export class MatchGrading extends ComponentGrading {
   bucketWidth: number;
   hasCorrectAnswer: boolean = false;
   isCorrect: boolean = false;
+  submitCounter: number;
+  isLatestComponentStateSubmit: boolean;
 
   constructor(protected matchService: MatchService, protected projectService: ProjectService) {
     super(projectService);
@@ -29,6 +31,8 @@ export class MatchGrading extends ComponentGrading {
     this.isCorrect = this.componentState.studentData.isCorrect;
     this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
+    this.submitCounter = this.componentState.studentData.submitCounter;
+    this.isLatestComponentStateSubmit = this.componentState.isSubmit;
   }
 
   initializeBuckets(buckets: any[]): void {

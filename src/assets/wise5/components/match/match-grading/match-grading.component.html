@@ -48,19 +48,9 @@
       </div>
     </div>
   </div>
-  <div class="md-caption"
-      *ngIf="hasCorrectAnswer && componentContent.maxSubmitCount != null"
-      i18n>
-    You have used {{componentState.studentData.submitCounter}} of {{componentContent.maxSubmitCount}} attempt(s)
-  </div>
-  <div *ngIf="hasCorrectAnswer && componentState.studentData.isCorrect === true"
-      class="success"
-      i18n>
-    Correct
-  </div>
-  <div *ngIf="hasCorrectAnswer && componentState.studentData.isCorrect === false"
-      class="warn"
-      i18n>
-    Incorrect
-  </div>
+  <match-feedback-section [componentContent]="componentContent"
+      [hasCorrectAnswer]="hasCorrectAnswer"
+      [isCorrect]="isCorrect"
+      [isLatestComponentStateSubmit]="isLatestComponentStateSubmit"
+      [submitCounter]="submitCounter"></match-feedback-section>
 </div>

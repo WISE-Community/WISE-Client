@@ -12521,43 +12521,6 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">404</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="06ce7d94965efa6522f9a9615a9bdc6c163f64b3" datatype="html">
-        <source> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-grading/match-grading.component.html</context>
-          <context context-type="linenumber">53,55</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b9d8b8ec705079ec5a4555723762a04a0b55d864" datatype="html">
-        <source> Correct </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-grading/match-grading.component.html</context>
-          <context context-type="linenumber">59,60</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
-          <context context-type="linenumber">10,11</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">55,56</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d4d6f1510d16638d79a0e793a0ac8a11b2231a8f" datatype="html">
-        <source> Incorrect </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-grading/match-grading.component.html</context>
-          <context context-type="linenumber">64,65</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
-          <context context-type="linenumber">15,16</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
-          <context context-type="linenumber">60,61</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="3db39135c783da4bb320d5826f4de893f62c7e1b" datatype="html">
         <source>Correct</source>
         <context-group purpose="location">
@@ -12606,6 +12569,28 @@ Warning: This will delete all existing choices and buckets in this component.</s
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
           <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b9d8b8ec705079ec5a4555723762a04a0b55d864" datatype="html">
+        <source> Correct </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d4d6f1510d16638d79a0e793a0ac8a11b2231a8f" datatype="html">
+        <source> Incorrect </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
+          <context context-type="linenumber">60,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5222638645205059452" datatype="html">
