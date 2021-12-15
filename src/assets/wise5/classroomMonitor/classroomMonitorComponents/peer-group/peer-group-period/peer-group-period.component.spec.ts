@@ -97,6 +97,9 @@ describe('PeerGroupPeriodComponent', () => {
     spyOn(TestBed.inject(PeerGroupService), 'moveWorkgroupToGroup').and.callFake(() => {
       return of({});
     });
+    spyOn(TestBed.inject(PeerGroupService), 'removeWorkgroupFromGroup').and.callFake(() => {
+      return of({});
+    });
     spyOn(TestBed.inject(ConfigService), 'getDisplayUsernamesByWorkgroupId').and.callFake(() => {
       return 'Student Name Here';
     });
