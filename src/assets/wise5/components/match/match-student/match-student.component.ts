@@ -440,7 +440,7 @@ export class MatchStudent extends ComponentStudent {
           );
           isCorrect &&= isChoiceCorrect;
         }
-        this.setItemStatus(item);
+        this.MatchService.setItemStatus(item);
       }
     }
 
@@ -466,17 +466,6 @@ export class MatchStudent extends ComponentStudent {
     }
     this.tryDisableComponent();
     return isCorrect;
-  }
-
-  setItemStatus(item: any): void {
-    item.status = '';
-    if (item.isCorrect) {
-      item.status = 'correct';
-    } else if (item.isIncorrectPosition) {
-      item.status = 'warn';
-    } else if (this.hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition) {
-      item.status = 'incorrect';
-    }
   }
 
   getFeedback(feedbackObject: any, hasCorrectAnswer: boolean, position: number): string {

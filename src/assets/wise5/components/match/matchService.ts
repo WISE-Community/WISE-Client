@@ -102,4 +102,15 @@ export class MatchService extends ComponentService {
     }
     return false;
   }
+
+  setItemStatus(item: any): void {
+    item.status = '';
+    if (item.isCorrect) {
+      item.status = 'correct';
+    } else if (item.isIncorrectPosition) {
+      item.status = 'warn';
+    } else if (this.hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition) {
+      item.status = 'incorrect';
+    }
+  }
 }

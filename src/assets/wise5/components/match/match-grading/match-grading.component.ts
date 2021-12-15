@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ComponentGrading } from '../../../classroomMonitor/classroomMonitorComponents/shared/component-grading.component';
+import { ProjectService } from '../../../services/projectService';
+import { MatchService } from '../matchService';
 
 @Component({
   selector: 'match-grading',
@@ -16,6 +18,10 @@ export class MatchGrading extends ComponentGrading {
   hasCorrectAnswer: boolean = false;
   isCorrect: boolean = false;
 
+  constructor(protected matchService: MatchService, protected projectService: ProjectService) {
+    super(projectService);
+  }
+
   ngOnInit() {
     super.ngOnInit();
     this.initializeBuckets(this.componentState.studentData.buckets);
@@ -27,6 +33,7 @@ export class MatchGrading extends ComponentGrading {
 
   initializeBuckets(buckets: any[]): void {
     for (const bucket of buckets) {
+      this.setItemStatuses(bucket.items);
       if (bucket.id === this.sourceBucketId) {
         this.sourceBucket = bucket;
       } else {
@@ -44,5 +51,11 @@ export class MatchGrading extends ComponentGrading {
       }
     }
     return false;
+  }
+
+  setItemStatuses(items: any[]): void {
+    for (const item of items) {
+      this.matchService.setItemStatus(item);
+    }
   }
 }
