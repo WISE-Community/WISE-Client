@@ -177,7 +177,6 @@ describe('MatchStudent', () => {
   initializeBuckets();
   initializeChoices();
   createComponentStateObject();
-  hasCorrectChoices();
   clearFeedback();
   isAuthorHasSpecifiedACorrectBucket();
   isAuthorHasSpecifiedACorrectPosition();
@@ -579,19 +578,6 @@ function createComponentStateObject() {
       expect(componentState.studentData.buckets[0].items[0].value).toEqual(choiceValue1);
       expect(componentState.studentData.buckets[0].items[1].value).toEqual(choiceValue2);
       expect(componentState.studentData.buckets[0].items[2].value).toEqual(choiceValue3);
-    });
-  });
-}
-
-function hasCorrectChoices() {
-  describe('hasCorrectChoices', () => {
-    it('should check if there is a correct choice when there is none', () => {
-      expect(component.hasCorrectChoices()).toEqual(false);
-    });
-
-    it('should check if there is a correct choice when there is', () => {
-      component.componentContent.feedback[1].choices[0].isCorrect = true;
-      expect(component.hasCorrectChoices()).toEqual(true);
     });
   });
 }

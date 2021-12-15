@@ -26,13 +26,13 @@ export class MatchGrading extends ComponentGrading {
 
   ngOnInit() {
     super.ngOnInit();
-    this.initializeBuckets(this.componentState.studentData.buckets);
-    this.hasCorrectAnswer = this.hasCorrectChoices(this.componentContent);
+    this.hasCorrectAnswer = this.matchService.hasCorrectChoices(this.componentContent);
     this.isCorrect = this.componentState.studentData.isCorrect;
     this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
     this.submitCounter = this.componentState.studentData.submitCounter;
     this.isLatestComponentStateSubmit = this.componentState.isSubmit;
+    this.initializeBuckets(this.componentState.studentData.buckets);
   }
 
   initializeBuckets(buckets: any[]): void {
@@ -46,20 +46,9 @@ export class MatchGrading extends ComponentGrading {
     }
   }
 
-  hasCorrectChoices(componentContent: any): boolean {
-    for (const bucket of componentContent.feedback) {
-      for (const choice of bucket.choices) {
-        if (choice.isCorrect) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
   setItemStatuses(items: any[]): void {
     for (const item of items) {
-      this.matchService.setItemStatus(item);
+      this.matchService.setItemStatus(item, this.hasCorrectAnswer);
     }
   }
 }

@@ -78,7 +78,7 @@ export class MatchStudent extends ComponentStudent {
     this.isHorizontal = this.componentContent.horizontal;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    this.hasCorrectAnswer = this.hasCorrectChoices();
+    this.hasCorrectAnswer = this.MatchService.hasCorrectChoices(this.componentContent);
     if (this.shouldImportPrivateNotes()) {
       this.importPrivateNotes();
     }
@@ -440,7 +440,7 @@ export class MatchStudent extends ComponentStudent {
           );
           isCorrect &&= isChoiceCorrect;
         }
-        this.MatchService.setItemStatus(item);
+        this.MatchService.setItemStatus(item, this.hasCorrectAnswer);
       }
     }
 
@@ -636,17 +636,6 @@ export class MatchStudent extends ComponentStudent {
       }
     }
     return null;
-  }
-
-  hasCorrectChoices(): boolean {
-    for (const bucket of this.componentContent.feedback) {
-      for (const choice of bucket.choices) {
-        if (choice.isCorrect) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   clearFeedback(): void {
