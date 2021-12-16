@@ -2,7 +2,8 @@ import { CRaterIdea } from './CRaterIdea';
 import { CRaterScore } from './CRaterScore';
 
 export class CRaterResponse {
-  ideas: CRaterIdea[];
+  ideas: CRaterIdea[] = [];
+  score: number;
   scores: CRaterScore[];
 
   constructor() {}

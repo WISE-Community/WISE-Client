@@ -23,14 +23,18 @@ import { UtilService } from '../../../services/utilService';
 import { MockNodeService } from '../../animation/animation-authoring/animation-authoring.component.spec';
 import { MockService } from '../../animation/animation-student/animation-student.component.spec';
 import { ComponentService } from '../../componentService';
+import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseMultipleScores';
+import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
+import { CRaterResponse } from '../CRaterResponse';
+import { CRaterScore } from '../CRaterScore';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { DialogGuidanceStudentComponent } from './dialog-guidance-student.component';
 
-describe('DialogGuidanceStudentComponent', () => {
-  let component: DialogGuidanceStudentComponent;
-  let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
+let component: DialogGuidanceStudentComponent;
+let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
 
+describe('DialogGuidanceStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
@@ -76,12 +80,67 @@ describe('DialogGuidanceStudentComponent', () => {
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
     component.componentContent = TestBed.inject(DialogGuidanceService).createComponent();
+    component.componentContent.feedbackRules = [
+      {
+        expression: 'isDefault',
+        feedback: 'Default Feedback'
+      }
+    ];
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create computer dialog response with single score', () => {
+    const response = new CRaterResponse();
+    const score = 5;
+    response.score = score;
+    const computerDialogResponse = component.createComputerDialogResponse(response);
+    expect((computerDialogResponse as ComputerDialogResponseSingleScore).score).toEqual(score);
+  });
+
+  it('should create computer dialog response with multiple scores', () => {
+    const response = new CRaterResponse();
+    const scores = [new CRaterScore('ki', 5, 5.0), new CRaterScore('science', 4, 4.1)];
+    response.scores = scores;
+    const computerDialogResponse = component.createComputerDialogResponse(response);
+    expect((computerDialogResponse as ComputerDialogResponseMultipleScores).scores).toEqual(scores);
+  });
+
+  it('should handle crater success response', () => {
+    const broadcastComponentSubmitTriggeredSpy = spyOn(
+      TestBed.inject(StudentDataService),
+      'broadcastComponentSubmitTriggered'
+    );
+    component.setIsSubmitDirty(true);
+    const response = new CRaterResponse();
+    component.cRaterSuccessResponse(response);
+    expect(broadcastComponentSubmitTriggeredSpy).toHaveBeenCalled();
+    expect(component.submitCounter).toEqual(1);
+  });
+
+  it('should disable submit button after using all submits', () => {
+    component.componentContent.maxSubmitCount = 2;
+    expect(component.studentCanRespond).toEqual(true);
+    simulateSubmit(component);
+    expect(component.studentCanRespond).toEqual(true);
+    simulateSubmit(component);
+    expect(component.studentCanRespond).toEqual(false);
+  });
+
+  it('should handle crater error response', () => {
+    const broadcastComponentSaveTriggeredSpy = spyOn(
+      TestBed.inject(StudentDataService),
+      'broadcastComponentSaveTriggered'
+    );
+    component.cRaterErrorResponse();
+    expect(broadcastComponentSaveTriggeredSpy).toHaveBeenCalled();
+    expect(component.submitCounter).toEqual(0);
   });
 });
+
+function simulateSubmit(component: DialogGuidanceStudentComponent): void {
+  const response = new CRaterResponse();
+  component.setIsSubmitDirty(true);
+  component.cRaterSuccessResponse(response);
+}

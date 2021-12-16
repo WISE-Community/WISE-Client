@@ -1,32 +1,43 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentGrading } from '../../../classroomMonitor/classroomMonitorComponents/shared/component-grading.component';
+import { ProjectService } from '../../../services/projectService';
+import { MatchService } from '../matchService';
 
 @Component({
   selector: 'match-grading',
   templateUrl: 'match-grading.component.html',
-  styleUrls: ['match-grading.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['../match-student/match-student.component.scss', 'match-grading.component.scss']
 })
 export class MatchGrading extends ComponentGrading {
   sourceBucketId = '0';
   sourceBucket: any;
   targetBuckets: any[] = [];
-  isHorizontal: boolean = false;
+  isHorizontal: boolean;
+  isChoicesAfter: boolean;
   bucketWidth: number;
-  hasCorrectAnswer: boolean = false;
-  isCorrect: boolean = false;
+  hasCorrectAnswer: boolean;
+  isCorrect: boolean;
+  submitCounter: number;
+  isLatestComponentStateSubmit: boolean;
+
+  constructor(protected matchService: MatchService, protected projectService: ProjectService) {
+    super(projectService);
+  }
 
   ngOnInit() {
     super.ngOnInit();
-    this.initializeBuckets(this.componentState.studentData.buckets);
-    this.hasCorrectAnswer = this.hasCorrectChoices(this.componentContent);
+    this.hasCorrectAnswer = this.matchService.hasCorrectChoices(this.componentContent);
     this.isCorrect = this.componentState.studentData.isCorrect;
+    this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
-    this.bucketWidth = this.calculateBucketWidth(this.targetBuckets, this.isHorizontal);
+    this.submitCounter = this.componentState.studentData.submitCounter;
+    this.isLatestComponentStateSubmit = this.componentState.isSubmit;
+    this.initializeBuckets(this.componentState.studentData.buckets);
   }
 
   initializeBuckets(buckets: any[]): void {
     for (const bucket of buckets) {
+      this.setItemStatuses(bucket.items);
       if (bucket.id === this.sourceBucketId) {
         this.sourceBucket = bucket;
       } else {
@@ -35,31 +46,9 @@ export class MatchGrading extends ComponentGrading {
     }
   }
 
-  hasCorrectChoices(componentContent: any): boolean {
-    for (const bucket of componentContent.feedback) {
-      for (const choice of bucket.choices) {
-        if (choice.isCorrect) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  calculateBucketWidth(buckets: any[], isHorizontal: boolean): number {
-    if (isHorizontal) {
-      return 100;
-    } else {
-      return this.calculateVerticalBucketWidth(buckets);
-    }
-  }
-
-  calculateVerticalBucketWidth(buckets: any[]): number {
-    const numBuckets = buckets.length;
-    if (numBuckets % 3 === 0 || numBuckets > 4) {
-      return Math.round(100 / 3);
-    } else if (numBuckets % 2 === 0) {
-      return 100 / 2;
+  setItemStatuses(items: any[]): void {
+    for (const item of items) {
+      this.matchService.setItemStatus(item, this.hasCorrectAnswer);
     }
   }
 }

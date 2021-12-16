@@ -8,5 +8,7 @@
         (ngModelChange)="inputChange.next($event)"
         type="text" />
   </mat-form-field>
+  <edit-component-max-submit [(maxSubmitCount)]="authoringComponentContent.maxSubmitCount"
+      (maxSubmitCountChange)="componentChanged()"></edit-component-max-submit>
   <edit-dialog-guidance-feedback-rules [feedbackRules]="authoringComponentContent.feedbackRules"></edit-dialog-guidance-feedback-rules>
 </div>

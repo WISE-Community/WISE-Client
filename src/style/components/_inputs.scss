@@ -3,6 +3,20 @@
   border-radius: 0;
 }
 
+.form-field-long-hint {
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .mat-form-field-underline {
+    position: initial;
+  }
+
+  .mat-form-field-subscript-wrapper {
+    position: relative;
+  }
+}
+
 .form-field-no-label {
   &.mat-form-field-appearance-fill, &.mat-form-field-appearance-outline {
     .mat-form-field-wrapper {

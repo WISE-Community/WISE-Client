@@ -10,16 +10,6 @@
 </div>
 <div>
   <mat-checkbox
-      color="primary"
-      class="checkbox"
-      [(ngModel)]="authoringComponentContent.horizontal"
-      (ngModelChange)="componentChanged()"
-      i18n>
-    Show Source and Target Buckets Side-by-Side
-  </mat-checkbox>
-</div>
-<div>
-  <mat-checkbox
       *ngIf="isNotebookEnabled()"
       color="primary"
       class="checkbox"
@@ -39,7 +29,6 @@
     (maxSubmitCountChange)="maxSubmitCountChanged($event)">
 </edit-component-max-submit>
 <edit-component-default-feedback
-    *ngIf="authoringComponentContent.showSubmitButton"
     [authoringComponentContent]="authoringComponentContent">
 </edit-component-default-feedback>
 <div fxLayout="column" fxLayoutAlign="start start">

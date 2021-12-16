@@ -5,6 +5,7 @@ import { AudioOscillatorGrading } from '../../assets/wise5/components/audioOscil
 import { DialogGuidanceGradingComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-grading/dialog-guidance-grading.component';
 import { DiscussionGrading } from '../../assets/wise5/components/discussion/discussion-grading/discussion-grading.component';
 import { EmbeddedGrading } from '../../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
+import { MatchGradingModule } from '../../assets/wise5/components/match/match-grading/match-grading-module';
 import { PeerChatGradingComponent } from '../../assets/wise5/components/peerChat/peer-chat-grading/peer-chat-grading.component';
 import { PeerChatModule } from '../../assets/wise5/components/peerChat/peer-chat.module';
 import { AngularJSModule } from '../common-hybrid-angular.module';
@@ -18,13 +19,14 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     EmbeddedGrading,
     PeerChatGradingComponent
   ],
-  imports: [AngularJSModule, HighchartsChartModule, PeerChatModule],
+  imports: [AngularJSModule, HighchartsChartModule, MatchGradingModule, PeerChatModule],
   exports: [
     AnimationGrading,
     AudioOscillatorGrading,
     DialogGuidanceGradingComponent,
     DiscussionGrading,
     EmbeddedGrading,
+    MatchGradingModule,
     PeerChatGradingComponent
   ]
 })

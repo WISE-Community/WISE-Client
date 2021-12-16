@@ -793,7 +793,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component.html</context>
           <context context-type="linenumber">7,8</context>
         </context-group>
-        <target state="needs-translation"> Show Add to Notebook Button
+        <target state="translated"> Not Defterine Ekle Butonunu Göster
 </target>
       </trans-unit>
       <trans-unit id="702a15f8f5225300ad2cefa789efa384489289e8" datatype="html">
@@ -2810,7 +2810,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
           <context context-type="linenumber">90</context>
         </context-group>
-        <target state="needs-translation">You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.</target>
+        <target state="translated">Çok sayıda geçersiz doğrulama kodu gönderdiniz. Güvenlik nedeniyle, şifrenizi değiştirme özelliğini 10 dakikalığına kilitleyeceğiz. 10 dakika sonra, yeni bir doğrulama kodu oluşturmak için lütfen Öğretmen Parolamı Unuttum sayfasına geri dönün.</target>
       </trans-unit>
       <trans-unit id="7375295840965754734" datatype="html">
         <source>Password cannot be blank, please enter a password.</source>
@@ -3066,7 +3066,7 @@
           <context context-type="sourcefile">src/app/help/getting-started/getting-started.component.html</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">Here are instructions on how to set up a Run.</target>
+        <target state="translated">Bir Oturumun nasıl kurulacağına dair talimatlar.</target>
       </trans-unit>
       <trans-unit id="e9a22cb12f2c9f5db14a01d04ae6d9e829cd5b48" datatype="html">
         <source>Sign in to WISE with your teacher account.</source>
@@ -3078,7 +3078,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Sign in to WISE with your teacher account.</target>
+        <target state="translated">Öğretmen hesabınızla WISE'da oturum açın.</target>
       </trans-unit>
       <trans-unit id="95c22fc191e91241d3fe6293898fec4d41e20c7d" datatype="html">
         <source>Click the &quot;Unit Library&quot; tab.</source>
@@ -3094,7 +3094,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">110</context>
         </context-group>
-        <target state="needs-translation">Click the "Unit Library" tab.</target>
+        <target state="translated">"Ünite Kitaplığı" sekmesine tıklayın.</target>
       </trans-unit>
       <trans-unit id="6aad599c3073e68956b4f15a368db489510bbe7e" datatype="html">
         <source>Find a project that you would like to use with your class.</source>
@@ -3130,7 +3130,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Click the "Use With Class" button.</target>
+        <target state="translated">"Sınıfla Kullan" düğmesini tıklayın.</target>
       </trans-unit>
       <trans-unit id="0b4cc6a461d3a489f1aad44dfcd492bc70cbac56" datatype="html">
         <source>Choose the periods you will use the project in.</source>
@@ -3202,7 +3202,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">35</context>
         </context-group>
-        <target state="needs-translation">Copy the "Access Code" for the new run and write it down somewhere like on the white board. Students will need to use this access code to work on the run you created.</target>
+        <target state="translated">Yeni oturum için "Erişim Kodu"nu kopyalayın ve sınıf tahtası gibi bir yere yazın. Öğrencilerin, oluşturduğunuz oturum üzerinde çalışmak için bu erişim kodunu kullanmaları gerekecektir.</target>
       </trans-unit>
       <trans-unit id="688edac32995bc4fd9d4d04172c545200250a958" datatype="html">
         <source>Teacher FAQ</source>
@@ -3394,7 +3394,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Go to the forgot username page and follow the instructions to retrieve your username.</target>
+        <target state="translated">Kullanıcı adımı unuttum sayfasına gidin ve kullanıcı adınızı almak için talimatları izleyin.</target>
       </trans-unit>
       <trans-unit id="7a8b3b1d4ba29026aabcd075b48e4de18bf81ecf" datatype="html">
         <source>I forgot my password, how can I change it?</source>
@@ -3410,7 +3410,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Go to the forgot password page and follow the instructions to reset your password.</target>
+        <target state="translated">Parolamı unuttum sayfasına gidin ve şifrenizi sıfırlamak için talimatları izleyin.</target>
       </trans-unit>
       <trans-unit id="c4672e4b6ec584927ff0957152d61090c5eabb13" datatype="html">
         <source>How do I start working on a project?</source>
@@ -3474,7 +3474,7 @@
           <context context-type="sourcefile">src/app/help/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">35</context>
         </context-group>
-        <target state="needs-translation">The run will be added to your list of runs.</target>
+        <target state="translated">Oturum, oturum listenize eklenecek.</target>
       </trans-unit>
       <trans-unit id="8bd99290f700002f66521ecaeff19f420c156558" datatype="html">
         <source>Click &quot;Launch&quot; to open the project.</source>
@@ -3546,7 +3546,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">199</context>
         </context-group>
-        <target state="needs-translation">What if I have trouble logging in?</target>
+        <target state="translated">Giriş yapmakta sorun yaşarsam?</target>
       </trans-unit>
       <trans-unit id="ef91b6733f15c82512f30d911641bc4b2076879c" datatype="html">
         <source>If you do not remember your username or password click the Lost Username or Password link and follow the instructions. </source>
@@ -3558,7 +3558,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">201</context>
         </context-group>
-        <target state="needs-translation">If you do not remember your username or password click the Lost Username or Password link and follow the instructions. </target>
+        <target state="translated">Kullanıcı adınızı veya şifrenizi hatırlamıyorsanız, Kayıp Kullanıcı Adı veya Şifre bağlantısını tıklayın ve talimatları izleyin. </target>
       </trans-unit>
       <trans-unit id="df6ec49a683a1c798d509516f3b73dd1befb6a62" datatype="html">
         <source>Can I use WISE in another language?</source>
@@ -3806,7 +3806,7 @@
           <context context-type="sourcefile">src/app/help/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <target state="needs-translation">First, we recommend always having students WRITE DOWN their username/password when they first register.</target>
+        <target state="translated">İlk olarak, ilk kayıt olduklarında her zaman öğrencilerin kullanıcı adlarını/şifrelerini bir yere YAZMALARINI öneririz.</target>
       </trans-unit>
       <trans-unit id="427421b70d77408e21b0462e665b63cb5765f06a" datatype="html">
         <source>Second, encourage the students to solve the problem themselves. Tell them to go to the WISE home page, click the Lost username/password link, and click the Student button. If the student can answer their security question (created at registration) they can change their password.</source>
@@ -5792,7 +5792,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
@@ -7922,7 +7922,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <target state="translated">Başlama tarihi</target>
       </trans-unit>
@@ -7942,7 +7942,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target state="translated">Bitiş tarihi</target>
       </trans-unit>
@@ -7962,7 +7962,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <target state="needs-translation">If the End Date has passed and the unit is locked, students will no longer be able to save new work</target>
       </trans-unit>
@@ -8050,7 +8050,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
@@ -8306,7 +8306,7 @@
         <source>Class Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <target state="needs-translation">Class Periods</target>
       </trans-unit>
@@ -8314,7 +8314,7 @@
         <source>Delete period</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <target state="needs-translation">Delete period</target>
       </trans-unit>
@@ -8322,7 +8322,7 @@
         <source>Add new period</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <target state="needs-translation">Add new period</target>
       </trans-unit>
@@ -8330,55 +8330,63 @@
         <source>Add period</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <target state="needs-translation">Add period</target>
+      </trans-unit>
+      <trans-unit id="8e4f6fbd6f10462ce24ec7b579764cbb0e7208da" datatype="html">
+        <source>For &quot;Period 9&quot;, just enter the number 9.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target state="needs-translation">For "Period 9", just enter the number 9.</target>
       </trans-unit>
       <trans-unit id="9e52801929bc9e355f8de5c5c13ba357055d1bdf" datatype="html">
         <source>Students Per Team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <target state="needs-translation">Students Per Team</target>
       </trans-unit>
-      <trans-unit id="17fa4b58d131328449acdbaad4bbe404bfd31264" datatype="html">
-        <source>Only 1 student</source>
+      <trans-unit id="3830ac25d707cb610ab5eae521c759a557fb7d7d" datatype="html">
+        <source> Only 1 student </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">31,32</context>
+          <context context-type="linenumber">41,42</context>
         </context-group>
-        <target state="translated">Sadece 1 öğrenci</target>
+        <target state="needs-translation"> Only 1 student </target>
       </trans-unit>
-      <trans-unit id="975a4029af4b0992dcdcbe682bcba819ea8cf809" datatype="html">
-        <source>1-3 students</source>
+      <trans-unit id="3e3d338fd6b6cce651564a6cd4868c6c31d7df26" datatype="html">
+        <source> 1-3 students </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">33,34</context>
+          <context context-type="linenumber">44,45</context>
         </context-group>
-        <target state="translated">1-3 öğrenciler</target>
+        <target state="needs-translation"> 1-3 students </target>
       </trans-unit>
       <trans-unit id="4a4f46a2dcec36bd5c8c371ceee55c2226dec27f" datatype="html">
         <source>Schedule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <target state="translated">Program</target>
       </trans-unit>
-      <trans-unit id="c1d7798f7e66f0c74760feddb4a5ebe92a5dd49f" datatype="html">
-        <source>(Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>)</source>
+      <trans-unit id="2987d3838d160f224644ae6a7d19eea2d40ef7e6" datatype="html">
+        <source> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">39,40</context>
+          <context context-type="linenumber">50,52</context>
         </context-group>
-        <target state="needs-translation">(Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>)</target>
+        <target state="needs-translation"> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>) </target>
       </trans-unit>
       <trans-unit id="a1c89f5496e99086127a54d08cecba1d0920397e" datatype="html">
         <source>Start date is required.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="translated">Başlama tarihi gereklidir.</target>
       </trans-unit>
@@ -8386,7 +8394,7 @@
         <source> Lock After End Date </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">67,68</context>
+          <context context-type="linenumber">87,88</context>
         </context-group>
         <target state="translated"> Bitiş Tarihinden Sonra Kilitle </target>
       </trans-unit>
@@ -10708,7 +10716,7 @@ Are you ready to receive feedback on this answer?</target>
         <source> Show Amplitude Input </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">93,94</context>
+          <context context-type="linenumber">94,95</context>
         </context-group>
         <target state="needs-translation"> Show Amplitude Input </target>
       </trans-unit>
@@ -10716,7 +10724,7 @@ Are you ready to receive feedback on this answer?</target>
         <source> Allow Student to Edit Amplitude </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">102,103</context>
+          <context context-type="linenumber">103,104</context>
         </context-group>
         <target state="needs-translation"> Allow Student to Edit Amplitude </target>
       </trans-unit>
@@ -10724,7 +10732,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Oscillator Width (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <target state="translated">Osilatör Genişliği (Piksel)</target>
       </trans-unit>
@@ -10732,7 +10740,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Oscillator Height (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
         <target state="translated">Osilatör Yüksekliği (Piksel)</target>
       </trans-unit>
@@ -10740,7 +10748,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Oscillator Grid Size (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">129</context>
         </context-group>
         <target state="needs-translation">Oscillator Grid Size (Pixels)</target>
       </trans-unit>
@@ -11512,7 +11520,7 @@ Bu yanıtla ilgili geri bildirim almaya hazır mısınız?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">157</context>
         </context-group>
-        <target state="needs-translation">Delete Catagory</target>
+        <target state="translated">Kategoriyi Sil</target>
       </trans-unit>
       <trans-unit id="460193163eac2e72b0d34272b5685eb378271663" datatype="html">
         <source>Custom Rule Evaluator</source>
@@ -11584,6 +11592,14 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Warning: This will delete all existing nodes and links in this component.</target>
       </trans-unit>
+      <trans-unit id="5596810972110629301" datatype="html">
+        <source>Thanks for submitting your response.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/DialogGuidanceFeedbackRuleEvaluator.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Thanks for submitting your response.</target>
+      </trans-unit>
       <trans-unit id="27e0b1e650bef276e8c29dd8d547e3fc8c4f833f" datatype="html">
         <source>Item ID</source>
         <context-group purpose="location">
@@ -11598,7 +11614,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="needs-translation">Add response...</target>
+        <target state="translated">Yanıt ekle...</target>
       </trans-unit>
       <trans-unit id="427e92e019c34109656b0e1fc9576bfb833934d9" datatype="html">
         <source> Send </source>
@@ -11606,7 +11622,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
           <context context-type="linenumber">24,25</context>
         </context-group>
-        <target state="needs-translation"> Send </target>
+        <target state="translated"> Gönder </target>
       </trans-unit>
       <trans-unit id="c80dd9bfb0bd7a7ce89ef1140e6f35211ab711f0" datatype="html">
         <source>Student response</source>
@@ -11631,6 +11647,86 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="linenumber">16</context>
         </context-group>
         <target state="needs-translation">Dialog Guidance</target>
+      </trans-unit>
+      <trans-unit id="ac4a8ebf1347b29327308613dd307970ec899941" datatype="html">
+        <source>Feedback Rules</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <target state="needs-translation">Feedback Rules</target>
+      </trans-unit>
+      <trans-unit id="9c15557f92d1f8a01b15d096b2428d1a593293e7" datatype="html">
+        <source>Add a new rule</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <target state="needs-translation">Add a new rule</target>
+      </trans-unit>
+      <trans-unit id="6fcbf761098624382d8edcae063b3f0207059601" datatype="html">
+        <source>Drag to reorder</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <target state="needs-translation">Drag to reorder</target>
+      </trans-unit>
+      <trans-unit id="cc697167c19fb984956b08b0e01767da0dce90fa" datatype="html">
+        <source>Expression</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation">Expression</target>
+      </trans-unit>
+      <trans-unit id="e9b20820eab2b7caad859fd12f5e211cdb4eae88" datatype="html">
+        <source>Feedback</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
+          <context context-type="linenumber">181</context>
+        </context-group>
+        <target state="translated">Geri bildirim</target>
+      </trans-unit>
+      <trans-unit id="d3ccd931bd0661bdf42d1023fc5a8f26503a4d5f" datatype="html">
+        <source>Delete rule</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <target state="needs-translation">Delete rule</target>
+      </trans-unit>
+      <trans-unit id="f5d502c5d44fd9d78ed4979a7efae43369b09dca" datatype="html">
+        <source>Move up</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <target state="needs-translation">Move up</target>
+      </trans-unit>
+      <trans-unit id="7a91e24cda07c3ccff6a84d88c25de674bf288f0" datatype="html">
+        <source>Move down</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <target state="needs-translation">Move down</target>
+      </trans-unit>
+      <trans-unit id="28b0236983b8c9cde819e9f8dc2f3b85fa419168" datatype="html">
+        <source>Add a new rule at the end</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <target state="needs-translation">Add a new rule at the end</target>
       </trans-unit>
       <trans-unit id="f1affa088d785794802225dbc56ee2ff3d785f87" datatype="html">
         <source>Post attachment</source>
@@ -12478,7 +12574,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">208</context>
         </context-group>
-        <target state="needs-translation">Min</target>
+        <target state="translated">Min</target>
       </trans-unit>
       <trans-unit id="c3ced4d162a0a55ee233a187ce7208ba5e922418" datatype="html">
         <source>Max</source>
@@ -12494,7 +12590,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">215</context>
         </context-group>
-        <target state="needs-translation">Max</target>
+        <target state="translated">Maks</target>
       </trans-unit>
       <trans-unit id="97a50d727afd9926957096c30bc144712aa88088" datatype="html">
         <source> Locked </source>
@@ -12740,7 +12836,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.ts</context>
           <context context-type="linenumber">31</context>
         </context-group>
-        <target state="needs-translation">Scatter Plot</target>
+        <target state="translated">Dağılım Grafiği</target>
       </trans-unit>
       <trans-unit id="8727651362349810833" datatype="html">
         <source>No Rounding</source>
@@ -13546,18 +13642,6 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <target state="needs-translation">Delete Bucket</target>
       </trans-unit>
-      <trans-unit id="e9b20820eab2b7caad859fd12f5e211cdb4eae88" datatype="html">
-        <source>Feedback</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">160</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">181</context>
-        </context-group>
-        <target state="translated">Geri bildirim</target>
-      </trans-unit>
       <trans-unit id="f3540227c398d8d2a32067863ec5ad68a4bb8274" datatype="html">
         <source> Choices need to be ordered within buckets </source>
         <context-group purpose="location">
@@ -13704,7 +13788,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/delete-choice-button/delete-choice-button.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Delete item</target>
+        <target state="translated">Maddeyi Sil</target>
       </trans-unit>
       <trans-unit id="8927837337329146438" datatype="html">
         <source>Are you sure you want to delete this item?</source>
@@ -13712,7 +13796,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/delete-choice-button/delete-choice-button.component.ts</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this item?</target>
+        <target state="translated">Bu maddeyi silmek istediğinizden emin misiniz?</target>
       </trans-unit>
       <trans-unit id="8b8ff7859cae872c69d4677ab92308d7465220cb" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> <x id="ICU" equiv-text="{componentContent.maxSubmitCount, plural, =1 {attempt} other {attempts}}"/>.
@@ -13822,7 +13906,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">77,78</context>
         </context-group>
-        <target state="needs-translation"> Show Feedback </target>
+        <target state="translated"> Geri Bildirimi Göster </target>
       </trans-unit>
       <trans-unit id="7065715943846466006" datatype="html">
         <source>Do you want to copy the choices from the connected component?
@@ -13968,7 +14052,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">43,44</context>
         </context-group>
-        <target state="needs-translation"> Verify </target>
+        <target state="translated"> Doğrula </target>
       </trans-unit>
       <trans-unit id="0fb52c47065ca9a478556a80d5d9c9c3af467b42" datatype="html">
         <source>Verifying...</source>
@@ -13976,7 +14060,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <target state="needs-translation">Verifying...</target>
+        <target state="translated">Doğrulanıyor...</target>
       </trans-unit>
       <trans-unit id="99479f9b35593d64dbe0c0b498c4431a18505edd" datatype="html">
         <source>Valid</source>
@@ -13984,7 +14068,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <target state="needs-translation">Valid</target>
+        <target state="translated">Geçerli</target>
       </trans-unit>
       <trans-unit id="c145a34359b00a08aef9bf3fdf35a985aea25c8c" datatype="html">
         <source>Invalid</source>
@@ -13992,7 +14076,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <target state="needs-translation">Invalid</target>
+        <target state="translated">Geçersiz</target>
       </trans-unit>
       <trans-unit id="b106332b20efb21342c43ea21f50b088d2facd7b" datatype="html">
         <source>Score On</source>
@@ -14008,7 +14092,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">57</context>
         </context-group>
-        <target state="needs-translation">Change</target>
+        <target state="translated">Değiştir</target>
       </trans-unit>
       <trans-unit id="a63d5bda68e815e4ee820c6ebebaa83cb0d78ca4" datatype="html">
         <source> Show Score </source>
@@ -14016,7 +14100,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">68,69</context>
         </context-group>
-        <target state="needs-translation"> Show Score </target>
+        <target state="translated"> Puanı Göster </target>
       </trans-unit>
       <trans-unit id="1af86cf046af1ad99f6148363089317c4711f840" datatype="html">
         <source>Scoring Rule</source>
@@ -14024,7 +14108,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
-        <target state="needs-translation">Scoring Rule</target>
+        <target state="translated">Puanlama Kuralı</target>
       </trans-unit>
       <trans-unit id="1fd3b06c122aa8a76f671b604246ea4ac4ceb733" datatype="html">
         <source>Add Scoring Rule</source>
@@ -14032,7 +14116,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">86</context>
         </context-group>
-        <target state="needs-translation">Add Scoring Rule</target>
+        <target state="translated">Puanlama Kuralı Ekle</target>
       </trans-unit>
       <trans-unit id="380e20a1e13d9489c69f6dbea7da19025ab6eb25" datatype="html">
         <source>Score</source>
@@ -14048,7 +14132,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">103</context>
         </context-group>
-        <target state="needs-translation">Feedback Text</target>
+        <target state="translated">Geri Bildirim Metni</target>
       </trans-unit>
       <trans-unit id="15ff433c6152bcc0653e60e459c440bdc772aec5" datatype="html">
         <source>Move Scoring Rule Up</source>
@@ -14056,7 +14140,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">116</context>
         </context-group>
-        <target state="needs-translation">Move Scoring Rule Up</target>
+        <target state="translated">Puanlama Kuralını Yukarı Taşı</target>
       </trans-unit>
       <trans-unit id="04a96f1c6d8b00a057ad6fca4fb1680cea118142" datatype="html">
         <source>Move Scoring Rule Down</source>
@@ -14064,7 +14148,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">126</context>
         </context-group>
-        <target state="needs-translation">Move Scoring Rule Down</target>
+        <target state="translated">Puanlama Kuralını Aşağı Taşı</target>
       </trans-unit>
       <trans-unit id="8db5e82a6d07bf4aadf3c778b57db528379ee102" datatype="html">
         <source>Delete Scoring Rule</source>
@@ -14072,7 +14156,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">134</context>
         </context-group>
-        <target state="needs-translation">Delete Scoring Rule</target>
+        <target state="translated">Puanlama Kuralını Sil</target>
       </trans-unit>
       <trans-unit id="766b54d3e45afff8eea756ea51c8d39c56e1d78a" datatype="html">
         <source> Enable Multiple Attempt Feedback </source>
@@ -14108,7 +14192,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">252</context>
         </context-group>
-        <target state="needs-translation">Previous Score</target>
+        <target state="translated">Önceki Puan</target>
       </trans-unit>
       <trans-unit id="fb1e5a694a54df3978ca47c93c6f85ee44dc41fc" datatype="html">
         <source>Current Score</source>
@@ -14120,7 +14204,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">260</context>
         </context-group>
-        <target state="needs-translation">Current Score</target>
+        <target state="translated">Mevcut Puan</target>
       </trans-unit>
       <trans-unit id="0e77256e7f17964f23969c5bbf35aa1ec494e5a7" datatype="html">
         <source>Feedback to Student</source>
@@ -14132,7 +14216,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">320</context>
         </context-group>
-        <target state="needs-translation">Feedback to Student</target>
+        <target state="translated">Öğrenciye Geri Bildirim</target>
       </trans-unit>
       <trans-unit id="0153489f24e8fca3ec53f77aaa6ad073918805a6" datatype="html">
         <source>Move Multiple Attempt Scoring Rule Up</source>
@@ -14164,7 +14248,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">232,233</context>
         </context-group>
-        <target state="needs-translation"> Enable Notifications </target>
+        <target state="translated"> Bildirimleri Etkinleştir </target>
       </trans-unit>
       <trans-unit id="8bcabdf6b16cad0313a86c7e940c5e3ad7f9f8ab" datatype="html">
         <source>Notifications</source>
@@ -14172,7 +14256,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">237</context>
         </context-group>
-        <target state="needs-translation">Notifications</target>
+        <target state="translated">Bildirimler</target>
       </trans-unit>
       <trans-unit id="993fa2a51a4be7f00603dc7a85ccd20dd27fd974" datatype="html">
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
@@ -14188,7 +14272,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">274</context>
         </context-group>
-        <target state="needs-translation">Move Notification Up</target>
+        <target state="translated">Bildirimi Yukarı Taşı</target>
       </trans-unit>
       <trans-unit id="b90a653590a4e37aedb232278befe4d6534498f9" datatype="html">
         <source>Move Notification Down</source>
@@ -14196,7 +14280,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">284</context>
         </context-group>
-        <target state="needs-translation">Move Notification Down</target>
+        <target state="translated">Bildirimi Aşağı Taşı</target>
       </trans-unit>
       <trans-unit id="beda496f3a2e498b89cb87603e127419f002d329" datatype="html">
         <source>Delete Notification</source>
@@ -14204,7 +14288,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">293</context>
         </context-group>
-        <target state="needs-translation">Delete Notification</target>
+        <target state="translated">Bildirimi Sil</target>
       </trans-unit>
       <trans-unit id="30d1c1578593a3fec78ecd4fd7402cb832589534" datatype="html">
         <source> Enable Ambient Display Dismiss Mode </source>
@@ -14228,7 +14312,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">317,318</context>
         </context-group>
-        <target state="needs-translation"> Notify Student </target>
+        <target state="translated"> Öğrenciye Bildir </target>
       </trans-unit>
       <trans-unit id="b5fbf162f2273b47d29a8246337ab53593c7758d" datatype="html">
         <source> Notify Teacher </source>
@@ -14236,7 +14320,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">335,336</context>
         </context-group>
-        <target state="needs-translation"> Notify Teacher </target>
+        <target state="translated"> Öğretmene Bildir </target>
       </trans-unit>
       <trans-unit id="d66b9370ca0ed83e6b75ba0224226150c9085679" datatype="html">
         <source>Feedback to Teacher</source>
@@ -14244,7 +14328,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">338</context>
         </context-group>
-        <target state="needs-translation">Feedback to Teacher</target>
+        <target state="translated">Öğretmene Geri Bildirim</target>
       </trans-unit>
       <trans-unit id="8bf4a48a7842ed465fb5824cc30da7ae61d58a55" datatype="html">
         <source> Use Custom Completion Criteria </source>
@@ -14268,7 +14352,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">366</context>
         </context-group>
-        <target state="needs-translation">Add Completion Criteria</target>
+        <target state="translated">Tamamlama Kriterleri Ekle</target>
       </trans-unit>
       <trans-unit id="50402d02643dd3a5a8f0e5c6305d21c36a792bcd" datatype="html">
         <source>Move Completion Criteria Up</source>
@@ -14276,7 +14360,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">415</context>
         </context-group>
-        <target state="needs-translation">Move Completion Criteria Up</target>
+        <target state="translated">Tamamlama Kriterlerini Yukarı Taşı</target>
       </trans-unit>
       <trans-unit id="3f39284f9eaabca99528d60f7ced8b5f13670ff9" datatype="html">
         <source>Move Completion Criteria Down</source>
@@ -14284,7 +14368,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">425</context>
         </context-group>
-        <target state="needs-translation">Move Completion Criteria Down</target>
+        <target state="translated">Tamamlama Kriterlerini Aşağı Taşı</target>
       </trans-unit>
       <trans-unit id="34596e0fbbe0cb6a3b26baaeee2f9d863ce6ac9a" datatype="html">
         <source>Delete Completion Criteria</source>
@@ -14292,7 +14376,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">434</context>
         </context-group>
-        <target state="needs-translation">Delete Completion Criteria</target>
+        <target state="translated">Tamamlama Kriterlerini Sil</target>
       </trans-unit>
       <trans-unit id="2839735751687486837" datatype="html">
         <source>Are you sure you want to delete this scoring rule?
@@ -14676,7 +14760,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">32</context>
         </context-group>
-        <target state="needs-translation">Student Data Type</target>
+        <target state="translated">Öğrenci Veri Türü</target>
       </trans-unit>
       <trans-unit id="a0a2a44bfb782424826e21b4361cf4d693e437da" datatype="html">
         <source> Responses </source>
@@ -14732,7 +14816,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">62</context>
         </context-group>
-        <target state="needs-translation">Chart Type</target>
+        <target state="translated">Grafik Tipi</target>
       </trans-unit>
       <trans-unit id="a329e4b5f2d94e592dea582612ccedd868fb979f" datatype="html">
         <source> Bar </source>
@@ -14812,7 +14896,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">116</context>
         </context-group>
-        <target state="needs-translation">Add Custom Label Color</target>
+        <target state="translated">Özel Etiket Rengi Ekle</target>
       </trans-unit>
       <trans-unit id="8caf178921de01ad9f9452a00711e08cfd3c6ea2" datatype="html">
         <source> There are no custom label colors. Click the &quot;Add Custom Label Color&quot; button to give a label a specific color.
@@ -14830,7 +14914,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">134</context>
         </context-group>
-        <target state="needs-translation">Label</target>
+        <target state="translated">Etiket</target>
       </trans-unit>
       <trans-unit id="5323072532436410106" datatype="html">
         <source>Are you sure you want to delete this custom label color?</source>
@@ -14838,7 +14922,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.ts</context>
           <context context-type="linenumber">181</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this custom label color?</target>
+        <target state="translated">Bu özel etiket rengini silmek istediğinizden emin misiniz?</target>
       </trans-unit>
       <trans-unit id="3556872137858469937" datatype="html">
         <source>You must submit work on &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the summary.</source>
@@ -14894,7 +14978,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
           <context context-type="linenumber">20,21</context>
         </context-group>
-        <target state="needs-translation"> Scatter Plot </target>
+        <target state="translated"> Dağılım Grafiği </target>
       </trans-unit>
       <trans-unit id="4d2a0e8db94c238611e9fb2cfe21e9033c804540" datatype="html">
         <source> Line Graph </source>
@@ -14902,7 +14986,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
           <context context-type="linenumber">27,28</context>
         </context-group>
-        <target state="needs-translation"> Line Graph </target>
+        <target state="translated"> Çizgi Grafiği </target>
       </trans-unit>
       <trans-unit id="6803ecdcc4c6672f2088eb835bdc8beee7624ee4" datatype="html">
         <source> Bar Graph </source>
@@ -14910,7 +14994,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
           <context context-type="linenumber">34,35</context>
         </context-group>
-        <target state="needs-translation"> Bar Graph </target>
+        <target state="translated"> Sütun Grafiği </target>
       </trans-unit>
       <trans-unit id="dbf1a52e88afc54e94898559bd0eea1ae5b211fa" datatype="html">
         <source> Show Scatter Plot Regression Line </source>
@@ -14918,7 +15002,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
           <context context-type="linenumber">43,44</context>
         </context-group>
-        <target state="needs-translation"> Show Scatter Plot Regression Line </target>
+        <target state="translated"> Dağılım Grafiği Regresyon Doğrusunu Göster </target>
       </trans-unit>
       <trans-unit id="8719210bcb914b359bda6ee1387f3a7e09861b46" datatype="html">
         <source>Number of Series</source>
@@ -14950,7 +15034,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
           <context context-type="linenumber">89,90</context>
         </context-group>
-        <target state="needs-translation"> Can Student Edit Axis Labels </target>
+        <target state="translated"> Öğrenci Eksen Etiketlerini Düzenleyebilir </target>
       </trans-unit>
       <trans-unit id="d6e1844697cf81349bc9d30503a8484c16425330" datatype="html">
         <source>Fix Data to Table Column</source>
@@ -15006,7 +15090,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
           <context context-type="linenumber">129</context>
         </context-group>
-        <target state="needs-translation">Table Column</target>
+        <target state="translated">Tablo Sütunu</target>
       </trans-unit>
       <trans-unit id="2872debf9c5ceea4c74848246e8d32111d9d06fd" datatype="html">
         <source>Y Data <x id="INTERPOLATION" equiv-text="{{ (authoringComponentContent.numDataExplorerSeries &gt; 1 ? dataExplorerSeriesIndex + 1 : &quot;&quot;) }}"/></source>
@@ -15030,7 +15114,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-connected-components/edit-table-connected-components.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Merge</target>
+        <target state="translated">Birleştir</target>
       </trans-unit>
       <trans-unit id="0d03d787306410e77e4703cc6da4486836dec357" datatype="html">
         <source>Append</source>
@@ -15038,7 +15122,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-connected-components/edit-table-connected-components.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">Append</target>
+        <target state="translated">Ekle</target>
       </trans-unit>
       <trans-unit id="c93a01b0aeb9d67adcad2a85effefe92d91bd986" datatype="html">
         <source> Only Show Data At Mouse X Position </source>
@@ -15210,7 +15294,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
           <context context-type="linenumber">49</context>
         </context-group>
-        <target state="needs-translation">Cell content</target>
+        <target state="translated">Hücre içeriği</target>
       </trans-unit>
       <trans-unit id="c1ac7b8d0d0a0d2e7452433c930cef085486540c" datatype="html">
         <source>Graph Type</source>
@@ -15286,7 +15370,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
           <context context-type="linenumber">71</context>
         </context-group>
-        <target state="needs-translation">Choose the table data you want to graph:</target>
+        <target state="translated">Grafik oluşturmak istediğiniz tablo verilerini seçin:</target>
       </trans-unit>
       <trans-unit id="310b6ade177e4fb8a9f30579b05696c0122f08a6" datatype="html">
         <source>(None)</source>
@@ -15346,7 +15430,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
           <context context-type="linenumber">187</context>
         </context-group>
-        <target state="needs-translation">The student will see a graph of their individual data here.</target>
+        <target state="translated">Öğrenci burada kendi bireysel verilerinin bir grafiğini görecektir.</target>
       </trans-unit>
       <trans-unit id="2142002953999044695" datatype="html">
         <source>Class Responses</source>
@@ -15394,7 +15478,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component.ts</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">Insert WISE Link</target>
+        <target state="translated">WISE Bağlantısını Ekle</target>
       </trans-unit>
       <trans-unit id="8455204924704616723" datatype="html">
         <source>File</source>
@@ -15514,7 +15598,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Expand or collapse lesson content</target>
+        <target state="translated">Ders içeriğini genişlet veya daralt</target>
       </trans-unit>
       <trans-unit id="21b4a27510afaf13943eed74935b8a88b69725d4" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{nodeStatus.progress.completionPct}}"/>% completed</source>

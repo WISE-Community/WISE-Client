@@ -153,6 +153,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
   matchRule_MultipleIdeasUsingAndOr();
   matchRule_MultipleIdeasUsingNotAndOr();
   matchNoRule_ReturnDefault();
+  matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault();
   secondToLastSubmit();
   finalSubmit();
   nonScorable();
@@ -197,6 +198,13 @@ function matchRule_MultipleIdeasUsingNotAndOr() {
 function matchNoRule_ReturnDefault() {
   it('should return default idea when no rule is matched', () => {
     expectFeedback(['idea10', 'idea11'], [], 'default feedback');
+  });
+}
+
+function matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault() {
+  it('should return application default rule when no rule is matched and no default is authored', () => {
+    component.componentContent.feedbackRules = [];
+    expectFeedback(['idea10', 'idea11'], [], evaluator.defaultFeedback);
   });
 }
 

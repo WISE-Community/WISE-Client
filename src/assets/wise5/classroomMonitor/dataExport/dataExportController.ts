@@ -11,11 +11,53 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 
 class DataExportController {
   $translate: any;
-  availableComponentAllRevisionsDataExports = ['Discussion', 'Match'];
-  availableComponentLatestRevisionsDataExports = ['Match'];
+  allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match'];
+  allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Match'];
   componentExportTooltips = {};
+  componentExportDefaultColumnNames = [
+    '#',
+    'Workgroup ID',
+    'User ID 1',
+    'Student Name 1',
+    'User ID 2',
+    'Student Name 2',
+    'User ID 3',
+    'Student Name 3',
+    'Class Period',
+    'Project ID',
+    'Project Name',
+    'Run ID',
+    'Start Date',
+    'End Date',
+    'Student Work ID',
+    'Server Timestamp',
+    'Client Timestamp',
+    'Node ID',
+    'Component ID',
+    'Component Part Number',
+    'Step Title',
+    'Component Type',
+    'Component Prompt',
+    'Student Data',
+    'Component Revision Counter',
+    'Is Submit',
+    'Submit Count'
+  ];
   canViewStudentNames: boolean = false;
   componentTypeToComponentService: any = {};
+  dialogGuidanceComputerResponseLabel: string = 'Computer Response';
+  dialogGuidanceIdeaLabel: string = 'Idea';
+  dialogGuidanceItemIdLabel: string = 'Item ID';
+  dialogGuidanceRevisionLabel: string = 'Revision';
+  dialogGuidanceScoreLabel: string = 'Score';
+  dialogGuidanceStudentResponseLabel: string = 'Student Response';
+  embeddedTableKeyToValue = {
+    co2saved: 'CO2 Saved',
+    current: 'Current',
+    future: 'Future',
+    kwhsaved: 'kWh Saved',
+    minutes: 'Minutes'
+  };
   exportStepSelectionType: string = 'exportAllSteps';
   exportType: string = null; // type of export: [latestWork, allWork, events]
   includeAnnotations: boolean;
@@ -791,6 +833,7 @@ class DataExportController {
                  */
                 cell = 'Data Too Large';
               }
+              cell = cell.replace(/"/g, '""');
               cell = '"' + cell + '"';
             }
             csvString += cell + ',';
@@ -920,32 +963,71 @@ class DataExportController {
     columnNameToNumber: any,
     events: any[]
   ): number {
-    const workgroups = this.ConfigService.getClassmateUserInfosSortedByWorkgroupId();
-    for (const workgroup of workgroups) {
-      const workgroupId = workgroup.workgroupId;
-      const periodName = workgroup.periodName;
-      const userInfo = this.ConfigService.getUserInfoByWorkgroupId(workgroupId);
-      const extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
-      for (const event of events) {
-        const row = this.createStudentEventExportRow(
+    for (const workgroup of this.ConfigService.getClassmateUserInfosSortedByWorkgroupId()) {
+      rowCounter = this.addStudentEventsForWorkgroup(
+        workgroup,
+        rows,
+        rowCounter,
+        columnNames,
+        columnNameToNumber,
+        events
+      );
+    }
+    return rowCounter;
+  }
+
+  addStudentEventsForWorkgroup(
+    workgroup: any,
+    rows: any[],
+    rowCounter: number,
+    columnNames: string[],
+    columnNameToNumber: any,
+    events: any
+  ): number {
+    for (const event of events) {
+      if (event.workgroupId === workgroup.workgroupId) {
+        rowCounter = this.addStudentEventRow(
+          workgroup,
+          rows,
+          rowCounter,
           columnNames,
           columnNameToNumber,
-          rowCounter,
-          workgroupId,
-          extractedUserIDsAndStudentNames['userId1'],
-          extractedUserIDsAndStudentNames['userId2'],
-          extractedUserIDsAndStudentNames['userId3'],
-          extractedUserIDsAndStudentNames['studentName1'],
-          extractedUserIDsAndStudentNames['studentName2'],
-          extractedUserIDsAndStudentNames['studentName3'],
-          periodName,
           event
         );
-        rows.push(row);
-        rowCounter++;
       }
     }
     return rowCounter;
+  }
+
+  addStudentEventRow(
+    workgroup: any,
+    rows: any[],
+    rowCounter: number,
+    columnNames: string[],
+    columnNameToNumber: any,
+    event: any
+  ): number {
+    const workgroupId = workgroup.workgroupId;
+    const periodName = workgroup.periodName;
+    const userInfo = this.ConfigService.getUserInfoByWorkgroupId(workgroupId);
+    const extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
+    rows.push(
+      this.createStudentEventExportRow(
+        columnNames,
+        columnNameToNumber,
+        rowCounter,
+        workgroupId,
+        extractedUserIDsAndStudentNames['userId1'],
+        extractedUserIDsAndStudentNames['userId2'],
+        extractedUserIDsAndStudentNames['userId3'],
+        extractedUserIDsAndStudentNames['studentName1'],
+        extractedUserIDsAndStudentNames['studentName2'],
+        extractedUserIDsAndStudentNames['studentName3'],
+        periodName,
+        event
+      )
+    );
+    return ++rowCounter;
   }
 
   addTeacherEvents(
@@ -2558,27 +2640,36 @@ class DataExportController {
     return compositeId;
   }
 
-  /**
-   * Check if a component type has a specific export implemented for it.
-   * @param componentType The component type.
-   * @return Whether the component type has a specific export.
-   */
-  canExportAllRevisionsForComponentDataType(componentType: string) {
-    for (const allowedComponentType of this.availableComponentAllRevisionsDataExports) {
-      if (componentType === allowedComponentType) {
-        return true;
-      }
-    }
-    return false;
+  canExportAllRevisionsForComponent(component: any) {
+    return this.canExportForComponent(component, this.allowedComponentTypesForAllRevisions);
   }
 
-  canExportLatestRevisionsForComponentDataType(componentType: string) {
-    for (const allowedComponentType of this.availableComponentLatestRevisionsDataExports) {
-      if (componentType === allowedComponentType) {
+  canExportLatestRevisionsForComponent(component: any) {
+    return this.canExportForComponent(component, this.allowedComponentTypesForLatestRevisions);
+  }
+
+  canExportForComponent(component: any, allowedComponentTypes: string[]): boolean {
+    for (const allowedComponentType of allowedComponentTypes) {
+      if (component.type === allowedComponentType) {
         return true;
       }
     }
-    return false;
+    return this.isEmbeddedTableComponentAndCanExport(component);
+  }
+
+  isEmbeddedTableComponentAndCanExport(component: any): boolean {
+    return (
+      component.type === 'Embedded' &&
+      (this.isDevicesEmbeddedTable(component) || this.isTransporationEmbeddedTable(component))
+    );
+  }
+
+  isDevicesEmbeddedTable(component: any): boolean {
+    return component.tags != null && component.tags.includes('devices-kwh-co2-table');
+  }
+
+  isTransporationEmbeddedTable(component: any): boolean {
+    return component.tags != null && component.tags.includes('transportation-co2-table');
   }
 
   /**
@@ -2597,10 +2688,15 @@ class DataExportController {
    * @param component The component content object.
    */
   exportComponentAllRevisions(nodeId: string, component: any) {
+    this.setAllWorkSelectionType();
     if (component.type === 'Match') {
-      this.exportMatchComponentAllRevisions(nodeId, component);
+      this.exportMatchComponent(nodeId, component);
     } else if (component.type === 'Discussion') {
       this.exportDiscussionComponent(nodeId, component);
+    } else if (component.type === 'DialogGuidance') {
+      this.exportDialogGuidanceComponent(nodeId, component);
+    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
+      this.exportEmbeddedComponent(nodeId, component);
     }
   }
 
@@ -2610,8 +2706,13 @@ class DataExportController {
    * @param component The component content object.
    */
   exportComponentLatestRevisions(nodeId: string, component: any) {
+    this.setLatestWorkSelectionType();
     if (component.type === 'Match') {
-      this.exportMatchComponentLatestRevisions(nodeId, component);
+      this.exportMatchComponent(nodeId, component);
+    } else if (component.type === 'DialogGuidance') {
+      this.exportDialogGuidanceComponent(nodeId, component);
+    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
+      this.exportEmbeddedComponent(nodeId, component);
     }
   }
 
@@ -2856,16 +2957,6 @@ class DataExportController {
     return runId + '_step_' + stepNumber + '_component_' + componentNumber + '_discussion_work.csv';
   }
 
-  exportMatchComponentAllRevisions(nodeId: string, component: any) {
-    this.workSelectionType = 'exportAllWork';
-    this.exportMatchComponent(nodeId, component);
-  }
-
-  exportMatchComponentLatestRevisions(nodeId: string, component: any) {
-    this.workSelectionType = 'exportLatestWork';
-    this.exportMatchComponent(nodeId, component);
-  }
-
   /**
    * Generate an export for a specific match component.
    * TODO: Move these Match export functions to the MatchService.
@@ -2880,17 +2971,8 @@ class DataExportController {
   }
 
   generateMatchComponentExport(nodeId: string, component: any) {
-    const runId = this.ConfigService.getRunId();
-    const stepNumber = this.ProjectService.getNodePositionById(nodeId);
-    const componentNumber =
-      this.ProjectService.getComponentPositionByNodeIdAndComponentId(nodeId, component.id) + 1;
-    const fileName = this.getMatchExportFileName(
-      runId,
-      stepNumber,
-      componentNumber,
-      this.workSelectionType
-    );
     const rows = this.getExportMatchComponentRows(nodeId, component);
+    const fileName = this.getComponentExportFileName(nodeId, component.id, 'match');
     this.generateCSVFile(rows, fileName);
     this.hideDownloadingExportMessage();
   }
@@ -2901,24 +2983,9 @@ class DataExportController {
     let rows = [];
     rows.push(this.generateMatchComponentHeaderRow(component, columnNames, columnNameToNumber));
     rows = rows.concat(
-      this.generateMatchComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
+      this.generateComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
     );
     return rows;
-  }
-
-  getMatchExportFileName(
-    runId: number,
-    stepNumber: number,
-    componentNumber: number,
-    workSelectionType: string
-  ) {
-    let allOrLatest = '';
-    if (workSelectionType === 'exportAllWork') {
-      allOrLatest = 'all';
-    } else if (workSelectionType === 'exportLatestWork') {
-      allOrLatest = 'latest';
-    }
-    return `${runId}_step_${stepNumber}_component_${componentNumber}_${allOrLatest}_match_work.csv`;
   }
 
   /**
@@ -2930,46 +2997,18 @@ class DataExportController {
    * of column name to column number.
    */
   populateMatchColumnNames(component, columnNames, columnNameToNumber) {
-    let defaultMatchColumnNames = [
-      '#',
-      'Workgroup ID',
-      'User ID 1',
-      'Student Name 1',
-      'User ID 2',
-      'Student Name 2',
-      'User ID 3',
-      'Student Name 3',
-      'Class Period',
-      'Project ID',
-      'Project Name',
-      'Run ID',
-      'Start Date',
-      'End Date',
-      'Student Work ID',
-      'Server Timestamp',
-      'Client Timestamp',
-      'Node ID',
-      'Component ID',
-      'Component Part Number',
-      'Step Title',
-      'Component Type',
-      'Component Prompt',
-      'Student Data',
-      'Component Revision Counter',
-      'Is Submit',
-      'Submit Count'
-    ];
-
     /*
      * Add the default column names that contain the information about the
      * student, project, run, node, and component.
      */
-    for (let c = 0; c < defaultMatchColumnNames.length; c++) {
-      let defaultMatchColumnName = defaultMatchColumnNames[c];
-      columnNameToNumber[defaultMatchColumnName] = c;
-      columnNames.push(defaultMatchColumnName);
+    for (const defaultMatchColumnName of this.componentExportDefaultColumnNames) {
+      this.addColumnNameToColumnDataStructures(
+        columnNameToNumber,
+        columnNames,
+        defaultMatchColumnName
+      );
     }
-    for (let choice of component.choices) {
+    for (const choice of component.choices) {
       columnNameToNumber[choice.id] = columnNames.length;
       columnNames.push(choice.value);
     }
@@ -2978,8 +3017,7 @@ class DataExportController {
         columnNameToNumber[choice.id + '-boolean'] = columnNames.length;
         columnNames.push(choice.value);
       }
-      columnNameToNumber['Is Correct'] = columnNames.length;
-      columnNames.push('Is Correct');
+      this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, 'Is Correct');
     }
   }
 
@@ -2992,120 +3030,7 @@ class DataExportController {
    */
   generateMatchComponentHeaderRow(component, columnNames, columnNameToNumber) {
     this.populateMatchColumnNames(component, columnNames, columnNameToNumber);
-    const headerRow = [];
-    for (const columnName of columnNames) {
-      headerRow.push(columnName);
-    }
-    return headerRow;
-  }
-
-  /**
-   * Generate all the rows for all the workgroups.
-   * @param component The component content object.
-   * @param columnNames All the header column names.
-   * @param columnNameToNumber The mapping from column name to column number.
-   * @param nodeId The node id the component is in.
-   * @return An array of rows.
-   */
-  generateMatchComponentWorkRows(component, columnNames, columnNameToNumber, nodeId) {
-    let componentId = component.id;
-    let workgroups = this.ConfigService.getClassmateUserInfosSortedByWorkgroupId();
-    let rows = [];
-    let rowCounter = 1;
-    for (const workgroup of workgroups) {
-      let rowsForWorkgroup = this.generateMatchComponentWorkRowsForWorkgroup(
-        component,
-        workgroup,
-        columnNames,
-        columnNameToNumber,
-        nodeId,
-        componentId,
-        rowCounter
-      );
-      rows = rows.concat(rowsForWorkgroup);
-      rowCounter += rowsForWorkgroup.length;
-    }
-    return rows;
-  }
-
-  /**
-   * Generate all the rows for a workgroup.
-   * @param component The component content object.
-   * @param workgroup The workgroup.
-   * @param columnNames An array of column name headers.
-   * @param columnNameToNumber The mapping from column name to column number.
-   * @param nodeId The node the component is in.
-   * @param componentId The component id.
-   * @param rowCounter The current row number we will be creating.
-   */
-  generateMatchComponentWorkRowsForWorkgroup(
-    component,
-    workgroup,
-    columnNames,
-    columnNameToNumber,
-    nodeId,
-    componentId,
-    rowCounter
-  ) {
-    let rows = [];
-    let workgroupId = workgroup.workgroupId;
-    let periodName = workgroup.periodName;
-    let userInfo = this.ConfigService.getUserInfoByWorkgroupId(workgroupId);
-    let extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
-
-    /*
-     * a mapping from component to component revision counter.
-     * the key will be {{nodeId}}_{{componentId}} and the
-     * value will be a number.
-     */
-    let componentRevisionCounter = {};
-    let matchComponentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
-      workgroupId,
-      componentId
-    );
-    if (matchComponentStates != null) {
-      for (let c = 0; c < matchComponentStates.length; c++) {
-        let matchComponentState = matchComponentStates[c];
-        let exportRow = true;
-        if (this.includeOnlySubmits && !matchComponentState.isSubmit) {
-          exportRow = false;
-        } else if (
-          this.workSelectionType == 'exportLatestWork' &&
-          c != matchComponentStates.length - 1
-        ) {
-          exportRow = false;
-        }
-
-        if (exportRow) {
-          rows.push(
-            this.generateMatchComponentWorkRow(
-              component,
-              columnNames,
-              columnNameToNumber,
-              rowCounter,
-              workgroupId,
-              extractedUserIDsAndStudentNames['userId1'],
-              extractedUserIDsAndStudentNames['userId2'],
-              extractedUserIDsAndStudentNames['userId3'],
-              extractedUserIDsAndStudentNames['studentName1'],
-              extractedUserIDsAndStudentNames['studentName2'],
-              extractedUserIDsAndStudentNames['studentName3'],
-              periodName,
-              componentRevisionCounter,
-              matchComponentState
-            )
-          );
-          rowCounter++;
-        } else {
-          /*
-           * We do not want to add this row in the export but
-           * we still want to increment the revision counter.
-           */
-          this.incrementRevisionCounter(componentRevisionCounter, nodeId, componentId);
-        }
-      }
-    }
-    return rows;
+    return columnNames;
   }
 
   /**
@@ -3201,6 +3126,668 @@ class DataExportController {
         row[columnNameToNumber[columnName]] = 0;
       }
     }
+  }
+
+  setAllWorkSelectionType(): void {
+    this.setWorkSelectionType('exportAllWork');
+  }
+
+  setLatestWorkSelectionType(): void {
+    this.setWorkSelectionType('exportLatestWork');
+  }
+
+  setWorkSelectionType(workSelectionType: string): void {
+    this.workSelectionType = workSelectionType;
+  }
+
+  exportDialogGuidanceComponent(nodeId: string, component: any): void {
+    const components = this.getComponentsParam(nodeId, component.id);
+    this.DataExportService.retrieveStudentDataExport(components).then((result: any) => {
+      this.generateDialogGuidanceComponentExport(nodeId, component);
+    });
+  }
+
+  generateDialogGuidanceComponentExport(nodeId: string, component: any): void {
+    const rows = this.getExportDialogGuidanceComponentRows(nodeId, component);
+    const fileName = this.getComponentExportFileName(nodeId, component.id, 'dialog_guidance');
+    this.generateCSVFile(rows, fileName);
+    this.hideDownloadingExportMessage();
+  }
+
+  getComponentExportFileName(nodeId: string, componentId: string, componentType: string): string {
+    const runId = this.ConfigService.getRunId();
+    const stepNumber = this.ProjectService.getNodePositionById(nodeId);
+    const componentNumber =
+      this.ProjectService.getComponentPositionByNodeIdAndComponentId(nodeId, componentId) + 1;
+    let allOrLatest = '';
+    if (this.workSelectionType === 'exportAllWork') {
+      allOrLatest = 'all';
+    } else if (this.workSelectionType === 'exportLatestWork') {
+      allOrLatest = 'latest';
+    }
+    return `run_${runId}_step_${stepNumber}_component_${componentNumber}_${allOrLatest}_${componentType}_work.csv`;
+  }
+
+  getExportDialogGuidanceComponentRows(nodeId: string, component: any): string[] {
+    const columnNames = [];
+    const columnNameToNumber = {};
+    let rows = [];
+    rows.push(
+      this.generateDialogGuidanceComponentHeaderRow(component, columnNames, columnNameToNumber)
+    );
+    rows = rows.concat(
+      this.generateComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
+    );
+    return rows;
+  }
+
+  generateDialogGuidanceComponentHeaderRow(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any
+  ): string[] {
+    this.populateDialogGuidanceColumnNames(component, columnNames, columnNameToNumber);
+    return columnNames;
+  }
+
+  populateDialogGuidanceColumnNames(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any
+  ): void {
+    for (const defaultMatchColumnName of this.componentExportDefaultColumnNames) {
+      this.addColumnNameToColumnDataStructures(
+        columnNameToNumber,
+        columnNames,
+        defaultMatchColumnName
+      );
+    }
+    this.addColumnNameToColumnDataStructures(
+      columnNameToNumber,
+      columnNames,
+      this.dialogGuidanceItemIdLabel
+    );
+    const componentStates = this.TeacherDataService.getComponentStatesByComponentId(component.id);
+    const ideaNames = this.getDialogGuidanceIdeaNames(componentStates);
+    const scoreNames = this.getDialogGuidanceScoreNames(componentStates);
+    for (let r = 0; r < this.getMaxNumberOfStudentResponses(componentStates); r++) {
+      const revisionNumber = `${this.dialogGuidanceRevisionLabel} ${r + 1}`;
+      this.addColumnNameToColumnDataStructures(
+        columnNameToNumber,
+        columnNames,
+        `${this.dialogGuidanceStudentResponseLabel} ${revisionNumber}`
+      );
+      for (const ideaName of ideaNames) {
+        this.addColumnNameToColumnDataStructures(
+          columnNameToNumber,
+          columnNames,
+          `${this.dialogGuidanceIdeaLabel} ${ideaName} ${revisionNumber}`
+        );
+      }
+      for (const scoreName of scoreNames) {
+        this.addColumnNameToColumnDataStructures(
+          columnNameToNumber,
+          columnNames,
+          `${this.dialogGuidanceScoreLabel} ${scoreName} ${revisionNumber}`
+        );
+      }
+      this.addColumnNameToColumnDataStructures(
+        columnNameToNumber,
+        columnNames,
+        `${this.dialogGuidanceComputerResponseLabel} ${revisionNumber}`
+      );
+    }
+  }
+
+  addColumnNameToColumnDataStructures(
+    columnNameToNumber: any,
+    columnNames: string[],
+    columnName: string
+  ): void {
+    columnNameToNumber[columnName] = columnNames.length;
+    columnNames.push(columnName);
+  }
+
+  getDialogGuidanceIdeaNames(componentStates: any[]): string[] {
+    for (const componentState of componentStates) {
+      for (const response of componentState.studentData.responses) {
+        if (response.ideas != null && response.ideas.length > 0) {
+          return this.getIdeaNamesFromIdeas(response.ideas);
+        }
+      }
+    }
+    return [];
+  }
+
+  getIdeaNamesFromIdeas(ideas: any[]): string[] {
+    const ideaNames = [];
+    for (const idea of ideas) {
+      ideaNames.push(idea.name);
+    }
+    return ideaNames.sort(this.sortIdeaNames);
+  }
+
+  sortIdeaNames(a: any, b: any): number {
+    const aInt = parseInt(a);
+    const bInt = parseInt(b);
+    // if a and b are the same number but one of them contains a letter, we will sort alphabetically
+    // when a string like "5a" is given to parseInt(), it will return 5
+    // therefore if we are comparing "5" and "5a" we will sort alphabetically because we want
+    // 5 to show up before 5a
+    if (!isNaN(aInt) && !isNaN(bInt) && aInt !== bInt) {
+      // sort numerically
+      return aInt - bInt;
+    } else {
+      // sort alphabetically
+      if (a === b) {
+        return 0;
+      } else if (a < b) {
+        return -1;
+      } else if (a > b) {
+        return 1;
+      }
+    }
+  }
+
+  getDialogGuidanceScoreNames(componentStates: any[]): string[] {
+    for (const componentState of componentStates) {
+      for (const response of componentState.studentData.responses) {
+        if (response.scores != null && response.scores.length > 0) {
+          return this.getScoreNamesFromScores(response.scores);
+        }
+      }
+    }
+    return [];
+  }
+
+  getScoreNamesFromScores(scores: any[]): string[] {
+    const scoreNames = [];
+    for (const score of scores) {
+      scoreNames.push(score.id);
+    }
+    return scoreNames.sort();
+  }
+
+  getMaxNumberOfStudentResponses(componentStates: any[]): number {
+    let maxNumberOfResponses = 0;
+    for (const componentState of componentStates) {
+      const numberOfStudentResponses = this.getNumberOfStudentResponses(componentState);
+      if (numberOfStudentResponses > maxNumberOfResponses) {
+        maxNumberOfResponses = numberOfStudentResponses;
+      }
+    }
+    return maxNumberOfResponses;
+  }
+
+  getNumberOfStudentResponses(componentState: any): number {
+    let count = 0;
+    for (const response of componentState.studentData.responses) {
+      if (response.user === 'Student') {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  generateComponentWorkRows(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    nodeId: string
+  ): string[] {
+    const componentId = component.id;
+    const workgroups = this.ConfigService.getClassmateUserInfosSortedByWorkgroupId();
+    let rows = [];
+    let rowCounter = 1;
+    for (const workgroup of workgroups) {
+      const rowsForWorkgroup = this.generateWorkgroupComponentWorkRows(
+        component,
+        workgroup,
+        columnNames,
+        columnNameToNumber,
+        nodeId,
+        componentId,
+        rowCounter
+      );
+      rows = rows.concat(rowsForWorkgroup);
+      rowCounter += rowsForWorkgroup.length;
+    }
+    return rows;
+  }
+
+  generateWorkgroupComponentWorkRows(
+    component: any,
+    workgroup: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    nodeId: string,
+    componentId: string,
+    rowCounter: number
+  ): string[] {
+    return this.generateComponentWorkRowsForWorkgroup(
+      component,
+      workgroup,
+      columnNames,
+      columnNameToNumber,
+      nodeId,
+      componentId,
+      rowCounter
+    );
+  }
+
+  generateComponentWorkRowsForWorkgroup(
+    component: any,
+    workgroup: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    nodeId: string,
+    componentId: string,
+    rowCounter: number
+  ): string[] {
+    const rows = [];
+    const workgroupId = workgroup.workgroupId;
+    const periodName = workgroup.periodName;
+    const userInfo = this.ConfigService.getUserInfoByWorkgroupId(workgroupId);
+    const extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
+
+    // A mapping from component to component revision counter. The key will be
+    // {{nodeId}}_{{componentId}} and the value will be a number.
+    const componentRevisionCounter = {};
+    const componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
+      workgroupId,
+      componentId
+    );
+    for (let c = 0; c < componentStates.length; c++) {
+      const componentState = componentStates[c];
+      if (this.shouldExportRow(componentState, c, componentStates.length)) {
+        const row = this.generateComponentWorkRow(
+          component,
+          columnNames,
+          columnNameToNumber,
+          rowCounter,
+          workgroupId,
+          extractedUserIDsAndStudentNames['userId1'],
+          extractedUserIDsAndStudentNames['userId2'],
+          extractedUserIDsAndStudentNames['userId3'],
+          extractedUserIDsAndStudentNames['studentName1'],
+          extractedUserIDsAndStudentNames['studentName2'],
+          extractedUserIDsAndStudentNames['studentName3'],
+          periodName,
+          componentRevisionCounter,
+          componentState
+        );
+        rows.push(row);
+        rowCounter++;
+      } else {
+        // We do not want to add this component state as a row in the export but we still want to
+        // increment the revision counter.
+        this.incrementRevisionCounter(componentRevisionCounter, nodeId, componentId);
+      }
+    }
+    return rows;
+  }
+
+  shouldExportRow(
+    componentState: any,
+    componentStateIndex: number,
+    numComponentStates: number
+  ): boolean {
+    let exportRow = true;
+    if (this.includeOnlySubmits && !componentState.isSubmit) {
+      exportRow = false;
+    } else if (
+      this.workSelectionType === 'exportLatestWork' &&
+      componentStateIndex != numComponentStates - 1
+    ) {
+      exportRow = false;
+    }
+    return exportRow;
+  }
+
+  generateComponentWorkRow(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    rowCounter: number,
+    workgroupId: number,
+    userId1: number,
+    userId2: number,
+    userId3: number,
+    studentName1: string,
+    studentName2: string,
+    studentName3: string,
+    periodName: string,
+    componentRevisionCounter: any,
+    componentState: any
+  ): string[] {
+    if (componentState.componentType === 'Match') {
+      return this.generateMatchComponentWorkRow(
+        component,
+        columnNames,
+        columnNameToNumber,
+        rowCounter,
+        workgroupId,
+        userId1,
+        userId2,
+        userId3,
+        studentName1,
+        studentName2,
+        studentName3,
+        periodName,
+        componentRevisionCounter,
+        componentState
+      );
+    } else if (componentState.componentType === 'DialogGuidance') {
+      return this.generateDialogGuidanceComponentWorkRow(
+        component,
+        columnNames,
+        columnNameToNumber,
+        rowCounter,
+        workgroupId,
+        userId1,
+        userId2,
+        userId3,
+        studentName1,
+        studentName2,
+        studentName3,
+        periodName,
+        componentRevisionCounter,
+        componentState
+      );
+    } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
+      return this.generateEmbeddedComponentWorkRow(
+        component,
+        columnNames,
+        columnNameToNumber,
+        rowCounter,
+        workgroupId,
+        userId1,
+        userId2,
+        userId3,
+        studentName1,
+        studentName2,
+        studentName3,
+        periodName,
+        componentRevisionCounter,
+        componentState
+      );
+    }
+  }
+
+  generateDialogGuidanceComponentWorkRow(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    rowCounter: number,
+    workgroupId: number,
+    userId1: number,
+    userId2: number,
+    userId3: number,
+    studentName1: string,
+    studentName2: string,
+    studentName3: string,
+    periodName: string,
+    componentRevisionCounter: any,
+    dialogGuidanceComponentState: any
+  ): string[] {
+    // Populate the cells in the row that contain the information about the student, project, run,
+    // step, and component.
+    let row = this.createStudentWorkExportRow(
+      columnNames,
+      columnNameToNumber,
+      rowCounter,
+      workgroupId,
+      userId1,
+      userId2,
+      userId3,
+      studentName1,
+      studentName2,
+      studentName3,
+      periodName,
+      componentRevisionCounter,
+      dialogGuidanceComponentState
+    );
+    row[columnNameToNumber[this.dialogGuidanceItemIdLabel]] = component.itemId;
+    let revisionCounter = 0;
+    let revisionLabel = '';
+    for (const response of dialogGuidanceComponentState.studentData.responses) {
+      if (response.user === 'Student') {
+        revisionCounter++;
+        revisionLabel = `${this.dialogGuidanceRevisionLabel} ${revisionCounter}`;
+        this.addDialogGuidanceStudentResponseToRow(
+          row,
+          columnNameToNumber,
+          revisionLabel,
+          response.text
+        );
+      } else if (response.user === 'Computer') {
+        if (response.ideas != null) {
+          this.addDialogGuidanceIdeasToRow(row, columnNameToNumber, revisionLabel, response.ideas);
+        }
+        if (response.scores != null) {
+          this.addDialogGuidanceScoresToRow(
+            row,
+            columnNameToNumber,
+            revisionLabel,
+            response.scores
+          );
+        }
+        this.addDialogGuidanceComputerResponseToRow(
+          row,
+          columnNameToNumber,
+          revisionLabel,
+          response.text
+        );
+      }
+    }
+    return row;
+  }
+
+  addDialogGuidanceStudentResponseToRow(
+    row: any[],
+    columnNameToNumber: any,
+    revisionLabel: string,
+    text: string
+  ): void {
+    row[columnNameToNumber[`${this.dialogGuidanceStudentResponseLabel} ${revisionLabel}`]] = text;
+  }
+
+  addDialogGuidanceIdeasToRow(
+    row: any[],
+    columnNameToNumber: any,
+    revisionLabel: string,
+    ideas: any[]
+  ): void {
+    for (const ideaObject of ideas) {
+      row[
+        columnNameToNumber[`${this.dialogGuidanceIdeaLabel} ${ideaObject.name} ${revisionLabel}`]
+      ] = ideaObject.detected ? 1 : 0;
+    }
+  }
+
+  addDialogGuidanceScoresToRow(
+    row: any[],
+    columnNameToNumber: any,
+    revisionLabel: string,
+    scores: any[]
+  ): void {
+    for (const scoreObject of scores) {
+      row[
+        columnNameToNumber[`${this.dialogGuidanceScoreLabel} ${scoreObject.id} ${revisionLabel}`]
+      ] = scoreObject.score;
+    }
+  }
+
+  addDialogGuidanceComputerResponseToRow(
+    row: any[],
+    columnNameToNumber: any,
+    revisionLabel: string,
+    text: string
+  ): void {
+    row[columnNameToNumber[`${this.dialogGuidanceComputerResponseLabel} ${revisionLabel}`]] = text;
+  }
+
+  exportEmbeddedComponent(nodeId: string, component: any): void {
+    const components = this.getComponentsParam(nodeId, component.id);
+    this.DataExportService.retrieveStudentDataExport(components).then((result: any) => {
+      this.generateEmbeddedComponentExport(nodeId, component);
+    });
+  }
+
+  generateEmbeddedComponentExport(nodeId: string, component: any): void {
+    const rows = this.getExportEmbeddedComponentRows(nodeId, component);
+    const fileName = this.getComponentExportFileName(nodeId, component.id, 'embedded');
+    this.generateCSVFile(rows, fileName);
+    this.hideDownloadingExportMessage();
+  }
+
+  getExportEmbeddedComponentRows(nodeId: string, component: any): string[] {
+    const columnNames = [];
+    const columnNameToNumber = {};
+    let rows = [];
+    rows.push(this.generateEmbeddedComponentHeaderRow(component, columnNames, columnNameToNumber));
+    rows = rows.concat(
+      this.generateComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
+    );
+    return rows;
+  }
+
+  generateEmbeddedComponentHeaderRow(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any
+  ): string[] {
+    this.populateEmbeddedColumnNames(component, columnNames, columnNameToNumber);
+    return columnNames;
+  }
+
+  populateEmbeddedColumnNames(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any
+  ): void {
+    for (const defaultMatchColumnName of this.componentExportDefaultColumnNames) {
+      this.addColumnNameToColumnDataStructures(
+        columnNameToNumber,
+        columnNames,
+        defaultMatchColumnName
+      );
+    }
+    const componentStates = this.TeacherDataService.getComponentStatesByComponentId(component.id);
+    const items = this.getEmbeddedTableRowItems(component, componentStates);
+    const columnKeys = this.getEmbeddedTableColumnKeys(component);
+    if (this.isEmbeddedTableComponentAndCanExport(component)) {
+      for (const item of items) {
+        columnKeys.forEach((columnKey) => {
+          this.addColumnNameToColumnDataStructures(
+            columnNameToNumber,
+            columnNames,
+            `${item} ${this.embeddedTableKeyToValue[columnKey]}`
+          );
+        });
+      }
+    }
+  }
+
+  getEmbeddedTableColumnKeys(component: any): string[] {
+    let columnKeys = [];
+    if (this.isDevicesEmbeddedTable(component)) {
+      columnKeys = ['current', 'future', 'kwhsaved', 'co2saved'];
+    } else if (this.isTransporationEmbeddedTable(component)) {
+      columnKeys = ['minutes', 'current', 'future', 'co2saved'];
+    }
+    return columnKeys;
+  }
+
+  getEmbeddedTableRowItems(component: any, componentStates: any[]): string[] {
+    if (this.isDevicesEmbeddedTable(component)) {
+      return this.getDevices(componentStates);
+    } else if (this.isTransporationEmbeddedTable(component)) {
+      return this.getTransportationMethods(componentStates);
+    }
+  }
+
+  getDevices(componentStates: any[]): string[] {
+    const devices = [];
+    for (const row of componentStates[0].studentData.tableData) {
+      devices.push(row.appliance);
+    }
+    return devices;
+  }
+
+  getTransportationMethods(componentStates: any[]): string[] {
+    const transportation = [];
+    for (const row of componentStates[0].studentData.tableData) {
+      transportation.push(row.method);
+    }
+    return transportation;
+  }
+
+  generateEmbeddedComponentWorkRow(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    rowCounter: number,
+    workgroupId: number,
+    userId1: number,
+    userId2: number,
+    userId3: number,
+    studentName1: string,
+    studentName2: string,
+    studentName3: string,
+    periodName: string,
+    componentRevisionCounter: any,
+    embeddedComponentState: any
+  ): string[] {
+    // Populate the cells in the row that contain the information about the student, project, run,
+    // step, and component.
+    const row = this.createStudentWorkExportRow(
+      columnNames,
+      columnNameToNumber,
+      rowCounter,
+      workgroupId,
+      userId1,
+      userId2,
+      userId3,
+      studentName1,
+      studentName2,
+      studentName3,
+      periodName,
+      componentRevisionCounter,
+      embeddedComponentState
+    );
+    const columnKeys = this.getEmbeddedTableColumnKeys(component);
+    for (const studentTableDataRow of embeddedComponentState.studentData.tableData) {
+      const item = this.getEmbeddedTableRowItem(component, studentTableDataRow);
+      for (const column of columnKeys) {
+        this.addEmbeddedCellsToRow(
+          row,
+          columnNameToNumber,
+          item,
+          column,
+          studentTableDataRow[column]
+        );
+      }
+    }
+    return row;
+  }
+
+  getEmbeddedTableRowItem(component: any, studentTableDataRow: any): string {
+    if (this.isDevicesEmbeddedTable(component)) {
+      return studentTableDataRow.appliance;
+    } else if (this.isTransporationEmbeddedTable(component)) {
+      return studentTableDataRow.method;
+    }
+  }
+
+  addEmbeddedCellsToRow(
+    row: any[],
+    columnNameToNumber: any,
+    device: string,
+    column: string,
+    text: string
+  ): void {
+    row[columnNameToNumber[`${device} ${this.embeddedTableKeyToValue[column]}`]] = text;
   }
 
   showDownloadingExportMessage() {

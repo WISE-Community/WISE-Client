@@ -1,5 +1,23 @@
 <edit-component-prompt [prompt]="authoringComponentContent.prompt"
    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
+<p>
+  <mat-checkbox color="primary"
+      class="checkbox"
+      [(ngModel)]="authoringComponentContent.horizontal"
+      (ngModelChange)="componentChanged()"
+      i18n>
+    Show Source and Target Buckets Side-by-Side
+  </mat-checkbox>
+</p>
+<p>
+  <mat-checkbox color="primary"
+      class="checkbox"
+      [(ngModel)]="authoringComponentContent.choicesAfter"
+      (ngModelChange)="componentChanged()"
+      i18n>
+    Show Choices After Target Buckets
+  </mat-checkbox>
+</p>
 <div class="section">
   <span i18n>Choices</span>
   <button mat-raised-button

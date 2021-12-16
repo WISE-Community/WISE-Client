@@ -5792,7 +5792,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
@@ -7922,7 +7922,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <target state="translated">起始日期</target>
       </trans-unit>
@@ -7942,7 +7942,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target state="translated">結束日期</target>
       </trans-unit>
@@ -7962,7 +7962,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <target state="needs-translation">If the End Date has passed and the unit is locked, students will no longer be able to save new work</target>
       </trans-unit>
@@ -8050,7 +8050,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
@@ -8306,7 +8306,7 @@
         <source>Class Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <target state="translated">課程時段</target>
       </trans-unit>
@@ -8314,7 +8314,7 @@
         <source>Delete period</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <target state="translated">刪除課程時段</target>
       </trans-unit>
@@ -8322,7 +8322,7 @@
         <source>Add new period</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <target state="translated">新增新的課程時段</target>
       </trans-unit>
@@ -8330,55 +8330,63 @@
         <source>Add period</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <target state="translated">新增課程時段</target>
+      </trans-unit>
+      <trans-unit id="8e4f6fbd6f10462ce24ec7b579764cbb0e7208da" datatype="html">
+        <source>For &quot;Period 9&quot;, just enter the number 9.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target state="needs-translation">For "Period 9", just enter the number 9.</target>
       </trans-unit>
       <trans-unit id="9e52801929bc9e355f8de5c5c13ba357055d1bdf" datatype="html">
         <source>Students Per Team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <target state="translated">每組的學生</target>
       </trans-unit>
-      <trans-unit id="17fa4b58d131328449acdbaad4bbe404bfd31264" datatype="html">
-        <source>Only 1 student</source>
+      <trans-unit id="3830ac25d707cb610ab5eae521c759a557fb7d7d" datatype="html">
+        <source> Only 1 student </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">31,32</context>
+          <context context-type="linenumber">41,42</context>
         </context-group>
-        <target state="translated">只有1名學生</target>
+        <target state="needs-translation"> Only 1 student </target>
       </trans-unit>
-      <trans-unit id="975a4029af4b0992dcdcbe682bcba819ea8cf809" datatype="html">
-        <source>1-3 students</source>
+      <trans-unit id="3e3d338fd6b6cce651564a6cd4868c6c31d7df26" datatype="html">
+        <source> 1-3 students </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">33,34</context>
+          <context context-type="linenumber">44,45</context>
         </context-group>
-        <target state="translated">1-3名學生</target>
+        <target state="needs-translation"> 1-3 students </target>
       </trans-unit>
       <trans-unit id="4a4f46a2dcec36bd5c8c371ceee55c2226dec27f" datatype="html">
         <source>Schedule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <target state="translated">預定排程</target>
       </trans-unit>
-      <trans-unit id="c1d7798f7e66f0c74760feddb4a5ebe92a5dd49f" datatype="html">
-        <source>(Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>)</source>
+      <trans-unit id="2987d3838d160f224644ae6a7d19eea2d40ef7e6" datatype="html">
+        <source> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">39,40</context>
+          <context context-type="linenumber">50,52</context>
         </context-group>
-        <target state="needs-translation">(Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>)</target>
+        <target state="needs-translation"> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>) </target>
       </trans-unit>
       <trans-unit id="a1c89f5496e99086127a54d08cecba1d0920397e" datatype="html">
         <source>Start date is required.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="translated">開始日期是必填的。</target>
       </trans-unit>
@@ -8386,7 +8394,7 @@
         <source> Lock After End Date </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">67,68</context>
+          <context context-type="linenumber">87,88</context>
         </context-group>
         <target state="needs-translation"> Lock After End Date </target>
       </trans-unit>
@@ -10708,7 +10716,7 @@ Are you ready to receive feedback on this answer?</target>
         <source> Show Amplitude Input </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">93,94</context>
+          <context context-type="linenumber">94,95</context>
         </context-group>
         <target state="needs-translation"> Show Amplitude Input </target>
       </trans-unit>
@@ -10716,7 +10724,7 @@ Are you ready to receive feedback on this answer?</target>
         <source> Allow Student to Edit Amplitude </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">102,103</context>
+          <context context-type="linenumber">103,104</context>
         </context-group>
         <target state="needs-translation"> Allow Student to Edit Amplitude </target>
       </trans-unit>
@@ -10724,7 +10732,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Oscillator Width (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <target state="needs-translation">Oscillator Width (Pixels)</target>
       </trans-unit>
@@ -10732,7 +10740,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Oscillator Height (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
         <target state="needs-translation">Oscillator Height (Pixels)</target>
       </trans-unit>
@@ -10740,7 +10748,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Oscillator Grid Size (Pixels)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">129</context>
         </context-group>
         <target state="needs-translation">Oscillator Grid Size (Pixels)</target>
       </trans-unit>
@@ -11584,6 +11592,14 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Warning: This will delete all existing nodes and links in this component.</target>
       </trans-unit>
+      <trans-unit id="5596810972110629301" datatype="html">
+        <source>Thanks for submitting your response.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/DialogGuidanceFeedbackRuleEvaluator.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Thanks for submitting your response.</target>
+      </trans-unit>
       <trans-unit id="27e0b1e650bef276e8c29dd8d547e3fc8c4f833f" datatype="html">
         <source>Item ID</source>
         <context-group purpose="location">
@@ -11631,6 +11647,86 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="linenumber">16</context>
         </context-group>
         <target state="needs-translation">Dialog Guidance</target>
+      </trans-unit>
+      <trans-unit id="ac4a8ebf1347b29327308613dd307970ec899941" datatype="html">
+        <source>Feedback Rules</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <target state="needs-translation">Feedback Rules</target>
+      </trans-unit>
+      <trans-unit id="9c15557f92d1f8a01b15d096b2428d1a593293e7" datatype="html">
+        <source>Add a new rule</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <target state="needs-translation">Add a new rule</target>
+      </trans-unit>
+      <trans-unit id="6fcbf761098624382d8edcae063b3f0207059601" datatype="html">
+        <source>Drag to reorder</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <target state="needs-translation">Drag to reorder</target>
+      </trans-unit>
+      <trans-unit id="cc697167c19fb984956b08b0e01767da0dce90fa" datatype="html">
+        <source>Expression</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation">Expression</target>
+      </trans-unit>
+      <trans-unit id="e9b20820eab2b7caad859fd12f5e211cdb4eae88" datatype="html">
+        <source>Feedback</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
+          <context context-type="linenumber">181</context>
+        </context-group>
+        <target state="needs-translation">Feedback</target>
+      </trans-unit>
+      <trans-unit id="d3ccd931bd0661bdf42d1023fc5a8f26503a4d5f" datatype="html">
+        <source>Delete rule</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <target state="needs-translation">Delete rule</target>
+      </trans-unit>
+      <trans-unit id="f5d502c5d44fd9d78ed4979a7efae43369b09dca" datatype="html">
+        <source>Move up</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <target state="needs-translation">Move up</target>
+      </trans-unit>
+      <trans-unit id="7a91e24cda07c3ccff6a84d88c25de674bf288f0" datatype="html">
+        <source>Move down</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <target state="needs-translation">Move down</target>
+      </trans-unit>
+      <trans-unit id="28b0236983b8c9cde819e9f8dc2f3b85fa419168" datatype="html">
+        <source>Add a new rule at the end</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <target state="needs-translation">Add a new rule at the end</target>
       </trans-unit>
       <trans-unit id="f1affa088d785794802225dbc56ee2ff3d785f87" datatype="html">
         <source>Post attachment</source>
@@ -13545,18 +13641,6 @@ Warning: This will delete all existing choices and buckets in this component.</t
           <context context-type="linenumber">149</context>
         </context-group>
         <target state="needs-translation">Delete Bucket</target>
-      </trans-unit>
-      <trans-unit id="e9b20820eab2b7caad859fd12f5e211cdb4eae88" datatype="html">
-        <source>Feedback</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">160</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">181</context>
-        </context-group>
-        <target state="needs-translation">Feedback</target>
       </trans-unit>
       <trans-unit id="f3540227c398d8d2a32067863ec5ad68a4bb8274" datatype="html">
         <source> Choices need to be ordered within buckets </source>

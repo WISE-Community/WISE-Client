@@ -80,7 +80,6 @@ import { DrawGrading } from '../assets/wise5/components/draw/draw-grading/draw-g
 import { GraphGrading } from '../assets/wise5/components/graph/graph-grading/graph-grading.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { LabelGrading } from '../assets/wise5/components/label/label-grading/label-grading.component';
-import { MatchGrading } from '../assets/wise5/components/match/match-grading/match-grading.component';
 import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
 
 @Component({ template: `` })
@@ -97,7 +96,6 @@ export class EmptyComponent {}
     EmptyComponent,
     HelpIconComponent,
     LabelGrading,
-    MatchGrading,
     MultipleChoiceGrading,
     NodeIconComponent,
     NodeStatusIcon,
@@ -207,7 +205,6 @@ export class EmptyComponent {}
     MatSidenavModule,
     MatSliderModule,
     MatSlideToggleModule,
-    MatchGrading,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,

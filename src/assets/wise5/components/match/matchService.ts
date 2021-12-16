@@ -102,4 +102,26 @@ export class MatchService extends ComponentService {
     }
     return false;
   }
+
+  setItemStatus(item: any, hasCorrectAnswer: boolean): void {
+    item.status = '';
+    if (item.isCorrect) {
+      item.status = 'correct';
+    } else if (item.isIncorrectPosition) {
+      item.status = 'warn';
+    } else if (hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition) {
+      item.status = 'incorrect';
+    }
+  }
+
+  hasCorrectChoices(componentContent: any): boolean {
+    for (const bucket of componentContent.feedback) {
+      for (const choice of bucket.choices) {
+        if (choice.isCorrect) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 }

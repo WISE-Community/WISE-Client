@@ -191,14 +191,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     if (this.isDisabled) {
       return;
     }
-    if (this.mode === 'student') {
-      const category = 'StudentInteraction';
-      const event = 'choiceSelected';
-      const data: any = {
-        selectedChoiceId: choiceId
-      };
-      this.StudentDataService.saveComponentEvent(this, category, event, data);
-    }
   }
 
   checkboxClicked(choiceId: string): void {
@@ -207,15 +199,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     }
     this.addOrRemoveFromStudentChoices(choiceId);
     this.studentDataChanged();
-    if (this.mode === 'student') {
-      const category = 'StudentInteraction';
-      const event = 'choiceSelected';
-      const data: any = {
-        selectedChoiceId: choiceId,
-        choicesAfter: this.studentChoices
-      };
-      this.StudentDataService.saveComponentEvent(this, category, event, data);
-    }
   }
 
   addOrRemoveFromStudentChoices(choiceId: string): void {
