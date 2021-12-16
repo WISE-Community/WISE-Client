@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentGrading } from '../../../classroomMonitor/classroomMonitorComponents/shared/component-grading.component';
 import { ProjectService } from '../../../services/projectService';
 import { MatchService } from '../matchService';
@@ -12,11 +12,11 @@ export class MatchGrading extends ComponentGrading {
   sourceBucketId = '0';
   sourceBucket: any;
   targetBuckets: any[] = [];
-  isHorizontal: boolean = false;
-  isChoicesAfter: boolean = false;
+  isHorizontal: boolean;
+  isChoicesAfter: boolean;
   bucketWidth: number;
-  hasCorrectAnswer: boolean = false;
-  isCorrect: boolean = false;
+  hasCorrectAnswer: boolean;
+  isCorrect: boolean;
   submitCounter: number;
   isLatestComponentStateSubmit: boolean;
 
