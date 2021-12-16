@@ -28,19 +28,19 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   logicOptions = [
     {
       value: 'random',
-      text: 'Random'
+      text: $localize`Random`
     },
     {
       value: 'maximizeSimilarIdeas',
-      text: 'Maximize Similar Ideas'
+      text: $localize`Maximize Similar Ideas`
     },
     {
       value: 'maximizeDifferentIdeas',
-      text: 'Maximize Different Ideas'
+      text: $localize`Maximize Different Ideas`
     },
     {
       value: 'manual',
-      text: 'Manual'
+      text: $localize`Manual`
     }
   ];
   nodeIds: string[];

@@ -61,9 +61,10 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <ng-container *ngIf="singleLogic.name !== 'random' && singleLogic.name !== 'manual'">
+  <ng-container *ngIf="singleLogic.name !== 'manual'">
     <mat-form-field>
-      <mat-label i18n>Step</mat-label>
+      <mat-label i18n *ngIf="singleLogic.name === 'random'">Step (Optional)</mat-label>
+      <mat-label i18n *ngIf="singleLogic.name !== 'random'" class="red">Step (Required)</mat-label>
       <mat-select [(ngModel)]="singleLogic.nodeId"
           (ngModelChange)="logicNodeIdChanged(singleLogic)">
         <mat-option [value]='' i18n>(None)</mat-option>
@@ -75,7 +76,8 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-label i18n>Component</mat-label>
+      <mat-label i18n *ngIf="singleLogic.name === 'random'">Component (Optional)</mat-label>
+      <mat-label i18n *ngIf="singleLogic.name !== 'random'" class="red">Component (Required)</mat-label>
       <mat-select [(ngModel)]="singleLogic.componentId"
           (ngModelChange)="componentChanged()">
         <mat-option [value]='' i18n>(None)</mat-option>
@@ -89,6 +91,7 @@
     </mat-form-field>
     </ng-container>
   <button mat-raised-button
+      *ngIf="authoringComponentContent.logic.length > 1"
       color="primary"
       (click)="deleteLogic(logicIndex)"
       matTooltip="Delete Logic"
