@@ -4095,7 +4095,7 @@
           <context context-type="linenumber">4</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-status-icon/match-status-icon.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
         <target state="translated">Advertencia</target>
@@ -14256,6 +14256,22 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the background image?</target>
       </trans-unit>
+      <trans-unit id="a7d56850122574ce933b94051d73d65817e8369b" datatype="html">
+        <source>Delete item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/delete-choice-button/delete-choice-button.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <target state="needs-translation">Delete item</target>
+      </trans-unit>
+      <trans-unit id="8927837337329146438" datatype="html">
+        <source>Are you sure you want to delete this item?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/delete-choice-button/delete-choice-button.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to delete this item?</target>
+      </trans-unit>
       <trans-unit id="43e2291ad2f3e8419aeefcc82006a294d86e3445" datatype="html">
         <source> Student Can Create Choices </source>
         <context-group purpose="location">
@@ -14468,41 +14484,21 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this bucket?</target>
       </trans-unit>
-      <trans-unit id="f80d8048e1a73a4f0c35681cc5f8a250754eaf4b" datatype="html">
-        <source> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </source>
+      <trans-unit id="3db39135c783da4bb320d5826f4de893f62c7e1b" datatype="html">
+        <source>Correct</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-grading/match-grading.component.html</context>
-          <context context-type="linenumber">101,103</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.html</context>
+          <context context-type="linenumber">3</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
-          <context context-type="linenumber">38,40</context>
-        </context-group>
-        <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </target>
+        <target state="needs-translation">Correct</target>
       </trans-unit>
-      <trans-unit id="00a48b9fab48a5ccc0ebf0a2793495ee1cc9f968" datatype="html">
-        <source> Correct </source>
+      <trans-unit id="8b42d54000704393a3c06e5f8b668880014f6986" datatype="html">
+        <source>Incorrect</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-grading/match-grading.component.html</context>
-          <context context-type="linenumber">107,108</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.html</context>
+          <context context-type="linenumber">11</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
-          <context context-type="linenumber">44,45</context>
-        </context-group>
-        <target state="needs-translation"> Correct </target>
-      </trans-unit>
-      <trans-unit id="49a3371af0eb58f02e541105eb395340048527ec" datatype="html">
-        <source> Incorrect </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-grading/match-grading.component.html</context>
-          <context context-type="linenumber">112,113</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
-          <context context-type="linenumber">49,50</context>
-        </context-group>
-        <target state="needs-translation"> Incorrect </target>
+        <target state="needs-translation">Incorrect</target>
       </trans-unit>
       <trans-unit id="0f72a164f5a5d10d1fbdeeb84ac80a63c04b7e1b" datatype="html">
         <source>Add item</source>
@@ -14527,22 +14523,6 @@ Warning: This will delete all existing choices and buckets in this component.</t
           <context context-type="linenumber">10</context>
         </context-group>
         <target state="needs-translation">Item Text required</target>
-      </trans-unit>
-      <trans-unit id="a7d56850122574ce933b94051d73d65817e8369b" datatype="html">
-        <source>Delete item</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/delete-choice-button/delete-choice-button.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <target state="needs-translation">Delete item</target>
-      </trans-unit>
-      <trans-unit id="8927837337329146438" datatype="html">
-        <source>Are you sure you want to delete this item?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/delete-choice-button/delete-choice-button.component.ts</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-        <target state="needs-translation">Are you sure you want to delete this item?</target>
       </trans-unit>
       <trans-unit id="8b8ff7859cae872c69d4677ab92308d7465220cb" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> <x id="ICU" equiv-text="{componentContent.maxSubmitCount, plural, =1 {attempt} other {attempts}}"/>.
@@ -14586,27 +14566,11 @@ Warning: This will delete all existing choices and buckets in this component.</t
         </context-group>
         <target state="needs-translation"> Incorrect </target>
       </trans-unit>
-      <trans-unit id="3db39135c783da4bb320d5826f4de893f62c7e1b" datatype="html">
-        <source>Correct</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-status-icon/match-status-icon.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-        <target state="needs-translation">Correct</target>
-      </trans-unit>
-      <trans-unit id="8b42d54000704393a3c06e5f8b668880014f6986" datatype="html">
-        <source>Incorrect</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-status-icon/match-status-icon.component.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-        <target state="needs-translation">Incorrect</target>
-      </trans-unit>
       <trans-unit id="5222638645205059452" datatype="html">
         <source>Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">507</context>
+          <context context-type="linenumber">496</context>
         </context-group>
         <target state="needs-translation">Correct bucket but wrong position</target>
       </trans-unit>
@@ -14614,7 +14578,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Correct</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">517</context>
+          <context context-type="linenumber">506</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
@@ -14630,7 +14594,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Incorrect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">519</context>
+          <context context-type="linenumber">508</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
@@ -14743,6 +14707,30 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="linenumber">132</context>
         </context-group>
         <target state="needs-translation">Reload Preview</target>
+      </trans-unit>
+      <trans-unit id="f80d8048e1a73a4f0c35681cc5f8a250754eaf4b" datatype="html">
+        <source> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
+          <context context-type="linenumber">38,40</context>
+        </context-group>
+        <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </target>
+      </trans-unit>
+      <trans-unit id="00a48b9fab48a5ccc0ebf0a2793495ee1cc9f968" datatype="html">
+        <source> Correct </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+        <target state="needs-translation"> Correct </target>
+      </trans-unit>
+      <trans-unit id="49a3371af0eb58f02e541105eb395340048527ec" datatype="html">
+        <source> Incorrect </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+        <target state="needs-translation"> Incorrect </target>
       </trans-unit>
       <trans-unit id="15a55678173547662c25708af440a302696f5a0c" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount}}"/> attempt </source>
