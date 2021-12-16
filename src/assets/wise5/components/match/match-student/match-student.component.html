@@ -10,8 +10,7 @@
           fxLayoutGap="8px">
         <h3 class="mat-body-2" [innerHTML]="buckets[0].value"></h3>
         <div *ngIf="componentContent.canCreateChoices">
-        <add-choice-button [isDisabled]="isDisabled"
-            (onClick)="addChoice()"></add-choice-button>
+          <add-choice-button [isDisabled]="isDisabled" (onClick)="addChoice()"></add-choice-button>
         </div>
       </div>
       <ul class="items"

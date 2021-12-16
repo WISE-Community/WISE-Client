@@ -78,7 +78,7 @@ export class MatchStudent extends ComponentStudent {
     this.isHorizontal = this.componentContent.horizontal;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    this.hasCorrectAnswer = this.hasCorrectChoices();
+    this.hasCorrectAnswer = this.MatchService.hasCorrectChoices(this.componentContent);
     if (this.shouldImportPrivateNotes()) {
       this.importPrivateNotes();
     }
@@ -440,7 +440,7 @@ export class MatchStudent extends ComponentStudent {
           );
           isCorrect &&= isChoiceCorrect;
         }
-        this.setItemStatus(item);
+        this.MatchService.setItemStatus(item, this.hasCorrectAnswer);
       }
     }
 
@@ -466,17 +466,6 @@ export class MatchStudent extends ComponentStudent {
     }
     this.tryDisableComponent();
     return isCorrect;
-  }
-
-  setItemStatus(item: any): void {
-    item.status = '';
-    if (item.isCorrect) {
-      item.status = 'correct';
-    } else if (item.isIncorrectPosition) {
-      item.status = 'warn';
-    } else if (this.hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition) {
-      item.status = 'incorrect';
-    }
   }
 
   getFeedback(feedbackObject: any, hasCorrectAnswer: boolean, position: number): string {
@@ -647,17 +636,6 @@ export class MatchStudent extends ComponentStudent {
       }
     }
     return null;
-  }
-
-  hasCorrectChoices(): boolean {
-    for (const bucket of this.componentContent.feedback) {
-      for (const choice of bucket.choices) {
-        if (choice.isCorrect) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   clearFeedback(): void {
