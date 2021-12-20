@@ -23,7 +23,12 @@ export default angular
       component: NodeAdvancedConstraintAuthoringComponent
     }) as angular.IDirectiveFactory
   )
-  .component('nodeAdvancedPathAuthoringComponent', NodeAdvancedPathAuthoringComponent)
+  .directive(
+    'nodeAdvancedPathAuthoringComponent',
+    downgradeComponent({
+      component: NodeAdvancedPathAuthoringComponent
+    }) as angular.IDirectiveFactory
+  )
   .directive(
     'nodeAdvancedGeneralAuthoringComponent',
     downgradeComponent({
