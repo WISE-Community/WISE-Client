@@ -9260,6 +9260,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
           <context context-type="linenumber">37</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
         <target state="needs-translation">Workgroup ID</target>
       </trans-unit>
       <trans-unit id="7123653594948067002" datatype="html">
@@ -9296,6 +9300,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
           <context context-type="linenumber">49</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
         <target state="needs-translation">Random</target>
       </trans-unit>
       <trans-unit id="1825829511397926879" datatype="html">
@@ -9303,6 +9311,14 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
           <context context-type="linenumber">53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <target state="needs-translation">Tag</target>
       </trans-unit>
@@ -9699,6 +9715,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">125</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.ts</context>
           <context context-type="linenumber">311</context>
         </context-group>
@@ -9867,6 +9887,296 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">2</context>
         </context-group>
         <target state="needs-translation">Edit Step JSON</target>
+      </trans-unit>
+      <trans-unit id="f70f8b1d5244e87cb949377f5ea3722f7a52d553" datatype="html">
+        <source>Paths</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <target state="needs-translation">Paths</target>
+      </trans-unit>
+      <trans-unit id="5767ba76365ed9ed651b7abe4fd1ad8c4eda11ee" datatype="html">
+        <source>Add a path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <target state="needs-translation">Add a path</target>
+      </trans-unit>
+      <trans-unit id="2a856ced9ba8b59e19a90427c927a9c1799ae814" datatype="html">
+        <source> There are no paths out of this step
+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+        <target state="needs-translation"> There are no paths out of this step
+</target>
+      </trans-unit>
+      <trans-unit id="ee93d749730f5ae1d9d0f6cb5a141f0b5a2224e8" datatype="html">
+        <source>Path <x id="INTERPOLATION" equiv-text="{{ transitionIndex + 1 }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="needs-translation">Path <x id="INTERPOLATION" equiv-text="{{ transitionIndex + 1 }}"/></target>
+      </trans-unit>
+      <trans-unit id="e1120d319b1db2b145c23ab7622028206c10003e" datatype="html">
+        <source>Delete path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <target state="needs-translation">Delete path</target>
+      </trans-unit>
+      <trans-unit id="fa732bcde4ea86edc40eddcc5c057ae878d8ac59" datatype="html">
+        <source>Which step this path leads to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <target state="needs-translation">Which step this path leads to</target>
+      </trans-unit>
+      <trans-unit id="74f563e1cafbbbaeb15e20840c26a194a42f38ba" datatype="html">
+        <source>Requirements</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <target state="needs-translation">Requirements</target>
+      </trans-unit>
+      <trans-unit id="f0e66684c9c8050b4db7ce7212d2d45b06d751cd" datatype="html">
+        <source>Add a requirement for this path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <target state="needs-translation">Add a requirement for this path</target>
+      </trans-unit>
+      <trans-unit id="6fbf852b33ee8b0634f7af1592e80de9e4226c9e" datatype="html">
+        <source> There are no requirements for this transition </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">56,57</context>
+        </context-group>
+        <target state="needs-translation"> There are no requirements for this transition </target>
+      </trans-unit>
+      <trans-unit id="da5dce2488f1d19a15da35e59cc6d18dd39eff55" datatype="html">
+        <source>The student needs to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+        <target state="needs-translation">The student needs to</target>
+      </trans-unit>
+      <trans-unit id="2f07413706ed8845d98a15692ed31f76b050a94d" datatype="html">
+        <source>Delete this requirement</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <target state="needs-translation">Delete this requirement</target>
+      </trans-unit>
+      <trans-unit id="ee9fceb5c80ca69aa7f7c26262837fbcfea8ffbf" datatype="html">
+        <source>The student needs to choose this choice</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+        <target state="needs-translation">The student needs to choose this choice</target>
+      </trans-unit>
+      <trans-unit id="987bd44fb717e3299640f9be1042f5f12a55b140" datatype="html">
+        <source>The student needs to choose these choices</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">141</context>
+        </context-group>
+        <target state="needs-translation">The student needs to choose these choices</target>
+      </trans-unit>
+      <trans-unit id="337ca2e5eeea28eaca91e8511eb5eaafdb385ce6" datatype="html">
+        <source>Tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+        <target state="needs-translation">Tag</target>
+      </trans-unit>
+      <trans-unit id="633096eab818151cb300ca4201e022414ba00d70" datatype="html">
+        <source>How to choose among available paths</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">165</context>
+        </context-group>
+        <target state="needs-translation">How to choose among available paths</target>
+      </trans-unit>
+      <trans-unit id="00fd86bb6dc4681e493de8f2ca8ffeab4c851be1" datatype="html">
+        <source>When to choose path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">179</context>
+        </context-group>
+        <target state="needs-translation">When to choose path</target>
+      </trans-unit>
+      <trans-unit id="247eed3fc2331c25d31014622202310bbddba64d" datatype="html">
+        <source>Can change path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">193</context>
+        </context-group>
+        <target state="needs-translation">Can change path</target>
+      </trans-unit>
+      <trans-unit id="076a88d122244d6db473a42168737b4a534d140d" datatype="html">
+        <source>Max paths visitable</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
+          <context context-type="linenumber">208</context>
+        </context-group>
+        <target state="needs-translation">Max paths visitable</target>
+      </trans-unit>
+      <trans-unit id="4465085913683915434" datatype="html">
+        <source>True</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <target state="needs-translation">True</target>
+      </trans-unit>
+      <trans-unit id="3800326155195149498" datatype="html">
+        <source>False</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <target state="needs-translation">False</target>
+      </trans-unit>
+      <trans-unit id="4746248193865274387" datatype="html">
+        <source>First Available</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="needs-translation">First Available</target>
+      </trans-unit>
+      <trans-unit id="5749828523955698758" datatype="html">
+        <source>Last Available</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <target state="needs-translation">Last Available</target>
+      </trans-unit>
+      <trans-unit id="2240347155507306942" datatype="html">
+        <source>Get a specific score on a component</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <target state="needs-translation">Get a specific score on a component</target>
+      </trans-unit>
+      <trans-unit id="282405884193383477" datatype="html">
+        <source>Node ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <target state="needs-translation">Node ID</target>
+      </trans-unit>
+      <trans-unit id="6666903681821403514" datatype="html">
+        <source>Component ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <target state="needs-translation">Component ID</target>
+      </trans-unit>
+      <trans-unit id="5224889179213510862" datatype="html">
+        <source>Scores(s)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <target state="needs-translation">Scores(s)</target>
+      </trans-unit>
+      <trans-unit id="5667984727098835392" datatype="html">
+        <source>Score ID (Optional)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target state="needs-translation">Score ID (Optional)</target>
+      </trans-unit>
+      <trans-unit id="4259244002485463451" datatype="html">
+        <source>Choose a specific choice on a component</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <target state="needs-translation">Choose a specific choice on a component</target>
+      </trans-unit>
+      <trans-unit id="4749094791509859108" datatype="html">
+        <source>Have Tag Assigned To Workgroup</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <target state="needs-translation">Have Tag Assigned To Workgroup</target>
+      </trans-unit>
+      <trans-unit id="2816870790889466850" datatype="html">
+        <source>Enter Node</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <target state="needs-translation">Enter Node</target>
+      </trans-unit>
+      <trans-unit id="7469455958890383589" datatype="html">
+        <source>Exit Node</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <target state="needs-translation">Exit Node</target>
+      </trans-unit>
+      <trans-unit id="2016805497661021642" datatype="html">
+        <source>Score Changed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <target state="needs-translation">Score Changed</target>
+      </trans-unit>
+      <trans-unit id="6660309701458926514" datatype="html">
+        <source>Student Data Changed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <target state="needs-translation">Student Data Changed</target>
+      </trans-unit>
+      <trans-unit id="931706124544241162" datatype="html">
+        <source>Are you sure you want to delete this requirement?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to delete this requirement?</target>
+      </trans-unit>
+      <trans-unit id="9161423248419359552" datatype="html">
+        <source>Are you sure you want to delete this path to &quot;<x id="PH" equiv-text="stepTitle"/>&quot;?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
+          <context context-type="linenumber">204</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to delete this path to "<x id="PH" equiv-text="stepTitle"/>"?</target>
       </trans-unit>
       <trans-unit id="e5f24fc7a2bf50bd61d109dd9cad3fbff6ec7add" datatype="html">
         <source>Required</source>
