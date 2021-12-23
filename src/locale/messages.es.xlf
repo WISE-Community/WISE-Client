@@ -4748,7 +4748,7 @@
         <source>An error occurred: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/http-error.interceptor.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <target state="translated">Ocurrió un error: </target>
       </trans-unit>
@@ -4756,7 +4756,7 @@
         <source>Backend returned code <x id="status" equiv-text="err.status"/>, body was: <x id="error" equiv-text="err.error"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/http-error.interceptor.ts</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <target state="translated">El código de error <x id="status" equiv-text="err.status"/>, fue: <x id="error" equiv-text="err.error"/></target>
       </trans-unit>
@@ -4764,7 +4764,7 @@
         <source>An error occurred. Please refresh this page and try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/http-error.interceptor.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <target state="translated">Ocurrió un error. Por favor refrescar la página e intentar nuevamente.</target>
       </trans-unit>
