@@ -42,7 +42,6 @@ export class StepToolsComponent implements OnInit {
   }
 
   subscribeToChanges(): void {
-    this.subscriptions = new Subscription();
     this.subscriptions.add(
       this.StudentDataService.currentNodeChanged$.subscribe(() => {
         this.updateModel();
