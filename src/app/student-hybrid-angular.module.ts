@@ -35,11 +35,13 @@ import { SummaryDisplay } from '../assets/wise5/directives/summaryDisplay/summar
 import { HighchartsChartModule } from 'highcharts-angular';
 import { GraphStudent } from '../assets/wise5/components/graph/graph-student/graph-student.component';
 import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
+import { ComponentComponent } from '../assets/wise5/components/component/component.component';
 
 @NgModule({
   declarations: [
     AnimationStudent,
     AudioOscillatorStudent,
+    ComponentComponent,
     ConceptMapStudent,
     DiscussionStudent,
     DrawStudent,
