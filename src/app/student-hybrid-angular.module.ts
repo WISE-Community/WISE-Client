@@ -35,6 +35,8 @@ import { SummaryDisplay } from '../assets/wise5/directives/summaryDisplay/summar
 import { HighchartsChartModule } from 'highcharts-angular';
 import { GraphStudent } from '../assets/wise5/components/graph/graph-student/graph-student.component';
 import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
+import { StudentAssetsComponent } from '../assets/wise5/vle/studentAsset/student-assets/student-assets.component';
+import { DragAndDropDirective } from '../assets/wise5/common/drag-and-drop/drag-and-drop.directive';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGu
     AudioOscillatorStudent,
     ConceptMapStudent,
     DiscussionStudent,
+    DragAndDropDirective,
     DrawStudent,
     EmbeddedStudent,
     GraphStudent,
@@ -55,6 +58,7 @@ import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGu
     SafeUrl,
     TableStudent,
     NavItemComponent,
+    StudentAssetsComponent,
     SummaryDisplay,
     SummaryStudent
   ],
