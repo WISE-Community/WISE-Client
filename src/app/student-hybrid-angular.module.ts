@@ -36,6 +36,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { GraphStudent } from '../assets/wise5/components/graph/graph-student/graph-student.component';
 import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
 import { ComponentComponent } from '../assets/wise5/components/component/component.component';
+import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ComponentComponent } from '../assets/wise5/components/component/compone
     OpenResponseStudent,
     OutsideUrlStudent,
     SafeUrl,
+    StepToolsComponent,
     TableStudent,
     NavItemComponent,
     SummaryDisplay,
