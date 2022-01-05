@@ -15,6 +15,6 @@ export class NodeStatusIcon {
   constructor(private StudentDataService: StudentDataService) {}
 
   ngOnChanges() {
-    this.nodeStatus = this.StudentDataService.nodeStatuses[this.nodeId];
+    this.nodeStatus = this.StudentDataService.getNodeStatuses()[this.nodeId];
   }
 }
