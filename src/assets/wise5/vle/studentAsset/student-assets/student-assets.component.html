@@ -6,7 +6,10 @@
       title="Use this file"
       i18n-title />
 </div>
-<div class="drop-box" (fileDropped)="uploadStudentAssets($event)" dragAndDrop>
+<div *ngIf="mode !== 'preview'"
+    class="drop-box"
+    (fileDropped)="uploadStudentAssets($event)"
+    dragAndDrop>
   <input type="file"
       (change)="uploadStudentAssets($event.target.files)"
       #fileDropRef
