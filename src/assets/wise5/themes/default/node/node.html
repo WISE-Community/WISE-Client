@@ -23,10 +23,8 @@
             </div>
             <component node-id='{{::nodeController.node.id}}'
                        component-id='{{::component.id}}'
-                       component-state='{{::nodeController.getComponentStateByComponentId(component.id)}}'
-                       workgroup-id='::nodeController.workgroupId'
-                       teacher-workgroup-id='::nodeController.teacherWorkgroupId'
-                       mode='student'></component>
+                       [component-state]='nodeController.getComponentStateByComponentId(component.id)'
+                       [workgroup-id]='nodeController.workgroupId'></component>
         </div>
         <div class="node-content__actions" layout="row" layout-align="start center" flex="100">
             <md-button class="md-raised md-primary"
