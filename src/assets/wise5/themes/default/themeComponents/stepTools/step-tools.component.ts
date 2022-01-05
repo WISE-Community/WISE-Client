@@ -23,9 +23,9 @@ export class StepToolsComponent implements OnInit {
   toNodeId: string;
 
   constructor(
-    private NodeService: NodeService,
-    private ProjectService: ProjectService,
-    private StudentDataService: StudentDataService
+    private nodeService: NodeService,
+    private projectService: ProjectService,
+    private studentDataService: StudentDataService
   ) {}
 
   ngOnInit(): void {
@@ -35,20 +35,20 @@ export class StepToolsComponent implements OnInit {
       this.icons = { prev: 'chevron_right', next: 'chevron_left' };
     }
     this.calculateNodeIds();
-    this.nodeStatuses = this.StudentDataService.getNodeStatuses();
-    this.idToOrder = this.ProjectService.idToOrder;
+    this.nodeStatuses = this.studentDataService.getNodeStatuses();
+    this.idToOrder = this.projectService.idToOrder;
     this.updateModel();
     this.subscribeToChanges();
   }
 
   subscribeToChanges(): void {
     this.subscriptions.add(
-      this.StudentDataService.currentNodeChanged$.subscribe(() => {
+      this.studentDataService.currentNodeChanged$.subscribe(() => {
         this.updateModel();
       })
     );
     this.subscriptions.add(
-      this.StudentDataService.nodeStatusesChanged$.subscribe(() => {
+      this.studentDataService.nodeStatusesChanged$.subscribe(() => {
         this.updateModel();
       })
     );
@@ -59,27 +59,24 @@ export class StepToolsComponent implements OnInit {
   }
 
   calculateNodeIds(): void {
-    this.nodeIds = Object.keys(this.ProjectService.idToOrder);
-    this.nodeIds = this.nodeIds.filter((nodeId) => {
-      return this.isGroupNode(nodeId) || this.ProjectService.nodeHasWork(nodeId);
-    });
+    this.nodeIds = Object.keys(this.projectService.idToOrder);
     this.nodeIds.shift(); // remove the 'group0' master root node from consideration
   }
 
   toNodeIdChanged(): void {
-    if (!this.ProjectService.isGroupNode(this.toNodeId)) {
-      this.StudentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.toNodeId);
+    if (!this.projectService.isGroupNode(this.toNodeId)) {
+      this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.toNodeId);
     }
   }
 
   updateModel(): void {
-    const nodeId = this.StudentDataService.getCurrentNodeId();
-    if (!this.ProjectService.isGroupNode(nodeId)) {
+    const nodeId = this.studentDataService.getCurrentNodeId();
+    if (!this.projectService.isGroupNode(nodeId)) {
       this.nodeId = nodeId;
       this.nodeStatus = this.nodeStatuses[this.nodeId];
-      this.prevId = this.NodeService.getPrevNodeId();
+      this.prevId = this.nodeService.getPrevNodeId();
       this.nextId = null;
-      this.NodeService.getNextNodeId().then((nodeId: string) => {
+      this.nodeService.getNextNodeId().then((nodeId: string) => {
         this.nextId = nodeId;
       });
       this.toNodeId = this.nodeId;
@@ -87,34 +84,34 @@ export class StepToolsComponent implements OnInit {
   }
 
   getTemplateUrl(): string {
-    return this.ProjectService.getThemePath() + '/themeComponents/stepTools/stepTools.html';
+    return this.projectService.getThemePath() + '/themeComponents/stepTools/stepTools.html';
   }
 
-  getNodeTitleByNodeId(nodeId: string): boolean {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitleByNodeId(nodeId: string): string {
+    return this.projectService.getNodeTitleByNodeId(nodeId);
   }
 
-  getNodePositionById(nodeId: string): boolean {
-    return this.ProjectService.getNodePositionById(nodeId);
+  getNodePositionById(nodeId: string): string {
+    return this.projectService.getNodePositionById(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): boolean {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitleByNodeId(nodeId: string): string {
+    return this.projectService.getNodePositionAndTitleByNodeId(nodeId);
   }
 
   isGroupNode(nodeId: string): boolean {
-    return this.ProjectService.isGroupNode(nodeId);
+    return this.projectService.isGroupNode(nodeId);
   }
 
   goToPrevNode(): void {
-    this.NodeService.goToPrevNode();
+    this.nodeService.goToPrevNode();
   }
 
   goToNextNode(): void {
-    this.NodeService.goToNextNode();
+    this.nodeService.goToNextNode();
   }
 
   closeNode(): void {
-    this.NodeService.closeNode();
+    this.nodeService.closeNode();
   }
 }
