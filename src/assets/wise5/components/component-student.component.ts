@@ -27,6 +27,9 @@ export abstract class ComponentStudent {
   componentState: any;
 
   @Input()
+  isDisabled: boolean = false;
+
+  @Input()
   mode: string;
 
   @Input()
@@ -44,7 +47,6 @@ export abstract class ComponentStudent {
   isSubmitDirty: boolean = false;
   isSubmit: boolean = false;
   isDirty: boolean = false;
-  isDisabled: boolean = false;
   isStudentAttachmentEnabled: boolean = false;
   submitCounter: number = 0;
   latestAnnotations: any;

@@ -23,6 +23,7 @@ import { DrawStudent } from '../assets/wise5/components/draw/draw-student/draw-s
 import { ConceptMapStudent } from '../assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component';
 import { HtmlDialog } from '../assets/wise5/directives/html-dialog/html-dialog';
 import { MatchStudentModule } from '../assets/wise5/components/match/match-student/match-student.module';
+import { ShowWorkStudentModule } from '../assets/wise5/components/showWork/show-work-student/show-work-student.module';
 import { StudentComponentModule } from './student/student.component.module';
 import { AnimationStudent } from '../assets/wise5/components/animation/animation-student/animation-student.component';
 import { EmbeddedStudent } from '../assets/wise5/components/embedded/embedded-student/embedded-student.component';
@@ -67,6 +68,7 @@ import { PeerChatModule } from '../assets/wise5/components/peerChat/peer-chat.mo
     HighchartsChartModule,
     MatchStudentModule,
     PeerChatModule,
+    ShowWorkStudentModule,
     StudentComponentModule
   ],
   providers: [

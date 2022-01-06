@@ -178,6 +178,13 @@ const Component = {
               [workgroup-id]="workgroupId"
               [mode]="mode">
           </peer-chat-student>
+          <show-work-student ng-switch-when="ShowWork"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [component-state]="componentState"
+              [workgroup-id]="workgroupId"
+              [mode]="mode">
+          </show-work-student>
           <summary-student ng-switch-when="Summary"
               [node-id]="nodeId"
               [component-content]="componentContent"
