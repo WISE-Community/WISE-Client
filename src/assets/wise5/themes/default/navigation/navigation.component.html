@@ -1,0 +1,19 @@
+<div class="l-constrained l-constrained-md md-padding nav" fxLayout="column">
+  <div class="md-toolbar-tools auto-width">
+    <div class="md-subhead nav-head">
+      <span i18n>Project Plan</span>
+    </div>
+    <span flex></span>
+  </div>
+  <div class="nav-contents nav-contents--root">
+    <div fxLayout="row wrap" fxLayoutAlign="center start">
+      <nav-item *ngFor="let id of rootNode.ids"
+          class="nav-item nav-item--root"
+          [ngClass]="{'expanded': navItemIsExpanded[id]}"
+          [showPosition]="true"
+          [nodeId]="id"
+          type="card"
+          fxFlex="100"></nav-item>
+    </div>
+  </div>
+</div>
