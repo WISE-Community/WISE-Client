@@ -37,6 +37,7 @@ import { GraphStudent } from '../assets/wise5/components/graph/graph-student/gra
 import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
 import { ComponentComponent } from '../assets/wise5/components/component/component.component';
 import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
+import { StudentAssetsModule } from '../assets/wise5/vle/studentAsset/student-assets/student-assets-module';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponen
     DialogGuidanceStudentModule,
     HighchartsChartModule,
     MatchStudentModule,
+    StudentAssetsModule,
     StudentComponentModule
   ],
   providers: [
