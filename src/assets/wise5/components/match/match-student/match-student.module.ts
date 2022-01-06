@@ -7,11 +7,8 @@ import { StudentComponentModule } from '../../../../../app/student/student.compo
 import { MatchCommonModule } from '../match-common.module';
 
 @NgModule({
-  declarations: [
-    AddChoiceButton,
-    AddMatchChoiceDialog,
-    MatchStudent
-  ],
-  imports: [AngularJSModule, MatchCommonModule, StudentComponentModule]
+  declarations: [AddChoiceButton, AddMatchChoiceDialog, MatchStudent],
+  imports: [AngularJSModule, MatchCommonModule, StudentComponentModule],
+  exports: [MatchStudent]
 })
-export class MatchStudentModule {} 
+export class MatchStudentModule {}

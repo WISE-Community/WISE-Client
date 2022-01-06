@@ -37,11 +37,14 @@ import { GraphStudent } from '../assets/wise5/components/graph/graph-student/gra
 import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
 import { StudentAssetsComponent } from '../assets/wise5/vle/studentAsset/student-assets/student-assets.component';
 import { DragAndDropDirective } from '../assets/wise5/common/drag-and-drop/drag-and-drop.directive';
+import { ComponentComponent } from '../assets/wise5/components/component/component.component';
+import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
 
 @NgModule({
   declarations: [
     AnimationStudent,
     AudioOscillatorStudent,
+    ComponentComponent,
     ConceptMapStudent,
     DiscussionStudent,
     DragAndDropDirective,
@@ -56,6 +59,7 @@ import { DragAndDropDirective } from '../assets/wise5/common/drag-and-drop/drag-
     OpenResponseStudent,
     OutsideUrlStudent,
     SafeUrl,
+    StepToolsComponent,
     TableStudent,
     NavItemComponent,
     StudentAssetsComponent,
