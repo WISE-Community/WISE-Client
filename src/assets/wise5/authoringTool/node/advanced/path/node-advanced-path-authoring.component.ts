@@ -1,81 +1,70 @@
+import { Component, OnInit } from '@angular/core';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
-class NodeAdvancedPathAuthoringController {
-  canChangePathOptions = [null, true, false];
+@Component({
+  selector: 'node-advanced-path-authoring',
+  templateUrl: 'node-advanced-path-authoring.component.html',
+  styleUrls: ['node-advanced-path-authoring.component.scss']
+})
+export class NodeAdvancedPathAuthoringComponent implements OnInit {
+  canChangePathOptions = [
+    { value: true, text: $localize`True` },
+    { value: false, text: $localize`False` }
+  ];
+  howToChooseAmongAvailablePathsOptions = [
+    { value: 'random', text: $localize`Random` },
+    { value: 'workgroupId', text: $localize`Workgroup ID` },
+    { value: 'firstAvailable', text: $localize`First Available` },
+    { value: 'lastAvailable', text: $localize`Last Available` },
+    { value: 'tag', text: $localize`Tag` }
+  ];
   items: any[];
   node: any;
   nodeId: string;
-  whenToChoosePathOptions = [null, 'enterNode', 'exitNode', 'scoreChanged', 'studentDataChanged'];
-  transitionCriterias: any;
-  $translate: any;
-
-  static $inject = ['$filter', 'ProjectService', 'TeacherDataService'];
+  nodeIds: string[];
+  transitionCriterias = [
+    {
+      value: 'score',
+      text: $localize`Get a specific score on a component`,
+      params: [
+        { value: 'nodeId', text: $localize`Node ID` },
+        { value: 'componentId', text: $localize`Component ID` },
+        { value: 'scores', text: $localize`Scores(s)` },
+        { value: 'scoreId', text: $localize`Score ID (Optional)` }
+      ]
+    },
+    {
+      value: 'choiceChosen',
+      text: $localize`Choose a specific choice on a component`,
+      params: [
+        { value: 'nodeId', text: $localize`Node ID` },
+        { value: 'componentId', text: $localize`Component ID` },
+        { value: 'choiceIds', text: $localize`Choices` }
+      ]
+    },
+    {
+      value: 'tag',
+      text: $localize`Have Tag Assigned To Workgroup`,
+      params: [{ value: 'tag', text: $localize`Tag` }]
+    }
+  ];
+  whenToChoosePathOptions = [
+    { value: 'enterNode', text: $localize`Enter Node` },
+    { value: 'exitNode', text: $localize`Exit Node` },
+    { value: 'scoreChanged', text: $localize`Score Changed` },
+    { value: 'studentDataChanged', text: $localize`Student Data Changed` }
+  ];
 
   constructor(
-    private $filter: any,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService
-  ) {
-    this.$translate = this.$filter('translate');
-    this.transitionCriterias = [
-      {
-        value: 'score',
-        text: this.$translate('getASpecificScoreOnAComponent'),
-        params: [
-          {
-            value: 'nodeId',
-            text: this.$translate('nodeID')
-          },
-          {
-            value: 'componentId',
-            text: this.$translate('componentID')
-          },
-          {
-            value: 'scores',
-            text: this.$translate('scoresParens')
-          },
-          {
-            value: 'scoreId',
-            text: this.$translate('scoreID')
-          }
-        ]
-      },
-      {
-        value: 'choiceChosen',
-        text: this.$translate('chooseASpecificChoiceOnAComponent'),
-        params: [
-          {
-            value: 'nodeId',
-            text: this.$translate('nodeID')
-          },
-          {
-            value: 'componentId',
-            text: this.$translate('componentID')
-          },
-          {
-            value: 'choiceIds',
-            text: this.$translate('choices')
-          }
-        ]
-      },
-      {
-        value: 'tag',
-        text: this.$translate('tagAssignedToWorkgroup'),
-        params: [
-          {
-            value: 'tag',
-            text: this.$translate('tag')
-          }
-        ]
-      }
-    ];
-  }
+  ) {}
 
-  $onInit() {
-    this.items = this.ProjectService.idToOrder;
+  ngOnInit() {
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
     this.node = this.ProjectService.getNodeById(this.nodeId);
+    this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds(true);
   }
 
   addNewTransition() {
@@ -144,7 +133,7 @@ class NodeAdvancedPathAuthoringController {
   }
 
   deleteTransitionCriteria(transition, transitionCriteriaIndex) {
-    if (confirm(this.$translate('areYouSureYouWantToDeleteThisRequirement'))) {
+    if (confirm($localize`Are you sure you want to delete this requirement?`)) {
       const transitionCriterias = transition.criteria;
       if (transitionCriterias != null) {
         transitionCriterias.splice(transitionCriteriaIndex, 1);
@@ -212,9 +201,7 @@ class NodeAdvancedPathAuthoringController {
 
   deleteTransition(transition) {
     const stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(transition.to);
-    const answer = confirm(
-      this.$translate('areYouSureYouWantToDeleteThisPath', { stepTitle: stepTitle })
-    );
+    const answer = confirm($localize`Are you sure you want to delete this path to "${stepTitle}"?`);
     if (answer) {
       this.ProjectService.deleteTransition(this.node, transition);
       this.saveProject();
@@ -254,6 +241,11 @@ class NodeAdvancedPathAuthoringController {
     return this.ProjectService.getComponentsByNodeId(nodeId);
   }
 
+  scoresChanged(value: any, params: any): void {
+    params.scores = value.split(',');
+    this.saveProject();
+  }
+
   scoreIdChanged(transitionCriteria: any): void {
     if (transitionCriteria.params.scoreId === '') {
       delete transitionCriteria.params.scoreId;
@@ -261,8 +253,3 @@ class NodeAdvancedPathAuthoringController {
     this.saveProject();
   }
 }
-
-export const NodeAdvancedPathAuthoringComponent = {
-  templateUrl: `/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html`,
-  controller: NodeAdvancedPathAuthoringController
-};
