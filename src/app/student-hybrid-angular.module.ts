@@ -35,10 +35,9 @@ import { SummaryDisplay } from '../assets/wise5/directives/summaryDisplay/summar
 import { HighchartsChartModule } from 'highcharts-angular';
 import { GraphStudent } from '../assets/wise5/components/graph/graph-student/graph-student.component';
 import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
-import { StudentAssetsComponent } from '../assets/wise5/vle/studentAsset/student-assets/student-assets.component';
-import { DragAndDropDirective } from '../assets/wise5/common/drag-and-drop/drag-and-drop.directive';
 import { ComponentComponent } from '../assets/wise5/components/component/component.component';
 import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
+import { StudentAssetsModule } from '../assets/wise5/vle/studentAsset/student-assets/student-assets-module';
 
 @NgModule({
   declarations: [
@@ -47,7 +46,6 @@ import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponen
     ComponentComponent,
     ConceptMapStudent,
     DiscussionStudent,
-    DragAndDropDirective,
     DrawStudent,
     EmbeddedStudent,
     GraphStudent,
@@ -62,7 +60,6 @@ import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponen
     StepToolsComponent,
     TableStudent,
     NavItemComponent,
-    StudentAssetsComponent,
     SummaryDisplay,
     SummaryStudent
   ],
@@ -71,6 +68,7 @@ import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponen
     DialogGuidanceStudentModule,
     HighchartsChartModule,
     MatchStudentModule,
+    StudentAssetsModule,
     StudentComponentModule
   ],
   providers: [
