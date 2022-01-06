@@ -10956,6 +10956,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
         <target state="needs-translation">Previous Step</target>
       </trans-unit>
       <trans-unit id="63801449925cc7b568e5ed1b756f2f17e1632d97" datatype="html">
@@ -10967,6 +10971,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <target state="needs-translation">Select a Step</target>
       </trans-unit>
@@ -10987,6 +10999,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <target state="needs-translation">Next Step</target>
       </trans-unit>
@@ -16619,6 +16635,34 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">13</context>
         </context-group>
         <target state="translated">已完成</target>
+      </trans-unit>
+      <trans-unit id="8b79fd295381edd3dcd2a32dffd96a2434fa6c80" datatype="html">
+        <source>Previous Item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Previous Item</target>
+      </trans-unit>
+      <trans-unit id="dffef841f039c3070d3b2666b8686f7bfbe4c583" datatype="html">
+        <source>Next Item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <target state="needs-translation">Next Item</target>
+      </trans-unit>
+      <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">
+        <source>Project Plan</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+        <target state="needs-translation">Project Plan</target>
       </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">
         <source>Expand or collapse lesson content</source>
