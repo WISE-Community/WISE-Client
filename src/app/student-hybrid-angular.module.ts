@@ -37,11 +37,14 @@ import { GraphStudent } from '../assets/wise5/components/graph/graph-student/gra
 import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
 import { PeerChatStudentComponent } from '../assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component';
 import { PeerChatModule } from '../assets/wise5/components/peerChat/peer-chat.module';
+import { ComponentComponent } from '../assets/wise5/components/component/component.component';
+import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
 
 @NgModule({
   declarations: [
     AnimationStudent,
     AudioOscillatorStudent,
+    ComponentComponent,
     ConceptMapStudent,
     DiscussionStudent,
     DrawStudent,
@@ -56,6 +59,7 @@ import { PeerChatModule } from '../assets/wise5/components/peerChat/peer-chat.mo
     OutsideUrlStudent,
     PeerChatStudentComponent,
     SafeUrl,
+    StepToolsComponent,
     TableStudent,
     NavItemComponent,
     SummaryDisplay,
