@@ -38,6 +38,7 @@ import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGu
 import { ComponentComponent } from '../assets/wise5/components/component/component.component';
 import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
 import { NavigationComponent } from '../assets/wise5/themes/default/navigation/navigation.component';
+import { StudentAssetsModule } from '../assets/wise5/vle/studentAsset/student-assets/student-assets-module';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { NavigationComponent } from '../assets/wise5/themes/default/navigation/n
     DialogGuidanceStudentModule,
     HighchartsChartModule,
     MatchStudentModule,
+    StudentAssetsModule,
     StudentComponentModule
   ],
   providers: [
