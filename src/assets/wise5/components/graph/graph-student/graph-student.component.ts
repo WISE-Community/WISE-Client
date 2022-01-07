@@ -15,6 +15,7 @@ import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import * as covariance from 'compute-covariance';
 import canvg from 'canvg';
+import { MatDialog } from '@angular/material/dialog';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -81,6 +82,7 @@ export class GraphStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     private GraphService: GraphService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
@@ -94,6 +96,7 @@ export class GraphStudent extends ComponentStudent {
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,

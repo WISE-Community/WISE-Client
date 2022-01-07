@@ -11,6 +11,7 @@ import { ComponentService } from '../../componentService';
 import { LabelService } from '../labelService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'label-student',
@@ -47,6 +48,7 @@ export class LabelStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     private LabelService: LabelService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
@@ -59,6 +61,7 @@ export class LabelStudent extends ComponentStudent {
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,

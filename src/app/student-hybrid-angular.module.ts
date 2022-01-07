@@ -38,6 +38,7 @@ import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGu
 import { ComponentComponent } from '../assets/wise5/components/component/component.component';
 import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
 import { StudentAssetsModule } from '../assets/wise5/vle/studentAsset/student-assets/student-assets-module';
+import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { StudentAssetsModule } from '../assets/wise5/vle/studentAsset/student-as
     DiscussionStudent,
     DrawStudent,
     EmbeddedStudent,
+    GenerateImageDialogComponent,
     GraphStudent,
     HtmlDialog,
     HtmlStudent,

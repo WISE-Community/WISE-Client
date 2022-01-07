@@ -1,6 +1,7 @@
 'use strict';
 
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -33,6 +34,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     private MultipleChoiceService: MultipleChoiceService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
@@ -46,6 +48,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,

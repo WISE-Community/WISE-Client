@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
@@ -39,7 +40,7 @@ let saveNotificationToServerSpy;
 describe('DiscussionStudent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserModule, HttpClientTestingModule, UpgradeModule],
+      imports: [BrowserModule, HttpClientTestingModule, MatDialogModule, UpgradeModule],
       declarations: [DiscussionStudent],
       providers: [
         AnnotationService,

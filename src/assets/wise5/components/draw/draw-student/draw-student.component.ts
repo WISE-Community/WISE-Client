@@ -12,6 +12,7 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { DrawService } from '../drawService';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'draw-student',
@@ -33,6 +34,7 @@ export class DrawStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     private DrawService: DrawService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
@@ -46,6 +48,7 @@ export class DrawStudent extends ComponentStudent {
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
