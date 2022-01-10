@@ -38,10 +38,12 @@ import { HtmlStudentModule } from '../assets/wise5/components/html/html-student/
 import { OutsideUrlStudentModule } from '../assets/wise5/components/outsideURL/outside-url-student/outside-url-student.module';
 import { SummaryStudentModule } from '../assets/wise5/components/summary/summary-student/summary-student.module';
 import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/summary-display.module';
+import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 
 @NgModule({
   declarations: [
     ComponentComponent,
+    GenerateImageDialogComponent,
     HtmlDialog,
     NavItemComponent,
     SafeUrl,

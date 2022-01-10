@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { WiseLinkService } from '../../../../../app/services/wiseLinkService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -26,11 +26,11 @@ export class HtmlStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService,
     private WiseLinkService: WiseLinkService
   ) {
@@ -38,11 +38,11 @@ export class HtmlStudent extends ComponentStudent {
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
