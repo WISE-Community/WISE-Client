@@ -1,6 +1,5 @@
 import * as html2canvas from 'html2canvas';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -52,7 +51,6 @@ export class TableStudent extends ComponentStudent {
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     private TableService: TableService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
@@ -64,7 +62,6 @@ export class TableStudent extends ComponentStudent {
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }

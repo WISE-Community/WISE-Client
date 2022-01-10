@@ -10,7 +10,6 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { LabelService } from '../labelService';
 import { StudentAssetService } from '../../../services/studentAssetService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -54,7 +53,6 @@ export class LabelStudent extends ComponentStudent {
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
@@ -66,7 +64,6 @@ export class LabelStudent extends ComponentStudent {
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }

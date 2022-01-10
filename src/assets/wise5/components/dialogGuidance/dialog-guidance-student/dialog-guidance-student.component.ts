@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ComponentStudent } from '../../component-student.component';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
@@ -46,7 +45,6 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
@@ -58,7 +56,6 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }

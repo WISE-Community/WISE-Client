@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -33,7 +32,6 @@ export class OutsideUrlStudent extends ComponentStudent {
     protected sanitizer: DomSanitizer,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
@@ -45,7 +43,6 @@ export class OutsideUrlStudent extends ComponentStudent {
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }

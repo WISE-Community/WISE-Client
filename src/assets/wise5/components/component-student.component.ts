@@ -1,7 +1,6 @@
 import { Directive, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
 import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
@@ -70,7 +69,6 @@ export abstract class ComponentStudent {
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {}
 
