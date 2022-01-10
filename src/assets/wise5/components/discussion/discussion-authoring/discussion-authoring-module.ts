@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { AngularJSModule } from '../../../../../app/common-hybrid-angular.module';
 import { StudentComponentModule } from '../../../../../app/student/student.component.module';
 import { DiscussionCommonModule } from '../discussion-common.module';
-import { DiscussionStudent } from './discussion-student.component';
+import { DiscussionAuthoring } from './discussion-authoring.component';
 
 @NgModule({
-  declarations: [DiscussionStudent],
+  declarations: [DiscussionAuthoring],
   imports: [AngularJSModule, DiscussionCommonModule, StudentComponentModule],
-  exports: [DiscussionStudent]
+  exports: [DiscussionAuthoring]
 })
-export class DiscussionStudentModule {}
+export class DiscussionAuthoringModule {}

@@ -4,7 +4,7 @@ import { AnimationGrading } from '../../assets/wise5/components/animation/animat
 import { AudioOscillatorGrading } from '../../assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component';
 import { ConceptMapGrading } from '../../assets/wise5/components/conceptMap/concept-map-grading/concept-map-grading.component';
 import { DialogGuidanceGradingComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-grading/dialog-guidance-grading.component';
-import { DiscussionGrading } from '../../assets/wise5/components/discussion/discussion-grading/discussion-grading.component';
+import { DiscussionGradingModule } from '../../assets/wise5/components/discussion/discussion-grading/discussion-grading.module';
 import { DrawGrading } from '../../assets/wise5/components/draw/draw-grading/draw-grading.component';
 import { EmbeddedGrading } from '../../assets/wise5/components/embedded/embedded-grading/embedded-grading.component';
 import { GraphGrading } from '../../assets/wise5/components/graph/graph-grading/graph-grading.component';
@@ -22,7 +22,6 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     ConceptMapGrading,
     DrawGrading,
     DialogGuidanceGradingComponent,
-    DiscussionGrading,
     EmbeddedGrading,
     GraphGrading,
     LabelGrading,
@@ -30,14 +29,14 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
     OpenResponseGrading,
     TableGrading
   ],
-  imports: [AngularJSModule, HighchartsChartModule, MatchGradingModule],
+  imports: [AngularJSModule, DiscussionGradingModule, HighchartsChartModule, MatchGradingModule],
   exports: [
     AnimationGrading,
     AudioOscillatorGrading,
     ConceptMapGrading,
     DrawGrading,
     DialogGuidanceGradingComponent,
-    DiscussionGrading,
+    DiscussionGradingModule,
     EmbeddedGrading,
     GraphGrading,
     LabelGrading,
