@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
@@ -49,6 +50,7 @@ describe('GraphStudent', () => {
         BrowserModule,
         HighchartsChartModule,
         HttpClientTestingModule,
+        MatDialogModule,
         NoopAnimationsModule,
         UpgradeModule
       ],

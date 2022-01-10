@@ -1,0 +1,26 @@
+.modal-overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+.importing-work-message {
+  padding: 20px;
+  z-index: 1000;
+}
+
+.yellow-background {
+  background-color: yellow;
+}
+
+.red-background {
+  background-color: #B00020;
+}
+
+.white {
+  color: white;
+}
