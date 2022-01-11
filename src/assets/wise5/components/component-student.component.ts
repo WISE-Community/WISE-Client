@@ -1,8 +1,8 @@
 import { Directive, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
-import { GenerateImageDialog } from '../directives/generate-image-dialog/generate-image-dialog';
+import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NodeService } from '../services/nodeService';
@@ -66,11 +66,11 @@ export abstract class ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {}
 
@@ -637,19 +637,14 @@ export abstract class ComponentStudent {
    * @return A promise that will return an image.
    */
   generateImageFromComponentState(componentState: any): any {
-    return this.upgrade.$injector
-      .get('$mdDialog')
-      .show({
-        templateUrl: 'assets/wise5/directives/generate-image-dialog/generate-image-dialog.html',
-        controller: GenerateImageDialog,
-        controllerAs: '$ctrl',
-        locals: {
-          componentState: componentState
-        }
-      })
-      .then((image: any) => {
-        return image;
+    const dialogRef = this.dialog.open(GenerateImageDialogComponent, {
+      data: componentState
+    });
+    return new Promise((resolve, reject) => {
+      dialogRef.afterClosed().subscribe((result) => {
+        resolve(result);
       });
+    });
   }
 
   isAddToNotebookEnabled() {

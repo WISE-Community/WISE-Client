@@ -11,7 +11,6 @@ import './animation/animationGradingComponentModule';
 import './audioOscillator/audioOscillatorGradingComponentModule';
 import './conceptMap/conceptMapGradingComponentModule';
 import './dialogGuidance/dialogGuidanceGradingComponentModule';
-import './discussion/discussionGradingComponentModule';
 import './draw/drawGradingComponentModule';
 import './embedded/embeddedGradingComponentModule';
 import './graph/graphGradingComponentModule';
@@ -28,7 +27,6 @@ export default angular
     'audioOscillatorGradingComponentModule',
     'conceptMapGradingComponentModule',
     'dialogGuidanceGradingComponentModule',
-    'discussionGradingComponentModule',
     'drawGradingComponentModule',
     'embeddedGradingComponentModule',
     'graphGradingComponentModule',

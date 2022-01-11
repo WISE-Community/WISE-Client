@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -25,23 +25,23 @@ export class ShowWorkStudentComponent extends ComponentStudent {
     protected annotationService: AnnotationService,
     protected componentService: ComponentService,
     protected configService: ConfigService,
+    protected dialog: MatDialog,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     protected projectService: ProjectService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected utilService: UtilService
   ) {
     super(
       annotationService,
       componentService,
       configService,
+      dialog,
       nodeService,
       notebookService,
       studentAssetService,
       studentDataService,
-      upgrade,
       utilService
     );
   }

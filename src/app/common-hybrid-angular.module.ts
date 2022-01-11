@@ -61,7 +61,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
-import { ClassResponse } from '../assets/wise5/components/discussion/class-response/class-response.component';
 import { ComponentService } from '../assets/wise5/components/componentService';
 import { WiseLinkService } from './services/wiseLinkService';
 import { DataExportService } from '../assets/wise5/services/dataExportService';
@@ -88,7 +87,6 @@ export class EmptyComponent {}
 
 @NgModule({
   declarations: [
-    ClassResponse,
     ConceptMapGrading,
     DialogResponseComponent,
     DialogResponsesComponent,
@@ -177,7 +175,6 @@ export class EmptyComponent {}
     WiseLinkService
   ],
   exports: [
-    ClassResponse,
     CommonModule,
     ConceptMapGrading,
     DialogResponseComponent,
