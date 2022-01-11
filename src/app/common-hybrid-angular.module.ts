@@ -81,6 +81,8 @@ import { GraphGrading } from '../assets/wise5/components/graph/graph-grading/gra
 import { HighchartsChartModule } from 'highcharts-angular';
 import { LabelGrading } from '../assets/wise5/components/label/label-grading/label-grading.component';
 import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
+import { ComponentHeader } from '../assets/wise5/directives/component-header/component-header.component';
+import { PossibleScoreComponent } from './possible-score/possible-score.component';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -88,6 +90,7 @@ export class EmptyComponent {}
 @NgModule({
   declarations: [
     ClassResponse,
+    ComponentHeader,
     ConceptMapGrading,
     DialogResponseComponent,
     DialogResponsesComponent,
@@ -100,6 +103,7 @@ export class EmptyComponent {}
     NodeIconComponent,
     NodeStatusIcon,
     OpenResponseGrading,
+    PossibleScoreComponent,
     TableGrading
   ],
   imports: [
@@ -177,6 +181,7 @@ export class EmptyComponent {}
   exports: [
     ClassResponse,
     CommonModule,
+    ComponentHeader,
     ConceptMapGrading,
     DialogResponseComponent,
     DialogResponsesComponent,
@@ -213,6 +218,7 @@ export class EmptyComponent {}
     NodeIconComponent,
     NodeStatusIcon,
     OpenResponseGrading,
+    PossibleScoreComponent,
     ReactiveFormsModule,
     TableGrading
   ]

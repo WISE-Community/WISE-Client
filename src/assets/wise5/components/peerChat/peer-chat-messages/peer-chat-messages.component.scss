@@ -1,4 +1,7 @@
 peer-chat-message {
   display: block;
-  margin-bottom: 8px;
+
+  &:not(:last-of-type) { 
+    margin-bottom: 8px;
+  }
 }

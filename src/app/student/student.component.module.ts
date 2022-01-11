@@ -10,17 +10,13 @@ import { PossibleScoreComponent } from '../possible-score/possible-score.compone
   declarations: [
     AddToNotebookButton,
     ComponentAnnotationsComponent,
-    ComponentHeader,
-    ComponentSaveSubmitButtons,
-    PossibleScoreComponent
+    ComponentSaveSubmitButtons
   ],
   imports: [AngularJSModule],
   exports: [
     AddToNotebookButton,
     ComponentAnnotationsComponent,
-    ComponentHeader,
-    ComponentSaveSubmitButtons,
-    PossibleScoreComponent
+    ComponentSaveSubmitButtons
   ]
 })
 export class StudentComponentModule {}
