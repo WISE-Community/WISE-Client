@@ -6,11 +6,7 @@
         </div>
     </md-toolbar>
     <md-content class="md-padding">
-        <studentassets template-url="studentAssetTemplateUrl"
-                component-controller="componentController"
-                node-id="nodeId"
-                component-id="componentId">
-        </studentassets>
+        <student-assets [node-id]="nodeId" [component-id]="componentId"></student-assets>
     </md-content>
     <md-dialog-actions layout="row">
         <md-button ng-click="closeDialog()" class="md-primary">Close</md-button>

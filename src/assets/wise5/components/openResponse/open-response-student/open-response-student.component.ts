@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { timeout } from 'rxjs/operators';
 import { HtmlDialog } from '../../../directives/html-dialog/html-dialog';
 import { AnnotationService } from '../../../services/annotationService';
@@ -39,7 +38,7 @@ export class OpenResponseStudent extends ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     private CRaterService: CRaterService,
-    private dialog: MatDialog,
+    protected dialog: MatDialog,
     private OpenResponseService: OpenResponseService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
@@ -47,18 +46,17 @@ export class OpenResponseStudent extends ComponentStudent {
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }

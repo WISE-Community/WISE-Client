@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ComponentStudent } from '../../component-student.component';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
@@ -19,6 +18,7 @@ import { FeedbackRule } from '../FeedbackRule';
 import { DialogGuidanceFeedbackRuleEvaluator } from '../DialogGuidanceFeedbackRuleEvaluator';
 import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseMultipleScores';
 import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -40,22 +40,22 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected CRaterService: CRaterService,
+    protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
