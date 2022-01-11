@@ -299,11 +299,7 @@ export class DiscussionService extends ComponentService {
     const workgroupId = componentState.workgroupId;
     const usernames = this.ConfigService.getUsernamesByWorkgroupId(workgroupId);
     if (usernames.length > 0) {
-      componentState.usernames = usernames
-        .map(function (obj) {
-          return obj.name;
-        })
-        .join(', ');
+      componentState.usernames = this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId);
     } else if (componentState.usernamesArray != null) {
       componentState.usernames = componentState.usernamesArray
         .map(function (obj) {
@@ -311,16 +307,8 @@ export class DiscussionService extends ComponentService {
         })
         .join(', ');
     } else {
-      componentState.usernames = this.getUserIdsDisplay(workgroupId);
+      componentState.usernames = this.ConfigService.getUserIdsStringByWorkgroupId(workgroupId);
     }
-  }
-
-  getUserIdsDisplay(workgroupId: number): string {
-    const userIdsDisplay = [];
-    for (const userId of this.ConfigService.getUserIdsByWorkgroupId(workgroupId)) {
-      userIdsDisplay.push(`Student ${userId}`);
-    }
-    return userIdsDisplay.join(', ');
   }
 
   getResponsesMap(componentStates: any[]): any {

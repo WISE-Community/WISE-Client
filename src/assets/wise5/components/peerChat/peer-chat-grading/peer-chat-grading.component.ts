@@ -75,23 +75,9 @@ export class PeerChatGradingComponent extends ComponentGrading {
     for (const workgroupId of workgroupIds) {
       this.peerChatWorkgroupInfos[workgroupId] = {
         avatarColor: this.configService.getAvatarColorForWorkgroupId(workgroupId),
-        displayNames: this.getDisplayNames(workgroupId)
+        displayNames: this.configService.getDisplayUsernamesByWorkgroupId(workgroupId)
       };
     }
     this.isPeerChatWorkgroupsAvailable = true;
-  }
-
-  getDisplayNames(workgroupId: number): string {
-    // TODO: duplciate code in DiscussionService (setUsernames); extract to service function
-    let displayNames: string = '';
-    const usernames = this.configService.getUsernamesByWorkgroupId(workgroupId);
-    if (usernames.length > 0) {
-      displayNames = usernames
-        .map(function (obj) {
-          return obj.name;
-        })
-        .join(', ');
-    }
-    return displayNames;
   }
 }
