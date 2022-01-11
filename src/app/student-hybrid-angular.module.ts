@@ -39,6 +39,7 @@ import { OutsideUrlStudentModule } from '../assets/wise5/components/outsideURL/o
 import { SummaryStudentModule } from '../assets/wise5/components/summary/summary-student/summary-student.module';
 import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/summary-display.module';
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
+import { NotificationsMenuComponent } from '../assets/wise5/vle/notifications-menu/notifications-menu.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { GenerateImageDialogComponent } from '../assets/wise5/directives/generat
     NavItemComponent,
     SafeUrl,
     StepToolsComponent,
-    NavItemComponent
+    NavItemComponent,
+    NotificationsMenuComponent
   ],
   imports: [
     AngularJSModule,
