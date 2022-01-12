@@ -7,7 +7,7 @@
           [componentContent]="showWorkComponentContent"
           [componentState]="studentWork"
           [isDisabled]="true"
-          [workgroupId]="workgroupId"
+          [workgroupId]="studentWork.workgroupId"
           [mode]="student">
       </animation-student>
       <audio-oscillator-student *ngSwitchCase="'AudioOscillator'"

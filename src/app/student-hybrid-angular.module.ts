@@ -42,6 +42,7 @@ import { OutsideUrlStudentModule } from '../assets/wise5/components/outsideURL/o
 import { SummaryStudentModule } from '../assets/wise5/components/summary/summary-student/summary-student.module';
 import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/summary-display.module';
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
+import { ShowPeerGroupWorkStudentModule } from '../assets/wise5/components/showPeerGroupWork/show-peer-group-work-student/show-peer-group-work-student.module';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { GenerateImageDialogComponent } from '../assets/wise5/directives/generat
     OpenResponseStudentModule,
     OutsideUrlStudentModule,
     PeerChatModule,
+    ShowPeerGroupWorkStudentModule,
     ShowWorkStudentModule,
     StudentAssetsModule,
     StudentComponentModule,

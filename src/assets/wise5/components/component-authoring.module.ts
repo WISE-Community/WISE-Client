@@ -15,6 +15,7 @@ import './openResponse/openResponseAuthoringComponentModule';
 import './outsideURL/outsideURLAuthoringComponentModule';
 import './peerChat/peerChatAuthoringComponentModule';
 import './showWork/show-work-authoring/showWorkAuthoringAngularJSComponentModule';
+import './showPeerGroupWork/show-peer-group-work-authoring/showPeerGroupWorkAuthoringAngularJSComponentModule';
 import './summary/summaryAuthoringComponentModule';
 import './table/tableAuthoringComponentModule';
 import { downgradeComponent } from '@angular/upgrade/static';
@@ -56,6 +57,7 @@ export default angular
     'openResponseAuthoringComponentModule',
     'outsideURLAuthoringComponentModule',
     'peerChatAuthoringComponentModule',
+    'showPeerGroupWorkAuthoringAngularJSComponentModule',
     'showWorkAuthoringAngularJSComponentModule',
     'summaryAuthoringComponentModule',
     'tableAuthoringComponentModule'

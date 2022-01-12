@@ -65,6 +65,7 @@ import { UtilService } from './services/utilService';
 import * as moment from 'moment';
 import * as SockJS from 'sockjs-client';
 import './components/showWork/show-work-student/showWorkStudentAngularJSComponentModule';
+import './components/showPeerGroupWork/show-peer-group-work-student/showPeerGroupWorkStudentAngularJSComponentModule';
 import * as StompJS from '@stomp/stompjs';
 window['SockJS'] = SockJS;
 window['Stomp'] = StompJS.Stomp;
@@ -106,6 +107,7 @@ angular
     'outsideURLComponentModule',
     'pascalprecht.translate',
     'peerChatStudentComponentModule',
+    'showPeerGroupWorkStudentAngularJSComponentModule',
     'showWorkStudentAngularJSComponentModule',
     'summaryComponentModule',
     'tableComponentModule',
