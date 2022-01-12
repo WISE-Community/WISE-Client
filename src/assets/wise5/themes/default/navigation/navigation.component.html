@@ -1,19 +1,13 @@
-<div class="l-constrained l-constrained-md md-padding nav" fxLayout="column">
-  <div class="md-toolbar-tools auto-width">
-    <div class="md-subhead nav-head">
-      <span i18n>Project Plan</span>
-    </div>
-    <span flex></span>
-  </div>
-  <div class="nav-contents nav-contents--root">
-    <div fxLayout="row wrap" fxLayoutAlign="center start">
-      <nav-item *ngFor="let id of rootNode.ids"
-          class="nav-item nav-item--root"
-          [ngClass]="{'expanded': navItemIsExpanded[id]}"
-          [showPosition]="true"
-          [nodeId]="id"
-          type="card"
-          fxFlex="100"></nav-item>
-    </div>
+<div class="nav" fxLayout="column">
+  <div class="mat-subheading-2 secondary-text nav-header" i18n>Project Plan</div>
+  <div fxLayout="row wrap" fxLayoutAlign="center start">
+    <nav-item *ngFor="let id of rootNode.ids"
+        class="lesson"
+        [ngClass]="{'expanded': navItemIsExpanded[id]}"
+        [showPosition]="true"
+        [nodeId]="id"
+        type="card"
+        fxFlex="100"
+        [fxFlex.gt-xs]="navItemIsExpanded[id] ? 100 : 50"></nav-item>
   </div>
 </div>
