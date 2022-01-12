@@ -64,6 +64,7 @@ import { TagService } from './services/tagService';
 import { UtilService } from './services/utilService';
 import * as moment from 'moment';
 import * as SockJS from 'sockjs-client';
+import './components/showWork/show-work-student/showWorkStudentAngularJSComponentModule';
 import * as StompJS from '@stomp/stompjs';
 window['SockJS'] = SockJS;
 window['Stomp'] = StompJS.Stomp;
@@ -76,7 +77,6 @@ import { NotebookNotesComponent } from '../../app/notebook/notebook-notes/notebo
 import { NotebookReportComponent } from '../../app/notebook/notebook-report/notebook-report.component';
 import { NotebookReportAnnotationsComponent } from '../../app/notebook/notebook-report-annotations/notebook-report-annotations.component';
 import EditNotebookItemController from './themes/default/notebook/editNotebookItemController';
-import './components/discussion/class-response/classResponseComponentModule';
 
 angular
   .module('common', [
@@ -84,7 +84,6 @@ angular
     'angular-toArrayFilter',
     'animationComponentModule',
     'audioOscillatorComponentModule',
-    'classResponseComponentModule',
     'components',
     'conceptMapComponentModule',
     'dialogGuidanceStudentComponentModule',
@@ -107,6 +106,7 @@ angular
     'outsideURLComponentModule',
     'pascalprecht.translate',
     'peerChatStudentComponentModule',
+    'showWorkStudentAngularJSComponentModule',
     'summaryComponentModule',
     'tableComponentModule',
     'ui.router'

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -63,25 +63,25 @@ export class AudioOscillatorStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private AudioOscillatorService: AudioOscillatorService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
-    private AudioOscillatorService: AudioOscillatorService,
+    protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -47,25 +46,24 @@ export class MatchStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
-    private dialog: MatDialog,
+    protected dialog: MatDialog,
     private MatchService: MatchService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }

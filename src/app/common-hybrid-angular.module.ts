@@ -61,7 +61,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
-import { ClassResponse } from '../assets/wise5/components/discussion/class-response/class-response.component';
 import { ComponentService } from '../assets/wise5/components/componentService';
 import { WiseLinkService } from './services/wiseLinkService';
 import { DataExportService } from '../assets/wise5/services/dataExportService';
@@ -83,13 +82,13 @@ import { LabelGrading } from '../assets/wise5/components/label/label-grading/lab
 import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
 import { ComponentHeader } from '../assets/wise5/directives/component-header/component-header.component';
 import { PossibleScoreComponent } from './possible-score/possible-score.component';
+import { ShowWorkService } from '../assets/wise5/components/showWork/showWorkService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
 
 @NgModule({
   declarations: [
-    ClassResponse,
     ComponentHeader,
     ConceptMapGrading,
     DialogResponseComponent,
@@ -168,6 +167,7 @@ export class EmptyComponent {}
     ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,
+    ShowWorkService,
     StudentAssetService,
     StudentDataService,
     StudentWebSocketService,
@@ -179,7 +179,6 @@ export class EmptyComponent {}
     WiseLinkService
   ],
   exports: [
-    ClassResponse,
     CommonModule,
     ComponentHeader,
     ConceptMapGrading,

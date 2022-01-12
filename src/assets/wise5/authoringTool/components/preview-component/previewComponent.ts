@@ -120,6 +120,11 @@ class PreviewComponentController {
               [component-content]="componentContent"
               [mode]="mode">
           </peer-chat-student>
+          <show-work-student ng-switch-when="ShowWork"
+              [node-id]="nodeId"
+              [component-content]="componentContent"
+              [mode]="mode">
+          </show-work-student>
           <summary-student ng-switch-when="Summary"
               [node-id]="nodeId"
               [component-content]="componentContent"
