@@ -533,33 +533,39 @@ export class ConfigService {
     return usernamesObjects;
   }
 
-  getDisplayUsernamesByWorkgroupId(workgroupId) {
+  getDisplayUsernamesByWorkgroupId(workgroupId: number): string {
     let usernames = '';
     if (workgroupId != null) {
       if (this.getPermissions().canViewStudentNames) {
-        let names = this.getUsernamesByWorkgroupId(workgroupId);
-        let l = names.length;
-        for (let i = 0; i < l; i++) {
-          let name = names[i].name;
-          usernames += name;
-
-          if (i < l - 1) {
-            usernames += ', ';
-          }
-        }
+        usernames = this.getUsernamesStringByWorkgroupId(workgroupId);
       } else {
-        // current user is not allowed to view student names, so return string with student ids
-        let userIds = this.getUserIdsByWorkgroupId(workgroupId);
-        for (let i = 0; i < userIds.length; i++) {
-          let id = userIds[i];
-          if (i !== 0) {
-            usernames += ', ';
-          }
-          usernames += this.upgrade.$injector.get('$filter')('translate')('studentId', { id: id });
-        }
+        usernames = this.getUserIdsStringByWorkgroupId(workgroupId);
       }
     }
     return usernames;
+  }
+
+  getUsernamesStringByWorkgroupId(workgroupId: number): string {
+    const names = this.getUsernamesByWorkgroupId(workgroupId);
+    return names.length > 0
+      ? names
+          .map(function (obj) {
+            return obj.name;
+          })
+          .join(', ')
+      : '';
+  }
+
+  getUserIdsStringByWorkgroupId(workgroupId: number): string {
+    const translate = this.upgrade.$injector.get('$filter')('translate');
+    const ids = this.getUserIdsByWorkgroupId(workgroupId);
+    return ids.length > 0
+      ? ids
+          .map(function (id) {
+            return translate('studentId', { id: id });
+          })
+          .join(', ')
+      : '';
   }
 
   isPreview() {

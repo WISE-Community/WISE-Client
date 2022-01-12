@@ -162,8 +162,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.peerChatWorkgroupInfos = {};
     for (const workgroupId of workgroupIds) {
       this.peerChatWorkgroupInfos[workgroupId] = {
-        avatarColor: this.getAvatarColor(workgroupId),
-        displayNames: this.getDisplayNames(workgroupId)
+        avatarColor: this.ConfigService.getAvatarColorForWorkgroupId(workgroupId),
+        displayNames: this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId)
       };
     }
     this.isPeerChatWorkgroupsAvailable = true;
@@ -251,19 +251,5 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   getAvatarColor(workgroupId: number): string {
     return this.ConfigService.getAvatarColorForWorkgroupId(workgroupId);
-  }
-
-  getDisplayNames(workgroupId: number): string {
-    // TODO: duplciate code in DiscussionService (setUsernames); extract to service function
-    let displayNames: string = '';
-    const usernames = this.ConfigService.getUsernamesByWorkgroupId(workgroupId);
-    if (usernames.length > 0) {
-      displayNames = usernames
-        .map(function (obj) {
-          return obj.name;
-        })
-        .join(', ');
-    }
-    return displayNames;
   }
 }

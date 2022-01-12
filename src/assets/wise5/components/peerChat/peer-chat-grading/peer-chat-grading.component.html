@@ -1,2 +1,19 @@
-<peer-chat-messages [peerChatMessages]="peerChatMessages" [myWorkgroupId]="workgroupId">
-</peer-chat-messages>
+<ng-container *ngIf="isPeerChatWorkgroupsAvailable">
+  <component-header *ngIf="secondPromptComponentContent" [componentContent]="secondPromptComponentContent">
+  </component-header>
+  <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign.gt-md="start start" fxLayoutGap="16px">
+    <div *ngIf="componentContent.questionBank.length > 0"
+        fxFlex
+        fxFlex.gt-md="40"
+        fxFlexOrder="1"
+        fxFlexOrder.gt-md="2">
+      <peer-chat-question-bank [questions]="componentContent.questionBank"></peer-chat-question-bank>
+    </div>
+    <div fxFlex fxFlex.gt-md="60" fxFlexOrder="2" fxFlexOrder.gt-md="1">
+      <peer-chat-chat-box [messages]="peerChatMessages"
+          [myWorkgroupId]="workgroupId"
+          [workgroupInfos]="peerChatWorkgroupInfos"
+          [isEnabled]="false"></peer-chat-chat-box>
+    </div>
+  </div>
+</ng-container>
