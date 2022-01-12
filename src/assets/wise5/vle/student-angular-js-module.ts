@@ -13,6 +13,7 @@ import { ComponentSaveSubmitButtons } from '../directives/component-save-submit-
 import { NotebookLauncherComponent } from '../../../../src/app/notebook/notebook-launcher/notebook-launcher.component';
 import { AddToNotebookButton } from '../directives/add-to-notebook-button/add-to-notebook-button.component';
 import { NavigationComponent } from '../themes/default/navigation/navigation.component';
+import { NotificationsMenuComponent } from './notifications-menu/notifications-menu.component';
 
 export function createStudentAngularJSModule(type = 'preview') {
   return angular
@@ -55,6 +56,10 @@ export function createStudentAngularJSModule(type = 'preview') {
     .directive(
       'componentSaveSubmitButtons',
       downgradeComponent({ component: ComponentSaveSubmitButtons }) as angular.IDirectiveFactory
+    )
+    .directive(
+      'notificationsMenu',
+      downgradeComponent({ component: NotificationsMenuComponent }) as angular.IDirectiveFactory
     )
     .config([
       '$stateProvider',
