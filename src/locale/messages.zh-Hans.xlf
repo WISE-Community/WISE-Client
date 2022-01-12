@@ -16732,6 +16732,62 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="translated">此项内容已锁定</target>
       </trans-unit>
+      <trans-unit id="9fe218829514884cdd0ca2300573a4e0428c324f" datatype="html">
+        <source>Alerts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <target state="needs-translation">Alerts</target>
+      </trans-unit>
+      <trans-unit id="eae1bb3f81534953df4c9a2f0e7e24223ec63754" datatype="html">
+        <source>Hi there! You currently have no alerts.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <target state="needs-translation">Hi there! You currently have no alerts.</target>
+      </trans-unit>
+      <trans-unit id="addf9c8b12b40609cede43bbe1a0f43914bda14e" datatype="html">
+        <source>Visit Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <target state="needs-translation">Visit Step</target>
+      </trans-unit>
+      <trans-unit id="3290e723a9af5017b3e5287ee83b7ee151ac0d96" datatype="html">
+        <source>Remove Notification</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target state="needs-translation">Remove Notification</target>
+      </trans-unit>
+      <trans-unit id="4200122564420479235" datatype="html">
+        <source>You have new replies to your discussion post!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.ts</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+        <target state="needs-translation">You have new replies to your discussion post!</target>
+      </trans-unit>
+      <trans-unit id="199088045976822823" datatype="html">
+        <source>You have new feedback from your teacher!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.ts</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <target state="needs-translation">You have new feedback from your teacher!</target>
+      </trans-unit>
+      <trans-unit id="5013145827213980080" datatype="html">
+        <source>You have new feedback!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.ts</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+        <target state="needs-translation">You have new feedback!</target>
+      </trans-unit>
       <trans-unit id="fcc4b29f2c63c0f61e98757c3e0bceed176606eb" datatype="html">
         <source>Use this file</source>
         <context-group purpose="location">
