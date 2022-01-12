@@ -10,10 +10,10 @@
     </div>
     <mat-list *ngIf="hasNewNotifications()">
       <mat-list-item *ngFor="let notificationAggregate of newNotifications;"
-          (click)="dismissNotificationAggregateAndVisitNode($event, notificationAggregate)"
           class="md-2-line notification-item"
           fxLayout="row" fxLayoutAlign="start center">
         <div class="md-list-item-text"
+            (click)="dismissNotificationAggregateAndVisitNode($event, notificationAggregate)"
             matTooltip="Visit Step"
             matTooltipPosition="above"
             i18n-matTooltip>

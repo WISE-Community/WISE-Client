@@ -17,7 +17,6 @@ export class NotificationsMenuComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
 
   constructor(
-    private annotationService: AnnotationService,
     private notebookService: NotebookService,
     private notificationService: NotificationService,
     private projectService: ProjectService,
@@ -25,78 +24,13 @@ export class NotificationsMenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.notifications = this.notificationService.notifications;
     this.subscriptions.add(
       this.notificationService.notificationChanged$.subscribe(() => {
         // update new notifications
-        this.notifications = this.notificationService.notifications;
-        this.newNotifications = this.getNewNotifications();
+        this.newNotifications = this.notificationService.getNewNotifications();
       })
     );
-    this.newNotifications = this.getNewNotifications();
-  }
-
-  getNewNotifications(): any[] {
-    let newNotificationAggregates = [];
-    for (const notification of this.notifications) {
-      if (notification.timeDismissed == null) {
-        let notificationNodeId = notification.nodeId;
-        let notificationType = notification.type;
-        let newNotificationForNodeIdAndTypeExists = false;
-        for (const newNotificationAggregate of newNotificationAggregates) {
-          if (
-            newNotificationAggregate.nodeId == notificationNodeId &&
-            newNotificationAggregate.type == notificationType
-          ) {
-            newNotificationForNodeIdAndTypeExists = true;
-            newNotificationAggregate.notifications.push(notification);
-            if (notification.timeGenerated > newNotificationAggregate.latestNotificationTimestamp) {
-              newNotificationAggregate.latestNotificationTimestamp = notification.timeGenerated;
-            }
-          }
-        }
-        let notebookItemId = null; // if this notification was created because teacher commented on a notebook report.
-        if (!newNotificationForNodeIdAndTypeExists) {
-          let message = '';
-          if (notificationType === 'DiscussionReply') {
-            message = $localize`You have new replies to your discussion post!`;
-          } else if (notificationType === 'teacherToStudent') {
-            message = $localize`You have new feedback from your teacher!`;
-            if (notification.data != null) {
-              if (typeof notification.data === 'string') {
-                notification.data = JSON.parse(notification.data);
-              }
-
-              if (notification.data.annotationId != null) {
-                let annotation = this.annotationService.getAnnotationById(
-                  notification.data.annotationId
-                );
-                if (annotation != null && annotation.notebookItemId != null) {
-                  notebookItemId = annotation.notebookItemId;
-                }
-              }
-            }
-          } else if (notificationType === 'CRaterResult') {
-            message = $localize`You have new feedback!`;
-          }
-          const newNotificationAggregate = {
-            latestNotificationTimestamp: notification.timeGenerated,
-            message: message,
-            nodeId: notificationNodeId,
-            notebookItemId: notebookItemId,
-            notifications: [notification],
-            type: notificationType
-          };
-          newNotificationAggregates.push(newNotificationAggregate);
-        }
-      }
-    }
-
-    // sort the aggregates by latestNotificationTimestamp, latest -> oldest
-    newNotificationAggregates.sort((n1, n2) => {
-      return n2.latestNotificationTimestamp - n1.latestNotificationTimestamp;
-    });
-    return newNotificationAggregates;
+    this.newNotifications = this.notificationService.getNewNotifications();
   }
 
   hasNewNotifications(): boolean {

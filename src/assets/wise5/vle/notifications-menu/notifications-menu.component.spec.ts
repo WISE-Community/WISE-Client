@@ -91,13 +91,6 @@ describe('NotificationsMenuComponent', () => {
     };
   }
 
-  it('should get new notifications', () => {
-    component.notifications = [notification1, notification2];
-    const newNotifications = component.getNewNotifications();
-    expect(newNotifications.length).toEqual(1);
-    expect(newNotifications[0].notifications.length).toEqual(2);
-  });
-
   it('should dismiss notification that does not require dismiss code', () => {
     component.dismissNotification({}, notification1);
     expect(dismissNotificationSpy).toHaveBeenCalled();
