@@ -4,6 +4,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
+import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
@@ -17,6 +18,10 @@ import { ComponentService } from '../../componentService';
   styleUrls: ['./show-peer-group-work-student.component.scss']
 })
 export class ShowPeerGroupWorkStudentComponent extends ComponentStudent {
+  showWorkComponentContent: any;
+
+  studentWorkFromPeerGroupMembers: any[];
+
   constructor(
     protected annotationService: AnnotationService,
     protected componentService: ComponentService,
@@ -24,6 +29,7 @@ export class ShowPeerGroupWorkStudentComponent extends ComponentStudent {
     protected dialog: MatDialog,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
+    protected peerGroupService: PeerGroupService,
     protected projectService: ProjectService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService,
@@ -44,5 +50,24 @@ export class ShowPeerGroupWorkStudentComponent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.peerGroupService
+      .retrievePeerGroup(this.componentContent.peerGroupActivityTag)
+      .subscribe((peerGroup) => {
+        this.peerGroupService
+          .retrieveStudentWork(
+            peerGroup,
+            this.nodeId,
+            this.componentId,
+            this.componentContent.showWorkNodeId,
+            this.componentContent.showWorkComponentId
+          )
+          .subscribe((studentWorkFromPeerGroupMembers: any[]) => {
+            this.studentWorkFromPeerGroupMembers = studentWorkFromPeerGroupMembers;
+          });
+      });
+    this.showWorkComponentContent = this.projectService.getComponentByNodeIdAndComponentId(
+      this.componentContent.showWorkNodeId,
+      this.componentContent.showWorkComponentId
+    );
   }
 }

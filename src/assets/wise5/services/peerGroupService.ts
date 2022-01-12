@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Node } from '../common/Node';
+import { PeerGroup } from '../components/peerChat/PeerGroup';
 import { ConfigService } from './configService';
 
 @Injectable()
@@ -20,6 +21,24 @@ export class PeerGroupService {
       }
     }
     return componentIds;
+  }
+
+  retrievePeerGroup(peerGroupActivityTag: string): Observable<any> {
+    const runId = this.ConfigService.isPreview() ? 1 : this.ConfigService.getRunId();
+    const workgroupId = this.ConfigService.getWorkgroupId();
+    return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${peerGroupActivityTag}`);
+  }
+
+  retrieveStudentWork(
+    peerGroup: PeerGroup,
+    nodeId: string,
+    componentId: string,
+    showWorkNodeId: string,
+    showWorkComponentId: string
+  ): Observable<any> {
+    return this.http.get(
+      `/api/classmate/peer-group-work/${peerGroup.id}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}`
+    );
   }
 
   retrieveGroupings(nodeId: string, componentId: string): Observable<any> {

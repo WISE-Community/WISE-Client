@@ -82,6 +82,7 @@ import { LabelGrading } from '../assets/wise5/components/label/label-grading/lab
 import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
 import { ShowWorkService } from '../assets/wise5/components/showWork/showWorkService';
 import { ShowPeerGroupWorkService } from '../assets/wise5/components/showPeerGroupWork/showPeerGroupWorkService';
+import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -161,6 +162,7 @@ export class EmptyComponent {}
     OutsideURLService,
     OpenResponseService,
     PeerChatService,
+    PeerGroupService,
     ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,
