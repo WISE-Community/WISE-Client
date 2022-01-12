@@ -35,8 +35,9 @@ describe('PeerChatGradingComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerChatGradingComponent);
     component = fixture.componentInstance;
-    component.componentContent = TestBed.inject(PeerChatService).createComponent();
-    component.componentContent.secondPrompt = "Discuss. Use the question bank.";
+    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({
+      secondPrompt: 'Discuss. Use the question bank.'
+    });
     fixture.detectChanges();
   });
 
