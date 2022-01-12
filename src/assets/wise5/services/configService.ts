@@ -546,30 +546,26 @@ export class ConfigService {
   }
 
   getUsernamesStringByWorkgroupId(workgroupId: number): string {
-    let usernames: string = '';
     const names = this.getUsernamesByWorkgroupId(workgroupId);
-    if (names.length > 0) {
-      usernames = names
-        .map(function (obj) {
-          return obj.name;
-        })
-        .join(', ');
-    }
-    return usernames;
+    return names.length > 0
+      ? names
+          .map(function (obj) {
+            return obj.name;
+          })
+          .join(', ')
+      : '';
   }
 
   getUserIdsStringByWorkgroupId(workgroupId: number): string {
-    let userIds: string = '';
     const translate = this.upgrade.$injector.get('$filter')('translate');
     const ids = this.getUserIdsByWorkgroupId(workgroupId);
-    if (ids.length > 0) {
-      userIds = ids
-        .map(function (id) {
-          return translate('studentId', { id: id });
-        })
-        .join(', ');
-    }
-    return userIds;
+    return ids.length > 0
+      ? ids
+          .map(function (id) {
+            return translate('studentId', { id: id });
+          })
+          .join(', ')
+      : '';
   }
 
   isPreview() {
