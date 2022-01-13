@@ -13,7 +13,7 @@ export class ShowGroupWorkService extends ComponentService {
   }
 
   getComponentTypeLabel() {
-    return $localize`Show Peer Group Work`;
+    return $localize`Show Group Work`;
   }
 
   createComponent() {

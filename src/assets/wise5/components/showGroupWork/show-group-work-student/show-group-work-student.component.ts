@@ -19,7 +19,7 @@ import { ComponentService } from '../../componentService';
 })
 export class ShowGroupWorkStudentComponent extends ComponentStudent {
   showWorkComponentContent: any;
-
+  showWorkNodeId: string;
   studentWorkFromGroupMembers: any[];
 
   constructor(
@@ -69,5 +69,6 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
       this.componentContent.showWorkNodeId,
       this.componentContent.showWorkComponentId
     );
+    this.showWorkNodeId = this.componentContent.showWorkNodeId;
   }
 }
