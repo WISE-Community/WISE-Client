@@ -1,0 +1,131 @@
+<ng-container [ngSwitch]="studentWork.componentType">
+  <animation-student *ngSwitchCase="'Animation'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </animation-student>
+  <audio-oscillator-student *ngSwitchCase="'AudioOscillator'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </audio-oscillator-student>
+  <concept-map-student *ngSwitchCase="'ConceptMap'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </concept-map-student>
+  <dialog-guidance-student *ngSwitchCase="'DialogGuidance'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </dialog-guidance-student>
+  <discussion-student *ngSwitchCase="'Discussion'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </discussion-student>
+  <draw-student *ngSwitchCase="'Draw'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </draw-student>
+  <embedded-student *ngSwitchCase="'Embedded'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </embedded-student>
+  <graph-student *ngSwitchCase="'Graph'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </graph-student>
+  <html-student *ngSwitchCase="'HTML'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [mode]="student">
+  </html-student>
+  <label-student *ngSwitchCase="'Label'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </label-student>
+  <match-student *ngSwitchCase="'Match'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </match-student>
+  <multiple-choice-student *ngSwitchCase="'MultipleChoice'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </multiple-choice-student>
+  <open-response-student *ngSwitchCase="'OpenResponse'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </open-response-student>
+  <outside-url-student *ngSwitchCase="'OutsideURL'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [mode]="student">
+  </outside-url-student>
+  <peer-chat-student *ngSwitchCase="'PeerChat'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </peer-chat-student>
+  <summary-student *ngSwitchCase="'Summary'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </summary-student>
+  <table-student *ngSwitchCase="'Table'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="studentWork"
+      [isDisabled]="true"
+      [workgroupId]="studentWork.workgroupId"
+      [mode]="student">
+  </table-student>
+</ng-container>

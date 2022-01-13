@@ -18,7 +18,7 @@ import { ComponentService } from '../../componentService';
 })
 export class ShowMyWorkStudentComponent extends ComponentStudent {
   showWorkComponentContent: any;
-
+  showWorkNodeId: string;
   studentWork: any;
 
   constructor(
@@ -52,6 +52,7 @@ export class ShowMyWorkStudentComponent extends ComponentStudent {
       this.componentContent.showWorkNodeId,
       this.componentContent.showWorkComponentId
     );
+    this.showWorkNodeId = this.componentContent.showWorkNodeId;
     this.studentWork = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
       this.componentContent.showWorkNodeId,
       this.componentContent.showWorkComponentId
