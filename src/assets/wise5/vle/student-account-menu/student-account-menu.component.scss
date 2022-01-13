@@ -1,0 +1,53 @@
+.usernames-div {
+  min-height: 48px;
+}
+
+.avatar-div {
+  width: 24px;
+  height: 24px;
+  padding: 12px;
+}
+
+.avatar-icon {
+  font-size: 24px;
+}
+
+.workgroup {
+  font-size: 15px;
+}
+
+.usernames {
+  font-weight: 500;
+}
+
+.divider {
+  margin: 0px;
+}
+
+.progress-percentage-parent {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.progress-percentage-circle {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.progress-percentage-number {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 60px;
+  height: 60px;
+}
+
+.gold {
+  color: #ffc107;
+}
+
+.button {
+  margin: 6px 8px;
+}

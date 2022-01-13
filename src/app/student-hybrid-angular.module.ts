@@ -41,6 +41,7 @@ import { SummaryStudentModule } from '../assets/wise5/components/summary/summary
 import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/summary-display.module';
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 import { NotificationsMenuComponent } from '../assets/wise5/vle/notifications-menu/notifications-menu.component';
+import { StudentAccountMenuComponent } from '../assets/wise5/vle/student-account-menu/student-account-menu.component';
 
 @NgModule({
   declarations: [
@@ -49,10 +50,10 @@ import { NotificationsMenuComponent } from '../assets/wise5/vle/notifications-me
     HtmlDialog,
     NavigationComponent,
     NavItemComponent,
+    NotificationsMenuComponent,
     SafeUrl,
     StepToolsComponent,
-    NavItemComponent,
-    NotificationsMenuComponent
+    StudentAccountMenuComponent
   ],
   imports: [
     AngularJSModule,

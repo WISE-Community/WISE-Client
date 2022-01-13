@@ -1,0 +1,57 @@
+<div class="account-menu__info">
+  <div class="usernames-div" fxLayout="row" fxLayoutAlign="start center">
+    <div class="avatar-div">
+      <mat-icon class="avatar-icon" style="color: {{ getAvatarColorForWorkgroupId(workgroupId) }}">
+        account_circle
+      </mat-icon>
+    </div>
+    <div class="workgroup md-list-item-text" fxLayout="row" fxLayoutGap="10px">
+      <span class="usernames">{{ usernamesDisplay }}</span>
+      <span class="account-menu__info__team" i18n>(Team {{ workgroupId }})</span>
+    </div>
+  </div>
+</div>
+<mat-divider class="divider"></mat-divider>
+<div class="account-menu__info" *ngIf="rootNodeStatus != null">
+  <div class="account-menu__progress" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="column">
+      <span class="md-body-2" i18n>Unit Completion</span>
+      <span class="md-body-1 gray-dark" i18n>
+        {{ rootNodeStatus.progress.completedItems }}/{{ rootNodeStatus.progress.totalItems }} items
+      </span>
+    </div>
+    <div class="progress-percentage-parent">
+      <div class="progress-percentage-circle">
+        <mat-progress-spinner mode="determinate" [diameter]="60"
+            value="{{ rootNodeStatus.progress.completionPct }}">
+        </mat-progress-spinner>
+      </div>
+      <div class="progress-percentage-number"
+          fxLayoutAlign="center center">
+        <h3 class="accent-1">{{ rootNodeStatus.progress.completionPct }}%</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<mat-divider class="divider"></mat-divider>
+<div class="account-menu__info" *ngIf="!hideTotalScores && maxScore != null">
+  <div class="account-menu__score" fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="column">
+      <span class="md-body-2" i18n>Total Score</span>
+      <span class="md-body-1 gray-dark">{{ totalScore }}/{{ maxScore }} points</span>
+    </div>
+    <span fxFlex></span>
+    <div class="account-menu__grade" fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon class="gold">grade</mat-icon>
+      <h3 class="accent-1" *ngIf="maxScore > 0">{{ scorePercentage }}%</h3>
+    </div>
+  </div>
+</div>
+<mat-divider class="divider"></mat-divider>
+<div class="account-menu__actions" fxLayout="row">
+  <button mat-button color="primary" class="button" (click)="goHome()" i18n>Go Home</button>
+  <span fxFlex></span>
+  <button mat-button color="primary" class="button" (click)="logOut('logOutButtonClicked')" i18n>
+    Sign Out
+  </button>
+</div>
