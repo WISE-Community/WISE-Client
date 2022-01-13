@@ -14489,11 +14489,11 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-student/show-my-work-student.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/showPeerGroupWork/show-peer-group-work-student/show-peer-group-work-student.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-student/show-my-work-student.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
@@ -14511,17 +14511,17 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4651856658264516345" datatype="html">
+        <source>Show Peer Group Work</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/showGroupWorkService.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8147119602241675293" datatype="html">
         <source>Show Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/showMyWorkService.ts</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4651856658264516345" datatype="html">
-        <source>Show Peer Group Work</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/showPeerGroupWork/showPeerGroupWorkService.ts</context>
           <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>

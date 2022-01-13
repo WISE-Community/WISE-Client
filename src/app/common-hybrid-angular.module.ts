@@ -81,7 +81,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { LabelGrading } from '../assets/wise5/components/label/label-grading/label-grading.component';
 import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
 import { ShowMyWorkService } from '../assets/wise5/components/showMyWork/showMyWorkService';
-import { ShowPeerGroupWorkService } from '../assets/wise5/components/showPeerGroupWork/showPeerGroupWorkService';
+import { ShowGroupWorkService } from '../assets/wise5/components/showGroupWork/showGroupWorkService';
 import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 
 @Component({ template: `` })
@@ -166,7 +166,7 @@ export class EmptyComponent {}
     ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,
-    ShowPeerGroupWorkService,
+    ShowGroupWorkService,
     ShowMyWorkService,
     StudentAssetService,
     StudentDataService,

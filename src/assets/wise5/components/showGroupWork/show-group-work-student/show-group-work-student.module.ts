@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { GraphStudentModule } from '../../graph/graph-student/graph-student.module';
 import { MatchStudentModule } from '../../match/match-student/match-student.module';
 import { OpenResponseStudentModule } from '../../openResponse/open-response-student/open-response-student.module';
-import { ShowPeerGroupWorkStudentComponent } from './show-peer-group-work-student.component';
+import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
 
 @NgModule({
-  declarations: [ShowPeerGroupWorkStudentComponent],
+  declarations: [ShowGroupWorkStudentComponent],
   imports: [CommonModule, GraphStudentModule, MatchStudentModule, OpenResponseStudentModule],
-  exports: [ShowPeerGroupWorkStudentComponent]
+  exports: [ShowGroupWorkStudentComponent]
 })
-export class ShowPeerGroupWorkStudentModule {}
+export class ShowGroupWorkStudentModule {}

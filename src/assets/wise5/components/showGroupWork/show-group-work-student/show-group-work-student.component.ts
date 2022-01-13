@@ -13,14 +13,14 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 
 @Component({
-  selector: 'show-peer-group-work-student',
-  templateUrl: './show-peer-group-work-student.component.html',
-  styleUrls: ['./show-peer-group-work-student.component.scss']
+  selector: 'show-group-work-student',
+  templateUrl: './show-group-work-student.component.html',
+  styleUrls: ['./show-group-work-student.component.scss']
 })
-export class ShowPeerGroupWorkStudentComponent extends ComponentStudent {
+export class ShowGroupWorkStudentComponent extends ComponentStudent {
   showWorkComponentContent: any;
 
-  studentWorkFromPeerGroupMembers: any[];
+  studentWorkFromGroupMembers: any[];
 
   constructor(
     protected annotationService: AnnotationService,
@@ -61,8 +61,8 @@ export class ShowPeerGroupWorkStudentComponent extends ComponentStudent {
             this.componentContent.showWorkNodeId,
             this.componentContent.showWorkComponentId
           )
-          .subscribe((studentWorkFromPeerGroupMembers: any[]) => {
-            this.studentWorkFromPeerGroupMembers = studentWorkFromPeerGroupMembers;
+          .subscribe((studentWorkFromGroupMembers: any[]) => {
+            this.studentWorkFromGroupMembers = studentWorkFromGroupMembers;
           });
       });
     this.showWorkComponentContent = this.projectService.getComponentByNodeIdAndComponentId(

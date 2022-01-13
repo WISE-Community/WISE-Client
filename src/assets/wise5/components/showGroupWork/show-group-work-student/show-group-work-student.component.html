@@ -1,5 +1,5 @@
-<p>show-peer-group-work-student works!</p>
-<div *ngFor="let studentWork of studentWorkFromPeerGroupMembers">
+<p>show-group-work-student works!</p>
+<div *ngFor="let studentWork of studentWorkFromGroupMembers">
   <span class="text-secondary" *ngIf="studentWork == null" i18n>(No response)</span>
   <ng-container *ngIf="studentWork != null" [ngSwitch]="studentWork.componentType">
     <animation-student *ngSwitchCase="'Animation'"

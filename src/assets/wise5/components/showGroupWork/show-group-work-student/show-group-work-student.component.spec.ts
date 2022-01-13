@@ -15,7 +15,7 @@ import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
 import { MockService } from '../../animation/animation-student/animation-student.component.spec';
 import { ComponentService } from '../../componentService';
-import { ShowPeerGroupWorkStudentComponent } from './show-peer-group-work-student.component';
+import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
 
 class MockNotebookService {
   isNotebookEnabled() {
@@ -41,14 +41,14 @@ class MockConfigService {
   }
 }
 
-describe('ShowPeerGroupWorkStudentComponent', () => {
-  let component: ShowPeerGroupWorkStudentComponent;
-  let fixture: ComponentFixture<ShowPeerGroupWorkStudentComponent>;
+describe('ShowGroupWorkStudentComponent', () => {
+  let component: ShowGroupWorkStudentComponent;
+  let fixture: ComponentFixture<ShowGroupWorkStudentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
-      declarations: [ShowPeerGroupWorkStudentComponent],
+      declarations: [ShowGroupWorkStudentComponent],
       providers: [
         AnnotationService,
         { provide: ComponentService, useClass: MockService },
@@ -68,7 +68,7 @@ describe('ShowPeerGroupWorkStudentComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShowPeerGroupWorkStudentComponent);
+    fixture = TestBed.createComponent(ShowGroupWorkStudentComponent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,
       comment: ''

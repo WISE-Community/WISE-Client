@@ -4,7 +4,7 @@ import { UtilService } from '../../services/utilService';
 import { ComponentService } from '../componentService';
 
 @Injectable()
-export class ShowPeerGroupWorkService extends ComponentService {
+export class ShowGroupWorkService extends ComponentService {
   constructor(
     protected studentDataService: StudentDataService,
     protected utilService: UtilService
@@ -18,7 +18,7 @@ export class ShowPeerGroupWorkService extends ComponentService {
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'ShowPeerGroupWork';
+    component.type = 'ShowGroupWork';
     component.showWorkNodeId = '';
     component.showWorkComponentId = '';
     component.peerGroupActivityTag = '';
