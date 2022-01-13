@@ -4,8 +4,8 @@ import * as angular from 'angular';
 import { downgradeInjectable } from '@angular/upgrade/static';
 import { ShowMyWorkService } from '../showMyWorkService';
 
-const showWorkAuthoringAngularJSComponentModule = angular
-  .module('showWorkAuthoringAngularJSComponentModule', [])
+const showMyWorkAuthoringAngularJSComponentModule = angular
+  .module('showMyWorkAuthoringAngularJSComponentModule', [])
   .service('ShowMyWorkService', downgradeInjectable(ShowMyWorkService));
 
-export default showWorkAuthoringAngularJSComponentModule;
+export default showMyWorkAuthoringAngularJSComponentModule;

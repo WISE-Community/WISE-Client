@@ -14,7 +14,7 @@ import './multipleChoice/multipleChoiceAuthoringComponentModule';
 import './openResponse/openResponseAuthoringComponentModule';
 import './outsideURL/outsideURLAuthoringComponentModule';
 import './peerChat/peerChatAuthoringComponentModule';
-import './showMyWork/show-my-work-authoring/showWorkAuthoringAngularJSComponentModule';
+import './showMyWork/show-my-work-authoring/showMyWorkAuthoringAngularJSComponentModule';
 import './showPeerGroupWork/show-peer-group-work-authoring/showPeerGroupWorkAuthoringAngularJSComponentModule';
 import './summary/summaryAuthoringComponentModule';
 import './table/tableAuthoringComponentModule';
@@ -58,7 +58,7 @@ export default angular
     'outsideURLAuthoringComponentModule',
     'peerChatAuthoringComponentModule',
     'showPeerGroupWorkAuthoringAngularJSComponentModule',
-    'showWorkAuthoringAngularJSComponentModule',
+    'showMyWorkAuthoringAngularJSComponentModule',
     'summaryAuthoringComponentModule',
     'tableAuthoringComponentModule'
   ])

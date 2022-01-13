@@ -13,12 +13,12 @@ export class ShowMyWorkService extends ComponentService {
   }
 
   getComponentTypeLabel() {
-    return $localize`Show Work`;
+    return $localize`Show Student Work`;
   }
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'ShowWork';
+    component.type = 'ShowMyWork';
     component.showWorkNodeId = '';
     component.showWorkComponentId = '';
     return component;

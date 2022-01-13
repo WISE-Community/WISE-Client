@@ -413,7 +413,7 @@ export class UtilService {
       { type: 'PeerChat', name: this.getComponentTypeLabel('PeerChat') },
       { type: 'HTML', name: this.getComponentTypeLabel('HTML') },
       { type: 'ShowPeerGroupWork', name: this.getComponentTypeLabel('ShowPeerGroupWork') },
-      { type: 'ShowWork', name: this.getComponentTypeLabel('ShowWork') },
+      { type: 'ShowMyWork', name: this.getComponentTypeLabel('ShowMyWork') },
       { type: 'Summary', name: this.getComponentTypeLabel('Summary') },
       { type: 'Table', name: this.getComponentTypeLabel('Table') }
     ];
