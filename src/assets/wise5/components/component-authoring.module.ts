@@ -14,7 +14,7 @@ import './multipleChoice/multipleChoiceAuthoringComponentModule';
 import './openResponse/openResponseAuthoringComponentModule';
 import './outsideURL/outsideURLAuthoringComponentModule';
 import './peerChat/peerChatAuthoringComponentModule';
-import './showWork/show-work-authoring/showWorkAuthoringAngularJSComponentModule';
+import './showMyWork/show-my-work-authoring/showWorkAuthoringAngularJSComponentModule';
 import './showPeerGroupWork/show-peer-group-work-authoring/showPeerGroupWorkAuthoringAngularJSComponentModule';
 import './summary/summaryAuthoringComponentModule';
 import './table/tableAuthoringComponentModule';

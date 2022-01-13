@@ -4,7 +4,7 @@ import { UtilService } from '../../services/utilService';
 import { ComponentService } from '../componentService';
 
 @Injectable()
-export class ShowWorkService extends ComponentService {
+export class ShowMyWorkService extends ComponentService {
   constructor(
     protected studentDataService: StudentDataService,
     protected utilService: UtilService

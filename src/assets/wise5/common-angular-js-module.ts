@@ -64,7 +64,7 @@ import { TagService } from './services/tagService';
 import { UtilService } from './services/utilService';
 import * as moment from 'moment';
 import * as SockJS from 'sockjs-client';
-import './components/showWork/show-work-student/showWorkStudentAngularJSComponentModule';
+import './components/showMyWork/show-my-work-student/showMyWorkStudentAngularJSComponentModule';
 import './components/showPeerGroupWork/show-peer-group-work-student/showPeerGroupWorkStudentAngularJSComponentModule';
 import * as StompJS from '@stomp/stompjs';
 window['SockJS'] = SockJS;
@@ -108,7 +108,7 @@ angular
     'pascalprecht.translate',
     'peerChatStudentComponentModule',
     'showPeerGroupWorkStudentAngularJSComponentModule',
-    'showWorkStudentAngularJSComponentModule',
+    'showMyWorkStudentAngularJSComponentModule',
     'summaryComponentModule',
     'tableComponentModule',
     'ui.router'

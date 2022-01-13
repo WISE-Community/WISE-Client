@@ -12,11 +12,11 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 
 @Component({
-  selector: 'show-work-student',
-  templateUrl: './show-work-student.component.html',
-  styleUrls: ['./show-work-student.component.scss']
+  selector: 'show-my-work-student',
+  templateUrl: './show-my-work-student.component.html',
+  styleUrls: ['./show-my-work-student.component.scss']
 })
-export class ShowWorkStudentComponent extends ComponentStudent {
+export class ShowMyWorkStudentComponent extends ComponentStudent {
   showWorkComponentContent: any;
 
   studentWork: any;

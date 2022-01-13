@@ -16,7 +16,7 @@ import { AngularJSModule } from './common-hybrid-angular.module';
 import { NavItemComponent } from '../assets/wise5/vle/nav-item/nav-item.component';
 import { HtmlDialog } from '../assets/wise5/directives/html-dialog/html-dialog';
 import { MatchStudentModule } from '../assets/wise5/components/match/match-student/match-student.module';
-import { ShowWorkStudentModule } from '../assets/wise5/components/showWork/show-work-student/show-work-student.module';
+import { ShowMyWorkStudentModule } from '../assets/wise5/components/showMyWork/show-my-work-student/show-my-work-student.module';
 import { StudentComponentModule } from './student/student.component.module';
 import { SafeUrl } from '../assets/wise5/directives/safeUrl/safe-url.pipe';
 import { HighchartsChartModule } from 'highcharts-angular';
@@ -74,7 +74,7 @@ import { ShowPeerGroupWorkStudentModule } from '../assets/wise5/components/showP
     OutsideUrlStudentModule,
     PeerChatModule,
     ShowPeerGroupWorkStudentModule,
-    ShowWorkStudentModule,
+    ShowMyWorkStudentModule,
     StudentAssetsModule,
     StudentComponentModule,
     SummaryDisplayModule,

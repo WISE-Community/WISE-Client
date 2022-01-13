@@ -125,11 +125,11 @@ class PreviewComponentController {
               [component-content]="componentContent"
               [mode]="mode">
           </show-peer-group-work-student>
-          <show-work-student ng-switch-when="ShowWork"
+          <show-my-work-student ng-switch-when="ShowMyWork"
               [node-id]="nodeId"
               [component-content]="componentContent"
               [mode]="mode">
-          </show-work-student>
+          </show-my-work-student>
           <summary-student ng-switch-when="Summary"
               [node-id]="nodeId"
               [component-content]="componentContent"

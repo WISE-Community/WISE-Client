@@ -11,10 +11,10 @@ import { MatchStudentModule } from '../../match/match-student/match-student.modu
 import { MultipleChoiceStudentModule } from '../../multipleChoice/multiple-choice-student/multiple-choice-student.module';
 import { OpenResponseStudentModule } from '../../openResponse/open-response-student/open-response-student.module';
 import { TableStudentModule } from '../../table/table-student/table-student.module';
-import { ShowWorkStudentComponent } from './show-work-student.component';
+import { ShowMyWorkStudentComponent } from './show-my-work-student.component';
 
 @NgModule({
-  declarations: [ShowWorkStudentComponent],
+  declarations: [ShowMyWorkStudentComponent],
   imports: [
     AngularJSModule,
     ConceptMapStudentModule,
@@ -29,6 +29,6 @@ import { ShowWorkStudentComponent } from './show-work-student.component';
     OpenResponseStudentModule,
     TableStudentModule
   ],
-  exports: [ShowWorkStudentComponent]
+  exports: [ShowMyWorkStudentComponent]
 })
-export class ShowWorkStudentModule {}
+export class ShowMyWorkStudentModule {}
