@@ -2,7 +2,6 @@ import '../lib/jquery/jquery-global';
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import '../common-angular-js-module';
-import NavigationController from '../vle/navigation/navigationController';
 import NodeController from '../vle/node/nodeController';
 import { StudentWebSocketService } from '../services/studentWebSocketService';
 import VLEController from '../vle/vleController';
@@ -13,6 +12,7 @@ import { ComponentHeader } from '../directives/component-header/component-header
 import { ComponentSaveSubmitButtons } from '../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { NotebookLauncherComponent } from '../../../../src/app/notebook/notebook-launcher/notebook-launcher.component';
 import { AddToNotebookButton } from '../directives/add-to-notebook-button/add-to-notebook-button.component';
+import { NavigationComponent } from '../themes/default/navigation/navigation.component';
 import { NotificationsMenuComponent } from './notifications-menu/notifications-menu.component';
 
 export function createStudentAngularJSModule(type = 'preview') {
@@ -35,7 +35,10 @@ export function createStudentAngularJSModule(type = 'preview') {
       'notebookLauncher',
       downgradeComponent({ component: NotebookLauncherComponent }) as angular.IDirectiveFactory
     )
-    .controller('NavigationController', NavigationController)
+    .directive(
+      'navigation',
+      downgradeComponent({ component: NavigationComponent }) as angular.IDirectiveFactory
+    )
     .controller('NodeController', NodeController)
     .controller('VLEController', VLEController)
     .directive(
