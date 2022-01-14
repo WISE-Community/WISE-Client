@@ -65,6 +65,8 @@ import { EditSummaryAdvancedComponent } from '../../assets/wise5/components/summ
 import { EditTableAdvancedComponent } from '../../assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component';
 import { EditPeerChatAdvancedComponentComponent } from '../../assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component';
 import { PeerChatAuthoringComponent } from '../../assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component';
+import { ShowMyWorkAuthoringComponent } from '../../assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component';
+import { EditShowMyWorkAdvancedComponent } from '../../assets/wise5/components/showMyWork/edit-show-my-work-advanced/edit-show-my-work-advanced.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +120,7 @@ import { PeerChatAuthoringComponent } from '../../assets/wise5/components/peerCh
     EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EditPeerChatAdvancedComponentComponent,
+    EditShowMyWorkAdvancedComponent,
     EditSummaryAdvancedComponent,
     EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,
@@ -130,6 +133,7 @@ import { PeerChatAuthoringComponent } from '../../assets/wise5/components/peerCh
     OpenResponseAuthoring,
     OutsideUrlAuthoring,
     PeerChatAuthoringComponent,
+    ShowMyWorkAuthoringComponent,
     SummaryAuthoring,
     TableAuthoring,
     WiseAuthoringTinymceEditorComponent
@@ -183,6 +187,7 @@ import { PeerChatAuthoringComponent } from '../../assets/wise5/components/peerCh
     EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EditPeerChatAdvancedComponentComponent,
+    EditShowMyWorkAdvancedComponent,
     EditSummaryAdvancedComponent,
     EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,
@@ -195,6 +200,7 @@ import { PeerChatAuthoringComponent } from '../../assets/wise5/components/peerCh
     OpenResponseAuthoring,
     OutsideUrlAuthoring,
     PeerChatAuthoringComponent,
+    ShowMyWorkAuthoringComponent,
     SummaryAuthoring,
     TableAuthoring,
     WiseAuthoringTinymceEditorComponent
