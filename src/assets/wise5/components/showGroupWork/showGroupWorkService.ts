@@ -22,7 +22,7 @@ export class ShowGroupWorkService extends ComponentService {
     component.showWorkNodeId = '';
     component.showWorkComponentId = '';
     component.peerGroupActivityTag = '';
-    component.showMyWork = true;
+    component.isShowMyWork = true;
     return component;
   }
 }

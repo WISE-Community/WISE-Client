@@ -43,6 +43,8 @@ class MockConfigService {
 
 describe('ShowGroupWorkStudentComponent', () => {
   let component: ShowGroupWorkStudentComponent;
+  let componentState1;
+  let componentState2;
   let fixture: ComponentFixture<ShowGroupWorkStudentComponent>;
 
   beforeEach(async () => {
@@ -73,6 +75,8 @@ describe('ShowGroupWorkStudentComponent', () => {
       score: 0,
       comment: ''
     });
+    componentState1 = createComponentState(1);
+    componentState2 = createComponentState(2);
     component = fixture.componentInstance;
     component.componentContent = {
       id: 'abc',
@@ -84,7 +88,26 @@ describe('ShowGroupWorkStudentComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  function createComponentState(workgroupId: number): any {
+    return {
+      workgroupId: workgroupId
+    };
+  }
+
+  it('should set student work from group members including my work', () => {
+    component.componentContent.isShowMyWork = true;
+    const studentWork = [componentState1, componentState2];
+    component.studentWorkFromGroupMembers = [];
+    component.setStudentWorkFromGroupMembers(studentWork);
+    expect(component.studentWorkFromGroupMembers.length).toEqual(2);
+  });
+
+  it('should set student work from group members not including my work', () => {
+    component.componentContent.isShowMyWork = false;
+    const studentWork = [componentState1, componentState2];
+    component.studentWorkFromGroupMembers = [];
+    spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
+    component.setStudentWorkFromGroupMembers(studentWork);
+    expect(component.studentWorkFromGroupMembers.length).toEqual(1);
   });
 });

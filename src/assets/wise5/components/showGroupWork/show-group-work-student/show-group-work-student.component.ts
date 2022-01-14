@@ -62,7 +62,7 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
             this.componentContent.showWorkComponentId
           )
           .subscribe((studentWorkFromGroupMembers: any[]) => {
-            this.studentWorkFromGroupMembers = studentWorkFromGroupMembers;
+            this.setStudentWorkFromGroupMembers(studentWorkFromGroupMembers);
           });
       });
     this.showWorkComponentContent = this.projectService.getComponentByNodeIdAndComponentId(
@@ -70,5 +70,22 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
       this.componentContent.showWorkComponentId
     );
     this.showWorkNodeId = this.componentContent.showWorkNodeId;
+  }
+
+  setStudentWorkFromGroupMembers(studentWorkFromGroupMembers: any[]): void {
+    if (this.componentContent.isShowMyWork) {
+      this.studentWorkFromGroupMembers = studentWorkFromGroupMembers;
+    } else {
+      this.studentWorkFromGroupMembers = this.getGroupStudentWorkNotIncludingMyWork(
+        studentWorkFromGroupMembers
+      );
+    }
+  }
+
+  getGroupStudentWorkNotIncludingMyWork(studentWorkFromGroupMembers: any[]): any[] {
+    const myWorkgroupId = this.configService.getWorkgroupId();
+    return studentWorkFromGroupMembers.filter((studentWork) => {
+      return studentWork.workgroupId !== myWorkgroupId;
+    });
   }
 }
