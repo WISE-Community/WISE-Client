@@ -381,7 +381,8 @@ export class MatchStudent extends ComponentStudent {
     this.sourceBucket = this.createSourceBucket();
     this.sourceBucket.items = this.sourceBucket.items.concat(this.choices);
     this.buckets.push(this.sourceBucket);
-    for (const bucket of this.componentContent.buckets) {
+    for (const componentContentBucket of this.componentContent.buckets) {
+      const bucket = JSON.parse(JSON.stringify(componentContentBucket));
       bucket.items = [];
       this.buckets.push(bucket);
     }
