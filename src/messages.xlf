@@ -929,6 +929,10 @@
           <context context-type="linenumber">88</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
@@ -14284,6 +14288,14 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
@@ -14523,15 +14535,12 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6296654944974704263" datatype="html">
-        <source>Show Group Work</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/showGroupWorkService.ts</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="3eadcc6c36867a6d135be94da38b992e5dbd2f2f" datatype="html">
         <source>Show Work Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component.html</context>
           <context context-type="linenumber">5</context>
@@ -14540,8 +14549,33 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="1702c8b1dfd9b74fe218322fb3509b227cd41b1b" datatype="html">
         <source>Show Work Component</source>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component.html</context>
           <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bf53458f6b19dba9c15c339aa781d23b1370e9c8" datatype="html">
+        <source>Peer Group Activity Tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f5e5d449095ff67307e2d7c8a4da0147117406b0" datatype="html">
+        <source> Show My Work </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6296654944974704263" datatype="html">
+        <source>Show Group Work</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/showGroupWorkService.ts</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8147119602241675293" datatype="html">
