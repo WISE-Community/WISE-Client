@@ -1462,7 +1462,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">57</context>
         </context-group>
-        <target state="needs-translation">Issue Type</target>
+        <target state="translated">Tipo de problema</target>
       </trans-unit>
       <trans-unit id="15b954ace707d502928339a1518c05e2c33a2bc4" datatype="html">
         <source>Issue Type required</source>
@@ -1470,7 +1470,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">63</context>
         </context-group>
-        <target state="needs-translation">Issue Type required</target>
+        <target state="translated">Tipo de problema requerido</target>
       </trans-unit>
       <trans-unit id="84f64f26d4b4e040f0ca418bb766cf2120b052bd" datatype="html">
         <source>Project Name</source>
@@ -8584,7 +8584,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Share Classroom Access</target>
+        <target state="translated">Compartir acceso</target>
       </trans-unit>
       <trans-unit id="f1b3a4c04de059a8a400c8eace966d618373afe0" datatype="html">
         <source>Transfer Classroom Unit</source>
@@ -8592,7 +8592,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Transfer Classroom Unit</target>
+        <target state="translated">Transferir Unidad de Clase</target>
       </trans-unit>
       <trans-unit id="024fbeb663ba44da37aa2e09552c26e13d489420" datatype="html">
         <source>Sharing access allows other WISE teachers to view student work and optionally view student names, grade, manage teams, and edit unit content.</source>
@@ -8600,7 +8600,7 @@
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Sharing access allows other WISE teachers to view student work and optionally view student names, grade, manage teams, and edit unit content.</target>
+        <target state="translated">El compartir el acceso permite a otros docentes de WISE ver el trabajo de los estudiantes y opcionalmente sus nombres, calificaciones, gestionar equipos y editar el contenido de las unidades.</target>
       </trans-unit>
       <trans-unit id="07ea4c59d728355192870ed4608485551a2c376c" datatype="html">
         <source>If you have customized the content in this unit and want to share so other teachers can use with their students, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;&quot; (click)=&quot;copyProject()&quot;&gt;"/>make a copy<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> of the unit.</source>
@@ -8900,7 +8900,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">33</context>
         </context-group>
-        <target state="needs-translation">*Note: You can always add or remove content later by editing the step.</target>
+        <target state="translated">*Nota: El contenido de un paso puede editarse en cualquier momento.</target>
       </trans-unit>
       <trans-unit id="fe47acba6a2b6d343c4568432b800629bb8dd638" datatype="html">
         <source>Choose a location for the new step</source>
@@ -8908,7 +8908,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-location/choose-new-node-location.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Choose a location for the new step</target>
+        <target state="translated">Elegir ubicación para el nuevo paso</target>
       </trans-unit>
       <trans-unit id="8bff5bc1b934165ac00899643ab91eb5320ad557" datatype="html">
         <source>Start from scratch or choose a step template:</source>
@@ -8916,7 +8916,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Start from scratch or choose a step template:</target>
+        <target state="translated">Empezar de cero o elegir una plantilla de paso:</target>
       </trans-unit>
       <trans-unit id="e11a19f1ab295da63dbb5e942c351fde8d6a6360" datatype="html">
         <source> Select </source>
@@ -8936,7 +8936,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.ts</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">Create Your Own</target>
+        <target state="translated">Crear uno propio</target>
       </trans-unit>
       <trans-unit id="5366550815577392042" datatype="html">
         <source>Create Your Own Description</source>
@@ -8960,7 +8960,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component.ts</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Automated Assessment Description</target>
+        <target state="translated">Descripción de la Evaluación Automatizada</target>
       </trans-unit>
       <trans-unit id="6013229483538709548" datatype="html">
         <source>Interactive Simulation</source>
@@ -9096,7 +9096,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/main/mainAuthoringComponent.ts</context>
           <context context-type="linenumber">92</context>
         </context-group>
-        <target state="needs-translation">There was an error copying this project. Please contact WISE staff.</target>
+        <target state="translated">Hubo un error al copiar este proyecto. Por favor contactar a WISE.</target>
       </trans-unit>
       <trans-unit id="95a6b174bcdc9e77421358825217263add8e6bd8" datatype="html">
         <source>Create Branch</source>
@@ -9104,7 +9104,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Create Branch</target>
+        <target state="translated">Crear ramificación</target>
       </trans-unit>
       <trans-unit id="06c301fa0994d4b67e51eeb201f1d3d9988c7a23" datatype="html">
         <source>Number of Branch Paths</source>
@@ -9120,7 +9120,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">15,16</context>
         </context-group>
-        <target state="needs-translation"> Remove Branch </target>
+        <target state="translated"> Remover ramificación </target>
       </trans-unit>
       <trans-unit id="f349eaff8f8387128c51240dbb351413930be068" datatype="html">
         <source>How to Choose Among Paths</source>
@@ -9136,7 +9136,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">36</context>
         </context-group>
-        <target state="needs-translation">Choose Step</target>
+        <target state="translated">Elegir Paso</target>
       </trans-unit>
       <trans-unit id="1245c793ad05ce2a888f5e24dff88b5861c392d5" datatype="html">
         <source>Choose Component</source>
@@ -9144,7 +9144,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="needs-translation">Choose Component</target>
+        <target state="translated">Elegir Componente</target>
       </trans-unit>
       <trans-unit id="58d7675515a0348b1b6782b3f3c29346482443c3" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ componentIndex + 1 }}"/>. <x id="INTERPOLATION_1" equiv-text="{{ component.type }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ component.id }}"/>) Prompt: <x id="INTERPOLATION_3" equiv-text="{{ component.prompt }}"/> </source>
@@ -9188,7 +9188,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">95</context>
         </context-group>
-        <target state="needs-translation">Score</target>
+        <target state="translated">Calificación</target>
       </trans-unit>
       <trans-unit id="811195f9acaa8be6f8d39184c94c2e3c63bff00c" datatype="html">
         <source>Choice Chosen</source>
@@ -9196,7 +9196,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">89</context>
         </context-group>
-        <target state="needs-translation">Choice Chosen</target>
+        <target state="translated">Opción elegida</target>
       </trans-unit>
       <trans-unit id="bc46fc5f8c5c9df6cf3f56382d48e786f149fe6b" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ choice.text }}"/> (<x id="INTERPOLATION_1" equiv-text="{{ choice.id }}"/>), Is Correct: <x id="INTERPOLATION_2" equiv-text="{{ choice.isCorrect }}"/>, Feedback: <x id="INTERPOLATION_3" equiv-text="{{ choice.feedback }}"/> </source>
@@ -9212,7 +9212,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.html</context>
           <context context-type="linenumber">97,98</context>
         </context-group>
-        <target state="needs-translation"> Random </target>
+        <target state="translated"> Aleatorio </target>
       </trans-unit>
       <trans-unit id="26e1ab408d92c7b0e86cacbb0d7ac460a1b68b96" datatype="html">
         <source> Close Branch Path <x id="INTERPOLATION" equiv-text="{{ branch.number }}"/> Steps Chooser </source>
@@ -9284,7 +9284,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
           <context context-type="linenumber">404</context>
         </context-group>
-        <target state="needs-translation">Score</target>
+        <target state="translated">Calificación</target>
       </trans-unit>
       <trans-unit id="8352660755693654653" datatype="html">
         <source>Choice Chosen</source>
@@ -9296,7 +9296,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">113</context>
         </context-group>
-        <target state="needs-translation">Choice Chosen</target>
+        <target state="translated">Opción elegida</target>
       </trans-unit>
       <trans-unit id="1102665189929883417" datatype="html">
         <source>Random</source>
@@ -9308,7 +9308,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">Random</target>
+        <target state="translated">Aleatorio</target>
       </trans-unit>
       <trans-unit id="1825829511397926879" datatype="html">
         <source>Tag</source>
@@ -9324,7 +9324,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">49</context>
         </context-group>
-        <target state="needs-translation">Tag</target>
+        <target state="translated">Etiqueta</target>
       </trans-unit>
       <trans-unit id="6214965175603898773" datatype="html">
         <source>Error: You can&apos;t have 0 branch paths</source>
@@ -9348,7 +9348,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/branch/node-advanced-branch-authoring.component.ts</context>
           <context context-type="linenumber">646</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to remove the branch?</target>
+        <target state="translated">¿Seguro que quiere remover la ramificación?</target>
       </trans-unit>
       <trans-unit id="0cada54d56c57f907453f8a5f13d21e293de5fa9" datatype="html">
         <source>Add Constraint</source>
@@ -9396,7 +9396,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-connected-components/edit-table-connected-components.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Action</target>
+        <target state="translated">Acción</target>
       </trans-unit>
       <trans-unit id="1f82a6f53121ef89b69e214fcd43064526986bf6" datatype="html">
         <source>Removal Conditional</source>
@@ -9436,7 +9436,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
           <context context-type="linenumber">87</context>
         </context-group>
-        <target state="needs-translation">Please Choose a Step</target>
+        <target state="translated">Por favor elija un Paso</target>
       </trans-unit>
       <trans-unit id="094540f13b02029c812bf4fe10b929a96cf6da3f" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ getNodePositionById(nodeId) + &apos;:&apos;}}"/><x id="INTERPOLATION_1" equiv-text="{{ getNodeTitleByNodeId(nodeId) }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ nodeId }}"/>)</source>
@@ -9452,7 +9452,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
           <context context-type="linenumber">105</context>
         </context-group>
-        <target state="needs-translation">Please Choose a Component</target>
+        <target state="translated">Por favor elija un Componente</target>
       </trans-unit>
       <trans-unit id="7c831d76a7e9f463ee4e190cea972b77fe7d6438" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ (componentIndex + 1) }}"/>. <x id="INTERPOLATION_1" equiv-text="{{ component.type }}"/> (Prompt: <x id="INTERPOLATION_2" equiv-text="{{ component.prompt }}"/>)</source>
@@ -9468,7 +9468,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
           <context context-type="linenumber">124</context>
         </context-group>
-        <target state="needs-translation">Please Select a From Step</target>
+        <target state="translated">Por favor elija un Desde el Paso</target>
       </trans-unit>
       <trans-unit id="20cee39940010d8e8bd5c2bf5871a1e6bf445356" datatype="html">
         <source>Please Select a To Step</source>
@@ -9476,7 +9476,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
           <context context-type="linenumber">143</context>
         </context-group>
-        <target state="needs-translation">Please Select a To Step</target>
+        <target state="translated">Por favor elija un Hasta el Paso</target>
       </trans-unit>
       <trans-unit id="337685d80c312b75cbb9b507173f51f559c7f4ae" datatype="html">
         <source>Please Select a Choice</source>
@@ -9484,7 +9484,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
           <context context-type="linenumber">186</context>
         </context-group>
-        <target state="needs-translation">Please Select a Choice</target>
+        <target state="translated">Por favor elija una Opción</target>
       </trans-unit>
       <trans-unit id="331a731f82078e496dfeddc5399c38bd40f7ffaa" datatype="html">
         <source>
@@ -9570,7 +9570,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">51</context>
         </context-group>
-        <target state="needs-translation">Make this node not visible</target>
+        <target state="translated">Hacer este nodo no visible</target>
       </trans-unit>
       <trans-unit id="1616102757855967475" datatype="html">
         <source>All</source>
@@ -9578,7 +9578,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">57</context>
         </context-group>
-        <target state="needs-translation">All</target>
+        <target state="translated">Todo</target>
       </trans-unit>
       <trans-unit id="3184700926171002527" datatype="html">
         <source>Any</source>
@@ -9602,7 +9602,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">71</context>
         </context-group>
-        <target state="needs-translation">Is Completed</target>
+        <target state="translated">Está completo</target>
       </trans-unit>
       <trans-unit id="8980375993935541237" datatype="html">
         <source>Step</source>
@@ -9686,7 +9686,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">93</context>
         </context-group>
-        <target state="needs-translation">Score(s)</target>
+        <target state="translated">Calificación(es)</target>
       </trans-unit>
       <trans-unit id="16986194959433746" datatype="html">
         <source>Branch Path Taken</source>
@@ -9694,7 +9694,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">99</context>
         </context-group>
-        <target state="needs-translation">Branch Path Taken</target>
+        <target state="translated">Recorrido de ramificación elegido</target>
       </trans-unit>
       <trans-unit id="6380325907263903883" datatype="html">
         <source>From Step</source>
@@ -9702,7 +9702,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">103</context>
         </context-group>
-        <target state="needs-translation">From Step</target>
+        <target state="translated">Desde el Paso</target>
       </trans-unit>
       <trans-unit id="455666817590621118" datatype="html">
         <source>To Step</source>
@@ -9710,7 +9710,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">107</context>
         </context-group>
-        <target state="needs-translation">To Step</target>
+        <target state="translated">Hasta el Paso</target>
       </trans-unit>
       <trans-unit id="6910078656226990536" datatype="html">
         <source>Choices</source>
@@ -9746,7 +9746,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">145</context>
         </context-group>
-        <target state="needs-translation">Used X Submits</target>
+        <target state="translated">Realizó X envíos</target>
       </trans-unit>
       <trans-unit id="767433972334291022" datatype="html">
         <source>Required Submit Count</source>
@@ -9754,7 +9754,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">157</context>
         </context-group>
-        <target state="needs-translation">Required Submit Count</target>
+        <target state="translated">Se requiere la cantidad de envíos</target>
       </trans-unit>
       <trans-unit id="2997822456018079719" datatype="html">
         <source>Is Visible</source>
@@ -9762,7 +9762,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">163</context>
         </context-group>
-        <target state="needs-translation">Is Visible</target>
+        <target state="translated">Es Visible</target>
       </trans-unit>
       <trans-unit id="2226381985639556979" datatype="html">
         <source>Is Visitable</source>
@@ -9770,7 +9770,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">173</context>
         </context-group>
-        <target state="needs-translation">Is Visitable</target>
+        <target state="translated">Es Visitable</target>
       </trans-unit>
       <trans-unit id="3284330787067886212" datatype="html">
         <source>Is Visited</source>
@@ -9778,7 +9778,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">183</context>
         </context-group>
-        <target state="needs-translation">Is Visited</target>
+        <target state="translated">Es Visitado</target>
       </trans-unit>
       <trans-unit id="3120562623622017132" datatype="html">
         <source>Wrote X Number of Words</source>
@@ -9786,7 +9786,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">193</context>
         </context-group>
-        <target state="needs-translation">Wrote X Number of Words</target>
+        <target state="translated">Escribió X cantidad de palabras</target>
       </trans-unit>
       <trans-unit id="3793469420585389570" datatype="html">
         <source>Required Number of Words</source>
@@ -9794,7 +9794,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">205</context>
         </context-group>
-        <target state="needs-translation">Required Number of Words</target>
+        <target state="translated">Requerida la cantidad de palabras</target>
       </trans-unit>
       <trans-unit id="2346474241177154844" datatype="html">
         <source>Add X Number of Notes On This Step</source>
@@ -9802,7 +9802,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">211</context>
         </context-group>
-        <target state="needs-translation">Add X Number of Notes On This Step</target>
+        <target state="translated">Agregar X cantidad de notas en este Paso</target>
       </trans-unit>
       <trans-unit id="2215706295447985195" datatype="html">
         <source>Required Number of Notes</source>
@@ -9810,7 +9810,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">219</context>
         </context-group>
-        <target state="needs-translation">Required Number of Notes</target>
+        <target state="translated">Requerida la cantidad de palabras</target>
       </trans-unit>
       <trans-unit id="3753898460381641212" datatype="html">
         <source>Fill X Number of Rows</source>
@@ -9818,7 +9818,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">225</context>
         </context-group>
-        <target state="needs-translation">Fill X Number of Rows</target>
+        <target state="translated">Llenar X cantidad de filas</target>
       </trans-unit>
       <trans-unit id="8868642264052368211" datatype="html">
         <source>Required Number of Filled Rows (Not Including Header Row)</source>
@@ -9826,7 +9826,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">238</context>
         </context-group>
-        <target state="needs-translation">Required Number of Filled Rows (Not Including Header Row)</target>
+        <target state="translated">Requerida la cantidad de filas rellenadas (sin incluir los encabezados de fila)</target>
       </trans-unit>
       <trans-unit id="3373179210544883044" datatype="html">
         <source>Table Has Header Row</source>
@@ -9834,7 +9834,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">243</context>
         </context-group>
-        <target state="needs-translation">Table Has Header Row</target>
+        <target state="translated">La tabla tiene encabezado</target>
       </trans-unit>
       <trans-unit id="3682483624336387760" datatype="html">
         <source>Require All Cells In a Row To Be Filled</source>
@@ -9842,7 +9842,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.ts</context>
           <context context-type="linenumber">248</context>
         </context-group>
-        <target state="needs-translation">Require All Cells In a Row To Be Filled</target>
+        <target state="translated">Requiere que todas las celdas en una fila sean rellenadas</target>
       </trans-unit>
       <trans-unit id="6549053190457916462" datatype="html">
         <source>Teacher Removes Constraint</source>
@@ -9882,7 +9882,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/general/node-advanced-general-authoring.component.html</context>
           <context context-type="linenumber">15,16</context>
         </context-group>
-        <target state="needs-translation"> Show Submit Button </target>
+        <target state="translated"> Mostrar botón de Enviar </target>
       </trans-unit>
       <trans-unit id="397caaa290032309390882c11de492805dead8e4" datatype="html">
         <source>Edit Step JSON</source>
@@ -9890,7 +9890,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/json/node-advanced-json-authoring.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Edit Step JSON</target>
+        <target state="translated">Editar JSON del Paso</target>
       </trans-unit>
       <trans-unit id="f70f8b1d5244e87cb949377f5ea3722f7a52d553" datatype="html">
         <source>Paths</source>
@@ -9898,7 +9898,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Paths</target>
+        <target state="translated">Recorridos</target>
       </trans-unit>
       <trans-unit id="5767ba76365ed9ed651b7abe4fd1ad8c4eda11ee" datatype="html">
         <source>Add a path</source>
@@ -9906,7 +9906,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Add a path</target>
+        <target state="translated">Agregar un recorrido</target>
       </trans-unit>
       <trans-unit id="2a856ced9ba8b59e19a90427c927a9c1799ae814" datatype="html">
         <source> There are no paths out of this step
@@ -9915,7 +9915,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">13,14</context>
         </context-group>
-        <target state="needs-translation"> There are no paths out of this step
+        <target state="translated"> No hay recorridos para este paso
 </target>
       </trans-unit>
       <trans-unit id="ee93d749730f5ae1d9d0f6cb5a141f0b5a2224e8" datatype="html">
@@ -9932,7 +9932,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">Delete path</target>
+        <target state="translated">Eliminar recorrido</target>
       </trans-unit>
       <trans-unit id="fa732bcde4ea86edc40eddcc5c057ae878d8ac59" datatype="html">
         <source>Which step this path leads to</source>
@@ -9940,7 +9940,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="needs-translation">Which step this path leads to</target>
+        <target state="translated">A qué paso conduce este recorrido</target>
       </trans-unit>
       <trans-unit id="74f563e1cafbbbaeb15e20840c26a194a42f38ba" datatype="html">
         <source>Requirements</source>
@@ -9948,7 +9948,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <target state="needs-translation">Requirements</target>
+        <target state="translated">Requerimientos</target>
       </trans-unit>
       <trans-unit id="f0e66684c9c8050b4db7ce7212d2d45b06d751cd" datatype="html">
         <source>Add a requirement for this path</source>
@@ -9956,7 +9956,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">49</context>
         </context-group>
-        <target state="needs-translation">Add a requirement for this path</target>
+        <target state="translated">Agregar un requerimiento para este recorrido</target>
       </trans-unit>
       <trans-unit id="6fbf852b33ee8b0634f7af1592e80de9e4226c9e" datatype="html">
         <source> There are no requirements for this transition </source>
@@ -9964,7 +9964,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">56,57</context>
         </context-group>
-        <target state="needs-translation"> There are no requirements for this transition </target>
+        <target state="translated"> No hay requerimientos para esta transición </target>
       </trans-unit>
       <trans-unit id="da5dce2488f1d19a15da35e59cc6d18dd39eff55" datatype="html">
         <source>The student needs to</source>
@@ -9972,7 +9972,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">62</context>
         </context-group>
-        <target state="needs-translation">The student needs to</target>
+        <target state="translated">El/la estudiante necesita</target>
       </trans-unit>
       <trans-unit id="2f07413706ed8845d98a15692ed31f76b050a94d" datatype="html">
         <source>Delete this requirement</source>
@@ -9980,7 +9980,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">78</context>
         </context-group>
-        <target state="needs-translation">Delete this requirement</target>
+        <target state="translated">Eliminar este requerimiento</target>
       </trans-unit>
       <trans-unit id="ee9fceb5c80ca69aa7f7c26262837fbcfea8ffbf" datatype="html">
         <source>The student needs to choose this choice</source>
@@ -9988,7 +9988,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">129</context>
         </context-group>
-        <target state="needs-translation">The student needs to choose this choice</target>
+        <target state="translated">El/La estudiante necesita elegir esta opción</target>
       </trans-unit>
       <trans-unit id="987bd44fb717e3299640f9be1042f5f12a55b140" datatype="html">
         <source>The student needs to choose these choices</source>
@@ -9996,7 +9996,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">141</context>
         </context-group>
-        <target state="needs-translation">The student needs to choose these choices</target>
+        <target state="translated">El/La estudiante necesita elegir estas opciones</target>
       </trans-unit>
       <trans-unit id="337ca2e5eeea28eaca91e8511eb5eaafdb385ce6" datatype="html">
         <source>Tag</source>
@@ -10004,7 +10004,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">153</context>
         </context-group>
-        <target state="needs-translation">Tag</target>
+        <target state="translated">Etiqueta</target>
       </trans-unit>
       <trans-unit id="633096eab818151cb300ca4201e022414ba00d70" datatype="html">
         <source>How to choose among available paths</source>
@@ -10012,7 +10012,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">165</context>
         </context-group>
-        <target state="needs-translation">How to choose among available paths</target>
+        <target state="translated">Cómo elegir entre estos recorridos disponibles</target>
       </trans-unit>
       <trans-unit id="00fd86bb6dc4681e493de8f2ca8ffeab4c851be1" datatype="html">
         <source>When to choose path</source>
@@ -10020,7 +10020,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">179</context>
         </context-group>
-        <target state="needs-translation">When to choose path</target>
+        <target state="translated">Cuándo elegir un recorrido</target>
       </trans-unit>
       <trans-unit id="247eed3fc2331c25d31014622202310bbddba64d" datatype="html">
         <source>Can change path</source>
@@ -10028,7 +10028,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">193</context>
         </context-group>
-        <target state="needs-translation">Can change path</target>
+        <target state="translated">Puede cambiar el recorrido</target>
       </trans-unit>
       <trans-unit id="076a88d122244d6db473a42168737b4a534d140d" datatype="html">
         <source>Max paths visitable</source>
@@ -10036,7 +10036,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">208</context>
         </context-group>
-        <target state="needs-translation">Max paths visitable</target>
+        <target state="translated">Máximo de recorridos visitables</target>
       </trans-unit>
       <trans-unit id="4465085913683915434" datatype="html">
         <source>True</source>
@@ -10044,7 +10044,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">True</target>
+        <target state="translated">Verdadero</target>
       </trans-unit>
       <trans-unit id="3800326155195149498" datatype="html">
         <source>False</source>
@@ -10052,7 +10052,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="needs-translation">False</target>
+        <target state="translated">Falso</target>
       </trans-unit>
       <trans-unit id="4746248193865274387" datatype="html">
         <source>First Available</source>
@@ -10060,7 +10060,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">First Available</target>
+        <target state="translated">Primero disponible</target>
       </trans-unit>
       <trans-unit id="5749828523955698758" datatype="html">
         <source>Last Available</source>
@@ -10068,7 +10068,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Last Available</target>
+        <target state="translated">Último disponible</target>
       </trans-unit>
       <trans-unit id="2240347155507306942" datatype="html">
         <source>Get a specific score on a component</source>
@@ -10076,7 +10076,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Get a specific score on a component</target>
+        <target state="translated">Obtener un puntaje específico en un componente</target>
       </trans-unit>
       <trans-unit id="282405884193383477" datatype="html">
         <source>Node ID</source>
@@ -10088,7 +10088,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">41</context>
         </context-group>
-        <target state="needs-translation">Node ID</target>
+        <target state="translated">ID de Nodo</target>
       </trans-unit>
       <trans-unit id="6666903681821403514" datatype="html">
         <source>Component ID</source>
@@ -10100,7 +10100,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">42</context>
         </context-group>
-        <target state="needs-translation">Component ID</target>
+        <target state="translated">ID de componente</target>
       </trans-unit>
       <trans-unit id="5224889179213510862" datatype="html">
         <source>Scores(s)</source>
@@ -10108,7 +10108,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">33</context>
         </context-group>
-        <target state="needs-translation">Scores(s)</target>
+        <target state="translated">Calificación(es)</target>
       </trans-unit>
       <trans-unit id="5667984727098835392" datatype="html">
         <source>Score ID (Optional)</source>
@@ -10124,7 +10124,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">39</context>
         </context-group>
-        <target state="needs-translation">Choose a specific choice on a component</target>
+        <target state="translated">Elegir una opción específica de un componente</target>
       </trans-unit>
       <trans-unit id="4749094791509859108" datatype="html">
         <source>Have Tag Assigned To Workgroup</source>
@@ -10132,7 +10132,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <target state="needs-translation">Have Tag Assigned To Workgroup</target>
+        <target state="translated">Tiene etiqueta asignada al Grupo de Trabajo</target>
       </trans-unit>
       <trans-unit id="2816870790889466850" datatype="html">
         <source>Enter Node</source>
@@ -10140,7 +10140,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="needs-translation">Enter Node</target>
+        <target state="translated">Ingresar Nodo</target>
       </trans-unit>
       <trans-unit id="7469455958890383589" datatype="html">
         <source>Exit Node</source>
@@ -10148,7 +10148,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">54</context>
         </context-group>
-        <target state="needs-translation">Exit Node</target>
+        <target state="translated">Salir del Nodo</target>
       </trans-unit>
       <trans-unit id="2016805497661021642" datatype="html">
         <source>Score Changed</source>
@@ -10156,7 +10156,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">Score Changed</target>
+        <target state="translated">La calificación cambió</target>
       </trans-unit>
       <trans-unit id="6660309701458926514" datatype="html">
         <source>Student Data Changed</source>
@@ -10164,7 +10164,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">Student Data Changed</target>
+        <target state="translated">Cambiaron los datos del/la estudiante</target>
       </trans-unit>
       <trans-unit id="931706124544241162" datatype="html">
         <source>Are you sure you want to delete this requirement?</source>
@@ -10172,7 +10172,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">136</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this requirement?</target>
+        <target state="translated">¿Seguro que desea eliminar este requerimiento?</target>
       </trans-unit>
       <trans-unit id="9161423248419359552" datatype="html">
         <source>Are you sure you want to delete this path to &quot;<x id="PH" equiv-text="stepTitle"/>&quot;?</source>
@@ -10180,7 +10180,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">204</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this path to "<x id="PH" equiv-text="stepTitle"/>"?</target>
+        <target state="translated">¿Seguro que desea eliminar este recorrido a "<x id="PH" equiv-text="stepTitle"/>"?</target>
       </trans-unit>
       <trans-unit id="e5f24fc7a2bf50bd61d109dd9cad3fbff6ec7add" datatype="html">
         <source>Required</source>
@@ -10188,7 +10188,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Required</target>
+        <target state="translated">Requerido</target>
       </trans-unit>
       <trans-unit id="92328333ea9c72926ca7c631e9e1c0f081cbf565" datatype="html">
         <source>Edit Unit Rubric</source>
@@ -10204,7 +10204,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-state-info/component-state-info.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Submitted</target>
+        <target state="translated">Enviado</target>
       </trans-unit>
       <trans-unit id="52b56d5859b56a3a1bfe56ce67dfd5e93b21e960" datatype="html">
         <source>Saved</source>
@@ -10212,7 +10212,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-state-info/component-state-info.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Saved</target>
+        <target state="translated">Guardado</target>
       </trans-unit>
       <trans-unit id="694e14160d51abf2460c07f4d2592dac127e1f2f" datatype="html">
         <source>Auto Comment</source>
@@ -10232,7 +10232,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-annotations/edit-component-annotations.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <target state="needs-translation">No feedback given for this version</target>
+        <target state="translated">No se ha brindado retroalimentación para esta versión</target>
       </trans-unit>
       <trans-unit id="1de4bc95785a34afe2f48becbf8fbb591cf39b5f" datatype="html">
         <source>Teacher Comment:</source>
@@ -10256,7 +10256,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Auto Score</target>
+        <target state="translated">Auto calificación</target>
       </trans-unit>
       <trans-unit id="f1614a3596f48debea1d7f7c616381868d9741cd" datatype="html">
         <source>Teacher Score:</source>
@@ -10264,7 +10264,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Teacher Score:</target>
+        <target state="translated">Calificación del docente:</target>
       </trans-unit>
       <trans-unit id="2be79e7197af4e1e057ff5164b6f53fb91126eae" datatype="html">
         <source>Item Score:</source>
@@ -10272,7 +10272,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Item Score:</target>
+        <target state="translated">Calificación del item:</target>
       </trans-unit>
       <trans-unit id="463ae7be19d173ab727deebd0ba59925ab12390d" datatype="html">
         <source>Create a new team</source>
@@ -10280,7 +10280,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-button/add-team-button.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Create a new team</target>
+        <target state="translated">Crear un nuevo equipo</target>
       </trans-unit>
       <trans-unit id="f5a0686cf32eb4fea3247ca0c61821005c322186" datatype="html">
         <source>New Team</source>
@@ -10288,7 +10288,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-button/add-team-button.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">New Team</target>
+        <target state="translated">Nuevo Equipo</target>
       </trans-unit>
       <trans-unit id="075d61dad9fdfbec0186f4759d153ab4b25ec5ed" datatype="html">
         <source>Create New Team (Period <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/>)</source>
@@ -10296,7 +10296,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Create New Team (Period <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/>)</target>
+        <target state="translated">Crear Nuevo Equipo (Período <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/>)</target>
       </trans-unit>
       <trans-unit id="4c83e79205d3ed1110fce42349e356be4adfeb94" datatype="html">
         <source>Select students to add to the new team:</source>
@@ -10304,7 +10304,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Select students to add to the new team:</target>
+        <target state="translated">Seleccionar estudiantes para agregar al nuevo equipo:</target>
       </trans-unit>
       <trans-unit id="da4d824b07f56697ecb3ccd2b1daae888f36662f" datatype="html">
         <source>No team members added</source>
@@ -10312,7 +10312,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">No team members added</target>
+        <target state="translated">No se agregaron nuevos miembros</target>
       </trans-unit>
       <trans-unit id="c221696c6d218674ebe7289b93dc32ddf09281f6" datatype="html">
         <source>Delete team member</source>
@@ -10320,7 +10320,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="needs-translation">Delete team member</target>
+        <target state="translated">Eliminar miembros del equipo</target>
       </trans-unit>
       <trans-unit id="c9edeb217965a55b5e8120e380b70bda6dcd8c69" datatype="html">
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon color=&quot;warn&quot; aria-label=&quot;Warning color&quot; aira-label-18n&gt;"/>stop<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> = Student without a current team </source>
@@ -10328,7 +10328,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
           <context context-type="linenumber">35,36</context>
         </context-group>
-        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon color=&quot;warn&quot; aria-label=&quot;Warning color&quot; aira-label-18n&gt;"/>stop<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> = Student without a current team </target>
+        <target state="translated"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon color=&quot;warn&quot; aria-label=&quot;Warning color&quot; aira-label-18n&gt;"/>stop<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> = Estudiante sin equipo asignado </target>
       </trans-unit>
       <trans-unit id="70a67e04629f6d412db0a12d51820b480788d795" datatype="html">
         <source>Create</source>
@@ -10336,7 +10336,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <target state="needs-translation">Create</target>
+        <target state="translated">Crear</target>
       </trans-unit>
       <trans-unit id="1914329737918937216" datatype="html">
         <source>New team <x id="PH" equiv-text="newWorkgroupId"/> has been created.</source>
@@ -10344,7 +10344,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.ts</context>
           <context context-type="linenumber">80</context>
         </context-group>
-        <target state="needs-translation">New team <x id="PH" equiv-text="newWorkgroupId"/> has been created.</target>
+        <target state="translated">El nuevo equipo <x id="PH" equiv-text="newWorkgroupId"/> ha sido creado.</target>
       </trans-unit>
       <trans-unit id="6babfd035bd01c83b35e9440bd51b8b3b45e15d6" datatype="html">
         <source>Change Student Password</source>
@@ -10352,7 +10352,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Change Student Password</target>
+        <target state="translated">Cambiar contraseña de estudiante</target>
       </trans-unit>
       <trans-unit id="8a63415043b4a84f052f227fc7fea5e1bd8023c0" datatype="html">
         <source>Change password for </source>
@@ -10360,7 +10360,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Change password for </target>
+        <target state="translated">Cambiar contraseña para </target>
       </trans-unit>
       <trans-unit id="cc098b5c45cb0a9a41f75986d8ba37564302cf50" datatype="html">
         <source>Student <x id="INTERPOLATION" equiv-text="{{user.id}}"/></source>
@@ -10384,7 +10384,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">Teacher Password</target>
+        <target state="translated">Contraseña del docente</target>
       </trans-unit>
       <trans-unit id="3eb3060dbcb7f5e3034e2d1ca3827dfc982e51f5" datatype="html">
         <source>Teacher Password required</source>
@@ -10392,7 +10392,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="needs-translation">Teacher Password required</target>
+        <target state="translated">Se requiere contraseña del docente</target>
       </trans-unit>
       <trans-unit id="f1ca7e8784d363977ca2745cb7550fb03ce54d30" datatype="html">
         <source>New Student Password</source>
@@ -10400,7 +10400,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">New Student Password</target>
+        <target state="translated">Nueva contraseña de estudiante</target>
       </trans-unit>
       <trans-unit id="9fe2145f77bb355cd1631bdff398b57391e589e2" datatype="html">
         <source>New Student Password required</source>
@@ -10528,7 +10528,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Student ID</target>
+        <target state="translated">ID de estudiante</target>
       </trans-unit>
       <trans-unit id="53684a4ac6d12088a94ed67fe4a63c7d5405be2e" datatype="html">
         <source>Most Recent Login</source>
@@ -10536,7 +10536,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Most Recent Login</target>
+        <target state="translated">Accesos recientes</target>
       </trans-unit>
       <trans-unit id="5e538d8948a58cc9389f36c011afcbb1e11da0f9" datatype="html">
         <source>Registration Date</source>
@@ -10876,7 +10876,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">84</context>
         </context-group>
-        <target state="needs-translation">Knowledge Integration elicit ideas</target>
+        <target state="translated">Integración del Conocimiento generar ideas</target>
       </trans-unit>
       <trans-unit id="9027810240090135692" datatype="html">
         <source>Elicit Ideas</source>
@@ -10892,7 +10892,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">89</context>
         </context-group>
-        <target state="needs-translation">Knowledge Integration discover ideas</target>
+        <target state="translated">Integración del Conocimiento descubrir ideas</target>
       </trans-unit>
       <trans-unit id="6987978600862806678" datatype="html">
         <source>Discover Ideas</source>
@@ -10908,7 +10908,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">94</context>
         </context-group>
-        <target state="needs-translation">Knowledge Integration distinguish ideas</target>
+        <target state="translated">Integración del Conocimiento distinguir ideas</target>
       </trans-unit>
       <trans-unit id="5003353968126431012" datatype="html">
         <source>Distinguish Ideas</source>
@@ -10924,7 +10924,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">99</context>
         </context-group>
-        <target state="needs-translation">Knowledge Integration connect ideas and reflect</target>
+        <target state="translated">Integración del Conocimiento conectar ideas y reflexionar</target>
       </trans-unit>
       <trans-unit id="1055307563609433839" datatype="html">
         <source>Connect Ideas &amp; Reflect</source>
@@ -10932,7 +10932,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">100</context>
         </context-group>
-        <target state="needs-translation">Connect Ideas &amp; Reflect</target>
+        <target state="translated">Conectar Ideas &amp; Reflexionar</target>
       </trans-unit>
       <trans-unit id="1395167530251175410" datatype="html">
         <source>Knowledge Integration cycle</source>
@@ -10940,7 +10940,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">104</context>
         </context-group>
-        <target state="needs-translation">Knowledge Integration cycle</target>
+        <target state="translated">Ciclo de Integración del Conocimiento</target>
       </trans-unit>
       <trans-unit id="4840904011085648831" datatype="html">
         <source>KI Cycle</source>
@@ -10948,7 +10948,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">105</context>
         </context-group>
-        <target state="needs-translation">KI Cycle</target>
+        <target state="translated">Ciclo de IC</target>
       </trans-unit>
       <trans-unit id="9ba24bf3c65fed6e59c2d2264be8d104f370a69c" datatype="html">
         <source>Previous Step</source>
@@ -10964,7 +10964,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Previous Step</target>
+        <target state="translated">Paso Anterior</target>
       </trans-unit>
       <trans-unit id="63801449925cc7b568e5ed1b756f2f17e1632d97" datatype="html">
         <source>Select a Step</source>
@@ -10984,7 +10984,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">Select a Step</target>
+        <target state="translated">Seleccionar un Paso</target>
       </trans-unit>
       <trans-unit id="336bb34dbee61b667deb8c5d2f94d7b7451e3eb8" datatype="html">
         <source> Select a Step </source>
@@ -10992,7 +10992,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">28,29</context>
         </context-group>
-        <target state="needs-translation"> Select a Step </target>
+        <target state="translated"> Seleccionar un Paso </target>
       </trans-unit>
       <trans-unit id="8b28432b6c78dfa3fb0a921ff13c63faa06457fe" datatype="html">
         <source>Next Step</source>
@@ -11008,7 +11008,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">57</context>
         </context-group>
-        <target state="needs-translation">Next Step</target>
+        <target state="translated">Paso Siguiente</target>
       </trans-unit>
       <trans-unit id="df184ae51172832d20f5f4d460894d183c397025" datatype="html">
         <source>Width (Pixels)</source>
@@ -11016,7 +11016,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Width (Pixels)</target>
+        <target state="translated">Ancho (pixels)</target>
       </trans-unit>
       <trans-unit id="8b2bddba6d9e64e99c22fac2645f2f70d926c54e" datatype="html">
         <source>Height (Pixels)</source>
@@ -11024,7 +11024,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="needs-translation">Height (Pixels)</target>
+        <target state="translated">Alto (pixels)</target>
       </trans-unit>
       <trans-unit id="5267498fc1cf5746e92132632299c4f170acdd38" datatype="html">
         <source>Width (Units)</source>
@@ -11032,7 +11032,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">Width (Units)</target>
+        <target state="translated">Ancho (unidades)</target>
       </trans-unit>
       <trans-unit id="701a0dcd34275c6c20cf014390a51e52f815a527" datatype="html">
         <source>Height (Units)</source>
@@ -11040,7 +11040,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
-        <target state="needs-translation">Height (Units)</target>
+        <target state="translated">Alto (unidades)</target>
       </trans-unit>
       <trans-unit id="9ac620f767315e6287cdeaf22a58ecf0c7e7f9c2" datatype="html">
         <source>Data Origin X (Pixels)</source>
@@ -11064,7 +11064,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">67,68</context>
         </context-group>
-        <target state="needs-translation"> Screen </target>
+        <target state="translated"> Pantalla </target>
       </trans-unit>
       <trans-unit id="fdae5712fc4f05add769baf6a28e0f9ad34970d1" datatype="html">
         <source> Cartesian </source>
@@ -11072,7 +11072,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">74,75</context>
         </context-group>
-        <target state="needs-translation"> Cartesian </target>
+        <target state="translated"> Cartesiano </target>
       </trans-unit>
       <trans-unit id="afdb601c16162f2c798b16a2920955f1cc6a20aa" datatype="html">
         <source>Objects</source>
@@ -11080,7 +11080,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">79</context>
         </context-group>
-        <target state="needs-translation">Objects</target>
+        <target state="translated">Objetos</target>
       </trans-unit>
       <trans-unit id="bd2997d1e32d4132ac2f4230777e0f64ad5db06f" datatype="html">
         <source>Add Object</source>
@@ -11088,7 +11088,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">83</context>
         </context-group>
-        <target state="needs-translation">Add Object</target>
+        <target state="translated">Agregar objeto</target>
       </trans-unit>
       <trans-unit id="5349af83bd04e5ceddfd26ec5a13d3eac4e04aa3" datatype="html">
         <source> Image </source>
@@ -11096,7 +11096,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">104,105</context>
         </context-group>
-        <target state="needs-translation"> Image </target>
+        <target state="translated"> Imagen </target>
       </trans-unit>
       <trans-unit id="6594220b7118a3c1ff8c30585868b80bb8c821de" datatype="html">
         <source> Text </source>
@@ -11104,7 +11104,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">111,112</context>
         </context-group>
-        <target state="needs-translation"> Text </target>
+        <target state="translated"> Texto </target>
       </trans-unit>
       <trans-unit id="a5f9ba9bb9faa8284bcadb1cdbc6aaf969e9c4bb" datatype="html">
         <source>Image</source>
@@ -11132,7 +11132,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
           <context context-type="linenumber">60</context>
         </context-group>
-        <target state="needs-translation">Image</target>
+        <target state="translated">Imagen</target>
       </trans-unit>
       <trans-unit id="ac7627de4d6171adbfba4d934025c8c39debc469" datatype="html">
         <source>Choose an Image</source>
@@ -11228,7 +11228,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
           <context context-type="linenumber">57</context>
         </context-group>
-        <target state="needs-translation">Choose an Image</target>
+        <target state="translated">Elegir una Imagen</target>
       </trans-unit>
       <trans-unit id="8ba143716c2da6e4120c0c1a804f0bdd9a7e5f5b" datatype="html">
         <source>Text</source>
@@ -11248,7 +11248,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">112</context>
         </context-group>
-        <target state="needs-translation">Text</target>
+        <target state="translated">Texto</target>
       </trans-unit>
       <trans-unit id="39827ee9952ed983e1c42eaef82e390fc5d92a58" datatype="html">
         <source>Move Object Up</source>
@@ -11256,7 +11256,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">147</context>
         </context-group>
-        <target state="needs-translation">Move Object Up</target>
+        <target state="translated">Mover objeto hacia arriba</target>
       </trans-unit>
       <trans-unit id="b7cd4598b947ef99d3603c8a026a57b821786785" datatype="html">
         <source>Up</source>
@@ -11288,7 +11288,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">154</context>
         </context-group>
-        <target state="needs-translation">Up</target>
+        <target state="translated">Arriba</target>
       </trans-unit>
       <trans-unit id="0fb395209832e558eb8ea6fb9233de2b2e4d9739" datatype="html">
         <source>Move Object Down</source>
@@ -11296,7 +11296,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">159</context>
         </context-group>
-        <target state="needs-translation">Move Object Down</target>
+        <target state="translated">Mover objeto hacia abajo</target>
       </trans-unit>
       <trans-unit id="c52c8626a9b546aa3859aa0a2e58221e27285cee" datatype="html">
         <source>Down</source>
@@ -11328,7 +11328,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">166</context>
         </context-group>
-        <target state="needs-translation">Down</target>
+        <target state="translated">Abajo</target>
       </trans-unit>
       <trans-unit id="69d176fb780a26c006d3ef975fb16645a2f44abe" datatype="html">
         <source>Delete Object</source>
@@ -11336,7 +11336,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">170</context>
         </context-group>
-        <target state="needs-translation">Delete Object</target>
+        <target state="translated">Eliminar objeto</target>
       </trans-unit>
       <trans-unit id="690a6d2fcf85a0854096391408df478482badf8a" datatype="html">
         <source>Image Width (Pixels)</source>
@@ -11344,7 +11344,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">181</context>
         </context-group>
-        <target state="needs-translation">Image Width (Pixels)</target>
+        <target state="translated">Ancho de imagen (pixels)</target>
       </trans-unit>
       <trans-unit id="de83b77448a33a8247809b61849b581f367f6344" datatype="html">
         <source>Image Height (Pixels)</source>
@@ -11352,7 +11352,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">189</context>
         </context-group>
-        <target state="needs-translation">Image Height (Pixels)</target>
+        <target state="translated">Alto de imagen (pixels)</target>
       </trans-unit>
       <trans-unit id="5df086bb7bebadb64eb7c562b936b1120c7ea2c2" datatype="html">
         <source>Image Moving Left</source>
@@ -11360,7 +11360,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">199</context>
         </context-group>
-        <target state="needs-translation">Image Moving Left</target>
+        <target state="translated">Mover imagen hacia la izquierda</target>
       </trans-unit>
       <trans-unit id="fff0cec45caa66d325fe392895fbbd2f3a861b87" datatype="html">
         <source>Image Moving Right</source>
@@ -11368,7 +11368,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">216</context>
         </context-group>
-        <target state="needs-translation">Image Moving Right</target>
+        <target state="translated">Mover imagen hacia la derecha</target>
       </trans-unit>
       <trans-unit id="547d11041e289de36f5958c484bffabc1cd6fcde" datatype="html">
         <source>Location X (Pixels)</source>
@@ -11376,7 +11376,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">235</context>
         </context-group>
-        <target state="needs-translation">Location X (Pixels)</target>
+        <target state="translated">Coordenada X (pixels)</target>
       </trans-unit>
       <trans-unit id="e8f3f6a38df7af92cccc986f5b833c2c226524fb" datatype="html">
         <source>Location Y (Pixels)</source>
@@ -11384,7 +11384,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">243</context>
         </context-group>
-        <target state="needs-translation">Location Y (Pixels)</target>
+        <target state="translated">Coordenada Y (pixels)</target>
       </trans-unit>
       <trans-unit id="1d9afebdca76f25aa9ddf671699f24fff8f357a0" datatype="html">
         <source>Data X (Units)</source>
@@ -11392,7 +11392,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">251</context>
         </context-group>
-        <target state="needs-translation">Data X (Units)</target>
+        <target state="translated">Dato X (Unidades)</target>
       </trans-unit>
       <trans-unit id="117106ed2c2a6afb070d53fe00d5f0e6f8777373" datatype="html">
         <source>Data Y (Units)</source>
@@ -11400,7 +11400,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">259</context>
         </context-group>
-        <target state="needs-translation">Data Y (Units)</target>
+        <target state="translated">Dato Y (unidades)</target>
       </trans-unit>
       <trans-unit id="b6227dc3e17d5f8b796e21e712f8c55ebc9a1046" datatype="html">
         <source>Data Points</source>
@@ -11412,7 +11412,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">419</context>
         </context-group>
-        <target state="needs-translation">Data Points</target>
+        <target state="translated">Puntos de los datos</target>
       </trans-unit>
       <trans-unit id="b5c5ea7ee14b645e592707054ca5b727bd985ad0" datatype="html">
         <source>Add Data Point</source>
@@ -11424,7 +11424,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">423</context>
         </context-group>
-        <target state="needs-translation">Add Data Point</target>
+        <target state="translated">Agregar punto de dato</target>
       </trans-unit>
       <trans-unit id="b24f1cd32cbc1ec9537af28c4fe1b8204097714b" datatype="html">
         <source>Time</source>
@@ -11432,7 +11432,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">287</context>
         </context-group>
-        <target state="needs-translation">Time</target>
+        <target state="translated">Tiempo</target>
       </trans-unit>
       <trans-unit id="eb652ec6e5b2ef867985722c158224053cca15ab" datatype="html">
         <source>X</source>
@@ -11452,7 +11452,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">178</context>
         </context-group>
-        <target state="needs-translation">X</target>
+        <target state="translated">X</target>
       </trans-unit>
       <trans-unit id="5f735468df8e1a39a74409adff2c9a9a5f29ead8" datatype="html">
         <source>Y</source>
@@ -11472,7 +11472,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">185</context>
         </context-group>
-        <target state="needs-translation">Y</target>
+        <target state="translated">Y</target>
       </trans-unit>
       <trans-unit id="a87cd687ef990679c0deb96f208f06f03422c08c" datatype="html">
         <source>Change to Image (Optional)</source>
@@ -11480,7 +11480,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">311</context>
         </context-group>
-        <target state="needs-translation">Change to Image (Optional)</target>
+        <target state="translated">Cambiar a Imagen (opcional)</target>
       </trans-unit>
       <trans-unit id="60868526620ee92a59b32a059834511e5ec8b6b8" datatype="html">
         <source>Delete Data Point</source>
@@ -11492,7 +11492,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">488</context>
         </context-group>
-        <target state="needs-translation">Delete Data Point</target>
+        <target state="translated">Eliminar punto de dato</target>
       </trans-unit>
       <trans-unit id="1b6bc6d5daaa6ec75d201690bb6f782f30bf98a0" datatype="html">
         <source>Data Source</source>
@@ -11500,7 +11500,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">367</context>
         </context-group>
-        <target state="needs-translation">Data Source</target>
+        <target state="translated">Origen de datos</target>
       </trans-unit>
       <trans-unit id="f5e4f7358f5f70cb4e88c83e3865cd758369b8bf" datatype="html">
         <source>Add Data Source</source>
@@ -11508,7 +11508,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">373</context>
         </context-group>
-        <target state="needs-translation">Add Data Source</target>
+        <target state="translated">Agregar origen de datos</target>
       </trans-unit>
       <trans-unit id="42b5078634d3e085b31b421372fceb987d07592f" datatype="html">
         <source>Delete Data Source</source>
@@ -11516,7 +11516,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">384</context>
         </context-group>
-        <target state="needs-translation">Delete Data Source</target>
+        <target state="translated">Eliminar origen de dato</target>
       </trans-unit>
       <trans-unit id="475b087f10a84debf0c689d012f27f6c4e9868e9" datatype="html">
         <source>Trial Index</source>
@@ -11524,7 +11524,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
           <context context-type="linenumber">419</context>
         </context-group>
-        <target state="needs-translation">Trial Index</target>
+        <target state="translated">Índice de prueba</target>
       </trans-unit>
       <trans-unit id="fb86d7d684aed2a9795e8bfcc18097a462065823" datatype="html">
         <source>Series Index</source>
@@ -11612,7 +11612,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="needs-translation">Play</target>
+        <target state="translated">Reproducir</target>
       </trans-unit>
       <trans-unit id="b2838c6165a9672a17db188f4dd9676574353dd8" datatype="html">
         <source>Pause</source>
@@ -11950,7 +11950,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
-        <target state="needs-translation">Max Amplitude Played</target>
+        <target state="translated">Amplitud Máxima</target>
       </trans-unit>
       <trans-unit id="9c2c8ec247988ec539f153bfa59000811c7cbf89" datatype="html">
         <source>Oscillator Type</source>
@@ -11958,7 +11958,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Oscillator Type</target>
+        <target state="translated">Tipo de Oscilador</target>
       </trans-unit>
       <trans-unit id="abf667ffefffda6607c19873644cadf7b64e6852" datatype="html">
         <source>Frequency (Hz)</source>
@@ -11966,7 +11966,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="needs-translation">Frequency (Hz)</target>
+        <target state="translated">Frecuencia (Hz)</target>
       </trans-unit>
       <trans-unit id="a59391d2fb63e4438777098cb4166b3fed876056" datatype="html">
         <source>Ampitude (dB)</source>
@@ -11974,7 +11974,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">Ampitude (dB)</target>
+        <target state="translated">Amplitud (dB)</target>
       </trans-unit>
       <trans-unit id="8564202903947049539" datatype="html">
         <source>Play</source>
@@ -11982,7 +11982,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
           <context context-type="linenumber">280</context>
         </context-group>
-        <target state="needs-translation">Play</target>
+        <target state="translated">Reproducir</target>
       </trans-unit>
       <trans-unit id="3133539296286953705" datatype="html">
         <source>Stop</source>
@@ -11990,7 +11990,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator-student.component.ts</context>
           <context context-type="linenumber">284</context>
         </context-group>
-        <target state="needs-translation">Stop</target>
+        <target state="translated">Detener</target>
       </trans-unit>
       <trans-unit id="6333335057236774263" datatype="html">
         <source>Saved</source>
@@ -11998,7 +11998,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
           <context context-type="linenumber">566</context>
         </context-group>
-        <target state="needs-translation">Saved</target>
+        <target state="translated">Guardado</target>
       </trans-unit>
       <trans-unit id="6643018309880261465" datatype="html">
         <source>Auto Saved</source>
@@ -12006,7 +12006,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
           <context context-type="linenumber">570</context>
         </context-group>
-        <target state="needs-translation">Auto Saved</target>
+        <target state="translated">Auto guardado</target>
       </trans-unit>
       <trans-unit id="1612722476211621614" datatype="html">
         <source>Submitted</source>
@@ -12014,7 +12014,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
           <context context-type="linenumber">574</context>
         </context-group>
-        <target state="needs-translation">Submitted</target>
+        <target state="translated">Enviado</target>
       </trans-unit>
       <trans-unit id="818444ddcd112e756ab725357dcfb238b9257324" datatype="html">
         <source>Background Image (Optional)</source>
@@ -12030,7 +12030,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">240</context>
         </context-group>
-        <target state="needs-translation">Background Image (Optional)</target>
+        <target state="translated">Imagen de fondo (opcional)</target>
       </trans-unit>
       <trans-unit id="8826edcfc6401bd828595e349d2a560cf84e8613" datatype="html">
         <source> Stretch background to fit </source>
@@ -12038,7 +12038,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">25,26</context>
         </context-group>
-        <target state="needs-translation"> Stretch background to fit </target>
+        <target state="translated"> Ajustar fondo </target>
       </trans-unit>
       <trans-unit id="d23ca7ec1129194cd7886fb73832a19ce4e00354" datatype="html">
         <source> Allow student to upload background image </source>
@@ -12046,7 +12046,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">33,34</context>
         </context-group>
-        <target state="needs-translation"> Allow student to upload background image </target>
+        <target state="translated"> Permitir a estudiantes cargar imagen de fondo </target>
       </trans-unit>
       <trans-unit id="24a6439d05a766062a67a2c2797c3d46e0b14cb1" datatype="html">
         <source>Canvas Width (Optional)</source>
@@ -12054,7 +12054,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">Canvas Width (Optional)</target>
+        <target state="translated">Ancho del Lienzo (opcional)</target>
       </trans-unit>
       <trans-unit id="ac73c15ba143c99206114f58260b06bd8f4f4f83" datatype="html">
         <source>Canvas Height (Optional)</source>
@@ -12066,7 +12066,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">40</context>
         </context-group>
-        <target state="needs-translation">Canvas Height (Optional)</target>
+        <target state="translated">Alto del Lienzo (opcional)</target>
       </trans-unit>
       <trans-unit id="6e2329529b1953198c7dfa0edb260554310bc636" datatype="html">
         <source>Nodes</source>
@@ -12074,7 +12074,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">54</context>
         </context-group>
-        <target state="needs-translation">Nodes</target>
+        <target state="translated">Nodos</target>
       </trans-unit>
       <trans-unit id="a2abc798988051264ce46963e3ec75953d4a1216" datatype="html">
         <source>Add Node</source>
@@ -12086,7 +12086,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">61</context>
         </context-group>
-        <target state="needs-translation">Add Node</target>
+        <target state="translated">Agregar Nodo</target>
       </trans-unit>
       <trans-unit id="ae13e4d6aa03b7492e7e3f106053af91587e1594" datatype="html">
         <source>There are no nodes. Click the &quot;Add Node&quot; button to add a node.</source>
@@ -12094,7 +12094,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">67</context>
         </context-group>
-        <target state="needs-translation">There are no nodes. Click the "Add Node" button to add a node.</target>
+        <target state="translated">No hay nodos. Clic en el botón "Agregar Nodo" para agregar un nodo.</target>
       </trans-unit>
       <trans-unit id="0738afe18a258dbcc9031a6ca2bb42747696bd46" datatype="html">
         <source>Node Label</source>
@@ -12102,7 +12102,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">75</context>
         </context-group>
-        <target state="needs-translation">Node Label</target>
+        <target state="translated">Etiqueta del Nodo</target>
       </trans-unit>
       <trans-unit id="828bc0d28636c4fda125fbf32af8df99cf1fe83e" datatype="html">
         <source>Width</source>
@@ -12110,7 +12110,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">105</context>
         </context-group>
-        <target state="needs-translation">Width</target>
+        <target state="translated">Ancho</target>
       </trans-unit>
       <trans-unit id="179eb5c4a21ad324f75f723218a621d120e39d30" datatype="html">
         <source>Height</source>
@@ -12118,7 +12118,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">112</context>
         </context-group>
-        <target state="needs-translation">Height</target>
+        <target state="translated">Alto</target>
       </trans-unit>
       <trans-unit id="e3b469b69eef004764c51b7a8b3efa761501ab73" datatype="html">
         <source> Show Node Labels </source>
@@ -12126,7 +12126,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">161,162</context>
         </context-group>
-        <target state="needs-translation"> Show Node Labels </target>
+        <target state="translated"> Mostrar etiquetas de Nodo </target>
       </trans-unit>
       <trans-unit id="4e2806322b1ecd0fc052b3d8ece2985eeb8f5708" datatype="html">
         <source>Links Title</source>
@@ -12134,7 +12134,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">167</context>
         </context-group>
-        <target state="needs-translation">Links Title</target>
+        <target state="translated">Título de enlace</target>
       </trans-unit>
       <trans-unit id="dc60677d5a906e69f38a5cf9da7f2eb03931bea0" datatype="html">
         <source>Links</source>
@@ -12142,7 +12142,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">173</context>
         </context-group>
-        <target state="needs-translation">Links</target>
+        <target state="translated">Enlaces</target>
       </trans-unit>
       <trans-unit id="72ea393a8941d9c78b055e5c4597a7f760b713a7" datatype="html">
         <source>Add Link</source>
@@ -12154,7 +12154,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">180</context>
         </context-group>
-        <target state="needs-translation">Add Link</target>
+        <target state="translated">Agregar enlace</target>
       </trans-unit>
       <trans-unit id="8774f599f2e1ccb18ed0cf4536279ddce1868359" datatype="html">
         <source>There are no links. Click the &quot;Add Link&quot; button to add a link.</source>
@@ -12162,7 +12162,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">186</context>
         </context-group>
-        <target state="needs-translation">There are no links. Click the "Add Link" button to add a link.</target>
+        <target state="translated">No hay enlaces. Clic en el botón "Agregar enlaces" para agregar un enlace.</target>
       </trans-unit>
       <trans-unit id="704ff937be1fcf12bfd12a1a85844849765d13f5" datatype="html">
         <source>Link Label</source>
@@ -12170,7 +12170,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">195</context>
         </context-group>
-        <target state="needs-translation">Link Label</target>
+        <target state="translated">Etiqueta del enlace</target>
       </trans-unit>
       <trans-unit id="8fa4d523f7b91df4390120b85ed0406138273e1a" datatype="html">
         <source>Color</source>
@@ -12206,7 +12206,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">140</context>
         </context-group>
-        <target state="needs-translation">Color</target>
+        <target state="translated">Color</target>
       </trans-unit>
       <trans-unit id="9fae747b3706d7f4d6b694ae273d7df2799a732c" datatype="html">
         <source>(Optional) Create a starting state for the concept map by editing the &quot;Student Preview&quot; below and then saving here:</source>
@@ -12214,7 +12214,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">248</context>
         </context-group>
-        <target state="needs-translation">(Optional) Create a starting state for the concept map by editing the "Student Preview" below and then saving here:</target>
+        <target state="translated">(Opcional) Crear un estado inicial para el mapa conceptual editando la "Vista previa del estudiante" a continuación y luego guardándola aquí:</target>
       </trans-unit>
       <trans-unit id="116d459d032992c6d86e207ff08fab531e990322" datatype="html">
         <source>Save Starter Concept Map</source>
@@ -12226,7 +12226,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">255</context>
         </context-group>
-        <target state="needs-translation">Save Starter Concept Map</target>
+        <target state="translated">Guardar Iniciador de Mapa Conceptual</target>
       </trans-unit>
       <trans-unit id="aebb147a3be02ea5345152dbf903a6db25c29858" datatype="html">
         <source>Delete Starter Concept Map</source>
@@ -12238,7 +12238,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
           <context context-type="linenumber">265</context>
         </context-group>
-        <target state="needs-translation">Delete Starter Concept Map</target>
+        <target state="translated">Eliminar Iniciador de Mapa Conceptual</target>
       </trans-unit>
       <trans-unit id="3009366829878620841" datatype="html">
         <source>Are you sure you want to delete this node?
@@ -12249,10 +12249,10 @@ Label: <x id="PH_1" equiv-text="nodeLabel"/></source>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.ts</context>
           <context context-type="linenumber">67</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this node?
+        <target state="translated">¿Seguro que desea eliminar este nodo?
 
-File Name: <x id="PH" equiv-text="nodeFileName"/>
-Label: <x id="PH_1" equiv-text="nodeLabel"/></target>
+Nombre del archivo: <x id="PH" equiv-text="nodeFileName"/>
+Etiqueta: <x id="PH_1" equiv-text="nodeLabel"/></target>
       </trans-unit>
       <trans-unit id="3501064048095066932" datatype="html">
         <source>Are you sure you want to delete this link?
@@ -12262,9 +12262,9 @@ Label: <x id="PH" equiv-text="linkLabel"/></source>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.ts</context>
           <context context-type="linenumber">89</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this link?
+        <target state="translated">¿Seguro que desea eliminar este enlace?
 
-Label: <x id="PH" equiv-text="linkLabel"/></target>
+Etiqueta: <x id="PH" equiv-text="linkLabel"/></target>
       </trans-unit>
       <trans-unit id="8883308302591137451" datatype="html">
         <source>Are you sure you want to save the starter concept map?</source>
@@ -12272,7 +12272,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.ts</context>
           <context context-type="linenumber">135</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to save the starter concept map?</target>
+        <target state="translated">¿Seguro que quiere guardar el iniciador del mapa conceptual?</target>
       </trans-unit>
       <trans-unit id="122836227193831555" datatype="html">
         <source>Are you sure you want to delete the starter concept map?</source>
@@ -12280,7 +12280,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.ts</context>
           <context context-type="linenumber">146</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete the starter concept map?</target>
+        <target state="translated">¿Seguro que desea eliminar el iniciador del mapa conceptual?</target>
       </trans-unit>
       <trans-unit id="c741e919cae3e4e5d7a6e43da8926bb99b1fd780" datatype="html">
         <source> Reset </source>
@@ -12288,7 +12288,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
           <context context-type="linenumber">11,12</context>
         </context-group>
-        <target state="needs-translation"> Reset </target>
+        <target state="translated"> Resetear </target>
       </trans-unit>
       <trans-unit id="58a5686b8ceaee99cd9e3c1ad7b85c3fd6a30aa1" datatype="html">
         <source>Upload Background Image</source>
@@ -12300,7 +12300,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <target state="needs-translation">Upload Background Image</target>
+        <target state="translated">Cargar imagen de fondo</target>
       </trans-unit>
       <trans-unit id="a34cc48491622c29efdffcda963e97a750f1e02b" datatype="html">
         <source>Delete Background Image</source>
@@ -12312,7 +12312,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
           <context context-type="linenumber">58</context>
         </context-group>
-        <target state="needs-translation">Delete Background Image</target>
+        <target state="translated">Eliminar imagen de fondo</target>
       </trans-unit>
       <trans-unit id="17a9d3860d9ad593dd09a9f934e03999d9e76a7a" datatype="html">
         <source> Cancel </source>
@@ -12320,7 +12320,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
           <context context-type="linenumber">93,94</context>
         </context-group>
-        <target state="needs-translation"> Cancel </target>
+        <target state="translated"> Cancelar </target>
       </trans-unit>
       <trans-unit id="7aafd81526e4dbfbfe16413c3e1350f66939ec96" datatype="html">
         <source> Delete </source>
@@ -12340,7 +12340,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
           <context context-type="linenumber">332</context>
         </context-group>
-        <target state="needs-translation">You have no more chances to receive feedback on your answer.</target>
+        <target state="translated">No tienes más opciones para recibir retroalimentación sobre tu respuesta.</target>
       </trans-unit>
       <trans-unit id="1088900768760788337" datatype="html">
         <source>You have 1 chance to receive feedback on your answer so this should be your best work.
@@ -12354,9 +12354,9 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
           <context context-type="linenumber">209</context>
         </context-group>
-        <target state="needs-translation">You have 1 chance to receive feedback on your answer so this should be your best work.
+        <target state="translated">Te queda solamente 1 intento de recibir retroalimentación de tu respuesta así que debería ser tu mejor trabajo.
 
-Are you ready to receive feedback on this answer?</target>
+¿Listo para recibir retroalimentación sobre esta respuesta?</target>
       </trans-unit>
       <trans-unit id="8429316238784832901" datatype="html">
         <source>Feedback</source>
@@ -12376,7 +12376,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
           <context context-type="linenumber">1422</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to reset your work?</target>
+        <target state="translated">¿Seguro que deseas resetear tu trabajo?</target>
       </trans-unit>
       <trans-unit id="4d5d5b4e6b3c3a79914e4c5a72054018599ac2c4" datatype="html">
         <source> Show Auto Score </source>
@@ -12384,7 +12384,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">8,9</context>
         </context-group>
-        <target state="needs-translation"> Show Auto Score </target>
+        <target state="translated"> Mostrar Auto Calificación </target>
       </trans-unit>
       <trans-unit id="938ce93515b4603b134daf42cf1325ea17ccf594" datatype="html">
         <source> Show Auto Feedback </source>
@@ -12392,7 +12392,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">17,18</context>
         </context-group>
-        <target state="needs-translation"> Show Auto Feedback </target>
+        <target state="translated"> Mostrar Auto Retroalimentación </target>
       </trans-unit>
       <trans-unit id="2489eefea00931942b91f4a1ae109514b591e2e1" datatype="html">
         <source>Rules</source>
@@ -12400,7 +12400,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Rules</target>
+        <target state="translated">Reglas</target>
       </trans-unit>
       <trans-unit id="22e1b2f610135608344003f9fd38d87b64c9e0f6" datatype="html">
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
@@ -12408,7 +12408,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <target state="translated"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>agregar<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
       </trans-unit>
       <trans-unit id="743ec76118803d14b5695bc5915735101fd32fd6" datatype="html">
         <source>Rule Name</source>
@@ -12416,7 +12416,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Rule Name</target>
+        <target state="translated">Nombre de la regla</target>
       </trans-unit>
       <trans-unit id="bffe44ab461449f76ced3a1d609783dbfc404ede" datatype="html">
         <source>Should</source>
@@ -12424,7 +12424,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">35</context>
         </context-group>
-        <target state="needs-translation">Should</target>
+        <target state="translated">Debe</target>
       </trans-unit>
       <trans-unit id="c2216fd04d1f069218979a131552091658db5711" datatype="html">
         <source>should contain</source>
@@ -12432,7 +12432,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">should contain</target>
+        <target state="translated">debe contener</target>
       </trans-unit>
       <trans-unit id="632d243f93e08bdb56cf5f30c935410370e89057" datatype="html">
         <source>should not contain</source>
@@ -12440,7 +12440,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">39</context>
         </context-group>
-        <target state="needs-translation">should not contain</target>
+        <target state="translated">no debe contener</target>
       </trans-unit>
       <trans-unit id="f9cece0ed974f75c69c8db7fa805c3c40f91405e" datatype="html">
         <source>Comparison</source>
@@ -12448,7 +12448,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">43</context>
         </context-group>
-        <target state="needs-translation">Comparison</target>
+        <target state="translated">Comparación</target>
       </trans-unit>
       <trans-unit id="e24b46c9aa62dbd25c9fe782b5ce22f37994898b" datatype="html">
         <source>exactly</source>
@@ -12456,7 +12456,7 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <target state="needs-translation">exactly</target>
+        <target state="translated">exactamente</target>
       </trans-unit>
       <trans-unit id="7687c48bf1f418c337fcb20c46c51f2b737ab597" datatype="html">
         <source>more than</source>
@@ -12954,7 +12954,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
-        <target state="needs-translation">Share with class...</target>
+        <target state="translated">Compartir con clase...</target>
       </trans-unit>
       <trans-unit id="b87e7abf15926adeca15e38e887a4c21121c9587" datatype="html">
         <source>Remove file</source>
@@ -12962,7 +12962,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <target state="needs-translation">Remove file</target>
+        <target state="translated">Quitar archivo</target>
       </trans-unit>
       <trans-unit id="c648889391b76acac6870869f928f33920241c76" datatype="html">
         <source>Add picture</source>
@@ -12970,7 +12970,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
           <context context-type="linenumber">64</context>
         </context-group>
-        <target state="needs-translation">Add picture</target>
+        <target state="translated">Agregar imagen</target>
       </trans-unit>
       <trans-unit id="cf52ff0f4f9dc792b81e652fc6f0c2e83d14d56b" datatype="html">
         <source> Post </source>
@@ -12978,7 +12978,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
           <context context-type="linenumber">75,76</context>
         </context-group>
-        <target state="needs-translation"> Post </target>
+        <target state="translated"> Posteo </target>
       </trans-unit>
       <trans-unit id="3210146777760299474" datatype="html">
         <source><x id="PH" equiv-text="usernames"/> replied to a discussion you were in!</source>
@@ -12994,7 +12994,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">28,29</context>
         </context-group>
-        <target state="needs-translation"> Allow student to upload background image </target>
+        <target state="translated"> Permitir a estudiantes cargar imagen de fondo </target>
       </trans-unit>
       <trans-unit id="1ddab39a5de0dc854ff4562b74800e78df85302e" datatype="html">
         <source>Enable All Tools</source>
@@ -13002,7 +13002,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">51</context>
         </context-group>
-        <target state="needs-translation">Enable All Tools</target>
+        <target state="translated">Habilitar todas las herramientas</target>
       </trans-unit>
       <trans-unit id="71d7b83972f4a18be195cfff1aee5cea0d858c56" datatype="html">
         <source>Enable All</source>
@@ -13010,7 +13010,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">54</context>
         </context-group>
-        <target state="needs-translation">Enable All</target>
+        <target state="translated">Habilitar todo</target>
       </trans-unit>
       <trans-unit id="c96e813e2e7b96ece5c09e10ee40e813ee95aa89" datatype="html">
         <source>Disable All Tools</source>
@@ -13018,7 +13018,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">62</context>
         </context-group>
-        <target state="needs-translation">Disable All Tools</target>
+        <target state="translated">Deshabilitar todas las herramientas</target>
       </trans-unit>
       <trans-unit id="b733a7b18590377ccaf24295f95e72b23c4bd64e" datatype="html">
         <source>Disable All</source>
@@ -13026,7 +13026,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">Disable All</target>
+        <target state="translated">Deshabilitar todo</target>
       </trans-unit>
       <trans-unit id="70bf34d6f83d0c224d5bc84afd972e3fd8d7cdb1" datatype="html">
         <source> Select Tool </source>
@@ -13034,7 +13034,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">76,77</context>
         </context-group>
-        <target state="needs-translation"> Select Tool </target>
+        <target state="translated"> Seleccionar herramienta </target>
       </trans-unit>
       <trans-unit id="ecbfa99f57ec36ab3262c7bf4bd512864a0a7cbd" datatype="html">
         <source> Line Tool </source>
@@ -13042,7 +13042,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">84,85</context>
         </context-group>
-        <target state="needs-translation"> Line Tool </target>
+        <target state="translated"> Herramienta Línea </target>
       </trans-unit>
       <trans-unit id="f1680e8c1b6f63a26d157115651a601f56c2e0ba" datatype="html">
         <source> Shape Tool </source>
@@ -13050,7 +13050,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">92,93</context>
         </context-group>
-        <target state="needs-translation"> Shape Tool </target>
+        <target state="translated"> Herramienta Figura </target>
       </trans-unit>
       <trans-unit id="4df38423916492d5f2b8c8e4061a818388ff3b18" datatype="html">
         <source> Free Hand Tool </source>
@@ -13058,7 +13058,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">100,101</context>
         </context-group>
-        <target state="needs-translation"> Free Hand Tool </target>
+        <target state="translated"> Dibujo a mano </target>
       </trans-unit>
       <trans-unit id="73e60083837758f3c9cb59dcfcb51a72a4bd4260" datatype="html">
         <source> Text Tool </source>
@@ -13066,7 +13066,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">109,110</context>
         </context-group>
-        <target state="needs-translation"> Text Tool </target>
+        <target state="translated"> Texto </target>
       </trans-unit>
       <trans-unit id="cd3f70f961a94e4b24fa1f506a991ddeef2f233f" datatype="html">
         <source> Stamp Tool </source>
@@ -13074,7 +13074,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">117,118</context>
         </context-group>
-        <target state="needs-translation"> Stamp Tool </target>
+        <target state="translated"> Estampar </target>
       </trans-unit>
       <trans-unit id="8f2f25432014af68650224c125f8d82cddbbe6c1" datatype="html">
         <source> Clone Tool </source>
@@ -13082,7 +13082,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">125,126</context>
         </context-group>
-        <target state="needs-translation"> Clone Tool </target>
+        <target state="translated"> Clonar </target>
       </trans-unit>
       <trans-unit id="1eb7bac0abf789a73463c5bf6c42337baa2830d4" datatype="html">
         <source> Stroke Color Tool </source>
@@ -13090,7 +13090,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">133,134</context>
         </context-group>
-        <target state="needs-translation"> Stroke Color Tool </target>
+        <target state="translated"> Color recuadro </target>
       </trans-unit>
       <trans-unit id="8309d3262c1d16f588bf524e44fdf2e07caf146c" datatype="html">
         <source> Fill Color Tool </source>
@@ -13098,7 +13098,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">142,143</context>
         </context-group>
-        <target state="needs-translation"> Fill Color Tool </target>
+        <target state="translated"> Color llenado </target>
       </trans-unit>
       <trans-unit id="8055b62ee939763fcda594e42dcbd478e65d75aa" datatype="html">
         <source> Stroke Width Tool </source>
@@ -13114,7 +13114,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">158,159</context>
         </context-group>
-        <target state="needs-translation"> Send Back Tool </target>
+        <target state="translated"> Herramienta Enviar atrás </target>
       </trans-unit>
       <trans-unit id="c2b3ff652e0bb9c37d89b1b36fbad028d56369fa" datatype="html">
         <source> Send Forward Tool </source>
@@ -13122,7 +13122,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">166,167</context>
         </context-group>
-        <target state="needs-translation"> Send Forward Tool </target>
+        <target state="translated"> Herramienta traer adelante </target>
       </trans-unit>
       <trans-unit id="18441b29c4857bbde4a86e25c7ecec2b60816aaf" datatype="html">
         <source> Undo Tool </source>
@@ -13130,7 +13130,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">175,176</context>
         </context-group>
-        <target state="needs-translation"> Undo Tool </target>
+        <target state="translated"> Deshacer </target>
       </trans-unit>
       <trans-unit id="3a574598a15808caa743ad45e350673c77543fa7" datatype="html">
         <source> Redo Tool </source>
@@ -13138,7 +13138,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">183,184</context>
         </context-group>
-        <target state="needs-translation"> Redo Tool </target>
+        <target state="translated"> Rehacer </target>
       </trans-unit>
       <trans-unit id="605aa0d5209741a29bae1f8f15b681834e4da1a7" datatype="html">
         <source> Delete Tool </source>
@@ -13146,7 +13146,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">191,192</context>
         </context-group>
-        <target state="needs-translation"> Delete Tool </target>
+        <target state="translated"> Eliminar </target>
       </trans-unit>
       <trans-unit id="680eaf58a4fc0dd8d3b3478b2b67a7119089318a" datatype="html">
         <source>Stamps</source>
@@ -13154,7 +13154,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">197</context>
         </context-group>
-        <target state="needs-translation">Stamps</target>
+        <target state="translated">Sellos</target>
       </trans-unit>
       <trans-unit id="7f93eba96bfe522f5f216b8e4359a83225e928a9" datatype="html">
         <source>Add Stamp</source>
@@ -13162,7 +13162,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">202</context>
         </context-group>
-        <target state="needs-translation">Add Stamp</target>
+        <target state="translated">Agregar sello</target>
       </trans-unit>
       <trans-unit id="029590c3a6ac353df3f0f8a2dfe7272a871656fe" datatype="html">
         <source>above</source>
@@ -13170,7 +13170,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">251</context>
         </context-group>
-        <target state="needs-translation">above</target>
+        <target state="translated">arriba</target>
       </trans-unit>
       <trans-unit id="bcfc99153c2c0d547f3af6670ddfaae5e6ffb429" datatype="html">
         <source>Save Starter Drawing</source>
@@ -13178,7 +13178,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">275</context>
         </context-group>
-        <target state="needs-translation">Save Starter Drawing</target>
+        <target state="translated">Guardar Iniciador de Dibujo</target>
       </trans-unit>
       <trans-unit id="a5a5b66acab96c55cf12967a05d09f0ad6524482" datatype="html">
         <source>Delete Starter Drawing</source>
@@ -13186,7 +13186,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
           <context context-type="linenumber">286</context>
         </context-group>
-        <target state="needs-translation">Delete Starter Drawing</target>
+        <target state="translated">Eliminar Iniciador de Dibujo</target>
       </trans-unit>
       <trans-unit id="3572984514771368051" datatype="html">
         <source>Are you sure you want to save the starter drawing?</source>
@@ -15320,7 +15320,7 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">245</context>
         </context-group>
-        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <target state="translated"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>agregar<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
       </trans-unit>
       <trans-unit id="02c1371da872a1989dd16ee5b4bbc60ce619173c" datatype="html">
         <source>Move Notification Up</source>
