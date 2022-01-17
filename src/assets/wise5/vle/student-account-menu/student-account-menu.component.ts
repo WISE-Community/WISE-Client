@@ -54,7 +54,7 @@ export class StudentAccountMenuComponent implements OnInit {
     return usernamesDisplay;
   }
 
-  getAvatarColorForWorkgroupId(workgroupId) {
+  getAvatarColorForWorkgroupId(workgroupId: number): string {
     return this.configService.getAvatarColorForWorkgroupId(workgroupId);
   }
 

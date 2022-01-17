@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
@@ -62,11 +62,19 @@ describe('StudentAccountMenuComponent', () => {
     expect(goHomeSpy).toHaveBeenCalled();
   });
 
-  it('should log out', () => {
-    const logOutSpy = spyOn(TestBed.inject(StudentDataService), 'saveVLEEvent').and.returnValue(
-      Promise.resolve({})
-    );
-    component.logOut();
-    expect(logOutSpy).toHaveBeenCalled();
-  });
+  it(
+    'should log out',
+    waitForAsync(() => {
+      const saveEventSpy = spyOn(
+        TestBed.inject(StudentDataService),
+        'saveVLEEvent'
+      ).and.returnValue(Promise.resolve({}));
+      const logOutSpy = spyOn(TestBed.inject(SessionService), 'logOut');
+      component.logOut();
+      expect(saveEventSpy).toHaveBeenCalled();
+      fixture.whenStable().then(() => {
+        expect(logOutSpy).toHaveBeenCalled();
+      });
+    })
+  );
 });
