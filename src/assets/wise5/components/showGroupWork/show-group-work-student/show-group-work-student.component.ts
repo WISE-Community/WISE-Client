@@ -69,6 +69,9 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
       this.componentContent.showWorkNodeId,
       this.componentContent.showWorkComponentId
     );
+    this.showWorkComponentContent = this.projectService.injectAssetPaths(
+      this.showWorkComponentContent
+    );
     this.showWorkNodeId = this.componentContent.showWorkNodeId;
   }
 
