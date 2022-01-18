@@ -34,14 +34,6 @@ export class ConceptMapService extends ComponentService {
     return this.upgrade.$injector.get('$filter')('translate')(key);
   }
 
-  getDomIdEnding(nodeId: string, componentId: string, componentState: any): string {
-    if (componentState == null) {
-      return `${nodeId}-${componentId}`;
-    } else {
-      return `${nodeId}-${componentId}-${componentState.id}`;
-    }
-  }
-
   getSVGId(domIdEnding: string): string {
     return this.getElementId('svg', domIdEnding);
   }
@@ -56,10 +48,6 @@ export class ConceptMapService extends ComponentService {
 
   getFeedbackContainerId(domIdEnding: string): string {
     return this.getElementId('feedback-container', domIdEnding);
-  }
-
-  getElementId(domIdBeginning: string, domIdEnding: string): string {
-    return `${domIdBeginning}-${domIdEnding}`;
   }
 
   createComponent() {
