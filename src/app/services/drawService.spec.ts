@@ -302,7 +302,7 @@ function setUpTools() {
     for (const expectedValue of expectedValues) {
       tools[expectedValue.name] = expectedValue.isVisible;
     }
-    const drawingToolId = service.getDrawingToolId('node1', 'component1');
+    const drawingToolId = service.getDrawingToolId('node1-component1');
     createDrawingToolDiv(drawingToolId);
     service.initializeDrawingTool(drawingToolId, {});
     service.setUpTools(drawingToolId, tools, false);
