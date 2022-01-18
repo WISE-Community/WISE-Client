@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AngularJSModule } from '../../../../../app/common-hybrid-angular.module';
 import { AnimationStudentModule } from '../../animation/animation-student/animation-student.module';
+import { AudioOscillatorStudentModule } from '../../audioOscillator/audio-oscillator-student/audio-oscillator.module';
 import { ConceptMapStudentModule } from '../../conceptMap/concept-map-student/concept-map-student.module';
 import { DialogGuidanceStudentModule } from '../../dialogGuidance/dialogGuidanceStudentModule';
 import { DiscussionStudentModule } from '../../discussion/discussion-student/discussion-student.module';
@@ -19,6 +20,7 @@ import { ShowWorkStudentComponent } from './show-work-student.component';
   imports: [
     AngularJSModule,
     AnimationStudentModule,
+    AudioOscillatorStudentModule,
     ConceptMapStudentModule,
     DialogGuidanceStudentModule,
     DiscussionStudentModule,
