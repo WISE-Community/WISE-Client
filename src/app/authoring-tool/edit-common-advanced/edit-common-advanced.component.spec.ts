@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { AnnotationService } from '../../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
@@ -56,6 +57,7 @@ describe('EditCommonAdvancedComponent', () => {
         EditConnectedComponentsComponent
       ],
       providers: [
+        AnnotationService,
         ConfigService,
         NotificationService,
         ProjectService,

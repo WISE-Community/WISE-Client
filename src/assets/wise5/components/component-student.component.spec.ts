@@ -15,6 +15,7 @@ import { UtilService } from '../services/utilService';
 import { ComponentService } from './componentService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 
 let component: ComponentStudent;
 let fixture: ComponentFixture<ComponentStudent>;
@@ -30,7 +31,7 @@ class ComponentStudentImpl extends ComponentStudent {}
 describe('ComponentStudent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
       declarations: [ComponentStudentImpl],
       providers: [
         AnnotationService,

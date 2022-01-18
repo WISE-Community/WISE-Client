@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -63,25 +63,25 @@ export class AudioOscillatorStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private AudioOscillatorService: AudioOscillatorService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
-    private AudioOscillatorService: AudioOscillatorService,
+    protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
@@ -339,6 +339,25 @@ export class AudioOscillatorStudent extends ComponentStudent {
   amplitudeChanged(): void {
     this.amplitude = this.limitAmplitudeIfNecessary(this.amplitude);
     this.refreshOscilloscope();
+  }
+
+  amplitudeKeyUp(event: any): void {
+    if (this.isNumberEvent(event)) {
+      this.amplitudeChanged();
+    }
+  }
+
+  isNumberEvent(event: any): boolean {
+    const keyCode = event.keyCode;
+    return this.isTopRowNumber(keyCode) || this.isNumPadNumber(keyCode);
+  }
+
+  isTopRowNumber(keyCode: number): boolean {
+    return 48 <= keyCode && keyCode <= 57;
+  }
+
+  isNumPadNumber(keyCode: number): boolean {
+    return 96 <= keyCode && keyCode <= 105;
   }
 
   limitAmplitudeIfNecessary(amplitude: number): number {

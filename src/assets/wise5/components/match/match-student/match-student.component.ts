@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -34,6 +33,7 @@ export class MatchStudent extends ComponentStudent {
   choices: any[] = [];
   choiceStyle: any = '';
   hasCorrectAnswer: boolean = false;
+  isChoicesAfter: boolean = false;
   isCorrect: boolean = false;
   isHorizontal: boolean = false;
   isLatestComponentStateSubmit: boolean = false;
@@ -46,25 +46,24 @@ export class MatchStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
-    private dialog: MatDialog,
+    protected dialog: MatDialog,
     private MatchService: MatchService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
@@ -73,10 +72,11 @@ export class MatchStudent extends ComponentStudent {
     super.ngOnInit();
     this.autoScroll = require('dom-autoscroller');
     this.registerAutoScroll();
+    this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    this.hasCorrectAnswer = this.hasCorrectChoices();
+    this.hasCorrectAnswer = this.MatchService.hasCorrectChoices(this.componentContent);
     if (this.shouldImportPrivateNotes()) {
       this.importPrivateNotes();
     }
@@ -438,7 +438,7 @@ export class MatchStudent extends ComponentStudent {
           );
           isCorrect &&= isChoiceCorrect;
         }
-        this.setItemStatus(item);
+        this.MatchService.setItemStatus(item, this.hasCorrectAnswer);
       }
     }
 
@@ -464,17 +464,6 @@ export class MatchStudent extends ComponentStudent {
     }
     this.tryDisableComponent();
     return isCorrect;
-  }
-
-  setItemStatus(item: any): void {
-    item.status = '';
-    if (item.isCorrect) {
-      item.status = 'correct';
-    } else if (item.isIncorrectPosition) {
-      item.status = 'warn';
-    } else if (this.hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition) {
-      item.status = 'incorrect';
-    }
   }
 
   getFeedback(feedbackObject: any, hasCorrectAnswer: boolean, position: number): string {
@@ -645,17 +634,6 @@ export class MatchStudent extends ComponentStudent {
       }
     }
     return null;
-  }
-
-  hasCorrectChoices(): boolean {
-    for (const bucket of this.componentContent.feedback) {
-      for (const choice of bucket.choices) {
-        if (choice.isCorrect) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   clearFeedback(): void {

@@ -2,7 +2,6 @@
 
 import * as angular from 'angular';
 import Compile from './compile/compile';
-import Component from './component/component';
 import DisableDeleteKeypress from './disableDeleteKeypress/disableDeleteKeypress';
 import Draggable from './draggable/draggable';
 import GlobalAnnotations from './globalAnnotations/globalAnnotations';
@@ -15,11 +14,15 @@ import { NodeIconComponent } from '../classroomMonitor/classroomMonitorComponent
 import { MilestoneReportDataComponent } from '../../../app/teacher/milestone/milestone-report-data/milestone-report-data.component';
 import { PossibleScoreComponent } from '../../../app/possible-score/possible-score.component';
 import { SummaryDisplay } from './summaryDisplay/summary-display.component';
+import { ComponentComponent } from '../components/component/component.component';
 
 const Components = angular.module('components', []);
 
 Components.component('compile', Compile);
-Components.component('component', Component);
+Components.directive(
+  'component',
+  downgradeComponent({ component: ComponentComponent }) as angular.IDirectiveFactory
+);
 Components.component('disableDeleteKeypress', DisableDeleteKeypress);
 Components.component('draggable', Draggable);
 Components.component('globalAnnotations', GlobalAnnotations);

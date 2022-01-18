@@ -5,6 +5,7 @@ import { DialogGuidanceStudentComponent } from './dialog-guidance-student/dialog
 
 @NgModule({
   declarations: [DialogGuidanceStudentComponent],
-  imports: [AngularJSModule, StudentComponentModule]
+  imports: [AngularJSModule, StudentComponentModule],
+  exports: [DialogGuidanceStudentComponent]
 })
 export class DialogGuidanceStudentModule {}

@@ -1,6 +1,5 @@
 import { fabric } from 'fabric';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -12,6 +11,7 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { DrawService } from '../drawService';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'draw-student',
@@ -33,24 +33,24 @@ export class DrawStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     private DrawService: DrawService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
@@ -85,7 +85,6 @@ export class DrawStudent extends ComponentStudent {
     this.initializeStudentData();
     this.disableComponentIfNecessary();
     this.setDrawingChangedListener();
-    this.setToolChangedListener();
     this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, this.isDisabled);
 
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
@@ -178,17 +177,6 @@ export class DrawStudent extends ComponentStudent {
         this.studentDataChanged();
       });
     }, 500);
-  }
-
-  setToolChangedListener(): void {
-    this.drawingTool.on('tool:changed', (toolName: string) => {
-      const category = 'Tool';
-      const event = 'toolSelected';
-      const data = {
-        selectedToolName: toolName
-      };
-      this.StudentDataService.saveComponentEvent(this, category, event, data);
-    });
   }
 
   handleConnectedComponentsPostProcess(): void {

@@ -101,6 +101,23 @@ class MilestonesAuthoringController {
     return this.ProjectService.getComponentsByNodeId(nodeId);
   }
 
+  isCRaterComponent(component: any): boolean {
+    return (
+      (component.type === 'OpenResponse' && component.enableCRater) ||
+      component.type === 'DialogGuidance'
+    );
+  }
+
+  getItemId(component: any): string {
+    if (component.type === 'OpenResponse' && component.enableCRater) {
+      return component.cRater.itemId;
+    } else if (component.type === 'DialogGuidance') {
+      return component.itemId;
+    } else {
+      return '';
+    }
+  }
+
   getStepNodeIds() {
     this.ProjectService.idToOrder;
   }
