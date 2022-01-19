@@ -228,7 +228,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">156</context>
         </context-group>
-        <target state="translated">WISE brinda a más docentes y estudiantes la oportunidad de hacer ciencia basada en la investigación. Nuestras unidades hacen que los conceptos difíciles sean accesibles tanto para que los docentes enseñen como para que los estudiantes aprendan. La currícula de WISE ayuda a los estudiantes a verse a sí mismos como capaces de hacer ciencia y darse cuenta de que, sin importar sus antecedentes, la ciencia puede ser una carrera potencial.</target>
+        <target state="translated">WISE brinda a más docentes y estudiantes la oportunidad de hacer ciencia basada en la investigación. Nuestras unidades hacen que los conceptos difíciles sean accesibles tanto para que los docentes enseñen como para que los estudiantes aprendan. La currícula de WISE ayuda a los estudiantes a verse a sí mismos como capaces de hacer ciencia y darse cuenta de que, sin importar sus antecedentes, la ciencia puede ser una potencial carrera para su futuro.</target>
       </trans-unit>
       <trans-unit id="d528a21d07675cb0c41c688a22371f4cc925a969" datatype="html">
         <source>Accessible to All</source>
@@ -244,7 +244,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">163</context>
         </context-group>
-        <target state="translated">WISE es <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>gratis<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> y <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>de código abierto<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>!WISE subsiste con el generoso apoyo de la National Science Foundation, lo que significa que está disponible para cualquier persona con conexión a Internet. Impulsado por una comunidad activa de desarrolladores, WISE se expande y mejora continuamente. ¡Llevemos la investigación científica al aula, al museo, a las actividades extraescolares o al ambiente escolar en casa!</target>
+        <target state="translated">WISE es <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>gratis<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> y <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>de código abierto<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsiste gracias al generoso apoyo de la National Science Foundation, lo que significa que está disponible para cualquier persona con conexión a Internet. Impulsado por una comunidad activa de desarrolladores, WISE se expande y mejora continuamente. ¡Llevemos la investigación científica al aula, al museo, a las actividades extraescolares o al ambiente escolar en casa!</target>
       </trans-unit>
       <trans-unit id="4ad1e5cce5dbc999f93e23e6bc9fa28d9cbb0ee1" datatype="html">
         <source>WISE on student computer</source>
@@ -478,7 +478,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <target state="translated">Cancelar</target>
       </trans-unit>
@@ -1108,7 +1108,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="translated">Ejecutar ID</target>
+        <target state="translated">ID de ejecución</target>
       </trans-unit>
       <trans-unit id="325291e71ff2bb75a324c2c02e5deb1ff8600043" datatype="html">
         <source>Library Units</source>
@@ -4562,7 +4562,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="translated">Ofertas de currículum</target>
+        <target state="translated">Unidades didácticas</target>
       </trans-unit>
       <trans-unit id="dcd4eff483113708f4fd91f98236bee705e676a8" datatype="html">
         <source>Ready to try WISE in the Classroom?</source>
@@ -4570,7 +4570,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">58</context>
         </context-group>
-        <target state="translated">¿Listo para probar WISE en el salón de clases?</target>
+        <target state="translated">¿Le interesa probar WISE con sus estudiantes?</target>
       </trans-unit>
       <trans-unit id="b4b200f1299f2e043cae72f59718dca3b12f1f38" datatype="html">
         <source>Sign up for free!</source>
@@ -4578,7 +4578,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="translated">¡Regístrate gratis!</target>
+        <target state="translated">¡Regístrese gratis!</target>
       </trans-unit>
       <trans-unit id="da6aa9950c74cadd85a3bf26272f34f28d8338c8" datatype="html">
         <source>Connect</source>
@@ -4730,7 +4730,7 @@
           <context context-type="sourcefile">src/app/home/home.component.ts</context>
           <context context-type="linenumber">70</context>
         </context-group>
-        <target state="translated">Modelos científicos interactivos más actividades prácticas, orientación personalizada y evaluaciones integradas enriquecidas</target>
+        <target state="translated">Modelos científicos interactivos, actividades prácticas, orientación personalizada y evaluaciones integradas enriquecidas</target>
       </trans-unit>
       <trans-unit id="5655885224951904964" datatype="html">
         <source>WISE students and teacher</source>
@@ -5230,7 +5230,7 @@
           <context context-type="sourcefile">src/app/modules/library/home-page-project-library/home-page-project-library.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="translated">Explore los planes de estudio de WISE sugeridos para los niveles de grado dados o busque unidades específicas que aborden sus necesidades.</target>
+        <target state="translated">Explorar las unidades didácticas de WISE sugeridas para los niveles de grado dados o buscar unidades específicas.</target>
       </trans-unit>
       <trans-unit id="1ada756975a68f38f92477600b2ca2864ea89533" datatype="html">
         <source>Toggle filters</source>
@@ -7992,7 +7992,7 @@
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
           <context context-type="linenumber">73</context>
         </context-group>
-        <target state="translated">¡Confirmado! La unidad ha sido agregada a su Agenda de Clase.</target>
+        <target state="translated">¡Confirmado! La unidad ha sido agregada a la sección "Mis Clases".</target>
       </trans-unit>
       <trans-unit id="08386d4e77c0a63a78f010c21160833578891b20" datatype="html">
         <source>Access Code: <x id="INTERPOLATION" equiv-text="{{ run.runCode }}"/></source>
@@ -8020,7 +8020,7 @@
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
           <context context-type="linenumber">77</context>
         </context-group>
-        <target state="translated">El código de acceso para cada unidad está en su Agenda de Clases.</target>
+        <target state="translated">El código de acceso para cada unidad está en la sección "Mis Clases".</target>
       </trans-unit>
       <trans-unit id="e57f5a8a6dae5484ae05dbdff681c11ec42c732f" datatype="html">
         <source> Share to Google Classroom </source>
@@ -8146,7 +8146,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="translated">OK</target>
       </trans-unit>
@@ -8256,7 +8256,7 @@
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="translated">Ejecutar ID: <x id="INTERPOLATION" equiv-text="{{ run.id }}"/></target>
+        <target state="translated">ID de ejecución: <x id="INTERPOLATION" equiv-text="{{ run.id }}"/></target>
       </trans-unit>
       <trans-unit id="3ee54b66b7f53827035c3055f228bc2bf2550dab" datatype="html">
         <source>Unit Info</source>
@@ -8688,7 +8688,7 @@
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="translated">Agenda de Clases</target>
+        <target state="translated">Mis Clases</target>
       </trans-unit>
       <trans-unit id="4340256332658641886" datatype="html">
         <source>Unit Library</source>
@@ -14850,7 +14850,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         <source>Item Text required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <target state="translated">Item de texto requerido</target>
       </trans-unit>
@@ -16631,6 +16631,30 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <target state="translated">Informe</target>
       </trans-unit>
+      <trans-unit id="4200122564420479235" datatype="html">
+        <source>You have new replies to your discussion post!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+        <target state="translated">Tienes nuevas respuestas a tu posteo!</target>
+      </trans-unit>
+      <trans-unit id="199088045976822823" datatype="html">
+        <source>You have new feedback from your teacher!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+        <target state="translated">¡Tienes nueva retroalimentación de tu docente!</target>
+      </trans-unit>
+      <trans-unit id="5013145827213980080" datatype="html">
+        <source>You have new feedback!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+        <target state="translated">Tienes nueva retroalimentación!</target>
+      </trans-unit>
       <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">
         <source>Project Plan</source>
         <context-group purpose="location">
@@ -16766,30 +16790,6 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="linenumber">34</context>
         </context-group>
         <target state="translated">Remover notificación</target>
-      </trans-unit>
-      <trans-unit id="4200122564420479235" datatype="html">
-        <source>You have new replies to your discussion post!</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.ts</context>
-          <context context-type="linenumber">62</context>
-        </context-group>
-        <target state="translated">Tienes nuevas respuestas a tu posteo!</target>
-      </trans-unit>
-      <trans-unit id="199088045976822823" datatype="html">
-        <source>You have new feedback from your teacher!</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.ts</context>
-          <context context-type="linenumber">64</context>
-        </context-group>
-        <target state="translated">¡Tienes nueva retroalimentación de tu docente!</target>
-      </trans-unit>
-      <trans-unit id="5013145827213980080" datatype="html">
-        <source>You have new feedback!</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.ts</context>
-          <context context-type="linenumber">80</context>
-        </context-group>
-        <target state="translated">Tienes nueva retroalimentación!</target>
       </trans-unit>
       <trans-unit id="fcc4b29f2c63c0f61e98757c3e0bceed176606eb" datatype="html">
         <source>Use this file</source>
