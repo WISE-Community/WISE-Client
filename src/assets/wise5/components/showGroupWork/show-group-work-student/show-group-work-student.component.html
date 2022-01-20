@@ -1,3 +1,4 @@
+<component-header [componentContent]="componentContent"></component-header>
 <div *ngFor="let studentWork of studentWorkFromGroupMembers">
   <span class="text-secondary" *ngIf="studentWork == null" i18n>(No response)</span>
   <show-work-student [studentWork]="studentWork"
