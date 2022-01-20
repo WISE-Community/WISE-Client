@@ -16,7 +16,7 @@ import { AngularJSModule } from './common-hybrid-angular.module';
 import { NavItemComponent } from '../assets/wise5/vle/nav-item/nav-item.component';
 import { HtmlDialog } from '../assets/wise5/directives/html-dialog/html-dialog';
 import { MatchStudentModule } from '../assets/wise5/components/match/match-student/match-student.module';
-import { ShowWorkStudentModule } from '../assets/wise5/components/showWork/show-work-student/show-work-student.module';
+import { ShowMyWorkStudentModule } from '../assets/wise5/components/showMyWork/show-my-work-student/show-my-work-student.module';
 import { StudentComponentModule } from './student/student.component.module';
 import { SafeUrl } from '../assets/wise5/directives/safeUrl/safe-url.pipe';
 import { HighchartsChartModule } from 'highcharts-angular';
@@ -42,6 +42,7 @@ import { OutsideUrlStudentModule } from '../assets/wise5/components/outsideURL/o
 import { SummaryStudentModule } from '../assets/wise5/components/summary/summary-student/summary-student.module';
 import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/summary-display.module';
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
+import { ShowGroupWorkStudentModule } from '../assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.module';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { GenerateImageDialogComponent } from '../assets/wise5/directives/generat
     OpenResponseStudentModule,
     OutsideUrlStudentModule,
     PeerChatModule,
-    ShowWorkStudentModule,
+    ShowGroupWorkStudentModule,
+    ShowMyWorkStudentModule,
     StudentAssetsModule,
     StudentComponentModule,
     SummaryDisplayModule,

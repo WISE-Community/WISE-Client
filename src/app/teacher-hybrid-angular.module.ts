@@ -26,7 +26,6 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
 import { UpdateWorkgroupService } from './services/updateWorkgroupService';
 import { GetWorkgroupService } from './services/getWorkgroupService';
 import { WorkgroupService } from './services/workgroup.service';
-import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 
 @NgModule({
   declarations: [StepToolsComponent],
@@ -43,7 +42,6 @@ import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
     InsertNodesService,
     MilestoneService,
     MoveNodesService,
-    PeerGroupService,
     ProjectAssetService,
     SpaceService,
     StudentStatusService,

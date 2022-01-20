@@ -1,0 +1,6 @@
+<div *ngFor="let studentWork of studentWorkFromGroupMembers">
+  <span class="text-secondary" *ngIf="studentWork == null" i18n>(No response)</span>
+  <show-work-student [studentWork]="studentWork"
+      [componentContent]="showWorkComponentContent"
+      [nodeId]="showWorkNodeId"></show-work-student>
+</div>

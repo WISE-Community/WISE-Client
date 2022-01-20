@@ -96,15 +96,15 @@ describe('MatchStudent', () => {
     choice1 = createChoice(choiceId1, choiceValue1);
     choice2 = createChoice(choiceId2, choiceValue2);
     choice3 = createChoice(choiceId3, choiceValue3);
-    bucket1 = createBucket(bucketId1, bucketValue1, []);
-    bucket2 = createBucket(bucketId2, bucketValue2, []);
-    bucket3 = createBucket(bucketId3, bucketValue3, []);
+    const componentContentBucket1 = createBucket(bucketId1, bucketValue1, []);
+    const componentContentBucket2 = createBucket(bucketId2, bucketValue2, []);
+    const componentContentBucket3 = createBucket(bucketId3, bucketValue3, []);
     const componentContent = {
       id: componentId,
       type: 'Match',
       prompt: 'Put the choices in the buckets.',
       choices: [choice1, choice2, choice3],
-      buckets: [bucket1, bucket2, bucket3],
+      buckets: [componentContentBucket1, componentContentBucket2, componentContentBucket3],
       choicesLabel: starterBucketLabel,
       feedback: [
         createFeedbackForBucket('0', [
@@ -159,6 +159,9 @@ describe('MatchStudent', () => {
     notebookItemImageName = 'my-image.png';
     notebookItem = createNotebookItem(notebookItemId, notebookItemText, notebookItemImageName);
     fixture.detectChanges();
+    bucket1 = component.buckets[1];
+    bucket2 = component.buckets[2];
+    bucket3 = component.buckets[3];
   });
 
   createSourceBucket();

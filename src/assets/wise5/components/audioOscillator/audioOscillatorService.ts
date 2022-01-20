@@ -22,6 +22,10 @@ export class AudioOscillatorService extends ComponentService {
     return this.getTranslation('audioOscillator.componentTypeLabel');
   }
 
+  getOscilloscopeId(domIdEnding: string): string {
+    return `oscilloscope-${domIdEnding}`;
+  }
+
   getTranslation(key: string) {
     return this.upgrade.$injector.get('$filter')('translate')(key);
   }

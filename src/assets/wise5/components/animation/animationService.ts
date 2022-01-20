@@ -20,8 +20,8 @@ export class AnimationService extends ComponentService {
     return this.getTranslation('animation.componentTypeLabel');
   }
 
-  getSvgId(nodeId: string, componentId: string): string {
-    return `svg-${nodeId}-${componentId}`;
+  getSvgId(domIdEnding: string): string {
+    return `svg-${domIdEnding}`;
   }
 
   getTranslation(key: string) {

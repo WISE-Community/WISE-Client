@@ -8,14 +8,14 @@ describe('ShowWorkStudentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShowWorkStudentComponent ]
-    })
-    .compileComponents();
+      declarations: [ShowWorkStudentComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowWorkStudentComponent);
     component = fixture.componentInstance;
+    component.studentWork = {};
     fixture.detectChanges();
   });
 

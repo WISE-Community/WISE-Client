@@ -21,6 +21,18 @@ export class ComponentService {
     protected UtilService: UtilService
   ) {}
 
+  getDomIdEnding(nodeId: string, componentId: string, componentState: any): string {
+    if (componentState == null) {
+      return `${nodeId}-${componentId}`;
+    } else {
+      return `${nodeId}-${componentId}-${componentState.id}`;
+    }
+  }
+
+  getElementId(domIdBeginning: string, domIdEnding: string): string {
+    return `${domIdBeginning}-${domIdEnding}`;
+  }
+
   requestComponentState(nodeId: string, componentId: string, isSubmit: boolean = false): void {
     this.requestComponentStateSource.next({
       nodeId: nodeId,

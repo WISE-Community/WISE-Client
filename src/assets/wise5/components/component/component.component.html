@@ -100,13 +100,20 @@
       [workgroupId]="workgroupId"
       [mode]="student">
   </peer-chat-student>
-  <show-work-student *ngSwitchCase="'ShowWork'"
+  <show-group-work-student *ngSwitchCase="'ShowGroupWork'"
       [nodeId]="nodeId"
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
       [mode]="student">
-  </show-work-student>
+  </show-group-work-student>
+  <show-my-work-student *ngSwitchCase="'ShowMyWork'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="componentState"
+      [workgroupId]="workgroupId"
+      [mode]="student">
+  </show-my-work-student>
   <summary-student *ngSwitchCase="'Summary'"
       [nodeId]="nodeId"
       [componentContent]="componentContent"
