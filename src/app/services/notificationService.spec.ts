@@ -6,6 +6,7 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { AnnotationService } from '../../assets/wise5/services/annotationService';
 
 let service: NotificationService;
 let configService: ConfigService;
@@ -32,7 +33,14 @@ describe('NotificationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [ConfigService, NotificationService, ProjectService, SessionService, UtilService]
+      providers: [
+        AnnotationService,
+        ConfigService,
+        NotificationService,
+        ProjectService,
+        SessionService,
+        UtilService
+      ]
     });
     http = TestBed.get(HttpTestingController);
     service = TestBed.get(NotificationService);

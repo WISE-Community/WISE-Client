@@ -21,7 +21,7 @@
                 <md-icon md-menu-origin> notifications </md-icon>
             </md-button>
             <md-menu-content width="5" class="account-menu">
-                <ng-include src="::vleController.themePath + '/templates/notificationMenu.html'"></ng-include>
+                <notifications-menu></notifications-menu>
             </md-menu-content>
         </md-menu>
         <md-progress-circular class="menu-progress" md-mode="determinate" md-diameter="32" value="{{ themeCtrl.rootNodeStatus.progress.completionPct }}"></md-progress-circular>

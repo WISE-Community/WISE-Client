@@ -25,6 +25,7 @@ import { PeerChatStudentComponent } from '../assets/wise5/components/peerChat/pe
 import { PeerChatModule } from '../assets/wise5/components/peerChat/peer-chat.module';
 import { ComponentComponent } from '../assets/wise5/components/component/component.component';
 import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
+import { NavigationComponent } from '../assets/wise5/themes/default/navigation/navigation.component';
 import { StudentAssetsModule } from '../assets/wise5/vle/studentAsset/student-assets/student-assets-module';
 import { OpenResponseStudentModule } from '../assets/wise5/components/openResponse/open-response-student/open-response-student.module';
 import { TableStudentModule } from '../assets/wise5/components/table/table-student/table-student.module';
@@ -43,17 +44,20 @@ import { SummaryStudentModule } from '../assets/wise5/components/summary/summary
 import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/summary-display.module';
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 import { ShowGroupWorkStudentModule } from '../assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.module';
+import { NotificationsMenuComponent } from '../assets/wise5/vle/notifications-menu/notifications-menu.component';
 
 @NgModule({
   declarations: [
     ComponentComponent,
     GenerateImageDialogComponent,
     HtmlDialog,
+    NavigationComponent,
     NavItemComponent,
     PeerChatStudentComponent,
     SafeUrl,
     StepToolsComponent,
-    NavItemComponent
+    NavItemComponent,
+    NotificationsMenuComponent
   ],
   imports: [
     AngularJSModule,

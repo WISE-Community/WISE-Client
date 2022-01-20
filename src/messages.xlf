@@ -453,7 +453,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1bf58cf720f3aa0e4a6f06d2a84183b552f3f3c6" datatype="html">
@@ -7430,7 +7430,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="81d287d330a52df6ba828022a1fcd0a749a27ab1" datatype="html">
@@ -13445,7 +13445,7 @@ Warning: This will delete all existing choices and buckets in this component.</s
         <source>Item Text required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8b8ff7859cae872c69d4677ab92308d7465220cb" datatype="html">
@@ -15315,6 +15315,42 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4200122564420479235" datatype="html">
+        <source>You have new replies to your discussion post!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="199088045976822823" datatype="html">
+        <source>You have new feedback from your teacher!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5013145827213980080" datatype="html">
+        <source>You have new feedback!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">
+        <source>Project Plan</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/navigation/navigation.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="2e1aeaf8d183e6846a0463a08c784f472184fcf0" datatype="html">
         <source>Completed with warning</source>
         <context-group purpose="location">
@@ -15348,17 +15384,6 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">55</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">
-        <source>Project Plan</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">65</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">
@@ -15401,6 +15426,34 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
           <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9fe218829514884cdd0ca2300573a4e0428c324f" datatype="html">
+        <source>Alerts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eae1bb3f81534953df4c9a2f0e7e24223ec63754" datatype="html">
+        <source>Hi there! You currently have no alerts.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="addf9c8b12b40609cede43bbe1a0f43914bda14e" datatype="html">
+        <source>Visit Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3290e723a9af5017b3e5287ee83b7ee151ac0d96" datatype="html">
+        <source>Remove Notification</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fcc4b29f2c63c0f61e98757c3e0bceed176606eb" datatype="html">
