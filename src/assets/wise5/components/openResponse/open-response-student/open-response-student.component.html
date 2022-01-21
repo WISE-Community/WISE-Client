@@ -118,7 +118,6 @@
     (submitButtonClicked)="submitButtonClicked($event)">
 </component-save-submit-buttons>
 <component-annotations
-    *ngIf="mode === 'student'"
     [annotations]="latestAnnotations"
     [maxScore]="componentContent.maxScore"
     [nodeId]="nodeId"
