@@ -10,9 +10,6 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 })
 export class StudentAssetsComponent implements OnInit {
   @Input()
-  componentController: any;
-
-  @Input()
   componentId: string;
 
   @Input()
