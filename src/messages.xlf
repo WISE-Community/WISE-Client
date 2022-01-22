@@ -14514,11 +14514,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.component.html</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-student/show-my-work-student.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="375ead964bf5b0ae938bb0b600db793ac0d32683" datatype="html">

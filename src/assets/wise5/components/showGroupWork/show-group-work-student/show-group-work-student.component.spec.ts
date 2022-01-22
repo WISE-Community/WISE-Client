@@ -39,6 +39,12 @@ class MockConfigService {
   getWorkgroupId() {
     return 1;
   }
+  getAvatarColorForWorkgroupId(workgroupId: any) {
+    return '#000000';
+  }
+  getUsernamesStringByWorkgroupId(workgroupId: number) {
+    return `Student ${workgroupId}`;
+  }
 }
 
 describe('ShowGroupWorkStudentComponent', () => {
@@ -100,6 +106,7 @@ describe('ShowGroupWorkStudentComponent', () => {
     component.studentWorkFromGroupMembers = [];
     component.setStudentWorkFromGroupMembers(studentWork);
     expect(component.studentWorkFromGroupMembers.length).toEqual(2);
+    expect(Object.keys(component.workgroupInfos).length).toEqual(2);
   });
 
   it('should set student work from group members not including my work', () => {
@@ -109,5 +116,6 @@ describe('ShowGroupWorkStudentComponent', () => {
     spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
     component.setStudentWorkFromGroupMembers(studentWork);
     expect(component.studentWorkFromGroupMembers.length).toEqual(1);
+    expect(Object.keys(component.workgroupInfos).length).toEqual(1);
   });
 });
