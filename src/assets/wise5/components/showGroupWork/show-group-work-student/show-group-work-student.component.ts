@@ -21,6 +21,7 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
   showWorkComponentContent: any;
   showWorkNodeId: string;
   studentWorkFromGroupMembers: any[];
+  workgroupInfos: any = {};
 
   constructor(
     protected annotationService: AnnotationService,
@@ -83,12 +84,27 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
         studentWorkFromGroupMembers
       );
     }
+    this.setWorkgroupInfos();
   }
 
-  getGroupStudentWorkNotIncludingMyWork(studentWorkFromGroupMembers: any[]): any[] {
+  private getGroupStudentWorkNotIncludingMyWork(studentWorkFromGroupMembers: any[]): any[] {
     const myWorkgroupId = this.configService.getWorkgroupId();
     return studentWorkFromGroupMembers.filter((studentWork) => {
       return studentWork.workgroupId !== myWorkgroupId;
     });
+  }
+
+  private setWorkgroupInfos(): void {
+    this.workgroupInfos = {};
+    for (const studentWork of this.studentWorkFromGroupMembers) {
+      this.setWorkgroupInfo(studentWork.workgroupId);
+    }
+  }
+
+  private setWorkgroupInfo(workgroupId: number): void {
+    this.workgroupInfos[workgroupId] = {
+      avatarColor: this.ConfigService.getAvatarColorForWorkgroupId(workgroupId),
+      displayNames: this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId)
+    };
   }
 }
