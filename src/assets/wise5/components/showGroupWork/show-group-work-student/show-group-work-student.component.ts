@@ -77,7 +77,6 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
   }
 
   setStudentWorkFromGroupMembers(studentWorkFromGroupMembers: any[]): void {
-    this.workgroupInfos = {};
     if (this.componentContent.isShowMyWork) {
       this.studentWorkFromGroupMembers = studentWorkFromGroupMembers;
     } else {
@@ -85,19 +84,24 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
         studentWorkFromGroupMembers
       );
     }
-    for (const studentWork of this.studentWorkFromGroupMembers) {
-      this.setWorkgroupInfo(studentWork.workgroupId);
-    }
+    this.setWorkgroupInfos();
   }
 
-  getGroupStudentWorkNotIncludingMyWork(studentWorkFromGroupMembers: any[]): any[] {
+  private getGroupStudentWorkNotIncludingMyWork(studentWorkFromGroupMembers: any[]): any[] {
     const myWorkgroupId = this.configService.getWorkgroupId();
     return studentWorkFromGroupMembers.filter((studentWork) => {
       return studentWork.workgroupId !== myWorkgroupId;
     });
   }
 
-  setWorkgroupInfo(workgroupId: number): void {
+  private setWorkgroupInfos(): void {
+    this.workgroupInfos = {};
+    for (const studentWork of this.studentWorkFromGroupMembers) {
+      this.setWorkgroupInfo(studentWork.workgroupId);
+    }
+  }
+
+  private setWorkgroupInfo(workgroupId: number): void {
     this.workgroupInfos[workgroupId] = {
       avatarColor: this.ConfigService.getAvatarColorForWorkgroupId(workgroupId),
       displayNames: this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId)
