@@ -68,6 +68,7 @@ describe('DiscussionStudent', () => {
       comment: ''
     });
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
+    spyOn(TestBed.inject(ConfigService), 'getUserIdsStringByWorkgroupId').and.returnValue('1');
     saveNotificationToServerSpy = spyOn(
       TestBed.inject(NotificationService),
       'saveNotificationToServer'
