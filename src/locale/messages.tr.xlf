@@ -11666,11 +11666,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">184</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">222</context>
+          <context context-type="linenumber">200</context>
         </context-group>
         <target state="translated">Cevabınız hakkında geri bildirim almak için daha fazla şansınız yoktur.</target>
       </trans-unit>
@@ -12352,7 +12352,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">187</context>
         </context-group>
         <target state="translated">Cevabınız hakkında geri bildirim almak için 1 şansınız var, bu yüzden bu sizin en iyi çalışmanız olmalı.
 
@@ -15588,7 +15588,7 @@ Mevcut Puan: <x id="PH_1" equiv-text="currentScore"/></target>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">213</context>
+          <context context-type="linenumber">191</context>
         </context-group>
         <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this should be your best work.
 
@@ -15600,7 +15600,7 @@ Are you ready to receive feedback on this answer?</target>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">225</context>
+          <context context-type="linenumber">203</context>
         </context-group>
         <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chance to receive feedback on your answer so this should be your best work.
 
@@ -15612,7 +15612,7 @@ Are you ready to receive feedback on this answer?</target>
 Are you ready to submit this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">229</context>
+          <context context-type="linenumber">207</context>
         </context-group>
         <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to submit your answer so this should be your best work.
 
@@ -15622,7 +15622,7 @@ Are you ready to submit this answer?</target>
         <source>We are scoring your work...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">373</context>
+          <context context-type="linenumber">351</context>
         </context-group>
         <target state="translated">Çalışmalarınızı puanlıyoruz...</target>
       </trans-unit>
@@ -15630,7 +15630,7 @@ Are you ready to submit this answer?</target>
         <source>Please Wait</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">375</context>
+          <context context-type="linenumber">353</context>
         </context-group>
         <target state="translated">Lütfen Bekleyin</target>
       </trans-unit>
@@ -15639,7 +15639,7 @@ Are you ready to submit this answer?</target>
 If this problem continues, let your teacher know and move on to the next activity. Your work will still be saved.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">396</context>
+          <context context-type="linenumber">374</context>
         </context-group>
         <target state="translated">Çalışmanızın puanlanmasıyla ilgili bir sorun oluştu. Lütfen tekrar deneyin.
 Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin. Çalışmanız yine de kaydedilmiş olacak.</target>
@@ -15648,7 +15648,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>This will replace your existing recording. Is this OK?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">820</context>
+          <context context-type="linenumber">774</context>
         </context-group>
         <target state="translated">Bu, mevcut kaydınızın yerini alacak. Uygun mu?</target>
       </trans-unit>
@@ -15656,7 +15656,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Are you sure you want to delete your recording?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">864</context>
+          <context context-type="linenumber">818</context>
         </context-group>
         <target state="translated">Kaydınızı silmek istediğinizden emin misiniz?</target>
       </trans-unit>
