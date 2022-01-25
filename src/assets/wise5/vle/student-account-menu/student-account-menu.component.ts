@@ -17,7 +17,8 @@ export class StudentAccountMenuComponent implements OnInit {
   rootNodeStatus: any;
   scorePercentage: number;
   themeSettings: any;
-  totalScore: number;
+  totalScoreNum: number;
+  totalScore: string;
   usernamesDisplay: string;
   usersInWorkgroup: any[];
   workgroupId: number;
@@ -30,16 +31,15 @@ export class StudentAccountMenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.themeSettings = this.projectService.getThemeSettings();
-    this.hideTotalScores = this.themeSettings.hideTotalScores;
     this.nodeStatuses = this.studentDataService.nodeStatuses;
     this.rootNode = this.projectService.rootNode;
     this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
     this.workgroupId = this.configService.getWorkgroupId();
     this.usersInWorkgroup = this.configService.getUsernamesByWorkgroupId(this.workgroupId);
-    this.totalScore = this.studentDataService.getTotalScore();
+    this.totalScoreNum = this.studentDataService.getTotalScore();
+    this.totalScore = typeof(this.totalScoreNum) === 'number' ? this.totalScoreNum.toString() : '-';
     this.maxScore = this.studentDataService.maxScore;
-    this.scorePercentage = Math.ceil((100 * this.totalScore) / this.maxScore);
+    this.scorePercentage = Math.ceil((100 * this.totalScoreNum) / this.maxScore);
     this.usernamesDisplay = this.getUsernamesDisplay(this.usersInWorkgroup);
   }
 
