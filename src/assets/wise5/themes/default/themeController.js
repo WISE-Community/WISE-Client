@@ -47,6 +47,9 @@ class ThemeController {
     this.idToOrder = this.ProjectService.idToOrder;
 
     this.workgroupId = this.ConfigService.getWorkgroupId();
+    
+    this.rootNode = this.ProjectService.rootNode;
+    this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
 
     this.notebookOpen = false;
     this.notebookConfig = this.NotebookService.getNotebookConfig();
