@@ -64,55 +64,33 @@ export class OpenResponseStudent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
 
-    if (this.mode === 'student') {
-      this.isSaveButtonVisible = this.componentContent.showSaveButton;
-      this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    } else if (this.mode === 'showPreviousWork') {
-      this.isSaveButtonVisible = false;
-      this.isSubmitButtonVisible = false;
-      this.isDisabled = true;
-    }
-
-    if (this.mode == 'student') {
-      if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
-        // we will show work from another component
-        this.handleConnectedComponents();
-      } else if (
-        this.componentState != null &&
-        this.OpenResponseService.componentStateHasStudentWork(
-          this.componentState,
-          this.componentContent
-        )
-      ) {
-        /*
-         * the student has work so we will populate the work into this
-         * component
-         */
-        this.setStudentWork(this.componentState);
-      } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-        // we will import work from another component
-        this.handleConnectedComponents();
-      } else if (this.componentState == null) {
-        // check if we need to import work
-
-        if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-          /*
-           * the student does not have any work and there are connected
-           * components so we will get the work from the connected
-           * components
-           */
-          this.handleConnectedComponents();
-        } else if (this.componentContent.starterSentence != null) {
-          /*
-           * the student has not done any work and there is a starter sentence
-           * so we will populate the textarea with the starter sentence
-           */
-          this.studentResponse = this.componentContent.starterSentence;
-        }
-      }
-    } else {
-      // populate the student work into this component
+    if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    } else if (
+      this.componentState != null &&
+      this.OpenResponseService.componentStateHasStudentWork(
+        this.componentState,
+        this.componentContent
+      )
+    ) {
       this.setStudentWork(this.componentState);
+    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      this.handleConnectedComponents();
+    } else if (this.componentState == null) {
+      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+        /*
+         * the student does not have any work and there are connected
+         * components so we will get the work from the connected
+         * components
+         */
+        this.handleConnectedComponents();
+      } else if (this.componentContent.starterSentence != null) {
+        /*
+         * the student has not done any work and there is a starter sentence
+         * so we will populate the textarea with the starter sentence
+         */
+        this.studentResponse = this.componentContent.starterSentence;
+      }
     }
 
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
@@ -500,18 +478,6 @@ export class OpenResponseStudent extends ComponentStudent {
 
     componentState.annotations = [autoScoreAnnotation];
 
-    if (this.mode === 'authoring') {
-      if (this.latestAnnotations == null) {
-        this.latestAnnotations = {};
-      }
-
-      /*
-       * we are in the authoring view so we will set the
-       * latest score annotation manually
-       */
-      this.latestAnnotations.score = autoScoreAnnotation;
-    }
-
     let autoComment = null;
     const submitCounter = this.submitCounter;
 
@@ -548,18 +514,6 @@ export class OpenResponseStudent extends ComponentStudent {
         }
       }
       componentState.annotations.push(autoCommentAnnotation);
-
-      if (this.mode === 'authoring') {
-        if (this.latestAnnotations == null) {
-          this.latestAnnotations = {};
-        }
-
-        /*
-         * we are in the authoring view so we will set the
-         * latest comment annotation manually
-         */
-        this.latestAnnotations.comment = autoCommentAnnotation;
-      }
     }
     if (
       this.componentContent.enableNotifications &&
