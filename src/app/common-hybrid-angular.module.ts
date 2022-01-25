@@ -72,14 +72,7 @@ import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance
 import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
 import { PeerChatService } from '../assets/wise5/components/peerChat/peerChatService';
-import { OpenResponseGrading } from '../assets/wise5/components/openResponse/open-response-grading/open-response-grading.component';
-import { MultipleChoiceGrading } from '../assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component';
-import { ConceptMapGrading } from '../assets/wise5/components/conceptMap/concept-map-grading/concept-map-grading.component';
-import { DrawGrading } from '../assets/wise5/components/draw/draw-grading/draw-grading.component';
-import { GraphGrading } from '../assets/wise5/components/graph/graph-grading/graph-grading.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { LabelGrading } from '../assets/wise5/components/label/label-grading/label-grading.component';
-import { TableGrading } from '../assets/wise5/components/table/table-grading/table-grading.component';
 import { ShowMyWorkService } from '../assets/wise5/components/showMyWork/showMyWorkService';
 import { ShowGroupWorkService } from '../assets/wise5/components/showGroupWork/showGroupWorkService';
 import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
@@ -89,19 +82,12 @@ export class EmptyComponent {}
 
 @NgModule({
   declarations: [
-    ConceptMapGrading,
     DialogResponseComponent,
     DialogResponsesComponent,
-    DrawGrading,
-    GraphGrading,
     EmptyComponent,
     HelpIconComponent,
-    LabelGrading,
-    MultipleChoiceGrading,
     NodeIconComponent,
-    NodeStatusIcon,
-    OpenResponseGrading,
-    TableGrading
+    NodeStatusIcon
   ],
   imports: [
     UpgradeModule,
@@ -180,16 +166,12 @@ export class EmptyComponent {}
   ],
   exports: [
     CommonModule,
-    ConceptMapGrading,
     DialogResponseComponent,
     DialogResponsesComponent,
     DragDropModule,
-    DrawGrading,
     EditorModule,
     FlexLayoutModule,
     FormsModule,
-    GraphGrading,
-    LabelGrading,
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
@@ -212,12 +194,9 @@ export class EmptyComponent {}
     MatToolbarModule,
     MatTooltipModule,
     MomentModule,
-    MultipleChoiceGrading,
     NodeIconComponent,
     NodeStatusIcon,
-    OpenResponseGrading,
-    ReactiveFormsModule,
-    TableGrading
+    ReactiveFormsModule
   ]
 })
 export class AngularJSModule {}

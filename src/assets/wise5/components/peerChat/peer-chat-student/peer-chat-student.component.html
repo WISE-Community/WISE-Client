@@ -4,20 +4,6 @@
 </div>
 <ng-container *ngIf="isPeerChatWorkgroupsAvailable">
   <component-header [componentContent]="componentContent"></component-header>
-  <div *ngIf="isShowWorkFromAnotherComponent"
-      fxLayout="column"
-      fxLayout.gt-sm="row"
-      fxLayoutAlign.gt-sm="start start"
-      fxLayoutGap="16px"
-      class="previous-work">
-    <div *ngFor="let peerChatWorkgroupId of peerChatWorkgroupIds" fxFlex fxflex.gt-sm="50">
-      <peer-chat-previous-work [studentWork]="peerWorkFromAnotherComponent[peerChatWorkgroupId]"
-          [avatarColor]="peerChatWorkgroupInfos[peerChatWorkgroupId].avatarColor"
-          [displayNames]="peerChatWorkgroupInfos[peerChatWorkgroupId].displayNames"
-          [errorRetrievingStudentWork]="errorRetrievingWorkFromAnotherComponent">
-      </peer-chat-previous-work>
-    </div>
-  </div>
   <div fxLayout="column"
       fxLayout.gt-sm="row"
       fxLayoutAlign.gt-sm="start start"

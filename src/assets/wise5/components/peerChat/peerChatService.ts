@@ -66,18 +66,6 @@ export class PeerChatService extends ComponentService {
     );
   }
 
-  retrieveWorkFromAnotherComponent(
-    peerGroupId: number,
-    nodeId: string,
-    componentId: string,
-    showWorkNodeId: string,
-    showWorkComponentId: string
-  ): Observable<any> {
-    return this.http.get(
-      `/api/classmate/peer-chat/student-work/${peerGroupId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}`
-    );
-  }
-
   createDummyComponentStates(workgroupIds: number[]): any[] {
     const componentStates = [];
     for (const workgroupId of workgroupIds) {

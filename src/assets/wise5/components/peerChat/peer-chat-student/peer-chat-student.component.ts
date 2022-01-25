@@ -5,7 +5,6 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
-import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
@@ -25,7 +24,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
   errorRetrievingWorkFromAnotherComponent: boolean;
   isPeerChatWorkgroupsResponseReceived: boolean;
   isPeerChatWorkgroupsAvailable: boolean;
-  isShowWorkFromAnotherComponent: boolean;
   myWorkgroupId: number;
   peerChatMessages: PeerChatMessage[] = [];
   peerChatWorkgroupIds: number[] = [];
@@ -45,7 +43,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private PeerChatService: PeerChatService,
-    private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     private StudentWebSocketService: StudentWebSocketService,
@@ -69,11 +66,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.myWorkgroupId = this.ConfigService.getWorkgroupId();
     this.showWorkComponentId = this.componentContent.showWorkComponentId;
     this.showWorkNodeId = this.componentContent.showWorkNodeId;
-    this.isShowWorkFromAnotherComponent =
-      this.ProjectService.getComponentByNodeIdAndComponentId(
-        this.showWorkNodeId,
-        this.showWorkComponentId
-      ) != null;
     this.requestChatWorkgroups();
     this.registerStudentWorkReceivedListener();
   }
@@ -107,9 +99,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.isPeerChatWorkgroupsResponseReceived = true;
     this.peerGroupId = peerGroup.id;
     this.setPeerChatWorkgroups(this.getPeerGroupWorkgroupIds(peerGroup));
-    if (this.isShowWorkFromAnotherComponent) {
-      this.getPeerWorkFromAnotherComponent();
-    }
     this.getPeerChatComponentStates(peerGroup.id);
   }
 
@@ -167,25 +156,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
     return {
       workgroupId: workgroupId
     };
-  }
-
-  getPeerWorkFromAnotherComponent(): void {
-    this.PeerChatService.retrieveWorkFromAnotherComponent(
-      this.peerGroupId,
-      this.nodeId,
-      this.componentId,
-      this.showWorkNodeId,
-      this.showWorkComponentId
-    ).subscribe(
-      (componentStates: any[]) => {
-        for (const componentState of componentStates) {
-          this.peerWorkFromAnotherComponent[componentState.workgroupId] = componentState;
-        }
-      },
-      (err) => {
-        this.errorRetrievingWorkFromAnotherComponent = true;
-      }
-    );
   }
 
   submitStudentResponse(event): void {
