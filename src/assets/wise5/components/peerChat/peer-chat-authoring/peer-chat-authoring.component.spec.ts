@@ -42,8 +42,7 @@ const componentContent = {
   maxMembershipCount: 2,
   questionBank: ['What color is the sky?', 'How deep is the ocean?'],
   showWorkNodeId: 'node8',
-  showWorkComponentId: 'vau6ihimfk',
-  secondPrompt: 'Discuss. Use the Question Bank.'
+  showWorkComponentId: 'vau6ihimfk'
 };
 
 describe('PeerChatAuthoringComponent', () => {

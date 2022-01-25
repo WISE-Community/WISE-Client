@@ -1,6 +1,4 @@
 <ng-container *ngIf="isPeerChatWorkgroupsAvailable">
-  <component-header *ngIf="secondPromptComponentContent" [componentContent]="secondPromptComponentContent">
-  </component-header>
   <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign.gt-md="start start" fxLayoutGap="16px">
     <div *ngIf="componentContent.questionBank.length > 0"
         fxFlex

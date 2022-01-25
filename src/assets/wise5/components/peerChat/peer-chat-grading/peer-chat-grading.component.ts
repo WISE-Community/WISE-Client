@@ -17,7 +17,6 @@ export class PeerChatGradingComponent extends ComponentGrading {
   peerChatWorkgroupIds: number[] = [];
   peerChatWorkgroupInfos: any = {};
   requestTimeout: number = 10000;
-  secondPromptComponentContent: any;
 
   @Input()
   workgroupId: any;
@@ -32,11 +31,6 @@ export class PeerChatGradingComponent extends ComponentGrading {
 
   ngOnInit(): void {
     super.ngOnInit();
-    if (this.componentContent.secondPrompt != null && this.componentContent.secondPrompt != '') {
-      this.secondPromptComponentContent = {
-        prompt: this.componentContent.secondPrompt
-      };
-    }
     this.retrievePeerChatComponentStates(this.nodeId, this.componentId, this.workgroupId);
   }
 

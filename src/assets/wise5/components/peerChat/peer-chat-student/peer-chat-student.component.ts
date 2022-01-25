@@ -34,7 +34,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
   peerWorkFromAnotherComponent: any = {};
   requestTimeout: number = 10000;
   response: string;
-  secondPromptComponentContent: any;
   showWorkComponentId: string;
   showWorkNodeId: string;
 
@@ -75,11 +74,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
         this.showWorkNodeId,
         this.showWorkComponentId
       ) != null;
-    if (this.componentContent.secondPrompt != null && this.componentContent.secondPrompt != '') {
-      this.secondPromptComponentContent = {
-        prompt: this.componentContent.secondPrompt
-      };
-    }
     this.requestChatWorkgroups();
     this.registerStudentWorkReceivedListener();
   }

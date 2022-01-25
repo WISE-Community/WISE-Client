@@ -28,16 +28,6 @@
     </mat-select>
   </mat-form-field>
 </div>
-<mat-form-field class="second-prompt" appearance="fill">
-  <mat-label i18n>Second Prompt (Optional)</mat-label>
-  <textarea matInput
-      [(ngModel)]="authoringComponentContent.secondPrompt"
-      (ngModelChange)="componentChanged()"
-      placeholder="Enter Second Prompt Here"
-      i18n-placeholder
-      cdkTextareaAutosize>
-  </textarea>
-</mat-form-field>
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="bottom-spacing">
   <mat-label i18n>Grouping Logic</mat-label>
   <button mat-raised-button
