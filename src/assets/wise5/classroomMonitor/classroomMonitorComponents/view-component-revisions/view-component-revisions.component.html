@@ -13,110 +13,110 @@
         <div class="component--grading">
           <div class="component__content" fxLayout="row wrap">
             <div fxFlex="100" fxFlex.gt-sm="66.67" fxLayout="column" class="component--grading__response">
-              <animation-show-work
+              <animation-grading
                   *ngIf="revision.componentState.componentType === 'Animation'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </animation-show-work>
-              <audio-oscillator-show-work
+              </animation-grading>
+              <audio-oscillator-grading
                   *ngIf="revision.componentState.componentType === 'AudioOscillator'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </audio-oscillator-show-work>
-              <concept-map-show-work
+              </audio-oscillator-grading>
+              <concept-map-grading
                   *ngIf="revision.componentState.componentType === 'ConceptMap'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </concept-map-show-work>
-              <dialog-guidance-show-work
+              </concept-map-grading>
+              <dialog-guidance-grading
                   *ngIf="revision.componentState.componentType === 'DialogGuidance'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </dialog-guidance-show-work>
-              <discussion-show-work
+              </dialog-guidance-grading>
+              <discussion-grading
                   *ngIf="revision.componentState.componentType === 'Discussion'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </discussion-show-work>
-              <draw-show-work
+              </discussion-grading>
+              <draw-grading
                   *ngIf="revision.componentState.componentType === 'Draw'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </draw-show-work>
-              <embedded-show-work
+              </draw-grading>
+              <embedded-grading
                   *ngIf="revision.componentState.componentType === 'Embedded'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </embedded-show-work>
-              <graph-show-work
+              </embedded-grading>
+              <graph-grading
                   *ngIf="revision.componentState.componentType === 'Graph'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </graph-show-work>
-              <label-show-work
+              </graph-grading>
+              <label-grading
                   *ngIf="revision.componentState.componentType === 'Label'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </label-show-work>
-              <match-show-work
+              </label-grading>
+              <match-grading
                   *ngIf="revision.componentState.componentType === 'Match'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </match-show-work>
-              <multiple-choice-show-work
+              </match-grading>
+              <multiple-choice-grading
                   *ngIf="revision.componentState.componentType === 'MultipleChoice'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </multiple-choice-show-work>
-              <open-response-show-work
+              </multiple-choice-grading>
+              <open-response-grading
                   *ngIf="revision.componentState.componentType === 'OpenResponse'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </open-response-show-work>
-              <table-show-work
+              </open-response-grading>
+              <table-grading
                   *ngIf="revision.componentState.componentType === 'Table'"
                   [nodeId]="nodeId"
                   [componentId]="componentId"
                   [componentState]="revision.componentState"
                   [workgroupId]="workgroupId"
                   [isRevision]="true">
-              </table-show-work>
+              </table-grading>
               <span fxFlex></span>
               <div class="component__actions__info component--grading__actions__info md-caption">
                 <component-state-info [componentState]="revision.componentState" [isActive]="false">

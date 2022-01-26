@@ -35,7 +35,7 @@ import { MilestoneReportDataComponent } from './milestone/milestone-report-data/
 import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component';
 import { ManageShowStudentInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component';
 import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component';
-import { ComponentShowWorkModule } from './component-show-work.module';
+import { ComponentGradingModule } from './component-grading.module';
 
 @NgModule({
   declarations: [
@@ -75,6 +75,6 @@ import { ComponentShowWorkModule } from './component-show-work.module';
     NavItemScoreComponent,
     WorkgroupNodeStatusComponent
   ],
-  imports: [AngularJSModule, ComponentShowWorkModule]
+  imports: [AngularJSModule, ComponentGradingModule]
 })
 export class ClassroomMonitorModule {}

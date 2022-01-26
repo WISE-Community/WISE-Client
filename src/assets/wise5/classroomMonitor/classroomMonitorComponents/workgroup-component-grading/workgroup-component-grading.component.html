@@ -1,85 +1,85 @@
 <div class="component__content" fxLayout="row wrap">
   <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="66" class="component--grading__response">
     <ng-container *ngIf="latestComponentState != null">
-      <animation-show-work
+      <animation-grading
           *ngIf="component.type === 'Animation'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </animation-show-work>
-      <audio-oscillator-show-work
+      </animation-grading>
+      <audio-oscillator-grading
           *ngIf="component.type === 'AudioOscillator'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </audio-oscillator-show-work>
-      <concept-map-show-work
+      </audio-oscillator-grading>
+      <concept-map-grading
           *ngIf="component.type === 'ConceptMap'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </concept-map-show-work>
-      <dialog-guidance-show-work
+      </concept-map-grading>
+      <dialog-guidance-grading
           *ngIf="component.type === 'DialogGuidance'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </dialog-guidance-show-work>
-      <discussion-show-work
+      </dialog-guidance-grading>
+      <discussion-grading
           *ngIf="component.type === 'Discussion'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState"
           [workgroupId]="workgroupId">
-      </discussion-show-work>
-      <draw-show-work
+      </discussion-grading>
+      <draw-grading
           *ngIf="component.type === 'Draw'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </draw-show-work>
-      <embedded-show-work
+      </draw-grading>
+      <embedded-grading
           *ngIf="component.type === 'Embedded'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </embedded-show-work>
-      <graph-show-work
+      </embedded-grading>
+      <graph-grading
           *ngIf="component.type === 'Graph'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </graph-show-work>
-      <label-show-work
+      </graph-grading>
+      <label-grading
           *ngIf="component.type === 'Label'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </label-show-work>
-      <match-show-work
+      </label-grading>
+      <match-grading
           *ngIf="component.type === 'Match'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </match-show-work>
-      <multiple-choice-show-work
+      </match-grading>
+      <multiple-choice-grading
           *ngIf="component.type === 'MultipleChoice'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </multiple-choice-show-work>
-      <open-response-show-work
+      </multiple-choice-grading>
+      <open-response-grading
           *ngIf="component.type === 'OpenResponse'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </open-response-show-work>
-      <table-show-work
+      </open-response-grading>
+      <table-grading
           *ngIf="component.type === 'Table'"
           [nodeId]="nodeId"
           [componentId]="component.id"
           [componentState]="latestComponentState">
-      </table-show-work>
+      </table-grading>
     </ng-container>
     <span fxFlex></span>
     <div *ngIf="componentStates.length === 0" class="component__actions__info component--grading__actions__info md-caption" i18n>
