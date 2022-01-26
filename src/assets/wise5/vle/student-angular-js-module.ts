@@ -14,6 +14,7 @@ import { NotebookLauncherComponent } from '../../../../src/app/notebook/notebook
 import { AddToNotebookButton } from '../directives/add-to-notebook-button/add-to-notebook-button.component';
 import { NavigationComponent } from '../themes/default/navigation/navigation.component';
 import { NotificationsMenuComponent } from './notifications-menu/notifications-menu.component';
+import { StudentAccountMenuComponent } from './student-account-menu/student-account-menu.component';
 
 export function createStudentAngularJSModule(type = 'preview') {
   return angular
@@ -60,6 +61,10 @@ export function createStudentAngularJSModule(type = 'preview') {
     .directive(
       'notificationsMenu',
       downgradeComponent({ component: NotificationsMenuComponent }) as angular.IDirectiveFactory
+    )
+    .directive(
+      'studentAccountMenu',
+      downgradeComponent({ component: StudentAccountMenuComponent }) as angular.IDirectiveFactory
     )
     .config([
       '$stateProvider',

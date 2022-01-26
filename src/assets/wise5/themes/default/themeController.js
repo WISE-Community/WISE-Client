@@ -42,16 +42,14 @@ class ThemeController {
 
     this.themePath = this.ProjectService.getThemePath();
     this.themeSettings = this.ProjectService.getThemeSettings();
-    this.hideTotalScores = this.themeSettings.hideTotalScores;
 
     this.nodeStatuses = this.StudentDataService.nodeStatuses;
     this.idToOrder = this.ProjectService.idToOrder;
 
+    this.workgroupId = this.ConfigService.getWorkgroupId();
+    
     this.rootNode = this.ProjectService.rootNode;
     this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
-
-    this.workgroupId = this.ConfigService.getWorkgroupId();
-    this.workgroupUsernames = this.ConfigService.getUsernamesByWorkgroupId(this.workgroupId);
 
     this.notebookOpen = false;
     this.notebookConfig = this.NotebookService.getNotebookConfig();
