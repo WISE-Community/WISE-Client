@@ -2,6 +2,7 @@ import '../lib/jquery/jquery-global';
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import '../common-angular-js-module';
+import '../../../app/student/top-bar/topBarAngularJSModule';
 import NodeController from '../vle/node/nodeController';
 import { StudentWebSocketService } from '../services/studentWebSocketService';
 import VLEController from '../vle/vleController';
@@ -24,6 +25,7 @@ export function createStudentAngularJSModule(type = 'preview') {
       'studentAsset',
       'summaryComponentModule',
       'theme',
+      'topBarAngularJSModule',
       'ui.scrollpoint'
     ])
     .factory('ProjectService', downgradeInjectable(VLEProjectService))

@@ -7084,6 +7084,34 @@
           <context context-type="linenumber">302,304</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="64307025869f10565870c106fd2bc800278e1bb8" datatype="html">
+        <source>Only Available in Preview Mode</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a0d81d0871e7acd62d27a030e7e8c6bdad31d54d" datatype="html">
+        <source>Turn Off Constraints</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="074eede8c0a1156b21a4efb4d81a56e1c41f591a" datatype="html">
+        <source>Constraints Are Off</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="72778a65e8adb61055af9ac6e0f5dc566502ed16" datatype="html">
+        <source>Open Account Menu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="e438ba78cbafdb5bcbce0820bfaad995a504f222" datatype="html">
         <source>Display Name</source>
         <context-group purpose="location">
