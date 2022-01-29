@@ -1,18 +1,23 @@
 <component-header [componentContent]="componentContent"></component-header>
-<div fxLayout="column" fxLayoutGap="16px">
-  <mat-card *ngFor="let studentWork of studentWorkFromGroupMembers" class="mat-elevation-z0 notice-bg-bg">
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-      <mat-icon class="mat-30" [ngStyle]="{'color': workgroupInfos[studentWork.workgroupId].avatarColor}">
-        account_circle
-      </mat-icon>
-      <span class="mat-body-2">{{ workgroupInfos[studentWork.workgroupId].displayNames }}</span>
-    </div>
-    <mat-card-content class="app-bg-bg">
-      <span class="text-secondary" *ngIf="studentWork == null" i18n>(No response)</span>
-      <show-work-student [studentWork]="studentWork"
-        [componentContent]="showWorkComponentContent"
-        [nodeId]="showWorkNodeId">
-      </show-work-student>
-    </mat-card-content>
-  </mat-card>
+<div [fxLayout]="flexLayout">
+  <div *ngFor="let studentWork of studentWorkFromGroupMembers"
+      fxFlex="100"
+      [fxFlex.gt-sm]="widthMd"
+      [fxFlex.gt-md]="widthLg">
+    <mat-card class="mat-elevation-z0 notice-bg-bg">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <mat-icon class="mat-30" [ngStyle]="{'color': workgroupInfos[studentWork.workgroupId].avatarColor}">
+          account_circle
+        </mat-icon>
+        <span class="mat-body-2">{{ workgroupInfos[studentWork.workgroupId].displayNames }}</span>
+      </div>
+      <mat-card-content class="app-bg-bg">
+        <span class="text-secondary" *ngIf="studentWork == null" i18n>(No response)</span>
+        <show-work-student [studentWork]="studentWork"
+            [componentContent]="showWorkComponentContent"
+            [nodeId]="showWorkNodeId">
+        </show-work-student>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

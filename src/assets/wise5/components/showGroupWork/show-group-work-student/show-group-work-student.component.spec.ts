@@ -47,12 +47,14 @@ class MockConfigService {
   }
 }
 
-describe('ShowGroupWorkStudentComponent', () => {
-  let component: ShowGroupWorkStudentComponent;
-  let componentState1;
-  let componentState2;
-  let fixture: ComponentFixture<ShowGroupWorkStudentComponent>;
+let component: ShowGroupWorkStudentComponent;
+let componentState1;
+let componentState2;
+let componentState3;
+let fixture: ComponentFixture<ShowGroupWorkStudentComponent>;
+let studentWork;
 
+describe('ShowGroupWorkStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
@@ -74,7 +76,7 @@ describe('ShowGroupWorkStudentComponent', () => {
       ]
     }).compileComponents();
   });
-
+  
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowGroupWorkStudentComponent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
@@ -83,39 +85,96 @@ describe('ShowGroupWorkStudentComponent', () => {
     });
     componentState1 = createComponentState(1);
     componentState2 = createComponentState(2);
+    studentWork = [componentState1, componentState2];
     component = fixture.componentInstance;
     component.componentContent = {
       id: 'abc',
       prompt: '',
       showSaveButton: true,
-      showSubmitButton: true
+      showSubmitButton: true,
+      isShowMyWork: true,
+      layout: 'row'
     };
+    spyOn(TestBed.inject(ProjectService), 'injectAssetPaths').and.returnValue({
+      type: 'OpenResponse'
+    });
+    component.studentWorkFromGroupMembers = [];
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     fixture.detectChanges();
   });
+  
+  setStudentWork();
+  setLayout();
+  setWidths();
+});
 
-  function createComponentState(workgroupId: number): any {
+function createComponentState(workgroupId: number): any {
     return {
       workgroupId: workgroupId
     };
   }
 
-  it('should set student work from group members including my work', () => {
-    component.componentContent.isShowMyWork = true;
-    const studentWork = [componentState1, componentState2];
-    component.studentWorkFromGroupMembers = [];
-    component.setStudentWorkFromGroupMembers(studentWork);
-    expect(component.studentWorkFromGroupMembers.length).toEqual(2);
-    expect(Object.keys(component.workgroupInfos).length).toEqual(2);
+function setStudentWork() {
+  describe('setStudentWork', () => {
+    it('should set student work from group members including my work', () => {
+      component.setStudentWorkFromGroupMembers(studentWork);
+      expect(component.studentWorkFromGroupMembers.length).toEqual(2);
+      expect(Object.keys(component.workgroupInfos).length).toEqual(2);
+    });
+    
+    it('should set student work from group members not including my work', () => {
+      component.componentContent.isShowMyWork = false;
+      spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
+      component.setStudentWorkFromGroupMembers(studentWork);
+      expect(component.studentWorkFromGroupMembers.length).toEqual(1);
+      expect(Object.keys(component.workgroupInfos).length).toEqual(1);
+    });
   });
+}
 
-  it('should set student work from group members not including my work', () => {
-    component.componentContent.isShowMyWork = false;
-    const studentWork = [componentState1, componentState2];
-    component.studentWorkFromGroupMembers = [];
-    spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
-    component.setStudentWorkFromGroupMembers(studentWork);
-    expect(component.studentWorkFromGroupMembers.length).toEqual(1);
-    expect(Object.keys(component.workgroupInfos).length).toEqual(1);
+function setLayout() {
+  describe('setLayout', () => {
+    it('should set row layout for narrow component type', () => {
+      component.setStudentWorkFromGroupMembers(studentWork);
+      expect(component.flexLayout).toBe('row wrap');
+    });
+
+    it('should set column layout for wide component type', () => {
+      component.showWorkComponentContent.type = 'Graph';
+      component.setStudentWorkFromGroupMembers(studentWork);
+      expect(component.flexLayout).toBe('column');
+    });
+
+    it('should set column layout', () => {
+      component.componentContent.layout = 'column';
+      component.setStudentWorkFromGroupMembers(studentWork);
+      expect(component.flexLayout).toBe('column');
+    });
   });
-});
+}
+
+function setWidths() {
+  describe('setWidths()', () => {
+    it('should set widths for narrow component type including my work', () => {
+      component.setStudentWorkFromGroupMembers(studentWork);
+      expect(component.widthMd).toEqual(50);
+      expect(component.widthLg).toEqual(50);
+    });
+    
+    it('should set widths for narrow component type not including my work', () => {
+      component.componentContent.isShowMyWork = false;
+      spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
+      component.setStudentWorkFromGroupMembers(studentWork);
+      expect(component.widthMd).toEqual(100);
+      expect(component.widthLg).toEqual(100);
+    });
+    
+    it('should set widths for narrow component type and more than 2 group members', () => {
+      componentState3 = createComponentState(3);
+      studentWork = [componentState1, componentState2, componentState3];
+      component.setStudentWorkFromGroupMembers(studentWork);
+      expect(component.widthMd).toEqual(50);
+      expect(component.widthLg).toEqual(33.33);
+    });
+  });
+}

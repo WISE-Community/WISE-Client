@@ -22,5 +22,9 @@ export class ShowGroupWorkAuthoringComponent extends ShowMyWorkAuthoringComponen
 
   ngOnInit(): void {
     super.ngOnInit();
+
+    if (!this.authoringComponentContent.hasOwnProperty('layout')) {
+      this.authoringComponentContent.layout = 'column';
+    }
   }
 }
