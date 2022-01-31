@@ -16797,7 +16797,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">(Team <x id="INTERPOLATION" equiv-text="{{ workgroupId }}"/>)</target>
+        <target state="translated">(Equipo <x id="INTERPOLATION" equiv-text="{{ workgroupId }}"/>)</target>
       </trans-unit>
       <trans-unit id="1bda3502b1b8833d88448e87041c252aff841379" datatype="html">
         <source>Unit Completion</source>
@@ -16805,7 +16805,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="needs-translation">Unit Completion</target>
+        <target state="translated">Avance de la unidad</target>
       </trans-unit>
       <trans-unit id="60209e908d2b6e6916bca731bc4399d5da2646c7" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ rootNodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ rootNodeStatus.progress.totalItems }}"/> items </source>
@@ -16813,7 +16813,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
           <context context-type="linenumber">14,16</context>
         </context-group>
-        <target state="needs-translation"> <x id="INTERPOLATION" equiv-text="{{ rootNodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ rootNodeStatus.progress.totalItems }}"/> items </target>
+        <target state="translated"> <x id="INTERPOLATION" equiv-text="{{ rootNodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ rootNodeStatus.progress.totalItems }}"/> items </target>
       </trans-unit>
       <trans-unit id="53385b88c26d3732c6dd9c2b6e32ec510d3fc6e1" datatype="html">
         <source>Total Score</source>
@@ -16821,7 +16821,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
-        <target state="needs-translation">Total Score</target>
+        <target state="translated">Puntaje total</target>
       </trans-unit>
       <trans-unit id="464f480c29835535fb95652fc32c6d52fcf76b02" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ totalScore }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ maxScore }}"/> points</source>
@@ -16829,7 +16829,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
           <context context-type="linenumber">32</context>
         </context-group>
-        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ totalScore }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ maxScore }}"/> points</target>
+        <target state="translated"><x id="INTERPOLATION" equiv-text="{{ totalScore }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ maxScore }}"/> puntos</target>
       </trans-unit>
       <trans-unit id="be95ff6f3d39423936fc148d197e7b0a9df95756" datatype="html">
         <source>Go Home</source>
@@ -16837,7 +16837,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
           <context context-type="linenumber">50</context>
         </context-group>
-        <target state="needs-translation">Go Home</target>
+        <target state="translated">Ir a la página principal</target>
       </trans-unit>
       <trans-unit id="10e82841909e865dc5c051c29af7cc22069233b2" datatype="html">
         <source> Sign Out </source>
@@ -16845,7 +16845,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
           <context context-type="linenumber">53,54</context>
         </context-group>
-        <target state="needs-translation"> Sign Out </target>
+        <target state="translated"> Cerrar sesión </target>
       </trans-unit>
       <trans-unit id="fcc4b29f2c63c0f61e98757c3e0bceed176606eb" datatype="html">
         <source>Use this file</source>
