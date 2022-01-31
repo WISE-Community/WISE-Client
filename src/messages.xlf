@@ -280,7 +280,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/generate-image-dialog/generate-image-dialog.component.html</context>
@@ -9703,7 +9703,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Show more</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="149546eb32bc1b69012afcd34945c180f0790dbf" datatype="html">
