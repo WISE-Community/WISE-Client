@@ -6,7 +6,6 @@ import SVG from 'svg.js';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { UtilService } from '../../services/utilService';
 import { StudentDataService } from '../../services/studentDataService';
 
@@ -18,17 +17,15 @@ export class LabelService extends ComponentService {
   defaultTextBackgroundColor: string = 'blue';
 
   constructor(
-    private upgrade: UpgradeModule,
     private StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
     super(StudentDataService, UtilService);
-    this.StudentAssetService = StudentAssetService;
   }
 
-  getComponentTypeLabel() {
-    return this.upgrade.$injector.get('$filter')('translate')('label.componentTypeLabel');
+  getComponentTypeLabel(): string {
+    return $localize`Label`;
   }
 
   createComponent() {
