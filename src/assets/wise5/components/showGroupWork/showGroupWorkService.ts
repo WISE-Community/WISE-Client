@@ -23,6 +23,7 @@ export class ShowGroupWorkService extends ComponentService {
     component.showWorkComponentId = '';
     component.peerGroupActivityTag = '';
     component.isShowMyWork = true;
+    component.layout = 'column';
     return component;
   }
 }

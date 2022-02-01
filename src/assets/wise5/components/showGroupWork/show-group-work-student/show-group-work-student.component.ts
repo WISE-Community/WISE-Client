@@ -132,6 +132,6 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
   }
 
   isNarrow(): boolean {
-    return this.narrowComponentTypes.indexOf(this.showWorkComponentContent.type) > -1;
+    return this.narrowComponentTypes.includes(this.showWorkComponentContent.type);
   }
 }
