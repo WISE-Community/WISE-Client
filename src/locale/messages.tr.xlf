@@ -310,7 +310,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/generate-image-dialog/generate-image-dialog.component.html</context>
@@ -10774,7 +10774,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Show more</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">139</context>
         </context-group>
         <target state="translated">Daha fazla göster</target>
       </trans-unit>
@@ -11601,7 +11601,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
       <trans-unit id="05906ead7fe8ab49cf23094f3e62ae43190c1ee7" datatype="html">
         <source>Number of Times Animation Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-grading/animation-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-show-work/animation-show-work.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
         <target state="needs-translation">Number of Times Animation Played</target>
@@ -11843,7 +11843,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="69c3a88db813e4b07df0bd518f272ac529b2c3f1" datatype="html">
         <source>Frequencies (Hz)</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
         <target state="needs-translation">Frequencies (Hz)</target>
@@ -11851,7 +11851,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="8753a270abbecc917891dd3d7dc315e8cd96f840" datatype="html">
         <source>Frequencies Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
         <target state="needs-translation">Frequencies Played</target>
@@ -11859,7 +11859,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="36b948190c1d09ffe66ca7eaa9ac33b047088ce6" datatype="html">
         <source>Frequencies Played Sorted</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
         <target state="needs-translation">Frequencies Played Sorted</target>
@@ -11867,7 +11867,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="8e91eced3cef5ca841d92a8ba8c962988370db95" datatype="html">
         <source>Number of Frequencies Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
         <target state="needs-translation">Number of Frequencies Played</target>
@@ -11875,7 +11875,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="8c583ceab2194fc6f80c25bdb499f72df6627c7b" datatype="html">
         <source>Number of Unique Frequencies Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
         <target state="needs-translation">Number of Unique Frequencies Played</target>
@@ -11883,7 +11883,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="a6d4e749589a8487922daf71057ee0d99d571906" datatype="html">
         <source>Minimum Frequency Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
         <target state="needs-translation">Minimum Frequency Played</target>
@@ -11891,7 +11891,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="2c29ab22017adf00451b4c72328381b548a40856" datatype="html">
         <source>Maximum Frequency Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
         <target state="needs-translation">Maximum Frequency Played</target>
@@ -11899,7 +11899,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="c10e82783c8291c2256b1085a680eb7b178bb43e" datatype="html">
         <source>Amplitudes (dB)</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
         <target state="needs-translation">Amplitudes (dB)</target>
@@ -11907,7 +11907,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="1abd902da9e440116264c2328dcb2cfc17c47567" datatype="html">
         <source>Amplitudes Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
         <target state="needs-translation">Amplitudes Played</target>
@@ -11915,7 +11915,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="f3b52a07acc291ed420962c1d9ebe861c0f31f72" datatype="html">
         <source>Amplitudes Played Sorted</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
         <target state="needs-translation">Amplitudes Played Sorted</target>
@@ -11923,7 +11923,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="d7b8ddf06b443fd47c950274e91ab0d67a005ca4" datatype="html">
         <source>Number of Amplitudes Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
         <target state="needs-translation">Number of Amplitudes Played</target>
@@ -11931,7 +11931,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="7135b8ebcec988fc9dcfe4ba600d9f01ac072bda" datatype="html">
         <source>Number of Unique Amplitudes Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
         <target state="needs-translation">Number of Unique Amplitudes Played</target>
@@ -11939,7 +11939,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="54a8d34f0aa8fc9b47ee77d8f736aa20c2eeb816" datatype="html">
         <source>Min Amplitude Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
         <target state="needs-translation">Min Amplitude Played</target>
@@ -11947,7 +11947,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="3a00664d68630d99ee7c58a23a6a1e3cd83bee02" datatype="html">
         <source>Max Amplitude Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
         <target state="needs-translation">Max Amplitude Played</target>
@@ -12943,7 +12943,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
       <trans-unit id="1951089763019042037" datatype="html">
         <source>Student</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-grading/discussion-grading.component.ts</context>
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-show-work/discussion-show-work.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
         <target state="translated">Öğrenci</target>
@@ -15041,7 +15041,7 @@ Warning: This will delete all existing choices in this component.</target>
       <trans-unit id="f80d8048e1a73a4f0c35681cc5f8a250754eaf4b" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
           <context context-type="linenumber">38,40</context>
         </context-group>
         <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </target>
@@ -15049,7 +15049,7 @@ Warning: This will delete all existing choices in this component.</target>
       <trans-unit id="00a48b9fab48a5ccc0ebf0a2793495ee1cc9f968" datatype="html">
         <source> Correct </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
           <context context-type="linenumber">44,45</context>
         </context-group>
         <target state="translated"> Doğru </target>
@@ -15057,7 +15057,7 @@ Warning: This will delete all existing choices in this component.</target>
       <trans-unit id="49a3371af0eb58f02e541105eb395340048527ec" datatype="html">
         <source> Incorrect </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
           <context context-type="linenumber">49,50</context>
         </context-group>
         <target state="translated"> Yanlış </target>
@@ -16115,7 +16115,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="linenumber">106</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
@@ -16335,7 +16335,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
       <trans-unit id="4dee60f2a97f5dcf1f2edbf2f44961facc5bf1ef" datatype="html">
         <source>Cell content</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
@@ -16347,7 +16347,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
       <trans-unit id="c1ac7b8d0d0a0d2e7452433c930cef085486540c" datatype="html">
         <source>Graph Type</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
         <context-group purpose="location">
@@ -16359,7 +16359,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
       <trans-unit id="967a05fa93ce8900222661f7beb6c08924b3a857" datatype="html">
         <source>Y Data <x id="INTERPOLATION" equiv-text="{{dataExplorerSeries.length &gt; 1 ? (i + 1) : &apos;&apos;}}"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">48</context>
         </context-group>
         <target state="needs-translation">Y Data <x id="INTERPOLATION" equiv-text="{{dataExplorerSeries.length &gt; 1 ? (i + 1) : ''}}"/></target>
@@ -16367,7 +16367,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
       <trans-unit id="b703c5f9773985dca9e4594ae0c3ecb9f3da4462" datatype="html">
         <source>X Axis Label</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
@@ -16379,7 +16379,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
       <trans-unit id="484e9a22dbb7f73c463535f204e1f221b6cbdacb" datatype="html">
         <source>Y Axis Label</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">77</context>
         </context-group>
         <context-group purpose="location">
@@ -16391,7 +16391,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
       <trans-unit id="f15f150caaef41e4e915900660dae93b053ec897" datatype="html">
         <source>Y Axis <x id="INTERPOLATION" equiv-text="{{i + 1}}"/> Label</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">94</context>
         </context-group>
         <target state="needs-translation">Y Axis <x id="INTERPOLATION" equiv-text="{{i + 1}}"/> Label</target>
@@ -16399,7 +16399,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
       <trans-unit id="8764032794209664551" datatype="html">
         <source>(None)</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.ts</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
         <target state="translated">(Hiçbiri)</target>
