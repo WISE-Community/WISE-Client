@@ -30,16 +30,6 @@ describe('GraphService', () => {
       ]
     });
     service = TestBed.get(GraphService);
-    spyOn(service, 'getTranslation').and.callFake((key: string) => {
-      const keyToTranslation = {
-        'graph.timeSeconds': 'Time (seconds)',
-        'graph.secondsUnit': 's',
-        'graph.positionMeters': 'Position (meters)',
-        'graph.metersUnit': 'm',
-        'graph.prediction': 'Prediction'
-      };
-      return keyToTranslation[key];
-    });
   });
   createComponent();
   isCompleted();
