@@ -40,3 +40,29 @@
     Show My Work
   </mat-checkbox>
 </div>
+<div class="layout-select"
+    fxLayout.xs="column"
+    fxLayout.gt-xs="row wrap"
+    fxLayoutAlign.gt-xs="start center"
+    fxLayoutGap="12px">
+  <label id="layout-select-label" i18n>Layout:</label>
+  <mat-radio-group [(ngModel)]="authoringComponentContent.layout"
+      (ngModelChange)="componentChanged()"
+      ngDefaultControl
+      color="primary"
+      aria-label-i18n
+      aria-label="Select a layout option"
+      aria-labelledby="layout-select-label"
+      fxLayoutGap="12px">
+    <mat-radio-button value="column">
+      <span fxLayoutAlign="start center">
+        <mat-icon>table_rows</mat-icon>&nbsp;<span i18n>Stacked Vertically</span>
+      </span>
+    </mat-radio-button>
+    <mat-radio-button value="row">
+      <span fxLayoutAlign="start center">
+        <mat-icon>view_columns</mat-icon>&nbsp;<span i18n>Side-by-Side</span>
+      </span>
+    </mat-radio-button>
+  </mat-radio-group>
+</div>

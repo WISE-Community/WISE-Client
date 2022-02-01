@@ -18,9 +18,14 @@ import { ComponentService } from '../../componentService';
   styleUrls: ['./show-group-work-student.component.scss']
 })
 export class ShowGroupWorkStudentComponent extends ComponentStudent {
+  flexLayout: string = 'column';
+  narrowComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];
+  numWorkgroups: number;
   showWorkComponentContent: any;
   showWorkNodeId: string;
   studentWorkFromGroupMembers: any[];
+  widthLg: number = 100;
+  widthMd: number = 100;
   workgroupInfos: any = {};
 
   constructor(
@@ -84,7 +89,9 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
         studentWorkFromGroupMembers
       );
     }
+    this.numWorkgroups = this.studentWorkFromGroupMembers.length;
     this.setWorkgroupInfos();
+    this.setLayout();
   }
 
   private getGroupStudentWorkNotIncludingMyWork(studentWorkFromGroupMembers: any[]): any[] {
@@ -106,5 +113,25 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
       avatarColor: this.ConfigService.getAvatarColorForWorkgroupId(workgroupId),
       displayNames: this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId)
     };
+  }
+
+  setLayout(): void {
+    if (this.componentContent.layout === 'row') {
+      this.flexLayout = 'row wrap';
+      this.setWidths();
+    }
+  }
+  setWidths(): void {
+    if (this.numWorkgroups > 1) {
+      this.widthMd = 50;
+      this.widthLg = 50;
+    }
+    if (this.numWorkgroups > 2 && this.isNarrow()) {
+      this.widthLg = 33.33;
+    }
+  }
+
+  isNarrow(): boolean {
+    return this.narrowComponentTypes.includes(this.showWorkComponentContent.type);
   }
 }

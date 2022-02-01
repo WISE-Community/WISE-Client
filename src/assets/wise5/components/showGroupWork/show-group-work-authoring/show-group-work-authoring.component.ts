@@ -19,8 +19,4 @@ export class ShowGroupWorkAuthoringComponent extends ShowMyWorkAuthoringComponen
   ) {
     super(configService, nodeService, projectAssetService, projectService);
   }
-
-  ngOnInit(): void {
-    super.ngOnInit();
-  }
 }
