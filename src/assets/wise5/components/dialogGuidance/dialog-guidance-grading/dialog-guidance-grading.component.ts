@@ -1,16 +1,8 @@
 import { Component } from '@angular/core';
-import { ComponentGrading } from '../../../classroomMonitor/classroomMonitorComponents/shared/component-grading.component';
-import { DialogResponse } from '../DialogResponse';
+import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 
 @Component({
   selector: 'dialog-guidance-grading',
-  templateUrl: './dialog-guidance-grading.component.html',
-  styleUrls: ['./dialog-guidance-grading.component.scss']
+  templateUrl: 'dialog-guidance-grading.component.html'
 })
-export class DialogGuidanceGradingComponent extends ComponentGrading {
-  responses: DialogResponse[];
-
-  ngOnInit(): void {
-    this.responses = this.componentState.studentData.responses;
-  }
-}
+export class DialogGuidanceGradingComponent extends ComponentShowWorkDirective {}
