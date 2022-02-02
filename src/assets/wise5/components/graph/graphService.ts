@@ -7,14 +7,12 @@ import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 
 @Injectable()
 export class GraphService extends ComponentService {
   seriesColors: string[] = ['blue', 'red', 'green', 'orange', 'purple', 'black'];
 
   constructor(
-    private upgrade: UpgradeModule,
     private StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -22,12 +20,8 @@ export class GraphService extends ComponentService {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.getTranslation('graph.componentTypeLabel');
-  }
-
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
+  getComponentTypeLabel(): string {
+    return $localize`Graph`;
   }
 
   /**
@@ -49,19 +43,19 @@ export class GraphService extends ComponentService {
     component.graphType = 'line';
     component.xAxis = {
       title: {
-        text: this.getTranslation('graph.timeSeconds'),
+        text: $localize`Time (seconds)`,
         useHTML: true
       },
       min: 0,
       max: 100,
-      units: this.getTranslation('graph.secondsUnit'),
+      units: $localize`s`,
       locked: true,
       type: 'limits',
       allowDecimals: false
     };
     component.yAxis = {
       title: {
-        text: this.getTranslation('graph.positionMeters'),
+        text: $localize`Position (meters)`,
         useHTML: true,
         style: {
           color: null
@@ -74,13 +68,13 @@ export class GraphService extends ComponentService {
       },
       min: 0,
       max: 100,
-      units: this.getTranslation('graph.metersUnit'),
+      units: $localize`m`,
       locked: true,
       allowDecimals: false
     };
     component.series = [
       {
-        name: this.getTranslation('graph.prediction'),
+        name: $localize`Prediction`,
         data: [],
         color: 'blue',
         dashStyle: 'Solid',

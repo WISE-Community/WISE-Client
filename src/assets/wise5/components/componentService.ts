@@ -49,7 +49,7 @@ export class ComponentService {
    * Get the component type label. For example "Open Response".
    * @returns {string}
    */
-  getComponentTypeLabel() {
+  getComponentTypeLabel(): string {
     return '';
   }
 

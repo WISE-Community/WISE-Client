@@ -13,7 +13,7 @@ import { SessionService } from '../../assets/wise5/services/sessionService';
 
 let service: HTMLService;
 
-describe('TableService', () => {
+describe('HTMLService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
@@ -30,13 +30,6 @@ describe('TableService', () => {
       ]
     });
     service = TestBed.get(HTMLService);
-    spyOn(service, 'getTranslation').and.callFake((key: string) => {
-      if (key === 'html.componentTypelabel') {
-        return 'HTML';
-      } else if (key === 'html.enterHTMLHere') {
-        return 'Enter html here';
-      }
-    });
   });
   createComponent();
   isCompleted();

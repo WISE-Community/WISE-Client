@@ -2,7 +2,6 @@
 
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
@@ -10,7 +9,6 @@ import { UtilService } from '../../services/utilService';
 @Injectable()
 export class OutsideURLService extends ComponentService {
   constructor(
-    private upgrade: UpgradeModule,
     private http: HttpClient,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -18,8 +16,8 @@ export class OutsideURLService extends ComponentService {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.upgrade.$injector.get('$filter')('translate')('outsideURL.componentTypeLabel');
+  getComponentTypeLabel(): string {
+    return $localize`Outside Resource`;
   }
 
   createComponent() {
