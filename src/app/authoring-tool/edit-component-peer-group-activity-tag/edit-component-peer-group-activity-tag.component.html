@@ -1,0 +1,11 @@
+<mat-form-field>
+  <mat-label i18n>Peer Group Activity Tag</mat-label>
+  <input matInput
+      [(ngModel)]="authoringComponentContent.peerGroupActivityTag"
+      (ngModelChange)="inputChanged.next($event)"
+      [formControl]="tagControl"
+      [matAutocomplete]="auto"/>
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">{{ tag }}</mat-option>
+  </mat-autocomplete>
+</mat-form-field>
