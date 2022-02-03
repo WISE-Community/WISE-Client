@@ -8,7 +8,6 @@ import { StudentAssetService } from '../../services/studentAssetService';
 import ConceptMapNode from './conceptMapNode';
 import ConceptMapLink from './conceptMapLink';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
 import { NodeService } from '../../services/nodeService';
@@ -16,7 +15,6 @@ import { NodeService } from '../../services/nodeService';
 @Injectable()
 export class ConceptMapService extends ComponentService {
   constructor(
-    private upgrade: UpgradeModule,
     private ConfigService: ConfigService,
     private NodeService: NodeService,
     private StudentAssetService: StudentAssetService,
@@ -26,12 +24,8 @@ export class ConceptMapService extends ComponentService {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.getTranslation('conceptMap.componentTypeLabel');
-  }
-
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
+  getComponentTypeLabel(): string {
+    return $localize`Concept Map`;
   }
 
   getSVGId(nodeId: string, componentId: string): string {

@@ -19,7 +19,6 @@ class VLEController {
   constraintsDisabled: boolean = false;
   currentNode: any;
   homePath: string;
-  maxScore: any;
   navFilter: any;
   navFilters: any;
   newNotifications: any;
@@ -35,7 +34,6 @@ class VLEController {
   reportEnabled: boolean = false;
   reportFullscreen: boolean = false;
   themePath: string;
-  totalScore: any;
   subscriptions: Subscription = new Subscription();
 
   static $inject = [
@@ -88,8 +86,6 @@ class VLEController {
 
     this.projectStyle = this.ProjectService.getStyle();
     this.projectName = this.ProjectService.getProjectTitle();
-    this.totalScore = this.StudentDataService.getTotalScore();
-    this.maxScore = this.StudentDataService.maxScore;
     if (this.NotebookService.isNotebookEnabled()) {
       this.notebookConfig = this.NotebookService.getStudentNotebookConfig();
       this.notesEnabled = this.notebookConfig.itemTypes.note.enabled;
@@ -306,24 +302,6 @@ class VLEController {
   processNotifications(): void {
     this.notifications = this.NotificationService.notifications;
     this.newNotifications = this.NotificationService.getNewNotifications();
-  }
-
-  goHome() {
-    const nodeId = null;
-    const componentId = null;
-    const componentType = null;
-    const category = 'Navigation';
-    const event = 'goHomeButtonClicked';
-    const eventData = {};
-    this.StudentDataService.saveVLEEvent(
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      eventData
-    );
-    this.SessionService.goHome();
   }
 
   logOut(eventName = 'logOut') {

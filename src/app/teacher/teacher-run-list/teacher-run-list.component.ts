@@ -18,7 +18,7 @@ export class TeacherRunListComponent implements OnInit {
   loaded: boolean = false;
   searchValue: string = '';
   periods: string[] = [];
-  filterOptions: any[] = [{ value: '', label: 'All Periods' }];
+  filterOptions: any[] = [{ value: '', label: $localize`All Periods` }];
   filterValue: string = '';
   isPersonalRunsRetrieved: boolean = false;
   isSharedRunsRetrieved: boolean = false;

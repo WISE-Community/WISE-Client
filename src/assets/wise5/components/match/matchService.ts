@@ -4,20 +4,18 @@ import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 
 @Injectable()
 export class MatchService extends ComponentService {
   constructor(
-    private upgrade: UpgradeModule,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.upgrade.$injector.get('$filter')('translate')('match.componentTypeLabel');
+  getComponentTypeLabel(): string {
+    return $localize`Match`;
   }
 
   createComponent() {
