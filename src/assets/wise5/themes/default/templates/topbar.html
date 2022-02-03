@@ -30,7 +30,7 @@
                 <md-icon md-menu-origin class="account-menu__icon" style="color: {{::themeCtrl.getAvatarColorForWorkgroupId(themeCtrl.workgroupId)}};"> account_circle </md-icon>
             </md-button>
             <md-menu-content width="5" class="account-menu">
-                <ng-include src="::vleController.themePath + '/templates/accountMenu.html'"></ng-include>
+                <student-account-menu></student-account-menu>
             </md-menu-content>
         </md-menu>
     </div>

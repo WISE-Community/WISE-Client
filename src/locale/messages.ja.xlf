@@ -140,6 +140,10 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">96</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/about/about.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
         <target state="needs-translation">Discover Ideas</target>
       </trans-unit>
       <trans-unit id="6f2168a4a47a1e6fa5d58a4334c7b67805dd3fe0" datatype="html">
@@ -310,7 +314,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/generate-image-dialog/generate-image-dialog.component.html</context>
@@ -478,7 +482,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <target state="translated">取消</target>
       </trans-unit>
@@ -2557,6 +2561,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.html</context>
           <context context-type="linenumber">58</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
@@ -5260,7 +5268,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
@@ -6104,7 +6112,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <target state="needs-translation">Show More</target>
       </trans-unit>
@@ -7654,7 +7662,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <target state="needs-translation">Units found: <x id="INTERPOLATION" equiv-text="{{ filteredRuns.length }}"/></target>
       </trans-unit>
@@ -7674,7 +7682,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ scheduledTotal() }}"/> scheduled</target>
       </trans-unit>
@@ -7686,7 +7694,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ activeTotal() }}"/> active</target>
       </trans-unit>
@@ -8146,7 +8154,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="needs-translation">OK</target>
       </trans-unit>
@@ -8258,6 +8266,18 @@
         </context-group>
         <target state="needs-translation">Run ID: <x id="INTERPOLATION" equiv-text="{{ run.id }}"/></target>
       </trans-unit>
+      <trans-unit id="a2a99d70cee0c47626832a30636f0ede3c84c2eb" datatype="html">
+        <source>Edit Settings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <target state="translated">設定を編集</target>
+      </trans-unit>
       <trans-unit id="3ee54b66b7f53827035c3055f228bc2bf2550dab" datatype="html">
         <source>Unit Info</source>
         <context-group purpose="location">
@@ -8297,14 +8317,6 @@
           <context context-type="linenumber">84</context>
         </context-group>
         <target state="needs-translation">Edit Classroom Unit Warning</target>
-      </trans-unit>
-      <trans-unit id="a2a99d70cee0c47626832a30636f0ede3c84c2eb" datatype="html">
-        <source>Edit Settings</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <target state="translated">設定を編集</target>
       </trans-unit>
       <trans-unit id="9cce5b778a46771992b9753e43f7f3dbcc8c322a" datatype="html">
         <source>Class Periods</source>
@@ -8814,13 +8826,33 @@
         </context-group>
         <target state="needs-translation">Select "Browse Units" to find titles to use with your students.</target>
       </trans-unit>
+      <trans-unit id="f559a6743d18f1b3a793df643266a5210ecbd8e5" datatype="html">
+        <source>Filter By Period</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <target state="needs-translation">Filter By Period</target>
+      </trans-unit>
       <trans-unit id="54d96f2f53d37cf8c3260171012afedef7ba7f95" datatype="html">
         <source>Total classroom units: <x id="INTERPOLATION" equiv-text="{{ filteredRuns.length }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <target state="needs-translation">Total classroom units: <x id="INTERPOLATION" equiv-text="{{ filteredRuns.length }}"/></target>
+      </trans-unit>
+      <trans-unit id="1775311053456611668" datatype="html">
+        <source>All Periods</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+        <target state="needs-translation">All Periods</target>
       </trans-unit>
       <trans-unit id="d9b2ffb3e1ce1ca42a3db04d00ea072777898eb3" datatype="html">
         <source>Legacy Unit Warning</source>
@@ -10746,14 +10778,6 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{period.numWorkgroupsInPeriod}}"/> teams</target>
       </trans-unit>
-      <trans-unit id="1775311053456611668" datatype="html">
-        <source>All Periods</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
-          <context context-type="linenumber">94</context>
-        </context-group>
-        <target state="needs-translation">All Periods</target>
-      </trans-unit>
       <trans-unit id="6933068701447776492" datatype="html">
         <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
         <context-group purpose="location">
@@ -10774,7 +10798,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Show more</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">139</context>
         </context-group>
         <target state="needs-translation">Show more</target>
       </trans-unit>
@@ -11601,7 +11625,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
       <trans-unit id="05906ead7fe8ab49cf23094f3e62ae43190c1ee7" datatype="html">
         <source>Number of Times Animation Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-grading/animation-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animation-show-work/animation-show-work.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
         <target state="needs-translation">Number of Times Animation Played</target>
@@ -11666,11 +11690,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">184</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">222</context>
+          <context context-type="linenumber">200</context>
         </context-group>
         <target state="needs-translation">You do not have any more chances to receive feedback on your answer.</target>
       </trans-unit>
@@ -11701,6 +11725,14 @@ Are you ready to receive feedback on this answer?</source>
         <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this this should be your best work.
 
 Are you ready to receive feedback on this answer?</target>
+      </trans-unit>
+      <trans-unit id="7885570895165894241" datatype="html">
+        <source>Animation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/animationService.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="needs-translation">Animation</target>
       </trans-unit>
       <trans-unit id="4ef67b5c60d20815a15d316e469e88c0ca9b6950" datatype="html">
         <source>Oscillator Types</source>
@@ -11843,7 +11875,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="69c3a88db813e4b07df0bd518f272ac529b2c3f1" datatype="html">
         <source>Frequencies (Hz)</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
         <target state="needs-translation">Frequencies (Hz)</target>
@@ -11851,7 +11883,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="8753a270abbecc917891dd3d7dc315e8cd96f840" datatype="html">
         <source>Frequencies Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
         <target state="needs-translation">Frequencies Played</target>
@@ -11859,7 +11891,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="36b948190c1d09ffe66ca7eaa9ac33b047088ce6" datatype="html">
         <source>Frequencies Played Sorted</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
         <target state="needs-translation">Frequencies Played Sorted</target>
@@ -11867,7 +11899,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="8e91eced3cef5ca841d92a8ba8c962988370db95" datatype="html">
         <source>Number of Frequencies Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
         <target state="needs-translation">Number of Frequencies Played</target>
@@ -11875,7 +11907,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="8c583ceab2194fc6f80c25bdb499f72df6627c7b" datatype="html">
         <source>Number of Unique Frequencies Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
         <target state="needs-translation">Number of Unique Frequencies Played</target>
@@ -11883,7 +11915,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="a6d4e749589a8487922daf71057ee0d99d571906" datatype="html">
         <source>Minimum Frequency Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
         <target state="needs-translation">Minimum Frequency Played</target>
@@ -11891,7 +11923,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="2c29ab22017adf00451b4c72328381b548a40856" datatype="html">
         <source>Maximum Frequency Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
         <target state="needs-translation">Maximum Frequency Played</target>
@@ -11899,7 +11931,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="c10e82783c8291c2256b1085a680eb7b178bb43e" datatype="html">
         <source>Amplitudes (dB)</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
         <target state="needs-translation">Amplitudes (dB)</target>
@@ -11907,7 +11939,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="1abd902da9e440116264c2328dcb2cfc17c47567" datatype="html">
         <source>Amplitudes Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
         <target state="needs-translation">Amplitudes Played</target>
@@ -11915,7 +11947,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="f3b52a07acc291ed420962c1d9ebe861c0f31f72" datatype="html">
         <source>Amplitudes Played Sorted</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
         <target state="needs-translation">Amplitudes Played Sorted</target>
@@ -11923,7 +11955,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="d7b8ddf06b443fd47c950274e91ab0d67a005ca4" datatype="html">
         <source>Number of Amplitudes Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
         <target state="needs-translation">Number of Amplitudes Played</target>
@@ -11931,7 +11963,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="7135b8ebcec988fc9dcfe4ba600d9f01ac072bda" datatype="html">
         <source>Number of Unique Amplitudes Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
         <target state="needs-translation">Number of Unique Amplitudes Played</target>
@@ -11939,7 +11971,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="54a8d34f0aa8fc9b47ee77d8f736aa20c2eeb816" datatype="html">
         <source>Min Amplitude Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
         <target state="needs-translation">Min Amplitude Played</target>
@@ -11947,7 +11979,7 @@ Are you ready to receive feedback on this answer?</target>
       <trans-unit id="3a00664d68630d99ee7c58a23a6a1e3cd83bee02" datatype="html">
         <source>Max Amplitude Played</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
         <target state="needs-translation">Max Amplitude Played</target>
@@ -11991,6 +12023,14 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="linenumber">284</context>
         </context-group>
         <target state="needs-translation">Stop</target>
+      </trans-unit>
+      <trans-unit id="8869226125397640676" datatype="html">
+        <source>Audio Oscillator</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/audioOscillatorService.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <target state="needs-translation">Audio Oscillator</target>
       </trans-unit>
       <trans-unit id="6333335057236774263" datatype="html">
         <source>Saved</source>
@@ -12352,7 +12392,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">187</context>
         </context-group>
         <target state="needs-translation">You have 1 chance to receive feedback on your answer so this should be your best work.
 
@@ -12377,6 +12417,14 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="linenumber">1422</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset your work?</target>
+      </trans-unit>
+      <trans-unit id="3948212117337409586" datatype="html">
+        <source>Concept Map</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/conceptMapService.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <target state="needs-translation">Concept Map</target>
       </trans-unit>
       <trans-unit id="4d5d5b4e6b3c3a79914e4c5a72054018599ac2c4" datatype="html">
         <source> Show Auto Score </source>
@@ -12943,7 +12991,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
       <trans-unit id="1951089763019042037" datatype="html">
         <source>Student</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-grading/discussion-grading.component.ts</context>
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-show-work/discussion-show-work.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
         <target state="translated">学生</target>
@@ -12987,6 +13035,14 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="linenumber">198</context>
         </context-group>
         <target state="needs-translation"><x id="PH" equiv-text="usernames"/> replied to a discussion you were in!</target>
+      </trans-unit>
+      <trans-unit id="6160972322896689559" datatype="html">
+        <source>Discussion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussionService.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <target state="needs-translation">Discussion</target>
       </trans-unit>
       <trans-unit id="fa8877ba0986b7bb88ec902a4a0dab94371354c0" datatype="html">
         <source> Allow student to upload background image </source>
@@ -13260,6 +13316,14 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Do you want to update the connected drawing?</target>
       </trans-unit>
+      <trans-unit id="8647687729200262691" datatype="html">
+        <source>Draw</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/drawService.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <target state="needs-translation">Draw</target>
+      </trans-unit>
       <trans-unit id="4712f427e9539919676da90b406d1ca87f18ec22" datatype="html">
         <source>Update On</source>
         <context-group purpose="location">
@@ -13335,6 +13399,14 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="linenumber">56</context>
         </context-group>
         <target state="needs-translation">Reload Model</target>
+      </trans-unit>
+      <trans-unit id="6789418188453734195" datatype="html">
+        <source>Embedded (Custom)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/embeddedService.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target state="needs-translation">Embedded (Custom)</target>
       </trans-unit>
       <trans-unit id="cc50767a953f7987117890731c4a78c74f735016" datatype="html">
         <source>Subtitle</source>
@@ -14302,6 +14374,70 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Trial</target>
       </trans-unit>
+      <trans-unit id="9070768663485888935" datatype="html">
+        <source>Graph</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <target state="needs-translation">Graph</target>
+      </trans-unit>
+      <trans-unit id="7500488806315952979" datatype="html">
+        <source>Time (seconds)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <target state="needs-translation">Time (seconds)</target>
+      </trans-unit>
+      <trans-unit id="2155832126259145609" datatype="html">
+        <source>s</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <target state="needs-translation">s</target>
+      </trans-unit>
+      <trans-unit id="2074112513968400781" datatype="html">
+        <source>Position (meters)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <target state="needs-translation">Position (meters)</target>
+      </trans-unit>
+      <trans-unit id="8033953731717586115" datatype="html">
+        <source>m</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <target state="needs-translation">m</target>
+      </trans-unit>
+      <trans-unit id="2165011258157601810" datatype="html">
+        <source>Prediction</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <target state="needs-translation">Prediction</target>
+      </trans-unit>
+      <trans-unit id="1391027585017325946" datatype="html">
+        <source>Rich Text (HTML)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/html/htmlService.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <target state="needs-translation">Rich Text (HTML)</target>
+      </trans-unit>
+      <trans-unit id="88232795223704551" datatype="html">
+        <source>Enter html here</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/html/htmlService.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <target state="needs-translation">Enter html here</target>
+      </trans-unit>
       <trans-unit id="f52e63a081903f024d473a4d9aff696e9eb60368" datatype="html">
         <source>Characters Per Line</source>
         <context-group purpose="location">
@@ -14586,6 +14722,14 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the background image?</target>
       </trans-unit>
+      <trans-unit id="4077520913910941990" datatype="html">
+        <source>Label</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/labelService.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <target state="needs-translation">Label</target>
+      </trans-unit>
       <trans-unit id="a7d56850122574ce933b94051d73d65817e8369b" datatype="html">
         <source>Delete item</source>
         <context-group purpose="location">
@@ -14850,7 +14994,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Item Text required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-match-choice-dialog/add-match-choice-dialog.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <target state="needs-translation">Item Text required</target>
       </trans-unit>
@@ -14935,6 +15079,14 @@ Warning: This will delete all existing choices and buckets in this component.</t
           <context context-type="linenumber">710</context>
         </context-group>
         <target state="needs-translation">Incorrect</target>
+      </trans-unit>
+      <trans-unit id="6619869754055745168" datatype="html">
+        <source>Match</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/matchService.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="needs-translation">Match</target>
       </trans-unit>
       <trans-unit id="2d07aed510fda739dd79dcbc3a9d807af224e41f" datatype="html">
         <source> Show Feedback </source>
@@ -15041,7 +15193,7 @@ Warning: This will delete all existing choices in this component.</target>
       <trans-unit id="f80d8048e1a73a4f0c35681cc5f8a250754eaf4b" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
           <context context-type="linenumber">38,40</context>
         </context-group>
         <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </target>
@@ -15049,7 +15201,7 @@ Warning: This will delete all existing choices in this component.</target>
       <trans-unit id="00a48b9fab48a5ccc0ebf0a2793495ee1cc9f968" datatype="html">
         <source> Correct </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
           <context context-type="linenumber">44,45</context>
         </context-group>
         <target state="needs-translation"> Correct </target>
@@ -15057,7 +15209,7 @@ Warning: This will delete all existing choices in this component.</target>
       <trans-unit id="49a3371af0eb58f02e541105eb395340048527ec" datatype="html">
         <source> Incorrect </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
           <context context-type="linenumber">49,50</context>
         </context-group>
         <target state="needs-translation"> Incorrect </target>
@@ -15077,6 +15229,14 @@ Warning: This will delete all existing choices in this component.</target>
           <context context-type="linenumber">46,48</context>
         </context-group>
         <target state="needs-translation"> You have used <x id="INTERPOLATION" equiv-text="{{ submitCounter }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ componentContent.maxSubmitCount }}"/> attempts </target>
+      </trans-unit>
+      <trans-unit id="4737017620429217247" datatype="html">
+        <source>Multiple Choice</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multipleChoiceService.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="needs-translation">Multiple Choice</target>
       </trans-unit>
       <trans-unit id="2655d8a7c10f89657ed08436143cf6eaf6a526f8" datatype="html">
         <source>Starter Sentence (Optional)</source>
@@ -15588,7 +15748,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></target>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">213</context>
+          <context context-type="linenumber">191</context>
         </context-group>
         <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this should be your best work.
 
@@ -15600,7 +15760,7 @@ Are you ready to receive feedback on this answer?</target>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">225</context>
+          <context context-type="linenumber">203</context>
         </context-group>
         <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chance to receive feedback on your answer so this should be your best work.
 
@@ -15612,7 +15772,7 @@ Are you ready to receive feedback on this answer?</target>
 Are you ready to submit this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">229</context>
+          <context context-type="linenumber">207</context>
         </context-group>
         <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to submit your answer so this should be your best work.
 
@@ -15622,7 +15782,7 @@ Are you ready to submit this answer?</target>
         <source>We are scoring your work...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">373</context>
+          <context context-type="linenumber">351</context>
         </context-group>
         <target state="needs-translation">We are scoring your work...</target>
       </trans-unit>
@@ -15630,7 +15790,7 @@ Are you ready to submit this answer?</target>
         <source>Please Wait</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">375</context>
+          <context context-type="linenumber">353</context>
         </context-group>
         <target state="needs-translation">Please Wait</target>
       </trans-unit>
@@ -15639,7 +15799,7 @@ Are you ready to submit this answer?</target>
 If this problem continues, let your teacher know and move on to the next activity. Your work will still be saved.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">396</context>
+          <context context-type="linenumber">374</context>
         </context-group>
         <target state="needs-translation">There was an issue scoring your work. Please try again.
 If this problem continues, let your teacher know and move on to the next activity. Your work will still be saved.</target>
@@ -15648,7 +15808,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>This will replace your existing recording. Is this OK?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">820</context>
+          <context context-type="linenumber">774</context>
         </context-group>
         <target state="needs-translation">This will replace your existing recording. Is this OK?</target>
       </trans-unit>
@@ -15656,9 +15816,17 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Are you sure you want to delete your recording?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">864</context>
+          <context context-type="linenumber">818</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete your recording?</target>
+      </trans-unit>
+      <trans-unit id="5623290610025495479" datatype="html">
+        <source>Open Response</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/openResponseService.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="needs-translation">Open Response</target>
       </trans-unit>
       <trans-unit id="2e0e07912515c250498d28841610709033392606" datatype="html">
         <source> Show Open Education Resources
@@ -15799,6 +15967,14 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">7</context>
         </context-group>
         <target state="needs-translation">Credit: <x id="INTERPOLATION" equiv-text="{{infoString}}"/></target>
+      </trans-unit>
+      <trans-unit id="8854737225828300632" datatype="html">
+        <source>Outside Resource</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outsideURLService.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <target state="needs-translation">Outside Resource</target>
       </trans-unit>
       <trans-unit id="b7476b3f8bc67f93405690b807d8751371cdf7ed" datatype="html">
         <source> Choose the step and component to show the summary data for:
@@ -16012,6 +16188,14 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">You must complete "<x id="PH" equiv-text="this.otherStepTitle"/>" to view the class summary.</target>
       </trans-unit>
+      <trans-unit id="4739818603756173797" datatype="html">
+        <source>Summary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/summaryService.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <target state="needs-translation">Summary</target>
+      </trans-unit>
       <trans-unit id="f7d15493b0e51d441ca4b60ff28151b6de9b9ee2" datatype="html">
         <source> Enable Data Explorer </source>
         <context-group purpose="location">
@@ -16115,7 +16299,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">106</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
@@ -16335,7 +16519,7 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="4dee60f2a97f5dcf1f2edbf2f44961facc5bf1ef" datatype="html">
         <source>Cell content</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
@@ -16347,7 +16531,7 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="c1ac7b8d0d0a0d2e7452433c930cef085486540c" datatype="html">
         <source>Graph Type</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
         <context-group purpose="location">
@@ -16359,7 +16543,7 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="967a05fa93ce8900222661f7beb6c08924b3a857" datatype="html">
         <source>Y Data <x id="INTERPOLATION" equiv-text="{{dataExplorerSeries.length &gt; 1 ? (i + 1) : &apos;&apos;}}"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">48</context>
         </context-group>
         <target state="needs-translation">Y Data <x id="INTERPOLATION" equiv-text="{{dataExplorerSeries.length &gt; 1 ? (i + 1) : ''}}"/></target>
@@ -16367,7 +16551,7 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="b703c5f9773985dca9e4594ae0c3ecb9f3da4462" datatype="html">
         <source>X Axis Label</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
@@ -16379,7 +16563,7 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="484e9a22dbb7f73c463535f204e1f221b6cbdacb" datatype="html">
         <source>Y Axis Label</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">77</context>
         </context-group>
         <context-group purpose="location">
@@ -16391,7 +16575,7 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="f15f150caaef41e4e915900660dae93b053ec897" datatype="html">
         <source>Y Axis <x id="INTERPOLATION" equiv-text="{{i + 1}}"/> Label</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
           <context context-type="linenumber">94</context>
         </context-group>
         <target state="needs-translation">Y Axis <x id="INTERPOLATION" equiv-text="{{i + 1}}"/> Label</target>
@@ -16399,7 +16583,7 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="8764032794209664551" datatype="html">
         <source>(None)</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/table/table-grading/table-grading.component.ts</context>
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
         <target state="needs-translation">(None)</target>
@@ -16463,6 +16647,14 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">140</context>
         </context-group>
         <target state="needs-translation">Y Axis <x id="INTERPOLATION" equiv-text="{{yAxisIndex + 1}}"/> Label</target>
+      </trans-unit>
+      <trans-unit id="1358239534403218079" datatype="html">
+        <source>Table</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/tableService.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <target state="needs-translation">Table</target>
       </trans-unit>
       <trans-unit id="13914f9fe459520b280fb4e82a4c44812a6d74ad" datatype="html">
         <source>Score: <x id="INTERPOLATION" equiv-text="{{annotations.score.data.value}}"/><x id="INTERPOLATION_1" equiv-text="{{maxScoreDisplay}}"/></source>
@@ -16632,6 +16824,30 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">Report</target>
       </trans-unit>
+      <trans-unit id="4200122564420479235" datatype="html">
+        <source>You have new replies to your discussion post!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+        <target state="needs-translation">You have new replies to your discussion post!</target>
+      </trans-unit>
+      <trans-unit id="199088045976822823" datatype="html">
+        <source>You have new feedback from your teacher!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+        <target state="needs-translation">You have new feedback from your teacher!</target>
+      </trans-unit>
+      <trans-unit id="5013145827213980080" datatype="html">
+        <source>You have new feedback!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+        <target state="needs-translation">You have new feedback!</target>
+      </trans-unit>
       <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">
         <source>Project Plan</source>
         <context-group purpose="location">
@@ -16768,29 +16984,61 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">Remove Notification</target>
       </trans-unit>
-      <trans-unit id="4200122564420479235" datatype="html">
-        <source>You have new replies to your discussion post!</source>
+      <trans-unit id="b9311730cc705aa91140b247c6e4fb58a10174dd" datatype="html">
+        <source>(Team <x id="INTERPOLATION" equiv-text="{{ workgroupId }}"/>)</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">You have new replies to your discussion post!</target>
+        <target state="needs-translation">(Team <x id="INTERPOLATION" equiv-text="{{ workgroupId }}"/>)</target>
       </trans-unit>
-      <trans-unit id="199088045976822823" datatype="html">
-        <source>You have new feedback from your teacher!</source>
+      <trans-unit id="1bda3502b1b8833d88448e87041c252aff841379" datatype="html">
+        <source>Unit Completion</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">13</context>
         </context-group>
-        <target state="needs-translation">You have new feedback from your teacher!</target>
+        <target state="needs-translation">Unit Completion</target>
       </trans-unit>
-      <trans-unit id="5013145827213980080" datatype="html">
-        <source>You have new feedback!</source>
+      <trans-unit id="60209e908d2b6e6916bca731bc4399d5da2646c7" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ rootNodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ rootNodeStatus.progress.totalItems }}"/> items </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">14,16</context>
         </context-group>
-        <target state="needs-translation">You have new feedback!</target>
+        <target state="needs-translation"> <x id="INTERPOLATION" equiv-text="{{ rootNodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ rootNodeStatus.progress.totalItems }}"/> items </target>
+      </trans-unit>
+      <trans-unit id="53385b88c26d3732c6dd9c2b6e32ec510d3fc6e1" datatype="html">
+        <source>Total Score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <target state="needs-translation">Total Score</target>
+      </trans-unit>
+      <trans-unit id="464f480c29835535fb95652fc32c6d52fcf76b02" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ totalScore }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ maxScore }}"/> points</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ totalScore }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ maxScore }}"/> points</target>
+      </trans-unit>
+      <trans-unit id="be95ff6f3d39423936fc148d197e7b0a9df95756" datatype="html">
+        <source>Go Home</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <target state="needs-translation">Go Home</target>
+      </trans-unit>
+      <trans-unit id="10e82841909e865dc5c051c29af7cc22069233b2" datatype="html">
+        <source> Sign Out </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+        <target state="needs-translation"> Sign Out </target>
       </trans-unit>
       <trans-unit id="fcc4b29f2c63c0f61e98757c3e0bceed176606eb" datatype="html">
         <source>Use this file</source>

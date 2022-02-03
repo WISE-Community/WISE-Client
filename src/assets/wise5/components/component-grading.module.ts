@@ -7,36 +7,9 @@ import { EditComponentScoreComponent } from '../classroomMonitor/classroomMonito
 import { GradingEditComponentMaxScoreComponent } from '../classroomMonitor/classroomMonitorComponents/grading-edit-component-max-score/grading-edit-component-max-score.component';
 import { SelectPeriodComponent } from '../classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 import { WorkgroupComponentGradingComponent } from '../classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component';
-import './animation/animationGradingComponentModule';
-import './audioOscillator/audioOscillatorGradingComponentModule';
-import './conceptMap/conceptMapGradingComponentModule';
-import './dialogGuidance/dialogGuidanceGradingComponentModule';
-import './draw/drawGradingComponentModule';
-import './embedded/embeddedGradingComponentModule';
-import './graph/graphGradingComponentModule';
-import './label/labelGradingComponentModule';
-import './match/matchGradingComponentModule';
-import './multipleChoice/multipleChoiceGradingComponentModule';
-import './openResponse/openResponseGradingComponentModule';
-import './peerChat/peerChatGradingComponentModule';
-import './table/tableGradingComponentModule';
 
 export default angular
-  .module('componentGrading', [
-    'animationGradingComponentModule',
-    'audioOscillatorGradingComponentModule',
-    'conceptMapGradingComponentModule',
-    'dialogGuidanceGradingComponentModule',
-    'drawGradingComponentModule',
-    'embeddedGradingComponentModule',
-    'graphGradingComponentModule',
-    'labelGradingComponentModule',
-    'matchGradingComponentModule',
-    'multipleChoiceGradingComponentModule',
-    'openResponseGradingComponentModule',
-    'peerChatGradingComponentModule',
-    'tableGradingComponentModule'
-  ])
+  .module('componentGrading', [])
   .directive(
     'componentStateInfo',
     downgradeComponent({

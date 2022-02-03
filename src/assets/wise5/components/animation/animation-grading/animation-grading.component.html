@@ -1,3 +1,6 @@
-<div *ngIf="numTimesPlayClicked != null">
-  <span i18n>Number of Times Animation Played</span>: {{ numTimesPlayClicked }}
-</div>
+<animation-show-work
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="componentState"
+    [isRevision]="isRevision">
+</animation-show-work>

@@ -107,8 +107,7 @@ class PreviewComponentController {
           </multiple-choice-student>
           <open-response-student ng-switch-when="OpenResponse"
               [node-id]="nodeId"
-              [component-content]="componentContent"
-              [mode]="mode">
+              [component-content]="componentContent">
           </open-response-student>
           <outside-url-student ng-switch-when="OutsideURL"
               [node-id]="nodeId"

@@ -11,7 +11,6 @@ import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
 import { StudentDataService } from '../../services/studentDataService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { UtilService } from '../../services/utilService';
 
 @Injectable()
@@ -35,7 +34,6 @@ export class DrawService extends ComponentService {
   };
 
   constructor(
-    private upgrade: UpgradeModule,
     private StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -43,12 +41,8 @@ export class DrawService extends ComponentService {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.getTranslation('draw.componentTypeLabel');
-  }
-
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
+  getComponentTypeLabel(): string {
+    return $localize`Draw`;
   }
 
   createComponent() {

@@ -30,13 +30,13 @@ import { WorkgroupNodeStatusComponent } from '../classroom-monitor/workgroup-nod
 import { WorkgroupSelectAutocompleteComponent } from '../classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 import { WorkgroupSelectDropdownComponent } from '../classroom-monitor/workgroup-select/workgroup-select-dropdown/workgroup-select-dropdown.component';
 import { AngularJSModule } from '../common-hybrid-angular.module';
-import { ComponentGradingModule } from './component-grading.module';
 import { MilestoneReportDataComponent } from './milestone/milestone-report-data/milestone-report-data.component';
 import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component';
 import { ManageShowStudentInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component';
 import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component';
 import { PeerGroupGradingModule } from './peer-group-grading.module';
 import { SelectPeriodModule } from './select-period.module';
+import { ComponentGradingModule } from './component-grading.module';
 
 @NgModule({
   declarations: [

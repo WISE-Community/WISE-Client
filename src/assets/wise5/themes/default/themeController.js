@@ -42,16 +42,14 @@ class ThemeController {
 
     this.themePath = this.ProjectService.getThemePath();
     this.themeSettings = this.ProjectService.getThemeSettings();
-    this.hideTotalScores = this.themeSettings.hideTotalScores;
 
     this.nodeStatuses = this.StudentDataService.nodeStatuses;
     this.idToOrder = this.ProjectService.idToOrder;
 
+    this.workgroupId = this.ConfigService.getWorkgroupId();
+    
     this.rootNode = this.ProjectService.rootNode;
     this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
-
-    this.workgroupId = this.ConfigService.getWorkgroupId();
-    this.workgroupUsernames = this.ConfigService.getUsernamesByWorkgroupId(this.workgroupId);
 
     this.notebookOpen = false;
     this.notebookConfig = this.NotebookService.getNotebookConfig();
@@ -142,7 +140,7 @@ class ThemeController {
     }));
 
     this.subscriptions.add(
-        this.StudentAssetService.showStudentAssets$.subscribe(({ componentController, nodeId, componentId, $event }) => {
+        this.StudentAssetService.showStudentAssets$.subscribe(({ nodeId, componentId, $event }) => {
       const studentAssetDialogTemplateUrl = this.themePath + '/templates/studentAssetDialog.html';
       const studentAssetTemplateUrl = this.themePath + '/studentAsset/studentAsset.html';
       this.$mdDialog.show({
@@ -151,22 +149,20 @@ class ThemeController {
         templateUrl: studentAssetDialogTemplateUrl,
         locals: {
           studentAssetTemplateUrl: studentAssetTemplateUrl,
-          componentController: componentController,
           nodeId: nodeId,
           componentId: componentId
         },
         controller: StudentAssetDialogController
       });
-      function StudentAssetDialogController($scope, $mdDialog, componentController, nodeId, componentId) {
+      function StudentAssetDialogController($scope, $mdDialog, nodeId, componentId) {
         $scope.studentAssetTemplateUrl = studentAssetTemplateUrl;
-        $scope.componentController = componentController;
         $scope.nodeId = nodeId;
         $scope.componentId = componentId;
         $scope.closeDialog = function() {
           $mdDialog.hide();
         };
       }
-      StudentAssetDialogController.$inject = ['$scope', '$mdDialog', 'componentController', 'nodeId', 'componentId'];
+      StudentAssetDialogController.$inject = ['$scope', '$mdDialog', 'nodeId', 'componentId'];
     }));
 
     // handle request for notification dismiss codes

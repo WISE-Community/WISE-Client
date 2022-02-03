@@ -1,6 +1,5 @@
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
 
@@ -11,23 +10,18 @@ export class AudioOscillatorService extends ComponentService {
   maxAmplitude: number = 50;
 
   constructor(
-    private upgrade: UpgradeModule,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.getTranslation('audioOscillator.componentTypeLabel');
+  getComponentTypeLabel(): string {
+    return $localize`Audio Oscillator`;
   }
 
   getOscilloscopeId(domIdEnding: string): string {
     return `oscilloscope-${domIdEnding}`;
-  }
-
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
   }
 
   createComponent() {

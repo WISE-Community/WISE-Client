@@ -28,12 +28,8 @@ export class DiscussionService extends ComponentService {
     }
   }
 
-  getComponentTypeLabel() {
-    return this.getTranslation('discussion.componentTypeLabel');
-  }
-
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
+  getComponentTypeLabel(): string {
+    return $localize`Discussion`;
   }
 
   createComponent() {
