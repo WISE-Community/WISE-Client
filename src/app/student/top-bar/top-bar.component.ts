@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
+import { StudentAccountMenuComponent } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.component';
 
 @Component({
   selector: 'top-bar',
+  styleUrls: ['./top-bar.component.scss'],
   templateUrl: 'top-bar.component.html'
 })
 export class TopBarComponent {
+  @ViewChild(StudentAccountMenuComponent)
+  accountMenu: StudentAccountMenuComponent;
+
   avatarColor: string;
   completionPercent: number;
   homeURL: string;
@@ -67,7 +72,8 @@ export class TopBarComponent {
     return this.newNotifications.length > 0;
   }
 
-  disableConstraints(): void {
+  disableConstraints($event: any): void {
+    $event.stopPropagation();
     this.isConstraintsDisabled = true;
     this.projectService.activeConstraints = [];
     this.studentDataService.updateNodeStatuses();

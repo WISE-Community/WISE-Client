@@ -1,38 +1,59 @@
-<mat-toolbar class="l-header" [ngClass]="{'md-whiteframe-z1': layoutState === 'nav'}">
-  <div class="md-toolbar-tools"
+<mat-toolbar class="topbar dark-theme" color="primary" [ngClass]="{'mat-elevation-z1': layoutState === 'nav'}">
+  <div class="topbar-content"
       [ngClass]="{'warn-bg': hasNewAmbientNotifications()}"
-      (click)="viewCurrentAmbientNotification($event)">
-    <a [href]="homeURL" target="_self" class="md-button logo-link">
-       <img [src]="logoURL" alt="WISE Logo" class="logo" />
+      (click)="viewCurrentAmbientNotification($event)"
+      fxFlex
+      fxLayout="row"
+      fxLayoutAlign="start center">
+    <a [href]="homeURL" target="_self" class="logo-link" (click)="$event.stopPropagation()">
+      <img [src]="logoURL" alt="WISE Logo" i18n-alt class="logo" />
     </a>
-    <h3><span>{{projectName}}</span></h3>
+    <h3 fxFlex="4 1 0%" class="title" [title]="projectName">{{projectName}}</h3>
     <span fxFlex></span>
     <button mat-button
         id="toggleConstraints"
-        class="md-raised md-primary"
         *ngIf="isPreview && !isConstraintsDisabled && hasConstraints()"
         (click)="disableConstraints()"
         title="Only Available in Preview Mode"
         i18n-title
         i18n>Turn Off Constraints</button>
     <span *ngIf="isConstraintsDisabled" i18n>Constraints Are Off</span>
-    <button mat-icon-button [matMenuTriggerFor]="notificationMenu" id="viewNotificationsButton" aria-label="View notifications" class="md-icon-button notification-btn">
-        <span *ngIf="hasNewNotifications()" class="notification-count">{{newNotifications.length}}</span>
-        <mat-icon md-menu-origin>notifications</mat-icon>
-    </button>
-    <mat-menu #notificationMenu="matMenu">
-      <notifications-menu></notifications-menu>
-    </mat-menu>
-    <mat-progress-spinner class="menu-progress"
-        mode="determinate"
-        diameter="32"
-        [value]="completionPercent">
-    </mat-progress-spinner>
-    <button mat-icon-button [matMenuTriggerFor]="accountMenu" id="openAccountMenuButton" aria-label="Open Account Menu" i18n-aria-label class="md-icon-button">
-      <mat-icon class="account-menu__icon" [ngStyle]="{'color': avatarColor}">account_circle</mat-icon>
-    </button>
-    <mat-menu #accountMenu="matMenu" id='accountMenu'>
-      <student-account-menu></student-account-menu>
-    </mat-menu>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <div>
+        <button mat-icon-button
+            [matMenuTriggerFor]="notificationMenu"
+            (click)="$event.stopPropagation()"
+            id="viewNotificationsButton"
+            aria-label="View alerts"
+            i18n-aria-label
+            class="alerts">
+          <mat-icon matBadge="{{newNotifications.length}}"
+              matBadgeColor="accent"
+              [matBadgeHidden]="!hasNewNotifications()">notifications</mat-icon>
+        </button>
+        <mat-menu #notificationMenu="matMenu">
+          <notifications-menu></notifications-menu>
+        </mat-menu>
+      </div>
+      <div class="account-menu-container">
+        <mat-progress-spinner class="menu-progress"
+            mode="determinate"
+            diameter="32"
+            strokeWidth="2"
+            [value]="completionPercent"
+            aria-label="Unit percent completed"
+            i18n-aria-label>
+        </mat-progress-spinner>
+        <student-account-menu #accountMenu></student-account-menu>
+        <button mat-icon-button
+            [matMenuTriggerFor]="accountMenu?.menu"
+            (click)="$event.stopPropagation()"
+            id="openAccountMenuButton"
+            aria-label="Open Account Menu"
+            i18n-aria-label>
+          <mat-icon class="avatar" [ngStyle]="{'color': avatarColor}">account_circle</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </mat-toolbar>
