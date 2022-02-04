@@ -23,7 +23,6 @@ import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGu
 import { ComponentComponent } from '../assets/wise5/components/component/component.component';
 import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
 import { NavigationComponent } from '../assets/wise5/themes/default/navigation/navigation.component';
-import { StudentAssetsModule } from '../assets/wise5/vle/studentAsset/student-assets/student-assets-module';
 import { OpenResponseStudentModule } from '../assets/wise5/components/openResponse/open-response-student/open-response-student.module';
 import { TableStudentModule } from '../assets/wise5/components/table/table-student/table-student.module';
 import { MultipleChoiceStudentModule } from '../assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.module';
@@ -42,6 +41,7 @@ import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 import { NotificationsMenuComponent } from '../assets/wise5/vle/notifications-menu/notifications-menu.component';
 import { StudentAccountMenuComponent } from '../assets/wise5/vle/student-account-menu/student-account-menu.component';
+import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
 
 @NgModule({
   declarations: [
@@ -72,7 +72,7 @@ import { StudentAccountMenuComponent } from '../assets/wise5/vle/student-account
     MultipleChoiceStudentModule,
     OpenResponseStudentModule,
     OutsideUrlStudentModule,
-    StudentAssetsModule,
+    StudentAssetsDialogModule,
     StudentComponentModule,
     SummaryDisplayModule,
     SummaryStudentModule,
