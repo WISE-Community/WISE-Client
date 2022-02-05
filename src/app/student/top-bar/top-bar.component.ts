@@ -1,9 +1,11 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
+import { NotificationsDialogComponent } from '../../../assets/wise5/vle/notifications-dialog/notifications-dialog.component';
 import { StudentAccountMenuComponent } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.component';
 
 @Component({
@@ -20,7 +22,6 @@ export class TopBarComponent {
   homeURL: string;
   isConstraintsDisabled: boolean = false;
   isPreview: boolean = false;
-  layoutState: string = 'nav';
   logoURL: string;
   newNotifications: any[];
   notifications: any[];
@@ -28,6 +29,7 @@ export class TopBarComponent {
   subscriptions: Subscription = new Subscription();
 
   constructor(
+    private dialog: MatDialog,
     private configService: ConfigService,
     private notificationService: NotificationService,
     private projectService: ProjectService,
@@ -119,6 +121,13 @@ export class TopBarComponent {
         this.processNotifications();
       })
     );
+  }
+
+  viewAlerts($event: any): void {
+    $event.stopPropagation();
+    this.dialog.open(NotificationsDialogComponent, {
+      panelClass: 'dialog-sm'
+    });
   }
 
   private setHomeURL(): void {

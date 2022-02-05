@@ -1,4 +1,4 @@
-<mat-toolbar class="topbar dark-theme" color="primary" [ngClass]="{'mat-elevation-z1': layoutState === 'nav'}">
+<mat-toolbar class="topbar dark-theme" color="primary">
   <div class="topbar-content"
       [ngClass]="{'warn-bg': hasNewAmbientNotifications()}"
       (click)="viewCurrentAmbientNotification($event)"
@@ -21,8 +21,7 @@
     <div fxLayout="row" fxLayoutGap="16px">
       <div>
         <button mat-icon-button
-            [matMenuTriggerFor]="notificationMenu"
-            (click)="$event.stopPropagation()"
+            (click)="viewAlerts($event)"
             id="viewNotificationsButton"
             aria-label="View alerts"
             i18n-aria-label
@@ -31,9 +30,6 @@
               matBadgeColor="accent"
               [matBadgeHidden]="!hasNewNotifications()">notifications</mat-icon>
         </button>
-        <mat-menu #notificationMenu="matMenu">
-          <notifications-menu></notifications-menu>
-        </mat-menu>
       </div>
       <div class="account-menu-container">
         <mat-progress-spinner class="menu-progress"
