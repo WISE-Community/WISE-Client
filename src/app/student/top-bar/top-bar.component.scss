@@ -39,8 +39,14 @@ h3.title {
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 66vw;
+}
 
-  @media (max-width: breakpoint('xs.max')) {
+.constraints {
+  padding: 16px;
+}
+
+@media (max-width: breakpoint('xs.max')) {
+  .constraints, h3.title {
     font-size: .9rem;
   }
 }

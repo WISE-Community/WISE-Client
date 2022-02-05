@@ -10,14 +10,16 @@
     </a>
     <h3 fxFlex="4 1 0%" class="title" [title]="projectName">{{projectName}}</h3>
     <span fxFlex></span>
-    <button mat-button
-        id="toggleConstraints"
-        *ngIf="isPreview && !isConstraintsDisabled && hasConstraints()"
-        (click)="disableConstraints()"
-        title="Only Available in Preview Mode"
-        i18n-title
-        i18n>Turn Off Constraints</button>
-    <span *ngIf="isConstraintsDisabled" i18n>Constraints Are Off</span>
+    <div class="constraints">
+      <button mat-button
+          id="toggleConstraints"
+          *ngIf="isPreview && !isConstraintsDisabled && hasConstraints()"
+          (click)="disableConstraints()"
+          title="Only Available in Preview Mode"
+          i18n-title
+          i18n>Turn Off Constraints</button>
+      <span *ngIf="isConstraintsDisabled" i18n>Constraints Are Off</span>
+    </div>
     <div fxLayout="row" fxLayoutGap="16px">
       <div>
         <button mat-icon-button

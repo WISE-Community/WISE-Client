@@ -75,7 +75,6 @@ export class TopBarComponent {
   }
 
   disableConstraints($event: any): void {
-    $event.stopPropagation();
     this.isConstraintsDisabled = true;
     this.projectService.activeConstraints = [];
     this.studentDataService.updateNodeStatuses();
