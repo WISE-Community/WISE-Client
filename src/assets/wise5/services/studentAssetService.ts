@@ -12,8 +12,6 @@ export class StudentAssetService {
   allAssets = [];
   imageFileExtensions = ['png', 'jpg', 'jpeg', 'gif'];
   audioFileExtensions = ['wav', 'mp3', 'ogg', 'm4a', 'm4p', 'raw', 'aiff', 'webm'];
-  private showStudentAssetsSource: Subject<any> = new Subject<any>();
-  public showStudentAssets$: Observable<any> = this.showStudentAssetsSource.asObservable();
   private attachStudentAssetSource: Subject<StudentAssetRequest> = new Subject<StudentAssetRequest>();
   public attachStudentAsset$: Observable<StudentAssetRequest> = this.attachStudentAssetSource.asObservable();
 
@@ -250,10 +248,6 @@ export class StudentAssetService {
           return studentAsset;
         });
     }
-  }
-
-  broadcastShowStudentAssets(args: any) {
-    this.showStudentAssetsSource.next(args);
   }
 
   broadcastAttachStudentAsset(nodeId: string, componentId: string, asset: any): void {
