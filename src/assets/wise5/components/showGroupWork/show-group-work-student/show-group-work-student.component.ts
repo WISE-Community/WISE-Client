@@ -21,8 +21,7 @@ import { PeerGroup } from '../../peerChat/PeerGroup';
 export class ShowGroupWorkStudentComponent extends ComponentStudent {
   flexLayout: string = 'column';
   narrowComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];
-  numWorkgroups: number;
-  peerGroup: PeerGroup;
+  peerGroup: PeerGroup = new PeerGroup();
   showWorkComponentContent: any;
   showWorkNodeId: string;
   studentWorkFromGroupMembers: any[];
@@ -94,7 +93,6 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
     this.studentWorkFromGroupMembers.forEach((work) => {
       this.workgroupIdToWork.set(work.workgroupId, work);
     });
-    this.numWorkgroups = this.studentWorkFromGroupMembers.length;
   }
 
   private removeMyWork(studentWorkList: any[]): any[] {
@@ -125,11 +123,12 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
     }
   }
   setWidths(): void {
-    if (this.numWorkgroups > 1) {
+    const numWorkgroups = this.peerGroup.members.length;
+    if (numWorkgroups > 1) {
       this.widthMd = 50;
       this.widthLg = 50;
     }
-    if (this.numWorkgroups > 2 && this.isNarrow()) {
+    if (numWorkgroups > 2 && this.isNarrow()) {
       this.widthLg = 33.33;
     }
   }
