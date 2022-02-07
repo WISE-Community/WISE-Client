@@ -19,8 +19,4 @@ export class EditPeerChatAdvancedComponentComponent extends EditAdvancedComponen
   ) {
     super(NodeService, NotebookService, ProjectService);
   }
-
-  ngOnInit(): void {
-    super.ngOnInit();
-  }
 }

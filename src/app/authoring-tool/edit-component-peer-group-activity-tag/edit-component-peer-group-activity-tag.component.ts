@@ -34,15 +34,13 @@ export class EditComponentPeerGroupActivityTagComponent extends EditComponentFie
   }
 
   getPeerGroupActivityTags(): string[] {
-    const tags: string[] = [];
-    const tagsFound = new Map();
+    const tagsFound = new Set<string>();
     for (const component of this.projectService.getComponents()) {
       const tag = component.peerGroupActivityTag;
-      if (tag != null && tag !== '' && !tagsFound.has(tag)) {
-        tags.push(tag);
-        tagsFound.set(tag, true);
+      if (tag != null && tag !== '') {
+        tagsFound.add(tag);
       }
     }
-    return tags.sort();
+    return Array.from(tagsFound).sort();
   }
 }
