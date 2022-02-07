@@ -13,7 +13,9 @@
         <span class="mat-body-2">{{ workgroupInfos[member.id].displayNames }}</span>
       </div>
       <mat-card-content class="app-bg-bg" fxFlex="100">
-        <span class="text-secondary" *ngIf="workgroupIdToWork.get(member.id) == null" i18n>(No response)</span>
+        <span class="text-secondary" *ngIf="workgroupIdToWork.get(member.id) == null" i18n>
+          (Waiting for response...)
+        </span>
         <show-work-student *ngIf="workgroupIdToWork.get(member.id) != null"
             [studentWork]="workgroupIdToWork.get(member.id)"
             [componentContent]="showWorkComponentContent"
