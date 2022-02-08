@@ -1,19 +1,23 @@
 <component-header [componentContent]="componentContent"></component-header>
 <div [fxLayout]="flexLayout">
-  <div *ngFor="let studentWork of studentWorkFromGroupMembers"
+  <div *ngFor="let member of peerGroup.members"
       fxFlex="100"
       [fxFlex.gt-sm]="widthMd"
-      [fxFlex.gt-md]="widthLg">
-    <mat-card class="mat-elevation-z0 notice-bg-bg">
+      [fxFlex.gt-md]="widthLg"
+      fxLayout="column">
+    <mat-card class="mat-elevation-z0 notice-bg-bg" fxFlex="100" fxLayout="column">
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-        <mat-icon class="mat-30" [ngStyle]="{'color': workgroupInfos[studentWork.workgroupId].avatarColor}">
+        <mat-icon class="mat-30" [ngStyle]="{'color': workgroupInfos[member.id].avatarColor}">
           account_circle
         </mat-icon>
-        <span class="mat-body-2">{{ workgroupInfos[studentWork.workgroupId].displayNames }}</span>
+        <span class="mat-body-2">{{ workgroupInfos[member.id].displayNames }}</span>
       </div>
-      <mat-card-content class="app-bg-bg">
-        <span class="text-secondary" *ngIf="studentWork == null" i18n>(No response)</span>
-        <show-work-student [studentWork]="studentWork"
+      <mat-card-content class="app-bg-bg" fxFlex="100">
+        <span class="text-secondary" *ngIf="workgroupIdToWork.get(member.id) == null" i18n>
+          (Waiting for response...)
+        </span>
+        <show-work-student *ngIf="workgroupIdToWork.get(member.id) != null"
+            [studentWork]="workgroupIdToWork.get(member.id)"
             [componentContent]="showWorkComponentContent"
             [nodeId]="showWorkNodeId">
         </show-work-student>

@@ -11,6 +11,7 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
+import { PeerGroup } from '../../peerChat/PeerGroup';
 
 @Component({
   selector: 'show-group-work-student',
@@ -20,12 +21,13 @@ import { ComponentService } from '../../componentService';
 export class ShowGroupWorkStudentComponent extends ComponentStudent {
   flexLayout: string = 'column';
   narrowComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];
-  numWorkgroups: number;
+  peerGroup: PeerGroup = new PeerGroup();
   showWorkComponentContent: any;
   showWorkNodeId: string;
   studentWorkFromGroupMembers: any[];
   widthLg: number = 100;
   widthMd: number = 100;
+  workgroupIdToWork = new Map();
   workgroupInfos: any = {};
 
   constructor(
@@ -59,6 +61,8 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
     this.peerGroupService
       .retrievePeerGroup(this.componentContent.peerGroupActivityTag)
       .subscribe((peerGroup) => {
+        this.peerGroup = peerGroup;
+        this.setWorkgroupInfos();
         this.peerGroupService
           .retrieveStudentWork(
             peerGroup,
@@ -69,6 +73,7 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
           )
           .subscribe((studentWorkFromGroupMembers: any[]) => {
             this.setStudentWorkFromGroupMembers(studentWorkFromGroupMembers);
+            this.setLayout();
           });
       });
     this.showWorkComponentContent = this.projectService.getComponentByNodeIdAndComponentId(
@@ -82,29 +87,25 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
   }
 
   setStudentWorkFromGroupMembers(studentWorkFromGroupMembers: any[]): void {
-    if (this.componentContent.isShowMyWork) {
-      this.studentWorkFromGroupMembers = studentWorkFromGroupMembers;
-    } else {
-      this.studentWorkFromGroupMembers = this.getGroupStudentWorkNotIncludingMyWork(
-        studentWorkFromGroupMembers
-      );
-    }
-    this.numWorkgroups = this.studentWorkFromGroupMembers.length;
-    this.setWorkgroupInfos();
-    this.setLayout();
+    this.studentWorkFromGroupMembers = this.componentContent.isShowMyWork
+      ? studentWorkFromGroupMembers
+      : this.removeMyWork(studentWorkFromGroupMembers);
+    this.studentWorkFromGroupMembers.forEach((work) => {
+      this.workgroupIdToWork.set(work.workgroupId, work);
+    });
   }
 
-  private getGroupStudentWorkNotIncludingMyWork(studentWorkFromGroupMembers: any[]): any[] {
+  private removeMyWork(studentWorkList: any[]): any[] {
     const myWorkgroupId = this.configService.getWorkgroupId();
-    return studentWorkFromGroupMembers.filter((studentWork) => {
+    return studentWorkList.filter((studentWork) => {
       return studentWork.workgroupId !== myWorkgroupId;
     });
   }
 
-  private setWorkgroupInfos(): void {
+  setWorkgroupInfos(): void {
     this.workgroupInfos = {};
-    for (const studentWork of this.studentWorkFromGroupMembers) {
-      this.setWorkgroupInfo(studentWork.workgroupId);
+    for (const member of this.peerGroup.members) {
+      this.setWorkgroupInfo(member.id);
     }
   }
 
@@ -122,11 +123,12 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
     }
   }
   setWidths(): void {
-    if (this.numWorkgroups > 1) {
+    const numWorkgroups = this.peerGroup.members.length;
+    if (numWorkgroups > 1) {
       this.widthMd = 50;
       this.widthLg = 50;
     }
-    if (this.numWorkgroups > 2 && this.isNarrow()) {
+    if (numWorkgroups > 2 && this.isNarrow()) {
       this.widthLg = 33.33;
     }
   }

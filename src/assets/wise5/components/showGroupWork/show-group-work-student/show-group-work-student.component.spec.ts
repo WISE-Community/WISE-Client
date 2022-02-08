@@ -15,6 +15,7 @@ import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
 import { MockService } from '../../animation/animation-student/animation-student.component.spec';
 import { ComponentService } from '../../componentService';
+import { PeerGroup } from '../../peerChat/PeerGroup';
 import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
 
 class MockNotebookService {
@@ -99,6 +100,13 @@ describe('ShowGroupWorkStudentComponent', () => {
       type: 'OpenResponse'
     });
     component.studentWorkFromGroupMembers = [];
+    component.peerGroup = new PeerGroup();
+    component.peerGroup.members = [
+      { id: 1, periodId: 1 },
+      { id: 2, periodId: 1 },
+      { id: 3, periodId: 1 }
+    ];
+    component.setWorkgroupInfos();
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     fixture.detectChanges();
   });
@@ -119,7 +127,7 @@ function setStudentWork() {
     it('should set student work from group members including my work', () => {
       component.setStudentWorkFromGroupMembers(studentWork);
       expect(component.studentWorkFromGroupMembers.length).toEqual(2);
-      expect(Object.keys(component.workgroupInfos).length).toEqual(2);
+      expect(Object.keys(component.workgroupInfos).length).toEqual(3);
     });
 
     it('should set student work from group members not including my work', () => {
@@ -127,7 +135,7 @@ function setStudentWork() {
       spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
       component.setStudentWorkFromGroupMembers(studentWork);
       expect(component.studentWorkFromGroupMembers.length).toEqual(1);
-      expect(Object.keys(component.workgroupInfos).length).toEqual(1);
+      expect(Object.keys(component.workgroupInfos).length).toEqual(3);
     });
   });
 }
@@ -136,12 +144,14 @@ function setLayout() {
   describe('setLayout', () => {
     it('should set row layout for narrow component type', () => {
       component.setStudentWorkFromGroupMembers(studentWork);
+      component.setLayout();
       expect(component.flexLayout).toBe('row wrap');
     });
 
     it('should set column layout', () => {
       component.componentContent.layout = 'column';
       component.setStudentWorkFromGroupMembers(studentWork);
+      component.setLayout();
       expect(component.flexLayout).toBe('column');
     });
   });
@@ -151,6 +161,7 @@ function setWidths() {
   describe('setWidths()', () => {
     it('should set widths for narrow component type including my work', () => {
       component.setStudentWorkFromGroupMembers(studentWork);
+      component.setWidths();
       expect(component.widthMd).toEqual(50);
       expect(component.widthLg).toEqual(50);
     });
@@ -159,6 +170,7 @@ function setWidths() {
       component.componentContent.isShowMyWork = false;
       spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
       component.setStudentWorkFromGroupMembers(studentWork);
+      component.setWidths();
       expect(component.widthMd).toEqual(100);
       expect(component.widthLg).toEqual(100);
     });
@@ -167,6 +179,7 @@ function setWidths() {
       componentState3 = createComponentState(3);
       studentWork = [componentState1, componentState2, componentState3];
       component.setStudentWorkFromGroupMembers(studentWork);
+      component.setWidths();
       expect(component.widthMd).toEqual(50);
       expect(component.widthLg).toEqual(33.33);
     });
