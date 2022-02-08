@@ -69,6 +69,8 @@ import { ShowMyWorkAuthoringComponent } from '../../assets/wise5/components/show
 import { EditShowMyWorkAdvancedComponent } from '../../assets/wise5/components/showMyWork/edit-show-my-work-advanced/edit-show-my-work-advanced.component';
 import { ShowGroupWorkAuthoringComponent } from '../../assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component';
 import { EditShowGroupWorkAdvancedComponent } from '../../assets/wise5/components/showGroupWork/edit-show-group-work-advanced/edit-show-group-work-advanced.component';
+import { EditComponentPeerGroupActivityTagComponent } from '../authoring-tool/edit-component-peer-group-activity-tag/edit-component-peer-group-activity-tag.component';
+import { EditDialogGuidanceAdvancedComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +90,7 @@ import { EditShowGroupWorkAdvancedComponent } from '../../assets/wise5/component
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
     EditComponentMaxSubmitComponent,
+    EditComponentPeerGroupActivityTagComponent,
     EditComponentPrompt,
     EditComponentRubricComponent,
     EditComponentSaveButtonComponent,
@@ -104,6 +107,7 @@ import { EditShowGroupWorkAdvancedComponent } from '../../assets/wise5/component
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
+    EditDialogGuidanceAdvancedComponent,
     EditDialogGuidanceFeedbackRulesComponent,
     EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,
@@ -158,6 +162,7 @@ import { EditShowGroupWorkAdvancedComponent } from '../../assets/wise5/component
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
     EditComponentMaxSubmitComponent,
+    EditComponentPeerGroupActivityTagComponent,
     EditComponentPrompt,
     EditComponentRubricComponent,
     EditComponentSaveButtonComponent,
@@ -174,6 +179,7 @@ import { EditShowGroupWorkAdvancedComponent } from '../../assets/wise5/component
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
+    EditDialogGuidanceAdvancedComponent,
     EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,
     EditDrawAdvancedComponent,

@@ -1,0 +1,40 @@
+<div fxFlex="row wrap" fxLayoutGap="20px">
+  <mat-form-field>
+    <mat-label i18n>Peer Group Activity Tag</mat-label>
+    <input matInput
+        #tagInput
+        [readonly]="!isEditMode"
+        [formControl]="tagControl"
+        [matAutocomplete]="auto"/>
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">{{ tag }}</mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-raised-button
+      *ngIf="!isEditMode"
+      color="primary"
+      (click)="edit()"
+      matTooltip="Edit Peer Group Activity Tag"
+      matTooltipPosition="above"
+      i18n-matTooltip>
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-raised-button
+      color="primary"
+      *ngIf="isEditMode"
+      (click)="save()"
+      matTooltip="Save Peer Group Activity Tag"
+      matTooltipPosition="above"
+      i18n-matTooltip>
+    <mat-icon>done</mat-icon>
+  </button>
+  <button mat-raised-button
+      *ngIf="isEditMode"
+      color="primary"
+      (click)="cancel()"
+      matTooltip="Cancel Edit Peer Group Activity Tag"
+      matTooltipPosition="above"
+      i18n-matTooltip>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>

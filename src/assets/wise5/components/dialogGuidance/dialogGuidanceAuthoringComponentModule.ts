@@ -14,7 +14,10 @@ const dialogGuidanceAuthoringComponentModule = angular
     'dialogGuidanceAuthoring',
     downgradeComponent({ component: DialogGuidanceAuthoringComponent }) as angular.IDirectiveFactory
   )
-  .component('editDialogGuidanceFeedbackRules', EditDialogGuidanceFeedbackRulesComponent)
-  .component('editDialogGuidanceAdvanced', EditDialogGuidanceAdvancedComponent);
+  .directive(
+    'editDialogGuidanceAdvanced',
+    downgradeComponent({ component: EditDialogGuidanceAdvancedComponent })
+  )
+  .component('editDialogGuidanceFeedbackRules', EditDialogGuidanceFeedbackRulesComponent);
 
 export default dialogGuidanceAuthoringComponentModule;

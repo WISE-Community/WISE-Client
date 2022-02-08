@@ -2908,6 +2908,16 @@ export class TeacherProjectService extends ProjectService {
     return stepNodeDetails.sort(this.sortByOrder);
   }
 
+  getComponents(): any[] {
+    const components = [];
+    for (const node of this.applicationNodes) {
+      for (const component of node.components) {
+        components.push(component);
+      }
+    }
+    return components;
+  }
+
   sortByOrder(a: any, b: any): number {
     return a.order - b.order;
   }

@@ -821,6 +821,38 @@
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="bf53458f6b19dba9c15c339aa781d23b1370e9c8" datatype="html">
+        <source>Peer Group Activity Tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-peer-group-activity-tag/edit-component-peer-group-activity-tag.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fe73bc1a92595cfbfa514767a069501f41f481fd" datatype="html">
+        <source>Edit Peer Group Activity Tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-peer-group-activity-tag/edit-component-peer-group-activity-tag.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c42b84a8f0a424ed8a9d8ca931b63e32fb1a4615" datatype="html">
+        <source>Save Peer Group Activity Tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-peer-group-activity-tag/edit-component-peer-group-activity-tag.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7f8a7e8f687a6df9a66f413b60a50838ef791585" datatype="html">
+        <source>Cancel Edit Peer Group Activity Tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-peer-group-activity-tag/edit-component-peer-group-activity-tag.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6bc7f2c14cb3141e690735b278591defe07c68fb" datatype="html">
         <source>Prompt</source>
         <context-group purpose="location">
@@ -14675,13 +14707,6 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component.html</context>
           <context context-type="linenumber">17</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="bf53458f6b19dba9c15c339aa781d23b1370e9c8" datatype="html">
-        <source>Peer Group Activity Tag</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
-          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f5e5d449095ff67307e2d7c8a4da0147117406b0" datatype="html">
