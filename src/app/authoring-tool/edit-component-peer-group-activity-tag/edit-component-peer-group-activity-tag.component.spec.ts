@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,8 +22,11 @@ describe('EditComponentPeerGroupActivityTagComponent', () => {
   const component3 = createComponent('banana');
   const component4 = createComponent('apple');
   const components = [component1, component2, component3, component4];
+  let componentChangedSpy: jasmine.Spy;
   let fixture: ComponentFixture<EditComponentPeerGroupActivityTagComponent>;
   let getComponentsSpy: jasmine.Spy;
+  const newTag = 'green';
+  const oldTag = 'blue';
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -34,6 +38,7 @@ describe('EditComponentPeerGroupActivityTagComponent', () => {
         HttpClientTestingModule,
         MatAutocompleteModule,
         MatFormFieldModule,
+        MatIconModule,
         MatInputModule,
         ReactiveFormsModule,
         UpgradeModule
@@ -49,6 +54,7 @@ describe('EditComponentPeerGroupActivityTagComponent', () => {
     component.authoringComponentContent = {};
     getComponentsSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponents');
     getComponentsSpy.and.returnValue(components);
+    componentChangedSpy = spyOn(TestBed.inject(TeacherProjectService), 'componentChanged');
     fixture.detectChanges();
   });
 
@@ -64,15 +70,41 @@ describe('EditComponentPeerGroupActivityTagComponent', () => {
       createComponent(''),
       createComponent('')
     ]);
-    const tags = component.getPeerGroupActivityTags();
+    const tags = component.getExistingPeerGroupActivityTags();
     expect(tags.length).toEqual(0);
   });
 
   it('should get peer group activity tags that are unique and sorted alphabetically', () => {
-    const tags = component.getPeerGroupActivityTags();
+    const tags = component.getExistingPeerGroupActivityTags();
     expect(tags.length).toEqual(3);
     expect(tags[0]).toEqual(component2.peerGroupActivityTag);
     expect(tags[1]).toEqual(component3.peerGroupActivityTag);
     expect(tags[2]).toEqual(component1.peerGroupActivityTag);
+  });
+
+  it('should edit', () => {
+    expect(component.tagControl.disabled).toEqual(true);
+    expect(component.tagInput.nativeElement).not.toEqual(document.activeElement);
+    component.edit();
+    expect(component.tagControl.disabled).toEqual(false);
+    expect(component.tagInput.nativeElement).toEqual(document.activeElement);
+  });
+
+  it('should save', () => {
+    component.authoringComponentContent.peerGroupActivityTag = oldTag;
+    component.tagControl.setValue(newTag);
+    component.save();
+    expect(component.authoringComponentContent.peerGroupActivityTag).toEqual(newTag);
+    expect(componentChangedSpy).toHaveBeenCalled();
+    expect(component.tagControl.disabled).toEqual(true);
+  });
+
+  it('should cancel', () => {
+    component.authoringComponentContent.peerGroupActivityTag = oldTag;
+    component.tagControl.setValue(newTag);
+    component.cancel();
+    expect(component.authoringComponentContent.peerGroupActivityTag).toEqual(oldTag);
+    expect(componentChangedSpy).not.toHaveBeenCalled();
+    expect(component.tagControl.disabled).toEqual(true);
   });
 });
