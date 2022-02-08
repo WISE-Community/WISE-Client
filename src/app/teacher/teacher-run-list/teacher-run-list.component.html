@@ -10,14 +10,16 @@
     <app-search-bar fxFlex="0 0 auto"
                     fxFlex.xs="0 0 100%"
                     fxFlex.sm="0 0 calc(50%-8px)"
-                    [placeholderText]="'Search'"
+                    i18n-placeholderText
+                    placeholderText="Search"
                     [value]="searchValue"
                     (update)="searchChanged($event)"></app-search-bar>
     <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
     <app-select-menu fxFlex="0 0 auto"
                      fxFlex.sm="0 0 calc(50%-8px)"
                      [options]="filterOptions"
-                     [placeholderText]="'Filter By Period'"
+                     i18n-placeholderText
+                     placeholderText="Filter By Period"
                      [value]="filterValue"
                      (update)="filterChanged($event)"
                      [valueProp]="'value'"

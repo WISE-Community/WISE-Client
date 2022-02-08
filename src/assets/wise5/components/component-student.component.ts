@@ -10,6 +10,7 @@ import { NotebookService } from '../services/notebookService';
 import { StudentAssetService } from '../services/studentAssetService';
 import { StudentDataService } from '../services/studentDataService';
 import { UtilService } from '../services/utilService';
+import { StudentAssetsDialogComponent } from '../vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
 import { StudentAssetRequest } from '../vle/studentAsset/StudentAssetRequest';
 import { ComponentService } from './componentService';
 import { ComponentStateRequest } from './ComponentStateRequest';
@@ -669,9 +670,12 @@ export abstract class ComponentStudent {
   }
 
   showStudentAssets() {
-    this.StudentAssetService.broadcastShowStudentAssets({
-      nodeId: this.nodeId,
-      componentId: this.componentId
+    this.dialog.open(StudentAssetsDialogComponent, {
+      data: {
+        nodeId: this.nodeId,
+        componentId: this.componentId
+      },
+      panelClass: 'dialog-md'
     });
   }
 

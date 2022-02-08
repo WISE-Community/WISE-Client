@@ -4,20 +4,18 @@ import { Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 
 @Injectable()
 export class OpenResponseService extends ComponentService {
   constructor(
-    private upgrade: UpgradeModule,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.upgrade.$injector.get('$filter')('translate')('openResponse.componentTypeLabel');
+  getComponentTypeLabel(): string {
+    return $localize`Open Response`;
   }
 
   createComponent() {

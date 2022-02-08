@@ -3,29 +3,23 @@
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../services/studentDataService';
 
 @Injectable()
 export class AnimationService extends ComponentService {
   constructor(
-    private upgrade: UpgradeModule,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.getTranslation('animation.componentTypeLabel');
+  getComponentTypeLabel(): string {
+    return $localize`Animation`;
   }
 
   getSvgId(nodeId: string, componentId: string): string {
     return `svg-${nodeId}-${componentId}`;
-  }
-
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
   }
 
   createComponent() {

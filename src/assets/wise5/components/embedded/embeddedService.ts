@@ -6,7 +6,6 @@ import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../services/studentDataService';
 import { ConfigService } from '../../services/configService';
 import { AnnotationService } from '../../services/annotationService';
@@ -18,7 +17,6 @@ export class EmbeddedService extends ComponentService {
   iframePrefix: string = 'embedded-application-iframe-';
 
   constructor(
-    private upgrade: UpgradeModule,
     protected AnnotationService: AnnotationService,
     protected ConfigService: ConfigService,
     protected StudentAssetService: StudentAssetService,
@@ -32,12 +30,8 @@ export class EmbeddedService extends ComponentService {
     return `${this.iframePrefix}-${componentId}`;
   }
 
-  getComponentTypeLabel() {
-    return this.getTranslation('embedded.componentTypeLabel');
-  }
-
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
+  getComponentTypeLabel(): string {
+    return $localize`Embedded (Custom)`;
   }
 
   createComponent() {

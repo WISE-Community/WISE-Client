@@ -12,7 +12,7 @@ export class DialogGuidanceService extends ComponentService {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
+  getComponentTypeLabel(): string {
     return $localize`Dialog Guidance`;
   }
 

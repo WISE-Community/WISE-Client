@@ -2,30 +2,24 @@ import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 
 @Injectable()
 export class HTMLService extends ComponentService {
   constructor(
-    private upgrade: UpgradeModule,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.getTranslation('html.componentTypeLabel');
-  }
-
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
+  getComponentTypeLabel(): string {
+    return $localize`Rich Text (HTML)`;
   }
 
   createComponent() {
     const component: any = super.createComponent();
     component.type = 'HTML';
-    component.html = this.getTranslation('html.enterHTMLHere');
+    component.html = $localize`Enter html here`;
     return component;
   }
 

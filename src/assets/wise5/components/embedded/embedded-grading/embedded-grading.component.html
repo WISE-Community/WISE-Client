@@ -1,7 +1,6 @@
-<iframe
-    [id]="embeddedApplicationIFrameId"
-    [src]="url"
-    (load)="iframeLoaded()"
-    class="embedded-content__iframe"
-    style="width: 100%; height: {{height}};">
-</iframe>
+<embedded-show-work
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="componentState"
+    [isRevision]="isRevision">
+</embedded-show-work>
