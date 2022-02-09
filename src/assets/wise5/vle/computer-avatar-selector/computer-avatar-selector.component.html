@@ -1,0 +1,20 @@
+<div class="prompt-div">{{ prompt }}</div>
+<hr>
+<div i18n>Choose Your {{ label }}:</div>
+<div fxLayout="row wrap">
+  <div *ngFor="let avatar of avatars"
+      fxLayout="column" fxLayoutAlign="center center"
+      (click)="highlightAvatar(avatar)"
+      class="avatar-div"
+      [ngClass]="{ 'avatar-div-selected': avatar.isSelected }">
+    <img [src]="avatarsPath + avatar.image" class="avatar-image" />
+    <span>{{ avatar.name }}</span>
+  </div>
+</div>
+<button mat-raised-button
+    color="primary"
+    [disabled]="avatarSelected == null"
+    (click)="chooseAvatar()"
+    i18n>
+  Continue
+</button>

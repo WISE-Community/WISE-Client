@@ -11457,18 +11457,25 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="9dcaba9bd0f0db5a811772d3153746830a15f0ab" datatype="html">
+        <source> Enable Computer Avatar </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="c50661356b4d4941e7eb9b151c65f5f5897d236e" datatype="html">
         <source>Add response...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="427e92e019c34109656b0e1fc9576bfb833934d9" datatype="html">
+      <trans-unit id="a93bfb3e1753bcd8f4eafa16a3c77f0b15826372" datatype="html">
         <source> Send </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">32,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c80dd9bfb0bd7a7ce89ef1140e6f35211ab711f0" datatype="html">
@@ -15105,6 +15112,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d44e0fae2f7939bc76717ba6833b1bb8f5031c81" datatype="html">
+        <source>Choose Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="17b3eb095d935eeb62192f17ad9421655ec377d8" datatype="html">
+        <source> Continue
+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
+          <context context-type="linenumber">19,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">

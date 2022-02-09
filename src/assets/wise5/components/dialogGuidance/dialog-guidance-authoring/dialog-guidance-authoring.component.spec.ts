@@ -1,12 +1,16 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Observable, Subject } from 'rxjs';
+import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ConfigService } from '../../../services/configService';
@@ -34,16 +38,20 @@ describe('DialogGuidanceAuthoringComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        DragDropModule,
         FormsModule,
         HttpClientTestingModule,
+        MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
+        MatIconModule,
         MatInputModule,
         UpgradeModule
       ],
       declarations: [
         DialogGuidanceAuthoringComponent,
         EditComponentPrompt,
+        EditComponentMaxSubmitComponent,
         EditDialogGuidanceFeedbackRulesComponent
       ],
       providers: [

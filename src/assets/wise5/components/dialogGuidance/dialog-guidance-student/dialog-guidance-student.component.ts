@@ -26,8 +26,13 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./dialog-guidance-student.component.scss']
 })
 export class DialogGuidanceStudentComponent extends ComponentStudent {
+  computerAvatarLabel: string;
+  computerAvatarPrompt: string;
+  computerAvatarSelected: any;
   cRaterTimeout: number = 40000;
   feedbackRuleEvaluator: DialogGuidanceFeedbackRuleEvaluator;
+  isComputerAvatarEnabled: boolean = false;
+  isShowComputerAvatarSelector: boolean = false;
   isSubmitEnabled: boolean = false;
   isWaitingForComputerResponse: boolean = false;
   responses: DialogResponse[] = [];
@@ -73,6 +78,34 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       this.disableStudentResponse();
     }
     this.feedbackRuleEvaluator = new DialogGuidanceFeedbackRuleEvaluator(this);
+    this.isComputerAvatarEnabled = this.componentContent.isComputerAvatarEnabled;
+    if (this.isComputerAvatarEnabled) {
+      this.initializeComputerAvatar();
+    }
+  }
+
+  initializeComputerAvatar(): void {
+    this.computerAvatarPrompt = this.componentContent.computerAvatarPrompt;
+    this.computerAvatarLabel = this.componentContent.computerAvatarLabel;
+    this.computerAvatarSelected = this.componentState?.studentData?.computerAvatar;
+    if (this.computerAvatarSelected == null) {
+      this.showComputerAvatarSelector();
+    } else {
+      this.hideComputerAvatarSelector();
+    }
+  }
+
+  showComputerAvatarSelector(): void {
+    this.isShowComputerAvatarSelector = true;
+  }
+
+  hideComputerAvatarSelector(): void {
+    this.isShowComputerAvatarSelector = false;
+  }
+
+  selectComputerAvatar(computerAvatar: any): void {
+    this.computerAvatarSelected = computerAvatar;
+    this.hideComputerAvatarSelector();
   }
 
   submitStudentResponse(): void {
