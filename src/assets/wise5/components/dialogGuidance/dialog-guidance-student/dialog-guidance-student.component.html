@@ -8,7 +8,10 @@
 </div>
 <div *ngIf="!isShowComputerAvatarSelector">
   <mat-card class="mat-elevation-z2">
-    <dialog-responses [responses]="responses" [isWaitingForComputerResponse]="isWaitingForComputerResponse">
+    <dialog-responses
+        [responses]="responses"
+        [isWaitingForComputerResponse]="isWaitingForComputerResponse"
+        [computerAvatar]="computerAvatar">
     </dialog-responses>
     <div *ngIf="studentCanRespond"
         class="add-response"

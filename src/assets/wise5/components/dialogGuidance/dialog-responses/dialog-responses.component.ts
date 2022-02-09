@@ -8,6 +8,9 @@ import { DialogResponse } from '../DialogResponse';
 })
 export class DialogResponsesComponent implements OnInit {
   @Input()
+  computerAvatar: any;
+
+  @Input()
   responses: DialogResponse[] = [];
 
   @Input()
