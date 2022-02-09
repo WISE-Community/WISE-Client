@@ -8,9 +8,11 @@ import { DialogResponse } from '../DialogResponse';
   styleUrls: ['./dialog-guidance-show-work.component.scss']
 })
 export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective {
+  computerAvatar: any;
   responses: DialogResponse[];
 
   ngOnInit(): void {
     this.responses = this.componentState.studentData.responses;
+    this.computerAvatar = this.componentState.studentData.computerAvatar;
   }
 }
