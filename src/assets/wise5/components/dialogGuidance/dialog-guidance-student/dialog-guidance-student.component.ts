@@ -78,8 +78,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       this.disableStudentResponse();
     }
     this.feedbackRuleEvaluator = new DialogGuidanceFeedbackRuleEvaluator(this);
-    this.isComputerAvatarEnabled = this.componentContent.isComputerAvatarEnabled;
-    if (this.isComputerAvatarEnabled) {
+    if (this.componentContent.isComputerAvatarEnabled) {
       this.initializeComputerAvatar();
     }
   }
@@ -106,6 +105,12 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   selectComputerAvatar(computerAvatar: any): void {
     this.computerAvatar = computerAvatar;
     this.hideComputerAvatarSelector();
+    const computerAvatarInitialResponse = this.componentContent.computerAvatarInitialResponse;
+    if (computerAvatarInitialResponse != null && computerAvatarInitialResponse != '') {
+      this.addDialogResponse(
+        new ComputerDialogResponse(computerAvatarInitialResponse, [], new Date().getTime())
+      );
+    }
   }
 
   submitStudentResponse(): void {
