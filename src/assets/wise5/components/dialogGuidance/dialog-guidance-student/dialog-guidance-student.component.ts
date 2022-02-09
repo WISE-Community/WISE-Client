@@ -210,6 +210,9 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       responses: this.responses,
       submitCounter: this.submitCounter
     };
+    if (this.computerAvatar != null) {
+      componentState.studentData.computerAvatar = this.computerAvatar;
+    }
     componentState.componentType = 'DialogGuidance';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
