@@ -163,7 +163,7 @@ function setWidths() {
       component.setStudentWorkFromGroupMembers(studentWork);
       component.setWidths();
       expect(component.widthMd).toEqual(50);
-      expect(component.widthLg).toEqual(50);
+      expect(component.widthLg).toEqual(33.33);
     });
 
     it('should set widths for narrow component type not including my work', () => {
@@ -171,8 +171,8 @@ function setWidths() {
       spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
       component.setStudentWorkFromGroupMembers(studentWork);
       component.setWidths();
-      expect(component.widthMd).toEqual(100);
-      expect(component.widthLg).toEqual(100);
+      expect(component.widthMd).toEqual(50);
+      expect(component.widthLg).toEqual(33.33);
     });
 
     it('should set widths for narrow component type and more than 2 group members', () => {
