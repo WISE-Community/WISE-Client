@@ -16,5 +16,35 @@
       i18n>
     Enable Computer Avatar
   </mat-checkbox>
-  <edit-dialog-guidance-feedback-rules [feedbackRules]="authoringComponentContent.feedbackRules"></edit-dialog-guidance-feedback-rules>
+  <div *ngIf="authoringComponentContent.isComputerAvatarEnabled"
+      fxLayout="column">
+    <mat-form-field class="computer-avatar-label">
+      <mat-label i18n>Computer Avatar Label</mat-label>
+      <input matInput
+          [(ngModel)]="authoringComponentContent.computerAvatarLabel"
+          (ngModelChange)="componentChanged()"
+          placeholder="Thought Partner"
+          i18n-placeholder />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n>Computer Avatar Prompt</mat-label>
+      <textarea matInput
+          [(ngModel)]="authoringComponentContent.computerAvatarPrompt"
+          (ngModelChange)="componentChanged()"
+          placeholder="Discuss your answer with a thought partner!"
+          i18n-placeholder
+          cdkTextareaAutosize>
+      </textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n>Computer Avatar Initial Response</mat-label>
+      <input matInput
+          [(ngModel)]="authoringComponentContent.computerAvatarInitialResponse"
+          (ngModelChange)="componentChanged()"
+          placeholder="Hi there, what do you think about [insert topic here]"
+          i18n-placeholder />
+    </mat-form-field>
+  </div>
+  <edit-dialog-guidance-feedback-rules [feedbackRules]="authoringComponentContent.feedbackRules">
+  </edit-dialog-guidance-feedback-rules>
 </div>
