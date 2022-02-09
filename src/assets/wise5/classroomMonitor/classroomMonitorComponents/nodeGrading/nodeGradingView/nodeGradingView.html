@@ -20,9 +20,9 @@
         <md-icon class="info"> flag </md-icon>
         <span>{{ ::'REPORT' | translate }}</span>
       </md-button>
-      <md-button ng-repeat="peerGroupComponentId in $ctrl.peerGroupComponentIds"
+      <md-button ng-repeat="peerGroupActivityTag in $ctrl.peerGroupActivityTags"
           class="md-raised info"
-          ng-click="$ctrl.showPeerGroupGroupings($ctrl.nodeId, peerGroupComponentId)">
+          ng-click="$ctrl.showPeerGroupDetails(peerGroupActivityTag)">
         <md-icon class="info">groups</md-icon>
         <span class="info">{{ ::'peerGroups' | translate }}</span>
       </md-button>

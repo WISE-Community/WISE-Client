@@ -9,8 +9,7 @@ import { PeerGroupService } from '../../../../services/peerGroupService';
   styleUrls: ['./peer-group-period.component.scss']
 })
 export class PeerGroupPeriodComponent implements OnInit {
-  @Input() componentId: string;
-  @Input() nodeId: string;
+  @Input() peerGroupActivityTag: string;
   @Input() period: any;
 
   UNASSIGNED_GROUP_ID = 0;
@@ -25,7 +24,7 @@ export class PeerGroupPeriodComponent implements OnInit {
   ngOnInit(): void {}
 
   ngOnChanges(): void {
-    this.PeerGroupService.retrieveGroupings(this.nodeId, this.componentId).subscribe(
+    this.PeerGroupService.retrievePeerGroupInfo(this.peerGroupActivityTag).subscribe(
       ({ peerGroups, workgroupsNotInPeerGroup }) => {
         for (const peerGroup of this.getPeerGroupsInPeriod(peerGroups, this.period.periodId)) {
           this.addGrouping(peerGroup);
@@ -72,8 +71,7 @@ export class PeerGroupPeriodComponent implements OnInit {
   createNewGroup(): Subscription {
     return this.PeerGroupService.createNewGroup(
       this.period.periodId,
-      this.nodeId,
-      this.componentId
+      this.peerGroupActivityTag
     ).subscribe(
       (group) => {
         this.addGrouping(group);
