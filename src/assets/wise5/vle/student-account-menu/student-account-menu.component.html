@@ -46,10 +46,12 @@
   </div>
 </div>
 <mat-divider class="divider"></mat-divider>
-<div class="notice-bg-bg controls" fxLayout="row">
+<div class="notice-bg-bg controls" fxLayout="row" fxLayoutAlign="end" >
   <button mat-button color="primary" class="button" (click)="goHome()" i18n>Go Home</button>
-  <span fxFlex></span>
-  <button mat-button color="primary" class="button" (click)="logOut('logOutButtonClicked')" i18n>
-    Sign Out
-  </button>
+  <span *ngIf="isAuthenticated" fxFlex></span>
+  <button mat-button
+      *ngIf="isAuthenticated"
+      color="primary"
+      class="button"
+      (click)="logOut('logOutButtonClicked')" i18n>Sign Out</button>
 </div>
