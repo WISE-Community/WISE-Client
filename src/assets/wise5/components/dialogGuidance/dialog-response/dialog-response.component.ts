@@ -15,7 +15,7 @@ export class DialogResponseComponent implements OnInit {
   response: DialogResponse;
 
   avatarColor: string;
-  computerAvatarsPath: string = '/wise5/themes/default/images/computer-avatars/';
+  computerAvatarsPath: string = '/assets/img/computer-avatars/';
   isStudent: boolean;
 
   constructor(protected ConfigService: ConfigService) {}

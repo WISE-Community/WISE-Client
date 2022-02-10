@@ -24,7 +24,7 @@ export class ComputerAvatarSelectorComponent implements OnInit {
     { id: 'koala', name: 'Koala', image: 'monkey.jpg' }
   ];
   avatarSelected: any;
-  avatarsPath: string = '/wise5/themes/default/images/computer-avatars/';
+  avatarsPath: string = '/assets/img/computer-avatars/';
 
   constructor() {}
 
