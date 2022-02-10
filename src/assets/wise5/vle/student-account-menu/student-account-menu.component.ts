@@ -16,6 +16,7 @@ export class StudentAccountMenuComponent implements OnInit {
   menu: MatMenu;
 
   hideTotalScores: boolean;
+  isAuthenticated: boolean;
   maxScore: number;
   nodeStatuses: any;
   rootNode: any;
@@ -36,6 +37,7 @@ export class StudentAccountMenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isAuthenticated = this.sessionService.isAuthenticated();
     this.nodeStatuses = this.studentDataService.nodeStatuses;
     this.rootNode = this.projectService.rootNode;
     this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
