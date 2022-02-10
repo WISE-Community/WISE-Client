@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { PeerGroupDialogComponent } from '../classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component';
 import { Node } from '../common/Node';
 import { PeerGroup } from '../components/peerChat/PeerGroup';
 import { ConfigService } from './configService';
@@ -9,18 +11,22 @@ import { ConfigService } from './configService';
 export class PeerGroupService {
   runId: number;
 
-  constructor(private ConfigService: ConfigService, private http: HttpClient) {
+  constructor(
+    private ConfigService: ConfigService,
+    private dialog: MatDialog,
+    private http: HttpClient
+  ) {
     this.runId = this.ConfigService.getRunId();
   }
 
-  getPeerGroupComponentIds(node: Node): string[] {
-    const componentIds = [];
-    for (const component of node.components) {
-      if (component.type === 'PeerChat') {
-        componentIds.push(component.id);
+  getPeerGroupActivityTags(node: Node): Set<string> {
+    const tags = new Set<string>();
+    node.components.forEach((component) => {
+      if (component.peerGroupActivityTag != null) {
+        tags.add(component.peerGroupActivityTag);
       }
-    }
-    return componentIds;
+    });
+    return tags;
   }
 
   retrievePeerGroup(peerGroupActivityTag: string): Observable<any> {
@@ -41,13 +47,13 @@ export class PeerGroupService {
     );
   }
 
-  retrieveGroupings(nodeId: string, componentId: string): Observable<any> {
-    return this.http.get(`/api/teacher/peer-group-info/${this.runId}/${nodeId}/${componentId}`);
+  retrievePeerGroupInfo(peerGroupActivityTag: string): Observable<any> {
+    return this.http.get(`/api/teacher/peer-group-info/${this.runId}/${peerGroupActivityTag}`);
   }
 
-  createNewGroup(periodId: number, nodeId: string, componentId: string): Observable<any> {
+  createNewGroup(periodId: number, peerGroupActivityTag: string): Observable<any> {
     return this.http.post(
-      `/api/peer-group/create/${this.runId}/${periodId}/${nodeId}/${componentId}`,
+      `/api/peer-group/create/${this.runId}/${periodId}/${peerGroupActivityTag}`,
       {}
     );
   }
@@ -58,5 +64,12 @@ export class PeerGroupService {
 
   removeWorkgroupFromGroup(workgroupId: number, groupId: number): Observable<any> {
     return this.http.delete(`/api/peer-group/membership/${groupId}/${workgroupId}`);
+  }
+
+  showPeerGroupDetails(peerGroupActivityTag: string): void {
+    this.dialog.open(PeerGroupDialogComponent, {
+      data: peerGroupActivityTag,
+      panelClass: 'dialog-lg'
+    });
   }
 }

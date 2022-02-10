@@ -18,7 +18,6 @@ import { Node } from '../../../../common/Node';
 
 @Directive()
 export class NodeGradingViewController {
-  $translate: any;
   canViewStudentNames: boolean;
   hiddenComponents: any = [];
   isExpandAll: boolean;
@@ -30,7 +29,7 @@ export class NodeGradingViewController {
   nodeHasWork: boolean;
   nodeId: string;
   numRubrics: number;
-  peerGroupComponentIds: string[];
+  peerGroupActivityTags: string[];
   sortOrder: object = {
     team: ['-isVisible', 'workgroupId'],
     '-team': ['-isVisible', '-workgroupId'],
@@ -71,9 +70,7 @@ export class NodeGradingViewController {
     protected ProjectService: TeacherProjectService,
     protected StudentStatusService: StudentStatusService,
     protected TeacherDataService: TeacherDataService
-  ) {
-    this.$translate = this.$filter('translate');
-  }
+  ) {}
 
   $onInit() {
     this.maxScore = this.getMaxScore();
@@ -82,7 +79,9 @@ export class NodeGradingViewController {
     this.sort = this.TeacherDataService.nodeGradingSort;
     this.nodeContent = this.ProjectService.getNodeById(this.nodeId);
     this.milestoneReport = this.MilestoneService.getMilestoneReportByNodeId(this.nodeId);
-    this.peerGroupComponentIds = this.PeerGroupService.getPeerGroupComponentIds(this.node);
+    this.peerGroupActivityTags = Array.from(
+      this.PeerGroupService.getPeerGroupActivityTags(this.node)
+    );
     this.retrieveStudentData();
     this.subscribeToEvents();
   }
@@ -365,12 +364,8 @@ export class NodeGradingViewController {
     this.MilestoneService.showMilestoneDetails(this.milestoneReport, $event);
   }
 
-  showPeerGroupGroupings(nodeId: string, componentId: string): void {
-    this.NodeService.showPeerGroupDetails(
-      this.TeacherDataService.getCurrentPeriod().periodId,
-      nodeId,
-      componentId
-    );
+  showPeerGroupDetails(peerGroupActivityTag: string): void {
+    this.PeerGroupService.showPeerGroupDetails(peerGroupActivityTag);
   }
 }
 

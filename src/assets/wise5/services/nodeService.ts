@@ -8,7 +8,6 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 import { DataService } from '../../../app/services/data.service';
 import { Observable, Subject } from 'rxjs';
-import { PeerGroupDialogComponent } from '../classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component';
 
 @Injectable()
 export class NodeService {
@@ -838,17 +837,6 @@ export class NodeService {
     const subscription = this.DataService.currentNodeChanged$.subscribe(() => {
       this.scrollToComponentAndHighlight(componentId);
       subscription.unsubscribe();
-    });
-  }
-
-  showPeerGroupDetails(periodId: number, nodeId: string, componentId: string): void {
-    this.dialog.open(PeerGroupDialogComponent, {
-      data: {
-        componentId: componentId,
-        nodeId: nodeId,
-        periodId: periodId
-      },
-      panelClass: 'dialog-lg'
     });
   }
 }
