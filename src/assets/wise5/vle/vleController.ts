@@ -333,39 +333,6 @@ class VLEController {
     this.SessionService.mouseMoved();
   }
 
-  hasNewNotifications() {
-    return this.newNotifications.length > 0;
-  }
-
-  hasNewAmbientNotifications() {
-    return this.getNewAmbientNotifications().length > 0;
-  }
-
-  /**
-   * Returns all ambient notifications that have not been dismissed yet
-   */
-  getNewAmbientNotifications() {
-    return this.notifications.filter(function (notification) {
-      let isAmbient = notification.data ? notification.data.isAmbient : false;
-      return notification.timeDismissed == null && isAmbient;
-    });
-  }
-
-  /**
-   * View the most recent ambient notification and allow teacher to input
-   * dismiss code
-   */
-  viewCurrentAmbientNotification(event) {
-    let ambientNotifications = this.getNewAmbientNotifications();
-    if (ambientNotifications.length) {
-      const args = {
-        event: event,
-        notification: ambientNotifications[0]
-      };
-      this.NotificationService.broadcastViewCurrentAmbientNotification(args);
-    }
-  }
-
   pauseScreen() {
     // TODO: i18n
     this.pauseDialog = this.$mdDialog.show({
@@ -384,34 +351,6 @@ class VLEController {
 
   isPreview() {
     return this.ConfigService.isPreview();
-  }
-
-  /**
-   * Check if there are any constraints in the project
-   * @return whether there are any constraints in the project
-   */
-  hasConstraints() {
-    let hasActiveConstraints = false;
-    const activeConstraints = this.ProjectService.activeConstraints;
-    if (activeConstraints != null && activeConstraints.length > 0) {
-      hasActiveConstraints = true;
-    }
-    return hasActiveConstraints;
-  }
-
-  /**
-   * Disable all the constraints
-   */
-  disableConstraints() {
-    if (this.ConfigService.isPreview()) {
-      this.constraintsDisabled = true;
-      this.ProjectService.activeConstraints = [];
-      /*
-       * update the node statuses so that they are re-evaluated now that
-       * all the constraints have been removed
-       */
-      this.StudentDataService.updateNodeStatuses();
-    }
   }
 
   /**

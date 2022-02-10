@@ -14,13 +14,13 @@ import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
-
-import { NotificationsMenuComponent } from './notifications-menu.component';
+import { NotificationsDialogComponent } from './notifications-dialog.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 describe('NotificationsMenuComponent', () => {
-  let component: NotificationsMenuComponent;
+  let component: NotificationsDialogComponent;
   let dismissNotificationSpy: any;
-  let fixture: ComponentFixture<NotificationsMenuComponent>;
+  let fixture: ComponentFixture<NotificationsDialogComponent>;
   const nodeId1 = 'node1';
   let notification1: any;
   let notification2: any;
@@ -33,11 +33,12 @@ describe('NotificationsMenuComponent', () => {
       imports: [
         HttpClientTestingModule,
         MatCardModule,
+        MatDialogModule,
         MatIconModule,
         MatToolbarModule,
         UpgradeModule
       ],
-      declarations: [NotificationsMenuComponent],
+      declarations: [NotificationsDialogComponent],
       providers: [
         AnnotationService,
         ConfigService,
@@ -48,13 +49,17 @@ describe('NotificationsMenuComponent', () => {
         StudentAssetService,
         StudentDataService,
         TagService,
-        UtilService
+        UtilService,
+        {
+          provide: MatDialogRef,
+          useValue: { close: () => {} } 
+        }
       ]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NotificationsMenuComponent);
+    fixture = TestBed.createComponent(NotificationsDialogComponent);
     component = fixture.componentInstance;
     notification1 = createNotification(nodeId1, teacherToStudentType, 'Hello1', null);
     notification2 = createNotification(nodeId1, teacherToStudentType, 'Hello2', null);
