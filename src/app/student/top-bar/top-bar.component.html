@@ -11,7 +11,7 @@
     <h3 fxFlex="4 1 0%" class="title" [title]="projectName">{{projectName}}</h3>
     <span fxFlex></span>
     <div class="constraints">
-      <button mat-flat-button
+      <button mat-stroked-button
           id="toggleConstraints"
           *ngIf="isPreview && !isConstraintsDisabled && hasConstraints()"
           (click)="disableConstraints()"
