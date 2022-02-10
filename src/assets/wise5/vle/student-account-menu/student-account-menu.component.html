@@ -46,9 +46,9 @@
     </div>
   </div>
   <mat-divider class="divider"></mat-divider>
-  <div class="notice-bg-bg controls" fxLayout="row" fxLayoutAlign="end">
+  <div class="notice-bg-bg controls" fxLayout="row">
     <button mat-menu-item class="mat-button mat-primary" (click)="goHome()" i18n>Go Home</button>
-    <span *ngIf="isAuthenticated" fxFlex></span>
+    <span fxFlex></span>
     <button *ngIf="isAuthenticated"
         mat-menu-item
         class="mat-button mat-primary"
