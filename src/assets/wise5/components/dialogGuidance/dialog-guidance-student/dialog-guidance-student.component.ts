@@ -26,7 +26,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./dialog-guidance-student.component.scss']
 })
 export class DialogGuidanceStudentComponent extends ComponentStudent {
-  computerAvatar: any;
+  computerAvatarId: any;
   computerAvatarLabel: string;
   computerAvatarPrompt: string;
   cRaterTimeout: number = 40000;
@@ -86,8 +86,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   initializeComputerAvatar(): void {
     this.computerAvatarPrompt = this.componentContent.computerAvatarPrompt;
     this.computerAvatarLabel = this.componentContent.computerAvatarLabel;
-    this.computerAvatar = this.componentState?.studentData?.computerAvatar;
-    if (this.computerAvatar == null) {
+    this.computerAvatarId = this.componentState?.studentData?.computerAvatarId;
+    if (this.computerAvatarId == null) {
       this.showComputerAvatarSelector();
     } else {
       this.hideComputerAvatarSelector();
@@ -102,8 +102,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.isShowComputerAvatarSelector = false;
   }
 
-  selectComputerAvatar(computerAvatar: any): void {
-    this.computerAvatar = computerAvatar;
+  selectComputerAvatar(computerAvatarId: string): void {
+    this.computerAvatarId = computerAvatarId;
     this.hideComputerAvatarSelector();
     const computerAvatarInitialResponse = this.componentContent.computerAvatarInitialResponse;
     if (computerAvatarInitialResponse != null && computerAvatarInitialResponse != '') {
@@ -215,8 +215,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       responses: this.responses,
       submitCounter: this.submitCounter
     };
-    if (this.computerAvatar != null) {
-      componentState.studentData.computerAvatar = this.computerAvatar;
+    if (this.computerAvatarId != null) {
+      componentState.studentData.computerAvatarId = this.computerAvatarId;
     }
     componentState.componentType = 'DialogGuidance';
     componentState.nodeId = this.nodeId;

@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ComputerAvatar } from '../../common/ComputerAvatar';
+import { ComputerAvatarService } from '../../services/computerAvatarService';
 
 @Component({
   selector: 'computer-avatar-selector',
@@ -15,20 +17,15 @@ export class ComputerAvatarSelectorComponent implements OnInit {
   @Output()
   chooseAvatarEvent = new EventEmitter<string>();
 
-  avatars: any[] = [
-    { id: 'robot', name: 'Robot', image: 'robot.png' },
-    { id: 'monkey', name: 'Monkey', image: 'monkey.jpg' },
-    { id: 'girl', name: 'Girl', image: 'robot.png' },
-    { id: 'boy', name: 'Boy', image: 'monkey.jpg' },
-    { id: 'tiger', name: 'Tiger', image: 'robot.png' },
-    { id: 'koala', name: 'Koala', image: 'monkey.jpg' }
-  ];
+  avatars: ComputerAvatar[];
   avatarSelected: any;
-  avatarsPath: string = '/assets/img/computer-avatars/';
+  avatarsPath: string;
 
-  constructor() {}
+  constructor(private computerAvatarService: ComputerAvatarService) {}
 
   ngOnInit(): void {
+    this.avatars = this.computerAvatarService.getAvatars();
+    this.avatarsPath = this.computerAvatarService.getAvatarsPath();
     if (this.prompt == null) {
       this.prompt =
         'Discuss your answer with a thought partner!\n' +
@@ -49,6 +46,6 @@ export class ComputerAvatarSelectorComponent implements OnInit {
 
   chooseAvatar(): void {
     delete this.avatarSelected.isSelected;
-    this.chooseAvatarEvent.emit(this.avatarSelected);
+    this.chooseAvatarEvent.emit(this.avatarSelected.id);
   }
 }

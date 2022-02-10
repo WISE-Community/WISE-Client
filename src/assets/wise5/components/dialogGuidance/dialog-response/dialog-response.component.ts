@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { DialogResponse } from '../DialogResponse';
 
@@ -9,21 +10,29 @@ import { DialogResponse } from '../DialogResponse';
 })
 export class DialogResponseComponent implements OnInit {
   @Input()
-  computerAvatar: any;
+  computerAvatarId: string;
 
   @Input()
   response: DialogResponse;
 
   avatarColor: string;
-  computerAvatarsPath: string = '/assets/img/computer-avatars/';
+  computerAvatarImage: string;
+  computerAvatarsPath: string;
   isStudent: boolean;
 
-  constructor(protected ConfigService: ConfigService) {}
+  constructor(
+    private computerAvatarService: ComputerAvatarService,
+    private ConfigService: ConfigService
+  ) {}
 
   ngOnInit(): void {
     this.isStudent = this.response.user === 'Student';
     if (this.isStudent) {
       this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.response.workgroupId);
+    }
+    if (this.computerAvatarId != null) {
+      this.computerAvatarsPath = this.computerAvatarService.getAvatarsPath();
+      this.computerAvatarImage = this.computerAvatarService.getImage(this.computerAvatarId);
     }
   }
 }

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComputerAvatarService } from '../../services/computerAvatarService';
 
 import { ComputerAvatarSelectorComponent } from './computer-avatar-selector.component';
 
@@ -8,7 +9,8 @@ describe('ComputerAvatarSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComputerAvatarSelectorComponent]
+      declarations: [ComputerAvatarSelectorComponent],
+      providers: [ComputerAvatarService]
     }).compileComponents();
   });
 

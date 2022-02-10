@@ -75,6 +75,7 @@ import { NotebookNotesComponent } from '../../app/notebook/notebook-notes/notebo
 import { NotebookReportComponent } from '../../app/notebook/notebook-report/notebook-report.component';
 import { NotebookReportAnnotationsComponent } from '../../app/notebook/notebook-report-annotations/notebook-report-annotations.component';
 import EditNotebookItemController from './themes/default/notebook/editNotebookItemController';
+import { ComputerAvatarService } from './services/computerAvatarService';
 
 angular
   .module('common', [
@@ -138,6 +139,7 @@ angular
   .factory('AudioRecorderService', downgradeInjectable(AudioRecorderService))
   .factory('ConfigService', downgradeInjectable(ConfigService))
   .factory('ComponentService', downgradeInjectable(ComponentService))
+  .factory('ComputerAvatarService', downgradeInjectable(ComputerAvatarService))
   .factory('CRaterService', downgradeInjectable(CRaterService))
   .service('HttpInterceptor', HttpInterceptor)
   .service('NodeService', downgradeInjectable(NodeService))

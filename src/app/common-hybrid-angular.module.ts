@@ -71,6 +71,7 @@ import { setUpLocationSync } from '@angular/router/upgrade';
 import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance/dialogGuidanceService';
 import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
+import { ComputerAvatarService } from '../assets/wise5/services/computerAvatarService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -124,6 +125,7 @@ export class EmptyComponent {}
     AudioRecorderService,
     ConceptMapService,
     ComponentService,
+    ComputerAvatarService,
     ConfigService,
     CRaterService,
     DataExportService,

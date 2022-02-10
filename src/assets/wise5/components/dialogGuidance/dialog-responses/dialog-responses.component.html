@@ -1,6 +1,6 @@
 <dialog-response
     *ngFor="let response of responses"
     [response]="response"
-    [computerAvatar]="computerAvatar">
+    [computerAvatarId]="computerAvatarId">
 </dialog-response>
 <dialog-response *ngIf="isWaitingForComputerResponse" [response]="{text: '...'}"></dialog-response>
