@@ -321,6 +321,10 @@
           <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
@@ -331,6 +335,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/announcement/announcement.component.html</context>
           <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <target state="needs-translation">Dismiss</target>
       </trans-unit>
@@ -5094,6 +5102,10 @@
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
           <context context-type="linenumber">86</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
         <target state="translated">ログアウト</target>
       </trans-unit>
       <trans-unit id="17f37e96c7b8059b23c07791dca1bdb3f3f6853f" datatype="html">
@@ -7825,6 +7837,62 @@
           <context context-type="linenumber">302,304</context>
         </context-group>
         <target state="needs-translation"><x id="studentName" equiv-text="this.getNameDisplay(                 targetMember               )"/> is already in a team with <x id="studentNames" equiv-text="teamMatesDisplay"/></target>
+      </trans-unit>
+      <trans-unit id="44edb2ce4b3000caf2e5fb16619886b6429a94bc" datatype="html">
+        <source>WISE Logo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <target state="needs-translation">WISE Logo</target>
+      </trans-unit>
+      <trans-unit id="64307025869f10565870c106fd2bc800278e1bb8" datatype="html">
+        <source>Only Available in Preview Mode</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="needs-translation">Only Available in Preview Mode</target>
+      </trans-unit>
+      <trans-unit id="a0d81d0871e7acd62d27a030e7e8c6bdad31d54d" datatype="html">
+        <source>Turn Off Constraints</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <target state="needs-translation">Turn Off Constraints</target>
+      </trans-unit>
+      <trans-unit id="074eede8c0a1156b21a4efb4d81a56e1c41f591a" datatype="html">
+        <source>Constraints Are Off</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <target state="needs-translation">Constraints Are Off</target>
+      </trans-unit>
+      <trans-unit id="6705491d3c449b391cd7ce4f5837231c7eb98787" datatype="html">
+        <source>View alerts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <target state="needs-translation">View alerts</target>
+      </trans-unit>
+      <trans-unit id="c0961a71d775c905195f97cfd155f9b34052b1c6" datatype="html">
+        <source>Unit percent completed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <target state="needs-translation">Unit percent completed</target>
+      </trans-unit>
+      <trans-unit id="72778a65e8adb61055af9ac6e0f5dc566502ed16" datatype="html">
+        <source>Open Account Menu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <target state="needs-translation">Open Account Menu</target>
       </trans-unit>
       <trans-unit id="e438ba78cbafdb5bcbce0820bfaad995a504f222" datatype="html">
         <source>Display Name</source>
@@ -16959,40 +17027,32 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="9fe218829514884cdd0ca2300573a4e0428c324f" datatype="html">
         <source>Alerts</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <target state="needs-translation">Alerts</target>
       </trans-unit>
       <trans-unit id="eae1bb3f81534953df4c9a2f0e7e24223ec63754" datatype="html">
         <source>Hi there! You currently have no alerts.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <target state="needs-translation">Hi there! You currently have no alerts.</target>
       </trans-unit>
-      <trans-unit id="addf9c8b12b40609cede43bbe1a0f43914bda14e" datatype="html">
-        <source>Visit Step</source>
+      <trans-unit id="89ff62ce83b0b07cc05847d8dd1ce15df94e6e20" datatype="html">
+        <source>View alert</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
+          <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Visit Step</target>
-      </trans-unit>
-      <trans-unit id="3290e723a9af5017b3e5287ee83b7ee151ac0d96" datatype="html">
-        <source>Remove Notification</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <target state="needs-translation">Remove Notification</target>
+        <target state="needs-translation">View alert</target>
       </trans-unit>
       <trans-unit id="b9311730cc705aa91140b247c6e4fb58a10174dd" datatype="html">
         <source>(Team <x id="INTERPOLATION" equiv-text="{{ workgroupId }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <target state="needs-translation">(Team <x id="INTERPOLATION" equiv-text="{{ workgroupId }}"/>)</target>
       </trans-unit>
@@ -17000,15 +17060,15 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Unit Completion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <target state="needs-translation">Unit Completion</target>
       </trans-unit>
-      <trans-unit id="60209e908d2b6e6916bca731bc4399d5da2646c7" datatype="html">
+      <trans-unit id="eb3a473d4253ef87e2c5d0bbe874da4c82bcf666" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ rootNodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ rootNodeStatus.progress.totalItems }}"/> items </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
-          <context context-type="linenumber">14,16</context>
+          <context context-type="linenumber">15,17</context>
         </context-group>
         <target state="needs-translation"> <x id="INTERPOLATION" equiv-text="{{ rootNodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ rootNodeStatus.progress.totalItems }}"/> items </target>
       </trans-unit>
@@ -17016,7 +17076,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Total Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <target state="needs-translation">Total Score</target>
       </trans-unit>
@@ -17024,7 +17084,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source><x id="INTERPOLATION" equiv-text="{{ totalScore }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ maxScore }}"/> points</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ totalScore }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ maxScore }}"/> points</target>
       </trans-unit>
@@ -17035,14 +17095,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">50</context>
         </context-group>
         <target state="needs-translation">Go Home</target>
-      </trans-unit>
-      <trans-unit id="10e82841909e865dc5c051c29af7cc22069233b2" datatype="html">
-        <source> Sign Out </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
-          <context context-type="linenumber">53,54</context>
-        </context-group>
-        <target state="needs-translation"> Sign Out </target>
       </trans-unit>
       <trans-unit id="3cfa8ca4df9d35c6b4a587aec80bda5408324ad9" datatype="html">
         <source>My Files</source>
