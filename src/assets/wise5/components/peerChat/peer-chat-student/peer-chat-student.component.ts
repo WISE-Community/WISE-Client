@@ -5,6 +5,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
+import { PeerGroupService } from '../../../services/peerGroupService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
@@ -29,6 +30,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   peerChatWorkgroupIds: number[] = [];
   peerChatWorkgroupInfos: any = {};
   peerGroupId: number;
+  peerGroupActivityTag: string;
   peerWorkFromAnotherComponent: any = {};
   requestTimeout: number = 10000;
   response: string;
@@ -42,6 +44,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    private peerGroupService: PeerGroupService,
     private PeerChatService: PeerChatService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
@@ -66,6 +69,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.myWorkgroupId = this.ConfigService.getWorkgroupId();
     this.showWorkComponentId = this.componentContent.showWorkComponentId;
     this.showWorkNodeId = this.componentContent.showWorkNodeId;
+    this.peerGroupActivityTag = this.componentContent.peerGroupActivityTag;
     this.requestChatWorkgroups();
     this.registerStudentWorkReceivedListener();
   }
@@ -83,7 +87,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   requestChatWorkgroups(): void {
-    this.PeerChatService.retrievePeerChatWorkgroups(this.nodeId, this.componentId)
+    this.peerGroupService
+      .retrievePeerGroup(this.peerGroupActivityTag)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (peerGroup: any) => {
@@ -99,7 +104,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.isPeerChatWorkgroupsResponseReceived = true;
     this.peerGroupId = peerGroup.id;
     this.setPeerChatWorkgroups(this.getPeerGroupWorkgroupIds(peerGroup));
-    this.getPeerChatComponentStates(peerGroup.id);
+    this.getPeerChatComponentStates(peerGroup);
   }
 
   getPeerGroupWorkgroupIds(peerGroup: PeerGroup): number[] {
@@ -110,8 +115,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.isPeerChatWorkgroupsResponseReceived = true;
   }
 
-  getPeerChatComponentStates(peerGroupId: number): void {
-    this.PeerChatService.retrievePeerChatComponentStatesByPeerGroup(peerGroupId)
+  getPeerChatComponentStates(peerGroup: PeerGroup): void {
+    this.peerGroupService
+      .retrievePeerGroupWork(peerGroup)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (componentStates: any[]) => {

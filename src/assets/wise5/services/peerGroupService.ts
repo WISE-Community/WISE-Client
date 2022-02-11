@@ -35,6 +35,10 @@ export class PeerGroupService {
     return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${peerGroupActivityTag}`);
   }
 
+  retrievePeerGroupWork(peerGroup: PeerGroup): Observable<any> {
+    return this.http.get(`/api/peer-group/${peerGroup.id}/student-work`);
+  }
+
   retrieveStudentWork(
     peerGroup: PeerGroup,
     nodeId: string,

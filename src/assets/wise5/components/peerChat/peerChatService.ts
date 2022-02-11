@@ -33,23 +33,6 @@ export class PeerChatService extends ComponentService {
     return component;
   }
 
-  retrievePeerChatWorkgroups(nodeId: string, componentId: string): Observable<any> {
-    if (this.ConfigService.isPreview()) {
-      this.ConfigService.config.runId = 1;
-    }
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const runId = this.ConfigService.getRunId();
-    const workgroupId = this.ConfigService.getWorkgroupId();
-    return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}`, {
-      headers: headers
-    });
-  }
-
-  retrievePeerChatComponentStatesByPeerGroup(peerGroupId: number): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get(`/api/peer-group/${peerGroupId}/student-work`, { headers: headers });
-  }
-
   retrievePeerChatComponentStates(
     nodeId: string,
     componentId: string,
@@ -64,38 +47,6 @@ export class PeerChatService extends ComponentService {
       `/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}/student-work`,
       { headers: headers }
     );
-  }
-
-  createDummyComponentStates(workgroupIds: number[]): any[] {
-    const componentStates = [];
-    for (const workgroupId of workgroupIds) {
-      componentStates.push(
-        this.createDummyComponentState(
-          workgroupId,
-          'PeerChat',
-          `Hello this is ${workgroupId}`,
-          new Date().getTime()
-        )
-      );
-    }
-    return componentStates;
-  }
-
-  createDummyComponentState(
-    workgroupId: number,
-    componentType: string,
-    response: string,
-    timestamp: number
-  ): any {
-    return {
-      componentType: componentType,
-      studentData: {
-        attachments: [],
-        response: response
-      },
-      serverSaveTime: timestamp,
-      workgroupId: workgroupId
-    };
   }
 
   convertComponentStateToPeerChatMessage(componentState: any): PeerChatMessage {
