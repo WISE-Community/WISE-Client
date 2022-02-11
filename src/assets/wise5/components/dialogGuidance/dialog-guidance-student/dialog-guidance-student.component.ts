@@ -108,7 +108,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.computerAvatarId = computerAvatarId;
     this.hideComputerAvatarSelector();
     const computerAvatarInitialResponse = this.componentContent.computerAvatarInitialResponse;
-    if (computerAvatarInitialResponse != null && computerAvatarInitialResponse != '') {
+    if (computerAvatarInitialResponse != null && computerAvatarInitialResponse !== '') {
       this.addDialogResponse(
         new ComputerDialogResponse(computerAvatarInitialResponse, [], new Date().getTime())
       );
