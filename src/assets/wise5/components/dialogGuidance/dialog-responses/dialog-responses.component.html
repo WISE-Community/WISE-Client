@@ -3,4 +3,8 @@
     [response]="response"
     [computerAvatarId]="computerAvatarId">
 </dialog-response>
-<dialog-response *ngIf="isWaitingForComputerResponse" [response]="{text: '...'}"></dialog-response>
+<dialog-response
+    *ngIf="isWaitingForComputerResponse"
+    [response]="{text: '...'}"
+    [computerAvatarId]="computerAvatarId">
+</dialog-response>
