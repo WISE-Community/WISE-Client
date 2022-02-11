@@ -9,6 +9,9 @@ import { ComputerAvatarService } from '../../services/computerAvatarService';
 })
 export class ComputerAvatarSelectorComponent implements OnInit {
   @Input()
+  avatarIds: any;
+
+  @Input()
   label: string;
 
   @Input()
@@ -24,7 +27,7 @@ export class ComputerAvatarSelectorComponent implements OnInit {
   constructor(private computerAvatarService: ComputerAvatarService) {}
 
   ngOnInit(): void {
-    this.avatars = this.computerAvatarService.getAvatars();
+    this.avatars = this.filterAvatars(this.computerAvatarService.getAvatars(), this.avatarIds);
     this.avatarsPath = this.computerAvatarService.getAvatarsPath();
     if (this.prompt == null) {
       this.prompt =
@@ -36,6 +39,16 @@ export class ComputerAvatarSelectorComponent implements OnInit {
     if (this.label == null) {
       this.label = 'Thought Partner';
     }
+  }
+
+  filterAvatars(allAvatars: ComputerAvatar[], avatarIdsToUse: any): ComputerAvatar[] {
+    const avatars = [];
+    for (const avatar of allAvatars) {
+      if (avatarIdsToUse[avatar.id] === true) {
+        avatars.push(avatar);
+      }
+    }
+    return avatars;
   }
 
   highlightAvatar(avatar: any): void {

@@ -12,7 +12,7 @@
       (maxSubmitCountChange)="componentChanged()"></edit-component-max-submit>
   <mat-checkbox color="primary"
       [(ngModel)]="authoringComponentContent.isComputerAvatarEnabled"
-      (ngModelChange)="componentChanged()"
+      (ngModelChange)="enableComputerAvatarClicked()"
       i18n>
     Enable Computer Avatar
   </mat-checkbox>
@@ -44,6 +44,48 @@
           placeholder="Hi there, what do you think about [insert topic here]"
           i18n-placeholder />
     </mat-form-field>
+    <div fxLayout="row wrap"
+        fxLayoutAlign="start center"
+        fxLayoutGap="20px"
+        class="computer-avatar-select-all-buttons-div">
+      <button mat-raised-button
+          color="primary"
+          class="computer-avatar-select-all-button"
+          (click)="selectAllComputerAvatars()"
+          matTooltip="Select All Computer Avatars"
+          matTooltipPosition="above"
+          i18n-matTooltip
+          i18n>
+        Select All
+      </button>
+      <button mat-raised-button
+          color="primary"
+          class="computer-avatar-select-all-button"
+          (click)="unselectAllComputerAvatars()"
+          matTooltip="Unselect All Computer Avatars"
+          matTooltipPosition="above"
+          i18n-matTooltip
+          i18n>
+        Unselect All
+      </button>
+      <div *ngIf="numSelectedComputerAvatars === 0" class="red" i18n>
+        Error: You must select at least one computer avatar
+      </div>
+    </div>
+    <div fxLayout="row wrap" class="computer-avatars-div">
+      <div *ngFor="let computerAvatar of allComputerAvatars"
+          fxLayout="column" fxLayoutAlign="center center"
+          class="computer-avatar-div"
+          [ngClass]="{ 'avatar-div-selected': computerAvatar.isSelected }"
+          (click)="toggleSelectComputerAvatar(computerAvatar)">
+        <img [src]="avatarsPath + computerAvatar.image" class="computer-avatar-image" />
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+          <span>{{ computerAvatar.name }}</span>
+          <mat-icon *ngIf="computerAvatar.isSelected" class="green">check_circle</mat-icon>
+          <mat-icon *ngIf="!computerAvatar.isSelected" class="red">cancel</mat-icon>
+        </div>
+      </div>
+    </div>
   </div>
   <edit-dialog-guidance-feedback-rules [feedbackRules]="authoringComponentContent.feedbackRules">
   </edit-dialog-guidance-feedback-rules>

@@ -29,6 +29,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   computerAvatarId: any;
   computerAvatarLabel: string;
   computerAvatarPrompt: string;
+  computerAvatarIds: any;
   cRaterTimeout: number = 40000;
   feedbackRuleEvaluator: DialogGuidanceFeedbackRuleEvaluator;
   isComputerAvatarEnabled: boolean = false;
@@ -87,6 +88,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.computerAvatarPrompt = this.componentContent.computerAvatarPrompt;
     this.computerAvatarLabel = this.componentContent.computerAvatarLabel;
     this.computerAvatarId = this.componentState?.studentData?.computerAvatarId;
+    this.computerAvatarIds = this.componentContent.computerAvatarIds;
     if (this.computerAvatarId == null) {
       this.showComputerAvatarSelector();
     } else {

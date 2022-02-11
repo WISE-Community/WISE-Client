@@ -1,9 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComputerAvatar } from '../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
-
 import { ComputerAvatarSelectorComponent } from './computer-avatar-selector.component';
 
 describe('ComputerAvatarSelectorComponent', () => {
+  const avatars: ComputerAvatar[] = [
+    new ComputerAvatar('robot', 'Robot', 'robot.png'),
+    new ComputerAvatar('monkey', 'Monkey', 'monkey.png')
+  ];
   let component: ComputerAvatarSelectorComponent;
   let fixture: ComponentFixture<ComputerAvatarSelectorComponent>;
 
@@ -16,7 +20,9 @@ describe('ComputerAvatarSelectorComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComputerAvatarSelectorComponent);
+    spyOn(TestBed.inject(ComputerAvatarService), 'getAvatars').and.returnValue(avatars);
     component = fixture.componentInstance;
+    component.avatarIds = { robot: true };
     fixture.detectChanges();
   });
 

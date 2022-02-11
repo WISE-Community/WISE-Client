@@ -13,6 +13,7 @@ import { Observable, Subject } from 'rxjs';
 import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
@@ -55,6 +56,7 @@ describe('DialogGuidanceAuthoringComponent', () => {
         EditDialogGuidanceFeedbackRulesComponent
       ],
       providers: [
+        ComputerAvatarService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
         ProjectAssetService,
