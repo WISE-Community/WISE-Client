@@ -139,6 +139,57 @@ describe('DialogGuidanceStudentComponent', () => {
     expect(broadcastComponentSaveTriggeredSpy).toHaveBeenCalled();
     expect(component.submitCounter).toEqual(0);
   });
+
+  it('should initialize computer avatar', () => {
+    const prompt = 'Choose a thought buddy.';
+    const label = 'Thought Buddy';
+    const computerAvatarIds = {
+      girl: true,
+      robot: true
+    };
+    component.componentContent.computerAvatarPrompt = prompt;
+    component.componentContent.computerAvatarLabel = label;
+    component.componentContent.computerAvatarIds = computerAvatarIds;
+    component.initializeComputerAvatar();
+    expect(component.computerAvatarPrompt).toEqual(prompt);
+    expect(component.computerAvatarLabel).toEqual(label);
+    expect(component.computerAvatarIds).toEqual(computerAvatarIds);
+  });
+
+  it(`should initialize computer avatar when the student has not previously chosen a computer
+      avatar`, () => {
+    component.componentState = { studentData: {} };
+    component.initializeComputerAvatar();
+    expect(component.isShowComputerAvatarSelector).toEqual(true);
+  });
+
+  it(`should initialize computer avatar when the student has previously chosen a computer
+      avatar`, () => {
+    component.componentState = {
+      studentData: {
+        computerAvatarId: 'robot'
+      }
+    };
+    component.initializeComputerAvatar();
+    expect(component.isShowComputerAvatarSelector).toEqual(false);
+  });
+
+  it('should select computer avatar', () => {
+    const computerAvatarId = 'robot';
+    component.selectComputerAvatar(computerAvatarId);
+    expect(component.computerAvatarId).toEqual(computerAvatarId);
+    expect(component.isShowComputerAvatarSelector).toEqual(false);
+  });
+
+  it('should select computer avatar when there is a computer avatar initial response', () => {
+    const text = 'Hi there, who lives in a pineapple under sea?';
+    component.componentContent.computerAvatarInitialResponse = text;
+    const computerAvatarId = 'robot';
+    expect(component.responses.length).toEqual(0);
+    component.selectComputerAvatar(computerAvatarId);
+    expect(component.responses.length).toEqual(1);
+    expect(component.responses[0].text).toEqual(text);
+  });
 });
 
 function simulateSubmit(component: DialogGuidanceStudentComponent): void {
