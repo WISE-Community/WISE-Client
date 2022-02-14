@@ -18,6 +18,7 @@ import { ComponentService } from '../../componentService';
 })
 export class ShowMyWorkStudentComponent extends ComponentStudent {
   showWorkComponentContent: any;
+  showWorkComponentId: string;
   showWorkNodeId: string;
   studentWork: any;
 
@@ -55,6 +56,7 @@ export class ShowMyWorkStudentComponent extends ComponentStudent {
     this.showWorkComponentContent = this.projectService.injectAssetPaths(
       this.showWorkComponentContent
     );
+    this.showWorkComponentId = this.componentContent.showWorkComponentId;
     this.showWorkNodeId = this.componentContent.showWorkNodeId;
     this.studentWork = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
       this.componentContent.showWorkNodeId,

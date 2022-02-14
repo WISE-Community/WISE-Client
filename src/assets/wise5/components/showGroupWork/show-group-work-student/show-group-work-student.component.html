@@ -18,7 +18,7 @@
         </span>
         <show-work-student *ngIf="workgroupIdToWork.get(member.id) != null"
             [studentWork]="workgroupIdToWork.get(member.id)"
-            [componentContent]="showWorkComponentContent"
+            [componentId]="showWorkComponentId"
             [nodeId]="showWorkNodeId">
         </show-work-student>
       </mat-card-content>

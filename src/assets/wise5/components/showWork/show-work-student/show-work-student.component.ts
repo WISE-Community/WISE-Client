@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ShowWorkStudentComponent implements OnInit {
   @Input() componentContent: any;
+  @Input() componentId: string;
   @Input() nodeId: string;
   @Input() studentWork: any;
 
