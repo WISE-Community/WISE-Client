@@ -99,7 +99,6 @@ describe('ShowGroupWorkStudentComponent', () => {
     spyOn(TestBed.inject(ProjectService), 'injectAssetPaths').and.returnValue({
       type: 'OpenResponse'
     });
-    component.studentWorkFromGroupMembers = [];
     component.peerGroup = new PeerGroup();
     component.peerGroup.members = [
       { id: 1, periodId: 1 },
@@ -111,7 +110,7 @@ describe('ShowGroupWorkStudentComponent', () => {
     fixture.detectChanges();
   });
 
-  setStudentWork();
+  setStudentWorkFromGroupMembers();
   setLayout();
   setWidths();
 });
@@ -122,20 +121,11 @@ function createComponentState(workgroupId: number): any {
   };
 }
 
-function setStudentWork() {
-  describe('setStudentWork', () => {
-    it('should set student work from group members including my work', () => {
+function setStudentWorkFromGroupMembers() {
+  describe('setStudentWorkFromGroupMembers', () => {
+    it('should add entry to workgroupIdToWork for each student work', () => {
       component.setStudentWorkFromGroupMembers(studentWork);
-      expect(component.studentWorkFromGroupMembers.length).toEqual(2);
-      expect(Object.keys(component.workgroupInfos).length).toEqual(3);
-    });
-
-    it('should set student work from group members not including my work', () => {
-      component.componentContent.isShowMyWork = false;
-      spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
-      component.setStudentWorkFromGroupMembers(studentWork);
-      expect(component.studentWorkFromGroupMembers.length).toEqual(1);
-      expect(Object.keys(component.workgroupInfos).length).toEqual(3);
+      expect(component.workgroupIdToWork.size).toEqual(2);
     });
   });
 }

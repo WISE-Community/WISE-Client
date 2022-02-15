@@ -24,7 +24,6 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
   peerGroup: PeerGroup = new PeerGroup();
   showWorkComponentContent: any;
   showWorkNodeId: string;
-  studentWorkFromGroupMembers: any[];
   widthLg: number = 100;
   widthMd: number = 100;
   workgroupIdToWork = new Map();
@@ -60,8 +59,10 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
     super.ngOnInit();
     this.peerGroupService
       .retrievePeerGroup(this.componentContent.peerGroupActivityTag)
-      .subscribe((peerGroup) => {
-        this.peerGroup = peerGroup;
+      .subscribe((peerGroup: PeerGroup) => {
+        this.peerGroup = this.componentContent.isShowMyWork
+          ? peerGroup
+          : this.removeMyWorkgroup(peerGroup);
         this.setWorkgroupInfos();
         this.peerGroupService
           .retrieveStudentWork(
@@ -87,19 +88,17 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
   }
 
   setStudentWorkFromGroupMembers(studentWorkFromGroupMembers: any[]): void {
-    this.studentWorkFromGroupMembers = this.componentContent.isShowMyWork
-      ? studentWorkFromGroupMembers
-      : this.removeMyWork(studentWorkFromGroupMembers);
-    this.studentWorkFromGroupMembers.forEach((work) => {
+    studentWorkFromGroupMembers.forEach((work) => {
       this.workgroupIdToWork.set(work.workgroupId, work);
     });
   }
 
-  private removeMyWork(studentWorkList: any[]): any[] {
+  private removeMyWorkgroup(peerGroup: PeerGroup): PeerGroup {
     const myWorkgroupId = this.configService.getWorkgroupId();
-    return studentWorkList.filter((studentWork) => {
-      return studentWork.workgroupId !== myWorkgroupId;
+    peerGroup.members = peerGroup.members.filter((workgroup) => {
+      return workgroup.id !== myWorkgroupId;
     });
+    return peerGroup;
   }
 
   setWorkgroupInfos(): void {
