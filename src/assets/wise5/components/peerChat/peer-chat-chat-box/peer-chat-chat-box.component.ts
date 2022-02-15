@@ -22,28 +22,5 @@ export class PeerChatChatBoxComponent implements OnInit {
   @Output('onSubmit')
   submit: EventEmitter<string> = new EventEmitter<string>();
 
-  isSubmitEnabled: boolean = false;
-  messageText: string;
-
-  constructor() {}
-
   ngOnInit(): void {}
-
-  responseChanged(): void {
-    this.isSubmitEnabled = this.messageText.length > 0;
-  }
-
-  keyPressed(event: any): void {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      if (this.isSubmitEnabled) {
-        this.submitResponse();
-      }
-    }
-  }
-
-  submitResponse(): void {
-    this.submit.emit(this.messageText);
-    this.messageText = '';
-  }
 }

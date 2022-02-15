@@ -3,23 +3,5 @@
       [peerChatMessages]="messages"
       [myWorkgroupId]="myWorkgroupId"
       [workgroupInfos]="workgroupInfos"></peer-chat-messages>
-  <div *ngIf="isEnabled" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-    <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
-      <textarea matInput
-          cdkTextareaAutosize
-          placeholder="Add response..."
-          i18n-placeholder
-          [(ngModel)]="messageText"
-          (ngModelChange)="responseChanged()"
-          (keypress)="keyPressed($event)">
-      </textarea>
-    </mat-form-field>
-    <button mat-flat-button
-        color="primary" 
-        (click)="submitResponse()"
-        [disabled]="!isSubmitEnabled"
-        i18n>
-      Send
-    </button>
-  </div>
+  <peer-chat-message-input *ngIf="isEnabled" (onSubmit)="submit.emit($event)"></peer-chat-message-input>
 </mat-card>
