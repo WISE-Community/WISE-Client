@@ -5,7 +5,8 @@
       [fxFlex.gt-sm]="widthMd"
       [fxFlex.gt-md]="widthLg"
       fxLayout="column">
-    <mat-card class="mat-elevation-z0 notice-bg-bg" fxFlex="100" fxLayout="column">
+    <mat-card *ngIf="workgroupIdToWork.get(member.id) != null"
+        class="mat-elevation-z0 notice-bg-bg" fxFlex="100" fxLayout="column">
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
         <mat-icon class="mat-30" [ngStyle]="{'color': workgroupInfos[member.id].avatarColor}">
           account_circle
@@ -16,7 +17,7 @@
         <span class="text-secondary" *ngIf="workgroupIdToWork.get(member.id) == null" i18n>
           (Waiting for response...)
         </span>
-        <show-work-student *ngIf="workgroupIdToWork.get(member.id) != null"
+        <show-work-student
             [studentWork]="workgroupIdToWork.get(member.id)"
             [componentContent]="showWorkComponentContent"
             [nodeId]="showWorkNodeId">
