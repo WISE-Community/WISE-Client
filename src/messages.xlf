@@ -13630,6 +13630,10 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">10,11</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
           <context context-type="linenumber">55,56</context>
         </context-group>
@@ -13639,6 +13643,10 @@ Warning: This will delete all existing choices and buckets in this component.</s
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
           <context context-type="linenumber">15,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
+          <context context-type="linenumber">46,47</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.component.html</context>
@@ -13777,25 +13785,11 @@ Warning: This will delete all existing choices in this component.</source>
           <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="f80d8048e1a73a4f0c35681cc5f8a250754eaf4b" datatype="html">
+      <trans-unit id="06ce7d94965efa6522f9a9615a9bdc6c163f64b3" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
-          <context context-type="linenumber">38,40</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="00a48b9fab48a5ccc0ebf0a2793495ee1cc9f968" datatype="html">
-        <source> Correct </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
-          <context context-type="linenumber">44,45</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="49a3371af0eb58f02e541105eb395340048527ec" datatype="html">
-        <source> Incorrect </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component.html</context>
-          <context context-type="linenumber">49,50</context>
+          <context context-type="linenumber">35,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="15a55678173547662c25708af440a302696f5a0c" datatype="html">
@@ -14675,6 +14669,10 @@ If this problem continues, let your teacher know and move on to the next activit
       </trans-unit>
       <trans-unit id="375ead964bf5b0ae938bb0b600db793ac0d32683" datatype="html">
         <source> This Peer Chat activity is not yet available. Please check back later or wait for a notification to return. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-show-work/peer-chat-show-work.component.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>
           <context context-type="linenumber">2,3</context>

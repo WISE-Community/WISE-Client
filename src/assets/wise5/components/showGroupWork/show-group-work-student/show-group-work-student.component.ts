@@ -23,6 +23,7 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
   narrowComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];
   peerGroup: PeerGroup = new PeerGroup();
   showWorkComponentContent: any;
+  showWorkComponentId: string;
   showWorkNodeId: string;
   studentWorkFromGroupMembers: any[];
   widthLg: number = 100;
@@ -84,6 +85,7 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
       this.showWorkComponentContent
     );
     this.showWorkNodeId = this.componentContent.showWorkNodeId;
+    this.showWorkComponentId = this.componentContent.showWorkComponentId;
   }
 
   setStudentWorkFromGroupMembers(studentWorkFromGroupMembers: any[]): void {

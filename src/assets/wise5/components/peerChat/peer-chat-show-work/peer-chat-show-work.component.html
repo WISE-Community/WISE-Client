@@ -15,3 +15,7 @@
     </div>
   </div>
 </ng-container>
+<div *ngIf="!isPeerChatWorkgroupsAvailable" class="notice mat-body-2" i18n>
+  This Peer Chat activity is not yet available. Please check back later or wait for a notification to return.
+  <!-- TODO: Show different message when student has not completed required previous component(s) -->
+</div>
