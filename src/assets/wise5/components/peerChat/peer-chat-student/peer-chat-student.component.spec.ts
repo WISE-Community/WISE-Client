@@ -7,6 +7,7 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
+import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentAssetService } from '../../../services/studentAssetService';
@@ -63,6 +64,7 @@ describe('PeerChatStudentComponent', () => {
         { provide: NotebookService, useClass: MockService },
         NotificationService,
         PeerChatService,
+        PeerGroupService,
         ProjectService,
         SessionService,
         StudentAssetService,
