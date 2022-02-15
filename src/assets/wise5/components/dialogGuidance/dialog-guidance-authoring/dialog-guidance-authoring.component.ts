@@ -52,12 +52,15 @@ export class DialogGuidanceAuthoringComponent extends ComponentAuthoring {
         this.selectAllComputerAvatars();
       }
       this.populateAndUpdateNumSelectedComputerAvatars();
+    } else {
+      this.componentChanged();
     }
   }
 
   populateAndUpdateNumSelectedComputerAvatars(): void {
     this.populateSelectedComputerAvatars();
     this.updateNumSelectedComputerAvatars();
+    this.componentChanged();
   }
 
   updateNumSelectedComputerAvatars(): void {
