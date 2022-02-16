@@ -1,20 +1,32 @@
-<div class="prompt-div">{{ prompt }}</div>
-<hr>
-<div i18n>Choose Your {{ label }}:</div>
-<div fxLayout="row wrap">
-  <div *ngFor="let avatar of avatars"
-      fxLayout="column" fxLayoutAlign="center center"
-      (click)="highlightAvatar(avatar)"
-      class="avatar-div"
-      [ngClass]="{ 'avatar-div-selected': avatar.isSelected }">
-    <img [src]="avatarsPath + avatar.image" class="avatar-image" />
-    <span>{{ avatar.name }}</span>
-  </div>
-</div>
-<button mat-raised-button
-    color="primary"
-    [disabled]="avatarSelected == null"
-    (click)="chooseAvatar()"
-    i18n>
-  Continue
-</button>
+<mat-card class="mat-elevation-z2">
+  <mat-card-content>
+    <ng-container *ngIf="prompt">
+      <div class="mat-body-1" [innerHtml]="prompt"></div>
+      <mat-divider></mat-divider>
+    </ng-container>
+    <div class="mat-body-2 accent" i18n>Choose Your {{ label }}:</div>
+    <mat-button-toggle-group [(ngModel)]="avatarSelected"
+        fxLayout="row wrap"
+        aria-label="Selected Avatar"
+        i18n-aria-label>
+      <ng-container *ngFor="let avatar of avatars">
+        <mat-button-toggle [value]="avatar"
+            (click)="highlightAvatar(avatar)"
+            aria-label="{{ avatar.name }}"
+            i18n-aria-label>
+          <img [src]="avatarsPath + avatar.image" alt="{{ avatar.name }}" class="avatar-image" />
+          <div class="name"><b>{{ avatar.name }}</b></div>
+        </mat-button-toggle>
+      </ng-container>
+    </mat-button-toggle-group>
+  </mat-card-content>
+  <mat-card-actions fxLayoutAlign="end">
+    <button mat-flat-button
+        color="primary"
+        [disabled]="avatarSelected == null"
+        (click)="chooseAvatar()"
+        i18n>
+      Continue
+    </button>
+  </mat-card-actions>
+</mat-card>

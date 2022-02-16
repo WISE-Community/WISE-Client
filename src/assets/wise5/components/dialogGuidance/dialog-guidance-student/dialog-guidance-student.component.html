@@ -1,40 +1,37 @@
-<div *ngIf="isShowComputerAvatarSelector">
-  <computer-avatar-selector
-      [label]="computerAvatarLabel"
-      [prompt]="computerAvatarPrompt"
-      [avatarIds]="computerAvatarIds"
-      (chooseAvatarEvent)="selectComputerAvatar($event)">
-  </computer-avatar-selector>
-</div>
-<div *ngIf="!isShowComputerAvatarSelector">
-  <mat-card class="mat-elevation-z2">
-    <component-header [componentContent]="componentContent"></component-header>
-    <dialog-responses
-        [responses]="responses"
-        [isWaitingForComputerResponse]="isWaitingForComputerResponse"
-        [computerAvatarId]="computerAvatarId">
-    </dialog-responses>
-    <div *ngIf="studentCanRespond"
-        class="add-response"
-        fxLayout="row"
-        fxLayoutAlign="start center"
-        fxLayoutGap="8px">
-      <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
-        <textarea matInput
-            cdkTextareaAutosize
-            placeholder="Add response..."
-            i18n-placeholder
-            [(ngModel)]="studentResponse"
-            (ngModelChange)="studentResponseChanged()"
-            [disabled]="isDisabled"></textarea>
-      </mat-form-field>
-      <button mat-flat-button
-          color="primary"
-          (click)="submitStudentResponse()"
-          [disabled]="!isSubmitEnabled"
-          i18n>
-        Send
-      </button>
-    </div>
-  </mat-card>
-</div>
+<computer-avatar-selector
+    *ngIf="isShowComputerAvatarSelector"
+    [label]="computerAvatarLabel"
+    [prompt]="computerAvatarPrompt"
+    [avatarIds]="computerAvatarIds"
+    (chooseAvatarEvent)="selectComputerAvatar($event)">
+</computer-avatar-selector>
+<mat-card *ngIf="!isShowComputerAvatarSelector" class="mat-elevation-z2">
+  <component-header [componentContent]="componentContent"></component-header>
+  <dialog-responses
+      [responses]="responses"
+      [isWaitingForComputerResponse]="isWaitingForComputerResponse"
+      [computerAvatarId]="computerAvatarId">
+  </dialog-responses>
+  <div *ngIf="studentCanRespond"
+      class="add-response"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="8px">
+    <mat-form-field fxFlex class="form-field-no-label form-field-no-hint" appearance="fill">
+      <textarea matInput
+          cdkTextareaAutosize
+          placeholder="Add response..."
+          i18n-placeholder
+          [(ngModel)]="studentResponse"
+          (ngModelChange)="studentResponseChanged()"
+          [disabled]="isDisabled"></textarea>
+    </mat-form-field>
+    <button mat-flat-button
+        color="primary"
+        (click)="submitStudentResponse()"
+        [disabled]="!isSubmitEnabled"
+        i18n>
+      Send
+    </button>
+  </div>
+</mat-card>

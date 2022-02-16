@@ -31,4 +31,13 @@ export class ComputerAvatarService {
     }
     return '';
   }
+
+  getName(id: string): string {
+    for (const avatar of this.avatars) {
+      if (avatar.id === id) {
+        return avatar.name;
+      }
+    }
+    return '';
+  }
 }

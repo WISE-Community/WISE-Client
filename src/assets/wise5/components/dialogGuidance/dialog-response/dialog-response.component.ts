@@ -18,6 +18,7 @@ export class DialogResponseComponent implements OnInit {
   avatarColor: string;
   computerAvatarImage: string;
   computerAvatarsPath: string;
+  displayNames: string;
   isStudent: boolean;
 
   constructor(
@@ -29,6 +30,10 @@ export class DialogResponseComponent implements OnInit {
     this.isStudent = this.response.user === 'Student';
     if (this.isStudent) {
       this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.response.workgroupId);
+      const firstNames = this.ConfigService.getStudentFirstNamesByWorkgroupId(this.response.workgroupId);
+      this.displayNames = firstNames.join(', ');
+    } else {
+      this.displayNames = this.computerAvatarService.getName(this.computerAvatarId);
     }
     if (this.computerAvatarId != null) {
       this.computerAvatarsPath = this.computerAvatarService.getAvatarsPath();

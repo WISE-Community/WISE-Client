@@ -1,13 +1,13 @@
 <div fxLayoutAlign="{{isStudent ? 'start' : 'end'}} start" fxLayoutGap="4px">
   <ng-container *ngIf="isStudent">
-    <mat-icon class="mat-30"
+    <mat-icon class="mat-36"
         [ngStyle]="{'color': avatarColor}"
         aria-label="Student response"
         i18n-aria-label>account_circle</mat-icon>
   </ng-container>
   <ng-container *ngIf="!isStudent">
     <ng-container *ngIf="computerAvatarId == null">
-      <mat-icon class="mat-30"
+      <mat-icon class="mat-36"
           color="accent"
           aria-label="Automated guidance response"
           i18n-aria-label
@@ -15,7 +15,7 @@
     </ng-container>
     <ng-container *ngIf="computerAvatarId != null">
       <img [src]="computerAvatarsPath + computerAvatarImage"
-          class="computer-avatar-image"
+          class="computer-avatar"
           aria-label="Automated guidance response"
           i18n-aria-label
           fxFlexOrder="2" />
@@ -23,7 +23,8 @@
   </ng-container>
   <div fxFlex fxLayoutAlign="{{isStudent ? 'start' : 'end'}}">
     <div class="response-text" [class]="{'notice-bg-bg': !isStudent, 'selected-bg-bg': isStudent}">
-      {{response.text}}
+      <div class="mat-small secondary-text poster">{{ displayNames }}</div>
+      <div [innerHtml]="response.text"></div>
     </div>
   </div>
 </div>

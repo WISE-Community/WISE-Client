@@ -54,7 +54,6 @@ export class ComputerAvatarSelectorComponent implements OnInit {
   highlightAvatar(avatar: any): void {
     this.avatars.forEach((avatar) => delete avatar.isSelected);
     avatar.isSelected = true;
-    this.avatarSelected = avatar;
   }
 
   chooseAvatar(): void {
