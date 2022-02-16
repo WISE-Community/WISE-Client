@@ -1,0 +1,101 @@
+<mat-toolbar style="background-color: {{ color }};">
+  <h2 class="header-text-color">{{ title }}</h2>
+</mat-toolbar>
+<mat-dialog-content>
+  <div class="md-dialog-content view-notebook-item__content">
+    <mat-form-field
+        class="note-form-field md-block md-input-has-placeholder notebook-item__text-input">
+      <mat-label *ngIf="item.content.text === ''" i18n>Note text</mat-label>
+      <textarea matInput
+        class="note-textarea"
+        [(ngModel)]="item.content.text"
+        (ngModelChange)="update()"
+        [disabled]="!isEditMode || !isEditTextEnabled"
+        cdkTextareaAutosize>
+      </textarea>
+    </mat-form-field>
+    <div class="notebook-item__attachment" *ngFor="let attachment of item.content.attachments">
+      <img [src]="attachment.iconURL" class="notebook-item__attachment__content" />
+      <button mat-mini-fab
+          color="white"
+          class="notebook-item__attachment__delete"
+          fxLayoutAlign="center center"
+          (click)='removeAttachment(attachment)'
+          [disabled]="!isEditMode"
+          title="Remove File"
+          i18n-title>
+        <mat-icon class="text-secondary">delete</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="isEditMode && showUpload"
+        class="drop-box"
+        fxLayoutAlign="center center"
+        (fileDropped)="attachStudentAssetToNote($event[0])"
+        dragAndDrop>
+      <input
+        type="file"
+        (change)="attachStudentAssetToNote($event.target.files[0])"
+        #fileDropRef
+        class="file-input" />
+      <mat-icon>image</mat-icon> <span i18n>Drop image or file here or click to upload!</span>
+    </div>
+    <div class="notebook-item__info md-caption"
+        fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon>place</mat-icon>
+      <wise-link [type]="'link'"
+          [nodeId]="getItemNodeId()"
+          [linkText]="getItemNodeLink()"
+          [linkClass]="'md-caption'">
+      </wise-link>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="start center" *ngIf="isEditMode">
+  <div>
+    <mat-checkbox class="primary"
+       *ngIf="canShareWithClass()"
+       [checked]="isSharedWithClass()"
+       (click)="toggleMakeNotePublic()"
+       aria-label="Share"
+       i18n-aria-label
+       i18n>
+      Share with Class
+    </mat-checkbox>
+  </div>
+  <span fxFlex></span>
+  <div>
+    <button mat-button
+        class="primary"
+        aria-label="Cancel"
+        (click)="cancel()"
+        i18n>
+      Cancel
+    </button>
+    <button mat-button
+        class="primary"
+        aria-label="Save"
+        (click)="save()"
+        [disabled]="!saveEnabled"
+        i18n>
+      Save
+    </button>
+  </div>
+</mat-dialog-actions>
+<mat-dialog-actions *ngIf="!isEditMode" fxLayout="row" fxLayoutAlign="end center">
+  <div>
+    <button class="primary"
+      *ngIf="canCopyPublicNotebookItem()"
+      (click)="copyPublicNotebookItem($event)"
+      aria-label="Copy"
+      i18n-aria-label>
+    <mat-icon class="primary">content_copy</mat-icon>
+    <span i18n>Copy to My Notes</span>
+    </button>
+  </div>
+  <span fxFlex></span>
+  <div>
+    <button mat-button class="primary" aria-label="Close" (click)="close()" i18n>
+      Close
+    </button>
+  </div>
+</mat-dialog-actions>

@@ -41,6 +41,7 @@ import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 import { TopBarModule } from './student/top-bar/top-bar.module';
 import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
+import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.module';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/stud
     DialogGuidanceStudentModule,
     DiscussionStudentModule,
     DrawStudentModule,
+    EditNotebookItemDialogModule,
     EmbeddedStudentModule,
     GraphStudentModule,
     HighchartsChartModule,

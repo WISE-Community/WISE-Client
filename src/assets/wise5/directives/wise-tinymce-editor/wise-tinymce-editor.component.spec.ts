@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../services/annotationService';
@@ -20,7 +21,7 @@ describe('WiseTinymceEditorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [WiseTinymceEditorComponent],
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
       providers: [
         AnnotationService,
         ConfigService,
