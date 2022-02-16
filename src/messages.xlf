@@ -7294,6 +7294,13 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="26599a3f0d31f31c0a993b352609d6f10af5ccdf" datatype="html">
+        <source>Visit the WISE Community</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/discourse-recent-activity/discourse-recent-activity.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4c49a9bb7a99a9da256c6e678cbb49baa70e268a" datatype="html">
         <source>Edit Classroom Unit</source>
         <context-group purpose="location">
@@ -7755,11 +7762,25 @@
           <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4954fe49190be1ec2fbfbc10aae294701a75bd55" datatype="html">
+        <source>Copy link</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="7bbddc45d6222dca137dc142330ab84c2d959aa2" datatype="html">
         <source>Students with WISE accounts can also select <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Add Unit+<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and type the Access Code:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
           <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8ba9f54a801ef6833fd2986db3d697543e8b13c9" datatype="html">
+        <source>Copy Access Code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="209863274ddac11c65a5735ed1d1e2d869f665b2" datatype="html">
@@ -9337,6 +9358,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
           <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="33d01a75af7af3e0d614e1e916fa8ad2d8fc21c6" datatype="html">
+        <source>Select to add student to new team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c9edeb217965a55b5e8120e380b70bda6dcd8c69" datatype="html">
@@ -11545,14 +11573,14 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Add response...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a93bfb3e1753bcd8f4eafa16a3c77f0b15826372" datatype="html">
+      <trans-unit id="427e92e019c34109656b0e1fc9576bfb833934d9" datatype="html">
         <source> Send </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">36,37</context>
+          <context context-type="linenumber">34,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c80dd9bfb0bd7a7ce89ef1140e6f35211ab711f0" datatype="html">
@@ -15199,15 +15227,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Choose Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="17b3eb095d935eeb62192f17ad9421655ec377d8" datatype="html">
-        <source> Continue
-</source>
+      <trans-unit id="0548ad193574f84a9154edf4c80c08e583d58988" datatype="html">
+        <source>Selected Avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="56c5e79c645bd3799640d22d9cee53bfdd4b9b7e" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ avatar.name }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d8be89df0f7689e784ded095554331510617728c" datatype="html">
+        <source> Continue </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
+          <context context-type="linenumber">29,30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">
@@ -15301,6 +15342,13 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">14,16</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4d418c5c1ccdbf08dc601cc30fbbf79c8dc9b7ef" datatype="html">
+        <source>completion percentage</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="53385b88c26d3732c6dd9c2b6e32ec510d3fc6e1" datatype="html">
         <source>Total Score</source>
         <context-group purpose="location">
@@ -15313,6 +15361,13 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
           <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4b23766b017af944af613787e9946ec1008c6564" datatype="html">
+        <source>total score percentage</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="be95ff6f3d39423936fc148d197e7b0a9df95756" datatype="html">

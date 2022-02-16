@@ -18,7 +18,7 @@
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-progress-bar mode="determinate"
           value="{{ rootNodeStatus.progress.completionPct }}"
-          aria-label-i18n
+          i18n-aria-label
           aria-label="completion percentage"></mat-progress-bar>
       <h3 class="mat-display-1">{{ rootNodeStatus.progress.completionPct }}%</h3>
     </div>
@@ -37,7 +37,7 @@
         <mat-progress-bar class="score"
             mode="determinate"
             value="{{ scorePercentage }}"
-            aria-label-i18n
+            i18n-aria-label
             aria-label="total score percentage"></mat-progress-bar>
       </div>
       <!-- <mat-icon class="gold mat-36">grade</mat-icon> -->

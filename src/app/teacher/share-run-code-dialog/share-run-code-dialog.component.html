@@ -7,7 +7,7 @@
     <p>
       <span i18n>Copy this link to share with your students:</span><br>
       <span class="share">
-        <button mat-button aria-label-i18n aria-label="Copy link" 
+        <button mat-button i18n-aria-label aria-label="Copy link" 
                 matTooltip="Copy link" matTooltipPosition="after" 
                 [cdkCopyToClipboard]="link" (click)="copyMsg()">
           <mat-icon>content_copy</mat-icon>&nbsp;
@@ -18,7 +18,7 @@
     <p>
       <span i18n>Students with WISE accounts can also select <strong>Add Unit+</strong> and type the Access Code:</span><br>
       <span class="share">
-        <button mat-button aria-label-i18n aria-label="Copy Access Code" 
+        <button mat-button i18n-aria-label aria-label="Copy Access Code" 
                 matTooltip="Copy Access Code" matTooltipPosition="after" 
                 [cdkCopyToClipboard]="run.runCode" (click)="copyMsg()">
           <mat-icon>content_copy</mat-icon>&nbsp;
