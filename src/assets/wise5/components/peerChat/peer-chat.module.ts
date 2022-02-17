@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PeerChatChatBoxComponent } from './peer-chat-chat-box/peer-chat-chat-box.component';
 import { PeerChatMessageComponent } from './peer-chat-message/peer-chat-message.component';
+import { PeerChatMessageInputComponent } from './peer-chat-message-input/peer-chat-message-input.component';
 import { PeerChatMessagesComponent } from './peer-chat-messages/peer-chat-messages.component';
 import { PeerChatQuestionBankComponent } from './peer-chat-question-bank/peer-chat-question-bank.component';
 import { AngularJSModule } from '../../../../app/common-hybrid-angular.module';
@@ -9,6 +10,7 @@ import { AngularJSModule } from '../../../../app/common-hybrid-angular.module';
   declarations: [
     PeerChatChatBoxComponent,
     PeerChatMessageComponent,
+    PeerChatMessageInputComponent,
     PeerChatMessagesComponent,
     PeerChatQuestionBankComponent
   ],
@@ -16,6 +18,7 @@ import { AngularJSModule } from '../../../../app/common-hybrid-angular.module';
   exports: [
     PeerChatChatBoxComponent,
     PeerChatMessageComponent,
+    PeerChatMessageInputComponent,
     PeerChatMessagesComponent,
     PeerChatQuestionBankComponent
   ]
