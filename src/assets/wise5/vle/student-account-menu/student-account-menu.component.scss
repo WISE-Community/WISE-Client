@@ -1,29 +1,62 @@
-.menu-section {
-  padding: 8px 12px;
-}
+@import
+  '~style/abstracts/variables',
+  '~style/abstracts/functions';
 
-.mat-divider {
-  margin: 0;
-}
+.student-account-menu {
+  &.mat-menu-panel {
+    max-width: 480px;
 
-.mat-display-1 {
-  margin: 0;
-}
+    @media (min-width: breakpoint('sm.min')) {
+      min-width: 320px;
+    }
 
-.mat-progress-bar {
-  transform: rotate(270deg);
-  width: 32px;
-  height: 14px;
-}
+    @media (min-width: breakpoint('md.min')) {
+      min-width: 380px;
+    }
 
-.score-wrap {
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
+    .mat-menu-content {
+      padding: 0;
+    }
+  }
 
-.score {
-  height: 32px;
-}
+  button.mat-menu-item {
+    width: auto;
+    font-weight: 500;
+    line-height: 36px;
+    height: 36px;
+  }
 
-.controls {
-  padding: 8px;
+  .mat-menu-content {
+    padding: 0;
+
+    .mat-divider-horizontal {
+      margin: 0;
+    }
+  }
+
+  .menu-section {
+    padding: 8px 12px;
+  }
+
+  .mat-display-1 {
+    margin: 0;
+  }
+
+  .mat-progress-bar {
+    transform: rotate(270deg);
+    width: 32px;
+    height: 14px;
+  }
+
+  .score-wrap {
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+
+  .score {
+    height: 32px;
+  }
+
+  .controls {
+    padding: 8px;
+  }
 }

@@ -2,6 +2,7 @@ import '../lib/jquery/jquery-global';
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import '../common-angular-js-module';
+import '../../../app/student/top-bar/topBarAngularJSModule';
 import NodeController from '../vle/node/nodeController';
 import { StudentWebSocketService } from '../services/studentWebSocketService';
 import VLEController from '../vle/vleController';
@@ -13,7 +14,7 @@ import { ComponentSaveSubmitButtons } from '../directives/component-save-submit-
 import { NotebookLauncherComponent } from '../../../../src/app/notebook/notebook-launcher/notebook-launcher.component';
 import { AddToNotebookButton } from '../directives/add-to-notebook-button/add-to-notebook-button.component';
 import { NavigationComponent } from '../themes/default/navigation/navigation.component';
-import { NotificationsMenuComponent } from './notifications-menu/notifications-menu.component';
+import { NotificationsDialogComponent } from './notifications-dialog/notifications-dialog.component';
 import { StudentAccountMenuComponent } from './student-account-menu/student-account-menu.component';
 
 export function createStudentAngularJSModule(type = 'preview') {
@@ -24,6 +25,7 @@ export function createStudentAngularJSModule(type = 'preview') {
       'studentAsset',
       'summaryComponentModule',
       'theme',
+      'topBarAngularJSModule',
       'ui.scrollpoint'
     ])
     .factory('ProjectService', downgradeInjectable(VLEProjectService))
@@ -60,7 +62,7 @@ export function createStudentAngularJSModule(type = 'preview') {
     )
     .directive(
       'notificationsMenu',
-      downgradeComponent({ component: NotificationsMenuComponent }) as angular.IDirectiveFactory
+      downgradeComponent({ component: NotificationsDialogComponent }) as angular.IDirectiveFactory
     )
     .directive(
       'studentAccountMenu',
