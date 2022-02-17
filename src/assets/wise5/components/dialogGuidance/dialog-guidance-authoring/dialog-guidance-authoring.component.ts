@@ -15,7 +15,7 @@ import { ComputerAvatar } from '../../../common/ComputerAvatar';
   styleUrls: ['./dialog-guidance-authoring.component.scss']
 })
 export class DialogGuidanceAuthoringComponent extends ComponentAuthoring {
-  allComputerAvatars: any;
+  allComputerAvatars: ComputerAvatar[];
   avatarsPath: string;
   inputChange: Subject<string> = new Subject<string>();
   numSelectedComputerAvatars: number;
