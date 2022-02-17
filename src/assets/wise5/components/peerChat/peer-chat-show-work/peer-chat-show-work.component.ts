@@ -21,8 +21,8 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   workgroupId: any;
 
   constructor(
-    private configService: ConfigService,
-    private peerChatService: PeerChatService,
+    protected configService: ConfigService,
+    protected peerChatService: PeerChatService,
     protected projectService: ProjectService
   ) {
     super(projectService);
