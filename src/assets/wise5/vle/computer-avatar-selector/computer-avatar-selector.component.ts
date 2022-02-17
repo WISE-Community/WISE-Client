@@ -32,6 +32,9 @@ export class ComputerAvatarSelectorComponent implements OnInit {
     if (this.label == null || this.label === '') {
       this.label = 'Thought Partner';
     }
+    if (this.avatars.length === 1) {
+      this.avatarSelected = this.avatars[0];
+    }
   }
 
   filterAvatars(allAvatars: ComputerAvatar[], avatarIdsToUse: any): ComputerAvatar[] {

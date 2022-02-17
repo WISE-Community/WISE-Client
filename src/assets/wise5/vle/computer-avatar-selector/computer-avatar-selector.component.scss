@@ -24,6 +24,10 @@
   }
 }
 
+.mat-button-toggle-disabled.mat-button-toggle-checked {
+  background-color: transparent;
+}
+
 .avatar-image {
   width: 88px;
   height: auto;

@@ -15269,25 +15269,32 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="7fb53ef6f4a51654aa5d007c189f354a75b4c05f" datatype="html">
+        <source>Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="d44e0fae2f7939bc76717ba6833b1bb8f5031c81" datatype="html">
         <source>Choose Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e86ce5c4b75612c7ed9f6754d33b35a82cb025a9" datatype="html">
         <source>Selected avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d8be89df0f7689e784ded095554331510617728c" datatype="html">
         <source> Continue </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">28,29</context>
+          <context context-type="linenumber">30,31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">
