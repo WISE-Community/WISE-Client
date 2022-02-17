@@ -196,6 +196,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     componentState.runId = this.ConfigService.getRunId();
     componentState.periodId = this.ConfigService.getPeriodId();
     componentState.workgroupId = this.ConfigService.getWorkgroupId();
+    componentState.peerGroupId = this.peerGroupId;
     const promise = new Promise((resolve, reject) => {
       this.createComponentStateAdditionalProcessing(
         { resolve: resolve, reject: reject },
