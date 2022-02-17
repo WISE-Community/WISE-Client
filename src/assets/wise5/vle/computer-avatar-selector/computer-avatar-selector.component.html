@@ -7,13 +7,12 @@
     <div class="mat-body-2 accent" i18n>Choose Your {{ label }}:</div>
     <mat-button-toggle-group [(ngModel)]="avatarSelected"
         fxLayout="row wrap"
-        aria-label="Selected Avatar"
+        aria-label="Selected avatar"
         i18n-aria-label>
       <ng-container *ngFor="let avatar of avatars">
         <mat-button-toggle [value]="avatar"
             (click)="highlightAvatar(avatar)"
-            aria-label="{{ avatar.name }}"
-            i18n-aria-label>
+            aria-label="{{ avatar.name }}">
           <img [src]="avatarsPath + avatar.image" alt="{{ avatar.name }}" class="avatar-image" />
           <div class="name"><b>{{ avatar.name }}</b></div>
         </mat-button-toggle>

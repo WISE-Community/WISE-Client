@@ -8244,6 +8244,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
           <context context-type="linenumber">61</context>
         </context-group>
@@ -11496,14 +11500,21 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Computer Avatar Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="bf67d3e3671f5c99ee5157f97b6f78f7dbd3fc2c" datatype="html">
-        <source>Thought Partner</source>
+      <trans-unit id="5259202f409ce68afebe226dbdfd1164080c8354" datatype="html">
+        <source>Thought Buddy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cf956634c613f2e2441a589756ba50e211fd615e" datatype="html">
+        <source>Default is &quot;Thought Buddy&quot;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b1e071dd153cd41f10c927d7152b58c10d143091" datatype="html">
@@ -11513,60 +11524,95 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8189f34ab570df2620ccbbc004fd8a759e23c099" datatype="html">
-        <source>Discuss your answer with a thought partner!</source>
+      <trans-unit id="e613415e9c6e4c83d994717820278a6fce5452eb" datatype="html">
+        <source>Discuss your answer with a thought buddy!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
           <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="41a133b581aac4fb993dcbb529388571cb714470" datatype="html">
+        <source>This text will introduce the avatar selection task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e6d52ee834360f0d9cf115f9b181bf390f0ca0e4" datatype="html">
         <source>Computer Avatar Initial Response</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="08289457a04e8b160559a8ad0ac0481c1b12c5dd" datatype="html">
-        <source>Hi there, what do you think about [insert topic here]</source>
+      <trans-unit id="fd892b03fa033d52a2d7df8739e111f7c2103bee" datatype="html">
+        <source>Hi there! It&apos;s nice to meet you. What do you think about...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="d5e1ee61e7706339464cb41fe63bdb3656ae6b95" datatype="html">
-        <source>Select All Computer Avatars</source>
+      <trans-unit id="42171c1193c9971ed94b551d15abe6c23afe5602" datatype="html">
+        <source>Computer avatar will initiate dialog with this text</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="dbcb5c68926fbb89335f710a022a7fce90f41f69" datatype="html">
+      <trans-unit id="6d35db3e303ce2b0a7ca704d01e40db06c2261ac" datatype="html">
+        <source>Select all avatars</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="805bc997cf921808e907aaed1bb3ba9fc75fc0f2" datatype="html">
         <source> Select All </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
-          <context context-type="linenumber">59,60</context>
+          <context context-type="linenumber">60,61</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1a6b45780ffb6a55d97b8ff7950a793d2cf9b77d" datatype="html">
-        <source>Unselect All Computer Avatars</source>
+      <trans-unit id="661e889c7bc2e4c7817524d979f92bde5e12d8c5" datatype="html">
+        <source>Select no avatars</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="b30cfda09a603953ec5056de2d27b98598a824cd" datatype="html">
-        <source> Unselect All </source>
+      <trans-unit id="7d97295120be4e21f191b4d5b8504c9183c0d576" datatype="html">
+        <source> Select None </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
-          <context context-type="linenumber">69,70</context>
+          <context context-type="linenumber">68,69</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="bd38daa3794dcf201a64d5ff6ae1bb1557e40578" datatype="html">
-        <source> Error: You must select at least one computer avatar </source>
+      <trans-unit id="aa697f2bae032b1c63ef838c9e82c4a7c7998d62" datatype="html">
+        <source> You must select at least one computer avatar </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
-          <context context-type="linenumber">72,73</context>
+          <context context-type="linenumber">73,74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="51c96f0051a84a0981042239f47b3f38ee2257cf" datatype="html">
+        <source>Avatars available to students</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c0a308497c02864bc2c7cefcf0274368d3e5edc7" datatype="html">
+        <source>Toggle <x id="INTERPOLATION" equiv-text="{{ computerAvatar.name }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5f9ab61f40e9053c2e217864b1d0b00b1df5f35f" datatype="html">
+        <source>Not selected</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c50661356b4d4941e7eb9b151c65f5f5897d236e" datatype="html">
@@ -15230,25 +15276,18 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="0548ad193574f84a9154edf4c80c08e583d58988" datatype="html">
-        <source>Selected Avatar</source>
+      <trans-unit id="e86ce5c4b75612c7ed9f6754d33b35a82cb025a9" datatype="html">
+        <source>Selected avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
           <context context-type="linenumber">10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="56c5e79c645bd3799640d22d9cee53bfdd4b9b7e" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ avatar.name }}"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d8be89df0f7689e784ded095554331510617728c" datatype="html">
         <source> Continue </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">29,30</context>
+          <context context-type="linenumber">28,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">

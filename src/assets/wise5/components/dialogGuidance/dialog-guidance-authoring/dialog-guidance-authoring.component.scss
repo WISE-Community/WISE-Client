@@ -1,37 +1,43 @@
+@import '~style/abstracts/variables', '~style/abstracts/functions';
+
 edit-dialog-guidance-feedback-rules {
   margin-bottom: 16px;
 }
 
-.computer-avatar-label {
-  width: 400px;
+.avatar-label {
+  max-width: 400px;
 }
 
-.computer-avatar-select-all-buttons-div {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.avatars {
+  margin: 16px 0;
 }
 
-.computer-avatar-select-all-button {
-  width: 140px;
+.mat-button-toggle-group {
+  // border: 0 none;
+  margin-top: 16px;
 }
 
-.computer-avatars-div {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.mat-button-toggle-group-appearance-standard {
+  .mat-button-toggle, .mat-button-toggle + .mat-button-toggle {
+    border-left: 0 none;
+    // border-radius: $card-border-radius;
+    // margin: 4px;
+  }
 }
 
-.computer-avatar-div {
-  padding: 10px;
+.mat-button-toggle-checked {
+  background-color: transparent;
 }
 
-.computer-avatar-image {
-  width: 100px;
+.avatar-image {
+  width: 88px;
+  margin: 0 auto;
+  height: auto;
+  border-radius: 50%;
+  padding: 8px 0;
 }
 
-.green {
-  color: green;
-}
-
-.red {
-  color: red;
+.name {
+  line-height: 1;
+  padding-bottom: 8px;
 }

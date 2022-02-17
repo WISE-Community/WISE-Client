@@ -29,13 +29,6 @@ export class ComputerAvatarSelectorComponent implements OnInit {
   ngOnInit(): void {
     this.avatars = this.filterAvatars(this.computerAvatarService.getAvatars(), this.avatarIds);
     this.avatarsPath = this.computerAvatarService.getAvatarsPath();
-    if (this.prompt == null || this.prompt === '') {
-      this.prompt =
-        'Discuss your answer with a thought partner!\n' +
-        'Your partner will ask you to explain your thinking and will compare your response to ' +
-        'responses from other students around the world.\n' +
-        'Then your partner will ask some questions to help you.';
-    }
     if (this.label == null || this.label === '') {
       this.label = 'Thought Partner';
     }
