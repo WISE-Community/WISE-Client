@@ -103,7 +103,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
   requestChatWorkgroupsSuccess(peerGroup: PeerGroup): void {
     this.isPeerChatWorkgroupsResponseReceived = true;
     this.peerGroupId = peerGroup.id;
-    this.setPeerChatWorkgroups(this.getPeerGroupWorkgroupIds(peerGroup));
+    const peerGroupWorkgroupIds = this.getPeerGroupWorkgroupIds(peerGroup);
+    peerGroupWorkgroupIds.push(this.ConfigService.getTeacherWorkgroupId());
+    this.setPeerChatWorkgroups(peerGroupWorkgroupIds);
     this.getPeerChatComponentStates(peerGroup);
   }
 
@@ -117,7 +119,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   getPeerChatComponentStates(peerGroup: PeerGroup): void {
     this.peerGroupService
-      .retrievePeerGroupWork(peerGroup)
+      .retrievePeerGroupWork(peerGroup, this.nodeId, this.componentId)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (componentStates: any[]) => {
@@ -152,7 +154,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
     for (const workgroupId of workgroupIds) {
       this.peerChatWorkgroupInfos[workgroupId] = {
         avatarColor: this.ConfigService.getAvatarColorForWorkgroupId(workgroupId),
-        displayNames: this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId)
+        displayNames: this.ConfigService.isTeacherWorkgroupId(workgroupId)
+          ? $localize`Teacher`
+          : this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId)
       };
     }
     this.isPeerChatWorkgroupsAvailable = true;
