@@ -15358,6 +15358,13 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">30,31</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6832087445897716825" datatype="html">
+        <source>Thought Buddy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">
         <source>Expand or collapse lesson content</source>
         <context-group purpose="location">

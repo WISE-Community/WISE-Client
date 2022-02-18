@@ -22,7 +22,7 @@ describe('ComputerAvatarSelectorComponent', () => {
     fixture = TestBed.createComponent(ComputerAvatarSelectorComponent);
     spyOn(TestBed.inject(ComputerAvatarService), 'getAvatars').and.returnValue(avatars);
     component = fixture.componentInstance;
-    component.avatarIds = { robot: true };
+    component.avatarIds = { robot: true, monkey: true };
     fixture.detectChanges();
   });
 
@@ -30,7 +30,8 @@ describe('ComputerAvatarSelectorComponent', () => {
     expect(component.avatarSelected).toEqual(undefined);
     const firstAvatar = component.avatars[0];
     component.highlightAvatar(firstAvatar);
-    expect(component.avatarSelected).toEqual(firstAvatar);
+    expect(firstAvatar.isSelected).toBeTrue();
+    expect(component.avatars[1].isSelected).toBeFalsy();
   });
 
   it('should choose avatar', () => {

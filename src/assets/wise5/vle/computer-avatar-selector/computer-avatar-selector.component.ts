@@ -30,7 +30,7 @@ export class ComputerAvatarSelectorComponent implements OnInit {
     this.avatars = this.filterAvatars(this.computerAvatarService.getAvatars(), this.avatarIds);
     this.avatarsPath = this.computerAvatarService.getAvatarsPath();
     if (this.label == null || this.label === '') {
-      this.label = 'Thought Partner';
+      this.label = $localize`Thought Buddy`;
     }
     if (this.avatars.length === 1) {
       this.avatarSelected = this.avatars[0];
