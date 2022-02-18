@@ -13098,7 +13098,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
           <context context-type="linenumber">75,76</context>
         </context-group>
-        <target state="translated"> Posteo </target>
+        <target state="translated"> Publicar </target>
       </trans-unit>
       <trans-unit id="3210146777760299474" datatype="html">
         <source><x id="PH" equiv-text="usernames"/> replied to a discussion you were in!</source>
@@ -13418,7 +13418,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="translated">Nombre de archivo del modelo</target>
+        <target state="translated">Nombre de archivo del elemento a embeber</target>
       </trans-unit>
       <trans-unit id="83813fc16c9097856819be3462a0f06ccf97f525" datatype="html">
         <source>Choose Model File</source>
@@ -16901,7 +16901,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
           <context context-type="linenumber">130</context>
         </context-group>
-        <target state="translated">Tienes nuevas respuestas a tu posteo!</target>
+        <target state="translated">Hay nuevas respuestas a tu posteo del foro!</target>
       </trans-unit>
       <trans-unit id="199088045976822823" datatype="html">
         <source>You have new feedback from your teacher!</source>
