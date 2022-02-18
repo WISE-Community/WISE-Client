@@ -145,6 +145,8 @@ export class NotificationService {
             }
           } else if (notificationType === 'CRaterResult') {
             message = $localize`You have new feedback!`;
+          } else {
+            message = notification.message;
           }
           const newNotificationAggregate = {
             latestNotificationTimestamp: notification.timeGenerated,

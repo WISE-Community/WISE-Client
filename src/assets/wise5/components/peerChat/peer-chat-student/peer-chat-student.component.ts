@@ -5,6 +5,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
+import { NotificationService } from '../../../services/notificationService';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
@@ -44,6 +45,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    private notificationService: NotificationService,
     private peerGroupService: PeerGroupService,
     private PeerChatService: PeerChatService,
     protected StudentAssetService: StudentAssetService,
@@ -204,6 +206,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   createComponentStateAdditionalProcessing(promise: any, componentState: any, action: string) {
     this.sendWorkToPeerWorkgroups(componentState);
+    this.sendNotificationToPeerWorkgroups();
     promise.resolve(componentState);
   }
 
@@ -215,6 +218,29 @@ export class PeerChatStudentComponent extends ComponentStudent {
     for (const workgroupId of this.peerChatWorkgroupIds) {
       if (workgroupId !== this.workgroupId) {
         this.StudentWebSocketService.sendMessageToClassmate(workgroupId, message);
+      }
+    }
+  }
+
+  sendNotificationToPeerWorkgroups() {
+    const runId = this.ConfigService.getRunId();
+    const periodId = this.ConfigService.getPeriodId();
+    const notificationType = 'PeerChatMessage';
+    const firstName = this.ConfigService.getStudentFirstNamesByWorkgroupId(this.workgroupId);
+    const message = $localize`${firstName} sent a chat message`;
+    for (const peerWorkgroupId of this.peerChatWorkgroupIds) {
+      if (peerWorkgroupId !== this.workgroupId) {
+        const notification = this.notificationService.createNewNotification(
+          runId,
+          periodId,
+          notificationType,
+          this.nodeId,
+          this.componentId,
+          this.workgroupId,
+          peerWorkgroupId,
+          message
+        );
+        this.notificationService.saveNotificationToServer(notification);
       }
     }
   }
