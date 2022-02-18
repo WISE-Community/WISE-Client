@@ -293,8 +293,8 @@ export class NodeService {
    * Go to the next node that captures work
    * @return a promise that will return the next node id
    */
-  goToNextNodeWithWork() {
-    this.getNextNodeIdWithWork().then((nextNodeId) => {
+  goToNextNodeWithWork(): Promise<string> {
+    return this.getNextNodeIdWithWork().then((nextNodeId: string) => {
       if (nextNodeId) {
         this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(nextNodeId);
       }

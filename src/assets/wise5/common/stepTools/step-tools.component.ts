@@ -5,6 +5,7 @@ import { NodeService } from '../../services/nodeService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Node } from '../Node';
+import { ConfigService } from '../../services/configService';
 
 @Component({
   styleUrls: ['step-tools.component.scss'],
@@ -24,6 +25,7 @@ export class StepToolsComponent {
   subscriptions: Subscription = new Subscription();
 
   constructor(
+    private configService: ConfigService,
     private dir: Directionality,
     private NodeService: NodeService,
     private ProjectService: TeacherProjectService,
@@ -93,13 +95,27 @@ export class StepToolsComponent {
   }
 
   goToPrevNode() {
-    this.NodeService.goToPrevNode();
+    if (this.isClassroomMonitorMode()) {
+      this.NodeService.goToPrevNodeWithWork();
+    } else {
+      this.NodeService.goToPrevNode();
+    }
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
   }
 
   goToNextNode() {
-    this.NodeService.goToNextNode().then((nodeId: string) => {
-      this.nodeId = nodeId;
-    });
+    if (this.isClassroomMonitorMode()) {
+      this.NodeService.goToNextNodeWithWork().then((nodeId: string) => {
+        this.nodeId = nodeId;
+      });
+    } else {
+      this.NodeService.goToNextNode().then((nodeId: string) => {
+        this.nodeId = nodeId;
+      });
+    }
+  }
+
+  isClassroomMonitorMode(): boolean {
+    return this.configService.getMode() === 'classroomMonitor';
   }
 }
