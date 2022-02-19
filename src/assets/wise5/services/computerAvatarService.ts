@@ -5,7 +5,7 @@ import { ComputerAvatar } from '../common/ComputerAvatar';
 
 @Injectable()
 export class ComputerAvatarService {
-  avatars: any[] = [
+  avatars: ComputerAvatar[] = [
     new ComputerAvatar('robot', 'Robot', 'robot.png'),
     new ComputerAvatar('monkey', 'Monkey', 'monkey.jpg'),
     new ComputerAvatar('girl', 'Girl', 'robot.png'),
@@ -15,29 +15,15 @@ export class ComputerAvatarService {
   ];
   avatarsPath: string = '/assets/img/computer-avatars/';
 
+  getAvatar(id: string): ComputerAvatar {
+    return this.avatars.find((avatar) => avatar.id === id);
+  }
+
   getAvatars(): ComputerAvatar[] {
     return JSON.parse(JSON.stringify(this.avatars));
   }
 
   getAvatarsPath(): string {
     return this.avatarsPath;
-  }
-
-  getImage(id: string): string {
-    for (const avatar of this.avatars) {
-      if (avatar.id === id) {
-        return avatar.image;
-      }
-    }
-    return '';
-  }
-
-  getName(id: string): string {
-    for (const avatar of this.avatars) {
-      if (avatar.id === id) {
-        return avatar.name;
-      }
-    }
-    return '';
   }
 }

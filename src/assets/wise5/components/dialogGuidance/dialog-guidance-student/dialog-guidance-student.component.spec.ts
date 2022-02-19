@@ -9,8 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
 import { NodeService } from '../../../services/nodeService';
@@ -34,6 +36,7 @@ import { DialogGuidanceStudentComponent } from './dialog-guidance-student.compon
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
+const robotAvatar = new ComputerAvatar('robot', 'Robot', 'robot.png');
 
 describe('DialogGuidanceStudentComponent', () => {
   beforeEach(async () => {
@@ -58,6 +61,7 @@ describe('DialogGuidanceStudentComponent', () => {
       providers: [
         AnnotationService,
         ComponentService,
+        ComputerAvatarService,
         CRaterService,
         ConfigService,
         DialogGuidanceService,
@@ -175,18 +179,16 @@ describe('DialogGuidanceStudentComponent', () => {
   });
 
   it('should select computer avatar', () => {
-    const computerAvatarId = 'robot';
-    component.selectComputerAvatar(computerAvatarId);
-    expect(component.computerAvatarId).toEqual(computerAvatarId);
+    component.selectComputerAvatar(robotAvatar);
+    expect(component.computerAvatar).toEqual(robotAvatar);
     expect(component.isShowComputerAvatarSelector).toEqual(false);
   });
 
   it('should select computer avatar when there is a computer avatar initial response', () => {
     const text = 'Hi there, who lives in a pineapple under sea?';
     component.componentContent.computerAvatarInitialResponse = text;
-    const computerAvatarId = 'robot';
     expect(component.responses.length).toEqual(0);
-    component.selectComputerAvatar(computerAvatarId);
+    component.selectComputerAvatar(robotAvatar);
     expect(component.responses.length).toEqual(1);
     expect(component.responses[0].text).toEqual(text);
   });

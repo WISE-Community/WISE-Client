@@ -18,10 +18,10 @@ export class ComputerAvatarSelectorComponent implements OnInit {
   prompt: string;
 
   @Output()
-  chooseAvatarEvent = new EventEmitter<string>();
+  chooseAvatarEvent = new EventEmitter<ComputerAvatar>();
 
   avatars: ComputerAvatar[];
-  avatarSelected: any;
+  avatarSelected: ComputerAvatar;
   avatarsPath: string;
 
   constructor(private computerAvatarService: ComputerAvatarService) {}
@@ -47,13 +47,13 @@ export class ComputerAvatarSelectorComponent implements OnInit {
     return avatars;
   }
 
-  highlightAvatar(avatar: any): void {
+  highlightAvatar(avatar: ComputerAvatar): void {
     this.avatars.forEach((avatar) => delete avatar.isSelected);
     avatar.isSelected = true;
   }
 
   chooseAvatar(): void {
     delete this.avatarSelected.isSelected;
-    this.chooseAvatarEvent.emit(this.avatarSelected.id);
+    this.chooseAvatarEvent.emit(this.avatarSelected);
   }
 }

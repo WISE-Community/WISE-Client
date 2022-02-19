@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
@@ -16,7 +17,7 @@ describe('DialogGuidanceShowWorkComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
       declarations: [DialogGuidanceShowWorkComponent, DialogResponsesComponent],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      providers: [ConfigService, ComputerAvatarService, ProjectService, SessionService, UtilService]
     }).compileComponents();
   });
 

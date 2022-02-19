@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { DialogResponse } from '../DialogResponse';
@@ -10,14 +11,13 @@ import { DialogResponse } from '../DialogResponse';
 })
 export class DialogResponseComponent implements OnInit {
   @Input()
-  computerAvatarId: string;
+  computerAvatar: ComputerAvatar;
 
   @Input()
   response: DialogResponse;
 
   avatarColor: string;
-  computerAvatarImage: string;
-  computerAvatarsPath: string;
+  computerAvatarImageSrc: string;
   displayNames: string;
   isStudent: boolean;
 
@@ -30,14 +30,16 @@ export class DialogResponseComponent implements OnInit {
     this.isStudent = this.response.user === 'Student';
     if (this.isStudent) {
       this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.response.workgroupId);
-      const firstNames = this.ConfigService.getStudentFirstNamesByWorkgroupId(this.response.workgroupId);
+      const firstNames = this.ConfigService.getStudentFirstNamesByWorkgroupId(
+        this.response.workgroupId
+      );
       this.displayNames = firstNames.join(', ');
     } else {
-      this.displayNames = this.computerAvatarService.getName(this.computerAvatarId);
+      this.displayNames = this.computerAvatar.name;
     }
-    if (this.computerAvatarId != null) {
-      this.computerAvatarsPath = this.computerAvatarService.getAvatarsPath();
-      this.computerAvatarImage = this.computerAvatarService.getImage(this.computerAvatarId);
+    if (this.computerAvatar != null) {
+      this.computerAvatarImageSrc =
+        this.computerAvatarService.getAvatarsPath() + this.computerAvatar.image;
     }
   }
 }

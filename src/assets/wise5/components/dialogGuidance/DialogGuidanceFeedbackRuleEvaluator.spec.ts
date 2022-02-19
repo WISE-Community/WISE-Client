@@ -11,6 +11,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { PossibleScoreComponent } from '../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../services/annotationService';
+import { ComputerAvatarService } from '../../services/computerAvatarService';
 import { ConfigService } from '../../services/configService';
 import { CRaterService } from '../../services/cRaterService';
 import { NodeService } from '../../services/nodeService';
@@ -119,6 +120,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
       providers: [
         AnnotationService,
         ComponentService,
+        ComputerAvatarService,
         CRaterService,
         ConfigService,
         DialogGuidanceService,

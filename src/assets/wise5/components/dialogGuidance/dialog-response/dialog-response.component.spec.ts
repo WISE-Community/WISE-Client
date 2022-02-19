@@ -24,6 +24,7 @@ describe('DialogResponseComponent', () => {
     fixture = TestBed.createComponent(DialogResponseComponent);
     component = fixture.componentInstance;
     component.response = new DialogResponse('Hello World', new Date().getTime(), 1);
+    component.response.user = 'Student';
     fixture.detectChanges();
   });
 
