@@ -8,6 +8,7 @@
       <peer-chat-question-bank [questions]="componentContent.questionBank"></peer-chat-question-bank>
     </div>
     <div fxFlex fxFlex.gt-md="60" fxFlexOrder="2" fxFlexOrder.gt-md="1">
+      <peer-chat-members [peerChatWorkgroupInfos]="peerChatWorkgroupInfos"></peer-chat-members>
       <peer-chat-chat-box [messages]="peerChatMessages"
           [myWorkgroupId]="workgroupId"
           [workgroupInfos]="peerChatWorkgroupInfos"
