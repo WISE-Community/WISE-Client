@@ -22,7 +22,12 @@ describe('ComputerAvatarSelectorComponent', () => {
     fixture = TestBed.createComponent(ComputerAvatarSelectorComponent);
     spyOn(TestBed.inject(ComputerAvatarService), 'getAvatars').and.returnValue(avatars);
     component = fixture.componentInstance;
-    component.avatarIds = { robot: true, monkey: true };
+    component.computerAvatarSettings = {
+      ids: { robot: true, monkey: true },
+      label: 'Thought buddy',
+      prompt: 'Discuss with your thought buddy',
+      initialResponse: 'What do you think about...'
+    };
     fixture.detectChanges();
   });
 

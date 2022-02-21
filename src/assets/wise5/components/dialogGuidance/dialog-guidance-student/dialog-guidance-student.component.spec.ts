@@ -144,22 +144,6 @@ describe('DialogGuidanceStudentComponent', () => {
     expect(component.submitCounter).toEqual(0);
   });
 
-  it('should initialize computer avatar', () => {
-    const prompt = 'Choose a thought buddy.';
-    const label = 'Thought Buddy';
-    const computerAvatarIds = {
-      girl: true,
-      robot: true
-    };
-    component.componentContent.computerAvatarPrompt = prompt;
-    component.componentContent.computerAvatarLabel = label;
-    component.componentContent.computerAvatarIds = computerAvatarIds;
-    component.initializeComputerAvatar();
-    expect(component.computerAvatarPrompt).toEqual(prompt);
-    expect(component.computerAvatarLabel).toEqual(label);
-    expect(component.computerAvatarIds).toEqual(computerAvatarIds);
-  });
-
   it(`should initialize computer avatar when the student has not previously chosen a computer
       avatar`, () => {
     component.componentState = { studentData: {} };
@@ -186,7 +170,7 @@ describe('DialogGuidanceStudentComponent', () => {
 
   it('should select computer avatar when there is a computer avatar initial response', () => {
     const text = 'Hi there, who lives in a pineapple under sea?';
-    component.componentContent.computerAvatarInitialResponse = text;
+    component.componentContent.computerAvatarSettings.initialResponse = text;
     expect(component.responses.length).toEqual(0);
     component.selectComputerAvatar(robotAvatar);
     expect(component.responses.length).toEqual(1);

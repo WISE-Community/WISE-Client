@@ -1,8 +1,6 @@
 <computer-avatar-selector
     *ngIf="isShowComputerAvatarSelector"
-    [label]="computerAvatarLabel"
-    [prompt]="computerAvatarPrompt"
-    [avatarIds]="computerAvatarIds"
+    [computerAvatarSettings]="componentContent.computerAvatarSettings"
     (chooseAvatarEvent)="selectComputerAvatar($event)">
 </computer-avatar-selector>
 <mat-card *ngIf="!isShowComputerAvatarSelector" class="mat-elevation-z2">

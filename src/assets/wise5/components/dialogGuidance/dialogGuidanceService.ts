@@ -21,6 +21,12 @@ export class DialogGuidanceService extends ComponentService {
     component.type = 'DialogGuidance';
     component.itemId = '';
     component.feedbackRules = [];
+    component.isComputerAvatarEnabled = false;
+    component.computerAvatarSettings = {
+      label: $localize`Thought Buddy`,
+      prompt: $localize`Discuss your answer with a thought buddy!`,
+      initialResponse: $localize`Hi there! It's nice to meet you. What do you think about...`
+    };
     return component;
   }
 }

@@ -29,12 +29,8 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 })
 export class DialogGuidanceStudentComponent extends ComponentStudent {
   computerAvatar: ComputerAvatar;
-  computerAvatarLabel: string;
-  computerAvatarPrompt: string;
-  computerAvatarIds: any;
   cRaterTimeout: number = 40000;
   feedbackRuleEvaluator: DialogGuidanceFeedbackRuleEvaluator;
-  isComputerAvatarEnabled: boolean = false;
   isShowComputerAvatarSelector: boolean = false;
   isSubmitEnabled: boolean = false;
   isWaitingForComputerResponse: boolean = false;
@@ -88,19 +84,10 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   }
 
   initializeComputerAvatar(): void {
-    this.computerAvatarPrompt = this.componentContent.computerAvatarPrompt;
-    this.computerAvatarLabel = this.componentContent.computerAvatarLabel;
     this.computerAvatar = this.componentState?.studentData?.computerAvatarId
       ? this.computerAvatarService.getAvatar(this.componentState?.studentData?.computerAvatarId)
       : null;
-    this.computerAvatarIds = this.componentContent.computerAvatarIds;
-    if (this.computerAvatar == null) {
-      this.showComputerAvatarSelector();
-    }
-  }
-
-  showComputerAvatarSelector(): void {
-    this.isShowComputerAvatarSelector = true;
+    this.isShowComputerAvatarSelector = this.computerAvatar == null;
   }
 
   hideComputerAvatarSelector(): void {
@@ -110,7 +97,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   selectComputerAvatar(computerAvatar: ComputerAvatar): void {
     this.computerAvatar = computerAvatar;
     this.hideComputerAvatarSelector();
-    const computerAvatarInitialResponse = this.componentContent.computerAvatarInitialResponse;
+    const computerAvatarInitialResponse = this.componentContent.computerAvatarSettings
+      .initialResponse;
     if (computerAvatarInitialResponse != null && computerAvatarInitialResponse !== '') {
       this.addDialogResponse(
         new ComputerDialogResponse(computerAvatarInitialResponse, [], new Date().getTime())

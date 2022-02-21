@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ComputerAvatar } from '../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
+import { ComputerAvatarSettings } from '../../components/dialogGuidance/ComputerAvatarSettings';
 
 @Component({
   selector: 'computer-avatar-selector',
@@ -9,13 +10,7 @@ import { ComputerAvatarService } from '../../services/computerAvatarService';
 })
 export class ComputerAvatarSelectorComponent implements OnInit {
   @Input()
-  avatarIds: any;
-
-  @Input()
-  label: string;
-
-  @Input()
-  prompt: string;
+  computerAvatarSettings: ComputerAvatarSettings;
 
   @Output()
   chooseAvatarEvent = new EventEmitter<ComputerAvatar>();
@@ -27,11 +22,11 @@ export class ComputerAvatarSelectorComponent implements OnInit {
   constructor(private computerAvatarService: ComputerAvatarService) {}
 
   ngOnInit(): void {
-    this.avatars = this.filterAvatars(this.computerAvatarService.getAvatars(), this.avatarIds);
+    this.avatars = this.filterAvatars(
+      this.computerAvatarService.getAvatars(),
+      this.computerAvatarSettings.ids
+    );
     this.avatarsPath = this.computerAvatarService.getAvatarsPath();
-    if (this.label == null || this.label === '') {
-      this.label = $localize`Thought Buddy`;
-    }
     if (this.avatars.length === 1) {
       this.avatarSelected = this.avatars[0];
     }
