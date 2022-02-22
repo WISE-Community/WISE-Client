@@ -99,7 +99,9 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
 
   it('should select all computer avatars', () => {
     component.computerAvatarSettings.ids = {};
-    expect(isAllComputerAvatarsUnselected(component.allComputerAvatars)).toEqual(true);
+    component.computerAvatarSettings.ids[component.allComputerAvatars[0].id] = true;
+    component.allComputerAvatars[0].isSelected = true;
+    expect(isOnlyFirstComputerAvatarSelected(component.allComputerAvatars)).toEqual(true);
     component.selectAllComputerAvatars();
     expect(isAllComputerAvatarsSelected(component.allComputerAvatars)).toEqual(true);
   });
@@ -110,7 +112,7 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
       robot: true
     };
     component.unselectAllComputerAvatars();
-    expect(isAllComputerAvatarsUnselected(component.allComputerAvatars)).toEqual(true);
+    expect(isOnlyFirstComputerAvatarSelected(component.allComputerAvatars)).toEqual(true);
   });
 
   it('should toggle selection of a computer avatar', () => {
@@ -154,9 +156,14 @@ function isAllComputerAvatarsSelected(computerAvatars: ComputerAvatar[]): boolea
   return true;
 }
 
-function isAllComputerAvatarsUnselected(computerAvatars: ComputerAvatar[]): boolean {
-  for (const computerAvatar of computerAvatars) {
-    if (computerAvatar.isSelected) {
+function isOnlyFirstComputerAvatarSelected(computerAvatars: ComputerAvatar[]): boolean {
+  for (let c = 0; c < computerAvatars.length; c++) {
+    const computerAvatar = computerAvatars[c];
+    if (c === 0) {
+      if (!computerAvatar.isSelected) {
+        return false;
+      }
+    } else if (computerAvatar.isSelected) {
       return false;
     }
   }
