@@ -60,12 +60,20 @@ export class EditDialogGuidanceComputerAvatarComponent implements OnInit {
     for (const computerAvatar of this.allComputerAvatars) {
       computerAvatar.isSelected = false;
     }
+    // select the first avatar to make sure there is always at least one selected
+    this.allComputerAvatars[0].isSelected = true;
     this.saveAndUpdateNumComputerAvatars();
   }
 
   toggleSelectComputerAvatar(computerAvatar: ComputerAvatar): void {
-    computerAvatar.isSelected = !computerAvatar.isSelected;
-    this.saveAndUpdateNumComputerAvatars();
+    if (!this.isLastSelectedComputerAvatar(computerAvatar)) {
+      computerAvatar.isSelected = !computerAvatar.isSelected;
+      this.saveAndUpdateNumComputerAvatars();
+    }
+  }
+
+  isLastSelectedComputerAvatar(computerAvatar: ComputerAvatar): boolean {
+    return computerAvatar.isSelected && this.getNumSelectedComputerAvatars() === 1;
   }
 
   private saveAndUpdateNumComputerAvatars(): void {

@@ -42,9 +42,15 @@ export class ComputerAvatarSelectorComponent implements OnInit {
     return avatars;
   }
 
-  highlightAvatar(avatar: ComputerAvatar): void {
-    this.avatars.forEach((avatar) => delete avatar.isSelected);
-    avatar.isSelected = true;
+  highlightAvatar(avatarClicked: ComputerAvatar): void {
+    for (const avatar of this.avatars) {
+      if (avatar.id === avatarClicked.id) {
+        avatar.isSelected = true;
+        this.avatarSelected = avatarClicked;
+      } else {
+        avatar.isSelected = false;
+      }
+    }
   }
 
   chooseAvatar(): void {

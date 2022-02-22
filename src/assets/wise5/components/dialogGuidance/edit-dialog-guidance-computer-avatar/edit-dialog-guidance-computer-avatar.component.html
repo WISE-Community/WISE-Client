@@ -62,7 +62,7 @@
             i18n-aria-label
             multiple>
           <ng-container *ngFor="let computerAvatar of allComputerAvatars">
-            <mat-button-toggle (click)="toggleSelectComputerAvatar(computerAvatar)"
+            <mat-button-toggle (mousedown)="toggleSelectComputerAvatar(computerAvatar)"
                 checked="{{ computerAvatar.isSelected ? true : false }}"
                 aria-label="Toggle {{ computerAvatar.name }}"
                 i18n-aria-label>
