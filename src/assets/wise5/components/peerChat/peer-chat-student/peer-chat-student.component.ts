@@ -71,12 +71,20 @@ export class PeerChatStudentComponent extends ComponentStudent {
   registerStudentWorkReceivedListener(): void {
     this.subscriptions.add(
       this.StudentDataService.studentWorkReceived$.subscribe((componentState) => {
-        if (this.isForThisComponent(componentState) && this.isWorkFromClassmate(componentState)) {
+        if (this.isMessageToDisplayForThisChat(componentState)) {
           this.addPeerChatMessage(
             this.PeerChatService.convertComponentStateToPeerChatMessage(componentState)
           );
         }
       })
+    );
+  }
+
+  isMessageToDisplayForThisChat(componentState: any) {
+    return (
+      this.isForThisComponent(componentState) &&
+      this.isWorkFromClassmate(componentState) &&
+      componentState.peerGroupId === this.peerGroup.id
     );
   }
 
