@@ -174,14 +174,6 @@ export class EditNotebookItemDialogComponent implements OnInit {
     }
   }
 
-  getItemNodePosition(): string {
-    if (this.item == null) {
-      return '';
-    } else {
-      return this.projectService.getNodePositionById(this.item.nodeId);
-    }
-  }
-
   removeAttachment(attachment: any): void {
     if (this.item.content.attachments.indexOf(attachment) != -1) {
       this.item.content.attachments.splice(this.item.content.attachments.indexOf(attachment), 1);
