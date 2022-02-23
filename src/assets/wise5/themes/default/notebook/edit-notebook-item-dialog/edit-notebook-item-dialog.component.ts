@@ -159,19 +159,13 @@ export class EditNotebookItemDialogComponent implements OnInit {
   }
 
   getItemNodeId(): string {
-    if (this.item == null) {
-      return null;
-    } else {
-      return this.item.nodeId;
-    }
+    return this.item == null ? null : this.item.nodeId;
   }
 
   getItemNodeLink(): string {
-    if (this.item == null) {
-      return '';
-    } else {
-      return this.projectService.getNodePositionAndTitleByNodeId(this.item.nodeId);
-    }
+    return this.item == null
+      ? ''
+      : this.projectService.getNodePositionAndTitleByNodeId(this.item.nodeId);
   }
 
   removeAttachment(attachment: any): void {
