@@ -29,14 +29,20 @@ export class PeerGroupService {
     return tags;
   }
 
-  retrievePeerGroup(peerGroupActivityTag: string): Observable<any> {
+  retrievePeerGroup(
+    peerGroupActivityTag: string,
+    workgroupId = this.ConfigService.getWorkgroupId()
+  ): Observable<any> {
     const runId = this.ConfigService.isPreview() ? 1 : this.ConfigService.getRunId();
-    const workgroupId = this.ConfigService.getWorkgroupId();
     return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${peerGroupActivityTag}`);
   }
 
-  retrievePeerGroupWork(peerGroup: PeerGroup): Observable<any> {
-    return this.http.get(`/api/peer-group/${peerGroup.id}/student-work`);
+  retrievePeerGroupWork(
+    peerGroup: PeerGroup,
+    nodeId: string,
+    componentId: string
+  ): Observable<any> {
+    return this.http.get(`/api/peer-group/${peerGroup.id}/${nodeId}/${componentId}/student-work`);
   }
 
   retrieveStudentWork(

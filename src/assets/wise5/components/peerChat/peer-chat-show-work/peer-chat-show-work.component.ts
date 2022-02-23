@@ -21,8 +21,8 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   workgroupId: any;
 
   constructor(
-    private configService: ConfigService,
-    private peerChatService: PeerChatService,
+    protected configService: ConfigService,
+    protected peerChatService: PeerChatService,
     protected projectService: ProjectService
   ) {
     super(projectService);
@@ -68,7 +68,9 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     for (const workgroupId of workgroupIds) {
       this.peerChatWorkgroupInfos[workgroupId] = {
         avatarColor: this.configService.getAvatarColorForWorkgroupId(workgroupId),
-        displayNames: this.configService.getDisplayUsernamesByWorkgroupId(workgroupId)
+        displayNames: this.configService.isTeacherWorkgroupId(workgroupId)
+          ? $localize`Teacher`
+          : this.configService.getUsernamesStringByWorkgroupId(workgroupId)
       };
     }
     this.isPeerChatWorkgroupsAvailable = true;
