@@ -84,10 +84,44 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   }
 
   initializeComputerAvatar(): void {
-    this.computerAvatar = this.componentState?.studentData?.computerAvatarId
-      ? this.computerAvatarService.getAvatar(this.componentState?.studentData?.computerAvatarId)
-      : null;
-    this.isShowComputerAvatarSelector = this.computerAvatar == null;
+    this.repopulateComputerAvatarFromComponentState(this.componentState);
+    if (this.hasStudentPreviouslyChosenComputerAvatar()) {
+      this.hideComputerAvatarSelector();
+    } else if (this.isOnlyOneComputerAvatarAvailable() && !this.isComputerAvatarPromptAvailable()) {
+      this.hideComputerAvatarSelector();
+      this.selectComputerAvatar(this.getTheOnlyComputerAvatarAvailable());
+    } else {
+      this.showComputerAvatarSelector();
+    }
+  }
+
+  repopulateComputerAvatarFromComponentState(componentState: any): void {
+    this.computerAvatar = this.computerAvatarService.getAvatar(
+      componentState?.studentData?.computerAvatarId
+    );
+  }
+
+  hasStudentPreviouslyChosenComputerAvatar(): boolean {
+    return this.computerAvatar != null;
+  }
+
+  isOnlyOneComputerAvatarAvailable(): boolean {
+    return Object.keys(this.componentContent.computerAvatarSettings.ids).length === 1;
+  }
+
+  getTheOnlyComputerAvatarAvailable(): ComputerAvatar {
+    return this.computerAvatarService.getAvatar(
+      Object.keys(this.componentContent.computerAvatarSettings.ids)[0]
+    );
+  }
+
+  isComputerAvatarPromptAvailable(): boolean {
+    const computerAvatarPrompt = this.componentContent.computerAvatarSettings.prompt;
+    return computerAvatarPrompt != null && computerAvatarPrompt !== '';
+  }
+
+  showComputerAvatarSelector(): void {
+    this.isShowComputerAvatarSelector = true;
   }
 
   hideComputerAvatarSelector(): void {

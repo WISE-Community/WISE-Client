@@ -145,10 +145,41 @@ describe('DialogGuidanceStudentComponent', () => {
   });
 
   it(`should initialize computer avatar when the student has not previously chosen a computer
-      avatar`, () => {
-    component.componentState = { studentData: {} };
+      avatar and there are multiple computer avatars to choose`, () => {
+    initializeComponentStateWithNoComputerAvatarId(component);
+    component.componentContent.computerAvatarSettings = {
+      ids: {
+        monkey: true,
+        robot: true
+      }
+    };
     component.initializeComputerAvatar();
-    expect(component.isShowComputerAvatarSelector).toEqual(true);
+    expectComputerAvatarSelectorToBeShown(component);
+  });
+
+  it(`should initialize computer avatar when the student has not previously chosen a computer
+      avatar and there is one computer avatar and no computer avatar prompt`, () => {
+    initializeComponentStateWithNoComputerAvatarId(component);
+    component.componentContent.computerAvatarSettings = {
+      ids: {
+        monkey: true
+      }
+    };
+    component.initializeComputerAvatar();
+    expectComputerAvatarSelectorNotToBeShown(component);
+  });
+
+  it(`should initialize computer avatar when the student has not previously chosen a computer
+      avatar and there is one computer avatar and there is a computer avatar prompt`, () => {
+    initializeComponentStateWithNoComputerAvatarId(component);
+    component.componentContent.computerAvatarSettings = {
+      ids: {
+        monkey: true
+      },
+      prompt: 'This is your thought buddy you will be chatting with.'
+    };
+    component.initializeComputerAvatar();
+    expectComputerAvatarSelectorToBeShown(component);
   });
 
   it(`should initialize computer avatar when the student has previously chosen a computer
@@ -159,13 +190,13 @@ describe('DialogGuidanceStudentComponent', () => {
       }
     };
     component.initializeComputerAvatar();
-    expect(component.isShowComputerAvatarSelector).toEqual(false);
+    expectComputerAvatarSelectorNotToBeShown(component);
   });
 
   it('should select computer avatar', () => {
     component.selectComputerAvatar(robotAvatar);
     expect(component.computerAvatar).toEqual(robotAvatar);
-    expect(component.isShowComputerAvatarSelector).toEqual(false);
+    expectComputerAvatarSelectorNotToBeShown(component);
   });
 
   it('should select computer avatar when there is a computer avatar initial response', () => {
@@ -182,4 +213,23 @@ function simulateSubmit(component: DialogGuidanceStudentComponent): void {
   const response = new CRaterResponse();
   component.setIsSubmitDirty(true);
   component.cRaterSuccessResponse(response);
+}
+
+function initializeComponentStateWithNoComputerAvatarId(component: any) {
+  component.componentState = { studentData: {} };
+}
+
+function expectComputerAvatarSelectorToBeShown(component: any) {
+  expectIsShowComputerAvatarSelector(component, true);
+}
+
+function expectComputerAvatarSelectorNotToBeShown(component: any) {
+  expectIsShowComputerAvatarSelector(component, false);
+}
+
+function expectIsShowComputerAvatarSelector(
+  component: any,
+  expectedIsShowComputerAvatarSelector: boolean
+) {
+  expect(component.isShowComputerAvatarSelector).toEqual(expectedIsShowComputerAvatarSelector);
 }
