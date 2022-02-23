@@ -186,7 +186,7 @@ export class NodeService {
    * @param currentId (optional)
    * @returns a promise that returns the next node id
    */
-  getNextNodeId(currentId?) {
+  getNextNodeId(currentId?): Promise<any> {
     const promise = new Promise((resolve, reject) => {
       let nextNodeId = null;
       let currentNodeId = null;

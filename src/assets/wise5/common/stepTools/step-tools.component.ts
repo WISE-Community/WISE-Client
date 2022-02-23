@@ -78,11 +78,27 @@ export class StepToolsComponent {
       this.nextId = null;
     } else {
       if (!this.ProjectService.isGroupNode(this.nodeId)) {
-        this.prevId = this.NodeService.getPrevNodeId(this.nodeId);
-        this.NodeService.getNextNodeId(this.nodeId).then((currentNodeId) => {
-          this.nextId = currentNodeId;
+        this.prevId = this.getPrevNodeId();
+        this.getNextNodeId().then((nextId) => {
+          this.nextId = nextId;
         });
       }
+    }
+  }
+
+  getPrevNodeId(): string {
+    if (this.isClassroomMonitorMode()) {
+      return this.NodeService.getPrevNodeIdWithWork(this.nodeId);
+    } else {
+      return this.NodeService.getPrevNodeId(this.nodeId);
+    }
+  }
+
+  getNextNodeId(): Promise<any> {
+    if (this.isClassroomMonitorMode()) {
+      return Promise.resolve(this.NodeService.getNextNodeIdWithWork(this.nodeId));
+    } else {
+      return this.NodeService.getNextNodeId(this.nodeId);
     }
   }
 
