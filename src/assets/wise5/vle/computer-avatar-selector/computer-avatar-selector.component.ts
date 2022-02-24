@@ -36,19 +36,7 @@ export class ComputerAvatarSelectorComponent implements OnInit {
     return allAvatars.filter((avatar) => avatarIdsToUse.includes(avatar.id));
   }
 
-  highlightAvatar(avatarClicked: ComputerAvatar): void {
-    for (const avatar of this.avatars) {
-      if (avatar.id === avatarClicked.id) {
-        avatar.isSelected = true;
-        this.avatarSelected = avatarClicked;
-      } else {
-        avatar.isSelected = false;
-      }
-    }
-  }
-
   chooseAvatar(): void {
-    delete this.avatarSelected.isSelected;
     this.chooseAvatarEvent.emit(this.avatarSelected);
   }
 }

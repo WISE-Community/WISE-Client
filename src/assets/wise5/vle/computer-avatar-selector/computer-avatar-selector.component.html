@@ -12,9 +12,7 @@
         aria-label="Selected avatar"
         i18n-aria-label>
       <ng-container *ngFor="let avatar of avatars">
-        <mat-button-toggle [value]="avatar"
-            (mousedown)="highlightAvatar(avatar)"
-            aria-label="{{ avatar.name }}">
+        <mat-button-toggle [value]="avatar" aria-label="{{ avatar.name }}">
           <img [src]="avatarsPath + avatar.image" alt="{{ avatar.name }}" class="avatar-image" />
           <div class="name"><b>{{ avatar.name }}</b></div>
         </mat-button-toggle>
