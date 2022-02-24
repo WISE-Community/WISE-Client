@@ -106,12 +106,12 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   }
 
   isOnlyOneComputerAvatarAvailable(): boolean {
-    return Object.keys(this.componentContent.computerAvatarSettings.ids).length === 1;
+    return this.componentContent.computerAvatarSettings.ids.length === 1;
   }
 
   getTheOnlyComputerAvatarAvailable(): ComputerAvatar {
     return this.computerAvatarService.getAvatar(
-      Object.keys(this.componentContent.computerAvatarSettings.ids)[0]
+      this.componentContent.computerAvatarSettings.ids[0]
     );
   }
 
