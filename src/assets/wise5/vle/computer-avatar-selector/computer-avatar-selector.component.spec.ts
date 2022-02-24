@@ -32,7 +32,6 @@ describe('ComputerAvatarSelectorComponent', () => {
   });
 
   it('should highlight avatar', () => {
-    console.log('avatars:' + component.avatars);
     expect(component.avatarSelected).toEqual(undefined);
     const firstAvatar = component.avatars[0];
     component.highlightAvatar(firstAvatar);
