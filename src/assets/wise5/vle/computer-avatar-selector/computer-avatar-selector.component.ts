@@ -32,14 +32,8 @@ export class ComputerAvatarSelectorComponent implements OnInit {
     }
   }
 
-  filterAvatars(allAvatars: ComputerAvatar[], avatarIdsToUse: any): ComputerAvatar[] {
-    const avatars = [];
-    for (const avatar of allAvatars) {
-      if (avatarIdsToUse[avatar.id] === true) {
-        avatars.push(avatar);
-      }
-    }
-    return avatars;
+  filterAvatars(allAvatars: ComputerAvatar[], avatarIdsToUse: string[]): ComputerAvatar[] {
+    return allAvatars.filter((avatar) => avatarIdsToUse.includes(avatar.id));
   }
 
   highlightAvatar(avatarClicked: ComputerAvatar): void {
