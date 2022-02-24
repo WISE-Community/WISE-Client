@@ -7355,6 +7355,13 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="26599a3f0d31f31c0a993b352609d6f10af5ccdf" datatype="html">
+        <source>Visit the WISE Community</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/discourse-recent-activity/discourse-recent-activity.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4c49a9bb7a99a9da256c6e678cbb49baa70e268a" datatype="html">
         <source>Edit Classroom Unit</source>
         <context-group purpose="location">
@@ -15223,6 +15230,86 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component.ts</context>
           <context context-type="linenumber">190</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="3570422532828875517" datatype="html">
+        <source>Ermina</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="8914050092323261624" datatype="html">
+        <source>Alyx</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="2455552806354464106" datatype="html">
+        <source>Kai</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="262311140042297980" datatype="html">
+        <source>Morgan</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="4422740314692964863" datatype="html">
+        <source>Parker</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="5776585992601205479" datatype="html">
+        <source>Milan</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="2076719387781676997" datatype="html">
+        <source>Emery</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="7976407223189093423" datatype="html">
+        <source>Yuna</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="6260126143122875881" datatype="html">
+        <source>Ada</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="1192043368264556666" datatype="html">
+        <source>Nico</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
       <trans-unit id="1384916903989385807" datatype="html">
         <source>Notebook</source>
