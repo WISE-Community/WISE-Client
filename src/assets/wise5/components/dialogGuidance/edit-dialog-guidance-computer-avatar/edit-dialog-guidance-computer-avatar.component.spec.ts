@@ -91,16 +91,15 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
   });
 
   it('should create with initial values', () => {
-    component.computerAvatarSettings.ids = null;
+    component.computerAvatarSettings.ids = ['robot', 'monkey', 'girl'];
     component.ngOnInit();
     expect(component.allComputerAvatars).toEqual(allComputerAvatars);
     expect(isAllComputerAvatarsSelected(component.allComputerAvatars)).toBeTrue();
   });
 
   it('should select all computer avatars', () => {
-    component.computerAvatarSettings.ids = [];
-    component.computerAvatarSettings.ids[component.allComputerAvatars[0].id] = true;
-    component.allComputerAvatars[0].isSelected = true;
+    component.computerAvatarSettings.ids = ['robot'];
+    component.ngOnInit();
     expect(isOnlyFirstComputerAvatarSelected(component.allComputerAvatars)).toEqual(true);
     component.selectAllComputerAvatars();
     expect(isAllComputerAvatarsSelected(component.allComputerAvatars)).toEqual(true);

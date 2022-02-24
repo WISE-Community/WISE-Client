@@ -24,7 +24,6 @@ export class EditDialogGuidanceComputerAvatarComponent implements OnInit {
   ngOnInit(): void {
     this.allComputerAvatars = this.computerAvatarService.getAvatars();
     this.avatarsPath = this.computerAvatarService.getAvatarsPath();
-    this.tryInitializeComputerAvatarIds();
     this.populateAndUpdateNumSelectedComputerAvatars();
   }
 
@@ -32,13 +31,6 @@ export class EditDialogGuidanceComputerAvatarComponent implements OnInit {
     this.populateSelectedComputerAvatars();
     this.updateNumSelectedComputerAvatars();
     this.componentChanged();
-  }
-
-  private tryInitializeComputerAvatarIds(): void {
-    if (this.computerAvatarSettings.ids == null) {
-      this.computerAvatarSettings.ids = [];
-      this.selectAllComputerAvatars();
-    }
   }
 
   private populateSelectedComputerAvatars(): void {
