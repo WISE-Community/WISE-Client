@@ -31,21 +31,11 @@ describe('ComputerAvatarSelectorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should highlight avatar', () => {
-    expect(component.avatarSelected).toEqual(undefined);
-    const firstAvatar = component.avatars[0];
-    component.highlightAvatar(firstAvatar);
-    expect(firstAvatar.isSelected).toBeTrue();
-    expect(component.avatars[1].isSelected).toBeFalsy();
-  });
-
   it('should choose avatar', () => {
     const firstAvatar = component.avatars[0];
-    firstAvatar.isSelected = true;
     component.avatarSelected = firstAvatar;
     const confirmSelectionEmitSpy = spyOn(component.chooseAvatarEvent, 'emit');
     component.chooseAvatar();
-    expect(firstAvatar.isSelected).toEqual(undefined);
     expect(confirmSelectionEmitSpy).toHaveBeenCalled();
   });
 });

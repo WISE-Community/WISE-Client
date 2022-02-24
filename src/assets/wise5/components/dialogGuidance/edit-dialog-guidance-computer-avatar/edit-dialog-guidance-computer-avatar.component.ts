@@ -14,7 +14,6 @@ export class EditDialogGuidanceComputerAvatarComponent implements OnInit {
 
   allComputerAvatars: ComputerAvatar[];
   avatarsPath: string;
-  numSelectedComputerAvatars: number;
 
   constructor(
     private computerAvatarService: ComputerAvatarService,
@@ -24,21 +23,8 @@ export class EditDialogGuidanceComputerAvatarComponent implements OnInit {
   ngOnInit(): void {
     this.allComputerAvatars = this.computerAvatarService.getAvatars();
     this.avatarsPath = this.computerAvatarService.getAvatarsPath();
-    this.tryInitializeComputerAvatarIds();
-    this.populateAndUpdateNumSelectedComputerAvatars();
-  }
-
-  private populateAndUpdateNumSelectedComputerAvatars(): void {
     this.populateSelectedComputerAvatars();
-    this.updateNumSelectedComputerAvatars();
     this.componentChanged();
-  }
-
-  private tryInitializeComputerAvatarIds(): void {
-    if (this.computerAvatarSettings.ids == null) {
-      this.computerAvatarSettings.ids = [];
-      this.selectAllComputerAvatars();
-    }
   }
 
   private populateSelectedComputerAvatars(): void {
@@ -53,7 +39,7 @@ export class EditDialogGuidanceComputerAvatarComponent implements OnInit {
     for (const computerAvatar of this.allComputerAvatars) {
       computerAvatar.isSelected = true;
     }
-    this.saveAndUpdateNumComputerAvatars();
+    this.saveSelectedComputerAvatars();
   }
 
   unselectAllComputerAvatars(): void {
@@ -62,31 +48,18 @@ export class EditDialogGuidanceComputerAvatarComponent implements OnInit {
     }
     // select the first avatar to make sure there is always at least one selected
     this.allComputerAvatars[0].isSelected = true;
-    this.saveAndUpdateNumComputerAvatars();
+    this.saveSelectedComputerAvatars();
   }
 
   toggleSelectComputerAvatar(computerAvatar: ComputerAvatar): void {
     if (!this.isLastSelectedComputerAvatar(computerAvatar)) {
       computerAvatar.isSelected = !computerAvatar.isSelected;
-      this.saveAndUpdateNumComputerAvatars();
+      this.saveSelectedComputerAvatars();
     }
   }
 
   isLastSelectedComputerAvatar(computerAvatar: ComputerAvatar): boolean {
-    return computerAvatar.isSelected && this.getNumSelectedComputerAvatars() === 1;
-  }
-
-  private saveAndUpdateNumComputerAvatars(): void {
-    this.saveSelectedComputerAvatars();
-    this.updateNumSelectedComputerAvatars();
-  }
-
-  private updateNumSelectedComputerAvatars(): void {
-    this.numSelectedComputerAvatars = this.getNumSelectedComputerAvatars();
-  }
-
-  private getNumSelectedComputerAvatars(): number {
-    return this.computerAvatarSettings.ids.length;
+    return computerAvatar.isSelected && this.computerAvatarSettings.ids.length === 1;
   }
 
   saveSelectedComputerAvatars(): void {
