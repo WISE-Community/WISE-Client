@@ -7362,6 +7362,13 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="26599a3f0d31f31c0a993b352609d6f10af5ccdf" datatype="html">
+        <source>Visit the WISE Community</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/discourse-recent-activity/discourse-recent-activity.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4c49a9bb7a99a9da256c6e678cbb49baa70e268a" datatype="html">
         <source>Edit Classroom Unit</source>
         <context-group purpose="location">
@@ -14663,8 +14670,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="41eba3c2d03f6e2f71bc11b22e781961754a21ee" datatype="html">
-        <source>Chat Members</source>
+      <trans-unit id="1cd15276840c64f5eae40ef3fb51ff81f84f278b" datatype="html">
+        <source>Chat Members:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-members/peer-chat-members.component.html</context>
           <context context-type="linenumber">2</context>
@@ -14681,7 +14688,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> This Peer Chat activity is not yet available. Please check back later or wait for a notification to return. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-show-work/peer-chat-show-work.component.html</context>
-          <context context-type="linenumber">20,21</context>
+          <context context-type="linenumber">19,20</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.html</context>

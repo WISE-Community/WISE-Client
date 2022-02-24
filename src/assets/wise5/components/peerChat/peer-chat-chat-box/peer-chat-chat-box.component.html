@@ -1,4 +1,5 @@
 <mat-card class="chat-box mat-elevation-z2">
+  <peer-chat-members [peerChatWorkgroupInfos]="workgroupInfos"></peer-chat-members>
   <peer-chat-messages *ngIf="messages.length > 0"
       [peerChatMessages]="messages"
       [myWorkgroupId]="myWorkgroupId"

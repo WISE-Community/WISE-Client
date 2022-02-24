@@ -1,11 +1,10 @@
-<mat-card class="chat-members-card">
-  <div i18n>Chat Members</div>
-  <div *ngFor="let peerChatWorkgroupId of peerChatWorkgroupIds"
-      fxLayoutAlign="start center" fxLayoutGap="8px">
-    <mat-icon class="mat-30"
+<div class="mat-small secondary-text" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="6px">
+  <span i18n>Chat Members:</span>
+  <span *ngFor="let peerChatWorkgroupId of peerChatWorkgroupIds; let last = last;">
+    <mat-icon class="mat-24"
         [ngStyle]="{'color': peerChatWorkgroupInfos[peerChatWorkgroupId].avatarColor}">
       account_circle
     </mat-icon>
-    <div class="mat-body-2">{{ peerChatWorkgroupInfos[peerChatWorkgroupId].displayNames }}</div>
-  </div>
-</mat-card>
+    <span class="names">{{ peerChatWorkgroupInfos[peerChatWorkgroupId].displayNames }}</span>
+  </span>
+</div>
