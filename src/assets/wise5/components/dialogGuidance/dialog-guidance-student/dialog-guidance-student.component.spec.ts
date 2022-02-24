@@ -148,10 +148,7 @@ describe('DialogGuidanceStudentComponent', () => {
       avatar and there are multiple computer avatars to choose`, () => {
     initializeComponentStateWithNoComputerAvatarId(component);
     component.componentContent.computerAvatarSettings = {
-      ids: {
-        monkey: true,
-        robot: true
-      }
+      ids: ['monkey', 'robot']
     };
     component.initializeComputerAvatar();
     expectComputerAvatarSelectorToBeShown(component);
@@ -161,9 +158,7 @@ describe('DialogGuidanceStudentComponent', () => {
       avatar and there is one computer avatar and no computer avatar prompt`, () => {
     initializeComponentStateWithNoComputerAvatarId(component);
     component.componentContent.computerAvatarSettings = {
-      ids: {
-        monkey: true
-      }
+      ids: ['monkey']
     };
     component.initializeComputerAvatar();
     expectComputerAvatarSelectorNotToBeShown(component);
@@ -173,9 +168,7 @@ describe('DialogGuidanceStudentComponent', () => {
       avatar and there is one computer avatar and there is a computer avatar prompt`, () => {
     initializeComponentStateWithNoComputerAvatarId(component);
     component.componentContent.computerAvatarSettings = {
-      ids: {
-        monkey: true
-      },
+      ids: ['monkey'],
       prompt: 'This is your thought buddy you will be chatting with.'
     };
     component.initializeComputerAvatar();
@@ -184,6 +177,9 @@ describe('DialogGuidanceStudentComponent', () => {
 
   it(`should initialize computer avatar when the student has previously chosen a computer
       avatar`, () => {
+    component.componentContent.computerAvatarSettings = {
+      ids: ['monkey']
+    };
     component.componentState = {
       studentData: {
         computerAvatarId: 'robot'

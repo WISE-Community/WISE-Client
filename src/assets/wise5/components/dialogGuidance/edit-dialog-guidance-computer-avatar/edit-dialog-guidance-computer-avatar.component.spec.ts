@@ -82,7 +82,7 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
       'getComponentByNodeIdAndComponentId'
     ).and.returnValue(JSON.parse(JSON.stringify(componentContent)));
     component.computerAvatarSettings = {
-      ids: {},
+      ids: [],
       label: 'Thought Buddy',
       prompt: 'Choose your thought buddy!',
       initialResponse: 'What do you think about...'
@@ -98,7 +98,7 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
   });
 
   it('should select all computer avatars', () => {
-    component.computerAvatarSettings.ids = {};
+    component.computerAvatarSettings.ids = [];
     component.computerAvatarSettings.ids[component.allComputerAvatars[0].id] = true;
     component.allComputerAvatars[0].isSelected = true;
     expect(isOnlyFirstComputerAvatarSelected(component.allComputerAvatars)).toEqual(true);
@@ -107,16 +107,13 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
   });
 
   it('should unselect all computer avatars', () => {
-    component.computerAvatarSettings.ids = {
-      girl: true,
-      robot: true
-    };
+    component.computerAvatarSettings.ids = ['girl', 'robot'];
     component.unselectAllComputerAvatars();
     expect(isOnlyFirstComputerAvatarSelected(component.allComputerAvatars)).toEqual(true);
   });
 
   it('should toggle selection of a computer avatar', () => {
-    component.computerAvatarSettings.ids = {};
+    component.computerAvatarSettings.ids = [];
     const computerAvatar: ComputerAvatar = component.allComputerAvatars[0];
     computerAvatar.isSelected = false;
     component.toggleSelectComputerAvatar(computerAvatar);
@@ -124,15 +121,12 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
   });
 
   it('should save selected computer avatars', () => {
-    component.computerAvatarSettings.ids = {};
+    component.computerAvatarSettings.ids = [];
     component.allComputerAvatars[0].isSelected = true;
     component.allComputerAvatars[1].isSelected = false;
     component.allComputerAvatars[2].isSelected = true;
     component.saveSelectedComputerAvatars();
-    expect(component.computerAvatarSettings.ids).toEqual({
-      girl: true,
-      robot: true
-    });
+    expect(component.computerAvatarSettings.ids).toEqual(['robot', 'girl']);
   });
 });
 

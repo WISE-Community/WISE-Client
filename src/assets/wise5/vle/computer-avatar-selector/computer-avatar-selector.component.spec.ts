@@ -23,7 +23,7 @@ describe('ComputerAvatarSelectorComponent', () => {
     spyOn(TestBed.inject(ComputerAvatarService), 'getAvatars').and.returnValue(avatars);
     component = fixture.componentInstance;
     component.computerAvatarSettings = {
-      ids: { robot: true, monkey: true },
+      ids: ['robot', 'monkey'],
       label: 'Thought buddy',
       prompt: 'Discuss with your thought buddy',
       initialResponse: 'What do you think about...'
@@ -32,6 +32,7 @@ describe('ComputerAvatarSelectorComponent', () => {
   });
 
   it('should highlight avatar', () => {
+    console.log('avatars:' + component.avatars);
     expect(component.avatarSelected).toEqual(undefined);
     const firstAvatar = component.avatars[0];
     component.highlightAvatar(firstAvatar);
