@@ -945,7 +945,7 @@ export class TeacherProjectService extends ProjectService {
     return this.http
       .post(
         this.ConfigService.getConfigParam('saveProjectURL'),
-        angular.toJson(this.project, false)
+        JSON.stringify(this.project, (_key, value) => (value instanceof Set ? [...value] : value))
       )
       .toPromise()
       .then((response: any) => {

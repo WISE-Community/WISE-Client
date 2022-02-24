@@ -21,6 +21,7 @@ import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSing
 import { MatDialog } from '@angular/material/dialog';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
+import { ComputerAvatarSettings } from '../ComputerAvatarSettings';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -79,6 +80,10 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     }
     this.feedbackRuleEvaluator = new DialogGuidanceFeedbackRuleEvaluator(this);
     if (this.componentContent.isComputerAvatarEnabled) {
+      this.componentContent.computerAvatarSettings = Object.assign(
+        new ComputerAvatarSettings(),
+        this.componentContent.computerAvatarSettings
+      );
       this.initializeComputerAvatar();
     }
   }

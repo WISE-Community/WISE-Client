@@ -32,10 +32,10 @@ export class ComputerAvatarSelectorComponent implements OnInit {
     }
   }
 
-  filterAvatars(allAvatars: ComputerAvatar[], avatarIdsToUse: any): ComputerAvatar[] {
+  filterAvatars(allAvatars: ComputerAvatar[], avatarIdsToUse: Set<string>): ComputerAvatar[] {
     const avatars = [];
     for (const avatar of allAvatars) {
-      if (avatarIdsToUse[avatar.id] === true) {
+      if (avatarIdsToUse.has(avatar.id)) {
         avatars.push(avatar);
       }
     }

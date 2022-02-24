@@ -23,6 +23,7 @@ export class DialogGuidanceService extends ComponentService {
     component.feedbackRules = [];
     component.isComputerAvatarEnabled = false;
     component.computerAvatarSettings = {
+      ids: [],
       label: $localize`Thought Buddy`,
       prompt: $localize`Discuss your answer with a thought buddy!`,
       initialResponse: $localize`Hi there! It's nice to meet you. What do you think about...`

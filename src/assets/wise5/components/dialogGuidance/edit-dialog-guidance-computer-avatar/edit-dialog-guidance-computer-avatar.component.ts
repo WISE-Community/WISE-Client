@@ -36,14 +36,16 @@ export class EditDialogGuidanceComputerAvatarComponent implements OnInit {
 
   private tryInitializeComputerAvatarIds(): void {
     if (this.computerAvatarSettings.ids == null) {
-      this.computerAvatarSettings.ids = {};
+      this.computerAvatarSettings.ids = new Set<string>();
       this.selectAllComputerAvatars();
+    } else {
+      this.computerAvatarSettings.ids = new Set(this.computerAvatarSettings.ids);
     }
   }
 
   private populateSelectedComputerAvatars(): void {
     for (const availableComputerAvatar of this.allComputerAvatars) {
-      if (this.computerAvatarSettings.ids[availableComputerAvatar.id]) {
+      if (this.computerAvatarSettings.ids.has(availableComputerAvatar.id)) {
         availableComputerAvatar.isSelected = true;
       }
     }
@@ -86,15 +88,15 @@ export class EditDialogGuidanceComputerAvatarComponent implements OnInit {
   }
 
   private getNumSelectedComputerAvatars(): number {
-    return Object.keys(this.computerAvatarSettings.ids).length;
+    return this.computerAvatarSettings.ids.size;
   }
 
   saveSelectedComputerAvatars(): void {
     for (const computerAvatar of this.allComputerAvatars) {
       if (computerAvatar.isSelected) {
-        this.computerAvatarSettings.ids[computerAvatar.id] = true;
+        this.computerAvatarSettings.ids.add(computerAvatar.id);
       } else {
-        delete this.computerAvatarSettings.ids[computerAvatar.id];
+        this.computerAvatarSettings.ids.delete(computerAvatar.id);
       }
     }
     this.componentChanged();

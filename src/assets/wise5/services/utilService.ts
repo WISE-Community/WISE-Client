@@ -72,8 +72,10 @@ export class UtilService {
     return str;
   }
 
-  makeCopyOfJSONObject(jsonObject): any {
-    return angular.fromJson(angular.toJson(jsonObject));
+  makeCopyOfJSONObject(jsonObject: any): any {
+    return JSON.parse(
+      JSON.stringify(jsonObject, (_key, value) => (value instanceof Set ? [...value] : value))
+    );
   }
 
   getImageObjectFromBase64String(img_b64) {

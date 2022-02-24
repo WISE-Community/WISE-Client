@@ -1,5 +1,5 @@
 export class ComputerAvatarSettings {
-  ids: {};
+  ids: Set<string>;
   label: string;
   prompt: string;
   initialResponse: string;
