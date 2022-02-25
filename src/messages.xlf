@@ -7363,6 +7363,13 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="26599a3f0d31f31c0a993b352609d6f10af5ccdf" datatype="html">
+        <source>Visit the WISE Community</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/discourse-recent-activity/discourse-recent-activity.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4c49a9bb7a99a9da256c6e678cbb49baa70e268a" datatype="html">
         <source>Edit Classroom Unit</source>
         <context-group purpose="location">
@@ -7824,11 +7831,25 @@
           <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4954fe49190be1ec2fbfbc10aae294701a75bd55" datatype="html">
+        <source>Copy link</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="7bbddc45d6222dca137dc142330ab84c2d959aa2" datatype="html">
         <source>Students with WISE accounts can also select <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Add Unit+<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and type the Access Code:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
           <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8ba9f54a801ef6833fd2986db3d697543e8b13c9" datatype="html">
+        <source>Copy Access Code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="209863274ddac11c65a5735ed1d1e2d869f665b2" datatype="html">
@@ -8290,6 +8311,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/card-selector/card-selector.component.html</context>
           <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
@@ -9406,6 +9431,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
           <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="33d01a75af7af3e0d614e1e916fa8ad2d8fc21c6" datatype="html">
+        <source>Select to add student to new team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c9edeb217965a55b5e8120e380b70bda6dcd8c69" datatype="html">
@@ -11526,18 +11558,25 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="989e3e512d67ecf1ee51ebf8edc99e048d3c3959" datatype="html">
+        <source>Enable Computer Avatar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="c50661356b4d4941e7eb9b151c65f5f5897d236e" datatype="html">
         <source>Add response...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="427e92e019c34109656b0e1fc9576bfb833934d9" datatype="html">
         <source> Send </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">32,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c80dd9bfb0bd7a7ce89ef1140e6f35211ab711f0" datatype="html">
@@ -11551,14 +11590,151 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Automated guidance response</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component.html</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4467968363873261907" datatype="html">
         <source>Dialog Guidance</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6832087445897716825" datatype="html">
+        <source>Thought Buddy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7559493123326903347" datatype="html">
+        <source>Discuss your answer with a thought buddy!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="817739684653615188" datatype="html">
+        <source>Hi there! It&apos;s nice to meet you. What do you think about...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5ee734dd4f01e4fdc237a0eac5d1b2942bda22b3" datatype="html">
+        <source>Computer Avatar Label</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5259202f409ce68afebe226dbdfd1164080c8354" datatype="html">
+        <source>Thought Buddy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="51e0301771667a3262784b0ae17ce504f94254e8" datatype="html">
+        <source>This is what the computer avatar will be referred as</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b1e071dd153cd41f10c927d7152b58c10d143091" datatype="html">
+        <source>Computer Avatar Prompt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e613415e9c6e4c83d994717820278a6fce5452eb" datatype="html">
+        <source>Discuss your answer with a thought buddy!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="41a133b581aac4fb993dcbb529388571cb714470" datatype="html">
+        <source>This text will introduce the avatar selection task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e6d52ee834360f0d9cf115f9b181bf390f0ca0e4" datatype="html">
+        <source>Computer Avatar Initial Response</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fd892b03fa033d52a2d7df8739e111f7c2103bee" datatype="html">
+        <source>Hi there! It&apos;s nice to meet you. What do you think about...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="42171c1193c9971ed94b551d15abe6c23afe5602" datatype="html">
+        <source>Computer avatar will initiate dialog with this text</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6d35db3e303ce2b0a7ca704d01e40db06c2261ac" datatype="html">
+        <source>Select all avatars</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="805bc997cf921808e907aaed1bb3ba9fc75fc0f2" datatype="html">
+        <source> Select All </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="661e889c7bc2e4c7817524d979f92bde5e12d8c5" datatype="html">
+        <source>Select no avatars</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7d97295120be4e21f191b4d5b8504c9183c0d576" datatype="html">
+        <source> Select None </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">51,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="51c96f0051a84a0981042239f47b3f38ee2257cf" datatype="html">
+        <source>Avatars available to students</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c0a308497c02864bc2c7cefcf0274368d3e5edc7" datatype="html">
+        <source>Toggle <x id="INTERPOLATION" equiv-text="{{ computerAvatar.name }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5f9ab61f40e9053c2e217864b1d0b00b1df5f35f" datatype="html">
+        <source>Not selected</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ac4a8ebf1347b29327308613dd307970ec899941" datatype="html">
@@ -15067,6 +15243,86 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3570422532828875517" datatype="html">
+        <source>Ermina</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="8914050092323261624" datatype="html">
+        <source>Alyx</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="2455552806354464106" datatype="html">
+        <source>Kai</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="262311140042297980" datatype="html">
+        <source>Morgan</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="4422740314692964863" datatype="html">
+        <source>Parker</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="5776585992601205479" datatype="html">
+        <source>Milan</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="2076719387781676997" datatype="html">
+        <source>Emery</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="7976407223189093423" datatype="html">
+        <source>Yuna</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="6260126143122875881" datatype="html">
+        <source>Ada</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
+      <trans-unit id="1192043368264556666" datatype="html">
+        <source>Nico</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description">A name for a computer avatar</note>
+      </trans-unit>
       <trans-unit id="1384916903989385807" datatype="html">
         <source>Notebook</source>
         <context-group purpose="location">
@@ -15273,6 +15529,34 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ea13858d4b49bbcbc396191b16ac52dbf859e6fe" datatype="html">
+        <source>Your <x id="INTERPOLATION" equiv-text="{{ computerAvatarSettings.label }}"/>:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ba4c60df94ccbaf73fe5c4cec1d0cc96af239914" datatype="html">
+        <source>Choose Your <x id="INTERPOLATION" equiv-text="{{ computerAvatarSettings.label }}"/>:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e86ce5c4b75612c7ed9f6754d33b35a82cb025a9" datatype="html">
+        <source>Selected avatar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d8be89df0f7689e784ded095554331510617728c" datatype="html">
+        <source> Continue </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
+          <context context-type="linenumber">28,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">

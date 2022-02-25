@@ -1,4 +1,7 @@
 dialog-response {
   display: block;
-  margin: 8px 4px;
+
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
 }

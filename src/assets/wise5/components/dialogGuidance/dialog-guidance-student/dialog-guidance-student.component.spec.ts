@@ -9,8 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
 import { NodeService } from '../../../services/nodeService';
@@ -34,6 +36,7 @@ import { DialogGuidanceStudentComponent } from './dialog-guidance-student.compon
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
+const robotAvatar = new ComputerAvatar('robot', 'Robot', 'robot.png');
 
 describe('DialogGuidanceStudentComponent', () => {
   beforeEach(async () => {
@@ -58,6 +61,7 @@ describe('DialogGuidanceStudentComponent', () => {
       providers: [
         AnnotationService,
         ComponentService,
+        ComputerAvatarService,
         CRaterService,
         ConfigService,
         DialogGuidanceService,
@@ -139,10 +143,89 @@ describe('DialogGuidanceStudentComponent', () => {
     expect(broadcastComponentSaveTriggeredSpy).toHaveBeenCalled();
     expect(component.submitCounter).toEqual(0);
   });
+
+  it(`should initialize computer avatar when the student has not previously chosen a computer
+      avatar and there are multiple computer avatars to choose`, () => {
+    initializeComponentStateWithNoComputerAvatarId(component);
+    component.componentContent.computerAvatarSettings = {
+      ids: ['monkey', 'robot']
+    };
+    component.initializeComputerAvatar();
+    expectComputerAvatarSelectorToBeShown(component);
+  });
+
+  it(`should initialize computer avatar when the student has not previously chosen a computer
+      avatar and there is one computer avatar and no computer avatar prompt`, () => {
+    initializeComponentStateWithNoComputerAvatarId(component);
+    component.componentContent.computerAvatarSettings = {
+      ids: ['monkey']
+    };
+    component.initializeComputerAvatar();
+    expectComputerAvatarSelectorNotToBeShown(component);
+  });
+
+  it(`should initialize computer avatar when the student has not previously chosen a computer
+      avatar and there is one computer avatar and there is a computer avatar prompt`, () => {
+    initializeComponentStateWithNoComputerAvatarId(component);
+    component.componentContent.computerAvatarSettings = {
+      ids: ['monkey'],
+      prompt: 'This is your thought buddy you will be chatting with.'
+    };
+    component.initializeComputerAvatar();
+    expectComputerAvatarSelectorToBeShown(component);
+  });
+
+  it(`should initialize computer avatar when the student has previously chosen a computer
+      avatar`, () => {
+    component.componentContent.computerAvatarSettings = {
+      ids: ['monkey']
+    };
+    component.componentState = {
+      studentData: {
+        computerAvatarId: 'robot'
+      }
+    };
+    component.initializeComputerAvatar();
+    expectComputerAvatarSelectorNotToBeShown(component);
+  });
+
+  it('should select computer avatar', () => {
+    component.selectComputerAvatar(robotAvatar);
+    expect(component.computerAvatar).toEqual(robotAvatar);
+    expectComputerAvatarSelectorNotToBeShown(component);
+  });
+
+  it('should select computer avatar when there is a computer avatar initial response', () => {
+    const text = 'Hi there, who lives in a pineapple under sea?';
+    component.componentContent.computerAvatarSettings.initialResponse = text;
+    expect(component.responses.length).toEqual(0);
+    component.selectComputerAvatar(robotAvatar);
+    expect(component.responses.length).toEqual(1);
+    expect(component.responses[0].text).toEqual(text);
+  });
 });
 
 function simulateSubmit(component: DialogGuidanceStudentComponent): void {
   const response = new CRaterResponse();
   component.setIsSubmitDirty(true);
   component.cRaterSuccessResponse(response);
+}
+
+function initializeComponentStateWithNoComputerAvatarId(component: any) {
+  component.componentState = { studentData: {} };
+}
+
+function expectComputerAvatarSelectorToBeShown(component: any) {
+  expectIsShowComputerAvatarSelector(component, true);
+}
+
+function expectComputerAvatarSelectorNotToBeShown(component: any) {
+  expectIsShowComputerAvatarSelector(component, false);
+}
+
+function expectIsShowComputerAvatarSelector(
+  component: any,
+  expectedIsShowComputerAvatarSelector: boolean
+) {
+  expect(component.isShowComputerAvatarSelector).toEqual(expectedIsShowComputerAvatarSelector);
 }
