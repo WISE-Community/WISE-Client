@@ -25,4 +25,6 @@ export abstract class ComponentShowWorkDirective {
       this.componentId
     );
   }
+
+  ngOnDestroy(): void {}
 }
