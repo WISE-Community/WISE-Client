@@ -57,6 +57,7 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
@@ -71,6 +72,7 @@ import { setUpLocationSync } from '@angular/router/upgrade';
 import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance/dialogGuidanceService';
 import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
+import { ComputerAvatarService } from '../assets/wise5/services/computerAvatarService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -93,6 +95,7 @@ export class EmptyComponent {}
     FormsModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
@@ -124,6 +127,7 @@ export class EmptyComponent {}
     AudioRecorderService,
     ConceptMapService,
     ComponentService,
+    ComputerAvatarService,
     ConfigService,
     CRaterService,
     DataExportService,
@@ -164,6 +168,7 @@ export class EmptyComponent {}
     FormsModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
     MatChipsModule,

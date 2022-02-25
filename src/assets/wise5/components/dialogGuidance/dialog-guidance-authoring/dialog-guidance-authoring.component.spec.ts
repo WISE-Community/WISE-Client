@@ -1,20 +1,29 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Observable, Subject } from 'rxjs';
+import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { AnnotationService } from '../../../services/annotationService';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { DialogGuidanceService } from '../dialogGuidanceService';
 import { EditDialogGuidanceFeedbackRulesComponent } from '../edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component';
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 
@@ -34,24 +43,33 @@ describe('DialogGuidanceAuthoringComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        DragDropModule,
         FormsModule,
         HttpClientTestingModule,
+        MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
+        MatIconModule,
         MatInputModule,
         UpgradeModule
       ],
       declarations: [
         DialogGuidanceAuthoringComponent,
         EditComponentPrompt,
+        EditComponentMaxSubmitComponent,
         EditDialogGuidanceFeedbackRulesComponent
       ],
       providers: [
+        AnnotationService,
+        ComputerAvatarService,
         ConfigService,
+        DialogGuidanceService,
         { provide: NodeService, useClass: MockNodeService },
         ProjectAssetService,
         ProjectService,
         SessionService,
+        StudentDataService,
+        TagService,
         TeacherProjectService,
         UtilService
       ]
@@ -85,6 +103,7 @@ function createComponentContent() {
     prompt: '',
     feedbackRules: [],
     showSaveButton: false,
-    showSubmitButton: false
+    showSubmitButton: false,
+    isComputerAvatarEnabled: false
   };
 }

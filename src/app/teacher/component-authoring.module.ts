@@ -63,6 +63,7 @@ import { EditOpenResponseAdvancedComponent } from '../../assets/wise5/components
 import { EditMatchAdvancedComponent } from '../../assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component';
 import { EditSummaryAdvancedComponent } from '../../assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component';
 import { EditTableAdvancedComponent } from '../../assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component';
+import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { EditTableAdvancedComponent } from '../../assets/wise5/components/table/
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
+    EditDialogGuidanceComputerAvatarComponent,
     EditDialogGuidanceFeedbackRulesComponent,
     EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,

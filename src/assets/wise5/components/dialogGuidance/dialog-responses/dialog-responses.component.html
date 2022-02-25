@@ -1,2 +1,10 @@
-<dialog-response *ngFor="let response of responses" [response]="response"></dialog-response>
-<dialog-response *ngIf="isWaitingForComputerResponse" [response]="{text: '...'}"></dialog-response>
+<dialog-response
+    *ngFor="let response of responses"
+    [response]="response"
+    [computerAvatar]="computerAvatar">
+</dialog-response>
+<dialog-response
+    *ngIf="isWaitingForComputerResponse"
+    [response]="{text: '...'}"
+    [computerAvatar]="computerAvatar">
+</dialog-response>

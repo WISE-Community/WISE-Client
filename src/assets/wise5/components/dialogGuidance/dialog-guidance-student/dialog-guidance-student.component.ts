@@ -19,6 +19,8 @@ import { DialogGuidanceFeedbackRuleEvaluator } from '../DialogGuidanceFeedbackRu
 import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseMultipleScores';
 import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
 import { MatDialog } from '@angular/material/dialog';
+import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -26,8 +28,10 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./dialog-guidance-student.component.scss']
 })
 export class DialogGuidanceStudentComponent extends ComponentStudent {
+  computerAvatar: ComputerAvatar;
   cRaterTimeout: number = 40000;
   feedbackRuleEvaluator: DialogGuidanceFeedbackRuleEvaluator;
+  isShowComputerAvatarSelector: boolean = false;
   isSubmitEnabled: boolean = false;
   isWaitingForComputerResponse: boolean = false;
   responses: DialogResponse[] = [];
@@ -38,6 +42,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   constructor(
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
+    protected computerAvatarService: ComputerAvatarService,
     protected ConfigService: ConfigService,
     protected CRaterService: CRaterService,
     protected dialog: MatDialog,
@@ -73,6 +78,68 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       this.disableStudentResponse();
     }
     this.feedbackRuleEvaluator = new DialogGuidanceFeedbackRuleEvaluator(this);
+    if (this.componentContent.isComputerAvatarEnabled) {
+      this.initializeComputerAvatar();
+    } else {
+      this.computerAvatar = this.computerAvatarService.getDefaultAvatar();
+    }
+  }
+
+  initializeComputerAvatar(): void {
+    this.repopulateComputerAvatarFromComponentState(this.componentState);
+    if (this.hasStudentPreviouslyChosenComputerAvatar()) {
+      this.hideComputerAvatarSelector();
+    } else if (this.isOnlyOneComputerAvatarAvailable() && !this.isComputerAvatarPromptAvailable()) {
+      this.hideComputerAvatarSelector();
+      this.selectComputerAvatar(this.getTheOnlyComputerAvatarAvailable());
+    } else {
+      this.showComputerAvatarSelector();
+    }
+  }
+
+  repopulateComputerAvatarFromComponentState(componentState: any): void {
+    this.computerAvatar = this.computerAvatarService.getAvatar(
+      componentState?.studentData?.computerAvatarId
+    );
+  }
+
+  hasStudentPreviouslyChosenComputerAvatar(): boolean {
+    return this.computerAvatar != null;
+  }
+
+  isOnlyOneComputerAvatarAvailable(): boolean {
+    return this.componentContent.computerAvatarSettings.ids.length === 1;
+  }
+
+  getTheOnlyComputerAvatarAvailable(): ComputerAvatar {
+    return this.computerAvatarService.getAvatar(
+      this.componentContent.computerAvatarSettings.ids[0]
+    );
+  }
+
+  isComputerAvatarPromptAvailable(): boolean {
+    const computerAvatarPrompt = this.componentContent.computerAvatarSettings.prompt;
+    return computerAvatarPrompt != null && computerAvatarPrompt !== '';
+  }
+
+  showComputerAvatarSelector(): void {
+    this.isShowComputerAvatarSelector = true;
+  }
+
+  hideComputerAvatarSelector(): void {
+    this.isShowComputerAvatarSelector = false;
+  }
+
+  selectComputerAvatar(computerAvatar: ComputerAvatar): void {
+    this.computerAvatar = computerAvatar;
+    this.hideComputerAvatarSelector();
+    const computerAvatarInitialResponse = this.componentContent.computerAvatarSettings
+      .initialResponse;
+    if (computerAvatarInitialResponse != null && computerAvatarInitialResponse !== '') {
+      this.addDialogResponse(
+        new ComputerDialogResponse(computerAvatarInitialResponse, [], new Date().getTime())
+      );
+    }
   }
 
   submitStudentResponse(): void {
@@ -177,6 +244,9 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       responses: this.responses,
       submitCounter: this.submitCounter
     };
+    if (this.computerAvatar != null) {
+      componentState.studentData.computerAvatarId = this.computerAvatar.id;
+    }
     componentState.componentType = 'DialogGuidance';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
