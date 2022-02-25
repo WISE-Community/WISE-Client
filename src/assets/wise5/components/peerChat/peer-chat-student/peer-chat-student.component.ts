@@ -88,7 +88,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   requestChatWorkgroups(): void {
     this.peerGroupService
-      .retrievePeerGroup(this.peerGroupActivityTag)
+      .retrievePeerGroup(this.workgroupId, this.peerGroupActivityTag)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (peerGroup: any) => {
