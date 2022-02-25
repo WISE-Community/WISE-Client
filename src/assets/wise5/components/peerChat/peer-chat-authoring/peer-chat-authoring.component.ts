@@ -14,7 +14,7 @@ import { UtilService } from '../../../services/utilService';
   styleUrls: ['./peer-chat-authoring.component.scss']
 })
 export class PeerChatAuthoringComponent extends ComponentAuthoring {
-  allowedShowWorkComponentTypes: string[] = [
+  allowedComponentTypes: string[] = [
     'ConceptMap',
     'Draw',
     'Graph',
@@ -31,16 +31,16 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
       text: $localize`Random`
     },
     {
+      value: 'manual',
+      text: $localize`Manual`
+    },
+    {
       value: 'maximizeSimilarIdeas',
       text: $localize`Maximize Similar Ideas`
     },
     {
       value: 'maximizeDifferentIdeas',
       text: $localize`Maximize Different Ideas`
-    },
-    {
-      value: 'manual',
-      text: $localize`Manual`
     }
   ];
   nodeIds: string[];
@@ -77,17 +77,8 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     return this.ProjectService.getComponentsByNodeId(nodeId);
   }
 
-  isShowWorkComponentTypeAllowed(componentType: string): boolean {
-    return this.allowedShowWorkComponentTypes.includes(componentType);
-  }
-
-  showWorkNodeIdChanged(): void {
-    this.tryUpdateComponentId(
-      this.authoringComponentContent,
-      'showWorkNodeId',
-      'showWorkComponentId'
-    );
-    this.componentChanged();
+  isComponentTypeAllowed(componentType: string): boolean {
+    return this.allowedComponentTypes.includes(componentType);
   }
 
   tryUpdateComponentId(object: any, nodeIdFieldName: string, componentIdFieldName: string): void {

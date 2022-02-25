@@ -59,7 +59,7 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     this.peerGroupService
-      .retrievePeerGroup(this.workgroupId, this.componentContent.peerGroupActivityTag)
+      .retrievePeerGroup(this.componentContent.peerGroupActivityTag, this.workgroupId)
       .subscribe((peerGroup: PeerGroup) => {
         this.peerGroup = this.componentContent.isShowMyWork
           ? peerGroup
