@@ -80,6 +80,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.feedbackRuleEvaluator = new DialogGuidanceFeedbackRuleEvaluator(this);
     if (this.componentContent.isComputerAvatarEnabled) {
       this.initializeComputerAvatar();
+    } else {
+      this.computerAvatar = this.computerAvatarService.getDefaultAvatar();
     }
   }
 

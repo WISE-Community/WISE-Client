@@ -30,4 +30,8 @@ export class ComputerAvatarService {
   getAvatarsPath(): string {
     return this.avatarsPath;
   }
+
+  getDefaultAvatar(): ComputerAvatar {
+    return this.getAvatar('robot1');
+  }
 }

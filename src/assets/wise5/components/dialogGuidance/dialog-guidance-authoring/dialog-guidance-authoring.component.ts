@@ -6,6 +6,7 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { DialogGuidanceService } from '../dialogGuidanceService';
 
 @Component({
   selector: 'dialog-guidance-authoring',
@@ -17,6 +18,7 @@ export class DialogGuidanceAuthoringComponent extends ComponentAuthoring {
 
   constructor(
     protected configService: ConfigService,
+    private dialogGuidanceService: DialogGuidanceService,
     protected nodeService: NodeService,
     protected projectAssetService: ProjectAssetService,
     protected projectService: TeacherProjectService
@@ -27,5 +29,12 @@ export class DialogGuidanceAuthoringComponent extends ComponentAuthoring {
         this.componentChanged();
       })
     );
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+    if (this.authoringComponentContent.computerAvatarSettings == null) {
+      this.authoringComponentContent.computerAvatarSettings = this.dialogGuidanceService.getDefaultComputerAvatarSettings();
+    }
   }
 }

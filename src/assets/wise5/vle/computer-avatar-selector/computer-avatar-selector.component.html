@@ -4,8 +4,8 @@
       <div class="mat-body-1" [innerHtml]="computerAvatarSettings.prompt"></div>
       <mat-divider></mat-divider>
     </ng-container>
-    <div *ngIf="avatars.length === 1" class="mat-body-2 accent" i18n>Your {{ computerAvatarSettings.label }}:</div>
-    <div *ngIf="avatars.length != 1" class="mat-body-2 accent" i18n>Choose Your {{ computerAvatarSettings.label }}:</div>
+    <div *ngIf="avatars.length === 1" class="mat-body-2 accent" i18n>Your {{ label }}:</div>
+    <div *ngIf="avatars.length != 1" class="mat-body-2 accent" i18n>Choose Your {{ label }}:</div>
     <mat-button-toggle-group [(ngModel)]="avatarSelected"
         [disabled]="avatars.length === 1"
         fxLayout="row wrap"

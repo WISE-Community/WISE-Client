@@ -13,14 +13,17 @@ import { Observable, Subject } from 'rxjs';
 import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { AnnotationService } from '../../../services/annotationService';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
+import { StudentDataService } from '../../../services/studentDataService';
+import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { DialogGuidanceService } from '../dialogGuidanceService';
 import { EditDialogGuidanceFeedbackRulesComponent } from '../edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component';
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 
@@ -57,12 +60,16 @@ describe('DialogGuidanceAuthoringComponent', () => {
         EditDialogGuidanceFeedbackRulesComponent
       ],
       providers: [
+        AnnotationService,
         ComputerAvatarService,
         ConfigService,
+        DialogGuidanceService,
         { provide: NodeService, useClass: MockNodeService },
         ProjectAssetService,
         ProjectService,
         SessionService,
+        StudentDataService,
+        TagService,
         TeacherProjectService,
         UtilService
       ]

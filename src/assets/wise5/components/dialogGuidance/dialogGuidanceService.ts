@@ -24,12 +24,20 @@ export class DialogGuidanceService extends ComponentService {
     component.itemId = '';
     component.feedbackRules = [];
     component.isComputerAvatarEnabled = false;
-    component.computerAvatarSettings = {
+    component.computerAvatarSettings = this.getDefaultComputerAvatarSettings();
+    return component;
+  }
+
+  getDefaultComputerAvatarSettings(): any {
+    return {
       ids: this.computerAvatarService.getAvatars().map((avatar) => avatar.id),
-      label: $localize`Thought Buddy`,
+      label: this.getDefaultComputerAvatarLabel(),
       prompt: $localize`Discuss your answer with a thought buddy!`,
       initialResponse: $localize`Hi there! It's nice to meet you. What do you think about...`
     };
-    return component;
+  }
+
+  getDefaultComputerAvatarLabel(): string {
+    return $localize`Thought Buddy`;
   }
 }
