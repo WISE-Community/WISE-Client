@@ -14,6 +14,7 @@ import demoNotebooksByWorkgroupId_import from './sampleData/sample_notebooksByWo
 import demoPublicNotebookItems_import from './sampleData/sample_publicNotebookItems.json';
 import demoProject_import from './sampleData/curriculum/Demo.project.json';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { StudentStudentStatusService } from '../../assets/wise5/services/studentStudentStatusService';
 
 let http: HttpTestingController;
 let configService: ConfigService;
@@ -42,6 +43,7 @@ describe('NotebookService', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentStudentStatusService,
         TagService,
         UtilService
       ]

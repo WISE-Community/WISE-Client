@@ -27,6 +27,7 @@ import { ComponentService } from '../../componentService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { AudioOscillatorStudent } from './audio-oscillator-student.component';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
+import { StudentStudentStatusService } from '../../../services/studentStudentStatusService';
 
 export class MockService {}
 
@@ -74,6 +75,7 @@ describe('AudioOscillatorStudent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentStudentStatusService,
         TagService,
         UtilService
       ],

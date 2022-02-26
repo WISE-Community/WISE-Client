@@ -6,6 +6,7 @@ import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentDataService } from '../../../services/studentDataService';
+import { StudentStudentStatusService } from '../../../services/studentStudentStatusService';
 import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
 import { VLEProjectService } from '../../../vle/vleProjectService';
@@ -29,6 +30,7 @@ describe('NavigationComponent', () => {
         ProjectService,
         SessionService,
         StudentDataService,
+        StudentStudentStatusService,
         TagService,
         UtilService,
         { provide: VLEProjectService, useClass: MockVLEProjectService }

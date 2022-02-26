@@ -16,6 +16,7 @@ import { ComponentService } from './componentService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StudentStudentStatusService } from '../services/studentStudentStatusService';
 
 let component: ComponentStudent;
 let fixture: ComponentFixture<ComponentStudent>;
@@ -43,6 +44,7 @@ describe('ComponentStudent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentStudentStatusService,
         TagService,
         UtilService
       ],

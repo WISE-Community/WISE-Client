@@ -16,6 +16,7 @@ import { AddToNotebookButton } from '../directives/add-to-notebook-button/add-to
 import { NavigationComponent } from '../themes/default/navigation/navigation.component';
 import { NotificationsDialogComponent } from './notifications-dialog/notifications-dialog.component';
 import { StudentAccountMenuComponent } from './student-account-menu/student-account-menu.component';
+import { StudentStudentStatusService } from '../services/studentStudentStatusService';
 
 export function createStudentAngularJSModule(type = 'preview') {
   return angular
@@ -29,6 +30,7 @@ export function createStudentAngularJSModule(type = 'preview') {
       'ui.scrollpoint'
     ])
     .factory('ProjectService', downgradeInjectable(VLEProjectService))
+    .factory('StudentStudentStatusService', downgradeInjectable(StudentStudentStatusService))
     .factory('StudentWebSocketService', downgradeInjectable(StudentWebSocketService))
     .directive(
       'navItem',
@@ -133,6 +135,13 @@ export function createStudentAngularJSModule(type = 'preview') {
                 'tags',
                 (StudentDataService, config, project, tags) => {
                   return StudentDataService.retrieveStudentData();
+                }
+              ],
+              studentStatus: [
+                'StudentStudentStatusService',
+                'config',
+                (StudentStudentStatusService, config) => {
+                  return StudentStudentStatusService.retrieveStudentStatus();
                 }
               ],
               notebook: [

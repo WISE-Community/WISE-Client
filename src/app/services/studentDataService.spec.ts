@@ -9,6 +9,7 @@ import { UtilService } from '../../assets/wise5/services/utilService';
 import * as angular from 'angular';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { StudentStudentStatusService } from '../../assets/wise5/services/studentStudentStatusService';
 
 let $injector, $rootScope;
 let http: HttpTestingController;
@@ -32,6 +33,7 @@ describe('StudentDataService', () => {
         ProjectService,
         SessionService,
         StudentDataService,
+        StudentStudentStatusService,
         TagService,
         UtilService
       ]
@@ -1310,6 +1312,7 @@ function shouldSaveStudentStatus() {
     spyOn(service, 'getCurrentNodeId').and.returnValue(nodeId);
     spyOn(service, 'getNodeStatuses').and.returnValue(nodeStatuses);
     spyOn(service, 'getProjectCompletion').and.returnValue(projectCompletion);
+    spyOn(TestBed.inject(StudentStudentStatusService), 'getComputerAvatarId').and.returnValue(null);
     service.saveStudentStatus();
     const studentStatusJSON = {
       runId: runId,

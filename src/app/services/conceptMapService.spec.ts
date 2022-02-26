@@ -12,6 +12,7 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { NodeService } from '../../assets/wise5/services/nodeService';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StudentStudentStatusService } from '../../assets/wise5/services/studentStudentStatusService';
 
 let service: ConceptMapService;
 let conceptMapNode1: any;
@@ -58,6 +59,7 @@ describe('ConceptMapService', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentStudentStatusService,
         TagService,
         UtilService
       ]

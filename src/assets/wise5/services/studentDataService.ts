@@ -11,6 +11,8 @@ import * as angular from 'angular';
 import { TagService } from './tagService';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
+import { StudentStatus } from '../common/StudentStatus';
+import { StudentStudentStatusService } from './studentStudentStatusService';
 
 @Injectable()
 export class StudentDataService extends DataService {
@@ -114,6 +116,7 @@ export class StudentDataService extends DataService {
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
     ProjectService: ProjectService,
+    private studentStudentStatusService: StudentStudentStatusService,
     private TagService: TagService,
     private UtilService: UtilService
   ) {
@@ -1100,7 +1103,7 @@ export class StudentDataService extends DataService {
       const currentNodeId = this.getCurrentNodeId();
       const nodeStatuses = this.getNodeStatuses();
       const projectCompletion = this.getProjectCompletion();
-      const studentStatusJSON = {
+      const studentStatusJSON: StudentStatus = {
         runId: runId,
         periodId: periodId,
         workgroupId: workgroupId,
@@ -1108,6 +1111,11 @@ export class StudentDataService extends DataService {
         nodeStatuses: nodeStatuses,
         projectCompletion: projectCompletion
       };
+      const computerAvatarId = this.studentStudentStatusService.getComputerAvatarId();
+      if (computerAvatarId != null) {
+        studentStatusJSON.computerAvatarId = computerAvatarId;
+      }
+      this.studentStudentStatusService.setStudentStatus(studentStatusJSON);
       const studentStatusParams = {
         runId: runId,
         periodId: periodId,

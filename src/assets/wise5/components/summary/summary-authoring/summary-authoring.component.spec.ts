@@ -21,6 +21,7 @@ import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentDataService } from '../../../services/studentDataService';
+import { StudentStudentStatusService } from '../../../services/studentStudentStatusService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
@@ -65,6 +66,7 @@ describe('SummaryAuthoring', () => {
         ProjectService,
         SessionService,
         StudentDataService,
+        StudentStudentStatusService,
         SummaryService,
         TagService,
         TeacherProjectService,

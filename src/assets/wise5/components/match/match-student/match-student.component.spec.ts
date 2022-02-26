@@ -12,6 +12,7 @@ import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
+import { StudentStudentStatusService } from '../../../services/studentStudentStatusService';
 import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
@@ -78,6 +79,7 @@ describe('MatchStudent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentStudentStatusService,
         TagService,
         UtilService
       ],

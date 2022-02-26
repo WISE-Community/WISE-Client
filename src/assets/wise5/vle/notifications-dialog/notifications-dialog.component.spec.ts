@@ -16,6 +16,7 @@ import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { NotificationsDialogComponent } from './notifications-dialog.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { StudentStudentStatusService } from '../../services/studentStudentStatusService';
 
 describe('NotificationsMenuComponent', () => {
   let component: NotificationsDialogComponent;
@@ -48,11 +49,12 @@ describe('NotificationsMenuComponent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentStudentStatusService,
         TagService,
         UtilService,
         {
           provide: MatDialogRef,
-          useValue: { close: () => {} } 
+          useValue: { close: () => {} }
         }
       ]
     }).compileComponents();

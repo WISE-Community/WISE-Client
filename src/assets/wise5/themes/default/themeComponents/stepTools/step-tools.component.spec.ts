@@ -12,6 +12,7 @@ import { NodeService } from '../../../../services/nodeService';
 import { ProjectService } from '../../../../services/projectService';
 import { SessionService } from '../../../../services/sessionService';
 import { StudentDataService } from '../../../../services/studentDataService';
+import { StudentStudentStatusService } from '../../../../services/studentStudentStatusService';
 import { TagService } from '../../../../services/tagService';
 import { UtilService } from '../../../../services/utilService';
 import { NodeStatusIcon } from '../nodeStatusIcon/node-status-icon.component';
@@ -55,6 +56,7 @@ describe('StepToolsComponent', () => {
         ProjectService,
         SessionService,
         StudentDataService,
+        StudentStudentStatusService,
         TagService,
         UtilService
       ]

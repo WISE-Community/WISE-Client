@@ -21,6 +21,7 @@ import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSing
 import { MatDialog } from '@angular/material/dialog';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
+import { StudentStudentStatusService } from '../../../services/studentStudentStatusService';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -50,6 +51,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
+    protected studentStudentStatusService: StudentStudentStatusService,
     protected UtilService: UtilService
   ) {
     super(
@@ -86,7 +88,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   }
 
   initializeComputerAvatar(): void {
-    this.repopulateComputerAvatarFromComponentState(this.componentState);
+    this.tryToRepopulateComputerAvatar();
     if (this.hasStudentPreviouslyChosenComputerAvatar()) {
       this.hideComputerAvatarSelector();
     } else if (this.isOnlyOneComputerAvatarAvailable() && !this.isComputerAvatarPromptAvailable()) {
@@ -97,10 +99,37 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     }
   }
 
+  tryToRepopulateComputerAvatar(): void {
+    if (this.isComputerAvatarInComponentState(this.componentState)) {
+      this.repopulateComputerAvatarFromComponentState(this.componentState);
+    } else if (this.shouldUseGlobalComputerAvatar() && this.isGlobalComputerAvatarAvailable()) {
+      this.repopulateGlobalComputerAvatar();
+    }
+  }
+
+  isComputerAvatarInComponentState(componentState: any): boolean {
+    return componentState?.studentData?.computerAvatarId != null;
+  }
+
+  shouldUseGlobalComputerAvatar(): boolean {
+    return this.componentContent.computerAvatarSettings.useGlobalComputerAvatar;
+  }
+
+  isGlobalComputerAvatarAvailable(): boolean {
+    return this.studentStudentStatusService.getComputerAvatarId() != null;
+  }
+
   repopulateComputerAvatarFromComponentState(componentState: any): void {
     this.computerAvatar = this.computerAvatarService.getAvatar(
       componentState?.studentData?.computerAvatarId
     );
+  }
+
+  repopulateGlobalComputerAvatar(): void {
+    const computerAvatarId = this.studentStudentStatusService.getComputerAvatarId();
+    if (computerAvatarId != null) {
+      this.selectComputerAvatar(this.computerAvatarService.getAvatar(computerAvatarId));
+    }
   }
 
   hasStudentPreviouslyChosenComputerAvatar(): boolean {
@@ -132,6 +161,9 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   selectComputerAvatar(computerAvatar: ComputerAvatar): void {
     this.computerAvatar = computerAvatar;
+    if (this.shouldUseGlobalComputerAvatar()) {
+      this.studentStudentStatusService.setComputerAvatarId(computerAvatar.id);
+    }
     this.hideComputerAvatarSelector();
     const computerAvatarInitialResponse = this.componentContent.computerAvatarSettings
       .initialResponse;

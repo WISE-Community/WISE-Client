@@ -11,6 +11,7 @@ import { ProjectService } from '../../assets/wise5/services/projectService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
+import { StudentStudentStatusService } from '../../assets/wise5/services/studentStudentStatusService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { TeacherDataService } from '../../assets/wise5/services/teacherDataService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
@@ -37,6 +38,7 @@ describe('DataExportService', () => {
         SessionService,
         StudentDataService,
         StudentStatusService,
+        StudentStudentStatusService,
         TagService,
         TeacherDataService,
         TeacherProjectService,

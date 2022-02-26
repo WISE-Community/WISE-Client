@@ -21,6 +21,7 @@ import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
+import { StudentStudentStatusService } from '../../../services/studentStudentStatusService';
 import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
 import { MockNodeService } from '../../animation/animation-authoring/animation-authoring.component.spec';
@@ -71,6 +72,7 @@ describe('DialogGuidanceStudentComponent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentStudentStatusService,
         TagService,
         UtilService
       ]
@@ -144,8 +146,16 @@ describe('DialogGuidanceStudentComponent', () => {
     expect(component.submitCounter).toEqual(0);
   });
 
+  it('should initialize computer avatar to default computer avatar', () => {
+    clearComputerAvatar(component);
+    component.ngOnInit();
+    expectComputerAvatarSelectorNotToBeShown(component);
+    expect(component.computerAvatar).not.toBeNull();
+  });
+
   it(`should initialize computer avatar when the student has not previously chosen a computer
       avatar and there are multiple computer avatars to choose`, () => {
+    clearComputerAvatar(component);
     initializeComponentStateWithNoComputerAvatarId(component);
     component.componentContent.computerAvatarSettings = {
       ids: ['monkey', 'robot']
@@ -156,6 +166,7 @@ describe('DialogGuidanceStudentComponent', () => {
 
   it(`should initialize computer avatar when the student has not previously chosen a computer
       avatar and there is one computer avatar and no computer avatar prompt`, () => {
+    clearComputerAvatar(component);
     initializeComponentStateWithNoComputerAvatarId(component);
     component.componentContent.computerAvatarSettings = {
       ids: ['monkey']
@@ -166,6 +177,7 @@ describe('DialogGuidanceStudentComponent', () => {
 
   it(`should initialize computer avatar when the student has not previously chosen a computer
       avatar and there is one computer avatar and there is a computer avatar prompt`, () => {
+    clearComputerAvatar(component);
     initializeComponentStateWithNoComputerAvatarId(component);
     component.componentContent.computerAvatarSettings = {
       ids: ['monkey'],
@@ -177,6 +189,7 @@ describe('DialogGuidanceStudentComponent', () => {
 
   it(`should initialize computer avatar when the student has previously chosen a computer
       avatar`, () => {
+    clearComputerAvatar(component);
     component.componentContent.computerAvatarSettings = {
       ids: ['monkey']
     };
@@ -195,6 +208,23 @@ describe('DialogGuidanceStudentComponent', () => {
     expectComputerAvatarSelectorNotToBeShown(component);
   });
 
+  it('should set computer avatar to global computer avatar', () => {
+    clearComputerAvatar(component);
+    component.componentContent.computerAvatarSettings.useGlobalComputerAvatar = true;
+    spyOn(TestBed.inject(StudentStudentStatusService), 'getComputerAvatarId').and.returnValue(
+      'robot1'
+    );
+    spyOn(
+      TestBed.inject(StudentStudentStatusService),
+      'setComputerAvatarId'
+    ).and.callFake(() => {});
+    const computerAvatarService = TestBed.inject(ComputerAvatarService);
+    const defaultComputerAvatar = computerAvatarService.getDefaultAvatar();
+    spyOn(computerAvatarService, 'getAvatar').and.returnValue(defaultComputerAvatar);
+    component.initializeComputerAvatar();
+    expect(component.computerAvatar).toEqual(defaultComputerAvatar);
+  });
+
   it('should select computer avatar when there is a computer avatar initial response', () => {
     const text = 'Hi there, who lives in a pineapple under sea?';
     component.componentContent.computerAvatarSettings.initialResponse = text;
@@ -209,6 +239,10 @@ function simulateSubmit(component: DialogGuidanceStudentComponent): void {
   const response = new CRaterResponse();
   component.setIsSubmitDirty(true);
   component.cRaterSuccessResponse(response);
+}
+
+function clearComputerAvatar(component: any): void {
+  component.computerAvatar = null;
 }
 
 function initializeComponentStateWithNoComputerAvatarId(component: any) {
