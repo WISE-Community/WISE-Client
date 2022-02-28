@@ -73,7 +73,7 @@ import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance
 import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
 import { ComputerAvatarService } from '../assets/wise5/services/computerAvatarService';
-import { StudentStudentStatusService } from '../assets/wise5/services/studentStudentStatusService';
+import { StudentStatusService } from '../assets/wise5/services/studentStatusService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -151,7 +151,7 @@ export class EmptyComponent {}
     SessionService,
     StudentAssetService,
     StudentDataService,
-    StudentStudentStatusService,
+    StudentStatusService,
     StudentWebSocketService,
     SummaryService,
     TableService,

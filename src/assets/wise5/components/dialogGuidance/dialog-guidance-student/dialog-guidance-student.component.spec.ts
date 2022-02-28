@@ -21,7 +21,7 @@ import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { StudentStudentStatusService } from '../../../services/studentStudentStatusService';
+import { StudentStatusService } from '../../../services/studentStatusService';
 import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
 import { MockNodeService } from '../../animation/animation-authoring/animation-authoring.component.spec';
@@ -72,7 +72,7 @@ describe('DialogGuidanceStudentComponent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentStudentStatusService,
+        StudentStatusService,
         TagService,
         UtilService
       ]
@@ -211,13 +211,8 @@ describe('DialogGuidanceStudentComponent', () => {
   it('should set computer avatar to global computer avatar', () => {
     clearComputerAvatar(component);
     component.componentContent.computerAvatarSettings.useGlobalComputerAvatar = true;
-    spyOn(TestBed.inject(StudentStudentStatusService), 'getComputerAvatarId').and.returnValue(
-      'robot1'
-    );
-    spyOn(
-      TestBed.inject(StudentStudentStatusService),
-      'setComputerAvatarId'
-    ).and.callFake(() => {});
+    spyOn(TestBed.inject(StudentStatusService), 'getComputerAvatarId').and.returnValue('robot1');
+    spyOn(TestBed.inject(StudentStatusService), 'setComputerAvatarId').and.callFake(() => {});
     const computerAvatarService = TestBed.inject(ComputerAvatarService);
     const defaultComputerAvatar = computerAvatarService.getDefaultAvatar();
     spyOn(computerAvatarService, 'getAvatar').and.returnValue(defaultComputerAvatar);

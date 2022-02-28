@@ -10,7 +10,7 @@ import { UtilService } from '../../assets/wise5/services/utilService';
 import { LabelService } from '../../assets/wise5/components/label/labelService';
 import { TestBed } from '@angular/core/testing';
 import { SessionService } from '../../assets/wise5/services/sessionService';
-import { StudentStudentStatusService } from '../../assets/wise5/services/studentStudentStatusService';
+import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
 
 let service: LabelService;
 let utilService: UtilService;
@@ -50,7 +50,7 @@ describe('LabelService', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentStudentStatusService,
+        StudentStatusService,
         TagService,
         UtilService
       ]

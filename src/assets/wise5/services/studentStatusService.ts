@@ -4,7 +4,7 @@ import { StudentStatus } from '../common/StudentStatus';
 import { ConfigService } from './configService';
 
 @Injectable()
-export class StudentStudentStatusService {
+export class StudentStatusService {
   studentStatus: StudentStatus;
 
   constructor(private http: HttpClient, private configService: ConfigService) {}

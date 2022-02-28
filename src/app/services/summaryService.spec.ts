@@ -9,7 +9,7 @@ import { AnnotationService } from '../../assets/wise5/services/annotationService
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
-import { StudentStudentStatusService } from '../../assets/wise5/services/studentStudentStatusService';
+import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
 
 let service;
 const summaryAllowedComponentTypes = [
@@ -40,7 +40,7 @@ describe('SummaryService', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStudentStatusService,
+        StudentStatusService,
         SummaryService,
         TagService,
         UtilService

@@ -11,7 +11,7 @@ import { ProjectService } from '../../../../services/projectService';
 import { SessionService } from '../../../../services/sessionService';
 import { StudentDataService } from '../../../../services/studentDataService';
 import { TeacherStudentStatusService } from '../../../../services/teacherStudentStatusService';
-import { StudentStudentStatusService } from '../../../../services/studentStudentStatusService';
+import { StudentStatusService } from '../../../../services/studentStatusService';
 import { TagService } from '../../../../services/tagService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
@@ -36,7 +36,7 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStudentStatusService,
+        StudentStatusService,
         TagService,
         TeacherDataService,
         TeacherProjectService,

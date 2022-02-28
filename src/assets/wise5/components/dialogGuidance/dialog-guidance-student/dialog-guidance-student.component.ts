@@ -21,7 +21,7 @@ import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSing
 import { MatDialog } from '@angular/material/dialog';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
-import { StudentStudentStatusService } from '../../../services/studentStudentStatusService';
+import { StudentStatusService } from '../../../services/studentStatusService';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -51,7 +51,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected studentStudentStatusService: StudentStudentStatusService,
+    protected studentStatusService: StudentStatusService,
     protected UtilService: UtilService
   ) {
     super(
@@ -116,7 +116,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   }
 
   isGlobalComputerAvatarAvailable(): boolean {
-    return this.studentStudentStatusService.getComputerAvatarId() != null;
+    return this.studentStatusService.getComputerAvatarId() != null;
   }
 
   repopulateComputerAvatarFromComponentState(componentState: any): void {
@@ -126,7 +126,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   }
 
   repopulateGlobalComputerAvatar(): void {
-    const computerAvatarId = this.studentStudentStatusService.getComputerAvatarId();
+    const computerAvatarId = this.studentStatusService.getComputerAvatarId();
     if (computerAvatarId != null) {
       this.selectComputerAvatar(this.computerAvatarService.getAvatar(computerAvatarId));
     }
@@ -162,7 +162,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   selectComputerAvatar(computerAvatar: ComputerAvatar): void {
     this.computerAvatar = computerAvatar;
     if (this.shouldUseGlobalComputerAvatar()) {
-      this.studentStudentStatusService.setComputerAvatarId(computerAvatar.id);
+      this.studentStatusService.setComputerAvatarId(computerAvatar.id);
     }
     this.hideComputerAvatarSelector();
     const computerAvatarInitialResponse = this.componentContent.computerAvatarSettings
