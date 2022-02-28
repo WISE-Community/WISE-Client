@@ -61,6 +61,8 @@ describe('ConfigService', () => {
   getAllUsersInPeriod();
   getUsersNotInWorkgroupInPeriod();
   getTeacherWorkgroupId();
+  getSharedTeacherWorkgroupIds();
+  getTeacherWorkgroupIds();
   getPeriodIdGivenWorkgroupId();
   calculateIsRunActive();
   isEndedAndLocked();
@@ -162,6 +164,20 @@ function getTeacherWorkgroupId() {
   it('should get teacher workgroup id from config', () => {
     service.setConfig(sampleConfig1);
     expect(service.getTeacherWorkgroupId()).toEqual(1);
+  });
+}
+
+function getSharedTeacherWorkgroupIds() {
+  it('should get shared teacher workgroup ids from config', () => {
+    service.setConfig(sampleConfig1);
+    expect(service.getSharedTeacherWorkgroupIds()).toEqual([100, 101]);
+  });
+}
+
+function getTeacherWorkgroupIds() {
+  it('should get shared teacher workgroup ids from config', () => {
+    service.setConfig(sampleConfig1);
+    expect(service.getTeacherWorkgroupIds()).toEqual([1, 100, 101]);
   });
 }
 

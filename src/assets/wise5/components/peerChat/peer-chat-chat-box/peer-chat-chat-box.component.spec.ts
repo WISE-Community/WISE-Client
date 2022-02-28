@@ -1,4 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PeerChatMembersComponent } from '../peer-chat-members/peer-chat-members.component';
+import { PeerChatMessageInputComponent } from '../peer-chat-message-input/peer-chat-message-input.component';
 
 import { PeerChatChatBoxComponent } from './peer-chat-chat-box.component';
 
@@ -8,9 +15,19 @@ describe('PeerChatChatBoxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PeerChatChatBoxComponent ]
-    })
-    .compileComponents();
+      imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule
+      ],
+      declarations: [
+        PeerChatChatBoxComponent,
+        PeerChatMembersComponent,
+        PeerChatMessageInputComponent
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +38,20 @@ describe('PeerChatChatBoxComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should get workgroup infos without teachers', () => {
+    const workgroupInfos = {
+      1: { isTeacher: true },
+      2: { isTeacher: false },
+      3: { isTeacher: false }
+    };
+    const workgroupInfosWithoutTeachers = component.getWorkgroupInfosWithoutTeachers(
+      workgroupInfos
+    );
+    expect(workgroupInfosWithoutTeachers).toEqual({
+      2: { isTeacher: false },
+      3: { isTeacher: false }
+    });
   });
 });

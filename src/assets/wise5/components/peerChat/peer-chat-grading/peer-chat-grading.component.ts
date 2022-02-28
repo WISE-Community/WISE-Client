@@ -34,7 +34,7 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
     protected teacherWebSocketService: TeacherWebSocketService,
     protected teacherWorkService: TeacherWorkService
   ) {
-    super(configService, peerChatService, projectService);
+    super(configService, peerChatService, peerGroupService, projectService);
   }
 
   ngOnInit(): void {

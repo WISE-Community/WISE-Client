@@ -283,12 +283,27 @@ export class ConfigService {
     }
   }
 
-  getTeacherWorkgroupId() {
+  getTeacherWorkgroupIds(): number[] {
+    const teacherWorkgroupIds = [];
+    teacherWorkgroupIds.push(this.getTeacherWorkgroupId());
+    teacherWorkgroupIds.push(...this.getSharedTeacherWorkgroupIds());
+    return teacherWorkgroupIds;
+  }
+
+  getTeacherWorkgroupId(): number {
     const teacherUserInfo = this.getTeacherUserInfo();
     if (teacherUserInfo != null) {
       return teacherUserInfo.workgroupId;
     }
     return null;
+  }
+
+  getSharedTeacherWorkgroupIds(): number[] {
+    const workgroupIds = [];
+    this.getSharedTeacherUserInfos().forEach((sharedTeacherUserInfo: any) => {
+      workgroupIds.push(sharedTeacherUserInfo.workgroupId);
+    });
+    return workgroupIds;
   }
 
   getTeacherUserInfo() {
