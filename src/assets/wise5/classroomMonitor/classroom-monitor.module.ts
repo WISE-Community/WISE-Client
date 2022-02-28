@@ -74,10 +74,10 @@ export default angular
               }
             ],
             studentStatuses: [
-              'StudentStatusService',
+              'TeacherStudentStatusService',
               'config',
-              (StudentStatusService, config) => {
-                return StudentStatusService.retrieveStudentStatuses();
+              (TeacherStudentStatusService, config) => {
+                return TeacherStudentStatusService.retrieveStudentStatuses();
               }
             ],
             achievements: [

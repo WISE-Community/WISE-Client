@@ -3,7 +3,7 @@
 import { Directive } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../services/configService';
-import { StudentStatusService } from '../../services/studentStatusService';
+import { TeacherStudentStatusService } from '../../services/teacherStudentStatusService';
 import { TeacherDataService } from '../../services/teacherDataService';
 
 @Directive()
@@ -32,16 +32,16 @@ class StudentProgressController {
     '$scope',
     '$state',
     'ConfigService',
-    'StudentStatusService',
-    'TeacherDataService'
+    'TeacherDataService',
+    'TeacherStudentStatusService'
   ];
 
   constructor(
     private $scope: any,
     private $state: any,
     private ConfigService: ConfigService,
-    private StudentStatusService: StudentStatusService,
-    private TeacherDataService: TeacherDataService
+    private TeacherDataService: TeacherDataService,
+    private teacherStudentStatusService: TeacherStudentStatusService
   ) {
     this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
     this.sort = this.TeacherDataService.studentProgressSort;
@@ -49,7 +49,7 @@ class StudentProgressController {
     this.students = [];
     this.initializeStudents();
     this.subscriptions.add(
-      this.StudentStatusService.studentStatusReceived$.subscribe((args) => {
+      this.teacherStudentStatusService.studentStatusReceived$.subscribe((args) => {
         const studentStatus = args.studentStatus;
         const workgroupId = studentStatus.workgroupId;
         this.updateTeam(workgroupId);
@@ -86,7 +86,9 @@ class StudentProgressController {
   }
 
   getCurrentNodeForWorkgroupId(workgroupId) {
-    return this.StudentStatusService.getCurrentNodePositionAndNodeTitleForWorkgroupId(workgroupId);
+    return this.teacherStudentStatusService.getCurrentNodePositionAndNodeTitleForWorkgroupId(
+      workgroupId
+    );
   }
 
   /**
@@ -97,7 +99,7 @@ class StudentProgressController {
    * between 0 and 100)
    */
   getStudentProjectCompletion(workgroupId) {
-    return this.StudentStatusService.getStudentProjectCompletion(workgroupId, true);
+    return this.teacherStudentStatusService.getStudentProjectCompletion(workgroupId, true);
   }
 
   isWorkgroupShown(workgroup) {
@@ -133,7 +135,7 @@ class StudentProgressController {
     let location = this.getCurrentNodeForWorkgroupId(workgroupId);
     let completion = this.getStudentProjectCompletion(workgroupId);
     let score = this.getStudentTotalScore(workgroupId);
-    let maxScore = this.StudentStatusService.getMaxScoreForWorkgroupId(workgroupId);
+    let maxScore = this.teacherStudentStatusService.getMaxScoreForWorkgroupId(workgroupId);
     maxScore = maxScore ? maxScore : 0;
 
     for (let i = 0; i < this.teams.length; i++) {

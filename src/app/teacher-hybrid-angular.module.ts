@@ -7,7 +7,7 @@ import { ProjectService } from '../assets/wise5/services/projectService';
 import { TeacherProjectService } from '../assets/wise5/services/teacherProjectService';
 import { ProjectAssetService } from './services/projectAssetService';
 import { SpaceService } from '../assets/wise5/services/spaceService';
-import { StudentStatusService } from '../assets/wise5/services/studentStatusService';
+import { TeacherStudentStatusService } from '../assets/wise5/services/teacherStudentStatusService';
 import { TeacherDataService } from '../assets/wise5/services/teacherDataService';
 import { TeacherWebSocketService } from '../assets/wise5/services/teacherWebSocketService';
 import { DataService } from './services/data.service';
@@ -44,10 +44,10 @@ import { WorkgroupService } from './services/workgroup.service';
     MoveNodesService,
     ProjectAssetService,
     SpaceService,
-    StudentStatusService,
     { provide: ProjectService, useExisting: TeacherProjectService },
     TeacherDataService,
     TeacherProjectService,
+    TeacherStudentStatusService,
     TeacherWebSocketService,
     UpdateWorkgroupService,
     WorkgroupService

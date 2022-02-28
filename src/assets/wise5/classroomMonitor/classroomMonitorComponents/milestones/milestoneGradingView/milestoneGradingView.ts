@@ -4,7 +4,7 @@ import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { NodeService } from '../../../../services/nodeService';
 import { NotificationService } from '../../../../services/notificationService';
-import { StudentStatusService } from '../../../../services/studentStatusService';
+import { TeacherStudentStatusService } from '../../../../services/teacherStudentStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NodeGradingViewController } from '../../nodeGrading/nodeGradingView/nodeGradingView';
@@ -28,8 +28,8 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     protected NodeService: NodeService,
     protected NotificationService: NotificationService,
     protected ProjectService: TeacherProjectService,
-    protected StudentStatusService: StudentStatusService,
-    protected TeacherDataService: TeacherDataService
+    protected TeacherDataService: TeacherDataService,
+    protected teacherStudentStatusService: TeacherStudentStatusService
   ) {
     super(
       $filter,
@@ -39,8 +39,8 @@ class MilestoneGradingViewController extends NodeGradingViewController {
       NodeService,
       NotificationService,
       ProjectService,
-      StudentStatusService,
-      TeacherDataService
+      TeacherDataService,
+      teacherStudentStatusService
     );
     const additionalSortOrder = {
       initialScore: ['-isVisible', 'initialScore', 'workgroupId'],

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
-import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
+import { TeacherStudentStatusService } from '../../assets/wise5/services/teacherStudentStatusService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -9,10 +9,10 @@ import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 
 let configService: ConfigService;
-let service: StudentStatusService;
+let service: TeacherStudentStatusService;
 let http: HttpTestingController;
 
-describe('StudentStatusService', () => {
+describe('TeacherStudentStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
@@ -21,12 +21,12 @@ describe('StudentStatusService', () => {
         ConfigService,
         ProjectService,
         SessionService,
-        StudentStatusService,
+        TeacherStudentStatusService,
         UtilService
       ]
     });
     http = TestBed.inject(HttpTestingController);
-    service = TestBed.inject(StudentStatusService);
+    service = TestBed.inject(TeacherStudentStatusService);
     configService = TestBed.inject(ConfigService);
   });
   retrieveStudentStatuses();

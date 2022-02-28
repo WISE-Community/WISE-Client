@@ -10,7 +10,7 @@ import { NotificationService } from '../../../../services/notificationService';
 import { ProjectService } from '../../../../services/projectService';
 import { SessionService } from '../../../../services/sessionService';
 import { StudentDataService } from '../../../../services/studentDataService';
-import { StudentStatusService } from '../../../../services/studentStatusService';
+import { TeacherStudentStatusService } from '../../../../services/teacherStudentStatusService';
 import { StudentStudentStatusService } from '../../../../services/studentStudentStatusService';
 import { TagService } from '../../../../services/tagService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
@@ -36,11 +36,11 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStatusService,
         StudentStudentStatusService,
         TagService,
         TeacherDataService,
         TeacherProjectService,
+        TeacherStudentStatusService,
         TeacherWebSocketService,
         UtilService
       ]

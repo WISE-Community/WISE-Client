@@ -12,7 +12,7 @@ import { MilestoneService } from '../services/milestoneService';
 import { MoveNodesService } from '../services/moveNodesService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { SpaceService } from '../services/spaceService';
-import { StudentStatusService } from '../services/studentStatusService';
+import { TeacherStudentStatusService } from '../services/teacherStudentStatusService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherWebSocketService } from '../services/teacherWebSocketService';
 import { StepToolsComponent } from '../common/stepTools/step-tools.component';
@@ -32,8 +32,8 @@ angular
   .factory('MoveNodesService', downgradeInjectable(MoveNodesService))
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
   .factory('SpaceService', downgradeInjectable(SpaceService))
-  .factory('StudentStatusService', downgradeInjectable(StudentStatusService))
   .factory('TeacherDataService', downgradeInjectable(TeacherDataService))
+  .factory('TeacherStudentStatusService', downgradeInjectable(TeacherStudentStatusService))
   .factory('TeacherWebSocketService', downgradeInjectable(TeacherWebSocketService))
   .directive(
     'stepTools',

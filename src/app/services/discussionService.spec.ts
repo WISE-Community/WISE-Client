@@ -15,7 +15,7 @@ import { TeacherProjectService } from '../../assets/wise5/services/teacherProjec
 import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
 import { AchievementService } from '../../assets/wise5/services/achievementService';
 import { NotificationService } from '../../assets/wise5/services/notificationService';
-import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
+import { TeacherStudentStatusService } from '../../assets/wise5/services/teacherStudentStatusService';
 import { StudentStudentStatusService } from '../../assets/wise5/services/studentStudentStatusService';
 
 class MockTeacherDataService {
@@ -45,11 +45,11 @@ describe('DiscussionService', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentStatusService,
         StudentStudentStatusService,
         TagService,
         { provide: TeacherDataService, useClass: MockTeacherDataService },
         TeacherProjectService,
+        TeacherStudentStatusService,
         TeacherWebSocketService,
         UtilService
       ]

@@ -14,7 +14,7 @@ import { TagService } from '../../assets/wise5/services/tagService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
 import { NotificationService } from '../../assets/wise5/services/notificationService';
-import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
+import { TeacherStudentStatusService } from '../../assets/wise5/services/teacherStudentStatusService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 import { StudentStudentStatusService } from '../../assets/wise5/services/studentStudentStatusService';
@@ -93,11 +93,11 @@ describe('MilestoneService', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStatusService,
         StudentStudentStatusService,
         TagService,
         TeacherDataService,
         TeacherProjectService,
+        TeacherStudentStatusService,
         TeacherWebSocketService,
         UtilService
       ]
