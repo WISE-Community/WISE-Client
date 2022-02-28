@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { any } from 'angular-ui-router';
 import { PeerChatMessage } from '../PeerChatMessage';
 
 @Component({
@@ -25,17 +26,14 @@ export class PeerChatChatBoxComponent implements OnInit {
   submit: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void {
-    this.workgroupInfosWithoutTeachers = this.getWorkgroupInfosWithoutTeachers(this.workgroupInfos);
+    this.populateWorkgroupInfosWithoutTeachers();
   }
 
-  getWorkgroupInfosWithoutTeachers(workgroupInfos: any): any {
-    const workgroupInfosWithoutTeachers = {};
-    for (const workgroupId of Object.keys(workgroupInfos)) {
-      const workgroupInfo = workgroupInfos[workgroupId];
-      if (!workgroupInfo.isTeacher) {
-        workgroupInfosWithoutTeachers[workgroupId] = workgroupInfo;
+  private populateWorkgroupInfosWithoutTeachers(): void {
+    for (const [workgroupId, workgroupInfo] of Object.entries(this.workgroupInfos)) {
+      if (!(workgroupInfo as any).isTeacher) {
+        this.workgroupInfosWithoutTeachers[workgroupId] = workgroupInfo;
       }
     }
-    return workgroupInfosWithoutTeachers;
   }
 }
