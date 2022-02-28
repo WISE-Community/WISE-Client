@@ -2,7 +2,7 @@
 
 import { Directive } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TeacherStudentStatusService } from '../../../../services/teacherStudentStatusService';
+import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
@@ -25,9 +25,9 @@ class NodeProgressViewController {
     '$scope',
     '$state',
     '$transitions',
+    'ClassroomStatusService',
     'ProjectService',
-    'TeacherDataService',
-    'TeacherStudentStatusService'
+    'TeacherDataService'
   ];
 
   constructor(
@@ -36,9 +36,9 @@ class NodeProgressViewController {
     private $scope: any,
     private $state: any,
     private $transitions: any,
+    private classroomStatusService: ClassroomStatusService,
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private teacherStudentStatusService: TeacherStudentStatusService
+    private TeacherDataService: TeacherDataService
   ) {
     this.$translate = $filter('translate');
     this.$scope.$on('$destroy', () => {
@@ -163,14 +163,14 @@ class NodeProgressViewController {
   getNumberOfStudentsOnNode(nodeId) {
     var currentPeriod = this.getCurrentPeriod();
     var periodId = currentPeriod.periodId;
-    var count = this.teacherStudentStatusService.getWorkgroupIdsOnNode(nodeId, periodId).length;
+    var count = this.classroomStatusService.getWorkgroupIdsOnNode(nodeId, periodId).length;
     return count;
   }
 
   getNodeCompletion(nodeId) {
     var currentPeriod = this.getCurrentPeriod();
     var periodId = currentPeriod.periodId;
-    var completionPercentage = this.teacherStudentStatusService.getNodeCompletion(nodeId, periodId)
+    var completionPercentage = this.classroomStatusService.getNodeCompletion(nodeId, periodId)
       .completionPct;
     return completionPercentage;
   }

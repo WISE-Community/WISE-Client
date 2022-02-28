@@ -12,7 +12,7 @@ import { MilestoneService } from '../services/milestoneService';
 import { MoveNodesService } from '../services/moveNodesService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { SpaceService } from '../services/spaceService';
-import { TeacherStudentStatusService } from '../services/teacherStudentStatusService';
+import { ClassroomStatusService } from '../services/classroomStatusService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherWebSocketService } from '../services/teacherWebSocketService';
 import { StepToolsComponent } from '../common/stepTools/step-tools.component';
@@ -22,6 +22,7 @@ import '../authoringTool/authoring-tool.module';
 
 angular
   .module('teacher', ['common', 'angular-inview', 'authoringTool', 'classroomMonitor', 'ngAnimate'])
+  .factory('ClassroomStatusService', downgradeInjectable(ClassroomStatusService))
   .factory('CopyComponentService', downgradeInjectable(CopyComponentService))
   .factory('CopyNodesService', downgradeInjectable(CopyNodesService))
   .factory('CopyProjectService', downgradeInjectable(CopyProjectService))
@@ -33,7 +34,6 @@ angular
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
   .factory('SpaceService', downgradeInjectable(SpaceService))
   .factory('TeacherDataService', downgradeInjectable(TeacherDataService))
-  .factory('TeacherStudentStatusService', downgradeInjectable(TeacherStudentStatusService))
   .factory('TeacherWebSocketService', downgradeInjectable(TeacherWebSocketService))
   .directive(
     'stepTools',

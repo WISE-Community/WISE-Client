@@ -10,7 +10,7 @@ import { NotificationService } from '../../assets/wise5/services/notificationSer
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
-import { TeacherStudentStatusService } from '../../assets/wise5/services/teacherStudentStatusService';
+import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
 import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { TeacherDataService } from '../../assets/wise5/services/teacherDataService';
@@ -30,6 +30,7 @@ describe('DataExportService', () => {
       providers: [
         AchievementService,
         AnnotationService,
+        ClassroomStatusService,
         ConfigService,
         CopyNodesService,
         DataExportService,
@@ -41,7 +42,6 @@ describe('DataExportService', () => {
         TagService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherStudentStatusService,
         TeacherWebSocketService,
         UtilService
       ],

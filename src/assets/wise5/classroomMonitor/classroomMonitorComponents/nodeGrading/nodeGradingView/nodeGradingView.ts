@@ -5,7 +5,7 @@ import { ConfigService } from '../../../../services/configService';
 import { NodeService } from '../../../../services/nodeService';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { NotificationService } from '../../../../services/notificationService';
-import { TeacherStudentStatusService } from '../../../../services/teacherStudentStatusService';
+import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import * as angular from 'angular';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
@@ -48,25 +48,25 @@ export class NodeGradingViewController {
   static $inject = [
     '$filter',
     'AnnotationService',
+    'ClassroomStatusService',
     'ConfigService',
     'MilestoneService',
     'NodeService',
     'NotificationService',
     'ProjectService',
-    'TeacherDataService',
-    'TeacherStudentStatusService'
+    'TeacherDataService'
   ];
 
   constructor(
     protected $filter: any,
     protected AnnotationService: AnnotationService,
+    protected classroomStatusService: ClassroomStatusService,
     protected ConfigService: ConfigService,
     protected MilestoneService: MilestoneService,
     protected NodeService: NodeService,
     protected NotificationService: NotificationService,
     protected ProjectService: TeacherProjectService,
-    protected TeacherDataService: TeacherDataService,
-    protected teacherStudentStatusService: TeacherStudentStatusService
+    protected TeacherDataService: TeacherDataService
   ) {
     this.$translate = this.$filter('translate');
   }
@@ -215,9 +215,7 @@ export class NodeGradingViewController {
       latestWorkTime: null,
       latestAnnotationTime: null
     };
-    const studentStatus = this.teacherStudentStatusService.getStudentStatusForWorkgroupId(
-      workgroupId
-    );
+    const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
     if (studentStatus != null) {
       const nodeStatus = studentStatus.nodeStatuses[this.nodeId];
       if (nodeStatus) {
@@ -281,14 +279,14 @@ export class NodeGradingViewController {
   }
 
   getNodeCompletion(nodeId: string) {
-    return this.teacherStudentStatusService.getNodeCompletion(
+    return this.classroomStatusService.getNodeCompletion(
       nodeId,
       this.TeacherDataService.getCurrentPeriodId()
     ).completionPct;
   }
 
   getNodeAverageScore() {
-    const averageScore = this.teacherStudentStatusService.getNodeAverageScore(
+    const averageScore = this.classroomStatusService.getNodeAverageScore(
       this.nodeId,
       this.TeacherDataService.getCurrentPeriodId()
     );

@@ -14,7 +14,7 @@ import { TagService } from '../../assets/wise5/services/tagService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
 import { NotificationService } from '../../assets/wise5/services/notificationService';
-import { TeacherStudentStatusService } from '../../assets/wise5/services/teacherStudentStatusService';
+import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
@@ -86,6 +86,7 @@ describe('MilestoneService', () => {
       providers: [
         AchievementService,
         AnnotationService,
+        ClassroomStatusService,
         ConfigService,
         CopyNodesService,
         MilestoneService,
@@ -97,7 +98,6 @@ describe('MilestoneService', () => {
         TagService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherStudentStatusService,
         TeacherWebSocketService,
         UtilService
       ]

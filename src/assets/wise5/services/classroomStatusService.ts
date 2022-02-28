@@ -6,7 +6,7 @@ import { ProjectService } from './projectService';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable()
-export class TeacherStudentStatusService {
+export class ClassroomStatusService {
   studentStatuses = [];
   private studentStatusReceivedSource: Subject<any> = new Subject<any>();
   public studentStatusReceived$: Observable<any> = this.studentStatusReceivedSource.asObservable();
