@@ -16,7 +16,11 @@ export class StudentStudentStatusService {
       return this.http
         .get(`/api/studentStatus/${this.configService.getWorkgroupId()}`)
         .subscribe((studentStatus: any) => {
-          this.setStudentStatus(JSON.parse(studentStatus.status));
+          if (studentStatus == null) {
+            this.setStudentStatus(new StudentStatus());
+          } else {
+            this.setStudentStatus(JSON.parse(studentStatus.status));
+          }
         });
     }
   }
