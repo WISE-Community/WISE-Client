@@ -5,6 +5,7 @@ import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
+import { PeerGroupService } from '../../../services/peerGroupService';
 
 @Component({
   selector: 'peer-chat-show-work',
@@ -13,7 +14,7 @@ import { PeerChatService } from '../peerChatService';
 export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   isPeerChatWorkgroupsAvailable: boolean = false;
   peerChatMessages: PeerChatMessage[] = [];
-  peerChatWorkgroupIds: number[] = [];
+  peerChatWorkgroupIds: Set<number>;
   peerChatWorkgroupInfos: any = {};
   requestTimeout: number = 10000;
 
@@ -23,6 +24,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   constructor(
     protected configService: ConfigService,
     protected peerChatService: PeerChatService,
+    protected peerGroupService: PeerGroupService,
     protected projectService: ProjectService
   ) {
     super(projectService);
@@ -30,7 +32,40 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.peerChatWorkgroupIds = new Set<number>();
+    this.requestChatWorkgroups();
+  }
+
+  requestChatWorkgroups(): void {
+    this.peerGroupService
+      .retrievePeerGroup(this.componentContent.peerGroupActivityTag, this.workgroupId)
+      .pipe(timeout(this.requestTimeout))
+      .subscribe(
+        (peerGroup: any) => {
+          this.requestChatWorkgroupsSuccess(peerGroup);
+        },
+        (error) => {
+          // TODO
+        }
+      );
+  }
+
+  requestChatWorkgroupsSuccess(peerGroup: any): void {
+    this.addWorkgroupIdsFromPeerGroup(this.peerChatWorkgroupIds, peerGroup);
+    this.addTeacherWorkgroupIds(this.peerChatWorkgroupIds);
     this.retrievePeerChatComponentStates(this.nodeId, this.componentId, this.workgroupId);
+  }
+
+  addWorkgroupIdsFromPeerGroup(workgroupIds: Set<number>, peerGroup: any): void {
+    peerGroup.members.forEach((member: any) => {
+      workgroupIds.add(member.id);
+    });
+  }
+
+  addTeacherWorkgroupIds(workgroupIds: Set<number>): void {
+    this.configService.getTeacherWorkgroupIds().forEach((workgroupId) => {
+      workgroupIds.add(workgroupId);
+    });
   }
 
   retrievePeerChatComponentStates(nodeId: string, componentId: string, workgroupId: number): void {
@@ -40,7 +75,8 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
       .subscribe(
         (componentStates: any[]) => {
           this.setPeerChatMessages(componentStates);
-          this.setPeerChatWorkgroups(this.peerChatWorkgroupIds);
+          this.addWorkgroupIdsFromPeerChatMessages(this.peerChatWorkgroupIds, componentStates);
+          this.setPeerChatWorkgroupInfos(Array.from(this.peerChatWorkgroupIds));
         },
         (error) => {
           // TODO
@@ -51,26 +87,26 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   setPeerChatMessages(componentStates: any[]): void {
     this.peerChatMessages = [];
     componentStates.forEach((componentState: any) => {
-      this.addToWorkgroupIds(componentState.workgroupId);
       this.peerChatMessages.push(
         this.peerChatService.convertComponentStateToPeerChatMessage(componentState)
       );
     });
   }
 
-  addToWorkgroupIds(workgroupId: number): void {
-    if (!this.peerChatWorkgroupIds.includes(workgroupId)) {
-      this.peerChatWorkgroupIds.push(workgroupId);
-    }
+  addWorkgroupIdsFromPeerChatMessages(workgroupIds: Set<number>, componentStates: any[]): void {
+    componentStates.forEach((componentState) => {
+      workgroupIds.add(componentState.workgroupId);
+    });
   }
 
-  setPeerChatWorkgroups(workgroupIds: number[]): void {
+  setPeerChatWorkgroupInfos(workgroupIds: number[]): void {
     for (const workgroupId of workgroupIds) {
       this.peerChatWorkgroupInfos[workgroupId] = {
         avatarColor: this.configService.getAvatarColorForWorkgroupId(workgroupId),
         displayNames: this.configService.isTeacherWorkgroupId(workgroupId)
           ? $localize`Teacher`
-          : this.configService.getUsernamesStringByWorkgroupId(workgroupId)
+          : this.configService.getUsernamesStringByWorkgroupId(workgroupId),
+        isTeacher: this.configService.isTeacherWorkgroupId(workgroupId)
       };
     }
     this.isPeerChatWorkgroupsAvailable = true;
