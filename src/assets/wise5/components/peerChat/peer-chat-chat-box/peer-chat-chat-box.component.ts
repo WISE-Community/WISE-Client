@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { any } from 'angular-ui-router';
 import { PeerChatMessage } from '../PeerChatMessage';
 
 @Component({
