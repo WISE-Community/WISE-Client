@@ -19,20 +19,16 @@ export class PeerChatChatBoxComponent implements OnInit {
   @Input()
   workgroupInfos: any = {};
 
-  workgroupInfosWithoutTeachers: any = {};
+  workgroupInfosWithoutTeachers: any[];
 
   @Output('onSubmit')
   submit: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void {
-    this.populateWorkgroupInfosWithoutTeachers();
+    this.workgroupInfosWithoutTeachers = this.filterOutTeachers(this.workgroupInfos);
   }
 
-  private populateWorkgroupInfosWithoutTeachers(): void {
-    for (const [workgroupId, workgroupInfo] of Object.entries(this.workgroupInfos)) {
-      if (!(workgroupInfo as any).isTeacher) {
-        this.workgroupInfosWithoutTeachers[workgroupId] = workgroupInfo;
-      }
-    }
+  private filterOutTeachers(workgroupInfos: any): any[] {
+    return Object.values(workgroupInfos).filter((workgroupInfo: any) => !workgroupInfo.isTeacher);
   }
 }

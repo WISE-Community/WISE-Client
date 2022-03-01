@@ -43,9 +43,9 @@ describe('PeerChatChatBoxComponent', () => {
 
   it('should create with workgroup infos without teachers', () => {
     expect(component).toBeTruthy();
-    expect(component.workgroupInfosWithoutTeachers).toEqual({
-      2: { isTeacher: false },
-      3: { isTeacher: false }
-    });
+    expect(component.workgroupInfosWithoutTeachers).toEqual([
+      { isTeacher: false },
+      { isTeacher: false }
+    ]);
   });
 });

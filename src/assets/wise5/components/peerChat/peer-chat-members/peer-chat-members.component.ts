@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PeerChatMembersComponent implements OnInit {
   @Input()
-  peerChatWorkgroupInfos: any;
+  peerChatWorkgroupInfos: any[];
 
   constructor() {}
 

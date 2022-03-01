@@ -16,7 +16,7 @@ describe('PeerChatMembersComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerChatMembersComponent);
     component = fixture.componentInstance;
-    component.peerChatWorkgroupInfos = {};
+    component.peerChatWorkgroupInfos = [];
     fixture.detectChanges();
   });
 
