@@ -108,9 +108,13 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.isPeerChatWorkgroupsResponseReceived = true;
     this.peerGroup = peerGroup;
     const peerGroupWorkgroupIds = this.getPeerGroupWorkgroupIds(peerGroup);
-    peerGroupWorkgroupIds.push(this.ConfigService.getTeacherWorkgroupId());
+    this.addTeacherWorkgroupIds(peerGroupWorkgroupIds);
     this.setPeerChatWorkgroups(peerGroupWorkgroupIds);
     this.getPeerChatComponentStates(peerGroup);
+  }
+
+  addTeacherWorkgroupIds(workgroupIds: number[]): void {
+    workgroupIds.push(...this.ConfigService.getTeacherWorkgroupIds());
   }
 
   getPeerGroupWorkgroupIds(peerGroup: PeerGroup): number[] {
@@ -194,7 +198,13 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   createComponentStateAdditionalProcessing(promise: any, componentState: any, action: string) {
     this.sendWorkToPeerWorkgroups(componentState);
-    this.sendNotificationToPeerWorkgroups();
+    this.sendNotificationToPeerWorkgroups(
+      this.getWorkgroupIdsToSendNotificationTo(
+        this.peerChatWorkgroupIds,
+        this.peerChatMessages,
+        this.workgroupId
+      )
+    );
     promise.resolve(componentState);
   }
 
@@ -210,27 +220,54 @@ export class PeerChatStudentComponent extends ComponentStudent {
     }
   }
 
-  sendNotificationToPeerWorkgroups() {
+  sendNotificationToPeerWorkgroups(workgroupIds: number[]): void {
     const runId = this.ConfigService.getRunId();
     const periodId = this.ConfigService.getPeriodId();
     const notificationType = 'PeerChatMessage';
     const firstName = this.ConfigService.getStudentFirstNamesByWorkgroupId(this.workgroupId);
     const message = $localize`${firstName} sent a chat message`;
-    for (const peerWorkgroupId of this.peerChatWorkgroupIds) {
-      if (peerWorkgroupId !== this.workgroupId) {
-        const notification = this.notificationService.createNewNotification(
-          runId,
-          periodId,
-          notificationType,
-          this.nodeId,
-          this.componentId,
-          this.workgroupId,
-          peerWorkgroupId,
-          message
-        );
-        this.notificationService.saveNotificationToServer(notification);
+    for (const workgroupId of workgroupIds) {
+      const notification = this.notificationService.createNewNotification(
+        runId,
+        periodId,
+        notificationType,
+        this.nodeId,
+        this.componentId,
+        this.workgroupId,
+        workgroupId,
+        message
+      );
+      this.notificationService.saveNotificationToServer(notification);
+    }
+  }
+
+  getWorkgroupIdsToSendNotificationTo(
+    peerChatWorkgroupIds: number[],
+    peerChatMessages: PeerChatMessage[],
+    myWorkgroupId: number
+  ): number[] {
+    return peerChatWorkgroupIds.filter((workgroupId) => {
+      if (workgroupId === myWorkgroupId) {
+        return false;
+      } else if (this.isTeacherWorkgroupId(workgroupId)) {
+        return this.containsTeacherMessage(peerChatMessages);
+      } else {
+        return true;
+      }
+    });
+  }
+
+  containsTeacherMessage(peerChatMessages: PeerChatMessage[]): boolean {
+    for (const peerChatMessage of peerChatMessages) {
+      if (this.isTeacherWorkgroupId(peerChatMessage.workgroupId)) {
+        return true;
       }
     }
+    return false;
+  }
+
+  isTeacherWorkgroupId(workgroupId: number): boolean {
+    return this.ConfigService.getTeacherWorkgroupIds().includes(workgroupId);
   }
 
   getAvatarColor(workgroupId: number): string {
