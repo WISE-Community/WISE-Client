@@ -8,11 +8,12 @@ class NotificationsMenuController {
   $translate: any;
   newNotifications: any;
 
-  static $inject = ['$filter', '$mdDialog', 'NotificationService', 'ProjectService'];
+  static $inject = ['$filter', '$mdDialog', '$state', 'NotificationService', 'ProjectService'];
 
   constructor(
     $filter: any,
     private $mdDialog: any,
+    private $state: any,
     private NotificationService: NotificationService,
     private ProjectService: TeacherProjectService
   ) {
@@ -46,6 +47,11 @@ class NotificationsMenuController {
   dismissNotification(notification) {
     this.NotificationService.dismissNotification(notification);
   }
+
+  dismissNotificationAndVisitNode(notification: any): void {
+    this.dismissNotification(notification);
+    this.$state.go('root.cm.unit.node', { nodeId: notification.nodeId });
+  }
 }
 
 const NotificationsMenu = {
@@ -73,7 +79,7 @@ const NotificationsMenu = {
                 <div class="md-padding center" ng-if="!$ctrl.newNotifications.length"><span class="md-body-1" translate="NO_ALERTS"></span></div>
                 <md-list class="notification-list" ng-if="$ctrl.newNotifications.length">
                     <md-list-item ng-repeat="notification in $ctrl.newNotifications track by $index"
-                                  ng-click="$ctrl.dismissNotification(notification)"
+                                  ng-click="$ctrl.dismissNotificationAndVisitNode(notification)"
                                   md-autofocus="$first"
                                   class="md-2-line">
                         <div class="md-list-item-text">
