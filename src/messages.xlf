@@ -4770,7 +4770,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4568352014425961102" datatype="html">
@@ -5017,7 +5017,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4bad40355890bcbe1b4003d9fd0632beeffd6580" datatype="html">
@@ -11604,25 +11604,25 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6832087445897716825" datatype="html">
-        <source>Thought Buddy</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="7559493123326903347" datatype="html">
         <source>Discuss your answer with a thought buddy!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="817739684653615188" datatype="html">
         <source>Hi there! It&apos;s nice to meet you. What do you think about...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6832087445897716825" datatype="html">
+        <source>Thought Buddy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5ee734dd4f01e4fdc237a0eac5d1b2942bda22b3" datatype="html">
@@ -15408,93 +15408,101 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="9a4656858fb898acb7e9d84c74d503a520c00ca4" datatype="html">
-        <source>Note text</source>
+      <trans-unit id="8bb72dd61fcb847d109325b4dcae05bef9de55c0" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ textInputLabel }}"/> required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5405a50074566c88d510755217ab163d40865419" datatype="html">
         <source>Remove File</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5abeb8898e4a9d00841c40124f192d0a71b3cc18" datatype="html">
         <source>Drop image or file here or click to upload!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets/student-assets.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="63048f60df0b46354c2cf63827734876266859d9" datatype="html">
+      <trans-unit id="b62f0f814f8a2a55dc78bb653101f4e840ffad56" datatype="html">
         <source> Share with Class </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">62,63</context>
+          <context context-type="linenumber">61,62</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="da44efc7b658c318651866454d258bbbe57ff21c" datatype="html">
+      <trans-unit id="a5433ae2324496bea9537caa5e8a2719d8e958d8" datatype="html">
         <source> Cancel </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">72,73</context>
+          <context context-type="linenumber">71,72</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
+      <trans-unit id="f8b53b407af242e77dc3391947f23988f3451e64" datatype="html">
         <source> Save </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">80,81</context>
+          <context context-type="linenumber">79,80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dc390b4facb4c5f5fb7d88cac9db7fe350393640" datatype="html">
         <source>Copy to My Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5d49ee389add9351d1a4e56d4c8200eff140b932" datatype="html">
+      <trans-unit id="6cb1a9de15616c0b4efdd54cc10b58a166b9e016" datatype="html">
         <source> Close </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">98,99</context>
+          <context context-type="linenumber">97,98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5379448133816368703" datatype="html">
         <source>Note from <x id="PH" equiv-text="currentNodeTitle"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8417917245707164827" datatype="html">
         <source>Edit <x id="PH" equiv-text="label"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5258595085525200029" datatype="html">
         <source>Add <x id="PH" equiv-text="label"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3296271610866256066" datatype="html">
         <source>View <x id="PH" equiv-text="label"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">96</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="7033364046926512938" datatype="html">
+        <source><x id="PH" equiv-text="noteTerm"/> text</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <note priority="1" from="description">Label for note text input</note>
       </trans-unit>
       <trans-unit id="2e1aeaf8d183e6846a0463a08c784f472184fcf0" datatype="html">
         <source>Completed with warning</source>
@@ -15531,15 +15539,15 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ea13858d4b49bbcbc396191b16ac52dbf859e6fe" datatype="html">
-        <source>Your <x id="INTERPOLATION" equiv-text="{{ computerAvatarSettings.label }}"/>:</source>
+      <trans-unit id="7fb53ef6f4a51654aa5d007c189f354a75b4c05f" datatype="html">
+        <source>Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ba4c60df94ccbaf73fe5c4cec1d0cc96af239914" datatype="html">
-        <source>Choose Your <x id="INTERPOLATION" equiv-text="{{ computerAvatarSettings.label }}"/>:</source>
+      <trans-unit id="d44e0fae2f7939bc76717ba6833b1bb8f5031c81" datatype="html">
+        <source>Choose Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
           <context context-type="linenumber">8</context>
@@ -15556,7 +15564,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Continue </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">28,29</context>
+          <context context-type="linenumber">31,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,6 +25,7 @@ import { EditNotebookItemDialogComponent } from './edit-notebook-item-dialog.com
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
+    ReactiveFormsModule,
     WiseLinkModule
   ],
   exports: [EditNotebookItemDialogComponent]

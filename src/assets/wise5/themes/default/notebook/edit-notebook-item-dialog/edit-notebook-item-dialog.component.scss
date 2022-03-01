@@ -1,13 +1,6 @@
-.header-text-color {
-  color: white;
-}
 
-.note-form-field {
+.mat-form-field {
   width: 100%;
-}
-
-.note-textarea {
-  resize: none;
 }
 
 .file-input {
@@ -26,11 +19,10 @@
 
 .drop-box {
   background: #F8F8F8;
-  border: 5px dashed #DDD;
+  border: 4px dashed #DDD;
   height: 100px;
   text-align: center;
-  margin-top: 10px;
-  bottom: 0px;
+  margin-top: 16px;
   position: relative;
 }
 
@@ -38,6 +30,7 @@
   cursor: pointer;
 }
 
-.notebook-item__info {
-  margin-top: 10px;
+.item-info {
+  margin-top: 16px;
+  font-style: italic;
 }

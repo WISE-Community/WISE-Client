@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
 import { ProjectService } from '../../../../services/projectService';
@@ -21,16 +22,20 @@ export class EditNotebookItemDialogComponent implements OnInit {
   itemId: string;
   note: any;
   notebookConfig: any;
+  noteFormGroup: FormGroup;
   saveEnabled: boolean;
   showUpload: boolean = false;
   studentWorkIds: number[];
-  text: string;
+  text: string = '';
+  textInputLabel: string;
+  textRequired: boolean;
   title: string;
 
   constructor(
     private configService: ConfigService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<EditNotebookItemDialogComponent>,
+    private fb: FormBuilder,
     private projectService: ProjectService,
     private studentAssetService: StudentAssetService,
     private studentDataService: StudentDataService,
@@ -78,6 +83,7 @@ export class EditNotebookItemDialogComponent implements OnInit {
     // this.notebookConfig = this.NotebookService.getNotebookConfig();
     this.notebookConfig = this.data.notebookConfig;
     this.color = this.notebookConfig.itemTypes[this.item.type].label.color;
+    this.textRequired = this.notebookConfig.itemTypes?.note?.requireTextOnEveryNote;
 
     let label = this.notebookConfig.itemTypes[this.item.type].label.singular;
     if (this.isEditMode) {
@@ -89,6 +95,8 @@ export class EditNotebookItemDialogComponent implements OnInit {
     } else {
       this.title = $localize`View ${label}`;
     }
+    const noteTerm = this.notebookConfig.itemTypes[this.item.type].label.link;
+    this.textInputLabel = $localize`:Label for note text input:${noteTerm} text`;
     this.saveEnabled = false;
 
     if (this.file != null) {
@@ -105,9 +113,23 @@ export class EditNotebookItemDialogComponent implements OnInit {
     if (!this.isFileUploadEnabled) {
       this.showUpload = false;
     }
+    this.intitializeForm();
 
     if (this.studentWorkIds != null) {
       this.item.content.studentWorkIds = this.studentWorkIds;
+    }
+  }
+
+  intitializeForm(): void {
+    this.noteFormGroup = this.fb.group({
+      text: new FormControl('')
+    });
+    const textInput = this.noteFormGroup.get('text');
+    if (!this.isEditMode || !this.isEditTextEnabled) {
+      textInput.disable();
+    }
+    if (this.textRequired) {
+      textInput.setValidators(Validators.required);
     }
   }
 
@@ -236,18 +258,8 @@ export class EditNotebookItemDialogComponent implements OnInit {
   }
 
   update(): void {
-    this.saveEnabled =
-      this.item.content.text ||
-      (!this.isRequireTextOnEveryNote() && this.item.content.attachments.length);
+    this.saveEnabled = this.item.content.text || (!this.textRequired && this.item.content.attachments.length);
     this.setShowUpload();
-  }
-
-  isRequireTextOnEveryNote(): boolean {
-    return (
-      this.notebookConfig.itemTypes != null &&
-      this.notebookConfig.itemTypes.note != null &&
-      this.notebookConfig.itemTypes.note.requireTextOnEveryNote
-    );
   }
 
   setShowUpload(): void {
