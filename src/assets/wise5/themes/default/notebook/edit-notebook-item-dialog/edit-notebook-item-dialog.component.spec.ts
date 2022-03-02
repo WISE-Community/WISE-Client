@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,6 +36,7 @@ describe('EditNotebookItemDialogComponent', () => {
         MatIconModule,
         MatInputModule,
         MatToolbarModule,
+        ReactiveFormsModule,
         UpgradeModule
       ],
       declarations: [EditNotebookItemDialogComponent, WiseLinkComponent],

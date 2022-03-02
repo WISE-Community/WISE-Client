@@ -26,7 +26,7 @@ export class EditNotebookItemDialogComponent implements OnInit {
   saveEnabled: boolean;
   showUpload: boolean = false;
   studentWorkIds: number[];
-  text: string = '';
+  text: string;
   textInputLabel: string;
   textRequired: boolean;
   title: string;
