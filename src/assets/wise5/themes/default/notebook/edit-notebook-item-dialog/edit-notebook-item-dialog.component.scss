@@ -3,18 +3,35 @@
   width: 100%;
 }
 
+.attachment {
+  padding: 16px;
+  margin: 16px 0;
+  text-align: center;
+  position: relative;
+}
+
+.attachment-content {
+  max-width: 100%;
+  height: auto;
+}
+
+.attachment-delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .file-input {
   width: 100%;
   height: 100%;
   opacity: 0;
   position: absolute;
-  z-index: 2;
   top: 0px;
   left: 0px;
-}
 
-.file-input:hover {
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .drop-box {

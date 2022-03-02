@@ -15,17 +15,17 @@
       <mat-error *ngIf="noteFormGroup.controls['text'].hasError('required')"
           i18n>{{ textInputLabel }} required</mat-error>
     </mat-form-field>
-    <div class="notebook-item__attachment" *ngFor="let attachment of item.content.attachments">
-      <img [src]="attachment.iconURL" class="notebook-item__attachment__content" />
+    <div class="attachment notice-bg-bg" *ngFor="let attachment of item.content.attachments">
+      <img [src]="attachment.iconURL" class="attachment-content" />
       <button mat-mini-fab
           color="white"
-          class="notebook-item__attachment__delete"
+          class="attachment-delete"
           fxLayoutAlign="center center"
           (click)='removeAttachment(attachment)'
           [disabled]="!isEditMode"
           title="Remove File"
           i18n-title>
-        <mat-icon class="text-secondary">delete</mat-icon>
+        <mat-icon>delete</mat-icon>
       </button>
     </div>
     <div *ngIf="isEditMode && showUpload"
@@ -37,12 +37,14 @@
         type="file"
         (change)="attachStudentAssetToNote($event.target.files[0])"
         #fileDropRef
-        class="file-input" />
+        class="file-input"
+        aria-label="Upload file"
+        i18-aria-label />
       <mat-icon>image</mat-icon> <span i18n>Drop image or file here or click to upload!</span>
     </div>
     <div class="item-info mat-small"
         fxLayout="row" fxLayoutAlign="start center">
-      <mat-icon>place</mat-icon>
+      <mat-icon class="secondary-text">place</mat-icon>
       <wise-link [type]="'link'"
           [nodeId]="getItemNodeId()"
           [linkText]="getItemNodeLink()">
@@ -51,14 +53,12 @@
   </mat-dialog-content>
   <mat-dialog-actions fxLayout="row" fxLayoutAlign="start center" *ngIf="isEditMode">
     <div>
-      <mat-checkbox class="primary"
+      <mat-checkbox color="primary"
         *ngIf="canShareWithClass()"
         [checked]="isSharedWithClass()"
         (click)="toggleMakeNotePublic()"
-        aria-label="Share"
-        i18n-aria-label
         i18n>
-        Share with Class
+        <span class="mat-small">Share with Class</span>
       </mat-checkbox>
     </div>
     <span fxFlex></span>
