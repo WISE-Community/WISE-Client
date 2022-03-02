@@ -64,6 +64,7 @@
     <span fxFlex></span>
     <div>
       <button mat-button
+          type="button"
           class="primary"
           aria-label="Cancel"
           (click)="cancel()"
@@ -83,6 +84,7 @@
   <mat-dialog-actions *ngIf="!isEditMode" fxLayout="row" fxLayoutAlign="end center">
     <div>
       <button class="primary"
+        type="button"
         *ngIf="canCopyPublicNotebookItem()"
         (click)="copyPublicNotebookItem($event)"
         aria-label="Copy"
@@ -93,7 +95,7 @@
     </div>
     <span fxFlex></span>
     <div>
-      <button mat-button class="primary" aria-label="Close" (click)="close()" i18n>
+      <button mat-button type="button" class="primary" aria-label="Close" (click)="close()" i18n>
         Close
       </button>
     </div>
