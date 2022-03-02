@@ -15190,11 +15190,11 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Go to step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-link/wise-link.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/wise-link/wise-link.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8560978883976627945" datatype="html">

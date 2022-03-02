@@ -1,11 +1,12 @@
-<div *ngIf="type === 'link'"
-    class="step-link {{ linkClass }}"
+<a *ngIf="type === 'link'"
+    href="#"
+    class="{{ linkClass }}"
     (click)="goToStep()"
     matTooltip="Go to step"
     matTooltipPosition="above"
     i18n-matTooltip>
   {{ linkText }}
-</div>
+</a>
 <button *ngIf="type === 'button'"
     mat-raised-button
     color="primary"
