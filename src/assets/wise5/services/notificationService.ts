@@ -1,12 +1,11 @@
-import * as angular from 'angular';
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { Notification } from '../../../app/domain/notification';
+import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 import { UtilService } from './utilService';
-import { Notification } from '../../../app/domain/notification';
-import { Observable, Subject } from 'rxjs';
-import { AnnotationService } from './annotationService';
 
 @Injectable()
 export class NotificationService {
@@ -263,17 +262,106 @@ export class NotificationService {
     }
   }
 
-  dismissNotification(notification) {
+  dismissNotification(notification: Notification): void {
     if (this.ConfigService.isPreview()) {
-      return this.pretendServerRequest(notification);
+      this.pretendServerRequest(notification);
     }
-    notification.timeDismissed = Date.parse(new Date().toString());
-    return this.http
-      .post(`${this.ConfigService.getNotificationURL()}/dismiss`, notification)
-      .toPromise()
-      .then((notification: Notification) => {
-        this.addNotification(notification);
-      });
+    const notificationsToDismiss = this.getActiveNotificationsWithSameSource(
+      this.notifications,
+      notification
+    );
+    this.dismissNotifications(notificationsToDismiss);
+  }
+
+  getActiveNotificationsWithSameSource(
+    notifications: Notification[],
+    notification: Notification
+  ): Notification[] {
+    const activeNotificationsWithSameSource = [];
+    const sourceKey = this.getSourceKey(notification);
+    for (const tempNotification of notifications) {
+      if (
+        this.isActiveNotification(tempNotification) &&
+        this.getSourceKey(tempNotification) === sourceKey
+      ) {
+        activeNotificationsWithSameSource.push(tempNotification);
+      }
+    }
+    return activeNotificationsWithSameSource;
+  }
+
+  dismissNotifications(notifications: Notification[]): void {
+    notifications.forEach((notification: any) => {
+      notification.timeDismissed = Date.parse(new Date().toString());
+      return this.http
+        .post(`${this.ConfigService.getNotificationURL()}/dismiss`, notification)
+        .subscribe((notification: Notification) => {
+          this.addNotification(notification);
+        });
+    });
+  }
+
+  getLatestActiveNotificationsFromUniqueSource(
+    notifications: Notification[],
+    workgroupId: number
+  ): Notification[] {
+    const notificationsToWorkgroup = this.getNotificationsSentToWorkgroup(
+      notifications,
+      workgroupId
+    );
+    const activeNotifications = this.getActiveNotifications(notificationsToWorkgroup);
+    return this.getLatestUniqueSourceNotifications(activeNotifications);
+  }
+
+  getNotificationsSentToWorkgroup(
+    notifications: Notification[],
+    workgroupId: number
+  ): Notification[] {
+    return notifications.filter((notification) => notification.toWorkgroupId === workgroupId);
+  }
+
+  getActiveNotifications(notifications: Notification[]): Notification[] {
+    return notifications.filter((notification) => {
+      return this.isActiveNotification(notification);
+    });
+  }
+
+  isActiveNotification(notification: Notification): boolean {
+    return notification.timeDismissed == null;
+  }
+
+  getDismissedNotificationsForWorkgroup(
+    notifications: Notification[],
+    workgroupId: number
+  ): Notification[] {
+    const notificationsToWorkgroup = this.getNotificationsSentToWorkgroup(
+      notifications,
+      workgroupId
+    );
+    return this.getDismissedNotifications(notificationsToWorkgroup);
+  }
+
+  getDismissedNotifications(notifications: Notification[]): Notification[] {
+    return notifications.filter((notification) => notification.timeDismissed != null);
+  }
+
+  getLatestUniqueSourceNotifications(notifications: Notification[]): Notification[] {
+    const sourcesFound = new Set<string>();
+    const latestUniqueSourceNotifications = [];
+    for (let n = notifications.length - 1; n >= 0; n--) {
+      const notification = notifications[n];
+      const sourceKey = this.getSourceKey(notification);
+      if (!sourcesFound.has(sourceKey)) {
+        latestUniqueSourceNotifications.push(notification);
+        sourcesFound.add(sourceKey);
+      }
+    }
+    return latestUniqueSourceNotifications;
+  }
+
+  getSourceKey(notification: Notification): string {
+    const { nodeId, componentId, fromWorkgroupId, toWorkgroupId, type } = notification;
+    return `${nodeId}-${componentId}-${fromWorkgroupId}-${toWorkgroupId}-${type}`;
   }
 
   pretendServerRequest(notification) {
