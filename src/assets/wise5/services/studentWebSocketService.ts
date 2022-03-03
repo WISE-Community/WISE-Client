@@ -88,10 +88,9 @@ export class StudentWebSocketService {
       .subscribe(`/topic/workgroup/${this.workgroupId}`, (message, headers, res) => {
         if (message.type === 'notification') {
           const notification = JSON.parse(message.content);
+          this.NotificationService.addNotification(notification);
           if (notification.nodeId === this.StudentDataService.getCurrentNodeId()) {
             this.NotificationService.dismissNotification(notification);
-          } else {
-            this.NotificationService.addNotification(notification);
           }
         } else if (message.type === 'annotation') {
           const annotationData = JSON.parse(message.content);

@@ -275,19 +275,13 @@ export class NotificationService {
 
   private getActiveNotificationsWithSameSource(
     notifications: Notification[],
-    notification: Notification
+    notificationToCompare: Notification
   ): Notification[] {
-    const activeNotificationsWithSameSource = [];
-    const sourceKey = this.getSourceKey(notification);
-    for (const tempNotification of notifications) {
-      if (
-        this.isActiveNotification(tempNotification) &&
-        this.getSourceKey(tempNotification) === sourceKey
-      ) {
-        activeNotificationsWithSameSource.push(tempNotification);
-      }
-    }
-    return activeNotificationsWithSameSource;
+    const sourceKey = this.getSourceKey(notificationToCompare);
+    return notifications.filter(
+      (notification) =>
+        this.isActiveNotification(notification) && this.getSourceKey(notification) === sourceKey
+    );
   }
 
   dismissNotifications(notifications: Notification[]): void {
