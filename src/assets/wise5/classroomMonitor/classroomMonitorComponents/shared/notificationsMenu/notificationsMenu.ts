@@ -3,6 +3,7 @@
 import { NotificationService } from '../../../../services/notificationService';
 import * as angular from 'angular';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { Notification } from '../../../../../../app/domain/notification';
 
 class NotificationsMenuController {
   $translate: any;
@@ -38,17 +39,17 @@ class NotificationsMenuController {
     });
   }
 
-  dismissAllNotifications() {
+  dismissAllNotifications(): void {
     this.newNotifications.map((newNotification) => {
       this.dismissNotification(newNotification);
     });
   }
 
-  dismissNotification(notification) {
+  dismissNotification(notification: Notification): void {
     this.NotificationService.dismissNotification(notification);
   }
 
-  dismissNotificationAndVisitNode(notification: any): void {
+  dismissNotificationAndVisitNode(notification: Notification): void {
     this.dismissNotification(notification);
     this.$state.go('root.cm.unit.node', { nodeId: notification.nodeId });
   }

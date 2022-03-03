@@ -7350,13 +7350,6 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="26599a3f0d31f31c0a993b352609d6f10af5ccdf" datatype="html">
-        <source>Visit the WISE Community</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/discourse-recent-activity/discourse-recent-activity.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="4c49a9bb7a99a9da256c6e678cbb49baa70e268a" datatype="html">
         <source>Edit Classroom Unit</source>
         <context-group purpose="location">
@@ -14643,20 +14636,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1cd15276840c64f5eae40ef3fb51ff81f84f278b" datatype="html">
-        <source>Chat Members:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-members/peer-chat-members.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="939b4d44088b8ece0fd394a0eb0e9c43d632b99c" datatype="html">
-        <source> Send </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-message-input/peer-chat-message-input.component.html</context>
-          <context context-type="linenumber">17,18</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="375ead964bf5b0ae938bb0b600db793ac0d32683" datatype="html">
         <source> This Peer Chat activity is not yet available. Please check back later or wait for a notification to return. </source>
         <context-group purpose="location">
@@ -14672,6 +14651,13 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">2,3</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="1cd15276840c64f5eae40ef3fb51ff81f84f278b" datatype="html">
+        <source>Chat Members:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-members/peer-chat-members.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="939b4d44088b8ece0fd394a0eb0e9c43d632b99c" datatype="html">
         <source> Send </source>
         <context-group purpose="location">
@@ -14683,18 +14669,18 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-show-work/peer-chat-show-work.component.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7975922355923237879" datatype="html">
         <source><x id="PH" equiv-text="firstName"/> sent a chat message</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.ts</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">228</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6310961320545154131" datatype="html">
@@ -15530,21 +15516,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You have new replies to your discussion post!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="199088045976822823" datatype="html">
         <source>You have new feedback from your teacher!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5013145827213980080" datatype="html">
         <source>You have new feedback!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">

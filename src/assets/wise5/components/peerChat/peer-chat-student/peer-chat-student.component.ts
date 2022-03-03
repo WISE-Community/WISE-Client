@@ -241,7 +241,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     }
   }
 
-  getWorkgroupIdsToSendNotificationTo(
+  private getWorkgroupIdsToSendNotificationTo(
     peerChatWorkgroupIds: number[],
     peerChatMessages: PeerChatMessage[],
     myWorkgroupId: number
@@ -257,16 +257,13 @@ export class PeerChatStudentComponent extends ComponentStudent {
     });
   }
 
-  containsTeacherMessage(peerChatMessages: PeerChatMessage[]): boolean {
-    for (const peerChatMessage of peerChatMessages) {
-      if (this.isTeacherWorkgroupId(peerChatMessage.workgroupId)) {
-        return true;
-      }
-    }
-    return false;
+  private containsTeacherMessage(peerChatMessages: PeerChatMessage[]): boolean {
+    return peerChatMessages.some((peerChatMessage) =>
+      this.isTeacherWorkgroupId(peerChatMessage.workgroupId)
+    );
   }
 
-  isTeacherWorkgroupId(workgroupId: number): boolean {
+  private isTeacherWorkgroupId(workgroupId: number): boolean {
     return this.ConfigService.getTeacherWorkgroupIds().includes(workgroupId);
   }
 

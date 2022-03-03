@@ -56,7 +56,7 @@ describe('NotificationService', () => {
     notifications = createTestNotifications();
     service.notifications = notifications;
   });
-  retrieveNotifications_Teacher_ShouldReturnAndSetNotificaitons();
+  retrieveNotifications_Teacher_ShouldReturnAndSetNotifications();
   getLatestActiveNotificationsFromUniqueSource_ShouldReturnNotificationsFromUniqueSource();
   getDismissedNotificationsForWorkgroup_ShouldReturnDismissedNotifications();
   dismissNotification_MultipleFromSameSource_ShouldDismissAllFromSameSource();
@@ -117,7 +117,7 @@ function createNotification(
   toWorkgroupId: number,
   type: string,
   timeDismissed: number = null
-) {
+): Notification {
   const notification = new Notification();
   notification.nodeId = nodeId;
   notification.componentId = componentId;
@@ -128,7 +128,7 @@ function createNotification(
   return notification;
 }
 
-function retrieveNotifications_Teacher_ShouldReturnAndSetNotificaitons() {
+function retrieveNotifications_Teacher_ShouldReturnAndSetNotifications() {
   it('retrieve and set notifications for current run', () => {
     const notificationsExpected = [notification1];
     service.retrieveNotifications().then((notifications: any) => {

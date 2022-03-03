@@ -273,7 +273,7 @@ export class NotificationService {
     this.dismissNotifications(notificationsToDismiss);
   }
 
-  getActiveNotificationsWithSameSource(
+  private getActiveNotificationsWithSameSource(
     notifications: Notification[],
     notification: Notification
   ): Notification[] {
@@ -313,20 +313,20 @@ export class NotificationService {
     return this.getLatestUniqueSourceNotifications(activeNotifications);
   }
 
-  getNotificationsSentToWorkgroup(
+  private getNotificationsSentToWorkgroup(
     notifications: Notification[],
     workgroupId: number
   ): Notification[] {
     return notifications.filter((notification) => notification.toWorkgroupId === workgroupId);
   }
 
-  getActiveNotifications(notifications: Notification[]): Notification[] {
+  private getActiveNotifications(notifications: Notification[]): Notification[] {
     return notifications.filter((notification) => {
       return this.isActiveNotification(notification);
     });
   }
 
-  isActiveNotification(notification: Notification): boolean {
+  private isActiveNotification(notification: Notification): boolean {
     return notification.timeDismissed == null;
   }
 
@@ -341,11 +341,11 @@ export class NotificationService {
     return this.getDismissedNotifications(notificationsToWorkgroup);
   }
 
-  getDismissedNotifications(notifications: Notification[]): Notification[] {
+  private getDismissedNotifications(notifications: Notification[]): Notification[] {
     return notifications.filter((notification) => notification.timeDismissed != null);
   }
 
-  getLatestUniqueSourceNotifications(notifications: Notification[]): Notification[] {
+  private getLatestUniqueSourceNotifications(notifications: Notification[]): Notification[] {
     const sourcesFound = new Set<string>();
     const latestUniqueSourceNotifications = [];
     for (let n = notifications.length - 1; n >= 0; n--) {
@@ -359,12 +359,12 @@ export class NotificationService {
     return latestUniqueSourceNotifications;
   }
 
-  getSourceKey(notification: Notification): string {
+  private getSourceKey(notification: Notification): string {
     const { nodeId, componentId, fromWorkgroupId, toWorkgroupId, type } = notification;
     return `${nodeId}-${componentId}-${fromWorkgroupId}-${toWorkgroupId}-${type}`;
   }
 
-  pretendServerRequest(notification) {
+  private pretendServerRequest(notification) {
     return Promise.resolve(notification);
   }
 
@@ -374,7 +374,7 @@ export class NotificationService {
    * (e.g. nodeId, componentId, toWorkgroupId, fromWorkgroupId, periodId, type)
    * @returns array of notificaitons
    */
-  getNotifications(args) {
+  private getNotifications(args) {
     let notifications = this.notifications;
     for (const p in args) {
       if (args.hasOwnProperty(p) && args[p] !== null) {
