@@ -52,14 +52,28 @@ describe('StudentStatusService', () => {
     service = TestBed.inject(StudentStatusService);
     studentDataService = TestBed.inject(StudentDataService);
   });
+  retrieveStudentStatus();
+  saveStudentStatus();
+});
 
-  it('should retrieve student status when in preview', () => {
+function retrieveStudentStatus() {
+  describe('retrieveStudentStatus()', () => {
+    retrieveStudentStatus_Preview_SetNewStatus();
+    retrieveStudentStatus_ReceiveNull_SetNewStatus();
+    retrieveStudentStatus_ReceiveStudentStatus_SetStudentStatus();
+  });
+}
+
+function retrieveStudentStatus_Preview_SetNewStatus() {
+  it('should retrieve empty student status when in preview', () => {
     setIsPreview(true);
     expectStudentStatusToBeUndefined();
     service.retrieveStudentStatus();
     expect(service.getStudentStatus()).toEqual(new StudentStatus());
   });
+}
 
+function retrieveStudentStatus_ReceiveNull_SetNewStatus() {
   it('should retrieve student status and receive null', () => {
     setIsPreview(false);
     expectStudentStatusToBeUndefined();
@@ -68,7 +82,9 @@ describe('StudentStatusService', () => {
     expect(httpGetSpy).toHaveBeenCalled();
     expect(service.getStudentStatus()).toEqual(new StudentStatus());
   });
+}
 
+function retrieveStudentStatus_ReceiveStudentStatus_SetStudentStatus() {
   it('should retrieve student status and receive a student status', () => {
     setIsPreview(false);
     expectStudentStatusToBeUndefined();
@@ -79,8 +95,16 @@ describe('StudentStatusService', () => {
     expect(httpGetSpy).toHaveBeenCalled();
     expect(service.getStudentStatus()).toEqual(studentStatus);
   });
+}
 
-  it('should save student status', () => {
+function saveStudentStatus() {
+  describe('saveStudentStatus()', () => {
+    saveStudentStatus_nodeStatusChanged_PostStudentStatus();
+  });
+}
+
+function saveStudentStatus_nodeStatusChanged_PostStudentStatus() {
+  it('should post student status on nodeStatusChanged', () => {
     setIsPreview(false);
     setIsRunActive(true);
     spyOn(configService, 'getRunId').and.returnValue(runId);
@@ -114,7 +138,7 @@ describe('StudentStatusService', () => {
     );
     expect(httpPostSpy).toHaveBeenCalledWith(studentStatusUrl, studentStatusParams);
   });
-});
+}
 
 function setIsPreview(value: boolean) {
   spyOn(TestBed.inject(ConfigService), 'isPreview').and.returnValue(value);
