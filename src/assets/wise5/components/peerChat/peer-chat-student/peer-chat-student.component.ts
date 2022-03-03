@@ -151,7 +151,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
         avatarColor: this.ConfigService.getAvatarColorForWorkgroupId(workgroupId),
         displayNames: this.ConfigService.isTeacherWorkgroupId(workgroupId)
           ? $localize`Teacher`
-          : this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId)
+          : this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId),
+        isTeacher: this.ConfigService.isTeacherWorkgroupId(workgroupId)
       };
     }
     this.isPeerChatWorkgroupsAvailable = true;
