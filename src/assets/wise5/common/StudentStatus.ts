@@ -6,4 +6,12 @@ export class StudentStatus {
   projectCompletion: any;
   runId: number;
   workgroupId: number;
+
+  constructor(jsonObject: any = {}) {
+    for (const key of Object.keys(jsonObject)) {
+      if (jsonObject[key] != null) {
+        this[key] = jsonObject[key];
+      }
+    }
+  }
 }

@@ -28,7 +28,7 @@ export class StudentStatusService {
           if (studentStatus == null) {
             this.setStudentStatus(new StudentStatus());
           } else {
-            this.setStudentStatus(JSON.parse(studentStatus.status));
+            this.setStudentStatus(new StudentStatus(JSON.parse(studentStatus.status)));
           }
         });
     }
@@ -36,6 +36,10 @@ export class StudentStatusService {
 
   private setStudentStatus(studentStatus: StudentStatus): void {
     this.studentStatus = studentStatus;
+  }
+
+  getStudentStatus(): StudentStatus {
+    return this.studentStatus;
   }
 
   setComputerAvatarId(computerAvatarId: string): void {
