@@ -89,6 +89,9 @@ export class StudentWebSocketService {
         if (message.type === 'notification') {
           const notification = JSON.parse(message.content);
           this.NotificationService.addNotification(notification);
+          if (notification.nodeId === this.StudentDataService.getCurrentNodeId()) {
+            this.NotificationService.dismissNotification(notification);
+          }
         } else if (message.type === 'annotation') {
           const annotationData = JSON.parse(message.content);
           this.AnnotationService.addOrUpdateAnnotation(annotationData);
