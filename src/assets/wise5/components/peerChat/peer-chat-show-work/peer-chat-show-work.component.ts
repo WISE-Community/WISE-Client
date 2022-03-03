@@ -6,6 +6,8 @@ import { ProjectService } from '../../../services/projectService';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroupService } from '../../../services/peerGroupService';
+import { PeerGroup } from '../PeerGroup';
+import { PeerGroupMember } from '../PeerGroupMember';
 
 @Component({
   selector: 'peer-chat-show-work',
@@ -14,7 +16,7 @@ import { PeerGroupService } from '../../../services/peerGroupService';
 export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   isPeerChatWorkgroupsAvailable: boolean = false;
   peerChatMessages: PeerChatMessage[] = [];
-  peerChatWorkgroupIds: Set<number>;
+  peerChatWorkgroupIds: Set<number> = new Set<number>();
   peerChatWorkgroupInfos: any = {};
   requestTimeout: number = 10000;
 
@@ -32,59 +34,52 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.peerChatWorkgroupIds = new Set<number>();
     this.requestChatWorkgroups();
   }
 
-  requestChatWorkgroups(): void {
+  private requestChatWorkgroups(): void {
     this.peerGroupService
       .retrievePeerGroup(this.componentContent.peerGroupActivityTag, this.workgroupId)
       .pipe(timeout(this.requestTimeout))
-      .subscribe(
-        (peerGroup: any) => {
-          this.requestChatWorkgroupsSuccess(peerGroup);
-        },
-        (error) => {
-          // TODO
-        }
-      );
+      .subscribe((peerGroup: PeerGroup) => {
+        this.requestChatWorkgroupsSuccess(peerGroup);
+      });
   }
 
-  requestChatWorkgroupsSuccess(peerGroup: any): void {
+  private requestChatWorkgroupsSuccess(peerGroup: PeerGroup): void {
     this.addWorkgroupIdsFromPeerGroup(this.peerChatWorkgroupIds, peerGroup);
     this.addTeacherWorkgroupIds(this.peerChatWorkgroupIds);
     this.retrievePeerChatComponentStates(this.nodeId, this.componentId, this.workgroupId);
   }
 
-  addWorkgroupIdsFromPeerGroup(workgroupIds: Set<number>, peerGroup: any): void {
-    peerGroup.members.forEach((member: any) => {
+  private addWorkgroupIdsFromPeerGroup(workgroupIds: Set<number>, peerGroup: PeerGroup): void {
+    peerGroup.members.forEach((member: PeerGroupMember) => {
       workgroupIds.add(member.id);
     });
   }
 
-  addTeacherWorkgroupIds(workgroupIds: Set<number>): void {
+  private addTeacherWorkgroupIds(workgroupIds: Set<number>): void {
     this.configService.getTeacherWorkgroupIds().forEach((workgroupId) => {
       workgroupIds.add(workgroupId);
     });
   }
 
-  retrievePeerChatComponentStates(nodeId: string, componentId: string, workgroupId: number): void {
+  private retrievePeerChatComponentStates(
+    nodeId: string,
+    componentId: string,
+    workgroupId: number
+  ): void {
     this.peerChatService
       .retrievePeerChatComponentStates(nodeId, componentId, workgroupId)
       .pipe(timeout(this.requestTimeout))
-      .subscribe(
-        (componentStates: any[]) => {
-          this.setPeerChatMessages(componentStates);
-          this.addWorkgroupIdsFromPeerChatMessages(this.peerChatWorkgroupIds, componentStates);
-          this.setPeerChatWorkgroupInfos(Array.from(this.peerChatWorkgroupIds));
-        },
-        (error) => {
-          // TODO
-        }
-      );
+      .subscribe((componentStates: any[]) => {
+        this.setPeerChatMessages(componentStates);
+        this.addWorkgroupIdsFromPeerChatMessages(this.peerChatWorkgroupIds, componentStates);
+        this.setPeerChatWorkgroupInfos(Array.from(this.peerChatWorkgroupIds));
+      });
   }
 
-  setPeerChatMessages(componentStates: any[]): void {
+  private setPeerChatMessages(componentStates: any[]): void {
     this.peerChatMessages = [];
     componentStates.forEach((componentState: any) => {
       this.peerChatMessages.push(
@@ -93,13 +88,16 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     });
   }
 
-  addWorkgroupIdsFromPeerChatMessages(workgroupIds: Set<number>, componentStates: any[]): void {
+  private addWorkgroupIdsFromPeerChatMessages(
+    workgroupIds: Set<number>,
+    componentStates: any[]
+  ): void {
     componentStates.forEach((componentState) => {
       workgroupIds.add(componentState.workgroupId);
     });
   }
 
-  setPeerChatWorkgroupInfos(workgroupIds: number[]): void {
+  private setPeerChatWorkgroupInfos(workgroupIds: number[]): void {
     for (const workgroupId of workgroupIds) {
       this.peerChatWorkgroupInfos[workgroupId] = {
         avatarColor: this.configService.getAvatarColorForWorkgroupId(workgroupId),

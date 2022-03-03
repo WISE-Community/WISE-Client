@@ -33,25 +33,19 @@ describe('PeerChatChatBoxComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerChatChatBoxComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should get workgroup infos without teachers', () => {
-    const workgroupInfos = {
+    component.workgroupInfos = {
       1: { isTeacher: true },
       2: { isTeacher: false },
       3: { isTeacher: false }
     };
-    const workgroupInfosWithoutTeachers = component.getWorkgroupInfosWithoutTeachers(
-      workgroupInfos
-    );
-    expect(workgroupInfosWithoutTeachers).toEqual({
-      2: { isTeacher: false },
-      3: { isTeacher: false }
-    });
+    fixture.detectChanges();
+  });
+
+  it('should create with workgroup infos without teachers', () => {
+    expect(component).toBeTruthy();
+    expect(component.workgroupInfosWithoutTeachers).toEqual([
+      { isTeacher: false },
+      { isTeacher: false }
+    ]);
   });
 });
