@@ -10,7 +10,6 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { SessionService } from '../../../assets/wise5/services/sessionService';
 import { StudentAssetService } from '../../../assets/wise5/services/studentAssetService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
-import { StudentStatusService } from '../../../assets/wise5/services/studentStatusService';
 import { TagService } from '../../../assets/wise5/services/tagService';
 import { UtilService } from '../../../assets/wise5/services/utilService';
 import { NotebookNotesComponent } from './notebook-notes.component';
@@ -30,7 +29,6 @@ describe('NotebookNotesComponent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         UtilService
       ]

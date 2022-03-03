@@ -8,7 +8,6 @@ import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
-import { StudentStatusService } from '../../services/studentStatusService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { SummaryDisplay } from './summary-display.component';
@@ -27,7 +26,6 @@ describe('SummaryDisplay', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         UtilService
       ],

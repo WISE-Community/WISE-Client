@@ -11,7 +11,6 @@ import { StudentDataService } from '../../services/studentDataService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { StudentAccountMenuComponent } from './student-account-menu.component';
-import { StudentStatusService } from '../../services/studentStatusService';
 
 class MockProjectService {
   rootNode = {};
@@ -35,7 +34,6 @@ describe('StudentAccountMenuComponent', () => {
         { provide: ProjectService, useClass: MockProjectService },
         SessionService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         UtilService
       ]

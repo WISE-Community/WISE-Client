@@ -16,9 +16,7 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
 import { UtilService } from '../../../../services/utilService';
-
 import { NodeAdvancedConstraintAuthoringComponent } from './node-advanced-constraint-authoring.component';
-import { StudentStatusService } from '../../../../services/studentStatusService';
 
 describe('NodeAdvancedConstraintAuthoringComponent', () => {
   let component: NodeAdvancedConstraintAuthoringComponent;
@@ -38,7 +36,6 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         TeacherDataService,
         TeacherProjectService,

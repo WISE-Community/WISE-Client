@@ -19,7 +19,6 @@ import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
-import { StudentStatusService } from '../../services/studentStatusService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { GenerateImageDialogComponent } from './generate-image-dialog.component';
@@ -62,7 +61,6 @@ describe('GenerateImageDialogComponent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentStatusService,
         TableService,
         TagService,
         UtilService

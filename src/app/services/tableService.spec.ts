@@ -10,7 +10,6 @@ import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
-import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
 
 let service: TableService;
 
@@ -25,7 +24,6 @@ describe('TableService', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentStatusService,
         TableService,
         TagService,
         UtilService

@@ -9,7 +9,6 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
-import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
 
 let service: OutsideURLService;
 let http: HttpTestingController;
@@ -25,7 +24,6 @@ describe('OutsideURLService', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         UtilService
       ]

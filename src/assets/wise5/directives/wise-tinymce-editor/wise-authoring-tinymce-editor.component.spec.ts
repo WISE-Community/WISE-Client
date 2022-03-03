@@ -10,7 +10,6 @@ import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
-import { StudentStatusService } from '../../services/studentStatusService';
 import { TagService } from '../../services/tagService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { UtilService } from '../../services/utilService';
@@ -34,7 +33,6 @@ describe('WiseAuthoringTinymceEditorComponent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         TeacherProjectService,
         UtilService

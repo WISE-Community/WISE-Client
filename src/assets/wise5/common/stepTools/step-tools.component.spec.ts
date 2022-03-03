@@ -15,7 +15,6 @@ import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
-import { StudentStatusService } from '../../services/studentStatusService';
 import { TagService } from '../../services/tagService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -72,7 +71,6 @@ describe('StepTools', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         TeacherDataService,
         TeacherProjectService,

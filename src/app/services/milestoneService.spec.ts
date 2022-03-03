@@ -17,7 +17,6 @@ import { NotificationService } from '../../assets/wise5/services/notificationSer
 import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
-import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
 
 let service: MilestoneService;
 let achievementService: AchievementService;
@@ -94,7 +93,6 @@ describe('MilestoneService', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         TeacherDataService,
         TeacherProjectService,

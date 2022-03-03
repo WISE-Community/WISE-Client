@@ -10,7 +10,6 @@ import { StudentDataService } from '../../assets/wise5/services/studentDataServi
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
-import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
 
 let service: MatchService;
 let componentStateBucketWithItem: any;
@@ -27,7 +26,6 @@ describe('MatchService', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         UtilService
       ]

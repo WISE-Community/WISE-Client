@@ -18,7 +18,6 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
 import { LabelService } from '../labelService';
 import { LabelStudent } from './label-student.component';
-import { StudentStatusService } from '../../../services/studentStatusService';
 
 export class MockService {}
 
@@ -41,7 +40,6 @@ describe('LabelStudent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         UtilService
       ],
