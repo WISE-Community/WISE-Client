@@ -34,7 +34,7 @@ export class StudentStatusService {
     }
   }
 
-  setStudentStatus(studentStatus: StudentStatus): void {
+  private setStudentStatus(studentStatus: StudentStatus): void {
     this.studentStatus = studentStatus;
   }
 
@@ -46,7 +46,7 @@ export class StudentStatusService {
     return this.studentStatus.computerAvatarId;
   }
 
-  saveStudentStatus() {
+  private saveStudentStatus() {
     if (!this.configService.isPreview() && this.configService.isRunActive()) {
       const runId = this.configService.getRunId();
       const periodId = this.configService.getPeriodId();

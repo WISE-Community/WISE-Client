@@ -99,69 +99,69 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     }
   }
 
-  tryToRepopulateComputerAvatar(): void {
-    if (this.isComputerAvatarInComponentState(this.componentState)) {
+  private tryToRepopulateComputerAvatar(): void {
+    if (this.includesComputerAvatar(this.componentState)) {
       this.repopulateComputerAvatarFromComponentState(this.componentState);
-    } else if (this.shouldUseGlobalComputerAvatar() && this.isGlobalComputerAvatarAvailable()) {
+    } else if (this.isUseGlobalComputerAvatar() && this.isGlobalComputerAvatarAvailable()) {
       this.repopulateGlobalComputerAvatar();
     }
   }
 
-  isComputerAvatarInComponentState(componentState: any): boolean {
+  private includesComputerAvatar(componentState: any): boolean {
     return componentState?.studentData?.computerAvatarId != null;
   }
 
-  shouldUseGlobalComputerAvatar(): boolean {
+  private isUseGlobalComputerAvatar(): boolean {
     return this.componentContent.computerAvatarSettings.useGlobalComputerAvatar;
   }
 
-  isGlobalComputerAvatarAvailable(): boolean {
+  private isGlobalComputerAvatarAvailable(): boolean {
     return this.studentStatusService.getComputerAvatarId() != null;
   }
 
-  repopulateComputerAvatarFromComponentState(componentState: any): void {
+  private repopulateComputerAvatarFromComponentState(componentState: any): void {
     this.computerAvatar = this.computerAvatarService.getAvatar(
       componentState?.studentData?.computerAvatarId
     );
   }
 
-  repopulateGlobalComputerAvatar(): void {
+  private repopulateGlobalComputerAvatar(): void {
     const computerAvatarId = this.studentStatusService.getComputerAvatarId();
     if (computerAvatarId != null) {
       this.selectComputerAvatar(this.computerAvatarService.getAvatar(computerAvatarId));
     }
   }
 
-  hasStudentPreviouslyChosenComputerAvatar(): boolean {
+  private hasStudentPreviouslyChosenComputerAvatar(): boolean {
     return this.computerAvatar != null;
   }
 
-  isOnlyOneComputerAvatarAvailable(): boolean {
+  private isOnlyOneComputerAvatarAvailable(): boolean {
     return this.componentContent.computerAvatarSettings.ids.length === 1;
   }
 
-  getTheOnlyComputerAvatarAvailable(): ComputerAvatar {
+  private getTheOnlyComputerAvatarAvailable(): ComputerAvatar {
     return this.computerAvatarService.getAvatar(
       this.componentContent.computerAvatarSettings.ids[0]
     );
   }
 
-  isComputerAvatarPromptAvailable(): boolean {
+  private isComputerAvatarPromptAvailable(): boolean {
     const computerAvatarPrompt = this.componentContent.computerAvatarSettings.prompt;
     return computerAvatarPrompt != null && computerAvatarPrompt !== '';
   }
 
-  showComputerAvatarSelector(): void {
+  private showComputerAvatarSelector(): void {
     this.isShowComputerAvatarSelector = true;
   }
 
-  hideComputerAvatarSelector(): void {
+  private hideComputerAvatarSelector(): void {
     this.isShowComputerAvatarSelector = false;
   }
 
   selectComputerAvatar(computerAvatar: ComputerAvatar): void {
     this.computerAvatar = computerAvatar;
-    if (this.shouldUseGlobalComputerAvatar()) {
+    if (this.isUseGlobalComputerAvatar()) {
       this.studentStatusService.setComputerAvatarId(computerAvatar.id);
     }
     this.hideComputerAvatarSelector();
@@ -185,20 +185,20 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     }, 500);
   }
 
-  clearStudentResponse(): void {
+  private clearStudentResponse(): void {
     this.studentResponse = '';
     this.studentResponseChanged();
   }
 
-  addStudentDialogResponse(text: string): void {
+  private addStudentDialogResponse(text: string): void {
     this.responses.push(new StudentDialogResponse(text, new Date().getTime(), this.workgroupId));
   }
 
-  addDialogResponse(dialogResponse: DialogResponse): void {
+  private addDialogResponse(dialogResponse: DialogResponse): void {
     this.responses.push(dialogResponse);
   }
 
-  submitToCRater(studentResponse: string): void {
+  private submitToCRater(studentResponse: string): void {
     this.showWaitingForComputerResponse();
     this.CRaterService.makeCRaterScoringRequest(
       this.componentContent.itemId,
@@ -216,23 +216,23 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       );
   }
 
-  showWaitingForComputerResponse(): void {
+  private showWaitingForComputerResponse(): void {
     this.isWaitingForComputerResponse = true;
   }
 
-  hideWaitingForComputerResponse(): void {
+  private hideWaitingForComputerResponse(): void {
     this.isWaitingForComputerResponse = false;
   }
 
-  disableInput(): void {
+  private disableInput(): void {
     this.isDisabled = true;
   }
 
-  enableInput(): void {
+  private enableInput(): void {
     this.isDisabled = false;
   }
 
-  disableStudentResponse(): void {
+  private disableStudentResponse(): void {
     this.studentCanRespond = false;
   }
 

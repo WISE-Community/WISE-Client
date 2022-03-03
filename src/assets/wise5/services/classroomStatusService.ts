@@ -13,14 +13,14 @@ export class ClassroomStatusService {
 
   constructor(
     private http: HttpClient,
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
-    private ProjectService: ProjectService
+    private annotationService: AnnotationService,
+    private configService: ConfigService,
+    private projectService: ProjectService
   ) {}
 
   retrieveStudentStatuses() {
     return this.http
-      .get(`/api/teacher/run/${this.ConfigService.getRunId()}/student-status`)
+      .get(`/api/teacher/run/${this.configService.getRunId()}/student-status`)
       .subscribe((studentStatuses: any[]) => {
         this.studentStatuses = this.parseStudentStatuses(studentStatuses);
         return this.studentStatuses;
@@ -29,7 +29,7 @@ export class ClassroomStatusService {
 
   private parseStudentStatuses(studentStatuses: any[]): any[] {
     const parsedStatuses = [];
-    const workgroups = this.ConfigService.getClassmateUserInfos();
+    const workgroups = this.configService.getClassmateUserInfos();
     for (const studentStatus of studentStatuses) {
       if (
         workgroups.find((workgroup) => {
@@ -58,7 +58,7 @@ export class ClassroomStatusService {
     const studentStatus = this.getStudentStatusForWorkgroupId(workgroupId);
     if (studentStatus != null) {
       const currentNodeId = studentStatus.currentNodeId;
-      return this.ProjectService.getNodePositionAndTitleByNodeId(currentNodeId);
+      return this.projectService.getNodePositionAndTitleByNodeId(currentNodeId);
     }
     return null;
   }
@@ -146,11 +146,11 @@ export class ClassroomStatusService {
           let currentNodeId = studentStatus.currentNodeId;
           if (nodeId === currentNodeId) {
             workgroupIds.push(studentStatus.workgroupId);
-          } else if (this.ProjectService.isGroupNode(nodeId)) {
-            let currentNode = this.ProjectService.getNodeById(currentNodeId);
-            let group = this.ProjectService.getNodeById(nodeId);
+          } else if (this.projectService.isGroupNode(nodeId)) {
+            let currentNode = this.projectService.getNodeById(currentNodeId);
+            let group = this.projectService.getNodeById(nodeId);
 
-            if (this.ProjectService.isNodeDescendentOfGroup(currentNode, group)) {
+            if (this.projectService.isNodeDescendentOfGroup(currentNode, group)) {
               workgroupIds.push(studentStatus.workgroupId);
             }
           }
@@ -173,7 +173,7 @@ export class ClassroomStatusService {
   getNodeCompletion(nodeId, periodId, workgroupId = null, excludeNonWorkNodes = false) {
     let numCompleted = 0;
     let numTotal = 0;
-    let isGroupNode = this.ProjectService.isGroupNode(nodeId);
+    let isGroupNode = this.projectService.isGroupNode(nodeId);
 
     let studentStatuses = this.studentStatuses;
     for (let studentStatus of studentStatuses) {
@@ -196,18 +196,18 @@ export class ClassroomStatusService {
                        * we have a legacy nodeStatus.progress that only includes completion information for all nodes
                        * so we need to calculate manually
                        */
-                      let group = this.ProjectService.getNodeById(nodeId);
+                      let group = this.projectService.getNodeById(nodeId);
 
-                      let descendants = this.ProjectService.getDescendentsOfGroup(group);
+                      let descendants = this.projectService.getDescendentsOfGroup(group);
 
                       for (let descendantId of descendants) {
-                        if (!this.ProjectService.isGroupNode(descendantId)) {
+                        if (!this.projectService.isGroupNode(descendantId)) {
                           let descendantStatus = nodeStatuses[descendantId];
 
                           if (
                             descendantStatus &&
                             descendantStatus.isVisible &&
-                            this.ProjectService.nodeHasWork(descendantId)
+                            this.projectService.nodeHasWork(descendantId)
                           ) {
                             numTotal++;
 
@@ -241,7 +241,7 @@ export class ClassroomStatusService {
                      * i.e. either includeNonWorkNodes is true or the node has student work
                      */
                     let includeNode =
-                      !excludeNonWorkNodes || this.ProjectService.nodeHasWork(nodeId);
+                      !excludeNonWorkNodes || this.projectService.nodeHasWork(nodeId);
 
                     if (includeNode) {
                       numTotal++;
@@ -288,7 +288,7 @@ export class ClassroomStatusService {
           const workgroupId = studentStatus.workgroupId;
 
           // get the workgroups score on the node
-          const score = this.AnnotationService.getTotalNodeScoreForWorkgroup(workgroupId, nodeId);
+          const score = this.annotationService.getTotalNodeScoreForWorkgroup(workgroupId, nodeId);
 
           if (score != null) {
             // increment the counter of students with a score for this node
@@ -327,8 +327,8 @@ export class ClassroomStatusService {
           if (nodeStatuses.hasOwnProperty(p)) {
             let nodeStatus = nodeStatuses[p];
             let nodeId = nodeStatus.nodeId;
-            if (nodeStatus.isVisible && this.ProjectService.isApplicationNode(nodeId)) {
-              let nodeMaxScore = this.ProjectService.getMaxScoreForNode(nodeId);
+            if (nodeStatus.isVisible && this.projectService.isApplicationNode(nodeId)) {
+              let nodeMaxScore = this.projectService.getMaxScoreForNode(nodeId);
               if (nodeMaxScore) {
                 // there is a max score for the node, so add to total
                 // TODO geoffreykwan: trying to add to null?
