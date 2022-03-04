@@ -52,7 +52,7 @@ describe('NotificationsMenuComponent', () => {
         UtilService,
         {
           provide: MatDialogRef,
-          useValue: { close: () => {} } 
+          useValue: { close: () => {} }
         }
       ]
     }).compileComponents();
