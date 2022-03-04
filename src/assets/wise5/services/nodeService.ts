@@ -183,7 +183,7 @@ export class NodeService {
    * @param currentId (optional)
    * @returns a promise that returns the next node id
    */
-  getNextNodeId(currentId?) {
+  getNextNodeId(currentId?): Promise<any> {
     const promise = new Promise((resolve, reject) => {
       let nextNodeId = null;
       let currentNodeId = null;
@@ -290,8 +290,8 @@ export class NodeService {
    * Go to the next node that captures work
    * @return a promise that will return the next node id
    */
-  goToNextNodeWithWork() {
-    this.getNextNodeIdWithWork().then((nextNodeId) => {
+  goToNextNodeWithWork(): Promise<string> {
+    return this.getNextNodeIdWithWork().then((nextNodeId: string) => {
       if (nextNodeId) {
         this.DataService.endCurrentNodeAndSetCurrentNodeByNodeId(nextNodeId);
       }

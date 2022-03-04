@@ -12,7 +12,7 @@
         ng-mousemove="themeCtrl.mouseMoved()"
         ng-class="::{'notebook-enabled': vleController.notebookEnabled}"
         style="position: absolute;">
-      <ng-include src="::vleController.themePath + '/templates/topbar.html'"></ng-include>
+      <top-bar></top-bar>
       <step-tools show-position="themeCtrl.numberProject" ng-if="themeCtrl.layoutState === 'node'">
       </step-tools>
       <md-content id="content"

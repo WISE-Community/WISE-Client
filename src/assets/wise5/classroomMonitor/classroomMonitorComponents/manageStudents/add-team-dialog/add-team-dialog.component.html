@@ -26,7 +26,7 @@
               (click)="addTeamMember(user)"
               [disabled]="initialTeamMembers.length == 3 || initialTeamMembers.includes(user)"
               aria-label="Select to add student to new team"
-              aria-label-i18n>
+              i18n-aria-label>
             <show-student-info [user]="user"></show-student-info>
           </button>
         </div>

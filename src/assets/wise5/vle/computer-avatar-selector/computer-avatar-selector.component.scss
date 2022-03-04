@@ -1,0 +1,41 @@
+@import '~style/abstracts/variables', '~style/abstracts/functions';
+
+.mat-card {
+  padding: 12px;
+  margin-top: 16px;
+  max-width: breakpoint('sm.min');
+
+  .mat-divider-horizontal {
+    position: relative;
+    margin: 12px 0;
+  }
+}
+
+.mat-button-toggle-group {
+  border: 0 none;
+  margin-top: 16px;
+}
+
+.mat-button-toggle-group-appearance-standard {
+  .mat-button-toggle, .mat-button-toggle + .mat-button-toggle {
+    border-left: 0 none;
+    border-radius: $card-border-radius;
+    margin: 4px;
+  }
+}
+
+.mat-button-toggle-disabled.mat-button-toggle-checked {
+  background-color: transparent;
+}
+
+.avatar-image {
+  width: 88px;
+  height: auto;
+  border-radius: 50%;
+  padding: 8px 0;
+}
+
+.name {
+  line-height: 1;
+  padding-bottom: 8px;
+}

@@ -26,7 +26,6 @@ import { PeerChatModule } from '../assets/wise5/components/peerChat/peer-chat.mo
 import { ComponentComponent } from '../assets/wise5/components/component/component.component';
 import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
 import { NavigationComponent } from '../assets/wise5/themes/default/navigation/navigation.component';
-import { StudentAssetsModule } from '../assets/wise5/vle/studentAsset/student-assets/student-assets-module';
 import { OpenResponseStudentModule } from '../assets/wise5/components/openResponse/open-response-student/open-response-student.module';
 import { TableStudentModule } from '../assets/wise5/components/table/table-student/table-student.module';
 import { MultipleChoiceStudentModule } from '../assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.module';
@@ -44,8 +43,8 @@ import { SummaryStudentModule } from '../assets/wise5/components/summary/summary
 import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/summary-display.module';
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 import { ShowGroupWorkStudentModule } from '../assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.module';
-import { NotificationsMenuComponent } from '../assets/wise5/vle/notifications-menu/notifications-menu.component';
-import { StudentAccountMenuComponent } from '../assets/wise5/vle/student-account-menu/student-account-menu.component';
+import { TopBarModule } from './student/top-bar/top-bar.module';
+import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
 
 @NgModule({
   declarations: [
@@ -55,10 +54,8 @@ import { StudentAccountMenuComponent } from '../assets/wise5/vle/student-account
     NavigationComponent,
     NavItemComponent,
     PeerChatStudentComponent,
-    NotificationsMenuComponent,
     SafeUrl,
-    StepToolsComponent,
-    StudentAccountMenuComponent
+    StepToolsComponent
   ],
   imports: [
     AngularJSModule,
@@ -80,11 +77,12 @@ import { StudentAccountMenuComponent } from '../assets/wise5/vle/student-account
     PeerChatModule,
     ShowGroupWorkStudentModule,
     ShowMyWorkStudentModule,
-    StudentAssetsModule,
+    StudentAssetsDialogModule,
     StudentComponentModule,
     SummaryDisplayModule,
     SummaryStudentModule,
-    TableStudentModule
+    TableStudentModule,
+    TopBarModule
   ],
   providers: [
     { provide: DataService, useExisting: StudentDataService },

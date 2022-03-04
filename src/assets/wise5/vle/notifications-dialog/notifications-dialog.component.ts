@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { AnnotationService } from '../../services/annotationService';
 import { NotebookService } from '../../services/notebookService';
 import { NotificationService } from '../../services/notificationService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 
 @Component({
-  selector: 'notifications-menu',
-  templateUrl: './notifications-menu.component.html',
-  styleUrls: ['./notifications-menu.component.scss']
+  selector: 'notifications-dialog',
+  templateUrl: './notifications-dialog.component.html',
+  styleUrls: ['./notifications-dialog.component.scss']
 })
-export class NotificationsMenuComponent implements OnInit {
+export class NotificationsDialogComponent implements OnInit {
   newNotifications: any;
   notifications: any;
   subscriptions: Subscription = new Subscription();
 
   constructor(
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<NotificationsDialogComponent>,
     private notebookService: NotebookService,
     private notificationService: NotificationService,
     private projectService: ProjectService,
@@ -52,10 +54,12 @@ export class NotificationsMenuComponent implements OnInit {
     let notebookItemId = notificationAggregate.notebookItemId;
     if (goToNodeId != null) {
       this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(goToNodeId);
+      this.dialogRef.close();
     } else if (notebookItemId != null) {
       // assume notification with notebookItemId is for the report for now,
       // as we don't currently support annotations on notes
       this.notebookService.broadcastShowReportAnnotations();
+      this.dialogRef.close();
     }
   }
 
@@ -69,6 +73,7 @@ export class NotificationsMenuComponent implements OnInit {
         notification: notification
       };
       this.notificationService.broadcastViewCurrentAmbientNotification(args);
+      this.dialogRef.close();
     }
   }
 

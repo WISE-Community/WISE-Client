@@ -71,6 +71,7 @@ import { ShowGroupWorkAuthoringComponent } from '../../assets/wise5/components/s
 import { EditShowGroupWorkAdvancedComponent } from '../../assets/wise5/components/showGroupWork/edit-show-group-work-advanced/edit-show-group-work-advanced.component';
 import { EditComponentPeerGroupActivityTagComponent } from '../authoring-tool/edit-component-peer-group-activity-tag/edit-component-peer-group-activity-tag.component';
 import { EditDialogGuidanceAdvancedComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component';
+import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { EditDialogGuidanceAdvancedComponent } from '../../assets/wise5/componen
     EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
     EditDialogGuidanceAdvancedComponent,
+    EditDialogGuidanceComputerAvatarComponent,
     EditDialogGuidanceFeedbackRulesComponent,
     EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,

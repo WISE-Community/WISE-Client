@@ -997,7 +997,6 @@ export class StudentDataService extends DataService {
        * server
        */
       this.updateNodeStatuses();
-      this.saveStudentStatus();
     }
     const deferred = this.upgrade.$injector.get('$q').defer();
     deferred.resolve(savedStudentDataResponse);
@@ -1090,42 +1089,6 @@ export class StudentDataService extends DataService {
     const deferred = this.upgrade.$injector.get('$q').defer();
     deferred.resolve();
     return deferred.promise;
-  }
-
-  saveStudentStatus() {
-    if (!this.ConfigService.isPreview() && this.ConfigService.isRunActive()) {
-      const runId = this.ConfigService.getRunId();
-      const periodId = this.ConfigService.getPeriodId();
-      const workgroupId = this.ConfigService.getWorkgroupId();
-      const currentNodeId = this.getCurrentNodeId();
-      const nodeStatuses = this.getNodeStatuses();
-      const projectCompletion = this.getProjectCompletion();
-      const studentStatusJSON = {
-        runId: runId,
-        periodId: periodId,
-        workgroupId: workgroupId,
-        currentNodeId: currentNodeId,
-        nodeStatuses: nodeStatuses,
-        projectCompletion: projectCompletion
-      };
-      const studentStatusParams = {
-        runId: runId,
-        periodId: periodId,
-        workgroupId: workgroupId,
-        status: angular.toJson(studentStatusJSON)
-      };
-      return this.http
-        .post(this.ConfigService.getStudentStatusURL(), studentStatusParams)
-        .toPromise()
-        .then(
-          (result) => {
-            return true;
-          },
-          (result) => {
-            return false;
-          }
-        );
-    }
   }
 
   getLatestComponentState() {

@@ -15,7 +15,7 @@ import { TeacherProjectService } from '../../assets/wise5/services/teacherProjec
 import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
 import { AchievementService } from '../../assets/wise5/services/achievementService';
 import { NotificationService } from '../../assets/wise5/services/notificationService';
-import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
+import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
 
 class MockTeacherDataService {
   getComponentStatesByComponentIds() {
@@ -37,6 +37,7 @@ describe('DiscussionService', () => {
       providers: [
         AchievementService,
         AnnotationService,
+        ClassroomStatusService,
         ConfigService,
         DiscussionService,
         NotificationService,
@@ -44,7 +45,6 @@ describe('DiscussionService', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         { provide: TeacherDataService, useClass: MockTeacherDataService },
         TeacherProjectService,

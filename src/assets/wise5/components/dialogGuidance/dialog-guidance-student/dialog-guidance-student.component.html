@@ -1,8 +1,14 @@
-<component-header [componentContent]="componentContent"></component-header>
-<mat-card class="mat-elevation-z2">
-  <dialog-responses *ngIf="responses.length > 0"
+<computer-avatar-selector
+    *ngIf="isShowComputerAvatarSelector"
+    [computerAvatarSettings]="componentContent.computerAvatarSettings"
+    (chooseAvatarEvent)="selectComputerAvatar($event)">
+</computer-avatar-selector>
+<mat-card *ngIf="!isShowComputerAvatarSelector" class="mat-elevation-z2">
+  <component-header [componentContent]="componentContent"></component-header>
+  <dialog-responses
       [responses]="responses"
-      [isWaitingForComputerResponse]="isWaitingForComputerResponse">
+      [isWaitingForComputerResponse]="isWaitingForComputerResponse"
+      [computerAvatar]="computerAvatar">
   </dialog-responses>
   <div *ngIf="studentCanRespond"
       class="add-response"

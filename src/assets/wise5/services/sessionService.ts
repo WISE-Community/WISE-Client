@@ -1,7 +1,6 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { Observable, Subject } from 'rxjs';
@@ -21,11 +20,7 @@ export class SessionService {
   private logOutSource: Subject<void> = new Subject<void>();
   public logOut$ = this.logOutSource.asObservable();
 
-  constructor(
-    protected upgrade: UpgradeModule,
-    protected http: HttpClient,
-    protected ConfigService: ConfigService
-  ) {}
+  constructor(protected http: HttpClient, protected ConfigService: ConfigService) {}
 
   calculateIntervals(sessionTimeout): any {
     const forceLogoutAfterWarningInterval: number = Math.min(
@@ -39,9 +34,15 @@ export class SessionService {
     };
   }
 
+  isAuthenticated(): boolean {
+    return this.ConfigService.getConfigParam('userType') != 'none';
+  }
+
   goHome() {
     this.broadcastExit();
-    this.upgrade.$injector.get('$location').url(this.ConfigService.getConfigParam('userType'));
+    window.location.href = this.isAuthenticated()
+      ? `/${this.ConfigService.getConfigParam('userType')}`
+      : '/';
   }
 
   broadcastExit() {

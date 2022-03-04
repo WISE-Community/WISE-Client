@@ -11,6 +11,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { PossibleScoreComponent } from '../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../services/annotationService';
+import { ComputerAvatarService } from '../../services/computerAvatarService';
 import { ConfigService } from '../../services/configService';
 import { CRaterService } from '../../services/cRaterService';
 import { NodeService } from '../../services/nodeService';
@@ -19,6 +20,7 @@ import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
+import { StudentStatusService } from '../../services/studentStatusService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { MockNodeService } from '../animation/animation-authoring/animation-authoring.component.spec';
@@ -119,6 +121,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
       providers: [
         AnnotationService,
         ComponentService,
+        ComputerAvatarService,
         CRaterService,
         ConfigService,
         DialogGuidanceService,
@@ -128,6 +131,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentStatusService,
         TagService,
         UtilService
       ]
