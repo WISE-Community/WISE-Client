@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { DismissAmbientNotificationDialogModule } from '../../../assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.module';
 import { NotificationsDialogModule } from '../../../assets/wise5/vle/notifications-dialog/notifications-dialog.module';
 import { StudentAccountMenuModule } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.module';
 import { TopBarComponent } from './top-bar.component';
@@ -16,6 +17,7 @@ import { TopBarComponent } from './top-bar.component';
   declarations: [TopBarComponent],
   imports: [
     CommonModule,
+    DismissAmbientNotificationDialogModule,
     FlexLayoutModule,
     MatBadgeModule,
     MatButtonModule,

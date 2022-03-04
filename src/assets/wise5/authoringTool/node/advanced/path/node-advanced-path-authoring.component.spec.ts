@@ -17,6 +17,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
 import { UtilService } from '../../../../services/utilService';
 import { NodeAdvancedPathAuthoringComponent } from './node-advanced-path-authoring.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('NodeAdvancedPathAuthoringComponent', () => {
   let component: NodeAdvancedPathAuthoringComponent;
@@ -25,7 +26,13 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatFormFieldModule, MatIconModule, UpgradeModule],
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        UpgradeModule
+      ],
       declarations: [NodeAdvancedPathAuthoringComponent],
       providers: [
         AchievementService,

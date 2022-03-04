@@ -16,6 +16,7 @@ import { TeacherDataService } from '../../assets/wise5/services/teacherDataServi
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
 import { UtilService } from '../../assets/wise5/services/utilService';
+import { MatDialogModule } from '@angular/material/dialog';
 
 let service: DataExportService;
 let configService: ConfigService;
@@ -43,7 +44,7 @@ describe('DataExportService', () => {
         TeacherWebSocketService,
         UtilService
       ],
-      imports: [HttpClientTestingModule, UpgradeModule]
+      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule]
     });
     service = TestBed.inject(DataExportService);
     configService = TestBed.inject(ConfigService);

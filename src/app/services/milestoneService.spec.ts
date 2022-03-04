@@ -17,6 +17,7 @@ import { NotificationService } from '../../assets/wise5/services/notificationSer
 import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
+import { MatDialogModule } from '@angular/material/dialog';
 
 let service: MilestoneService;
 let achievementService: AchievementService;
@@ -81,7 +82,7 @@ const reportSettingsCustomScoreValuesSample = {
 describe('MilestoneService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
       providers: [
         AchievementService,
         AnnotationService,

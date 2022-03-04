@@ -7,6 +7,7 @@ import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
+import { MatDialogModule } from '@angular/material/dialog';
 
 let service: NotificationService;
 let configService: ConfigService;
@@ -32,7 +33,7 @@ const notification1 = {
 describe('NotificationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
       providers: [
         AnnotationService,
         ConfigService,
