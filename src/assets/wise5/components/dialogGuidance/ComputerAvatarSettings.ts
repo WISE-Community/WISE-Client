@@ -3,4 +3,5 @@ export class ComputerAvatarSettings {
   label: string;
   prompt: string;
   initialResponse: string;
+  useGlobalComputerAvatar?: boolean;
 }

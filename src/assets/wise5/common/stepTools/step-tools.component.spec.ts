@@ -14,7 +14,7 @@ import { NotificationService } from '../../services/notificationService';
 import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
-import { StudentStatusService } from '../../services/studentStatusService';
+import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { TagService } from '../../services/tagService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -64,13 +64,13 @@ describe('StepTools', () => {
       providers: [
         AchievementService,
         AnnotationService,
+        ClassroomStatusService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
         NotificationService,
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         TeacherDataService,
         TeacherProjectService,
