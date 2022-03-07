@@ -5230,6 +5230,10 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
         <target state="translated">コピー</target>
       </trans-unit>
       <trans-unit id="4568352014425961102" datatype="html">
@@ -17000,6 +17004,18 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">Count</target>
       </trans-unit>
+      <trans-unit id="d53b401d14b43833857138029db823612e52f518" datatype="html">
+        <source>Go to step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/wise-link/wise-link.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/wise-link/wise-link.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <target state="needs-translation">Go to step</target>
+      </trans-unit>
       <trans-unit id="8560978883976627945" datatype="html">
         <source>Alignment</source>
         <context-group purpose="location">
@@ -17142,7 +17158,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="needs-translation">Notebook</target>
       </trans-unit>
@@ -17150,7 +17166,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>note</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <target state="needs-translation">note</target>
       </trans-unit>
@@ -17158,7 +17174,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <target state="needs-translation">notes</target>
       </trans-unit>
@@ -17166,7 +17182,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Manage Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target state="needs-translation">Manage Notes</target>
       </trans-unit>
@@ -17174,7 +17190,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <target state="needs-translation">report</target>
       </trans-unit>
@@ -17182,7 +17198,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>reports</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <target state="needs-translation">reports</target>
       </trans-unit>
@@ -17190,7 +17206,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <target state="needs-translation">Report</target>
       </trans-unit>
@@ -17233,6 +17249,115 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">67</context>
         </context-group>
         <target state="needs-translation">Project Plan</target>
+      </trans-unit>
+      <trans-unit id="8bb72dd61fcb847d109325b4dcae05bef9de55c0" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ textInputLabel }}"/> required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ textInputLabel }}"/> required</target>
+      </trans-unit>
+      <trans-unit id="5405a50074566c88d510755217ab163d40865419" datatype="html">
+        <source>Remove File</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <target state="needs-translation">Remove File</target>
+      </trans-unit>
+      <trans-unit id="5abeb8898e4a9d00841c40124f192d0a71b3cc18" datatype="html">
+        <source>Drop image or file here or click to upload!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets/student-assets.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="needs-translation">Drop image or file here or click to upload!</target>
+      </trans-unit>
+      <trans-unit id="eec31089571ce760c1f3c39edb0469e81ed2595f" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;mat-small&quot;&gt;"/>Share with Class<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;mat-small&quot;&gt;"/>Share with Class<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="a5433ae2324496bea9537caa5e8a2719d8e958d8" datatype="html">
+        <source> Cancel </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">72,73</context>
+        </context-group>
+        <target state="needs-translation"> Cancel </target>
+      </trans-unit>
+      <trans-unit id="f8b53b407af242e77dc3391947f23988f3451e64" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">80,81</context>
+        </context-group>
+        <target state="needs-translation"> Save </target>
+      </trans-unit>
+      <trans-unit id="dc390b4facb4c5f5fb7d88cac9db7fe350393640" datatype="html">
+        <source>Copy to My Notes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+        <target state="needs-translation">Copy to My Notes</target>
+      </trans-unit>
+      <trans-unit id="6cb1a9de15616c0b4efdd54cc10b58a166b9e016" datatype="html">
+        <source> Close </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">99,100</context>
+        </context-group>
+        <target state="needs-translation"> Close </target>
+      </trans-unit>
+      <trans-unit id="5379448133816368703" datatype="html">
+        <source>Note from <x id="PH" equiv-text="currentNodeTitle"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+        <target state="needs-translation">Note from <x id="PH" equiv-text="currentNodeTitle"/></target>
+      </trans-unit>
+      <trans-unit id="8417917245707164827" datatype="html">
+        <source>Edit <x id="PH" equiv-text="label"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+        <target state="needs-translation">Edit <x id="PH" equiv-text="label"/></target>
+      </trans-unit>
+      <trans-unit id="5258595085525200029" datatype="html">
+        <source>Add <x id="PH" equiv-text="label"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+        <target state="needs-translation">Add <x id="PH" equiv-text="label"/></target>
+      </trans-unit>
+      <trans-unit id="3296271610866256066" datatype="html">
+        <source>View <x id="PH" equiv-text="label"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+        <target state="needs-translation">View <x id="PH" equiv-text="label"/></target>
+      </trans-unit>
+      <trans-unit id="7033364046926512938" datatype="html">
+        <source><x id="PH" equiv-text="noteTerm"/> text</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <note priority="1" from="description">Label for note text input</note>
+        <target state="needs-translation"><x id="PH" equiv-text="noteTerm"/> text</target>
       </trans-unit>
       <trans-unit id="2e1aeaf8d183e6846a0463a08c784f472184fcf0" datatype="html">
         <source>Completed with warning</source>
@@ -17441,14 +17566,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">6</context>
         </context-group>
         <target state="needs-translation">Use this file</target>
-      </trans-unit>
-      <trans-unit id="5abeb8898e4a9d00841c40124f192d0a71b3cc18" datatype="html">
-        <source>Drop image or file here or click to upload!</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets/student-assets.component.html</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-        <target state="needs-translation">Drop image or file here or click to upload!</target>
       </trans-unit>
       <trans-unit id="95f17765f1d22644b3487059b4f575b4e3b77e70" datatype="html">
         <source> The student assets will appear here once you set up a classroom run.
