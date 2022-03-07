@@ -74,7 +74,6 @@ import { NotebookItemComponent } from '../../app/notebook/notebook-item/notebook
 import { NotebookNotesComponent } from '../../app/notebook/notebook-notes/notebook-notes.component';
 import { NotebookReportComponent } from '../../app/notebook/notebook-report/notebook-report.component';
 import { NotebookReportAnnotationsComponent } from '../../app/notebook/notebook-report-annotations/notebook-report-annotations.component';
-import EditNotebookItemController from './themes/default/notebook/editNotebookItemController';
 import { ComputerAvatarService } from './services/computerAvatarService';
 
 angular
@@ -151,7 +150,6 @@ angular
   .factory('StudentDataService', downgradeInjectable(StudentDataService))
   .factory('UtilService', downgradeInjectable(UtilService))
   .component('sideMenu', SideMenu)
-  .controller('EditNotebookItemController', EditNotebookItemController)
   .filter('Filters', Filters)
   .config([
     '$httpProvider',
