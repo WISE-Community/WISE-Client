@@ -10,7 +10,7 @@ export class Notification {
   fromWorkgroupId: number;
   toWorkgroupId: number;
   message: string;
-  data: string;
+  data: any;
   groupId: string;
   timeGenerated: number;
   timeDismissed: number;

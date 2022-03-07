@@ -343,18 +343,15 @@ export class NotificationService {
     this.broadcastNotificationChanged(notification);
   }
 
-  displayAmbientNotification(notification: any): void {
+  displayAmbientNotification(notification: Notification): void {
     this.dialog.open(DismissAmbientNotificationDialogComponent, {
       data: {
-        dismissNotification: (notification: any) => {
-          this.dismissNotification(notification);
-        },
         notification: notification
       }
     });
   }
 
-  broadcastNotificationChanged(notification: any) {
+  broadcastNotificationChanged(notification: Notification) {
     this.notificationChangedSource.next(notification);
   }
 

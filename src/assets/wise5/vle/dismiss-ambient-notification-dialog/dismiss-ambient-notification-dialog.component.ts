@@ -7,6 +7,8 @@ import {
   ValidationErrors
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Notification } from '../../../../app/domain/notification';
+import { NotificationService } from '../../services/notificationService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 
@@ -22,12 +24,13 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
   hasDismissCode: boolean = false;
   isShowInvalidDismissCodeMessage: boolean = false;
   nodePositionAndTitle: string;
-  notification: any;
+  notification: Notification;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<DismissAmbientNotificationDialogComponent>,
     private formBuilder: FormBuilder,
+    private notificationService: NotificationService,
     private projectService: ProjectService,
     private studentDataService: StudentDataService
   ) {
@@ -75,7 +78,7 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
 
   checkDismissCode(): void {
     if (!this.hasDismissCode || this.dismissCodeInput === this.notification.data.dismissCode) {
-      this.data.dismissNotification(this.notification);
+      this.notificationService.dismissNotification(this.notification);
       this.saveNotificationDismissedWithCodeEvent();
       this.dialogRef.close();
     } else {
