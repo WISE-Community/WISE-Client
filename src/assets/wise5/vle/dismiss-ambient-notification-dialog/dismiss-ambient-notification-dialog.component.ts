@@ -7,8 +7,8 @@ import {
   ValidationErrors
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable, Subject } from 'rxjs';
 import { Notification } from '../../../../app/domain/notification';
-import { NotificationService } from '../../services/notificationService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 
@@ -18,6 +18,8 @@ import { StudentDataService } from '../../services/studentDataService';
   styleUrls: ['./dismiss-ambient-notification-dialog.component.scss']
 })
 export class DismissAmbientNotificationDialogComponent implements OnInit {
+  private dismissSource: Subject<any> = new Subject<any>();
+  public dismiss$: Observable<any> = this.dismissSource.asObservable();
   dismissCodeInput: string = '';
   errorMessage: string = $localize`Invalid dismiss code. Please try again.`;
   formGroup: FormGroup;
@@ -30,7 +32,6 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<DismissAmbientNotificationDialogComponent>,
     private formBuilder: FormBuilder,
-    private notificationService: NotificationService,
     private projectService: ProjectService,
     private studentDataService: StudentDataService
   ) {
@@ -78,7 +79,7 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
 
   checkDismissCode(): void {
     if (!this.hasDismissCode || this.dismissCodeInput === this.notification.data.dismissCode) {
-      this.notificationService.dismissNotification(this.notification);
+      this.dismissSource.next(this.notification);
       this.saveNotificationDismissedWithCodeEvent();
       this.dialogRef.close();
     } else {
