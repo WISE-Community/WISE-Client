@@ -20,8 +20,9 @@ import { PeerGroup } from '../../peerChat/PeerGroup';
 })
 export class ShowGroupWorkStudentComponent extends ComponentStudent {
   flexLayout: string = 'column';
+  isPeerGroupRetrieved: boolean = false;
   narrowComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];
-  peerGroup: PeerGroup = new PeerGroup();
+  peerGroup: PeerGroup;
   showWorkComponentContent: any;
   showWorkComponentId: string;
   showWorkNodeId: string;
@@ -61,22 +62,25 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
     this.peerGroupService
       .retrievePeerGroup(this.componentContent.peerGroupActivityTag, this.workgroupId)
       .subscribe((peerGroup: PeerGroup) => {
-        this.peerGroup = this.componentContent.isShowMyWork
-          ? peerGroup
-          : this.removeMyWorkgroup(peerGroup);
-        this.setWorkgroupInfos();
-        this.peerGroupService
-          .retrieveStudentWork(
-            peerGroup,
-            this.nodeId,
-            this.componentId,
-            this.componentContent.showWorkNodeId,
-            this.componentContent.showWorkComponentId
-          )
-          .subscribe((studentWorkFromGroupMembers: any[]) => {
-            this.setStudentWorkFromGroupMembers(studentWorkFromGroupMembers);
-            this.setLayout();
-          });
+        if (peerGroup != null) {
+          this.peerGroup = this.componentContent.isShowMyWork
+            ? peerGroup
+            : this.removeMyWorkgroup(peerGroup);
+          this.setWorkgroupInfos();
+          this.peerGroupService
+            .retrieveStudentWork(
+              peerGroup,
+              this.nodeId,
+              this.componentId,
+              this.componentContent.showWorkNodeId,
+              this.componentContent.showWorkComponentId
+            )
+            .subscribe((studentWorkFromGroupMembers: any[]) => {
+              this.setStudentWorkFromGroupMembers(studentWorkFromGroupMembers);
+              this.setLayout();
+            });
+        }
+        this.isPeerGroupRetrieved = true;
       });
     this.showWorkComponentContent = this.projectService.getComponentByNodeIdAndComponentId(
       this.componentContent.showWorkNodeId,
