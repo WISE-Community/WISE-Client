@@ -26,17 +26,14 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
   hasDismissCode: boolean = false;
   isShowInvalidDismissCodeMessage: boolean = false;
   nodePositionAndTitle: string;
-  notification: Notification;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { notification: Notification },
+    @Inject(MAT_DIALOG_DATA) public notification: Notification,
     public dialogRef: MatDialogRef<DismissAmbientNotificationDialogComponent>,
     private formBuilder: FormBuilder,
     private projectService: ProjectService,
     private studentDataService: StudentDataService
-  ) {
-    this.notification = data.notification;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.initializeFormGroup();

@@ -345,9 +345,7 @@ export class NotificationService {
 
   displayAmbientNotification(notification: Notification): void {
     const dialogRef = this.dialog.open(DismissAmbientNotificationDialogComponent, {
-      data: {
-        notification: notification
-      }
+      data: notification
     });
     dialogRef.componentInstance.dismiss$.subscribe((notification: Notification) => {
       this.dismissNotification(notification);
