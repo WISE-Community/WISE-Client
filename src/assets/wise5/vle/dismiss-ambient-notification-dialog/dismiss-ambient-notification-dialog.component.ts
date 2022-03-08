@@ -29,7 +29,7 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
   notification: Notification;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: { notification: Notification },
     public dialogRef: MatDialogRef<DismissAmbientNotificationDialogComponent>,
     private formBuilder: FormBuilder,
     private projectService: ProjectService,
