@@ -42,7 +42,7 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
     this.saveNotificationWindowOpenedEvent();
   }
 
-  initializeFormGroup(): void {
+  private initializeFormGroup(): void {
     this.formGroup = this.formBuilder.group(
       {
         dismissCode: new FormControl('')
@@ -55,20 +55,20 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
     );
   }
 
-  dismissCodeValidator(control: AbstractControl): ValidationErrors {
+  private dismissCodeValidator(control: AbstractControl): ValidationErrors {
     if (this.isShowInvalidDismissCodeMessage) {
       control.get('dismissCode').setErrors({ incorrect: true });
     }
     return null;
   }
 
-  initializeHasDismissCode(): void {
+  private initializeHasDismissCode(): void {
     if (this.notification.data && this.notification.data.dismissCode) {
       this.hasDismissCode = true;
     }
   }
 
-  initializeNodePositionAndTitle(): void {
+  private initializeNodePositionAndTitle(): void {
     this.nodePositionAndTitle = this.projectService.getNodePositionAndTitleByNodeId(
       this.notification.nodeId
     );
@@ -85,19 +85,19 @@ export class DismissAmbientNotificationDialogComponent implements OnInit {
     }
   }
 
-  saveNotificationWindowOpenedEvent(): void {
+  private saveNotificationWindowOpenedEvent(): void {
     this.saveEvent('currentAmbientNotificationWindowOpened');
   }
 
-  saveNotificationDismissedWithCodeEvent(): void {
+  private saveNotificationDismissedWithCodeEvent(): void {
     this.saveEvent('currentAmbientNotificationDimissedWithCode');
   }
 
-  saveNotificationWindowClosedEvent(): void {
+  private saveNotificationWindowClosedEvent(): void {
     this.saveEvent('currentAmbientNotificationWindowClosed');
   }
 
-  saveEvent(eventName: string): void {
+  private saveEvent(eventName: string): void {
     const nodeId = null;
     const componentId = null;
     const componentType = null;

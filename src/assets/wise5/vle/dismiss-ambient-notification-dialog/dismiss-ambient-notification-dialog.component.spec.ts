@@ -16,9 +16,9 @@ import { UtilService } from '../../services/utilService';
 import { DismissAmbientNotificationDialogComponent } from './dismiss-ambient-notification-dialog.component';
 
 let component: DismissAmbientNotificationDialogComponent;
-const dismissCode: string = 'computer';
+const DISMISS_CODE: string = 'computer';
 let fixture: ComponentFixture<DismissAmbientNotificationDialogComponent>;
-const incorrectDismissCode: string = 'candy';
+const INCORRECT_DISMISS_CODE: string = 'candy';
 const nodeId = 'node1';
 let saveVLEEventSpy: jasmine.Spy;
 
@@ -43,8 +43,7 @@ describe('DismissAmbientNotificationDialogComponent', () => {
         {
           provide: MAT_DIALOG_DATA,
           useValue: {
-            notification: { data: { dismissCode: dismissCode } },
-            dismissNotification: () => {}
+            data: { dismissCode: DISMISS_CODE }
           }
         },
         { provide: MatDialogRef, useValue: { close() {} } },
@@ -72,16 +71,16 @@ describe('DismissAmbientNotificationDialogComponent', () => {
 
 function checkDismissCode(): void {
   describe('checkDismissCode()', () => {
-    it('should check dismiss code when user has invalid input code', () => {
-      component.dismissCodeInput = incorrectDismissCode;
+    beforeEach(() => {
       expect(component.isShowInvalidDismissCodeMessage).toEqual(false);
+    });
+    it('should show invalid dismiss code message when user has invalid input code', () => {
+      component.dismissCodeInput = INCORRECT_DISMISS_CODE;
       component.checkDismissCode();
       expect(component.isShowInvalidDismissCodeMessage).toEqual(true);
     });
-
-    it('should check dismiss code when user has correct input code', () => {
-      component.dismissCodeInput = dismissCode;
-      expect(component.isShowInvalidDismissCodeMessage).toEqual(false);
+    it('should not show invalid dismiss code message when user has valid input code', () => {
+      component.dismissCodeInput = DISMISS_CODE;
       component.checkDismissCode();
       expect(component.isShowInvalidDismissCodeMessage).toEqual(false);
     });
