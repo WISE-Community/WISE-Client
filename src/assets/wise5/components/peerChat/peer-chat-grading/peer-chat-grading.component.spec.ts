@@ -4,6 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AchievementService } from '../../../services/achievementService';
 import { AnnotationService } from '../../../services/annotationService';
+import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { ConfigService } from '../../../services/configService';
 import { NotificationService } from '../../../services/notificationService';
 import { PeerGroupService } from '../../../services/peerGroupService';
@@ -31,6 +32,7 @@ describe('PeerChatGradingComponent', () => {
       providers: [
         AchievementService,
         AnnotationService,
+        ClassroomStatusService,
         ConfigService,
         NotificationService,
         PeerChatService,

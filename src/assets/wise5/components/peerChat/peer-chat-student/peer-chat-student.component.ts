@@ -188,7 +188,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     componentState.workgroupId = this.ConfigService.getWorkgroupId();
     componentState.peerGroupId = this.peerGroup.id;
     const promise = new Promise((resolve, reject) => {
-      this.createComponentStateAdditionalProcessing(
+      return this.createComponentStateAdditionalProcessing(
         { resolve: resolve, reject: reject },
         componentState,
         action
@@ -207,6 +207,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
       )
     );
     promise.resolve(componentState);
+    return promise;
   }
 
   sendWorkToPeerWorkgroups(componentState: any): void {

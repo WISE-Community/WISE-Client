@@ -22,6 +22,7 @@ import { SelectPeriodComponent } from '../../select-period/select-period.compone
 import { PeerGroupDialogComponent } from './peer-group-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 
 describe('PeerGroupDialogComponent', () => {
   let component: PeerGroupDialogComponent;
@@ -40,6 +41,7 @@ describe('PeerGroupDialogComponent', () => {
       providers: [
         AchievementService,
         AnnotationService,
+        ClassroomStatusService,
         ConfigService,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         NotificationService,

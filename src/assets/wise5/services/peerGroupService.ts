@@ -33,6 +33,7 @@ export class PeerGroupService {
     peerGroupActivityTag: string,
     workgroupId = this.ConfigService.getWorkgroupId()
   ): Observable<any> {
+    console.log('PeerGroupService.retrievePeerGroup()');
     const runId = this.ConfigService.isPreview() ? 1 : this.ConfigService.getRunId();
     return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${peerGroupActivityTag}`);
   }

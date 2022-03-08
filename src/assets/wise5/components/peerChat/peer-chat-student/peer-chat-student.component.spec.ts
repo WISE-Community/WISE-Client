@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
@@ -17,7 +17,25 @@ import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
 import { PeerChatService } from '../peerChatService';
+import { PeerGroup } from '../PeerGroup';
 import { PeerChatStudentComponent } from './peer-chat-student.component';
+import { PeerGroupMember } from '../PeerGroupMember';
+import { PeerGroupActivity } from '../PeerGroupActivity';
+import { of } from 'rxjs';
+import { ComponentHeader } from '../../../directives/component-header/component-header.component';
+import { PeerChatChatBoxComponent } from '../peer-chat-chat-box/peer-chat-chat-box.component';
+import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { MatCardModule } from '@angular/material/card';
+import { PeerChatMembersComponent } from '../peer-chat-members/peer-chat-members.component';
+import { PeerChatQuestionBankComponent } from '../peer-chat-question-bank/peer-chat-question-bank.component';
+import { PeerChatMessagesComponent } from '../peer-chat-messages/peer-chat-messages.component';
+import { MatIconModule } from '@angular/material/icon';
+import { PeerChatMessageInputComponent } from '../peer-chat-message-input/peer-chat-message-input.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { PeerChatMessageComponent } from '../peer-chat-message/peer-chat-message.component';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 class MockService {}
 
@@ -27,8 +45,22 @@ export class MockNodeService {
   }
 }
 
+let component: PeerChatStudentComponent;
+const componentId = 'component1';
+let fixture: ComponentFixture<PeerChatStudentComponent>;
+const nodeId = 'node1';
+const peerGroupId = 100;
+const periodId = 10;
+const response1 = 'Hello World';
+const response2 = 'Hello World 2';
+let retrievePeerGroupSpy: jasmine.Spy;
+const studentWorkgroupId1 = 1001;
+const studentWorkgroupId2 = 1002;
+const studentWorkgroupId3 = 1003;
+const teacherWorkgroupId = 1;
+
 const componentContent = {
-  id: 'qn3savv52r',
+  id: componentId,
   type: 'PeerChat',
   prompt: 'You were paired together based on your responses.',
   showSaveButton: false,
@@ -43,19 +75,59 @@ const componentContent = {
   logicThresholdCount: 0,
   logicThresholdPercent: 0,
   maxMembershipCount: 2,
-  questionBank: ['What color is the sky?', 'How deep is the ocean?'],
-  showWorkNodeId: 'node8',
-  showWorkComponentId: 'vau6ihimfk'
+  questionBank: ['What color is the sky?', 'How deep is the ocean?']
 };
 
-describe('PeerChatStudentComponent', () => {
-  let component: PeerChatStudentComponent;
-  let fixture: ComponentFixture<PeerChatStudentComponent>;
+const componentState1 = createComponentStateObject(
+  nodeId,
+  componentId,
+  studentWorkgroupId1,
+  peerGroupId,
+  response1
+);
 
+const componentState2 = createComponentStateObject(
+  nodeId,
+  componentId,
+  studentWorkgroupId2,
+  peerGroupId,
+  response2
+);
+
+const peerGroup = new PeerGroup(
+  peerGroupId,
+  [
+    new PeerGroupMember(studentWorkgroupId1, periodId),
+    new PeerGroupMember(studentWorkgroupId2, periodId)
+  ],
+  new PeerGroupActivity()
+);
+
+describe('PeerChatStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
-      declarations: [PeerChatStudentComponent],
+      imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientTestingModule,
+        MatCardModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        UpgradeModule
+      ],
+      declarations: [
+        ComponentHeader,
+        PeerChatChatBoxComponent,
+        PeerChatMembersComponent,
+        PeerChatMessageComponent,
+        PeerChatMessageInputComponent,
+        PeerChatMessagesComponent,
+        PeerChatStudentComponent,
+        PeerChatQuestionBankComponent,
+        PossibleScoreComponent
+      ],
       providers: [
         AnnotationService,
         ComponentService,
@@ -82,15 +154,112 @@ describe('PeerChatStudentComponent', () => {
       score: 0,
       comment: ''
     });
+    spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(studentWorkgroupId1);
+    spyOn(TestBed.inject(ConfigService), 'getTeacherWorkgroupIds').and.returnValue([
+      teacherWorkgroupId
+    ]);
+    spyOn(TestBed.inject(ConfigService), 'isTeacherWorkgroupId').and.callFake(
+      (workgroupId: number) => {
+        return workgroupId === teacherWorkgroupId;
+      }
+    );
+    spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
+    retrievePeerGroupSpy = spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup');
+    retrievePeerGroupSpy.and.callFake(() => {
+      return of(peerGroup);
+    });
+    spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroupWork').and.returnValue(
+      of([componentState1, componentState2])
+    );
     component = fixture.componentInstance;
     component.componentContent = componentContent;
+    component.nodeId = nodeId;
+    component.componentId = componentId;
+    component.workgroupId = studentWorkgroupId1;
+    component.peerGroup = peerGroup;
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     spyOn(component, 'studentDataChanged').and.callFake(() => {});
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  ngOnInit();
+  addPeerChatMessage();
+  submitStudentResponse();
+  createComponentState();
 });
+
+function createComponentStateObject(
+  nodeId: string,
+  componentId: string,
+  workgroupId: number,
+  peerGroupId: number,
+  response: string
+): any {
+  return {
+    componentId: componentId,
+    nodeId: nodeId,
+    peerGroupId: peerGroupId,
+    studentData: {
+      response: response
+    },
+    workgroupId: workgroupId
+  };
+}
+
+function ngOnInit() {
+  it('should initialize peer chat group and peer chat messages', fakeAsync(() => {
+    expect(component.peerGroup).toEqual(peerGroup);
+    expect(component.peerChatMessages.length).toEqual(2);
+    expect(component.peerChatMessages[0].text).toEqual(response1);
+    expect(component.peerChatMessages[1].text).toEqual(response2);
+  }));
+}
+
+function addPeerChatMessage() {
+  it(`should receive student work for the Peer Chat component and add it to peer chat
+      messages`, () => {
+    component.peerChatMessages = [];
+    TestBed.inject(StudentDataService).broadcastStudentWorkReceived(componentState2);
+    expect(component.peerChatMessages.length).toEqual(1);
+    expect(component.peerChatMessages[0].text).toEqual(response2);
+  });
+
+  it(`should receive student work for the Peer Chat component and not add it to peer chat
+      messages`, () => {
+    component.peerChatMessages = [];
+    TestBed.inject(StudentDataService).broadcastStudentWorkReceived(componentState1);
+    expect(component.peerChatMessages.length).toEqual(0);
+  });
+}
+
+function submitStudentResponse() {
+  it('should submit student response', () => {
+    component.peerChatMessages = [];
+    component.submitStudentResponse(response1);
+    expect(component.peerChatMessages.length).toEqual(1);
+    expect(component.peerChatMessages[0].text).toEqual(response1);
+  });
+}
+
+function createComponentState() {
+  it('should create component state', () => {
+    component.peerChatWorkgroupIds = [
+      studentWorkgroupId1,
+      studentWorkgroupId2,
+      studentWorkgroupId3
+    ];
+    const sendMessageToClassmateSpy = spyOn(
+      TestBed.inject(StudentWebSocketService),
+      'sendMessageToClassmate'
+    );
+    const saveNotificationToServerSpy = spyOn(
+      TestBed.inject(NotificationService),
+      'saveNotificationToServer'
+    );
+    component.createComponentState('submit').then(() => {
+      expect(sendMessageToClassmateSpy).toHaveBeenCalledTimes(2);
+      expect(saveNotificationToServerSpy).toHaveBeenCalledTimes(2);
+    });
+  });
+}
