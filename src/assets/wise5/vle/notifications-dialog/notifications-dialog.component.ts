@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { Notification } from '../../../../app/domain/notification';
 import { NotebookService } from '../../services/notebookService';
 import { NotificationService } from '../../services/notificationService';
 import { ProjectService } from '../../services/projectService';
@@ -63,7 +64,7 @@ export class NotificationsDialogComponent implements OnInit {
     }
   }
 
-  dismissNotification(event: any, notification: any): any {
+  dismissNotification(event: any, notification: Notification): any {
     if (notification.data == null || notification.data.dismissCode == null) {
       this.notificationService.dismissNotification(notification);
     } else {
