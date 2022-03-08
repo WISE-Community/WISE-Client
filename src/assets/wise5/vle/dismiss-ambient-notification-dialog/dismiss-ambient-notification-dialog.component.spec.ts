@@ -75,16 +75,21 @@ function checkDismissCode(): void {
       expect(component.isShowInvalidDismissCodeMessage).toEqual(false);
     });
     it('should show invalid dismiss code message when user has invalid input code', () => {
-      component.dismissCodeInput = INCORRECT_DISMISS_CODE;
-      component.checkDismissCode();
-      expect(component.isShowInvalidDismissCodeMessage).toEqual(true);
+      dismissCodeShouldShowInvalidDismissCodeMessage(INCORRECT_DISMISS_CODE, true);
     });
     it('should not show invalid dismiss code message when user has valid input code', () => {
-      component.dismissCodeInput = DISMISS_CODE;
-      component.checkDismissCode();
-      expect(component.isShowInvalidDismissCodeMessage).toEqual(false);
+      dismissCodeShouldShowInvalidDismissCodeMessage(DISMISS_CODE, false);
     });
   });
+}
+
+function dismissCodeShouldShowInvalidDismissCodeMessage(
+  dismissCode: string,
+  isShowInvalidDismissCodeMessage: boolean
+) {
+  component.dismissCodeInput = dismissCode;
+  component.checkDismissCode();
+  expect(component.isShowInvalidDismissCodeMessage).toEqual(isShowInvalidDismissCodeMessage);
 }
 
 function visitNode(): void {
