@@ -19,12 +19,31 @@ import { TeacherWebSocketService } from '../../../services/teacherWebSocketServi
 import { TeacherWorkService } from '../../../services/teacherWorkService';
 import { UtilService } from '../../../services/utilService';
 import { PeerChatService } from '../peerChatService';
+import { PeerGroup } from '../PeerGroup';
+import { PeerGroupActivity } from '../PeerGroupActivity';
+import { PeerGroupMember } from '../PeerGroupMember';
 import { PeerChatGradingComponent } from './peer-chat-grading.component';
+import { of } from 'rxjs';
+
+let component: PeerChatGradingComponent;
+let fixture: ComponentFixture<PeerChatGradingComponent>;
+const peerGroupId = 100;
+const periodId = 10;
+const response = 'Hello World';
+const studentWorkgroupId1 = 1001;
+const studentWorkgroupId2 = 1002;
+const teacherWorkgroupId = 1;
+
+const peerGroup = new PeerGroup(
+  peerGroupId,
+  [
+    new PeerGroupMember(studentWorkgroupId1, periodId),
+    new PeerGroupMember(studentWorkgroupId2, periodId)
+  ],
+  new PeerGroupActivity()
+);
 
 describe('PeerChatGradingComponent', () => {
-  let component: PeerChatGradingComponent;
-  let fixture: ComponentFixture<PeerChatGradingComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
@@ -53,12 +72,34 @@ describe('PeerChatGradingComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerChatGradingComponent);
-    component = fixture.componentInstance;
     spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});
+    spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(1);
+    spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(100);
+    spyOn(TestBed.inject(ConfigService), 'getTeacherWorkgroupIds').and.returnValue([
+      teacherWorkgroupId
+    ]);
+    spyOn(TestBed.inject(ConfigService), 'isTeacherWorkgroupId').and.callFake(
+      (workgroupId: number) => {
+        return workgroupId === teacherWorkgroupId;
+      }
+    );
+    spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriodId').and.returnValue(10);
+    spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup').and.callFake(() => {
+      return of(peerGroup);
+    });
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  submitTeacherResponse();
 });
+
+function submitTeacherResponse() {
+  it('submit teacher response', () => {
+    const saveWorkSpy = spyOn(TestBed.inject(TeacherWorkService), 'saveWork').and.returnValue(of());
+    component.submitTeacherResponse(response);
+    expect(saveWorkSpy).toHaveBeenCalledWith(
+      jasmine.objectContaining({ studentData: { response: response } })
+    );
+  });
+}
