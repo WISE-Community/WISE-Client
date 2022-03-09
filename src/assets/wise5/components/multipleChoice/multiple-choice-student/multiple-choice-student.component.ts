@@ -144,15 +144,10 @@ export class MultipleChoiceStudent extends ComponentStudent {
   }
 
   showFeedbackForChoiceIds(choiceIds: string[]): void {
-    const originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
-    for (const choiceId of choiceIds) {
-      const choiceObject = this.getChoiceById(originalComponentContent, choiceId);
-      if (choiceObject != null) {
-        choiceObject.showFeedback = true;
-        choiceObject.feedbackToShow = choiceObject.feedback;
+    for (const choice of this.choices) {
+      if (choiceIds.includes(choice.id)) {
+        choice.showFeedback = true;
+        choice.feedbackToShow = choice.feedback;
       }
     }
   }
