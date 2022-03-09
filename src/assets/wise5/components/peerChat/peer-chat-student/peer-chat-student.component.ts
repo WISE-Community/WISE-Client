@@ -268,8 +268,4 @@ export class PeerChatStudentComponent extends ComponentStudent {
   private isTeacherWorkgroupId(workgroupId: number): boolean {
     return this.ConfigService.getTeacherWorkgroupIds().includes(workgroupId);
   }
-
-  getAvatarColor(workgroupId: number): string {
-    return this.ConfigService.getAvatarColorForWorkgroupId(workgroupId);
-  }
 }
