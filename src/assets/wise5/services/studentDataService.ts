@@ -128,53 +128,7 @@ export class StudentDataService extends DataService {
     this.componentStudentDataSource.next(componentStudentData);
   }
 
-  handleNodeStatusesChanged() {
-    this.AnnotationService.calculateActiveGlobalAnnotationGroups();
-    const globalAnnotationGroups = this.AnnotationService.getActiveGlobalAnnotationGroups();
-    globalAnnotationGroups.map((globalAnnotationGroup) => {
-      const globalAnnotations = globalAnnotationGroup.annotations;
-      globalAnnotations.map((globalAnnotation) => {
-        if (globalAnnotation.data != null && globalAnnotation.data.isGlobal) {
-          this.processGlobalAnnotation(globalAnnotation);
-        }
-      });
-    });
-  }
-
-  processGlobalAnnotation(globalAnnotation) {
-    const unGlobalizeConditional = globalAnnotation.data.unGlobalizeConditional;
-    if (unGlobalizeConditional === 'any') {
-      this.processGlobalAnnotationAnyConditional(globalAnnotation);
-    } else if (unGlobalizeConditional === 'all') {
-      this.processGlobalAnnotationAllConditional(globalAnnotation);
-    }
-  }
-
-  processGlobalAnnotationAnyConditional(globalAnnotation) {
-    let anySatified = false;
-    const unGlobalizeCriteriaArray = globalAnnotation.data.unGlobalizeCriteria;
-    for (const unGlobalizeCriteria of unGlobalizeCriteriaArray) {
-      const unGlobalizeCriteriaResult = this.evaluateCriteria(unGlobalizeCriteria);
-      anySatified = anySatified || unGlobalizeCriteriaResult;
-    }
-    if (anySatified) {
-      globalAnnotation.data.unGlobalizedTimestamp = Date.parse(new Date().toString());
-      this.saveAnnotations([globalAnnotation]);
-    }
-  }
-
-  processGlobalAnnotationAllConditional(globalAnnotation) {
-    let allSatisfied = true;
-    const unGlobalizeCriteriaArray = globalAnnotation.data.unGlobalizeCriteria;
-    for (const unGlobalizeCriteria of unGlobalizeCriteriaArray) {
-      const unGlobalizeCriteriaResult = this.evaluateCriteria(unGlobalizeCriteria);
-      allSatisfied = allSatisfied && unGlobalizeCriteriaResult;
-    }
-    if (allSatisfied) {
-      globalAnnotation.data.unGlobalizedTimestamp = Date.parse(new Date().toString());
-      this.saveAnnotations([globalAnnotation]);
-    }
-  }
+  handleNodeStatusesChanged() {}
 
   retrieveStudentData() {
     this.nodeStatuses = {};

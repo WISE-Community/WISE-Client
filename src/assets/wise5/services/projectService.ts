@@ -3139,8 +3139,6 @@ export class ProjectService {
     return deferred.promise;
   }
 
-  getGlobalAnnotationGroupByScore(component, previousScore, currentScore) {}
-
   getNotificationByScore(component, previousScore, currentScore) {}
 
   isConnectedComponent(nodeId, componentId, connectedComponentId): boolean {
