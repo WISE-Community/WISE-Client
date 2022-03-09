@@ -16,6 +16,8 @@ import { UtilService } from '../../../services/utilService';
 import { MockService } from '../../animation/animation-student/animation-student.component.spec';
 import { ComponentService } from '../../componentService';
 import { PeerGroup } from '../../peerChat/PeerGroup';
+import { PeerGroupActivity } from '../../peerChat/PeerGroupActivity';
+import { PeerGroupMember } from '../../peerChat/PeerGroupMember';
 import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
 
 class MockNotebookService {
@@ -99,12 +101,11 @@ describe('ShowGroupWorkStudentComponent', () => {
     spyOn(TestBed.inject(ProjectService), 'injectAssetPaths').and.returnValue({
       type: 'OpenResponse'
     });
-    component.peerGroup = new PeerGroup();
-    component.peerGroup.members = [
-      { id: 1, periodId: 1 },
-      { id: 2, periodId: 1 },
-      { id: 3, periodId: 1 }
-    ];
+    component.peerGroup = new PeerGroup(
+      1,
+      [new PeerGroupMember(1, 1), new PeerGroupMember(2, 1), new PeerGroupMember(3, 1)],
+      new PeerGroupActivity()
+    );
     component.setWorkgroupInfos();
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     fixture.detectChanges();

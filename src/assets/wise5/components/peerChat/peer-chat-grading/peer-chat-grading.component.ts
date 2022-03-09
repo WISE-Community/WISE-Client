@@ -62,7 +62,7 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
     });
   }
 
-  createComponentState(response: string): ComponentState {
+  private createComponentState(response: string): ComponentState {
     return {
       componentId: this.componentId,
       componentType: 'PeerChat',
