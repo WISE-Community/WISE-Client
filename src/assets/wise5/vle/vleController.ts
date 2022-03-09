@@ -303,8 +303,6 @@ class VLEController {
       }
     }
 
-    this.$mdToast = $mdToast;
-
     // TODO: set these variables dynamically from theme settings
     this.layoutView = 'list'; // 'list' or 'card'
     this.numberProject = true;
