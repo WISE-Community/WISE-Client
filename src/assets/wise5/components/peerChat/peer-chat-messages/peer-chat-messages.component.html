@@ -1,6 +1,7 @@
 <peer-chat-message *ngFor="let peerChatMessage of peerChatMessages"
     [avatarColor]="workgroupInfos[peerChatMessage.workgroupId].avatarColor"
     [displayNames]="workgroupInfos[peerChatMessage.workgroupId].displayNames"
+    [isTeacher]="workgroupInfos[peerChatMessage.workgroupId].isTeacher"
     [peerChatMessage]="peerChatMessage"
     [myWorkgroupId]="myWorkgroupId">
 </peer-chat-message>
