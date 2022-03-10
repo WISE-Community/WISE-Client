@@ -128,8 +128,6 @@ export class StudentDataService extends DataService {
     this.componentStudentDataSource.next(componentStudentData);
   }
 
-  handleNodeStatusesChanged() {}
-
   retrieveStudentData() {
     this.nodeStatuses = {};
     if (this.ConfigService.isPreview()) {
@@ -222,7 +220,6 @@ export class StudentDataService extends DataService {
     this.updateStepNodeStatuses();
     this.updateGroupNodeStatuses();
     this.maxScore = this.getMaxScore();
-    this.handleNodeStatusesChanged();
     this.broadcastNodeStatusesChanged();
   }
 
