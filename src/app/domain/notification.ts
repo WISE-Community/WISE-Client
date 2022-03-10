@@ -1,7 +1,7 @@
 export class Notification {
   componentId: string;
   componentType: string;
-  data: string;
+  data: any;
   fromWorkgroupId: number;
   groupId: string;
   id: number;

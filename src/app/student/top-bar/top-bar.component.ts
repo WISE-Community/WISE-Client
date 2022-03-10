@@ -7,6 +7,7 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
 import { NotificationsDialogComponent } from '../../../assets/wise5/vle/notifications-dialog/notifications-dialog.component';
 import { StudentAccountMenuComponent } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.component';
+import { Notification } from '../../domain/notification';
 
 @Component({
   selector: 'top-bar',
@@ -23,8 +24,8 @@ export class TopBarComponent {
   isConstraintsDisabled: boolean = false;
   isPreview: boolean = false;
   logoURL: string;
-  newNotifications: any[];
-  notifications: any[];
+  newNotifications: Notification[];
+  notifications: Notification[];
   projectName: string;
   subscriptions: Subscription = new Subscription();
 
@@ -61,7 +62,7 @@ export class TopBarComponent {
   }
 
   private getNewAmbientNotifications(): any[] {
-    return this.notifications.filter((notification: any) => {
+    return this.notifications.filter((notification: Notification) => {
       return (
         notification.timeDismissed == null &&
         notification.data != null &&

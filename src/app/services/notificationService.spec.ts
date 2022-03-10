@@ -10,6 +10,7 @@ import { AnnotationService } from '../../assets/wise5/services/annotationService
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { Notification } from '../domain/notification';
+import { MatDialogModule } from '@angular/material/dialog';
 
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -39,7 +40,7 @@ const retrieveNotificationsURL = `/notifications/${runId1}`;
 describe('NotificationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
       providers: [
         AnnotationService,
         ConfigService,

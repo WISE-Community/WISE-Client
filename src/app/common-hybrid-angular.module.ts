@@ -77,6 +77,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { ShowMyWorkService } from '../assets/wise5/components/showMyWork/showMyWorkService';
 import { ShowGroupWorkService } from '../assets/wise5/components/showGroupWork/showGroupWorkService';
 import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
+import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.module';
 import { ComputerAvatarService } from '../assets/wise5/services/computerAvatarService';
 import { StudentStatusService } from '../assets/wise5/services/studentStatusService';
 
@@ -96,6 +97,7 @@ export class EmptyComponent {}
     UpgradeModule,
     CommonModule,
     DragDropModule,
+    EditNotebookItemDialogModule,
     EditorModule,
     FlexLayoutModule,
     FormsModule,

@@ -9,6 +9,7 @@ import { StudentDataService } from './studentDataService';
 import { NotificationService } from './notificationService';
 import { ProjectService } from './projectService';
 import * as angular from 'angular';
+import { Notification } from '../../../app/domain/notification';
 
 @Injectable()
 export class StudentWebSocketService {
@@ -89,7 +90,7 @@ export class StudentWebSocketService {
         if (message.type === 'notification') {
           const notification = JSON.parse(message.content);
           this.NotificationService.addNotification(notification);
-          if (notification.nodeId === this.StudentDataService.getCurrentNodeId()) {
+          if (this.isDismissImmediately(notification)) {
             this.NotificationService.dismissNotification(notification);
           }
         } else if (message.type === 'annotation') {
@@ -109,6 +110,13 @@ export class StudentWebSocketService {
           this.StudentDataService.broadcastStudentWorkReceived(message.studentWork);
         }
       });
+  }
+
+  isDismissImmediately(notification: Notification): boolean {
+    return (
+      notification.nodeId === this.StudentDataService.getCurrentNodeId() &&
+      notification.type === 'PeerChatMessage'
+    );
   }
 
   goToStep(nodeId) {

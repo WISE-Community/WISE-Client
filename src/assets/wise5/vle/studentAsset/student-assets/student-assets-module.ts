@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { DragAndDropDirective } from '../../../common/drag-and-drop/drag-and-drop.directive';
+import { DragAndDropModule } from '../../../common/drag-and-drop/drag-and-drop.module';
 import { StudentAssetsComponent } from './student-assets.component';
 
 @NgModule({
-  declarations: [DragAndDropDirective, StudentAssetsComponent],
-  imports: [CommonModule],
+  declarations: [StudentAssetsComponent],
+  imports: [CommonModule, DragAndDropModule],
   exports: [StudentAssetsComponent]
 })
 export class StudentAssetsModule {}

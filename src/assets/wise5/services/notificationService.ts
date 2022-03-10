@@ -1,11 +1,13 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { Notification } from '../../../app/domain/notification';
-import { AnnotationService } from './annotationService';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 import { UtilService } from './utilService';
+import { Notification } from '../../../app/domain/notification';
+import { Observable, Subject } from 'rxjs';
+import { AnnotationService } from './annotationService';
+import { DismissAmbientNotificationDialogComponent } from '../vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable()
 export class NotificationService {
@@ -23,6 +25,7 @@ export class NotificationService {
 
   constructor(
     private annotationService: AnnotationService,
+    private dialog: MatDialog,
     private http: HttpClient,
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
@@ -425,7 +428,16 @@ export class NotificationService {
     this.broadcastNotificationChanged(notification);
   }
 
-  broadcastNotificationChanged(notification: any) {
+  displayAmbientNotification(notification: Notification): void {
+    const dialogRef = this.dialog.open(DismissAmbientNotificationDialogComponent, {
+      data: notification
+    });
+    dialogRef.componentInstance.dismiss$.subscribe((notification: Notification) => {
+      this.dismissNotification(notification);
+    });
+  }
+
+  broadcastNotificationChanged(notification: Notification) {
     this.notificationChangedSource.next(notification);
   }
 
