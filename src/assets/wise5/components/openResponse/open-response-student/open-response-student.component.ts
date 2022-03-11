@@ -407,6 +407,9 @@ export class OpenResponseStudent extends ComponentStudent {
     if (data.scores != null) {
       autoScoreAnnotationData.scores = data.scores;
     }
+    if (data.ideas != null) {
+      autoScoreAnnotationData.ideas = data.ideas;
+    }
 
     let autoScoreAnnotation = this.createAutoScoreAnnotation(autoScoreAnnotationData);
     let annotationGroupForScore = null;
