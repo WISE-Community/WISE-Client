@@ -20,6 +20,9 @@ export class PeerChatMessageComponent implements OnInit {
   @Input()
   peerChatMessage: PeerChatMessage;
 
+  @Input()
+  isTeacher: boolean;
+
   isMyMessage: boolean;
   text: string;
   timestamp: any;

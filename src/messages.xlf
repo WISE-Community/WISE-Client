@@ -14915,8 +14915,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">2,3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1cd15276840c64f5eae40ef3fb51ff81f84f278b" datatype="html">
-        <source>Chat Members:</source>
+      <trans-unit id="aacb138400a9389df0ddcfd566616c90c6915682" datatype="html">
+        <source>Chat members:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-members/peer-chat-members.component.html</context>
           <context context-type="linenumber">2</context>

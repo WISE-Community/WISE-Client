@@ -1,16 +1,18 @@
 <div fxLayoutAlign="start start" fxLayoutGap="4px">
-  <ng-container *ngIf="isMyMessage">
-    <mat-icon class="mat-30" [ngStyle]="{'color': avatarColor}">
+  <ng-container *ngIf="isTeacher">
+    <mat-icon class="mat-36" [ngStyle]="{'color': avatarColor}">
+      account_box
+    </mat-icon>
+  </ng-container>
+  <ng-container *ngIf="!isTeacher">
+    <mat-icon class="mat-36" [ngStyle]="{'color': avatarColor}">
       account_circle
     </mat-icon>
   </ng-container>
-  <ng-container *ngIf="!isMyMessage">
-    <mat-icon class="mat-30" [ngStyle]="{'color': avatarColor}">
-      account_circle
-    </mat-icon>
-  </ng-container>
-  <div fxFlex class="response-text" [class]="{'notice-bg-bg': !isMyMessage, 'selected-bg-bg': isMyMessage}">
-    <div class="mat-body-2">{{ displayNames }}</div>
+  <div fxFlex class="response-text"
+      [class]="{'notice-bg-bg': !isMyMessage, 'selected-bg-bg': isMyMessage, 'teacher-response': isTeacher}"
+      [ngStyle]="{'border-color': avatarColor}">
+    <div class="mat-small secondary-text">{{ displayNames }}</div>
     <span>{{ text }}</span>
   </div>
 </div>
