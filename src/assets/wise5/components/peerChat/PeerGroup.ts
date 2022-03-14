@@ -5,6 +5,7 @@ export class PeerGroup {
   id: number;
   members: PeerGroupMember[];
   peerGroupActivity: PeerGroupActivity;
+  periodId: number;
 
   constructor(id: number, members: PeerGroupMember[], peerGroupActivity: PeerGroupActivity) {
     this.id = id;
