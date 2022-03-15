@@ -75,11 +75,11 @@ describe('EditComponentPeerGroupActivityTagComponent', () => {
   });
 
   it('should get peer group activity tags that are unique and sorted alphabetically', () => {
-    const tags = component.getExistingPeerGroupActivityTags();
-    expect(tags.length).toEqual(3);
-    expect(tags[0]).toEqual(component2.peerGroupActivityTag);
-    expect(tags[1]).toEqual(component3.peerGroupActivityTag);
-    expect(tags[2]).toEqual(component1.peerGroupActivityTag);
+    expect(component.getExistingPeerGroupActivityTags()).toEqual([
+      component2.peerGroupActivityTag,
+      component3.peerGroupActivityTag,
+      component1.peerGroupActivityTag
+    ]);
   });
 
   it('should edit', () => {

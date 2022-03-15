@@ -19,12 +19,12 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
 import { EditShowGroupWorkAdvancedComponent } from './edit-show-group-work-advanced.component';
 
-describe('EditShowGroupWorkAdvancedComponent', () => {
-  let component: EditShowGroupWorkAdvancedComponent;
-  let fixture: ComponentFixture<EditShowGroupWorkAdvancedComponent>;
+let component: EditShowGroupWorkAdvancedComponent;
+let fixture: ComponentFixture<EditShowGroupWorkAdvancedComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+describe('EditShowGroupWorkAdvancedComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
         MatDialogModule,
@@ -48,9 +48,6 @@ describe('EditShowGroupWorkAdvancedComponent', () => {
         UtilService
       ]
     }).compileComponents();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(EditShowGroupWorkAdvancedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

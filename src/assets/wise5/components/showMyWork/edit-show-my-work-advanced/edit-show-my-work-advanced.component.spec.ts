@@ -20,12 +20,12 @@ import { UtilService } from '../../../services/utilService';
 
 import { EditShowMyWorkAdvancedComponent } from './edit-show-my-work-advanced.component';
 
-describe('EditShowMyWorkAdvancedComponent', () => {
-  let component: EditShowMyWorkAdvancedComponent;
-  let fixture: ComponentFixture<EditShowMyWorkAdvancedComponent>;
+let component: EditShowMyWorkAdvancedComponent;
+let fixture: ComponentFixture<EditShowMyWorkAdvancedComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+describe('EditShowMyWorkAdvancedComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
         MatDialogModule,
@@ -49,9 +49,6 @@ describe('EditShowMyWorkAdvancedComponent', () => {
         UtilService
       ]
     }).compileComponents();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(EditShowMyWorkAdvancedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
