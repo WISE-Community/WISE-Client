@@ -19,7 +19,7 @@ import { PeerGroup } from '../PeerGroup';
 })
 export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
   @Input()
-  workgroupId: any;
+  workgroupId: number;
 
   peerGroup: PeerGroup;
 
