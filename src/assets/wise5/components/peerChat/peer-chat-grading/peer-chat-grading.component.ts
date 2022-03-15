@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
 import { NotificationService } from '../../../services/notificationService';
@@ -18,12 +17,7 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-grading.component.scss']
 })
 export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
-  @Input()
-  workgroupId: number;
-
   peerGroup: PeerGroup;
-
-  subscriptions: Subscription = new Subscription();
 
   constructor(
     protected configService: ConfigService,
@@ -45,16 +39,6 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
       .subscribe((peerGroup) => {
         this.peerGroup = peerGroup;
       });
-    this.subscriptions.add(
-      this.teacherWebSocketService.newStudentWorkReceived$.subscribe(() => {
-        this.ngOnInit();
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
-    this.subscriptions.unsubscribe();
   }
 
   submitTeacherResponse(response: string): void {
