@@ -64,7 +64,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     });
   }
 
-  protected retrievePeerChatComponentStates(): void {
+  private retrievePeerChatComponentStates(): void {
     this.peerChatService
       .retrievePeerChatComponentStates(this.nodeId, this.componentId, this.workgroupId)
       .pipe(timeout(this.requestTimeout))
