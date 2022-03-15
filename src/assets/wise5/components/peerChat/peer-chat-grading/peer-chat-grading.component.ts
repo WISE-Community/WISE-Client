@@ -18,9 +18,6 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-grading.component.scss']
 })
 export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
-  @Input()
-  workgroupId: number;
-
   peerGroup: PeerGroup;
 
   subscriptions: Subscription = new Subscription();
@@ -46,8 +43,10 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
         this.peerGroup = peerGroup;
       });
     this.subscriptions.add(
-      this.teacherWebSocketService.newStudentWorkReceived$.subscribe(() => {
-        this.ngOnInit();
+      this.teacherWebSocketService.newStudentWorkReceived$.subscribe(({ studentWork }) => {
+        if (this.isForThisPeerGroup(studentWork)) {
+          this.retrievePeerChatComponentStates();
+        }
       })
     );
   }
@@ -104,5 +103,13 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
       workgroupId: this.configService.getWorkgroupId(),
       peerGroupId: this.peerGroup.id
     };
+  }
+
+  private isForThisPeerGroup(studentWork: any): boolean {
+    return this.isForThisComponent(studentWork) && this.isPeerGroupMember(studentWork.workgroupId);
+  }
+
+  private isPeerGroupMember(workgroupId: number): boolean {
+    return this.peerGroup.members.some((member) => member.id === workgroupId);
   }
 }

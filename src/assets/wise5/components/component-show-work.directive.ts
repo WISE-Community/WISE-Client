@@ -27,4 +27,8 @@ export abstract class ComponentShowWorkDirective {
   }
 
   ngOnDestroy(): void {}
+
+  isForThisComponent(object: any): boolean {
+    return object.nodeId === this.nodeId && object.componentId === this.componentId;
+  }
 }

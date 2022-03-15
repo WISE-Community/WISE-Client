@@ -21,7 +21,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   requestTimeout: number = 10000;
 
   @Input()
-  workgroupId: any;
+  workgroupId: number;
 
   constructor(
     protected configService: ConfigService,
@@ -49,7 +49,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   private requestChatWorkgroupsSuccess(peerGroup: PeerGroup): void {
     this.addWorkgroupIdsFromPeerGroup(this.peerChatWorkgroupIds, peerGroup);
     this.addTeacherWorkgroupIds(this.peerChatWorkgroupIds);
-    this.retrievePeerChatComponentStates(this.nodeId, this.componentId, this.workgroupId);
+    this.retrievePeerChatComponentStates();
   }
 
   private addWorkgroupIdsFromPeerGroup(workgroupIds: Set<number>, peerGroup: PeerGroup): void {
@@ -64,13 +64,9 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     });
   }
 
-  private retrievePeerChatComponentStates(
-    nodeId: string,
-    componentId: string,
-    workgroupId: number
-  ): void {
+  protected retrievePeerChatComponentStates(): void {
     this.peerChatService
-      .retrievePeerChatComponentStates(nodeId, componentId, workgroupId)
+      .retrievePeerChatComponentStates(this.nodeId, this.componentId, this.workgroupId)
       .pipe(timeout(this.requestTimeout))
       .subscribe((componentStates: any[]) => {
         this.setPeerChatMessages(componentStates);
