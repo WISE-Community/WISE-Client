@@ -8,7 +8,10 @@ import { DialogResponse } from '../DialogResponse';
 @Component({
   selector: 'dialog-guidance-show-work',
   templateUrl: './dialog-guidance-show-work.component.html',
-  styleUrls: ['./dialog-guidance-show-work.component.scss']
+  styleUrls: [
+    '../dialog-guidance-student/dialog-guidance-student.component.scss',
+    './dialog-guidance-show-work.component.scss'
+  ]
 })
 export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective {
   computerAvatar: ComputerAvatar;

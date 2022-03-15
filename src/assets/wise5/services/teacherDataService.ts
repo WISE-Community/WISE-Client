@@ -608,6 +608,11 @@ export class TeacherDataService extends DataService {
     return this.studentData.annotationsByNodeId[nodeId] || [];
   }
 
+  getAnnotationsByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
+    const annotationsByNodeId = this.getAnnotationsByNodeId(nodeId);
+    return annotationsByNodeId.filter((annotation: any) => annotation.componentId === componentId);
+  }
+
   getAnnotationsByNodeIdAndPeriodId(nodeId, periodId) {
     const annotationsByNodeId = this.studentData.annotationsByNodeId[nodeId];
     if (annotationsByNodeId != null) {

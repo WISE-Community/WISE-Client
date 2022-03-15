@@ -407,6 +407,9 @@ export class OpenResponseStudent extends ComponentStudent {
     if (data.scores != null) {
       autoScoreAnnotationData.scores = data.scores;
     }
+    if (data.ideas != null) {
+      autoScoreAnnotationData.ideas = data.ideas;
+    }
 
     let autoScoreAnnotation = this.createAutoScoreAnnotation(autoScoreAnnotationData);
     let annotationGroupForScore = null;
@@ -422,58 +425,6 @@ export class OpenResponseStudent extends ComponentStudent {
       latestAnnotations.score.data != null
     ) {
       previousScore = latestAnnotations.score.data.value;
-    }
-
-    if (
-      this.componentContent.enableGlobalAnnotations &&
-      this.componentContent.globalAnnotationSettings != null
-    ) {
-      let globalAnnotationMaxCount = 0;
-      if (this.componentContent.globalAnnotationSettings.globalAnnotationMaxCount != null) {
-        globalAnnotationMaxCount = this.componentContent.globalAnnotationSettings
-          .globalAnnotationMaxCount;
-      }
-      // get the annotation properties for the score that the student got.
-      annotationGroupForScore = this.ProjectService.getGlobalAnnotationGroupByScore(
-        this.componentContent,
-        previousScore,
-        score
-      );
-
-      // check if we need to apply this globalAnnotationSetting to this annotation: we don't need to if we've already reached the maxCount
-      if (annotationGroupForScore != null) {
-        let globalAnnotationGroupsByNodeIdAndComponentId = this.AnnotationService.getAllGlobalAnnotationGroups();
-        annotationGroupForScore.annotationGroupCreatedTime = autoScoreAnnotation.clientSaveTime; // save annotation creation time
-
-        if (globalAnnotationGroupsByNodeIdAndComponentId.length >= globalAnnotationMaxCount) {
-          // we've already applied this annotation properties to maxCount annotations, so we don't need to apply it any more.
-          annotationGroupForScore = null;
-        }
-      }
-
-      if (
-        annotationGroupForScore != null &&
-        annotationGroupForScore.isGlobal &&
-        annotationGroupForScore.unGlobalizeCriteria != null
-      ) {
-        // check if this annotation is global and what criteria needs to be met to un-globalize.
-        annotationGroupForScore.unGlobalizeCriteria.map((unGlobalizeCriteria) => {
-          // if the un-globalize criteria is time-based (e.g. isVisitedAfter, isRevisedAfter, isVisitedAndRevisedAfter, etc), store the timestamp of this annotation in the criteria
-          // so we can compare it when we check for criteria satisfaction.
-          if (unGlobalizeCriteria.params != null) {
-            unGlobalizeCriteria.params.criteriaCreatedTimestamp =
-              autoScoreAnnotation.clientSaveTime; // save annotation creation time to criteria
-          }
-        });
-      }
-
-      if (annotationGroupForScore != null) {
-        // copy over the annotation properties into the autoScoreAnnotation's data
-        this.mergeObjects(
-          autoScoreAnnotation.data,
-          this.UtilService.makeCopyOfJSONObject(annotationGroupForScore)
-        );
-      }
     }
 
     componentState.annotations = [autoScoreAnnotation];
@@ -503,16 +454,6 @@ export class OpenResponseStudent extends ComponentStudent {
       autoCommentAnnotationData.autoGrader = 'cRater';
 
       const autoCommentAnnotation = this.createAutoCommentAnnotation(autoCommentAnnotationData);
-
-      if (this.componentContent.enableGlobalAnnotations) {
-        if (annotationGroupForScore != null) {
-          // copy over the annotation properties into the autoCommentAnnotation's data
-          this.mergeObjects(
-            autoScoreAnnotation.data,
-            this.UtilService.makeCopyOfJSONObject(annotationGroupForScore)
-          );
-        }
-      }
       componentState.annotations.push(autoCommentAnnotation);
     }
     if (
@@ -531,15 +472,6 @@ export class OpenResponseStudent extends ComponentStudent {
         notificationForScore.componentId = this.componentId;
         this.NotificationService.sendNotificationForScore(notificationForScore);
       }
-    }
-
-    if (
-      this.componentContent.enableGlobalAnnotations &&
-      annotationGroupForScore != null &&
-      annotationGroupForScore.isGlobal &&
-      annotationGroupForScore.isPopup
-    ) {
-      this.AnnotationService.broadcastDisplayGlobalAnnotations();
     }
   }
 
