@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { now } from 'moment';
 import { Subscription } from 'rxjs';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
+import { NotificationService } from '../../../services/notificationService';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
@@ -19,7 +19,7 @@ import { PeerGroup } from '../PeerGroup';
 })
 export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
   @Input()
-  workgroupId: any;
+  workgroupId: number;
 
   peerGroup: PeerGroup;
 
@@ -27,6 +27,7 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
 
   constructor(
     protected configService: ConfigService,
+    protected notificationService: NotificationService,
     protected peerChatService: PeerChatService,
     protected peerGroupService: PeerGroupService,
     protected projectService: ProjectService,
@@ -57,9 +58,35 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
   }
 
   submitTeacherResponse(response: string): void {
+    this.sendNotificationsToGroupMembers(this.peerGroup);
     this.teacherWorkService.saveWork(this.createComponentState(response)).subscribe(() => {
       this.ngOnInit();
     });
+  }
+
+  private sendNotificationsToGroupMembers(peerGroup: PeerGroup): void {
+    const runId = this.configService.getRunId();
+    const periodId = peerGroup.periodId;
+    const notificationType = 'PeerChatMessage';
+    const teacherWorkgroupId = this.configService.getWorkgroupId();
+    const message = 'Your teacher sent a chat message';
+    for (const workgroupId of this.getPeerGroupWorkgroupIds(peerGroup)) {
+      const notification = this.notificationService.createNewNotification(
+        runId,
+        periodId,
+        notificationType,
+        this.nodeId,
+        this.componentId,
+        teacherWorkgroupId,
+        workgroupId,
+        message
+      );
+      this.notificationService.saveNotificationToServer(notification);
+    }
+  }
+
+  private getPeerGroupWorkgroupIds(peerGroup: PeerGroup): number[] {
+    return peerGroup.members.map((member: any) => member.id);
   }
 
   private createComponentState(response: string): ComponentState {
