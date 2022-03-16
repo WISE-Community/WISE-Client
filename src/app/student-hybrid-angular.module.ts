@@ -15,36 +15,18 @@ import { DataService } from './services/data.service';
 import { AngularJSModule } from './common-hybrid-angular.module';
 import { NavItemComponent } from '../assets/wise5/vle/nav-item/nav-item.component';
 import { HtmlDialog } from '../assets/wise5/directives/html-dialog/html-dialog';
-import { MatchStudentModule } from '../assets/wise5/components/match/match-student/match-student.module';
 import { StudentComponentModule } from './student/student.component.module';
 import { SafeUrl } from '../assets/wise5/directives/safeUrl/safe-url.pipe';
-import { HighchartsChartModule } from 'highcharts-angular';
-import { DialogGuidanceStudentModule } from '../assets/wise5/components/dialogGuidance/dialogGuidanceStudentModule';
-import { ComponentComponent } from '../assets/wise5/components/component/component.component';
 import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
 import { NavigationComponent } from '../assets/wise5/themes/default/navigation/navigation.component';
-import { OpenResponseStudentModule } from '../assets/wise5/components/openResponse/open-response-student/open-response-student.module';
-import { TableStudentModule } from '../assets/wise5/components/table/table-student/table-student.module';
-import { MultipleChoiceStudentModule } from '../assets/wise5/components/multipleChoice/multiple-choice-student/multiple-choice-student.module';
-import { LabelStudentModule } from '../assets/wise5/components/label/label-student/label-student.module';
-import { ConceptMapStudentModule } from '../assets/wise5/components/conceptMap/concept-map-student/concept-map-student.module';
-import { DrawStudentModule } from '../assets/wise5/components/draw/draw-student/draw-student-module';
-import { DiscussionStudentModule } from '../assets/wise5/components/discussion/discussion-student/discussion-student.module';
-import { GraphStudentModule } from '../assets/wise5/components/graph/graph-student/graph-student.module';
-import { AnimationStudentModule } from '../assets/wise5/components/animation/animation-student/animation-student.module';
-import { AudioOscillatorStudentModule } from '../assets/wise5/components/audioOscillator/audio-oscillator-student/audio-oscillator.module';
-import { EmbeddedStudentModule } from '../assets/wise5/components/embedded/embedded-student/embedded-student.module';
-import { HtmlStudentModule } from '../assets/wise5/components/html/html-student/html-student.module';
-import { OutsideUrlStudentModule } from '../assets/wise5/components/outsideURL/outside-url-student/outside-url-student.module';
-import { SummaryStudentModule } from '../assets/wise5/components/summary/summary-student/summary-student.module';
 import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/summary-display.module';
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 import { TopBarModule } from './student/top-bar/top-bar.module';
 import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
+import { ComponentStudentModule } from '../assets/wise5/components/component/component-student.module';
 
 @NgModule({
   declarations: [
-    ComponentComponent,
     GenerateImageDialogComponent,
     HtmlDialog,
     NavigationComponent,
@@ -54,26 +36,10 @@ import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/stud
   ],
   imports: [
     AngularJSModule,
-    AnimationStudentModule,
-    AudioOscillatorStudentModule,
-    ConceptMapStudentModule,
-    DialogGuidanceStudentModule,
-    DiscussionStudentModule,
-    DrawStudentModule,
-    EmbeddedStudentModule,
-    GraphStudentModule,
-    HighchartsChartModule,
-    HtmlStudentModule,
-    LabelStudentModule,
-    MatchStudentModule,
-    MultipleChoiceStudentModule,
-    OpenResponseStudentModule,
-    OutsideUrlStudentModule,
+    ComponentStudentModule,
     StudentAssetsDialogModule,
     StudentComponentModule,
     SummaryDisplayModule,
-    SummaryStudentModule,
-    TableStudentModule,
     TopBarModule
   ],
   providers: [
