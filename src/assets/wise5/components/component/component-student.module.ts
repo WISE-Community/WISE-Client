@@ -47,4 +47,4 @@ import { ComponentComponent } from './component.component';
   ],
   exports: [ComponentComponent]
 })
-export class ComponentModule {}
+export class ComponentStudentModule {}

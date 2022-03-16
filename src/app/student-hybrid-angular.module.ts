@@ -23,7 +23,7 @@ import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 import { TopBarModule } from './student/top-bar/top-bar.module';
 import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
-import { ComponentModule } from '../assets/wise5/components/component/component.module';
+import { ComponentStudentModule } from '../assets/wise5/components/component/component-student.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { ComponentModule } from '../assets/wise5/components/component/component.
   ],
   imports: [
     AngularJSModule,
-    ComponentModule,
+    ComponentStudentModule,
     StudentAssetsDialogModule,
     StudentComponentModule,
     SummaryDisplayModule,
