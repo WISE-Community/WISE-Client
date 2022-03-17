@@ -79,7 +79,7 @@ export abstract class ComponentStudent {
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.isSaveOrSubmitButtonVisible = this.isSaveButtonVisible || this.isSubmitButtonVisible;
-    if (!this.isAuthoringComponentPreviewMode()) {
+    if (!this.isPreviewMode()) {
       this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
         this.nodeId,
         this.componentId,
@@ -103,8 +103,8 @@ export abstract class ComponentStudent {
     this.subscriptions.unsubscribe();
   }
 
-  isAuthoringComponentPreviewMode(): boolean {
-    return this.mode === 'authoringComponentPreview';
+  isPreviewMode(): boolean {
+    return this.mode === 'preview';
   }
 
   subscribeToSubscriptions(): void {
@@ -398,7 +398,7 @@ export abstract class ComponentStudent {
       nodeId: this.nodeId,
       componentId: this.componentId
     });
-    if (this.isAuthoringComponentPreviewMode()) {
+    if (this.isPreviewMode()) {
       this.saveForAuthoringPreviewMode('save');
     }
   }
@@ -481,7 +481,7 @@ export abstract class ComponentStudent {
 
     if (submitTriggeredBy == null || submitTriggeredBy === 'componentSubmitButton') {
       this.emitComponentSubmitTriggered();
-      if (this.isAuthoringComponentPreviewMode()) {
+      if (this.isPreviewMode()) {
         this.saveForAuthoringPreviewMode('submit');
       }
     }

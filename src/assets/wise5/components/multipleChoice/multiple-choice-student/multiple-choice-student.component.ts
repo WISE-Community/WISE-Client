@@ -256,7 +256,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
             nodeId: this.nodeId,
             componentId: this.componentId
           });
-          if (this.isAuthoringComponentPreviewMode()) {
+          if (this.isPreviewMode()) {
             this.saveForAuthoringPreviewMode('submit');
           }
         }

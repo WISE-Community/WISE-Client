@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentComponentModule } from '../../../../app/student/student.component.module';
+import { PreviewComponentComponent } from '../../authoringTool/components/preview-component/preview-component.component';
 import { StudentAssetsDialogModule } from '../../vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
 import { AnimationStudentModule } from '../animation/animation-student/animation-student.module';
 import { AudioOscillatorStudentModule } from '../audioOscillator/audio-oscillator-student/audio-oscillator.module';
@@ -22,7 +23,7 @@ import { TableStudentModule } from '../table/table-student/table-student.module'
 import { ComponentComponent } from './component.component';
 
 @NgModule({
-  declarations: [ComponentComponent],
+  declarations: [ComponentComponent, PreviewComponentComponent],
   imports: [
     AnimationStudentModule,
     AudioOscillatorStudentModule,
@@ -45,6 +46,6 @@ import { ComponentComponent } from './component.component';
     SummaryStudentModule,
     TableStudentModule
   ],
-  exports: [ComponentComponent]
+  exports: [ComponentComponent, PreviewComponentComponent]
 })
 export class ComponentStudentModule {}
