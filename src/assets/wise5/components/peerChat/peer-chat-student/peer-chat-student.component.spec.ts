@@ -23,19 +23,14 @@ import { PeerGroupMember } from '../PeerGroupMember';
 import { PeerGroupActivity } from '../PeerGroupActivity';
 import { of } from 'rxjs';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
-import { PeerChatChatBoxComponent } from '../peer-chat-chat-box/peer-chat-chat-box.component';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { MatCardModule } from '@angular/material/card';
-import { PeerChatMembersComponent } from '../peer-chat-members/peer-chat-members.component';
-import { PeerChatQuestionBankComponent } from '../peer-chat-question-bank/peer-chat-question-bank.component';
-import { PeerChatMessagesComponent } from '../peer-chat-messages/peer-chat-messages.component';
 import { MatIconModule } from '@angular/material/icon';
-import { PeerChatMessageInputComponent } from '../peer-chat-message-input/peer-chat-message-input.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { PeerChatMessageComponent } from '../peer-chat-message/peer-chat-message.component';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { PeerChatModule } from '../peer-chat.module';
 
 class MockService {}
 
@@ -78,19 +73,43 @@ const componentContent = {
   questionBank: ['What color is the sky?', 'How deep is the ocean?']
 };
 
-const componentState1 = createComponentStateObject(
+class ComponentState {
+  nodeId: string;
+  componentId: string;
+  peerGroupId: number;
+  studentData: {
+    response: string;
+  };
+  workgroupId: number;
+
+  constructor(
+    nodeId: string,
+    componentId: string,
+    peerGroupId: number,
+    workgroupId: number,
+    response: string
+  ) {
+    this.nodeId = nodeId;
+    this.componentId = componentId;
+    this.peerGroupId = peerGroupId;
+    this.studentData = { response: response };
+    this.workgroupId = workgroupId;
+  }
+}
+
+const componentState1 = new ComponentState(
   nodeId,
   componentId,
-  studentWorkgroupId1,
   peerGroupId,
+  studentWorkgroupId1,
   response1
 );
 
-const componentState2 = createComponentStateObject(
+const componentState2 = new ComponentState(
   nodeId,
   componentId,
-  studentWorkgroupId2,
   peerGroupId,
+  studentWorkgroupId2,
   response2
 );
 
@@ -104,8 +123,8 @@ const peerGroup = new PeerGroup(
 );
 
 describe('PeerChatStudentComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
         FormsModule,
@@ -115,19 +134,10 @@ describe('PeerChatStudentComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
+        PeerChatModule,
         UpgradeModule
       ],
-      declarations: [
-        ComponentHeader,
-        PeerChatChatBoxComponent,
-        PeerChatMembersComponent,
-        PeerChatMessageComponent,
-        PeerChatMessageInputComponent,
-        PeerChatMessagesComponent,
-        PeerChatStudentComponent,
-        PeerChatQuestionBankComponent,
-        PossibleScoreComponent
-      ],
+      declarations: [ComponentHeader, PeerChatStudentComponent, PossibleScoreComponent],
       providers: [
         AnnotationService,
         ComponentService,
@@ -188,24 +198,6 @@ describe('PeerChatStudentComponent', () => {
   submitStudentResponse();
   createComponentState();
 });
-
-function createComponentStateObject(
-  nodeId: string,
-  componentId: string,
-  workgroupId: number,
-  peerGroupId: number,
-  response: string
-): any {
-  return {
-    componentId: componentId,
-    nodeId: nodeId,
-    peerGroupId: peerGroupId,
-    studentData: {
-      response: response
-    },
-    workgroupId: workgroupId
-  };
-}
 
 function ngOnInit() {
   it('should initialize peer chat group and peer chat messages', fakeAsync(() => {

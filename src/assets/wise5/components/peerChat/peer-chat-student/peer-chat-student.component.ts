@@ -35,36 +35,36 @@ export class PeerChatStudentComponent extends ComponentStudent {
   response: string;
 
   constructor(
-    protected AnnotationService: AnnotationService,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected annotationService: AnnotationService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
     private notificationService: NotificationService,
     private peerGroupService: PeerGroupService,
-    private PeerChatService: PeerChatService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    private StudentWebSocketService: StudentWebSocketService,
-    protected UtilService: UtilService
+    private peerChatService: PeerChatService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService,
+    private studentWebSocketService: StudentWebSocketService,
+    protected utilService: UtilService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService,
-      UtilService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService,
+      utilService
     );
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.myWorkgroupId = this.ConfigService.getWorkgroupId();
+    this.myWorkgroupId = this.configService.getWorkgroupId();
     this.peerGroupActivityTag = this.componentContent.peerGroupActivityTag;
     this.requestChatWorkgroups();
     this.registerStudentWorkReceivedListener();
@@ -72,17 +72,17 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   private registerStudentWorkReceivedListener(): void {
     this.subscriptions.add(
-      this.StudentDataService.studentWorkReceived$.subscribe((componentState) => {
+      this.studentDataService.studentWorkReceived$.subscribe((componentState) => {
         if (this.isMessageToDisplayForThisChat(componentState)) {
           this.addPeerChatMessage(
-            this.PeerChatService.convertComponentStateToPeerChatMessage(componentState)
+            this.peerChatService.convertComponentStateToPeerChatMessage(componentState)
           );
         }
       })
     );
   }
 
-  private isMessageToDisplayForThisChat(componentState: any) {
+  private isMessageToDisplayForThisChat(componentState: any): boolean {
     return (
       this.isForThisComponent(componentState) &&
       this.isWorkFromClassmate(componentState) &&
@@ -95,34 +95,26 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .retrievePeerGroup(this.peerGroupActivityTag, this.workgroupId)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
-        (peerGroup: any) => {
-          this.requestChatWorkgroupsSuccess(peerGroup);
+        (peerGroup: PeerGroup) => {
+          this.isPeerChatWorkgroupsResponseReceived = true;
+          this.peerGroup = peerGroup;
+          const peerGroupWorkgroupIds = this.getPeerGroupWorkgroupIds(peerGroup);
+          this.addTeacherWorkgroupIds(peerGroupWorkgroupIds);
+          this.setPeerChatWorkgroups(peerGroupWorkgroupIds);
+          this.getPeerChatComponentStates(peerGroup);
         },
         (error) => {
-          this.requestChatWorkgroupsError();
+          this.isPeerChatWorkgroupsResponseReceived = true;
         }
       );
   }
 
-  private requestChatWorkgroupsSuccess(peerGroup: PeerGroup): void {
-    this.isPeerChatWorkgroupsResponseReceived = true;
-    this.peerGroup = peerGroup;
-    const peerGroupWorkgroupIds = this.getPeerGroupWorkgroupIds(peerGroup);
-    this.addTeacherWorkgroupIds(peerGroupWorkgroupIds);
-    this.setPeerChatWorkgroups(peerGroupWorkgroupIds);
-    this.getPeerChatComponentStates(peerGroup);
-  }
-
   private addTeacherWorkgroupIds(workgroupIds: number[]): void {
-    workgroupIds.push(...this.ConfigService.getTeacherWorkgroupIds());
+    workgroupIds.push(...this.configService.getTeacherWorkgroupIds());
   }
 
   private getPeerGroupWorkgroupIds(peerGroup: PeerGroup): number[] {
     return peerGroup.members.map((member) => member.id);
-  }
-
-  private requestChatWorkgroupsError(): void {
-    this.isPeerChatWorkgroupsResponseReceived = true;
   }
 
   private getPeerChatComponentStates(peerGroup: PeerGroup): void {
@@ -138,7 +130,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.peerChatMessages = [];
     componentStates.forEach((componentState: any) => {
       this.peerChatMessages.push(
-        this.PeerChatService.convertComponentStateToPeerChatMessage(componentState)
+        this.peerChatService.convertComponentStateToPeerChatMessage(componentState)
       );
     });
   }
@@ -148,11 +140,11 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.peerChatWorkgroupInfos = {};
     for (const workgroupId of workgroupIds) {
       this.peerChatWorkgroupInfos[workgroupId] = {
-        avatarColor: this.ConfigService.getAvatarColorForWorkgroupId(workgroupId),
-        displayNames: this.ConfigService.isTeacherWorkgroupId(workgroupId)
+        avatarColor: this.configService.getAvatarColorForWorkgroupId(workgroupId),
+        displayNames: this.configService.isTeacherWorkgroupId(workgroupId)
           ? $localize`Teacher`
-          : this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId),
-        isTeacher: this.ConfigService.isTeacherWorkgroupId(workgroupId)
+          : this.configService.getUsernamesStringByWorkgroupId(workgroupId),
+        isTeacher: this.configService.isTeacherWorkgroupId(workgroupId)
       };
     }
     this.isPeerChatWorkgroupsAvailable = true;
@@ -160,7 +152,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   submitStudentResponse(response: string): void {
     const peerChatMessage = new PeerChatMessage(
-      this.ConfigService.getWorkgroupId(),
+      this.configService.getWorkgroupId(),
       response,
       new Date().getTime()
     );
@@ -174,7 +166,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   createComponentState(action: string): any {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.nodeService.createNewComponentState();
     componentState.studentData = {
       response: this.response,
       submitCounter: this.submitCounter
@@ -183,9 +175,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
     componentState.isSubmit = true;
-    componentState.runId = this.ConfigService.getRunId();
-    componentState.periodId = this.ConfigService.getPeriodId();
-    componentState.workgroupId = this.ConfigService.getWorkgroupId();
+    componentState.runId = this.configService.getRunId();
+    componentState.periodId = this.configService.getPeriodId();
+    componentState.workgroupId = this.configService.getWorkgroupId();
     componentState.peerGroupId = this.peerGroup.id;
     const promise = new Promise((resolve, reject) => {
       return this.createComponentStateAdditionalProcessing(
@@ -217,16 +209,16 @@ export class PeerChatStudentComponent extends ComponentStudent {
     };
     for (const workgroupId of this.peerChatWorkgroupIds) {
       if (workgroupId !== this.workgroupId) {
-        this.StudentWebSocketService.sendMessageToClassmate(workgroupId, message);
+        this.studentWebSocketService.sendMessageToClassmate(workgroupId, message);
       }
     }
   }
 
   private sendNotificationToPeerWorkgroups(workgroupIds: number[]): void {
-    const runId = this.ConfigService.getRunId();
-    const periodId = this.ConfigService.getPeriodId();
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
     const notificationType = 'PeerChatMessage';
-    const firstName = this.ConfigService.getStudentFirstNamesByWorkgroupId(this.workgroupId);
+    const firstName = this.configService.getStudentFirstNamesByWorkgroupId(this.workgroupId);
     const message = $localize`${firstName} sent a chat message`;
     for (const workgroupId of workgroupIds) {
       const notification = this.notificationService.createNewNotification(
@@ -266,6 +258,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   private isTeacherWorkgroupId(workgroupId: number): boolean {
-    return this.ConfigService.getTeacherWorkgroupIds().includes(workgroupId);
+    return this.configService.getTeacherWorkgroupIds().includes(workgroupId);
   }
 }
