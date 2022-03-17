@@ -7,7 +7,10 @@
         fxFlexOrder.gt-md="2">
       <peer-chat-question-bank [questions]="componentContent.questionBank"></peer-chat-question-bank>
     </div>
-    <div fxFlex fxFlex.gt-md="60" fxFlexOrder="2" fxFlexOrder.gt-md="1">
+    <div fxFlex
+        [fxFlex.gt-md]="componentContent.questionBank.length > 0 ? 60 : 100"
+        fxFlexOrder="2"
+        fxFlexOrder.gt-md="1">
       <peer-chat-chat-box [messages]="peerChatMessages"
           [myWorkgroupId]="workgroupId"
           [workgroupInfos]="peerChatWorkgroupInfos"
