@@ -48,7 +48,6 @@
     "fabric": "^3.6.6",
     "highcharts": "^9.0.1",
     "highcharts-angular": "^2.10.0",
-    "hopscotch": "^0.3.1",
     "html2canvas": "^0.5.0-beta4",
     "iframe-resizer": "^3.5.3",
     "jquery": "^3.4.1",

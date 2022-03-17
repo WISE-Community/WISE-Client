@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentComponentModule } from '../../../../app/student/student.component.module';
+import { HelpIconModule } from '../../themes/default/themeComponents/helpIcon/help-icon.module';
 import { StudentAssetsDialogModule } from '../../vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
 import { AnimationStudentModule } from '../animation/animation-student/animation-student.module';
 import { AudioOscillatorStudentModule } from '../audioOscillator/audio-oscillator-student/audio-oscillator.module';
@@ -33,6 +34,7 @@ import { ComponentComponent } from './component.component';
     DrawStudentModule,
     EmbeddedStudentModule,
     GraphStudentModule,
+    HelpIconModule,
     HighchartsChartModule,
     HtmlStudentModule,
     LabelStudentModule,

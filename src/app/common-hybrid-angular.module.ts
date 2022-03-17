@@ -48,7 +48,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
-import { HelpIconComponent } from '../assets/wise5/themes/default/themeComponents/helpIcon/help-icon.component';
 import { NodeStatusIcon } from '../assets/wise5/themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -84,7 +83,6 @@ export class EmptyComponent {}
     DialogResponseComponent,
     DialogResponsesComponent,
     EmptyComponent,
-    HelpIconComponent,
     NodeIconComponent,
     NodeStatusIcon
   ],
