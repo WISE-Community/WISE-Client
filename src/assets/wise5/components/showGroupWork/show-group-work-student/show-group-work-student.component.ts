@@ -24,8 +24,6 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
   narrowComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];
   peerGroup: PeerGroup;
   showWorkComponentContent: any;
-  showWorkComponentId: string;
-  showWorkNodeId: string;
   widthLg: number = 100;
   widthMd: number = 100;
   workgroupIdToWork = new Map();
@@ -59,6 +57,11 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.retrieveStudentWorkForPeerGroup();
+    this.setShowWorkComponentContent();
+  }
+
+  private retrieveStudentWorkForPeerGroup(): void {
     this.peerGroupService
       .retrievePeerGroup(this.componentContent.peerGroupActivityTag, this.workgroupId)
       .subscribe((peerGroup: PeerGroup) => {
@@ -82,21 +85,21 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
         }
         this.isPeerGroupRetrieved = true;
       });
-    this.showWorkComponentContent = this.projectService.getComponentByNodeIdAndComponentId(
-      this.componentContent.showWorkNodeId,
-      this.componentContent.showWorkComponentId
-    );
-    this.showWorkComponentContent = this.projectService.injectAssetPaths(
-      this.showWorkComponentContent
-    );
-    this.showWorkNodeId = this.componentContent.showWorkNodeId;
-    this.showWorkComponentId = this.componentContent.showWorkComponentId;
   }
 
   setStudentWorkFromGroupMembers(studentWorkFromGroupMembers: any[]): void {
     studentWorkFromGroupMembers.forEach((work) => {
       this.workgroupIdToWork.set(work.workgroupId, work);
     });
+  }
+
+  private setShowWorkComponentContent(): void {
+    this.showWorkComponentContent = this.projectService.injectAssetPaths(
+      this.projectService.getComponentByNodeIdAndComponentId(
+        this.componentContent.showWorkNodeId,
+        this.componentContent.showWorkComponentId
+      )
+    );
   }
 
   private removeMyWorkgroup(peerGroup: PeerGroup): PeerGroup {
@@ -127,6 +130,7 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
       this.setWidths();
     }
   }
+
   setWidths(): void {
     const numWorkgroups = this.peerGroup.members.length;
     if (numWorkgroups > 1) {
