@@ -218,8 +218,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     const runId = this.configService.getRunId();
     const periodId = this.configService.getPeriodId();
     const notificationType = 'PeerChatMessage';
-    const firstName = this.configService.getStudentFirstNamesByWorkgroupId(this.workgroupId);
-    const message = $localize`${firstName} sent a chat message`;
+    const message = $localize`You have new chat messages`;
     for (const workgroupId of workgroupIds) {
       const notification = this.notificationService.createNewNotification(
         runId,
