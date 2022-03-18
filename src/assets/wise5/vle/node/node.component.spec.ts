@@ -50,7 +50,6 @@ describe('NodeComponent', () => {
     spyOn(TestBed.inject(VLEProjectService), 'getNodeTitleByNodeId').and.returnValue('');
     component = fixture.componentInstance;
     fixture.detectChanges();
-    createComponentStatesSpy = spyOn(component, 'createComponentStates');
   });
 
   afterEach(() => {
@@ -59,70 +58,4 @@ describe('NodeComponent', () => {
     });
     fixture.destroy();
   });
-
-  createAndSaveComponentData();
-  getDataArraysToSaveFromComponentStates();
-  getAnnotationsFromComponentStates();
 });
-
-function createAndSaveComponentData() {
-  it('should create and save component data and call save to server with non null component states', async () => {
-    const componentState1 = { id: 1 };
-    const componentState2 = { id: 2 };
-    const componentStates = [componentState1, componentState2];
-    createComponentStatesSpy.and.callFake(() => {
-      return Promise.resolve(componentStates);
-    });
-    const saveToServerSpy = spyOn(TestBed.inject(StudentDataService), 'saveToServer').and.callFake(
-      () => {
-        return Promise.resolve({});
-      }
-    );
-    await component.createAndSaveComponentData(false);
-    expect(saveToServerSpy).toHaveBeenCalledWith([componentState1, componentState2], [], []);
-  });
-}
-
-function getDataArraysToSaveFromComponentStates() {
-  it('should get data arrays to save from component states', () => {
-    const annotation1 = { id: 100 };
-    const annotation2 = { id: 200 };
-    const annotation3 = { id: 300 };
-    const componentState1 = { id: 1, annotations: [annotation1, annotation2] };
-    const componentState2 = { id: 2, annotations: [annotation3] };
-    const componentStatesFromComponents = [componentState1, componentState2];
-    const {
-      componentStates,
-      componentEvents,
-      componentAnnotations
-    } = component.getDataArraysToSaveFromComponentStates(componentStatesFromComponents);
-    expect(componentStates.length).toEqual(2);
-    expect(componentStates[0]).toEqual(componentState1);
-    expect(componentStates[1]).toEqual(componentState2);
-    expect(componentStates[0].annotations).toBeUndefined();
-    expect(componentStates[1].annotations).toBeUndefined();
-    expect(componentEvents.length).toEqual(0);
-    expect(componentAnnotations.length).toEqual(3);
-    expect(componentAnnotations[0]).toEqual(annotation1);
-    expect(componentAnnotations[1]).toEqual(annotation2);
-    expect(componentAnnotations[2]).toEqual(annotation3);
-  });
-}
-
-function getAnnotationsFromComponentStates() {
-  it('should get annotations from component states', () => {
-    const annotation1 = { id: 100 };
-    const annotation2 = { id: 200 };
-    const annotation3 = { id: 300 };
-    const componentState1 = { id: 1, annotations: [annotation1, annotation2] };
-    const componentState2 = { id: 2, annotations: [annotation3] };
-    const componentStatesFromComponents = [componentState1, componentState2];
-    const componentAnnotations = component.getAnnotationsFromComponentStates(
-      componentStatesFromComponents
-    );
-    expect(componentAnnotations.length).toEqual(3);
-    expect(componentAnnotations[0]).toEqual(annotation1);
-    expect(componentAnnotations[1]).toEqual(annotation2);
-    expect(componentAnnotations[2]).toEqual(annotation3);
-  });
-}
