@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 
 @Component({
+  selector: 'preview-component',
   templateUrl: 'preview-component.component.html'
 })
 export class PreviewComponentComponent implements OnInit {

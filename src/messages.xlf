@@ -279,6 +279,10 @@
           <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component.html</context>
           <context context-type="linenumber">32</context>
         </context-group>
@@ -4987,6 +4991,10 @@
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="3563179927132287246" datatype="html">
         <source>License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.</source>
@@ -8341,6 +8349,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
           <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="929954f6e28805c5a7c03aac44c9e48cad2ab3e3" datatype="html">
+        <source>Preview Component</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component.html</context>
+          <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2544043210306731906" datatype="html">
@@ -14403,14 +14418,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>This will replace your existing recording. Is this OK?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">774</context>
+          <context context-type="linenumber">706</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8057349329324626950" datatype="html">
         <source>Are you sure you want to delete your recording?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">818</context>
+          <context context-type="linenumber">750</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5623290610025495479" datatype="html">
@@ -15621,7 +15636,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Invalid dismiss code. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f3bb0234ead15a9bf90c2cb2ed7b48570d6011c5" datatype="html">

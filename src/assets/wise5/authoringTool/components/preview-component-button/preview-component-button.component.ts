@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PreviewComponentComponent } from '../preview-component/preview-component.component';
+import { PreviewComponentDialogComponent } from '../preview-component-dialog/preview-component-dialog.component';
 
 @Component({
   templateUrl: 'preview-component-button.component.html'
@@ -17,7 +17,7 @@ export class PreviewComponentButtonComponent implements OnInit {
   ngOnInit(): void {}
 
   popUpComponentPreview(): void {
-    const dialogRef = this.dialog.open(PreviewComponentComponent, {
+    const dialogRef = this.dialog.open(PreviewComponentDialogComponent, {
       panelClass: 'dialog-md'
     });
     dialogRef.componentInstance.nodeId = this.nodeId;

@@ -21,6 +21,7 @@ import { AngularJSModule } from '../common-hybrid-angular.module';
 import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component';
+import { PreviewComponentDialogComponent } from '../../assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringToo
     NodeAdvancedPathAuthoringComponent,
     NodeIconChooserDialog,
     PreviewComponentButtonComponent,
+    PreviewComponentDialogComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent
   ],
