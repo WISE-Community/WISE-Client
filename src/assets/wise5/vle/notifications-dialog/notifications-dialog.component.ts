@@ -64,10 +64,10 @@ export class NotificationsDialogComponent implements OnInit {
     }
   }
 
-  dismissNotification(event: any, notification: Notification): any {
-    if (notification.data == null || notification.data.dismissCode == null) {
+  dismissNotification(event: any, notification: Notification, showDismissCode: boolean = true): any {
+    if (this.canDismissWithoutCode(notification)) {
       this.notificationService.dismissNotification(notification);
-    } else {
+    } else if (showDismissCode) {
       // ask user to input dismiss code before dismissing it
       let args = {
         event: event,
@@ -78,15 +78,25 @@ export class NotificationsDialogComponent implements OnInit {
     }
   }
 
-  dismissNotificationAggregate(event: any, notificationAggregate: any): void {
+  dismissNotificationAggregate(event: any, notificationAggregate: any, showDismissCode: boolean = true): void {
     if (notificationAggregate != null && notificationAggregate.notifications != null) {
       for (const notification of notificationAggregate.notifications) {
-        this.dismissNotification(event, notification);
+        this.dismissNotification(event, notification, showDismissCode);
       }
+    }
+  }
+
+  dismissAll(event: any): void {
+    for (const notificationAggregate of this.newNotifications) {
+      this.dismissNotificationAggregate(event, notificationAggregate, false);
     }
   }
 
   getNodePositionAndTitleByNodeId(nodeId: string): string {
     return this.projectService.getNodePositionAndTitleByNodeId(nodeId);
+  }
+
+  canDismissWithoutCode(notification: Notification): boolean {
+    return notification.data == null || notification.data.dismissCode == null;
   }
 }

@@ -4,6 +4,15 @@
     fxLayoutGap="4px">
   <mat-icon color="accent">notifications</mat-icon>
   <span i18n>Alerts</span>
+  <span fxFlex></span>
+  <button *ngIf="newNotifications.length > 0"
+      mat-icon-button
+      (click)="dismissAll($event)"
+      matTooltip="Dismiss all alerts"
+      matTooltipPosition="before"
+      i18n-matTooltip>
+    <mat-icon class="text-secondary">clear_all</mat-icon>
+  </button>
 </h3>
 <mat-dialog-content class="dialog-content-scroll notifications">
   <p *ngIf="!hasNewNotifications()"
@@ -42,5 +51,5 @@
   </mat-list>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="8px">
-  <button mat-flat-button color="primary" [mat-dialog-close] i18n>Close</button>
+  <button mat-button [mat-dialog-close] i18n>Close</button>
 </mat-dialog-actions>
