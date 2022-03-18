@@ -135,11 +135,6 @@ export class NodeComponent implements OnInit {
     this.rubric = this.node.rubric;
     this.initializeIdToIsPulsing();
 
-    if (this.upgrade?.$injector?.get('$state')?.params?.componentId != null) {
-      const componentId = this.upgrade.$injector.get('$state').params.componentId;
-      this.scrollAndHighlightComponent(componentId);
-    }
-
     this.subscriptions.add(
       this.studentDataService.componentSaveTriggered$.subscribe(({ nodeId, componentId }) => {
         if (nodeId == this.node.id && this.node.hasComponent(componentId)) {
@@ -228,31 +223,6 @@ export class NodeComponent implements OnInit {
 
   helpIconClicked(id: string): void {
     this.idToIsPulsing[id] = false;
-  }
-
-  scrollAndHighlightComponent(componentId: string): void {
-    setTimeout(() => {
-      const componentElement = $('#component_' + componentId);
-      if (componentElement != null) {
-        const originalBackgroundColor = componentElement.css('backgroundColor');
-        componentElement.css('background-color', '#FFFF9C');
-        $('#content').animate(
-          {
-            scrollTop: componentElement.prop('offsetTop')
-          },
-          1000
-        );
-
-        /*
-         * remove the background highlighting so that it returns
-         * to its original color
-         */
-        componentElement.css({
-          transition: 'background-color 3s ease-in-out',
-          'background-color': originalBackgroundColor
-        });
-      }
-    }, 1000);
   }
 
   isShowNodeRubric(): boolean {

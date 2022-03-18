@@ -23,6 +23,7 @@
       </help-icon>
     </div>
     <div *ngFor="let component of getComponents(); index as componentIndex"
+        id="component_{{ component.id }}"
         class="component"
         fxFlex
         fxFlex.gt-sm="{{component.componentWidth ? component.componentWidth : 100}}">
