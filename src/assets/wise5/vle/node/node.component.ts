@@ -4,14 +4,12 @@ import { filter, take } from 'rxjs/operators';
 import { Node } from '../../common/Node';
 import { ComponentService } from '../../components/componentService';
 import { ComponentStateWrapper } from '../../components/ComponentStateWrapper';
-import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { NodeService } from '../../services/nodeService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
 import { VLEProjectService } from '../vleProjectService';
-import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
   selector: 'node',
@@ -57,14 +55,12 @@ export class NodeComponent implements OnInit {
   workgroupId: number;
 
   constructor(
-    private annotationService: AnnotationService,
     private componentService: ComponentService,
     private configService: ConfigService,
     private nodeService: NodeService,
     private projectService: VLEProjectService,
     private sessionService: SessionService,
     private studentDataService: StudentDataService,
-    private upgrade: UpgradeModule,
     private utilService: UtilService
   ) {}
 
@@ -214,7 +210,7 @@ export class NodeComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  initializeIdToIsPulsing(): void {
+  private initializeIdToIsPulsing(): void {
     this.idToIsPulsing[this.node.id] = true;
     this.node.components.forEach((component) => {
       this.idToIsPulsing[component.id] = true;
@@ -232,10 +228,6 @@ export class NodeComponent implements OnInit {
   isShowComponentRubric(component: any): boolean {
     return component.rubric != null && component.rubric != '' && this.mode === 'preview';
   }
-
-  setStudentWork(): void {}
-
-  importWork(): void {}
 
   saveButtonClicked(): void {
     const isAutoSave = false;
@@ -258,32 +250,28 @@ export class NodeComponent implements OnInit {
     });
   }
 
-  getComponentTemplatePath(componentType: string): string {
-    return this.nodeService.getComponentTemplatePath(componentType);
-  }
-
-  setSavedMessage(time: any): void {
+  private setSavedMessage(time: any): void {
     this.setSaveText($localize`Saved`, time);
   }
 
-  setAutoSavedMessage(time: any): void {
+  private setAutoSavedMessage(time: any): void {
     this.setSaveText($localize`Auto Saved`, time);
   }
 
-  setSubmittedMessage(time: any): void {
+  private setSubmittedMessage(time: any): void {
     this.setSaveText($localize`Submitted`, time);
   }
 
-  setSaveText(message: string, time: any): void {
+  private setSaveText(message: string, time: any): void {
     this.saveMessage.text = message;
     this.saveMessage.time = time;
   }
 
-  clearSaveText(): void {
+  private clearSaveText(): void {
     this.setSaveText('', null);
   }
 
-  startAutoSaveInterval(): void {
+  private startAutoSaveInterval(): void {
     this.autoSaveIntervalId = setInterval(() => {
       if (this.dirtyComponentIds.length) {
         const isAutoSave = true;
@@ -292,7 +280,7 @@ export class NodeComponent implements OnInit {
     }, this.autoSaveInterval);
   }
 
-  stopAutoSaveInterval(): void {
+  private stopAutoSaveInterval(): void {
     clearInterval(this.autoSaveIntervalId);
   }
 
@@ -306,7 +294,11 @@ export class NodeComponent implements OnInit {
    * @returns a promise that will save all the component states for the step
    * that needs saving
    */
-  createAndSaveComponentData(isAutoSave, componentId = null, isSubmit = null): Promise<any> {
+  private createAndSaveComponentData(
+    isAutoSave,
+    componentId = null,
+    isSubmit = null
+  ): Promise<any> {
     return this.createComponentStates(isAutoSave, componentId, isSubmit).then(
       (componentStatesFromComponents) => {
         if (this.utilService.arrayHasNonNullElement(componentStatesFromComponents)) {
@@ -367,7 +359,7 @@ export class NodeComponent implements OnInit {
     );
   }
 
-  getDataArraysToSaveFromComponentStates(componentStates: any[]): any {
+  private getDataArraysToSaveFromComponentStates(componentStates: any[]): any {
     return {
       componentStates: componentStates,
       componentEvents: [],
@@ -375,7 +367,7 @@ export class NodeComponent implements OnInit {
     };
   }
 
-  getAnnotationsFromComponentStates(componentStates: any[]): any[] {
+  private getAnnotationsFromComponentStates(componentStates: any[]): any[] {
     const componentAnnotations = [];
     for (const componentState of componentStates) {
       const annotations = componentState.annotations;
@@ -394,7 +386,7 @@ export class NodeComponent implements OnInit {
    * @param isSubmit (optional) whether this is a submission or not
    * @returns an array of promises that will return component states
    */
-  createComponentStates(
+  private createComponentStates(
     isAutoSave: boolean = false,
     componentId: string,
     isSubmit: boolean = false
@@ -406,7 +398,7 @@ export class NodeComponent implements OnInit {
     });
   }
 
-  getComponentsToSave(componentId: string): any {
+  private getComponentsToSave(componentId: string): any {
     if (componentId) {
       const components = [];
       const component = this.node.getComponent(componentId);
@@ -419,7 +411,7 @@ export class NodeComponent implements OnInit {
     }
   }
 
-  getComponentStatePromises(
+  private getComponentStatePromises(
     components: any[],
     isAutoSave: boolean = false,
     isSubmit: boolean = false
@@ -438,7 +430,7 @@ export class NodeComponent implements OnInit {
     return componentStatePromises;
   }
 
-  getComponentStatePromiseFromService(
+  private getComponentStatePromiseFromService(
     nodeId: string,
     componentId: string,
     isAutoSave: boolean = false,
@@ -453,7 +445,7 @@ export class NodeComponent implements OnInit {
     return componentStatePromise;
   }
 
-  getComponentStatePromise(
+  private getComponentStatePromise(
     nodeId: string,
     componentId: string,
     isAutoSave: boolean = false,
@@ -479,7 +471,7 @@ export class NodeComponent implements OnInit {
     });
   }
 
-  resolveComponentStatePromise(
+  private resolveComponentStatePromise(
     resolve: any,
     componentStatePromise: Promise<any>,
     isAutoSave: boolean = false,
@@ -495,7 +487,7 @@ export class NodeComponent implements OnInit {
     });
   }
 
-  injectAdditionalComponentStateFields(
+  private injectAdditionalComponentStateFields(
     componentState: any,
     isAutoSave: boolean = false,
     isSubmit: boolean = false
@@ -508,40 +500,11 @@ export class NodeComponent implements OnInit {
   }
 
   /**
-   * Get the latest annotations for a given component
-   * TODO: move to a parent component class in the future?
-   * @param componentId the component's id
-   * @return object containing the component's latest score and comment annotations
-   */
-  getLatestComponentAnnotations(componentId: string): any {
-    let latestScoreAnnotation = null;
-    let latestCommentAnnotation = null;
-    let nodeId = this.nodeId;
-    let workgroupId = this.workgroupId;
-    latestScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
-      nodeId,
-      componentId,
-      workgroupId,
-      'any'
-    );
-    latestCommentAnnotation = this.annotationService.getLatestCommentAnnotation(
-      nodeId,
-      componentId,
-      workgroupId,
-      'any'
-    );
-    return {
-      score: latestScoreAnnotation,
-      comment: latestCommentAnnotation
-    };
-  }
-
-  /**
    * Notify any connected components that the student data has changed
    * @param componentId the component id that has changed
    * @param componentState the new component state
    */
-  notifyConnectedParts(changedComponentId: string, componentState: any): void {
+  private notifyConnectedParts(changedComponentId: string, componentState: any): void {
     for (const component of this.getComponents()) {
       if (component.connectedComponents != null) {
         for (const connectedComponent of component.connectedComponents) {
@@ -567,7 +530,7 @@ export class NodeComponent implements OnInit {
     );
   }
 
-  nodeUnloaded(nodeId: string): void {
+  private nodeUnloaded(nodeId: string): void {
     const isAutoSave = true;
     this.createAndSaveComponentData(isAutoSave);
     const componentId = null;
@@ -587,17 +550,7 @@ export class NodeComponent implements OnInit {
     );
   }
 
-  getSubmitDirty(): boolean {
-    for (const component of this.getComponents()) {
-      const latestState = this.getComponentStateByComponentId(component.id);
-      if (latestState && !latestState.isSubmit) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  registerExitListener(): void {
+  private registerExitListener(): void {
     this.subscriptions.add(
       this.sessionService.exit$.subscribe(() => {
         this.stopAutoSaveInterval();
