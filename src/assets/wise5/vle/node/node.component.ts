@@ -221,7 +221,7 @@ export class NodeComponent implements OnInit {
     });
   }
 
-  helpIconClicked(id: string): void {
+  stopPulsing(id: string): void {
     this.idToIsPulsing[id] = false;
   }
 

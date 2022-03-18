@@ -16,7 +16,7 @@
       <help-icon
           [content]="replaceAssetPaths(rubric)"
           [pulse]="idToIsPulsing[node.id]"
-          (click)="helpIconClicked(node.id)"
+          (click)="stopPulsing(node.id)"
           label="Step Info"
           i18n-label
           icon="info">
@@ -31,7 +31,7 @@
         <help-icon
             [content]="replaceAssetPaths(component.rubric)"
             [pulse]="idToIsPulsing[component.id]"
-            (click)="helpIconClicked(component.id)"
+            (click)="stopPulsing(component.id)"
             label="Teaching Tips"
             i18n-label
             icon="info">
