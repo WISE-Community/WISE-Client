@@ -1,6 +1,15 @@
 <h2 class="mat-dialog-title" i18n>Preview</h2>
+<save-starter-state
+    *ngIf="canSaveStarterState"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [starterState]="starterState"></save-starter-state>
 <mat-dialog-content>
-  <preview-component [nodeId]="nodeId" [componentId]="componentId"></preview-component>
+  <preview-component
+      [nodeId]="nodeId"
+      [componentId]="componentId"
+      (starterStateChangedEvent)="updateStarterState($event)">
+  </preview-component>
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="end">
   <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>

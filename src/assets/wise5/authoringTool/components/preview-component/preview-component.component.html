@@ -12,6 +12,7 @@
   <concept-map-student *ngSwitchCase="'ConceptMap'"
       [nodeId]="nodeId"
       [componentContent]="componentContent"
+      (starterStateChangedEvent)="updateStarterState($event)"
       mode="preview">
   </concept-map-student>
   <dialog-guidance-student *ngSwitchCase="'DialogGuidance'"
@@ -27,6 +28,7 @@
   <draw-student *ngSwitchCase="'Draw'"
       [nodeId]="nodeId"
       [componentContent]="componentContent"
+      (starterStateChangedEvent)="updateStarterState($event)"
       mode="preview">
   </draw-student>
   <embedded-student *ngSwitchCase="'Embedded'"
@@ -47,6 +49,7 @@
   <label-student *ngSwitchCase="'Label'"
       [nodeId]="nodeId"
       [componentContent]="componentContent"
+      (starterStateChangedEvent)="updateStarterState($event)"
       mode="preview">
   </label-student>
   <match-student *ngSwitchCase="'Match'"

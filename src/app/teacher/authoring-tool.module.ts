@@ -22,6 +22,7 @@ import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component';
 import { PreviewComponentDialogComponent } from '../../assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component';
+import { SaveStarterStateComponent } from '../../assets/wise5/authoringTool/components/save-starter-state/save-starter-state.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PreviewComponentDialogComponent } from '../../assets/wise5/authoringToo
     PreviewComponentButtonComponent,
     PreviewComponentDialogComponent,
     RequiredErrorLabelComponent,
-    RubricAuthoringComponent
+    RubricAuthoringComponent,
+    SaveStarterStateComponent
   ],
   imports: [AngularJSModule, ComponentAuthoringModule, ComponentStudentModule, RouterModule]
 })

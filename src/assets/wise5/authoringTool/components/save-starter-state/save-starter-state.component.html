@@ -1,0 +1,17 @@
+<button mat-raised-button
+    color="primary"
+    matTooltip="Save Starter State"
+    matTooltipPosition="above"
+    (click)="confirmSave()"
+    [disabled]="!isDirty"
+    i18n-matToolTip>
+  <mat-icon>save</mat-icon>
+</button>
+<button mat-raised-button
+    color="primary"
+    matTooltip="Delete Starter State"
+    matTooltipPosition="above"
+    (click)="confirmDelete()"
+    i18n-matToolTip>
+  <mat-icon>delete</mat-icon>
+</button>

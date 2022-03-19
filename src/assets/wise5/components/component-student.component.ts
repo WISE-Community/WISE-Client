@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
@@ -32,6 +32,9 @@ export abstract class ComponentStudent {
 
   @Input()
   workgroupId: number;
+
+  @Output()
+  starterStateChangedEvent = new EventEmitter<any>();
 
   attachments: any[] = [];
   componentId: string;
@@ -113,7 +116,6 @@ export abstract class ComponentStudent {
     this.subscribeToNotebookItemChosen();
     this.subscribeToNotifyConnectedComponents();
     this.subscribeToAttachStudentAsset();
-    this.subscribeToStarterStateRequest();
     this.subscribeToStudentWorkSavedToServer();
     this.subscribeToRequestComponentState();
   }
@@ -197,16 +199,6 @@ export abstract class ComponentStudent {
           }
         }
       )
-    );
-  }
-
-  subscribeToStarterStateRequest() {
-    this.subscriptions.add(
-      this.NodeService.starterStateRequest$.subscribe((args: any) => {
-        if (this.isForThisComponent(args)) {
-          this.generateStarterState();
-        }
-      })
     );
   }
 
@@ -578,6 +570,9 @@ export abstract class ComponentStudent {
   createComponentStateAndBroadcast(action: string): void {
     this.createComponentState(action).then((componentState: any) => {
       this.emitComponentStudentDataChanged(componentState);
+      if (this.mode === 'preview') {
+        this.starterStateChangedEvent.emit(this.generateStarterState());
+      }
     });
   }
 

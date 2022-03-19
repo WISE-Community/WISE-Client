@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { Observable, Subject } from 'rxjs';
 import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
@@ -23,17 +22,10 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { MockNodeService } from '../../common/MockNodeService';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { EditDialogGuidanceFeedbackRulesComponent } from '../edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component';
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
-
-class MockNodeService {
-  private starterStateResponseSource: Subject<any> = new Subject<any>();
-  public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
-  createNewComponentState() {
-    return {};
-  }
-}
 
 describe('DialogGuidanceAuthoringComponent', () => {
   let component: DialogGuidanceAuthoringComponent;

@@ -12,7 +12,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
-import { Observable, Subject } from 'rxjs';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -24,15 +23,11 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { MockNodeService } from '../../common/MockNodeService';
 import { SummaryService } from '../summaryService';
 import { SummaryAuthoring } from './summary-authoring.component';
 
 export class MockConfigService {}
-
-export class MockNodeService {
-  private starterStateResponseSource: Subject<any> = new Subject<any>();
-  public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
-}
 
 let component: SummaryAuthoring;
 let fixture: ComponentFixture<SummaryAuthoring>;

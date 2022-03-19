@@ -1579,12 +1579,8 @@ export class ConceptMapStudent extends ComponentStudent {
     this.background = null;
   }
 
-  generateStarterState(): void {
-    this.NodeService.respondStarterState({
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      starterState: this.getConceptMapData()
-    });
+  generateStarterState(): any {
+    return this.getConceptMapData();
   }
 
   attachStudentAsset(studentAsset: any): void {
