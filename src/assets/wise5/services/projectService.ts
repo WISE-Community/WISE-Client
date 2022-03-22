@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionService } from './sessionService';
 import { Observable, Subject } from 'rxjs';
 import { Node } from '../common/Node';
+import { PeerGroupSettings } from '../authoringTool/peer-group/peerGroupSettings';
 
 @Injectable()
 export class ProjectService {
@@ -3215,5 +3216,13 @@ export class ProjectService {
 
   broadcastSnipImage(args: any) {
     this.snipImageSource.next(args);
+  }
+
+  getPeerGroupSettings(): PeerGroupSettings[] {
+    return this.project.peerGroupActivities;
+  }
+
+  getApplicationNodes(): any[] {
+    return this.applicationNodes;
   }
 }

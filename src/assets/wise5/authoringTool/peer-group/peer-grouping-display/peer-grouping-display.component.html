@@ -1,0 +1,15 @@
+<div class="peer-grouping">
+  <peer-grouping-selecting
+      *ngIf="!isAuthoring"
+      [peerGrouping]="peerGrouping"
+      [selectedPeerGroupingTag]="selectedPeerGroupingTag"
+      (selectPeerGroupingEvent)="selectPeerGrouping($event)"
+      (editSettingsEvent)="showAuthoringView()">
+  </peer-grouping-selecting>
+  <peer-grouping-authoring
+      *ngIf="isAuthoring"
+      [peerGrouping]="peerGrouping"
+      (updateEvent)="hideAuthoringView()"
+      (cancelEvent)="hideAuthoringView()">
+  </peer-grouping-authoring>
+</div>

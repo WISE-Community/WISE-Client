@@ -4,89 +4,12 @@
   <mat-label i18n>Grouping Logic</mat-label>
   <button mat-raised-button
       color="primary"
-      (click)="addLogic()"
-      matTooltip="Add Logic"
+      (click)="selectGroupingLogic()"
+      matTooltip="Select Grouping Logic"
       matTooltipPosition="above"
       i18n-matTooltip>
-    <mat-icon>add</mat-icon>
+    Select
   </button>
-</div>
-<div *ngFor="let singleLogic of authoringComponentContent.logic; index as logicIndex"
-    fxLayoutGap="20px">
-  <mat-form-field>
-    <mat-label i18n>Grouping Logic Name</mat-label>
-    <mat-select [(ngModel)]="singleLogic.name"
-        (ngModelChange)="logicNameChanged(singleLogic)">
-      <mat-option *ngFor="let logicOption of logicOptions"
-          [value]="logicOption.value">
-        {{ logicOption.text }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <ng-container *ngIf="singleLogic.name !== 'manual'">
-    <mat-form-field>
-      <mat-label i18n *ngIf="singleLogic.name === 'random'">Step (Optional)</mat-label>
-      <mat-label i18n *ngIf="singleLogic.name !== 'random'" class="red">Step (Required)</mat-label>
-      <mat-select [(ngModel)]="singleLogic.nodeId"
-          (ngModelChange)="logicNodeIdChanged(singleLogic)">
-        <mat-option [value]='' i18n>(None)</mat-option>
-        <ng-container *ngFor="let nodeId of nodeIds">
-          <mat-option *ngIf="isApplicationNode(nodeId)" [value]="nodeId">
-            {{ getNodePositionAndTitleByNodeId(nodeId) }}
-          </mat-option>
-        </ng-container>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label i18n *ngIf="singleLogic.name === 'random'">Component (Optional)</mat-label>
-      <mat-label i18n *ngIf="singleLogic.name !== 'random'" class="red">Component (Required)</mat-label>
-      <mat-select [(ngModel)]="singleLogic.componentId"
-          (ngModelChange)="componentChanged()">
-        <mat-option [value]='' i18n>(None)</mat-option>
-        <mat-option *ngFor="let component of getComponentsByNodeId(singleLogic.nodeId); index as componentIndex"
-            [value]="component.id"
-            [disabled]="!isComponentTypeAllowed(component.type) || component.id === componentId">
-          <span>{{ componentIndex + 1 }}. {{ component.type }} </span>
-          <span *ngIf="component.id === componentId" i18n>(This Component)</span>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    </ng-container>
-  <button mat-raised-button
-      *ngIf="authoringComponentContent.logic.length > 1"
-      color="primary"
-      (click)="deleteLogic(logicIndex)"
-      matTooltip="Delete Logic"
-      matTooltipPosition="above"
-      i18n-matTooltip>
-    <mat-icon>delete</mat-icon>
-  </button>
-</div>
-<div fxLayoutGap="20px">
-  <mat-form-field>
-    <mat-label i18n>Threshold Count</mat-label>
-    <input matInput
-        type="number"
-        [(ngModel)]="authoringComponentContent.logicThresholdCount"
-        (ngModelChange)="componentChanged()"
-        min="0"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label i18n>Threshold Percent</mat-label>
-    <input matInput
-        [(ngModel)]="authoringComponentContent.logicThresholdPercent"
-        (ngModelChange)="componentChanged()"
-        type="number"
-        min="0"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label i18n>Number of Workgroups Per Grouping</mat-label>
-    <input matInput
-        [(ngModel)]="authoringComponentContent.maxMembershipCount"
-        (ngModelChange)="componentChanged()"
-        type="number"
-        min="2"/>
-  </mat-form-field>
 </div>
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="bottom-spacing">
   <label i18n>Question Bank</label>

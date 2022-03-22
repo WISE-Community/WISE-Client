@@ -1,0 +1,44 @@
+<div>
+  <mat-form-field>
+    <mat-label i18n>Grouping Name</mat-label>
+    <input matInput [(ngModel)]="peerGrouping.peerGroupSetting.label" />
+  </mat-form-field>
+</div>
+<div>
+  <span i18n>Steps Used In: </span>
+  <span *ngFor="let stepUsedIn of peerGrouping.stepsUsedIn; last as isLast">
+    {{ stepUsedIn }}<span *ngIf="!isLast">, </span>
+  </span>
+</div>
+<div>
+  <mat-form-field>
+    <mat-label i18n>Logic</mat-label>
+    <mat-select [(ngModel)]="peerGrouping.peerGroupSetting.logic">
+      <mat-option *ngFor="let logic of availableLogic"
+          [value]="logic.value">
+        {{ logic.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field>
+    <mat-label i18n>Threshold</mat-label>
+    <input matInput [(ngModel)]="peerGrouping.peerGroupSetting.threshold" />
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field>
+    <mat-label i18n>Teams Per Group</mat-label>
+    <input matInput
+        [(ngModel)]="peerGrouping.peerGroupSetting.maxMembershipCount"
+        type="number"
+    />
+  </mat-form-field>
+</div>
+<div *ngIf="peerGrouping.isDetailsShown">
+  <div fxLayoutAlign="end center" fxLayoutGap="12px">
+    <button mat-button (click)="cancel()" i18n>Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()" i18n>Update</button>
+  </div>
+</div>

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { SelectPeerGroupingDialogComponent } from '../../../authoringTool/peer-group/select-peer-grouping-dialog/select-peer-grouping-dialog.component';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -47,6 +49,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
 
   constructor(
     protected ConfigService: ConfigService,
+    private dialog: MatDialog,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService,
@@ -88,11 +91,6 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     } else if (components.length === 1) {
       object[componentIdFieldName] = components[0].id;
     }
-  }
-
-  addLogic(): void {
-    this.authoringComponentContent.logic.push({ name: 'random' });
-    this.componentChanged();
   }
 
   deleteLogic(index: number): void {
@@ -143,5 +141,21 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
 
   customTrackBy(index: number): any {
     return index;
+  }
+
+  selectGroupingLogic(): void {
+    const dialogRef = this.dialog.open(SelectPeerGroupingDialogComponent, {
+      data: {
+        peerGroupingTag: this.authoringComponentContent.peerGroupActivityTag
+      },
+      position: { top: '10px' },
+      width: '600px'
+    });
+    dialogRef.afterClosed().subscribe((tag: string) => {
+      if (tag != null) {
+        this.authoringComponentContent.peerGroupActivityTag = tag;
+        this.componentChanged();
+      }
+    });
   }
 }

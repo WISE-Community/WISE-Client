@@ -1,0 +1,19 @@
+<h3 i18n>Select Peer Grouping</h3>
+<div i18n>Choose a Peer Grouping to use for this component:</div>
+<div *ngFor="let peerGrouping of peerGroupings" class="peer-grouping">
+  <peer-grouping-display
+      [peerGrouping]="peerGrouping"
+      [selectedPeerGroupingTag]="selectedPeerGroupingTag"
+      (selectPeerGroupingEvent)="selectPeerGrouping($event)">
+  </peer-grouping-display>
+</div>
+<button mat-raised-button>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon>add</mat-icon>
+    <span i18n>New Grouping</span>
+  </div>
+</button>
+<mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
+</mat-dialog-actions>
