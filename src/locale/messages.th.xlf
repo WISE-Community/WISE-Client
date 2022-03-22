@@ -36,7 +36,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">27</context>
         </context-group>
-        <target state="needs-translation">WISE teacher workshop 2018</target>
+        <target state="translated">การสัมมนาเชิงปฏิบัติการสำหรับครูผู้สอน WISE ปี 2018</target>
       </trans-unit>
       <trans-unit id="70ff1cc8f851490c4cb6237ec6991ef6a644d4e4" datatype="html">
         <source>WISE student and teacher</source>
@@ -44,7 +44,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <target state="needs-translation">WISE student and teacher</target>
+        <target state="translated">นักเรียนและครูผู้สอน WISE</target>
       </trans-unit>
       <trans-unit id="2b4a83d9816a80170d470f0cbe714553f33450ae" datatype="html">
         <source>WISE teacher workshop design</source>
@@ -52,7 +52,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">50</context>
         </context-group>
-        <target state="needs-translation">WISE teacher workshop design</target>
+        <target state="translated">การออกแบบการสัมมนาเชิงปฏิบัติการสำหรับครูผู้สอน WISE</target>
       </trans-unit>
       <trans-unit id="cf46260d6f44d44d379d124ec8df098441107eb5" datatype="html">
         <source>Marcia at WISE workshop</source>
@@ -60,7 +60,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">Marcia at WISE workshop</target>
+        <target state="translated">ศาสตราจารย์ Marcia ในการสัมมนาเชิงปฏิบัติการ WISE</target>
       </trans-unit>
       <trans-unit id="c0025974cf98becba943b54047f136ecdf25e5c1" datatype="html">
         <source>Based on Research, Refined Through Practice</source>
@@ -68,7 +68,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">60</context>
         </context-group>
-        <target state="needs-translation">Based on Research, Refined Through Practice</target>
+        <target state="translated">บนฐานงานวิจัย และนำไปปรับแต่งแนวปฏิบัติงาน</target>
       </trans-unit>
       <trans-unit id="fd1c49d6e3e02db68fe37f6c2d12cf7d1658f200" datatype="html">
         <source>Through our collaborations with teachers, administrators, technology designers, and education researchers, we have refined a set of principles which guide the design of all WISE curriculum materials and tools.</source>
@@ -76,7 +76,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">61</context>
         </context-group>
-        <target state="needs-translation">Through our collaborations with teachers, administrators, technology designers, and education researchers, we have refined a set of principles which guide the design of all WISE curriculum materials and tools.</target>
+        <target state="translated">บนฐานความร่วมมือกันระหว่างครูผู้สอน ผู้บริหาร นักออกแบบเทคโนโลยี และนักวิจัยทางการศึกษาแล้วนั้น พวกเราได้ปรับแต่งชุดหลักการที่ชี้แนะการออกแบบหน่วยการเรียนรู้และสื่อการเรียนรู้ใน WISE</target>
       </trans-unit>
       <trans-unit id="93d7310ae0cdb74d49573a47634d9a7b1c771462" datatype="html">
         <source>This means that when implementing WISE units, you can be assured that what you&apos;re using is grown from a solid foundation, advised by real teachers&apos; experiences, and tested in classrooms with real students.</source>
@@ -84,7 +84,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">63</context>
         </context-group>
-        <target state="needs-translation">This means that when implementing WISE units, you can be assured that what you're using is grown from a solid foundation, advised by real teachers' experiences, and tested in classrooms with real students.</target>
+        <target state="translated">ดังนั้นแล้ว เมื่อท่านนำหน่วยการเรียนรู้ WISE ไปใช้ ท่านสามารถมั่นใจได้ว่าบทเรียนที่ท่านกำลังใช้นี้ถูกพัฒนาขึ้นมาโดยผ่านกระบวนการที่เข้มแข็ง เสนอแนะโดยครูผู้สอนที่มีประสบการณ์ และผ่านการทดสอบในบริบทชั้นเรียนจริงกับนักเรียน</target>
       </trans-unit>
       <trans-unit id="ba47fad2e84864c65ead1cd83f593ddb919c274f" datatype="html">
         <source>Our Research + Team</source>
@@ -92,7 +92,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">Our Research + Team</target>
+        <target state="translated">งานวิจัยและทีมพวกเรา</target>
       </trans-unit>
       <trans-unit id="2430d9c22ccaf6b5daf94c0135b02f753ca6b185" datatype="html">
         <source>Knowledge Integration</source>
@@ -100,7 +100,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">77</context>
         </context-group>
-        <target state="needs-translation">Knowledge Integration</target>
+        <target state="translated">การบูรณาการความรู้(KI)</target>
       </trans-unit>
       <trans-unit id="1a90e48699c691ba54728351e4be72af77b280ce" datatype="html">
         <source>As students grapple with multiple conflicting and confusing ideas, research has shown that instruction is most effective when student views are used as a starting point for scientific investigations.</source>
@@ -108,7 +108,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">78</context>
         </context-group>
-        <target state="needs-translation">As students grapple with multiple conflicting and confusing ideas, research has shown that instruction is most effective when student views are used as a starting point for scientific investigations.</target>
+        <target state="translated">ตามที่นักเรียนต้องเผชิญกับความสับสนและขัดแย้งที่หลากหลายในการเรียนรู้ชุดแนวคิด งานวิจัยระบุชี้ไว้ว่าการจัดการเรียนรู้ที่มีประสิทธิภาพที่สุดคือการที่เริ่มการเรียนรู้โดยการสำรวจตรวจสอบทางวิทยาศาสตร์นั้นควรต้องเริ่มจากตำแหน่งที่เป็นทัศนะของนักเรียนเอง</target>
       </trans-unit>
       <trans-unit id="e40dc97986107e694a5c5860f0fbf5bd0ddadeae" datatype="html">
         <source>The KI Processes:</source>
@@ -116,7 +116,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">84</context>
         </context-group>
-        <target state="needs-translation">The KI Processes:</target>
+        <target state="translated">กระบวนการบูรณาการความรู้(KI)</target>
       </trans-unit>
       <trans-unit id="9df7621dfbe30a790903d461e721c9029627ff34" datatype="html">
         <source>Elicit Ideas</source>
@@ -132,7 +132,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Elicit Ideas</target>
+        <target state="translated">เปิดเผยชุดแนวคิด</target>
       </trans-unit>
       <trans-unit id="fe0d0081b4a9791d74f26b46fc8345ad8a3c78de" datatype="html">
         <source>Discover Ideas</source>
@@ -144,7 +144,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">98</context>
         </context-group>
-        <target state="needs-translation">Discover Ideas</target>
+        <target state="translated">ค้นพบชุดแนวคิด</target>
       </trans-unit>
       <trans-unit id="6f2168a4a47a1e6fa5d58a4334c7b67805dd3fe0" datatype="html">
         <source>Distinguish Ideas</source>
@@ -160,7 +160,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Distinguish Ideas</target>
+        <target state="translated">จำแนกแยะแยะชุดแนวคิด</target>
       </trans-unit>
       <trans-unit id="cd755b466131777a8842f833087a9aa103d26e89" datatype="html">
         <source>Connect Ideas and Reflect</source>
@@ -176,7 +176,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="needs-translation">Connect Ideas and Reflect</target>
+        <target state="translated">เชื่อมโยงชุดแนวคิดและสะท้อนผล</target>
       </trans-unit>
       <trans-unit id="e85808e27272fa3c1d2dfaf998ce12ca205e5fbd" datatype="html">
         <source>~ WISE Goals ~</source>
@@ -184,7 +184,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">122</context>
         </context-group>
-        <target state="needs-translation">~ WISE Goals ~</target>
+        <target state="translated">เป้าหมายปลายทางของ WISE</target>
       </trans-unit>
       <trans-unit id="a8c4f4b7ff2dc03b066549737367901b95c1f556" datatype="html">
         <source>Make Science Meaningful</source>
@@ -192,7 +192,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">136</context>
         </context-group>
-        <target state="needs-translation">Make Science Meaningful</target>
+        <target state="translated">ทำให้วิทยาศาสตร์มีความหมาย</target>
       </trans-unit>
       <trans-unit id="d1d5c7485a7278e9df8a76c3481541ef3d231792" datatype="html">
         <source>WISE units introduce students to complex science concepts through personally and socially relevant topics. Each unit uses a classroom-tested pattern of instruction that values the ideas students bring with them, helps them connect new information to their personal experiences, and integrates their ideas into a coherent understanding of science.</source>
@@ -264,7 +264,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">177</context>
         </context-group>
-        <target state="needs-translation">WISE researcher</target>
+        <target state="translated">นักวิจัย WISE</target>
       </trans-unit>
       <trans-unit id="6cc03c819c2923d3c2dd2a236ee0040ddac13c4b" datatype="html">
         <source>WISE teachers and researcher</source>
@@ -272,7 +272,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">182</context>
         </context-group>
-        <target state="needs-translation">WISE teachers and researcher</target>
+        <target state="translated">ครูผู้สอนและนักวิจัย WISE</target>
       </trans-unit>
       <trans-unit id="9d4d981f8068dbb230ef2048664016f5ff9c255e" datatype="html">
         <source>WISE developers and teacher</source>
@@ -280,7 +280,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">187</context>
         </context-group>
-        <target state="needs-translation">WISE developers and teacher</target>
+        <target state="translated">นักพัฒนาและครูผู้สอน WISE</target>
       </trans-unit>
       <trans-unit id="f4e529ae5ffd73001d1ff4bbdeeb0a72e342e5c8" datatype="html">
         <source>Close</source>
@@ -328,7 +328,7 @@
           <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Close</target>
+        <target state="translated">ปิด</target>
       </trans-unit>
       <trans-unit id="ea4d9fe61420a3fce81cf54c4c615e3c19c646a6" datatype="html">
         <source>Dismiss</source>
@@ -352,7 +352,7 @@
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Back to Top</target>
+        <target state="translated">ย้อนกลับไปสู่ด้านบน</target>
       </trans-unit>
       <trans-unit id="1fa4d608488f8c688cef3cac8f93e5e2e43a39de" datatype="html">
         <source>Choose New Location</source>
@@ -400,7 +400,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">Back</target>
+        <target state="translated">ย้อนหลัง</target>
       </trans-unit>
       <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
         <source>Cancel</source>
@@ -504,7 +504,7 @@
           <context context-type="sourcefile">src/assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">Cancel</target>
+        <target state="translated">ยกเลิก</target>
       </trans-unit>
       <trans-unit id="1bf58cf720f3aa0e4a6f06d2a84183b552f3f3c6" datatype="html">
         <source>Click the new component type you want to add</source>
@@ -532,7 +532,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">41</context>
         </context-group>
-        <target state="needs-translation">Next</target>
+        <target state="translated">ไปต่อ</target>
       </trans-unit>
       <trans-unit id="dbd36abe21bb781c2a88177e89cf74ca0b688d91" datatype="html">
         <source> Default Feedback on Submit </source>
@@ -620,7 +620,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">151</context>
         </context-group>
-        <target state="needs-translation">Move Up</target>
+        <target state="translated">เลื่อนขึ้น</target>
       </trans-unit>
       <trans-unit id="3a12bd96093f8972cbd9d52a68fb9178aaee4388" datatype="html">
         <source>Move Down</source>
@@ -680,7 +680,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">163</context>
         </context-group>
-        <target state="needs-translation">Move Down</target>
+        <target state="translated">เลื่อนลง</target>
       </trans-unit>
       <trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
         <source>Delete</source>
@@ -804,7 +804,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
           <context context-type="linenumber">94</context>
         </context-group>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">ลบออก</target>
       </trans-unit>
       <trans-unit id="2671031157428687170" datatype="html">
         <source>Are you sure you want to delete this default feedback?</source>
@@ -840,7 +840,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">JSON</target>
+        <target state="translated">JSON</target>
       </trans-unit>
       <trans-unit id="077fb7924ecebe2ae768d860909315c29ee61fbe" datatype="html">
         <source>Show JSON</source>
@@ -6166,7 +6166,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
           <context context-type="linenumber">105</context>
         </context-group>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">ลบออก</target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
@@ -6174,7 +6174,7 @@
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
           <context context-type="linenumber">106</context>
         </context-group>
-        <target state="needs-translation">Cancel</target>
+        <target state="translated">ยกเลิก</target>
       </trans-unit>
       <trans-unit id="5416386898703427966" datatype="html">
         <source>Are you sure you want to revive this <x id="PH" equiv-text="this.label.singular"/>?</source>
@@ -11028,7 +11028,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">85</context>
         </context-group>
-        <target state="needs-translation">Elicit Ideas</target>
+        <target state="translated">เปิดเผยชุดแนวคิด</target>
       </trans-unit>
       <trans-unit id="5060022891098618470" datatype="html">
         <source>Knowledge Integration discover ideas</source>
@@ -11044,7 +11044,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">90</context>
         </context-group>
-        <target state="needs-translation">Discover Ideas</target>
+        <target state="translated">ค้นพบชุดแนวคิด</target>
       </trans-unit>
       <trans-unit id="6027324852341840147" datatype="html">
         <source>Knowledge Integration distinguish ideas</source>
@@ -11060,7 +11060,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">95</context>
         </context-group>
-        <target state="needs-translation">Distinguish Ideas</target>
+        <target state="translated">จำแนกแยะแยะชุดแนวคิด</target>
       </trans-unit>
       <trans-unit id="5284841868972566661" datatype="html">
         <source>Knowledge Integration connect ideas and reflect</source>
