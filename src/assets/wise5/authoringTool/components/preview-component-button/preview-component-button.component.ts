@@ -18,7 +18,7 @@ export class PreviewComponentButtonComponent implements OnInit {
 
   popUpComponentPreview(): void {
     const dialogRef = this.dialog.open(PreviewComponentDialogComponent, {
-      panelClass: 'dialog-md'
+      panelClass: 'dialog-lg'
     });
     dialogRef.componentInstance.nodeId = this.nodeId;
     dialogRef.componentInstance.componentId = this.componentId;

@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 
 @Component({
-  templateUrl: 'preview-component-dialog.component.html'
+  templateUrl: 'preview-component-dialog.component.html',
+  styleUrls: ['preview-component-dialog.component.scss']
 })
 export class PreviewComponentDialogComponent implements OnInit {
   @Input()

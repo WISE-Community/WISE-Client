@@ -138,11 +138,11 @@
    <em>{{ ::'stepHasNoComponents' | translate }}</em>
 </div>
 <div ng-repeat='(componentIndex, component) in $ctrl.components'
-    class='component md-padding'
+    class='component'
     style='padding: 0; margin: 0 16px;'
     ng-if='$ctrl.showComponents'>
   <div id='{{component.id}}' layout='row'>
-    <div style='margin-top: 15px; width: 300px;'>
+    <div style='margin-top: 15px;'>
       <md-checkbox ng-model='$ctrl.componentsToChecked[component.id]'
           ng-disabled='$ctrl.insertComponentMode'
           class='md-primary'>
@@ -151,12 +151,12 @@
     </div>
     <div ng-if='!$ctrl.insertComponentMode && $ctrl.showComponentAuthoringViews'>
       <md-input-container style='margin-top: 0; margin-right: 20px; width: 150px; height: 40px;'>
-        <preview-component-button node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}' />
         <md-button class='topButton md-raised md-primary'
             ng-click='$ctrl.showComponentAdvancedAuthoring(component)'>
           <md-icon>build</md-icon>
           <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'ADVANCED' | translate }}</md-tooltip>
         </md-button>
+         <preview-component-button node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}' />
       </md-input-container>
     </div>
   </div>
@@ -187,8 +187,10 @@
       <summary-authoring ng-switch-when="Summary" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></summary-authoring>
       <table-authoring ng-switch-when="Table" node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}'></table-authoring>
     </ng-content>
-    <preview-component-button node-id='{{$ctrl.nodeId}}' component-id='{{component.id}}' />
-    <br/><br/>
+    <preview-component-button style="display: block; margin-top: 16px;"
+        node-id="{{$ctrl.nodeId}}"
+        component-id="{{component.id}}"/>
+    <br/>
     <md-divider ng-if='!$last'></md-divider>
   </div>
 </div>
