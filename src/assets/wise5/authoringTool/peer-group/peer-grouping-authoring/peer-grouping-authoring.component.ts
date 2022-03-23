@@ -21,7 +21,7 @@ export class PeerGroupingAuthoringComponent implements OnInit {
   @Output()
   updateEvent: EventEmitter<any> = new EventEmitter();
 
-  constructor(private peerGroupAuthoringService: PeerGroupAuthoringService) {}
+  constructor(protected peerGroupAuthoringService: PeerGroupAuthoringService) {}
 
   ngOnInit(): void {}
 

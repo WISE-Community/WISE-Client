@@ -6,10 +6,10 @@
       (selectPeerGroupingEvent)="selectPeerGrouping($event)"
       (editSettingsEvent)="showAuthoringView()">
   </peer-grouping-selecting>
-  <peer-grouping-authoring
+  <edit-peer-grouping
       *ngIf="isAuthoring"
       [peerGrouping]="peerGrouping"
       (updateEvent)="hideAuthoringView()"
       (cancelEvent)="hideAuthoringView()">
-  </peer-grouping-authoring>
+  </edit-peer-grouping>
 </div>

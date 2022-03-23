@@ -11,13 +11,9 @@ import { NodeAdvancedGeneralAuthoringComponent } from '../../assets/wise5/author
 import { NodeAdvancedJsonAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/json/node-advanced-json-authoring.component';
 import { NodeAdvancedPathAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component';
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
-import { PeerGroupingAuthoringComponent } from '../../assets/wise5/authoringTool/peer-group/peer-grouping-authoring/peer-grouping-authoring.component';
-import { PeerGroupingDisplayComponent } from '../../assets/wise5/authoringTool/peer-group/peer-grouping-display/peer-grouping-display.component';
-import { PeerGroupingSelectingComponent } from '../../assets/wise5/authoringTool/peer-group/peer-grouping-selecting/peer-grouping-selecting.component';
-import { SelectPeerGroupingDialogComponent } from '../../assets/wise5/authoringTool/peer-group/select-peer-grouping-dialog/select-peer-grouping-dialog.component';
+import { PeerGroupAuthoringModule } from '../../assets/wise5/authoringTool/peer-group/peer-grouping-authoring.module';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { NodeIconChooserDialog } from '../../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
-import { PeerGroupAuthoringService } from '../../assets/wise5/services/peerGroupAuthoringService';
 import { ChooseNewComponentLocation } from '../authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component';
 import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { ChooseImportStepLocationComponent } from '../authoring-tool/import-step/choose-import-step-location/choose-import-step-location.component';
@@ -42,14 +38,10 @@ import { ComponentAuthoringModule } from './component-authoring.module';
     NodeAdvancedJsonAuthoringComponent,
     NodeAdvancedPathAuthoringComponent,
     NodeIconChooserDialog,
-    PeerGroupingAuthoringComponent,
-    PeerGroupingDisplayComponent,
-    PeerGroupingSelectingComponent,
     RequiredErrorLabelComponent,
-    RubricAuthoringComponent,
-    SelectPeerGroupingDialogComponent
+    RubricAuthoringComponent
   ],
   imports: [AngularJSModule, ComponentAuthoringModule, RouterModule],
-  providers: [PeerGroupAuthoringService]
+  providers: []
 })
 export class AuthoringToolModule {}

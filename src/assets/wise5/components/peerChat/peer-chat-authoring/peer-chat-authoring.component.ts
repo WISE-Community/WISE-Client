@@ -148,8 +148,8 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
       data: {
         peerGroupingTag: this.authoringComponentContent.peerGroupActivityTag
       },
-      position: { top: '10px' },
-      width: '600px'
+      height: '80%',
+      width: '50%'
     });
     dialogRef.afterClosed().subscribe((tag: string) => {
       if (tag != null) {

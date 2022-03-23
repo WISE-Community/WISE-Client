@@ -72,6 +72,7 @@ import { EditShowGroupWorkAdvancedComponent } from '../../assets/wise5/component
 import { EditComponentPeerGroupActivityTagComponent } from '../authoring-tool/edit-component-peer-group-activity-tag/edit-component-peer-group-activity-tag.component';
 import { EditDialogGuidanceAdvancedComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component';
 import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
+import { PeerGroupAuthoringModule } from '../../assets/wise5/authoringTool/peer-group/peer-grouping-authoring.module';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,7 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     TableAuthoring,
     WiseAuthoringTinymceEditorComponent
   ],
-  imports: [AngularJSModule],
+  imports: [AngularJSModule, PeerGroupAuthoringModule],
   exports: [
     AnimationAuthoring,
     AudioOscillatorAuthoring,
