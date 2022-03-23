@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PeerGroupAuthoringService } from '../../services/peerGroupAuthoringService';
-import { PeerGroupingAuthoringComponent } from './peer-grouping-authoring/peer-grouping-authoring.component';
-import { PeerGroupingDisplayComponent } from './peer-grouping-display/peer-grouping-display.component';
-import { PeerGroupingSelectingComponent } from './peer-grouping-selecting/peer-grouping-selecting.component';
+import { AuthorPeerGroupingComponent } from './author-peer-grouping/author-peer-grouping.component';
+import { DisplayPeerGroupingComponent } from './display-peer-grouping/display-peer-grouping.component';
+import { SelectPeerGroupingComponent } from './select-peer-grouping/select-peer-grouping.component';
 import { SelectPeerGroupingDialogComponent } from './select-peer-grouping-dialog/select-peer-grouping-dialog.component';
 import { AngularJSModule } from '../../../../app/common-hybrid-angular.module';
 import { NewPeerGroupingComponent } from './new-peer-grouping/new-peer-grouping.component';
@@ -13,9 +13,9 @@ import { EditPeerGroupingComponent } from './edit-peer-grouping/edit-peer-groupi
   declarations: [
     EditPeerGroupingComponent,
     NewPeerGroupingComponent,
-    PeerGroupingAuthoringComponent,
-    PeerGroupingDisplayComponent,
-    PeerGroupingSelectingComponent,
+    AuthorPeerGroupingComponent,
+    DisplayPeerGroupingComponent,
+    SelectPeerGroupingComponent,
     SelectPeerGroupingDialogComponent
   ],
   providers: [PeerGroupAuthoringService]

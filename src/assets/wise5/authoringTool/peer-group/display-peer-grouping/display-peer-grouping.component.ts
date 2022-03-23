@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'peer-grouping-display',
-  templateUrl: './peer-grouping-display.component.html',
-  styleUrls: ['./peer-grouping-display.component.scss']
+  selector: 'display-peer-grouping',
+  templateUrl: './display-peer-grouping.component.html',
+  styleUrls: ['./display-peer-grouping.component.scss']
 })
-export class PeerGroupingDisplayComponent implements OnInit {
+export class DisplayPeerGroupingComponent implements OnInit {
   isAuthoring: boolean = false;
 
   @Input()

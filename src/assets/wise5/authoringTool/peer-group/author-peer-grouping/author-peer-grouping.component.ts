@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PeerGroupAuthoringService } from '../../../services/peerGroupAuthoringService';
 
 @Component({
-  selector: 'peer-grouping-authoring',
-  templateUrl: './peer-grouping-authoring.component.html',
-  styleUrls: ['./peer-grouping-authoring.component.scss']
+  selector: 'author-peer-grouping',
+  templateUrl: './author-peer-grouping.component.html',
+  styleUrls: ['./author-peer-grouping.component.scss']
 })
-export class PeerGroupingAuthoringComponent implements OnInit {
+export class AuthorPeerGroupingComponent implements OnInit {
   availableLogic: any[] = [
     { name: 'Random', value: 'random' },
     { name: 'Manual', value: 'manual' }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { PeerGroupAuthoringService } from '../../../services/peerGroupAuthoringService';
-import { PeerGroupingAuthoringComponent } from '../peer-grouping-authoring/peer-grouping-authoring.component';
+import { AuthorPeerGroupingComponent } from '../author-peer-grouping/author-peer-grouping.component';
 import { PeerGroupSettings } from '../peerGroupSettings';
 
 @Component({
@@ -8,7 +8,7 @@ import { PeerGroupSettings } from '../peerGroupSettings';
   templateUrl: './new-peer-grouping.component.html',
   styleUrls: ['./new-peer-grouping.component.scss']
 })
-export class NewPeerGroupingComponent extends PeerGroupingAuthoringComponent {
+export class NewPeerGroupingComponent extends AuthorPeerGroupingComponent {
   @Output()
   createPeerGroupingEvent: EventEmitter<any> = new EventEmitter<any>();
 

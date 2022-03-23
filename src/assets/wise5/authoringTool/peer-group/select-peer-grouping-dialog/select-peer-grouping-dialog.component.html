@@ -1,11 +1,11 @@
 <h3 i18n>Select Peer Grouping</h3>
 <div i18n>Choose a Peer Grouping to use for this component:</div>
 <div *ngFor="let peerGrouping of peerGroupings" class="peer-grouping">
-  <peer-grouping-display
+  <display-peer-grouping
       [peerGrouping]="peerGrouping"
       [selectedPeerGroupingTag]="selectedPeerGroupingTag"
       (selectPeerGroupingEvent)="selectPeerGrouping($event)">
-  </peer-grouping-display>
+  </display-peer-grouping>
 </div>
 <button mat-raised-button
     *ngIf="!isShowNewGroupingAuthoring"

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'peer-grouping-selecting',
-  templateUrl: './peer-grouping-selecting.component.html',
-  styleUrls: ['./peer-grouping-selecting.component.scss']
+  selector: 'select-peer-grouping',
+  templateUrl: './select-peer-grouping.component.html',
+  styleUrls: ['./select-peer-grouping.component.scss']
 })
-export class PeerGroupingSelectingComponent implements OnInit {
+export class SelectPeerGroupingComponent implements OnInit {
   @Input()
   peerGrouping: any;
 
