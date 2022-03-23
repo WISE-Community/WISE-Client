@@ -41,7 +41,8 @@
           [nodeId]="node.id"
           [componentId]="component.id"
           [componentState]="getComponentStateByComponentId(component.id)"
-          [workgroupId]="workgroupId">
+          [workgroupId]="workgroupId"
+          (saveComponentStateEvent)="saveComponentState($event)">
       </component>
     </div>
     <div class="node-content__actions"

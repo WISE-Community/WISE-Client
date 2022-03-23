@@ -300,63 +300,66 @@ export class NodeComponent implements OnInit {
     isSubmit = null
   ): Promise<any> {
     return this.createComponentStates(isAutoSave, componentId, isSubmit).then(
-      (componentStatesFromComponents) => {
-        if (this.utilService.arrayHasNonNullElement(componentStatesFromComponents)) {
-          const {
-            componentStates,
-            componentEvents,
-            componentAnnotations
-          } = this.getDataArraysToSaveFromComponentStates(componentStatesFromComponents);
-          componentStates.forEach((componentState: any) => {
-            this.notifyConnectedParts(componentId, componentState);
-          });
-          return this.studentDataService
-            .saveToServer(componentStates, componentEvents, componentAnnotations)
-            .then((savedStudentDataResponse) => {
-              if (savedStudentDataResponse) {
-                if (this.nodeService.currentNodeHasTransitionLogic()) {
-                  if (this.nodeService.evaluateTransitionLogicOn('studentDataChanged')) {
-                    this.nodeService.evaluateTransitionLogic();
-                  }
-                  if (this.nodeService.evaluateTransitionLogicOn('scoreChanged')) {
-                    if (componentAnnotations != null && componentAnnotations.length > 0) {
-                      let evaluateTransitionLogic = false;
-                      for (const componentAnnotation of componentAnnotations) {
-                        if (componentAnnotation != null) {
-                          if (componentAnnotation.type === 'autoScore') {
-                            evaluateTransitionLogic = true;
-                          }
+      this.createComponentStatesResponseHandler(isAutoSave, componentId, isSubmit)
+    );
+  }
+
+  private createComponentStatesResponseHandler(isAutoSave, componentId = null, isSubmit = null) {
+    return (componentStatesFromComponents) => {
+      if (this.utilService.arrayHasNonNullElement(componentStatesFromComponents)) {
+        const {
+          componentStates,
+          componentEvents,
+          componentAnnotations
+        } = this.getDataArraysToSaveFromComponentStates(componentStatesFromComponents);
+        componentStates.forEach((componentState: any) => {
+          this.injectAdditionalComponentStateFields(componentState, isAutoSave, isSubmit);
+          this.notifyConnectedParts(componentId, componentState);
+        });
+        return this.studentDataService
+          .saveToServer(componentStates, componentEvents, componentAnnotations)
+          .then((savedStudentDataResponse) => {
+            if (savedStudentDataResponse) {
+              if (this.nodeService.currentNodeHasTransitionLogic()) {
+                if (this.nodeService.evaluateTransitionLogicOn('studentDataChanged')) {
+                  this.nodeService.evaluateTransitionLogic();
+                }
+                if (this.nodeService.evaluateTransitionLogicOn('scoreChanged')) {
+                  if (componentAnnotations != null && componentAnnotations.length > 0) {
+                    let evaluateTransitionLogic = false;
+                    for (const componentAnnotation of componentAnnotations) {
+                      if (componentAnnotation != null) {
+                        if (componentAnnotation.type === 'autoScore') {
+                          evaluateTransitionLogic = true;
                         }
                       }
-                      if (evaluateTransitionLogic) {
-                        this.nodeService.evaluateTransitionLogic();
-                      }
+                    }
+                    if (evaluateTransitionLogic) {
+                      this.nodeService.evaluateTransitionLogic();
                     }
                   }
                 }
-                const studentWorkList = savedStudentDataResponse.studentWorkList;
-                if (!componentId && studentWorkList && studentWorkList.length) {
-                  const latestStudentWork = studentWorkList[studentWorkList.length - 1];
-                  const serverSaveTime = latestStudentWork.serverSaveTime;
-                  const clientSaveTime = this.configService.convertToClientTimestamp(
-                    serverSaveTime
-                  );
-                  if (isAutoSave) {
-                    this.setAutoSavedMessage(clientSaveTime);
-                  } else if (isSubmit) {
-                    this.setSubmittedMessage(clientSaveTime);
-                  } else {
-                    this.setSavedMessage(clientSaveTime);
-                  }
-                } else {
-                  this.clearSaveText();
-                }
               }
-              return savedStudentDataResponse;
-            });
-        }
+              const studentWorkList = savedStudentDataResponse.studentWorkList;
+              if (!componentId && studentWorkList && studentWorkList.length) {
+                const latestStudentWork = studentWorkList[studentWorkList.length - 1];
+                const serverSaveTime = latestStudentWork.serverSaveTime;
+                const clientSaveTime = this.configService.convertToClientTimestamp(serverSaveTime);
+                if (isAutoSave) {
+                  this.setAutoSavedMessage(clientSaveTime);
+                } else if (isSubmit) {
+                  this.setSubmittedMessage(clientSaveTime);
+                } else {
+                  this.setSavedMessage(clientSaveTime);
+                }
+              } else {
+                this.clearSaveText();
+              }
+            }
+            return savedStudentDataResponse;
+          });
       }
-    );
+    };
   }
 
   private getDataArraysToSaveFromComponentStates(componentStates: any[]): any {
@@ -531,8 +534,6 @@ export class NodeComponent implements OnInit {
   }
 
   private nodeUnloaded(nodeId: string): void {
-    const isAutoSave = true;
-    this.createAndSaveComponentData(isAutoSave);
     const componentId = null;
     const componentType = null;
     const category = 'Navigation';
@@ -561,5 +562,11 @@ export class NodeComponent implements OnInit {
 
   replaceAssetPaths(content: string): string {
     return this.projectService.replaceAssetPaths(content);
+  }
+
+  saveComponentState($event: any): Promise<any> {
+    return Promise.all([$event.componentStatePromise]).then(
+      this.createComponentStatesResponseHandler(true)
+    );
   }
 }

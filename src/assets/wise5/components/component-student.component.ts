@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
@@ -32,6 +32,9 @@ export abstract class ComponentStudent {
 
   @Input()
   workgroupId: number;
+
+  @Output()
+  saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
 
   attachments: any[] = [];
   componentId: string;
@@ -100,6 +103,14 @@ export abstract class ComponentStudent {
   }
 
   ngOnDestroy(): void {
+    if (this.isDirty) {
+      const request = {
+        componentId: this.componentId,
+        isSubmit: false,
+        nodeId: this.nodeId
+      };
+      this.saveComponentStateEvent.emit(this.getComponentStateWrapper(request));
+    }
     this.subscriptions.unsubscribe();
   }
 
