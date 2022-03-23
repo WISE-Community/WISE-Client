@@ -1,7 +1,7 @@
 export class PeerGroupSettings {
-  label: string;
   logic: string;
   maxMembershipCount: number;
-  threshold: any[];
+  name: string;
   tag: string;
+  threshold: any[];
 }

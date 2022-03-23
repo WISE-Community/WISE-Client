@@ -3,7 +3,7 @@
       [checked]="peerGrouping.peerGroupSetting.tag === selectedPeerGroupingTag"
       (click)="select()"
       color="primary">
-    {{ peerGrouping.peerGroupSetting.label }}
+    {{ peerGrouping.peerGroupSetting.name }}
   </mat-radio-button>
   <button mat-stroked-button
       (click)="peerGrouping.isDetailsShown = !peerGrouping.isDetailsShown"
