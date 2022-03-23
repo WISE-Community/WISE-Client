@@ -25,7 +25,10 @@ export class NewPeerGroupingComponent extends PeerGroupingAuthoringComponent {
 
   create(): void {
     this.peerGroupSettings.tag = this.peerGroupAuthoringService.getUniqueTag();
-    this.peerGroupAuthoringService.createNewPeerGroupSettings(this.peerGroupSettings);
-    this.createPeerGroupingEvent.emit(this.peerGroupSettings);
+    this.peerGroupAuthoringService
+      .createNewPeerGroupSettings(this.peerGroupSettings)
+      .subscribe(() => {
+        this.createPeerGroupingEvent.emit(this.peerGroupSettings);
+      });
   }
 }

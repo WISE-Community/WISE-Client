@@ -26,8 +26,11 @@ export class PeerGroupingAuthoringComponent implements OnInit {
   ngOnInit(): void {}
 
   save(): void {
-    this.peerGroupAuthoringService.updatePeerGroupSettings(this.peerGrouping.peerGroupSetting);
-    this.updateEvent.emit();
+    this.peerGroupAuthoringService
+      .updatePeerGroupSettings(this.peerGrouping.peerGroupSetting)
+      .subscribe(() => {
+        this.updateEvent.emit();
+      });
   }
 
   cancel(): void {
