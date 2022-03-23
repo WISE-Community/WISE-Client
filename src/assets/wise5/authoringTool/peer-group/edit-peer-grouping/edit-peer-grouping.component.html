@@ -35,9 +35,7 @@
         type="number"/>
   </mat-form-field>
 </div>
-<div *ngIf="peerGrouping.isDetailsShown">
-  <div fxLayoutAlign="end center" fxLayoutGap="12px">
-    <button mat-button (click)="cancel()" i18n>Cancel</button>
-    <button mat-raised-button color="primary" (click)="save()" i18n>Update</button>
-  </div>
+<div fxLayoutAlign="end center" fxLayoutGap="12px">
+  <button mat-button (click)="cancel()" i18n>Cancel</button>
+  <button mat-raised-button color="primary" (click)="save()" i18n>Update</button>
 </div>
