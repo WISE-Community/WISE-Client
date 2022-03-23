@@ -20,9 +20,7 @@ import { ChooseImportStepComponent } from '../authoring-tool/import-step/choose-
 import { AngularJSModule } from '../common-hybrid-angular.module';
 import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
-import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component';
-import { PreviewComponentDialogComponent } from '../../assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component';
-import { SaveStarterStateComponent } from '../../assets/wise5/authoringTool/components/save-starter-state/save-starter-state.component';
+import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
 
 @NgModule({
   declarations: [
@@ -41,12 +39,15 @@ import { SaveStarterStateComponent } from '../../assets/wise5/authoringTool/comp
     NodeAdvancedJsonAuthoringComponent,
     NodeAdvancedPathAuthoringComponent,
     NodeIconChooserDialog,
-    PreviewComponentButtonComponent,
-    PreviewComponentDialogComponent,
     RequiredErrorLabelComponent,
-    RubricAuthoringComponent,
-    SaveStarterStateComponent
+    RubricAuthoringComponent
   ],
-  imports: [AngularJSModule, ComponentAuthoringModule, ComponentStudentModule, RouterModule]
+  imports: [
+    AngularJSModule,
+    ComponentAuthoringModule,
+    ComponentStudentModule,
+    PreviewComponentModule,
+    RouterModule
+  ]
 })
 export class AuthoringToolModule {}
