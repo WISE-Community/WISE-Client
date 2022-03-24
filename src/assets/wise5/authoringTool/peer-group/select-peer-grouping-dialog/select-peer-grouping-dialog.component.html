@@ -1,6 +1,9 @@
 <h3 i18n>Select Peer Grouping</h3>
-<div i18n>Choose a Peer Grouping to use for this component:</div>
-<div *ngFor="let peerGrouping of peerGroupings" class="peer-grouping">
+<div i18n class="margin">Choose a Peer Grouping to use for this component:</div>
+<div *ngIf="peerGroupings.length === 0" class="margin" i18n>
+  (There are no Peer Groupings. Please create a new one.)
+</div>
+<div *ngFor="let peerGrouping of peerGroupings" class="margin">
   <display-peer-grouping
       [peerGrouping]="peerGrouping"
       [selectedPeerGroupingTag]="selectedPeerGroupingTag"
@@ -10,6 +13,7 @@
 </div>
 <button mat-raised-button
     *ngIf="!isShowNewGroupingAuthoring"
+    class="margin"
     (click)="showNewGroupingAuthoring()">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
     <mat-icon>add</mat-icon>
