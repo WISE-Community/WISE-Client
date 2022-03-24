@@ -26,7 +26,7 @@ export class SelectPeerGroupingComponent implements OnInit {
   ngOnInit(): void {}
 
   select(): void {
-    this.selectPeerGroupingEvent.emit(this.peerGrouping.peerGroupSetting.tag);
+    this.selectPeerGroupingEvent.emit(this.peerGrouping.peerGroupSettings.tag);
   }
 
   edit(): void {
@@ -35,7 +35,7 @@ export class SelectPeerGroupingComponent implements OnInit {
 
   delete(): void {
     if (confirm($localize`Are you sure you want to delete this Peer Grouping?`)) {
-      this.deletePeerGroupingEvent.emit(this.peerGrouping.peerGroupSetting.tag);
+      this.deletePeerGroupingEvent.emit(this.peerGrouping.peerGroupSettings.tag);
     }
   }
 }

@@ -22,18 +22,18 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.peerGroupAuthoringService.getPeerGroupSettings().forEach((peerGroupSetting) => {
+    this.peerGroupAuthoringService.getPeerGroupSettings().forEach((peerGroupSettings) => {
       this.peerGroupings.push({
-        peerGroupSetting: peerGroupSetting,
-        stepsUsedIn: this.peerGroupAuthoringService.getStepsUsedIn(peerGroupSetting.tag)
+        peerGroupSettings: peerGroupSettings,
+        stepsUsedIn: this.peerGroupAuthoringService.getStepsUsedIn(peerGroupSettings.tag)
       });
     });
   }
 
-  addPeerGroupSettings(peerGroupSettings: PeerGroupSettings): void {
+  addPeerGroupSettings(peerGroupSettingsToAdd: PeerGroupSettings): void {
     this.peerGroupings.push({
-      peerGroupSetting: peerGroupSettings,
-      stepsUsedIn: this.peerGroupAuthoringService.getStepsUsedIn(peerGroupSettings.tag)
+      peerGroupSettings: peerGroupSettingsToAdd,
+      stepsUsedIn: this.peerGroupAuthoringService.getStepsUsedIn(peerGroupSettingsToAdd.tag)
     });
   }
 
@@ -65,7 +65,7 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
   deletePeerGrouping(tag: string): void {
     for (let p = 0; p < this.peerGroupings.length; p++) {
       const peerGrouping = this.peerGroupings[p];
-      if (peerGrouping.peerGroupSetting.tag === tag) {
+      if (peerGrouping.peerGroupSettings.tag === tag) {
         this.peerGroupings.splice(p, 1);
         break;
       }

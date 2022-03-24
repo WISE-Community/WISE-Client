@@ -21,12 +21,12 @@ export class EditPeerGroupingComponent extends AuthorPeerGroupingComponent {
 
   ngOnInit(): void {
     this.peerGroupSettings = this.utilService.makeCopyOfJSONObject(
-      this.peerGrouping.peerGroupSetting
+      this.peerGrouping.peerGroupSettings
     );
   }
 
   save(): void {
-    this.peerGrouping.peerGroupSetting = this.peerGroupSettings;
+    this.peerGrouping.peerGroupSettings = this.peerGroupSettings;
     this.peerGroupAuthoringService.updatePeerGroupSettings(this.peerGroupSettings).subscribe(() => {
       this.updateEvent.emit();
     });
