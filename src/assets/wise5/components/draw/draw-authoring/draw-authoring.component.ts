@@ -96,22 +96,14 @@ export class DrawAuthoring extends ComponentAuthoring {
     this.componentChanged();
   }
 
-  saveStarterDrawData(): void {
-    if (confirm($localize`Are you sure you want to save the starter drawing?`)) {
-      this.NodeService.requestStarterState({ nodeId: this.nodeId, componentId: this.componentId });
-    }
-  }
-
   saveStarterState(starterState: any): void {
     this.authoringComponentContent.starterDrawData = starterState;
     this.componentChanged();
   }
 
-  deleteStarterDrawData(): void {
-    if (confirm($localize`Are you sure you want to delete the starter drawing?`)) {
-      this.authoringComponentContent.starterDrawData = null;
-      this.componentChanged();
-    }
+  deleteStarterState(): void {
+    this.authoringComponentContent.starterDrawData = null;
+    this.componentChanged();
   }
 
   canvasWidthChanged(): void {

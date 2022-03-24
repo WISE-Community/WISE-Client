@@ -131,22 +131,14 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
     return this.ConceptMapService.getNextAvailableId(this.authoringComponentContent.links, 'link');
   }
 
-  saveStarterConceptMap(): void {
-    if (confirm($localize`Are you sure you want to save the starter concept map?`)) {
-      this.NodeService.requestStarterState({ nodeId: this.nodeId, componentId: this.componentId });
-    }
-  }
-
   saveStarterState(starterState: any): void {
     this.authoringComponentContent.starterConceptMap = starterState;
     this.componentChanged();
   }
 
-  deleteStarterConceptMap(): void {
-    if (confirm($localize`Are you sure you want to delete the starter concept map?`)) {
-      this.authoringComponentContent.starterConceptMap = null;
-      this.componentChanged();
-    }
+  deleteStarterState(): void {
+    this.authoringComponentContent.starterConceptMap = null;
+    this.componentChanged();
   }
 
   assetSelected(args: any): void {
