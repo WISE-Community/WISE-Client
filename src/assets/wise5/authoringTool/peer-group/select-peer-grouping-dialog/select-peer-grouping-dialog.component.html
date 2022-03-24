@@ -4,7 +4,8 @@
   <display-peer-grouping
       [peerGrouping]="peerGrouping"
       [selectedPeerGroupingTag]="selectedPeerGroupingTag"
-      (selectPeerGroupingEvent)="selectPeerGrouping($event)">
+      (selectPeerGroupingEvent)="selectPeerGrouping($event)"
+      (deletePeerGroupingEvent)="deletePeerGrouping($event)">
   </display-peer-grouping>
 </div>
 <button mat-raised-button

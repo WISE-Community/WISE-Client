@@ -4,7 +4,8 @@
       [peerGrouping]="peerGrouping"
       [selectedPeerGroupingTag]="selectedPeerGroupingTag"
       (selectPeerGroupingEvent)="selectPeerGrouping($event)"
-      (editSettingsEvent)="showAuthoringView()">
+      (editSettingsEvent)="showAuthoringView()"
+      (deletePeerGroupingEvent)="deletePeerGrouping($event)">
   </select-peer-grouping>
   <edit-peer-grouping
       *ngIf="isAuthoring"

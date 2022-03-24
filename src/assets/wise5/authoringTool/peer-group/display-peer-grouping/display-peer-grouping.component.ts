@@ -15,13 +15,16 @@ export class DisplayPeerGroupingComponent implements OnInit {
   selectedPeerGroupingTag: string;
 
   @Output()
+  deletePeerGroupingEvent: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
   selectPeerGroupingEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  selectPeerGrouping($event): void {
+  selectPeerGrouping($event: any): void {
     this.selectPeerGroupingEvent.emit($event);
   }
 
@@ -31,5 +34,9 @@ export class DisplayPeerGroupingComponent implements OnInit {
 
   hideAuthoringView(): void {
     this.isAuthoring = false;
+  }
+
+  deletePeerGrouping($event: any): void {
+    this.deletePeerGroupingEvent.emit($event);
   }
 }

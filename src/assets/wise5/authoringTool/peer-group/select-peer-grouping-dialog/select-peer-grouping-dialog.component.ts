@@ -61,4 +61,15 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
     this.hideNewGroupingAuthoring();
     this.addPeerGroupSettings(peerGroupSettings);
   }
+
+  deletePeerGrouping(tag: string): void {
+    for (let p = 0; p < this.peerGroupings.length; p++) {
+      const peerGrouping = this.peerGroupings[p];
+      if (peerGrouping.peerGroupSetting.tag === tag) {
+        this.peerGroupings.splice(p, 1);
+        break;
+      }
+    }
+    this.peerGroupAuthoringService.deletePeerGroupSettings(tag);
+  }
 }

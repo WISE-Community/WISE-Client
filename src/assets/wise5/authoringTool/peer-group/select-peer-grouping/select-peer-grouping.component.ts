@@ -13,6 +13,9 @@ export class SelectPeerGroupingComponent implements OnInit {
   selectedPeerGroupingTag: string;
 
   @Output()
+  deletePeerGroupingEvent: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
   editSettingsEvent: EventEmitter<any> = new EventEmitter<any>();
 
   @Output()
@@ -28,5 +31,11 @@ export class SelectPeerGroupingComponent implements OnInit {
 
   edit(): void {
     this.editSettingsEvent.emit();
+  }
+
+  delete(): void {
+    if (confirm($localize`Are you sure you want to delete this Peer Grouping?`)) {
+      this.deletePeerGroupingEvent.emit(this.peerGrouping.peerGroupSetting.tag);
+    }
   }
 }

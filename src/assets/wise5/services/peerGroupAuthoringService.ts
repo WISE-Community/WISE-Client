@@ -76,4 +76,16 @@ export class PeerGroupAuthoringService {
   getAllPeerGroupTags(peerGroupSettings: PeerGroupSettings[]): string[] {
     return peerGroupSettings.map((peerGroupSettings) => peerGroupSettings.tag);
   }
+
+  deletePeerGroupSettings(tag: string): void {
+    const allPeerGroupSettings = this.getPeerGroupSettings();
+    for (let i = 0; i < allPeerGroupSettings.length; i++) {
+      const peerGroupSettings = allPeerGroupSettings[i];
+      if (peerGroupSettings.tag === tag) {
+        allPeerGroupSettings.splice(i, 1);
+        break;
+      }
+    }
+    this.projectService.saveProject();
+  }
 }
