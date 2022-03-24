@@ -11,15 +11,12 @@ import { PeerGroupSettings } from '../peerGroupSettings';
 export class SelectPeerGroupingDialogComponent implements OnInit {
   isShowNewGroupingAuthoring: boolean = false;
   peerGroupings: any[] = [];
-  selectedPeerGroupingTag: string;
 
   constructor(
     public dialogRef: MatDialogRef<SelectPeerGroupingDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) private selectedPeerGroupingTag: string,
     private peerGroupAuthoringService: PeerGroupAuthoringService
-  ) {
-    this.selectedPeerGroupingTag = this.data.peerGroupingTag;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.peerGroupAuthoringService.getPeerGroupSettings().forEach((peerGroupSettings) => {
