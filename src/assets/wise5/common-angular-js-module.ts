@@ -41,8 +41,6 @@ window['Highcharts'] = Highcharts;
 window['HighchartsExporting'] = HighchartsExporting;
 window['covariance'] = covariance;
 import './components/graph/graphComponentModule';
-import * as hopscotch from 'hopscotch';
-window['hopscotch'] = hopscotch;
 import './components/html/htmlComponentModule';
 import HttpInterceptor from './services/httpInterceptor';
 import './components/label/labelComponentModule';

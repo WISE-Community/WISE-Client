@@ -36,7 +36,6 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       fabric: ['fabric', 'fabric'],
-      hopscotch: 'hopscotch',
       SockJS: 'sockjs-client',
       Stomp: ['@stomp/stompjs', 'Stomp']
     })

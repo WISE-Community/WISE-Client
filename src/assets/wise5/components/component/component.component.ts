@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
@@ -26,6 +26,9 @@ export class ComponentComponent {
 
   @Input()
   workgroupId: number;
+
+  @Output()
+  saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private configService: ConfigService,
@@ -62,5 +65,9 @@ export class ComponentComponent {
       componentContent = this.projectService.injectClickToSnipImage(componentContent);
     }
     this.componentContent = componentContent;
+  }
+
+  saveComponentState($event: any): void {
+    this.saveComponentStateEvent.emit($event);
   }
 }

@@ -407,11 +407,7 @@ export class DrawStudent extends ComponentStudent {
     return null;
   }
 
-  generateStarterState(): void {
-    this.NodeService.respondStarterState({
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      starterState: this.getDrawData()
-    });
+  generateStarterState(): any {
+    return this.getDrawData();
   }
 }

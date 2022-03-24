@@ -279,6 +279,10 @@
           <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component.html</context>
           <context context-type="linenumber">32</context>
         </context-group>
@@ -704,10 +708,6 @@
           <context context-type="linenumber">264</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">289</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
           <context context-type="linenumber">109</context>
         </context-group>
@@ -730,10 +730,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
           <context context-type="linenumber">198</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">224</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
@@ -1535,6 +1531,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component.html</context>
           <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6178733511992894634" datatype="html">
@@ -5802,16 +5802,8 @@
           <context context-type="linenumber">84</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">278</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component.html</context>
           <context context-type="linenumber">18</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">213</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
@@ -5824,6 +5816,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/component-save-submit-buttons/component-save-submit-buttons.component.html</context>
           <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="044703276ff14d0a94f05154d5bc032872465a0d" datatype="html">
@@ -8409,6 +8405,38 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
           <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="929954f6e28805c5a7c03aac44c9e48cad2ab3e3" datatype="html">
+        <source>Preview Component</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/preview-component-dialog/preview-component-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9b308e8ca0ff8b74acdcca4d472469ae86692561" datatype="html">
+        <source>To set a starter state, edit the content below and save:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/save-starter-state/save-starter-state.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7549308393437021845" datatype="html">
+        <source>Are you sure you want to save the starter state?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/save-starter-state/save-starter-state.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2719035378398088475" datatype="html">
+        <source>Are you sure you want to delete the starter state? This will also close this preview window.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/save-starter-state/save-starter-state.component.ts</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2544043210306731906" datatype="html">
@@ -11092,21 +11120,33 @@ Are you ready to receive feedback on this answer?</source>
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">573</context>
+          <context context-type="linenumber">576</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
+          <context context-type="linenumber">255</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6643018309880261465" datatype="html">
         <source>Auto Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">577</context>
+          <context context-type="linenumber">580</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
+          <context context-type="linenumber">259</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1612722476211621614" datatype="html">
         <source>Submitted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">581</context>
+          <context context-type="linenumber">584</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
+          <context context-type="linenumber">263</context>
         </context-group>
       </trans-unit>
       <trans-unit id="818444ddcd112e756ab725357dcfb238b9257324" datatype="html">
@@ -11283,35 +11323,6 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="9fae747b3706d7f4d6b694ae273d7df2799a732c" datatype="html">
-        <source>(Optional) Create a starting state for the concept map by editing the &quot;Student Preview&quot; below and then saving here:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">248</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="116d459d032992c6d86e207ff08fab531e990322" datatype="html">
-        <source>Save Starter Concept Map</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">252</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">255</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="aebb147a3be02ea5345152dbf903a6db25c29858" datatype="html">
-        <source>Delete Starter Concept Map</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">262</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.html</context>
-          <context context-type="linenumber">265</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="3009366829878620841" datatype="html">
         <source>Are you sure you want to delete this node?
 
@@ -11329,20 +11340,6 @@ Label: <x id="PH" equiv-text="linkLabel"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.ts</context>
           <context context-type="linenumber">89</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8883308302591137451" datatype="html">
-        <source>Are you sure you want to save the starter concept map?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.ts</context>
-          <context context-type="linenumber">135</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="122836227193831555" datatype="html">
-        <source>Are you sure you want to delete the starter concept map?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.ts</context>
-          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c741e919cae3e4e5d7a6e43da8926bb99b1fd780" datatype="html">
@@ -11378,14 +11375,14 @@ Label: <x id="PH" equiv-text="linkLabel"/></source>
         <source> Cancel </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
-          <context context-type="linenumber">93,94</context>
+          <context context-type="linenumber">96,97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7aafd81526e4dbfbfe16413c3e1350f66939ec96" datatype="html">
         <source> Delete </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
-          <context context-type="linenumber">103,104</context>
+          <context context-type="linenumber">106,107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
@@ -12296,41 +12293,13 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">251</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="bcfc99153c2c0d547f3af6670ddfaae5e6ffb429" datatype="html">
-        <source>Save Starter Drawing</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">275</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a5a5b66acab96c55cf12967a05d09f0ad6524482" datatype="html">
-        <source>Delete Starter Drawing</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
-          <context context-type="linenumber">286</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3572984514771368051" datatype="html">
-        <source>Are you sure you want to save the starter drawing?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.ts</context>
-          <context context-type="linenumber">100</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5159178725279504421" datatype="html">
-        <source>Are you sure you want to delete the starter drawing?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.ts</context>
-          <context context-type="linenumber">111</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="295915101298598419" datatype="html">
         <source>Are you sure you want to delete this stamp?
 
 <x id="PH" equiv-text="this.authoringComponentContent.stamps.Stamps[index]"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.ts</context>
-          <context context-type="linenumber">264</context>
+          <context context-type="linenumber">256</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3ee6d14ea15f70683272c9df8c3aff6457182928" datatype="html">
@@ -13527,20 +13496,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">195</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="f1e5600c2fa5270b62ebe32c80557986dd7e1fc0" datatype="html">
-        <source>Save Starter Labels</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">210</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ce8236188975ede0677402fb75456a3db8499613" datatype="html">
-        <source>Delete Starter Labels</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
-          <context context-type="linenumber">221</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="3544625641256817186" datatype="html">
         <source>Enter text here</source>
         <context-group purpose="location">
@@ -13559,20 +13514,6 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
           <context context-type="linenumber">716</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1702242588697640273" datatype="html">
-        <source>Are you sure you want to save the starter labels?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.ts</context>
-          <context context-type="linenumber">81</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7381968285458940688" datatype="html">
-        <source>label.areYouSureYouWantToDeleteAllTheStarterLabels</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.ts</context>
-          <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d0416d769e2f5f38e271f36c0e263f02e2f3b603" datatype="html">
@@ -13607,7 +13548,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Are you sure you want to delete the background image?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">887</context>
+          <context context-type="linenumber">883</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4077520913910941990" datatype="html">
@@ -15822,7 +15763,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Step Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/nodeService.ts</context>
-          <context context-type="linenumber">725</context>
+          <context context-type="linenumber">723</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1384916903989385807" datatype="html">
@@ -15955,6 +15896,10 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
           <context context-type="linenumber">80,81</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="dc390b4facb4c5f5fb7d88cac9db7fe350393640" datatype="html">
         <source>Copy to My Notes</source>
@@ -16005,6 +15950,13 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">99</context>
         </context-group>
         <note priority="1" from="description">Label for note text input</note>
+      </trans-unit>
+      <trans-unit id="8129802372590365244" datatype="html">
+        <source>Rubric</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/helpIcon/help-icon.component.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="2e1aeaf8d183e6846a0463a08c784f472184fcf0" datatype="html">
         <source>Completed with warning</source>
@@ -16151,6 +16103,34 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
           <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2b3d6255f6480242ac1c150a618cebb4707f0163" datatype="html">
+        <source>Step Info</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dc34bee07a6ceed8f010d89d1fcbda15a5abee8c" datatype="html">
+        <source>Teaching Tips</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b570c9b6f5d96fb6f6969cb9397019829c34e82c" datatype="html">
+        <source> Submit </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">70,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7117912496769621431" datatype="html">
+        <source>This unit ended on <x id="PH" equiv-text="endDate"/>. You can no longer save new work.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9fe218829514884cdd0ca2300573a4e0428c324f" datatype="html">

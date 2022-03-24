@@ -19,6 +19,8 @@ import { ChooseImportStepLocationComponent } from '../authoring-tool/import-step
 import { ChooseImportStepComponent } from '../authoring-tool/import-step/choose-import-step/choose-import-step.component';
 import { AngularJSModule } from '../common-hybrid-angular.module';
 import { ComponentAuthoringModule } from './component-authoring.module';
+import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
+import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,12 @@ import { ComponentAuthoringModule } from './component-authoring.module';
     RequiredErrorLabelComponent,
     RubricAuthoringComponent
   ],
-  imports: [AngularJSModule, ComponentAuthoringModule, RouterModule]
+  imports: [
+    AngularJSModule,
+    ComponentAuthoringModule,
+    ComponentStudentModule,
+    PreviewComponentModule,
+    RouterModule
+  ]
 })
 export class AuthoringToolModule {}
