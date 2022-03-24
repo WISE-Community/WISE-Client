@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { PeerGroupAuthoringService } from '../../../services/peerGroupAuthoringService';
+import { UtilService } from '../../../services/utilService';
 import { AuthorPeerGroupingComponent } from '../author-peer-grouping/author-peer-grouping.component';
+import { PeerGroupSettings } from '../peerGroupSettings';
 
 @Component({
   selector: 'edit-peer-grouping',
@@ -8,9 +10,25 @@ import { AuthorPeerGroupingComponent } from '../author-peer-grouping/author-peer
   styleUrls: ['./edit-peer-grouping.component.scss']
 })
 export class EditPeerGroupingComponent extends AuthorPeerGroupingComponent {
-  constructor(protected peerGroupAuthoringService: PeerGroupAuthoringService) {
+  peerGroupSettings: PeerGroupSettings;
+
+  constructor(
+    protected peerGroupAuthoringService: PeerGroupAuthoringService,
+    private utilService: UtilService
+  ) {
     super(peerGroupAuthoringService);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.peerGroupSettings = this.utilService.makeCopyOfJSONObject(
+      this.peerGrouping.peerGroupSetting
+    );
+  }
+
+  save(): void {
+    this.peerGrouping.peerGroupSetting = this.peerGroupSettings;
+    this.peerGroupAuthoringService.updatePeerGroupSettings(this.peerGroupSettings).subscribe(() => {
+      this.updateEvent.emit();
+    });
+  }
 }

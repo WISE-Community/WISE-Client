@@ -25,14 +25,6 @@ export class AuthorPeerGroupingComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  save(): void {
-    this.peerGroupAuthoringService
-      .updatePeerGroupSettings(this.peerGrouping.peerGroupSetting)
-      .subscribe(() => {
-        this.updateEvent.emit();
-      });
-  }
-
   cancel(): void {
     this.cancelEvent.emit();
   }
