@@ -11,8 +11,6 @@ import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class NodeService {
-  $mdDialog: any;
-  $translate: any;
   transitionResults = {};
   chooseTransitionPromises = {};
   private nodeSubmitClickedSource: Subject<any> = new Subject<any>();
@@ -34,10 +32,7 @@ export class NodeService {
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
     private DataService: DataService
-  ) {
-    this.$mdDialog = this.upgrade.$injector.get('$mdDialog');
-    this.$translate = this.upgrade.$injector.get('$filter')('translate');
-  }
+  ) {}
 
   /**
    * Create a new empty node state
@@ -725,7 +720,7 @@ export class NodeService {
    */
   showNodeInfo(nodeId, $event) {
     let stepNumberAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
-    let rubricTitle = this.$translate('STEP_INFO');
+    let rubricTitle = $localize`Step Info`;
 
     /*
      * create the dialog header, actions, and content elements
@@ -750,7 +745,7 @@ export class NodeService {
     let dialogString = `<md-dialog class="dialog--wider" aria-label="${stepNumberAndTitle} - ${rubricTitle}">${dialogHeader}${dialogContent}${dialogActions}</md-dialog>`;
 
     // display the rubric in a popup
-    this.$mdDialog.show({
+    this.upgrade.$injector.get('$mdDialog').show({
       template: dialogString,
       fullscreen: true,
       multiple: true,

@@ -3,7 +3,6 @@ import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import '../common-angular-js-module';
 import '../../../app/student/top-bar/topBarAngularJSModule';
-import NodeController from '../vle/node/nodeController';
 import { StudentWebSocketService } from '../services/studentWebSocketService';
 import VLEController from '../vle/vleController';
 import { VLEProjectService } from '../vle/vleProjectService';
@@ -17,6 +16,7 @@ import { NavigationComponent } from '../themes/default/navigation/navigation.com
 import { NotificationsDialogComponent } from './notifications-dialog/notifications-dialog.component';
 import { StudentAccountMenuComponent } from './student-account-menu/student-account-menu.component';
 import { StudentStatusService } from '../services/studentStatusService';
+import { NodeComponent } from './node/node.component';
 
 export function createStudentAngularJSModule(type = 'preview') {
   return angular
@@ -44,7 +44,6 @@ export function createStudentAngularJSModule(type = 'preview') {
       'navigation',
       downgradeComponent({ component: NavigationComponent }) as angular.IDirectiveFactory
     )
-    .controller('NodeController', NodeController)
     .controller('VLEController', VLEController)
     .directive(
       'addToNotebookButton',
@@ -61,6 +60,10 @@ export function createStudentAngularJSModule(type = 'preview') {
     .directive(
       'componentSaveSubmitButtons',
       downgradeComponent({ component: ComponentSaveSubmitButtons }) as angular.IDirectiveFactory
+    )
+    .directive(
+      'node',
+      downgradeComponent({ component: NodeComponent }) as angular.IDirectiveFactory
     )
     .directive(
       'notificationsMenu',
@@ -257,9 +260,7 @@ export function createStudentAngularJSModule(type = 'preview') {
                         return response.data;
                       });
                   }
-                ],
-                controller: 'NodeController',
-                controllerAs: 'nodeController'
+                ]
               }
             }
           })

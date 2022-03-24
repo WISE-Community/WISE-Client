@@ -24,6 +24,7 @@ import { GenerateImageDialogComponent } from '../assets/wise5/directives/generat
 import { TopBarModule } from './student/top-bar/top-bar.module';
 import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
 import { ComponentStudentModule } from '../assets/wise5/components/component/component-student.module';
+import { NodeModule } from '../assets/wise5/vle/node/node.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ComponentStudentModule } from '../assets/wise5/components/component/com
   imports: [
     AngularJSModule,
     ComponentStudentModule,
+    NodeModule,
     StudentAssetsDialogModule,
     StudentComponentModule,
     SummaryDisplayModule,

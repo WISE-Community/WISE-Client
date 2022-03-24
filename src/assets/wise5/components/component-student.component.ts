@@ -34,6 +34,9 @@ export abstract class ComponentStudent {
   workgroupId: number;
 
   @Output()
+  saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
   starterStateChangedEvent = new EventEmitter<any>();
 
   attachments: any[] = [];
@@ -103,6 +106,14 @@ export abstract class ComponentStudent {
   }
 
   ngOnDestroy(): void {
+    if (this.isDirty) {
+      const request = {
+        componentId: this.componentId,
+        isSubmit: false,
+        nodeId: this.nodeId
+      };
+      this.saveComponentStateEvent.emit(this.getComponentStateWrapper(request));
+    }
     this.subscriptions.unsubscribe();
   }
 
