@@ -23,19 +23,40 @@ export class PeerGroupAuthoringService {
   createNewPeerGroupSettings(
     newPeerGroupSettings: PeerGroupSettings
   ): Observable<PeerGroupSettings> {
+    this.createNewPeerGroupSettingsInProject(newPeerGroupSettings);
+    return this.createNewPeerGroupSettingsInDatabase(newPeerGroupSettings);
+  }
+
+  createNewPeerGroupSettingsInProject(newPeerGroupSettings: PeerGroupSettings): void {
     const allPeerGroupSettings = this.getPeerGroupSettings();
     allPeerGroupSettings.push(newPeerGroupSettings);
     this.projectService.saveProject();
+  }
+
+  createNewPeerGroupSettingsInDatabase(
+    newPeerGroupSettings: PeerGroupSettings
+  ): Observable<PeerGroupSettings> {
     const runId = this.configService.getRunId();
-    return this.http.post<PeerGroupSettings>(
-      `/api/run/${runId}/peer-group-settings`,
-      newPeerGroupSettings
-    );
+    if (runId == null) {
+      return new Observable((observer) => {
+        observer.next();
+      });
+    } else {
+      return this.http.post<PeerGroupSettings>(
+        `/api/run/${runId}/peer-group-settings`,
+        newPeerGroupSettings
+      );
+    }
   }
 
   updatePeerGroupSettings(
     peerGroupSettingsToUpdate: PeerGroupSettings
   ): Observable<PeerGroupSettings> {
+    this.upatePeerGroupSettingsInProject(peerGroupSettingsToUpdate);
+    return this.updatePeerGroupSettingsInDatabase(peerGroupSettingsToUpdate);
+  }
+
+  upatePeerGroupSettingsInProject(peerGroupSettingsToUpdate: PeerGroupSettings): void {
     const allPeerGroupSettings = this.getPeerGroupSettings();
     for (let i = 0; i < allPeerGroupSettings.length; i++) {
       const peerGroupSettings = allPeerGroupSettings[i];
@@ -44,11 +65,22 @@ export class PeerGroupAuthoringService {
       }
     }
     this.projectService.saveProject();
+  }
+
+  updatePeerGroupSettingsInDatabase(
+    peerGroupSettingsToUpdate: PeerGroupSettings
+  ): Observable<PeerGroupSettings> {
     const runId = this.configService.getRunId();
-    return this.http.put<PeerGroupSettings>(
-      `/api/run/${runId}/peer-group-settings/${peerGroupSettingsToUpdate.tag}`,
-      peerGroupSettingsToUpdate
-    );
+    if (runId == null) {
+      return new Observable((observer) => {
+        observer.next();
+      });
+    } else {
+      return this.http.put<PeerGroupSettings>(
+        `/api/run/${runId}/peer-group-settings/${peerGroupSettingsToUpdate.tag}`,
+        peerGroupSettingsToUpdate
+      );
+    }
   }
 
   getStepsUsedIn(peerGroupTag: string): string[] {
