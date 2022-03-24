@@ -2,7 +2,7 @@
   <component-header [componentContent]="componentContent"></component-header>
   <div class="main-concept-map-div">
     <div class="top-buttons" fxLayout="row">
-      <button 
+      <button
           mat-button
           class="mat-primary mat-raised-button top-button"
           (click)="resetConceptMap()"
@@ -40,6 +40,7 @@
       </div>
     </div>
     <div id="{{conceptMapContainerId}}"
+        class="container"
         fxLayout="row">
       <div id="{{selectNodeBarId}}"
           class="side-node-bar">
@@ -54,11 +55,13 @@
           <span>{{availableNode.name}}</span>
         </div>
       </div>
-      <svg id="{{svgId}}"
-          class="concept-map-svg"
-          [style.background-image]="backgroundUrl"
-          [style.background-size]="backgroundSize">
-      </svg>
+      <div class="concept-map-content">
+        <svg id="{{svgId}}"
+            class="concept-map-svg"
+            [style.background-image]="backgroundUrl"
+            [style.background-size]="backgroundSize">
+        </svg>
+      </div>
     </div>
     <div *ngIf="displayLinkTypeChooser"
         class="link-type-chooser">

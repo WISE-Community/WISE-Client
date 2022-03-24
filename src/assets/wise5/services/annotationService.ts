@@ -11,7 +11,7 @@ import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class AnnotationService {
-  annotations: any;
+  annotations: any = [];
   dummyAnnotationId: number = 1; // used in preview mode when we simulate saving of annotation
   private annotationSavedToServerSource: Subject<any> = new Subject<any>();
   public annotationSavedToServer$: Observable<any> = this.annotationSavedToServerSource.asObservable();

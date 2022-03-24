@@ -23,10 +23,10 @@ export class NodeService {
   public componentShowSubmitButtonValueChanged$: Observable<any> = this.componentShowSubmitButtonValueChangedSource.asObservable();
   private showRubricSource: Subject<string> = new Subject<string>();
   public showRubric$: Observable<string> = this.showRubricSource.asObservable();
-  private starterStateRequestSource: Subject<any> = new Subject<any>();
-  public starterStateRequest$: Observable<any> = this.starterStateRequestSource.asObservable();
   private starterStateResponseSource: Subject<any> = new Subject<any>();
   public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
+  private deleteStarterStateSource: Subject<any> = new Subject<any>();
+  public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
 
   constructor(
     private upgrade: UpgradeModule,
@@ -807,8 +807,8 @@ export class NodeService {
     this.componentShowSubmitButtonValueChangedSource.next(args);
   }
 
-  requestStarterState(args: any) {
-    this.starterStateRequestSource.next(args);
+  deleteStarterState(args: any) {
+    this.deleteStarterStateSource.next(args);
   }
 
   respondStarterState(args: any) {

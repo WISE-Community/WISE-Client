@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
@@ -32,6 +32,9 @@ export abstract class ComponentStudent {
 
   @Input()
   workgroupId: number;
+
+  @Output()
+  starterStateChangedEvent = new EventEmitter<any>();
 
   attachments: any[] = [];
   componentId: string;
@@ -79,7 +82,7 @@ export abstract class ComponentStudent {
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.isSaveOrSubmitButtonVisible = this.isSaveButtonVisible || this.isSubmitButtonVisible;
-    if (!this.isAuthoringComponentPreviewMode()) {
+    if (!this.isPreviewMode()) {
       this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
         this.nodeId,
         this.componentId,
@@ -103,8 +106,8 @@ export abstract class ComponentStudent {
     this.subscriptions.unsubscribe();
   }
 
-  isAuthoringComponentPreviewMode(): boolean {
-    return this.mode === 'authoringComponentPreview';
+  isPreviewMode(): boolean {
+    return this.mode === 'preview';
   }
 
   subscribeToSubscriptions(): void {
@@ -113,7 +116,6 @@ export abstract class ComponentStudent {
     this.subscribeToNotebookItemChosen();
     this.subscribeToNotifyConnectedComponents();
     this.subscribeToAttachStudentAsset();
-    this.subscribeToStarterStateRequest();
     this.subscribeToStudentWorkSavedToServer();
     this.subscribeToRequestComponentState();
   }
@@ -197,16 +199,6 @@ export abstract class ComponentStudent {
           }
         }
       )
-    );
-  }
-
-  subscribeToStarterStateRequest() {
-    this.subscriptions.add(
-      this.NodeService.starterStateRequest$.subscribe((args: any) => {
-        if (this.isForThisComponent(args)) {
-          this.generateStarterState();
-        }
-      })
     );
   }
 
@@ -398,7 +390,7 @@ export abstract class ComponentStudent {
       nodeId: this.nodeId,
       componentId: this.componentId
     });
-    if (this.isAuthoringComponentPreviewMode()) {
+    if (this.isPreviewMode()) {
       this.saveForAuthoringPreviewMode('save');
     }
   }
@@ -481,7 +473,7 @@ export abstract class ComponentStudent {
 
     if (submitTriggeredBy == null || submitTriggeredBy === 'componentSubmitButton') {
       this.emitComponentSubmitTriggered();
-      if (this.isAuthoringComponentPreviewMode()) {
+      if (this.isPreviewMode()) {
         this.saveForAuthoringPreviewMode('submit');
       }
     }
@@ -578,6 +570,9 @@ export abstract class ComponentStudent {
   createComponentStateAndBroadcast(action: string): void {
     this.createComponentState(action).then((componentState: any) => {
       this.emitComponentStudentDataChanged(componentState);
+      if (this.mode === 'preview') {
+        this.starterStateChangedEvent.emit(this.generateStarterState());
+      }
     });
   }
 

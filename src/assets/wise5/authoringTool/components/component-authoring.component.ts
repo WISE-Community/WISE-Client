@@ -54,6 +54,13 @@ export abstract class ComponentAuthoring {
       })
     );
     this.subscriptions.add(
+      this.NodeService.deleteStarterState$.subscribe((args: any) => {
+        if (this.isForThisComponent(args)) {
+          this.deleteStarterState();
+        }
+      })
+    );
+    this.subscriptions.add(
       this.promptChange
         .pipe(debounceTime(1000), distinctUntilChanged())
         .subscribe((prompt: string) => {
@@ -90,6 +97,8 @@ export abstract class ComponentAuthoring {
   isForThisComponent(object: any): boolean {
     return object.nodeId == this.nodeId && object.componentId == this.componentId;
   }
+
+  deleteStarterState(): void {}
 
   saveStarterState(starterState: any): void {}
 

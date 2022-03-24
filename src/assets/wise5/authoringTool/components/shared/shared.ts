@@ -4,13 +4,22 @@ import MainMenu from './mainMenu/mainMenu';
 import Toolbar from './toolbar/toolbar';
 import TopBar from './topBar/topBar';
 import * as angular from 'angular';
-import PreviewComponent from '../preview-component/previewComponent';
+import { downgradeComponent } from '@angular/upgrade/static';
+import { PreviewComponentComponent } from '../preview-component/preview-component.component';
+import { PreviewComponentButtonComponent } from '../preview-component-button/preview-component-button.component';
 
 const SharedComponents = angular
   .module('atShared', [])
   .component('atMainMenu', MainMenu)
   .component('atToolbar', Toolbar)
   .component('atTopBar', TopBar)
-  .component('previewComponent', PreviewComponent);
+  .directive(
+    'previewComponent',
+    downgradeComponent({ component: PreviewComponentComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'previewComponentButton',
+    downgradeComponent({ component: PreviewComponentButtonComponent }) as angular.IDirectiveFactory
+  );
 
 export default SharedComponents;
