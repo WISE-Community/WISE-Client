@@ -7,6 +7,7 @@ import { ComponentAuthoring } from '../../../authoringTool/components/component-
 import { SelectPeerGroupingDialogComponent } from '../../../authoringTool/peer-group/select-peer-grouping-dialog/select-peer-grouping-dialog.component';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { PeerGroupAuthoringService } from '../../../services/peerGroupAuthoringService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
 
@@ -26,6 +27,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     'OpenResponse',
     'Table'
   ];
+  groupingLogicName: string;
   inputChange: Subject<string> = new Subject<string>();
   logicOptions = [
     {
@@ -51,6 +53,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     protected ConfigService: ConfigService,
     private dialog: MatDialog,
     protected NodeService: NodeService,
+    private peerGroupAuthoringService: PeerGroupAuthoringService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService,
     private UtilService: UtilService
@@ -66,6 +69,18 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   ngOnInit(): void {
     super.ngOnInit();
     this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds();
+    this.tryToInitializeGroupingLogicName();
+  }
+
+  tryToInitializeGroupingLogicName(): void {
+    if (
+      this.authoringComponentContent.peerGroupActivityTag != null &&
+      this.authoringComponentContent.peerGroupActivityTag !== ''
+    ) {
+      this.groupingLogicName = this.peerGroupAuthoringService.getPeerGroupingName(
+        this.authoringComponentContent.peerGroupActivityTag
+      );
+    }
   }
 
   isApplicationNode(nodeId: string): boolean {

@@ -1,7 +1,8 @@
 <edit-component-prompt [prompt]="authoringComponentContent.prompt"
     (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="bottom-spacing">
-  <mat-label i18n>Grouping Logic</mat-label>
+  <mat-label class="bold" i18n>Grouping Logic:</mat-label>
+  <span>{{ groupingLogicName }}</span>
   <button mat-raised-button
       color="primary"
       (click)="selectGroupingLogic()"

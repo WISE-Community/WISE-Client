@@ -120,4 +120,13 @@ export class PeerGroupAuthoringService {
     }
     this.projectService.saveProject();
   }
+
+  getPeerGroupingName(tag: string): string {
+    for (const peerGroupSettings of this.getPeerGroupSettings()) {
+      if (peerGroupSettings.tag === tag) {
+        return peerGroupSettings.name;
+      }
+    }
+    return null;
+  }
 }
