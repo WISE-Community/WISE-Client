@@ -3219,6 +3219,9 @@ export class ProjectService {
   }
 
   getPeerGroupSettings(): PeerGroupSettings[] {
+    if (this.project.peerGroupActivities == null) {
+      this.project.peerGroupActivities = [];
+    }
     return this.project.peerGroupActivities;
   }
 
