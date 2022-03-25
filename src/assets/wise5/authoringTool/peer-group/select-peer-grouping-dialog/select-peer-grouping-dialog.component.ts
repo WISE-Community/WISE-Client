@@ -14,8 +14,8 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
   selectedPeerGroupingTag: string;
 
   constructor(
-    public dialogRef: MatDialogRef<SelectPeerGroupingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<SelectPeerGroupingDialogComponent>,
     private peerGroupAuthoringService: PeerGroupAuthoringService
   ) {
     this.selectedPeerGroupingTag = this.data.peerGroupingTag;

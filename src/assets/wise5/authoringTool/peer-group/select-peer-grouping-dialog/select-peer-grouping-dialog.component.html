@@ -3,13 +3,13 @@
 <div *ngIf="peerGroupings.length === 0" class="margin" i18n>
   (There are no Peer Groupings. Please create a new one.)
 </div>
-<div *ngFor="let peerGrouping of peerGroupings" class="margin">
-  <display-peer-grouping
+<div *ngFor="let peerGrouping of peerGroupings" class="peer-grouping margin">
+  <select-peer-grouping
       [peerGrouping]="peerGrouping"
       [selectedPeerGroupingTag]="selectedPeerGroupingTag"
       (selectPeerGroupingEvent)="selectPeerGrouping($event)"
       (deletePeerGroupingEvent)="deletePeerGrouping($event)">
-  </display-peer-grouping>
+  </select-peer-grouping>
 </div>
 <button mat-raised-button
     *ngIf="!isShowNewGroupingAuthoring"

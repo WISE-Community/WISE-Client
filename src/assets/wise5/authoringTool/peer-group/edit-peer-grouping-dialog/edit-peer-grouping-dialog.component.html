@@ -35,7 +35,17 @@
         type="number"/>
   </mat-form-field>
 </div>
-<div fxLayoutAlign="end center" fxLayoutGap="12px">
+<div fxLayoutGap="12px">
+  <button mat-raised-button
+      color="warn"
+      [disabled]="peerGrouping.stepsUsedIn.length > 0"
+      (click)="delete()">
+    <span [matTooltip]="peerGrouping.stepsUsedIn.length > 0 ? 'You are not allowed to delete a Peer Grouping that is being used' : ''"
+        i18n>
+      Delete
+    </span>
+  </button>
+  <div fxFlex></div>
   <button mat-button (click)="cancel()" i18n>Cancel</button>
   <button mat-raised-button color="primary" (click)="save()" i18n>Update</button>
 </div>

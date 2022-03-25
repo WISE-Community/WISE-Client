@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EditPeerGroupingDialogComponent } from '../edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
 
 @Component({
   selector: 'select-peer-grouping',
@@ -16,12 +18,9 @@ export class SelectPeerGroupingComponent implements OnInit {
   deletePeerGroupingEvent: EventEmitter<any> = new EventEmitter<any>();
 
   @Output()
-  editSettingsEvent: EventEmitter<any> = new EventEmitter<any>();
-
-  @Output()
   selectPeerGroupingEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -30,7 +29,19 @@ export class SelectPeerGroupingComponent implements OnInit {
   }
 
   edit(): void {
-    this.editSettingsEvent.emit();
+    this.dialog
+      .open(EditPeerGroupingDialogComponent, {
+        data: {
+          peerGrouping: this.peerGrouping
+        },
+        width: '40%'
+      })
+      .afterClosed()
+      .subscribe((isDelete: boolean) => {
+        if (isDelete) {
+          this.deletePeerGroupingEvent.emit(this.peerGrouping.peerGroupSettings.tag);
+        }
+      });
   }
 
   delete(): void {
