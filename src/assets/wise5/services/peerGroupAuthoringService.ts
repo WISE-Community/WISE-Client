@@ -16,8 +16,7 @@ export class PeerGroupAuthoringService {
   ) {}
 
   getPeerGroupSettings(): PeerGroupSettings[] {
-    const peerGroupSettings = this.projectService.getPeerGroupSettings();
-    return peerGroupSettings ? peerGroupSettings : [];
+    return this.projectService.getPeerGroupSettings();
   }
 
   createNewPeerGroupSettings(
@@ -52,11 +51,11 @@ export class PeerGroupAuthoringService {
   updatePeerGroupSettings(
     peerGroupSettingsToUpdate: PeerGroupSettings
   ): Observable<PeerGroupSettings> {
-    this.upatePeerGroupSettingsInProject(peerGroupSettingsToUpdate);
+    this.updatePeerGroupSettingsInProject(peerGroupSettingsToUpdate);
     return this.updatePeerGroupSettingsInDatabase(peerGroupSettingsToUpdate);
   }
 
-  upatePeerGroupSettingsInProject(peerGroupSettingsToUpdate: PeerGroupSettings): void {
+  updatePeerGroupSettingsInProject(peerGroupSettingsToUpdate: PeerGroupSettings): void {
     const allPeerGroupSettings = this.getPeerGroupSettings();
     for (let i = 0; i < allPeerGroupSettings.length; i++) {
       const peerGroupSettings = allPeerGroupSettings[i];
