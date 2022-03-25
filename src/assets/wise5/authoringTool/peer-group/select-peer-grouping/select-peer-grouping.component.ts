@@ -31,9 +31,7 @@ export class SelectPeerGroupingComponent implements OnInit {
   edit(): void {
     this.dialog
       .open(EditPeerGroupingDialogComponent, {
-        data: {
-          peerGrouping: this.peerGrouping
-        },
+        data: this.peerGrouping,
         width: '40%'
       })
       .afterClosed()

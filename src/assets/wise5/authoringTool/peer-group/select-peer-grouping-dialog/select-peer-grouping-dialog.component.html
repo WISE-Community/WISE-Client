@@ -12,7 +12,6 @@
   </select-peer-grouping>
 </div>
 <button mat-raised-button
-    *ngIf="!isShowNewGroupingAuthoring"
     class="margin"
     (click)="showNewGroupingAuthoring()">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
@@ -20,12 +19,6 @@
     <span i18n>New Grouping</span>
   </div>
 </button>
-<new-peer-grouping
-    *ngIf="isShowNewGroupingAuthoring"
-    class="peer-grouping"
-    (createPeerGroupingEvent)="createPeerGrouping($event)"
-    (cancelEvent)="hideNewGroupingAuthoring()">
-</new-peer-grouping>
 <mat-dialog-actions fxLayoutAlign="end center">
   <button mat-button (click)="cancel()">Cancel</button>
   <button mat-raised-button color="primary" (click)="save()">Save</button>

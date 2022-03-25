@@ -1,31 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PeerGroupAuthoringService } from '../../../services/peerGroupAuthoringService';
+import { Directive, OnInit } from '@angular/core';
+import { PeerGroupSettings } from '../peerGroupSettings';
 
-@Component({
-  selector: 'author-peer-grouping',
-  templateUrl: './author-peer-grouping.component.html',
-  styleUrls: ['./author-peer-grouping.component.scss']
-})
-export class AuthorPeerGroupingComponent implements OnInit {
+@Directive()
+export abstract class AuthorPeerGroupingComponent implements OnInit {
   availableLogic: any[] = [
     { name: 'Random', value: 'random' },
     { name: 'Manual', value: 'manual' }
   ];
+  peerGroupSettings: PeerGroupSettings;
 
-  @Input()
-  peerGrouping: any;
-
-  @Output()
-  cancelEvent: EventEmitter<any> = new EventEmitter();
-
-  @Output()
-  updateEvent: EventEmitter<any> = new EventEmitter();
-
-  constructor(protected peerGroupAuthoringService: PeerGroupAuthoringService) {}
+  constructor() {}
 
   ngOnInit(): void {}
-
-  cancel(): void {
-    this.cancelEvent.emit();
-  }
 }

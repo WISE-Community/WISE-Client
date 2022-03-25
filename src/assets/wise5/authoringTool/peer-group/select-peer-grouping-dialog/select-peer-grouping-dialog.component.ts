@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PeerGroupAuthoringService } from '../../../services/peerGroupAuthoringService';
+import { CreateNewPeerGroupingDialogComponent } from '../create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
 import { PeerGroupSettings } from '../peerGroupSettings';
 
 @Component({
@@ -13,7 +14,8 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
   peerGroupings: any[] = [];
 
   constructor(
-    public dialogRef: MatDialogRef<SelectPeerGroupingDialogComponent>,
+    private dialog: MatDialog,
+    private dialogRef: MatDialogRef<SelectPeerGroupingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private selectedPeerGroupingTag: string,
     private peerGroupAuthoringService: PeerGroupAuthoringService
   ) {}
@@ -47,15 +49,19 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
   }
 
   showNewGroupingAuthoring(): void {
-    this.isShowNewGroupingAuthoring = true;
-  }
-
-  hideNewGroupingAuthoring(): void {
-    this.isShowNewGroupingAuthoring = false;
+    this.dialog
+      .open(CreateNewPeerGroupingDialogComponent, {
+        width: '40%'
+      })
+      .afterClosed()
+      .subscribe((peerGroupSettings: PeerGroupSettings) => {
+        if (peerGroupSettings != null) {
+          this.addPeerGroupSettings(peerGroupSettings);
+        }
+      });
   }
 
   createPeerGrouping(peerGroupSettings: PeerGroupSettings): void {
-    this.hideNewGroupingAuthoring();
     this.addPeerGroupSettings(peerGroupSettings);
   }
 
