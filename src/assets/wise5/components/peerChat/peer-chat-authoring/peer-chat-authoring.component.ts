@@ -160,9 +160,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
 
   selectGroupingLogic(): void {
     const dialogRef = this.dialog.open(SelectPeerGroupingDialogComponent, {
-      data: {
-        peerGroupingTag: this.authoringComponentContent.peerGroupActivityTag
-      },
+      data: this.authoringComponentContent.peerGroupActivityTag,
       height: '80%',
       width: '50%'
     });
