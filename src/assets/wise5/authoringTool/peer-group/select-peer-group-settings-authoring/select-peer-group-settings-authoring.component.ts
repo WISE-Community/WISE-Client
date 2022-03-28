@@ -29,7 +29,7 @@ export class SelectPeerGroupSettingsAuthoringComponent implements OnInit {
   }
 
   setGroupingLogicName(peerGroupActivityTag: string): void {
-    this.groupingLogicName = this.peerGroupSettingsAuthoringService.getPeerGroupingName(
+    this.groupingLogicName = this.peerGroupSettingsAuthoringService.getPeerGroupSettingsName(
       peerGroupActivityTag
     );
   }
