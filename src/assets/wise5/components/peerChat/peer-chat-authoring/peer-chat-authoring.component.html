@@ -1,17 +1,9 @@
 <edit-component-prompt [prompt]="authoringComponentContent.prompt"
     (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="bottom-spacing">
-  <mat-label class="bold" i18n>Grouping Logic:</mat-label>
-  <span>{{ groupingLogicName }}</span>
-  <button mat-raised-button
-      color="primary"
-      (click)="selectGroupingLogic()"
-      matTooltip="Select Grouping Logic"
-      matTooltipPosition="above"
-      i18n-matTooltip>
-    Select
-  </button>
-</div>
+<select-peer-grouping-authoring
+    [peerGroupActivityTag]="authoringComponentContent.peerGroupActivityTag"
+    (peerGroupActivityTagChanged)="peerGroupActivityTagChanged($event)">
+</select-peer-grouping-authoring>
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="bottom-spacing">
   <label i18n>Question Bank</label>
   <button mat-raised-button
