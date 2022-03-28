@@ -9,10 +9,10 @@ import { SelectPeerGroupSettingsDialogComponent } from '../select-peer-group-set
   styleUrls: ['./select-peer-group-settings-authoring.component.scss']
 })
 export class SelectPeerGroupSettingsAuthoringComponent implements OnInit {
-  groupingLogicName: string;
+  peerGroupSettingsName: string;
 
   @Input()
-  peerGroupActivityTag: string;
+  peerGroupSettingsTag: string;
 
   @Output()
   peerGroupActivityTagChanged: EventEmitter<string> = new EventEmitter<string>();
@@ -23,25 +23,25 @@ export class SelectPeerGroupSettingsAuthoringComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.peerGroupActivityTag != null && this.peerGroupActivityTag !== '') {
-      this.setGroupingLogicName(this.peerGroupActivityTag);
+    if (this.peerGroupSettingsTag != null && this.peerGroupSettingsTag !== '') {
+      this.setPeerGroupSettingsName(this.peerGroupSettingsTag);
     }
   }
 
-  setGroupingLogicName(peerGroupActivityTag: string): void {
-    this.groupingLogicName = this.peerGroupSettingsAuthoringService.getPeerGroupSettingsName(
-      peerGroupActivityTag
+  setPeerGroupSettingsName(peerGroupSettingsTag: string): void {
+    this.peerGroupSettingsName = this.peerGroupSettingsAuthoringService.getPeerGroupSettingsName(
+      peerGroupSettingsTag
     );
   }
 
   selectGroupingLogic(): void {
     const dialogRef = this.dialog.open(SelectPeerGroupSettingsDialogComponent, {
-      data: this.peerGroupActivityTag,
+      data: this.peerGroupSettingsTag,
       width: '50%'
     });
     dialogRef.afterClosed().subscribe((tag: string) => {
       if (tag != null) {
-        this.setGroupingLogicName(tag);
+        this.setPeerGroupSettingsName(tag);
         this.peerGroupActivityTagChanged.emit(tag);
       }
     });

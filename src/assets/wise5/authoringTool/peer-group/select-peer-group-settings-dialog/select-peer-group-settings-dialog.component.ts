@@ -10,13 +10,12 @@ import { PeerGroupSettings } from '../peerGroupSettings';
   styleUrls: ['./select-peer-group-settings-dialog.component.scss']
 })
 export class SelectPeerGroupSettingsDialogComponent implements OnInit {
-  isShowNewGroupingAuthoring: boolean = false;
   peerGroupings: any[] = [];
 
   constructor(
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<SelectPeerGroupSettingsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private selectedPeerGroupingTag: string,
+    @Inject(MAT_DIALOG_DATA) private selectedPeerGroupSettingsTag: string,
     private peerGroupSettingsAuthoringService: PeerGroupSettingsAuthoringService
   ) {}
 
@@ -36,19 +35,19 @@ export class SelectPeerGroupSettingsDialogComponent implements OnInit {
     });
   }
 
-  selectPeerGrouping(tag: string): void {
-    this.selectedPeerGroupingTag = tag;
+  selectPeerGroupSettings(tag: string): void {
+    this.selectedPeerGroupSettingsTag = tag;
   }
 
   save(): void {
-    this.dialogRef.close(this.selectedPeerGroupingTag);
+    this.dialogRef.close(this.selectedPeerGroupSettingsTag);
   }
 
   cancel(): void {
     this.dialogRef.close();
   }
 
-  showNewGroupingAuthoring(): void {
+  showNewPeerGroupSettingsAuthoring(): void {
     this.dialog
       .open(CreateNewPeerGroupSettingsDialogComponent, {
         width: '40%'
@@ -61,11 +60,7 @@ export class SelectPeerGroupSettingsDialogComponent implements OnInit {
       });
   }
 
-  createPeerGrouping(peerGroupSettings: PeerGroupSettings): void {
-    this.addPeerGroupSettings(peerGroupSettings);
-  }
-
-  deletePeerGrouping(tag: string): void {
+  deletePeerGroupSettings(tag: string): void {
     for (let p = 0; p < this.peerGroupings.length; p++) {
       const peerGrouping = this.peerGroupings[p];
       if (peerGrouping.peerGroupSettings.tag === tag) {

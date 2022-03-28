@@ -8,14 +8,14 @@
   <div *ngFor="let peerGrouping of peerGroupings" class="peer-grouping margin">
     <select-peer-group-settings-option
         [peerGrouping]="peerGrouping"
-        [selectedPeerGroupingTag]="selectedPeerGroupingTag"
-        (selectPeerGroupingEvent)="selectPeerGrouping($event)"
-        (deletePeerGroupingEvent)="deletePeerGrouping($event)">
+        [selectedPeerGroupSettingsTag]="selectedPeerGroupSettingsTag"
+        (selectPeerGroupSettingsEvent)="selectPeerGroupSettings($event)"
+        (deletePeerGroupSettingsEvent)="deletePeerGroupSettings($event)">
     </select-peer-group-settings-option>
   </div>
   <button mat-raised-button
       class="margin"
-      (click)="showNewGroupingAuthoring()">
+      (click)="showNewPeerGroupSettingsAuthoring()">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
       <mat-icon>add</mat-icon>
       <span i18n>New Grouping</span>
