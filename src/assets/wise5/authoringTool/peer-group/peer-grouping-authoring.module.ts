@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PeerGroupAuthoringService } from '../../services/peerGroupAuthoringService';
-import { SelectPeerGroupingComponent } from './select-peer-grouping/select-peer-grouping.component';
+import { SelectPeerGroupingOptionComponent } from './select-peer-grouping-option/select-peer-grouping-option.component';
 import { SelectPeerGroupingDialogComponent } from './select-peer-grouping-dialog/select-peer-grouping-dialog.component';
 import { AngularJSModule } from '../../../../app/common-hybrid-angular.module';
 import { EditPeerGroupingDialogComponent } from './edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
@@ -13,7 +13,7 @@ import { SelectPeerGroupingAuthoringComponent } from './select-peer-grouping-aut
     CreateNewPeerGroupingDialogComponent,
     EditPeerGroupingDialogComponent,
     SelectPeerGroupingAuthoringComponent,
-    SelectPeerGroupingComponent,
+    SelectPeerGroupingOptionComponent,
     SelectPeerGroupingDialogComponent
   ],
   providers: [PeerGroupAuthoringService],

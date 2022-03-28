@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditPeerGroupingDialogComponent } from '../edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
 
 @Component({
-  selector: 'select-peer-grouping',
-  templateUrl: './select-peer-grouping.component.html',
-  styleUrls: ['./select-peer-grouping.component.scss']
+  selector: 'select-peer-grouping-option',
+  templateUrl: './select-peer-grouping-option.component.html',
+  styleUrls: ['./select-peer-grouping-option.component.scss']
 })
-export class SelectPeerGroupingComponent implements OnInit {
+export class SelectPeerGroupingOptionComponent implements OnInit {
   @Input()
   peerGrouping: any;
 

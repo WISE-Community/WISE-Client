@@ -6,12 +6,12 @@
     (There are no Peer Groupings. Please create a new one.)
   </div>
   <div *ngFor="let peerGrouping of peerGroupings" class="peer-grouping margin">
-    <select-peer-grouping
+    <select-peer-grouping-option
         [peerGrouping]="peerGrouping"
         [selectedPeerGroupingTag]="selectedPeerGroupingTag"
         (selectPeerGroupingEvent)="selectPeerGrouping($event)"
         (deletePeerGroupingEvent)="deletePeerGrouping($event)">
-    </select-peer-grouping>
+    </select-peer-grouping-option>
   </div>
   <button mat-raised-button
       class="margin"

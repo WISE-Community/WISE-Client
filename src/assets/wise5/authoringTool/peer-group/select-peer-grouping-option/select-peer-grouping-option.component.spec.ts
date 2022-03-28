@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectPeerGroupingComponent } from './select-peer-grouping.component';
+import { SelectPeerGroupingOptionComponent } from './select-peer-grouping-option.component';
 
 describe('SelectPeerGroupingComponent', () => {
-  let component: SelectPeerGroupingComponent;
-  let fixture: ComponentFixture<SelectPeerGroupingComponent>;
+  let component: SelectPeerGroupingOptionComponent;
+  let fixture: ComponentFixture<SelectPeerGroupingOptionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SelectPeerGroupingComponent]
+      declarations: [SelectPeerGroupingOptionComponent]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectPeerGroupingComponent);
+    fixture = TestBed.createComponent(SelectPeerGroupingOptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
