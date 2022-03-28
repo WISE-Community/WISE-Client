@@ -11,7 +11,6 @@ import { NodeAdvancedGeneralAuthoringComponent } from '../../assets/wise5/author
 import { NodeAdvancedJsonAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/json/node-advanced-json-authoring.component';
 import { NodeAdvancedPathAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component';
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
-import { PeerGroupAuthoringModule } from '../../assets/wise5/authoringTool/peer-group/peer-grouping-authoring.module';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { NodeIconChooserDialog } from '../../assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
 import { ChooseNewComponentLocation } from '../authoring-tool/add-component/choose-new-component-location/choose-new-component-location.component';

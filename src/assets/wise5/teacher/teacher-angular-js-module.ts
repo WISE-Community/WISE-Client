@@ -10,7 +10,6 @@ import { ImportComponentService } from '../services/importComponentService';
 import { InsertComponentService } from '../services/insertComponentService';
 import { MilestoneService } from '../services/milestoneService';
 import { MoveNodesService } from '../services/moveNodesService';
-import { PeerGroupAuthoringService } from '../services/peerGroupAuthoringService';
 import { PeerGroupService } from '../services/peerGroupService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { SpaceService } from '../services/spaceService';
@@ -33,7 +32,10 @@ angular
   .factory('InsertComponentService', downgradeInjectable(InsertComponentService))
   .factory('MilestoneService', downgradeInjectable(MilestoneService))
   .factory('MoveNodesService', downgradeInjectable(MoveNodesService))
-  .factory('PeerGroupAuthoringService', downgradeInjectable(PeerGroupAuthoringService))
+  .factory(
+    'PeerGroupSettingsAuthoringService',
+    downgradeInjectable(PeerGroupSettingsAuthoringService)
+  )
   .factory('PeerGroupService', downgradeInjectable(PeerGroupService))
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
   .factory('SpaceService', downgradeInjectable(SpaceService))
@@ -57,3 +59,6 @@ angular
         });
     }
   ]);
+function PeerGroupSettingsAuthoringService(PeerGroupSettingsAuthoringService: any): any {
+  throw new Error('Function not implemented.');
+}

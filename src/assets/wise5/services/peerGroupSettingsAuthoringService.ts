@@ -7,7 +7,7 @@ import { TeacherProjectService } from './teacherProjectService';
 import { UtilService } from './utilService';
 
 @Injectable()
-export class PeerGroupAuthoringService {
+export class PeerGroupSettingsAuthoringService {
   constructor(
     private configService: ConfigService,
     private http: HttpClient,

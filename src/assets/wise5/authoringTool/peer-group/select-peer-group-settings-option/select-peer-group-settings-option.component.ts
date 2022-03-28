@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EditPeerGroupingDialogComponent } from '../edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
+import { EditPeerGroupSettingsDialogComponent } from '../edit-peer-group-settings-dialog/edit-peer-group-settings-dialog.component';
 
 @Component({
-  selector: 'select-peer-grouping-option',
-  templateUrl: './select-peer-grouping-option.component.html',
-  styleUrls: ['./select-peer-grouping-option.component.scss']
+  selector: 'select-peer-group-settings-option',
+  templateUrl: './select-peer-group-settings-option.component.html',
+  styleUrls: ['./select-peer-group-settings-option.component.scss']
 })
-export class SelectPeerGroupingOptionComponent implements OnInit {
+export class SelectPeerGroupSettingsOptionComponent implements OnInit {
   @Input()
   peerGrouping: any;
 
@@ -30,7 +30,7 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
 
   edit(): void {
     this.dialog
-      .open(EditPeerGroupingDialogComponent, {
+      .open(EditPeerGroupSettingsDialogComponent, {
         data: this.peerGrouping,
         width: '40%'
       })

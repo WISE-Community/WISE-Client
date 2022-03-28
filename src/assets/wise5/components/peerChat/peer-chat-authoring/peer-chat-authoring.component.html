@@ -1,9 +1,9 @@
 <edit-component-prompt [prompt]="authoringComponentContent.prompt"
     (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
-<select-peer-grouping-authoring
+<select-peer-group-settings-authoring
     [peerGroupActivityTag]="authoringComponentContent.peerGroupActivityTag"
     (peerGroupActivityTagChanged)="peerGroupActivityTagChanged($event)">
-</select-peer-grouping-authoring>
+</select-peer-group-settings-authoring>
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="bottom-spacing">
   <label i18n>Question Bank</label>
   <button mat-raised-button

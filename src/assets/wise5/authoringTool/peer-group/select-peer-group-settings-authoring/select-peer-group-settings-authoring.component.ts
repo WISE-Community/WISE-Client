@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PeerGroupAuthoringService } from '../../../services/peerGroupAuthoringService';
-import { SelectPeerGroupingDialogComponent } from '../select-peer-grouping-dialog/select-peer-grouping-dialog.component';
+import { PeerGroupSettingsAuthoringService } from '../../../services/peerGroupSettingsAuthoringService';
+import { SelectPeerGroupSettingsDialogComponent } from '../select-peer-group-settings-dialog/select-peer-group-settings-dialog.component';
 
 @Component({
-  selector: 'select-peer-grouping-authoring',
-  templateUrl: './select-peer-grouping-authoring.component.html',
-  styleUrls: ['./select-peer-grouping-authoring.component.scss']
+  selector: 'select-peer-group-settings-authoring',
+  templateUrl: './select-peer-group-settings-authoring.component.html',
+  styleUrls: ['./select-peer-group-settings-authoring.component.scss']
 })
-export class SelectPeerGroupingAuthoringComponent implements OnInit {
+export class SelectPeerGroupSettingsAuthoringComponent implements OnInit {
   groupingLogicName: string;
 
   @Input()
@@ -19,7 +19,7 @@ export class SelectPeerGroupingAuthoringComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private peerGroupAuthoringService: PeerGroupAuthoringService
+    private peerGroupSettingsAuthoringService: PeerGroupSettingsAuthoringService
   ) {}
 
   ngOnInit(): void {
@@ -29,13 +29,13 @@ export class SelectPeerGroupingAuthoringComponent implements OnInit {
   }
 
   setGroupingLogicName(peerGroupActivityTag: string): void {
-    this.groupingLogicName = this.peerGroupAuthoringService.getPeerGroupingName(
+    this.groupingLogicName = this.peerGroupSettingsAuthoringService.getPeerGroupingName(
       peerGroupActivityTag
     );
   }
 
   selectGroupingLogic(): void {
-    const dialogRef = this.dialog.open(SelectPeerGroupingDialogComponent, {
+    const dialogRef = this.dialog.open(SelectPeerGroupSettingsDialogComponent, {
       data: this.peerGroupActivityTag,
       width: '50%'
     });
