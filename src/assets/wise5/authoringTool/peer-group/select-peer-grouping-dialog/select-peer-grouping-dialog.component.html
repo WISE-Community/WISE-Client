@@ -1,24 +1,28 @@
 <h3 i18n>Select Peer Grouping</h3>
-<div i18n class="margin">Choose a Peer Grouping to use for this component:</div>
-<div *ngIf="peerGroupings.length === 0" class="margin" i18n>
-  (There are no Peer Groupings. Please create a new one.)
-</div>
-<div *ngFor="let peerGrouping of peerGroupings" class="peer-grouping margin">
-  <select-peer-grouping
-      [peerGrouping]="peerGrouping"
-      [selectedPeerGroupingTag]="selectedPeerGroupingTag"
-      (selectPeerGroupingEvent)="selectPeerGrouping($event)"
-      (deletePeerGroupingEvent)="deletePeerGrouping($event)">
-  </select-peer-grouping>
-</div>
-<button mat-raised-button
-    class="margin"
-    (click)="showNewGroupingAuthoring()">
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-    <mat-icon>add</mat-icon>
-    <span i18n>New Grouping</span>
+<mat-divider></mat-divider>
+<mat-dialog-content>
+  <div i18n class="margin">Choose a Peer Grouping to use for this component:</div>
+  <div *ngIf="peerGroupings.length === 0" class="margin" i18n>
+    (There are no Peer Groupings. Please create a new one.)
   </div>
-</button>
+  <div *ngFor="let peerGrouping of peerGroupings" class="peer-grouping margin">
+    <select-peer-grouping
+        [peerGrouping]="peerGrouping"
+        [selectedPeerGroupingTag]="selectedPeerGroupingTag"
+        (selectPeerGroupingEvent)="selectPeerGrouping($event)"
+        (deletePeerGroupingEvent)="deletePeerGrouping($event)">
+    </select-peer-grouping>
+  </div>
+  <button mat-raised-button
+      class="margin"
+      (click)="showNewGroupingAuthoring()">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <mat-icon>add</mat-icon>
+      <span i18n>New Grouping</span>
+    </div>
+  </button>
+</mat-dialog-content>
+<mat-divider></mat-divider>
 <mat-dialog-actions fxLayoutAlign="end center">
   <button mat-button (click)="cancel()">Cancel</button>
   <button mat-raised-button color="primary" (click)="save()">Save</button>
