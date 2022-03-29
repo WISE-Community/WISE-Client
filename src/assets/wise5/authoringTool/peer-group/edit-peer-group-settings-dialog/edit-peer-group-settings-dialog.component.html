@@ -10,6 +10,7 @@
   <span *ngFor="let stepUsedIn of peerGrouping.stepsUsedIn; last as isLast">
     {{ stepUsedIn }}<span *ngIf="!isLast">, </span>
   </span>
+  <span *ngIf="peerGrouping.stepsUsedIn.length === 0" i18n>None</span>
 </div>
 <div>
   <mat-form-field>
