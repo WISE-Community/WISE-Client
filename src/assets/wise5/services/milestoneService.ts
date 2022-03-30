@@ -75,14 +75,6 @@ export class MilestoneService {
     private UtilService: UtilService
   ) {}
 
-  getTranslation(key: string, args: any = null) {
-    if (args == null) {
-      return this.upgrade.$injector.get('$filter')('translate')(key);
-    } else {
-      return this.upgrade.$injector.get('$filter')('translate')(key, args);
-    }
-  }
-
   getProjectMilestones() {
     const achievements = this.ProjectService.getAchievements();
     if (achievements.isEnabled) {

@@ -555,7 +555,7 @@ export class ConfigService {
           if (i !== 0) {
             usernames += ', ';
           }
-          usernames += this.upgrade.$injector.get('$filter')('translate')('studentId', { id: id });
+          usernames += $localize`Student ${id}`;
         }
       }
     }

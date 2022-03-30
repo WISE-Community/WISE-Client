@@ -142,7 +142,7 @@ export class StudentDataService extends DataService {
       componentStates: [],
       events: [],
       annotations: [],
-      username: this.upgrade.$injector.get('$filter')('translate')('PREVIEW_STUDENT'),
+      username: $localize`Preview Student`,
       userId: '0'
     };
     this.AnnotationService.setAnnotations(this.studentData.annotations);
@@ -773,9 +773,7 @@ export class StudentDataService extends DataService {
   saveComponentEvent(component, category, event, data) {
     if (component == null || category == null || event == null) {
       alert(
-        this.upgrade.$injector.get('$filter')('translate')(
-          'STUDENT_DATA_SERVICE_SAVE_COMPONENT_EVENT_COMPONENT_CATEGORY_EVENT_ERROR'
-        )
+        $localize`StudentDataService.saveComponentEvent: component, category, event args must not be null`
       );
       return;
     }
@@ -785,9 +783,7 @@ export class StudentDataService extends DataService {
     const componentType = component.componentType;
     if (nodeId == null || componentId == null || componentType == null) {
       alert(
-        this.upgrade.$injector.get('$filter')('translate')(
-          'STUDENT_DATA_SERVICE_SAVE_COMPONENT_EVENT_NODE_ID_COMPONENT_ID_COMPONENT_TYPE_ERROR'
-        )
+        $localize`StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null`
       );
       return;
     }
@@ -796,11 +792,7 @@ export class StudentDataService extends DataService {
 
   saveVLEEvent(nodeId, componentId, componentType, category, event, data) {
     if (category == null || event == null) {
-      alert(
-        this.upgrade.$injector.get('$filter')('translate')(
-          'STUDENT_DATA_SERVICE_SAVE_VLE_EVENT_CATEGORY_EVENT_ERROR'
-        )
-      );
+      alert($localize`StudentDataService.saveVLEEvent: category and event args must not be null`);
       return;
     }
     const context = 'VLE';
