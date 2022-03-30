@@ -10,7 +10,7 @@ import { PeerChatMessage } from './PeerChatMessage';
 @Injectable()
 export class PeerChatService extends ComponentService {
   constructor(
-    private ConfigService: ConfigService,
+    private configService: ConfigService,
     private http: HttpClient,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -38,10 +38,10 @@ export class PeerChatService extends ComponentService {
     componentId: string,
     workgroupId: number
   ): Observable<any> {
-    const runId = this.ConfigService.getRunId();
+    const runId = this.configService.getRunId();
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    if (this.ConfigService.isPreview()) {
-      this.ConfigService.config.runId = 1;
+    if (this.configService.isPreview()) {
+      this.configService.config.runId = 1;
     }
     return this.http.get(
       `/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}/student-work`,
@@ -55,5 +55,23 @@ export class PeerChatService extends ComponentService {
       componentState.studentData.response,
       componentState.serverSaveTime
     );
+  }
+
+  setPeerChatWorkgroups(peerChatWorkgroupInfos: any, workgroupIds: number[]): any {
+    for (const workgroupId of workgroupIds) {
+      peerChatWorkgroupInfos[workgroupId] = {
+        avatarColor: this.configService.getAvatarColorForWorkgroupId(workgroupId),
+        displayNames: this.configService.isTeacherWorkgroupId(workgroupId)
+          ? $localize`Teacher`
+          : this.configService.getUsernamesStringByWorkgroupId(workgroupId),
+        isTeacher: this.configService.isTeacherWorkgroupId(workgroupId)
+      };
+    }
+  }
+
+  setPeerChatMessages(peerChatMessages: PeerChatMessage[], componentStates: any): void {
+    componentStates.forEach((componentState: any) => {
+      peerChatMessages.push(this.convertComponentStateToPeerChatMessage(componentState));
+    });
   }
 }

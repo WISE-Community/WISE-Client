@@ -151,4 +151,11 @@ export abstract class ComponentAuthoring {
       delete this.authoringComponentContent.reloadTime;
     });
   }
+
+  confirmAndRemove(message: string, array: any[], index: number): void {
+    if (confirm(message)) {
+      array.splice(index, 1);
+      this.componentChanged();
+    }
+  }
 }

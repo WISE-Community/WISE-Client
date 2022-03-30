@@ -135,10 +135,11 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   }
 
   deleteQuestion(index: number): void {
-    if (confirm($localize`Are you sure you want to delete this question?`)) {
-      this.authoringComponentContent.questionBank.splice(index, 1);
-      this.componentChanged();
-    }
+    this.confirmAndRemove(
+      $localize`Are you sure you want to delete this question?`,
+      this.authoringComponentContent.questionBank,
+      index
+    );
   }
 
   customTrackBy(index: number): any {

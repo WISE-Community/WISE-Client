@@ -128,25 +128,13 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   private setPeerChatMessages(componentStates: any = []): void {
     this.peerChatMessages = [];
-    componentStates.forEach((componentState: any) => {
-      this.peerChatMessages.push(
-        this.peerChatService.convertComponentStateToPeerChatMessage(componentState)
-      );
-    });
+    this.peerChatService.setPeerChatMessages(this.peerChatMessages, componentStates);
   }
 
   private setPeerChatWorkgroups(workgroupIds: number[]): void {
     this.peerChatWorkgroupIds = workgroupIds;
     this.peerChatWorkgroupInfos = {};
-    for (const workgroupId of workgroupIds) {
-      this.peerChatWorkgroupInfos[workgroupId] = {
-        avatarColor: this.configService.getAvatarColorForWorkgroupId(workgroupId),
-        displayNames: this.configService.isTeacherWorkgroupId(workgroupId)
-          ? $localize`Teacher`
-          : this.configService.getUsernamesStringByWorkgroupId(workgroupId),
-        isTeacher: this.configService.isTeacherWorkgroupId(workgroupId)
-      };
-    }
+    this.peerChatService.setPeerChatWorkgroups(this.peerChatWorkgroupInfos, workgroupIds);
     this.isPeerChatWorkgroupsAvailable = true;
   }
 
