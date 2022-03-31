@@ -55,7 +55,6 @@ describe('DiscussionService', () => {
 
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(DiscussionService);
-    service.TeacherDataService = TestBed.inject(TeacherDataService);
     configService = TestBed.inject(ConfigService);
     studentDataService = TestBed.inject(StudentDataService);
   });
@@ -64,9 +63,6 @@ describe('DiscussionService', () => {
   componentStateHasStudentWork();
   createComponent();
   getClassmateResponses();
-  getPostAndAllRepliesByComponentIds();
-  getPostAndAllRepliesWithComponentIdAndComponentStateId();
-  getPostsAssociatedWithComponentIdsAndWorkgroupId();
   hasShowWorkConnectedComponentThatHasWork();
   hasNodeEnteredEvent();
   isCompleted();
@@ -76,7 +72,6 @@ describe('DiscussionService', () => {
   isStudentWorkHasAttachment();
   isTopLevelComponentStateIdFound();
   isTopLevelPost();
-  workgroupHasWorkForComponent();
 });
 
 function createComponentStateFromOnlyResponse(response: string, attachments: any[] = []) {
@@ -228,14 +223,6 @@ function getClassmateResponses() {
   });
 }
 
-function workgroupHasWorkForComponent() {
-  // TODO
-}
-
-function getPostsAssociatedWithComponentIdsAndWorkgroupId() {
-  // TODO
-}
-
 function isTopLevelPost() {
   let componentState: any;
   beforeEach(() => {
@@ -262,10 +249,6 @@ function isTopLevelComponentStateIdFound() {
       found`, () => {
     expect(service.isTopLevelComponentStateIdFound(['id1', 'id2'], 'id2')).toEqual(true);
   });
-}
-
-function getPostAndAllRepliesByComponentIds() {
-  // TODO
 }
 
 function componentStateHasStudentWork() {
@@ -398,22 +381,5 @@ function checkThatAComponentStateHasStudentWorkWhenStudentOnlyAttachedAFile() {
     };
     const hasStudentWork = service.componentStateHasStudentWork(componentState, componentContent);
     expect(hasStudentWork).toEqual(true);
-  });
-}
-
-function getPostAndAllRepliesWithComponentIdAndComponentStateId() {
-  it('should get post and all replies with component id and component state id', () => {
-    spyOn(TestBed.inject(TeacherDataService), 'getComponentStatesByComponentIds').and.callFake(
-      () => {
-        const componentStates = [
-          createComponentState(1, nodeId, componentId, null, 'Hello', []),
-          createComponentState(2, nodeId, componentId, 1, 'World', []),
-          createComponentState(3, nodeId, componentId, null, 'OK', [])
-        ];
-        return componentStates;
-      }
-    );
-    const postAndAllReplies = service.getPostAndAllRepliesByComponentIds([componentId], 1);
-    expect(postAndAllReplies.length).toEqual(2);
   });
 }
