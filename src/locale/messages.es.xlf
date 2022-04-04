@@ -866,6 +866,22 @@
         </context-group>
         <target state="translated">Editar componente JSON</target>
       </trans-unit>
+      <trans-unit id="19198353055300541" datatype="html">
+        <source>The JSON is invalid. Invalid JSON will not be saved.
+Click &quot;OK&quot; to revert back to the last valid JSON.
+Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <target state="translated">El JSON no es válido. El JSON no válido no se guardará.
+Hacer clic en "Aceptar" para volver al último JSON válido.
+Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo.</target>
+      </trans-unit>
       <trans-unit id="2af3e40232b763ae8a6cba9f4bb455ed49d4f86c" datatype="html">
         <source>Max Score</source>
         <context-group purpose="location">
@@ -953,6 +969,14 @@
           <context context-type="linenumber">15</context>
         </context-group>
         <target state="translated">Nombre de etiqueta</target>
+      </trans-unit>
+      <trans-unit id="9001940350011393028" datatype="html">
+        <source>Are you sure you want to delete this tag?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-tags/edit-component-tags.component.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to delete this tag?</target>
       </trans-unit>
       <trans-unit id="2485299eb70909a6cfa961bfac54f062a220806c" datatype="html">
         <source>Component Width</source>
@@ -1203,6 +1227,14 @@
         </context-group>
         <target state="translated"> 1 item de evaluación
 </target>
+      </trans-unit>
+      <trans-unit id="7688617353265462545" datatype="html">
+        <source>Showing <x id="PH" equiv-text="this.selectedComponents.length"/>/<x id="PH_1" equiv-text="this.components.length"/> items</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/component-select/component-select.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <target state="needs-translation">Showing <x id="PH" equiv-text="this.selectedComponents.length"/>/<x id="PH_1" equiv-text="this.components.length"/> items</target>
       </trans-unit>
       <trans-unit id="e9f75e02d7db72cd425f81c273a721c62a617dc4" datatype="html">
         <source>~ Report Available ~</source>
@@ -6280,6 +6312,10 @@
           <context context-type="sourcefile">src/app/notebook/notebook-report-annotations/notebook-report-annotations.component.ts</context>
           <context context-type="linenumber">67</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
+          <context context-type="linenumber">208</context>
+        </context-group>
         <target state="translated">Feedback del Docente</target>
       </trans-unit>
       <trans-unit id="3de550daa9bf35829dbeb9099844614347d2dbc5" datatype="html">
@@ -8956,6 +8992,10 @@
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
           <context context-type="linenumber">94</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherDataService.ts</context>
+          <context context-type="linenumber">646</context>
+        </context-group>
         <target state="translated">Todos los períodos</target>
       </trans-unit>
       <trans-unit id="d9b2ffb3e1ce1ca42a3db04d00ea072777898eb3" datatype="html">
@@ -9181,18 +9221,6 @@
           <context context-type="linenumber">42</context>
         </context-group>
         <target state="translated">Abrir URL de la Unidad en Nueva Pestaña</target>
-      </trans-unit>
-      <trans-unit id="19198353055300541" datatype="html">
-        <source>The JSON is invalid. Invalid JSON will not be saved.
-Click &quot;OK&quot; to revert back to the last valid JSON.
-Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.ts</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-        <target state="translated">El JSON no es válido. El JSON no válido no se guardará.
-Hacer clic en "Aceptar" para volver al último JSON válido.
-Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo.</target>
       </trans-unit>
       <trans-unit id="f79611b9cc78f612ae8cc2cce08ff9f14581aeb3" datatype="html">
         <source>Selected</source>
@@ -12523,6 +12551,10 @@ Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
           <context context-type="linenumber">423</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
+          <context context-type="linenumber">205</context>
         </context-group>
         <target state="translated">Retroalimentación</target>
       </trans-unit>
@@ -17097,6 +17129,14 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <note priority="1" from="description">A name for a computer avatar</note>
         <target state="needs-translation">Nico</target>
       </trans-unit>
+      <trans-unit id="6516762932593571783" datatype="html">
+        <source>Student <x id="PH" equiv-text="id"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/configService.ts</context>
+          <context context-type="linenumber">558</context>
+        </context-group>
+        <target state="needs-translation">Student <x id="PH" equiv-text="id"/></target>
+      </trans-unit>
       <trans-unit id="2821363608497156596" datatype="html">
         <source>Step Info</source>
         <context-group purpose="location">
@@ -17111,6 +17151,10 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
           <context context-type="linenumber">20</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
         <target state="translated">Cuaderno digital</target>
       </trans-unit>
       <trans-unit id="7975589013595125523" datatype="html">
@@ -17119,6 +17163,14 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
           <context context-type="linenumber">33</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
         <target state="translated">nota</target>
       </trans-unit>
       <trans-unit id="5946383547512220582" datatype="html">
@@ -17126,6 +17178,14 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
           <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">149</context>
         </context-group>
         <target state="translated">notas</target>
       </trans-unit>
@@ -17143,6 +17203,10 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
         <target state="translated">informe</target>
       </trans-unit>
       <trans-unit id="6590475405017990661" datatype="html">
@@ -17151,6 +17215,10 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
         <target state="translated">informes</target>
       </trans-unit>
       <trans-unit id="7008439939460403347" datatype="html">
@@ -17158,6 +17226,10 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/notebookService.ts</context>
           <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">118</context>
         </context-group>
         <target state="translated">Informe</target>
       </trans-unit>
@@ -17184,6 +17256,346 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="linenumber">149</context>
         </context-group>
         <target state="translated">Tienes nueva retroalimentación!</target>
+      </trans-unit>
+      <trans-unit id="4358283284933461426" datatype="html">
+        <source>All steps after this one will not be visitable until </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2184</context>
+        </context-group>
+        <target state="needs-translation">All steps after this one will not be visitable until </target>
+      </trans-unit>
+      <trans-unit id="5548702737138673668" datatype="html">
+        <source>All steps after this one will not be visible until </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2187</context>
+        </context-group>
+        <target state="needs-translation">All steps after this one will not be visible until </target>
+      </trans-unit>
+      <trans-unit id="3112051127445790513" datatype="html">
+        <source>All other steps will not be visitable until </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2190</context>
+        </context-group>
+        <target state="needs-translation">All other steps will not be visitable until </target>
+      </trans-unit>
+      <trans-unit id="2264443134334419091" datatype="html">
+        <source>All other steps will not be visible until </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2193</context>
+        </context-group>
+        <target state="needs-translation">All other steps will not be visible until </target>
+      </trans-unit>
+      <trans-unit id="6819040711904864999" datatype="html">
+        <source>This step will not be visitable until </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2196</context>
+        </context-group>
+        <target state="needs-translation">This step will not be visitable until </target>
+      </trans-unit>
+      <trans-unit id="816962217622004346" datatype="html">
+        <source>This step will not be visible until </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2199</context>
+        </context-group>
+        <target state="needs-translation">This step will not be visible until </target>
+      </trans-unit>
+      <trans-unit id="4238892785951327020" datatype="html">
+        <source>Complete &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;&quot;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2221</context>
+        </context-group>
+        <target state="needs-translation">Complete &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;"</target>
+      </trans-unit>
+      <trans-unit id="4750375498606149231" datatype="html">
+        <source>Visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2227</context>
+        </context-group>
+        <target state="needs-translation">Visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="6126058561630526429" datatype="html">
+        <source>Correctly answer &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2233</context>
+        </context-group>
+        <target state="needs-translation">Correctly answer &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="7085241847460263487" datatype="html">
+        <source>Obtain a score of &lt;b&gt;<x id="PH" equiv-text="scoresString"/>&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2248</context>
+        </context-group>
+        <target state="needs-translation">Obtain a score of &lt;b&gt;<x id="PH" equiv-text="scoresString"/>&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="5469027549306748048" datatype="html">
+        <source>You must choose &quot;<x id="PH" equiv-text="choiceText"/>&quot; on &quot;<x id="PH_1" equiv-text="nodeTitle"/>&quot;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2256</context>
+        </context-group>
+        <target state="needs-translation">You must choose "<x id="PH" equiv-text="choiceText"/>" on "<x id="PH_1" equiv-text="nodeTitle"/>"</target>
+      </trans-unit>
+      <trans-unit id="6293177000168372990" datatype="html">
+        <source>Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; time on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2268</context>
+        </context-group>
+        <target state="needs-translation">Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; time on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="4693324974790890133" datatype="html">
+        <source>Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; times on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2270</context>
+        </context-group>
+        <target state="needs-translation">Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; times on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="8416169412912074869" datatype="html">
+        <source>Take the branch path from &lt;b&gt;<x id="PH" equiv-text="fromNodeTitle"/>&lt;/b&gt; to &lt;b&gt;<x id="PH_1" equiv-text="toNodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2277</context>
+        </context-group>
+        <target state="needs-translation">Take the branch path from &lt;b&gt;<x id="PH" equiv-text="fromNodeTitle"/>&lt;/b&gt; to &lt;b&gt;<x id="PH_1" equiv-text="toNodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="8087029188038414167" datatype="html">
+        <source>Write &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfWords"/>&lt;/b&gt; words on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2283</context>
+        </context-group>
+        <target state="needs-translation">Write &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfWords"/>&lt;/b&gt; words on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="22049568725715518" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="nodeTitle"/>&quot; is visible</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2289</context>
+        </context-group>
+        <target state="needs-translation">"<x id="PH" equiv-text="nodeTitle"/>" is visible</target>
+      </trans-unit>
+      <trans-unit id="5023130174506669799" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="nodeTitle"/>&quot; is visitable</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2295</context>
+        </context-group>
+        <target state="needs-translation">"<x id="PH" equiv-text="nodeTitle"/>" is visitable</target>
+      </trans-unit>
+      <trans-unit id="1185133360670447094" datatype="html">
+        <source>Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; note on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2302</context>
+        </context-group>
+        <target state="needs-translation">Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; note on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="5985921753090789216" datatype="html">
+        <source>Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; notes on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2304</context>
+        </context-group>
+        <target state="needs-translation">Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; notes on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="4560070803879446782" datatype="html">
+        <source>You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; row in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2311</context>
+        </context-group>
+        <target state="needs-translation">You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; row in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="2804292280751903227" datatype="html">
+        <source>You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; rows in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2313</context>
+        </context-group>
+        <target state="needs-translation">You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; rows in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
+      </trans-unit>
+      <trans-unit id="4171523921205906508" datatype="html">
+        <source>Wait for your teacher to unlock the item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
+          <context context-type="linenumber">2316</context>
+        </context-group>
+        <target state="needs-translation">Wait for your teacher to unlock the item</target>
+      </trans-unit>
+      <trans-unit id="8770055323459972095" datatype="html">
+        <source>There was an error uploading.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+        <target state="needs-translation">There was an error uploading.</target>
+      </trans-unit>
+      <trans-unit id="7911256030566990381" datatype="html">
+        <source>There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
+          <context context-type="linenumber">165</context>
+        </context-group>
+        <target state="needs-translation">There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</target>
+      </trans-unit>
+      <trans-unit id="7178340069631637479" datatype="html">
+        <source>Preview Student</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+        <target state="needs-translation">Preview Student</target>
+      </trans-unit>
+      <trans-unit id="1967824796880640028" datatype="html">
+        <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
+          <context context-type="linenumber">776</context>
+        </context-group>
+        <target state="needs-translation">StudentDataService.saveComponentEvent: component, category, event args must not be null</target>
+      </trans-unit>
+      <trans-unit id="944638387659785956" datatype="html">
+        <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
+          <context context-type="linenumber">786</context>
+        </context-group>
+        <target state="needs-translation">StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</target>
+      </trans-unit>
+      <trans-unit id="4924640921903672943" datatype="html">
+        <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
+          <context context-type="linenumber">795</context>
+        </context-group>
+        <target state="needs-translation">StudentDataService.saveVLEEvent: category and event args must not be null</target>
+      </trans-unit>
+      <trans-unit id="8725215606116054825" datatype="html">
+        <source>First Lesson</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <target state="needs-translation">First Lesson</target>
+      </trans-unit>
+      <trans-unit id="2017855920890197640" datatype="html">
+        <source>First Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <target state="needs-translation">First Step</target>
+      </trans-unit>
+      <trans-unit id="8104421162933956065" datatype="html">
+        <source>Notes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">150</context>
+        </context-group>
+        <target state="needs-translation">Notes</target>
+      </trans-unit>
+      <trans-unit id="5668531960608480573" datatype="html">
+        <source>Final Report</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+        <target state="needs-translation">Final Report</target>
+      </trans-unit>
+      <trans-unit id="8604167983715964004" datatype="html">
+        <source>Final summary report of what you learned in this unit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+        <target state="needs-translation">Final summary report of what you learned in this unit</target>
+      </trans-unit>
+      <trans-unit id="4419148705442508208" datatype="html">
+        <source>Use this space to write your final report using evidence from your notebook.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+        <target state="needs-translation">Use this space to write your final report using evidence from your notebook.</target>
+      </trans-unit>
+      <trans-unit id="2128364009265696768" datatype="html">
+        <source>&lt;h3&gt;This is a heading&lt;/h3&gt;&lt;p&gt;This is a paragraph.&lt;/p&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+        <target state="needs-translation">&lt;h3&gt;This is a heading&lt;/h3&gt;&lt;p&gt;This is a paragraph.&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="3712572360135341203" datatype="html">
+        <source>Teacher Notebook</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+        <target state="needs-translation">Teacher Notebook</target>
+      </trans-unit>
+      <trans-unit id="3422550137142657635" datatype="html">
+        <source>teacher notes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">158</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">159</context>
+        </context-group>
+        <target state="needs-translation">teacher notes</target>
+      </trans-unit>
+      <trans-unit id="2558301014879118031" datatype="html">
+        <source>Teacher Notes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">167</context>
+        </context-group>
+        <target state="needs-translation">Teacher Notes</target>
+      </trans-unit>
+      <trans-unit id="2841850575512700640" datatype="html">
+        <source>Notes for the teacher as they&apos;re running the WISE unit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">168</context>
+        </context-group>
+        <target state="needs-translation">Notes for the teacher as they're running the WISE unit</target>
+      </trans-unit>
+      <trans-unit id="4383493915104232758" datatype="html">
+        <source>Use this space to take notes for this unit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">169</context>
+        </context-group>
+        <target state="needs-translation">Use this space to take notes for this unit</target>
+      </trans-unit>
+      <trans-unit id="8373748870534083811" datatype="html">
+        <source>&lt;p&gt;Use this space to take notes for this unit&lt;/p&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">170</context>
+        </context-group>
+        <target state="needs-translation">&lt;p&gt;Use this space to take notes for this unit&lt;/p&gt;</target>
       </trans-unit>
       <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">
         <source>Project Plan</source>
