@@ -10,18 +10,18 @@ import { DiscussionService } from './discussionService';
 export class TeacherDiscussionService extends DiscussionService {
   constructor(
     protected http: HttpClient,
-    protected ConfigService: ConfigService,
-    protected StudentDataService: StudentDataService,
-    protected TeacherDataService: TeacherDataService,
-    protected UtilService: UtilService
+    protected configService: ConfigService,
+    protected studentDataService: StudentDataService,
+    protected teacherDataService: TeacherDataService,
+    protected utilService: UtilService
   ) {
-    super(http, ConfigService, StudentDataService, UtilService);
+    super(http, configService, studentDataService, utilService);
   }
 
   getPostsAssociatedWithComponentIdsAndWorkgroupId(componentIds: string[], workgroupId: number) {
     let allPosts = [];
     const topLevelComponentStateIdsFound = [];
-    const componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentIds(
+    const componentStates = this.teacherDataService.getComponentStatesByWorkgroupIdAndComponentIds(
       workgroupId,
       componentIds
     );
@@ -55,7 +55,7 @@ export class TeacherDiscussionService extends DiscussionService {
 
   getPostAndAllRepliesByComponentIds(componentIds: string[], componentStateId: number) {
     const postAndAllReplies = [];
-    const componentStatesForComponentIds = this.TeacherDataService.getComponentStatesByComponentIds(
+    const componentStatesForComponentIds = this.teacherDataService.getComponentStatesByComponentIds(
       componentIds
     );
     for (const componentState of componentStatesForComponentIds) {
