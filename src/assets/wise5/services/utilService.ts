@@ -53,10 +53,6 @@ export class UtilService {
     this.upgrade.$injector.get('$rootScope').$broadcast(event, data);
   }
 
-  translate(key) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
-  }
-
   generateKey(length = 10) {
     let key = '';
     for (let a = 0; a < length; a++) {
