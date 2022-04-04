@@ -24,6 +24,23 @@ class MockTeacherDataService {
   }
 }
 
+class ComponentState {
+  studentData: any = {};
+
+  constructor(
+    protected id: number,
+    protected nodeId: string,
+    protected componentId: string,
+    componentStateIdReplyingTo: number,
+    response: string,
+    attachments: any[]
+  ) {
+    this.studentData.attachments = attachments;
+    this.studentData.componentStateIdReplyingTo = componentStateIdReplyingTo;
+    this.studentData.response = response;
+  }
+}
+
 let service: TeacherDiscussionService;
 const componentId = 'component1';
 const nodeId = 'node1';
@@ -58,34 +75,14 @@ describe('TeacherDiscussionService', () => {
   getPostAndAllRepliesWithComponentIdAndComponentStateId();
 });
 
-function createComponentState(
-  componentStateId,
-  nodeId,
-  componentId,
-  componentStateIdReplyingTo,
-  response,
-  attachments
-) {
-  return {
-    id: componentStateId,
-    nodeId: nodeId,
-    componentId: componentId,
-    studentData: {
-      attachments: attachments,
-      componentStateIdReplyingTo: componentStateIdReplyingTo,
-      response: response
-    }
-  };
-}
-
 function getPostAndAllRepliesWithComponentIdAndComponentStateId() {
   it('should get post and all replies with component id and component state id', () => {
     spyOn(TestBed.inject(TeacherDataService), 'getComponentStatesByComponentIds').and.callFake(
       () => {
         const componentStates = [
-          createComponentState(1, nodeId, componentId, null, 'Hello', []),
-          createComponentState(2, nodeId, componentId, 1, 'World', []),
-          createComponentState(3, nodeId, componentId, null, 'OK', [])
+          new ComponentState(1, nodeId, componentId, null, 'Hello', []),
+          new ComponentState(2, nodeId, componentId, 1, 'World', []),
+          new ComponentState(3, nodeId, componentId, null, 'OK', [])
         ];
         return componentStates;
       }
