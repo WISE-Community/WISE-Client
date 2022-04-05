@@ -4,8 +4,6 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 
 @Component({
@@ -14,8 +12,6 @@ import { DialogGuidanceService } from '../dialogGuidanceService';
   styleUrls: ['./dialog-guidance-authoring.component.scss']
 })
 export class DialogGuidanceAuthoringComponent extends ComponentAuthoring {
-  inputChange: Subject<string> = new Subject<string>();
-
   constructor(
     protected configService: ConfigService,
     private dialogGuidanceService: DialogGuidanceService,
@@ -24,11 +20,6 @@ export class DialogGuidanceAuthoringComponent extends ComponentAuthoring {
     protected projectService: TeacherProjectService
   ) {
     super(configService, nodeService, projectAssetService, projectService);
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
-    );
   }
 
   ngOnInit() {

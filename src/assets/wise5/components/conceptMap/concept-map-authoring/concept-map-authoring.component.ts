@@ -1,8 +1,6 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
@@ -19,7 +17,6 @@ import { ConceptMapService } from '../conceptMapService';
 export class ConceptMapAuthoring extends ComponentAuthoring {
   availableNodes: any[];
   availableLinks: any[];
-  inputChange: Subject<string> = new Subject<string>();
 
   constructor(
     private ConceptMapService: ConceptMapService,
@@ -30,11 +27,6 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
     protected UtilService: UtilService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
-    );
   }
 
   ngOnInit() {

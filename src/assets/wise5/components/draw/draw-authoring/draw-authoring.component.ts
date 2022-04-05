@@ -39,7 +39,6 @@ export class DrawAuthoring extends ComponentAuthoring {
   defaultHeight: number = 600;
   stamps: any[] = [];
 
-  inputChange: Subject<string> = new Subject<string>();
   backgroundImageChange: Subject<string> = new Subject<string>();
   canvasWidthChange: Subject<string> = new Subject<string>();
   canvasHeightChange: Subject<string> = new Subject<string>();
@@ -52,11 +51,6 @@ export class DrawAuthoring extends ComponentAuthoring {
     protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
-    );
     this.subscriptions.add(
       this.backgroundImageChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.updateStarterDrawDataBackgroundAndSave();
