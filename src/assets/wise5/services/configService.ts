@@ -572,15 +572,9 @@ export class ConfigService {
   }
 
   getUserIdsStringByWorkgroupId(workgroupId: number): string {
-    const translate = this.upgrade.$injector.get('$filter')('translate');
-    const ids = this.getUserIdsByWorkgroupId(workgroupId);
-    return ids.length > 0
-      ? ids
-          .map(function (id) {
-            return translate('studentId', { id: id });
-          })
-          .join(', ')
-      : '';
+    return this.getUserIdsByWorkgroupId(workgroupId)
+      .map((id) => $localize`Student ${id}`)
+      .join(', ');
   }
 
   isPreview() {

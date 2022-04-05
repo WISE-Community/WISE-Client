@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { UtilService } from '../../../assets/wise5/services/utilService';
 
@@ -19,11 +18,7 @@ export class ComponentSelectComponent {
 
   selectedComponents: any[];
 
-  constructor(
-    private upgrade: UpgradeModule,
-    private ProjectService: TeacherProjectService,
-    private UtilService: UtilService
-  ) {}
+  constructor(private ProjectService: TeacherProjectService, private UtilService: UtilService) {}
 
   ngOnInit() {
     this.components = this.ProjectService.getComponentsByNodeId(this.nodeId).filter((component) => {
@@ -39,11 +34,7 @@ export class ComponentSelectComponent {
   }
 
   getSelectedText() {
-    let nComponents = this.components.length;
-    return this.upgrade.$injector.get('$filter')('translate')('selectedComponentsLabel', {
-      selected: this.selectedComponents.length,
-      total: nComponents
-    });
+    return $localize`Showing ${this.selectedComponents.length}/${this.components.length} items`;
   }
 
   selectedComponentsChange() {

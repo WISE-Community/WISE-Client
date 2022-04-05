@@ -72,10 +72,6 @@ export class TeacherDataService extends DataService {
     });
   }
 
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$translate')(key);
-  }
-
   getRootScope() {
     if (this.$rootScope == null) {
       this.$rootScope = this.upgrade.$injector.get('$rootScope');
@@ -647,7 +643,7 @@ export class TeacherDataService extends DataService {
   addAllPeriods(periods: any[]): void {
     periods.unshift({
       periodId: -1,
-      periodName: this.getTranslation('allPeriods')
+      periodName: $localize`All Periods`
     });
   }
 

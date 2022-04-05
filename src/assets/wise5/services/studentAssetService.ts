@@ -142,9 +142,7 @@ export class StudentAssetService {
         })
         .success((asset, status, headers, config) => {
           if (asset === 'error') {
-            alert(
-              this.upgrade.$injector.get('$filter')('translate')('THERE_WAS_AN_ERROR_UPLOADING')
-            );
+            alert($localize`There was an error uploading.`);
           } else {
             const studentUploadsBaseURL = this.ConfigService.getStudentUploadsBaseURL();
             asset.url = studentUploadsBaseURL + asset.filePath;
@@ -164,9 +162,7 @@ export class StudentAssetService {
         })
         .error((asset, status, headers, config) => {
           alert(
-            this.upgrade.$injector.get('$filter')('translate')(
-              'THERE_WAS_AN_ERROR_UPLOADING_YOU_MIGHT_HAVE_REACHED_LIMIT'
-            )
+            $localize`There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.`
           );
         });
       return deferred.promise;
