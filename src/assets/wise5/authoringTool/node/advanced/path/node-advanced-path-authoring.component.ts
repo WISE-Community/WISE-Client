@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import * as authoringOptions from './node-advanced-path-authoring-options';
 
 @Component({
   selector: 'node-advanced-path-authoring',
@@ -8,53 +9,14 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
   styleUrls: ['node-advanced-path-authoring.component.scss']
 })
 export class NodeAdvancedPathAuthoringComponent implements OnInit {
-  canChangePathOptions = [
-    { value: true, text: $localize`True` },
-    { value: false, text: $localize`False` }
-  ];
-  howToChooseAmongAvailablePathsOptions = [
-    { value: 'random', text: $localize`Random` },
-    { value: 'workgroupId', text: $localize`Workgroup ID` },
-    { value: 'firstAvailable', text: $localize`First Available` },
-    { value: 'lastAvailable', text: $localize`Last Available` },
-    { value: 'tag', text: $localize`Tag` }
-  ];
+  canChangePathOptions = authoringOptions.canChangePathOptions;
+  howToChooseAmongAvailablePathsOptions = authoringOptions.howToChooseAmongAvailablePathsOptions;
   items: any[];
   node: any;
   nodeId: string;
   nodeIds: string[];
-  transitionCriterias = [
-    {
-      value: 'score',
-      text: $localize`Get a specific score on a component`,
-      params: [
-        { value: 'nodeId', text: $localize`Node ID` },
-        { value: 'componentId', text: $localize`Component ID` },
-        { value: 'scores', text: $localize`Scores(s)` },
-        { value: 'scoreId', text: $localize`Score ID (Optional)` }
-      ]
-    },
-    {
-      value: 'choiceChosen',
-      text: $localize`Choose a specific choice on a component`,
-      params: [
-        { value: 'nodeId', text: $localize`Node ID` },
-        { value: 'componentId', text: $localize`Component ID` },
-        { value: 'choiceIds', text: $localize`Choices` }
-      ]
-    },
-    {
-      value: 'tag',
-      text: $localize`Have Tag Assigned To Workgroup`,
-      params: [{ value: 'tag', text: $localize`Tag` }]
-    }
-  ];
-  whenToChoosePathOptions = [
-    { value: 'enterNode', text: $localize`Enter Node` },
-    { value: 'exitNode', text: $localize`Exit Node` },
-    { value: 'scoreChanged', text: $localize`Score Changed` },
-    { value: 'studentDataChanged', text: $localize`Student Data Changed` }
-  ];
+  transitionCriterias = authoringOptions.transitionCriterias;
+  whenToChoosePathOptions = authoringOptions.whenToChoosePathOptions;
 
   constructor(
     private ProjectService: TeacherProjectService,
