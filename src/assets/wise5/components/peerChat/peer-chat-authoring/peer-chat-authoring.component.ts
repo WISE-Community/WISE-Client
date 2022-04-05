@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import peerChatLogicOptions from './peer-chat-logic-options';
 
 @Component({
   selector: 'peer-chat-authoring',
@@ -24,40 +23,17 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     'OpenResponse',
     'Table'
   ];
-  inputChange: Subject<string> = new Subject<string>();
-  logicOptions = [
-    {
-      value: 'random',
-      text: $localize`Random`
-    },
-    {
-      value: 'manual',
-      text: $localize`Manual`
-    },
-    {
-      value: 'maximizeSimilarIdeas',
-      text: $localize`Maximize Similar Ideas`
-    },
-    {
-      value: 'maximizeDifferentIdeas',
-      text: $localize`Maximize Different Ideas`
-    }
-  ];
+  logicOptions = peerChatLogicOptions;
   nodeIds: string[];
 
   constructor(
-    protected ConfigService: ConfigService,
-    protected NodeService: NodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    private UtilService: UtilService
+    protected configService: ConfigService,
+    protected nodeService: NodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService,
+    private utilService: UtilService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
-    );
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit(): void {
@@ -125,12 +101,12 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   }
 
   moveQuestionUp(index: number): void {
-    this.UtilService.moveObjectUp(this.authoringComponentContent.questionBank, index);
+    this.utilService.moveObjectUp(this.authoringComponentContent.questionBank, index);
     this.componentChanged();
   }
 
   moveQuestionDown(index: number): void {
-    this.UtilService.moveObjectDown(this.authoringComponentContent.questionBank, index);
+    this.utilService.moveObjectDown(this.authoringComponentContent.questionBank, index);
     this.componentChanged();
   }
 
@@ -142,7 +118,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     );
   }
 
-  customTrackBy(index: number): any {
+  customTrackBy(index: number): number {
     return index;
   }
 }
