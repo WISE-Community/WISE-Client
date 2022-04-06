@@ -5,6 +5,7 @@ import { CopyProjectService } from '../../services/copyProjectService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
+import { newProjectTemplate } from '../newProjectTemplate';
 import * as angular from 'angular';
 import * as $ from 'jquery';
 
@@ -133,7 +134,7 @@ class MainAuthoringController {
   }
 
   showRegisterNewProjectView() {
-    this.project = this.ProjectService.getNewProjectTemplate();
+    this.project = newProjectTemplate;
     this.showCreateProjectView = true;
     this.$timeout(() => {
       document.getElementById('newProjectTitle').focus();

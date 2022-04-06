@@ -4,6 +4,7 @@ import { ConfigService } from '../../services/configService';
 import { SpaceService } from '../../services/spaceService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { UtilService } from '../../services/utilService';
+import { newProjectTemplate } from '../newProjectTemplate';
 
 class NotebookAuthoringController {
   $translate: any;
@@ -38,12 +39,12 @@ class NotebookAuthoringController {
     this.reportIdToAuthoringNote = {};
 
     if (this.project.notebook == null) {
-      const projectTemplate = this.ProjectService.getNewProjectTemplate();
+      const projectTemplate = newProjectTemplate;
       this.project.notebook = projectTemplate.notebook;
     }
 
     if (this.project.teacherNotebook == null) {
-      const projectTemplate = this.ProjectService.getNewProjectTemplate();
+      const projectTemplate = newProjectTemplate;
       projectTemplate.teacherNotebook.enabled = false;
       this.project.teacherNotebook = projectTemplate.teacherNotebook;
     }
@@ -99,7 +100,7 @@ class NotebookAuthoringController {
   }
 
   addReportNote() {
-    const projectTemplate = this.ProjectService.getNewProjectTemplate();
+    const projectTemplate = newProjectTemplate;
     if (this.project.notebook.itemTypes.report.notes == null) {
       this.project.notebook.itemTypes.report.notes = [];
     }
