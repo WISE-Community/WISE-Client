@@ -10,6 +10,7 @@ import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
 import { GraphService } from '../graphService';
+import * as graphAuthoringOptions from './graph-authoring-options';
 
 @Component({
   selector: 'graph-authoring',
@@ -17,107 +18,12 @@ import { GraphService } from '../graphService';
   styleUrls: ['graph-authoring.component.scss']
 })
 export class GraphAuthoring extends ComponentAuthoring {
-  availableGraphTypes = [
-    {
-      value: 'line',
-      text: $localize`Line Plot`
-    },
-    {
-      value: 'column',
-      text: $localize`Column Plot`
-    },
-    {
-      value: 'scatter',
-      text: $localize`Scatter Plot`
-    }
-  ];
-
-  availableRoundingOptions = [
-    {
-      value: null,
-      text: $localize`No Rounding`
-    },
-    {
-      value: 'integer',
-      text: $localize`Integer (example 1)`
-    },
-    {
-      value: 'tenth',
-      text: $localize`Tenth (exapmle 0.1)`
-    },
-    {
-      value: 'hundredth',
-      text: $localize`Hundredth (example 0.01)`
-    }
-  ];
-
-  availableSymbols = [
-    {
-      value: 'circle',
-      text: $localize`Circle`
-    },
-    {
-      value: 'square',
-      text: $localize`Square`
-    },
-    {
-      value: 'triangle',
-      text: $localize`Triangle`
-    },
-    {
-      value: 'triangle-down',
-      text: $localize`Triangle Down`
-    },
-    {
-      value: 'diamond',
-      text: $localize`Diamond`
-    }
-  ];
-
-  availableSeriesTypes = [
-    {
-      value: 'line',
-      text: $localize`Line`
-    },
-    {
-      value: 'scatter',
-      text: $localize`Point`
-    }
-  ];
-
-  availableLineTypes = [
-    {
-      value: 'Solid',
-      text: $localize`Solid`
-    },
-    {
-      value: 'Dash',
-      text: $localize`Dash`
-    },
-    {
-      value: 'Dot',
-      text: $localize`Dot`
-    },
-    {
-      value: 'ShortDash',
-      text: $localize`Short Dash`
-    },
-    {
-      value: 'ShortDot',
-      text: $localize`Short Dot`
-    }
-  ];
-
-  availableXAxisTypes = [
-    {
-      value: 'limits',
-      text: $localize`Limits`
-    },
-    {
-      value: 'categories',
-      text: $localize`Categories`
-    }
-  ];
+  availableGraphTypes = graphAuthoringOptions.graphTypes;
+  availableRoundingOptions = graphAuthoringOptions.roundingOptions;
+  availableSymbols = graphAuthoringOptions.symbols;
+  availableSeriesTypes = graphAuthoringOptions.seriesTypes;
+  availableLineTypes = graphAuthoringOptions.lineTypes;
+  availableXAxisTypes = graphAuthoringOptions.xAxisTypes;
 
   plotTypeToLimitType = {
     line: 'limits',
