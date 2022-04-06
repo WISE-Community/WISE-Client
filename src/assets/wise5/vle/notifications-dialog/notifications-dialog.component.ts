@@ -40,13 +40,13 @@ export class NotificationsDialogComponent implements OnInit {
     return this.newNotifications.length > 0;
   }
 
-  dismissNotificationAggregateAndVisitNode(event: any, notificationAggregate: any): void {
+  dismissNotificationAggregateAndVisitNode(notificationAggregate: any): void {
     if (notificationAggregate != null && notificationAggregate.notifications != null) {
       for (const notification of notificationAggregate.notifications) {
         if (notification.data == null || notification.data.dismissCode == null) {
           // only dismiss notifications that don't require a dismiss code,
           // but still allow them to move to the node
-          this.dismissNotification(event, notification);
+          this.dismissNotification(notification);
         }
       }
     }
@@ -64,13 +64,12 @@ export class NotificationsDialogComponent implements OnInit {
     }
   }
 
-  dismissNotification(event: any, notification: Notification, showDismissCode: boolean = true): any {
+  private dismissNotification(notification: Notification, showDismissCode: boolean = true): any {
     if (this.canDismissWithoutCode(notification)) {
       this.notificationService.dismissNotification(notification);
     } else if (showDismissCode) {
       // ask user to input dismiss code before dismissing it
       let args = {
-        event: event,
         notification: notification
       };
       this.notificationService.broadcastViewCurrentAmbientNotification(args);
@@ -78,10 +77,10 @@ export class NotificationsDialogComponent implements OnInit {
     }
   }
 
-  dismissNotificationAggregate(event: any, notificationAggregate: any, showDismissCode: boolean = true): void {
+  dismissNotificationAggregate(notificationAggregate: any, showDismissCode: boolean = true): void {
     if (notificationAggregate != null && notificationAggregate.notifications != null) {
       for (const notification of notificationAggregate.notifications) {
-        this.dismissNotification(event, notification, showDismissCode);
+        this.dismissNotification(notification, showDismissCode);
       }
     }
   }
@@ -89,7 +88,7 @@ export class NotificationsDialogComponent implements OnInit {
   dismissAll(event: any): void {
     if (confirm($localize`Are you sure you want to dismiss all your alerts?`)) {
       for (const notificationAggregate of this.newNotifications) {
-        this.dismissNotificationAggregate(event, notificationAggregate, false);
+        this.dismissNotificationAggregate(notificationAggregate, false);
       }
     }
   }
@@ -98,7 +97,7 @@ export class NotificationsDialogComponent implements OnInit {
     return this.projectService.getNodePositionAndTitleByNodeId(nodeId);
   }
 
-  canDismissWithoutCode(notification: Notification): boolean {
+  private canDismissWithoutCode(notification: Notification): boolean {
     return notification.data == null || notification.data.dismissCode == null;
   }
 }

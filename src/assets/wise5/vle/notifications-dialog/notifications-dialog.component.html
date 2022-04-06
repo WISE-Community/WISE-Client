@@ -7,7 +7,7 @@
   <span fxFlex></span>
   <button *ngIf="newNotifications.length > 0"
       mat-icon-button
-      (click)="dismissAll($event)"
+      (click)="dismissAll()"
       matTooltip="Dismiss all alerts"
       matTooltipPosition="before"
       i18n-matTooltip>
@@ -23,7 +23,7 @@
   <mat-list *ngIf="hasNewNotifications()">
     <mat-list-item *ngFor="let notificationAggregate of newNotifications; let last = last;" class="notification-item">
       <p matLine class="mat-body-1">
-        <a (click)="dismissNotificationAggregateAndVisitNode($event, notificationAggregate)"
+        <a (click)="dismissNotificationAggregateAndVisitNode(notificationAggregate)"
             tabindex="0"
             aria-label="View alert"
             i18n-aria-label>
@@ -41,7 +41,7 @@
         {{ reportItem.title }}
       </p>
       <button mat-icon-button
-          (click)="dismissNotificationAggregate($event, notificationAggregate); $event.stopPropagation();"
+          (click)="dismissNotificationAggregate(notificationAggregate); $event.stopPropagation();"
           aria-label="Dismiss"
           i18n-aria-label>
         <mat-icon class="text-secondary">clear</mat-icon>
