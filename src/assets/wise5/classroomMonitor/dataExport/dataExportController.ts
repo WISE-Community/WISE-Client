@@ -11,6 +11,7 @@ import { DataExportContext } from './DataExportContext';
 import { RawDataExportStrategy } from './strategies/RawDataExportStrategy';
 import { OneWorkgroupPerRowDataExportStrategy } from './strategies/OneWorkgroupPerRowDataExportStrategy';
 import { EventDataExportStrategy } from './strategies/EventDataExportStrategy';
+import { StudentAssetDataExportStrategy } from './strategies/StudentAssetDataExportStrategy';
 
 class DataExportController {
   allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match', 'OpenResponse'];
@@ -167,7 +168,8 @@ class DataExportController {
     } else if (exportType === 'notifications') {
       this.exportNotifications();
     } else if (exportType === 'studentAssets') {
-      this.exportStudentAssets();
+      this.dataExportContext.setStrategy(new StudentAssetDataExportStrategy(this));
+      this.dataExportContext.export();
     } else if (exportType === 'oneWorkgroupPerRow') {
       this.dataExportContext.export();
     } else if (exportType === 'rawData') {
@@ -1060,13 +1062,6 @@ class DataExportController {
       }
     }
     return row;
-  }
-
-  exportStudentAssets() {
-    this.showDownloadingExportMessage();
-    this.DataExportService.retrieveStudentAssetsExport().then(() => {
-      this.hideDownloadingExportMessage();
-    });
   }
 
   /**
