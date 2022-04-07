@@ -12,6 +12,7 @@ import { RawDataExportStrategy } from './strategies/RawDataExportStrategy';
 import { OneWorkgroupPerRowDataExportStrategy } from './strategies/OneWorkgroupPerRowDataExportStrategy';
 import { EventDataExportStrategy } from './strategies/EventDataExportStrategy';
 import { StudentAssetDataExportStrategy } from './strategies/StudentAssetDataExportStrategy';
+import { NotebookDataExportStrategy } from './strategies/NotebookDataExportStrategy';
 
 class DataExportController {
   allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match', 'OpenResponse'];
@@ -164,7 +165,8 @@ class DataExportController {
       this.dataExportContext.setStrategy(new EventDataExportStrategy(this));
       this.dataExportContext.export();
     } else if (exportType === 'latestNotebookItems' || exportType === 'allNotebookItems') {
-      this.exportNotebookItems(exportType);
+      this.dataExportContext.setStrategy(new NotebookDataExportStrategy(this, exportType));
+      this.dataExportContext.export();
     } else if (exportType === 'notifications') {
       this.exportNotifications();
     } else if (exportType === 'studentAssets') {
@@ -835,121 +837,6 @@ class DataExportController {
 
   escapeContent(str) {
     return str.replace(/[\n]/g, '\\n').replace(/[\r]/g, '\\r').replace(/[\t]/g, '\\t');
-  }
-
-  exportNotebookItems(exportType) {
-    this.showDownloadingExportMessage();
-    this.DataExportService.retrieveNotebookExport(exportType).then((result) => {
-      const notebookItems = result;
-      const columnNames = [
-        'ID',
-        'Teacher Username',
-        'Run ID',
-        'Period ID',
-        'Period Name',
-        'Project ID',
-        'Node ID',
-        'Component ID',
-        'Step Number',
-        'Step Title',
-        'Component Part Number',
-        'Component Type',
-        'Client Save Time',
-        'Server Save Time',
-        'Workgroup ID',
-        'User ID 1',
-        'User ID 2',
-        'User ID 3',
-        'Content',
-        'Note Item ID',
-        'Type',
-        'Response'
-      ];
-      const columnNameToNumber = {};
-      const headerRow = [];
-      for (let c = 0; c < columnNames.length; c++) {
-        const columnName = columnNames[c];
-        columnNameToNumber[columnName] = c;
-        headerRow.push(columnName);
-      }
-      const rows = [];
-      rows.push(headerRow);
-      for (const notebookItem of notebookItems) {
-        rows.push(this.createExportNotebookItemRow(columnNames, columnNameToNumber, notebookItem));
-      }
-      const runId = this.ConfigService.getRunId();
-      let fileName = '';
-      if (exportType === 'latestNotebookItems') {
-        fileName = `${runId}_latest_notebook_items.csv`;
-      } else if (exportType === 'allNotebookItems') {
-        fileName = `${runId}_all_notebook_items.csv`;
-      }
-      this.generateCSVFile(rows, fileName);
-      this.hideDownloadingExportMessage();
-    });
-  }
-
-  createExportNotebookItemRow(columnNames, columnNameToNumber, notebookItem) {
-    const row = new Array(columnNames.length);
-    row.fill(' ');
-    row[columnNameToNumber['ID']] = notebookItem.id;
-    row[columnNameToNumber['Note Item ID']] = notebookItem.localNotebookItemId;
-    row[columnNameToNumber['Node ID']] = notebookItem.nodeId;
-    row[columnNameToNumber['Component ID']] = notebookItem.componentId;
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(
-      notebookItem.nodeId,
-      notebookItem.componentId
-    );
-    if (component != null) {
-      row[columnNameToNumber['Component Type']] = component.type;
-    }
-    row[columnNameToNumber['Step Number']] = this.getNodePositionById(notebookItem.nodeId);
-    row[columnNameToNumber['Step Title']] = this.getNodeTitleByNodeId(notebookItem.nodeId);
-    const position = this.ProjectService.getComponentPositionByNodeIdAndComponentId(
-      notebookItem.nodeId,
-      notebookItem.componentId
-    );
-    if (position != -1) {
-      row[columnNameToNumber['Component Part Number']] = position + 1;
-    }
-    row[
-      columnNameToNumber['Client Save Time']
-    ] = this.UtilService.convertMillisecondsToFormattedDateTime(notebookItem.clientSaveTime);
-    row[
-      columnNameToNumber['Server Save Time']
-    ] = this.UtilService.convertMillisecondsToFormattedDateTime(notebookItem.serverSaveTime);
-    row[columnNameToNumber['Type']] = notebookItem.type;
-    row[columnNameToNumber['Content']] = JSON.parse(notebookItem.content);
-    row[columnNameToNumber['Run ID']] = notebookItem.runId;
-    row[columnNameToNumber['Workgroup ID']] = notebookItem.workgroupId;
-    const userInfo = this.ConfigService.getUserInfoByWorkgroupId(notebookItem.workgroupId);
-    if (notebookItem.localNotebookItemId !== 'teacherReport') {
-      row[columnNameToNumber['Period ID']] = notebookItem.periodId;
-      row[columnNameToNumber['Period Name']] = userInfo.periodName;
-    }
-    row[columnNameToNumber['Teacher Username']] = this.ConfigService.getTeacherUserInfo().username;
-    row[columnNameToNumber['Project ID']] = this.ConfigService.getProjectId();
-    if (notebookItem.localNotebookItemId !== 'teacherReport') {
-      const student1 = userInfo.users[0];
-      const student2 = userInfo.users[1];
-      const student3 = userInfo.users[2];
-      if (student1 != null) {
-        row[columnNameToNumber['User ID 1']] = student1.id;
-      }
-      if (student2 != null) {
-        row[columnNameToNumber['User ID 2']] = student2.id;
-      }
-      if (student3 != null) {
-        row[columnNameToNumber['User ID 3']] = student3.id;
-      }
-    }
-    const responseJSON = JSON.parse(notebookItem.content);
-    if (notebookItem.type === 'report') {
-      row[columnNameToNumber['Response']] = this.UtilService.removeHTMLTags(responseJSON.content);
-    } else {
-      row[columnNameToNumber['Response']] = responseJSON.text;
-    }
-    return row;
   }
 
   exportNotifications() {
