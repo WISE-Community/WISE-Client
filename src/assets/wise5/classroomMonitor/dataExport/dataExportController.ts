@@ -13,6 +13,7 @@ import { OneWorkgroupPerRowDataExportStrategy } from './strategies/OneWorkgroupP
 import { EventDataExportStrategy } from './strategies/EventDataExportStrategy';
 import { StudentAssetDataExportStrategy } from './strategies/StudentAssetDataExportStrategy';
 import { NotebookDataExportStrategy } from './strategies/NotebookDataExportStrategy';
+import { NotificationDataExportStrategy } from './strategies/NotificationDataExportStrategy';
 
 class DataExportController {
   allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match', 'OpenResponse'];
@@ -168,7 +169,8 @@ class DataExportController {
       this.dataExportContext.setStrategy(new NotebookDataExportStrategy(this, exportType));
       this.dataExportContext.export();
     } else if (exportType === 'notifications') {
-      this.exportNotifications();
+      this.dataExportContext.setStrategy(new NotificationDataExportStrategy(this));
+      this.dataExportContext.export();
     } else if (exportType === 'studentAssets') {
       this.dataExportContext.setStrategy(new StudentAssetDataExportStrategy(this));
       this.dataExportContext.export();
@@ -837,118 +839,6 @@ class DataExportController {
 
   escapeContent(str) {
     return str.replace(/[\n]/g, '\\n').replace(/[\r]/g, '\\r').replace(/[\t]/g, '\\t');
-  }
-
-  exportNotifications() {
-    this.showDownloadingExportMessage();
-    this.DataExportService.retrieveNotificationsExport().then((result) => {
-      const notifications = result;
-      const columnNames = [
-        'ID',
-        'Teacher Username',
-        'Run ID',
-        'Period ID',
-        'Period Name',
-        'Project ID',
-        'Node ID',
-        'Component ID',
-        'Step Number',
-        'Step Title',
-        'Component Part Number',
-        'Component Type',
-        'Server Save Time',
-        'Time Generated',
-        'Time Dismissed',
-        'From Workgroup ID',
-        'To Workgroup ID',
-        'User ID 1',
-        'User ID 2',
-        'User ID 3',
-        'Data',
-        'Group ID',
-        'Type',
-        'Message'
-      ];
-      const columnNameToNumber = {};
-      const headerRow = [];
-      for (let c = 0; c < columnNames.length; c++) {
-        const columnName = columnNames[c];
-        columnNameToNumber[columnName] = c;
-        headerRow.push(columnName);
-      }
-      const rows = [];
-      rows.push(headerRow);
-      for (const notification of notifications) {
-        rows.push(this.createExportNotificationRow(columnNames, columnNameToNumber, notification));
-      }
-      const runId = this.ConfigService.getRunId();
-      const fileName = `${runId}_notifications.csv`;
-      this.generateCSVFile(rows, fileName);
-      this.hideDownloadingExportMessage();
-    });
-  }
-
-  createExportNotificationRow(columnNames, columnNameToNumber, notification) {
-    const row = new Array(columnNames.length);
-    row.fill(' ');
-    row[columnNameToNumber['ID']] = notification.id;
-    row[columnNameToNumber['Node ID']] = notification.nodeId;
-    row[columnNameToNumber['Component ID']] = notification.componentId;
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(
-      notification.nodeId,
-      notification.componentId
-    );
-    if (component != null) {
-      row[columnNameToNumber['Component Type']] = component.type;
-    }
-    row[columnNameToNumber['Step Number']] = this.getNodePositionById(notification.nodeId);
-    row[columnNameToNumber['Step Title']] = this.getNodeTitleByNodeId(notification.nodeId);
-    const componentPosition = this.ProjectService.getComponentPositionByNodeIdAndComponentId(
-      notification.nodeId,
-      notification.componentId
-    );
-    if (componentPosition != -1) {
-      row[columnNameToNumber['Component Part Number']] = componentPosition + 1;
-    }
-    row[
-      columnNameToNumber['Server Save Time']
-    ] = this.UtilService.convertMillisecondsToFormattedDateTime(notification.serverSaveTime);
-    row[
-      columnNameToNumber['Time Generated']
-    ] = this.UtilService.convertMillisecondsToFormattedDateTime(notification.timeGenerated);
-    if (notification.timeDismissed != null) {
-      row[
-        columnNameToNumber['Time Dismissed']
-      ] = this.UtilService.convertMillisecondsToFormattedDateTime(notification.timeDismissed);
-    }
-    row[columnNameToNumber['Type']] = notification.type;
-    if (notification.groupId != null) {
-      row[columnNameToNumber['Group ID']] = notification.groupId;
-    }
-    row[columnNameToNumber['Message']] = notification.message;
-    row[columnNameToNumber['Data']] = notification.data;
-    row[columnNameToNumber['Period ID']] = notification.periodId;
-    row[columnNameToNumber['Run ID']] = notification.runId;
-    row[columnNameToNumber['From Workgroup ID']] = notification.fromWorkgroupId;
-    row[columnNameToNumber['To Workgroup ID']] = notification.toWorkgroupId;
-    const userInfo = this.ConfigService.getUserInfoByWorkgroupId(notification.toWorkgroupId);
-    row[columnNameToNumber['Period Name']] = userInfo.periodName;
-    row[columnNameToNumber['Teacher Username']] = this.ConfigService.getTeacherUserInfo().username;
-    row[columnNameToNumber['Project ID']] = this.ConfigService.getProjectId();
-    if (userInfo.users != null) {
-      this.addStudentUserIDsToNotificationRow(row, columnNameToNumber, userInfo);
-    }
-    return row;
-  }
-
-  addStudentUserIDsToNotificationRow(row: any, columnNameToNumber: any, userInfo: any) {
-    for (let i = 0; i <= 2; i++) {
-      const student = userInfo.users[i];
-      if (student != null) {
-        row[columnNameToNumber[`User ID ${i + 1}`]] = student.id;
-      }
-    }
-    return row;
   }
 
   /**
