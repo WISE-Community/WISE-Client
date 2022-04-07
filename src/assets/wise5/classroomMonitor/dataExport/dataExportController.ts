@@ -14,6 +14,7 @@ import { EventDataExportStrategy } from './strategies/EventDataExportStrategy';
 import { StudentAssetDataExportStrategy } from './strategies/StudentAssetDataExportStrategy';
 import { NotebookDataExportStrategy } from './strategies/NotebookDataExportStrategy';
 import { NotificationDataExportStrategy } from './strategies/NotificationDataExportStrategy';
+import { StudentWorkDataExportStrategy } from './strategies/StudentWorkDataExportStrategy';
 
 class DataExportController {
   allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match', 'OpenResponse'];
@@ -158,10 +159,9 @@ class DataExportController {
       'exportRequested',
       { exportType: exportType }
     );
-    if (exportType === 'allStudentWork') {
-      this.exportAllStudentWork();
-    } else if (exportType === 'latestStudentWork') {
-      this.exportLatestStudentWork();
+    if (exportType === 'allStudentWork' || exportType === 'latestStudentWork') {
+      this.dataExportContext.setStrategy(new StudentWorkDataExportStrategy(this, exportType));
+      this.dataExportContext.export();
     } else if (exportType === 'events') {
       this.dataExportContext.setStrategy(new EventDataExportStrategy(this));
       this.dataExportContext.export();
@@ -179,160 +179,6 @@ class DataExportController {
     } else if (exportType === 'rawData') {
       this.dataExportContext.export();
     }
-  }
-
-  exportAllStudentWork() {
-    this.exportStudentWork('allStudentWork');
-  }
-
-  exportLatestStudentWork() {
-    this.exportStudentWork('latestStudentWork');
-  }
-
-  /**
-   * Export all the student work
-   * @param exportType the export type e.g. "allStudentWork" or "latestStudentWork"
-   */
-  exportStudentWork(exportType) {
-    this.showDownloadingExportMessage();
-    var selectedNodes = [];
-    var selectedNodesMap = null;
-    if (this.exportStepSelectionType === 'exportSelectSteps') {
-      selectedNodes = this.getSelectedNodesToExport();
-      if (selectedNodes == null || selectedNodes.length == 0) {
-        alert('Please select a step to export.');
-        return;
-      } else {
-        selectedNodesMap = this.getSelectedNodesMap(selectedNodes);
-      }
-    }
-    this.DataExportService.retrieveStudentDataExport(selectedNodes).then((result) => {
-      var runId = this.ConfigService.getRunId();
-      var rows = [];
-      var rowCounter = 1;
-      var columnNameToNumber = {};
-      var columnNames = [
-        '#',
-        'Workgroup ID',
-        'User ID 1',
-        'Student Name 1',
-        'User ID 2',
-        'Student Name 2',
-        'User ID 3',
-        'Student Name 3',
-        'Class Period',
-        'Project ID',
-        'Project Name',
-        'Run ID',
-        'Start Date',
-        'End Date',
-        'Student Work ID',
-        'Server Timestamp',
-        'Client Timestamp',
-        'Node ID',
-        'Component ID',
-        'Component Part Number',
-        'Teacher Score Server Timestamp',
-        'Teacher Score Client Timestamp',
-        'Teacher Score',
-        'Max Teacher Score',
-        'Teacher Comment Server Timestamp',
-        'Teacher Comment Client Timestamp',
-        'Teacher Comment',
-        'Auto Score Server Timestamp',
-        'Auto Score Client Timestamp',
-        'Auto Score',
-        'Max Auto Score',
-        'Auto Comment Server Timestamp',
-        'Auto Comment Client Timestamp',
-        'Auto Comment',
-        'Step Title',
-        'Component Type',
-        'Component Prompt',
-        'Student Data',
-        'Component Revision Counter',
-        'Is Correct',
-        'Is Submit',
-        'Submit Count',
-        'Response'
-      ];
-      var headerRow = [];
-      for (var c = 0; c < columnNames.length; c++) {
-        var columnName = columnNames[c];
-        if (columnName != null) {
-          columnNameToNumber[columnName] = c;
-        }
-        headerRow.push(columnName);
-      }
-      rows.push(headerRow);
-      for (const workgroupId of this.ConfigService.getClassmateWorkgroupIds()) {
-        var userInfo = this.ConfigService.getUserInfoByWorkgroupId(workgroupId);
-        var extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
-        /*
-         * a mapping from component to component revision counter.
-         * the key will be {{nodeId}}_{{componentId}} and the
-         * value will be a number.
-         */
-        var componentRevisionCounter = {};
-        let componentStates = [];
-        if (exportType === 'allStudentWork') {
-          componentStates = this.TeacherDataService.getComponentStatesByWorkgroupId(workgroupId);
-        } else if (exportType === 'latestStudentWork') {
-          this.TeacherDataService.injectRevisionCounterIntoComponentStates(
-            this.TeacherDataService.getComponentStatesByWorkgroupId(workgroupId)
-          );
-          componentStates = this.TeacherDataService.getLatestComponentStatesByWorkgroupId(
-            workgroupId
-          );
-        }
-        if (componentStates != null) {
-          for (var c = 0; c < componentStates.length; c++) {
-            var componentState = componentStates[c];
-            if (componentState != null) {
-              var exportRow = true;
-              if (this.exportStepSelectionType === 'exportSelectSteps') {
-                if (
-                  !this.isComponentSelected(
-                    selectedNodesMap,
-                    componentState.nodeId,
-                    componentState.componentId
-                  )
-                ) {
-                  exportRow = false;
-                }
-              }
-              if (exportRow) {
-                var row = this.createStudentWorkExportRow(
-                  columnNames,
-                  columnNameToNumber,
-                  rowCounter,
-                  workgroupId,
-                  extractedUserIDsAndStudentNames['userId1'],
-                  extractedUserIDsAndStudentNames['userId2'],
-                  extractedUserIDsAndStudentNames['userId3'],
-                  extractedUserIDsAndStudentNames['studentName1'],
-                  extractedUserIDsAndStudentNames['studentName2'],
-                  extractedUserIDsAndStudentNames['studentName3'],
-                  userInfo.periodName,
-                  componentRevisionCounter,
-                  componentState
-                );
-                rows.push(row);
-                rowCounter++;
-              }
-            }
-          }
-        }
-      }
-      var fileName = '';
-      if (exportType === 'allStudentWork') {
-        fileName = runId + '_all_work.csv';
-      } else if (exportType === 'latestStudentWork') {
-        fileName = runId + '_latest_work.csv';
-      }
-      this.generateCSVFile(rows, fileName);
-      this.hideDownloadingExportMessage();
-    });
   }
 
   /**
