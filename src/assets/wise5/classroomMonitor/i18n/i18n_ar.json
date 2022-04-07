@@ -88,7 +88,6 @@
   "lockPeriodLabel": "قفل شاشات الطالب (الفترة الزمنية: {{ periodName }})",
   "lockStudentScreens": "قفل شاشات الطالب",
   "mainMenu": "القائمة الأساسية",
-  "matchCorrectnessColumnKey": "مفتاح عمود التصحيح: 0 = خاطئ، 1 = صحيح، 2 = مستودع صحيح لكن موضع خاطئ",
   "meanScore": "متوسط الدرجة",
   "milestoneDescriptionPlaceholder": "مثال \"قم بإنهاء النشاط الأول\"\n",
   "milestoneNamePlaceholder": "مثال \"الحدث الرئيسي رقم 1\"",

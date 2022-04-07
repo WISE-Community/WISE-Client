@@ -133,7 +133,6 @@
   "lockNodeConfirmation": "{{ nodeTitle }} has been locked for {{ periodName }}.",
   "unlockNodeConfirmation": "{{ nodeTitle }} has been unlocked for {{ periodName }}.",
   "mainMenu": "Main Menu",
-  "matchCorrectnessColumnKey": "Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position",
   "manageStudents": "Manage Students",
   "meanScore": "mean score",
   "milestoneDescriptionPlaceholder": "example \"Finish the first lesson\"",

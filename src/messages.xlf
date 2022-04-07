@@ -9906,6 +9906,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2288335752546657530" datatype="html">
+        <source>Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/dataExportController.ts</context>
+          <context context-type="linenumber">120</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="058b73757ea9dc14dee9cb48d52bf312fbb8ab15" datatype="html">
         <source>Selected icon</source>
         <context-group purpose="location">

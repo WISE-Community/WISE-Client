@@ -13,7 +13,6 @@ import { OneWorkgroupPerRowDataExportStrategy } from './strategies/OneWorkgroupP
 import { EventDataExportStrategy } from './strategies/EventDataExportStrategy';
 
 class DataExportController {
-  $translate: any;
   allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match', 'OpenResponse'];
   allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Match', 'OpenResponse'];
   autoScoreLabel: string = 'Auto Score';
@@ -89,7 +88,6 @@ class DataExportController {
   workSelectionType: string;
 
   static $inject = [
-    '$filter',
     '$injector',
     '$mdDialog',
     '$state',
@@ -104,7 +102,6 @@ class DataExportController {
   ];
 
   constructor(
-    $filter: any,
     private $injector: any,
     private $mdDialog: any,
     private $state: any,
@@ -118,8 +115,9 @@ class DataExportController {
     public UtilService: UtilService
   ) {
     this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
-    this.$translate = $filter('translate');
-    this.componentExportTooltips['Match'] = this.$translate('matchCorrectnessColumnKey');
+    this.componentExportTooltips[
+      'Match'
+    ] = $localize`Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position`;
     this.setDefaultExportSettings();
     this.project = this.ProjectService.project;
     let nodeOrderOfProject = this.ProjectService.getNodeOrderOfProject(this.project);
