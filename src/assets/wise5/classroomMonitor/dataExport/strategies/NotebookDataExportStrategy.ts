@@ -1,12 +1,13 @@
-import DataExportController from '../dataExportController';
-import { DataExportStrategy } from './DataExportStrategy';
+import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
-export class NotebookDataExportStrategy implements DataExportStrategy {
-  constructor(private controller: DataExportController, private exportType: string) {}
+export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
+  constructor(private exportType: string) {
+    super();
+  }
 
   export() {
     this.controller.showDownloadingExportMessage();
-    this.controller.DataExportService.retrieveNotebookExport(this.exportType).then((result) => {
+    this.dataExportService.retrieveNotebookExport(this.exportType).then((result) => {
       const notebookItems = result;
       const columnNames = [
         'ID',
@@ -42,16 +43,14 @@ export class NotebookDataExportStrategy implements DataExportStrategy {
       const rows = [];
       rows.push(headerRow);
       for (const notebookItem of notebookItems) {
-        const userInfo = this.controller.ConfigService.getUserInfoByWorkgroupId(
-          notebookItem.workgroupId
-        );
+        const userInfo = this.configService.getUserInfoByWorkgroupId(notebookItem.workgroupId);
         if (userInfo != null) {
           rows.push(
             this.createExportNotebookItemRow(columnNames, columnNameToNumber, notebookItem)
           );
         }
       }
-      const runId = this.controller.ConfigService.getRunId();
+      const runId = this.configService.getRunId();
       let fileName = '';
       if (this.exportType === 'latestNotebookItems') {
         fileName = `${runId}_latest_notebook_items.csv`;
@@ -70,7 +69,7 @@ export class NotebookDataExportStrategy implements DataExportStrategy {
     row[columnNameToNumber['Note Item ID']] = notebookItem.localNotebookItemId;
     row[columnNameToNumber['Node ID']] = notebookItem.nodeId;
     row[columnNameToNumber['Component ID']] = notebookItem.componentId;
-    const component = this.controller.ProjectService.getComponentByNodeIdAndComponentId(
+    const component = this.projectService.getComponentByNodeIdAndComponentId(
       notebookItem.nodeId,
       notebookItem.componentId
     );
@@ -83,7 +82,7 @@ export class NotebookDataExportStrategy implements DataExportStrategy {
     row[columnNameToNumber['Step Title']] = this.controller.getNodeTitleByNodeId(
       notebookItem.nodeId
     );
-    const position = this.controller.ProjectService.getComponentPositionByNodeIdAndComponentId(
+    const position = this.projectService.getComponentPositionByNodeIdAndComponentId(
       notebookItem.nodeId,
       notebookItem.componentId
     );
@@ -92,29 +91,21 @@ export class NotebookDataExportStrategy implements DataExportStrategy {
     }
     row[
       columnNameToNumber['Client Save Time']
-    ] = this.controller.UtilService.convertMillisecondsToFormattedDateTime(
-      notebookItem.clientSaveTime
-    );
+    ] = this.utilService.convertMillisecondsToFormattedDateTime(notebookItem.clientSaveTime);
     row[
       columnNameToNumber['Server Save Time']
-    ] = this.controller.UtilService.convertMillisecondsToFormattedDateTime(
-      notebookItem.serverSaveTime
-    );
+    ] = this.utilService.convertMillisecondsToFormattedDateTime(notebookItem.serverSaveTime);
     row[columnNameToNumber['Type']] = notebookItem.type;
     row[columnNameToNumber['Content']] = JSON.parse(notebookItem.content);
     row[columnNameToNumber['Run ID']] = notebookItem.runId;
     row[columnNameToNumber['Workgroup ID']] = notebookItem.workgroupId;
-    const userInfo = this.controller.ConfigService.getUserInfoByWorkgroupId(
-      notebookItem.workgroupId
-    );
+    const userInfo = this.configService.getUserInfoByWorkgroupId(notebookItem.workgroupId);
     if (notebookItem.localNotebookItemId !== 'teacherReport') {
       row[columnNameToNumber['Period ID']] = notebookItem.periodId;
       row[columnNameToNumber['Period Name']] = userInfo.periodName;
     }
-    row[
-      columnNameToNumber['Teacher Username']
-    ] = this.controller.ConfigService.getTeacherUserInfo().username;
-    row[columnNameToNumber['Project ID']] = this.controller.ConfigService.getProjectId();
+    row[columnNameToNumber['Teacher Username']] = this.configService.getTeacherUserInfo().username;
+    row[columnNameToNumber['Project ID']] = this.configService.getProjectId();
     if (notebookItem.localNotebookItemId !== 'teacherReport') {
       const student1 = userInfo.users[0];
       const student2 = userInfo.users[1];
@@ -131,9 +122,7 @@ export class NotebookDataExportStrategy implements DataExportStrategy {
     }
     const responseJSON = JSON.parse(notebookItem.content);
     if (notebookItem.type === 'report') {
-      row[columnNameToNumber['Response']] = this.controller.UtilService.removeHTMLTags(
-        responseJSON.content
-      );
+      row[columnNameToNumber['Response']] = this.utilService.removeHTMLTags(responseJSON.content);
     } else {
       row[columnNameToNumber['Response']] = responseJSON.text;
     }

@@ -1,12 +1,9 @@
-import DataExportController from '../dataExportController';
-import { DataExportStrategy } from './DataExportStrategy';
+import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
-export class NotificationDataExportStrategy implements DataExportStrategy {
-  constructor(private controller: DataExportController) {}
-
+export class NotificationDataExportStrategy extends AbstractDataExportStrategy {
   export() {
     this.controller.showDownloadingExportMessage();
-    this.controller.DataExportService.retrieveNotificationsExport().then((result) => {
+    this.dataExportService.retrieveNotificationsExport().then((result) => {
       const notifications = result;
       const columnNames = [
         'ID',
@@ -46,7 +43,7 @@ export class NotificationDataExportStrategy implements DataExportStrategy {
       for (const notification of notifications) {
         rows.push(this.createExportNotificationRow(columnNames, columnNameToNumber, notification));
       }
-      const runId = this.controller.ConfigService.getRunId();
+      const runId = this.configService.getRunId();
       const fileName = `${runId}_notifications.csv`;
       this.controller.generateCSVFile(rows, fileName);
       this.controller.hideDownloadingExportMessage();
@@ -59,7 +56,7 @@ export class NotificationDataExportStrategy implements DataExportStrategy {
     row[columnNameToNumber['ID']] = notification.id;
     row[columnNameToNumber['Node ID']] = notification.nodeId;
     row[columnNameToNumber['Component ID']] = notification.componentId;
-    const component = this.controller.ProjectService.getComponentByNodeIdAndComponentId(
+    const component = this.projectService.getComponentByNodeIdAndComponentId(
       notification.nodeId,
       notification.componentId
     );
@@ -72,7 +69,7 @@ export class NotificationDataExportStrategy implements DataExportStrategy {
     row[columnNameToNumber['Step Title']] = this.controller.getNodeTitleByNodeId(
       notification.nodeId
     );
-    const componentPosition = this.controller.ProjectService.getComponentPositionByNodeIdAndComponentId(
+    const componentPosition = this.projectService.getComponentPositionByNodeIdAndComponentId(
       notification.nodeId,
       notification.componentId
     );
@@ -81,20 +78,14 @@ export class NotificationDataExportStrategy implements DataExportStrategy {
     }
     row[
       columnNameToNumber['Server Save Time']
-    ] = this.controller.UtilService.convertMillisecondsToFormattedDateTime(
-      notification.serverSaveTime
-    );
+    ] = this.utilService.convertMillisecondsToFormattedDateTime(notification.serverSaveTime);
     row[
       columnNameToNumber['Time Generated']
-    ] = this.controller.UtilService.convertMillisecondsToFormattedDateTime(
-      notification.timeGenerated
-    );
+    ] = this.utilService.convertMillisecondsToFormattedDateTime(notification.timeGenerated);
     if (notification.timeDismissed != null) {
       row[
         columnNameToNumber['Time Dismissed']
-      ] = this.controller.UtilService.convertMillisecondsToFormattedDateTime(
-        notification.timeDismissed
-      );
+      ] = this.utilService.convertMillisecondsToFormattedDateTime(notification.timeDismissed);
     }
     row[columnNameToNumber['Type']] = notification.type;
     if (notification.groupId != null) {
@@ -106,14 +97,10 @@ export class NotificationDataExportStrategy implements DataExportStrategy {
     row[columnNameToNumber['Run ID']] = notification.runId;
     row[columnNameToNumber['From Workgroup ID']] = notification.fromWorkgroupId;
     row[columnNameToNumber['To Workgroup ID']] = notification.toWorkgroupId;
-    const userInfo = this.controller.ConfigService.getUserInfoByWorkgroupId(
-      notification.toWorkgroupId
-    );
+    const userInfo = this.configService.getUserInfoByWorkgroupId(notification.toWorkgroupId);
     row[columnNameToNumber['Period Name']] = userInfo.periodName;
-    row[
-      columnNameToNumber['Teacher Username']
-    ] = this.controller.ConfigService.getTeacherUserInfo().username;
-    row[columnNameToNumber['Project ID']] = this.controller.ConfigService.getProjectId();
+    row[columnNameToNumber['Teacher Username']] = this.configService.getTeacherUserInfo().username;
+    row[columnNameToNumber['Project ID']] = this.configService.getProjectId();
     if (userInfo.users != null) {
       this.addStudentUserIDsToNotificationRow(row, columnNameToNumber, userInfo);
     }

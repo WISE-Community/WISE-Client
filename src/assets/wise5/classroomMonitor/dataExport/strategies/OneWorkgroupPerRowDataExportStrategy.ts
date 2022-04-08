@@ -1,9 +1,9 @@
+import { DataExportContext } from '../DataExportContext';
 import DataExportController from '../dataExportController';
+import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 import { DataExportStrategy } from './DataExportStrategy';
 
-export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy {
-  constructor(private controller: DataExportController) {}
-
+export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStrategy {
   /**
    * Create a csv export file with one workgroup per row
    */
@@ -25,172 +25,170 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
         alert('Please select a step to export.');
         return;
       } else {
-        selectedNodesMap = this.controller.getSelectedNodesMap(selectedNodes);
+        selectedNodesMap = this.getSelectedNodesMap(selectedNodes);
       }
     }
 
-    this.controller.DataExportService.retrieveOneWorkgroupPerRowExport(selectedNodes).then(
-      (result) => {
-        var rows = [];
-        var projectId = this.controller.ConfigService.getProjectId();
-        var projectTitle = this.controller.ProjectService.getProjectTitle();
-        var runId = this.controller.ConfigService.getRunId();
-        var startDate = '';
-        var endDate = '';
-        var columnIds = this.getColumnIdsForOneWorkgroupPerRow(selectedNodesMap);
-        var nodeIds = this.controller.ProjectService.getFlattenedProjectAsNodeIds();
-        var descriptionRowHeaders = [
-          'Workgroup ID',
-          'User ID 1',
-          'Student Name 1',
-          'User ID 2',
-          'Student Name 2',
-          'User ID 3',
-          'Student Name 3',
-          'Class Period',
-          'Project ID',
-          'Project Name',
-          'Run ID',
-          'Start Date',
-          'End Date'
-        ];
-        var columnIdToColumnIndex = this.controller.getColumnIdToColumnIndex(
-          columnIds,
-          descriptionRowHeaders
+    this.dataExportService.retrieveOneWorkgroupPerRowExport(selectedNodes).then((result) => {
+      var rows = [];
+      var projectId = this.configService.getProjectId();
+      var projectTitle = this.projectService.getProjectTitle();
+      var runId = this.configService.getRunId();
+      var startDate = '';
+      var endDate = '';
+      var columnIds = this.getColumnIdsForOneWorkgroupPerRow(selectedNodesMap);
+      var nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
+      var descriptionRowHeaders = [
+        'Workgroup ID',
+        'User ID 1',
+        'Student Name 1',
+        'User ID 2',
+        'Student Name 2',
+        'User ID 3',
+        'Student Name 3',
+        'Class Period',
+        'Project ID',
+        'Project Name',
+        'Run ID',
+        'Start Date',
+        'End Date'
+      ];
+      var columnIdToColumnIndex = this.controller.getColumnIdToColumnIndex(
+        columnIds,
+        descriptionRowHeaders
+      );
+      var topRows = this.getOneWorkgroupPerRowTopRows(
+        columnIds,
+        columnIdToColumnIndex,
+        descriptionRowHeaders
+      );
+      rows = rows.concat(topRows);
+      for (const workgroupId of this.configService.getClassmateWorkgroupIds()) {
+        /*
+         * Create the row for the workgroup and fill each cell with
+         * a space " ".
+         * The array length will be equal to the number of
+         * description header columns plus a column for the vertical
+         * headers plus all the columns for the steps/components.
+         */
+        var workgroupRow = new Array(descriptionRowHeaders.length + 1 + columnIds.length);
+        workgroupRow.fill(' ');
+        var userInfo = this.configService.getUserInfoByWorkgroupId(workgroupId);
+        workgroupRow[columnIdToColumnIndex['Workgroup ID']] = workgroupId;
+        var extractedUserIDsAndStudentNames = this.controller.extractUserIDsAndStudentNames(
+          userInfo.users
         );
-        var topRows = this.getOneWorkgroupPerRowTopRows(
-          columnIds,
-          columnIdToColumnIndex,
-          descriptionRowHeaders
-        );
-        rows = rows.concat(topRows);
-        for (const workgroupId of this.controller.ConfigService.getClassmateWorkgroupIds()) {
-          /*
-           * Create the row for the workgroup and fill each cell with
-           * a space " ".
-           * The array length will be equal to the number of
-           * description header columns plus a column for the vertical
-           * headers plus all the columns for the steps/components.
-           */
-          var workgroupRow = new Array(descriptionRowHeaders.length + 1 + columnIds.length);
-          workgroupRow.fill(' ');
-          var userInfo = this.controller.ConfigService.getUserInfoByWorkgroupId(workgroupId);
-          workgroupRow[columnIdToColumnIndex['Workgroup ID']] = workgroupId;
-          var extractedUserIDsAndStudentNames = this.controller.extractUserIDsAndStudentNames(
-            userInfo.users
-          );
-          var userId1 = extractedUserIDsAndStudentNames['userId1'];
-          var userId2 = extractedUserIDsAndStudentNames['userId2'];
-          var userId3 = extractedUserIDsAndStudentNames['userId3'];
-          var studentName1 = extractedUserIDsAndStudentNames['studentName1'];
-          var studentName2 = extractedUserIDsAndStudentNames['studentName2'];
-          var studentName3 = extractedUserIDsAndStudentNames['studentName3'];
-          if (userId1 != null) {
-            workgroupRow[columnIdToColumnIndex['User ID 1']] = userId1;
-          }
-          if (studentName1 != null && this.controller.includeStudentNames) {
-            workgroupRow[columnIdToColumnIndex['Student Name 1']] = studentName1;
-          }
-          if (userId2 != null) {
-            workgroupRow[columnIdToColumnIndex['User ID 2']] = userId2;
-          }
-          if (studentName2 != null && this.controller.includeStudentNames) {
-            workgroupRow[columnIdToColumnIndex['Student Name 2']] = studentName2;
-          }
-          if (userId3 != null) {
-            workgroupRow[columnIdToColumnIndex['User ID 3']] = userId3;
-          }
-          if (studentName3 != null && this.controller.includeStudentNames) {
-            workgroupRow[columnIdToColumnIndex['Student Name 3']] = studentName3;
-          }
-          workgroupRow[columnIdToColumnIndex['Class Period']] = userInfo.periodName;
-          workgroupRow[columnIdToColumnIndex['Project ID']] = projectId;
-          workgroupRow[columnIdToColumnIndex['Project Name']] = projectTitle;
-          workgroupRow[columnIdToColumnIndex['Run ID']] = runId;
-          workgroupRow[columnIdToColumnIndex['Start Date']] = startDate;
-          workgroupRow[columnIdToColumnIndex['End Date']] = endDate;
-          for (var n = 0; n < nodeIds.length; n++) {
-            var nodeId = nodeIds[n];
-            var components = this.controller.ProjectService.getComponentsByNodeId(nodeId);
-            if (components != null) {
-              for (var c = 0; c < components.length; c++) {
-                var component = components[c];
-                if (component != null) {
-                  var componentId = component.id;
-                  if (this.exportComponent(selectedNodesMap, nodeId, componentId)) {
-                    var columnIdPrefix = nodeId + '-' + componentId;
-                    var componentState = this.controller.TeacherDataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
-                      workgroupId,
-                      nodeId,
-                      componentId
-                    );
-                    if (componentState != null) {
-                      if (this.controller.includeStudentWorkIds) {
-                        workgroupRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']] =
-                          componentState.id;
-                      }
-                      if (this.controller.includeStudentWorkTimestamps) {
-                        if (componentState.serverSaveTime != null) {
-                          var formattedDateTime = this.controller.UtilService.convertMillisecondsToFormattedDateTime(
-                            componentState.serverSaveTime
-                          );
-                          workgroupRow[
-                            columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']
-                          ] = formattedDateTime;
-                        }
-                      }
-                      workgroupRow[
-                        columnIdToColumnIndex[columnIdPrefix + '-studentWork']
-                      ] = this.controller.getStudentDataString(componentState);
-                      if (this.controller.includeScores || this.controller.includeComments) {
-                        var latestComponentAnnotations = this.controller.AnnotationService.getLatestComponentAnnotations(
-                          nodeId,
-                          componentId,
-                          workgroupId
+        var userId1 = extractedUserIDsAndStudentNames['userId1'];
+        var userId2 = extractedUserIDsAndStudentNames['userId2'];
+        var userId3 = extractedUserIDsAndStudentNames['userId3'];
+        var studentName1 = extractedUserIDsAndStudentNames['studentName1'];
+        var studentName2 = extractedUserIDsAndStudentNames['studentName2'];
+        var studentName3 = extractedUserIDsAndStudentNames['studentName3'];
+        if (userId1 != null) {
+          workgroupRow[columnIdToColumnIndex['User ID 1']] = userId1;
+        }
+        if (studentName1 != null && this.controller.includeStudentNames) {
+          workgroupRow[columnIdToColumnIndex['Student Name 1']] = studentName1;
+        }
+        if (userId2 != null) {
+          workgroupRow[columnIdToColumnIndex['User ID 2']] = userId2;
+        }
+        if (studentName2 != null && this.controller.includeStudentNames) {
+          workgroupRow[columnIdToColumnIndex['Student Name 2']] = studentName2;
+        }
+        if (userId3 != null) {
+          workgroupRow[columnIdToColumnIndex['User ID 3']] = userId3;
+        }
+        if (studentName3 != null && this.controller.includeStudentNames) {
+          workgroupRow[columnIdToColumnIndex['Student Name 3']] = studentName3;
+        }
+        workgroupRow[columnIdToColumnIndex['Class Period']] = userInfo.periodName;
+        workgroupRow[columnIdToColumnIndex['Project ID']] = projectId;
+        workgroupRow[columnIdToColumnIndex['Project Name']] = projectTitle;
+        workgroupRow[columnIdToColumnIndex['Run ID']] = runId;
+        workgroupRow[columnIdToColumnIndex['Start Date']] = startDate;
+        workgroupRow[columnIdToColumnIndex['End Date']] = endDate;
+        for (var n = 0; n < nodeIds.length; n++) {
+          var nodeId = nodeIds[n];
+          var components = this.projectService.getComponentsByNodeId(nodeId);
+          if (components != null) {
+            for (var c = 0; c < components.length; c++) {
+              var component = components[c];
+              if (component != null) {
+                var componentId = component.id;
+                if (this.exportComponent(selectedNodesMap, nodeId, componentId)) {
+                  var columnIdPrefix = nodeId + '-' + componentId;
+                  var componentState = this.teacherDataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
+                    workgroupId,
+                    nodeId,
+                    componentId
+                  );
+                  if (componentState != null) {
+                    if (this.controller.includeStudentWorkIds) {
+                      workgroupRow[columnIdToColumnIndex[columnIdPrefix + '-studentWorkId']] =
+                        componentState.id;
+                    }
+                    if (this.controller.includeStudentWorkTimestamps) {
+                      if (componentState.serverSaveTime != null) {
+                        var formattedDateTime = this.utilService.convertMillisecondsToFormattedDateTime(
+                          componentState.serverSaveTime
                         );
-                        if (latestComponentAnnotations != null) {
-                          var scoreAnnotation = latestComponentAnnotations.score;
-                          var commentAnnotation = latestComponentAnnotations.comment;
-                          if (scoreAnnotation != null) {
-                            if (this.controller.includeScoreTimestamps) {
-                              var scoreTimestamp = this.controller.UtilService.convertMillisecondsToFormattedDateTime(
-                                scoreAnnotation.serverSaveTime
-                              );
+                        workgroupRow[
+                          columnIdToColumnIndex[columnIdPrefix + '-studentWorkTimestamp']
+                        ] = formattedDateTime;
+                      }
+                    }
+                    workgroupRow[
+                      columnIdToColumnIndex[columnIdPrefix + '-studentWork']
+                    ] = this.controller.getStudentDataString(componentState);
+                    if (this.controller.includeScores || this.controller.includeComments) {
+                      var latestComponentAnnotations = this.annotationService.getLatestComponentAnnotations(
+                        nodeId,
+                        componentId,
+                        workgroupId
+                      );
+                      if (latestComponentAnnotations != null) {
+                        var scoreAnnotation = latestComponentAnnotations.score;
+                        var commentAnnotation = latestComponentAnnotations.comment;
+                        if (scoreAnnotation != null) {
+                          if (this.controller.includeScoreTimestamps) {
+                            var scoreTimestamp = this.utilService.convertMillisecondsToFormattedDateTime(
+                              scoreAnnotation.serverSaveTime
+                            );
+                            workgroupRow[
+                              columnIdToColumnIndex[columnIdPrefix + '-scoreTimestamp']
+                            ] = scoreTimestamp;
+                          }
+                          if (this.controller.includeScores) {
+                            if (
+                              scoreAnnotation.data != null &&
+                              scoreAnnotation.data.value != null
+                            ) {
+                              var scoreValue = scoreAnnotation.data.value;
                               workgroupRow[
-                                columnIdToColumnIndex[columnIdPrefix + '-scoreTimestamp']
-                              ] = scoreTimestamp;
-                            }
-                            if (this.controller.includeScores) {
-                              if (
-                                scoreAnnotation.data != null &&
-                                scoreAnnotation.data.value != null
-                              ) {
-                                var scoreValue = scoreAnnotation.data.value;
-                                workgroupRow[
-                                  columnIdToColumnIndex[columnIdPrefix + '-score']
-                                ] = scoreValue;
-                              }
+                                columnIdToColumnIndex[columnIdPrefix + '-score']
+                              ] = scoreValue;
                             }
                           }
-                          if (commentAnnotation != null) {
-                            if (this.controller.includeCommentTimestamps) {
-                              var commentTimestamp = this.controller.UtilService.convertMillisecondsToFormattedDateTime(
-                                commentAnnotation.serverSaveTime
-                              );
+                        }
+                        if (commentAnnotation != null) {
+                          if (this.controller.includeCommentTimestamps) {
+                            var commentTimestamp = this.utilService.convertMillisecondsToFormattedDateTime(
+                              commentAnnotation.serverSaveTime
+                            );
+                            workgroupRow[
+                              columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']
+                            ] = commentTimestamp;
+                          }
+                          if (this.controller.includeComments) {
+                            if (
+                              commentAnnotation.data != null &&
+                              commentAnnotation.data.value != null
+                            ) {
+                              var commentValue = commentAnnotation.data.value;
                               workgroupRow[
-                                columnIdToColumnIndex[columnIdPrefix + '-commentTimestamp']
-                              ] = commentTimestamp;
-                            }
-                            if (this.controller.includeComments) {
-                              if (
-                                commentAnnotation.data != null &&
-                                commentAnnotation.data.value != null
-                              ) {
-                                var commentValue = commentAnnotation.data.value;
-                                workgroupRow[
-                                  columnIdToColumnIndex[columnIdPrefix + '-comment']
-                                ] = commentValue;
-                              }
+                                columnIdToColumnIndex[columnIdPrefix + '-comment']
+                              ] = commentValue;
                             }
                           }
                         }
@@ -200,62 +198,58 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
                 }
               }
             }
-            if (this.controller.exportNode(selectedNodesMap, nodeId)) {
-              if (this.controller.ProjectService.isBranchPoint(nodeId)) {
-                var toNodeId = null;
-                var stepTitle = null;
-                var eventType = 'branchPathTaken';
-                var latestBranchPathTakenEvent = this.controller.TeacherDataService.getLatestEventByWorkgroupIdAndNodeIdAndType(
-                  workgroupId,
-                  nodeId,
-                  eventType
-                );
-                if (
-                  latestBranchPathTakenEvent != null &&
-                  latestBranchPathTakenEvent.data != null &&
-                  latestBranchPathTakenEvent.data.toNodeId != null
-                ) {
-                  toNodeId = latestBranchPathTakenEvent.data.toNodeId;
-                  stepTitle = this.controller.ProjectService.getNodePositionAndTitleByNodeId(
-                    toNodeId
-                  );
+          }
+          if (this.controller.exportNode(selectedNodesMap, nodeId)) {
+            if (this.projectService.isBranchPoint(nodeId)) {
+              var toNodeId = null;
+              var stepTitle = null;
+              var eventType = 'branchPathTaken';
+              var latestBranchPathTakenEvent = this.teacherDataService.getLatestEventByWorkgroupIdAndNodeIdAndType(
+                workgroupId,
+                nodeId,
+                eventType
+              );
+              if (
+                latestBranchPathTakenEvent != null &&
+                latestBranchPathTakenEvent.data != null &&
+                latestBranchPathTakenEvent.data.toNodeId != null
+              ) {
+                toNodeId = latestBranchPathTakenEvent.data.toNodeId;
+                stepTitle = this.projectService.getNodePositionAndTitleByNodeId(toNodeId);
+              }
+              if (this.controller.includeBranchPathTakenNodeId) {
+                if (toNodeId != null) {
+                  workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTakenNodeId']] = toNodeId;
+                } else {
+                  workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTakenNodeId']] = ' ';
                 }
-                if (this.controller.includeBranchPathTakenNodeId) {
-                  if (toNodeId != null) {
-                    workgroupRow[
-                      columnIdToColumnIndex[nodeId + '-branchPathTakenNodeId']
-                    ] = toNodeId;
-                  } else {
-                    workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTakenNodeId']] = ' ';
-                  }
+              }
+              if (this.controller.includeBranchPathTaken) {
+                var branchLetter = this.projectService.getBranchLetter(toNodeId);
+                if (stepTitle != null) {
+                  workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTaken']] = branchLetter;
+                } else {
+                  workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTaken']] = ' ';
                 }
-                if (this.controller.includeBranchPathTaken) {
-                  var branchLetter = this.controller.ProjectService.getBranchLetter(toNodeId);
-                  if (stepTitle != null) {
-                    workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTaken']] = branchLetter;
-                  } else {
-                    workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTaken']] = ' ';
-                  }
-                }
-                if (this.controller.includeBranchPathTakenStepTitle) {
-                  if (stepTitle != null) {
-                    workgroupRow[
-                      columnIdToColumnIndex[nodeId + '-branchPathTakenStepTitle']
-                    ] = stepTitle;
-                  } else {
-                    workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTakenStepTitle']] = ' ';
-                  }
+              }
+              if (this.controller.includeBranchPathTakenStepTitle) {
+                if (stepTitle != null) {
+                  workgroupRow[
+                    columnIdToColumnIndex[nodeId + '-branchPathTakenStepTitle']
+                  ] = stepTitle;
+                } else {
+                  workgroupRow[columnIdToColumnIndex[nodeId + '-branchPathTakenStepTitle']] = ' ';
                 }
               }
             }
           }
-          rows.push(workgroupRow);
         }
-        var fileName = runId + '_one_workgroup_per_row.csv';
-        this.controller.generateCSVFile(rows, fileName);
-        this.controller.hideDownloadingExportMessage();
+        rows.push(workgroupRow);
       }
-    );
+      var fileName = runId + '_one_workgroup_per_row.csv';
+      this.controller.generateCSVFile(rows, fileName);
+      this.controller.hideDownloadingExportMessage();
+    });
   }
 
   /**
@@ -283,11 +277,11 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
    */
   private getColumnIdsForOneWorkgroupPerRow(selectedNodesMap) {
     var columnIds = [];
-    var nodeIds = this.controller.ProjectService.getFlattenedProjectAsNodeIds();
+    var nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
     if (nodeIds != null) {
       for (var n = 0; n < nodeIds.length; n++) {
         var nodeId = nodeIds[n];
-        var components = this.controller.ProjectService.getComponentsByNodeId(nodeId);
+        var components = this.projectService.getComponentsByNodeId(nodeId);
         if (components != null) {
           for (var c = 0; c < components.length; c++) {
             var component = components[c];
@@ -321,7 +315,7 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
           }
         }
         if (this.controller.exportNode(selectedNodesMap, nodeId)) {
-          if (this.controller.ProjectService.isBranchPoint(nodeId)) {
+          if (this.projectService.isBranchPoint(nodeId)) {
             if (this.controller.includeBranchPathTakenNodeId) {
               columnIds.push(nodeId + '-branchPathTakenNodeId');
             }
@@ -384,19 +378,19 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
     for (var d = 0; d < descriptionRowHeaders.length; d++) {
       descriptionRow[d] = descriptionRowHeaders[d];
     }
-    var nodeIds = this.controller.ProjectService.getFlattenedProjectAsNodeIds();
+    var nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
     if (nodeIds != null) {
       for (var n = 0; n < nodeIds.length; n++) {
         var nodeId = nodeIds[n];
-        var stepTitle = this.controller.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
-        var components = this.controller.ProjectService.getComponentsByNodeId(nodeId);
+        var stepTitle = this.projectService.getNodePositionAndTitleByNodeId(nodeId);
+        var components = this.projectService.getComponentsByNodeId(nodeId);
         if (components != null) {
           for (var c = 0; c < components.length; c++) {
             var component = components[c];
             if (component != null) {
               var componentId = component.id;
               var columnIdPrefix = nodeId + '-' + componentId;
-              var prompt = this.controller.UtilService.removeHTMLTags(component.prompt);
+              var prompt = this.utilService.removeHTMLTags(component.prompt);
               prompt = prompt.replace(/"/g, '""');
               if (prompt == '') {
                 prompt = ' ';
@@ -523,7 +517,7 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
           }
         }
         if (this.controller.includeBranchPathTakenNodeId) {
-          if (this.controller.ProjectService.isBranchPoint(nodeId)) {
+          if (this.projectService.isBranchPoint(nodeId)) {
             stepTitleRow[columnIdToColumnIndex[nodeId + '-branchPathTakenNodeId']] = stepTitle;
             componentPartNumberRow[columnIdToColumnIndex[nodeId + '-branchPathTakenNodeId']] = ' ';
             componentTypeRow[columnIdToColumnIndex[nodeId + '-branchPathTakenNodeId']] = ' ';
@@ -537,7 +531,7 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
           }
         }
         if (this.controller.includeBranchPathTaken) {
-          if (this.controller.ProjectService.isBranchPoint(nodeId)) {
+          if (this.projectService.isBranchPoint(nodeId)) {
             stepTitleRow[columnIdToColumnIndex[nodeId + '-branchPathTaken']] = stepTitle;
             componentPartNumberRow[columnIdToColumnIndex[nodeId + '-branchPathTaken']] = ' ';
             componentTypeRow[columnIdToColumnIndex[nodeId + '-branchPathTaken']] = ' ';
@@ -551,7 +545,7 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
           }
         }
         if (this.controller.includeBranchPathTakenStepTitle) {
-          if (this.controller.ProjectService.isBranchPoint(nodeId)) {
+          if (this.projectService.isBranchPoint(nodeId)) {
             stepTitleRow[columnIdToColumnIndex[nodeId + '-branchPathTakenStepTitle']] = stepTitle;
             componentPartNumberRow[columnIdToColumnIndex[nodeId + '-branchPathTakenStepTitle']] =
               ' ';

@@ -52,7 +52,7 @@ class DataExportController {
   ];
   canViewStudentNames: boolean = false;
   componentTypeToComponentService: any = {};
-  dataExportContext: DataExportContext = new DataExportContext();
+  dataExportContext: DataExportContext;
   dialogGuidanceComputerResponseLabel: string = 'Computer Response';
   dialogGuidanceRevisionLabel: string = 'Revision';
   embeddedTableKeyToValue = {
@@ -118,6 +118,7 @@ class DataExportController {
     public TeacherDataService: TeacherDataService,
     public UtilService: UtilService
   ) {
+    this.dataExportContext = new DataExportContext(this);
     this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
     this.componentExportTooltips[
       'Match'
@@ -160,19 +161,19 @@ class DataExportController {
       { exportType: exportType }
     );
     if (exportType === 'allStudentWork' || exportType === 'latestStudentWork') {
-      this.dataExportContext.setStrategy(new StudentWorkDataExportStrategy(this, exportType));
+      this.dataExportContext.setStrategy(new StudentWorkDataExportStrategy(exportType));
     } else if (exportType === 'events') {
-      this.dataExportContext.setStrategy(new EventDataExportStrategy(this));
+      this.dataExportContext.setStrategy(new EventDataExportStrategy());
     } else if (exportType === 'latestNotebookItems' || exportType === 'allNotebookItems') {
-      this.dataExportContext.setStrategy(new NotebookDataExportStrategy(this, exportType));
+      this.dataExportContext.setStrategy(new NotebookDataExportStrategy(exportType));
     } else if (exportType === 'notifications') {
-      this.dataExportContext.setStrategy(new NotificationDataExportStrategy(this));
+      this.dataExportContext.setStrategy(new NotificationDataExportStrategy());
     } else if (exportType === 'studentAssets') {
-      this.dataExportContext.setStrategy(new StudentAssetDataExportStrategy(this));
+      this.dataExportContext.setStrategy(new StudentAssetDataExportStrategy());
     } else if (exportType === 'oneWorkgroupPerRow') {
-      this.dataExportContext.setStrategy(new OneWorkgroupPerRowDataExportStrategy(this));
+      this.dataExportContext.setStrategy(new OneWorkgroupPerRowDataExportStrategy());
     } else if (exportType === 'rawData') {
-      this.dataExportContext.setStrategy(new RawDataExportStrategy(this));
+      this.dataExportContext.setStrategy(new RawDataExportStrategy());
     }
     this.dataExportContext.export();
   }
@@ -729,55 +730,6 @@ class DataExportController {
       }
     }
     return selectedNodes;
-  }
-
-  /**
-   * Get a mapping of node/component id strings to true.
-   * example if
-   * selectedNodes = [
-   *   {
-   *     nodeId: "node1",
-   *     componentId: "343b8aesf7"
-   *   },
-   *   {
-   *     nodeId: "node2",
-   *     componentId: "b34gaf0ug2"
-   *   },
-   *   {
-   *     nodeId: "node3"
-   *   }
-   * ]
-   *
-   * this function will return
-   * {
-   *   "node1-343b8aesf7": true,
-   *   "node2-b34gaf0ug2": true,
-   *   "node3": true
-   * }
-   *
-   * @param selectedNodes an array of objects that contain a nodeId field and maybe also
-   * a componentId field
-   * @return a mapping of node/component id strings to true
-   */
-  getSelectedNodesMap(selectedNodes = []) {
-    const selectedNodesMap = {};
-    for (var sn = 0; sn < selectedNodes.length; sn++) {
-      var selectedNode = selectedNodes[sn];
-      if (selectedNode != null) {
-        var nodeId = selectedNode.nodeId;
-        var componentId = selectedNode.componentId;
-        var selectedNodeString = '';
-        if (nodeId != null && componentId != null) {
-          selectedNodeString = nodeId + '-' + componentId;
-        } else if (nodeId != null) {
-          selectedNodeString = nodeId;
-        }
-        if (selectedNodeString != null && selectedNodeString != '') {
-          selectedNodesMap[selectedNodeString] = true;
-        }
-      }
-    }
-    return selectedNodesMap;
   }
 
   /**

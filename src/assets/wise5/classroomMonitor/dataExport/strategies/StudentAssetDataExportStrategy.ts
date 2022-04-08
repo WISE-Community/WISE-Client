@@ -1,12 +1,9 @@
-import DataExportController from '../dataExportController';
-import { DataExportStrategy } from './DataExportStrategy';
+import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
-export class StudentAssetDataExportStrategy implements DataExportStrategy {
-  constructor(private controller: DataExportController) {}
-
+export class StudentAssetDataExportStrategy extends AbstractDataExportStrategy {
   export() {
     this.controller.showDownloadingExportMessage();
-    this.controller.DataExportService.retrieveStudentAssetsExport().then(() => {
+    this.dataExportService.retrieveStudentAssetsExport().then(() => {
       this.controller.hideDownloadingExportMessage();
     });
   }

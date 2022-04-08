@@ -1,18 +1,17 @@
-import DataExportController from '../dataExportController';
-import { DataExportStrategy } from './DataExportStrategy';
+import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
-export class EventDataExportStrategy implements DataExportStrategy {
-  constructor(private controller: DataExportController) {}
-
+export class EventDataExportStrategy extends AbstractDataExportStrategy {
   export() {
     this.controller.showDownloadingExportMessage();
-    this.controller.DataExportService.retrieveEventsExport(
-      this.controller.includeStudentEvents,
-      this.controller.includeTeacherEvents,
-      this.controller.includeStudentNames
-    ).then((events: any[]) => {
-      this.generateEventsExport(events);
-    });
+    this.dataExportService
+      .retrieveEventsExport(
+        this.controller.includeStudentEvents,
+        this.controller.includeTeacherEvents,
+        this.controller.includeStudentNames
+      )
+      .then((events: any[]) => {
+        this.generateEventsExport(events);
+      });
   }
 
   private generateEventsExport(events: any[]): void {
@@ -27,9 +26,9 @@ export class EventDataExportStrategy implements DataExportStrategy {
         rowCounter,
         columnNames,
         columnNameToNumber,
-        this.controller.DataExportService.getStudentEvents(events).sort(
-          this.sortByFields('workgroupId', 'serverSaveTime')
-        )
+        this.dataExportService
+          .getStudentEvents(events)
+          .sort(this.sortByFields('workgroupId', 'serverSaveTime'))
       );
     }
     if (this.controller.includeTeacherEvents) {
@@ -38,12 +37,12 @@ export class EventDataExportStrategy implements DataExportStrategy {
         rowCounter,
         columnNames,
         columnNameToNumber,
-        this.controller.DataExportService.getTeacherEvents(events).sort(
-          this.sortByFields('userId', 'serverSaveTime')
-        )
+        this.dataExportService
+          .getTeacherEvents(events)
+          .sort(this.sortByFields('userId', 'serverSaveTime'))
       );
     }
-    const fileName = this.controller.ConfigService.getRunId() + '_events.csv';
+    const fileName = this.configService.getRunId() + '_events.csv';
     this.controller.generateCSVFile(rows, fileName);
     this.controller.hideDownloadingExportMessage();
   }
@@ -55,7 +54,7 @@ export class EventDataExportStrategy implements DataExportStrategy {
     columnNameToNumber: any,
     events: any[]
   ): number {
-    for (const workgroup of this.controller.ConfigService.getClassmateUserInfosSortedByWorkgroupId()) {
+    for (const workgroup of this.configService.getClassmateUserInfosSortedByWorkgroupId()) {
       rowCounter = this.addStudentEventsForWorkgroup(
         workgroup,
         rows,
@@ -101,7 +100,7 @@ export class EventDataExportStrategy implements DataExportStrategy {
   ): number {
     const workgroupId = workgroup.workgroupId;
     const periodName = workgroup.periodName;
-    const userInfo = this.controller.ConfigService.getUserInfoByWorkgroupId(workgroupId);
+    const userInfo = this.configService.getUserInfoByWorkgroupId(workgroupId);
     const extractedUserIDsAndStudentNames = this.controller.extractUserIDsAndStudentNames(
       userInfo.users
     );
@@ -203,7 +202,7 @@ export class EventDataExportStrategy implements DataExportStrategy {
         rowCounter,
         event.workgroupId,
         event.userId,
-        this.controller.ConfigService.getTeacherUsername(event.userId),
+        this.configService.getTeacherUsername(event.userId),
         event
       );
       rows.push(row);
@@ -361,15 +360,15 @@ export class EventDataExportStrategy implements DataExportStrategy {
   }
 
   private setProjectId(row, columnNameToNumber) {
-    row[columnNameToNumber['Project ID']] = this.controller.ConfigService.getProjectId();
+    row[columnNameToNumber['Project ID']] = this.configService.getProjectId();
   }
 
   private setProjectName(row, columnNameToNumber) {
-    row[columnNameToNumber['Project Name']] = this.controller.ProjectService.getProjectTitle();
+    row[columnNameToNumber['Project Name']] = this.projectService.getProjectTitle();
   }
 
   private setRunId(row, columnNameToNumber) {
-    row[columnNameToNumber['Run ID']] = this.controller.ConfigService.getRunId();
+    row[columnNameToNumber['Run ID']] = this.configService.getRunId();
   }
 
   private setEventId(row, columnNameToNumber, data) {
@@ -388,13 +387,13 @@ export class EventDataExportStrategy implements DataExportStrategy {
   private setServerSaveTime(row, columnNameToNumber, data) {
     row[
       columnNameToNumber['Server Timestamp']
-    ] = this.controller.UtilService.convertMillisecondsToFormattedDateTime(data.serverSaveTime);
+    ] = this.utilService.convertMillisecondsToFormattedDateTime(data.serverSaveTime);
   }
 
   private setClientSaveTime(row, columnNameToNumber, data) {
     row[
       columnNameToNumber['Client Timestamp']
-    ] = this.controller.UtilService.convertMillisecondsToFormattedDateTime(data.clientSaveTime);
+    ] = this.utilService.convertMillisecondsToFormattedDateTime(data.clientSaveTime);
   }
 
   private setNodeId(row, columnNameToNumber, data) {
@@ -432,14 +431,14 @@ export class EventDataExportStrategy implements DataExportStrategy {
   }
 
   private setTitle(row, columnNameToNumber, data) {
-    const stepTitle = this.controller.ProjectService.getNodePositionAndTitleByNodeId(data.nodeId);
+    const stepTitle = this.projectService.getNodePositionAndTitleByNodeId(data.nodeId);
     if (stepTitle != null) {
       row[columnNameToNumber['Step Title']] = stepTitle;
     }
   }
 
   private setComponentPartNumber(row, columnNameToNumber, data) {
-    const componentPartNumber = this.controller.ProjectService.getComponentPositionByNodeIdAndComponentId(
+    const componentPartNumber = this.projectService.getComponentPositionByNodeIdAndComponentId(
       data.nodeId,
       data.componentId
     );
@@ -456,7 +455,7 @@ export class EventDataExportStrategy implements DataExportStrategy {
 
   private setComponentPrompt(row, columnNameToNumber, component) {
     if (component != null) {
-      let prompt = this.controller.UtilService.removeHTMLTags(component.prompt);
+      let prompt = this.utilService.removeHTMLTags(component.prompt);
       prompt = prompt.replace(/"/g, '""');
       row[columnNameToNumber['Component Prompt']] = prompt;
     }
@@ -466,7 +465,7 @@ export class EventDataExportStrategy implements DataExportStrategy {
     const nodeId = data.nodeId;
     const componentId = data.componentId;
     if (nodeId != null && componentId != null) {
-      const component = this.controller.ProjectService.getComponentByNodeIdAndComponentId(
+      const component = this.projectService.getComponentByNodeIdAndComponentId(
         data.nodeId,
         data.componentId
       );
@@ -490,7 +489,7 @@ export class EventDataExportStrategy implements DataExportStrategy {
          */
         if (event.data != null && event.data.toNodeId != null) {
           var toNodeId = event.data.toNodeId;
-          var stepTitle = this.controller.ProjectService.getNodePositionAndTitleByNodeId(toNodeId);
+          var stepTitle = this.projectService.getNodePositionAndTitleByNodeId(toNodeId);
           response = stepTitle;
         }
       }

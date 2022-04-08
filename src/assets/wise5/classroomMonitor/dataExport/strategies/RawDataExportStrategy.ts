@@ -1,10 +1,7 @@
-import { DataExportStrategy } from './DataExportStrategy';
-import DataExportController from '../dataExportController';
 import * as angular from 'angular';
+import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
-export class RawDataExportStrategy implements DataExportStrategy {
-  constructor(private controller: DataExportController) {}
-
+export class RawDataExportStrategy extends AbstractDataExportStrategy {
   export() {
     this.controller.showDownloadingExportMessage();
     var selectedNodes = [];
@@ -23,14 +20,14 @@ export class RawDataExportStrategy implements DataExportStrategy {
         alert('Please select a step to export.');
         return;
       } else {
-        selectedNodesMap = this.controller.getSelectedNodesMap(selectedNodes);
+        selectedNodesMap = this.getSelectedNodesMap(selectedNodes);
       }
     }
-    this.controller.DataExportService.retrieveRawDataExport(selectedNodes).then((result) => {
-      var runId = this.controller.ConfigService.getRunId();
+    this.dataExportService.retrieveRawDataExport(selectedNodes).then((result) => {
+      var runId = this.configService.getRunId();
       var data: any = {};
-      var workgroups = this.controller.ConfigService.getClassmateUserInfosSortedByWorkgroupId();
-      workgroups = this.controller.UtilService.makeCopyOfJSONObject(workgroups);
+      var workgroups = this.configService.getClassmateUserInfosSortedByWorkgroupId();
+      workgroups = this.utilService.makeCopyOfJSONObject(workgroups);
       for (var w = 0; w < workgroups.length; w++) {
         var workgroup = workgroups[w];
         if (workgroup != null) {
@@ -40,7 +37,7 @@ export class RawDataExportStrategy implements DataExportStrategy {
           var workgroupId = workgroup.workgroupId;
           if (this.controller.includeStudentWork) {
             workgroup.studentWork = [];
-            var componentStates = this.controller.TeacherDataService.getComponentStatesByWorkgroupId(
+            var componentStates = this.teacherDataService.getComponentStatesByWorkgroupId(
               workgroupId
             );
             if (componentStates != null) {
@@ -60,9 +57,7 @@ export class RawDataExportStrategy implements DataExportStrategy {
           }
           if (this.controller.includeAnnotations) {
             workgroup.annotations = [];
-            var annotations = this.controller.TeacherDataService.getAnnotationsToWorkgroupId(
-              workgroupId
-            );
+            var annotations = this.teacherDataService.getAnnotationsToWorkgroupId(workgroupId);
             if (annotations != null) {
               for (var a = 0; a < annotations.length; a++) {
                 var annotation = annotations[a];
@@ -80,7 +75,7 @@ export class RawDataExportStrategy implements DataExportStrategy {
           }
           if (this.controller.includeEvents) {
             workgroup.events = [];
-            var events = this.controller.TeacherDataService.getEventsByWorkgroupId(workgroupId);
+            var events = this.teacherDataService.getEventsByWorkgroupId(workgroupId);
             if (events != null) {
               for (var e = 0; e < events.length; e++) {
                 var event = events[e];

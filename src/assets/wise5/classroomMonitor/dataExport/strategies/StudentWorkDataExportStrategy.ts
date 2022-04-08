@@ -1,8 +1,9 @@
-import DataExportController from '../dataExportController';
-import { DataExportStrategy } from './DataExportStrategy';
+import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
-export class StudentWorkDataExportStrategy implements DataExportStrategy {
-  constructor(private controller: DataExportController, private exportType: string) {}
+export class StudentWorkDataExportStrategy extends AbstractDataExportStrategy {
+  constructor(private exportType: string) {
+    super();
+  }
 
   export() {
     this.controller.showDownloadingExportMessage();
@@ -14,11 +15,11 @@ export class StudentWorkDataExportStrategy implements DataExportStrategy {
         alert('Please select a step to export.');
         return;
       } else {
-        selectedNodesMap = this.controller.getSelectedNodesMap(selectedNodes);
+        selectedNodesMap = this.getSelectedNodesMap(selectedNodes);
       }
     }
-    this.controller.DataExportService.retrieveStudentDataExport(selectedNodes).then((result) => {
-      var runId = this.controller.ConfigService.getRunId();
+    this.dataExportService.retrieveStudentDataExport(selectedNodes).then((result) => {
+      var runId = this.configService.getRunId();
       var rows = [];
       var rowCounter = 1;
       var columnNameToNumber = {};
@@ -76,8 +77,8 @@ export class StudentWorkDataExportStrategy implements DataExportStrategy {
         headerRow.push(columnName);
       }
       rows.push(headerRow);
-      for (const workgroupId of this.controller.ConfigService.getClassmateWorkgroupIds()) {
-        var userInfo = this.controller.ConfigService.getUserInfoByWorkgroupId(workgroupId);
+      for (const workgroupId of this.configService.getClassmateWorkgroupIds()) {
+        var userInfo = this.configService.getUserInfoByWorkgroupId(workgroupId);
         var extractedUserIDsAndStudentNames = this.controller.extractUserIDsAndStudentNames(
           userInfo.users
         );
@@ -89,14 +90,12 @@ export class StudentWorkDataExportStrategy implements DataExportStrategy {
         var componentRevisionCounter = {};
         let componentStates = [];
         if (this.exportType === 'allStudentWork') {
-          componentStates = this.controller.TeacherDataService.getComponentStatesByWorkgroupId(
-            workgroupId
-          );
+          componentStates = this.teacherDataService.getComponentStatesByWorkgroupId(workgroupId);
         } else if (this.exportType === 'latestStudentWork') {
-          this.controller.TeacherDataService.injectRevisionCounterIntoComponentStates(
-            this.controller.TeacherDataService.getComponentStatesByWorkgroupId(workgroupId)
+          this.teacherDataService.injectRevisionCounterIntoComponentStates(
+            this.teacherDataService.getComponentStatesByWorkgroupId(workgroupId)
           );
-          componentStates = this.controller.TeacherDataService.getLatestComponentStatesByWorkgroupId(
+          componentStates = this.teacherDataService.getLatestComponentStatesByWorkgroupId(
             workgroupId
           );
         }
