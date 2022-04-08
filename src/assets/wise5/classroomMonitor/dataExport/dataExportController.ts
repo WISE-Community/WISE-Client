@@ -161,24 +161,20 @@ class DataExportController {
     );
     if (exportType === 'allStudentWork' || exportType === 'latestStudentWork') {
       this.dataExportContext.setStrategy(new StudentWorkDataExportStrategy(this, exportType));
-      this.dataExportContext.export();
     } else if (exportType === 'events') {
       this.dataExportContext.setStrategy(new EventDataExportStrategy(this));
-      this.dataExportContext.export();
     } else if (exportType === 'latestNotebookItems' || exportType === 'allNotebookItems') {
       this.dataExportContext.setStrategy(new NotebookDataExportStrategy(this, exportType));
-      this.dataExportContext.export();
     } else if (exportType === 'notifications') {
       this.dataExportContext.setStrategy(new NotificationDataExportStrategy(this));
-      this.dataExportContext.export();
     } else if (exportType === 'studentAssets') {
       this.dataExportContext.setStrategy(new StudentAssetDataExportStrategy(this));
-      this.dataExportContext.export();
     } else if (exportType === 'oneWorkgroupPerRow') {
-      this.dataExportContext.export();
+      this.dataExportContext.setStrategy(new OneWorkgroupPerRowDataExportStrategy(this));
     } else if (exportType === 'rawData') {
-      this.dataExportContext.export();
+      this.dataExportContext.setStrategy(new RawDataExportStrategy(this));
     }
+    this.dataExportContext.export();
   }
 
   /**
@@ -949,31 +945,11 @@ class DataExportController {
   }
 
   /**
-   * Check if we want to export this component
-   * @param selectedNodesMap a mapping of node id to boolean value of whether
-   * the researcher has checked the node
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @return whether the component was checked
-   */
-  exportComponent(selectedNodesMap, nodeId, componentId) {
-    if (
-      selectedNodesMap == null ||
-      this.isComponentSelected(selectedNodesMap, nodeId, componentId)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /**
    * The "Export One Workgroup Per Row" button was clicked so we will display the
    * view for it
    */
   exportOneWorkgroupPerRowClicked() {
     this.exportType = 'oneWorkgroupPerRow';
-    this.dataExportContext.setStrategy(new OneWorkgroupPerRowDataExportStrategy(this));
   }
 
   /**
@@ -1065,36 +1041,6 @@ class DataExportController {
 
   rawDataExportClicked() {
     this.exportType = 'rawData';
-    this.dataExportContext.setStrategy(new RawDataExportStrategy(this));
-  }
-
-  removeNamesFromWorkgroup(workgroup) {
-    delete workgroup.username;
-    delete workgroup.displayNames;
-    for (let user of workgroup.users) {
-      delete user.name;
-      delete user.firstName;
-      delete user.lastName;
-    }
-  }
-
-  /**
-   * Get the composite id for a given object
-   * @param object a component state, annotation, or event
-   * @return the composite id for the object
-   * example
-   * 'node3'
-   * 'node4-wt38sdf1d3'
-   */
-  getCompositeId(object) {
-    var compositeId = null;
-    if (object.nodeId != null) {
-      compositeId = object.nodeId;
-    }
-    if (object.componentId != null) {
-      compositeId += '-' + object.componentId;
-    }
-    return compositeId;
   }
 
   canExportAllRevisionsForComponent(component: any) {

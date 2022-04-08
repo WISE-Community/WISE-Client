@@ -35,7 +35,7 @@ export class RawDataExportStrategy implements DataExportStrategy {
         var workgroup = workgroups[w];
         if (workgroup != null) {
           if (!this.controller.includeStudentNames) {
-            this.controller.removeNamesFromWorkgroup(workgroup);
+            this.removeNamesFromWorkgroup(workgroup);
           }
           var workgroupId = workgroup.workgroupId;
           if (this.controller.includeStudentWork) {
@@ -47,7 +47,7 @@ export class RawDataExportStrategy implements DataExportStrategy {
               for (var c = 0; c < componentStates.length; c++) {
                 var componentState = componentStates[c];
                 if (componentState != null) {
-                  var compositeId = this.controller.getCompositeId(componentState);
+                  var compositeId = this.getCompositeId(componentState);
                   if (
                     selectedNodesMap == null ||
                     (compositeId != null && selectedNodesMap[compositeId] == true)
@@ -67,7 +67,7 @@ export class RawDataExportStrategy implements DataExportStrategy {
               for (var a = 0; a < annotations.length; a++) {
                 var annotation = annotations[a];
                 if (annotation != null) {
-                  var compositeId = this.controller.getCompositeId(annotation);
+                  var compositeId = this.getCompositeId(annotation);
                   if (
                     selectedNodesMap == null ||
                     (compositeId != null && selectedNodesMap[compositeId] == true)
@@ -85,7 +85,7 @@ export class RawDataExportStrategy implements DataExportStrategy {
               for (var e = 0; e < events.length; e++) {
                 var event = events[e];
                 if (event != null) {
-                  var compositeId = this.controller.getCompositeId(event);
+                  var compositeId = this.getCompositeId(event);
                   if (
                     selectedNodesMap == null ||
                     (compositeId != null && selectedNodesMap[compositeId] == true)
@@ -104,5 +104,34 @@ export class RawDataExportStrategy implements DataExportStrategy {
       this.controller.FileSaver.saveAs(blob, runId + '_raw_data.json');
       this.controller.hideDownloadingExportMessage();
     });
+  }
+
+  private removeNamesFromWorkgroup(workgroup): void {
+    delete workgroup.username;
+    delete workgroup.displayNames;
+    for (let user of workgroup.users) {
+      delete user.name;
+      delete user.firstName;
+      delete user.lastName;
+    }
+  }
+
+  /**
+   * Get the composite id for a given object
+   * @param object a component state, annotation, or event
+   * @return the composite id for the object
+   * example
+   * 'node3'
+   * 'node4-wt38sdf1d3'
+   */
+  private getCompositeId(object): string {
+    var compositeId = null;
+    if (object.nodeId != null) {
+      compositeId = object.nodeId;
+    }
+    if (object.componentId != null) {
+      compositeId += '-' + object.componentId;
+    }
+    return compositeId;
   }
 }

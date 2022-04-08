@@ -117,7 +117,7 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
                 var component = components[c];
                 if (component != null) {
                   var componentId = component.id;
-                  if (this.controller.exportComponent(selectedNodesMap, nodeId, componentId)) {
+                  if (this.exportComponent(selectedNodesMap, nodeId, componentId)) {
                     var columnIdPrefix = nodeId + '-' + componentId;
                     var componentState = this.controller.TeacherDataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
                       workgroupId,
@@ -259,6 +259,21 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
   }
 
   /**
+   * Check if we want to export this component
+   * @param selectedNodesMap a mapping of node id to boolean value of whether
+   * the researcher has checked the node
+   * @param nodeId the node id
+   * @param componentId the component id
+   * @return whether the component was checked
+   */
+  private exportComponent(selectedNodesMap, nodeId, componentId) {
+    return (
+      selectedNodesMap == null ||
+      this.controller.isComponentSelected(selectedNodesMap, nodeId, componentId)
+    );
+  }
+
+  /**
    * Get the column ids for the One Workgroup Per Row export
    * @param selectedNodesMap the nodes that were selected
    * @return an array of column ids. the column ids will be in the format
@@ -278,7 +293,7 @@ export class OneWorkgroupPerRowDataExportStrategy implements DataExportStrategy 
             var component = components[c];
             if (component != null) {
               var componentId = component.id;
-              if (this.controller.exportComponent(selectedNodesMap, nodeId, componentId)) {
+              if (this.exportComponent(selectedNodesMap, nodeId, componentId)) {
                 var columnIdPrefix = nodeId + '-' + componentId;
                 if (this.controller.includeStudentWorkIds) {
                   columnIds.push(columnIdPrefix + '-studentWorkId');
