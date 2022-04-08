@@ -85,7 +85,7 @@ export class NotificationsDialogComponent implements OnInit {
     }
   }
 
-  dismissAll(event: any): void {
+  dismissAll(): void {
     if (confirm($localize`Are you sure you want to dismiss all your alerts?`)) {
       for (const notificationAggregate of this.newNotifications) {
         this.dismissNotificationAggregate(notificationAggregate, false);
