@@ -13360,7 +13360,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Discussion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussionService.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="needs-translation">Discussion</target>
       </trans-unit>
