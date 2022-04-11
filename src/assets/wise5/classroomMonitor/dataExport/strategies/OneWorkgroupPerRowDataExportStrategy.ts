@@ -53,10 +53,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
         'Start Date',
         'End Date'
       ];
-      var columnIdToColumnIndex = this.controller.getColumnIdToColumnIndex(
-        columnIds,
-        descriptionRowHeaders
-      );
+      var columnIdToColumnIndex = this.getColumnIdToColumnIndex(columnIds, descriptionRowHeaders);
       var topRows = this.getOneWorkgroupPerRowTopRows(
         columnIds,
         columnIdToColumnIndex,
@@ -571,5 +568,58 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
     topRows.push(columnIdRow);
     topRows.push(descriptionRow);
     return topRows;
+  }
+
+  /**
+   * Create mappings from column id to column index so that we can easily
+   * insert cell values into the correct column when we fill in the row
+   * for a workgroup
+   * @param columnIds an array of column ids in the order that the
+   * associated columns will appear in the export
+   * @param descriptionRowHeaders an array of headers in the description row
+   * @return an object that contains mappings from column id to column index
+   */
+  private getColumnIdToColumnIndex(columnIds, descriptionRowHeaders) {
+    /*
+     * the student work columns will start after the description header
+     * columns and vertical headers column
+     */
+    var numberOfColumnsToShift = descriptionRowHeaders.length + 1;
+    var columnIdToColumnIndex = {};
+
+    /*
+     * loop through all the description columns
+     * Workgroup ID
+     * User ID 1
+     * User ID 2
+     * User ID 3
+     * Class Period
+     * Project ID
+     * Project Name
+     * Run ID
+     * Start Date
+     * End Date
+     */
+    for (var d = 0; d < descriptionRowHeaders.length; d++) {
+      var descriptionRowHeader = descriptionRowHeaders[d];
+      columnIdToColumnIndex[descriptionRowHeader] = d;
+    }
+
+    // generate the header row by looping through all the column names
+    for (var c = 0; c < columnIds.length; c++) {
+      var columnId = columnIds[c];
+      if (columnId != null) {
+        /*
+         * Add a mapping from column name to column index. The columns
+         * for the components will start after the blank columns and
+         * after the column that contains the vertical headers for the
+         * top rows. We need to add +1 for the vertical headers column
+         * which contains the values Step Title, Component Part Number,
+         * Component Type, Prompt, Node ID, Component ID, Description.
+         */
+        columnIdToColumnIndex[columnId] = numberOfColumnsToShift + c;
+      }
+    }
+    return columnIdToColumnIndex;
   }
 }
