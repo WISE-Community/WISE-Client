@@ -2,14 +2,14 @@
 
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
-import { DiscussionService } from './discussionService';
 import { EditDiscussionAdvancedComponent } from './edit-discussion-advanced/edit-discussion-advanced.component';
 import { DiscussionAuthoring } from './discussion-authoring/discussion-authoring.component';
 import { EditDiscussionConnectedComponentsComponent } from './edit-discussion-connected-components/edit-discussion-connected-components.component';
+import { TeacherDiscussionService } from './teacherDiscussionService';
 
 const discussionAuthoringComponentModule = angular
   .module('discussionAuthoringComponentModule', [])
-  .service('DiscussionService', downgradeInjectable(DiscussionService))
+  .service('TeacherDiscussionService', downgradeInjectable(TeacherDiscussionService))
   .directive(
     'discussionAuthoring',
     downgradeComponent({ component: DiscussionAuthoring }) as angular.IDirectiveFactory
