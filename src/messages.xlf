@@ -296,7 +296,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component.html</context>
@@ -315,7 +315,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="69410cfd03d0c317234765d99d86c2c9e88bb915" datatype="html">
@@ -16028,18 +16028,32 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="e4c201ad39e5fa4658b22a707c94012bc30e0846" datatype="html">
+        <source>Dismiss all alerts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="eae1bb3f81534953df4c9a2f0e7e24223ec63754" datatype="html">
         <source>Hi there! You currently have no alerts.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="89ff62ce83b0b07cc05847d8dd1ce15df94e6e20" datatype="html">
         <source>View alert</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9025871139272246057" datatype="html">
+        <source>Are you sure you want to dismiss all your alerts?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.ts</context>
+          <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b9311730cc705aa91140b247c6e4fb58a10174dd" datatype="html">

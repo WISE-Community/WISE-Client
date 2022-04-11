@@ -26,6 +26,7 @@ describe('NotificationsMenuComponent', () => {
   let notification2: any;
   let notification3: any;
   let notificationAggregate1: any;
+  let notificationAggregate2: any;
   const teacherToStudentType = 'teacherToStudent';
 
   beforeEach(async () => {
@@ -68,6 +69,10 @@ describe('NotificationsMenuComponent', () => {
       notification1,
       notification2
     ]);
+    notificationAggregate2 = createNotificationAggregate(nodeId1, 'Hello', [
+      notification1,
+      notification3
+    ]);
     dismissNotificationSpy = spyOn(TestBed.inject(NotificationService), 'dismissNotification');
     fixture.detectChanges();
   });
@@ -96,32 +101,38 @@ describe('NotificationsMenuComponent', () => {
     };
   }
 
-  it('should dismiss notification that does not require dismiss code', () => {
-    component.dismissNotification({}, notification1);
-    expect(dismissNotificationSpy).toHaveBeenCalled();
-  });
-
-  it('should dismiss notification that does require dismiss code', () => {
-    const broadcastViewCurrentAmbientNotificationSpy = spyOn(
-      TestBed.inject(NotificationService),
-      'broadcastViewCurrentAmbientNotification'
-    );
-    component.dismissNotification({}, notification3);
-    expect(broadcastViewCurrentAmbientNotificationSpy).toHaveBeenCalled();
-  });
-
   it('should dismiss notification aggregate and visit node', () => {
     const endCurrentNodeAndSetCurrentNodeByNodeIdSpy = spyOn(
       TestBed.inject(StudentDataService),
       'endCurrentNodeAndSetCurrentNodeByNodeId'
     ).and.callFake(() => {});
-    component.dismissNotificationAggregateAndVisitNode({}, notificationAggregate1);
+    component.dismissNotificationAggregateAndVisitNode(notificationAggregate1);
     expect(dismissNotificationSpy).toHaveBeenCalledTimes(2);
     expect(endCurrentNodeAndSetCurrentNodeByNodeIdSpy).toHaveBeenCalledWith(nodeId1);
   });
 
-  it('should dismiss notification aggregate', () => {
-    component.dismissNotificationAggregate({}, notificationAggregate1);
+  it('should dismiss notification aggregate that does not require dismiss code', () => {
+    component.dismissNotificationAggregate(notificationAggregate1);
     expect(dismissNotificationSpy).toHaveBeenCalledTimes(2);
   });
+
+  it('should dismiss notification aggregate that does require dismiss code', () => {
+    const broadcastViewCurrentAmbientNotificationSpy = spyOn(
+      TestBed.inject(NotificationService),
+      'broadcastViewCurrentAmbientNotification'
+    );
+    component.dismissNotificationAggregate(notificationAggregate2);
+    expect(dismissNotificationSpy).toHaveBeenCalledTimes(1);
+    expect(broadcastViewCurrentAmbientNotificationSpy).toHaveBeenCalled();
+  });
+
+  it('should dismiss all notifications', () => {
+    component.newNotifications = [notificationAggregate1, notificationAggregate2];
+    const dismissNotificationAggregateSpy = spyOn(component, 'dismissNotificationAggregate');
+    spyOn(window, 'confirm').and.callFake(function () {
+      return true;
+    });
+    component.dismissAll();
+    expect(dismissNotificationAggregateSpy).toHaveBeenCalledTimes(2);
+  })
 });
