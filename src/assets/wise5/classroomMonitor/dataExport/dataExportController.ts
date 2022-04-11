@@ -680,10 +680,6 @@ class DataExportController {
     this.FileSaver.saveAs(csvBlob, fileName);
   }
 
-  escapeContent(str) {
-    return str.replace(/[\n]/g, '\\n').replace(/[\r]/g, '\\r').replace(/[\t]/g, '\\t');
-  }
-
   /**
    * Get the selected nodes to export
    * @return an array of objects that contain a nodeId field and maybe also
