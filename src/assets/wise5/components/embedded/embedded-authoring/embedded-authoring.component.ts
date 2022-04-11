@@ -1,8 +1,6 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
@@ -17,7 +15,6 @@ import { EmbeddedService } from '../embeddedService';
 })
 export class EmbeddedAuthoring extends ComponentAuthoring {
   embeddedApplicationIFrameId: string;
-  inputChange: Subject<string> = new Subject<string>();
 
   constructor(
     protected ConfigService: ConfigService,
@@ -33,11 +30,6 @@ export class EmbeddedAuthoring extends ComponentAuthoring {
     super.ngOnInit();
     this.embeddedApplicationIFrameId = this.EmbeddedService.getEmbeddedApplicationIframeId(
       this.componentId
-    );
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
     );
   }
 

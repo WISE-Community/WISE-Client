@@ -14,6 +14,7 @@ export abstract class ComponentAuthoring {
   @Input()
   componentId: string;
 
+  inputChange: Subject<string> = new Subject<string>();
   promptChange: Subject<string> = new Subject<string>();
   allowedConnectedComponentTypes: string[];
   authoringComponentContent: any;
@@ -67,6 +68,11 @@ export abstract class ComponentAuthoring {
           this.authoringComponentContent.prompt = prompt;
           this.componentChanged();
         })
+    );
+    this.subscriptions.add(
+      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
+        this.componentChanged();
+      })
     );
   }
 
