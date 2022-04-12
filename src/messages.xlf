@@ -11210,7 +11210,7 @@ File Name: <x id="PH" equiv-text="nodeFileName"/>
 Label: <x id="PH_1" equiv-text="nodeLabel"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3501064048095066932" datatype="html">
@@ -11219,7 +11219,7 @@ Label: <x id="PH_1" equiv-text="nodeLabel"/></source>
 Label: <x id="PH" equiv-text="linkLabel"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component.ts</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c741e919cae3e4e5d7a6e43da8926bb99b1fd780" datatype="html">
@@ -11529,7 +11529,7 @@ Are you ready to receive feedback on this answer?</source>
 Rule Name: <x id="PH" equiv-text="ruleName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5561671044584768513" datatype="html">
@@ -11539,7 +11539,7 @@ Rule Name: <x id="PH" equiv-text="ruleName"/>
 Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6e8e9e580c92d6331c82ef49943806725c861172" datatype="html">
@@ -14209,7 +14209,7 @@ Score: <x id="PH" equiv-text="score"/>
 Feedback Text: <x id="PH_1" equiv-text="feedbackText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1461861786609911168" datatype="html">
@@ -14222,28 +14222,28 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/>
 Feedback Text: <x id="PH_2" equiv-text="feedbackText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="846244999760672149" datatype="html">
         <source>you got a score of</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">222</context>
+          <context context-type="linenumber">166</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7599226289089492371" datatype="html">
         <source>Please talk to your teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">224</context>
+          <context context-type="linenumber">168</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5580639382077453513" datatype="html">
         <source>got a score of</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="867656616658826137" datatype="html">
@@ -14254,21 +14254,21 @@ Previous Score: <x id="PH" equiv-text="previousScore"/>
 Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">270</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3689003016353565518" datatype="html">
         <source>Are you sure you want to delete the custom completion criteria?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">305</context>
+          <context context-type="linenumber">218</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2986030604058491184" datatype="html">
         <source>Are you sure you want to delete this completion criteria?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">353</context>
+          <context context-type="linenumber">250</context>
         </context-group>
       </trans-unit>
       <trans-unit id="350e893dc35c1ca7a171e2944630e2c8f3f4785a" datatype="html">
@@ -16053,7 +16053,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Are you sure you want to dismiss all your alerts?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.ts</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b9311730cc705aa91140b247c6e4fb58a10174dd" datatype="html">

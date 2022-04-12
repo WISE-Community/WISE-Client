@@ -80,9 +80,6 @@ describe('ConceptMapAuthoring', () => {
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
     fixture.detectChanges();
   });
-
-  moveTheObjectDown();
-  moveTheObjectUp();
 });
 
 function createComponentContent() {
@@ -152,28 +149,4 @@ function createComponentContent() {
     showNodeLabels: true,
     showAddToNotebookButton: true
   };
-}
-
-function moveTheObjectUp() {
-  it('should move the object up', () => {
-    const componentChangedSpy = spyOn(component, 'componentChanged');
-    component.moveNodeUpButtonClicked(1);
-    expect(componentChangedSpy).toHaveBeenCalled();
-    expect(component.authoringComponentContent.nodes[0].id).toEqual('node2');
-    expect(component.authoringComponentContent.nodes[1].id).toEqual('node1');
-    expect(component.authoringComponentContent.nodes[2].id).toEqual('node3');
-    expect(component.authoringComponentContent.nodes[3].id).toEqual('node4');
-  });
-}
-
-function moveTheObjectDown() {
-  it('should move the object down', () => {
-    const componentChangedSpy = spyOn(component, 'componentChanged');
-    component.moveNodeDownButtonClicked(1);
-    expect(componentChangedSpy).toHaveBeenCalled();
-    expect(component.authoringComponentContent.nodes[0].id).toEqual('node1');
-    expect(component.authoringComponentContent.nodes[1].id).toEqual('node3');
-    expect(component.authoringComponentContent.nodes[2].id).toEqual('node2');
-    expect(component.authoringComponentContent.nodes[3].id).toEqual('node4');
-  });
 }

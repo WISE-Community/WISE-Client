@@ -114,8 +114,6 @@ describe('EditOpenResponseAdvancedComponent', () => {
 
   enableCRaterClicked();
   addScoringRule();
-  scoringRuleUpClicked();
-  scoringRuleDownClicked();
   scoringRuleDeleteClicked();
   addMultipleAttemptScoringRule();
   multipleAttemptScoringRuleDeleteClicked();
@@ -152,45 +150,11 @@ function addScoringRule() {
   });
 }
 
-function scoringRuleUpClicked() {
-  describe('scoringRuleUpClicked', () => {
-    it('should handle moving a scoring rule up', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
-      component.authoringComponentContent.cRater.scoringRules = [
-        scoringRule1,
-        scoringRule2,
-        scoringRule3
-      ];
-      component.scoringRuleUpClicked(1);
-      expect(component.authoringComponentContent.cRater.scoringRules[0]).toEqual(scoringRule2);
-      expect(component.authoringComponentContent.cRater.scoringRules[1]).toEqual(scoringRule1);
-      expect(component.authoringComponentContent.cRater.scoringRules[2]).toEqual(scoringRule3);
-    });
-  });
-}
-
 function createScoringRuleObject(score: number, feedbackText: string): any {
   return {
     feedbackText: feedbackText,
     score: score
   };
-}
-
-function scoringRuleDownClicked() {
-  describe('scoringRuleDownClicked', () => {
-    it('should handle moving a scoring rule down', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
-      component.authoringComponentContent.cRater.scoringRules = [
-        scoringRule1,
-        scoringRule2,
-        scoringRule3
-      ];
-      component.scoringRuleDownClicked(1);
-      expect(component.authoringComponentContent.cRater.scoringRules[0]).toEqual(scoringRule1);
-      expect(component.authoringComponentContent.cRater.scoringRules[1]).toEqual(scoringRule3);
-      expect(component.authoringComponentContent.cRater.scoringRules[2]).toEqual(scoringRule2);
-    });
-  });
 }
 
 function scoringRuleDeleteClicked() {
