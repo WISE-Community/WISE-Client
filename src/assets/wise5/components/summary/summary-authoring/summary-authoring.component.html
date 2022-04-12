@@ -146,7 +146,7 @@
     <button mat-raised-button
         color="primary"
         class="button"
-        (click)="moveCustomLabelColorUp(customLabelColorIndex)"
+        (click)="moveObjectUp(authoringComponentContent.customLabelColors, customLabelColorIndex)"
         [disabled]="isFirst"
         matTooltip="Move Up"
         matTooltipPosition="above"
@@ -158,7 +158,7 @@
     <button mat-raised-button
         color="primary"
         class="button"
-        (click)="moveCustomLabelColorDown(customLabelColorIndex)"
+        (click)="moveObjectDown(authoringComponentContent.customLabelColors, customLabelColorIndex)"
         [disabled]="isLast"
         matTooltip="Move Down"
         matTooltipPosition="above"

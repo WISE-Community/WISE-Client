@@ -177,16 +177,6 @@ export class SummaryAuthoring extends ComponentAuthoring {
     );
   }
 
-  moveCustomLabelColorUp(index: number): void {
-    this.UtilService.moveObjectUp(this.authoringComponentContent.customLabelColors, index);
-    this.componentChanged();
-  }
-
-  moveCustomLabelColorDown(index: number): void {
-    this.UtilService.moveObjectDown(this.authoringComponentContent.customLabelColors, index);
-    this.componentChanged();
-  }
-
   getComponentsByNodeId(nodeId: string): any[] {
     return this.ProjectService.getComponentsByNodeId(nodeId);
   }

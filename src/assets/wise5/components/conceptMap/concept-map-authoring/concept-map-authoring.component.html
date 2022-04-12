@@ -121,7 +121,7 @@
           <button mat-raised-button
               color="primary"
               [disabled]="isFirst"
-              (click)="moveNodeUpButtonClicked(nodeIndex)"
+              (click)="moveObjectUp(authoringComponentContent.nodes, nodeIndex)"
               matTooltip="Move Up"
               matTooltipPosition="above"
               i18n-matTooltip
@@ -132,7 +132,7 @@
           <button mat-raised-button
               color="primary"
               [disabled]="isLast"
-              (click)="moveNodeDownButtonClicked(nodeIndex)"
+              (click)="moveObjectDown(authoringComponentContent.nodes, nodeIndex)"
               matTooltip="Move Down"
               matTooltipPosition="above"
               i18n-matTooltip
@@ -208,7 +208,7 @@
           <button mat-raised-button
               color="primary"
               [disabled]="isFirst"
-              (click)="moveLinkUpButtonClicked(linkIndex)"
+              (click)="moveObjectUp(authoringComponentContent.links, linkIndex)"
               matTooltip="Move Up"
               matTooltipPosition="above"
               i18n-matTooltip
@@ -219,7 +219,7 @@
           <button mat-raised-button
               color="primary"
               [disabled]="isLast"
-              (click)="moveLinkDownButtonClicked(linkIndex)"
+              (click)="moveObjectDown(authoringComponentContent.links, linkIndex)"
               matTooltip="Move Down"
               matTooltipPosition="above"
               i18n-matTooltip

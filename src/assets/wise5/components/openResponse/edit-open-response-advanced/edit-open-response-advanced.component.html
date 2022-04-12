@@ -111,7 +111,7 @@
         <button
             mat-raised-button
             color="primary"
-            (click)="scoringRuleUpClicked(scoringRuleIndex)"
+            (click)="moveObjectUp(authoringComponentContent.cRater.scoringRules, scoringRuleIndex)"
             [disabled]="isFirst"
             matTooltip="Move Scoring Rule Up"
             matTooltipPosition="above"
@@ -121,7 +121,7 @@
         <button
             mat-raised-button
             color="primary"
-            (click)="scoringRuleDownClicked(scoringRuleIndex)"
+            (click)="moveObjectDown(authoringComponentContent.cRater.scoringRules, scoringRuleIndex)"
             [disabled]="isLast"
             matTooltip="Move Scoring Rule Down"
             matTooltipPosition="above"
@@ -191,7 +191,7 @@
           <button
              mat-raised-button
              color="primary"
-             (click)="multipleAttemptScoringRuleUpClicked(multipleAttemptScoringRuleIndex)"
+             (click)="moveObjectUp(authoringComponentContent.cRater.multipleAttemptScoringRules, multipleAttemptScoringRuleIndex)"
              [disabled]="isFirst"
              matTooltip="Move Multiple Attempt Scoring Rule Up"
              matTooltipPosition="above"
@@ -201,7 +201,7 @@
           <button
              mat-raised-button
              color="primary"
-             (click)="multipleAttemptScoringRuleDownClicked(multipleAttemptScoringRuleIndex)"
+             (click)="moveObjectDown(authoringComponentContent.cRater.multipleAttemptScoringRules, multipleAttemptScoringRuleIndex)"
              [disabled]="isLast"
              matTooltip="Move Multiple Attempt Scoring Rule Down"
              matTooltipPosition="above"
@@ -269,7 +269,7 @@
             <button
                 mat-raised-button
                 color="primary"
-                (click)="notificationUpClicked(notificationIndex)"
+                (click)="moveObjectUp(authoringComponentContent.notificationSettings.notifications, notificationIndex)"
                 [disabled]="isFirst"
                 matTooltip="Move Notification Up"
                 matTooltipPosition="above"
@@ -279,7 +279,7 @@
             <button
                 mat-raised-button
                 color="primary"
-                (click)="notificationDownClicked(notificationIndex)"
+                (click)="moveObjectDown(authoringComponentContent.notificationSettings.notifications, notificationIndex)"
                 [disabled]="isLast"
                 matTooltip="Move Notification Down"
                 matTooltipPosition="above"
@@ -318,7 +318,7 @@
           </mat-checkbox>
           <mat-form-field *ngIf="notification.isNotifyStudent" class="notification-feedback">
             <mat-label i18n>Feedback to Student</mat-label>
-            <textarea 
+            <textarea
                 matInput
                 [(ngModel)]="notification.notificationMessageToStudent"
                 (ngModelChange)="componentChanged()"
@@ -410,7 +410,7 @@
           <button
               mat-raised-button
               color="primary"
-              (click)="moveCompletionCriteriaUp(criteriaIndex)"
+              (click)="moveObjectUp(authoringComponentContent.completionCriteria.criteria, criteriaIndex)"
               [disabled]="isFirst"
               matTooltip="Move Completion Criteria Up"
               matTooltipPosition="above"
@@ -420,7 +420,7 @@
           <button
               mat-raised-button
               color="primary"
-              (click)="moveCompletionCriteriaDown(criteriaIndex)"
+              (click)="moveObjectDown(authoringComponentContent.completionCriteria.criteria, criteriaIndex)"
               [disabled]="isLast"
               matTooltip="Move Completion Criteria Down"
               matTooltipPosition="above"

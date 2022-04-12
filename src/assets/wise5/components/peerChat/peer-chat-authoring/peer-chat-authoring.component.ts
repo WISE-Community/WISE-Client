@@ -4,7 +4,6 @@ import { ComponentAuthoring } from '../../../authoringTool/components/component-
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import peerChatLogicOptions from './peer-chat-logic-options';
 
 @Component({
@@ -30,8 +29,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     protected configService: ConfigService,
     protected nodeService: NodeService,
     protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService,
-    private utilService: UtilService
+    protected projectService: TeacherProjectService
   ) {
     super(configService, nodeService, projectAssetService, projectService);
   }
@@ -97,16 +95,6 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
 
   addQuestion(): void {
     this.authoringComponentContent.questionBank.push('');
-    this.componentChanged();
-  }
-
-  moveQuestionUp(index: number): void {
-    this.utilService.moveObjectUp(this.authoringComponentContent.questionBank, index);
-    this.componentChanged();
-  }
-
-  moveQuestionDown(index: number): void {
-    this.utilService.moveObjectDown(this.authoringComponentContent.questionBank, index);
     this.componentChanged();
   }
 

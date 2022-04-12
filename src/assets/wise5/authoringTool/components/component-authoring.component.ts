@@ -164,4 +164,14 @@ export abstract class ComponentAuthoring {
       this.componentChanged();
     }
   }
+
+  moveObjectUp(objects: any[], index: number): void {
+    this.ProjectService.moveObjectUp(objects, index);
+    this.componentChanged();
+  }
+
+  moveObjectDown(objects: any[], index: number): void {
+    this.ProjectService.moveObjectDown(objects, index);
+    this.componentChanged();
+  }
 }

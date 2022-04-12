@@ -692,22 +692,6 @@ export class UtilService {
     }
   }
 
-  moveObjectUp(objects, index) {
-    if (index !== 0) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index - 1, 0, object);
-    }
-  }
-
-  moveObjectDown(objects, index) {
-    if (index !== objects.length - 1) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index + 1, 0, object);
-    }
-  }
-
   rgbToHex(color, opacity) {
     let values = color
       .replace(/rgb?\(/, '')
