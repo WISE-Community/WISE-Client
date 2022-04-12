@@ -78,41 +78,16 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     };
   }
 
-  scoringRuleUpClicked(index: number): void {
-    if (
-      this.authoringComponentContent.cRater != null &&
-      this.authoringComponentContent.cRater.scoringRules != null
-    ) {
-      this.UtilService.moveObjectUp(this.authoringComponentContent.cRater.scoringRules, index);
-      this.componentChanged();
-    }
-  }
-
-  scoringRuleDownClicked(index: number): void {
-    if (
-      this.authoringComponentContent.cRater != null &&
-      this.authoringComponentContent.cRater.scoringRules != null
-    ) {
-      this.UtilService.moveObjectDown(this.authoringComponentContent.cRater.scoringRules, index);
-      this.componentChanged();
-    }
-  }
-
   scoringRuleDeleteClicked(index: number): void {
-    if (
-      this.authoringComponentContent.cRater != null &&
-      this.authoringComponentContent.cRater.scoringRules != null
-    ) {
-      const scoringRule = this.authoringComponentContent.cRater.scoringRules[index];
-      const score = scoringRule.score;
-      const feedbackText = scoringRule.feedbackText;
-      const answer = confirm(
-        $localize`Are you sure you want to delete this scoring rule?\n\nScore: ${score}\n\nFeedback Text: ${feedbackText}`
-      );
-      if (answer) {
-        this.authoringComponentContent.cRater.scoringRules.splice(index, 1);
-        this.componentChanged();
-      }
+    const scoringRule = this.authoringComponentContent.cRater.scoringRules[index];
+    const score = scoringRule.score;
+    const feedbackText = scoringRule.feedbackText;
+    const answer = confirm(
+      $localize`Are you sure you want to delete this scoring rule?\n\nScore: ${score}\n\nFeedback Text: ${feedbackText}`
+    );
+    if (answer) {
+      this.authoringComponentContent.cRater.scoringRules.splice(index, 1);
+      this.componentChanged();
     }
   }
 
@@ -144,54 +119,23 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     };
   }
 
-  multipleAttemptScoringRuleUpClicked(index: number): void {
-    if (
-      this.authoringComponentContent.cRater != null &&
-      this.authoringComponentContent.cRater.multipleAttemptScoringRules != null
-    ) {
-      this.UtilService.moveObjectUp(
-        this.authoringComponentContent.cRater.multipleAttemptScoringRules,
-        index
-      );
-      this.componentChanged();
-    }
-  }
-
-  multipleAttemptScoringRuleDownClicked(index: number): void {
-    if (
-      this.authoringComponentContent.cRater != null &&
-      this.authoringComponentContent.cRater.multipleAttemptScoringRules != null
-    ) {
-      this.UtilService.moveObjectDown(
-        this.authoringComponentContent.cRater.multipleAttemptScoringRules,
-        index
-      );
-      this.componentChanged();
-    }
-  }
-
   multipleAttemptScoringRuleDeleteClicked(index: number): void {
-    if (
-      this.authoringComponentContent.cRater != null &&
-      this.authoringComponentContent.cRater.multipleAttemptScoringRules != null
-    ) {
-      const multipleAttemptScoringRule = this.authoringComponentContent.cRater
-        .multipleAttemptScoringRules[index];
-      const scoreSequence = multipleAttemptScoringRule.scoreSequence;
-      let previousScore = '';
-      let currentScore = '';
-      if (scoreSequence != null) {
-        previousScore = scoreSequence[0];
-        currentScore = scoreSequence[1];
-      }
-      const feedbackText = multipleAttemptScoringRule.feedbackText;
-      const answer = confirm(
-        $localize`Are you sure you want to delete this multiple attempt scoring rule?\n\nPrevious Score: ${previousScore}\n\nCurrent Score: ${currentScore}\n\nFeedback Text: ${feedbackText}`
-      );
-      if (answer) {
-        this.authoringComponentContent.cRater.multipleAttemptScoringRules.splice(index, 1);
-        this.componentChanged();
-      }
+    const multipleAttemptScoringRule = this.authoringComponentContent.cRater
+      .multipleAttemptScoringRules[index];
+    const scoreSequence = multipleAttemptScoringRule.scoreSequence;
+    let previousScore = '';
+    let currentScore = '';
+    if (scoreSequence != null) {
+      previousScore = scoreSequence[0];
+      currentScore = scoreSequence[1];
+    }
+    const feedbackText = multipleAttemptScoringRule.feedbackText;
+    const answer = confirm(
+      $localize`Are you sure you want to delete this multiple attempt scoring rule?\n\nPrevious Score: ${previousScore}\n\nCurrent Score: ${currentScore}\n\nFeedback Text: ${feedbackText}`
+    );
+    if (answer) {
+      this.authoringComponentContent.cRater.multipleAttemptScoringRules.splice(index, 1);
+      this.componentChanged();
     }
   }
 
@@ -227,52 +171,21 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     };
   }
 
-  notificationUpClicked(index: number): void {
-    if (
-      this.authoringComponentContent.notificationSettings != null &&
-      this.authoringComponentContent.notificationSettings.notifications != null
-    ) {
-      this.UtilService.moveObjectUp(
-        this.authoringComponentContent.notificationSettings.notifications,
-        index
-      );
-      this.componentChanged();
-    }
-  }
-
-  notificationDownClicked(index: number): void {
-    if (
-      this.authoringComponentContent.notificationSettings != null &&
-      this.authoringComponentContent.notificationSettings.notifications != null
-    ) {
-      this.UtilService.moveObjectDown(
-        this.authoringComponentContent.notificationSettings.notifications,
-        index
-      );
-      this.componentChanged();
-    }
-  }
-
   notificationDeleteClicked(index: number): void {
-    if (
-      this.authoringComponentContent.notificationSettings != null &&
-      this.authoringComponentContent.notificationSettings.notifications != null
-    ) {
-      const notification = this.authoringComponentContent.notificationSettings.notifications[index];
-      const scoreSequence = notification.enableCriteria.scoreSequence;
-      let previousScore = '';
-      let currentScore = '';
-      if (scoreSequence != null) {
-        previousScore = scoreSequence[0];
-        currentScore = scoreSequence[1];
-      }
-      const answer = confirm(
-        $localize`Are you sure you want to delete this notification?\n\nPrevious Score: ${previousScore}\n\nCurrent Score: ${currentScore}`
-      );
-      if (answer) {
-        this.authoringComponentContent.notificationSettings.notifications.splice(index, 1);
-        this.componentChanged();
-      }
+    const notification = this.authoringComponentContent.notificationSettings.notifications[index];
+    const scoreSequence = notification.enableCriteria.scoreSequence;
+    let previousScore = '';
+    let currentScore = '';
+    if (scoreSequence != null) {
+      previousScore = scoreSequence[0];
+      currentScore = scoreSequence[1];
+    }
+    const answer = confirm(
+      $localize`Are you sure you want to delete this notification?\n\nPrevious Score: ${previousScore}\n\nCurrent Score: ${currentScore}`
+    );
+    if (answer) {
+      this.authoringComponentContent.notificationSettings.notifications.splice(index, 1);
+      this.componentChanged();
     }
   }
 
@@ -330,22 +243,6 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       name: 'isSubmitted'
     };
     this.authoringComponentContent.completionCriteria.criteria.push(newCompletionCriteria);
-    this.componentChanged();
-  }
-
-  moveCompletionCriteriaUp(index: number): void {
-    this.UtilService.moveObjectUp(
-      this.authoringComponentContent.completionCriteria.criteria,
-      index
-    );
-    this.componentChanged();
-  }
-
-  moveCompletionCriteriaDown(index: number): void {
-    this.UtilService.moveObjectDown(
-      this.authoringComponentContent.completionCriteria.criteria,
-      index
-    );
     this.componentChanged();
   }
 

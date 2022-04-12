@@ -39,12 +39,12 @@ export class EditComponentDefaultFeedback {
   }
 
   moveDefaultFeedbackUp(index: number): void {
-    this.UtilService.moveObjectUp(this.authoringComponentContent.defaultFeedback, index);
+    this.ProjectService.moveObjectUp(this.authoringComponentContent.defaultFeedback, index);
     this.componentChanged();
   }
 
   moveDefaultFeedbackDown(index: number): void {
-    this.UtilService.moveObjectDown(this.authoringComponentContent.defaultFeedback, index);
+    this.ProjectService.moveObjectDown(this.authoringComponentContent.defaultFeedback, index);
     this.componentChanged();
   }
 

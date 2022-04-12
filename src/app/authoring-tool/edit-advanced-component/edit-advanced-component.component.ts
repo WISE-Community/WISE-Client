@@ -46,4 +46,14 @@ export abstract class EditAdvancedComponentComponent {
   componentChanged(): void {
     this.TeacherProjectService.nodeChanged();
   }
+
+  moveObjectUp(objects: any[], index: number): void {
+    this.TeacherProjectService.moveObjectUp(objects, index);
+    this.componentChanged();
+  }
+
+  moveObjectDown(objects: any[], index: number): void {
+    this.TeacherProjectService.moveObjectDown(objects, index);
+    this.componentChanged();
+  }
 }

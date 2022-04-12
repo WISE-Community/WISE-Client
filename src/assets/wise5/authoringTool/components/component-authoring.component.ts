@@ -157,4 +157,14 @@ export abstract class ComponentAuthoring {
       delete this.authoringComponentContent.reloadTime;
     });
   }
+
+  moveObjectUp(objects: any[], index: number): void {
+    this.ProjectService.moveObjectUp(objects, index);
+    this.componentChanged();
+  }
+
+  moveObjectDown(objects: any[], index: number): void {
+    this.ProjectService.moveObjectDown(objects, index);
+    this.componentChanged();
+  }
 }

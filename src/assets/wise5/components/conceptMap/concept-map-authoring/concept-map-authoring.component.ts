@@ -39,16 +39,6 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
     }
   }
 
-  moveNodeUpButtonClicked(index: number): void {
-    this.UtilService.moveObjectUp(this.authoringComponentContent.nodes, index);
-    this.componentChanged();
-  }
-
-  moveNodeDownButtonClicked(index: number): void {
-    this.UtilService.moveObjectDown(this.authoringComponentContent.nodes, index);
-    this.componentChanged();
-  }
-
   nodeDeleteButtonClicked(index: number): void {
     const nodes = this.authoringComponentContent.nodes;
     const node = nodes[index];
@@ -62,16 +52,6 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
       nodes.splice(index, 1);
       this.componentChanged();
     }
-  }
-
-  moveLinkUpButtonClicked(index: number): void {
-    this.UtilService.moveObjectUp(this.authoringComponentContent.links, index);
-    this.componentChanged();
-  }
-
-  moveLinkDownButtonClicked(index: number): void {
-    this.UtilService.moveObjectDown(this.authoringComponentContent.links, index);
-    this.componentChanged();
   }
 
   linkDeleteButtonClicked(index: number): void {
