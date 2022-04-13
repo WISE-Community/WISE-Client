@@ -8,15 +8,14 @@ import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServiceSpec.project.json';
 import { SessionService } from '../../assets/wise5/services/sessionService';
-import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 let service: TeacherProjectService;
 let configService: ConfigService;
-let sessionService: SessionService;
 let utilService: UtilService;
 let http: HttpTestingController;
 let demoProjectJSON: any;
 let scootersProjectJSON: any;
 let teacherProjectJSON: any;
+let objects;
 
 const scootersProjectJSONString = JSON.stringify(demoProjectJSON_import);
 const scootersProjectName = 'scooters';
@@ -31,18 +30,11 @@ describe('TeacherProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [
-        TeacherProjectService,
-        ConfigService,
-        CopyNodesService,
-        SessionService,
-        UtilService
-      ]
+      providers: [TeacherProjectService, ConfigService, SessionService, UtilService]
     });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(TeacherProjectService);
     configService = TestBed.inject(ConfigService);
-    sessionService = TestBed.inject(SessionService);
     utilService = TestBed.inject(UtilService);
     spyOn(utilService, 'broadcastEventInRootScope');
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
@@ -78,18 +70,7 @@ describe('TeacherProjectService', () => {
   shouldBeAbleToInsertAStepNodeInsideAGroupNode();
   shouldBeAbleToInsertAGroupNodeInsideAGroupNode();
   shouldNotBeAbleToInsertAStepNodeInsideAStepNode();
-  shouldDeleteAStepFromTheProject();
-  shouldDeleteAnInactiveStepFromTheProject();
-  shouldDeleteAStepThatIsTheStartIdOfTheProject();
-  shouldDeleteAStepThatIsTheLastStepOfTheProject();
-  shouldDeleteAStepThatIsTheStartIdOfAnAactivityThatIsNotTheFirstActivity();
-  shouldDeleteTheFirstActivityFromTheProject();
-  shouldDeleteAnActivityInTheMiddleOfTheProject();
-  shouldDeleteTheLastActivityFromTheProject();
   getUniqueAuthors();
-  deleteActivityWithBranching();
-  deleteTheLastStepInAnActivity();
-  deleteAllStepsInAnActivity();
   addCurrentUserToAuthors_CM_shouldAddUserInfo();
   getNodeIds();
   getInactiveNodeIds();
@@ -100,6 +81,8 @@ describe('TeacherProjectService', () => {
   getOldToNewIds();
   replaceOldIds();
   replaceIds();
+  moveObjectUp();
+  moveObjectDown();
 });
 
 function createNormalSpy() {
@@ -492,112 +475,6 @@ function shouldNotBeAbleToInsertAStepNodeInsideAStepNode() {
   });
 }
 
-function shouldDeleteAStepFromTheProject() {
-  it('should delete a step from the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getNodes().length).toEqual(54);
-    expect(service.getNodeById('node5')).not.toBeNull();
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node4'), 'node5')).toBeTruthy();
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node5'), 'node6')).toBeTruthy();
-    expect(service.getNodesWithTransitionToNodeId('node6').length).toEqual(1);
-    service.deleteNode('node5');
-    expect(service.getNodes().length).toEqual(53);
-    expect(service.getNodeById('node5')).toBeNull();
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node4'), 'node6')).toBeTruthy();
-    expect(service.getNodesWithTransitionToNodeId('node6').length).toEqual(1);
-  });
-}
-
-function shouldDeleteAnInactiveStepFromTheProject() {
-  it('should delete an inactive step from the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getInactiveNodes().length).toEqual(1);
-    expect(service.getNodeById('node789')).not.toBeNull();
-    service.deleteNode('node789');
-    expect(service.getInactiveNodes().length).toEqual(0);
-    expect(service.getNodeById('node789')).toBeNull();
-  });
-}
-
-function shouldDeleteAStepThatIsTheStartIdOfTheProject() {
-  it('should delete a step that is the start id of the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getStartNodeId()).toEqual('node1');
-    expect(service.getNodesWithTransitionToNodeId('node2').length).toEqual(1);
-    service.deleteNode('node1');
-    expect(service.getStartNodeId()).toEqual('node2');
-    expect(service.getNodesWithTransitionToNodeId('node2').length).toEqual(0);
-  });
-}
-
-function shouldDeleteAStepThatIsTheLastStepOfTheProject() {
-  it('should delete a step that is the last step of the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getTransitionsByFromNodeId('node802').length).toEqual(1);
-    expect(
-      service.nodeHasTransitionToNodeId(service.getNodeById('node802'), 'node803')
-    ).toBeTruthy();
-    service.deleteNode('node803');
-    expect(service.getTransitionsByFromNodeId('node802').length).toEqual(0);
-    expect(
-      service.nodeHasTransitionToNodeId(service.getNodeById('node802'), 'node803')
-    ).toBeFalsy();
-  });
-}
-
-function shouldDeleteAStepThatIsTheStartIdOfAnAactivityThatIsNotTheFirstActivity() {
-  it('should delete a step that is the start id of an activity that is not the first activity', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getGroupStartId('group2')).toEqual('node20');
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node19'), 'node20')).toBeTruthy();
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node20'), 'node21')).toBeTruthy();
-    service.deleteNode('node20');
-    expect(service.getGroupStartId('group2')).toEqual('node21');
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('node19'), 'node21')).toBeTruthy();
-  });
-}
-
-function shouldDeleteTheFirstActivityFromTheProject() {
-  it('should delete the first activity from the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getGroupStartId('group0')).toEqual('group1');
-    expect(service.getStartNodeId()).toEqual('node1');
-    expect(service.getNodes().length).toEqual(54);
-    expect(service.getNodesWithTransitionToNodeId('node20').length).toEqual(1);
-    service.deleteNode('group1');
-    expect(service.getNodeById('group1')).toBeNull();
-    expect(service.getGroupStartId('group0')).toEqual('group2');
-    expect(service.getStartNodeId()).toEqual('node20');
-    expect(service.getNodes().length).toEqual(34);
-    expect(service.getNodesWithTransitionToNodeId('node20').length).toEqual(0);
-  });
-}
-
-function shouldDeleteAnActivityInTheMiddleOfTheProject() {
-  it('should delete an activity that is in the middle of the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('group2'), 'group3')).toBeTruthy();
-    expect(service.getNodes().length).toEqual(54);
-    service.deleteNode('group3');
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('group2'), 'group3')).toBeFalsy();
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('group2'), 'group4')).toBeTruthy();
-    expect(service.getNodes().length).toEqual(51);
-  });
-}
-
-function shouldDeleteTheLastActivityFromTheProject() {
-  it('should delete the last activity from the project', () => {
-    service.setProject(demoProjectJSON);
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('group4'), 'group5')).toBeTruthy();
-    expect(service.getTransitionsByFromNodeId('group4').length).toEqual(1);
-    expect(service.getNodes().length).toEqual(54);
-    service.deleteNode('group5');
-    expect(service.nodeHasTransitionToNodeId(service.getNodeById('group4'), 'group5')).toBeFalsy();
-    expect(service.getTransitionsByFromNodeId('group4').length).toEqual(0);
-    expect(service.getNodes().length).toEqual(48);
-  });
-}
-
 function insertNodeAfterInTransitions() {
   it('should be able to insert a step node after another step node', () => {
     expectInsertNodeAfterInTransition('node1', 'node2');
@@ -664,71 +541,6 @@ function getUniqueAuthors() {
       expect(uniqueAuthors[2].firstName).toEqual('c');
       expect(uniqueAuthors[2].lastName).toEqual('c');
     });
-  });
-}
-
-function deleteActivityWithBranching() {
-  it(`should delete an activity with branching and is also the first activity in the project
-      and properly set the project start node id`, () => {
-    service.setProject(demoProjectJSON);
-    expect(service.getStartNodeId()).toEqual('node1');
-    service.deleteNode('group1');
-    expect(service.getStartNodeId()).toEqual('node20');
-  });
-
-  it(`should delete an activity in the middle of the project with branching and properly remove
-      transitions from remaining steps`, () => {
-    service.setProject(demoProjectJSON);
-    const node19 = service.getNodeById('node19');
-    const node19Transitions = node19.transitionLogic.transitions;
-    expect(node19Transitions.length).toEqual(1);
-    expect(node19Transitions[0].to).toEqual('node20');
-    service.deleteNode('group2');
-    expect(node19Transitions.length).toEqual(1);
-    expect(node19Transitions[0].to).toEqual('node790');
-  });
-
-  it(`should delete an activity at the end of the project with branching and properly remove
-      transitions from remaining steps`, () => {
-    service.setProject(demoProjectJSON);
-    const node798 = service.getNodeById('node798');
-    const node798Transitions = node798.transitionLogic.transitions;
-    expect(node798Transitions.length).toEqual(1);
-    expect(node798Transitions[0].to).toEqual('node799');
-    service.deleteNode('group5');
-    expect(node798Transitions.length).toEqual(0);
-  });
-}
-
-function deleteTheLastStepInAnActivity() {
-  it(`should delete the last step in an activity in the middle of the project and set previous
-      step to transition to the first step of the next activity`, () => {
-    service.setProject(demoProjectJSON);
-    const node790Transitions = service.getTransitionsByFromNodeId('node790');
-    expect(node790Transitions.length).toEqual(1);
-    expect(
-      service.nodeHasTransitionToNodeId(service.getNodeById('node790'), 'node791')
-    ).toBeTruthy();
-    service.deleteNode('node791');
-    expect(node790Transitions.length).toEqual(1);
-    expect(
-      service.nodeHasTransitionToNodeId(service.getNodeById('node790'), 'node792')
-    ).toBeTruthy();
-  });
-}
-
-function deleteAllStepsInAnActivity() {
-  it(`should delete all steps in an activity in the middle of the project and set previous step
-      to transition to activity`, () => {
-    service.setProject(demoProjectJSON);
-    const node34 = service.getNodeById('node34');
-    const node34Transitions = node34.transitionLogic.transitions;
-    expect(node34Transitions.length).toEqual(1);
-    expect(node34Transitions[0].to).toEqual('node790');
-    service.deleteNode('node790');
-    service.deleteNode('node791');
-    expect(node34Transitions.length).toEqual(1);
-    expect(node34Transitions[0].to).toEqual('group3');
   });
 }
 
@@ -995,5 +807,53 @@ function replaceIds() {
       const expectedString = '"node10", "node10", "node2", "node10", "node11", "node11"';
       expect(service.replaceIds(string, 'node1', 'node10')).toEqual(expectedString);
     });
+  });
+}
+
+function moveObjectUp() {
+  describe('moveObjectUp()', () => {
+    beforeEach(() => {
+      objects = [1, 2, 3];
+    });
+    moveObjectUpTopElement();
+    moveObjectUpNotTopElement();
+  });
+}
+
+function moveObjectUpTopElement() {
+  it('should not move an object up when the object is the top element', () => {
+    service.moveObjectUp(objects, 0);
+    expect(objects).toEqual([1, 2, 3]);
+  });
+}
+
+function moveObjectUpNotTopElement() {
+  it('should move an object up when the object is not the top element', () => {
+    service.moveObjectUp(objects, 1);
+    expect(objects).toEqual([2, 1, 3]);
+  });
+}
+
+function moveObjectDown() {
+  describe('moveObjectDown()', () => {
+    beforeEach(() => {
+      objects = [1, 2, 3];
+    });
+    moveObjectDownNotBottomElement();
+    moveObjectDownIsBottomElement();
+  });
+}
+
+function moveObjectDownNotBottomElement() {
+  it('should move an object down when the object is not the bottom element', () => {
+    service.moveObjectDown(objects, 1);
+    expect(objects).toEqual([1, 3, 2]);
+  });
+}
+
+function moveObjectDownIsBottomElement() {
+  it('should not move an object down when the object is the bottom element', () => {
+    service.moveObjectDown(objects, 2);
+    expect(objects).toEqual([1, 2, 3]);
   });
 }

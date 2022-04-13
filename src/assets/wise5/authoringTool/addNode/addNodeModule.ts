@@ -6,6 +6,7 @@ import { ChooseNewNodeTemplate } from './choose-new-node-template/choose-new-nod
 import AutomatedAssessmentChooseItemController from './automatedAssessment/automatedAssessmentChooseItemController';
 import AutomatedAssessmentConfigureController from './automatedAssessment/automatedAssessmentConfigureController';
 import SimulationChooseItemController from './simulation/simulationChooseItemController';
+import { CardSelectorComponent } from '../components/card-selector/card-selector.component';
 
 export default angular
   .module('addNodeModule', ['ui.router'])
@@ -19,6 +20,10 @@ export default angular
   .directive(
     'chooseNewNodeTemplate',
     downgradeComponent({ component: ChooseNewNodeTemplate }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'cardSelector',
+    downgradeComponent({ component: CardSelectorComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'chooseNewNodeLocation',

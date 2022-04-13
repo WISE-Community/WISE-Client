@@ -40,7 +40,7 @@ export class RunMenuComponent implements OnInit {
   shareRun() {
     this.dialog.open(ShareRunDialogComponent, {
       data: { run: this.run },
-      panelClass: 'mat-dialog--md'
+      panelClass: 'dialog-md'
     });
   }
 
@@ -48,7 +48,7 @@ export class RunMenuComponent implements OnInit {
     const project = this.run.project;
     this.dialog.open(LibraryProjectDetailsComponent, {
       data: { project: project, isRunProject: true },
-      panelClass: 'mat-dialog--md'
+      panelClass: 'dialog-md'
     });
   }
 
@@ -73,7 +73,7 @@ export class RunMenuComponent implements OnInit {
     this.dialog.open(RunSettingsDialogComponent, {
       ariaLabel: $localize`Run Settings`,
       data: { run: run },
-      panelClass: 'mat-dialog--md',
+      panelClass: 'dialog-md',
       autoFocus: true
     });
   }
@@ -83,7 +83,7 @@ export class RunMenuComponent implements OnInit {
       this.dialog.open(EditRunWarningDialogComponent, {
         ariaLabel: $localize`Edit Classroom Unit Warning`,
         data: { run: this.run },
-        panelClass: 'mat-dialog--sm'
+        panelClass: 'dialog-sm'
       });
     } else {
       this.router.navigateByUrl(this.editLink);

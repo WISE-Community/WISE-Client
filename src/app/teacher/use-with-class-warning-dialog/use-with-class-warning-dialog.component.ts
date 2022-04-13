@@ -23,7 +23,7 @@ export class UseWithClassWarningDialogComponent implements OnInit {
   proceedAnyway() {
     this.dialog.open(CreateRunDialogComponent, {
       data: this.data,
-      panelClass: 'mat-dialog--md',
+      panelClass: 'dialog-md',
       disableClose: true
     });
 

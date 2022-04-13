@@ -1,6 +1,6 @@
 <h2 class="mat-dialog-title" i18n>Use with Class</h2>
 <form *ngIf="!isCreated" [formGroup]="form" (ngSubmit)="create()">
-  <mat-dialog-content class="mat-dialog-content--scroll">
+  <mat-dialog-content class="dialog-content-scroll">
     <p class="mat-subheading-2 accent-1">
       {{ project.metadata.title }} <span class="mat-caption" i18n>(Unit ID: {{ project.id }})</span>
     </p>
@@ -12,7 +12,7 @@
         </mat-checkbox>
       </span>
     </p>
-    <mat-form-field appearance="fill" class="mat-form-field--longhint">
+    <mat-form-field appearance="fill" class="period-input form-field-long-hint">
       <mat-label i18n>Add your own periods</mat-label>
       <input matInput id="customPeriods" name="customPeriods" formControlName="customPeriods" />
       <mat-hint i18n>For "Period 9", just enter the number 9. Separate periods with commas (e.g. "Section 1, Section 2"). Manually named periods should be no more than 16 characters long.
@@ -48,7 +48,7 @@
           <mat-datepicker #endDatePicker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div fxLayoutAlign="center center" style="padding-bottom: 1.34375em;">
+      <div fxLayoutAlign="start center" style="padding-bottom: 1.34375em;">
         <mat-checkbox formControlName="isLockedAfterEndDate" i18n>
           Lock After End Date
         </mat-checkbox>&nbsp;

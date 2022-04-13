@@ -1,4 +1,5 @@
 import { ConfigService } from '../../services/configService';
+import { ImportComponentService } from '../../services/importComponentService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
@@ -12,6 +13,7 @@ class ChooseComponentLocationController {
     '$state',
     '$stateParams',
     'ConfigService',
+    'ImportComponentService',
     'ProjectAssetService',
     'ProjectService',
     'TeacherDataService',
@@ -22,6 +24,7 @@ class ChooseComponentLocationController {
     private $state: any,
     private $stateParams: any,
     private ConfigService: ConfigService,
+    private ImportComponentService: ImportComponentService,
     private ProjectAssetService: ProjectAssetService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService,
@@ -42,7 +45,13 @@ class ChooseComponentLocationController {
   }
 
   importComponentAfter(insertAfterComponentId: string) {
-    this.importComponents(this.nodeId, insertAfterComponentId).then((newComponents) => {
+    this.ImportComponentService.importComponents(
+      this.$stateParams.selectedComponents,
+      this.$stateParams.importFromProjectId,
+      this.nodeId,
+      insertAfterComponentId
+    ).then((newComponents) => {
+      this.saveImportedComponentsEvent(newComponents);
       this.ProjectService.saveProject();
       // refresh the project assets in case any of the imported components also imported assets
       this.ProjectAssetService.retrieveProjectAssets();
@@ -51,18 +60,6 @@ class ChooseComponentLocationController {
         nodeId: this.nodeId,
         newComponents: newComponents
       });
-    });
-  }
-
-  importComponents(nodeId: string, insertAfterComponentId: string) {
-    return this.ProjectService.importComponents(
-      this.$stateParams.selectedComponents,
-      this.$stateParams.importFromProjectId,
-      nodeId,
-      insertAfterComponentId
-    ).then((newComponents) => {
-      this.saveImportedComponentsEvent(newComponents);
-      return newComponents;
     });
   }
 

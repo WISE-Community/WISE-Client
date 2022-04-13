@@ -1,0 +1,22 @@
+@import
+  '~style/abstracts/functions',
+  '~style/abstracts/variables';
+
+.nav {
+  margin: 0 auto 16px;
+  padding: 16px;
+  width: breakpoint('md.min');
+  max-width: 100%;
+}
+
+.nav-header {
+  margin: 16px;
+}
+
+.lesson {
+  transition: box-shadow .25s;
+}
+
+.expanded {
+  margin: 4px -8px 4px 0; 
+}

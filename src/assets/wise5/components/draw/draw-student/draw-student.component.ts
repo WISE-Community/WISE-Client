@@ -1,6 +1,5 @@
 import { fabric } from 'fabric';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -12,6 +11,7 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { DrawService } from '../drawService';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'draw-student',
@@ -33,24 +33,24 @@ export class DrawStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     private DrawService: DrawService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
@@ -66,7 +66,12 @@ export class DrawStudent extends ComponentStudent {
   }
 
   ngAfterViewInit(): void {
-    this.initializeDrawingTool();
+    // When a draw is imported into another component as a background, it is rendered in a popup
+    // but sometimes the drawing tool in the popup is not rendered. Using a setTimeout allows the
+    // drawing tool to render in the popup consistently.
+    setTimeout(() => {
+      this.initializeDrawingTool();
+    });
   }
 
   initializeDrawingTool(): void {
@@ -80,13 +85,11 @@ export class DrawStudent extends ComponentStudent {
     this.initializeStudentData();
     this.disableComponentIfNecessary();
     this.setDrawingChangedListener();
-    this.setToolChangedListener();
     this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, this.isDisabled);
 
-    if (this.hasMaxSubmitCount() && this.hasSubmitsLeft()) {
-      this.isSubmitButtonDisabled = true;
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.disableSubmitButton();
     }
-
     if (this.isDisabled) {
       this.drawingTool.canvas.removeListeners();
     }
@@ -176,23 +179,13 @@ export class DrawStudent extends ComponentStudent {
     }, 500);
   }
 
-  setToolChangedListener(): void {
-    this.drawingTool.on('tool:changed', (toolName: string) => {
-      const category = 'Tool';
-      const event = 'toolSelected';
-      const data = {
-        selectedToolName: toolName
-      };
-      this.StudentDataService.saveComponentEvent(this, category, event, data);
-    });
-  }
-
   handleConnectedComponentsPostProcess(): void {
     this.setAuthoredBackgroundIfAvailable();
   }
 
   setStudentWork(componentState: any): void {
     this.setDrawData(componentState);
+    this.setSubmitCounter(componentState);
     this.processLatestStudentWork();
   }
 
@@ -409,11 +402,7 @@ export class DrawStudent extends ComponentStudent {
     return null;
   }
 
-  generateStarterState(): void {
-    this.NodeService.respondStarterState({
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      starterState: this.getDrawData()
-    });
+  generateStarterState(): any {
+    return this.getDrawData();
   }
 }

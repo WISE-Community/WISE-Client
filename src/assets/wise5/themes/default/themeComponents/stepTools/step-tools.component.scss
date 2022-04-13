@@ -1,0 +1,48 @@
+@import
+  '~style/abstracts/functions',
+  '~style/abstracts/variables';
+
+.step-tools {
+  mat-select {
+    text-align: left;
+    text-transform: none;
+    width: 168px;
+
+    @media only screen and (min-width: breakpoint('sm.min')) {
+      width: 264px;
+    }
+
+    @media only screen and (min-width: breakpoint('md.min')) {
+      width: 432px;
+    }
+  }
+}
+
+.mat-option.node-select-option {
+  &.step {
+    padding-left: 20px;
+  }
+
+  .mat-icon {
+    margin-right: 8px;
+  }
+}
+
+.toolbar {
+  padding: 0 16px;
+}
+
+.node-icon-div {
+  width: 34px;
+  margin: 4px;
+  text-align: center;
+}
+
+.node-status-div {
+  width: 24px;
+  margin: 4px;
+}
+
+.unit-plan-icon {
+  color: rgba(0,0,0,.54);
+}

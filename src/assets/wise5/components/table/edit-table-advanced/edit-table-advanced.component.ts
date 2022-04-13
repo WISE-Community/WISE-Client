@@ -1,6 +1,15 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
-class EditTableAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  selector: 'edit-table-advanced',
+  templateUrl: 'edit-table-advanced.component.html',
+  styleUrls: ['edit-table-advanced.component.scss']
+})
+export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['Embedded', 'Graph', 'Table'];
   isDataExplorerScatterPlotEnabled: boolean;
   isDataExplorerLineGraphEnabled: boolean;
@@ -8,11 +17,20 @@ class EditTableAdvancedController extends EditAdvancedComponentAngularJSControll
   numColumns: number;
   columnNames: string[] = [];
 
-  $onInit(): void {
-    super.$onInit();
+  constructor(
+    protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
+    protected TeacherProjectService: TeacherProjectService
+  ) {
+    super(NodeService, NotebookService, TeacherProjectService);
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
     if (this.authoringComponentContent.isDataExplorerEnabled) {
       this.repopulateDataExplorerGraphTypes();
       this.initializeDataExplorerSeriesParams();
+      this.tryInitializeDataExplorerDataToColumn();
     }
     this.numColumns = this.getNumTableColumns(this.authoringComponentContent);
     this.columnNames = this.getColumnNames(this.authoringComponentContent);
@@ -49,6 +67,12 @@ class EditTableAdvancedController extends EditAdvancedComponentAngularJSControll
     }
   }
 
+  tryInitializeDataExplorerDataToColumn(): void {
+    if (this.authoringComponentContent.dataExplorerDataToColumn == null) {
+      this.authoringComponentContent.dataExplorerDataToColumn = {};
+    }
+  }
+
   getNumTableColumns(componentContent: any): number {
     return this.getTableDataFirstRow(componentContent).length;
   }
@@ -80,6 +104,9 @@ class EditTableAdvancedController extends EditAdvancedComponentAngularJSControll
       }
       if (this.authoringComponentContent.dataExplorerSeriesParams == null) {
         this.authoringComponentContent.dataExplorerSeriesParams = [{}];
+      }
+      if (this.authoringComponentContent.dataExplorerDataToColumn == null) {
+        this.authoringComponentContent.dataExplorerDataToColumn = {};
       }
     }
     this.componentChanged();
@@ -151,13 +178,3 @@ class EditTableAdvancedController extends EditAdvancedComponentAngularJSControll
     }
   }
 }
-
-export const EditTableAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditTableAdvancedController,
-  templateUrl:
-    'assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html'
-};

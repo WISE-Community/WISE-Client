@@ -2,6 +2,8 @@
 
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { ConfigService } from '../../services/configService';
+import { CopyComponentService } from '../../services/copyComponentService';
+import { InsertComponentService } from '../../services/insertComponentService';
 import { NodeService } from '../../services/nodeService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
@@ -54,6 +56,8 @@ class NodeAuthoringController {
     '$stateParams',
     '$timeout',
     'ConfigService',
+    'CopyComponentService',
+    'InsertComponentService',
     'NodeService',
     'NotificationService',
     'ProjectService',
@@ -70,6 +74,8 @@ class NodeAuthoringController {
     private $stateParams: any,
     private $timeout: any,
     private ConfigService: ConfigService,
+    private CopyComponentService: CopyComponentService,
+    private InsertComponentService: InsertComponentService,
     private NodeService: NodeService,
     private NotificationService: NotificationService,
     private ProjectService: TeacherProjectService,
@@ -447,18 +453,17 @@ class NodeAuthoringController {
 
   /**
    * Copy components in this step.
-   * @param componentId (optional) Put the copied components after this
-   * component id. If the componentId is not provided, we will put the
-   * components at the beginning of the step.
+   * @param componentId (optional) Put the copied components after this component id. If the
+   * componentId is not provided, put the components at the beginning of the step.
    */
   handleCopyComponent(componentId = null) {
     const selectedComponentIds = this.getSelectedComponentIds();
-    const componentsCopied = this.getComponentObjectsForEventData(selectedComponentIds);
-    const newComponents = this.ProjectService.copyComponentAndInsert(
+    const newComponents = this.CopyComponentService.copyComponents(
       this.nodeId,
-      selectedComponentIds,
-      componentId
+      selectedComponentIds
     );
+    this.InsertComponentService.insertComponents(newComponents, this.nodeId, componentId);
+    const componentsCopied = this.getComponentObjectsForEventData(selectedComponentIds);
     for (let c = 0; c < componentsCopied.length; c++) {
       const componentCopied = componentsCopied[c];
       const newComponent = newComponents[c];

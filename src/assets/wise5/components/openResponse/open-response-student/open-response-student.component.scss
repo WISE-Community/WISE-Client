@@ -1,0 +1,24 @@
+.student-response-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.student-response {
+  width: 99%;
+  min-height: 80px;
+  background-color: #f7f7f7;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.student-response:focus {
+  outline: none;
+  border: 1px solid rgb(28, 140, 168);
+  border-radius: 0px !important;
+  background-color: #ffffff;
+}
+
+.recording-div {
+  height: 60px;
+  margin-bottom: 20px;
+}

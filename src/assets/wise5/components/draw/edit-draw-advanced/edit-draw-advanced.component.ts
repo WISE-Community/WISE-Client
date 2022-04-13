@@ -1,73 +1,10 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
-class EditDrawAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  selector: 'edit-draw-advanced',
+  templateUrl: 'edit-draw-advanced.component.html'
+})
+export class EditDrawAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['ConceptMap', 'Draw', 'Embedded', 'Graph', 'Label', 'Table'];
-
-  automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent) {
-    let numberOfAllowedComponents = 0;
-    let allowedComponent = null;
-    for (const component of this.getComponentsByNodeId(connectedComponent.nodeId)) {
-      if (
-        this.isConnectedComponentTypeAllowed(component.type) &&
-        component.id != this.componentId
-      ) {
-        numberOfAllowedComponents += 1;
-        allowedComponent = component;
-      }
-    }
-    if (numberOfAllowedComponents === 1) {
-      connectedComponent.componentId = allowedComponent.id;
-      connectedComponent.type = 'importWork';
-      this.setImportWorkAsBackgroundIfApplicable(connectedComponent);
-      this.setUpdateOnIfApplicable(connectedComponent);
-    }
-  }
-
-  setUpdateOnIfApplicable(connectedComponent) {
-    if (connectedComponent.nodeId === this.nodeId) {
-      connectedComponent.updateOn = 'submit';
-    } else {
-      delete connectedComponent.updateOn;
-    }
-  }
-
-  connectedComponentNodeIdChanged(connectedComponent) {
-    super.connectedComponentNodeIdChanged(connectedComponent);
-    this.setUpdateOnIfApplicable(connectedComponent);
-  }
-
-  connectedComponentComponentIdChanged(connectedComponent) {
-    connectedComponent.type = 'importWork';
-    this.setImportWorkAsBackgroundIfApplicable(connectedComponent);
-    this.setUpdateOnIfApplicable(connectedComponent);
-    this.componentChanged();
-  }
-
-  setImportWorkAsBackgroundIfApplicable(connectedComponent) {
-    const componentType = this.ProjectService.getComponentType(
-      connectedComponent.nodeId,
-      connectedComponent.componentId
-    );
-    if (['ConceptMap', 'Embedded', 'Graph', 'Label', 'Table'].includes(componentType)) {
-      connectedComponent.importWorkAsBackground = true;
-    } else {
-      delete connectedComponent.importWorkAsBackground;
-    }
-  }
-
-  importWorkAsBackgroundClicked(connectedComponent) {
-    if (!connectedComponent.importWorkAsBackground) {
-      delete connectedComponent.importWorkAsBackground;
-    }
-    this.componentChanged();
-  }
 }
-
-export const EditDrawAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditDrawAdvancedController,
-  templateUrl: 'assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html'
-};

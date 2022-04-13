@@ -1,0 +1,61 @@
+@import '~style/abstracts/functions', '~style/abstracts/variables', '~style/abstracts/mixins';
+
+.latest-news {
+  padding: 8px;
+  background-color: rgba(0,0,0,0.8);
+  border-style: solid;
+  border-width: 0 0 0 8px;
+  display: none;
+
+  [dir=rtl] & {
+    border-width: 0 8px 0 0;
+  }
+
+  @media (min-width: breakpoint('md.min')) {
+    padding: 24px;
+  }
+
+  &.loaded {
+    display: block;
+  }
+
+  > * {
+    @media (max-width: breakpoint('sm.max')) {
+      display: inline;
+    }
+  }
+}
+
+.mat-icon {
+  vertical-align: sub;
+}
+
+ul {
+  padding: 0;
+
+  @media (min-width: breakpoint('md.min')) {
+    padding: 0 0 0 16px;
+  }
+}
+
+li {
+  &:not(:last-of-type) {
+    margin-bottom: 4px;
+  }
+
+  @media (max-width: breakpoint('sm.max')) {
+    display: inline;
+    list-style-type: none;
+  }
+
+  @media (min-width: breakpoint('md.min')) {
+    a {
+      max-width: 100%;
+      vertical-align: middle;
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}

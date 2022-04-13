@@ -3,10 +3,13 @@
 import { Injectable } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class ConfigService {
   public config: any = null;
+  private configRetrievedSource: Subject<any> = new Subject<any>();
+  public configRetrieved$: Observable<any> = this.configRetrievedSource.asObservable();
 
   constructor(private upgrade: UpgradeModule, private http: HttpClient) {}
 
@@ -64,7 +67,7 @@ export class ConfigService {
             myUserInfo.workgroupId = Math.floor(100 * Math.random()) + 1;
           }
         }
-
+        this.configRetrievedSource.next(configJSON);
         return configJSON;
       });
   }
@@ -363,6 +366,30 @@ export class ConfigService {
     };
   }
 
+  private getAllUserInfoInPeriod(periodId: number): any {
+    return this.getClassmateUserInfos()
+      .map((userInfo) => {
+        return userInfo.periodId === periodId ? userInfo : [];
+      })
+      .flat();
+  }
+
+  getAllUsersInPeriod(periodId: number): any[] {
+    return this.getAllUserInfoInPeriod(periodId)
+      .map((userInfo) => userInfo.users)
+      .flat();
+  }
+
+  getUsersNotInWorkgroupInPeriod(periodId: number): any[] {
+    const users = [];
+    this.getAllUserInfoInPeriod(periodId).forEach((userInfo) => {
+      if (userInfo.workgroupId == null) {
+        users.push(...userInfo.users);
+      }
+    });
+    return users;
+  }
+
   getUserInfoByWorkgroupId(workgroupId) {
     let userInfo = null;
     if (workgroupId != null) {
@@ -528,7 +555,7 @@ export class ConfigService {
           if (i !== 0) {
             usernames += ', ';
           }
-          usernames += this.upgrade.$injector.get('$filter')('translate')('studentId', { id: id });
+          usernames += $localize`Student ${id}`;
         }
       }
     }
@@ -947,5 +974,9 @@ export class ConfigService {
         .convertMillisecondsToFormattedDateTime(this.getEndDate());
     }
     return '';
+  }
+
+  isGoogleUser() {
+    return this.getMyUserInfo().isGoogleUser;
   }
 }

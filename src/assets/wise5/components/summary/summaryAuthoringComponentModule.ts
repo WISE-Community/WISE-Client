@@ -7,18 +7,15 @@ import { EditSummaryAdvancedComponent } from './edit-summary-advanced/edit-summa
 import { SummaryAuthoring } from './summary-authoring/summary-authoring.component';
 
 const summaryAuthoringComponentModule = angular
-  .module('summaryAuthoringComponentModule', ['pascalprecht.translate'])
+  .module('summaryAuthoringComponentModule', [])
   .service('SummaryService', downgradeInjectable(SummaryService))
   .directive(
     'summaryAuthoring',
     downgradeComponent({ component: SummaryAuthoring }) as angular.IDirectiveFactory
   )
-  .component('editSummaryAdvanced', EditSummaryAdvancedComponent)
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/summary/i18n');
-    }
-  ]);
+  .directive(
+    'editSummaryAdvanced',
+    downgradeComponent({ component: EditSummaryAdvancedComponent }) as angular.IDirectiveFactory
+  );
 
 export default summaryAuthoringComponentModule;

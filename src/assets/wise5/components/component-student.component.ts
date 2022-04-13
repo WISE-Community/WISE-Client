@@ -1,8 +1,8 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
-import { GenerateImageDialog } from '../directives/generate-image-dialog/generate-image-dialog';
+import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NodeService } from '../services/nodeService';
@@ -10,6 +10,7 @@ import { NotebookService } from '../services/notebookService';
 import { StudentAssetService } from '../services/studentAssetService';
 import { StudentDataService } from '../services/studentDataService';
 import { UtilService } from '../services/utilService';
+import { StudentAssetsDialogComponent } from '../vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
 import { StudentAssetRequest } from '../vle/studentAsset/StudentAssetRequest';
 import { ComponentService } from './componentService';
 import { ComponentStateRequest } from './ComponentStateRequest';
@@ -31,6 +32,12 @@ export abstract class ComponentStudent {
 
   @Input()
   workgroupId: number;
+
+  @Output()
+  saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  starterStateChangedEvent = new EventEmitter<any>();
 
   attachments: any[] = [];
   componentId: string;
@@ -64,11 +71,11 @@ export abstract class ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {}
 
@@ -78,7 +85,7 @@ export abstract class ComponentStudent {
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.isSaveOrSubmitButtonVisible = this.isSaveButtonVisible || this.isSubmitButtonVisible;
-    if (!this.isAuthoringComponentPreviewMode()) {
+    if (!this.isPreviewMode()) {
       this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
         this.nodeId,
         this.componentId,
@@ -99,11 +106,19 @@ export abstract class ComponentStudent {
   }
 
   ngOnDestroy(): void {
+    if (this.isDirty) {
+      const request = {
+        componentId: this.componentId,
+        isSubmit: false,
+        nodeId: this.nodeId
+      };
+      this.saveComponentStateEvent.emit(this.getComponentStateWrapper(request));
+    }
     this.subscriptions.unsubscribe();
   }
 
-  isAuthoringComponentPreviewMode(): boolean {
-    return this.mode === 'authoringComponentPreview';
+  isPreviewMode(): boolean {
+    return this.mode === 'preview';
   }
 
   subscribeToSubscriptions(): void {
@@ -112,7 +127,6 @@ export abstract class ComponentStudent {
     this.subscribeToNotebookItemChosen();
     this.subscribeToNotifyConnectedComponents();
     this.subscribeToAttachStudentAsset();
-    this.subscribeToStarterStateRequest();
     this.subscribeToStudentWorkSavedToServer();
     this.subscribeToRequestComponentState();
   }
@@ -199,16 +213,6 @@ export abstract class ComponentStudent {
     );
   }
 
-  subscribeToStarterStateRequest() {
-    this.subscriptions.add(
-      this.NodeService.starterStateRequest$.subscribe((args: any) => {
-        if (this.isForThisComponent(args)) {
-          this.generateStarterState();
-        }
-      })
-    );
-  }
-
   generateStarterState() {}
 
   copyAndAttachStudentAsset(studentAsset: any): any {
@@ -225,12 +229,33 @@ export abstract class ComponentStudent {
     });
   }
 
-  attachStudentAsset(studentAsset: any): void {}
+  attachStudentAsset(studentAsset: any): any {
+    return this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
+      const attachment = {
+        studentAssetId: copiedAsset.id,
+        iconURL: copiedAsset.iconURL,
+        url: copiedAsset.url,
+        type: copiedAsset.type
+      };
+      this.attachments.push(attachment);
+      this.studentDataChanged();
+    });
+  }
+
+  removeAttachment(attachment: any): void {
+    if (this.attachments.indexOf(attachment) !== -1) {
+      this.attachments.splice(this.attachments.indexOf(attachment), 1);
+      this.studentDataChanged();
+    }
+  }
 
   subscribeToStudentWorkSavedToServer(): void {
     this.subscriptions.add(
       this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
         this.handleStudentWorkSavedToServer(componentState);
+        if (this.isFromConnectedComponent(componentState)) {
+          this.connectedComponentStudentDataSaved();
+        }
       })
     );
   }
@@ -255,8 +280,8 @@ export abstract class ComponentStudent {
       } else {
         this.setSavedMessage(clientSaveTime);
       }
+      this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
     }
-    this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
   }
 
   getIsDirty(): boolean {
@@ -376,7 +401,7 @@ export abstract class ComponentStudent {
       nodeId: this.nodeId,
       componentId: this.componentId
     });
-    if (this.isAuthoringComponentPreviewMode()) {
+    if (this.isPreviewMode()) {
       this.saveForAuthoringPreviewMode('save');
     }
   }
@@ -459,7 +484,7 @@ export abstract class ComponentStudent {
 
     if (submitTriggeredBy == null || submitTriggeredBy === 'componentSubmitButton') {
       this.emitComponentSubmitTriggered();
-      if (this.isAuthoringComponentPreviewMode()) {
+      if (this.isPreviewMode()) {
         this.saveForAuthoringPreviewMode('submit');
       }
     }
@@ -556,6 +581,9 @@ export abstract class ComponentStudent {
   createComponentStateAndBroadcast(action: string): void {
     this.createComponentState(action).then((componentState: any) => {
       this.emitComponentStudentDataChanged(componentState);
+      if (this.mode === 'preview') {
+        this.starterStateChangedEvent.emit(this.generateStarterState());
+      }
     });
   }
 
@@ -610,19 +638,14 @@ export abstract class ComponentStudent {
    * @return A promise that will return an image.
    */
   generateImageFromComponentState(componentState: any): any {
-    return this.upgrade.$injector
-      .get('$mdDialog')
-      .show({
-        templateUrl: 'assets/wise5/directives/generate-image-dialog/generate-image-dialog.html',
-        controller: GenerateImageDialog,
-        controllerAs: '$ctrl',
-        locals: {
-          componentState: componentState
-        }
-      })
-      .then((image: any) => {
-        return image;
+    const dialogRef = this.dialog.open(GenerateImageDialogComponent, {
+      data: componentState
+    });
+    return new Promise((resolve, reject) => {
+      dialogRef.afterClosed().subscribe((result) => {
+        resolve(result);
       });
+    });
   }
 
   isAddToNotebookEnabled() {
@@ -653,9 +676,12 @@ export abstract class ComponentStudent {
   }
 
   showStudentAssets() {
-    this.StudentAssetService.broadcastShowStudentAssets({
-      nodeId: this.nodeId,
-      componentId: this.componentId
+    this.dialog.open(StudentAssetsDialogComponent, {
+      data: {
+        nodeId: this.nodeId,
+        componentId: this.componentId
+      },
+      panelClass: 'dialog-md'
     });
   }
 
@@ -743,5 +769,86 @@ export abstract class ComponentStudent {
 
   updateLatestCommentAnnotation(annotation: any): void {
     this.latestAnnotations.comment = annotation;
+  }
+
+  registerNotebookItemChosenListener(): void {
+    this.subscriptions.add(
+      this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
+        if (requester === `${this.nodeId}-${this.componentId}`) {
+          const studentWorkId = notebookItem.content.studentWorkIds[0];
+          this.importWorkByStudentWorkId(studentWorkId);
+        }
+      })
+    );
+  }
+
+  copyPublicNotebookItemButtonClicked(): void {
+    this.NotebookService.setInsertMode({
+      nodeId: this.nodeId,
+      componentId: this.componentId,
+      insertMode: true,
+      requester: this.nodeId + '-' + this.componentId,
+      visibleSpace: 'public'
+    });
+    this.NotebookService.setNotesVisible(true);
+  }
+
+  getElementById(id: string, getFirstResult: boolean = false): any {
+    if (getFirstResult) {
+      return $(`#${id}`)[0];
+    } else {
+      return $(`#${id}`);
+    }
+  }
+
+  isFromConnectedComponent(componentState: any) {
+    if (this.componentContent.connectedComponents != null) {
+      for (const connectedComponent of this.componentContent.connectedComponents) {
+        if (
+          connectedComponent.nodeId === componentState.nodeId &&
+          connectedComponent.componentId === componentState.componentId
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
+   * This function is called when a connected component of this component saves student data.
+   * This was added to handle a race condition when a step has a connected component on a previous
+   * step but the connected component student work on the previous step was not being imported
+   * because it wasn't being saved in time.
+   * Here is an example of what was happening
+   * - Student generates work on step 1 but does not click the save button
+   * - Student goes to step 2 which triggers a promise to save the student work on step 1
+   * - Step 2 is loaded and checks if there is any work it needs to import from step 1
+   * - The work in step 1 has not saved yet so step 2 does not import any work and loads without
+   *   importing any work
+   * - The work from step 1 is then saved
+   * Here is the additional process that this function performs to fix this problem
+   * - Step 2 listens for when work is saved on step 1
+   * - When the work for step 1 is saved, step 2 checks to see if it needs to import that work
+   */
+  connectedComponentStudentDataSaved() {
+    if (this.isHandleConnectedComponentAfterConnectedComponentStudentDataSaved()) {
+      this.handleConnectedComponents();
+    }
+  }
+
+  isHandleConnectedComponentAfterConnectedComponentStudentDataSaved() {
+    const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      this.nodeId,
+      this.componentId
+    );
+    return latestComponentState == null && !this.isDirty;
+  }
+
+  setSubmitCounter(componentState: any): void {
+    const submitCounter = componentState?.studentData?.submitCounter;
+    if (submitCounter != null) {
+      this.submitCounter = submitCounter;
+    }
   }
 }

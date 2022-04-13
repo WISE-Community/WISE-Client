@@ -62,7 +62,10 @@ export class WorkgroupSelectComponent {
 
   filterWorkgroupsBySelectedPeriod() {
     this.workgroups = this.ConfigService.getClassmateUserInfos().filter((workgroup) => {
-      return this.periodId === -1 || workgroup.periodId === this.periodId;
+      return (
+        (this.periodId === -1 || workgroup.periodId === this.periodId) &&
+        workgroup.workgroupId != null
+      );
     });
   }
 

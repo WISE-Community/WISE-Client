@@ -1,0 +1,16 @@
+@import '~style/abstracts/variables';
+
+.response-text {
+  padding: 4px 8px;
+  display: inline-block;
+  border-radius: $card-border-radius;
+}
+
+.computer-avatar {
+  width: 36px;
+  border-radius: 50%;
+}
+
+.poster {
+  margin-bottom: 2px;
+}

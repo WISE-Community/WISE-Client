@@ -1,7 +1,3 @@
-.main-div {
-  margin-left: 20px;
-}
-
 .main-concept-map-div {
   margin-bottom: 20px;
 }
@@ -14,6 +10,10 @@
   margin-right: 20px;
 }
 
+.container {
+  overflow: auto;
+}
+
 .side-node-bar {
   border: 1px solid black;
 }
@@ -24,8 +24,11 @@
   height: 100px;
 }
 
-.concept-map-svg {
+.concept-map-content {
   border: 1px solid black;
+}
+
+.concept-map-svg {
   background-repeat: no-repeat;
   user-select: none;
   -moz-user-select: none;

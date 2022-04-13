@@ -25,9 +25,6 @@ export class TeacherDataService extends DataService {
   nodeGradingSort = 'team';
   studentGradingSort = 'step';
   studentProgressSort = 'team';
-  annotationSavedToServerSubscription: Subscription;
-  newAnnotationReceivedSubscription: Subscription;
-  newStudentWorkReceivedSubscription: Subscription;
   private currentPeriodChangedSource: Subject<any> = new Subject<any>();
   public currentPeriodChanged$: Observable<any> = this.currentPeriodChangedSource.asObservable();
   private currentWorkgroupChangedSource: Subject<any> = new Subject<any>();
@@ -52,29 +49,27 @@ export class TeacherDataService extends DataService {
     };
 
     if (this.upgrade.$injector != null) {
-      this.annotationSavedToServerSubscription = this.AnnotationService.annotationSavedToServer$.subscribe(
-        ({ annotation }) => {
-          this.handleAnnotationReceived(annotation);
-        }
-      );
-
-      this.newAnnotationReceivedSubscription = this.TeacherWebSocketService.newAnnotationReceived$.subscribe(
-        ({ annotation }) => {
-          this.handleAnnotationReceived(annotation);
-        }
-      );
-
-      this.newStudentWorkReceivedSubscription = this.TeacherWebSocketService.newStudentWorkReceived$.subscribe(
-        ({ studentWork }) => {
-          this.addOrUpdateComponentState(studentWork);
-          this.broadcastStudentWorkReceived({ studentWork: studentWork });
-        }
-      );
+      this.subscribeToEvents();
     }
   }
 
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$translate')(key);
+  subscribeToEvents() {
+    this.AnnotationService.annotationSavedToServer$.subscribe(({ annotation }) => {
+      this.handleAnnotationReceived(annotation);
+    });
+
+    this.TeacherWebSocketService.newAnnotationReceived$.subscribe(({ annotation }) => {
+      this.handleAnnotationReceived(annotation);
+    });
+
+    this.TeacherWebSocketService.newStudentWorkReceived$.subscribe(({ studentWork }) => {
+      this.addOrUpdateComponentState(studentWork);
+      this.broadcastStudentWorkReceived({ studentWork: studentWork });
+    });
+
+    this.ConfigService.configRetrieved$.subscribe(() => {
+      this.retrieveRunStatus();
+    });
   }
 
   getRootScope() {
@@ -319,8 +314,9 @@ export class TeacherDataService extends DataService {
   }
 
   processAnnotations(annotations) {
-    this.studentData.annotations = annotations;
-    for (const annotation of annotations) {
+    const activeAnnotations = this.getActiveAnnototations(annotations);
+    this.studentData.annotations = activeAnnotations;
+    for (const annotation of activeAnnotations) {
       this.addAnnotationToAnnotationsToWorkgroupId(annotation);
       this.addAnnotationToAnnotationsByNodeId(annotation);
     }
@@ -608,6 +604,11 @@ export class TeacherDataService extends DataService {
     return this.studentData.annotationsByNodeId[nodeId] || [];
   }
 
+  getAnnotationsByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
+    const annotationsByNodeId = this.getAnnotationsByNodeId(nodeId);
+    return annotationsByNodeId.filter((annotation: any) => annotation.componentId === componentId);
+  }
+
   getAnnotationsByNodeIdAndPeriodId(nodeId, periodId) {
     const annotationsByNodeId = this.studentData.annotationsByNodeId[nodeId];
     if (annotationsByNodeId != null) {
@@ -626,11 +627,11 @@ export class TeacherDataService extends DataService {
   }
 
   initializePeriods() {
-    const periods = this.ConfigService.getPeriods();
-    this.setCurrentPeriod(periods[0]);
-    if (periods.length > 1) {
-      this.addAllPeriods(periods);
+    const periods = [...this.ConfigService.getPeriods()];
+    if (this.currentPeriod == null) {
+      this.setCurrentPeriod(periods[0]);
     }
+    this.addAllPeriods(periods);
     let mergedPeriods = periods;
     if (this.runStatus.periods != null) {
       mergedPeriods = this.mergeConfigAndRunStatusPeriods(periods, this.runStatus.periods);
@@ -639,13 +640,11 @@ export class TeacherDataService extends DataService {
     this.runStatus.periods = mergedPeriods;
   }
 
-  addAllPeriods(periods) {
-    const allPeriodsOption = {
+  addAllPeriods(periods: any[]): void {
+    periods.unshift({
       periodId: -1,
-      periodName: this.getTranslation('allPeriods')
-    };
-    periods.unshift(allPeriodsOption);
-    return periods;
+      periodName: $localize`All Periods`
+    });
   }
 
   mergeConfigAndRunStatusPeriods(configPeriods, runStatusPeriods) {
@@ -653,10 +652,6 @@ export class TeacherDataService extends DataService {
     for (const configPeriod of configPeriods) {
       const runStatusPeriod = this.getRunStatusPeriodById(runStatusPeriods, configPeriod.periodId);
       if (runStatusPeriod == null) {
-        /*
-         * we did not find the period object in the run status so we will use the period object from
-         * the config
-         */
         mergedPeriods.push(configPeriod);
       } else {
         mergedPeriods.push(runStatusPeriod);
@@ -859,24 +854,19 @@ export class TeacherDataService extends DataService {
     }
   }
 
-  isWorkgroupShown(workgroup) {
-    let show = false;
-    if (this.currentPeriod.periodId === -1 || workgroup.periodId === this.currentPeriod.periodId) {
-      show = true;
-      if (!this.isCurrentWorkgroup(workgroup.workgroupId)) {
-        show = false;
-      }
-    }
-    return show;
+  isWorkgroupShown(workgroup): boolean {
+    return (
+      this.isWorkgroupInCurrentPeriod(workgroup) &&
+      workgroup.workgroupId != null &&
+      (this.currentWorkgroup == null || this.isCurrentWorkgroup(workgroup.workgroupId))
+    );
   }
 
-  isCurrentWorkgroup(workgroupId) {
-    let isCurrentWorkgroup = true;
-    if (this.currentWorkgroup) {
-      if (this.currentWorkgroup.workgroupId !== parseInt(workgroupId)) {
-        isCurrentWorkgroup = false;
-      }
-    }
-    return isCurrentWorkgroup;
+  isWorkgroupInCurrentPeriod(workgroup: any): boolean {
+    return this.currentPeriod.periodId === -1 || workgroup.periodId === this.currentPeriod.periodId;
+  }
+
+  isCurrentWorkgroup(workgroupId: number): boolean {
+    return this.currentWorkgroup.workgroupId === workgroupId;
   }
 }

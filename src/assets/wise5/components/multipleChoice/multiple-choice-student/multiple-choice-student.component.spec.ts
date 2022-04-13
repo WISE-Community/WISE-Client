@@ -1,9 +1,15 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
+import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -33,18 +39,103 @@ const choiceText2 = 'B';
 const choiceText3 = 'C<br/><img src="cookie.png"/>';
 let component: MultipleChoiceStudent;
 const componentId = 'component1';
-const feedback1 = 'Good job';
-const feedback2 = 'This is not A, this is B';
-const feedback3 = 'This is not A, this is C';
+const feedback1 = 'A Feedback';
+const feedback2 = 'B Feedback';
+const feedback3 = 'C Feedback';
 let fixture: ComponentFixture<MultipleChoiceStudent>;
+const multipleChoiceType = 'MultipleChoice';
 const nodeId = 'node1';
-let originalComponentContent;
+let originalComponentContent: any;
+const singleAnswerSingleCorrectAnswerComponent = createComponent('radio', [
+  {
+    id: choiceId1,
+    text: choiceText1,
+    feedback: feedback1,
+    isCorrect: false
+  },
+  {
+    id: choiceId2,
+    text: choiceText2,
+    feedback: feedback2,
+    isCorrect: false
+  },
+  {
+    id: choiceId3,
+    text: choiceText3,
+    feedback: feedback3,
+    isCorrect: true
+  }
+]);
+
+const singleAnswerMultipleCorrectAnswersComponent = createComponent('radio', [
+  {
+    id: choiceId1,
+    text: choiceText1,
+    feedback: feedback1,
+    isCorrect: false
+  },
+  {
+    id: choiceId2,
+    text: choiceText2,
+    feedback: feedback2,
+    isCorrect: true
+  },
+  {
+    id: choiceId3,
+    text: choiceText3,
+    feedback: feedback3,
+    isCorrect: true
+  }
+]);
+
+const multipleAnswerComponent = createComponent('checkbox', [
+  {
+    id: choiceId1,
+    text: choiceText1,
+    feedback: feedback1,
+    isCorrect: false
+  },
+  {
+    id: choiceId2,
+    text: choiceText2,
+    feedback: feedback2,
+    isCorrect: true
+  },
+  {
+    id: choiceId3,
+    text: choiceText3,
+    feedback: feedback3,
+    isCorrect: true
+  }
+]);
+
+function createComponent(choiceType: string, choices: any[]): any {
+  return {
+    id: componentId,
+    type: multipleChoiceType,
+    prompt: '',
+    showSaveButton: true,
+    showSubmitButton: true,
+    choiceType: choiceType,
+    choices: choices,
+    showFeedback: true
+  };
+}
 
 describe('MultipleChoiceStudent', () => {
   configureTestSuite(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
-      declarations: [MultipleChoiceStudent],
+      imports: [
+        BrowserAnimationsModule,
+        BrowserModule,
+        HttpClientTestingModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatRadioModule,
+        ReactiveFormsModule,
+        UpgradeModule
+      ],
+      declarations: [ComponentHeader, MultipleChoiceStudent, PossibleScoreComponent],
       providers: [
         AnnotationService,
         MultipleChoiceService,
@@ -59,7 +150,7 @@ describe('MultipleChoiceStudent', () => {
         TagService,
         UtilService
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: []
     });
   });
 
@@ -69,17 +160,19 @@ describe('MultipleChoiceStudent', () => {
       score: 0,
       comment: ''
     });
+    spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
     component.nodeId = nodeId;
     originalComponentContent = {
       id: componentId,
-      type: 'MultipleChoice',
+      type: multipleChoiceType,
       prompt: 'Choose A',
       choices: [
         createComponentContentChoice(choiceId1, choiceText1, feedback1, true),
         createComponentContentChoice(choiceId2, choiceText2, feedback2, false),
         createComponentContentChoice(choiceId3, choiceText3, feedback3, false)
-      ]
+      ],
+      showFeedback: true
     };
     component.componentContent = JSON.parse(JSON.stringify(originalComponentContent));
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
@@ -93,13 +186,17 @@ describe('MultipleChoiceStudent', () => {
   });
 
   getChoiceById();
+  testMultipleAnswerComponent();
+  testSingleAnswerSingleCorrectAnswerComponent();
+  testSingleAnswerMultipleCorrectAnswersComponent();
+  ngOnInit();
 });
 
 function createComponentContentChoice(
   id: string,
   text: string,
-  feedback: string,
-  isCorrect: boolean
+  feedback: string = '',
+  isCorrect: boolean = false
 ): any {
   return {
     id: id,
@@ -110,7 +207,7 @@ function createComponentContentChoice(
 }
 
 function getChoiceById() {
-  describe('getChoiceById', () => {
+  describe('getChoiceById()', () => {
     it('should get choice by id', () => {
       component.componentContent = TestBed.inject(ProjectService).injectClickToSnipImage(
         component.componentContent
@@ -127,4 +224,194 @@ function getChoiceById() {
       );
     });
   });
+}
+
+function testMultipleAnswerComponent() {
+  describe('multiple answer component', () => {
+    beforeEach(() => {
+      component.componentContent = JSON.parse(JSON.stringify(multipleAnswerComponent));
+      component.ngOnInit();
+    });
+    multipleAnswerComponentShouldShowCorrectWhenOnlyTheCorrectAnswersAreSubmitted();
+    multipleAnswerComponentShouldShowIncorrectWhenTheIncorrectAnswerIsSubmitted();
+    multipleAnswerComponentShouldShowIncorrectWhenNotJustTheCorrectAnswersAreSubmitted();
+    multipleAnswerComponentShouldShowIncorrectWhenNotAllTheCorrectAnswersAreSubmitted();
+    multipleAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoices();
+  });
+}
+
+function testSingleAnswerSingleCorrectAnswerComponent() {
+  describe('single answer single correct answer component', () => {
+    beforeEach(() => {
+      component.componentContent = JSON.parse(
+        JSON.stringify(singleAnswerSingleCorrectAnswerComponent)
+      );
+      component.ngOnInit();
+    });
+    singleAnswerSingleCorrectAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoice();
+    singleAnswerSingleCorrectAnswerComponentShouldShowCorrect();
+    singleAnswerSingleCorrectAnswerComponentShouldShowIncorrect();
+  });
+}
+
+function testSingleAnswerMultipleCorrectAnswersComponent() {
+  describe('single answer multiple correct answers component', () => {
+    beforeEach(() => {
+      component.componentContent = JSON.parse(
+        JSON.stringify(singleAnswerMultipleCorrectAnswersComponent)
+      );
+      component.ngOnInit();
+    });
+    singleAnswerMultipleCorrectAnswersComponentShouldShowCorrect();
+  });
+}
+
+function selectSingleAnswerChoice(choiceId) {
+  component.radioChoiceSelected(choiceId);
+  component.studentChoices = choiceId;
+}
+
+function selectMultipleAnswerChoice(choiceId) {
+  component.addOrRemoveFromStudentChoices(choiceId);
+}
+
+function checkAnswer() {
+  component.checkAnswer();
+}
+
+function singleAnswerSingleCorrectAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoice() {
+  it('should show the feedback on the submitted choice', () => {
+    selectSingleAnswerChoice(choiceId1);
+    checkAnswer();
+    const choice1 = component.getChoiceById(component, choiceId1);
+    const choice2 = component.getChoiceById(component, choiceId2);
+    const choice3 = component.getChoiceById(component, choiceId3);
+    expect(choice1.showFeedback).toBeTruthy();
+    expect(choice1.feedbackToShow).toEqual(feedback1);
+    expect(choice2.showFeedback).toBeFalsy();
+    expect(choice2.feedbackToShow).toBeFalsy();
+    expect(choice3.showFeedback).toBeFalsy();
+    expect(choice3.feedbackToShow).toBeFalsy();
+  });
+}
+
+function singleAnswerSingleCorrectAnswerComponentShouldShowIncorrect() {
+  it(`should show incorrect when the incorrect answer is submitted`, () => {
+    selectSingleAnswerChoice(choiceId1);
+    checkAnswer();
+    expect(component.isCorrect).toBeFalsy();
+  });
+}
+
+function singleAnswerSingleCorrectAnswerComponentShouldShowCorrect() {
+  it(`should show correct when the correct answer is submitted`, () => {
+    selectSingleAnswerChoice(choiceId3);
+    checkAnswer();
+    expect(component.isCorrect).toBeTruthy();
+  });
+}
+
+function singleAnswerMultipleCorrectAnswersComponentShouldShowCorrect() {
+  it(`should show correct when one of the multiple correct answers is submitted`, () => {
+    selectSingleAnswerChoice(choiceId2);
+    checkAnswer();
+    expect(component.isCorrect).toBeTruthy();
+    selectSingleAnswerChoice(choiceId3);
+    checkAnswer();
+    expect(component.isCorrect).toBeTruthy();
+  });
+}
+
+function multipleAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoices() {
+  it('should show the feedback on the submitted choices', () => {
+    selectMultipleAnswerChoice(choiceId1);
+    selectMultipleAnswerChoice(choiceId2);
+    selectMultipleAnswerChoice(choiceId3);
+    checkAnswer();
+    const choice1 = component.getChoiceById(component, choiceId1);
+    const choice2 = component.getChoiceById(component, choiceId2);
+    const choice3 = component.getChoiceById(component, choiceId3);
+    expect(choice1.showFeedback).toBeTruthy();
+    expect(choice1.feedbackToShow).toEqual(feedback1);
+    expect(choice2.showFeedback).toBeTruthy();
+    expect(choice2.feedbackToShow).toEqual(feedback2);
+    expect(choice3.showFeedback).toBeTruthy();
+    expect(choice3.feedbackToShow).toEqual(feedback3);
+  });
+}
+
+function multipleAnswerComponentShouldShowIncorrectWhenTheIncorrectAnswerIsSubmitted() {
+  it(`should show incorrect when the incorrect answer is submitted`, () => {
+    selectMultipleAnswerChoice(choiceId1);
+    checkAnswer();
+    expect(component.isCorrect).toBeFalsy();
+  });
+}
+
+function multipleAnswerComponentShouldShowIncorrectWhenNotJustTheCorrectAnswersAreSubmitted() {
+  it(`should show incorrect when not just the correct answers are submitted`, () => {
+    selectMultipleAnswerChoice(choiceId1);
+    selectMultipleAnswerChoice(choiceId2);
+    selectMultipleAnswerChoice(choiceId3);
+    checkAnswer();
+    expect(component.isCorrect).toBeFalsy();
+  });
+}
+
+function multipleAnswerComponentShouldShowIncorrectWhenNotAllTheCorrectAnswersAreSubmitted() {
+  it(`should show incorrect when not all the correct answers are submitted`, () => {
+    selectMultipleAnswerChoice(choiceId2);
+    checkAnswer();
+    expect(component.isCorrect).toBeFalsy();
+  });
+}
+
+function multipleAnswerComponentShouldShowCorrectWhenOnlyTheCorrectAnswersAreSubmitted() {
+  it(`should show correct when only the correct answers are submitted`, () => {
+    selectMultipleAnswerChoice(choiceId2);
+    selectMultipleAnswerChoice(choiceId3);
+    checkAnswer();
+    expect(component.isCorrect).toBeTruthy();
+  });
+}
+
+function ngOnInit() {
+  describe('ngOnInit()', () => {
+    it('should set student work and repopulate feedback that was previously shown', () => {
+      component.choices.forEach((choice) => {
+        expect(choice.feedbackToShow).toBeUndefined();
+      });
+      const componentState = createComponentState(
+        [
+          createComponentContentChoice(choiceId1, choiceText1),
+          createComponentContentChoice(choiceId2, choiceText2)
+        ],
+        true
+      );
+      component.componentState = componentState;
+      component.ngOnInit();
+      expectChoiceToShowFeedback(component.choices[0], feedback1);
+      expectChoiceToShowFeedback(component.choices[1], feedback2);
+      expectChoiceToNotShowFeedback(component.choices[2]);
+    });
+  });
+}
+
+function createComponentState(studentChoices: any[], isSubmit: boolean): any {
+  return {
+    isSubmit: isSubmit,
+    studentData: {
+      studentChoices: studentChoices
+    }
+  };
+}
+
+function expectChoiceToShowFeedback(choice: any, expectedFeedback: string): void {
+  expect(choice.feedbackToShow).toEqual(expectedFeedback);
+  expect(choice.showFeedback).toEqual(true);
+}
+
+function expectChoiceToNotShowFeedback(choice: any): void {
+  expect(choice.feedbackToShow).toBeUndefined();
+  expect(choice.showFeedback).toBeFalsy();
 }

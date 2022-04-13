@@ -25,6 +25,7 @@ import { ConfigService } from './services/configService';
 import { CRaterService } from './services/cRaterService';
 import './directives/components';
 import { ComponentService } from './components/componentService';
+import './components/dialogGuidance/dialogGuidanceStudentComponentModule';
 import './components/discussion/discussionComponentModule';
 import './components/draw/drawComponentModule';
 import './components/embedded/embeddedComponentModule';
@@ -40,8 +41,6 @@ window['Highcharts'] = Highcharts;
 window['HighchartsExporting'] = HighchartsExporting;
 window['covariance'] = covariance;
 import './components/graph/graphComponentModule';
-import * as hopscotch from 'hopscotch';
-window['hopscotch'] = hopscotch;
 import './components/html/htmlComponentModule';
 import HttpInterceptor from './services/httpInterceptor';
 import './components/label/labelComponentModule';
@@ -73,8 +72,7 @@ import { NotebookItemComponent } from '../../app/notebook/notebook-item/notebook
 import { NotebookNotesComponent } from '../../app/notebook/notebook-notes/notebook-notes.component';
 import { NotebookReportComponent } from '../../app/notebook/notebook-report/notebook-report.component';
 import { NotebookReportAnnotationsComponent } from '../../app/notebook/notebook-report-annotations/notebook-report-annotations.component';
-import EditNotebookItemController from './themes/default/notebook/editNotebookItemController';
-import './components/discussion/class-response/classResponseComponentModule';
+import { ComputerAvatarService } from './services/computerAvatarService';
 
 angular
   .module('common', [
@@ -82,9 +80,9 @@ angular
     'angular-toArrayFilter',
     'animationComponentModule',
     'audioOscillatorComponentModule',
-    'classResponseComponentModule',
     'components',
     'conceptMapComponentModule',
+    'dialogGuidanceStudentComponentModule',
     'discussionComponentModule',
     'drawComponentModule',
     'embeddedComponentModule',
@@ -138,6 +136,7 @@ angular
   .factory('AudioRecorderService', downgradeInjectable(AudioRecorderService))
   .factory('ConfigService', downgradeInjectable(ConfigService))
   .factory('ComponentService', downgradeInjectable(ComponentService))
+  .factory('ComputerAvatarService', downgradeInjectable(ComputerAvatarService))
   .factory('CRaterService', downgradeInjectable(CRaterService))
   .service('HttpInterceptor', HttpInterceptor)
   .service('NodeService', downgradeInjectable(NodeService))
@@ -149,7 +148,6 @@ angular
   .factory('StudentDataService', downgradeInjectable(StudentDataService))
   .factory('UtilService', downgradeInjectable(UtilService))
   .component('sideMenu', SideMenu)
-  .controller('EditNotebookItemController', EditNotebookItemController)
   .filter('Filters', Filters)
   .config([
     '$httpProvider',

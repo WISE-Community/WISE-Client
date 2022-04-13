@@ -1,39 +1,23 @@
 import { ComponentService } from '../componentService';
 import { ConfigService } from '../../services/configService';
-import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../services/studentDataService';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class DiscussionService extends ComponentService {
-  TeacherDataService: TeacherDataService;
-
   constructor(
-    private upgrade: UpgradeModule,
-    private http: HttpClient,
-    private ConfigService: ConfigService,
+    protected http: HttpClient,
+    protected ConfigService: ConfigService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
     super(StudentDataService, UtilService);
-    if (['classroomMonitor', 'author'].includes(this.ConfigService.getMode())) {
-      /*
-       * In the Classroom Monitor, we need access to the TeacherDataService so we can retrieve posts
-       * for all students.
-       */
-      this.TeacherDataService = this.upgrade.$injector.get('TeacherDataService');
-    }
   }
 
-  getComponentTypeLabel() {
-    return this.getTranslation('discussion.componentTypeLabel');
-  }
-
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
+  getComponentTypeLabel(): string {
+    return $localize`Discussion`;
   }
 
   createComponent() {
@@ -111,50 +95,6 @@ export class DiscussionService extends ComponentService {
     });
   }
 
-  workgroupHasWorkForComponent(workgroupId: number, componentId: string) {
-    return (
-      this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
-        workgroupId,
-        componentId
-      ).length > 0
-    );
-  }
-
-  getPostsAssociatedWithComponentIdsAndWorkgroupId(componentIds: string[], workgroupId: number) {
-    let allPosts = [];
-    const topLevelComponentStateIdsFound = [];
-    const componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentIds(
-      workgroupId,
-      componentIds
-    );
-    for (const componentState of componentStates) {
-      const componentStateIdReplyingTo = componentState.studentData.componentStateIdReplyingTo;
-      if (this.isTopLevelPost(componentState)) {
-        if (
-          !this.isTopLevelComponentStateIdFound(topLevelComponentStateIdsFound, componentState.id)
-        ) {
-          allPosts = allPosts.concat(
-            this.getPostAndAllRepliesByComponentIds(componentIds, componentState.id)
-          );
-          topLevelComponentStateIdsFound.push(componentState.id);
-        }
-      } else {
-        if (
-          !this.isTopLevelComponentStateIdFound(
-            topLevelComponentStateIdsFound,
-            componentStateIdReplyingTo
-          )
-        ) {
-          allPosts = allPosts.concat(
-            this.getPostAndAllRepliesByComponentIds(componentIds, componentStateIdReplyingTo)
-          );
-          topLevelComponentStateIdsFound.push(componentStateIdReplyingTo);
-        }
-      }
-    }
-    return allPosts;
-  }
-
   isTopLevelPost(componentState: any) {
     return componentState.studentData.componentStateIdReplyingTo == null;
   }
@@ -164,24 +104,6 @@ export class DiscussionService extends ComponentService {
     componentStateId: string
   ) {
     return topLevelComponentStateIdsFound.indexOf(componentStateId) !== -1;
-  }
-
-  getPostAndAllRepliesByComponentIds(componentIds: string[], componentStateId: string) {
-    const postAndAllReplies = [];
-    const componentStatesForComponentIds = this.TeacherDataService.getComponentStatesByComponentIds(
-      componentIds
-    );
-    for (const componentState of componentStatesForComponentIds) {
-      if (componentState.id === componentStateId) {
-        postAndAllReplies.push(componentState);
-      } else {
-        const componentStateIdReplyingTo = componentState.studentData.componentStateIdReplyingTo;
-        if (componentStateIdReplyingTo === componentStateId) {
-          postAndAllReplies.push(componentState);
-        }
-      }
-    }
-    return postAndAllReplies;
   }
 
   componentUsesSaveButton() {

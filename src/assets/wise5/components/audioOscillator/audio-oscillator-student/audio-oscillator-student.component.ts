@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -17,8 +17,16 @@ import { AudioOscillatorService } from '../audioOscillatorService';
   styleUrls: ['audio-oscillator-student.component.scss']
 })
 export class AudioOscillatorStudent extends ComponentStudent {
+  amplitude: number;
+  amplitudesPlayed: number[] = [];
+  amplitudesPlayedSorted: number[] = [];
   analyser: any;
   audioContext: any;
+  canStudentEditAmplitude: boolean = true;
+  canStudentEditFrequency: boolean = true;
+  canStudentViewAmplitudeInput: boolean = true;
+  canStudentViewFrequencyInput: boolean = true;
+  defaultDBSPL: number = 44;
   destination: any;
   frequenciesPlayed: number[] = [];
   frequenciesPlayedSorted: number[] = [];
@@ -27,8 +35,22 @@ export class AudioOscillatorStudent extends ComponentStudent {
   goodDraw: boolean;
   gridCellSize: number = 50;
   isPlaying: boolean = false;
+  maxAmplitude: number;
+  maxAmplitudePlayed: number;
   maxFrequencyPlayed: number;
+  // We have strategically chosen the max dBSPL to be 50 so that when the student lowers the
+  // amplitude to 0 it coincides with the sound curve being completely flat and no more sound being
+  // emitted. If we chose a value much higher, the student could lower the amplitude to something
+  // low like 20 and no longer see a curve in the sound wave and no longer hear the sound even when
+  // they should still be able to see and hear 20 dBSPL. If we chose a value much lower, the student
+  // could set the amplitude to 0 but still see a curve in the sound wave and also still hear the
+  // sound when they should not be able to see or hear anything.
+  maxDBSPL: number = this.AudioOscillatorService.maxAmplitude;
+  minAmplitude: number;
+  minAmplitudePlayed: number;
+  minDBSPL: number = 0;
   minFrequencyPlayed: number;
+  numberOfAmplitudesPlayed: number = 0;
   numberOfFrequenciesPlayed: number = 0;
   oscillator: any;
   oscillatorType: string = 'sine';
@@ -41,25 +63,25 @@ export class AudioOscillatorStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private AudioOscillatorService: AudioOscillatorService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
-    private AudioOscillatorService: AudioOscillatorService,
+    protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
@@ -83,7 +105,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
       this.handleConnectedComponents();
     }
 
-    if (this.hasMaxSubmitCount() && !this.hasSubmitsLeft()) {
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableSubmitButton();
     }
 
@@ -116,25 +138,74 @@ export class AudioOscillatorStudent extends ComponentStudent {
     this.setFieldMininum1('oscilloscopeHeight', this.componentContent.oscilloscopeHeight);
     this.setFieldMininum1('gridCellSize', this.componentContent.gridCellSize);
     this.stopAfterGoodDraw = this.componentContent.stopAfterGoodDraw;
+    this.setMinMaxAmplitude();
+    this.setAmplitude(this.componentContent.startingAmplitude);
+    this.setCanStudentEditAmplitude(this.componentContent.canStudentEditAmplitude);
+    this.setCanStudentViewAmplitudeInput(this.componentContent.canStudentViewAmplitudeInput);
+    this.setCanStudentEditFrequency(this.componentContent.canStudentEditFrequency);
+    this.setCanStudentViewFrequencyInput(this.componentContent.canStudentViewFrequencyInput);
   }
 
   setFieldMininum1(field: string, value: number): void {
     this[field] = value < 1 ? 1 : value;
   }
 
+  setMinMaxAmplitude(): void {
+    this.maxAmplitude = this.maxDBSPL;
+    this.minAmplitude = this.minDBSPL;
+  }
+
+  setAmplitude(amplitude: number): void {
+    if (amplitude == null) {
+      this.amplitude = this.defaultDBSPL;
+    } else {
+      this.amplitude = amplitude;
+    }
+  }
+
+  setCanStudentEditAmplitude(canStudentEditAmplitude: boolean = true): void {
+    this.canStudentEditAmplitude = canStudentEditAmplitude;
+  }
+
+  setCanStudentEditFrequency(canStudentEditFrequency: boolean = true): void {
+    this.canStudentEditFrequency = canStudentEditFrequency;
+  }
+
+  setCanStudentViewAmplitudeInput(canStudentViewAmplitudeInput: boolean = true): void {
+    this.canStudentViewAmplitudeInput = canStudentViewAmplitudeInput;
+  }
+
+  setCanStudentViewFrequencyInput(canStudentViewFrequencyInput: boolean = true): void {
+    this.canStudentViewFrequencyInput = canStudentViewFrequencyInput;
+  }
+
   setStudentWork(componentState: any): void {
     const studentData = componentState.studentData;
+    this.setFrequencyStudentWork(studentData);
+    if (this.isAmplitudeInStudentWork(studentData)) {
+      this.setAmplitudeStudentWork(studentData);
+    }
+    this.submitCounter = studentData.submitCounter;
+    this.attachments = studentData.attachments;
+    this.processLatestStudentWork();
+  }
+
+  setFrequencyStudentWork(studentData: any): void {
     this.frequenciesPlayed = studentData.frequenciesPlayed;
     if (this.frequenciesPlayed.length > 0) {
       this.frequency = this.frequenciesPlayed[this.frequenciesPlayed.length - 1];
     }
-    this.frequenciesPlayedSorted = studentData.frequenciesPlayedSorted;
-    this.numberOfFrequenciesPlayed = studentData.numberOfFrequenciesPlayed;
-    this.minFrequencyPlayed = studentData.minFrequencyPlayed;
-    this.maxFrequencyPlayed = studentData.maxFrequencyPlayed;
-    this.submitCounter = studentData.submitCounter;
-    this.attachments = studentData.attachments;
-    this.processLatestStudentWork();
+  }
+
+  isAmplitudeInStudentWork(studentData: any): boolean {
+    return studentData.amplitudesPlayed != null;
+  }
+
+  setAmplitudeStudentWork(studentData: any): void {
+    this.amplitudesPlayed = studentData.amplitudesPlayed;
+    if (this.amplitudesPlayed.length > 0) {
+      this.amplitude = this.amplitudesPlayed[this.amplitudesPlayed.length - 1];
+    }
   }
 
   createComponentState(action: string): Promise<any> {
@@ -143,14 +214,12 @@ export class AudioOscillatorStudent extends ComponentStudent {
     componentState.componentType = 'AudioOscillator';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
-    componentState.studentData = this.createStudentData(
-      this.frequenciesPlayed,
-      this.frequenciesPlayedSorted,
-      this.numberOfFrequenciesPlayed,
-      this.minFrequencyPlayed,
-      this.maxFrequencyPlayed,
-      this.submitCounter
-    );
+    const studentData = {
+      submitCounter: this.submitCounter
+    };
+    this.addFrequencyDataToStudentData(studentData);
+    this.addAmplitudeDataToStudentData(studentData);
+    componentState.studentData = studentData;
     if (this.isSubmit && this.hasDefaultFeedback()) {
       this.addDefaultFeedback(componentState);
     }
@@ -164,21 +233,37 @@ export class AudioOscillatorStudent extends ComponentStudent {
   }
 
   createStudentData(
+    amplitudesPlayed: number[] = [],
     frequenciesPlayed: number[] = [],
-    frequenciesPlayedSorted: number[] = [],
-    numberOfFrequenciesPlayed: number = 0,
-    minFrequencyPlayed: number = null,
-    maxFrequencyPlayed: number = null,
     submitCounter: number = 0
   ): any {
     return {
+      amplitudesPlayed: amplitudesPlayed,
       frequenciesPlayed: frequenciesPlayed,
-      frequenciesPlayedSorted: frequenciesPlayedSorted,
-      numberOfFrequenciesPlayed: numberOfFrequenciesPlayed,
-      minFrequencyPlayed: minFrequencyPlayed,
-      maxFrequencyPlayed: maxFrequencyPlayed,
       submitCounter: submitCounter
     };
+  }
+
+  addFrequencyDataToStudentData(studentData: any): void {
+    studentData.frequenciesPlayed = this.frequenciesPlayed;
+    studentData.frequenciesPlayedSorted = this.UtilService.makeCopyOfJSONObject(
+      this.frequenciesPlayed
+    ).sort();
+    studentData.numberOfFrequenciesPlayed = this.frequenciesPlayed.length;
+    studentData.numberOfUniqueFrequenciesPlayed = [...new Set(this.frequenciesPlayed)].length;
+    studentData.minFrequencyPlayed = Math.min(...this.frequenciesPlayed);
+    studentData.maxFrequencyPlayed = Math.max(...this.frequenciesPlayed);
+  }
+
+  addAmplitudeDataToStudentData(studentData: any): void {
+    studentData.amplitudesPlayed = this.amplitudesPlayed;
+    studentData.amplitudesPlayedSorted = this.UtilService.makeCopyOfJSONObject(
+      this.amplitudesPlayed
+    ).sort();
+    studentData.numberOfAmplitudesPlayed = this.amplitudesPlayed.length;
+    studentData.numberOfUniqueAmplitudesPlayed = [...new Set(this.amplitudesPlayed)].length;
+    studentData.minAmplitudePlayed = Math.min(...this.amplitudesPlayed);
+    studentData.maxAmplitudePlayed = Math.max(...this.amplitudesPlayed);
   }
 
   togglePlay(): void {
@@ -204,7 +289,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
     this.oscillator.type = this.oscillatorType;
     this.oscillator.frequency.value = this.frequency;
     this.gain = this.audioContext.createGain();
-    this.gain.gain.value = 0.5;
+    this.gain.gain.value = this.getGain(this.amplitude);
     this.destination = this.audioContext.destination;
     this.analyser = this.audioContext.createAnalyser();
     this.analyser.fftSize = 2048;
@@ -216,16 +301,80 @@ export class AudioOscillatorStudent extends ComponentStudent {
     this.isPlaying = true;
     this.drawOscilloscope();
     this.addFrequencyPlayed(this.frequency);
+    this.addAmplitudePlayed(this.amplitude);
     this.studentDataChanged();
+  }
+
+  getGain(dbspl: number): number {
+    const dbfs = this.convertDBSPLToDBFS(dbspl);
+    return this.convertDBFSToGainValue(dbfs);
+  }
+
+  /**
+   * There is no actual decibel FS (dBFS) to decibel SPL (dBSPL) conversion because it does not
+   * exist.
+   * - dBFS is a computer signal measurement that ranges from negative infinity to 0, where 0 is the
+   * loudest the computer can output.
+   * - dBSPL is a sound pressure measurement that ranges from 0 to 194, where 194 is the loudest
+   * possible sound in air.
+   * We will use a conversion function that will do its best to convert from dBFS to dBSPL in our
+   * context to get the basic idea across.
+   */
+  convertDBSPLToDBFS(dbspl: number): number {
+    // Since we need a number that is negative or 0, we will take the dBSPL the student has chosen
+    // and subtract the max dBSPL that we allow. This means the higher the dBSPL the student chose,
+    // the closer the dBFS will be to 0 and therefore louder. The lower the dBSPL the student
+    // chose, the more negative the dBFS will be and therefore quieter.
+    return dbspl - this.maxDBSPL;
+  }
+
+  /**
+   * The decibel FS to gain conversion function was obtained from
+   * https://www.w3.org/TR/webaudio/#linear-to-decibel
+   */
+  convertDBFSToGainValue(dbfs: number): number {
+    return Math.pow(10, dbfs / 20);
+  }
+
+  amplitudeChanged(): void {
+    this.amplitude = this.limitAmplitudeIfNecessary(this.amplitude);
+    this.refreshOscilloscope();
+  }
+
+  amplitudeKeyUp(event: any): void {
+    if (this.isNumberEvent(event)) {
+      this.amplitudeChanged();
+    }
+  }
+
+  isNumberEvent(event: any): boolean {
+    const keyCode = event.keyCode;
+    return this.isTopRowNumber(keyCode) || this.isNumPadNumber(keyCode);
+  }
+
+  isTopRowNumber(keyCode: number): boolean {
+    return 48 <= keyCode && keyCode <= 57;
+  }
+
+  isNumPadNumber(keyCode: number): boolean {
+    return 96 <= keyCode && keyCode <= 105;
+  }
+
+  limitAmplitudeIfNecessary(amplitude: number): number {
+    if (amplitude > this.maxAmplitude) {
+      return this.maxAmplitude;
+    } else if (amplitude < this.minAmplitude) {
+      return this.minAmplitude;
+    }
+    return amplitude;
   }
 
   addFrequencyPlayed(frequency: number): void {
     this.frequenciesPlayed.push(frequency);
-    this.frequenciesPlayedSorted = this.UtilService.makeCopyOfJSONObject(this.frequenciesPlayed);
-    this.frequenciesPlayedSorted.sort((a, b) => a - b);
-    this.numberOfFrequenciesPlayed = this.frequenciesPlayed.length;
-    this.minFrequencyPlayed = Math.min(...this.frequenciesPlayed);
-    this.maxFrequencyPlayed = Math.max(...this.frequenciesPlayed);
+  }
+
+  addAmplitudePlayed(amplitude: number): void {
+    this.amplitudesPlayed.push(amplitude);
   }
 
   stop(): void {
@@ -459,10 +608,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
    */
   mergeStudentData(existingStudentData: any, newStudentData: any): any {
     this.mergeFrequenciesPlayed(existingStudentData, newStudentData);
-    this.mergeFrequenciesPlayedSorted(existingStudentData, newStudentData);
-    this.mergeNumberOfFrequenciesPlayed(existingStudentData, newStudentData);
-    this.mergeMinFrequencyPlayed(existingStudentData, newStudentData);
-    this.mergeMaxFrequencyPlayed(existingStudentData, newStudentData);
+    this.mergeAmplitudesPlayed(existingStudentData, newStudentData);
     return existingStudentData;
   }
 
@@ -472,38 +618,9 @@ export class AudioOscillatorStudent extends ComponentStudent {
     );
   }
 
-  mergeFrequenciesPlayedSorted(existingStudentData: any, newStudentData: any): void {
-    const frequenciesPlayedSorted = this.UtilService.makeCopyOfJSONObject(
-      existingStudentData.frequenciesPlayedSorted.concat(newStudentData.frequenciesPlayedSorted)
+  mergeAmplitudesPlayed(existingStudentData: any, newStudentData: any): void {
+    existingStudentData.amplitudesPlayed = existingStudentData.amplitudesPlayed.concat(
+      newStudentData.amplitudesPlayed
     );
-    frequenciesPlayedSorted.sort();
-    existingStudentData.frequenciesPlayedSorted = frequenciesPlayedSorted;
-  }
-
-  mergeNumberOfFrequenciesPlayed(existingStudentData: any, newStudentData: any): void {
-    existingStudentData.numberOfFrequenciesPlayed =
-      existingStudentData.numberOfFrequenciesPlayed + newStudentData.numberOfFrequenciesPlayed;
-  }
-
-  mergeMinFrequencyPlayed(existingStudentData: any, newStudentData: any): void {
-    if (existingStudentData.minFrequencyPlayed == null) {
-      existingStudentData.minFrequencyPlayed = newStudentData.minFrequencyPlayed;
-    } else {
-      existingStudentData.minFrequencyPlayed = Math.min(
-        existingStudentData.minFrequencyPlayed,
-        newStudentData.minFrequencyPlayed
-      );
-    }
-  }
-
-  mergeMaxFrequencyPlayed(existingStudentData: any, newStudentData: any): void {
-    if (existingStudentData.maxFrequencyPlayed == null) {
-      existingStudentData.maxFrequencyPlayed = newStudentData.maxFrequencyPlayed;
-    } else {
-      existingStudentData.maxFrequencyPlayed = Math.max(
-        existingStudentData.maxFrequencyPlayed,
-        newStudentData.maxFrequencyPlayed
-      );
-    }
   }
 }

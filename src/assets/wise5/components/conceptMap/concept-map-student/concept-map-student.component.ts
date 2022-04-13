@@ -2,7 +2,6 @@ import 'svg.js';
 import 'svg.draggable.js';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HtmlDialog } from '../../../directives/html-dialog/html-dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -33,6 +32,7 @@ export class ConceptMapStudent extends ComponentStudent {
   availableLinks: any[] = [];
   background: any;
   backgroundSize: string;
+  backgroundUrl: string = '';
   componentStateId: number;
   componentTypesCanImportAsBackground: string[] = ['Draw', 'Embedded', 'Graph', 'Label', 'Table'];
   conceptMapContainerId: string;
@@ -66,24 +66,23 @@ export class ConceptMapStudent extends ComponentStudent {
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     private ConceptMapService: ConceptMapService,
-    private dialog: MatDialog,
+    protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
@@ -174,7 +173,7 @@ export class ConceptMapStudent extends ComponentStudent {
     } else if (this.componentContentHasStarterConceptMap()) {
       this.populateConceptMapData(this.componentContent.starterConceptMap);
     }
-    if (this.hasMaxSubmitCount() && !this.hasSubmitsLeft()) {
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableSubmitButton();
     }
     if (!this.isDisabled) {
@@ -419,8 +418,9 @@ export class ConceptMapStudent extends ComponentStudent {
   showFeedbackInPopup(feedbackText: string): void {
     this.dialog.open(HtmlDialog, {
       data: {
-        title: $localize`Feedback`,
-        content: feedbackText
+        content: feedbackText,
+        isShowCloseButton: true,
+        title: $localize`Feedback`
       }
     });
   }
@@ -1493,7 +1493,7 @@ export class ConceptMapStudent extends ComponentStudent {
       }
     }
     if (this.isBackgroundAvailable(this.componentContent)) {
-      const conceptMapData = componentStateToMergeInto.studentData.conceptMapdata;
+      const conceptMapData = componentStateToMergeInto.studentData.conceptMapData;
       conceptMapData.backgroundPath = this.componentContent.background;
       conceptMapData.stretchBackground = this.componentContent.stretchBackground;
     }
@@ -1554,8 +1554,21 @@ export class ConceptMapStudent extends ComponentStudent {
 
   setBackground(backgroundPath: string, stretchBackground: boolean): void {
     this.background = backgroundPath;
+    this.setBackgroundUrl(backgroundPath);
     this.stretchBackground = stretchBackground;
-    if (stretchBackground) {
+    this.setBackgroundSize(stretchBackground);
+  }
+
+  setBackgroundUrl(backgroundPath: string): void {
+    if (backgroundPath == null || backgroundPath === '') {
+      this.backgroundUrl = '';
+    } else {
+      this.backgroundUrl = `url("${backgroundPath}")`;
+    }
+  }
+
+  setBackgroundSize(isStretchBackground: boolean): void {
+    if (isStretchBackground) {
       this.backgroundSize = '100% 100%';
     } else {
       this.backgroundSize = '';
@@ -1566,20 +1579,8 @@ export class ConceptMapStudent extends ComponentStudent {
     this.background = null;
   }
 
-  generateStarterState(): void {
-    this.NodeService.respondStarterState({
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      starterState: this.getConceptMapData()
-    });
-  }
-
-  getElementById(id: string, getFirstResult: boolean = false): any {
-    if (getFirstResult) {
-      return $(`#${id}`)[0];
-    } else {
-      return $(`#${id}`);
-    }
+  generateStarterState(): any {
+    return this.getConceptMapData();
   }
 
   attachStudentAsset(studentAsset: any): void {

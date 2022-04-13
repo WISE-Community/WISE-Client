@@ -54,6 +54,7 @@ describe('DrawStudent', () => {
   });
 
   beforeEach(() => {
+    jasmine.clock().install();
     fixture = TestBed.createComponent(DrawStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,
@@ -73,6 +74,13 @@ describe('DrawStudent', () => {
     spyOn(component, 'subscribeToNotebookItemChosen').and.callFake(() => {});
     spyOn(component, 'studentDataChanged').and.callFake(() => {});
     fixture.detectChanges();
+    // Run tick() so that the setTimeout() in ngAfterViewInit() in draw-student.component.ts has
+    // time to run initializeDrawingTool().
+    jasmine.clock().tick(1);
+  });
+
+  afterEach(() => {
+    jasmine.clock().uninstall();
   });
 
   initializeStudentData();

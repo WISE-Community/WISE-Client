@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
-import { StudentStatusService } from './studentStatusService';
+import { ClassroomStatusService } from './classroomStatusService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { NotificationService } from './notificationService';
 import { Observable, Subject } from 'rxjs';
@@ -21,9 +21,9 @@ export class TeacherWebSocketService {
   constructor(
     private upgrade: UpgradeModule,
     private AchievementService: AchievementService,
+    private classroomStatusService: ClassroomStatusService,
     private ConfigService: ConfigService,
-    private NotificationService: NotificationService,
-    private StudentStatusService: StudentStatusService
+    private NotificationService: NotificationService
   ) {
     if (this.upgrade.$injector != null) {
       this.initializeStomp();
@@ -67,8 +67,8 @@ export class TeacherWebSocketService {
         this.broadcastNewStudentWorkReceived({ studentWork: studentWork });
       } else if (message.type === 'studentStatus') {
         const status = JSON.parse(message.content);
-        this.StudentStatusService.setStudentStatus(status);
-        this.StudentStatusService.broadcastStudentStatusReceived({ studentStatus: status });
+        this.classroomStatusService.setStudentStatus(status);
+        this.classroomStatusService.broadcastStudentStatusReceived({ studentStatus: status });
       } else if (message.type === 'newStudentAchievement') {
         const achievement = JSON.parse(message.content);
         this.AchievementService.broadcastNewStudentAchievement({ studentAchievement: achievement });

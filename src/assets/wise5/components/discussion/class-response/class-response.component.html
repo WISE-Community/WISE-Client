@@ -22,7 +22,7 @@
     <img *ngFor="let attachment of response.studentData.attachments"
         [src]="attachment.iconURL"
         i18n-alt
-        alt="Post attachment" 
+        alt="Post attachment"
         class="attachment" />
     <div fxLayoutAlign="end center" *ngIf="mode === 'grading' || mode === 'gradingRevision'">
       <br />
@@ -119,9 +119,8 @@
     </mat-list>
     <mat-divider></mat-divider>
   </div>
-  <div class="new-reply" fxLayout="row"
-    *ngIf="mode === 'student' && !isdisabled">
-    <textarea class="new-reply-input" 
+  <div class="new-reply" fxLayout="row" *ngIf="mode === 'student' && !isDisabled">
+    <textarea class="new-reply-input"
         [(ngModel)]="response.replyText"
         (keyup)="replyEntered($event)"
         placeholder="Add Comment"

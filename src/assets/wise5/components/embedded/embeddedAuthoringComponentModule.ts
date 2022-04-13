@@ -7,18 +7,15 @@ import { EditEmbeddedAdvancedComponent } from './edit-embedded-advanced/edit-emb
 import { EmbeddedAuthoring } from './embedded-authoring/embedded-authoring.component';
 
 const embeddedAuthoringComponentModule = angular
-  .module('embeddedAuthoringComponentModule', ['pascalprecht.translate'])
+  .module('embeddedAuthoringComponentModule', [])
   .service('EmbeddedService', downgradeInjectable(EmbeddedService))
+  .directive(
+    'editEmbeddedAdvanced',
+    downgradeComponent({ component: EditEmbeddedAdvancedComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'embeddedAuthoring',
     downgradeComponent({ component: EmbeddedAuthoring }) as angular.IDirectiveFactory
-  )
-  .component('editEmbeddedAdvanced', EditEmbeddedAdvancedComponent)
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/embedded/i18n');
-    }
-  ]);
+  );
 
 export default embeddedAuthoringComponentModule;

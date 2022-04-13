@@ -22,54 +22,74 @@ $config: mat-typography-config();
   @media (min-width: breakpoint('lg.min')) {
     padding: 33% 0 0;
   }
-
-  .mat-icon {
-    margin: 0 8px;
-  }
 }
 
-.hero__content {
+.hero-wrap {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
   background-color: rgba(0,0,0,0.4);
-  color: #ffffff;
-  text-align: center;
-  padding: 32px;
+}
+
+.hero-content {
+  max-width: breakpoint('lg.min');
+  margin: 0 auto;
+  padding: 16px 16px;
 
   @media (min-width: breakpoint('sm.min')) {
+    padding: 16px 48px;
+  }
+  
+  @media (min-width: breakpoint('lg.min')) {
     padding: 32px 64px;
+  }
+
+  @media (min-width: breakpoint('xl.min')) {
+    max-width: breakpoint('xl.min');
   }
 }
 
-h1.hero__headline {
-  .mat-icon {
-    @include mat-icon-size(mat-font-size($config, display-1));
-  }
+.main-content {
+  color: #ffffff;
+  text-align: center;
 
+  &.with-sidecontent {
+    @media (min-width: breakpoint('md.min')) {
+      text-align: start;
+    }
+  }
+}
+
+h1.headline {
   @media (min-width: breakpoint('sm.min')) {
     margin-bottom: 24px;
 
+    .mat-icon {
+      @include mat-icon-size(mat-font-size($config, display-2));
+    }
+  }
+
+  @media (min-width: breakpoint('md.min')) {
     .mat-icon {
       @include mat-icon-size(mat-font-size($config, display-3));
     }
   }
 }
 
-h1.hero__headline--withtagline {
+h1.with-tagline {
   margin-bottom: 4px;
 
   @media (min-width: breakpoint('sm.min')) {
-    margin-bottom: 32px;
+    margin-bottom: 8px;
   }
 
   @media (min-width: breakpoint('md.min')) {
-    margin-bottom: 48px;
+    margin-bottom: 16px;
   }
 }
 
-h2.hero__tagline {
+h2.tagline {
   font-weight: 400;
   margin-bottom: 0 !important;
 
@@ -81,5 +101,11 @@ h2.hero__tagline {
     .mat-icon {
       @include mat-icon-size(mat-font-size($config, display-1));
     }
+  }
+}
+
+@media (max-width: breakpoint('xs.max')) {
+  h1.headline, h2.tagline {
+    line-height: 1.2;
   }
 }

@@ -1,6 +1,5 @@
 import * as html2canvas from 'html2canvas';
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -12,6 +11,7 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { EmbeddedService } from '../embeddedService';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'embedded-student',
@@ -71,24 +71,24 @@ export class EmbeddedStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     private EmbeddedService: EmbeddedService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private saniztizer: DomSanitizer,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
@@ -102,9 +102,14 @@ export class EmbeddedStudent extends ComponentStudent {
     );
     this.componentType = this.componentContent.type;
     this.setURL(this.componentContent.url);
-    this.subscribeToSiblingComponentStudentDataChanged();
     this.initializeMessageEventListener();
     this.broadcastDoneRenderingComponent();
+    if (this.componentState != null) {
+      this.setSubmitCounter(this.componentState);
+    }
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.disableSubmitButton();
+    }
   }
 
   ngOnDestroy(): void {
@@ -119,20 +124,6 @@ export class EmbeddedStudent extends ComponentStudent {
     if (height != null) {
       this.height = `${height}px`;
     }
-  }
-
-  subscribeToSiblingComponentStudentDataChanged(): void {
-    this.subscriptions.add(
-      this.NodeService.siblingComponentStudentDataChanged$.subscribe((args: any) => {
-        if (this.isForThisComponent(args)) {
-          const message = {
-            messageType: 'siblingComponentStudentDataChanged',
-            componentState: args.componentState
-          };
-          this.sendMessageToApplication(message);
-        }
-      })
-    );
   }
 
   initializeMessageEventListener(): void {
@@ -180,7 +171,6 @@ export class EmbeddedStudent extends ComponentStudent {
     if (messageEventData.annotations != null) {
       this.setAnnotations(messageEventData.annotations);
     }
-    this.studentDataChanged();
 
     // tell the parent node that this component wants to save
     this.StudentDataService.broadcastComponentSaveTriggered({
@@ -614,5 +604,15 @@ export class EmbeddedStudent extends ComponentStudent {
       componentState: componentState
     };
     this.sendMessageToApplication(message);
+  }
+
+  connectedComponentStudentDataSaved() {
+    if (this.isHandleConnectedComponentAfterConnectedComponentStudentDataSaved()) {
+      const message = {
+        messageType: 'componentState',
+        componentState: this.componentState
+      };
+      this.sendMessageToApplication(message);
+    }
   }
 }

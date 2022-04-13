@@ -3,7 +3,6 @@
 import { ComponentService } from '../componentService';
 import { UtilService } from '../../services/utilService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../services/studentDataService';
 
 @Injectable()
@@ -12,7 +11,6 @@ export class SummaryService extends ComponentService {
   componentsWithResponsesSummary: string[];
 
   constructor(
-    private upgrade: UpgradeModule,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
@@ -34,8 +32,8 @@ export class SummaryService extends ComponentService {
     this.componentsWithResponsesSummary = ['MultipleChoice', 'Table'];
   }
 
-  getComponentTypeLabel() {
-    return this.upgrade.$injector.get('$filter')('translate')('summary.componentTypeLabel');
+  getComponentTypeLabel(): string {
+    return $localize`Summary`;
   }
 
   createComponent() {

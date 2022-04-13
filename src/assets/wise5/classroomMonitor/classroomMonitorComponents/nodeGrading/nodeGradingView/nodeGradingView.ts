@@ -5,7 +5,7 @@ import { ConfigService } from '../../../../services/configService';
 import { NodeService } from '../../../../services/nodeService';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { NotificationService } from '../../../../services/notificationService';
-import { StudentStatusService } from '../../../../services/studentStatusService';
+import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import * as angular from 'angular';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
@@ -48,24 +48,24 @@ export class NodeGradingViewController {
   static $inject = [
     '$filter',
     'AnnotationService',
+    'ClassroomStatusService',
     'ConfigService',
     'MilestoneService',
     'NodeService',
     'NotificationService',
     'ProjectService',
-    'StudentStatusService',
     'TeacherDataService'
   ];
 
   constructor(
     protected $filter: any,
     protected AnnotationService: AnnotationService,
+    protected classroomStatusService: ClassroomStatusService,
     protected ConfigService: ConfigService,
     protected MilestoneService: MilestoneService,
     protected NodeService: NodeService,
     protected NotificationService: NotificationService,
     protected ProjectService: TeacherProjectService,
-    protected StudentStatusService: StudentStatusService,
     protected TeacherDataService: TeacherDataService
   ) {
     this.$translate = this.$filter('translate');
@@ -130,13 +130,13 @@ export class NodeGradingViewController {
     );
   }
 
-  retrieveStudentData() {
-    this.TeacherDataService.retrieveStudentDataForNode(this.node).then(() => {
+  retrieveStudentData(node = this.node) {
+    this.TeacherDataService.retrieveStudentDataForNode(node).then(() => {
       this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
       this.workgroups = this.ConfigService.getClassmateUserInfos();
       this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
       this.setWorkgroupsById();
-      this.numRubrics = this.ProjectService.getNumberOfRubricsByNodeId(this.nodeId);
+      this.numRubrics = this.ProjectService.getNumberOfRubricsByNodeId(node.id);
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
   }
@@ -160,8 +160,8 @@ export class NodeGradingViewController {
     );
   }
 
-  getMaxScore() {
-    return this.ProjectService.getMaxScoreForNode(this.nodeId);
+  getMaxScore(nodeId = this.nodeId) {
+    return this.ProjectService.getMaxScoreForNode(nodeId);
   }
 
   setWorkgroupsById() {
@@ -215,7 +215,7 @@ export class NodeGradingViewController {
       latestWorkTime: null,
       latestAnnotationTime: null
     };
-    const studentStatus = this.StudentStatusService.getStudentStatusForWorkgroupId(workgroupId);
+    const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
     if (studentStatus != null) {
       const nodeStatus = studentStatus.nodeStatuses[this.nodeId];
       if (nodeStatus) {
@@ -279,14 +279,14 @@ export class NodeGradingViewController {
   }
 
   getNodeCompletion(nodeId: string) {
-    return this.StudentStatusService.getNodeCompletion(
+    return this.classroomStatusService.getNodeCompletion(
       nodeId,
       this.TeacherDataService.getCurrentPeriodId()
     ).completionPct;
   }
 
   getNodeAverageScore() {
-    const averageScore = this.StudentStatusService.getNodeAverageScore(
+    const averageScore = this.classroomStatusService.getNodeAverageScore(
       this.nodeId,
       this.TeacherDataService.getCurrentPeriodId()
     );

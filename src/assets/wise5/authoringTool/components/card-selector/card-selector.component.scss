@@ -1,0 +1,30 @@
+.item-cards-container {
+  height: 600px;
+  overflow-y: auto;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.item-card {
+  margin: 6px;
+}
+
+.item-card-title {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-card-image {
+  margin-left: -16px;
+  margin-right: -16px;
+  position: relative;
+  padding-top: 60%;
+  background-size: cover;
+  background-position: center;
+}
+
+.item-card-actions-spacer {
+  flex: 1 1 auto;
+}

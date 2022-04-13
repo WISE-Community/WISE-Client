@@ -1,0 +1,55 @@
+<h3 class="mat-dialog-title"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="4px">
+  <mat-icon color="accent">notifications</mat-icon>
+  <span i18n>Alerts</span>
+  <span fxFlex></span>
+  <button *ngIf="newNotifications.length > 0"
+      mat-icon-button
+      (click)="dismissAll()"
+      matTooltip="Dismiss all alerts"
+      matTooltipPosition="before"
+      i18n-matTooltip>
+    <mat-icon class="text-secondary">clear_all</mat-icon>
+  </button>
+</h3>
+<mat-dialog-content class="dialog-content-scroll notifications">
+  <p *ngIf="!hasNewNotifications()"
+      class="no-notifications-message">
+    <span class="mat-body-1"
+        i18n>Hi there! You currently have no alerts.</span>
+  </p>
+  <mat-list *ngIf="hasNewNotifications()">
+    <mat-list-item *ngFor="let notificationAggregate of newNotifications; let last = last;" class="notification-item">
+      <p matLine class="mat-body-1">
+        <a (click)="dismissNotificationAggregateAndVisitNode(notificationAggregate)"
+            tabindex="0"
+            aria-label="View alert"
+            i18n-aria-label>
+          {{ notificationAggregate.message }}
+        </a>
+      </p>
+      <p *ngIf="notificationAggregate.nodeId != null"
+          matLine
+          class="mat-small text-secondary">
+        {{ getNodePositionAndTitleByNodeId(notificationAggregate.nodeId) }}
+      </p>
+      <p *ngIf="notificationAggregate.notebookItemId != null"
+          matLine
+          class="mat-small text-secondary">
+        {{ reportItem.title }}
+      </p>
+      <button mat-icon-button
+          (click)="dismissNotificationAggregate(notificationAggregate); $event.stopPropagation();"
+          aria-label="Dismiss"
+          i18n-aria-label>
+        <mat-icon class="text-secondary">clear</mat-icon>
+      </button>
+      <mat-divider *ngIf="!last"></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="8px">
+  <button mat-button [mat-dialog-close] i18n>Close</button>
+</mat-dialog-actions>

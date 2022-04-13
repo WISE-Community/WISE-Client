@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/assets/wise5/lib/hopscotch/dist/css/hopscotch.min.css" />
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/angular-material.css" />
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/vle.css" />
 <style ng-bind-html="::vleController.projectStyle"></style>
@@ -8,29 +7,26 @@
         role="main"
         layout="column"
         layout-fill
-        ng-controller="ThemeController as themeCtrl"
-        ng-mousemove="themeCtrl.mouseMoved()"
+        ng-mousemove="vleController.mouseMoved()"
         ng-class="::{'notebook-enabled': vleController.notebookEnabled}"
         style="position: absolute;">
-      <ng-include src="::vleController.themePath + '/templates/topbar.html'"></ng-include>
-      <step-tools show-position="themeCtrl.numberProject" ng-if="themeCtrl.layoutState === 'node'">
+      <top-bar></top-bar>
+      <step-tools show-position="vleController.numberProject" ng-if="vleController.layoutState === 'node'">
       </step-tools>
       <md-content id="content"
           flex
           role="main"
           ui-scrollpoint-target
-          ng-class="{'l-nav': themeCtrl.layoutState === 'nav', 'l-node': themeCtrl.layoutState === 'node'}"
+          ng-class="{'l-nav': vleController.layoutState === 'nav', 'l-node': vleController.layoutState === 'node'}"
           layout="column">
-        <div id="nav"
-            ng-include="::vleController.themePath + '/navigation/navigation.html'"
-            ng-show="themeCtrl.layoutState === 'nav'"></div>
-        <div ng-if="themeCtrl.isEndedAndLocked"
+        <navigation ng-show="vleController.layoutState === 'nav'"></navigation>
+        <div ng-if="vleController.isEndedAndLocked"
             style="color: red; display: flex; justify-content: center; align-items: center; height: 30px;">
           <span style="border: 1px solid black; border-radius: 3px; padding-left: 8px; padding-right: 8px; background-color: white;">
-            {{ themeCtrl.endedAndLockedMessage }}
+            {{ vleController.endedAndLockedMessage }}
           </span>
         </div>
-        <div id="node" ng-cloak ui-view="nodeView" ng-if="themeCtrl.layoutState === 'node'">
+        <div id="node" ng-cloak ui-view="nodeView" ng-if="vleController.layoutState === 'node'">
         </div>
       </md-content>
       <md-sidenav ng-if="vleController.notesEnabled"

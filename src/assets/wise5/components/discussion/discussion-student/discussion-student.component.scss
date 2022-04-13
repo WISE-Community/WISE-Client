@@ -1,0 +1,19 @@
+.discussion-content {
+  padding: 16px;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.discussion-new__input-container {
+  width: 100%;
+
+  .mat-form-field-infix {
+    border-top: 0em;
+  }
+}

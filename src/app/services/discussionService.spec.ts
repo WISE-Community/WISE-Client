@@ -10,55 +10,90 @@ import { StudentDataService } from '../../assets/wise5/services/studentDataServi
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { TeacherDataService } from '../../assets/wise5/services/teacherDataService';
+import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
+import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
+import { AchievementService } from '../../assets/wise5/services/achievementService';
+import { NotificationService } from '../../assets/wise5/services/notificationService';
+import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
+
+class MockTeacherDataService {
+  getComponentStatesByComponentIds() {
+    return [];
+  }
+}
 
 let service: DiscussionService;
 let http: HttpTestingController;
 let configService: ConfigService;
 let studentDataService: StudentDataService;
+const componentId = 'component1';
+const nodeId = 'node1';
 
 describe('DiscussionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
       providers: [
+        AchievementService,
         AnnotationService,
+        ClassroomStatusService,
         ConfigService,
         DiscussionService,
+        NotificationService,
         ProjectService,
         SessionService,
         StudentAssetService,
         StudentDataService,
         TagService,
+        { provide: TeacherDataService, useClass: MockTeacherDataService },
+        TeacherProjectService,
+        TeacherWebSocketService,
         UtilService
       ]
     });
-    http = TestBed.get(HttpTestingController);
-    service = TestBed.get(DiscussionService);
-    configService = TestBed.get(ConfigService);
-    studentDataService = TestBed.get(StudentDataService);
+
+    http = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(DiscussionService);
+    configService = TestBed.inject(ConfigService);
+    studentDataService = TestBed.inject(StudentDataService);
   });
+
+  checkThatAComponentStateHasStudentWorkWhenStudentOnlyAttachedAFile();
+  componentStateHasStudentWork();
   createComponent();
-  isCompleted();
+  getClassmateResponses();
   hasShowWorkConnectedComponentThatHasWork();
   hasNodeEnteredEvent();
-  getClassmateResponses();
-  workgroupHasWorkForComponent();
-  getPostsAssociatedWithComponentIdsAndWorkgroupId();
-  isTopLevelPost();
-  isTopLevelComponentStateIdFound();
-  getPostAndAllRepliesByComponentIds();
-  componentStateHasStudentWork();
+  isCompleted();
   isComponentHasStarterSentence();
   isStudentResponseDifferentFromStarterSentence();
   isStudentWorkHasText();
   isStudentWorkHasAttachment();
+  isTopLevelComponentStateIdFound();
+  isTopLevelPost();
 });
 
-function createComponentState(response: string, attachments: any[] = []) {
+function createComponentStateFromOnlyResponse(response: string, attachments: any[] = []) {
+  return createComponentState(1, nodeId, componentId, null, response, attachments);
+}
+
+function createComponentState(
+  componentStateId,
+  nodeId,
+  componentId,
+  componentStateIdReplyingTo,
+  response,
+  attachments
+) {
   return {
+    id: componentStateId,
+    nodeId: nodeId,
+    componentId: componentId,
     studentData: {
-      response: response,
-      attachments: attachments
+      attachments: attachments,
+      componentStateIdReplyingTo: componentStateIdReplyingTo,
+      response: response
     }
   };
 }
@@ -116,14 +151,15 @@ function isCompleted() {
   });
   it('should check if a component is completed when it has a show work connected component', () => {
     spyOn(studentDataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue([
-      createComponentState('Hello World')
+      createComponentStateFromOnlyResponse('Hello World')
     ]);
     component.connectedComponents = [createConnectedComponent('node1', 'component1', 'showWork')];
     nodeEvents.push(createNodeEvent('nodeEntered'));
     expectIsCompleted(component, componentStates, nodeEvents, true);
   });
-  it(`should check if a component is completed when it has a component state with a response`, () => {
-    componentStates.push(createComponentState('Hello World'));
+  it(`should check if a component is completed when it has a component state with a
+      response`, () => {
+    componentStates.push(createComponentStateFromOnlyResponse('Hello World'));
     expectIsCompleted(component, componentStates, nodeEvents, true);
   });
 }
@@ -152,7 +188,7 @@ function hasShowWorkConnectedComponentThatHasWork() {
     const connectedComponent = createConnectedComponent('node1', 'component1', 'showWork');
     componentContent.connectedComponents.push(connectedComponent);
     spyOn(studentDataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue([
-      createComponentState('Hello World')
+      createComponentStateFromOnlyResponse('Hello World')
     ]);
     expectHasShowWorkConnectedComponentThatHasWork(componentContent, true);
   });
@@ -187,18 +223,10 @@ function getClassmateResponses() {
   });
 }
 
-function workgroupHasWorkForComponent() {
-  // TODO
-}
-
-function getPostsAssociatedWithComponentIdsAndWorkgroupId() {
-  // TODO
-}
-
 function isTopLevelPost() {
   let componentState: any;
   beforeEach(() => {
-    componentState = createComponentState('');
+    componentState = createComponentStateFromOnlyResponse('');
   });
   function expectIsTopLevelPost(componentState: any, expectedResult: boolean) {
     expect(service.isTopLevelPost(componentState)).toEqual(expectedResult);
@@ -223,15 +251,11 @@ function isTopLevelComponentStateIdFound() {
   });
 }
 
-function getPostAndAllRepliesByComponentIds() {
-  // TODO
-}
-
 function componentStateHasStudentWork() {
   let componentState: any;
   let componentContent: any;
   beforeEach(() => {
-    componentState = createComponentState('');
+    componentState = createComponentStateFromOnlyResponse('');
     componentContent = createDiscussionComponent('');
   });
   function expectComponentStatehasStudentWork(
@@ -291,7 +315,7 @@ function isStudentResponseDifferentFromStarterSentence() {
   let componentState: any;
   let componentContent: any;
   beforeEach(() => {
-    componentState = createComponentState('');
+    componentState = createComponentStateFromOnlyResponse('');
     componentContent = createDiscussionComponent('');
   });
   function expectIsStudentResponseDifferentFromStarterSentence(
@@ -303,10 +327,12 @@ function isStudentResponseDifferentFromStarterSentence() {
       service.isStudentResponseDifferentFromStarterSentence(componentState, componentContent)
     ).toEqual(expectedResult);
   }
-  it('should check if student response is different from starter sentence when it is the same', () => {
+  it(`should check if student response is different from starter sentence when it is the
+      same`, () => {
     expectIsStudentResponseDifferentFromStarterSentence(componentState, componentContent, false);
   });
-  it('should check if student response is different from starter sentence when it is different', () => {
+  it(`should check if student response is different from starter sentence when it is
+      different`, () => {
     componentState.studentData.response = 'Hello World';
     expectIsStudentResponseDifferentFromStarterSentence(componentState, componentContent, true);
   });
@@ -315,7 +341,7 @@ function isStudentResponseDifferentFromStarterSentence() {
 function isStudentWorkHasText() {
   let componentState: any;
   beforeEach(() => {
-    componentState = createComponentState('');
+    componentState = createComponentStateFromOnlyResponse('');
   });
   function expectIsStudentWorkHasText(componentState: any, expectedResult: boolean) {
     expect(service.isStudentWorkHasText(componentState)).toEqual(expectedResult);
@@ -332,7 +358,7 @@ function isStudentWorkHasText() {
 function isStudentWorkHasAttachment() {
   let componentState: any;
   beforeEach(() => {
-    componentState = createComponentState('Hello World');
+    componentState = createComponentStateFromOnlyResponse('Hello World');
   });
   function expectIsStudentWorkHasAttachment(componentState: any, expectedResult: boolean) {
     expect(service.isStudentWorkHasAttachment(componentState)).toEqual(expectedResult);
@@ -343,5 +369,17 @@ function isStudentWorkHasAttachment() {
   it('should check if student work has attachment when it does', () => {
     componentState.studentData.attachments.push({});
     expectIsStudentWorkHasAttachment(componentState, true);
+  });
+}
+
+function checkThatAComponentStateHasStudentWorkWhenStudentOnlyAttachedAFile() {
+  it(`should check that a component state has student work when student only attached a
+      file`, () => {
+    const componentState = createComponentState(1, nodeId, componentId, null, '', ['somefile.png']);
+    const componentContent = {
+      starterSentence: 'starter sentence'
+    };
+    const hasStudentWork = service.componentStateHasStudentWork(componentState, componentContent);
+    expect(hasStudentWork).toEqual(true);
   });
 }

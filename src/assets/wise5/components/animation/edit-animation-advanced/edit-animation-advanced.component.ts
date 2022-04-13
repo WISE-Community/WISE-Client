@@ -1,15 +1,10 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
-class EditAnimationAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  selector: 'edit-animation-advanced',
+  templateUrl: 'edit-animation-advanced.component.html'
+})
+export class EditAnimationAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['Animation', 'Graph'];
 }
-
-export const EditAnimationAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditAnimationAdvancedController,
-  templateUrl:
-    'assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html'
-};

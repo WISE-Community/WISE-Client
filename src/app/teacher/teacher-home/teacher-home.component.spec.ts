@@ -128,6 +128,6 @@ describe('TeacherHomeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    expect(component.isDiscourseEnabled).toBeTruthy();
+    expect(component.discourseUrl).not.toBeNull();
   });
 });

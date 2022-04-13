@@ -1,0 +1,10 @@
+<div class="max-submit-container">
+  <mat-form-field>
+    <mat-label i18n>Max Submit</mat-label>
+    <input matInput
+        type="number"
+        min="1"
+        [(ngModel)]="maxSubmitCount"
+        (ngModelChange)="maxSubmitCountDebouncer.next($event)"/>
+  </mat-form-field>
+</div>

@@ -6,15 +6,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: 'html-dialog.html'
 })
 export class HtmlDialog {
-  title: string;
   content: string;
+  isShowCloseButton: boolean;
+  title: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<HtmlDialog>
   ) {
-    this.title = data.title;
     this.content = data.content;
+    this.isShowCloseButton = data.isShowCloseButton;
+    this.title = data.title;
   }
 
   close(): void {

@@ -52,7 +52,7 @@ export class LibraryProjectComponent implements OnInit {
     this.dialog.open(LibraryProjectDetailsComponent, {
       ariaLabel: $localize`Unit Details`,
       data: { project: project },
-      panelClass: 'mat-dialog--md'
+      panelClass: 'dialog-md'
     });
   }
 }

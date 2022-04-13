@@ -1,0 +1,34 @@
+.avatar-label {
+  max-width: 400px;
+}
+
+.avatars {
+  margin: 16px 0;
+}
+
+.mat-button-toggle-group {
+  margin-top: 16px;
+}
+
+.mat-button-toggle-group-appearance-standard {
+  .mat-button-toggle, .mat-button-toggle + .mat-button-toggle {
+    border-left: 0 none;
+  }
+}
+
+.mat-button-toggle-checked {
+  background-color: transparent;
+}
+
+.avatar-image {
+  width: 88px;
+  margin: 0 auto;
+  height: auto;
+  border-radius: 50%;
+  padding: 8px 0;
+}
+
+.name {
+  line-height: 1;
+  padding-bottom: 8px;
+}

@@ -1,0 +1,11 @@
+<span fxLayout="row" fxLayoutGap="4px">
+  <span *ngIf="componentState.isSubmit" i18n>Submitted</span>
+  <span *ngIf="!componentState.isSubmit" i18n>Saved</span>
+  <span *ngIf="isActive">
+    <span class="component__actions__more"
+        am-time-ago="latestComponentStateTime"
+        matTooltip="{{ latestComponentStateTime | amDateFormat:'ddd MMM D YYYY, h:mm a' }}"
+        matTooltipPosition="above">{{ latestComponentStateTime | amTimeAgo }}</span>
+  </span>
+  <span *ngIf="!isActive">{{ latestComponentStateTime | amDateFormat:'ddd MMM D YYYY, h:mm a' }}</span>
+</span>

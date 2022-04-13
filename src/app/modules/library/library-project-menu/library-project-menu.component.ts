@@ -68,7 +68,7 @@ export class LibraryProjectMenuComponent {
         projectRun.project = this.project;
         this.dialog.open(EditRunWarningDialogComponent, {
           data: { run: projectRun },
-          panelClass: 'mat-dialog--sm'
+          panelClass: 'dialog-sm'
         });
       } else {
         window.location.href = this.editLink;
@@ -79,7 +79,7 @@ export class LibraryProjectMenuComponent {
   shareProject() {
     this.dialog.open(ShareProjectDialogComponent, {
       data: { project: this.project },
-      panelClass: 'mat-dialog--md'
+      panelClass: 'dialog-md'
     });
   }
 }

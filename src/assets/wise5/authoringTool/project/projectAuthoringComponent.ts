@@ -1,7 +1,10 @@
 'use strict';
 
-import { TeacherProjectService } from '../../services/teacherProjectService';
 import { ConfigService } from '../../services/configService';
+import { CopyNodesService } from '../../services/copyNodesService';
+import { DeleteNodeService } from '../../services/deleteNodeService';
+import { MoveNodesService } from '../../services/moveNodesService';
+import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
 import * as angular from 'angular';
@@ -61,6 +64,9 @@ class ProjectAuthoringController {
     '$transitions',
     '$window',
     'ConfigService',
+    'CopyNodesService',
+    'DeleteNodeService',
+    'MoveNodesService',
     'ProjectService',
     'TeacherDataService',
     'UtilService'
@@ -75,6 +81,9 @@ class ProjectAuthoringController {
     private $transitions,
     private $window,
     private ConfigService: ConfigService,
+    private CopyNodesService: CopyNodesService,
+    private DeleteNodeService: DeleteNodeService,
+    private MoveNodesService: MoveNodesService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService,
     private UtilService: UtilService
@@ -311,9 +320,9 @@ class ProjectAuthoringController {
 
       let newNodes = [];
       if (moveTo === 'inside') {
-        newNodes = this.ProjectService.moveNodesInside(selectedNodeIds, nodeId);
+        newNodes = this.MoveNodesService.moveNodesInsideGroup(selectedNodeIds, nodeId);
       } else if (moveTo === 'after') {
-        newNodes = this.ProjectService.moveNodesAfter(selectedNodeIds, nodeId);
+        newNodes = this.MoveNodesService.moveNodesAfter(selectedNodeIds, nodeId);
       } else {
         // an unspecified moveTo was provided
         return;
@@ -355,26 +364,27 @@ class ProjectAuthoringController {
    * @param moveTo whether to insert 'inside' or 'after' the nodeId parameter
    */
   handleCopyModeInsert(nodeId, moveTo) {
-    let copiedNodes = [];
     let selectedNodeIds = this.getSelectedNodeIds();
-    for (let selectedNodeId of selectedNodeIds) {
-      let node = {
-        fromNodeId: selectedNodeId,
-        fromTitle: this.ProjectService.getNodePositionAndTitleByNodeId(selectedNodeId)
-      };
-      copiedNodes.push(node);
-    }
-
     let newNodes = [];
     if (moveTo === 'inside') {
-      newNodes = this.ProjectService.copyNodesInside(selectedNodeIds, nodeId);
+      const firstNode: any = this.CopyNodesService.copyNodeInside(selectedNodeIds[0], nodeId);
+      const otherNodes = this.CopyNodesService.copyNodesAfter(
+        selectedNodeIds.slice(1),
+        firstNode.id
+      );
+      newNodes = [firstNode].concat(otherNodes);
     } else if (moveTo === 'after') {
-      newNodes = this.ProjectService.copyNodesAfter(selectedNodeIds, nodeId);
+      newNodes = this.CopyNodesService.copyNodesAfter(selectedNodeIds, nodeId);
     } else {
       // an unspecified moveTo was provided
       return;
     }
-
+    const copiedNodes: any[] = selectedNodeIds.map((selectedNodeId) => {
+      return {
+        fromNodeId: selectedNodeId,
+        fromTitle: this.ProjectService.getNodePositionAndTitleByNodeId(selectedNodeId)
+      };
+    });
     this.copyMode = false;
     this.insertGroupMode = false;
     this.insertNodeMode = false;
@@ -481,7 +491,7 @@ class ProjectAuthoringController {
       } else {
         stepsDeleted.push(tempNode);
       }
-      this.ProjectService.deleteNode(nodeId);
+      this.DeleteNodeService.deleteNode(nodeId);
     }
     if (deletedStartNodeId) {
       this.updateStartNodeId();
@@ -625,20 +635,13 @@ class ProjectAuthoringController {
   }
 
   refreshProject() {
-    /*
-     * Use a timeout before we refresh the project in order to allow the
-     * spinning progress indicator to show up before the browser starts
-     * blocking/freezing.
-     */
-    this.$timeout(() => {
-      this.ProjectService.parseProject();
-      this.items = this.ProjectService.idToOrder;
-      this.inactiveGroupNodes = this.ProjectService.getInactiveGroupNodes();
-      this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
-      this.inactiveNodes = this.ProjectService.getInactiveNodes();
-      this.idToNode = this.ProjectService.getIdToNode();
-      this.unselectAllItems();
-    });
+    this.ProjectService.parseProject();
+    this.items = this.ProjectService.idToOrder;
+    this.inactiveGroupNodes = this.ProjectService.getInactiveGroupNodes();
+    this.inactiveStepNodes = this.ProjectService.getInactiveStepNodes();
+    this.inactiveNodes = this.ProjectService.getInactiveNodes();
+    this.idToNode = this.ProjectService.getIdToNode();
+    this.unselectAllItems();
   }
 
   importStep() {

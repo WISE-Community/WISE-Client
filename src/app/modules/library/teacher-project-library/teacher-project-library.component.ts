@@ -63,7 +63,7 @@ export class TeacherProjectLibraryComponent implements OnInit {
 
   showInfo() {
     this.dialog.open(OfficialLibraryDetailsComponent, {
-      panelClass: 'mat-dialog--sm'
+      panelClass: 'dialog-sm'
     });
   }
 }

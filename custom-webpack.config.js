@@ -6,5 +6,20 @@ module.exports = {
     new MomentLocalesPlugin({
       localesToKeep: ['zh-cn', 'zh-tw']
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-url-loader',
+            options: {
+              encoding: 'base64'
+            }
+          }
+        ]
+      }
+    ],
+  },
 };

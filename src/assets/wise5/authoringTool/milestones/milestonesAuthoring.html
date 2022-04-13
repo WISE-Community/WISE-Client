@@ -110,10 +110,13 @@
                 <label>{{ ::'componentID' | translate }}</label>
                 <md-select ng-model="satisfyCriteria.componentId"
                     ng-change="$ctrl.save()">
-                  <md-option ng-repeat='(componentIndex, component) in $ctrl.getComponentsByNodeId(satisfyCriteria.nodeId)'
-                      value="{{component.id}}">
-                    {{ componentIndex + 1 }}. {{component.type}}
-                  </md-option>
+                  <ng-container ng-repeat='(componentIndex, component) in $ctrl.getComponentsByNodeId(satisfyCriteria.nodeId)'
+                      ng-init="isCRater = $ctrl.isCRaterComponent(component)">
+                    <md-option value="{{component.id}}"
+                        ng-disabled="!isCRater">
+                      {{ componentIndex + 1 }}. {{component.type}} {{ isCRater ? '(' + $ctrl.getItemId(component) + ')' : '' }}
+                    </md-option>
+                  </ng-container>
                 </md-select>
               </md-input-container>
               <md-input-container style="width: 180px; margin-right: 40px;">
@@ -164,10 +167,13 @@
                 <label>{{ ::'componentID' | translate }}</label>
                 <md-select ng-model="location.componentId"
                     ng-change="$ctrl.save()">
-                  <md-option ng-repeat='(componentIndex, component) in $ctrl.getComponentsByNodeId(location.nodeId)'
-                      value="{{component.id}}">
-                    {{ componentIndex + 1 }}. {{component.type}}
-                  </md-option>
+                  <ng-container ng-repeat='(componentIndex, component) in $ctrl.getComponentsByNodeId(location.nodeId)'
+                      ng-init="isCRater = $ctrl.isCRaterComponent(component)">
+                    <md-option value="{{component.id}}"
+                        ng-disabled="!isCRater">
+                      {{ componentIndex + 1 }}. {{component.type}} {{ isCRater ? '(' + $ctrl.getItemId(component) + ')' : '' }}
+                    </md-option>
+                  </ng-container>
                 </md-select>
               </md-input-container>
               <md-button class="topButton md-raised md-primary"
@@ -274,10 +280,13 @@
                         <label>{{ ::'componentID' | translate }}</label>
                         <md-select ng-model="satisfyCriteria.componentId"
                             ng-change="$ctrl.save()">
-                          <md-option ng-repeat='(componentIndex, component) in $ctrl.getComponentsByNodeId(satisfyCriteria.nodeId)'
-                              value="{{component.id}}">
-                            {{ componentIndex + 1 }}. {{component.type}}
-                          </md-option>
+                          <ng-container ng-repeat='(componentIndex, component) in $ctrl.getComponentsByNodeId(satisfyCriteria.nodeId)'
+                              ng-init="isCRater = $ctrl.isCRaterComponent(component)">
+                            <md-option value="{{component.id}}"
+                                ng-disabled="!isCRater">
+                              {{ componentIndex + 1 }}. {{component.type}} {{ isCRater ? '(' + $ctrl.getItemId(component) + ')' : '' }}
+                            </md-option>
+                          </ng-container>
                         </md-select>
                       </md-input-container>
                       <br/>

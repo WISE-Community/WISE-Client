@@ -1,6 +1,6 @@
 import * as angular from 'angular';
-import { ManageStudentsComponent } from '../../manageStudents/manage-students-component';
 import { downgradeComponent } from '@angular/upgrade/static';
+import { ManageStudentsComponent } from './manage-students/manage-students.component';
 
 angular
   .module('manageStudents', [])
@@ -12,7 +12,7 @@ angular
     '$stateProvider',
     ($stateProvider) => {
       $stateProvider.state('root.cm.manageStudents', {
-        url: '/manageStudents',
+        url: '/manage-students',
         component: 'manageStudentsComponent'
       });
     }

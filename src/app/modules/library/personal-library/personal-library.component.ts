@@ -85,7 +85,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
 
   showInfo() {
     this.dialog.open(PersonalLibraryDetailsComponent, {
-      panelClass: 'mat-dialog--sm'
+      panelClass: 'dialog-sm'
     });
   }
 }

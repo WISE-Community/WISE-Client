@@ -15,6 +15,11 @@
     <mat-icon>insert_photo</mat-icon>
   </button>
 </div>
+<author-url-parameters
+    [url]="authoringComponentContent.url"
+    [parameters]="authoringComponentContent.urlParameters"
+    (generatedUrl)="updateUrl($event)">
+</author-url-parameters>
 <div fxLayout="row wrap" fxLayoutAlign="start center">
   <mat-form-field class="dimension">
     <mat-label i18n>Width (px) (optional)</mat-label>

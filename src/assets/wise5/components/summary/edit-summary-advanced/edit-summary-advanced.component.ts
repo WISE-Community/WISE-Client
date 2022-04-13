@@ -1,13 +1,8 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
-class EditSummaryAdvancedController extends EditAdvancedComponentAngularJSController {}
-
-export const EditSummaryAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditSummaryAdvancedController,
-  templateUrl:
-    'assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.html'
-};
+@Component({
+  selector: 'edit-summary-advanced',
+  templateUrl: 'edit-summary-advanced.component.html'
+})
+export class EditSummaryAdvancedComponent extends EditAdvancedComponentComponent {}

@@ -69,14 +69,15 @@ export default angular
               'TeacherDataService',
               'config',
               (TeacherDataService, config) => {
+                TeacherDataService.currentPeriod = null;
                 return TeacherDataService.retrieveRunStatus();
               }
             ],
             studentStatuses: [
-              'StudentStatusService',
+              'ClassroomStatusService',
               'config',
-              (StudentStatusService, config) => {
-                return StudentStatusService.retrieveStudentStatuses();
+              (ClassroomStatusService, config) => {
+                return ClassroomStatusService.retrieveStudentStatuses();
               }
             ],
             achievements: [

@@ -33,7 +33,7 @@ export class UnlinkGoogleAccountPasswordComponent {
         this.isSaving = false;
         this.dialog.closeAll();
         this.dialog.open(UnlinkGoogleAccountSuccessComponent, {
-          panelClass: 'mat-dialog--sm'
+          panelClass: 'dialog-sm'
         });
       });
   }

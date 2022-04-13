@@ -53,10 +53,6 @@ export class UtilService {
     this.upgrade.$injector.get('$rootScope').$broadcast(event, data);
   }
 
-  translate(key) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
-  }
-
   generateKey(length = 10) {
     let key = '';
     for (let a = 0; a < length; a++) {
@@ -323,10 +319,22 @@ export class UtilService {
    * @return text without html tags and new lines
    */
   removeHTMLTags(html = '') {
-    let text = html.replace(/<\/?[^>]+(>|$)/g, ' ');
-    text = text.replace(/\n/g, ' ');
-    text = text.replace(/\r/g, ' ');
-    return text;
+    let text = this.replaceImgTagWithFileName(html);
+    text = text.replace(/<\/?[^>]+(>|$)/g, ' ');
+    return this.removeNewLines(text);
+  }
+
+  removeNewLines(html = '') {
+    let text = html.replace(/\n/g, ' ');
+    return text.replace(/\r/g, ' ');
+  }
+
+  /**
+   * Replace img tags with the src value.
+   * Example: <img src="computer.png"/> will be replaced with computer.png.
+   */
+  replaceImgTagWithFileName(html = '') {
+    return html.replace(/<img.*?src=["'](.*?)["'].*?>/g, '$1');
   }
 
   /**
@@ -388,6 +396,7 @@ export class UtilService {
       { type: 'Animation', name: this.getComponentTypeLabel('Animation') },
       { type: 'AudioOscillator', name: this.getComponentTypeLabel('AudioOscillator') },
       { type: 'ConceptMap', name: this.getComponentTypeLabel('ConceptMap') },
+      { type: 'DialogGuidance', name: this.getComponentTypeLabel('DialogGuidance') },
       { type: 'Discussion', name: this.getComponentTypeLabel('Discussion') },
       { type: 'Draw', name: this.getComponentTypeLabel('Draw') },
       { type: 'Embedded', name: this.getComponentTypeLabel('Embedded') },
@@ -677,22 +686,6 @@ export class UtilService {
       return true;
     } catch (e) {
       return false;
-    }
-  }
-
-  moveObjectUp(objects, index) {
-    if (index !== 0) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index - 1, 0, object);
-    }
-  }
-
-  moveObjectDown(objects, index) {
-    if (index !== objects.length - 1) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index + 1, 0, object);
     }
   }
 

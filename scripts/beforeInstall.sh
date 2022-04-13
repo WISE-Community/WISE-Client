@@ -3,6 +3,12 @@
 export HOME=/home/ubuntu
 export WISE_BUILD_FILES=$HOME/wise-build-files
 
+if [[ "$DEPLOYMENT_GROUP_NAME" == "qa-wise-client-deployment-group" ]]; then
+  export ENV="qa"
+else
+  export ENV="prod"
+fi
+
 sudo -u ubuntu -g ubuntu touch $HOME/deploy.log
 exec &>> $HOME/deploy.log
 
@@ -35,7 +41,7 @@ sed 's/gzip on;/gzip on;\n        gzip_types text\/plain text\/xml image\/gif im
 
 echo "Copying WISE Nginx config file to Nginx sites-enabled folder"
 rm -f /etc/nginx/sites-enabled/*
-cp $WISE_BUILD_FILES/client/wise.conf /etc/nginx/sites-enabled/wise.conf
+cp $WISE_BUILD_FILES/client/$ENV/wise.conf /etc/nginx/sites-enabled/wise.conf
 
 echo "Restart Nginx"
 systemctl restart nginx

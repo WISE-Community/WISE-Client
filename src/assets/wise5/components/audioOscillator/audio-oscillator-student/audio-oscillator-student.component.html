@@ -11,13 +11,25 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="frequency">
+  <mat-form-field *ngIf="canStudentViewFrequencyInput" class="frequency">
     <mat-label i18n>Frequency (Hz)</mat-label>
     <input matInput
         type="number"
         [(ngModel)]="frequency"
         (ngModelChange)="refreshOscilloscope()"
-        [disabled]="isDisabled"/>
+        [disabled]="isDisabled || !canStudentEditFrequency"/>
+  </mat-form-field>
+  <mat-form-field *ngIf="canStudentViewAmplitudeInput" class="frequency">
+    <mat-label i18n>Ampitude (dB)</mat-label>
+    <input matInput
+        type="number"
+        [max]="maxAmplitude"
+        [min]="minAmplitude"
+        name="amplitude"
+        [(ngModel)]="amplitude"
+        (change)="amplitudeChanged()"
+        (keyup)="amplitudeKeyUp($event)"
+        [disabled]="isDisabled || !canStudentEditAmplitude"/>
   </mat-form-field>
   <button
       mat-button
@@ -39,6 +51,7 @@
     [isDirty]="isDirty"
     [isDisabled]="isDisabled"
     [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
     [isSubmitButtonVisible]="isSubmitButtonVisible"
     [isSubmitDirty]="isSubmitDirty"
     [saveMessage]="saveMessage"

@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -33,24 +33,24 @@ export class MultipleChoiceStudent extends ComponentStudent {
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
+    protected dialog: MatDialog,
     private MultipleChoiceService: MultipleChoiceService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
@@ -144,15 +144,10 @@ export class MultipleChoiceStudent extends ComponentStudent {
   }
 
   showFeedbackForChoiceIds(choiceIds: string[]): void {
-    const originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
-    for (const choiceId of choiceIds) {
-      const choiceObject = this.getChoiceById(originalComponentContent, choiceId);
-      if (choiceObject != null) {
-        choiceObject.showFeedback = true;
-        choiceObject.feedbackToShow = choiceObject.feedback;
+    for (const choice of this.choices) {
+      if (choiceIds.includes(choice.id)) {
+        choice.showFeedback = true;
+        choice.feedbackToShow = choice.feedback;
       }
     }
   }
@@ -191,14 +186,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     if (this.isDisabled) {
       return;
     }
-    if (this.mode === 'student') {
-      const category = 'StudentInteraction';
-      const event = 'choiceSelected';
-      const data: any = {
-        selectedChoiceId: choiceId
-      };
-      this.StudentDataService.saveComponentEvent(this, category, event, data);
-    }
   }
 
   checkboxClicked(choiceId: string): void {
@@ -207,15 +194,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     }
     this.addOrRemoveFromStudentChoices(choiceId);
     this.studentDataChanged();
-    if (this.mode === 'student') {
-      const category = 'StudentInteraction';
-      const event = 'choiceSelected';
-      const data: any = {
-        selectedChoiceId: choiceId,
-        choicesAfter: this.studentChoices
-      };
-      this.StudentDataService.saveComponentEvent(this, category, event, data);
-    }
   }
 
   addOrRemoveFromStudentChoices(choiceId: string): void {
@@ -278,7 +256,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
             nodeId: this.nodeId,
             componentId: this.componentId
           });
-          if (this.isAuthoringComponentPreviewMode()) {
+          if (this.isPreviewMode()) {
             this.saveForAuthoringPreviewMode('submit');
           }
         }

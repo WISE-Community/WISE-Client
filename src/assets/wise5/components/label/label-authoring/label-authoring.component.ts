@@ -77,12 +77,6 @@ export class LabelAuthoring extends ComponentAuthoring {
     }
   }
 
-  saveStarterLabels(): void {
-    if (confirm($localize`Are you sure you want to save the starter labels?`)) {
-      this.NodeService.requestStarterState({ nodeId: this.nodeId, componentId: this.componentId });
-    }
-  }
-
   saveStarterState(starterState: any): void {
     this.authoringComponentContent.labels = starterState;
     this.componentChanged();
@@ -98,11 +92,9 @@ export class LabelAuthoring extends ComponentAuthoring {
     }
   }
 
-  deleteStarterLabels(): void {
-    if (confirm($localize`label.areYouSureYouWantToDeleteAllTheStarterLabels`)) {
-      this.authoringComponentContent.labels = [];
-      this.componentChanged();
-    }
+  deleteStarterState(): void {
+    this.authoringComponentContent.labels = [];
+    this.componentChanged();
   }
 
   openColorViewer(): void {

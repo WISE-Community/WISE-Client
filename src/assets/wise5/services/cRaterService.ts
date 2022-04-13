@@ -3,33 +3,44 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class CRaterService {
   constructor(protected http: HttpClient, protected ConfigService: ConfigService) {}
 
   /**
-   * Make a CRater request to score student data
-   * @param cRaterItemId
-   * @param cRaterResponseId a randomly generated id used to keep track of the request
-   * @param studentData the student data
+   * Make a CRater request to score student response
+   * @param itemId CRater item ID
+   * @param responseId number used to keep track of this request
+   * @param responseText the student's response to CRater item
    * @returns a promise that returns the result of the CRater request
    */
-  makeCRaterScoringRequest(cRaterItemId: string, cRaterResponseId: number, studentData: any) {
-    const url = this.ConfigService.getCRaterRequestURL() + '/score';
-    const params = new HttpParams()
-      .set('itemId', cRaterItemId)
-      .set('responseId', cRaterResponseId + '')
-      .set('studentData', studentData);
-    const options = {
-      params: params
-    };
-    return this.http
-      .get(url, options)
-      .toPromise()
-      .then((response) => {
-        return response;
+  makeCRaterScoringRequest(
+    itemId: string,
+    responseId: number,
+    responseText: string
+  ): Observable<any> {
+    if (itemId === 'MOCK') {
+      return this.mockResponse(responseText);
+    } else {
+      return this.http.post(`${this.ConfigService.getCRaterRequestURL()}/score`, {
+        itemId: itemId,
+        responseId: responseId,
+        responseText: responseText
       });
+    }
+  }
+
+  private mockResponse(responseText: string): Observable<any> {
+    const ideasFound = responseText.match(/idea([a-zA-Z0-9]+)/g) ?? [];
+    const isNonScorable = responseText.includes('isNonScorable') ? 1 : 0;
+    return of({
+      scores: [{ id: 'nonscorable', score: isNonScorable }],
+      ideas: ideasFound.map((idea) => {
+        return { name: idea, detected: true, characterOffsets: [] };
+      })
+    });
   }
 
   /**
@@ -286,8 +297,8 @@ export class CRaterService {
     return this.http
       .get(url, options)
       .toPromise()
-      .then((response: any) => {
-        return response.isAvailable;
+      .then((isAvailable: boolean) => {
+        return isAvailable;
       });
   }
 }

@@ -142,7 +142,8 @@ const NodeInfo = {
                             component__header">
                         {{ component.assessmentItemIndex + '. ' + $ctrl.getComponentTypeLabel(component.type) }}&nbsp;
                     </h3>
-                    <preview-component component-content='component'/>
+                    <preview-component [node-id]="$ctrl.nodeId" [component-id]="component.id">
+                    </preview-component>
                     <md-card class="annotations annotations--info" ng-if="component.rubric">
                        <md-card-title class="annotations__header">
                            <div class="annotations__avatar md-avatar avatar--icon md-36 avatar md-whiteframe-1dp">
@@ -158,15 +159,19 @@ const NodeInfo = {
                     </md-card>
                     <div ng-if='$ctrl.isResponsesSummaryAvailableForComponentType(component.type)'>
                         <summary-display ng-if='component.type === "MultipleChoice"'
-                                node-id='::$ctrl.nodeId' component-id='::component.id'
-                                period-id='$ctrl.periodId' student-data-type='"responses"'
-                                highlight-correct-answer='$ctrl.componentHasCorrectAnswer(component)'>
+                                [node-id]='::$ctrl.nodeId' [component-id]='::component.id'
+                                [period-id]='$ctrl.periodId' [student-data-type]='"responses"'
+                                [highlight-correct-answer]='$ctrl.componentHasCorrectAnswer(component)'
+                                [chart-type]='"column"'
+                                [do-render]='true'>
                         </summary-display>
                     </div>
                     <div ng-if='$ctrl.isScoresSummaryAvailableForComponentType(component.type) &&
                             $ctrl.componentHasScoreAnnotation(component.id)'>
-                        <summary-display node-id='::$ctrl.nodeId' component-id='::component.id'
-                                period-id='$ctrl.periodId' student-data-type='"scores"'>
+                        <summary-display [node-id]='::$ctrl.nodeId' [component-id]='::component.id'
+                                [period-id]='$ctrl.periodId' [student-data-type]='"scores"'
+                                [chart-type]='"column"'
+                                [do-render]='true'>
                         </summary-display>
                     </div>
                 </div>

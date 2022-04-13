@@ -67,7 +67,7 @@ $dark-accent: (
 
 $dark-theme-primary: mat-palette($dark-primary);
 $dark-theme-accent: mat-palette($dark-accent);
-$dark-theme-warn: mat-palette($mat-red);
+$dark-theme-warn: mat-palette($mat-red, 800);
 
 // custom background and foreground palettes for this theme
 $dark-theme-background: (

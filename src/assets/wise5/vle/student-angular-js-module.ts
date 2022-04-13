@@ -2,8 +2,7 @@ import '../lib/jquery/jquery-global';
 import * as angular from 'angular';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import '../common-angular-js-module';
-import NavigationController from '../vle/navigation/navigationController';
-import NodeController from '../vle/node/nodeController';
+import '../../../app/student/top-bar/topBarAngularJSModule';
 import { StudentWebSocketService } from '../services/studentWebSocketService';
 import VLEController from '../vle/vleController';
 import { VLEProjectService } from '../vle/vleProjectService';
@@ -13,6 +12,11 @@ import { ComponentHeader } from '../directives/component-header/component-header
 import { ComponentSaveSubmitButtons } from '../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { NotebookLauncherComponent } from '../../../../src/app/notebook/notebook-launcher/notebook-launcher.component';
 import { AddToNotebookButton } from '../directives/add-to-notebook-button/add-to-notebook-button.component';
+import { NavigationComponent } from '../themes/default/navigation/navigation.component';
+import { NotificationsDialogComponent } from './notifications-dialog/notifications-dialog.component';
+import { StudentAccountMenuComponent } from './student-account-menu/student-account-menu.component';
+import { StudentStatusService } from '../services/studentStatusService';
+import { NodeComponent } from './node/node.component';
 
 export function createStudentAngularJSModule(type = 'preview') {
   return angular
@@ -22,9 +26,11 @@ export function createStudentAngularJSModule(type = 'preview') {
       'studentAsset',
       'summaryComponentModule',
       'theme',
+      'topBarAngularJSModule',
       'ui.scrollpoint'
     ])
     .factory('ProjectService', downgradeInjectable(VLEProjectService))
+    .factory('StudentStatusService', downgradeInjectable(StudentStatusService))
     .factory('StudentWebSocketService', downgradeInjectable(StudentWebSocketService))
     .directive(
       'navItem',
@@ -34,8 +40,10 @@ export function createStudentAngularJSModule(type = 'preview') {
       'notebookLauncher',
       downgradeComponent({ component: NotebookLauncherComponent }) as angular.IDirectiveFactory
     )
-    .controller('NavigationController', NavigationController)
-    .controller('NodeController', NodeController)
+    .directive(
+      'navigation',
+      downgradeComponent({ component: NavigationComponent }) as angular.IDirectiveFactory
+    )
     .controller('VLEController', VLEController)
     .directive(
       'addToNotebookButton',
@@ -52,6 +60,18 @@ export function createStudentAngularJSModule(type = 'preview') {
     .directive(
       'componentSaveSubmitButtons',
       downgradeComponent({ component: ComponentSaveSubmitButtons }) as angular.IDirectiveFactory
+    )
+    .directive(
+      'node',
+      downgradeComponent({ component: NodeComponent }) as angular.IDirectiveFactory
+    )
+    .directive(
+      'notificationsMenu',
+      downgradeComponent({ component: NotificationsDialogComponent }) as angular.IDirectiveFactory
+    )
+    .directive(
+      'studentAccountMenu',
+      downgradeComponent({ component: StudentAccountMenuComponent }) as angular.IDirectiveFactory
     )
     .config([
       '$stateProvider',
@@ -118,6 +138,13 @@ export function createStudentAngularJSModule(type = 'preview') {
                 'tags',
                 (StudentDataService, config, project, tags) => {
                   return StudentDataService.retrieveStudentData();
+                }
+              ],
+              studentStatus: [
+                'StudentStatusService',
+                'config',
+                (StudentStatusService, config) => {
+                  return StudentStatusService.retrieveStudentStatus();
                 }
               ],
               notebook: [
@@ -233,9 +260,7 @@ export function createStudentAngularJSModule(type = 'preview') {
                         return response.data;
                       });
                   }
-                ],
-                controller: 'NodeController',
-                controllerAs: 'nodeController'
+                ]
               }
             }
           })

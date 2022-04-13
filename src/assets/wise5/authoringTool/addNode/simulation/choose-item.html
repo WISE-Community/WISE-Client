@@ -1,27 +1,33 @@
-<h5 translate="simulation.label"></h5>
+<h5 translate="interactiveSimulation"></h5>
 <p translate="simulation.description"></p>
-<hr>
-<h6 translate="simulation.chooseSimulationItem"></h6>
-<md-radio-group ng-model="$ctrl.selectedNodeId">
-  <div ng-repeat="item in $ctrl.projectItems"
-       ng-class="::{'groupHeader': item.node.type == 'group', 'stepHeader': item.node.type != 'group'}">
-    <div ng-if="item.order != 0 && item.node.type == 'group'">
-      {{item.node.title}}:
-    </div>
-    <div layout="row" layout-align="start center" ng-if="item.order != 0 && item.node.type != 'group'">
-      <md-radio-button ng-value="item.node" style="margin-bottom: 0;">
-        <span class="bold">{{item.node.title}}</span>
-      </md-radio-button>
-      <md-button class="regularButton md-raised md-primary" ng-click="$ctrl.previewNode(item.node)"
-                 aria-label="{{ ::'previewStep' | translate }}">
-        <md-icon>visibility</md-icon>
-        <md-tooltip md-direction="top" class="projectButtonTooltip">
-          {{ ::"previewStep" | translate }}
-        </md-tooltip>
-      </md-button>
-    </div>
-  </div>
-</md-radio-group>
+<div layout="row" layout-wrap layout-align="start" style="margin-top: 24px;">
+  <md-input-container style="margin: 0 8px;">
+    <label translate="filterByTopic"></label>
+    <md-select ng-model="$ctrl.selectedSubjects" ng-change="$ctrl.filter()" multiple>
+      <md-option ng-value="subject" ng-repeat="subject in $ctrl.subjects">{{subject}}</md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container style="margin: 0 8px;">
+    <label translate="SEARCH"></label>
+    <input ng-model="$ctrl.searchText" ng-change="$ctrl.filter()"></input>
+  </md-input-container>
+  <button class="md-icon-button md-button"
+      ng-click="$ctrl.clearFilters()"
+      ng-if="$ctrl.searchText || $ctrl.selectedSubjects.length"
+      aria-label="{{ ::'CLEAR_ALL' | translate }}"
+      style="align-self: center; margin: 0 8px 1em;">
+    <md-icon>clear</md-icon>
+    <md-tooltip md-direction="top">{{ ::'CLEAR_ALL' | translate }}</md-tooltip>
+  </button>
+  <span style="align-self: center; margin: 0 8px 1em;">
+    {{ 'numberItemsFound' | translate: { number: $ctrl.getNumItemsFound() } }}
+  </span>
+</div>
+<card-selector
+    [items]="$ctrl.filteredNodes"
+    [preview-project-url]="$ctrl.project.previewProjectURL"
+    (item-selected)="$ctrl.itemSelected($event)">
+</card-selector>
 <hr>
 <div layout="row">
   <md-button class="createButton md-primary"
@@ -34,7 +40,7 @@
              aria-label="{{ ::'cancel' | translate }}"
              translate="cancel"></md-button>
   <md-button class="createButton md-raised md-primary"
-             ng-disabled="$ctrl.selectedNodeId == null"
+             ng-disabled="$ctrl.selectedNode == null"
              ng-click="$ctrl.next()"
              aria-label="{{ ::'next' | translate }}"
              translate="next"></md-button>

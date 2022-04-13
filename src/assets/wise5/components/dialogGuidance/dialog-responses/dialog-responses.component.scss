@@ -1,0 +1,7 @@
+dialog-response {
+  display: block;
+
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
+}

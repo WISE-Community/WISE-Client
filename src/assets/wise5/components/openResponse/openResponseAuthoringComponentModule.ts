@@ -7,18 +7,16 @@ import { OpenResponseAuthoring } from './open-response-authoring/open-response-a
 import { EditOpenResponseAdvancedComponent } from './edit-open-response-advanced/edit-open-response-advanced.component';
 
 const openResponseAuthoringComponentModule = angular
-  .module('openResponseAuthoringComponentModule', ['pascalprecht.translate'])
+  .module('openResponseAuthoringComponentModule', [])
   .service('OpenResponseService', downgradeInjectable(OpenResponseService))
   .directive(
     'openResponseAuthoring',
     downgradeComponent({ component: OpenResponseAuthoring }) as angular.IDirectiveFactory
   )
-  .component('editOpenResponseAdvanced', EditOpenResponseAdvancedComponent)
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/openResponse/i18n');
-    }
-  ]);
-
+  .directive(
+    'editOpenResponseAdvanced',
+    downgradeComponent({
+      component: EditOpenResponseAdvancedComponent
+    }) as angular.IDirectiveFactory
+  );
 export default openResponseAuthoringComponentModule;

@@ -18,7 +18,7 @@
 </ng-container>
 <ng-container *ngIf="courses.length && !isAdded">
   <form [formGroup]="form" (ngSubmit)="addToClassroom()">
-    <mat-dialog-content class="mat-dialog-content--scroll" fxLayout="column">
+    <mat-dialog-content class="dialog-content-scroll" fxLayout="column">
       <p class="mat-subheading-1 accent-1">
         {{ data.run.name }} <span class="mat-caption" i18n>(Run ID: {{ data.run.id }})</span>
       </p>

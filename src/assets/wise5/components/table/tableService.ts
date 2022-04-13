@@ -7,14 +7,12 @@ import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 
 @Injectable()
 export class TableService extends ComponentService {
   $translate: any;
 
   constructor(
-    private upgrade: UpgradeModule,
     private StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -22,8 +20,8 @@ export class TableService extends ComponentService {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.upgrade.$injector.get('$filter')('translate')('table.componentTypeLabel');
+  getComponentTypeLabel(): string {
+    return $localize`Table`;
   }
 
   createComponent() {
@@ -86,6 +84,10 @@ export class TableService extends ComponentService {
       ]
     ];
     return component;
+  }
+
+  getTableId(nodeId: string, componentId: string): string {
+    return `table-${nodeId}-${componentId}`;
   }
 
   isCompleted(component, componentStates, componentEvents, nodeEvents, node) {

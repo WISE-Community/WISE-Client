@@ -128,54 +128,6 @@ export class StudentDataService extends DataService {
     this.componentStudentDataSource.next(componentStudentData);
   }
 
-  handleNodeStatusesChanged() {
-    this.AnnotationService.calculateActiveGlobalAnnotationGroups();
-    const globalAnnotationGroups = this.AnnotationService.getActiveGlobalAnnotationGroups();
-    globalAnnotationGroups.map((globalAnnotationGroup) => {
-      const globalAnnotations = globalAnnotationGroup.annotations;
-      globalAnnotations.map((globalAnnotation) => {
-        if (globalAnnotation.data != null && globalAnnotation.data.isGlobal) {
-          this.processGlobalAnnotation(globalAnnotation);
-        }
-      });
-    });
-  }
-
-  processGlobalAnnotation(globalAnnotation) {
-    const unGlobalizeConditional = globalAnnotation.data.unGlobalizeConditional;
-    if (unGlobalizeConditional === 'any') {
-      this.processGlobalAnnotationAnyConditional(globalAnnotation);
-    } else if (unGlobalizeConditional === 'all') {
-      this.processGlobalAnnotationAllConditional(globalAnnotation);
-    }
-  }
-
-  processGlobalAnnotationAnyConditional(globalAnnotation) {
-    let anySatified = false;
-    const unGlobalizeCriteriaArray = globalAnnotation.data.unGlobalizeCriteria;
-    for (const unGlobalizeCriteria of unGlobalizeCriteriaArray) {
-      const unGlobalizeCriteriaResult = this.evaluateCriteria(unGlobalizeCriteria);
-      anySatified = anySatified || unGlobalizeCriteriaResult;
-    }
-    if (anySatified) {
-      globalAnnotation.data.unGlobalizedTimestamp = Date.parse(new Date().toString());
-      this.saveAnnotations([globalAnnotation]);
-    }
-  }
-
-  processGlobalAnnotationAllConditional(globalAnnotation) {
-    let allSatisfied = true;
-    const unGlobalizeCriteriaArray = globalAnnotation.data.unGlobalizeCriteria;
-    for (const unGlobalizeCriteria of unGlobalizeCriteriaArray) {
-      const unGlobalizeCriteriaResult = this.evaluateCriteria(unGlobalizeCriteria);
-      allSatisfied = allSatisfied && unGlobalizeCriteriaResult;
-    }
-    if (allSatisfied) {
-      globalAnnotation.data.unGlobalizedTimestamp = Date.parse(new Date().toString());
-      this.saveAnnotations([globalAnnotation]);
-    }
-  }
-
   retrieveStudentData() {
     this.nodeStatuses = {};
     if (this.ConfigService.isPreview()) {
@@ -190,7 +142,7 @@ export class StudentDataService extends DataService {
       componentStates: [],
       events: [],
       annotations: [],
-      username: this.upgrade.$injector.get('$filter')('translate')('PREVIEW_STUDENT'),
+      username: $localize`Preview Student`,
       userId: '0'
     };
     this.AnnotationService.setAnnotations(this.studentData.annotations);
@@ -228,7 +180,7 @@ export class StudentDataService extends DataService {
       }
     }
     this.studentData.events = resultData.events;
-    this.studentData.annotations = resultData.annotations;
+    this.studentData.annotations = this.getActiveAnnototations(resultData.annotations);
     this.AnnotationService.setAnnotations(this.studentData.annotations);
     this.populateHistories(this.studentData.events);
     this.updateNodeStatuses();
@@ -268,7 +220,6 @@ export class StudentDataService extends DataService {
     this.updateStepNodeStatuses();
     this.updateGroupNodeStatuses();
     this.maxScore = this.getMaxScore();
-    this.handleNodeStatusesChanged();
     this.broadcastNodeStatusesChanged();
   }
 
@@ -822,9 +773,7 @@ export class StudentDataService extends DataService {
   saveComponentEvent(component, category, event, data) {
     if (component == null || category == null || event == null) {
       alert(
-        this.upgrade.$injector.get('$filter')('translate')(
-          'STUDENT_DATA_SERVICE_SAVE_COMPONENT_EVENT_COMPONENT_CATEGORY_EVENT_ERROR'
-        )
+        $localize`StudentDataService.saveComponentEvent: component, category, event args must not be null`
       );
       return;
     }
@@ -834,9 +783,7 @@ export class StudentDataService extends DataService {
     const componentType = component.componentType;
     if (nodeId == null || componentId == null || componentType == null) {
       alert(
-        this.upgrade.$injector.get('$filter')('translate')(
-          'STUDENT_DATA_SERVICE_SAVE_COMPONENT_EVENT_NODE_ID_COMPONENT_ID_COMPONENT_TYPE_ERROR'
-        )
+        $localize`StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null`
       );
       return;
     }
@@ -845,11 +792,7 @@ export class StudentDataService extends DataService {
 
   saveVLEEvent(nodeId, componentId, componentType, category, event, data) {
     if (category == null || event == null) {
-      alert(
-        this.upgrade.$injector.get('$filter')('translate')(
-          'STUDENT_DATA_SERVICE_SAVE_VLE_EVENT_CATEGORY_EVENT_ERROR'
-        )
-      );
+      alert($localize`StudentDataService.saveVLEEvent: category and event args must not be null`);
       return;
     }
     const context = 'VLE';
@@ -904,7 +847,7 @@ export class StudentDataService extends DataService {
     if (this.ConfigService.isPreview()) {
       return this.handlePreviewSaveToServer(studentWorkList, events, annotations);
     } else if (!this.ConfigService.isRunActive()) {
-      return this.upgrade.$injector.get('$q').defer().promise;
+      return Promise.resolve();
     } else {
       const params = {
         projectId: this.ConfigService.getProjectId(),
@@ -997,7 +940,6 @@ export class StudentDataService extends DataService {
        * server
        */
       this.updateNodeStatuses();
-      this.saveStudentStatus();
     }
     const deferred = this.upgrade.$injector.get('$q').defer();
     deferred.resolve(savedStudentDataResponse);
@@ -1090,42 +1032,6 @@ export class StudentDataService extends DataService {
     const deferred = this.upgrade.$injector.get('$q').defer();
     deferred.resolve();
     return deferred.promise;
-  }
-
-  saveStudentStatus() {
-    if (!this.ConfigService.isPreview() && this.ConfigService.isRunActive()) {
-      const runId = this.ConfigService.getRunId();
-      const periodId = this.ConfigService.getPeriodId();
-      const workgroupId = this.ConfigService.getWorkgroupId();
-      const currentNodeId = this.getCurrentNodeId();
-      const nodeStatuses = this.getNodeStatuses();
-      const projectCompletion = this.getProjectCompletion();
-      const studentStatusJSON = {
-        runId: runId,
-        periodId: periodId,
-        workgroupId: workgroupId,
-        currentNodeId: currentNodeId,
-        nodeStatuses: nodeStatuses,
-        projectCompletion: projectCompletion
-      };
-      const studentStatusParams = {
-        runId: runId,
-        periodId: periodId,
-        workgroupId: workgroupId,
-        status: angular.toJson(studentStatusJSON)
-      };
-      return this.http
-        .post(this.ConfigService.getStudentStatusURL(), studentStatusParams)
-        .toPromise()
-        .then(
-          (result) => {
-            return true;
-          },
-          (result) => {
-            return false;
-          }
-        );
-    }
   }
 
   getLatestComponentState() {

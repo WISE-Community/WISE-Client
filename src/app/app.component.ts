@@ -89,6 +89,10 @@ export class AppComponent {
       'google-classroom',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/google-classroom.svg')
     );
+    iconRegistry.addSvgIcon(
+      'google',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/google-logo.svg')
+    );
     utilService.getMobileMenuState().subscribe((state) => {
       this.showMobileMenu = state;
     });

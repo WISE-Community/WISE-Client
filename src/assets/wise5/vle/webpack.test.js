@@ -36,7 +36,6 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       fabric: ['fabric', 'fabric'],
-      hopscotch: 'hopscotch',
       SockJS: 'sockjs-client',
       Stomp: ['@stomp/stompjs', 'Stomp']
     })
@@ -52,6 +51,10 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.svg$/,
+        use: 'svg-url-loader'
       }
     ]
   },

@@ -3,7 +3,7 @@
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { NotificationService } from '../../services/notificationService';
-import { StudentStatusService } from '../../services/studentStatusService';
+import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import * as angular from 'angular';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -52,10 +52,10 @@ class StudentGradingController {
     '$stateParams',
     'orderByFilter',
     'AnnotationService',
+    'ClassroomStatusService',
     'ConfigService',
     'NotificationService',
     'ProjectService',
-    'StudentStatusService',
     'TeacherDataService'
   ];
 
@@ -67,10 +67,10 @@ class StudentGradingController {
     private $stateParams: any,
     private orderBy: any,
     private AnnotationService: AnnotationService,
+    private classroomStatusService: ClassroomStatusService,
     private ConfigService: ConfigService,
     private NotificationService: NotificationService,
     private ProjectService: TeacherProjectService,
-    private StudentStatusService: StudentStatusService,
     private TeacherDataService: TeacherDataService
   ) {
     this.$scope.$mdMedia = $mdMedia;
@@ -78,7 +78,7 @@ class StudentGradingController {
 
     this.subscriptions.add(
       this.ProjectService.projectSaved$.subscribe(() => {
-        this.maxScore = this.StudentStatusService.getMaxScoreForWorkgroupId(this.workgroupId);
+        this.maxScore = this.classroomStatusService.getMaxScoreForWorkgroupId(this.workgroupId);
         this.setNodesById();
       })
     );
@@ -185,10 +185,10 @@ class StudentGradingController {
     this.workgroupId = parseInt(this.$stateParams.workgroupId);
     let workgroup = this.ConfigService.getUserInfoByWorkgroupId(this.workgroupId);
     this.TeacherDataService.setCurrentWorkgroup(workgroup);
-    let maxScore = this.StudentStatusService.getMaxScoreForWorkgroupId(this.workgroupId);
+    let maxScore = this.classroomStatusService.getMaxScoreForWorkgroupId(this.workgroupId);
     this.maxScore = maxScore ? maxScore : 0;
     this.totalScore = this.TeacherDataService.getTotalScoreByWorkgroupId(this.workgroupId);
-    this.projectCompletion = this.StudentStatusService.getStudentProjectCompletion(
+    this.projectCompletion = this.classroomStatusService.getStudentProjectCompletion(
       this.workgroupId,
       true
     );
@@ -289,7 +289,9 @@ class StudentGradingController {
     let latestWorkTime = this.getLatestWorkTimeByNodeId(nodeId);
 
     let latestAnnotationTime = this.getLatestAnnotationTimeByNodeId(nodeId);
-    let studentStatus = this.StudentStatusService.getStudentStatusForWorkgroupId(this.workgroupId);
+    let studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(
+      this.workgroupId
+    );
     if (studentStatus != null) {
       let nodeStatus = studentStatus.nodeStatuses[nodeId];
       if (nodeStatus) {

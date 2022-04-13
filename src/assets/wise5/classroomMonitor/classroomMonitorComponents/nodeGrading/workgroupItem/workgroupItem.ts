@@ -171,9 +171,9 @@ const WorkgroupItem = {
                                                   [workgroup-id]="$ctrl.workgroupId"
                                                   [node-id]="$ctrl.nodeId"></component-new-work-badge>
                       </h3>
-                      <workgroup-component-grading component-id="component.id"
-                          workgroup-id="$ctrl.workgroupId"
-                          node-id="$ctrl.nodeId"></workgroup-component-grading>
+                      <workgroup-component-grading [component-id]="component.id"
+                          [workgroup-id]="$ctrl.workgroupId"
+                          [node-id]="$ctrl.nodeId"></workgroup-component-grading>
                     </div>
                   </div>
                 </div>

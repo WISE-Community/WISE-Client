@@ -111,12 +111,12 @@ export class LibraryProjectDetailsComponent implements OnInit {
     if (this.project.wiseVersion === 4) {
       this.dialog.open(UseWithClassWarningDialogComponent, {
         data: this.data,
-        panelClass: 'mat-dialog--md'
+        panelClass: 'dialog-md'
       });
     } else {
       this.dialog.open(CreateRunDialogComponent, {
         data: this.data,
-        panelClass: 'mat-dialog--md',
+        panelClass: 'dialog-md',
         disableClose: true
       });
     }

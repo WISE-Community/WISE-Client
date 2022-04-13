@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation
+} from '@angular/core';
 import { ConfigService } from '../../../services/configService';
 
 @Component({
@@ -12,13 +19,13 @@ export class ClassResponse {
   response: any;
 
   @Input()
-  numreplies: number;
+  numReplies: number;
 
   @Input()
   mode: any;
 
   @Input()
-  isdisabled: any;
+  isDisabled: boolean;
 
   @Output()
   submitButtonClicked: any = new EventEmitter();
@@ -36,7 +43,6 @@ export class ClassResponse {
   constructor(private ConfigService: ConfigService) {}
 
   ngOnInit(): void {
-    this.isdisabled = this.isdisabled === 'true';
     this.injectLinksIntoResponse();
     this.injectLinksIntoReplies();
     if (this.hasAnyReply()) {
@@ -45,7 +51,7 @@ export class ClassResponse {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.numreplies != null && !changes.numreplies.isFirstChange()) {
+    if (changes.numReplies != null && !changes.numReplies.isFirstChange()) {
       this.expanded = true;
       this.injectLinksIntoReplies();
       this.showAllReplies();

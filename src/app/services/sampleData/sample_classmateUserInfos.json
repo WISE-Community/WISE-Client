@@ -1,0 +1,13 @@
+[
+  {
+    "workgroupId": 7,
+    "periodId": 1,
+    "userIds": [3, 4],
+    "users": [
+      { "id": 3, "username": "student0103" },
+      { "id": 4, "username": "student0104" }
+    ]
+  },
+  { "workgroupId": 6, "periodId": 2, "userIds": [2], "users": [{ "id": 2, "username": "student0102" }] },
+  { "workgroupId": 5, "periodId": 1, "userIds": [1], "users": [{ "id": 1, "username": "student0101" }] }
+]

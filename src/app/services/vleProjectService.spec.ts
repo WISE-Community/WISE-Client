@@ -28,7 +28,6 @@ describe('VLEProjectService', () => {
   shouldGetTheExpectedCurrentScore();
   shouldCorrectlyCalculateIsScoreMatchTrue();
   shouldCorrectlyCalculateIsScoreMatchFalse();
-  shouldGetGlobalAnnotationGroupByScore();
   shouldGetNotificationByScore();
 });
 
@@ -57,76 +56,6 @@ function shouldCorrectlyCalculateIsScoreMatchTrue() {
 function shouldCorrectlyCalculateIsScoreMatchFalse() {
   it('should correctly calculate isScoreMatch() false', () => {
     expect(service.isScoreMatch(4, '1, 2, 3')).toBe(false);
-  });
-}
-
-function shouldGetGlobalAnnotationGroupByScore() {
-  it('should get global annotation group by score', () => {
-    const component = {
-      globalAnnotationSettings: {
-        globalAnnotationMaxCount: 2,
-        globalAnnotationGroups: [
-          {
-            annotationGroupName: 'score012345firsttime',
-            enableCriteria: {
-              scoreSequence: ['', '0, 1, 2, 3, 4, 5']
-            }
-          },
-          {
-            annotationGroupName: 'score012',
-            enableCriteria: {
-              scoreSequence: ['0, 1, 2, 3, 4, 5', '0, 1, 2']
-            }
-          },
-          {
-            annotationGroupName: 'score3after1245',
-            enableCriteria: {
-              scoreSequence: ['1, 2, 4, 5', '3']
-            }
-          },
-          {
-            annotationGroupName: 'score3after3',
-            enableCriteria: {
-              scoreSequence: ['3', '3']
-            }
-          },
-          {
-            annotationGroupName: 'score4after1235',
-            enableCriteria: {
-              scoreSequence: ['1, 2, 3, 5', '4']
-            }
-          },
-          {
-            annotationGroupName: 'score4after4',
-            enableCriteria: {
-              scoreSequence: ['4', '4']
-            }
-          },
-          {
-            annotationGroupName: 'score5after1234',
-            enableCriteria: {
-              scoreSequence: ['1, 2, 3, 4', '5']
-            }
-          }
-        ]
-      }
-    };
-    let globalAnnotationGroup = service.getGlobalAnnotationGroupByScore(component, null, 1);
-    expect(globalAnnotationGroup.annotationGroupName).toBe('score012345firsttime');
-    globalAnnotationGroup = service.getGlobalAnnotationGroupByScore(component, 1, 1);
-    expect(globalAnnotationGroup.annotationGroupName).toBe('score012');
-    globalAnnotationGroup = service.getGlobalAnnotationGroupByScore(component, 2, 3);
-    expect(globalAnnotationGroup.annotationGroupName).toBe('score3after1245');
-    globalAnnotationGroup = service.getGlobalAnnotationGroupByScore(component, 3, 3);
-    expect(globalAnnotationGroup.annotationGroupName).toBe('score3after3');
-    globalAnnotationGroup = service.getGlobalAnnotationGroupByScore(component, 3, 4);
-    expect(globalAnnotationGroup.annotationGroupName).toBe('score4after1235');
-    globalAnnotationGroup = service.getGlobalAnnotationGroupByScore(component, 4, 4);
-    expect(globalAnnotationGroup.annotationGroupName).toBe('score4after4');
-    globalAnnotationGroup = service.getGlobalAnnotationGroupByScore(component, 4, 5);
-    expect(globalAnnotationGroup.annotationGroupName).toBe('score5after1234');
-    globalAnnotationGroup = service.getGlobalAnnotationGroupByScore(component, 5, 5);
-    expect(globalAnnotationGroup).toBe(null);
   });
 }
 

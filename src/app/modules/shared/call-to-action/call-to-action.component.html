@@ -24,7 +24,9 @@
 
 <a *ngIf="isOutsideLink"
    mat-raised-button
-   class="cta">
+   class="cta"
+   href="{{ destination }}"
+   target="{{ linkTarget }}">
   <div class="cta__wrap">
     <span *ngTemplateOutlet="linkContent"></span>
   </div>

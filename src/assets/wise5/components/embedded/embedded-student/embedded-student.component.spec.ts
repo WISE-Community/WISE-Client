@@ -90,22 +90,22 @@ describe('EmbeddedStudent', () => {
       return true;
     });
     spyOn(component, 'subscribeToNotebookItemChosen').and.callFake(() => {});
-    spyOn(component, 'subscribeToSiblingComponentStudentDataChanged').and.callFake(() => {});
     spyOn(component, 'studentDataChanged').and.callFake(() => {});
     fixture.detectChanges();
   });
 
-  setWidthAndHeight();
-  initializeMessageEventListener();
   createComponentStateObject();
-  handleStudentWorkMessage();
-  sendLatestWorkToApplication();
-  getLatestStudentWorkFromOtherComponents();
   getAllStudentWorkFromOtherComponents();
+  getLatestStudentWorkFromOtherComponents();
   handleConnectedComponents();
-  mergeComponentState();
-  sendMessageToApplication();
+  handleStudentWorkMessage();
+  initializeMessageEventListener();
   isPerformOverwrite();
+  mergeASpecificFieldInAComponentState();
+  mergeComponentState();
+  sendLatestWorkToApplication();
+  sendMessageToApplication();
+  setWidthAndHeight();
 });
 
 function setWidthAndHeight() {
@@ -190,13 +190,17 @@ function createComponentStateObject() {
 function handleStudentWorkMessage() {
   describe('handleStudentWorkMessage', () => {
     it('should handle student work message', () => {
+      const broadcastComponentSaveTriggeredSpy = spyOn(
+        TestBed.inject(StudentDataService),
+        'broadcastComponentSaveTriggered'
+      );
       const spongebobStudentData = createStudentDataWithNameAndAge(spongebobName, spongebobAge);
       const messageEventData = {
         studentData: spongebobStudentData
       };
       component.handleStudentWorkMessage(messageEventData);
       expect(component.studentData).toEqual(spongebobStudentData);
-      expect(component.studentDataChanged).toHaveBeenCalled();
+      expect(broadcastComponentSaveTriggeredSpy).toHaveBeenCalled();
     });
   });
 }
@@ -390,5 +394,40 @@ function isPerformOverwrite() {
       mergeField.action = 'read';
       expect(component.isPerformOverwrite(mergeField, firstTime)).toEqual(false);
     });
+  });
+}
+
+function mergeASpecificFieldInAComponentState() {
+  it('should merge a specific field in a component state', () => {
+    const toComponentState = {
+      componentType: 'Embedded',
+      studentData: {
+        modelScore: 1,
+        modelText: 'Try Again'
+      }
+    };
+    const fromComponentState = {
+      componentType: 'Embedded',
+      studentData: {
+        modelScore: 2,
+        modelText: 'Good Job'
+      }
+    };
+    const mergeFields = [
+      {
+        name: 'modelText',
+        when: 'always',
+        action: 'write'
+      }
+    ];
+    const firstTime = true;
+    const mergedComponentState = component.mergeComponentState(
+      toComponentState,
+      fromComponentState,
+      mergeFields,
+      firstTime
+    );
+    expect(mergedComponentState.studentData.modelScore).toEqual(1);
+    expect(mergedComponentState.studentData.modelText).toEqual('Good Job');
   });
 }

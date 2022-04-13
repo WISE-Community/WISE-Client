@@ -16,11 +16,12 @@ describe('UtilService', () => {
   convertStringToNumberTests();
   makeCopyOfJSONObjectTests();
   arrayHasNonNullElementTests();
-  moveObjectTests();
   calculateMeanTests();
   getIntersectOfArraysTests();
   isValidJSONStringTests();
   trimToLength();
+  removeHTMLTags();
+  replaceImgTagWithFileName();
 });
 
 function generateKeyTests() {
@@ -106,54 +107,6 @@ function arrayHasNonNullElementTests() {
   });
 }
 
-let myArray;
-function moveObjectTests() {
-  describe('moveObject', () => {
-    beforeEach(() => {
-      myArray = [{ name: 'a' }, { name: 'b' }, { name: 'c' }];
-    });
-    moveObjectUpNotTopElement();
-    moveObjectUpIsTopElement();
-    moveObjectDownNotBottomElement();
-    moveObjectDownIsBottomElement();
-  });
-}
-
-function expectArrayNameOrder(arr, nameOrder) {
-  for (let i = 0; i < arr.length; i++) {
-    expect(arr[i].name).toEqual(nameOrder[i]);
-  }
-}
-
-function moveObjectUpNotTopElement() {
-  it('moveObjectUp should move an object up when the object is not the top element', () => {
-    expectMoveFunctionResult('moveObjectUp', 1, ['b', 'a', 'c']);
-  });
-}
-
-function moveObjectUpIsTopElement() {
-  it('moveObjectUp should not move an object up when the object is the top element', () => {
-    expectMoveFunctionResult('moveObjectUp', 0, ['a', 'b', 'c']);
-  });
-}
-
-function moveObjectDownNotBottomElement() {
-  it('moveObjectDown should move an object down when the object is not the bottom element', () => {
-    expectMoveFunctionResult('moveObjectDown', 1, ['a', 'c', 'b']);
-  });
-}
-
-function moveObjectDownIsBottomElement() {
-  it('moveObjectDown should not move an object down when the object is the bottom element', () => {
-    expectMoveFunctionResult('moveObjectDown', 2, ['a', 'b', 'c']);
-  });
-}
-
-function expectMoveFunctionResult(func, index, expectedResult) {
-  service[func](myArray, index);
-  expectArrayNameOrder(myArray, expectedResult);
-}
-
 function calculateMeanTests() {
   describe('calculateMean()', () => {
     it('should calculate the mean when there is one value', () => {
@@ -220,6 +173,36 @@ function trimToLength() {
     });
     it('should trim length and add ellipses if length is longer than max length', () => {
       expect(service.trimToLength('123456789', 7)).toEqual('1234...');
+    });
+  });
+}
+
+function removeHTMLTags() {
+  describe('removeHTMLTags()', () => {
+    it('should remove html tags', () => {
+      expect(service.removeHTMLTags('<p><img src="computer.png"/></p>')).toEqual(' computer.png ');
+    });
+  });
+}
+
+function replaceImgTagWithFileName() {
+  describe('replaceImgTagWithFileName()', () => {
+    it('should replace image tag with file name when it uses double quotes', () => {
+      expect(service.replaceImgTagWithFileName('<img src="computer.png"/>')).toEqual(
+        'computer.png'
+      );
+    });
+    it('should replace image tag with file name when it uses single quotes', () => {
+      expect(service.replaceImgTagWithFileName("<img src='computer.png'/>")).toEqual(
+        'computer.png'
+      );
+    });
+    it('should replace image tag with file name when there are other attributes', () => {
+      expect(
+        service.replaceImgTagWithFileName(
+          "<img alt='Computer' src='computer.png' aria-label='Computer'/>"
+        )
+      ).toEqual('computer.png');
     });
   });
 }

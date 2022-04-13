@@ -15,35 +15,46 @@ import { Subscription } from 'rxjs';
 @Directive()
 class VLEController {
   $translate: any;
-  workgroupId: number;
+  connectionLostDisplay: any;
+  connectionLostShown: boolean = false;
   constraintsDisabled: boolean = false;
   currentNode: any;
   homePath: string;
-  maxScore: any;
+  idToOrder: any;
+  layoutState: string;
+  layoutView: string;
+  nodeStatuses: any[];
   navFilter: any;
   navFilters: any;
   newNotifications: any;
+  notebookConfig: any;
+  notebookFilter: string = '';
+  notebookItemPath: string;
+  notebookNavOpen: boolean;
+  notebookOpen: boolean = false;
   noteDialog: any;
   notesEnabled: boolean = false;
-  notebookConfig: any;
-  notebookItemPath: string;
   notesVisible: boolean = false;
   notifications: any;
+  numberProject: boolean;
   pauseDialog: any;
   projectName: string;
   projectStyle: string;
   reportEnabled: boolean = false;
   reportFullscreen: boolean = false;
-  themePath: string;
-  totalScore: any;
+  rootNode: any;
+  rootNodeStatus: any;
   subscriptions: Subscription = new Subscription();
+  themePath: string;
+  themeSettings: any;
+  workgroupId: number;
 
   static $inject = [
     '$anchorScroll',
     '$scope',
     '$filter',
     '$mdDialog',
-    '$mdMenu',
+    '$mdToast',
     '$state',
     '$transitions',
     '$window',
@@ -61,7 +72,7 @@ class VLEController {
     private $scope: any,
     private $filter: any,
     private $mdDialog: any,
-    private $mdMenu: any,
+    private $mdToast: any,
     private $state: any,
     private $transitions: any,
     private $window: any,
@@ -88,8 +99,6 @@ class VLEController {
 
     this.projectStyle = this.ProjectService.getStyle();
     this.projectName = this.ProjectService.getProjectTitle();
-    this.totalScore = this.StudentDataService.getTotalScore();
-    this.maxScore = this.StudentDataService.maxScore;
     if (this.NotebookService.isNotebookEnabled()) {
       this.notebookConfig = this.NotebookService.getStudentNotebookConfig();
       this.notesEnabled = this.notebookConfig.itemTypes.note.enabled;
@@ -198,14 +207,11 @@ class VLEController {
       this.$anchorScroll('node');
     });
 
-    this.notifications = this.NotificationService.notifications;
-    this.newNotifications = this.getNewNotifications();
-
+    this.processNotifications();
     this.subscriptions.add(
       this.NotificationService.notificationChanged$.subscribe(() => {
         // update new notifications
-        this.notifications = this.NotificationService.notifications;
-        this.newNotifications = this.getNewNotifications();
+        this.processNotifications();
       })
     );
 
@@ -297,6 +303,115 @@ class VLEController {
       }
     }
 
+    // TODO: set these variables dynamically from theme settings
+    this.layoutView = 'list'; // 'list' or 'card'
+    this.numberProject = true;
+
+    this.themePath = this.ProjectService.getThemePath();
+    this.themeSettings = this.ProjectService.getThemeSettings();
+
+    this.nodeStatuses = this.StudentDataService.nodeStatuses;
+    this.idToOrder = this.ProjectService.idToOrder;
+
+    this.workgroupId = this.ConfigService.getWorkgroupId();
+
+    this.rootNode = this.ProjectService.rootNode;
+    this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
+
+    this.notebookConfig = this.NotebookService.getNotebookConfig();
+    this.currentNode = this.StudentDataService.getCurrentNode();
+
+    // set current notebook type filter to first enabled type
+    if (this.notebookConfig.enabled) {
+      for (var type in this.notebookConfig.itemTypes) {
+        let prop = this.notebookConfig.itemTypes[type];
+        if (this.notebookConfig.itemTypes.hasOwnProperty(type) && prop.enabled) {
+          this.notebookFilter = type;
+          break;
+        }
+      }
+    }
+
+    // build server disconnect display
+    this.connectionLostDisplay = $mdToast.build({
+      template:
+        "<md-toast>\
+                      <span>{{ 'ERROR_CHECK_YOUR_INTERNET_CONNECTION' | translate }}</span>\
+                      </md-toast>",
+      hideDelay: 0
+    });
+
+    this.setLayoutState();
+
+    // update layout state when current node changes
+    this.subscriptions.add(
+      this.StudentDataService.currentNodeChanged$.subscribe(() => {
+        this.currentNode = this.StudentDataService.getCurrentNode();
+        this.setLayoutState();
+      })
+    );
+
+    this.subscriptions.add(
+      this.StudentDataService.nodeClickLocked$.subscribe(({ nodeId }) => {
+        let message = this.$translate('sorryYouCannotViewThisItemYet');
+        const node = this.ProjectService.getNodeById(nodeId);
+        if (node != null) {
+          // get the constraints that affect this node
+          const constraints = this.ProjectService.getConstraintsThatAffectNode(node);
+          this.ProjectService.orderConstraints(constraints);
+
+          if (constraints != null && constraints.length > 0) {
+            // get the node title the student is trying to go to
+            const nodeTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+            message = `<p>
+              ${this.$translate('toVisitNodeTitleYouNeedTo', { nodeTitle: nodeTitle })}
+            </p>
+            <ul>`;
+          }
+
+          // loop through all the constraints that affect this node
+          for (let c = 0; c < constraints.length; c++) {
+            const constraint = constraints[c];
+
+            // check if the constraint has been satisfied
+            if (constraint != null && !this.StudentDataService.evaluateConstraint(constraint)) {
+              // the constraint has not been satisfied and is still active
+              // get the message that describes how to disable the constraint
+              message += `<li>${this.ProjectService.getConstraintMessage(nodeId, constraint)}</li>`;
+            }
+          }
+          message += `</ul>`;
+        }
+
+        this.$mdDialog.show(
+          this.$mdDialog
+            .alert()
+            .parent(angular.element(document.body))
+            .title(this.$translate('itemLocked'))
+            .htmlContent(message)
+            .ariaLabel(this.$translate('itemLocked'))
+            .ok(this.$translate('ok'))
+        );
+      })
+    );
+
+    this.subscriptions.add(
+      this.NotificationService.serverConnectionStatus$.subscribe((isConnected) => {
+        if (isConnected) {
+          this.handleServerReconnect();
+        } else {
+          this.handleServerDisconnect();
+        }
+      })
+    );
+
+    // handle request for notification dismiss codes
+    this.subscriptions.add(
+      this.NotificationService.viewCurrentAmbientNotification$.subscribe((args) => {
+        this.NotificationService.displayAmbientNotification(args.notification);
+      })
+    );
+
     this.$scope.$on('$destroy', () => {
       this.ngOnDestroy();
     });
@@ -306,22 +421,9 @@ class VLEController {
     this.subscriptions.unsubscribe();
   }
 
-  goHome() {
-    const nodeId = null;
-    const componentId = null;
-    const componentType = null;
-    const category = 'Navigation';
-    const event = 'goHomeButtonClicked';
-    const eventData = {};
-    this.StudentDataService.saveVLEEvent(
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      eventData
-    );
-    this.SessionService.goHome();
+  processNotifications(): void {
+    this.notifications = this.NotificationService.notifications;
+    this.newNotifications = this.NotificationService.getNewNotifications();
   }
 
   logOut(eventName = 'logOut') {
@@ -353,169 +455,6 @@ class VLEController {
     this.SessionService.mouseMoved();
   }
 
-  hasNewNotifications() {
-    return this.newNotifications.length > 0;
-  }
-
-  hasNewAmbientNotifications() {
-    return this.getNewAmbientNotifications().length > 0;
-  }
-
-  /**
-   * Returns all notifications that have not been dismissed yet
-   * The newNotifications is an array of notification aggregate objects that looks like this:
-   * [
-   *  {
-   *    "nodeId": "node2",
-   *    "type": "DiscussionReply",   // ["DiscussionReply", "teacherToStudent"]
-   *    "notifications": [{ id: 1117} , { id: 1120 }]      // array of actual undismissed notifications with this nodeId and type
-   *  },
-   *  ...
-   * ]
-   * The annotation aggregates will be sorted by latest first -> oldest last
-   */
-  getNewNotifications() {
-    let newNotificationAggregates = [];
-    for (let notification of this.notifications) {
-      if (notification.timeDismissed == null) {
-        let notificationNodeId = notification.nodeId;
-        let notificationType = notification.type;
-        let newNotificationForNodeIdAndTypeExists = false;
-        for (let newNotificationAggregate of newNotificationAggregates) {
-          if (
-            newNotificationAggregate.nodeId == notificationNodeId &&
-            newNotificationAggregate.type == notificationType
-          ) {
-            newNotificationForNodeIdAndTypeExists = true;
-            newNotificationAggregate.notifications.push(notification);
-            if (notification.timeGenerated > newNotificationAggregate.latestNotificationTimestamp) {
-              newNotificationAggregate.latestNotificationTimestamp = notification.timeGenerated;
-            }
-          }
-        }
-        let notebookItemId = null; // if this notification was created because teacher commented on a notebook report.
-        if (!newNotificationForNodeIdAndTypeExists) {
-          let message = '';
-          if (notificationType === 'DiscussionReply') {
-            message = this.$translate('newRepliesOnDiscussionPost');
-          } else if (notificationType === 'teacherToStudent') {
-            message = this.$translate('newFeedbackFromTeacher');
-            if (notification.data != null) {
-              if (typeof notification.data === 'string') {
-                notification.data = angular.fromJson(notification.data);
-              }
-
-              if (notification.data.annotationId != null) {
-                let annotation = this.AnnotationService.getAnnotationById(
-                  notification.data.annotationId
-                );
-                if (annotation != null && annotation.notebookItemId != null) {
-                  notebookItemId = annotation.notebookItemId;
-                }
-              }
-            }
-          } else if (notificationType === 'CRaterResult') {
-            message = this.$translate('newFeedback');
-          }
-          let newNotificationAggregate = {
-            latestNotificationTimestamp: notification.timeGenerated,
-            message: message,
-            nodeId: notificationNodeId,
-            notebookItemId: notebookItemId,
-            notifications: [notification],
-            type: notificationType
-          };
-          newNotificationAggregates.push(newNotificationAggregate);
-        }
-      }
-    }
-
-    // sort the aggregates by latestNotificationTimestamp, latest -> oldest
-    newNotificationAggregates.sort((n1, n2) => {
-      return n2.latestNotificationTimestamp - n1.latestNotificationTimestamp;
-    });
-    return newNotificationAggregates;
-  }
-
-  /**
-   * Returns all ambient notifications that have not been dismissed yet
-   */
-  getNewAmbientNotifications() {
-    return this.notifications.filter(function (notification) {
-      let isAmbient = notification.data ? notification.data.isAmbient : false;
-      return notification.timeDismissed == null && isAmbient;
-    });
-  }
-
-  dismissNotification(event, notification) {
-    if (notification.data == null || notification.data.dismissCode == null) {
-      this.NotificationService.dismissNotification(notification);
-    } else {
-      // ask user to input dimiss code before dimissing it
-      let args = {
-        event: event,
-        notification: notification
-      };
-      this.NotificationService.broadcastViewCurrentAmbientNotification(args);
-      this.$mdMenu.hide();
-    }
-  }
-
-  /**
-   * View the most recent ambient notification and allow teacher to input
-   * dismiss code
-   */
-  viewCurrentAmbientNotification(event) {
-    let ambientNotifications = this.getNewAmbientNotifications();
-    if (ambientNotifications.length) {
-      const args = {
-        event: event,
-        notification: ambientNotifications[0]
-      };
-      this.NotificationService.broadcastViewCurrentAmbientNotification(args);
-    }
-  }
-
-  /**
-   * Dismiss the notification aggregate object, which effectively dismisses all notifications
-   * for the nodeId and type of the aggregate object.
-   * @param event
-   * @param notificationAggregate
-   */
-  dismissNotificationAggregate(event, notificationAggregate) {
-    if (notificationAggregate != null && notificationAggregate.notifications != null) {
-      for (let notification of notificationAggregate.notifications) {
-        this.dismissNotification(event, notification);
-      }
-    }
-  }
-
-  /**
-   * Dismiss the specified notification aggregate object and visit the node
-   * @param notificationAggregate, which contains nodeId, type, and notifications of that nodeId and type
-   */
-  dismissNotificationAggregateAndVisitNode(event, notificationAggregate) {
-    if (notificationAggregate != null && notificationAggregate.notifications != null) {
-      for (const notification of notificationAggregate.notifications) {
-        if (notification.data == null || notification.data.dismissCode == null) {
-          // only dismiss notifications that don't require a dismiss code,
-          // but still allow them to move to the node
-          this.dismissNotification(event, notification);
-        }
-      }
-    }
-
-    let goToNodeId = notificationAggregate.nodeId;
-    let notebookItemId = notificationAggregate.notebookItemId;
-    if (goToNodeId != null) {
-      this.StudentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(goToNodeId);
-    } else if (notebookItemId != null) {
-      // assume notification with notebookItemId is for the report for now,
-      // as we don't currently support annotations on notes
-      this.NotebookService.broadcastShowReportAnnotations();
-    }
-  }
-
   pauseScreen() {
     // TODO: i18n
     this.pauseDialog = this.$mdDialog.show({
@@ -534,34 +473,6 @@ class VLEController {
 
   isPreview() {
     return this.ConfigService.isPreview();
-  }
-
-  /**
-   * Check if there are any constraints in the project
-   * @return whether there are any constraints in the project
-   */
-  hasConstraints() {
-    let hasActiveConstraints = false;
-    const activeConstraints = this.ProjectService.activeConstraints;
-    if (activeConstraints != null && activeConstraints.length > 0) {
-      hasActiveConstraints = true;
-    }
-    return hasActiveConstraints;
-  }
-
-  /**
-   * Disable all the constraints
-   */
-  disableConstraints() {
-    if (this.ConfigService.isPreview()) {
-      this.constraintsDisabled = true;
-      this.ProjectService.activeConstraints = [];
-      /*
-       * update the node statuses so that they are re-evaluated now that
-       * all the constraints have been removed
-       */
-      this.StudentDataService.updateNodeStatuses();
-    }
   }
 
   /**
@@ -662,6 +573,64 @@ class VLEController {
         return this.ProjectService.getMaxScoreForComponent(nodeId, componentId);
       }
     };
+  }
+
+  /**
+   * Set the layout state of the vle
+   * @param state string specifying state (e.g. 'notebook'; optional)
+   */
+  setLayoutState(state: string = null) {
+    let layoutState = 'nav'; // default layout state
+    if (state) {
+      layoutState = state;
+    } else {
+      // no state was sent, so set based on current node
+      if (this.currentNode) {
+        var id = this.currentNode.id;
+        if (this.ProjectService.isApplicationNode(id)) {
+          // currently viewing step, so show step view
+          layoutState = 'node';
+        } else if (this.ProjectService.isGroupNode(id)) {
+          // currently viewing group node, so show navigation view
+          layoutState = 'nav';
+        }
+      }
+    }
+
+    if (layoutState === 'notebook') {
+      this.$state.go('root.notebook', { nodeId: this.currentNode.id });
+    } else {
+      this.notebookNavOpen = false;
+      if (this.ConfigService.isPreview()) {
+        this.$state.go('root.preview.node', {
+          projectId: this.ConfigService.getProjectId(),
+          nodeId: this.currentNode.id
+        });
+      } else {
+        this.$state.go('root.run.node', {
+          runId: this.ConfigService.getRunId(),
+          nodeId: this.currentNode.id
+        });
+      }
+    }
+
+    this.layoutState = layoutState;
+  }
+
+  handleServerDisconnect() {
+    if (!this.connectionLostShown) {
+      this.$mdToast.show(this.connectionLostDisplay);
+      this.connectionLostShown = true;
+    }
+  }
+
+  handleServerReconnect() {
+    this.$mdToast.hide(this.connectionLostDisplay);
+    this.connectionLostShown = false;
+  }
+
+  getAvatarColorForWorkgroupId(workgroupId) {
+    return this.ConfigService.getAvatarColorForWorkgroupId(workgroupId);
   }
 }
 

@@ -1,6 +1,15 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
-class EditGraphAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  template: 'edit-graph-advanced',
+  templateUrl: 'edit-graph-advanced.component.html',
+  styleUrls: ['edit-graph-advanced.component.scss']
+})
+export class EditGraphAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = [
     'Animation',
     'ConceptMap',
@@ -10,6 +19,14 @@ class EditGraphAdvancedController extends EditAdvancedComponentAngularJSControll
     'Label',
     'Table'
   ];
+
+  constructor(
+    protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
+    protected TeacherProjectService: TeacherProjectService
+  ) {
+    super(NodeService, NotebookService, TeacherProjectService);
+  }
 
   addXAxisPlotLine(): void {
     if (this.authoringComponentContent.xAxis.plotLines == null) {
@@ -30,6 +47,7 @@ class EditGraphAdvancedController extends EditAdvancedComponentAngularJSControll
       }
     };
     this.authoringComponentContent.xAxis.plotLines.push(plotLine);
+    this.componentChanged();
   }
 
   deleteXAxisPlotLine(index: number): void {
@@ -53,122 +71,11 @@ class EditGraphAdvancedController extends EditAdvancedComponentAngularJSControll
       }
     };
     this.authoringComponentContent.yAxis.plotLines.push(plotLine);
+    this.componentChanged();
   }
 
   deleteYAxisPlotLine(index: number): void {
     this.authoringComponentContent.yAxis.plotLines.splice(index, 1);
     this.componentChanged();
   }
-
-  addConnectedComponent() {
-    this.addConnectedComponentAndSetComponentIdIfPossible();
-    if (
-      this.authoringComponentContent.connectedComponents.length > 1 ||
-      this.authoringComponentContent.series.length > 0
-    ) {
-      // enable trials so each connected component can put work in a different trial
-      this.authoringComponentContent.enableTrials = true;
-    }
-    this.componentChanged();
-  }
-
-  addConnectedComponentSeriesNumber(connectedComponent) {
-    if (connectedComponent.seriesNumbers == null) {
-      connectedComponent.seriesNumbers = [];
-    }
-    connectedComponent.seriesNumbers.push(null);
-    this.componentChanged();
-  }
-
-  deleteConnectedComponentSeriesNumber(connectedComponent, seriesNumberIndex) {
-    if (connectedComponent.seriesNumbers == null) {
-      connectedComponent.seriesNumbers = [];
-    }
-    connectedComponent.seriesNumbers.splice(seriesNumberIndex, 1);
-    this.componentChanged();
-  }
-
-  connectedComponentSeriesNumberChanged(connectedComponent, seriesNumberIndex, value) {
-    if (connectedComponent.seriesNumbers == null) {
-      connectedComponent.seriesNumbers = [];
-    }
-    if (seriesNumberIndex < connectedComponent.seriesNumbers.length) {
-      connectedComponent.seriesNumbers[seriesNumberIndex] = value;
-    }
-    this.componentChanged();
-  }
-
-  connectedComponentComponentIdChanged(connectedComponent) {
-    const connectedComponentType = this.getConnectedComponentType(connectedComponent);
-    if (connectedComponentType !== 'Embedded') {
-      delete connectedComponent.seriesNumbers;
-    }
-    if (connectedComponentType !== 'Table') {
-      delete connectedComponent.skipFirstRow;
-      delete connectedComponent.xColumn;
-      delete connectedComponent.yColumn;
-    }
-    if (connectedComponentType !== 'Graph') {
-      delete connectedComponent.showClassmateWorkSource;
-    }
-    if (connectedComponentType === 'Table') {
-      connectedComponent.skipFirstRow = true;
-      connectedComponent.xColumn = 0;
-      connectedComponent.yColumn = 1;
-    }
-    connectedComponent.type = 'importWork';
-    this.setImportWorkAsBackgroundIfApplicable(connectedComponent);
-    this.componentChanged();
-  }
-
-  connectedComponentShowClassmateWorkChanged(connectedComponent) {
-    if (connectedComponent.showClassmateWork) {
-      connectedComponent.showClassmateWorkSource = 'period';
-    } else {
-      delete connectedComponent.showClassmateWork;
-      delete connectedComponent.showClassmateWorkSource;
-    }
-    this.componentChanged();
-  }
-
-  setImportWorkAsBackgroundIfApplicable(connectedComponent) {
-    const componentType = this.getConnectedComponentType(connectedComponent);
-    if (['ConceptMap', 'Draw', 'Label'].includes(componentType)) {
-      connectedComponent.importWorkAsBackground = true;
-    } else {
-      delete connectedComponent.importWorkAsBackground;
-    }
-  }
-
-  connectedComponentTypeChanged(connectedComponent) {
-    if (connectedComponent.type === 'importWork') {
-      delete connectedComponent.showClassmateWorkSource;
-    } else if (connectedComponent.type === 'showWork') {
-      delete connectedComponent.showClassmateWorkSource;
-    } else if (connectedComponent.type === 'showClassmateWork') {
-      // enable trials so each classmate work will show up in a different trial
-      this.authoringComponentContent.enableTrials = true;
-      if (connectedComponent.showClassmateWorkSource == null) {
-        connectedComponent.showClassmateWorkSource = 'period';
-      }
-    }
-    this.componentChanged();
-  }
-
-  importWorkAsBackgroundClicked(connectedComponent) {
-    if (!connectedComponent.importWorkAsBackground) {
-      delete connectedComponent.importWorkAsBackground;
-    }
-    this.componentChanged();
-  }
 }
-
-export const EditGraphAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditGraphAdvancedController,
-  templateUrl:
-    'assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html'
-};

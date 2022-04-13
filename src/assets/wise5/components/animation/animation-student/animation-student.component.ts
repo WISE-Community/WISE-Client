@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -43,26 +43,26 @@ export class AnimationStudent extends ComponentStudent {
   width: number = 800;
 
   constructor(
+    private AnimationService: AnimationService,
     protected AnnotationService: AnnotationService,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
-    private AnimationService: AnimationService,
+    protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected upgrade: UpgradeModule,
     protected UtilService: UtilService
   ) {
     super(
       AnnotationService,
       ComponentService,
       ConfigService,
+      dialog,
       NodeService,
       NotebookService,
       StudentAssetService,
       StudentDataService,
-      upgrade,
       UtilService
     );
   }
@@ -82,6 +82,9 @@ export class AnimationStudent extends ComponentStudent {
       this.handleConnectedComponents();
     }
 
+    if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
+      this.disableSubmitButton();
+    }
     this.disableComponentIfNecessary();
     this.broadcastDoneRenderingComponent();
   }

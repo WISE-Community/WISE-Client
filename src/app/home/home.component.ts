@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, SecurityContext } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn } from '../animations';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -6,7 +6,6 @@ import { DomSanitizer } from '@angular/platform-browser';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  encapsulation: ViewEncapsulation.None,
   animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn]
 })
 export class HomeComponent implements OnInit {

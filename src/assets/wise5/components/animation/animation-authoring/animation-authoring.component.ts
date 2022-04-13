@@ -185,11 +185,11 @@ export class AnimationAuthoring extends ComponentAuthoring {
 
   confirmDeleteDataSource(animationObject: any): void {
     if (confirm($localize`Are you sure you want to delete the Data Source?`)) {
-      this.authoringDeleteDataSource(animationObject);
+      this.deleteDataSource(animationObject);
     }
   }
 
-  authoringDeleteDataSource(animationObject: any): void {
+  deleteDataSource(animationObject: any): void {
     delete animationObject.dataSource;
     this.componentChanged();
   }

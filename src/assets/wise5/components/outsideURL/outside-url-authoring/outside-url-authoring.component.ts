@@ -108,17 +108,15 @@ export class OutsideUrlAuthoring extends ComponentAuthoring {
 
   searchFieldChanged(): void {
     this.filteredOpenEducationalResources = this.allOpenEducationalResources.filter((oer) => {
+      const isSearchTextFound = this.isSearchTextFound(this.searchText, JSON.stringify(oer));
       if (this.isAnySubjectChosen()) {
-        return (
-          this.isTextMatch(this.searchText, JSON.stringify(oer)) &&
-          this.isSubjectMatch(this.selectedSubjects, oer)
-        );
+        return isSearchTextFound && this.isSubjectFound(this.selectedSubjects, oer);
       }
-      return this.isTextMatch(this.searchText, JSON.stringify(oer));
+      return isSearchTextFound;
     });
   }
 
-  isTextMatch(searchText: string, testText: string): boolean {
+  isSearchTextFound(searchText: string, testText: string): boolean {
     return testText.toLowerCase().includes(searchText.toLowerCase());
   }
 
@@ -126,7 +124,7 @@ export class OutsideUrlAuthoring extends ComponentAuthoring {
     return this.selectedSubjects.length > 0;
   }
 
-  isSubjectMatch(selectedSubjects: any[], resource: any): boolean {
+  isSubjectFound(selectedSubjects: any[], resource: any): boolean {
     for (const subject of selectedSubjects) {
       if (resource.metadata.subjects.includes(subject)) {
         return true;

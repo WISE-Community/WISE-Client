@@ -1,30 +1,9 @@
-<div class='advancedAuthoringDiv'>
-  <edit-component-save-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-save-button>
-  <br/>
-  <edit-component-submit-button [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-submit-button>
-  <div>
-    <md-checkbox class='md-primary'
-                 ng-if='$ctrl.isNotebookEnabled()'
-                 ng-model='$ctrl.authoringComponentContent.showAddToNotebookButton'
-                 ng-change='$ctrl.componentChanged()'>
-      {{ ::'SHOW_ADD_TO_NOTEBOOK_BUTTON' | translate }}
-    </md-checkbox>
-  </div>
-  <div>
-    <md-input-container style='margin-right: 20px; width: 150px; height: 25px;'
-                        ng-if='$ctrl.authoringComponentContent.showSubmitButton'>
-      <label>{{ ::'MAX_SUBMIT' | translate }}</label>
-      <input type='number'
-             ng-model='$ctrl.authoringComponentContent.maxSubmitCount'
-             ng-model-options='{ debounce: 1000 }'
-             ng-change='$ctrl.componentChanged()'/>
-    </md-input-container>
-  </div>
-  <div layout="column" layout-align="start start">
-    <edit-component-width [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-width>
-    <edit-component-exclude-from-total-score [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-exclude-from-total-score>
-    <edit-component-rubric [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-rubric>
-    <edit-component-tags [authoring-component-content]="$ctrl.authoringComponentContent"></edit-component-tags>
-    <edit-component-json [node-id]="$ctrl.nodeId" [component-id]="$ctrl.componentId"></edit-component-json>
-  </div>
+<div fxLayout="column">
+  <edit-component-width [authoringComponentContent]="authoringComponentContent">
+  </edit-component-width>
+  <edit-component-rubric [authoringComponentContent]="authoringComponentContent">
+  </edit-component-rubric>
+  <edit-component-tags [authoringComponentContent]="authoringComponentContent">
+  </edit-component-tags>
+  <edit-component-json [nodeId]="nodeId" [componentId]="componentId"></edit-component-json>
 </div>

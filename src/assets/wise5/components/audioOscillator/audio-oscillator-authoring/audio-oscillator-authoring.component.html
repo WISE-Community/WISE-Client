@@ -43,36 +43,94 @@
     Sawtooth
   </mat-checkbox>
 </div>
-<mat-form-field class="number-input">
-  <mat-label i18n>Starting Frequency (Hz)</mat-label>
-  <input matInput
-      type="number"
-      min="1"
-      [(ngModel)]="authoringComponentContent.startingFrequency"
-      (ngModelChange)="inputChange.next($event)"/>
-</mat-form-field>
-<br/>
-<mat-form-field class="number-input">
-  <mat-label i18n>Oscillator Width (Pixels)</mat-label>
-  <input matInput
-      type="number"
-      min="1"
-      [(ngModel)]="authoringComponentContent.oscilloscopeWidth"
-      (ngModelChange)="inputChange.next($event)"/>
-</mat-form-field>
-<mat-form-field class="number-input">
-  <mat-label i18n>Oscillator Height (Pixels)</mat-label>
-  <input matInput
-      type="number"
-      min="1"
-      [(ngModel)]="authoringComponentContent.oscilloscopeHeight"
-      (ngModelChange)="inputChange.next($event)"/>
-</mat-form-field>
-<mat-form-field class="number-input">
-  <mat-label i18n>Oscillator Grid Size (Pixels)</mat-label>
-  <input matInput
-      type="number"
-      min="1"
-      [(ngModel)]="authoringComponentContent.gridCellSize"
-      (ngModelChange)="inputChange.next($event)"/>
-</mat-form-field>
+<div class="frequency-amplitude-container"
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="40px">
+  <span i18n>Frequency</span>
+  <mat-form-field class="number-input-small">
+    <mat-label i18n>Starting Frequency (Hz)</mat-label>
+    <input matInput
+        type="number"
+        min="1"
+        [(ngModel)]="authoringComponentContent.startingFrequency"
+        (ngModelChange)="inputChange.next($event)"/>
+  </mat-form-field>
+  <mat-checkbox
+      color="primary"
+      [(ngModel)]="authoringComponentContent.canStudentViewFrequencyInput"
+      (ngModelChange)="showFrequencyInputChanged()"
+      i18n>
+    Show Frequency Input
+  </mat-checkbox>
+  <mat-checkbox
+      color="primary"
+      [(ngModel)]="authoringComponentContent.canStudentEditFrequency"
+      (ngModelChange)="componentChanged()"
+      [disabled]="!authoringComponentContent.canStudentViewFrequencyInput"
+      i18n>
+    Allow Student to Edit Frequency
+  </mat-checkbox>
+</div>
+<div class="frequency-amplitude-container"
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="40px">
+  <span i18n>Amplitude</span>
+  <mat-form-field class="number-input-small">
+    <mat-label i18n>Starting Amplitude (dB)</mat-label>
+    <input matInput
+        type="number"
+        min="0"
+        [max]="maxAmplitude"
+        [(ngModel)]="authoringComponentContent.startingAmplitude"
+        (ngModelChange)="inputChange.next($event)"/>
+  </mat-form-field>
+  <mat-checkbox
+      color="primary"
+      [(ngModel)]="authoringComponentContent.canStudentViewAmplitudeInput"
+      (ngModelChange)="showAmplitudeInputChanged()"
+      i18n>
+    Show Amplitude Input
+  </mat-checkbox>
+  <div>
+    <mat-checkbox
+        color="primary"
+        [(ngModel)]="authoringComponentContent.canStudentEditAmplitude"
+        (ngModelChange)="componentChanged()"
+        [disabled]="!authoringComponentContent.canStudentViewAmplitudeInput"
+        i18n>
+      Allow Student to Edit Amplitude
+    </mat-checkbox>
+  </div>
+</div>
+<div class="frequency-amplitude-container"
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="40px">
+  <span i81n>Grid Dimensions</span>
+  <mat-form-field class="number-input-small">
+    <mat-label i18n>Oscillator Width (Pixels)</mat-label>
+    <input matInput
+        type="number"
+        min="1"
+        [(ngModel)]="authoringComponentContent.oscilloscopeWidth"
+        (ngModelChange)="inputChange.next($event)"/>
+  </mat-form-field>
+  <mat-form-field class="number-input-small">
+    <mat-label i18n>Oscillator Height (Pixels)</mat-label>
+    <input matInput
+        type="number"
+        min="1"
+        [(ngModel)]="authoringComponentContent.oscilloscopeHeight"
+        (ngModelChange)="inputChange.next($event)"/>
+  </mat-form-field>
+  <mat-form-field class="number-input-medium">
+    <mat-label i18n>Oscillator Grid Size (Pixels)</mat-label>
+    <input matInput
+        type="number"
+        min="1"
+        [(ngModel)]="authoringComponentContent.gridCellSize"
+        (ngModelChange)="inputChange.next($event)"/>
+  </mat-form-field>
+</div>

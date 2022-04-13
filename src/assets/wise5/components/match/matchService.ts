@@ -4,20 +4,18 @@ import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 
 @Injectable()
 export class MatchService extends ComponentService {
   constructor(
-    private upgrade: UpgradeModule,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
     super(StudentDataService, UtilService);
   }
 
-  getComponentTypeLabel() {
-    return this.upgrade.$injector.get('$filter')('translate')('match.componentTypeLabel');
+  getComponentTypeLabel(): string {
+    return $localize`Match`;
   }
 
   createComponent() {
@@ -95,6 +93,28 @@ export class MatchService extends ComponentService {
   componentHasCorrectAnswer(component: any): boolean {
     for (const feedback of component.feedback) {
       for (const choice of feedback.choices) {
+        if (choice.isCorrect) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  setItemStatus(item: any, hasCorrectAnswer: boolean): void {
+    item.status = '';
+    if (item.isCorrect) {
+      item.status = 'correct';
+    } else if (item.isIncorrectPosition) {
+      item.status = 'warn';
+    } else if (hasCorrectAnswer && !item.isCorrect && !item.isIncorrectPosition) {
+      item.status = 'incorrect';
+    }
+  }
+
+  hasCorrectChoices(componentContent: any): boolean {
+    for (const bucket of componentContent.feedback) {
+      for (const choice of bucket.choices) {
         if (choice.isCorrect) {
           return true;
         }

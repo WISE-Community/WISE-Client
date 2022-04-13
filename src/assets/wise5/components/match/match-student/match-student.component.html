@@ -1,6 +1,6 @@
 <component-header [componentContent]="componentContent"></component-header>
 <div class="match" fxLayout="row wrap" cdkDropListGroup>
-  <div fxFlex="100" fxFlex.gt-xs="{{isHorizontal ? 50: 100}}">
+  <div fxFlex="100" fxFlex.gt-xs="{{isHorizontal ? 50: 100}}" fxFlexOrder="{{isChoicesAfter ? 2 : 1}}">
     <div class="bucket selected-bg-bg"
         fxLayout="column"
         [ngStyle]="{'margin-bottom': isHorizontal ? '0' : '8px'}">
@@ -10,8 +10,7 @@
           fxLayoutGap="8px">
         <h3 class="mat-body-2" [innerHTML]="buckets[0].value"></h3>
         <div *ngIf="componentContent.canCreateChoices">
-        <add-choice-button [isDisabled]="isDisabled"
-            (onClick)="addChoice()"></add-choice-button>
+          <add-choice-button [isDisabled]="isDisabled" (onClick)="addChoice()"></add-choice-button>
         </div>
       </div>
       <ul class="items"
@@ -26,7 +25,8 @@
             [cdkDragDisabled]="isDisabled"
             (cdkDragEntered)="dragEnter($event)"
             (cdkDragExited)="dragExit($event)"
-            *ngFor="let item of buckets[0].items">
+            *ngFor="let item of buckets[0].items; let position = index;"
+            [cdkDragData]="position">
           <match-choice-item [buckets]="buckets"
               [item]="item"
               [hasCorrectAnswer]="hasCorrectAnswer"
@@ -40,7 +40,8 @@
       fxLayout.gt-xs="{{isHorizontal ? 'column' : 'row wrap'}}"
       fxLayoutAlign="start stretch"
       fxFlex="100"
-      fxFlex.gt-xs="{{isHorizontal ? 50 : 100}}">
+      fxFlex.gt-xs="{{isHorizontal ? 50 : 100}}"
+      fxFlexOrder="{{isChoicesAfter ? 1 : 2}}">
     <div *ngFor="let bucket of buckets.slice(1)"
         fxLayout="column"
         fxFlex="100"
@@ -63,7 +64,8 @@
               [cdkDragDisabled]="isDisabled"
               (cdkDragEntered)="dragEnter($event)"
               (cdkDragExited)="dragExit($event)"
-              *ngFor="let item of bucket.items">
+              *ngFor="let item of bucket.items; let position = index;"
+              [cdkDragData]="position">
             <match-choice-item [buckets]="buckets"
                 [item]="item"
                 [hasCorrectAnswer]="hasCorrectAnswer"

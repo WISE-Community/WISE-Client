@@ -1,36 +1,28 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { NodeService } from '../../../services/nodeService';
+import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
 
-class EditConceptMapAdvancedController extends EditAdvancedComponentAngularJSController {
+@Component({
+  selector: 'edit-concept-map-advanced',
+  templateUrl: 'edit-concept-map-advanced.component.html',
+  styleUrls: ['edit-concept-map-advanced.component.scss']
+})
+export class EditConceptMapAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['ConceptMap', 'Draw', 'Embedded', 'Graph', 'Label', 'Table'];
-  shouldOptions: any[] = [
-    {
-      value: false,
-      label: $localize`Should`
-    },
-    {
-      value: true,
-      label: $localize`Should Not`
-    }
-  ];
-
-  static $inject = ['NodeService', 'ProjectService', 'UtilService'];
 
   constructor(
     protected NodeService: NodeService,
+    protected NotebookService: NotebookService,
     protected ProjectService: TeacherProjectService,
     protected UtilService: UtilService
   ) {
-    super(NodeService, ProjectService);
+    super(NodeService, NotebookService, ProjectService);
   }
 
-  /**
-   * A "with link" checkbox was checked
-   * @param ruleIndex the index of the rule
-   */
-  ruleLinkCheckboxClicked(ruleIndex: number): void {
+  ruleTypeChanged(ruleIndex: number): void {
     const rule = this.authoringComponentContent.rules[ruleIndex];
     if (rule.type === 'node') {
       /*
@@ -61,16 +53,6 @@ class EditConceptMapAdvancedController extends EditAdvancedComponentAngularJSCon
     }
 
     this.setShowSubmitButtonValue(showSubmitButton);
-    this.componentChanged();
-  }
-
-  moveRuleUpButtonClicked(index: number): void {
-    this.UtilService.moveObjectUp(this.authoringComponentContent.rules, index);
-    this.componentChanged();
-  }
-
-  moveRuleDownButtonClicked(index: number): void {
-    this.UtilService.moveObjectDown(this.authoringComponentContent.rules, index);
     this.componentChanged();
   }
 
@@ -107,62 +89,7 @@ class EditConceptMapAdvancedController extends EditAdvancedComponentAngularJSCon
     }
   }
 
-  automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent: any): void {
-    super.automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent);
-    if (connectedComponent.componentId != null) {
-      this.setImportWorkAsBackgroundIfApplicable(connectedComponent);
-    }
-  }
-
-  connectedComponentComponentIdChanged(connectedComponent: any): void {
-    this.automaticallySetConnectedComponentTypeIfPossible(connectedComponent);
-    this.afterComponentIdChanged(connectedComponent);
-    this.setImportWorkAsBackgroundIfApplicable(connectedComponent);
-    this.componentChanged();
-  }
-
-  setImportWorkAsBackgroundIfApplicable(connectedComponent: any): void {
-    const componentType = this.getConnectedComponentType(connectedComponent);
-    if (['Draw', 'Embedded', 'Graph', 'Label', 'Table'].includes(componentType)) {
-      connectedComponent.importWorkAsBackground = true;
-    } else {
-      delete connectedComponent.importWorkAsBackground;
-    }
-  }
-
-  importWorkAsBackgroundClicked(connectedComponent: any): void {
-    if (!connectedComponent.importWorkAsBackground) {
-      delete connectedComponent.importWorkAsBackground;
-    }
-    this.componentChanged();
-  }
-
-  afterComponentIdChanged(connectedComponent: any): void {
-    const nodeId = connectedComponent.nodeId;
-    const componentId = connectedComponent.componentId;
-    if (this.ProjectService.getComponentType(nodeId, componentId) === 'ConceptMap') {
-      if (
-        confirm(
-          $localize`Do you want to copy the nodes and links from the connected component?\n\nWarning: This will delete all existing nodes and links in this component.`
-        )
-      ) {
-        const connectedComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-          nodeId,
-          componentId
-        );
-        this.authoringComponentContent.nodes = connectedComponentContent.nodes;
-        this.authoringComponentContent.links = connectedComponentContent.links;
-      }
-    }
+  customTrackBy(index: number): any {
+    return index;
   }
 }
-
-export const EditConceptMapAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditConceptMapAdvancedController,
-  templateUrl:
-    'assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html'
-};

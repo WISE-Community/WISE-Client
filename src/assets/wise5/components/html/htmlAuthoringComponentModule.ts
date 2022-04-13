@@ -16,12 +16,6 @@ const htmlComponentModule = angular
   .directive(
     'editHtmlAdvanced',
     downgradeComponent({ component: EditHTMLAdvancedComponent }) as angular.IDirectiveFactory
-  )
-  .config([
-    '$translatePartialLoaderProvider',
-    ($translatePartialLoaderProvider) => {
-      $translatePartialLoaderProvider.addPart('components/html/i18n');
-    }
-  ]);
+  );
 
 export default htmlComponentModule;

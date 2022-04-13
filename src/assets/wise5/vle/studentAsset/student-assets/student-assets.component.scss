@@ -1,0 +1,54 @@
+.file-input {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+  top: 0px;
+  left: 0px;
+}
+
+.file-input:hover {
+  cursor: pointer;
+}
+
+.drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  height: 100px;
+  text-align: center;
+  padding-top: 30px;
+  margin-top: 10px;
+  bottom: 0px;
+  position: relative;
+}
+
+.drop-box:hover {
+  cursor: pointer;
+}
+
+.studentAssets {
+  height: auto;
+  width: auto;
+  min-height: 200px;
+  max-height: 200px;
+  border: 3px solid #DDD;
+  overflow:auto;
+  list-style-type: none;
+  padding:0px;
+}
+
+.studentAsset {
+  width: auto;
+  height: auto;
+  max-width: 100px;
+  max-height: 100px;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #DDD;
+  overflow:auto;
+}
+
+.studentAsset:hover {
+  cursor: pointer;
+}

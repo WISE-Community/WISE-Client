@@ -11,9 +11,24 @@ import { NodeAuthoringComponent } from './nodeAuthoringComponent';
 export default angular
   .module('nodeAuthoringModule', [])
   .component('nodeAdvancedAuthoringComponent', NodeAdvancedAuthoringComponent)
-  .component('nodeAdvancedBranchAuthoringComponent', NodeAdvancedBranchAuthoringComponent)
-  .component('nodeAdvancedConstraintAuthoringComponent', NodeAdvancedConstraintAuthoringComponent)
-  .component('nodeAdvancedPathAuthoringComponent', NodeAdvancedPathAuthoringComponent)
+  .directive(
+    'nodeAdvancedBranchAuthoringComponent',
+    downgradeComponent({
+      component: NodeAdvancedBranchAuthoringComponent
+    }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'nodeAdvancedConstraintAuthoringComponent',
+    downgradeComponent({
+      component: NodeAdvancedConstraintAuthoringComponent
+    }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'nodeAdvancedPathAuthoringComponent',
+    downgradeComponent({
+      component: NodeAdvancedPathAuthoringComponent
+    }) as angular.IDirectiveFactory
+  )
   .directive(
     'nodeAdvancedGeneralAuthoringComponent',
     downgradeComponent({
