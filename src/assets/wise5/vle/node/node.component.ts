@@ -82,54 +82,9 @@ export class NodeComponent implements OnInit {
 
     this.rubric = null;
     this.mode = this.configService.getMode();
-    this.nodeId = this.studentDataService.getCurrentNodeId();
-    this.node = this.projectService.getNode(this.nodeId);
-    this.nodeContent = this.projectService.getNodeById(this.nodeId);
-    this.nodeStatus = this.studentDataService.getNodeStatusByNodeId(this.nodeId);
+    this.initializeNode();
     this.startAutoSaveInterval();
     this.registerExitListener();
-
-    if (
-      this.nodeService.currentNodeHasTransitionLogic() &&
-      this.nodeService.evaluateTransitionLogicOn('enterNode')
-    ) {
-      this.nodeService.evaluateTransitionLogic();
-    }
-
-    // set save message with last save/submission
-    // for now, we'll use the latest component state (since we don't currently keep track of node-level saves)
-    // TODO: use node states once we implement node state saving
-    const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.nodeId
-    );
-    if (latestComponentState) {
-      const latestClientSaveTime = latestComponentState.clientSaveTime;
-      if (latestComponentState.isSubmit) {
-        this.setSubmittedMessage(latestClientSaveTime);
-      } else {
-        this.setSavedMessage(latestClientSaveTime);
-      }
-    }
-
-    const nodeId = this.nodeId;
-    const componentId = null;
-    const componentType = null;
-    const category = 'Navigation';
-    const event = 'nodeEntered';
-    const eventData = {
-      nodeId: nodeId
-    };
-    this.studentDataService.saveVLEEvent(
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      eventData
-    );
-
-    this.rubric = this.node.rubric;
-    this.initializeIdToIsPulsing();
 
     this.subscriptions.add(
       this.studentDataService.componentSaveTriggered$.subscribe(({ nodeId, componentId }) => {
@@ -189,6 +144,56 @@ export class NodeComponent implements OnInit {
         }
       })
     );
+
+    this.studentDataService.currentNodeChanged$.subscribe(() => {
+      this.initializeNode();
+    });
+  }
+
+  initializeNode(): void {
+    this.nodeId = this.studentDataService.getCurrentNodeId();
+    this.node = this.projectService.getNode(this.nodeId);
+    this.nodeContent = this.projectService.getNodeById(this.nodeId);
+    this.nodeStatus = this.studentDataService.getNodeStatusByNodeId(this.nodeId);
+
+    if (
+      this.nodeService.currentNodeHasTransitionLogic() &&
+      this.nodeService.evaluateTransitionLogicOn('enterNode')
+    ) {
+      this.nodeService.evaluateTransitionLogic();
+    }
+
+    const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      this.nodeId
+    );
+    if (latestComponentState) {
+      const latestClientSaveTime = latestComponentState.clientSaveTime;
+      if (latestComponentState.isSubmit) {
+        this.setSubmittedMessage(latestClientSaveTime);
+      } else {
+        this.setSavedMessage(latestClientSaveTime);
+      }
+    }
+
+    const nodeId = this.nodeId;
+    const componentId = null;
+    const componentType = null;
+    const category = 'Navigation';
+    const event = 'nodeEntered';
+    const eventData = {
+      nodeId: nodeId
+    };
+    this.studentDataService.saveVLEEvent(
+      nodeId,
+      componentId,
+      componentType,
+      category,
+      event,
+      eventData
+    );
+
+    this.rubric = this.node.rubric;
+    this.initializeIdToIsPulsing();
 
     const script = this.nodeContent.script;
     if (script != null) {

@@ -1,0 +1,19 @@
+.l-node {
+  margin-top: 42px;
+}
+
+.ended-and-locked-div {
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+.ended-and-locked-message {
+  border: 1px solid black;
+  border-radius: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: white;
+}

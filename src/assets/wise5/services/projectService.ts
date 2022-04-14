@@ -3155,4 +3155,8 @@ export class ProjectService {
   broadcastSnipImage(args: any) {
     this.snipImageSource.next(args);
   }
+  
+  getProjectRootNode() {
+    return this.rootNode;
+  }
 }

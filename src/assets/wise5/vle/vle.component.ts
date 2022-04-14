@@ -1,26 +1,33 @@
-'use strict';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NotebookService } from '../services/notebookService';
 import { NotificationService } from '../services/notificationService';
-import { VLEProjectService } from './vleProjectService';
 import { SessionService } from '../services/sessionService';
 import { StudentDataService } from '../services/studentDataService';
-import * as angular from 'angular';
-import * as $ from 'jquery';
-import { Directive } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { VLEProjectService } from './vleProjectService';
+import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
+import { DialogWithoutCloseComponent } from '../directives/dialog-without-close/dialog-without-close.component';
 
-@Directive()
-class VLEController {
-  $translate: any;
-  connectionLostDisplay: any;
+@Component({
+  selector: 'vle',
+  templateUrl: './vle.component.html',
+  styleUrls: ['./vle.component.scss']
+})
+export class VLEComponent implements OnInit {
   connectionLostShown: boolean = false;
   constraintsDisabled: boolean = false;
   currentNode: any;
+  @ViewChild('drawer') public drawer: any;
+  endedAndLockedMessage: string;
   homePath: string;
   idToOrder: any;
+  isEndedAndLocked: boolean;
   layoutState: string;
   layoutView: string;
   nodeStatuses: any[];
@@ -49,64 +56,31 @@ class VLEController {
   themeSettings: any;
   workgroupId: number;
 
-  static $inject = [
-    '$anchorScroll',
-    '$scope',
-    '$filter',
-    '$mdDialog',
-    '$mdToast',
-    '$state',
-    '$transitions',
-    '$window',
-    'AnnotationService',
-    'ConfigService',
-    'NotebookService',
-    'NotificationService',
-    'ProjectService',
-    'SessionService',
-    'StudentDataService'
-  ];
-
   constructor(
-    private $anchorScroll: any,
-    private $scope: any,
-    private $filter: any,
-    private $mdDialog: any,
-    private $mdToast: any,
-    private $state: any,
-    private $transitions: any,
-    private $window: any,
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
-    private NotebookService: NotebookService,
-    private NotificationService: NotificationService,
-    private ProjectService: VLEProjectService,
-    private SessionService: SessionService,
-    private StudentDataService: StudentDataService
+    private annotationService: AnnotationService,
+    private configService: ConfigService,
+    private dialog: MatDialog,
+    private notebookService: NotebookService,
+    private notificationService: NotificationService,
+    private projectService: VLEProjectService,
+    private sessionService: SessionService,
+    private snackBar: MatSnackBar,
+    private studentDataService: StudentDataService,
+    private upgrade: UpgradeModule
   ) {
-    this.$translate = this.$filter('translate');
-    this.$window.onbeforeunload = () => {
-      this.SessionService.broadcastExit();
-    };
-
-    this.workgroupId = this.ConfigService.getWorkgroupId();
-    this.currentNode = null;
-    this.pauseDialog = null;
-    this.noteDialog = null;
-
-    this.navFilters = this.ProjectService.getFilters();
+    this.workgroupId = this.configService.getWorkgroupId();
+    this.navFilters = this.projectService.getFilters();
     this.navFilter = this.navFilters[0].name;
-
-    this.projectStyle = this.ProjectService.getStyle();
-    this.projectName = this.ProjectService.getProjectTitle();
-    if (this.NotebookService.isNotebookEnabled()) {
-      this.notebookConfig = this.NotebookService.getStudentNotebookConfig();
+    this.projectStyle = this.projectService.getStyle();
+    this.projectName = this.projectService.getProjectTitle();
+    if (this.notebookService.isNotebookEnabled()) {
+      this.notebookConfig = this.notebookService.getStudentNotebookConfig();
       this.notesEnabled = this.notebookConfig.itemTypes.note.enabled;
       this.reportEnabled = this.notebookConfig.itemTypes.report.enabled;
     }
 
-    let userType = this.ConfigService.getConfigParam('userType');
-    let contextPath = this.ConfigService.getConfigParam('contextPath');
+    let userType = this.configService.getConfigParam('userType');
+    let contextPath = this.configService.getConfigParam('contextPath');
     if (userType == 'student') {
       this.homePath = contextPath + '/student';
     } else if (userType == 'teacher') {
@@ -115,54 +89,53 @@ class VLEController {
       this.homePath = contextPath;
     }
 
-    if (this.ConfigService.getConfigParam('constraints') == false) {
+    if (this.configService.getConfigParam('constraints') == false) {
       this.constraintsDisabled = true;
     }
 
-    let script = this.ProjectService.getProjectScript();
+    this.isEndedAndLocked = this.configService.isEndedAndLocked();
+    if (this.isEndedAndLocked) {
+      const endDate = this.configService.getPrettyEndDate();
+      this.endedAndLockedMessage = $localize`This unit ended on ${endDate}. You can no longer save new work.`;
+    }
+
+    let script = this.projectService.getProjectScript();
     if (script != null) {
-      this.ProjectService.retrieveScript(script).then((script: string) => {
+      this.projectService.retrieveScript(script).then((script: string) => {
         new Function(script).call(this);
       });
     }
 
     this.subscriptions.add(
-      this.SessionService.showSessionWarning$.subscribe(() => {
-        const confirm = $mdDialog
-          .confirm()
-          .parent(angular.element(document.body))
-          .title(this.$translate('SESSION_TIMEOUT'))
-          .content(this.$translate('SESSION_TIMEOUT_MESSAGE'))
-          .ariaLabel(this.$translate('SESSION_TIMEOUT'))
-          .ok(this.$translate('YES'))
-          .cancel(this.$translate('NO'));
-        $mdDialog.show(confirm).then(
-          () => {
-            this.SessionService.closeWarningAndRenewSession();
-          },
-          () => {
-            this.logOut();
-          }
-        );
+      this.sessionService.showSessionWarning$.subscribe(() => {
+        this.dialog
+          .open(DialogWithConfirmComponent, {
+            data: {
+              content: $localize`You have been inactive for a long time. Do you want to stay logged in?`,
+              title: $localize`Session Timeout`
+            }
+          })
+          .afterClosed()
+          .subscribe((isRenew: boolean) => {
+            if (isRenew) {
+              this.sessionService.closeWarningAndRenewSession();
+            } else {
+              this.logOut();
+            }
+          });
       })
     );
 
     this.subscriptions.add(
-      this.SessionService.logOut$.subscribe(() => {
-        this.logOut();
-      })
-    );
-
-    this.subscriptions.add(
-      this.StudentDataService.currentNodeChanged$.subscribe(({ previousNode }) => {
-        let currentNode = this.StudentDataService.getCurrentNode();
+      this.studentDataService.currentNodeChanged$.subscribe(({ previousNode }) => {
+        let currentNode = this.studentDataService.getCurrentNode();
         let currentNodeId = currentNode.id;
 
-        this.StudentDataService.updateStackHistory(currentNodeId);
-        this.StudentDataService.updateVisitedNodesHistory(currentNodeId);
+        this.studentDataService.updateStackHistory(currentNodeId);
+        this.studentDataService.updateVisitedNodesHistory(currentNodeId);
 
         let componentId, componentType, category, eventName, eventData, eventNodeId;
-        if (previousNode != null && this.ProjectService.isGroupNode(previousNode.id)) {
+        if (previousNode != null && this.projectService.isGroupNode(previousNode.id)) {
           // going from group to node or group to group
           componentId = null;
           componentType = null;
@@ -172,7 +145,7 @@ class VLEController {
             nodeId: previousNode.id
           };
           eventNodeId = previousNode.id;
-          this.StudentDataService.saveVLEEvent(
+          this.studentDataService.saveVLEEvent(
             eventNodeId,
             componentId,
             componentType,
@@ -182,7 +155,7 @@ class VLEController {
           );
         }
 
-        if (this.ProjectService.isGroupNode(currentNodeId)) {
+        if (this.projectService.isGroupNode(currentNodeId)) {
           componentId = null;
           componentType = null;
           category = 'Navigation';
@@ -191,7 +164,7 @@ class VLEController {
             nodeId: currentNode.id
           };
           eventNodeId = currentNode.id;
-          this.StudentDataService.saveVLEEvent(
+          this.studentDataService.saveVLEEvent(
             eventNodeId,
             componentId,
             componentType,
@@ -203,20 +176,15 @@ class VLEController {
       })
     );
 
-    this.$transitions.onSuccess({}, ($transition) => {
-      this.$anchorScroll('node');
-    });
-
     this.processNotifications();
     this.subscriptions.add(
-      this.NotificationService.notificationChanged$.subscribe(() => {
-        // update new notifications
+      this.notificationService.notificationChanged$.subscribe(() => {
         this.processNotifications();
       })
     );
 
     this.subscriptions.add(
-      this.StudentDataService.pauseScreen$.subscribe((doPause: boolean) => {
+      this.studentDataService.pauseScreen$.subscribe((doPause: boolean) => {
         if (doPause) {
           this.pauseScreen();
         } else {
@@ -226,13 +194,18 @@ class VLEController {
     );
 
     this.subscriptions.add(
-      this.NotebookService.notesVisible$.subscribe((notesVisible: boolean) => {
+      this.notebookService.notesVisible$.subscribe((notesVisible: boolean) => {
         this.notesVisible = notesVisible;
+        if (this.notesVisible) {
+          this.drawer.open();
+        } else {
+          this.drawer.close();
+        }
       })
     );
 
     this.subscriptions.add(
-      this.NotebookService.reportFullScreen$.subscribe((full: boolean) => {
+      this.notebookService.reportFullScreen$.subscribe((full: boolean) => {
         this.reportFullscreen = full;
       })
     );
@@ -249,15 +222,15 @@ class VLEController {
       return false;
     });
 
-    this.themePath = this.ProjectService.getThemePath();
+    this.themePath = this.projectService.getThemePath();
     this.notebookItemPath = this.themePath + '/notebook/notebookItem.html';
 
     let nodeId = null;
     let stateParams = null;
     let stateParamNodeId = null;
 
-    if (this.$state != null) {
-      stateParams = this.$state.params;
+    if (this.upgrade.$injector != null && this.upgrade.$injector.get('$state') != null) {
+      stateParams = this.upgrade.$injector.get('$state').params;
     }
 
     if (stateParams != null) {
@@ -271,19 +244,19 @@ class VLEController {
        * get the node id for the latest node entered event for an active
        * node that exists in the project
        */
-      nodeId = this.StudentDataService.getLatestNodeEnteredEventNodeIdWithExistingNode();
+      nodeId = this.studentDataService.getLatestNodeEnteredEventNodeIdWithExistingNode();
     }
 
     if (nodeId == null || nodeId === '') {
-      nodeId = this.ProjectService.getStartNodeId();
+      nodeId = this.projectService.getStartNodeId();
     }
 
-    this.StudentDataService.setCurrentNodeByNodeId(nodeId);
+    this.studentDataService.setCurrentNodeByNodeId(nodeId);
 
-    const runStatus = this.StudentDataService.getRunStatus();
+    const runStatus = this.studentDataService.getRunStatus();
     if (runStatus != null) {
       let pause = false;
-      const periodId = this.ConfigService.getPeriodId();
+      const periodId = this.configService.getPeriodId();
       if (periodId != null) {
         const periods = runStatus.periods;
         if (periods != null) {
@@ -307,19 +280,19 @@ class VLEController {
     this.layoutView = 'list'; // 'list' or 'card'
     this.numberProject = true;
 
-    this.themePath = this.ProjectService.getThemePath();
-    this.themeSettings = this.ProjectService.getThemeSettings();
+    this.themePath = this.projectService.getThemePath();
+    this.themeSettings = this.projectService.getThemeSettings();
 
-    this.nodeStatuses = this.StudentDataService.nodeStatuses;
-    this.idToOrder = this.ProjectService.idToOrder;
+    this.nodeStatuses = this.studentDataService.nodeStatuses;
+    this.idToOrder = this.projectService.idToOrder;
 
-    this.workgroupId = this.ConfigService.getWorkgroupId();
+    this.workgroupId = this.configService.getWorkgroupId();
 
-    this.rootNode = this.ProjectService.rootNode;
+    this.rootNode = this.projectService.getProjectRootNode();
     this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
 
-    this.notebookConfig = this.NotebookService.getNotebookConfig();
-    this.currentNode = this.StudentDataService.getCurrentNode();
+    this.notebookConfig = this.notebookService.getNotebookConfig();
+    this.currentNode = this.studentDataService.getCurrentNode();
 
     // set current notebook type filter to first enabled type
     if (this.notebookConfig.enabled) {
@@ -332,41 +305,28 @@ class VLEController {
       }
     }
 
-    // build server disconnect display
-    this.connectionLostDisplay = $mdToast.build({
-      template:
-        "<md-toast>\
-                      <span>{{ 'ERROR_CHECK_YOUR_INTERNET_CONNECTION' | translate }}</span>\
-                      </md-toast>",
-      hideDelay: 0
-    });
-
     this.setLayoutState();
 
-    // update layout state when current node changes
     this.subscriptions.add(
-      this.StudentDataService.currentNodeChanged$.subscribe(() => {
-        this.currentNode = this.StudentDataService.getCurrentNode();
+      this.studentDataService.currentNodeChanged$.subscribe(() => {
+        this.currentNode = this.studentDataService.getCurrentNode();
         this.setLayoutState();
       })
     );
 
     this.subscriptions.add(
-      this.StudentDataService.nodeClickLocked$.subscribe(({ nodeId }) => {
-        let message = this.$translate('sorryYouCannotViewThisItemYet');
-        const node = this.ProjectService.getNodeById(nodeId);
+      this.studentDataService.nodeClickLocked$.subscribe(({ nodeId }) => {
+        let message = $localize`Sorry, you cannot view this item yet.`;
+        const node = this.projectService.getNodeById(nodeId);
         if (node != null) {
           // get the constraints that affect this node
-          const constraints = this.ProjectService.getConstraintsThatAffectNode(node);
-          this.ProjectService.orderConstraints(constraints);
+          const constraints = this.projectService.getConstraintsThatAffectNode(node);
+          this.projectService.orderConstraints(constraints);
 
           if (constraints != null && constraints.length > 0) {
             // get the node title the student is trying to go to
-            const nodeTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
-            message = `<p>
-              ${this.$translate('toVisitNodeTitleYouNeedTo', { nodeTitle: nodeTitle })}
-            </p>
-            <ul>`;
+            const nodeTitle = this.projectService.getNodePositionAndTitleByNodeId(nodeId);
+            message = $localize`<p>To visit <b>${nodeTitle}</b> you need to:</p><ul>`;
           }
 
           // loop through all the constraints that affect this node
@@ -374,29 +334,26 @@ class VLEController {
             const constraint = constraints[c];
 
             // check if the constraint has been satisfied
-            if (constraint != null && !this.StudentDataService.evaluateConstraint(constraint)) {
+            if (constraint != null && !this.studentDataService.evaluateConstraint(constraint)) {
               // the constraint has not been satisfied and is still active
               // get the message that describes how to disable the constraint
-              message += `<li>${this.ProjectService.getConstraintMessage(nodeId, constraint)}</li>`;
+              message += `<li>${this.projectService.getConstraintMessage(nodeId, constraint)}</li>`;
             }
           }
           message += `</ul>`;
         }
 
-        this.$mdDialog.show(
-          this.$mdDialog
-            .alert()
-            .parent(angular.element(document.body))
-            .title(this.$translate('itemLocked'))
-            .htmlContent(message)
-            .ariaLabel(this.$translate('itemLocked'))
-            .ok(this.$translate('ok'))
-        );
+        this.dialog.open(DialogWithCloseComponent, {
+          data: {
+            content: message,
+            title: $localize`Item Locked`
+          }
+        });
       })
     );
 
     this.subscriptions.add(
-      this.NotificationService.serverConnectionStatus$.subscribe((isConnected) => {
+      this.notificationService.serverConnectionStatus$.subscribe((isConnected) => {
         if (isConnected) {
           this.handleServerReconnect();
         } else {
@@ -407,23 +364,22 @@ class VLEController {
 
     // handle request for notification dismiss codes
     this.subscriptions.add(
-      this.NotificationService.viewCurrentAmbientNotification$.subscribe((args) => {
-        this.NotificationService.displayAmbientNotification(args.notification);
+      this.notificationService.viewCurrentAmbientNotification$.subscribe((args) => {
+        this.notificationService.displayAmbientNotification(args.notification);
       })
     );
-
-    this.$scope.$on('$destroy', () => {
-      this.ngOnDestroy();
-    });
   }
+
+  ngOnInit(): void {}
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+    this.sessionService.broadcastExit();
   }
 
   processNotifications(): void {
-    this.notifications = this.NotificationService.notifications;
-    this.newNotifications = this.NotificationService.getNewNotifications();
+    this.notifications = this.notificationService.notifications;
+    this.newNotifications = this.notificationService.getNewNotifications();
   }
 
   logOut(eventName = 'logOut') {
@@ -433,46 +389,40 @@ class VLEController {
     const category = 'Navigation';
     const event = eventName;
     const eventData = {};
-    this.StudentDataService.saveVLEEvent(
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      eventData
-    ).then(() => {
-      this.SessionService.logOut();
-    });
+    this.studentDataService
+      .saveVLEEvent(nodeId, componentId, componentType, category, event, eventData)
+      .then(() => {
+        this.sessionService.logOut();
+      });
   }
 
   loadRoot() {
-    this.StudentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(
-      this.ProjectService.rootNode.id
+    this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(
+      this.projectService.rootNode.id
     );
   }
 
   mouseMoved() {
-    this.SessionService.mouseMoved();
+    this.sessionService.mouseMoved();
   }
 
   pauseScreen() {
-    // TODO: i18n
-    this.pauseDialog = this.$mdDialog.show({
-      template:
-        '<md-dialog aria-label="Screen Paused"><md-dialog-content><div class="md-dialog-content center">' +
-        this.$translate('yourTeacherHasPausedAllTheScreensInTheClass') +
-        '</div></md-dialog-content></md-dialog>',
-      escapeToClose: false
+    this.pauseDialog = this.dialog.open(DialogWithoutCloseComponent, {
+      data: {
+        content: $localize`Your teacher has paused all the screens in the class.`,
+        title: $localize`Screen Paused`
+      },
+      disableClose: true
     });
   }
 
   unPauseScreen() {
-    this.$mdDialog.hide();
+    this.pauseDialog.close();
     this.pauseDialog = null;
   }
 
   isPreview() {
-    return this.ConfigService.isPreview();
+    return this.configService.isPreview();
   }
 
   /**
@@ -484,10 +434,11 @@ class VLEController {
        * Registers a function that will be invoked before the componentState is saved to the server
        * @param nodeId the node id
        * @param componentId the component id
-       * @param additionalProcessingFunction the function to register for the specified node and component
+       * @param additionalProcessingFunction the function to register for the specified node and
+       * component
        */
       registerAdditionalProcessingFunction: (nodeId, componentId, additionalProcessingFunction) => {
-        this.ProjectService.addAdditionalProcessingFunction(
+        this.projectService.addAdditionalProcessingFunction(
           nodeId,
           componentId,
           additionalProcessingFunction
@@ -504,11 +455,11 @@ class VLEController {
        * @returns the auto score annotation
        */
       createAutoScoreAnnotation: (nodeId, componentId, data) => {
-        let runId = this.ConfigService.getRunId();
-        let periodId = this.ConfigService.getPeriodId();
-        let toWorkgroupId = this.ConfigService.getWorkgroupId();
+        let runId = this.configService.getRunId();
+        let periodId = this.configService.getPeriodId();
+        let toWorkgroupId = this.configService.getWorkgroupId();
 
-        return this.AnnotationService.createAutoScoreAnnotation(
+        return this.annotationService.createAutoScoreAnnotation(
           runId,
           periodId,
           nodeId,
@@ -528,11 +479,11 @@ class VLEController {
        * @returns the auto comment annotation
        */
       createAutoCommentAnnotation: (nodeId, componentId, data) => {
-        let runId = this.ConfigService.getRunId();
-        let periodId = this.ConfigService.getPeriodId();
-        let toWorkgroupId = this.ConfigService.getWorkgroupId();
+        let runId = this.configService.getRunId();
+        let periodId = this.configService.getPeriodId();
+        let toWorkgroupId = this.configService.getWorkgroupId();
 
-        return this.AnnotationService.createAutoCommentAnnotation(
+        return this.annotationService.createAutoCommentAnnotation(
           runId,
           periodId,
           nodeId,
@@ -554,14 +505,14 @@ class VLEController {
           componentId: componentId,
           type: annotationType
         };
-        return this.AnnotationService.getLatestAnnotation(params);
+        return this.annotationService.getLatestAnnotation(params);
       },
       /**
        * Updates the annotation locally and on the server
        * @param annotation
        */
       updateAnnotation: (annotation) => {
-        this.AnnotationService.saveAnnotation(annotation);
+        this.annotationService.saveAnnotation(annotation);
       },
       /**
        * Returns the maxScore for the specified node and component
@@ -570,7 +521,7 @@ class VLEController {
        * @returns the max score for the component
        */
       getMaxScoreForComponent: (nodeId, componentId) => {
-        return this.ProjectService.getMaxScoreForComponent(nodeId, componentId);
+        return this.projectService.getMaxScoreForComponent(nodeId, componentId);
       }
     };
   }
@@ -587,30 +538,33 @@ class VLEController {
       // no state was sent, so set based on current node
       if (this.currentNode) {
         var id = this.currentNode.id;
-        if (this.ProjectService.isApplicationNode(id)) {
+        if (this.projectService.isApplicationNode(id)) {
           // currently viewing step, so show step view
           layoutState = 'node';
-        } else if (this.ProjectService.isGroupNode(id)) {
+        } else if (this.projectService.isGroupNode(id)) {
           // currently viewing group node, so show navigation view
           layoutState = 'nav';
         }
       }
     }
 
-    if (layoutState === 'notebook') {
-      this.$state.go('root.notebook', { nodeId: this.currentNode.id });
-    } else {
-      this.notebookNavOpen = false;
-      if (this.ConfigService.isPreview()) {
-        this.$state.go('root.preview.node', {
-          projectId: this.ConfigService.getProjectId(),
-          nodeId: this.currentNode.id
-        });
+    if (this.upgrade.$injector != null) {
+      const $state = this.upgrade.$injector.get('$state');
+      if (layoutState === 'notebook') {
+        $state.go('root.notebook', { nodeId: this.currentNode.id });
       } else {
-        this.$state.go('root.run.node', {
-          runId: this.ConfigService.getRunId(),
-          nodeId: this.currentNode.id
-        });
+        this.notebookNavOpen = false;
+        if (this.configService.isPreview()) {
+          $state.go('root.preview.node', {
+            projectId: this.configService.getProjectId(),
+            nodeId: this.currentNode.id
+          });
+        } else {
+          $state.go('root.run.node', {
+            runId: this.configService.getRunId(),
+            nodeId: this.currentNode.id
+          });
+        }
       }
     }
 
@@ -619,19 +573,18 @@ class VLEController {
 
   handleServerDisconnect() {
     if (!this.connectionLostShown) {
-      this.$mdToast.show(this.connectionLostDisplay);
+      this.snackBar.open(
+        $localize`Error: Data is not being saved! Check your internet connection.`
+      );
       this.connectionLostShown = true;
     }
   }
 
   handleServerReconnect() {
-    this.$mdToast.hide(this.connectionLostDisplay);
     this.connectionLostShown = false;
   }
 
   getAvatarColorForWorkgroupId(workgroupId) {
-    return this.ConfigService.getAvatarColorForWorkgroupId(workgroupId);
+    return this.configService.getAvatarColorForWorkgroupId(workgroupId);
   }
 }
-
-export default VLEController;

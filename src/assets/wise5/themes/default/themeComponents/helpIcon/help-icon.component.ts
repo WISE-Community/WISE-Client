@@ -2,7 +2,7 @@
 
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HtmlDialog } from '../../../../directives/html-dialog/html-dialog';
+import { DialogWithCloseComponent } from '../../../../directives/dialog-with-close/dialog-with-close.component';
 
 @Component({
   selector: 'help-icon',
@@ -34,10 +34,9 @@ export class HelpIconComponent {
   constructor(public dialog: MatDialog) {}
 
   showRubric() {
-    this.dialog.open(HtmlDialog, {
+    this.dialog.open(DialogWithCloseComponent, {
       data: {
         content: this.content,
-        isShowCloseButton: true,
         title: $localize`Rubric`
       }
     });
