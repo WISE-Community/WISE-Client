@@ -13,6 +13,9 @@
           "options": {
             "allowedCommonJsDependencies": [
               "angular",
+              "fabric",
+              "dom-autoscroller",
+              "drawing-tool",
               "jquery",
               "rxjs/internal/BehaviorSubject",
               "canvg",
@@ -34,7 +37,7 @@
               {
                 "glob": "**/*",
                 "input": "src/assets/",
-                "ignore": ["**/*.scss"],
+                "ignore": ["**/*.scss", "**/*.md"],
                 "output": "/assets/"
               },
               "src/favicon.ico",
@@ -81,6 +84,17 @@
               "outputPath": "dist/",
               "baseHref": "/"
             },
+            "development": {
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "namedChunks": true,
+              "aot": true,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "budgets": []
+            },
             "es": {
               "localize": ["es"]
             },
@@ -110,6 +124,9 @@
             "production": {
               "browserTarget": "wise:build:production"
             },
+            "development": {
+              "browserTarget": "wise:build:development"
+            },
             "es": {
               "browserTarget": "wise:build:es"
             },
@@ -128,7 +145,8 @@
             "zh-Hant": {
               "browserTarget": "wise:build:zh-Hant"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
