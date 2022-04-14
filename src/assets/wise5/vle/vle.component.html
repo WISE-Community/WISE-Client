@@ -12,7 +12,7 @@
     <div *ngIf="isEndedAndLocked" class="ended-and-locked-div">
       <span class="ended-and-locked-message">{{ endedAndLockedMessage }}</span>
     </div>
-    <node></node>
+    <node *ngIf="layoutState === 'node'"></node>
   </div>
   <notebook-report *ngIf="reportEnabled"
       [ngClass]="{'notes-visible': notesVisible, 'report-full': reportFullscreen}"
