@@ -13,9 +13,10 @@ module.exports = {
         test: /\.svg$/,
         use: [
           {
-            loader: 'svg-url-loader'
+            loader: 'url-loader'
           }
-        ]
+        ],
+        type: 'javascript/auto'
       }
     ],
   },
