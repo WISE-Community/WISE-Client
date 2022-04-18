@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TitleAndContentComponent } from '../title-and-content/title-and-content.component';
-
 import { DialogWithCloseComponent } from './dialog-with-close.component';
 
 describe('DialogWithCloseComponent', () => {
@@ -16,10 +15,7 @@ describe('DialogWithCloseComponent', () => {
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} }
       ]
-    }).compileComponents();
-  });
-
-  beforeEach(() => {
+    });
     fixture = TestBed.createComponent(DialogWithCloseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

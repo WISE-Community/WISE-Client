@@ -14,6 +14,7 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { ConceptMapService } from '../conceptMapService';
 import { DialogWithCloseComponent } from '../../../directives/dialog-with-close/dialog-with-close.component';
+import { DialogContent } from '../../../../../app/domain/dialogContent';
 
 @Component({
   selector: 'concept-map-student',
@@ -417,10 +418,7 @@ export class ConceptMapStudent extends ComponentStudent {
 
   showFeedbackInPopup(feedbackText: string): void {
     this.dialog.open(DialogWithCloseComponent, {
-      data: {
-        content: feedbackText,
-        title: $localize`Feedback`
-      }
+      data: new DialogContent($localize`Feedback`, feedbackText)
     });
   }
 

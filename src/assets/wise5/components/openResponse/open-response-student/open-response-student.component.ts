@@ -16,6 +16,7 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { OpenResponseService } from '../openResponseService';
+import { DialogContent } from '../../../../../app/domain/dialogContent';
 
 @Component({
   selector: 'open-response-student',
@@ -347,10 +348,7 @@ export class OpenResponseStudent extends ComponentStudent {
 
   private performCRaterScoring(deferred: any, componentState: any): void {
     const dialogRef = this.dialog.open(DialogWithoutCloseComponent, {
-      data: {
-        content: $localize`We are scoring your work...`,
-        title: $localize`Please Wait`
-      }
+      data: new DialogContent($localize`Please Wait`, $localize`We are scoring your work...`)
     });
     this.CRaterService.makeCRaterScoringRequest(
       this.CRaterService.getCRaterItemId(this.componentContent),

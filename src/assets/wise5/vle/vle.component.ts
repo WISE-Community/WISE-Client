@@ -12,6 +12,7 @@ import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/di
 import { UpgradeModule } from '@angular/upgrade/static';
 import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
 import { DialogWithoutCloseComponent } from '../directives/dialog-without-close/dialog-without-close.component';
+import { DialogContent } from '../../../app/domain/dialogContent';
 
 @Component({
   selector: 'vle',
@@ -205,10 +206,10 @@ export class VLEComponent implements OnInit {
       this.sessionService.showSessionWarning$.subscribe(() => {
         this.dialog
           .open(DialogWithConfirmComponent, {
-            data: {
-              content: $localize`You have been inactive for a long time. Do you want to stay logged in?`,
-              title: $localize`Session Timeout`
-            }
+            data: new DialogContent(
+              $localize`Session Timeout`,
+              $localize`You have been inactive for a long time. Do you want to stay logged in?`
+            )
           })
           .afterClosed()
           .subscribe((isRenew: boolean) => {
@@ -348,10 +349,7 @@ export class VLEComponent implements OnInit {
         }
 
         this.dialog.open(DialogWithCloseComponent, {
-          data: {
-            content: message,
-            title: $localize`Item Locked`
-          }
+          data: new DialogContent($localize`Item Locked`, message)
         });
       })
     );
@@ -412,10 +410,10 @@ export class VLEComponent implements OnInit {
 
   private pauseScreen() {
     this.pauseDialog = this.dialog.open(DialogWithoutCloseComponent, {
-      data: {
-        content: $localize`Your teacher has paused all the screens in the class.`,
-        title: $localize`Screen Paused`
-      },
+      data: new DialogContent(
+        $localize`Screen Paused`,
+        $localize`Your teacher has paused all the screens in the class.`
+      ),
       disableClose: true
     });
   }
