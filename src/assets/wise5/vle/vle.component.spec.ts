@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
@@ -109,22 +109,4 @@ describe('VLEComponent', () => {
   afterEach(() => {
     fixture.destroy();
   });
-
-  logOut();
-  pauseScreen();
 });
-
-function logOut() {
-  it('should log out', () => {
-    component.logOut();
-    expect(saveVLEEventSpy).toHaveBeenCalled();
-  });
-}
-
-function pauseScreen() {
-  it('should pause screen', () => {
-    const dialogOpenSpy = spyOn(TestBed.inject(MatDialog), 'open');
-    component.pauseScreen();
-    expect(dialogOpenSpy).toHaveBeenCalled();
-  });
-}
