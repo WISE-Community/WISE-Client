@@ -19,6 +19,7 @@ import { VLEProjectService } from '../vleProjectService';
 export class NodeComponent implements OnInit {
   autoSaveInterval: number = 60000; // in milliseconds;
   autoSaveIntervalId: any;
+  components: any[];
   dirtyComponentIds: any = [];
   dirtySubmitComponentIds: any = [];
   endedAndLockedMessage: string;
@@ -155,6 +156,7 @@ export class NodeComponent implements OnInit {
     this.node = this.projectService.getNode(this.nodeId);
     this.nodeContent = this.projectService.getNodeById(this.nodeId);
     this.nodeStatus = this.studentDataService.getNodeStatusByNodeId(this.nodeId);
+    this.components = this.getComponents();
 
     if (
       this.nodeService.currentNodeHasTransitionLogic() &&
