@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NotebookService } from '../services/notebookService';
 import { NotificationService } from '../services/notificationService';
@@ -57,7 +56,6 @@ export class VLEComponent implements OnInit {
   workgroupId: number;
 
   constructor(
-    private annotationService: AnnotationService,
     private configService: ConfigService,
     private dialog: MatDialog,
     private notebookService: NotebookService,
@@ -67,7 +65,9 @@ export class VLEComponent implements OnInit {
     private snackBar: MatSnackBar,
     private studentDataService: StudentDataService,
     private upgrade: UpgradeModule
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.workgroupId = this.configService.getWorkgroupId();
     this.navFilters = this.projectService.getFilters();
     this.navFilter = this.navFilters[0].name;
@@ -106,6 +106,101 @@ export class VLEComponent implements OnInit {
       });
     }
 
+    this.processNotifications();
+
+    // Make sure if we drop something on the page we don't navigate away
+    // https://developer.mozilla.org/En/DragDrop/Drag_Operations#drop
+    $(document.body).on('dragover', function (e) {
+      e.preventDefault();
+      return false;
+    });
+
+    $(document.body).on('drop', function (e) {
+      e.preventDefault();
+      return false;
+    });
+
+    this.themePath = this.projectService.getThemePath();
+    this.notebookItemPath = this.themePath + '/notebook/notebookItem.html';
+
+    let nodeId = null;
+    let stateParams = null;
+    let stateParamNodeId = null;
+
+    if (this.upgrade.$injector != null && this.upgrade.$injector.get('$state') != null) {
+      stateParams = this.upgrade.$injector.get('$state').params;
+    }
+
+    if (stateParams != null) {
+      stateParamNodeId = stateParams.nodeId;
+    }
+
+    if (stateParamNodeId != null && stateParamNodeId !== '') {
+      nodeId = stateParamNodeId;
+    } else {
+      /*
+       * get the node id for the latest node entered event for an active
+       * node that exists in the project
+       */
+      nodeId = this.studentDataService.getLatestNodeEnteredEventNodeIdWithExistingNode();
+    }
+
+    if (nodeId == null || nodeId === '') {
+      nodeId = this.projectService.getStartNodeId();
+    }
+
+    this.studentDataService.setCurrentNodeByNodeId(nodeId);
+
+    if (this.shouldScreenBePaused()) {
+      this.pauseScreen();
+    }
+
+    // TODO: set these variables dynamically from theme settings
+    this.layoutView = 'list'; // 'list' or 'card'
+    this.numberProject = true;
+    this.themePath = this.projectService.getThemePath();
+    this.themeSettings = this.projectService.getThemeSettings();
+    this.nodeStatuses = this.studentDataService.nodeStatuses;
+    this.idToOrder = this.projectService.idToOrder;
+    this.workgroupId = this.configService.getWorkgroupId();
+    this.rootNode = this.projectService.getProjectRootNode();
+    this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
+    this.notebookConfig = this.notebookService.getNotebookConfig();
+    this.currentNode = this.studentDataService.getCurrentNode();
+
+    // set current notebook type filter to first enabled type
+    if (this.notebookConfig.enabled) {
+      for (var type in this.notebookConfig.itemTypes) {
+        let prop = this.notebookConfig.itemTypes[type];
+        if (this.notebookConfig.itemTypes.hasOwnProperty(type) && prop.enabled) {
+          this.notebookFilter = type;
+          break;
+        }
+      }
+    }
+
+    this.setLayoutState();
+    this.initializeSubscriptions();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+    this.sessionService.broadcastExit();
+  }
+
+  private initializeSubscriptions(): void {
+    this.subscribeToShowSessionWarning();
+    this.subscribeToCurrentNodeChanged();
+    this.subscribeToNotificationChanged();
+    this.subscribeToPauseScreen();
+    this.subscribeToNotesVisible();
+    this.subscribeToReportFullScreen();
+    this.subscribeToNodeClickLocked();
+    this.subscribeToServerConnectionStatus();
+    this.subscribeToViewCurrentAmbientNotification();
+  }
+
+  private subscribeToShowSessionWarning(): void {
     this.subscriptions.add(
       this.sessionService.showSessionWarning$.subscribe(() => {
         this.dialog
@@ -125,7 +220,9 @@ export class VLEComponent implements OnInit {
           });
       })
     );
+  }
 
+  private subscribeToCurrentNodeChanged(): void {
     this.subscriptions.add(
       this.studentDataService.currentNodeChanged$.subscribe(({ previousNode }) => {
         let currentNode = this.studentDataService.getCurrentNode();
@@ -173,16 +270,21 @@ export class VLEComponent implements OnInit {
             eventData
           );
         }
+
+        this.setLayoutState();
       })
     );
+  }
 
-    this.processNotifications();
+  private subscribeToNotificationChanged(): void {
     this.subscriptions.add(
       this.notificationService.notificationChanged$.subscribe(() => {
         this.processNotifications();
       })
     );
+  }
 
+  private subscribeToPauseScreen(): void {
     this.subscriptions.add(
       this.studentDataService.pauseScreen$.subscribe((doPause: boolean) => {
         if (doPause) {
@@ -192,7 +294,9 @@ export class VLEComponent implements OnInit {
         }
       })
     );
+  }
 
+  private subscribeToNotesVisible(): void {
     this.subscriptions.add(
       this.notebookService.notesVisible$.subscribe((notesVisible: boolean) => {
         this.notesVisible = notesVisible;
@@ -203,117 +307,17 @@ export class VLEComponent implements OnInit {
         }
       })
     );
+  }
 
+  private subscribeToReportFullScreen(): void {
     this.subscriptions.add(
       this.notebookService.reportFullScreen$.subscribe((full: boolean) => {
         this.reportFullscreen = full;
       })
     );
+  }
 
-    // Make sure if we drop something on the page we don't navigate away
-    // https://developer.mozilla.org/En/DragDrop/Drag_Operations#drop
-    $(document.body).on('dragover', function (e) {
-      e.preventDefault();
-      return false;
-    });
-
-    $(document.body).on('drop', function (e) {
-      e.preventDefault();
-      return false;
-    });
-
-    this.themePath = this.projectService.getThemePath();
-    this.notebookItemPath = this.themePath + '/notebook/notebookItem.html';
-
-    let nodeId = null;
-    let stateParams = null;
-    let stateParamNodeId = null;
-
-    if (this.upgrade.$injector != null && this.upgrade.$injector.get('$state') != null) {
-      stateParams = this.upgrade.$injector.get('$state').params;
-    }
-
-    if (stateParams != null) {
-      stateParamNodeId = stateParams.nodeId;
-    }
-
-    if (stateParamNodeId != null && stateParamNodeId !== '') {
-      nodeId = stateParamNodeId;
-    } else {
-      /*
-       * get the node id for the latest node entered event for an active
-       * node that exists in the project
-       */
-      nodeId = this.studentDataService.getLatestNodeEnteredEventNodeIdWithExistingNode();
-    }
-
-    if (nodeId == null || nodeId === '') {
-      nodeId = this.projectService.getStartNodeId();
-    }
-
-    this.studentDataService.setCurrentNodeByNodeId(nodeId);
-
-    const runStatus = this.studentDataService.getRunStatus();
-    if (runStatus != null) {
-      let pause = false;
-      const periodId = this.configService.getPeriodId();
-      if (periodId != null) {
-        const periods = runStatus.periods;
-        if (periods != null) {
-          for (const tempPeriod of periods) {
-            if (periodId === tempPeriod.periodId) {
-              if (tempPeriod.paused) {
-                pause = true;
-                break;
-              }
-            }
-          }
-        }
-      }
-
-      if (pause) {
-        this.pauseScreen();
-      }
-    }
-
-    // TODO: set these variables dynamically from theme settings
-    this.layoutView = 'list'; // 'list' or 'card'
-    this.numberProject = true;
-
-    this.themePath = this.projectService.getThemePath();
-    this.themeSettings = this.projectService.getThemeSettings();
-
-    this.nodeStatuses = this.studentDataService.nodeStatuses;
-    this.idToOrder = this.projectService.idToOrder;
-
-    this.workgroupId = this.configService.getWorkgroupId();
-
-    this.rootNode = this.projectService.getProjectRootNode();
-    this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
-
-    this.notebookConfig = this.notebookService.getNotebookConfig();
-    this.currentNode = this.studentDataService.getCurrentNode();
-
-    // set current notebook type filter to first enabled type
-    if (this.notebookConfig.enabled) {
-      for (var type in this.notebookConfig.itemTypes) {
-        let prop = this.notebookConfig.itemTypes[type];
-        if (this.notebookConfig.itemTypes.hasOwnProperty(type) && prop.enabled) {
-          this.notebookFilter = type;
-          break;
-        }
-      }
-    }
-
-    this.setLayoutState();
-
-    this.subscriptions.add(
-      this.studentDataService.currentNodeChanged$.subscribe(() => {
-        this.currentNode = this.studentDataService.getCurrentNode();
-        this.setLayoutState();
-      })
-    );
-
+  private subscribeToNodeClickLocked(): void {
     this.subscriptions.add(
       this.studentDataService.nodeClickLocked$.subscribe(({ nodeId }) => {
         let message = $localize`Sorry, you cannot view this item yet.`;
@@ -351,7 +355,9 @@ export class VLEComponent implements OnInit {
         });
       })
     );
+  }
 
+  private subscribeToServerConnectionStatus(): void {
     this.subscriptions.add(
       this.notificationService.serverConnectionStatus$.subscribe((isConnected) => {
         if (isConnected) {
@@ -361,8 +367,9 @@ export class VLEComponent implements OnInit {
         }
       })
     );
+  }
 
-    // handle request for notification dismiss codes
+  private subscribeToViewCurrentAmbientNotification(): void {
     this.subscriptions.add(
       this.notificationService.viewCurrentAmbientNotification$.subscribe((args) => {
         this.notificationService.displayAmbientNotification(args.notification);
@@ -370,19 +377,26 @@ export class VLEComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-    this.sessionService.broadcastExit();
-  }
-
-  processNotifications(): void {
+  private processNotifications(): void {
     this.notifications = this.notificationService.notifications;
     this.newNotifications = this.notificationService.getNewNotifications();
   }
 
-  logOut(eventName = 'logOut') {
+  private shouldScreenBePaused(): boolean {
+    const runStatus = this.studentDataService.getRunStatus();
+    const periodId = this.configService.getPeriodId();
+    const periods = runStatus.periods;
+    for (const tempPeriod of periods) {
+      if (periodId === tempPeriod.periodId) {
+        if (tempPeriod.paused) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private logOut(eventName = 'logOut') {
     const nodeId = null;
     const componentId = null;
     const componentType = null;
@@ -396,17 +410,7 @@ export class VLEComponent implements OnInit {
       });
   }
 
-  loadRoot() {
-    this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(
-      this.projectService.rootNode.id
-    );
-  }
-
-  mouseMoved() {
-    this.sessionService.mouseMoved();
-  }
-
-  pauseScreen() {
+  private pauseScreen() {
     this.pauseDialog = this.dialog.open(DialogWithoutCloseComponent, {
       data: {
         content: $localize`Your teacher has paused all the screens in the class.`,
@@ -416,121 +420,16 @@ export class VLEComponent implements OnInit {
     });
   }
 
-  unPauseScreen() {
+  private unPauseScreen() {
     this.pauseDialog.close();
     this.pauseDialog = null;
-  }
-
-  isPreview() {
-    return this.configService.isPreview();
-  }
-
-  /**
-   * Returns WISE API
-   */
-  getWISEAPI() {
-    return {
-      /**
-       * Registers a function that will be invoked before the componentState is saved to the server
-       * @param nodeId the node id
-       * @param componentId the component id
-       * @param additionalProcessingFunction the function to register for the specified node and
-       * component
-       */
-      registerAdditionalProcessingFunction: (nodeId, componentId, additionalProcessingFunction) => {
-        this.projectService.addAdditionalProcessingFunction(
-          nodeId,
-          componentId,
-          additionalProcessingFunction
-        );
-      },
-      /**
-       * Create an auto score annotation
-       * @param runId the run id
-       * @param periodId the period id
-       * @param nodeId the node id
-       * @param componentId the component id
-       * @param toWorkgroupId the student workgroup id
-       * @param data the annotation data
-       * @returns the auto score annotation
-       */
-      createAutoScoreAnnotation: (nodeId, componentId, data) => {
-        let runId = this.configService.getRunId();
-        let periodId = this.configService.getPeriodId();
-        let toWorkgroupId = this.configService.getWorkgroupId();
-
-        return this.annotationService.createAutoScoreAnnotation(
-          runId,
-          periodId,
-          nodeId,
-          componentId,
-          toWorkgroupId,
-          data
-        );
-      },
-      /**
-       * Create an auto comment annotation
-       * @param runId the run id
-       * @param periodId the period id
-       * @param nodeId the node id
-       * @param componentId the component id
-       * @param toWorkgroupId the student workgroup id
-       * @param data the annotation data
-       * @returns the auto comment annotation
-       */
-      createAutoCommentAnnotation: (nodeId, componentId, data) => {
-        let runId = this.configService.getRunId();
-        let periodId = this.configService.getPeriodId();
-        let toWorkgroupId = this.configService.getWorkgroupId();
-
-        return this.annotationService.createAutoCommentAnnotation(
-          runId,
-          periodId,
-          nodeId,
-          componentId,
-          toWorkgroupId,
-          data
-        );
-      },
-      /**
-       * Gets the latest annotation for the specified node, component, and type
-       * @param nodeId
-       * @param componentId
-       * @param annotationType
-       * @returns {the|Object}
-       */
-      getLatestAnnotationForComponent: (nodeId, componentId, annotationType) => {
-        let params = {
-          nodeId: nodeId,
-          componentId: componentId,
-          type: annotationType
-        };
-        return this.annotationService.getLatestAnnotation(params);
-      },
-      /**
-       * Updates the annotation locally and on the server
-       * @param annotation
-       */
-      updateAnnotation: (annotation) => {
-        this.annotationService.saveAnnotation(annotation);
-      },
-      /**
-       * Returns the maxScore for the specified node and component
-       * @param nodeId the node id
-       * @param componentId the component id
-       * @returns the max score for the component
-       */
-      getMaxScoreForComponent: (nodeId, componentId) => {
-        return this.projectService.getMaxScoreForComponent(nodeId, componentId);
-      }
-    };
   }
 
   /**
    * Set the layout state of the vle
    * @param state string specifying state (e.g. 'notebook'; optional)
    */
-  setLayoutState(state: string = null) {
+  private setLayoutState(state: string = null) {
     let layoutState = 'nav'; // default layout state
     if (state) {
       layoutState = state;
@@ -571,7 +470,7 @@ export class VLEComponent implements OnInit {
     this.layoutState = layoutState;
   }
 
-  handleServerDisconnect() {
+  private handleServerDisconnect() {
     if (!this.connectionLostShown) {
       this.snackBar.open(
         $localize`Error: Data is not being saved! Check your internet connection.`
@@ -580,11 +479,7 @@ export class VLEComponent implements OnInit {
     }
   }
 
-  handleServerReconnect() {
+  private handleServerReconnect() {
     this.connectionLostShown = false;
-  }
-
-  getAvatarColorForWorkgroupId(workgroupId) {
-    return this.configService.getAvatarColorForWorkgroupId(workgroupId);
   }
 }
