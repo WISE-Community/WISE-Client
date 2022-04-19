@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
@@ -12,15 +11,12 @@ let fixture: ComponentFixture<TableShowWorkComponent>;
 let component: TableShowWorkComponent;
 
 describe('TableShowWorkComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [TableShowWorkComponent],
       providers: [ConfigService, ProjectService, SessionService, UpgradeModule, UtilService]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(TableShowWorkComponent);
     const componentContent = {
       isDataExplorerEnabled: false

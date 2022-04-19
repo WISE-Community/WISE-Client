@@ -9,7 +9,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
+import { AuthorUrlParametersComponent } from '../../../../../app/authoring-tool/author-url-parameters/author-url-parameters.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -31,8 +31,8 @@ export class MockConfigService {}
 let component: EmbeddedAuthoring;
 let fixture: ComponentFixture<EmbeddedAuthoring>;
 
-describe('EmbeddedAuthoring', () => {
-  configureTestSuite(() => {
+describe('EmbeddedAuthoringComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -47,7 +47,7 @@ describe('EmbeddedAuthoring', () => {
         ReactiveFormsModule,
         UpgradeModule
       ],
-      declarations: [EmbeddedAuthoring, EditComponentPrompt],
+      declarations: [EmbeddedAuthoring, EditComponentPrompt, AuthorUrlParametersComponent],
       providers: [
         AnnotationService,
         ConfigService,
@@ -64,9 +64,6 @@ describe('EmbeddedAuthoring', () => {
       ],
       schemas: []
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(EmbeddedAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();

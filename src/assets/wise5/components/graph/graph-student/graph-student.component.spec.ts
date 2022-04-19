@@ -7,7 +7,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Point } from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -43,8 +42,8 @@ const sampleData = [
 ];
 let studentDataChangedSpy: jasmine.Spy;
 
-describe('GraphStudent', () => {
-  configureTestSuite(() => {
+describe('GraphStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
@@ -72,9 +71,6 @@ describe('GraphStudent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(GraphStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,

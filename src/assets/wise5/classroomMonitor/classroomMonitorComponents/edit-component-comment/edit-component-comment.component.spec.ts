@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
 import { EditComponentCommentComponent } from './edit-component-comment.component';
 
@@ -16,7 +15,7 @@ let component: EditComponentCommentComponent;
 let fixture: ComponentFixture<EditComponentCommentComponent>;
 
 describe('EditComponentCommentComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
       declarations: [EditComponentCommentComponent],
@@ -24,8 +23,6 @@ describe('EditComponentCommentComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     annotationService = TestBed.inject(AnnotationService);
-  });
-  beforeEach(() => {
     fixture = TestBed.createComponent(EditComponentCommentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

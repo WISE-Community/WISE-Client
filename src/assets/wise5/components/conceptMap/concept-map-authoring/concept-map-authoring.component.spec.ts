@@ -9,7 +9,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -32,7 +31,7 @@ let component: ConceptMapAuthoring;
 let fixture: ComponentFixture<ConceptMapAuthoring>;
 
 describe('ConceptMapAuthoring', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -64,9 +63,6 @@ describe('ConceptMapAuthoring', () => {
       ],
       schemas: []
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ConceptMapAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();

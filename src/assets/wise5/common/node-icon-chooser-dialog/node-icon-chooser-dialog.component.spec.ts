@@ -1,6 +1,5 @@
 import { NodeIconChooserDialog } from './node-icon-chooser-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { configureTestSuite } from 'ng-bullet';
 import { TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -42,7 +41,7 @@ class MockProjectService {
 let fixture;
 let component;
 describe('NodeIconChooserDialog', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NodeIconChooserDialog],
       providers: [
@@ -52,8 +51,6 @@ describe('NodeIconChooserDialog', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-  beforeEach(() => {
     fixture = TestBed.createComponent(NodeIconChooserDialog);
     component = fixture.componentInstance;
     component.node = Object.assign(new Node(), node1);

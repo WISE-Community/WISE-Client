@@ -8,10 +8,10 @@ const cityValue = 'Berkeley';
 const walkToSchoolValue = 'Walk_to_school';
 
 describe('AuthorUrlParametersComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [AuthorUrlParametersComponent]
-    }).compileComponents();
+    });
   });
 
   beforeEach(() => {

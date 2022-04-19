@@ -6,7 +6,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Observable, config, BehaviorSubject } from 'rxjs';
 import { UtilService } from './services/util.service';
-import { configureTestSuite } from 'ng-bullet';
 import { Announcement } from './domain/announcement';
 import { ConfigService } from './services/config.service';
 import { Config } from './domain/config';
@@ -67,7 +66,7 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   environment.production = true;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
@@ -86,25 +85,37 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the app', waitForAsync(() => {
-    expect(component).toBeTruthy();
-  }));
+  it(
+    'should create the app',
+    waitForAsync(() => {
+      expect(component).toBeTruthy();
+    })
+  );
 
-  it(`should have as title 'app'`, waitForAsync(() => {
-    expect(component.title).toEqual('app');
-  }));
+  it(
+    `should have as title 'app'`,
+    waitForAsync(() => {
+      expect(component.title).toEqual('app');
+    })
+  );
 
-  it(`should show announcement banner and hide when dismissed`, waitForAsync(() => {
-    component.hasAnnouncement = true;
-    fixture.detectChanges();
-    const shadowRoot: DocumentFragment = fixture.debugElement.nativeElement;
-    expect(shadowRoot.querySelector('app-announcement')).toBeTruthy();
-    component.dismissAnnouncement();
-    fixture.detectChanges();
-    expect(shadowRoot.querySelector('app-announcement')).toBeFalsy();
-  }));
+  it(
+    `should show announcement banner and hide when dismissed`,
+    waitForAsync(() => {
+      component.hasAnnouncement = true;
+      fixture.detectChanges();
+      const shadowRoot: DocumentFragment = fixture.debugElement.nativeElement;
+      expect(shadowRoot.querySelector('app-announcement')).toBeTruthy();
+      component.dismissAnnouncement();
+      fixture.detectChanges();
+      expect(shadowRoot.querySelector('app-announcement')).toBeFalsy();
+    })
+  );
 
-  it(`should set Google Analytics tracking code`, waitForAsync(() => {
-    expect(component.googleAnalyticsId).toEqual('UA-XXXXXX-1');
-  }));
+  it(
+    `should set Google Analytics tracking code`,
+    waitForAsync(() => {
+      expect(component.googleAnalyticsId).toEqual('UA-XXXXXX-1');
+    })
+  );
 });

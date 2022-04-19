@@ -9,7 +9,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -31,8 +30,8 @@ export class MockConfigService {}
 let component: DrawAuthoring;
 let fixture: ComponentFixture<DrawAuthoring>;
 
-describe('DrawAuthoring', () => {
-  configureTestSuite(() => {
+describe('DrawAuthoringComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -64,9 +63,6 @@ describe('DrawAuthoring', () => {
       ],
       schemas: []
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(DrawAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();

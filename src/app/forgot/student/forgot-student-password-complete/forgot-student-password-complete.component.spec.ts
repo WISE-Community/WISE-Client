@@ -3,7 +3,6 @@ import { ForgotStudentPasswordCompleteComponent } from './forgot-student-passwor
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { configureTestSuite } from 'ng-bullet';
 
 describe('ForgotStudentPasswordCompleteComponent', () => {
   let component: ForgotStudentPasswordCompleteComponent;
@@ -13,15 +12,12 @@ describe('ForgotStudentPasswordCompleteComponent', () => {
     return fixture.debugElement.nativeElement.querySelector('button');
   };
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotStudentPasswordCompleteComponent],
       imports: [RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ForgotStudentPasswordCompleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

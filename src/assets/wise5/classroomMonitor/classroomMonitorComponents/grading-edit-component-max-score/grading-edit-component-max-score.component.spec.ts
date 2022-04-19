@@ -1,4 +1,3 @@
-import { configureTestSuite } from 'ng-bullet';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GradingEditComponentMaxScoreComponent } from './grading-edit-component-max-score.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -19,7 +18,7 @@ let projectService: TeacherProjectService;
 class MockService {}
 
 describe('GradingEditComponentMaxScoreComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
       declarations: [GradingEditComponentMaxScoreComponent],
@@ -33,8 +32,6 @@ describe('GradingEditComponentMaxScoreComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     projectService = TestBed.inject(TeacherProjectService);
-  });
-  beforeEach(() => {
     fixture = TestBed.createComponent(GradingEditComponentMaxScoreComponent);
     component = fixture.componentInstance;
     saveProjectSpy = spyOn(projectService, 'saveProject').and.callFake(() => {});

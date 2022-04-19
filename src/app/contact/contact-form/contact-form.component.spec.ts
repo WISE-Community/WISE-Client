@@ -11,7 +11,6 @@ import { ConfigService } from '../../services/config.service';
 import { StudentService } from '../../student/student.service';
 import { User } from '../../domain/user';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { configureTestSuite } from 'ng-bullet';
 import { LibraryService } from '../../services/library.service';
 import { Config } from '../../domain/config';
 
@@ -53,25 +52,27 @@ describe('ContactFormComponent', () => {
   let component: ContactFormComponent;
   let fixture: ComponentFixture<ContactFormComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ContactFormComponent],
-      imports: [
-        BrowserAnimationsModule,
-        RouterTestingModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatInputModule
-      ],
-      providers: [
-        { provide: ConfigService, useClass: MockConfigService },
-        { provide: UserService, useClass: MockUserService },
-        { provide: StudentService, useClass: MockStudentService },
-        { provide: LibraryService, useClass: MockLibraryService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ContactFormComponent],
+        imports: [
+          BrowserAnimationsModule,
+          RouterTestingModule,
+          ReactiveFormsModule,
+          MatSelectModule,
+          MatInputModule
+        ],
+        providers: [
+          { provide: ConfigService, useClass: MockConfigService },
+          { provide: UserService, useClass: MockUserService },
+          { provide: StudentService, useClass: MockStudentService },
+          { provide: LibraryService, useClass: MockLibraryService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ContactFormComponent);

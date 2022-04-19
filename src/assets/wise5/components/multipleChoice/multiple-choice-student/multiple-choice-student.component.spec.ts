@@ -7,7 +7,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
@@ -122,8 +121,8 @@ function createComponent(choiceType: string, choices: any[]): any {
   };
 }
 
-describe('MultipleChoiceStudent', () => {
-  configureTestSuite(() => {
+describe('MultipleChoiceStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -152,9 +151,6 @@ describe('MultipleChoiceStudent', () => {
       ],
       schemas: []
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(MultipleChoiceStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,

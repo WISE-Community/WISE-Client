@@ -11,7 +11,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -33,8 +32,8 @@ export class MockConfigService {}
 let component: GraphAuthoring;
 let fixture: ComponentFixture<GraphAuthoring>;
 
-describe('GraphAuthoring', () => {
-  configureTestSuite(() => {
+describe('GraphAuthoringComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -68,9 +67,6 @@ describe('GraphAuthoring', () => {
       ],
       schemas: []
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(GraphAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
