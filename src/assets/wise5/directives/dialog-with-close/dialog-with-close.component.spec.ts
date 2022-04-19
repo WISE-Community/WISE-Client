@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TitleAndContentComponent } from '../title-and-content/title-and-content.component';
 import { DialogWithCloseComponent } from './dialog-with-close.component';
 
 describe('DialogWithCloseComponent', () => {
@@ -10,7 +9,7 @@ describe('DialogWithCloseComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule],
-      declarations: [DialogWithCloseComponent, TitleAndContentComponent],
+      declarations: [DialogWithCloseComponent],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} }

@@ -1,4 +1,4 @@
-export class DialogContent {
+export class DialogData {
   content: string;
   title: string;
 

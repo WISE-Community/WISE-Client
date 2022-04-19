@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TitleAndContentComponent } from '../title-and-content/title-and-content.component';
 import { DialogWithConfirmComponent } from './dialog-with-confirm.component';
 
 describe('DialogWithConfirmComponent', () => {
@@ -10,7 +9,7 @@ describe('DialogWithConfirmComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule],
-      declarations: [DialogWithConfirmComponent, TitleAndContentComponent],
+      declarations: [DialogWithConfirmComponent],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} }

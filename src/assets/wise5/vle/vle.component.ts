@@ -12,7 +12,7 @@ import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/di
 import { UpgradeModule } from '@angular/upgrade/static';
 import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
 import { DialogWithoutCloseComponent } from '../directives/dialog-without-close/dialog-without-close.component';
-import { DialogContent } from '../../../app/domain/dialogContent';
+import { DialogData } from '../../../app/domain/dialogData';
 
 @Component({
   selector: 'vle',
@@ -206,7 +206,7 @@ export class VLEComponent implements OnInit {
       this.sessionService.showSessionWarning$.subscribe(() => {
         this.dialog
           .open(DialogWithConfirmComponent, {
-            data: new DialogContent(
+            data: new DialogData(
               $localize`Session Timeout`,
               $localize`You have been inactive for a long time. Do you want to stay logged in?`
             )
@@ -349,7 +349,7 @@ export class VLEComponent implements OnInit {
         }
 
         this.dialog.open(DialogWithCloseComponent, {
-          data: new DialogContent($localize`Item Locked`, message)
+          data: new DialogData($localize`Item Locked`, message)
         });
       })
     );
@@ -410,7 +410,7 @@ export class VLEComponent implements OnInit {
 
   private pauseScreen() {
     this.pauseDialog = this.dialog.open(DialogWithoutCloseComponent, {
-      data: new DialogContent(
+      data: new DialogData(
         $localize`Screen Paused`,
         $localize`Your teacher has paused all the screens in the class.`
       ),

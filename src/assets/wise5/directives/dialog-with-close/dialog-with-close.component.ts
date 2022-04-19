@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { DialogWithoutCloseComponent } from '../dialog-without-close/dialog-without-close.component';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'dialog-with-close',
   templateUrl: './dialog-with-close.component.html'
 })
-export class DialogWithCloseComponent extends DialogWithoutCloseComponent {}
+export class DialogWithCloseComponent extends DialogComponent {}
