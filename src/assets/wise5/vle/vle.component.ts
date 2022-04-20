@@ -13,6 +13,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
 import { DialogWithoutCloseComponent } from '../directives/dialog-without-close/dialog-without-close.component';
 import { DialogData } from '../../../app/domain/dialogData';
+import { AnnotationService } from '../services/annotationService';
 
 @Component({
   selector: 'vle',
@@ -57,6 +58,7 @@ export class VLEComponent implements OnInit {
   workgroupId: number;
 
   constructor(
+    private annotationService: AnnotationService,
     private configService: ConfigService,
     private dialog: MatDialog,
     private notebookService: NotebookService,
@@ -461,5 +463,105 @@ export class VLEComponent implements OnInit {
 
   private handleServerReconnect() {
     this.connectionLostShown = false;
+  }
+
+  /**
+   * Returns WISE API
+   */
+  getWISEAPI() {
+    return {
+      /**
+       * Registers a function that will be invoked before the componentState is saved to the server
+       * @param nodeId the node id
+       * @param componentId the component id
+       * @param additionalProcessingFunction the function to register for the specified node and component
+       */
+      registerAdditionalProcessingFunction: (nodeId, componentId, additionalProcessingFunction) => {
+        this.projectService.addAdditionalProcessingFunction(
+          nodeId,
+          componentId,
+          additionalProcessingFunction
+        );
+      },
+      /**
+       * Create an auto score annotation
+       * @param runId the run id
+       * @param periodId the period id
+       * @param nodeId the node id
+       * @param componentId the component id
+       * @param toWorkgroupId the student workgroup id
+       * @param data the annotation data
+       * @returns the auto score annotation
+       */
+      createAutoScoreAnnotation: (nodeId, componentId, data) => {
+        let runId = this.configService.getRunId();
+        let periodId = this.configService.getPeriodId();
+        let toWorkgroupId = this.configService.getWorkgroupId();
+
+        return this.annotationService.createAutoScoreAnnotation(
+          runId,
+          periodId,
+          nodeId,
+          componentId,
+          toWorkgroupId,
+          data
+        );
+      },
+      /**
+       * Create an auto comment annotation
+       * @param runId the run id
+       * @param periodId the period id
+       * @param nodeId the node id
+       * @param componentId the component id
+       * @param toWorkgroupId the student workgroup id
+       * @param data the annotation data
+       * @returns the auto comment annotation
+       */
+      createAutoCommentAnnotation: (nodeId, componentId, data) => {
+        let runId = this.configService.getRunId();
+        let periodId = this.configService.getPeriodId();
+        let toWorkgroupId = this.configService.getWorkgroupId();
+
+        return this.annotationService.createAutoCommentAnnotation(
+          runId,
+          periodId,
+          nodeId,
+          componentId,
+          toWorkgroupId,
+          data
+        );
+      },
+      /**
+       * Gets the latest annotation for the specified node, component, and type
+       * @param nodeId
+       * @param componentId
+       * @param annotationType
+       * @returns {the|Object}
+       */
+      getLatestAnnotationForComponent: (nodeId, componentId, annotationType) => {
+        let params = {
+          nodeId: nodeId,
+          componentId: componentId,
+          type: annotationType
+        };
+        return this.annotationService.getLatestAnnotation(params);
+      },
+      /**
+       * Updates the annotation locally and on the server
+       * @param annotation
+       */
+      updateAnnotation: (annotation) => {
+        this.annotationService.saveAnnotation(annotation);
+      },
+      /**
+       * Returns the maxScore for the specified node and component
+       * @param nodeId the node id
+       * @param componentId the component id
+       * @returns the max score for the component
+       */
+      getMaxScoreForComponent: (nodeId, componentId) => {
+        return this.projectService.getMaxScoreForComponent(nodeId, componentId);
+      }
+    };
   }
 }
