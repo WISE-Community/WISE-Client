@@ -126,18 +126,10 @@ export class VLEComponent implements OnInit {
     this.themePath = this.projectService.getThemePath();
     this.notebookItemPath = this.themePath + '/notebook/notebookItem.html';
 
+    const stateParams = this.upgrade.$injector.get('$state').params;
+    const stateParamNodeId = stateParams.nodeId;
+
     let nodeId = null;
-    let stateParams = null;
-    let stateParamNodeId = null;
-
-    if (this.upgrade.$injector != null && this.upgrade.$injector.get('$state') != null) {
-      stateParams = this.upgrade.$injector.get('$state').params;
-    }
-
-    if (stateParams != null) {
-      stateParamNodeId = stateParams.nodeId;
-    }
-
     if (stateParamNodeId != null && stateParamNodeId !== '') {
       nodeId = stateParamNodeId;
     } else {

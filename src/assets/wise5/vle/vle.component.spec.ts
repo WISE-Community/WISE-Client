@@ -30,16 +30,33 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { NavigationComponent } from '../themes/default/navigation/navigation.component';
+import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/step-tools.component';
+import { MatSelectModule } from '@angular/material/select';
+import { NodeStatusIcon } from '../themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
+import { NodeIconComponent } from '../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
+import { Node } from '../common/Node';
+import { FormsModule } from '@angular/forms';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
+const group0Id: string = 'group0';
+const node1Id: string = 'node1';
 let saveVLEEventSpy: jasmine.Spy;
+
+class MockUpgradeModule {
+  $injector: any = {
+    get() {
+      return { params: {}, go: () => {} };
+    }
+  };
+}
 
 describe('VLEComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        FormsModule,
         HttpClientTestingModule,
         MatBadgeModule,
         MatDialogModule,
@@ -48,6 +65,7 @@ describe('VLEComponent', () => {
         MatMenuModule,
         MatProgressSpinnerModule,
         MatToolbarModule,
+        MatSelectModule,
         MatSidenavModule,
         MatSnackBarModule,
         UpgradeModule
@@ -55,7 +73,10 @@ describe('VLEComponent', () => {
       declarations: [
         NavigationComponent,
         NodeComponent,
+        NodeIconComponent,
+        NodeStatusIcon,
         NotebookNotesComponent,
+        StepToolsComponent,
         StudentAccountMenuComponent,
         TopBarComponent,
         VLEComponent
@@ -72,6 +93,7 @@ describe('VLEComponent', () => {
         StudentAssetService,
         StudentDataService,
         TagService,
+        { provide: UpgradeModule, useClass: MockUpgradeModule },
         UtilService,
         VLEProjectService
       ]
@@ -85,18 +107,26 @@ describe('VLEComponent', () => {
     spyOn(vleProjectService, 'getProjectScript').and.returnValue(null);
     spyOn(vleProjectService, 'getStartNodeId').and.returnValue('node1');
     spyOn(vleProjectService, 'getThemeSettings').and.returnValue({});
-    spyOn(vleProjectService, 'getProjectRootNode').and.returnValue({ id: 'group0' });
+    spyOn(vleProjectService, 'getProjectRootNode').and.returnValue({ id: group0Id });
     spyOn(vleProjectService, 'getNodeById').and.returnValue({});
     const projectService = TestBed.inject(ProjectService);
     spyOn(projectService, 'getSpaces').and.returnValue([]);
-    spyOn(projectService, 'getProjectRootNode').and.returnValue({ id: 'group0' });
+    spyOn(projectService, 'getProjectRootNode').and.returnValue({ id: group0Id });
     const notebookService = TestBed.inject(NotebookService);
     spyOn(notebookService, 'isNotebookEnabled').and.returnValue(false);
     const configService = TestBed.inject(ConfigService);
     spyOn(configService, 'isEndedAndLocked').and.returnValue(false);
     spyOn(configService, 'isRunActive').and.returnValue(true);
     const studentDataService = TestBed.inject(StudentDataService);
-    spyOn(studentDataService, 'getNodeStatuses').and.returnValue({ group0: { progress: {} } });
+    spyOn(studentDataService, 'getNodeStatuses').and.returnValue({
+      group0: { progress: {} },
+      node1: { icon: '' }
+    });
+    spyOn(studentDataService, 'getRunStatus').and.returnValue({
+      periods: [{ periodId: 1, periodName: '1' }]
+    });
+    spyOn(studentDataService, 'getCurrentNode').and.returnValue({ id: node1Id });
+    spyOn(studentDataService, 'getCurrentNodeId').and.returnValue(node1Id);
     saveVLEEventSpy = spyOn(studentDataService, 'saveVLEEvent');
     saveVLEEventSpy.and.callFake(() => {
       return new Promise(() => {});
@@ -108,5 +138,9 @@ describe('VLEComponent', () => {
 
   afterEach(() => {
     fixture.destroy();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 });
