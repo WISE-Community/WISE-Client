@@ -373,15 +373,7 @@ export class VLEComponent implements OnInit {
   private shouldScreenBePaused(): boolean {
     const runStatus = this.studentDataService.getRunStatus();
     const periodId = this.configService.getPeriodId();
-    const periods = runStatus.periods;
-    for (const tempPeriod of periods) {
-      if (periodId === tempPeriod.periodId) {
-        if (tempPeriod.paused) {
-          return true;
-        }
-      }
-    }
-    return false;
+    return runStatus.periods.some((period: any) => period.periodId === periodId && period.paused);
   }
 
   private logOut(eventName = 'logOut') {
