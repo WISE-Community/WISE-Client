@@ -30,6 +30,7 @@ class MockNodeService {
   createNewComponentState() {
     return {};
   }
+  broadcastDoneRenderingComponent() {}
 }
 
 let component: GraphStudent;

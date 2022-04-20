@@ -33,8 +33,6 @@ module.exports = function (config) {
     autoWatch: true,
     autoWatchBatchDelay: 500,
     browsers: ['Chrome','ChromeHeadlessNoSandbox'],
-    browserNoActivityTimeout: 60000,
-    browserDisconnectTimeout: 60000,
     singleRun: false,
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
