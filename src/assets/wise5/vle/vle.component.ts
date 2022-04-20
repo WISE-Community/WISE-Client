@@ -324,30 +324,20 @@ export class VLEComponent implements OnInit {
         let message = $localize`Sorry, you cannot view this item yet.`;
         const node = this.projectService.getNodeById(nodeId);
         if (node != null) {
-          // get the constraints that affect this node
           const constraints = this.projectService.getConstraintsThatAffectNode(node);
           this.projectService.orderConstraints(constraints);
-
           if (constraints != null && constraints.length > 0) {
-            // get the node title the student is trying to go to
             const nodeTitle = this.projectService.getNodePositionAndTitleByNodeId(nodeId);
             message = $localize`<p>To visit <b>${nodeTitle}</b> you need to:</p><ul>`;
           }
-
-          // loop through all the constraints that affect this node
           for (let c = 0; c < constraints.length; c++) {
             const constraint = constraints[c];
-
-            // check if the constraint has been satisfied
             if (constraint != null && !this.studentDataService.evaluateConstraint(constraint)) {
-              // the constraint has not been satisfied and is still active
-              // get the message that describes how to disable the constraint
               message += `<li>${this.projectService.getConstraintMessage(nodeId, constraint)}</li>`;
             }
           }
           message += `</ul>`;
         }
-
         this.dialog.open(DialogWithCloseComponent, {
           data: new DialogData($localize`Item Locked`, message)
         });
