@@ -6,7 +6,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { AuthorUrlParametersComponent } from '../../../../../app/authoring-tool/author-url-parameters/author-url-parameters.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -19,25 +21,26 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
-import { ConceptMapService } from '../conceptMapService';
-import { ConceptMapAuthoring } from './concept-map-authoring.component';
+import { EmbeddedService } from '../embeddedService';
+import { EmbeddedAuthoring } from './embedded-authoring.component';
 
 @NgModule({
-  declarations: [ConceptMapAuthoring, EditComponentPrompt],
+  declarations: [EmbeddedAuthoring, EditComponentPrompt, AuthorUrlParametersComponent],
   imports: [
     CommonModule,
     FormsModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatDialogModule,
+    MatRadioModule,
     UpgradeModule
   ],
   providers: [
     AnnotationService,
-    ConceptMapService,
     ConfigService,
+    EmbeddedService,
     NodeService,
     ProjectAssetService,
     ProjectService,
@@ -48,6 +51,6 @@ import { ConceptMapAuthoring } from './concept-map-authoring.component';
     TeacherProjectService,
     UtilService
   ],
-  exports: [ConceptMapAuthoring, EditComponentPrompt]
+  exports: [EmbeddedAuthoring, EditComponentPrompt, AuthorUrlParametersComponent]
 })
-export class ConceptMapAuthoringModule {}
+export class EmbeddedAuthoringModule {}

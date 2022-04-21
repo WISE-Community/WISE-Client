@@ -1,19 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
-import { MockNodeService } from '../../common/MockNodeService';
-import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapAuthoring } from './concept-map-authoring.component';
 import { ConceptMapAuthoringModule } from './concept-map-authoring.module';
 
@@ -92,23 +80,7 @@ const componentContent = {
 describe('ConceptMapAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, ConceptMapAuthoringModule, HttpClientTestingModule],
-      declarations: [],
-      providers: [
-        AnnotationService,
-        ConceptMapService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        ProjectAssetService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        TeacherProjectService,
-        UtilService
-      ],
-      schemas: []
+      imports: [BrowserAnimationsModule, ConceptMapAuthoringModule, HttpClientTestingModule]
     });
     fixture = TestBed.createComponent(ConceptMapAuthoring);
     component = fixture.componentInstance;

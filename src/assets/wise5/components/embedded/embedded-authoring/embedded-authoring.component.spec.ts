@@ -1,30 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { AuthorUrlParametersComponent } from '../../../../../app/authoring-tool/author-url-parameters/author-url-parameters.component';
-import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
-import { MockNodeService } from '../../common/MockNodeService';
-import { EmbeddedService } from '../embeddedService';
 import { EmbeddedAuthoring } from './embedded-authoring.component';
+import { EmbeddedAuthoringModule } from './embedded-authoring.module';
 
 export class MockConfigService {}
 
@@ -34,35 +13,7 @@ let fixture: ComponentFixture<EmbeddedAuthoring>;
 describe('EmbeddedAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        BrowserModule,
-        FormsModule,
-        HttpClientTestingModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatRadioModule,
-        ReactiveFormsModule,
-        UpgradeModule
-      ],
-      declarations: [EmbeddedAuthoring, EditComponentPrompt, AuthorUrlParametersComponent],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        EmbeddedService,
-        { provide: NodeService, useClass: MockNodeService },
-        ProjectAssetService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        TeacherProjectService,
-        UtilService
-      ],
-      schemas: []
+      imports: [BrowserAnimationsModule, EmbeddedAuthoringModule, HttpClientTestingModule]
     });
     fixture = TestBed.createComponent(EmbeddedAuthoring);
     component = fixture.componentInstance;
