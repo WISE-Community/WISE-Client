@@ -12,7 +12,6 @@ import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/di
 import { UpgradeModule } from '@angular/upgrade/static';
 import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
 import { DialogWithoutCloseComponent } from '../directives/dialog-without-close/dialog-without-close.component';
-import { DialogData } from '../../../app/domain/dialogData';
 import { AnnotationService } from '../services/annotationService';
 
 @Component({
@@ -200,10 +199,10 @@ export class VLEComponent implements OnInit {
       this.sessionService.showSessionWarning$.subscribe(() => {
         this.dialog
           .open(DialogWithConfirmComponent, {
-            data: new DialogData(
-              $localize`Session Timeout`,
-              $localize`You have been inactive for a long time. Do you want to stay logged in?`
-            )
+            data: {
+              content: $localize`You have been inactive for a long time. Do you want to stay logged in?`,
+              title: $localize`Session Timeout`
+            }
           })
           .afterClosed()
           .subscribe((isRenew: boolean) => {
@@ -333,7 +332,10 @@ export class VLEComponent implements OnInit {
           message += `</ul>`;
         }
         this.dialog.open(DialogWithCloseComponent, {
-          data: new DialogData($localize`Item Locked`, message)
+          data: {
+            content: message,
+            title: $localize`Item Locked`
+          }
         });
       })
     );
@@ -386,10 +388,10 @@ export class VLEComponent implements OnInit {
 
   private pauseScreen() {
     this.pauseDialog = this.dialog.open(DialogWithoutCloseComponent, {
-      data: new DialogData(
-        $localize`Screen Paused`,
-        $localize`Your teacher has paused all the screens in the class.`
-      ),
+      data: {
+        content: $localize`Your teacher has paused all the screens in the class.`,
+        title: $localize`Screen Paused`
+      },
       disableClose: true
     });
   }
