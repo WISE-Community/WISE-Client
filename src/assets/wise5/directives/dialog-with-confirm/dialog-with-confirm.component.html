@@ -1,5 +1,5 @@
-<h1 mat-dialog-title>{{ dialogData.title }}</h1>
-<div mat-dialog-content>{{ dialogData.content }}</div>
+<h1 mat-dialog-title [innerHTML]="dialogData.title"></h1>
+<div mat-dialog-content [innerHTML]="dialogData.content"></div>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
   <button mat-button class="mat-primary" [mat-dialog-close]="false" i18n>No</button>
   <button mat-raised-button class="mat-primary" [mat-dialog-close]="true" cdkFocusInitial i18n>
