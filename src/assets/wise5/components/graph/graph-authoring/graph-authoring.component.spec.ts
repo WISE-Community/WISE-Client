@@ -70,9 +70,6 @@ describe('GraphAuthoringComponent', () => {
     fixture = TestBed.createComponent(GraphAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
-    );
     spyOn(
       TestBed.inject(TeacherProjectService),
       'getComponentByNodeIdAndComponentId'

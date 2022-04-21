@@ -54,9 +54,6 @@ describe('AnimationAuthoring', () => {
     fixture = TestBed.createComponent(AnimationAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
-    );
     spyOn(
       TestBed.inject(TeacherProjectService),
       'getComponentByNodeIdAndComponentId'
