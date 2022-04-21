@@ -387,7 +387,7 @@ export class VLEComponent implements OnInit {
   }
 
   private pauseScreen() {
-    this.pauseDialog = this.dialog.open(DialogWithoutCloseComponent, {
+    this.dialog.open(DialogWithoutCloseComponent, {
       data: {
         content: $localize`Your teacher has paused all the screens in the class.`,
         title: $localize`Screen Paused`
@@ -397,8 +397,7 @@ export class VLEComponent implements OnInit {
   }
 
   private unPauseScreen() {
-    this.pauseDialog.close();
-    this.pauseDialog = null;
+    this.dialog.closeAll();
   }
 
   /**
