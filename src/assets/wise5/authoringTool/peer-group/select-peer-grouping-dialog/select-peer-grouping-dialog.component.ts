@@ -1,29 +1,29 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PeerGroupSettingsAuthoringService } from '../../../services/peerGroupSettingsAuthoringService';
-import { CreateNewPeerGroupSettingsDialogComponent } from '../create-new-peer-group-settings-dialog/create-new-peer-group-settings-dialog.component';
+import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
+import { CreateNewPeerGroupingDialogComponent } from '../create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
 import { PeerGroupSettings } from '../peerGroupSettings';
 
 @Component({
   selector: 'select-peer-grouping-dialog',
-  templateUrl: './select-peer-group-settings-dialog.component.html',
-  styleUrls: ['./select-peer-group-settings-dialog.component.scss']
+  templateUrl: './select-peer-grouping-dialog.component.html',
+  styleUrls: ['./select-peer-grouping-dialog.component.scss']
 })
-export class SelectPeerGroupSettingsDialogComponent implements OnInit {
+export class SelectPeerGroupingDialogComponent implements OnInit {
   peerGroupings: any[] = [];
 
   constructor(
     private dialog: MatDialog,
-    private dialogRef: MatDialogRef<SelectPeerGroupSettingsDialogComponent>,
+    private dialogRef: MatDialogRef<SelectPeerGroupingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private selectedPeerGroupSettingsTag: string,
-    private peerGroupSettingsAuthoringService: PeerGroupSettingsAuthoringService
+    private peerGroupingAuthoringService: PeerGroupingAuthoringService
   ) {}
 
   ngOnInit(): void {
-    this.peerGroupSettingsAuthoringService.getPeerGroupSettings().forEach((peerGroupSettings) => {
+    this.peerGroupingAuthoringService.getPeerGroupSettings().forEach((peerGroupSettings) => {
       this.peerGroupings.push({
         peerGroupSettings: peerGroupSettings,
-        stepsUsedIn: this.peerGroupSettingsAuthoringService.getStepsUsedIn(peerGroupSettings.tag)
+        stepsUsedIn: this.peerGroupingAuthoringService.getStepsUsedIn(peerGroupSettings.tag)
       });
     });
   }
@@ -31,7 +31,7 @@ export class SelectPeerGroupSettingsDialogComponent implements OnInit {
   addPeerGroupSettings(peerGroupSettingsToAdd: PeerGroupSettings): void {
     this.peerGroupings.push({
       peerGroupSettings: peerGroupSettingsToAdd,
-      stepsUsedIn: this.peerGroupSettingsAuthoringService.getStepsUsedIn(peerGroupSettingsToAdd.tag)
+      stepsUsedIn: this.peerGroupingAuthoringService.getStepsUsedIn(peerGroupSettingsToAdd.tag)
     });
   }
 
@@ -49,7 +49,7 @@ export class SelectPeerGroupSettingsDialogComponent implements OnInit {
 
   showNewPeerGroupSettingsAuthoring(): void {
     this.dialog
-      .open(CreateNewPeerGroupSettingsDialogComponent, {
+      .open(CreateNewPeerGroupingDialogComponent, {
         width: '40%'
       })
       .afterClosed()
@@ -68,6 +68,6 @@ export class SelectPeerGroupSettingsDialogComponent implements OnInit {
         break;
       }
     }
-    this.peerGroupSettingsAuthoringService.deletePeerGroupSettings(tag);
+    this.peerGroupingAuthoringService.deletePeerGroupSettings(tag);
   }
 }

@@ -26,10 +26,10 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <select-peer-group-settings-authoring
+  <select-peer-grouping-authoring
       [peerGroupSettingsTag]="authoringComponentContent.peerGroupActivityTag"
       (peerGroupActivityTagChanged)="peerGroupActivityTagChanged($event)">
-  </select-peer-group-settings-authoring>
+  </select-peer-grouping-authoring>
   <mat-checkbox
       [(ngModel)]="authoringComponentContent.isShowMyWork"
       (ngModelChange)="componentChanged()"

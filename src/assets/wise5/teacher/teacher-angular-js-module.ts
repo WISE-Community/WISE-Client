@@ -17,6 +17,7 @@ import { ClassroomStatusService } from '../services/classroomStatusService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherWebSocketService } from '../services/teacherWebSocketService';
 import { StepToolsComponent } from '../common/stepTools/step-tools.component';
+import { PeerGroupingAuthoringService } from '../../../../src/assets/wise5/services/peerGroupingAuthoringService';
 
 import '../classroomMonitor/classroom-monitor.module';
 import '../authoringTool/authoring-tool.module';
@@ -32,10 +33,7 @@ angular
   .factory('InsertComponentService', downgradeInjectable(InsertComponentService))
   .factory('MilestoneService', downgradeInjectable(MilestoneService))
   .factory('MoveNodesService', downgradeInjectable(MoveNodesService))
-  .factory(
-    'PeerGroupSettingsAuthoringService',
-    downgradeInjectable(PeerGroupSettingsAuthoringService)
-  )
+  .factory('PeerGroupingAuthoringService', downgradeInjectable(PeerGroupingAuthoringService))
   .factory('PeerGroupService', downgradeInjectable(PeerGroupService))
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
   .factory('SpaceService', downgradeInjectable(SpaceService))
@@ -59,6 +57,3 @@ angular
         });
     }
   ]);
-function PeerGroupSettingsAuthoringService(PeerGroupSettingsAuthoringService: any): any {
-  throw new Error('Function not implemented.');
-}

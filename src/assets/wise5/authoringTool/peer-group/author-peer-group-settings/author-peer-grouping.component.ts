@@ -2,7 +2,7 @@ import { Directive, OnInit } from '@angular/core';
 import { PeerGroupSettings } from '../peerGroupSettings';
 
 @Directive()
-export abstract class AuthorPeerGroupSettingsComponent implements OnInit {
+export abstract class AuthorPeerGroupingComponent implements OnInit {
   availableLogic: any[] = [
     { name: 'Random', value: 'random' },
     { name: 'Manual', value: 'manual' }

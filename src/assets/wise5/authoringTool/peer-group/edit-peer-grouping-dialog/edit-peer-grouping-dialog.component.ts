@@ -1,19 +1,19 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PeerGroupSettingsAuthoringService } from '../../../services/peerGroupSettingsAuthoringService';
+import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { UtilService } from '../../../services/utilService';
-import { AuthorPeerGroupSettingsComponent } from '../author-peer-group-settings/author-peer-group-settings.component';
+import { AuthorPeerGroupingComponent } from '../author-peer-group-settings/author-peer-grouping.component';
 
 @Component({
-  selector: 'app-edit-peer-group-settings-dialog',
-  templateUrl: './edit-peer-group-settings-dialog.component.html',
-  styleUrls: ['./edit-peer-group-settings-dialog.component.scss']
+  selector: 'edit-peer-grouping-dialog',
+  templateUrl: './edit-peer-grouping-dialog.component.html',
+  styleUrls: ['./edit-peer-grouping-dialog.component.scss']
 })
-export class EditPeerGroupSettingsDialogComponent extends AuthorPeerGroupSettingsComponent {
+export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public peerGrouping: any,
-    private dialogRef: MatDialogRef<EditPeerGroupSettingsDialogComponent>,
-    private peerGroupSettingsAuthoringService: PeerGroupSettingsAuthoringService,
+    private dialogRef: MatDialogRef<EditPeerGroupingDialogComponent>,
+    private peerGroupingAuthoringService: PeerGroupingAuthoringService,
     private utilService: UtilService
   ) {
     super();
@@ -27,7 +27,7 @@ export class EditPeerGroupSettingsDialogComponent extends AuthorPeerGroupSetting
 
   save(): void {
     this.peerGrouping.peerGroupSettings = this.peerGroupSettings;
-    this.peerGroupSettingsAuthoringService
+    this.peerGroupingAuthoringService
       .updatePeerGroupSettings(this.peerGroupSettings)
       .subscribe(() => {
         this.dialogRef.close();

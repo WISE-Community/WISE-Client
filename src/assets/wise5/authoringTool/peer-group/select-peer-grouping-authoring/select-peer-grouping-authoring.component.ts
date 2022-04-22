@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PeerGroupSettingsAuthoringService } from '../../../services/peerGroupSettingsAuthoringService';
-import { SelectPeerGroupSettingsDialogComponent } from '../select-peer-group-settings-dialog/select-peer-group-settings-dialog.component';
+import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
+import { SelectPeerGroupingDialogComponent } from '../select-peer-grouping-dialog/select-peer-grouping-dialog.component';
 
 @Component({
-  selector: 'select-peer-group-settings-authoring',
-  templateUrl: './select-peer-group-settings-authoring.component.html',
-  styleUrls: ['./select-peer-group-settings-authoring.component.scss']
+  selector: 'select-peer-grouping-authoring',
+  templateUrl: './select-peer-grouping-authoring.component.html',
+  styleUrls: ['./select-peer-grouping-authoring.component.scss']
 })
-export class SelectPeerGroupSettingsAuthoringComponent implements OnInit {
+export class SelectPeerGroupingAuthoringComponent implements OnInit {
   peerGroupSettingsName: string;
 
   @Input()
@@ -19,7 +19,7 @@ export class SelectPeerGroupSettingsAuthoringComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private peerGroupSettingsAuthoringService: PeerGroupSettingsAuthoringService
+    private peerGroupingAuthoringService: PeerGroupingAuthoringService
   ) {}
 
   ngOnInit(): void {
@@ -29,13 +29,13 @@ export class SelectPeerGroupSettingsAuthoringComponent implements OnInit {
   }
 
   setPeerGroupSettingsName(peerGroupSettingsTag: string): void {
-    this.peerGroupSettingsName = this.peerGroupSettingsAuthoringService.getPeerGroupSettingsName(
+    this.peerGroupSettingsName = this.peerGroupingAuthoringService.getPeerGroupSettingsName(
       peerGroupSettingsTag
     );
   }
 
   selectGroupingLogic(): void {
-    const dialogRef = this.dialog.open(SelectPeerGroupSettingsDialogComponent, {
+    const dialogRef = this.dialog.open(SelectPeerGroupingDialogComponent, {
       data: this.peerGroupSettingsTag,
       width: '50%'
     });
