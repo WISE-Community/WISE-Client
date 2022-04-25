@@ -219,8 +219,8 @@ export class VLEComponent implements OnInit {
   private subscribeToCurrentNodeChanged(): void {
     this.subscriptions.add(
       this.studentDataService.currentNodeChanged$.subscribe(({ previousNode }) => {
-        let currentNode = this.studentDataService.getCurrentNode();
-        let currentNodeId = currentNode.id;
+        this.currentNode = this.studentDataService.getCurrentNode();
+        let currentNodeId = this.currentNode.id;
 
         this.studentDataService.updateStackHistory(currentNodeId);
         this.studentDataService.updateVisitedNodesHistory(currentNodeId);
@@ -252,9 +252,9 @@ export class VLEComponent implements OnInit {
           category = 'Navigation';
           eventName = 'nodeEntered';
           eventData = {
-            nodeId: currentNode.id
+            nodeId: currentNodeId
           };
-          eventNodeId = currentNode.id;
+          eventNodeId = currentNodeId;
           this.studentDataService.saveVLEEvent(
             eventNodeId,
             componentId,
