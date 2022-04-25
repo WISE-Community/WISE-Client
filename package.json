@@ -11,13 +11,13 @@
   ],
   "dependencies": {
     "@angular/animations": "^12.0.4",
-    "@angular/cdk": "^11.2.5",
+    "@angular/cdk": "^12.2.13",
     "@angular/common": "^12.0.4",
     "@angular/compiler": "^12.0.4",
     "@angular/core": "^12.0.4",
-    "@angular/flex-layout": "^11.0.0-beta.33",
+    "@angular/flex-layout": "^12.0.0-beta.35",
     "@angular/forms": "^12.2.16",
-    "@angular/material": "^11.2.13",
+    "@angular/material": "^12.2.13",
     "@angular/platform-browser": "^12.0.4",
     "@angular/platform-browser-dynamic": "^12.0.4",
     "@angular/router": "^12.2.16",
@@ -128,7 +128,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "serve-dev": "node ./node_modules/@angular/cli/bin/ng serve --hmr --host 0.0.0.0",
+    "serve-dev": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng serve --hmr --host 0.0.0.0",
     "build-prod": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --configuration production; gulp copy-site-styles",
     "bundle-report": "node ./node_modules/webpack-bundle-analyzer/lib/bin/analyzer.js dist/stats.json",
     "prettier-format": "prettier --config .prettierrc 'src' --write",
