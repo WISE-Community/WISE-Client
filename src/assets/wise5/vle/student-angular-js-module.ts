@@ -100,16 +100,7 @@ export function createStudentAngularJSModule(type = 'preview') {
                 }
               ]
             },
-            templateProvider: [
-              '$http',
-              'ProjectService',
-              ($http, ProjectService) => {
-                let themePath = ProjectService.getThemePath();
-                return $http.get(themePath + '/vle.html').then((response) => {
-                  return response.data;
-                });
-              }
-            ]
+            component: 'vle'
           })
           .state(type === 'preview' ? 'root.preview' : 'root.run', {
             url: type === 'preview' ? '/unit/:projectId' : '/unit/:runId',
