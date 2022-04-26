@@ -182,6 +182,10 @@ export class VLEComponent implements OnInit {
     this.sessionService.broadcastExit();
   }
 
+  closeNotes(): void {
+    this.notebookService.closeNotes();
+  }
+
   private initializeSubscriptions(): void {
     this.subscribeToShowSessionWarning();
     this.subscribeToCurrentNodeChanged();

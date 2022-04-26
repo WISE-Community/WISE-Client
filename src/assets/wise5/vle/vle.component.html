@@ -1,24 +1,30 @@
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/angular-material.css" />
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/vle.css" />
 <style ng-bind-html="projectStyle"></style>
+<mat-drawer-container [hasBackdrop]="false">
 <mat-drawer-container class="layout-fill">
   <mat-drawer #drawer mode="over" position="end">
     <notebook-notes [config]="notebookConfig"></notebook-notes>
   </mat-drawer>
-  <top-bar></top-bar>
-  <step-tools *ngIf="layoutState === 'node'" show-position="numberProject"></step-tools>
-  <div [ngClass]="{'l-nav': layoutState === 'nav', 'l-node': layoutState === 'node'}">
-    <navigation *ngIf="layoutState === 'nav'"></navigation>
-    <div *ngIf="isEndedAndLocked" class="ended-and-locked-div">
-      <span class="ended-and-locked-message">{{ endedAndLockedMessage }}</span>
+  <mat-drawer-content>
+    <top-bar></top-bar>
+    <step-tools *ngIf="layoutState === 'node'"
+        class="control-bg-bg mat-elevation-z1"
+        show-position="numberProject"></step-tools>
+    <div class="vle-content" [ngClass]="{'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node'}">
+      <navigation *ngIf="layoutState === 'nav'"></navigation>
+      <div *ngIf="isEndedAndLocked"
+          class="ended-and-locked-div">
+        <span class="ended-and-locked-message">{{ endedAndLockedMessage }}</span>
+      </div>
+      <node *ngIf="layoutState === 'node'"></node>
     </div>
-    <node *ngIf="layoutState === 'node'"></node>
-  </div>
-  <notebook-report *ngIf="reportEnabled"
-      [ngClass]="{'notes-visible': notesVisible, 'report-full': reportFullscreen}"
-      [config]="notebookConfig">
-  </notebook-report>
-  <notebook-launcher *ngIf="notesEnabled && !notesVisible"
-      [notebookConfig]="notebookConfig">
-  </notebook-launcher>
+    <notebook-report *ngIf="reportEnabled"
+        [ngClass]="{'notes-visible': notesVisible, 'report-full': reportFullscreen}"
+        [config]="notebookConfig">
+    </notebook-report>
+    <notebook-launcher *ngIf="notesEnabled && !notesVisible"
+        [notebookConfig]="notebookConfig">
+    </notebook-launcher>
+  </mat-drawer-content>
 </mat-drawer-container>
