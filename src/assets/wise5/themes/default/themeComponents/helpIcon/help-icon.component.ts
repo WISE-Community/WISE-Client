@@ -37,8 +37,10 @@ export class HelpIconComponent {
     this.dialog.open(DialogWithCloseComponent, {
       data: {
         content: this.content,
-        title: $localize`Rubric`
-      }
+        title: $localize`Rubric`,
+        scroll: true
+      },
+      panelClass: 'dialog-lg'
     });
   }
 }
