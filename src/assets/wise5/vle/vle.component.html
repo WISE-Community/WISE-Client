@@ -10,7 +10,9 @@
     <step-tools *ngIf="layoutState === 'node'"
         class="control-bg-bg mat-elevation-z1"
         show-position="numberProject"></step-tools>
-    <div class="vle-content" [ngClass]="{'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node'}">
+    <div id="content"
+        class="vle-content"
+        [ngClass]="{'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node'}">
       <div *ngIf="isEndedAndLocked"
           class="notice node-notice"
           fxLayout="row"
