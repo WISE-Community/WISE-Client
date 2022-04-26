@@ -11,12 +11,17 @@
         class="control-bg-bg mat-elevation-z1"
         show-position="numberProject"></step-tools>
     <div class="vle-content" [ngClass]="{'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node'}">
-      <navigation *ngIf="layoutState === 'nav'"></navigation>
       <div *ngIf="isEndedAndLocked"
-          class="ended-and-locked-div">
-        <span class="ended-and-locked-message">{{ endedAndLockedMessage }}</span>
+          class="notice node-notice"
+          fxLayout="row"
+          fxLayoutAlign="center center">
+        <span>
+          <mat-icon class="warn">lock</mat-icon>&nbsp;
+        </span>
+        <span class="warn md-body-2">{{ endedAndLockedMessage }}</span>
       </div>
       <node *ngIf="layoutState === 'node'"></node>
+      <navigation *ngIf="layoutState === 'nav'"></navigation>
     </div>
     <notebook-report *ngIf="reportEnabled"
         [ngClass]="{'notes-visible': notesVisible, 'report-full': reportFullscreen}"

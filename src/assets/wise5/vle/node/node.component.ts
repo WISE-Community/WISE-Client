@@ -25,7 +25,6 @@ export class NodeComponent implements OnInit {
   endedAndLockedMessage: string;
   idToIsPulsing: any = {};
   isDisabled: boolean;
-  isEndedAndLocked: boolean;
   mode: any;
   node: Node;
   nodeContent: any;
@@ -69,12 +68,6 @@ export class NodeComponent implements OnInit {
     this.workgroupId = this.configService.getWorkgroupId();
     this.teacherWorkgroupId = this.configService.getTeacherWorkgroupId();
     this.isDisabled = !this.configService.isRunActive();
-
-    this.isEndedAndLocked = this.configService.isEndedAndLocked();
-    if (this.isEndedAndLocked) {
-      const endDate = this.configService.getPrettyEndDate();
-      this.endedAndLockedMessage = $localize`This unit ended on ${endDate}. You can no longer save new work.`;
-    }
 
     this.saveMessage = {
       text: '',

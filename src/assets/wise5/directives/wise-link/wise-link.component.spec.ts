@@ -52,7 +52,7 @@ describe('WiseLinkComponent', () => {
     component.nodeId = nodeId1;
     component.goToStep();
     expect(closeAllSpy).toHaveBeenCalled();
-    expect(closeNotesSpy).toHaveBeenCalledWith(false);
+    expect(closeNotesSpy).toHaveBeenCalled();
     expect(setCurrentNodeByNodeIdSpy).toHaveBeenCalledWith(nodeId1);
   });
 });

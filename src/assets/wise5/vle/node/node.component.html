@@ -1,11 +1,4 @@
 <div class="l-constrained">
-  <div *ngIf="isEndedAndLocked"
-      class="notice node-notice"
-      fxLayout="row"
-      fxLayoutAlign="center start">
-    <span><mat-icon class="warn">lock</mat-icon>&nbsp;</span>
-    <span class="warn md-body-2">{{ endedAndLockedMessage }}</span>
-  </div>
   <div class="node-content mat-elevation-z1"
       style="border-color: {{nodeStatus?.icon?.color}}; position: relative;"
       fxLayout="row wrap">
