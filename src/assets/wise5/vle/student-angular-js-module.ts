@@ -85,9 +85,8 @@ export function createStudentAngularJSModule(type = 'preview') {
     .directive('vle', downgradeComponent({ component: VLEComponent }) as angular.IDirectiveFactory)
     .config([
       '$stateProvider',
-      '$translatePartialLoaderProvider',
       '$mdThemingProvider',
-      ($stateProvider, $translatePartialLoaderProvider, $mdThemingProvider) => {
+      ($stateProvider, $mdThemingProvider) => {
         $stateProvider
           .state('root', {
             url: type === 'preview' ? '/preview' : '/student',
@@ -216,15 +215,6 @@ export function createStudentAngularJSModule(type = 'preview') {
                     return StudentWebSocketService.initialize();
                   }
                 }
-              ],
-              language: [
-                '$translate',
-                'ConfigService',
-                'config',
-                ($translate, ConfigService, config) => {
-                  let locale = ConfigService.getLocale(); // defaults to "en"
-                  $translate.use(locale);
-                }
               ]
             },
             views: {
@@ -267,7 +257,6 @@ export function createStudentAngularJSModule(type = 'preview') {
             url: '/*path',
             template: ''
           });
-        $translatePartialLoaderProvider.addPart('vle/i18n');
         $mdThemingProvider
           .theme('default')
           .primaryPalette('primary')
