@@ -321,6 +321,10 @@
           <context context-type="linenumber">144</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-close/dialog-with-close.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/generate-image-dialog/generate-image-dialog.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
@@ -1628,7 +1632,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <target state="translated">Enviar</target>
       </trans-unit>
@@ -6314,7 +6318,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">208</context>
+          <context context-type="linenumber">211</context>
         </context-group>
         <target state="translated">Feedback del Docente</target>
       </trans-unit>
@@ -6370,7 +6374,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <target state="translated">Guardar</target>
       </trans-unit>
@@ -9932,7 +9936,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">402</context>
+          <context context-type="linenumber">405</context>
         </context-group>
         <target state="translated">Opciones</target>
       </trans-unit>
@@ -11166,7 +11170,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <target state="translated">Paso Anterior</target>
       </trans-unit>
@@ -11182,11 +11186,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <target state="translated">Seleccionar un Paso</target>
       </trans-unit>
@@ -11210,7 +11214,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <target state="translated">Paso Siguiente</target>
       </trans-unit>
@@ -12216,7 +12220,7 @@ Are you ready to receive feedback on this answer?</source>
         <source>Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">570</context>
+          <context context-type="linenumber">569</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
@@ -12228,7 +12232,7 @@ Are you ready to receive feedback on this answer?</source>
         <source>Auto Saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">574</context>
+          <context context-type="linenumber">573</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
@@ -12240,7 +12244,7 @@ Are you ready to receive feedback on this answer?</source>
         <source>Submitted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">578</context>
+          <context context-type="linenumber">577</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
@@ -12550,11 +12554,11 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">423</context>
+          <context context-type="linenumber">422</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">205</context>
+          <context context-type="linenumber">208</context>
         </context-group>
         <target state="translated">Retroalimentación</target>
       </trans-unit>
@@ -12562,7 +12566,7 @@ Are you ready to receive feedback on this answer?</source>
         <source>Are you sure you want to reset your work?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">1422</context>
+          <context context-type="linenumber">1421</context>
         </context-group>
         <target state="translated">¿Seguro que deseas resetear tu trabajo?</target>
       </trans-unit>
@@ -15300,7 +15304,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         <source>Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">494</context>
+          <context context-type="linenumber">497</context>
         </context-group>
         <target state="translated">La zona es correcta pero la posición es incorrecta</target>
       </trans-unit>
@@ -15308,7 +15312,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         <source>Correct</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">504</context>
+          <context context-type="linenumber">507</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
@@ -15324,7 +15328,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         <source>Incorrect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">506</context>
+          <context context-type="linenumber">509</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
@@ -16049,7 +16053,7 @@ Are you ready to submit this answer?</source>
         <source>Please Wait</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">353</context>
+          <context context-type="linenumber">352</context>
         </context-group>
         <target state="translated">Por favor esperar</target>
       </trans-unit>
@@ -16058,7 +16062,7 @@ Are you ready to submit this answer?</source>
 If this problem continues, let your teacher know and move on to the next activity. Your work will still be saved.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">374</context>
+          <context context-type="linenumber">373</context>
         </context-group>
         <target state="translated">Hubo un problema al calificar tu trabajo. Intentalo de nuevo.
 Si este problema continúa, informale a tu docente y continuá con la siguiente actividad. Tu trabajo igual se guardará.</target>
@@ -16067,7 +16071,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>This will replace your existing recording. Is this OK?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">706</context>
+          <context context-type="linenumber">705</context>
         </context-group>
         <target state="translated">Esto reemplazará la grabación existente, ¿Ok?</target>
       </trans-unit>
@@ -16075,7 +16079,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Are you sure you want to delete your recording?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">750</context>
+          <context context-type="linenumber">749</context>
         </context-group>
         <target state="translated">¿Seguro que quiere eliminar su grabación?</target>
       </trans-unit>
@@ -16923,6 +16927,22 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <target state="translated">Calificación: <x id="INTERPOLATION" equiv-text="{{annotations.score.data.value}}"/><x id="INTERPOLATION_1" equiv-text="{{maxScoreDisplay}}"/></target>
       </trans-unit>
+      <trans-unit id="3d3ae7deebc5949b0c1c78b9847886a94321d9fd" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-confirm/dialog-with-confirm.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">No</target>
+      </trans-unit>
+      <trans-unit id="82fd7e594001bd60b83e2fce92649f7686e40b3f" datatype="html">
+        <source> Yes </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-confirm/dialog-with-confirm.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <target state="needs-translation"> Yes </target>
+      </trans-unit>
       <trans-unit id="e36b49b483ff4b8995838209aa628921c87a6bf3" datatype="html">
         <source>Importing Work...</source>
         <context-group purpose="location">
@@ -17461,7 +17481,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">776</context>
+          <context context-type="linenumber">778</context>
         </context-group>
         <target state="needs-translation">StudentDataService.saveComponentEvent: component, category, event args must not be null</target>
       </trans-unit>
@@ -17469,7 +17489,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">786</context>
+          <context context-type="linenumber">788</context>
         </context-group>
         <target state="needs-translation">StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</target>
       </trans-unit>
@@ -17477,7 +17497,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">795</context>
+          <context context-type="linenumber">797</context>
         </context-group>
         <target state="needs-translation">StudentDataService.saveVLEEvent: category and event args must not be null</target>
       </trans-unit>
@@ -17605,11 +17625,11 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="translated">Planificación de Proyecto</target>
       </trans-unit>
@@ -17665,7 +17685,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">60,61</context>
+          <context context-type="linenumber">52,53</context>
         </context-group>
         <target state="needs-translation"> Save </target>
       </trans-unit>
@@ -17730,7 +17750,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Rubric</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/helpIcon/help-icon.component.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target state="translated">Rúbrica</target>
       </trans-unit>
@@ -17762,7 +17782,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Previous Item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <target state="translated">Item anterior</target>
       </trans-unit>
@@ -17770,7 +17790,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Next Item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <target state="translated">Item siguiente</target>
       </trans-unit>
@@ -17906,7 +17926,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Step Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <target state="needs-translation">Step Info</target>
       </trans-unit>
@@ -17914,7 +17934,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Teaching Tips</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <target state="needs-translation">Teaching Tips</target>
       </trans-unit>
@@ -17922,17 +17942,9 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source> Submit </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">70,71</context>
+          <context context-type="linenumber">62,63</context>
         </context-group>
         <target state="needs-translation"> Submit </target>
-      </trans-unit>
-      <trans-unit id="7117912496769621431" datatype="html">
-        <source>This unit ended on <x id="PH" equiv-text="endDate"/>. You can no longer save new work.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
-          <context context-type="linenumber">75</context>
-        </context-group>
-        <target state="needs-translation">This unit ended on <x id="PH" equiv-text="endDate"/>. You can no longer save new work.</target>
       </trans-unit>
       <trans-unit id="9fe218829514884cdd0ca2300573a4e0428c324f" datatype="html">
         <source>Alerts</source>
@@ -18047,6 +18059,78 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <target state="translated"> Las cosas de los estudiantes aparacerán acá una vez que hayas configurado la clase.
 </target>
+      </trans-unit>
+      <trans-unit id="7117912496769621431" datatype="html">
+        <source>This unit ended on <x id="PH" equiv-text="endDate"/>. You can no longer save new work.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <target state="needs-translation">This unit ended on <x id="PH" equiv-text="endDate"/>. You can no longer save new work.</target>
+      </trans-unit>
+      <trans-unit id="2304476742154607725" datatype="html">
+        <source>You have been inactive for a long time. Do you want to stay logged in?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">202</context>
+        </context-group>
+        <target state="needs-translation">You have been inactive for a long time. Do you want to stay logged in?</target>
+      </trans-unit>
+      <trans-unit id="537022937435161177" datatype="html">
+        <source>Session Timeout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">203</context>
+        </context-group>
+        <target state="needs-translation">Session Timeout</target>
+      </trans-unit>
+      <trans-unit id="3178064088723974543" datatype="html">
+        <source>Sorry, you cannot view this item yet.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">308</context>
+        </context-group>
+        <target state="needs-translation">Sorry, you cannot view this item yet.</target>
+      </trans-unit>
+      <trans-unit id="685273827497092928" datatype="html">
+        <source>&lt;p&gt;To visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt; you need to:&lt;/p&gt;&lt;ul&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">315</context>
+        </context-group>
+        <target state="needs-translation">&lt;p&gt;To visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt; you need to:&lt;/p&gt;&lt;ul&gt;</target>
+      </trans-unit>
+      <trans-unit id="2738912629247967660" datatype="html">
+        <source>Item Locked</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">328</context>
+        </context-group>
+        <target state="needs-translation">Item Locked</target>
+      </trans-unit>
+      <trans-unit id="4484876679373170309" datatype="html">
+        <source>Your teacher has paused all the screens in the class.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">378</context>
+        </context-group>
+        <target state="needs-translation">Your teacher has paused all the screens in the class.</target>
+      </trans-unit>
+      <trans-unit id="6670906177291724132" datatype="html">
+        <source>Screen Paused</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">379</context>
+        </context-group>
+        <target state="needs-translation">Screen Paused</target>
+      </trans-unit>
+      <trans-unit id="3023661788238273336" datatype="html">
+        <source>Error: Data is not being saved! Check your internet connection.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">437</context>
+        </context-group>
+        <target state="needs-translation">Error: Data is not being saved! Check your internet connection.</target>
       </trans-unit>
     </body>
   </file>
