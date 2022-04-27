@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { UtilService } from '../../../services/utilService';
-import { AuthorPeerGroupingComponent } from '../author-peer-group-settings/author-peer-grouping.component';
+import { AuthorPeerGroupingComponent } from '../author-peer-grouping-settings/author-peer-grouping.component';
 
 @Component({
   selector: 'edit-peer-grouping-dialog',
@@ -20,18 +20,14 @@ export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingComponent
   }
 
   ngOnInit(): void {
-    this.peerGroupSettings = this.utilService.makeCopyOfJSONObject(
-      this.peerGrouping.peerGroupSettings
-    );
+    this.settings = this.utilService.makeCopyOfJSONObject(this.peerGrouping.settings);
   }
 
   save(): void {
-    this.peerGrouping.peerGroupSettings = this.peerGroupSettings;
-    this.peerGroupingAuthoringService
-      .updatePeerGroupSettings(this.peerGroupSettings)
-      .subscribe(() => {
-        this.dialogRef.close();
-      });
+    this.peerGrouping.settings = this.settings;
+    this.peerGroupingAuthoringService.updatePeerGroupingSettings(this.settings).subscribe(() => {
+      this.dialogRef.close();
+    });
   }
 
   delete(): void {

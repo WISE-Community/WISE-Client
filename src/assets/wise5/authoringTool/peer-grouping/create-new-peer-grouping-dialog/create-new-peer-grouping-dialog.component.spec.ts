@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
 import { CreateNewPeerGroupingDialogComponent } from './create-new-peer-grouping-dialog.component';
 
 describe('CreateNewPeerGroupingDialogComponent', () => {
@@ -7,7 +8,9 @@ describe('CreateNewPeerGroupingDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CreateNewPeerGroupingDialogComponent]
+      imports: [PeerGroupingTestingModule],
+      declarations: [CreateNewPeerGroupingDialogComponent],
+      providers: []
     }).compileComponents();
   });
 

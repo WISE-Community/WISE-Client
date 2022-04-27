@@ -1,9 +1,9 @@
 <div fxLayoutAlign="space-between start">
   <mat-radio-button
-      [checked]="peerGrouping.peerGroupSettings.tag === selectedPeerGroupSettingsTag"
+      [checked]="peerGrouping.settings.tag === selectedTag"
       (click)="select()"
       color="primary">
-    {{ peerGrouping.peerGroupSettings.name }}
+    {{ peerGrouping.settings.name }}
   </mat-radio-button>
   <button mat-stroked-button (click)="edit()" i18n>Edit Settings</button>
 </div>
@@ -17,13 +17,13 @@
       <span *ngIf="peerGrouping.stepsUsedIn.length === 0" i18n>None</span>
     </div>
     <div>
-      <span class="field-label" i18n>Logic: </span><span>{{ peerGrouping.peerGroupSettings.logic }}</span>
+      <span class="field-label" i18n>Logic: </span><span>{{ peerGrouping.settings.logic }}</span>
     </div>
     <div>
-      <span class="field-label" i18n>Threshold: </span><span>{{ peerGrouping.peerGroupSettings.threshold }}</span>
+      <span class="field-label" i18n>Threshold: </span><span>{{ peerGrouping.settings.threshold }}</span>
     </div>
     <div>
-      <span class="field-label" i18n>Teams Per Group: </span><span>{{ peerGrouping.peerGroupSettings.maxMembershipCount }}</span>
+      <span class="field-label" i18n>Teams Per Group: </span><span>{{ peerGrouping.settings.maxMembershipCount }}</span>
     </div>
   </div>
 </div>

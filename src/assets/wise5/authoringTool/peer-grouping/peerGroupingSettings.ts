@@ -1,4 +1,4 @@
-export class PeerGroupSettings {
+export class PeerGroupingSettings {
   logic: string;
   maxMembershipCount: number;
   name: string;

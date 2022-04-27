@@ -12,20 +12,20 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
   peerGrouping: any;
 
   @Input()
-  selectedPeerGroupSettingsTag: string;
+  selectedTag: string;
 
   @Output()
-  deletePeerGroupSettingsEvent: EventEmitter<any> = new EventEmitter<any>();
+  deleteEvent: EventEmitter<any> = new EventEmitter<any>();
 
   @Output()
-  selectPeerGroupSettingsEvent: EventEmitter<string> = new EventEmitter<string>();
+  selectEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   select(): void {
-    this.selectPeerGroupSettingsEvent.emit(this.peerGrouping.peerGroupSettings.tag);
+    this.selectEvent.emit(this.peerGrouping.settings.tag);
   }
 
   edit(): void {
@@ -37,14 +37,14 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
       .afterClosed()
       .subscribe((isDelete: boolean) => {
         if (isDelete) {
-          this.deletePeerGroupSettingsEvent.emit(this.peerGrouping.peerGroupSettings.tag);
+          this.deleteEvent.emit(this.peerGrouping.settings.tag);
         }
       });
   }
 
   delete(): void {
     if (confirm($localize`Are you sure you want to delete this Peer Grouping?`)) {
-      this.deletePeerGroupSettingsEvent.emit(this.peerGrouping.peerGroupSettings.tag);
+      this.deleteEvent.emit(this.peerGrouping.settings.tag);
     }
   }
 }

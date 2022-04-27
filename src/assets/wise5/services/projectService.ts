@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionService } from './sessionService';
 import { Observable, Subject } from 'rxjs';
 import { Node } from '../common/Node';
-import { PeerGroupSettings } from '../authoringTool/peer-group/peerGroupSettings';
+import { PeerGroupingSettings } from '../authoringTool/peer-grouping/peerGroupingSettings';
 
 @Injectable()
 export class ProjectService {
@@ -3218,7 +3218,7 @@ export class ProjectService {
     this.snipImageSource.next(args);
   }
 
-  getPeerGroupSettings(): PeerGroupSettings[] {
+  getPeerGroupingSettings(): PeerGroupingSettings[] {
     if (this.project.peerGroupActivities == null) {
       this.project.peerGroupActivities = [];
     }

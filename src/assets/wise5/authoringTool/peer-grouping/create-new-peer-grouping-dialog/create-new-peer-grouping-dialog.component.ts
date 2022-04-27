@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
-import { AuthorPeerGroupingComponent } from '../author-peer-group-settings/author-peer-grouping.component';
-import { PeerGroupSettings } from '../peerGroupSettings';
+import { AuthorPeerGroupingComponent } from '../author-peer-grouping-settings/author-peer-grouping.component';
+import { PeerGroupingSettings } from '../peerGroupingSettings';
 
 @Component({
   selector: 'create-new-peer-grouping-dialog',
@@ -18,18 +18,16 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingComp
   }
 
   ngOnInit(): void {
-    this.peerGroupSettings = new PeerGroupSettings();
-    this.peerGroupSettings.logic = 'random';
-    this.peerGroupSettings.maxMembershipCount = 2;
+    this.settings = new PeerGroupingSettings();
+    this.settings.logic = 'random';
+    this.settings.maxMembershipCount = 2;
   }
 
   create(): void {
-    this.peerGroupSettings.tag = this.peerGroupingAuthoringService.getUniqueTag();
-    this.peerGroupingAuthoringService
-      .createNewPeerGroupSettings(this.peerGroupSettings)
-      .subscribe(() => {
-        this.dialogRef.close(this.peerGroupSettings);
-      });
+    this.settings.tag = this.peerGroupingAuthoringService.getUniqueTag();
+    this.peerGroupingAuthoringService.createNewPeerGroupingSettings(this.settings).subscribe(() => {
+      this.dialogRef.close(this.settings);
+    });
   }
 
   cancel(): void {
