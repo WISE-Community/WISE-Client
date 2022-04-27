@@ -183,8 +183,7 @@ export abstract class ComponentStudent {
       if (componentState != null) {
         this.setStudentWork(componentState);
         this.setParentStudentWorkIdToCurrentStudentWork(studentWorkId);
-        this.NotebookService.setNotesVisible(false);
-        this.NotebookService.setInsertMode({ insertMode: false });
+        this.NotebookService.closeNotes();
       }
     });
   }

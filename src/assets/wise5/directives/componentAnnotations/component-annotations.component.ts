@@ -1,6 +1,6 @@
 'use strict';
 
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { WiseLinkService } from '../../../../app/services/wiseLinkService';
@@ -36,6 +36,10 @@ export class ComponentAnnotationsComponent {
   showScore: boolean = true;
   studentWorkSavedToServerSubscription: Subscription;
   wiseLinkClickedHandler: any;
+  @ViewChild('wiseLinkCommunicator')
+  set aRef(ref: ElementRef) {
+    this.wiseLinkCommunicator = ref.nativeElement;
+  }
   wiseLinkCommunicator: any;
   wiseLinkCommunicatorId: string;
 
@@ -63,7 +67,6 @@ export class ComponentAnnotationsComponent {
 
   ngAfterViewInit() {
     this.processAnnotations();
-    this.wiseLinkCommunicator = document.getElementById(this.wiseLinkCommunicatorId);
     this.wiseLinkClickedHandler = this.WiseLinkService.createWiseLinkClickedHandler(this.nodeId);
     this.WiseLinkService.addWiseLinkClickedListener(
       this.wiseLinkCommunicator,

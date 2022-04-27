@@ -1,0 +1,69 @@
+
+@import
+  '~style/abstracts/functions',
+  '~style/abstracts/variables';
+
+.mat-drawer-container {
+  height: 100%;
+}
+
+step-tools {
+  display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: $toolbar-height;
+  height: $secondary-toolbar-height;
+  z-index: 3;
+}
+
+.vle-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  padding: 0;
+
+  @media (min-width: breakpoint('sm.min')) {
+    padding: 32px 16px;
+  }
+}
+
+.node-view {
+  margin-top: $toolbar-height + $secondary-toolbar-height;
+}
+
+.nav-view {
+  margin-top: $toolbar-height;
+}
+
+notebook-notes {
+  display: block;
+  width: $notebook-sidebar-width;
+
+  @media (min-width: breakpoint('sm.min')) {
+    width: $notebook-sidebar-width-gt-xs;
+  }
+}
+
+notebook-report {
+  z-index: 10;
+}
+
+.ended-and-locked-div {
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+.ended-and-locked-message {
+  border: 1px solid black;
+  border-radius: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: white;
+}

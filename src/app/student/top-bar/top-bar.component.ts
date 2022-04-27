@@ -97,8 +97,8 @@ export class TopBarComponent {
   }
 
   private setCompletionPercent(): void {
-    this.completionPercent = this.studentDataService.nodeStatuses[
-      this.projectService.rootNode.id
+    this.completionPercent = this.studentDataService.getNodeStatuses()[
+      this.projectService.getProjectRootNode().id
     ].progress.completionPct;
   }
 

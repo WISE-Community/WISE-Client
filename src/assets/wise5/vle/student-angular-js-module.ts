@@ -4,19 +4,21 @@ import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static
 import '../common-angular-js-module';
 import '../../../app/student/top-bar/topBarAngularJSModule';
 import { StudentWebSocketService } from '../services/studentWebSocketService';
-import VLEController from '../vle/vleController';
 import { VLEProjectService } from '../vle/vleProjectService';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { ComponentAnnotationsComponent } from '../directives/componentAnnotations/component-annotations.component';
 import { ComponentHeader } from '../directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../directives/component-save-submit-buttons/component-save-submit-buttons.component';
-import { NotebookLauncherComponent } from '../../../../src/app/notebook/notebook-launcher/notebook-launcher.component';
+import { NotebookLauncherComponent } from '../../../app/notebook/notebook-launcher/notebook-launcher.component';
 import { AddToNotebookButton } from '../directives/add-to-notebook-button/add-to-notebook-button.component';
 import { NavigationComponent } from '../themes/default/navigation/navigation.component';
 import { NotificationsDialogComponent } from './notifications-dialog/notifications-dialog.component';
 import { StudentAccountMenuComponent } from './student-account-menu/student-account-menu.component';
 import { StudentStatusService } from '../services/studentStatusService';
 import { NodeComponent } from './node/node.component';
+import { VLEComponent } from './vle.component';
+import { NotebookNotesComponent } from '../../../app/notebook/notebook-notes/notebook-notes.component';
+import { NotebookReportComponent } from '../../../app/notebook/notebook-report/notebook-report.component';
 
 export function createStudentAngularJSModule(type = 'preview') {
   return angular
@@ -37,14 +39,21 @@ export function createStudentAngularJSModule(type = 'preview') {
       downgradeComponent({ component: NavItemComponent }) as angular.IDirectiveFactory
     )
     .directive(
+      'notebookNotes',
+      downgradeComponent({ component: NotebookNotesComponent }) as angular.IDirectiveFactory
+    )
+    .directive(
       'notebookLauncher',
       downgradeComponent({ component: NotebookLauncherComponent }) as angular.IDirectiveFactory
+    )
+    .directive(
+      'notebookReport',
+      downgradeComponent({ component: NotebookReportComponent }) as angular.IDirectiveFactory
     )
     .directive(
       'navigation',
       downgradeComponent({ component: NavigationComponent }) as angular.IDirectiveFactory
     )
-    .controller('VLEController', VLEController)
     .directive(
       'addToNotebookButton',
       downgradeComponent({ component: AddToNotebookButton }) as angular.IDirectiveFactory
@@ -73,11 +82,11 @@ export function createStudentAngularJSModule(type = 'preview') {
       'studentAccountMenu',
       downgradeComponent({ component: StudentAccountMenuComponent }) as angular.IDirectiveFactory
     )
+    .directive('vle', downgradeComponent({ component: VLEComponent }) as angular.IDirectiveFactory)
     .config([
       '$stateProvider',
-      '$translatePartialLoaderProvider',
       '$mdThemingProvider',
-      ($stateProvider, $translatePartialLoaderProvider, $mdThemingProvider) => {
+      ($stateProvider, $mdThemingProvider) => {
         $stateProvider
           .state('root', {
             url: type === 'preview' ? '/preview' : '/student',
@@ -90,18 +99,7 @@ export function createStudentAngularJSModule(type = 'preview') {
                 }
               ]
             },
-            templateProvider: [
-              '$http',
-              'ProjectService',
-              ($http, ProjectService) => {
-                let themePath = ProjectService.getThemePath();
-                return $http.get(themePath + '/vle.html').then((response) => {
-                  return response.data;
-                });
-              }
-            ],
-            controller: 'VLEController',
-            controllerAs: 'vleController'
+            component: 'vle'
           })
           .state(type === 'preview' ? 'root.preview' : 'root.run', {
             url: type === 'preview' ? '/unit/:projectId' : '/unit/:runId',
@@ -217,15 +215,6 @@ export function createStudentAngularJSModule(type = 'preview') {
                     return StudentWebSocketService.initialize();
                   }
                 }
-              ],
-              language: [
-                '$translate',
-                'ConfigService',
-                'config',
-                ($translate, ConfigService, config) => {
-                  let locale = ConfigService.getLocale(); // defaults to "en"
-                  $translate.use(locale);
-                }
               ]
             },
             views: {
@@ -268,7 +257,6 @@ export function createStudentAngularJSModule(type = 'preview') {
             url: '/*path',
             template: ''
           });
-        $translatePartialLoaderProvider.addPart('vle/i18n');
         $mdThemingProvider
           .theme('default')
           .primaryPalette('primary')

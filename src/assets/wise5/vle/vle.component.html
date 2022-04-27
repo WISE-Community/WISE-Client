@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/assets/wise5/themes/default/style/angular-material.css" />
+<link rel="stylesheet" href="/assets/wise5/themes/default/style/vle.css" />
+<style ng-bind-html="projectStyle"></style>
+<mat-drawer-container [hasBackdrop]="false">
+  <mat-drawer #drawer mode="over" position="end" (keydown.escape)="closeNotes()">
+    <notebook-notes [config]="notebookConfig"></notebook-notes>
+  </mat-drawer>
+  <mat-drawer-content>
+    <top-bar></top-bar>
+    <step-tools *ngIf="layoutState === 'node'"
+        class="control-bg-bg mat-elevation-z1"
+        show-position="numberProject"></step-tools>
+    <div id="content"
+        class="vle-content"
+        [ngClass]="{'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node'}">
+      <div *ngIf="isEndedAndLocked"
+          class="notice node-notice"
+          fxLayout="row"
+          fxLayoutAlign="center center">
+        <span>
+          <mat-icon class="warn">lock</mat-icon>&nbsp;
+        </span>
+        <span class="warn md-body-2">{{ endedAndLockedMessage }}</span>
+      </div>
+      <node *ngIf="layoutState === 'node'"></node>
+      <navigation *ngIf="layoutState === 'nav'"></navigation>
+    </div>
+    <notebook-report *ngIf="reportEnabled"
+        [ngClass]="{'notes-visible': notesVisible, 'report-full': reportFullscreen}"
+        [config]="notebookConfig">
+    </notebook-report>
+    <notebook-launcher *ngIf="notesEnabled && !notesVisible"
+        [notebookConfig]="notebookConfig">
+    </notebook-launcher>
+  </mat-drawer-content>
+</mat-drawer-container>

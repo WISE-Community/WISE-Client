@@ -19,6 +19,10 @@ class MockProjectService {
   getThemeSettings() {
     return {};
   }
+
+  getProjectRootNode() {
+    return {};
+  }
 }
 
 describe('StudentAccountMenuComponent', () => {

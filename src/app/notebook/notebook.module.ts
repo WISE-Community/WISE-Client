@@ -49,6 +49,14 @@ import { NotebookReportComponent } from './notebook-report/notebook-report.compo
     MatTooltipModule,
     MomentModule
   ],
-  providers: [{ provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }]
+  providers: [{ provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
+  exports: [
+    NotebookParentComponent,
+    NotebookItemComponent,
+    NotebookLauncherComponent,
+    NotebookNotesComponent,
+    NotebookReportComponent,
+    NotebookReportAnnotationsComponent
+  ]
 })
 export class NotebookModule {}
