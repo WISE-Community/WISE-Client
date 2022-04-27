@@ -3,7 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Student } from '../../domain/student';
 import { StudentRun } from '../student-run';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { SocialAuthService, GoogleLoginProvider } from 'angularx-social-login';
+import { SocialAuthService, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { ConfigService } from '../../services/config.service';
 import { StudentService } from '../student.service';
 import { Router } from '@angular/router';
