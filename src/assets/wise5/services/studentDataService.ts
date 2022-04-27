@@ -202,6 +202,9 @@ export class StudentDataService extends DataService {
         .toPromise()
         .then((runStatus: any) => {
           this.runStatus = runStatus;
+          if (this.runStatus != null && this.runStatus.periods == null) {
+            this.runStatus.periods = [];
+          }
         });
     }
   }
