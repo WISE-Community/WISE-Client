@@ -44,7 +44,7 @@ describe('WiseLinkComponent', () => {
 
   it('should go to step', () => {
     const closeAllSpy = spyOn(TestBed.inject(MatDialog), 'closeAll');
-    const setNotesVisibleSpy = spyOn(TestBed.inject(NotebookService), 'setNotesVisible');
+    const closeNotesSpy = spyOn(TestBed.inject(NotebookService), 'closeNotes');
     const setCurrentNodeByNodeIdSpy = spyOn(
       TestBed.inject(StudentDataService),
       'setCurrentNodeByNodeId'
@@ -52,7 +52,7 @@ describe('WiseLinkComponent', () => {
     component.nodeId = nodeId1;
     component.goToStep();
     expect(closeAllSpy).toHaveBeenCalled();
-    expect(setNotesVisibleSpy).toHaveBeenCalledWith(false);
+    expect(closeNotesSpy).toHaveBeenCalled();
     expect(setCurrentNodeByNodeIdSpy).toHaveBeenCalledWith(nodeId1);
   });
 });

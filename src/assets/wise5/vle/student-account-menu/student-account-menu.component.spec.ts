@@ -11,11 +11,16 @@ import { StudentDataService } from '../../services/studentDataService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { StudentAccountMenuComponent } from './student-account-menu.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 class MockProjectService {
   rootNode = {};
 
   getThemeSettings() {
+    return {};
+  }
+
+  getProjectRootNode() {
     return {};
   }
 }
@@ -26,7 +31,13 @@ describe('StudentAccountMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDividerModule, MatIconModule, UpgradeModule],
+      imports: [
+        HttpClientTestingModule,
+        MatDividerModule,
+        MatIconModule,
+        MatMenuModule,
+        UpgradeModule
+      ],
       declarations: [StudentAccountMenuComponent],
       providers: [
         AnnotationService,

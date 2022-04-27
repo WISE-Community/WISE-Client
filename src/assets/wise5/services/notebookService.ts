@@ -688,6 +688,11 @@ export class NotebookService {
     this.showReportAnnotationsSource.next();
   }
 
+  closeNotes(): void {
+    this.setNotesVisible(false);
+    this.setInsertMode({ insertMode: false });
+  }
+
   setNotesVisible(value: boolean): void {
     this.notesVisibleSource.next(value);
   }

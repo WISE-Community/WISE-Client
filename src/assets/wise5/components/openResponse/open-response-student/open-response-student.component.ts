@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { timeout } from 'rxjs/operators';
-import { HtmlDialog } from '../../../directives/html-dialog/html-dialog';
+import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
 import { AnnotationService } from '../../../services/annotationService';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { ConfigService } from '../../../services/configService';
@@ -346,10 +346,9 @@ export class OpenResponseStudent extends ComponentStudent {
   }
 
   private performCRaterScoring(deferred: any, componentState: any): void {
-    const dialogRef = this.dialog.open(HtmlDialog, {
+    const dialogRef = this.dialog.open(DialogWithoutCloseComponent, {
       data: {
         content: $localize`We are scoring your work...`,
-        isShowCloseButton: false,
         title: $localize`Please Wait`
       }
     });

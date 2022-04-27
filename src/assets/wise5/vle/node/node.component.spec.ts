@@ -41,7 +41,6 @@ describe('NodeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NodeComponent);
     spyOn(TestBed.inject(ConfigService), 'isRunActive').and.returnValue(true);
-    spyOn(TestBed.inject(ConfigService), 'isEndedAndLocked').and.returnValue(false);
     spyOn(TestBed.inject(StudentDataService), 'getCurrentNode').and.returnValue({});
     spyOn(TestBed.inject(StudentDataService), 'getNodeStatusByNodeId').and.returnValue({});
     spyOn(TestBed.inject(StudentDataService), 'saveVLEEvent').and.callFake(() => {});

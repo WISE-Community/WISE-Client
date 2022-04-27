@@ -44,6 +44,9 @@ export class NavItemComponent {
       : this.item.title;
     this.currentNode = this.StudentDataService.currentNode;
     this.isCurrentNode = this.currentNode.id === this.nodeId;
+    if (this.isGroup && this.isCurrentNode) {
+      this.setExpanded();
+    }
     this.subscriptions.add(
       this.StudentDataService.navItemIsExpanded$.subscribe(({ nodeId, isExpanded }) => {
         if (nodeId === this.nodeId) {
@@ -73,8 +76,7 @@ export class NavItemComponent {
               this.item
             );
             if (this.isCurrentNode) {
-              this.expanded = true;
-              this.StudentDataService.setNavItemExpanded(this.nodeId, this.expanded);
+              this.setExpanded();
               if (prevNodeisGroup || !prevNodeIsDescendant) {
                 this.zoomToElement();
               }
@@ -99,6 +101,11 @@ export class NavItemComponent {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  setExpanded(): void {
+    this.expanded = true;
+    this.StudentDataService.setNavItemExpanded(this.nodeId, this.expanded);
   }
 
   zoomToElement() {
