@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { CopyNodesService } from '../../../../assets/wise5/services/copyNodesService';
 import { SessionService } from '../../../../assets/wise5/services/sessionService';
@@ -20,7 +19,7 @@ let feedback3 = 'Third feedback';
 let fixture: ComponentFixture<EditComponentDefaultFeedback>;
 
 describe('EditComponentDefaultFeedback', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,

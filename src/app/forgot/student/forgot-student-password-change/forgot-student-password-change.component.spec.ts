@@ -7,7 +7,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StudentService } from '../../../student/student.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/index';
-import { configureTestSuite } from 'ng-bullet';
 
 export class MockStudentService {
   changePassword(
@@ -59,16 +58,13 @@ describe('ForgotStudentPasswordChangeComponent', () => {
     return fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
   };
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotStudentPasswordChangeComponent],
       imports: [RouterTestingModule, BrowserAnimationsModule, ReactiveFormsModule],
       providers: [{ provide: StudentService, useClass: MockStudentService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ForgotStudentPasswordChangeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

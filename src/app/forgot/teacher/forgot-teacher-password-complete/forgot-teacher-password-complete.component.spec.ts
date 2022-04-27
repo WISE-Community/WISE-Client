@@ -3,21 +3,17 @@ import { ForgotTeacherPasswordCompleteComponent } from './forgot-teacher-passwor
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { configureTestSuite } from 'ng-bullet';
 
 describe('ForgotTeacherPasswordCompleteComponent', () => {
   let component: ForgotTeacherPasswordCompleteComponent;
   let fixture: ComponentFixture<ForgotTeacherPasswordCompleteComponent>;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotTeacherPasswordCompleteComponent],
       imports: [RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ForgotTeacherPasswordCompleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

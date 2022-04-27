@@ -4,7 +4,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -24,8 +23,8 @@ export class MockService {}
 let component: LabelStudent;
 let fixture: ComponentFixture<LabelStudent>;
 
-describe('LabelStudent', () => {
-  configureTestSuite(() => {
+describe('LabelStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
       declarations: [LabelStudent],
@@ -45,9 +44,6 @@ describe('LabelStudent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(LabelStudent);
     spyOn(TestBed.get(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({});
     component = fixture.componentInstance;

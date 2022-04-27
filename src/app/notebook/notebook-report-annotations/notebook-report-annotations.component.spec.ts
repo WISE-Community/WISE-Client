@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { SessionService } from '../../../assets/wise5/services/sessionService';
@@ -12,15 +11,12 @@ import { NotebookReportAnnotationsComponent } from './notebook-report-annotation
 let component: NotebookReportAnnotationsComponent;
 
 describe('NotebookReportAnnotationsComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
       declarations: [NotebookReportAnnotationsComponent],
       providers: [ConfigService, ProjectService, SessionService, UtilService, VLEProjectService]
     });
-  });
-
-  beforeEach(() => {
     const fixture = TestBed.createComponent(NotebookReportAnnotationsComponent);
     component = fixture.componentInstance;
   });

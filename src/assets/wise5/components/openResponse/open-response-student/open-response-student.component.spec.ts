@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { of } from 'rxjs';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
@@ -45,7 +44,7 @@ const nodeId = 'node1';
 const response = 'Hello World';
 
 describe('OpenResponseStudent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,

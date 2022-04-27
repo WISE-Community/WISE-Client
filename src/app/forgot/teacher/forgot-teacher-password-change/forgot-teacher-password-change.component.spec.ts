@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { Observable } from 'rxjs/index';
 import { Router } from '@angular/router';
-import { configureTestSuite } from 'ng-bullet';
 
 export class MockTeacherService {
   changePassword(
@@ -54,16 +53,13 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
     return errorMessageDiv.textContent;
   };
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotTeacherPasswordChangeComponent],
       imports: [RouterTestingModule, ReactiveFormsModule],
       providers: [{ provide: TeacherService, useClass: MockTeacherService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ForgotTeacherPasswordChangeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

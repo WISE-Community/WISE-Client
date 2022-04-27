@@ -1,23 +1,19 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { configureTestSuite } from 'ng-bullet';
 import { UnlinkGoogleAccountConfirmComponent } from './unlink-google-account-confirm.component';
 
 let component: UnlinkGoogleAccountConfirmComponent;
 let fixture: ComponentFixture<UnlinkGoogleAccountConfirmComponent>;
 
 describe('UnlinkGoogleAccountConfirmComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [UnlinkGoogleAccountConfirmComponent],
       imports: [MatDialogModule],
       providers: [],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(UnlinkGoogleAccountConfirmComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

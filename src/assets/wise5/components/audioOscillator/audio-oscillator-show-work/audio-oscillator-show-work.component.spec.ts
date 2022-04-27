@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
@@ -13,16 +12,13 @@ let component: AudioOscillatorShowWorkComponent;
 let fixture: ComponentFixture<AudioOscillatorShowWorkComponent>;
 
 describe('AudioOscillatorShowWorkComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
       declarations: [AudioOscillatorShowWorkComponent],
       providers: [ConfigService, SessionService, ProjectService, UtilService],
       schemas: []
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(AudioOscillatorShowWorkComponent);
     spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});
     component = fixture.componentInstance;

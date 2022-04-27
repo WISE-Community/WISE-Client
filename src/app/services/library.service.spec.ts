@@ -1,12 +1,10 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { LibraryService } from './library.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { configureTestSuite } from 'ng-bullet';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LibraryService', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [LibraryService],
       imports: [HttpClientTestingModule, RouterTestingModule]

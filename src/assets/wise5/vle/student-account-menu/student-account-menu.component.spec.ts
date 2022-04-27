@@ -29,8 +29,8 @@ describe('StudentAccountMenuComponent', () => {
   let component: StudentAccountMenuComponent;
   let fixture: ComponentFixture<StudentAccountMenuComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
         MatDividerModule,
@@ -48,10 +48,7 @@ describe('StudentAccountMenuComponent', () => {
         TagService,
         UtilService
       ]
-    }).compileComponents();
-  });
-
-  beforeEach(() => {
+    });
     fixture = TestBed.createComponent(StudentAccountMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

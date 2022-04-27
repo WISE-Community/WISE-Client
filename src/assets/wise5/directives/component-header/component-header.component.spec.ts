@@ -1,4 +1,3 @@
-import { configureTestSuite } from 'ng-bullet';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentHeader } from './component-header.component';
@@ -7,8 +6,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 let component: ComponentHeader;
 let fixture: ComponentFixture<ComponentHeader>;
 
-describe('ComponentHeader', () => {
-  configureTestSuite(() => {
+describe('ComponentHeaderComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ComponentHeader],
       providers: [

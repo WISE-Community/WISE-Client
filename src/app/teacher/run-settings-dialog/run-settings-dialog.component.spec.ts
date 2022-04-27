@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RunSettingsDialogComponent } from './run-settings-dialog.component';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -8,7 +8,6 @@ import { TeacherService } from '../teacher.service';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { MomentModule } from 'ngx-moment';
-import { configureTestSuite } from 'ng-bullet';
 
 export class MockTeacherService {
   addPeriodToRun(runId, periodName) {
@@ -78,7 +77,7 @@ describe('RunSettingsDialogComponent', () => {
     });
   }
 
-  configureTestSuite(() =>
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [RunSettingsDialogComponent],
       imports: [MatSnackBarModule, MomentModule],
@@ -89,10 +88,7 @@ describe('RunSettingsDialogComponent', () => {
         { provide: TeacherService, useClass: MockTeacherService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
-    })
-  );
-
-  beforeEach(() => {
+    });
     fixture = TestBed.createComponent(RunSettingsDialogComponent);
     component = fixture.componentInstance;
     component.run = createNewRun();

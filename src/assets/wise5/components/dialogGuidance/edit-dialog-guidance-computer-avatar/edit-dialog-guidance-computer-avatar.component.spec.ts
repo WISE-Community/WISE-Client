@@ -68,9 +68,6 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
     fixture = TestBed.createComponent(EditDialogGuidanceComputerAvatarComponent);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
-    );
     allComputerAvatars = [
       new ComputerAvatar('robot', 'Robot', 'robot.png'),
       new ComputerAvatar('monkey', 'Monkey', 'Monkey.png'),

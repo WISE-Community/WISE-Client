@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { configureTestSuite } from 'ng-bullet';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountPasswordComponent } from './unlink-google-account-password.component';
@@ -19,15 +18,13 @@ let fixture: ComponentFixture<UnlinkGoogleAccountPasswordComponent>;
 let userService = new MockUserService();
 
 describe('UnlinkGoogleAccountPasswordComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [UnlinkGoogleAccountPasswordComponent],
       imports: [BrowserAnimationsModule, ReactiveFormsModule, MatDialogModule],
       providers: [{ provide: UserService, useValue: userService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-  beforeEach(() => {
     fixture = TestBed.createComponent(UnlinkGoogleAccountPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

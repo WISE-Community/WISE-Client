@@ -5,7 +5,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -35,8 +34,8 @@ let fixture: ComponentFixture<SummaryStudent>;
 const nodeId = 'node1';
 const otherStepTitle = 'Choose your favorite ice cream';
 
-describe('SummaryStudent', () => {
-  configureTestSuite(() => {
+describe('SummaryStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
@@ -62,9 +61,6 @@ describe('SummaryStudent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(SummaryStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,

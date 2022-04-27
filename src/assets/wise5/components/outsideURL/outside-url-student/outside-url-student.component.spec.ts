@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { ConfigService } from '../../../services/configService';
@@ -39,8 +38,8 @@ const componentId = 'component1';
 let fixture: ComponentFixture<OutsideUrlStudent>;
 const nodeId = 'node1';
 
-describe('OutsideUrlStudent', () => {
-  configureTestSuite(() => {
+describe('OutsideUrlStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -73,9 +72,6 @@ describe('OutsideUrlStudent', () => {
       ],
       schemas: []
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(OutsideUrlStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,
