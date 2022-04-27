@@ -33,7 +33,6 @@ export class VLEComponent implements OnInit {
   nodeStatuses: any[];
   navFilter: any;
   navFilters: any;
-  newNotifications: any;
   notebookConfig: any;
   notebookFilter: string = '';
   notebookItemPath: string;
@@ -42,7 +41,6 @@ export class VLEComponent implements OnInit {
   noteDialog: any;
   notesEnabled: boolean = false;
   notesVisible: boolean = false;
-  notifications: any;
   numberProject: boolean;
   pauseDialog: any;
   projectName: string;
@@ -107,8 +105,6 @@ export class VLEComponent implements OnInit {
         new Function(script).call(this);
       });
     }
-
-    this.processNotifications();
 
     // Make sure if we drop something on the page we don't navigate away
     // https://developer.mozilla.org/En/DragDrop/Drag_Operations#drop
@@ -189,7 +185,6 @@ export class VLEComponent implements OnInit {
   private initializeSubscriptions(): void {
     this.subscribeToShowSessionWarning();
     this.subscribeToCurrentNodeChanged();
-    this.subscribeToNotificationChanged();
     this.subscribeToPauseScreen();
     this.subscribeToNotesVisible();
     this.subscribeToReportFullScreen();
@@ -270,14 +265,6 @@ export class VLEComponent implements OnInit {
         }
 
         this.setLayoutState();
-      })
-    );
-  }
-
-  private subscribeToNotificationChanged(): void {
-    this.subscriptions.add(
-      this.notificationService.notificationChanged$.subscribe(() => {
-        this.processNotifications();
       })
     );
   }
@@ -363,11 +350,6 @@ export class VLEComponent implements OnInit {
         this.notificationService.displayAmbientNotification(args.notification);
       })
     );
-  }
-
-  private processNotifications(): void {
-    this.notifications = this.notificationService.notifications;
-    this.newNotifications = this.notificationService.getNewNotifications();
   }
 
   private shouldScreenBePaused(): boolean {
