@@ -116,7 +116,8 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "wise:build"
+            "browserTarget": "wise:build",
+            "publicHost": "localhost:4200"
           },
           "configurations": {
             "production": {
