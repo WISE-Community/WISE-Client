@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { AuthorPeerGroupingComponent } from '../author-peer-grouping-settings/author-peer-grouping.component';
 import { PeerGroupingSettings } from '../peerGroupingSettings';
@@ -23,11 +24,13 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingComp
     this.settings.maxMembershipCount = 2;
   }
 
-  create(): void {
+  create(): Subscription {
     this.settings.tag = this.peerGroupingAuthoringService.getUniqueTag();
-    this.peerGroupingAuthoringService.createNewPeerGroupingSettings(this.settings).subscribe(() => {
-      this.dialogRef.close(this.settings);
-    });
+    return this.peerGroupingAuthoringService
+      .createNewPeerGroupingSettings(this.settings)
+      .subscribe(() => {
+        this.dialogRef.close(this.settings);
+      });
   }
 
   cancel(): void {

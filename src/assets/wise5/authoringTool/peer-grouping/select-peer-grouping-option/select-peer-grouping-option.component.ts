@@ -42,7 +42,7 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
       });
   }
 
-  delete(): void {
+  private delete(): void {
     if (confirm($localize`Are you sure you want to delete this Peer Grouping?`)) {
       this.deleteEvent.emit(this.peerGrouping.settings.tag);
     }

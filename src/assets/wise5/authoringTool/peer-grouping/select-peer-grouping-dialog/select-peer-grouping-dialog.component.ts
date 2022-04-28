@@ -28,7 +28,7 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
     });
   }
 
-  addPeerGrouping(peerGroupingSettingsToAdd: PeerGroupingSettings): void {
+  private addPeerGrouping(peerGroupingSettingsToAdd: PeerGroupingSettings): void {
     this.peerGroupings.push({
       settings: peerGroupingSettingsToAdd,
       stepsUsedIn: this.peerGroupingAuthoringService.getStepsUsedIn(peerGroupingSettingsToAdd.tag)
