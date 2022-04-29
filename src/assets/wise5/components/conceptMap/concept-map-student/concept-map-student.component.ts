@@ -1,4 +1,4 @@
-import 'svg.js';
+import SVG from 'svg.js';
 import 'svg.draggable.js';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';

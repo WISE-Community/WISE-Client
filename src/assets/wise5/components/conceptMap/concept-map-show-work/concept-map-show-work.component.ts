@@ -1,4 +1,4 @@
-import 'svg.js';
+import SVG from 'svg.js';
 import { Component } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 import { ConceptMapService } from '../conceptMapService';
