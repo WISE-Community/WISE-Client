@@ -13,17 +13,17 @@ import { ConfigService } from '../../../assets/wise5/services/configService';
 import { SessionService } from '../../../assets/wise5/services/sessionService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { UtilService } from '../../../assets/wise5/services/utilService';
-import { EditComponentPeerGroupActivityTagComponent } from './edit-component-peer-group-activity-tag.component';
+import { EditComponentPeerGroupingTagComponent } from './edit-component-peer-grouping-tag.component';
 
-describe('EditComponentPeerGroupActivityTagComponent', () => {
-  let component: EditComponentPeerGroupActivityTagComponent;
+describe('EditComponentPeerGroupingTagComponent', () => {
+  let component: EditComponentPeerGroupingTagComponent;
   const component1 = createComponent('cookie');
   const component2 = createComponent('apple');
   const component3 = createComponent('banana');
   const component4 = createComponent('apple');
   const components = [component1, component2, component3, component4];
   let componentChangedSpy: jasmine.Spy;
-  let fixture: ComponentFixture<EditComponentPeerGroupActivityTagComponent>;
+  let fixture: ComponentFixture<EditComponentPeerGroupingTagComponent>;
   let getComponentsSpy: jasmine.Spy;
   const newTag = 'green';
   const oldTag = 'blue';
@@ -43,13 +43,13 @@ describe('EditComponentPeerGroupActivityTagComponent', () => {
         ReactiveFormsModule,
         UpgradeModule
       ],
-      declarations: [EditComponentPeerGroupActivityTagComponent],
+      declarations: [EditComponentPeerGroupingTagComponent],
       providers: [ConfigService, SessionService, TeacherProjectService, UtilService]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditComponentPeerGroupActivityTagComponent);
+    fixture = TestBed.createComponent(EditComponentPeerGroupingTagComponent);
     component = fixture.componentInstance;
     component.authoringComponentContent = {};
     getComponentsSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponents');
@@ -58,9 +58,9 @@ describe('EditComponentPeerGroupActivityTagComponent', () => {
     fixture.detectChanges();
   });
 
-  function createComponent(peerGroupActivityTag: string) {
+  function createComponent(peerGroupingTag: string) {
     return {
-      peerGroupActivityTag: peerGroupActivityTag
+      peerGroupingTag: peerGroupingTag
     };
   }
 
@@ -70,15 +70,15 @@ describe('EditComponentPeerGroupActivityTagComponent', () => {
       createComponent(''),
       createComponent('')
     ]);
-    const tags = component.getExistingPeerGroupActivityTags();
+    const tags = component.getExistingPeerGroupingTags();
     expect(tags.length).toEqual(0);
   });
 
   it('should get peer group activity tags that are unique and sorted alphabetically', () => {
-    expect(component.getExistingPeerGroupActivityTags()).toEqual([
-      component2.peerGroupActivityTag,
-      component3.peerGroupActivityTag,
-      component1.peerGroupActivityTag
+    expect(component.getExistingPeerGroupingTags()).toEqual([
+      component2.peerGroupingTag,
+      component3.peerGroupingTag,
+      component1.peerGroupingTag
     ]);
   });
 
@@ -91,19 +91,19 @@ describe('EditComponentPeerGroupActivityTagComponent', () => {
   });
 
   it('should save', () => {
-    component.authoringComponentContent.peerGroupActivityTag = oldTag;
+    component.authoringComponentContent.peerGroupingTag = oldTag;
     component.tagControl.setValue(newTag);
     component.save();
-    expect(component.authoringComponentContent.peerGroupActivityTag).toEqual(newTag);
+    expect(component.authoringComponentContent.peerGroupingTag).toEqual(newTag);
     expect(componentChangedSpy).toHaveBeenCalled();
     expect(component.tagControl.disabled).toEqual(true);
   });
 
   it('should cancel', () => {
-    component.authoringComponentContent.peerGroupActivityTag = oldTag;
+    component.authoringComponentContent.peerGroupingTag = oldTag;
     component.tagControl.setValue(newTag);
     component.cancel();
-    expect(component.authoringComponentContent.peerGroupActivityTag).toEqual(oldTag);
+    expect(component.authoringComponentContent.peerGroupingTag).toEqual(oldTag);
     expect(componentChangedSpy).not.toHaveBeenCalled();
     expect(component.tagControl.disabled).toEqual(true);
   });

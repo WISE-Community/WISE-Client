@@ -1,8 +1,8 @@
 <edit-component-prompt [prompt]="authoringComponentContent.prompt"
     (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <select-peer-grouping-authoring
-    [tag]="authoringComponentContent.peerGroupActivityTag"
-    (tagChanged)="peerGroupActivityTagChanged($event)">
+    [tag]="authoringComponentContent.peerGroupingTag"
+    (tagChanged)="peerGroupingTagChanged($event)">
 </select-peer-grouping-authoring>
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="bottom-spacing">
   <label i18n>Question Bank</label>

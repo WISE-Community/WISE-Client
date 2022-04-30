@@ -140,8 +140,8 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     return index;
   }
 
-  peerGroupActivityTagChanged(tag: string): void {
-    this.authoringComponentContent.peerGroupActivityTag = tag;
+  peerGroupingTagChanged(tag: string): void {
+    this.authoringComponentContent.peerGroupingTag = tag;
     this.componentChanged();
   }
 }

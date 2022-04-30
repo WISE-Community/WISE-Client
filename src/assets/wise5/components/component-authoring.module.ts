@@ -39,7 +39,7 @@ import { EditConnectedComponentTypeSelectComponent } from '../../../app/authorin
 import { EditConnectedComponentDeleteButtonComponent } from '../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
 import { EditConnectedComponentDefaultSelectsComponent } from '../../../app/authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
 import { EditComponentMaxSubmitComponent } from '../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
-import { EditComponentPeerGroupActivityTagComponent } from '../../../app/authoring-tool/edit-component-peer-group-activity-tag/edit-component-peer-group-activity-tag.component';
+import { EditComponentPeerGroupingTagComponent } from '../../../app/authoring-tool/edit-component-peer-grouping-tag/edit-component-peer-grouping-tag.component';
 
 export default angular
   .module('componentAuthoringModule', [
@@ -89,9 +89,9 @@ export default angular
     downgradeComponent({ component: EditComponentPrompt }) as angular.IDirectiveFactory
   )
   .directive(
-    'editComponentPeerGroupActivityTag',
+    'editComponentPeerGroupingTag',
     downgradeComponent({
-      component: EditComponentPeerGroupActivityTagComponent
+      component: EditComponentPeerGroupingTagComponent
     }) as angular.IDirectiveFactory
   )
   .directive(

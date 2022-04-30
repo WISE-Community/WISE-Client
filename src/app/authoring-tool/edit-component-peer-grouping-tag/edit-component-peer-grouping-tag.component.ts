@@ -5,11 +5,11 @@ import { map, startWith } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
-  selector: 'edit-component-peer-group-activity-tag',
-  templateUrl: './edit-component-peer-group-activity-tag.component.html',
-  styleUrls: ['./edit-component-peer-group-activity-tag.component.scss']
+  selector: 'edit-component-peer-grouping-tag',
+  templateUrl: './edit-component-peer-grouping-tag.component.html',
+  styleUrls: ['./edit-component-peer-grouping-tag.component.scss']
 })
-export class EditComponentPeerGroupActivityTagComponent {
+export class EditComponentPeerGroupingTagComponent {
   @Input() authoringComponentContent: any;
   filteredTags: Observable<string[]>;
   isEditMode: boolean;
@@ -22,7 +22,7 @@ export class EditComponentPeerGroupActivityTagComponent {
   ngOnInit(): void {
     this.setTagFromComponentContent();
     this.disableTagInput();
-    this.existingTags = this.getExistingPeerGroupActivityTags();
+    this.existingTags = this.getExistingPeerGroupingTags();
     this.filteredTags = this.tagControl.valueChanges.pipe(
       startWith(''),
       map((value) => this.filterTags(value))
@@ -30,7 +30,7 @@ export class EditComponentPeerGroupActivityTagComponent {
   }
 
   setTagFromComponentContent(): void {
-    this.tagControl.setValue(this.authoringComponentContent.peerGroupActivityTag);
+    this.tagControl.setValue(this.authoringComponentContent.peerGroupingTag);
   }
 
   enableTagInput(): void {
@@ -46,10 +46,10 @@ export class EditComponentPeerGroupActivityTagComponent {
     return this.existingTags.filter((tag) => tag.toLowerCase().includes(filteredValue));
   }
 
-  getExistingPeerGroupActivityTags(): string[] {
+  getExistingPeerGroupingTags(): string[] {
     const tagsFound = new Set<string>();
     for (const component of this.projectService.getComponents()) {
-      const tag = component.peerGroupActivityTag;
+      const tag = component.peerGroupingTag;
       if (tag != null && tag !== '') {
         tagsFound.add(tag);
       }
@@ -66,7 +66,7 @@ export class EditComponentPeerGroupActivityTagComponent {
   save(): void {
     this.turnOffEditMode();
     this.disableTagInput();
-    this.authoringComponentContent.peerGroupActivityTag = this.tagControl.value;
+    this.authoringComponentContent.peerGroupingTag = this.tagControl.value;
     this.projectService.componentChanged();
   }
 

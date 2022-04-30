@@ -20,8 +20,8 @@ export class ShowGroupWorkAuthoringComponent extends ShowMyWorkAuthoringComponen
     super(configService, nodeService, projectAssetService, projectService);
   }
 
-  peerGroupActivityTagChanged(tag: string): void {
-    this.authoringComponentContent.peerGroupActivityTag = tag;
+  peerGroupingTagChanged(tag: string): void {
+    this.authoringComponentContent.peerGroupingTag = tag;
     this.componentChanged();
   }
 }

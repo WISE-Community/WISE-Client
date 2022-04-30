@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -16,7 +17,6 @@ import { UtilService } from '../../../services/utilService';
 import { MockService } from '../../animation/animation-student/animation-student.component.spec';
 import { ComponentService } from '../../componentService';
 import { PeerGroup } from '../../peerChat/PeerGroup';
-import { PeerGroupActivity } from '../../peerChat/PeerGroupActivity';
 import { PeerGroupMember } from '../../peerChat/PeerGroupMember';
 import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
 
@@ -104,7 +104,7 @@ describe('ShowGroupWorkStudentComponent', () => {
     component.peerGroup = new PeerGroup(
       1,
       [new PeerGroupMember(1, 1), new PeerGroupMember(2, 1), new PeerGroupMember(3, 1)],
-      new PeerGroupActivity()
+      new PeerGrouping()
     );
     component.setWorkgroupInfos();
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});

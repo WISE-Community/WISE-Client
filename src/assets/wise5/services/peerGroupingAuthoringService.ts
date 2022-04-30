@@ -50,7 +50,7 @@ export class PeerGroupingAuthoringService {
   ): Observable<PeerGroupingSettings> {
     const runId = this.configService.getRunId();
     return this.http.post<PeerGroupingSettings>(
-      `/api/run/${runId}/peer-group-settings`,
+      `/api/run/${runId}/peer-grouping`,
       newPeerGroupingSettings
     );
   }
@@ -85,16 +85,16 @@ export class PeerGroupingAuthoringService {
   ): Observable<PeerGroupingSettings> {
     const runId = this.configService.getRunId();
     return this.http.put<PeerGroupingSettings>(
-      `/api/run/${runId}/peer-group-settings/${peerGroupingSettingsToUpdate.tag}`,
+      `/api/run/${runId}/peer-grouping/${peerGroupingSettingsToUpdate.tag}`,
       peerGroupingSettingsToUpdate
     );
   }
 
-  getStepsUsedIn(peerGroupTag: string): string[] {
+  getStepsUsedIn(peerGroupingTag: string): string[] {
     const stepsUsedIn = [];
     for (const node of this.projectService.getApplicationNodes()) {
       for (const component of node.components) {
-        if (component.peerGroupActivityTag === peerGroupTag) {
+        if (component.peerGroupingTag === peerGroupingTag) {
           stepsUsedIn.push(this.projectService.getNodePositionAndTitleByNodeId(node.id));
           break;
         }

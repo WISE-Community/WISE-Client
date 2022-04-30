@@ -29,7 +29,7 @@ export class NodeGradingViewController {
   nodeHasWork: boolean;
   nodeId: string;
   numRubrics: number;
-  peerGroupActivityTags: string[];
+  peerGroupingTags: string[];
   sortOrder: object = {
     team: ['-isVisible', 'workgroupId'],
     '-team': ['-isVisible', '-workgroupId'],
@@ -79,9 +79,7 @@ export class NodeGradingViewController {
     this.sort = this.TeacherDataService.nodeGradingSort;
     this.nodeContent = this.ProjectService.getNodeById(this.nodeId);
     this.milestoneReport = this.MilestoneService.getMilestoneReportByNodeId(this.nodeId);
-    this.peerGroupActivityTags = Array.from(
-      this.PeerGroupService.getPeerGroupActivityTags(this.node)
-    );
+    this.peerGroupingTags = Array.from(this.PeerGroupService.getPeerGroupingTags(this.node));
     this.retrieveStudentData();
     this.subscribeToEvents();
   }
@@ -364,8 +362,8 @@ export class NodeGradingViewController {
     this.MilestoneService.showMilestoneDetails(this.milestoneReport, $event);
   }
 
-  showPeerGroupDetails(peerGroupActivityTag: string): void {
-    this.PeerGroupService.showPeerGroupDetails(peerGroupActivityTag);
+  showPeerGroupDetails(peerGroupingTag: string): void {
+    this.PeerGroupService.showPeerGroupDetails(peerGroupingTag);
   }
 }
 

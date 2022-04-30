@@ -63,7 +63,7 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
 
   private retrieveStudentWorkForPeerGroup(): void {
     this.peerGroupService
-      .retrievePeerGroup(this.componentContent.peerGroupActivityTag, this.workgroupId)
+      .retrievePeerGroup(this.componentContent.peerGroupingTag, this.workgroupId)
       .subscribe((peerGroup: PeerGroup) => {
         if (peerGroup != null) {
           this.peerGroup = this.componentContent.isShowMyWork

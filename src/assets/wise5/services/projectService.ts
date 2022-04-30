@@ -3219,10 +3219,10 @@ export class ProjectService {
   }
 
   getPeerGroupingSettings(): PeerGroupingSettings[] {
-    if (this.project.peerGroupActivities == null) {
-      this.project.peerGroupActivities = [];
+    if (this.project.peerGroupings == null) {
+      this.project.peerGroupings = [];
     }
-    return this.project.peerGroupActivities;
+    return this.project.peerGroupings;
   }
 
   getApplicationNodes(): any[] {

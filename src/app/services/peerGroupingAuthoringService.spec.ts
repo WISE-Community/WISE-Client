@@ -123,7 +123,7 @@ function createStepNode(id: string, components: any[]): any {
 }
 
 function createComponent(tag: string): any {
-  return { peerGroupActivityTag: tag };
+  return { peerGroupingTag: tag };
 }
 
 function getUniqueTag() {

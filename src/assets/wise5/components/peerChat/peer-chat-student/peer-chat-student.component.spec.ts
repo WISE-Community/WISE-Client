@@ -20,7 +20,6 @@ import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
 import { PeerChatStudentComponent } from './peer-chat-student.component';
 import { PeerGroupMember } from '../PeerGroupMember';
-import { PeerGroupActivity } from '../PeerGroupActivity';
 import { of } from 'rxjs';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
@@ -31,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { PeerChatModule } from '../peer-chat.module';
+import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 
 class MockService {}
 
@@ -119,7 +119,7 @@ const peerGroup = new PeerGroup(
     new PeerGroupMember(studentWorkgroupId1, periodId),
     new PeerGroupMember(studentWorkgroupId2, periodId)
   ],
-  new PeerGroupActivity()
+  new PeerGrouping()
 );
 
 describe('PeerChatStudentComponent', () => {
