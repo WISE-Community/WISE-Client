@@ -10,6 +10,8 @@ import { AuthorPeerGroupingComponent } from '../author-peer-grouping-settings/au
   styleUrls: ['./edit-peer-grouping-dialog.component.scss']
 })
 export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingComponent {
+  stepsUsedIn: string[] = [];
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public peerGrouping: any,
     private dialogRef: MatDialogRef<EditPeerGroupingDialogComponent>,
@@ -20,12 +22,12 @@ export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingComponent
   }
 
   ngOnInit(): void {
-    this.settings = this.utilService.makeCopyOfJSONObject(this.peerGrouping.settings);
+    this.peerGrouping = this.utilService.makeCopyOfJSONObject(this.peerGrouping);
+    this.stepsUsedIn = this.peerGroupingAuthoringService.getStepsUsedIn(this.peerGrouping.tag);
   }
 
   save(): void {
-    this.peerGrouping.settings = this.settings;
-    this.peerGroupingAuthoringService.updatePeerGroupingSettings(this.settings).subscribe(() => {
+    this.peerGroupingAuthoringService.updatePeerGrouping(this.peerGrouping).subscribe(() => {
       this.dialogRef.close();
     });
   }

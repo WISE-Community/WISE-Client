@@ -25,7 +25,7 @@ export class SelectPeerGroupingAuthoringComponent implements OnInit {
   }
 
   private setName(tag: string): void {
-    this.name = this.peerGroupingAuthoringService.getPeerGroupingSettingsName(tag);
+    this.name = this.peerGroupingAuthoringService.getPeerGroupingName(tag);
   }
 
   selectGroupingLogic(): void {

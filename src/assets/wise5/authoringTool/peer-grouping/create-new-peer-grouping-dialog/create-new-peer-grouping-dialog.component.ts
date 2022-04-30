@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { AuthorPeerGroupingComponent } from '../author-peer-grouping-settings/author-peer-grouping.component';
-import { PeerGroupingSettings } from '../peerGroupingSettings';
 
 @Component({
   selector: 'create-new-peer-grouping-dialog',
@@ -19,17 +19,15 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingComp
   }
 
   ngOnInit(): void {
-    this.settings = new PeerGroupingSettings();
-    this.settings.logic = 'random';
-    this.settings.maxMembershipCount = 2;
+    this.peerGrouping = new PeerGrouping({ logic: 'random', maxMembershipCount: 2 });
   }
 
   create(): Subscription {
-    this.settings.tag = this.peerGroupingAuthoringService.getUniqueTag();
+    this.peerGrouping.tag = this.peerGroupingAuthoringService.getUniqueTag();
     return this.peerGroupingAuthoringService
-      .createNewPeerGroupingSettings(this.settings)
+      .createNewPeerGrouping(this.peerGrouping)
       .subscribe(() => {
-        this.dialogRef.close(this.settings);
+        this.dialogRef.close();
       });
   }
 

@@ -1,5 +1,5 @@
 import { Directive, OnInit } from '@angular/core';
-import { PeerGroupingSettings } from '../peerGroupingSettings';
+import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 
 @Directive()
 export abstract class AuthorPeerGroupingComponent implements OnInit {
@@ -7,7 +7,7 @@ export abstract class AuthorPeerGroupingComponent implements OnInit {
     { name: 'Random', value: 'random' },
     { name: 'Manual', value: 'manual' }
   ];
-  settings: PeerGroupingSettings;
+  peerGrouping: PeerGrouping;
 
   constructor() {}
 

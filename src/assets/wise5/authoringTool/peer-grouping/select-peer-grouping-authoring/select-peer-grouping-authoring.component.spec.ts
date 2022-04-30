@@ -29,10 +29,9 @@ describe('SelectPeerGroupingAuthoringComponent', () => {
 function selectGroupingLogic() {
   it('should select grouping logic', () => {
     const dialogOpenSpy = getDialogOpenSpy(tag1);
-    spyOn(
-      TestBed.inject(PeerGroupingAuthoringService),
-      'getPeerGroupingSettingsName'
-    ).and.returnValue(name);
+    spyOn(TestBed.inject(PeerGroupingAuthoringService), 'getPeerGroupingName').and.returnValue(
+      name
+    );
     const tagChangedEmitSpy = spyOn(component.tagChanged, 'emit');
     expect(component.name).not.toEqual(name);
     component.selectGroupingLogic();

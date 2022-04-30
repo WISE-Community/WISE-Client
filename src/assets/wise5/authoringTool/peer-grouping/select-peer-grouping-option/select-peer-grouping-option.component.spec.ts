@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
 import { SelectPeerGroupingOptionComponent } from './select-peer-grouping-option.component';
 import { getDialogOpenSpy } from '../peer-grouping-testing-helper';
+import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 
 let component: SelectPeerGroupingOptionComponent;
 let deleteEventSpy: jasmine.Spy;
@@ -19,7 +20,7 @@ describe('SelectPeerGroupingOptionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectPeerGroupingOptionComponent);
     component = fixture.componentInstance;
-    component.peerGrouping = { settings: { tag: tag1 }, stepsUsedIn: [] };
+    component.peerGrouping = new PeerGrouping({ tag: tag1 });
     deleteEventSpy = spyOn(component.deleteEvent, 'emit');
     fixture.detectChanges();
   });

@@ -3,8 +3,8 @@ import { of } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
-import { PeerGroupingSettings } from '../peerGroupingSettings';
 import { EditPeerGroupingDialogComponent } from './edit-peer-grouping-dialog.component';
+import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 
 let component: EditPeerGroupingDialogComponent;
 let dialogCloseSpy: jasmine.Spy;
@@ -34,35 +34,35 @@ describe('EditPeerGroupingDialogComponent', () => {
     fixture.detectChanges();
   });
 
-  savePeerGroupingSettings();
-  deletePeerGroupingSettings();
-  cancelPeerGroupingSettings();
+  savePeerGrouping();
+  deletePeerGrouping();
+  cancelPeerGrouping();
 });
 
-function savePeerGroupingSettings() {
-  it('should save peer grouping settings', async () => {
-    const settings = new PeerGroupingSettings();
-    component.settings = settings;
-    const updatePeerGroupingSettingsSpy = spyOn(
+function savePeerGrouping() {
+  it('should save peer grouping', async () => {
+    const settings = new PeerGrouping();
+    component.peerGrouping = settings;
+    const updatePeerGroupingSpy = spyOn(
       TestBed.inject(PeerGroupingAuthoringService),
-      'updatePeerGroupingSettings'
+      'updatePeerGrouping'
     ).and.returnValue(of(settings));
     component.save();
-    expect(updatePeerGroupingSettingsSpy).toHaveBeenCalledWith(settings);
+    expect(updatePeerGroupingSpy).toHaveBeenCalledWith(settings);
     expect(dialogCloseSpy).toHaveBeenCalled();
   });
 }
 
-function deletePeerGroupingSettings() {
-  it('should delete peer grouping settings', () => {
+function deletePeerGrouping() {
+  it('should delete peer grouping', () => {
     spyOn(window, 'confirm').and.returnValue(true);
     component.delete();
     expect(dialogCloseSpy).toHaveBeenCalled();
   });
 }
 
-function cancelPeerGroupingSettings() {
-  it('should cancel peer grouping settings', () => {
+function cancelPeerGrouping() {
+  it('should cancel peer grouping', () => {
     component.cancel();
     expect(dialogCloseSpy).toHaveBeenCalled();
   });

@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { CreateNewPeerGroupingDialogComponent } from '../create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
-import { PeerGroupingSettings } from '../peerGroupingSettings';
 
 @Component({
   selector: 'select-peer-grouping-dialog',
@@ -10,7 +10,7 @@ import { PeerGroupingSettings } from '../peerGroupingSettings';
   styleUrls: ['./select-peer-grouping-dialog.component.scss']
 })
 export class SelectPeerGroupingDialogComponent implements OnInit {
-  peerGroupings: any[] = [];
+  peerGroupings: PeerGrouping[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -20,19 +20,7 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.peerGroupingAuthoringService.getPeerGroupingSettings().forEach((peerGroupingSettings) => {
-      this.peerGroupings.push({
-        settings: peerGroupingSettings,
-        stepsUsedIn: this.peerGroupingAuthoringService.getStepsUsedIn(peerGroupingSettings.tag)
-      });
-    });
-  }
-
-  private addPeerGrouping(peerGroupingSettingsToAdd: PeerGroupingSettings): void {
-    this.peerGroupings.push({
-      settings: peerGroupingSettingsToAdd,
-      stepsUsedIn: this.peerGroupingAuthoringService.getStepsUsedIn(peerGroupingSettingsToAdd.tag)
-    });
+    this.peerGroupings = this.peerGroupingAuthoringService.getPeerGroupings();
   }
 
   selectPeerGrouping(tag: string): void {
@@ -48,26 +36,19 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
   }
 
   showNewPeerGroupingAuthoring(): void {
-    this.dialog
-      .open(CreateNewPeerGroupingDialogComponent, {
-        width: '40%'
-      })
-      .afterClosed()
-      .subscribe((peerGroupingSettings: PeerGroupingSettings) => {
-        if (peerGroupingSettings != null) {
-          this.addPeerGrouping(peerGroupingSettings);
-        }
-      });
+    this.dialog.open(CreateNewPeerGroupingDialogComponent, {
+      width: '40%'
+    });
   }
 
   deletePeerGrouping(tag: string): void {
     for (let p = 0; p < this.peerGroupings.length; p++) {
       const peerGrouping = this.peerGroupings[p];
-      if (peerGrouping.settings.tag === tag) {
+      if (peerGrouping.tag === tag) {
         this.peerGroupings.splice(p, 1);
         break;
       }
     }
-    this.peerGroupingAuthoringService.deletePeerGroupingSettings(tag);
+    this.peerGroupingAuthoringService.deletePeerGrouping(tag);
   }
 }

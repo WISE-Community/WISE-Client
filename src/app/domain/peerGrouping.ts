@@ -2,6 +2,7 @@ export class PeerGrouping {
   logic: string;
   maxMembershipCount: number;
   name: string;
+  stepsUsedIn: string[];
   tag: string;
   threshold: any[];
 

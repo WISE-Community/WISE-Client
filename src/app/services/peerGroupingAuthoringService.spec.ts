@@ -1,23 +1,23 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { PeerGroupingSettings } from '../../assets/wise5/authoringTool/peer-grouping/peerGroupingSettings';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { PeerGroupingAuthoringService } from '../../assets/wise5/services/peerGroupingAuthoringService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
+import { PeerGrouping } from '../domain/peerGrouping';
 
-let allPeerGroupingSettings: PeerGroupingSettings[];
+let allPeerGroupings: PeerGrouping[];
 let configService: ConfigService;
-let getPeerGroupingSettingsSpy: jasmine.Spy;
+let getPeerGroupingsSpy: jasmine.Spy;
 let http: HttpTestingController;
 const name1: string = 'Group 1';
 const name2: string = 'Group 2';
 const nodeId1: string = 'node1';
 const nodeId2: string = 'node2';
-let peerGroupingSettings1: PeerGroupingSettings;
-let peerGroupingSettings2: PeerGroupingSettings;
+let peerGrouping1: PeerGrouping;
+let peerGrouping2: PeerGrouping;
 const nodeTitle1: string = 'First Step';
 const nodeTitle2: string = 'Second Step';
 let projectService: TeacherProjectService;
@@ -43,11 +43,11 @@ describe('PeerGroupingAuthoringService', () => {
     configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpTestingController);
     projectService = TestBed.inject(TeacherProjectService);
-    peerGroupingSettings1 = new PeerGroupingSettings({ name: name1, tag: tag1 });
-    peerGroupingSettings2 = new PeerGroupingSettings({ name: name2, tag: tag2 });
-    allPeerGroupingSettings = [peerGroupingSettings1, peerGroupingSettings2];
-    getPeerGroupingSettingsSpy = spyOn(projectService, 'getPeerGroupingSettings').and.returnValue(
-      allPeerGroupingSettings
+    peerGrouping1 = new PeerGrouping({ name: name1, tag: tag1 });
+    peerGrouping2 = new PeerGrouping({ name: name2, tag: tag2 });
+    allPeerGroupings = [peerGrouping1, peerGrouping2];
+    getPeerGroupingsSpy = spyOn(projectService, 'getPeerGroupings').and.returnValue(
+      allPeerGroupings
     );
     saveProjectSpy = spyOn(projectService, 'saveProject');
     spyOn(configService, 'getRunId').and.returnValue(runId);
@@ -63,44 +63,44 @@ describe('PeerGroupingAuthoringService', () => {
     });
   });
 
-  getPeerGroupingSettings();
-  createNewPeerGroupingSettings();
-  updatePeerGroupingSettings();
+  getPeerGroupings();
+  createNewPeerGrouping();
+  updatePeerGrouping();
   getStepsUsedIn();
   getUniqueTag();
-  deletePeerGroupingSettings();
-  getPeerGroupingSettingsName();
+  deletePeerGrouping();
+  getPeerGroupingName();
 });
 
-function getPeerGroupingSettings() {
-  describe('getPeerGroupingSettings', () => {
-    it('should get peer grouping settings', () => {
-      const peerGroupingSettingsResult = service.getPeerGroupingSettings();
-      expect(getPeerGroupingSettingsSpy).toHaveBeenCalled();
-      expect(peerGroupingSettingsResult).toEqual(allPeerGroupingSettings);
+function getPeerGroupings() {
+  describe('getPeerGroupings', () => {
+    it('should get peer groupings', () => {
+      const peerGroupings = service.getPeerGroupings();
+      expect(getPeerGroupingsSpy).toHaveBeenCalled();
+      expect(peerGroupings).toEqual(allPeerGroupings);
     });
   });
 }
 
-function createNewPeerGroupingSettings() {
-  describe('createNewPeerGroupingSettings', () => {
-    it('should create new peer grouping settings', () => {
-      service.createNewPeerGroupingSettings(peerGroupingSettings1).subscribe(() => {});
-      const expectedRequest = http.expectOne(`/api/run/${runId}/peer-group-settings`);
+function createNewPeerGrouping() {
+  describe('createNewPeerGrouping', () => {
+    it('should create new peer grouping', () => {
+      service.createNewPeerGrouping(peerGrouping1).subscribe(() => {});
+      const expectedRequest = http.expectOne(`/api/run/${runId}/peer-grouping`);
       expect(expectedRequest.request.method).toEqual('POST');
-      expect(expectedRequest.request.body).toEqual(peerGroupingSettings1);
+      expect(expectedRequest.request.body).toEqual(peerGrouping1);
     });
   });
 }
 
-function updatePeerGroupingSettings() {
-  describe('updatePeerGroupingSettings', () => {
+function updatePeerGrouping() {
+  describe('updatePeerGrouping', () => {
     it('should update peer grouping settings', () => {
       const newName = 'Group A';
-      const peerGroupingSettings = new PeerGroupingSettings({ name: newName, tag: tag1 });
-      expect(allPeerGroupingSettings[0].name).toEqual(name1);
-      service.updatePeerGroupingSettings(peerGroupingSettings);
-      expect(allPeerGroupingSettings[0].name).toEqual(newName);
+      const peerGrouping = new PeerGrouping({ name: newName, tag: tag1 });
+      expect(allPeerGroupings[0].name).toEqual(name1);
+      service.updatePeerGrouping(peerGrouping);
+      expect(allPeerGroupings[0].name).toEqual(newName);
       expect(saveProjectSpy).toHaveBeenCalled();
     });
   });
@@ -135,23 +135,23 @@ function getUniqueTag() {
   });
 }
 
-function deletePeerGroupingSettings() {
-  describe('deletePeerGroupingSettings', () => {
-    it('should delete peer grouping settings', () => {
-      expect(allPeerGroupingSettings.length).toEqual(2);
-      service.deletePeerGroupingSettings(tag2);
-      expect(allPeerGroupingSettings.length).toEqual(1);
-      expect(allPeerGroupingSettings[0].tag).toEqual(tag1);
+function deletePeerGrouping() {
+  describe('deletePeerGrouping', () => {
+    it('should delete peer grouping', () => {
+      expect(allPeerGroupings.length).toEqual(2);
+      service.deletePeerGrouping(tag2);
+      expect(allPeerGroupings.length).toEqual(1);
+      expect(allPeerGroupings[0].tag).toEqual(tag1);
       expect(saveProjectSpy).toHaveBeenCalled();
     });
   });
 }
 
-function getPeerGroupingSettingsName() {
-  describe('getPeerGroupingSettingsName', () => {
-    it('should get peer grouping settings name', () => {
-      expect(service.getPeerGroupingSettingsName(tag1)).toEqual(name1);
-      expect(service.getPeerGroupingSettingsName(tag2)).toEqual(name2);
+function getPeerGroupingName() {
+  describe('getPeerGroupingName', () => {
+    it('should get peer grouping name', () => {
+      expect(service.getPeerGroupingName(tag1)).toEqual(name1);
+      expect(service.getPeerGroupingName(tag2)).toEqual(name2);
     });
   });
 }

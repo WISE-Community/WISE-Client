@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogRef } from '@angular/material/dialog';
 import { of } from 'rxjs';
+import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
-import { PeerGroupingSettings } from '../peerGroupingSettings';
 import { CreateNewPeerGroupingDialogComponent } from './create-new-peer-grouping-dialog.component';
 
 let component: CreateNewPeerGroupingDialogComponent;
@@ -29,20 +29,20 @@ describe('CreateNewPeerGroupingDialogComponent', () => {
 });
 
 function create() {
-  it('should create peer grouping settings', async () => {
+  it('should create peer grouping', async () => {
     spyOn(TestBed.inject(PeerGroupingAuthoringService), 'getUniqueTag').and.returnValue(tag1);
-    const newPeerGroupingSettings = new PeerGroupingSettings({
+    const newPeerGrouping = new PeerGrouping({
       logic: 'random',
       maxMembershipCount: 2,
       tag: tag1
     });
-    const createNewPeerGroupingSettingsSpy = spyOn(
+    const createNewPeerGroupingSpy = spyOn(
       TestBed.inject(PeerGroupingAuthoringService),
-      'createNewPeerGroupingSettings'
-    ).and.returnValue(of(newPeerGroupingSettings));
+      'createNewPeerGrouping'
+    ).and.returnValue(of(newPeerGrouping));
     const dialogCloseSpy = spyOn(TestBed.inject(MatDialogRef), 'close');
     component.create();
-    expect(createNewPeerGroupingSettingsSpy).toHaveBeenCalledWith(newPeerGroupingSettings);
-    expect(dialogCloseSpy).toHaveBeenCalledWith(newPeerGroupingSettings);
+    expect(createNewPeerGroupingSpy).toHaveBeenCalledWith(newPeerGrouping);
+    expect(dialogCloseSpy).toHaveBeenCalled();
   });
 }

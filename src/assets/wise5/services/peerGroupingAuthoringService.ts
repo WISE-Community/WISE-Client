@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PeerGroupingSettings } from '../authoringTool/peer-grouping/peerGroupingSettings';
+import { PeerGrouping } from '../../../app/domain/peerGrouping';
 import { ConfigService } from './configService';
 import { TeacherProjectService } from './teacherProjectService';
 import { UtilService } from './utilService';
@@ -15,19 +15,17 @@ export class PeerGroupingAuthoringService {
     private utilService: UtilService
   ) {}
 
-  getPeerGroupingSettings(): PeerGroupingSettings[] {
-    return this.projectService.getPeerGroupingSettings();
+  getPeerGroupings(): PeerGrouping[] {
+    return this.projectService.getPeerGroupings();
   }
 
-  createNewPeerGroupingSettings(
-    newPeerGroupingSettings: PeerGroupingSettings
-  ): Observable<PeerGroupingSettings> {
-    this.createNewPeerGroupingSettingsInProject(newPeerGroupingSettings);
+  createNewPeerGrouping(newPeerGrouping: PeerGrouping): Observable<PeerGrouping> {
+    this.createNewPeerGroupingInProject(newPeerGrouping);
     const runId = this.configService.getRunId();
     if (runId == null) {
       return this.getDummyObservable();
     } else {
-      return this.createNewPeerGroupingSettingsInDatabase(newPeerGroupingSettings);
+      return this.createNewPeerGroupingInDatabase(newPeerGrouping);
     }
   }
 
@@ -37,56 +35,45 @@ export class PeerGroupingAuthoringService {
     });
   }
 
-  private createNewPeerGroupingSettingsInProject(
-    newPeerGroupingSettings: PeerGroupingSettings
-  ): void {
-    const allPeerGroupingSettings = this.getPeerGroupingSettings();
-    allPeerGroupingSettings.push(newPeerGroupingSettings);
+  private createNewPeerGroupingInProject(newPeerGrouping: PeerGrouping): void {
+    const allPeerGrouping = this.getPeerGroupings();
+    allPeerGrouping.push(newPeerGrouping);
     this.projectService.saveProject();
   }
 
-  private createNewPeerGroupingSettingsInDatabase(
-    newPeerGroupingSettings: PeerGroupingSettings
-  ): Observable<PeerGroupingSettings> {
+  private createNewPeerGroupingInDatabase(newPeerGrouping: PeerGrouping): Observable<PeerGrouping> {
     const runId = this.configService.getRunId();
-    return this.http.post<PeerGroupingSettings>(
-      `/api/run/${runId}/peer-grouping`,
-      newPeerGroupingSettings
-    );
+    return this.http.post<PeerGrouping>(`/api/run/${runId}/peer-grouping`, newPeerGrouping);
   }
 
-  updatePeerGroupingSettings(
-    peerGroupingSettingsToUpdate: PeerGroupingSettings
-  ): Observable<PeerGroupingSettings> {
-    this.updatePeerGroupingSettingsInProject(peerGroupingSettingsToUpdate);
+  updatePeerGrouping(peerGroupingToUpdate: PeerGrouping): Observable<PeerGrouping> {
+    this.updatePeerGroupingInProject(peerGroupingToUpdate);
     const runId = this.configService.getRunId();
     if (runId == null) {
       return this.getDummyObservable();
     } else {
-      return this.updatePeerGroupingSettingsInDatabase(peerGroupingSettingsToUpdate);
+      return this.updatePeerGroupingInDatabase(peerGroupingToUpdate);
     }
   }
 
-  private updatePeerGroupingSettingsInProject(
-    peerGroupingSettingsToUpdate: PeerGroupingSettings
-  ): void {
-    const allPeerGroupingSettings = this.getPeerGroupingSettings();
-    for (let i = 0; i < allPeerGroupingSettings.length; i++) {
-      const peerGroupingSettings = allPeerGroupingSettings[i];
-      if (peerGroupingSettings.tag === peerGroupingSettingsToUpdate.tag) {
-        allPeerGroupingSettings[i] = peerGroupingSettingsToUpdate;
+  private updatePeerGroupingInProject(peerGroupingToUpdate: PeerGrouping): void {
+    const allPeerGroupings = this.getPeerGroupings();
+    for (let i = 0; i < allPeerGroupings.length; i++) {
+      const peerGrouping = allPeerGroupings[i];
+      if (peerGrouping.tag === peerGroupingToUpdate.tag) {
+        allPeerGroupings[i] = peerGroupingToUpdate;
       }
     }
     this.projectService.saveProject();
   }
 
-  private updatePeerGroupingSettingsInDatabase(
-    peerGroupingSettingsToUpdate: PeerGroupingSettings
-  ): Observable<PeerGroupingSettings> {
+  private updatePeerGroupingInDatabase(
+    peerGroupingToUpdate: PeerGrouping
+  ): Observable<PeerGrouping> {
     const runId = this.configService.getRunId();
-    return this.http.put<PeerGroupingSettings>(
-      `/api/run/${runId}/peer-grouping/${peerGroupingSettingsToUpdate.tag}`,
-      peerGroupingSettingsToUpdate
+    return this.http.put<PeerGrouping>(
+      `/api/run/${runId}/peer-grouping/${peerGroupingToUpdate.tag}`,
+      peerGroupingToUpdate
     );
   }
 
@@ -105,33 +92,33 @@ export class PeerGroupingAuthoringService {
 
   getUniqueTag(): string {
     let newTag = this.utilService.generateKey();
-    const allPeerGroupingTags = this.getAllPeerGroupingTags(this.getPeerGroupingSettings());
+    const allPeerGroupingTags = this.getAllPeerGroupingTags(this.getPeerGroupings());
     while (allPeerGroupingTags.includes(newTag)) {
       newTag = this.utilService.generateKey();
     }
     return newTag;
   }
 
-  private getAllPeerGroupingTags(peerGroupingSettings: PeerGroupingSettings[]): string[] {
-    return peerGroupingSettings.map((peerGroupingSettings) => peerGroupingSettings.tag);
+  private getAllPeerGroupingTags(peerGrouping: PeerGrouping[]): string[] {
+    return peerGrouping.map((peerGrouping) => peerGrouping.tag);
   }
 
-  deletePeerGroupingSettings(tag: string): void {
-    const allPeerGroupingSettings = this.getPeerGroupingSettings();
-    for (let i = 0; i < allPeerGroupingSettings.length; i++) {
-      const peerGroupingSettings = allPeerGroupingSettings[i];
-      if (peerGroupingSettings.tag === tag) {
-        allPeerGroupingSettings.splice(i, 1);
+  deletePeerGrouping(tag: string): void {
+    const allPeerGroupings = this.getPeerGroupings();
+    for (let i = 0; i < allPeerGroupings.length; i++) {
+      const peerGrouping = allPeerGroupings[i];
+      if (peerGrouping.tag === tag) {
+        allPeerGroupings.splice(i, 1);
         break;
       }
     }
     this.projectService.saveProject();
   }
 
-  getPeerGroupingSettingsName(tag: string): string {
-    for (const peerGroupingSettings of this.getPeerGroupingSettings()) {
-      if (peerGroupingSettings.tag === tag) {
-        return peerGroupingSettings.name;
+  getPeerGroupingName(tag: string): string {
+    for (const peerGrouping of this.getPeerGroupings()) {
+      if (peerGrouping.tag === tag) {
+        return peerGrouping.name;
       }
     }
     return null;
