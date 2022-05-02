@@ -104,9 +104,4 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   customTrackBy(index: number): number {
     return index;
   }
-
-  peerGroupingTagChanged(tag: string): void {
-    this.authoringComponentContent.peerGroupingTag = tag;
-    this.componentChanged();
-  }
 }

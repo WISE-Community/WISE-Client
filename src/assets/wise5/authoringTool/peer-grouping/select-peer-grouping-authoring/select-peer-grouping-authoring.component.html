@@ -1,6 +1,9 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="bottom-spacing">
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="bottom-spacing">
   <mat-label class="bold" i18n>Grouping Logic:</mat-label>
-  <span>{{ name }}</span>
+  <ng-container [ngSwitch]="name">
+    <span *ngSwitchCase="null" i18n>(None Selected)</span>
+    <span *ngSwitchDefault>{{ name }}</span>
+  </ng-container>
   <button mat-raised-button
       color="primary"
       (click)="selectGroupingLogic()"
