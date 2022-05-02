@@ -1,6 +1,5 @@
 import * as angular from 'angular';
 import { Component, Input } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
@@ -23,7 +22,6 @@ export class EditComponentJsonComponent {
   subscriptions: Subscription = new Subscription();
 
   constructor(
-    private upgrade: UpgradeModule,
     private NotificationService: NotificationService,
     private ProjectService: TeacherProjectService
   ) {}
@@ -66,7 +64,7 @@ export class EditComponentJsonComponent {
         this.showJSONAuthoring = false;
       } else {
         const doRollback = confirm(
-          this.upgrade.$injector.get('$filter')('translate')('jsonInvalidErrorMessage')
+          $localize`The JSON is invalid. Invalid JSON will not be saved.\nClick "OK" to revert back to the last valid JSON.\nClick "Cancel" to keep the invalid JSON open so you can fix it.`
         );
         if (doRollback) {
           this.rollbackToRecentValidJSON();

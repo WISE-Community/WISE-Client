@@ -871,12 +871,8 @@ export class LabelStudent extends ComponentStudent {
     return showWorkConnectedComponentCount;
   }
 
-  generateStarterState(): void {
-    this.NodeService.respondStarterState({
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      starterState: this.getLabelData()
-    });
+  generateStarterState(): any {
+    return this.getLabelData();
   }
 
   attachStudentAsset(studentAsset: any): any {

@@ -2,7 +2,6 @@
 
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
 import { WiseLinkService } from '../../../../app/services/wiseLinkService';
 import { ConfigService } from '../../services/configService';
@@ -41,7 +40,6 @@ export class ComponentAnnotationsComponent {
   wiseLinkCommunicatorId: string;
 
   constructor(
-    private upgrade: UpgradeModule,
     private ConfigService: ConfigService,
     private ProjectService: VLEProjectService,
     private StudentDataService: StudentDataService,
@@ -204,10 +202,10 @@ export class ComponentAnnotationsComponent {
     const latest = this.getLatestAnnotation();
     if (latest) {
       if (latest.type === 'autoComment' || latest.type === 'autoScore') {
-        this.label = this.upgrade.$injector.get('$filter')('translate')('FEEDBACK');
+        this.label = $localize`Feedback`;
         this.icon = 'message';
       } else {
-        this.label = this.upgrade.$injector.get('$filter')('translate')('teacherFeedbackLabel');
+        this.label = $localize`Teacher Feedback`;
         this.icon = 'person';
       }
     }

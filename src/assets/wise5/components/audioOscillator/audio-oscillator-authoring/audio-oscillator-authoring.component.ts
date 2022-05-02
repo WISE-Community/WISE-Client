@@ -1,8 +1,6 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
@@ -17,7 +15,6 @@ import { AudioOscillatorService } from '../audioOscillatorService';
   styleUrls: ['audio-oscillator-authoring.component.scss']
 })
 export class AudioOscillatorAuthoring extends ComponentAuthoring {
-  inputChange: Subject<string> = new Subject<string>();
   maxAmplitude: number = this.AudioOscillatorService.maxAmplitude;
   sawtoothChecked: boolean;
   sineChecked: boolean;
@@ -39,11 +36,6 @@ export class AudioOscillatorAuthoring extends ComponentAuthoring {
     super.ngOnInit();
     this.populateCheckedOscillatorTypes();
     this.initializeStartingAmplitude();
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
-    );
   }
 
   populateCheckedOscillatorTypes(): void {

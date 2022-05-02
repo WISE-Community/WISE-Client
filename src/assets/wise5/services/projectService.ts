@@ -2182,30 +2182,22 @@ export class ProjectService {
    */
   getActionMessage(action) {
     if (action === 'makeAllNodesAfterThisNotVisitable') {
-      return this.upgrade.$injector.get('$filter')('translate')(
-        'allStepsAfterThisOneWillNotBeVisitableUntil'
-      );
+      return $localize`All steps after this one will not be visitable until `;
     }
     if (action === 'makeAllNodesAfterThisNotVisible') {
-      return this.upgrade.$injector.get('$filter')('translate')(
-        'allStepsAfterThisOneWillNotBeVisibleUntil'
-      );
+      return $localize`All steps after this one will not be visible until `;
     }
     if (action === 'makeAllOtherNodesNotVisitable') {
-      return this.upgrade.$injector.get('$filter')('translate')(
-        'allOtherStepsWillNotBeVisitableUntil'
-      );
+      return $localize`All other steps will not be visitable until `;
     }
     if (action === 'makeAllOtherNodesNotVisible') {
-      return this.upgrade.$injector.get('$filter')('translate')(
-        'allOtherStepsWillNotBeVisibleUntil'
-      );
+      return $localize`All other steps will not be visible until `;
     }
     if (action === 'makeThisNodeNotVisitable') {
-      return this.upgrade.$injector.get('$filter')('translate')('thisStepWillNotBeVisitableUntil');
+      return $localize`This step will not be visitable until `;
     }
     if (action === 'makeThisNodeNotVisible') {
-      return this.upgrade.$injector.get('$filter')('translate')('thisStepWillNotBeVisibleUntil');
+      return $localize`This step will not be visible until `;
     }
   }
 
@@ -2227,26 +2219,19 @@ export class ProjectService {
         const nodeId = params.nodeId;
         if (nodeId != null) {
           const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
-          message += this.upgrade.$injector.get('$filter')('translate')('completeNodeTitle', {
-            nodeTitle: nodeTitle
-          });
+          message += $localize`Complete <b>${nodeTitle}</b>"`;
         }
       } else if (name === 'isVisited') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
           const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
-          message += this.upgrade.$injector.get('$filter')('translate')('visitNodeTitle', {
-            nodeTitle: nodeTitle
-          });
+          message += $localize`Visit <b>${nodeTitle}</b>`;
         }
       } else if (name === 'isCorrect') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
           const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
-          message += this.upgrade.$injector.get('$filter')('translate')(
-            'correctlyAnswerNodeTitle',
-            { nodeTitle: nodeTitle }
-          );
+          message += $localize`Correctly answer <b>${nodeTitle}</b>`;
         }
       } else if (name === 'score') {
         const nodeId = params.nodeId;
@@ -2261,13 +2246,7 @@ export class ProjectService {
         if (scores != null) {
           scoresString = scores.join(', ');
         }
-        message += this.upgrade.$injector.get('$filter')('translate')(
-          'obtainAScoreOfXOnNodeTitle',
-          {
-            score: scoresString,
-            nodeTitle: nodeTitle
-          }
-        );
+        message += $localize`Obtain a score of <b>${scoresString}</b> on <b>${nodeTitle}</b>`;
       } else if (name === 'choiceChosen') {
         const nodeId = params.nodeId;
         const componentId = params.componentId;
@@ -2275,10 +2254,7 @@ export class ProjectService {
         let nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
         let choices = this.getChoiceTextByNodeIdAndComponentId(nodeId, componentId, choiceIds);
         let choiceText = choices.join(', ');
-        message += this.upgrade.$injector.get('$filter')('translate')('chooseChoiceOnNodeTitle', {
-          choiceText: choiceText,
-          nodeTitle: nodeTitle
-        });
+        message += $localize`You must choose "${choiceText}" on "${nodeTitle}"`;
       } else if (name === 'usedXSubmits') {
         const nodeId = params.nodeId;
         let nodeTitle = '';
@@ -2290,92 +2266,55 @@ export class ProjectService {
         }
 
         if (requiredSubmitCount == 1) {
-          message += this.upgrade.$injector.get('$filter')('translate')('submitXTimeOnNodeTitle', {
-            requiredSubmitCount: requiredSubmitCount,
-            nodeTitle: nodeTitle
-          });
+          message += $localize`Submit <b>${requiredSubmitCount}</b> time on <b>${nodeTitle}</b>`;
         } else {
-          message += this.upgrade.$injector.get('$filter')('translate')('submitXTimesOnNodeTitle', {
-            requiredSubmitCount: requiredSubmitCount,
-            nodeTitle: nodeTitle
-          });
+          message += $localize`Submit <b>${requiredSubmitCount}</b> times on <b>${nodeTitle}</b>`;
         }
       } else if (name === 'branchPathTaken') {
         const fromNodeId = params.fromNodeId;
         const fromNodeTitle = this.getNodePositionAndTitleByNodeId(fromNodeId);
         const toNodeId = params.toNodeId;
         const toNodeTitle = this.getNodePositionAndTitleByNodeId(toNodeId);
-        message += this.upgrade.$injector.get('$filter')('translate')('branchPathTakenFromTo', {
-          fromNodeTitle: fromNodeTitle,
-          toNodeTitle: toNodeTitle
-        });
+        message += $localize`Take the branch path from <b>${fromNodeTitle}</b> to <b>${toNodeTitle}</b>`;
       } else if (name === 'wroteXNumberOfWords') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
           const requiredNumberOfWords = params.requiredNumberOfWords;
           const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
-          message += this.upgrade.$injector.get('$filter')('translate')(
-            'writeXNumberOfWordsOnNodeTitle',
-            {
-              requiredNumberOfWords: requiredNumberOfWords,
-              nodeTitle: nodeTitle
-            }
-          );
+          message += $localize`Write <b>${requiredNumberOfWords}</b> words on <b>${nodeTitle}</b>`;
         }
       } else if (name === 'isVisible') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
           const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
-          message += this.upgrade.$injector.get('$filter')('translate')('nodeTitleIsVisible', {
-            nodeTitle: nodeTitle
-          });
+          message += $localize`"${nodeTitle}" is visible`;
         }
       } else if (name === 'isVisitable') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
           const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
-          message += this.upgrade.$injector.get('$filter')('translate')('nodeTitleIsVisitable', {
-            nodeTitle: nodeTitle
-          });
+          message += $localize`"${nodeTitle}" is visitable`;
         }
       } else if (name === 'addXNumberOfNotesOnThisStep') {
         const nodeId = params.nodeId;
         const requiredNumberOfNotes = params.requiredNumberOfNotes;
         const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
         if (requiredNumberOfNotes == 1) {
-          message += this.upgrade.$injector.get('$filter')('translate')(
-            'addXNumberOfNotesOnThisStepSingular',
-            {
-              requiredNumberOfNotes: requiredNumberOfNotes,
-              nodeTitle: nodeTitle
-            }
-          );
+          message += $localize`Add <b>${requiredNumberOfNotes}</b> note on <b>${nodeTitle}</b>`;
         } else {
-          message += this.upgrade.$injector.get('$filter')('translate')(
-            'addXNumberOfNotesOnThisStepPlural',
-            {
-              requiredNumberOfNotes: requiredNumberOfNotes,
-              nodeTitle: nodeTitle
-            }
-          );
+          message += $localize`Add <b>${requiredNumberOfNotes}</b> notes on <b>${nodeTitle}</b>`;
         }
       } else if (name === 'fillXNumberOfRows') {
         const requiredNumberOfFilledRows = params.requiredNumberOfFilledRows;
         const nodeId = params.nodeId;
         const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
         if (requiredNumberOfFilledRows == 1) {
-          message += this.upgrade.$injector.get('$filter')('translate')('youMustFillInXRow', {
-            requiredNumberOfFilledRows: requiredNumberOfFilledRows,
-            nodeTitle: nodeTitle
-          });
+          message += $localize`You must fill in <b>${requiredNumberOfFilledRows}</b> row in the <b>Table</b> on <b>${nodeTitle}</b>`;
         } else {
-          message += this.upgrade.$injector.get('$filter')('translate')('youMustFillInXRows', {
-            requiredNumberOfFilledRows: requiredNumberOfFilledRows,
-            nodeTitle: nodeTitle
-          });
+          message += $localize`You must fill in <b>${requiredNumberOfFilledRows}</b> rows in the <b>Table</b> on <b>${nodeTitle}</b>`;
         }
       } else if (name === 'teacherRemoval') {
-        message += this.upgrade.$injector.get('$filter')('translate')('waitForTeacherToUnlock');
+        message += $localize`Wait for your teacher to unlock the item`;
       }
     }
     return message;

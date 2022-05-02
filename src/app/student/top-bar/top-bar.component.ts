@@ -126,7 +126,8 @@ export class TopBarComponent {
   viewAlerts($event: any): void {
     $event.stopPropagation();
     this.dialog.open(NotificationsDialogComponent, {
-      panelClass: 'dialog-sm'
+      panelClass: 'dialog-sm',
+      autoFocus: false
     });
   }
 

@@ -9,7 +9,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
-import { Observable, Subject } from 'rxjs';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ConfigService } from '../../../services/configService';
@@ -18,14 +17,10 @@ import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { MockNodeService } from '../../common/MockNodeService';
 import { AnimationAuthoring } from './animation-authoring.component';
 
 export class MockConfigService {}
-
-export class MockNodeService {
-  private starterStateResponseSource: Subject<any> = new Subject<any>();
-  public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
-}
 
 let component: AnimationAuthoring;
 let fixture: ComponentFixture<AnimationAuthoring>;

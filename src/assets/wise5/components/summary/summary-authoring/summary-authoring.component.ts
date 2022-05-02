@@ -1,8 +1,6 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
@@ -21,7 +19,6 @@ export class SummaryAuthoring extends ComponentAuthoring {
   isHighlightCorrectAnswerAvailable: boolean = false;
   isPieChartAllowed: boolean = true;
   stepNodesDetails: string[];
-  inputChange: Subject<string> = new Subject<string>();
 
   constructor(
     protected ConfigService: ConfigService,
@@ -33,11 +30,6 @@ export class SummaryAuthoring extends ComponentAuthoring {
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
     this.stepNodesDetails = this.ProjectService.getStepNodesDetailsInOrder();
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
-    );
   }
 
   ngOnInit(): void {
@@ -178,20 +170,11 @@ export class SummaryAuthoring extends ComponentAuthoring {
   }
 
   deleteCustomLabelColor(index: number): void {
-    if (confirm($localize`Are you sure you want to delete this custom label color?`)) {
-      this.authoringComponentContent.customLabelColors.splice(index, 1);
-      this.componentChanged();
-    }
-  }
-
-  moveCustomLabelColorUp(index: number): void {
-    this.UtilService.moveObjectUp(this.authoringComponentContent.customLabelColors, index);
-    this.componentChanged();
-  }
-
-  moveCustomLabelColorDown(index: number): void {
-    this.UtilService.moveObjectDown(this.authoringComponentContent.customLabelColors, index);
-    this.componentChanged();
+    this.confirmAndRemove(
+      $localize`Are you sure you want to delete this custom label color?`,
+      this.authoringComponentContent.customLabelColors,
+      index
+    );
   }
 
   getComponentsByNodeId(nodeId: string): any[] {

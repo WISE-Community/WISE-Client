@@ -54,7 +54,7 @@ export class TeacherProjectService extends ProjectService {
         {
           id: 'group1',
           type: 'group',
-          title: this.UtilService.translate('FIRST_ACTIVITY'),
+          title: $localize`First Lesson`,
           startId: 'node1',
           ids: ['node1'],
           icons: {
@@ -69,7 +69,7 @@ export class TeacherProjectService extends ProjectService {
         {
           id: 'node1',
           type: 'node',
-          title: this.UtilService.translate('FIRST_STEP'),
+          title: $localize`First Step`,
           components: [],
           constraints: [],
           showSaveButton: false,
@@ -91,7 +91,7 @@ export class TeacherProjectService extends ProjectService {
       },
       notebook: {
         enabled: false,
-        label: this.UtilService.translate('NOTEBOOK'),
+        label: $localize`Notebook`,
         enableAddNew: true,
         itemTypes: {
           note: {
@@ -103,9 +103,9 @@ export class TeacherProjectService extends ProjectService {
             enableStudentUploads: true,
             requireTextOnEveryNote: false,
             label: {
-              singular: this.UtilService.translate('NOTE_LOWERCASE'),
-              plural: this.UtilService.translate('NOTES_LOWERCASE'),
-              link: this.UtilService.translate('NOTES'),
+              singular: $localize`note`,
+              plural: $localize`notes`,
+              link: $localize`Notes`,
               icon: 'note',
               color: '#1565C0'
             }
@@ -113,19 +113,19 @@ export class TeacherProjectService extends ProjectService {
           report: {
             enabled: false,
             label: {
-              singular: this.UtilService.translate('REPORT_LOWERCASE'),
-              plural: this.UtilService.translate('REPORTS_LOWERCASE'),
-              link: this.UtilService.translate('REPORT'),
+              singular: $localize`report`,
+              plural: $localize`reports`,
+              link: $localize`Report`,
               icon: 'assignment',
               color: '#AD1457'
             },
             notes: [
               {
                 reportId: 'finalReport',
-                title: this.UtilService.translate('FINAL_REPORT'),
-                description: this.UtilService.translate('REPORT_DESCRIPTION'),
-                prompt: this.UtilService.translate('REPORT_PROMPT'),
-                content: this.UtilService.translate('REPORT_CONTENT')
+                title: $localize`Final Report`,
+                description: $localize`Final summary report of what you learned in this unit`,
+                prompt: $localize`Use this space to write your final report using evidence from your notebook.`,
+                content: $localize`<h3>This is a heading</h3><p>This is a paragraph.</p>`
               }
             ]
           }
@@ -133,7 +133,7 @@ export class TeacherProjectService extends ProjectService {
       },
       teacherNotebook: {
         enabled: true,
-        label: this.UtilService.translate('TEACHER_NOTEBOOK'),
+        label: $localize`Teacher Notebook`,
         enableAddNew: true,
         itemTypes: {
           note: {
@@ -145,9 +145,9 @@ export class TeacherProjectService extends ProjectService {
             enableStudentUploads: true,
             requireTextOnEveryNote: false,
             label: {
-              singular: this.UtilService.translate('NOTE_LOWERCASE'),
-              plural: this.UtilService.translate('NOTES_LOWERCASE'),
-              link: this.UtilService.translate('NOTES'),
+              singular: $localize`note`,
+              plural: $localize`notes`,
+              link: $localize`Notes`,
               icon: 'note',
               color: '#1565C0'
             }
@@ -155,19 +155,19 @@ export class TeacherProjectService extends ProjectService {
           report: {
             enabled: true,
             label: {
-              singular: this.UtilService.translate('TEACHER_REPORT_LOWERCASE'),
-              plural: this.UtilService.translate('TEACHER_REPORTS_LOWERCASE'),
-              link: this.UtilService.translate('TEACHER_REPORT'),
+              singular: $localize`teacher notes`,
+              plural: $localize`teacher notes`,
+              link: $localize`Teacher Notes`,
               icon: 'assignment',
               color: '#AD1457'
             },
             notes: [
               {
                 reportId: 'teacherReport',
-                title: this.UtilService.translate('TEACHER_REPORT'),
-                description: this.UtilService.translate('TEACHER_REPORT_DESCRIPTION'),
-                prompt: this.UtilService.translate('TEACHER_REPORT_PROMPT'),
-                content: this.UtilService.translate('TEACHER_REPORT_CONTENT')
+                title: $localize`Teacher Notes`,
+                description: $localize`Notes for the teacher as they're running the WISE unit`,
+                prompt: $localize`Use this space to take notes for this unit`,
+                content: $localize`<p>Use this space to take notes for this unit</p>`
               }
             ]
           }
@@ -2940,5 +2940,21 @@ export class TeacherProjectService extends ProjectService {
 
   broadcastProjectSaved() {
     this.projectSavedSource.next();
+  }
+
+  moveObjectUp(objects: any[], index: number): void {
+    if (index !== 0) {
+      const object = objects[index];
+      objects.splice(index, 1);
+      objects.splice(index - 1, 0, object);
+    }
+  }
+
+  moveObjectDown(objects: any[], index: number): void {
+    if (index !== objects.length - 1) {
+      const object = objects[index];
+      objects.splice(index, 1);
+      objects.splice(index + 1, 0, object);
+    }
   }
 }

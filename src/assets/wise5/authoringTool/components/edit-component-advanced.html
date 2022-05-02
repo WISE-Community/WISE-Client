@@ -22,8 +22,7 @@
         <edit-open-response-advanced ng-switch-when="OpenResponse" node-id='{{$ctrl.nodeId}}' component-id='{{$ctrl.component.id}}'></edit-open-response-advanced>
         <edit-outside-url-advanced ng-switch-when="OutsideURL" node-id='{{$ctrl.nodeId}}' component-id='{{$ctrl.component.id}}'></edit-outside-url-advanced>
         <edit-peer-chat-advanced ng-switch-when="PeerChat" node-id='{{$ctrl.nodeId}}' component-id='{{$ctrl.component.id}}'></edit-peer-chat-advanced>
-        <edit-show-group-work-advanced ng-switch-when="ShowGroupWork" node-id='{{$ctrl.nodeId}}' component-id='{{$ctrl.component.id}}'></edit-show-group-work-advanced>
-        <edit-show-my-work-advanced ng-switch-when="ShowMyWork" node-id='{{$ctrl.nodeId}}' component-id='{{$ctrl.component.id}}'></edit-show-my-work-advanced>
+        <edit-component-json ng-switch-when="ShowGroupWork|ShowMyWork" ng-switch-when-separator="|" node-id='{{$ctrl.nodeId}}' component-id='{{$ctrl.component.id}}'></edit-component-json>
         <edit-summary-advanced ng-switch-when="Summary" node-id='{{$ctrl.nodeId}}' component-id='{{$ctrl.component.id}}'></edit-summary-advanced>
         <edit-table-advanced ng-switch-when="Table" node-id='{{$ctrl.nodeId}}' component-id='{{$ctrl.component.id}}'></edit-table-advanced>
       </ng-content>

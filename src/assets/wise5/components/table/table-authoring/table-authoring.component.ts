@@ -20,7 +20,6 @@ export class TableAuthoring extends ComponentAuthoring {
   numColumnsChange: Subject<number> = new Subject<number>();
   numRowsChange: Subject<number> = new Subject<number>();
   globalCellSizeChange: Subject<number> = new Subject<number>();
-  inputChange: Subject<string> = new Subject<string>();
 
   constructor(
     protected ConfigService: ConfigService,
@@ -41,11 +40,6 @@ export class TableAuthoring extends ComponentAuthoring {
     );
     this.subscriptions.add(
       this.globalCellSizeChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
-    );
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
       })
     );

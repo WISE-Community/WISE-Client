@@ -10,7 +10,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { configureTestSuite } from 'ng-bullet';
-import { Observable, Subject } from 'rxjs';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -23,15 +22,11 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { MockNodeService } from '../../common/MockNodeService';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapAuthoring } from './concept-map-authoring.component';
 
 export class MockConfigService {}
-
-export class MockNodeService {
-  private starterStateResponseSource: Subject<any> = new Subject<any>();
-  public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
-}
 
 let component: ConceptMapAuthoring;
 let fixture: ComponentFixture<ConceptMapAuthoring>;
@@ -85,9 +80,6 @@ describe('ConceptMapAuthoring', () => {
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
     fixture.detectChanges();
   });
-
-  moveTheObjectDown();
-  moveTheObjectUp();
 });
 
 function createComponentContent() {
@@ -157,28 +149,4 @@ function createComponentContent() {
     showNodeLabels: true,
     showAddToNotebookButton: true
   };
-}
-
-function moveTheObjectUp() {
-  it('should move the object up', () => {
-    const componentChangedSpy = spyOn(component, 'componentChanged');
-    component.moveNodeUpButtonClicked(1);
-    expect(componentChangedSpy).toHaveBeenCalled();
-    expect(component.authoringComponentContent.nodes[0].id).toEqual('node2');
-    expect(component.authoringComponentContent.nodes[1].id).toEqual('node1');
-    expect(component.authoringComponentContent.nodes[2].id).toEqual('node3');
-    expect(component.authoringComponentContent.nodes[3].id).toEqual('node4');
-  });
-}
-
-function moveTheObjectDown() {
-  it('should move the object down', () => {
-    const componentChangedSpy = spyOn(component, 'componentChanged');
-    component.moveNodeDownButtonClicked(1);
-    expect(componentChangedSpy).toHaveBeenCalled();
-    expect(component.authoringComponentContent.nodes[0].id).toEqual('node1');
-    expect(component.authoringComponentContent.nodes[1].id).toEqual('node3');
-    expect(component.authoringComponentContent.nodes[2].id).toEqual('node2');
-    expect(component.authoringComponentContent.nodes[3].id).toEqual('node4');
-  });
 }

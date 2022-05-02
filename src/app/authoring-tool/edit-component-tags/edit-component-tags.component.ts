@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
@@ -15,7 +14,7 @@ export class EditComponentTagsComponent {
   tagChanged: Subject<any> = new Subject<any>();
   tagChangedSubscription: Subscription;
 
-  constructor(private ProjectService: TeacherProjectService, private upgrade: UpgradeModule) {}
+  constructor(private ProjectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.tagChangedSubscription = this.tagChanged
@@ -57,11 +56,7 @@ export class EditComponentTagsComponent {
   }
 
   deleteTag(indexOfTagToDelete: number): void {
-    if (
-      confirm(
-        this.upgrade.$injector.get('$filter')('translate')('areYouSureYouWantToDeleteThisTag')
-      )
-    ) {
+    if (confirm($localize`Are you sure you want to delete this tag?`)) {
       this.authoringComponentContent.tags.splice(indexOfTagToDelete, 1);
       this.ProjectService.componentChanged();
     }

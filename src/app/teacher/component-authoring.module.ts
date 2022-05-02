@@ -66,9 +66,7 @@ import { EditTableAdvancedComponent } from '../../assets/wise5/components/table/
 import { EditPeerChatAdvancedComponentComponent } from '../../assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component';
 import { PeerChatAuthoringComponent } from '../../assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component';
 import { ShowMyWorkAuthoringComponent } from '../../assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component';
-import { EditShowMyWorkAdvancedComponent } from '../../assets/wise5/components/showMyWork/edit-show-my-work-advanced/edit-show-my-work-advanced.component';
 import { ShowGroupWorkAuthoringComponent } from '../../assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component';
-import { EditShowGroupWorkAdvancedComponent } from '../../assets/wise5/components/showGroupWork/edit-show-group-work-advanced/edit-show-group-work-advanced.component';
 import { EditComponentPeerGroupingTagComponent } from '../authoring-tool/edit-component-peer-grouping-tag/edit-component-peer-grouping-tag.component';
 import { EditDialogGuidanceAdvancedComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component';
 import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
@@ -129,8 +127,6 @@ import { PeerGroupingAuthoringModule } from '../../assets/wise5/authoringTool/pe
     EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EditPeerChatAdvancedComponentComponent,
-    EditShowGroupWorkAdvancedComponent,
-    EditShowMyWorkAdvancedComponent,
     EditSummaryAdvancedComponent,
     EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,
@@ -200,8 +196,6 @@ import { PeerGroupingAuthoringModule } from '../../assets/wise5/authoringTool/pe
     EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EditPeerChatAdvancedComponentComponent,
-    EditShowGroupWorkAdvancedComponent,
-    EditShowMyWorkAdvancedComponent,
     EditSummaryAdvancedComponent,
     EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,

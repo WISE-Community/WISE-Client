@@ -28,7 +28,7 @@
   </mat-form-field>
   <button mat-raised-button
       color="primary"
-      (click)="moveQuestionUp(questionIndex)"
+      (click)="moveObjectUp(authoringComponentContent.questionBank, questionIndex)"
       [disabled]="isFirst"
       matTooltip="Move Question Up"
       matTooltipPosition="above"
@@ -37,7 +37,7 @@
   </button>
   <button mat-raised-button
       color="primary"
-      (click)="moveQuestionDown(questionIndex)"
+      (click)="moveObjectDown(authoringComponentContent.questionBank, questionIndex)"
       [disabled]="isLast"
       matTooltip="Move Question Down"
       matTooltipPosition="above"

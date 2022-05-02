@@ -4,6 +4,7 @@
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
       mode="student">
   </animation-student>
   <audio-oscillator-student *ngSwitchCase="'AudioOscillator'"
@@ -11,6 +12,7 @@
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
       mode="student">
   </audio-oscillator-student>
   <concept-map-student *ngSwitchCase="'ConceptMap'"
@@ -18,6 +20,7 @@
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
       mode="student">
   </concept-map-student>
   <dialog-guidance-student *ngSwitchCase="'DialogGuidance'"
@@ -39,6 +42,7 @@
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
       mode="student">
   </draw-student>
   <embedded-student *ngSwitchCase="'Embedded'"
@@ -46,6 +50,7 @@
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
       mode="student">
   </embedded-student>
   <graph-student *ngSwitchCase="'Graph'"
@@ -53,6 +58,7 @@
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
       mode="student">
   </graph-student>
   <html-student *ngSwitchCase="'HTML'"
@@ -65,6 +71,7 @@
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
       mode="student">
   </label-student>
   <match-student *ngSwitchCase="'Match'"
@@ -72,6 +79,7 @@
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
       mode="student">
   </match-student>
   <multiple-choice-student *ngSwitchCase="'MultipleChoice'"
@@ -79,13 +87,16 @@
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
       mode="student">
   </multiple-choice-student>
   <open-response-student *ngSwitchCase="'OpenResponse'"
       [nodeId]="nodeId"
       [componentContent]="componentContent"
       [componentState]="componentState"
-      [workgroupId]="workgroupId">
+      [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
+      mode="student">
   </open-response-student>
   <outside-url-student *ngSwitchCase="'OutsideURL'"
       [nodeId]="nodeId"
@@ -125,6 +136,7 @@
       [componentContent]="componentContent"
       [componentState]="componentState"
       [workgroupId]="workgroupId"
+      (saveComponentStateEvent)="saveComponentState($event)"
       mode="student">
   </table-student>
 </div>

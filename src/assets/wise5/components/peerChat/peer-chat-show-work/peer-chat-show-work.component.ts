@@ -77,11 +77,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
 
   private setPeerChatMessages(componentStates: any[]): void {
     this.peerChatMessages = [];
-    componentStates.forEach((componentState: any) => {
-      this.peerChatMessages.push(
-        this.peerChatService.convertComponentStateToPeerChatMessage(componentState)
-      );
-    });
+    this.peerChatService.setPeerChatMessages(this.peerChatMessages, componentStates);
   }
 
   private addWorkgroupIdsFromPeerChatMessages(
@@ -94,15 +90,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   }
 
   private setPeerChatWorkgroupInfos(workgroupIds: number[]): void {
-    for (const workgroupId of workgroupIds) {
-      this.peerChatWorkgroupInfos[workgroupId] = {
-        avatarColor: this.configService.getAvatarColorForWorkgroupId(workgroupId),
-        displayNames: this.configService.isTeacherWorkgroupId(workgroupId)
-          ? $localize`Teacher`
-          : this.configService.getUsernamesStringByWorkgroupId(workgroupId),
-        isTeacher: this.configService.isTeacherWorkgroupId(workgroupId)
-      };
-    }
+    this.peerChatService.setPeerChatWorkgroups(this.peerChatWorkgroupInfos, workgroupIds);
     this.isPeerChatWorkgroupsAvailable = true;
   }
 }

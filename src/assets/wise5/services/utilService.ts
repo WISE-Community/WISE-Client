@@ -53,10 +53,6 @@ export class UtilService {
     this.upgrade.$injector.get('$rootScope').$broadcast(event, data);
   }
 
-  translate(key) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
-  }
-
   generateKey(length = 10) {
     let key = '';
     for (let a = 0; a < length; a++) {
@@ -693,22 +689,6 @@ export class UtilService {
       return true;
     } catch (e) {
       return false;
-    }
-  }
-
-  moveObjectUp(objects, index) {
-    if (index !== 0) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index - 1, 0, object);
-    }
-  }
-
-  moveObjectDown(objects, index) {
-    if (index !== objects.length - 1) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index + 1, 0, object);
     }
   }
 

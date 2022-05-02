@@ -14,6 +14,7 @@ export abstract class ComponentAuthoring {
   @Input()
   componentId: string;
 
+  inputChange: Subject<string> = new Subject<string>();
   promptChange: Subject<string> = new Subject<string>();
   allowedConnectedComponentTypes: string[];
   authoringComponentContent: any;
@@ -54,12 +55,24 @@ export abstract class ComponentAuthoring {
       })
     );
     this.subscriptions.add(
+      this.NodeService.deleteStarterState$.subscribe((args: any) => {
+        if (this.isForThisComponent(args)) {
+          this.deleteStarterState();
+        }
+      })
+    );
+    this.subscriptions.add(
       this.promptChange
         .pipe(debounceTime(1000), distinctUntilChanged())
         .subscribe((prompt: string) => {
           this.authoringComponentContent.prompt = prompt;
           this.componentChanged();
         })
+    );
+    this.subscriptions.add(
+      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
+        this.componentChanged();
+      })
     );
   }
 
@@ -90,6 +103,8 @@ export abstract class ComponentAuthoring {
   isForThisComponent(object: any): boolean {
     return object.nodeId == this.nodeId && object.componentId == this.componentId;
   }
+
+  deleteStarterState(): void {}
 
   saveStarterState(starterState: any): void {}
 
@@ -141,5 +156,22 @@ export abstract class ComponentAuthoring {
       // remove the field we previously used to trigger the reload
       delete this.authoringComponentContent.reloadTime;
     });
+  }
+
+  confirmAndRemove(message: string, array: any[], index: number): void {
+    if (confirm(message)) {
+      array.splice(index, 1);
+      this.componentChanged();
+    }
+  }
+
+  moveObjectUp(objects: any[], index: number): void {
+    this.ProjectService.moveObjectUp(objects, index);
+    this.componentChanged();
+  }
+
+  moveObjectDown(objects: any[], index: number): void {
+    this.ProjectService.moveObjectDown(objects, index);
+    this.componentChanged();
   }
 }

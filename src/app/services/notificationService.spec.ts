@@ -14,13 +14,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 let configService: ConfigService;
 let http: HttpTestingController;
-let notification1: Notification;
-let notification2: Notification;
-let notification3: Notification;
-let notification4: Notification;
-let notification5: Notification;
-let notification6: Notification;
-let notifications = [];
+let notification1,
+  notification2,
+  notification3,
+  notification4,
+  notification5,
+  notification6: Notification;
+let notifications: Notification[];
 let service: NotificationService;
 
 const componentId1 = 'component1';
@@ -64,69 +64,55 @@ describe('NotificationService', () => {
 });
 
 function createTestNotifications(): Notification[] {
-  notification1 = createNotification(
-    nodeId2,
-    componentId2,
-    workgroupId2,
-    workgroupId3,
-    discussionReplyType
-  );
-  notification2 = createNotification(
-    nodeId1,
-    componentId1,
-    workgroupId2,
-    workgroupId1,
-    peerChatMessageType,
-    timeDismissed
-  );
-  notification3 = createNotification(
-    nodeId1,
-    componentId1,
-    workgroupId2,
-    workgroupId1,
-    peerChatMessageType,
-    timeDismissed
-  );
-  notification4 = createNotification(
-    nodeId1,
-    componentId1,
-    workgroupId2,
-    workgroupId1,
-    peerChatMessageType
-  );
-  notification5 = createNotification(
-    nodeId1,
-    componentId1,
-    workgroupId3,
-    workgroupId1,
-    peerChatMessageType
-  );
-  notification6 = createNotification(
-    nodeId1,
-    componentId1,
-    workgroupId2,
-    workgroupId1,
-    peerChatMessageType
-  );
+  notification1 = new Notification({
+    nodeId: nodeId2,
+    componentId: componentId2,
+    fromWorkgroupId: workgroupId2,
+    toWorkgroupId: workgroupId3,
+    type: discussionReplyType,
+    timeDismissed: timeDismissed
+  });
+  notification2 = new Notification({
+    nodeId: nodeId1,
+    componentId: componentId1,
+    fromWorkgroupId: workgroupId2,
+    toWorkgroupId: workgroupId1,
+    type: peerChatMessageType,
+    timeDismissed: timeDismissed
+  });
+  notification3 = new Notification({
+    nodeId: nodeId1,
+    componentId: componentId1,
+    fromWorkgroupId: workgroupId2,
+    toWorkgroupId: workgroupId1,
+    type: peerChatMessageType,
+    timeDismissed: timeDismissed
+  });
+  notification4 = new Notification({
+    nodeId: nodeId1,
+    componentId: componentId1,
+    fromWorkgroupId: workgroupId2,
+    toWorkgroupId: workgroupId1,
+    type: peerChatMessageType,
+    timeDismissed: null
+  });
+  notification5 = new Notification({
+    nodeId: nodeId1,
+    componentId: componentId1,
+    fromWorkgroupId: workgroupId3,
+    toWorkgroupId: workgroupId1,
+    type: peerChatMessageType,
+    timeDismissed: null
+  });
+  notification6 = new Notification({
+    nodeId: nodeId1,
+    componentId: componentId1,
+    fromWorkgroupId: workgroupId2,
+    toWorkgroupId: workgroupId1,
+    type: peerChatMessageType,
+    timeDismissed: null
+  });
   return [notification1, notification2, notification3, notification4, notification5, notification6];
-}
-
-function createNotification(
-  nodeId: string,
-  componentId: string,
-  fromWorkgroupId: number,
-  toWorkgroupId: number,
-  type: string,
-  timeDismissed: number = null
-): Notification {
-  const notification = new Notification();
-  notification.nodeId = nodeId;
-  notification.componentId = componentId;
-  notification.fromWorkgroupId = fromWorkgroupId;
-  notification.toWorkgroupId = toWorkgroupId;
-  notification.type = type;
-  notification.timeDismissed = timeDismissed;
-  return notification;
 }
 
 function retrieveNotifications_Teacher_ShouldReturnAndSetNotifications() {
@@ -141,25 +127,18 @@ function retrieveNotifications_Teacher_ShouldReturnAndSetNotifications() {
 
 function getLatestActiveNotificationsFromUniqueSource_ShouldReturnNotificationsFromUniqueSource() {
   it('should get latest active notifications from unique source', () => {
-    const latestActiveNotificationsFromUniqueSource = service.getLatestActiveNotificationsFromUniqueSource(
-      notifications,
-      workgroupId1
-    );
-    expect(latestActiveNotificationsFromUniqueSource.length).toEqual(2);
-    expect(latestActiveNotificationsFromUniqueSource[0]).toEqual(notification6);
-    expect(latestActiveNotificationsFromUniqueSource[1]).toEqual(notification5);
+    expect(
+      service.getLatestActiveNotificationsFromUniqueSource(notifications, workgroupId1)
+    ).toEqual([notification6, notification5]);
   });
 }
 
 function getDismissedNotificationsForWorkgroup_ShouldReturnDismissedNotifications() {
   it('should get dismissed notifications for workgroup', () => {
-    const dismissedNotifications = service.getDismissedNotificationsForWorkgroup(
-      notifications,
-      workgroupId1
-    );
-    expect(dismissedNotifications.length).toEqual(2);
-    expect(dismissedNotifications[0]).toEqual(notification2);
-    expect(dismissedNotifications[1]).toEqual(notification3);
+    expect(service.getDismissedNotificationsForWorkgroup(notifications, workgroupId1)).toEqual([
+      notification2,
+      notification3
+    ]);
   });
 }
 

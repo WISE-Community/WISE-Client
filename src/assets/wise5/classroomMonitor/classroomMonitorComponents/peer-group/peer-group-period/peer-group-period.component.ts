@@ -150,14 +150,11 @@ export class PeerGroupPeriodComponent implements OnInit {
   }
 
   removeWorkgroupFromGroup(workgroupId: number, groupId: number): void {
-    for (const group of this.groupings) {
-      if (group.id === groupId) {
-        for (let w = 0; w < group.members.length; w++) {
-          if (group.members[w].id === workgroupId) {
-            group.members.splice(w, 1);
-            return;
-          }
-        }
+    const group = this.getGroup(groupId);
+    for (let w = 0; w < group.members.length; w++) {
+      if (group.members[w].id === workgroupId) {
+        group.members.splice(w, 1);
+        return;
       }
     }
   }
@@ -173,11 +170,6 @@ export class PeerGroupPeriodComponent implements OnInit {
   }
 
   getGroup(groupId: number): any {
-    for (const group of this.groupings) {
-      if (group.id === groupId) {
-        return group;
-      }
-    }
-    return null;
+    return this.groupings.find((group) => group.id === groupId);
   }
 }

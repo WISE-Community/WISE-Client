@@ -1,8 +1,6 @@
 'use strict';
 
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
@@ -19,7 +17,6 @@ import { ConceptMapService } from '../conceptMapService';
 export class ConceptMapAuthoring extends ComponentAuthoring {
   availableNodes: any[];
   availableLinks: any[];
-  inputChange: Subject<string> = new Subject<string>();
 
   constructor(
     private ConceptMapService: ConceptMapService,
@@ -30,11 +27,6 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
     protected UtilService: UtilService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
-    );
   }
 
   ngOnInit() {
@@ -45,16 +37,6 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
       this.componentContent.showNodeLabels = true;
       this.authoringComponentContent.showNodeLabels = true;
     }
-  }
-
-  moveNodeUpButtonClicked(index: number): void {
-    this.UtilService.moveObjectUp(this.authoringComponentContent.nodes, index);
-    this.componentChanged();
-  }
-
-  moveNodeDownButtonClicked(index: number): void {
-    this.UtilService.moveObjectDown(this.authoringComponentContent.nodes, index);
-    this.componentChanged();
   }
 
   nodeDeleteButtonClicked(index: number): void {
@@ -70,16 +52,6 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
       nodes.splice(index, 1);
       this.componentChanged();
     }
-  }
-
-  moveLinkUpButtonClicked(index: number): void {
-    this.UtilService.moveObjectUp(this.authoringComponentContent.links, index);
-    this.componentChanged();
-  }
-
-  moveLinkDownButtonClicked(index: number): void {
-    this.UtilService.moveObjectDown(this.authoringComponentContent.links, index);
-    this.componentChanged();
   }
 
   linkDeleteButtonClicked(index: number): void {
@@ -131,22 +103,14 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
     return this.ConceptMapService.getNextAvailableId(this.authoringComponentContent.links, 'link');
   }
 
-  saveStarterConceptMap(): void {
-    if (confirm($localize`Are you sure you want to save the starter concept map?`)) {
-      this.NodeService.requestStarterState({ nodeId: this.nodeId, componentId: this.componentId });
-    }
-  }
-
   saveStarterState(starterState: any): void {
     this.authoringComponentContent.starterConceptMap = starterState;
     this.componentChanged();
   }
 
-  deleteStarterConceptMap(): void {
-    if (confirm($localize`Are you sure you want to delete the starter concept map?`)) {
-      this.authoringComponentContent.starterConceptMap = null;
-      this.componentChanged();
-    }
+  deleteStarterState(): void {
+    this.authoringComponentContent.starterConceptMap = null;
+    this.componentChanged();
   }
 
   assetSelected(args: any): void {

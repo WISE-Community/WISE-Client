@@ -16,7 +16,6 @@ import { MatchService } from '../matchService';
 })
 export class MatchAuthoring extends ComponentAuthoring {
   defaultSourceBucketId: string = '0';
-  inputChange: Subject<string> = new Subject<string>();
   feedbackChange: Subject<string> = new Subject<string>();
 
   constructor(
@@ -28,11 +27,6 @@ export class MatchAuthoring extends ComponentAuthoring {
     protected UtilService: UtilService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
-    );
     this.subscriptions.add(
       this.feedbackChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.turnOnSubmitButtonIfFeedbackExists();

@@ -3,7 +3,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
-import { DiscussionService } from '../discussionService';
+import { TeacherDiscussionService } from '../teacherDiscussionService';
 
 @Component({
   selector: 'discussion-show-work',
@@ -23,7 +23,7 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
   constructor(
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
-    private DiscussionService: DiscussionService,
+    private TeacherDiscussionService: TeacherDiscussionService,
     protected ProjectService: ProjectService
   ) {
     super(ProjectService);
@@ -37,7 +37,7 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
 
   setStudentWork(): void {
     const componentIds = this.getGradingComponentIds();
-    const componentStates = this.DiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
+    const componentStates = this.TeacherDiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
       componentIds,
       this.workgroupId
     );
@@ -76,14 +76,14 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
 
   setClassResponses(componentStates: any[], annotations: any[] = []): void {
     const isStudentMode = false;
-    this.classResponses = this.DiscussionService.getClassResponses(
+    this.classResponses = this.TeacherDiscussionService.getClassResponses(
       componentStates,
       annotations,
       isStudentMode
     );
-    this.responsesMap = this.DiscussionService.getResponsesMap(this.classResponses);
+    this.responsesMap = this.TeacherDiscussionService.getResponsesMap(this.classResponses);
     const isGradingMode = true;
-    this.topLevelResponses = this.DiscussionService.getLevel1Responses(
+    this.topLevelResponses = this.TeacherDiscussionService.getLevel1Responses(
       this.classResponses,
       this.componentId,
       this.workgroupId,
@@ -130,7 +130,7 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
       data
     );
     this.AnnotationService.saveAnnotation(annotation).then(() => {
-      const componentStates = this.DiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
+      const componentStates = this.TeacherDiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
         this.getGradingComponentIds(),
         this.workgroupId
       );
@@ -169,7 +169,7 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
       data
     );
     this.AnnotationService.saveAnnotation(annotation).then(() => {
-      const componentStates = this.DiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
+      const componentStates = this.TeacherDiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
         this.getGradingComponentIds(),
         this.workgroupId
       );

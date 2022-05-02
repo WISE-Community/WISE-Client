@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { Observable, Subject } from 'rxjs';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ConfigService } from '../../../services/configService';
@@ -17,12 +16,8 @@ import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { MockNodeService } from '../../common/MockNodeService';
 import { PeerChatAuthoringComponent } from './peer-chat-authoring.component';
-
-export class MockNodeService {
-  private starterStateResponseSource: Subject<any> = new Subject<any>();
-  public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
-}
 
 const componentContent = {
   id: 'qn3savv52r',
