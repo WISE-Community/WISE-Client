@@ -14,10 +14,6 @@
     border-top-width: 0;
   }
 
-  .mat-select-arrow-wrapper {
-    display: block;
-  }
-
   .mat-form-field-label-wrapper {
     display: none;
   }
@@ -28,6 +24,12 @@
 
   .mat-select-value-text {
     font-weight: 500;
+  }
+
+  &.mat-form-field-appearance-fill {
+    .mat-select-arrow-wrapper {
+      transform: translateY(0);
+    }
   }
 }
 
