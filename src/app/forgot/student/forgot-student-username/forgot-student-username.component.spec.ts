@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
-import { configureTestSuite } from 'ng-bullet';
 
 export class MockStudentService {}
 
@@ -20,7 +19,7 @@ describe('ForgotStudentUsernameComponent', () => {
     return fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
   };
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotStudentUsernameComponent],
       imports: [
@@ -33,9 +32,6 @@ describe('ForgotStudentUsernameComponent', () => {
       providers: [{ provide: StudentService, useClass: MockStudentService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ForgotStudentUsernameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

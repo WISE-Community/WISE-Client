@@ -1,8 +1,7 @@
-import 'svg.js';
+import SVG from 'svg.js';
 import 'svg.draggable.js';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HtmlDialog } from '../../../directives/html-dialog/html-dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -14,6 +13,7 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { ConceptMapService } from '../conceptMapService';
+import { DialogWithCloseComponent } from '../../../directives/dialog-with-close/dialog-with-close.component';
 
 @Component({
   selector: 'concept-map-student',
@@ -406,10 +406,9 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   showFeedbackInPopup(feedbackText: string): void {
-    this.dialog.open(HtmlDialog, {
+    this.dialog.open(DialogWithCloseComponent, {
       data: {
         content: feedbackText,
-        isShowCloseButton: true,
         title: $localize`Feedback`
       }
     });

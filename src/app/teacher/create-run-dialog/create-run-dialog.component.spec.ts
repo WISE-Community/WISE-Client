@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TeacherService } from '../teacher.service';
 import { CreateRunDialogComponent } from './create-run-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,6 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
-import { configureTestSuite } from 'ng-bullet';
 
 export class MockTeacherService {
   createRun() {
@@ -88,7 +87,7 @@ describe('CreateRunDialogComponent', () => {
     return fixture.debugElement.query(By.css('form'));
   };
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, MatRadioModule, MatCheckboxModule],
       declarations: [CreateRunDialogComponent],
@@ -118,9 +117,6 @@ describe('CreateRunDialogComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(CreateRunDialogComponent);
     component = fixture.componentInstance;
     component.project = project;

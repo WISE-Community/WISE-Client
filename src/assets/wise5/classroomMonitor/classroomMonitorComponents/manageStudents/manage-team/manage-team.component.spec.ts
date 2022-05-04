@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
-import { configureTestSuite } from 'ng-bullet';
 import { UpdateWorkgroupService } from '../../../../../../app/services/updateWorkgroupService';
 import { ConfigService } from '../../../../services/configService';
 import { ManageTeamComponent } from './manage-team.component';
@@ -22,18 +22,16 @@ let fixture: ComponentFixture<ManageTeamComponent>;
 let component: ManageTeamComponent;
 
 describe('ManageTeamComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ManageTeamComponent],
-      imports: [MatSnackBarModule],
+      imports: [MatSnackBarModule, MatCardModule],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: UpdateWorkgroupService, useClass: UpdateWorkgroupServiceStub },
         { provide: MatDialog, useValue: {} }
       ]
     });
-  });
-  beforeEach(() => {
     configService = TestBed.inject(ConfigService);
     fixture = TestBed.createComponent(ManageTeamComponent);
     component = fixture.componentInstance;

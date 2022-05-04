@@ -11,7 +11,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -33,8 +32,8 @@ let component: SummaryAuthoring;
 let fixture: ComponentFixture<SummaryAuthoring>;
 let getComponentByNodeIdAndComponentIdSpy;
 
-describe('SummaryAuthoring', () => {
-  configureTestSuite(() => {
+describe('SummaryAuthoringComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -67,9 +66,6 @@ describe('SummaryAuthoring', () => {
       ],
       schemas: []
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(SummaryAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();

@@ -6,7 +6,7 @@ import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Config } from '../../domain/config';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { User } from '../../domain/user';
 import { StudentService } from '../student.service';
 import { RouterTestingModule } from '@angular/router/testing';

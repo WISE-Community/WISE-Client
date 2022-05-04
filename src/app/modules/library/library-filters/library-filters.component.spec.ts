@@ -6,7 +6,6 @@ import { SimpleChange, NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { fakeAsyncResponse } from '../../../student/student-run-list/student-run-list.component.spec';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
-import { configureTestSuite } from 'ng-bullet';
 
 export class MockLibraryService {
   public officialLibraryProjectsSource$ = fakeAsyncResponse([]);
@@ -24,16 +23,13 @@ describe('LibraryFiltersComponent', () => {
   let fixture: ComponentFixture<LibraryFiltersComponent>;
   let projects: LibraryProject[];
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [LibraryFiltersComponent],
       providers: [{ provide: LibraryService, useClass: MockLibraryService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     projects = sampleLibraryProjects;
     fixture = TestBed.createComponent(LibraryFiltersComponent);
     component = fixture.componentInstance;
@@ -53,15 +49,21 @@ describe('LibraryFiltersComponent', () => {
     expect(component.peOptions.length).toBe(3);
   });
 
-  it('should call LibraryService.setFilterValues when the search value changes', waitForAsync(() => {
-    const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
-    component.searchUpdated('photo');
-    expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
-  }));
+  it(
+    'should call LibraryService.setFilterValues when the search value changes',
+    waitForAsync(() => {
+      const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
+      component.searchUpdated('photo');
+      expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
+    })
+  );
 
-  it('should call LibraryService.setFilterValues when a filter value changes', waitForAsync(() => {
-    const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
-    component.filterUpdated(['Earth Sciences', 'Physical Sciences'], 'discipline');
-    expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
-  }));
+  it(
+    'should call LibraryService.setFilterValues when a filter value changes',
+    waitForAsync(() => {
+      const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
+      component.filterUpdated(['Earth Sciences', 'Physical Sciences'], 'discipline');
+      expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
+    })
+  );
 });

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterTeacherComponent } from './register-teacher.component';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';

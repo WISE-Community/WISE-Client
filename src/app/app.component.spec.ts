@@ -1,19 +1,14 @@
-import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { Component } from '@angular/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
-import { Observable, config, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { UtilService } from './services/util.service';
-import { configureTestSuite } from 'ng-bullet';
 import { Announcement } from './domain/announcement';
 import { ConfigService } from './services/config.service';
 import { Config } from './domain/config';
 import { environment } from '../environments/environment';
-
-@Component({ selector: 'router-outlet', template: '' })
-class RouterOutletStubComponent {}
 
 export class MockConfigService {
   private config$: BehaviorSubject<Config> = new BehaviorSubject<Config>(null);
@@ -67,7 +62,7 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   environment.production = true;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
@@ -78,23 +73,20 @@ describe('AppComponent', () => {
       imports: [RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create the app', waitForAsync(() => {
+  it('should create the app', () => {
     expect(component).toBeTruthy();
-  }));
+  });
 
-  it(`should have as title 'app'`, waitForAsync(() => {
+  it(`should have as title 'app'`, () => {
     expect(component.title).toEqual('app');
-  }));
+  });
 
-  it(`should show announcement banner and hide when dismissed`, waitForAsync(() => {
+  it(`should show announcement banner and hide when dismissed`, () => {
     component.hasAnnouncement = true;
     fixture.detectChanges();
     const shadowRoot: DocumentFragment = fixture.debugElement.nativeElement;
@@ -102,9 +94,9 @@ describe('AppComponent', () => {
     component.dismissAnnouncement();
     fixture.detectChanges();
     expect(shadowRoot.querySelector('app-announcement')).toBeFalsy();
-  }));
+  });
 
-  it(`should set Google Analytics tracking code`, waitForAsync(() => {
+  it(`should set Google Analytics tracking code`, () => {
     expect(component.googleAnalyticsId).toEqual('UA-XXXXXX-1');
-  }));
+  });
 });

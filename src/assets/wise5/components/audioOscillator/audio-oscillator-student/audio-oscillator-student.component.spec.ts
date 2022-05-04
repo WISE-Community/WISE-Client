@@ -10,7 +10,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
@@ -46,7 +45,7 @@ const componentId = 'component1';
 const nodeId = 'node1';
 
 describe('AudioOscillatorStudent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -79,9 +78,6 @@ describe('AudioOscillatorStudent', () => {
       ],
       schemas: []
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(AudioOscillatorStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       comment: '',
@@ -159,52 +155,52 @@ function setStudentWork() {
     beforeEach(() => {
       spyOn(component, 'processLatestStudentWork').and.callFake(() => {});
     });
-  });
-  it('should set student work when there is no amplitude data', () => {
-    const audioOscillatorStudentData = {
-      amplitudesPlayed: null,
-      amplitudesPlayedSorted: null,
-      numberOfAmplitudesPlayed: null,
-      numberOfUniqueAmplitudesPlayed: null,
-      minAmplitudePlayed: null,
-      maxAmplitudePlayed: null,
-      frequenciesPlayed: frequenciesPlayed,
-      frequenciesPlayedSorted: frequenciesPlayedSorted,
-      numberOfFrequenciesPlayed: numberOfFrequenciesPlayed,
-      numberOfUniqueFrequenciesPlayed: numberOfUniqueFrequenciesPlayed,
-      minFrequencyPlayed: minFrequencyPlayed,
-      maxFrequencyPlayed: maxFrequencyPlayed,
-      submitCounter: submitCounter
-    };
-    const componentState = createComponentStateObject(audioOscillatorStudentData);
-    component.setStudentWork(componentState);
-    expect(component.frequency).toEqual(800);
-    expect(component.frequenciesPlayed).toEqual(frequenciesPlayed);
-    expect(component.submitCounter).toEqual(submitCounter);
-  });
-  it('should set student work when there is amplitude data', () => {
-    const audioOscillatorStudentData = {
-      amplitudesPlayed: amplitudesPlayed,
-      amplitudesPlayedSorted: amplitudesPlayedSorted,
-      numberOfAmplitudesPlayed: numberOfAmplitudesPlayed,
-      numberOfUniqueAmplitudesPlayed: numberOfUniqueAmplitudesPlayed,
-      minAmplitudePlayed: minAmplitudePlayed,
-      maxAmplitudePlayed: maxAmplitudePlayed,
-      frequenciesPlayed: frequenciesPlayed,
-      frequenciesPlayedSorted: frequenciesPlayedSorted,
-      numberOfFrequenciesPlayed: numberOfFrequenciesPlayed,
-      numberOfUniqueFrequenciesPlayed: numberOfUniqueFrequenciesPlayed,
-      minFrequencyPlayed: minFrequencyPlayed,
-      maxFrequencyPlayed: maxFrequencyPlayed,
-      submitCounter: submitCounter
-    };
-    const componentState = createComponentStateObject(audioOscillatorStudentData);
-    component.setStudentWork(componentState);
-    expect(component.frequency).toEqual(800);
-    expect(component.frequenciesPlayed).toEqual(frequenciesPlayed);
-    expect(component.amplitude).toEqual(22);
-    expect(component.amplitudesPlayed).toEqual(amplitudesPlayed);
-    expect(component.submitCounter).toEqual(submitCounter);
+    it('should set student work when there is no amplitude data', () => {
+      const audioOscillatorStudentData = {
+        amplitudesPlayed: null,
+        amplitudesPlayedSorted: null,
+        numberOfAmplitudesPlayed: null,
+        numberOfUniqueAmplitudesPlayed: null,
+        minAmplitudePlayed: null,
+        maxAmplitudePlayed: null,
+        frequenciesPlayed: frequenciesPlayed,
+        frequenciesPlayedSorted: frequenciesPlayedSorted,
+        numberOfFrequenciesPlayed: numberOfFrequenciesPlayed,
+        numberOfUniqueFrequenciesPlayed: numberOfUniqueFrequenciesPlayed,
+        minFrequencyPlayed: minFrequencyPlayed,
+        maxFrequencyPlayed: maxFrequencyPlayed,
+        submitCounter: submitCounter
+      };
+      const componentState = createComponentStateObject(audioOscillatorStudentData);
+      component.setStudentWork(componentState);
+      expect(component.frequency).toEqual(800);
+      expect(component.frequenciesPlayed).toEqual(frequenciesPlayed);
+      expect(component.submitCounter).toEqual(submitCounter);
+    });
+    it('should set student work when there is amplitude data', () => {
+      const audioOscillatorStudentData = {
+        amplitudesPlayed: amplitudesPlayed,
+        amplitudesPlayedSorted: amplitudesPlayedSorted,
+        numberOfAmplitudesPlayed: numberOfAmplitudesPlayed,
+        numberOfUniqueAmplitudesPlayed: numberOfUniqueAmplitudesPlayed,
+        minAmplitudePlayed: minAmplitudePlayed,
+        maxAmplitudePlayed: maxAmplitudePlayed,
+        frequenciesPlayed: frequenciesPlayed,
+        frequenciesPlayedSorted: frequenciesPlayedSorted,
+        numberOfFrequenciesPlayed: numberOfFrequenciesPlayed,
+        numberOfUniqueFrequenciesPlayed: numberOfUniqueFrequenciesPlayed,
+        minFrequencyPlayed: minFrequencyPlayed,
+        maxFrequencyPlayed: maxFrequencyPlayed,
+        submitCounter: submitCounter
+      };
+      const componentState = createComponentStateObject(audioOscillatorStudentData);
+      component.setStudentWork(componentState);
+      expect(component.frequency).toEqual(800);
+      expect(component.frequenciesPlayed).toEqual(frequenciesPlayed);
+      expect(component.amplitude).toEqual(22);
+      expect(component.amplitudesPlayed).toEqual(amplitudesPlayed);
+      expect(component.submitCounter).toEqual(submitCounter);
+    });
   });
 }
 

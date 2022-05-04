@@ -14,7 +14,6 @@ import { MatListModule } from '@angular/material/list';
 import { DataService } from './services/data.service';
 import { AngularJSModule } from './common-hybrid-angular.module';
 import { NavItemComponent } from '../assets/wise5/vle/nav-item/nav-item.component';
-import { HtmlDialog } from '../assets/wise5/directives/html-dialog/html-dialog';
 import { StudentComponentModule } from './student/student.component.module';
 import { SafeUrl } from '../assets/wise5/directives/safeUrl/safe-url.pipe';
 import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
@@ -25,20 +24,25 @@ import { TopBarModule } from './student/top-bar/top-bar.module';
 import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
 import { ComponentStudentModule } from '../assets/wise5/components/component/component-student.module';
 import { NodeModule } from '../assets/wise5/vle/node/node.module';
+import { VLEComponent } from '../assets/wise5/vle/vle.component';
+import { NotebookModule } from './notebook/notebook.module';
+import { SimpleDialogModule } from '../assets/wise5/directives/simple-dialog.module';
 
 @NgModule({
   declarations: [
     GenerateImageDialogComponent,
-    HtmlDialog,
     NavigationComponent,
     NavItemComponent,
     SafeUrl,
-    StepToolsComponent
+    StepToolsComponent,
+    VLEComponent
   ],
   imports: [
     AngularJSModule,
     ComponentStudentModule,
     NodeModule,
+    NotebookModule,
+    SimpleDialogModule,
     StudentAssetsDialogModule,
     StudentComponentModule,
     SummaryDisplayModule,

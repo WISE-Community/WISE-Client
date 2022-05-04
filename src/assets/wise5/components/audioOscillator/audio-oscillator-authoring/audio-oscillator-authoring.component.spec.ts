@@ -5,7 +5,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -26,7 +25,7 @@ let fixture: ComponentFixture<AudioOscillatorAuthoring>;
 let getComponentByNodeIdAndComponentIdSpy;
 
 describe('AudioOscillatorAuthoring', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -53,9 +52,6 @@ describe('AudioOscillatorAuthoring', () => {
       ],
       schemas: []
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(AudioOscillatorAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();

@@ -3,7 +3,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -45,7 +44,7 @@ let nodeInstanceId1 = 'studentNode1';
 let nodeInstanceId2 = 'studentNode2';
 
 describe('ConceptMapStudent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
       declarations: [ConceptMapStudent],
@@ -65,9 +64,6 @@ describe('ConceptMapStudent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ConceptMapStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,

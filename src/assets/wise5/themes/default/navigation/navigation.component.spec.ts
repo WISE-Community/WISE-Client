@@ -13,6 +13,10 @@ import { NavigationComponent } from './navigation.component';
 
 class MockVLEProjectService {
   rootNode = { ids: [] };
+
+  getProjectRootNode() {
+    return this.rootNode;
+  }
 }
 
 describe('NavigationComponent', () => {

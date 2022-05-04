@@ -159,8 +159,8 @@ class ConceptMapLink {
       const head = arrowPathArraysObject[1];
 
       // draw the head and tail
-      this.head = this.draw.path(head.toString());
-      this.path = this.draw.path(tail.toString());
+      this.head = this.draw.path(head.join(' '));
+      this.path = this.draw.path(tail.join(' '));
     } else {
       // create a straight line
       this.path = this.draw.path('M' + x1 + ',' + y1 + ' L' + x2 + ',' + y2);
@@ -368,8 +368,8 @@ class ConceptMapLink {
       const head = arrowPathArraysObject[1];
 
       // re-plot the head and path
-      this.head.plot(head.toString());
-      this.path.plot(tail.toString());
+      this.head.plot(head.join(' '));
+      this.path.plot(tail.join(' '));
     } else {
       // draw a straight line
 

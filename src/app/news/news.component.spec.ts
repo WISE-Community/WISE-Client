@@ -7,7 +7,6 @@ import { News } from '../domain/news';
 import { Observable } from 'rxjs';
 import { User } from '../domain/user';
 import * as moment from 'moment';
-import { configureTestSuite } from 'ng-bullet';
 
 const createNewsItem = (id, date, type, title, news, owner) => {
   return new News({
@@ -76,16 +75,13 @@ describe('NewsComponent', () => {
     return timelineItem.querySelector('div').innerHTML;
   };
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NewsComponent],
       imports: [MomentModule],
       providers: [{ provide: NewsService, useClass: MockNewsService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(NewsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

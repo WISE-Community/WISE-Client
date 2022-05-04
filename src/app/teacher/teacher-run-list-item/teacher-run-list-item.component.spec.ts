@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TeacherRunListItemComponent } from './teacher-run-list-item.component';
 import { Project } from '../../domain/project';
 import { TeacherService } from '../teacher.service';
@@ -7,7 +7,6 @@ import { ConfigService } from '../../services/config.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MomentModule } from 'ngx-moment';
 import { MatDialogModule } from '@angular/material/dialog';
-import { configureTestSuite } from 'ng-bullet';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -29,7 +28,7 @@ describe('TeacherRunListItemComponent', () => {
   let component: TeacherRunListItemComponent;
   let fixture: ComponentFixture<TeacherRunListItemComponent>;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TeacherRunListItemComponent],
       imports: [MatDialogModule, MomentModule, BrowserAnimationsModule, RouterTestingModule],
@@ -39,9 +38,6 @@ describe('TeacherRunListItemComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(TeacherRunListItemComponent);
     component = fixture.componentInstance;
     const run = new TeacherRun();

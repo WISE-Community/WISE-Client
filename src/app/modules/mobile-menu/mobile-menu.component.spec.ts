@@ -1,75 +1,71 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs';
-import { NO_ERRORS_SCHEMA, Provider } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MobileMenuComponent } from './mobile-menu.component';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
-import { configureTestSuite } from 'ng-bullet';
 
-export class MockUserServiceLogIn {
-  getUser(): Observable<User[]> {
-    const user: User = new User();
-    user.role = 'teacher';
-    return Observable.create((observer) => {
-      observer.next(user);
-      observer.complete();
-    });
+export class MockUserService {
+  getUser(): Observable<User> {
+    return null;
   }
 }
 
-export class MockUserServiceLogOut {
-  getUser(): Observable<User[]> {
-    const user: User = null;
-    return Observable.create((observer) => {
-      observer.next(user);
-      observer.complete();
-    });
-  }
-}
+let userService: MockUserService;
+let fixture: ComponentFixture<MobileMenuComponent>;
 
 describe('MobileMenuComponent', () => {
-  let component: MobileMenuComponent;
-  let fixture: ComponentFixture<MobileMenuComponent>;
-
-  function createComponent(providers: Provider[] = []) {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [MobileMenuComponent],
-      providers: [{ provide: UserService, useValue: new MockUserServiceLogIn() }],
+      providers: [{ provide: UserService, useValue: new MockUserService() }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-
     fixture = TestBed.createComponent(MobileMenuComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }
-
-  describe('when user is logged in', () => {
-    configureTestSuite(() => {
-      createComponent();
-    });
-
-    it('should create', () => {
-      expect(component).toBeTruthy();
-    });
-
-    it('should hide account links when user logs in', () => {
-      const accountLinks = fixture.debugElement.query(By.css('#mobileMenuAccountLinks'));
-      expect(accountLinks).toBeFalsy();
-    });
+    userService = TestBed.get(UserService);
   });
-
-  describe('when user is logged out', () => {
-    configureTestSuite(() => {
-      TestBed.overrideProvider(UserService, { useValue: new MockUserServiceLogOut() });
-      createComponent();
-    });
-
-    it('should show account links when user logs out', () => {
-      const accountLinks = fixture.debugElement.query(By.css('#mobileMenuAccountLinks'));
-      expect(accountLinks).toBeTruthy();
-    });
-  });
+  userLoggedIn();
+  userLoggedOut();
 });
+
+function userLoggedIn() {
+  describe('when user is logged in', () => {
+    it('should hide account links after component initialized', () => {
+      expectUserLoggedIn();
+      fixture.detectChanges();
+      expectMobileAccountLinksShown(false);
+    });
+  });
+}
+
+function userLoggedOut() {
+  describe('when user is logged out', () => {
+    it('should show account links after component initialized', () => {
+      expectUserLoggedOut();
+      fixture.detectChanges();
+      expectMobileAccountLinksShown(true);
+    });
+  });
+}
+
+function expectUserLoggedIn() {
+  const teacher: User = new User();
+  teacher.role = 'teacher';
+  spyOn(userService, 'getUser').and.returnValue(of(teacher));
+}
+
+function expectUserLoggedOut() {
+  spyOn(userService, 'getUser').and.returnValue(of(null));
+}
+
+function expectMobileAccountLinksShown(isShown: boolean) {
+  const accountLinks = fixture.debugElement.query(By.css('#mobileMenuAccountLinks'));
+  if (isShown) {
+    expect(accountLinks).toBeTruthy();
+  } else {
+    expect(accountLinks).toBeFalsy();
+  }
+}

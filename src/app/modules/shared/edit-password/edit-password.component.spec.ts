@@ -8,7 +8,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { User } from '../../../domain/user';
-import { configureTestSuite } from 'ng-bullet';
 import { MatDialogModule } from '@angular/material/dialog';
 const CORRECT_OLD_PASS = 'a';
 const INCORRECT_OLD_PASS = 'b';
@@ -55,16 +54,13 @@ const getForm = () => {
 };
 
 describe('EditPasswordComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EditPasswordComponent],
       imports: [BrowserAnimationsModule, ReactiveFormsModule, MatSnackBarModule, MatDialogModule],
       providers: [{ provide: UserService, useValue: new MockUserService() }],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(EditPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

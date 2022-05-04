@@ -71,7 +71,6 @@ export class MatchStudent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     this.autoScroll = require('dom-autoscroller');
-    this.registerAutoScroll();
     this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
@@ -97,6 +96,10 @@ export class MatchStudent extends ComponentStudent {
     this.tryDisableComponent();
     this.disableComponentIfNecessary();
     this.broadcastDoneRenderingComponent();
+  }
+
+  ngAfterContentInit() {
+    this.registerAutoScroll();
   }
 
   importPrivateNotes(): void {

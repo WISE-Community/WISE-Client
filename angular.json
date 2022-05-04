@@ -13,6 +13,9 @@
           "options": {
             "allowedCommonJsDependencies": [
               "angular",
+              "fabric",
+              "dom-autoscroller",
+              "drawing-tool",
               "jquery",
               "rxjs/internal/BehaviorSubject",
               "canvg",
@@ -29,9 +32,13 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "extractCss": true,
             "assets": [
-              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/assets/",
+                "ignore": ["**/*.scss", "**/*.md"],
+                "output": "/assets/"
+              },
               "src/favicon.ico",
               { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }
             ],
@@ -60,7 +67,6 @@
               "outputHashing": "all",
               "sourceMap": true,
               "statsJson": false,
-              "extractCss": true,
               "namedChunks": true,
               "aot": true,
               "localize": true,
@@ -75,6 +81,17 @@
               ],
               "outputPath": "dist/",
               "baseHref": "/"
+            },
+            "development": {
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "namedChunks": true,
+              "aot": true,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "budgets": []
             },
             "es": {
               "localize": ["es"]
@@ -97,13 +114,17 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "wise:build"
+            "browserTarget": "wise:build",
+            "publicHost": "localhost:4200"
           },
           "configurations": {
             "production": {
               "browserTarget": "wise:build:production"
+            },
+            "development": {
+              "browserTarget": "wise:build:development"
             },
             "es": {
               "browserTarget": "wise:build:es"
@@ -123,16 +144,17 @@
             "zh-Hant": {
               "browserTarget": "wise:build:zh-Hant"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular-builders/custom-webpack:extract-i18n",
           "options": {
             "browserTarget": "wise:build"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/custom-webpack:karma",
           "options": {
             "main": "src/test.ts",
             "karmaConfig": "./karma.conf.js",
@@ -142,6 +164,10 @@
             "styles": [
               "src/style/styles.scss"
             ],
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js",
+              "replaceDuplicatePlugins": true
+            },
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/style"
