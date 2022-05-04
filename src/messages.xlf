@@ -16001,14 +16001,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Go to <x id="INTERPOLATION" equiv-text="{{nodeTitle}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b73fb34ae49aef54ad30ef3b47b73bb3987c8c51" datatype="html">
         <source>Item is locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2b3d6255f6480242ac1c150a618cebb4707f0163" datatype="html">
