@@ -7155,49 +7155,49 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>WISE Logo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="64307025869f10565870c106fd2bc800278e1bb8" datatype="html">
         <source>Only Available in Preview Mode</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a0d81d0871e7acd62d27a030e7e8c6bdad31d54d" datatype="html">
         <source>Turn Off Constraints</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="074eede8c0a1156b21a4efb4d81a56e1c41f591a" datatype="html">
         <source>Constraints Are Off</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6705491d3c449b391cd7ce4f5837231c7eb98787" datatype="html">
         <source>View alerts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c0961a71d775c905195f97cfd155f9b34052b1c6" datatype="html">
         <source>Unit percent completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="72778a65e8adb61055af9ac6e0f5dc566502ed16" datatype="html">
         <source>Open Account Menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e438ba78cbafdb5bcbce0820bfaad995a504f222" datatype="html">
