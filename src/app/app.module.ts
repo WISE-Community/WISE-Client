@@ -13,7 +13,7 @@ import {
   SocialLoginModule,
   GoogleLoginProvider,
   SocialAuthServiceConfig
-} from 'angularx-social-login';
+} from '@abacritt/angularx-social-login';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -48,6 +48,7 @@ export function getAuthServiceConfigs(configService: ConfigService) {
     providers: []
   };
   const googleLoginOptions = {
+    scope: 'profile email',
     prompt: 'select_account'
   };
   configService.getConfig().subscribe((config) => {

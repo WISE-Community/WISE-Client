@@ -1,3 +1,4 @@
+import SVG from 'svg.js';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';

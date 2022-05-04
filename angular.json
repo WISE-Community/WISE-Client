@@ -116,7 +116,8 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "wise:build"
+            "browserTarget": "wise:build",
+            "publicHost": "localhost:4200"
           },
           "configurations": {
             "production": {
@@ -147,7 +148,7 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular-builders/custom-webpack:extract-i18n",
           "options": {
             "browserTarget": "wise:build"
           }
