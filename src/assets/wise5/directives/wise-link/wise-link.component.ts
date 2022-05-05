@@ -40,7 +40,7 @@ export class WiseLinkComponent implements OnInit {
 
   goToStep(): void {
     this.dialog.closeAll();
-    this.notebookService.setNotesVisible(false);
+    this.notebookService.closeNotes();
     this.studentDataService.setCurrentNodeByNodeId(this.nodeId);
   }
 }

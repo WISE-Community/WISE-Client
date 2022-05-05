@@ -11,11 +11,16 @@ import { StudentDataService } from '../../services/studentDataService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { StudentAccountMenuComponent } from './student-account-menu.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 class MockProjectService {
   rootNode = {};
 
   getThemeSettings() {
+    return {};
+  }
+
+  getProjectRootNode() {
     return {};
   }
 }
@@ -24,9 +29,15 @@ describe('StudentAccountMenuComponent', () => {
   let component: StudentAccountMenuComponent;
   let fixture: ComponentFixture<StudentAccountMenuComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDividerModule, MatIconModule, UpgradeModule],
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        MatDividerModule,
+        MatIconModule,
+        MatMenuModule,
+        UpgradeModule
+      ],
       declarations: [StudentAccountMenuComponent],
       providers: [
         AnnotationService,
@@ -37,10 +48,7 @@ describe('StudentAccountMenuComponent', () => {
         TagService,
         UtilService
       ]
-    }).compileComponents();
-  });
-
-  beforeEach(() => {
+    });
     fixture = TestBed.createComponent(StudentAccountMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { defer, Observable } from 'rxjs';
 import { MomentModule } from 'ngx-moment';
 import { StudentRun } from '../student-run';
@@ -9,7 +9,6 @@ import { Run } from '../../domain/run';
 import { ConfigService } from '../../services/config.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { configureTestSuite } from 'ng-bullet';
 
 export function fakeAsyncResponse<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -63,7 +62,7 @@ describe('StudentRunListComponent', () => {
   let component: StudentRunListComponent;
   let fixture: ComponentFixture<StudentRunListComponent>;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [StudentRunListComponent],
       imports: [MomentModule],
@@ -75,9 +74,6 @@ describe('StudentRunListComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(StudentRunListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

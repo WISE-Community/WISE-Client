@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CopyProjectDialogComponent } from './copy-project-dialog.component';
 import { LibraryService } from '../../../services/library.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -6,7 +6,6 @@ import { Project } from '../../../domain/project';
 import { Observable, Subject } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
-import { configureTestSuite } from 'ng-bullet';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 export class MockLibraryService {
@@ -44,7 +43,7 @@ describe('CopyProjectDialogComponent', () => {
     return buttons[1];
   };
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [CopyProjectDialogComponent],
       imports: [MatSnackBarModule],
@@ -72,9 +71,6 @@ describe('CopyProjectDialogComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(CopyProjectDialogComponent);
     component = fixture.componentInstance;
     component.dialog = TestBed.get(MatDialog);

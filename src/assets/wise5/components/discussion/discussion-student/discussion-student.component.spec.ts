@@ -4,7 +4,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -37,8 +36,8 @@ let fixture: ComponentFixture<DiscussionStudent>;
 const nodeId = 'node1';
 let saveNotificationToServerSpy;
 
-describe('DiscussionStudent', () => {
-  configureTestSuite(() => {
+describe('DiscussionStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [BrowserModule, HttpClientTestingModule, MatDialogModule, UpgradeModule],
       declarations: [DiscussionStudent],
@@ -59,9 +58,6 @@ describe('DiscussionStudent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(DiscussionStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,

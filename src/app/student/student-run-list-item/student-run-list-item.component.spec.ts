@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentRun } from '../student-run';
 import { StudentRunListItemComponent } from './student-run-list-item.component';
 import { Observable } from 'rxjs';
@@ -8,10 +8,9 @@ import { MomentModule } from 'ngx-moment';
 import { Project } from '../../domain/project';
 import { User } from '../../domain/user';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { StudentService } from '../student.service';
 import { UserService } from '../../services/user.service';
-import { configureTestSuite } from 'ng-bullet';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class MockConfigService {
@@ -42,7 +41,7 @@ describe('StudentRunListItemComponent', () => {
   let component: StudentRunListItemComponent;
   let fixture: ComponentFixture<StudentRunListItemComponent>;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [MomentModule, BrowserAnimationsModule, MatDialogModule],
       declarations: [StudentRunListItemComponent],
@@ -53,9 +52,6 @@ describe('StudentRunListItemComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(StudentRunListItemComponent);
     component = fixture.componentInstance;
     const run: StudentRun = new StudentRun();

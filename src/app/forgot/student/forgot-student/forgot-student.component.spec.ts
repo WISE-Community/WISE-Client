@@ -1,13 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotStudentComponent } from './forgot-student.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { configureTestSuite } from 'ng-bullet';
 
 describe('ForgotStudentComponent', () => {
   let component: ForgotStudentComponent;
   let fixture: ComponentFixture<ForgotStudentComponent>;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotStudentComponent],
       schemas: [NO_ERRORS_SCHEMA]

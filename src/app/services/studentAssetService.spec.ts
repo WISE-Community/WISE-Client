@@ -80,7 +80,7 @@ function deleteAsset_StudentMode_DeleteAsset() {
       return req.url.startsWith(`${studentAssetURL}/delete`);
     });
     expect(request.request.method).toEqual('DELETE');
-    expect(request.request.params.get('studentAssetId')).toEqual(2 as any);
+    expect(request.request.params.get('studentAssetId')).toEqual('2' as any);
     expect(request.request.params.get('clientDeleteTime')).toBeDefined();
     request.flush({});
     tick();

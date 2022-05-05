@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../../services/configService';
 import { ManageUserComponent } from './manage-user.component';
 
@@ -23,7 +22,7 @@ let component: ManageUserComponent;
 let http: HttpTestingController;
 
 describe('ManageUserComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ManageUserComponent],
       imports: [BrowserAnimationsModule, HttpClientTestingModule, MatSnackBarModule],
@@ -32,8 +31,6 @@ describe('ManageUserComponent', () => {
         { provide: MatDialog, useValue: {} }
       ]
     });
-  });
-  beforeEach(() => {
     configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(ManageUserComponent);

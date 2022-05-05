@@ -5,7 +5,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { AchievementService } from '../../services/achievementService';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
@@ -50,7 +49,8 @@ describe('StepTools', () => {
   let component: StepToolsComponent;
   let fixture: ComponentFixture<StepToolsComponent>;
   let getModeSpy: jasmine.Spy;
-  configureTestSuite(() => {
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -78,9 +78,6 @@ describe('StepTools', () => {
         UtilService
       ]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(StepToolsComponent);
     component = fixture.componentInstance;
     component.nodeId = nodeId3;

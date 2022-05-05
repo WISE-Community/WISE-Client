@@ -189,7 +189,9 @@ export class StudentDataService extends DataService {
 
   retrieveRunStatus() {
     if (this.ConfigService.isPreview()) {
-      this.runStatus = {};
+      this.runStatus = {
+        periods: []
+      };
     } else {
       const params = new HttpParams().set('runId', this.ConfigService.getConfigParam('runId'));
       const options = {
@@ -200,6 +202,9 @@ export class StudentDataService extends DataService {
         .toPromise()
         .then((runStatus: any) => {
           this.runStatus = runStatus;
+          if (this.runStatus != null && this.runStatus.periods == null) {
+            this.runStatus.periods = [];
+          }
         });
     }
   }

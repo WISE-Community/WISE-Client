@@ -1,12 +1,5 @@
 <div class="l-constrained">
-  <div *ngIf="isEndedAndLocked"
-      class="notice node-notice"
-      fxLayout="row"
-      fxLayoutAlign="center start">
-    <span><mat-icon class="warn">lock</mat-icon>&nbsp;</span>
-    <span class="warn md-body-2">{{ endedAndLockedMessage }}</span>
-  </div>
-  <div class="node-content md-whiteframe-1dp"
+  <div class="node-content mat-elevation-z1"
       style="border-color: {{nodeStatus?.icon?.color}}; position: relative;"
       fxLayout="row wrap">
     <div *ngIf="isShowNodeRubric()"
@@ -22,10 +15,9 @@
           icon="info">
       </help-icon>
     </div>
-    <div *ngFor="let component of getComponents(); index as componentIndex"
+    <div *ngFor="let component of components"
         id="component_{{ component.id }}"
         class="component"
-        fxFlex
         fxFlex.gt-sm="{{component.componentWidth ? component.componentWidth : 100}}">
       <div *ngIf="isShowComponentRubric(component)" class="component__rubric">
         <help-icon

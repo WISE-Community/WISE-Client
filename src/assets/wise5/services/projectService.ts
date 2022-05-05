@@ -3167,4 +3167,8 @@ export class ProjectService {
   getApplicationNodes(): any[] {
     return this.applicationNodes;
   }
+
+  getProjectRootNode() {
+    return this.rootNode;
+  }
 }

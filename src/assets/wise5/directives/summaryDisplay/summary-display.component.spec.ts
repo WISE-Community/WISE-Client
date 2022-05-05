@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
@@ -15,8 +14,8 @@ import { SummaryDisplay } from './summary-display.component';
 let component: SummaryDisplay;
 let fixture: ComponentFixture<SummaryDisplay>;
 
-describe('SummaryDisplay', () => {
-  configureTestSuite(() => {
+describe('SummaryDisplayComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
       declarations: [SummaryDisplay],
@@ -31,9 +30,6 @@ describe('SummaryDisplay', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(SummaryDisplay);
     component = fixture.componentInstance;
     fixture.detectChanges();

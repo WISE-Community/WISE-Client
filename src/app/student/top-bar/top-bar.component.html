@@ -1,6 +1,5 @@
-<mat-toolbar class="topbar dark-theme" color="primary">
+<mat-toolbar class="topbar dark-theme" [color]="hasNewAmbientNotifications() ? 'warn' : 'primary'">
   <div class="topbar-content"
-      [ngClass]="{'warn-bg': hasNewAmbientNotifications()}"
       (click)="viewCurrentAmbientNotification($event)"
       fxFlex
       fxLayout="row"
