@@ -7,12 +7,16 @@ import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
+import { ConfigService } from '../../services/configService';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class GraphService extends ComponentService {
   seriesColors: string[] = ['blue', 'red', 'green', 'orange', 'purple', 'black'];
 
   constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
     private StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -499,5 +503,28 @@ export class GraphService extends ComponentService {
       }
     }
     return series;
+  }
+
+  getClassmateStudentWork(
+    nodeId: string,
+    componentId: string,
+    periodId: number,
+    showWorkNodeId: string,
+    showWorkComponentId: string,
+    showClassmateWorkSource: string
+  ) {
+    const runId = this.configService.getRunId();
+    switch (showClassmateWorkSource) {
+      case 'period':
+        return this.http.get(
+          `/api/classmate/graph/student-work/${runId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}/period/${periodId}`
+        );
+      case 'class':
+        return this.http.get(
+          `/api/classmate/graph/student-work/${runId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}/class`
+        );
+      default:
+        throw $localize`Invalid Show Classmate Work Source`;
+    }
   }
 }

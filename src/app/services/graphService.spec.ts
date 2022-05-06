@@ -1,5 +1,5 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -11,6 +11,8 @@ import { UtilService } from '../../assets/wise5/services/utilService';
 import { GraphService } from '../../assets/wise5/components/graph/graphService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 
+let http: HttpTestingController;
+const runId: number = 1;
 let service: GraphService;
 
 describe('GraphService', () => {
@@ -30,6 +32,8 @@ describe('GraphService', () => {
       ]
     });
     service = TestBed.get(GraphService);
+    http = TestBed.inject(HttpTestingController);
+    spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(runId);
   });
   createComponent();
   isCompleted();
@@ -50,6 +54,7 @@ describe('GraphService', () => {
   getHighchartsDiv();
   getTheSeriesFromTheTrials();
   getTheCategoryByIndex();
+  getClassmateStudentWork();
 });
 
 function createComponentState(studentData: any, isSubmit: boolean = false) {
@@ -484,4 +489,36 @@ function getTheCategoryByIndex() {
     expect(service.getCategoryByIndex(1, xAxis)).toEqual('Phones');
     expect(service.getCategoryByIndex(2, xAxis)).toEqual('Pizzas');
   });
+}
+
+function getClassmateStudentWork() {
+  const componentId1 = 'component1';
+  const componentId2 = 'component2';
+  const nodeId1 = 'node1';
+  const nodeId2 = 'node2';
+  const periodId = 100;
+  it('should get classmate student work from period', () => {
+    service
+      .getClassmateStudentWork(nodeId2, componentId2, periodId, nodeId1, componentId1, 'period')
+      .subscribe();
+    http
+      .expectOne(
+        `/api/classmate/graph/student-work/${runId}/${nodeId2}/${componentId2}/${nodeId1}/${componentId1}/period/${periodId}`
+      )
+      .flush([]);
+  });
+
+  it(
+    'should get classmate student work from class',
+    waitForAsync(() => {
+      service
+        .getClassmateStudentWork(nodeId2, componentId2, periodId, nodeId1, componentId1, 'class')
+        .subscribe();
+      http
+        .expectOne(
+          `/api/classmate/graph/student-work/${runId}/${nodeId2}/${componentId2}/${nodeId1}/${componentId1}/class`
+        )
+        .flush([]);
+    })
+  );
 }
