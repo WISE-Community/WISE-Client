@@ -127,7 +127,7 @@ export class DialogGuidanceFeedbackRuleEvaluator {
       feedbackRules.find((rule) => FeedbackRule.isDefaultRule(rule)) ||
       Object.assign(new FeedbackRule(), {
         expression: 'isDefault',
-        feedback: this.defaultFeedback
+        feedback: this.component.isVersion1() ? this.defaultFeedback : [this.defaultFeedback]
       })
     );
   }

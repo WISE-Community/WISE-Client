@@ -22,6 +22,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
+import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -47,6 +48,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected ConfigService: ConfigService,
     protected CRaterService: CRaterService,
     protected dialog: MatDialog,
+    protected dialogGuidanceFeedbackService: DialogGuidanceFeedbackService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
@@ -249,19 +251,33 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   createComputerDialogResponse(response: CRaterResponse): ComputerDialogResponse {
     const feedbackRule: FeedbackRule = this.feedbackRuleEvaluator.getFeedbackRule(response);
-    return response.scores != null
-      ? new ComputerDialogResponseMultipleScores(
-          feedbackRule.feedback,
-          response.scores,
-          response.ideas,
-          new Date().getTime()
-        )
-      : new ComputerDialogResponseSingleScore(
-          feedbackRule.feedback,
-          response.score,
-          response.ideas,
-          new Date().getTime()
-        );
+    const feedbackText = this.dialogGuidanceFeedbackService.getFeedbackText(this, feedbackRule);
+    const computerResponse =
+      response.scores != null
+        ? new ComputerDialogResponseMultipleScores(
+            feedbackText,
+            response.scores,
+            response.ideas,
+            new Date().getTime()
+          )
+        : new ComputerDialogResponseSingleScore(
+            feedbackText,
+            response.score,
+            response.ideas,
+            new Date().getTime()
+          );
+    if (this.isVersion2()) {
+      computerResponse.feedbackRuleId = feedbackRule.id;
+    }
+    return computerResponse;
+  }
+
+  isVersion1(): boolean {
+    return this.componentContent.version == null;
+  }
+
+  isVersion2(): boolean {
+    return this.componentContent.version === 2;
   }
 
   cRaterErrorResponse() {
