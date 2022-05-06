@@ -1,6 +1,7 @@
 export class FeedbackRule {
+  id?: string;
   expression: string;
-  feedback: string;
+  feedback: string | string[];
   static operatorPrecedences = { '!': 2, '&&': 1, '||': 1 };
 
   static isSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {

@@ -15,6 +15,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
+import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
@@ -65,6 +66,7 @@ describe('DialogGuidanceStudentComponent', () => {
         ComputerAvatarService,
         CRaterService,
         ConfigService,
+        DialogGuidanceFeedbackService,
         DialogGuidanceService,
         { provide: NodeService, useClass: MockNodeService },
         { provide: NotebookService, useClass: MockService },
