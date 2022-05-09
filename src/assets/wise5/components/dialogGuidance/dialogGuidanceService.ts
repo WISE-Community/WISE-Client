@@ -25,6 +25,7 @@ export class DialogGuidanceService extends ComponentService {
     component.feedbackRules = [];
     component.isComputerAvatarEnabled = false;
     component.computerAvatarSettings = this.getDefaultComputerAvatarSettings();
+    component.version = 2;
     return component;
   }
 

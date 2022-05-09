@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { UtilService } from '../../../services/utilService';
 
 @Component({
   selector: 'edit-dialog-guidance-feedback-rules',
@@ -13,8 +14,9 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
   @Input() feedbackRules: any = [];
   inputChanged: Subject<string> = new Subject<string>();
   subscriptions: Subscription = new Subscription();
+  @Input() version: number;
 
-  constructor(private ProjectService: TeacherProjectService) {}
+  constructor(private ProjectService: TeacherProjectService, private utilService: UtilService) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -46,7 +48,7 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
   }
 
   addNewRule(position: string): void {
-    const newFeedbackRule = { expression: '', feedback: '' };
+    const newFeedbackRule = this.createNewFeedbackRule();
     if (position === 'beginning') {
       this.feedbackRules.unshift(newFeedbackRule);
     } else {
@@ -55,8 +57,32 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
     this.ProjectService.nodeChanged();
   }
 
+  createNewFeedbackRule(): any {
+    if (this.version === 1) {
+      return { expression: '', feedback: '' };
+    } else {
+      return { id: this.utilService.generateKey(10), expression: '', feedback: [''] };
+    }
+  }
+
+  addNewFeedbackToRule(rule: any): void {
+    rule.feedback.push('');
+  }
+
+  deleteFeedbackInRule(rule: any, feedbackIndex: number): void {
+    if (confirm($localize`Are you sure you want to delete this feedback string?`)) {
+      rule.feedback.splice(feedbackIndex, 1);
+    }
+  }
+
   deleteRule(ruleIndex: number): void {
-    this.feedbackRules.splice(ruleIndex, 1);
-    this.ProjectService.nodeChanged();
+    if (confirm($localize`Are you sure you want to delete thise feedback rule?`)) {
+      this.feedbackRules.splice(ruleIndex, 1);
+      this.ProjectService.nodeChanged();
+    }
+  }
+
+  customTrackBy(index: number): number {
+    return index;
   }
 }
