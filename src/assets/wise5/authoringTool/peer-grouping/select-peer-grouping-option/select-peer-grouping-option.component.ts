@@ -38,7 +38,7 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
     this.dialog
       .open(EditPeerGroupingDialogComponent, {
         data: this.peerGrouping,
-        width: '40%'
+        panelClass: 'dialog-sm'
       })
       .afterClosed()
       .subscribe((isDelete: boolean) => {

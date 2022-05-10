@@ -39,7 +39,7 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
 
   showNewPeerGroupingAuthoring(): void {
     this.dialog.open(CreateNewPeerGroupingDialogComponent, {
-      width: '40%'
+      panelClass: 'dialog-sm'
     });
   }
 

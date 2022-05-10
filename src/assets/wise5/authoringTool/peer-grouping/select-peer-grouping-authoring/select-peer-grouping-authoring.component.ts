@@ -32,7 +32,7 @@ export class SelectPeerGroupingAuthoringComponent implements OnInit {
           this.tagChanged.emit(tag);
         }
       },
-      width: '50%'
+      panelClass: 'dialog-md'
     });
   }
 }
