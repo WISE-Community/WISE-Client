@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { of } from 'rxjs';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -289,8 +290,8 @@ function getClassmateResponses() {
       'should get classmate responses',
       waitForAsync(() => {
         spyOn(TestBed.inject(DiscussionService), 'getClassmateResponses').and.callFake(() => {
-          return Promise.resolve({
-            studentWorkList: [componentState1, componentState2],
+          return of({
+            studentWork: [componentState1, componentState2],
             annotations: []
           });
         });
