@@ -4,6 +4,7 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { FeedbackRule } from '../FeedbackRule';
 
 @Component({
   selector: 'edit-dialog-guidance-feedback-rules',
@@ -11,7 +12,7 @@ import { UtilService } from '../../../services/utilService';
   styleUrls: ['./edit-dialog-guidance-feedback-rules.component.scss']
 })
 export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
-  @Input() feedbackRules: any = [];
+  @Input() feedbackRules: FeedbackRule[] = [];
   inputChanged: Subject<string> = new Subject<string>();
   subscriptions: Subscription = new Subscription();
   @Input() version: number;
@@ -57,7 +58,7 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
     this.ProjectService.nodeChanged();
   }
 
-  createNewFeedbackRule(): any {
+  private createNewFeedbackRule(): any {
     if (this.version === 1) {
       return { expression: '', feedback: '' };
     } else {
@@ -65,13 +66,13 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
     }
   }
 
-  addNewFeedbackToRule(rule: any): void {
-    rule.feedback.push('');
+  addNewFeedbackToRule(rule: FeedbackRule): void {
+    (rule.feedback as string[]).push('');
   }
 
-  deleteFeedbackInRule(rule: any, feedbackIndex: number): void {
+  deleteFeedbackInRule(rule: FeedbackRule, feedbackIndex: number): void {
     if (confirm($localize`Are you sure you want to delete this feedback?`)) {
-      rule.feedback.splice(feedbackIndex, 1);
+      (rule.feedback as string[]).splice(feedbackIndex, 1);
     }
   }
 
