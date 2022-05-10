@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { EditPeerGroupingDialogComponent } from '../edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
+import { availableLogic } from '../PeerGroupingLogic';
 
 @Component({
   selector: 'select-peer-grouping-option',
@@ -12,6 +13,7 @@ import { EditPeerGroupingDialogComponent } from '../edit-peer-grouping-dialog/ed
 export class SelectPeerGroupingOptionComponent implements OnInit {
   @Input() peerGrouping: PeerGrouping;
   @Input() selectedPeerGrouping: PeerGrouping;
+  peerGroupingLogicName: string;
   stepsUsedIn: string[] = [];
 
   @Output() deleteEvent: EventEmitter<PeerGrouping> = new EventEmitter<PeerGrouping>();
@@ -22,12 +24,20 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
     private peerGroupingAuthoringService: PeerGroupingAuthoringService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setPeerGroupingLogicName();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.selectedPeerGrouping) {
       this.stepsUsedIn = this.peerGroupingAuthoringService.getStepsUsedIn(this.peerGrouping.tag);
     }
+  }
+
+  setPeerGroupingLogicName(): void {
+    this.peerGroupingLogicName = availableLogic.find(
+      (logic) => logic.value === this.peerGrouping.logic
+    ).name;
   }
 
   select(): void {
@@ -44,6 +54,8 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
       .subscribe((isDelete: boolean) => {
         if (isDelete) {
           this.deleteEvent.emit(this.peerGrouping);
+        } else {
+          this.setPeerGroupingLogicName();
         }
       });
   }

@@ -1,16 +1,16 @@
 import { Directive, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
+import { availableLogic, PeerGroupingLogic } from '../PeerGroupingLogic';
 
 @Directive()
 export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
-  availableLogic: any[] = [
-    { name: 'Random', value: 'random' },
-    { name: 'Manual', value: 'manual' }
-  ];
+  availableLogic: PeerGroupingLogic[];
   peerGrouping: PeerGrouping;
 
-  constructor(protected dialogRef: MatDialogRef<AuthorPeerGroupingDialogComponent>) {}
+  constructor(protected dialogRef: MatDialogRef<AuthorPeerGroupingDialogComponent>) {
+    this.availableLogic = availableLogic;
+  }
 
   ngOnInit(): void {}
 

@@ -457,7 +457,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component.html</context>
@@ -8645,6 +8645,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/PeerGroupingLogic.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-logic-options.ts</context>
           <context context-type="linenumber">4</context>
         </context-group>
@@ -9431,6 +9435,17 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2233560223291461480" datatype="html">
+        <source>Manual</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/PeerGroupingLogic.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-logic-options.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1291b18561bc1d5f0fba6f4284001e655ef9c12e" datatype="html">
         <source>Create New Peer Grouping</source>
         <context-group purpose="location">
@@ -9468,7 +9483,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="70a67e04629f6d412db0a12d51820b480788d795" datatype="html">
@@ -9493,28 +9508,28 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Used in </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5a8f0930e6a9f0a3350c4a43858d01e75f752762" datatype="html">
         <source>Not used in any steps.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d9797b7f7d130802253f3bdd06f7da9f474816af" datatype="html">
         <source> Delete </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
-          <context context-type="linenumber">47,49</context>
+          <context context-type="linenumber">41,43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="047f50bc5b5d17b5bec0196355953e1a5c590ddb" datatype="html">
         <source>Update</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4659585107312140486" datatype="html">
@@ -9605,7 +9620,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Teams Per Group: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/select-peer-grouping-option/select-peer-grouping-option.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="92328333ea9c72926ca7c631e9e1c0f081cbf565" datatype="html">
@@ -14890,13 +14905,6 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component.ts</context>
           <context context-type="linenumber">98</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2233560223291461480" datatype="html">
-        <source>Manual</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-logic-options.ts</context>
-          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3136412673562255449" datatype="html">
