@@ -21,7 +21,7 @@ describe('SelectPeerGroupingOptionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectPeerGroupingOptionComponent);
     component = fixture.componentInstance;
-    peerGrouping1 = new PeerGrouping({ tag: tag1 });
+    peerGrouping1 = new PeerGrouping({ tag: tag1, logic: 'random' });
     component.peerGrouping = peerGrouping1;
     deleteEventSpy = spyOn(component.deleteEvent, 'emit');
     fixture.detectChanges();
