@@ -70,13 +70,13 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
   }
 
   deleteFeedbackInRule(rule: any, feedbackIndex: number): void {
-    if (confirm($localize`Are you sure you want to delete this feedback string?`)) {
+    if (confirm($localize`Are you sure you want to delete this feedback?`)) {
       rule.feedback.splice(feedbackIndex, 1);
     }
   }
 
   deleteRule(ruleIndex: number): void {
-    if (confirm($localize`Are you sure you want to delete thise feedback rule?`)) {
+    if (confirm($localize`Are you sure you want to delete this feedback rule?`)) {
       this.feedbackRules.splice(ruleIndex, 1);
       this.ProjectService.nodeChanged();
     }
