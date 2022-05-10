@@ -1,15 +1,15 @@
-import { PeerGroupActivity } from './PeerGroupActivity';
+import { PeerGrouping } from '../../../../app/domain/peerGrouping';
 import { PeerGroupMember } from './PeerGroupMember';
 
 export class PeerGroup {
   id: number;
   members: PeerGroupMember[];
-  peerGroupActivity: PeerGroupActivity;
+  peerGrouping: PeerGrouping;
   periodId: number;
 
-  constructor(id: number, members: PeerGroupMember[], peerGroupActivity: PeerGroupActivity) {
+  constructor(id: number, members: PeerGroupMember[], peerGrouping: PeerGrouping) {
     this.id = id;
     this.members = members;
-    this.peerGroupActivity = peerGroupActivity;
+    this.peerGrouping = peerGrouping;
   }
 }

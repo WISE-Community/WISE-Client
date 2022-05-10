@@ -64,11 +64,6 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     }
   }
 
-  addLogic(): void {
-    this.authoringComponentContent.logic.push({ name: 'random' });
-    this.componentChanged();
-  }
-
   deleteLogic(index: number): void {
     if (this.authoringComponentContent.logic.length === 1) {
       alert(

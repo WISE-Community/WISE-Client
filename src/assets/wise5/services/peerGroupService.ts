@@ -19,22 +19,22 @@ export class PeerGroupService {
     this.runId = this.ConfigService.getRunId();
   }
 
-  getPeerGroupActivityTags(node: Node): Set<string> {
+  getPeerGroupingTags(node: Node): Set<string> {
     const tags = new Set<string>();
     node.components.forEach((component) => {
-      if (component.peerGroupActivityTag != null) {
-        tags.add(component.peerGroupActivityTag);
+      if (component.peerGroupingTag != null) {
+        tags.add(component.peerGroupingTag);
       }
     });
     return tags;
   }
 
   retrievePeerGroup(
-    peerGroupActivityTag: string,
+    peerGroupingTag: string,
     workgroupId = this.ConfigService.getWorkgroupId()
   ): Observable<any> {
     const runId = this.ConfigService.isPreview() ? 1 : this.ConfigService.getRunId();
-    return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${peerGroupActivityTag}`);
+    return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${peerGroupingTag}`);
   }
 
   retrievePeerGroupWork(
@@ -57,13 +57,13 @@ export class PeerGroupService {
     );
   }
 
-  retrievePeerGroupInfo(peerGroupActivityTag: string): Observable<any> {
-    return this.http.get(`/api/teacher/peer-group-info/${this.runId}/${peerGroupActivityTag}`);
+  retrievePeerGroupInfo(peerGroupingTag: string): Observable<any> {
+    return this.http.get(`/api/teacher/peer-group-info/${this.runId}/${peerGroupingTag}`);
   }
 
-  createNewGroup(periodId: number, peerGroupActivityTag: string): Observable<any> {
+  createNewGroup(periodId: number, peerGroupingTag: string): Observable<any> {
     return this.http.post(
-      `/api/peer-group/create/${this.runId}/${periodId}/${peerGroupActivityTag}`,
+      `/api/peer-group/create/${this.runId}/${periodId}/${peerGroupingTag}`,
       {}
     );
   }
@@ -76,9 +76,9 @@ export class PeerGroupService {
     return this.http.delete(`/api/peer-group/membership/${groupId}/${workgroupId}`);
   }
 
-  showPeerGroupDetails(peerGroupActivityTag: string): void {
+  showPeerGroupDetails(peerGroupingTag: string): void {
     this.dialog.open(PeerGroupDialogComponent, {
-      data: peerGroupActivityTag,
+      data: peerGroupingTag,
       panelClass: 'dialog-lg'
     });
   }

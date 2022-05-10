@@ -67,9 +67,10 @@ import { EditPeerChatAdvancedComponentComponent } from '../../assets/wise5/compo
 import { PeerChatAuthoringComponent } from '../../assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component';
 import { ShowMyWorkAuthoringComponent } from '../../assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component';
 import { ShowGroupWorkAuthoringComponent } from '../../assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component';
-import { EditComponentPeerGroupActivityTagComponent } from '../authoring-tool/edit-component-peer-group-activity-tag/edit-component-peer-group-activity-tag.component';
+import { EditComponentPeerGroupingTagComponent } from '../authoring-tool/edit-component-peer-grouping-tag/edit-component-peer-grouping-tag.component';
 import { EditDialogGuidanceAdvancedComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component';
 import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
+import { PeerGroupingAuthoringModule } from '../../assets/wise5/authoringTool/peer-grouping/peer-grouping-authoring.module';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,7 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
     EditComponentMaxSubmitComponent,
-    EditComponentPeerGroupActivityTagComponent,
+    EditComponentPeerGroupingTagComponent,
     EditComponentPrompt,
     EditComponentRubricComponent,
     EditComponentSaveButtonComponent,
@@ -144,7 +145,7 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     TableAuthoring,
     WiseAuthoringTinymceEditorComponent
   ],
-  imports: [AngularJSModule],
+  imports: [AngularJSModule, PeerGroupingAuthoringModule],
   exports: [
     AnimationAuthoring,
     AudioOscillatorAuthoring,
@@ -160,7 +161,7 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
     EditComponentMaxSubmitComponent,
-    EditComponentPeerGroupActivityTagComponent,
+    EditComponentPeerGroupingTagComponent,
     EditComponentPrompt,
     EditComponentRubricComponent,
     EditComponentSaveButtonComponent,

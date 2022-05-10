@@ -20,10 +20,10 @@ import { TeacherWorkService } from '../../../services/teacherWorkService';
 import { UtilService } from '../../../services/utilService';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
-import { PeerGroupActivity } from '../PeerGroupActivity';
 import { PeerGroupMember } from '../PeerGroupMember';
 import { PeerChatGradingComponent } from './peer-chat-grading.component';
 import { of } from 'rxjs';
+import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 
 let component: PeerChatGradingComponent;
 let fixture: ComponentFixture<PeerChatGradingComponent>;
@@ -40,7 +40,7 @@ const peerGroup = new PeerGroup(
     new PeerGroupMember(studentWorkgroupId1, periodId),
     new PeerGroupMember(studentWorkgroupId2, periodId)
   ],
-  new PeerGroupActivity()
+  new PeerGrouping()
 );
 
 describe('PeerChatGradingComponent', () => {

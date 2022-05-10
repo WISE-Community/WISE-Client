@@ -26,16 +26,13 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field>
-    <mat-label i18n>Peer Group Activity Tag</mat-label>
-    <input matInput
-        [(ngModel)]="authoringComponentContent.peerGroupActivityTag"
-        (ngModelChange)="componentChanged()" />
-  </mat-form-field>
+  <edit-component-peer-grouping-tag [authoringComponentContent]="authoringComponentContent">
+  </edit-component-peer-grouping-tag>
   <mat-checkbox
       [(ngModel)]="authoringComponentContent.isShowMyWork"
       (ngModelChange)="componentChanged()"
       color="primary"
+      class="bottom-spacing"
       i18n>
     Show My Work
   </mat-checkbox>

@@ -21,7 +21,7 @@ export class ShowGroupWorkService extends ComponentService {
     component.type = 'ShowGroupWork';
     component.showWorkNodeId = '';
     component.showWorkComponentId = '';
-    component.peerGroupActivityTag = '';
+    component.peerGroupingTag = '';
     component.isShowMyWork = true;
     component.layout = 'column';
     return component;

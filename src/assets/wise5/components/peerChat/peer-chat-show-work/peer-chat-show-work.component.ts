@@ -39,7 +39,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
 
   private requestChatWorkgroups(): void {
     this.peerGroupService
-      .retrievePeerGroup(this.componentContent.peerGroupActivityTag, this.workgroupId)
+      .retrievePeerGroup(this.componentContent.peerGroupingTag, this.workgroupId)
       .pipe(timeout(this.requestTimeout))
       .subscribe((peerGroup: PeerGroup) => {
         this.requestChatWorkgroupsSuccess(peerGroup);

@@ -13,7 +13,7 @@ export class PeerGroupDialogComponent implements OnInit {
   periods: any[];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public peerGroupActivityTag: string,
+    @Inject(MAT_DIALOG_DATA) public peerGroupingTag: string,
     private TeacherDataService: TeacherDataService
   ) {}
 

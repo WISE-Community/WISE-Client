@@ -30,7 +30,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   peerChatWorkgroupIds: number[] = [];
   peerChatWorkgroupInfos: any = {};
   peerGroup: PeerGroup;
-  peerGroupActivityTag: string;
+  peerGroupingTag: string;
   requestTimeout: number = 10000;
   response: string;
 
@@ -65,7 +65,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     this.myWorkgroupId = this.configService.getWorkgroupId();
-    this.peerGroupActivityTag = this.componentContent.peerGroupActivityTag;
+    this.peerGroupingTag = this.componentContent.peerGroupingTag;
     this.requestChatWorkgroups();
     this.registerStudentWorkReceivedListener();
   }
@@ -92,7 +92,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   private requestChatWorkgroups(): void {
     this.peerGroupService
-      .retrievePeerGroup(this.peerGroupActivityTag, this.workgroupId)
+      .retrievePeerGroup(this.peerGroupingTag, this.workgroupId)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (peerGroup: PeerGroup) => {

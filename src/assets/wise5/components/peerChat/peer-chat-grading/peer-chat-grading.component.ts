@@ -35,7 +35,7 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
   ngOnInit(): void {
     super.ngOnInit();
     this.peerGroupService
-      .retrievePeerGroup(this.componentContent.peerGroupActivityTag, this.workgroupId)
+      .retrievePeerGroup(this.componentContent.peerGroupingTag, this.workgroupId)
       .subscribe((peerGroup) => {
         this.peerGroup = peerGroup;
       });
