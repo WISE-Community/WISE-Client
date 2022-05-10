@@ -1,6 +1,6 @@
 <div fxLayoutAlign="space-between start">
   <mat-radio-button
-      [checked]="peerGrouping.tag === selectedTag"
+      [checked]="selectedPeerGrouping != null && peerGrouping.tag === selectedPeerGrouping.tag"
       (click)="select()"
       color="primary">
     <span class="mat-body-2">{{ peerGrouping.name }}</span>

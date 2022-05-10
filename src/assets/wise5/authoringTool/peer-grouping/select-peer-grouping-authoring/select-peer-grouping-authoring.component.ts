@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { SelectPeerGroupingDialogComponent } from '../select-peer-grouping-dialog/select-peer-grouping-dialog.component';
 
@@ -9,7 +10,7 @@ import { SelectPeerGroupingDialogComponent } from '../select-peer-grouping-dialo
   styleUrls: ['./select-peer-grouping-authoring.component.scss']
 })
 export class SelectPeerGroupingAuthoringComponent implements OnInit {
-  name: string;
+  peerGrouping: PeerGrouping;
   @Input() tag: string;
   @Output() tagChanged: EventEmitter<string> = new EventEmitter<string>();
 
@@ -19,27 +20,19 @@ export class SelectPeerGroupingAuthoringComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.tag != null && this.tag !== '') {
-      this.setName(this.tag);
-    }
-  }
-
-  private setName(tag: string): void {
-    this.name = this.peerGroupingAuthoringService.getPeerGroupingName(tag);
+    this.peerGrouping = this.peerGroupingAuthoringService.getPeerGrouping(this.tag);
   }
 
   selectGroupingLogic(): void {
-    this.dialog
-      .open(SelectPeerGroupingDialogComponent, {
-        data: this.tag,
-        width: '50%'
-      })
-      .afterClosed()
-      .subscribe((tag: string) => {
-        if (tag != null) {
-          this.setName(tag);
+    this.dialog.open(SelectPeerGroupingDialogComponent, {
+      data: {
+        peerGrouping: this.peerGrouping,
+        updateSelectedTag: (tag: string) => {
+          this.peerGrouping = this.peerGroupingAuthoringService.getPeerGrouping(tag);
           this.tagChanged.emit(tag);
         }
-      });
+      },
+      width: '50%'
+    });
   }
 }

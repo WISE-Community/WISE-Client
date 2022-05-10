@@ -7,7 +7,7 @@
   <mat-card *ngFor="let peerGrouping of peerGroupings" class="peer-grouping">
     <select-peer-grouping-option
         [peerGrouping]="peerGrouping"
-        [selectedTag]="selectedTag"
+        [selectedPeerGrouping]="dialogData.peerGrouping"
         (selectEvent)="selectPeerGrouping($event)"
         (deleteEvent)="deletePeerGrouping($event)">
     </select-peer-grouping-option>
@@ -20,6 +20,5 @@
   </button>
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="end center">
-  <button mat-button (click)="cancel()">Cancel</button>
-  <button mat-flat-button color="primary" (click)="save()">Save</button>
+  <button mat-button (click)="close()" i18n>Close</button>
 </mat-dialog-actions>

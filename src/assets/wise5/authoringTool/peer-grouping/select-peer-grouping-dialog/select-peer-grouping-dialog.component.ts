@@ -4,6 +4,11 @@ import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { CreateNewPeerGroupingDialogComponent } from '../create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
 
+class SelectPeerGroupingDialogData {
+  peerGrouping: PeerGrouping;
+  updateSelectedTag: (tag: string) => void;
+}
+
 @Component({
   selector: 'select-peer-grouping-dialog',
   templateUrl: './select-peer-grouping-dialog.component.html',
@@ -15,7 +20,7 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<SelectPeerGroupingDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private selectedTag: string,
+    @Inject(MAT_DIALOG_DATA) private dialogData: SelectPeerGroupingDialogData,
     private peerGroupingAuthoringService: PeerGroupingAuthoringService
   ) {}
 
@@ -23,15 +28,12 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
     this.peerGroupings = this.peerGroupingAuthoringService.getPeerGroupings();
   }
 
-  selectPeerGrouping(tag: string): void {
-    this.selectedTag = tag;
+  selectPeerGrouping(peerGrouping: PeerGrouping): void {
+    this.dialogData.peerGrouping = peerGrouping;
+    this.dialogData.updateSelectedTag(peerGrouping.tag);
   }
 
-  save(): void {
-    this.dialogRef.close(this.selectedTag);
-  }
-
-  cancel(): void {
+  close(): void {
     this.dialogRef.close();
   }
 
@@ -41,14 +43,7 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
     });
   }
 
-  deletePeerGrouping(tag: string): void {
-    for (let p = 0; p < this.peerGroupings.length; p++) {
-      const peerGrouping = this.peerGroupings[p];
-      if (peerGrouping.tag === tag) {
-        this.peerGroupings.splice(p, 1);
-        break;
-      }
-    }
-    this.peerGroupingAuthoringService.deletePeerGrouping(tag);
+  deletePeerGrouping(peerGrouping: PeerGrouping): void {
+    this.peerGroupingAuthoringService.deletePeerGrouping(peerGrouping);
   }
 }

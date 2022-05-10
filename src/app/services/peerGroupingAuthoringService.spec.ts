@@ -64,12 +64,12 @@ describe('PeerGroupingAuthoringService', () => {
   });
 
   getPeerGroupings();
+  getPeerGrouping();
   createNewPeerGrouping();
   updatePeerGrouping();
   getStepsUsedIn();
   getUniqueTag();
   deletePeerGrouping();
-  getPeerGroupingName();
 });
 
 function getPeerGroupings() {
@@ -78,6 +78,15 @@ function getPeerGroupings() {
       const peerGroupings = service.getPeerGroupings();
       expect(getPeerGroupingsSpy).toHaveBeenCalled();
       expect(peerGroupings).toEqual(allPeerGroupings);
+    });
+  });
+}
+
+function getPeerGrouping() {
+  describe('getPeerGrouping', () => {
+    it('should get peer grouping', () => {
+      const peerGrouping = service.getPeerGrouping(tag2);
+      expect(peerGrouping).toEqual(peerGrouping2);
     });
   });
 }
@@ -138,20 +147,10 @@ function getUniqueTag() {
 function deletePeerGrouping() {
   describe('deletePeerGrouping', () => {
     it('should delete peer grouping', () => {
-      expect(allPeerGroupings.length).toEqual(2);
-      service.deletePeerGrouping(tag2);
-      expect(allPeerGroupings.length).toEqual(1);
-      expect(allPeerGroupings[0].tag).toEqual(tag1);
+      expect(allPeerGroupings).toEqual([peerGrouping1, peerGrouping2]);
+      service.deletePeerGrouping(peerGrouping2);
+      expect(allPeerGroupings).toEqual([peerGrouping1]);
       expect(saveProjectSpy).toHaveBeenCalled();
-    });
-  });
-}
-
-function getPeerGroupingName() {
-  describe('getPeerGroupingName', () => {
-    it('should get peer grouping name', () => {
-      expect(service.getPeerGroupingName(tag1)).toEqual(name1);
-      expect(service.getPeerGroupingName(tag2)).toEqual(name2);
     });
   });
 }

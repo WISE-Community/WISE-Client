@@ -3,19 +3,19 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
-import { AuthorPeerGroupingComponent } from '../author-peer-grouping-settings/author-peer-grouping.component';
+import { AuthorPeerGroupingDialogComponent } from '../author-peer-grouping-dialog/author-peer-grouping-dialog.component';
 
 @Component({
   selector: 'create-new-peer-grouping-dialog',
   templateUrl: './create-new-peer-grouping-dialog.component.html',
   styleUrls: ['./create-new-peer-grouping-dialog.component.scss']
 })
-export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingComponent {
+export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDialogComponent {
   constructor(
-    private dialogRef: MatDialogRef<CreateNewPeerGroupingDialogComponent>,
+    protected dialogRef: MatDialogRef<CreateNewPeerGroupingDialogComponent>,
     private peerGroupingAuthoringService: PeerGroupingAuthoringService
   ) {
-    super();
+    super(dialogRef);
   }
 
   ngOnInit(): void {
@@ -29,9 +29,5 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingComp
       .subscribe(() => {
         this.dialogRef.close();
       });
-  }
-
-  cancel(): void {
-    this.dialogRef.close();
   }
 }

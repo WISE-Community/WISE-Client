@@ -8,7 +8,8 @@ import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 
 let component: SelectPeerGroupingDialogComponent;
 let fixture: ComponentFixture<SelectPeerGroupingDialogComponent>;
-let peerGrouping: PeerGrouping;
+let peerGrouping1: PeerGrouping;
+let peerGrouping2: PeerGrouping;
 const tag1: string = 'tag1';
 const tag2: string = 'tag2';
 
@@ -24,7 +25,8 @@ describe('SelectPeerGroupingDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectPeerGroupingDialogComponent);
     component = fixture.componentInstance;
-    peerGrouping = new PeerGrouping();
+    peerGrouping1 = new PeerGrouping({ tag: tag1 });
+    peerGrouping2 = new PeerGrouping({ tag: tag2 });
     spyOn(TestBed.inject(TeacherProjectService), 'getPeerGroupings').and.returnValue([]);
     fixture.detectChanges();
   });
@@ -33,13 +35,9 @@ describe('SelectPeerGroupingDialogComponent', () => {
   deletePeerGrouping();
 });
 
-function createPeerGrouping(tag: string): any {
-  return new PeerGrouping({ tag: tag });
-}
-
 function showNewPeerGroupingAuthoring() {
   it('should show new peer grouping authoring', () => {
-    const dialogOpenSpy = getDialogOpenSpy(peerGrouping);
+    const dialogOpenSpy = getDialogOpenSpy(peerGrouping1);
     component.showNewPeerGroupingAuthoring();
     expect(dialogOpenSpy).toHaveBeenCalled();
   });
@@ -47,15 +45,12 @@ function showNewPeerGroupingAuthoring() {
 
 function deletePeerGrouping() {
   it('should delete peer grouping', () => {
-    const peerGrouping1 = createPeerGrouping(tag1);
-    const peerGrouping2 = createPeerGrouping(tag2);
     component.peerGroupings = [peerGrouping1, peerGrouping2];
     const deletePeerGroupingSpy = spyOn(
       TestBed.inject(PeerGroupingAuthoringService),
       'deletePeerGrouping'
     );
-    component.deletePeerGrouping(tag2);
-    expect(component.peerGroupings).toEqual([peerGrouping1]);
-    expect(deletePeerGroupingSpy).toHaveBeenCalledWith(tag2);
+    component.deletePeerGrouping(peerGrouping2);
+    expect(deletePeerGroupingSpy).toHaveBeenCalledWith(peerGrouping2);
   });
 }

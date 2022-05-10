@@ -61,7 +61,8 @@ export class PeerGroupingAuthoringService {
     for (let i = 0; i < allPeerGroupings.length; i++) {
       const peerGrouping = allPeerGroupings[i];
       if (peerGrouping.tag === peerGroupingToUpdate.tag) {
-        allPeerGroupings[i] = peerGroupingToUpdate;
+        Object.assign(allPeerGroupings[i], peerGroupingToUpdate);
+        break;
       }
     }
     this.projectService.saveProject();
@@ -103,11 +104,11 @@ export class PeerGroupingAuthoringService {
     return peerGrouping.map((peerGrouping) => peerGrouping.tag);
   }
 
-  deletePeerGrouping(tag: string): void {
+  deletePeerGrouping(peerGroupingToDelete: PeerGrouping): void {
     const allPeerGroupings = this.getPeerGroupings();
     for (let i = 0; i < allPeerGroupings.length; i++) {
       const peerGrouping = allPeerGroupings[i];
-      if (peerGrouping.tag === tag) {
+      if (peerGrouping.tag === peerGroupingToDelete.tag) {
         allPeerGroupings.splice(i, 1);
         break;
       }
@@ -115,12 +116,9 @@ export class PeerGroupingAuthoringService {
     this.projectService.saveProject();
   }
 
-  getPeerGroupingName(tag: string): string {
-    for (const peerGrouping of this.getPeerGroupings()) {
-      if (peerGrouping.tag === tag) {
-        return peerGrouping.name;
-      }
-    }
-    return null;
+  getPeerGrouping(tag: string): PeerGrouping {
+    return this.getPeerGroupings().find((peerGrouping: PeerGrouping) => {
+      return peerGrouping.tag === tag;
+    });
   }
 }

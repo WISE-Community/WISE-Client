@@ -7,6 +7,7 @@ import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 let component: SelectPeerGroupingOptionComponent;
 let deleteEventSpy: jasmine.Spy;
 let fixture: ComponentFixture<SelectPeerGroupingOptionComponent>;
+let peerGrouping1: PeerGrouping;
 const tag1: string = 'tag1';
 
 describe('SelectPeerGroupingOptionComponent', () => {
@@ -20,7 +21,8 @@ describe('SelectPeerGroupingOptionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectPeerGroupingOptionComponent);
     component = fixture.componentInstance;
-    component.peerGrouping = new PeerGrouping({ tag: tag1 });
+    peerGrouping1 = new PeerGrouping({ tag: tag1 });
+    component.peerGrouping = peerGrouping1;
     deleteEventSpy = spyOn(component.deleteEvent, 'emit');
     fixture.detectChanges();
   });
@@ -33,7 +35,7 @@ function selectPeerGrouping() {
   it('should select peer grouping', () => {
     const selectEventSpy = spyOn(component.selectEvent, 'emit');
     component.select();
-    expect(selectEventSpy).toHaveBeenCalledWith(tag1);
+    expect(selectEventSpy).toHaveBeenCalledWith(peerGrouping1);
   });
 }
 
@@ -49,6 +51,6 @@ function editPeerGrouping() {
     const dialogOpenSpy = getDialogOpenSpy(true);
     component.edit();
     expect(dialogOpenSpy).toHaveBeenCalled();
-    expect(deleteEventSpy).toHaveBeenCalledWith(tag1);
+    expect(deleteEventSpy).toHaveBeenCalledWith(peerGrouping1);
   });
 }

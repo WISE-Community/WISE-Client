@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
@@ -11,23 +11,27 @@ import { EditPeerGroupingDialogComponent } from '../edit-peer-grouping-dialog/ed
 })
 export class SelectPeerGroupingOptionComponent implements OnInit {
   @Input() peerGrouping: PeerGrouping;
-  @Input() selectedTag: string;
+  @Input() selectedPeerGrouping: PeerGrouping;
   stepsUsedIn: string[] = [];
 
-  @Output() deleteEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() selectEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() deleteEvent: EventEmitter<PeerGrouping> = new EventEmitter<PeerGrouping>();
+  @Output() selectEvent: EventEmitter<PeerGrouping> = new EventEmitter<PeerGrouping>();
 
   constructor(
     private dialog: MatDialog,
     private peerGroupingAuthoringService: PeerGroupingAuthoringService
   ) {}
 
-  ngOnInit(): void {
-    this.stepsUsedIn = this.peerGroupingAuthoringService.getStepsUsedIn(this.peerGrouping.tag);
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.selectedPeerGrouping) {
+      this.stepsUsedIn = this.peerGroupingAuthoringService.getStepsUsedIn(this.peerGrouping.tag);
+    }
   }
 
   select(): void {
-    this.selectEvent.emit(this.peerGrouping.tag);
+    this.selectEvent.emit(this.peerGrouping);
   }
 
   edit(): void {
@@ -39,7 +43,7 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
       .afterClosed()
       .subscribe((isDelete: boolean) => {
         if (isDelete) {
-          this.deleteEvent.emit(this.peerGrouping.tag);
+          this.deleteEvent.emit(this.peerGrouping);
         }
       });
   }
