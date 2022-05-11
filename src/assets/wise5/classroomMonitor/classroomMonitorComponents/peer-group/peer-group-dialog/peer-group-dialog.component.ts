@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../../services/teacherDataService';
+import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
 @Component({
   selector: 'peer-group-dialog',
@@ -10,20 +11,23 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 })
 export class PeerGroupDialogComponent implements OnInit {
   currentPeriodChangedSubscription: Subscription;
+  peerGroupingName: string;
   periods: any[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public peerGroupingTag: string,
-    private TeacherDataService: TeacherDataService
+    private teacherDataService: TeacherDataService,
+    private teacherProjectService: TeacherProjectService
   ) {}
 
   ngOnInit() {
-    this.setPeriods(this.TeacherDataService.getCurrentPeriodId());
+    this.setPeriods(this.teacherDataService.getCurrentPeriodId());
+    this.peerGroupingName = this.teacherProjectService.getPeerGrouping(this.peerGroupingTag).name;
     this.subscribeToPeriodChanged();
   }
 
   subscribeToPeriodChanged(): void {
-    this.currentPeriodChangedSubscription = this.TeacherDataService.currentPeriodChanged$.subscribe(
+    this.currentPeriodChangedSubscription = this.teacherDataService.currentPeriodChanged$.subscribe(
       ({ currentPeriod }) => {
         this.setPeriods(currentPeriod.periodId);
       }
@@ -31,7 +35,7 @@ export class PeerGroupDialogComponent implements OnInit {
   }
 
   setPeriods(periodId: number): void {
-    this.periods = this.TeacherDataService.getVisiblePeriodsById(periodId);
+    this.periods = this.teacherDataService.getVisiblePeriodsById(periodId);
   }
 
   ngOnDestroy() {

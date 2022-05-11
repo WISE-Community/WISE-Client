@@ -18,11 +18,11 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
 import { UtilService } from '../../../../services/utilService';
 import { SelectPeriodComponent } from '../../select-period/select-period.component';
-
 import { PeerGroupDialogComponent } from './peer-group-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
+import { PeerGrouping } from '../../../../../../app/domain/peerGrouping';
 
 describe('PeerGroupDialogComponent', () => {
   let component: PeerGroupDialogComponent;
@@ -64,6 +64,9 @@ describe('PeerGroupDialogComponent', () => {
     fixture = TestBed.createComponent(PeerGroupDialogComponent);
     spyOn(TestBed.inject(TeacherProjectService), 'getStartNodeId').and.returnValue('node1');
     spyOn(TestBed.inject(TeacherProjectService), 'getRootNode').and.returnValue({ id: 'group0' });
+    spyOn(TestBed.inject(TeacherProjectService), 'getPeerGrouping').and.returnValue(
+      new PeerGrouping()
+    );
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriodId').and.returnValue(1);
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({
       periodId: 1,

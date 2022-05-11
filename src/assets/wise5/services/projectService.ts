@@ -3164,6 +3164,10 @@ export class ProjectService {
     return this.project.peerGroupings;
   }
 
+  getPeerGrouping(tag: string): PeerGrouping {
+    return this.getPeerGroupings().find((peerGrouping: PeerGrouping) => peerGrouping.tag === tag);
+  }
+
   getApplicationNodes(): any[] {
     return this.applicationNodes;
   }

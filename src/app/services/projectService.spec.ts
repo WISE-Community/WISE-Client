@@ -9,6 +9,8 @@ import oneBranchTwoPathsProjectJSON_import from './sampleData/curriculum/OneBran
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import twoStepsProjectJSON_import from './sampleData/curriculum/TwoSteps.project.json';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { PeerGrouping } from '../domain/peerGrouping';
+
 const projectIdDefault = 1;
 const projectBaseURL = 'http://localhost:8080/curriculum/12345/';
 const projectURL = projectBaseURL + 'project.json';
@@ -65,6 +67,7 @@ describe('ProjectService', () => {
   getParentGroup();
   getMaxScoreForComponent();
   getMaxScoreForNode();
+  getPeerGrouping();
   // TODO: add test for service.getFlattenedProjectAsNodeIds()
   // TODO: add test for service.consumePathsUntilNodeId()
   // TODO: add test for service.getFirstNodeIdInPathAtIndex()
@@ -520,5 +523,21 @@ function getMaxScoreForComponent_excludeFromTotalScore_returnNull() {
     service.setProject(demoProjectJSON);
     service.getComponentByNodeIdAndComponentId('node2', '7edwu1p29b').excludeFromTotalScore = true;
     expect(service.getMaxScoreForComponent('node2', '7edwu1p29b')).toBeNull();
+  });
+}
+
+function getPeerGrouping() {
+  describe('getPeerGrouping', () => {
+    it('should get peer grouping', () => {
+      const tag1 = 'tag1';
+      const tag2 = 'tag2';
+      const peerGrouping1 = new PeerGrouping({ name: 'Group 1', tag: tag1 });
+      const peerGrouping2 = new PeerGrouping({ name: 'Group 2', tag: tag2 });
+      service.project = {
+        peerGroupings: [peerGrouping1, peerGrouping2]
+      };
+      expect(service.getPeerGrouping(tag1)).toEqual(peerGrouping1);
+      expect(service.getPeerGrouping(tag2)).toEqual(peerGrouping2);
+    });
   });
 }
