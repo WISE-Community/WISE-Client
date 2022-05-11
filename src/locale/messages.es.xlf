@@ -17483,7 +17483,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
           <context context-type="linenumber">781</context>
         </context-group>
-        <target state="needs-translation">StudentDataService.saveComponentEvent: component, category, event args must not be null</target>
+        <target state="translated">StudentDataService.saveComponentEvent: component, category, event args no pueden ser nulos</target>
       </trans-unit>
       <trans-unit id="944638387659785956" datatype="html">
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
@@ -17491,7 +17491,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
           <context context-type="linenumber">791</context>
         </context-group>
-        <target state="needs-translation">StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</target>
+        <target state="translated">StudentDataService.saveComponentEvent: nodeId, componentId, componentType no pueden ser nulos</target>
       </trans-unit>
       <trans-unit id="4924640921903672943" datatype="html">
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
@@ -17499,7 +17499,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
           <context context-type="linenumber">800</context>
         </context-group>
-        <target state="needs-translation">StudentDataService.saveVLEEvent: category and event args must not be null</target>
+        <target state="translated">StudentDataService.saveVLEEvent: argumentos para categoría y evento no pueden ser nulos</target>
       </trans-unit>
       <trans-unit id="8725215606116054825" datatype="html">
         <source>First Lesson</source>
@@ -17687,7 +17687,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
           <context context-type="linenumber">51,53</context>
         </context-group>
-        <target state="needs-translation"> Save </target>
+        <target state="translated"> Guardar </target>
       </trans-unit>
       <trans-unit id="dc390b4facb4c5f5fb7d88cac9db7fe350393640" datatype="html">
         <source>Copy to My Notes</source>
@@ -17695,7 +17695,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
           <context context-type="linenumber">93</context>
         </context-group>
-        <target state="needs-translation">Copy to My Notes</target>
+        <target state="translated">Copiar a Mis Notas</target>
       </trans-unit>
       <trans-unit id="6cb1a9de15616c0b4efdd54cc10b58a166b9e016" datatype="html">
         <source> Close </source>
@@ -17703,7 +17703,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
           <context context-type="linenumber">98,100</context>
         </context-group>
-        <target state="needs-translation"> Close </target>
+        <target state="translated"> Cerrar </target>
       </trans-unit>
       <trans-unit id="5379448133816368703" datatype="html">
         <source>Note from <x id="PH" equiv-text="currentNodeTitle"/></source>
@@ -17711,7 +17711,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
           <context context-type="linenumber">63</context>
         </context-group>
-        <target state="needs-translation">Note from <x id="PH" equiv-text="currentNodeTitle"/></target>
+        <target state="translated">Nota de <x id="PH" equiv-text="currentNodeTitle"/></target>
       </trans-unit>
       <trans-unit id="8417917245707164827" datatype="html">
         <source>Edit <x id="PH" equiv-text="label"/></source>
@@ -17719,7 +17719,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
           <context context-type="linenumber">91</context>
         </context-group>
-        <target state="needs-translation">Edit <x id="PH" equiv-text="label"/></target>
+        <target state="translated">Editar <x id="PH" equiv-text="label"/></target>
       </trans-unit>
       <trans-unit id="5258595085525200029" datatype="html">
         <source>Add <x id="PH" equiv-text="label"/></source>
@@ -17727,7 +17727,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
           <context context-type="linenumber">93</context>
         </context-group>
-        <target state="needs-translation">Add <x id="PH" equiv-text="label"/></target>
+        <target state="translated">Agregar <x id="PH" equiv-text="label"/></target>
       </trans-unit>
       <trans-unit id="3296271610866256066" datatype="html">
         <source>View <x id="PH" equiv-text="label"/></source>
@@ -17735,7 +17735,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.ts</context>
           <context context-type="linenumber">96</context>
         </context-group>
-        <target state="needs-translation">View <x id="PH" equiv-text="label"/></target>
+        <target state="translated">Ver <x id="PH" equiv-text="label"/></target>
       </trans-unit>
       <trans-unit id="7033364046926512938" datatype="html">
         <source><x id="PH" equiv-text="noteTerm"/> text</source>
@@ -17744,7 +17744,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="linenumber">99</context>
         </context-group>
         <note priority="1" from="description">Label for note text input</note>
-        <target state="needs-translation"><x id="PH" equiv-text="noteTerm"/> text</target>
+        <target state="translated">texto <x id="PH" equiv-text="noteTerm"/></target>
       </trans-unit>
       <trans-unit id="8129802372590365244" datatype="html">
         <source>Rubric</source>
@@ -17800,7 +17800,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</target>
+        <target state="translated">Tu <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</target>
       </trans-unit>
       <trans-unit id="d44e0fae2f7939bc76717ba6833b1bb8f5031c81" datatype="html">
         <source>Choose Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
@@ -17808,7 +17808,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Choose Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</target>
+        <target state="translated">Elegir tu <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</target>
       </trans-unit>
       <trans-unit id="e86ce5c4b75612c7ed9f6754d33b35a82cb025a9" datatype="html">
         <source>Selected avatar</source>
@@ -17816,7 +17816,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation">Selected avatar</target>
+        <target state="translated">Avatar seleccionado</target>
       </trans-unit>
       <trans-unit id="d8be89df0f7689e784ded095554331510617728c" datatype="html">
         <source> Continue </source>
@@ -17824,7 +17824,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
           <context context-type="linenumber">30,32</context>
         </context-group>
-        <target state="needs-translation"> Continue </target>
+        <target state="translated"> Continuar </target>
       </trans-unit>
       <trans-unit id="ef4790a816a01e9ce9e11454485d74f7ac587a64" datatype="html">
         <source>Action Required</source>
@@ -17832,7 +17832,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Action Required</target>
+        <target state="translated">Acción requerida</target>
       </trans-unit>
       <trans-unit id="b96e6b5cafa67a388a51c5a265f29ff447215e48" datatype="html">
         <source>Teacher, enter code to dismiss this alert:</source>
@@ -17840,7 +17840,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Teacher, enter code to dismiss this alert:</target>
+        <target state="translated">Docente, ingrese código para ignorar este alerta:</target>
       </trans-unit>
       <trans-unit id="232ae4d8d2026563c3eac24f4576202450a77a6e" datatype="html">
         <source>Dismiss code</source>
@@ -17848,7 +17848,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Dismiss code</target>
+        <target state="translated">Código para ignorar</target>
       </trans-unit>
       <trans-unit id="da44efc7b658c318651866454d258bbbe57ff21c" datatype="html">
         <source> Cancel </source>
