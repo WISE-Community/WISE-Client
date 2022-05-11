@@ -2,7 +2,6 @@
 
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { StudentDataService } from '../services/studentDataService';
 import { UtilService } from '../services/utilService';
 import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
@@ -16,10 +15,7 @@ export class ComponentService {
   private notifyConnectedComponentSource = new Subject<any>();
   public notifyConnectedComponentSource$ = this.notifyConnectedComponentSource.asObservable();
 
-  constructor(
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
-  ) {}
+  constructor(protected UtilService: UtilService) {}
 
   requestComponentState(nodeId: string, componentId: string, isSubmit: boolean = false): void {
     this.requestComponentStateSource.next({

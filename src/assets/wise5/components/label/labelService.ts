@@ -7,7 +7,6 @@ import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../services/utilService';
-import { StudentDataService } from '../../services/studentDataService';
 
 @Injectable()
 export class LabelService extends ComponentService {
@@ -18,10 +17,9 @@ export class LabelService extends ComponentService {
 
   constructor(
     private StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {

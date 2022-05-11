@@ -10,7 +10,6 @@ import DrawingTool from 'drawing-tool';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
-import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
 
 @Injectable()
@@ -35,10 +34,9 @@ export class DrawService extends ComponentService {
 
   constructor(
     private StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {
