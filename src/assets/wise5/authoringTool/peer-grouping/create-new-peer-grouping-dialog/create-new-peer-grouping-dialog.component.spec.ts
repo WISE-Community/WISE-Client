@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
@@ -13,7 +14,7 @@ const tag1: string = 'tag1';
 describe('CreateNewPeerGroupingDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PeerGroupingTestingModule],
+      imports: [MatSnackBarModule, PeerGroupingTestingModule],
       declarations: [CreateNewPeerGroupingDialogComponent],
       providers: []
     }).compileComponents();

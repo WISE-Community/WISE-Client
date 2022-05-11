@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
 import { ConfigService } from './configService';
 import { TeacherProjectService } from './teacherProjectService';
@@ -20,12 +21,15 @@ export class PeerGroupingAuthoringService {
   }
 
   createNewPeerGrouping(newPeerGrouping: PeerGrouping): Observable<PeerGrouping> {
-    this.createNewPeerGroupingInProject(newPeerGrouping);
     const runId = this.configService.getRunId();
     if (runId == null) {
-      return this.getDummyObservable();
+      return this.getDummyObservable().pipe(
+        tap(() => {
+          this.createNewPeerGroupingInProject(newPeerGrouping);
+        })
+      );
     } else {
-      return this.createNewPeerGroupingInDatabase(newPeerGrouping);
+      return this.createNewPeerGroupingOnServer(newPeerGrouping);
     }
   }
 
@@ -41,9 +45,13 @@ export class PeerGroupingAuthoringService {
     this.projectService.saveProject();
   }
 
-  private createNewPeerGroupingInDatabase(newPeerGrouping: PeerGrouping): Observable<PeerGrouping> {
+  private createNewPeerGroupingOnServer(newPeerGrouping: PeerGrouping): Observable<PeerGrouping> {
     const runId = this.configService.getRunId();
-    return this.http.post<PeerGrouping>(`/api/run/${runId}/peer-grouping`, newPeerGrouping);
+    return this.http.post<PeerGrouping>(`/api/run/${runId}/peer-grouping`, newPeerGrouping).pipe(
+      tap(() => {
+        this.createNewPeerGroupingInProject(newPeerGrouping);
+      })
+    );
   }
 
   updatePeerGrouping(peerGroupingToUpdate: PeerGrouping): Observable<PeerGrouping> {

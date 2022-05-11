@@ -9497,6 +9497,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="7071012620934540859" datatype="html">
+        <source>Please Try Again (Error: Duplicate Tag)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="f49dc696db7f816c672e23d20e563dd132a8e714" datatype="html">
         <source>Edit Peer Grouping</source>
         <context-group purpose="location">
@@ -10081,8 +10088,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="128eb5663b6c72231ac1e98d0e1345be8f75b894" datatype="html">
-        <source>Groupings for <x id="INTERPOLATION" equiv-text="{{ peerGroupingTag }}"/></source>
+      <trans-unit id="c151982595278a219e1f55d5e49c46c39ad8c598" datatype="html">
+        <source>Groupings for <x id="INTERPOLATION" equiv-text="{{ peerGroupingName }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component.html</context>
           <context context-type="linenumber">2</context>
@@ -14968,7 +14975,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peerChatService.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3eadcc6c36867a6d135be94da38b992e5dbd2f2f" datatype="html">
