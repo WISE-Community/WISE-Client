@@ -25,6 +25,7 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
+import { OpenResponseCompletionCriteriaService } from '../openResponseCompletionCriteriaService';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
 
@@ -72,6 +73,7 @@ describe('OpenResponseStudent', () => {
         { provide: NodeService, useClass: MockNodeService },
         { provide: NotebookService, useClass: MockNotebookService },
         NotificationService,
+        OpenResponseCompletionCriteriaService,
         OpenResponseService,
         ProjectService,
         SessionService,
@@ -228,7 +230,7 @@ function createComponentState() {
     it(
       'should create component state',
       waitForAsync(() => {
-        spyOn(TestBed.inject(OpenResponseService), 'isCompleted').and.returnValue(true);
+        spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
         component.studentResponse = response;
         component.createComponentState('save').then((componentState: any) => {
           expect(componentState.componentId).toEqual(componentId);
@@ -245,7 +247,7 @@ function createComponentStateAdditionalProcessing() {
     it(
       'should perform create component state additional processing',
       waitForAsync(() => {
-        spyOn(TestBed.inject(OpenResponseService), 'isCompleted').and.returnValue(true);
+        spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
         spyOn(component, 'isCRaterScoreOnSubmit').and.returnValue(true);
         spyOn(TestBed.inject(CRaterService), 'makeCRaterScoringRequest').and.returnValue(
           of({ score: 1 })

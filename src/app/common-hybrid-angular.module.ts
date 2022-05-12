@@ -79,6 +79,7 @@ import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.module';
 import { ComputerAvatarService } from '../assets/wise5/services/computerAvatarService';
 import { StudentStatusService } from '../assets/wise5/services/studentStatusService';
+import { OpenResponseCompletionCriteriaService } from '../assets/wise5/components/openResponse/openResponseCompletionCriteriaService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -151,6 +152,7 @@ export class EmptyComponent {}
     NotebookService,
     NotificationService,
     OutsideURLService,
+    OpenResponseCompletionCriteriaService,
     OpenResponseService,
     PeerChatService,
     PeerGroupService,
