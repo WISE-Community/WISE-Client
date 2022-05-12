@@ -43,12 +43,12 @@ function createComponent() {
 
 function isCompleted() {
   function expectIsCompleted(nodeEvents: any[], expectedResult: boolean) {
-    expect(service.isCompleted({}, [], [], nodeEvents)).toEqual(expectedResult);
+    expect(service.isCompleted({}, [], nodeEvents, null)).toEqual(expectedResult);
   }
-  it('should check if is compeleted when there are no node entered events', () => {
+  it('should check if is completed when there are no node entered events', () => {
     expectIsCompleted([], false);
   });
-  it('should check if is compeleted when there is a node entered event', () => {
+  it('should check if is completed when there is a node entered event', () => {
     expectIsCompleted([{ event: 'nodeEntered' }], true);
   });
 }

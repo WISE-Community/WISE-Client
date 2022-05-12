@@ -203,7 +203,7 @@ function isCompleted() {
     node: any,
     expectedResult: boolean
   ) {
-    expect(service.isCompleted(component, componentStates, [], [], node)).toEqual(expectedResult);
+    expect(service.isCompleted(component, componentStates, [], node)).toEqual(expectedResult);
   }
   it('should check if a component is completed when there are no component states', () => {
     expectIsCompleted({}, [], {}, false);

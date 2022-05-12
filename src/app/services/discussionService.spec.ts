@@ -144,7 +144,9 @@ function isCompleted() {
     nodeEvents: any[],
     expectedResult: boolean
   ) {
-    expect(service.isCompleted(component, componentStates, [], nodeEvents)).toEqual(expectedResult);
+    expect(service.isCompleted(component, componentStates, nodeEvents, null)).toEqual(
+      expectedResult
+    );
   }
   it(`should check if a component is completed when it does not have a show work connected component
       and it does not have any component states`, () => {
