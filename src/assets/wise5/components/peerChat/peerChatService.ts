@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConfigService } from '../../services/configService';
-import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
 import { ComponentService } from '../componentService';
 import { PeerChatMessage } from './PeerChatMessage';
@@ -12,10 +11,9 @@ export class PeerChatService extends ComponentService {
   constructor(
     private configService: ConfigService,
     private http: HttpClient,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel() {
