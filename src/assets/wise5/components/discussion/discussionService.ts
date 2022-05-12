@@ -31,7 +31,7 @@ export class DiscussionService extends ComponentService {
     return component;
   }
 
-  isCompleted(component: any, componentStates: any[], componentEvents: any[], nodeEvents: any[]) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (this.hasShowWorkConnectedComponentThatHasWork(component)) {
       return this.hasNodeEnteredEvent(nodeEvents);
     }

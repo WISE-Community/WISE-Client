@@ -262,7 +262,6 @@ export class OpenResponseStudent extends ComponentStudent {
       this.componentContent,
       [componentState],
       null,
-      null,
       this.ProjectService.getNodeById(this.nodeId)
     );
 

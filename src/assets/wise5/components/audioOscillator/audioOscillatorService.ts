@@ -28,13 +28,7 @@ export class AudioOscillatorService extends ComponentService {
     return component;
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (componentStates && componentStates.length) {
       const latestComponentState = componentStates[componentStates.length - 1];
       return this.componentStateHasStudentWork(latestComponentState, component);

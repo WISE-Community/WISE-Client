@@ -90,7 +90,6 @@ function createComponent() {
 function isCompleted() {
   let component: any;
   let componentStates: any[] = [];
-  let componentEvents: any[] = [];
   let nodeEvents: any[] = [];
   let node: any;
   beforeEach(() => {
@@ -104,9 +103,9 @@ function isCompleted() {
     node: any,
     expectedResult: boolean
   ) {
-    expect(
-      service.isCompleted(component, componentStates, componentEvents, nodeEvents, node)
-    ).toEqual(expectedResult);
+    expect(service.isCompleted(component, componentStates, nodeEvents, node)).toEqual(
+      expectedResult
+    );
   }
   it('should check if a component is completed when there are no component states', () => {
     expectIsCompleted(component, componentStates, node, false);

@@ -237,9 +237,7 @@ function isCompleted() {
     node: any,
     expectedResult: boolean
   ) {
-    expect(service.isCompleted(component, componentStates, null, null, node)).toEqual(
-      expectedResult
-    );
+    expect(service.isCompleted(component, componentStates, null, node)).toEqual(expectedResult);
   }
   it(`should check if is completed when submit is required and there are no submit component
       states`, () => {

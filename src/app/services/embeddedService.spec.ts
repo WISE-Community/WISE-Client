@@ -58,7 +58,7 @@ function isCompleted() {
     nodeEvents = [];
   });
   function expectIsCompleted(componentStates: any[], nodeEvents: any[], expectedResult: boolean) {
-    expect(service.isCompleted({}, componentStates, [], nodeEvents)).toEqual(expectedResult);
+    expect(service.isCompleted({}, componentStates, nodeEvents, null)).toEqual(expectedResult);
   }
   it('should check is completed when there are no node entered events and no component states', () => {
     expectIsCompleted(componentStates, nodeEvents, false);

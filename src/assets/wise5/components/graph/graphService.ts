@@ -86,13 +86,7 @@ export class GraphService extends ComponentService {
     return component;
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (this.canEdit(component)) {
       return this.hasCompletedComponentState(componentStates, node, component);
     } else {

@@ -139,7 +139,7 @@ function isCompleted() {
     node: any,
     expectedResult: boolean
   ) {
-    expect(service.isCompleted(component, componentStates, [], nodeEvents, node)).toEqual(
+    expect(service.isCompleted(component, componentStates, nodeEvents, node)).toEqual(
       expectedResult
     );
   }

@@ -88,7 +88,7 @@ export class TableService extends ComponentService {
     return `table-${nodeId}-${componentId}`;
   }
 
-  isCompleted(component, componentStates, componentEvents, nodeEvents, node) {
+  isCompleted(component, componentStates, nodeEvents, node) {
     if (!this.componentHasEditableCells(component)) {
       /*
        * The component does not have any editable cells so we will say

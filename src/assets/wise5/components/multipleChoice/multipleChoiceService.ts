@@ -88,13 +88,7 @@ export class MultipleChoiceService extends ComponentService {
     return choiceIds;
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (componentStates && componentStates.length) {
       const isSubmitRequired = this.isSubmitRequired(node, component);
       for (let c = componentStates.length - 1; c >= 0; c--) {

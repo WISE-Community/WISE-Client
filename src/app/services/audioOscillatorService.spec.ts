@@ -57,7 +57,7 @@ function createComponent() {
 
 function isCompleted() {
   function expectIsCompleted(componentStates: any, expectedResult: boolean) {
-    expect(service.isCompleted({}, componentStates, [], [], {})).toEqual(expectedResult);
+    expect(service.isCompleted({}, componentStates, [], {})).toEqual(expectedResult);
   }
   it('should check is completed when it is not completed', () => {
     expectIsCompleted([], false);
