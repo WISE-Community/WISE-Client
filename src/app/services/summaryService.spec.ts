@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { SummaryService } from '../../assets/wise5/components/summary/summaryService';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -38,7 +37,6 @@ describe('SummaryService', () => {
         ConfigService,
         ProjectService,
         SessionService,
-        StudentDataService,
         SummaryService,
         TagService,
         UtilService

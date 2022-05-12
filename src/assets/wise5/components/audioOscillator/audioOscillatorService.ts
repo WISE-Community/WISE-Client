@@ -1,20 +1,11 @@
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
-import { StudentDataService } from '../../services/studentDataService';
-import { UtilService } from '../../services/utilService';
 
 @Injectable()
 export class AudioOscillatorService extends ComponentService {
   defaultStartingAmplitude: number = 44;
   defaultStartingFrequency: number = 440;
   maxAmplitude: number = 50;
-
-  constructor(
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
-  ) {
-    super(StudentDataService, UtilService);
-  }
 
   getComponentTypeLabel(): string {
     return $localize`Audio Oscillator`;

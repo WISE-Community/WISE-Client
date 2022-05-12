@@ -2,18 +2,9 @@
 
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
-import { UtilService } from '../../services/utilService';
-import { StudentDataService } from '../../services/studentDataService';
 
 @Injectable()
 export class AnimationService extends ComponentService {
-  constructor(
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
-  ) {
-    super(StudentDataService, UtilService);
-  }
-
   getComponentTypeLabel(): string {
     return $localize`Animation`;
   }

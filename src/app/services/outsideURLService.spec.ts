@@ -1,6 +1,5 @@
 import { OutsideURLService } from '../../assets/wise5/components/outsideURL/outsideURLService';
 import { TestBed } from '@angular/core/testing';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
@@ -23,7 +22,6 @@ describe('OutsideURLService', () => {
         OutsideURLService,
         ProjectService,
         SessionService,
-        StudentDataService,
         TagService,
         UtilService
       ]
