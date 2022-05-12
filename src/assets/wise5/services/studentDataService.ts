@@ -552,11 +552,15 @@ export class StudentDataService extends DataService {
     return branchPathTakenEvents;
   }
 
-  evaluateChoiceChosenCriteria(criteria) {
+  evaluateChoiceChosenCriteria(criteria: any): boolean {
     const serviceName = 'MultipleChoiceService';
     if (this.upgrade.$injector.has(serviceName)) {
       const service = this.upgrade.$injector.get(serviceName);
-      return service.choiceChosen(criteria);
+      const latestComponentState = this.getLatestComponentStateByNodeIdAndComponentId(
+        criteria.params.nodeId,
+        criteria.params.componentId
+      );
+      return latestComponentState != null && service.choiceChosen(criteria, latestComponentState);
     }
     return false;
   }
