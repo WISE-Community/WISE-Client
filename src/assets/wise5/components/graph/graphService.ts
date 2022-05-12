@@ -5,7 +5,6 @@ import * as html2canvas from 'html2canvas';
 import { Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
 
 @Injectable()
@@ -14,10 +13,9 @@ export class GraphService extends ComponentService {
 
   constructor(
     private StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {

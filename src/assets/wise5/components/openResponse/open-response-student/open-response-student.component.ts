@@ -350,7 +350,8 @@ export class OpenResponseStudent extends ComponentStudent {
       data: {
         content: $localize`We are scoring your work...`,
         title: $localize`Please Wait`
-      }
+      },
+      disableClose: true
     });
     this.CRaterService.makeCRaterScoringRequest(
       this.CRaterService.getCRaterItemId(this.componentContent),

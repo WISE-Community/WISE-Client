@@ -4,7 +4,6 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
@@ -23,7 +22,6 @@ describe('TableService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TableService,
         TagService,
         UtilService

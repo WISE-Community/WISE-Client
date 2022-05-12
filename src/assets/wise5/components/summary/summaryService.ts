@@ -3,18 +3,14 @@
 import { ComponentService } from '../componentService';
 import { UtilService } from '../../services/utilService';
 import { Injectable } from '@angular/core';
-import { StudentDataService } from '../../services/studentDataService';
 
 @Injectable()
 export class SummaryService extends ComponentService {
   componentsWithScoresSummary: string[];
   componentsWithResponsesSummary: string[];
 
-  constructor(
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
-  ) {
-    super(StudentDataService, UtilService);
+  constructor(protected UtilService: UtilService) {
+    super(UtilService);
     this.componentsWithScoresSummary = [
       'Animation',
       'AudioOscillator',
