@@ -258,11 +258,10 @@ export class OpenResponseStudent extends ComponentStudent {
     // set the component id
     componentState.componentId = this.componentId;
 
-    componentState.isCompleted = this.OpenResponseService.isCompleted(
+    componentState.isCompleted = this.OpenResponseService.isCompletedV2(
+      this.ProjectService.getNodeById(this.nodeId),
       this.componentContent,
-      [componentState],
-      null,
-      this.ProjectService.getNodeById(this.nodeId)
+      { nodeId: this.nodeId, componentId: this.componentId, componentStates: [componentState] }
     );
 
     /*
