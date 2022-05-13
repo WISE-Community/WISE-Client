@@ -1281,17 +1281,17 @@ export class StudentDataService extends DataService {
     return result;
   }
 
-  isComponentCompleted(nodeId: string, componentId: string) {
-    const componentStates = this.getComponentStatesByNodeIdAndComponentId(nodeId, componentId);
-    const nodeEvents = this.getEventsByNodeId(nodeId);
-    const node = this.ProjectService.getNodeById(nodeId);
+  private isComponentCompleted(nodeId: string, componentId: string): boolean {
     const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
     if (component != null) {
+      const node = this.ProjectService.getNodeById(nodeId);
       const componentType = component.type;
       const service = this.upgrade.$injector.get(componentType + 'Service');
-      if (componentType === 'OpenResponse') {
+      if (['OpenResponse', 'Discussion'].includes(componentType)) {
         return service.isCompletedV2(node, component, this.studentData);
       } else {
+        const componentStates = this.getComponentStatesByNodeIdAndComponentId(nodeId, componentId);
+        const nodeEvents = this.getEventsByNodeId(nodeId);
         return service.isCompleted(component, componentStates, nodeEvents, node);
       }
     }

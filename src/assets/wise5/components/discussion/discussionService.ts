@@ -1,7 +1,6 @@
 import { ComponentService } from '../componentService';
 import { ConfigService } from '../../services/configService';
 import { UtilService } from '../../services/utilService';
-import { StudentDataService } from '../../services/studentDataService';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
@@ -12,7 +11,6 @@ export class DiscussionService extends ComponentService {
   constructor(
     protected http: HttpClient,
     protected ConfigService: ConfigService,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
     super(UtilService);
@@ -31,32 +29,35 @@ export class DiscussionService extends ComponentService {
     return component;
   }
 
-  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
-    if (this.hasShowWorkConnectedComponentThatHasWork(component)) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any): boolean {
+    throw new Error('No longer used');
+  }
+
+  isCompletedV2(node: any, component: any, studentData: any): boolean {
+    if (this.hasShowWorkConnectedComponentThatHasWork(component, studentData)) {
+      const nodeEvents = studentData.events.filter((event) => event.nodeId == node.id);
       return this.hasNodeEnteredEvent(nodeEvents);
     }
+    const componentStates = studentData.componentStates.filter(
+      (componentState) =>
+        componentState.nodeId === node.id && componentState.componentId == component.id
+    );
     return this.hasAnyComponentStateWithResponse(componentStates);
   }
 
-  hasAnyComponentStateWithResponse(componentStates: any[]) {
-    for (const componentState of componentStates) {
-      if (componentState.studentData.response != null) {
-        return true;
-      }
-    }
-    return false;
+  private hasAnyComponentStateWithResponse(componentStates: any[]): boolean {
+    return componentStates.some((componentState) => componentState.studentData.response != null);
   }
 
-  hasShowWorkConnectedComponentThatHasWork(componentContent: any) {
+  private hasShowWorkConnectedComponentThatHasWork(
+    componentContent: any,
+    studentData: any
+  ): boolean {
     const connectedComponents = componentContent.connectedComponents;
     if (connectedComponents != null) {
       for (const connectedComponent of connectedComponents) {
         if (connectedComponent.type === 'showWork') {
-          const componentStates = this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
-            connectedComponent.nodeId,
-            connectedComponent.componentId
-          );
-          if (componentStates.length > 0) {
+          if (this.hasComponentStateForConnectedComponent(connectedComponent, studentData)) {
             return true;
           }
         }
@@ -65,13 +66,19 @@ export class DiscussionService extends ComponentService {
     return false;
   }
 
-  hasNodeEnteredEvent(nodeEvents: any[]) {
-    for (const nodeEvent of nodeEvents) {
-      if (nodeEvent.event === 'nodeEntered') {
-        return true;
-      }
-    }
-    return false;
+  private hasComponentStateForConnectedComponent(
+    connectedComponent: any,
+    studentData: any
+  ): boolean {
+    return studentData.componentStates.some(
+      (componentState) =>
+        componentState.nodeId === connectedComponent.nodeId &&
+        componentState.componentId === connectedComponent.componentId
+    );
+  }
+
+  private hasNodeEnteredEvent(nodeEvents: any[]): boolean {
+    return nodeEvents.some((nodeEvent) => nodeEvent.event === 'nodeEntered');
   }
 
   getClassmateResponsesFromComponents(
