@@ -1,0 +1,13 @@
+@import '~style/abstracts/variables';
+
+.mat-card {
+  margin: 4px;
+  padding: 8px;
+}
+
+.mat-card-content {
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: $button-border-radius;
+  overflow: auto;
+}

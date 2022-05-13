@@ -9,8 +9,8 @@ export class AnimationService extends ComponentService {
     return $localize`Animation`;
   }
 
-  getSvgId(nodeId: string, componentId: string): string {
-    return `svg-${nodeId}-${componentId}`;
+  getSvgId(domIdEnding: string): string {
+    return `svg-${domIdEnding}`;
   }
 
   createComponent() {

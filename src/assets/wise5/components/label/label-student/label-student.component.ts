@@ -71,7 +71,12 @@ export class LabelStudent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     this.enableFabricTextPadding();
-    this.canvasId = `canvas_${this.nodeId}_${this.componentId}`;
+    const domIdEnding = this.LabelService.getDomIdEnding(
+      this.nodeId,
+      this.componentId,
+      this.componentState
+    );
+    this.canvasId = this.LabelService.getCanvasId(domIdEnding);
     this.initializeComponent(this.componentContent);
   }
 

@@ -1,0 +1,26 @@
+<div fxLayoutAlign="space-between start">
+  <mat-radio-button
+      [checked]="selectedPeerGrouping != null && peerGrouping.tag === selectedPeerGrouping.tag"
+      (click)="select()"
+      color="primary">
+    <span class="mat-body-2">{{ peerGrouping.name }}</span>
+  </mat-radio-button>
+  <button mat-stroked-button (click)="edit()" i18n>Edit</button>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between end">
+  <div>
+    <div>
+      <span class="field-label" i18n>Steps Used In: </span>
+      <span *ngFor="let stepUsedIn of stepsUsedIn; last as isLast">
+        {{ stepUsedIn }}<span *ngIf="!isLast">, </span>
+      </span>
+      <span *ngIf="stepsUsedIn.length === 0" i18n>None</span>
+    </div>
+    <div>
+      <span class="field-label" i18n>Logic: </span><span>{{ peerGroupingLogicName }}</span>
+    </div>
+    <div>
+      <span class="field-label" i18n>Teams Per Group: </span><span>{{ peerGrouping.maxMembershipCount }}</span>
+    </div>
+  </div>
+</div>

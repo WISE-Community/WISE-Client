@@ -20,6 +20,12 @@
         <md-icon class="info"> flag </md-icon>
         <span>{{ ::'REPORT' | translate }}</span>
       </md-button>
+      <md-button ng-repeat="peerGroupingTag in $ctrl.peerGroupingTags"
+          class="md-raised info"
+          ng-click="$ctrl.showPeerGroupDetails(peerGroupingTag)">
+        <md-icon class="info">groups</md-icon>
+        <span class="info">{{ ::'peerGroups' | translate }}</span>
+      </md-button>
       <md-button ng-click="$ctrl.showRubric($event)" class="md-raised info">
         <md-icon class="info"> info_outline </md-icon>
         <span ng-if="!$ctrl.numRubrics">{{ ::'STEP_INFO' | translate }}</span>

@@ -88,7 +88,12 @@ export class AudioOscillatorStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.oscilloscopeId = 'oscilloscope' + this.componentId;
+    const domIdEnding = this.AudioOscillatorService.getDomIdEnding(
+      this.nodeId,
+      this.componentId,
+      this.componentState
+    );
+    this.oscilloscopeId = this.AudioOscillatorService.getOscilloscopeId(domIdEnding);
     this.setButtonTextToPlay();
     this.setParametersFromComponentContent();
 

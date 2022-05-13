@@ -26,6 +26,10 @@ export class LabelService extends ComponentService {
     return $localize`Label`;
   }
 
+  getCanvasId(domIdEnding: string): string {
+    return this.getElementId('canvas', domIdEnding);
+  }
+
   createComponent() {
     const component: any = super.createComponent();
     component.type = 'Label';

@@ -11,6 +11,10 @@ export class AudioOscillatorService extends ComponentService {
     return $localize`Audio Oscillator`;
   }
 
+  getOscilloscopeId(domIdEnding: string): string {
+    return `oscilloscope-${domIdEnding}`;
+  }
+
   createComponent() {
     const component: any = super.createComponent();
     component.type = 'AudioOscillator';

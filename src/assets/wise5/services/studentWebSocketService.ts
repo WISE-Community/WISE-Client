@@ -9,11 +9,13 @@ import { StudentDataService } from './studentDataService';
 import { NotificationService } from './notificationService';
 import { ProjectService } from './projectService';
 import * as angular from 'angular';
+import { Notification } from '../../../app/domain/notification';
 
 @Injectable()
 export class StudentWebSocketService {
   runId: number;
   periodId: any;
+  stomp: any;
   workgroupId: number;
 
   constructor(
@@ -24,7 +26,20 @@ export class StudentWebSocketService {
     private ProjectService: ProjectService,
     private StudentDataService: StudentDataService,
     private TagService: TagService
-  ) {}
+  ) {
+    if (this.upgrade.$injector != null) {
+      this.initializeStomp();
+    }
+  }
+
+  initializeStomp() {
+    this.stomp = this.upgrade.$injector.get('$stomp');
+    this.stomp.setDebug(() => {});
+  }
+
+  getStomp() {
+    return this.stomp;
+  }
 
   initialize() {
     this.runId = this.ConfigService.getRunId();
@@ -75,6 +90,9 @@ export class StudentWebSocketService {
         if (message.type === 'notification') {
           const notification = JSON.parse(message.content);
           this.NotificationService.addNotification(notification);
+          if (this.isDismissImmediately(notification)) {
+            this.NotificationService.dismissNotification(notification);
+          }
         } else if (message.type === 'annotation') {
           const annotationData = JSON.parse(message.content);
           this.AnnotationService.addOrUpdateAnnotation(annotationData);
@@ -88,8 +106,17 @@ export class StudentWebSocketService {
           this.goToStep(message.content);
         } else if (message.type === 'goToNextNode') {
           this.goToNextStep();
+        } else if (message.type === 'classmateStudentWork') {
+          this.StudentDataService.broadcastStudentWorkReceived(message.studentWork);
         }
       });
+  }
+
+  isDismissImmediately(notification: Notification): boolean {
+    return (
+      notification.nodeId === this.StudentDataService.getCurrentNodeId() &&
+      notification.type === 'PeerChatMessage'
+    );
   }
 
   goToStep(nodeId) {
@@ -110,5 +137,9 @@ export class StudentWebSocketService {
     this.ProjectService.replaceNode(node.id, node);
     this.ProjectService.parseProject();
     this.StudentDataService.updateNodeStatuses();
+  }
+
+  sendMessageToClassmate(workgroupId: number, message: any): void {
+    this.getStomp().send(`/topic/workgroup/${workgroupId}`, message);
   }
 }

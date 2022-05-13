@@ -107,6 +107,14 @@
                 [workgroupId]="workgroupId"
                 [isRevision]="true">
             </open-response-grading>
+            <peer-chat-grading
+                *ngIf="revision.componentState.componentType === 'PeerChat'"
+                [nodeId]="nodeId"
+                [componentId]="componentId"
+                [componentState]="revision.componentState"
+                [workgroupId]="workgroupId"
+                [isRevision]="true">
+            </peer-chat-grading>
             <table-grading
                 *ngIf="revision.componentState.componentType === 'Table'"
                 [nodeId]="nodeId"
