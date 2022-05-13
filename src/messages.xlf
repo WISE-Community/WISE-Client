@@ -10158,6 +10158,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4727137603428883374" datatype="html">
+        <source>Empty Team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-workgroup/peer-group-workgroup.component.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4fc1ce64a0242febe825d1737eb8b0da1f5c3865" datatype="html">
         <source>All Periods</source>
         <context-group purpose="location">
@@ -14968,14 +14975,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Peer Chat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peerChatService.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4250948520990652627" datatype="html">
         <source>Teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peerChatService.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3eadcc6c36867a6d135be94da38b992e5dbd2f2f" datatype="html">
@@ -15073,7 +15080,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Show Group Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/showGroupWorkService.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3e4063d41615b0bdb15dd79a55e0334dabeb361f" datatype="html">
@@ -15087,7 +15094,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Show Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/showMyWorkService.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b7476b3f8bc67f93405690b807d8751371cdf7ed" datatype="html">

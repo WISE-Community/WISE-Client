@@ -10,14 +10,19 @@ export class PeerGroupWorkgroupComponent implements OnInit {
   @Input() workgroup: any;
 
   avatarColor: string;
+  isEmptyWorkgroup: boolean;
   workgroupUsernames: string;
 
-  constructor(private ConfigService: ConfigService) {}
+  constructor(private configService: ConfigService) {}
 
   ngOnInit(): void {
-    this.workgroupUsernames = this.ConfigService.getDisplayUsernamesByWorkgroupId(
+    this.workgroupUsernames = this.configService.getDisplayUsernamesByWorkgroupId(
       this.workgroup.id
     );
-    this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.workgroup.id);
+    if (this.workgroupUsernames === '') {
+      this.isEmptyWorkgroup = true;
+      this.workgroupUsernames = $localize`Empty Team`;
+    }
+    this.avatarColor = this.configService.getAvatarColorForWorkgroupId(this.workgroup.id);
   }
 }
