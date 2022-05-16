@@ -68,11 +68,13 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
 
   addNewFeedbackToRule(rule: FeedbackRule): void {
     (rule.feedback as string[]).push('');
+    this.ProjectService.nodeChanged();
   }
 
   deleteFeedbackInRule(rule: FeedbackRule, feedbackIndex: number): void {
     if (confirm($localize`Are you sure you want to delete this feedback?`)) {
       (rule.feedback as string[]).splice(feedbackIndex, 1);
+      this.ProjectService.nodeChanged();
     }
   }
 
