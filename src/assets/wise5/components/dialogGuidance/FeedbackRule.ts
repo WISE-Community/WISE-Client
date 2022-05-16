@@ -4,6 +4,14 @@ export class FeedbackRule {
   feedback: string | string[];
   static operatorPrecedences = { '!': 2, '&&': 1, '||': 1 };
 
+  constructor(jsonObject: any = {}) {
+    for (const key of Object.keys(jsonObject)) {
+      if (jsonObject[key] != null) {
+        this[key] = jsonObject[key];
+      }
+    }
+  }
+
   static isSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {
     return feedbackRule.expression === 'isSecondToLastSubmit';
   }
