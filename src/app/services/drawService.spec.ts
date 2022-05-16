@@ -91,7 +91,7 @@ function isCompleted() {
     componentStates = [createComponentState(defaultDrawDataWithNoObjectsField)];
   });
   function expectIsCompleted(componentStates: any[], node: any, expectedResult: boolean) {
-    expect(service.isCompleted({}, componentStates, [], [], node)).toEqual(expectedResult);
+    expect(service.isCompleted({}, componentStates, [], node)).toEqual(expectedResult);
   }
   it('should check is completed when there are no component states', () => {
     expectIsCompleted([], node, false);

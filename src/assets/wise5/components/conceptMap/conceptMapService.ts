@@ -75,13 +75,7 @@ export class ConceptMapService extends ComponentService {
     return componentState;
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (componentStates != null && componentStates.length > 0) {
       if (this.isSubmitRequired(node, component)) {
         return this.hasComponentStateWithIsSubmitTrue(componentStates);

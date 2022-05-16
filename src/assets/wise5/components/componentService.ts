@@ -79,12 +79,11 @@ export class ComponentService {
    * Check if the component was completed
    * @param component the component object
    * @param componentStates the component states for the specific component
-   * @param componentEvents the events for the specific component
    * @param nodeEvents the events for the parent node of the component
    * @param node parent node of the component
    * @returns {boolean} whether the component was completed
    */
-  isCompleted(component, componentStates, componentEvents, nodeEvents, node) {
+  isCompleted(component, componentStates, nodeEvents, node) {
     return true;
   }
 

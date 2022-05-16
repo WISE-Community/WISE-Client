@@ -95,7 +95,7 @@ function isCompleted() {
   const componentStateSubmitFalse = createComponentState(studentData, false);
   const componentStateSubmitTrue = createComponentState(studentData, true);
   function expectIsCompleted(component: any, componentStates: any, expectedResult: boolean) {
-    expect(service.isCompleted(component, componentStates, [], [], node)).toEqual(expectedResult);
+    expect(service.isCompleted(component, componentStates, [], node)).toEqual(expectedResult);
   }
   it('should check if a component is completed when it has no editable cells', () => {
     const component = { tableData: [createCell('Item', false), createCell('Count', false)] };

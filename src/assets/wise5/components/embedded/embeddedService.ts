@@ -40,7 +40,7 @@ export class EmbeddedService extends ComponentService {
     return component;
   }
 
-  isCompleted(component: any, componentStates: any[], componentEvents: any[], nodeEvents: any[]) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (componentStates != null) {
       if (
         this.hasComponentStateWithIsCompletedField(componentStates) &&

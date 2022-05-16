@@ -1277,16 +1277,15 @@ export class StudentDataService extends DataService {
     return result;
   }
 
-  isComponentCompleted(nodeId, componentId) {
+  isComponentCompleted(nodeId: string, componentId: string) {
     const componentStates = this.getComponentStatesByNodeIdAndComponentId(nodeId, componentId);
-    const componentEvents = this.getEventsByNodeIdAndComponentId(nodeId, componentId);
     const nodeEvents = this.getEventsByNodeId(nodeId);
     const node = this.ProjectService.getNodeById(nodeId);
     const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
     if (component != null) {
       const componentType = component.type;
       const service = this.upgrade.$injector.get(componentType + 'Service');
-      return service.isCompleted(component, componentStates, componentEvents, nodeEvents, node);
+      return service.isCompleted(component, componentStates, nodeEvents, node);
     }
     return false;
   }

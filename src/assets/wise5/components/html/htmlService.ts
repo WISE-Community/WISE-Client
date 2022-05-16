@@ -14,7 +14,7 @@ export class HTMLService extends ComponentService {
     return component;
   }
 
-  isCompleted(component: any, componentStates: any[], componentEvents: any[], nodeEvents: any[]) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (nodeEvents != null) {
       for (const nodeEvent of nodeEvents) {
         if (nodeEvent.event === 'nodeEntered') {

@@ -23,7 +23,7 @@ export class OutsideURLService extends ComponentService {
     return component;
   }
 
-  isCompleted(component: any, componentStates: any[], componentEvents: any[], nodeEvents: any[]) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (nodeEvents != null) {
       for (const event of nodeEvents) {
         if (event.event === 'nodeEntered') {

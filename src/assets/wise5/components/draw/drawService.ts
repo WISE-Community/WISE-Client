@@ -73,13 +73,7 @@ export class DrawService extends ComponentService {
     return this.getElementId('drawing-tool', domIdEnding);
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (componentStates != null && componentStates.length > 0) {
       if (this.isSubmitRequired(node, component)) {
         return this.hasComponentStateWithIsSubmitTrue(componentStates);
