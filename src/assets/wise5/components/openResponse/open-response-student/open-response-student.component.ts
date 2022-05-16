@@ -261,7 +261,7 @@ export class OpenResponseStudent extends ComponentStudent {
     componentState.isCompleted = this.OpenResponseService.isCompletedV2(
       this.ProjectService.getNodeById(this.nodeId),
       this.componentContent,
-      { nodeId: this.nodeId, componentId: this.componentId, componentStates: [componentState] }
+      { componentStates: [componentState], events: [], annotations: [] }
     );
 
     /*
