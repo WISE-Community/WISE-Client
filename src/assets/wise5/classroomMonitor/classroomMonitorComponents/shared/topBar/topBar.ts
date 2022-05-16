@@ -93,19 +93,15 @@ class TopBarController {
    * TODO: move to TeacherDataService?
    */
   setNotifications() {
-    // get all notifications for the logged in teacher
     // TODO: take into account shared teacher users!
-    let userNotifications = this.notifications.filter((notification) => {
-      return notification.toWorkgroupId === this.workgroupId;
-    });
-
-    this.newNotifications = userNotifications.filter((notification) => {
-      return notification.timeDismissed == null;
-    });
-
-    this.dismissedNotifications = userNotifications.filter((notification) => {
-      return notification.timeDismissed != null;
-    });
+    this.newNotifications = this.NotificationService.getLatestActiveNotificationsFromUniqueSource(
+      this.notifications,
+      this.workgroupId
+    );
+    this.dismissedNotifications = this.NotificationService.getDismissedNotificationsForWorkgroup(
+      this.notifications,
+      this.workgroupId
+    );
   }
 
   /**

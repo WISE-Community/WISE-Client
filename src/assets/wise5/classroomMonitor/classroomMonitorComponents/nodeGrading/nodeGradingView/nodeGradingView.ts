@@ -5,6 +5,7 @@ import { ConfigService } from '../../../../services/configService';
 import { NodeService } from '../../../../services/nodeService';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { NotificationService } from '../../../../services/notificationService';
+import { PeerGroupService } from '../../../../services/peerGroupService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import * as angular from 'angular';
@@ -17,7 +18,6 @@ import { Node } from '../../../../common/Node';
 
 @Directive()
 export class NodeGradingViewController {
-  $translate: any;
   canViewStudentNames: boolean;
   hiddenComponents: any = [];
   isExpandAll: boolean;
@@ -29,6 +29,7 @@ export class NodeGradingViewController {
   nodeHasWork: boolean;
   nodeId: string;
   numRubrics: number;
+  peerGroupingTags: string[];
   sortOrder: object = {
     team: ['-isVisible', 'workgroupId'],
     '-team': ['-isVisible', '-workgroupId'],
@@ -53,6 +54,7 @@ export class NodeGradingViewController {
     'MilestoneService',
     'NodeService',
     'NotificationService',
+    'PeerGroupService',
     'ProjectService',
     'TeacherDataService'
   ];
@@ -65,11 +67,10 @@ export class NodeGradingViewController {
     protected MilestoneService: MilestoneService,
     protected NodeService: NodeService,
     protected NotificationService: NotificationService,
+    protected PeerGroupService: PeerGroupService,
     protected ProjectService: TeacherProjectService,
     protected TeacherDataService: TeacherDataService
-  ) {
-    this.$translate = this.$filter('translate');
-  }
+  ) {}
 
   $onInit() {
     this.maxScore = this.getMaxScore();
@@ -78,6 +79,7 @@ export class NodeGradingViewController {
     this.sort = this.TeacherDataService.nodeGradingSort;
     this.nodeContent = this.ProjectService.getNodeById(this.nodeId);
     this.milestoneReport = this.MilestoneService.getMilestoneReportByNodeId(this.nodeId);
+    this.peerGroupingTags = Array.from(this.PeerGroupService.getPeerGroupingTags(this.node));
     this.retrieveStudentData();
     this.subscribeToEvents();
   }
@@ -358,6 +360,10 @@ export class NodeGradingViewController {
 
   showReport($event) {
     this.MilestoneService.showMilestoneDetails(this.milestoneReport, $event);
+  }
+
+  showPeerGroupDetails(peerGroupingTag: string): void {
+    this.PeerGroupService.showPeerGroupDetails(peerGroupingTag);
   }
 }
 

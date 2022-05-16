@@ -170,10 +170,11 @@ export class SummaryAuthoring extends ComponentAuthoring {
   }
 
   deleteCustomLabelColor(index: number): void {
-    if (confirm($localize`Are you sure you want to delete this custom label color?`)) {
-      this.authoringComponentContent.customLabelColors.splice(index, 1);
-      this.componentChanged();
-    }
+    this.confirmAndRemove(
+      $localize`Are you sure you want to delete this custom label color?`,
+      this.authoringComponentContent.customLabelColors,
+      index
+    );
   }
 
   getComponentsByNodeId(nodeId: string): any[] {

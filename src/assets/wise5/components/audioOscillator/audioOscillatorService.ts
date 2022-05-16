@@ -1,7 +1,5 @@
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
-import { StudentDataService } from '../../services/studentDataService';
-import { UtilService } from '../../services/utilService';
 
 @Injectable()
 export class AudioOscillatorService extends ComponentService {
@@ -9,15 +7,12 @@ export class AudioOscillatorService extends ComponentService {
   defaultStartingFrequency: number = 440;
   maxAmplitude: number = 50;
 
-  constructor(
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
-  ) {
-    super(StudentDataService, UtilService);
-  }
-
   getComponentTypeLabel(): string {
     return $localize`Audio Oscillator`;
+  }
+
+  getOscilloscopeId(domIdEnding: string): string {
+    return `oscilloscope-${domIdEnding}`;
   }
 
   createComponent() {
@@ -37,13 +32,7 @@ export class AudioOscillatorService extends ComponentService {
     return component;
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (componentStates && componentStates.length) {
       const latestComponentState = componentStates[componentStates.length - 1];
       return this.componentStateHasStudentWork(latestComponentState, component);

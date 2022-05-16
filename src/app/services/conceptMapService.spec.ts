@@ -4,7 +4,6 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { ConceptMapService } from '../../assets/wise5/components/conceptMap/conceptMapService';
@@ -57,7 +56,6 @@ describe('ConceptMapService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TagService,
         UtilService
       ]
@@ -239,9 +237,7 @@ function isCompleted() {
     node: any,
     expectedResult: boolean
   ) {
-    expect(service.isCompleted(component, componentStates, null, null, node)).toEqual(
-      expectedResult
-    );
+    expect(service.isCompleted(component, componentStates, null, node)).toEqual(expectedResult);
   }
   it(`should check if is completed when submit is required and there are no submit component
       states`, () => {

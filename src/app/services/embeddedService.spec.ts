@@ -5,7 +5,6 @@ import { AnnotationService } from '../../assets/wise5/services/annotationService
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { EmbeddedService } from '../../assets/wise5/components/embedded/embeddedService';
@@ -24,7 +23,6 @@ describe('EmbeddedService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TagService,
         UtilService
       ]
@@ -60,7 +58,7 @@ function isCompleted() {
     nodeEvents = [];
   });
   function expectIsCompleted(componentStates: any[], nodeEvents: any[], expectedResult: boolean) {
-    expect(service.isCompleted({}, componentStates, [], nodeEvents)).toEqual(expectedResult);
+    expect(service.isCompleted({}, componentStates, nodeEvents, null)).toEqual(expectedResult);
   }
   it('should check is completed when there are no node entered events and no component states', () => {
     expectIsCompleted(componentStates, nodeEvents, false);

@@ -27,7 +27,16 @@
             "periodName": "1"
           }
         ],
-        "sharedTeacherUserInfos": [],
+        "sharedTeacherUserInfos": [
+          {
+            "workgroupId": 100,
+            "username": "aa"
+          },
+          {
+            "workgroupId": 101,
+            "username": "bb"
+          }
+        ],
         "periods": [
           {
             "periodId": 1,

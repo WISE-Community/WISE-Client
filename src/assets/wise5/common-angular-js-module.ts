@@ -51,6 +51,7 @@ import { NotebookService } from './services/notebookService';
 import { NotificationService } from './services/notificationService';
 import './components/openResponse/openResponseComponentModule';
 import './components/outsideURL/outsideURLComponentModule';
+import './components/peerChat/peerChatStudentComponentModule';
 import { SessionService } from './services/sessionService';
 import './vle/studentAsset/studentAsset';
 import { StudentAssetService } from './services/studentAssetService';
@@ -61,6 +62,8 @@ import { TagService } from './services/tagService';
 import { UtilService } from './services/utilService';
 import * as moment from 'moment';
 import * as SockJS from 'sockjs-client';
+import './components/showMyWork/show-my-work-student/showMyWorkStudentAngularJSComponentModule';
+import './components/showGroupWork/show-group-work-student/showGroupWorkStudentAngularJSComponentModule';
 import * as StompJS from '@stomp/stompjs';
 window['SockJS'] = SockJS;
 window['Stomp'] = StompJS.Stomp;
@@ -101,6 +104,9 @@ angular
     'openResponseComponentModule',
     'outsideURLComponentModule',
     'pascalprecht.translate',
+    'peerChatStudentComponentModule',
+    'showGroupWorkStudentAngularJSComponentModule',
+    'showMyWorkStudentAngularJSComponentModule',
     'summaryComponentModule',
     'tableComponentModule',
     'ui.router'

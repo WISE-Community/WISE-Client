@@ -49,6 +49,7 @@ export class NodeComponent implements OnInit {
     'Match',
     'MultipleChoice',
     'OpenResponse',
+    'PeerChat',
     'Summary',
     'Table'
   ];

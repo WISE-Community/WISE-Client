@@ -1,0 +1,48 @@
+<h3 mat-dialog-title i18n>Edit Peer Grouping</h3>
+<mat-dialog-content class="dialog-content-scroll">
+  <mat-form-field>
+    <mat-label i18n>Grouping Name</mat-label>
+    <input matInput [(ngModel)]="peerGrouping.name" />
+  </mat-form-field>
+  <div>
+    <mat-form-field>
+      <mat-label i18n>Logic</mat-label>
+      <mat-select [(ngModel)]="peerGrouping.logic">
+        <mat-option *ngFor="let logic of availableLogic" [value]="logic.value">
+          {{ logic.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label i18n>Teams Per Group</mat-label>
+      <input matInput
+          [(ngModel)]="peerGrouping.maxMembershipCount"
+          type="number" />
+    </mat-form-field>
+  </div>
+  <div class="mat-small info">
+    <ng-container *ngIf="stepsUsedIn.length > 0">
+      <span i18n>Used in </span>
+      <span *ngFor="let stepUsedIn of stepsUsedIn; last as isLast">
+        {{ stepUsedIn }}<span *ngIf="!isLast">, </span>
+      </span>.
+    </ng-container>
+    <span *ngIf="stepsUsedIn.length === 0" i18n>Not used in any steps.</span>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button
+      color="warn"
+      [disabled]="stepsUsedIn.length > 0"
+      (click)="delete()">
+    <span [matTooltip]="stepsUsedIn.length > 0 ? 'You are not allowed to delete a Peer Grouping that is being used' : ''"
+        i18n>
+      Delete
+    </span>
+  </button>
+  <div fxFlex></div>
+  <button mat-button (click)="cancel()" i18n>Cancel</button>
+  <button mat-flat-button color="primary" (click)="save()" i18n>Update</button>
+</mat-dialog-actions>

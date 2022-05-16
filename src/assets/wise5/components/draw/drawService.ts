@@ -10,7 +10,6 @@ import DrawingTool from 'drawing-tool';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
-import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
 
 @Injectable()
@@ -35,10 +34,9 @@ export class DrawService extends ComponentService {
 
   constructor(
     private StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {
@@ -71,17 +69,11 @@ export class DrawService extends ComponentService {
     return component;
   }
 
-  getDrawingToolId(nodeId: string, componentId: string): string {
-    return `drawing-tool-${nodeId}-${componentId}`;
+  getDrawingToolId(domIdEnding: string): string {
+    return this.getElementId('drawing-tool', domIdEnding);
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (componentStates != null && componentStates.length > 0) {
       if (this.isSubmitRequired(node, component)) {
         return this.hasComponentStateWithIsSubmitTrue(componentStates);
@@ -162,7 +154,12 @@ export class DrawService extends ComponentService {
    */
   generateImageFromRenderedComponentState(componentState: any) {
     return new Promise((resolve, reject) => {
-      const canvas = this.getDrawingToolCanvas(componentState.nodeId, componentState.componentId);
+      const domIdEnding = this.getDomIdEnding(
+        componentState.nodeId,
+        componentState.componentId,
+        componentState
+      );
+      const canvas = this.getDrawingToolCanvas(this.getDrawingToolId(domIdEnding));
       const canvasBase64String = canvas.toDataURL('image/png');
       const imageObject = this.UtilService.getImageObjectFromBase64String(canvasBase64String);
       this.StudentAssetService.uploadAsset(imageObject).then((asset) => {
@@ -171,10 +168,8 @@ export class DrawService extends ComponentService {
     });
   }
 
-  getDrawingToolCanvas(nodeId: string, componentId: string) {
-    return angular.element(
-      document.querySelector(`#${this.getDrawingToolId(nodeId, componentId)} canvas`)
-    )[0];
+  getDrawingToolCanvas(drawingToolId: string): any {
+    return angular.element(document.querySelector(`#${drawingToolId} canvas`))[0];
   }
 
   initializeDrawingTool(

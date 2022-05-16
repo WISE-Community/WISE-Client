@@ -1,13 +1,8 @@
-import { EditAdvancedComponentAngularJSController } from '../../../../../app/authoring-tool/edit-advanced-component/editAdvancedComponentAngularJSController';
+import { Component } from '@angular/core';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
-class EditDialogGuidanceAdvancedController extends EditAdvancedComponentAngularJSController {}
-
-export const EditDialogGuidanceAdvancedComponent = {
-  bindings: {
-    nodeId: '@',
-    componentId: '@'
-  },
-  controller: EditDialogGuidanceAdvancedController,
-  templateUrl:
-    'assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html'
-};
+@Component({
+  selector: 'edit-dialog-guidance-advanced',
+  templateUrl: 'edit-dialog-guidance-advanced.component.html'
+})
+export class EditDialogGuidanceAdvancedComponent extends EditAdvancedComponentComponent {}

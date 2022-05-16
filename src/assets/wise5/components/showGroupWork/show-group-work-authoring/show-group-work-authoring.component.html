@@ -1,0 +1,65 @@
+<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
+<div fxLayoutGap="20px">
+  <mat-form-field>
+    <mat-label i18n>Show Work Step</mat-label>
+    <mat-select [(ngModel)]="authoringComponentContent.showWorkNodeId"
+        (ngModelChange)="showWorkNodeIdChanged()">
+      <mat-option [value]="''" i18n>(None)</mat-option>
+      <ng-container *ngFor="let nodeId of nodeIds">
+        <mat-option *ngIf="isApplicationNode(nodeId)" [value]="nodeId">
+          {{ getNodePositionAndTitleByNodeId(nodeId) }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label i18n>Show Work Component</mat-label>
+    <mat-select [(ngModel)]="authoringComponentContent.showWorkComponentId"
+        (ngModelChange)="componentChanged()">
+      <mat-option [value]="''" i18n>(None)</mat-option>
+      <mat-option *ngFor="let component of getComponentsByNodeId(authoringComponentContent.showWorkNodeId); index as componentIndex"
+          [value]="component.id"
+          [disabled]="!isShowWorkComponentTypeAllowed(component.type) || component.id === componentId">
+        <span>{{ componentIndex + 1 }}. {{ component.type }} </span>
+        <span *ngIf="component.id === componentId" i18n>(This Component)</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <edit-component-peer-grouping-tag [authoringComponentContent]="authoringComponentContent">
+  </edit-component-peer-grouping-tag>
+  <mat-checkbox
+      [(ngModel)]="authoringComponentContent.isShowMyWork"
+      (ngModelChange)="componentChanged()"
+      color="primary"
+      class="bottom-spacing"
+      i18n>
+    Show My Work
+  </mat-checkbox>
+</div>
+<div class="layout-select"
+    fxLayout.xs="column"
+    fxLayout.gt-xs="row wrap"
+    fxLayoutAlign.gt-xs="start center"
+    fxLayoutGap="12px">
+  <label id="layout-select-label" i18n>Layout:</label>
+  <mat-radio-group [(ngModel)]="authoringComponentContent.layout"
+      (ngModelChange)="componentChanged()"
+      ngDefaultControl
+      color="primary"
+      aria-label-i18n
+      aria-label="Select a layout option"
+      aria-labelledby="layout-select-label"
+      fxLayoutGap="12px">
+    <mat-radio-button value="column">
+      <span fxLayoutAlign="start center">
+        <mat-icon>table_rows</mat-icon>&nbsp;<span i18n>Stacked Vertically</span>
+      </span>
+    </mat-radio-button>
+    <mat-radio-button value="row">
+      <span fxLayoutAlign="start center">
+        <mat-icon>view_columns</mat-icon>&nbsp;<span i18n>Side-by-Side</span>
+      </span>
+    </mat-radio-button>
+  </mat-radio-group>
+</div>

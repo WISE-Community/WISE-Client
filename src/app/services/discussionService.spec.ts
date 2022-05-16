@@ -1,5 +1,5 @@
 import { DiscussionService } from '../../assets/wise5/components/discussion/discussionService';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
@@ -25,10 +25,11 @@ class MockTeacherDataService {
 
 let service: DiscussionService;
 let http: HttpTestingController;
-let configService: ConfigService;
 let studentDataService: StudentDataService;
 const componentId = 'component1';
 const nodeId = 'node1';
+const periodId = 2;
+const runId = 1;
 
 describe('DiscussionService', () => {
   beforeEach(() => {
@@ -55,13 +56,13 @@ describe('DiscussionService', () => {
 
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(DiscussionService);
-    configService = TestBed.inject(ConfigService);
     studentDataService = TestBed.inject(StudentDataService);
   });
 
   checkThatAComponentStateHasStudentWorkWhenStudentOnlyAttachedAFile();
   componentStateHasStudentWork();
   createComponent();
+  getClassmateResponsesFromComponents();
   getClassmateResponses();
   hasShowWorkConnectedComponentThatHasWork();
   hasNodeEnteredEvent();
@@ -143,7 +144,9 @@ function isCompleted() {
     nodeEvents: any[],
     expectedResult: boolean
   ) {
-    expect(service.isCompleted(component, componentStates, [], nodeEvents)).toEqual(expectedResult);
+    expect(service.isCompleted(component, componentStates, nodeEvents, null)).toEqual(
+      expectedResult
+    );
   }
   it(`should check if a component is completed when it does not have a show work connected component
       and it does not have any component states`, () => {
@@ -206,21 +209,61 @@ function hasNodeEnteredEvent() {
   });
 }
 
-function getClassmateResponses() {
-  it('should get classmate responses', () => {
-    spyOn(configService, 'getConfigParam').and.returnValue('/student/data');
-    service
-      .getClassmateResponses(1, 2, [{ nodeId: 'node1', componentId: 'component1' }])
-      .then((data: any) => {
-        expect(data.studentWorkList[0].studentData.response).toEqual('Hello World');
-      });
-    const expectedRequest =
-      '/student/data?runId=1&periodId=2&getStudentWork=true&getAnnotations=' +
-      'true&components=%7B%22nodeId%22:%22node1%22,%22componentId%22:%22component1%22%7D';
-    http
-      .expectOne(expectedRequest)
-      .flush({ studentWorkList: [{ studentData: { response: 'Hello World' } }] });
+function getClassmateResponsesFromComponents() {
+  it('should get classmate responses from components', () => {
+    waitForAsync(() => {
+      const componentState1 = { studentData: { response: 'Hello World' } };
+      const componentState2 = { studentData: { response: 'Hello World 2' } };
+      const annotation1 = { data: { action: 'Delete' } };
+      const annotation2 = { data: { action: 'Undelete' } };
+      const componentStates = [componentState1, componentState2];
+      const annotations = [annotation1, annotation2];
+      service
+        .getClassmateResponsesFromComponents(runId, periodId, [
+          { nodeId: nodeId, componentId: componentId }
+        ])
+        .subscribe((response: any) => {
+          expect(response.studentWork).toEqual(componentStates);
+          expect(response.annotations).toEqual(annotations);
+        });
+      http
+        .expectOne(
+          `/api/classmate/discussion/student-work/${runId}/${periodId}/${nodeId}/${componentId}`
+        )
+        .flush(componentStates);
+      http
+        .expectOne(
+          `/api/classmate/discussion/annotations/${runId}/${periodId}/${nodeId}/${componentId}`
+        )
+        .flush(annotations);
+    });
   });
+}
+
+function getClassmateResponses() {
+  it(
+    'should get classmate responses',
+    waitForAsync(() => {
+      const componentState1 = { studentData: { response: 'Hello World' } };
+      const annotation1 = { data: { action: 'Delete' } };
+      service
+        .getClassmateResponses(runId, periodId, nodeId, componentId)
+        .subscribe((response: any) => {
+          expect(response.studentWork).toEqual([componentState1]);
+          expect(response.annotations).toEqual([annotation1]);
+        });
+      http
+        .expectOne(
+          `/api/classmate/discussion/student-work/${runId}/${periodId}/${nodeId}/${componentId}`
+        )
+        .flush([componentState1]);
+      http
+        .expectOne(
+          `/api/classmate/discussion/annotations/${runId}/${periodId}/${nodeId}/${componentId}`
+        )
+        .flush([annotation1]);
+    })
+  );
 }
 
 function isTopLevelPost() {

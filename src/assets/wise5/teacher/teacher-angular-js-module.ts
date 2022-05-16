@@ -10,12 +10,14 @@ import { ImportComponentService } from '../services/importComponentService';
 import { InsertComponentService } from '../services/insertComponentService';
 import { MilestoneService } from '../services/milestoneService';
 import { MoveNodesService } from '../services/moveNodesService';
+import { PeerGroupService } from '../services/peerGroupService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { SpaceService } from '../services/spaceService';
 import { ClassroomStatusService } from '../services/classroomStatusService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherWebSocketService } from '../services/teacherWebSocketService';
 import { StepToolsComponent } from '../common/stepTools/step-tools.component';
+import { PeerGroupingAuthoringService } from '../../../../src/assets/wise5/services/peerGroupingAuthoringService';
 
 import '../classroomMonitor/classroom-monitor.module';
 import '../authoringTool/authoring-tool.module';
@@ -31,6 +33,8 @@ angular
   .factory('InsertComponentService', downgradeInjectable(InsertComponentService))
   .factory('MilestoneService', downgradeInjectable(MilestoneService))
   .factory('MoveNodesService', downgradeInjectable(MoveNodesService))
+  .factory('PeerGroupingAuthoringService', downgradeInjectable(PeerGroupingAuthoringService))
+  .factory('PeerGroupService', downgradeInjectable(PeerGroupService))
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
   .factory('SpaceService', downgradeInjectable(SpaceService))
   .factory('TeacherDataService', downgradeInjectable(TeacherDataService))
