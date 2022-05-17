@@ -7,6 +7,7 @@ import * as angular from 'angular';
 import { WorkgroupInfoComponent } from './workgroupInfo/workgroup-info.component';
 import { downgradeComponent } from '@angular/upgrade/static';
 import MilestoneWorkgroupItem from '../milestones/milestoneWorkgroupItem/milestoneWorkgroupItem';
+import { PeerGroupDialogComponent } from '../peer-group/peer-group-dialog/peer-group-dialog.component';
 
 const NodeGrading = angular
   .module('nodeGrading', [])
@@ -14,6 +15,10 @@ const NodeGrading = angular
   .directive(
     'componentSelect',
     downgradeComponent({ component: ComponentSelectComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'peerGroupDialog',
+    downgradeComponent({ component: PeerGroupDialogComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'workgroupInfo',

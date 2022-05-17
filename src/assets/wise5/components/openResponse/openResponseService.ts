@@ -11,7 +11,7 @@ export class OpenResponseService extends ComponentService {
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {
@@ -26,13 +26,7 @@ export class OpenResponseService extends ComponentService {
     return component;
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (component.completionCriteria != null) {
       return this.StudentDataService.isCompletionCriteriaSatisfied(component.completionCriteria);
     } else if (this.hasComponentState(componentStates)) {

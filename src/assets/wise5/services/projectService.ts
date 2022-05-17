@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionService } from './sessionService';
 import { Observable, Subject } from 'rxjs';
 import { Node } from '../common/Node';
+import { PeerGrouping } from '../../../app/domain/peerGrouping';
 
 @Injectable()
 export class ProjectService {
@@ -3155,7 +3156,22 @@ export class ProjectService {
   broadcastSnipImage(args: any) {
     this.snipImageSource.next(args);
   }
-  
+
+  getPeerGroupings(): PeerGrouping[] {
+    if (this.project.peerGroupings == null) {
+      this.project.peerGroupings = [];
+    }
+    return this.project.peerGroupings;
+  }
+
+  getPeerGrouping(tag: string): PeerGrouping {
+    return this.getPeerGroupings().find((peerGrouping: PeerGrouping) => peerGrouping.tag === tag);
+  }
+
+  getApplicationNodes(): any[] {
+    return this.applicationNodes;
+  }
+
   getProjectRootNode() {
     return this.rootNode;
   }

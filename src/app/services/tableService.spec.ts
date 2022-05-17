@@ -4,7 +4,6 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
@@ -23,7 +22,6 @@ describe('TableService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TableService,
         TagService,
         UtilService
@@ -97,7 +95,7 @@ function isCompleted() {
   const componentStateSubmitFalse = createComponentState(studentData, false);
   const componentStateSubmitTrue = createComponentState(studentData, true);
   function expectIsCompleted(component: any, componentStates: any, expectedResult: boolean) {
-    expect(service.isCompleted(component, componentStates, [], [], node)).toEqual(expectedResult);
+    expect(service.isCompleted(component, componentStates, [], node)).toEqual(expectedResult);
   }
   it('should check if a component is completed when it has no editable cells', () => {
     const component = { tableData: [createCell('Item', false), createCell('Count', false)] };

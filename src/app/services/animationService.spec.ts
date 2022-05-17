@@ -5,7 +5,6 @@ import { AnnotationService } from '../../assets/wise5/services/annotationService
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { AnimationService } from '../../assets/wise5/components/animation/animationService';
@@ -24,7 +23,6 @@ describe('AnimationService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TagService,
         UtilService
       ]
@@ -53,7 +51,7 @@ function createComponent() {
 
 function isCompleted() {
   function expectIsCompleted(componentStates: any[], expectedResult: boolean) {
-    expect(service.isCompleted({}, componentStates, [], [], {})).toEqual(expectedResult);
+    expect(service.isCompleted({}, componentStates, [], {})).toEqual(expectedResult);
   }
   it('should check is completed when it is not completed', () => {
     expectIsCompleted([], false);

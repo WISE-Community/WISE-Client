@@ -158,6 +158,13 @@ export abstract class ComponentAuthoring {
     });
   }
 
+  confirmAndRemove(message: string, array: any[], index: number): void {
+    if (confirm(message)) {
+      array.splice(index, 1);
+      this.componentChanged();
+    }
+  }
+
   moveObjectUp(objects: any[], index: number): void {
     this.ProjectService.moveObjectUp(objects, index);
     this.componentChanged();

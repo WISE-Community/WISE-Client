@@ -1,0 +1,45 @@
+@import '~style/abstracts/variables';
+
+.group.mat-card {
+    padding: 8px 8px 0;
+    box-shadow: none;
+  }
+
+.mat-card-title {
+  margin-bottom: 4px;
+}
+
+.mat-card-content {
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
+}
+
+.avatar {
+  margin-right: 4px;
+}
+
+ul {
+  min-height: 48px;
+  padding: 4px;
+  margin: -4px -8px;
+  transition: background-color 250ms;
+  border-bottom-left-radius: $card-border-radius;
+  border-bottom-right-radius: $card-border-radius;
+  column-gap: 0;
+}
+
+li {
+  list-style-type: none;
+  cursor: move;
+  padding: 4px;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.cdk-drag-placeholder {
+  opacity: .4;
+}

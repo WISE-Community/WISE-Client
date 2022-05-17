@@ -26,6 +26,7 @@ import { StepToolsComponent } from '../assets/wise5/common/stepTools/step-tools.
 import { UpdateWorkgroupService } from './services/updateWorkgroupService';
 import { GetWorkgroupService } from './services/getWorkgroupService';
 import { WorkgroupService } from './services/workgroup.service';
+import { TeacherWorkService } from '../assets/wise5/services/teacherWorkService';
 import { TeacherDiscussionService } from '../assets/wise5/components/discussion/teacherDiscussionService';
 
 @NgModule({
@@ -51,6 +52,7 @@ import { TeacherDiscussionService } from '../assets/wise5/components/discussion/
     TeacherDiscussionService,
     TeacherProjectService,
     TeacherWebSocketService,
+    TeacherWorkService,
     UpdateWorkgroupService,
     WorkgroupService
   ]

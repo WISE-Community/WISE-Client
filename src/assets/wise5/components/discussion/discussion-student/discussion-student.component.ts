@@ -99,7 +99,7 @@ export class DiscussionStudent extends ComponentStudent {
             componentId: this.componentId
           });
         }
-        this.getClassmateResponses(retrieveWorkFromTheseComponents);
+        this.getClassmateResponsesFromComponents(retrieveWorkFromTheseComponents);
       } else {
         if (this.isClassmateResponsesGated()) {
           const componentState = this.componentState;
@@ -311,22 +311,33 @@ export class DiscussionStudent extends ComponentStudent {
     );
   }
 
-  isWorkFromClassmate(componentState) {
-    return componentState.workgroupId !== this.ConfigService.getWorkgroupId();
-  }
-
   isWorkFromThisComponent(componentState) {
     return this.isForThisComponent(componentState);
   }
 
-  getClassmateResponses(components = [{ nodeId: this.nodeId, componentId: this.componentId }]) {
+  getClassmateResponsesFromComponents(components: any[] = []): void {
     const runId = this.ConfigService.getRunId();
     const periodId = this.ConfigService.getPeriodId();
-    this.DiscussionService.getClassmateResponses(runId, periodId, components).then(
-      (result: any) => {
-        this.setClassResponses(result.studentWorkList, result.annotations);
-      }
-    );
+    this.DiscussionService.getClassmateResponsesFromComponents(
+      runId,
+      periodId,
+      components
+    ).subscribe((response: any) => {
+      this.setClassResponses(response.studentWork, response.annotations);
+    });
+  }
+
+  getClassmateResponses(): void {
+    const runId = this.ConfigService.getRunId();
+    const periodId = this.ConfigService.getPeriodId();
+    this.DiscussionService.getClassmateResponses(
+      runId,
+      periodId,
+      this.nodeId,
+      this.componentId
+    ).subscribe((response: any) => {
+      this.setClassResponses(response.studentWork, response.annotations);
+    });
   }
 
   submitButtonClicked() {

@@ -3,7 +3,9 @@ import { ConfigService } from '../../services/configService';
 import { UtilService } from '../../services/utilService';
 import { StudentDataService } from '../../services/studentDataService';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DiscussionService extends ComponentService {
@@ -13,7 +15,7 @@ export class DiscussionService extends ComponentService {
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {
@@ -29,7 +31,7 @@ export class DiscussionService extends ComponentService {
     return component;
   }
 
-  isCompleted(component: any, componentStates: any[], componentEvents: any[], nodeEvents: any[]) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (this.hasShowWorkConnectedComponentThatHasWork(component)) {
       return this.hasNodeEnteredEvent(nodeEvents);
     }
@@ -72,27 +74,51 @@ export class DiscussionService extends ComponentService {
     return false;
   }
 
-  getClassmateResponses(runId: number, periodId: number, components: any[]) {
-    return new Promise((resolve, reject) => {
-      let params = new HttpParams()
-        .set('runId', runId + '')
-        .set('periodId', periodId + '')
-        .set('getStudentWork', true + '')
-        .set('getAnnotations', true + '');
-      for (const component of components) {
-        params = params.append('components', JSON.stringify(component));
-      }
-      const options = {
-        params: params
-      };
-      const url = this.ConfigService.getConfigParam('studentDataURL');
-      this.http
-        .get(url, options)
-        .toPromise()
-        .then((data) => {
-          resolve(data);
-        });
+  getClassmateResponsesFromComponents(
+    runId: number,
+    periodId: number,
+    components: any[]
+  ): Observable<any> {
+    const requests = components.map((component) =>
+      this.getClassmateResponses(runId, periodId, component.nodeId, component.componentId)
+    );
+    return forkJoin(requests).pipe(
+      map((responses: any[]) => {
+        return this.combineClassmatesResponses(responses);
+      })
+    );
+  }
+
+  private combineClassmatesResponses(responses: any[]): any {
+    const studentWork = [];
+    const annotations = [];
+    responses.forEach((response) => {
+      studentWork.push(...response.studentWork);
+      annotations.push(...response.annotations);
     });
+    return {
+      annotations: annotations,
+      studentWork: studentWork
+    };
+  }
+
+  getClassmateResponses(
+    runId: number,
+    periodId: number,
+    nodeId: string,
+    componentId: string
+  ): Observable<any> {
+    const studentWorkRequest = this.http.get(
+      `/api/classmate/discussion/student-work/${runId}/${periodId}/${nodeId}/${componentId}`
+    );
+    const annotationsRequest = this.http.get(
+      `/api/classmate/discussion/annotations/${runId}/${periodId}/${nodeId}/${componentId}`
+    );
+    return forkJoin([studentWorkRequest, annotationsRequest]).pipe(
+      map((response) => {
+        return { studentWork: response[0], annotations: response[1] };
+      })
+    );
   }
 
   isTopLevelPost(componentState: any) {
@@ -221,11 +247,7 @@ export class DiscussionService extends ComponentService {
     const workgroupId = componentState.workgroupId;
     const usernames = this.ConfigService.getUsernamesByWorkgroupId(workgroupId);
     if (usernames.length > 0) {
-      componentState.usernames = usernames
-        .map(function (obj) {
-          return obj.name;
-        })
-        .join(', ');
+      componentState.usernames = this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId);
     } else if (componentState.usernamesArray != null) {
       componentState.usernames = componentState.usernamesArray
         .map(function (obj) {
@@ -233,16 +255,8 @@ export class DiscussionService extends ComponentService {
         })
         .join(', ');
     } else {
-      componentState.usernames = this.getUserIdsDisplay(workgroupId);
+      componentState.usernames = this.ConfigService.getUserIdsStringByWorkgroupId(workgroupId);
     }
-  }
-
-  getUserIdsDisplay(workgroupId: number): string {
-    const userIdsDisplay = [];
-    for (const userId of this.ConfigService.getUserIdsByWorkgroupId(workgroupId)) {
-      userIdsDisplay.push(`Student ${userId}`);
-    }
-    return userIdsDisplay.join(', ');
   }
 
   getResponsesMap(componentStates: any[]): any {
