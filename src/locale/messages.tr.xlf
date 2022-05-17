@@ -13308,7 +13308,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Discuss your answer with a thought buddy!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <target state="needs-translation">Discuss your answer with a thought buddy!</target>
       </trans-unit>
@@ -13316,7 +13316,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Hi there! It&apos;s nice to meet you. What do you think about...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target state="needs-translation">Hi there! It's nice to meet you. What do you think about...</target>
       </trans-unit>
@@ -13324,7 +13324,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Thought Buddy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialogGuidanceService.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target state="needs-translation">Thought Buddy</target>
       </trans-unit>
@@ -13500,7 +13500,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
@@ -13512,11 +13516,43 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="translated">Geri bildirim</target>
       </trans-unit>
+      <trans-unit id="ab02f454f6f3e1bddbf2ea5a40d5fd3fff93457d" datatype="html">
+        <source>Feedback #<x id="INTERPOLATION" equiv-text="{{feedbackIndex + 1}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <target state="needs-translation">Feedback #<x id="INTERPOLATION" equiv-text="{{feedbackIndex + 1}}"/></target>
+      </trans-unit>
+      <trans-unit id="3aa2cdd901989a09c8e86d46bd5f7286269dfb04" datatype="html">
+        <source>Delete feedback</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <target state="needs-translation">Delete feedback</target>
+      </trans-unit>
+      <trans-unit id="e01a2fbbb7dc8f23d76bc4546e106de85ec707a5" datatype="html">
+        <source>Add new feedback</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <target state="needs-translation">Add new feedback</target>
+      </trans-unit>
+      <trans-unit id="a21168341f6e8fcc754c90ac1bab01a5348d5647" datatype="html">
+        <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+      </trans-unit>
       <trans-unit id="d3ccd931bd0661bdf42d1023fc5a8f26503a4d5f" datatype="html">
         <source>Delete rule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">79</context>
         </context-group>
         <target state="needs-translation">Delete rule</target>
       </trans-unit>
@@ -13524,7 +13560,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Move up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <target state="needs-translation">Move up</target>
       </trans-unit>
@@ -13532,7 +13568,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Move down</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <target state="needs-translation">Move down</target>
       </trans-unit>
@@ -13540,9 +13576,25 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Add a new rule at the end</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <target state="needs-translation">Add a new rule at the end</target>
+      </trans-unit>
+      <trans-unit id="9105812558859476049" datatype="html">
+        <source>Are you sure you want to delete this feedback?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to delete this feedback?</target>
+      </trans-unit>
+      <trans-unit id="7484685939884481783" datatype="html">
+        <source>Are you sure you want to delete this feedback rule?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.ts</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to delete this feedback rule?</target>
       </trans-unit>
       <trans-unit id="f1affa088d785794802225dbc56ee2ff3d785f87" datatype="html">
         <source>Post attachment</source>
@@ -16402,7 +16454,7 @@ Are you ready to submit this answer?</target>
         <source>We are scoring your work...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">351</context>
+          <context context-type="linenumber">350</context>
         </context-group>
         <target state="translated">Çalışmalarınızı puanlıyoruz...</target>
       </trans-unit>
@@ -16410,7 +16462,7 @@ Are you ready to submit this answer?</target>
         <source>Please Wait</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">352</context>
+          <context context-type="linenumber">351</context>
         </context-group>
         <target state="translated">Lütfen Bekleyin</target>
       </trans-unit>
@@ -16419,7 +16471,7 @@ Are you ready to submit this answer?</target>
 If this problem continues, let your teacher know and move on to the next activity. Your work will still be saved.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">374</context>
+          <context context-type="linenumber">373</context>
         </context-group>
         <target state="translated">Çalışmanızın puanlanmasıyla ilgili bir sorun oluştu. Lütfen tekrar deneyin.
 Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin. Çalışmanız yine de kaydedilmiş olacak.</target>
@@ -16428,7 +16480,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>This will replace your existing recording. Is this OK?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">706</context>
+          <context context-type="linenumber">705</context>
         </context-group>
         <target state="translated">Bu, mevcut kaydınızın yerini alacak. Uygun mu?</target>
       </trans-unit>
@@ -16436,7 +16488,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Are you sure you want to delete your recording?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">750</context>
+          <context context-type="linenumber">749</context>
         </context-group>
         <target state="translated">Kaydınızı silmek istediğinizden emin misiniz?</target>
       </trans-unit>
