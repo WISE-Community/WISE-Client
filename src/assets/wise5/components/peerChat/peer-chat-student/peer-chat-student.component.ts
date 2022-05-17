@@ -97,11 +97,13 @@ export class PeerChatStudentComponent extends ComponentStudent {
       .subscribe(
         (peerGroup: PeerGroup) => {
           this.isPeerChatWorkgroupsResponseReceived = true;
-          this.peerGroup = peerGroup;
-          const peerGroupWorkgroupIds = this.getPeerGroupWorkgroupIds(peerGroup);
-          this.addTeacherWorkgroupIds(peerGroupWorkgroupIds);
-          this.setPeerChatWorkgroups(peerGroupWorkgroupIds);
-          this.getPeerChatComponentStates(peerGroup);
+          if (peerGroup != null) {
+            this.peerGroup = peerGroup;
+            const peerGroupWorkgroupIds = this.getPeerGroupWorkgroupIds(peerGroup);
+            this.addTeacherWorkgroupIds(peerGroupWorkgroupIds);
+            this.setPeerChatWorkgroups(peerGroupWorkgroupIds);
+            this.getPeerChatComponentStates(peerGroup);
+          }
         },
         (error) => {
           this.isPeerChatWorkgroupsResponseReceived = true;
