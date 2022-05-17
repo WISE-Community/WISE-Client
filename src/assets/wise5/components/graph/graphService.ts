@@ -503,20 +503,17 @@ export class GraphService extends ComponentService {
     periodId: number,
     showWorkNodeId: string,
     showWorkComponentId: string,
-    showClassmateWorkSource: string
+    showClassmateWorkSource: 'period' | 'class'
   ) {
     const runId = this.configService.getRunId();
-    switch (showClassmateWorkSource) {
-      case 'period':
-        return this.http.get(
-          `/api/classmate/graph/student-work/${runId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}/period/${periodId}`
-        );
-      case 'class':
-        return this.http.get(
-          `/api/classmate/graph/student-work/${runId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}/class`
-        );
-      default:
-        throw $localize`Invalid Show Classmate Work Source`;
+    if (showClassmateWorkSource === 'period') {
+      return this.http.get(
+        `/api/classmate/graph/student-work/${runId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}/period/${periodId}`
+      );
+    } else {
+      return this.http.get(
+        `/api/classmate/graph/student-work/${runId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}/class`
+      );
     }
   }
 }

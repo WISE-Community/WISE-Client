@@ -201,15 +201,12 @@ export class GraphStudent extends ComponentStudent {
   }
 
   hasConnectedComponentShowClassmateWork(componentContent: any): boolean {
-    if (componentContent.connectedComponents == null) {
-      return false;
-    }
-    for (const connectedComponent of componentContent.connectedComponents) {
-      if (connectedComponent.type === 'showClassmateWork') {
-        return true;
-      }
-    }
-    return false;
+    return (
+      componentContent.connectedComponents != null &&
+      componentContent.connectedComponents.some(
+        (connectedComponent: any) => connectedComponent.type === 'showClassmateWork'
+      )
+    );
   }
 
   processConnectedComponentState(componentState: any): void {
@@ -1660,7 +1657,7 @@ export class GraphStudent extends ComponentStudent {
     periodId: number,
     showWorkNodeId: string,
     showWorkComponentId: string,
-    showClassmateWorkSource: string
+    showClassmateWorkSource: 'period' | 'class'
   ): Promise<any> {
     return new Promise((resolve, reject) => {
       this.GraphService.getClassmateStudentWork(
