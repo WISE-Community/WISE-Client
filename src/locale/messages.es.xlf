@@ -13522,7 +13522,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
           <context context-type="linenumber">37</context>
         </context-group>
-        <target state="needs-translation">Feedback #<x id="INTERPOLATION" equiv-text="{{feedbackIndex + 1}}"/></target>
+        <target state="translated">Retroalimentación #<x id="INTERPOLATION" equiv-text="{{feedbackIndex + 1}}"/></target>
       </trans-unit>
       <trans-unit id="3aa2cdd901989a09c8e86d46bd5f7286269dfb04" datatype="html">
         <source>Delete feedback</source>
@@ -13530,7 +13530,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <target state="needs-translation">Delete feedback</target>
+        <target state="translated">Borrar retroalimentación</target>
       </trans-unit>
       <trans-unit id="e01a2fbbb7dc8f23d76bc4546e106de85ec707a5" datatype="html">
         <source>Add new feedback</source>
@@ -13538,7 +13538,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="needs-translation">Add new feedback</target>
+        <target state="translated">Agregar nueva retroalimentación</target>
       </trans-unit>
       <trans-unit id="a21168341f6e8fcc754c90ac1bab01a5348d5647" datatype="html">
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
@@ -13546,7 +13546,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.html</context>
           <context context-type="linenumber">60</context>
         </context-group>
-        <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+        <target state="translated"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
       </trans-unit>
       <trans-unit id="d3ccd931bd0661bdf42d1023fc5a8f26503a4d5f" datatype="html">
         <source>Delete rule</source>
@@ -13586,7 +13586,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.ts</context>
           <context context-type="linenumber">75</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this feedback?</target>
+        <target state="translated">¿Seguro que desea borrar esta retroalimentación?</target>
       </trans-unit>
       <trans-unit id="7484685939884481783" datatype="html">
         <source>Are you sure you want to delete this feedback rule?</source>
@@ -13594,7 +13594,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component.ts</context>
           <context context-type="linenumber">82</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this feedback rule?</target>
+        <target state="translated">¿Seguro que desea borrar esta regla de retroalimentación?</target>
       </trans-unit>
       <trans-unit id="f1affa088d785794802225dbc56ee2ff3d785f87" datatype="html">
         <source>Post attachment</source>
@@ -16785,7 +16785,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>You have new chat messages</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.ts</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">211</context>
         </context-group>
         <target state="translated">Tiene nuevos mensajes de chat</target>
       </trans-unit>
@@ -16815,7 +16815,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Show Work Step</target>
+        <target state="translated">Mostrar el trabajo del Paso</target>
       </trans-unit>
       <trans-unit id="310b6ade177e4fb8a9f30579b05696c0122f08a6" datatype="html">
         <source>(None)</source>
@@ -16855,7 +16855,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
-        <target state="needs-translation">Show Work Component</target>
+        <target state="translated">Mostrar componente del trabajo</target>
       </trans-unit>
       <trans-unit id="f5e5d449095ff67307e2d7c8a4da0147117406b0" datatype="html">
         <source> Show My Work </source>
@@ -16863,7 +16863,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
           <context context-type="linenumber">36,38</context>
         </context-group>
-        <target state="needs-translation"> Show My Work </target>
+        <target state="translated"> Mostrar mi trabajo </target>
       </trans-unit>
       <trans-unit id="c0e23e3cdbac881ae9b97dbc68a38e649066dacb" datatype="html">
         <source>Layout:</source>
@@ -16871,7 +16871,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <target state="needs-translation">Layout:</target>
+        <target state="translated">Diseño:</target>
       </trans-unit>
       <trans-unit id="3583552a7ce6df3916c7d4e18909aeef0aedc728" datatype="html">
         <source>Stacked Vertically</source>
@@ -16879,7 +16879,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
           <context context-type="linenumber">56</context>
         </context-group>
-        <target state="needs-translation">Stacked Vertically</target>
+        <target state="translated">Formato vertical</target>
       </trans-unit>
       <trans-unit id="eafcf772e6e9935d21a9e0f77bec0d241b252e40" datatype="html">
         <source>Side-by-Side</source>
@@ -16887,7 +16887,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
           <context context-type="linenumber">61</context>
         </context-group>
-        <target state="needs-translation">Side-by-Side</target>
+        <target state="translated">Lado a lado</target>
       </trans-unit>
       <trans-unit id="bed97e00c4410c5f35cecf15517f4ad34caa00bc" datatype="html">
         <source> You have not been paired with a classmate yet. Please check back later. </source>
@@ -16895,7 +16895,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.component.html</context>
           <context context-type="linenumber">3,5</context>
         </context-group>
-        <target state="needs-translation"> You have not been paired with a classmate yet. Please check back later. </target>
+        <target state="translated"> Aún no has sido asignado como par de un/a compañero/a de clase. Por favor, intentar más tarde. </target>
       </trans-unit>
       <trans-unit id="695002b0833dd1205d98680144ae619f6d06a79b" datatype="html">
         <source> (Waiting for response...) </source>
@@ -16903,7 +16903,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-student/show-group-work-student.component.html</context>
           <context context-type="linenumber">20,22</context>
         </context-group>
-        <target state="needs-translation"> (Waiting for response...) </target>
+        <target state="translated"> (Esperando respuesta...) </target>
       </trans-unit>
       <trans-unit id="6296654944974704263" datatype="html">
         <source>Show Group Work</source>
@@ -16911,7 +16911,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/showGroupWorkService.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Show Group Work</target>
+        <target state="translated">Mostrar grupo de trabajo</target>
       </trans-unit>
       <trans-unit id="3e4063d41615b0bdb15dd79a55e0334dabeb361f" datatype="html">
         <source>(No response)</source>
@@ -16919,7 +16919,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/show-my-work-student/show-my-work-student.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">(No response)</target>
+        <target state="translated">(sin respuesta)</target>
       </trans-unit>
       <trans-unit id="8147119602241675293" datatype="html">
         <source>Show Student Work</source>
@@ -16927,7 +16927,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showMyWork/showMyWorkService.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Show Student Work</target>
+        <target state="translated">Mostrar trabajo de estudiante</target>
       </trans-unit>
       <trans-unit id="b7476b3f8bc67f93405690b807d8751371cdf7ed" datatype="html">
         <source> Choose the step and component to show the summary data for:
