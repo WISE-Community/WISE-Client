@@ -1285,7 +1285,11 @@ export class StudentDataService extends DataService {
     if (component != null) {
       const componentType = component.type;
       const service = this.upgrade.$injector.get(componentType + 'Service');
-      return service.isCompleted(component, componentStates, nodeEvents, node);
+      if (componentType === 'OpenResponse') {
+        return service.isCompletedV2(node, component, this.studentData);
+      } else {
+        return service.isCompleted(component, componentStates, nodeEvents, node);
+      }
     }
     return false;
   }
@@ -1384,93 +1388,6 @@ export class StudentDataService extends DataService {
     } else {
       return null;
     }
-  }
-
-  isCompletionCriteriaSatisfied(completionCriteria) {
-    let result = true;
-    if (completionCriteria.inOrder) {
-      result = this.isInOrderCompletionCriteriaSatisfied(completionCriteria);
-    }
-    return result;
-  }
-
-  isInOrderCompletionCriteriaSatisfied(completionCriteria) {
-    let result = true;
-    let tempTimestamp = 0;
-    for (const completionCriterion of completionCriteria.criteria) {
-      const functionName = completionCriterion.name;
-      if (functionName == 'isSubmitted') {
-        const tempComponentState = this.getComponentStateSubmittedAfter(
-          completionCriterion.nodeId,
-          completionCriterion.componentId,
-          tempTimestamp
-        );
-        if (tempComponentState == null) {
-          return false;
-        } else {
-          tempTimestamp = tempComponentState.serverSaveTime;
-        }
-      } else if (functionName == 'isSaved') {
-        const tempComponentState = this.getComponentStateSavedAfter(
-          completionCriterion.nodeId,
-          completionCriterion.componentId,
-          tempTimestamp
-        );
-        if (tempComponentState == null) {
-          return false;
-        } else {
-          tempTimestamp = tempComponentState.serverSaveTime;
-        }
-      } else if (functionName == 'isVisited') {
-        const tempEvent = this.getVisitEventAfter(completionCriterion.nodeId, tempTimestamp);
-        if (tempEvent == null) {
-          return false;
-        } else {
-          tempTimestamp = tempEvent.serverSaveTime;
-        }
-      }
-    }
-    return result;
-  }
-
-  getComponentStateSavedAfter(nodeId, componentId, timestamp) {
-    for (const componentState of this.studentData.componentStates) {
-      if (
-        componentState.nodeId === nodeId &&
-        componentState.componentId === componentId &&
-        componentState.serverSaveTime > timestamp
-      ) {
-        return componentState;
-      }
-    }
-    return null;
-  }
-
-  getComponentStateSubmittedAfter(nodeId, componentId, timestamp) {
-    for (const componentState of this.studentData.componentStates) {
-      if (
-        componentState.nodeId === nodeId &&
-        componentState.componentId === componentId &&
-        componentState.serverSaveTime > timestamp &&
-        componentState.isSubmit
-      ) {
-        return componentState;
-      }
-    }
-    return null;
-  }
-
-  getVisitEventAfter(nodeId, timestamp) {
-    for (const tempEvent of this.studentData.events) {
-      if (
-        tempEvent.nodeId === nodeId &&
-        tempEvent.serverSaveTime > timestamp &&
-        tempEvent.event === 'nodeEntered'
-      ) {
-        return tempEvent;
-      }
-    }
-    return null;
   }
 
   getClassmateStudentWork(nodeId, componentId, periodId) {
