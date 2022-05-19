@@ -1473,7 +1473,16 @@ export class ConceptMapStudent extends ComponentStudent {
    * @return a component state with the merged student responses
    */
   createMergedComponentState(componentStates: any[]): any {
-    let componentStateToMergeInto: any = this.ConceptMapService.createComponentStateObject();
+    let componentStateToMergeInto: any = this.NodeService.createNewComponentState();
+    componentStateToMergeInto.studentData = {
+      conceptMapData: {
+        background: null,
+        backgroundPath: null,
+        links: [],
+        nodes: [],
+        stretchBackground: null
+      }
+    };
     for (const componentState of componentStates) {
       if (componentState.componentType === 'ConceptMap') {
         this.mergeConceptMapComponentState(componentStateToMergeInto, componentState);
