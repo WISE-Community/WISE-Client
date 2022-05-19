@@ -2,18 +2,9 @@
 
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
-import { StudentDataService } from '../../services/studentDataService';
-import { UtilService } from '../../services/utilService';
 
 @Injectable()
 export class MultipleChoiceService extends ComponentService {
-  constructor(
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
-  ) {
-    super(UtilService);
-  }
-
   getComponentTypeLabel(): string {
     return $localize`Multiple Choice`;
   }
@@ -28,25 +19,17 @@ export class MultipleChoiceService extends ComponentService {
   }
 
   /**
-   * Check if the student chose a specific choice
+   * Returns true iff the student chose a choice specified in the criteria
    * @param criteria the criteria object
+   * @param componentState contains student's last choice
    * @returns a boolean value whether the student chose the choice specified in the
    * criteria object
    */
-  choiceChosen(criteria: any) {
-    const nodeId = criteria.params.nodeId;
-    const componentId = criteria.params.componentId;
-    const constraintChoiceIds = criteria.params.choiceIds;
-    const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      nodeId,
-      componentId
+  choiceChosen(criteria: any, componentState: any): boolean {
+    const studentChoiceIds = this.getStudentChoiceIdsFromStudentChoiceObjects(
+      componentState.studentData.studentChoices
     );
-    if (latestComponentState != null) {
-      const studentChoices = latestComponentState.studentData.studentChoices;
-      const studentChoiceIds = this.getStudentChoiceIdsFromStudentChoiceObjects(studentChoices);
-      return this.isChoicesSelected(studentChoiceIds, constraintChoiceIds);
-    }
-    return false;
+    return this.isChoicesSelected(studentChoiceIds, criteria.params.choiceIds);
   }
 
   isChoicesSelected(studentChoiceIds: any, constraintChoiceIds: any) {
