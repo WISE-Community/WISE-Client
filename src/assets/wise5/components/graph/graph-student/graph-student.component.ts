@@ -186,7 +186,10 @@ export class GraphStudent extends ComponentStudent {
     if (!this.GraphService.componentStateHasStudentWork(componentState, this.componentContent)) {
       this.newTrial();
     }
-    if (this.UtilService.hasConnectedComponentAlwaysField(this.componentContent)) {
+    if (
+      this.UtilService.hasConnectedComponentAlwaysField(this.componentContent) ||
+      this.hasConnectedComponentShowClassmateWork(this.componentContent)
+    ) {
       this.handleConnectedComponents();
     } else if (
       this.GraphService.componentStateHasStudentWork(componentState, this.componentContent)
@@ -195,6 +198,15 @@ export class GraphStudent extends ComponentStudent {
     } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
       this.handleConnectedComponents();
     }
+  }
+
+  hasConnectedComponentShowClassmateWork(componentContent: any): boolean {
+    return (
+      componentContent.connectedComponents != null &&
+      componentContent.connectedComponents.some(
+        (connectedComponent: any) => connectedComponent.type === 'showClassmateWork'
+      )
+    );
   }
 
   processConnectedComponentState(componentState: any): void {
@@ -1639,25 +1651,37 @@ export class GraphStudent extends ComponentStudent {
    * are "period" or "class".
    * @return a promise that will return all the trials from the classmates
    */
-  getTrialsFromClassmates(nodeId, componentId, periodId) {
+  getTrialsFromClassmates(
+    nodeId: string,
+    componentId: string,
+    periodId: number,
+    showWorkNodeId: string,
+    showWorkComponentId: string,
+    showClassmateWorkSource: 'period' | 'class'
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.StudentDataService.getClassmateStudentWork(nodeId, componentId, periodId).then(
-        (componentStates) => {
-          const promises = [];
-          for (const componentState of componentStates) {
-            promises.push(this.getTrialsFromComponentState(nodeId, componentId, componentState));
-          }
-          Promise.all(promises).then((promiseResults) => {
-            const mergedTrials = [];
-            for (const trials of promiseResults) {
-              for (const trial of trials) {
-                mergedTrials.push(trial);
-              }
-            }
-            resolve(mergedTrials);
-          });
+      this.GraphService.getClassmateStudentWork(
+        nodeId,
+        componentId,
+        periodId,
+        showWorkNodeId,
+        showWorkComponentId,
+        showClassmateWorkSource
+      ).subscribe((componentStates: any[]) => {
+        const promises = [];
+        for (const componentState of componentStates) {
+          promises.push(this.getTrialsFromComponentState(nodeId, componentId, componentState));
         }
-      );
+        Promise.all(promises).then((promiseResults) => {
+          const mergedTrials = [];
+          for (const trials of promiseResults) {
+            for (const trial of trials) {
+              mergedTrials.push(trial);
+            }
+          }
+          resolve(mergedTrials);
+        });
+      });
     });
   }
 
@@ -2632,11 +2656,16 @@ export class GraphStudent extends ComponentStudent {
         }
       }
     } else {
-      let periodId = null;
-      if (connectedComponent.showClassmateWorkSource === 'period') {
-        periodId = this.ConfigService.getPeriodId();
-      }
-      promises.push(this.getTrialsFromClassmates(nodeId, componentId, periodId));
+      promises.push(
+        this.getTrialsFromClassmates(
+          this.nodeId,
+          this.componentId,
+          this.ConfigService.getPeriodId(),
+          nodeId,
+          componentId,
+          connectedComponent.showClassmateWorkSource
+        )
+      );
       let component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
       component = this.ProjectService.injectAssetPaths(component);
       connectedComponentBackgroundImage = component.backgroundImage;

@@ -6,12 +6,16 @@ import { Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { UtilService } from '../../services/utilService';
+import { ConfigService } from '../../services/configService';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class GraphService extends ComponentService {
   seriesColors: string[] = ['blue', 'red', 'green', 'orange', 'purple', 'black'];
 
   constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
     private StudentAssetService: StudentAssetService,
     protected UtilService: UtilService
   ) {
@@ -491,5 +495,25 @@ export class GraphService extends ComponentService {
       }
     }
     return series;
+  }
+
+  getClassmateStudentWork(
+    nodeId: string,
+    componentId: string,
+    periodId: number,
+    showWorkNodeId: string,
+    showWorkComponentId: string,
+    showClassmateWorkSource: 'period' | 'class'
+  ) {
+    const runId = this.configService.getRunId();
+    if (showClassmateWorkSource === 'period') {
+      return this.http.get(
+        `/api/classmate/graph/student-work/${runId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}/period/${periodId}`
+      );
+    } else {
+      return this.http.get(
+        `/api/classmate/graph/student-work/${runId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}/class`
+      );
+    }
   }
 }
