@@ -6,7 +6,6 @@ import { AnnotationService } from '../../assets/wise5/services/annotationService
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
@@ -25,7 +24,6 @@ class MockTeacherDataService {
 
 let service: DiscussionService;
 let http: HttpTestingController;
-let studentDataService: StudentDataService;
 const componentId = 'component1';
 const nodeId = 'node1';
 const periodId = 2;
@@ -45,7 +43,6 @@ describe('DiscussionService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TagService,
         { provide: TeacherDataService, useClass: MockTeacherDataService },
         TeacherProjectService,
@@ -56,7 +53,6 @@ describe('DiscussionService', () => {
 
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(DiscussionService);
-    studentDataService = TestBed.inject(StudentDataService);
   });
 
   checkThatAComponentStateHasStudentWorkWhenStudentOnlyAttachedAFile();
@@ -64,8 +60,6 @@ describe('DiscussionService', () => {
   createComponent();
   getClassmateResponsesFromComponents();
   getClassmateResponses();
-  hasShowWorkConnectedComponentThatHasWork();
-  hasNodeEnteredEvent();
   isCompleted();
   isComponentHasStarterSentence();
   isStudentResponseDifferentFromStarterSentence();
@@ -132,80 +126,29 @@ function createComponent() {
 function isCompleted() {
   let component: any;
   let componentStates: any[];
-  let nodeEvents: any[];
+  let studentData = { componentStates: [], events: [] };
+  const node = { id: nodeId };
   beforeEach(() => {
     component = {};
     componentStates = [];
-    nodeEvents = [];
   });
-  function expectIsCompleted(
-    component: any,
-    componentStates: any[],
-    nodeEvents: any[],
-    expectedResult: boolean
-  ) {
-    expect(service.isCompleted(component, componentStates, nodeEvents, null)).toEqual(
-      expectedResult
-    );
+  function expectIsCompleted(node: any, component: any, studentData: any, expectedResult: boolean) {
+    expect(service.isCompletedV2(node, component, studentData)).toEqual(expectedResult);
   }
   it(`should check if a component is completed when it does not have a show work connected component
       and it does not have any component states`, () => {
-    expectIsCompleted(component, componentStates, nodeEvents, false);
+    expectIsCompleted(node, component, studentData, false);
   });
   it('should check if a component is completed when it has a show work connected component', () => {
-    spyOn(studentDataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue([
-      createComponentStateFromOnlyResponse('Hello World')
-    ]);
+    studentData.componentStates.push(createComponentStateFromOnlyResponse('Hello World'));
     component.connectedComponents = [createConnectedComponent('node1', 'component1', 'showWork')];
-    nodeEvents.push(createNodeEvent('nodeEntered'));
-    expectIsCompleted(component, componentStates, nodeEvents, true);
+    studentData.events.push(createNodeEvent('nodeEntered'));
+    expectIsCompleted(node, component, studentData, false);
   });
   it(`should check if a component is completed when it has a component state with a
       response`, () => {
     componentStates.push(createComponentStateFromOnlyResponse('Hello World'));
-    expectIsCompleted(component, componentStates, nodeEvents, true);
-  });
-}
-
-function hasShowWorkConnectedComponentThatHasWork() {
-  let componentContent: any;
-  beforeEach(() => {
-    componentContent = {
-      connectedComponents: []
-    };
-  });
-  function expectHasShowWorkConnectedComponentThatHasWork(
-    componentContent: any,
-    expectedResult: boolean
-  ) {
-    expect(service.hasShowWorkConnectedComponentThatHasWork(componentContent)).toEqual(
-      expectedResult
-    );
-  }
-  it(`should check if there is a show work connected component when there are no connected
-      components`, () => {
-    expectHasShowWorkConnectedComponentThatHasWork(componentContent, false);
-  });
-  it(`should check if there is a show work connected component when there is a connected
-      component`, () => {
-    const connectedComponent = createConnectedComponent('node1', 'component1', 'showWork');
-    componentContent.connectedComponents.push(connectedComponent);
-    spyOn(studentDataService, 'getComponentStatesByNodeIdAndComponentId').and.returnValue([
-      createComponentStateFromOnlyResponse('Hello World')
-    ]);
-    expectHasShowWorkConnectedComponentThatHasWork(componentContent, true);
-  });
-}
-
-function hasNodeEnteredEvent() {
-  function expectHasNodeEnteredEvent(nodeEvents: any[], expectedResult: boolean) {
-    expect(service.hasNodeEnteredEvent(nodeEvents)).toEqual(expectedResult);
-  }
-  it('should check if there are any node entered events when there are none', () => {
-    expectHasNodeEnteredEvent([createNodeEvent('nodeExited')], false);
-  });
-  it('should check if there are any node entered events when there is one', () => {
-    expectHasNodeEnteredEvent([createNodeEvent('nodeEntered')], true);
+    expectIsCompleted(node, component, studentData, false);
   });
 }
 

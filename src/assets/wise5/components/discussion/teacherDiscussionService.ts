@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from '../../services/configService';
-import { StudentDataService } from '../../services/studentDataService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
 import { DiscussionService } from './discussionService';
@@ -11,11 +10,10 @@ export class TeacherDiscussionService extends DiscussionService {
   constructor(
     protected http: HttpClient,
     protected configService: ConfigService,
-    protected studentDataService: StudentDataService,
     protected teacherDataService: TeacherDataService,
     protected utilService: UtilService
   ) {
-    super(http, configService, studentDataService, utilService);
+    super(http, configService, utilService);
   }
 
   getPostsAssociatedWithComponentIdsAndWorkgroupId(componentIds: string[], workgroupId: number) {
