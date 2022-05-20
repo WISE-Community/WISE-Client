@@ -29,7 +29,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           );
         }
 
-        if (err.status >= 500 || err.status === 0) {
+        if (err.status >= 500 || err.status === 0 || err.status === 403) {
           this.processError(err);
         }
         return throwError(err);
