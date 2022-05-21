@@ -1664,7 +1664,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <target state="translated">提交</target>
       </trans-unit>
@@ -6414,7 +6414,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <target state="translated">保存</target>
       </trans-unit>
@@ -12934,7 +12934,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Concept Map</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/conceptMapService.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <target state="needs-translation">Concept Map</target>
       </trans-unit>
@@ -18364,7 +18364,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">52,54</context>
         </context-group>
         <target state="needs-translation"> Save </target>
       </trans-unit>
@@ -18613,7 +18613,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Teaching Tips</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <target state="needs-translation">Teaching Tips</target>
       </trans-unit>
@@ -18621,7 +18621,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Submit </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">61,63</context>
+          <context context-type="linenumber">62,64</context>
         </context-group>
         <target state="needs-translation"> Submit </target>
       </trans-unit>
