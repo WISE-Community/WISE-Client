@@ -80,6 +80,7 @@ import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/not
 import { ComputerAvatarService } from '../assets/wise5/services/computerAvatarService';
 import { StudentStatusService } from '../assets/wise5/services/studentStatusService';
 import { OpenResponseCompletionCriteriaService } from '../assets/wise5/components/openResponse/openResponseCompletionCriteriaService';
+import { ComponentServiceLookupService } from '../assets/wise5/services/componentServiceLookupService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -135,6 +136,7 @@ export class EmptyComponent {}
     AudioRecorderService,
     ConceptMapService,
     ComponentService,
+    ComponentServiceLookupService,
     ComputerAvatarService,
     ConfigService,
     CRaterService,

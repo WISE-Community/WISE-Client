@@ -8,6 +8,7 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
 import * as angular from 'angular';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
 
 class DataExportController {
   $translate: any;
@@ -45,7 +46,6 @@ class DataExportController {
     'Submit Count'
   ];
   canViewStudentNames: boolean = false;
-  componentTypeToComponentService: any = {};
   dialogGuidanceComputerResponseLabel: string = 'Computer Response';
   dialogGuidanceRevisionLabel: string = 'Revision';
   embeddedTableKeyToValue = {
@@ -86,10 +86,10 @@ class DataExportController {
 
   static $inject = [
     '$filter',
-    '$injector',
     '$mdDialog',
     '$state',
     'AnnotationService',
+    'ComponentServiceLookupService',
     'ConfigService',
     'DataExportService',
     'FileSaver',
@@ -101,10 +101,10 @@ class DataExportController {
 
   constructor(
     $filter: any,
-    private $injector: any,
     private $mdDialog: any,
     private $state: any,
     private AnnotationService: AnnotationService,
+    private componentServiceLookupService: ComponentServiceLookupService,
     private ConfigService: ConfigService,
     private DataExportService: DataExportService,
     private FileSaver: any,
@@ -688,7 +688,7 @@ class DataExportController {
      */
     let studentDataString = ' ';
     let componentType = componentState.componentType;
-    let componentService = this.getComponentService(componentType);
+    let componentService = this.componentServiceLookupService.getService(componentType);
     if (componentService != null && componentService.getStudentDataString != null) {
       studentDataString = componentService.getStudentDataString(componentState);
       studentDataString = this.UtilService.removeHTMLTags(studentDataString);
@@ -2341,23 +2341,6 @@ class DataExportController {
     topRows.push(columnIdRow);
     topRows.push(descriptionRow);
     return topRows;
-  }
-
-  /**
-   * Get the component service for a component type
-   * @param componentType the component type
-   * @return the component service or null if it doesn't exist
-   */
-  getComponentService(componentType) {
-    let componentService = null;
-    if (componentType != null) {
-      componentService = this.componentTypeToComponentService[componentType];
-      if (componentService == null) {
-        componentService = this.$injector.get(componentType + 'Service');
-        this.componentTypeToComponentService[componentType] = componentService;
-      }
-    }
-    return componentService;
   }
 
   /**

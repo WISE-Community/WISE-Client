@@ -1,5 +1,6 @@
 import { downgradeInjectable } from '@angular/upgrade/static';
 import * as angular from 'angular';
+import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
 import { DataExportService } from '../../services/dataExportService';
 import DataExportController from './dataExportController';
 import ExportController from './exportController';
@@ -8,6 +9,7 @@ import ExportVisitsController from './exportVisitsController';
 export default angular
   .module('dataExport', ['ngFileSaver'])
   .factory('DataExportService', downgradeInjectable(DataExportService))
+  .factory('ComponentServiceLookupService', downgradeInjectable(ComponentServiceLookupService))
   .controller('DataExportController', DataExportController)
   .controller('ExportController', ExportController)
   .controller('ExportVisitsController', ExportVisitsController)
