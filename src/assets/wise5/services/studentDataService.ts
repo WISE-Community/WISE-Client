@@ -81,7 +81,6 @@ export class StudentDataService extends DataService {
     }
   };
 
-  $q: any;
   $translate: any;
   private deleteKeyPressedSource: Subject<any> = new Subject<any>();
   public deleteKeyPressed$: Observable<any> = this.deleteKeyPressedSource.asObservable();
@@ -914,9 +913,7 @@ export class StudentDataService extends DataService {
     };
     this.copyClientSaveTimeToServerSaveTime(savedStudentDataResponse);
     this.handleSaveToServerSuccess(savedStudentDataResponse);
-    const deferred = this.upgrade.$injector.get('$q').defer();
-    deferred.resolve(savedStudentDataResponse);
-    return deferred.promise;
+    return Promise.resolve(savedStudentDataResponse);
   }
 
   copyClientSaveTimeToServerSaveTime(studentDataResponse: any): void {
@@ -950,9 +947,7 @@ export class StudentDataService extends DataService {
        */
       this.updateNodeStatuses();
     }
-    const deferred = this.upgrade.$injector.get('$q').defer();
-    deferred.resolve(savedStudentDataResponse);
-    return deferred.promise;
+    return Promise.resolve(savedStudentDataResponse);
   }
 
   processSavedStudentWorkList(savedStudentWorkList) {
@@ -1038,9 +1033,7 @@ export class StudentDataService extends DataService {
 
   handleSaveToServerError() {
     this.saveToServerRequestCount -= 1;
-    const deferred = this.upgrade.$injector.get('$q').defer();
-    deferred.resolve();
-    return deferred.promise;
+    return Promise.resolve({});
   }
 
   getLatestComponentState() {

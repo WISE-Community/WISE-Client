@@ -3074,9 +3074,7 @@ export class ProjectService {
   replaceComponent(nodeId, componentId, component) {}
 
   retrieveScript(scriptFilename) {
-    const deferred = this.upgrade.$injector.get('$q').defer();
-    deferred.resolve({});
-    return deferred.promise;
+    return Promise.resolve('');
   }
 
   getNotificationByScore(component, previousScore, currentScore) {}

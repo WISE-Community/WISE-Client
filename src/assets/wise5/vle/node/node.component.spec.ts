@@ -43,7 +43,9 @@ describe('NodeComponent', () => {
     spyOn(TestBed.inject(ConfigService), 'isRunActive').and.returnValue(true);
     spyOn(TestBed.inject(StudentDataService), 'getCurrentNode').and.returnValue({});
     spyOn(TestBed.inject(StudentDataService), 'getNodeStatusByNodeId').and.returnValue({});
-    spyOn(TestBed.inject(StudentDataService), 'saveVLEEvent').and.callFake(() => {});
+    spyOn(TestBed.inject(StudentDataService), 'saveVLEEvent').and.callFake(() => {
+      return Promise.resolve({});
+    });
     spyOn(TestBed.inject(VLEProjectService), 'isApplicationNode').and.returnValue(true);
     spyOn(TestBed.inject(VLEProjectService), 'getNodeById').and.returnValue({ components: [] });
     spyOn(TestBed.inject(VLEProjectService), 'getNodeTitleByNodeId').and.returnValue('');
