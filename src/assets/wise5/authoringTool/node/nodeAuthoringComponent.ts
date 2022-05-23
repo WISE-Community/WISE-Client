@@ -12,6 +12,7 @@ import { NotificationService } from '../../services/notificationService';
 import { Subscription } from 'rxjs';
 import { Directive } from '@angular/core';
 import { Node } from '../../common/Node';
+import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
 
 @Directive()
 class NodeAuthoringController {
@@ -50,13 +51,13 @@ class NodeAuthoringController {
   static $inject = [
     '$anchorScroll',
     '$filter',
-    '$injector',
     '$mdDialog',
     '$state',
     '$stateParams',
     '$timeout',
     'ConfigService',
     'CopyComponentService',
+    'ComponentServiceLookupService',
     'InsertComponentService',
     'NodeService',
     'NotificationService',
@@ -68,13 +69,13 @@ class NodeAuthoringController {
   constructor(
     private $anchorScroll: any,
     $filter: any,
-    private $injector: any,
     private $mdDialog: any,
     private $state: any,
     private $stateParams: any,
     private $timeout: any,
     private ConfigService: ConfigService,
     private CopyComponentService: CopyComponentService,
+    private componentServiceLookupService: ComponentServiceLookupService,
     private InsertComponentService: InsertComponentService,
     private NodeService: NodeService,
     private NotificationService: NotificationService,
@@ -183,7 +184,7 @@ class NodeAuthoringController {
 
   hideAllComponentSaveButtons() {
     for (const component of this.components) {
-      const service = this.$injector.get(component.type + 'Service');
+      const service = this.componentServiceLookupService.getService(component.type);
       if (service.componentUsesSaveButton()) {
         component.showSaveButton = false;
       }

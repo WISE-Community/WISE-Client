@@ -5,6 +5,7 @@ import { SummaryService } from '../../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { UtilService } from '../../../../services/utilService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
 
 class NodeInfoController {
   color: any;
@@ -14,8 +15,8 @@ class NodeInfoController {
   nodeId: string;
   periodId: number;
   static $inject = [
-    '$injector',
     'AnnotationService',
+    'ComponentServiceLookupService',
     'ProjectService',
     'SummaryService',
     'TeacherDataService',
@@ -23,8 +24,8 @@ class NodeInfoController {
   ];
 
   constructor(
-    private $injector: any,
     private AnnotationService: AnnotationService,
+    private componentServiceLookupService: ComponentServiceLookupService,
     private ProjectService: TeacherProjectService,
     private SummaryService: SummaryService,
     private TeacherDataService: TeacherDataService,
@@ -109,8 +110,8 @@ class NodeInfoController {
     );
   }
 
-  componentHasCorrectAnswer(component) {
-    const service = this.$injector.get(component.type + 'Service');
+  componentHasCorrectAnswer(component: any): boolean {
+    const service = this.componentServiceLookupService.getService(component.type);
     return service.componentHasCorrectAnswer(component);
   }
 }
