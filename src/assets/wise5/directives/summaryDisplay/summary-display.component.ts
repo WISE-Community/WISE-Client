@@ -736,9 +736,9 @@ export class SummaryDisplay {
 
   getGraphTitleForSelf() {
     if (this.isStudentDataTypeResponses()) {
-      return 'Your Response';
+      return $localize`Your Response`;
     } else if (this.isStudentDataTypeScores()) {
-      return 'Your Score';
+      return $localize`Your Score`;
     }
   }
 
