@@ -1394,52 +1394,6 @@ export class StudentDataService extends DataService {
     }
   }
 
-  getClassmateStudentWork(nodeId, componentId, periodId) {
-    let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('nodeId', nodeId + '')
-      .set('componentId', componentId + '')
-      .set('getStudentWork', true + '')
-      .set('getEvents', false + '')
-      .set('getAnnotations', false + '')
-      .set('onlyGetLatest', true + '');
-    if (periodId != null) {
-      params = params.set('periodId', periodId);
-    }
-    const options = {
-      params: params
-    };
-    return this.http
-      .get(this.ConfigService.getConfigParam('studentDataURL'), options)
-      .toPromise()
-      .then((resultData: any) => {
-        return resultData.studentWorkList;
-      });
-  }
-
-  getClassmateScores(nodeId, componentId, periodId) {
-    let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('nodeId', nodeId + '')
-      .set('componentId', componentId + '')
-      .set('getStudentWork', false + '')
-      .set('getEvents', false + '')
-      .set('getAnnotations', true + '')
-      .set('onlyGetLatest', false + '');
-    if (periodId != null) {
-      params = params.set('periodId', periodId);
-    }
-    const options = {
-      params: params
-    };
-    return this.http
-      .get(this.ConfigService.getConfigParam('studentDataURL'), options)
-      .toPromise()
-      .then((resultData: any) => {
-        return resultData.annotations;
-      });
-  }
-
   getStudentWorkById(id) {
     const params = new HttpParams()
       .set('runId', this.ConfigService.getRunId())
