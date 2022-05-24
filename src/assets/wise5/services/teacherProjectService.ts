@@ -193,16 +193,16 @@ export class TeacherProjectService extends ProjectService {
   }
 
   notifyAuthorProjectEnd(projectId = null) {
-    return this.upgrade.$injector.get('$q')((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       if (projectId == null) {
         if (this.project != null) {
           projectId = this.ConfigService.getProjectId();
         } else {
-          resolve();
+          resolve({});
         }
       }
       this.notifyAuthorProjectBeginEnd(projectId, false).then(() => {
-        resolve();
+        resolve({});
       });
     });
   }

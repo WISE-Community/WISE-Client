@@ -57,10 +57,9 @@ describe('DismissAmbientNotificationDialogComponent', () => {
   });
 
   beforeEach(() => {
-    saveVLEEventSpy = spyOn(
-      TestBed.inject(StudentDataService),
-      'saveVLEEvent'
-    ).and.callFake(() => {});
+    saveVLEEventSpy = spyOn(TestBed.inject(StudentDataService), 'saveVLEEvent').and.callFake(() => {
+      return Promise.resolve({});
+    });
     fixture = TestBed.createComponent(DismissAmbientNotificationDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
