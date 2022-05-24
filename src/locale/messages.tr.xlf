@@ -18136,7 +18136,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>There was an error uploading.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <target state="needs-translation">There was an error uploading.</target>
       </trans-unit>
@@ -18144,7 +18144,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">163</context>
         </context-group>
         <target state="needs-translation">There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</target>
       </trans-unit>
@@ -18152,7 +18152,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Preview Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target state="needs-translation">Preview Student</target>
       </trans-unit>
@@ -18160,7 +18160,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">785</context>
+          <context context-type="linenumber">784</context>
         </context-group>
         <target state="needs-translation">StudentDataService.saveComponentEvent: component, category, event args must not be null</target>
       </trans-unit>
@@ -18168,7 +18168,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">795</context>
+          <context context-type="linenumber">794</context>
         </context-group>
         <target state="needs-translation">StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</target>
       </trans-unit>
@@ -18176,7 +18176,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">804</context>
+          <context context-type="linenumber">803</context>
         </context-group>
         <target state="needs-translation">StudentDataService.saveVLEEvent: category and event args must not be null</target>
       </trans-unit>
