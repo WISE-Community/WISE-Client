@@ -112,8 +112,6 @@ describe('StudentDataService', () => {
   shouldCheckIsCompleted();
   shouldGetLatestComponentStatesByNodeId();
   shouldGetLatestComponentStateByNodeId();
-  shouldGetClassmateStudentWork();
-  shouldGetClassmateScores();
   shouldGetStudentWorkById();
   shouldGetMaxScore();
   shouldEvaluateCriterias();
@@ -1366,34 +1364,6 @@ function shouldGetLatestComponentStateByNodeId() {
     };
     const componentState = service.getLatestComponentStateByNodeId('node1');
     expect(componentState.id).toEqual(2);
-  });
-}
-
-function shouldGetClassmateStudentWork() {
-  it('should get classmate student work', () => {
-    spyOn(configService, 'getRunId').and.returnValue(1);
-    spyOn(configService, 'getConfigParam').withArgs('studentDataURL').and.returnValue('/student');
-    service.getClassmateStudentWork('node1', 'component1', 10);
-    http
-      .expectOne(
-        '/student?runId=1&nodeId=node1&componentId=component1&getStudentWork=true&' +
-          'getEvents=false&getAnnotations=false&onlyGetLatest=true&periodId=10'
-      )
-      .flush({});
-  });
-}
-
-function shouldGetClassmateScores() {
-  it('should get classmate scores', () => {
-    spyOn(configService, 'getRunId').and.returnValue(1);
-    spyOn(configService, 'getConfigParam').withArgs('studentDataURL').and.returnValue('/student');
-    service.getClassmateScores('node1', 'component1', 10);
-    http
-      .expectOne(
-        '/student?runId=1&nodeId=node1&componentId=component1&getStudentWork=false&' +
-          'getEvents=false&getAnnotations=true&onlyGetLatest=false&periodId=10'
-      )
-      .flush({});
   });
 }
 

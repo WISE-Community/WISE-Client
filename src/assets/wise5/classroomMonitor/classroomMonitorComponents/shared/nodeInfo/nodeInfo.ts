@@ -14,6 +14,7 @@ class NodeInfoController {
   nodeContent: any;
   nodeId: string;
   periodId: number;
+  source: string;
   static $inject = [
     'AnnotationService',
     'ComponentServiceLookupService',
@@ -34,6 +35,11 @@ class NodeInfoController {
     const currentPeriod = this.TeacherDataService.getCurrentPeriod();
     if (currentPeriod != null) {
       this.periodId = currentPeriod.periodId;
+      if (this.periodId === -1) {
+        this.source = 'allPeriods';
+      } else {
+        this.source = 'period';
+      }
     }
   }
 
@@ -162,6 +168,7 @@ const NodeInfo = {
                         <summary-display ng-if='component.type === "MultipleChoice"'
                                 [node-id]='::$ctrl.nodeId' [component-id]='::component.id'
                                 [period-id]='$ctrl.periodId' [student-data-type]='"responses"'
+                                [source]='$ctrl.source'
                                 [highlight-correct-answer]='$ctrl.componentHasCorrectAnswer(component)'
                                 [chart-type]='"column"'
                                 [do-render]='true'>
@@ -171,6 +178,7 @@ const NodeInfo = {
                             $ctrl.componentHasScoreAnnotation(component.id)'>
                         <summary-display [node-id]='::$ctrl.nodeId' [component-id]='::component.id'
                                 [period-id]='$ctrl.periodId' [student-data-type]='"scores"'
+                                [source]='$ctrl.source'
                                 [chart-type]='"column"'
                                 [do-render]='true'>
                         </summary-display>
