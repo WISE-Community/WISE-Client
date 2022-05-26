@@ -1,31 +1,19 @@
 import { ComponentService } from '../componentService';
 import { ConfigService } from '../../services/configService';
-import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { StudentDataService } from '../../services/studentDataService';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DiscussionService extends ComponentService {
-  TeacherDataService: TeacherDataService;
-
   constructor(
-    private upgrade: UpgradeModule,
-    private http: HttpClient,
-    private ConfigService: ConfigService,
-    protected StudentDataService: StudentDataService,
+    protected http: HttpClient,
+    protected ConfigService: ConfigService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
-    if (['classroomMonitor', 'author'].includes(this.ConfigService.getMode())) {
-      /*
-       * In the Classroom Monitor, we need access to the TeacherDataService so we can retrieve posts
-       * for all students.
-       */
-      this.TeacherDataService = this.upgrade.$injector.get('TeacherDataService');
-    }
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {
@@ -41,32 +29,35 @@ export class DiscussionService extends ComponentService {
     return component;
   }
 
-  isCompleted(component: any, componentStates: any[], componentEvents: any[], nodeEvents: any[]) {
-    if (this.hasShowWorkConnectedComponentThatHasWork(component)) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any): boolean {
+    throw new Error('No longer used');
+  }
+
+  isCompletedV2(node: any, component: any, studentData: any): boolean {
+    if (this.hasShowWorkConnectedComponentThatHasWork(component, studentData)) {
+      const nodeEvents = studentData.events.filter((event) => event.nodeId == node.id);
       return this.hasNodeEnteredEvent(nodeEvents);
     }
+    const componentStates = studentData.componentStates.filter(
+      (componentState) =>
+        componentState.nodeId === node.id && componentState.componentId == component.id
+    );
     return this.hasAnyComponentStateWithResponse(componentStates);
   }
 
-  hasAnyComponentStateWithResponse(componentStates: any[]) {
-    for (const componentState of componentStates) {
-      if (componentState.studentData.response != null) {
-        return true;
-      }
-    }
-    return false;
+  private hasAnyComponentStateWithResponse(componentStates: any[]): boolean {
+    return componentStates.some((componentState) => componentState.studentData.response != null);
   }
 
-  hasShowWorkConnectedComponentThatHasWork(componentContent: any) {
+  private hasShowWorkConnectedComponentThatHasWork(
+    componentContent: any,
+    studentData: any
+  ): boolean {
     const connectedComponents = componentContent.connectedComponents;
     if (connectedComponents != null) {
       for (const connectedComponent of connectedComponents) {
         if (connectedComponent.type === 'showWork') {
-          const componentStates = this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
-            connectedComponent.nodeId,
-            connectedComponent.componentId
-          );
-          if (componentStates.length > 0) {
+          if (this.hasComponentStateForConnectedComponent(connectedComponent, studentData)) {
             return true;
           }
         }
@@ -75,80 +66,66 @@ export class DiscussionService extends ComponentService {
     return false;
   }
 
-  hasNodeEnteredEvent(nodeEvents: any[]) {
-    for (const nodeEvent of nodeEvents) {
-      if (nodeEvent.event === 'nodeEntered') {
-        return true;
-      }
-    }
-    return false;
+  private hasComponentStateForConnectedComponent(
+    connectedComponent: any,
+    studentData: any
+  ): boolean {
+    return studentData.componentStates.some(
+      (componentState) =>
+        componentState.nodeId === connectedComponent.nodeId &&
+        componentState.componentId === connectedComponent.componentId
+    );
   }
 
-  getClassmateResponses(runId: number, periodId: number, components: any[]) {
-    return new Promise((resolve, reject) => {
-      let params = new HttpParams()
-        .set('runId', runId + '')
-        .set('periodId', periodId + '')
-        .set('getStudentWork', true + '')
-        .set('getAnnotations', true + '');
-      for (const component of components) {
-        params = params.append('components', JSON.stringify(component));
-      }
-      const options = {
-        params: params
-      };
-      const url = this.ConfigService.getConfigParam('studentDataURL');
-      this.http
-        .get(url, options)
-        .toPromise()
-        .then((data) => {
-          resolve(data);
-        });
+  private hasNodeEnteredEvent(nodeEvents: any[]): boolean {
+    return nodeEvents.some((nodeEvent) => nodeEvent.event === 'nodeEntered');
+  }
+
+  getClassmateResponsesFromComponents(
+    runId: number,
+    periodId: number,
+    components: any[]
+  ): Observable<any> {
+    const requests = components.map((component) =>
+      this.getClassmateResponses(runId, periodId, component.nodeId, component.componentId)
+    );
+    return forkJoin(requests).pipe(
+      map((responses: any[]) => {
+        return this.combineClassmatesResponses(responses);
+      })
+    );
+  }
+
+  private combineClassmatesResponses(responses: any[]): any {
+    const studentWork = [];
+    const annotations = [];
+    responses.forEach((response) => {
+      studentWork.push(...response.studentWork);
+      annotations.push(...response.annotations);
     });
+    return {
+      annotations: annotations,
+      studentWork: studentWork
+    };
   }
 
-  workgroupHasWorkForComponent(workgroupId: number, componentId: string) {
-    return (
-      this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
-        workgroupId,
-        componentId
-      ).length > 0
+  getClassmateResponses(
+    runId: number,
+    periodId: number,
+    nodeId: string,
+    componentId: string
+  ): Observable<any> {
+    const studentWorkRequest = this.http.get(
+      `/api/classmate/discussion/student-work/${runId}/${periodId}/${nodeId}/${componentId}`
     );
-  }
-
-  getPostsAssociatedWithComponentIdsAndWorkgroupId(componentIds: string[], workgroupId: number) {
-    let allPosts = [];
-    const topLevelComponentStateIdsFound = [];
-    const componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentIds(
-      workgroupId,
-      componentIds
+    const annotationsRequest = this.http.get(
+      `/api/classmate/discussion/annotations/${runId}/${periodId}/${nodeId}/${componentId}`
     );
-    for (const componentState of componentStates) {
-      const componentStateIdReplyingTo = componentState.studentData.componentStateIdReplyingTo;
-      if (this.isTopLevelPost(componentState)) {
-        if (
-          !this.isTopLevelComponentStateIdFound(topLevelComponentStateIdsFound, componentState.id)
-        ) {
-          allPosts = allPosts.concat(
-            this.getPostAndAllRepliesByComponentIds(componentIds, componentState.id)
-          );
-          topLevelComponentStateIdsFound.push(componentState.id);
-        }
-      } else {
-        if (
-          !this.isTopLevelComponentStateIdFound(
-            topLevelComponentStateIdsFound,
-            componentStateIdReplyingTo
-          )
-        ) {
-          allPosts = allPosts.concat(
-            this.getPostAndAllRepliesByComponentIds(componentIds, componentStateIdReplyingTo)
-          );
-          topLevelComponentStateIdsFound.push(componentStateIdReplyingTo);
-        }
-      }
-    }
-    return allPosts;
+    return forkJoin([studentWorkRequest, annotationsRequest]).pipe(
+      map((response) => {
+        return { studentWork: response[0], annotations: response[1] };
+      })
+    );
   }
 
   isTopLevelPost(componentState: any) {
@@ -160,24 +137,6 @@ export class DiscussionService extends ComponentService {
     componentStateId: string
   ) {
     return topLevelComponentStateIdsFound.indexOf(componentStateId) !== -1;
-  }
-
-  getPostAndAllRepliesByComponentIds(componentIds: string[], componentStateId: number) {
-    const postAndAllReplies = [];
-    const componentStatesForComponentIds = this.TeacherDataService.getComponentStatesByComponentIds(
-      componentIds
-    );
-    for (const componentState of componentStatesForComponentIds) {
-      if (componentState.id === componentStateId) {
-        postAndAllReplies.push(componentState);
-      } else {
-        const componentStateIdReplyingTo = componentState.studentData.componentStateIdReplyingTo;
-        if (componentStateIdReplyingTo === componentStateId) {
-          postAndAllReplies.push(componentState);
-        }
-      }
-    }
-    return postAndAllReplies;
   }
 
   componentUsesSaveButton() {
@@ -295,11 +254,7 @@ export class DiscussionService extends ComponentService {
     const workgroupId = componentState.workgroupId;
     const usernames = this.ConfigService.getUsernamesByWorkgroupId(workgroupId);
     if (usernames.length > 0) {
-      componentState.usernames = usernames
-        .map(function (obj) {
-          return obj.name;
-        })
-        .join(', ');
+      componentState.usernames = this.ConfigService.getUsernamesStringByWorkgroupId(workgroupId);
     } else if (componentState.usernamesArray != null) {
       componentState.usernames = componentState.usernamesArray
         .map(function (obj) {
@@ -307,16 +262,8 @@ export class DiscussionService extends ComponentService {
         })
         .join(', ');
     } else {
-      componentState.usernames = this.getUserIdsDisplay(workgroupId);
+      componentState.usernames = this.ConfigService.getUserIdsStringByWorkgroupId(workgroupId);
     }
-  }
-
-  getUserIdsDisplay(workgroupId: number): string {
-    const userIdsDisplay = [];
-    for (const userId of this.ConfigService.getUserIdsByWorkgroupId(workgroupId)) {
-      userIdsDisplay.push(`Student ${userId}`);
-    }
-    return userIdsDisplay.join(', ');
   }
 
   getResponsesMap(componentStates: any[]): any {

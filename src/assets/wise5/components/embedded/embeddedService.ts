@@ -6,7 +6,6 @@ import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../services/utilService';
-import { StudentDataService } from '../../services/studentDataService';
 import { ConfigService } from '../../services/configService';
 import { AnnotationService } from '../../services/annotationService';
 
@@ -20,10 +19,9 @@ export class EmbeddedService extends ComponentService {
     protected AnnotationService: AnnotationService,
     protected ConfigService: ConfigService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getEmbeddedApplicationIframeId(componentId: string): string {
@@ -42,7 +40,7 @@ export class EmbeddedService extends ComponentService {
     return component;
   }
 
-  isCompleted(component: any, componentStates: any[], componentEvents: any[], nodeEvents: any[]) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (componentStates != null) {
       if (
         this.hasComponentStateWithIsCompletedField(componentStates) &&

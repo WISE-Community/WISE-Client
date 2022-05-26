@@ -10,13 +10,14 @@ import { NotificationService } from '../../../../services/notificationService';
 import { ProjectService } from '../../../../services/projectService';
 import { SessionService } from '../../../../services/sessionService';
 import { StudentDataService } from '../../../../services/studentDataService';
-import { StudentStatusService } from '../../../../services/studentStatusService';
+import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TagService } from '../../../../services/tagService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
 import { UtilService } from '../../../../services/utilService';
 import { NodeAdvancedPathAuthoringComponent } from './node-advanced-path-authoring.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('NodeAdvancedPathAuthoringComponent', () => {
   let component: NodeAdvancedPathAuthoringComponent;
@@ -25,17 +26,23 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatFormFieldModule, MatIconModule, UpgradeModule],
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        UpgradeModule
+      ],
       declarations: [NodeAdvancedPathAuthoringComponent],
       providers: [
         AchievementService,
         AnnotationService,
+        ClassroomStatusService,
         ConfigService,
         NotificationService,
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         TeacherDataService,
         TeacherProjectService,

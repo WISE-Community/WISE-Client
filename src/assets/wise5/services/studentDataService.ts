@@ -81,7 +81,6 @@ export class StudentDataService extends DataService {
     }
   };
 
-  $q: any;
   $translate: any;
   private deleteKeyPressedSource: Subject<any> = new Subject<any>();
   public deleteKeyPressed$: Observable<any> = this.deleteKeyPressedSource.asObservable();
@@ -128,54 +127,6 @@ export class StudentDataService extends DataService {
     this.componentStudentDataSource.next(componentStudentData);
   }
 
-  handleNodeStatusesChanged() {
-    this.AnnotationService.calculateActiveGlobalAnnotationGroups();
-    const globalAnnotationGroups = this.AnnotationService.getActiveGlobalAnnotationGroups();
-    globalAnnotationGroups.map((globalAnnotationGroup) => {
-      const globalAnnotations = globalAnnotationGroup.annotations;
-      globalAnnotations.map((globalAnnotation) => {
-        if (globalAnnotation.data != null && globalAnnotation.data.isGlobal) {
-          this.processGlobalAnnotation(globalAnnotation);
-        }
-      });
-    });
-  }
-
-  processGlobalAnnotation(globalAnnotation) {
-    const unGlobalizeConditional = globalAnnotation.data.unGlobalizeConditional;
-    if (unGlobalizeConditional === 'any') {
-      this.processGlobalAnnotationAnyConditional(globalAnnotation);
-    } else if (unGlobalizeConditional === 'all') {
-      this.processGlobalAnnotationAllConditional(globalAnnotation);
-    }
-  }
-
-  processGlobalAnnotationAnyConditional(globalAnnotation) {
-    let anySatified = false;
-    const unGlobalizeCriteriaArray = globalAnnotation.data.unGlobalizeCriteria;
-    for (const unGlobalizeCriteria of unGlobalizeCriteriaArray) {
-      const unGlobalizeCriteriaResult = this.evaluateCriteria(unGlobalizeCriteria);
-      anySatified = anySatified || unGlobalizeCriteriaResult;
-    }
-    if (anySatified) {
-      globalAnnotation.data.unGlobalizedTimestamp = Date.parse(new Date().toString());
-      this.saveAnnotations([globalAnnotation]);
-    }
-  }
-
-  processGlobalAnnotationAllConditional(globalAnnotation) {
-    let allSatisfied = true;
-    const unGlobalizeCriteriaArray = globalAnnotation.data.unGlobalizeCriteria;
-    for (const unGlobalizeCriteria of unGlobalizeCriteriaArray) {
-      const unGlobalizeCriteriaResult = this.evaluateCriteria(unGlobalizeCriteria);
-      allSatisfied = allSatisfied && unGlobalizeCriteriaResult;
-    }
-    if (allSatisfied) {
-      globalAnnotation.data.unGlobalizedTimestamp = Date.parse(new Date().toString());
-      this.saveAnnotations([globalAnnotation]);
-    }
-  }
-
   retrieveStudentData() {
     this.nodeStatuses = {};
     if (this.ConfigService.isPreview()) {
@@ -190,7 +141,7 @@ export class StudentDataService extends DataService {
       componentStates: [],
       events: [],
       annotations: [],
-      username: this.upgrade.$injector.get('$filter')('translate')('PREVIEW_STUDENT'),
+      username: $localize`Preview Student`,
       userId: '0'
     };
     this.AnnotationService.setAnnotations(this.studentData.annotations);
@@ -237,7 +188,9 @@ export class StudentDataService extends DataService {
 
   retrieveRunStatus() {
     if (this.ConfigService.isPreview()) {
-      this.runStatus = {};
+      this.runStatus = {
+        periods: []
+      };
     } else {
       const params = new HttpParams().set('runId', this.ConfigService.getConfigParam('runId'));
       const options = {
@@ -248,6 +201,9 @@ export class StudentDataService extends DataService {
         .toPromise()
         .then((runStatus: any) => {
           this.runStatus = runStatus;
+          if (this.runStatus != null && this.runStatus.periods == null) {
+            this.runStatus.periods = [];
+          }
         });
     }
   }
@@ -268,7 +224,6 @@ export class StudentDataService extends DataService {
     this.updateStepNodeStatuses();
     this.updateGroupNodeStatuses();
     this.maxScore = this.getMaxScore();
-    this.handleNodeStatusesChanged();
     this.broadcastNodeStatusesChanged();
   }
 
@@ -596,11 +551,15 @@ export class StudentDataService extends DataService {
     return branchPathTakenEvents;
   }
 
-  evaluateChoiceChosenCriteria(criteria) {
+  evaluateChoiceChosenCriteria(criteria: any): boolean {
     const serviceName = 'MultipleChoiceService';
     if (this.upgrade.$injector.has(serviceName)) {
       const service = this.upgrade.$injector.get(serviceName);
-      return service.choiceChosen(criteria);
+      const latestComponentState = this.getLatestComponentStateByNodeIdAndComponentId(
+        criteria.params.nodeId,
+        criteria.params.componentId
+      );
+      return latestComponentState != null && service.choiceChosen(criteria, latestComponentState);
     }
     return false;
   }
@@ -822,9 +781,7 @@ export class StudentDataService extends DataService {
   saveComponentEvent(component, category, event, data) {
     if (component == null || category == null || event == null) {
       alert(
-        this.upgrade.$injector.get('$filter')('translate')(
-          'STUDENT_DATA_SERVICE_SAVE_COMPONENT_EVENT_COMPONENT_CATEGORY_EVENT_ERROR'
-        )
+        $localize`StudentDataService.saveComponentEvent: component, category, event args must not be null`
       );
       return;
     }
@@ -834,9 +791,7 @@ export class StudentDataService extends DataService {
     const componentType = component.componentType;
     if (nodeId == null || componentId == null || componentType == null) {
       alert(
-        this.upgrade.$injector.get('$filter')('translate')(
-          'STUDENT_DATA_SERVICE_SAVE_COMPONENT_EVENT_NODE_ID_COMPONENT_ID_COMPONENT_TYPE_ERROR'
-        )
+        $localize`StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null`
       );
       return;
     }
@@ -845,11 +800,7 @@ export class StudentDataService extends DataService {
 
   saveVLEEvent(nodeId, componentId, componentType, category, event, data) {
     if (category == null || event == null) {
-      alert(
-        this.upgrade.$injector.get('$filter')('translate')(
-          'STUDENT_DATA_SERVICE_SAVE_VLE_EVENT_CATEGORY_EVENT_ERROR'
-        )
-      );
+      alert($localize`StudentDataService.saveVLEEvent: category and event args must not be null`);
       return;
     }
     const context = 'VLE';
@@ -962,9 +913,7 @@ export class StudentDataService extends DataService {
     };
     this.copyClientSaveTimeToServerSaveTime(savedStudentDataResponse);
     this.handleSaveToServerSuccess(savedStudentDataResponse);
-    const deferred = this.upgrade.$injector.get('$q').defer();
-    deferred.resolve(savedStudentDataResponse);
-    return deferred.promise;
+    return Promise.resolve(savedStudentDataResponse);
   }
 
   copyClientSaveTimeToServerSaveTime(studentDataResponse: any): void {
@@ -997,11 +946,8 @@ export class StudentDataService extends DataService {
        * server
        */
       this.updateNodeStatuses();
-      this.saveStudentStatus();
     }
-    const deferred = this.upgrade.$injector.get('$q').defer();
-    deferred.resolve(savedStudentDataResponse);
-    return deferred.promise;
+    return Promise.resolve(savedStudentDataResponse);
   }
 
   processSavedStudentWorkList(savedStudentWorkList) {
@@ -1087,45 +1033,7 @@ export class StudentDataService extends DataService {
 
   handleSaveToServerError() {
     this.saveToServerRequestCount -= 1;
-    const deferred = this.upgrade.$injector.get('$q').defer();
-    deferred.resolve();
-    return deferred.promise;
-  }
-
-  saveStudentStatus() {
-    if (!this.ConfigService.isPreview() && this.ConfigService.isRunActive()) {
-      const runId = this.ConfigService.getRunId();
-      const periodId = this.ConfigService.getPeriodId();
-      const workgroupId = this.ConfigService.getWorkgroupId();
-      const currentNodeId = this.getCurrentNodeId();
-      const nodeStatuses = this.getNodeStatuses();
-      const projectCompletion = this.getProjectCompletion();
-      const studentStatusJSON = {
-        runId: runId,
-        periodId: periodId,
-        workgroupId: workgroupId,
-        currentNodeId: currentNodeId,
-        nodeStatuses: nodeStatuses,
-        projectCompletion: projectCompletion
-      };
-      const studentStatusParams = {
-        runId: runId,
-        periodId: periodId,
-        workgroupId: workgroupId,
-        status: angular.toJson(studentStatusJSON)
-      };
-      return this.http
-        .post(this.ConfigService.getStudentStatusURL(), studentStatusParams)
-        .toPromise()
-        .then(
-          (result) => {
-            return true;
-          },
-          (result) => {
-            return false;
-          }
-        );
-    }
+    return Promise.resolve({});
   }
 
   getLatestComponentState() {
@@ -1366,16 +1274,19 @@ export class StudentDataService extends DataService {
     return result;
   }
 
-  isComponentCompleted(nodeId, componentId) {
-    const componentStates = this.getComponentStatesByNodeIdAndComponentId(nodeId, componentId);
-    const componentEvents = this.getEventsByNodeIdAndComponentId(nodeId, componentId);
-    const nodeEvents = this.getEventsByNodeId(nodeId);
-    const node = this.ProjectService.getNodeById(nodeId);
+  private isComponentCompleted(nodeId: string, componentId: string): boolean {
     const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
     if (component != null) {
+      const node = this.ProjectService.getNodeById(nodeId);
       const componentType = component.type;
       const service = this.upgrade.$injector.get(componentType + 'Service');
-      return service.isCompleted(component, componentStates, componentEvents, nodeEvents, node);
+      if (['OpenResponse', 'Discussion'].includes(componentType)) {
+        return service.isCompletedV2(node, component, this.studentData);
+      } else {
+        const componentStates = this.getComponentStatesByNodeIdAndComponentId(nodeId, componentId);
+        const nodeEvents = this.getEventsByNodeId(nodeId);
+        return service.isCompleted(component, componentStates, nodeEvents, node);
+      }
     }
     return false;
   }
@@ -1474,139 +1385,6 @@ export class StudentDataService extends DataService {
     } else {
       return null;
     }
-  }
-
-  isCompletionCriteriaSatisfied(completionCriteria) {
-    let result = true;
-    if (completionCriteria.inOrder) {
-      result = this.isInOrderCompletionCriteriaSatisfied(completionCriteria);
-    }
-    return result;
-  }
-
-  isInOrderCompletionCriteriaSatisfied(completionCriteria) {
-    let result = true;
-    let tempTimestamp = 0;
-    for (const completionCriterion of completionCriteria.criteria) {
-      const functionName = completionCriterion.name;
-      if (functionName == 'isSubmitted') {
-        const tempComponentState = this.getComponentStateSubmittedAfter(
-          completionCriterion.nodeId,
-          completionCriterion.componentId,
-          tempTimestamp
-        );
-        if (tempComponentState == null) {
-          return false;
-        } else {
-          tempTimestamp = tempComponentState.serverSaveTime;
-        }
-      } else if (functionName == 'isSaved') {
-        const tempComponentState = this.getComponentStateSavedAfter(
-          completionCriterion.nodeId,
-          completionCriterion.componentId,
-          tempTimestamp
-        );
-        if (tempComponentState == null) {
-          return false;
-        } else {
-          tempTimestamp = tempComponentState.serverSaveTime;
-        }
-      } else if (functionName == 'isVisited') {
-        const tempEvent = this.getVisitEventAfter(completionCriterion.nodeId, tempTimestamp);
-        if (tempEvent == null) {
-          return false;
-        } else {
-          tempTimestamp = tempEvent.serverSaveTime;
-        }
-      }
-    }
-    return result;
-  }
-
-  getComponentStateSavedAfter(nodeId, componentId, timestamp) {
-    for (const componentState of this.studentData.componentStates) {
-      if (
-        componentState.nodeId === nodeId &&
-        componentState.componentId === componentId &&
-        componentState.serverSaveTime > timestamp
-      ) {
-        return componentState;
-      }
-    }
-    return null;
-  }
-
-  getComponentStateSubmittedAfter(nodeId, componentId, timestamp) {
-    for (const componentState of this.studentData.componentStates) {
-      if (
-        componentState.nodeId === nodeId &&
-        componentState.componentId === componentId &&
-        componentState.serverSaveTime > timestamp &&
-        componentState.isSubmit
-      ) {
-        return componentState;
-      }
-    }
-    return null;
-  }
-
-  getVisitEventAfter(nodeId, timestamp) {
-    for (const tempEvent of this.studentData.events) {
-      if (
-        tempEvent.nodeId === nodeId &&
-        tempEvent.serverSaveTime > timestamp &&
-        tempEvent.event === 'nodeEntered'
-      ) {
-        return tempEvent;
-      }
-    }
-    return null;
-  }
-
-  getClassmateStudentWork(nodeId, componentId, periodId) {
-    let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('nodeId', nodeId + '')
-      .set('componentId', componentId + '')
-      .set('getStudentWork', true + '')
-      .set('getEvents', false + '')
-      .set('getAnnotations', false + '')
-      .set('onlyGetLatest', true + '');
-    if (periodId != null) {
-      params = params.set('periodId', periodId);
-    }
-    const options = {
-      params: params
-    };
-    return this.http
-      .get(this.ConfigService.getConfigParam('studentDataURL'), options)
-      .toPromise()
-      .then((resultData: any) => {
-        return resultData.studentWorkList;
-      });
-  }
-
-  getClassmateScores(nodeId, componentId, periodId) {
-    let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('nodeId', nodeId + '')
-      .set('componentId', componentId + '')
-      .set('getStudentWork', false + '')
-      .set('getEvents', false + '')
-      .set('getAnnotations', true + '')
-      .set('onlyGetLatest', false + '');
-    if (periodId != null) {
-      params = params.set('periodId', periodId);
-    }
-    const options = {
-      params: params
-    };
-    return this.http
-      .get(this.ConfigService.getConfigParam('studentDataURL'), options)
-      .toPromise()
-      .then((resultData: any) => {
-        return resultData.annotations;
-      });
   }
 
   getStudentWorkById(id) {

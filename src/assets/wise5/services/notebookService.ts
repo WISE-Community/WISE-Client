@@ -9,6 +9,8 @@ import { StudentAssetService } from './studentAssetService';
 import { StudentDataService } from './studentDataService';
 import { Subject, Subscription } from 'rxjs';
 import { UtilService } from './utilService';
+import { MatDialog } from '@angular/material/dialog';
+import { EditNotebookItemDialogComponent } from '../themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component';
 
 @Injectable()
 export class NotebookService {
@@ -73,6 +75,7 @@ export class NotebookService {
   public reportFullScreen$ = this.reportFullScreenSource.asObservable();
 
   constructor(
+    private dialog: MatDialog,
     private upgrade: UpgradeModule,
     public http: HttpClient,
     private ConfigService: ConfigService,
@@ -159,19 +162,43 @@ export class NotebookService {
     isFileUploadEnabled: boolean,
     studentWorkIds: number[]
   ): void {
-    this.upgrade.$injector.get('$mdDialog').show({
-      templateUrl: `${this.ProjectService.getThemePath()}/notebook/editNotebookItem.html`,
-      controller: 'EditNotebookItemController',
-      controllerAs: 'editNotebookItemController',
-      bindToController: true,
-      locals: {
-        note: note,
-        isEditMode: isEditMode,
+    this.dialog.open(EditNotebookItemDialogComponent, {
+      width: '600px',
+      data: {
+        copyNotebookItem: (notebookItemId: string) => {
+          return this.copyNotebookItem(notebookItemId);
+        },
         file: file,
-        text: text,
-        studentWorkIds: studentWorkIds,
+        isEditMode: isEditMode,
         isEditTextEnabled: isEditTextEnabled,
-        isFileUploadEnabled: isFileUploadEnabled
+        isFileUploadEnabled: isFileUploadEnabled,
+        note: note,
+        notebookConfig: this.config,
+        saveNotebookItem: (
+          notebookItemId,
+          nodeId,
+          localNotebookItemId,
+          type,
+          title,
+          content,
+          groups,
+          clientSaveTime,
+          clientDeleteTime
+        ) => {
+          return this.saveNotebookItem(
+            notebookItemId,
+            nodeId,
+            localNotebookItemId,
+            type,
+            title,
+            content,
+            groups,
+            clientSaveTime,
+            clientDeleteTime
+          );
+        },
+        studentWorkIds: studentWorkIds,
+        text: text
       }
     });
   }
@@ -659,6 +686,11 @@ export class NotebookService {
 
   broadcastShowReportAnnotations() {
     this.showReportAnnotationsSource.next();
+  }
+
+  closeNotes(): void {
+    this.setNotesVisible(false);
+    this.setInsertMode({ insertMode: false });
   }
 
   setNotesVisible(value: boolean): void {

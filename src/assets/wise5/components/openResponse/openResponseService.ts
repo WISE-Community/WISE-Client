@@ -2,16 +2,16 @@
 
 import { Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
-import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
+import { OpenResponseCompletionCriteriaService } from './openResponseCompletionCriteriaService';
 
 @Injectable()
 export class OpenResponseService extends ComponentService {
   constructor(
-    protected StudentDataService: StudentDataService,
+    private completionCriteriaService: OpenResponseCompletionCriteriaService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {
@@ -26,22 +26,26 @@ export class OpenResponseService extends ComponentService {
     return component;
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
-    if (component.completionCriteria != null) {
-      return this.StudentDataService.isCompletionCriteriaSatisfied(component.completionCriteria);
-    } else if (this.hasComponentState(componentStates)) {
-      return this.isCompletedByComponentStates(component, componentStates, node);
-    }
-    return false;
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any): boolean {
+    throw new Error('No longer used');
   }
 
-  isCompletedByComponentStates(component: any, componentStates: any[], node: any) {
+  isCompletedV2(node: any, component: any, studentData: any) {
+    if (component.completionCriteria != null) {
+      return this.completionCriteriaService.isSatisfied(studentData, component.completionCriteria);
+    } else {
+      const componentStates = studentData.componentStates.filter(
+        (componentState) =>
+          componentState.nodeId === node.id && componentState.componentId == component.id
+      );
+      if (this.hasComponentState(componentStates)) {
+        return this.isCompletedByComponentStates(component, componentStates, node);
+      }
+      return false;
+    }
+  }
+
+  private isCompletedByComponentStates(component: any, componentStates: any[], node: any) {
     if (this.isSubmitRequired(node, component)) {
       return this.isAnyComponentStateHasResponseAndIsSubmit(componentStates);
     } else {
@@ -109,7 +113,7 @@ export class OpenResponseService extends ComponentService {
     return (response != null && response !== '') || attachments.length > 0;
   }
 
-  isAnyComponentStateHasResponse(componentStates: any[]) {
+  private isAnyComponentStateHasResponse(componentStates: any[]) {
     for (let c = componentStates.length - 1; c >= 0; c--) {
       if (this.hasResponse(componentStates[c])) {
         return true;
@@ -118,7 +122,7 @@ export class OpenResponseService extends ComponentService {
     return false;
   }
 
-  isAnyComponentStateHasResponseAndIsSubmit(componentStates: any[]) {
+  private isAnyComponentStateHasResponseAndIsSubmit(componentStates: any[]) {
     for (let c = componentStates.length - 1; c >= 0; c--) {
       const componentState = componentStates[c];
       if (this.hasResponse(componentState) && componentState.isSubmit) {

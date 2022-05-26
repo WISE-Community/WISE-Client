@@ -1,0 +1,28 @@
+<div *ngIf="isPeerChatWorkgroupsResponseReceived && !isPeerChatWorkgroupsAvailable" class="notice mat-body-2" i18n>
+  This Peer Chat activity is not yet available. Please check back later or wait for a notification to return.
+  <!-- TODO: Show different message when student has not completed required previous component(s) -->
+</div>
+<ng-container *ngIf="isPeerChatWorkgroupsAvailable">
+  <component-header [componentContent]="componentContent"></component-header>
+  <div fxLayout="column"
+      fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="start start"
+      fxLayoutGap="16px">
+    <div *ngIf="componentContent.questionBank.length > 0"
+        fxFlex
+        fxFlex.gt-sm="40"
+        fxFlexOrder="1"
+        fxFlexOrder.gt-sm="2">
+      <peer-chat-question-bank [questions]="componentContent.questionBank"></peer-chat-question-bank>
+    </div>
+    <div fxFlex
+        fxFlex.gt-sm="60"
+        fxFlexOrder="2"
+        fxFlexOrder.gt-sm="1">
+      <peer-chat-chat-box [messages]="peerChatMessages"
+          [myWorkgroupId]="myWorkgroupId"
+          [workgroupInfos]="peerChatWorkgroupInfos"
+          (onSubmit)="submitStudentResponse($event)"></peer-chat-chat-box>
+    </div>
+  </div>
+</ng-container>

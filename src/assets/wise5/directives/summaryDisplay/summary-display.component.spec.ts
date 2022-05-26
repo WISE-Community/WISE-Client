@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
+import { SummaryService } from '../../components/summary/summaryService';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
@@ -15,8 +15,8 @@ import { SummaryDisplay } from './summary-display.component';
 let component: SummaryDisplay;
 let fixture: ComponentFixture<SummaryDisplay>;
 
-describe('SummaryDisplay', () => {
-  configureTestSuite(() => {
+describe('SummaryDisplayComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, UpgradeModule],
       declarations: [SummaryDisplay],
@@ -26,14 +26,12 @@ describe('SummaryDisplay', () => {
         ProjectService,
         SessionService,
         StudentDataService,
+        SummaryService,
         TagService,
         UtilService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(SummaryDisplay);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -57,7 +55,8 @@ describe('SummaryDisplay', () => {
   filterLatestScoreAnnotations();
   getChartColors();
   getDataPointColor();
-  getGraphTitle();
+  getGraphForSelf();
+  getGraphTitleForPeriod();
   getGraphTitleForClass();
   getIndexByName();
   getPercentOfClassRespondedText();
@@ -67,7 +66,6 @@ describe('SummaryDisplay', () => {
   getTotalWorkgroups();
   hasCorrectAnswer();
   initializeOtherComponent();
-  initializePeriodId();
   setCustomLabelColors();
   setLatestAnnotationIfNewer();
   setNumDummySamples();
@@ -228,23 +226,6 @@ function initializeOtherComponent() {
       component.initializeOtherComponent();
       expect(component.otherComponent).toEqual(otherComponent);
       expect(component.otherComponentType).toEqual(otherComponentType);
-    });
-  });
-}
-
-function initializePeriodId() {
-  describe('initializePeriodId', () => {
-    it('should initialize period id', () => {
-      spyOn(component, 'isClassroomMonitor').and.returnValue(true);
-      spyOn(component, 'isSourcePeriod').and.returnValue(true);
-      const periodId = 10;
-      component.dataService = {
-        currentPeriod: {
-          periodId: periodId
-        }
-      };
-      component.initializePeriodId();
-      expect(component.periodId).toEqual(periodId);
     });
   });
 }
@@ -477,37 +458,52 @@ function getChartColors() {
   });
 }
 
-function getGraphTitleForClass() {
-  describe('getGraphTitleForClass', () => {
-    it('should get graph title for class when student data type is responses', () => {
-      expectGraphTitleForClass('responses');
+function getGraphTitleForPeriod() {
+  describe('getGraphTitleForPeriod', () => {
+    it('should get graph title for period when student data type is responses', () => {
+      expectGraphTitleForX('Period', 'responses');
     });
-    it('should get graph title for class when student data type is scores', () => {
-      expectGraphTitleForClass('scores');
+    it('should get graph title for period when student data type is scores', () => {
+      expectGraphTitleForX('Period', 'scores');
     });
   });
 }
 
-function expectGraphTitleForClass(studentDataType: string) {
-  setResponseNumbers(component);
-  component.studentDataType = studentDataType;
-  const title = component.getGraphTitleForClass();
-  const upperCaseStudentDataType = studentDataType[0].toUpperCase() + studentDataType.substring(1);
-  expect(title).toEqual(`Class ${upperCaseStudentDataType} | 60% Responded (6/10)`);
+function getGraphTitleForClass() {
+  describe('getGraphTitleForClass', () => {
+    it('should get graph title for class when student data type is responses', () => {
+      expectGraphTitleForX('Class', 'responses');
+    });
+    it('should get graph title for class when student data type is scores', () => {
+      expectGraphTitleForX('Class', 'scores');
+    });
+  });
 }
 
-function getGraphTitle() {
+function expectGraphTitleForX(source: string, studentDataType: string) {
+  setResponseNumbers(component);
+  component.studentDataType = studentDataType;
+  let title: string;
+  if (source === 'Period') {
+    title = component.getGraphTitleForPeriod();
+  } else {
+    title = component.getGraphTitleForClass();
+  }
+  const upperCaseStudentDataType = studentDataType[0].toUpperCase() + studentDataType.substring(1);
+  expect(title).toEqual(`${source} ${upperCaseStudentDataType} | 60% Responded (6/10)`);
+}
+
+function getGraphForSelf() {
   describe('getGraphTitle', () => {
-    it('should get graph title when source is self', () => {
+    it('should get graph title for self when student data type is responses', () => {
       component.source = 'self';
+      component.studentDataType = 'responses';
       expect(component.getGraphTitle()).toEqual('Your Response');
     });
-    it('should get graph title when source is class', () => {
-      component.source = 'period';
-      setResponseNumbers(component);
-      component.studentDataType = 'responses';
-      const title = component.getGraphTitle();
-      expect(title).toEqual(`Class Responses | 60% Responded (6/10)`);
+    it('should get graph title for self when student data type is scores', () => {
+      component.source = 'self';
+      component.studentDataType = 'scores';
+      expect(component.getGraphTitle()).toEqual('Your Score');
     });
   });
 }

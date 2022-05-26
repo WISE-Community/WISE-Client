@@ -3,16 +3,18 @@
 import { NotificationService } from '../../../../services/notificationService';
 import * as angular from 'angular';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { Notification } from '../../../../../../app/domain/notification';
 
 class NotificationsMenuController {
   $translate: any;
   newNotifications: any;
 
-  static $inject = ['$filter', '$mdDialog', 'NotificationService', 'ProjectService'];
+  static $inject = ['$filter', '$mdDialog', '$state', 'NotificationService', 'ProjectService'];
 
   constructor(
     $filter: any,
     private $mdDialog: any,
+    private $state: any,
     private NotificationService: NotificationService,
     private ProjectService: TeacherProjectService
   ) {
@@ -37,14 +39,19 @@ class NotificationsMenuController {
     });
   }
 
-  dismissAllNotifications() {
+  dismissAllNotifications(): void {
     this.newNotifications.map((newNotification) => {
       this.dismissNotification(newNotification);
     });
   }
 
-  dismissNotification(notification) {
+  dismissNotification(notification: Notification): void {
     this.NotificationService.dismissNotification(notification);
+  }
+
+  dismissNotificationAndVisitNode(notification: Notification): void {
+    this.dismissNotification(notification);
+    this.$state.go('root.cm.unit.node', { nodeId: notification.nodeId });
   }
 }
 
@@ -61,19 +68,20 @@ const NotificationsMenu = {
             <md-toolbar md-theme="light" class="account-menu__info md-subhead md-whiteframe-1dp" layout="row" layout-align="start center">
                 <span class="accent account-menu__info__title" layout="row" layout-align="start center"><md-icon class="accent"> notifications </md-icon>&nbsp;<span translate="ALERTS"></span></span>
                 <span flex></span>
-                <!--<md-button class="md-icon-button"
-                           aria-label="Clear all notifications"
-                           md-prevent-menu-close="md-prevent-menu-close"
-                           ng-disabled="$ctrl.newNotifications.length < 1"
-                           ng-click="$ctrl.confirmDismissAllNotifications($event)">
-                    <md-icon> clear_all </md-icon>-->
+                  <md-button ng-if="$ctrl.newNotifications.length"
+                             class="md-icon-button"
+                             aria-label="Clear all notifications"
+                             md-prevent-menu-close="md-prevent-menu-close"
+                             ng-disabled="$ctrl.newNotifications.length < 1"
+                             ng-click="$ctrl.confirmDismissAllNotifications($event)">
+                  <md-icon> clear_all </md-icon>
                 </md-button>
             </md-toolbar>
             <md-content class="account-menu__actions" flex>
                 <div class="md-padding center" ng-if="!$ctrl.newNotifications.length"><span class="md-body-1" translate="NO_ALERTS"></span></div>
                 <md-list class="notification-list" ng-if="$ctrl.newNotifications.length">
                     <md-list-item ng-repeat="notification in $ctrl.newNotifications track by $index"
-                                  ng-click="$ctrl.dismissNotification(notification)"
+                                  ng-click="$ctrl.dismissNotificationAndVisitNode(notification)"
                                   md-autofocus="$first"
                                   class="md-2-line">
                         <div class="md-list-item-text">

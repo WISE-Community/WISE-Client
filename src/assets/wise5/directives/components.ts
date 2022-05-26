@@ -4,8 +4,6 @@ import * as angular from 'angular';
 import Compile from './compile/compile';
 import DisableDeleteKeypress from './disableDeleteKeypress/disableDeleteKeypress';
 import Draggable from './draggable/draggable';
-import GlobalAnnotations from './globalAnnotations/globalAnnotations';
-import GlobalAnnotationsList from './globalAnnotationsList/globalAnnotationsList';
 import ListenForDeleteKeypress from './listenForDeleteKeypress/listenForDeleteKeypress';
 import MilestoneReportGraph from './milestoneReportGraph/milestoneReportGraph';
 import Sticky from './sticky/sticky';
@@ -25,8 +23,6 @@ Components.directive(
 );
 Components.component('disableDeleteKeypress', DisableDeleteKeypress);
 Components.component('draggable', Draggable);
-Components.component('globalAnnotations', GlobalAnnotations);
-Components.component('globalAnnotationsList', GlobalAnnotationsList);
 Components.component('listenForDeleteKeypress', ListenForDeleteKeypress);
 Components.directive(
   'milestoneReportData',

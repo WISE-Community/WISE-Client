@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { MatMenu } from '@angular/material/menu';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
@@ -7,10 +8,15 @@ import { StudentDataService } from '../../services/studentDataService';
 @Component({
   selector: 'student-account-menu',
   templateUrl: './student-account-menu.component.html',
-  styleUrls: ['./student-account-menu.component.scss']
+  styleUrls: ['./student-account-menu.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class StudentAccountMenuComponent implements OnInit {
+  @ViewChild(MatMenu, { static: true })
+  menu: MatMenu;
+
   hideTotalScores: boolean;
+  isAuthenticated: boolean;
   maxScore: number;
   nodeStatuses: any;
   rootNode: any;
@@ -31,13 +37,14 @@ export class StudentAccountMenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isAuthenticated = this.sessionService.isAuthenticated();
     this.nodeStatuses = this.studentDataService.nodeStatuses;
-    this.rootNode = this.projectService.rootNode;
+    this.rootNode = this.projectService.getProjectRootNode();
     this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
     this.workgroupId = this.configService.getWorkgroupId();
     this.usersInWorkgroup = this.configService.getUsernamesByWorkgroupId(this.workgroupId);
     this.totalScoreNum = this.studentDataService.getTotalScore();
-    this.totalScore = typeof(this.totalScoreNum) === 'number' ? this.totalScoreNum.toString() : '-';
+    this.totalScore = typeof this.totalScoreNum === 'number' ? this.totalScoreNum.toString() : '-';
     this.maxScore = this.studentDataService.maxScore;
     this.scorePercentage = Math.ceil((100 * this.totalScoreNum) / this.maxScore);
     this.usernamesDisplay = this.getUsernamesDisplay(this.usersInWorkgroup);

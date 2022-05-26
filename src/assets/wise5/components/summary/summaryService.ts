@@ -3,7 +3,9 @@
 import { ComponentService } from '../componentService';
 import { UtilService } from '../../services/utilService';
 import { Injectable } from '@angular/core';
-import { StudentDataService } from '../../services/studentDataService';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from '../../services/configService';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class SummaryService extends ComponentService {
@@ -11,10 +13,11 @@ export class SummaryService extends ComponentService {
   componentsWithResponsesSummary: string[];
 
   constructor(
-    protected StudentDataService: StudentDataService,
+    private configService: ConfigService,
+    private http: HttpClient,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
     this.componentsWithScoresSummary = [
       'Animation',
       'AudioOscillator',
@@ -64,5 +67,25 @@ export class SummaryService extends ComponentService {
 
   isResponsesSummaryAvailableForComponentType(componentType) {
     return this.componentsWithResponsesSummary.indexOf(componentType) != -1;
+  }
+
+  getLatestClassmateStudentWork(
+    nodeId: string,
+    componentId: string,
+    source: string
+  ): Observable<any> {
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
+    return this.http.get(
+      `/api/classmate/summary/student-work/${runId}/${periodId}/${nodeId}/${componentId}/${source}`
+    );
+  }
+
+  getLatestClassmateScores(nodeId: string, componentId: string, source: string): Observable<any> {
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
+    return this.http.get(
+      `/api/classmate/summary/scores/${runId}/${periodId}/${nodeId}/${componentId}/${source}`
+    );
   }
 }

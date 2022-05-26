@@ -4,7 +4,8 @@ import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { NodeService } from '../../../../services/nodeService';
 import { NotificationService } from '../../../../services/notificationService';
-import { StudentStatusService } from '../../../../services/studentStatusService';
+import { PeerGroupService } from '../../../../services/peerGroupService';
+import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NodeGradingViewController } from '../../nodeGrading/nodeGradingView/nodeGradingView';
@@ -23,23 +24,25 @@ class MilestoneGradingViewController extends NodeGradingViewController {
   constructor(
     protected $filter: any,
     protected AnnotationService: AnnotationService,
+    protected classroomStatusService: ClassroomStatusService,
     protected ConfigService: ConfigService,
     protected MilestoneService: MilestoneService,
     protected NodeService: NodeService,
     protected NotificationService: NotificationService,
+    protected PeerGroupService: PeerGroupService,
     protected ProjectService: TeacherProjectService,
-    protected StudentStatusService: StudentStatusService,
     protected TeacherDataService: TeacherDataService
   ) {
     super(
       $filter,
       AnnotationService,
+      classroomStatusService,
       ConfigService,
       MilestoneService,
       NodeService,
       NotificationService,
+      PeerGroupService,
       ProjectService,
-      StudentStatusService,
       TeacherDataService
     );
     const additionalSortOrder = {

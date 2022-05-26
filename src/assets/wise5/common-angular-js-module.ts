@@ -41,8 +41,6 @@ window['Highcharts'] = Highcharts;
 window['HighchartsExporting'] = HighchartsExporting;
 window['covariance'] = covariance;
 import './components/graph/graphComponentModule';
-import * as hopscotch from 'hopscotch';
-window['hopscotch'] = hopscotch;
 import './components/html/htmlComponentModule';
 import HttpInterceptor from './services/httpInterceptor';
 import './components/label/labelComponentModule';
@@ -53,6 +51,7 @@ import { NotebookService } from './services/notebookService';
 import { NotificationService } from './services/notificationService';
 import './components/openResponse/openResponseComponentModule';
 import './components/outsideURL/outsideURLComponentModule';
+import './components/peerChat/peerChatStudentComponentModule';
 import { SessionService } from './services/sessionService';
 import './vle/studentAsset/studentAsset';
 import { StudentAssetService } from './services/studentAssetService';
@@ -63,6 +62,8 @@ import { TagService } from './services/tagService';
 import { UtilService } from './services/utilService';
 import * as moment from 'moment';
 import * as SockJS from 'sockjs-client';
+import './components/showMyWork/show-my-work-student/showMyWorkStudentAngularJSComponentModule';
+import './components/showGroupWork/show-group-work-student/showGroupWorkStudentAngularJSComponentModule';
 import * as StompJS from '@stomp/stompjs';
 window['SockJS'] = SockJS;
 window['Stomp'] = StompJS.Stomp;
@@ -74,7 +75,7 @@ import { NotebookItemComponent } from '../../app/notebook/notebook-item/notebook
 import { NotebookNotesComponent } from '../../app/notebook/notebook-notes/notebook-notes.component';
 import { NotebookReportComponent } from '../../app/notebook/notebook-report/notebook-report.component';
 import { NotebookReportAnnotationsComponent } from '../../app/notebook/notebook-report-annotations/notebook-report-annotations.component';
-import EditNotebookItemController from './themes/default/notebook/editNotebookItemController';
+import { ComputerAvatarService } from './services/computerAvatarService';
 
 angular
   .module('common', [
@@ -103,6 +104,9 @@ angular
     'openResponseComponentModule',
     'outsideURLComponentModule',
     'pascalprecht.translate',
+    'peerChatStudentComponentModule',
+    'showGroupWorkStudentAngularJSComponentModule',
+    'showMyWorkStudentAngularJSComponentModule',
     'summaryComponentModule',
     'tableComponentModule',
     'ui.router'
@@ -138,6 +142,7 @@ angular
   .factory('AudioRecorderService', downgradeInjectable(AudioRecorderService))
   .factory('ConfigService', downgradeInjectable(ConfigService))
   .factory('ComponentService', downgradeInjectable(ComponentService))
+  .factory('ComputerAvatarService', downgradeInjectable(ComputerAvatarService))
   .factory('CRaterService', downgradeInjectable(CRaterService))
   .service('HttpInterceptor', HttpInterceptor)
   .service('NodeService', downgradeInjectable(NodeService))
@@ -149,7 +154,6 @@ angular
   .factory('StudentDataService', downgradeInjectable(StudentDataService))
   .factory('UtilService', downgradeInjectable(UtilService))
   .component('sideMenu', SideMenu)
-  .controller('EditNotebookItemController', EditNotebookItemController)
   .filter('Filters', Filters)
   .config([
     '$httpProvider',

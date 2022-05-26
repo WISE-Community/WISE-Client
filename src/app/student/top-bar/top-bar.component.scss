@@ -1,0 +1,67 @@
+@import
+  '~style/abstracts/variables',
+  '~style/abstracts/functions';
+  
+.topbar {
+  z-index: 3;
+  position: fixed;
+}
+
+.topbar-content {
+  max-height: 100%;
+  margin: 0 -16px;
+  padding: 0 16px;
+}
+
+.logo {
+  margin-left: 0;
+  height: 36px;
+  width: 36px;
+  vertical-align: middle;
+}
+
+.logo-link {
+  min-width: auto;
+  display: none;
+  padding: 0 4px;
+  margin-right: 12px;
+
+  @media (min-width: breakpoint('sm.min')) {
+    display: block;
+  }
+
+  &:hover, &:focus {
+      border: 0 none;
+  }
+}
+
+h3.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 66vw;
+}
+
+.constraints {
+  padding: 16px;
+}
+
+@media (max-width: breakpoint('xs.max')) {
+  .constraints, h3.title {
+    font-size: .9rem;
+  }
+}
+
+.avatar {
+  background-color: white;
+}
+
+.account-menu-container {
+  position: relative;
+}
+
+.menu-progress {
+  position: absolute;
+  right: 4px;
+  top: 5px;
+}

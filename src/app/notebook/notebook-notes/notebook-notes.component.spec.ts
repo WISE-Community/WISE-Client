@@ -1,8 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
-import { Subscription } from 'rxjs';
 import { AnnotationService } from '../../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
@@ -17,9 +16,9 @@ import { NotebookNotesComponent } from './notebook-notes.component';
 let component: NotebookNotesComponent;
 
 describe('NotebookNotesComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
       declarations: [NotebookNotesComponent],
       providers: [
         AnnotationService,
@@ -33,9 +32,6 @@ describe('NotebookNotesComponent', () => {
         UtilService
       ]
     });
-  });
-
-  beforeEach(() => {
     const fixture = TestBed.createComponent(NotebookNotesComponent);
     component = fixture.componentInstance;
   });

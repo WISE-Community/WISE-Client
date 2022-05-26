@@ -3,7 +3,7 @@
 import { AnnotationService } from '../../../../services/annotationService';
 import { ConfigService } from '../../../../services/configService';
 import { NotificationService } from '../../../../services/notificationService';
-import { StudentStatusService } from '../../../../services/studentStatusService';
+import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
 import * as $ from 'jquery';
@@ -48,10 +48,10 @@ class NavItemController {
     '$mdToast',
     '$scope',
     'AnnotationService',
+    'ClassroomStatusService',
     'ConfigService',
     'NotificationService',
     'ProjectService',
-    'StudentStatusService',
     'TeacherDataService',
     'TeacherWebSocketService'
   ];
@@ -62,10 +62,10 @@ class NavItemController {
     private $mdToast: any,
     private $scope: any,
     private AnnotationService: AnnotationService,
+    private classroomStatusService: ClassroomStatusService,
     private ConfigService: ConfigService,
     private NotificationService: NotificationService,
     private ProjectService: TeacherProjectService,
-    private StudentStatusService: StudentStatusService,
     private TeacherDataService: TeacherDataService,
     private TeacherWebSocketService: TeacherWebSocketService
   ) {
@@ -174,7 +174,7 @@ class NavItemController {
 
   subscribeStudentStatusReceived(): void {
     this.subscriptions.add(
-      this.StudentStatusService.studentStatusReceived$.subscribe(() => {
+      this.classroomStatusService.studentStatusReceived$.subscribe(() => {
         this.setWorkgroupsOnNodeData();
         this.setCurrentNodeStatus();
         this.getAlertNotifications();
@@ -353,7 +353,7 @@ class NavItemController {
   }
 
   getNodeCompletion(): number {
-    return this.StudentStatusService.getNodeCompletion(
+    return this.classroomStatusService.getNodeCompletion(
       this.nodeId,
       this.currentPeriod.periodId,
       null,
@@ -366,7 +366,7 @@ class NavItemController {
     if (workgroupId) {
       return this.AnnotationService.getTotalNodeScoreForWorkgroup(workgroupId, this.nodeId);
     } else {
-      return this.StudentStatusService.getNodeAverageScore(
+      return this.classroomStatusService.getNodeAverageScore(
         this.nodeId,
         this.currentPeriod.periodId
       );
@@ -374,7 +374,7 @@ class NavItemController {
   }
 
   getWorkgroupIdsOnNode(): any[] {
-    return this.StudentStatusService.getWorkgroupIdsOnNode(
+    return this.classroomStatusService.getWorkgroupIdsOnNode(
       this.nodeId,
       this.currentPeriod.periodId
     );
@@ -393,7 +393,7 @@ class NavItemController {
 
   setCurrentNodeStatus(): void {
     if (this.currentWorkgroup) {
-      const studentStatus = this.StudentStatusService.getStudentStatusForWorkgroupId(
+      const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(
         this.currentWorkgroup.workgroupId
       );
       this.currentNodeStatus = studentStatus.nodeStatuses[this.nodeId];

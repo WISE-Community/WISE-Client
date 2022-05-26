@@ -5,7 +5,7 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 @Component({
   selector: 'table-show-work',
   templateUrl: 'table-show-work.component.html',
-  styleUrls: ['../table-student/table-student.component.scss']
+  styleUrls: ['../table-student/table-student.component.scss', 'table-show-work.component.scss']
 })
 export class TableShowWorkComponent extends ComponentShowWorkDirective {
   tableData: any[];

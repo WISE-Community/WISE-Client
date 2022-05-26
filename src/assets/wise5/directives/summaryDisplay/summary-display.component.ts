@@ -1,12 +1,15 @@
 import * as Highcharts from 'highcharts';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
+import { SummaryService } from '../../components/summary/summaryService';
+import { from, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'summary-display',
@@ -68,6 +71,7 @@ export class SummaryDisplay {
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
     private StudentDataService: StudentDataService,
+    private summaryService: SummaryService,
     private upgrade: UpgradeModule,
     private UtilService: UtilService
   ) {}
@@ -76,7 +80,6 @@ export class SummaryDisplay {
     this.setNumDummySamples();
     this.initializeOtherComponent();
     this.initializeDataService();
-    this.initializePeriodId();
     this.initializeCustomLabelColors();
     this.initializeChangeListeners();
     if (this.doRender) {
@@ -113,12 +116,6 @@ export class SummaryDisplay {
       this.dataService = this.upgrade.$injector.get('StudentDataService');
     } else if (this.isClassroomMonitor() || this.isAuthoringPreview()) {
       this.dataService = this.upgrade.$injector.get('TeacherDataService');
-    }
-  }
-
-  initializePeriodId() {
-    if (this.isClassroomMonitor() && this.isSourcePeriod()) {
-      this.periodId = this.dataService.currentPeriod.periodId;
     }
   }
 
@@ -209,27 +206,33 @@ export class SummaryDisplay {
   }
 
   renderClassResponses() {
-    this.getComponentStates(this.nodeId, this.componentId, this.periodId).then(
+    this.getLatestStudentWork(this.nodeId, this.componentId, this.source, this.periodId).subscribe(
       (componentStates = []) => {
         this.processComponentStates(componentStates);
       }
     );
   }
 
-  getScores(nodeId, componentId, periodId) {
+  getLatestScores(
+    nodeId: string,
+    componentId: string,
+    source: string,
+    periodId: number
+  ): Observable<any[]> {
     if (this.isVLEPreview()) {
-      return this.getDummyStudentScoresForVLEPreview(nodeId, componentId);
+      return this.getDummyStudentScoresForVLEPreview();
     } else if (this.isAuthoringPreview()) {
       return this.getDummyStudentScoresForAuthoringPreview();
     } else if (this.isStudentRun()) {
-      return this.dataService
-        .getClassmateScores(nodeId, componentId, periodId)
-        .then((annotations) => {
-          return this.filterLatestScoreAnnotations(annotations);
-        });
+      return this.summaryService.getLatestClassmateScores(nodeId, componentId, source).pipe(
+        tap((scoreAnnotations) => {
+          return this.filterLatestScoreAnnotations(scoreAnnotations);
+        })
+      );
     } else if (this.isClassroomMonitor()) {
-      const annotations = this.dataService.getAnnotationsByNodeIdAndPeriodId(nodeId, periodId);
-      return this.resolveData(this.filterLatestScoreAnnotations(annotations));
+      const periodIdValue = this.getPeriodIdValue(periodId);
+      const annotations = this.dataService.getAnnotationsByNodeIdAndPeriodId(nodeId, periodIdValue);
+      return of(this.filterLatestScoreAnnotations(annotations));
     }
   }
 
@@ -271,9 +274,11 @@ export class SummaryDisplay {
 
   renderClassScores() {
     this.setMaxScore(this.otherComponent);
-    this.getScores(this.nodeId, this.componentId, this.periodId).then((annotations) => {
-      this.processScoreAnnotations(annotations);
-    });
+    this.getLatestScores(this.nodeId, this.componentId, this.source, this.periodId).subscribe(
+      (annotations) => {
+        this.processScoreAnnotations(annotations);
+      }
+    );
   }
 
   setMaxScore(component) {
@@ -284,20 +289,32 @@ export class SummaryDisplay {
     }
   }
 
-  getComponentStates(nodeId, componentId, periodId) {
+  getLatestStudentWork(
+    nodeId: string,
+    componentId: string,
+    source: string,
+    periodId: number
+  ): Observable<any> {
     if (this.isVLEPreview()) {
       return this.getDummyStudentWorkForVLEPreview(nodeId, componentId);
     } else if (this.isAuthoringPreview()) {
       return this.getDummyStudentWorkForAuthoringPreview();
     } else if (this.isStudentRun()) {
-      return this.dataService.getClassmateStudentWork(nodeId, componentId, periodId);
+      return this.summaryService.getLatestClassmateStudentWork(nodeId, componentId, source);
     } else if (this.isClassroomMonitor()) {
-      return this.dataService.retrieveLatestStudentDataByNodeIdAndComponentIdAndPeriodId(
-        nodeId,
-        componentId,
-        periodId
+      const periodIdValue = this.getPeriodIdValue(periodId);
+      return from(
+        this.dataService.retrieveLatestStudentDataByNodeIdAndComponentIdAndPeriodId(
+          nodeId,
+          componentId,
+          periodIdValue
+        )
       );
     }
+  }
+
+  getPeriodIdValue(periodId: number): number {
+    return periodId === -1 ? null : periodId;
   }
 
   filterLatestScoreAnnotations(annotations) {
@@ -324,7 +341,7 @@ export class SummaryDisplay {
     });
   }
 
-  getDummyStudentWorkForVLEPreview(nodeId, componentId) {
+  getDummyStudentWorkForVLEPreview(nodeId: string, componentId: string): Observable<any> {
     const componentStates = this.createDummyComponentStates();
     const componentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
       nodeId,
@@ -333,32 +350,24 @@ export class SummaryDisplay {
     if (componentState != null) {
       componentStates.push(componentState);
     }
-    return this.resolveData(componentStates);
+    return of(componentStates);
   }
 
-  getDummyStudentScoresForVLEPreview(nodeId, componentId) {
+  getDummyStudentScoresForVLEPreview(): Observable<any> {
     const annotations = this.createDummyScoreAnnotations();
     const annotation = this.getLatestScoreAnnotationForWorkgroup();
     if (annotation != null) {
       annotations.push(annotation);
     }
-    return this.resolveData(annotations);
+    return of(annotations);
   }
 
-  getDummyStudentWorkForAuthoringPreview() {
-    return this.resolveData(this.createDummyComponentStates());
+  getDummyStudentWorkForAuthoringPreview(): Observable<any> {
+    return of(this.createDummyComponentStates());
   }
 
-  getDummyStudentScoresForAuthoringPreview() {
-    return this.resolveData(this.createDummyScoreAnnotations());
-  }
-
-  resolveData(data) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(data);
-      });
-    });
+  getDummyStudentScoresForAuthoringPreview(): Observable<any> {
+    return of(this.createDummyScoreAnnotations());
   }
 
   createDummyComponentStates() {
@@ -718,21 +727,51 @@ export class SummaryDisplay {
   getGraphTitle() {
     if (this.isSourceSelf()) {
       return this.getGraphTitleForSelf();
+    } else if (this.isSourcePeriod()) {
+      return this.getGraphTitleForPeriod();
     } else {
       return this.getGraphTitleForClass();
     }
   }
 
   getGraphTitleForSelf() {
-    return 'Your Response';
+    if (this.isStudentDataTypeResponses()) {
+      return $localize`Your Response`;
+    } else if (this.isStudentDataTypeScores()) {
+      return $localize`Your Score`;
+    }
+  }
+
+  getGraphTitleForPeriod() {
+    if (this.isStudentDataTypeResponses()) {
+      return this.getGraphTitleWithLabelAndPercent(
+        $localize`Period Responses`,
+        this.getPercentOfClassRespondedText()
+      );
+    } else if (this.isStudentDataTypeScores()) {
+      return this.getGraphTitleWithLabelAndPercent(
+        $localize`Period Scores`,
+        this.getPercentOfClassRespondedText()
+      );
+    }
   }
 
   getGraphTitleForClass() {
     if (this.isStudentDataTypeResponses()) {
-      return $localize`Class Responses` + ' | ' + this.getPercentOfClassRespondedText();
+      return this.getGraphTitleWithLabelAndPercent(
+        $localize`Class Responses`,
+        this.getPercentOfClassRespondedText()
+      );
     } else if (this.isStudentDataTypeScores()) {
-      return $localize`Class Scores` + ' | ' + this.getPercentOfClassRespondedText();
+      return this.getGraphTitleWithLabelAndPercent(
+        $localize`Class Scores`,
+        this.getPercentOfClassRespondedText()
+      );
     }
+  }
+
+  getGraphTitleWithLabelAndPercent(label: string, percentDisplayText: string): string {
+    return `${label} | ${percentDisplayText}`;
   }
 
   getPercentOfClassRespondedText(): string {

@@ -74,6 +74,13 @@
           [componentId]="component.id"
           [componentState]="latestComponentState">
       </open-response-grading>
+      <peer-chat-grading
+          *ngIf="component.type === 'PeerChat'"
+          [nodeId]="nodeId"
+          [componentId]="component.id"
+          [componentState]="latestComponentState"
+          [workgroupId]="workgroupId">
+      </peer-chat-grading>
       <table-grading
           *ngIf="component.type === 'Table'"
           [nodeId]="nodeId"

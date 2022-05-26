@@ -11,18 +11,21 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { PossibleScoreComponent } from '../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../services/annotationService';
+import { ComputerAvatarService } from '../../services/computerAvatarService';
 import { ConfigService } from '../../services/configService';
 import { CRaterService } from '../../services/cRaterService';
+import { DialogGuidanceFeedbackService } from '../../services/dialogGuidanceFeedbackService';
 import { NodeService } from '../../services/nodeService';
 import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
+import { StudentStatusService } from '../../services/studentStatusService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
-import { MockNodeService } from '../animation/animation-authoring/animation-authoring.component.spec';
 import { MockService } from '../animation/animation-student/animation-student.component.spec';
+import { MockNodeService } from '../common/MockNodeService';
 import { ComponentService } from '../componentService';
 import { CRaterIdea } from './CRaterIdea';
 import { CRaterResponse } from './CRaterResponse';
@@ -119,8 +122,10 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
       providers: [
         AnnotationService,
         ComponentService,
+        ComputerAvatarService,
         CRaterService,
         ConfigService,
+        DialogGuidanceFeedbackService,
         DialogGuidanceService,
         { provide: NodeService, useClass: MockNodeService },
         { provide: NotebookService, useClass: MockService },
@@ -128,6 +133,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentStatusService,
         TagService,
         UtilService
       ]

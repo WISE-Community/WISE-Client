@@ -69,24 +69,6 @@ export class VLEProjectService extends ProjectService {
     return componentService.displayAnnotation(component, annotation);
   }
 
-  /**
-   * Get the global annotation properties for the specified component and score, if exists.
-   * @param component the component content
-   * @param previousScore the previousScore we want the annotation properties for, can be null,
-   * which means we just want to look at the currentScore
-   * @param currentScore the currentScore we want the annotation properties for
-   * @returns the annotation properties for the given score
-   */
-  getGlobalAnnotationGroupByScore(component, previousScore, currentScore) {
-    for (const globalAnnotationGroup of component.globalAnnotationSettings.globalAnnotationGroups) {
-      const scoreSequence = globalAnnotationGroup.enableCriteria.scoreSequence;
-      if (this.isScoreSequenceMatch(scoreSequence, previousScore, currentScore)) {
-        return globalAnnotationGroup;
-      }
-    }
-    return null;
-  }
-
   isScoreSequenceMatch(scoreSequence, previousScore, currentScore) {
     const previousScoreMatch = this.getExpectedPreviousScore(scoreSequence);
     const currentScoreMatch = this.getExpectedCurrentScore(scoreSequence);

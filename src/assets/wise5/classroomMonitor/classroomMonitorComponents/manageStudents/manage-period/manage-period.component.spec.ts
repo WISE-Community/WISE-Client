@@ -1,13 +1,14 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
+import { MatCardModule } from '@angular/material/card';
 import { of } from 'rxjs';
 import { GetWorkgroupService } from '../../../../../../app/services/getWorkgroupService';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { ConfigService } from '../../../../services/configService';
 import { ManagePeriodComponent } from './manage-period.component';
 import classmateUserInfos from '../../../../../../app/services/sampleData/sample_classmateUserInfos.json';
+import { ManageTeamsComponent } from '../manage-teams/manage-teams.component';
 
 let fixture: ComponentFixture<ManagePeriodComponent>;
 let component: ManagePeriodComponent;
@@ -21,15 +22,13 @@ workgroupsInPeriod.set(7, {
   users: [{ username: 'student0103' }, { username: 'student0104' }]
 });
 
-describe('ManagePeriod', () => {
-  configureTestSuite(() => {
+describe('ManagePeriodComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [ManagePeriodComponent],
+      imports: [HttpClientTestingModule, MatCardModule],
+      declarations: [ManagePeriodComponent, ManageTeamsComponent],
       providers: [ConfigService, GetWorkgroupService, UpgradeModule, WorkgroupService]
     });
-  });
-  beforeEach(() => {
     configService = TestBed.inject(ConfigService);
     workgroupService = TestBed.inject(WorkgroupService);
     fixture = TestBed.createComponent(ManagePeriodComponent);

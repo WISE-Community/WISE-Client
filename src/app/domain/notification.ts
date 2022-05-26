@@ -1,19 +1,21 @@
 export class Notification {
-  id: number;
-  runId: number;
-  type: string;
-  nodeId: string;
   componentId: string;
+  componentType: string;
+  data: any;
+  fromWorkgroupId: number;
+  groupId: string;
+  id: number;
+  message: string;
+  nodeId: string;
   nodePosition: string;
   nodePositionAndTitle: string;
   periodId: number;
-  fromWorkgroupId: number;
-  toWorkgroupId: number;
-  message: string;
-  data: string;
-  groupId: string;
+  runId: number;
+  serverSaveTime: number;
+  timeDismissed?: number;
   timeGenerated: number;
-  timeDismissed: number;
+  toWorkgroupId: number;
+  type: string;
   constructor(jsonObject: any = {}) {
     for (const key of Object.keys(jsonObject)) {
       if (jsonObject[key] != null) {

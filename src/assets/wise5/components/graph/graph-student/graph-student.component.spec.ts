@@ -1,13 +1,12 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Point } from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -22,6 +21,7 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
 import { GraphService } from '../graphService';
 import { GraphStudent } from './graph-student.component';
+import { of } from 'rxjs';
 
 class MockNotebookService {
   addNote() {}
@@ -31,6 +31,7 @@ class MockNodeService {
   createNewComponentState() {
     return {};
   }
+  broadcastDoneRenderingComponent() {}
 }
 
 let component: GraphStudent;
@@ -43,8 +44,8 @@ const sampleData = [
 ];
 let studentDataChangedSpy: jasmine.Spy;
 
-describe('GraphStudent', () => {
-  configureTestSuite(() => {
+describe('GraphStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
@@ -72,9 +73,6 @@ describe('GraphStudent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(GraphStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,
@@ -198,6 +196,7 @@ describe('GraphStudent', () => {
   turnOffYAxisDecimalsWhenThereAreMultipleYAxes();
   undoClicked();
   updateMinMaxAxisValues();
+  getTrialsFromClassmates();
 });
 
 function createComponentContent() {
@@ -2181,4 +2180,22 @@ function setAllSeriesColorsToMatchYAxes() {
     expect(series[2].color).toEqual('green');
     expect(series[3].color).toEqual('orange');
   });
+}
+
+function getTrialsFromClassmates() {
+  it('should get trials from classmates', fakeAsync(() => {
+    const name1 = 'Step 1';
+    const trial1 = { name: name1, show: true };
+    const trials = [trial1];
+    const componentState1 = createComponentStateObject(trials);
+    spyOn(TestBed.inject(ProjectService), 'getNodePositionAndTitleByNodeId').and.returnValue(name1);
+    spyOn(TestBed.inject(GraphService), 'getClassmateStudentWork').and.returnValue(
+      of([componentState1])
+    );
+    component
+      .getTrialsFromClassmates('node2', 'component2', 100, 'node1', 'component1', 'period')
+      .then((mergedTrials) => {
+        expect(mergedTrials).toEqual(trials);
+      });
+  }));
 }

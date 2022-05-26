@@ -10,5 +10,15 @@
   </mat-form-field>
   <edit-component-max-submit [(maxSubmitCount)]="authoringComponentContent.maxSubmitCount"
       (maxSubmitCountChange)="componentChanged()"></edit-component-max-submit>
-  <edit-dialog-guidance-feedback-rules [feedbackRules]="authoringComponentContent.feedbackRules"></edit-dialog-guidance-feedback-rules>
+  <mat-checkbox color="primary"
+      [(ngModel)]="authoringComponentContent.isComputerAvatarEnabled"
+      (ngModelChange)="componentChanged()"
+      i18n>Enable Computer Avatar</mat-checkbox>
+  <edit-dialog-guidance-computer-avatar *ngIf="authoringComponentContent.isComputerAvatarEnabled"
+      [computerAvatarSettings]="authoringComponentContent.computerAvatarSettings">
+  </edit-dialog-guidance-computer-avatar>
+  <edit-dialog-guidance-feedback-rules
+      [feedbackRules]="authoringComponentContent.feedbackRules"
+      [version]="authoringComponentContent.version">
+  </edit-dialog-guidance-feedback-rules>
 </div>

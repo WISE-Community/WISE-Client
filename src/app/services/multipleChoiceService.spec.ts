@@ -6,13 +6,11 @@ import { AnnotationService } from '../../assets/wise5/services/annotationService
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 
 let service: MultipleChoiceService;
-let studentDataService: StudentDataService;
 let choiceId1: string = 'aaaaaaaaaa';
 let choiceId2: string = 'bbbbbbbbbb';
 let choiceId3: string = 'cccccccccc';
@@ -36,13 +34,11 @@ describe('MultipleChoiceService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TagService,
         UtilService
       ]
     });
     service = TestBed.get(MultipleChoiceService);
-    studentDataService = TestBed.get(StudentDataService);
     choice1 = createChoice(choiceId1, choiceText1, '', false);
     choice2 = createChoice(choiceId2, choiceText2, '', false);
     choice3 = createChoice(choiceId3, choiceText3, '', false);
@@ -106,17 +102,8 @@ function createChoice(id: string, text: string, feedback: string, isCorrect: boo
 
 function choiceChosen() {
   function expectChoiceChosen(criteria: any, componentState: any, expectedResult: boolean) {
-    spyOn(studentDataService, 'getLatestComponentStateByNodeIdAndComponentId').and.returnValue(
-      componentState
-    );
-    expect(service.choiceChosen(criteria)).toEqual(expectedResult);
+    expect(service.choiceChosen(criteria, componentState)).toEqual(expectedResult);
   }
-  it(`should check if the student chose the choice in the criteria when the student does not have
-      any component states`, () => {
-    const criteria = createCriteria(nodeId1, componentId1, [choiceId3]);
-    const componentState = null;
-    expectChoiceChosen(criteria, componentState, false);
-  });
   it(`should check if the student chose the choice in the criteria when they did not choose the
       choice`, () => {
     const criteria = createCriteria(nodeId1, componentId1, [choiceId3]);
@@ -203,7 +190,7 @@ function isCompleted() {
     node: any,
     expectedResult: boolean
   ) {
-    expect(service.isCompleted(component, componentStates, [], [], node)).toEqual(expectedResult);
+    expect(service.isCompleted(component, componentStates, [], node)).toEqual(expectedResult);
   }
   it('should check if a component is completed when there are no component states', () => {
     expectIsCompleted({}, [], {}, false);

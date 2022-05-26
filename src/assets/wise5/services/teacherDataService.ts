@@ -72,10 +72,6 @@ export class TeacherDataService extends DataService {
     });
   }
 
-  getTranslation(key: string) {
-    return this.upgrade.$injector.get('$translate')(key);
-  }
-
   getRootScope() {
     if (this.$rootScope == null) {
       this.$rootScope = this.upgrade.$injector.get('$rootScope');
@@ -608,6 +604,11 @@ export class TeacherDataService extends DataService {
     return this.studentData.annotationsByNodeId[nodeId] || [];
   }
 
+  getAnnotationsByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
+    const annotationsByNodeId = this.getAnnotationsByNodeId(nodeId);
+    return annotationsByNodeId.filter((annotation: any) => annotation.componentId === componentId);
+  }
+
   getAnnotationsByNodeIdAndPeriodId(nodeId, periodId) {
     const annotationsByNodeId = this.studentData.annotationsByNodeId[nodeId];
     if (annotationsByNodeId != null) {
@@ -642,7 +643,7 @@ export class TeacherDataService extends DataService {
   addAllPeriods(periods: any[]): void {
     periods.unshift({
       periodId: -1,
-      periodName: this.getTranslation('allPeriods')
+      periodName: $localize`All Periods`
     });
   }
 
@@ -707,6 +708,14 @@ export class TeacherDataService extends DataService {
 
   getRunStatus() {
     return this.runStatus;
+  }
+
+  getVisiblePeriodsById(currentPeriodId: number): any {
+    if (currentPeriodId === -1) {
+      return this.getPeriods().slice(1);
+    } else {
+      return [this.getPeriodById(currentPeriodId)];
+    }
   }
 
   setCurrentWorkgroup(workgroup) {

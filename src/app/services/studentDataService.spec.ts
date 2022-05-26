@@ -6,7 +6,6 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
-import * as angular from 'angular';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 
@@ -58,8 +57,6 @@ describe('StudentDataService', () => {
     };
   });
 
-  shouldHandleNodeStatusesChanged();
-  shouldProcessGlobalAnnotationAnyConditional();
   shouldEvaluateNodeConstraintWithOneRemovalCriteria();
   shouldEvaluateNodeConstraintWithTwoRemovalCriteriaRequiringAll();
   shouldEvaluateNodeConstraintWithTwoRemovalCriteriaRequiringAny();
@@ -99,7 +96,6 @@ describe('StudentDataService', () => {
   shouldHandleSaveStudentWorkToServerSuccess();
   shouldHandleSaveEventsToServerSuccess();
   shouldHandleSaveAnnotationsToServerSuccess();
-  shouldSaveStudentStatus();
   shouldGetLatestComponentState();
   shouldCheckIsComponentSubmitDirty();
   shouldGetLatestComponentStateByNodeIdAndComponentId();
@@ -116,378 +112,10 @@ describe('StudentDataService', () => {
   shouldCheckIsCompleted();
   shouldGetLatestComponentStatesByNodeId();
   shouldGetLatestComponentStateByNodeId();
-  shouldCheckIsCompletionCriteriaSatisfied();
-  shouldGetComponentStateSavedAfter();
-  shouldGetComponentStateSubmittedAfter();
-  shouldGetVisitEventAfter();
-  shouldGetClassmateStudentWork();
-  shouldGetClassmateScores();
   shouldGetStudentWorkById();
   shouldGetMaxScore();
   shouldEvaluateCriterias();
 });
-
-function shouldHandleNodeStatusesChanged() {
-  it('should handle node statuses changed conditional any not satisfied', () => {
-    spyOn(annotationService, 'calculateActiveGlobalAnnotationGroups').and.callFake(() => {});
-    const data = {
-      isGlobal: true,
-      unGlobalizeConditional: 'any',
-      unGlobalizeCriteria: [
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component1'
-          }
-        },
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component2'
-          }
-        }
-      ]
-    };
-    const annotations = [createAnnotationGroupAnnotation(1, 'node1', 'component1', data)];
-    const globalAnnotationGroups = [
-      createAnnotationGroup('Global Annotation 1', 'node1', 'component1', 5000, annotations)
-    ];
-    spyOn(annotationService, 'getActiveGlobalAnnotationGroups').and.returnValue(
-      globalAnnotationGroups
-    );
-    spyOn(service, 'saveAnnotations').and.callFake((annotations) => {
-      return annotations;
-    });
-    const componentState1 = {
-      id: 1,
-      nodeId: 'node1',
-      componentId: 'component1',
-      clientSaveTime: 1000
-    };
-    const componentState2 = {
-      id: 2,
-      nodeId: 'node1',
-      componentId: 'component2',
-      clientSaveTime: 1000
-    };
-    spyOn(service, 'getLatestComponentStateByNodeIdAndComponentId').and.callFake(
-      (nodeId, componentId) => {
-        if (nodeId === 'node1' && componentId === 'component1') {
-          return componentState1;
-        } else if (nodeId === 'node1' && componentId === 'component2') {
-          return componentState2;
-        }
-      }
-    );
-    service.handleNodeStatusesChanged();
-    expect(service.saveAnnotations).not.toHaveBeenCalled();
-  });
-  it('should handle node statuses changed conditional any satisfied', () => {
-    spyOn(annotationService, 'calculateActiveGlobalAnnotationGroups').and.callFake(() => {});
-    const data = {
-      isGlobal: true,
-      unGlobalizeConditional: 'any',
-      unGlobalizeCriteria: [
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component1'
-          }
-        },
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component2'
-          }
-        }
-      ]
-    };
-    const annotations = [createAnnotationGroupAnnotation(1, 'node1', 'component1', data)];
-    const globalAnnotationGroups = [
-      createAnnotationGroup('Global Annotation 1', 'node1', 'component1', 5000, annotations)
-    ];
-    spyOn(annotationService, 'getActiveGlobalAnnotationGroups').and.returnValue(
-      globalAnnotationGroups
-    );
-    spyOn(service, 'saveAnnotations').and.callFake((annotations) => {
-      return annotations;
-    });
-    const componentState1 = {
-      id: 1,
-      nodeId: 'node1',
-      componentId: 'component1',
-      clientSaveTime: 1000
-    };
-    const componentState2 = {
-      id: 2,
-      nodeId: 'node1',
-      componentId: 'component2',
-      clientSaveTime: 6000
-    };
-    spyOn(service, 'getLatestComponentStateByNodeIdAndComponentId').and.callFake(
-      (nodeId, componentId) => {
-        if (nodeId === 'node1' && componentId === 'component1') {
-          return componentState1;
-        } else if (nodeId === 'node1' && componentId === 'component2') {
-          return componentState2;
-        }
-      }
-    );
-    service.handleNodeStatusesChanged();
-    expect(service.saveAnnotations).toHaveBeenCalled();
-  });
-  it('should handle node statuses changed conditional all not satisfied', () => {
-    spyOn(annotationService, 'calculateActiveGlobalAnnotationGroups').and.callFake(() => {});
-    const data = {
-      isGlobal: true,
-      unGlobalizeConditional: 'all',
-      unGlobalizeCriteria: [
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component1'
-          }
-        },
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component2'
-          }
-        }
-      ]
-    };
-    const annotations = [createAnnotationGroupAnnotation(1, 'node1', 'component1', data)];
-    const globalAnnotationGroups = [
-      createAnnotationGroup('Global Annotation 1', 'node1', 'component1', 5000, annotations)
-    ];
-    spyOn(annotationService, 'getActiveGlobalAnnotationGroups').and.returnValue(
-      globalAnnotationGroups
-    );
-    spyOn(service, 'saveAnnotations').and.callFake((annotations) => {
-      return annotations;
-    });
-    const componentState1 = {
-      id: 1,
-      nodeId: 'node1',
-      componentId: 'component1',
-      clientSaveTime: 1000
-    };
-    const componentState2 = {
-      id: 2,
-      nodeId: 'node1',
-      componentId: 'component2',
-      clientSaveTime: 6000
-    };
-    spyOn(service, 'getLatestComponentStateByNodeIdAndComponentId').and.callFake(
-      (nodeId, componentId) => {
-        if (nodeId === 'node1' && componentId === 'component1') {
-          return componentState1;
-        } else if (nodeId === 'node1' && componentId === 'component2') {
-          return componentState2;
-        }
-      }
-    );
-    service.handleNodeStatusesChanged();
-    expect(service.saveAnnotations).not.toHaveBeenCalled();
-  });
-  it('should handle node statuses changed conditional all satisfied', () => {
-    spyOn(annotationService, 'calculateActiveGlobalAnnotationGroups').and.callFake(() => {});
-    const data = {
-      isGlobal: true,
-      unGlobalizeConditional: 'all',
-      unGlobalizeCriteria: [
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component1'
-          }
-        },
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component2'
-          }
-        }
-      ]
-    };
-    const annotations = [createAnnotationGroupAnnotation(1, 'node1', 'component1', data)];
-    const globalAnnotationGroups = [
-      createAnnotationGroup('Global Annotation 1', 'node1', 'component1', 5000, annotations)
-    ];
-    spyOn(annotationService, 'getActiveGlobalAnnotationGroups').and.returnValue(
-      globalAnnotationGroups
-    );
-    spyOn(service, 'saveAnnotations').and.callFake((annotations) => {
-      return annotations;
-    });
-    const componentState1 = {
-      id: 1,
-      nodeId: 'node1',
-      componentId: 'component1',
-      clientSaveTime: 6000
-    };
-    const componentState2 = {
-      id: 2,
-      nodeId: 'node1',
-      componentId: 'component2',
-      clientSaveTime: 6000
-    };
-    spyOn(service, 'getLatestComponentStateByNodeIdAndComponentId').and.callFake(
-      (nodeId, componentId) => {
-        if (nodeId === 'node1' && componentId === 'component1') {
-          return componentState1;
-        } else if (nodeId === 'node1' && componentId === 'component2') {
-          return componentState2;
-        }
-      }
-    );
-    service.handleNodeStatusesChanged();
-    expect(service.saveAnnotations).toHaveBeenCalled();
-  });
-}
-
-function createAnnotationGroupAnnotation(id, nodeId, componentId, data) {
-  return {
-    id: id,
-    nodeId: nodeId,
-    componentId: componentId,
-    data: data
-  };
-}
-
-function createAnnotationGroup(name, nodeId, componentId, serverSaveTime, annotations) {
-  return {
-    annotationGroupName: name,
-    nodeId: nodeId,
-    componentId: componentId,
-    serverSaveTime: serverSaveTime,
-    annotations: annotations
-  };
-}
-
-function shouldProcessGlobalAnnotationAnyConditional() {
-  it('should process global annotation any conditional', () => {
-    const data = {
-      isGlobal: true,
-      unGlobalizeConditional: 'any',
-      unGlobalizeCriteria: [
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component1'
-          }
-        },
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component2'
-          }
-        }
-      ]
-    };
-    const annotation = createAnnotationGroupAnnotation(1, 'node1', 'component1', data);
-    spyOn(service, 'saveAnnotations').and.callFake((annotations) => {
-      return annotations;
-    });
-    const componentState1 = {
-      id: 1,
-      nodeId: 'node1',
-      componentId: 'component1',
-      clientSaveTime: 1000
-    };
-    const componentState2 = {
-      id: 2,
-      nodeId: 'node1',
-      componentId: 'component2',
-      clientSaveTime: 6000
-    };
-    spyOn(service, 'getLatestComponentStateByNodeIdAndComponentId').and.callFake(
-      (nodeId, componentId) => {
-        if (nodeId === 'node1' && componentId === 'component1') {
-          return componentState1;
-        } else if (nodeId === 'node1' && componentId === 'component2') {
-          return componentState2;
-        }
-      }
-    );
-    service.processGlobalAnnotationAnyConditional(annotation);
-    expect(service.saveAnnotations).toHaveBeenCalled();
-  });
-}
-
-function shouldProcessGlobalAnnotationAllConditional() {
-  it('should process global annotation all conditional', () => {
-    const data = {
-      isGlobal: true,
-      unGlobalizeConditional: 'all',
-      unGlobalizeCriteria: [
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component1'
-          }
-        },
-        {
-          name: 'isRevisedAfter',
-          params: {
-            criteriaCreatedTimestamp: 5000,
-            isRevisedAfterNodeId: 'node1',
-            isRevisedAfterComponentId: 'component2'
-          }
-        }
-      ]
-    };
-    const annotation = createAnnotationGroupAnnotation(1, 'node1', 'component1', data);
-    spyOn(service, 'saveAnnotations').and.callFake((annotations) => {
-      return annotations;
-    });
-    const componentState1 = {
-      id: 1,
-      nodeId: 'node1',
-      componentId: 'component1',
-      clientSaveTime: 6000
-    };
-    const componentState2 = {
-      id: 2,
-      nodeId: 'node1',
-      componentId: 'component2',
-      clientSaveTime: 6000
-    };
-    spyOn(service, 'getLatestComponentStateByNodeIdAndComponentId').and.callFake(
-      (nodeId, componentId) => {
-        if (nodeId === 'node1' && componentId === 'component1') {
-          return componentState1;
-        } else if (nodeId === 'node1' && componentId === 'component2') {
-          return componentState2;
-        }
-      }
-    );
-    service.processGlobalAnnotationAnyConditional(annotation);
-    expect(service.saveAnnotations).toHaveBeenCalled();
-  });
-}
 
 function shouldEvaluateNodeConstraintWithOneRemovalCriteria() {
   it('should evaluate node constraint with one removal criteria', () => {
@@ -1139,11 +767,6 @@ function shouldHandleSaveStudentWorkToServerSuccess() {
     spyOn(configService, 'getMode').and.returnValue('preview');
     spyOn($rootScope, '$broadcast');
     spyOn(service, 'updateNodeStatuses').and.callFake(() => {});
-    spyOn(service, 'saveStudentStatus').and.callFake(() => {
-      return new Promise(() => {
-        return true;
-      });
-    });
     service.saveToServerRequestCount = 1;
     service.handleSaveToServerSuccess(savedStudentDataResponse);
     expect(service.studentData.componentStates[0].serverSaveTime).toBeDefined();
@@ -1161,7 +784,6 @@ function shouldHandleSaveStudentWorkToServerSuccess() {
     );
     expect(service.saveToServerRequestCount).toEqual(0);
     expect(service.updateNodeStatuses).toHaveBeenCalled();
-    expect(service.saveStudentStatus).toHaveBeenCalled();
   });
 }
 
@@ -1201,11 +823,6 @@ function shouldHandleSaveEventsToServerSuccess() {
     };
     spyOn($rootScope, '$broadcast');
     spyOn(service, 'updateNodeStatuses').and.callFake(() => {});
-    spyOn(service, 'saveStudentStatus').and.callFake(() => {
-      return new Promise(() => {
-        return true;
-      });
-    });
     service.saveToServerRequestCount = 1;
     service.handleSaveToServerSuccess(savedStudentDataResponse);
     expect(service.studentData.events[0].serverSaveTime).toEqual(1000);
@@ -1216,7 +833,6 @@ function shouldHandleSaveEventsToServerSuccess() {
     expect(service.studentData.events[2].requestToken).toEqual(null);
     expect(service.saveToServerRequestCount).toEqual(0);
     expect(service.updateNodeStatuses).toHaveBeenCalled();
-    expect(service.saveStudentStatus).toHaveBeenCalled();
   });
 }
 
@@ -1252,11 +868,6 @@ function shouldHandleSaveAnnotationsToServerSuccess() {
     };
     spyOn(annotationService, 'broadcastAnnotationSavedToServer');
     spyOn(service, 'updateNodeStatuses').and.callFake(() => {});
-    spyOn(service, 'saveStudentStatus').and.callFake(() => {
-      return new Promise(() => {
-        return true;
-      });
-    });
     service.saveToServerRequestCount = 1;
     service.handleSaveToServerSuccess(savedStudentDataResponse);
     expect(service.studentData.annotations[0].serverSaveTime).toEqual(1000);
@@ -1270,7 +881,6 @@ function shouldHandleSaveAnnotationsToServerSuccess() {
     );
     expect(service.saveToServerRequestCount).toEqual(0);
     expect(service.updateNodeStatuses).toHaveBeenCalled();
-    expect(service.saveStudentStatus).toHaveBeenCalled();
   });
 }
 
@@ -1280,60 +890,6 @@ function createAnnotation(id, requestToken, serverSaveTime = 123) {
     requestToken: requestToken,
     serverSaveTime: serverSaveTime
   };
-}
-
-function shouldSaveStudentStatus() {
-  it('should not save student status in preview mode', () => {
-    spyOn(configService, 'isPreview').and.returnValue(true);
-    service.saveStudentStatus();
-    http.expectNone('/student');
-  });
-  it('should not save student status when the run is not active', () => {
-    spyOn(configService, 'isPreview').and.returnValue(false);
-    spyOn(configService, 'isRunActive').and.returnValue(false);
-    service.saveStudentStatus();
-    http.expectNone('/student');
-  });
-  it('should save student status', () => {
-    spyOn(configService, 'isPreview').and.returnValue(false);
-    spyOn(configService, 'isRunActive').and.returnValue(true);
-    spyOn(configService, 'getStudentStatusURL').and.returnValue('/student');
-    const runId = 1;
-    const periodId = 10;
-    const workgroupId = 100;
-    const nodeId = 'node1';
-    const nodeStatuses = { node1: { isCompleted: true } };
-    const projectCompletion: any = { completionPct: 50 };
-    spyOn(configService, 'getRunId').and.returnValue(runId);
-    spyOn(configService, 'getPeriodId').and.returnValue(periodId);
-    spyOn(configService, 'getWorkgroupId').and.returnValue(workgroupId);
-    spyOn(service, 'getCurrentNodeId').and.returnValue(nodeId);
-    spyOn(service, 'getNodeStatuses').and.returnValue(nodeStatuses);
-    spyOn(service, 'getProjectCompletion').and.returnValue(projectCompletion);
-    service.saveStudentStatus();
-    const studentStatusJSON = {
-      runId: runId,
-      periodId: periodId,
-      workgroupId: workgroupId,
-      currentNodeId: nodeId,
-      nodeStatuses: nodeStatuses,
-      projectCompletion: projectCompletion
-    };
-    const status = angular.toJson(studentStatusJSON);
-    const studentStatusParams = {
-      runId: runId,
-      periodId: periodId,
-      workgroupId: workgroupId,
-      status: status
-    };
-    const httpParams = {
-      method: 'POST',
-      url: '/student',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data: $.param(studentStatusParams)
-    };
-    http.expectOne('/student').flush({});
-  });
 }
 
 function shouldGetLatestComponentState() {
@@ -1808,166 +1364,6 @@ function shouldGetLatestComponentStateByNodeId() {
     };
     const componentState = service.getLatestComponentStateByNodeId('node1');
     expect(componentState.id).toEqual(2);
-  });
-}
-
-function shouldCheckIsCompletionCriteriaSatisfied() {
-  it('should check is completion criteria satisfied submit save false', () => {
-    const completionCriteria = {
-      criteria: [
-        { nodeId: 'node1', componentId: 'component1', name: 'isSubmitted' },
-        { nodeId: 'node1', componentId: 'component1', name: 'isSaved' }
-      ],
-      inOrder: true
-    };
-    const componentState1 = {};
-    spyOn(service, 'getComponentStateSubmittedAfter').and.returnValue(componentState1);
-    spyOn(service, 'getComponentStateSavedAfter').and.returnValue(null);
-    expect(service.isCompletionCriteriaSatisfied(completionCriteria)).toEqual(false);
-  });
-  it('should check is completion criteria satisfied submit save true', () => {
-    const completionCriteria = {
-      criteria: [
-        { nodeId: 'node1', componentId: 'component1', name: 'isSubmitted' },
-        { nodeId: 'node1', componentId: 'component1', name: 'isSaved' }
-      ],
-      inOrder: true
-    };
-    const componentState1 = {};
-    spyOn(service, 'getComponentStateSubmittedAfter').and.returnValue(componentState1);
-    const componentState2 = {};
-    spyOn(service, 'getComponentStateSavedAfter').and.returnValue(componentState2);
-    expect(service.isCompletionCriteriaSatisfied(completionCriteria)).toEqual(true);
-  });
-  it('should check is completion criteria satisfied submit visit false', () => {
-    const completionCriteria = {
-      criteria: [
-        { nodeId: 'node1', componentId: 'component1', name: 'isSubmitted' },
-        { nodeId: 'node1', componentId: 'component1', name: 'isVisited' }
-      ],
-      inOrder: true
-    };
-    const componentState1 = {};
-    spyOn(service, 'getComponentStateSubmittedAfter').and.returnValue(componentState1);
-    spyOn(service, 'getVisitEventAfter').and.returnValue(null);
-    expect(service.isCompletionCriteriaSatisfied(completionCriteria)).toEqual(false);
-  });
-  it('should check is completion criteria satisfied submit visit true', () => {
-    const completionCriteria = {
-      criteria: [
-        { nodeId: 'node1', componentId: 'component1', name: 'isSubmitted' },
-        { nodeId: 'node1', componentId: 'component1', name: 'isVisited' }
-      ],
-      inOrder: true
-    };
-    const componentState1 = {};
-    spyOn(service, 'getComponentStateSubmittedAfter').and.returnValue(componentState1);
-    const visitEvent1 = {};
-    spyOn(service, 'getVisitEventAfter').and.returnValue(visitEvent1);
-    expect(service.isCompletionCriteriaSatisfied(completionCriteria)).toEqual(true);
-  });
-}
-
-function shouldGetComponentStateSavedAfter() {
-  it('should get component state saved after false', () => {
-    service.studentData = {
-      componentStates: [
-        createComponentState(1, 'node1', 'component1', false, null, 1000),
-        createComponentState(2, 'node1', 'component1', false, null, 2000),
-        createComponentState(3, 'node1', 'component1', false, null, 3000)
-      ]
-    };
-    const componentState = service.getComponentStateSavedAfter('node1', 'component1', 4000);
-    expect(componentState).toBeNull();
-  });
-  it('should get component state saved after true', () => {
-    service.studentData = {
-      componentStates: [
-        createComponentState(1, 'node1', 'component1', false, null, 1000),
-        createComponentState(2, 'node1', 'component1', false, null, 2000),
-        createComponentState(3, 'node1', 'component1', false, null, 3000)
-      ]
-    };
-    const componentState = service.getComponentStateSavedAfter('node1', 'component1', 1500);
-    expect(componentState.id).toEqual(2);
-  });
-}
-
-function shouldGetComponentStateSubmittedAfter() {
-  it('should get component state submitted after false', () => {
-    service.studentData = {
-      componentStates: [
-        createComponentState(1, 'node1', 'component1', true, null, 1000),
-        createComponentState(2, 'node1', 'component1', false, null, 2000),
-        createComponentState(3, 'node1', 'component1', false, null, 3000)
-      ]
-    };
-    const componentState = service.getComponentStateSubmittedAfter('node1', 'component1', 1500);
-    expect(componentState).toBeNull();
-  });
-  it('should get component state submitted after true', () => {
-    service.studentData = {
-      componentStates: [
-        createComponentState(1, 'node1', 'component1', true, null, 1000),
-        createComponentState(2, 'node1', 'component1', false, null, 2000),
-        createComponentState(3, 'node1', 'component1', true, null, 3000)
-      ]
-    };
-    const componentState = service.getComponentStateSubmittedAfter('node1', 'component1', 1500);
-    expect(componentState.id).toEqual(3);
-  });
-}
-
-function shouldGetVisitEventAfter() {
-  it('should get visit event after false', () => {
-    service.studentData = {
-      events: [
-        createEvent(1, 'node1', 'component1', 'nodeEntered', null, 1000),
-        createEvent(2, 'node1', 'component1', 'nodeEntered', null, 2000),
-        createEvent(3, 'node1', 'component1', 'nodeEntered', null, 3000)
-      ]
-    };
-    const event = service.getVisitEventAfter('node1', 4000);
-    expect(event).toBeNull();
-  });
-  it('should get visit event after true', () => {
-    service.studentData = {
-      events: [
-        createEvent(1, 'node1', 'component1', 'nodeEntered', null, 1000),
-        createEvent(2, 'node1', 'component1', 'nodeEntered', null, 2000),
-        createEvent(3, 'node1', 'component1', 'nodeEntered', null, 3000)
-      ]
-    };
-    const event = service.getVisitEventAfter('node1', 1500);
-    expect(event.id).toEqual(2);
-  });
-}
-
-function shouldGetClassmateStudentWork() {
-  it('should get classmate student work', () => {
-    spyOn(configService, 'getRunId').and.returnValue(1);
-    spyOn(configService, 'getConfigParam').withArgs('studentDataURL').and.returnValue('/student');
-    service.getClassmateStudentWork('node1', 'component1', 10);
-    http
-      .expectOne(
-        '/student?runId=1&nodeId=node1&componentId=component1&getStudentWork=true&' +
-          'getEvents=false&getAnnotations=false&onlyGetLatest=true&periodId=10'
-      )
-      .flush({});
-  });
-}
-
-function shouldGetClassmateScores() {
-  it('should get classmate scores', () => {
-    spyOn(configService, 'getRunId').and.returnValue(1);
-    spyOn(configService, 'getConfigParam').withArgs('studentDataURL').and.returnValue('/student');
-    service.getClassmateScores('node1', 'component1', 10);
-    http
-      .expectOne(
-        '/student?runId=1&nodeId=node1&componentId=component1&getStudentWork=false&' +
-          'getEvents=false&getAnnotations=true&onlyGetLatest=false&periodId=10'
-      )
-      .flush({});
   });
 }
 

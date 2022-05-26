@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterStudentComponent } from './register-student.component';
 import { Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Config } from '../../domain/config';
 import { ConfigService } from '../../services/config.service';

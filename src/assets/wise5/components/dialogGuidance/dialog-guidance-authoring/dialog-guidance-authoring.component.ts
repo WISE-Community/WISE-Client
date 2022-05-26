@@ -4,32 +4,28 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { DialogGuidanceService } from '../dialogGuidanceService';
 
 @Component({
-  selector: 'app-dialog-guidance-authoring',
+  selector: 'dialog-guidance-authoring',
   templateUrl: './dialog-guidance-authoring.component.html',
   styleUrls: ['./dialog-guidance-authoring.component.scss']
 })
 export class DialogGuidanceAuthoringComponent extends ComponentAuthoring {
-  inputChange: Subject<string> = new Subject<string>();
-
   constructor(
-    protected ConfigService: ConfigService,
-    protected NodeService: NodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected configService: ConfigService,
+    private dialogGuidanceService: DialogGuidanceService,
+    protected nodeService: NodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.subscriptions.add(
-      this.inputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.componentChanged();
-      })
-    );
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     super.ngOnInit();
+    if (this.authoringComponentContent.computerAvatarSettings == null) {
+      this.authoringComponentContent.computerAvatarSettings = this.dialogGuidanceService.getDefaultComputerAvatarSettings();
+    }
   }
 }

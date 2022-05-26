@@ -1,7 +1,8 @@
 'use strict';
 
 import { Component, Input } from '@angular/core';
-import { NodeService } from '../../../../services/nodeService';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogWithCloseComponent } from '../../../../directives/dialog-with-close/dialog-with-close.component';
 
 @Component({
   selector: 'help-icon',
@@ -28,11 +29,18 @@ export class HelpIconComponent {
   pulse: boolean;
 
   @Input()
-  rubricId: string;
+  content: string;
 
-  constructor(private NodeService: NodeService) {}
+  constructor(public dialog: MatDialog) {}
 
   showRubric() {
-    this.NodeService.showRubric(this.rubricId);
+    this.dialog.open(DialogWithCloseComponent, {
+      data: {
+        content: this.content,
+        title: $localize`Rubric`,
+        scroll: true
+      },
+      panelClass: 'dialog-lg'
+    });
   }
 }

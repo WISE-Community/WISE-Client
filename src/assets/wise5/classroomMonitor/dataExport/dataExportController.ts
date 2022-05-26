@@ -8,11 +8,13 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { UtilService } from '../../services/utilService';
 import * as angular from 'angular';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
 
 class DataExportController {
   $translate: any;
-  allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match'];
-  allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Match'];
+  allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match', 'OpenResponse'];
+  allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Match', 'OpenResponse'];
+  autoScoreLabel: string = 'Auto Score';
   componentExportTooltips = {};
   componentExportDefaultColumnNames = [
     '#',
@@ -44,13 +46,8 @@ class DataExportController {
     'Submit Count'
   ];
   canViewStudentNames: boolean = false;
-  componentTypeToComponentService: any = {};
   dialogGuidanceComputerResponseLabel: string = 'Computer Response';
-  dialogGuidanceIdeaLabel: string = 'Idea';
-  dialogGuidanceItemIdLabel: string = 'Item ID';
   dialogGuidanceRevisionLabel: string = 'Revision';
-  dialogGuidanceScoreLabel: string = 'Score';
-  dialogGuidanceStudentResponseLabel: string = 'Student Response';
   embeddedTableKeyToValue = {
     co2saved: 'CO2 Saved',
     current: 'Current',
@@ -60,6 +57,7 @@ class DataExportController {
   };
   exportStepSelectionType: string = 'exportAllSteps';
   exportType: string = null; // type of export: [latestWork, allWork, events]
+  ideaLabel: string = 'Idea';
   includeAnnotations: boolean;
   includeBranchPathTaken: boolean;
   includeBranchPathTakenNodeId: boolean;
@@ -78,17 +76,20 @@ class DataExportController {
   includeStudentWork: boolean;
   includeStudentWorkIds: boolean;
   includeStudentWorkTimestamps: boolean;
+  itemIdLabel: string = 'Item ID';
   project: any;
   projectIdToOrder: any;
   projectItems: any;
+  scoreLabel: string = 'Score';
+  studentResponseLabel: string = 'Student Response';
   workSelectionType: string;
 
   static $inject = [
     '$filter',
-    '$injector',
     '$mdDialog',
     '$state',
     'AnnotationService',
+    'ComponentServiceLookupService',
     'ConfigService',
     'DataExportService',
     'FileSaver',
@@ -100,10 +101,10 @@ class DataExportController {
 
   constructor(
     $filter: any,
-    private $injector: any,
     private $mdDialog: any,
     private $state: any,
     private AnnotationService: AnnotationService,
+    private componentServiceLookupService: ComponentServiceLookupService,
     private ConfigService: ConfigService,
     private DataExportService: DataExportService,
     private FileSaver: any,
@@ -687,7 +688,7 @@ class DataExportController {
      */
     let studentDataString = ' ';
     let componentType = componentState.componentType;
-    let componentService = this.getComponentService(componentType);
+    let componentService = this.componentServiceLookupService.getService(componentType);
     if (componentService != null && componentService.getStudentDataString != null) {
       studentDataString = componentService.getStudentDataString(componentState);
       studentDataString = this.UtilService.removeHTMLTags(studentDataString);
@@ -2343,23 +2344,6 @@ class DataExportController {
   }
 
   /**
-   * Get the component service for a component type
-   * @param componentType the component type
-   * @return the component service or null if it doesn't exist
-   */
-  getComponentService(componentType) {
-    let componentService = null;
-    if (componentType != null) {
-      componentService = this.componentTypeToComponentService[componentType];
-      if (componentService == null) {
-        componentService = this.$injector.get(componentType + 'Service');
-        this.componentTypeToComponentService[componentType] = componentService;
-      }
-    }
-    return componentService;
-  }
-
-  /**
    * Check if we want to export this node
    * @param selectedNodesMap a mapping of node id to boolean value of whether
    * the researcher has checked the node
@@ -2675,6 +2659,8 @@ class DataExportController {
       this.exportDiscussionComponent(nodeId, component);
     } else if (component.type === 'DialogGuidance') {
       this.exportDialogGuidanceComponent(nodeId, component);
+    } else if (component.type === 'OpenResponse') {
+      this.exportOpenResponseComponent(nodeId, component);
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
     }
@@ -2691,6 +2677,8 @@ class DataExportController {
       this.exportMatchComponent(nodeId, component);
     } else if (component.type === 'DialogGuidance') {
       this.exportDialogGuidanceComponent(nodeId, component);
+    } else if (component.type === 'OpenResponse') {
+      this.exportOpenResponseComponent(nodeId, component);
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
     }
@@ -3134,6 +3122,157 @@ class DataExportController {
     this.hideDownloadingExportMessage();
   }
 
+  exportOpenResponseComponent(nodeId: string, component: any): void {
+    const components = this.getComponentsParam(nodeId, component.id);
+    this.DataExportService.retrieveStudentDataExport(components).then(() => {
+      this.generateOpenResponseComponentExport(nodeId, component);
+    });
+  }
+
+  generateOpenResponseComponentExport(nodeId: string, component: any): void {
+    const rows = this.getExportOpenResponseComponentRows(nodeId, component);
+    const fileName = this.getComponentExportFileName(nodeId, component.id, 'open_response');
+    this.generateCSVFile(rows, fileName);
+    this.hideDownloadingExportMessage();
+  }
+
+  getExportOpenResponseComponentRows(nodeId: string, component: any): string[] {
+    const columnNames = [];
+    const columnNameToNumber = {};
+    let rows = [];
+    rows.push(
+      this.generateOpenResponseComponentHeaderRow(
+        component,
+        columnNames,
+        columnNameToNumber,
+        nodeId
+      )
+    );
+    rows = rows.concat(
+      this.generateComponentWorkRows(component, columnNames, columnNameToNumber, nodeId)
+    );
+    return rows;
+  }
+
+  generateOpenResponseComponentHeaderRow(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    nodeId: string
+  ): string[] {
+    this.populateOpenResponseColumnNames(component, columnNames, columnNameToNumber, nodeId);
+    return columnNames;
+  }
+
+  populateOpenResponseColumnNames(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    nodeId: string
+  ): void {
+    for (const defaultColumnName of this.componentExportDefaultColumnNames) {
+      this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, defaultColumnName);
+    }
+    this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, this.itemIdLabel);
+    this.addColumnNameToColumnDataStructures(
+      columnNameToNumber,
+      columnNames,
+      this.studentResponseLabel
+    );
+    if (this.isCRaterEnabled(component)) {
+      const annotations = this.TeacherDataService.getAnnotationsByNodeIdAndComponentId(
+        nodeId,
+        component.id
+      );
+      this.tryToAddIdeaColumnNames(columnNames, columnNameToNumber, annotations);
+      this.tryToAddScoreColumnNames(columnNames, columnNameToNumber, annotations);
+    }
+  }
+
+  isCRaterEnabled(component: any): boolean {
+    return component.enableCRater && component.cRater.itemId !== '';
+  }
+
+  tryToAddIdeaColumnNames(
+    columnNames: string[],
+    columnNameToNumber: any,
+    annotations: any[]
+  ): void {
+    const ideaNames = this.getIdeaNamesFromAnnotations(annotations);
+    for (const ideaName of ideaNames) {
+      this.addColumnNameToColumnDataStructures(
+        columnNameToNumber,
+        columnNames,
+        `${this.ideaLabel} ${ideaName}`
+      );
+    }
+  }
+
+  getIdeaNamesFromAnnotations(annotations: any[]): string[] {
+    const ideaNames = new Set();
+    for (const annotation of annotations) {
+      const ideaNamesFromAnnotation = this.getIdeaNamesFromAnnotation(annotation);
+      for (const ideaName of ideaNamesFromAnnotation) {
+        ideaNames.add(ideaName);
+      }
+    }
+    return Array.from(ideaNames).sort(this.sortIdeaNames) as string[];
+  }
+
+  getIdeaNamesFromAnnotation(annotation: any): string[] {
+    const ideaNames = [];
+    if (annotation.data.ideas != null) {
+      for (const idea of annotation.data.ideas) {
+        ideaNames.push(idea.name);
+      }
+    }
+    return ideaNames;
+  }
+
+  tryToAddScoreColumnNames(
+    columnNames: string[],
+    columnNameToNumber: any,
+    annotations: any[]
+  ): void {
+    const scoreNames = this.getScoreNamesFromAnnotations(annotations);
+    if (scoreNames.length === 0) {
+      this.addColumnNameToColumnDataStructures(
+        columnNameToNumber,
+        columnNames,
+        `${this.autoScoreLabel}`
+      );
+    } else {
+      for (const scoreName of scoreNames) {
+        this.addColumnNameToColumnDataStructures(
+          columnNameToNumber,
+          columnNames,
+          `${this.scoreLabel} ${scoreName}`
+        );
+      }
+    }
+  }
+
+  getScoreNamesFromAnnotations(annotations: any[]): string[] {
+    const scoreNames = new Set();
+    for (const annotation of annotations) {
+      const scoreNamesFromAnnotation = this.getScoreNamesFromAnnotation(annotation);
+      for (const scoreName of scoreNamesFromAnnotation) {
+        scoreNames.add(scoreName);
+      }
+    }
+    return Array.from(scoreNames).sort() as string[];
+  }
+
+  getScoreNamesFromAnnotation(annotation: any): string[] {
+    const scoreNames = [];
+    if (annotation.data.scores != null) {
+      for (const score of annotation.data.scores) {
+        scoreNames.push(score.id);
+      }
+    }
+    return scoreNames.sort();
+  }
+
   getComponentExportFileName(nodeId: string, componentId: string, componentType: string): string {
     const runId = this.ConfigService.getRunId();
     const stepNumber = this.ProjectService.getNodePositionById(nodeId);
@@ -3175,18 +3314,10 @@ class DataExportController {
     columnNames: string[],
     columnNameToNumber: any
   ): void {
-    for (const defaultMatchColumnName of this.componentExportDefaultColumnNames) {
-      this.addColumnNameToColumnDataStructures(
-        columnNameToNumber,
-        columnNames,
-        defaultMatchColumnName
-      );
+    for (const defaultColumnName of this.componentExportDefaultColumnNames) {
+      this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, defaultColumnName);
     }
-    this.addColumnNameToColumnDataStructures(
-      columnNameToNumber,
-      columnNames,
-      this.dialogGuidanceItemIdLabel
-    );
+    this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, this.itemIdLabel);
     const componentStates = this.TeacherDataService.getComponentStatesByComponentId(component.id);
     const ideaNames = this.getDialogGuidanceIdeaNames(componentStates);
     const scoreNames = this.getDialogGuidanceScoreNames(componentStates);
@@ -3195,20 +3326,20 @@ class DataExportController {
       this.addColumnNameToColumnDataStructures(
         columnNameToNumber,
         columnNames,
-        `${this.dialogGuidanceStudentResponseLabel} ${revisionNumber}`
+        `${this.studentResponseLabel} ${revisionNumber}`
       );
       for (const ideaName of ideaNames) {
         this.addColumnNameToColumnDataStructures(
           columnNameToNumber,
           columnNames,
-          `${this.dialogGuidanceIdeaLabel} ${ideaName} ${revisionNumber}`
+          `${this.ideaLabel} ${ideaName} ${revisionNumber}`
         );
       }
       for (const scoreName of scoreNames) {
         this.addColumnNameToColumnDataStructures(
           columnNameToNumber,
           columnNames,
-          `${this.dialogGuidanceScoreLabel} ${scoreName} ${revisionNumber}`
+          `${this.scoreLabel} ${scoreName} ${revisionNumber}`
         );
       }
       this.addColumnNameToColumnDataStructures(
@@ -3259,13 +3390,7 @@ class DataExportController {
       return aInt - bInt;
     } else {
       // sort alphabetically
-      if (a === b) {
-        return 0;
-      } else if (a < b) {
-        return -1;
-      } else if (a > b) {
-        return 1;
-      }
+      return a.localeCompare(b);
     }
   }
 
@@ -3471,6 +3596,23 @@ class DataExportController {
         componentRevisionCounter,
         componentState
       );
+    } else if (componentState.componentType === 'OpenResponse') {
+      return this.generateOpenResponseComponentWorkRow(
+        component,
+        columnNames,
+        columnNameToNumber,
+        rowCounter,
+        workgroupId,
+        userId1,
+        userId2,
+        userId3,
+        studentName1,
+        studentName2,
+        studentName3,
+        periodName,
+        componentRevisionCounter,
+        componentState
+      );
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       return this.generateEmbeddedComponentWorkRow(
         component,
@@ -3524,7 +3666,7 @@ class DataExportController {
       componentRevisionCounter,
       dialogGuidanceComponentState
     );
-    row[columnNameToNumber[this.dialogGuidanceItemIdLabel]] = component.itemId;
+    row[columnNameToNumber[this.itemIdLabel]] = component.itemId;
     let revisionCounter = 0;
     let revisionLabel = '';
     for (const response of dialogGuidanceComponentState.studentData.responses) {
@@ -3566,7 +3708,7 @@ class DataExportController {
     revisionLabel: string,
     text: string
   ): void {
-    row[columnNameToNumber[`${this.dialogGuidanceStudentResponseLabel} ${revisionLabel}`]] = text;
+    row[columnNameToNumber[`${this.studentResponseLabel} ${revisionLabel}`]] = text;
   }
 
   addDialogGuidanceIdeasToRow(
@@ -3577,7 +3719,7 @@ class DataExportController {
   ): void {
     for (const ideaObject of ideas) {
       row[
-        columnNameToNumber[`${this.dialogGuidanceIdeaLabel} ${ideaObject.name} ${revisionLabel}`]
+        columnNameToNumber[`${this.ideaLabel} ${ideaObject.name} ${revisionLabel}`]
       ] = ideaObject.detected ? 1 : 0;
     }
   }
@@ -3589,9 +3731,8 @@ class DataExportController {
     scores: any[]
   ): void {
     for (const scoreObject of scores) {
-      row[
-        columnNameToNumber[`${this.dialogGuidanceScoreLabel} ${scoreObject.id} ${revisionLabel}`]
-      ] = scoreObject.score;
+      row[columnNameToNumber[`${this.scoreLabel} ${scoreObject.id} ${revisionLabel}`]] =
+        scoreObject.score;
     }
   }
 
@@ -3602,6 +3743,69 @@ class DataExportController {
     text: string
   ): void {
     row[columnNameToNumber[`${this.dialogGuidanceComputerResponseLabel} ${revisionLabel}`]] = text;
+  }
+
+  generateOpenResponseComponentWorkRow(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    rowCounter: number,
+    workgroupId: number,
+    userId1: number,
+    userId2: number,
+    userId3: number,
+    studentName1: string,
+    studentName2: string,
+    studentName3: string,
+    periodName: string,
+    componentRevisionCounter: any,
+    componentState: any
+  ): string[] {
+    const row = this.createStudentWorkExportRow(
+      columnNames,
+      columnNameToNumber,
+      rowCounter,
+      workgroupId,
+      userId1,
+      userId2,
+      userId3,
+      studentName1,
+      studentName2,
+      studentName3,
+      periodName,
+      componentRevisionCounter,
+      componentState
+    );
+    row[columnNameToNumber[this.itemIdLabel]] = component?.cRater?.itemId;
+    row[columnNameToNumber[this.studentResponseLabel]] = componentState.studentData.response;
+    const annotation = this.AnnotationService.getLatestAnnotationByStudentWorkIdAndType(
+      componentState.id,
+      'autoScore'
+    );
+    if (annotation != null) {
+      this.tryToAddOpenResponseAnnotationIdeas(row, columnNameToNumber, annotation);
+      this.tryToAddOpenResponseAnnotationScores(row, columnNameToNumber, annotation);
+    }
+    return row;
+  }
+
+  tryToAddOpenResponseAnnotationIdeas(row: any[], columnNameToNumber: any, annotation: any): void {
+    if (annotation.data.ideas != null) {
+      for (const idea of annotation.data.ideas) {
+        row[columnNameToNumber[`${this.ideaLabel} ${idea.name}`]] = idea.detected ? 1 : 0;
+      }
+    }
+  }
+
+  tryToAddOpenResponseAnnotationScores(row: any[], columnNameToNumber: any, annotation: any): void {
+    if (annotation.data.scores != null) {
+      for (const score of annotation.data.scores) {
+        row[columnNameToNumber[`${this.scoreLabel} ${score.id}`]] = score.score;
+      }
+    }
+    if (annotation.data.value != null) {
+      row[columnNameToNumber[`${this.autoScoreLabel}`]] = annotation.data.value;
+    }
   }
 
   exportEmbeddedComponent(nodeId: string, component: any): void {

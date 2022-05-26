@@ -53,10 +53,6 @@ export class UtilService {
     this.upgrade.$injector.get('$rootScope').$broadcast(event, data);
   }
 
-  translate(key) {
-    return this.upgrade.$injector.get('$filter')('translate')(key);
-  }
-
   generateKey(length = 10) {
     let key = '';
     for (let a = 0; a < length; a++) {
@@ -410,7 +406,10 @@ export class UtilService {
       { type: 'MultipleChoice', name: this.getComponentTypeLabel('MultipleChoice') },
       { type: 'OpenResponse', name: this.getComponentTypeLabel('OpenResponse') },
       { type: 'OutsideURL', name: this.getComponentTypeLabel('OutsideURL') },
+      { type: 'PeerChat', name: this.getComponentTypeLabel('PeerChat') },
       { type: 'HTML', name: this.getComponentTypeLabel('HTML') },
+      { type: 'ShowGroupWork', name: this.getComponentTypeLabel('ShowGroupWork') },
+      { type: 'ShowMyWork', name: this.getComponentTypeLabel('ShowMyWork') },
       { type: 'Summary', name: this.getComponentTypeLabel('Summary') },
       { type: 'Table', name: this.getComponentTypeLabel('Table') }
     ];
@@ -690,22 +689,6 @@ export class UtilService {
       return true;
     } catch (e) {
       return false;
-    }
-  }
-
-  moveObjectUp(objects, index) {
-    if (index !== 0) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index - 1, 0, object);
-    }
-  }
-
-  moveObjectDown(objects, index) {
-    if (index !== objects.length - 1) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index + 1, 0, object);
     }
   }
 

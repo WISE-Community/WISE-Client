@@ -10,12 +10,13 @@ import { NotificationService } from '../../assets/wise5/services/notificationSer
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
-import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
+import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { TeacherDataService } from '../../assets/wise5/services/teacherDataService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebSocketService';
 import { UtilService } from '../../assets/wise5/services/utilService';
+import { MatDialogModule } from '@angular/material/dialog';
 
 let service: DataExportService;
 let configService: ConfigService;
@@ -29,6 +30,7 @@ describe('DataExportService', () => {
       providers: [
         AchievementService,
         AnnotationService,
+        ClassroomStatusService,
         ConfigService,
         CopyNodesService,
         DataExportService,
@@ -36,14 +38,13 @@ describe('DataExportService', () => {
         ProjectService,
         SessionService,
         StudentDataService,
-        StudentStatusService,
         TagService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
         UtilService
       ],
-      imports: [HttpClientTestingModule, UpgradeModule]
+      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule]
     });
     service = TestBed.inject(DataExportService);
     configService = TestBed.inject(ConfigService);

@@ -6,13 +6,13 @@ import { AnnotationService } from '../../assets/wise5/services/annotationService
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { OpenResponseCompletionCriteriaService } from '../../assets/wise5/components/openResponse/openResponseCompletionCriteriaService';
 
 let service: OpenResponseService;
-let studentDataService: StudentDataService;
+let completionCriteriaService: OpenResponseCompletionCriteriaService;
 
 describe('OpenResponseService', () => {
   beforeEach(() => {
@@ -21,17 +21,17 @@ describe('OpenResponseService', () => {
       providers: [
         AnnotationService,
         ConfigService,
+        OpenResponseCompletionCriteriaService,
         OpenResponseService,
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TagService,
         UtilService
       ]
     });
-    service = TestBed.get(OpenResponseService);
-    studentDataService = TestBed.get(StudentDataService);
+    service = TestBed.inject(OpenResponseService);
+    completionCriteriaService = TestBed.inject(OpenResponseCompletionCriteriaService);
   });
   createComponent();
   isCompleted();
@@ -41,8 +41,6 @@ describe('OpenResponseService', () => {
   hasComponentState();
   hasStarterSentence();
   hasResponse();
-  isAnyComponentStateHasResponse();
-  isAnyComponentStateHasResponseAndIsSubmit();
 });
 
 function createComponentContent() {
@@ -89,13 +87,11 @@ function createComponent() {
 
 function isCompleted() {
   let component: any;
-  let componentStates: any[] = [];
-  let componentEvents: any[] = [];
-  let nodeEvents: any[] = [];
+  let studentData: any;
   let node: any;
   beforeEach(() => {
     component = createComponentContent();
-    componentStates = [];
+    studentData = { componentStates: [] };
     node = createNode();
   });
   function expectIsCompleted(
@@ -104,37 +100,40 @@ function isCompleted() {
     node: any,
     expectedResult: boolean
   ) {
-    expect(
-      service.isCompleted(component, componentStates, componentEvents, nodeEvents, node)
-    ).toEqual(expectedResult);
+    expect(service.isCompletedV2(node, component, componentStates)).toEqual(expectedResult);
   }
   it('should check if a component is completed when there are no component states', () => {
-    expectIsCompleted(component, componentStates, node, false);
+    expectIsCompleted(component, studentData, node, false);
   });
   it('should check if a component is completed when there are component states', () => {
-    expectIsCompleted(component, [createComponentState('Hello World')], node, true);
+    studentData.componentStates.push(createComponentState('Hello World'));
+    expectIsCompleted(component, studentData, node, true);
   });
   it(`should check if a component is completed when submit is required but there are no
       submits`, () => {
     component.showSubmitButton = true;
-    expectIsCompleted(component, [createComponentState('Hello World', false)], node, false);
+    studentData.componentStates.push(createComponentState('Hello World', false));
+    expectIsCompleted(component, studentData, node, false);
   });
   it(`should check if a component is completed when submit is required and there is a
       submit`, () => {
     component.showSubmitButton = true;
-    expectIsCompleted(component, [createComponentState('Hello World', true)], node, true);
+    studentData.componentStates.push(createComponentState('Hello World', true));
+    expectIsCompleted(component, studentData, node, true);
   });
   it(`should check if a component is completed when it has a completion criteria it has not
       satisfied`, () => {
     component.completionCriteria = {};
-    spyOn(studentDataService, 'isCompletionCriteriaSatisfied').and.returnValue(false);
-    expectIsCompleted(component, [createComponentState('Hello World', false)], node, false);
+    spyOn(completionCriteriaService, 'isSatisfied').and.returnValue(false);
+    studentData.componentStates.push(createComponentState('Hello World', false));
+    expectIsCompleted(component, studentData, node, false);
   });
   it(`should check if a component is completed when it has a completion criteria it has
       satisfied`, () => {
     component.completionCriteria = {};
-    spyOn(studentDataService, 'isCompletionCriteriaSatisfied').and.returnValue(true);
-    expectIsCompleted(component, [createComponentState('Hello World', false)], node, true);
+    spyOn(completionCriteriaService, 'isSatisfied').and.returnValue(true);
+    studentData.componentStates.push(createComponentState('Hello World', false));
+    expectIsCompleted(component, studentData, node, true);
   });
 }
 
@@ -277,28 +276,5 @@ function hasResponse() {
       response`, () => {
     componentState.studentData.attachments.push({});
     expect(service.hasResponse(componentState)).toEqual(true);
-  });
-}
-
-function isAnyComponentStateHasResponse() {
-  it('should check if any component state has a response when there are none', () => {
-    expect(service.isAnyComponentStateHasResponse([createComponentState('')])).toEqual(false);
-  });
-  it('should check if any component state has a response when there is a response', () => {
-    expect(service.isAnyComponentStateHasResponse([createComponentState('Hello World')])).toEqual(
-      true
-    );
-  });
-}
-
-function isAnyComponentStateHasResponseAndIsSubmit() {
-  it('should check if any component state has a response and submit when there are none', () => {
-    const componentStates = [createComponentState('Hello World', false)];
-    expect(service.isAnyComponentStateHasResponseAndIsSubmit(componentStates)).toEqual(false);
-  });
-  it(`should check if any component state has a response and submit when there is a submit
-      response`, () => {
-    const componentStates = [createComponentState('Hello World', true)];
-    expect(service.isAnyComponentStateHasResponseAndIsSubmit(componentStates)).toEqual(true);
   });
 }

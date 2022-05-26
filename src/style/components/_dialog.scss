@@ -31,6 +31,8 @@ mat-dialog-container.mat-dialog-container {
 }
 
 .cdk-overlay-pane {
+  max-width: 90vw !important;
+  
   @media (max-width: breakpoint('xs.max')) {
     max-width: 95vw !important;
   }

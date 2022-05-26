@@ -2,7 +2,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MomentModule } from 'ngx-moment';
-import { configureTestSuite } from 'ng-bullet';
 import { ConfigService } from '../../../../services/configService';
 import { ManageShowStudentInfoComponent } from './manage-show-student-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +17,7 @@ let component: ManageShowStudentInfoComponent;
 const user: any = {};
 
 describe('ManageShowStudentInfoComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ManageShowStudentInfoComponent],
       imports: [BrowserAnimationsModule, HttpClientTestingModule, MatDialogModule, MomentModule],
@@ -27,8 +26,6 @@ describe('ManageShowStudentInfoComponent', () => {
         { provide: MAT_DIALOG_DATA, useValue: user }
       ]
     });
-  });
-  beforeEach(() => {
     configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(ManageShowStudentInfoComponent);

@@ -5,6 +5,7 @@ import { SummaryService } from '../../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { UtilService } from '../../../../services/utilService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
 
 class NodeInfoController {
   color: any;
@@ -13,9 +14,10 @@ class NodeInfoController {
   nodeContent: any;
   nodeId: string;
   periodId: number;
+  source: string;
   static $inject = [
-    '$injector',
     'AnnotationService',
+    'ComponentServiceLookupService',
     'ProjectService',
     'SummaryService',
     'TeacherDataService',
@@ -23,8 +25,8 @@ class NodeInfoController {
   ];
 
   constructor(
-    private $injector: any,
     private AnnotationService: AnnotationService,
+    private componentServiceLookupService: ComponentServiceLookupService,
     private ProjectService: TeacherProjectService,
     private SummaryService: SummaryService,
     private TeacherDataService: TeacherDataService,
@@ -33,6 +35,11 @@ class NodeInfoController {
     const currentPeriod = this.TeacherDataService.getCurrentPeriod();
     if (currentPeriod != null) {
       this.periodId = currentPeriod.periodId;
+      if (this.periodId === -1) {
+        this.source = 'allPeriods';
+      } else {
+        this.source = 'period';
+      }
     }
   }
 
@@ -109,8 +116,8 @@ class NodeInfoController {
     );
   }
 
-  componentHasCorrectAnswer(component) {
-    const service = this.$injector.get(component.type + 'Service');
+  componentHasCorrectAnswer(component: any): boolean {
+    const service = this.componentServiceLookupService.getService(component.type);
     return service.componentHasCorrectAnswer(component);
   }
 }
@@ -142,7 +149,8 @@ const NodeInfo = {
                             component__header">
                         {{ component.assessmentItemIndex + '. ' + $ctrl.getComponentTypeLabel(component.type) }}&nbsp;
                     </h3>
-                    <preview-component component-content='component'/>
+                    <preview-component [node-id]="$ctrl.nodeId" [component-id]="component.id">
+                    </preview-component>
                     <md-card class="annotations annotations--info" ng-if="component.rubric">
                        <md-card-title class="annotations__header">
                            <div class="annotations__avatar md-avatar avatar--icon md-36 avatar md-whiteframe-1dp">
@@ -160,6 +168,7 @@ const NodeInfo = {
                         <summary-display ng-if='component.type === "MultipleChoice"'
                                 [node-id]='::$ctrl.nodeId' [component-id]='::component.id'
                                 [period-id]='$ctrl.periodId' [student-data-type]='"responses"'
+                                [source]='$ctrl.source'
                                 [highlight-correct-answer]='$ctrl.componentHasCorrectAnswer(component)'
                                 [chart-type]='"column"'
                                 [do-render]='true'>
@@ -169,6 +178,7 @@ const NodeInfo = {
                             $ctrl.componentHasScoreAnnotation(component.id)'>
                         <summary-display [node-id]='::$ctrl.nodeId' [component-id]='::component.id'
                                 [period-id]='$ctrl.periodId' [student-data-type]='"scores"'
+                                [source]='$ctrl.source'
                                 [chart-type]='"column"'
                                 [do-render]='true'>
                         </summary-display>

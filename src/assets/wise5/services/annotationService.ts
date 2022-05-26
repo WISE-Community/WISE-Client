@@ -1,7 +1,6 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectService } from './projectService';
 import { ConfigService } from './configService';
 import { UtilService } from './utilService';
@@ -11,18 +10,14 @@ import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class AnnotationService {
-  activeGlobalAnnotationGroups: any;
-  annotations: any;
+  annotations: any = [];
   dummyAnnotationId: number = 1; // used in preview mode when we simulate saving of annotation
   private annotationSavedToServerSource: Subject<any> = new Subject<any>();
   public annotationSavedToServer$: Observable<any> = this.annotationSavedToServerSource.asObservable();
   private annotationReceivedSource: Subject<any> = new Subject<any>();
   public annotationReceived$: Observable<any> = this.annotationReceivedSource.asObservable();
-  private displayGlobalAnnotationsSource: Subject<any> = new Subject<any>();
-  public displayGlobalAnnotations$: Observable<any> = this.displayGlobalAnnotationsSource.asObservable();
 
   constructor(
-    private upgrade: UpgradeModule,
     private http: HttpClient,
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
@@ -169,9 +164,7 @@ export class AnnotationService {
         annotations: annotations
       };
       let annotation = this.saveToServerSuccess(savedAnnotationDataResponse);
-      let deferred = this.upgrade.$injector.get('$q').defer();
-      deferred.resolve(annotation);
-      return deferred.promise;
+      return Promise.resolve(annotation);
     } else {
       const params = {
         runId: this.ConfigService.getRunId(),
@@ -676,177 +669,6 @@ export class AnnotationService {
   }
 
   /**
-   * Get all global annotations that are active and inactive for a specified node and component
-   * @returns all global annotations that are active and inactive for a specified node and component
-   */
-  getAllGlobalAnnotationsByNodeIdAndComponentId(nodeId, componentId) {
-    let allGlobalAnnotations = this.getAllGlobalAnnotations();
-    let globalAnnotationsByNodeIdAndComponentId = allGlobalAnnotations.filter(
-      (globalAnnotation) => {
-        return globalAnnotation.nodeId === nodeId && globalAnnotation.componentId === componentId;
-      }
-    );
-    return globalAnnotationsByNodeIdAndComponentId;
-  }
-
-  /**
-   * Get all global annotations that are active and inactive
-   * @returns all global annotations that are active and inactive
-   */
-  getAllGlobalAnnotations() {
-    let globalAnnotations = [];
-    for (let annotation of this.annotations) {
-      if (annotation != null && annotation.data != null) {
-        if (annotation.data.isGlobal) {
-          globalAnnotations.push(annotation);
-        }
-      }
-    }
-    return globalAnnotations;
-  }
-
-  /**
-   * Get all global annotations that are active and inactive and groups them by annotation group name
-   * @returns all global annotations that are active and inactive
-   */
-  getAllGlobalAnnotationGroups() {
-    let globalAnnotationGroups = [];
-    for (let annotation of this.annotations) {
-      if (annotation != null && annotation.data != null) {
-        if (annotation.data.isGlobal) {
-          // check if this global annotation can be grouped (has the same annotationGroupName as another that we've seen before)
-          if (
-            annotation.data.annotationGroupName != null &&
-            annotation.data.annotationGroupCreatedTime != null
-          ) {
-            let sameGroupFound = false;
-            for (let globalAnnotationGroup of globalAnnotationGroups) {
-              if (
-                globalAnnotationGroup.annotationGroupNameAndTime ==
-                annotation.data.annotationGroupName + annotation.data.annotationGroupCreatedTime
-              ) {
-                // push this annotation to the end of the group
-                globalAnnotationGroup.annotations.push(annotation);
-                sameGroupFound = true;
-              }
-            }
-            if (!sameGroupFound) {
-              let annotationGroup = {
-                annotationGroupNameAndTime:
-                  annotation.data.annotationGroupName + annotation.data.annotationGroupCreatedTime,
-                annotations: [annotation]
-              };
-              globalAnnotationGroups.push(annotationGroup);
-            }
-          } else {
-            // each global annotation should have a name, so it shouldn't get here
-            console.error(
-              this.upgrade.$injector.get('$filter')('translate')(
-                'GLOBAL_ANNOTATION_DOES_NOT_HAVE_A_NAME'
-              ) + annotation
-            );
-          }
-        }
-      }
-    }
-    return globalAnnotationGroups;
-  }
-
-  /**
-   * Get all global annotations that are active
-   * @returns all global annotations that are active, in a group
-   * [
-   * {
-   *   annotationGroupName:"score1",
-   *   annotations:[
-   *   {
-   *     type:autoScore,
-   *     value:1
-   *   },
-   *   {
-   *     type:autoComment,
-   *     value:"you received a score of 1."
-   *   }
-   *   ]
-   * },
-   * {
-   *   annotationGroupName:"score2",
-   *   annotations:[...]
-   * }
-   * ]
-   */
-  getActiveGlobalAnnotationGroups() {
-    return this.activeGlobalAnnotationGroups;
-  }
-
-  /**
-   * Calculates the active global annotations and groups them by annotation group name
-   */
-  calculateActiveGlobalAnnotationGroups() {
-    this.activeGlobalAnnotationGroups = [];
-
-    for (let annotation of this.annotations) {
-      if (annotation != null && annotation.data != null) {
-        if (annotation.data.isGlobal && annotation.data.unGlobalizedTimestamp == null) {
-          // check if this global annotation can be grouped (has the same annotationGroupName as another that we've seen before)
-          if (annotation.data.annotationGroupName != null) {
-            let sameGroupFound = false;
-            for (let activeGlobalAnnotationGroup of this.activeGlobalAnnotationGroups) {
-              if (
-                activeGlobalAnnotationGroup.annotationGroupName ==
-                annotation.data.annotationGroupName +
-                  '_' +
-                  annotation.data.annotationGroupCreatedTime
-              ) {
-                // push this annotation to the end of the group
-                activeGlobalAnnotationGroup.annotations.push(annotation);
-                sameGroupFound = true;
-              }
-            }
-            if (!sameGroupFound) {
-              let annotationGroup = {
-                annotationGroupName:
-                  annotation.data.annotationGroupName +
-                  '_' +
-                  annotation.data.annotationGroupCreatedTime,
-                annotations: [annotation],
-                nodeId: annotation.nodeId,
-                componentId: annotation.componentId,
-                serverSaveTime: annotation.serverSaveTime
-              };
-              this.activeGlobalAnnotationGroups.push(annotationGroup);
-            }
-          } else {
-            // each global annotation should have a name, so it shouldn't get here
-            console.error(
-              this.upgrade.$injector.get('$filter')('translate')(
-                'GLOBAL_ANNOTATION_DOES_NOT_HAVE_A_NAME'
-              ) + annotation
-            );
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * Get all global annotations that are in-active
-   * @returns all global annotations that are in-active
-   * In-active global annotations has data.isGlobal = false and data.unGlobalizedTimestamp is set.
-   */
-  getInActiveGlobalAnnotations() {
-    let inActiveGlobalAnnotations = [];
-    for (let annotation of this.annotations) {
-      if (annotation != null && annotation.data != null) {
-        if (annotation.data.isGlobal && annotation.data.unGlobalizedTimestamp != null) {
-          inActiveGlobalAnnotations.push(annotation);
-        }
-      }
-    }
-    return inActiveGlobalAnnotations;
-  }
-
-  /**
    * Get the latest teacher score annotation for a student work id
    * @param studentWorkId the student work id
    * @return the latest teacher score annotation for the student work
@@ -983,9 +805,5 @@ export class AnnotationService {
 
   broadcastAnnotationReceived(args: any) {
     this.annotationReceivedSource.next(args);
-  }
-
-  broadcastDisplayGlobalAnnotations() {
-    this.displayGlobalAnnotationsSource.next();
   }
 }

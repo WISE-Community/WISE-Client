@@ -104,7 +104,7 @@
     <div fxLayout="row" fxLayoutGap="10px">
       <button mat-raised-button
           color="primary"
-          (click)="moveRuleUpButtonClicked(ruleIndex)"
+          (click)="moveObjectUp(authoringComponentContent.rules, ruleIndex)"
           matTooltip="Move Up"
           matTooltipPosition="above"
           i18n-matTooltip
@@ -113,7 +113,7 @@
       </button>
       <button mat-raised-button
           color="primary"
-          (click)="moveRuleDownButtonClicked(ruleIndex)"
+          (click)="moveObjectDown(authoringComponentContent.rules, ruleIndex)"
           matTooltip="Move Down"
           matTooltipPosition="above"
           i18n-matTooltip

@@ -1,0 +1,28 @@
+.table-wrapper {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  max-height: 75vh;
+  overflow: auto;
+  border-radius: $card-border-radius;
+}
+
+.mat-table {
+  max-width: 100%;
+}
+
+th.mat-header-cell {
+  font-weight: 600;
+}
+
+div.mat-sort-header-content {
+  text-align: start;
+}
+
+.mat-cell {
+  .mat-form-field {
+    max-width: 100%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}

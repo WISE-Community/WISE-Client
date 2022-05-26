@@ -2,7 +2,6 @@
 
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { StudentDataService } from '../services/studentDataService';
 import { UtilService } from '../services/utilService';
 import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
@@ -16,10 +15,19 @@ export class ComponentService {
   private notifyConnectedComponentSource = new Subject<any>();
   public notifyConnectedComponentSource$ = this.notifyConnectedComponentSource.asObservable();
 
-  constructor(
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
-  ) {}
+  constructor(protected UtilService: UtilService) {}
+
+  getDomIdEnding(nodeId: string, componentId: string, componentState: any): string {
+    if (componentState == null) {
+      return `${nodeId}-${componentId}`;
+    } else {
+      return `${nodeId}-${componentId}-${componentState.id}`;
+    }
+  }
+
+  getElementId(domIdBeginning: string, domIdEnding: string): string {
+    return `${domIdBeginning}-${domIdEnding}`;
+  }
 
   requestComponentState(nodeId: string, componentId: string, isSubmit: boolean = false): void {
     this.requestComponentStateSource.next({
@@ -71,12 +79,11 @@ export class ComponentService {
    * Check if the component was completed
    * @param component the component object
    * @param componentStates the component states for the specific component
-   * @param componentEvents the events for the specific component
    * @param nodeEvents the events for the parent node of the component
    * @param node parent node of the component
    * @returns {boolean} whether the component was completed
    */
-  isCompleted(component, componentStates, componentEvents, nodeEvents, node) {
+  isCompleted(component, componentStates, nodeEvents, node) {
     return true;
   }
 

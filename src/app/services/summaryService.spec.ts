@@ -1,15 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { SummaryService } from '../../assets/wise5/components/summary/summaryService';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { UtilService } from '../../assets/wise5/services/utilService';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 
+const componentId = 'component1';
+let http: HttpTestingController;
+const nodeId = 'node1';
+const periodId = 10;
+const periodSource = 'period';
+const runId = 1;
 let service;
 const summaryAllowedComponentTypes = [
   'Animation',
@@ -38,18 +43,22 @@ describe('SummaryService', () => {
         ConfigService,
         ProjectService,
         SessionService,
-        StudentDataService,
         SummaryService,
         TagService,
         UtilService
       ]
     });
     service = TestBed.get(SummaryService);
+    http = TestBed.get(HttpTestingController);
+    spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(runId);
+    spyOn(TestBed.inject(ConfigService), 'getPeriodId').and.returnValue(periodId);
   });
   createComponent();
   isComponentTypeAllowed();
   isScoresSummaryAvailableForComponentType();
   isResponsesSummaryAvailableForComponentType();
+  getLatestClassmateStudentWork();
+  getLatestClassmateScores();
 });
 
 function createComponent() {
@@ -118,5 +127,37 @@ function isResponsesSummaryAvailableForComponentType() {
       ],
       false
     );
+  });
+}
+
+function getLatestClassmateStudentWork() {
+  it('should get latest classmate student work', () => {
+    const expectedStudentWork = [{ id: 1 }];
+    service
+      .getLatestClassmateStudentWork(nodeId, componentId, periodSource)
+      .subscribe((studentWork: any[]) => {
+        expect(studentWork).toEqual(expectedStudentWork);
+      });
+    http
+      .expectOne(
+        `/api/classmate/summary/student-work/${runId}/${periodId}/${nodeId}/${componentId}/${periodSource}`
+      )
+      .flush(expectedStudentWork);
+  });
+}
+
+function getLatestClassmateScores() {
+  it('should get latest classmate scores', () => {
+    const expectedScores = [{ id: 2 }];
+    service
+      .getLatestClassmateScores(nodeId, componentId, periodSource)
+      .subscribe((scores: any[]) => {
+        expect(scores).toEqual(expectedScores);
+      });
+    http
+      .expectOne(
+        `/api/classmate/summary/scores/${runId}/${periodId}/${nodeId}/${componentId}/${periodSource}`
+      )
+      .flush(expectedScores);
   });
 }

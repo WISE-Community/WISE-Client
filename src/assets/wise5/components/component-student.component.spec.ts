@@ -1,4 +1,3 @@
-import { configureTestSuite } from 'ng-bullet';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentStudent } from './component-student.component';
@@ -28,8 +27,8 @@ class MockService {}
 })
 class ComponentStudentImpl extends ComponentStudent {}
 
-describe('ComponentStudent', () => {
-  configureTestSuite(() => {
+describe('ComponentStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
       declarations: [ComponentStudentImpl],
@@ -48,8 +47,6 @@ describe('ComponentStudent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-  beforeEach(() => {
     fixture = TestBed.createComponent(ComponentStudentImpl);
     component = fixture.componentInstance;
     component.componentContent = {};

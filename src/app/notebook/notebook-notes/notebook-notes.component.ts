@@ -195,8 +195,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
   }
 
   close(): void {
-    this.NotebookService.setNotesVisible(false);
-    this.NotebookService.setInsertMode({ insertMode: false });
+    this.NotebookService.closeNotes();
   }
 
   filterDeleted(item: any): boolean {

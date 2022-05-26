@@ -3,7 +3,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -62,8 +61,8 @@ let notebookItemImageName: string;
 let notebookItemText: string;
 let starterBucketLabel = 'Starter Choices';
 
-describe('MatchStudent', () => {
-  configureTestSuite(() => {
+describe('MatchStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
       declarations: [MatchStudent],
@@ -83,9 +82,6 @@ describe('MatchStudent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(MatchStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,
@@ -96,15 +92,15 @@ describe('MatchStudent', () => {
     choice1 = createChoice(choiceId1, choiceValue1);
     choice2 = createChoice(choiceId2, choiceValue2);
     choice3 = createChoice(choiceId3, choiceValue3);
-    bucket1 = createBucket(bucketId1, bucketValue1, []);
-    bucket2 = createBucket(bucketId2, bucketValue2, []);
-    bucket3 = createBucket(bucketId3, bucketValue3, []);
+    const componentContentBucket1 = createBucket(bucketId1, bucketValue1, []);
+    const componentContentBucket2 = createBucket(bucketId2, bucketValue2, []);
+    const componentContentBucket3 = createBucket(bucketId3, bucketValue3, []);
     const componentContent = {
       id: componentId,
       type: 'Match',
       prompt: 'Put the choices in the buckets.',
       choices: [choice1, choice2, choice3],
-      buckets: [bucket1, bucket2, bucket3],
+      buckets: [componentContentBucket1, componentContentBucket2, componentContentBucket3],
       choicesLabel: starterBucketLabel,
       feedback: [
         createFeedbackForBucket('0', [
@@ -159,6 +155,9 @@ describe('MatchStudent', () => {
     notebookItemImageName = 'my-image.png';
     notebookItem = createNotebookItem(notebookItemId, notebookItemText, notebookItemImageName);
     fixture.detectChanges();
+    bucket1 = component.buckets[1];
+    bucket2 = component.buckets[2];
+    bucket3 = component.buckets[3];
   });
 
   createSourceBucket();

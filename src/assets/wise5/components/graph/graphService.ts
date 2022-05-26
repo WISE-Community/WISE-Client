@@ -5,19 +5,21 @@ import * as html2canvas from 'html2canvas';
 import { Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
+import { ConfigService } from '../../services/configService';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class GraphService extends ComponentService {
   seriesColors: string[] = ['blue', 'red', 'green', 'orange', 'purple', 'black'];
 
   constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
     private StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {
@@ -88,13 +90,7 @@ export class GraphService extends ComponentService {
     return component;
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (this.canEdit(component)) {
       return this.hasCompletedComponentState(componentStates, node, component);
     } else {
@@ -499,5 +495,25 @@ export class GraphService extends ComponentService {
       }
     }
     return series;
+  }
+
+  getClassmateStudentWork(
+    nodeId: string,
+    componentId: string,
+    periodId: number,
+    showWorkNodeId: string,
+    showWorkComponentId: string,
+    showClassmateWorkSource: 'period' | 'class'
+  ) {
+    const runId = this.configService.getRunId();
+    if (showClassmateWorkSource === 'period') {
+      return this.http.get(
+        `/api/classmate/graph/student-work/${runId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}/period/${periodId}`
+      );
+    } else {
+      return this.http.get(
+        `/api/classmate/graph/student-work/${runId}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}/class`
+      );
+    }
   }
 }

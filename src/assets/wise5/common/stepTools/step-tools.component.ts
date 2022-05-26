@@ -5,6 +5,7 @@ import { NodeService } from '../../services/nodeService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Node } from '../Node';
+import { ConfigService } from '../../services/configService';
 
 @Component({
   styleUrls: ['step-tools.component.scss'],
@@ -24,6 +25,7 @@ export class StepToolsComponent {
   subscriptions: Subscription = new Subscription();
 
   constructor(
+    private configService: ConfigService,
     private dir: Directionality,
     private NodeService: NodeService,
     private ProjectService: TeacherProjectService,
@@ -76,11 +78,27 @@ export class StepToolsComponent {
       this.nextId = null;
     } else {
       if (!this.ProjectService.isGroupNode(this.nodeId)) {
-        this.prevId = this.NodeService.getPrevNodeId(this.nodeId);
-        this.NodeService.getNextNodeId(this.nodeId).then((currentNodeId) => {
-          this.nextId = currentNodeId;
+        this.prevId = this.getPrevNodeId();
+        this.getNextNodeId().then((nextId) => {
+          this.nextId = nextId;
         });
       }
+    }
+  }
+
+  getPrevNodeId(): string {
+    if (this.isClassroomMonitorMode()) {
+      return this.NodeService.getPrevNodeIdWithWork(this.nodeId);
+    } else {
+      return this.NodeService.getPrevNodeId(this.nodeId);
+    }
+  }
+
+  getNextNodeId(): Promise<any> {
+    if (this.isClassroomMonitorMode()) {
+      return Promise.resolve(this.NodeService.getNextNodeIdWithWork(this.nodeId));
+    } else {
+      return this.NodeService.getNextNodeId(this.nodeId);
     }
   }
 
@@ -93,13 +111,27 @@ export class StepToolsComponent {
   }
 
   goToPrevNode() {
-    this.NodeService.goToPrevNode();
+    if (this.isClassroomMonitorMode()) {
+      this.NodeService.goToPrevNodeWithWork();
+    } else {
+      this.NodeService.goToPrevNode();
+    }
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
   }
 
   goToNextNode() {
-    this.NodeService.goToNextNode().then((nodeId: string) => {
-      this.nodeId = nodeId;
-    });
+    if (this.isClassroomMonitorMode()) {
+      this.NodeService.goToNextNodeWithWork().then((nodeId: string) => {
+        this.nodeId = nodeId;
+      });
+    } else {
+      this.NodeService.goToNextNode().then((nodeId: string) => {
+        this.nodeId = nodeId;
+      });
+    }
+  }
+
+  isClassroomMonitorMode(): boolean {
+    return this.configService.getMode() === 'classroomMonitor';
   }
 }
