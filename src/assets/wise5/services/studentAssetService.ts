@@ -1,7 +1,6 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { Observable, Subject } from 'rxjs';
@@ -15,11 +14,7 @@ export class StudentAssetService {
   private attachStudentAssetSource: Subject<StudentAssetRequest> = new Subject<StudentAssetRequest>();
   public attachStudentAsset$: Observable<StudentAssetRequest> = this.attachStudentAssetSource.asObservable();
 
-  constructor(
-    private upgrade: UpgradeModule,
-    private http: HttpClient,
-    private ConfigService: ConfigService
-  ) {}
+  constructor(private http: HttpClient, private ConfigService: ConfigService) {}
 
   getAssetById(assetId) {
     for (const asset of this.allAssets) {
