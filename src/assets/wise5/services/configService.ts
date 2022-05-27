@@ -152,9 +152,7 @@ export class ConfigService {
   }
 
   getWebSocketURL() {
-    return (
-      window.location.protocol + '//' + window.location.host + this.getContextPath() + '/websocket'
-    );
+    return 'ws://' + window.location.host + this.getContextPath() + '/websocket';
   }
 
   getWISEBaseURL() {
