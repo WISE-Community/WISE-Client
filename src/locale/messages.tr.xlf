@@ -18176,7 +18176,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>There was an error uploading.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <target state="needs-translation">There was an error uploading.</target>
       </trans-unit>
@@ -18184,7 +18184,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
-          <context context-type="linenumber">163</context>
+          <context context-type="linenumber">133</context>
         </context-group>
         <target state="needs-translation">There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</target>
       </trans-unit>
