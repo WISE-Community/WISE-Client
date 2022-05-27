@@ -24,6 +24,7 @@ import { EditDialogGuidanceFeedbackRulesComponent } from '../edit-dialog-guidanc
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceService } from '../dialogGuidanceService';
+import { NodeInfoService } from '../../../services/nodeInfoService';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DialogGuidanceService } from '../dialogGuidanceService';
     ConfigService,
     DialogGuidanceService,
     NodeService,
+    NodeInfoService,
     ProjectAssetService,
     ProjectService,
     SessionService,
