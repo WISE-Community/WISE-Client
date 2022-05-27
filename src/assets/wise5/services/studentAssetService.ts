@@ -1,7 +1,6 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { Observable, Subject } from 'rxjs';
@@ -15,11 +14,7 @@ export class StudentAssetService {
   private attachStudentAssetSource: Subject<StudentAssetRequest> = new Subject<StudentAssetRequest>();
   public attachStudentAsset$: Observable<StudentAssetRequest> = this.attachStudentAssetSource.asObservable();
 
-  constructor(
-    private upgrade: UpgradeModule,
-    private http: HttpClient,
-    private ConfigService: ConfigService
-  ) {}
+  constructor(private http: HttpClient, private ConfigService: ConfigService) {}
 
   getAssetById(assetId) {
     for (const asset of this.allAssets) {
@@ -102,86 +97,59 @@ export class StudentAssetService {
         const reader = new FileReader();
         reader.onload = ((theFile) => {
           return (e) => {
-            let fileSrc = e.target.result;
-            let fileName = theFile.name;
-
-            let asset: any = {};
-            asset.file = file;
-            asset.url = fileSrc;
-            if (this.isImage(asset)) {
-              asset.type = 'image';
-              asset.iconURL = asset.url;
-            } else if (this.isAudio(asset)) {
-              asset.type = 'audio';
-              asset.iconURL = 'assets/wise5/themes/default/images/audio.png';
-            } else {
-              asset.type = 'file';
-              asset.iconURL = 'assets/wise5/themes/default/images/file.png';
-            }
+            const asset: any = {
+              file: theFile.name,
+              url: e.target.result
+            };
+            this.setAssetTypeAndIconURL(asset);
             this.allAssets.push(asset);
-            return resolve(asset);
+            resolve(asset);
           };
         })(file);
         reader.readAsDataURL(file);
       });
     } else {
       return new Promise((resolve, reject) => {
-        this.upgrade.$injector
-          .get('Upload')
-          .upload({
-            url: this.ConfigService.getStudentAssetsURL(),
-            fields: {
-              runId: this.ConfigService.getRunId(),
-              workgroupId: this.ConfigService.getWorkgroupId(),
-              periodId: this.ConfigService.getPeriodId(),
-              clientSaveTime: Date.parse(new Date().toString())
-            },
-            file: file
-          })
-          .success((asset, status, headers, config) => {
+        const formData = new FormData();
+        formData.append('clientSaveTime', Date.parse(new Date().toString()) + '');
+        formData.append('files', file, file.name);
+        formData.append('periodId', this.ConfigService.getPeriodId());
+        formData.append('runId', this.ConfigService.getRunId());
+        formData.append('workgroupId', this.ConfigService.getWorkgroupId());
+        this.http.post(this.ConfigService.getStudentAssetsURL(), formData).subscribe(
+          (asset: any) => {
             if (asset === 'error') {
               alert($localize`There was an error uploading.`);
             } else {
               const studentUploadsBaseURL = this.ConfigService.getStudentUploadsBaseURL();
               asset.url = studentUploadsBaseURL + asset.filePath;
-              if (this.isImage(asset)) {
-                asset.type = 'image';
-                asset.iconURL = asset.url;
-              } else if (this.isAudio(asset)) {
-                asset.type = 'audio';
-                asset.iconURL = 'assets/wise5/themes/default/images/audio.png';
-              } else {
-                asset.type = 'file';
-                asset.iconURL = 'assets/wise5/themes/default/images/file.png';
-              }
+              this.setAssetTypeAndIconURL(asset);
               this.allAssets.push(asset);
               resolve(asset);
             }
-          })
-          .error((asset, status, headers, config) => {
+          },
+          () => {
             alert(
               $localize`There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.`
             );
             reject();
-          });
+          }
+        );
       });
     }
   }
 
-  uploadAssets(files) {
-    const promises = files.map((file) => {
-      return this.upgrade.$injector.get('Upload').upload({
-        url: this.ConfigService.getStudentAssetsURL(),
-        fields: {
-          runId: this.ConfigService.getRunId(),
-          workgroupId: this.ConfigService.getWorkgroupId(),
-          periodId: this.ConfigService.getPeriodId(),
-          clientSaveTime: Date.parse(new Date().toString())
-        },
-        file: file
-      });
-    });
-    return Promise.all(promises);
+  private setAssetTypeAndIconURL(asset: any): void {
+    if (this.isImage(asset)) {
+      asset.type = 'image';
+      asset.iconURL = asset.url;
+    } else if (this.isAudio(asset)) {
+      asset.type = 'audio';
+      asset.iconURL = 'assets/wise5/themes/default/images/audio.png';
+    } else {
+      asset.type = 'file';
+      asset.iconURL = 'assets/wise5/themes/default/images/file.png';
+    }
   }
 
   // given asset, makes a copy of it so steps can use for reference. Returns newly-copied asset.
