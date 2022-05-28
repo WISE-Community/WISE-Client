@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { DialogWithConfirmComponent } from '../../../assets/wise5/directives/dialog-with-confirm/dialog-with-confirm.component';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
@@ -37,10 +38,10 @@ export class NotebookItemComponent {
   notebookUpdatedSubscription: Subscription;
 
   constructor(
-    private upgrade: UpgradeModule,
     private ConfigService: ConfigService,
     private NotebookService: NotebookService,
-    private ProjectService: ProjectService
+    private ProjectService: ProjectService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -96,48 +97,36 @@ export class NotebookItemComponent {
 
   doDelete(ev: any): void {
     ev.stopPropagation();
-    const confirm = this.upgrade.$injector
-      .get('$mdDialog')
-      .confirm()
-      .title($localize`Are you sure you want to delete this ${this.label.singular}?`)
-      .ariaLabel($localize`Delete ${this.label.singular} confirmation`)
-      .targetEvent(ev)
-      .ok($localize`Delete`)
-      .cancel($localize`Cancel`);
-    this.upgrade.$injector
-      .get('$mdDialog')
-      .show(confirm)
-      .then(
-        () => {
-          this.NotebookService.deleteNote(this.item);
-        },
-        () => {
-          // they chose not to delete. Do nothing, the dialog will close.
+    this.dialog
+      .open(DialogWithConfirmComponent, {
+        data: {
+          content: $localize`Are you sure you want to delete this ${this.label.singular}:singular term for note in unit:?`,
+          title: $localize`Delete ${this.label.singular}:singular term for note in unit:`
         }
-      );
+      })
+      .afterClosed()
+      .subscribe((doDelete: boolean) => {
+        if (doDelete) {
+          this.NotebookService.deleteNote(this.item);
+        }
+      });
   }
 
   doRevive(ev: any): void {
     ev.stopPropagation();
-    const confirm = this.upgrade.$injector
-      .get('$mdDialog')
-      .confirm()
-      .title($localize`Are you sure you want to revive this ${this.label.singular}?`)
-      .ariaLabel($localize`Revive ${this.label.singular} confirmation`)
-      .targetEvent(ev)
-      .ok($localize`revive`)
-      .cancel($localize`cancel`);
-    this.upgrade.$injector
-      .get('$mdDialog')
-      .show(confirm)
-      .then(
-        () => {
-          this.NotebookService.reviveNote(this.item);
-        },
-        () => {
-          // they chose not to revive. Do nothing, the dialog will close.
+    this.dialog
+      .open(DialogWithConfirmComponent, {
+        data: {
+          content: $localize`Are you sure you want to revive this ${this.label.singular}:singular term for note in unit:?`,
+          title: $localize`Revive ${this.label.singular}:singular term for note in unit:`
         }
-      );
+      })
+      .afterClosed()
+      .subscribe((doRevive: boolean) => {
+        if (doRevive) {
+          this.NotebookService.reviveNote(this.item);
+        }
+      });
   }
 
   doSelect(event: any): void {
