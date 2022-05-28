@@ -7,7 +7,6 @@ import '../lib/jquery/jquery-global';
 
 @Injectable()
 export class UtilService {
-  componentTypeToLabel = {};
   CHARS = [
     'a',
     'b',
@@ -389,21 +388,6 @@ export class UtilService {
       return date.toDateString() + ' ' + date.toLocaleTimeString();
     }
     return '';
-  }
-
-  getComponentTypeLabel(componentType) {
-    let label = this.componentTypeToLabel[componentType];
-    if (label == null) {
-      let componentService = this.upgrade.$injector.get(componentType + 'Service');
-      if (componentService != null && componentService.getComponentTypeLabel != null) {
-        label = componentService.getComponentTypeLabel();
-        this.componentTypeToLabel[componentType] = label;
-      }
-    }
-    if (label == null) {
-      label = componentType;
-    }
-    return label;
   }
 
   /**

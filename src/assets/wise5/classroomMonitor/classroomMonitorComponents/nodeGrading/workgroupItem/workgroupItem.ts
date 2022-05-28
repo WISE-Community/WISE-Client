@@ -2,7 +2,7 @@
 
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import * as angular from 'angular';
-import { UtilService } from '../../../../services/utilService';
+import { ComponentTypeService } from '../../../../services/componentTypeService';
 
 export class WorkgroupItemController {
   $translate: any;
@@ -23,12 +23,12 @@ export class WorkgroupItemController {
   statusClass: any;
   statusText: string;
   workgroupId: number;
-  static $inject = ['$filter', 'ProjectService', 'UtilService'];
+  static $inject = ['$filter', 'ComponentTypeService', 'ProjectService'];
 
   constructor(
     $filter: any,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected componentTypeService: ComponentTypeService,
+    protected ProjectService: TeacherProjectService
   ) {
     this.$translate = $filter('translate');
   }
@@ -77,7 +77,7 @@ export class WorkgroupItemController {
   }
 
   getComponentTypeLabel(componentType) {
-    return this.UtilService.getComponentTypeLabel(componentType);
+    return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
   update() {

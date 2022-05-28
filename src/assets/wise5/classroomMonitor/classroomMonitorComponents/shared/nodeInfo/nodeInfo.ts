@@ -3,9 +3,9 @@
 import { AnnotationService } from '../../../../services/annotationService';
 import { SummaryService } from '../../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
-import { UtilService } from '../../../../services/utilService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
+import { ComponentTypeService } from '../../../../services/componentTypeService';
 
 class NodeInfoController {
   color: any;
@@ -18,19 +18,19 @@ class NodeInfoController {
   static $inject = [
     'AnnotationService',
     'ComponentServiceLookupService',
+    'ComponentTypeService',
     'ProjectService',
     'SummaryService',
-    'TeacherDataService',
-    'UtilService'
+    'TeacherDataService'
   ];
 
   constructor(
     private AnnotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
+    private componentTypeService: ComponentTypeService,
     private ProjectService: TeacherProjectService,
     private SummaryService: SummaryService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {
     const currentPeriod = this.TeacherDataService.getCurrentPeriod();
     if (currentPeriod != null) {
@@ -97,7 +97,7 @@ class NodeInfoController {
    * @return string of the component type label
    */
   getComponentTypeLabel(componentType) {
-    return this.UtilService.getComponentTypeLabel(componentType);
+    return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
   isResponsesSummaryAvailableForComponentType(componentType) {

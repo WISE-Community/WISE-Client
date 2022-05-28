@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ComponentTypeService } from '../../../../assets/wise5/services/componentTypeService';
 import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
@@ -41,6 +42,8 @@ class MockUpgradeModule {
   };
 }
 
+class MockComponentTypeService {}
+
 let component: ChooseNewComponentLocation;
 let teacherProjectService: TeacherProjectService;
 
@@ -50,6 +53,7 @@ describe('ChooseNewComponentLocation', () => {
       imports: [HttpClientTestingModule],
       providers: [
         ChooseNewComponentLocation,
+        { provide: ComponentTypeService, useClass: MockComponentTypeService },
         ConfigService,
         { provide: TeacherProjectService, useClass: MockProjectService },
         { provide: TeacherDataService, useClass: MockTeacherDataService },

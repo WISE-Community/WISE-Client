@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { Directive } from '@angular/core';
 import { Node } from '../../common/Node';
 import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
+import { ComponentTypeService } from '../../services/componentTypeService';
 
 @Directive()
 class NodeAuthoringController {
@@ -58,6 +59,7 @@ class NodeAuthoringController {
     'ConfigService',
     'CopyComponentService',
     'ComponentServiceLookupService',
+    'ComponentTypeService',
     'InsertComponentService',
     'NodeService',
     'NotificationService',
@@ -76,6 +78,7 @@ class NodeAuthoringController {
     private ConfigService: ConfigService,
     private CopyComponentService: CopyComponentService,
     private componentServiceLookupService: ComponentServiceLookupService,
+    private componentTypeService: ComponentTypeService,
     private InsertComponentService: InsertComponentService,
     private NodeService: NodeService,
     private NotificationService: NotificationService,
@@ -535,7 +538,7 @@ class NodeAuthoringController {
   }
 
   getComponentTypeLabel(componentType) {
-    return this.UtilService.getComponentTypeLabel(componentType);
+    return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
   /**

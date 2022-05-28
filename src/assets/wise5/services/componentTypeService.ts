@@ -29,7 +29,7 @@ export class ComponentTypeService {
     ];
   }
 
-  private getComponentTypeLabel(componentType: string): string {
+  getComponentTypeLabel(componentType: string): string {
     return this.componentServiceLookupService.getService(componentType).getComponentTypeLabel();
   }
 }
