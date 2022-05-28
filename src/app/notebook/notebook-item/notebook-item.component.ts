@@ -100,8 +100,7 @@ export class NotebookItemComponent {
     this.dialog
       .open(DialogWithConfirmComponent, {
         data: {
-          content:
-            $localize`Are you sure you want to delete this ${this.label.singular}:singular term for note in unit:?`,
+          content: $localize`Are you sure you want to delete this ${this.label.singular}:singular term for note in unit:?`,
           title: $localize`Delete ${this.label.singular}:singular term for note in unit:`
         }
       })
@@ -109,8 +108,6 @@ export class NotebookItemComponent {
       .subscribe((doDelete: boolean) => {
         if (doDelete) {
           this.NotebookService.deleteNote(this.item);
-        } else {
-          // they chose not to delete. Do nothing, the dialog will close.
         }
       });
   }
@@ -120,8 +117,7 @@ export class NotebookItemComponent {
     this.dialog
       .open(DialogWithConfirmComponent, {
         data: {
-          content:
-            $localize`Are you sure you want to revive this ${this.label.singular}:singular term for note in unit:?`,
+          content: $localize`Are you sure you want to revive this ${this.label.singular}:singular term for note in unit:?`,
           title: $localize`Revive ${this.label.singular}:singular term for note in unit:`
         }
       })
@@ -129,8 +125,6 @@ export class NotebookItemComponent {
       .subscribe((doRevive: boolean) => {
         if (doRevive) {
           this.NotebookService.reviveNote(this.item);
-        } else {
-          // they chose not to revive. Do nothing, the dialog will close.
         }
       });
   }
