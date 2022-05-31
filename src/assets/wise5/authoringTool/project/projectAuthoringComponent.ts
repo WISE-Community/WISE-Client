@@ -10,6 +10,8 @@ import { UtilService } from '../../services/utilService';
 import * as angular from 'angular';
 import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
+import { Message } from '@stomp/stompjs';
+import { RxStomp } from '@stomp/rx-stomp';
 
 class ProjectAuthoringController {
   $translate: any;
@@ -36,6 +38,7 @@ class ProjectAuthoringController {
   metadata: any;
   moveMode: boolean;
   projectURL: string;
+  rxStomp: RxStomp;
   subscriptions: Subscription = new Subscription();
 
   /*
@@ -59,7 +62,6 @@ class ProjectAuthoringController {
     '$filter',
     '$mdDialog',
     '$state',
-    '$stomp',
     '$timeout',
     '$transitions',
     '$window',
@@ -76,7 +78,6 @@ class ProjectAuthoringController {
     $filter,
     private $mdDialog,
     private $state,
-    private $stomp,
     private $timeout,
     private $transitions,
     private $window,
@@ -102,9 +103,7 @@ class ProjectAuthoringController {
     this.stepNodeSelected = false;
     this.activityNodeSelected = false;
     this.metadata = this.ProjectService.getProjectMetadata();
-    this.subscribeToCurrentAuthors(this.projectId).then(() => {
-      this.ProjectService.notifyAuthorProjectBegin(this.projectId);
-    });
+    this.subscribeToCurrentAuthors(this.projectId);
     this.projectURL = window.location.origin + this.ConfigService.getConfigParam('projectURL');
     this.$transitions.onSuccess({}, ($transition) => {
       const stateName = $transition.$to().name;
@@ -151,9 +150,8 @@ class ProjectAuthoringController {
   }
 
   endProjectAuthoringSession() {
-    this.unSubscribeFromCurrentAuthors(this.projectId).then(() => {
-      this.ProjectService.notifyAuthorProjectEnd(this.projectId);
-    });
+    this.unSubscribeFromCurrentAuthors();
+    this.ProjectService.notifyAuthorProjectEnd(this.projectId);
   }
 
   previewProject(enableConstraints: boolean = true) {
@@ -881,19 +879,22 @@ class ProjectAuthoringController {
   }
 
   subscribeToCurrentAuthors(projectId) {
-    return this.$stomp.connect(this.ConfigService.getWebSocketURL()).then((frame) => {
-      this.$stomp.subscribe(
-        `/topic/current-authors/${projectId}`,
-        (authors, headers, res) => {
-          this.showOtherConcurrentAuthors(authors);
-        },
-        {}
-      );
+    this.rxStomp = new RxStomp();
+    this.rxStomp.configure({
+      brokerURL: this.ConfigService.getWebSocketURL()
+    });
+    this.rxStomp.activate();
+    this.rxStomp.watch(`/topic/current-authors/${projectId}`).subscribe((message: Message) => {
+      const body = JSON.parse(message.body);
+      this.showOtherConcurrentAuthors(body);
+    });
+    this.rxStomp.connected$.subscribe(() => {
+      this.ProjectService.notifyAuthorProjectBegin(this.projectId);
     });
   }
 
-  unSubscribeFromCurrentAuthors(projectId) {
-    return this.$stomp.disconnect();
+  unSubscribeFromCurrentAuthors() {
+    this.rxStomp.deactivate();
   }
 }
 

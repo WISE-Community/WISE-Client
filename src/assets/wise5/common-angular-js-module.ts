@@ -9,7 +9,6 @@ import 'angular-material';
 import 'angular-moment';
 import 'ng-onload';
 import 'angular-sanitize';
-import 'ng-stomp';
 import 'angular-toarrayfilter';
 import 'angular-translate';
 import 'angular-translate-loader-partial';
@@ -61,12 +60,8 @@ import './components/table/tableComponentModule';
 import { TagService } from './services/tagService';
 import { UtilService } from './services/utilService';
 import * as moment from 'moment';
-import * as SockJS from 'sockjs-client';
 import './components/showMyWork/show-my-work-student/showMyWorkStudentAngularJSComponentModule';
 import './components/showGroupWork/show-group-work-student/showGroupWorkStudentAngularJSComponentModule';
-import * as StompJS from '@stomp/stompjs';
-window['SockJS'] = SockJS;
-window['Stomp'] = StompJS.Stomp;
 import './themes/default/theme';
 import SideMenu from './common/sideMenuComponent';
 import { EditorComponent } from '@tinymce/tinymce-angular';
@@ -100,7 +95,6 @@ angular
     'ngFileUpload',
     'ngMaterial',
     'ngSanitize',
-    'ngStomp',
     'openResponseComponentModule',
     'outsideURLComponentModule',
     'pascalprecht.translate',
