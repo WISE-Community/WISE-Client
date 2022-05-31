@@ -17847,8 +17847,8 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
       <trans-unit id="2821363608497156596" datatype="html">
         <source>Step Info</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/nodeService.ts</context>
-          <context context-type="linenumber">723</context>
+          <context context-type="sourcefile">src/assets/wise5/services/nodeInfoService.ts</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <target state="needs-translation">Step Info</target>
       </trans-unit>
