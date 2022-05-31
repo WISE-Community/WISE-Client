@@ -6,7 +6,6 @@ import 'angular-file-saver';
 import 'ng-file-upload';
 import 'angular-inview';
 import 'angular-material';
-import 'angular-moment';
 import 'ng-onload';
 import 'angular-sanitize';
 import 'ng-stomp';
@@ -79,7 +78,6 @@ import { ComputerAvatarService } from './services/computerAvatarService';
 
 angular
   .module('common', [
-    'angularMoment',
     'angular-toArrayFilter',
     'animationComponentModule',
     'audioOscillatorComponentModule',
