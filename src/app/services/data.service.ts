@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Subject } from 'rxjs';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 
@@ -14,7 +13,7 @@ export class DataService {
   private studentWorkReceivedSource: Subject<any> = new Subject<any>();
   public studentWorkReceived$ = this.studentWorkReceivedSource.asObservable();
 
-  constructor(protected upgrade: UpgradeModule, protected ProjectService: ProjectService) {}
+  constructor(protected ProjectService: ProjectService) {}
 
   isCompleted(nodeId, componentId) {}
 
