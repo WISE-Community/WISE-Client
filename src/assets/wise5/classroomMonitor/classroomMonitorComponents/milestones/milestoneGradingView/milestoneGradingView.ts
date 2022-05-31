@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
-import { NodeService } from '../../../../services/nodeService';
+import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { NotificationService } from '../../../../services/notificationService';
 import { PeerGroupService } from '../../../../services/peerGroupService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
@@ -27,7 +27,7 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     protected classroomStatusService: ClassroomStatusService,
     protected ConfigService: ConfigService,
     protected MilestoneService: MilestoneService,
-    protected NodeService: NodeService,
+    protected NodeInfoService: NodeInfoService,
     protected NotificationService: NotificationService,
     protected PeerGroupService: PeerGroupService,
     protected ProjectService: TeacherProjectService,
@@ -39,7 +39,7 @@ class MilestoneGradingViewController extends NodeGradingViewController {
       classroomStatusService,
       ConfigService,
       MilestoneService,
-      NodeService,
+      NodeInfoService,
       NotificationService,
       PeerGroupService,
       ProjectService,

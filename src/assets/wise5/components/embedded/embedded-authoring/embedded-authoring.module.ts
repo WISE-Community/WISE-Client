@@ -13,7 +13,6 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NodeInfoService } from '../../../services/nodeInfoService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
@@ -43,7 +42,6 @@ import { EmbeddedAuthoring } from './embedded-authoring.component';
     ConfigService,
     EmbeddedService,
     NodeService,
-    NodeInfoService,
     ProjectAssetService,
     ProjectService,
     SessionService,

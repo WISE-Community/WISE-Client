@@ -7,7 +7,6 @@ import { ProjectService } from './projectService';
 import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 import { DataService } from '../../../app/services/data.service';
 import { Observable, Subject } from 'rxjs';
-import { NodeInfoService } from './nodeInfoService';
 
 @Injectable()
 export class NodeService {
@@ -30,8 +29,7 @@ export class NodeService {
     private dialog: MatDialog,
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
-    private DataService: DataService,
-    private NodeInfoService: NodeInfoService
+    private DataService: DataService
   ) {}
 
   /**
@@ -712,10 +710,6 @@ export class NodeService {
         return;
       }
     }
-  }
-
-  showNodeInfo(nodeId, $event) {
-    this.NodeInfoService.showNodeInfo(nodeId, $event);
   }
 
   broadcastNodeSubmitClicked(args: any) {

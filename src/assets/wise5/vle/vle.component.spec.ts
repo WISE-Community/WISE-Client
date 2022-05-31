@@ -36,7 +36,6 @@ import { NodeStatusIcon } from '../themes/default/themeComponents/nodeStatusIcon
 import { NodeIconComponent } from '../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
 import { Node } from '../common/Node';
 import { FormsModule } from '@angular/forms';
-import { NodeInfoService } from '../services/nodeInfoService';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
@@ -87,7 +86,6 @@ describe('VLEComponent', () => {
         ConfigService,
         ComponentService,
         NodeService,
-        NodeInfoService,
         NotebookService,
         NotificationService,
         ProjectService,

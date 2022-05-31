@@ -2,8 +2,8 @@
 
 import { AnnotationService } from '../../../../services/annotationService';
 import { ConfigService } from '../../../../services/configService';
-import { NodeService } from '../../../../services/nodeService';
 import { MilestoneService } from '../../../../services/milestoneService';
+import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { NotificationService } from '../../../../services/notificationService';
 import { PeerGroupService } from '../../../../services/peerGroupService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
@@ -52,7 +52,7 @@ export class NodeGradingViewController {
     'ClassroomStatusService',
     'ConfigService',
     'MilestoneService',
-    'NodeService',
+    'NodeInfoService',
     'NotificationService',
     'PeerGroupService',
     'ProjectService',
@@ -65,7 +65,7 @@ export class NodeGradingViewController {
     protected classroomStatusService: ClassroomStatusService,
     protected ConfigService: ConfigService,
     protected MilestoneService: MilestoneService,
-    protected NodeService: NodeService,
+    protected NodeInfoService: NodeInfoService,
     protected NotificationService: NotificationService,
     protected PeerGroupService: PeerGroupService,
     protected ProjectService: TeacherProjectService,
@@ -304,7 +304,7 @@ export class NodeGradingViewController {
   }
 
   showRubric($event) {
-    this.NodeService.showNodeInfo(this.nodeId, $event);
+    this.NodeInfoService.showNodeInfo(this.nodeId, $event);
   }
 
   setSort(value) {

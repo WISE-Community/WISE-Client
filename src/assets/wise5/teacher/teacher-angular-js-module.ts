@@ -10,6 +10,7 @@ import { ImportComponentService } from '../services/importComponentService';
 import { InsertComponentService } from '../services/insertComponentService';
 import { MilestoneService } from '../services/milestoneService';
 import { MoveNodesService } from '../services/moveNodesService';
+import { NodeInfoService } from '../services/nodeInfoService';
 import { PeerGroupService } from '../services/peerGroupService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { SpaceService } from '../services/spaceService';
@@ -33,6 +34,7 @@ angular
   .factory('InsertComponentService', downgradeInjectable(InsertComponentService))
   .factory('MilestoneService', downgradeInjectable(MilestoneService))
   .factory('MoveNodesService', downgradeInjectable(MoveNodesService))
+  .factory('NodeInfoService', downgradeInjectable(NodeInfoService))
   .factory('PeerGroupingAuthoringService', downgradeInjectable(PeerGroupingAuthoringService))
   .factory('PeerGroupService', downgradeInjectable(PeerGroupService))
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
