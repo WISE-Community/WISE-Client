@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 import { DataService } from '../../../app/services/data.service';
 import { Observable, Subject } from 'rxjs';
@@ -27,7 +26,6 @@ export class NodeService {
   public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
 
   constructor(
-    private upgrade: UpgradeModule,
     private dialog: MatDialog,
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
@@ -712,82 +710,6 @@ export class NodeService {
         return;
       }
     }
-  }
-
-  /**
-   * Show the node content in a dialog. We will show the step content
-   * plus the node rubric and all component rubrics.
-   */
-  showNodeInfo(nodeId, $event) {
-    let stepNumberAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
-    let rubricTitle = $localize`Step Info`;
-
-    /*
-     * create the dialog header, actions, and content elements
-     */
-    let dialogHeader = `<md-toolbar>
-                <div class="md-toolbar-tools">
-                    <h2>${stepNumberAndTitle}</h2>
-                </div>
-            </md-toolbar>`;
-
-    let dialogActions = `<md-dialog-actions layout="row" layout-align="end center">
-                <md-button class="md-primary" ng-click="openInNewWindow()" aria-label="{{ 'openInNewWindow' | translate }}">{{ 'openInNewWindow' | translate }}</md-button>
-                <md-button class="md-primary" ng-click="close()" aria-label="{{ 'close' | translate }}">{{ 'close' | translate }}</md-button>
-            </md-dialog-actions>`;
-
-    let dialogContent = `<md-dialog-content class="gray-lighter-bg">
-                <div class="md-dialog-content" id="nodeInfo_${nodeId}">
-                    <node-info node-id="${nodeId}"></node-info>
-                </div>
-            </md-dialog-content>`;
-
-    let dialogString = `<md-dialog class="dialog--wider" aria-label="${stepNumberAndTitle} - ${rubricTitle}">${dialogHeader}${dialogContent}${dialogActions}</md-dialog>`;
-
-    // display the rubric in a popup
-    this.upgrade.$injector.get('$mdDialog').show({
-      template: dialogString,
-      fullscreen: true,
-      multiple: true,
-      controller: [
-        '$scope',
-        '$mdDialog',
-        function DialogController($scope, $mdDialog) {
-          // display the rubric in a new tab
-          $scope.openInNewWindow = function () {
-            // open a new tab
-            let w = window.open('', '_blank');
-
-            /*
-             * create the header for the new window that contains the project title
-             */
-            let windowHeader = `<md-toolbar class="layout-row">
-                                <div class="md-toolbar-tools primary-bg" style="color: #ffffff;">
-                                    <h2>${stepNumberAndTitle}</h2>
-                                </div>
-                            </md-toolbar>`;
-
-            let rubricContent = document.getElementById('nodeInfo_' + nodeId).innerHTML;
-
-            // create the window string
-            let windowString = `<link rel='stylesheet' href='../wise5/themes/default/style/monitor.css'>
-                            <link rel='stylesheet' href='../wise5/themes/default/style/angular-material.css'>
-                            <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic%7CMaterial+Icons" media="all">
-                            <body class="layout-column">
-                                <div class="layout-column">${windowHeader}<md-content class="md-padding">${rubricContent}</div></md-content></div>
-                            </body>`;
-            w.document.write(windowString);
-            $mdDialog.hide();
-          };
-          $scope.close = () => {
-            $mdDialog.hide();
-          };
-        }
-      ],
-      targetEvent: $event,
-      clickOutsideToClose: true,
-      escapeToClose: true
-    });
   }
 
   broadcastNodeSubmitClicked(args: any) {

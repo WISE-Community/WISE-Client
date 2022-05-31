@@ -1,9 +1,9 @@
 'use strict';
 
 import { ConfigService } from '../../../../services/configService';
+import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import * as angular from 'angular';
-import { NodeService } from '../../../../services/nodeService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { Directive } from '@angular/core';
 
@@ -21,7 +21,7 @@ class MilestoneDetailsController {
     '$filter',
     '$scope',
     'ConfigService',
-    'NodeService',
+    'NodeInfoService',
     'ProjectService',
     'TeacherDataService'
   ];
@@ -29,7 +29,7 @@ class MilestoneDetailsController {
     $filter,
     private $scope,
     private ConfigService: ConfigService,
-    private NodeService: NodeService,
+    private nodeInfoService: NodeInfoService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService
   ) {
@@ -113,7 +113,7 @@ class MilestoneDetailsController {
   }
 
   showMilestoneStepInfo($event) {
-    this.NodeService.showNodeInfo(this.milestone.nodeId, $event);
+    this.nodeInfoService.showNodeInfo(this.milestone.nodeId, $event);
   }
 
   visitNodeGrading() {
