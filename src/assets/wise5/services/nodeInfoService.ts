@@ -6,13 +6,10 @@ import { ProjectService } from './projectService';
 
 @Injectable()
 export class NodeInfoService {
-  constructor(
-    private upgrade: UpgradeModule,
-    private ProjectService: ProjectService
-  ) {}
+  constructor(private upgrade: UpgradeModule, private projectService: ProjectService) {}
 
   showNodeInfo(nodeId, $event) {
-    let stepNumberAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+    let stepNumberAndTitle = this.projectService.getNodePositionAndTitleByNodeId(nodeId);
     let rubricTitle = $localize`Step Info`;
 
     /*

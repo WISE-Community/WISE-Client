@@ -29,7 +29,7 @@ class MilestoneDetailsController {
     $filter,
     private $scope,
     private ConfigService: ConfigService,
-    private NodeInfoService: NodeInfoService,
+    private nodeInfoService: NodeInfoService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService
   ) {
@@ -113,7 +113,7 @@ class MilestoneDetailsController {
   }
 
   showMilestoneStepInfo($event) {
-    this.NodeInfoService.showNodeInfo(this.milestone.nodeId, $event);
+    this.nodeInfoService.showNodeInfo(this.milestone.nodeId, $event);
   }
 
   visitNodeGrading() {

@@ -65,7 +65,7 @@ export class NodeGradingViewController {
     protected classroomStatusService: ClassroomStatusService,
     protected ConfigService: ConfigService,
     protected MilestoneService: MilestoneService,
-    protected NodeInfoService: NodeInfoService,
+    protected nodeInfoService: NodeInfoService,
     protected NotificationService: NotificationService,
     protected PeerGroupService: PeerGroupService,
     protected ProjectService: TeacherProjectService,
@@ -304,7 +304,7 @@ export class NodeGradingViewController {
   }
 
   showRubric($event) {
-    this.NodeInfoService.showNodeInfo(this.nodeId, $event);
+    this.nodeInfoService.showNodeInfo(this.nodeId, $event);
   }
 
   setSort(value) {
