@@ -22,7 +22,6 @@ describe('VLEProjectService', () => {
     configService = TestBed.get(ConfigService);
     sessionService = TestBed.get(SessionService);
     utilService = TestBed.get(UtilService);
-    spyOn(utilService, 'broadcastEventInRootScope');
   });
   shouldGetTheExpectedPreviousScore();
   shouldGetTheExpectedCurrentScore();

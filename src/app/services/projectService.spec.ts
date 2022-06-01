@@ -36,7 +36,6 @@ describe('ProjectService', () => {
     configService = TestBed.get(ConfigService);
     sessionService = TestBed.get(SessionService);
     utilService = TestBed.get(UtilService);
-    spyOn(utilService, 'broadcastEventInRootScope').and.callFake(() => {});
     service = TestBed.get(ProjectService);
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
     oneBranchTwoPathsProjectJSON = JSON.parse(JSON.stringify(oneBranchTwoPathsProjectJSON_import));

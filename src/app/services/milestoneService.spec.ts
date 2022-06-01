@@ -107,7 +107,6 @@ describe('MilestoneService', () => {
     projectService = TestBed.get(ProjectService);
     teacherDataService = TestBed.get(TeacherDataService);
     utilService = TestBed.get(UtilService);
-    spyOn(utilService, 'broadcastEventInRootScope').and.callFake(() => {});
   });
   getProjectMilestones();
   getProjectMilestoneReports();

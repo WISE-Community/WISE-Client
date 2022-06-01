@@ -37,7 +37,6 @@ describe('AnnotationService', () => {
       providers: [ProjectService, ConfigService, SessionService, AnnotationService, UtilService]
     });
     utilService = TestBed.inject(UtilService);
-    spyOn(utilService, 'broadcastEventInRootScope').and.callFake(() => {});
     service = TestBed.inject(AnnotationService);
     projectService = TestBed.inject(ProjectService);
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));

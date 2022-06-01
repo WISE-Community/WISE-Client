@@ -1,6 +1,5 @@
 'use strict';
 
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
@@ -15,7 +14,6 @@ import { Node } from '../common/Node';
 @Injectable()
 export class TeacherDataService extends DataService {
   studentData: any;
-  $rootScope: any;
   currentPeriod = null;
   currentWorkgroup = null;
   currentStep = null;
@@ -31,7 +29,6 @@ export class TeacherDataService extends DataService {
   public currentWorkgroupChanged$: Observable<any> = this.currentWorkgroupChangedSource.asObservable();
 
   constructor(
-    private upgrade: UpgradeModule,
     private http: HttpClient,
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
@@ -47,10 +44,7 @@ export class TeacherDataService extends DataService {
       componentStatesByNodeId: {},
       componentStatesByComponentId: {}
     };
-
-    if (this.upgrade.$injector != null) {
-      this.subscribeToEvents();
-    }
+    this.subscribeToEvents();
   }
 
   subscribeToEvents() {
@@ -70,13 +64,6 @@ export class TeacherDataService extends DataService {
     this.ConfigService.configRetrieved$.subscribe(() => {
       this.retrieveRunStatus();
     });
-  }
-
-  getRootScope() {
-    if (this.$rootScope == null) {
-      this.$rootScope = this.upgrade.$injector.get('$rootScope');
-    }
-    return this.$rootScope;
   }
 
   handleAnnotationReceived(annotation) {
