@@ -1,9 +1,10 @@
 'use strict';
 
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { formatDate } from '@angular/common';
 
 @Injectable()
 export class ConfigService {
@@ -11,7 +12,11 @@ export class ConfigService {
   private configRetrievedSource: Subject<any> = new Subject<any>();
   public configRetrieved$: Observable<any> = this.configRetrievedSource.asObservable();
 
-  constructor(private upgrade: UpgradeModule, private http: HttpClient) {}
+  constructor(
+    private upgrade: UpgradeModule,
+    private http: HttpClient,
+    @Inject(LOCALE_ID) private localeID: string
+  ) {}
 
   setConfig(config) {
     this.config = config;
@@ -960,7 +965,7 @@ export class ConfigService {
   }
 
   getPrettyEndDate() {
-    return this.upgrade.$injector.get('moment')(this.getEndDate()).format('MMM D, YYYY');
+    return formatDate(this.getEndDate(), 'mediumDate', this.localeID);
   }
 
   getStartDate() {
