@@ -81,6 +81,7 @@ import { ComputerAvatarService } from '../assets/wise5/services/computerAvatarSe
 import { StudentStatusService } from '../assets/wise5/services/studentStatusService';
 import { OpenResponseCompletionCriteriaService } from '../assets/wise5/components/openResponse/openResponseCompletionCriteriaService';
 import { ComponentServiceLookupService } from '../assets/wise5/services/componentServiceLookupService';
+import { ComponentTypeService } from '../assets/wise5/services/componentTypeService';
 
 @Component({ template: `` })
 export class EmptyComponent {}
@@ -137,6 +138,7 @@ export class EmptyComponent {}
     ConceptMapService,
     ComponentService,
     ComponentServiceLookupService,
+    ComponentTypeService,
     ComputerAvatarService,
     ConfigService,
     CRaterService,

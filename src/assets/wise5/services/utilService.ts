@@ -7,7 +7,6 @@ import '../lib/jquery/jquery-global';
 
 @Injectable()
 export class UtilService {
-  componentTypeToLabel = {};
   CHARS = [
     'a',
     'b',
@@ -389,45 +388,6 @@ export class UtilService {
       return date.toDateString() + ' ' + date.toLocaleTimeString();
     }
     return '';
-  }
-
-  getComponentTypes(): any[] {
-    return [
-      { type: 'Animation', name: this.getComponentTypeLabel('Animation') },
-      { type: 'AudioOscillator', name: this.getComponentTypeLabel('AudioOscillator') },
-      { type: 'ConceptMap', name: this.getComponentTypeLabel('ConceptMap') },
-      { type: 'DialogGuidance', name: this.getComponentTypeLabel('DialogGuidance') },
-      { type: 'Discussion', name: this.getComponentTypeLabel('Discussion') },
-      { type: 'Draw', name: this.getComponentTypeLabel('Draw') },
-      { type: 'Embedded', name: this.getComponentTypeLabel('Embedded') },
-      { type: 'Graph', name: this.getComponentTypeLabel('Graph') },
-      { type: 'Label', name: this.getComponentTypeLabel('Label') },
-      { type: 'Match', name: this.getComponentTypeLabel('Match') },
-      { type: 'MultipleChoice', name: this.getComponentTypeLabel('MultipleChoice') },
-      { type: 'OpenResponse', name: this.getComponentTypeLabel('OpenResponse') },
-      { type: 'OutsideURL', name: this.getComponentTypeLabel('OutsideURL') },
-      { type: 'PeerChat', name: this.getComponentTypeLabel('PeerChat') },
-      { type: 'HTML', name: this.getComponentTypeLabel('HTML') },
-      { type: 'ShowGroupWork', name: this.getComponentTypeLabel('ShowGroupWork') },
-      { type: 'ShowMyWork', name: this.getComponentTypeLabel('ShowMyWork') },
-      { type: 'Summary', name: this.getComponentTypeLabel('Summary') },
-      { type: 'Table', name: this.getComponentTypeLabel('Table') }
-    ];
-  }
-
-  getComponentTypeLabel(componentType) {
-    let label = this.componentTypeToLabel[componentType];
-    if (label == null) {
-      let componentService = this.upgrade.$injector.get(componentType + 'Service');
-      if (componentService != null && componentService.getComponentTypeLabel != null) {
-        label = componentService.getComponentTypeLabel();
-        this.componentTypeToLabel[componentType] = label;
-      }
-    }
-    if (label == null) {
-      label = componentType;
-    }
-    return label;
   }
 
   /**

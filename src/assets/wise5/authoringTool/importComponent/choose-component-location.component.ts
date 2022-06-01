@@ -3,7 +3,7 @@ import { ImportComponentService } from '../../services/importComponentService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
-import { UtilService } from '../../services/utilService';
+import { ComponentTypeService } from '../../services/componentTypeService';
 
 class ChooseComponentLocationController {
   components: any = [];
@@ -12,23 +12,23 @@ class ChooseComponentLocationController {
   static $inject = [
     '$state',
     '$stateParams',
+    'ComponentTypeService',
     'ConfigService',
     'ImportComponentService',
     'ProjectAssetService',
     'ProjectService',
-    'TeacherDataService',
-    'UtilService'
+    'TeacherDataService'
   ];
 
   constructor(
     private $state: any,
     private $stateParams: any,
+    private componentTypeService: ComponentTypeService,
     private ConfigService: ConfigService,
     private ImportComponentService: ImportComponentService,
     private ProjectAssetService: ProjectAssetService,
     private ProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {}
 
   $onInit() {
@@ -37,7 +37,7 @@ class ChooseComponentLocationController {
   }
 
   getComponentTypeLabel(componentType) {
-    return this.UtilService.getComponentTypeLabel(componentType);
+    return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
   insertComponentAsFirst() {

@@ -2,9 +2,9 @@
 
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import * as angular from 'angular';
-import { UtilService } from '../../../../services/utilService';
 import { WorkgroupItemController } from '../../nodeGrading/workgroupItem/workgroupItem';
 import { Subscription } from 'rxjs';
+import { ComponentTypeService } from '../../../../services/componentTypeService';
 
 class MilestoneWorkgroupItemController extends WorkgroupItemController {
   $translate: any;
@@ -34,14 +34,14 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
   subscriptions: Subscription = new Subscription();
   workgroupId: number;
 
-  static $inject = ['$filter', 'ProjectService', 'UtilService'];
+  static $inject = ['$filter', 'ComponentTypeService', 'ProjectService'];
 
   constructor(
     $filter: any,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected componentTypeService: ComponentTypeService,
+    protected ProjectService: TeacherProjectService
   ) {
-    super($filter, ProjectService, UtilService);
+    super($filter, componentTypeService, ProjectService);
   }
 
   $onInit() {
@@ -117,10 +117,6 @@ class MilestoneWorkgroupItemController extends WorkgroupItemController {
 
   $onDestroy() {
     this.subscriptions.unsubscribe();
-  }
-
-  getComponentTypeLabel(componentType) {
-    return this.UtilService.getComponentTypeLabel(componentType);
   }
 
   getNodePosition(nodeId: string): string {

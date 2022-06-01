@@ -76,8 +76,6 @@ describe('PeerGroupDialogComponent', () => {
       { periodId: 1, periodName: '1' },
       { id: 2, periodName: '2' }
     ]);
-    spyOn(TestBed.inject(ProjectService), 'getComponentType').and.returnValue('PeerChat');
-    spyOn(TestBed.inject(UtilService), 'getComponentTypeLabel').and.returnValue('Peer Chat');
     spyOn(TestBed.inject(WorkgroupService), 'getWorkgroupsInPeriod').and.returnValue(new Map());
     component = fixture.componentInstance;
     fixture.detectChanges();

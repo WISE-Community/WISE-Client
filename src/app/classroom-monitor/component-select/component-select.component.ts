@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ComponentTypeService } from '../../../assets/wise5/services/componentTypeService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
 
 @Component({
   selector: 'component-select',
@@ -18,7 +18,10 @@ export class ComponentSelectComponent {
 
   selectedComponents: any[];
 
-  constructor(private ProjectService: TeacherProjectService, private UtilService: UtilService) {}
+  constructor(
+    private componentTypeService: ComponentTypeService,
+    private ProjectService: TeacherProjectService
+  ) {}
 
   ngOnInit() {
     this.components = this.ProjectService.getComponentsByNodeId(this.nodeId).filter((component) => {
@@ -30,7 +33,7 @@ export class ComponentSelectComponent {
   }
 
   getComponentTypeLabel(componentType) {
-    return this.UtilService.getComponentTypeLabel(componentType);
+    return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
   getSelectedText() {

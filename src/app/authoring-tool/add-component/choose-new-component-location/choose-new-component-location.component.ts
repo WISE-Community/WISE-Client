@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ComponentTypeService } from '../../../../assets/wise5/services/componentTypeService';
 import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { TeacherDataService } from '../../../../assets/wise5/services/teacherDataService';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
-import { UtilService } from '../../../../assets/wise5/services/utilService';
 
 @Component({
   selector: 'choose-new-component-location',
@@ -15,10 +15,10 @@ export class ChooseNewComponentLocation {
 
   constructor(
     private upgrade: UpgradeModule,
+    private componentTypeService: ComponentTypeService,
     private ConfigService: ConfigService,
     private TeacherProjectService: TeacherProjectService,
-    private TeacherDataService: TeacherDataService,
-    private UtilService: UtilService
+    private TeacherDataService: TeacherDataService
   ) {}
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class ChooseNewComponentLocation {
   }
 
   getComponentTypeLabel(componentType) {
-    return this.UtilService.getComponentTypeLabel(componentType);
+    return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
   insertComponentAsFirst() {
