@@ -108,7 +108,7 @@ export class StudentDataService extends DataService {
   public nodeStatusesChanged$: Observable<any> = this.nodeStatusesChangedSource.asObservable();
 
   constructor(
-    upgrade: UpgradeModule,
+    private upgrade: UpgradeModule,
     public http: HttpClient,
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
@@ -116,7 +116,7 @@ export class StudentDataService extends DataService {
     private TagService: TagService,
     private UtilService: UtilService
   ) {
-    super(upgrade, ProjectService);
+    super(ProjectService);
   }
 
   pauseScreen(doPause: boolean) {

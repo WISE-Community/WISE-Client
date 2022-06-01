@@ -8,7 +8,7 @@ import { UtilService } from './utilService';
 import { TeacherProjectService } from './teacherProjectService';
 import { TeacherWebSocketService } from './teacherWebSocketService';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { Node } from '../common/Node';
 
@@ -31,7 +31,7 @@ export class TeacherDataService extends DataService {
   public currentWorkgroupChanged$: Observable<any> = this.currentWorkgroupChangedSource.asObservable();
 
   constructor(
-    upgrade: UpgradeModule,
+    private upgrade: UpgradeModule,
     private http: HttpClient,
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
@@ -39,7 +39,7 @@ export class TeacherDataService extends DataService {
     private TeacherWebSocketService: TeacherWebSocketService,
     private UtilService: UtilService
   ) {
-    super(upgrade, ProjectService);
+    super(ProjectService);
     this.studentData = {
       annotationsByNodeId: {},
       annotationsToWorkgroupId: {},
