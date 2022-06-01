@@ -160,9 +160,8 @@ export class ConfigService {
   }
 
   getWebSocketURL() {
-    return (
-      window.location.protocol + '//' + window.location.host + this.getContextPath() + '/websocket'
-    );
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    return `${protocol}//${window.location.host}${this.getContextPath()}/websocket`;
   }
 
   getWISEBaseURL() {
