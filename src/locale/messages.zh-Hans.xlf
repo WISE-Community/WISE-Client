@@ -1276,7 +1276,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Showing <x id="PH" equiv-text="this.selectedComponents.length"/>/<x id="PH_1" equiv-text="this.components.length"/> items</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/classroom-monitor/component-select/component-select.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target state="translated">显示 <x id="PH" equiv-text="this.selectedComponents.length"/>/<x id="PH_1" equiv-text="this.components.length"/> 个项目</target>
       </trans-unit>
@@ -17840,7 +17840,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Student <x id="PH" equiv-text="id"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/configService.ts</context>
-          <context context-type="linenumber">576</context>
+          <context context-type="linenumber">580</context>
         </context-group>
         <target state="needs-translation">Student <x id="PH" equiv-text="id"/></target>
       </trans-unit>
