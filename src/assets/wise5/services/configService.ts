@@ -11,15 +11,12 @@ export class ConfigService {
   public config: any = null;
   private configRetrievedSource: Subject<any> = new Subject<any>();
   public configRetrieved$: Observable<any> = this.configRetrievedSource.asObservable();
-  private localID: string;
 
   constructor(
     private upgrade: UpgradeModule,
     private http: HttpClient,
-    @Inject(LOCALE_ID) localID: string
-  ) {
-    this.localID = localID;
-  }
+    @Inject(LOCALE_ID) private localeID: string
+  ) {}
 
   setConfig(config) {
     this.config = config;
@@ -968,7 +965,7 @@ export class ConfigService {
   }
 
   getPrettyEndDate() {
-    return formatDate(this.getEndDate(), 'mediumDate', this.localID);
+    return formatDate(this.getEndDate(), 'mediumDate', this.localeID);
   }
 
   getStartDate() {
