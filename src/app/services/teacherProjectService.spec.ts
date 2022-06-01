@@ -36,7 +36,6 @@ describe('TeacherProjectService', () => {
     service = TestBed.inject(TeacherProjectService);
     configService = TestBed.inject(ConfigService);
     utilService = TestBed.inject(UtilService);
-    spyOn(utilService, 'broadcastEventInRootScope');
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
     scootersProjectJSON = JSON.parse(JSON.stringify(scootersProjectJSON_import));
     teacherProjectJSON = JSON.parse(JSON.stringify(teacherProjctJSON_import));

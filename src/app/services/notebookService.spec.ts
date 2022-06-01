@@ -52,7 +52,6 @@ describe('NotebookService', () => {
     projectService = TestBed.get(ProjectService);
     studentDataService = TestBed.get(StudentDataService);
     utilService = TestBed.get(UtilService);
-    spyOn(utilService, 'broadcastEventInRootScope').and.callFake(() => {});
     service = TestBed.get(NotebookService);
     demoNotebookItems = JSON.parse(JSON.stringify(demoNotebookItems_import));
     demoNotebooksByWorkgroupId = JSON.parse(JSON.stringify(demoNotebooksByWorkgroupId_import));

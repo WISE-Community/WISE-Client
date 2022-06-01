@@ -2,7 +2,6 @@
 
 import { Injectable } from '@angular/core';
 import * as angular from 'angular';
-import { UpgradeModule } from '@angular/upgrade/static';
 import '../lib/jquery/jquery-global';
 
 @Injectable()
@@ -45,12 +44,6 @@ export class UtilService {
     '8',
     '9'
   ];
-
-  constructor(private upgrade: UpgradeModule) {}
-
-  broadcastEventInRootScope(event, data = {}) {
-    this.upgrade.$injector.get('$rootScope').$broadcast(event, data);
-  }
 
   generateKey(length = 10) {
     let key = '';
