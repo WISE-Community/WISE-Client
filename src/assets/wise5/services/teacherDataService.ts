@@ -62,7 +62,9 @@ export class TeacherDataService extends DataService {
     });
 
     this.ConfigService.configRetrieved$.subscribe(() => {
-      this.retrieveRunStatus();
+      if (this.ConfigService.isClassroomMonitor()) {
+        this.retrieveRunStatus();
+      }
     });
   }
 
