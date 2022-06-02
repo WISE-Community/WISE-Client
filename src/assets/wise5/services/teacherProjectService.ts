@@ -178,14 +178,7 @@ export class TeacherProjectService extends ProjectService {
   }
 
   notifyAuthorProjectBeginEnd(projectId, isBegin) {
-    return this.http
-      .post(
-        `${this.ConfigService.getConfigParam(
-          'notifyAuthoringBeginEndURL'
-        )}/${projectId}/${isBegin}`,
-        null
-      )
-      .toPromise();
+    return this.http.post(`/api/author/project/notify/${projectId}/${isBegin}`, null).toPromise();
   }
 
   notifyAuthorProjectBegin(projectId) {

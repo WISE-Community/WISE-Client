@@ -45,7 +45,9 @@ export class SelectPeriodComponent {
     );
     this.subscriptions.add(
       this.ConfigService.configRetrieved$.subscribe(() => {
-        this.populateNumWorkgroupsInPeriod();
+        if (this.ConfigService.isClassroomMonitor()) {
+          this.populateNumWorkgroupsInPeriod();
+        }
       })
     );
   }
