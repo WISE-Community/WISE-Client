@@ -39,4 +39,8 @@ export class DialogGuidanceService extends ComponentService {
   getDefaultComputerAvatarLabel(): string {
     return $localize`Thought Buddy`;
   }
+
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
+    return componentStates.length > 0;
+  }
 }
