@@ -3,12 +3,12 @@
 import { ConfigService } from './configService';
 import { UtilService } from './utilService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionService } from './sessionService';
 import { Observable, Subject } from 'rxjs';
 import { Node } from '../common/Node';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
+import { ComponentServiceLookupService } from './componentServiceLookupService';
 
 @Injectable()
 export class ProjectService {
@@ -18,7 +18,6 @@ export class ProjectService {
   allPaths: string[] = [];
   applicationNodes: any;
   branchesCache: any;
-  componentServices: any = {};
   filters: any[] = [{ name: 'all', label: 'All' }];
   flattenedProjectAsNodeIds: any = null;
   groupNodes: any[];
@@ -43,7 +42,7 @@ export class ProjectService {
   public snipImage$: Observable<any> = this.snipImageSource.asObservable();
 
   constructor(
-    protected upgrade: UpgradeModule,
+    protected componentServiceLookupService: ComponentServiceLookupService,
     protected http: HttpClient,
     protected ConfigService: ConfigService,
     protected SessionService: SessionService,
@@ -2431,27 +2430,8 @@ export class ProjectService {
    * @return whether the component generates work
    */
   componentHasWork(component) {
-    const componentType = component.type;
-    const componentService = this.getComponentService(componentType);
-    if (componentService != null) {
-      return componentService.componentHasWork(component);
-    }
-    return false;
-  }
-
-  /**
-   * Get a component service
-   * @param componentType the component type
-   * @return the component service
-   */
-  getComponentService(componentType) {
-    const componentServiceName = componentType + 'Service';
-    let componentService = this.componentServices[componentServiceName];
-    if (componentService == null) {
-      componentService = this.upgrade.$injector.get(componentServiceName);
-      this.componentServices[componentServiceName] = componentService;
-    }
-    return componentService;
+    const componentService = this.componentServiceLookupService.getService(component.type);
+    return componentService.componentHasWork(component);
   }
 
   getComponentType(nodeId: string, componentId: string): string {

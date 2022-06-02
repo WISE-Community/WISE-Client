@@ -14,6 +14,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
@@ -27,6 +28,15 @@ import { SummaryService } from '../summaryService';
 import { SummaryAuthoring } from './summary-authoring.component';
 
 export class MockConfigService {}
+export class MockComponentServiceLookupService {
+  getService(componentType: string) {
+    return {
+      componentHasCorrectAnswer() {
+        return true;
+      }
+    };
+  }
+}
 
 let component: SummaryAuthoring;
 let fixture: ComponentFixture<SummaryAuthoring>;
@@ -53,6 +63,7 @@ describe('SummaryAuthoringComponent', () => {
       declarations: [EditComponentPrompt, SummaryAuthoring],
       providers: [
         AnnotationService,
+        { provide: ComponentServiceLookupService, useClass: MockComponentServiceLookupService },
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
         ProjectAssetService,
@@ -75,11 +86,6 @@ describe('SummaryAuthoringComponent', () => {
       'getComponentByNodeIdAndComponentId'
     );
     getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponentService').and.returnValue({
-      componentHasCorrectAnswer: () => {
-        return true;
-      }
-    });
     spyOn(component, 'componentChanged');
     fixture.detectChanges();
   });
