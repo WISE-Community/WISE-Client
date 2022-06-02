@@ -69,4 +69,8 @@ export class PeerChatService extends ComponentService {
       peerChatMessages.push(this.convertComponentStateToPeerChatMessage(componentState));
     });
   }
+
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
+    return componentStates.length > 0;
+  }
 }
