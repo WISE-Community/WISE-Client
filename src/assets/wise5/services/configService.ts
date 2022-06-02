@@ -1,10 +1,10 @@
 'use strict';
 
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { formatDate } from '@angular/common';
+import { UtilService } from './utilService';
 
 @Injectable()
 export class ConfigService {
@@ -13,9 +13,9 @@ export class ConfigService {
   public configRetrieved$: Observable<any> = this.configRetrievedSource.asObservable();
 
   constructor(
-    private upgrade: UpgradeModule,
     private http: HttpClient,
-    @Inject(LOCALE_ID) private localeID: string
+    @Inject(LOCALE_ID) private localeID: string,
+    private utilService: UtilService
   ) {}
 
   setConfig(config) {
@@ -440,18 +440,11 @@ export class ConfigService {
   getWorkgroupsByPeriod(periodId) {
     const workgroupsInPeriod = [];
     const myUserInfo = this.getMyUserInfo();
-    if (
-      this.isStudent() &&
-      this.upgrade.$injector.get('UtilService').isMatchingPeriods(myUserInfo.periodId, periodId)
-    ) {
+    if (this.isStudent() && this.utilService.isMatchingPeriods(myUserInfo.periodId, periodId)) {
       workgroupsInPeriod.push(myUserInfo);
     }
     for (const classmateUserInfo of this.getClassmateUserInfos()) {
-      if (
-        this.upgrade.$injector
-          .get('UtilService')
-          .isMatchingPeriods(classmateUserInfo.periodId, periodId)
-      ) {
+      if (this.utilService.isMatchingPeriods(classmateUserInfo.periodId, periodId)) {
         workgroupsInPeriod.push(classmateUserInfo);
       }
     }
@@ -981,16 +974,12 @@ export class ConfigService {
   }
 
   getFormattedStartDate() {
-    return this.upgrade.$injector
-      .get('UtilService')
-      .convertMillisecondsToFormattedDateTime(this.getStartDate());
+    return this.utilService.convertMillisecondsToFormattedDateTime(this.getStartDate());
   }
 
   getFormattedEndDate() {
     if (this.getEndDate() != null) {
-      return this.upgrade.$injector
-        .get('UtilService')
-        .convertMillisecondsToFormattedDateTime(this.getEndDate());
+      return this.utilService.convertMillisecondsToFormattedDateTime(this.getEndDate());
     }
     return '';
   }

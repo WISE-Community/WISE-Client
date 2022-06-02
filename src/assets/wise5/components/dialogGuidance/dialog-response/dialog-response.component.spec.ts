@@ -2,9 +2,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
+import { UtilService } from '../../../services/utilService';
 import { DialogResponse } from '../DialogResponse';
 import { DialogResponseComponent } from './dialog-response.component';
 
@@ -14,9 +14,9 @@ describe('DialogResponseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FlexLayoutModule, HttpClientTestingModule, MatIconModule, UpgradeModule],
+      imports: [FlexLayoutModule, HttpClientTestingModule, MatIconModule],
       declarations: [DialogResponseComponent],
-      providers: [ComputerAvatarService, ConfigService]
+      providers: [ComputerAvatarService, ConfigService, UtilService]
     }).compileComponents();
   });
 
