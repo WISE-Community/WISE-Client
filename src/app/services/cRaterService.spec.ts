@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { CRaterService } from '../../assets/wise5/services/cRaterService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { UtilService } from '../../assets/wise5/services/utilService';
 let service: CRaterService;
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -10,8 +10,8 @@ let http: HttpTestingController;
 describe('CRaterService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [ConfigService, CRaterService]
+      imports: [HttpClientTestingModule],
+      providers: [ConfigService, CRaterService, UtilService]
     });
     http = TestBed.inject(HttpTestingController);
     configService = TestBed.inject(ConfigService);

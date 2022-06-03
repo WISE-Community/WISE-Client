@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import sampleConfig1 from './sampleData/sample_config_1.json';
+import { UtilService } from '../../assets/wise5/services/utilService';
 let service: ConfigService;
 let http: HttpTestingController;
 
@@ -19,8 +19,8 @@ const teacherWorkgroupId2 = 102;
 describe('ConfigService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [ConfigService]
+      imports: [HttpClientTestingModule],
+      providers: [ConfigService, UtilService]
     });
     http = TestBed.get(HttpTestingController);
     service = TestBed.get(ConfigService);

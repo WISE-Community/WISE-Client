@@ -1,8 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { MomentModule } from 'ngx-moment';
 import { ConfigService } from '../../../services/configService';
+import { UtilService } from '../../../services/utilService';
 import { ClassResponse } from './class-response.component';
 
 let fixture: ComponentFixture<ClassResponse>;
@@ -15,7 +15,7 @@ describe('ClassResponseComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MomentModule],
       declarations: [ClassResponse],
-      providers: [ConfigService, UpgradeModule]
+      providers: [ConfigService, UtilService]
     });
     fixture = TestBed.createComponent(ClassResponse);
     component = fixture.componentInstance;

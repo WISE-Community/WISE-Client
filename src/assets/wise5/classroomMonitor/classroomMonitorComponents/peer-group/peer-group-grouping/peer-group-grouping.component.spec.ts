@@ -4,9 +4,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { of } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
+import { UtilService } from '../../../../services/utilService';
 
 import { PeerGroupGroupingComponent } from './peer-group-grouping.component';
 
@@ -27,7 +27,7 @@ describe('PeerGroupGroupingComponent', () => {
         MatCardModule,
         MatDialogModule
       ],
-      providers: [ConfigService, UpgradeModule]
+      providers: [ConfigService, UtilService]
     }).compileComponents();
   });
 
