@@ -9018,11 +9018,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherDataService.ts</context>
-          <context context-type="linenumber">633</context>
+          <context context-type="linenumber">635</context>
         </context-group>
         <target state="translated">Todos los períodos</target>
       </trans-unit>
@@ -11302,7 +11302,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <target state="translated">Período: <x id="PH" equiv-text="this.currentPeriod.periodName"/></target>
       </trans-unit>
