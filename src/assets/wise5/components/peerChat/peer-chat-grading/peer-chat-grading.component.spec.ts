@@ -87,6 +87,9 @@ describe('PeerChatGradingComponent', () => {
     spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup').and.callFake(() => {
       return of(peerGroup);
     });
+    spyOn(TestBed.inject(NotificationService), 'saveNotificationToServer').and.callFake(() => {
+      return Promise.resolve();
+    });
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
