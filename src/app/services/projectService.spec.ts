@@ -10,6 +10,7 @@ import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVeh
 import twoStepsProjectJSON_import from './sampleData/curriculum/TwoSteps.project.json';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { PeerGrouping } from '../domain/peerGrouping';
+import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 
 const projectIdDefault = 1;
 const projectBaseURL = 'http://localhost:8080/curriculum/12345/';
@@ -29,7 +30,7 @@ let twoStepsProjectJSON: any;
 describe('ProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       providers: [ProjectService, ConfigService, SessionService, UtilService]
     });
     http = TestBed.get(HttpTestingController);
