@@ -18,7 +18,7 @@ import { StudentComponentModule } from './student/student.component.module';
 import { SafeUrl } from '../assets/wise5/directives/safeUrl/safe-url.pipe';
 import { StepToolsComponent } from '../assets/wise5/themes/default/themeComponents/stepTools/step-tools.component';
 import { NavigationComponent } from '../assets/wise5/themes/default/navigation/navigation.component';
-import { SummaryDisplayModule } from '../assets/wise5/directives/summaryDisplay/summary-display.module';
+import { SummaryDisplayModule } from '../assets/wise5/directives/summary-display/summary-display.module';
 import { GenerateImageDialogComponent } from '../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 import { TopBarModule } from './student/top-bar/top-bar.module';
 import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.module';

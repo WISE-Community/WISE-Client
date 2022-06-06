@@ -11,7 +11,7 @@ import { downgradeComponent } from '@angular/upgrade/static';
 import { NodeIconComponent } from '../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
 import { MilestoneReportDataComponent } from '../../../app/teacher/milestone/milestone-report-data/milestone-report-data.component';
 import { PossibleScoreComponent } from '../../../app/possible-score/possible-score.component';
-import { SummaryDisplay } from './summaryDisplay/summary-display.component';
+import { SummaryDisplay } from './summary-display/summary-display.component';
 import { ComponentComponent } from '../components/component/component.component';
 
 const Components = angular.module('components', []);
