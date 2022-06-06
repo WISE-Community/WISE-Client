@@ -237,11 +237,26 @@ export class EmbeddedStudent extends ComponentStudent {
   }
 
   handleGetLatestAnnotationsMessage(): void {
-    this.EmbeddedService.handleGetLatestAnnotationsMessage(
-      this.embeddedApplicationIFrameId,
+    const workgroupId = this.ConfigService.getWorkgroupId();
+    const type = 'any';
+    const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
       this.nodeId,
-      this.componentId
+      this.componentId,
+      workgroupId,
+      type
     );
+    const latestCommentAnnotation = this.AnnotationService.getLatestCommentAnnotation(
+      this.nodeId,
+      this.componentId,
+      workgroupId,
+      type
+    );
+    const message = {
+      messageType: 'latestAnnotations',
+      latestScoreAnnotation: latestScoreAnnotation,
+      latestCommentAnnotation: latestCommentAnnotation
+    };
+    this.sendMessageToApplication(message);
   }
 
   handleStudentWorkSavedToServerAdditionalProcessing(componentState: any): void {

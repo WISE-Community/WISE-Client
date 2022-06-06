@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { UtilService } from '../../../services/utilService';
@@ -18,6 +20,8 @@ export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
   messageEventListener: any;
 
   constructor(
+    private AnnotationService: AnnotationService,
+    private ConfigService: ConfigService,
     private EmbeddedService: EmbeddedService,
     protected ProjectService: ProjectService,
     protected TeacherDataService: TeacherDataService,
@@ -111,10 +115,25 @@ export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
   }
 
   handleGetLatestAnnotationsMessage(): void {
-    this.EmbeddedService.handleGetLatestAnnotationsMessage(
-      this.embeddedApplicationIFrameId,
+    const workgroupId = this.ConfigService.getWorkgroupId();
+    const type = 'any';
+    const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
       this.nodeId,
-      this.componentId
+      this.componentId,
+      workgroupId,
+      type
     );
+    const latestCommentAnnotation = this.AnnotationService.getLatestCommentAnnotation(
+      this.nodeId,
+      this.componentId,
+      workgroupId,
+      type
+    );
+    const message = {
+      messageType: 'latestAnnotations',
+      latestScoreAnnotation: latestScoreAnnotation,
+      latestCommentAnnotation: latestCommentAnnotation
+    };
+    this.sendMessageToApplication(message);
   }
 }
