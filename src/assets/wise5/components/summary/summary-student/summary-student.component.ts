@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -24,7 +24,7 @@ export class SummaryStudent extends ComponentStudent {
   isStudent: boolean;
   otherPrompt: string;
   otherStepTitle: string;
-  periodId: number;
+  @Input() periodId: number;
   prompt: string;
   source: string;
   studentDataType: string;
@@ -195,7 +195,7 @@ export class SummaryStudent extends ComponentStudent {
 
   setPeriodIdIfNecessary() {
     if (this.ConfigService.isStudentRun()) {
-      if (this.source === 'period') {
+      if (this.source === 'period' && this.periodId == null) {
         this.periodId = this.ConfigService.getPeriodId();
       } else if (this.source === 'allPeriods') {
         this.periodId = null;

@@ -37,6 +37,8 @@ import { RemoveUserConfirmDialogComponent } from '../../assets/wise5/classroomMo
 import { PeerGroupGradingModule } from './peer-group-grading.module';
 import { SelectPeriodModule } from './select-period.module';
 import { ComponentGradingModule } from './component-grading.module';
+import { TeacherSummaryDisplay } from '../../assets/wise5/directives/teacher-summary-display/teacher-summary-display.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { ComponentGradingModule } from './component-grading.module';
     ShowStudentInfoComponent,
     StatusIconComponent,
     StepInfoComponent,
+    TeacherSummaryDisplay,
     ViewComponentRevisionsComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupInfoComponent,
@@ -75,6 +78,12 @@ import { ComponentGradingModule } from './component-grading.module';
     NavItemScoreComponent,
     WorkgroupNodeStatusComponent
   ],
-  imports: [AngularJSModule, ComponentGradingModule, PeerGroupGradingModule, SelectPeriodModule]
+  imports: [
+    AngularJSModule,
+    ComponentGradingModule,
+    HighchartsChartModule,
+    PeerGroupGradingModule,
+    SelectPeriodModule
+  ]
 })
 export class ClassroomMonitorModule {}
