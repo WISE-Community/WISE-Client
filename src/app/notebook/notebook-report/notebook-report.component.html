@@ -54,7 +54,7 @@
           (click)="saveNotebookReportItem()"
           i18n>Save</button>
       <span *ngIf="saveTime" class="mat-caption secondary-text save-time"
-            matTooltip="{{ saveTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"
+            matTooltip="{{ saveTime | date:'mediumDate' }} • {{ saveTime | date:'shortTime' }}"
             matTooltipPosition="above">
         <em i18n>Saved {{ saveTime | amTimeAgo }}</em>
       </span>

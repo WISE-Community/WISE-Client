@@ -31,25 +31,9 @@
       <ng-container *ngFor="let run of filteredRuns.sort(sortByStartTimeDesc); let i=index">
         <app-timeline-item [active]="isRunActive(run)" *ngIf="i < 10 || showAll" id="run{{run.id}}">
           <app-timeline-item-label>
-            <ng-container *ngIf="run.endTime">
-              <ng-container *ngIf="runSpansYears(run)">
-                <span><strong>{{ run.startTime | amDateFormat:'MMM D' }}</strong></span>
-                <span class="secondary-text"> {{ run.startTime | amDateFormat:'Y' }}</span> -
-                <span><strong> {{ run.endTime | amDateFormat:'MMM D' }}</strong></span>
-                <span class="secondary-text"> {{ run.endTime | amDateFormat:'Y' }}</span>
-              </ng-container>
-              <ng-container *ngIf="!runSpansYears(run)">
-                <span><strong>{{ run.startTime | amDateFormat:'MMM D' }}</strong></span>
-                <ng-container *ngIf="runSpansDays(run)"> -
-                  <strong *ngIf="runSpansMonths(run)">{{ run.endTime | amDateFormat:'MMM D' }}</strong>
-                  <strong *ngIf="!runSpansMonths(run)">{{ run.endTime | amDateFormat:'D' }}</strong>
-                </ng-container>
-                <span class="secondary-text"> {{ run.endTime | amDateFormat:'Y' }}</span>
-              </ng-container>
-            </ng-container>
-            <ng-container *ngIf="!run.endTime">
-              <span><strong>{{ run.startTime | amDateFormat:'MMM D' }}</strong></span>
-              <span class="secondary-text"> {{ run.startTime | amDateFormat:'Y' }}</span>
+            <strong>{{ run.startTime | date:'mediumDate' }}</strong>
+            <ng-container *ngIf="run.endTime && runSpansDays(run)">
+                - <strong>{{ run.endTime | date:'mediumDate' }}</strong>
             </ng-container>
           </app-timeline-item-label>
           <app-timeline-item-content>

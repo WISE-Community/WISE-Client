@@ -2,16 +2,14 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NewsComponent } from './news.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NewsService } from '../services/news.service';
-import { MomentModule } from 'ngx-moment';
 import { News } from '../domain/news';
 import { Observable } from 'rxjs';
 import { User } from '../domain/user';
-import * as moment from 'moment';
 
 const createNewsItem = (id, date, type, title, news, owner) => {
   return new News({
     id: id,
-    date: moment(date, 'YYYY-MM-DD HH:mm:ss.SSS'),
+    date: new Date(date),
     type: type,
     title: title,
     news: news,
@@ -78,7 +76,7 @@ describe('NewsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NewsComponent],
-      imports: [MomentModule],
+      imports: [],
       providers: [{ provide: NewsService, useClass: MockNewsService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
