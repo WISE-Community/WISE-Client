@@ -91,7 +91,7 @@ export class StudentWebSocketService {
         } else if (body.type === 'goToNextNode') {
           this.goToNextStep();
         } else if (body.type === 'classmateStudentWork') {
-          this.StudentDataService.broadcastStudentWorkReceived(body.studentWork);
+          this.StudentDataService.broadcastStudentWorkReceived(JSON.parse(body.content));
         }
       });
   }
@@ -120,10 +120,10 @@ export class StudentWebSocketService {
     this.StudentDataService.updateNodeStatuses();
   }
 
-  sendMessageToClassmate(workgroupId: number, message: any): void {
+  sendStudentWorkToClassmate(workgroupId: number, studentWork: any): void {
     this.rxStomp.publish({
-      destination: `/topic/workgroup/${workgroupId}`,
-      body: JSON.stringify(message)
+      destination: `/app/api/workgroup/${workgroupId}/student-work`,
+      body: JSON.stringify(studentWork)
     });
   }
 }
