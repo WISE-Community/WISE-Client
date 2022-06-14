@@ -128,7 +128,7 @@
             class="common-width">
           <mat-label i18n>The student needs to choose this choice</mat-label>
           <mat-select
-              [(ngModel)]="transitionCriteria.params.choiceIds"
+              [(ngModel)]="transitionCriteria.params.choiceIds[0]"
               (ngModelChange)="saveProject()">
             <mat-option *ngFor="let choice of getChoicesByNodeIdAndComponentId(transitionCriteria.params.nodeId, transitionCriteria.params.componentId)"
                 [value]="choice.id">
