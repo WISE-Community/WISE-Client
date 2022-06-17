@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { AngularJSModule } from '../../../../app/common-hybrid-angular.module';
 import { StudentComponentModule } from '../../../../app/student/student.component.module';
-import { SummaryDisplay } from './summary-display.component';
+import { StudentSummaryDisplay } from '../student-summary-display/student-summary-display.component';
 
 @NgModule({
-  declarations: [SummaryDisplay],
+  declarations: [StudentSummaryDisplay],
   imports: [AngularJSModule, HighchartsChartModule, StudentComponentModule],
-  exports: [SummaryDisplay]
+  exports: [StudentSummaryDisplay]
 })
 export class SummaryDisplayModule {}

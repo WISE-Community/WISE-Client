@@ -9,11 +9,12 @@ import { ProjectService } from '../../assets/wise5/services/projectService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 
+const ALL_PERIODS = 'allPeriods';
 const componentId = 'component1';
 let http: HttpTestingController;
 const nodeId = 'node1';
+const PERIOD = 'period';
 const periodId = 10;
-const periodSource = 'period';
 const runId = 1;
 let service;
 const summaryAllowedComponentTypes = [
@@ -57,8 +58,10 @@ describe('SummaryService', () => {
   isComponentTypeAllowed();
   isScoresSummaryAvailableForComponentType();
   isResponsesSummaryAvailableForComponentType();
-  getLatestClassmateStudentWork();
-  getLatestClassmateScores();
+  getLatestClassmateStudentWorkInPeriod();
+  getLatestClassmateStudentWorkInClass();
+  getLatestClassmateScoresInPeriod();
+  getLatestClassmateScoresInClass();
 });
 
 function createComponent() {
@@ -130,34 +133,58 @@ function isResponsesSummaryAvailableForComponentType() {
   });
 }
 
-function getLatestClassmateStudentWork() {
-  it('should get latest classmate student work', () => {
-    const expectedStudentWork = [{ id: 1 }];
-    service
-      .getLatestClassmateStudentWork(nodeId, componentId, periodSource)
-      .subscribe((studentWork: any[]) => {
-        expect(studentWork).toEqual(expectedStudentWork);
-      });
-    http
-      .expectOne(
-        `/api/classmate/summary/student-work/${runId}/${periodId}/${nodeId}/${componentId}/${periodSource}`
-      )
-      .flush(expectedStudentWork);
+function getLatestClassmateStudentWorkInPeriod() {
+  it('should get latest classmate student work in period', () => {
+    getLatestClassmateStudentWorkInX(
+      PERIOD,
+      `/api/classmate/summary/student-work/${runId}/${nodeId}/${componentId}/period/${periodId}`
+    );
   });
 }
 
-function getLatestClassmateScores() {
-  it('should get latest classmate scores', () => {
-    const expectedScores = [{ id: 2 }];
-    service
-      .getLatestClassmateScores(nodeId, componentId, periodSource)
-      .subscribe((scores: any[]) => {
-        expect(scores).toEqual(expectedScores);
-      });
-    http
-      .expectOne(
-        `/api/classmate/summary/scores/${runId}/${periodId}/${nodeId}/${componentId}/${periodSource}`
-      )
-      .flush(expectedScores);
+function getLatestClassmateStudentWorkInClass() {
+  it('should get latest classmate student work in class', () => {
+    getLatestClassmateStudentWorkInX(
+      ALL_PERIODS,
+      `/api/classmate/summary/student-work/${runId}/${nodeId}/${componentId}/class`
+    );
   });
+}
+
+function getLatestClassmateStudentWorkInX(source: string, expectedUrl: string) {
+  const expectedStudentWork = [{ id: 1 }];
+  service
+    .getLatestClassmateStudentWork(runId, periodId, nodeId, componentId, source)
+    .subscribe((studentWork: any[]) => {
+      expect(studentWork).toEqual(expectedStudentWork);
+    });
+  http.expectOne(expectedUrl).flush(expectedStudentWork);
+}
+
+function getLatestClassmateScoresInPeriod() {
+  it('should get latest classmate scores in period', () => {
+    getLatestClassmateScoresInX(
+      PERIOD,
+      `/api/classmate/summary/scores/${runId}/${nodeId}/${componentId}/period/${periodId}`
+    );
+  });
+}
+
+function getLatestClassmateScoresInClass() {
+  it('should get latest classmate scores in class', () => {
+    getLatestClassmateScoresInX(
+      ALL_PERIODS,
+      `/api/classmate/summary/scores/${runId}/${nodeId}/${componentId}/class`
+    );
+  });
+}
+
+function getLatestClassmateScoresInX(source: string, expectedUrl: string) {
+  const expectedScores = [{ id: 2 }];
+  service
+    .getLatestClassmateScores(runId, periodId, nodeId, componentId, source)
+    .subscribe((scores: any[]) => {
+      expect(scores).toEqual(expectedScores);
+    });
+  http.expectOne(expectedUrl).flush(expectedScores);
 }

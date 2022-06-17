@@ -11,8 +11,8 @@ import { downgradeComponent } from '@angular/upgrade/static';
 import { NodeIconComponent } from '../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
 import { MilestoneReportDataComponent } from '../../../app/teacher/milestone/milestone-report-data/milestone-report-data.component';
 import { PossibleScoreComponent } from '../../../app/possible-score/possible-score.component';
-import { SummaryDisplay } from './summaryDisplay/summary-display.component';
 import { ComponentComponent } from '../components/component/component.component';
+import { TeacherSummaryDisplay } from './teacher-summary-display/teacher-summary-display.component';
 
 const Components = angular.module('components', []);
 
@@ -38,8 +38,8 @@ Components.directive(
   downgradeComponent({ component: PossibleScoreComponent }) as angular.IDirectiveFactory
 );
 Components.directive(
-  'summaryDisplay',
-  downgradeComponent({ component: SummaryDisplay }) as angular.IDirectiveFactory
+  'teacherSummaryDisplay',
+  downgradeComponent({ component: TeacherSummaryDisplay }) as angular.IDirectiveFactory
 );
 Components.directive('sticky', Sticky);
 

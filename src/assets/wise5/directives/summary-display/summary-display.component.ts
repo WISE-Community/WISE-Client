@@ -1,14 +1,12 @@
 import * as Highcharts from 'highcharts';
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Observable, Subscription } from 'rxjs';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
-import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
 import { SummaryService } from '../../components/summary/summaryService';
-import { from, of } from 'rxjs';
+import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -16,7 +14,7 @@ import { tap } from 'rxjs/operators';
   templateUrl: 'summary-display.component.html',
   styleUrls: ['summary-display.component.scss']
 })
-export class SummaryDisplay {
+export abstract class SummaryDisplay {
   chartConfig: any;
   colors = {
     palette: [
@@ -67,13 +65,11 @@ export class SummaryDisplay {
   @Input() doRender: boolean;
 
   constructor(
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
-    private ProjectService: ProjectService,
-    private StudentDataService: StudentDataService,
-    private summaryService: SummaryService,
-    private upgrade: UpgradeModule,
-    private UtilService: UtilService
+    protected annotationService: AnnotationService,
+    protected configService: ConfigService,
+    protected projectService: ProjectService,
+    protected summaryService: SummaryService,
+    protected utilService: UtilService
   ) {}
 
   ngOnInit() {
@@ -81,14 +77,9 @@ export class SummaryDisplay {
     this.initializeOtherComponent();
     this.initializeDataService();
     this.initializeCustomLabelColors();
-    this.initializeChangeListeners();
     if (this.doRender) {
       this.renderDisplay();
     }
-  }
-
-  ngOnDestroy() {
-    this.studentWorkSavedToServerSubscription.unsubscribe();
   }
 
   setNumDummySamples() {
@@ -102,7 +93,7 @@ export class SummaryDisplay {
   }
 
   initializeOtherComponent() {
-    this.otherComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
+    this.otherComponent = this.projectService.getComponentByNodeIdAndComponentId(
       this.nodeId,
       this.componentId
     );
@@ -112,31 +103,13 @@ export class SummaryDisplay {
   }
 
   initializeDataService() {
-    if (this.isVLEPreview() || this.isStudentRun()) {
-      this.dataService = this.upgrade.$injector.get('StudentDataService');
-    } else if (this.isClassroomMonitor() || this.isAuthoringPreview()) {
-      this.dataService = this.upgrade.$injector.get('TeacherDataService');
-    }
+    // implemented by children
   }
 
   initializeCustomLabelColors() {
     if (this.customLabelColors == null) {
       this.customLabelColors = [];
     }
-  }
-
-  initializeChangeListeners() {
-    this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-      (componentState) => {
-        if (
-          this.doRender &&
-          componentState.nodeId === this.nodeId &&
-          componentState.componentId === this.componentId
-        ) {
-          this.renderDisplay();
-        }
-      }
-    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -146,19 +119,19 @@ export class SummaryDisplay {
   }
 
   isVLEPreview() {
-    return this.ConfigService.isPreview();
+    return this.configService.isPreview();
   }
 
   isAuthoringPreview() {
-    return this.ConfigService.isAuthoring();
+    return this.configService.isAuthoring();
   }
 
   isStudentRun() {
-    return this.ConfigService.isStudentRun();
+    return this.configService.isStudentRun();
   }
 
   isClassroomMonitor() {
-    return this.ConfigService.isClassroomMonitor();
+    return this.configService.isClassroomMonitor();
   }
 
   renderDisplay() {
@@ -223,16 +196,20 @@ export class SummaryDisplay {
       return this.getDummyStudentScoresForVLEPreview();
     } else if (this.isAuthoringPreview()) {
       return this.getDummyStudentScoresForAuthoringPreview();
-    } else if (this.isStudentRun()) {
-      return this.summaryService.getLatestClassmateScores(nodeId, componentId, source).pipe(
-        tap((scoreAnnotations) => {
-          return this.filterLatestScoreAnnotations(scoreAnnotations);
-        })
-      );
-    } else if (this.isClassroomMonitor()) {
-      const periodIdValue = this.getPeriodIdValue(periodId);
-      const annotations = this.dataService.getAnnotationsByNodeIdAndPeriodId(nodeId, periodIdValue);
-      return of(this.filterLatestScoreAnnotations(annotations));
+    } else {
+      return this.summaryService
+        .getLatestClassmateScores(
+          this.configService.getRunId(),
+          periodId,
+          nodeId,
+          componentId,
+          source
+        )
+        .pipe(
+          tap((scoreAnnotations) => {
+            return this.filterLatestScoreAnnotations(scoreAnnotations);
+          })
+        );
     }
   }
 
@@ -265,10 +242,10 @@ export class SummaryDisplay {
   }
 
   getLatestScoreAnnotationForWorkgroup() {
-    return this.AnnotationService.getLatestScoreAnnotation(
+    return this.annotationService.getLatestScoreAnnotation(
       this.nodeId,
       this.componentId,
-      this.ConfigService.getWorkgroupId()
+      this.configService.getWorkgroupId()
     );
   }
 
@@ -299,16 +276,13 @@ export class SummaryDisplay {
       return this.getDummyStudentWorkForVLEPreview(nodeId, componentId);
     } else if (this.isAuthoringPreview()) {
       return this.getDummyStudentWorkForAuthoringPreview();
-    } else if (this.isStudentRun()) {
-      return this.summaryService.getLatestClassmateStudentWork(nodeId, componentId, source);
-    } else if (this.isClassroomMonitor()) {
-      const periodIdValue = this.getPeriodIdValue(periodId);
-      return from(
-        this.dataService.retrieveLatestStudentDataByNodeIdAndComponentIdAndPeriodId(
-          nodeId,
-          componentId,
-          periodIdValue
-        )
+    } else {
+      return this.summaryService.getLatestClassmateStudentWork(
+        this.configService.getRunId(),
+        periodId,
+        nodeId,
+        componentId,
+        source
       );
     }
   }
@@ -427,7 +401,7 @@ export class SummaryDisplay {
       this.componentId
     );
     if (componentState != null) {
-      tableData = this.UtilService.makeCopyOfJSONObject(componentState.studentData.tableData);
+      tableData = this.utilService.makeCopyOfJSONObject(componentState.studentData.tableData);
       for (let r = 1; r < tableData.length; r++) {
         tableData[r][1].text = this.getRandomSimilarNumber(tableData[r][1].text);
       }
@@ -787,7 +761,7 @@ export class SummaryDisplay {
       let opacity = 0.1;
       for (let i = 0; i < this.maxScore; i++) {
         opacity = opacity + step;
-        const color = this.UtilService.rgbToHex(this.colors.singleHue, opacity);
+        const color = this.utilService.rgbToHex(this.colors.singleHue, opacity);
         colors.push(color);
       }
       return colors;
@@ -920,7 +894,7 @@ export class SummaryDisplay {
     if (this.isVLEPreview() || this.isAuthoringPreview()) {
       return dataCount;
     } else {
-      const numWorkgroups = this.ConfigService.getNumberOfWorkgroupsInPeriod(this.periodId);
+      const numWorkgroups = this.configService.getNumberOfWorkgroupsInPeriod(this.periodId);
       return Math.max(numWorkgroups, dataCount);
     }
   }

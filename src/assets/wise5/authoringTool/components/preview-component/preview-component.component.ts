@@ -14,6 +14,9 @@ export class PreviewComponentComponent implements OnInit {
   @Input()
   nodeId: string;
 
+  @Input()
+  periodId: number;
+
   @Output()
   starterStateChangedEvent: EventEmitter<any> = new EventEmitter<any>();
 

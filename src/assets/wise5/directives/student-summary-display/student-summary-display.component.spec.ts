@@ -11,16 +11,16 @@ import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
-import { SummaryDisplay } from './summary-display.component';
+import { StudentSummaryDisplay } from './student-summary-display.component';
 
-let component: SummaryDisplay;
-let fixture: ComponentFixture<SummaryDisplay>;
+let component: StudentSummaryDisplay;
+let fixture: ComponentFixture<StudentSummaryDisplay>;
 
 describe('SummaryDisplayComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
-      declarations: [SummaryDisplay],
+      declarations: [StudentSummaryDisplay],
       providers: [
         AnnotationService,
         ConfigService,
@@ -33,7 +33,7 @@ describe('SummaryDisplayComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-    fixture = TestBed.createComponent(SummaryDisplay);
+    fixture = TestBed.createComponent(StudentSummaryDisplay);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

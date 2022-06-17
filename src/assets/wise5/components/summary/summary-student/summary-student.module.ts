@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AngularJSModule } from '../../../../../app/common-hybrid-angular.module';
 import { StudentComponentModule } from '../../../../../app/student/student.component.module';
-import { SummaryDisplayModule } from '../../../directives/summaryDisplay/summary-display.module';
+import { SummaryDisplayModule } from '../../../directives/summary-display/summary-display.module';
 import { SummaryStudent } from './summary-student.component';
 
 @NgModule({
