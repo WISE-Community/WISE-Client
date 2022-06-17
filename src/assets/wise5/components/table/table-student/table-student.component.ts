@@ -285,23 +285,7 @@ export class TableStudent extends ComponentStudent {
         componentId: this.componentId,
         isDirty: false
       });
-      const isAutoSave = componentState.isAutoSave;
-      const isSubmit = componentState.isSubmit;
-      const serverSaveTime = componentState.serverSaveTime;
-      const clientSaveTime = this.ConfigService.convertToClientTimestamp(serverSaveTime);
-      if (isSubmit) {
-        this.setSubmittedMessage(clientSaveTime);
-        this.lockIfNecessary();
-        this.isSubmitDirty = false;
-        this.StudentDataService.broadcastComponentSubmitDirty({
-          componentId: this.componentId,
-          isDirty: false
-        });
-      } else if (isAutoSave) {
-        this.setAutoSavedMessage(clientSaveTime);
-      } else {
-        this.setSavedMessage(clientSaveTime);
-      }
+      this.latestComponentState = componentState;
     }
   }
 
@@ -1014,7 +998,7 @@ export class TableStudent extends ComponentStudent {
     }
     this.setIsDirtyAndBroadcast();
     this.setIsSubmitDirtyAndBroadcast();
-    this.clearSaveText();
+    this.clearLatestComponentState();
     const action = 'change';
     this.createComponentStateAndBroadcast(action);
   }

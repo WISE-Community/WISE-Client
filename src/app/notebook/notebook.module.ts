@@ -13,7 +13,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
-import { MomentModule } from 'ngx-moment';
+import { ComponentStateInfoModule } from '../../assets/wise5/common/component-state-info/component-state-info.module';
 import { WiseTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
 import { NotebookItemComponent } from './notebook-item/notebook-item.component';
 import { NotebookLauncherComponent } from './notebook-launcher/notebook-launcher.component';
@@ -34,6 +34,7 @@ import { NotebookReportComponent } from './notebook-report/notebook-report.compo
   ],
   imports: [
     CommonModule,
+    ComponentStateInfoModule,
     EditorModule,
     FlexLayoutModule,
     MatButtonModule,
@@ -47,7 +48,6 @@ import { NotebookReportComponent } from './notebook-report/notebook-report.compo
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MomentModule
   ],
   providers: [{ provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
   exports: [

@@ -93,7 +93,7 @@
       Team has not saved any work
     </div>
     <div *ngIf="componentStates.length > 0" class="component__actions__info component--grading__actions__info md-caption" fxLayout="row">
-      <component-state-info [componentState]="latestComponentState" [isActive]="true">
+      <component-state-info [componentState]="latestComponentState">
       </component-state-info>
       <span *ngIf="componentStates.length > 1">
         &nbsp;&#8226;&nbsp;<a (click)="showRevisions($event)" i18n>See revisions</a>

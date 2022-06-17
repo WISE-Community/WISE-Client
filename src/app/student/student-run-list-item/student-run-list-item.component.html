@@ -60,7 +60,7 @@
               disabled
               fxFlex="0 0 auto"
               fxFlex.xs="100">
-        <ng-container i18n>Starts {{run.startTime | amTimeAgo}}</ng-container>
+        <ng-container i18n>Starts {{run.startTime | date}}</ng-container>
       </button>
       <button mat-flat-button
              *ngIf="isRunActive(run)"

@@ -61,13 +61,13 @@
   </div>
 </div>
 <component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
+    [componentState]="latestComponentState"
     [isDirty]="isDirty"
     [isDisabled]="isDisabled"
     [isSaveButtonVisible]="isSaveButtonVisible"
     [isSubmitButtonDisabled]="isSubmitButtonDisabled"
     [isSubmitButtonVisible]="isSubmitButtonVisible"
     [isSubmitDirty]="isSubmitDirty"
-    [saveMessage]="saveMessage"
     (saveButtonClicked)="saveButtonClicked($event)"
     (submitButtonClicked)="submitButtonClicked($event)">
 </component-save-submit-buttons>
