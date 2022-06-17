@@ -8,6 +8,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ConfigService } from '../../../services/configService';
 import { SessionService } from '../../../services/sessionService';
 import { CopyNodesService } from '../../../services/copyNodesService';
+import { ComponentServiceLookupServiceModule } from '../../../../wise5/services/componentServiceLookupServiceModule';
 
 let component: GradingEditComponentMaxScoreComponent;
 let fixture: ComponentFixture<GradingEditComponentMaxScoreComponent>;
@@ -20,7 +21,7 @@ class MockService {}
 describe('GradingEditComponentMaxScoreComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       declarations: [GradingEditComponentMaxScoreComponent],
       providers: [
         { provide: ConfigService, useClass: MockService },

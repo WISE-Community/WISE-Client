@@ -5,6 +5,7 @@ import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
 import { SelectPeerGroupingDialogComponent } from './select-peer-grouping-dialog.component';
 import { getDialogOpenSpy } from '../peer-grouping-testing-helper';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
 let component: SelectPeerGroupingDialogComponent;
 let fixture: ComponentFixture<SelectPeerGroupingDialogComponent>;
@@ -16,7 +17,7 @@ const tag2: string = 'tag2';
 describe('SelectPeerGroupingDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PeerGroupingTestingModule],
+      imports: [ComponentServiceLookupServiceModule, PeerGroupingTestingModule],
       declarations: [SelectPeerGroupingDialogComponent],
       providers: []
     }).compileComponents();

@@ -6,6 +6,7 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 
 let configService: ConfigService;
 let projectService: ProjectService;
@@ -16,7 +17,7 @@ let service: TagService;
 describe('TagService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       providers: [ConfigService, ProjectService, SessionService, TagService, UtilService]
     });
     http = TestBed.get(HttpTestingController);

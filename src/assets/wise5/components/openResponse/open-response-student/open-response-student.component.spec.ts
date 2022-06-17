@@ -13,6 +13,7 @@ import { ComponentHeader } from '../../../directives/component-header/component-
 import { ComponentSaveSubmitButtons } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { AnnotationService } from '../../../services/annotationService';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
 import { NodeService } from '../../../services/nodeService';
@@ -51,6 +52,7 @@ describe('OpenResponseStudent', () => {
         BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,

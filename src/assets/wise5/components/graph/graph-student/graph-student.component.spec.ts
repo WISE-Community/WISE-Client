@@ -22,6 +22,7 @@ import { ComponentService } from '../../componentService';
 import { GraphService } from '../graphService';
 import { GraphStudent } from './graph-student.component';
 import { of } from 'rxjs';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
 class MockNotebookService {
   addNote() {}
@@ -49,6 +50,7 @@ describe('GraphStudentComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
+        ComponentServiceLookupServiceModule,
         HighchartsChartModule,
         HttpClientTestingModule,
         MatDialogModule,

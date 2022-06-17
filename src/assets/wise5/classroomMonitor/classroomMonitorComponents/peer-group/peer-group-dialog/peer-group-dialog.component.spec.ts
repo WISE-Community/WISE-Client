@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { PeerGrouping } from '../../../../../../app/domain/peerGrouping';
+import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
 
 describe('PeerGroupDialogComponent', () => {
   let component: PeerGroupDialogComponent;
@@ -34,6 +35,7 @@ describe('PeerGroupDialogComponent', () => {
       imports: [
         BrowserAnimationsModule,
         CommonModule,
+        ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
         MatDialogModule,
         MatSelectModule

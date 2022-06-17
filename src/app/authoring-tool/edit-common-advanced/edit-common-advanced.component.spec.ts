@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../assets/wise5/services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../../assets/wise5/services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
@@ -36,6 +37,7 @@ describe('EditCommonAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,

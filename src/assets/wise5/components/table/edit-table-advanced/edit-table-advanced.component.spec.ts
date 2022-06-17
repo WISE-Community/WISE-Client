@@ -22,6 +22,7 @@ import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/e
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 import { AnnotationService } from '../../../services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
@@ -50,6 +51,7 @@ describe('EditTableAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
