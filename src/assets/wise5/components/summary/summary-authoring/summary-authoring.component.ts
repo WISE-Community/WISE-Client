@@ -3,10 +3,10 @@
 import { Component } from '@angular/core';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { SummaryService } from '../summaryService';
 
 @Component({
@@ -21,12 +21,12 @@ export class SummaryAuthoring extends ComponentAuthoring {
   stepNodesDetails: string[];
 
   constructor(
+    private componentServiceLookupService: ComponentServiceLookupService,
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
     protected ProjectService: TeacherProjectService,
-    private SummaryService: SummaryService,
-    private UtilService: UtilService
+    private SummaryService: SummaryService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
     this.stepNodesDetails = this.ProjectService.getStepNodesDetailsInOrder();
@@ -142,7 +142,7 @@ export class SummaryAuthoring extends ComponentAuthoring {
     if (nodeId != null && componentId != null) {
       const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
       if (component != null) {
-        const componentService = this.ProjectService.getComponentService(component.type);
+        const componentService = this.componentServiceLookupService.getService(component.type);
         return componentService.componentHasCorrectAnswer(component);
       }
     }

@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EmbeddedAuthoring } from './embedded-authoring.component';
 import { EmbeddedAuthoringModule } from './embedded-authoring.module';
@@ -13,7 +14,12 @@ let fixture: ComponentFixture<EmbeddedAuthoring>;
 describe('EmbeddedAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, EmbeddedAuthoringModule, HttpClientTestingModule]
+      imports: [
+        BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
+        EmbeddedAuthoringModule,
+        HttpClientTestingModule
+      ]
     });
     fixture = TestBed.createComponent(EmbeddedAuthoring);
     component = fixture.componentInstance;

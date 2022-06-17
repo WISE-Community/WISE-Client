@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 import { DeleteNodeService } from '../../assets/wise5/services/deleteNodeService';
@@ -16,7 +17,7 @@ let service: DeleteNodeService;
 describe('DeleteNodeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       providers: [
         ConfigService,
         CopyNodesService,

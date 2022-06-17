@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
@@ -39,6 +40,7 @@ describe('SummaryStudentComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
+        ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
         MatDialogModule,
         NoopAnimationsModule,

@@ -4,6 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../services/configService';
 import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
@@ -21,7 +22,12 @@ describe('WiseTinymceEditorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [WiseTinymceEditorComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        UpgradeModule
+      ],
       providers: [
         AnnotationService,
         ConfigService,

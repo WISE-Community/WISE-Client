@@ -5,6 +5,7 @@ import { VLEProjectService } from '../../assets/wise5/vle/vleProjectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 let service: VLEProjectService;
 let configService: ConfigService;
 let sessionService: SessionService;
@@ -14,7 +15,7 @@ let http: HttpTestingController;
 describe('VLEProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       providers: [VLEProjectService, ConfigService, SessionService, UtilService]
     });
     http = TestBed.get(HttpTestingController);

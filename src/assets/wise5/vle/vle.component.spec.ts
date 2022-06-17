@@ -36,6 +36,7 @@ import { NodeStatusIcon } from '../themes/default/themeComponents/nodeStatusIcon
 import { NodeIconComponent } from '../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
 import { Node } from '../common/Node';
 import { FormsModule } from '@angular/forms';
+import { ComponentServiceLookupServiceModule } from '../services/componentServiceLookupServiceModule';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
@@ -56,6 +57,7 @@ describe('VLEComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatBadgeModule,

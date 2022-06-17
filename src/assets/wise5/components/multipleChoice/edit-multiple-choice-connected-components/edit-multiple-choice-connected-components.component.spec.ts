@@ -9,6 +9,7 @@ import { SessionService } from '../../../services/sessionService';
 import { UtilService } from '../../../services/utilService';
 import { EditMultipleChoiceConnectedComponentsComponent } from './edit-multiple-choice-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
 let component: EditMultipleChoiceConnectedComponentsComponent;
 let fixture: ComponentFixture<EditMultipleChoiceConnectedComponentsComponent>;
@@ -18,7 +19,12 @@ const nodeId1 = 'nodeId1';
 describe('EditMultipleChoiceConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatIconModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatIconModule,
+        UpgradeModule
+      ],
       declarations: [
         EditConnectedComponentsAddButtonComponent,
         EditMultipleChoiceConnectedComponentsComponent

@@ -12,13 +12,19 @@ import { StudentDataService } from '../../../assets/wise5/services/studentDataSe
 import { TagService } from '../../../assets/wise5/services/tagService';
 import { UtilService } from '../../../assets/wise5/services/utilService';
 import { NotebookReportComponent } from './notebook-report.component';
+import { ComponentServiceLookupServiceModule } from '../../../assets/wise5/services/componentServiceLookupServiceModule';
 
 let component: NotebookReportComponent;
 
 describe('NotebookReportComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        UpgradeModule
+      ],
       declarations: [NotebookReportComponent],
       providers: [
         AnnotationService,

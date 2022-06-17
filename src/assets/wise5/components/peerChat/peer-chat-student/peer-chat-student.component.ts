@@ -193,13 +193,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   private sendWorkToPeerWorkgroups(componentState: any): void {
-    const message = {
-      studentWork: componentState,
-      type: 'classmateStudentWork'
-    };
     for (const workgroupId of this.peerChatWorkgroupIds) {
       if (workgroupId !== this.workgroupId) {
-        this.studentWebSocketService.sendMessageToClassmate(workgroupId, message);
+        this.studentWebSocketService.sendStudentWorkToClassmate(workgroupId, componentState);
       }
     }
   }

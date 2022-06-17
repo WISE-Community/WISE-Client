@@ -11,6 +11,7 @@ import { SessionService } from '../../../assets/wise5/services/sessionService';
 import { UtilService } from '../../../assets/wise5/services/utilService';
 import { EditConnectedComponentComponentSelectComponent } from './edit-connected-component-component-select.component';
 import { createConnectedComponentObject } from '../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
+import { ComponentServiceLookupServiceModule } from '../../../assets/wise5/services/componentServiceLookupServiceModule';
 
 describe('EditConnectedComponentComponentSelectComponent', () => {
   let component: EditConnectedComponentComponentSelectComponent;
@@ -22,6 +23,7 @@ describe('EditConnectedComponentComponentSelectComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientModule,
         MatFormFieldModule,

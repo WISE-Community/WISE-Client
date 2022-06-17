@@ -3,20 +3,20 @@ import { ProjectService } from '../services/projectService';
 import { ConfigService } from '../services/configService';
 import { UtilService } from '../services/utilService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
 import { SessionService } from '../services/sessionService';
+import { ComponentServiceLookupService } from '../services/componentServiceLookupService';
 
 @Injectable()
 export class VLEProjectService extends ProjectService {
   constructor(
-    protected upgrade: UpgradeModule,
+    protected componentServiceLookupService: ComponentServiceLookupService,
     protected http: HttpClient,
     protected ConfigService: ConfigService,
     protected SessionService: SessionService,
     protected UtilService: UtilService
   ) {
-    super(upgrade, http, ConfigService, SessionService, UtilService);
+    super(componentServiceLookupService, http, ConfigService, SessionService, UtilService);
   }
 
   /**
@@ -65,7 +65,7 @@ export class VLEProjectService extends ProjectService {
       annotation.nodeId,
       annotation.componentId
     );
-    const componentService = this.upgrade.$injector.get(component.type + 'Service');
+    const componentService = this.componentServiceLookupService.getService(component.type);
     return componentService.displayAnnotation(component, annotation);
   }
 
@@ -115,10 +115,10 @@ export class VLEProjectService extends ProjectService {
   }
 
   retrieveScript(scriptFilename) {
-    return this.upgrade.$injector
-      .get('$http')
+    return this.http
       .get(`${this.ConfigService.getProjectAssetsDirectoryPath()}/${scriptFilename}`)
-      .then((result) => {
+      .toPromise()
+      .then((result: any) => {
         return result.data;
       });
   }

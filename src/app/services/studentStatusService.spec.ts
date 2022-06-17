@@ -12,6 +12,7 @@ import { StudentStatusService } from '../../assets/wise5/services/studentStatusS
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { of } from 'rxjs';
+import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 
 let configService: ConfigService;
 let http: HttpClient;
@@ -35,7 +36,7 @@ const studentStatusUrl = '/api/studentStatus';
 describe('StudentStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       providers: [
         AnnotationService,
         ConfigService,

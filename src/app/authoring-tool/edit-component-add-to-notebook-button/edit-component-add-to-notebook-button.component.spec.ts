@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ComponentServiceLookupServiceModule } from '../../../assets/wise5/services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { SessionService } from '../../../assets/wise5/services/sessionService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
@@ -16,7 +17,13 @@ describe('EditComponentAddToNotebookButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule, HttpClientTestingModule, MatCheckboxModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        FormsModule,
+        HttpClientTestingModule,
+        MatCheckboxModule,
+        UpgradeModule
+      ],
       declarations: [EditComponentAddToNotebookButtonComponent],
       providers: [ConfigService, SessionService, TeacherProjectService, UtilService]
     }).compileComponents();

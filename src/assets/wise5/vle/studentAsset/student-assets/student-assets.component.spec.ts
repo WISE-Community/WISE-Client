@@ -7,6 +7,7 @@ import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { UtilService } from '../../../services/utilService';
 import { StudentAssetService } from '../../../services/studentAssetService';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
 describe('StudentAssetsComponent', () => {
   let component: StudentAssetsComponent;
@@ -20,7 +21,7 @@ describe('StudentAssetsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       declarations: [StudentAssetsComponent],
       providers: [ConfigService, ProjectService, SessionService, StudentAssetService, UtilService]
     }).compileComponents();

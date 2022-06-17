@@ -9,6 +9,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { SessionService } from './sessionService';
+import { ComponentServiceLookupService } from './componentServiceLookupService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -33,12 +34,13 @@ export class TeacherProjectService extends ProjectService {
 
   constructor(
     protected upgrade: UpgradeModule,
+    protected componentServiceLookupService: ComponentServiceLookupService,
     protected http: HttpClient,
     protected ConfigService: ConfigService,
     protected SessionService: SessionService,
     protected UtilService: UtilService
   ) {
-    super(upgrade, http, ConfigService, SessionService, UtilService);
+    super(componentServiceLookupService, http, ConfigService, SessionService, UtilService);
   }
 
   getNewProjectTemplate() {
@@ -604,7 +606,7 @@ export class TeacherProjectService extends ProjectService {
 
   turnOnSaveButtonForAllComponents(node) {
     for (const component of node.components) {
-      const service = this.upgrade.$injector.get(component.type + 'Service');
+      const service = this.componentServiceLookupService.getService(component.type);
       if (service.componentUsesSaveButton()) {
         component.showSaveButton = true;
       }
@@ -613,7 +615,7 @@ export class TeacherProjectService extends ProjectService {
 
   turnOffSaveButtonForAllComponents(node) {
     for (const component of node.components) {
-      const service = this.upgrade.$injector.get(component.type + 'Service');
+      const service = this.componentServiceLookupService.getService(component.type);
       if (service.componentUsesSaveButton()) {
         component.showSaveButton = false;
       }
@@ -1809,7 +1811,7 @@ export class TeacherProjectService extends ProjectService {
    */
   createComponent(nodeId, componentType, insertAfterComponentId = null) {
     const node = this.getNodeById(nodeId);
-    const service = this.upgrade.$injector.get(componentType + 'Service');
+    const service = this.componentServiceLookupService.getService(componentType);
     const component = service.createComponent();
     if (service.componentHasWork(component)) {
       if (node.showSaveButton == false) {
@@ -1832,7 +1834,7 @@ export class TeacherProjectService extends ProjectService {
   doesAnyComponentHaveWork(nodeId) {
     const node = this.getNodeById(nodeId);
     for (const component of node.components) {
-      const service = this.upgrade.$injector.get(component.type + 'Service');
+      const service = this.componentServiceLookupService.getService(component.type);
       if (service != null && service.componentHasWork(component)) {
         return true;
       }

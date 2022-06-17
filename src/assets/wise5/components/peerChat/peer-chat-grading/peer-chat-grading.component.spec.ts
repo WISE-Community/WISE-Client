@@ -24,6 +24,7 @@ import { PeerGroupMember } from '../PeerGroupMember';
 import { PeerChatGradingComponent } from './peer-chat-grading.component';
 import { of } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
 let component: PeerChatGradingComponent;
 let fixture: ComponentFixture<PeerChatGradingComponent>;
@@ -46,7 +47,12 @@ const peerGroup = new PeerGroup(
 describe('PeerChatGradingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        UpgradeModule
+      ],
       declarations: [PeerChatGradingComponent],
       providers: [
         AchievementService,
