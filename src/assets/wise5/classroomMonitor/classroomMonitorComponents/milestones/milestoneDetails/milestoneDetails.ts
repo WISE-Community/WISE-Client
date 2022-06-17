@@ -233,7 +233,7 @@ const MilestoneDetails = {
             <p class="heavy">{{ $ctrl.getDisplayNamesByWorkgroupId(workgroup.workgroupId) }}</p>
             <div class="md-secondary-container heavy">
               <span ng-if="workgroup.achievementTime !== null" class="success">
-                {{ workgroup.achievementTime | amTimeAgo }}
+                {{ workgroup.achievementTime | date: 'mediumDate' }}
               </span>
               <span ng-if="workgroup.achievementTime === null" class="warn">
                 {{ ::'notCompleted' | translate }}

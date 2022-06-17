@@ -77,13 +77,13 @@
          fxLayoutGap="16px">
       <span *ngIf="run.lastRun"
             class="mat-caption secondary-text center"
-            i18n>Last student login: {{run.lastRun | amCalendar}}</span>
+            i18n>Last student login: {{run.lastRun | date: 'short'}}</span>
       <button *ngIf="!isRunActive(run) && !isRunCompleted(run)"
               mat-flat-button
               disabled
               fxFlex="0 0 auto"
               fxFlex.xs="100">
-        <ng-container i18n>Starts {{run.startTime | amTimeAgo}}</ng-container>
+        <ng-container i18n>Starts {{run.startTime | date}}</ng-container>
       </button>
       <a *ngIf="isRunActive(run) || isRunCompleted(run)"
          mat-flat-button

@@ -24,7 +24,7 @@
         <div ng-if="$ctrl.reportEnabled" layout="row" layout-align="center center" flex="25">
           <span ng-if="$ctrl.reportHasWork" class="success center">
             {{ ::'latestWork' | translate }}
-            {{ ::$ctrl.workgroup.report.serverSaveTime | amTimeAgo }}
+            {{ ::$ctrl.workgroup.report.serverSaveTime | date: 'mediumDate' }}
           </span>
           <span ng-if="!$ctrl.reportHasWork" class="text-secondary">
             {{ ::'noWork' | translate }}

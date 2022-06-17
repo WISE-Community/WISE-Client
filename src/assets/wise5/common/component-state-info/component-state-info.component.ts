@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ConfigService } from '../../../services/configService';
+import { ConfigService } from '../../services/configService';
 
 @Component({
   selector: 'component-state-info',
@@ -7,7 +7,7 @@ import { ConfigService } from '../../../services/configService';
 })
 export class ComponentStateInfoComponent {
   @Input() componentState: any;
-  @Input() isActive: boolean;
+  @Input() isInactive: boolean;
 
   latestComponentStateTime: number;
 

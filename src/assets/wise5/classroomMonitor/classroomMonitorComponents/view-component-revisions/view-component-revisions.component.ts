@@ -1,4 +1,3 @@
-import * as moment from 'moment';
 import { Component, Inject } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -67,7 +66,7 @@ export class ViewComponentRevisionsComponent {
         // add state to corresponding node visit
         for (let nVisitsIndex = nodeVisits.length - 1; nVisitsIndex > -1; nVisitsIndex--) {
           const nodeVisit = nodeVisits[nVisitsIndex];
-          if (moment(componentState.serverSaveTime).isSameOrAfter(nodeVisit.serverSaveTime)) {
+          if (componentState.serverSaveTime >= nodeVisit.serverSaveTime) {
             nodeVisit.states.push(componentState);
             break;
           }

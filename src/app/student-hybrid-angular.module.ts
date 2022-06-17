@@ -25,7 +25,6 @@ import { StudentAssetsDialogModule } from '../assets/wise5/vle/studentAsset/stud
 import { ComponentStudentModule } from '../assets/wise5/components/component/component-student.module';
 import { NodeModule } from '../assets/wise5/vle/node/node.module';
 import { VLEComponent } from '../assets/wise5/vle/vle.component';
-import { NotebookModule } from './notebook/notebook.module';
 import { SimpleDialogModule } from '../assets/wise5/directives/simple-dialog.module';
 
 @NgModule({
@@ -41,7 +40,6 @@ import { SimpleDialogModule } from '../assets/wise5/directives/simple-dialog.mod
     AngularJSModule,
     ComponentStudentModule,
     NodeModule,
-    NotebookModule,
     SimpleDialogModule,
     StudentAssetsDialogModule,
     StudentComponentModule,

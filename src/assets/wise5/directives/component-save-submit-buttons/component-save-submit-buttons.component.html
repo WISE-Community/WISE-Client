@@ -11,10 +11,5 @@
       (click)="submit()"
       [disabled]="isSubmitButtonDisabled || isDisabled || !isSubmitDirty"
       i18n>Submit</button>
-  <div *ngIf="saveMessage.text" class="save-message mat-small secondary-text">
-    {{ saveMessage.text }}
-    <span class="more-info"
-        matTooltip="{{ saveMessage.time | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"
-        matTooltipPosition="above">{{ saveMessage.time | amTimeAgo }}</span>
-  </div>
+  <component-state-info *ngIf="componentState" [componentState]="componentState"></component-state-info>
 </div>

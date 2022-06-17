@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { defer, Observable } from 'rxjs';
-import { MomentModule } from 'ngx-moment';
 import { StudentRun } from '../student-run';
 import { StudentService } from '../student.service';
 import { StudentRunListComponent } from './student-run-list.component';
@@ -65,7 +64,6 @@ describe('StudentRunListComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [StudentRunListComponent],
-      imports: [MomentModule],
       providers: [
         { provide: StudentService, useClass: MockStudentService },
         { provide: ConfigService, useClass: MockConfigService },

@@ -1,6 +1,7 @@
 'use strict';
 
-import { Injectable } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import * as angular from 'angular';
 import '../lib/jquery/jquery-global';
 
@@ -44,6 +45,8 @@ export class UtilService {
     '8',
     '9'
   ];
+
+  constructor(@Inject(LOCALE_ID) private localeID: string) {}
 
   generateKey(length = 10) {
     let key = '';
@@ -778,6 +781,43 @@ export class UtilService {
 
   notEqualTo(a: number, b: number): boolean {
     return a !== b;
+  }
+
+  getSavedMessage(clientSaveTime: number, showFullDate: boolean = false): string {
+    let saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
+    return $localize`Saved ${saveTimeText}:saveTime:`;
+  }
+
+  getAutoSavedMessage(clientSaveTime: number, showFullDate: boolean = false): string {
+    let saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
+    return $localize`Auto Saved ${saveTimeText}:saveTime:`;
+  }
+
+  getSubmittedMessage(clientSaveTime: number, showFullDate: boolean = false): string {
+    let saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
+    return $localize`Submitted ${saveTimeText}:saveTime:`;
+  }
+
+  getSaveTimeMessage(clientSaveTime: number, showFullDate: boolean = false): string {
+    return this.getSaveTimeText(clientSaveTime, showFullDate);
+  }
+
+  getSaveTimeText(saveTime: number, showFullDate: boolean = false): string {
+    const now = new Date();
+    let saveTimeText = '';
+    if (showFullDate) {
+      saveTimeText = 
+        `${formatDate(saveTime, 'fullDate', this.localeID)} • ${formatDate(saveTime, 'shortTime', this.localeID)}`;
+    } else if (this.isSameDay(now, saveTime)) {
+      saveTimeText = formatDate(saveTime, 'shortTime', this.localeID);
+    } else {
+      saveTimeText = formatDate(saveTime, 'mediumDate', this.localeID);
+    }
+    return saveTimeText;
+  }
+
+  private isSameDay(a: string | number | Date, b: string | number | Date): boolean {
+    return formatDate(a, 'shortDate', this.localeID) === formatDate(b, 'shortDate', this.localeID);
   }
 }
 

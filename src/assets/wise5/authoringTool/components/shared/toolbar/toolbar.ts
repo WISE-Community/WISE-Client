@@ -68,12 +68,7 @@ const Toolbar = {
             class="component__actions__info md-caption global-message"
             style="margin-right: 20px;">
             {{$ctrl.globalMessage.text}}
-            <span class="component__actions__more">
-              <md-tooltip md-direction="bottom">
-                {{ $ctrl.globalMessage.time | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}
-              </md-tooltip>
-              <span am-time-ago="$ctrl.globalMessage.time"></span>
-            </span>
+            <span ng-bind="$ctrl.globalMessage.time | date: 'medium'"></span>
         </span>
       </div>
     </md-toolbar>`

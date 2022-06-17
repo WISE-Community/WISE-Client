@@ -8,7 +8,6 @@ import { AuthGuard } from './auth.guard';
 import { TeacherRunListComponent } from './teacher-run-list/teacher-run-list.component';
 import { TeacherRunListItemComponent } from './teacher-run-list-item/teacher-run-list-item.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MomentModule } from 'ngx-moment';
 import { FormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -66,7 +65,6 @@ const materialModules = [
     FormsModule,
     LibraryModule,
     materialModules,
-    MomentModule,
     SharedModule,
     TeacherRoutingModule,
     TimelineModule,

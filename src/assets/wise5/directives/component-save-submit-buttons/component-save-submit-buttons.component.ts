@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ComponentState } from '../../../../app/domain/componentState';
 
 @Component({
   selector: 'component-save-submit-buttons',
@@ -25,7 +26,7 @@ export class ComponentSaveSubmitButtons {
   isSubmitDirty: boolean;
 
   @Input()
-  saveMessage: any;
+  componentState: ComponentState;
 
   @Output()
   saveButtonClicked = new EventEmitter();

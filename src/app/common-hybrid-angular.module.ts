@@ -51,7 +51,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { NodeStatusIcon } from '../assets/wise5/themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MomentModule } from 'ngx-moment';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -124,7 +123,6 @@ export class EmptyComponent {}
     MatToolbarModule,
     MatSlideToggleModule,
     MatTooltipModule,
-    MomentModule,
     NotebookModule,
     ReactiveFormsModule,
     RouterModule.forChild([{ path: '**', component: EmptyComponent }])
@@ -206,9 +204,9 @@ export class EmptyComponent {}
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MomentModule,
     NodeIconComponent,
     NodeStatusIcon,
+    NotebookModule,
     ReactiveFormsModule
   ]
 })

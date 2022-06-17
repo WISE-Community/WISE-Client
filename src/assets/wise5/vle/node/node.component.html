@@ -62,15 +62,8 @@
           i18n>
         Submit
       </button>
-      <span *ngIf="saveMessage.text && (node.showSaveButton || node.showSubmitButton)"
-          class="node-content__actions__info md-caption">
-        {{ saveMessage.text }}
-        <span class="node-content__actions__more"
-            matTooltip="{{ saveMessage.time | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"
-            matTooltipPosition="above">
-          {{ saveMessage.time | amTimeAgo }}
-        </span>
-      </span>
+      <component-state-info *ngIf="latestComponentState && (node.showSaveButton || node.showSubmitButton)"
+          [componentState]="latestComponentState"></component-state-info>
     </div>
   </div>
 </div>

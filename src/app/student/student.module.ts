@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MomentModule } from 'ngx-moment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -44,7 +43,6 @@ import { TeamSignInDialogComponent } from './team-sign-in-dialog/team-sign-in-di
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MomentModule,
     materialModules,
     SharedModule,
     StudentRoutingModule,
