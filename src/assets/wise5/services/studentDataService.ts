@@ -11,6 +11,7 @@ import * as angular from 'angular';
 import { TagService } from './tagService';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
+import { ComponentServiceLookupService } from './componentServiceLookupService';
 
 @Injectable()
 export class StudentDataService extends DataService {
@@ -111,8 +112,9 @@ export class StudentDataService extends DataService {
     private upgrade: UpgradeModule,
     public http: HttpClient,
     private AnnotationService: AnnotationService,
+    private componentServiceLookupService: ComponentServiceLookupService,
     private ConfigService: ConfigService,
-    ProjectService: ProjectService,
+    protected ProjectService: ProjectService,
     private TagService: TagService,
     private UtilService: UtilService
   ) {
@@ -552,16 +554,12 @@ export class StudentDataService extends DataService {
   }
 
   evaluateChoiceChosenCriteria(criteria: any): boolean {
-    const serviceName = 'MultipleChoiceService';
-    if (this.upgrade.$injector.has(serviceName)) {
-      const service = this.upgrade.$injector.get(serviceName);
-      const latestComponentState = this.getLatestComponentStateByNodeIdAndComponentId(
-        criteria.params.nodeId,
-        criteria.params.componentId
-      );
-      return latestComponentState != null && service.choiceChosen(criteria, latestComponentState);
-    }
-    return false;
+    const service = this.componentServiceLookupService.getService('MultipleChoice');
+    const latestComponentState = this.getLatestComponentStateByNodeIdAndComponentId(
+      criteria.params.nodeId,
+      criteria.params.componentId
+    );
+    return latestComponentState != null && service.choiceChosen(criteria, latestComponentState);
   }
 
   evaluateScoreCriteria(criteria: any): boolean {
@@ -669,7 +667,7 @@ export class StudentDataService extends DataService {
     const requiredNumberOfFilledRows = params.requiredNumberOfFilledRows;
     const tableHasHeaderRow = params.tableHasHeaderRow;
     const requireAllCellsInARowToBeFilled = params.requireAllCellsInARowToBeFilled;
-    const tableService = this.upgrade.$injector.get('TableService');
+    const tableService = this.componentServiceLookupService.getService('Table');
     const componentState = this.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
     return (
       componentState != null &&
@@ -1279,7 +1277,7 @@ export class StudentDataService extends DataService {
     if (component != null) {
       const node = this.ProjectService.getNodeById(nodeId);
       const componentType = component.type;
-      const service = this.upgrade.$injector.get(componentType + 'Service');
+      const service = this.componentServiceLookupService.getService(componentType);
       if (['OpenResponse', 'Discussion'].includes(componentType)) {
         return service.isCompletedV2(node, component, this.studentData);
       } else {
