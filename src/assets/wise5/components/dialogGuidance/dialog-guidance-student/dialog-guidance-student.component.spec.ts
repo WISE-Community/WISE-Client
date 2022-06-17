@@ -12,6 +12,7 @@ import { PossibleScoreComponent } from '../../../../../app/possible-score/possib
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
@@ -51,6 +52,7 @@ describe('DialogGuidanceStudentComponent', () => {
       ],
       imports: [
         BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,

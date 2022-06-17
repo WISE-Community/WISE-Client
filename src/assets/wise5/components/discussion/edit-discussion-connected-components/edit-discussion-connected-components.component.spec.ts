@@ -9,6 +9,7 @@ import { SessionService } from '../../../services/sessionService';
 import { UtilService } from '../../../services/utilService';
 import { EditDiscussionConnectedComponentsComponent } from './edit-discussion-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
 let component: EditDiscussionConnectedComponentsComponent;
 let fixture: ComponentFixture<EditDiscussionConnectedComponentsComponent>;
@@ -16,7 +17,12 @@ let fixture: ComponentFixture<EditDiscussionConnectedComponentsComponent>;
 describe('EditDiscussionConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatIconModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatIconModule,
+        UpgradeModule
+      ],
       declarations: [
         EditConnectedComponentsAddButtonComponent,
         EditDiscussionConnectedComponentsComponent

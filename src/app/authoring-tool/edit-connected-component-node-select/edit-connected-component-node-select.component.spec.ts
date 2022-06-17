@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { ComponentServiceLookupServiceModule } from '../../../assets/wise5/services/componentServiceLookupServiceModule';
 
 describe('EditConnectedComponentNodeSelectComponent', () => {
   let component: EditConnectedComponentNodeSelectComponent;
@@ -22,6 +23,7 @@ describe('EditConnectedComponentNodeSelectComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientModule,
         MatFormFieldModule,

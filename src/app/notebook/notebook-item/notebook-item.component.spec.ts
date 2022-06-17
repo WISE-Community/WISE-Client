@@ -4,6 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
 import { AnnotationService } from '../../../assets/wise5/services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../../assets/wise5/services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
@@ -19,7 +20,12 @@ let component: NotebookItemComponent;
 describe('NotebookItemComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        UpgradeModule
+      ],
       declarations: [NotebookItemComponent],
       providers: [
         AnnotationService,

@@ -7,13 +7,14 @@ import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
+import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 let service: SpaceService;
 let teacherProjectService: TeacherProjectService;
 
 describe('SpaceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       providers: [
         ConfigService,
         CopyNodesService,

@@ -1,6 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { PeerGroupingAuthoringService } from '../../assets/wise5/services/peerGroupingAuthoringService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
@@ -30,7 +31,7 @@ const tag2: string = 'tag2';
 describe('PeerGroupingAuthoringService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       providers: [
         ConfigService,
         PeerGroupingAuthoringService,

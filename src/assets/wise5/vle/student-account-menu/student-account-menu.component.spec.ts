@@ -12,6 +12,7 @@ import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { StudentAccountMenuComponent } from './student-account-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
 
 class MockProjectService {
   rootNode = {};
@@ -32,6 +33,7 @@ describe('StudentAccountMenuComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
         MatDividerModule,
         MatIconModule,

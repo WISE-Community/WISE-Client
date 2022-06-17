@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { of } from 'rxjs';
 import { AnnotationService } from '../../../services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
@@ -40,7 +41,13 @@ let saveNotificationToServerSpy;
 describe('DiscussionStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserModule, HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [
+        BrowserModule,
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        UpgradeModule
+      ],
       declarations: [DiscussionStudent],
       providers: [
         AnnotationService,

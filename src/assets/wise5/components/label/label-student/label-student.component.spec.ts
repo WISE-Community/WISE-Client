@@ -17,6 +17,7 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
 import { LabelService } from '../labelService';
 import { LabelStudent } from './label-student.component';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
 export class MockService {}
 
@@ -26,7 +27,12 @@ let fixture: ComponentFixture<LabelStudent>;
 describe('LabelStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        UpgradeModule
+      ],
       declarations: [LabelStudent],
       providers: [
         AnnotationService,

@@ -16,6 +16,7 @@ import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { NotificationsDialogComponent } from './notifications-dialog.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
 
 describe('NotificationsMenuComponent', () => {
   let component: NotificationsDialogComponent;
@@ -32,6 +33,7 @@ describe('NotificationsMenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
         MatCardModule,
         MatDialogModule,
@@ -134,5 +136,5 @@ describe('NotificationsMenuComponent', () => {
     });
     component.dismissAll();
     expect(dismissNotificationAggregateSpy).toHaveBeenCalledTimes(2);
-  })
+  });
 });

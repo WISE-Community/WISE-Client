@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 import { DialogGuidanceAuthoringModule } from './dialog-guidance-authoring.module';
@@ -21,7 +22,12 @@ describe('DialogGuidanceAuthoringComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, DialogGuidanceAuthoringModule, HttpClientTestingModule]
+      imports: [
+        BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
+        DialogGuidanceAuthoringModule,
+        HttpClientTestingModule
+      ]
     });
     fixture = TestBed.createComponent(DialogGuidanceAuthoringComponent);
     component = fixture.componentInstance;

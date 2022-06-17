@@ -8,6 +8,7 @@ import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServiceSpec.project.json';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 let service: TeacherProjectService;
 let configService: ConfigService;
 let utilService: UtilService;
@@ -29,7 +30,7 @@ const wiseBaseURL = '/wise';
 describe('TeacherProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       providers: [TeacherProjectService, ConfigService, SessionService, UtilService]
     });
     http = TestBed.inject(HttpTestingController);
