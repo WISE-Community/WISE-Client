@@ -5,7 +5,6 @@ import { TeacherService } from '../teacher.service';
 import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MomentModule } from 'ngx-moment';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -31,7 +30,7 @@ describe('TeacherRunListItemComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TeacherRunListItemComponent],
-      imports: [MatDialogModule, MomentModule, BrowserAnimationsModule, RouterTestingModule],
+      imports: [MatDialogModule, BrowserAnimationsModule, RouterTestingModule],
       providers: [
         { provide: TeacherService, useClass: MockTeacherService },
         { provide: ConfigService, useClass: MockConfigService }

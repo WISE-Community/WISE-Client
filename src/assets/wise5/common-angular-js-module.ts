@@ -58,7 +58,6 @@ import './components/summary/summaryComponentModule';
 import './components/table/tableComponentModule';
 import { TagService } from './services/tagService';
 import { UtilService } from './services/utilService';
-import * as moment from 'moment';
 import './components/showMyWork/show-my-work-student/showMyWorkStudentAngularJSComponentModule';
 import './components/showGroupWork/show-group-work-student/showGroupWorkStudentAngularJSComponentModule';
 import './themes/default/theme';
@@ -229,15 +228,5 @@ angular
       });
       $mdThemingProvider.definePalette('light', lightMap);
       $mdThemingProvider.enableBrowserColor();
-      moment.updateLocale('en', {
-        calendar: {
-          lastDay: '[Yesterday at] LT',
-          sameDay: '[Today at] LT',
-          nextDay: '[Tomorrow at] LT',
-          lastWeek: '[last] dddd [at] LT',
-          nextWeek: 'dddd [at] LT',
-          sameElse: 'll'
-        }
-      });
     }
   ]);
