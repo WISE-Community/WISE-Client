@@ -26,6 +26,7 @@ import { ComponentService } from '../../componentService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { AudioOscillatorStudent } from './audio-oscillator-student.component';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
 export class MockService {}
 
@@ -50,6 +51,7 @@ describe('AudioOscillatorStudent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,

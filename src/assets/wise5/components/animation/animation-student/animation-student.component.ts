@@ -924,7 +924,7 @@ export class AnimationStudent extends ComponentStudent {
     this.emitComponentDirty(true);
     this.setIsSubmitDirty(true);
     this.emitComponentSubmitDirty(true);
-    this.clearSaveText();
+    this.clearLatestComponentState();
     this.createComponentStateAndBroadcast('change');
   }
 

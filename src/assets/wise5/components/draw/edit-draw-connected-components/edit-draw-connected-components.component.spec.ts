@@ -9,6 +9,7 @@ import { SessionService } from '../../../services/sessionService';
 import { UtilService } from '../../../services/utilService';
 import { EditDrawConnectedComponentsComponent } from './edit-draw-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
 let component: EditDrawConnectedComponentsComponent;
 let fixture: ComponentFixture<EditDrawConnectedComponentsComponent>;
@@ -20,7 +21,12 @@ const componentId2 = 'component2';
 describe('EditDrawConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatIconModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatIconModule,
+        UpgradeModule
+      ],
       declarations: [
         EditConnectedComponentsAddButtonComponent,
         EditDrawConnectedComponentsComponent

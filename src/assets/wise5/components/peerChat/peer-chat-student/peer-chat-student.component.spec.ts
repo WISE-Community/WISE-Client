@@ -243,7 +243,7 @@ function createComponentState() {
     ];
     const sendMessageToClassmateSpy = spyOn(
       TestBed.inject(StudentWebSocketService),
-      'sendMessageToClassmate'
+      'sendStudentWorkToClassmate'
     );
     const saveNotificationToServerSpy = spyOn(
       TestBed.inject(NotificationService),

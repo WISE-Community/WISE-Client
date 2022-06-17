@@ -7,7 +7,6 @@ import { Run } from '../../domain/run';
 import { TeacherService } from '../teacher.service';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
-import { MomentModule } from 'ngx-moment';
 
 export class MockTeacherService {
   addPeriodToRun(runId, periodName) {
@@ -80,7 +79,7 @@ describe('RunSettingsDialogComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [RunSettingsDialogComponent],
-      imports: [MatSnackBarModule, MomentModule],
+      imports: [MatSnackBarModule],
       providers: [
         { provide: MatDialog, useValue: {} },
         { provide: MatDialogRef, useValue: {} },

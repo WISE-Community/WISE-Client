@@ -12,6 +12,7 @@ import { GraphService } from '../../components/graph/graphService';
 import { LabelService } from '../../components/label/labelService';
 import { TableService } from '../../components/table/tableService';
 import { AnnotationService } from '../../services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../services/configService';
 import { NodeService } from '../../services/nodeService';
 import { NotebookService } from '../../services/notebookService';
@@ -43,7 +44,13 @@ describe('GenerateImageDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, MatProgressSpinnerModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        MatProgressSpinnerModule,
+        UpgradeModule
+      ],
       declarations: [ComponentComponent, GenerateImageDialogComponent],
       providers: [
         AnnotationService,

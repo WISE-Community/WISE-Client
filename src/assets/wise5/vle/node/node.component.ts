@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
+import { ComponentState } from '../../../../app/domain/componentState';
 import { Node } from '../../common/Node';
 import { ComponentService } from '../../components/componentService';
 import { ComponentStateWrapper } from '../../components/ComponentStateWrapper';
@@ -32,7 +33,7 @@ export class NodeComponent implements OnInit {
   nodeStatus: any;
   rubric: any;
   rubricTour: any;
-  saveMessage: any;
+  latestComponentState: ComponentState;
   submit: boolean = false;
   subscriptions: Subscription = new Subscription();
   teacherWorkgroupId: number;
@@ -69,11 +70,6 @@ export class NodeComponent implements OnInit {
     this.workgroupId = this.configService.getWorkgroupId();
     this.teacherWorkgroupId = this.configService.getTeacherWorkgroupId();
     this.isDisabled = !this.configService.isRunActive();
-
-    this.saveMessage = {
-      text: '',
-      time: ''
-    };
 
     this.rubric = null;
     this.mode = this.configService.getMode();
@@ -146,6 +142,7 @@ export class NodeComponent implements OnInit {
   }
 
   initializeNode(): void {
+    this.clearLatestComponentState();
     this.nodeId = this.studentDataService.getCurrentNodeId();
     this.node = this.projectService.getNode(this.nodeId);
     this.nodeContent = this.projectService.getNodeById(this.nodeId);
@@ -163,12 +160,7 @@ export class NodeComponent implements OnInit {
       this.nodeId
     );
     if (latestComponentState) {
-      const latestClientSaveTime = latestComponentState.clientSaveTime;
-      if (latestComponentState.isSubmit) {
-        this.setSubmittedMessage(latestClientSaveTime);
-      } else {
-        this.setSavedMessage(latestClientSaveTime);
-      }
+      this.latestComponentState = latestComponentState;
     }
 
     const nodeId = this.nodeId;
@@ -251,25 +243,8 @@ export class NodeComponent implements OnInit {
     });
   }
 
-  private setSavedMessage(time: any): void {
-    this.setSaveText($localize`Saved`, time);
-  }
-
-  private setAutoSavedMessage(time: any): void {
-    this.setSaveText($localize`Auto Saved`, time);
-  }
-
-  private setSubmittedMessage(time: any): void {
-    this.setSaveText($localize`Submitted`, time);
-  }
-
-  private setSaveText(message: string, time: any): void {
-    this.saveMessage.text = message;
-    this.saveMessage.time = time;
-  }
-
-  private clearSaveText(): void {
-    this.setSaveText('', null);
+  private clearLatestComponentState(): void {
+    this.latestComponentState = null;
   }
 
   private startAutoSaveInterval(): void {
@@ -343,18 +318,9 @@ export class NodeComponent implements OnInit {
               }
               const studentWorkList = savedStudentDataResponse.studentWorkList;
               if (!componentId && studentWorkList && studentWorkList.length) {
-                const latestStudentWork = studentWorkList[studentWorkList.length - 1];
-                const serverSaveTime = latestStudentWork.serverSaveTime;
-                const clientSaveTime = this.configService.convertToClientTimestamp(serverSaveTime);
-                if (isAutoSave) {
-                  this.setAutoSavedMessage(clientSaveTime);
-                } else if (isSubmit) {
-                  this.setSubmittedMessage(clientSaveTime);
-                } else {
-                  this.setSavedMessage(clientSaveTime);
-                }
+                this.latestComponentState = studentWorkList[studentWorkList.length - 1];
               } else {
-                this.clearSaveText();
+                this.clearLatestComponentState();
               }
             }
             return savedStudentDataResponse;

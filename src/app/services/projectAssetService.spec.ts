@@ -6,6 +6,7 @@ import { UtilService } from '../../assets/wise5/services/utilService';
 import { ProjectAssetService } from './projectAssetService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 let service: ProjectAssetService;
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -14,7 +15,7 @@ let spongeBobAndPatrickAssets: any;
 describe('ProjectAssetService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       providers: [ConfigService, ProjectAssetService, ProjectService, SessionService, UtilService]
     });
     http = TestBed.get(HttpTestingController);

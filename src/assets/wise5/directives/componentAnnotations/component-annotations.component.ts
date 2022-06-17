@@ -96,6 +96,7 @@ export class ComponentAnnotationsComponent {
       }
       this.setLabelAndIcon();
     }
+    this.latestAnnotationTime = this.getLatestAnnotationTime();
   }
 
   getNodeId(annotations: any): string {

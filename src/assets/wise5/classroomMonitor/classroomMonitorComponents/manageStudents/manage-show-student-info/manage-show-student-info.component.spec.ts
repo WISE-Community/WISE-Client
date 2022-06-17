@@ -1,7 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MomentModule } from 'ngx-moment';
 import { ConfigService } from '../../../../services/configService';
 import { ManageShowStudentInfoComponent } from './manage-show-student-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,7 +19,7 @@ describe('ManageShowStudentInfoComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ManageShowStudentInfoComponent],
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatDialogModule, MomentModule],
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, MatDialogModule],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: MAT_DIALOG_DATA, useValue: user }

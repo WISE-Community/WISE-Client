@@ -20,6 +20,7 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../services/teacherWebSocketService';
 import { UtilService } from '../../services/utilService';
 import { StepToolsComponent } from './step-tools.component';
+import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
 
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
@@ -53,6 +54,7 @@ describe('StepTools', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,

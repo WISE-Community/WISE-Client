@@ -15,6 +15,7 @@ import demoPublicNotebookItems_import from './sampleData/sample_publicNotebookIt
 import demoProject_import from './sampleData/curriculum/Demo.project.json';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 
 let http: HttpTestingController;
 let configService: ConfigService;
@@ -34,7 +35,12 @@ const teacherNotebookURL = 'http://localhost:8080/teacher/notebook/run/1';
 describe('NotebookService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        UpgradeModule
+      ],
       providers: [
         NotebookService,
         AnnotationService,

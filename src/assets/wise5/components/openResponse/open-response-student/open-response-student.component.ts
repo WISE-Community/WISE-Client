@@ -694,7 +694,7 @@ export class OpenResponseStudent extends ComponentStudent {
     } else {
       this.setIsSubmitDirtyAndBroadcast();
     }
-    this.clearSaveText();
+    this.clearLatestComponentState();
     const action = 'change';
     this.createComponentStateAndBroadcast(action);
   }

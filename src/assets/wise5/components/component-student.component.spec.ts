@@ -15,6 +15,7 @@ import { ComponentService } from './componentService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ComponentServiceLookupServiceModule } from '../services/componentServiceLookupServiceModule';
 
 let component: ComponentStudent;
 let fixture: ComponentFixture<ComponentStudent>;
@@ -30,7 +31,12 @@ class ComponentStudentImpl extends ComponentStudent {}
 describe('ComponentStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        UpgradeModule
+      ],
       declarations: [ComponentStudentImpl],
       providers: [
         AnnotationService,

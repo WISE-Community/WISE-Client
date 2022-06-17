@@ -1483,7 +1483,7 @@ export class GraphStudent extends ComponentStudent {
     this.emitComponentDirty(true);
     this.isSubmitDirty = true;
     this.emitComponentSubmitDirty(true);
-    this.clearSaveText();
+    this.clearLatestComponentState();
     this.drawGraph(useTimeoutSetupGraph);
     /*
      * the student work in this component has changed so we will tell

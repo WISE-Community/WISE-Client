@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { defer, Observable } from 'rxjs';
-import { MomentModule } from 'ngx-moment';
 import { TeacherRunListComponent } from './teacher-run-list.component';
 import { TeacherService } from '../teacher.service';
 import { Project } from '../../domain/project';
@@ -76,7 +75,6 @@ describe('TeacherRunListComponent', () => {
       TestBed.configureTestingModule({
         declarations: [TeacherRunListComponent],
         imports: [
-          MomentModule,
           RouterTestingModule.withRoutes([
             { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
           ])

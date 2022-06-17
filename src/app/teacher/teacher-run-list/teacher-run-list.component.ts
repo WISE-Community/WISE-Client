@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { DateFormatPipe } from 'ngx-moment';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { TeacherService } from '../teacher.service';
 import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -27,7 +27,8 @@ export class TeacherRunListComponent implements OnInit {
   constructor(
     private teacherService: TeacherService,
     private configService: ConfigService,
-    router: Router
+    router: Router,
+    @Inject(LOCALE_ID) private localeID: string
   ) {
     teacherService.newRunSource$.subscribe((run) => {
       const teacherRun: TeacherRun = new TeacherRun(run);
@@ -134,27 +135,9 @@ export class TeacherRunListComponent implements OnInit {
     }
   }
 
-  runSpansYears(run: TeacherRun) {
-    const startYear = new DateFormatPipe().transform(run.startTime, 'Y');
-    const endYear = new DateFormatPipe().transform(run.endTime, 'Y');
-    return startYear != endYear;
-  }
-
-  runSpansMonths(run: TeacherRun) {
-    if (this.runSpansYears(run)) {
-      return true;
-    }
-    const startMonth = new DateFormatPipe().transform(run.startTime, 'M');
-    const endMonth = new DateFormatPipe().transform(run.endTime, 'M');
-    return startMonth != endMonth;
-  }
-
   runSpansDays(run: TeacherRun) {
-    if (this.runSpansMonths(run)) {
-      return true;
-    }
-    const startDay = new DateFormatPipe().transform(run.startTime, 'D');
-    const endDay = new DateFormatPipe().transform(run.endTime, 'D');
+    const startDay = formatDate(run.startTime, 'shortDate', this.localeID);
+    const endDay = formatDate(run.endTime, 'shortDate', this.localeID);
     return startDay != endDay;
   }
 

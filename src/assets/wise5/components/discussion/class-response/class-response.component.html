@@ -8,11 +8,9 @@
       <div>
         <div class="mat-body-2">{{ response.usernames }}</div>
         <div class="mat-caption secondary-text">
-          <span class="more-info"
-              matTooltip="{{adjustClientSaveTime(response.serverSaveTime) | amDateFormat:'ddd, MMM D YYYY, h:mm a'}}"
-              matTooltipPosition="right">
-            {{ adjustClientSaveTime(response.serverSaveTime) | amTimeAgo }}
-          </span>
+          <save-time-message [saveTime]="adjustClientSaveTime(response.serverSaveTime)"
+              [timeOnly]="true"
+              tooltipPosition="after"></save-time-message>
         </div>
       </div>
     </div>
@@ -71,14 +69,12 @@
           class="mat-40"
           style="color: {{getAvatarColorForWorkgroupId(reply.workgroupId)}}">
           account_circle
-        </mat-icon>
+        </mat-icon> 
         <h3 matLine>
           <span class="mat-body-2">{{ reply.usernames }}</span>&nbsp;
-          <span class="more-info secondary-text mat-caption"
-              matTooltip="{{adjustClientSaveTime(reply.serverSaveTime) | amDateFormat:'ddd, MMM D YYYY, h:mm a'}}"
-              matTooltipPosition="right">
-            {{ adjustClientSaveTime(reply.serverSaveTime) | amTimeAgo }}
-          </span>
+          <save-time-message [saveTime]="adjustClientSaveTime(reply.serverSaveTime)"
+              [timeOnly]="true"
+              tooltipPosition="after"></save-time-message>
         </h3>
         <p matLine [innerHTML]="reply.studentData.responseHTML"></p>
         <div fxFlex></div>

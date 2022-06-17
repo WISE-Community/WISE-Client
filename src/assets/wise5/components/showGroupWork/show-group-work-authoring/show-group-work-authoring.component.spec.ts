@@ -18,6 +18,7 @@ import { UtilService } from '../../../services/utilService';
 import { ShowGroupWorkAuthoringComponent } from './show-group-work-authoring.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
 describe('ShowGroupWorkAuthoringComponent', () => {
   let component: ShowGroupWorkAuthoringComponent;
@@ -29,6 +30,7 @@ describe('ShowGroupWorkAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,

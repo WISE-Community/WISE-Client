@@ -43,7 +43,7 @@ echo "Copying WISE Nginx config file to Nginx sites-enabled folder"
 rm -f /etc/nginx/sites-enabled/*
 cp $WISE_BUILD_FILES/client/$ENV/wise.conf /etc/nginx/sites-enabled/wise.conf
 
-echo "Restart Nginx"
+echo "Restarting Nginx"
 systemctl restart nginx
 
 echo "Copying .vimrc file to the ubuntu home folder"
@@ -59,3 +59,17 @@ chmod 755 /etc/update-motd.d/99-notes
 
 echo "Installing tree"
 apt-get install tree -y
+
+echo "Installing sysstat"
+apt-get install sysstat -y
+
+echo "Configuring sysstat parameters"
+sed 's/ENABLED="false"/ENABLED="true"/' -i /etc/default/sysstat
+sed 's/HISTORY=7/HISTORY=30/' -i /etc/sysstat/sysstat
+sed 's/SADC_OPTIONS="-S DISK"/SADC_OPTIONS="-D -S DISK"/' -i /etc/sysstat/sysstat
+
+echo "Enabling sysstat on startup"
+systemctl enable sysstat
+
+echo "Starting sysstat"
+systemctl start sysstat

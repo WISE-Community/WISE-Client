@@ -18,6 +18,7 @@ import { TeacherWebSocketService } from '../../../../services/teacherWebSocketSe
 import { UtilService } from '../../../../services/utilService';
 import { NodeAdvancedConstraintAuthoringComponent } from './node-advanced-constraint-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
 
 describe('NodeAdvancedConstraintAuthoringComponent', () => {
   let component: NodeAdvancedConstraintAuthoringComponent;
@@ -27,6 +28,7 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
         MatDialogModule,
         MatFormFieldModule,

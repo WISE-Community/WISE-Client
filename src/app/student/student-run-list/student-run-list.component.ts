@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { DateFormatPipe } from 'ngx-moment';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { StudentRun } from '../student-run';
 import { StudentService } from '../student.service';
 import { ConfigService } from '../../services/config.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProjectDialogComponent } from '../add-project-dialog/add-project-dialog.component';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-student-run-list',
@@ -23,7 +23,8 @@ export class StudentRunListComponent implements OnInit {
     private studentService: StudentService,
     private configService: ConfigService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    @Inject(LOCALE_ID) private localeID: string
   ) {
     studentService.newRunSource$.subscribe((run) => {
       run.isHighlighted = true;
@@ -81,27 +82,9 @@ export class StudentRunListComponent implements OnInit {
     return null;
   }
 
-  runSpansYears(run: StudentRun) {
-    const startYear = new DateFormatPipe().transform(run.startTime, 'Y');
-    const endYear = new DateFormatPipe().transform(run.endTime, 'Y');
-    return startYear != endYear;
-  }
-
-  runSpansMonths(run: StudentRun) {
-    if (this.runSpansYears(run)) {
-      return true;
-    }
-    const startMonth = new DateFormatPipe().transform(run.startTime, 'M');
-    const endMonth = new DateFormatPipe().transform(run.endTime, 'M');
-    return startMonth != endMonth;
-  }
-
   runSpansDays(run: StudentRun) {
-    if (this.runSpansMonths(run)) {
-      return true;
-    }
-    const startDay = new DateFormatPipe().transform(run.startTime, 'D');
-    const endDay = new DateFormatPipe().transform(run.endTime, 'D');
+    const startDay = formatDate(run.startTime, 'shortDate', this.localeID);
+    const endDay = formatDate(run.endTime, 'shortDate', this.localeID);
     return startDay != endDay;
   }
 

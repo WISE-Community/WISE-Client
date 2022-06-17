@@ -13,6 +13,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { Observable, Subject } from 'rxjs';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -39,6 +40,7 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
         DragDropModule,
         FormsModule,
         HttpClientTestingModule,

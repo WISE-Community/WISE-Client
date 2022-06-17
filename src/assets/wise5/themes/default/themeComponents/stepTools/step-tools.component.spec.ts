@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { NodeIconComponent } from '../../../../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
 import { AnnotationService } from '../../../../services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../../services/configService';
 import { NodeService } from '../../../../services/nodeService';
 import { ProjectService } from '../../../../services/projectService';
@@ -40,6 +41,7 @@ describe('StepToolsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,

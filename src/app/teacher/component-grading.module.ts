@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ComponentStateInfoModule } from '../../assets/wise5/common/component-state-info/component-state-info.module';
 import { AnimationGradingModule } from '../../assets/wise5/components/animation/animation-grading/animation-grading.module';
 import { AudioOscillatorGradingModule } from '../../assets/wise5/components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.module';
 import { ConceptMapGradingModule } from '../../assets/wise5/components/conceptMap/concept-map-grading/concept-map-grading.module';
@@ -18,6 +19,7 @@ import { TableGradingModule } from '../../assets/wise5/components/table/table-gr
   imports: [
     AnimationGradingModule,
     AudioOscillatorGradingModule,
+    ComponentStateInfoModule,
     ConceptMapGradingModule,
     DialogGuidanceGradingModule,
     DiscussionGradingModule,
@@ -34,6 +36,7 @@ import { TableGradingModule } from '../../assets/wise5/components/table/table-gr
   exports: [
     AnimationGradingModule,
     AudioOscillatorGradingModule,
+    ComponentStateInfoModule,
     ConceptMapGradingModule,
     DialogGuidanceGradingModule,
     DiscussionGradingModule,

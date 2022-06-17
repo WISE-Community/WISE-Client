@@ -1,10 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LibraryProjectDetailsComponent } from '../../modules/library/library-project-details/library-project-details.component';
 import { Run } from '../../domain/run';
 import { TeacherService } from '../teacher.service';
-import * as moment from 'moment';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-run-settings-dialog',
@@ -37,7 +37,8 @@ export class RunSettingsDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<LibraryProjectDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private teacherService: TeacherService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    @Inject(LOCALE_ID) private localeID: string
   ) {
     this.run = data.run;
     this.maxStudentsPerTeam = this.run.maxStudentsPerTeam + '';
@@ -127,7 +128,7 @@ export class RunSettingsDialogComponent implements OnInit {
     }
     if (
       confirm(
-        $localize`Are you sure you want to change the students per team to ${maxStudentsPerTeamText}:value:?`
+        $localize`Are you sure you want to change the students per team to ${maxStudentsPerTeamText}:maxStudentsPerTeam:?`
       )
     ) {
       this.teacherService
@@ -155,10 +156,10 @@ export class RunSettingsDialogComponent implements OnInit {
     this.clearErrorMessages();
     if (this.startDate) {
       const startDate = this.startDate;
-      const formattedStartDate = moment(startDate).format('ddd MMM DD YYYY');
+      const formattedStartDate = formatDate(startDate, 'fullDate', this.localeID);
       if (
         confirm(
-          $localize`Are you sure you want to change the start date to ${formattedStartDate}:date:?`
+          $localize`Are you sure you want to change the start date to ${formattedStartDate}:startDate:?`
         )
       ) {
         this.teacherService
@@ -213,8 +214,8 @@ export class RunSettingsDialogComponent implements OnInit {
     if (this.endDate) {
       const endDate = this.endDate;
       endDate.setHours(23, 59, 59);
-      const formattedEndDate = moment(endDate).format('ddd MMM DD YYYY');
-      message = $localize`Are you sure you want to change the end date to ${formattedEndDate}:date:?`;
+      const formattedEndDate = formatDate(endDate, 'fullDate', this.localeID);
+      message = $localize`Are you sure you want to change the end date to ${formattedEndDate}:endDate:?`;
     } else {
       message = $localize`Are you sure you want to remove the end date?`;
     }

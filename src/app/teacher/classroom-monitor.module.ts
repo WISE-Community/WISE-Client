@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { AddTeamButtonComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-button/add-team-button.component';
 import { AddTeamDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/add-team-dialog/add-team-dialog.component';
 import { ChangeStudentPasswordDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component';
-import { ComponentStateInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-state-info/component-state-info.component';
 import { EditComponentAnnotationsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-annotations/edit-component-annotations.component';
 import { EditComponentCommentComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-comment/edit-component-comment.component';
 import { EditComponentScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-score/edit-component-score.component';
@@ -49,7 +48,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
     ChangeTeamPeriodDialogComponent,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
-    ComponentStateInfoComponent,
     EditComponentAnnotationsComponent,
     EditComponentCommentComponent,
     EditComponentScoreComponent,

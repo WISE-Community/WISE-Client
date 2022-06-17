@@ -14,6 +14,7 @@ import { StudentDataService } from '../../services/studentDataService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { DismissAmbientNotificationDialogComponent } from './dismiss-ambient-notification-dialog.component';
+import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
 
 let component: DismissAmbientNotificationDialogComponent;
 const DISMISS_CODE: string = 'computer';
@@ -27,6 +28,7 @@ describe('DismissAmbientNotificationDialogComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,

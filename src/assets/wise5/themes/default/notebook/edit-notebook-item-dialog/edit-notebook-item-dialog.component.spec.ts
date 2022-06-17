@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { WiseLinkComponent } from '../../../../directives/wise-link/wise-link.component';
 import { AnnotationService } from '../../../../services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../../services/configService';
 import { NotebookService } from '../../../../services/notebookService';
 import { ProjectService } from '../../../../services/projectService';
@@ -29,6 +30,7 @@ describe('EditNotebookItemDialogComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,

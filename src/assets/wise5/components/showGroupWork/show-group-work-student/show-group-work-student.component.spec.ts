@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { AnnotationService } from '../../../services/annotationService';
+import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
@@ -60,7 +61,7 @@ let studentWork;
 describe('ShowGroupWorkStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
       declarations: [ShowGroupWorkStudentComponent],
       providers: [
         AnnotationService,
