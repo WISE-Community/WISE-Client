@@ -5072,13 +5072,13 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="translated">SAIL (可擴充的互動式學習架構)</target>
       </trans-unit>
-      <trans-unit id="ffac91e3ed3d3f9238f218aaa135735f55daec60" datatype="html">
-        <source>©1996-<x id="INTERPOLATION" equiv-text="{{time | amDateFormat:&apos;YYYY&apos;}}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</source>
+      <trans-unit id="e67bd6887c1f08ea1aad066b9e6be64db9db8639" datatype="html">
+        <source>©1996-<x id="INTERPOLATION" equiv-text="{{time | date:&apos;y&apos;}}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">94</context>
         </context-group>
-        <target state="translated">©1996-<x id="INTERPOLATION" equiv-text="{{time | amDateFormat:'YYYY'}}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | 線上科學探究平台</target>
+        <target state="needs-translation">©1996-<x id="INTERPOLATION" equiv-text="{{time | date:'y'}}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</target>
       </trans-unit>
       <trans-unit id="d222f6ff9f7e28fdb4e8b2af47898446cf2eafe4" datatype="html">
         <source>Account Menu</source>
@@ -6220,11 +6220,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <target state="translated">顯示更多</target>
       </trans-unit>
@@ -6334,7 +6334,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">212</context>
         </context-group>
         <target state="needs-translation">Teacher Feedback</target>
       </trans-unit>
@@ -6394,19 +6394,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Save</target>
       </trans-unit>
-      <trans-unit id="044703276ff14d0a94f05154d5bc032872465a0d" datatype="html">
-        <source>Saved <x id="INTERPOLATION" equiv-text="{{ saveTime | amTimeAgo }}"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-        <target state="needs-translation">Saved <x id="INTERPOLATION" equiv-text="{{ saveTime | amTimeAgo }}"/></target>
-      </trans-unit>
       <trans-unit id="70cfd60f574a2e5b823237ac05381d8d488e4c7c" datatype="html">
         <source> Team hasn&apos;t worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">75,77</context>
+          <context context-type="linenumber">71,73</context>
         </context-group>
         <target state="needs-translation"> Team hasn't worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet. </target>
       </trans-unit>
@@ -7690,8 +7682,8 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="translated">回報問題</target>
       </trans-unit>
-      <trans-unit id="b0e70620d635e9fc164c5ea3c2f1f658513b0b97" datatype="html">
-        <source>Starts <x id="INTERPOLATION" equiv-text="{{run.startTime | amTimeAgo}}"/></source>
+      <trans-unit id="c18367fc05b25c29f2eeb2ad458855e5ab084acd" datatype="html">
+        <source>Starts <x id="INTERPOLATION" equiv-text="{{run.startTime | date}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list-item/student-run-list-item.component.html</context>
           <context context-type="linenumber">63</context>
@@ -7700,7 +7692,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
           <context context-type="linenumber">86</context>
         </context-group>
-        <target state="translated">開始 <x id="INTERPOLATION" equiv-text="{{run.startTime | amTimeAgo}}"/></target>
+        <target state="needs-translation">Starts <x id="INTERPOLATION" equiv-text="{{run.startTime | date}}"/></target>
       </trans-unit>
       <trans-unit id="2874cc3a35edcf67e588849afeb796f57163458b" datatype="html">
         <source>Launch</source>
@@ -8542,13 +8534,13 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="translated">預定排程</target>
       </trans-unit>
-      <trans-unit id="2987d3838d160f224644ae6a7d19eea2d40ef7e6" datatype="html">
-        <source> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>) </source>
+      <trans-unit id="428abb36bbd4e14be8e48afb3479d37fa486115b" datatype="html">
+        <source> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | date: &apos;short&apos; }}"/>) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
           <context context-type="linenumber">47,49</context>
         </context-group>
-        <target state="needs-translation"> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | amCalendar }}"/>) </target>
+        <target state="needs-translation"> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | date: 'short' }}"/>) </target>
       </trans-unit>
       <trans-unit id="a1c89f5496e99086127a54d08cecba1d0920397e" datatype="html">
         <source>Start date is required.</source>
@@ -8570,7 +8562,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>There is already a period with that name.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <target state="translated">該時段名稱已存在</target>
       </trans-unit>
@@ -8578,7 +8570,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>You do not have permission to add periods to this unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <target state="translated">您沒有權限向此課程增加時段。</target>
       </trans-unit>
@@ -8586,7 +8578,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>You are not allowed to delete a period that contains students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <target state="translated">您不能刪除包含學生的課程時段。</target>
       </trans-unit>
@@ -8594,7 +8586,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>You do not have permission to delete periods from this unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <target state="translated">您沒有權限在此課程中刪除時段。</target>
       </trans-unit>
@@ -8602,7 +8594,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>You do not have permission to change the number of students per team for this unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <target state="translated">您無權更改此課程每個小組的學生人數。</target>
       </trans-unit>
@@ -8610,7 +8602,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>You are not allowed to decrease the number of students per team because this unit already has teams with more than 1 student.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <target state="translated">不允許您減少每組的學生人數，因為該課程已經有超過1個學生的小組。</target>
       </trans-unit>
@@ -8618,7 +8610,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>You do not have permission to change the dates for this unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="translated">您無權更改此課程的日期。</target>
       </trans-unit>
@@ -8626,7 +8618,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>End date can&apos;t be before start date.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="translated">結束日期不能早於開始日期。</target>
       </trans-unit>
@@ -8634,7 +8626,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Start date can&apos;t be after end date.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <target state="translated">開始日期不能晚於結束日期。</target>
       </trans-unit>
@@ -8642,7 +8634,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>You do not have permission to change whether unit is locked after end date.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <target state="needs-translation">You do not have permission to change whether unit is locked after end date.</target>
       </trans-unit>
@@ -8650,7 +8642,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Please enter a new period name.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <target state="translated">請輸入新的課程時段名稱。</target>
       </trans-unit>
@@ -8658,39 +8650,39 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>1-3</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">127</context>
         </context-group>
         <target state="needs-translation">1-3</target>
       </trans-unit>
-      <trans-unit id="6127373082196535001" datatype="html">
-        <source>Are you sure you want to change the students per team to <x id="value" equiv-text="maxStudentsPerTeamText"/>?</source>
+      <trans-unit id="7492811595508525399" datatype="html">
+        <source>Are you sure you want to change the students per team to <x id="maxStudentsPerTeam" equiv-text="maxStudentsPerTeamText"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">131</context>
         </context-group>
-        <target state="translated">確定要將每個小組的學生人數更改為<x id="value"/>嗎？</target>
+        <target state="needs-translation">Are you sure you want to change the students per team to <x id="maxStudentsPerTeam" equiv-text="maxStudentsPerTeamText"/>?</target>
       </trans-unit>
-      <trans-unit id="7740591876616439835" datatype="html">
-        <source>Are you sure you want to change the start date to <x id="date" equiv-text="formattedStartDate"/>?</source>
+      <trans-unit id="976074716410791729" datatype="html">
+        <source>Are you sure you want to change the start date to <x id="startDate" equiv-text="formattedStartDate"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">162</context>
         </context-group>
-        <target state="translated">您確定要將開始日期更改為<x id="date"/>嗎？</target>
+        <target state="needs-translation">Are you sure you want to change the start date to <x id="startDate" equiv-text="formattedStartDate"/>?</target>
       </trans-unit>
-      <trans-unit id="6150645879410305022" datatype="html">
-        <source>Are you sure you want to change the end date to <x id="date" equiv-text="formattedEndDate"/>?</source>
+      <trans-unit id="1070039019925938729" datatype="html">
+        <source>Are you sure you want to change the end date to <x id="endDate" equiv-text="formattedEndDate"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">218</context>
         </context-group>
-        <target state="translated">您確定要將結束日期更改為<x id="date"/>嗎？</target>
+        <target state="needs-translation">Are you sure you want to change the end date to <x id="endDate" equiv-text="formattedEndDate"/>?</target>
       </trans-unit>
       <trans-unit id="4810452891345359652" datatype="html">
         <source>Are you sure you want to remove the end date?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">219</context>
+          <context context-type="linenumber">220</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to remove the end date?</target>
       </trans-unit>
@@ -8698,7 +8690,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Unit settings updated.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">302</context>
+          <context context-type="linenumber">303</context>
         </context-group>
         <target state="translated">課程設定已更新。</target>
       </trans-unit>
@@ -8954,13 +8946,13 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="translated">（舊版課程）</target>
       </trans-unit>
-      <trans-unit id="492e00b6b69577737a10d7af505fd3c483173468" datatype="html">
-        <source>Last student login: <x id="INTERPOLATION" equiv-text="{{run.lastRun | amCalendar}}"/></source>
+      <trans-unit id="c939f7061b636699d1c0dcef58f1b70a9b5cea41" datatype="html">
+        <source>Last student login: <x id="INTERPOLATION" equiv-text="{{run.lastRun | date: &apos;short&apos;}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
           <context context-type="linenumber">80</context>
         </context-group>
-        <target state="translated">上次學生登入：<x id="INTERPOLATION" equiv-text="{{run.lastRun | amCalendar}}"/></target>
+        <target state="needs-translation">Last student login: <x id="INTERPOLATION" equiv-text="{{run.lastRun | date: 'short'}}"/></target>
       </trans-unit>
       <trans-unit id="f31a4ac5cfc26f2d23677bd24f59219dc5f1c491" datatype="html">
         <source>Teacher Tools</source>
@@ -9968,7 +9960,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">406</context>
+          <context context-type="linenumber">404</context>
         </context-group>
         <target state="needs-translation">Choices</target>
       </trans-unit>
@@ -10657,22 +10649,6 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">6</context>
         </context-group>
         <target state="needs-translation">Edit Unit Rubric</target>
-      </trans-unit>
-      <trans-unit id="c01908e4fc24012a2f6f8ff170cc4cd3293807e2" datatype="html">
-        <source>Submitted</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-state-info/component-state-info.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-        <target state="translated">已提交</target>
-      </trans-unit>
-      <trans-unit id="52b56d5859b56a3a1bfe56ce67dfd5e93b21e960" datatype="html">
-        <source>Saved</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-state-info/component-state-info.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-        <target state="translated">已儲存</target>
       </trans-unit>
       <trans-unit id="694e14160d51abf2460c07f4d2592dac127e1f2f" datatype="html">
         <source>Auto Comment</source>
@@ -12552,42 +12528,6 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <target state="needs-translation">Audio Oscillator</target>
       </trans-unit>
-      <trans-unit id="6333335057236774263" datatype="html">
-        <source>Saved</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">575</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
-          <context context-type="linenumber">255</context>
-        </context-group>
-        <target state="translated">已儲存</target>
-      </trans-unit>
-      <trans-unit id="6643018309880261465" datatype="html">
-        <source>Auto Saved</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">579</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
-          <context context-type="linenumber">259</context>
-        </context-group>
-        <target state="translated">已自動儲存</target>
-      </trans-unit>
-      <trans-unit id="1612722476211621614" datatype="html">
-        <source>Submitted</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/component-student.component.ts</context>
-          <context context-type="linenumber">583</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.ts</context>
-          <context context-type="linenumber">263</context>
-        </context-group>
-        <target state="translated">已提交</target>
-      </trans-unit>
       <trans-unit id="818444ddcd112e756ab725357dcfb238b9257324" datatype="html">
         <source>Background Image (Optional)</source>
         <context-group purpose="location">
@@ -12854,7 +12794,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">94,96</context>
+          <context context-type="linenumber">90,92</context>
         </context-group>
         <target state="translated"> 刪除 </target>
       </trans-unit>
@@ -12894,7 +12834,7 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">208</context>
+          <context context-type="linenumber">209</context>
         </context-group>
         <target state="needs-translation">Feedback</target>
       </trans-unit>
@@ -13576,7 +13516,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Post attachment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <target state="needs-translation">Post attachment</target>
       </trans-unit>
@@ -13584,11 +13524,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Delete this post so students will not see it</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <target state="needs-translation">Delete this post so students will not see it</target>
       </trans-unit>
@@ -13596,7 +13536,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Delete </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">37,39</context>
+          <context context-type="linenumber">35,37</context>
         </context-group>
         <target state="translated"> 刪除 </target>
       </trans-unit>
@@ -13604,11 +13544,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Make this post viewable to students</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">108</context>
         </context-group>
         <target state="needs-translation">Make this post viewable to students</target>
       </trans-unit>
@@ -13616,7 +13556,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Undo Delete </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">48,50</context>
+          <context context-type="linenumber">46,48</context>
         </context-group>
         <target state="translated"> 取消刪除 </target>
       </trans-unit>
@@ -13624,7 +13564,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">56,58</context>
+          <context context-type="linenumber">54,56</context>
         </context-group>
         <target state="needs-translation"> Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>) </target>
       </trans-unit>
@@ -13632,7 +13572,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <target state="needs-translation">Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>)</target>
       </trans-unit>
@@ -13640,7 +13580,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Students will not see this post</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <target state="needs-translation">Students will not see this post</target>
       </trans-unit>
@@ -13648,7 +13588,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Parent Deleted </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">103,105</context>
+          <context context-type="linenumber">99,101</context>
         </context-group>
         <target state="needs-translation"> Parent Deleted </target>
       </trans-unit>
@@ -13656,7 +13596,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Undo Delete </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">114,116</context>
+          <context context-type="linenumber">110,112</context>
         </context-group>
         <target state="translated"> 取消刪除 </target>
       </trans-unit>
@@ -13664,11 +13604,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Add Comment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <target state="needs-translation">Add Comment</target>
       </trans-unit>
@@ -15704,7 +15644,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">498</context>
+          <context context-type="linenumber">496</context>
         </context-group>
         <target state="needs-translation">Correct bucket but wrong position</target>
       </trans-unit>
@@ -15712,7 +15652,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Correct</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">508</context>
+          <context context-type="linenumber">506</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
@@ -15728,7 +15668,7 @@ Warning: This will delete all existing choices and buckets in this component.</t
         <source>Incorrect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student.component.ts</context>
-          <context context-type="linenumber">510</context>
+          <context context-type="linenumber">508</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summaryDisplay/summary-display.component.ts</context>
@@ -18303,6 +18243,30 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">170</context>
         </context-group>
         <target state="needs-translation">&lt;p&gt;Use this space to take notes for this unit&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="3124371804165766752" datatype="html">
+        <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
+          <context context-type="linenumber">788</context>
+        </context-group>
+        <target state="needs-translation">Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
+      </trans-unit>
+      <trans-unit id="5275881069346355759" datatype="html">
+        <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
+          <context context-type="linenumber">793</context>
+        </context-group>
+        <target state="needs-translation">Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
+      </trans-unit>
+      <trans-unit id="2692433425768915750" datatype="html">
+        <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
+          <context context-type="linenumber">798</context>
+        </context-group>
+        <target state="needs-translation">Submitted <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
       <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">
         <source>Project Plan</source>
