@@ -2532,7 +2532,7 @@ export class GraphStudent extends ComponentStudent {
       renderCallback: () => {
         const base64Image = hiddenCanvas.toDataURL('image/png');
         const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-        this.NotebookService.addNote(imageObject);
+        this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
       }
     });
   }

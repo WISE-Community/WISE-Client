@@ -20,9 +20,6 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
 import { SummaryStudent } from './summary-student.component';
 
-class MockNotebookService {
-  addNote() {}
-}
 class MockNodeService {
   createNewComponentState() {
     return {};
@@ -52,7 +49,7 @@ describe('SummaryStudentComponent', () => {
         ComponentService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
+        NotebookService,
         NotificationService,
         ProjectService,
         SessionService,

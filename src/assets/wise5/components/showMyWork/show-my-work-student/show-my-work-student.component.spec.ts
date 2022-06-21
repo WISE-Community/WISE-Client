@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { of } from 'rxjs';
 import { AnnotationService } from '../../../services/annotationService';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../services/configService';
@@ -20,15 +21,17 @@ import { ShowMyWorkStudentComponent } from './show-my-work-student.component';
 
 class MockService {}
 
-class MockNotebookService {
-  isNotebookEnabled() {
-    return false;
-  }
-}
-
 class MockNodeService {
   createNewComponentState() {
     return {};
+  }
+}
+
+class MockNotebookService {
+  notebookUpdated$: any = of({});
+
+  isNotebookEnabled() {
+    return false;
   }
 }
 

@@ -13,6 +13,8 @@ import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { of } from 'rxjs';
 import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
+import { NotebookService } from '../../assets/wise5/services/notebookService';
+import { MatDialogModule } from '@angular/material/dialog';
 
 let configService: ConfigService;
 let http: HttpClient;
@@ -36,10 +38,16 @@ const studentStatusUrl = '/api/studentStatus';
 describe('StudentStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
+      imports: [
+        ComponentServiceLookupServiceModule,
+        HttpClientTestingModule,
+        MatDialogModule,
+        UpgradeModule
+      ],
       providers: [
         AnnotationService,
         ConfigService,
+        NotebookService,
         ProjectService,
         SessionService,
         StudentDataService,

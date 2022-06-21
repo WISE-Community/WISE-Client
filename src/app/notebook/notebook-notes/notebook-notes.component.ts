@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
+import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
 import { UtilService } from '../../../assets/wise5/services/utilService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
 
@@ -31,6 +32,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     ConfigService: ConfigService,
     NotebookService: NotebookService,
     private ProjectService: ProjectService,
+    private studentDataService: StudentDataService,
     UtilService: UtilService
   ) {
     super(ConfigService, NotebookService, UtilService);
@@ -181,7 +183,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
   }
 
   addNote() {
-    this.NotebookService.addNote();
+    this.NotebookService.addNote(this.studentDataService.getCurrentNodeId());
   }
 
   select({ event, note }: any): void {
@@ -190,7 +192,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
       this.NotebookService.broadcastNotebookItemChosen(this.insertArgs);
     } else {
       const isEditMode = !this.viewOnly;
-      this.NotebookService.editNote(note, isEditMode);
+      this.NotebookService.editNote(this.studentDataService.getCurrentNodeId(), note, isEditMode);
     }
   }
 

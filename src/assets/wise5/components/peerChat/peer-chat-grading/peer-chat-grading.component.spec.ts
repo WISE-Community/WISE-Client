@@ -25,6 +25,7 @@ import { PeerChatGradingComponent } from './peer-chat-grading.component';
 import { of } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
+import { NotebookService } from '../../../services/notebookService';
 
 let component: PeerChatGradingComponent;
 let fixture: ComponentFixture<PeerChatGradingComponent>;
@@ -60,6 +61,7 @@ describe('PeerChatGradingComponent', () => {
         ClassroomStatusService,
         ConfigService,
         NotificationService,
+        NotebookService,
         PeerChatService,
         PeerGroupService,
         ProjectService,

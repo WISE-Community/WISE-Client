@@ -5,13 +5,13 @@ import { ConfigService } from './configService';
 import { AnnotationService } from './annotationService';
 import { ProjectService } from './projectService';
 import { UtilService } from './utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import * as angular from 'angular';
 import { TagService } from './tagService';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
+import { NotebookService } from './notebookService';
 
 @Injectable()
 export class StudentDataService extends DataService {
@@ -82,7 +82,6 @@ export class StudentDataService extends DataService {
     }
   };
 
-  $translate: any;
   private deleteKeyPressedSource: Subject<any> = new Subject<any>();
   public deleteKeyPressed$: Observable<any> = this.deleteKeyPressedSource.asObservable();
   private nodeClickLockedSource: Subject<any> = new Subject<any>();
@@ -95,8 +94,6 @@ export class StudentDataService extends DataService {
   public componentSubmitDirty$: Observable<any> = this.componentSubmitDirtySource.asObservable();
   private componentSubmitTriggeredSource: Subject<boolean> = new Subject<boolean>();
   public componentSubmitTriggered$: Observable<any> = this.componentSubmitTriggeredSource.asObservable();
-  private notebookItemAnnotationReceivedSource: Subject<boolean> = new Subject<boolean>();
-  public notebookItemAnnotationReceived$ = this.notebookItemAnnotationReceivedSource.asObservable();
   private pauseScreenSource: Subject<boolean> = new Subject<boolean>();
   public pauseScreen$: Observable<any> = this.pauseScreenSource.asObservable();
   private componentStudentDataSource: Subject<any> = new Subject<any>();
@@ -109,16 +106,19 @@ export class StudentDataService extends DataService {
   public nodeStatusesChanged$: Observable<any> = this.nodeStatusesChangedSource.asObservable();
 
   constructor(
-    private upgrade: UpgradeModule,
     public http: HttpClient,
     private AnnotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private ConfigService: ConfigService,
+    private notebookService: NotebookService,
     protected ProjectService: ProjectService,
     private TagService: TagService,
     private UtilService: UtilService
   ) {
     super(ProjectService);
+    this.notebookService.notebookUpdated$.subscribe(() => {
+      this.updateNodeStatuses();
+    });
   }
 
   pauseScreen(doPause: boolean) {
@@ -651,9 +651,8 @@ export class StudentDataService extends DataService {
     const params = criteria.params;
     const nodeId = params.nodeId;
     const requiredNumberOfNotes = params.requiredNumberOfNotes;
-    const notebookService = this.upgrade.$injector.get('NotebookService');
     try {
-      const notebook = notebookService.getNotebookByWorkgroup();
+      const notebook = this.notebookService.getNotebookByWorkgroup();
       const notebookItemsByNodeId = this.getNotebookItemsByNodeId(notebook, nodeId);
       return notebookItemsByNodeId.length >= requiredNumberOfNotes;
     } catch (e) {}
@@ -761,19 +760,6 @@ export class StudentDataService extends DataService {
 
   addAnnotation(annotation) {
     this.studentData.annotations.push(annotation);
-  }
-
-  handleAnnotationReceived(annotation) {
-    this.studentData.annotations.push(annotation);
-    if (annotation.notebookItemId) {
-      this.broadcastNotebookItemAnnotationReceived({ annotation: annotation });
-    } else {
-      this.AnnotationService.broadcastAnnotationReceived({ annotation: annotation });
-    }
-  }
-
-  broadcastNotebookItemAnnotationReceived(args: any) {
-    this.notebookItemAnnotationReceivedSource.next(args);
   }
 
   saveComponentEvent(component, category, event, data) {

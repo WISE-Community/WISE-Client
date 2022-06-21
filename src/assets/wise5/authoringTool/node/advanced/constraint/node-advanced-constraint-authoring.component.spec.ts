@@ -19,6 +19,7 @@ import { UtilService } from '../../../../services/utilService';
 import { NodeAdvancedConstraintAuthoringComponent } from './node-advanced-constraint-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
+import { NotebookService } from '../../../../services/notebookService';
 
 describe('NodeAdvancedConstraintAuthoringComponent', () => {
   let component: NodeAdvancedConstraintAuthoringComponent;
@@ -41,6 +42,7 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
         AnnotationService,
         ClassroomStatusService,
         ConfigService,
+        NotebookService,
         NotificationService,
         ProjectService,
         SessionService,

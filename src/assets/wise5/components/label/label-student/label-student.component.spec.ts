@@ -40,7 +40,7 @@ describe('LabelStudentComponent', () => {
         ComponentService,
         ConfigService,
         { provide: NodeService, useClass: MockService },
-        { provide: NotebookService, useClass: MockService },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentAssetService,

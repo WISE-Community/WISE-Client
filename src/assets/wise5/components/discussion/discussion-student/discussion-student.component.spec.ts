@@ -21,9 +21,6 @@ import { ComponentService } from '../../componentService';
 import { DiscussionService } from '../discussionService';
 import { DiscussionStudent } from './discussion-student.component';
 
-class MockNotebookService {
-  addNote() {}
-}
 class MockNodeService {
   createNewComponentState() {
     return {};
@@ -55,7 +52,7 @@ describe('DiscussionStudentComponent', () => {
         ConfigService,
         DiscussionService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
+        NotebookService,
         NotificationService,
         ProjectService,
         SessionService,

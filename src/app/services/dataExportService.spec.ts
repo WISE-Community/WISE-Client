@@ -18,6 +18,7 @@ import { TeacherWebSocketService } from '../../assets/wise5/services/teacherWebS
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
+import { NotebookService } from '../../assets/wise5/services/notebookService';
 
 let service: DataExportService;
 let configService: ConfigService;
@@ -36,6 +37,7 @@ describe('DataExportService', () => {
         CopyNodesService,
         DataExportService,
         NotificationService,
+        NotebookService,
         ProjectService,
         SessionService,
         StudentDataService,

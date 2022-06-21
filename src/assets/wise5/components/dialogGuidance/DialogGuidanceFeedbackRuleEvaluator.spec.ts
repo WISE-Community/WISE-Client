@@ -25,7 +25,6 @@ import { StudentDataService } from '../../services/studentDataService';
 import { StudentStatusService } from '../../services/studentStatusService';
 import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
-import { MockService } from '../animation/animation-student/animation-student.component.spec';
 import { MockNodeService } from '../common/MockNodeService';
 import { ComponentService } from '../componentService';
 import { CRaterIdea } from './CRaterIdea';
@@ -130,7 +129,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
         DialogGuidanceFeedbackService,
         DialogGuidanceService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockService },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentAssetService,

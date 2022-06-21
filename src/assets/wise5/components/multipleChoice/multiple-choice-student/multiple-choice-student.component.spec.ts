@@ -24,7 +24,6 @@ import { ComponentService } from '../../componentService';
 import { MultipleChoiceService } from '../multipleChoiceService';
 import { MultipleChoiceStudent } from './multiple-choice-student.component';
 
-class MockService {}
 class MockNodeService {
   createNewComponentState() {
     return {};
@@ -143,7 +142,7 @@ describe('MultipleChoiceStudentComponent', () => {
         ComponentService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockService },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentAssetService,

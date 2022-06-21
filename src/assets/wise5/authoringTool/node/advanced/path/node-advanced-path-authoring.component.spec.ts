@@ -19,6 +19,7 @@ import { UtilService } from '../../../../services/utilService';
 import { NodeAdvancedPathAuthoringComponent } from './node-advanced-path-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
+import { NotebookService } from '../../../../services/notebookService';
 
 describe('NodeAdvancedPathAuthoringComponent', () => {
   let component: NodeAdvancedPathAuthoringComponent;
@@ -42,6 +43,7 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
         ClassroomStatusService,
         ConfigService,
         NotificationService,
+        NotebookService,
         ProjectService,
         SessionService,
         StudentDataService,

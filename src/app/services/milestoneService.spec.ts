@@ -19,6 +19,7 @@ import { SessionService } from '../../assets/wise5/services/sessionService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
+import { NotebookService } from '../../assets/wise5/services/notebookService';
 
 let service: MilestoneService;
 let achievementService: AchievementService;
@@ -96,6 +97,7 @@ describe('MilestoneService', () => {
         ConfigService,
         CopyNodesService,
         MilestoneService,
+        NotebookService,
         NotificationService,
         ProjectService,
         SessionService,

@@ -547,6 +547,7 @@ export class OpenResponseStudent extends ComponentStudent {
             const isEditTextEnabled = false;
             const isFileUploadEnabled = false;
             this.NotebookService.addNote(
+              this.StudentDataService.getCurrentNodeId(),
               imageObject,
               noteText,
               [componentState.id],
@@ -568,6 +569,7 @@ export class OpenResponseStudent extends ComponentStudent {
       const isEditTextEnabled = false;
       const isFileUploadEnabled = false;
       this.NotebookService.addNote(
+        this.StudentDataService.getCurrentNodeId(),
         imageObject,
         noteText,
         [studentWork.id],

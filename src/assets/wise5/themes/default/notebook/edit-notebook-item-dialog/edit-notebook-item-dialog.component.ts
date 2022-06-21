@@ -4,7 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentAssetService } from '../../../../services/studentAssetService';
-import { StudentDataService } from '../../../../services/studentDataService';
 import { UtilService } from '../../../../services/utilService';
 
 @Component({
@@ -20,6 +19,7 @@ export class EditNotebookItemDialogComponent implements OnInit {
   isFileUploadEnabled: boolean;
   item: any;
   itemId: string;
+  nodeId: string;
   note: any;
   notebookConfig: any;
   noteFormGroup: FormGroup;
@@ -38,9 +38,9 @@ export class EditNotebookItemDialogComponent implements OnInit {
     private fb: FormBuilder,
     private projectService: ProjectService,
     private studentAssetService: StudentAssetService,
-    private studentDataService: StudentDataService,
     private utilService: UtilService
   ) {
+    this.nodeId = this.data.nodeId;
     this.file = this.data.file;
     this.isEditMode = this.data.isEditMode;
     this.isEditTextEnabled = this.data.isEditTextEnabled;
@@ -52,14 +52,13 @@ export class EditNotebookItemDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.note == null) {
-      const currentNodeId = this.studentDataService.getCurrentNodeId();
-      const currentNodeTitle = this.projectService.getNodeTitleByNodeId(currentNodeId);
+      const currentNodeTitle = this.projectService.getNodeTitleByNodeId(this.nodeId);
 
       this.item = {
         id: null, // null id means we're creating a new notebook item.
         localNotebookItemId: this.utilService.generateKey(10),
         type: 'note', // the notebook item type, TODO: once questions are enabled, don't hard code
-        nodeId: currentNodeId,
+        nodeId: this.nodeId,
         title: $localize`Note from ${currentNodeTitle}`,
         content: {
           text: '',
@@ -258,7 +257,8 @@ export class EditNotebookItemDialogComponent implements OnInit {
   }
 
   update(): void {
-    this.saveEnabled = this.item.content.text || (!this.textRequired && this.item.content.attachments.length);
+    this.saveEnabled =
+      this.item.content.text || (!this.textRequired && this.item.content.attachments.length);
     this.setShowUpload();
   }
 

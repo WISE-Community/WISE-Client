@@ -28,8 +28,6 @@ import { AudioOscillatorStudent } from './audio-oscillator-student.component';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
-export class MockService {}
-
 class MockNodeService {
   createNewComponentState() {
     return {};
@@ -70,7 +68,7 @@ describe('AudioOscillatorStudent', () => {
         ComponentService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockService },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentAssetService,

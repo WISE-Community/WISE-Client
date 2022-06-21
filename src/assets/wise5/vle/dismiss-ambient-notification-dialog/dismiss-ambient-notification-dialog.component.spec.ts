@@ -15,6 +15,7 @@ import { TagService } from '../../services/tagService';
 import { UtilService } from '../../services/utilService';
 import { DismissAmbientNotificationDialogComponent } from './dismiss-ambient-notification-dialog.component';
 import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
+import { NotebookService } from '../../services/notebookService';
 
 let component: DismissAmbientNotificationDialogComponent;
 const DISMISS_CODE: string = 'computer';
@@ -49,6 +50,7 @@ describe('DismissAmbientNotificationDialogComponent', () => {
           }
         },
         { provide: MatDialogRef, useValue: { close() {} } },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentDataService,

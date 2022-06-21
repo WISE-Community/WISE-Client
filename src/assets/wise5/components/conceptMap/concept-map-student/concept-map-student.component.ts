@@ -1462,7 +1462,7 @@ export class ConceptMapStudent extends ComponentStudent {
       ctx.drawImage(image, 0, 0);
       const base64Image = myCanvas.toDataURL('image/png');
       const imageObject = thisUtilService.getImageObjectFromBase64String(base64Image);
-      this.NotebookService.addNote(imageObject);
+      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
     };
     image.src = url;
   }

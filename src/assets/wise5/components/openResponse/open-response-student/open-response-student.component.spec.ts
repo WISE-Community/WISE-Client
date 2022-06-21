@@ -30,9 +30,6 @@ import { OpenResponseCompletionCriteriaService } from '../openResponseCompletion
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
 
-class MockNotebookService {
-  addNote() {}
-}
 class MockNodeService {
   createNewComponentState() {
     return {};
@@ -73,7 +70,7 @@ describe('OpenResponseStudent', () => {
         ConfigService,
         CRaterService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
+        NotebookService,
         NotificationService,
         OpenResponseCompletionCriteriaService,
         OpenResponseService,

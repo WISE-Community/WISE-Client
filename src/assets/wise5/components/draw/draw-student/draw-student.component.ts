@@ -343,7 +343,9 @@ export class DrawStudent extends ComponentStudent {
 
   addNoteWithImage(componentStateId: number) {
     const image = this.generateImageFromCanvas();
-    this.NotebookService.addNote(image, null, [componentStateId]);
+    this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), image, null, [
+      componentStateId
+    ]);
   }
 
   generateImageFromCanvas(): any {

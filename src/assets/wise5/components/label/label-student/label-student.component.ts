@@ -708,7 +708,10 @@ export class LabelStudent extends ComponentStudent {
   }
 
   snipImage(): void {
-    this.NotebookService.addNote(this.getStudentDataImageObject());
+    this.NotebookService.addNote(
+      this.StudentDataService.getCurrentNodeId(),
+      this.getStudentDataImageObject()
+    );
   }
 
   deleteLabelButtonClicked(): void {

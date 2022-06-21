@@ -12,6 +12,7 @@ import * as angular from 'angular';
 import { Notification } from '../../../app/domain/notification';
 import { Message } from '@stomp/stompjs';
 import { RxStomp } from '@stomp/rx-stomp';
+import { NotebookService } from './notebookService';
 
 @Injectable()
 export class StudentWebSocketService {
@@ -21,6 +22,7 @@ export class StudentWebSocketService {
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
     private NodeService: NodeService,
+    private notebookService: NotebookService,
     private NotificationService: NotificationService,
     private ProjectService: ProjectService,
     private StudentDataService: StudentDataService,
@@ -80,7 +82,7 @@ export class StudentWebSocketService {
         } else if (body.type === 'annotation') {
           const annotationData = JSON.parse(body.content);
           this.AnnotationService.addOrUpdateAnnotation(annotationData);
-          this.StudentDataService.handleAnnotationReceived(annotationData);
+          this.handleAnnotationReceived(annotationData);
         } else if (body.type === 'tagsToWorkgroup') {
           const tags = JSON.parse(body.content);
           this.TagService.setTags(tags);
@@ -94,6 +96,15 @@ export class StudentWebSocketService {
           this.StudentDataService.broadcastStudentWorkReceived(JSON.parse(body.content));
         }
       });
+  }
+
+  handleAnnotationReceived(annotation: any): void {
+    this.StudentDataService.studentData.annotations.push(annotation);
+    if (annotation.notebookItemId) {
+      this.notebookService.broadcastNotebookItemAnnotationReceived({ annotation: annotation });
+    } else {
+      this.AnnotationService.broadcastAnnotationReceived({ annotation: annotation });
+    }
   }
 
   isDismissImmediately(notification: Notification): boolean {

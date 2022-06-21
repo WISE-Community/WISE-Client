@@ -18,7 +18,6 @@ import { ComponentService } from '../../componentService';
 import { MatchService } from '../matchService';
 import { MatchStudent } from './match-student.component';
 
-class MockService {}
 class MockNodeService {
   createNewComponentState() {
     return {};
@@ -78,7 +77,7 @@ describe('MatchStudentComponent', () => {
         ComponentService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockService },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentAssetService,
