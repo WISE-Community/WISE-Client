@@ -9,7 +9,6 @@ import { SessionService } from '../services/sessionService';
 import { StudentDataService } from '../services/studentDataService';
 import { VLEProjectService } from './vleProjectService';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
 import { DialogWithoutCloseComponent } from '../directives/dialog-without-close/dialog-without-close.component';
 import { AnnotationService } from '../services/annotationService';
@@ -66,8 +65,7 @@ export class VLEComponent implements OnInit {
     private sessionService: SessionService,
     private snackBar: MatSnackBar,
     private studentDataService: StudentDataService,
-    private utilService: UtilService,
-    private upgrade: UpgradeModule
+    private utilService: UtilService
   ) {}
 
   ngOnInit(): void {
@@ -124,21 +122,13 @@ export class VLEComponent implements OnInit {
     this.themePath = this.projectService.getThemePath();
     this.notebookItemPath = this.themePath + '/notebook/notebookItem.html';
 
-    const stateParams = this.upgrade.$injector.get('$state').params;
-    const stateParamNodeId = stateParams.nodeId;
+    const urlMatch = window.location.href.match(/unit\/[0-9]*\/(.*)/);
+    let nodeId =
+      urlMatch != null
+        ? urlMatch[1]
+        : this.studentDataService.getLatestNodeEnteredEventNodeIdWithExistingNode();
 
-    let nodeId = null;
-    if (stateParamNodeId != null && stateParamNodeId !== '') {
-      nodeId = stateParamNodeId;
-    } else {
-      /*
-       * get the node id for the latest node entered event for an active
-       * node that exists in the project
-       */
-      nodeId = this.studentDataService.getLatestNodeEnteredEventNodeIdWithExistingNode();
-    }
-
-    if (nodeId == null || nodeId === '') {
+    if (nodeId == null) {
       nodeId = this.projectService.getStartNodeId();
     }
 
@@ -422,27 +412,6 @@ export class VLEComponent implements OnInit {
         }
       }
     }
-
-    if (this.upgrade.$injector != null) {
-      const $state = this.upgrade.$injector.get('$state');
-      if (layoutState === 'notebook') {
-        $state.go('root.notebook', { nodeId: this.currentNode.id });
-      } else {
-        this.notebookNavOpen = false;
-        if (this.configService.isPreview()) {
-          $state.go('root.preview.node', {
-            projectId: this.configService.getProjectId(),
-            nodeId: this.currentNode.id
-          });
-        } else {
-          $state.go('root.run.node', {
-            runId: this.configService.getRunId(),
-            nodeId: this.currentNode.id
-          });
-        }
-      }
-    }
-
     this.layoutState = layoutState;
   }
 
