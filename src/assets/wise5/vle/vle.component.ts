@@ -13,6 +13,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
 import { DialogWithoutCloseComponent } from '../directives/dialog-without-close/dialog-without-close.component';
 import { AnnotationService } from '../services/annotationService';
+import { UtilService } from '../services/utilService';
 
 @Component({
   selector: 'vle',
@@ -49,6 +50,7 @@ export class VLEComponent implements OnInit {
   reportFullscreen: boolean = false;
   rootNode: any;
   rootNodeStatus: any;
+  snipImageHandler: any;
   subscriptions: Subscription = new Subscription();
   themePath: string;
   themeSettings: any;
@@ -64,6 +66,7 @@ export class VLEComponent implements OnInit {
     private sessionService: SessionService,
     private snackBar: MatSnackBar,
     private studentDataService: StudentDataService,
+    private utilService: UtilService,
     private upgrade: UpgradeModule
   ) {}
 
@@ -171,11 +174,23 @@ export class VLEComponent implements OnInit {
 
     this.setLayoutState();
     this.initializeSubscriptions();
+    this.addSnipImageListener();
   }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+    window.removeEventListener('snip-image', this.snipImageHandler);
     this.sessionService.broadcastExit();
+  }
+
+  private addSnipImageListener(): void {
+    this.snipImageHandler = (event: CustomEvent) => {
+      this.notebookService.addNote(
+        this.studentDataService.getCurrentNodeId(),
+        this.utilService.getImageObjectFromImageElement(event.detail.target)
+      );
+    };
+    window.addEventListener('snip-image', this.snipImageHandler);
   }
 
   closeNotes(): void {

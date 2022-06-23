@@ -24,10 +24,6 @@ import { GraphStudent } from './graph-student.component';
 import { of } from 'rxjs';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 
-class MockNotebookService {
-  addNote() {}
-  getNotebookConfig() {}
-}
 class MockNodeService {
   createNewComponentState() {
     return {};
@@ -64,7 +60,7 @@ describe('GraphStudentComponent', () => {
         ConfigService,
         GraphService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
+        NotebookService,
         NotificationService,
         ProjectService,
         SessionService,

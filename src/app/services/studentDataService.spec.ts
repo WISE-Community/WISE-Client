@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
@@ -9,6 +8,8 @@ import { UtilService } from '../../assets/wise5/services/utilService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
+import { NotebookService } from '../../assets/wise5/services/notebookService';
+import { MatDialogModule } from '@angular/material/dialog';
 
 let $injector, $rootScope;
 let http: HttpTestingController;
@@ -18,17 +19,17 @@ let annotationService: AnnotationService;
 let projectService: ProjectService;
 let tagService: TagService;
 let utilService: UtilService;
-let upgrade: UpgradeModule;
 let criteria1: any;
 let criteria2: any;
 
 describe('StudentDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
       providers: [
         AnnotationService,
         ConfigService,
+        NotebookService,
         ProjectService,
         SessionService,
         StudentDataService,
@@ -43,7 +44,6 @@ describe('StudentDataService', () => {
     projectService = TestBed.get(ProjectService);
     tagService = TestBed.get(TagService);
     utilService = TestBed.get(UtilService);
-    upgrade = TestBed.get(UpgradeModule);
     criteria1 = {
       name: 'isCompleted',
       params: {

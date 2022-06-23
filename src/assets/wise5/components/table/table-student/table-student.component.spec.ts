@@ -21,10 +21,6 @@ import { ComponentService } from '../../componentService';
 import { TableService } from '../tableService';
 import { TableStudent } from './table-student.component';
 
-class MockNotebookService {
-  addNote() {}
-  getNotebookConfig() {}
-}
 class MockNodeService {
   createNewComponentState() {
     return {};
@@ -59,7 +55,7 @@ describe('TableStudentComponent', () => {
         ComponentService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
+        NotebookService,
         NotificationService,
         ProjectService,
         SessionService,

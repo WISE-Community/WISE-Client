@@ -18,7 +18,6 @@ import { ComponentService } from '../../componentService';
 import { AnimationService } from '../animationService';
 import { AnimationStudent } from './animation-student.component';
 
-export class MockService {}
 export class MockNodeService {
   createNewComponentState() {
     return {};
@@ -68,7 +67,7 @@ describe('AnimationStudent', () => {
         ComponentService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockService },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentAssetService,

@@ -4,7 +4,6 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Subject } from 'rxjs';
-import { ComponentComponent } from '../../components/component/component.component';
 import { ConceptMapService } from '../../components/conceptMap/conceptMapService';
 import { DrawService } from '../../components/draw/drawService';
 import { EmbeddedService } from '../../components/embedded/embeddedService';
@@ -29,15 +28,6 @@ class MockNodeService {
   public doneRenderingComponent$ = this.doneRenderingComponentSource.asObservable();
 }
 
-class MockNotebookService {
-  isNotebookEnabled() {
-    return true;
-  }
-  isStudentNoteClippingEnabled() {
-    return true;
-  }
-}
-
 describe('GenerateImageDialogComponent', () => {
   let component: GenerateImageDialogComponent;
   let fixture: ComponentFixture<GenerateImageDialogComponent>;
@@ -51,7 +41,7 @@ describe('GenerateImageDialogComponent', () => {
         MatProgressSpinnerModule,
         UpgradeModule
       ],
-      declarations: [ComponentComponent, GenerateImageDialogComponent],
+      declarations: [GenerateImageDialogComponent],
       providers: [
         AnnotationService,
         ConceptMapService,
@@ -63,7 +53,7 @@ describe('GenerateImageDialogComponent', () => {
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: { close() {} } },
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentAssetService,

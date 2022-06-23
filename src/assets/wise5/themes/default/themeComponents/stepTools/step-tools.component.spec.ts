@@ -10,6 +10,7 @@ import { AnnotationService } from '../../../../services/annotationService';
 import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../../services/configService';
 import { NodeService } from '../../../../services/nodeService';
+import { NotebookService } from '../../../../services/notebookService';
 import { ProjectService } from '../../../../services/projectService';
 import { SessionService } from '../../../../services/sessionService';
 import { StudentDataService } from '../../../../services/studentDataService';
@@ -54,6 +55,7 @@ describe('StepToolsComponent', () => {
         AnnotationService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentDataService,

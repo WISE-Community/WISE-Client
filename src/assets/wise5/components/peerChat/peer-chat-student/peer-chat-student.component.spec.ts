@@ -32,8 +32,6 @@ import { FormsModule } from '@angular/forms';
 import { PeerChatModule } from '../peer-chat.module';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 
-class MockService {}
-
 export class MockNodeService {
   createNewComponentState() {
     return {};
@@ -143,7 +141,7 @@ describe('PeerChatStudentComponent', () => {
         ComponentService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockService },
+        NotebookService,
         NotificationService,
         PeerChatService,
         PeerGroupService,

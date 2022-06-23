@@ -25,9 +25,6 @@ import { ComponentService } from '../../componentService';
 import { OutsideURLService } from '../outsideURLService';
 import { OutsideUrlStudent } from './outside-url-student.component';
 
-class MockNotebookService {
-  addNote() {}
-}
 class MockNodeService {
   createNewComponentState() {
     return {};
@@ -62,7 +59,7 @@ describe('OutsideUrlStudentComponent', () => {
         ConfigService,
         CRaterService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
+        NotebookService,
         NotificationService,
         OutsideURLService,
         ProjectService,

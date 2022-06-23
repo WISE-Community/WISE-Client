@@ -1,12 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { NotebookService } from '../../assets/wise5/services/notebookService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import demoNotebookItems_import from './sampleData/sample_notebookItems.json';
@@ -19,9 +17,6 @@ import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services
 
 let http: HttpTestingController;
 let configService: ConfigService;
-let projectService: ProjectService;
-let studentDataService: StudentDataService;
-let utilService: UtilService;
 let service: NotebookService;
 let demoNotebookItems: any;
 let demoNotebooksByWorkgroupId: any;
@@ -35,12 +30,7 @@ const teacherNotebookURL = 'http://localhost:8080/teacher/notebook/run/1';
 describe('NotebookService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
       providers: [
         NotebookService,
         AnnotationService,
@@ -48,16 +38,12 @@ describe('NotebookService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TagService,
         UtilService
       ]
     });
     http = TestBed.get(HttpTestingController);
     configService = TestBed.get(ConfigService);
-    projectService = TestBed.get(ProjectService);
-    studentDataService = TestBed.get(StudentDataService);
-    utilService = TestBed.get(UtilService);
     service = TestBed.get(NotebookService);
     demoNotebookItems = JSON.parse(JSON.stringify(demoNotebookItems_import));
     demoNotebooksByWorkgroupId = JSON.parse(JSON.stringify(demoNotebooksByWorkgroupId_import));
@@ -103,12 +89,11 @@ function shouldUpdateNote() {
     spyOn(configService, 'isPreview').and.returnValue(false);
     spyOn(configService, 'getWorkgroupId').and.returnValue(2);
     spyOn(configService, 'getNotebookURL').and.returnValue(studentNotebookURL);
-    spyOn(studentDataService, 'updateNodeStatuses');
     const note = service.getLatestNotebookItemByLocalNotebookItemId(localNotebookItemId, 2);
     service.updateNote(note).then(() => {
       http.expectOne(studentNotebookURL).flush({});
       expect(service.handleNewNotebookItem).toHaveBeenCalled();
-      expect(studentDataService.updateNodeStatuses).toHaveBeenCalled();
+      expect(service.broadcastNotebookUpdated).toHaveBeenCalled();
     });
   });
 }
@@ -117,13 +102,13 @@ function shouldDeleteNote() {
   it('should delete a note in preview mode', (done) => {
     spyOn(configService, 'isPreview').and.returnValue(true);
     spyOn(configService, 'getWorkgroupId').and.returnValue(2);
-    spyOn(studentDataService, 'updateNodeStatuses');
+    spyOn(service, 'broadcastNotebookUpdated');
     let note = service.getLatestNotebookItemByLocalNotebookItemId(localNotebookItemId, 2);
     expect(note.serverDeleteTime).toBeNull();
     service.deleteNote(note).then(() => {
       note = service.getLatestNotebookItemByLocalNotebookItemId(localNotebookItemId, 2);
       expect(note.serverDeleteTime).not.toBeNull();
-      expect(studentDataService.updateNodeStatuses).toHaveBeenCalled();
+      expect(service.broadcastNotebookUpdated).toHaveBeenCalled();
       done();
     });
   });
@@ -133,12 +118,12 @@ function shouldReviveNote() {
   it('should revive a note in preview mode', (done) => {
     spyOn(configService, 'isPreview').and.returnValue(true);
     spyOn(configService, 'getWorkgroupId').and.returnValue(2);
-    spyOn(studentDataService, 'updateNodeStatuses');
+    spyOn(service, 'broadcastNotebookUpdated');
     let note = service.getLatestNotebookItemByLocalNotebookItemId('stb6er46ad', 2);
     service.reviveNote(note).then(() => {
       note = service.getLatestNotebookItemByLocalNotebookItemId('stb6er46ad', 2);
       expect(note.serverDeleteTime).toBeNull();
-      expect(studentDataService.updateNodeStatuses).toHaveBeenCalled();
+      expect(service.broadcastNotebookUpdated).toHaveBeenCalled();
       done();
     });
   });
@@ -338,7 +323,7 @@ function shouldSaveNotebookItem() {
 
     it('should save a notebook item in preview mode', (done) => {
       spyOn(configService, 'isPreview').and.returnValue(true);
-      spyOn(studentDataService, 'updateNodeStatuses');
+      spyOn(service, 'broadcastNotebookUpdated');
       let note = service.getLatestNotebookItemByLocalNotebookItemId(localNotebookItemId, 2);
       expect(note.content.text).toBe('test');
       expect(note.clientSaveTime).toBe(1500000000000);
@@ -346,7 +331,7 @@ function shouldSaveNotebookItem() {
         note = service.getLatestNotebookItemByLocalNotebookItemId(localNotebookItemId, 2);
         expect(note.content.text).toBe('some new text');
         expect(note.clientSaveTime).toBe(1500000100000);
-        expect(studentDataService.updateNodeStatuses).toHaveBeenCalled();
+        expect(service.broadcastNotebookUpdated).toHaveBeenCalled();
         done();
       });
     });
@@ -355,23 +340,23 @@ function shouldSaveNotebookItem() {
 
 function shouldHandleSaveNotebookItem() {
   it('should handle saving a private notebook item', () => {
-    spyOn(studentDataService, 'updateNodeStatuses');
+    spyOn(service, 'broadcastNotebookUpdated');
     spyOn(service, 'updatePrivateNotebookItem');
     const savedNotebookItem = { ...editNoteData };
     savedNotebookItem.content = JSON.stringify(savedNotebookItem.content);
     service.handleSaveNotebookItem(savedNotebookItem);
-    expect(studentDataService.updateNodeStatuses).toHaveBeenCalled();
+    expect(service.broadcastNotebookUpdated).toHaveBeenCalled();
     expect(service.updatePrivateNotebookItem).toHaveBeenCalled();
   });
 
   it('should handle saving a public notebook item', () => {
-    spyOn(studentDataService, 'updateNodeStatuses');
+    spyOn(service, 'broadcastNotebookUpdated');
     spyOn(service, 'updatePrivateNotebookItem');
     const savedNotebookItem = { ...editNoteData };
     savedNotebookItem.content = JSON.stringify(savedNotebookItem.content);
     savedNotebookItem.groups = ['public'];
     service.handleSaveNotebookItem(savedNotebookItem);
-    expect(studentDataService.updateNodeStatuses).toHaveBeenCalled();
+    expect(service.broadcastNotebookUpdated).toHaveBeenCalled();
     expect(service.updatePrivateNotebookItem).not.toHaveBeenCalled();
   });
 }
@@ -389,7 +374,7 @@ function shouldCopyNotebookItem() {
 
 function shouldHandleNewNotebookItem() {
   it('should add new notebook item after successful copy', () => {
-    spyOn(studentDataService, 'updateNodeStatuses');
+    spyOn(service, 'broadcastNotebookUpdated');
     service.handleRetrievePublicNotebookItems(demoPublicNotebookItems, 'public');
     const newLocalNotebookItemId = 'tr46ba89tq';
     const copiedNote = { ...service.publicNotebookItems['public'][0] };
@@ -403,6 +388,6 @@ function shouldHandleNewNotebookItem() {
     service.handleNewNotebookItem(copiedNote);
     newNote = service.getLatestNotebookItemByLocalNotebookItemId(newLocalNotebookItemId, 3);
     expect(newNote.localNotebookItemId).toBe(newLocalNotebookItemId);
-    expect(studentDataService.updateNodeStatuses).toHaveBeenCalled();
+    expect(service.broadcastNotebookUpdated).toHaveBeenCalled();
   });
 }

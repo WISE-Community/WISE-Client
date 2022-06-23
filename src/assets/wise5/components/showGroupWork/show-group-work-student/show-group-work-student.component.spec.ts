@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { of } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { AnnotationService } from '../../../services/annotationService';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
@@ -15,13 +16,16 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
-import { MockService } from '../../animation/animation-student/animation-student.component.spec';
 import { ComponentService } from '../../componentService';
 import { PeerGroup } from '../../peerChat/PeerGroup';
 import { PeerGroupMember } from '../../peerChat/PeerGroupMember';
 import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
 
+class MockService {}
+
 class MockNotebookService {
+  notebookUpdated$: any = of({});
+
   isNotebookEnabled() {
     return false;
   }

@@ -13,6 +13,8 @@ import { UtilService } from '../../services/utilService';
 import { StudentAccountMenuComponent } from './student-account-menu.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
+import { NotebookService } from '../../services/notebookService';
+import { MatDialogModule } from '@angular/material/dialog';
 
 class MockProjectService {
   rootNode = {};
@@ -35,6 +37,7 @@ describe('StudentAccountMenuComponent', () => {
       imports: [
         ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
+        MatDialogModule,
         MatDividerModule,
         MatIconModule,
         MatMenuModule,
@@ -44,6 +47,7 @@ describe('StudentAccountMenuComponent', () => {
       providers: [
         AnnotationService,
         ConfigService,
+        NotebookService,
         { provide: ProjectService, useClass: MockProjectService },
         SessionService,
         StudentDataService,

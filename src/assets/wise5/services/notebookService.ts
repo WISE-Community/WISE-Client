@@ -1,14 +1,11 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 import { StudentAssetService } from './studentAssetService';
-import { StudentDataService } from './studentDataService';
-import { Subject, Subscription } from 'rxjs';
-import { UtilService } from './utilService';
+import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EditNotebookItemDialogComponent } from '../themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component';
 
@@ -55,9 +52,7 @@ export class NotebookService {
   reports = [];
   publicNotebookItems = {};
   notebooksByWorkgroup = {};
-  notebookItemAnnotationReceivedSubscription: Subscription;
-  snipImageHandler: any;
-  private notebookItemAnnotationReceivedSource: Subject<boolean> = new Subject<boolean>();
+  private notebookItemAnnotationReceivedSource: Subject<any> = new Subject<any>();
   public notebookItemAnnotationReceived$ = this.notebookItemAnnotationReceivedSource.asObservable();
   private notebookItemChosenSource: Subject<any> = new Subject<any>();
   public notebookItemChosen$ = this.notebookItemChosenSource.asObservable();
@@ -76,36 +71,14 @@ export class NotebookService {
 
   constructor(
     private dialog: MatDialog,
-    private upgrade: UpgradeModule,
     public http: HttpClient,
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
-    private StudentAssetService: StudentAssetService,
-    private StudentDataService: StudentDataService,
-    private UtilService: UtilService
-  ) {
-    this.notebookItemAnnotationReceivedSubscription = this.StudentDataService.notebookItemAnnotationReceived$.subscribe(
-      (args: any) => {
-        this.notebookItemAnnotationReceivedSource.next(args);
-      }
-    );
-    this.addSnipImageListener();
-  }
+    private StudentAssetService: StudentAssetService
+  ) {}
 
-  addSnipImageListener(): void {
-    this.snipImageHandler = this.createSnipImageHandler();
-    window.addEventListener('snip-image', this.snipImageHandler);
-  }
-
-  createSnipImageHandler(): any {
-    return (event: CustomEvent) => {
-      this.addNote(this.UtilService.getImageObjectFromImageElement(event.detail.target));
-    };
-  }
-
-  ngOnDestroy(): void {
-    this.notebookItemAnnotationReceivedSubscription.unsubscribe();
-    window.removeEventListener('snip-image', this.snipImageHandler);
+  broadcastNotebookItemAnnotationReceived(annotation: any) {
+    this.notebookItemAnnotationReceivedSource.next(annotation);
   }
 
   getStudentNotebookConfig() {
@@ -117,6 +90,7 @@ export class NotebookService {
   }
 
   addNote(
+    nodeId: string,
     file: any = null,
     text: string = null,
     studentWorkIds: number[] = null,
@@ -126,6 +100,7 @@ export class NotebookService {
     const note = null;
     const isEditMode = true;
     this.showEditNoteDialog(
+      nodeId,
       note,
       isEditMode,
       file,
@@ -136,13 +111,14 @@ export class NotebookService {
     );
   }
 
-  editNote(note: any, isEditMode: boolean = true) {
+  editNote(nodeId: string, note: any, isEditMode: boolean = true) {
     const file = null;
     const noteText = null;
     const isEditTextEnabled = true;
     const isFileUploadEnabled = true;
     const studentWorkIds = null;
     this.showEditNoteDialog(
+      nodeId,
       note,
       isEditMode,
       file,
@@ -154,6 +130,7 @@ export class NotebookService {
   }
 
   showEditNoteDialog(
+    nodeId: string,
     note: any,
     isEditMode: boolean,
     file: any,
@@ -172,6 +149,7 @@ export class NotebookService {
         isEditMode: isEditMode,
         isEditTextEnabled: isEditTextEnabled,
         isFileUploadEnabled: isFileUploadEnabled,
+        nodeId: nodeId,
         note: note,
         notebookConfig: this.config,
         saveNotebookItem: (
@@ -352,10 +330,6 @@ export class NotebookService {
         if (notebookItem.studentAssetId != null) {
           notebookItem.studentAsset = this.StudentAssetService.getAssetById(
             notebookItem.studentAssetId
-          );
-        } else if (notebookItem.studentWorkId != null) {
-          notebookItem.studentWork = this.StudentDataService.getStudentWorkByStudentWorkId(
-            notebookItem.studentWorkId
           );
         } else {
           notebookItem.content = JSON.parse(notebookItem.content);
@@ -547,7 +521,6 @@ export class NotebookService {
       const workgroupId = notebookItem.workgroupId;
       this.addToNotebooksByWorgkroup(notebookItem, workgroupId);
       this.groupNotebookItems();
-      this.StudentDataService.updateNodeStatuses();
       this.broadcastNotebookUpdated({
         notebook: this.notebooksByWorkgroup[workgroupId],
         notebookItem: notebookItem
@@ -601,7 +574,6 @@ export class NotebookService {
       if (this.isNotebookItemPrivate(notebookItem)) {
         this.updatePrivateNotebookItem(notebookItem, workgroupId);
       }
-      this.StudentDataService.updateNodeStatuses();
       this.broadcastNotebookUpdated({
         notebook: this.notebooksByWorkgroup[workgroupId],
         notebookItem: notebookItem
@@ -645,31 +617,11 @@ export class NotebookService {
     const workgroupId = notebookItem.workgroupId;
     this.notebooksByWorkgroup[workgroupId].allItems.push(notebookItem);
     this.groupNotebookItems();
-    this.StudentDataService.updateNodeStatuses();
     this.broadcastNotebookUpdated({
       notebook: this.notebooksByWorkgroup[workgroupId],
       notebookItem: notebookItem
     });
     return notebookItem;
-  }
-
-  saveNotebookToggleEvent(isOpen, currentNode) {
-    const nodeId = null,
-      componentId = null,
-      componentType = null,
-      category = 'Notebook';
-    const eventData = {
-      curentNodeId: currentNode == null ? null : currentNode.id
-    };
-    const event = isOpen ? 'notebookOpened' : 'notebookClosed';
-    this.StudentDataService.saveVLEEvent(
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      eventData
-    );
   }
 
   broadcastNotebookItemChosen(args: any) {

@@ -24,12 +24,6 @@ export class MockNodeService {
   }
 }
 
-export class MockNotebookService {
-  getNotebookConfig() {
-    return {};
-  }
-}
-
 let component: EmbeddedStudent;
 const componentId = 'component1';
 let fixture: ComponentFixture<EmbeddedStudent>;
@@ -65,7 +59,7 @@ describe('EmbeddedStudentComponent', () => {
         ConfigService,
         EmbeddedService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentAssetService,

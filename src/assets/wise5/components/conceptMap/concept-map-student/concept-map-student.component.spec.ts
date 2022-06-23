@@ -18,7 +18,6 @@ import { ComponentService } from '../../componentService';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapStudent } from './concept-map-student.component';
 
-export class MockService {}
 export class MockNodeService {
   createNewComponentState() {
     return {};
@@ -60,7 +59,7 @@ describe('ConceptMapStudent', () => {
         ConceptMapService,
         ConfigService,
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockService },
+        NotebookService,
         ProjectService,
         SessionService,
         StudentAssetService,

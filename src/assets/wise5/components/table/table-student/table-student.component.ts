@@ -893,7 +893,7 @@ export class TableStudent extends ComponentStudent {
     html2canvas(tableElement).then((canvas: any) => {
       const base64Image = canvas.toDataURL('image/png');
       const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-      this.NotebookService.addNote(imageObject);
+      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
     });
   }
 
