@@ -55,6 +55,10 @@ export class HtmlStudent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     this.wiseLinkCommunicatorId = `wise-link-communicator-html-student-${this.nodeId}-${this.componentId}`;
+    this.html = this.WiseLinkService.generateHtmlWithWiseLink(
+      this.componentContent.html,
+      this.wiseLinkCommunicatorId
+    );
     this.broadcastDoneRenderingComponent();
   }
 
@@ -63,10 +67,6 @@ export class HtmlStudent extends ComponentStudent {
     this.WiseLinkService.addWiseLinkClickedListener(
       this.wiseLinkCommunicator,
       this.wiseLinkClickedHandler
-    );
-    this.html = this.WiseLinkService.generateHtmlWithWiseLink(
-      this.componentContent.html,
-      this.wiseLinkCommunicatorId
     );
   }
 

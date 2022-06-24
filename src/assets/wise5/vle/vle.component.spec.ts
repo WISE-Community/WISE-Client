@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NotebookService } from '../services/notebookService';
@@ -34,23 +34,18 @@ import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/
 import { MatSelectModule } from '@angular/material/select';
 import { NodeStatusIcon } from '../themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
 import { NodeIconComponent } from '../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
-import { Node } from '../common/Node';
 import { FormsModule } from '@angular/forms';
 import { ComponentServiceLookupServiceModule } from '../services/componentServiceLookupServiceModule';
+import { InitializeVLEService } from '../services/initializeVLEService';
+import { AchievementService } from '../services/achievementService';
+import { StudentWebSocketService } from '../services/studentWebSocketService';
+import { StudentStatusService } from '../services/studentStatusService';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
 const group0Id: string = 'group0';
 const node1Id: string = 'node1';
 let saveVLEEventSpy: jasmine.Spy;
-
-class MockUpgradeModule {
-  $injector: any = {
-    get() {
-      return { params: {}, go: () => {} };
-    }
-  };
-}
 
 describe('VLEComponent', () => {
   beforeEach(async () => {
@@ -70,7 +65,7 @@ describe('VLEComponent', () => {
         MatSelectModule,
         MatSidenavModule,
         MatSnackBarModule,
-        UpgradeModule
+        RouterTestingModule
       ],
       declarations: [
         NavigationComponent,
@@ -84,9 +79,11 @@ describe('VLEComponent', () => {
         VLEComponent
       ],
       providers: [
+        AchievementService,
         AnnotationService,
         ConfigService,
         ComponentService,
+        InitializeVLEService,
         NodeService,
         NotebookService,
         NotificationService,
@@ -94,8 +91,9 @@ describe('VLEComponent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
+        StudentStatusService,
+        StudentWebSocketService,
         TagService,
-        { provide: UpgradeModule, useClass: MockUpgradeModule },
         UtilService,
         VLEProjectService
       ]

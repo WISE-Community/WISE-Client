@@ -4,8 +4,8 @@ import { PeerChatMessageComponent } from './peer-chat-message/peer-chat-message.
 import { PeerChatMessageInputComponent } from './peer-chat-message-input/peer-chat-message-input.component';
 import { PeerChatMessagesComponent } from './peer-chat-messages/peer-chat-messages.component';
 import { PeerChatQuestionBankComponent } from './peer-chat-question-bank/peer-chat-question-bank.component';
-import { AngularJSModule } from '../../../../app/common-hybrid-angular.module';
 import { PeerChatMembersComponent } from './peer-chat-members/peer-chat-members.component';
+import { StudentTeacherCommonModule } from '../../../../app/student-teacher-common.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { PeerChatMembersComponent } from './peer-chat-members/peer-chat-members.
     PeerChatMessagesComponent,
     PeerChatQuestionBankComponent
   ],
-  imports: [AngularJSModule],
+  imports: [StudentTeacherCommonModule],
   exports: [
     PeerChatChatBoxComponent,
     PeerChatMembersComponent,

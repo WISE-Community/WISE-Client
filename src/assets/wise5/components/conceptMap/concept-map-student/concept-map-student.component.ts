@@ -97,6 +97,8 @@ export class ConceptMapStudent extends ComponentStudent {
     this.initializeSVG();
   }
 
+  ngAfterContentInit(): void {}
+
   ngOnDestroy(): void {
     super.ngOnDestroy();
     const svg = this.getElementById(this.svgId, true);

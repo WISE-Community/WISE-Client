@@ -20,6 +20,9 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.rootNode = this.projectService.getProjectRootNode();
+  }
+
+  ngAfterViewInit(): void {
     this.navItemIsExpandedSubscription = this.studentDataService.navItemIsExpanded$.subscribe(
       ({ nodeId, isExpanded }) => {
         this.navItemIsExpanded[nodeId] = isExpanded;

@@ -1,5 +1,4 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UpgradeModule } from '@angular/upgrade/static';
@@ -66,7 +65,6 @@ import { DataExportService } from '../assets/wise5/services/dataExportService';
 import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
 import { MatSliderModule } from '@angular/material/slider';
-import { setUpLocationSync } from '@angular/router/upgrade';
 import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance/dialogGuidanceService';
 import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
@@ -82,14 +80,10 @@ import { OpenResponseCompletionCriteriaService } from '../assets/wise5/component
 import { ComponentServiceLookupService } from '../assets/wise5/services/componentServiceLookupService';
 import { ComponentTypeService } from '../assets/wise5/services/componentTypeService';
 
-@Component({ template: `` })
-export class EmptyComponent {}
-
 @NgModule({
   declarations: [
     DialogResponseComponent,
     DialogResponsesComponent,
-    EmptyComponent,
     NodeIconComponent,
     NodeStatusIcon
   ],
@@ -124,8 +118,7 @@ export class EmptyComponent {}
     MatSlideToggleModule,
     MatTooltipModule,
     NotebookModule,
-    ReactiveFormsModule,
-    RouterModule.forChild([{ path: '**', component: EmptyComponent }])
+    ReactiveFormsModule
   ],
   providers: [
     AchievementService,
@@ -210,9 +203,4 @@ export class EmptyComponent {}
     ReactiveFormsModule
   ]
 })
-export class AngularJSModule {}
-
-export function bootstrapAngularJSModule(upgrade: UpgradeModule, moduleType: string) {
-  upgrade.bootstrap(document.body, [moduleType]);
-  setUpLocationSync(upgrade);
-}
+export class StudentTeacherCommonModule {}

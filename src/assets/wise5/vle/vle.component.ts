@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../services/configService';
+import { InitializeVLEService } from '../services/initializeVLEService';
 import { NotebookService } from '../services/notebookService';
 import { NotificationService } from '../services/notificationService';
 import { SessionService } from '../services/sessionService';
@@ -13,6 +14,7 @@ import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog
 import { DialogWithoutCloseComponent } from '../directives/dialog-without-close/dialog-without-close.component';
 import { AnnotationService } from '../services/annotationService';
 import { UtilService } from '../services/utilService';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'vle',
@@ -28,6 +30,7 @@ export class VLEComponent implements OnInit {
   homePath: string;
   idToOrder: any;
   isEndedAndLocked: boolean;
+  isInitialized: boolean;
   layoutState: string;
   layoutView: string;
   nodeStatuses: any[];
@@ -36,7 +39,6 @@ export class VLEComponent implements OnInit {
   notebookConfig: any;
   notebookFilter: string = '';
   notebookItemPath: string;
-  notebookNavOpen: boolean;
   notebookOpen: boolean = false;
   noteDialog: any;
   notesEnabled: boolean = false;
@@ -59,16 +61,35 @@ export class VLEComponent implements OnInit {
     private annotationService: AnnotationService,
     private configService: ConfigService,
     private dialog: MatDialog,
+    private initializeVLEService: InitializeVLEService,
     private notebookService: NotebookService,
     private notificationService: NotificationService,
     private projectService: VLEProjectService,
+    private route: ActivatedRoute,
+    private router: Router,
     private sessionService: SessionService,
     private snackBar: MatSnackBar,
     private studentDataService: StudentDataService,
     private utilService: UtilService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.initializeVLEService.initialized$.subscribe(() => {
+      this.isInitialized = true;
+      this.initRestOfVLE();
+    });
+    const urlMatch = window.location.href.match(/unit\/([0-9]*)/);
+    if (urlMatch != null) {
+      const unitId = urlMatch[1];
+      if (this.router.url.includes('/preview/unit')) {
+        this.initializeVLEService.initializePreview(unitId);
+      } else {
+        this.initializeVLEService.initializeStudent(unitId);
+      }
+    }
+  }
+
+  initRestOfVLE() {
     this.workgroupId = this.configService.getWorkgroupId();
     this.navFilters = this.projectService.getFilters();
     this.navFilter = this.navFilters[0].name;
@@ -412,6 +433,8 @@ export class VLEComponent implements OnInit {
         }
       }
     }
+
+    this.router.navigate([this.currentNode.id], { relativeTo: this.route.parent });
     this.layoutState = layoutState;
   }
 

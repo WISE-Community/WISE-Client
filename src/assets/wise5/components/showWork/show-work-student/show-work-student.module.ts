@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AngularJSModule } from '../../../../../app/common-hybrid-angular.module';
+import { StudentTeacherCommonModule } from '../../../../../app/student-teacher-common.module';
 import { AnimationShowWorkModule } from '../../animation/animation-show-work/animation-show-work.module';
 import { AudioOscillatorShowWorkModule } from '../../audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.module';
 import { ConceptMapShowWorkModule } from '../../conceptMap/concept-map-show-work/concept-map-show-work.module';
@@ -18,7 +18,7 @@ import { ShowWorkStudentComponent } from './show-work-student.component';
 @NgModule({
   declarations: [ShowWorkStudentComponent],
   imports: [
-    AngularJSModule,
+    StudentTeacherCommonModule,
     AnimationShowWorkModule,
     AudioOscillatorShowWorkModule,
     ConceptMapShowWorkModule,

@@ -17,10 +17,10 @@ import { ChooseNewComponentLocation } from '../authoring-tool/add-component/choo
 import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { ChooseImportStepLocationComponent } from '../authoring-tool/import-step/choose-import-step-location/choose-import-step-location.component';
 import { ChooseImportStepComponent } from '../authoring-tool/import-step/choose-import-step/choose-import-step.component';
-import { AngularJSModule } from '../common-hybrid-angular.module';
 import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
+import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import { PreviewComponentModule } from '../../assets/wise5/authoringTool/compone
     RubricAuthoringComponent
   ],
   imports: [
-    AngularJSModule,
+    StudentTeacherCommonModule,
     ComponentAuthoringModule,
     ComponentStudentModule,
     PreviewComponentModule,
