@@ -13697,7 +13697,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">719</context>
+          <context context-type="linenumber">721</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d0416d769e2f5f38e271f36c0e263f02e2f3b603" datatype="html">
@@ -13718,21 +13718,21 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>A New Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">463</context>
+          <context context-type="linenumber">465</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4546757591980718173" datatype="html">
         <source>Are you sure you want to reset to the initial state?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">825</context>
+          <context context-type="linenumber">827</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4725019513729542053" datatype="html">
         <source>Are you sure you want to delete the background image?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">886</context>
+          <context context-type="linenumber">888</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4077520913910941990" datatype="html">
@@ -14612,11 +14612,11 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
         <source>Delete Recording</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.html</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7148808745686324219" datatype="html">

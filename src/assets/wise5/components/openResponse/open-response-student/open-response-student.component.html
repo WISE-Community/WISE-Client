@@ -85,10 +85,9 @@
   </span>
   <div *ngFor="let attachment of attachments"
        fxLayout="row" fxLayoutAlign="start center">
-    <div *ngIf="attachment.type === 'audio'"
-        fxLayout="row" fxLayoutAlign="start center">
+    <div *ngIf="attachment.type === 'audio'" fxLayout="row" fxLayoutAlign="start center">
       <audio controls>
-        <source [src]="attachment.url | safeUrl" type="audio/webm">
+        <source src="{{attachment.url}}" type="audio/webm">
       </audio>
       <button
           mat-button
