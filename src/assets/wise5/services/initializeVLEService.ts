@@ -29,40 +29,29 @@ export class InitializeVLEService {
     private studentWebSocketService: StudentWebSocketService
   ) {}
 
-  initializeStudent(unitId: string) {
-    return this.configService.retrieveConfig(`/api/config/studentRun/${unitId}`).then(() => {
-      this.sessionService.initializeSession();
-      this.studentStatusService.retrieveStudentStatus();
-      return this.projectService.retrieveProject().then(() => {
-        this.studentWebSocketService.initialize();
-        return this.studentDataService.retrieveStudentData().then(() => {
-          this.notificationService.retrieveNotifications();
-          this.achievementService.retrieveStudentAchievements();
-          return this.studentDataService.retrieveRunStatus().then(() => {
-            return this.studentAssetService.retrieveAssets().then((studentAssets) => {
-              return this.notebookService
-                .retrieveNotebookItems(this.configService.getWorkgroupId())
-                .then((notebook) => {
-                  this.intializedSource.next(true);
-                  return notebook;
-                });
-            });
-          });
-        });
-      });
-    });
+  async initializeStudent(unitId: string) {
+    await this.configService.retrieveConfig(`/api/config/studentRun/${unitId}`);
+    this.sessionService.initializeSession();
+    this.studentStatusService.retrieveStudentStatus();
+    await this.projectService.retrieveProject();
+    this.studentWebSocketService.initialize();
+    await this.studentDataService.retrieveStudentData();
+    await this.notificationService.retrieveNotifications();
+    await this.achievementService.retrieveStudentAchievements();
+    await this.studentDataService.retrieveRunStatus();
+    await this.studentAssetService.retrieveAssets();
+    await this.notebookService.retrieveNotebookItems(this.configService.getWorkgroupId());
+    this.intializedSource.next(true);
   }
 
-  initializePreview(unitId: string) {
-    return this.configService.retrieveConfig(`/api/config/preview/${unitId}`).then(() => {
-      this.sessionService.initializeSession();
-      this.studentStatusService.retrieveStudentStatus();
-      return this.projectService.retrieveProject().then(() => {
-        this.studentDataService.retrieveStudentData();
-        this.studentDataService.retrieveRunStatus();
-        this.notificationService.retrieveNotifications();
-        this.intializedSource.next(true);
-      });
-    });
+  async initializePreview(unitId: string) {
+    await this.configService.retrieveConfig(`/api/config/preview/${unitId}`);
+    this.sessionService.initializeSession();
+    this.studentStatusService.retrieveStudentStatus();
+    await this.projectService.retrieveProject();
+    this.studentDataService.retrieveStudentData();
+    this.studentDataService.retrieveRunStatus();
+    this.notificationService.retrieveNotifications();
+    this.intializedSource.next(true);
   }
 }
