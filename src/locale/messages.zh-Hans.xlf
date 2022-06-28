@@ -6334,7 +6334,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">212</context>
+          <context context-type="linenumber">213</context>
         </context-group>
         <target state="translated">教师反馈</target>
       </trans-unit>
@@ -9506,7 +9506,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">394</context>
+          <context context-type="linenumber">396</context>
         </context-group>
         <target state="needs-translation">Score</target>
       </trans-unit>
@@ -12216,7 +12216,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">328</context>
+          <context context-type="linenumber">330</context>
         </context-group>
         <target state="needs-translation">You have <x id="PH" equiv-text="numberOfSubmitsLeft"/> chances to receive feedback on your answer so this this should be your best work.
 
@@ -12802,7 +12802,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></source>
         <source>You have no more chances to receive feedback on your answer.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">322</context>
+          <context context-type="linenumber">324</context>
         </context-group>
         <target state="needs-translation">You have no more chances to receive feedback on your answer.</target>
       </trans-unit>
@@ -12812,7 +12812,7 @@ Label: <x id="PH" equiv-text="linkLabel"/></source>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">325</context>
+          <context context-type="linenumber">327</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
@@ -12826,15 +12826,15 @@ Are you ready to receive feedback on this answer?</target>
         <source>Feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">403</context>
+          <context context-type="linenumber">405</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">412</context>
+          <context context-type="linenumber">414</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">210</context>
         </context-group>
         <target state="translated">反馈</target>
       </trans-unit>
@@ -12842,7 +12842,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Are you sure you want to reset your work?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.ts</context>
-          <context context-type="linenumber">1411</context>
+          <context context-type="linenumber">1413</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset your work?</target>
       </trans-unit>
@@ -15268,7 +15268,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">719</context>
+          <context context-type="linenumber">721</context>
         </context-group>
         <target state="translated">您确定要删除此标签吗？
 
@@ -15294,7 +15294,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>A New Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">463</context>
+          <context context-type="linenumber">465</context>
         </context-group>
         <target state="needs-translation">A New Label</target>
       </trans-unit>
@@ -15302,7 +15302,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Are you sure you want to reset to the initial state?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">825</context>
+          <context context-type="linenumber">827</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset to the initial state?</target>
       </trans-unit>
@@ -15310,7 +15310,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Are you sure you want to delete the background image?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">886</context>
+          <context context-type="linenumber">888</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the background image?</target>
       </trans-unit>
@@ -16322,11 +16322,11 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
         <source>Delete Recording</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.html</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">99</context>
         </context-group>
         <target state="needs-translation">Delete Recording</target>
       </trans-unit>
@@ -18715,7 +18715,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>This unit ended on <x id="PH" equiv-text="endDate"/>. You can no longer save new work.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="linenumber">121</context>
         </context-group>
         <target state="needs-translation">This unit ended on <x id="PH" equiv-text="endDate"/>. You can no longer save new work.</target>
       </trans-unit>
@@ -18723,7 +18723,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You have been inactive for a long time. Do you want to stay logged in?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">228</context>
         </context-group>
         <target state="needs-translation">You have been inactive for a long time. Do you want to stay logged in?</target>
       </trans-unit>
@@ -18731,7 +18731,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Session Timeout</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">229</context>
         </context-group>
         <target state="needs-translation">Session Timeout</target>
       </trans-unit>
@@ -18739,7 +18739,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Sorry, you cannot view this item yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">323</context>
+          <context context-type="linenumber">334</context>
         </context-group>
         <target state="needs-translation">Sorry, you cannot view this item yet.</target>
       </trans-unit>
@@ -18747,7 +18747,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>&lt;p&gt;To visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt; you need to:&lt;/p&gt;&lt;ul&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">330</context>
+          <context context-type="linenumber">341</context>
         </context-group>
         <target state="needs-translation">&lt;p&gt;To visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt; you need to:&lt;/p&gt;&lt;ul&gt;</target>
       </trans-unit>
@@ -18755,7 +18755,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Item Locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">343</context>
+          <context context-type="linenumber">354</context>
         </context-group>
         <target state="needs-translation">Item Locked</target>
       </trans-unit>
@@ -18763,7 +18763,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Your teacher has paused all the screens in the class.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">393</context>
+          <context context-type="linenumber">404</context>
         </context-group>
         <target state="needs-translation">Your teacher has paused all the screens in the class.</target>
       </trans-unit>
@@ -18771,7 +18771,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Screen Paused</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">394</context>
+          <context context-type="linenumber">405</context>
         </context-group>
         <target state="needs-translation">Screen Paused</target>
       </trans-unit>
@@ -18779,7 +18779,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Error: Data is not being saved! Check your internet connection.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">452</context>
+          <context context-type="linenumber">444</context>
         </context-group>
         <target state="needs-translation">Error: Data is not being saved! Check your internet connection.</target>
       </trans-unit>
