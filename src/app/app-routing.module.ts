@@ -29,6 +29,10 @@ const routes: Routes = [
   { path: 'news', loadChildren: () => import('./news/news.module').then((m) => m.NewsModule) },
   { path: 'privacy', component: PrivacyComponent },
   {
+    path: 'preview',
+    loadChildren: () => import('./student/student.module').then((m) => m.StudentModule)
+  },
+  {
     path: 'student',
     loadChildren: () => import('./student/student.module').then((m) => m.StudentModule)
   },

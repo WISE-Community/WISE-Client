@@ -6,7 +6,7 @@ import { PeerGroupMoveWorkgroupConfirmDialogComponent } from '../../assets/wise5
 import { PeerGroupPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-period/peer-group-period.component';
 import { PeerGroupUnassignedWorkgroupsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-unassigned-workgroups/peer-group-unassigned-workgroups.component';
 import { PeerGroupWorkgroupComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-workgroup/peer-group-workgroup.component';
-import { AngularJSModule } from '../common-hybrid-angular.module';
+import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { SelectPeriodModule } from './select-period.module';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { SelectPeriodModule } from './select-period.module';
     PeerGroupUnassignedWorkgroupsComponent,
     PeerGroupWorkgroupComponent
   ],
-  imports: [AngularJSModule, SelectPeriodModule],
+  imports: [StudentTeacherCommonModule, SelectPeriodModule],
   exports: [
     PeerGroupAssignedWorkgroupsComponent,
     PeerGroupDialogComponent,

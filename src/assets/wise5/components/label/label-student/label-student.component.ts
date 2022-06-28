@@ -1,5 +1,5 @@
 import { fabric } from 'fabric';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -45,6 +45,7 @@ export class LabelStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private changeDetector: ChangeDetectorRef,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected dialog: MatDialog,
@@ -83,6 +84,7 @@ export class LabelStudent extends ComponentStudent {
   ngAfterViewInit(): void {
     this.setupCanvas();
     this.broadcastDoneRenderingComponent();
+    this.changeDetector.detectChanges(); // prevents dev-mode change detection error
   }
 
   enableFabricTextPadding(): void {

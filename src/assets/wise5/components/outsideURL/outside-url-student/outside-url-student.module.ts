@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { AngularJSModule } from '../../../../../app/common-hybrid-angular.module';
+import { StudentTeacherCommonModule } from '../../../../../app/student-teacher-common.module';
 import { StudentComponentModule } from '../../../../../app/student/student.component.module';
 import { OutsideUrlStudent } from './outside-url-student.component';
 
 @NgModule({
   declarations: [OutsideUrlStudent],
-  imports: [AngularJSModule, StudentComponentModule],
+  imports: [StudentTeacherCommonModule, StudentComponentModule],
   exports: [OutsideUrlStudent]
 })
 export class OutsideUrlStudentModule {}

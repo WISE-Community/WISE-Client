@@ -28,7 +28,6 @@ import { MobileMenuModule } from './modules/mobile-menu/mobile-menu.module';
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementDialogComponent } from './announcement/announcement.component';
 import { TrackScrollDirective } from './track-scroll.directive';
-import { PreviewModule } from './preview/preview.module';
 
 export function initialize(
   configService: ConfigService,
@@ -81,7 +80,6 @@ export function getAuthServiceConfigs(configService: ConfigService) {
     HeaderModule,
     HomeModule,
     MobileMenuModule,
-    PreviewModule,
     SocialLoginModule,
     MatSidenavModule,
     MatSnackBarModule,

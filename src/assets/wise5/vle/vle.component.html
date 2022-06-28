@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/angular-material.css" />
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/vle.css" />
 <style ng-bind-html="projectStyle"></style>
-<mat-drawer-container [hasBackdrop]="false">
+<mat-drawer-container [hasBackdrop]="false" *ngIf="isInitialized">
   <mat-drawer #drawer mode="over" position="end" (keydown.escape)="closeNotes()">
     <notebook-notes [config]="notebookConfig"></notebook-notes>
   </mat-drawer>

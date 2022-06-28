@@ -1,6 +1,6 @@
 import SVG from 'svg.js';
 import 'svg.draggable.js';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -64,6 +64,7 @@ export class ConceptMapStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private changeDetector: ChangeDetectorRef,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     private ConceptMapService: ConceptMapService,
@@ -95,6 +96,7 @@ export class ConceptMapStudent extends ComponentStudent {
 
   ngAfterViewInit(): void {
     this.initializeSVG();
+    this.changeDetector.detectChanges(); // prevents dev-mode change detection error
   }
 
   ngOnDestroy(): void {

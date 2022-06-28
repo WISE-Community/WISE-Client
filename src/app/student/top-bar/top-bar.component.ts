@@ -24,8 +24,8 @@ export class TopBarComponent {
   isConstraintsDisabled: boolean = false;
   isPreview: boolean = false;
   logoURL: string;
-  newNotifications: Notification[];
-  notifications: Notification[];
+  newNotifications: Notification[] = [];
+  notifications: Notification[] = [];
   projectName: string;
   subscriptions: Subscription = new Subscription();
 

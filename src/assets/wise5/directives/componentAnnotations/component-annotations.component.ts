@@ -29,7 +29,7 @@ export class ComponentAnnotationsComponent {
   comment: SafeHtml;
   icon: string = 'person';
   isNew: boolean;
-  label: string = '';
+  label: string;
   latestAnnotationTime: any = null;
   maxScoreDisplay: string;
   showComment: boolean = true;
@@ -63,6 +63,7 @@ export class ComponentAnnotationsComponent {
       }
     );
     this.wiseLinkCommunicatorId = `wise-link-communicator-component-annotations-${this.nodeId}-${this.componentId}`;
+    this.processAnnotations();
   }
 
   ngAfterViewInit() {

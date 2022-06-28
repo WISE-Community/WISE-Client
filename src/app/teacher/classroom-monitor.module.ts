@@ -28,7 +28,6 @@ import { StepInfoComponent } from '../classroom-monitor/step-info/step-info.comp
 import { WorkgroupNodeStatusComponent } from '../classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { WorkgroupSelectAutocompleteComponent } from '../classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 import { WorkgroupSelectDropdownComponent } from '../classroom-monitor/workgroup-select/workgroup-select-dropdown/workgroup-select-dropdown.component';
-import { AngularJSModule } from '../common-hybrid-angular.module';
 import { MilestoneReportDataComponent } from './milestone/milestone-report-data/milestone-report-data.component';
 import { ChangeTeamPeriodDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component';
 import { ManageShowStudentInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component';
@@ -38,6 +37,7 @@ import { SelectPeriodModule } from './select-period.module';
 import { ComponentGradingModule } from './component-grading.module';
 import { TeacherSummaryDisplay } from '../../assets/wise5/directives/teacher-summary-display/teacher-summary-display.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     WorkgroupNodeStatusComponent
   ],
   imports: [
-    AngularJSModule,
+    StudentTeacherCommonModule,
     ComponentGradingModule,
     HighchartsChartModule,
     PeerGroupGradingModule,

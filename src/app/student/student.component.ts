@@ -12,6 +12,6 @@ export class StudentComponent implements OnInit {
   ngOnInit() {}
 
   isShowingAngularJSApp() {
-    return this.router.url.includes('/student/unit');
+    return this.router.url.includes('/student/unit') || this.router.url.includes('/preview/unit');
   }
 }

@@ -23,7 +23,7 @@ export class AppComponent {
   mediaWatcher: Subscription;
   googleAnalyticsId: string = null;
   hasAnnouncement: boolean = false;
-  isAngularJSPath: boolean = false;
+  isShowUIView: boolean = false;
   showDefaultMode: boolean = true;
   showHeaderAndFooter: boolean = true;
   popstate: boolean = false;
@@ -128,7 +128,7 @@ export class AppComponent {
       if (ev instanceof NavigationEnd) {
         this.showDefaultMode = this.isShowDefaultMode();
         this.showHeaderAndFooter = this.isShowHeaderAndFooter();
-        this.isAngularJSPath = this.isAngularJSRoute();
+        this.isShowUIView = this.isTeacherAngularJSPath();
         this.setTheme();
         this.scroll = false;
       }
@@ -190,13 +190,16 @@ export class AppComponent {
     return this.isShowDefaultMode() && !this.isAngularJSRoute();
   }
 
-  isAngularJSRoute() {
-    return (
-      this.router.url.includes('/teacher/manage') ||
-      this.router.url.includes('/teacher/edit') ||
-      this.router.url.includes('/student/unit') ||
-      this.router.url.includes('/preview/unit')
-    );
+  isAngularJSRoute(): boolean {
+    return this.isTeacherAngularJSPath() || this.isStudentAngularJSPath();
+  }
+
+  private isStudentAngularJSPath(): boolean {
+    return this.router.url.includes('/student/unit') || this.router.url.includes('/preview/unit');
+  }
+
+  private isTeacherAngularJSPath(): boolean {
+    return this.router.url.includes('/teacher/manage') || this.router.url.includes('/teacher/edit');
   }
 
   setTheme() {

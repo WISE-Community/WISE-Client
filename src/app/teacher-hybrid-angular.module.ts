@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 
 import '../assets/wise5/teacher/teacher-angular-js-module';
-import { AngularJSModule, bootstrapAngularJSModule } from './common-hybrid-angular.module';
+import { StudentTeacherCommonModule } from './student-teacher-common.module';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectService } from '../assets/wise5/services/projectService';
 import { TeacherProjectService } from '../assets/wise5/services/teacherProjectService';
@@ -29,10 +29,20 @@ import { WorkgroupService } from './services/workgroup.service';
 import { TeacherWorkService } from '../assets/wise5/services/teacherWorkService';
 import { TeacherDiscussionService } from '../assets/wise5/components/discussion/teacherDiscussionService';
 import { NodeInfoService } from '../assets/wise5/services/nodeInfoService';
+import { RouterModule } from '@angular/router';
+import { setUpLocationSync } from '@angular/router/upgrade';
+
+@Component({ template: `` })
+export class EmptyComponent {}
 
 @NgModule({
   declarations: [StepToolsComponent],
-  imports: [AngularJSModule, AuthoringToolModule, ClassroomMonitorModule],
+  imports: [
+    StudentTeacherCommonModule,
+    AuthoringToolModule,
+    ClassroomMonitorModule,
+    RouterModule.forChild([{ path: '**', component: EmptyComponent }])
+  ],
   providers: [
     ClassroomStatusService,
     CopyComponentService,
@@ -61,6 +71,7 @@ import { NodeInfoService } from '../assets/wise5/services/nodeInfoService';
 })
 export class TeacherAngularJSModule {
   constructor(upgrade: UpgradeModule) {
-    bootstrapAngularJSModule(upgrade, 'teacher');
+    upgrade.bootstrap(document.body, ['teacher']);
+    setUpLocationSync(upgrade);
   }
 }
