@@ -79,7 +79,7 @@ export class EditComponentJsonComponent {
 
   isJSONValid(): boolean {
     try {
-      angular.fromJson(this.componentContentJSONString);
+      JSON.parse(this.componentContentJSONString);
       return true;
     } catch (e) {
       return false;

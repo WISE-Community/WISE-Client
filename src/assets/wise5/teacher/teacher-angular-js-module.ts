@@ -12,6 +12,7 @@ import { MilestoneService } from '../services/milestoneService';
 import { MoveNodesService } from '../services/moveNodesService';
 import { NodeInfoService } from '../services/nodeInfoService';
 import { PeerGroupService } from '../services/peerGroupService';
+import { TeacherPeerGroupService } from '../services/teacherPeerGroupService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { SpaceService } from '../services/spaceService';
 import { ClassroomStatusService } from '../services/classroomStatusService';
@@ -37,6 +38,7 @@ angular
   .factory('NodeInfoService', downgradeInjectable(NodeInfoService))
   .factory('PeerGroupingAuthoringService', downgradeInjectable(PeerGroupingAuthoringService))
   .factory('PeerGroupService', downgradeInjectable(PeerGroupService))
+  .factory('TeacherPeerGroupService', downgradeInjectable(TeacherPeerGroupService))
   .factory('ProjectService', downgradeInjectable(TeacherProjectService))
   .factory('SpaceService', downgradeInjectable(SpaceService))
   .factory('TeacherDataService', downgradeInjectable(TeacherDataService))

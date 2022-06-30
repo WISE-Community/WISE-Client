@@ -1,10 +1,9 @@
 'use strict';
 
-import { ProjectService } from '../../../../services/projectService';
+import { ProjectService } from '../../services/projectService';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NodeIconChooserDialog } from '../../../../common/node-icon-chooser-dialog/node-icon-chooser-dialog.component';
-import { Node } from '../../../../common/Node';
+import { Node } from '../../common/Node';
 
 @Component({
   selector: 'node-icon',
@@ -33,7 +32,7 @@ export class NodeIconComponent {
 
   sizeClass: any;
 
-  constructor(public dialog: MatDialog, private ProjectService: ProjectService) {}
+  constructor(protected dialog: MatDialog, protected ProjectService: ProjectService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     this.node = this.ProjectService.getNode(this.nodeId);
@@ -52,12 +51,5 @@ export class NodeIconComponent {
 
   isImage() {
     return this.icon.type === 'img';
-  }
-
-  openNodeIconChooserDialog() {
-    this.dialog.open(NodeIconChooserDialog, {
-      data: { node: this.node },
-      panelClass: 'dialog-md'
-    });
   }
 }

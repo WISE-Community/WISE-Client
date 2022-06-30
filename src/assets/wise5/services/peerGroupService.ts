@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { PeerGroupDialogComponent } from '../classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component';
 import { Node } from '../common/Node';
 import { PeerGroup } from '../components/peerChat/PeerGroup';
 import { ConfigService } from './configService';
@@ -11,11 +9,7 @@ import { ConfigService } from './configService';
 export class PeerGroupService {
   runId: number;
 
-  constructor(
-    private ConfigService: ConfigService,
-    private dialog: MatDialog,
-    private http: HttpClient
-  ) {
+  constructor(protected ConfigService: ConfigService, protected http: HttpClient) {
     this.runId = this.ConfigService.getRunId();
   }
 
@@ -74,12 +68,5 @@ export class PeerGroupService {
 
   removeWorkgroupFromGroup(workgroupId: number, groupId: number): Observable<any> {
     return this.http.delete(`/api/peer-group/membership/${groupId}/${workgroupId}`);
-  }
-
-  showPeerGroupDetails(peerGroupingTag: string): void {
-    this.dialog.open(PeerGroupDialogComponent, {
-      data: peerGroupingTag,
-      panelClass: 'dialog-lg'
-    });
   }
 }

@@ -5,7 +5,7 @@ import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { NotificationService } from '../../../../services/notificationService';
-import { PeerGroupService } from '../../../../services/peerGroupService';
+import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import * as angular from 'angular';
@@ -54,7 +54,7 @@ export class NodeGradingViewController {
     'MilestoneService',
     'NodeInfoService',
     'NotificationService',
-    'PeerGroupService',
+    'TeacherPeerGroupService',
     'ProjectService',
     'TeacherDataService'
   ];
@@ -67,7 +67,7 @@ export class NodeGradingViewController {
     protected MilestoneService: MilestoneService,
     protected nodeInfoService: NodeInfoService,
     protected NotificationService: NotificationService,
-    protected PeerGroupService: PeerGroupService,
+    protected PeerGroupService: TeacherPeerGroupService,
     protected ProjectService: TeacherProjectService,
     protected TeacherDataService: TeacherDataService
   ) {}

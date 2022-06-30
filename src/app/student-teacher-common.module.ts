@@ -38,7 +38,7 @@ import { AnimationService } from '../assets/wise5/components/animation/animation
 import { AudioOscillatorService } from '../assets/wise5/components/audioOscillator/audioOscillatorService';
 import { ConceptMapService } from '../assets/wise5/components/conceptMap/conceptMapService';
 import { GraphService } from '../assets/wise5/components/graph/graphService';
-import { NodeIconComponent } from '../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
+import { NodeIconComponent } from '../assets/wise5/vle/node-icon/node-icon.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -61,7 +61,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { ComponentService } from '../assets/wise5/components/componentService';
 import { WiseLinkService } from './services/wiseLinkService';
-import { DataExportService } from '../assets/wise5/services/dataExportService';
 import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
 import { MatSliderModule } from '@angular/material/slider';
@@ -133,7 +132,6 @@ import { ComponentTypeService } from '../assets/wise5/services/componentTypeServ
     ComputerAvatarService,
     ConfigService,
     CRaterService,
-    DataExportService,
     DialogGuidanceService,
     DiscussionService,
     DrawService,

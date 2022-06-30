@@ -3,7 +3,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
-import { TeacherDataService } from '../../../services/teacherDataService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { EmbeddedService } from '../embeddedService';
@@ -24,7 +23,6 @@ export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
     private ConfigService: ConfigService,
     private EmbeddedService: EmbeddedService,
     protected ProjectService: ProjectService,
-    protected TeacherDataService: TeacherDataService,
     protected UtilService: UtilService,
     private sanitizer: DomSanitizer
   ) {

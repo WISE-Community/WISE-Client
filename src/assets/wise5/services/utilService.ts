@@ -2,7 +2,6 @@
 
 import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import * as angular from 'angular';
 import '../lib/jquery/jquery-global';
 
 @Injectable()
@@ -64,7 +63,7 @@ export class UtilService {
   }
 
   makeCopyOfJSONObject(jsonObject): any {
-    return angular.fromJson(angular.toJson(jsonObject));
+    return JSON.parse(JSON.stringify(jsonObject));
   }
 
   getImageObjectFromBase64String(img_b64) {
@@ -806,8 +805,11 @@ export class UtilService {
     const now = new Date();
     let saveTimeText = '';
     if (showFullDate) {
-      saveTimeText = 
-        `${formatDate(saveTime, 'fullDate', this.localeID)} • ${formatDate(saveTime, 'shortTime', this.localeID)}`;
+      saveTimeText = `${formatDate(saveTime, 'fullDate', this.localeID)} • ${formatDate(
+        saveTime,
+        'shortTime',
+        this.localeID
+      )}`;
     } else if (this.isSameDay(now, saveTime)) {
       saveTimeText = formatDate(saveTime, 'shortTime', this.localeID);
     } else {

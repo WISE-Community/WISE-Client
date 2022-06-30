@@ -5,7 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { NodeIconComponent } from '../../../../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
+import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../../services/configService';

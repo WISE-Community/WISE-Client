@@ -1,6 +1,5 @@
 'use strict';
 
-import * as angular from 'angular';
 import * as $ from 'jquery';
 import * as fabric from 'fabric';
 window['fabric'] = fabric.fabric;
@@ -104,10 +103,10 @@ export class DrawService extends ComponentService {
 
   removeBackgroundFromComponentState(componentState: any) {
     const drawData = componentState.studentData.drawData;
-    const drawDataObject = angular.fromJson(drawData);
+    const drawDataObject = JSON.parse(drawData);
     const canvas = drawDataObject.canvas;
     delete canvas.backgroundImage;
-    const drawDataJSONString = angular.toJson(drawDataObject);
+    const drawDataJSONString = JSON.stringify(drawDataObject);
     componentState.studentData.drawData = drawDataJSONString;
     return componentState;
   }
@@ -115,7 +114,7 @@ export class DrawService extends ComponentService {
   componentStateHasStudentWork(componentState: any, componentContent: any) {
     if (componentState != null) {
       const drawDataString = componentState.studentData.drawData;
-      const drawData = angular.fromJson(drawDataString);
+      const drawData = JSON.parse(drawDataString);
       if (this.isComponentContentNotNullAndStarterDrawDataExists(componentContent)) {
         const starterDrawData = componentContent.starterDrawData;
         return this.isStudentDrawDataDifferentFromStarterData(drawDataString, starterDrawData);
@@ -169,7 +168,7 @@ export class DrawService extends ComponentService {
   }
 
   getDrawingToolCanvas(drawingToolId: string): any {
-    return angular.element(document.querySelector(`#${drawingToolId} canvas`))[0];
+    return document.querySelector(`#${drawingToolId} canvas`);
   }
 
   initializeDrawingTool(

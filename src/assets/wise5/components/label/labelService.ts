@@ -1,6 +1,5 @@
 'use strict';
 
-import * as angular from 'angular';
 import { fabric } from 'fabric';
 import SVG from 'svg.js';
 import { ComponentService } from '../componentService';
@@ -352,7 +351,7 @@ export class LabelService extends ComponentService {
    */
   generateImageFromRenderedComponentState(componentState: any) {
     return new Promise((resolve, reject) => {
-      const canvas = this.getCanvas(componentState.nodeId, componentState.componentId);
+      const canvas = this.getCanvas(componentState);
       const img_b64 = canvas.toDataURL('image/png');
       const imageObject = this.UtilService.getImageObjectFromBase64String(img_b64);
       this.StudentAssetService.uploadAsset(imageObject).then((asset: any) => {
@@ -361,13 +360,10 @@ export class LabelService extends ComponentService {
     });
   }
 
-  getCanvas(nodeId: string, componentId: string) {
-    const canvas = angular.element(document.querySelector('#canvas_' + nodeId + '_' + componentId));
-    if (canvas != null && canvas.length > 0) {
-      return canvas[0];
-    } else {
-      return null;
-    }
+  getCanvas(componentState: any): any {
+    return document.querySelector(
+      `#canvas-${componentState.nodeId}-${componentState.componentId}-${componentState.id}`
+    );
   }
 
   initializeCanvas(canvasId: string, width: number, height: number, isDisabled: boolean): any {

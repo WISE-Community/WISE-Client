@@ -1,6 +1,5 @@
 'use strict';
 
-import * as angular from 'angular';
 import * as html2canvas from 'html2canvas';
 import { Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
@@ -317,12 +316,7 @@ export class GraphService extends ComponentService {
   }
 
   getHighchartsDiv(componentId: string) {
-    const highchartsDiv = angular.element('#chart_' + componentId).find('.highcharts-container');
-    if (highchartsDiv != null && highchartsDiv.length > 0) {
-      return highchartsDiv[0];
-    } else {
-      return null;
-    }
+    return document.querySelector(`#chart_${componentId} .highcharts-container`);
   }
 
   isMultipleYAxes(yAxis: any): boolean {

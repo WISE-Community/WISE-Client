@@ -33,7 +33,7 @@ import { NavigationComponent } from '../themes/default/navigation/navigation.com
 import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/step-tools.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NodeStatusIcon } from '../themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
-import { NodeIconComponent } from '../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
+import { NodeIconComponent } from './node-icon/node-icon.component';
 import { FormsModule } from '@angular/forms';
 import { ComponentServiceLookupServiceModule } from '../services/componentServiceLookupServiceModule';
 import { InitializeVLEService } from '../services/initializeVLEService';
