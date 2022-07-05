@@ -31,12 +31,15 @@ import { TeacherDiscussionService } from '../assets/wise5/components/discussion/
 import { NodeInfoService } from '../assets/wise5/services/nodeInfoService';
 import { RouterModule } from '@angular/router';
 import { setUpLocationSync } from '@angular/router/upgrade';
+import { TeacherPeerGroupService } from '../assets/wise5/services/teacherPeerGroupService';
+import { DataExportService } from '../assets/wise5/services/dataExportService';
+import { TeacherNodeIconComponent } from '../assets/wise5/authoringTool/teacher-node-icon/teacher-node-icon.component';
 
 @Component({ template: `` })
 export class EmptyComponent {}
 
 @NgModule({
-  declarations: [StepToolsComponent],
+  declarations: [StepToolsComponent, TeacherNodeIconComponent],
   imports: [
     StudentTeacherCommonModule,
     AuthoringToolModule,
@@ -48,6 +51,7 @@ export class EmptyComponent {}
     CopyComponentService,
     CopyNodesService,
     CopyProjectService,
+    DataExportService,
     { provide: DataService, useExisting: TeacherDataService },
     GetWorkgroupService,
     DeleteNodeService,
@@ -62,6 +66,7 @@ export class EmptyComponent {}
     { provide: ProjectService, useExisting: TeacherProjectService },
     TeacherDataService,
     TeacherDiscussionService,
+    TeacherPeerGroupService,
     TeacherProjectService,
     TeacherWebSocketService,
     TeacherWorkService,

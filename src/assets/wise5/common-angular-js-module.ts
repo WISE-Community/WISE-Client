@@ -11,20 +11,12 @@ import 'angular-toarrayfilter';
 import 'angular-translate';
 import 'angular-translate-loader-partial';
 import 'angular-ui-router';
-import './components/animation/animationComponentModule';
 import { AnnotationService } from './services/annotationService';
-import './components/audioOscillator/audioOscillatorComponentModule';
 import { AudioRecorderService } from './services/audioRecorderService';
-import * as canvg from 'canvg';
-import './components/conceptMap/conceptMapComponentModule';
 import { ConfigService } from './services/configService';
 import { CRaterService } from './services/cRaterService';
 import './directives/components';
 import { ComponentService } from './components/componentService';
-import './components/dialogGuidance/dialogGuidanceStudentComponentModule';
-import './components/discussion/discussionComponentModule';
-import './components/draw/drawComponentModule';
-import './components/embedded/embeddedComponentModule';
 import * as fabric from 'fabric';
 window['fabric'] = fabric.fabric;
 import Filters from './filters/filters';
@@ -36,33 +28,20 @@ import * as covariance from 'compute-covariance';
 window['Highcharts'] = Highcharts;
 window['HighchartsExporting'] = HighchartsExporting;
 window['covariance'] = covariance;
-import './components/graph/graphComponentModule';
-import './components/html/htmlComponentModule';
 import HttpInterceptor from './services/httpInterceptor';
-import './components/label/labelComponentModule';
-import './components/match/matchComponentModule';
-import './components/multipleChoice/multipleChoiceComponentModule';
 import { NodeService } from './services/nodeService';
 import { NotebookService } from './services/notebookService';
 import { NotificationService } from './services/notificationService';
-import './components/openResponse/openResponseComponentModule';
-import './components/outsideURL/outsideURLComponentModule';
-import './components/peerChat/peerChatStudentComponentModule';
 import { SessionService } from './services/sessionService';
 import './vle/studentAsset/studentAsset';
 import { StudentAssetService } from './services/studentAssetService';
 import { StudentDataService } from './services/studentDataService';
-import './components/summary/summaryComponentModule';
-import './components/table/tableComponentModule';
 import { TagService } from './services/tagService';
 import { UtilService } from './services/utilService';
-import './components/showMyWork/show-my-work-student/showMyWorkStudentAngularJSComponentModule';
-import './components/showGroupWork/show-group-work-student/showGroupWorkStudentAngularJSComponentModule';
 import './themes/default/theme';
 import SideMenu from './common/sideMenuComponent';
 import { EditorComponent } from '@tinymce/tinymce-angular';
 import { WiseTinymceEditorComponent } from './directives/wise-tinymce-editor/wise-tinymce-editor.component';
-import { NotebookItemComponent } from '../../app/notebook/notebook-item/notebook-item.component';
 import { NotebookNotesComponent } from '../../app/notebook/notebook-notes/notebook-notes.component';
 import { NotebookReportComponent } from '../../app/notebook/notebook-report/notebook-report.component';
 import { NotebookReportAnnotationsComponent } from '../../app/notebook/notebook-report-annotations/notebook-report-annotations.component';
@@ -72,36 +51,16 @@ import { ComponentTypeService } from './services/componentTypeService';
 angular
   .module('common', [
     'angular-toArrayFilter',
-    'animationComponentModule',
-    'audioOscillatorComponentModule',
     'components',
-    'conceptMapComponentModule',
-    'dialogGuidanceStudentComponentModule',
-    'discussionComponentModule',
-    'drawComponentModule',
-    'embeddedComponentModule',
     'filters',
-    'graphComponentModule',
     'highcharts-ng',
-    'htmlComponentModule',
-    'labelComponentModule',
-    'matchComponentModule',
-    'multipleChoiceComponentModule',
     'ngAria',
     'ngFileUpload',
     'ngMaterial',
     'ngSanitize',
-    'openResponseComponentModule',
-    'outsideURLComponentModule',
     'pascalprecht.translate',
-    'peerChatStudentComponentModule',
-    'showGroupWorkStudentAngularJSComponentModule',
-    'showMyWorkStudentAngularJSComponentModule',
-    'summaryComponentModule',
-    'tableComponentModule',
     'ui.router'
   ])
-  .service('AchievementService', downgradeInjectable(AchievementService))
   .directive(
     'editor',
     downgradeComponent({ component: EditorComponent }) as angular.IDirectiveFactory
@@ -109,10 +68,6 @@ angular
   .directive(
     'wiseTinymceEditor',
     downgradeComponent({ component: WiseTinymceEditorComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'notebookItem',
-    downgradeComponent({ component: NotebookItemComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'notebookNotes',
@@ -128,6 +83,7 @@ angular
       component: NotebookReportAnnotationsComponent
     }) as angular.IDirectiveFactory
   )
+  .service('AchievementService', downgradeInjectable(AchievementService))
   .factory('AnnotationService', downgradeInjectable(AnnotationService))
   .factory('AudioRecorderService', downgradeInjectable(AudioRecorderService))
   .factory('ConfigService', downgradeInjectable(ConfigService))

@@ -268,9 +268,11 @@ export class EmbeddedStudent extends ComponentStudent {
   }
 
   iframeLoaded(): void {
-    (window.document.getElementById(
-      this.embeddedApplicationIFrameId
-    ) as HTMLIFrameElement).contentWindow.addEventListener('message', this.messageEventListener);
+    if (this.embeddedApplicationIFrameId != null) {
+      (window.document.getElementById(
+        this.embeddedApplicationIFrameId
+      ) as HTMLIFrameElement).contentWindow.addEventListener('message', this.messageEventListener);
+    }
   }
 
   setURL(url: string): void {

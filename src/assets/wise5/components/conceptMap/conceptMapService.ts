@@ -1,6 +1,5 @@
 'use strict';
 
-import * as angular from 'angular';
 import SVG from 'svg.js';
 import { ComponentService } from '../componentService';
 import { ConfigService } from '../../services/configService';
@@ -1119,12 +1118,8 @@ export class ConceptMapService extends ComponentService {
         componentState.componentId,
         componentState
       );
-      let svgElement = angular.element(document.querySelector(`#${this.getSVGId(id)}`));
-
-      if (svgElement != null && svgElement.length > 0) {
-        // get the svg element
-        svgElement = svgElement[0];
-
+      let svgElement = document.querySelector(`#${this.getSVGId(id)}`);
+      if (svgElement != null) {
         // get the svg element as a string
         const serializer = new XMLSerializer();
         let svgString = serializer.serializeToString(svgElement);

@@ -1,6 +1,5 @@
 'use strict';
 
-import * as angular from 'angular';
 import * as html2canvas from 'html2canvas';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
@@ -209,11 +208,10 @@ export class TableService extends ComponentService {
    */
   generateImageFromRenderedComponentState(componentState) {
     const promise = new Promise((resolve, reject) => {
-      let tableElement = angular.element(
-        document.querySelector('#table_' + componentState.nodeId + '_' + componentState.componentId)
+      let tableElement = document.querySelector(
+        `#table-${componentState.nodeId}-${componentState.componentId}`
       );
-      if (tableElement != null && tableElement.length > 0) {
-        tableElement = tableElement[0];
+      if (tableElement != null) {
         // convert the table element to a canvas element
         html2canvas(tableElement).then((canvas) => {
           // get the canvas as a base64 string

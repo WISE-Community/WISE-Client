@@ -6,7 +6,6 @@ import { AnnotationService } from './annotationService';
 import { ProjectService } from './projectService';
 import { UtilService } from './utilService';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import * as angular from 'angular';
 import { TagService } from './tagService';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
@@ -845,9 +844,9 @@ export class StudentDataService extends DataService {
         projectId: this.ConfigService.getProjectId(),
         runId: this.ConfigService.getRunId(),
         workgroupId: this.ConfigService.getWorkgroupId(),
-        studentWorkList: angular.toJson(studentWorkList),
-        events: angular.toJson(events),
-        annotations: angular.toJson(annotations)
+        studentWorkList: JSON.stringify(studentWorkList),
+        events: JSON.stringify(events),
+        annotations: JSON.stringify(annotations)
       };
       return this.http
         .post(this.ConfigService.getConfigParam('studentDataURL'), params)

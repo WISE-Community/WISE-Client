@@ -8,7 +8,6 @@ import { StudentDataService } from './studentDataService';
 import { NodeService } from './nodeService';
 import { NotificationService } from './notificationService';
 import { ProjectService } from './projectService';
-import * as angular from 'angular';
 import { Notification } from '../../../app/domain/notification';
 import { Message } from '@stomp/stompjs';
 import { RxStomp } from '@stomp/rx-stomp';
@@ -125,7 +124,7 @@ export class StudentWebSocketService {
   }
 
   updateNode(nodeString: string): void {
-    const node = angular.fromJson(nodeString);
+    const node = JSON.parse(nodeString);
     this.ProjectService.replaceNode(node.id, node);
     this.ProjectService.parseProject();
     this.StudentDataService.updateNodeStatuses();

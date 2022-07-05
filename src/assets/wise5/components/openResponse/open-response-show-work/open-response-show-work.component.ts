@@ -1,4 +1,3 @@
-import * as angular from 'angular';
 import { Component } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 
@@ -14,15 +13,10 @@ export class OpenResponseShowWorkComponent extends ComponentShowWorkDirective {
 
   ngOnInit(): void {
     if (this.componentState != null && this.componentState !== '') {
-      this.componentState = this.convertComponentStateFromStringToObject(this.componentState);
       this.studentResponse = this.getStudentResponse(this.componentState);
       this.attachments = this.getAttachments(this.componentState);
       this.processAttachments(this.attachments);
     }
-  }
-
-  convertComponentStateFromStringToObject(componentState: any): any {
-    return angular.fromJson(componentState);
   }
 
   getStudentResponse(componentState: any): string {
