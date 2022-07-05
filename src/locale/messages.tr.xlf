@@ -12850,7 +12850,7 @@ Bu yanıtla ilgili geri bildirim almaya hazır mısınız?</target>
         <source>Concept Map</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/conceptMapService.ts</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <target state="needs-translation">Concept Map</target>
       </trans-unit>
@@ -13944,7 +13944,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Draw</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/drawService.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <target state="needs-translation">Draw</target>
       </trans-unit>
@@ -15002,7 +15002,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Graph</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <target state="needs-translation">Graph</target>
       </trans-unit>
@@ -15010,7 +15010,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Time (seconds)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <target state="needs-translation">Time (seconds)</target>
       </trans-unit>
@@ -15018,7 +15018,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>s</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <target state="needs-translation">s</target>
       </trans-unit>
@@ -15026,7 +15026,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Position (meters)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <target state="needs-translation">Position (meters)</target>
       </trans-unit>
@@ -15034,7 +15034,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>m</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <target state="needs-translation">m</target>
       </trans-unit>
@@ -15042,7 +15042,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Prediction</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graphService.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">78</context>
         </context-group>
         <target state="needs-translation">Prediction</target>
       </trans-unit>
@@ -15318,7 +15318,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/labelService.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <target state="translated">Etiket</target>
       </trans-unit>
@@ -17510,7 +17510,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Table</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/tableService.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <target state="needs-translation">Table</target>
       </trans-unit>
@@ -18100,7 +18100,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Preview Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target state="needs-translation">Preview Student</target>
       </trans-unit>
@@ -18108,7 +18108,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">768</context>
+          <context context-type="linenumber">767</context>
         </context-group>
         <target state="needs-translation">StudentDataService.saveComponentEvent: component, category, event args must not be null</target>
       </trans-unit>
@@ -18116,7 +18116,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">778</context>
+          <context context-type="linenumber">777</context>
         </context-group>
         <target state="needs-translation">StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</target>
       </trans-unit>
@@ -18124,7 +18124,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">787</context>
+          <context context-type="linenumber">786</context>
         </context-group>
         <target state="needs-translation">StudentDataService.saveVLEEvent: category and event args must not be null</target>
       </trans-unit>
@@ -18248,7 +18248,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">788</context>
+          <context context-type="linenumber">787</context>
         </context-group>
         <target state="needs-translation">Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -18256,7 +18256,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">793</context>
+          <context context-type="linenumber">792</context>
         </context-group>
         <target state="needs-translation">Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -18264,7 +18264,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">798</context>
+          <context context-type="linenumber">797</context>
         </context-group>
         <target state="needs-translation">Submitted <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
