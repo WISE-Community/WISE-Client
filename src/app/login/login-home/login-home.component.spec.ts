@@ -13,6 +13,9 @@ export class MockUserService {
   isSignedIn(): boolean {
     return false;
   }
+  getRedirectUrl(): string {
+    return '';
+  }
 }
 
 export class MockConfigService {
@@ -35,17 +38,19 @@ export class MockConfigService {
 describe('LoginHomeComponent', () => {
   let component: LoginHomeComponent;
   let fixture: ComponentFixture<LoginHomeComponent>;
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [LoginHomeComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule, RecaptchaModule],
-      providers: [
-        { provide: UserService, useClass: MockUserService },
-        { provide: ConfigService, useClass: MockConfigService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LoginHomeComponent],
+        imports: [HttpClientTestingModule, RouterTestingModule, RecaptchaModule],
+        providers: [
+          { provide: UserService, useClass: MockUserService },
+          { provide: ConfigService, useClass: MockConfigService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginHomeComponent);
