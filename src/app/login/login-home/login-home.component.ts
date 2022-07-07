@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from '../../services/user.service';
@@ -15,6 +14,7 @@ export class LoginHomeComponent implements OnInit {
   passwordError: boolean = false;
   processing: boolean = false;
   isGoogleAuthenticationEnabled: boolean = false;
+  isReLoginDueToErrorSavingData: boolean;
   isShowGoogleLogin: boolean = true;
   recaptchaPublicKey: string = '';
   isRecaptchaRequired: boolean = false;
@@ -23,7 +23,6 @@ export class LoginHomeComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
     private configService: ConfigService
@@ -56,6 +55,12 @@ export class LoginHomeComponent implements OnInit {
         this.accessCode = params['accessCode'];
       }
     });
+    this.isReLoginDueToErrorSavingData = this.isRedirectToAppRoutes();
+  }
+
+  private isRedirectToAppRoutes(): boolean {
+    const regExp = RegExp('/student/unit|/teacher/manage|/teacher/edit');
+    return regExp.test(this.getRedirectUrl(''));
   }
 
   login(): boolean {

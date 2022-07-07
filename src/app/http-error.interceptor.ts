@@ -31,6 +31,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
         if (err.status >= 500 || err.status === 0 || err.status === 403) {
           this.processError(err);
+          return;
         }
         return throwError(err);
       })
@@ -41,12 +42,25 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     try {
       const requestUrl = new URL(err.url);
       if (requestUrl.origin === this.configService.getWISEHostname()) {
-        this.showError();
+        if (this.isErrorSavingStudentTeacherAppData(requestUrl)) {
+          window.location.reload();
+        } else {
+          if (!requestUrl.pathname.includes('/api/author/config')) {
+            // fix me: this check should not be necessary. AT should not need to request config
+            // when session times out, but it currently is for some reason
+            this.showError();
+          }
+        }
       }
     } catch (e) {
       // request was from a relative (or invalid) URL
       this.showError();
     }
+  }
+
+  private isErrorSavingStudentTeacherAppData(url: URL): boolean {
+    const regExp = RegExp('/api/(student|teacher)/data|/api/author/project/save');
+    return regExp.test(url.pathname);
   }
 
   showError() {
