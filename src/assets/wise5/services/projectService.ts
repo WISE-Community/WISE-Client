@@ -36,8 +36,8 @@ export class ProjectService {
   project: any;
   rootNode: any = null;
   transitions: any;
-  private projectChangedSource: Subject<any> = new Subject<any>();
-  public projectChanged$: Observable<any> = this.projectChangedSource.asObservable();
+  private projectChangedSource: Subject<void> = new Subject<void>();
+  public projectChanged$: Observable<void> = this.projectChangedSource.asObservable();
   private snipImageSource: Subject<any> = new Subject<any>();
   public snipImage$: Observable<any> = this.snipImageSource.asObservable();
 

@@ -47,7 +47,7 @@ export function getAuthServiceConfigs(configService: ConfigService) {
     providers: []
   };
   const googleLoginOptions = {
-    scope: 'profile email',
+    scopes: ['profile', 'email'],
     prompt: 'select_account'
   };
   configService.getConfig().subscribe((config) => {

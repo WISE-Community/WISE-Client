@@ -93,8 +93,8 @@ export class NotebookReportComponent extends NotebookParentComponent {
     );
 
     this.subscriptions.add(
-      this.mediaObserver.media$.subscribe((change: MediaChange) => {
-        if (change.mqAlias == 'xs' && !this.collapsed) {
+      this.mediaObserver.asObservable().subscribe((change: MediaChange[]) => {
+        if (change[0].mqAlias == 'xs' && !this.collapsed) {
           this.collapsed = true;
           this.fullscreen();
         }

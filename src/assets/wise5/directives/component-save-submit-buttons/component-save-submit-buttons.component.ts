@@ -29,10 +29,10 @@ export class ComponentSaveSubmitButtons {
   componentState: ComponentState;
 
   @Output()
-  saveButtonClicked = new EventEmitter();
+  saveButtonClicked = new EventEmitter<void>();
 
   @Output()
-  submitButtonClicked = new EventEmitter();
+  submitButtonClicked = new EventEmitter<void>();
 
   save() {
     this.saveButtonClicked.next();

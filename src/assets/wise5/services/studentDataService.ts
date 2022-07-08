@@ -81,8 +81,8 @@ export class StudentDataService extends DataService {
     }
   };
 
-  private deleteKeyPressedSource: Subject<any> = new Subject<any>();
-  public deleteKeyPressed$: Observable<any> = this.deleteKeyPressedSource.asObservable();
+  private deleteKeyPressedSource: Subject<void> = new Subject<void>();
+  public deleteKeyPressed$: Observable<void> = this.deleteKeyPressedSource.asObservable();
   private nodeClickLockedSource: Subject<any> = new Subject<any>();
   public nodeClickLocked$: Observable<any> = this.nodeClickLockedSource.asObservable();
   private componentDirtySource: Subject<boolean> = new Subject<boolean>();
@@ -101,8 +101,8 @@ export class StudentDataService extends DataService {
   public studentWorkSavedToServer$: Observable<any> = this.studentWorkSavedToServerSource.asObservable();
   private navItemIsExpandedSource: Subject<any> = new Subject<any>();
   public navItemIsExpanded$: Observable<any> = this.navItemIsExpandedSource.asObservable();
-  private nodeStatusesChangedSource: Subject<any> = new Subject<any>();
-  public nodeStatusesChanged$: Observable<any> = this.nodeStatusesChangedSource.asObservable();
+  private nodeStatusesChangedSource: Subject<void> = new Subject<void>();
+  public nodeStatusesChanged$: Observable<void> = this.nodeStatusesChangedSource.asObservable();
 
   constructor(
     public http: HttpClient,
