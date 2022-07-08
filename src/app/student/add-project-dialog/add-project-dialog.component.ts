@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-project-dialog.component.scss']
 })
 export class AddProjectDialogComponent implements OnInit {
-  validRunCodeSyntaxRegEx: any = /^[a-zA-Z]*\d\d\d$/;
+  validRunCodeSyntaxRegEx: any = /^[a-zA-Z]*\d{3,4}$/;
   registerRunRunCode: string = '';
   registerRunPeriods: string[] = [];
   selectedPeriod: string = '';

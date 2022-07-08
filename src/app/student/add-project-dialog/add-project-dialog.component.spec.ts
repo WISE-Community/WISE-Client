@@ -36,14 +36,16 @@ describe('AddProjectDialogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should detect valid project code', () => {
-    const projectCode = 'Cat123';
-    expect(component.isValidRunCodeSyntax(projectCode)).toEqual(true);
+  it('should detect valid project codes', () => {
+    ['Cat123', 'Cat1234'].forEach((projectCode) => {
+      expect(component.isValidRunCodeSyntax(projectCode)).toEqual(true);
+    });
   });
 
-  it('should detect invalid project code', () => {
-    const projectCode = 'Cat12';
-    expect(component.isValidRunCodeSyntax(projectCode)).toEqual(false);
+  it('should detect invalid project codes', () => {
+    ['Cat12', 'Cat12345'].forEach((projectCode) => {
+      expect(component.isValidRunCodeSyntax(projectCode)).toEqual(false);
+    });
   });
 
   it('should detect invalid run code response', () => {
