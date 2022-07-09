@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -132,8 +131,7 @@ describe('PeerChatStudentComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        PeerChatModule,
-        UpgradeModule
+        PeerChatModule
       ],
       declarations: [ComponentHeader, PeerChatStudentComponent, PossibleScoreComponent],
       providers: [

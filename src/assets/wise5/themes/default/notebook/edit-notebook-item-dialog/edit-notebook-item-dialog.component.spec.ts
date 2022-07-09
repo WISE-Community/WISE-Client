@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { WiseLinkComponent } from '../../../../directives/wise-link/wise-link.component';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
@@ -38,8 +37,7 @@ describe('EditNotebookItemDialogComponent', () => {
         MatIconModule,
         MatInputModule,
         MatToolbarModule,
-        ReactiveFormsModule,
-        UpgradeModule
+        ReactiveFormsModule
       ],
       declarations: [EditNotebookItemDialogComponent, WiseLinkComponent],
       providers: [

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentStatus } from '../../assets/wise5/common/StudentStatus';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -38,12 +37,7 @@ const studentStatusUrl = '/api/studentStatus';
 describe('StudentStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
       providers: [
         AnnotationService,
         ConfigService,

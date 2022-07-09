@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { SummaryService } from '../../components/summary/summaryService';
 import { AnnotationService } from '../../services/annotationService';
 import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
@@ -21,12 +20,7 @@ let fixture: ComponentFixture<StudentSummaryDisplay>;
 describe('SummaryDisplayComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
       declarations: [StudentSummaryDisplay],
       providers: [
         AnnotationService,

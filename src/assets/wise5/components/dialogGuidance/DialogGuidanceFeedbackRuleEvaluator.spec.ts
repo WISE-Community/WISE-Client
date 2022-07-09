@@ -7,7 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { PossibleScoreComponent } from '../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../services/annotationService';
@@ -117,8 +116,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        MatInputModule,
-        UpgradeModule
+        MatInputModule
       ],
       providers: [
         AnnotationService,

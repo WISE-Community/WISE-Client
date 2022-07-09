@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
@@ -19,12 +18,7 @@ let component: NotebookReportComponent;
 describe('NotebookReportComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
       declarations: [NotebookReportComponent],
       providers: [
         AnnotationService,

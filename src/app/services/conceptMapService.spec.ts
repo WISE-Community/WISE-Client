@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
@@ -44,7 +43,7 @@ const link2DestinationNodeInstanceId = 'studentNode2';
 describe('ConceptMapService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule],
       providers: [
         AnnotationService,
         ConceptMapService,

@@ -7,7 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../assets/wise5/services/annotationService';
 import { ComponentServiceLookupServiceModule } from '../../../assets/wise5/services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../assets/wise5/services/configService';
@@ -44,8 +43,7 @@ describe('EditCommonAdvancedComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        MatInputModule,
-        UpgradeModule
+        MatInputModule
       ],
       declarations: [
         EditCommonAdvancedComponent,

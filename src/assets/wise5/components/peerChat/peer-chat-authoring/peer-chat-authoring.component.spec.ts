@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ConfigService } from '../../../services/configService';
@@ -54,8 +53,7 @@ describe('PeerChatAuthoringComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        MatSelectModule,
-        UpgradeModule
+        MatSelectModule
       ],
       declarations: [EditComponentPrompt, PeerChatAuthoringComponent],
       providers: [

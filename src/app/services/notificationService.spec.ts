@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { NotificationService } from '../../assets/wise5/services/notificationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -41,12 +40,7 @@ const retrieveNotificationsURL = `/notifications/${runId1}`;
 describe('NotificationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
       providers: [
         AnnotationService,
         ConfigService,

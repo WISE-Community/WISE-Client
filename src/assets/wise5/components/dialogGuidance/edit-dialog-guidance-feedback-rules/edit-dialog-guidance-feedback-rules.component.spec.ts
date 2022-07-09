@@ -3,7 +3,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { EditDialogGuidanceFeedbackRulesComponent } from './edit-dialog-guidance-feedback-rules.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { FeedbackRule } from '../FeedbackRule';
 
 class MockTeacherProjectService {
@@ -20,7 +19,7 @@ describe('EditDialogGuidanceFeedbackRulesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UpgradeModule],
+      imports: [],
       declarations: [EditDialogGuidanceFeedbackRulesComponent],
       providers: [
         { provide: TeacherProjectService, useClass: MockTeacherProjectService },

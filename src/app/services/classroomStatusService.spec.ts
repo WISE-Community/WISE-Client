@@ -3,7 +3,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
@@ -16,7 +15,7 @@ let http: HttpTestingController;
 describe('ClassroomStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
       providers: [
         AnnotationService,
         ConfigService,

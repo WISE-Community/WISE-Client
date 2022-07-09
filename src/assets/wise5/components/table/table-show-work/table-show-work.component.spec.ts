@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
@@ -16,7 +15,7 @@ describe('TableShowWorkComponent', () => {
     TestBed.configureTestingModule({
       imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
       declarations: [TableShowWorkComponent],
-      providers: [ConfigService, ProjectService, SessionService, UpgradeModule, UtilService]
+      providers: [ConfigService, ProjectService, SessionService, UtilService]
     });
     fixture = TestBed.createComponent(TableShowWorkComponent);
     const componentContent = {

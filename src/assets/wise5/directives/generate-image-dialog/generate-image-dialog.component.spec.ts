@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Subject } from 'rxjs';
 import { ConceptMapService } from '../../components/conceptMap/conceptMapService';
 import { DrawService } from '../../components/draw/drawService';
@@ -38,8 +37,7 @@ describe('GenerateImageDialogComponent', () => {
         ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
         MatDialogModule,
-        MatProgressSpinnerModule,
-        UpgradeModule
+        MatProgressSpinnerModule
       ],
       declarations: [GenerateImageDialogComponent],
       providers: [

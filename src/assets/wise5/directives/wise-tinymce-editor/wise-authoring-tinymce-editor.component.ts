@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
-import { TeacherProjectService } from '../../services/teacherProjectService';
 import { WiseTinymceEditorComponent } from './wise-tinymce-editor.component';
 import { NotebookService } from '../../services/notebookService';
 import 'tinymce';
+import { UpgradeModule } from '@angular/upgrade/static';
 
 declare let tinymce: any;
 
@@ -29,7 +29,7 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
     private ConfigService: ConfigService,
     NotebookService: NotebookService,
     private ProjectAssetService: ProjectAssetService,
-    private ProjectService: TeacherProjectService
+    private upgrade: UpgradeModule
   ) {
     super(NotebookService);
   }
@@ -40,8 +40,8 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
     this.initializeTinyMCE();
   }
 
-  initializeInsertWISELinkPlugin(): void {
-    const thisProjectService = this.ProjectService;
+  private initializeInsertWISELinkPlugin(): void {
+    const thisComponent = this;
     tinymce.PluginManager.add('wiselink', function (editor: any, url: string) {
       editor.ui.registry.addIcon(
         'wiselink',
@@ -61,7 +61,7 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
             componentId: '',
             target: ''
           };
-          thisProjectService.openWISELinkChooser(params).then((result) => {
+          thisComponent.openWISELinkChooser(params).then((result) => {
             let content = '';
             if (result.wiseLinkType === 'link') {
               content =
@@ -78,6 +78,23 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
           });
         }
       });
+    });
+  }
+
+  private openWISELinkChooser({ projectId, nodeId, componentId, target }): any {
+    const stateParams = {
+      projectId: projectId,
+      nodeId: nodeId,
+      componentId: componentId,
+      target: target
+    };
+    return this.upgrade.$injector.get('$mdDialog').show({
+      templateUrl: 'assets/wise5/authoringTool/wiseLink/wiseLinkAuthoring.html',
+      controller: 'WISELinkAuthoringController',
+      controllerAs: '$ctrl',
+      $stateParams: stateParams,
+      clickOutsideToClose: true,
+      escapeToClose: true
     });
   }
 
