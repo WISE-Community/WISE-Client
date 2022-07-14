@@ -33,13 +33,10 @@ export class TeacherProjectLibraryComponent implements OnInit {
     this.libraryService.numberOfPersonalProjectsVisible$.subscribe((num) => {
       this.tabs[2].numVisible = num;
     });
-    if (!this.libraryService.hasLoaded) {
-      this.libraryService.getCommunityLibraryProjects();
-      this.libraryService.getOfficialLibraryProjects();
-      this.libraryService.getPersonalLibraryProjects();
-      this.libraryService.getSharedLibraryProjects();
-      this.libraryService.hasLoaded = true;
-    }
+    this.libraryService.getCommunityLibraryProjects();
+    this.libraryService.getOfficialLibraryProjects();
+    this.libraryService.getPersonalLibraryProjects();
+    this.libraryService.getSharedLibraryProjects();
     this.libraryService.newProjectSource$.subscribe((project) => {
       if (project) {
         document.querySelector('.library').scrollIntoView();
