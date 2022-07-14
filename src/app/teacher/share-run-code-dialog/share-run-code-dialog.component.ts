@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfigService } from '../../services/config.service';
 import { UserService } from '../../services/user.service';
@@ -13,13 +13,11 @@ import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-d
   styleUrls: ['./share-run-code-dialog.component.scss']
 })
 export class ShareRunCodeDialogComponent {
-  run: TeacherRun;
   code: string;
   link: string;
 
   constructor(
-    private dialogRef: MatDialogRef<ShareRunCodeDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: any,
+    @Inject(MAT_DIALOG_DATA) public run: TeacherRun,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private teacherService: TeacherService,
@@ -28,7 +26,6 @@ export class ShareRunCodeDialogComponent {
   ) {}
 
   ngOnInit() {
-    this.run = new TeacherRun(this.data.run);
     this.code = this.run.runCode;
     const host = this.configService.getWISEHostname() + this.configService.getContextPath();
     this.link = `${host}/login?accessCode=${this.code}`;

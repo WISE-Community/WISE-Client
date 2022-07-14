@@ -2,9 +2,9 @@ import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LibraryProjectDetailsComponent } from '../../modules/library/library-project-details/library-project-details.component';
-import { Run } from '../../domain/run';
 import { TeacherService } from '../teacher.service';
 import { formatDate } from '@angular/common';
+import { TeacherRun } from '../teacher-run';
 
 @Component({
   selector: 'app-run-settings-dialog',
@@ -12,7 +12,7 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./run-settings-dialog.component.scss']
 })
 export class RunSettingsDialogComponent implements OnInit {
-  run: Run;
+  run: TeacherRun;
   newPeriodName: string;
   maxStudentsPerTeam: string;
   startDate: Date;
@@ -94,6 +94,7 @@ export class RunSettingsDialogComponent implements OnInit {
           this.clearNewPeriodInput();
           this.clearErrorMessages();
           this.showConfirmMessage();
+          this.teacherService.broadcastRunChanges(new TeacherRun(this.run));
         } else {
           this.addPeriodMessage = this.translateMessageCode(response.messageCode);
         }
@@ -112,6 +113,7 @@ export class RunSettingsDialogComponent implements OnInit {
             this.updateDataRun(this.run);
             this.clearErrorMessages();
             this.showConfirmMessage();
+            this.teacherService.broadcastRunChanges(new TeacherRun(this.run));
           } else {
             this.deletePeriodMessage = this.translateMessageCode(response.messageCode);
             alert(this.deletePeriodMessage);
