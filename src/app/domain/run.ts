@@ -80,22 +80,19 @@ export class Run {
     return user.permissions.includes(permission);
   }
 
-  isScheduled(now) {
+  isScheduled(now: number): boolean {
     return now < this.startTime;
   }
 
-  isActive(now) {
+  isActive(now: number): boolean {
     return !this.isScheduled(now) && !this.isCompleted(now);
   }
 
-  isCompleted(now) {
-    if (this.hasEndTime()) {
-      return this.endTime <= now;
-    }
-    return false;
+  isCompleted(now: number): boolean {
+    return this.hasEndTime() && this.endTime <= now;
   }
 
-  hasEndTime() {
+  private hasEndTime(): boolean {
     return this.endTime != null;
   }
 }
