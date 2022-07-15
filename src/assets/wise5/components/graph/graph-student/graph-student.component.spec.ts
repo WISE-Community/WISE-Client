@@ -1846,11 +1846,17 @@ function setYAxisLabelsWhenMultipleYAxes() {
     component.yAxis = [
       {
         title: {
+          style: {
+            color: ''
+          },
           text: ''
         }
       },
       {
         title: {
+          style: {
+            color: ''
+          },
           text: ''
         }
       }

@@ -343,12 +343,13 @@ export class GraphStudent extends ComponentStudent {
     return !Array.isArray(yAxis);
   }
 
-  setYAxisLabels(studentData) {
+  setYAxisLabels(studentData: any): void {
     if (this.isSingleYAxis(this.yAxis)) {
       this.yAxis.title.text = studentData.dataExplorerYAxisLabel;
     } else if (studentData.dataExplorerYAxisLabels != null) {
       for (let [index, yAxis] of Object.entries(this.yAxis)) {
         (yAxis as any).title.text = studentData.dataExplorerYAxisLabels[index];
+        (yAxis as any).title.style.color = this.dataExplorerColors[index];
       }
     }
   }
