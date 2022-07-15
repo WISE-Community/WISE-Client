@@ -3,11 +3,11 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { Project } from '../../domain/project';
-import { Run } from '../../domain/run';
 import { TeacherService } from '../teacher.service';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
 import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-dialog/list-classroom-courses-dialog.component';
+import { TeacherRun } from '../teacher-run';
 
 @Component({
   selector: 'create-run-dialog',
@@ -26,7 +26,7 @@ export class CreateRunDialogComponent {
   periodOptions: string[] = [];
   isCreating: boolean = false;
   isCreated: boolean = false;
-  run: Run = null;
+  run: TeacherRun = null;
 
   constructor(
     public dialog: MatDialog,
@@ -125,10 +125,10 @@ export class CreateRunDialogComponent {
           this.isCreating = false;
         })
       )
-      .subscribe((newRun: Run) => {
-        this.run = new Run(newRun);
+      .subscribe((newRun: TeacherRun) => {
+        this.run = new TeacherRun(newRun);
         this.dialogRef.afterClosed().subscribe((result) => {
-          this.teacherService.addNewRun(this.run);
+          this.teacherService.broadcastRunChanges(this.run);
         });
         this.isCreated = true;
       });
