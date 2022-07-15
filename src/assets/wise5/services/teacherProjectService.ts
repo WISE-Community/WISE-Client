@@ -1,6 +1,5 @@
 'use strict';
 import * as angular from 'angular';
-import * as $ from 'jquery';
 import { ConfigService } from '../services/configService';
 import { ProjectService } from './projectService';
 import { UtilService } from '../services/utilService';
@@ -1597,7 +1596,7 @@ export class TeacherProjectService extends ProjectService {
                      * get the branch paths. these paths do not
                      * contain the start point or merge point.
                      */
-                    const branchPaths = branch.branchPaths;
+                    const branchPaths = branch.paths;
 
                     if (branchPaths != null) {
                       for (let branchPath of branchPaths) {

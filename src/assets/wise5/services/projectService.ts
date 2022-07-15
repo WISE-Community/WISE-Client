@@ -9,6 +9,7 @@ import { Observable, Subject } from 'rxjs';
 import { Node } from '../common/Node';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
+import { Branch } from '../../../app/domain/branch';
 
 @Injectable()
 export class ProjectService {
@@ -17,7 +18,7 @@ export class ProjectService {
   additionalProcessingFunctionsMap: any = {};
   allPaths: string[] = [];
   applicationNodes: any;
-  branchesCache: any;
+  branchesCache: Branch[];
   filters: any[] = [{ name: 'all', label: 'All' }];
   flattenedProjectAsNodeIds: any = null;
   groupNodes: any[];
@@ -38,8 +39,6 @@ export class ProjectService {
   transitions: any;
   private projectChangedSource: Subject<any> = new Subject<any>();
   public projectChanged$: Observable<any> = this.projectChangedSource.asObservable();
-  private snipImageSource: Subject<any> = new Subject<any>();
-  public snipImage$: Observable<any> = this.snipImageSource.asObservable();
 
   constructor(
     protected componentServiceLookupService: ComponentServiceLookupService,
@@ -247,9 +246,9 @@ export class ProjectService {
     }
   }
 
-  loadNodeIdsInAnyBranch(branches) {
+  private loadNodeIdsInAnyBranch(branches: Branch[]): void {
     for (const branch of branches) {
-      for (const branchPath of branch.branchPaths) {
+      for (const branchPath of branch.paths) {
         this.nodeIdsInAnyBranch = this.nodeIdsInAnyBranch.concat(branchPath);
       }
     }
@@ -1665,7 +1664,7 @@ export class ProjectService {
    * Remember the branches.
    * @param branches An array of arrays of node ids.
    */
-  setBranchesCache(branches) {
+  private setBranchesCache(branches: Branch[]): void {
     this.branchesCache = branches;
   }
 
@@ -1673,7 +1672,7 @@ export class ProjectService {
    * Get the branches that were previously calculated.
    * @returns An array of arrays of node ids.
    */
-  getBranchesCache() {
+  private getBranchesCache(): Branch[] {
     return this.branchesCache;
   }
 
@@ -1681,7 +1680,7 @@ export class ProjectService {
     this.branchesCache = null;
   }
 
-  getBranches() {
+  private getBranches(): Branch[] {
     /*
      * Do not use the branches cache in the authoring tool because the branches
      * may change when the author changes the project. In all other modes the
@@ -1718,7 +1717,7 @@ export class ProjectService {
    * the branch start point, the branch paths, and the branch
    * end point
    */
-  findBranches(paths) {
+  private findBranches(paths: any[]): Branch[] {
     const branches = [];
     let previousNodeId = null;
 
@@ -1737,17 +1736,10 @@ export class ProjectService {
         previousNodeId = nodeId;
       } else {
         // not all the top node ids are the same which means we have branched
-
-        const branchMetaObject = this.createBranchMetaObject();
-        branchMetaObject.branchStartPoint = previousNodeId;
-
         const nextCommonNodeId = this.findNextCommonNodeId(paths);
-        branchMetaObject.branchEndPoint = nextCommonNodeId;
-
         let branchPaths = this.extractPathsUpToNodeId(paths, nextCommonNodeId);
         branchPaths = this.removeDuplicatePaths(branchPaths);
-        branchMetaObject.branchPaths = branchPaths;
-        branches.push(branchMetaObject);
+        branches.push(new Branch(previousNodeId, branchPaths, nextCommonNodeId));
 
         // trim the paths so that they start at the branch end point
         this.trimPathsUpToNodeId(paths, nextCommonNodeId);
@@ -1757,20 +1749,6 @@ export class ProjectService {
       }
     }
     return branches;
-  }
-
-  /**
-   * Create a branch meta object that will contain the branch start
-   * point, branch paths, and branch end point
-   * @return an object that contains a branch start point, branch paths,
-   * and a branch end point
-   */
-  createBranchMetaObject(): any {
-    return {
-      branchStartPoint: null,
-      branchPaths: [],
-      branchEndPoint: null
-    };
   }
 
   /**
@@ -1936,38 +1914,6 @@ export class ProjectService {
       }
     }
     return result;
-  }
-
-  /**
-   * Get the branch paths that a node id is in
-   * @param branches an array of branch objects
-   * @param nodeId the node id to check
-   * @return an array of the branch paths that the node id is in
-   */
-  getBranchPathsByNodeId(branches, nodeId) {
-    const branchPathsIn = [];
-    if (branches != null && nodeId != null) {
-      for (let branch of branches) {
-        if (branch != null) {
-          const branchPaths = branch.branchPaths;
-          if (branchPaths != null) {
-            for (let branchPath of branchPaths) {
-              if (branchPath != null) {
-                const index = branchPath.indexOf(nodeId);
-                if (index != -1) {
-                  /*
-                   * the node is in this branch path so we will
-                   * add the branch path to our array
-                   */
-                  branchPathsIn.push(branchPath);
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    return branchPathsIn;
   }
 
   /**
@@ -2485,16 +2431,8 @@ export class ProjectService {
    * @param nodeId look for a branch with this start node id
    * @return whether the node is a branch start point
    */
-  isBranchStartPoint(nodeId) {
-    const branches = this.getBranches();
-    if (branches != null) {
-      for (let branch of branches) {
-        if (branch.branchStartPoint == nodeId) {
-          return true;
-        }
-      }
-    }
-    return false;
+  private isBranchStartPoint(nodeId: string): boolean {
+    return this.getBranches().some((branch) => branch.startPoint === nodeId);
   }
 
   /**
@@ -2502,16 +2440,8 @@ export class ProjectService {
    * @param nodeId look for a branch with this end node id
    * @return whether the node is a branch end point
    */
-  isBranchMergePoint(nodeId) {
-    const branches = this.getBranches();
-    if (branches != null) {
-      for (let branch of branches) {
-        if (branch.branchEndPoint == nodeId) {
-          return true;
-        }
-      }
-    }
-    return false;
+  private isBranchMergePoint(nodeId: string): boolean {
+    return this.getBranches().some((branch) => branch.endPoint === nodeId);
   }
 
   /**
@@ -2519,24 +2449,8 @@ export class ProjectService {
    * @param nodeId the branch start point
    * @return an array of branches that have the given branch start point
    */
-  getBranchesByBranchStartPointNodeId(nodeId) {
-    const branches = [];
-    const allBranches = this.getBranches();
-
-    if (allBranches != null) {
-      for (let branch of allBranches) {
-        if (branch != null) {
-          if (nodeId == branch.branchStartPoint) {
-            /*
-             * the branch start point matches the node id we are
-             * looking for
-             */
-            branches.push(branch);
-          }
-        }
-      }
-    }
-    return branches;
+  getBranchesByBranchStartPointNodeId(nodeId: string): Branch[] {
+    return this.getBranches().filter((branch) => branch.startPoint === nodeId);
   }
 
   /**
@@ -2612,7 +2526,7 @@ export class ProjectService {
             const branchesByBranchStartPointNodeId = this.getBranchesByBranchStartPointNodeId(
               nodeId
             );
-            const branchesObject = branchesByBranchStartPointNodeId[0];
+            const branches = branchesByBranchStartPointNodeId[0];
 
             /*
              * been used in the branch paths so that we know what
@@ -2625,7 +2539,7 @@ export class ProjectService {
             this.nodeIdToNumber[nodeId] = currentActivityNumber + '.' + currentStepNumber;
 
             currentStepNumber++;
-            const branchPaths = branchesObject.branchPaths;
+            const branchPaths = branches.paths;
 
             for (let bp = 0; bp < branchPaths.length; bp++) {
               const branchPath = branchPaths[bp];
@@ -2666,7 +2580,7 @@ export class ProjectService {
             // get the step number we should use for the end point
             currentStepNumber = maxCurrentStepNumber;
 
-            const branchEndPointNodeId = branchesObject.branchEndPoint;
+            const branchEndPointNodeId = branches.endPoint;
 
             /*
              * calculate the node number for the branch end point and
@@ -3129,10 +3043,6 @@ export class ProjectService {
 
   broadcastProjectChanged() {
     this.projectChangedSource.next();
-  }
-
-  broadcastSnipImage(args: any) {
-    this.snipImageSource.next(args);
   }
 
   getPeerGroupings(): PeerGrouping[] {
