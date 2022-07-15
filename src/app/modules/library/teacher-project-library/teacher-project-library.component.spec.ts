@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TeacherProjectLibraryComponent } from './teacher-project-library.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -26,14 +25,16 @@ describe('TeacherProjectLibraryComponent', () => {
   let component: TeacherProjectLibraryComponent;
   let fixture: ComponentFixture<TeacherProjectLibraryComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [MatMenuModule, RouterTestingModule, MatDialogModule],
-      declarations: [TeacherProjectLibraryComponent],
-      providers: [{ provide: LibraryService, useClass: MockLibraryService }],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [MatMenuModule, RouterTestingModule],
+        declarations: [TeacherProjectLibraryComponent],
+        providers: [{ provide: LibraryService, useClass: MockLibraryService }],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeacherProjectLibraryComponent);

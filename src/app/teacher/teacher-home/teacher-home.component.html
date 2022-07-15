@@ -18,7 +18,7 @@
       fxFlex.gt-sm="0 0 auto"></discourse-recent-activity>
 </header>
 <section>
-  <nav mat-tab-nav-bar i18n-aria-label aria-label="Teacher home navigation">
+  <nav mat-tab-nav-bar i18n-aria-label aria-label="Teacher home navigation" [tabPanel]="tabPanel">
     <a mat-tab-link
         *ngFor="let tab of tabLinks"
         [routerLink]="[tab.path]"
@@ -32,6 +32,7 @@
       &nbsp;<mat-icon class="text">open_in_browser</mat-icon>
     </a>
   </nav>
-  <app-teacher-run-list [hidden]="!isRunListRoute()"></app-teacher-run-list>
-  <app-teacher-project-library [hidden]="isRunListRoute()"></app-teacher-project-library>
+  <mat-tab-nav-panel #tabPanel>
+    <router-outlet></router-outlet>
+  </mat-tab-nav-panel>
 </section>
