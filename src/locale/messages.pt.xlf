@@ -8458,7 +8458,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Run Settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target state="needs-translation">Run Settings</target>
       </trans-unit>
@@ -8466,7 +8466,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Edit Classroom Unit Warning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <target state="needs-translation">Edit Classroom Unit Warning</target>
       </trans-unit>
@@ -9014,7 +9014,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.ts</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
