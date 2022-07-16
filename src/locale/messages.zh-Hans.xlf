@@ -5944,7 +5944,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>WISE Tested</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.ts</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">19</context>
         </context-group>
         <target state="translated">经过WISE测试的课程</target>
       </trans-unit>
@@ -5952,7 +5952,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Community Built</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="translated">社区制作项目</target>
       </trans-unit>
@@ -5960,7 +5960,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>My Units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <target state="translated">我的项目</target>
       </trans-unit>
@@ -8658,7 +8658,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>1-3</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">129</context>
         </context-group>
         <target state="translated">1-3</target>
       </trans-unit>
@@ -8666,7 +8666,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Are you sure you want to change the students per team to <x id="maxStudentsPerTeam" equiv-text="maxStudentsPerTeamText"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">133</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to change the students per team to <x id="maxStudentsPerTeam" equiv-text="maxStudentsPerTeamText"/>?</target>
       </trans-unit>
@@ -8674,7 +8674,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Are you sure you want to change the start date to <x id="startDate" equiv-text="formattedStartDate"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">164</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to change the start date to <x id="startDate" equiv-text="formattedStartDate"/>?</target>
       </trans-unit>
@@ -8682,7 +8682,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Are you sure you want to change the end date to <x id="endDate" equiv-text="formattedEndDate"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">220</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to change the end date to <x id="endDate" equiv-text="formattedEndDate"/>?</target>
       </trans-unit>
@@ -8690,7 +8690,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Are you sure you want to remove the end date?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">220</context>
+          <context context-type="linenumber">222</context>
         </context-group>
         <target state="translated">你确定要删除结束日期么？</target>
       </trans-unit>
@@ -8698,7 +8698,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Unit settings updated.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.ts</context>
-          <context context-type="linenumber">303</context>
+          <context context-type="linenumber">305</context>
         </context-group>
         <target state="translated">项目设置已更新。</target>
       </trans-unit>
@@ -8754,7 +8754,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Copied to clipboard.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target state="translated">已复制到剪贴板。</target>
       </trans-unit>
@@ -8974,7 +8974,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Class Periods:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <target state="translated">课程课时：</target>
       </trans-unit>
@@ -9014,7 +9014,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -18256,7 +18256,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">787</context>
+          <context context-type="linenumber">791</context>
         </context-group>
         <target state="needs-translation">Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -18264,7 +18264,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">792</context>
+          <context context-type="linenumber">796</context>
         </context-group>
         <target state="needs-translation">Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -18272,7 +18272,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">797</context>
+          <context context-type="linenumber">801</context>
         </context-group>
         <target state="needs-translation">Submitted <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
