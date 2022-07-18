@@ -1,11 +1,9 @@
 'use strict';
 import * as angular from 'angular';
-import * as $ from 'jquery';
 import { ConfigService } from '../services/configService';
 import { ProjectService } from './projectService';
 import { UtilService } from '../services/utilService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { SessionService } from './sessionService';
@@ -33,7 +31,6 @@ export class TeacherProjectService extends ProjectService {
   public savingProject$: Observable<any> = this.savingProjectSource.asObservable();
 
   constructor(
-    protected upgrade: UpgradeModule,
     protected componentServiceLookupService: ComponentServiceLookupService,
     protected http: HttpClient,
     protected ConfigService: ConfigService,
@@ -903,23 +900,6 @@ export class TeacherProjectService extends ProjectService {
         constraint.removalCriteria[0].name === 'teacherRemoval' &&
         constraint.removalCriteria[0].params.periodId === periodId
       );
-    });
-  }
-
-  openWISELinkChooser({ projectId, nodeId, componentId, target }): any {
-    const stateParams = {
-      projectId: projectId,
-      nodeId: nodeId,
-      componentId: componentId,
-      target: target
-    };
-    return this.upgrade.$injector.get('$mdDialog').show({
-      templateUrl: 'assets/wise5/authoringTool/wiseLink/wiseLinkAuthoring.html',
-      controller: 'WISELinkAuthoringController',
-      controllerAs: '$ctrl',
-      $stateParams: stateParams,
-      clickOutsideToClose: true,
-      escapeToClose: true
     });
   }
 

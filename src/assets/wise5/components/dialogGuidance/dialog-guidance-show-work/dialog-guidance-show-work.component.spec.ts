@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { ConfigService } from '../../../services/configService';
@@ -16,7 +15,7 @@ describe('DialogGuidanceShowWorkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
       declarations: [DialogGuidanceShowWorkComponent, DialogResponsesComponent],
       providers: [ConfigService, ComputerAvatarService, ProjectService, SessionService, UtilService]
     }).compileComponents();

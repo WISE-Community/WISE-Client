@@ -12,7 +12,6 @@ import { StudentDataService } from '../services/studentDataService';
 import { TagService } from '../services/tagService';
 import { UtilService } from '../services/utilService';
 import { ComponentService } from './componentService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentServiceLookupServiceModule } from '../services/componentServiceLookupServiceModule';
@@ -31,12 +30,7 @@ class ComponentStudentImpl extends ComponentStudent {}
 describe('ComponentStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
       declarations: [ComponentStudentImpl],
       providers: [
         AnnotationService,

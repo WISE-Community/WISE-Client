@@ -4,7 +4,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../services/configService';
@@ -40,8 +39,7 @@ describe('SummaryStudentComponent', () => {
         ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
         MatDialogModule,
-        NoopAnimationsModule,
-        UpgradeModule
+        NoopAnimationsModule
       ],
       declarations: [SummaryStudent],
       providers: [
