@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { VLEProjectService } from '../../assets/wise5/vle/vleProjectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { UtilService } from '../../assets/wise5/services/utilService';
@@ -15,7 +14,7 @@ let http: HttpTestingController;
 describe('VLEProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
       providers: [VLEProjectService, ConfigService, SessionService, UtilService]
     });
     http = TestBed.get(HttpTestingController);

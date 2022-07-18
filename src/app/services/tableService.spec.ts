@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { TableService } from '../../assets/wise5/components/table/tableService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -15,7 +14,7 @@ let service: TableService;
 describe('TableService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       providers: [
         AnnotationService,
         ConfigService,

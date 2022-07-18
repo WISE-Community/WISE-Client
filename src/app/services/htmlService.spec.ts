@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { HTMLService } from '../../assets/wise5/components/html/htmlService';
@@ -15,7 +14,7 @@ let service: HTMLService;
 describe('HTMLService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       providers: [
         AnnotationService,
         ConfigService,

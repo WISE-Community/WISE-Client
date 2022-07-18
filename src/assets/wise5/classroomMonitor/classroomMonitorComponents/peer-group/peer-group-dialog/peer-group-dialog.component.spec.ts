@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { AchievementService } from '../../../../services/achievementService';
 import { AnnotationService } from '../../../../services/annotationService';
@@ -57,7 +56,6 @@ describe('PeerGroupDialogComponent', () => {
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
-        UpgradeModule,
         UtilService,
         WorkgroupService
       ]

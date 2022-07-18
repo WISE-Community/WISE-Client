@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { MatDividerModule } from '@angular/material/divider';
@@ -40,8 +39,7 @@ describe('StudentAccountMenuComponent', () => {
         MatDialogModule,
         MatDividerModule,
         MatIconModule,
-        MatMenuModule,
-        UpgradeModule
+        MatMenuModule
       ],
       declarations: [StudentAccountMenuComponent],
       providers: [

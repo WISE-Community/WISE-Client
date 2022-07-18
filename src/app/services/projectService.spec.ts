@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { UtilService } from '../../assets/wise5/services/utilService';
@@ -30,7 +29,7 @@ let twoStepsProjectJSON: any;
 describe('ProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
       providers: [ProjectService, ConfigService, SessionService, UtilService]
     });
     http = TestBed.get(HttpTestingController);
@@ -79,14 +78,12 @@ describe('ProjectService', () => {
   // TODO: add test for service.getNonEmptyPathIndex()
   // TODO: add test for service.getBranches()
   // TODO: add test for service.findBranches()
-  // TODO: add test for service.createBranchMetaObject()
   // TODO: add test for service.findNextCommonNodeId()
   // TODO: add test for service.allPathsContainNodeId()
   // TODO: add test for service.trimPathsUpToNodeId()
   // TODO: add test for service.extractPathsUpToNodeId()
   // TODO: add test for service.removeDuplicatePaths()
   // TODO: add test for service.pathsEqual()
-  // TODO: add test for service.getBranchPathsByNodeId()
   // TODO: add test for service.getNodeContentByNodeId()
   // TODO: add test for service.replaceComponent()
   // TODO: add test for service.createGroup()

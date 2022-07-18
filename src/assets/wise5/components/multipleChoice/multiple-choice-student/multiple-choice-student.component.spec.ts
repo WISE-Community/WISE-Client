@@ -6,7 +6,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
@@ -132,8 +131,7 @@ describe('MultipleChoiceStudentComponent', () => {
         MatCheckboxModule,
         MatDialogModule,
         MatRadioModule,
-        ReactiveFormsModule,
-        UpgradeModule
+        ReactiveFormsModule
       ],
       declarations: [ComponentHeader, MultipleChoiceStudent, PossibleScoreComponent],
       providers: [

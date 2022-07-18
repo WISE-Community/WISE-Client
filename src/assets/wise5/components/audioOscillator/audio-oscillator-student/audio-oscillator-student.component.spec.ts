@@ -9,7 +9,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
@@ -58,8 +57,7 @@ describe('AudioOscillatorStudent', () => {
         MatInputModule,
         MatSelectModule,
         MatTooltipModule,
-        ReactiveFormsModule,
-        UpgradeModule
+        ReactiveFormsModule
       ],
       declarations: [AudioOscillatorStudent, ComponentHeader, PossibleScoreComponent],
       providers: [

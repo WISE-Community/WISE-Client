@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { MatCardModule } from '@angular/material/card';
@@ -38,8 +37,7 @@ describe('NotificationsMenuComponent', () => {
         MatCardModule,
         MatDialogModule,
         MatIconModule,
-        MatToolbarModule,
-        UpgradeModule
+        MatToolbarModule
       ],
       declarations: [NotificationsDialogComponent],
       providers: [

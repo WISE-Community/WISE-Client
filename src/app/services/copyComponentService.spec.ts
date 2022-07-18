@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { CopyComponentService } from '../../assets/wise5/services/copyComponentService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
@@ -21,7 +20,7 @@ let utilService: UtilService;
 describe('CopyComponentService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       providers: [
         CopyComponentService,
         { provide: TeacherProjectService, useClass: MockProjectService },

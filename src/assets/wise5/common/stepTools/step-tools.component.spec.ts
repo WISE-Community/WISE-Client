@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AchievementService } from '../../services/achievementService';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
@@ -60,8 +59,7 @@ describe('StepTools', () => {
         HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
-        MatSelectModule,
-        UpgradeModule
+        MatSelectModule
       ],
       declarations: [StepToolsComponent],
       providers: [

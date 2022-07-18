@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { of } from 'rxjs';
 import { AnnotationService } from '../../../services/annotationService';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
@@ -41,12 +40,7 @@ describe('ShowMyWorkStudentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatCardModule,
-        UpgradeModule
-      ],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatCardModule],
       declarations: [ShowMyWorkStudentComponent],
       providers: [
         AnnotationService,

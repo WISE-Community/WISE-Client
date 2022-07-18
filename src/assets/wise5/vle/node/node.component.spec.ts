@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ComponentService } from '../../components/componentService';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
@@ -21,7 +20,7 @@ let fixture: ComponentFixture<NodeComponent>;
 describe('NodeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule],
       declarations: [NodeComponent],
       providers: [
         AnnotationService,

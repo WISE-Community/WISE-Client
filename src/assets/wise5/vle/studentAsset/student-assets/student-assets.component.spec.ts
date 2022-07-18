@@ -1,6 +1,5 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../../services/configService';
 import { StudentAssetsComponent } from './student-assets.component';
 import { ProjectService } from '../../../services/projectService';
@@ -21,7 +20,7 @@ describe('StudentAssetsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
       declarations: [StudentAssetsComponent],
       providers: [ConfigService, ProjectService, SessionService, StudentAssetService, UtilService]
     }).compileComponents();

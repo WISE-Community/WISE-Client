@@ -4,7 +4,6 @@ import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/cor
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Point } from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { AnnotationService } from '../../../services/annotationService';
@@ -50,8 +49,7 @@ describe('GraphStudentComponent', () => {
         HighchartsChartModule,
         HttpClientTestingModule,
         MatDialogModule,
-        NoopAnimationsModule,
-        UpgradeModule
+        NoopAnimationsModule
       ],
       declarations: [GraphStudent],
       providers: [
