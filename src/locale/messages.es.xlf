@@ -17807,7 +17807,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">93</context>
         </context-group>
         <target state="translated">Cuaderno digital</target>
       </trans-unit>
@@ -17819,11 +17819,11 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">105</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <target state="translated">nota</target>
       </trans-unit>
@@ -17835,11 +17835,11 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">106</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">148</context>
         </context-group>
         <target state="translated">notas</target>
       </trans-unit>
@@ -17859,7 +17859,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <target state="translated">informe</target>
       </trans-unit>
@@ -17871,7 +17871,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <target state="translated">informes</target>
       </trans-unit>
@@ -17883,7 +17883,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <target state="translated">Informe</target>
       </trans-unit>
@@ -18139,7 +18139,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>First Lesson</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <target state="translated">Primera lección</target>
       </trans-unit>
@@ -18147,7 +18147,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>First Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target state="translated">Primer Paso</target>
       </trans-unit>
@@ -18155,11 +18155,11 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">149</context>
         </context-group>
         <target state="translated">Notas</target>
       </trans-unit>
@@ -18167,7 +18167,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Final Report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <target state="translated">Informe final</target>
       </trans-unit>
@@ -18175,7 +18175,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Final summary report of what you learned in this unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <target state="translated">Informe final de lo que aprendiste en esta unidad</target>
       </trans-unit>
@@ -18183,7 +18183,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Use this space to write your final report using evidence from your notebook.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">126</context>
         </context-group>
         <target state="translated">Utilizar este espacio para escribir tu informe final usando la evidencia de tu libreta.</target>
       </trans-unit>
@@ -18191,7 +18191,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>&lt;h3&gt;This is a heading&lt;/h3&gt;&lt;p&gt;This is a paragraph.&lt;/p&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">127</context>
         </context-group>
         <target state="translated">&lt;h3&gt;Esto es un encabezado&lt;/h3&gt;&lt;p&gt;Este es un párrafo.&lt;/p&gt;</target>
       </trans-unit>
@@ -18199,7 +18199,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Teacher Notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target state="translated">Libreta docente</target>
       </trans-unit>
@@ -18207,11 +18207,11 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>teacher notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">158</context>
         </context-group>
         <target state="translated">notas del docente</target>
       </trans-unit>
@@ -18219,11 +18219,11 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Teacher Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">159</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">166</context>
         </context-group>
         <target state="translated">Notas del docente</target>
       </trans-unit>
@@ -18231,7 +18231,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Notes for the teacher as they&apos;re running the WISE unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">167</context>
         </context-group>
         <target state="translated">Notas del docente a medida que ejecuta la unidad de WISE</target>
       </trans-unit>
@@ -18239,7 +18239,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Use this space to take notes for this unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">168</context>
         </context-group>
         <target state="translated">Usar este espacio para tomar notas sobre esta unidad</target>
       </trans-unit>
@@ -18247,7 +18247,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>&lt;p&gt;Use this space to take notes for this unit&lt;/p&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">169</context>
         </context-group>
         <target state="translated">&lt;p&gt;Usar este espacio para tomar notas sobre esta unidad&lt;/p&gt;</target>
       </trans-unit>
