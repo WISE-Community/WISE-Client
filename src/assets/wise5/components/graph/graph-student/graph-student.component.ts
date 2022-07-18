@@ -350,6 +350,7 @@ export class GraphStudent extends ComponentStudent {
       for (let [index, yAxis] of Object.entries(this.yAxis)) {
         (yAxis as any).title.text = studentData.dataExplorerYAxisLabels[index];
         (yAxis as any).title.style.color = this.dataExplorerColors[index];
+        (yAxis as any).labels.style.color = this.dataExplorerColors[index];
       }
     }
   }
