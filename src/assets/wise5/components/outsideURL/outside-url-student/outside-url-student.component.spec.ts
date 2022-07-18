@@ -6,7 +6,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../../services/annotationService';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
@@ -48,8 +47,7 @@ describe('OutsideUrlStudentComponent', () => {
         HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
-        ReactiveFormsModule,
-        UpgradeModule
+        ReactiveFormsModule
       ],
       declarations: [OutsideUrlStudent],
       providers: [

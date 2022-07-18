@@ -13,15 +13,19 @@ export class CommunityLibraryComponent extends LibraryComponent {
   projects: LibraryProject[] = [];
   filteredProjects: LibraryProject[] = [];
 
-  constructor(libraryService: LibraryService, public dialog: MatDialog) {
+  constructor(protected libraryService: LibraryService, public dialog: MatDialog) {
     super(libraryService);
-    libraryService.communityLibraryProjectsSource$.subscribe((communityProjects) => {
-      this.projects = communityProjects;
-      this.filterUpdated();
-    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    super.ngOnInit();
+    this.subscriptions.add(
+      this.libraryService.communityLibraryProjectsSource$.subscribe((communityProjects) => {
+        this.projects = communityProjects;
+        this.filterUpdated();
+      })
+    );
+  }
 
   emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
     if (numProjectsVisible) {

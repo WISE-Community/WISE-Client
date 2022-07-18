@@ -38,7 +38,6 @@ export class LibraryService {
   public numberOfCommunityProjectsVisible$ = this.numberOfCommunityProjectsVisible.asObservable();
   public numberOfPersonalProjectsVisible = new BehaviorSubject<number>(0);
   public numberOfPersonalProjectsVisible$ = this.numberOfPersonalProjectsVisible.asObservable();
-  public hasLoaded: Boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {
     this.router = router;
@@ -166,6 +165,5 @@ export class LibraryService {
     this.personalLibraryProjectsSource.next([]);
     this.sharedLibraryProjectsSource.next([]);
     this.projectFilterValuesSource.next(new ProjectFilterValues());
-    this.hasLoaded = false;
   }
 }

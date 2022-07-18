@@ -3,7 +3,6 @@ import { GradingEditComponentMaxScoreComponent } from './grading-edit-component-
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ConfigService } from '../../../services/configService';
 import { SessionService } from '../../../services/sessionService';
@@ -21,7 +20,7 @@ class MockService {}
 describe('GradingEditComponentMaxScoreComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
       declarations: [GradingEditComponentMaxScoreComponent],
       providers: [
         { provide: ConfigService, useClass: MockService },

@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AchievementService } from '../../../../services/achievementService';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ConfigService } from '../../../../services/configService';
@@ -33,8 +32,7 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
         HttpClientTestingModule,
         MatDialogModule,
         MatFormFieldModule,
-        MatIconModule,
-        UpgradeModule
+        MatIconModule
       ],
       declarations: [NodeAdvancedPathAuthoringComponent],
       providers: [

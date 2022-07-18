@@ -12,25 +12,30 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
   encapsulation: ViewEncapsulation.None
 })
 export class OfficialLibraryComponent extends LibraryComponent {
-  @Input()
-  isSplitScreen: boolean = false;
+  @Input() isSplitScreen: boolean = false;
 
   projects: LibraryProject[] = [];
   libraryGroups: LibraryGroup[] = [];
   expandedGroups: object = {};
 
-  constructor(libraryService: LibraryService, public dialog: MatDialog) {
+  constructor(protected libraryService: LibraryService, public dialog: MatDialog) {
     super(libraryService);
-    libraryService.libraryGroupsSource$.subscribe((libraryGroups) => {
-      this.libraryGroups = libraryGroups;
-    });
-    libraryService.officialLibraryProjectsSource$.subscribe((libraryProjects) => {
-      this.projects = libraryProjects;
-      this.filterUpdated();
-    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    super.ngOnInit();
+    this.subscriptions.add(
+      this.libraryService.libraryGroupsSource$.subscribe((libraryGroups) => {
+        this.libraryGroups = libraryGroups;
+      })
+    );
+    this.subscriptions.add(
+      this.libraryService.officialLibraryProjectsSource$.subscribe((libraryProjects) => {
+        this.projects = libraryProjects;
+        this.filterUpdated();
+      })
+    );
+  }
 
   emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
     if (numProjectsVisible) {

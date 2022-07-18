@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { InsertComponentService } from '../../assets/wise5/services/insertComponentService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 
@@ -18,7 +17,7 @@ let node;
 describe('InsertComponentService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       providers: [
         InsertComponentService,
         { provide: TeacherProjectService, useClass: MockProjectService }

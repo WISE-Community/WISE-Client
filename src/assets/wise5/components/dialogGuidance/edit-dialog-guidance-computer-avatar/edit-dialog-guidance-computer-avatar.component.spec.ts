@@ -9,7 +9,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Observable, Subject } from 'rxjs';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
@@ -49,8 +48,7 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        MatInputModule,
-        UpgradeModule
+        MatInputModule
       ],
       declarations: [EditDialogGuidanceComputerAvatarComponent],
       providers: [

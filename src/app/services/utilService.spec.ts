@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { UtilService } from '../../assets/wise5/services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 let service: UtilService;
 
 describe('UtilService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [UpgradeModule],
+      imports: [],
       providers: [UtilService]
     });
     service = TestBed.get(UtilService);
@@ -84,6 +83,10 @@ function makeCopyOfJSONObjectTests() {
 
     it('should return null for null input', () => {
       expect(service.makeCopyOfJSONObject(null)).toEqual(null);
+    });
+
+    it('should return undefined for undefined input', () => {
+      expect(service.makeCopyOfJSONObject(undefined)).toEqual(undefined);
     });
   });
 }

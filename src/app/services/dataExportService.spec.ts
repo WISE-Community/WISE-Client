@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AchievementService } from '../../assets/wise5/services/achievementService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -47,12 +46,7 @@ describe('DataExportService', () => {
         TeacherWebSocketService,
         UtilService
       ],
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ]
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule]
     });
     service = TestBed.inject(DataExportService);
     configService = TestBed.inject(ConfigService);

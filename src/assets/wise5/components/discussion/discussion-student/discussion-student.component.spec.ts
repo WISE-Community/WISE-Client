@@ -3,7 +3,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { of } from 'rxjs';
 import { AnnotationService } from '../../../services/annotationService';
 import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
@@ -42,8 +41,7 @@ describe('DiscussionStudentComponent', () => {
         BrowserModule,
         ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
+        MatDialogModule
       ],
       declarations: [DiscussionStudent],
       providers: [

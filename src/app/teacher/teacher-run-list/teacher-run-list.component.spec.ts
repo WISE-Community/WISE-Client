@@ -53,7 +53,7 @@ export class MockTeacherService {
       observer.complete();
     });
   }
-  newRunSource$ = fakeAsyncResponse({
+  runs$ = fakeAsyncResponse({
     id: 3,
     name: 'Global Climate Change',
     periods: ['1', '2']

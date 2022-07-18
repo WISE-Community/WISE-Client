@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { SpaceService } from '../../assets/wise5/services/spaceService';
@@ -14,7 +13,7 @@ let teacherProjectService: TeacherProjectService;
 describe('SpaceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
       providers: [
         ConfigService,
         CopyNodesService,

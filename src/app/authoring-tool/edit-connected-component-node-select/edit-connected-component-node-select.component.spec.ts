@@ -1,6 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { SessionService } from '../../../assets/wise5/services/sessionService';
@@ -27,8 +26,7 @@ describe('EditConnectedComponentNodeSelectComponent', () => {
         FormsModule,
         HttpClientModule,
         MatFormFieldModule,
-        MatSelectModule,
-        UpgradeModule
+        MatSelectModule
       ],
       declarations: [EditConnectedComponentNodeSelectComponent],
       providers: [ConfigService, ProjectService, SessionService, UtilService]

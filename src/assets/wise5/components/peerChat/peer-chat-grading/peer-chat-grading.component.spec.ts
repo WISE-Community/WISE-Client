@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AchievementService } from '../../../services/achievementService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
@@ -48,12 +47,7 @@ const peerGroup = new PeerGroup(
 describe('PeerChatGradingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
+      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
       declarations: [PeerChatGradingComponent],
       providers: [
         AchievementService,

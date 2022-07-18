@@ -1,6 +1,5 @@
 import { MultipleChoiceService } from '../../assets/wise5/components/multipleChoice/multipleChoiceService';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { TestBed } from '@angular/core/testing';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -26,7 +25,7 @@ let componentId1: string = 'abcdefghij';
 describe('MultipleChoiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       providers: [
         AnnotationService,
         ConfigService,

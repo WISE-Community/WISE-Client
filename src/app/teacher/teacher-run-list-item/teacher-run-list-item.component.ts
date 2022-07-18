@@ -15,12 +15,10 @@ import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-
   animations: [flash]
 })
 export class TeacherRunListItemComponent implements OnInit {
-  @Input()
-  run: TeacherRun = new TeacherRun();
+  @Input() run: TeacherRun = new TeacherRun();
 
-  editLink: string = '';
-  gradeAndManageLink: string = '';
   manageStudentsLink: string = '';
+  periodsTooltipText: string;
   thumbStyle: SafeStyle;
   animateDuration: string = '0s';
   animateDelay: string = '0s';
@@ -31,28 +29,13 @@ export class TeacherRunListItemComponent implements OnInit {
     private router: Router,
     private elRef: ElementRef,
     private dialog: MatDialog
-  ) {
-    this.sanitizer = sanitizer;
-  }
-
-  getThumbStyle() {
-    const DEFAULT_THUMB = 'assets/img/default-picture.svg';
-    const STYLE = `url(${this.run.project.projectThumb}), url(${DEFAULT_THUMB})`;
-    return this.sanitizer.bypassSecurityTrustStyle(STYLE);
-  }
+  ) {}
 
   ngOnInit() {
     this.run.project.thumbStyle = this.getThumbStyle();
-    const contextPath = this.configService.getContextPath();
-    this.editLink = `${contextPath}/author/authorproject.html?projectId=${this.run.project.id}`;
-    if (this.run.project.wiseVersion === 4) {
-      this.gradeAndManageLink =
-        `${this.configService.getWISE4Hostname()}` +
-        `/teacher/classroomMonitor/classroomMonitor?runId=${this.run.id}&gradingType=monitor`;
-    } else {
-      this.gradeAndManageLink = `${contextPath}/teacher/manage/unit/${this.run.id}`;
-    }
-    this.manageStudentsLink = `${contextPath}/teacher/manage/unit/${this.run.id}/manage-students`;
+    this.manageStudentsLink = `${this.configService.getContextPath()}/teacher/manage/unit/${
+      this.run.id
+    }/manage-students`;
     if (this.run.isHighlighted) {
       this.animateDuration = '2s';
       this.animateDelay = '1s';
@@ -68,15 +51,29 @@ export class TeacherRunListItemComponent implements OnInit {
     }
   }
 
-  launchGradeAndManageTool() {
+  ngOnChanges() {
+    this.periodsTooltipText = this.getPeriodsTooltipText();
+  }
+
+  private getThumbStyle() {
+    const DEFAULT_THUMB = 'assets/img/default-picture.svg';
+    const STYLE = `url(${this.run.project.projectThumb}), url(${DEFAULT_THUMB})`;
+    return this.sanitizer.bypassSecurityTrustStyle(STYLE);
+  }
+
+  launchGradeAndManageTool(): void {
     if (this.run.project.wiseVersion === 4) {
-      window.location.href = this.gradeAndManageLink;
+      window.location.href =
+        `${this.configService.getWISE4Hostname()}` +
+        `/teacher/classroomMonitor/classroomMonitor?runId=${this.run.id}&gradingType=monitor`;
     } else {
-      this.router.navigateByUrl(this.gradeAndManageLink);
+      this.router.navigateByUrl(
+        `${this.configService.getContextPath()}/teacher/manage/unit/${this.run.id}`
+      );
     }
   }
 
-  periodsString() {
+  getPeriodsTooltipText(): string {
     let string = '';
     const length = this.run.periods.length;
     for (let p = 0; p < length; p++) {
@@ -99,9 +96,9 @@ export class TeacherRunListItemComponent implements OnInit {
     return run.isCompleted(this.configService.getCurrentServerTime());
   }
 
-  shareCode() {
+  shareCode(): void {
     this.dialog.open(ShareRunCodeDialogComponent, {
-      data: { run: this.run },
+      data: this.run,
       panelClass: 'dialog-sm'
     });
   }

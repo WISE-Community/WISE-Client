@@ -5,7 +5,6 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
@@ -35,8 +34,7 @@ describe('DismissAmbientNotificationDialogComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
-        ReactiveFormsModule,
-        UpgradeModule
+        ReactiveFormsModule
       ],
       declarations: [DismissAmbientNotificationDialogComponent],
       providers: [
