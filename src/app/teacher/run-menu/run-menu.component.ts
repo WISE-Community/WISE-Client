@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TeacherService } from '../teacher.service';
 import { ShareRunDialogComponent } from '../share-run-dialog/share-run-dialog.component';
 import { LibraryProjectDetailsComponent } from '../../modules/library/library-project-details/library-project-details.component';
 import { UserService } from '../../services/user.service';
@@ -16,15 +15,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./run-menu.component.scss']
 })
 export class RunMenuComponent implements OnInit {
-  @Input()
-  run: TeacherRun;
+  @Input() run: TeacherRun;
 
   editLink: string = '';
   reportProblemLink: string = '';
 
   constructor(
     private dialog: MatDialog,
-    private teacherService: TeacherService,
     private userService: UserService,
     private configService: ConfigService,
     private router: Router

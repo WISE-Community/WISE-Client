@@ -84,6 +84,10 @@ function makeCopyOfJSONObjectTests() {
     it('should return null for null input', () => {
       expect(service.makeCopyOfJSONObject(null)).toEqual(null);
     });
+
+    it('should return undefined for undefined input', () => {
+      expect(service.makeCopyOfJSONObject(undefined)).toEqual(undefined);
+    });
   });
 }
 

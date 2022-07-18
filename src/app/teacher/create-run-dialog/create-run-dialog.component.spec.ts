@@ -29,7 +29,7 @@ export class MockTeacherService {
     });
   }
 
-  addNewRun() {}
+  broadcastRunChanges() {}
 
   setTabIndex() {}
 

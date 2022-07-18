@@ -4,6 +4,7 @@ import { LibraryService } from '../../../services/library.service';
 import { Standard } from '../standard';
 import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
 
 @Directive()
 export abstract class LibraryComponent implements OnInit {
@@ -18,24 +19,30 @@ export abstract class LibraryComponent implements OnInit {
   peValue = [];
   filterValues: ProjectFilterValues = new ProjectFilterValues();
   showFilters: boolean = false;
+  subscriptions: Subscription = new Subscription();
   pageSizeOptions: number[] = [12, 24, 48, 96];
   pageIndex: number = 0;
   pageSize: number = 12;
   lowIndex: number = 0;
   highIndex: number = 0;
 
-  @Output('update')
-  update: EventEmitter<number> = new EventEmitter<number>();
+  @Output('update') update: EventEmitter<number> = new EventEmitter<number>();
 
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
 
-  constructor(protected libraryService: LibraryService) {
-    libraryService.projectFilterValuesSource$.subscribe((projectFilterValues) => {
-      this.filterUpdated(projectFilterValues);
-    });
+  constructor(protected libraryService: LibraryService) {}
+
+  ngOnInit() {
+    this.subscriptions.add(
+      this.libraryService.projectFilterValuesSource$.subscribe((projectFilterValues) => {
+        this.filterUpdated(projectFilterValues);
+      })
+    );
   }
 
-  ngOnInit() {}
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
 
   pageChange(event?: PageEvent, scroll?: boolean): void {
     this.pageIndex = event.pageIndex;
