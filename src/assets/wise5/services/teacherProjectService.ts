@@ -1577,7 +1577,7 @@ export class TeacherProjectService extends ProjectService {
                      * get the branch paths. these paths do not
                      * contain the start point or merge point.
                      */
-                    const branchPaths = branch.branchPaths;
+                    const branchPaths = branch.paths;
 
                     if (branchPaths != null) {
                       for (let branchPath of branchPaths) {
