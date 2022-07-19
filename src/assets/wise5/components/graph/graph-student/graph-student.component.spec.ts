@@ -1843,12 +1843,28 @@ function setYAxisLabelsWhenMultipleYAxes() {
   it('should set y axis labels when there are multiple y axes', () => {
     component.yAxis = [
       {
+        labels: {
+          style: {
+            color: ''
+          }
+        },
         title: {
+          style: {
+            color: ''
+          },
           text: ''
         }
       },
       {
+        labels: {
+          style: {
+            color: ''
+          }
+        },
         title: {
+          style: {
+            color: ''
+          },
           text: ''
         }
       }

@@ -1035,15 +1035,13 @@ export class TableStudent extends ComponentStudent {
     this.studentDataChanged();
   }
 
-  dataExplorerYColumnChanged(index) {
+  dataExplorerYColumnChanged(index: number): void {
     const yColumn = this.dataExplorerSeries[index].yColumn;
     this.dataExplorerSeries[index].name = this.columnNames[yColumn];
     if (!this.isDataExplorerOneYAxis()) {
       this.setDataExplorerSeriesYAxis(index);
     }
-    if (this.isDataExplorerYAxisLabelEmpty(index)) {
-      this.updateDataExplorerYAxisLabel(index, yColumn);
-    }
+    this.updateDataExplorerYAxisLabel(index, yColumn);
     this.studentDataChanged();
   }
 
