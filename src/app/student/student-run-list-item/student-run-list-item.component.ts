@@ -17,8 +17,7 @@ import { flash } from '../../animations';
   animations: [flash]
 })
 export class StudentRunListItemComponent implements OnInit {
-  @Input()
-  run: StudentRun = new StudentRun();
+  @Input() run: StudentRun = new StudentRun();
 
   problemLink: string = '';
   thumbStyle: SafeStyle;
@@ -31,14 +30,11 @@ export class StudentRunListItemComponent implements OnInit {
     public dialog: MatDialog,
     private studentService: StudentService,
     private userService: UserService
-  ) {
-    this.sanitizer = sanitizer;
-    this.configService = configService;
-  }
+  ) {}
 
   getThumbStyle() {
     const DEFAULT_THUMB = 'assets/img/default-picture.svg';
-    const STYLE = `url(${this.run.projectThumb}), url(${DEFAULT_THUMB})`;
+    const STYLE = `url(${this.run.project.projectThumb}), url(${DEFAULT_THUMB})`;
     return this.sanitizer.bypassSecurityTrustStyle(STYLE);
   }
 
