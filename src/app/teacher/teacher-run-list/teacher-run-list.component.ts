@@ -4,7 +4,8 @@ import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
-import { forkJoin, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -26,6 +27,7 @@ export class TeacherRunListComponent implements OnInit {
     private teacherService: TeacherService,
     private configService: ConfigService,
     private router: Router,
+    private userService: UserService,
     @Inject(LOCALE_ID) private localeID: string
   ) {}
 
@@ -39,19 +41,15 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   private getRuns(): void {
-    forkJoin([this.teacherService.getRuns(), this.teacherService.getSharedRuns()]).subscribe(
-      ([personalRuns, sharedRuns]) => {
-        personalRuns = personalRuns.map((run) => new TeacherRun(run));
-        sharedRuns = sharedRuns.map((run) => {
-          const sharedRun = new TeacherRun(run);
-          sharedRun.shared = true;
-          return sharedRun;
-        });
-        this.runs = personalRuns.concat(sharedRuns);
-        this.processRuns();
-        this.loaded = true;
-      }
-    );
+    this.teacherService.getRuns().subscribe((runs) => {
+      this.runs = runs.map((run) => {
+        const teacherRun = new TeacherRun(run);
+        teacherRun.shared = !teacherRun.isOwner(this.userService.getUserId());
+        return teacherRun;
+      });
+      this.processRuns();
+      this.loaded = true;
+    });
   }
 
   private subscribeToRuns(): void {
