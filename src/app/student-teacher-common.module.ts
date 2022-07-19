@@ -78,6 +78,8 @@ import { StudentStatusService } from '../assets/wise5/services/studentStatusServ
 import { OpenResponseCompletionCriteriaService } from '../assets/wise5/components/openResponse/openResponseCompletionCriteriaService';
 import { ComponentServiceLookupService } from '../assets/wise5/services/componentServiceLookupService';
 import { ComponentTypeService } from '../assets/wise5/services/componentTypeService';
+import { BranchService } from '../assets/wise5/services/branchService';
+import { PathService } from '../assets/wise5/services/pathService';
 
 @NgModule({
   declarations: [
@@ -125,6 +127,7 @@ import { ComponentTypeService } from '../assets/wise5/services/componentTypeServ
     AnnotationService,
     AudioOscillatorService,
     AudioRecorderService,
+    BranchService,
     ConceptMapService,
     ComponentService,
     ComponentServiceLookupService,
@@ -147,6 +150,7 @@ import { ComponentTypeService } from '../assets/wise5/services/componentTypeServ
     OutsideURLService,
     OpenResponseCompletionCriteriaService,
     OpenResponseService,
+    PathService,
     PeerChatService,
     PeerGroupService,
     ProjectLibraryService,
