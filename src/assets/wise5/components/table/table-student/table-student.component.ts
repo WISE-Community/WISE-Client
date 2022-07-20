@@ -1024,7 +1024,7 @@ export class TableStudent extends ComponentStudent {
     return (
       columnIndex === this.dataExplorerXColumn ||
       this.dataExplorerSeries.some((series) => {
-        return columnIndex === series.yColumn;
+        return series.yColumn === columnIndex;
       })
     );
   }
