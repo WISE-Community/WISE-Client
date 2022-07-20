@@ -4,12 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentServiceLookupServiceModule } from '../../../../assets/wise5/services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { CopyNodesService } from '../../../../assets/wise5/services/copyNodesService';
-import { SessionService } from '../../../../assets/wise5/services/sessionService';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
-import { UtilService } from '../../../../assets/wise5/services/utilService';
+import { StudentTeacherCommonServicesModule } from '../../../student-teacher-common-services.module';
 import { EditComponentDefaultFeedback } from './edit-component-default-feedback.component';
 
 let component: EditComponentDefaultFeedback;
@@ -22,21 +19,15 @@ describe('EditComponentDefaultFeedback', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatIconModule,
         MatInputModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentDefaultFeedback],
-      providers: [
-        ConfigService,
-        CopyNodesService,
-        SessionService,
-        TeacherProjectService,
-        UtilService
-      ]
+      providers: [CopyNodesService, TeacherProjectService]
     });
   });
 

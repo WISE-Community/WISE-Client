@@ -2,22 +2,14 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { AnnotationService } from '../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
-import { MockNodeService } from '../../common/MockNodeService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { AudioOscillatorAuthoring } from './audio-oscillator-authoring.component';
 
@@ -30,29 +22,17 @@ describe('AudioOscillatorAuthoring', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
+        MatDialogModule,
         MatInputModule,
         ReactiveFormsModule,
-        UpgradeModule
+        UpgradeModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, AudioOscillatorAuthoring],
-      providers: [
-        AnnotationService,
-        AudioOscillatorService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        ProjectAssetService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService,
-        TeacherProjectService,
-        UtilService
-      ],
-      schemas: []
+      providers: [ProjectAssetService, TeacherProjectService]
     });
     fixture = TestBed.createComponent(AudioOscillatorAuthoring);
     component = fixture.componentInstance;

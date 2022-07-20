@@ -3,7 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
 import { CreateNewPeerGroupingDialogComponent } from './create-new-peer-grouping-dialog.component';
@@ -15,9 +15,8 @@ const tag1: string = 'tag1';
 describe('CreateNewPeerGroupingDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, MatSnackBarModule, PeerGroupingTestingModule],
-      declarations: [CreateNewPeerGroupingDialogComponent],
-      providers: []
+      imports: [MatSnackBarModule, PeerGroupingTestingModule, StudentTeacherCommonServicesModule],
+      declarations: [CreateNewPeerGroupingDialogComponent]
     }).compileComponents();
   });
 

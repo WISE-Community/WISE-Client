@@ -7,18 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { WiseLinkComponent } from '../../../../directives/wise-link/wise-link.component';
-import { AnnotationService } from '../../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../../services/configService';
-import { NotebookService } from '../../../../services/notebookService';
 import { ProjectService } from '../../../../services/projectService';
-import { SessionService } from '../../../../services/sessionService';
-import { StudentAssetService } from '../../../../services/studentAssetService';
-import { StudentDataService } from '../../../../services/studentDataService';
-import { TagService } from '../../../../services/tagService';
-import { UtilService } from '../../../../services/utilService';
-
 import { EditNotebookItemDialogComponent } from './edit-notebook-item-dialog.component';
 
 describe('EditNotebookItemDialogComponent', () => {
@@ -29,7 +20,6 @@ describe('EditNotebookItemDialogComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
@@ -37,12 +27,11 @@ describe('EditNotebookItemDialogComponent', () => {
         MatIconModule,
         MatInputModule,
         MatToolbarModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditNotebookItemDialogComponent, WiseLinkComponent],
       providers: [
-        AnnotationService,
-        ConfigService,
         {
           provide: MAT_DIALOG_DATA,
           useValue: {
@@ -64,14 +53,7 @@ describe('EditNotebookItemDialogComponent', () => {
           useValue: {
             close: () => {}
           }
-        },
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
+        }
       ]
     }).compileComponents();
   });

@@ -2,18 +2,12 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NotebookService } from '../../assets/wise5/services/notebookService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { UtilService } from '../../assets/wise5/services/utilService';
-import { ProjectService } from '../../assets/wise5/services/projectService';
-import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { AnnotationService } from '../../assets/wise5/services/annotationService';
-import { TagService } from '../../assets/wise5/services/tagService';
 import demoNotebookItems_import from './sampleData/sample_notebookItems.json';
 import demoNotebooksByWorkgroupId_import from './sampleData/sample_notebooksByWorkgroup.json';
 import demoPublicNotebookItems_import from './sampleData/sample_publicNotebookItems.json';
 import demoProject_import from './sampleData/curriculum/Demo.project.json';
-import { SessionService } from '../../assets/wise5/services/sessionService';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 let http: HttpTestingController;
 let configService: ConfigService;
@@ -30,21 +24,11 @@ const teacherNotebookURL = 'http://localhost:8080/teacher/notebook/run/1';
 describe('NotebookService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
-      providers: [
-        NotebookService,
-        AnnotationService,
-        ConfigService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        TagService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
     });
-    http = TestBed.get(HttpTestingController);
-    configService = TestBed.get(ConfigService);
-    service = TestBed.get(NotebookService);
+    http = TestBed.inject(HttpTestingController);
+    configService = TestBed.inject(ConfigService);
+    service = TestBed.inject(NotebookService);
     demoNotebookItems = JSON.parse(JSON.stringify(demoNotebookItems_import));
     demoNotebooksByWorkgroupId = JSON.parse(JSON.stringify(demoNotebooksByWorkgroupId_import));
     demoPublicNotebookItems = JSON.parse(JSON.stringify(demoPublicNotebookItems_import));
