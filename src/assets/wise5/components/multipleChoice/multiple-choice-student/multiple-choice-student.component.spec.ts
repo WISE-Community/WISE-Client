@@ -7,27 +7,11 @@ import { MatRadioModule } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
-import { MultipleChoiceService } from '../multipleChoiceService';
 import { MultipleChoiceStudent } from './multiple-choice-student.component';
-
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 const choiceId1 = 'choice1';
 const choiceId2 = 'choice2';
@@ -126,29 +110,14 @@ describe('MultipleChoiceStudentComponent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
-        ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatRadioModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        StudentTeacherCommonServicesModule
       ],
-      declarations: [ComponentHeader, MultipleChoiceStudent, PossibleScoreComponent],
-      providers: [
-        AnnotationService,
-        MultipleChoiceService,
-        ComponentService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
-      schemas: []
+      declarations: [ComponentHeader, MultipleChoiceStudent, PossibleScoreComponent]
     });
     fixture = TestBed.createComponent(MultipleChoiceStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({

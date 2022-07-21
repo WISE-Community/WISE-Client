@@ -4,7 +4,7 @@ import { SelectPeerGroupingAuthoringComponent } from './select-peer-grouping-aut
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { MatDialog } from '@angular/material/dialog';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: SelectPeerGroupingAuthoringComponent;
 let fixture: ComponentFixture<SelectPeerGroupingAuthoringComponent>;
@@ -14,7 +14,7 @@ const tag1: string = 'tag1';
 describe('SelectPeerGroupingAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, PeerGroupingTestingModule],
+      imports: [PeerGroupingTestingModule, StudentTeacherCommonServicesModule],
       declarations: [SelectPeerGroupingAuthoringComponent],
       providers: [PeerGroupingAuthoringService]
     }).compileComponents();

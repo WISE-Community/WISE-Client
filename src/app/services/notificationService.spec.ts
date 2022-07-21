@@ -2,15 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NotificationService } from '../../assets/wise5/services/notificationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { ProjectService } from '../../assets/wise5/services/projectService';
-import { UtilService } from '../../assets/wise5/services/utilService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
-import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { Notification } from '../domain/notification';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -40,15 +36,7 @@ const retrieveNotificationsURL = `/notifications/${runId1}`;
 describe('NotificationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
     });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(NotificationService);

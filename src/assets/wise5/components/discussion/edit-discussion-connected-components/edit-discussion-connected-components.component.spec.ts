@@ -2,13 +2,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
-import { ConfigService } from '../../../services/configService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { UtilService } from '../../../services/utilService';
 import { EditDiscussionConnectedComponentsComponent } from './edit-discussion-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: EditDiscussionConnectedComponentsComponent;
 let fixture: ComponentFixture<EditDiscussionConnectedComponentsComponent>;
@@ -16,12 +12,11 @@ let fixture: ComponentFixture<EditDiscussionConnectedComponentsComponent>;
 describe('EditDiscussionConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatIconModule],
+      imports: [HttpClientTestingModule, MatIconModule, StudentTeacherCommonServicesModule],
       declarations: [
         EditConnectedComponentsAddButtonComponent,
         EditDiscussionConnectedComponentsComponent
-      ],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      ]
     }).compileComponents();
   });
 

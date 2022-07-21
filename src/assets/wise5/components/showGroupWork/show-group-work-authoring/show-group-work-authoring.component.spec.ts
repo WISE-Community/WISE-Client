@@ -8,17 +8,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { ShowGroupWorkAuthoringComponent } from './show-group-work-authoring.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 describe('ShowGroupWorkAuthoringComponent', () => {
   let component: ShowGroupWorkAuthoringComponent;
@@ -30,7 +25,6 @@ describe('ShowGroupWorkAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
@@ -38,18 +32,11 @@ describe('ShowGroupWorkAuthoringComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
-        UpgradeModule
+        UpgradeModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, ShowGroupWorkAuthoringComponent],
-      providers: [
-        ConfigService,
-        NodeService,
-        ProjectAssetService,
-        ProjectService,
-        SessionService,
-        TeacherProjectService,
-        UtilService
-      ]
+      providers: [ProjectAssetService, TeacherProjectService]
     }).compileComponents();
   });
 

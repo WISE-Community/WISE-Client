@@ -1,13 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GradingEditComponentMaxScoreComponent } from './grading-edit-component-max-score.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ConfigService } from '../../../services/configService';
-import { SessionService } from '../../../services/sessionService';
 import { CopyNodesService } from '../../../services/copyNodesService';
-import { ComponentServiceLookupServiceModule } from '../../../../wise5/services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: GradingEditComponentMaxScoreComponent;
 let fixture: ComponentFixture<GradingEditComponentMaxScoreComponent>;
@@ -15,20 +12,12 @@ let saveProjectSpy;
 let setMaxScoreForComponentSpy;
 let projectService: TeacherProjectService;
 
-class MockService {}
-
 describe('GradingEditComponentMaxScoreComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
       declarations: [GradingEditComponentMaxScoreComponent],
-      providers: [
-        { provide: ConfigService, useClass: MockService },
-        CopyNodesService,
-        { provide: SessionService, useClass: MockService },
-        TeacherProjectService,
-        UtilService
-      ],
+      providers: [CopyNodesService, TeacherProjectService],
       schemas: [NO_ERRORS_SCHEMA]
     });
     projectService = TestBed.inject(TeacherProjectService);

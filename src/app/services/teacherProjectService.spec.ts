@@ -2,15 +2,12 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServiceSpec.project.json';
-import { SessionService } from '../../assets/wise5/services/sessionService';
-import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 let service: TeacherProjectService;
 let configService: ConfigService;
-let utilService: UtilService;
 let http: HttpTestingController;
 let demoProjectJSON: any;
 let scootersProjectJSON: any;
@@ -29,13 +26,12 @@ const wiseBaseURL = '/wise';
 describe('TeacherProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
-      providers: [TeacherProjectService, ConfigService, SessionService, UtilService]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      providers: [TeacherProjectService]
     });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(TeacherProjectService);
     configService = TestBed.inject(ConfigService);
-    utilService = TestBed.inject(UtilService);
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
     scootersProjectJSON = JSON.parse(JSON.stringify(scootersProjectJSON_import));
     teacherProjectJSON = JSON.parse(JSON.stringify(teacherProjctJSON_import));

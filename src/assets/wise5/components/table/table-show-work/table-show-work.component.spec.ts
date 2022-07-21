@@ -1,10 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { UtilService } from '../../../services/utilService';
 import { TableShowWorkComponent } from './table-show-work.component';
 
 let fixture: ComponentFixture<TableShowWorkComponent>;
@@ -13,9 +10,8 @@ let component: TableShowWorkComponent;
 describe('TableShowWorkComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
-      declarations: [TableShowWorkComponent],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      declarations: [TableShowWorkComponent]
     });
     fixture = TestBed.createComponent(TableShowWorkComponent);
     const componentContent = {

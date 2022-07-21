@@ -10,6 +10,8 @@ import { Node } from '../common/Node';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { Branch } from '../../../app/domain/branch';
+import { BranchService } from './branchService';
+import { PathService } from './pathService';
 
 @Injectable()
 export class ProjectService {
@@ -18,7 +20,6 @@ export class ProjectService {
   additionalProcessingFunctionsMap: any = {};
   allPaths: string[] = [];
   applicationNodes: any;
-  branchesCache: Branch[];
   filters: any[] = [{ name: 'all', label: 'All' }];
   flattenedProjectAsNodeIds: any = null;
   groupNodes: any[];
@@ -41,9 +42,11 @@ export class ProjectService {
   public projectChanged$: Observable<any> = this.projectChangedSource.asObservable();
 
   constructor(
+    protected branchService: BranchService,
     protected componentServiceLookupService: ComponentServiceLookupService,
     protected http: HttpClient,
     protected ConfigService: ConfigService,
+    protected pathService: PathService,
     protected SessionService: SessionService,
     protected UtilService: UtilService
   ) {
@@ -80,7 +83,7 @@ export class ProjectService {
     this.nodeIdToIsInBranchPath = {};
     this.nodeIdsInAnyBranch = [];
     this.achievements = [];
-    this.clearBranchesCache();
+    this.branchService.clearBranchesCache();
   }
 
   getStyle() {
@@ -289,6 +292,11 @@ export class ProjectService {
         this.calculateNodeOrder(this.getNodeById(childId));
       }
     }
+  }
+
+  private getBranches(): Branch[] {
+    const allPaths = this.getAllPaths([], this.getStartNodeId());
+    return this.branchService.getBranches(allPaths);
   }
 
   /**
@@ -1416,17 +1424,17 @@ export class ProjectService {
      * node ids, we will remove them from the paths. once all the
      * paths are empty we will be done consolidating the paths.
      */
-    while (!this.arePathsEmpty(paths)) {
+    while (!this.pathService.arePathsEmpty(paths)) {
       // start with the first path
       const currentPath = this.getNonEmptyPathIndex(paths);
 
       // get the first node id in the current path
-      const nodeId = this.getFirstNodeIdInPathAtIndex(paths, currentPath);
-      if (this.areFirstNodeIdsInPathsTheSame(paths)) {
+      const nodeId = this.pathService.getFirstNodeIdInPathAtIndex(paths, currentPath);
+      if (this.pathService.areFirstNodeIdsInPathsTheSame(paths)) {
         // the first node ids in all the paths are the same
 
         // remove the node id from all the paths
-        this.removeNodeIdFromPaths(nodeId, paths);
+        this.pathService.removeNodeIdFromPaths(nodeId, paths);
 
         // add the node id to our consolidated path
         consolidatedPath.push(nodeId);
@@ -1452,7 +1460,7 @@ export class ProjectService {
             const consumedPath = this.consumePathsUntilNodeId(paths, nodeId);
 
             // remove the node id from the paths
-            this.removeNodeIdFromPaths(nodeId, paths);
+            this.pathService.removeNodeIdFromPaths(nodeId, paths);
 
             // add the node id to the end of the consumed path
             consumedPath.push(nodeId);
@@ -1485,59 +1493,6 @@ export class ProjectService {
       }
     }
     return consumedNodes;
-  }
-
-  /**
-   * Get the path at the given index and get the first node id in
-   * the path
-   * @param paths an array of paths. each path is an array of node ids
-   * @param index the index of the path we want
-   * @return the first node in the given path
-   */
-  getFirstNodeIdInPathAtIndex(paths, index) {
-    let nodeId = null;
-    if (paths != null && index != null) {
-      const path = paths[index];
-      if (path != null && path.length > 0) {
-        nodeId = path[0];
-      }
-    }
-    return nodeId;
-  }
-
-  /**
-   * Remove the node ifrom the paths
-   * @param nodeId the node id to remove
-   * @param paths an array of paths. each path is an array of node ids
-   */
-  removeNodeIdFromPaths(nodeId, paths) {
-    if (nodeId != null && paths != null) {
-      for (let path of paths) {
-        for (let x = 0; x < path.length; x++) {
-          const tempNodeId = path[x];
-
-          /*
-           * check if the node id matches the one we are looking
-           * for
-           */
-          if (nodeId === tempNodeId) {
-            /*
-             * we have found the node id we are looking for so
-             * we will remove it from the path
-             */
-            path.splice(x, 1);
-
-            /*
-             * move the counter back since we just removed a
-             * node id. we will continue searching this path
-             * for the node id in case the path contains it
-             * multiple times.
-             */
-            x--;
-          }
-        }
-      }
-    }
   }
 
   /**
@@ -1578,55 +1533,6 @@ export class ProjectService {
   }
 
   /**
-   * Check if the first node ids in the paths are the same
-   * @param paths an array of paths. each path is an array of node ids
-   * @return whether all the paths have the same first node id
-   */
-  areFirstNodeIdsInPathsTheSame(paths) {
-    let result = true;
-    let nodeId = null;
-    if (paths != null) {
-      for (let path of paths) {
-        const tempNodeId = path[0];
-        if (nodeId == null) {
-          /*
-           * this is the first path we have looked at so we will
-           * remember the node id
-           */
-          nodeId = tempNodeId;
-        } else if (nodeId != tempNodeId) {
-          /*
-           * the node id does not match the first node id from a
-           * previous path so the paths do not all have the same
-           * first node id
-           */
-          result = false;
-          break;
-        }
-      }
-    }
-    return result;
-  }
-
-  /**
-   * Check if all the paths are empty
-   * @param paths an array of paths. each path is an array of node ids
-   * @return whether all the paths are empty
-   */
-  arePathsEmpty(paths) {
-    if (paths != null) {
-      for (let path of paths) {
-        if (path != null) {
-          if (path.length !== 0) {
-            return false;
-          }
-        }
-      }
-    }
-    return true;
-  }
-
-  /**
    * Get the paths that contain the node id
    * @param nodeId the node id we are looking for
    * @param paths an array of paths. each path is an array of node ids
@@ -1658,262 +1564,6 @@ export class ProjectService {
       }
     }
     return null;
-  }
-
-  /**
-   * Remember the branches.
-   * @param branches An array of arrays of node ids.
-   */
-  private setBranchesCache(branches: Branch[]): void {
-    this.branchesCache = branches;
-  }
-
-  /**
-   * Get the branches that were previously calculated.
-   * @returns An array of arrays of node ids.
-   */
-  private getBranchesCache(): Branch[] {
-    return this.branchesCache;
-  }
-
-  clearBranchesCache() {
-    this.branchesCache = null;
-  }
-
-  private getBranches(): Branch[] {
-    /*
-     * Do not use the branches cache in the authoring tool because the branches
-     * may change when the author changes the project. In all other modes the
-     * branches can't change so we can use the cache.
-     */
-    if (this.ConfigService.getMode() != 'author') {
-      let branchesCache = this.getBranchesCache();
-      if (branchesCache != null) {
-        return branchesCache;
-      }
-    }
-
-    const startNodeId = this.getStartNodeId();
-
-    /*
-     * an array to keep track of the node ids in the path that
-     * we are currently on as we traverse the nodes in the project
-     * depth first
-     */
-    const pathsSoFar = [];
-
-    const allPaths = this.getAllPaths(pathsSoFar, startNodeId);
-    const branches = this.findBranches(allPaths);
-    if (this.ConfigService.getMode() != 'author') {
-      this.setBranchesCache(branches);
-    }
-    return branches;
-  }
-
-  /**
-   * Find the branches in the project
-   * @param paths all the possible paths through the project
-   * @return an array of branch objects. each branch object contains
-   * the branch start point, the branch paths, and the branch
-   * end point
-   */
-  private findBranches(paths: any[]): Branch[] {
-    const branches = [];
-    let previousNodeId = null;
-
-    /*
-     * continue until all the paths are empty. we will remove
-     * node ids from the paths as we traverse the paths to find
-     * the branches
-     */
-    while (!this.arePathsEmpty(paths)) {
-      const nodeId = this.getFirstNodeIdInPathAtIndex(paths, 0);
-
-      if (this.areFirstNodeIdsInPathsTheSame(paths)) {
-        // the first node ids in all the paths are the same
-
-        this.removeNodeIdFromPaths(nodeId, paths);
-        previousNodeId = nodeId;
-      } else {
-        // not all the top node ids are the same which means we have branched
-        const nextCommonNodeId = this.findNextCommonNodeId(paths);
-        let branchPaths = this.extractPathsUpToNodeId(paths, nextCommonNodeId);
-        branchPaths = this.removeDuplicatePaths(branchPaths);
-        branches.push(new Branch(previousNodeId, branchPaths, nextCommonNodeId));
-
-        // trim the paths so that they start at the branch end point
-        this.trimPathsUpToNodeId(paths, nextCommonNodeId);
-
-        // remember this node id for the next iteration of the loop
-        previousNodeId = nextCommonNodeId;
-      }
-    }
-    return branches;
-  }
-
-  /**
-   * Find the next common node id in all the paths
-   * @param paths the paths to find the common node id in
-   * @return a node id that is in all the paths or null
-   * if there is no node id that is in all the paths
-   */
-  findNextCommonNodeId(paths) {
-    let nextCommonNodeId = null;
-    if (paths != null) {
-      if (paths.length > 0) {
-        const path = paths[0];
-        for (let tempNodeId of path) {
-          if (this.allPathsContainNodeId(paths, tempNodeId)) {
-            /*
-             * the node id is in all the paths so we have found
-             * what we were looking for
-             */
-            nextCommonNodeId = tempNodeId;
-            break;
-          }
-        }
-      }
-    }
-    return nextCommonNodeId;
-  }
-
-  /**
-   * Check if all the paths contain the node id
-   * @param paths an array of paths. each path contains an array of node ids
-   * @param nodeId the node id that we will check is in all the paths
-   * @return whether the node id is in all the paths
-   */
-  allPathsContainNodeId(paths, nodeId) {
-    let result = false;
-    if (paths != null) {
-      for (let path of paths) {
-        const index = path.indexOf(nodeId);
-        if (index == -1) {
-          result = false;
-          break;
-        } else {
-          result = true;
-        }
-      }
-    }
-    return result;
-  }
-
-  /**
-   * Trim the paths up to the given node id so that the paths will contain
-   * the given node id and all the node ids after it. This function will
-   * modify the paths.
-   * @param paths the paths to trim
-   * @param nodeId the node id to trim up to
-   */
-  trimPathsUpToNodeId(paths, nodeId) {
-    if (paths != null) {
-      for (let path of paths) {
-        if (path != null) {
-          let index = path.indexOf(nodeId);
-
-          if (index == -1) {
-            /*
-             * the node id is not in the path so we will
-             * trim the path to the end which will make
-             * the path empty
-             */
-            index = path.length;
-          }
-
-          /*
-           * trim the path up to the node id index. this will
-           * modify the path array.
-           */
-          path.splice(0, index);
-        }
-      }
-    }
-  }
-
-  /**
-   * Extract the paths up to a given node id. This will be used to
-   * obtain branch paths.
-   * @param paths the paths to extract from
-   * @param nodeId the node id to extract up to
-   * @return paths that go up to but do not include the node id
-   */
-  extractPathsUpToNodeId(paths, nodeId) {
-    const extractedPaths = [];
-    if (paths != null) {
-      for (let path of paths) {
-        if (path != null) {
-          let index = path.indexOf(nodeId);
-          if (index == -1) {
-            /*
-             * the node id is not in the path so we will
-             * extract up to the end of the path
-             */
-            index = path.length;
-          }
-
-          /*
-           * get the path up to the node id index. this does
-           * not modify the path array.
-           */
-          const extractedPath = path.slice(0, index);
-          extractedPaths.push(extractedPath);
-        }
-      }
-    }
-    return extractedPaths;
-  }
-
-  /**
-   * Removes duplicate paths
-   * @param paths an array of paths. each path contains an array of node ids
-   * @return an array of unique paths
-   */
-  removeDuplicatePaths(paths) {
-    const uniquePaths = [];
-    if (paths != null) {
-      for (let path of paths) {
-        let isPathInUniquePaths = false;
-        for (let uniquePath of uniquePaths) {
-          if (this.pathsEqual(path, uniquePath)) {
-            isPathInUniquePaths = true;
-          }
-        }
-
-        if (!isPathInUniquePaths) {
-          // the path is not equal to any paths in the unique
-          // paths array so we will add it to the unique paths array
-          uniquePaths.push(path);
-        }
-      }
-    }
-    return uniquePaths;
-  }
-
-  /**
-   * Check if two paths are equal
-   * @param path1 an array of node ids
-   * @param path2 an array of node ids
-   * @return whether the two paths contain the same node ids
-   * in the same order
-   */
-  pathsEqual(path1, path2) {
-    let result = false;
-    if (path1 != null && path2 != null) {
-      if (path1.length === path2.length) {
-        result = true;
-
-        for (let x = 0; x < path1.length; x++) {
-          const path1NodeId = path1[x];
-          const path2NodeId = path2[x];
-          if (path1NodeId !== path2NodeId) {
-            result = false;
-            break;
-          }
-        }
-      }
-    }
-    return result;
   }
 
   /**

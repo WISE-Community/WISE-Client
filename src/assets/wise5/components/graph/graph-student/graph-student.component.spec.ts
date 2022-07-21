@@ -7,28 +7,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Point } from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
 import { GraphService } from '../graphService';
 import { GraphStudent } from './graph-student.component';
 import { of } from 'rxjs';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-  broadcastDoneRenderingComponent() {}
-}
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: GraphStudent;
 const componentId = 'component1';
@@ -45,28 +28,13 @@ describe('GraphStudentComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
-        ComponentServiceLookupServiceModule,
         HighchartsChartModule,
         HttpClientTestingModule,
         MatDialogModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [GraphStudent],
-      providers: [
-        AnnotationService,
-        ComponentService,
-        ConfigService,
-        GraphService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(GraphStudent);
