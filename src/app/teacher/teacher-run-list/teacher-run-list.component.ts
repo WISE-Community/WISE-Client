@@ -42,9 +42,10 @@ export class TeacherRunListComponent implements OnInit {
 
   private getRuns(): void {
     this.teacherService.getRuns().subscribe((runs) => {
+      const userId = this.userService.getUserId();
       this.runs = runs.map((run) => {
         const teacherRun = new TeacherRun(run);
-        teacherRun.shared = !teacherRun.isOwner(this.userService.getUserId());
+        teacherRun.shared = !teacherRun.isOwner(userId);
         return teacherRun;
       });
       this.processRuns();
