@@ -12,6 +12,7 @@
                     fxFlex.sm="0 0 calc(50%-8px)"
                     i18n-placeholderText
                     placeholderText="Search"
+                    [disable]="!loaded"
                     [value]="searchValue"
                     (update)="searchChanged($event)"></app-search-bar>
     <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
@@ -20,6 +21,7 @@
                      [options]="filterOptions"
                      i18n-placeholderText
                      placeholderText="Filter By Period"
+                     [disable]="!loaded"
                      [value]="filterValue"
                      (update)="filterChanged($event)"
                      [valueProp]="'value'"

@@ -4,8 +4,9 @@ import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -13,6 +14,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./teacher-run-list.component.scss']
 })
 export class TeacherRunListComponent implements OnInit {
+  FETCH_RECENT_RUNS_MAX = 10;
+
   runs: TeacherRun[] = [];
   filteredRuns: TeacherRun[] = [];
   loaded: boolean = false;
@@ -41,18 +44,35 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   private getRuns(): void {
-    this.teacherService.getRuns().subscribe((runs) => {
-      this.runs = runs.map((run) => {
-        const teacherRun = new TeacherRun(run);
-        teacherRun.shared = !teacherRun.isOwner(this.userService.getUserId());
-        return teacherRun;
+    this.teacherService
+      .getRuns(this.FETCH_RECENT_RUNS_MAX)
+      .pipe(mergeMap((runs) => this.processRecentRuns(runs)))
+      .subscribe((runs: TeacherRun[]) => {
+        this.setRuns(runs);
+        this.processRuns();
+        this.loaded = true;
       });
-      this.processRuns();
-      this.loaded = true;
-    });
   }
 
-  private subscribeToRuns(): void {
+  private processRecentRuns(runs: TeacherRun[]): Observable<TeacherRun[]> {
+    if (runs.length < this.FETCH_RECENT_RUNS_MAX) {
+      return of(runs);
+    } else {
+      this.setRuns(runs);
+      return this.teacherService.getRuns();
+    }
+  }
+
+  private setRuns(runs: TeacherRun[]) {
+    this.runs = runs.map((run) => {
+      const teacherRun = new TeacherRun(run);
+      teacherRun.shared = !teacherRun.isOwner(this.userService.getUserId());
+      return teacherRun;
+    });
+    this.filteredRuns = this.runs;
+  }
+
+  private subscribeToRuns(): any {
     this.subscriptions.add(
       this.teacherService.runs$.subscribe((run: TeacherRun) => {
         if (this.isNewRun(run)) {
