@@ -1,15 +1,8 @@
 'use strict';
 import * as angular from 'angular';
-import * as $ from 'jquery';
-import { ConfigService } from '../services/configService';
 import { ProjectService } from './projectService';
-import { UtilService } from '../services/utilService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { SessionService } from './sessionService';
-import { ComponentServiceLookupService } from './componentServiceLookupService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -31,17 +24,6 @@ export class TeacherProjectService extends ProjectService {
   public projectSaved$: Observable<void> = this.projectSavedSource.asObservable();
   private savingProjectSource: Subject<void> = new Subject<void>();
   public savingProject$: Observable<void> = this.savingProjectSource.asObservable();
-
-  constructor(
-    protected upgrade: UpgradeModule,
-    protected componentServiceLookupService: ComponentServiceLookupService,
-    protected http: HttpClient,
-    protected ConfigService: ConfigService,
-    protected SessionService: SessionService,
-    protected UtilService: UtilService
-  ) {
-    super(componentServiceLookupService, http, ConfigService, SessionService, UtilService);
-  }
 
   getNewProjectTemplate() {
     return {
@@ -906,23 +888,6 @@ export class TeacherProjectService extends ProjectService {
     });
   }
 
-  openWISELinkChooser({ projectId, nodeId, componentId, target }): any {
-    const stateParams = {
-      projectId: projectId,
-      nodeId: nodeId,
-      componentId: componentId,
-      target: target
-    };
-    return this.upgrade.$injector.get('$mdDialog').show({
-      templateUrl: 'assets/wise5/authoringTool/wiseLink/wiseLinkAuthoring.html',
-      controller: 'WISELinkAuthoringController',
-      controllerAs: '$ctrl',
-      $stateParams: stateParams,
-      clickOutsideToClose: true,
-      escapeToClose: true
-    });
-  }
-
   /**
    * Saves the project to Config.saveProjectURL and returns commit history promise.
    * if Config.saveProjectURL or Config.projectId are undefined, does not save and returns null
@@ -1597,7 +1562,7 @@ export class TeacherProjectService extends ProjectService {
                      * get the branch paths. these paths do not
                      * contain the start point or merge point.
                      */
-                    const branchPaths = branch.branchPaths;
+                    const branchPaths = branch.paths;
 
                     if (branchPaths != null) {
                       for (let branchPath of branchPaths) {

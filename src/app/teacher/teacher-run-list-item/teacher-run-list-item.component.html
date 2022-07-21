@@ -1,7 +1,7 @@
 <ng-template #runInfo>
   <div>
     <span class="more-info"
-          [matTooltip]="periodsString()"
+          [matTooltip]="periodsTooltipText"
           matTooltipPosition="above">
       {{run.periods.length}}
       <ng-container [ngPlural]="run.periods.length">

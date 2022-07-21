@@ -1,16 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { AnnotationService } from '../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
-import { NotebookService } from '../../../services/notebookService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { VLEProjectService } from '../../../vle/vleProjectService';
 import { NavigationComponent } from './navigation.component';
 
@@ -28,24 +19,9 @@ describe('NavigationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [NavigationComponent],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService,
-        UtilService,
-        { provide: VLEProjectService, useClass: MockVLEProjectService }
-      ]
+      providers: [{ provide: VLEProjectService, useClass: MockVLEProjectService }]
     }).compileComponents();
   });
 

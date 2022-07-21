@@ -1,31 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { AnnotationService } from '../../assets/wise5/services/annotationService';
-import { ConfigService } from '../../assets/wise5/services/configService';
-import { ProjectService } from '../../assets/wise5/services/projectService';
-import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { TagService } from '../../assets/wise5/services/tagService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { AudioOscillatorService } from '../../assets/wise5/components/audioOscillator/audioOscillatorService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 let service: AudioOscillatorService;
 
 describe('AudioOscillatorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [
-        AnnotationService,
-        AudioOscillatorService,
-        ConfigService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        TagService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
     });
     service = TestBed.get(AudioOscillatorService);
   });

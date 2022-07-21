@@ -6,7 +6,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { of } from 'rxjs';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { AchievementService } from '../../../../services/achievementService';
@@ -85,7 +84,6 @@ describe('PeerGroupPeriodComponent', () => {
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
-        UpgradeModule,
         UtilService,
         WorkgroupService
       ]

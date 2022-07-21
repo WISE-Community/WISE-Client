@@ -4,28 +4,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
-import { TableService } from '../tableService';
 import { TableStudent } from './table-student.component';
-
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: TableStudent;
 const componentId = 'component1';
@@ -43,28 +26,12 @@ describe('TableStudentComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
-        ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
         MatDialogModule,
         NoopAnimationsModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [TableStudent],
-      providers: [
-        AnnotationService,
-        ComponentService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        TableService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(TableStudent);

@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { SessionService } from '../../../assets/wise5/services/sessionService';
@@ -25,8 +24,7 @@ describe('EditConnectedComponentTypeSelectComponent', () => {
         FormsModule,
         HttpClientModule,
         MatFormFieldModule,
-        MatSelectModule,
-        UpgradeModule
+        MatSelectModule
       ],
       declarations: [EditConnectedComponentTypeSelectComponent],
       providers: [ConfigService, ProjectService, SessionService, UtilService]

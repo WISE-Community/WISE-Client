@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { UtilService } from '../../assets/wise5/services/utilService';
@@ -10,7 +9,7 @@ import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVeh
 import twoStepsProjectJSON_import from './sampleData/curriculum/TwoSteps.project.json';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { PeerGrouping } from '../domain/peerGrouping';
-import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 const projectIdDefault = 1;
 const projectBaseURL = 'http://localhost:8080/curriculum/12345/';
@@ -30,14 +29,13 @@ let twoStepsProjectJSON: any;
 describe('ProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
-      providers: [ProjectService, ConfigService, SessionService, UtilService]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
     });
-    http = TestBed.get(HttpTestingController);
-    configService = TestBed.get(ConfigService);
-    sessionService = TestBed.get(SessionService);
-    utilService = TestBed.get(UtilService);
-    service = TestBed.get(ProjectService);
+    http = TestBed.inject(HttpTestingController);
+    configService = TestBed.inject(ConfigService);
+    sessionService = TestBed.inject(SessionService);
+    utilService = TestBed.inject(UtilService);
+    service = TestBed.inject(ProjectService);
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
     oneBranchTwoPathsProjectJSON = JSON.parse(JSON.stringify(oneBranchTwoPathsProjectJSON_import));
     scootersProjectJSON = JSON.parse(JSON.stringify(scootersProjectJSON_import));
@@ -79,14 +77,12 @@ describe('ProjectService', () => {
   // TODO: add test for service.getNonEmptyPathIndex()
   // TODO: add test for service.getBranches()
   // TODO: add test for service.findBranches()
-  // TODO: add test for service.createBranchMetaObject()
   // TODO: add test for service.findNextCommonNodeId()
   // TODO: add test for service.allPathsContainNodeId()
   // TODO: add test for service.trimPathsUpToNodeId()
   // TODO: add test for service.extractPathsUpToNodeId()
   // TODO: add test for service.removeDuplicatePaths()
   // TODO: add test for service.pathsEqual()
-  // TODO: add test for service.getBranchPathsByNodeId()
   // TODO: add test for service.getNodeContentByNodeId()
   // TODO: add test for service.replaceComponent()
   // TODO: add test for service.createGroup()

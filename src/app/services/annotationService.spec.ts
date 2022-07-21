@@ -1,12 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
 import { UtilService } from '../../assets/wise5/services/utilService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 
 let service: AnnotationService;
@@ -34,8 +31,7 @@ const annotations = [
 describe('AnnotationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
-      providers: [ProjectService, ConfigService, SessionService, AnnotationService, UtilService]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
     });
     utilService = TestBed.inject(UtilService);
     service = TestBed.inject(AnnotationService);

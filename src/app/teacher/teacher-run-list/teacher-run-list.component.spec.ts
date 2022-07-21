@@ -7,6 +7,7 @@ import { TeacherRun } from '../teacher-run';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { UserService } from '../../services/user.service';
 
 class TeacherScheduleStubComponent {}
 
@@ -46,14 +47,7 @@ export class MockTeacherService {
       observer.complete();
     });
   }
-  getSharedRuns(): Observable<TeacherRun[]> {
-    const runs: TeacherRun[] = [];
-    return Observable.create((observer) => {
-      observer.next(runs);
-      observer.complete();
-    });
-  }
-  newRunSource$ = fakeAsyncResponse({
+  runs$ = fakeAsyncResponse({
     id: 3,
     name: 'Global Climate Change',
     periods: ['1', '2']
@@ -63,6 +57,12 @@ export class MockTeacherService {
 export class MockConfigService {
   getCurrentServerTime(): number {
     return new Date('2018-08-24T00:00:00.0').getTime();
+  }
+}
+
+export class MockUserService {
+  getUserId(): number {
+    return 1;
   }
 }
 
@@ -81,7 +81,8 @@ describe('TeacherRunListComponent', () => {
         ],
         providers: [
           { provide: TeacherService, useClass: MockTeacherService },
-          { provide: ConfigService, useClass: MockConfigService }
+          { provide: ConfigService, useClass: MockConfigService },
+          { provide: UserService, useClass: MockUserService }
         ],
         schemas: [NO_ERRORS_SCHEMA]
       });

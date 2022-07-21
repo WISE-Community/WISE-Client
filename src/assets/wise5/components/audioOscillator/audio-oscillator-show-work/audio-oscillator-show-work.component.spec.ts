@@ -1,11 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { UtilService } from '../../../services/utilService';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
 import { AudioOscillatorShowWorkComponent } from './audio-oscillator-show-work.component';
 
@@ -15,10 +11,8 @@ let fixture: ComponentFixture<AudioOscillatorShowWorkComponent>;
 describe('AudioOscillatorShowWorkComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
-      declarations: [AudioOscillatorShowWorkComponent],
-      providers: [ConfigService, SessionService, ProjectService, UtilService],
-      schemas: []
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      declarations: [AudioOscillatorShowWorkComponent]
     });
     fixture = TestBed.createComponent(AudioOscillatorShowWorkComponent);
     spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});

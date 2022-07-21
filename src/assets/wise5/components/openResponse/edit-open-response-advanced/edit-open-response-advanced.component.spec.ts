@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -7,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { EditComponentExcludeFromTotalScoreComponent } from '../../../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
@@ -20,27 +20,10 @@ import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/ed
 import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
-import { AnnotationService } from '../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
-import { CRaterService } from '../../../services/cRaterService';
-import { NodeService } from '../../../services/nodeService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { EditOpenResponseAdvancedComponent } from './edit-open-response-advanced.component';
-
-export class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: EditOpenResponseAdvancedComponent;
 let fixture: ComponentFixture<EditOpenResponseAdvancedComponent>;
@@ -53,7 +36,6 @@ describe('EditOpenResponseAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
@@ -61,7 +43,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [
         EditComponentAddToNotebookButtonComponent,
@@ -78,21 +60,8 @@ describe('EditOpenResponseAdvancedComponent', () => {
         EditConnectedComponentsComponent,
         EditOpenResponseAdvancedComponent
       ],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        CRaterService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        TeacherProjectService,
-        UtilService
-      ]
+      providers: [TeacherProjectService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

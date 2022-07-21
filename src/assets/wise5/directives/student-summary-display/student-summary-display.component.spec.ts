@@ -2,43 +2,19 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { SummaryService } from '../../components/summary/summaryService';
-import { AnnotationService } from '../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { ConfigService } from '../../services/configService';
-import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentDataService } from '../../services/studentDataService';
-import { TagService } from '../../services/tagService';
-import { UtilService } from '../../services/utilService';
 import { StudentSummaryDisplay } from './student-summary-display.component';
 
 let component: StudentSummaryDisplay;
 let fixture: ComponentFixture<StudentSummaryDisplay>;
 
-describe('SummaryDisplayComponent', () => {
+describe('StudentSummaryDisplayComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [StudentSummaryDisplay],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        SummaryService,
-        TagService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(StudentSummaryDisplay);

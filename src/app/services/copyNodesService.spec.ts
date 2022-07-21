@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
@@ -37,7 +36,7 @@ let createNodeAfterSpy, createNodeInsideSpy, getUnusedComponentIdSpy, parseProje
 describe('CopyNodesService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       providers: [
         CopyNodesService,
         { provide: ConfigService, useClass: ConfigServiceStub },

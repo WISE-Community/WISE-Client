@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { SummaryService } from '../../assets/wise5/components/summary/summaryService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -38,7 +37,7 @@ const scoreSummaryDisallowedComponentTypes = summaryDisallowedComponentTypes;
 describe('SummaryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       providers: [
         AnnotationService,
         ConfigService,

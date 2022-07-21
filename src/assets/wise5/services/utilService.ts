@@ -62,8 +62,12 @@ export class UtilService {
     return str;
   }
 
-  makeCopyOfJSONObject(jsonObject): any {
-    return JSON.parse(JSON.stringify(jsonObject));
+  makeCopyOfJSONObject(jsonObject: any): any {
+    return this.isUndefined(jsonObject) ? undefined : JSON.parse(JSON.stringify(jsonObject));
+  }
+
+  private isUndefined(value: any): boolean {
+    return typeof value === 'undefined';
   }
 
   getImageObjectFromBase64String(img_b64) {

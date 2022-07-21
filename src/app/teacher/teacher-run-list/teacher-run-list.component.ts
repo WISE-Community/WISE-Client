@@ -4,6 +4,8 @@ import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -12,64 +14,90 @@ import { formatDate } from '@angular/common';
 })
 export class TeacherRunListComponent implements OnInit {
   runs: TeacherRun[] = [];
-  personalRuns: TeacherRun[] = [];
-  sharedRuns: TeacherRun[] = [];
   filteredRuns: TeacherRun[] = [];
   loaded: boolean = false;
   searchValue: string = '';
   periods: string[] = [];
-  filterOptions: any[] = [{ value: '', label: $localize`All Periods` }];
+  filterOptions: any[];
   filterValue: string = '';
-  isPersonalRunsRetrieved: boolean = false;
-  isSharedRunsRetrieved: boolean = false;
   showAll: boolean = false;
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     private teacherService: TeacherService,
     private configService: ConfigService,
-    router: Router,
+    private router: Router,
+    private userService: UserService,
     @Inject(LOCALE_ID) private localeID: string
-  ) {
-    teacherService.newRunSource$.subscribe((run) => {
-      const teacherRun: TeacherRun = new TeacherRun(run);
-      teacherRun.isHighlighted = true;
-      this.runs.unshift(teacherRun);
-      this.runs.sort(this.sortByStartTimeDesc);
-      this.populatePeriods([teacherRun]);
-      this.periods.sort();
-      this.populateFilterOptions();
-      this.reset();
-      if (!this.showAll) {
-        const index = this.getRunIndex(teacherRun);
-        if (index > 9) {
-          this.showAll = true;
-        }
-      }
-      router.navigateByUrl('teacher/home/schedule').then(() => {
-        setTimeout(() => {
-          document.getElementById(`run${teacherRun.id}`).scrollIntoView();
-        }, 1000);
-      });
-    });
-  }
+  ) {}
 
   ngOnInit() {
     this.getRuns();
-    this.getSharedRuns();
+    this.subscribeToRuns();
   }
 
-  getRuns(): void {
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
+  private getRuns(): void {
     this.teacherService.getRuns().subscribe((runs) => {
-      this.personalRuns = [];
-      for (const personalRun of runs) {
-        this.personalRuns.push(new TeacherRun(personalRun));
-      }
-      this.isPersonalRunsRetrieved = true;
-      this.processRunsIfReady();
+      const userId = this.userService.getUserId();
+      this.runs = runs.map((run) => {
+        const teacherRun = new TeacherRun(run);
+        teacherRun.shared = !teacherRun.isOwner(userId);
+        return teacherRun;
+      });
+      this.processRuns();
+      this.loaded = true;
     });
   }
 
-  getRunIndex(run: TeacherRun) {
+  private subscribeToRuns(): void {
+    this.subscriptions.add(
+      this.teacherService.runs$.subscribe((run: TeacherRun) => {
+        if (this.isNewRun(run)) {
+          this.addNewRun(run);
+        } else {
+          this.updateExistingRun(run);
+        }
+      })
+    );
+  }
+
+  private addNewRun(newRun: TeacherRun): void {
+    newRun.isHighlighted = true;
+    this.runs.unshift(newRun);
+    this.runs.sort(this.sortByStartTimeDesc);
+    this.populatePeriods();
+    this.periods.sort();
+    this.populateFilterOptions();
+    this.reset();
+    if (!this.showAll) {
+      const index = this.getRunIndex(newRun);
+      if (index > 9) {
+        this.showAll = true;
+      }
+    }
+    this.router.navigateByUrl('teacher/home/schedule').then(() => {
+      setTimeout(() => {
+        document.getElementById(`run${newRun.id}`).scrollIntoView();
+      }, 1000);
+    });
+  }
+
+  private updateExistingRun(updatedRun: TeacherRun): void {
+    const runIndex = this.runs.findIndex((run) => run.id === updatedRun.id);
+    this.runs.splice(runIndex, 1, updatedRun);
+    this.processRuns();
+    this.reset();
+  }
+
+  private isNewRun(run: TeacherRun) {
+    return !this.runs.some((existingRun) => existingRun.id === run.id);
+  }
+
+  private getRunIndex(run: TeacherRun): number {
     for (let i = 0; i < this.runs.length; i++) {
       if (this.runs[i].id === run.id) {
         return i;
@@ -78,58 +106,31 @@ export class TeacherRunListComponent implements OnInit {
     return null;
   }
 
-  getSharedRuns(): void {
-    this.teacherService.getSharedRuns().subscribe((runs) => {
-      this.sharedRuns = [];
-      for (const sharedRun of runs) {
-        const teacherRun = new TeacherRun(sharedRun);
-        teacherRun.shared = true;
-        this.sharedRuns.push(teacherRun);
-      }
-      this.isSharedRunsRetrieved = true;
-      this.processRunsIfReady();
-    });
-  }
-
-  processRunsIfReady() {
-    if (this.isPersonalRunsRetrieved && this.isSharedRunsRetrieved) {
-      this.processRuns();
-    }
-  }
-
-  processRuns() {
-    const runs = this.personalRuns.concat(this.sharedRuns);
-    this.runs = runs;
-    this.filteredRuns = runs;
-    this.populatePeriods(runs);
+  private processRuns(): void {
+    this.filteredRuns = this.runs;
+    this.populatePeriods();
     this.periods.sort();
     this.populateFilterOptions();
     this.performSearchAndFilter();
-    this.loaded = true;
   }
 
-  sortByStartTimeDesc(a, b) {
-    if (a.startTime < b.startTime) {
-      return 1;
-    } else if (a.startTime > b.startTime) {
-      return -1;
-    } else {
-      return 0;
-    }
+  sortByStartTimeDesc(a: TeacherRun, b: TeacherRun): number {
+    return b.startTime - a.startTime;
   }
 
-  populatePeriods(runs: TeacherRun[]): void {
-    for (const run of runs) {
-      const periods = run.periods;
-      for (const period of periods) {
-        if (this.periods.indexOf(period) < 0) {
+  private populatePeriods(): void {
+    this.periods = [];
+    for (const run of this.runs) {
+      for (const period of run.periods) {
+        if (!this.periods.includes(period)) {
           this.periods.push(period);
         }
       }
     }
   }
 
-  populateFilterOptions(): void {
+  private populateFilterOptions(): void {
+    this.filterOptions = [{ value: '', label: $localize`All Periods` }];
     for (const period of this.periods) {
       this.filterOptions.push({ value: period, label: period });
     }
@@ -152,17 +153,6 @@ export class TeacherRunListComponent implements OnInit {
     return total;
   }
 
-  completedTotal(): number {
-    let total = 0;
-    const now = this.configService.getCurrentServerTime();
-    for (const run of this.filteredRuns) {
-      if (run.isCompleted(now)) {
-        total++;
-      }
-    }
-    return total;
-  }
-
   scheduledTotal(): number {
     let total = 0;
     const now = this.configService.getCurrentServerTime();
@@ -174,7 +164,7 @@ export class TeacherRunListComponent implements OnInit {
     return total;
   }
 
-  performSearchAndFilter(): void {
+  private performSearchAndFilter(): void {
     this.filteredRuns = this.searchValue ? this.performSearch(this.searchValue) : this.runs;
     this.performFilter(this.filterValue);
   }
@@ -189,17 +179,13 @@ export class TeacherRunListComponent implements OnInit {
     this.performSearchAndFilter();
   }
 
-  performFilter(value: string) {
+  private performFilter(value: string): void {
     this.filteredRuns = this.filteredRuns.filter((run: TeacherRun) => {
-      if (value !== '') {
-        return run.periods.indexOf(value) !== -1;
-      } else {
-        return true;
-      }
+      return value === '' || run.periods.includes(value);
     });
   }
 
-  performSearch(searchValue: string) {
+  private performSearch(searchValue: string) {
     searchValue = searchValue.toLocaleLowerCase();
     // TODO: extract this for global use?
     return this.runs.filter((run: TeacherRun) =>

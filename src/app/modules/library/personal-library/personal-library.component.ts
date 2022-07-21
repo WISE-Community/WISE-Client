@@ -3,7 +3,6 @@ import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryComponent } from '../library/library.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-personal-library',
@@ -15,14 +14,13 @@ export class PersonalLibraryComponent extends LibraryComponent {
   filteredProjects: LibraryProject[] = [];
   personalProjects: LibraryProject[] = [];
   sharedProjects: LibraryProject[] = [];
-  subscriptions: Subscription = new Subscription();
 
-  constructor(libraryService: LibraryService, private dialog: MatDialog) {
+  constructor(protected libraryService: LibraryService, private dialog: MatDialog) {
     super(libraryService);
-    this.libraryService = libraryService;
   }
 
   ngOnInit() {
+    super.ngOnInit();
     this.subscriptions.add(
       this.libraryService.personalLibraryProjectsSource$.subscribe(
         (personalProjects: LibraryProject[]) => {
@@ -48,10 +46,6 @@ export class PersonalLibraryComponent extends LibraryComponent {
         }
       })
     );
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
   }
 
   combinePersonalAndSharedProjects() {

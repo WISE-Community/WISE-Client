@@ -1,20 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentStatus } from '../../assets/wise5/common/StudentStatus';
-import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { ProjectService } from '../../assets/wise5/services/projectService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { StudentStatusService } from '../../assets/wise5/services/studentStatusService';
-import { TagService } from '../../assets/wise5/services/tagService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { of } from 'rxjs';
-import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
-import { NotebookService } from '../../assets/wise5/services/notebookService';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 let configService: ConfigService;
 let http: HttpClient;
@@ -38,23 +31,7 @@ const studentStatusUrl = '/api/studentStatus';
 describe('StudentStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        StudentStatusService,
-        TagService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
     });
     configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpClient);

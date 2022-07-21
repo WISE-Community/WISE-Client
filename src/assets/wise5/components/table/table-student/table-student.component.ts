@@ -20,6 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
   encapsulation: ViewEncapsulation.None
 })
 export class TableStudent extends ComponentStudent {
+  columnIndexToIsUsed: Map<number, boolean> = new Map();
   columnNames: string[];
   dataExplorerColumnToIsDisabled: any = {};
   dataExplorerGraphTypes: any[];
@@ -129,6 +130,7 @@ export class TableStudent extends ComponentStudent {
       if (this.componentContent.dataExplorerDataToColumn != null) {
         this.setDataExplorerDataToColumn();
       }
+      this.updateColumnsUsed();
     }
 
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
@@ -994,6 +996,7 @@ export class TableStudent extends ComponentStudent {
   studentDataChanged() {
     if (this.isDataExplorerEnabled) {
       this.updateColumnNames();
+      this.updateColumnsUsed();
       this.updateDataExplorerSeriesNames();
     }
     this.setIsDirtyAndBroadcast();
@@ -1008,6 +1011,22 @@ export class TableStudent extends ComponentStudent {
     this.columnNames = firstRow.map((cell: any): string => {
       return cell.text;
     });
+  }
+
+  updateColumnsUsed(): void {
+    const firstRow = this.tableData[0];
+    for (let c = 0; c < firstRow.length; c++) {
+      this.columnIndexToIsUsed.set(c, this.isColumnUsed(c));
+    }
+  }
+
+  isColumnUsed(columnIndex: number): boolean {
+    return (
+      columnIndex === this.dataExplorerXColumn ||
+      this.dataExplorerSeries.some((series) => {
+        return series.yColumn === columnIndex;
+      })
+    );
   }
 
   updateDataExplorerSeriesNames() {
@@ -1035,15 +1054,13 @@ export class TableStudent extends ComponentStudent {
     this.studentDataChanged();
   }
 
-  dataExplorerYColumnChanged(index) {
+  dataExplorerYColumnChanged(index: number): void {
     const yColumn = this.dataExplorerSeries[index].yColumn;
     this.dataExplorerSeries[index].name = this.columnNames[yColumn];
     if (!this.isDataExplorerOneYAxis()) {
       this.setDataExplorerSeriesYAxis(index);
     }
-    if (this.isDataExplorerYAxisLabelEmpty(index)) {
-      this.updateDataExplorerYAxisLabel(index, yColumn);
-    }
+    this.updateDataExplorerYAxisLabel(index, yColumn);
     this.studentDataChanged();
   }
 

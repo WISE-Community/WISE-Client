@@ -1,13 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { UtilService } from '../../../services/utilService';
 import { EditConceptMapConnectedComponentsComponent } from './edit-concept-map-connected-components.component';
 
 let component: EditConceptMapConnectedComponentsComponent;
@@ -18,17 +14,11 @@ const nodeId1 = 'nodeId1';
 describe('EditConceptMapConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatIconModule,
-        UpgradeModule
-      ],
+      imports: [HttpClientTestingModule, MatIconModule, StudentTeacherCommonServicesModule],
       declarations: [
         EditConnectedComponentsAddButtonComponent,
         EditConceptMapConnectedComponentsComponent
-      ],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      ]
     }).compileComponents();
   });
 

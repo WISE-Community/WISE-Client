@@ -1,13 +1,10 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { PeerGroupingAuthoringService } from '../../assets/wise5/services/peerGroupingAuthoringService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { PeerGrouping } from '../domain/peerGrouping';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 let allPeerGroupings: PeerGrouping[];
 let configService: ConfigService;
@@ -31,14 +28,8 @@ const tag2: string = 'tag2';
 describe('PeerGroupingAuthoringService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
-      providers: [
-        ConfigService,
-        PeerGroupingAuthoringService,
-        SessionService,
-        TeacherProjectService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      providers: [PeerGroupingAuthoringService, TeacherProjectService]
     });
     service = TestBed.inject(PeerGroupingAuthoringService);
     configService = TestBed.inject(ConfigService);

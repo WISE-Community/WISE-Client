@@ -1,12 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapAuthoring } from './concept-map-authoring.component';
 import { ConceptMapAuthoringModule } from './concept-map-authoring.module';
-
-export class MockConfigService {}
 
 let component: ConceptMapAuthoring;
 let fixture: ComponentFixture<ConceptMapAuthoring>;
@@ -83,9 +81,9 @@ describe('ConceptMapAuthoringComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        ComponentServiceLookupServiceModule,
         ConceptMapAuthoringModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        StudentTeacherCommonServicesModule
       ]
     });
     fixture = TestBed.createComponent(ConceptMapAuthoring);

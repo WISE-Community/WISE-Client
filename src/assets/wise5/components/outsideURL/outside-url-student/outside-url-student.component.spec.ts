@@ -6,30 +6,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../../services/annotationService';
-import { AudioRecorderService } from '../../../services/audioRecorderService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
-import { CRaterService } from '../../../services/cRaterService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
-import { OutsideURLService } from '../outsideURLService';
 import { OutsideUrlStudent } from './outside-url-student.component';
-
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: OutsideUrlStudent;
 const componentId = 'component1';
@@ -43,33 +23,14 @@ describe('OutsideUrlStudentComponent', () => {
         BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
         ReactiveFormsModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
-      declarations: [OutsideUrlStudent],
-      providers: [
-        AnnotationService,
-        AudioRecorderService,
-        ComponentService,
-        ConfigService,
-        CRaterService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        NotificationService,
-        OutsideURLService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
-      schemas: []
+      declarations: [OutsideUrlStudent]
     });
     fixture = TestBed.createComponent(OutsideUrlStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({

@@ -2,26 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentStudent } from './component-student.component';
 import { AnnotationService } from '../services/annotationService';
-import { ConfigService } from '../services/configService';
-import { NodeService } from '../services/nodeService';
 import { NotebookService } from '../services/notebookService';
-import { ProjectService } from '../services/projectService';
-import { SessionService } from '../services/sessionService';
-import { StudentAssetService } from '../services/studentAssetService';
-import { StudentDataService } from '../services/studentDataService';
-import { TagService } from '../services/tagService';
-import { UtilService } from '../services/utilService';
-import { ComponentService } from './componentService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ComponentServiceLookupServiceModule } from '../services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher-common-services.module';
 
 let component: ComponentStudent;
 let fixture: ComponentFixture<ComponentStudent>;
 let performSubmitSpy: jasmine.Spy;
-
-class MockService {}
 
 @Component({
   selector: 'component-student-impl'
@@ -31,26 +19,8 @@ class ComponentStudentImpl extends ComponentStudent {}
 describe('ComponentStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatDialogModule,
-        UpgradeModule
-      ],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [ComponentStudentImpl],
-      providers: [
-        AnnotationService,
-        ComponentService,
-        ConfigService,
-        { provide: NodeService, useClass: MockService },
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(ComponentStudentImpl);

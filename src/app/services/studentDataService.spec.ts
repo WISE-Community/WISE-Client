@@ -6,10 +6,8 @@ import { AnnotationService } from '../../assets/wise5/services/annotationService
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { TagService } from '../../assets/wise5/services/tagService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
-import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
-import { NotebookService } from '../../assets/wise5/services/notebookService';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 let $injector, $rootScope;
 let http: HttpTestingController;
@@ -25,25 +23,15 @@ let criteria2: any;
 describe('StudentDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
     });
-    http = TestBed.get(HttpTestingController);
-    service = TestBed.get(StudentDataService);
-    configService = TestBed.get(ConfigService);
-    annotationService = TestBed.get(AnnotationService);
-    projectService = TestBed.get(ProjectService);
-    tagService = TestBed.get(TagService);
-    utilService = TestBed.get(UtilService);
+    http = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(StudentDataService);
+    configService = TestBed.inject(ConfigService);
+    annotationService = TestBed.inject(AnnotationService);
+    projectService = TestBed.inject(ProjectService);
+    tagService = TestBed.inject(TagService);
+    utilService = TestBed.inject(UtilService);
     criteria1 = {
       name: 'isCompleted',
       params: {

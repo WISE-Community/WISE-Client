@@ -7,11 +7,11 @@ import { Teacher } from '../domain/teacher';
 import { Run } from '../domain/run';
 import { Course } from '../domain/course';
 import { CopyProjectDialogComponent } from '../modules/library/copy-project-dialog/copy-project-dialog.component';
+import { TeacherRun } from './teacher-run';
 
 @Injectable()
 export class TeacherService {
   private runsUrl = '/api/teacher/runs';
-  private sharedRunsUrl = '/api/teacher/sharedruns';
   private registerUrl = '/api/teacher/register';
   private runPermissionUrl = '/api/teacher/run/permission';
   private projectPermissionUrl = '/api/teacher/project/permission';
@@ -36,8 +36,8 @@ export class TeacherService {
   private addAssignmentUrl = '/api/google-classroom/create-assignment';
   private newProjectSource = new Subject<Project>();
   public newProjectSource$ = this.newProjectSource.asObservable();
-  private newRunSource = new Subject<Run>();
-  public newRunSource$ = this.newRunSource.asObservable();
+  private runs = new Subject<Run>();
+  public runs$ = this.runs.asObservable();
   private updateProfileUrl = '/api/teacher/profile/update';
 
   constructor(private http: HttpClient) {}
@@ -49,14 +49,9 @@ export class TeacherService {
     });
   }
 
-  getRuns(): Observable<Run[]> {
+  getRuns(): Observable<TeacherRun[]> {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
-    return this.http.get<Run[]>(this.runsUrl, { headers: headers });
-  }
-
-  getSharedRuns(): Observable<Run[]> {
-    const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
-    return this.http.get<Run[]>(this.sharedRunsUrl, { headers: headers });
+    return this.http.get<TeacherRun[]>(this.runsUrl, { headers: headers });
   }
 
   getRun(runId: number): Observable<Run> {
@@ -157,8 +152,8 @@ export class TeacherService {
     return this.http.delete<Object>(url, { headers: headers });
   }
 
-  addNewRun(run: Run) {
-    this.newRunSource.next(run);
+  broadcastRunChanges(run: TeacherRun): void {
+    this.runs.next(run);
   }
 
   updateProfile(

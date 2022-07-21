@@ -8,7 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { EditComponentExcludeFromTotalScoreComponent } from '../../../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
@@ -21,27 +20,11 @@ import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/ed
 import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
-import { AnnotationService } from '../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { EditTableConnectedComponentsComponent } from '../edit-table-connected-components/edit-table-connected-components.component';
 import { EditTableAdvancedComponent } from './edit-table-advanced.component';
-
-export class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: EditTableAdvancedComponent;
 let fixture: ComponentFixture<EditTableAdvancedComponent>;
@@ -51,7 +34,6 @@ describe('EditTableAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
@@ -60,7 +42,7 @@ describe('EditTableAdvancedComponent', () => {
         MatIconModule,
         MatInputModule,
         MatSelectModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [
         EditComponentAddToNotebookButtonComponent,
@@ -78,20 +60,7 @@ describe('EditTableAdvancedComponent', () => {
         EditTableAdvancedComponent,
         EditTableConnectedComponentsComponent
       ],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        TeacherProjectService,
-        UtilService
-      ]
+      providers: [TeacherProjectService]
     }).compileComponents();
   });
 

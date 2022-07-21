@@ -1,15 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
-import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { UtilService } from '../../../services/utilService';
 import { EditMatchConnectedComponentsComponent } from './edit-match-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: EditMatchConnectedComponentsComponent;
 let fixture: ComponentFixture<EditMatchConnectedComponentsComponent>;
@@ -19,17 +15,11 @@ const nodeId1 = 'nodeId1';
 describe('EditMatchConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        ComponentServiceLookupServiceModule,
-        HttpClientTestingModule,
-        MatIconModule,
-        UpgradeModule
-      ],
+      imports: [HttpClientTestingModule, MatIconModule, StudentTeacherCommonServicesModule],
       declarations: [
         EditConnectedComponentsAddButtonComponent,
         EditMatchConnectedComponentsComponent
-      ],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      ]
     }).compileComponents();
   });
 

@@ -5,7 +5,7 @@ import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuth
 import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
 import { EditPeerGroupingDialogComponent } from './edit-peer-grouping-dialog.component';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: EditPeerGroupingDialogComponent;
 let dialogCloseSpy: jasmine.Spy;
@@ -14,7 +14,7 @@ let fixture: ComponentFixture<EditPeerGroupingDialogComponent>;
 describe('EditPeerGroupingDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, PeerGroupingTestingModule],
+      imports: [PeerGroupingTestingModule, StudentTeacherCommonServicesModule],
       declarations: [EditPeerGroupingDialogComponent],
       providers: [
         {
