@@ -1,13 +1,8 @@
 'use strict';
 import * as angular from 'angular';
-import { ConfigService } from '../services/configService';
 import { ProjectService } from './projectService';
-import { UtilService } from '../services/utilService';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { SessionService } from './sessionService';
-import { ComponentServiceLookupService } from './componentServiceLookupService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -29,16 +24,6 @@ export class TeacherProjectService extends ProjectService {
   public projectSaved$: Observable<any> = this.projectSavedSource.asObservable();
   private savingProjectSource: Subject<any> = new Subject<any>();
   public savingProject$: Observable<any> = this.savingProjectSource.asObservable();
-
-  constructor(
-    protected componentServiceLookupService: ComponentServiceLookupService,
-    protected http: HttpClient,
-    protected ConfigService: ConfigService,
-    protected SessionService: SessionService,
-    protected UtilService: UtilService
-  ) {
-    super(componentServiceLookupService, http, ConfigService, SessionService, UtilService);
-  }
 
   getNewProjectTemplate() {
     return {

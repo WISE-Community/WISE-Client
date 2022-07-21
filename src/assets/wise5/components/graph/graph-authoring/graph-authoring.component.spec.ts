@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -13,22 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { AnnotationService } from '../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
-import { MockNodeService } from '../../common/MockNodeService';
-import { GraphService } from '../graphService';
 import { GraphAuthoring } from './graph-authoring.component';
-
-export class MockConfigService {}
 
 let component: GraphAuthoring;
 let fixture: ComponentFixture<GraphAuthoring>;
@@ -39,10 +27,10 @@ describe('GraphAuthoringComponent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
+        MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
@@ -50,24 +38,11 @@ describe('GraphAuthoringComponent', () => {
         MatSelectModule,
         MatSlideToggleModule,
         ReactiveFormsModule,
-        UpgradeModule
+        UpgradeModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [GraphAuthoring, EditComponentPrompt],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        GraphService,
-        { provide: NodeService, useClass: MockNodeService },
-        ProjectAssetService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        TeacherProjectService,
-        UtilService
-      ],
-      schemas: []
+      providers: [ProjectAssetService, TeacherProjectService]
     });
     fixture = TestBed.createComponent(GraphAuthoring);
     component = fixture.componentInstance;

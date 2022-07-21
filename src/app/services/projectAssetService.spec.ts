@@ -1,12 +1,9 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ProjectService } from '../../assets/wise5/services/projectService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { ProjectAssetService } from './projectAssetService';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { SessionService } from '../../assets/wise5/services/sessionService';
-import { ComponentServiceLookupServiceModule } from '../../assets/wise5/services/componentServiceLookupServiceModule';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 let service: ProjectAssetService;
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -15,8 +12,8 @@ let spongeBobAndPatrickAssets: any;
 describe('ProjectAssetService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, UpgradeModule],
-      providers: [ConfigService, ProjectAssetService, ProjectService, SessionService, UtilService]
+      imports: [HttpClientTestingModule, UpgradeModule, StudentTeacherCommonServicesModule],
+      providers: [ProjectAssetService]
     });
     http = TestBed.get(HttpTestingController);
     configService = TestBed.get(ConfigService);

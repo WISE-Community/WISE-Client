@@ -1,21 +1,15 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
-import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
 import { PeerGroup } from '../../peerChat/PeerGroup';
 import { PeerGroupMember } from '../../peerChat/PeerGroupMember';
 import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
@@ -64,23 +58,16 @@ let studentWork;
 describe('ShowGroupWorkStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
       declarations: [ShowGroupWorkStudentComponent],
       providers: [
         AnnotationService,
-        { provide: ComponentService, useClass: MockService },
         { provide: ConfigService, useClass: MockConfigService },
         { provide: MatDialog, useClass: MockService },
         { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
-        PeerGroupService,
-        ProjectService,
-        SessionService,
-        { provide: StudentAssetService, useClass: MockService },
-        StudentDataService,
-        TagService,
-        { provide: UtilService, useClass: MockService }
-      ]
+        { provide: NotebookService, useClass: MockNotebookService }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

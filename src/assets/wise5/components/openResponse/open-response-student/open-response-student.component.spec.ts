@@ -9,32 +9,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { of } from 'rxjs';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { AnnotationService } from '../../../services/annotationService';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
-import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
-import { OpenResponseCompletionCriteriaService } from '../openResponseCompletionCriteriaService';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
-
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: OpenResponseStudent;
 const componentId = 'component1';
@@ -49,12 +34,12 @@ describe('OpenResponseStudent', () => {
         BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
         ReactiveFormsModule,
+        StudentTeacherCommonServicesModule,
         UpgradeModule
       ],
       declarations: [
@@ -63,24 +48,7 @@ describe('OpenResponseStudent', () => {
         OpenResponseStudent,
         PossibleScoreComponent
       ],
-      providers: [
-        AnnotationService,
-        AudioRecorderService,
-        ComponentService,
-        ConfigService,
-        CRaterService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        NotificationService,
-        OpenResponseCompletionCriteriaService,
-        OpenResponseService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
+      providers: [AudioRecorderService],
       schemas: []
     });
   });

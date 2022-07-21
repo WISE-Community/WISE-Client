@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -18,26 +19,10 @@ import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/ed
 import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
-import { AnnotationService } from '../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { EditConceptMapAdvancedComponent } from './edit-concept-map-advanced.component';
-
-export class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: EditConceptMapAdvancedComponent;
 let fixture: ComponentFixture<EditConceptMapAdvancedComponent>;
@@ -48,14 +33,14 @@ describe('EditConceptMapAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        MatInputModule
+        MatInputModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [
         EditCommonAdvancedComponent,
@@ -71,20 +56,8 @@ describe('EditConceptMapAdvancedComponent', () => {
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
       ],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        TeacherProjectService,
-        UtilService
-      ]
+      providers: [TeacherProjectService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

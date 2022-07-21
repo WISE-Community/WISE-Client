@@ -1,16 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { AnnotationService } from '../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../services/configService';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../services/notebookService';
-import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
-import { TagService } from '../../services/tagService';
-import { UtilService } from '../../services/utilService';
 import { WiseLinkComponent } from './wise-link.component';
 
 describe('WiseLinkComponent', () => {
@@ -20,19 +13,8 @@ describe('WiseLinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
-      declarations: [WiseLinkComponent],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
+      declarations: [WiseLinkComponent]
     }).compileComponents();
   });
 
