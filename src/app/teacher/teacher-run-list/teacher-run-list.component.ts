@@ -14,7 +14,7 @@ import { mergeMap } from 'rxjs/operators';
   styleUrls: ['./teacher-run-list.component.scss']
 })
 export class TeacherRunListComponent implements OnInit {
-  FETCH_RECENT_RUNS_MAX = 10;
+  MAX_RECENT_RUNS = 10;
 
   runs: TeacherRun[] = [];
   filteredRuns: TeacherRun[] = [];
@@ -45,7 +45,7 @@ export class TeacherRunListComponent implements OnInit {
 
   private getRuns(): void {
     this.teacherService
-      .getRuns(this.FETCH_RECENT_RUNS_MAX)
+      .getRuns(this.MAX_RECENT_RUNS)
       .pipe(mergeMap((runs) => this.processRecentRuns(runs)))
       .subscribe((runs: TeacherRun[]) => {
         this.setRuns(runs);
@@ -55,7 +55,7 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   private processRecentRuns(runs: TeacherRun[]): Observable<TeacherRun[]> {
-    if (runs.length < this.FETCH_RECENT_RUNS_MAX) {
+    if (runs.length < this.MAX_RECENT_RUNS) {
       return of(runs);
     } else {
       this.setRuns(runs);
@@ -63,16 +63,17 @@ export class TeacherRunListComponent implements OnInit {
     }
   }
 
-  private setRuns(runs: TeacherRun[]) {
+  private setRuns(runs: TeacherRun[]): void {
+    const userId = this.userService.getUserId();
     this.runs = runs.map((run) => {
       const teacherRun = new TeacherRun(run);
-      teacherRun.shared = !teacherRun.isOwner(this.userService.getUserId());
+      teacherRun.shared = !teacherRun.isOwner(userId);
       return teacherRun;
     });
     this.filteredRuns = this.runs;
   }
 
-  private subscribeToRuns(): any {
+  private subscribeToRuns(): void {
     this.subscriptions.add(
       this.teacherService.runs$.subscribe((run: TeacherRun) => {
         if (this.isNewRun(run)) {

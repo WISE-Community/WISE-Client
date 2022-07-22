@@ -28,8 +28,8 @@
                      [viewValueProp]="'label'">
     </app-select-menu>
   </div>
-  <div *ngIf="loaded" class="notice">
-    <p>
+  <div class="notice">
+    <p [ngStyle]="{'visibility':loaded ? 'visible' : 'hidden'}">
       <ng-container *ngIf="searchValue || filterValue" i18n>Units found: {{ filteredRuns.length }}</ng-container>
       <ng-container *ngIf="!searchValue && !filterValue" i18n>Total classroom units: {{ filteredRuns.length }}</ng-container>
       <span class="mat-caption" *ngIf="filteredRuns.length">
