@@ -784,11 +784,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2671031157428687170" datatype="html">
@@ -14998,7 +14998,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1702c8b1dfd9b74fe218322fb3509b227cd41b1b" datatype="html">
@@ -15394,6 +15394,34 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="b652160adbee3bf218c97721e5b26a3bccf7b0c9" datatype="html">
+        <source>Import Table</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f691a121c479261a164621480b345efc8f65326c" datatype="html">
+        <source>Only .csv (comma separated values) files are allowed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">149</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3802284852279199102" datatype="html">
+        <source>Are you sure you want to overwrite the existing table?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
+          <context context-type="linenumber">183</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8522934403801176161" datatype="html">
+        <source>Successfully imported table</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
+          <context context-type="linenumber">190</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="7f8e64261497f0b38cfb8aa12b8f77cbb01a179b" datatype="html">
         <source>Merge</source>
         <context-group purpose="location">
@@ -15440,86 +15468,86 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Insert Column Before</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9634f970a787b967a6da5d3edcd6d6530012278c" datatype="html">
         <source>Delete Column</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="97537cb70f46603f1ae244ad748fa2622fb5bf0b" datatype="html">
         <source>Insert Column After</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="897363afbaacb7374bb5e259129b76687b431671" datatype="html">
         <source>Insert Row Before</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2ab75889a800e0e0fd14d0d63b8a003ee69519c6" datatype="html">
         <source>Delete Row</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
       <trans-unit id="75e10460c25b4a5f95b9d8077f0cb9b8968b47ce" datatype="html">
         <source>Insert Row After</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="13968818aa5f7771fe043f7d614f21c66b21e21a" datatype="html">
+      <trans-unit id="84ba8eac14d2c13ae78859833d4a19e05b769965" datatype="html">
         <source> Editable </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">125,127</context>
+          <context context-type="linenumber">126,128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5943b22e7e12f461de18c831b7cf94ddf4baf11a" datatype="html">
         <source>Column Cell Size</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8d3659d1c474ee37dde6c775445b585af3b79b56" datatype="html">
         <source> Make All Cells Editable </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">163,165</context>
+          <context context-type="linenumber">165,167</context>
         </context-group>
       </trans-unit>
       <trans-unit id="964c339de395a09a2ea31889d1f3b0e89ffd9107" datatype="html">
         <source> Make All Cells Uneditable </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">170,172</context>
+          <context context-type="linenumber">172,174</context>
         </context-group>
       </trans-unit>
       <trans-unit id="551594366276323400" datatype="html">
@@ -15587,7 +15615,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="484e9a22dbb7f73c463535f204e1f221b6cbdacb" datatype="html">
@@ -15598,7 +15626,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f15f150caaef41e4e915900660dae93b053ec897" datatype="html">
@@ -15633,29 +15661,29 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Y Data <x id="INTERPOLATION" equiv-text="{{ dataExplorerSeries.length &gt; 1 ? seriesIndex + 1 : &quot;&quot;}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7c0b21d6d77a0c42b3a86c8922b7766ebfaeb4c1" datatype="html">
         <source>Enter Text Here</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">120</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2ba0ed2ffebe37a936032b49e9fdf057a9af7d07" datatype="html">
         <source>Y Axis <x id="INTERPOLATION" equiv-text="{{yAxisIndex + 1}}"/> Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1358239534403218079" datatype="html">
