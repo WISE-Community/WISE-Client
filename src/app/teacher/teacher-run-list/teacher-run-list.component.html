@@ -12,6 +12,7 @@
                     fxFlex.sm="0 0 calc(50%-8px)"
                     i18n-placeholderText
                     placeholderText="Search"
+                    [disable]="!loaded"
                     [value]="searchValue"
                     (update)="searchChanged($event)"></app-search-bar>
     <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
@@ -20,14 +21,15 @@
                      [options]="filterOptions"
                      i18n-placeholderText
                      placeholderText="Filter By Period"
+                     [disable]="!loaded"
                      [value]="filterValue"
                      (update)="filterChanged($event)"
                      [valueProp]="'value'"
                      [viewValueProp]="'label'">
     </app-select-menu>
   </div>
-  <div *ngIf="loaded" class="notice">
-    <p>
+  <div class="notice">
+    <p [ngStyle]="{'visibility':loaded ? 'visible' : 'hidden'}">
       <ng-container *ngIf="searchValue || filterValue" i18n>Units found: {{ filteredRuns.length }}</ng-container>
       <ng-container *ngIf="!searchValue && !filterValue" i18n>Total classroom units: {{ filteredRuns.length }}</ng-container>
       <span class="mat-caption" *ngIf="filteredRuns.length">
