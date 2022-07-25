@@ -12,6 +12,7 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { TableService } from '../tableService';
 import { MatDialog } from '@angular/material/dialog';
+import { TabulatorData } from '../TabulatorData';
 
 @Component({
   selector: 'table-student',
@@ -40,6 +41,7 @@ export class TableStudent extends ComponentStudent {
   numDataExplorerSeries: number;
   tableData: any;
   tableId: string;
+  tabulatorData: TabulatorData;
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -323,6 +325,7 @@ export class TableStudent extends ComponentStudent {
        */
       this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
     }
+    this.tabulatorData = this.TableService.convertTableDataToTabulator(this.tableData);
   }
 
   /**

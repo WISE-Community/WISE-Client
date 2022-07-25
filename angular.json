@@ -43,6 +43,7 @@
               { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }
             ],
             "styles": [
+              "./node_modules/tabulator-tables/dist/css/tabulator_semanticui.min.css",
               {
                 "input": "src/style/styles.scss",
                 "bundleName": "siteStyles"

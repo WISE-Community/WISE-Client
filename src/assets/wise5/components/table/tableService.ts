@@ -5,6 +5,7 @@ import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { UtilService } from '../../services/utilService';
 import { Injectable } from '@angular/core';
+import { TabulatorData } from './TabulatorData';
 
 @Injectable()
 export class TableService extends ComponentService {
@@ -275,5 +276,45 @@ export class TableService extends ComponentService {
       }
     }
     return false;
+  }
+
+  convertTableDataToTabulator(tableData): TabulatorData {
+    const content = new TabulatorData();
+    content.columns = this.getTabulatorColumnsFromTable(tableData);
+    for (const [index, row] of tableData.entries()) {
+      if (index > 0) {
+        const rowData = this.getTabulatorRowDataFromTableRow(row, content.columns)
+        content.data.push(rowData.values);
+        content.editableCells[index-1] = rowData.editableCells;
+      }
+    }
+    return content;
+  }
+
+  private getTabulatorColumnsFromTable(tableData: any[]): any {
+    let columns = [];
+    const columnDefs = tableData[0];
+    columnDefs.forEach((columnDef, index) => {
+      columns.push({
+        title: columnDef.text,
+        field: `column-${index}`
+      });
+    });
+    return columns;
+  }
+
+  private getTabulatorRowDataFromTableRow(tableRow, columns): any {
+    let rowData = {
+      values: [],
+      editableCells: []
+    };
+    tableRow.forEach((cell, index) => {
+      const field = columns[index].field;
+      rowData.values[field] = cell.text;
+      if (cell.editable) {
+        rowData.editableCells.push(field);
+      }
+    });
+    return rowData;
   }
 }
