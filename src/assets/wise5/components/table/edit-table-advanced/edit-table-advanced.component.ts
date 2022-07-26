@@ -188,10 +188,9 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
     if (confirm($localize`Are you sure you want to overwrite the existing table?`)) {
       this.showImportingTableDisplay();
       this.setImportTableMessage($localize`Importing table...`);
-      const files = event.target.files;
-      const reader: any = new FileReader();
+      const reader: FileReader = new FileReader();
       reader.onload = () => {
-        const fileContent = reader.result;
+        const fileContent = reader.result as string;
         const tableContent = this.UtilService.CSVToArray(fileContent);
         const numCells = this.getNumCells(tableContent);
         if (numCells > this.MAX_ALLOWED_CELLS_IN_IMPORT) {
@@ -202,21 +201,17 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
           this.importTable(tableContent);
           this.setImportTableMessage($localize`Successfully imported table`);
         }
-        event.target.value = null;
         this.hideImportingTableDisplay();
       };
-      reader.readAsText(files[0]);
-    } else {
-      event.target.value = null;
+      reader.readAsText(event.target.files[0]);
     }
+    event.target.value = null;
   }
 
   getNumCells(tableContent: string[][]): number {
     let numCells = 0;
     for (const row of tableContent) {
-      for (const cell of row) {
-        numCells++;
-      }
+      numCells += row.length;
     }
     return numCells;
   }
@@ -234,11 +229,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
     for (const row of stringArray) {
       const tableRow = [];
       for (const cell of row) {
-        tableRow.push({
-          text: cell,
-          editable: true,
-          size: null
-        });
+        tableRow.push({ text: cell, editable: true, size: null });
       }
       table.push(tableRow);
     }
