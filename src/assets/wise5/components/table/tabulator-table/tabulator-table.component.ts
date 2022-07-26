@@ -11,6 +11,7 @@ import { TabulatorData } from '../TabulatorData';
 })
 export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   @Input() editableCells: any;
+  @Input() isDisabled: boolean;
   @Input() tabColumns: any[]; // see http://tabulator.info/docs/5.3/columns
   @Input() tabData: any[]; // see http://tabulator.info/docs/5.3/data
   @Input() tabOptions: any; // see http://tabulator.info/docs/5.3/options
@@ -61,7 +62,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     columns.forEach((column) => {
       column.editor = 'input';
       column.editable = (cell) => {
-        return this.isCellEditable(cell);
+        return this.isDisabled ? false : this.isCellEditable(cell);
       };
       column.formatter = (cell, formatterParams) => {
         return this.cellFormatter(cell, formatterParams);

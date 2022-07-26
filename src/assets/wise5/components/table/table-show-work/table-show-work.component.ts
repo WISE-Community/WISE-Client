@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
+import { TableService } from '../tableService';
+import { TabulatorData } from '../TabulatorData';
 
 @Component({
   selector: 'table-show-work',
@@ -19,8 +21,9 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
   minCellSize: number = 3;
   cellSizeToPixelsMultiplier: number = 10;
   noneText: string = $localize`(None)`;
+  tabulatorData: TabulatorData;
 
-  constructor(protected ProjectService: ProjectService) {
+  constructor(protected ProjectService: ProjectService, private TableService: TableService) {
     super(ProjectService);
   }
 
@@ -38,6 +41,7 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
       this.xColumnIndex = this.calculateXColumnIndex(this.componentState);
       this.columnNames = this.calculateColumnNames(this.componentState);
     }
+    this.tabulatorData = this.TableService.convertTableDataToTabulator(this.tableData);
   }
 
   injectCellWidths(tableData: any[]): any[] {
