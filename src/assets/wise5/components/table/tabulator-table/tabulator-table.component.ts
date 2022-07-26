@@ -10,11 +10,14 @@ import { TabulatorData } from '../TabulatorData';
   encapsulation: ViewEncapsulation.None
 })
 export class TabulatorTableComponent implements OnChanges, AfterViewInit {
-  @Input() tabData: TabulatorData;
+  @Input() editableCells: any;
+  @Input() tabColumns: any[]; // see http://tabulator.info/docs/5.3/columns
+  @Input() tabData: any[]; // see http://tabulator.info/docs/5.3/data
+  @Input() tabOptions: any; // see http://tabulator.info/docs/5.3/options
   @ViewChild('table', { static: false }) tableContainer: ElementRef;
 
-  editableCells: any;
   options: any;
+  table: Tabulator;
   tableEl = document.createElement('div');
   afterViewInitSubscription: Subscription;
   viewInit$ = new ReplaySubject();
@@ -29,35 +32,46 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.afterViewInitSubscription = this.viewInit$.subscribe(() => {
-      this.options = this.tabData.options;
-      this.options.columns = this.tabData.columns;
-      this.options.columns.forEach((column) => {
-        column.editor = 'input';
-        column.editable = editCheck;
-        column.formatter = cellFormatter;
-        column.sorter = 'alphanum';
-        column.sorterParams = {
-          alignEmptyValues: 'bottom',
-        }
-      });
-      this.options.data = this.tabData.data;
-      this.editableCells = this.tabData.editableCells;
-      this.drawTable();
-    });
-
-    const cellFormatter = (cell, formatterParams) => {
-      if (this.isCellEditable(cell)) {
-        cell.getElement().classList.add('tabulator-cell-editable');
+      if (this.table) {
+        this.processChanges(changes);
+      } else {
+        this.drawTable();
       }
-      return cell.getValue();
-    };
-
-    const editCheck = (cell) => {
-      return this.isCellEditable(cell);
-    };
+    });
   }
 
-  isCellEditable(cell) {
+  ngOnDestroy(): void {
+    this.afterViewInitSubscription.unsubscribe();
+  }
+
+  private drawTable(): void {
+    this.options = this.tabOptions;
+    this.options.columns = this.setupColumns(this.tabColumns);
+    this.options.data = this.tabData;
+    this.editableCells = this.editableCells;
+    this.table = new Tabulator(this.tableEl, this.options);
+    this.tableContainer.nativeElement.appendChild(this.tableEl);
+  }
+
+  private setupColumns(columns): any[] {
+    columns.forEach((column) => {
+      column.editor = 'input';
+      column.editable = (cell) => {
+        return this.isCellEditable(cell);
+      };
+      column.formatter = (cell, formatterParams) => {
+        return this.cellFormatter(cell, formatterParams);
+      };
+      column.sorter = 'alphanum';
+      column.sorterParams = {
+        alignEmptyValues: 'bottom'
+      };
+    });
+
+    return columns;
+  }
+
+  private isCellEditable(cell): boolean {
     const rowIndex = cell.getRow().getPosition();
     const field = cell.getColumn().getField();
     const row = this.editableCells[rowIndex];
@@ -68,13 +82,20 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  ngOnDestroy(): void {
-    this.afterViewInitSubscription.unsubscribe();
+  private cellFormatter(cell, formatterParams): any {
+    if (this.isCellEditable(cell)) {
+      cell.getElement().classList.add('tabulator-cell-editable');
+    }
+    return cell.getValue();
   }
 
-  private drawTable(): void {
-    new Tabulator(this.tableEl, this.options);
-    this.tableContainer.nativeElement.innerHtml = '';
-    this.tableContainer.nativeElement.appendChild(this.tableEl);
+  private processChanges(changes: SimpleChanges): void {
+    if (changes['tabColumns']) {
+      this.options.columns = this.setupColumns(this.tabColumns);
+      this.table.setColumns(this.tabColumns);
+    }
+    if (changes['tabData']) {
+      this.table.setData(this.tabData);
+    }
   }
 }
