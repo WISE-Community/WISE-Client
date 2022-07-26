@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReplaySubject, Subscription } from 'rxjs';
 import { Tabulator, EditModule, FormatModule, KeybindingsModule, SortModule } from 'tabulator-tables';
 import { TabulatorData } from '../TabulatorData';
@@ -14,6 +14,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   @Input() tabColumns: any[]; // see http://tabulator.info/docs/5.3/columns
   @Input() tabData: any[]; // see http://tabulator.info/docs/5.3/data
   @Input() tabOptions: any; // see http://tabulator.info/docs/5.3/options
+  @Output() cellChanged = new EventEmitter<Tabulator.CellComponent>();
   @ViewChild('table', { static: false }) tableContainer: ElementRef;
 
   options: any;
@@ -50,6 +51,9 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     this.options.data = this.tabData;
     this.editableCells = this.editableCells;
     this.table = new Tabulator(this.tableEl, this.options);
+    this.table.on('cellEdited', (cell) => {
+      this.cellEdited(cell);
+    });
     this.tableContainer.nativeElement.appendChild(this.tableEl);
   }
 
@@ -71,7 +75,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     return columns;
   }
 
-  private isCellEditable(cell): boolean {
+  private isCellEditable(cell: Tabulator.CellComponent): boolean {
     const rowIndex = cell.getRow().getPosition();
     const field = cell.getColumn().getField();
     const row = this.editableCells[rowIndex];
@@ -82,7 +86,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  private cellFormatter(cell, formatterParams): any {
+  private cellFormatter(cell: Tabulator.CellComponent, formatterParams: Tabulator.formatterParams): any {
     if (this.isCellEditable(cell)) {
       cell.getElement().classList.add('tabulator-cell-editable');
     }
@@ -97,5 +101,9 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     if (changes['tabData']) {
       this.table.setData(this.tabData);
     }
+  }
+
+  private cellEdited(cell: Tabulator.CellComponent) {
+    this.cellChanged.emit(cell);
   }
 }

@@ -1,5 +1,6 @@
 import * as html2canvas from 'html2canvas';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Tabulator } from 'tabulator-tables';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -1168,4 +1169,11 @@ export class TableStudent extends ComponentStudent {
   attachStudentAsset(studentAsset: any): void {
     // TODO: make sure the asset is a csv file then populate the csv data into the table
   }
+
+  tabulatorCellChanged(cell: Tabulator.CellComponent): void {
+    const columnIndex = parseInt(cell.getColumn().getField());
+    const rowIndex = cell.getRow().getPosition() + 1;
+    this.tableData[rowIndex][columnIndex].text = cell.getValue();
+    this.studentDataChanged();
+  };
 }
