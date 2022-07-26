@@ -3,6 +3,7 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { UtilService } from '../../../services/utilService';
 
 @Component({
   selector: 'edit-table-advanced',
@@ -10,18 +11,22 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   styleUrls: ['edit-table-advanced.component.scss']
 })
 export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
+  MAX_ALLOWED_CELLS_IN_IMPORT = 500;
+
   allowedConnectedComponentTypes = ['Embedded', 'Graph', 'Table'];
   columnNames: string[] = [];
   isDataExplorerScatterPlotEnabled: boolean;
   isDataExplorerLineGraphEnabled: boolean;
   isDataExplorerBarGraphEnabled: boolean;
+  isImportingTable: boolean = false;
   numColumns: number;
   importTableMessage: string;
 
   constructor(
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
-    protected TeacherProjectService: TeacherProjectService
+    protected TeacherProjectService: TeacherProjectService,
+    private UtilService: UtilService
   ) {
     super(NodeService, NotebookService, TeacherProjectService);
   }
@@ -181,13 +186,24 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
 
   importTableFile(event: any): void {
     if (confirm($localize`Are you sure you want to overwrite the existing table?`)) {
+      this.showImportingTableDisplay();
+      this.setImportTableMessage($localize`Importing table...`);
       const files = event.target.files;
       const reader: any = new FileReader();
       reader.onload = () => {
         const fileContent = reader.result;
-        this.importTable(fileContent);
+        const tableContent = this.UtilService.CSVToArray(fileContent);
+        const numCells = this.getNumCells(tableContent);
+        if (numCells > this.MAX_ALLOWED_CELLS_IN_IMPORT) {
+          this.setImportTableMessage(
+            $localize`Error: The table contains more than ${this.MAX_ALLOWED_CELLS_IN_IMPORT} cells`
+          );
+        } else {
+          this.importTable(tableContent);
+          this.setImportTableMessage($localize`Successfully imported table`);
+        }
         event.target.value = null;
-        this.importTableMessage = $localize`Successfully imported table`;
+        this.hideImportingTableDisplay();
       };
       reader.readAsText(files[0]);
     } else {
@@ -195,84 +211,22 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
     }
   }
 
-  importTable(fileContent: string): void {
-    const twoDimensionalStringArray = this.csvToArray(fileContent);
-    const tableData = this.convertToTableData(twoDimensionalStringArray);
+  getNumCells(tableContent: string[][]): number {
+    let numCells = 0;
+    for (const row of tableContent) {
+      for (const cell of row) {
+        numCells++;
+      }
+    }
+    return numCells;
+  }
+
+  importTable(tableContent: string[][]): void {
+    const tableData = this.convertToTableData(tableContent);
     this.authoringComponentContent.tableData = tableData;
     this.authoringComponentContent.numRows = this.getNumRows(tableData);
     this.authoringComponentContent.numColumns = this.getNumColumns(tableData);
     this.componentChanged();
-  }
-
-  /**
-   * This function was obtained from this blog post
-   * https://www.bennadel.com/blog/1504-ask-ben-parsing-csv-strings-with-javascript-exec-regular-expression-command.htm
-   */
-  csvToArray(strData: string, strDelimiter: string = ','): string[][] {
-    // Check to see if the delimiter is defined. If not,
-    // then default to comma.
-    strDelimiter = strDelimiter || ',';
-
-    // Create a regular expression to parse the CSV values.
-    var objPattern = new RegExp(
-      // Delimiters.
-      '(\\' +
-        strDelimiter +
-        '|\\r?\\n|\\r|^)' +
-        // Quoted fields.
-        '(?:"([^"]*(?:""[^"]*)*)"|' +
-        // Standard fields.
-        '([^"\\' +
-        strDelimiter +
-        '\\r\\n]*))',
-      'gi'
-    );
-
-    // Create an array to hold our data. Give the array
-    // a default empty first row.
-    var arrData = [[]];
-
-    // Create an array to hold our individual pattern
-    // matching groups.
-    var arrMatches = null;
-
-    // Keep looping over the regular expression matches
-    // until we can no longer find a match.
-    while ((arrMatches = objPattern.exec(strData))) {
-      // Get the delimiter that was found.
-      var strMatchedDelimiter = arrMatches[1];
-
-      // Check to see if the given delimiter has a length
-      // (is not the start of string) and if it matches
-      // field delimiter. If id does not, then we know
-      // that this delimiter is a row delimiter.
-      if (strMatchedDelimiter.length && strMatchedDelimiter !== strDelimiter) {
-        // Since we have reached a new row of data,
-        // add an empty row to our data array.
-        arrData.push([]);
-      }
-
-      var strMatchedValue;
-
-      // Now that we have our delimiter out of the way,
-      // let's check to see which kind of value we
-      // captured (quoted or unquoted).
-      if (arrMatches[2]) {
-        // We found a quoted value. When we capture
-        // this value, unescape any double quotes.
-        strMatchedValue = arrMatches[2].replace(new RegExp('""', 'g'), '"');
-      } else {
-        // We found a non-quoted value.
-        strMatchedValue = arrMatches[3];
-      }
-
-      // Now that we have our value string, let's add
-      // it to the data array.
-      arrData[arrData.length - 1].push(strMatchedValue);
-    }
-
-    // Return the parsed data.
-    return arrData;
   }
 
   convertToTableData(stringArray: string[][]): any[][] {
@@ -303,5 +257,17 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
       }
     }
     return maxColumns;
+  }
+
+  showImportingTableDisplay(): void {
+    this.isImportingTable = true;
+  }
+
+  hideImportingTableDisplay(): void {
+    this.isImportingTable = false;
+  }
+
+  setImportTableMessage(message: string): void {
+    this.importTableMessage = message;
   }
 }

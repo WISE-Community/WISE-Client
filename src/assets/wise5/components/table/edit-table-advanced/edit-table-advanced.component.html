@@ -150,6 +150,11 @@
       i18n-matTooltip>
     help
   </mat-icon>
+  <mat-progress-spinner *ngIf="isImportingTable"
+      class="import-table-spinner"
+      mode="indeterminate"
+      [diameter]="20">
+  </mat-progress-spinner>
   <div class="import-table-message">{{importTableMessage}}</div>
 </div>
 <div *ngIf="isNotebookEnabled()">

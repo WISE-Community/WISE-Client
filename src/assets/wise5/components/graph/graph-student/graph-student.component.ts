@@ -1731,7 +1731,7 @@ export class GraphStudent extends ComponentStudent {
    */
   attachStudentAsset(studentAsset) {
     this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
-      this.StudentAssetService.getAssetContent(copiedAsset).then((assetContent) => {
+      this.StudentAssetService.getAssetContent(copiedAsset).then((assetContent: string) => {
         const rowData = this.UtilService.CSVToArray(assetContent, ',');
         const params = {
           skipFirstRow: true,
