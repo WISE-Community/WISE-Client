@@ -23,6 +23,14 @@ export class VLEProjectService extends ProjectService {
     return false;
   }
 
+  private getConnectedComponentsByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
+    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    if (component != null && component.connectedComponents != null) {
+      return component.connectedComponents;
+    }
+    return [];
+  }
+
   isMatchingConnectedComponent(connectedComponent, id) {
     return connectedComponent.id === id || connectedComponent.componentId === id;
   }

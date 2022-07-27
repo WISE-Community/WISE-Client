@@ -99,11 +99,6 @@ export class ProjectService {
     return name ? name : 'A WISE Project (No name)';
   }
 
-  setProjectTitle(projectTitle) {
-    const metadata = this.getProjectMetadata();
-    metadata.title = projectTitle;
-  }
-
   getProjectMetadata() {
     return this.metadata ? this.metadata : {};
   }
@@ -124,15 +119,6 @@ export class ProjectService {
     return this.groupNodes;
   }
 
-  isNode(id) {
-    for (const node of this.getNodes()) {
-      if (node.id === id) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   addNode(node) {
     const existingNodes = this.project.nodes;
     let replaced = false;
@@ -150,21 +136,21 @@ export class ProjectService {
     }
   }
 
-  addApplicationNode(node) {
+  private addApplicationNode(node: any): void {
     const applicationNodes = this.applicationNodes;
     if (applicationNodes != null) {
       applicationNodes.push(node);
     }
   }
 
-  addGroupNode(node) {
+  private addGroupNode(node: any): void {
     const groupNodes = this.groupNodes;
     if (node != null && groupNodes != null) {
       groupNodes.push(node);
     }
   }
 
-  addNodeToGroupNode(groupId, nodeId) {
+  private addNodeToGroupNode(groupId: string, nodeId: string): void {
     if (groupId != null && nodeId != null) {
       const group = this.getNodeById(groupId);
       if (group != null) {
@@ -274,13 +260,13 @@ export class ProjectService {
     this.broadcastProjectChanged();
   }
 
-  instantiateDefaults() {
+  instantiateDefaults(): void {
     this.project.nodes = this.project.nodes ? this.project.nodes : [];
     this.project.inactiveNodes = this.project.inactiveNodes ? this.project.inactiveNodes : [];
     this.project.constraints = this.project.constraints ? this.project.constraints : [];
   }
 
-  calculateNodeOrderOfProject() {
+  private calculateNodeOrderOfProject(): void {
     this.calculateNodeOrder(this.rootNode);
   }
 
@@ -334,7 +320,7 @@ export class ProjectService {
    * @param stepNumber the current step number
    * @param nodes the array of nodes
    */
-  getNodeOrderOfProjectHelper(project, node, idToOrder, stepNumber, nodes) {
+  private getNodeOrderOfProjectHelper(project, node, idToOrder, stepNumber, nodes): any {
     /*
      * Create the item that we will add to the idToOrder mapping.
      * The 'order' field determines how the project nodes are displayed
@@ -370,23 +356,6 @@ export class ProjectService {
   }
 
   /**
-   * Returns the position in the project for the node with the given id. Returns null if no node
-   * with id exists.
-   * @param id a node id
-   * @return string position of the given node id in the project
-   */
-  getPositionById(id) {
-    for (let i = 0; i < this.rootNode.ids.length; i++) {
-      const node = this.getNodeById(this.rootNode.ids[i]);
-      const path = this.getPathToNode(node, i + 1, id);
-      if (path != undefined && path != null) {
-        return path;
-      }
-    }
-    return null;
-  }
-
-  /**
    * Returns the order of the given node id in the project. Returns null if no node with id exists.
    * @param id String node id
    * @return Number order of the given node id in the project
@@ -398,27 +367,6 @@ export class ProjectService {
     return null;
   }
 
-  /**
-   * Returns the id of the node with the given order in the project. Returns null if no order with
-   * node exists.
-   * @param order Number
-   * @return Number node id of the given order in the project
-   */
-  getIdByOrder(order) {
-    let nodeId = null;
-    for (let id in this.idToOrder) {
-      if (this.idToOrder[id].order === order) {
-        if (this.isGroupNode(id) && order > 1) {
-          nodeId = this.getIdByOrder(order - 1);
-        } else {
-          nodeId = id;
-        }
-        break;
-      }
-    }
-    return nodeId;
-  }
-
   getGroupNodesIdToOrder() {
     const idToOrder = {};
     const onlyGroupNodes = Object.entries(this.idToOrder).filter((item) => {
@@ -428,31 +376,6 @@ export class ProjectService {
       idToOrder[key] = value;
     }
     return idToOrder;
-  }
-
-  /**
-   * Recursively searches for the given node id from the point of the given node down and returns
-   * the path number (position)
-   * @param node a node to start searching down
-   * @param path the position of the given node
-   * @param id the node id to search for
-   * @return string path of the given node id in the project
-   */
-  getPathToNode(node, path, id) {
-    if (node.id === id) {
-      return path + '';
-    } else if (node.type === 'group') {
-      let num = 0;
-      for (let nodeId of node.ids) {
-        if (this.nodeIdsInAnyBranch.indexOf(nodeId) === -1) {
-          ++num;
-          const pos = this.getPathToNode(this.getNodeById(nodeId), path + '.' + num, id);
-          if (pos) {
-            return pos;
-          }
-        }
-      }
-    }
   }
 
   getNodePositionById(id) {
@@ -741,7 +664,7 @@ export class ProjectService {
     return null;
   }
 
-  isNodeDirectChildOfGroup(node, group) {
+  private isNodeDirectChildOfGroup(node: any, group: any): boolean {
     if (node != null && group != null) {
       const nodeId = node.id;
       const groupIds = group.ids;
@@ -808,28 +731,6 @@ export class ProjectService {
     return constraints;
   }
 
-  getConstraintsOnNode(nodeId) {
-    let node = this.getNodeById(nodeId);
-    return node.constraints;
-  }
-
-  addConstraintToNode(node, constraint) {
-    if (node.constraints == null) {
-      node.constraints = [];
-    }
-    node.constraints.push(constraint);
-  }
-
-  /**
-   * Check if a node has constraints.
-   * @param nodeId The node id of the node.
-   * @return true iff the node has constraints authored on it.
-   */
-  nodeHasConstraint(nodeId) {
-    let constraints = this.getConstraintsOnNode(nodeId);
-    return constraints.length > 0;
-  }
-
   /**
    * Order the constraints so that they show up in the same order as in the
    * project.
@@ -849,7 +750,7 @@ export class ProjectService {
    * @return A comparator that orders constraint objects in the order in which
    * the target ids show up in the project.
    */
-  constraintsComparatorGenerator(orderedNodeIds) {
+  private constraintsComparatorGenerator(orderedNodeIds: string[]): any {
     return function (constraintA, constraintB) {
       let constraintAIndex = orderedNodeIds.indexOf(constraintA.targetId);
       let constraintBIndex = orderedNodeIds.indexOf(constraintB.targetId);
@@ -868,7 +769,7 @@ export class ProjectService {
    * @param constraint the constraint that might affect the node
    * @returns whether the node is affected by the constraint
    */
-  isNodeAffectedByConstraint(node, constraint) {
+  private isNodeAffectedByConstraint(node: any, constraint: any): boolean {
     const cachedResult = this.getCachedIsNodeAffectedByConstraintResult(node.id, constraint.id);
     if (cachedResult != null) {
       return cachedResult;
@@ -929,7 +830,7 @@ export class ProjectService {
     return false;
   }
 
-  getOrCalculateAllPaths(): string[] {
+  private getOrCalculateAllPaths(): string[] {
     if (this.allPaths.length === 0) {
       this.allPaths = this.getAllPaths([], this.getStartNodeId(), true);
     }
@@ -941,7 +842,7 @@ export class ProjectService {
    * @param nodeId The node id of a step or group.
    * @returns {boolean} True iff nodeId comes after groupId.
    */
-  isNodeAfterGroup(groupId, nodeId) {
+  private isNodeAfterGroup(groupId: string, nodeId: string): boolean {
     const transitions = this.getTransitionsByFromNodeId(groupId);
     try {
       for (let transition of transitions) {
@@ -982,16 +883,6 @@ export class ProjectService {
   }
 
   /**
-   * Get all the node ids from steps (not groups)
-   * @returns an array with all the node ids
-   */
-  getNodeIds() {
-    return this.applicationNodes.map((node) => {
-      return node.id;
-    });
-  }
-
-  /**
    * Get nodes that have a transition to the given node id
    * @param toNodeId the node id
    * @returns an array of node objects that transition to the
@@ -1014,10 +905,6 @@ export class ProjectService {
       }
     }
     return nodesByToNodeId;
-  }
-
-  getActiveNodes() {
-    return this.project.nodes;
   }
 
   getInactiveNodes() {
@@ -1057,23 +944,6 @@ export class ProjectService {
   }
 
   /**
-   * Get the group nodes that point to a given node id
-   * @param toNodeId
-   */
-  getGroupNodesByToNodeId(toNodeId) {
-    const groupsThatPointToNodeId = [];
-    if (toNodeId != null) {
-      const groups = this.getGroups();
-      for (let group of groups) {
-        if (this.nodeHasTransitionToNodeId(group, toNodeId)) {
-          groupsThatPointToNodeId.push(group);
-        }
-      }
-    }
-    return groupsThatPointToNodeId;
-  }
-
-  /**
    * Retrieves the project JSON from Config.projectURL and returns it.
    * If Config.projectURL is undefined, returns null.
    */
@@ -1089,26 +959,6 @@ export class ProjectService {
       .then((projectJSON) => {
         this.setProject(projectJSON);
         return projectJSON;
-      });
-  }
-
-  /**
-   * Retrieve the project JSON
-   * @param projectId retrieve the project JSON with this id
-   * @return a promise to return the project JSON
-   */
-  retrieveProjectById(projectId) {
-    return this.http
-      .get(`/api/author/config/${projectId}`)
-      .toPromise()
-      .then((configJSON: any) => {
-        return this.http
-          .get(configJSON.projectURL)
-          .toPromise()
-          .then((projectJSON: any) => {
-            projectJSON.previewProjectURL = configJSON.previewProjectURL;
-            return projectJSON;
-          });
       });
   }
 
@@ -1501,7 +1351,7 @@ export class ProjectService {
    * @param paths an array of paths. each path is an array of node ids
    * @param pathIndex the path to remove from
    */
-  removeNodeIdFromPath(nodeId, paths, pathIndex) {
+  private removeNodeIdFromPath(nodeId: string, paths: any, pathIndex: any): void {
     if (nodeId != null && paths != null && pathIndex != null) {
       const path = paths[pathIndex];
       if (path != null) {
@@ -1538,7 +1388,7 @@ export class ProjectService {
    * @param paths an array of paths. each path is an array of node ids
    * @return an array of paths that contain the given node id
    */
-  getPathsThatContainNodeId(nodeId, paths = []) {
+  private getPathsThatContainNodeId(nodeId: string, paths = []) {
     const pathsThatContainNodeId = [];
     for (const path of paths) {
       if (path.indexOf(nodeId) !== -1) {
@@ -1554,7 +1404,7 @@ export class ProjectService {
    * @param paths an array of paths. each path is an array of node ids
    * @return the index of the path that is not empty
    */
-  getNonEmptyPathIndex(paths) {
+  private getNonEmptyPathIndex(paths: any): any {
     if (paths != null) {
       for (let p = 0; p < paths.length; p++) {
         const path = paths[p];
@@ -1580,14 +1430,6 @@ export class ProjectService {
       }
     }
     return null;
-  }
-
-  getConnectedComponentsByNodeIdAndComponentId(nodeId, componentId) {
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
-    if (component != null && component.connectedComponents != null) {
-      return component.connectedComponents;
-    }
-    return [];
   }
 
   /**
@@ -1668,43 +1510,6 @@ export class ProjectService {
   }
 
   /**
-   * Determine if a node id is a direct child of a group
-   * @param nodeId the node id
-   * @param groupId the group id
-   */
-  isNodeInGroup(nodeId, groupId) {
-    const group = this.getNodeById(groupId);
-    return group.ids.indexOf(nodeId) != -1;
-  }
-
-  /**
-   * Get the first leaf node by traversing all the start ids
-   * until a leaf node id is found
-   */
-  getFirstLeafNodeId() {
-    let firstLeafNodeId = null;
-    const startGroupId = this.project.startGroupId;
-    let node = this.getNodeById(startGroupId);
-    let done = false;
-
-    // loop until we have found a leaf node id or something went wrong
-    while (!done) {
-      if (node == null) {
-        done = true;
-      } else if (this.isGroupNode(node.id)) {
-        firstLeafNodeId = node.id;
-        node = this.getNodeById(node.startId);
-      } else if (this.isApplicationNode(node.id)) {
-        firstLeafNodeId = node.id;
-        done = true;
-      } else {
-        done = true;
-      }
-    }
-    return firstLeafNodeId;
-  }
-
-  /**
    * Get the message that describes how to disable the constraint
    * @param nodeId the node the student is trying to go to
    * @param constraint the constraint that is preventing the student
@@ -1742,58 +1547,6 @@ export class ProjectService {
       }
     }
     return message;
-  }
-
-  /**
-   * Get the human readable description of the constraint.
-   * @param constraint The constraint object.
-   * @returns A human readable text string that describes the constraint.
-   * example
-   * 'All steps after this one will not be visitable until the student completes
-   * "3.7 Revise Your Bowls Explanation"'
-   */
-  getConstraintDescription(constraint) {
-    let message = '';
-    for (const singleRemovalCriteria of constraint.removalCriteria) {
-      if (message != '') {
-        // this constraint has multiple removal criteria
-        if (constraint.removalConditional === 'any') {
-          message += ' or ';
-        } else if (constraint.removalConditional === 'all') {
-          message += ' and ';
-        }
-      }
-      message += this.getCriteriaMessage(singleRemovalCriteria);
-    }
-    return this.getActionMessage(constraint.action) + message;
-  }
-
-  /**
-   * Get the constraint action as human readable text.
-   * @param action A constraint action.
-   * @return A human readable text string that describes the action
-   * example
-   * 'All steps after this one will not be visitable until '
-   */
-  getActionMessage(action) {
-    if (action === 'makeAllNodesAfterThisNotVisitable') {
-      return $localize`All steps after this one will not be visitable until `;
-    }
-    if (action === 'makeAllNodesAfterThisNotVisible') {
-      return $localize`All steps after this one will not be visible until `;
-    }
-    if (action === 'makeAllOtherNodesNotVisitable') {
-      return $localize`All other steps will not be visitable until `;
-    }
-    if (action === 'makeAllOtherNodesNotVisible') {
-      return $localize`All other steps will not be visible until `;
-    }
-    if (action === 'makeThisNodeNotVisitable') {
-      return $localize`This step will not be visitable until `;
-    }
-    if (action === 'makeThisNodeNotVisible') {
-      return $localize`This step will not be visible until `;
-    }
   }
 
   /**
@@ -2033,47 +1786,6 @@ export class ProjectService {
   getComponentType(nodeId: string, componentId: string): string {
     const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
     return component.type;
-  }
-
-  getProjectRubric() {
-    return this.project.rubric;
-  }
-
-  /**
-   * Check if a node is a branch point. A branch point is a node with more
-   * than one transition.
-   * @param nodeId the node id
-   * @return whether the node is a branch point
-   */
-  isBranchPoint(nodeId) {
-    const transitions = this.getTransitionsByFromNodeId(nodeId);
-    return transitions != null && transitions.length > 1;
-  }
-
-  /**
-   * Check if the node is in any branch path
-   * @param nodeId the node id of the node
-   * @return whether the node is in any branch path
-   */
-  isNodeInAnyBranchPath(nodeId) {
-    let result = false;
-    if (this.nodeIdToIsInBranchPath[nodeId] == null) {
-      /*
-       * we have not calculated whether the node id is in a branch path
-       * before so we will now
-       */
-      result = this.nodeIdsInAnyBranch.indexOf(nodeId) !== -1;
-
-      // remember the result for this node id
-      this.nodeIdToIsInBranchPath[nodeId] = result;
-    } else {
-      /*
-       * we have calculated whether the node id is in a branch path
-       * before
-       */
-      result = this.nodeIdToIsInBranchPath[nodeId];
-    }
-    return result;
   }
 
   /**
@@ -2489,34 +2201,6 @@ export class ProjectService {
   }
 
   /**
-   * Get the total number of rubrics (step + components) for the given nodeId
-   * @param nodeId the node id
-   * @return Number of rubrics for the node
-   */
-  getNumberOfRubricsByNodeId(nodeId) {
-    let numRubrics = 0;
-    const node = this.getNodeById(nodeId);
-    if (node) {
-      const nodeRubric = node.rubric;
-      if (nodeRubric != null && nodeRubric != '') {
-        numRubrics++;
-      }
-      const components = node.components;
-      if (components && components.length) {
-        for (let component of components) {
-          if (component) {
-            const componentRubric = component.rubric;
-            if (componentRubric != null && componentRubric != '') {
-              numRubrics++;
-            }
-          }
-        }
-      }
-    }
-    return numRubrics;
-  }
-
-  /**
    * Remember the result for whether the node is affected by the constraint
    * @param nodeId the node id
    * @param constraintId the constraint id
@@ -2536,27 +2220,6 @@ export class ProjectService {
    */
   getCachedIsNodeAffectedByConstraintResult(nodeId, constraintId) {
     return this.isNodeAffectedByConstraintResult[nodeId + '-' + constraintId];
-  }
-
-  /**
-   * Get the id to node mappings.
-   * @return An object the keys as node ids and the values as nodes.
-   */
-  getIdToNode() {
-    return this.idToNode;
-  }
-
-  /**
-   * Check if a node has rubrics.
-   * @param nodeId The node id of the node.
-   * @return Whether the node has rubrics authored on it.
-   */
-  nodeHasRubric(nodeId) {
-    let numberOfRubrics = this.getNumberOfRubricsByNodeId(nodeId);
-    if (numberOfRubrics > 0) {
-      return true;
-    }
-    return false;
   }
 
   getSpaces() {
@@ -2614,8 +2277,6 @@ export class ProjectService {
       }
     }
   }
-
-  replaceComponent(nodeId, componentId, component) {}
 
   retrieveScript(scriptFilename) {
     return Promise.resolve('');
@@ -2704,10 +2365,6 @@ export class ProjectService {
 
   getPeerGrouping(tag: string): PeerGrouping {
     return this.getPeerGroupings().find((peerGrouping: PeerGrouping) => peerGrouping.tag === tag);
-  }
-
-  getApplicationNodes(): any[] {
-    return this.applicationNodes;
   }
 
   getProjectRootNode() {
