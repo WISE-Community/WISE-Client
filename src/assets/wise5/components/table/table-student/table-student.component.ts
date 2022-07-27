@@ -326,10 +326,7 @@ export class TableStudent extends ComponentStudent {
        */
       this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
     }
-    this.tabulatorData = this.TableService.convertTableDataToTabulator(
-      this.tableData,
-      this.componentContent.globalCellSize
-    );
+    this.setTabulatorData();
   }
 
   /**
@@ -358,6 +355,7 @@ export class TableStudent extends ComponentStudent {
           this.setDataExplorerDataToColumn();
         }
       }
+      this.setTabulatorData();
       this.studentDataChanged();
     }
   }
@@ -930,6 +928,7 @@ export class TableStudent extends ComponentStudent {
       }
     }
     if (isStudentDataChanged) {
+      this.setTabulatorData();
       this.studentDataChanged();
     }
   }
@@ -1171,6 +1170,13 @@ export class TableStudent extends ComponentStudent {
 
   attachStudentAsset(studentAsset: any): void {
     // TODO: make sure the asset is a csv file then populate the csv data into the table
+  }
+
+  private setTabulatorData(): void {
+    this.tabulatorData = this.TableService.convertTableDataToTabulator(
+      this.tableData,
+      this.componentContent.globalCellSize
+    );
   }
 
   tabulatorCellChanged(cell: Tabulator.CellComponent): void {
