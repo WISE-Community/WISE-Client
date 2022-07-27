@@ -15601,7 +15601,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>(None)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d56d67fc38809e23fcba86a9acc09bd9e40e8b2a" datatype="html">

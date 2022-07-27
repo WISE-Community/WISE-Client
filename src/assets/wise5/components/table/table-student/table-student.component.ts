@@ -326,7 +326,10 @@ export class TableStudent extends ComponentStudent {
        */
       this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
     }
-    this.tabulatorData = this.TableService.convertTableDataToTabulator(this.tableData);
+    this.tabulatorData = this.TableService.convertTableDataToTabulator(
+      this.tableData,
+      this.componentContent.globalCellSize
+    );
   }
 
   /**

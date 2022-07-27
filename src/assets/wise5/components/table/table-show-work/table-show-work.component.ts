@@ -18,8 +18,6 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
   dataExplorerYAxisLabels: string[];
   xColumnIndex: number;
   columnNames: string[] = [];
-  minCellSize: number = 3;
-  cellSizeToPixelsMultiplier: number = 10;
   noneText: string = $localize`(None)`;
   tabulatorData: TabulatorData;
 
@@ -31,7 +29,6 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
     super.ngOnInit();
     const studentData = this.componentState.studentData;
     this.tableData = studentData.tableData;
-    this.injectCellWidths(this.tableData);
     if (studentData.isDataExplorerEnabled) {
       this.dataExplorerGraphType = studentData.dataExplorerGraphType;
       this.dataExplorerSeries = studentData.dataExplorerSeries;
@@ -41,27 +38,10 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
       this.xColumnIndex = this.calculateXColumnIndex(this.componentState);
       this.columnNames = this.calculateColumnNames(this.componentState);
     }
-    this.tabulatorData = this.TableService.convertTableDataToTabulator(this.tableData);
-  }
-
-  injectCellWidths(tableData: any[]): any[] {
-    tableData.forEach((row: any) => {
-      row.forEach((cell: any) => {
-        cell.width = this.calculateCellWidth(cell);
-      });
-    });
-    return tableData;
-  }
-
-  calculateCellWidth(cell: any): number {
-    let size = this.componentContent.globalCellSize;
-    if (cell.size != null) {
-      size = cell.size;
-    }
-    if (size < this.minCellSize) {
-      size = this.minCellSize;
-    }
-    return size * this.cellSizeToPixelsMultiplier;
+    this.tabulatorData = this.TableService.convertTableDataToTabulator(
+      this.tableData,
+      this.componentContent.globalCellSize
+    );
   }
 
   calculateXColumnIndex(componentState: any): number {
