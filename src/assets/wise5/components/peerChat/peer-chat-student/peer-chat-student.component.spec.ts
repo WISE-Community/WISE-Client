@@ -30,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { PeerChatModule } from '../peer-chat.module';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
+import { PauseScreenService } from '../../../services/pauseScreenService';
 
 export class MockNodeService {
   createNewComponentState() {
@@ -141,6 +142,7 @@ describe('PeerChatStudentComponent', () => {
         { provide: NodeService, useClass: MockNodeService },
         NotebookService,
         NotificationService,
+        PauseScreenService,
         PeerChatService,
         PeerGroupService,
         ProjectService,
