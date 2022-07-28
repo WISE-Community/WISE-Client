@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -117,7 +117,6 @@ export class GraphStudent extends ComponentStudent {
       this.isSubmitButtonDisabled = true;
     }
     this.disableComponentIfNecessary();
-    this.initializeDeleteKeyPressedListener();
     this.chartCallback = this.createChartCallback();
     this.drawGraph().then(() => {
       this.broadcastDoneRenderingComponent();
@@ -225,14 +224,6 @@ export class GraphStudent extends ComponentStudent {
     } else if (componentType === 'Animation') {
       this.handleAnimationConnectedComponentStudentDataChanged(connectedComponent, componentState);
     }
-  }
-
-  initializeDeleteKeyPressedListener() {
-    this.subscriptions.add(
-      this.StudentDataService.deleteKeyPressed$.subscribe(() => {
-        this.handleDeleteKeyPressed();
-      })
-    );
   }
 
   fileUploadChanged(event) {
@@ -1876,7 +1867,8 @@ export class GraphStudent extends ComponentStudent {
     return null;
   }
 
-  handleDeleteKeyPressed() {
+  @HostListener('document:keydown.backspace')
+  handleDeleteKeyPressed(): void {
     const series = this.activeSeries;
     if (this.canEdit(series)) {
       const selectedPoints = this.getSelectedPoints();
