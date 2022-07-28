@@ -9,8 +9,24 @@ let service: BranchService;
 let configService: ConfigService;
 
 let paths: string[][];
-const expectedBranches = [new Branch('node1', [['node2a'], ['node2b']], 'node3')];
 const branchesCache = [new Branch('node100', [['node200a'], ['node200b']], 'node400')];
+const expectedBranches = [new Branch('node1', [['node2a'], ['node2b']], 'node3')];
+const expectedBranchesWithNoBranch = [];
+const expectedBranchesWithNoMergePoint = [
+  new Branch(
+    'node1',
+    [
+      ['node2a', 'node3a', 'node4a'],
+      ['node2b', 'node3b', 'node4b']
+    ],
+    null
+  )
+];
+const pathsWithNoBranch = [['node1', 'node2', 'node3', 'node4']];
+const pathsWithNoMergePoint = [
+  ['node1', 'node2a', 'node3a', 'node4a'],
+  ['node1', 'node2b', 'node3b', 'node4b']
+];
 
 describe('BranchService', () => {
   beforeEach(() => {
@@ -29,8 +45,28 @@ describe('BranchService', () => {
 
 function getBranches() {
   describe('getBranches()', () => {
+    getBranches_AnyMode();
     getBranches_AuthorMode();
     getBranches_NonAuthorMode();
+  });
+}
+
+function getBranches_AnyMode() {
+  describe('in any mode', () => {
+    getBranches_AnyMode_CalculateAndReturnBranchesWhenThereAreNoBranches();
+    getBranches_AnyMode_CalculateAndReturnBranchesWhenThereIsNoMergeStep();
+  });
+}
+
+function getBranches_AnyMode_CalculateAndReturnBranchesWhenThereAreNoBranches() {
+  it('should calculate and return branches when there are no branches', () => {
+    expect(service.getBranches(pathsWithNoBranch)).toEqual(expectedBranchesWithNoBranch);
+  });
+}
+
+function getBranches_AnyMode_CalculateAndReturnBranchesWhenThereIsNoMergeStep() {
+  it('should calculate and return branches when there is no merge step', () => {
+    expect(service.getBranches(pathsWithNoMergePoint)).toEqual(expectedBranchesWithNoMergePoint);
   });
 }
 
