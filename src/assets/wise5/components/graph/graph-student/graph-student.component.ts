@@ -46,7 +46,6 @@ export class GraphStudent extends ComponentStudent {
   initialComponentState: any = null;
   isLegendEnabled: boolean = true;
   isLoaded: boolean = false;
-  isResetGraphButtonVisible: boolean = false;
   isResetSeriesButtonVisible: boolean = false;
   isSelectSeriesVisible: boolean = false;
   lastDropTime: number;
@@ -1279,21 +1278,6 @@ export class GraphStudent extends ComponentStudent {
     this.setActiveSeries(series);
   }
 
-  resetGraph() {
-    this.setSeries(this.UtilService.makeCopyOfJSONObject(this.componentContent.series));
-    if (this.componentContent.xAxis != null) {
-      this.setXAxis(this.componentContent.xAxis);
-    }
-    if (this.componentContent.yAxis != null) {
-      this.setYAxis(this.componentContent.yAxis);
-    }
-    // set the active series to null so that the default series will become selected later
-    this.setActiveSeries(null);
-    this.backgroundImage = this.componentContent.backgroundImage;
-    this.addNextComponentStateToUndoStack = true;
-    this.studentDataChanged();
-  }
-
   resetSeries() {
     let confirmMessage = '';
     const seriesName = this.activeSeries.name;
@@ -1515,14 +1499,6 @@ export class GraphStudent extends ComponentStudent {
     } else {
       deferred.resolve(componentState);
     }
-  }
-
-  showResetGraphButton() {
-    return this.isResetGraphButtonVisible === true;
-  }
-
-  showResetSeriesButton() {
-    return this.isResetSeriesButtonVisible === true;
   }
 
   getSeriesIndex(series) {

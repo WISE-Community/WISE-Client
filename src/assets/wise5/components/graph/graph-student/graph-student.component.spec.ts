@@ -133,7 +133,6 @@ describe('GraphStudentComponent', () => {
   readCSVIntoActiveSeries();
   readTheConnectedComponentField();
   removeDefaultTrialIfNecessary();
-  resetGraph();
   resetSeriesHelper();
   setActiveTrialAndSeriesByTrialIdsToShow();
   setSeriesYIndex();
@@ -507,28 +506,6 @@ function handleDeleteKeyPressed() {
         [0, 0],
         [20, 40]
       ]);
-    });
-  });
-}
-
-function resetGraph() {
-  describe('resetGraph', () => {
-    it('should reset graph', () => {
-      component.series = [
-        {
-          data: [
-            [0, 0],
-            [10, 20],
-            [20, 40]
-          ]
-        }
-      ];
-      component.xAxis.max = 200;
-      component.yAxis.max = 50;
-      component.resetGraph();
-      expect(component.series[0].data).toEqual([]);
-      expect(component.xAxis.max).toEqual(100);
-      expect(component.yAxis.max).toEqual(100);
     });
   });
 }
