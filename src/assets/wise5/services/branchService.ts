@@ -91,26 +91,22 @@ export class BranchService {
    */
   private extractPathsUpToNodeId(paths: string[][], nodeId: string): string[][] {
     const extractedPaths = [];
-    if (paths != null) {
-      for (let path of paths) {
-        if (path != null) {
-          let index = path.indexOf(nodeId);
-          if (index == -1) {
-            /*
-             * the node id is not in the path so we will
-             * extract up to the end of the path
-             */
-            index = path.length;
-          }
-
-          /*
-           * get the path up to the node id index. this does
-           * not modify the path array.
-           */
-          const extractedPath = path.slice(0, index);
-          extractedPaths.push(extractedPath);
-        }
+    for (let path of paths) {
+      let index = path.indexOf(nodeId);
+      if (index == -1) {
+        /*
+         * the node id is not in the path so we will
+         * extract up to the end of the path
+         */
+        index = path.length;
       }
+
+      /*
+       * get the path up to the node id index. this does
+       * not modify the path array.
+       */
+      const extractedPath = path.slice(0, index);
+      extractedPaths.push(extractedPath);
     }
     return extractedPaths;
   }
@@ -122,49 +118,28 @@ export class BranchService {
    */
   private removeDuplicatePaths(paths: string[][]): string[][] {
     const uniquePaths = [];
-    if (paths != null) {
-      for (let path of paths) {
-        let isPathInUniquePaths = false;
-        for (let uniquePath of uniquePaths) {
-          if (this.pathsEqual(path, uniquePath)) {
-            isPathInUniquePaths = true;
-          }
+    for (const path of paths) {
+      let isPathInUniquePaths = false;
+      for (const uniquePath of uniquePaths) {
+        if (this.arrayEquals(path, uniquePath)) {
+          isPathInUniquePaths = true;
         }
-
-        if (!isPathInUniquePaths) {
-          // the path is not equal to any paths in the unique
-          // paths array so we will add it to the unique paths array
-          uniquePaths.push(path);
-        }
+      }
+      if (!isPathInUniquePaths) {
+        uniquePaths.push(path);
       }
     }
     return uniquePaths;
   }
 
   /**
-   * Check if two paths are equal
-   * @param path1 an array of node ids
-   * @param path2 an array of node ids
-   * @return whether the two paths contain the same node ids
-   * in the same order
+   * Check if two arrays are equal
+   * @param a an array of strings
+   * @param b an array of strings
+   * @return whether the two arrays contain the strings in the same order
    */
-  private pathsEqual(path1: string[], path2: string[]): boolean {
-    let result = false;
-    if (path1 != null && path2 != null) {
-      if (path1.length === path2.length) {
-        result = true;
-
-        for (let x = 0; x < path1.length; x++) {
-          const path1NodeId = path1[x];
-          const path2NodeId = path2[x];
-          if (path1NodeId !== path2NodeId) {
-            result = false;
-            break;
-          }
-        }
-      }
-    }
-    return result;
+  private arrayEquals(a: string[], b: string[]): boolean {
+    return a.length === b.length && a.every((val, index) => val === b[index]);
   }
 
   /**
@@ -175,27 +150,23 @@ export class BranchService {
    * @param nodeId the node id to trim up to
    */
   private trimPathsUpToNodeId(paths: string[][], nodeId: string): void {
-    if (paths != null) {
-      for (let path of paths) {
-        if (path != null) {
-          let index = path.indexOf(nodeId);
+    for (let path of paths) {
+      let index = path.indexOf(nodeId);
 
-          if (index == -1) {
-            /*
-             * the node id is not in the path so we will
-             * trim the path to the end which will make
-             * the path empty
-             */
-            index = path.length;
-          }
-
-          /*
-           * trim the path up to the node id index. this will
-           * modify the path array.
-           */
-          path.splice(0, index);
-        }
+      if (index == -1) {
+        /*
+         * the node id is not in the path so we will
+         * trim the path to the end which will make
+         * the path empty
+         */
+        index = path.length;
       }
+
+      /*
+       * trim the path up to the node id index. this will
+       * modify the path array.
+       */
+      path.splice(0, index);
     }
   }
 
@@ -207,18 +178,16 @@ export class BranchService {
    */
   private findNextCommonNodeId(paths: string[][]): string {
     let nextCommonNodeId = null;
-    if (paths != null) {
-      if (paths.length > 0) {
-        const path = paths[0];
-        for (let tempNodeId of path) {
-          if (this.allPathsContainNodeId(paths, tempNodeId)) {
-            /*
-             * the node id is in all the paths so we have found
-             * what we were looking for
-             */
-            nextCommonNodeId = tempNodeId;
-            break;
-          }
+    if (paths.length > 0) {
+      const path = paths[0];
+      for (const nodeId of path) {
+        if (this.allPathsContainNodeId(paths, nodeId)) {
+          /*
+           * the node id is in all the paths so we have found
+           * what we were looking for
+           */
+          nextCommonNodeId = nodeId;
+          break;
         }
       }
     }
@@ -232,18 +201,11 @@ export class BranchService {
    * @return whether the node id is in all the paths
    */
   private allPathsContainNodeId(paths: string[][], nodeId: string): boolean {
-    let result = false;
-    if (paths != null) {
-      for (let path of paths) {
-        const index = path.indexOf(nodeId);
-        if (index == -1) {
-          result = false;
-          break;
-        } else {
-          result = true;
-        }
+    for (const path of paths) {
+      if (!path.includes(nodeId)) {
+        return false;
       }
     }
-    return result;
+    return true;
   }
 }
