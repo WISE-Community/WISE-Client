@@ -5,6 +5,7 @@ import { AchievementService } from './achievementService';
 import { ConfigService } from './configService';
 import { NotebookService } from './notebookService';
 import { NotificationService } from './notificationService';
+import { PauseScreenService } from './pauseScreenService';
 import { SessionService } from './sessionService';
 import { StudentAssetService } from './studentAssetService';
 import { StudentDataService } from './studentDataService';
@@ -21,6 +22,7 @@ export class InitializeVLEService {
     private configService: ConfigService,
     private notebookService: NotebookService,
     private notificationService: NotificationService,
+    private pauseScreenService: PauseScreenService,
     private projectService: VLEProjectService,
     private sessionService: SessionService,
     private studentAssetService: StudentAssetService,
@@ -41,7 +43,17 @@ export class InitializeVLEService {
     await this.studentDataService.retrieveRunStatus();
     await this.studentAssetService.retrieveAssets();
     await this.notebookService.retrieveNotebookItems(this.configService.getWorkgroupId());
+
+    if (this.shouldScreenBePaused()) {
+      this.pauseScreenService.pauseScreen();
+    }
     this.intializedSource.next(true);
+  }
+
+  private shouldScreenBePaused(): boolean {
+    const runStatus = this.studentDataService.getRunStatus();
+    const periodId = this.configService.getPeriodId();
+    return runStatus.periods.some((period: any) => period.periodId === periodId && period.paused);
   }
 
   async initializePreview(unitId: string) {

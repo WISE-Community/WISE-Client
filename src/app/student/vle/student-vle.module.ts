@@ -24,6 +24,7 @@ import { DataService } from '../../services/data.service';
 import { StudentComponentModule } from '../student.component.module';
 import { TopBarModule } from '../top-bar/top-bar.module';
 import { StudentVLERoutingModule } from './student-vle-routing.module';
+import { PauseScreenService } from '../../../assets/wise5/services/pauseScreenService';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { StudentVLERoutingModule } from './student-vle-routing.module';
   ],
   providers: [
     InitializeVLEService,
+    PauseScreenService,
     { provide: DataService, useExisting: StudentDataService },
     { provide: ProjectService, useExisting: VLEProjectService },
     VLEProjectService
