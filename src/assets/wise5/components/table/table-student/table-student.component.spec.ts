@@ -597,6 +597,10 @@ function handleConnectedComponents() {
           ])
         }
       ]);
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.handleConnectedComponents();
       const expectedTableData = createTableData([
         ['Time', 'Position', 'Speed'],
@@ -605,6 +609,7 @@ function handleConnectedComponents() {
         ['2', '20', '10']
       ]);
       expectTableDataEquals(component.tableData, expectedTableData, true);
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
     it('should handle embedded connected component', () => {
       const tableData = createTableData([
@@ -617,8 +622,13 @@ function handleConnectedComponents() {
           componentState: createEmbeddedComponentState(tableData)
         }
       ]);
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.handleConnectedComponents();
       expectTableDataEquals(component.tableData, tableData, true);
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
   });
 }

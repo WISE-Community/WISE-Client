@@ -1168,6 +1168,7 @@ export class TableStudent extends ComponentStudent {
         componentId: this.componentId
       });
     }
+    this.setTabulatorData();
   }
 
   attachStudentAsset(studentAsset: any): void {
