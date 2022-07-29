@@ -67,7 +67,7 @@
   <div>
     <button
         mat-button
-        *ngIf="showResetSeriesButton() && activeSeries != null && activeSeries.canEdit"
+        *ngIf="isResetSeriesButtonVisible && activeSeries != null && activeSeries.canEdit"
         color="accent"
         (click)="resetSeries()"
         [disabled]="isDisabled">
@@ -95,15 +95,6 @@
       [disabled]="isDisabled">
     <mat-icon>add</mat-icon>
     <span i18n>New Trial</span>
-  </button>
-  <button
-      mat-button
-      color="accent"
-      (click)="resetGraph()"
-      *ngIf="showResetGraphButton()"
-      [disabled]="isDisabled">
-    <mat-icon>restore</mat-icon>
-    <span i18n>Reset Graph</span>
   </button>
   <button
       mat-button

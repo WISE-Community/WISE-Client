@@ -11,7 +11,6 @@ import { StudentDataService } from '../services/studentDataService';
 import { VLEProjectService } from './vleProjectService';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
 import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
-import { DialogWithoutCloseComponent } from '../directives/dialog-without-close/dialog-without-close.component';
 import { AnnotationService } from '../services/annotationService';
 import { UtilService } from '../services/utilService';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -155,10 +154,6 @@ export class VLEComponent implements OnInit {
 
     this.studentDataService.setCurrentNodeByNodeId(nodeId);
 
-    if (this.shouldScreenBePaused()) {
-      this.pauseScreen();
-    }
-
     // TODO: set these variables dynamically from theme settings
     this.layoutView = 'list'; // 'list' or 'card'
     this.numberProject = true;
@@ -211,7 +206,6 @@ export class VLEComponent implements OnInit {
   private initializeSubscriptions(): void {
     this.subscribeToShowSessionWarning();
     this.subscribeToCurrentNodeChanged();
-    this.subscribeToPauseScreen();
     this.subscribeToNotesVisible();
     this.subscribeToReportFullScreen();
     this.subscribeToNodeClickLocked();
@@ -295,18 +289,6 @@ export class VLEComponent implements OnInit {
     );
   }
 
-  private subscribeToPauseScreen(): void {
-    this.subscriptions.add(
-      this.studentDataService.pauseScreen$.subscribe((doPause: boolean) => {
-        if (doPause) {
-          this.pauseScreen();
-        } else {
-          this.unPauseScreen();
-        }
-      })
-    );
-  }
-
   private subscribeToNotesVisible(): void {
     this.subscriptions.add(
       this.notebookService.notesVisible$.subscribe((notesVisible: boolean) => {
@@ -378,12 +360,6 @@ export class VLEComponent implements OnInit {
     );
   }
 
-  private shouldScreenBePaused(): boolean {
-    const runStatus = this.studentDataService.getRunStatus();
-    const periodId = this.configService.getPeriodId();
-    return runStatus.periods.some((period: any) => period.periodId === periodId && period.paused);
-  }
-
   private logOut(eventName = 'logOut') {
     const nodeId = null;
     const componentId = null;
@@ -396,20 +372,6 @@ export class VLEComponent implements OnInit {
       .then(() => {
         this.sessionService.logOut();
       });
-  }
-
-  private pauseScreen() {
-    this.dialog.open(DialogWithoutCloseComponent, {
-      data: {
-        content: $localize`Your teacher has paused all the screens in the class.`,
-        title: $localize`Screen Paused`
-      },
-      disableClose: true
-    });
-  }
-
-  private unPauseScreen() {
-    this.dialog.closeAll();
   }
 
   /**

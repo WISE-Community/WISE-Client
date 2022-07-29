@@ -29,6 +29,7 @@ import { NodeIconComponent } from './node-icon/node-icon.component';
 import { FormsModule } from '@angular/forms';
 import { InitializeVLEService } from '../services/initializeVLEService';
 import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher-common-services.module';
+import { PauseScreenService } from '../services/pauseScreenService';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
@@ -67,7 +68,7 @@ describe('VLEComponent', () => {
         TopBarComponent,
         VLEComponent
       ],
-      providers: [InitializeVLEService, ProjectService, VLEProjectService]
+      providers: [InitializeVLEService, PauseScreenService, ProjectService, VLEProjectService]
     }).compileComponents();
   });
 

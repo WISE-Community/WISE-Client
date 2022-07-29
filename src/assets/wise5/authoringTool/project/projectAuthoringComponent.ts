@@ -870,7 +870,7 @@ class ProjectAuthoringController {
     return constraintDescriptions;
   }
 
-  nodeHasRubric(nodeId) {
+  nodeHasRubric(nodeId: string): boolean {
     return this.ProjectService.nodeHasRubric(nodeId);
   }
 

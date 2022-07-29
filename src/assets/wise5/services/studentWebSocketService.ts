@@ -12,6 +12,7 @@ import { Notification } from '../../../app/domain/notification';
 import { Message } from '@stomp/stompjs';
 import { RxStomp } from '@stomp/rx-stomp';
 import { NotebookService } from './notebookService';
+import { PauseScreenService } from './pauseScreenService';
 
 @Injectable()
 export class StudentWebSocketService {
@@ -23,6 +24,7 @@ export class StudentWebSocketService {
     private NodeService: NodeService,
     private notebookService: NotebookService,
     private NotificationService: NotificationService,
+    private pauseScreenService: PauseScreenService,
     private ProjectService: ProjectService,
     private StudentDataService: StudentDataService,
     private TagService: TagService
@@ -50,9 +52,9 @@ export class StudentWebSocketService {
       .subscribe((message: Message) => {
         const body = JSON.parse(message.body);
         if (body.type === 'pause') {
-          this.StudentDataService.pauseScreen(true);
+          this.pauseScreenService.pauseScreen();
         } else if (body.type === 'unpause') {
-          this.StudentDataService.pauseScreen(false);
+          this.pauseScreenService.unPauseScreen();
         } else if (body.type === 'studentWork') {
           const studentWork = JSON.parse(body.content);
           this.StudentDataService.broadcastStudentWorkReceived(studentWork);
