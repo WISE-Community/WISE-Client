@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReplaySubject, Subscription } from 'rxjs';
-import { Tabulator, EditModule, FormatModule, KeybindingsModule, SortModule } from 'tabulator-tables';
-import { TabulatorData } from '../TabulatorData';
+import { Tabulator, EditModule, FormatModule, KeybindingsModule, ReactiveDataModule, SortModule } from 'tabulator-tables';
 
 @Component({
   selector: 'tabulator-table',
@@ -21,32 +20,14 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   options: any;
   table: Tabulator;
   tableEl = document.createElement('div');
-  afterViewInitSubscription: Subscription;
+  subscriptions: Subscription = new Subscription();
   viewInit$ = new ReplaySubject();
 
   constructor() {
-    Tabulator.registerModule([EditModule, FormatModule, KeybindingsModule, SortModule]);
+    Tabulator.registerModule([EditModule, FormatModule, KeybindingsModule, ReactiveDataModule, SortModule]);
   }
-
+ 
   ngAfterViewInit(): void {
-    this.viewInit$.next();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.afterViewInitSubscription = this.viewInit$.subscribe(() => {
-      if (this.table) {
-        this.processChanges(changes);
-      } else {
-        this.drawTable();
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.afterViewInitSubscription.unsubscribe();
-  }
-
-  private drawTable(): void {
     this.options = this.tabOptions;
     this.options.columns = this.setupColumns(this.tabColumns);
     this.options.data = this.tabData;
@@ -56,6 +37,21 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
       this.cellEdited(cell);
     });
     this.tableContainer.nativeElement.appendChild(this.tableEl);
+    this.viewInit$.next();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.subscriptions.add(
+      this.viewInit$.subscribe(() => {
+        if (!changes.tabData.isFirstChange()) {
+          this.processChanges(changes);
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   private setupColumns(columns): any[] {
@@ -80,14 +76,13 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     const rowIndex = cell.getRow().getPosition();
     const field = cell.getColumn().getField();
     const row = this.editableCells[rowIndex];
-    if (row && row.indexOf(field) > -1) {
-      return true;
-    } else {
-      return false;
-    }
+    return row && row.indexOf(field) > -1;
   }
 
-  private cellFormatter(cell: Tabulator.CellComponent, formatterParams: Tabulator.formatterParams): any {
+  private cellFormatter(
+    cell: Tabulator.CellComponent,
+    formatterParams: Tabulator.formatterParams
+  ): any {
     if (this.isCellEditable(cell)) {
       cell.getElement().classList.add('tabulator-cell-editable');
     }

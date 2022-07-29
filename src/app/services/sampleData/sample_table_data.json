@@ -1,0 +1,70 @@
+[
+  [
+    {
+      "text": "Age",
+      "editable": false,
+      "size": null
+    },
+    {
+      "text": "Height",
+      "editable": false,
+      "size": null
+    },
+    {
+      "text": "Hours homework per day",
+      "editable": false,
+      "size": 20
+    }
+  ],
+  [
+    {
+      "text": "6",
+      "editable": false,
+      "size": null
+    },
+    {
+      "text": "36",
+      "editable": true,
+      "size": null
+    },
+    {
+      "text": "",
+      "editable": true,
+      "size": 20
+    }
+  ],
+  [
+    {
+      "text": "10",
+      "editable": false,
+      "size": null
+    },
+    {
+      "text": "",
+      "editable": true,
+      "size": null
+    },
+    {
+      "text": "",
+      "editable": true,
+      "size": 20
+    }
+  ],
+  [
+    {
+      "text": "12",
+      "editable": false,
+      "size": null
+    },
+    {
+      "text": "",
+      "editable": true,
+      "size": null
+    },
+    {
+      "text": "",
+      "editable": true,
+      "size": 20
+    }
+  ]
+]

@@ -8,6 +8,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { AnnotationService } from '../../../services/annotationService';
 import { ProjectService } from '../../../services/projectService';
 import { UtilService } from '../../../services/utilService';
+import { TabulatorDataService } from '../tabulatorDataService';
 import { TableStudent } from './table-student.component';
 
 let component: TableStudent;
@@ -171,7 +172,12 @@ function setupTable() {
   describe('setupTable', () => {
     it('should setup table', () => {
       component.tableData = null;
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.setupTable();
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
       expect(component.tableData).toEqual(createTestTableData());
     });
   });
@@ -197,8 +203,13 @@ function resetTable() {
     it('should reset table', () => {
       component.tableData = createTestTableData();
       component.tableData[0][0].text = 'Time2';
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.resetTable();
       expect(component.tableData[0][0].text).toEqual('Time');
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
   });
 }
@@ -567,8 +578,13 @@ function handleConnectedComponents() {
         }
       ]);
       component.tableData = null;
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.handleConnectedComponents();
       expectTableDataEquals(component.tableData, testTableData, true);
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
     it('should handle graph connected component', () => {
       spyOn(component, 'getConnectedComponentsAndTheirComponentStates').and.returnValue([

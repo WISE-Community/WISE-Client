@@ -14,6 +14,7 @@ import { ComponentService } from '../../componentService';
 import { TableService } from '../tableService';
 import { MatDialog } from '@angular/material/dialog';
 import { TabulatorData } from '../TabulatorData';
+import { TabulatorDataService } from '../tabulatorDataService';
 
 @Component({
   selector: 'table-student',
@@ -55,6 +56,7 @@ export class TableStudent extends ComponentStudent {
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     private TableService: TableService,
+    private TabulatorDataService: TabulatorDataService,
     protected UtilService: UtilService
   ) {
     super(
@@ -1173,7 +1175,7 @@ export class TableStudent extends ComponentStudent {
   }
 
   private setTabulatorData(): void {
-    this.tabulatorData = this.TableService.convertTableDataToTabulator(
+    this.tabulatorData = this.TabulatorDataService.convertTableDataToTabulator(
       this.tableData,
       this.componentContent.globalCellSize
     );

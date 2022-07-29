@@ -5,12 +5,9 @@ import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { UtilService } from '../../services/utilService';
 import { Injectable } from '@angular/core';
-import { TabulatorData } from './TabulatorData';
 
 @Injectable()
 export class TableService extends ComponentService {
-  $translate: any;
-
   constructor(
     private StudentAssetService: StudentAssetService,
     protected UtilService: UtilService
@@ -276,65 +273,5 @@ export class TableService extends ComponentService {
       }
     }
     return false;
-  }
-
-  convertTableDataToTabulator(tableData: any, globalCellSize: number): TabulatorData {
-    const content = new TabulatorData();
-    content.columns = this.getTabulatorColumnsFromTable(tableData, globalCellSize);
-    for (const [index, row] of tableData.entries()) {
-      if (index > 0) {
-        const rowData = this.getTabulatorRowDataFromTableRow(row, content.columns)
-        content.data.push(rowData.values);
-        content.editableCells[index-1] = rowData.editableCells;
-      }
-    }
-    return content;
-  }
-
-  private getTabulatorColumnsFromTable(tableData: any[], globalCellSize: number): any {
-    let columns = [];
-    const columnDefs = tableData[0];
-    columnDefs.forEach((columnDef, index) => {
-      columns.push(this.getTabulatorColumn(columnDef, index, globalCellSize))
-    });
-    return columns;
-  }
-
-  private getTabulatorColumn(columnDef: any, index: number, globalCellSize: number): any {
-    const column: any = {
-      title: columnDef.text,
-      field: `${index}`
-    };
-    const width: number = this.getTabulatorColumnWidth(columnDef, globalCellSize);
-    if (width) {
-      column.width = width;
-    }
-    return column;
-  }
-
-  private getTabulatorColumnWidth(columnDef: any, globalCellSize: number): number {
-    let width: number = null;
-    const legacyWidth: number = columnDef.size ? columnDef.size : globalCellSize;
-    if (columnDef.width) {
-      width = columnDef.width;
-    } else if (legacyWidth && legacyWidth !== 10) {
-      width = legacyWidth * 16; // approzimate conversion of legacy column size based on em measurements
-    }
-    return width;
-  }
-
-  private getTabulatorRowDataFromTableRow(tableRow, columns): any {
-    let rowData = {
-      values: [],
-      editableCells: []
-    };
-    tableRow.forEach((cell, index) => {
-      const field = columns[index].field;
-      rowData.values[field] = cell.text;
-      if (cell.editable) {
-        rowData.editableCells.push(field);
-      }
-    });
-    return rowData;
   }
 }

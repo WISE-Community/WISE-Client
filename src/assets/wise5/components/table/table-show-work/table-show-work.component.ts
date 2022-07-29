@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
-import { TableService } from '../tableService';
+import { TabulatorDataService } from '../tabulatorDataService';
 import { TabulatorData } from '../TabulatorData';
 
 @Component({
@@ -10,7 +10,7 @@ import { TabulatorData } from '../TabulatorData';
   styleUrls: ['../table-student/table-student.component.scss', 'table-show-work.component.scss']
 })
 export class TableShowWorkComponent extends ComponentShowWorkDirective {
-  tableData: any[];
+  tableData: any[] = [];
   dataExplorerGraphType: string;
   dataExplorerSeries: any[];
   dataExplorerXAxisLabel: string;
@@ -21,7 +21,7 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
   noneText: string = $localize`(None)`;
   tabulatorData: TabulatorData;
 
-  constructor(protected ProjectService: ProjectService, private TableService: TableService) {
+  constructor(protected ProjectService: ProjectService, private TabulatorDataService: TabulatorDataService) {
     super(ProjectService);
   }
 
@@ -38,10 +38,7 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
       this.xColumnIndex = this.calculateXColumnIndex(this.componentState);
       this.columnNames = this.calculateColumnNames(this.componentState);
     }
-    this.tabulatorData = this.TableService.convertTableDataToTabulator(
-      this.tableData,
-      this.componentContent.globalCellSize
-    );
+    this.setupTable()
   }
 
   calculateXColumnIndex(componentState: any): number {
@@ -56,5 +53,12 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
       columnNames.push(cell.text);
     }
     return columnNames;
+  }
+
+  setupTable(): void {
+    this.tabulatorData = this.TabulatorDataService.convertTableDataToTabulator(
+      this.tableData,
+      this.componentContent.globalCellSize
+    );
   }
 }
