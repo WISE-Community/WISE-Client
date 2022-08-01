@@ -4,7 +4,6 @@ import * as angular from 'angular';
 import Compile from './compile/compile';
 import DisableDeleteKeypress from './disableDeleteKeypress/disableDeleteKeypress';
 import Draggable from './draggable/draggable';
-import ListenForDeleteKeypress from './listenForDeleteKeypress/listenForDeleteKeypress';
 import MilestoneReportGraph from './milestoneReportGraph/milestoneReportGraph';
 import Sticky from './sticky/sticky';
 import { downgradeComponent } from '@angular/upgrade/static';
@@ -23,7 +22,6 @@ Components.directive(
 );
 Components.component('disableDeleteKeypress', DisableDeleteKeypress);
 Components.component('draggable', Draggable);
-Components.component('listenForDeleteKeypress', ListenForDeleteKeypress);
 Components.directive(
   'milestoneReportData',
   downgradeComponent({ component: MilestoneReportDataComponent }) as angular.IDirectiveFactory
