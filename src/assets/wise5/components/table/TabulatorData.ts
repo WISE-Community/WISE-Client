@@ -1,3 +1,5 @@
+import { Tabulator } from 'tabulator-tables';
+
 export class TabulatorData {
   constructor(
     public columns: TabulatorColumn[] = [], // see http://tabulator.info/docs/5.3/columns
@@ -18,6 +20,11 @@ export class TabulatorColumn {
   title: string;
   field: string;
   width: number | string; // number of pixels or percent of table width (e.g. '20%')
+  editor: string;
+  editable: (cell: Tabulator.CellComponent) => boolean;
+  formatter: (cell: Tabulator.CellComponent) => any;
+  sorter: string;
+  sorterParams: any;
 
   constructor(jsonObject: any = {}) {
     for (const key of Object.keys(jsonObject)) {

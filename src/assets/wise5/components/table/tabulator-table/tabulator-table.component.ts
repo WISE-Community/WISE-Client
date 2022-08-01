@@ -28,7 +28,7 @@ import { TabulatorColumn } from '../TabulatorData';
   encapsulation: ViewEncapsulation.None
 })
 export class TabulatorTableComponent implements OnChanges, AfterViewInit {
-  @Input() editableCells: string[][];
+  @Input() editableCells: any;
   @Input() isDisabled: boolean;
   @Input() tabColumns: TabulatorColumn[]; // see http://tabulator.info/docs/5.3/columns
   @Input() tabData: any[]; // see http://tabulator.info/docs/5.3/data
@@ -76,8 +76,8 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     this.subscriptions.unsubscribe();
   }
 
-  private setupColumns(columns): any[] {
-    columns.forEach((column) => {
+  private setupColumns(columns: TabulatorColumn[]): TabulatorColumn[] {
+    columns.forEach((column: TabulatorColumn) => {
       column.editor = 'input';
       column.editable = (cell) => {
         return this.isDisabled ? false : this.isCellEditable(cell);
@@ -97,7 +97,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     const rowIndex = cell.getRow().getPosition();
     const field = cell.getColumn().getField();
     const row = this.editableCells[rowIndex];
-    return row && row.indexOf(field) > -1;
+    return row && row.includes(field);
   }
 
   private cellFormatter(cell: Tabulator.CellComponent): any {

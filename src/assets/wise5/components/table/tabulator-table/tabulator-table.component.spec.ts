@@ -2,6 +2,7 @@ import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabulatorTableComponent } from './tabulator-table.component';
 import { Tabulator } from 'tabulator-tables';
+import { TabulatorColumn } from '../TabulatorData';
 
 let component: TabulatorTableComponent;
 let fixture: ComponentFixture<TabulatorTableComponent>;
@@ -12,14 +13,14 @@ const editableCells = {
   2: ['1', '2']
 };
 const tabColumns = [
-  {title: 'Age', field: '0'},
-  {title: 'Height', field: '1'},
-  {title: 'Hours homework per day', field: '2', width: 200}
+  new TabulatorColumn({ title: 'Age', field: '0' }),
+  new TabulatorColumn({ title: 'Height', field: '1' }),
+  new TabulatorColumn({ title: 'Hours homework per day', field: '2', width: 200 })
 ];
 const tabData = [
-  {0: '6', 1: '36', 2: ''},
-  {0: '10', 1: '', 2: ''},
-  {0: '12', 1: '', 2: ''}
+  { 0: '6', 1: '36', 2: '' },
+  { 0: '10', 1: '', 2: '' },
+  { 0: '12', 1: '', 2: '' }
 ];
 const tabOptions = {
   layout: "fitDataTable",
