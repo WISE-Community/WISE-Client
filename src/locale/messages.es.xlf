@@ -14950,7 +14950,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to overwrite the current line data?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">241</context>
+          <context context-type="linenumber">232</context>
         </context-group>
         <target state="translated">¿Seguro que desea sobreescribir la línea de datos actual?</target>
       </trans-unit>
@@ -14958,7 +14958,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">993</context>
+          <context context-type="linenumber">984</context>
         </context-group>
         <target state="translated">La serie a la que intenta agregar un punto está oculta actualmente. Muestre la serie haciendo clic en el nombre de la serie en la leyenda e intente agregar el punto nuevamente.</target>
       </trans-unit>
@@ -14966,7 +14966,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1007</context>
+          <context context-type="linenumber">998</context>
         </context-group>
         <target state="translated">No puede editar esta serie. Elegir una serie que pueda editarse.</target>
       </trans-unit>
@@ -14974,7 +14974,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1285</context>
+          <context context-type="linenumber">1276</context>
         </context-group>
         <target state="translated">¿Seguro que desea resetear la serie?</target>
       </trans-unit>
@@ -14982,7 +14982,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1287</context>
+          <context context-type="linenumber">1278</context>
         </context-group>
         <target state="translated">¿Seguro que desea resetear la serie "<x id="PH" equiv-text="seriesName"/>"?</target>
       </trans-unit>
@@ -14990,11 +14990,11 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1837</context>
+          <context context-type="linenumber">1829</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2672</context>
+          <context context-type="linenumber">2664</context>
         </context-group>
         <target state="translated">Ensayo</target>
       </trans-unit>
@@ -18115,7 +18115,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Preview Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <target state="translated">Previsualizar estudiante</target>
       </trans-unit>
@@ -18123,7 +18123,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">761</context>
+          <context context-type="linenumber">759</context>
         </context-group>
         <target state="translated">StudentDataService.saveComponentEvent: component, category, event args no pueden ser nulos</target>
       </trans-unit>
@@ -18131,7 +18131,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">771</context>
+          <context context-type="linenumber">769</context>
         </context-group>
         <target state="translated">StudentDataService.saveComponentEvent: nodeId, componentId, componentType no pueden ser nulos</target>
       </trans-unit>
@@ -18139,7 +18139,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">780</context>
+          <context context-type="linenumber">778</context>
         </context-group>
         <target state="translated">StudentDataService.saveVLEEvent: argumentos para categoría y evento no pueden ser nulos</target>
       </trans-unit>
