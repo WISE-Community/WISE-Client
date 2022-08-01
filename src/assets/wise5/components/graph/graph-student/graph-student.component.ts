@@ -304,6 +304,7 @@ export class GraphStudent extends ComponentStudent {
     const graphType = studentData.dataExplorerGraphType;
     this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
     this.setYAxisLabels(studentData);
+    this.setXAxisLabels(studentData);
     this.activeTrial.series = [];
     for (let seriesIndex = 0; seriesIndex < dataExplorerSeries.length; seriesIndex++) {
       const xColumn = dataExplorerSeries[seriesIndex].xColumn;
@@ -362,6 +363,38 @@ export class GraphStudent extends ComponentStudent {
         series.yAxis = 0;
       }
     }
+  }
+
+  setXAxisLabels(studentData: any): void {
+    const thisComponent = this;
+    this.xAxis.labels = {
+      formatter: function () {
+        if (
+          this.value < studentData.tableData.length &&
+          studentData.isDataExplorerEnabled != null &&
+          studentData.dataExplorerSeries != null &&
+          studentData.tableData != null
+        ) {
+          // try to convert the x value number to a category string on the x axis
+          const textValue = thisComponent.getXColumnTextValue(
+            studentData.dataExplorerSeries,
+            studentData.tableData,
+            this.value
+          );
+          if (isNaN(parseFloat(textValue))) {
+            return studentData.tableData[this.value + 1][studentData.dataExplorerSeries[0].xColumn]
+              .text;
+          }
+        }
+        return this.value;
+      }
+    };
+  }
+
+  getXColumnTextValue(dataExplorerSeries: any[], tableData: any[][], value: number): string {
+    const xColumn = dataExplorerSeries[0].xColumn;
+    const dataRow = tableData[value + 1];
+    return dataRow[xColumn].text;
   }
 
   generateDataExplorerSeries(tableData, xColumn, yColumn, graphType, name, color, yAxis) {
