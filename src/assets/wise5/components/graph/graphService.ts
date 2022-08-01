@@ -349,7 +349,6 @@ export class GraphService extends ComponentService {
         );
         text += thisGraphService.combineXTextAndYText(xText, yText);
       } else if (thisGraphService.isCategoriesXAxisType(xAxis)) {
-        text = thisGraphService.getSeriesText(this.series);
         const xText = thisGraphService.getXTextForCategoriesGraph(
           this.point,
           this.x,
@@ -357,7 +356,7 @@ export class GraphService extends ComponentService {
           roundValuesTo
         );
         const yText = thisGraphService.getYTextForCategoriesGraph(this.y, roundValuesTo);
-        text += xText + ' ' + yText;
+        text = `<b>${xText}</b><br/>${this.series.name}: <b>${yText}</b>`;
       }
       if (thisGraphService.pointHasCustomTooltip(this.point)) {
         text += '<br/>' + this.point.tooltip;
@@ -389,7 +388,16 @@ export class GraphService extends ComponentService {
     axisObj: any,
     roundValuesTo: string
   ): string {
-    let text = `${this.performRounding(num, roundValuesTo)}`;
+    let text = '';
+    if (
+      series.data[num] != null &&
+      series.data[num].category === num &&
+      series.data[num].name != null
+    ) {
+      text = series.data[num].name;
+    } else {
+      text = `${this.performRounding(num, roundValuesTo)}`;
+    }
     const axisUnits = this.getAxisUnits(series, axisName, axisObj);
     if (axisUnits != null && axisUnits !== '') {
       text += ' ' + axisUnits;
@@ -410,6 +418,8 @@ export class GraphService extends ComponentService {
     const category = this.getCategoryByIndex(point.index, xAxis);
     if (category != null) {
       return category;
+    } else if (point.category === x) {
+      return point.name;
     } else {
       return this.performRounding(x, roundValuesTo);
     }
