@@ -753,7 +753,7 @@ export class UtilService {
       // Now that we have our value string, let's add
       // it to the data array.
       let finalValue = strMatchedValue;
-      const floatVal = parseFloat(strMatchedValue);
+      const floatVal = parseFloat(strMatchedValue.replace(new RegExp(',', 'g'), ''));
       if (!isNaN(floatVal)) {
         finalValue = floatVal;
       }
