@@ -1,7 +1,7 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { TabulatorData } from './TabulatorData';
+import { TabulatorColumn, TabulatorData } from './TabulatorData';
 
 @Injectable()
 export class TabulatorDataService {
@@ -23,7 +23,7 @@ export class TabulatorDataService {
   }
 
   private getTabulatorColumnsFromTable(tableData: any[], globalCellSize: number): any[] {
-    let columns = [];
+    const columns: TabulatorColumn[] = [];
     const columnDefs = tableData[0];
     if (columnDefs) {
       columnDefs.forEach((columnDef, index) => {
@@ -33,11 +33,11 @@ export class TabulatorDataService {
     return columns;
   }
 
-  private getTabulatorColumn(columnDef: any, index: number, globalCellSize: number): any {
-    const column: any = {
+  private getTabulatorColumn(columnDef: any, index: number, globalCellSize: number): TabulatorColumn {
+    const column = new TabulatorColumn({
       title: columnDef.text,
       field: `${index}`
-    };
+    });
     const width: number = this.getTabulatorColumnWidth(columnDef, globalCellSize);
     if (width) {
       column.width = width;
@@ -57,7 +57,7 @@ export class TabulatorDataService {
   }
 
   private getTabulatorRowDataFromTableRow(tableRow: any[], columns: any[]): any {
-    let rowData = {
+    const rowData = {
       values: {},
       editableCells: []
     };
