@@ -1,5 +1,6 @@
 import * as html2canvas from 'html2canvas';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Tabulator } from 'tabulator-tables';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -12,6 +13,8 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { TableService } from '../tableService';
 import { MatDialog } from '@angular/material/dialog';
+import { TabulatorData } from '../TabulatorData';
+import { TabulatorDataService } from '../tabulatorDataService';
 
 @Component({
   selector: 'table-student',
@@ -40,6 +43,7 @@ export class TableStudent extends ComponentStudent {
   numDataExplorerSeries: number;
   tableData: any;
   tableId: string;
+  tabulatorData: TabulatorData;
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -52,6 +56,7 @@ export class TableStudent extends ComponentStudent {
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     private TableService: TableService,
+    private TabulatorDataService: TabulatorDataService,
     protected UtilService: UtilService
   ) {
     super(
@@ -323,6 +328,7 @@ export class TableStudent extends ComponentStudent {
        */
       this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
     }
+    this.setTabulatorData();
   }
 
   /**
@@ -351,6 +357,7 @@ export class TableStudent extends ComponentStudent {
           this.setDataExplorerDataToColumn();
         }
       }
+      this.setTabulatorData();
       this.studentDataChanged();
     }
   }
@@ -923,6 +930,7 @@ export class TableStudent extends ComponentStudent {
       }
     }
     if (isStudentDataChanged) {
+      this.setTabulatorData();
       this.studentDataChanged();
     }
   }
@@ -1160,9 +1168,24 @@ export class TableStudent extends ComponentStudent {
         componentId: this.componentId
       });
     }
+    this.setTabulatorData();
   }
 
   attachStudentAsset(studentAsset: any): void {
     // TODO: make sure the asset is a csv file then populate the csv data into the table
   }
+
+  private setTabulatorData(): void {
+    this.tabulatorData = this.TabulatorDataService.convertTableDataToTabulator(
+      this.tableData,
+      this.componentContent.globalCellSize
+    );
+  }
+
+  tabulatorCellChanged(cell: Tabulator.CellComponent): void {
+    const columnIndex = parseInt(cell.getColumn().getField());
+    const rowIndex = cell.getRow().getPosition() + 1;
+    this.tableData[rowIndex][columnIndex].text = cell.getValue();
+    this.studentDataChanged();
+  };
 }

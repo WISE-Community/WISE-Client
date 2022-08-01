@@ -11,7 +11,7 @@ import { UtilService } from '../../../services/utilService';
   styleUrls: ['edit-table-advanced.component.scss']
 })
 export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
-  MAX_ALLOWED_CELLS_IN_IMPORT = 500;
+  MAX_ALLOWED_CELLS_IN_IMPORT = 2000;
 
   allowedConnectedComponentTypes = ['Embedded', 'Graph', 'Table'];
   columnNames: string[] = [];
