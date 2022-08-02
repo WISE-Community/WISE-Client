@@ -2,13 +2,10 @@
 
 import { Injectable } from '@angular/core';
 import { AnnotationService } from './annotationService';
-import { ConfigService } from './configService';
 import { TagService } from './tagService';
 import { StudentDataService } from './studentDataService';
 import { NodeService } from './nodeService';
-import { NotificationService } from './notificationService';
 import { ProjectService } from './projectService';
-import { Notification } from '../../../app/domain/notification';
 import { Message } from '@stomp/stompjs';
 import { NotebookService } from './notebookService';
 import { StompService } from './stompService';
@@ -17,10 +14,8 @@ import { StompService } from './stompService';
 export class StudentWebSocketService {
   constructor(
     private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
     private NodeService: NodeService,
     private notebookService: NotebookService,
-    private NotificationService: NotificationService,
     private ProjectService: ProjectService,
     private stompService: StompService,
     private StudentDataService: StudentDataService,
@@ -33,10 +28,7 @@ export class StudentWebSocketService {
   }
 
   subscribeToClassroomTopic(): void {
-    this.stompService.rxStomp
-      .watch(
-        `/topic/classroom/${this.ConfigService.getRunId()}/${this.ConfigService.getPeriodId()}`
-      )
+    this.stompService.periodMessage$
       .subscribe((message: Message) => {
         const body = JSON.parse(message.body);
         if (body.type === 'studentWork') {
@@ -54,16 +46,10 @@ export class StudentWebSocketService {
   }
 
   subscribeToWorkgroupTopic(): void {
-    this.stompService.rxStomp.watch(`/topic/workgroup/${this.ConfigService.getWorkgroupId()}`)
+    this.stompService.workgroupMessage$
       .subscribe((message: Message) => {
         const body = JSON.parse(message.body);
-        if (body.type === 'notification') {
-          const notification = JSON.parse(body.content);
-          this.NotificationService.addNotification(notification);
-          if (this.isDismissImmediately(notification)) {
-            this.NotificationService.dismissNotification(notification);
-          }
-        } else if (body.type === 'annotation') {
+        if (body.type === 'annotation') {
           const annotationData = JSON.parse(body.content);
           this.AnnotationService.addOrUpdateAnnotation(annotationData);
           this.handleAnnotationReceived(annotationData);
@@ -89,13 +75,6 @@ export class StudentWebSocketService {
     } else {
       this.AnnotationService.broadcastAnnotationReceived({ annotation: annotation });
     }
-  }
-
-  isDismissImmediately(notification: Notification): boolean {
-    return (
-      notification.nodeId === this.StudentDataService.getCurrentNodeId() &&
-      notification.type === 'PeerChatMessage'
-    );
   }
 
   goToStep(nodeId: string): void {

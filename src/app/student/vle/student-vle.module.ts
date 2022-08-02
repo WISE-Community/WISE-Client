@@ -25,6 +25,8 @@ import { StudentComponentModule } from '../student.component.module';
 import { TopBarModule } from '../top-bar/top-bar.module';
 import { StudentVLERoutingModule } from './student-vle-routing.module';
 import { PauseScreenService } from '../../../assets/wise5/services/pauseScreenService';
+import { StudentNotificationService } from '../../../assets/wise5/services/studentNotificationService';
+import { NotificationService } from '../../../assets/wise5/services/notificationService';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { PauseScreenService } from '../../../assets/wise5/services/pauseScreenSe
     InitializeVLEService,
     PauseScreenService,
     { provide: DataService, useExisting: StudentDataService },
+    { provide: NotificationService, useExisting: StudentNotificationService },
     { provide: ProjectService, useExisting: VLEProjectService },
+    StudentNotificationService,
     VLEProjectService
   ],
   exports: [CommonModule, MatButtonModule, MatDialogModule, MatListModule, VLEComponent]
