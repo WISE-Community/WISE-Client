@@ -7,6 +7,7 @@ import { NotebookService } from './notebookService';
 import { NotificationService } from './notificationService';
 import { PauseScreenService } from './pauseScreenService';
 import { SessionService } from './sessionService';
+import { StompService } from './stompService';
 import { StudentAssetService } from './studentAssetService';
 import { StudentDataService } from './studentDataService';
 import { StudentStatusService } from './studentStatusService';
@@ -25,6 +26,7 @@ export class InitializeVLEService {
     private pauseScreenService: PauseScreenService,
     private projectService: VLEProjectService,
     private sessionService: SessionService,
+    private stompService: StompService,
     private studentAssetService: StudentAssetService,
     private studentDataService: StudentDataService,
     private studentStatusService: StudentStatusService,
@@ -36,24 +38,16 @@ export class InitializeVLEService {
     this.sessionService.initializeSession();
     this.studentStatusService.retrieveStudentStatus();
     await this.projectService.retrieveProject();
+    await this.stompService.initialize();
     this.studentWebSocketService.initialize();
     await this.studentDataService.retrieveStudentData();
     await this.notificationService.retrieveNotifications();
     await this.achievementService.retrieveStudentAchievements();
     await this.studentDataService.retrieveRunStatus();
+    this.pauseScreenService.initialize();
     await this.studentAssetService.retrieveAssets();
     await this.notebookService.retrieveNotebookItems(this.configService.getWorkgroupId());
-
-    if (this.shouldScreenBePaused()) {
-      this.pauseScreenService.pauseScreen();
-    }
     this.intializedSource.next(true);
-  }
-
-  private shouldScreenBePaused(): boolean {
-    const runStatus = this.studentDataService.getRunStatus();
-    const periodId = this.configService.getPeriodId();
-    return runStatus.periods.some((period: any) => period.periodId === periodId && period.paused);
   }
 
   async initializePreview(unitId: string) {
