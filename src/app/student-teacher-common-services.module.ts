@@ -46,6 +46,7 @@ import { ComponentTypeService } from '../assets/wise5/services/componentTypeServ
 import { BranchService } from '../assets/wise5/services/branchService';
 import { PathService } from '../assets/wise5/services/pathService';
 import { TabulatorDataService } from '../assets/wise5/components/table/tabulatorDataService';
+import { StompService } from '../assets/wise5/services/stompService';
 
 @NgModule({
   providers: [
@@ -85,6 +86,7 @@ import { TabulatorDataService } from '../assets/wise5/components/table/tabulator
     SessionService,
     ShowGroupWorkService,
     ShowMyWorkService,
+    StompService,
     StudentAssetService,
     StudentDataService,
     StudentStatusService,

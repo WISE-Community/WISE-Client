@@ -10,52 +10,36 @@ import { NotificationService } from './notificationService';
 import { ProjectService } from './projectService';
 import { Notification } from '../../../app/domain/notification';
 import { Message } from '@stomp/stompjs';
-import { RxStomp } from '@stomp/rx-stomp';
 import { NotebookService } from './notebookService';
-import { PauseScreenService } from './pauseScreenService';
+import { StompService } from './stompService';
 
 @Injectable()
 export class StudentWebSocketService {
-  rxStomp: RxStomp;
-
   constructor(
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
     private NodeService: NodeService,
     private notebookService: NotebookService,
     private NotificationService: NotificationService,
-    private pauseScreenService: PauseScreenService,
     private ProjectService: ProjectService,
+    private stompService: StompService,
     private StudentDataService: StudentDataService,
     private TagService: TagService
   ) {}
 
   initialize(): void {
-    this.initializeStomp();
     this.subscribeToClassroomTopic();
     this.subscribeToWorkgroupTopic();
   }
 
-  initializeStomp(): void {
-    this.rxStomp = new RxStomp();
-    this.rxStomp.configure({
-      brokerURL: this.ConfigService.getWebSocketURL()
-    });
-    this.rxStomp.activate();
-  }
-
   subscribeToClassroomTopic(): void {
-    this.rxStomp
+    this.stompService.rxStomp
       .watch(
         `/topic/classroom/${this.ConfigService.getRunId()}/${this.ConfigService.getPeriodId()}`
       )
       .subscribe((message: Message) => {
         const body = JSON.parse(message.body);
-        if (body.type === 'pause') {
-          this.pauseScreenService.pauseScreen();
-        } else if (body.type === 'unpause') {
-          this.pauseScreenService.unPauseScreen();
-        } else if (body.type === 'studentWork') {
+        if (body.type === 'studentWork') {
           const studentWork = JSON.parse(body.content);
           this.StudentDataService.broadcastStudentWorkReceived(studentWork);
         } else if (body.type === 'annotation') {
@@ -70,8 +54,7 @@ export class StudentWebSocketService {
   }
 
   subscribeToWorkgroupTopic(): void {
-    this.rxStomp
-      .watch(`/topic/workgroup/${this.ConfigService.getWorkgroupId()}`)
+    this.stompService.rxStomp.watch(`/topic/workgroup/${this.ConfigService.getWorkgroupId()}`)
       .subscribe((message: Message) => {
         const body = JSON.parse(message.body);
         if (body.type === 'notification') {
@@ -133,7 +116,7 @@ export class StudentWebSocketService {
   }
 
   sendStudentWorkToClassmate(workgroupId: number, studentWork: any): void {
-    this.rxStomp.publish({
+    this.stompService.rxStomp.publish({
       destination: `/app/api/workgroup/${workgroupId}/student-work`,
       body: JSON.stringify(studentWork)
     });
