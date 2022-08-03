@@ -144,18 +144,7 @@ export class TableStudent extends ComponentStudent {
 
     this.disableComponentIfNecessary();
 
-    if (
-      this.isDataExplorerEnabled &&
-      this.componentContent.dataExplorerDataToColumn != null &&
-      this.isAllDataExplorerSeriesSpecified()
-    ) {
-      // All the data explorer series have been fixed to display a specific column so we will call
-      // studentDataChanged() immediately to generate the table student data which will then be sent
-      // to the graph component so the graph can immediately be displayed. If we did not do this,
-      // the graph may not ever be displayed since it requires the student to change the table data.
-      // If all the data explorer series have been fixed to display a specific column and all the
-      // table data cells are not editable by the student, the student may not ever be able to
-      // change the table to generate table data to be sent to the graph.
+    if (this.isDataExplorerEnabled && this.componentContent.dataExplorerDataToColumn != null) {
       setTimeout(() => {
         this.studentDataChanged();
       }, 1000);
@@ -1187,5 +1176,5 @@ export class TableStudent extends ComponentStudent {
     const rowIndex = cell.getRow().getPosition() + 1;
     this.tableData[rowIndex][columnIndex].text = cell.getValue();
     this.studentDataChanged();
-  };
+  }
 }
