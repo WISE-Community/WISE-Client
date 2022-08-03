@@ -14958,7 +14958,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">984</context>
+          <context context-type="linenumber">1017</context>
         </context-group>
         <target state="translated">La serie a la que intenta agregar un punto está oculta actualmente. Muestre la serie haciendo clic en el nombre de la serie en la leyenda e intente agregar el punto nuevamente.</target>
       </trans-unit>
@@ -14966,7 +14966,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">998</context>
+          <context context-type="linenumber">1031</context>
         </context-group>
         <target state="translated">No puede editar esta serie. Elegir una serie que pueda editarse.</target>
       </trans-unit>
@@ -14974,7 +14974,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1276</context>
+          <context context-type="linenumber">1309</context>
         </context-group>
         <target state="translated">¿Seguro que desea resetear la serie?</target>
       </trans-unit>
@@ -14982,7 +14982,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1278</context>
+          <context context-type="linenumber">1311</context>
         </context-group>
         <target state="translated">¿Seguro que desea resetear la serie "<x id="PH" equiv-text="seriesName"/>"?</target>
       </trans-unit>
@@ -14990,11 +14990,11 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1829</context>
+          <context context-type="linenumber">1862</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2664</context>
+          <context context-type="linenumber">2697</context>
         </context-group>
         <target state="translated">Ensayo</target>
       </trans-unit>
@@ -17943,7 +17943,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Your teacher has paused all the screens in the class.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/pauseScreenService.ts</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <target state="translated">Se han pausado las pantallas.</target>
       </trans-unit>
@@ -17951,7 +17951,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Screen Paused</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/pauseScreenService.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target state="translated">Pantalla pausada</target>
       </trans-unit>
