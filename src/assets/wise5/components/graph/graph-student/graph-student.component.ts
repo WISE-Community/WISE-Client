@@ -361,7 +361,7 @@ export class GraphStudent extends ComponentStudent {
     this.xAxis.labels = {
       formatter: function () {
         if (
-          this.value < studentData.tableData.length &&
+          this.value + 1 < studentData.tableData.length &&
           studentData.isDataExplorerEnabled != null &&
           studentData.dataExplorerSeries != null &&
           studentData.tableData != null
@@ -1707,25 +1707,29 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  addPointFromTableIntoData(xCell, yCell, data) {
+  addPointFromTableIntoData(xCell: any, yCell: any, data: any[]) {
     let xText = xCell.text;
-    let yText = yCell.text;
-    if (xText != null && xText !== '' && yText != null && yText !== '') {
-      const xNumber = Number(xText);
-      const yNumber = Number(yText);
-      const point = [];
-      if (!isNaN(xNumber)) {
-        point.push(xNumber);
-      } else {
-        point.push(xText);
-      }
-      if (!isNaN(yNumber)) {
-        point.push(yNumber);
-      } else {
-        point.push(yText);
-      }
-      data.push(point);
+    if (xText == null || xText == '') {
+      xText = 'NA';
     }
+    let yText = yCell.text;
+    if (yText == null || yText == '') {
+      yText = 'NA';
+    }
+    const xNumber = Number(xText);
+    const yNumber = Number(yText);
+    const point = [];
+    if (!isNaN(xNumber)) {
+      point.push(xNumber);
+    } else {
+      point.push(xText);
+    }
+    if (!isNaN(yNumber)) {
+      point.push(yNumber);
+    } else {
+      point.push(yText);
+    }
+    data.push(point);
   }
 
   setSeriesIds(allSeries) {
