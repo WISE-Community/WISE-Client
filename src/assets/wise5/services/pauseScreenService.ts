@@ -16,25 +16,21 @@ export class PauseScreenService {
   ) {}
 
   initialize(): void {
-    this.subscribeToPauseEvents();
+    this.subscribeToPauseMessages();
     if (this.isPeriodPaused()) {
       this.pauseScreen();
     }
   }
 
-  private subscribeToPauseEvents(): void {
-    this.stompService.rxStomp
-      .watch(
-        `/topic/classroom/${this.configService.getRunId()}/${this.configService.getPeriodId()}`
-      )
-      .subscribe((message: Message) => {
-        const body = JSON.parse(message.body);
-        if (body.type === 'pause') {
-          this.pauseScreen();
-        } else if (body.type === 'unpause') {
-          this.unPauseScreen();
-        }
-      });
+  private subscribeToPauseMessages(): void {
+    this.stompService.periodMessage$.subscribe((message: Message) => {
+      const body = JSON.parse(message.body);
+      if (body.type === 'pause') {
+        this.pauseScreen();
+      } else if (body.type === 'unpause') {
+        this.unPauseScreen();
+      }
+    });
   }
 
   pauseScreen(): void {

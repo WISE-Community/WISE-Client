@@ -24,12 +24,12 @@ export class NotificationService {
   public viewCurrentAmbientNotification$: Observable<any> = this.viewCurrentAmbientNotificationSource.asObservable();
 
   constructor(
-    private annotationService: AnnotationService,
-    private dialog: MatDialog,
-    private http: HttpClient,
-    private ConfigService: ConfigService,
-    private ProjectService: ProjectService,
-    private UtilService: UtilService
+    protected annotationService: AnnotationService,
+    protected dialog: MatDialog,
+    protected http: HttpClient,
+    protected ConfigService: ConfigService,
+    protected ProjectService: ProjectService,
+    protected UtilService: UtilService
   ) {}
 
   /**
