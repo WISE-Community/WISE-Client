@@ -17943,7 +17943,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Your teacher has paused all the screens in the class.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/pauseScreenService.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <target state="translated">Se han pausado las pantallas.</target>
       </trans-unit>
@@ -17951,7 +17951,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Screen Paused</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/pauseScreenService.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target state="translated">Pantalla pausada</target>
       </trans-unit>
