@@ -53,7 +53,6 @@ export class InitializeVLEService {
 
   async initializePreview(unitId: string) {
     await this.configService.retrieveConfig(`/api/config/preview/${unitId}`);
-    this.sessionService.initializeSession();
     this.studentStatusService.retrieveStudentStatus();
     await this.projectService.retrieveProject();
     this.studentDataService.retrieveStudentData();
