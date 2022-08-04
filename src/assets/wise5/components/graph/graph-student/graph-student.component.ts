@@ -1710,11 +1710,11 @@ export class GraphStudent extends ComponentStudent {
   addPointFromTableIntoData(xCell: any, yCell: any, data: any[]) {
     let xText = xCell.text;
     if (xText == null || xText === '') {
-      xText = 'NA';
+      xText = 'N/A';
     }
     let yText = yCell.text;
     if (yText == null || yText === '') {
-      yText = 'NA';
+      yText = 'N/A';
     }
     const xNumber = Number(xText);
     const yNumber = Number(yText);
