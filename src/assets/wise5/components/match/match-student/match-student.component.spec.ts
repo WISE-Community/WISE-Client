@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../../services/annotationService';
+import { ClickToSnipImageService } from '../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../services/projectService';
 import { MatchStudent } from './match-student.component';
 
@@ -664,9 +665,9 @@ function getCleanedValue() {
       componentContent.choices[0].value = choiceValue;
       componentContent.buckets[0].value = bucketValue;
       const originalComponentContent = JSON.parse(JSON.stringify(componentContent));
-      component.componentContent = TestBed.inject(ProjectService).injectClickToSnipImage(
-        component.componentContent
-      );
+      component.componentContent = TestBed.inject(
+        ClickToSnipImageService
+      ).injectClickToSnipImageListener(component.componentContent);
       expect(component.componentContent.choices[0].value).toContain('onclick');
       expect(component.componentContent.buckets[0].value).toContain('onclick');
       expect(

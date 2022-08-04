@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ClickToSnipImageService } from '../../services/clickToSnipImageService';
 import { ConfigService } from '../../services/configService';
 import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
@@ -31,6 +32,7 @@ export class ComponentComponent {
   saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
+    private clickToSnipImageService: ClickToSnipImageService,
     private configService: ConfigService,
     private notebookService: NotebookService,
     private projectService: ProjectService,
@@ -62,7 +64,9 @@ export class ComponentComponent {
       this.notebookService.isNotebookEnabled() &&
       this.notebookService.isStudentNoteClippingEnabled()
     ) {
-      componentContent = this.projectService.injectClickToSnipImage(componentContent);
+      componentContent = this.clickToSnipImageService.injectClickToSnipImageListener(
+        componentContent
+      );
     }
     this.componentContent = componentContent;
   }
