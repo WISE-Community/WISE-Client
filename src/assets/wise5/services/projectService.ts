@@ -16,28 +16,28 @@ import { PathService } from './pathService';
 @Injectable()
 export class ProjectService {
   achievements: any = [];
-  activeConstraints: any;
+  activeConstraints: any = [];
   additionalProcessingFunctionsMap: any = {};
   allPaths: string[] = [];
-  applicationNodes: any;
+  applicationNodes: any = [];
   filters: any[] = [{ name: 'all', label: 'All' }];
   flattenedProjectAsNodeIds: any = null;
-  groupNodes: any[];
-  idToNode: any;
-  idToOrder: any;
-  inactiveGroupNodes: any[];
-  inactiveStepNodes: any[];
+  groupNodes: any[] = [];
+  idToNode: any = {};
+  idToOrder: any = {};
+  inactiveGroupNodes: any[] = [];
+  inactiveStepNodes: any[] = [];
   isNodeAffectedByConstraintResult: any = {};
-  metadata: any;
+  metadata: any = {};
   nodes: any = {};
   nodeCount: number = 0;
   nodeIdToNumber: any = {};
   nodeIdToIsInBranchPath: any = {};
   nodeIdsInAnyBranch: any = [];
   nodeIdToBranchPathLetter: any = {};
-  project: any;
+  project: any = null;
   rootNode: any = null;
-  transitions: any;
+  transitions: any = [];
   private projectChangedSource: Subject<any> = new Subject<any>();
   public projectChanged$: Observable<any> = this.projectChangedSource.asObservable();
 
@@ -49,19 +49,7 @@ export class ProjectService {
     protected pathService: PathService,
     protected SessionService: SessionService,
     protected UtilService: UtilService
-  ) {
-    this.project = null;
-    this.transitions = [];
-    this.applicationNodes = [];
-    this.inactiveStepNodes = [];
-    this.inactiveGroupNodes = [];
-    this.groupNodes = [];
-    this.idToNode = {};
-    this.metadata = {};
-    this.activeConstraints = [];
-    this.rootNode = null;
-    this.idToOrder = {};
-  }
+  ) {}
 
   setProject(project) {
     this.project = project;
@@ -493,57 +481,6 @@ export class ProjectService {
           }
         }
       );
-    }
-    return contentString;
-  }
-
-  /**
-   * Inject the ng-click attribute that will call the snipImage function
-   * @param content the content
-   * @returns the modified content
-   */
-  injectClickToSnipImage(content) {
-    if (content != null) {
-      if (typeof content === 'object') {
-        let contentString = JSON.stringify(content);
-        if (contentString != null) {
-          // replace the relative asset paths with the absolute paths
-          contentString = this.injectClickToSnipImageIntoContentString(contentString);
-
-          content = JSON.parse(contentString);
-        }
-      } else if (typeof content === 'string') {
-        // replace the relative asset paths with the absolute paths
-        content = this.injectClickToSnipImageIntoContentString(content);
-      }
-    }
-    return content;
-  }
-
-  /**
-   * Inject the ng-click attribute that will call the snipImage function
-   * @param contentString the content in string format
-   * @returns the modified content string
-   */
-  injectClickToSnipImageIntoContentString(contentString) {
-    if (contentString != null) {
-      const componentId = JSON.parse(contentString).id;
-
-      // regex to match image elements
-      const imgMatcher = new RegExp('<img.*?src=\\\\?[\'"](.*?)\\\\?[\'"].*?>', 'gi');
-
-      // replace all instances that match
-      contentString = contentString.replace(imgMatcher, (matchedString) => {
-        return matchedString.replace(
-          '<img',
-          `<img onclick=\\"window.dispatchEvent(new CustomEvent('snip-image', ` +
-            `{ detail: { target: this } }))\\" ` +
-            `onkeypress=\\"javascript: if (event.key === 'Enter' || event.keyCode === 13 || ` +
-            `event.which === 13 ) { window.dispatchEvent(new CustomEvent('snip-image', ` +
-            `{ detail: { target: this } } )) }\\" aria-label=\\"Select image to add to notebook\\" ` +
-            `title=\\"Add to notebook\\" tabindex=\\"0\\" snip`
-        );
-      });
     }
     return contentString;
   }

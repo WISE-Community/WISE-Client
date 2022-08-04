@@ -47,6 +47,7 @@ import { BranchService } from '../assets/wise5/services/branchService';
 import { PathService } from '../assets/wise5/services/pathService';
 import { TabulatorDataService } from '../assets/wise5/components/table/tabulatorDataService';
 import { StompService } from '../assets/wise5/services/stompService';
+import { ClickToSnipImageService } from '../assets/wise5/services/clickToSnipImageService';
 
 @NgModule({
   providers: [
@@ -56,6 +57,7 @@ import { StompService } from '../assets/wise5/services/stompService';
     AudioOscillatorService,
     AudioRecorderService,
     BranchService,
+    ClickToSnipImageService,
     ConceptMapService,
     ComponentService,
     ComponentServiceLookupService,

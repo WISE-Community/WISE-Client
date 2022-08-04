@@ -10,6 +10,7 @@ import { PossibleScoreComponent } from '../../../../../app/possible-score/possib
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
+import { ClickToSnipImageService } from '../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../services/projectService';
 import { MultipleChoiceStudent } from './multiple-choice-student.component';
 
@@ -173,9 +174,9 @@ function createComponentContentChoice(
 function getChoiceById() {
   describe('getChoiceById()', () => {
     it('should get choice by id', () => {
-      component.componentContent = TestBed.inject(ProjectService).injectClickToSnipImage(
-        component.componentContent
-      );
+      component.componentContent = TestBed.inject(
+        ClickToSnipImageService
+      ).injectClickToSnipImageListener(component.componentContent);
       expect(component.componentContent.choices[2].text).toContain('onclick');
       expect(component.getChoiceById(originalComponentContent, choiceId1).text).toEqual(
         choiceText1
