@@ -1,0 +1,63 @@
+<mat-card *ngIf="nodeContent.rubric" class="annotations annotations--info">
+  <mat-card-title class="annotations__header">
+    <div class="annotations__avatar md-avatar avatar--icon md-36 avatar md-whiteframe-1dp">
+      <mat-icon class="annotations__icon md-36 info">info</mat-icon>
+    </div>
+    <div class="annotations__title" fxLayout="row" fxFlex>
+      <span i18n>Step Info</span>
+    </div>
+  </mat-card-title>
+  <mat-card-content class="annotations__body md-body-1">
+    <div [innerHTML]="nodeContent.rubric"></div>
+  </mat-card-content>
+</mat-card>
+<mat-card class="node-info node-content" [ngStyle]="{'border-color': color }">
+  <mat-card-content>
+    <div id="component_{{component.id}}" *ngFor="let component of nodeContent.components; first as isFirst" class="component">
+      <mat-divider class="divider divider--dashed" *ngIf="!isFirst"></mat-divider>
+      <h3 *ngIf="component.isStudentWorkGenerated"
+          class="accent-1 md-body-2 gray-lightest-bg
+          component__header">
+        {{ component.assessmentItemIndex + ". " + component.typeLabel }}&nbsp;
+      </h3>
+      <preview-component [nodeId]="nodeId" [componentId]="component.id" [periodId]="periodId">
+      </preview-component>
+      <mat-card class="annotations annotations--info" *ngIf="component.rubric">
+        <mat-card-title class="annotations__header">
+          <div class="annotations__avatar md-avatar avatar--icon md-36 avatar md-whiteframe-1dp">
+            <mat-icon class="annotations__icon md-36 info">info</mat-icon>
+          </div>
+          <div class="annotations__title" fxLayout="row" fxFlex>
+            <span i18n>Item Info</span>
+          </div>
+        </mat-card-title>
+        <mat-card-content class="annotations__body md-body-1">
+          <div [innerHTML]="component.rubric"></div>
+        </mat-card-content>
+      </mat-card>
+      <div *ngIf="component.hasResponsesSummary">
+        <teacher-summary-display *ngIf="component.type === 'MultipleChoice'"
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+            [periodId]="periodId"
+            [studentDataType]="'responses'"
+            [source]="source"
+            [highlightCorrectAnswer]="component.hasCorrectAnswer"
+            [chartType]="'column'"
+            [doRender]="true">
+        </teacher-summary-display>
+      </div>
+      <div *ngIf="component.hasScoresSummary && component.hasScoreAnnotation">
+        <teacher-summary-display
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+            [periodId]="periodId"
+            [studentDataType]="'scores'"
+            [source]="source"
+            [chartType]="'column'"
+            [doRender]="true">
+        </teacher-summary-display>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
