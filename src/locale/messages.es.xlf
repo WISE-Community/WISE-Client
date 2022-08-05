@@ -17959,7 +17959,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Complete &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;&quot;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1570</context>
+          <context context-type="linenumber">1507</context>
         </context-group>
         <target state="translated">Completar &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;"</target>
       </trans-unit>
@@ -17967,7 +17967,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1576</context>
+          <context context-type="linenumber">1513</context>
         </context-group>
         <target state="translated">Visitar &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -17975,7 +17975,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Correctly answer &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1582</context>
+          <context context-type="linenumber">1519</context>
         </context-group>
         <target state="translated">Contestar correctamente &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -17983,7 +17983,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Obtain a score of &lt;b&gt;<x id="PH" equiv-text="scoresString"/>&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1597</context>
+          <context context-type="linenumber">1534</context>
         </context-group>
         <target state="translated">Obtener un puntaje de &lt;b&gt;<x id="PH" equiv-text="scoresString"/>&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -17991,7 +17991,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>You must choose &quot;<x id="PH" equiv-text="choiceText"/>&quot; on &quot;<x id="PH_1" equiv-text="nodeTitle"/>&quot;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1605</context>
+          <context context-type="linenumber">1542</context>
         </context-group>
         <target state="translated">Debe elegir "<x id="PH" equiv-text="choiceText"/>" on "<x id="PH_1" equiv-text="nodeTitle"/>"</target>
       </trans-unit>
@@ -17999,7 +17999,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; time on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1617</context>
+          <context context-type="linenumber">1554</context>
         </context-group>
         <target state="translated">Enviar &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; tiempo en &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -18007,7 +18007,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; times on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1619</context>
+          <context context-type="linenumber">1556</context>
         </context-group>
         <target state="translated">Enviar &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; veces en &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -18015,7 +18015,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Take the branch path from &lt;b&gt;<x id="PH" equiv-text="fromNodeTitle"/>&lt;/b&gt; to &lt;b&gt;<x id="PH_1" equiv-text="toNodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1626</context>
+          <context context-type="linenumber">1563</context>
         </context-group>
         <target state="translated">Tomar la bifurcación from &lt;b&gt;<x id="PH" equiv-text="fromNodeTitle"/>&lt;/b&gt; to &lt;b&gt;<x id="PH_1" equiv-text="toNodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -18023,7 +18023,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Write &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfWords"/>&lt;/b&gt; words on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1632</context>
+          <context context-type="linenumber">1569</context>
         </context-group>
         <target state="translated">Escribir &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfWords"/>&lt;/b&gt; palabras sobre &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -18031,7 +18031,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>&quot;<x id="PH" equiv-text="nodeTitle"/>&quot; is visible</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1638</context>
+          <context context-type="linenumber">1575</context>
         </context-group>
         <target state="translated">"<x id="PH" equiv-text="nodeTitle"/>" es visible</target>
       </trans-unit>
@@ -18039,7 +18039,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>&quot;<x id="PH" equiv-text="nodeTitle"/>&quot; is visitable</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1644</context>
+          <context context-type="linenumber">1581</context>
         </context-group>
         <target state="translated">"<x id="PH" equiv-text="nodeTitle"/>" es visitable</target>
       </trans-unit>
@@ -18047,7 +18047,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; note on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1651</context>
+          <context context-type="linenumber">1588</context>
         </context-group>
         <target state="translated">Agregar &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; nota sobre &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -18055,7 +18055,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; notes on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1653</context>
+          <context context-type="linenumber">1590</context>
         </context-group>
         <target state="translated">Agregar &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; notas sobre &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -18063,7 +18063,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; row in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1660</context>
+          <context context-type="linenumber">1597</context>
         </context-group>
         <target state="translated">Debe completar fila &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; en la &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -18071,7 +18071,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; rows in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1662</context>
+          <context context-type="linenumber">1599</context>
         </context-group>
         <target state="translated">Debe completar las filas &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; en la &lt;b&gt;Table&lt;/b&gt; en &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -18079,7 +18079,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Wait for your teacher to unlock the item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1665</context>
+          <context context-type="linenumber">1602</context>
         </context-group>
         <target state="translated">Esperar a que el/la docente desbloquee el item</target>
       </trans-unit>
