@@ -217,7 +217,16 @@ function createComponentStateAdditionalProcessing() {
         spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
         spyOn(component, 'isCRaterScoreOnSubmit').and.returnValue(true);
         spyOn(TestBed.inject(CRaterService), 'makeCRaterScoringRequest').and.returnValue(
-          of({ score: 1 })
+          of({
+            responses: {
+              feedback: {
+                ideas: {}
+              },
+              scores: {
+                raw_trim_round: 1
+              }
+            }
+          })
         );
         component.isSubmit = true;
         component.createComponentState('submit').then((componentState: any) => {

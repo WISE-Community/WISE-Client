@@ -210,7 +210,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       .pipe(timeout(this.cRaterTimeout))
       .subscribe(
         (response: CRaterResponse) => {
-          this.cRaterSuccessResponse(Object.assign(new CRaterResponse(), response));
+          const data = this.CRaterService.getDataFromResponse(response);
+          this.cRaterSuccessResponse(Object.assign(new CRaterResponse(), data));
         },
         () => {
           this.cRaterErrorResponse();

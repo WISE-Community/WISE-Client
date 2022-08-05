@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { Observable, of } from 'rxjs';
+import { CRaterIdea } from '../components/dialogGuidance/CRaterIdea';
+import { CRaterScore } from '../components/dialogGuidance/CRaterScore';
 
 @Injectable()
 export class CRaterService {
@@ -300,5 +302,50 @@ export class CRaterService {
       .then((isAvailable: boolean) => {
         return isAvailable;
       });
+  }
+
+  public getDataFromResponse(response: any): any {
+    const data: any = {};
+    if (this.isSingleScore(response)) {
+      data.score = this.getScore(response);
+    } else {
+      data.scores = this.getScores(response);
+    }
+    data.ideas = this.getIdeas(response);
+    return data;
+  }
+
+  private isSingleScore(response: any): boolean {
+    return response.responses.scores != null;
+  }
+
+  private getScore(response: any): number {
+    return response.responses.scores.raw_trim_round;
+  }
+
+  private getScores(response: any): any[] {
+    const scores = [];
+    for (const key in response.responses.trait_scores) {
+      const value = response.responses.trait_scores[key];
+      scores.push(
+        new CRaterScore(
+          key,
+          value.raw_trim_round,
+          value.raw,
+          value.score_range_min,
+          value.score_range_max
+        )
+      );
+    }
+    return scores;
+  }
+
+  private getIdeas(response: any): any[] {
+    const ideas = [];
+    for (const key in response.responses.feedback.ideas) {
+      const value = response.responses.feedback.ideas[key];
+      ideas.push(new CRaterIdea(key, value.detected));
+    }
+    return ideas;
   }
 }

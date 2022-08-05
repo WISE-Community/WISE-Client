@@ -358,8 +358,8 @@ export class OpenResponseStudent extends ComponentStudent {
     )
       .pipe(timeout(this.cRaterTimeout))
       .subscribe(
-        (data: any) => {
-          this.cRaterSuccessResponse(data, componentState, deferred, dialogRef);
+        (response: any) => {
+          this.cRaterSuccessResponse(response, componentState, deferred, dialogRef);
         },
         () => {
           this.cRaterErrorResponse(componentState, deferred, dialogRef);
@@ -378,7 +378,8 @@ export class OpenResponseStudent extends ComponentStudent {
     deferred.resolve(componentState);
   }
 
-  private cRaterSuccessResponse(data: any, componentState: any, deferred: any, dialogRef: any) {
+  private cRaterSuccessResponse(response: any, componentState: any, deferred: any, dialogRef: any) {
+    const data = this.CRaterService.getDataFromResponse(response);
     let score = data.score;
     let concepts = data.concepts;
     if (data.scores != null) {

@@ -83,7 +83,7 @@ describe('DialogGuidanceStudentComponent', () => {
 
   it('should create computer dialog response with multiple scores', () => {
     const response = new CRaterResponse();
-    const scores = [new CRaterScore('ki', 5, 5.0), new CRaterScore('science', 4, 4.1)];
+    const scores = [new CRaterScore('ki', 5, 5.0, 1, 5), new CRaterScore('science', 4, 4.1, 1, 5)];
     response.scores = scores;
     const computerDialogResponse = component.createComputerDialogResponse(response);
     expect((computerDialogResponse as ComputerDialogResponseMultipleScores).scores).toEqual(scores);

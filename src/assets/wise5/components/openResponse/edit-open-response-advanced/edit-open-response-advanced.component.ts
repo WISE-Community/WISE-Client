@@ -94,9 +94,9 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   verifyCRaterItemId(itemId: string): void {
     this.cRaterItemIdIsValid = null;
     this.isVerifyingCRaterItemId = true;
-    this.CRaterService.makeCRaterVerifyRequest(itemId).then((isValid) => {
+    this.CRaterService.makeCRaterVerifyRequest(itemId).then((response: any) => {
       this.isVerifyingCRaterItemId = false;
-      this.cRaterItemIdIsValid = isValid;
+      this.cRaterItemIdIsValid = response.available;
     });
   }
 
