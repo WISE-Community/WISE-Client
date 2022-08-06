@@ -13452,11 +13452,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1862</context>
+          <context context-type="linenumber">1866</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2697</context>
+          <context context-type="linenumber">2701</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9070768663485888935" datatype="html">
