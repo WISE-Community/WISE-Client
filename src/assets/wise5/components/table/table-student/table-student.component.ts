@@ -185,9 +185,7 @@ export class TableStudent extends ComponentStudent {
     this.dataExplorerSeries[dataExplorerSeriesIndex].xColumn = columnIndex;
     this.dataExplorerXColumn = columnIndex;
     this.setDataExplorerXColumnIsDisabled();
-    if (this.isDataExplorerXAxisLabelEmpty()) {
-      this.updateDataExplorerXAxisLabel(columnIndex);
-    }
+    this.updateDataExplorerXAxisLabel(columnIndex);
   }
 
   isDataExplorerXAxisLabelEmpty(): boolean {
@@ -1045,9 +1043,7 @@ export class TableStudent extends ComponentStudent {
     for (const singleSeries of this.dataExplorerSeries) {
       singleSeries.xColumn = this.dataExplorerXColumn;
     }
-    if (this.isDataExplorerXAxisLabelEmpty()) {
-      this.updateDataExplorerXAxisLabel(this.dataExplorerXColumn);
-    }
+    this.updateDataExplorerXAxisLabel(this.dataExplorerXColumn);
     this.studentDataChanged();
   }
 
