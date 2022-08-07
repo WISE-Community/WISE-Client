@@ -17215,7 +17215,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
           <context context-type="linenumber">143</context>
         </context-group>
-        <target state="needs-translation">Import Table</target>
+        <target state="translated">Importar tabla</target>
       </trans-unit>
       <trans-unit id="f691a121c479261a164621480b345efc8f65326c" datatype="html">
         <source>Only .csv (comma separated values) files are allowed</source>
@@ -17223,7 +17223,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
           <context context-type="linenumber">149</context>
         </context-group>
-        <target state="needs-translation">Only .csv (comma separated values) files are allowed</target>
+        <target state="translated">Solo se permiten archivos con formato CSV (valores separados por comas)</target>
       </trans-unit>
       <trans-unit id="3802284852279199102" datatype="html">
         <source>Are you sure you want to overwrite the existing table?</source>
@@ -17231,7 +17231,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
           <context context-type="linenumber">188</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to overwrite the existing table?</target>
+        <target state="translated">¿Sobreescribir la tabla existente?</target>
       </trans-unit>
       <trans-unit id="5497998297263821629" datatype="html">
         <source>Importing table...</source>
@@ -17239,7 +17239,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
           <context context-type="linenumber">190</context>
         </context-group>
-        <target state="needs-translation">Importing table...</target>
+        <target state="translated">Importando tabla...</target>
       </trans-unit>
       <trans-unit id="4805591784714355993" datatype="html">
         <source>Error: The table contains more than <x id="PH" equiv-text="this.MAX_ALLOWED_CELLS_IN_IMPORT"/> cells</source>
@@ -17247,7 +17247,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
           <context context-type="linenumber">198</context>
         </context-group>
-        <target state="needs-translation">Error: The table contains more than <x id="PH" equiv-text="this.MAX_ALLOWED_CELLS_IN_IMPORT"/> cells</target>
+        <target state="translated">Error: La tabla contiene más de <x id="PH" equiv-text="this.MAX_ALLOWED_CELLS_IN_IMPORT"/> celdas</target>
       </trans-unit>
       <trans-unit id="8522934403801176161" datatype="html">
         <source>Successfully imported table</source>
@@ -17255,7 +17255,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
           <context context-type="linenumber">202</context>
         </context-group>
-        <target state="needs-translation">Successfully imported table</target>
+        <target state="translated">La tabla fue importada exitosamente</target>
       </trans-unit>
       <trans-unit id="7f8e64261497f0b38cfb8aa12b8f77cbb01a179b" datatype="html">
         <source>Merge</source>
@@ -17375,7 +17375,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
           <context context-type="linenumber">126,128</context>
         </context-group>
-        <target state="needs-translation"> Editable </target>
+        <target state="translated"> Editable </target>
       </trans-unit>
       <trans-unit id="5943b22e7e12f461de18c831b7cf94ddf4baf11a" datatype="html">
         <source>Column Cell Size</source>
