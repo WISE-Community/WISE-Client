@@ -13452,11 +13452,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1862</context>
+          <context context-type="linenumber">1866</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2697</context>
+          <context context-type="linenumber">2701</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9070768663485888935" datatype="html">
@@ -15543,46 +15543,60 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="b2191784ed157dde935e61493024dce113a03da9" datatype="html">
+        <source>You can freeze any number of columns to the beginning or end of the table. Frozen columns must be next to each other.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="752d332c8e7b4c9e022f12882ebe67ae140349bd" datatype="html">
+        <source>Freeze</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
+          <context context-type="linenumber">163</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8d3659d1c474ee37dde6c775445b585af3b79b56" datatype="html">
         <source> Make All Cells Editable </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">165,167</context>
+          <context context-type="linenumber">175,177</context>
         </context-group>
       </trans-unit>
       <trans-unit id="964c339de395a09a2ea31889d1f3b0e89ffd9107" datatype="html">
         <source> Make All Cells Uneditable </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">172,174</context>
+          <context context-type="linenumber">182,184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="551594366276323400" datatype="html">
         <source>Are you sure you want to decrease the number of rows?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6196685900828213749" datatype="html">
         <source>Are you sure you want to decrease the number of columns?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9120249294492405998" datatype="html">
         <source>Are you sure you want to delete this row?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.ts</context>
-          <context context-type="linenumber">207</context>
+          <context context-type="linenumber">209</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3081423885664722646" datatype="html">
         <source>Are you sure you want to delete this column?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">233</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c1ac7b8d0d0a0d2e7452433c930cef085486540c" datatype="html">

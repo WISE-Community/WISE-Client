@@ -19,6 +19,7 @@ export class TabulatorData {
 export class TabulatorColumn {
   title: string;
   field: string;
+  frozen: boolean;
   width: number | string; // number of pixels or percent of table width (e.g. '20%')
   editor: string;
   editable: (cell: Tabulator.CellComponent) => boolean;

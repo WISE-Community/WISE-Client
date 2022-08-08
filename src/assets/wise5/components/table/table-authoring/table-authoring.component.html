@@ -143,7 +143,7 @@
       </td>
       <td *ngFor="let x of [].constructor(getNumColumnsInTableData()); index as cellIndex"
           class="inner-cell-container">
-        <div fxLayoutAlign="center center">
+        <div>
           <mat-form-field>
             <mat-label i18n>Column Cell Size</mat-label>
             <input matInput
@@ -152,6 +152,16 @@
                 [(ngModel)]="columnCellSizes[cellIndex]"
                 (ngModelChange)="columnSizeChanged(cellIndex)"/>
           </mat-form-field>
+        </div>
+        <div>
+          <mat-checkbox color="primary"
+              [(ngModel)]="frozenColumns[cellIndex]"
+              (ngModelChange)="frozenColumnsChanged(cellIndex)"
+              matTooltip="You can freeze any number of columns to the beginning or end of the table. Frozen columns must be next to each other."
+              matTooltipPosition="above"
+              i18n-matTooltip>
+            <span i18n>Freeze</span>
+          </mat-checkbox>
         </div>
       </td>
     </tr>

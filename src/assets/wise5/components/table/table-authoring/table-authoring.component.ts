@@ -16,6 +16,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 })
 export class TableAuthoring extends ComponentAuthoring {
   columnCellSizes: any;
+  frozenColumns: any;
 
   numColumnsChange: Subject<number> = new Subject<number>();
   numRowsChange: Subject<number> = new Subject<number>();
@@ -48,6 +49,7 @@ export class TableAuthoring extends ComponentAuthoring {
   ngOnInit() {
     super.ngOnInit();
     this.columnCellSizes = this.parseColumnCellSizes(this.componentContent);
+    this.frozenColumns = this.parseFrozenColumns(this.componentContent);
   }
 
   tableNumRowsChanged(): void {
@@ -308,16 +310,42 @@ export class TableAuthoring extends ComponentAuthoring {
     if (cellSize == '') {
       cellSize = null;
     }
-    this.setColumnCellSizes(index, cellSize);
+    this.setColumnCellSize(index, cellSize);
   }
 
-  setColumnCellSizes(column: number, size: number): void {
+  setColumnCellSize(column: number, size: number): void {
     const tableData = this.authoringComponentContent.tableData;
-    for (let r = 0; r < tableData.length; r++) {
-      const row = tableData[r];
-      const cell = row[column];
+    const firstRow = tableData[0];
+    if (firstRow != null) {
+      const cell = firstRow[column];
       if (cell != null) {
         cell.size = size;
+      }
+    }
+    this.componentChanged();
+  }
+
+  parseFrozenColumns(componentContent: any): any {
+    const frozenColumns = {};
+    const tableData = componentContent.tableData;
+    const firstRow = tableData[0];
+    if (firstRow != null) {
+      for (let x = 0; x < firstRow.length; x++) {
+        const cell = firstRow[x];
+        frozenColumns[x] = cell.frozen;
+      }
+    }
+    return frozenColumns;
+  }
+
+  frozenColumnsChanged(index: number): void {
+    let frozen = this.frozenColumns[index];
+    const tableData = this.authoringComponentContent.tableData;
+    const firstRow = tableData[0];
+    if (firstRow != null) {
+      const cell = firstRow[index];
+      if (cell != null) {
+        cell.frozen = frozen;
       }
     }
     this.componentChanged();
