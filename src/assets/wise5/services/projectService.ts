@@ -4,7 +4,6 @@ import { ConfigService } from './configService';
 import { UtilService } from './utilService';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SessionService } from './sessionService';
 import { Observable, Subject } from 'rxjs';
 import { Node } from '../common/Node';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
@@ -47,7 +46,6 @@ export class ProjectService {
     protected http: HttpClient,
     protected ConfigService: ConfigService,
     protected pathService: PathService,
-    protected SessionService: SessionService,
     protected UtilService: UtilService
   ) {}
 
