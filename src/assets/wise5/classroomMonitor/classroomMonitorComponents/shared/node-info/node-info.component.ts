@@ -8,10 +8,10 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 
 @Component({
   selector: 'node-info',
+  styleUrls: ['node-info.component.scss'],
   templateUrl: 'node-info.component.html'
 })
 export class NodeInfoComponent {
-  color: string;
   nodeContent: any;
   @Input() nodeId: string;
   periodId: number;
@@ -33,7 +33,6 @@ export class NodeInfoComponent {
     if (this.nodeContent.rubric != null) {
       this.nodeContent.rubric = this.projectService.replaceAssetPaths(this.nodeContent.rubric);
     }
-    this.color = this.projectService.getNode(this.nodeId).getIcon().color;
     this.populateComponentFields();
   }
 
