@@ -2,7 +2,7 @@
 
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
@@ -17,6 +17,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 export class TableAuthoring extends ComponentAuthoring {
   columnCellSizes: any;
   frozenColumns: any;
+  frozenColumnsLimitReached: boolean = false;
 
   numColumnsChange: Subject<number> = new Subject<number>();
   numRowsChange: Subject<number> = new Subject<number>();
@@ -226,6 +227,7 @@ export class TableAuthoring extends ComponentAuthoring {
     }
     this.authoringComponentContent.numColumns++;
     this.parseColumnCellSizes(this.authoringComponentContent);
+    this.parseFrozenColumns(this.authoringComponentContent);
     this.componentChanged();
   }
 
@@ -239,6 +241,7 @@ export class TableAuthoring extends ComponentAuthoring {
       }
       this.authoringComponentContent.numColumns--;
       this.parseColumnCellSizes(this.authoringComponentContent);
+      this.parseFrozenColumns(this.authoringComponentContent);
       this.componentChanged();
     }
   }
@@ -325,23 +328,22 @@ export class TableAuthoring extends ComponentAuthoring {
     this.componentChanged();
   }
 
-  parseFrozenColumns(componentContent: any): any {
+  private parseFrozenColumns(componentContent: any): any {
     const frozenColumns = {};
-    const tableData = componentContent.tableData;
-    const firstRow = tableData[0];
+    const firstRow = componentContent.tableData[0];
     if (firstRow != null) {
       for (let x = 0; x < firstRow.length; x++) {
         const cell = firstRow[x];
         frozenColumns[x] = cell.frozen;
       }
     }
+    this.frozenColumnsLimitReached = this.isfrozenColumnsLimitReached();
     return frozenColumns;
   }
 
   frozenColumnsChanged(index: number): void {
     let frozen = this.frozenColumns[index];
-    const tableData = this.authoringComponentContent.tableData;
-    const firstRow = tableData[0];
+    const firstRow = this.authoringComponentContent.tableData[0];
     if (firstRow != null) {
       const cell = firstRow[index];
       if (cell != null) {
@@ -349,6 +351,19 @@ export class TableAuthoring extends ComponentAuthoring {
       }
     }
     this.componentChanged();
+    this.frozenColumnsLimitReached = this.isfrozenColumnsLimitReached();
+  }
+
+  private isfrozenColumnsLimitReached(): boolean {
+    const firstRow = this.authoringComponentContent.tableData[0];
+    const maxFrozen = firstRow.length - 1;
+    let count = 0;
+    for (const key in firstRow) {
+      if (firstRow[key].frozen) {
+        count++;
+      }
+    }
+    return count === maxFrozen;
   }
 
   automaticallySetConnectedComponentFieldsIfPossible(connectedComponent) {
