@@ -332,9 +332,9 @@ export class TableAuthoring extends ComponentAuthoring {
     const frozenColumns = {};
     const firstRow = componentContent.tableData[0];
     if (firstRow != null) {
-      for (let x = 0; x < firstRow.length; x++) {
-        const cell = firstRow[x];
-        frozenColumns[x] = cell.frozen;
+      for (const key in firstRow) {
+        const cell = firstRow[key];
+        frozenColumns[key] = cell.frozen;
       }
     }
     this.frozenColumnsLimitReached = this.isfrozenColumnsLimitReached();
@@ -355,9 +355,12 @@ export class TableAuthoring extends ComponentAuthoring {
   }
 
   private isfrozenColumnsLimitReached(): boolean {
-    const firstRow = this.authoringComponentContent.tableData[0];
-    const maxFrozen = firstRow.length - 1;
     let count = 0;
+    const firstRow = this.authoringComponentContent.tableData[0];
+    if (firstRow == null) {
+      return false;
+    }
+    const maxFrozen = firstRow.length - 1;
     for (const key in firstRow) {
       if (firstRow[key].frozen) {
         count++;
