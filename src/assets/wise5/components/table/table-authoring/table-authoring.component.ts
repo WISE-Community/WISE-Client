@@ -316,7 +316,7 @@ export class TableAuthoring extends ComponentAuthoring {
     this.setColumnCellSize(index, cellSize);
   }
 
-  setColumnCellSize(column: number, size: number): void {
+  private setColumnCellSize(column: number, size: number): void {
     const tableData = this.authoringComponentContent.tableData;
     const firstRow = tableData[0];
     if (firstRow != null) {
