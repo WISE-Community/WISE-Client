@@ -1,5 +1,6 @@
 import * as html2canvas from 'html2canvas';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Tabulator } from 'tabulator-tables';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -12,6 +13,8 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { TableService } from '../tableService';
 import { MatDialog } from '@angular/material/dialog';
+import { TabulatorData } from '../TabulatorData';
+import { TabulatorDataService } from '../tabulatorDataService';
 
 @Component({
   selector: 'table-student',
@@ -20,6 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
   encapsulation: ViewEncapsulation.None
 })
 export class TableStudent extends ComponentStudent {
+  columnIndexToIsUsed: Map<number, boolean> = new Map();
   columnNames: string[];
   dataExplorerColumnToIsDisabled: any = {};
   dataExplorerGraphTypes: any[];
@@ -39,6 +43,7 @@ export class TableStudent extends ComponentStudent {
   numDataExplorerSeries: number;
   tableData: any;
   tableId: string;
+  tabulatorData: TabulatorData;
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -51,6 +56,7 @@ export class TableStudent extends ComponentStudent {
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     private TableService: TableService,
+    private TabulatorDataService: TabulatorDataService,
     protected UtilService: UtilService
   ) {
     super(
@@ -129,6 +135,7 @@ export class TableStudent extends ComponentStudent {
       if (this.componentContent.dataExplorerDataToColumn != null) {
         this.setDataExplorerDataToColumn();
       }
+      this.updateColumnsUsed();
     }
 
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
@@ -137,18 +144,7 @@ export class TableStudent extends ComponentStudent {
 
     this.disableComponentIfNecessary();
 
-    if (
-      this.isDataExplorerEnabled &&
-      this.componentContent.dataExplorerDataToColumn != null &&
-      this.isAllDataExplorerSeriesSpecified()
-    ) {
-      // All the data explorer series have been fixed to display a specific column so we will call
-      // studentDataChanged() immediately to generate the table student data which will then be sent
-      // to the graph component so the graph can immediately be displayed. If we did not do this,
-      // the graph may not ever be displayed since it requires the student to change the table data.
-      // If all the data explorer series have been fixed to display a specific column and all the
-      // table data cells are not editable by the student, the student may not ever be able to
-      // change the table to generate table data to be sent to the graph.
+    if (this.isDataExplorerEnabled && this.componentContent.dataExplorerDataToColumn != null) {
       setTimeout(() => {
         this.studentDataChanged();
       }, 1000);
@@ -321,6 +317,7 @@ export class TableStudent extends ComponentStudent {
        */
       this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
     }
+    this.setTabulatorData();
   }
 
   /**
@@ -349,6 +346,7 @@ export class TableStudent extends ComponentStudent {
           this.setDataExplorerDataToColumn();
         }
       }
+      this.setTabulatorData();
       this.studentDataChanged();
     }
   }
@@ -921,6 +919,7 @@ export class TableStudent extends ComponentStudent {
       }
     }
     if (isStudentDataChanged) {
+      this.setTabulatorData();
       this.studentDataChanged();
     }
   }
@@ -994,6 +993,7 @@ export class TableStudent extends ComponentStudent {
   studentDataChanged() {
     if (this.isDataExplorerEnabled) {
       this.updateColumnNames();
+      this.updateColumnsUsed();
       this.updateDataExplorerSeriesNames();
     }
     this.setIsDirtyAndBroadcast();
@@ -1008,6 +1008,22 @@ export class TableStudent extends ComponentStudent {
     this.columnNames = firstRow.map((cell: any): string => {
       return cell.text;
     });
+  }
+
+  updateColumnsUsed(): void {
+    const firstRow = this.tableData[0];
+    for (let c = 0; c < firstRow.length; c++) {
+      this.columnIndexToIsUsed.set(c, this.isColumnUsed(c));
+    }
+  }
+
+  isColumnUsed(columnIndex: number): boolean {
+    return (
+      columnIndex === this.dataExplorerXColumn ||
+      this.dataExplorerSeries.some((series) => {
+        return series.yColumn === columnIndex;
+      })
+    );
   }
 
   updateDataExplorerSeriesNames() {
@@ -1141,9 +1157,24 @@ export class TableStudent extends ComponentStudent {
         componentId: this.componentId
       });
     }
+    this.setTabulatorData();
   }
 
   attachStudentAsset(studentAsset: any): void {
     // TODO: make sure the asset is a csv file then populate the csv data into the table
+  }
+
+  private setTabulatorData(): void {
+    this.tabulatorData = this.TabulatorDataService.convertTableDataToTabulator(
+      this.tableData,
+      this.componentContent.globalCellSize
+    );
+  }
+
+  tabulatorCellChanged(cell: Tabulator.CellComponent): void {
+    const columnIndex = parseInt(cell.getColumn().getField());
+    const rowIndex = cell.getRow().getPosition() + 1;
+    this.tableData[rowIndex][columnIndex].text = cell.getValue();
+    this.studentDataChanged();
   }
 }

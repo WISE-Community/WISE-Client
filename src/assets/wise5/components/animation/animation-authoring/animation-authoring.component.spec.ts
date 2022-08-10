@@ -10,13 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { AnimationAuthoring } from './animation-authoring.component';
 
@@ -31,7 +27,6 @@ describe('AnimationAuthoring', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatFormFieldModule,
@@ -39,19 +34,15 @@ describe('AnimationAuthoring', () => {
         MatInputModule,
         MatRadioModule,
         ReactiveFormsModule,
-        UpgradeModule
+        UpgradeModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [AnimationAuthoring, EditComponentPrompt],
       providers: [
-        ConfigService,
         { provide: NodeService, useClass: MockNodeService },
         ProjectAssetService,
-        ProjectService,
-        SessionService,
-        TeacherProjectService,
-        UtilService
-      ],
-      schemas: []
+        TeacherProjectService
+      ]
     });
     fixture = TestBed.createComponent(AnimationAuthoring);
     component = fixture.componentInstance;

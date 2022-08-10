@@ -8,24 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PossibleScoreComponent } from '../../../../app/possible-score/possible-score.component';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { ComponentHeader } from '../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../services/componentServiceLookupServiceModule';
-import { ComputerAvatarService } from '../../services/computerAvatarService';
-import { ConfigService } from '../../services/configService';
-import { CRaterService } from '../../services/cRaterService';
 import { DialogGuidanceFeedbackService } from '../../services/dialogGuidanceFeedbackService';
-import { NodeService } from '../../services/nodeService';
-import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentAssetService } from '../../services/studentAssetService';
-import { StudentDataService } from '../../services/studentDataService';
-import { StudentStatusService } from '../../services/studentStatusService';
-import { TagService } from '../../services/tagService';
-import { UtilService } from '../../services/utilService';
-import { MockNodeService } from '../common/MockNodeService';
-import { ComponentService } from '../componentService';
 import { CRaterIdea } from './CRaterIdea';
 import { CRaterResponse } from './CRaterResponse';
 import { CRaterScore } from './CRaterScore';
@@ -109,33 +96,16 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
       ],
       imports: [
         BrowserAnimationsModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatCardModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        MatInputModule
+        MatInputModule,
+        StudentTeacherCommonServicesModule
       ],
-      providers: [
-        AnnotationService,
-        ComponentService,
-        ComputerAvatarService,
-        CRaterService,
-        ConfigService,
-        DialogGuidanceFeedbackService,
-        DialogGuidanceService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        StudentStatusService,
-        TagService,
-        UtilService
-      ]
+      providers: [DialogGuidanceFeedbackService]
     }).compileComponents();
   });
   beforeEach(() => {

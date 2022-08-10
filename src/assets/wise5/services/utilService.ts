@@ -693,7 +693,7 @@ export class UtilService {
    * can be overriden in the second argument.
    * Source: http://www.bennadel.com/blog/1504-ask-ben-parsing-csv-strings-with-javascript-exec-regular-expression-command.htm
    */
-  CSVToArray(strData, strDelimiter) {
+  CSVToArray(strData: string, strDelimiter: string = ','): string[][] {
     // Check to see if the delimiter is defined. If not,
     // then default to comma.
     strDelimiter = strDelimiter || ',';
@@ -753,7 +753,7 @@ export class UtilService {
       // Now that we have our value string, let's add
       // it to the data array.
       let finalValue = strMatchedValue;
-      const floatVal = parseFloat(strMatchedValue);
+      const floatVal = parseFloat(strMatchedValue.replace(new RegExp(',', 'g'), ''));
       if (!isNaN(floatVal)) {
         finalValue = floatVal;
       }

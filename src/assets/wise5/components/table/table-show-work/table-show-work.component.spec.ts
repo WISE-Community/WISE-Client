@@ -1,10 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { UtilService } from '../../../services/utilService';
+import { TabulatorDataService } from '../tabulatorDataService';
 import { TableShowWorkComponent } from './table-show-work.component';
 
 let fixture: ComponentFixture<TableShowWorkComponent>;
@@ -13,9 +11,8 @@ let component: TableShowWorkComponent;
 describe('TableShowWorkComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule],
-      declarations: [TableShowWorkComponent],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      declarations: [TableShowWorkComponent]
     });
     fixture = TestBed.createComponent(TableShowWorkComponent);
     const componentContent = {
@@ -30,10 +27,9 @@ describe('TableShowWorkComponent', () => {
     fixture.detectChanges();
     component.componentContent = { globalCellSize: 10 };
   });
-
-  injectCellWidths();
-  calculateCellWidth();
+  
   calculateColumnNames();
+  setupTable();
 });
 
 function createCell(text: string): any {
@@ -46,41 +42,6 @@ function createComponentState(tableData: any): any {
       tableData: tableData
     }
   };
-}
-
-function injectCellWidths() {
-  describe('injectCellWidths', () => {
-    it('should inject cell widths', () => {
-      const tableData: any[] = [
-        [{}, {}],
-        [{}, {}]
-      ];
-      const expectedWidth = 100;
-      expect(tableData[0][0].width).toBeUndefined();
-      expect(tableData[0][1].width).toBeUndefined();
-      expect(tableData[1][0].width).toBeUndefined();
-      expect(tableData[1][1].width).toBeUndefined();
-      component.injectCellWidths(tableData);
-      expect(tableData[0][0].width).toEqual(expectedWidth);
-      expect(tableData[0][1].width).toEqual(expectedWidth);
-      expect(tableData[1][0].width).toEqual(expectedWidth);
-      expect(tableData[1][1].width).toEqual(expectedWidth);
-    });
-  });
-}
-
-function calculateCellWidth() {
-  describe('calculateCellWidth', () => {
-    it('should calculate cell width when it has none', () => {
-      const cell = {};
-      expect(component.calculateCellWidth(cell)).toEqual(100);
-    });
-
-    it('should calculate cell width when it cell has a size set', () => {
-      const cell = { size: 20 };
-      expect(component.calculateCellWidth(cell)).toEqual(200);
-    });
-  });
 }
 
 function calculateColumnNames() {
@@ -97,6 +58,20 @@ function calculateColumnNames() {
       expect(columnNames.length).toEqual(2);
       expect(columnNames[0]).toEqual(columnName1);
       expect(columnNames[1]).toEqual(columnName2);
+    });
+  });
+}
+
+function setupTable() {
+  describe('setupTable', () => {
+    it('should setup table', () => {
+      component.tableData = null;
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
+      component.setupTable();
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
   });
 }

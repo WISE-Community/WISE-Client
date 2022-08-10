@@ -8,8 +8,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TableService extends ComponentService {
-  $translate: any;
-
   constructor(
     private StudentAssetService: StudentAssetService,
     protected UtilService: UtilService

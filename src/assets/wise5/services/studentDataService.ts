@@ -81,8 +81,6 @@ export class StudentDataService extends DataService {
     }
   };
 
-  private deleteKeyPressedSource: Subject<any> = new Subject<any>();
-  public deleteKeyPressed$: Observable<any> = this.deleteKeyPressedSource.asObservable();
   private nodeClickLockedSource: Subject<any> = new Subject<any>();
   public nodeClickLocked$: Observable<any> = this.nodeClickLockedSource.asObservable();
   private componentDirtySource: Subject<boolean> = new Subject<boolean>();
@@ -93,8 +91,6 @@ export class StudentDataService extends DataService {
   public componentSubmitDirty$: Observable<any> = this.componentSubmitDirtySource.asObservable();
   private componentSubmitTriggeredSource: Subject<boolean> = new Subject<boolean>();
   public componentSubmitTriggered$: Observable<any> = this.componentSubmitTriggeredSource.asObservable();
-  private pauseScreenSource: Subject<boolean> = new Subject<boolean>();
-  public pauseScreen$: Observable<any> = this.pauseScreenSource.asObservable();
   private componentStudentDataSource: Subject<any> = new Subject<any>();
   public componentStudentData$: Observable<any> = this.componentStudentDataSource.asObservable();
   private studentWorkSavedToServerSource: Subject<any> = new Subject<any>();
@@ -118,10 +114,6 @@ export class StudentDataService extends DataService {
     this.notebookService.notebookUpdated$.subscribe(() => {
       this.updateNodeStatuses();
     });
-  }
-
-  pauseScreen(doPause: boolean) {
-    this.pauseScreenSource.next(doPause);
   }
 
   broadcastComponentStudentData(componentStudentData: any) {
@@ -1428,9 +1420,6 @@ export class StudentDataService extends DataService {
   }
   broadcastComponentSubmitTriggered(args: any) {
     this.componentSubmitTriggeredSource.next(args);
-  }
-  broadcastDeleteKeyPressed() {
-    this.deleteKeyPressedSource.next();
   }
   setNavItemExpanded(nodeId: string, isExpanded: boolean) {
     this.navItemIsExpandedSource.next({ nodeId: nodeId, isExpanded: isExpanded });

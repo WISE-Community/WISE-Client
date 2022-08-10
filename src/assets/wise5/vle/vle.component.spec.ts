@@ -1,27 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NotebookService } from '../services/notebookService';
-import { NotificationService } from '../services/notificationService';
 import { VLEProjectService } from './vleProjectService';
 import { VLEComponent } from './vle.component';
-import { SessionService } from '../services/sessionService';
 import { StudentDataService } from '../services/studentDataService';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ProjectService } from '../services/projectService';
-import { UtilService } from '../services/utilService';
-import { StudentAssetService } from '../services/studentAssetService';
-import { TagService } from '../services/tagService';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component';
 import { NodeComponent } from './node/node.component';
 import { NotebookNotesComponent } from '../../../app/notebook/notebook-notes/notebook-notes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentService } from '../components/componentService';
-import { NodeService } from '../services/nodeService';
 import { StudentAccountMenuComponent } from './student-account-menu/student-account-menu.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
@@ -35,11 +27,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { NodeStatusIcon } from '../themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
 import { NodeIconComponent } from './node-icon/node-icon.component';
 import { FormsModule } from '@angular/forms';
-import { ComponentServiceLookupServiceModule } from '../services/componentServiceLookupServiceModule';
 import { InitializeVLEService } from '../services/initializeVLEService';
-import { AchievementService } from '../services/achievementService';
-import { StudentWebSocketService } from '../services/studentWebSocketService';
-import { StudentStatusService } from '../services/studentStatusService';
+import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher-common-services.module';
+import { PauseScreenService } from '../services/pauseScreenService';
+import { StudentNotificationService } from '../services/studentNotificationService';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
@@ -52,7 +43,6 @@ describe('VLEComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatBadgeModule,
@@ -65,7 +55,8 @@ describe('VLEComponent', () => {
         MatSelectModule,
         MatSidenavModule,
         MatSnackBarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [
         NavigationComponent,
@@ -79,22 +70,10 @@ describe('VLEComponent', () => {
         VLEComponent
       ],
       providers: [
-        AchievementService,
-        AnnotationService,
-        ConfigService,
-        ComponentService,
         InitializeVLEService,
-        NodeService,
-        NotebookService,
-        NotificationService,
+        PauseScreenService,
         ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        StudentStatusService,
-        StudentWebSocketService,
-        TagService,
-        UtilService,
+        StudentNotificationService,
         VLEProjectService
       ]
     }).compileComponents();

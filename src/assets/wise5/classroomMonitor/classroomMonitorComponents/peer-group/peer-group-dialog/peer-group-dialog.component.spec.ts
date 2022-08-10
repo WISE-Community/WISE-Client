@@ -3,27 +3,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
-import { AchievementService } from '../../../../services/achievementService';
-import { AnnotationService } from '../../../../services/annotationService';
-import { ConfigService } from '../../../../services/configService';
-import { NotificationService } from '../../../../services/notificationService';
-import { ProjectService } from '../../../../services/projectService';
-import { SessionService } from '../../../../services/sessionService';
-import { StudentDataService } from '../../../../services/studentDataService';
-import { StudentStatusService } from '../../../../services/studentStatusService';
-import { TagService } from '../../../../services/tagService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
-import { UtilService } from '../../../../services/utilService';
 import { SelectPeriodComponent } from '../../select-period/select-period.component';
 import { PeerGroupDialogComponent } from './peer-group-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { PeerGrouping } from '../../../../../../app/domain/peerGrouping';
-import { ComponentServiceLookupServiceModule } from '../../../../services/componentServiceLookupServiceModule';
-import { NotebookService } from '../../../../services/notebookService';
+import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 
 describe('PeerGroupDialogComponent', () => {
   let component: PeerGroupDialogComponent;
@@ -35,28 +24,17 @@ describe('PeerGroupDialogComponent', () => {
       imports: [
         BrowserAnimationsModule,
         CommonModule,
-        ComponentServiceLookupServiceModule,
         HttpClientTestingModule,
         MatDialogModule,
-        MatSelectModule
+        MatSelectModule,
+        StudentTeacherCommonServicesModule
       ],
       providers: [
-        AchievementService,
-        AnnotationService,
         ClassroomStatusService,
-        ConfigService,
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        NotebookService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        StudentStatusService,
-        TagService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
-        UtilService,
         WorkgroupService
       ]
     }).compileComponents();

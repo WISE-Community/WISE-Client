@@ -4,7 +4,9 @@ import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
-import { forkJoin, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
+import { UserService } from '../../services/user.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-teacher-run-list',
@@ -12,6 +14,8 @@ import { forkJoin, Subscription } from 'rxjs';
   styleUrls: ['./teacher-run-list.component.scss']
 })
 export class TeacherRunListComponent implements OnInit {
+  MAX_RECENT_RUNS = 10;
+
   runs: TeacherRun[] = [];
   filteredRuns: TeacherRun[] = [];
   loaded: boolean = false;
@@ -26,6 +30,7 @@ export class TeacherRunListComponent implements OnInit {
     private teacherService: TeacherService,
     private configService: ConfigService,
     private router: Router,
+    private userService: UserService,
     @Inject(LOCALE_ID) private localeID: string
   ) {}
 
@@ -39,19 +44,33 @@ export class TeacherRunListComponent implements OnInit {
   }
 
   private getRuns(): void {
-    forkJoin([this.teacherService.getRuns(), this.teacherService.getSharedRuns()]).subscribe(
-      ([personalRuns, sharedRuns]) => {
-        personalRuns = personalRuns.map((run) => new TeacherRun(run));
-        sharedRuns = sharedRuns.map((run) => {
-          const sharedRun = new TeacherRun(run);
-          sharedRun.shared = true;
-          return sharedRun;
-        });
-        this.runs = personalRuns.concat(sharedRuns);
+    this.teacherService
+      .getRuns(this.MAX_RECENT_RUNS)
+      .pipe(mergeMap((runs) => this.processRecentRuns(runs)))
+      .subscribe((runs: TeacherRun[]) => {
+        this.setRuns(runs);
         this.processRuns();
         this.loaded = true;
-      }
-    );
+      });
+  }
+
+  private processRecentRuns(runs: TeacherRun[]): Observable<TeacherRun[]> {
+    if (runs.length < this.MAX_RECENT_RUNS) {
+      return of(runs);
+    } else {
+      this.setRuns(runs);
+      return this.teacherService.getRuns();
+    }
+  }
+
+  private setRuns(runs: TeacherRun[]): void {
+    const userId = this.userService.getUserId();
+    this.runs = runs.map((run) => {
+      const teacherRun = new TeacherRun(run);
+      teacherRun.shared = !teacherRun.isOwner(userId);
+      return teacherRun;
+    });
+    this.filteredRuns = this.runs;
   }
 
   private subscribeToRuns(): void {

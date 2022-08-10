@@ -59,7 +59,6 @@ describe('StudentRunListItemComponent', () => {
     const owner = new User();
     owner.displayName = 'Mr. Happy';
     run.owner = owner;
-    run.projectThumb = 'Happy.png';
     run.startTime = new Date('2018-10-17T00:00:00.0').getTime();
     const project: Project = new Project();
     project.id = 1;

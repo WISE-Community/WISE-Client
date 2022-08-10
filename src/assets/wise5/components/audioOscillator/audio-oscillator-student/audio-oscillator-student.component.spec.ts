@@ -12,26 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
-import { AudioOscillatorService } from '../audioOscillatorService';
 import { AudioOscillatorStudent } from './audio-oscillator-student.component';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: AudioOscillatorStudent;
 let fixture: ComponentFixture<AudioOscillatorStudent>;
@@ -48,7 +32,6 @@ describe('AudioOscillatorStudent', () => {
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
-        ComponentServiceLookupServiceModule,
         FormsModule,
         HttpClientTestingModule,
         MatDialogModule,
@@ -57,24 +40,10 @@ describe('AudioOscillatorStudent', () => {
         MatInputModule,
         MatSelectModule,
         MatTooltipModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        StudentTeacherCommonServicesModule
       ],
-      declarations: [AudioOscillatorStudent, ComponentHeader, PossibleScoreComponent],
-      providers: [
-        AnnotationService,
-        AudioOscillatorService,
-        ComponentService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
-      schemas: []
+      declarations: [AudioOscillatorStudent, ComponentHeader, PossibleScoreComponent]
     });
     fixture = TestBed.createComponent(AudioOscillatorStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({

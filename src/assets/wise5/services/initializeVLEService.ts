@@ -4,10 +4,12 @@ import { VLEProjectService } from '../vle/vleProjectService';
 import { AchievementService } from './achievementService';
 import { ConfigService } from './configService';
 import { NotebookService } from './notebookService';
-import { NotificationService } from './notificationService';
+import { PauseScreenService } from './pauseScreenService';
 import { SessionService } from './sessionService';
+import { StompService } from './stompService';
 import { StudentAssetService } from './studentAssetService';
 import { StudentDataService } from './studentDataService';
+import { StudentNotificationService } from './studentNotificationService';
 import { StudentStatusService } from './studentStatusService';
 import { StudentWebSocketService } from './studentWebSocketService';
 
@@ -20,9 +22,11 @@ export class InitializeVLEService {
     private achievementService: AchievementService,
     private configService: ConfigService,
     private notebookService: NotebookService,
-    private notificationService: NotificationService,
+    private notificationService: StudentNotificationService,
+    private pauseScreenService: PauseScreenService,
     private projectService: VLEProjectService,
     private sessionService: SessionService,
+    private stompService: StompService,
     private studentAssetService: StudentAssetService,
     private studentDataService: StudentDataService,
     private studentStatusService: StudentStatusService,
@@ -34,11 +38,14 @@ export class InitializeVLEService {
     this.sessionService.initializeSession();
     this.studentStatusService.retrieveStudentStatus();
     await this.projectService.retrieveProject();
+    await this.stompService.initialize();
     this.studentWebSocketService.initialize();
     await this.studentDataService.retrieveStudentData();
     await this.notificationService.retrieveNotifications();
     await this.achievementService.retrieveStudentAchievements();
     await this.studentDataService.retrieveRunStatus();
+    this.pauseScreenService.initialize();
+    this.notificationService.initialize();
     await this.studentAssetService.retrieveAssets();
     await this.notebookService.retrieveNotebookItems(this.configService.getWorkgroupId());
     this.intializedSource.next(true);
@@ -46,7 +53,6 @@ export class InitializeVLEService {
 
   async initializePreview(unitId: string) {
     await this.configService.retrieveConfig(`/api/config/preview/${unitId}`);
-    this.sessionService.initializeSession();
     this.studentStatusService.retrieveStudentStatus();
     await this.projectService.retrieveProject();
     this.studentDataService.retrieveStudentData();

@@ -10,55 +10,46 @@ import { Node } from '../common/Node';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { Branch } from '../../../app/domain/branch';
+import { BranchService } from './branchService';
+import { PathService } from './pathService';
 
 @Injectable()
 export class ProjectService {
   achievements: any = [];
-  activeConstraints: any;
+  activeConstraints: any = [];
   additionalProcessingFunctionsMap: any = {};
   allPaths: string[] = [];
-  applicationNodes: any;
-  branchesCache: Branch[];
+  applicationNodes: any = [];
   filters: any[] = [{ name: 'all', label: 'All' }];
   flattenedProjectAsNodeIds: any = null;
-  groupNodes: any[];
-  idToNode: any;
-  idToOrder: any;
-  inactiveGroupNodes: any[];
-  inactiveStepNodes: any[];
+  groupNodes: any[] = [];
+  idToNode: any = {};
+  idToOrder: any = {};
+  inactiveGroupNodes: any[] = [];
+  inactiveStepNodes: any[] = [];
   isNodeAffectedByConstraintResult: any = {};
-  metadata: any;
+  metadata: any = {};
   nodes: any = {};
   nodeCount: number = 0;
   nodeIdToNumber: any = {};
   nodeIdToIsInBranchPath: any = {};
   nodeIdsInAnyBranch: any = [];
   nodeIdToBranchPathLetter: any = {};
-  project: any;
+  project: any = null;
   rootNode: any = null;
-  transitions: any;
+  transitions: any = [];
   private projectChangedSource: Subject<any> = new Subject<any>();
   public projectChanged$: Observable<any> = this.projectChangedSource.asObservable();
 
   constructor(
+    protected branchService: BranchService,
     protected componentServiceLookupService: ComponentServiceLookupService,
     protected http: HttpClient,
     protected ConfigService: ConfigService,
+    protected pathService: PathService,
     protected SessionService: SessionService,
     protected UtilService: UtilService
-  ) {
-    this.project = null;
-    this.transitions = [];
-    this.applicationNodes = [];
-    this.inactiveStepNodes = [];
-    this.inactiveGroupNodes = [];
-    this.groupNodes = [];
-    this.idToNode = {};
-    this.metadata = {};
-    this.activeConstraints = [];
-    this.rootNode = null;
-    this.idToOrder = {};
-  }
+  ) {}
 
   setProject(project) {
     this.project = project;
@@ -80,7 +71,7 @@ export class ProjectService {
     this.nodeIdToIsInBranchPath = {};
     this.nodeIdsInAnyBranch = [];
     this.achievements = [];
-    this.clearBranchesCache();
+    this.branchService.clearBranchesCache();
   }
 
   getStyle() {
@@ -94,11 +85,6 @@ export class ProjectService {
   getProjectTitle() {
     const name = this.getProjectMetadata().title;
     return name ? name : 'A WISE Project (No name)';
-  }
-
-  setProjectTitle(projectTitle) {
-    const metadata = this.getProjectMetadata();
-    metadata.title = projectTitle;
   }
 
   getProjectMetadata() {
@@ -121,15 +107,6 @@ export class ProjectService {
     return this.groupNodes;
   }
 
-  isNode(id) {
-    for (const node of this.getNodes()) {
-      if (node.id === id) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   addNode(node) {
     const existingNodes = this.project.nodes;
     let replaced = false;
@@ -147,21 +124,21 @@ export class ProjectService {
     }
   }
 
-  addApplicationNode(node) {
+  private addApplicationNode(node: any): void {
     const applicationNodes = this.applicationNodes;
     if (applicationNodes != null) {
       applicationNodes.push(node);
     }
   }
 
-  addGroupNode(node) {
+  private addGroupNode(node: any): void {
     const groupNodes = this.groupNodes;
     if (node != null && groupNodes != null) {
       groupNodes.push(node);
     }
   }
 
-  addNodeToGroupNode(groupId, nodeId) {
+  private addNodeToGroupNode(groupId: string, nodeId: string): void {
     if (groupId != null && nodeId != null) {
       const group = this.getNodeById(groupId);
       if (group != null) {
@@ -271,13 +248,13 @@ export class ProjectService {
     this.broadcastProjectChanged();
   }
 
-  instantiateDefaults() {
+  instantiateDefaults(): void {
     this.project.nodes = this.project.nodes ? this.project.nodes : [];
     this.project.inactiveNodes = this.project.inactiveNodes ? this.project.inactiveNodes : [];
     this.project.constraints = this.project.constraints ? this.project.constraints : [];
   }
 
-  calculateNodeOrderOfProject() {
+  private calculateNodeOrderOfProject(): void {
     this.calculateNodeOrder(this.rootNode);
   }
 
@@ -289,6 +266,11 @@ export class ProjectService {
         this.calculateNodeOrder(this.getNodeById(childId));
       }
     }
+  }
+
+  private getBranches(): Branch[] {
+    const allPaths = this.getAllPaths([], this.getStartNodeId());
+    return this.branchService.getBranches(allPaths);
   }
 
   /**
@@ -326,7 +308,7 @@ export class ProjectService {
    * @param stepNumber the current step number
    * @param nodes the array of nodes
    */
-  getNodeOrderOfProjectHelper(project, node, idToOrder, stepNumber, nodes) {
+  private getNodeOrderOfProjectHelper(project, node, idToOrder, stepNumber, nodes): any {
     /*
      * Create the item that we will add to the idToOrder mapping.
      * The 'order' field determines how the project nodes are displayed
@@ -362,23 +344,6 @@ export class ProjectService {
   }
 
   /**
-   * Returns the position in the project for the node with the given id. Returns null if no node
-   * with id exists.
-   * @param id a node id
-   * @return string position of the given node id in the project
-   */
-  getPositionById(id) {
-    for (let i = 0; i < this.rootNode.ids.length; i++) {
-      const node = this.getNodeById(this.rootNode.ids[i]);
-      const path = this.getPathToNode(node, i + 1, id);
-      if (path != undefined && path != null) {
-        return path;
-      }
-    }
-    return null;
-  }
-
-  /**
    * Returns the order of the given node id in the project. Returns null if no node with id exists.
    * @param id String node id
    * @return Number order of the given node id in the project
@@ -390,27 +355,6 @@ export class ProjectService {
     return null;
   }
 
-  /**
-   * Returns the id of the node with the given order in the project. Returns null if no order with
-   * node exists.
-   * @param order Number
-   * @return Number node id of the given order in the project
-   */
-  getIdByOrder(order) {
-    let nodeId = null;
-    for (let id in this.idToOrder) {
-      if (this.idToOrder[id].order === order) {
-        if (this.isGroupNode(id) && order > 1) {
-          nodeId = this.getIdByOrder(order - 1);
-        } else {
-          nodeId = id;
-        }
-        break;
-      }
-    }
-    return nodeId;
-  }
-
   getGroupNodesIdToOrder() {
     const idToOrder = {};
     const onlyGroupNodes = Object.entries(this.idToOrder).filter((item) => {
@@ -420,31 +364,6 @@ export class ProjectService {
       idToOrder[key] = value;
     }
     return idToOrder;
-  }
-
-  /**
-   * Recursively searches for the given node id from the point of the given node down and returns
-   * the path number (position)
-   * @param node a node to start searching down
-   * @param path the position of the given node
-   * @param id the node id to search for
-   * @return string path of the given node id in the project
-   */
-  getPathToNode(node, path, id) {
-    if (node.id === id) {
-      return path + '';
-    } else if (node.type === 'group') {
-      let num = 0;
-      for (let nodeId of node.ids) {
-        if (this.nodeIdsInAnyBranch.indexOf(nodeId) === -1) {
-          ++num;
-          const pos = this.getPathToNode(this.getNodeById(nodeId), path + '.' + num, id);
-          if (pos) {
-            return pos;
-          }
-        }
-      }
-    }
   }
 
   getNodePositionById(id) {
@@ -567,57 +486,6 @@ export class ProjectService {
   }
 
   /**
-   * Inject the ng-click attribute that will call the snipImage function
-   * @param content the content
-   * @returns the modified content
-   */
-  injectClickToSnipImage(content) {
-    if (content != null) {
-      if (typeof content === 'object') {
-        let contentString = JSON.stringify(content);
-        if (contentString != null) {
-          // replace the relative asset paths with the absolute paths
-          contentString = this.injectClickToSnipImageIntoContentString(contentString);
-
-          content = JSON.parse(contentString);
-        }
-      } else if (typeof content === 'string') {
-        // replace the relative asset paths with the absolute paths
-        content = this.injectClickToSnipImageIntoContentString(content);
-      }
-    }
-    return content;
-  }
-
-  /**
-   * Inject the ng-click attribute that will call the snipImage function
-   * @param contentString the content in string format
-   * @returns the modified content string
-   */
-  injectClickToSnipImageIntoContentString(contentString) {
-    if (contentString != null) {
-      const componentId = JSON.parse(contentString).id;
-
-      // regex to match image elements
-      const imgMatcher = new RegExp('<img.*?src=\\\\?[\'"](.*?)\\\\?[\'"].*?>', 'gi');
-
-      // replace all instances that match
-      contentString = contentString.replace(imgMatcher, (matchedString) => {
-        return matchedString.replace(
-          '<img',
-          `<img onclick=\\"window.dispatchEvent(new CustomEvent('snip-image', ` +
-            `{ detail: { target: this } }))\\" ` +
-            `onkeypress=\\"javascript: if (event.key === 'Enter' || event.keyCode === 13 || ` +
-            `event.which === 13 ) { window.dispatchEvent(new CustomEvent('snip-image', ` +
-            `{ detail: { target: this } } )) }\\" aria-label=\\"Select image to add to notebook\\" ` +
-            `title=\\"Add to notebook\\" tabindex=\\"0\\" snip`
-        );
-      });
-    }
-    return contentString;
-  }
-
-  /**
    * Returns the node specified by the nodeId
    * @param nodeId get the node with this node id
    * @param (optional) the project to retrieve the node from. this is used in
@@ -733,7 +601,7 @@ export class ProjectService {
     return null;
   }
 
-  isNodeDirectChildOfGroup(node, group) {
+  private isNodeDirectChildOfGroup(node: any, group: any): boolean {
     if (node != null && group != null) {
       const nodeId = node.id;
       const groupIds = group.ids;
@@ -800,28 +668,6 @@ export class ProjectService {
     return constraints;
   }
 
-  getConstraintsOnNode(nodeId) {
-    let node = this.getNodeById(nodeId);
-    return node.constraints;
-  }
-
-  addConstraintToNode(node, constraint) {
-    if (node.constraints == null) {
-      node.constraints = [];
-    }
-    node.constraints.push(constraint);
-  }
-
-  /**
-   * Check if a node has constraints.
-   * @param nodeId The node id of the node.
-   * @return true iff the node has constraints authored on it.
-   */
-  nodeHasConstraint(nodeId) {
-    let constraints = this.getConstraintsOnNode(nodeId);
-    return constraints.length > 0;
-  }
-
   /**
    * Order the constraints so that they show up in the same order as in the
    * project.
@@ -841,7 +687,7 @@ export class ProjectService {
    * @return A comparator that orders constraint objects in the order in which
    * the target ids show up in the project.
    */
-  constraintsComparatorGenerator(orderedNodeIds) {
+  private constraintsComparatorGenerator(orderedNodeIds: string[]): any {
     return function (constraintA, constraintB) {
       let constraintAIndex = orderedNodeIds.indexOf(constraintA.targetId);
       let constraintBIndex = orderedNodeIds.indexOf(constraintB.targetId);
@@ -860,7 +706,7 @@ export class ProjectService {
    * @param constraint the constraint that might affect the node
    * @returns whether the node is affected by the constraint
    */
-  isNodeAffectedByConstraint(node, constraint) {
+  private isNodeAffectedByConstraint(node: any, constraint: any): boolean {
     const cachedResult = this.getCachedIsNodeAffectedByConstraintResult(node.id, constraint.id);
     if (cachedResult != null) {
       return cachedResult;
@@ -921,7 +767,7 @@ export class ProjectService {
     return false;
   }
 
-  getOrCalculateAllPaths(): string[] {
+  private getOrCalculateAllPaths(): string[] {
     if (this.allPaths.length === 0) {
       this.allPaths = this.getAllPaths([], this.getStartNodeId(), true);
     }
@@ -933,7 +779,7 @@ export class ProjectService {
    * @param nodeId The node id of a step or group.
    * @returns {boolean} True iff nodeId comes after groupId.
    */
-  isNodeAfterGroup(groupId, nodeId) {
+  private isNodeAfterGroup(groupId: string, nodeId: string): boolean {
     const transitions = this.getTransitionsByFromNodeId(groupId);
     try {
       for (let transition of transitions) {
@@ -974,16 +820,6 @@ export class ProjectService {
   }
 
   /**
-   * Get all the node ids from steps (not groups)
-   * @returns an array with all the node ids
-   */
-  getNodeIds() {
-    return this.applicationNodes.map((node) => {
-      return node.id;
-    });
-  }
-
-  /**
    * Get nodes that have a transition to the given node id
    * @param toNodeId the node id
    * @returns an array of node objects that transition to the
@@ -1006,10 +842,6 @@ export class ProjectService {
       }
     }
     return nodesByToNodeId;
-  }
-
-  getActiveNodes() {
-    return this.project.nodes;
   }
 
   getInactiveNodes() {
@@ -1049,23 +881,6 @@ export class ProjectService {
   }
 
   /**
-   * Get the group nodes that point to a given node id
-   * @param toNodeId
-   */
-  getGroupNodesByToNodeId(toNodeId) {
-    const groupsThatPointToNodeId = [];
-    if (toNodeId != null) {
-      const groups = this.getGroups();
-      for (let group of groups) {
-        if (this.nodeHasTransitionToNodeId(group, toNodeId)) {
-          groupsThatPointToNodeId.push(group);
-        }
-      }
-    }
-    return groupsThatPointToNodeId;
-  }
-
-  /**
    * Retrieves the project JSON from Config.projectURL and returns it.
    * If Config.projectURL is undefined, returns null.
    */
@@ -1081,26 +896,6 @@ export class ProjectService {
       .then((projectJSON) => {
         this.setProject(projectJSON);
         return projectJSON;
-      });
-  }
-
-  /**
-   * Retrieve the project JSON
-   * @param projectId retrieve the project JSON with this id
-   * @return a promise to return the project JSON
-   */
-  retrieveProjectById(projectId) {
-    return this.http
-      .get(`/api/author/config/${projectId}`)
-      .toPromise()
-      .then((configJSON: any) => {
-        return this.http
-          .get(configJSON.projectURL)
-          .toPromise()
-          .then((projectJSON: any) => {
-            projectJSON.previewProjectURL = configJSON.previewProjectURL;
-            return projectJSON;
-          });
       });
   }
 
@@ -1416,17 +1211,17 @@ export class ProjectService {
      * node ids, we will remove them from the paths. once all the
      * paths are empty we will be done consolidating the paths.
      */
-    while (!this.arePathsEmpty(paths)) {
+    while (!this.pathService.arePathsEmpty(paths)) {
       // start with the first path
       const currentPath = this.getNonEmptyPathIndex(paths);
 
       // get the first node id in the current path
-      const nodeId = this.getFirstNodeIdInPathAtIndex(paths, currentPath);
-      if (this.areFirstNodeIdsInPathsTheSame(paths)) {
+      const nodeId = this.pathService.getFirstNodeIdInPathAtIndex(paths, currentPath);
+      if (this.pathService.areFirstNodeIdsInPathsTheSame(paths)) {
         // the first node ids in all the paths are the same
 
         // remove the node id from all the paths
-        this.removeNodeIdFromPaths(nodeId, paths);
+        this.pathService.removeNodeIdFromPaths(nodeId, paths);
 
         // add the node id to our consolidated path
         consolidatedPath.push(nodeId);
@@ -1452,7 +1247,7 @@ export class ProjectService {
             const consumedPath = this.consumePathsUntilNodeId(paths, nodeId);
 
             // remove the node id from the paths
-            this.removeNodeIdFromPaths(nodeId, paths);
+            this.pathService.removeNodeIdFromPaths(nodeId, paths);
 
             // add the node id to the end of the consumed path
             consumedPath.push(nodeId);
@@ -1488,65 +1283,12 @@ export class ProjectService {
   }
 
   /**
-   * Get the path at the given index and get the first node id in
-   * the path
-   * @param paths an array of paths. each path is an array of node ids
-   * @param index the index of the path we want
-   * @return the first node in the given path
-   */
-  getFirstNodeIdInPathAtIndex(paths, index) {
-    let nodeId = null;
-    if (paths != null && index != null) {
-      const path = paths[index];
-      if (path != null && path.length > 0) {
-        nodeId = path[0];
-      }
-    }
-    return nodeId;
-  }
-
-  /**
-   * Remove the node ifrom the paths
-   * @param nodeId the node id to remove
-   * @param paths an array of paths. each path is an array of node ids
-   */
-  removeNodeIdFromPaths(nodeId, paths) {
-    if (nodeId != null && paths != null) {
-      for (let path of paths) {
-        for (let x = 0; x < path.length; x++) {
-          const tempNodeId = path[x];
-
-          /*
-           * check if the node id matches the one we are looking
-           * for
-           */
-          if (nodeId === tempNodeId) {
-            /*
-             * we have found the node id we are looking for so
-             * we will remove it from the path
-             */
-            path.splice(x, 1);
-
-            /*
-             * move the counter back since we just removed a
-             * node id. we will continue searching this path
-             * for the node id in case the path contains it
-             * multiple times.
-             */
-            x--;
-          }
-        }
-      }
-    }
-  }
-
-  /**
    * Remove the node id from the path
    * @param nodeId the node id to remove
    * @param paths an array of paths. each path is an array of node ids
    * @param pathIndex the path to remove from
    */
-  removeNodeIdFromPath(nodeId, paths, pathIndex) {
+  private removeNodeIdFromPath(nodeId: string, paths: any, pathIndex: any): void {
     if (nodeId != null && paths != null && pathIndex != null) {
       const path = paths[pathIndex];
       if (path != null) {
@@ -1578,61 +1320,12 @@ export class ProjectService {
   }
 
   /**
-   * Check if the first node ids in the paths are the same
-   * @param paths an array of paths. each path is an array of node ids
-   * @return whether all the paths have the same first node id
-   */
-  areFirstNodeIdsInPathsTheSame(paths) {
-    let result = true;
-    let nodeId = null;
-    if (paths != null) {
-      for (let path of paths) {
-        const tempNodeId = path[0];
-        if (nodeId == null) {
-          /*
-           * this is the first path we have looked at so we will
-           * remember the node id
-           */
-          nodeId = tempNodeId;
-        } else if (nodeId != tempNodeId) {
-          /*
-           * the node id does not match the first node id from a
-           * previous path so the paths do not all have the same
-           * first node id
-           */
-          result = false;
-          break;
-        }
-      }
-    }
-    return result;
-  }
-
-  /**
-   * Check if all the paths are empty
-   * @param paths an array of paths. each path is an array of node ids
-   * @return whether all the paths are empty
-   */
-  arePathsEmpty(paths) {
-    if (paths != null) {
-      for (let path of paths) {
-        if (path != null) {
-          if (path.length !== 0) {
-            return false;
-          }
-        }
-      }
-    }
-    return true;
-  }
-
-  /**
    * Get the paths that contain the node id
    * @param nodeId the node id we are looking for
    * @param paths an array of paths. each path is an array of node ids
    * @return an array of paths that contain the given node id
    */
-  getPathsThatContainNodeId(nodeId, paths = []) {
+  private getPathsThatContainNodeId(nodeId: string, paths = []) {
     const pathsThatContainNodeId = [];
     for (const path of paths) {
       if (path.indexOf(nodeId) !== -1) {
@@ -1648,7 +1341,7 @@ export class ProjectService {
    * @param paths an array of paths. each path is an array of node ids
    * @return the index of the path that is not empty
    */
-  getNonEmptyPathIndex(paths) {
+  private getNonEmptyPathIndex(paths: any): any {
     if (paths != null) {
       for (let p = 0; p < paths.length; p++) {
         const path = paths[p];
@@ -1658,262 +1351,6 @@ export class ProjectService {
       }
     }
     return null;
-  }
-
-  /**
-   * Remember the branches.
-   * @param branches An array of arrays of node ids.
-   */
-  private setBranchesCache(branches: Branch[]): void {
-    this.branchesCache = branches;
-  }
-
-  /**
-   * Get the branches that were previously calculated.
-   * @returns An array of arrays of node ids.
-   */
-  private getBranchesCache(): Branch[] {
-    return this.branchesCache;
-  }
-
-  clearBranchesCache() {
-    this.branchesCache = null;
-  }
-
-  private getBranches(): Branch[] {
-    /*
-     * Do not use the branches cache in the authoring tool because the branches
-     * may change when the author changes the project. In all other modes the
-     * branches can't change so we can use the cache.
-     */
-    if (this.ConfigService.getMode() != 'author') {
-      let branchesCache = this.getBranchesCache();
-      if (branchesCache != null) {
-        return branchesCache;
-      }
-    }
-
-    const startNodeId = this.getStartNodeId();
-
-    /*
-     * an array to keep track of the node ids in the path that
-     * we are currently on as we traverse the nodes in the project
-     * depth first
-     */
-    const pathsSoFar = [];
-
-    const allPaths = this.getAllPaths(pathsSoFar, startNodeId);
-    const branches = this.findBranches(allPaths);
-    if (this.ConfigService.getMode() != 'author') {
-      this.setBranchesCache(branches);
-    }
-    return branches;
-  }
-
-  /**
-   * Find the branches in the project
-   * @param paths all the possible paths through the project
-   * @return an array of branch objects. each branch object contains
-   * the branch start point, the branch paths, and the branch
-   * end point
-   */
-  private findBranches(paths: any[]): Branch[] {
-    const branches = [];
-    let previousNodeId = null;
-
-    /*
-     * continue until all the paths are empty. we will remove
-     * node ids from the paths as we traverse the paths to find
-     * the branches
-     */
-    while (!this.arePathsEmpty(paths)) {
-      const nodeId = this.getFirstNodeIdInPathAtIndex(paths, 0);
-
-      if (this.areFirstNodeIdsInPathsTheSame(paths)) {
-        // the first node ids in all the paths are the same
-
-        this.removeNodeIdFromPaths(nodeId, paths);
-        previousNodeId = nodeId;
-      } else {
-        // not all the top node ids are the same which means we have branched
-        const nextCommonNodeId = this.findNextCommonNodeId(paths);
-        let branchPaths = this.extractPathsUpToNodeId(paths, nextCommonNodeId);
-        branchPaths = this.removeDuplicatePaths(branchPaths);
-        branches.push(new Branch(previousNodeId, branchPaths, nextCommonNodeId));
-
-        // trim the paths so that they start at the branch end point
-        this.trimPathsUpToNodeId(paths, nextCommonNodeId);
-
-        // remember this node id for the next iteration of the loop
-        previousNodeId = nextCommonNodeId;
-      }
-    }
-    return branches;
-  }
-
-  /**
-   * Find the next common node id in all the paths
-   * @param paths the paths to find the common node id in
-   * @return a node id that is in all the paths or null
-   * if there is no node id that is in all the paths
-   */
-  findNextCommonNodeId(paths) {
-    let nextCommonNodeId = null;
-    if (paths != null) {
-      if (paths.length > 0) {
-        const path = paths[0];
-        for (let tempNodeId of path) {
-          if (this.allPathsContainNodeId(paths, tempNodeId)) {
-            /*
-             * the node id is in all the paths so we have found
-             * what we were looking for
-             */
-            nextCommonNodeId = tempNodeId;
-            break;
-          }
-        }
-      }
-    }
-    return nextCommonNodeId;
-  }
-
-  /**
-   * Check if all the paths contain the node id
-   * @param paths an array of paths. each path contains an array of node ids
-   * @param nodeId the node id that we will check is in all the paths
-   * @return whether the node id is in all the paths
-   */
-  allPathsContainNodeId(paths, nodeId) {
-    let result = false;
-    if (paths != null) {
-      for (let path of paths) {
-        const index = path.indexOf(nodeId);
-        if (index == -1) {
-          result = false;
-          break;
-        } else {
-          result = true;
-        }
-      }
-    }
-    return result;
-  }
-
-  /**
-   * Trim the paths up to the given node id so that the paths will contain
-   * the given node id and all the node ids after it. This function will
-   * modify the paths.
-   * @param paths the paths to trim
-   * @param nodeId the node id to trim up to
-   */
-  trimPathsUpToNodeId(paths, nodeId) {
-    if (paths != null) {
-      for (let path of paths) {
-        if (path != null) {
-          let index = path.indexOf(nodeId);
-
-          if (index == -1) {
-            /*
-             * the node id is not in the path so we will
-             * trim the path to the end which will make
-             * the path empty
-             */
-            index = path.length;
-          }
-
-          /*
-           * trim the path up to the node id index. this will
-           * modify the path array.
-           */
-          path.splice(0, index);
-        }
-      }
-    }
-  }
-
-  /**
-   * Extract the paths up to a given node id. This will be used to
-   * obtain branch paths.
-   * @param paths the paths to extract from
-   * @param nodeId the node id to extract up to
-   * @return paths that go up to but do not include the node id
-   */
-  extractPathsUpToNodeId(paths, nodeId) {
-    const extractedPaths = [];
-    if (paths != null) {
-      for (let path of paths) {
-        if (path != null) {
-          let index = path.indexOf(nodeId);
-          if (index == -1) {
-            /*
-             * the node id is not in the path so we will
-             * extract up to the end of the path
-             */
-            index = path.length;
-          }
-
-          /*
-           * get the path up to the node id index. this does
-           * not modify the path array.
-           */
-          const extractedPath = path.slice(0, index);
-          extractedPaths.push(extractedPath);
-        }
-      }
-    }
-    return extractedPaths;
-  }
-
-  /**
-   * Removes duplicate paths
-   * @param paths an array of paths. each path contains an array of node ids
-   * @return an array of unique paths
-   */
-  removeDuplicatePaths(paths) {
-    const uniquePaths = [];
-    if (paths != null) {
-      for (let path of paths) {
-        let isPathInUniquePaths = false;
-        for (let uniquePath of uniquePaths) {
-          if (this.pathsEqual(path, uniquePath)) {
-            isPathInUniquePaths = true;
-          }
-        }
-
-        if (!isPathInUniquePaths) {
-          // the path is not equal to any paths in the unique
-          // paths array so we will add it to the unique paths array
-          uniquePaths.push(path);
-        }
-      }
-    }
-    return uniquePaths;
-  }
-
-  /**
-   * Check if two paths are equal
-   * @param path1 an array of node ids
-   * @param path2 an array of node ids
-   * @return whether the two paths contain the same node ids
-   * in the same order
-   */
-  pathsEqual(path1, path2) {
-    let result = false;
-    if (path1 != null && path2 != null) {
-      if (path1.length === path2.length) {
-        result = true;
-
-        for (let x = 0; x < path1.length; x++) {
-          const path1NodeId = path1[x];
-          const path2NodeId = path2[x];
-          if (path1NodeId !== path2NodeId) {
-            result = false;
-            break;
-          }
-        }
-      }
-    }
-    return result;
   }
 
   /**
@@ -1930,14 +1367,6 @@ export class ProjectService {
       }
     }
     return null;
-  }
-
-  getConnectedComponentsByNodeIdAndComponentId(nodeId, componentId) {
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
-    if (component != null && component.connectedComponents != null) {
-      return component.connectedComponents;
-    }
-    return [];
   }
 
   /**
@@ -2018,43 +1447,6 @@ export class ProjectService {
   }
 
   /**
-   * Determine if a node id is a direct child of a group
-   * @param nodeId the node id
-   * @param groupId the group id
-   */
-  isNodeInGroup(nodeId, groupId) {
-    const group = this.getNodeById(groupId);
-    return group.ids.indexOf(nodeId) != -1;
-  }
-
-  /**
-   * Get the first leaf node by traversing all the start ids
-   * until a leaf node id is found
-   */
-  getFirstLeafNodeId() {
-    let firstLeafNodeId = null;
-    const startGroupId = this.project.startGroupId;
-    let node = this.getNodeById(startGroupId);
-    let done = false;
-
-    // loop until we have found a leaf node id or something went wrong
-    while (!done) {
-      if (node == null) {
-        done = true;
-      } else if (this.isGroupNode(node.id)) {
-        firstLeafNodeId = node.id;
-        node = this.getNodeById(node.startId);
-      } else if (this.isApplicationNode(node.id)) {
-        firstLeafNodeId = node.id;
-        done = true;
-      } else {
-        done = true;
-      }
-    }
-    return firstLeafNodeId;
-  }
-
-  /**
    * Get the message that describes how to disable the constraint
    * @param nodeId the node the student is trying to go to
    * @param constraint the constraint that is preventing the student
@@ -2092,58 +1484,6 @@ export class ProjectService {
       }
     }
     return message;
-  }
-
-  /**
-   * Get the human readable description of the constraint.
-   * @param constraint The constraint object.
-   * @returns A human readable text string that describes the constraint.
-   * example
-   * 'All steps after this one will not be visitable until the student completes
-   * "3.7 Revise Your Bowls Explanation"'
-   */
-  getConstraintDescription(constraint) {
-    let message = '';
-    for (const singleRemovalCriteria of constraint.removalCriteria) {
-      if (message != '') {
-        // this constraint has multiple removal criteria
-        if (constraint.removalConditional === 'any') {
-          message += ' or ';
-        } else if (constraint.removalConditional === 'all') {
-          message += ' and ';
-        }
-      }
-      message += this.getCriteriaMessage(singleRemovalCriteria);
-    }
-    return this.getActionMessage(constraint.action) + message;
-  }
-
-  /**
-   * Get the constraint action as human readable text.
-   * @param action A constraint action.
-   * @return A human readable text string that describes the action
-   * example
-   * 'All steps after this one will not be visitable until '
-   */
-  getActionMessage(action) {
-    if (action === 'makeAllNodesAfterThisNotVisitable') {
-      return $localize`All steps after this one will not be visitable until `;
-    }
-    if (action === 'makeAllNodesAfterThisNotVisible') {
-      return $localize`All steps after this one will not be visible until `;
-    }
-    if (action === 'makeAllOtherNodesNotVisitable') {
-      return $localize`All other steps will not be visitable until `;
-    }
-    if (action === 'makeAllOtherNodesNotVisible') {
-      return $localize`All other steps will not be visible until `;
-    }
-    if (action === 'makeThisNodeNotVisitable') {
-      return $localize`This step will not be visitable until `;
-    }
-    if (action === 'makeThisNodeNotVisible') {
-      return $localize`This step will not be visible until `;
-    }
   }
 
   /**
@@ -2383,47 +1723,6 @@ export class ProjectService {
   getComponentType(nodeId: string, componentId: string): string {
     const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
     return component.type;
-  }
-
-  getProjectRubric() {
-    return this.project.rubric;
-  }
-
-  /**
-   * Check if a node is a branch point. A branch point is a node with more
-   * than one transition.
-   * @param nodeId the node id
-   * @return whether the node is a branch point
-   */
-  isBranchPoint(nodeId) {
-    const transitions = this.getTransitionsByFromNodeId(nodeId);
-    return transitions != null && transitions.length > 1;
-  }
-
-  /**
-   * Check if the node is in any branch path
-   * @param nodeId the node id of the node
-   * @return whether the node is in any branch path
-   */
-  isNodeInAnyBranchPath(nodeId) {
-    let result = false;
-    if (this.nodeIdToIsInBranchPath[nodeId] == null) {
-      /*
-       * we have not calculated whether the node id is in a branch path
-       * before so we will now
-       */
-      result = this.nodeIdsInAnyBranch.indexOf(nodeId) !== -1;
-
-      // remember the result for this node id
-      this.nodeIdToIsInBranchPath[nodeId] = result;
-    } else {
-      /*
-       * we have calculated whether the node id is in a branch path
-       * before
-       */
-      result = this.nodeIdToIsInBranchPath[nodeId];
-    }
-    return result;
   }
 
   /**
@@ -2839,34 +2138,6 @@ export class ProjectService {
   }
 
   /**
-   * Get the total number of rubrics (step + components) for the given nodeId
-   * @param nodeId the node id
-   * @return Number of rubrics for the node
-   */
-  getNumberOfRubricsByNodeId(nodeId) {
-    let numRubrics = 0;
-    const node = this.getNodeById(nodeId);
-    if (node) {
-      const nodeRubric = node.rubric;
-      if (nodeRubric != null && nodeRubric != '') {
-        numRubrics++;
-      }
-      const components = node.components;
-      if (components && components.length) {
-        for (let component of components) {
-          if (component) {
-            const componentRubric = component.rubric;
-            if (componentRubric != null && componentRubric != '') {
-              numRubrics++;
-            }
-          }
-        }
-      }
-    }
-    return numRubrics;
-  }
-
-  /**
    * Remember the result for whether the node is affected by the constraint
    * @param nodeId the node id
    * @param constraintId the constraint id
@@ -2886,27 +2157,6 @@ export class ProjectService {
    */
   getCachedIsNodeAffectedByConstraintResult(nodeId, constraintId) {
     return this.isNodeAffectedByConstraintResult[nodeId + '-' + constraintId];
-  }
-
-  /**
-   * Get the id to node mappings.
-   * @return An object the keys as node ids and the values as nodes.
-   */
-  getIdToNode() {
-    return this.idToNode;
-  }
-
-  /**
-   * Check if a node has rubrics.
-   * @param nodeId The node id of the node.
-   * @return Whether the node has rubrics authored on it.
-   */
-  nodeHasRubric(nodeId) {
-    let numberOfRubrics = this.getNumberOfRubricsByNodeId(nodeId);
-    if (numberOfRubrics > 0) {
-      return true;
-    }
-    return false;
   }
 
   getSpaces() {
@@ -2964,8 +2214,6 @@ export class ProjectService {
       }
     }
   }
-
-  replaceComponent(nodeId, componentId, component) {}
 
   retrieveScript(scriptFilename) {
     return Promise.resolve('');
@@ -3054,10 +2302,6 @@ export class ProjectService {
 
   getPeerGrouping(tag: string): PeerGrouping {
     return this.getPeerGroupings().find((peerGrouping: PeerGrouping) => peerGrouping.tag === tag);
-  }
-
-  getApplicationNodes(): any[] {
-    return this.applicationNodes;
   }
 
   getProjectRootNode() {

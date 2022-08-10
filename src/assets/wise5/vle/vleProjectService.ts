@@ -1,24 +1,9 @@
 'use strict';
 import { ProjectService } from '../services/projectService';
-import { ConfigService } from '../services/configService';
-import { UtilService } from '../services/utilService';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { SessionService } from '../services/sessionService';
-import { ComponentServiceLookupService } from '../services/componentServiceLookupService';
 
 @Injectable()
 export class VLEProjectService extends ProjectService {
-  constructor(
-    protected componentServiceLookupService: ComponentServiceLookupService,
-    protected http: HttpClient,
-    protected ConfigService: ConfigService,
-    protected SessionService: SessionService,
-    protected UtilService: UtilService
-  ) {
-    super(componentServiceLookupService, http, ConfigService, SessionService, UtilService);
-  }
-
   /**
    * @param nodeId the node id of the component
    * @param componentId the component that is listening for connected changes
@@ -36,6 +21,14 @@ export class VLEProjectService extends ProjectService {
       }
     }
     return false;
+  }
+
+  private getConnectedComponentsByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
+    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    if (component != null && component.connectedComponents != null) {
+      return component.connectedComponents;
+    }
+    return [];
   }
 
   isMatchingConnectedComponent(connectedComponent, id) {

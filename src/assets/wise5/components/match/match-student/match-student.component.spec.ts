@@ -2,26 +2,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../../services/annotationService';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
+import { ClickToSnipImageService } from '../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
-import { MatchService } from '../matchService';
 import { MatchStudent } from './match-student.component';
-
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: MatchStudent;
 let fixture: ComponentFixture<MatchStudent>;
@@ -63,22 +48,8 @@ let starterBucketLabel = 'Starter Choices';
 describe('MatchStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentServiceLookupServiceModule, HttpClientTestingModule, MatDialogModule],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [MatchStudent],
-      providers: [
-        AnnotationService,
-        MatchService,
-        ComponentService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(MatchStudent);
@@ -694,9 +665,9 @@ function getCleanedValue() {
       componentContent.choices[0].value = choiceValue;
       componentContent.buckets[0].value = bucketValue;
       const originalComponentContent = JSON.parse(JSON.stringify(componentContent));
-      component.componentContent = TestBed.inject(ProjectService).injectClickToSnipImage(
-        component.componentContent
-      );
+      component.componentContent = TestBed.inject(
+        ClickToSnipImageService
+      ).injectClickToSnipImageListener(component.componentContent);
       expect(component.componentContent.choices[0].value).toContain('onclick');
       expect(component.componentContent.buckets[0].value).toContain('onclick');
       expect(

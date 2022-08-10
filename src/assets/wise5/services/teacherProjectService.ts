@@ -1,13 +1,8 @@
 'use strict';
 import * as angular from 'angular';
-import { ConfigService } from '../services/configService';
 import { ProjectService } from './projectService';
-import { UtilService } from '../services/utilService';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { SessionService } from './sessionService';
-import { ComponentServiceLookupService } from './componentServiceLookupService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -29,16 +24,6 @@ export class TeacherProjectService extends ProjectService {
   public projectSaved$: Observable<any> = this.projectSavedSource.asObservable();
   private savingProjectSource: Subject<any> = new Subject<any>();
   public savingProject$: Observable<any> = this.savingProjectSource.asObservable();
-
-  constructor(
-    protected componentServiceLookupService: ComponentServiceLookupService,
-    protected http: HttpClient,
-    protected ConfigService: ConfigService,
-    protected SessionService: SessionService,
-    protected UtilService: UtilService
-  ) {
-    super(componentServiceLookupService, http, ConfigService, SessionService, UtilService);
-  }
 
   getNewProjectTemplate() {
     return {
@@ -197,6 +182,26 @@ export class TeacherProjectService extends ProjectService {
         resolve({});
       });
     });
+  }
+
+  /**
+   * Retrieve the project JSON
+   * @param projectId retrieve the project JSON with this id
+   * @return a promise to return the project JSON
+   */
+  retrieveProjectById(projectId: number): any {
+    return this.http
+      .get(`/api/author/config/${projectId}`)
+      .toPromise()
+      .then((configJSON: any) => {
+        return this.http
+          .get(configJSON.projectURL)
+          .toPromise()
+          .then((projectJSON: any) => {
+            projectJSON.previewProjectURL = configJSON.previewProjectURL;
+            return projectJSON;
+          });
+      });
   }
 
   /**
@@ -466,6 +471,10 @@ export class TeacherProjectService extends ProjectService {
     node.constraints.push(makeThisNodeNotVisitableConstraint);
   }
 
+  getProjectRubric(): any {
+    return this.project.rubric;
+  }
+
   setProjectRubric(html) {
     this.project.rubric = html;
   }
@@ -526,13 +535,36 @@ export class TeacherProjectService extends ProjectService {
     return null;
   }
 
-  /**
-   * Check if a node has rubrics.
-   * @param nodeId The node id of the node.
-   * @return Whether the node has rubrics authored on it.
-   */
-  nodeHasRubric(nodeId) {
+  nodeHasRubric(nodeId: string): boolean {
     return this.getNumberOfRubricsByNodeId(nodeId) > 0;
+  }
+
+  /**
+   * Get the total number of rubrics (step + components) for the given nodeId
+   * @param nodeId the node id
+   * @return Number of rubrics for the node
+   */
+  getNumberOfRubricsByNodeId(nodeId: string): number {
+    let numRubrics = 0;
+    const node = this.getNodeById(nodeId);
+    if (node) {
+      const nodeRubric = node.rubric;
+      if (nodeRubric != null && nodeRubric != '') {
+        numRubrics++;
+      }
+      const components = node.components;
+      if (components && components.length) {
+        for (let component of components) {
+          if (component) {
+            const componentRubric = component.rubric;
+            if (componentRubric != null && componentRubric != '') {
+              numRubrics++;
+            }
+          }
+        }
+      }
+    }
+    return numRubrics;
   }
 
   /**
@@ -634,6 +666,33 @@ export class TeacherProjectService extends ProjectService {
         this.setStartNodeId(firstLeafNodeId);
       }
     }
+  }
+
+  /**
+   * Get the first leaf node by traversing all the start ids
+   * until a leaf node id is found
+   */
+  private getFirstLeafNodeId(): any {
+    let firstLeafNodeId = null;
+    const startGroupId = this.project.startGroupId;
+    let node = this.getNodeById(startGroupId);
+    let done = false;
+
+    // loop until we have found a leaf node id or something went wrong
+    while (!done) {
+      if (node == null) {
+        done = true;
+      } else if (this.isGroupNode(node.id)) {
+        firstLeafNodeId = node.id;
+        node = this.getNodeById(node.startId);
+      } else if (this.isApplicationNode(node.id)) {
+        firstLeafNodeId = node.id;
+        done = true;
+      } else {
+        done = true;
+      }
+    }
+    return firstLeafNodeId;
   }
 
   /**
@@ -874,6 +933,68 @@ export class TeacherProjectService extends ProjectService {
     this.scrollToBottomOfPageSource.next();
   }
 
+  nodeHasConstraint(nodeId: string): boolean {
+    const constraints = this.getConstraintsOnNode(nodeId);
+    return constraints.length > 0;
+  }
+
+  getConstraintsOnNode(nodeId: string): any {
+    const node = this.getNodeById(nodeId);
+    return node.constraints;
+  }
+
+  /**
+   * Get the human readable description of the constraint.
+   * @param constraint The constraint object.
+   * @returns A human readable text string that describes the constraint.
+   * example
+   * 'All steps after this one will not be visitable until the student completes
+   * "3.7 Revise Your Bowls Explanation"'
+   */
+  getConstraintDescription(constraint: any): string {
+    let message = '';
+    for (const singleRemovalCriteria of constraint.removalCriteria) {
+      if (message != '') {
+        // this constraint has multiple removal criteria
+        if (constraint.removalConditional === 'any') {
+          message += ' or ';
+        } else if (constraint.removalConditional === 'all') {
+          message += ' and ';
+        }
+      }
+      message += this.getCriteriaMessage(singleRemovalCriteria);
+    }
+    return this.getActionMessage(constraint.action) + message;
+  }
+
+  /**
+   * Get the constraint action as human readable text.
+   * @param action A constraint action.
+   * @return A human readable text string that describes the action
+   * example
+   * 'All steps after this one will not be visitable until '
+   */
+  private getActionMessage(action: string): string {
+    if (action === 'makeAllNodesAfterThisNotVisitable') {
+      return $localize`All steps after this one will not be visitable until `;
+    }
+    if (action === 'makeAllNodesAfterThisNotVisible') {
+      return $localize`All steps after this one will not be visible until `;
+    }
+    if (action === 'makeAllOtherNodesNotVisitable') {
+      return $localize`All other steps will not be visitable until `;
+    }
+    if (action === 'makeAllOtherNodesNotVisible') {
+      return $localize`All other steps will not be visible until `;
+    }
+    if (action === 'makeThisNodeNotVisitable') {
+      return $localize`This step will not be visitable until `;
+    }
+    if (action === 'makeThisNodeNotVisible') {
+      return $localize`This step will not be visible until `;
+    }
+  }
+
   addTeacherRemovalConstraint(node: any, periodId: number) {
     const lockConstraint = {
       id: this.UtilService.generateKey(),
@@ -986,6 +1107,10 @@ export class TeacherProjectService extends ProjectService {
     this.getInactiveNodes().forEach((inactiveNode) => {
       this.cleanupNode(inactiveNode);
     });
+  }
+
+  getActiveNodes(): any[] {
+    return this.project.nodes;
   }
 
   /**
@@ -1153,6 +1278,13 @@ export class TeacherProjectService extends ProjectService {
       };
       this.addConstraintToNode(node, newConstraint);
     }
+  }
+
+  private addConstraintToNode(node: any, constraint: any): void {
+    if (node.constraints == null) {
+      node.constraints = [];
+    }
+    node.constraints.push(constraint);
   }
 
   /**
@@ -1710,6 +1842,43 @@ export class TeacherProjectService extends ProjectService {
     }
   }
 
+  /**
+   * Check if a node is a branch point. A branch point is a node with more
+   * than one transition.
+   * @param nodeId the node id
+   * @return whether the node is a branch point
+   */
+  isBranchPoint(nodeId: string): boolean {
+    const transitions = this.getTransitionsByFromNodeId(nodeId);
+    return transitions != null && transitions.length > 1;
+  }
+
+  /**
+   * Check if the node is in any branch path
+   * @param nodeId the node id of the node
+   * @return whether the node is in any branch path
+   */
+  isNodeInAnyBranchPath(nodeId: string): boolean {
+    let result = false;
+    if (this.nodeIdToIsInBranchPath[nodeId] == null) {
+      /*
+       * we have not calculated whether the node id is in a branch path
+       * before so we will now
+       */
+      result = this.nodeIdsInAnyBranch.indexOf(nodeId) !== -1;
+
+      // remember the result for this node id
+      this.nodeIdToIsInBranchPath[nodeId] = result;
+    } else {
+      /*
+       * we have calculated whether the node id is in a branch path
+       * before
+       */
+      result = this.nodeIdToIsInBranchPath[nodeId];
+    }
+    return result;
+  }
+
   isTransitionExist(transitions: any[], transition: any) {
     for (const tempTransition of transitions) {
       if (tempTransition.from === transition.from && tempTransition.to === transition.to) {
@@ -2039,6 +2208,16 @@ export class TeacherProjectService extends ProjectService {
   }
 
   /**
+   * Determine if a node id is a direct child of a group
+   * @param nodeId the node id
+   * @param groupId the group id
+   */
+  isNodeInGroup(nodeId: string, groupId: string): boolean {
+    const group = this.getNodeById(groupId);
+    return group.ids.indexOf(nodeId) != -1;
+  }
+
+  /**
    * Update the transitions so that the fromGroup points to the newToGroup
    *
    * Before
@@ -2298,6 +2477,23 @@ export class TeacherProjectService extends ProjectService {
         this.updateTransitionsForInsertingGroup(nodeId, null, node.id);
       }
     }
+  }
+
+  /**
+   * Get the group nodes that point to a given node id
+   * @param toNodeId
+   */
+  private getGroupNodesByToNodeId(toNodeId: string): any {
+    const groupsThatPointToNodeId = [];
+    if (toNodeId != null) {
+      const groups = this.getGroups();
+      for (let group of groups) {
+        if (this.nodeHasTransitionToNodeId(group, toNodeId)) {
+          groupsThatPointToNodeId.push(group);
+        }
+      }
+    }
+    return groupsThatPointToNodeId;
   }
 
   /**
@@ -2679,6 +2875,20 @@ export class TeacherProjectService extends ProjectService {
       }
     }
     return nextAvailableConstraintId;
+  }
+
+  /**
+   * Get all the node ids from steps (not groups)
+   * @returns an array with all the node ids
+   */
+  getNodeIds(): string[] {
+    return this.applicationNodes.map((node) => {
+      return node.id;
+    });
+  }
+
+  getApplicationNodes(): any[] {
+    return this.applicationNodes;
   }
 
   /**

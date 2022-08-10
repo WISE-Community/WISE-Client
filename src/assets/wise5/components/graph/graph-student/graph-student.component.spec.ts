@@ -7,28 +7,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Point } from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
 import { GraphService } from '../graphService';
 import { GraphStudent } from './graph-student.component';
 import { of } from 'rxjs';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
-
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-  broadcastDoneRenderingComponent() {}
-}
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: GraphStudent;
 const componentId = 'component1';
@@ -45,28 +28,13 @@ describe('GraphStudentComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
-        ComponentServiceLookupServiceModule,
         HighchartsChartModule,
         HttpClientTestingModule,
         MatDialogModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [GraphStudent],
-      providers: [
-        AnnotationService,
-        ComponentService,
-        ConfigService,
-        GraphService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(GraphStudent);
@@ -105,10 +73,6 @@ describe('GraphStudentComponent', () => {
   checkIfYAxisIsLockedWithMultipleYAxesTrue();
   checkIfYAxisIsLockedWithOneYAxisFalse();
   checkIfYAxisIsLockedWithOneYAxisTrue();
-  checkIfYAxisLabelIsBlankWithSingleYAxisFalse();
-  checkIfYAxisLabelIsBlankWithSingleYAxisTrue();
-  checkIfYAxisLabelIsBlankWithMultipleYAxesFalse();
-  checkIfYAxisLabelIsBlankWithMultipleYAxesTrue();
   clearSeriesIds();
   clickUndo();
   convertDataExplorerDataToSeriesData();
@@ -147,7 +111,6 @@ describe('GraphStudentComponent', () => {
   getTheYValueFromDataPoint();
   getTrialNumbers();
   getValuesInColumn();
-  getYAxisColor();
   handleDataExplorer();
   handleDeleteKeyPressed();
   handleTableConnectedComponentStudentDataChanged();
@@ -170,14 +133,9 @@ describe('GraphStudentComponent', () => {
   readCSVIntoActiveSeries();
   readTheConnectedComponentField();
   removeDefaultTrialIfNecessary();
-  removePointFromSeries();
-  resetGraph();
   resetSeriesHelper();
   setActiveTrialAndSeriesByTrialIdsToShow();
-  setAllSeriesColorsToMatchYAxes();
   setSeriesYIndex();
-  setSingleSeriesColorsToMatchYAxisWhenYAxisIsNotSet();
-  setSingleSeriesColorsToMatchYAxisWhenYAxisIsSet();
   setStudentWork();
   setTheDefaultActiveSeries();
   setTheTrialIdsToShow();
@@ -552,28 +510,6 @@ function handleDeleteKeyPressed() {
   });
 }
 
-function resetGraph() {
-  describe('resetGraph', () => {
-    it('should reset graph', () => {
-      component.series = [
-        {
-          data: [
-            [0, 0],
-            [10, 20],
-            [20, 40]
-          ]
-        }
-      ];
-      component.xAxis.max = 200;
-      component.yAxis.max = 50;
-      component.resetGraph();
-      expect(component.series[0].data).toEqual([]);
-      expect(component.xAxis.max).toEqual(100);
-      expect(component.yAxis.max).toEqual(100);
-    });
-  });
-}
-
 function resetSeriesHelper() {
   describe('resetSeriesHelper', () => {
     it('should reset series', () => {
@@ -669,22 +605,6 @@ function makePointsUnique() {
       expect(uniquePoints[0]).toEqual([0, 0]);
       expect(uniquePoints[1]).toEqual([10, 20]);
       expect(uniquePoints[2]).toEqual([20, 40]);
-    });
-  });
-}
-
-function removePointFromSeries() {
-  describe('removePointFromSeries', () => {
-    it('should remove point from series', () => {
-      const series = createSeries('series1', [
-        [0, 0],
-        [10, 20],
-        [20, 40]
-      ]);
-      component.removePointFromSeries(series, 10);
-      expect(series.data.length).toEqual(2);
-      expect(series.data[0]).toEqual([0, 0]);
-      expect(series.data[1]).toEqual([20, 40]);
     });
   });
 }
@@ -1909,90 +1829,6 @@ function setSeriesYIndex() {
   });
 }
 
-function checkIfYAxisLabelIsBlankWithSingleYAxisFalse() {
-  it('should check if Y Axis label is blank with single y axis false', () => {
-    const yAxis = {
-      title: {
-        text: 'Count'
-      },
-      min: 0,
-      max: 100,
-      units: '',
-      locked: false
-    };
-    expect(component.isYAxisLabelBlank(yAxis, null)).toEqual(false);
-  });
-}
-
-function checkIfYAxisLabelIsBlankWithSingleYAxisTrue() {
-  it('should check if Y Axis label is blank with single Y axis true', () => {
-    const yAxis = {
-      title: {
-        text: ''
-      },
-      min: 0,
-      max: 100,
-      units: '',
-      locked: false
-    };
-    expect(component.isYAxisLabelBlank(yAxis, null)).toEqual(true);
-  });
-}
-
-function checkIfYAxisLabelIsBlankWithMultipleYAxesFalse() {
-  it('should check if Y Axis label is blank with multiple y axes false', () => {
-    const firstYAxis = {
-      title: {
-        text: 'Count'
-      },
-      min: 0,
-      max: 100,
-      units: '',
-      locked: false
-    };
-    const secondYAxis = {
-      title: {
-        text: 'Price'
-      },
-      min: 0,
-      max: 1000,
-      units: '',
-      locked: false,
-      opposite: true
-    };
-    const yAxis = [firstYAxis, secondYAxis];
-    expect(component.isYAxisLabelBlank(yAxis, 0)).toEqual(false);
-    expect(component.isYAxisLabelBlank(yAxis, 1)).toEqual(false);
-  });
-}
-
-function checkIfYAxisLabelIsBlankWithMultipleYAxesTrue() {
-  it('should check if Y Axis label is blank with multiple y axes true', () => {
-    const firstYAxis = {
-      title: {
-        text: ''
-      },
-      min: 0,
-      max: 100,
-      units: '',
-      locked: false
-    };
-    const secondYAxis = {
-      title: {
-        text: ''
-      },
-      min: 0,
-      max: 1000,
-      units: '',
-      locked: false,
-      opposite: true
-    };
-    const yAxis = [firstYAxis, secondYAxis];
-    expect(component.isYAxisLabelBlank(yAxis, 0)).toEqual(true);
-    expect(component.isYAxisLabelBlank(yAxis, 1)).toEqual(true);
-  });
-}
-
 function getEventYValueWhenThereIsOneYAxis() {
   it('should get event y value when there is one y axis', () => {
     const event = {
@@ -2131,66 +1967,6 @@ function importGraphSettings() {
     expect(component.height).toEqual(graph2Height);
     expect(component.xAxis.title.text).toEqual(xAxis2Title);
     expect(component.yAxis.title.text).toEqual(yAxis2Title);
-  });
-}
-
-function getYAxisColor() {
-  it('should get y axis color', () => {
-    component.yAxis = [
-      createYAxis('blue'),
-      createYAxis('red'),
-      createYAxis('green'),
-      createYAxis('orange')
-    ];
-    expect(component.getYAxisColor(0)).toEqual('blue');
-    expect(component.getYAxisColor(1)).toEqual('red');
-    expect(component.getYAxisColor(2)).toEqual('green');
-    expect(component.getYAxisColor(3)).toEqual('orange');
-  });
-}
-
-function setSingleSeriesColorsToMatchYAxisWhenYAxisIsNotSet() {
-  it('should set single series colors to match y axis when y axis is not set', () => {
-    component.yAxis = [
-      createYAxis('blue'),
-      createYAxis('red'),
-      createYAxis('green'),
-      createYAxis('orange')
-    ];
-    const series: any = {};
-    component.setSinglSeriesColorsToMatchYAxis(series);
-    expect(series.color).toEqual('blue');
-  });
-}
-
-function setSingleSeriesColorsToMatchYAxisWhenYAxisIsSet() {
-  it('should set single series colors to match y axis when y axis is set', () => {
-    component.yAxis = [
-      createYAxis('blue'),
-      createYAxis('red'),
-      createYAxis('green'),
-      createYAxis('orange')
-    ];
-    const series: any = { yAxis: 1 };
-    component.setSinglSeriesColorsToMatchYAxis(series);
-    expect(series.color).toEqual('red');
-  });
-}
-
-function setAllSeriesColorsToMatchYAxes() {
-  it('should set all series colors to match y axes', () => {
-    component.yAxis = [
-      createYAxis('blue'),
-      createYAxis('red'),
-      createYAxis('green'),
-      createYAxis('orange')
-    ];
-    const series: any[] = [{ yAxis: 0 }, { yAxis: 1 }, { yAxis: 2 }, { yAxis: 3 }];
-    component.setAllSeriesColorsToMatchYAxes(series);
-    expect(series[0].color).toEqual('blue');
-    expect(series[1].color).toEqual('red');
-    expect(series[2].color).toEqual('green');
-    expect(series[3].color).toEqual('orange');
   });
 }
 

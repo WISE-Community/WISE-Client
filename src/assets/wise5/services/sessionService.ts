@@ -20,9 +20,9 @@ export class SessionService {
   private logOutSource: Subject<void> = new Subject<void>();
   public logOut$ = this.logOutSource.asObservable();
 
-  constructor(protected http: HttpClient, protected ConfigService: ConfigService) {}
+  constructor(protected http: HttpClient, protected configService: ConfigService) {}
 
-  calculateIntervals(sessionTimeout): any {
+  calculateIntervals(sessionTimeout: number): any {
     const forceLogoutAfterWarningInterval: number = Math.min(
       sessionTimeout * 0.1,
       this.defaultForceLogoutAfterWarningInterval
@@ -35,13 +35,13 @@ export class SessionService {
   }
 
   isAuthenticated(): boolean {
-    return this.ConfigService.getConfigParam('userType') != 'none';
+    return this.configService.getConfigParam('userType') != 'none';
   }
 
   goHome() {
     this.broadcastExit();
     window.location.href = this.isAuthenticated()
-      ? `/${this.ConfigService.getConfigParam('userType')}`
+      ? `/${this.configService.getConfigParam('userType')}`
       : '/';
   }
 
@@ -50,14 +50,14 @@ export class SessionService {
   }
 
   logOut() {
-    this.http.get(this.ConfigService.getSessionLogOutURL()).subscribe(() => {
+    this.http.get(this.configService.getSessionLogOutURL()).subscribe(() => {
       window.location.href = '/';
     });
   }
 
   initializeSession() {
     const intervals: any = this.calculateIntervals(
-      this.ConfigService.getConfigParam('sessionTimeout')
+      this.configService.getConfigParam('sessionTimeout')
     );
     this.showWarningInterval = intervals.showWarningInterval;
     this.forceLogoutAfterWarningInterval = intervals.forceLogoutAfterWarningInterval;
@@ -66,28 +66,28 @@ export class SessionService {
     this.startCheckMouseEvent();
   }
 
-  startCheckMouseEvent() {
+  startCheckMouseEvent(): void {
     setInterval(() => {
       this.checkMouseEvent();
     }, this.checkMouseEventInterval);
   }
 
-  convertMinutesToSeconds(minutes): number {
+  private convertMinutesToSeconds(minutes: number): number {
     return minutes * 60;
   }
 
-  convertMinutesToMilliseconds(minutes): number {
+  private convertMinutesToMilliseconds(minutes: number): number {
     return minutes * 60 * 1000;
   }
 
   /**
    * Note: This does not get called when the warning popup is being shown.
    */
-  mouseMoved() {
+  mouseMoved(): void {
     this.updateLastActivityTimestamp();
   }
 
-  updateLastActivityTimestamp() {
+  private updateLastActivityTimestamp(): void {
     this.lastActivityTimestamp = new Date().getTime();
   }
 
@@ -130,38 +130,38 @@ export class SessionService {
     return this.warningVisible;
   }
 
-  getInactiveTimeInSeconds(): number {
+  private getInactiveTimeInSeconds(): number {
     return Math.floor(this.getInactiveTimeInMilliseconds() / 1000);
   }
 
-  getInactiveTimeInMilliseconds(): number {
+  private getInactiveTimeInMilliseconds(): number {
     return new Date().getTime() - this.lastActivityTimestamp;
   }
 
-  forceLogOut() {
+  forceLogOut(): void {
     this.logOutSource.next();
   }
 
-  showWarning() {
+  showWarning(): void {
     this.warningVisible = true;
     this.broadcastShowSessionWarning();
   }
 
-  broadcastShowSessionWarning() {
+  private broadcastShowSessionWarning(): void {
     this.showSessionWarningSource.next();
   }
 
-  closeWarningAndRenewSession() {
+  closeWarningAndRenewSession(): void {
     this.warningVisible = false;
     this.updateLastActivityTimestamp();
     this.renewSession();
   }
 
-  checkIfSessionIsActive() {
-    return this.http.get(this.ConfigService.getConfigParam('renewSessionURL'));
+  checkIfSessionIsActive(): Observable<boolean> {
+    return this.http.get<boolean>(this.configService.getConfigParam('renewSessionURL'));
   }
 
-  renewSession() {
+  renewSession(): void {
     this.checkIfSessionIsActive().subscribe((isSessionActive) => {
       if (!isSessionActive) {
         this.logOut();

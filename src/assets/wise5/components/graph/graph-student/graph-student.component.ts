@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -46,7 +46,6 @@ export class GraphStudent extends ComponentStudent {
   initialComponentState: any = null;
   isLegendEnabled: boolean = true;
   isLoaded: boolean = false;
-  isResetGraphButtonVisible: boolean = false;
   isResetSeriesButtonVisible: boolean = false;
   isSelectSeriesVisible: boolean = false;
   lastDropTime: number;
@@ -117,7 +116,6 @@ export class GraphStudent extends ComponentStudent {
       this.isSubmitButtonDisabled = true;
     }
     this.disableComponentIfNecessary();
-    this.initializeDeleteKeyPressedListener();
     this.chartCallback = this.createChartCallback();
     this.drawGraph().then(() => {
       this.broadcastDoneRenderingComponent();
@@ -227,14 +225,6 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  initializeDeleteKeyPressedListener() {
-    this.subscriptions.add(
-      this.StudentDataService.deleteKeyPressed$.subscribe(() => {
-        this.handleDeleteKeyPressed();
-      })
-    );
-  }
-
   fileUploadChanged(event) {
     const activeSeriesData = this.activeSeries.data;
     let overwrite = true;
@@ -305,6 +295,7 @@ export class GraphStudent extends ComponentStudent {
     const graphType = studentData.dataExplorerGraphType;
     this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
     this.setYAxisLabels(studentData);
+    this.setXAxisLabels(studentData);
     this.activeTrial.series = [];
     for (let seriesIndex = 0; seriesIndex < dataExplorerSeries.length; seriesIndex++) {
       const xColumn = dataExplorerSeries[seriesIndex].xColumn;
@@ -365,47 +356,36 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  setAllSeriesColorsToMatchYAxes(series) {
-    for (const singleSeries of series) {
-      this.setSinglSeriesColorsToMatchYAxis(singleSeries);
-    }
+  setXAxisLabels(studentData: any): void {
+    const thisComponent = this;
+    this.xAxis.labels = {
+      formatter: function () {
+        if (
+          this.value + 1 < studentData.tableData.length &&
+          studentData.isDataExplorerEnabled != null &&
+          studentData.dataExplorerSeries != null &&
+          studentData.tableData != null
+        ) {
+          // try to convert the x value number to a category string on the x axis
+          const textValue = thisComponent.getXColumnTextValue(
+            studentData.dataExplorerSeries,
+            studentData.tableData,
+            this.value
+          );
+          if (isNaN(parseFloat(textValue))) {
+            return studentData.tableData[this.value + 1][studentData.dataExplorerSeries[0].xColumn]
+              .text;
+          }
+        }
+        return this.value;
+      }
+    };
   }
 
-  setSinglSeriesColorsToMatchYAxis(series) {
-    if (series.yAxis == null) {
-      series.color = this.getYAxisColor(0);
-    } else {
-      series.color = this.getYAxisColor(series.yAxis);
-    }
-  }
-
-  getYAxisColor(index) {
-    return this.yAxis[index].labels.style.color;
-  }
-
-  setYAxisColor(yAxis, color) {
-    if (yAxis.labels == null) {
-      yAxis.labels = {};
-    }
-    if (yAxis.labels.style == null) {
-      yAxis.labels.style = {};
-    }
-    if (yAxis.title == null) {
-      yAxis.title = {};
-    }
-    if (yAxis.title.style == null) {
-      yAxis.title.style = {};
-    }
-    yAxis.labels.style.color = color;
-    yAxis.title.style.color = color;
-  }
-
-  isYAxisLabelBlank(yAxis, index) {
-    if (this.GraphService.isMultipleYAxes(yAxis)) {
-      return yAxis[index].title.text === '';
-    } else {
-      return yAxis.title.text === '';
-    }
+  getXColumnTextValue(dataExplorerSeries: any[], tableData: any[][], value: number): string {
+    const xColumn = dataExplorerSeries[0].xColumn;
+    const dataRow = tableData[value + 1];
+    return dataRow[xColumn].text;
   }
 
   generateDataExplorerSeries(tableData, xColumn, yColumn, graphType, name, color, yAxis) {
@@ -715,16 +695,6 @@ export class GraphStudent extends ComponentStudent {
     chartYAxis.addPlotLine(plotLine);
   }
 
-  clearPlotLines() {
-    const chart = Highcharts.charts[0];
-    if (chart != null) {
-      const chartXAxis = chart.xAxis[0];
-      chartXAxis.removePlotLine('plot-line-x');
-      const chartYAxis = chart.yAxis[0];
-      chartYAxis.removePlotLine('plot-line-y');
-    }
-  }
-
   /**
    * If the x value is not within the x min and max limits, we will modify the x value to be at the
    * limit.
@@ -857,18 +827,6 @@ export class GraphStudent extends ComponentStudent {
 
   copyXAxisPlotBandsFromComponentContent() {
     this.xAxis.plotBands = this.componentContent.xAxis.plotBands;
-  }
-
-  setupWidth() {
-    if (this.componentContent.width != null) {
-      this.width = this.componentContent.width;
-    }
-  }
-
-  setupHeight() {
-    if (this.componentContent.height != null) {
-      this.height = this.componentContent.height;
-    }
   }
 
   setupXAxisLimitSpacerWidth() {
@@ -1021,19 +979,6 @@ export class GraphStudent extends ComponentStudent {
 
   isCategoriesXAxisType(xAxis) {
     return xAxis.type === 'categories';
-  }
-
-  combineXTextAndYText(xText, yText) {
-    let text = xText;
-    if (xText !== '') {
-      text += ', ';
-    }
-    text += yText;
-    return text;
-  }
-
-  pointHasCustomTooltip(point) {
-    return point.tooltip != null && point.tooltip !== '';
   }
 
   createGraphClickHandler() {
@@ -1259,23 +1204,6 @@ export class GraphStudent extends ComponentStudent {
     return uniquePoints;
   }
 
-  /**
-   * Remove a point from a series. We will remove all points that have the given x value.
-   * @param series the series to remove the point from
-   * @param x the x value of the point to remove
-   */
-  removePointFromSeries(series, x) {
-    const data = series.data;
-    for (let d = 0; d < data.length; d++) {
-      const dataPoint = data[d];
-      const tempDataXValue = dataPoint[0];
-      if (x === tempDataXValue) {
-        data.splice(d, 1);
-        d--;
-      }
-    }
-  }
-
   canEdit(series) {
     return series.canEdit;
   }
@@ -1298,10 +1226,6 @@ export class GraphStudent extends ComponentStudent {
 
   setTrials(trials) {
     this.trials = trials;
-  }
-
-  getTrials() {
-    return this.trials;
   }
 
   /**
@@ -1376,21 +1300,6 @@ export class GraphStudent extends ComponentStudent {
       series.yAxis = 0;
     }
     this.setActiveSeries(series);
-  }
-
-  resetGraph() {
-    this.setSeries(this.UtilService.makeCopyOfJSONObject(this.componentContent.series));
-    if (this.componentContent.xAxis != null) {
-      this.setXAxis(this.componentContent.xAxis);
-    }
-    if (this.componentContent.yAxis != null) {
-      this.setYAxis(this.componentContent.yAxis);
-    }
-    // set the active series to null so that the default series will become selected later
-    this.setActiveSeries(null);
-    this.backgroundImage = this.componentContent.backgroundImage;
-    this.addNextComponentStateToUndoStack = true;
-    this.studentDataChanged();
   }
 
   resetSeries() {
@@ -1616,14 +1525,6 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  showResetGraphButton() {
-    return this.isResetGraphButtonVisible === true;
-  }
-
-  showResetSeriesButton() {
-    return this.isResetSeriesButtonVisible === true;
-  }
-
   getSeriesIndex(series) {
     const multipleSeries = this.getSeries();
     for (let s = 0; s < multipleSeries.length; s++) {
@@ -1731,7 +1632,7 @@ export class GraphStudent extends ComponentStudent {
    */
   attachStudentAsset(studentAsset) {
     this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
-      this.StudentAssetService.getAssetContent(copiedAsset).then((assetContent) => {
+      this.StudentAssetService.getAssetContent(copiedAsset).then((assetContent: string) => {
         const rowData = this.UtilService.CSVToArray(assetContent, ',');
         const params = {
           skipFirstRow: true,
@@ -1806,25 +1707,29 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  addPointFromTableIntoData(xCell, yCell, data) {
+  addPointFromTableIntoData(xCell: any, yCell: any, data: any[]) {
     let xText = xCell.text;
-    let yText = yCell.text;
-    if (xText != null && xText !== '' && yText != null && yText !== '') {
-      const xNumber = Number(xText);
-      const yNumber = Number(yText);
-      const point = [];
-      if (!isNaN(xNumber)) {
-        point.push(xNumber);
-      } else {
-        point.push(xText);
-      }
-      if (!isNaN(yNumber)) {
-        point.push(yNumber);
-      } else {
-        point.push(yText);
-      }
-      data.push(point);
+    if (xText == null || xText === '') {
+      xText = 'N/A';
     }
+    let yText = yCell.text;
+    if (yText == null || yText === '') {
+      yText = 'N/A';
+    }
+    const xNumber = Number(xText);
+    const yNumber = Number(yText);
+    const point = [];
+    if (!isNaN(xNumber)) {
+      point.push(xNumber);
+    } else {
+      point.push(xText);
+    }
+    if (!isNaN(yNumber)) {
+      point.push(yNumber);
+    } else {
+      point.push(yText);
+    }
+    data.push(point);
   }
 
   setSeriesIds(allSeries) {
@@ -1876,7 +1781,8 @@ export class GraphStudent extends ComponentStudent {
     return null;
   }
 
-  handleDeleteKeyPressed() {
+  @HostListener('document:keydown.backspace')
+  handleDeleteKeyPressed(): void {
     const series = this.activeSeries;
     if (this.canEdit(series)) {
       const selectedPoints = this.getSelectedPoints();
@@ -3097,28 +3003,6 @@ export class GraphStudent extends ComponentStudent {
     }
   }
 
-  showTooltipOnX(seriesId, x) {
-    const chart = this.getChartById(this.chartId);
-    if (chart.series.length > 0) {
-      let series = null;
-      if (seriesId == null) {
-        series = chart.series[chart.series.length - 1];
-      } else {
-        for (const singleSeries of chart.series) {
-          if (singleSeries.userOptions.name === seriesId) {
-            series = singleSeries;
-          }
-        }
-      }
-      const points = series.points;
-      for (const point of points) {
-        if (point.x === x) {
-          chart.tooltip.refresh(point);
-        }
-      }
-    }
-  }
-
   highlightPointOnX(seriesId, x) {
     const chart = this.getChartById(this.chartId);
     if (chart.series.length > 0) {
@@ -3147,18 +3031,6 @@ export class GraphStudent extends ComponentStudent {
     for (const point of points) {
       if (point.x === x) {
         point.setState('hover');
-      }
-    }
-  }
-
-  showTooltipOnLatestPoint() {
-    const chart = this.getChartById(this.chartId);
-    if (chart.series.length > 0) {
-      const latestSeries = chart.series[chart.series.length - 1];
-      const points = latestSeries.points;
-      if (points.length > 0) {
-        const latestPoint = points[points.length - 1];
-        chart.tooltip.refresh(latestPoint);
       }
     }
   }

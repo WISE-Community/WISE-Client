@@ -69,7 +69,6 @@ function testInsertAsFirstActivity() {
       controller.insertAsFirstActivity();
       ProjectService.parseProject();
       expect(ProjectService.getGroupNodes().length).toEqual(4);
-      expect(ProjectService.getPositionById('group3')).toEqual('1');
     });
   });
 }
@@ -84,7 +83,6 @@ function testInsertAfter() {
       controller.insertAfterGroup('group1');
       ProjectService.parseProject();
       expect(ProjectService.getGroupNodes().length).toEqual(4);
-      expect(ProjectService.getPositionById('group3')).toEqual('2');
     });
   });
 }

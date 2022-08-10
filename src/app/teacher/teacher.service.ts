@@ -11,8 +11,6 @@ import { TeacherRun } from './teacher-run';
 
 @Injectable()
 export class TeacherService {
-  private runsUrl = '/api/teacher/runs';
-  private sharedRunsUrl = '/api/teacher/sharedruns';
   private registerUrl = '/api/teacher/register';
   private runPermissionUrl = '/api/teacher/run/permission';
   private projectPermissionUrl = '/api/teacher/project/permission';
@@ -50,14 +48,13 @@ export class TeacherService {
     });
   }
 
-  getRuns(): Observable<TeacherRun[]> {
+  getRuns(max: number = 0): Observable<TeacherRun[]> {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
-    return this.http.get<TeacherRun[]>(this.runsUrl, { headers: headers });
-  }
-
-  getSharedRuns(): Observable<TeacherRun[]> {
-    const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
-    return this.http.get<TeacherRun[]>(this.sharedRunsUrl, { headers: headers });
+    let params = new HttpParams();
+    if (max > 0) {
+      params = params.append('max', max);
+    }
+    return this.http.get<TeacherRun[]>('/api/teacher/runs', { headers, params });
   }
 
   getRun(runId: number): Observable<Run> {
