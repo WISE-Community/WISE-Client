@@ -355,17 +355,17 @@ export class TableAuthoring extends ComponentAuthoring {
   }
 
   private isfrozenColumnsLimitReached(): boolean {
-    let count = 0;
     const firstRow = this.authoringComponentContent.tableData[0];
     if (firstRow == null) {
       return false;
     }
-    const maxFrozen = firstRow.length - 1;
+    let count = 0;
     for (const key in firstRow) {
       if (firstRow[key].frozen) {
         count++;
       }
     }
+    const maxFrozen = firstRow.length - 1;
     return count === maxFrozen;
   }
 
