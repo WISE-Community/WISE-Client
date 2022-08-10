@@ -15543,8 +15543,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="b2191784ed157dde935e61493024dce113a03da9" datatype="html">
-        <source>You can freeze any number of columns to the beginning or end of the table. Frozen columns must be next to each other.</source>
+      <trans-unit id="4496d35daf8ae765406a70025b2675f5f5a5e9a9" datatype="html">
+        <source>You can freeze the first column and any next to it to the beginning of the table. Other columns you freeze will be pinned to the end.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
           <context context-type="linenumber">161</context>

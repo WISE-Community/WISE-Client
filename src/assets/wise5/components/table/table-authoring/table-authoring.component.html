@@ -158,7 +158,7 @@
               [(ngModel)]="frozenColumns[cellIndex]"
               (ngModelChange)="frozenColumnsChanged(cellIndex)"
               [disabled]="frozenColumnsLimitReached && !frozenColumns[cellIndex]"
-              matTooltip="You can freeze any number of columns to the beginning or end of the table. Frozen columns must be next to each other."
+              matTooltip="You can freeze the first column and any next to it to the beginning of the table. Other columns you freeze will be pinned to the end."
               matTooltipPosition="above"
               i18n-matTooltip>
             <span i18n>Freeze</span>
