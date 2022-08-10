@@ -10,7 +10,10 @@ export class TabulatorData {
     const defaultOptions = {
       layout: 'fitDataTable',
       maxHeight: '500px',
-      reactiveData: true
+      reactiveData: true,
+      columnDefaults: {
+        maxWidth: 200
+      }
     };
     this.options = { ...defaultOptions, ...options };
   }
@@ -20,6 +23,7 @@ export class TabulatorColumn {
   title: string;
   field: string;
   frozen: boolean;
+  maxWidth: number | boolean; // number of pixels or false for no
   width: number | string; // number of pixels or percent of table width (e.g. '20%')
   editor: string;
   editable: (cell: Tabulator.CellComponent) => boolean;

@@ -2,7 +2,7 @@
 
 import { ComponentNewWorkBadgeComponent } from '../../../../../app/classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import MainMenu from './mainMenu/mainMenu';
-import NodeInfo from './nodeInfo/nodeInfo';
+import { NodeInfoComponent } from './node-info/node-info.component';
 import NotificationsMenu from './notificationsMenu/notificationsMenu';
 import PauseScreensMenu from './pauseScreensMenu/pauseScreensMenu';
 import { StatusIconComponent } from '../../../../../app/classroom-monitor/status-icon/status-icon.component';
@@ -27,8 +27,11 @@ const Shared = angular
     downgradeComponent({ component: ComponentNewWorkBadgeComponent }) as angular.IDirectiveFactory
   )
   .component('cmMainMenu', MainMenu)
+  .directive(
+    'nodeInfo',
+    downgradeComponent({ component: NodeInfoComponent }) as angular.IDirectiveFactory
+  )
   .component('notificationsMenu', NotificationsMenu)
-  .component('nodeInfo', NodeInfo)
   .component('pauseScreensMenu', PauseScreensMenu)
   .directive(
     'statusIcon',

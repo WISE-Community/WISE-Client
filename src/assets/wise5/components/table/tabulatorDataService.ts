@@ -42,6 +42,7 @@ export class TabulatorDataService {
     const width: number = this.getTabulatorColumnWidth(columnDef, globalCellSize);
     if (width) {
       column.width = width;
+      column.maxWidth = false;
     }
     return column;
   }

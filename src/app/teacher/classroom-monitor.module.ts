@@ -38,6 +38,9 @@ import { ComponentGradingModule } from './component-grading.module';
 import { TeacherSummaryDisplay } from '../../assets/wise5/directives/teacher-summary-display/teacher-summary-display.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
+import { NodeInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
+import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
+import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
     MilestoneReportDataComponent,
     MoveUserConfirmDialogComponent,
     NavItemProgressComponent,
+    NodeInfoComponent,
     RemoveUserConfirmDialogComponent,
     ShowStudentInfoComponent,
     StatusIconComponent,
@@ -79,8 +83,10 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
   imports: [
     StudentTeacherCommonModule,
     ComponentGradingModule,
+    ComponentStudentModule,
     HighchartsChartModule,
     PeerGroupGradingModule,
+    PreviewComponentModule,
     SelectPeriodModule
   ]
 })
