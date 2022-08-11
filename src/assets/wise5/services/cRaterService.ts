@@ -6,6 +6,7 @@ import { ConfigService } from './configService';
 import { Observable, of } from 'rxjs';
 import { CRaterIdea } from '../components/dialogGuidance/CRaterIdea';
 import { CRaterScore } from '../components/dialogGuidance/CRaterScore';
+import { CRaterResponse } from '../components/dialogGuidance/CRaterResponse';
 
 @Injectable()
 export class CRaterService {
@@ -304,7 +305,7 @@ export class CRaterService {
       });
   }
 
-  public getDataFromResponse(response: any): any {
+  public getDataFromResponse(response: any): CRaterResponse {
     const data: any = {};
     if (this.isSingleScore(response)) {
       data.score = this.getScore(response);
@@ -323,7 +324,7 @@ export class CRaterService {
     return response.responses.scores.raw_trim_round;
   }
 
-  private getScores(response: any): any[] {
+  private getScores(response: any): CRaterScore[] {
     const scores = [];
     for (const key in response.responses.trait_scores) {
       const value = response.responses.trait_scores[key];
@@ -340,7 +341,7 @@ export class CRaterService {
     return scores;
   }
 
-  private getIdeas(response: any): any[] {
+  private getIdeas(response: any): CRaterIdea[] {
     const ideas = [];
     for (const key in response.responses.feedback.ideas) {
       const value = response.responses.feedback.ideas[key];
