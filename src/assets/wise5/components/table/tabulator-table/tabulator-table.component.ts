@@ -15,6 +15,7 @@ import {
   Tabulator,
   EditModule,
   FormatModule,
+  FrozenColumnsModule,
   KeybindingsModule,
   ReactiveDataModule,
   SortModule
@@ -45,6 +46,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     Tabulator.registerModule([
       EditModule,
       FormatModule,
+      FrozenColumnsModule,
       KeybindingsModule,
       ReactiveDataModule,
       SortModule

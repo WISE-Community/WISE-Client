@@ -22,6 +22,7 @@ export class TabulatorData {
 export class TabulatorColumn {
   title: string;
   field: string;
+  frozen: boolean;
   maxWidth: number | boolean; // number of pixels or false for no
   width: number | string; // number of pixels or percent of table width (e.g. '20%')
   editor: string;

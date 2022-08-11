@@ -36,7 +36,8 @@ export class TabulatorDataService {
   private getTabulatorColumn(columnDef: any, index: number, globalCellSize: number): TabulatorColumn {
     const column = new TabulatorColumn({
       title: columnDef.text,
-      field: `${index}`
+      field: `${index}`,
+      frozen: columnDef.frozen
     });
     const width: number = this.getTabulatorColumnWidth(columnDef, globalCellSize);
     if (width) {
