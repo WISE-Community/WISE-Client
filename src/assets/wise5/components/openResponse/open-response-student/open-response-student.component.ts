@@ -381,7 +381,6 @@ export class OpenResponseStudent extends ComponentStudent {
   private cRaterSuccessResponse(response: any, componentState: any, deferred: any, dialogRef: any) {
     const data = this.CRaterService.getDataFromResponse(response);
     let score = data.score;
-    let concepts = data.concepts;
     if (data.scores != null) {
       const maxSoFarFunc = (accumulator, currentValue) => {
         return Math.max(accumulator, currentValue.score);
@@ -389,18 +388,17 @@ export class OpenResponseStudent extends ComponentStudent {
       score = data.scores.reduce(maxSoFarFunc, 0);
     }
     if (score != null) {
-      this.processCRaterSuccessResponse(score, concepts, data, componentState);
+      this.processCRaterSuccessResponse(score, data, componentState);
     }
     dialogRef.close();
     deferred.resolve(componentState);
   }
 
-  private processCRaterSuccessResponse(score: any, concepts: any, data: any, componentState: any) {
+  private processCRaterSuccessResponse(score: any, data: any, componentState: any) {
     let previousScore = null;
     const autoScoreAnnotationData: any = {
       value: score,
       maxAutoScore: this.ProjectService.getMaxScoreForComponent(this.nodeId, this.componentId),
-      concepts: concepts,
       autoGrader: 'cRater'
     };
     if (data.scores != null) {
@@ -411,7 +409,6 @@ export class OpenResponseStudent extends ComponentStudent {
     }
 
     let autoScoreAnnotation = this.createAutoScoreAnnotation(autoScoreAnnotationData);
-    let annotationGroupForScore = null;
     const latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
       this.nodeId,
       this.componentId,
@@ -449,7 +446,6 @@ export class OpenResponseStudent extends ComponentStudent {
     if (autoComment != null) {
       const autoCommentAnnotationData: any = {};
       autoCommentAnnotationData.value = autoComment;
-      autoCommentAnnotationData.concepts = concepts;
       autoCommentAnnotationData.autoGrader = 'cRater';
 
       const autoCommentAnnotation = this.createAutoCommentAnnotation(autoCommentAnnotationData);
