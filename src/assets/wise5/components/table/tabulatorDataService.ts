@@ -16,7 +16,7 @@ export class TabulatorDataService {
         const rowData = this.getTabulatorRowDataFromTableRow(row, content.columns);
         rowData.values.id = rowIndex;
         content.data.push(rowData.values);
-        content.editableCells[rowIndex] = rowData.editableCells;
+        content.editableCells[index] = rowData.editableCells;
       }
     }
     return content;
