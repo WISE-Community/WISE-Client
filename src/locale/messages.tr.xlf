@@ -11290,6 +11290,26 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></target>
       </trans-unit>
+      <trans-unit id="2b3d6255f6480242ac1c150a618cebb4707f0163" datatype="html">
+        <source>Step Info</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <target state="needs-translation">Step Info</target>
+      </trans-unit>
+      <trans-unit id="a69e631bd9a55827a0856f474b879a10d9ee0cd2" datatype="html">
+        <source>Item Info</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation">Item Info</target>
+      </trans-unit>
       <trans-unit id="6c372513ec53879a9eeffbd96670484f6cc52269" datatype="html">
         <source>Revisions for <x id="INTERPOLATION" equiv-text="{{usernames}}"/></source>
         <context-group purpose="location">
@@ -18449,13 +18469,13 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <note priority="1" from="description">Label for note text input</note>
         <target state="needs-translation"><x id="PH" equiv-text="noteTerm"/> text</target>
       </trans-unit>
-      <trans-unit id="8129802372590365244" datatype="html">
-        <source>Rubric</source>
+      <trans-unit id="314315645942131479" datatype="html">
+        <source>Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/helpIcon/help-icon.component.ts</context>
           <context context-type="linenumber">40</context>
         </context-group>
-        <target state="translated">Rubrik</target>
+        <target state="needs-translation">Info</target>
       </trans-unit>
       <trans-unit id="2e1aeaf8d183e6846a0463a08c784f472184fcf0" datatype="html">
         <source>Completed with warning</source>
@@ -18624,14 +18644,6 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="linenumber">47</context>
         </context-group>
         <target state="needs-translation">Item is locked</target>
-      </trans-unit>
-      <trans-unit id="2b3d6255f6480242ac1c150a618cebb4707f0163" datatype="html">
-        <source>Step Info</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <target state="needs-translation">Step Info</target>
       </trans-unit>
       <trans-unit id="dc34bee07a6ceed8f010d89d1fcbda15a5abee8c" datatype="html">
         <source>Teaching Tips</source>
