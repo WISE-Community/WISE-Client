@@ -258,12 +258,6 @@ class AuthoringToolController {
     );
 
     this.subscriptions.add(
-      this.ProjectService.notLoggedInProjectNotSaved$.subscribe(() => {
-        this.setGlobalMessage(this.$translate('notLoggedInProjectNotSaved'), false, null);
-      })
-    );
-
-    this.subscriptions.add(
       this.ProjectService.notAllowedToEditThisProject$.subscribe(() => {
         this.setGlobalMessage(this.$translate('notAllowedToEditThisProject'), false, null);
       })

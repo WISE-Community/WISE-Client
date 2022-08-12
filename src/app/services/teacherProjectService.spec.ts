@@ -613,12 +613,6 @@ function shouldHandleSaveProjectResponse() {
   it('should broadcast project saved', () => {
     shouldHandleSaveProjectResponseSuccessHelper('broadcastProjectSaved');
   });
-  it('should broadcast not logged in project not saved', () => {
-    shouldHandleSaveProjectResponseErrorHelper(
-      'notSignedIn',
-      'broadcastNotLoggedInProjectNotSaved'
-    );
-  });
   it('should broadcast not allowed to edit this project', () => {
     shouldHandleSaveProjectResponseErrorHelper(
       'notAllowedToEditThisProject',
