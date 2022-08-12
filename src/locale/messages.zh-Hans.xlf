@@ -15010,11 +15010,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1862</context>
+          <context context-type="linenumber">1866</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2697</context>
+          <context context-type="linenumber">2701</context>
         </context-group>
         <target state="needs-translation">Trial</target>
       </trans-unit>
@@ -17406,11 +17406,27 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="translated">列单元格大小</target>
       </trans-unit>
+      <trans-unit id="4496d35daf8ae765406a70025b2675f5f5a5e9a9" datatype="html">
+        <source>You can freeze the first column and any next to it to the beginning of the table. Other columns you freeze will be pinned to the end.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
+          <context context-type="linenumber">161</context>
+        </context-group>
+        <target state="needs-translation">You can freeze the first column and any next to it to the beginning of the table. Other columns you freeze will be pinned to the end.</target>
+      </trans-unit>
+      <trans-unit id="752d332c8e7b4c9e022f12882ebe67ae140349bd" datatype="html">
+        <source>Freeze</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
+          <context context-type="linenumber">164</context>
+        </context-group>
+        <target state="needs-translation">Freeze</target>
+      </trans-unit>
       <trans-unit id="8d3659d1c474ee37dde6c775445b585af3b79b56" datatype="html">
         <source> Make All Cells Editable </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">165,167</context>
+          <context context-type="linenumber">176,178</context>
         </context-group>
         <target state="translated"> 使所有单元格均可编辑 </target>
       </trans-unit>
@@ -17418,7 +17434,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Make All Cells Uneditable </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
-          <context context-type="linenumber">172,174</context>
+          <context context-type="linenumber">183,185</context>
         </context-group>
         <target state="translated"> 使所有单元格不可编辑 </target>
       </trans-unit>
@@ -17426,7 +17442,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Are you sure you want to decrease the number of rows?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <target state="translated">您确定要减少行数吗？</target>
       </trans-unit>
@@ -17434,7 +17450,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Are you sure you want to decrease the number of columns?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">101</context>
         </context-group>
         <target state="translated">您确定要减少列数吗？</target>
       </trans-unit>
@@ -17442,7 +17458,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Are you sure you want to delete this row?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.ts</context>
-          <context context-type="linenumber">207</context>
+          <context context-type="linenumber">210</context>
         </context-group>
         <target state="translated">您确定要删除此行吗？</target>
       </trans-unit>
@@ -17450,7 +17466,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Are you sure you want to delete this column?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">235</context>
         </context-group>
         <target state="translated">您确定要删除此列吗？</target>
       </trans-unit>
