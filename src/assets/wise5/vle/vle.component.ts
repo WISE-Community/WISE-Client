@@ -73,19 +73,12 @@ export class VLEComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.initializeVLEService.initialized$.subscribe(() => {
-      this.isInitialized = true;
-      this.initRestOfVLE();
-    });
-    const urlMatch = window.location.href.match(/unit\/([0-9]*)/);
-    if (urlMatch != null) {
-      const unitId = urlMatch[1];
-      if (this.router.url.includes('/preview/unit')) {
-        this.initializeVLEService.initializePreview(unitId);
-      } else {
-        this.initializeVLEService.initializeStudent(unitId);
+    this.initializeVLEService.initialized$.subscribe((initialized: boolean) => {
+      if (initialized) {
+        this.initRestOfVLE();
+        this.isInitialized = true;
       }
-    }
+    });
   }
 
   initRestOfVLE() {
@@ -141,18 +134,6 @@ export class VLEComponent implements OnInit {
 
     this.themePath = this.projectService.getThemePath();
     this.notebookItemPath = this.themePath + '/notebook/notebookItem.html';
-
-    const urlMatch = window.location.href.match(/unit\/[0-9]*\/(.*)/);
-    let nodeId =
-      urlMatch != null
-        ? urlMatch[1]
-        : this.studentDataService.getLatestNodeEnteredEventNodeIdWithExistingNode();
-
-    if (nodeId == null) {
-      nodeId = this.projectService.getStartNodeId();
-    }
-
-    this.studentDataService.setCurrentNodeByNodeId(nodeId);
 
     // TODO: set these variables dynamically from theme settings
     this.layoutView = 'list'; // 'list' or 'card'
@@ -283,7 +264,7 @@ export class VLEComponent implements OnInit {
             eventData
           );
         }
-
+        this.router.navigate([currentNodeId], { relativeTo: this.route.parent });
         this.setLayoutState();
       })
     );
@@ -395,8 +376,6 @@ export class VLEComponent implements OnInit {
         }
       }
     }
-
-    this.router.navigate([this.currentNode.id], { relativeTo: this.route.parent });
     this.layoutState = layoutState;
   }
 
