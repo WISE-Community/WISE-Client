@@ -27,6 +27,7 @@ import { StudentVLERoutingModule } from './student-vle-routing.module';
 import { PauseScreenService } from '../../../assets/wise5/services/pauseScreenService';
 import { StudentNotificationService } from '../../../assets/wise5/services/studentNotificationService';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
+import { VLEParentComponent } from '../../../assets/wise5/vle/vle-parent/vle-parent.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NotificationService } from '../../../assets/wise5/services/notification
     NavItemComponent,
     SafeUrl,
     StepToolsComponent,
-    VLEComponent
+    VLEComponent,
+    VLEParentComponent
   ],
   imports: [
     StudentTeacherCommonModule,
@@ -60,6 +62,6 @@ import { NotificationService } from '../../../assets/wise5/services/notification
     StudentNotificationService,
     VLEProjectService
   ],
-  exports: [CommonModule, MatButtonModule, MatDialogModule, MatListModule, VLEComponent]
+  exports: [CommonModule, MatButtonModule, MatDialogModule, MatListModule]
 })
 export class StudentVLEModule {}

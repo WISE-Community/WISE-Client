@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { VLEProjectService } from '../vle/vleProjectService';
 import { AchievementService } from './achievementService';
 import { ConfigService } from './configService';
@@ -15,7 +15,7 @@ import { StudentWebSocketService } from './studentWebSocketService';
 
 @Injectable()
 export class InitializeVLEService {
-  private intializedSource: Subject<boolean> = new Subject<boolean>();
+  private intializedSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public initialized$: Observable<boolean> = this.intializedSource.asObservable();
 
   constructor(
