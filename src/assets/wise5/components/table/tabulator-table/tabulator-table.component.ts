@@ -96,7 +96,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   }
 
   private isCellEditable(cell: Tabulator.CellComponent): boolean {
-    const rowIndex = cell.getRow().getPosition();
+    const rowIndex = cell.getRow().getIndex() + 1;
     const field = cell.getColumn().getField();
     const row = this.editableCells[rowIndex];
     return row && row.includes(field);

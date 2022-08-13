@@ -1169,7 +1169,7 @@ export class TableStudent extends ComponentStudent {
 
   tabulatorCellChanged(cell: Tabulator.CellComponent): void {
     const columnIndex = parseInt(cell.getColumn().getField());
-    const rowIndex = cell.getRow().getPosition() + 1;
+    const rowIndex = cell.getRow().getIndex() + 1;
     this.tableData[rowIndex][columnIndex].text = cell.getValue();
     this.studentDataChanged();
   }

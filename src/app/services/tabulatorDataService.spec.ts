@@ -32,7 +32,7 @@ function convertTableDataToTabulator() {
       expect(tabulatorData.data.length).toBe(3);
       expect(tabulatorData.data[1]['0']).toBe('10');
       expect(tabulatorData.options.maxHeight).toBe('500px');
-      expect(tabulatorData.editableCells[0]).toEqual(['1','2']);
+      expect(tabulatorData.editableCells[1]).toEqual(['1', '2']);
     });
   });
 }
