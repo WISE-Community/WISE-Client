@@ -305,15 +305,15 @@ export class CRaterService {
       });
   }
 
-  public getDataFromResponse(response: any): CRaterResponse {
-    const data: any = {};
+  public getCRaterResponse(response: any): CRaterResponse {
+    const cRaterResponse: CRaterResponse = new CRaterResponse();
     if (this.isSingleScore(response)) {
-      data.score = this.getScore(response);
+      cRaterResponse.score = this.getScore(response);
     } else {
-      data.scores = this.getScores(response);
+      cRaterResponse.scores = this.getScores(response);
     }
-    data.ideas = this.getIdeas(response);
-    return data;
+    cRaterResponse.ideas = this.getIdeas(response);
+    return cRaterResponse;
   }
 
   private isSingleScore(response: any): boolean {

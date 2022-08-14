@@ -379,16 +379,16 @@ export class OpenResponseStudent extends ComponentStudent {
   }
 
   private cRaterSuccessResponse(response: any, componentState: any, deferred: any, dialogRef: any) {
-    const data = this.CRaterService.getDataFromResponse(response);
-    let score = data.score;
-    if (data.scores != null) {
+    const cRaterResponse = this.CRaterService.getCRaterResponse(response);
+    let score = cRaterResponse.score;
+    if (cRaterResponse.scores != null) {
       const maxSoFarFunc = (accumulator, currentValue) => {
         return Math.max(accumulator, currentValue.score);
       };
-      score = data.scores.reduce(maxSoFarFunc, 0);
+      score = cRaterResponse.scores.reduce(maxSoFarFunc, 0);
     }
     if (score != null) {
-      this.processCRaterSuccessResponse(score, data, componentState);
+      this.processCRaterSuccessResponse(score, cRaterResponse, componentState);
     }
     dialogRef.close();
     deferred.resolve(componentState);

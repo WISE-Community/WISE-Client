@@ -353,9 +353,9 @@ function getDataFromResponse() {
           }
         }
       };
-      const data = service.getDataFromResponse(response);
-      expect(data.score).toEqual(score);
-      expect(data.ideas).toEqual([new CRaterIdea('1', idea1Detected)]);
+      const cRaterResponse = service.getCRaterResponse(response);
+      expect(cRaterResponse.score).toEqual(score);
+      expect(cRaterResponse.ideas).toEqual([new CRaterIdea('1', idea1Detected)]);
     });
 
     it('should get multiple scores data from response', () => {
@@ -397,12 +397,12 @@ function getDataFromResponse() {
           }
         }
       };
-      const data = service.getDataFromResponse(response);
-      expect(data.scores).toEqual([
+      const cRaterResponse = service.getCRaterResponse(response);
+      expect(cRaterResponse.scores).toEqual([
         new CRaterScore('ki', kiRawTrimRound, kiRaw, kiScoreRangeMin, kiScoreRangeMax),
         new CRaterScore('dci', dciRawTrimRound, dciRaw, dciScoreRangeMin, dciScoreRangeMax)
       ]);
-      expect(data.ideas).toEqual([
+      expect(cRaterResponse.ideas).toEqual([
         new CRaterIdea('1', idea1Detected),
         new CRaterIdea('2', idea2Detected)
       ]);
@@ -420,9 +420,9 @@ function getDataFromResponse() {
           }
         }
       };
-      const data = service.getDataFromResponse(response);
-      expect(data.score).toEqual(score);
-      expect(data.ideas).toEqual([]);
+      const cRaterResponse = service.getCRaterResponse(response);
+      expect(cRaterResponse.score).toEqual(score);
+      expect(cRaterResponse.ideas).toEqual([]);
     });
   });
 }
