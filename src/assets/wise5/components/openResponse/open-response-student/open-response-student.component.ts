@@ -358,8 +358,8 @@ export class OpenResponseStudent extends ComponentStudent {
     )
       .pipe(timeout(this.cRaterTimeout))
       .subscribe(
-        (data: any) => {
-          this.cRaterSuccessResponse(data, componentState, deferred, dialogRef);
+        (response: any) => {
+          this.cRaterSuccessResponse(response, componentState, deferred, dialogRef);
         },
         () => {
           this.cRaterErrorResponse(componentState, deferred, dialogRef);
@@ -378,28 +378,27 @@ export class OpenResponseStudent extends ComponentStudent {
     deferred.resolve(componentState);
   }
 
-  private cRaterSuccessResponse(data: any, componentState: any, deferred: any, dialogRef: any) {
-    let score = data.score;
-    let concepts = data.concepts;
-    if (data.scores != null) {
+  private cRaterSuccessResponse(response: any, componentState: any, deferred: any, dialogRef: any) {
+    const cRaterResponse = this.CRaterService.getCRaterResponse(response);
+    let score = cRaterResponse.score;
+    if (cRaterResponse.scores != null) {
       const maxSoFarFunc = (accumulator, currentValue) => {
         return Math.max(accumulator, currentValue.score);
       };
-      score = data.scores.reduce(maxSoFarFunc, 0);
+      score = cRaterResponse.scores.reduce(maxSoFarFunc, 0);
     }
     if (score != null) {
-      this.processCRaterSuccessResponse(score, concepts, data, componentState);
+      this.processCRaterSuccessResponse(score, cRaterResponse, componentState);
     }
     dialogRef.close();
     deferred.resolve(componentState);
   }
 
-  private processCRaterSuccessResponse(score: any, concepts: any, data: any, componentState: any) {
+  private processCRaterSuccessResponse(score: any, data: any, componentState: any) {
     let previousScore = null;
     const autoScoreAnnotationData: any = {
       value: score,
       maxAutoScore: this.ProjectService.getMaxScoreForComponent(this.nodeId, this.componentId),
-      concepts: concepts,
       autoGrader: 'cRater'
     };
     if (data.scores != null) {
@@ -410,7 +409,6 @@ export class OpenResponseStudent extends ComponentStudent {
     }
 
     let autoScoreAnnotation = this.createAutoScoreAnnotation(autoScoreAnnotationData);
-    let annotationGroupForScore = null;
     const latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
       this.nodeId,
       this.componentId,
@@ -448,7 +446,6 @@ export class OpenResponseStudent extends ComponentStudent {
     if (autoComment != null) {
       const autoCommentAnnotationData: any = {};
       autoCommentAnnotationData.value = autoComment;
-      autoCommentAnnotationData.concepts = concepts;
       autoCommentAnnotationData.autoGrader = 'cRater';
 
       const autoCommentAnnotation = this.createAutoCommentAnnotation(autoCommentAnnotationData);

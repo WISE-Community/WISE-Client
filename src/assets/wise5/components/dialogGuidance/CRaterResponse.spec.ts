@@ -1,4 +1,5 @@
 import { CRaterResponse } from './CRaterResponse';
+import { CRaterScore } from './CRaterScore';
 
 const response = new CRaterResponse();
 describe('CRaterResponse', () => {
@@ -23,7 +24,7 @@ function getDetectedIdeaNames() {
 function getKIScore() {
   describe('getKIScore()', () => {
     it('should return the KI score', () => {
-      response.scores = [{ id: 'ki', score: 2, realNumberScore: 2.13 }];
+      response.scores = [new CRaterScore('ki', 2, 2.13, 1, 5)];
       expect(response.getKIScore()).toEqual(2);
     });
   });
@@ -32,9 +33,9 @@ function getKIScore() {
 function isNonScorable() {
   describe('isNonScorable()', () => {
     it('should return true for non-scorable item and false for scorable item', () => {
-      response.scores = [{ id: 'nonscorable', score: 1, realNumberScore: 1 }];
+      response.scores = [new CRaterScore('nonscorable', 1, 1, 1, 5)];
       expect(response.isNonScorable()).toBeTruthy();
-      response.scores = [{ id: 'nonscorable', score: 0, realNumberScore: 0 }];
+      response.scores = [new CRaterScore('nonscorable', 0, 0, 1, 5)];
       expect(response.isNonScorable()).toBeFalsy();
     });
   });

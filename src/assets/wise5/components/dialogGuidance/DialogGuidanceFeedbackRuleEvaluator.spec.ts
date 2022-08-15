@@ -201,9 +201,10 @@ function finalSubmit() {
 
 function nonScorable() {
   it('should return non-scorable rule when the item is not scorable', () => {
-    expectFeedback([], [{ id: 'nonscorable', score: 1, realNumberScore: 1 }], 'isNonScorable');
+    expectFeedback([], [new CRaterScore('nonscorable', 1, 1, 1, 5)], 'isNonScorable');
   });
 }
+
 function expectFeedback(ideas: string[], scores: CRaterScore[], expectedFeedback: string) {
   const rule = getFeedbackRule(ideas, scores);
   expect(rule.feedback).toContain(expectedFeedback);
@@ -216,10 +217,7 @@ function getFeedbackRule(ideas: string[], scores: CRaterScore[]): FeedbackRule {
 function createCRaterResponse(ideas: string[], scores: CRaterScore[]): CRaterResponse {
   const response = new CRaterResponse();
   response.ideas = ideas.map((idea) => {
-    const cRaterIdea = new CRaterIdea();
-    cRaterIdea.name = idea;
-    cRaterIdea.detected = true;
-    return cRaterIdea;
+    return new CRaterIdea(idea, true);
   });
   response.scores = scores;
   return response;
