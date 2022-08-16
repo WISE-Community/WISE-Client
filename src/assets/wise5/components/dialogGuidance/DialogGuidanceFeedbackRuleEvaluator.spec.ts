@@ -24,6 +24,8 @@ import { FeedbackRule } from './FeedbackRule';
 
 let component: DialogGuidanceStudentComponent;
 let evaluator: DialogGuidanceFeedbackRuleEvaluator;
+const KI_SCORE_1 = new CRaterScore('ki', 1, 1, 1, 5);
+const KI_SCORE_3 = new CRaterScore('ki', 3, 3, 1, 5);
 describe('DialogGuidanceFeedbackRuleEvaluator', () => {
   let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
   const defaultFeedbackRules = [
@@ -38,6 +40,10 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
     {
       expression: 'isNonScorable',
       feedback: 'isNonScorable'
+    },
+    {
+      expression: 'hasKIScore(3)',
+      feedback: 'hasKIScore(3)'
     },
     {
       expression: 'idea1 && idea2',
@@ -63,7 +69,6 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
       expression: 'idea1',
       feedback: 'You hit idea1'
     },
-
     {
       expression: '!idea10',
       feedback: '!idea10'
@@ -129,6 +134,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
   matchRule_MultipleIdeasUsingOr();
   matchRule_MultipleIdeasUsingAndOr();
   matchRule_MultipleIdeasUsingNotAndOr();
+  matchRule_hasKIScore();
   matchNoRule_ReturnDefault();
   matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault();
   secondToLastSubmit();
@@ -138,64 +144,70 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
 
 function matchRule_OneIdea() {
   it('should find first rule matching one idea', () => {
-    expectFeedback(['idea1'], [], 'You hit idea1');
+    expectFeedback(['idea1'], [KI_SCORE_1], 'You hit idea1');
   });
 }
 
 function matchRule_MultipleIdeasUsingAnd() {
   it('should find rule matching two ideas using && operator', () => {
-    expectFeedback(['idea1', 'idea2'], [], 'You hit idea1 and idea2');
-    expectFeedback(['idea2', 'idea3', 'idea4'], [], 'You hit idea2, idea3 and idea4');
+    expectFeedback(['idea1', 'idea2'], [KI_SCORE_1], 'You hit idea1 and idea2');
+    expectFeedback(['idea2', 'idea3', 'idea4'], [KI_SCORE_1], 'You hit idea2, idea3 and idea4');
   });
 }
 
 function matchRule_MultipleIdeasUsingOr() {
   it('should find rule matching ideas using || operator', () => {
-    expectFeedback(['idea5'], [], 'You hit idea5 or idea6');
+    expectFeedback(['idea5'], [KI_SCORE_1], 'You hit idea5 or idea6');
   });
 }
 
 function matchRule_MultipleIdeasUsingAndOr() {
   it('should find rule matching ideas using combination of && and || operators', () => {
-    expectFeedback(['idea7', 'idea9'], [], 'You hit idea7 or idea8 and idea9');
-    expectFeedback(['idea8', 'idea9'], [], 'You hit idea7 or idea8 and idea9');
-    expectFeedback(['idea7', 'idea8'], [], 'You hit idea7 and idea8 or idea9');
-    expectFeedback(['idea9'], [], 'You hit idea7 and idea8 or idea9');
+    expectFeedback(['idea7', 'idea9'], [KI_SCORE_1], 'You hit idea7 or idea8 and idea9');
+    expectFeedback(['idea8', 'idea9'], [KI_SCORE_1], 'You hit idea7 or idea8 and idea9');
+    expectFeedback(['idea7', 'idea8'], [KI_SCORE_1], 'You hit idea7 and idea8 or idea9');
+    expectFeedback(['idea9'], [KI_SCORE_1], 'You hit idea7 and idea8 or idea9');
   });
 }
 
 function matchRule_MultipleIdeasUsingNotAndOr() {
   it('should find rule matching ideas using combination of !, && and || operators', () => {
-    expectFeedback([], [], '!idea10');
-    expectFeedback(['idea10'], [], 'idea10 && !idea11');
-    expectFeedback(['idea10', 'idea11', 'idea12'], [], '!idea11 || idea12');
+    expectFeedback([], [KI_SCORE_1], '!idea10');
+    expectFeedback(['idea10'], [KI_SCORE_1], 'idea10 && !idea11');
+    expectFeedback(['idea10', 'idea11', 'idea12'], [KI_SCORE_1], '!idea11 || idea12');
+  });
+}
+
+function matchRule_hasKIScore() {
+  it('should find rule matching hasKIScore() function', () => {
+    expectFeedback([], [KI_SCORE_3], 'hasKIScore(3)');
   });
 }
 
 function matchNoRule_ReturnDefault() {
   it('should return default idea when no rule is matched', () => {
-    expectFeedback(['idea10', 'idea11'], [], 'default feedback');
+    expectFeedback(['idea10', 'idea11'], [KI_SCORE_1], 'default feedback');
   });
 }
 
 function matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault() {
   it('should return application default rule when no rule is matched and no default is authored', () => {
     component.componentContent.feedbackRules = [];
-    expectFeedback(['idea10', 'idea11'], [], evaluator.defaultFeedback);
+    expectFeedback(['idea10', 'idea11'], [KI_SCORE_1], evaluator.defaultFeedback);
   });
 }
 
 function secondToLastSubmit() {
   it('should return second to last submit rule when there is one submit left', () => {
     component.submitCounter = 4;
-    expectFeedback(['idea1'], [], 'second to last submission');
+    expectFeedback(['idea1'], [KI_SCORE_1], 'second to last submission');
   });
 }
 
 function finalSubmit() {
   it('should return final submit rule when no more submits left', () => {
     component.submitCounter = 5;
-    expectFeedback(['idea1'], [], 'final submission');
+    expectFeedback(['idea1'], [KI_SCORE_1], 'final submission');
   });
 }
 

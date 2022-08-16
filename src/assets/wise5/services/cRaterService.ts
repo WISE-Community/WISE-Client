@@ -321,7 +321,7 @@ export class CRaterService {
   }
 
   private getScore(response: any): number {
-    return response.responses.scores.raw_trim_round;
+    return parseInt(response.responses.scores.raw_trim_round);
   }
 
   private getScores(response: any): CRaterScore[] {
@@ -331,10 +331,10 @@ export class CRaterService {
       scores.push(
         new CRaterScore(
           key,
-          value.raw_trim_round,
-          value.raw,
-          value.score_range_min,
-          value.score_range_max
+          parseInt(value.raw_trim_round),
+          parseFloat(value.raw),
+          parseInt(value.score_range_min),
+          parseInt(value.score_range_max)
         )
       );
     }
