@@ -32,10 +32,13 @@
 </div>
 <tabulator-table [id]="tableId"
     [editableCells]="tabulatorData.editableCells"
+    [enableRowSelection]="componentContent.enableRowSelection"
+    [selectedRowIndeces]="selectedRowIndeces"
     [tabColumns]="tabulatorData.columns"
     [tabData]="tabulatorData.data"
     [tabOptions]="tabulatorData.options"
-    (cellChanged)="tabulatorCellChanged($event)"></tabulator-table>
+    (cellChanged)="tabulatorCellChanged($event)"
+    (rowSelectionChanged)="tabulatorRowSelectionChanged($event)"></tabulator-table>
 <div *ngIf="isDataExplorerEnabled">
   <br/>
   <mat-form-field *ngIf="componentContent.dataExplorerGraphTypes.length > 1" appearance="fill">
