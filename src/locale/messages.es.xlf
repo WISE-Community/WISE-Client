@@ -11308,7 +11308,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">Item Info</target>
+        <target state="translated">Info del item</target>
       </trans-unit>
       <trans-unit id="6c372513ec53879a9eeffbd96670484f6cc52269" datatype="html">
         <source>Revisions for <x id="INTERPOLATION" equiv-text="{{usernames}}"/></source>
@@ -16415,7 +16415,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>This will replace your existing recording. Is this OK?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">706</context>
+          <context context-type="linenumber">703</context>
         </context-group>
         <target state="translated">Esto reemplazará la grabación existente, ¿Ok?</target>
       </trans-unit>
@@ -16423,7 +16423,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Are you sure you want to delete your recording?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">750</context>
+          <context context-type="linenumber">747</context>
         </context-group>
         <target state="translated">¿Seguro que quiere eliminar su grabación?</target>
       </trans-unit>
@@ -17411,7 +17411,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
           <context context-type="linenumber">161</context>
         </context-group>
-        <target state="needs-translation">You can freeze the first column and any next to it to the beginning of the table. Other columns you freeze will be pinned to the end.</target>
+        <target state="translated">Puede congelar la primera columna y cualquiera de las siguientes al principio de la tabla. Otras columnas que congele se fijarán al final.</target>
       </trans-unit>
       <trans-unit id="752d332c8e7b4c9e022f12882ebe67ae140349bd" datatype="html">
         <source>Freeze</source>
@@ -17419,7 +17419,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
           <context context-type="linenumber">164</context>
         </context-group>
-        <target state="needs-translation">Freeze</target>
+        <target state="translated">Fijar</target>
       </trans-unit>
       <trans-unit id="8d3659d1c474ee37dde6c775445b585af3b79b56" datatype="html">
         <source> Make All Cells Editable </source>
