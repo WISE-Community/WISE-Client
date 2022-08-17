@@ -156,7 +156,7 @@ export class TableService extends ComponentService {
   }
 
   private studentDataHasSelectedRows(studentData: any): boolean {
-    return studentData.selectedRowIndeces != null;
+    return studentData.selectedRowIndices != null;
   }
 
   private studentDataHasTableData(studentData: any, componentContent: any): boolean {

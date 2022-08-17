@@ -35,7 +35,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   @Input() editableCells: any;
   @Input() enableRowSelection: boolean;
   @Input() disabled: boolean;
-  @Input() selectedRowIndeces: number[] = [];
+  @Input() selectedRowIndices: number[] = [];
   @Input() tabColumns: TabulatorColumn[]; // see http://tabulator.info/docs/5.3/columns
   @Input() tabData: any[]; // see http://tabulator.info/docs/5.3/data
   @Input() tabOptions: any; // see http://tabulator.info/docs/5.3/options
@@ -138,15 +138,15 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     if (changes['tabData'] && !changes['tabData'].isFirstChange()) {
       this.table.setData(this.tabData);
     }
-    if (changes['selectedRowIndeces'] && !changes['selectedRowIndeces'].isFirstChange()) {
-      this.processSelectedRowChanges(changes['selectedRowIndeces']);
+    if (changes['selectedRowIndices'] && !changes['selectedRowIndices'].isFirstChange()) {
+      this.processSelectedRowChanges(changes['selectedRowIndices']);
     }
   }
 
   private onTableBuilt(): void {
     if (this.enableRowSelection) {
-      if (this.selectedRowIndeces != null && this.selectedRowIndeces.length > 0) {
-        this.table.selectRow(this.selectedRowIndeces);
+      if (this.selectedRowIndices != null && this.selectedRowIndices.length > 0) {
+        this.table.selectRow(this.selectedRowIndices);
       }
       this.table.on('rowSelectionChanged', (data, rows) => {
         this.rowSelectionChanged.emit(rows);

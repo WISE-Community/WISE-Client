@@ -41,7 +41,7 @@ export class TableStudent extends ComponentStudent {
   latestConnectedComponentState: any;
   notebookConfig: any;
   numDataExplorerSeries: number;
-  selectedRowIndeces: number[];
+  selectedRowIndices: number[];
   tableData: any;
   tableId: string;
   tabulatorData: TabulatorData;
@@ -377,8 +377,8 @@ export class TableStudent extends ComponentStudent {
           this.submitCounter = submitCounter;
         }
 
-        this.selectedRowIndeces = studentData.selectedRowIndeces
-          ? studentData.selectedRowIndeces
+        this.selectedRowIndices = studentData.selectedRowIndices
+          ? studentData.selectedRowIndices
           : [];
 
         this.processLatestStudentWork();
@@ -396,7 +396,7 @@ export class TableStudent extends ComponentStudent {
     const componentState: any = this.NodeService.createNewComponentState();
     const studentData: any = {};
     studentData.tableData = this.getCopyOfTableData(this.tableData);
-    studentData.selectedRowIndeces = this.getselectedRowIndeces();
+    studentData.selectedRowIndices = this.getselectedRowIndices();
     studentData.isDataExplorerEnabled = this.isDataExplorerEnabled;
     studentData.dataExplorerGraphType = this.dataExplorerGraphType;
     studentData.dataExplorerXAxisLabel = this.dataExplorerXAxisLabel;
@@ -1181,14 +1181,14 @@ export class TableStudent extends ComponentStudent {
   }
 
   tabulatorRowSelectionChanged(rows: Tabulator.RowComponent[]): void {
-    this.selectedRowIndeces = [];
+    this.selectedRowIndices = [];
     for (const row of rows) {
-      this.selectedRowIndeces.push(row.getIndex());
+      this.selectedRowIndices.push(row.getIndex());
     }
     this.studentDataChanged();
   }
 
-  private getselectedRowIndeces(): number[] {
-    return this.componentContent.enableRowSelection ? this.selectedRowIndeces : [];
+  private getselectedRowIndices(): number[] {
+    return this.componentContent.enableRowSelection ? this.selectedRowIndices : [];
   }
 }
