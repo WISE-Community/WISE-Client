@@ -64,25 +64,16 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.tabOptions.columns = this.setupColumns(this.tabColumns);
-    if (this.enableRowSelection) {
-      this.tabOptions.columns.unshift({
-        formatter: 'rowSelection',
-        titleFormatter: 'rowSelection',
-        hozAlign: 'center',
-        headerSort: false,
-        frozen: true,
-        cellClick: (e, cell) => {
-          cell.getRow().toggleSelect();
-        }
-      });
-    }
+    this.initializeRowSelection();
     this.tabOptions.data = this.tabData;
     this.table = new Tabulator(this.tableEl, this.tabOptions);
     this.table.on('cellEdited', (cell) => {
       this.cellChanged.emit(cell);
     });
     this.table.on('tableBuilt', () => {
-      this.onTableBuilt();
+      if (this.enableRowSelection) {
+        this.setupRowSelection();
+      }
     });
     this.tableContainer.nativeElement.appendChild(this.tableEl);
     this.viewInit$.next();
@@ -131,6 +122,21 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     return cell.getValue();
   }
 
+  private initializeRowSelection(): void {
+    if (this.enableRowSelection && !this.disabled) {
+      this.tabOptions.columns.unshift({
+        formatter: 'rowSelection',
+        titleFormatter: 'rowSelection',
+        hozAlign: 'center',
+        headerSort: false,
+        frozen: true,
+        cellClick: (e, cell) => {
+          cell.getRow().toggleSelect();
+        }
+      });
+    }
+  }
+
   private processChanges(changes: SimpleChanges): void {
     if (changes['tabColumns'] && !changes['tabColumns'].isFirstChange()) {
       this.table.setColumns(this.setupColumns(this.tabColumns));
@@ -138,23 +144,14 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     if (changes['tabData'] && !changes['tabData'].isFirstChange()) {
       this.table.setData(this.tabData);
     }
-    if (changes['selectedRowIndices'] && !changes['selectedRowIndices'].isFirstChange()) {
-      this.processSelectedRowChanges(changes['selectedRowIndices']);
-    }
   }
 
-  private onTableBuilt(): void {
-    if (this.enableRowSelection) {
-      if (this.selectedRowIndices != null && this.selectedRowIndices.length > 0) {
-        this.table.selectRow(this.selectedRowIndices);
-      }
-      this.table.on('rowSelectionChanged', (data, rows) => {
-        this.rowSelectionChanged.emit(rows);
-      });
+  private setupRowSelection(): void {
+    if (this.selectedRowIndices != null && this.selectedRowIndices.length > 0) {
+      this.table.selectRow(this.selectedRowIndices);
     }
-  }
-
-  processSelectedRowChanges(change: SimpleChange): void {
-    const currentChange = change.currentValue;
+    this.table.on('rowSelectionChanged', (data, rows) => {
+      this.rowSelectionChanged.emit(rows);
+    });
   }
 }

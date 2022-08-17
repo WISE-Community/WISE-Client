@@ -13442,39 +13442,39 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1017</context>
+          <context context-type="linenumber">1037</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2852989551014711458" datatype="html">
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1031</context>
+          <context context-type="linenumber">1051</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7053114367342967943" datatype="html">
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1309</context>
+          <context context-type="linenumber">1329</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7889560203726829643" datatype="html">
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1311</context>
+          <context context-type="linenumber">1331</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6999515396807067782" datatype="html">
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1866</context>
+          <context context-type="linenumber">1886</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2701</context>
+          <context context-type="linenumber">2721</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9070768663485888935" datatype="html">
@@ -15369,7 +15369,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
@@ -15621,7 +15621,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Graph Type</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
@@ -15632,14 +15632,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Y Data <x id="INTERPOLATION" equiv-text="{{dataExplorerSeries.length &gt; 1 ? (i + 1) : &apos;&apos;}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b703c5f9773985dca9e4594ae0c3ecb9f3da4462" datatype="html">
         <source>X Axis Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
@@ -15650,7 +15650,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Y Axis Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
@@ -15661,14 +15661,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Y Axis <x id="INTERPOLATION" equiv-text="{{i + 1}}"/> Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8764032794209664551" datatype="html">
         <source>(None)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.ts</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d56d67fc38809e23fcba86a9acc09bd9e40e8b2a" datatype="html">
