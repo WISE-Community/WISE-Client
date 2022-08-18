@@ -24,8 +24,11 @@ import { FeedbackRule } from './FeedbackRule';
 
 let component: DialogGuidanceStudentComponent;
 let evaluator: DialogGuidanceFeedbackRuleEvaluator;
+const KI_SCORE_0 = new CRaterScore('ki', 0, 0, 1, 5);
 const KI_SCORE_1 = new CRaterScore('ki', 1, 1, 1, 5);
 const KI_SCORE_3 = new CRaterScore('ki', 3, 3, 1, 5);
+const KI_SCORE_5 = new CRaterScore('ki', 5, 5, 1, 5);
+const KI_SCORE_6 = new CRaterScore('ki', 6, 6, 1, 5);
 describe('DialogGuidanceFeedbackRuleEvaluator', () => {
   let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
   const defaultFeedbackRules = [
@@ -40,10 +43,6 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
     {
       expression: 'isNonScorable',
       feedback: 'isNonScorable'
-    },
-    {
-      expression: 'hasKIScore(3)',
-      feedback: 'hasKIScore(3)'
     },
     {
       expression: 'idea1 && idea2',
@@ -179,8 +178,36 @@ function matchRule_MultipleIdeasUsingNotAndOr() {
 }
 
 function matchRule_hasKIScore() {
-  it('should find rule matching hasKIScore() function', () => {
-    expectFeedback([], [KI_SCORE_3], 'hasKIScore(3)');
+  describe('hasKIScore()', () => {
+    beforeEach(() => {
+      component.componentContent.feedbackRules = [
+        {
+          expression: 'hasKIScore(1)',
+          feedback: 'hasKIScore(1)'
+        },
+        {
+          expression: 'hasKIScore(3)',
+          feedback: 'hasKIScore(3)'
+        },
+        {
+          expression: 'hasKIScore(5)',
+          feedback: 'hasKIScore(5)'
+        },
+        {
+          expression: 'isDefault',
+          feedback: 'isDefault'
+        }
+      ];
+    });
+    it('should match rule if KI score is in range [1-5]', () => {
+      expectFeedback([], [KI_SCORE_1], 'hasKIScore(1)');
+      expectFeedback([], [KI_SCORE_3], 'hasKIScore(3)');
+      expectFeedback([], [KI_SCORE_5], 'hasKIScore(5)');
+    });
+    it('should not match rule if KI score is out of range [1-5]', () => {
+      expectFeedback([], [KI_SCORE_0], 'isDefault');
+      expectFeedback([], [KI_SCORE_6], 'isDefault');
+    });
   });
 }
 
