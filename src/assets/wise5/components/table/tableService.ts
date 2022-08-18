@@ -185,6 +185,7 @@ export class TableService extends ComponentService {
         }
       }
     }
+    return false;
   }
 
   /**
