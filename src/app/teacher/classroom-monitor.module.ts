@@ -41,6 +41,7 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { NodeInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
+import { StudentGradingToolsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { PreviewComponentModule } from '../../assets/wise5/authoringTool/compone
     ShowStudentInfoComponent,
     StatusIconComponent,
     StepInfoComponent,
+    StudentGradingToolsComponent,
     TeacherSummaryDisplay,
     ViewComponentRevisionsComponent,
     WorkgroupComponentGradingComponent,
