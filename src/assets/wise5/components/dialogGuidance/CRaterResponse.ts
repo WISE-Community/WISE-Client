@@ -18,12 +18,14 @@ export class CRaterResponse {
     return detectedIdeaNames;
   }
 
-  getKIScore() {
-    for (const score of this.scores) {
-      if (score.id === 'ki') {
-        return score.score;
-      }
-    }
+  getKIScore(): number {
+    return this.isSingleScoreItem()
+      ? this.score
+      : this.scores.find((score) => score.id === 'ki').score;
+  }
+
+  private isSingleScoreItem(): boolean {
+    return this.score != null;
   }
 
   isNonScorable(): boolean {
