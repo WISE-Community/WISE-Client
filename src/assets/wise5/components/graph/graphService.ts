@@ -473,7 +473,7 @@ export class GraphService extends ComponentService {
     const category = this.getCategoryByIndex(point.index, xAxis);
     if (category != null) {
       return category;
-    } else if (point.category === x) {
+    } else if (point.category === x && point.name != null) {
       return point.name;
     } else {
       return this.performRounding(x, roundValuesTo);
