@@ -161,8 +161,8 @@ export class TableService extends ComponentService {
 
   private studentDataHasTableData(studentData: any, componentContent: any): boolean {
     const studentTableData = studentData.tableData;
-    const componentContentTableData = componentContent.tableData;
     if (studentTableData != null) {
+      const componentContentTableData = componentContent.tableData;
       const studentRows = studentTableData;
       for (let r = 0; r < studentRows.length; r++) {
         const studentRow = studentRows[r];

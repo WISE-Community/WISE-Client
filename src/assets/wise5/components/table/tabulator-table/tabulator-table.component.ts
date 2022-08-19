@@ -6,7 +6,6 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChange,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation
@@ -40,11 +39,10 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   @Input() tabData: any[]; // see http://tabulator.info/docs/5.3/data
   @Input() tabOptions: any; // see http://tabulator.info/docs/5.3/options
   @Output() cellChanged = new EventEmitter<Tabulator.CellComponent>();
-  @Output() rowSelectionChanged = new EventEmitter<Tabulator.CellComponent>();
+  @Output() rowSelectionChanged = new EventEmitter<Tabulator.RowComponent>();
   @ViewChild('table', { static: false }) tableContainer: ElementRef;
 
   table: Tabulator;
-  tableBuilt: boolean = false;
   tableEl = document.createElement('div');
   subscriptions: Subscription = new Subscription();
   viewInit$ = new ReplaySubject();
@@ -147,7 +145,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   }
 
   private setupRowSelection(): void {
-    if (this.selectedRowIndices != null && this.selectedRowIndices.length > 0) {
+    if (this.selectedRowIndices.length > 0) {
       this.table.selectRow(this.selectedRowIndices);
     }
     this.table.on('rowSelectionChanged', (data, rows) => {

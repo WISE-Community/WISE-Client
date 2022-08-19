@@ -272,7 +272,7 @@ export class GraphStudent extends ComponentStudent {
     this.isDirty = true;
   }
 
-  private getVisibleRows(tableData: any, selectedRowIndices: number[]): any {
+  private getVisibleRows(tableData: any, selectedRowIndices: number[]): any[] {
     const visibleRows = [];
     visibleRows.push(tableData[0]);
     tableData.forEach((row, index) => {

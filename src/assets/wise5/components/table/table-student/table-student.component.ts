@@ -41,7 +41,7 @@ export class TableStudent extends ComponentStudent {
   latestConnectedComponentState: any;
   notebookConfig: any;
   numDataExplorerSeries: number;
-  selectedRowIndices: number[];
+  selectedRowIndices: number[] = [];
   tableData: any;
   tableId: string;
   tabulatorData: TabulatorData;
@@ -396,7 +396,7 @@ export class TableStudent extends ComponentStudent {
     const componentState: any = this.NodeService.createNewComponentState();
     const studentData: any = {};
     studentData.tableData = this.getCopyOfTableData(this.tableData);
-    studentData.selectedRowIndices = this.getselectedRowIndices();
+    studentData.selectedRowIndices = this.getSelectedRowIndices();
     studentData.isDataExplorerEnabled = this.isDataExplorerEnabled;
     studentData.dataExplorerGraphType = this.dataExplorerGraphType;
     studentData.dataExplorerXAxisLabel = this.dataExplorerXAxisLabel;
@@ -1188,7 +1188,7 @@ export class TableStudent extends ComponentStudent {
     this.studentDataChanged();
   }
 
-  private getselectedRowIndices(): number[] {
+  private getSelectedRowIndices(): number[] {
     return this.componentContent.enableRowSelection ? this.selectedRowIndices : [];
   }
 }
