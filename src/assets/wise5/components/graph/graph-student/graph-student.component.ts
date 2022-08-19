@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -78,6 +78,7 @@ export class GraphStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private changeDetectorRef: ChangeDetectorRef,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected dialog: MatDialog,
@@ -831,6 +832,7 @@ export class GraphStudent extends ComponentStudent {
         this.setCustomLegend();
       });
     }
+    this.changeDetectorRef.detectChanges();
   }
 
   turnOffXAxisDecimals() {
