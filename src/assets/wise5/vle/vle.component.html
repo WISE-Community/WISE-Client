@@ -13,15 +13,7 @@
     <div id="content"
         class="vle-content"
         [ngClass]="{'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node'}">
-      <div *ngIf="isEndedAndLocked"
-          class="notice node-notice"
-          fxLayout="row"
-          fxLayoutAlign="center center">
-        <span>
-          <mat-icon class="warn">lock</mat-icon>&nbsp;
-        </span>
-        <span class="warn md-body-2">{{ endedAndLockedMessage }}</span>
-      </div>
+      <run-ended-and-locked-message *ngIf="runEndedAndLocked"></run-ended-and-locked-message>
       <node *ngIf="layoutState === 'node'"></node>
       <navigation *ngIf="layoutState === 'nav'"></navigation>
     </div>
@@ -29,8 +21,7 @@
         [ngClass]="{'notes-visible': notesVisible, 'report-full': reportFullscreen}"
         [config]="notebookConfig">
     </notebook-report>
-    <notebook-launcher *ngIf="notesEnabled && !notesVisible"
-        [notebookConfig]="notebookConfig">
+    <notebook-launcher *ngIf="notesEnabled && !notesVisible" [notebookConfig]="notebookConfig">
     </notebook-launcher>
   </mat-drawer-content>
 </mat-drawer-container>

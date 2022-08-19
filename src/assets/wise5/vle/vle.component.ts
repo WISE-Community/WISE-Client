@@ -25,10 +25,8 @@ export class VLEComponent implements OnInit {
   constraintsDisabled: boolean = false;
   currentNode: any;
   @ViewChild('drawer') public drawer: any;
-  endedAndLockedMessage: string;
   homePath: string;
   idToOrder: any;
-  isEndedAndLocked: boolean;
   isInitialized: boolean;
   layoutState: string;
   layoutView: string;
@@ -50,6 +48,7 @@ export class VLEComponent implements OnInit {
   reportFullscreen: boolean = false;
   rootNode: any;
   rootNodeStatus: any;
+  runEndedAndLocked: boolean;
   snipImageHandler: any;
   subscriptions: Subscription = new Subscription();
   themePath: string;
@@ -107,12 +106,7 @@ export class VLEComponent implements OnInit {
       this.constraintsDisabled = true;
     }
 
-    this.isEndedAndLocked = this.configService.isEndedAndLocked();
-    if (this.isEndedAndLocked) {
-      const endDate = this.configService.getPrettyEndDate();
-      this.endedAndLockedMessage = $localize`This unit ended on ${endDate}. You can no longer save new work.`;
-    }
-
+    this.runEndedAndLocked = this.configService.isEndedAndLocked();
     let script = this.projectService.getProjectScript();
     if (script != null) {
       this.projectService.retrieveScript(script).then((script: string) => {
