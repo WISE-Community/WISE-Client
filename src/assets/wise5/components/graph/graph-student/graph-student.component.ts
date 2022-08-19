@@ -257,40 +257,33 @@ export class GraphStudent extends ComponentStudent {
   }
 
   handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState) {
-    const studentData = componentState.studentData;
+    const studentData = this.UtilService.makeCopyOfJSONObject(componentState.studentData);
+    const selectedRowIndices = studentData.selectedRowIndices;
+    const tableData = studentData.tableData;
+    if (tableData.length > 0 && selectedRowIndices != null && selectedRowIndices.length > 0) {
+      studentData.tableData = this.getVisibleRows(studentData.tableData, selectedRowIndices);
+    }
     if (studentData.isDataExplorerEnabled) {
       this.handleDataExplorer(studentData);
     } else {
-      const rows = studentData.tableData;
-      const data = this.convertRowDataToSeriesData(rows, connectedComponent);
-      let seriesIndex = connectedComponent.seriesIndex;
-      if (seriesIndex == null) {
-        seriesIndex = 0;
-      }
-      if (this.isStudentDataVersion1()) {
-        let series = this.series[seriesIndex];
-        if (series == null) {
-          series = {};
-          this.series[seriesIndex] = series;
-        }
-        series.data = data;
-      } else {
-        const trial = this.activeTrial;
-        if (trial != null && trial.series != null) {
-          let series = trial.series[seriesIndex];
-          if (series == null) {
-            series = {};
-            this.series[seriesIndex] = series;
-          }
-          series.data = data;
-        }
-      }
+      this.handleConnectedComponentData(studentData, connectedComponent);
     }
     this.drawGraph();
     this.isDirty = true;
   }
 
-  handleDataExplorer(studentData) {
+  private getVisibleRows(tableData: any, selectedRowIndices: number[]): any[] {
+    const visibleRows = [];
+    visibleRows.push(tableData[0]);
+    tableData.forEach((row, index) => {
+      if (selectedRowIndices.includes(index - 1)) {
+        visibleRows.push(row);
+      }
+    });
+    return visibleRows;
+  }
+
+  private handleDataExplorer(studentData: any): void {
     const dataExplorerSeries = studentData.dataExplorerSeries;
     const graphType = studentData.dataExplorerGraphType;
     this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
@@ -326,6 +319,33 @@ export class GraphStudent extends ComponentStudent {
           );
           this.activeTrial.series.push(regressionSeries);
         }
+      }
+    }
+  }
+
+  private handleConnectedComponentData(studentData: any, connectedComponent: any): void {
+    const rows = studentData.tableData;
+    const data = this.convertRowDataToSeriesData(rows, connectedComponent);
+    let seriesIndex = connectedComponent.seriesIndex;
+    if (seriesIndex == null) {
+      seriesIndex = 0;
+    }
+    if (this.isStudentDataVersion1()) {
+      let series = this.series[seriesIndex];
+      if (series == null) {
+        series = {};
+        this.series[seriesIndex] = series;
+      }
+      series.data = data;
+    } else {
+      const trial = this.activeTrial;
+      if (trial != null && trial.series != null) {
+        let series = trial.series[seriesIndex];
+        if (series == null) {
+          series = {};
+          this.series[seriesIndex] = series;
+        }
+        series.data = data;
       }
     }
   }
