@@ -1728,28 +1728,26 @@ export class GraphStudent extends ComponentStudent {
   }
 
   addPointFromTableIntoData(xCell: any, yCell: any, data: any[]) {
-    let xText = xCell.text;
-    if (xText == null || xText === '') {
-      xText = 'N/A';
-    }
-    let yText = yCell.text;
-    if (yText == null || yText === '') {
-      yText = 'N/A';
-    }
-    const xNumber = Number(xText);
-    const yNumber = Number(yText);
-    const point = [];
-    if (!isNaN(xNumber)) {
-      point.push(xNumber);
+    const xText = xCell.text;
+    const yText = yCell.text;
+    if (xText != null && xText !== '' && yText != null && yText !== '') {
+      const xNumber = Number(xText);
+      const yNumber = Number(yText);
+      const point = [];
+      if (!isNaN(xNumber)) {
+        point.push(xNumber);
+      } else {
+        point.push(xText);
+      }
+      if (!isNaN(yNumber)) {
+        point.push(yNumber);
+      } else {
+        point.push(yText);
+      }
+      data.push(point);
     } else {
-      point.push(xText);
+      data.push([]);
     }
-    if (!isNaN(yNumber)) {
-      point.push(yNumber);
-    } else {
-      point.push(yText);
-    }
-    data.push(point);
   }
 
   setSeriesIds(allSeries) {
