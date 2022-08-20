@@ -29,6 +29,7 @@ import { StudentNotificationService } from '../../../assets/wise5/services/stude
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
 import { VLEParentComponent } from '../../../assets/wise5/vle/vle-parent/vle-parent.component';
 import { RunEndedAndLockedMessageComponent } from '../../../assets/wise5/vle/run-ended-and-locked-message/run-ended-and-locked-message.component';
+import { NodeClickLockedService } from '../../../assets/wise5/services/nodeClickLockedService';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { RunEndedAndLockedMessageComponent } from '../../../assets/wise5/vle/run
   ],
   providers: [
     InitializeVLEService,
+    NodeClickLockedService,
     PauseScreenService,
     { provide: DataService, useExisting: StudentDataService },
     { provide: NotificationService, useExisting: StudentNotificationService },

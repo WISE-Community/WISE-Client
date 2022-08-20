@@ -10,7 +10,6 @@ import { SessionService } from '../services/sessionService';
 import { StudentDataService } from '../services/studentDataService';
 import { VLEProjectService } from './vleProjectService';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
-import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
 import { AnnotationService } from '../services/annotationService';
 import { UtilService } from '../services/utilService';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -183,7 +182,6 @@ export class VLEComponent implements OnInit {
     this.subscribeToCurrentNodeChanged();
     this.subscribeToNotesVisible();
     this.subscribeToReportFullScreen();
-    this.subscribeToNodeClickLocked();
     this.subscribeToServerConnectionStatus();
     this.subscribeToViewCurrentAmbientNotification();
   }
@@ -281,36 +279,6 @@ export class VLEComponent implements OnInit {
     this.subscriptions.add(
       this.notebookService.reportFullScreen$.subscribe((full: boolean) => {
         this.reportFullscreen = full;
-      })
-    );
-  }
-
-  private subscribeToNodeClickLocked(): void {
-    this.subscriptions.add(
-      this.studentDataService.nodeClickLocked$.subscribe(({ nodeId }) => {
-        let message = $localize`Sorry, you cannot view this item yet.`;
-        const node = this.projectService.getNodeById(nodeId);
-        if (node != null) {
-          const constraints = this.projectService.getConstraintsThatAffectNode(node);
-          this.projectService.orderConstraints(constraints);
-          if (constraints != null && constraints.length > 0) {
-            const nodeTitle = this.projectService.getNodePositionAndTitleByNodeId(nodeId);
-            message = $localize`<p>To visit <b>${nodeTitle}</b> you need to:</p><ul>`;
-          }
-          for (let c = 0; c < constraints.length; c++) {
-            const constraint = constraints[c];
-            if (constraint != null && !this.studentDataService.evaluateConstraint(constraint)) {
-              message += `<li>${this.projectService.getConstraintMessage(nodeId, constraint)}</li>`;
-            }
-          }
-          message += `</ul>`;
-        }
-        this.dialog.open(DialogWithCloseComponent, {
-          data: {
-            content: message,
-            title: $localize`Item Locked`
-          }
-        });
       })
     );
   }
