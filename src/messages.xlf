@@ -16727,6 +16727,13 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">89</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="7117912496769621431" datatype="html">
+        <source>This unit ended on <x id="PH" equiv-text="endDate"/>. You can no longer save new work.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/run-ended-and-locked-message/run-ended-and-locked-message.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="b9311730cc705aa91140b247c6e4fb58a10174dd" datatype="html">
         <source>(Team <x id="INTERPOLATION" equiv-text="{{ workgroupId }}"/>)</source>
         <context-group purpose="location">
@@ -16791,53 +16798,46 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">20,22</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7117912496769621431" datatype="html">
-        <source>This unit ended on <x id="PH" equiv-text="endDate"/>. You can no longer save new work.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">113</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="2304476742154607725" datatype="html">
         <source>You have been inactive for a long time. Do you want to stay logged in?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">197</context>
         </context-group>
       </trans-unit>
       <trans-unit id="537022937435161177" datatype="html">
         <source>Session Timeout</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">204</context>
+          <context context-type="linenumber">198</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3178064088723974543" datatype="html">
         <source>Sorry, you cannot view this item yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">297</context>
+          <context context-type="linenumber">291</context>
         </context-group>
       </trans-unit>
       <trans-unit id="685273827497092928" datatype="html">
         <source>&lt;p&gt;To visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt; you need to:&lt;/p&gt;&lt;ul&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">304</context>
+          <context context-type="linenumber">298</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2738912629247967660" datatype="html">
         <source>Item Locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">317</context>
+          <context context-type="linenumber">311</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3023661788238273336" datatype="html">
         <source>Error: Data is not being saved! Check your internet connection.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">379</context>
         </context-group>
       </trans-unit>
     </body>
