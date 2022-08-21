@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -41,6 +41,7 @@ export class GraphStudent extends ComponentStudent {
   hasCustomLegendBeenSet: boolean = false;
   height: number = null;
   hiddenCanvasId: string = 'hiddenCanvas_' + this.componentId;
+  @ViewChild('hiddenButton') hiddenButtonElement: ElementRef;
   hideAllTrialsOnNewTrial: boolean = true;
   Highcharts: typeof Highcharts = Highcharts;
   initialComponentState: any = null;
@@ -1016,6 +1017,11 @@ export class GraphStudent extends ComponentStudent {
     };
   }
 
+  focusOnComponent(): void {
+    // allows this component to listen to events (e.g. "keydown.backspace")
+    this.hiddenButtonElement.nativeElement.focus();
+  }
+
   /*
    * Check if the last drop event was within the last 100 milliseconds so we will not register the
    * click. We need to do this because when students drag points, a click event is fired when they
@@ -1801,7 +1807,7 @@ export class GraphStudent extends ComponentStudent {
     return null;
   }
 
-  @HostListener('document:keydown.backspace')
+  @HostListener('keydown.backspace')
   handleDeleteKeyPressed(): void {
     const series = this.activeSeries;
     if (this.canEdit(series)) {
