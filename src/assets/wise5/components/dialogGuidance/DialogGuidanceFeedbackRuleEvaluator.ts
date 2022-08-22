@@ -132,12 +132,13 @@ export class DialogGuidanceFeedbackRuleEvaluator {
     const matches = term.match(/ideaCount(.*)\((.*)\)/);
     const comparer = matches[1];
     const expectedIdeaCount = parseInt(matches[2]);
-    if (comparer === 'MoreThan') {
-      return response.getDetectedIdeaCount() > expectedIdeaCount;
-    } else if (comparer === 'Equals') {
-      return response.getDetectedIdeaCount() === expectedIdeaCount;
-    } else {
-      return response.getDetectedIdeaCount() < expectedIdeaCount;
+    switch (comparer) {
+      case 'MoreThan':
+        return response.getDetectedIdeaCount() > expectedIdeaCount;
+      case 'Equals':
+        return response.getDetectedIdeaCount() === expectedIdeaCount;
+      case 'LessThan':
+        return response.getDetectedIdeaCount() < expectedIdeaCount;
     }
   }
 
