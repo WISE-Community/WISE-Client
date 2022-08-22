@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
@@ -33,7 +33,6 @@ export class VLEComponent implements OnInit {
   reportEnabled: boolean = false;
   reportFullscreen: boolean = false;
   runEndedAndLocked: boolean;
-  snipImageHandler: any;
   subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -95,23 +94,19 @@ export class VLEComponent implements OnInit {
     this.currentNode = this.studentDataService.getCurrentNode();
     this.setLayoutState();
     this.initializeSubscriptions();
-    this.addSnipImageListener();
   }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
-    window.removeEventListener('snip-image', this.snipImageHandler);
     this.sessionService.broadcastExit();
   }
 
-  private addSnipImageListener(): void {
-    this.snipImageHandler = (event: CustomEvent) => {
-      this.notebookService.addNote(
-        this.studentDataService.getCurrentNodeId(),
-        this.utilService.getImageObjectFromImageElement(event.detail.target)
-      );
-    };
-    window.addEventListener('snip-image', this.snipImageHandler);
+  @HostListener('window:snip-image', ['$event.detail.target'])
+  snipImage(image: Element): void {
+    this.notebookService.addNote(
+      this.studentDataService.getCurrentNodeId(),
+      this.utilService.getImageObjectFromImageElement(image)
+    );
   }
 
   closeNotes(): void {
