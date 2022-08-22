@@ -41,6 +41,7 @@ export class TableStudent extends ComponentStudent {
   latestConnectedComponentState: any;
   notebookConfig: any;
   numDataExplorerSeries: number;
+  selectedRowIndices: number[] = [];
   tableData: any;
   tableId: string;
   tabulatorData: TabulatorData;
@@ -185,9 +186,7 @@ export class TableStudent extends ComponentStudent {
     this.dataExplorerSeries[dataExplorerSeriesIndex].xColumn = columnIndex;
     this.dataExplorerXColumn = columnIndex;
     this.setDataExplorerXColumnIsDisabled();
-    if (this.isDataExplorerXAxisLabelEmpty()) {
-      this.updateDataExplorerXAxisLabel(columnIndex);
-    }
+    this.updateDataExplorerXAxisLabel(columnIndex);
   }
 
   isDataExplorerXAxisLabelEmpty(): boolean {
@@ -378,6 +377,10 @@ export class TableStudent extends ComponentStudent {
           this.submitCounter = submitCounter;
         }
 
+        this.selectedRowIndices = studentData.selectedRowIndices
+          ? studentData.selectedRowIndices
+          : [];
+
         this.processLatestStudentWork();
       }
     }
@@ -393,6 +396,7 @@ export class TableStudent extends ComponentStudent {
     const componentState: any = this.NodeService.createNewComponentState();
     const studentData: any = {};
     studentData.tableData = this.getCopyOfTableData(this.tableData);
+    studentData.selectedRowIndices = this.getSelectedRowIndices();
     studentData.isDataExplorerEnabled = this.isDataExplorerEnabled;
     studentData.dataExplorerGraphType = this.dataExplorerGraphType;
     studentData.dataExplorerXAxisLabel = this.dataExplorerXAxisLabel;
@@ -1045,9 +1049,7 @@ export class TableStudent extends ComponentStudent {
     for (const singleSeries of this.dataExplorerSeries) {
       singleSeries.xColumn = this.dataExplorerXColumn;
     }
-    if (this.isDataExplorerXAxisLabelEmpty()) {
-      this.updateDataExplorerXAxisLabel(this.dataExplorerXColumn);
-    }
+    this.updateDataExplorerXAxisLabel(this.dataExplorerXColumn);
     this.studentDataChanged();
   }
 
@@ -1173,8 +1175,20 @@ export class TableStudent extends ComponentStudent {
 
   tabulatorCellChanged(cell: Tabulator.CellComponent): void {
     const columnIndex = parseInt(cell.getColumn().getField());
-    const rowIndex = cell.getRow().getPosition() + 1;
+    const rowIndex = cell.getRow().getIndex() + 1;
     this.tableData[rowIndex][columnIndex].text = cell.getValue();
     this.studentDataChanged();
+  }
+
+  tabulatorRowSelectionChanged(rows: Tabulator.RowComponent[]): void {
+    this.selectedRowIndices = [];
+    for (const row of rows) {
+      this.selectedRowIndices.push(row.getIndex());
+    }
+    this.studentDataChanged();
+  }
+
+  private getSelectedRowIndices(): number[] {
+    return this.componentContent.enableRowSelection ? this.selectedRowIndices : [];
   }
 }

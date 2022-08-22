@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { Observable, of } from 'rxjs';
+import { CRaterIdea } from '../components/dialogGuidance/CRaterIdea';
+import { CRaterScore } from '../components/dialogGuidance/CRaterScore';
+import { CRaterResponse } from '../components/dialogGuidance/CRaterResponse';
 
 @Injectable()
 export class CRaterService {
@@ -300,5 +303,50 @@ export class CRaterService {
       .then((isAvailable: boolean) => {
         return isAvailable;
       });
+  }
+
+  public getCRaterResponse(response: any): CRaterResponse {
+    const cRaterResponse: CRaterResponse = new CRaterResponse();
+    if (this.isSingleScore(response)) {
+      cRaterResponse.score = this.getScore(response);
+    } else {
+      cRaterResponse.scores = this.getScores(response);
+    }
+    cRaterResponse.ideas = this.getIdeas(response);
+    return cRaterResponse;
+  }
+
+  private isSingleScore(response: any): boolean {
+    return response.responses.scores != null;
+  }
+
+  private getScore(response: any): number {
+    return parseInt(response.responses.scores.raw_trim_round);
+  }
+
+  private getScores(response: any): CRaterScore[] {
+    const scores = [];
+    for (const key in response.responses.trait_scores) {
+      const value = response.responses.trait_scores[key];
+      scores.push(
+        new CRaterScore(
+          key,
+          parseInt(value.raw_trim_round),
+          parseFloat(value.raw),
+          parseInt(value.score_range_min),
+          parseInt(value.score_range_max)
+        )
+      );
+    }
+    return scores;
+  }
+
+  private getIdeas(response: any): CRaterIdea[] {
+    const ideas = [];
+    for (const key in response.responses.feedback.ideas) {
+      const value = response.responses.feedback.ideas[key];
+      ideas.push(new CRaterIdea(key, value.detected));
+    }
+    return ideas;
   }
 }

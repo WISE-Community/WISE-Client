@@ -16,12 +16,16 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
   dataExplorerXAxisLabel: string;
   dataExplorerYAxisLabel: string;
   dataExplorerYAxisLabels: string[];
+  selectedRowIndices: number[];
   xColumnIndex: number;
   columnNames: string[] = [];
   noneText: string = $localize`(None)`;
   tabulatorData: TabulatorData;
 
-  constructor(protected ProjectService: ProjectService, private TabulatorDataService: TabulatorDataService) {
+  constructor(
+    protected ProjectService: ProjectService,
+    private TabulatorDataService: TabulatorDataService
+  ) {
     super(ProjectService);
   }
 
@@ -29,6 +33,7 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
     super.ngOnInit();
     const studentData = this.componentState.studentData;
     this.tableData = studentData.tableData;
+    this.selectedRowIndices = studentData.selectedRowIndices ? studentData.selectedRowIndices : [];
     if (studentData.isDataExplorerEnabled) {
       this.dataExplorerGraphType = studentData.dataExplorerGraphType;
       this.dataExplorerSeries = studentData.dataExplorerSeries;
@@ -38,7 +43,7 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
       this.xColumnIndex = this.calculateXColumnIndex(this.componentState);
       this.columnNames = this.calculateColumnNames(this.componentState);
     }
-    this.setupTable()
+    this.setupTable();
   }
 
   calculateXColumnIndex(componentState: any): number {

@@ -18,8 +18,6 @@ export class TeacherProjectService extends ProjectService {
   public errorSavingProject$: Observable<any> = this.errorSavingProjectSource.asObservable();
   private notAllowedToEditThisProjectSource: Subject<any> = new Subject<any>();
   public notAllowedToEditThisProject$: Observable<any> = this.notAllowedToEditThisProjectSource.asObservable();
-  private notLoggedInProjectNotSavedSource: Subject<any> = new Subject<any>();
-  public notLoggedInProjectNotSaved$: Observable<any> = this.notLoggedInProjectNotSavedSource.asObservable();
   private projectSavedSource: Subject<any> = new Subject<any>();
   public projectSaved$: Observable<any> = this.projectSavedSource.asObservable();
   private savingProjectSource: Subject<any> = new Subject<any>();
@@ -1081,10 +1079,7 @@ export class TeacherProjectService extends ProjectService {
 
   handleSaveProjectResponse(response: any): any {
     if (response.status === 'error') {
-      if (response.messageCode === 'notSignedIn') {
-        this.broadcastNotLoggedInProjectNotSaved();
-        this.SessionService.forceLogOut();
-      } else if (response.messageCode === 'notAllowedToEditThisProject') {
+      if (response.messageCode === 'notAllowedToEditThisProject') {
         this.broadcastNotAllowedToEditThisProject();
       } else if (response.messageCode === 'errorSavingProject') {
         this.broadcastErrorSavingProject();
@@ -3117,10 +3112,6 @@ export class TeacherProjectService extends ProjectService {
 
   broadcastNotAllowedToEditThisProject() {
     this.notAllowedToEditThisProjectSource.next();
-  }
-
-  broadcastNotLoggedInProjectNotSaved() {
-    this.notLoggedInProjectNotSavedSource.next();
   }
 
   broadcastProjectSaved() {
