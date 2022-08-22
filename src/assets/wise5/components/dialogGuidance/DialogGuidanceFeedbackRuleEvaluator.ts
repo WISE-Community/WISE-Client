@@ -117,8 +117,28 @@ export class DialogGuidanceFeedbackRuleEvaluator {
   private evaluateTerm(term: string, response: CRaterResponse): boolean {
     if (this.isHasKIScoreTerm(term)) {
       return this.evaluateHasKIScoreTerm(term, response);
+    } else if (this.isIdeaCountTerm(term)) {
+      return this.evaluateIdeaCountTerm(term, response);
     } else {
       return this.evaluateIdeaTerm(term, response);
+    }
+  }
+
+  private isIdeaCountTerm(term: string): boolean {
+    return /ideaCount(MoreThan|Equals|LessThan)\([\d+]\)/.test(term);
+  }
+
+  private evaluateIdeaCountTerm(term: string, response: CRaterResponse): boolean {
+    const matches = term.match(/ideaCount(.*)\((.*)\)/);
+    const comparer = matches[1];
+    const expectedIdeaCount = parseInt(matches[2]);
+    switch (comparer) {
+      case 'MoreThan':
+        return response.getDetectedIdeaCount() > expectedIdeaCount;
+      case 'Equals':
+        return response.getDetectedIdeaCount() === expectedIdeaCount;
+      case 'LessThan':
+        return response.getDetectedIdeaCount() < expectedIdeaCount;
     }
   }
 

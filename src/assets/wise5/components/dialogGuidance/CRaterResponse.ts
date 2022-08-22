@@ -8,6 +8,10 @@ export class CRaterResponse {
 
   constructor() {}
 
+  getDetectedIdeaCount(): number {
+    return this.getDetectedIdeaNames().length;
+  }
+
   getDetectedIdeaNames(): string[] {
     const detectedIdeaNames = [];
     this.ideas.forEach((idea: CRaterIdea) => {
