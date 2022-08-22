@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { InitializeVLEService } from '../../services/initializeVLEService';
+import { NodeClickLockedService } from '../../services/nodeClickLockedService';
 import { PauseScreenService } from '../../services/pauseScreenService';
 import { ProjectService } from '../../services/projectService';
 import { StudentNotificationService } from '../../services/studentNotificationService';
@@ -27,6 +28,7 @@ describe('VLEParentComponent', () => {
       declarations: [VLEParentComponent],
       providers: [
         InitializeVLEService,
+        NodeClickLockedService,
         PauseScreenService,
         ProjectService,
         StudentNotificationService,

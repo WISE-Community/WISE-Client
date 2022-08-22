@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { VLEProjectService } from '../vle/vleProjectService';
 import { AchievementService } from './achievementService';
 import { ConfigService } from './configService';
+import { NodeClickLockedService } from './nodeClickLockedService';
 import { NotebookService } from './notebookService';
 import { PauseScreenService } from './pauseScreenService';
 import { SessionService } from './sessionService';
@@ -21,6 +22,7 @@ export class InitializeVLEService {
   constructor(
     private achievementService: AchievementService,
     private configService: ConfigService,
+    private nodeClickLockedService: NodeClickLockedService,
     private notebookService: NotebookService,
     private notificationService: StudentNotificationService,
     private pauseScreenService: PauseScreenService,
@@ -46,6 +48,7 @@ export class InitializeVLEService {
     await this.studentDataService.retrieveRunStatus();
     this.pauseScreenService.initialize();
     this.notificationService.initialize();
+    this.nodeClickLockedService.initialize();
     await this.studentAssetService.retrieveAssets();
     await this.notebookService.retrieveNotebookItems(this.configService.getWorkgroupId());
     this.intializedSource.next(true);
@@ -58,6 +61,7 @@ export class InitializeVLEService {
     this.studentDataService.retrieveStudentData();
     this.studentDataService.retrieveRunStatus();
     this.notificationService.retrieveNotifications();
+    this.nodeClickLockedService.initialize();
     this.intializedSource.next(true);
   }
 }

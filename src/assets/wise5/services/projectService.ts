@@ -1502,7 +1502,7 @@ export class ProjectService {
         const nodeId = params.nodeId;
         if (nodeId != null) {
           const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
-          message += $localize`Complete <b>${nodeTitle}</b>"`;
+          message += $localize`Complete <b>${nodeTitle}</b>`;
         }
       } else if (name === 'isVisited') {
         const nodeId = params.nodeId;
