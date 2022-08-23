@@ -286,12 +286,17 @@ export class GraphStudent extends ComponentStudent {
   }
 
   private handleDataExplorer(studentData: any): void {
+    // clear graph to prevent issues with Highcharts merging old series data with new series data
+    this.activeTrial.series = [];
+    this.drawGraph();
+    this.changeDetectorRef.detectChanges();
+
     const dataExplorerSeries = studentData.dataExplorerSeries;
     const graphType = studentData.dataExplorerGraphType;
     this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
     this.setYAxisLabels(studentData);
     this.setXAxisLabels(studentData);
-    this.activeTrial.series = [];
+
     for (let seriesIndex = 0; seriesIndex < dataExplorerSeries.length; seriesIndex++) {
       const xColumn = dataExplorerSeries[seriesIndex].xColumn;
       const yColumn = dataExplorerSeries[seriesIndex].yColumn;
@@ -394,7 +399,7 @@ export class GraphStudent extends ComponentStudent {
             studentData.tableData,
             this.value
           );
-          if (isNaN(parseFloat(textValue))) {
+          if (textValue !== '' && isNaN(parseFloat(textValue))) {
             return studentData.tableData[this.value + 1][studentData.dataExplorerSeries[0].xColumn]
               .text;
           }
