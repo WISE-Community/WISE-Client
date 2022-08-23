@@ -399,7 +399,12 @@ export class GraphStudent extends ComponentStudent {
             studentData.tableData,
             this.value
           );
-          if (textValue !== '' && isNaN(parseFloat(textValue))) {
+          if (
+            textValue !== '' &&
+            textValue !== 'NA' &&
+            textValue !== 'N/A' &&
+            isNaN(parseFloat(textValue))
+          ) {
             return studentData.tableData[this.value + 1][studentData.dataExplorerSeries[0].xColumn]
               .text;
           }
