@@ -871,9 +871,8 @@ export class GraphStudent extends ComponentStudent {
   }
 
   setAllSeriesFields(series) {
-    const canAllSeriesMouseTrack = this.getNumberOfEditableSeries(series) === 0;
     for (const singleSeries of series) {
-      this.setSingleSeriesFields(singleSeries, canAllSeriesMouseTrack);
+      this.setSingleSeriesFields(singleSeries);
     }
   }
 
@@ -887,7 +886,7 @@ export class GraphStudent extends ComponentStudent {
     return numberOfEditableSeries;
   }
 
-  setSingleSeriesFields(singleSeries, canAllSeriesMouseTrack) {
+  setSingleSeriesFields(singleSeries) {
     if (singleSeries.canEdit && this.isActiveSeries(singleSeries)) {
       singleSeries.dragDrop = {
         draggableX: true,
@@ -902,7 +901,6 @@ export class GraphStudent extends ComponentStudent {
       singleSeries.stickyTracking = false;
       singleSeries.shared = false;
       singleSeries.allowPointSelect = true;
-      singleSeries.enableMouseTracking = true;
       this.showUndoButton = true;
     } else {
       singleSeries.dragDrop = {
@@ -914,14 +912,9 @@ export class GraphStudent extends ComponentStudent {
       singleSeries.stickyTracking = false;
       singleSeries.shared = false;
       singleSeries.allowPointSelect = false;
-      singleSeries.enableMouseTracking = canAllSeriesMouseTrack;
     }
     if (singleSeries.allowPointMouseOver === true) {
       singleSeries.allowPointSelect = true;
-      singleSeries.enableMouseTracking = true;
-    }
-    if (this.isMousePlotLineOn()) {
-      singleSeries.enableMouseTracking = true;
     }
   }
 
