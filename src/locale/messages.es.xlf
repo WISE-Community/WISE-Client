@@ -11146,6 +11146,62 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">*Tenga en cuenta que eliminar a un estudiante no elimina su cuenta WISE, solo su vínculo con esta unidad.</target>
       </trans-unit>
+      <trans-unit id="63ff7016751d1e4b07f4f7724378380cef2e049b" datatype="html">
+        <source>Show/hide team&apos;s work for this step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <target state="needs-translation">Show/hide team's work for this step</target>
+      </trans-unit>
+      <trans-unit id="314850458480650903" datatype="html">
+        <source>Not Assigned</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+        <target state="needs-translation">Not Assigned</target>
+      </trans-unit>
+      <trans-unit id="1161299114153631702" datatype="html">
+        <source>Completed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <target state="translated">Completado</target>
+      </trans-unit>
+      <trans-unit id="7564665875993875304" datatype="html">
+        <source>Visited</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <target state="needs-translation">Visited</target>
+      </trans-unit>
+      <trans-unit id="5725893165169390019" datatype="html">
+        <source>Partially Completed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+        <target state="needs-translation">Partially Completed</target>
+      </trans-unit>
+      <trans-unit id="2981239280931729191" datatype="html">
+        <source>No Work</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <target state="needs-translation">No Work</target>
+      </trans-unit>
+      <trans-unit id="6699405178343319429" datatype="html">
+        <source>Not Visited</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <target state="needs-translation">Not Visited</target>
+      </trans-unit>
       <trans-unit id="f9c52903219e583ddefb23cd102d2057504ac980" datatype="html">
         <source>(Team <x id="INTERPOLATION" equiv-text="{{workgroupId}}"/>)</source>
         <context-group purpose="location">
@@ -14978,7 +15034,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>The series you are trying to add a point to is currently hidden. Please show the series by clicking the series name in the legend and try adding the point again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1045</context>
+          <context context-type="linenumber">1050</context>
         </context-group>
         <target state="translated">La serie a la que intenta agregar un punto está oculta actualmente. Muestre la serie haciendo clic en el nombre de la serie en la leyenda e intente agregar el punto nuevamente.</target>
       </trans-unit>
@@ -14986,7 +15042,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>You can not edit this series. Please choose a series that can be edited.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1059</context>
+          <context context-type="linenumber">1064</context>
         </context-group>
         <target state="translated">No puede editar esta serie. Elegir una serie que pueda editarse.</target>
       </trans-unit>
@@ -14994,7 +15050,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset the series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1337</context>
+          <context context-type="linenumber">1342</context>
         </context-group>
         <target state="translated">¿Seguro que desea resetear la serie?</target>
       </trans-unit>
@@ -15002,7 +15058,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset the &quot;<x id="PH" equiv-text="seriesName"/>&quot; series?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1339</context>
+          <context context-type="linenumber">1344</context>
         </context-group>
         <target state="translated">¿Seguro que desea resetear la serie "<x id="PH" equiv-text="seriesName"/>"?</target>
       </trans-unit>
@@ -15010,11 +15066,11 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Trial</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">1892</context>
+          <context context-type="linenumber">1897</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-student/graph-student.component.ts</context>
-          <context context-type="linenumber">2727</context>
+          <context context-type="linenumber">2732</context>
         </context-group>
         <target state="translated">Ensayo</target>
       </trans-unit>
@@ -18834,7 +18890,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>You have been inactive for a long time. Do you want to stay logged in?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">131</context>
         </context-group>
         <target state="translated">¿Seguir conectado/a?</target>
       </trans-unit>
@@ -18842,7 +18898,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Session Timeout</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <target state="translated">Se acabó el tiempo de la sesión</target>
       </trans-unit>
@@ -18850,7 +18906,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Error: Data is not being saved! Check your internet connection.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">288</context>
+          <context context-type="linenumber">283</context>
         </context-group>
         <target state="translated">Error: los datos no fueron grabados. Revisar la conexión a internet.</target>
       </trans-unit>
