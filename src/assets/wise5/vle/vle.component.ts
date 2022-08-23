@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../services/configService';
 import { InitializeVLEService } from '../services/initializeVLEService';
@@ -20,7 +19,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./vle.component.scss']
 })
 export class VLEComponent implements OnInit {
-  connectionLostShown: boolean = false;
   currentNode: any;
   @ViewChild('drawer') public drawer: any;
   isInitialized: boolean;
@@ -46,7 +44,6 @@ export class VLEComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private sessionService: SessionService,
-    private snackBar: MatSnackBar,
     private studentDataService: StudentDataService,
     private utilService: UtilService
   ) {}
@@ -118,7 +115,6 @@ export class VLEComponent implements OnInit {
     this.subscribeToCurrentNodeChanged();
     this.subscribeToNotesVisible();
     this.subscribeToReportFullScreen();
-    this.subscribeToServerConnectionStatus();
     this.subscribeToViewCurrentAmbientNotification();
   }
 
@@ -219,18 +215,6 @@ export class VLEComponent implements OnInit {
     );
   }
 
-  private subscribeToServerConnectionStatus(): void {
-    this.subscriptions.add(
-      this.notificationService.serverConnectionStatus$.subscribe((isConnected) => {
-        if (isConnected) {
-          this.handleServerReconnect();
-        } else {
-          this.handleServerDisconnect();
-        }
-      })
-    );
-  }
-
   private subscribeToViewCurrentAmbientNotification(): void {
     this.subscriptions.add(
       this.notificationService.viewCurrentAmbientNotification$.subscribe((args) => {
@@ -275,19 +259,6 @@ export class VLEComponent implements OnInit {
       }
     }
     this.layoutState = layoutState;
-  }
-
-  private handleServerDisconnect() {
-    if (!this.connectionLostShown) {
-      this.snackBar.open(
-        $localize`Error: Data is not being saved! Check your internet connection.`
-      );
-      this.connectionLostShown = true;
-    }
-  }
-
-  private handleServerReconnect() {
-    this.connectionLostShown = false;
   }
 
   /**
