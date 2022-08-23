@@ -26,7 +26,6 @@ export class VLEComponent implements OnInit {
   notebookConfig: any;
   notesEnabled: boolean = false;
   notesVisible: boolean = false;
-  numberProject: boolean;
   projectStyle: string;
   reportEnabled: boolean = false;
   reportFullscreen: boolean = false;
@@ -86,7 +85,6 @@ export class VLEComponent implements OnInit {
     });
 
     // TODO: set these variables dynamically from theme settings
-    this.numberProject = true;
     this.notebookConfig = this.notebookService.getNotebookConfig();
     this.currentNode = this.studentDataService.getCurrentNode();
     this.setLayoutState();
