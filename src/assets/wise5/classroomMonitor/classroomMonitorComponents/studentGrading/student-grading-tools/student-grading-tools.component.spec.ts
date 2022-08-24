@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { StudentGradingToolsComponent } from './student-grading-tools.component';
 
 describe('StudentGradingToolsComponent', () => {
@@ -8,9 +8,9 @@ describe('StudentGradingToolsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StudentGradingToolsComponent ]
-    })
-    .compileComponents();
+      declarations: [StudentGradingToolsComponent],
+      imports: [ClassroomMonitorTestingModule]
+    }).compileComponents();
   });
 
   beforeEach(() => {
