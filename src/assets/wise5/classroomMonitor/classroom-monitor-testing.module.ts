@@ -7,9 +7,11 @@ import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
+    BrowserAnimationsModule,
     HttpClientTestingModule,
     MatDialogModule,
     StudentTeacherCommonServicesModule,
