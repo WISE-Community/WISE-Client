@@ -399,7 +399,12 @@ export class GraphStudent extends ComponentStudent {
             studentData.tableData,
             this.value
           );
-          if (textValue !== '' && isNaN(parseFloat(textValue))) {
+          if (
+            typeof textValue === 'string' &&
+            textValue !== '' &&
+            !thisComponent.isNA(textValue) &&
+            isNaN(parseFloat(textValue))
+          ) {
             return studentData.tableData[this.value + 1][studentData.dataExplorerSeries[0].xColumn]
               .text;
           }
@@ -407,6 +412,11 @@ export class GraphStudent extends ComponentStudent {
         return this.value;
       }
     };
+  }
+
+  isNA(text: string): boolean {
+    const textUpperCase = text.toUpperCase();
+    return textUpperCase === 'NA' || textUpperCase === 'N/A';
   }
 
   getXColumnTextValue(dataExplorerSeries: any[], tableData: any[][], value: number): string {
