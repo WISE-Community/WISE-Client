@@ -7,9 +7,7 @@
   </mat-drawer>
   <mat-drawer-content>
     <top-bar></top-bar>
-    <step-tools *ngIf="layoutState === 'node'"
-        class="control-bg-bg mat-elevation-z1"
-        show-position="numberProject"></step-tools>
+    <step-tools *ngIf="layoutState === 'node'" class="control-bg-bg mat-elevation-z1"></step-tools>
     <div id="content"
         class="vle-content"
         [ngClass]="{'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node'}">

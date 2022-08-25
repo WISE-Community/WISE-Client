@@ -6,7 +6,6 @@ import { NotebookService } from '../services/notebookService';
 import { VLEProjectService } from './vleProjectService';
 import { VLEComponent } from './vle.component';
 import { StudentDataService } from '../services/studentDataService';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component';
@@ -53,7 +52,6 @@ describe('VLEComponent', () => {
         MatToolbarModule,
         MatSelectModule,
         MatSidenavModule,
-        MatSnackBarModule,
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],

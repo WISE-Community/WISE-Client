@@ -286,12 +286,17 @@ export class GraphStudent extends ComponentStudent {
   }
 
   private handleDataExplorer(studentData: any): void {
+    // clear graph to prevent issues with Highcharts merging old series data with new series data
+    this.activeTrial.series = [];
+    this.drawGraph();
+    this.changeDetectorRef.detectChanges();
+
     const dataExplorerSeries = studentData.dataExplorerSeries;
     const graphType = studentData.dataExplorerGraphType;
     this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
     this.setYAxisLabels(studentData);
     this.setXAxisLabels(studentData);
-    this.activeTrial.series = [];
+
     for (let seriesIndex = 0; seriesIndex < dataExplorerSeries.length; seriesIndex++) {
       const xColumn = dataExplorerSeries[seriesIndex].xColumn;
       const yColumn = dataExplorerSeries[seriesIndex].yColumn;
@@ -394,7 +399,12 @@ export class GraphStudent extends ComponentStudent {
             studentData.tableData,
             this.value
           );
-          if (isNaN(parseFloat(textValue))) {
+          if (
+            typeof textValue === 'string' &&
+            textValue !== '' &&
+            !thisComponent.isNA(textValue) &&
+            isNaN(parseFloat(textValue))
+          ) {
             return studentData.tableData[this.value + 1][studentData.dataExplorerSeries[0].xColumn]
               .text;
           }
@@ -402,6 +412,11 @@ export class GraphStudent extends ComponentStudent {
         return this.value;
       }
     };
+  }
+
+  isNA(text: string): boolean {
+    const textUpperCase = text.toUpperCase();
+    return textUpperCase === 'NA' || textUpperCase === 'N/A';
   }
 
   getXColumnTextValue(dataExplorerSeries: any[], tableData: any[][], value: number): string {
@@ -866,9 +881,8 @@ export class GraphStudent extends ComponentStudent {
   }
 
   setAllSeriesFields(series) {
-    const canAllSeriesMouseTrack = this.getNumberOfEditableSeries(series) === 0;
     for (const singleSeries of series) {
-      this.setSingleSeriesFields(singleSeries, canAllSeriesMouseTrack);
+      this.setSingleSeriesFields(singleSeries);
     }
   }
 
@@ -882,7 +896,7 @@ export class GraphStudent extends ComponentStudent {
     return numberOfEditableSeries;
   }
 
-  setSingleSeriesFields(singleSeries, canAllSeriesMouseTrack) {
+  setSingleSeriesFields(singleSeries) {
     if (singleSeries.canEdit && this.isActiveSeries(singleSeries)) {
       singleSeries.dragDrop = {
         draggableX: true,
@@ -897,7 +911,6 @@ export class GraphStudent extends ComponentStudent {
       singleSeries.stickyTracking = false;
       singleSeries.shared = false;
       singleSeries.allowPointSelect = true;
-      singleSeries.enableMouseTracking = true;
       this.showUndoButton = true;
     } else {
       singleSeries.dragDrop = {
@@ -909,14 +922,9 @@ export class GraphStudent extends ComponentStudent {
       singleSeries.stickyTracking = false;
       singleSeries.shared = false;
       singleSeries.allowPointSelect = false;
-      singleSeries.enableMouseTracking = canAllSeriesMouseTrack;
     }
     if (singleSeries.allowPointMouseOver === true) {
       singleSeries.allowPointSelect = true;
-      singleSeries.enableMouseTracking = true;
-    }
-    if (this.isMousePlotLineOn()) {
-      singleSeries.enableMouseTracking = true;
     }
   }
 
