@@ -14,6 +14,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
       - name: Run CodeBuild
+        id: code-build
         uses: aws-actions/aws-codebuild-run-build@v1
         with:
           project-name: wise-client-github-actions-project
+      - run: echo ${{steps.code-build.outputs.aws-build-id}}
