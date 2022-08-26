@@ -1758,7 +1758,7 @@ export class GraphStudent extends ComponentStudent {
       if (!isNaN(yNumber)) {
         point.push(yNumber);
       } else {
-        point.push(yText);
+        point.push(null);
       }
       data.push(point);
     } else {
