@@ -39,7 +39,6 @@ class NavItemController {
   rubricIconLabel: string;
   rubricIconName: string;
   showPosition: any;
-  workgroupsOnNodeData: any = [];
   subscriptions: Subscription = new Subscription();
 
   static $inject = [
@@ -90,7 +89,6 @@ class NavItemController {
     if (parentGroup != null) {
       this.parentGroupId = parentGroup.id;
     }
-    this.setWorkgroupsOnNodeData();
     this.getAlertNotifications();
     this.hasRubrics = this.ProjectService.getNumberOfRubricsByNodeId(this.nodeId) > 0;
     this.alertIconLabel = this.$translate('HAS_ALERTS_NEW');
@@ -175,7 +173,6 @@ class NavItemController {
   subscribeStudentStatusReceived(): void {
     this.subscriptions.add(
       this.classroomStatusService.studentStatusReceived$.subscribe(() => {
-        this.setWorkgroupsOnNodeData();
         this.setCurrentNodeStatus();
         this.getAlertNotifications();
       })
@@ -186,7 +183,6 @@ class NavItemController {
     this.subscriptions.add(
       this.TeacherDataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         this.currentPeriod = currentPeriod;
-        this.setWorkgroupsOnNodeData();
         this.getAlertNotifications();
       })
     );
@@ -378,17 +374,6 @@ class NavItemController {
       this.nodeId,
       this.currentPeriod.periodId
     );
-  }
-
-  setWorkgroupsOnNodeData(): void {
-    this.workgroupsOnNodeData = [];
-    for (const workgroupId of this.getWorkgroupIdsOnNode()) {
-      this.workgroupsOnNodeData.push({
-        workgroupId: workgroupId,
-        usernames: this.ConfigService.getDisplayUsernamesByWorkgroupId(workgroupId),
-        avatarColor: this.ConfigService.getAvatarColorForWorkgroupId(workgroupId)
-      });
-    }
   }
 
   setCurrentNodeStatus(): void {
