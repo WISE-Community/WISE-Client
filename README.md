@@ -15,3 +15,5 @@ To see WISE in action and for inquiry science curricula developed by the WISE re
 Developer discussions: https://github.com/WISE-Community/WISE-Client/discussions
 
 General WISE discussions: https://wise-discuss.berkeley.edu/
+
+Test
