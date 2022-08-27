@@ -1,4 +1,14 @@
-<div [ngSwitch]="type" class="component__wrapper">
+<div *ngIf="showRubric" class="component__rubric">
+  <help-icon
+      [content]="rubric"
+      [pulse]="pulseRubricIcon"
+      (click)="pulseRubricIcon = false"
+      label="Teaching Tips"
+      i18n-label
+      icon="info">
+  </help-icon>
+</div>
+<div [ngSwitch]="componentContent.type" class="component__wrapper">
   <animation-student *ngSwitchCase="'Animation'"
       [nodeId]="nodeId"
       [componentContent]="componentContent"
