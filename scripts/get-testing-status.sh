@@ -11,8 +11,8 @@
 # Recommended
 # Install watch command
 
-is_pipeline_in_use=false
-is_pipeline_ready_for_testing=false
+any_pipeline_in_use=false
+any_pipeline_ready_for_testing=false
 
 function display_pipeline_status() {
   pipeline_name=$1
@@ -35,12 +35,10 @@ function display_pipeline_status() {
     statusOutput+="$stageName $status\n"
 
     if [[ "$status" == "InProgress" ]]; then
-      is_pipeline_in_use=true
-      if [[ "$stageName" == "Approve-Terminate-Private-Instances" ]]; then
-        is_pipeline_ready_for_testing=true
-      fi
-      if [[ "$stageName" == "Approve-Terminate-QA-Instances" ]]; then
-        is_pipeline_ready_for_testing=true
+      any_pipeline_in_use=true
+      if [[ "$stageName" == "Approve-Terminate-Private-Instances" || \
+          "$stageName" == "Approve-Terminate-QA-Instances" ]]; then
+        any_pipeline_ready_for_testing=true
       fi
     fi
   done
@@ -63,9 +61,9 @@ for testing_pipeline in "${testing_pipelines[@]}"; do
 done
 
 # Display whether any testing pipeline is in use
-if [[ "$is_pipeline_ready_for_testing" == true ]]; then
+if [[ "$any_pipeline_ready_for_testing" == true ]]; then
   echo "A testing pipeline is currently in use and ready for testing"
-elif [[ "$is_pipeline_in_use" == true ]]; then
+elif [[ "$any_pipeline_in_use" == true ]]; then
   echo "A testing pipeline is currently in use"
 else
   echo "Testing pipelines are currently not in use"

@@ -1,7 +1,40 @@
 #!/bin/bash
 
-pipeline_name=private-wise-client-github-actions-pipeline
-project_name=wise-client-github-actions-project
+# Check if any testing pipelines are in use. If any testing pipelines are in use, the global
+# variable any_testing_pipeline_in_use will be set to true.
+function check_if_any_testing_pipeline_in_use() {
+  testing_pipelines=(
+    "private-wise-api-pipeline"
+    "private-wise-client-github-actions-pipeline"
+    "private-wise-client-pipeline"
+    "wise-qa-pipeline"
+  )
+
+  for testing_pipeline in "${testing_pipelines[@]}"; do
+    is_testing_pipeline_in_use $testing_pipeline
+  done
+}
+
+# Check if the testing pipeline is in use. If the testing pipeline is in use, this function will set
+# the global variable any_testing_pipeline_in_use to true.
+function is_testing_pipeline_in_use() {
+  testing_pipeline_name=$1
+
+  declare -a statuses=($(aws codepipeline get-pipeline-state --name $testing_pipeline_name |
+      jq -c -r '.stageStates[] | { stageName: .stageName, status: .latestExecution.status }'))
+
+  for status in "${statuses[@]}"; do
+    # Get the stage name without double quotes
+    stageName=$(echo $status | jq '.stageName' | tr -d '"')
+
+    # Get the status without double quotes
+    status=$(echo $status | jq '.status' | tr -d '"')
+
+    if [[ "$status" == "InProgress" ]]; then
+      any_testing_pipeline_in_use=true
+    fi
+  done
+}
 
 function print_deploy_info() {
   if [[ "$1" == "--dry-run" ]]; then
@@ -27,6 +60,17 @@ if [[ -z $(git ls-remote --heads origin $1) ]]; then
   exit 1
 fi
 
+# Check if any testing pipelines are in use
+any_testing_pipeline_in_use=false
+check_if_any_testing_pipeline_in_use
+
+if [[ "$any_testing_pipeline_in_use" == true ]]; then
+  echo "Error: a testing pipeline is already in use"
+  exit 0
+fi
+
+pipeline_name=private-wise-client-github-actions-pipeline
+project_name=wise-client-github-actions-project
 branch_name=$1
 
 # Get all builds created by GitHub Actions Pull Requests
