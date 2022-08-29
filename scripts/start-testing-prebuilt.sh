@@ -30,7 +30,8 @@ fi
 branch_name=$1
 
 # Get all builds created by GitHub Actions Pull Requests
-build_ids=$(aws codebuild list-builds-for-project --project-name $project_name | jq -c '.ids | join(" ")' | tr -d '"')
+build_ids=$(aws codebuild list-builds-for-project --project-name $project_name |
+    jq -c '.ids | join(" ")' | tr -d '"')
 
 if [[ -z "$build_ids" ]]; then
   echo "Error: no builds found"
@@ -44,7 +45,9 @@ fi
 #   "wise-client-github-actions-project:e1bbb411-2d84-4a71-8301-b875190d80ac",
 #   "ddfa9e00f4de5ff32c1fea731ba67e4cea086ffe"
 # ]
-latest_build_info=$(aws codebuild batch-get-builds --ids $build_ids --query "builds[? environment.environmentVariables[? name=='GITHUB_HEAD_REF' && value=='$branch_name']].[id, sourceVersion] | [0]")
+query="builds[? environment.environmentVariables[? \
+    name=='GITHUB_HEAD_REF' && value=='$branch_name']].[id, sourceVersion] | [0]"
+latest_build_info=$(aws codebuild batch-get-builds --ids $build_ids --query "$query")
 
 # Get the latest build id without the project name prefix
 # The latest_build_id will look something like this
@@ -79,7 +82,8 @@ if [[ $pipeline_json =~ $s3_object_key_value_regex ]]; then
   new_s3_object_key_value="\"S3ObjectKey\": \"$latest_build_id\/wise-client.zip\""
 
   # Replace the previous S3 object key and value with the new S3 object key and value
-  updated_pipeline_json=$(echo $pipeline_json | sed "s/$previous_s3_object_key_value/$new_s3_object_key_value/")
+  updated_pipeline_json=$(echo $pipeline_json |
+      sed "s/$previous_s3_object_key_value/$new_s3_object_key_value/")
 
   # Update the pipeline to use the latest build for the specified branch
   aws codepipeline update-pipeline --cli-input-json "$updated_pipeline_json" > /dev/null
