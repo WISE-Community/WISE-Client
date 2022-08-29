@@ -29,6 +29,7 @@ function check_if_any_testing_pipeline_in_use() {
 function is_testing_pipeline_in_use() {
   testing_pipeline_name=$1
 
+  # Get all stage names and the status for each stage
   declare -a statuses=($(aws codepipeline get-pipeline-state --name $testing_pipeline_name |
       jq -c -r '.stageStates[] | { stageName: .stageName, status: .latestExecution.status }'))
 
@@ -47,7 +48,7 @@ function is_testing_pipeline_in_use() {
 
 function print_deploy_info() {
   if [[ "$1" == "--dry-run" ]]; then
-    echo "Deploying (dry run not actually deploying)"
+    echo "Dry run not actually deploying"
   else
     echo "Deploying"
   fi
@@ -66,15 +67,6 @@ fi
 # Check if the branch exists
 if [[ -z $(git ls-remote --heads origin $1) ]]; then
   echo "Error: branch $1 does not exist"
-  exit 1
-fi
-
-# Check if any testing pipelines are in use
-any_testing_pipeline_in_use=false
-check_if_any_testing_pipeline_in_use
-
-if [[ "$any_testing_pipeline_in_use" == true ]]; then
-  echo "Error: a testing pipeline is already in use"
   exit 1
 fi
 
@@ -114,6 +106,15 @@ if [[ "$2" == "--dry-run" ]]; then
   # Dry run will not update the pipeline and will not start the pipeline
   print_deploy_info $2
   exit 0
+fi
+
+# Check if any testing pipelines are in use
+any_testing_pipeline_in_use=false
+check_if_any_testing_pipeline_in_use
+
+if [[ "$any_testing_pipeline_in_use" == true ]]; then
+  echo "Error: a testing pipeline is already in use"
+  exit 1
 fi
 
 # Get the JSON definition of the pipeline without the metadata
