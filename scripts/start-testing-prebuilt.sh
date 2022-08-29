@@ -3,17 +3,28 @@
 pipeline_name=private-wise-client-github-actions-pipeline
 project_name=wise-client-github-actions-project
 
+function print_deploy_info() {
+  if [[ "$1" == "--dry-run" ]]; then
+    echo "Deploying (dry run not actually deploying)"
+  else
+    echo "Deploying"
+  fi
+  echo "Branch: $branch_name"
+  echo "Commit Hash: $commit_hash"
+  echo "Build ID: $latest_build_id"
+}
+
 # Check if the branch name was provided as an argument
 if [[ -z $1 ]]; then
   echo "Error: branch name required"
   echo "Example usage: ./start-testing-prebuilt.sh issue-123-fix-a-problem"
-  exit 0
+  exit 1
 fi
 
 # Check if the branch exists
 if [[ -z $(git ls-remote --heads origin $1) ]]; then
   echo "Error: branch $1 does not exist"
-  exit 0
+  exit 1
 fi
 
 branch_name=$1
@@ -21,41 +32,63 @@ branch_name=$1
 # Get all builds created by GitHub Actions Pull Requests
 build_ids=$(aws codebuild list-builds-for-project --project-name $project_name | jq -c '.ids | join(" ")' | tr -d '"')
 
-# Get builds for the specified branch
-builds=$(aws codebuild batch-get-builds --ids $build_ids --query "builds[? environment.environmentVariables[? name=='GITHUB_HEAD_REF' && value=='$branch_name']].id")
+if [[ -z "$build_ids" ]]; then
+  echo "Error: no builds found"
+  exit 0
+fi
 
-# Get the latest build for the specified branch
-# By default, the builds are ordered from newest to oldest so we will get the first in the array
-# The lastest_build will look something like this
-# wise-client-github-actions-project:5b818116-6414-4d40-ac16-9c9ddc7ffa60
-latest_build=$(echo $builds | jq '.[0]' | tr -d '"')
+# Get the latest build info for the specified branch which will be an array with the build id and
+# commit hash.
+# It will look something like this
+# [
+#   "wise-client-github-actions-project:e1bbb411-2d84-4a71-8301-b875190d80ac",
+#   "ddfa9e00f4de5ff32c1fea731ba67e4cea086ffe"
+# ]
+latest_build_info=$(aws codebuild batch-get-builds --ids $build_ids --query "builds[? environment.environmentVariables[? name=='GITHUB_HEAD_REF' && value=='$branch_name']].[id, sourceVersion] | [0]")
 
-# Get the build id (without the project name)
-latest_build_id=($(echo $latest_build | cut -d ':' -f2))
+# Get the latest build id without the project name prefix
+# The latest_build_id will look something like this
+# e1bbb411-2d84-4a71-8301-b875190d80ac
+latest_build_id=($(echo $latest_build_info | jq '.[0]' | tr -d '"' | cut -d ':' -f2))
 
-# Get the JSON definition of the pipeline
+# Get the commit hash that was used for the build
+commit_hash=($(echo $latest_build_info | jq '.[1]' | tr -d '"'))
+
+if [[ "$2" == "--dry-run" ]]; then
+  # Dry run will not update the pipeline and will not start the pipeline
+  print_deploy_info $2
+  exit 0
+fi
+
+# Get the JSON definition of the pipeline without the metadata
 pipeline_json=$(aws codepipeline get-pipeline --name $pipeline_name | jq 'del(.metadata)')
 
-# Create regex to find the previous S3ObjectKey
-s3_object_key_regex="\"S3ObjectKey\": \"(.*?)\/wise-client\.zip\""
+# Create a regex to find the S3 object key and value
+s3_object_key_value_regex="\"S3ObjectKey\": \"[-\/\.a-z0-9]*?\""
 
-if [[ $pipeline_json =~ $s3_object_key_regex ]]; then
-  # Get the previous S3ObjectKey
-  previous_s3_object_key=${BASH_REMATCH[1]}
+if [[ $pipeline_json =~ $s3_object_key_value_regex ]]; then
+  # Get the S3 object key and value string that we found
+  # It will look something like this
+  # "S3ObjectKey": "4dfa518f-07a0-4237-830d-a3c17ffa87a4/wise-client.zip"
+  previous_s3_object_key_value=${BASH_REMATCH[0]}
+  
+  # Escape the forward slash otherwise the sed command below will not work
+  previous_s3_object_key_value=$(echo $previous_s3_object_key_value | sed 's/\//\\\//g')
 
-  # Replace the previous build id with the latest build id
-  updated_pipeline_json=$(echo $pipeline_json | sed "s/$previous_s3_object_key/$latest_build_id/")
+  # Generate the new S3 object key and value string
+  new_s3_object_key_value="\"S3ObjectKey\": \"$latest_build_id\/wise-client.zip\""
 
-  # Update the pipeline
-  aws codepipeline update-pipeline --cli-input-json "$updated_pipeline_json"
+  # Replace the previous S3 object key and value with the new S3 object key and value
+  updated_pipeline_json=$(echo $pipeline_json | sed "s/$previous_s3_object_key_value/$new_s3_object_key_value/")
+
+  # Update the pipeline to use the latest build for the specified branch
+  aws codepipeline update-pipeline --cli-input-json "$updated_pipeline_json" > /dev/null
 
   # Start the pipeline
-  aws codepipeline start-pipeline-execution --name $pipeline_name
+  aws codepipeline start-pipeline-execution --name $pipeline_name > /dev/null
 
-  echo "Deploying"
-  echo "Branch: $branch_name"
-  echo "Build ID: $latest_build_id"
+  print_deploy_info
 else
-  echo "Error: Could not update pipeline"
-  exit 0
+  echo "Error: could not update pipeline"
+  exit 1
 fi
