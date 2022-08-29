@@ -8,7 +8,7 @@
 # Run aws configure on the command line to register your AWS access keys locally
 # Install jq command
 
-pipeline_name=private-wise-client-pipeline
+pipeline_name=private-wise-client-github-actions-pipeline
 
 # Get the execution token from the Approve-Terminate-Private-Instances stage/action
 token=$(aws codepipeline get-pipeline-state --name $pipeline_name |
