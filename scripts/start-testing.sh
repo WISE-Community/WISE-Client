@@ -66,7 +66,7 @@ check_if_any_testing_pipeline_in_use
 
 if [[ "$any_testing_pipeline_in_use" == true ]]; then
   echo "Error: a testing pipeline is already in use"
-  exit 0
+  exit 1
 fi
 
 pipeline_name=private-wise-client-github-actions-pipeline
@@ -79,7 +79,7 @@ build_ids=$(aws codebuild list-builds-for-project --project-name $project_name |
 
 if [[ -z "$build_ids" ]]; then
   echo "Error: no builds found"
-  exit 0
+  exit 1
 fi
 
 # Get the latest build info for the specified branch which will be an array with the build id and
@@ -136,8 +136,10 @@ if [[ $pipeline_json =~ $s3_object_key_value_regex ]]; then
     # Successfully updated the pipeline so now we will start it
     aws codepipeline start-pipeline-execution --name $pipeline_name > /dev/null
     print_deploy_info
+    exit 0
   else
     echo "Error: could not update the pipeline"
+    exit 1
   fi
 else
   echo "Error: could not find the S3ObjectKey in the pipeline JSON so we could not update it"
