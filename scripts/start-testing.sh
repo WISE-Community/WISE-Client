@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Required
+# Install AWS CLI
+# AWS account with permission to access the pipeline
+# AWS access key ID associated with your AWS account
+# AWS secret access key associated with your AWS account
+# Run aws configure on the command line to register your AWS access keys locally
+# Install jq command
+# Install git command (you probably already have this installed)
+
 # Check if any testing pipelines are in use. If any testing pipelines are in use, the global
 # variable any_testing_pipeline_in_use will be set to true.
 function check_if_any_testing_pipeline_in_use() {
