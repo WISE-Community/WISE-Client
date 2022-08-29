@@ -53,7 +53,7 @@ function print_deploy_info() {
   fi
   echo "Branch: $branch_name"
   echo "Commit Hash: $commit_hash"
-  echo "Build ID: $latest_build_id"
+  echo "Build Id: $latest_build_id"
 }
 
 # Check if the branch name was provided as an argument
