@@ -84,11 +84,14 @@ if [[ $pipeline_json =~ $s3_object_key_value_regex ]]; then
   # Update the pipeline to use the latest build for the specified branch
   aws codepipeline update-pipeline --cli-input-json "$updated_pipeline_json" > /dev/null
 
-  # Start the pipeline
-  aws codepipeline start-pipeline-execution --name $pipeline_name > /dev/null
-
-  print_deploy_info
+  if [[ $? -eq 0 ]]; then
+    # Successfully updated the pipeline so now we will start it
+    aws codepipeline start-pipeline-execution --name $pipeline_name > /dev/null
+    print_deploy_info
+  else
+    echo "Error: could not update the pipeline"
+  fi
 else
-  echo "Error: could not update pipeline"
+  echo "Error: could not find the S3ObjectKey in the pipeline JSON so we could not update it"
   exit 1
 fi
