@@ -18,16 +18,21 @@ token=$(aws codepipeline get-pipeline-state --name $pipeline_name |
 
 # Make sure we were able to retrieve the execution token
 if [[ "$token" == "null" ]]; then
-  echo "Error: Unable to retrieve the execution token."
-  echo "Make sure the Approve-Terminate-Private-Instances stage is InProgress."
+  echo "Error: unable to retrieve the execution token, make sure the" \
+      "Approve-Terminate-Private-Instances stage is InProgress"
   exit 0
 fi
 
 # Approve the Approve-Terminate-Private-Instances stage to terminate the test servers
-echo "Stopping $pipeline_name"
 aws codepipeline put-approval-result \
   --pipeline-name $pipeline_name \
   --stage-name Approve-Terminate-Private-Instances \
   --action-name Approve-Terminate-Private-Instances \
   --result "summary=Done testing,status=Approved" \
-  --token $token
+  --token $token > /dev/null
+
+if [[ $? -eq 0 ]]; then
+  echo "Successfully stopped $pipeline_name"
+else
+  echo "Error: failed to stop pipeline"
+fi

@@ -50,7 +50,7 @@ function print_deploy_info() {
 # Check if the branch name was provided as an argument
 if [[ -z $1 ]]; then
   echo "Error: branch name required"
-  echo "Example usage: ./start-testing-prebuilt.sh issue-123-fix-a-problem"
+  echo "Example usage: ./start-testing.sh issue-123-fix-a-problem"
   exit 1
 fi
 
