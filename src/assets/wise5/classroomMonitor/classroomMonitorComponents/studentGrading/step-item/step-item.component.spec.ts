@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 
 import { StepItemComponent } from './step-item.component';
 
@@ -8,9 +9,9 @@ describe('StepItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StepItemComponent ]
-    })
-    .compileComponents();
+      declarations: [StepItemComponent],
+      imports: [ClassroomMonitorTestingModule]
+    }).compileComponents();
   });
 
   beforeEach(() => {
