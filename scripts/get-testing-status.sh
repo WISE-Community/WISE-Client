@@ -36,8 +36,7 @@ function display_pipeline_status() {
 
     if [[ "$status" == "InProgress" ]]; then
       any_pipeline_in_use=true
-      if [[ "$stageName" == "Approve-Terminate-Private-Instances" || \
-          "$stageName" == "Approve-Terminate-QA-Instances" ]]; then
+      if [[ "$stageName" == "Approve-Terminate-Private-Instances" ]]; then
         any_pipeline_ready_for_testing=true
       fi
     fi
@@ -51,7 +50,6 @@ testing_pipelines=(
   "private-wise-api-pipeline"
   "private-wise-client-github-actions-pipeline"
   "private-wise-client-pipeline"
-  "wise-qa-pipeline"
 )
 
 # Show the status for all the testing pipelines

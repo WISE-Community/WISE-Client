@@ -16,7 +16,6 @@ function check_if_any_testing_pipeline_in_use() {
     "private-wise-api-pipeline"
     "private-wise-client-github-actions-pipeline"
     "private-wise-client-pipeline"
-    "wise-qa-pipeline"
   )
 
   for testing_pipeline in "${testing_pipelines[@]}"; do
