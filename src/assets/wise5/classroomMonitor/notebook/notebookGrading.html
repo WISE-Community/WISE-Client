@@ -78,15 +78,15 @@
         </div>
       </md-list-item>
       <notebook-workgroup-grading ng-repeat="workgroup in notebookGradingController.workgroups | orderBy:notebookGradingController.getOrderBy()"
-                                  ng-if="notebookGradingController.isWorkgroupShown(workgroup)"
-                                  workgroup="workgroup"
-                                  expand="notebookGradingController.workVisibilityById[workgroup.workgroupId]"
-                                  notebook-config="notebookGradingController.getNotebookConfigForWorkgroup(workgroup.workgroupId)"
-                                  notes-enabled="notebookGradingController.notesEnabled"
-                                  report-enabled="notebookGradingController.reportEnabled"
-                                  report-title="{{ ::notebookGradingController.reportTitle }}"
-                                  on-update-expand="notebookGradingController.onUpdateExpand(workgroupId, value)"
-                                  in-view="notebookGradingController.workgroupInView(workgroup.workgroupId, $inview)">
+          ng-if="notebookGradingController.isWorkgroupShown(workgroup)"
+          [workgroup]="workgroup"
+          [expand]="notebookGradingController.workVisibilityById[workgroup.workgroupId]"
+          [notebook-config]="notebookGradingController.getNotebookConfigForWorkgroup(workgroup.workgroupId)"
+          [notes-enabled]="notebookGradingController.notesEnabled"
+          [report-enabled]="notebookGradingController.reportEnabled"
+          [report-title]="notebookGradingController.reportTitle"
+          (on-update-expand)="notebookGradingController.onUpdateExpand($event)"
+          in-view="notebookGradingController.workgroupInView(workgroup.workgroupId, $inview)">
       </notebook-workgroup-grading>
   </div>
 </div>
