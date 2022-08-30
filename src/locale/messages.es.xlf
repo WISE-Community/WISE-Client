@@ -1672,7 +1672,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <target state="translated">Enviar</target>
       </trans-unit>
@@ -6398,7 +6398,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target state="translated">Guardar</target>
       </trans-unit>
@@ -12656,6 +12656,14 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <target state="translated">Oscilador de audio</target>
       </trans-unit>
+      <trans-unit id="dc34bee07a6ceed8f010d89d1fcbda15a5abee8c" datatype="html">
+        <source>Teaching Tips</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/component/component.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <target state="translated">Consejos didácticos</target>
+      </trans-unit>
       <trans-unit id="818444ddcd112e756ab725357dcfb238b9257324" datatype="html">
         <source>Background Image (Optional)</source>
         <context-group purpose="location">
@@ -18555,7 +18563,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">52,54</context>
+          <context context-type="linenumber">42,44</context>
         </context-group>
         <target state="translated"> Guardar </target>
       </trans-unit>
@@ -18792,19 +18800,11 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         </context-group>
         <target state="translated">El item está bloqueado</target>
       </trans-unit>
-      <trans-unit id="dc34bee07a6ceed8f010d89d1fcbda15a5abee8c" datatype="html">
-        <source>Teaching Tips</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-        <target state="translated">Consejos didácticos</target>
-      </trans-unit>
       <trans-unit id="b570c9b6f5d96fb6f6969cb9397019829c34e82c" datatype="html">
         <source> Submit </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">62,64</context>
+          <context context-type="linenumber">52,54</context>
         </context-group>
         <target state="translated"> Enviar </target>
       </trans-unit>
