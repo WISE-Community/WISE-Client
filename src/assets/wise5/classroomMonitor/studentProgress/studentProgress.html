@@ -87,9 +87,9 @@
                 {{ team.location }}
               </td>
               <td layout="row" layout-align="center center">
-                <project-progress completed="team.completion.completedItems"
-                                  total="team.completion.totalItems"
-                                  percent="team.completion.completionPct">
+                <project-progress [completed]="team.completion.completedItems"
+                                  [total]="team.completion.totalItems"
+                                  [percent]="team.completion.completionPct">
                 </project-progress>
               </td>
               <td class="center">
