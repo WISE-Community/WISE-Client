@@ -1,0 +1,14 @@
+<button mat-button
+    class='mat-raised-button mat-primary'
+    (click)='goToPrevNode()'
+    [disabled]="!hasPrevNode"
+    i18n>
+  Previous step
+</button>
+<button mat-button
+    class='mat-raised-button mat-primary'
+    (click)='goToNextNode()'
+    [disabled]="!hasNextNode"
+    i18n>
+  Next step
+</button>

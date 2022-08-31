@@ -15860,6 +15860,22 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="ac1099dc4e1282de264387bf56018caf41f2b94b" datatype="html">
+        <source> Previous step
+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9354ff225c42cf816b83f207e097c6adc33ba452" datatype="html">
+        <source> Next step
+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="866753876041645935" datatype="html">
         <source>The student will see a graph of their individual data here.</source>
         <context-group purpose="location">
@@ -16913,14 +16929,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You have been inactive for a long time. Do you want to stay logged in?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="537022937435161177" datatype="html">
         <source>Session Timeout</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
     </body>

@@ -15,8 +15,7 @@ import { Notification } from '../../domain/notification';
   templateUrl: 'top-bar.component.html'
 })
 export class TopBarComponent {
-  @ViewChild(StudentAccountMenuComponent)
-  accountMenu: StudentAccountMenuComponent;
+  @ViewChild(StudentAccountMenuComponent) accountMenu: StudentAccountMenuComponent;
 
   avatarColor: string;
   completionPercent: number;
@@ -41,7 +40,7 @@ export class TopBarComponent {
     this.avatarColor = this.configService.getAvatarColorForWorkgroupId(
       this.configService.getWorkgroupId()
     );
-    this.logoURL = `${this.projectService.getThemePath()}/images/WISE-logo-ffffff.svg`;
+    this.logoURL = '/assets/wise5/themes/default/images/WISE-logo-ffffff.svg';
     this.projectName = this.projectService.getProjectTitle();
     this.isPreview = this.configService.isPreview();
     this.isConstraintsDisabled = !this.configService.getConfigParam('constraints');

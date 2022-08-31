@@ -30,6 +30,10 @@ step-tools {
   }
 }
 
+.node-view.tabbed {
+  margin-top: $secondary-toolbar-height;
+}
+
 .node-view {
   margin-top: $toolbar-height + $secondary-toolbar-height;
 }
