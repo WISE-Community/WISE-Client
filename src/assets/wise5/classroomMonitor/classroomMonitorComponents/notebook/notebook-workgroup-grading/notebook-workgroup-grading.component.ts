@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { NotebookService } from '../../../../services/notebookService';
-import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
 @Component({
   selector: 'notebook-workgroup-grading',
@@ -18,16 +17,11 @@ export class NotebookWorkgroupGradingComponent implements OnInit {
   @Input() reportEnabled: boolean;
   reportHasWork: boolean;
   @Input() reportTitle: string;
-  themePath: string;
   @Input() workgroup: any;
 
-  constructor(
-    private notebookService: NotebookService,
-    private projectService: TeacherProjectService
-  ) {}
+  constructor(private notebookService: NotebookService) {}
 
   ngOnInit(): void {
-    this.themePath = this.projectService.getThemePath();
     if (this.reportEnabled) {
       const reportId = this.notebookConfig.itemTypes.report.notes[0].reportId;
       this.maxScore = this.notebookService.getMaxScoreByReportId(reportId);
