@@ -43,6 +43,7 @@ import { MilestoneWorkgroupItemComponent } from '../../assets/wise5/classroomMon
 import { NodeInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
+import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
 import { ProjectProgressComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
 
 @NgModule({
@@ -70,6 +71,7 @@ import { ProjectProgressComponent } from '../../assets/wise5/classroomMonitor/cl
     MoveUserConfirmDialogComponent,
     NavItemProgressComponent,
     NodeInfoComponent,
+    NotebookWorkgroupGradingComponent,
     ProjectProgressComponent,
     RemoveUserConfirmDialogComponent,
     ShowStudentInfoComponent,

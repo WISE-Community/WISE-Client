@@ -126,7 +126,7 @@ class NotebookGradingController {
     this.isExpandAll = false;
   }
 
-  onUpdateExpand(workgroupId, isExpanded) {
+  onUpdateExpand({ workgroupId, isExpanded }) {
     this.workVisibilityById[workgroupId] = isExpanded;
   }
 
