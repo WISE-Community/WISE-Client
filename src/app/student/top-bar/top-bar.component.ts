@@ -40,7 +40,7 @@ export class TopBarComponent {
     this.avatarColor = this.configService.getAvatarColorForWorkgroupId(
       this.configService.getWorkgroupId()
     );
-    this.logoURL = '/assets/wise5/themes/default/images/WISE-logo-ffffff.svg';
+    this.logoURL = `${this.projectService.getThemePath()}/images/WISE-logo-ffffff.svg`;
     this.projectName = this.projectService.getProjectTitle();
     this.isPreview = this.configService.isPreview();
     this.isConstraintsDisabled = !this.configService.getConfigParam('constraints');
