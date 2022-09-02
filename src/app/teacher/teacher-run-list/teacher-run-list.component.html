@@ -4,28 +4,28 @@
 </div>
 <div class="content-block" *ngIf="runs.length">
   <div class="content-block__header controls dark-theme primary-bg"
-       fxLayout="row"
-       fxLayout.xs="column"
-       fxLayoutGap.sm="16px">
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap.sm="16px">
     <app-search-bar fxFlex="0 0 auto"
-                    fxFlex.xs="0 0 100%"
-                    fxFlex.sm="0 0 calc(50%-8px)"
-                    i18n-placeholderText
-                    placeholderText="Search"
-                    [disable]="!loaded"
-                    [value]="searchValue"
-                    (update)="searchChanged($event)"></app-search-bar>
+        fxFlex.xs="0 0 100%"
+        fxFlex.sm="0 0 calc(50%-8px)"
+        i18n-placeholderText
+        placeholderText="Search"
+        [disable]="!loaded"
+        [value]="searchValue"
+        (update)="searchChanged($event)"></app-search-bar>
     <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
     <app-select-menu fxFlex="0 0 auto"
-                     fxFlex.sm="0 0 calc(50%-8px)"
-                     [options]="filterOptions"
-                     i18n-placeholderText
-                     placeholderText="Filter By Period"
-                     [disable]="!loaded"
-                     [value]="filterValue"
-                     (update)="filterChanged($event)"
-                     [valueProp]="'value'"
-                     [viewValueProp]="'label'">
+        fxFlex.sm="0 0 calc(50%-8px)"
+        [options]="filterOptions"
+        i18n-placeholderText
+        placeholderText="Filter By Period"
+        [disable]="!loaded"
+        [value]="filterValue"
+        (update)="filterChanged($event)"
+        [valueProp]="'value'"
+        [viewValueProp]="'label'">
     </app-select-menu>
   </div>
   <div class="notice">
@@ -37,7 +37,11 @@
         <ng-container><span i18n>{{ activeTotal() }} active</span></ng-container>)
       </span>
       <ng-container *ngIf="searchValue || filterValue">
-        | <a [routerLink]="" (click)="reset()" i18n>Reset</a>
+        | <a [routerLink]=""
+            (click)="reset()"
+            (keyup.enter)="reset()"
+            tabindex="0"
+            i18n>Clear filters</a>
       </ng-container>
     </p>
   </div>
@@ -58,8 +62,7 @@
     </ng-container>
   </app-timeline>
 
-  <div class="content-block__actions"
-       *ngIf="filteredRuns.length > 10 && !showAll" >
-    <a mat-raised-button color="accent" (click)="showAll = true" i18n>Show More</a>
+  <div class="content-block__actions" *ngIf="filteredRuns.length > 10 && !showAll">
+    <button mat-raised-button color="accent" (click)="showAll = true" i18n>Show More</button>
   </div>
 </div>
