@@ -120,7 +120,7 @@ fi
 pipeline_json=$(aws codepipeline get-pipeline --name $pipeline_name | jq 'del(.metadata)')
 
 # Create a regex to find the S3 object key and value
-s3_object_key_value_regex="\"S3ObjectKey\": \"[-\/\.a-z0-9]*?\""
+s3_object_key_value_regex="\"S3ObjectKey\": \"[-\/\.a-z0-9]*\""
 
 if [[ $pipeline_json =~ $s3_object_key_value_regex ]]; then
   # Get the S3 object key and value string that we found
