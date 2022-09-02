@@ -186,18 +186,12 @@ export class EmbeddedStudent extends ComponentStudent {
 
   handleComponentDirtyMessage(messageEventData: any): void {
     this.isDirty = messageEventData.isDirty;
-    this.StudentDataService.broadcastComponentDirty({
-      componentId: this.componentId,
-      isDirty: this.isDirty
-    });
+    this.emitComponentDirty(this.isDirty);
   }
 
   handleComponentSubmitDirtyMessage(messageEventData: any): void {
     this.isSubmitDirty = messageEventData.isDirty;
-    this.StudentDataService.broadcastComponentSubmitDirty({
-      componentId: this.componentId,
-      isDirty: this.isSubmitDirty
-    });
+    this.emitComponentSubmitDirty(this.isSubmitDirty);
   }
 
   handleStudentDataChangedMessage(messageEventData: any): void {
