@@ -5,6 +5,7 @@ import { VLEProjectService } from '../../vle/vleProjectService';
 
 class GroupNode {
   id: string;
+  disabled: boolean;
   startId: string;
   title: string;
 }
@@ -24,10 +25,13 @@ export class GroupTabsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.groupNodes = this.projectService.rootNode.ids.map((id: string) =>
-      this.projectService.getNodeById(id)
-    );
+    this.setGroupNodes();
     this.selectCurrentGroupTab();
+    this.subscriptions.add(
+      this.studentDataService.nodeStatusesChanged$.subscribe(() => {
+        this.setGroupNodes();
+      })
+    );
     this.subscriptions.add(
       this.studentDataService.currentNodeChanged$.subscribe(() => {
         this.selectCurrentGroupTab();
@@ -37,6 +41,14 @@ export class GroupTabsComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  private setGroupNodes(): void {
+    this.groupNodes = this.projectService.rootNode.ids.map((id: string) => {
+      const node: GroupNode = this.projectService.getNodeById(id);
+      node.disabled = !this.studentDataService.canVisitNode(node.id);
+      return node;
+    });
   }
 
   private selectCurrentGroupTab(): void {

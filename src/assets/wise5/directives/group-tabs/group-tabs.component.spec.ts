@@ -24,13 +24,19 @@ class MockVLEProjectService {
 
 class MockStudentDataService {
   currentNodeChanged$ = of(null);
+  nodeStatusesChanged$ = of(null);
   getCurrentNode(): any {
     return node1;
   }
+  canVisitNode(): boolean {
+    return true;
+  }
+  endCurrentNodeAndSetCurrentNodeByNodeId(): void {}
 }
 
 let component: GroupTabsComponent;
 let projectService: VLEProjectService;
+let studentDataService: StudentDataService;
 describe('GroupTabsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -42,8 +48,10 @@ describe('GroupTabsComponent', () => {
     });
     component = TestBed.inject(GroupTabsComponent);
     projectService = TestBed.inject(VLEProjectService);
+    studentDataService = TestBed.inject(StudentDataService);
   });
   ngOnInit();
+  goToGroupTab();
 });
 
 function ngOnInit() {
@@ -52,6 +60,19 @@ function ngOnInit() {
       component.ngOnInit();
       expect(component.groupNodes.length).toEqual(2);
       expect(component.selectedTabIndex).toEqual(0);
+    });
+  });
+}
+
+function goToGroupTab() {
+  describe('goToGroupTab()', () => {
+    it("should call function to set new group's startNodeId", () => {
+      component.groupNodes = [
+        { id: 'group1', disabled: false, startId: 'node1', title: 'Lesson 1' }
+      ];
+      const spy = spyOn(studentDataService, 'endCurrentNodeAndSetCurrentNodeByNodeId');
+      component.goToGroupTab(0);
+      expect(spy).toHaveBeenCalledWith('node1');
     });
   });
 }
