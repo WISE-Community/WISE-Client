@@ -1,7 +1,7 @@
-<div class="md-whiteframe-1dp"
+<div class="mat-elevation-z1"
     [ngClass]="{ 'list-item--warn': statusClass === 'warn', 'list-item--info': statusClass === 'info' }">
-  <div matSubheader class="list-item md-whiteframe-1dp">
-    <button class="md-button md-ink-ripple list-item__subheader-button"
+  <div matSubheader class="list-item">
+    <button mat-button class="list-item__subheader-button"
         aria-label="Show/hide team's work for this step"
         i18n-aria-label
         [ngClass]="{ 'list-item--noclick': !showScore || disabled }"
