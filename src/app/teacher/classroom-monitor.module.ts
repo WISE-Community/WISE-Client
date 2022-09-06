@@ -45,6 +45,8 @@ import { ComponentStudentModule } from '../../assets/wise5/components/component/
 import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
 import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
 import { ProjectProgressComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
+import { NodeGradingViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component';
+import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,7 @@ import { ProjectProgressComponent } from '../../assets/wise5/classroomMonitor/cl
     MoveUserConfirmDialogComponent,
     NavItemProgressComponent,
     NodeInfoComponent,
+    NodeGradingViewComponent,
     NotebookWorkgroupGradingComponent,
     ProjectProgressComponent,
     RemoveUserConfirmDialogComponent,
@@ -93,6 +96,7 @@ import { ProjectProgressComponent } from '../../assets/wise5/classroomMonitor/cl
     ComponentGradingModule,
     ComponentStudentModule,
     HighchartsChartModule,
+    IntersectionObserverModule,
     PeerGroupGradingModule,
     PreviewComponentModule,
     SelectPeriodModule

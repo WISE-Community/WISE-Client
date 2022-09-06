@@ -8,6 +8,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MilestoneService } from '../services/milestoneService';
+import { NodeInfoService } from '../services/nodeInfoService';
+import { TeacherPeerGroupService } from '../services/teacherPeerGroupService';
 
 @NgModule({
   imports: [
@@ -19,7 +22,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     ClassroomStatusService,
+    MilestoneService,
+    NodeInfoService,
     TeacherDataService,
+    TeacherPeerGroupService,
     TeacherProjectService,
     TeacherWebSocketService
   ]
