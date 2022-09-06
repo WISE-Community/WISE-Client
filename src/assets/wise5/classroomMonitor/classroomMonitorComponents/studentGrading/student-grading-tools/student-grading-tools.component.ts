@@ -7,8 +7,7 @@ import { UtilService } from '../../../../services/utilService';
 
 @Component({
   selector: 'student-grading-tools',
-  templateUrl: './student-grading-tools.component.html',
-  styleUrls: ['./student-grading-tools.component.scss']
+  templateUrl: './student-grading-tools.component.html'
 })
 export class StudentGradingToolsComponent implements OnInit {
   avatarColor: string;
