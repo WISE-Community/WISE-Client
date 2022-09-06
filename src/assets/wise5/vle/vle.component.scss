@@ -4,7 +4,11 @@
   '~style/abstracts/variables';
 
 .mat-drawer-container {
-  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 step-tools {
@@ -38,6 +42,12 @@ step-tools {
   margin-top: $toolbar-height;
 }
 
+notebook-launcher {
+  bottom: 24px;
+  position: fixed;
+  right: 28px;
+}
+
 notebook-notes {
   display: block;
   width: $notebook-sidebar-width;
@@ -49,6 +59,10 @@ notebook-notes {
 
 notebook-report {
   z-index: 10;
+  bottom: 0;
+  position: fixed;
+  right: 96px;
+  transition: right 0.25s;
 }
 
 .ended-and-locked-div {

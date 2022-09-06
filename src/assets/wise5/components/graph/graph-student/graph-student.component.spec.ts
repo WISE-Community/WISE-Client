@@ -418,7 +418,7 @@ function handleTableConnectedComponentStudentDataChanged() {
   describe('handleTableConnectedComponentStudentDataChanged', () => {
     it('should handle table connected component student data changed', () => {
       const connectedComponent = createTableConnectedComponent();
-      const dataRows: any[] = [sampleData];
+      const dataRows: any[] = sampleData;
       const tableDataRows: any[] = [['Time', 'Position']].concat(dataRows);
       const componentState = {
         studentData: {

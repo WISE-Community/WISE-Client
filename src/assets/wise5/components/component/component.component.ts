@@ -10,26 +10,16 @@ import { StudentDataService } from '../../services/studentDataService';
   templateUrl: 'component.component.html'
 })
 export class ComponentComponent {
-  @Input()
-  componentId: string;
+  @Input() componentId: string;
+  @Input() componentState: any;
+  @Input() nodeId: string;
+  @Input() workgroupId: number;
+  @Output() saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
 
   componentContent: any;
-
-  @Input()
-  componentState: any;
-
-  mode: string = 'student';
-
-  @Input()
-  nodeId: string;
-
-  type: string;
-
-  @Input()
-  workgroupId: number;
-
-  @Output()
-  saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
+  pulseRubricIcon: boolean = true;
+  rubric: string;
+  showRubric: boolean;
 
   constructor(
     private clickToSnipImageService: ClickToSnipImageService,
@@ -50,7 +40,8 @@ export class ComponentComponent {
       this.componentId = this.componentState.componentId;
     }
     this.setComponentContent();
-    this.type = this.componentContent.type;
+    this.rubric = this.projectService.replaceAssetPaths(this.componentContent.rubric);
+    this.showRubric = this.rubric != null && this.rubric != '' && this.configService.isPreview();
   }
 
   setComponentContent(): void {

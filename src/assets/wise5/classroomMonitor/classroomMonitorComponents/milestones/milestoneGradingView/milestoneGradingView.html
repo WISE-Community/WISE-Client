@@ -89,14 +89,16 @@
         </md-button>
       </div>
     </md-list-item>
-    <milestone-workgroup-item ng-repeat="workgroup in $ctrl.workgroupsById | toArray | orderBy:$ctrl.getOrderBy()"
-        ng-if="$ctrl.isWorkgroupShown(workgroup)"
-        expand="$ctrl.workVisibilityById[workgroup.$key]"
-        show-score="true"
-        locations="$ctrl.milestone.report.locations"
-        workgroup-id="::workgroup.workgroupId"
-        workgroup-data="workgroup"
-        on-update-expand="$ctrl.onUpdateExpand(workgroupId, value)"
-        in-view="$ctrl.workgroupInView(workgroup.$key, $inview)"></milestone-workgroup-item>
+    <div class="md-whiteframe-1dp">
+      <milestone-workgroup-item ng-repeat="workgroup in $ctrl.workgroupsById | toArray | orderBy:$ctrl.getOrderBy()"
+          ng-if="$ctrl.isWorkgroupShown(workgroup)"
+          [expanded]="$ctrl.workVisibilityById[workgroup.$key]"
+          [show-score]="true"
+          [locations]="$ctrl.milestone.report.locations"
+          [workgroup-id]="::workgroup.workgroupId"
+          [workgroup-data]="workgroup"
+          (on-update-expand)="$ctrl.onUpdateExpand($event.workgroupId, $event.value)"
+          in-view="$ctrl.workgroupInView(workgroup.$key, $inview)"></milestone-workgroup-item>
+    </div>
   </md-list>
 </div>

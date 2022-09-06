@@ -431,7 +431,7 @@
   <div *ngIf="series.data == null || series.data.length == 0">
     This series has no starter data points. Click the "Add Data Point" button to add a starter data point if you'd like.
   </div>
-  <div *ngFor="let dataPoint of series.data; index as dataPointIndex; first as isFirst; last as isLast">
+  <div *ngFor="let dataPoint of series.data; index as dataPointIndex; first as isFirst; last as isLast; trackBy: customTrackBy">
     <span *ngIf="authoringComponentContent.xAxis.type === 'limits' || authoringComponentContent.xAxis.type === '' || authoringComponentContent.xAxis.type == null">
       <mat-form-field class="data-point-input">
         <mat-label i18n>X</mat-label>

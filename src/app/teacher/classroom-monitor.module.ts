@@ -39,9 +39,12 @@ import { ComponentGradingModule } from './component-grading.module';
 import { TeacherSummaryDisplay } from '../../assets/wise5/directives/teacher-summary-display/teacher-summary-display.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
+import { MilestoneWorkgroupItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component';
 import { NodeInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
+import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
+import { ProjectProgressComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
 import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component';
 
 @NgModule({
@@ -65,9 +68,12 @@ import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroom
     ManageUserComponent,
     MilestonesComponent,
     MilestoneReportDataComponent,
+    MilestoneWorkgroupItemComponent,
     MoveUserConfirmDialogComponent,
     NavItemProgressComponent,
     NodeInfoComponent,
+    NotebookWorkgroupGradingComponent,
+    ProjectProgressComponent,
     RemoveUserConfirmDialogComponent,
     ShowStudentInfoComponent,
     StatusIconComponent,
