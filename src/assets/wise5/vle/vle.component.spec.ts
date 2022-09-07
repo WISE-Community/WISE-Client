@@ -6,9 +6,7 @@ import { NotebookService } from '../services/notebookService';
 import { VLEProjectService } from './vleProjectService';
 import { VLEComponent } from './vle.component';
 import { StudentDataService } from '../services/studentDataService';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ProjectService } from '../services/projectService';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component';
 import { NodeComponent } from './node/node.component';
@@ -31,10 +29,10 @@ import { InitializeVLEService } from '../services/initializeVLEService';
 import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher-common-services.module';
 import { PauseScreenService } from '../services/pauseScreenService';
 import { StudentNotificationService } from '../services/studentNotificationService';
+import { NodeClickLockedService } from '../services/nodeClickLockedService';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
-const group0Id: string = 'group0';
 const node1Id: string = 'node1';
 let saveVLEEventSpy: jasmine.Spy;
 
@@ -54,7 +52,6 @@ describe('VLEComponent', () => {
         MatToolbarModule,
         MatSelectModule,
         MatSidenavModule,
-        MatSnackBarModule,
         RouterTestingModule,
         StudentTeacherCommonServicesModule
       ],
@@ -71,8 +68,8 @@ describe('VLEComponent', () => {
       ],
       providers: [
         InitializeVLEService,
+        NodeClickLockedService,
         PauseScreenService,
-        ProjectService,
         StudentNotificationService,
         VLEProjectService
       ]
@@ -82,28 +79,12 @@ describe('VLEComponent', () => {
   beforeEach(() => {
     const vleProjectService = TestBed.inject(VLEProjectService);
     spyOn(vleProjectService, 'getStyle').and.returnValue(null);
-    spyOn(vleProjectService, 'getProjectTitle').and.returnValue('My Project');
     spyOn(vleProjectService, 'getProjectScript').and.returnValue(null);
-    spyOn(vleProjectService, 'getStartNodeId').and.returnValue('node1');
-    spyOn(vleProjectService, 'getThemeSettings').and.returnValue({});
-    spyOn(vleProjectService, 'getProjectRootNode').and.returnValue({ id: group0Id });
-    spyOn(vleProjectService, 'getNodeById').and.returnValue({});
-    const projectService = TestBed.inject(ProjectService);
-    spyOn(projectService, 'getSpaces').and.returnValue([]);
-    spyOn(projectService, 'getProjectRootNode').and.returnValue({ id: group0Id });
     const notebookService = TestBed.inject(NotebookService);
     spyOn(notebookService, 'isNotebookEnabled').and.returnValue(false);
     const configService = TestBed.inject(ConfigService);
     spyOn(configService, 'isEndedAndLocked').and.returnValue(false);
-    spyOn(configService, 'isRunActive').and.returnValue(true);
     const studentDataService = TestBed.inject(StudentDataService);
-    spyOn(studentDataService, 'getNodeStatuses').and.returnValue({
-      group0: { progress: {} },
-      node1: { icon: '' }
-    });
-    spyOn(studentDataService, 'getRunStatus').and.returnValue({
-      periods: [{ periodId: 1, periodName: '1' }]
-    });
     spyOn(studentDataService, 'getCurrentNode').and.returnValue({ id: node1Id });
     spyOn(studentDataService, 'getCurrentNodeId').and.returnValue(node1Id);
     saveVLEEventSpy = spyOn(studentDataService, 'saveVLEEvent');

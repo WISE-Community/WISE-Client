@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../services/configService';
 import { InitializeVLEService } from '../services/initializeVLEService';
@@ -10,7 +9,6 @@ import { SessionService } from '../services/sessionService';
 import { StudentDataService } from '../services/studentDataService';
 import { VLEProjectService } from './vleProjectService';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
-import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
 import { AnnotationService } from '../services/annotationService';
 import { UtilService } from '../services/utilService';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,40 +19,18 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./vle.component.scss']
 })
 export class VLEComponent implements OnInit {
-  connectionLostShown: boolean = false;
-  constraintsDisabled: boolean = false;
   currentNode: any;
   @ViewChild('drawer') public drawer: any;
-  endedAndLockedMessage: string;
-  homePath: string;
-  idToOrder: any;
-  isEndedAndLocked: boolean;
   isInitialized: boolean;
   layoutState: string;
-  layoutView: string;
-  nodeStatuses: any[];
-  navFilter: any;
-  navFilters: any;
   notebookConfig: any;
-  notebookFilter: string = '';
-  notebookItemPath: string;
-  notebookOpen: boolean = false;
-  noteDialog: any;
   notesEnabled: boolean = false;
   notesVisible: boolean = false;
-  numberProject: boolean;
-  pauseDialog: any;
-  projectName: string;
   projectStyle: string;
   reportEnabled: boolean = false;
   reportFullscreen: boolean = false;
-  rootNode: any;
-  rootNodeStatus: any;
-  snipImageHandler: any;
+  runEndedAndLocked: boolean;
   subscriptions: Subscription = new Subscription();
-  themePath: string;
-  themeSettings: any;
-  workgroupId: number;
 
   constructor(
     private annotationService: AnnotationService,
@@ -67,7 +43,6 @@ export class VLEComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private sessionService: SessionService,
-    private snackBar: MatSnackBar,
     private studentDataService: StudentDataService,
     private utilService: UtilService
   ) {}
@@ -82,37 +57,14 @@ export class VLEComponent implements OnInit {
   }
 
   initRestOfVLE() {
-    this.workgroupId = this.configService.getWorkgroupId();
-    this.navFilters = this.projectService.getFilters();
-    this.navFilter = this.navFilters[0].name;
     this.projectStyle = this.projectService.getStyle();
-    this.projectName = this.projectService.getProjectTitle();
     if (this.notebookService.isNotebookEnabled()) {
       this.notebookConfig = this.notebookService.getStudentNotebookConfig();
       this.notesEnabled = this.notebookConfig.itemTypes.note.enabled;
       this.reportEnabled = this.notebookConfig.itemTypes.report.enabled;
     }
 
-    let userType = this.configService.getConfigParam('userType');
-    let contextPath = this.configService.getConfigParam('contextPath');
-    if (userType == 'student') {
-      this.homePath = contextPath + '/student';
-    } else if (userType == 'teacher') {
-      this.homePath = contextPath + '/teacher';
-    } else {
-      this.homePath = contextPath;
-    }
-
-    if (this.configService.getConfigParam('constraints') == false) {
-      this.constraintsDisabled = true;
-    }
-
-    this.isEndedAndLocked = this.configService.isEndedAndLocked();
-    if (this.isEndedAndLocked) {
-      const endDate = this.configService.getPrettyEndDate();
-      this.endedAndLockedMessage = $localize`This unit ended on ${endDate}. You can no longer save new work.`;
-    }
-
+    this.runEndedAndLocked = this.configService.isEndedAndLocked();
     let script = this.projectService.getProjectScript();
     if (script != null) {
       this.projectService.retrieveScript(script).then((script: string) => {
@@ -132,52 +84,24 @@ export class VLEComponent implements OnInit {
       return false;
     });
 
-    this.themePath = this.projectService.getThemePath();
-    this.notebookItemPath = this.themePath + '/notebook/notebookItem.html';
-
     // TODO: set these variables dynamically from theme settings
-    this.layoutView = 'list'; // 'list' or 'card'
-    this.numberProject = true;
-    this.themePath = this.projectService.getThemePath();
-    this.themeSettings = this.projectService.getThemeSettings();
-    this.nodeStatuses = this.studentDataService.nodeStatuses;
-    this.idToOrder = this.projectService.idToOrder;
-    this.workgroupId = this.configService.getWorkgroupId();
-    this.rootNode = this.projectService.getProjectRootNode();
-    this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
     this.notebookConfig = this.notebookService.getNotebookConfig();
     this.currentNode = this.studentDataService.getCurrentNode();
-
-    // set current notebook type filter to first enabled type
-    if (this.notebookConfig.enabled) {
-      for (var type in this.notebookConfig.itemTypes) {
-        let prop = this.notebookConfig.itemTypes[type];
-        if (this.notebookConfig.itemTypes.hasOwnProperty(type) && prop.enabled) {
-          this.notebookFilter = type;
-          break;
-        }
-      }
-    }
-
     this.setLayoutState();
     this.initializeSubscriptions();
-    this.addSnipImageListener();
   }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
-    window.removeEventListener('snip-image', this.snipImageHandler);
     this.sessionService.broadcastExit();
   }
 
-  private addSnipImageListener(): void {
-    this.snipImageHandler = (event: CustomEvent) => {
-      this.notebookService.addNote(
-        this.studentDataService.getCurrentNodeId(),
-        this.utilService.getImageObjectFromImageElement(event.detail.target)
-      );
-    };
-    window.addEventListener('snip-image', this.snipImageHandler);
+  @HostListener('window:snip-image', ['$event.detail.target'])
+  snipImage(image: Element): void {
+    this.notebookService.addNote(
+      this.studentDataService.getCurrentNodeId(),
+      this.utilService.getImageObjectFromImageElement(image)
+    );
   }
 
   closeNotes(): void {
@@ -189,8 +113,6 @@ export class VLEComponent implements OnInit {
     this.subscribeToCurrentNodeChanged();
     this.subscribeToNotesVisible();
     this.subscribeToReportFullScreen();
-    this.subscribeToNodeClickLocked();
-    this.subscribeToServerConnectionStatus();
     this.subscribeToViewCurrentAmbientNotification();
   }
 
@@ -291,48 +213,6 @@ export class VLEComponent implements OnInit {
     );
   }
 
-  private subscribeToNodeClickLocked(): void {
-    this.subscriptions.add(
-      this.studentDataService.nodeClickLocked$.subscribe(({ nodeId }) => {
-        let message = $localize`Sorry, you cannot view this item yet.`;
-        const node = this.projectService.getNodeById(nodeId);
-        if (node != null) {
-          const constraints = this.projectService.getConstraintsThatAffectNode(node);
-          this.projectService.orderConstraints(constraints);
-          if (constraints != null && constraints.length > 0) {
-            const nodeTitle = this.projectService.getNodePositionAndTitleByNodeId(nodeId);
-            message = $localize`<p>To visit <b>${nodeTitle}</b> you need to:</p><ul>`;
-          }
-          for (let c = 0; c < constraints.length; c++) {
-            const constraint = constraints[c];
-            if (constraint != null && !this.studentDataService.evaluateConstraint(constraint)) {
-              message += `<li>${this.projectService.getConstraintMessage(nodeId, constraint)}</li>`;
-            }
-          }
-          message += `</ul>`;
-        }
-        this.dialog.open(DialogWithCloseComponent, {
-          data: {
-            content: message,
-            title: $localize`Item Locked`
-          }
-        });
-      })
-    );
-  }
-
-  private subscribeToServerConnectionStatus(): void {
-    this.subscriptions.add(
-      this.notificationService.serverConnectionStatus$.subscribe((isConnected) => {
-        if (isConnected) {
-          this.handleServerReconnect();
-        } else {
-          this.handleServerDisconnect();
-        }
-      })
-    );
-  }
-
   private subscribeToViewCurrentAmbientNotification(): void {
     this.subscriptions.add(
       this.notificationService.viewCurrentAmbientNotification$.subscribe((args) => {
@@ -377,19 +257,6 @@ export class VLEComponent implements OnInit {
       }
     }
     this.layoutState = layoutState;
-  }
-
-  private handleServerDisconnect() {
-    if (!this.connectionLostShown) {
-      this.snackBar.open(
-        $localize`Error: Data is not being saved! Check your internet connection.`
-      );
-      this.connectionLostShown = true;
-    }
-  }
-
-  private handleServerReconnect() {
-    this.connectionLostShown = false;
   }
 
   /**

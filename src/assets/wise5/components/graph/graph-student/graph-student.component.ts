@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -41,6 +41,7 @@ export class GraphStudent extends ComponentStudent {
   hasCustomLegendBeenSet: boolean = false;
   height: number = null;
   hiddenCanvasId: string = 'hiddenCanvas_' + this.componentId;
+  @ViewChild('hiddenButton') hiddenButtonElement: ElementRef;
   hideAllTrialsOnNewTrial: boolean = true;
   Highcharts: typeof Highcharts = Highcharts;
   initialComponentState: any = null;
@@ -78,6 +79,7 @@ export class GraphStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private changeDetectorRef: ChangeDetectorRef,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected dialog: MatDialog,
@@ -257,46 +259,44 @@ export class GraphStudent extends ComponentStudent {
   }
 
   handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState) {
-    const studentData = componentState.studentData;
+    const studentData = this.UtilService.makeCopyOfJSONObject(componentState.studentData);
+    const selectedRowIndices = studentData.selectedRowIndices;
+    const tableData = studentData.tableData;
+    if (tableData.length > 0 && selectedRowIndices != null && selectedRowIndices.length > 0) {
+      studentData.tableData = this.getVisibleRows(studentData.tableData, selectedRowIndices);
+    }
     if (studentData.isDataExplorerEnabled) {
       this.handleDataExplorer(studentData);
     } else {
-      const rows = studentData.tableData;
-      const data = this.convertRowDataToSeriesData(rows, connectedComponent);
-      let seriesIndex = connectedComponent.seriesIndex;
-      if (seriesIndex == null) {
-        seriesIndex = 0;
-      }
-      if (this.isStudentDataVersion1()) {
-        let series = this.series[seriesIndex];
-        if (series == null) {
-          series = {};
-          this.series[seriesIndex] = series;
-        }
-        series.data = data;
-      } else {
-        const trial = this.activeTrial;
-        if (trial != null && trial.series != null) {
-          let series = trial.series[seriesIndex];
-          if (series == null) {
-            series = {};
-            this.series[seriesIndex] = series;
-          }
-          series.data = data;
-        }
-      }
+      this.handleConnectedComponentData(studentData, connectedComponent);
     }
     this.drawGraph();
     this.isDirty = true;
   }
 
-  handleDataExplorer(studentData) {
+  private getVisibleRows(tableData: any, selectedRowIndices: number[]): any[] {
+    const visibleRows = [];
+    visibleRows.push(tableData[0]);
+    tableData.forEach((row, index) => {
+      if (selectedRowIndices.includes(index - 1)) {
+        visibleRows.push(row);
+      }
+    });
+    return visibleRows;
+  }
+
+  private handleDataExplorer(studentData: any): void {
+    // clear graph to prevent issues with Highcharts merging old series data with new series data
+    this.activeTrial.series = [];
+    this.drawGraph();
+    this.changeDetectorRef.detectChanges();
+
     const dataExplorerSeries = studentData.dataExplorerSeries;
     const graphType = studentData.dataExplorerGraphType;
     this.xAxis.title.text = studentData.dataExplorerXAxisLabel;
     this.setYAxisLabels(studentData);
     this.setXAxisLabels(studentData);
-    this.activeTrial.series = [];
+
     for (let seriesIndex = 0; seriesIndex < dataExplorerSeries.length; seriesIndex++) {
       const xColumn = dataExplorerSeries[seriesIndex].xColumn;
       const yColumn = dataExplorerSeries[seriesIndex].yColumn;
@@ -326,6 +326,33 @@ export class GraphStudent extends ComponentStudent {
           );
           this.activeTrial.series.push(regressionSeries);
         }
+      }
+    }
+  }
+
+  private handleConnectedComponentData(studentData: any, connectedComponent: any): void {
+    const rows = studentData.tableData;
+    const data = this.convertRowDataToSeriesData(rows, connectedComponent);
+    let seriesIndex = connectedComponent.seriesIndex;
+    if (seriesIndex == null) {
+      seriesIndex = 0;
+    }
+    if (this.isStudentDataVersion1()) {
+      let series = this.series[seriesIndex];
+      if (series == null) {
+        series = {};
+        this.series[seriesIndex] = series;
+      }
+      series.data = data;
+    } else {
+      const trial = this.activeTrial;
+      if (trial != null && trial.series != null) {
+        let series = trial.series[seriesIndex];
+        if (series == null) {
+          series = {};
+          this.series[seriesIndex] = series;
+        }
+        series.data = data;
       }
     }
   }
@@ -372,7 +399,12 @@ export class GraphStudent extends ComponentStudent {
             studentData.tableData,
             this.value
           );
-          if (isNaN(parseFloat(textValue))) {
+          if (
+            typeof textValue === 'string' &&
+            textValue !== '' &&
+            !thisComponent.isNA(textValue) &&
+            isNaN(parseFloat(textValue))
+          ) {
             return studentData.tableData[this.value + 1][studentData.dataExplorerSeries[0].xColumn]
               .text;
           }
@@ -380,6 +412,11 @@ export class GraphStudent extends ComponentStudent {
         return this.value;
       }
     };
+  }
+
+  isNA(text: string): boolean {
+    const textUpperCase = text.toUpperCase();
+    return textUpperCase === 'NA' || textUpperCase === 'N/A';
   }
 
   getXColumnTextValue(dataExplorerSeries: any[], tableData: any[][], value: number): string {
@@ -811,6 +848,7 @@ export class GraphStudent extends ComponentStudent {
         this.setCustomLegend();
       });
     }
+    this.changeDetectorRef.detectChanges();
   }
 
   turnOffXAxisDecimals() {
@@ -843,9 +881,8 @@ export class GraphStudent extends ComponentStudent {
   }
 
   setAllSeriesFields(series) {
-    const canAllSeriesMouseTrack = this.getNumberOfEditableSeries(series) === 0;
     for (const singleSeries of series) {
-      this.setSingleSeriesFields(singleSeries, canAllSeriesMouseTrack);
+      this.setSingleSeriesFields(singleSeries);
     }
   }
 
@@ -859,7 +896,7 @@ export class GraphStudent extends ComponentStudent {
     return numberOfEditableSeries;
   }
 
-  setSingleSeriesFields(singleSeries, canAllSeriesMouseTrack) {
+  setSingleSeriesFields(singleSeries) {
     if (singleSeries.canEdit && this.isActiveSeries(singleSeries)) {
       singleSeries.dragDrop = {
         draggableX: true,
@@ -874,7 +911,6 @@ export class GraphStudent extends ComponentStudent {
       singleSeries.stickyTracking = false;
       singleSeries.shared = false;
       singleSeries.allowPointSelect = true;
-      singleSeries.enableMouseTracking = true;
       this.showUndoButton = true;
     } else {
       singleSeries.dragDrop = {
@@ -886,14 +922,9 @@ export class GraphStudent extends ComponentStudent {
       singleSeries.stickyTracking = false;
       singleSeries.shared = false;
       singleSeries.allowPointSelect = false;
-      singleSeries.enableMouseTracking = canAllSeriesMouseTrack;
     }
     if (singleSeries.allowPointMouseOver === true) {
       singleSeries.allowPointSelect = true;
-      singleSeries.enableMouseTracking = true;
-    }
-    if (this.isMousePlotLineOn()) {
-      singleSeries.enableMouseTracking = true;
     }
   }
 
@@ -992,6 +1023,11 @@ export class GraphStudent extends ComponentStudent {
         }
       }
     };
+  }
+
+  focusOnComponent(): void {
+    // allows this component to listen to events (e.g. "keydown.backspace")
+    this.hiddenButtonElement.nativeElement.focus();
   }
 
   /*
@@ -1708,28 +1744,26 @@ export class GraphStudent extends ComponentStudent {
   }
 
   addPointFromTableIntoData(xCell: any, yCell: any, data: any[]) {
-    let xText = xCell.text;
-    if (xText == null || xText === '') {
-      xText = 'N/A';
-    }
-    let yText = yCell.text;
-    if (yText == null || yText === '') {
-      yText = 'N/A';
-    }
-    const xNumber = Number(xText);
-    const yNumber = Number(yText);
-    const point = [];
-    if (!isNaN(xNumber)) {
-      point.push(xNumber);
+    const xText = xCell.text;
+    const yText = yCell.text;
+    if (xText != null && xText !== '' && yText != null && yText !== '') {
+      const xNumber = Number(xText);
+      const yNumber = Number(yText);
+      const point = [];
+      if (!isNaN(xNumber)) {
+        point.push(xNumber);
+      } else {
+        point.push(xText);
+      }
+      if (!isNaN(yNumber)) {
+        point.push(yNumber);
+      } else {
+        point.push(null);
+      }
+      data.push(point);
     } else {
-      point.push(xText);
+      data.push([]);
     }
-    if (!isNaN(yNumber)) {
-      point.push(yNumber);
-    } else {
-      point.push(yText);
-    }
-    data.push(point);
   }
 
   setSeriesIds(allSeries) {
@@ -1781,7 +1815,7 @@ export class GraphStudent extends ComponentStudent {
     return null;
   }
 
-  @HostListener('document:keydown.backspace')
+  @HostListener('keydown.backspace')
   handleDeleteKeyPressed(): void {
     const series = this.activeSeries;
     if (this.canEdit(series)) {

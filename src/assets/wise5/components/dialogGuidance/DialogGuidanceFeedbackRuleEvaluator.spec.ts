@@ -81,10 +81,6 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
       feedback: '!idea11 || idea12'
     },
     {
-      expression: 'idea2',
-      feedback: 'You hit idea2'
-    },
-    {
       expression: 'isDefault',
       feedback: 'This is a default feedback'
     }
@@ -134,6 +130,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
   matchRule_MultipleIdeasUsingAndOr();
   matchRule_MultipleIdeasUsingNotAndOr();
   matchRule_hasKIScore();
+  matchRule_ideaCount();
   matchNoRule_ReturnDefault();
   matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault();
   secondToLastSubmit();
@@ -207,6 +204,32 @@ function matchRule_hasKIScore() {
     it('should not match rule if KI score is out of range [1-5]', () => {
       expectFeedback([], [KI_SCORE_0], 'isDefault');
       expectFeedback([], [KI_SCORE_6], 'isDefault');
+    });
+  });
+}
+
+function matchRule_ideaCount() {
+  describe('ideaCount[MoreThan|Equals|LessThan]()', () => {
+    beforeEach(() => {
+      component.componentContent.feedbackRules = [
+        {
+          expression: 'ideaCountMoreThan(3)',
+          feedback: 'ideaCountMoreThan(3)'
+        },
+        {
+          expression: 'ideaCountEquals(3)',
+          feedback: 'ideaCountEquals(3)'
+        },
+        {
+          expression: 'ideaCountLessThan(3)',
+          feedback: 'ideaCountLessThan(3)'
+        }
+      ];
+    });
+    it('should match rules based on number of ideas found', () => {
+      expectFeedback(['idea1', 'idea2', 'idea3', 'idea4'], [KI_SCORE_1], 'ideaCountMoreThan(3)');
+      expectFeedback(['idea1', 'idea2', 'idea3'], [KI_SCORE_1], 'ideaCountEquals(3)');
+      expectFeedback(['idea1', 'idea2'], [KI_SCORE_1], 'ideaCountLessThan(3)');
     });
   });
 }

@@ -2,12 +2,12 @@
 
 import { ComponentSelectComponent } from '../../../../../app/classroom-monitor/component-select/component-select.component';
 import NodeGradingView from './nodeGradingView/nodeGradingView';
-import WorkgroupItem from './workgroupItem/workgroupItem';
 import * as angular from 'angular';
 import { WorkgroupInfoComponent } from './workgroupInfo/workgroup-info.component';
 import { downgradeComponent } from '@angular/upgrade/static';
-import MilestoneWorkgroupItem from '../milestones/milestoneWorkgroupItem/milestoneWorkgroupItem';
+import { MilestoneWorkgroupItemComponent } from '../milestones/milestone-workgroup-item/milestone-workgroup-item.component';
 import { PeerGroupDialogComponent } from '../peer-group/peer-group-dialog/peer-group-dialog.component';
+import { WorkgroupItemComponent } from './workgroup-item/workgroup-item.component';
 
 const NodeGrading = angular
   .module('nodeGrading', [])
@@ -24,7 +24,13 @@ const NodeGrading = angular
     'workgroupInfo',
     downgradeComponent({ component: WorkgroupInfoComponent }) as angular.IDirectiveFactory
   )
-  .component('workgroupItem', WorkgroupItem)
-  .component('milestoneWorkgroupItem', MilestoneWorkgroupItem);
+  .directive(
+    'workgroupItem',
+    downgradeComponent({ component: WorkgroupItemComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'milestoneWorkgroupItem',
+    downgradeComponent({ component: MilestoneWorkgroupItemComponent }) as angular.IDirectiveFactory
+  );
 
 export default NodeGrading;

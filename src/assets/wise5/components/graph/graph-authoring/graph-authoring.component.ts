@@ -569,4 +569,8 @@ export class GraphAuthoring extends ComponentAuthoring {
       delete series.dashStyle;
     }
   }
+
+  customTrackBy(index: number): number {
+    return index;
+  }
 }

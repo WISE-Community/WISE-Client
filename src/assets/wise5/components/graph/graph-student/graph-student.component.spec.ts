@@ -111,7 +111,6 @@ describe('GraphStudentComponent', () => {
   getTheYValueFromDataPoint();
   getTrialNumbers();
   getValuesInColumn();
-  handleDataExplorer();
   handleDeleteKeyPressed();
   handleTableConnectedComponentStudentDataChanged();
   handleTrialIdsToShowChanged();
@@ -391,15 +390,35 @@ function createChartConfig() {
   });
 }
 
+function createTableConnectedComponent(): any {
+  return {
+    skipFirstRow: true,
+    xColumn: 0,
+    yColumn: 1
+  };
+}
+
+function createDataExplorerStudentData(): any {
+  return {
+    isDataExplorerEnabled: true,
+    dataExplorerGraphType: 'scatter',
+    tableData: [
+      [{ text: 'ID' }, { text: 'Age' }, { text: 'Score' }],
+      [{ text: '1' }, { text: '10' }, { text: '100' }],
+      [{ text: '2' }, { text: '20' }, { text: '200' }],
+      [{ text: '3' }, { text: '30' }, { text: '300' }]
+    ],
+    dataExplorerSeries: [{ xColumn: 0, yColumn: 1, name: 'The series name' }],
+    dataExplorerXAxisLabel: 'Hello',
+    dataExplorerYAxisLabel: 'World'
+  };
+}
+
 function handleTableConnectedComponentStudentDataChanged() {
   describe('handleTableConnectedComponentStudentDataChanged', () => {
     it('should handle table connected component student data changed', () => {
-      const connectedComponent = {
-        skipFirstRow: true,
-        xColumn: 0,
-        yColumn: 1
-      };
-      const dataRows: any[] = [sampleData];
+      const connectedComponent = createTableConnectedComponent();
+      const dataRows: any[] = sampleData;
       const tableDataRows: any[] = [['Time', 'Position']].concat(dataRows);
       const componentState = {
         studentData: {
@@ -408,6 +427,64 @@ function handleTableConnectedComponentStudentDataChanged() {
       };
       component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
       expect(component.activeTrial.series[0].data).toEqual(dataRows);
+    });
+    it('should handle table connected component student data changed with selected rows', () => {
+      const connectedComponent = createTableConnectedComponent();
+      const dataRows: any[] = [
+        [0, 0],
+        [10, 20],
+        [20, 40],
+        [30, 80]
+      ];
+      const tableDataRows: any[] = [['Time', 'Position']].concat(dataRows);
+      const componentState = {
+        studentData: {
+          tableData: createTable(tableDataRows),
+          selectedRowIndices: [0, 2]
+        }
+      };
+      component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+      expect(component.activeTrial.series[0].data).toEqual([
+        [0, 0],
+        [20, 40]
+      ]);
+    });
+    it('should handle connected data explorer student data changed', () => {
+      const connectedComponent = createTableConnectedComponent();
+      const studentData = createDataExplorerStudentData();
+      const componentState = {
+        studentData: studentData
+      };
+      component.activeTrial = {};
+      component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+      expect(component.xAxis.title.text).toEqual('Hello');
+      expect(component.yAxis.title.text).toEqual('World');
+      expect(component.activeTrial.series.length).toEqual(1);
+      const series = component.activeTrial.series[0];
+      expect(series.type).toEqual('scatter');
+      expect(series.name).toEqual('The series name');
+      expect(series.color).toEqual('blue');
+      expect(series.data[0][0]).toEqual(1);
+      expect(series.data[1][1]).toEqual(20);
+    });
+    it('should handle connected data explorer student data changed with selected rows', () => {
+      const connectedComponent = createTableConnectedComponent();
+      const studentData = createDataExplorerStudentData();
+      studentData.selectedRowIndices = [0, 2];
+      const componentState = {
+        studentData: studentData
+      };
+      component.activeTrial = {};
+      component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+      expect(component.xAxis.title.text).toEqual('Hello');
+      expect(component.yAxis.title.text).toEqual('World');
+      expect(component.activeTrial.series.length).toEqual(1);
+      const series = component.activeTrial.series[0];
+      expect(series.type).toEqual('scatter');
+      expect(series.name).toEqual('The series name');
+      expect(series.color).toEqual('blue');
+      expect(series.data[0][0]).toEqual(1);
+      expect(series.data[1][1]).toEqual(30);
     });
   });
 }
@@ -1537,34 +1614,6 @@ function notSetTheActiveTrialAndSeriesIfTheTrialCanNotBeEdited() {
     expect(component.series).toEqual(trial1.series);
     expect(component.activeTrial).toEqual(trial1);
     expect(component.activeSeries).toEqual(trial1.series[0]);
-  });
-}
-
-function handleDataExplorer() {
-  it('should handle data explorer', () => {
-    const studentData = {
-      dataExplorerGraphType: 'scatter',
-      tableData: [
-        [{ text: 'ID' }, { text: 'Age' }, { text: 'Score' }],
-        [{ text: '1' }, { text: '10' }, { text: '100' }],
-        [{ text: '2' }, { text: '20' }, { text: '200' }],
-        [{ text: '3' }, { text: '30' }, { text: '300' }]
-      ],
-      dataExplorerSeries: [{ xColumn: 0, yColumn: 1, name: 'The series name' }],
-      dataExplorerXAxisLabel: 'Hello',
-      dataExplorerYAxisLabel: 'World'
-    };
-    component.activeTrial = {};
-    component.handleDataExplorer(studentData);
-    expect(component.xAxis.title.text).toEqual('Hello');
-    expect(component.yAxis.title.text).toEqual('World');
-    expect(component.activeTrial.series.length).toEqual(1);
-    const series = component.activeTrial.series[0];
-    expect(series.type).toEqual('scatter');
-    expect(series.name).toEqual('The series name');
-    expect(series.color).toEqual('blue');
-    expect(series.data[0][0]).toEqual(1);
-    expect(series.data[0][1]).toEqual(10);
   });
 }
 

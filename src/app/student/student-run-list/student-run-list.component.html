@@ -5,14 +5,14 @@
   </div>
   <div class="content-block" *ngIf="runs.length">
     <div class="content-block__header controls dark-theme primary-bg"
-         fxLayout="row"
-         fxLayout.xs="column"
-         fxLayoutGap.sm="16px">
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap.sm="16px">
       <app-search-bar fxFlex="0 0 100%"
-                      fxFlex.gt-sm="0 0 auto"
-                      [placeholderText]="'Search'"
-                      [value]="search"
-                      (update)="searchUpdated($event)"></app-search-bar>
+          fxFlex.gt-sm="0 0 auto"
+          [placeholderText]="'Search'"
+          [value]="search"
+          (update)="searchUpdated($event)"></app-search-bar>
     </div>
     <div id="unitCount" *ngIf="loaded" class="notice">
       <p>
@@ -23,7 +23,11 @@
           <ng-container><span i18n>{{ activeTotal() }} active</span></ng-container>)
         </span>
         <ng-container *ngIf="search">
-          | <a [routerLink]="" (click)="reset()" i18n>Reset</a>
+          | <a [routerLink]=""
+              (click)="reset()"
+              (keyup.enter)="reset()"
+              tabindex="0"
+              i18n>Clear search</a>
         </ng-container>
       </p>
     </div>
@@ -42,8 +46,7 @@
         </app-timeline-item>
       </ng-container>
     </app-timeline>
-    <div class="content-block__actions"
-         *ngIf="filteredRuns.length > 10 && !showAll" >
+    <div class="content-block__actions" *ngIf="filteredRuns.length > 10 && !showAll">
       <a mat-raised-button color="accent" (click)="showAll = true" i18n>Show More</a>
     </div>
   </div>
