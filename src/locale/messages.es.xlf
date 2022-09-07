@@ -11164,6 +11164,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
         <target state="translated">Mostrar/ocultar trabajo de estudiantes para este paso</target>
       </trans-unit>
       <trans-unit id="de94081f843943ea7aadc7a757aedafb56972bcf" datatype="html">
@@ -11192,6 +11196,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
           <context context-type="linenumber">68</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
         <target state="translated">No asignado</target>
       </trans-unit>
       <trans-unit id="1161299114153631702" datatype="html">
@@ -11204,6 +11212,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
           <context context-type="linenumber">73</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
         <target state="translated">Completado</target>
       </trans-unit>
       <trans-unit id="5725893165169390019" datatype="html">
@@ -11215,6 +11227,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
           <context context-type="linenumber">80</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <target state="translated">Parcialmente completo</target>
       </trans-unit>
@@ -11236,6 +11252,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
           <context context-type="linenumber">85</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
         <target state="translated">No hay trabajo</target>
       </trans-unit>
       <trans-unit id="7564665875993875304" datatype="html">
@@ -11244,6 +11264,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
           <context context-type="linenumber">75</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
         <target state="translated">Visitado</target>
       </trans-unit>
       <trans-unit id="6699405178343319429" datatype="html">
@@ -11251,6 +11275,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
           <context context-type="linenumber">87</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
+          <context context-type="linenumber">82</context>
         </context-group>
         <target state="translated">No visitado</target>
       </trans-unit>
