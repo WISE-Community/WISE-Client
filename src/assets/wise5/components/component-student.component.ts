@@ -322,13 +322,17 @@ export abstract class ComponentStudent {
         this.nodeId,
         this.componentId
       );
-      if (this.NodeService.isWorkSubmitted(componentStates)) {
+      if (this.hasAnySubmissions(componentStates)) {
         this.isDisabled = true;
       }
     }
   }
 
-  isLockAfterSubmit(): boolean {
+  private hasAnySubmissions(componentStates: any): boolean {
+    return componentStates.some((componentState) => componentState.isSubmit);
+  }
+
+  private isLockAfterSubmit(): boolean {
     return this.componentContent.lockAfterSubmit;
   }
 
