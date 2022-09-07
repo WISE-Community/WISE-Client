@@ -276,10 +276,7 @@ export class TableStudent extends ComponentStudent {
   handleStudentWorkSavedToServer(componentState: any): void {
     if (this.isForThisComponent(componentState)) {
       this.isDirty = false;
-      this.StudentDataService.broadcastComponentDirty({
-        componentId: this.componentId,
-        isDirty: false
-      });
+      this.emitComponentDirty(false);
       this.latestComponentState = componentState;
     }
   }

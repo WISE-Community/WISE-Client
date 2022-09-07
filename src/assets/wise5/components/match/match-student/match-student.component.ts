@@ -236,10 +236,7 @@ export class MatchStudent extends ComponentStudent {
     }
   }
 
-  setGeneralComponentStatus(
-    isCorrect: boolean,
-    isSubmitDirty: boolean
-  ): void {
+  setGeneralComponentStatus(isCorrect: boolean, isSubmitDirty: boolean): void {
     this.isCorrect = isCorrect;
     this.setIsSubmitDirty(isSubmitDirty);
   }
@@ -283,10 +280,7 @@ export class MatchStudent extends ComponentStudent {
 
   setIsSubmitDirty(isSubmitDirty: boolean): void {
     this.isSubmitDirty = isSubmitDirty;
-    this.StudentDataService.broadcastComponentSubmitDirty({
-      componentId: this.componentId,
-      isDirty: isSubmitDirty
-    });
+    this.emitComponentSubmitDirty(isSubmitDirty);
   }
 
   getBucketIds(): string[] {
