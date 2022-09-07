@@ -73,46 +73,39 @@ export class StudentGradingToolsComponent implements OnInit {
 
   setNextAndPrev(): void {
     const currentWorkgroupId = this.workgroupId;
-    this.prevId = this.getPrevId(currentWorkgroupId);
-    this.nextId = this.getNextId(currentWorkgroupId);
+    this.prevId = this.getPreviousWorkgroupId(currentWorkgroupId);
+    this.nextId = this.getNextWorkgroupId(currentWorkgroupId);
   }
 
-  getPrevId(id: number): number {
-    let prevId = null;
-    for (let i = 0; i < this.workgroups.length; i++) {
-      const workgroupId = this.workgroups[i].workgroupId;
-      if (workgroupId === id) {
-        if (i > 0) {
-          const prevWorkgroup = this.workgroups[i - 1];
-          if (prevWorkgroup.visible) {
-            prevId = prevWorkgroup.workgroupId;
-          } else {
-            prevId = this.getPrevId(prevWorkgroup.workgroupId);
-          }
-        }
-        break;
+  getPreviousWorkgroupId(workgroupId: number): number {
+    const indexOfWorkgroupId = this.getIndexOfWorkgroupId(workgroupId);
+    for (let i = indexOfWorkgroupId - 1; i >= 0; i--) {
+      const prevWorkgroup = this.workgroups[i];
+      if (prevWorkgroup.visible) {
+        return prevWorkgroup.workgroupId;
       }
     }
-    return prevId;
+    return null;
   }
 
-  getNextId(id: number): number {
-    let nextId = null;
-    for (let i = 0; i < this.workgroups.length; i++) {
-      const workgroupId = this.workgroups[i].workgroupId;
-      if (workgroupId === id) {
-        if (i < this.workgroups.length - 1) {
-          const nextWorkgroup = this.workgroups[i + 1];
-          if (nextWorkgroup.visible) {
-            nextId = nextWorkgroup.workgroupId;
-          } else {
-            nextId = this.getNextId(nextWorkgroup.workgroupId);
-          }
-        }
-        break;
+  getNextWorkgroupId(workgroupId: number): number {
+    const indexOfWorkgroupId = this.getIndexOfWorkgroupId(workgroupId);
+    for (let i = indexOfWorkgroupId + 1; i < this.workgroups.length; i++) {
+      const nextWorkgroup = this.workgroups[i];
+      if (nextWorkgroup.visible) {
+        return nextWorkgroup.workgroupId;
       }
     }
-    return nextId;
+    return null;
+  }
+
+  getIndexOfWorkgroupId(workgroupId: number): number {
+    for (let i = 0; i < this.workgroups.length; i++) {
+      if (this.workgroups[i].workgroupId === workgroupId) {
+        return i;
+      }
+    }
+    return null;
   }
 
   goToPrevTeam(): void {
