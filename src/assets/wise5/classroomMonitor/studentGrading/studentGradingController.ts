@@ -525,7 +525,7 @@ class StudentGradingController {
     this.isExpandAll = false;
   }
 
-  onUpdateExpand(nodeId, value) {
+  onUpdateExpand({ nodeId, value }) {
     this.nodeVisibilityById[nodeId] = value;
   }
 
