@@ -113,13 +113,19 @@ export class LoginHomeComponent implements OnInit {
   getRedirectUrl(social: string): string {
     let redirectUrl = '';
     if (social === 'google') {
-      redirectUrl = `${this.configService.getContextPath()}/api/google-login`;
+      redirectUrl = `${this.configService.getContextPath()}/api/google-login?redirectUrl=${this.userService.getRedirectUrl()}`;
     } else {
       redirectUrl = this.userService.getRedirectUrl();
     }
     if (this.accessCode !== '') {
-      redirectUrl = `${redirectUrl}?accessCode=${this.accessCode}`;
+      redirectUrl = this.appendAccessCodeParameter(redirectUrl);
     }
     return redirectUrl;
+  }
+
+  private appendAccessCodeParameter(url: string): string {
+    return url.includes('?')
+      ? `${url}&accessCode=${this.accessCode}`
+      : `${url}?accessCode=${this.accessCode}`;
   }
 }
