@@ -1,10 +1,10 @@
 'use strict';
 
-import StudentGradingTools from './studentGradingTools/studentGradingTools';
 import * as angular from 'angular';
 import { StepInfoComponent } from '../../../../../app/classroom-monitor/step-info/step-info.component';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { StepItemComponent } from './step-item/step-item.component';
+import { StudentGradingToolsComponent } from './student-grading-tools/student-grading-tools.component';
 
 const StudentGrading = angular
   .module('studentGrading', [])
@@ -16,6 +16,9 @@ const StudentGrading = angular
     'stepItem',
     downgradeComponent({ component: StepItemComponent }) as angular.IDirectiveFactory
   )
-  .component('studentGradingTools', StudentGradingTools);
+  .directive(
+    'studentGradingTools',
+    downgradeComponent({ component: StudentGradingToolsComponent }) as angular.IDirectiveFactory
+  );
 
 export default StudentGrading;

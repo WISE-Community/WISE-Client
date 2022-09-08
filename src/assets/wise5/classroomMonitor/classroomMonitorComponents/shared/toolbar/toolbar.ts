@@ -36,7 +36,7 @@ const Toolbar = {
                 </md-button>
                 <span class="toolbar__title" ng-if="$ctrl.showTitle">{{ $ctrl.viewName }}</span>
                 <step-tools ng-if="$ctrl.showStepTools" [only-show-steps-with-work]="true"></step-tools>
-                <student-grading-tools ng-if="$ctrl.showTeamTools" workgroup-id="$ctrl.workgroupId"></student-grading-tools>
+                <student-grading-tools ng-if="$ctrl.showTeamTools" [workgroup-id]="$ctrl.workgroupId"></student-grading-tools>
                 <span flex></span>
                 <select-period ng-if="$ctrl.showPeriodSelect"></select-period>
             </div>

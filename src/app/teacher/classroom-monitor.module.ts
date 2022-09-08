@@ -47,6 +47,7 @@ import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomM
 import { ProjectProgressComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
 import { PauseScreensMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component';
 import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component';
+import { StudentGradingToolsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroom
     StatusIconComponent,
     StepInfoComponent,
     StepItemComponent,
+    StudentGradingToolsComponent,
     TeacherSummaryDisplay,
     ViewComponentRevisionsComponent,
     WorkgroupComponentGradingComponent,
