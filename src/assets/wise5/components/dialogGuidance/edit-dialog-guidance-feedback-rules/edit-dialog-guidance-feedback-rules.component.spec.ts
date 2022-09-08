@@ -4,14 +4,21 @@ import { EditDialogGuidanceFeedbackRulesComponent } from './edit-dialog-guidance
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
 import { FeedbackRule } from '../FeedbackRule';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogGuidanceFeedbackRuleHelpComponent } from '../dialog-guidance-feedback-rule-help/dialog-guidance-feedback-rule-help.component';
 
 class MockTeacherProjectService {
   nodeChanged() {}
 }
 
+class MockMatDialog {
+  open() {}
+}
+
 let component: EditDialogGuidanceFeedbackRulesComponent;
 const feedbackString1: string = 'you hit idea1';
 const feedbackString2: string = 'you hit idea2';
+let dialogOpenSpy: jasmine.Spy;
 let nodeChangedSpy: jasmine.Spy;
 
 describe('EditDialogGuidanceFeedbackRulesComponent', () => {
@@ -22,6 +29,7 @@ describe('EditDialogGuidanceFeedbackRulesComponent', () => {
       imports: [],
       declarations: [EditDialogGuidanceFeedbackRulesComponent],
       providers: [
+        { provide: MatDialog, useClass: MockMatDialog },
         { provide: TeacherProjectService, useClass: MockTeacherProjectService },
         UtilService
       ],
@@ -34,6 +42,7 @@ describe('EditDialogGuidanceFeedbackRulesComponent', () => {
       new FeedbackRule({ id: '1111111111', expression: 'idea1', feedback: [feedbackString1] }),
       new FeedbackRule({ id: '2222222222', expression: 'idea2', feedback: [feedbackString2] })
     ];
+    dialogOpenSpy = spyOn(TestBed.inject(MatDialog), 'open');
     nodeChangedSpy = spyOn(TestBed.inject(TeacherProjectService), 'nodeChanged');
     fixture.detectChanges();
   });
@@ -44,6 +53,7 @@ describe('EditDialogGuidanceFeedbackRulesComponent', () => {
   moveDown();
   addNewFeedbackToRule();
   deleteFeedbackInRule();
+  showHelp();
 });
 
 function addNewRule() {
@@ -143,6 +153,15 @@ function deleteFeedbackInRule() {
       });
       component.deleteFeedbackInRule(feedbackRule, 1);
       expect(feedbackRule.feedback).toEqual(['Hello']);
+    });
+  });
+}
+
+function showHelp() {
+  describe('showHelp()', () => {
+    it('should show DialogGuidanceFeedbackRuleHelpComponent in a dialog', () => {
+      component.showHelp();
+      expect(dialogOpenSpy).toHaveBeenCalledOnceWith(DialogGuidanceFeedbackRuleHelpComponent);
     });
   });
 }

@@ -5,6 +5,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
 import { FeedbackRule } from '../FeedbackRule';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogGuidanceFeedbackRuleHelpComponent } from '../dialog-guidance-feedback-rule-help/dialog-guidance-feedback-rule-help.component';
 
 @Component({
   selector: 'edit-dialog-guidance-feedback-rules',
@@ -17,12 +19,16 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
   @Input() version: number;
 
-  constructor(private ProjectService: TeacherProjectService, private utilService: UtilService) {}
+  constructor(
+    private dialog: MatDialog,
+    private projectService: TeacherProjectService,
+    private utilService: UtilService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
       this.inputChanged.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.ProjectService.nodeChanged();
+        this.projectService.nodeChanged();
       })
     );
   }
@@ -45,7 +51,7 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
 
   moveRuleItem(previousIndex: number, currentIndex: number): void {
     moveItemInArray(this.feedbackRules, previousIndex, currentIndex);
-    this.ProjectService.nodeChanged();
+    this.projectService.nodeChanged();
   }
 
   addNewRule(position: string): void {
@@ -55,7 +61,7 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
     } else {
       this.feedbackRules.push(newFeedbackRule);
     }
-    this.ProjectService.nodeChanged();
+    this.projectService.nodeChanged();
   }
 
   private createNewFeedbackRule(): any {
@@ -68,24 +74,28 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
 
   addNewFeedbackToRule(rule: FeedbackRule): void {
     (rule.feedback as string[]).push('');
-    this.ProjectService.nodeChanged();
+    this.projectService.nodeChanged();
   }
 
   deleteFeedbackInRule(rule: FeedbackRule, feedbackIndex: number): void {
     if (confirm($localize`Are you sure you want to delete this feedback?`)) {
       (rule.feedback as string[]).splice(feedbackIndex, 1);
-      this.ProjectService.nodeChanged();
+      this.projectService.nodeChanged();
     }
   }
 
   deleteRule(ruleIndex: number): void {
     if (confirm($localize`Are you sure you want to delete this feedback rule?`)) {
       this.feedbackRules.splice(ruleIndex, 1);
-      this.ProjectService.nodeChanged();
+      this.projectService.nodeChanged();
     }
   }
 
   customTrackBy(index: number): number {
     return index;
+  }
+
+  showHelp(): void {
+    this.dialog.open(DialogGuidanceFeedbackRuleHelpComponent);
   }
 }
