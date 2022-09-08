@@ -124,8 +124,6 @@ export class LoginHomeComponent implements OnInit {
   }
 
   private appendAccessCodeParameter(url: string): string {
-    return url.includes('?')
-      ? `${url}&accessCode=${this.accessCode}`
-      : `${url}?accessCode=${this.accessCode}`;
+    return `${url}${url.includes('?') ? '&' : '?'}accessCode=${this.accessCode}`;
   }
 }
