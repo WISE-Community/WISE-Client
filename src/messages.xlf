@@ -12247,8 +12247,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">78,83</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3d77040007fc8a27e9ecbc997c10d29839ff3959" datatype="html">
-        <source> Evaluates to true if a term on either side of this operator evaluates to true<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if either idea 1 or 2 was found Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found, or idea 3 was found </source>
+      <trans-unit id="9b6d3cce00caf762fd168120ed200945252cb39b" datatype="html">
+        <source> Evaluates to true if a term on either side of this operator evaluates to true<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if either idea 1 or 2 was found<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found, or idea 3 was found </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-feedback-rule-help/dialog-guidance-feedback-rule-help.component.html</context>
           <context context-type="linenumber">87,92</context>
