@@ -1,14 +1,17 @@
-<button mat-button
-    class='mat-raised-button mat-primary'
-    (click)='goToPrevNode()'
-    [disabled]="!hasPrevNode"
-    i18n>
-  Previous step
-</button>
-<button mat-button
-    class='mat-raised-button mat-primary'
-    (click)='goToNextNode()'
-    [disabled]="!hasNextNode"
-    i18n>
-  Next step
-</button>
+<div class="l-constrained" fxLayoutAlign="start center" fxLayoutGap="4px">
+  <button *ngIf="hasPrevNode"
+      mat-button
+      class='mat-raised-button mat-primary'
+      (click)='goToPrevNode()'
+      i18n>
+    Previous step
+  </button>
+  <span fxFlex></span>
+  <button *ngIf="hasNextNode"
+      mat-button
+      class='mat-raised-button mat-primary'
+      (click)='goToNextNode()'
+      i18n>
+    Next step
+  </button>
+</div>

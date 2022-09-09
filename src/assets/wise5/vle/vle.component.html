@@ -32,9 +32,11 @@
   <div id="content"
       class="vle-content tabbed"
       [ngClass]="{'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node'}">
-    <run-ended-and-locked-message *ngIf="runEndedAndLocked"></run-ended-and-locked-message>
     <group-tabs></group-tabs>
-    <node *ngIf="layoutState === 'node'"></node>
-    <node-navigation></node-navigation>
+    <div class="tab-content">
+      <run-ended-and-locked-message *ngIf="runEndedAndLocked"></run-ended-and-locked-message>
+      <node *ngIf="layoutState === 'node'"></node>
+      <node-navigation></node-navigation>
+    </div>
   </div>
 </ng-template>

@@ -15901,20 +15901,18 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ac1099dc4e1282de264387bf56018caf41f2b94b" datatype="html">
-        <source> Previous step
-</source>
+      <trans-unit id="e0a9d4bf9fa677b18e0c334249274957d3ee7fab" datatype="html">
+        <source> Previous step </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">5,7</context>
+          <context context-type="linenumber">6,8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="9354ff225c42cf816b83f207e097c6adc33ba452" datatype="html">
-        <source> Next step
-</source>
+      <trans-unit id="96247ff61a36a0a5c6d3d28c5e0df0391df45a0e" datatype="html">
+        <source> Next step </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">12,14</context>
+          <context context-type="linenumber">14,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="866753876041645935" datatype="html">
