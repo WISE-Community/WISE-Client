@@ -5,6 +5,7 @@ import { StepInfoComponent } from '../../../../../app/classroom-monitor/step-inf
 import { downgradeComponent } from '@angular/upgrade/static';
 import { StepItemComponent } from './step-item/step-item.component';
 import { StudentGradingToolsComponent } from './student-grading-tools/student-grading-tools.component';
+import { StepToolsComponent } from '../../../common/stepTools/step-tools.component';
 
 const StudentGrading = angular
   .module('studentGrading', [])
@@ -15,6 +16,10 @@ const StudentGrading = angular
   .directive(
     'stepItem',
     downgradeComponent({ component: StepItemComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'stepTools',
+    downgradeComponent({ component: StepToolsComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'studentGradingTools',

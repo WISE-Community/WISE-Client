@@ -39,7 +39,7 @@ import { TeacherNodeIconComponent } from '../assets/wise5/authoringTool/teacher-
 export class EmptyComponent {}
 
 @NgModule({
-  declarations: [StepToolsComponent, TeacherNodeIconComponent],
+  declarations: [TeacherNodeIconComponent],
   imports: [
     StudentTeacherCommonModule,
     AuthoringToolModule,
