@@ -7776,7 +7776,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="needs-translation">Clear search</target>
+        <target state="translated">Limpiar búsqueda</target>
       </trans-unit>
       <trans-unit id="13c602751734f72430891c9781167bf53c612481" datatype="html">
         <source>Team Sign In</source>
@@ -9016,7 +9016,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <target state="needs-translation">Clear filters</target>
+        <target state="translated">Limpiar filtros</target>
       </trans-unit>
       <trans-unit id="1775311053456611668" datatype="html">
         <source>All Periods</source>
@@ -11176,7 +11176,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <target state="needs-translation">Step <x id="INTERPOLATION" equiv-text="{{getNodePosition(firstNodeId)}}"/></target>
+        <target state="translated">Paso <x id="INTERPOLATION" equiv-text="{{getNodePosition(firstNodeId)}}"/></target>
       </trans-unit>
       <trans-unit id="429aa2f6b04bbf98c741bb68f18baf78a1911d78" datatype="html">
         <source>Step <x id="INTERPOLATION" equiv-text="{{getNodePosition(lastNodeId)}}"/></source>
@@ -11184,7 +11184,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.html</context>
           <context context-type="linenumber">57</context>
         </context-group>
-        <target state="needs-translation">Step <x id="INTERPOLATION" equiv-text="{{getNodePosition(lastNodeId)}}"/></target>
+        <target state="translated">Paso <x id="INTERPOLATION" equiv-text="{{getNodePosition(lastNodeId)}}"/></target>
       </trans-unit>
       <trans-unit id="314850458480650903" datatype="html">
         <source>Not Assigned</source>
@@ -11240,7 +11240,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
           <context context-type="linenumber">146</context>
         </context-group>
-        <target state="needs-translation">Not Completed</target>
+        <target state="translated">Incompleto</target>
       </trans-unit>
       <trans-unit id="2981239280931729191" datatype="html">
         <source>No Work</source>
@@ -11296,7 +11296,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Show/hide team's notebook contents</target>
+        <target state="translated">Mostrar/ocultar contenido del cuaderno de los equipos</target>
       </trans-unit>
       <trans-unit id="ee8f01f880aa93450e427573939a31763f76d1a8" datatype="html">
         <source> Latest Work: <x id="INTERPOLATION" equiv-text="{{ workgroup.report.serverSaveTime | date: &apos;mediumDate&apos; }}"/> </source>
@@ -11304,7 +11304,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component.html</context>
           <context context-type="linenumber">25,27</context>
         </context-group>
-        <target state="needs-translation"> Latest Work: <x id="INTERPOLATION" equiv-text="{{ workgroup.report.serverSaveTime | date: 'mediumDate' }}"/> </target>
+        <target state="translated"> Último trabajo: <x id="INTERPOLATION" equiv-text="{{ workgroup.report.serverSaveTime | date: 'mediumDate' }}"/> </target>
       </trans-unit>
       <trans-unit id="e37a67ebb62ec62b03e33b8e2fd9ad350be49112" datatype="html">
         <source> No Work </source>
@@ -11312,7 +11312,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component.html</context>
           <context context-type="linenumber">28,30</context>
         </context-group>
-        <target state="needs-translation"> No Work </target>
+        <target state="translated"> Sin trabajo </target>
       </trans-unit>
       <trans-unit id="fcde58253a4cfd52c228eebdae74e1be7a1ab714" datatype="html">
         <source>Notes</source>
@@ -11328,7 +11328,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Pause Student Screens</target>
+        <target state="translated">Pausar pantalla de estudiantes</target>
       </trans-unit>
       <trans-unit id="a552ad46813fe1b88086583d3397a241d41c1b2e" datatype="html">
         <source>Pause student screens (Period: All Periods)</source>
@@ -11336,7 +11336,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Pause student screens (Period: All Periods)</target>
+        <target state="translated">Pausar pantalla de estudiantes (Período: todos)</target>
       </trans-unit>
       <trans-unit id="cccee651739a1dbd8f7eb8dcd379e306b6b39aa0" datatype="html">
         <source> All Periods </source>
@@ -11344,7 +11344,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
           <context context-type="linenumber">18,20</context>
         </context-group>
-        <target state="needs-translation"> All Periods </target>
+        <target state="translated"> Todos los períodos </target>
       </trans-unit>
       <trans-unit id="2d1736cd8600b7c4b498f776a6c5a08b6e6a3d57" datatype="html">
         <source>Pause student screens (Period: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/>)</source>
@@ -11352,7 +11352,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">Pause student screens (Period: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/>)</target>
+        <target state="translated">Pausar pantalla de estudiantes (Período: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/>)</target>
       </trans-unit>
       <trans-unit id="f0f3be7dbd4e1b480f15f6ac04b4898a19bf57fe" datatype="html">
         <source> Period: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/> </source>
@@ -11360,7 +11360,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
           <context context-type="linenumber">28,30</context>
         </context-group>
-        <target state="needs-translation"> Period: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/> </target>
+        <target state="translated"> Período: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/> </target>
       </trans-unit>
       <trans-unit id="c151982595278a219e1f55d5e49c46c39ad8c598" datatype="html">
         <source>Groupings for <x id="INTERPOLATION" equiv-text="{{ peerGroupingName }}"/></source>
@@ -11528,7 +11528,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Previous Team</target>
+        <target state="translated">Equipo anterior</target>
       </trans-unit>
       <trans-unit id="a583a8310a17f5d7048ddca86ed44d4e512d6cb2" datatype="html">
         <source>Next Team</source>
@@ -11540,7 +11540,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <target state="needs-translation">Next Team</target>
+        <target state="translated">Próximo equipo</target>
       </trans-unit>
       <trans-unit id="57acb9f2d8deff630650f87fc5cf6f42951481e4" datatype="html">
         <source>Completed <x id="INTERPOLATION" equiv-text="{{ completed }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ total }}"/> steps with work</source>
@@ -11548,7 +11548,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentProgress/project-progress/project-progress.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Completed <x id="INTERPOLATION" equiv-text="{{ completed }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ total }}"/> steps with work</target>
+        <target state="translated">Completados <x id="INTERPOLATION" equiv-text="{{ completed }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ total }}"/> pasos con trabajo</target>
       </trans-unit>
       <trans-unit id="6c372513ec53879a9eeffbd96670484f6cc52269" datatype="html">
         <source>Revisions for <x id="INTERPOLATION" equiv-text="{{usernames}}"/></source>
