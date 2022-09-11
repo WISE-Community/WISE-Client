@@ -22,7 +22,6 @@ class ClassroomMonitorController {
   menuOpen: boolean = false;
   notebookConfig: any;
   notifications: any;
-  numberProject: boolean = true;
   projectId: number;
   projectTitle: string;
   reportEnabled: boolean = false;

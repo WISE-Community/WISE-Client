@@ -5,7 +5,6 @@ import MainMenu from './mainMenu/mainMenu';
 import { NodeInfoComponent } from './node-info/node-info.component';
 import NotificationsMenu from './notificationsMenu/notificationsMenu';
 import { StatusIconComponent } from '../../../../../app/classroom-monitor/status-icon/status-icon.component';
-import Toolbar from './toolbar/toolbar';
 import TopBar from './topBar/topBar';
 import { WorkgroupNodeStatusComponent } from '../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { WorkgroupSelectAutocompleteComponent } from '../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
@@ -15,6 +14,7 @@ import * as angular from 'angular';
 import { WorkgroupNodeScoreComponent } from './workgroupNodeScore/workgroup-node-score.component';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { PauseScreensMenuComponent } from '../pause-screens-menu/pause-screens-menu.component';
+import { ToolBarComponent } from './tool-bar/tool-bar.component';
 
 const Shared = angular
   .module('cmShared', [])
@@ -40,7 +40,10 @@ const Shared = angular
     'statusIcon',
     downgradeComponent({ component: StatusIconComponent }) as angular.IDirectiveFactory
   )
-  .component('cmToolbar', Toolbar)
+  .directive(
+    'cmToolbar',
+    downgradeComponent({ component: ToolBarComponent }) as angular.IDirectiveFactory
+  )
   .component('cmTopBar', TopBar)
   .directive(
     'workgroupNodeScore',

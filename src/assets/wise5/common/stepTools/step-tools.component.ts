@@ -8,13 +8,14 @@ import { Node } from '../Node';
 import { ConfigService } from '../../services/configService';
 
 @Component({
+  selector: 'step-tools',
   styleUrls: ['step-tools.component.scss'],
   templateUrl: 'step-tools.component.html',
   encapsulation: ViewEncapsulation.None
 })
 export class StepToolsComponent {
   @Input()
-  onlyShowStepsWithWork: boolean = false;
+  showOnlyStepsWithWork: boolean = false;
 
   icons: any;
   nextId: any;
@@ -58,7 +59,7 @@ export class StepToolsComponent {
 
   calculateNodeIds() {
     this.nodeIds = Object.keys(this.ProjectService.idToOrder);
-    if (this.onlyShowStepsWithWork) {
+    if (this.showOnlyStepsWithWork) {
       this.nodeIds = this.nodeIds.filter((nodeId) => {
         return this.isGroupNode(nodeId) || this.ProjectService.nodeHasWork(nodeId);
       });
