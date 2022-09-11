@@ -6,7 +6,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./tool-bar.component.scss']
 })
 export class ToolBarComponent implements OnInit {
-  @Input() numberProject: number;
   @Output() onMenuToggle: EventEmitter<any> = new EventEmitter<any>();
   @Input() showPeriodSelect: boolean;
   @Input() showStepTools: boolean;
