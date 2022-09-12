@@ -24,20 +24,15 @@ step-tools {
 }
 
 .vle-content {
-  top: 0;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   overflow: auto;
-  padding: 0;
-
-  @media (min-width: breakpoint('sm.min')) {
-    padding: 32px 16px;
-  }
 }
 
 .node-view {
-  margin-top: $toolbar-height + $secondary-toolbar-height;
+  top: $toolbar-height + $secondary-toolbar-height;
 
   &.tabbed {
     position: absolute;
@@ -64,26 +59,30 @@ group-tabs {
   bottom: 0;
   overflow-y: auto;
   padding-bottom: 104px;
+}
+
+node, navigation {
+  display: block;
 
   @media (min-width: breakpoint('sm.min')) {
-    padding: 32px 32px 104px;
+    padding: 32px 16px;
   }
+}
+
+.node-tabbed {
+  padding-bottom: 16px;
 }
 
 node-navigation {
   display: block;
-  margin-top: 16px;
-  margin-left: 16px;
-  margin-right: 16px;
+}
 
-  @media (min-width: breakpoint('sm.min')) {
-    margin-left: 0;
-    margin-right: 0;
-  }
+.node-nav {
+  padding: 0 16px;
 }
 
 .nav-view {
-  margin-top: $toolbar-height;
+  top: $toolbar-height;
 }
 
 notebook-launcher {

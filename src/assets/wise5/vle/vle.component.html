@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/angular-material.css" />
 <link rel="stylesheet" href="/assets/wise5/themes/default/style/vle.css" />
 <style ng-bind-html="projectStyle"></style>
-<mat-drawer-container [hasBackdrop]="false" *ngIf="initialized" class="top">
+<mat-drawer-container [hasBackdrop]="false" *ngIf="initialized">
   <mat-drawer #drawer mode="over" position="end" (keydown.escape)="closeNotes()">
     <notebook-notes [config]="notebookConfig"></notebook-notes>
   </mat-drawer>
@@ -23,8 +23,8 @@
       class="vle-content"
       [ngClass]="{'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node'}">
     <run-ended-and-locked-message *ngIf="runEndedAndLocked"></run-ended-and-locked-message>
-    <node *ngIf="layoutState === 'node'"></node>
-    <navigation *ngIf="layoutState === 'nav'"></navigation>
+    <node *ngIf="layoutState === 'node'" class="top"></node>
+    <navigation *ngIf="layoutState === 'nav'" class="top"></navigation>
   </div>
 </ng-template>
 
@@ -35,8 +35,10 @@
     <group-tabs></group-tabs>
     <div class="tab-content">
       <run-ended-and-locked-message *ngIf="runEndedAndLocked"></run-ended-and-locked-message>
-      <node *ngIf="layoutState === 'node'"></node>
-      <node-navigation></node-navigation>
+      <node *ngIf="layoutState === 'node'" class="node-tabbed top"></node>
+      <div class="node-nav">
+        <node-navigation class="l-constrained"></node-navigation>
+      </div>
     </div>
   </div>
 </ng-template>

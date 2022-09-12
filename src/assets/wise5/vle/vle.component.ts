@@ -193,10 +193,11 @@ export class VLEComponent implements AfterViewInit {
             eventName,
             eventData
           );
+        } else {
+          this.scrollToTop();
         }
         this.router.navigate([currentNodeId], { relativeTo: this.route.parent });
         this.setLayoutState();
-        this.scrollToTop();
       })
     );
   }
