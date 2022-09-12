@@ -28,5 +28,9 @@
       flex role="main">
     <div ui-view></div>
   </md-content>
-  <side-menu ng-if="$ctrl.showToolbar" state="$ctrl.$state" views="$ctrl.views"></side-menu>
+  <side-menu ng-if="$ctrl.showToolbar"
+      [state]="$ctrl.$state"
+      [views]="$ctrl.views"
+      (go-to-view)="$ctrl.goToView($event)">
+  </side-menu>
 </div>
