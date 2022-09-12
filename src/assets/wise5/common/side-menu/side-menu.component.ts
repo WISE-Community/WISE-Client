@@ -7,7 +7,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SideMenuComponent implements OnInit {
   @Output() goToView: EventEmitter<any> = new EventEmitter<any>();
-  sortedViews: any[] = [];
   @Input() state: any;
   @Input() views: any;
 
