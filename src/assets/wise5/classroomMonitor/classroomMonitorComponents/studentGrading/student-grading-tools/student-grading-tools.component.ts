@@ -5,6 +5,11 @@ import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { UtilService } from '../../../../services/utilService';
 
+class Workgroup {
+  periodId: number;
+  workgroupId: number;
+}
+
 @Component({
   selector: 'student-grading-tools',
   templateUrl: './student-grading-tools.component.html'
@@ -14,15 +19,15 @@ export class StudentGradingToolsComponent implements OnInit {
   currentPeriodChangedSubscription: Subscription;
   icons: any;
   is_rtl: boolean;
-  nextId: any;
+  nextId: number;
   periodId: number;
-  prevId: any;
+  prevId: number;
   @Input() workgroupId: number;
-  workgroups: any;
+  workgroups: Workgroup[];
 
   constructor(
     private configService: ConfigService,
-    private teacherDataService: TeacherDataService,
+    private dataService: TeacherDataService,
     private upgrade: UpgradeModule,
     private utilService: UtilService
   ) {}
@@ -33,12 +38,9 @@ export class StudentGradingToolsComponent implements OnInit {
     if (this.is_rtl) {
       this.icons = { prev: 'chevron_right', next: 'chevron_left' };
     }
-    this.currentPeriodChangedSubscription = this.teacherDataService.currentPeriodChanged$.subscribe(
-      ({ currentPeriod }) => {
-        this.periodId = currentPeriod.periodId;
-        this.filterForPeriod();
-      }
-    );
+    this.currentPeriodChangedSubscription = this.dataService.currentPeriodChanged$.subscribe(() => {
+      this.updateModel();
+    });
   }
 
   ngOnDestroy(): void {
@@ -46,66 +48,45 @@ export class StudentGradingToolsComponent implements OnInit {
   }
 
   ngOnChanges(): void {
+    this.updateModel();
+  }
+
+  private updateModel(): void {
     this.avatarColor = this.configService.getAvatarColorForWorkgroupId(this.workgroupId);
-    this.periodId = this.teacherDataService.getCurrentPeriod().periodId;
-    const workgroups = this.utilService.makeCopyOfJSONObject(
-      this.configService.getClassmateUserInfos()
-    );
-    this.workgroups = workgroups.sort(this.sortByWorkgroupId);
-    this.filterForPeriod();
-  }
-
-  sortByWorkgroupId(a: any, b: any): number {
-    return a.workgroupId - b.workgroupId;
-  }
-
-  filterForPeriod(): void {
-    for (const workgroup of this.workgroups) {
-      const periodId = workgroup.periodId;
-      if (this.periodId === -1 || periodId === this.periodId) {
-        workgroup.visible = true;
-      } else {
-        workgroup.visible = false;
-      }
-    }
+    this.periodId = this.dataService.getCurrentPeriod().periodId;
+    this.filterWorkgroupsForPeriod();
+    this.workgroups = this.workgroups.sort(this.sortByWorkgroupId);
     this.setNextAndPrev();
   }
 
-  setNextAndPrev(): void {
-    const currentWorkgroupId = this.workgroupId;
-    this.prevId = this.getPreviousWorkgroupId(currentWorkgroupId);
-    this.nextId = this.getNextWorkgroupId(currentWorkgroupId);
+  private sortByWorkgroupId(a: Workgroup, b: Workgroup): number {
+    return a.workgroupId - b.workgroupId;
   }
 
-  getPreviousWorkgroupId(workgroupId: number): number {
-    const indexOfWorkgroupId = this.getIndexOfWorkgroupId(workgroupId);
-    for (let i = indexOfWorkgroupId - 1; i >= 0; i--) {
-      const prevWorkgroup = this.workgroups[i];
-      if (prevWorkgroup.visible) {
-        return prevWorkgroup.workgroupId;
-      }
-    }
-    return null;
+  private filterWorkgroupsForPeriod(): void {
+    this.workgroups = this.utilService
+      .makeCopyOfJSONObject(this.configService.getClassmateUserInfos())
+      .filter((workgroup) => this.periodId === -1 || workgroup.periodId === this.periodId);
   }
 
-  getNextWorkgroupId(workgroupId: number): number {
-    const indexOfWorkgroupId = this.getIndexOfWorkgroupId(workgroupId);
-    for (let i = indexOfWorkgroupId + 1; i < this.workgroups.length; i++) {
-      const nextWorkgroup = this.workgroups[i];
-      if (nextWorkgroup.visible) {
-        return nextWorkgroup.workgroupId;
-      }
-    }
-    return null;
+  private setNextAndPrev(): void {
+    const currentWorkgroupIndex = this.workgroups.findIndex(
+      (workgroup) => workgroup.workgroupId === this.workgroupId
+    );
+    this.prevId = this.getPreviousWorkgroupId(currentWorkgroupIndex);
+    this.nextId = this.getNextWorkgroupId(currentWorkgroupIndex);
   }
 
-  getIndexOfWorkgroupId(workgroupId: number): number {
-    for (let i = 0; i < this.workgroups.length; i++) {
-      if (this.workgroups[i].workgroupId === workgroupId) {
-        return i;
-      }
-    }
-    return null;
+  private getPreviousWorkgroupId(currentWorkgroupIndex: number): number {
+    return currentWorkgroupIndex > 0
+      ? this.workgroups[currentWorkgroupIndex - 1].workgroupId
+      : null;
+  }
+
+  private getNextWorkgroupId(currentWorkgroupIndex: number): number {
+    return currentWorkgroupIndex < this.workgroups.length - 1
+      ? this.workgroups[currentWorkgroupIndex + 1].workgroupId
+      : null;
   }
 
   goToPrevTeam(): void {
