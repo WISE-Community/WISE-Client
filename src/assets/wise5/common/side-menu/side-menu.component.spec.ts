@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SideMenuComponent } from './side-menu.component';
 
 describe('SideMenuComponent', () => {
