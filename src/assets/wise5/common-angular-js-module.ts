@@ -39,7 +39,6 @@ import { StudentDataService } from './services/studentDataService';
 import { TagService } from './services/tagService';
 import { UtilService } from './services/utilService';
 import './themes/default/theme';
-import SideMenu from './common/sideMenuComponent';
 import { EditorComponent } from '@tinymce/tinymce-angular';
 import { WiseTinymceEditorComponent } from './directives/wise-tinymce-editor/wise-tinymce-editor.component';
 import { NotebookNotesComponent } from '../../app/notebook/notebook-notes/notebook-notes.component';
@@ -47,6 +46,7 @@ import { NotebookReportComponent } from '../../app/notebook/notebook-report/note
 import { NotebookReportAnnotationsComponent } from '../../app/notebook/notebook-report-annotations/notebook-report-annotations.component';
 import { ComputerAvatarService } from './services/computerAvatarService';
 import { ComponentTypeService } from './services/componentTypeService';
+import { SideMenuComponent } from './common/side-menu/side-menu.component';
 
 angular
   .module('common', [
@@ -100,7 +100,10 @@ angular
   .factory('TagService', downgradeInjectable(TagService))
   .factory('StudentDataService', downgradeInjectable(StudentDataService))
   .factory('UtilService', downgradeInjectable(UtilService))
-  .component('sideMenu', SideMenu)
+  .directive(
+    'sideMenu',
+    downgradeComponent({ component: SideMenuComponent }) as angular.IDirectiveFactory
+  )
   .filter('Filters', Filters)
   .config([
     '$httpProvider',
