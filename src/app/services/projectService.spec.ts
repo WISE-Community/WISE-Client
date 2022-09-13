@@ -2,12 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import oneBranchTwoPathsProjectJSON_import from './sampleData/curriculum/OneBranchTwoPaths.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import twoStepsProjectJSON_import from './sampleData/curriculum/TwoSteps.project.json';
-import { SessionService } from '../../assets/wise5/services/sessionService';
 import { PeerGrouping } from '../domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
@@ -18,8 +16,6 @@ const saveProjectURL = 'http://localhost:8080/wise/project/save/' + projectIdDef
 const wiseBaseURL = '/wise';
 let service: ProjectService;
 let configService: ConfigService;
-let sessionService: SessionService;
-let utilService: UtilService;
 let http: HttpTestingController;
 let demoProjectJSON: any;
 let oneBranchTwoPathsProjectJSON: any;
@@ -33,8 +29,6 @@ describe('ProjectService', () => {
     });
     http = TestBed.inject(HttpTestingController);
     configService = TestBed.inject(ConfigService);
-    sessionService = TestBed.inject(SessionService);
-    utilService = TestBed.inject(UtilService);
     service = TestBed.inject(ProjectService);
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
     oneBranchTwoPathsProjectJSON = JSON.parse(JSON.stringify(oneBranchTwoPathsProjectJSON_import));
@@ -46,8 +40,7 @@ describe('ProjectService', () => {
   shouldNotReplaceAssetPathsInHtmlComponentContent();
   shouldRetrieveProjectWhenConfigProjectURLIsValid();
   shouldNotRetrieveProjectWhenConfigProjectURLIsUndefined();
-  shouldGetDefaultThemePathWhenThemeIsNotDefinedInTheProject();
-  shouldGetProjectThemePathWhenThemeIsDefinedInTheProject();
+  shouldGetDefaultThemePath();
   shouldReturnTheStartNodeOfTheProject();
   shouldReturnTheNodeByNodeId();
   shouldReturnTheNodeTitleByNodeId();
@@ -175,23 +168,11 @@ function shouldNotRetrieveProjectWhenConfigProjectURLIsUndefined() {
   });
 }
 
-function shouldGetDefaultThemePathWhenThemeIsNotDefinedInTheProject() {
-  it('should get default theme path when theme is not defined in the project', () => {
+function shouldGetDefaultThemePath() {
+  it('should get default theme path', () => {
     spyOn(configService, 'getConfigParam').and.returnValue(wiseBaseURL);
     service.setProject(scootersProjectJSON);
     const expectedThemePath = wiseBaseURL + '/assets/wise5/themes/default';
-    const actualThemePath = service.getThemePath();
-    expect(configService.getConfigParam).toHaveBeenCalledWith('wiseBaseURL');
-    expect(actualThemePath).toEqual(expectedThemePath);
-  });
-}
-
-function shouldGetProjectThemePathWhenThemeIsDefinedInTheProject() {
-  it('should get project theme path when theme is defined in the project', () => {
-    spyOn(configService, 'getConfigParam').and.returnValue(wiseBaseURL);
-    service.setProject(demoProjectJSON);
-    const demoProjectTheme = demoProjectJSON.theme; // Demo Project has a theme defined
-    const expectedThemePath = wiseBaseURL + '/assets/wise5/themes/' + demoProjectTheme;
     const actualThemePath = service.getThemePath();
     expect(configService.getConfigParam).toHaveBeenCalledWith('wiseBaseURL');
     expect(actualThemePath).toEqual(expectedThemePath);

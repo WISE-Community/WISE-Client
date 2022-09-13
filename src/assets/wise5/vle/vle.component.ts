@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../services/configService';
@@ -18,10 +18,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './vle.component.html',
   styleUrls: ['./vle.component.scss']
 })
-export class VLEComponent implements OnInit {
-  currentNode: any;
+export class VLEComponent implements AfterViewInit {
+  @ViewChild('defaultVLETemplate') private defaultVLETemplate: TemplateRef<any>;
   @ViewChild('drawer') public drawer: any;
-  isInitialized: boolean;
+  @ViewChild('tabbedVLETemplate') private tabbedVLETemplate: TemplateRef<any>;
+
+  currentNode: any;
+  initialized: boolean;
   layoutState: string;
   notebookConfig: any;
   notesEnabled: boolean = false;
@@ -31,6 +34,7 @@ export class VLEComponent implements OnInit {
   reportFullscreen: boolean = false;
   runEndedAndLocked: boolean;
   subscriptions: Subscription = new Subscription();
+  vleTemplate: TemplateRef<any>;
 
   constructor(
     private annotationService: AnnotationService,
@@ -47,16 +51,20 @@ export class VLEComponent implements OnInit {
     private utilService: UtilService
   ) {}
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
     this.initializeVLEService.initialized$.subscribe((initialized: boolean) => {
       if (initialized) {
         this.initRestOfVLE();
-        this.isInitialized = true;
+        this.initialized = true;
       }
     });
   }
 
   initRestOfVLE() {
+    this.vleTemplate =
+      this.projectService.project.theme === 'tab'
+        ? this.tabbedVLETemplate
+        : this.defaultVLETemplate;
     this.projectStyle = this.projectService.getStyle();
     if (this.notebookService.isNotebookEnabled()) {
       this.notebookConfig = this.notebookService.getStudentNotebookConfig();
@@ -185,6 +193,8 @@ export class VLEComponent implements OnInit {
             eventName,
             eventData
           );
+        } else {
+          this.scrollToTop();
         }
         this.router.navigate([currentNodeId], { relativeTo: this.route.parent });
         this.setLayoutState();
@@ -257,6 +267,10 @@ export class VLEComponent implements OnInit {
       }
     }
     this.layoutState = layoutState;
+  }
+
+  private scrollToTop() {
+    document.querySelector('.top').scrollIntoView();
   }
 
   /**
