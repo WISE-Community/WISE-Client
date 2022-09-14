@@ -1,79 +1,95 @@
 <div class="l-constrained grading">
-  <div class="flex md-subhead content-head" fxLayout="row wrap"
+  <div class="content-head" fxLayout="row wrap"
        fxLayoutAlign="center center" fxLayout.gt-sm="start center">
-    <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex-xs="100" fxFlex-sm="100">
+    <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex.lt-md="100">
       <div class="accent-1" fxLayout="row" fxLayoutAlign="center center">
-        <h2 class="content-head__item">
-          {{getNodeCompletion(nodeId)}}%
-          <span class="md-subhead" i18n>Completion</span>
+        <h2 class="content-head__item" fxLayout.lt-md="column" fxLayoutGap.gt-sm="4px">
+          <span>{{getNodeCompletion(nodeId)}}%</span>
+          <span class="content-head-label" i18n>Completion</span>
         </h2>
-        <h2 class="content-head__item" *ngIf="nodeHasWork">
-          <span *ngIf="getNodeAverageScore() !== 'N/A'; then averageIsNumber; else avergeIsNa">
-          </span>
-          <ng-template #averageIsNumber>{{getNodeAverageScore() | number: '1.1'}}</ng-template>
-          <ng-template #avergeIsNa i18n>N/A</ng-template>
-          <span class="md-subhead" i18n>Mean Score</span>
+        <h2 class="content-head__item"
+            *ngIf="nodeHasWork"
+            fxLayout.lt-md="column"
+            fxLayoutGap.gt-sm="4px">
+          <ng-template #averageIsNumber>
+            <span>{{getNodeAverageScore() | number: '1.1'}}</span>
+          </ng-template>
+          <ng-template #avergeIsNa>
+            <span i18n>N/A</span>
+          </ng-template>
+          <ng-container *ngIf="getNodeAverageScore() !== 'N/A'; then averageIsNumber; else avergeIsNa">
+          </ng-container>
+          <span class="content-head-label" i18n>Mean Score</span>
         </h2>
       </div>
     </div>
     <span fxFlex></span>
-    <div class="content-head__more" fxLayout="row wrap" fxLayoutAlign="center center">
+    <div class="content-head-label"
+        fxLayout="row wrap"
+        fxLayoutAlign="center center"
+        fxLayoutGap="8px">
       <component-select
           [nodeId]="nodeId"
-          class="md-button md-no-underline"
           (modelChange)="onUpdateHiddenComponents($event)">
       </component-select>
       <button *ngIf="milestoneReport"
-          mat-button
+          mat-stroked-button
           (click)="showReport($event)"
-          class="md-raised info">
-        <mat-icon class="info">flag</mat-icon>
-        <span i18n>Report</span>
+          class="info">
+        <div fxLayoutAlign="center center" fxLayoutGap="4px">
+          <mat-icon class="info">flag</mat-icon>
+          <span i18n>Report</span>
+        </div>
       </button>
       <button *ngFor="let peerGroupingTag of peerGroupingTags"
-          mat-button
-          class="md-raised info"
+          mat-stroked-button
+          class="info"
           (click)="showPeerGroupDetails(peerGroupingTag)">
-        <mat-icon class="info">groups</mat-icon>
-        <span class="info" i18n>Peer Groups</span>
+        <div fxLayoutAlign="center center" fxLayoutGap="4px">
+          <mat-icon class="info">groups</mat-icon>
+          <span class="info" i18n>Peer Groups</span>
+        </div>
       </button>
-      <button
-          mat-button
+      <button mat-stroked-button
           (click)="showRubric($event)"
-          class="md-raised info">
-        <mat-icon class="info">info_outline</mat-icon>
-        <span *ngIf="!numRubrics" i18n>Step Info</span>
-        <span *ngIf="numRubrics" i18n>Info + Tips ({{ numRubrics }})</span>
+          class="info">
+        <div fxLayoutAlign="center center" fxLayoutGap="4px">
+          <mat-icon class="info">info_outline</mat-icon>
+          <span *ngIf="!numRubrics" i18n>Step Info</span>
+          <span *ngIf="numRubrics" i18n>Info + Tips ({{ numRubrics }})</span>
+        </div>
       </button>
     </div>
   </div>
   <mat-list class="user-list">
-    <mat-list-item class="md-whiteframe-1dp md-with-secondary list-item list-item--actions">
-      <div fxFlex.xs="100" fxFlex.sm="100">
+    <mat-list-item class="mat-elevation-z1 list-item user-list-controls">
+      <div fxFlex="100"
+          fxLayout="column"
+          fxLayout.gt-sm="row"
+          fxLayoutAlign="center center"
+          fxLayoutGap.lt-md="8px">
         <workgroup-select-autocomplete></workgroup-select-autocomplete>
-      </div>
-      <span fxFlex fxHide.xs fxHide.sm></span>
-      <div *ngIf="nodeHasWork"
-          class="md-secondary-container"
-          fxFlex.xs="100"
-          fxFlex.sm="100"
-          fxLayoutAlign="center center">
-        <button mat-button
-            aria-label="Expand all"
-            i18n-aria-label
-            class="button--small md-primary"
-            (click)="expandAll()"
-            i18n>
-          + Expand all
-        </button>
-        <button mat-button
-            aria-label="Collapse all"
-            i18n-aria-label
-            class="button--small md-primary"
-            (click)="collapseAll()"
-            i18n>
-          - Collapse all
-        </button>
+        <span fxFlex fxHide fxShow.gt-sm></span>
+        <div *ngIf="nodeHasWork"
+            fxFlex.lt-md="100"
+            fxLayoutAlign="center center">
+          <button mat-button
+              aria-label="Expand all teams"
+              i18n-aria-label
+              color="primary"
+              (click)="expandAll()"
+              i18n>
+            + Expand all
+          </button>
+          <button mat-button
+              aria-label="Collapse all teams"
+              i18n-aria-label
+              color="primary"
+              (click)="collapseAll()"
+              i18n>
+            - Collapse all
+          </button>
+        </div>
       </div>
       <div *ngIf="!nodeHasWork" class="center md-padding" fxFlex.xs="100" fxFlex.sm="100">
         <span class="text-secondary md-caption" i18n>
@@ -81,14 +97,14 @@
         </span>
       </div>
     </mat-list-item>
-    <mat-list-item class="table--list__thead table--list__thead__th md-whiteframe-1dp">
-      <div class="md-list-item-text table--list__thead__tr" fxLayout="row" fxFlex>
+    <mat-list-item class="table--list__thead table--list__thead__th mat-elevation-z1">
+      <div class="table--list__thead__tr dark-theme" fxLayout="row" fxFlex>
         <button mat-button
             class="table--list__thead__link" fxFlex fxLayout="row" fxLayoutAlign="start center"
             (click)="setSort('team')" aria-label="Sort by team" i18n-aria-label>
           <span i18n>Team</span>
           <mat-icon *ngIf="sort === 'team' || sort === '-team'"
-              class="text-light table--list__thead__sort" md-theme="default"
+              class="table--list__thead__sort"
               [ngClass]="{'table--list__thead__sort--reverse': sort === '-team'}">
             arrow_drop_up
           </mat-icon>
@@ -103,7 +119,7 @@
             i18n-aria-label>
           <span i18n>Status</span>
           <mat-icon *ngIf="sort === 'status' || sort === '-status'"
-              class="text-light table--list__thead__sort" md-theme="default"
+              class="table--list__thead__sort"
               [ngClass]="{'table--list__thead__sort--reverse': sort === '-status'}">
             arrow_drop_up
           </mat-icon>
@@ -120,8 +136,7 @@
             i18n-aria-label>
           <span i18n>Score</span>
           <mat-icon *ngIf="sort === 'score' || sort === '-score'"
-              class="text-light table--list__thead__sort"
-              md-theme="default"
+              class="table--list__thead__sort"
               [ngClass]="{'table--list__thead__sort--reverse': sort === '-score'}">
             arrow_drop_up
           </mat-icon>
