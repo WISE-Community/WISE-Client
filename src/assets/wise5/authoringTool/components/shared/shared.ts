@@ -1,6 +1,6 @@
 'use strict';
 
-import MainMenu from './mainMenu/mainMenu';
+import { MainMenuComponent } from '../../../common/main-menu/main-menu.component';
 import Toolbar from './toolbar/toolbar';
 import TopBar from './topBar/topBar';
 import * as angular from 'angular';
@@ -10,7 +10,10 @@ import { PreviewComponentButtonComponent } from '../preview-component-button/pre
 
 const SharedComponents = angular
   .module('atShared', [])
-  .component('atMainMenu', MainMenu)
+  .directive(
+    'atMainMenu',
+    downgradeComponent({ component: MainMenuComponent }) as angular.IDirectiveFactory
+  )
   .component('atToolbar', Toolbar)
   .component('atTopBar', TopBar)
   .directive(

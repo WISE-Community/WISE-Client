@@ -20,6 +20,6 @@
 </div>
 
 <div class="view-content--with-sidemenu" ng-if="$ctrl.isApplicationNode($ctrl.nodeId)">
-  <node-grading-view node-id="$ctrl.nodeId"></node-grading-view>
+  <node-grading-view [node-id]="$ctrl.nodeId"></node-grading-view>
   <!-- <div class="md-padding" ng-cloak ui-view="nodeView"></div> -->
 </div>

@@ -39,6 +39,10 @@ import { EditRunWarningDialogComponent } from './edit-run-warning-dialog/edit-ru
 import { ListClassroomCoursesDialogComponent } from './list-classroom-courses-dialog/list-classroom-courses-dialog.component';
 import { DiscourseRecentActivityComponent } from './discourse-recent-activity/discourse-recent-activity.component';
 import { ShareRunCodeDialogComponent } from './share-run-code-dialog/share-run-code-dialog.component';
+import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
+import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -49,6 +53,7 @@ const materialModules = [
   MatDialogModule,
   MatDividerModule,
   MatIconModule,
+  MatListModule,
   MatMenuModule,
   MatNativeDateModule,
   MatProgressBarModule,
@@ -56,6 +61,7 @@ const materialModules = [
   MatSnackBarModule,
   MatTabsModule,
   MatTableModule,
+  MatToolbarModule,
   MatTooltipModule
 ];
 @NgModule({
@@ -73,19 +79,21 @@ const materialModules = [
   declarations: [
     CreateRunDialogComponent,
     DiscourseRecentActivityComponent,
+    EditComponent,
+    EditProfileComponent,
+    EditRunWarningDialogComponent,
+    ListClassroomCoursesDialogComponent,
+    MainMenuComponent,
+    RunMenuComponent,
+    RunSettingsDialogComponent,
+    ShareRunCodeDialogComponent,
+    ShareRunDialogComponent,
+    SideMenuComponent,
     TeacherComponent,
     TeacherHomeComponent,
     TeacherRunListComponent,
     TeacherRunListItemComponent,
-    RunMenuComponent,
-    RunSettingsDialogComponent,
-    ShareRunDialogComponent,
-    EditComponent,
-    EditProfileComponent,
-    UseWithClassWarningDialogComponent,
-    EditRunWarningDialogComponent,
-    ListClassroomCoursesDialogComponent,
-    ShareRunCodeDialogComponent
+    UseWithClassWarningDialogComponent
   ],
   providers: [AuthGuard],
   exports: [TeacherComponent, materialModules]

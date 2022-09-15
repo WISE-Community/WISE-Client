@@ -23,6 +23,8 @@
     "@angular/platform-browser-dynamic": "^13.3.5",
     "@angular/router": "^13.3.5",
     "@angular/upgrade": "^13.3.5",
+    "@ng-web-apis/common": "^2.0.1",
+    "@ng-web-apis/intersection-observer": "^3.0.0",
     "@stomp/rx-stomp": "^1.1.4",
     "@stomp/stompjs": "^5.4.4",
     "@tinymce/tinymce-angular": "^4.2.4",
