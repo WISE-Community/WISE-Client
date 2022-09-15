@@ -312,10 +312,6 @@ class ClassroomMonitorController {
       return result;
     });
   }
-
-  goToView(route: string): void {
-    this.$state.go(route);
-  }
 }
 
 export default ClassroomMonitorController;
