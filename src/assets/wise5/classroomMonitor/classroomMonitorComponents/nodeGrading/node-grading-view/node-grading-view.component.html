@@ -30,7 +30,8 @@
         fxLayoutGap="8px">
       <component-select
           [nodeId]="nodeId"
-          (modelChange)="onUpdateHiddenComponents($event)">
+          (modelChange)="onUpdateHiddenComponents($event)"
+          class="component-select">
       </component-select>
       <button *ngIf="milestoneReport"
           mat-stroked-button
