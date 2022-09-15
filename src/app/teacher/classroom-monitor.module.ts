@@ -50,6 +50,8 @@ import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroom
 import { StudentGradingToolsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component';
 import { ToolBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component';
 import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
+import { NodeGradingViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component';
+import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,7 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     MoveUserConfirmDialogComponent,
     NavItemProgressComponent,
     NodeInfoComponent,
+    NodeGradingViewComponent,
     NotebookWorkgroupGradingComponent,
     PauseScreensMenuComponent,
     ProjectProgressComponent,
@@ -103,6 +106,7 @@ import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-too
     ComponentGradingModule,
     ComponentStudentModule,
     HighchartsChartModule,
+    IntersectionObserverModule,
     PeerGroupGradingModule,
     PreviewComponentModule,
     SelectPeriodModule

@@ -4,7 +4,8 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 
 @Component({
   selector: 'workgroup-item',
-  templateUrl: 'workgroup-item.component.html'
+  templateUrl: 'workgroup-item.component.html',
+  styleUrls: ['workgroup-item.component.scss']
 })
 export class WorkgroupItemComponent {
   components: any[] = [];
