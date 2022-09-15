@@ -35,6 +35,7 @@ import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuida
 import { HighchartsChartModule } from 'highcharts-angular';
 import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.module';
 import { StudentTeacherCommonServicesModule } from './student-teacher-common-services.module';
+import { MathModule } from './math/math.module';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { StudentTeacherCommonServicesModule } from './student-teacher-common-ser
     MatToolbarModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MathModule,
     NotebookModule,
     ReactiveFormsModule,
     StudentTeacherCommonServicesModule
@@ -107,6 +109,7 @@ import { StudentTeacherCommonServicesModule } from './student-teacher-common-ser
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MathModule,
     NodeIconComponent,
     NodeStatusIcon,
     NotebookModule,
