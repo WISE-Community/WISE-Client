@@ -1,7 +1,6 @@
 'use strict';
 
 import { ComponentNewWorkBadgeComponent } from '../../../../../app/classroom-monitor/component-new-work-badge/component-new-work-badge.component';
-import MainMenu from './mainMenu/mainMenu';
 import { NodeInfoComponent } from './node-info/node-info.component';
 import NotificationsMenu from './notificationsMenu/notificationsMenu';
 import { StatusIconComponent } from '../../../../../app/classroom-monitor/status-icon/status-icon.component';
@@ -15,6 +14,7 @@ import { WorkgroupNodeScoreComponent } from './workgroupNodeScore/workgroup-node
 import { downgradeComponent } from '@angular/upgrade/static';
 import { PauseScreensMenuComponent } from '../pause-screens-menu/pause-screens-menu.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
+import { MainMenuComponent } from '../../../common/main-menu/main-menu.component';
 
 const Shared = angular
   .module('cmShared', [])
@@ -26,7 +26,10 @@ const Shared = angular
     'componentNewWorkBadge',
     downgradeComponent({ component: ComponentNewWorkBadgeComponent }) as angular.IDirectiveFactory
   )
-  .component('cmMainMenu', MainMenu)
+  .directive(
+    'cmMainMenu',
+    downgradeComponent({ component: MainMenuComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'nodeInfo',
     downgradeComponent({ component: NodeInfoComponent }) as angular.IDirectiveFactory

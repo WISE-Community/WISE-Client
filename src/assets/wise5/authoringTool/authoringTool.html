@@ -21,7 +21,7 @@
        view-name="$ctrl.currentViewName"
        on-menu-toggle="$ctrl.toggleMenu()"></at-toolbar>
   <md-sidenav md-component-id="monitorSidenav" md-is-open="$ctrl.isMenuOpen" md-whiteframe="4">
-    <at-main-menu state="$ctrl.$state" views="$ctrl.views"></at-main-menu>
+    <at-main-menu [state]="$ctrl.$state" [title]="$ctrl.title" [views]="$ctrl.views"></at-main-menu>
   </md-sidenav>
   <md-content id="content" flex role="main" layout="column" class="l-main"
       ng-class="{ 'l-main--with-toolbar': $ctrl.showToolbar }"
@@ -30,7 +30,6 @@
   </md-content>
   <side-menu ng-if="$ctrl.showToolbar"
       [state]="$ctrl.$state"
-      [views]="$ctrl.views"
-      (go-to-view)="$ctrl.goToView($event)">
+      [views]="$ctrl.views">
   </side-menu>
 </div>
