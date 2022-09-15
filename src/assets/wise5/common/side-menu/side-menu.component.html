@@ -4,7 +4,7 @@
         *ngIf="view.type === 'primary' && view.active"
         id="{{ view.route }}"
         aria-label="{{ view.label }}"
-        (click)="goToView.emit(view.route)"
+        (click)="goToView(view)"
         class="md-icon-button menu-sidebar__link"
         matTooltip="{{ view.name }}"
         matTooltipPosition="after">

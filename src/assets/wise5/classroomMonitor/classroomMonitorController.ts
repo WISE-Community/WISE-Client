@@ -34,6 +34,7 @@ class ClassroomMonitorController {
   showSideMenu: boolean = true;
   showToolbar: boolean = true;
   themePath: string;
+  title: string = 'Classroom Monitor';
   views: any;
   workgroupId: number;
   subscriptions: Subscription = new Subscription();

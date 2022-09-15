@@ -21,6 +21,7 @@ class AuthoringToolController {
   runCode: string;
   showStepTools: boolean = false;
   showToolbar: boolean = true;
+  title: string = 'Authoring Tool';
   views: any;
   subscriptions: Subscription = new Subscription();
 
