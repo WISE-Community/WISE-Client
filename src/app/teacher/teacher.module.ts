@@ -39,6 +39,7 @@ import { EditRunWarningDialogComponent } from './edit-run-warning-dialog/edit-ru
 import { ListClassroomCoursesDialogComponent } from './list-classroom-courses-dialog/list-classroom-courses-dialog.component';
 import { DiscourseRecentActivityComponent } from './discourse-recent-activity/discourse-recent-activity.component';
 import { ShareRunCodeDialogComponent } from './share-run-code-dialog/share-run-code-dialog.component';
+import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -85,7 +86,8 @@ const materialModules = [
     UseWithClassWarningDialogComponent,
     EditRunWarningDialogComponent,
     ListClassroomCoursesDialogComponent,
-    ShareRunCodeDialogComponent
+    ShareRunCodeDialogComponent,
+    SideMenuComponent
   ],
   providers: [AuthGuard],
   exports: [TeacherComponent, materialModules]

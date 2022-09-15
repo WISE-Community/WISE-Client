@@ -1145,12 +1145,9 @@ export class StudentDataService extends DataService {
     return this.ProjectService.getNodeById(nodeId) != null && this.ProjectService.isActive(nodeId);
   }
 
-  canVisitNode(nodeId) {
+  canVisitNode(nodeId: string): boolean {
     const nodeStatus = this.getNodeStatusByNodeId(nodeId);
-    if (nodeStatus != null && nodeStatus.isVisitable) {
-      return true;
-    }
-    return false;
+    return nodeStatus != null && nodeStatus.isVisitable;
   }
 
   /**

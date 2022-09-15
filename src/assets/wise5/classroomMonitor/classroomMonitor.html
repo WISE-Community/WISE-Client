@@ -10,13 +10,12 @@
       run-id="classroomMonitorController.runId"
       run-code="classroomMonitorController.runCode"></cm-top-bar>
   <cm-toolbar ng-if="classroomMonitorController.showToolbar"
-      number-project="classroomMonitorController.numberProject"
-      show-period-select="classroomMonitorController.showPeriodSelect"
-      show-step-tools="classroomMonitorController.showGradeByStepTools"
-      show-team-tools="classroomMonitorController.showGradeByTeamTools"
-      view-name="classroomMonitorController.currentViewName"
-      workgroup-id="classroomMonitorController.workgroupId"
-      on-menu-toggle="classroomMonitorController.toggleMenu()"></cm-toolbar>
+      [show-period-select]="classroomMonitorController.showPeriodSelect"
+      [show-step-tools]="classroomMonitorController.showGradeByStepTools"
+      [show-team-tools]="classroomMonitorController.showGradeByTeamTools"
+      [view-name]="classroomMonitorController.currentViewName"
+      [workgroup-id]="classroomMonitorController.workgroupId"
+      (on-menu-toggle)="classroomMonitorController.toggleMenu()"></cm-toolbar>
   <md-sidenav md-component-id="monitorSidenav"
       md-is-open="classroomMonitorController.menuOpen"
       md-whiteframe="4">
@@ -27,8 +26,9 @@
     <div ui-view autoscroll="true"></div>
   </md-content>
   <side-menu ng-if="classroomMonitorController.showToolbar"
-      state="classroomMonitorController.$state"
-      views="classroomMonitorController.views"></side-menu>
+      [state]="classroomMonitorController.$state"
+      [views]="classroomMonitorController.views"
+      (go-to-view)="classroomMonitorController.goToView($event)"></side-menu>
   <notebook-report ng-if="classroomMonitorController.reportEnabled"
       ng-class="{'report-full': classroomMonitorController.reportFullscreen}"
       [notebook-config]="classroomMonitorController.notebookConfig"></notebook-report>

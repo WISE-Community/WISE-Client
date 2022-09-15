@@ -18,29 +18,14 @@ import { ComponentStateWrapper } from './ComponentStateWrapper';
 
 @Directive()
 export abstract class ComponentStudent {
-  @Input()
-  nodeId: string;
-
-  @Input()
-  componentContent: any;
-
-  @Input()
-  componentState: any;
-
-  @Input()
-  isDisabled: boolean = false;
-
-  @Input()
-  mode: string;
-
-  @Input()
-  workgroupId: number;
-
-  @Output()
-  saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
-
-  @Output()
-  starterStateChangedEvent = new EventEmitter<any>();
+  @Input() componentContent: any;
+  @Input() componentState: any;
+  @Input() isDisabled: boolean = false;
+  @Input() mode: string;
+  @Input() nodeId: string;
+  @Input() workgroupId: number;
+  @Output() saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() starterStateChangedEvent = new EventEmitter<any>();
 
   attachments: any[] = [];
   componentId: string;
@@ -270,10 +255,7 @@ export abstract class ComponentStudent {
       if (componentState.isSubmit) {
         this.lockIfNecessary();
         this.setIsSubmitDirty(false);
-        this.StudentDataService.broadcastComponentSubmitDirty({
-          componentId: this.componentId,
-          isDirty: this.isSubmitDirty
-        });
+        this.emitComponentSubmitDirty(this.isSubmitDirty);
       }
       this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
     }
@@ -340,13 +322,17 @@ export abstract class ComponentStudent {
         this.nodeId,
         this.componentId
       );
-      if (this.NodeService.isWorkSubmitted(componentStates)) {
+      if (this.hasAnySubmissions(componentStates)) {
         this.isDisabled = true;
       }
     }
   }
 
-  isLockAfterSubmit(): boolean {
+  private hasAnySubmissions(componentStates: any): boolean {
+    return componentStates.some((componentState) => componentState.isSubmit);
+  }
+
+  private isLockAfterSubmit(): boolean {
     return this.componentContent.lockAfterSubmit;
   }
 

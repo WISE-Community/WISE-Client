@@ -22,7 +22,6 @@ class ClassroomMonitorController {
   menuOpen: boolean = false;
   notebookConfig: any;
   notifications: any;
-  numberProject: boolean = true;
   projectId: number;
   projectTitle: string;
   reportEnabled: boolean = false;
@@ -83,20 +82,23 @@ class ClassroomMonitorController {
         this.notebookConfig.enabled && this.notebookConfig.itemTypes.report.enabled;
     }
     this.enableProjectAchievements = this.ProjectService.getAchievements().isEnabled;
-    this.views = {
-      'root.cm.dashboard': {
+    this.views = [
+      {
+        route: 'root.cm.dashboard',
         name: this.$translate('dashboard'),
         icon: 'dashboard',
         type: 'primary',
         active: false
       },
-      'root.cm.milestones': {
+      {
+        route: 'root.cm.milestones',
         name: this.$translate('milestones'),
         icon: 'flag',
         type: 'primary',
         active: this.enableProjectAchievements
       },
-      'root.cm.unit': {
+      {
+        route: 'root.cm.unit',
         name: this.$translate('gradeByStep'),
         icon: 'view_list',
         type: 'primary',
@@ -109,31 +111,35 @@ class ClassroomMonitorController {
         },
         active: true
       },
-      'root.cm.teamLanding': {
+      {
+        route: 'root.cm.teamLanding',
         name: this.$translate('gradeByTeam'),
         icon: 'people',
         type: 'primary',
         active: true
       },
-      'root.cm.manageStudents': {
+      {
+        route: 'root.cm.manageStudents',
         name: this.$translate('manageStudents'),
         icon: 'face',
         type: 'primary',
         active: true
       },
-      'root.cm.notebooks': {
+      {
+        route: 'root.cm.notebooks',
         name: this.$translate('studentNotebooks'),
         icon: 'chrome_reader_mode',
         type: 'primary',
         active: this.NotebookService.isNotebookEnabled()
       },
-      'root.cm.export': {
+      {
+        route: 'root.cm.export',
         name: this.$translate('dataExport'),
         icon: 'file_download',
         type: 'secondary',
         active: true
       }
-    };
+    ];
 
     this.connectionLostDisplay = this.$mdToast.build({
       template: `<md-toast>
@@ -242,7 +248,7 @@ class ClassroomMonitorController {
    */
   processUI() {
     const viewName = this.$state.$current.name;
-    const currentView = this.views[viewName];
+    const currentView = this.views.find((view: any) => view.route === viewName);
     if (currentView) {
       this.currentViewName = currentView.name;
     }
@@ -304,6 +310,10 @@ class ClassroomMonitorController {
     ).then((result) => {
       return result;
     });
+  }
+
+  goToView(route: string): void {
+    this.$state.go(route);
   }
 }
 

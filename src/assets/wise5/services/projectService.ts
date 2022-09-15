@@ -897,18 +897,12 @@ export class ProjectService {
       });
   }
 
-  /**
-   * Returns the theme path for the current project
-   */
-  getThemePath() {
-    const wiseBaseURL = this.ConfigService.getWISEBaseURL();
-    if (this.project != null && this.project.theme) {
-      // TODO: check if this is a valid theme (using ConfigService) rather than just truthy
-      return wiseBaseURL + '/assets/wise5/themes/' + this.project.theme;
-    } else {
-      // TODO: get default theme name from ConfigService
-      return wiseBaseURL + '/assets/wise5/themes/default';
-    }
+  getThemePath(): string {
+    return this.getDefaultThemePath();
+  }
+
+  private getDefaultThemePath(): string {
+    return `${this.ConfigService.getWISEBaseURL()}/assets/wise5/themes/default`;
   }
 
   /**

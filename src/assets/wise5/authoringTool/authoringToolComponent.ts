@@ -56,8 +56,9 @@ class AuthoringToolController {
 
   $onInit() {
     this.logoPath = this.ProjectService.getThemePath() + '/images/WISE-logo-ffffff.svg';
-    this.views = {
-      'root.at.project': {
+    this.views = [
+      {
+        route: 'root.at.project',
         id: 'projectHomeButton',
         name: this.$translate('projectHome'),
         label: this.$translate('projectHome'),
@@ -66,7 +67,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: true
       },
-      'root.at.project.info': {
+      {
+        route: 'root.at.project.info',
         id: 'infoButton',
         name: this.$translate('PROJECT_INFO'),
         label: this.$translate('PROJECT_INFO'),
@@ -75,7 +77,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: true
       },
-      'root.at.project.asset': {
+      {
+        route: 'root.at.project.asset',
         id: 'assetButton',
         name: this.$translate('fileManager'),
         label: this.$translate('fileManager'),
@@ -84,7 +87,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: true
       },
-      'root.at.project.notebook': {
+      {
+        route: 'root.at.project.notebook',
         id: 'notebookButton',
         name: this.$translate('notebookSettings'),
         label: this.$translate('notebookSettings'),
@@ -93,7 +97,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: true
       },
-      'root.at.project.milestones': {
+      {
+        route: 'root.at.project.milestones',
         id: 'milestonesButton',
         name: this.$translate('MILESTONES'),
         label: this.$translate('MILESTONES'),
@@ -102,7 +107,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: true
       },
-      'root.at.main': {
+      {
+        route: 'root.at.main',
         id: 'projectListButton',
         name: this.$translate('projectsList'),
         label: this.$translate('projectsList'),
@@ -111,7 +117,8 @@ class AuthoringToolController {
         showToolbar: false,
         active: true
       },
-      'root.at.project.node': {
+      {
+        route: 'root.at.project.node',
         name: '',
         label: '',
         icon: '',
@@ -119,7 +126,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: false
       },
-      'root.at.project.node.advanced.branch': {
+      {
+        route: 'root.at.project.node.advanced.branch',
         name: '',
         label: '',
         icon: '',
@@ -127,7 +135,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: false
       },
-      'root.at.project.node.advanced.constraint': {
+      {
+        route: 'root.at.project.node.advanced.constraint',
         name: '',
         label: '',
         icon: '',
@@ -135,7 +144,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: false
       },
-      'root.at.project.node.advanced.path': {
+      {
+        route: 'root.at.project.node.advanced.path',
         name: '',
         label: '',
         icon: '',
@@ -143,7 +153,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: false
       },
-      'root.at.project.node.advanced': {
+      {
+        route: 'root.at.project.node.advanced',
         name: '',
         label: '',
         icon: '',
@@ -151,7 +162,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: false
       },
-      'root.at.project.node.advanced.general': {
+      {
+        route: 'root.at.project.node.advanced.general',
         name: '',
         label: '',
         icon: '',
@@ -159,7 +171,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: false
       },
-      'root.at.project.node.advanced.json': {
+      {
+        route: 'root.at.project.node.advanced.json',
         name: '',
         label: '',
         icon: '',
@@ -167,7 +180,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: false
       },
-      'root.at.project.advanced': {
+      {
+        route: 'root.at.project.advanced',
         name: '',
         label: '',
         icon: '',
@@ -175,7 +189,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: false
       },
-      'root.at.project.rubric': {
+      {
+        route: 'root.at.project.rubric',
         name: '',
         label: '',
         icon: '',
@@ -183,7 +198,8 @@ class AuthoringToolController {
         showToolbar: true,
         active: false
       },
-      'root.at.project.node.edit-rubric': {
+      {
+        route: 'root.at.project.node.edit-rubric',
         name: '',
         label: '',
         icon: '',
@@ -191,7 +207,7 @@ class AuthoringToolController {
         showToolbar: true,
         active: false
       }
-    };
+    ];
     this.processUI();
 
     this.$transitions.onSuccess({}, ($transition) => {
@@ -304,7 +320,7 @@ class AuthoringToolController {
       'root.at.project.node.advanced.json',
       'root.at.project.node.advanced.path'
     ].includes(this.$state.$current.name);
-    const view = this.views[this.$state.$current.name];
+    const view = this.views.find((view: any) => view.route === this.$state.$current.name);
     if (view) {
       this.currentViewName = view.name;
       this.showToolbar = view.showToolbar;
@@ -373,6 +389,10 @@ class AuthoringToolController {
     ).then((result) => {
       return result;
     });
+  }
+
+  goToView(route: string): void {
+    this.$state.go(route);
   }
 }
 
