@@ -12240,8 +12240,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ab6ce985f2b7efd20fb47919fbcd7b75ff940acb" datatype="html">
-        <source>Operators let you combine one more terms together to make a rule.</source>
+      <trans-unit id="b2145d0c97ccffaf79c5770f967a429c84af4123" datatype="html">
+        <source>Operators let you combine one or more terms together to make a rule.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-feedback-rule-help/dialog-guidance-feedback-rule-help.component.html</context>
           <context context-type="linenumber">76</context>
