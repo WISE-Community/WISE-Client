@@ -9425,6 +9425,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">95</context>
         </context-group>
@@ -11194,7 +11198,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
@@ -11210,7 +11214,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
@@ -11226,7 +11230,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
@@ -11250,19 +11254,163 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+        <target state="needs-translation">No Work</target>
+      </trans-unit>
+      <trans-unit id="f6081cf997fb77d65144cb8b834506ef855ea13b" datatype="html">
+        <source>Completion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <target state="needs-translation">Completion</target>
+      </trans-unit>
+      <trans-unit id="84a36cb75660b736773fe36ffa3d54f0f0fe363e" datatype="html">
+        <source>N/A</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <target state="needs-translation">N/A</target>
+      </trans-unit>
+      <trans-unit id="bac63739f10a578509cf1456d0406e39471ec8ab" datatype="html">
+        <source>Mean Score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <target state="needs-translation">Mean Score</target>
+      </trans-unit>
+      <trans-unit id="f72992030f134408b675152c397f9d0ec00f3b2a" datatype="html">
+        <source>Report</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <target state="needs-translation">Report</target>
+      </trans-unit>
+      <trans-unit id="2c49c02ee0f76a11b13ce1585b68c7c6ee137ab1" datatype="html">
+        <source>Peer Groups</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <target state="needs-translation">Peer Groups</target>
+      </trans-unit>
+      <trans-unit id="2b3d6255f6480242ac1c150a618cebb4707f0163" datatype="html">
+        <source>Step Info</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <target state="needs-translation">Step Info</target>
+      </trans-unit>
+      <trans-unit id="b0298b037a077b5130906e8ae5911a882e9cda04" datatype="html">
+        <source>Info + Tips (<x id="INTERPOLATION" equiv-text="{{ numRubrics }}"/>)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <target state="needs-translation">Info + Tips (<x id="INTERPOLATION" equiv-text="{{ numRubrics }}"/>)</target>
+      </trans-unit>
+      <trans-unit id="5cb2df7f127e1028a256bde8ee4fe5b779010b61" datatype="html">
+        <source>Expand all teams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <target state="needs-translation">Expand all teams</target>
+      </trans-unit>
+      <trans-unit id="2c1c5e78f6ace9b0a0fbd7c8cb161e63821e11d4" datatype="html">
+        <source> + Expand all </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">81,83</context>
+        </context-group>
+        <target state="needs-translation"> + Expand all </target>
+      </trans-unit>
+      <trans-unit id="bb43ffa923ca3da9303f363b128d3c9cc637a455" datatype="html">
+        <source>Collapse all teams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
           <context context-type="linenumber">85</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
           <context context-type="linenumber">80</context>
         </context-group>
-        <target state="needs-translation">No Work</target>
+        <target state="needs-translation">Collapse all teams</target>
+      </trans-unit>
+      <trans-unit id="f6fa4a9eb52ae7a15fa08af49ea459f1da5b76ae" datatype="html">
+        <source> - Collapse all </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">89,91</context>
+        </context-group>
+        <target state="needs-translation"> - Collapse all </target>
+      </trans-unit>
+      <trans-unit id="a267500a2fbe56e30ac3c42990dce8ff490a8c77" datatype="html">
+        <source> This step doesn&apos;t require any student work </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">95,97</context>
+        </context-group>
+        <target state="needs-translation"> This step doesn't require any student work </target>
+      </trans-unit>
+      <trans-unit id="ed770f216587fb35c8e9508d1b3fe5204c87797b" datatype="html">
+        <source>Sort by team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+        <target state="needs-translation">Sort by team</target>
+      </trans-unit>
+      <trans-unit id="764a8a101f8ee5a4b98844e93406182fb078507b" datatype="html">
+        <source>Team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+        <target state="needs-translation">Team</target>
+      </trans-unit>
+      <trans-unit id="3ca94075fcdfe042f999337b148a33f2912708e4" datatype="html">
+        <source>Sorty by completion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+        <target state="needs-translation">Sorty by completion</target>
+      </trans-unit>
+      <trans-unit id="81b97b8ea996ad1e4f9fca8415021850214884b1" datatype="html">
+        <source>Status</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">120</context>
+        </context-group>
+        <target state="needs-translation">Status</target>
+      </trans-unit>
+      <trans-unit id="5a96ffba91e27b989b170eb545cc3bc55c9ada35" datatype="html">
+        <source>Sort by score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+        <target state="needs-translation">Sort by score</target>
       </trans-unit>
       <trans-unit id="7564665875993875304" datatype="html">
         <source>Visited</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
@@ -11274,7 +11422,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Not Visited</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component.ts</context>
@@ -11498,18 +11646,6 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></target>
       </trans-unit>
-      <trans-unit id="2b3d6255f6480242ac1c150a618cebb4707f0163" datatype="html">
-        <source>Step Info</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <target state="needs-translation">Step Info</target>
-      </trans-unit>
       <trans-unit id="a69e631bd9a55827a0856f474b879a10d9ee0cd2" datatype="html">
         <source>Item Info</source>
         <context-group purpose="location">
@@ -11593,6 +11729,16 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">99</context>
         </context-group>
         <target state="translated">Düzeltmeleri gör</target>
+      </trans-unit>
+      <trans-unit id="66abb23ed9adf4aa03eab3e4b75234d32748e44c" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ title }}"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/main-menu/main-menu.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ title }}"/></target>
       </trans-unit>
       <trans-unit id="058b73757ea9dc14dee9cb48d52bf312fbb8ab15" datatype="html">
         <source>Selected icon</source>
