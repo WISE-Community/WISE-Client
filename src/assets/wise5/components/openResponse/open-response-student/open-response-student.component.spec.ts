@@ -89,11 +89,8 @@ describe('OpenResponseStudent', () => {
   createComponentState();
   createComponentStateAdditionalProcessing();
   createMergedComponentState();
-  hasAudioResponses();
   hasFeedback();
   mergeObjects();
-  removeAudioAttachment();
-  removeAudioAttachments();
   setStudentWork();
   snipButtonClicked();
   submitWithFeedback();
@@ -256,19 +253,6 @@ function snipButtonClicked() {
   });
 }
 
-function hasAudioResponses() {
-  describe('hasAudioResponses', () => {
-    it('should check if there are audio responses when there are none', () => {
-      component.attachments = [];
-      expect(component.hasAudioResponses()).toEqual(false);
-    });
-    it('should check if there are audio responses when there are some', () => {
-      component.attachments = [{ type: 'audio' }];
-      expect(component.hasAudioResponses()).toEqual(true);
-    });
-  });
-}
-
 function createComponentStateObject(response: string): any {
   return {
     studentData: {
@@ -286,33 +270,6 @@ function createMergedComponentState() {
       ];
       const mergedComponentState = component.createMergedComponentState(componentStates);
       expect(mergedComponentState.studentData.response).toEqual('Hello\nWorld');
-    });
-  });
-}
-
-function removeAudioAttachment() {
-  describe('removeAudioAttachment', () => {
-    it('should remove audio attachment', () => {
-      const audioAttachment = { type: 'audio' };
-      component.attachments = [audioAttachment, { type: 'image' }];
-      spyOn(window, 'confirm').and.returnValue(true);
-      component.removeAudioAttachment(audioAttachment);
-      expect(component.attachments.length).toEqual(1);
-    });
-  });
-}
-
-function removeAudioAttachments() {
-  describe('removeAudioAttachments', () => {
-    it('should remove audio attachments', () => {
-      component.attachments = [
-        { type: 'image' },
-        { type: 'audio' },
-        { type: 'image' },
-        { type: 'audio' }
-      ];
-      component.removeAudioAttachments();
-      expect(component.attachments.length).toEqual(2);
     });
   });
 }
