@@ -19,8 +19,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
 function removeAudioAttachment() {
   describe('removeAudioAttachment()', () => {
     it('should confirm and remove attachment', () => {
-      const audioAttachment = { type: 'audio' };
-      component.audioAttachments = [audioAttachment, { type: 'image' }];
+      const audioAttachment = { type: 'audio', url: 'hello.mp3' };
       const confirmSpy = spyOn(window, 'confirm').and.returnValue(true);
       const removeAttachmentSpy = spyOn(component.removeAttachment, 'emit');
       component.removeAudioAttachment(audioAttachment);
