@@ -9,6 +9,8 @@
         (click)="addNewRule('beginning')">
       <mat-icon>add_circle</mat-icon>
     </button>
+    <span fxFlex></span>
+    <button mat-button (click)="showHelp()" i18n>Help</button>
   </h5>
   <ul cdkDropList [cdkDropListData]="feedbackRules" (cdkDropListDropped)="drop($event)" cdkScrollable>
     <ng-container *ngFor="let rule of feedbackRules; let ruleIndex = index; let first = first; let last = last">
