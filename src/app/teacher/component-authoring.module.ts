@@ -71,6 +71,7 @@ import { EditDialogGuidanceAdvancedComponent } from '../../assets/wise5/componen
 import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
 import { PeerGroupingAuthoringModule } from '../../assets/wise5/authoringTool/peer-grouping/peer-grouping-authoring.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
+import { DialogGuidanceFeedbackRuleHelpComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-feedback-rule-help/dialog-guidance-feedback-rule-help.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
     ConceptMapAuthoring,
     DrawAuthoring,
     DialogGuidanceAuthoringComponent,
+    DialogGuidanceFeedbackRuleHelpComponent,
     DiscussionAuthoring,
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,

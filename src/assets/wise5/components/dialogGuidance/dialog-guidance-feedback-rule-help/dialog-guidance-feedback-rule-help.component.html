@@ -1,0 +1,111 @@
+<h2 class="mat-dialog-title" i18n>Feedback Rule Authoring</h2>
+<mat-dialog-content class="dialog-content-scroll">
+  <h3 i18n>Introduction</h3>
+  <p i18n>
+    Rules are evaluated top to bottom. The first rule <b>Expression</b> that matches the student's
+    response is used to provide feedback.
+  </p>
+  <p i18n>You can add multiple <b>Feedback</b> items per rule. The first time a rule matches, Feedback
+    #1 will be shown to the student.<br />
+    If the rule matches a second time (in a subsequent round), Feedback #2 will be shown, and so on.
+  </p>
+  <p i18n><b>Expressions</b> are made up of terms and operators:</p>
+  <h3 i18n>Terms</h3>
+  <p i18n>Terms lets you specify what to look for in a student response.</p>
+  <table class="app-bg-bg">
+    <tr><th i18n>Term</th><th i18n>Description</th></tr>
+    <tr>
+      <td class="term">1,2,...18,...</td>
+      <td i18n>Evaluates to true if idea 1, 2, 18, etc was found in the student’s response.</td>
+    </tr>
+    <tr>
+      <td class="term">hasKIScore(X)</td>
+      <td i18n>
+        Evaluates to true if the student received a KI score of X.<br />
+        Ex: <b>hasKIScore(3)</b> evaluates to true if the student received KI score 3.
+      </td>
+    </tr>
+    <tr>
+      <td class="term">ideaCountMoreThan(X)</td>
+      <td i18n>
+        Evaluates to true if more than X ideas were found in the student’s response.<br />
+        Ex: <b>ideaCountMoreThan(2)</b> evaluates to true if the student had more than 2 ideas.
+      </td>
+    </tr>
+    <tr>
+      <td class="term">ideaCountLessThan(X)</td>
+      <td i18n>
+        Evaluates to true if less than X ideas were found in the student’s response.<br />
+        Ex: <b>ideaCountLessThan(2)</b> evaluates to true if the student had less than 2 ideas.
+      </td>
+    </tr>
+    <tr>
+      <td class="term">ideaCountEquals(X)</td>
+      <td i18n>
+        Evaluates to true if exactly X ideas were found in the student’s response.<br />
+        Ex: <b>ideaCountEquals(2)</b> evaluates to true if the student had exactly 2 ideas.
+      </td>
+    </tr>
+    <tr>
+      <td class="term">isSecondToLastSubmit</td>
+      <td i18n>
+        Evaluates to true if this is the student’s second to last response when the max number of submits is
+        specified.
+      </td>
+    </tr>
+    <tr>
+      <td class="term">isFinalSubmit</td>
+      <td i18n>
+        Evaluates to true if this is the student’s final response when the max number of submits is
+        specified.
+      </td>
+    </tr>
+    <tr>
+      <td class="term">isNonScorable</td>
+      <td i18n>Evaluates to true if the student’s response was not scorable.</td>
+    </tr>
+    <tr>
+      <td class="term">isDefault</td>
+      <td i18n>
+        Evaluates to true if no other terms were matched. Add this term as the final rule to specify a
+        default feedback.
+      </td>
+    </tr>
+  </table>
+  <h3 i18n>Operators</h3>
+  <p i18n>Operators let you combine one or more terms together to make a rule.</p>
+  <table class="app-bg-bg">
+    <tr>
+      <th i18n>Operator</th>
+      <th i18n>Description</th>
+    </tr>
+    <tr>
+      <td class="operator">&&</td>
+      <td i18n>
+        Evaluates to true if terms on both sides of this operator evaluate to true.<br />
+        Ex: <b>1 && 2</b> evaluates to true if both idea 1 and 2 were found.<br />
+        Ex: <b>1 && hasKIScore(2)</b> evaluates to true if idea 1 was found and the student received a KI
+        score of 2.
+        </td>
+    </tr>
+    <tr>
+      <td class="operator">||</td>
+      <td i18n>
+        Evaluates to true if a term on either side of this operator evaluates to true.<br />
+        Ex: <b>1 || 2</b> evaluates to true if either idea 1 or 2 was found.<br />
+        Ex: <b>1 && 2 || 3</b> evaluates to true if both idea 1 and 2 were found or idea 3 was found.
+      </td>
+    </tr>
+    <tr>
+      <td class="operator">!</td>
+      <td i18n>
+        Evaluates to true if a term following this operator evaluates to false.<br />
+        Ex: <b>!1</b> evaluates to true if idea 1 was not found.
+      </td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>
+</mat-dialog-actions>
+

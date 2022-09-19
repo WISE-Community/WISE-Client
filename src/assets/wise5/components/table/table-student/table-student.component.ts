@@ -1,5 +1,5 @@
 import * as html2canvas from 'html2canvas';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { Tabulator } from 'tabulator-tables';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -48,6 +48,7 @@ export class TableStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private changeDetectorRef: ChangeDetectorRef,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected dialog: MatDialog,
@@ -363,7 +364,7 @@ export class TableStudent extends ComponentStudent {
       // get the student data from the component state
       const studentData = componentState.studentData;
 
-      if (studentData != null) {
+      if (studentData != null && studentData.tableData != null) {
         // set the table into the controller
         this.tableData = studentData.tableData;
 
@@ -1157,6 +1158,9 @@ export class TableStudent extends ComponentStudent {
       });
     }
     this.setTabulatorData();
+    if (componentType === 'Embedded') {
+      this.changeDetectorRef.detectChanges();
+    }
   }
 
   attachStudentAsset(studentAsset: any): void {

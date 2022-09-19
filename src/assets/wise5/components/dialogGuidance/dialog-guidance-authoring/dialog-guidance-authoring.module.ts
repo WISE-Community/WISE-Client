@@ -24,10 +24,12 @@ import { EditDialogGuidanceFeedbackRulesComponent } from '../edit-dialog-guidanc
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceService } from '../dialogGuidanceService';
+import { DialogGuidanceFeedbackRuleHelpComponent } from '../dialog-guidance-feedback-rule-help/dialog-guidance-feedback-rule-help.component';
 
 @NgModule({
   declarations: [
     DialogGuidanceAuthoringComponent,
+    DialogGuidanceFeedbackRuleHelpComponent,
     EditComponentPrompt,
     EditComponentMaxSubmitComponent,
     EditDialogGuidanceFeedbackRulesComponent

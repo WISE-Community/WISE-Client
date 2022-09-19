@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { timeout } from 'rxjs/operators';
 import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
 import { AnnotationService } from '../../../services/annotationService';
-import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
 import { NodeService } from '../../../services/nodeService';
@@ -23,18 +22,15 @@ import { OpenResponseService } from '../openResponseService';
   styleUrls: ['open-response-student.component.scss']
 })
 export class OpenResponseStudent extends ComponentStudent {
-  audioRecordingInterval: any;
-  audioRecordingMaxTime: number = 60000;
-  audioRecordingStartTime: number = 0;
+  audioAttachments: any[] = [];
   cRaterTimeout: number = 40000;
   isPublicSpaceExist: boolean = false;
-  isRecordingAudio: boolean = false;
   isStudentAudioRecordingEnabled: boolean = false;
   studentResponse: string = '';
 
   constructor(
     protected AnnotationService: AnnotationService,
-    private AudioRecorderService: AudioRecorderService,
+    private changeDetector: ChangeDetectorRef,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     private CRaterService: CRaterService,
@@ -101,9 +97,7 @@ export class OpenResponseStudent extends ComponentStudent {
 
     this.isPublicSpaceExist = this.ProjectService.isSpaceExists('public');
     this.registerNotebookItemChosenListener();
-    this.registerAudioRecordedListener();
-    this.isStudentAudioRecordingEnabled =
-      this.componentContent.isStudentAudioRecordingEnabled || false;
+    this.isStudentAudioRecordingEnabled = this.componentContent.isStudentAudioRecordingEnabled;
 
     // load script for this component, if any
     const script = this.componentContent.script;
@@ -113,6 +107,7 @@ export class OpenResponseStudent extends ComponentStudent {
       });
     }
 
+    this.updateAudioAttachments();
     this.broadcastDoneRenderingComponent();
   }
 
@@ -696,79 +691,20 @@ export class OpenResponseStudent extends ComponentStudent {
     this.clearLatestComponentState();
     const action = 'change';
     this.createComponentStateAndBroadcast(action);
+    this.updateAudioAttachments();
   }
 
-  startRecordingAudio() {
-    if (this.hasAudioResponses()) {
-      if (confirm($localize`This will replace your existing recording. Is this OK?`)) {
-        this.removeAudioAttachments();
-      } else {
-        return;
-      }
-    }
-    this.AudioRecorderService.startRecording(`${this.nodeId}-${this.componentId}`);
-    this.startAudioCountdown();
-    this.isRecordingAudio = true;
-  }
-
-  startAudioCountdown() {
-    this.audioRecordingStartTime = new Date().getTime();
-    this.audioRecordingInterval = setInterval(() => {
-      if (this.getAudioRecordingTimeLeft() <= 0) {
-        this.stopRecordingAudio();
-      }
-    }, 500);
-  }
-
-  stopRecordingAudio() {
-    this.AudioRecorderService.stopRecording();
-    this.isRecordingAudio = false;
-    clearInterval(this.audioRecordingInterval);
-  }
-
-  getAudioRecordingTimeElapsed() {
-    const now = new Date().getTime();
-    return now - this.audioRecordingStartTime;
-  }
-
-  getAudioRecordingTimeLeft() {
-    return Math.floor((this.audioRecordingMaxTime - this.getAudioRecordingTimeElapsed()) / 1000);
-  }
-
-  hasAudioResponses() {
-    return (
-      this.attachments.filter((attachment) => {
-        return attachment.type === 'audio';
-      }).length > 0
-    );
-  }
-
-  removeAudioAttachment(attachment) {
-    if (confirm($localize`Are you sure you want to delete your recording?`)) {
-      this.removeAttachment(attachment);
-    }
-  }
-
-  removeAudioAttachments() {
-    this.attachments.forEach((attachment) => {
-      if (attachment.type === 'audio') {
-        this.removeAttachment(attachment);
-      }
+  attachAudioRecording(audioFile: any): void {
+    this.StudentAssetService.uploadAsset(audioFile).then((studentAsset) => {
+      this.attachStudentAsset(studentAsset).then(() => {
+        this.StudentAssetService.deleteAsset(studentAsset).then(() => this.studentDataChanged());
+      });
     });
   }
 
-  registerAudioRecordedListener() {
-    this.subscriptions.add(
-      this.AudioRecorderService.audioRecorded$.subscribe(({ requester, audioFile }) => {
-        if (requester === `${this.nodeId}-${this.componentId}`) {
-          this.StudentAssetService.uploadAsset(audioFile).then((studentAsset) => {
-            this.attachStudentAsset(studentAsset).then(() => {
-              this.StudentAssetService.deleteAsset(studentAsset);
-            });
-          });
-        }
-      })
-    );
+  private updateAudioAttachments(): void {
+    this.audioAttachments = this.attachments.filter((attachment) => attachment.type === 'audio');
+    this.changeDetector.detectChanges();
   }
 
   mergeObjects(destination: any, source: any): void {
