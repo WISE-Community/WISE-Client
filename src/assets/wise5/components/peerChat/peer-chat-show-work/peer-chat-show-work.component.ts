@@ -8,6 +8,7 @@ import { PeerChatService } from '../peerChatService';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { PeerGroup } from '../PeerGroup';
 import { PeerGroupMember } from '../PeerGroupMember';
+import { NodeService } from '../../../services/nodeService';
 
 @Component({
   selector: 'peer-chat-show-work',
@@ -20,16 +21,16 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   peerChatWorkgroupInfos: any = {};
   requestTimeout: number = 10000;
 
-  @Input()
-  workgroupId: number;
+  @Input() workgroupId: number;
 
   constructor(
     protected configService: ConfigService,
+    protected nodeService: NodeService,
     protected peerChatService: PeerChatService,
     protected peerGroupService: PeerGroupService,
     protected projectService: ProjectService
   ) {
-    super(projectService);
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {

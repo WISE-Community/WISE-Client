@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { TabulatorDataService } from '../tabulatorDataService';
@@ -23,10 +24,11 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
   tabulatorData: TabulatorData;
 
   constructor(
+    protected nodeService: NodeService,
     protected ProjectService: ProjectService,
     private TabulatorDataService: TabulatorDataService
   ) {
-    super(ProjectService);
+    super(nodeService, ProjectService);
   }
 
   ngOnInit(): void {

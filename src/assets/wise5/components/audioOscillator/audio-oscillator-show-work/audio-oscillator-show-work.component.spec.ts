@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectService } from '../../../services/projectService';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
@@ -11,7 +12,7 @@ let fixture: ComponentFixture<AudioOscillatorShowWorkComponent>;
 describe('AudioOscillatorShowWorkComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [AudioOscillatorShowWorkComponent]
     });
     fixture = TestBed.createComponent(AudioOscillatorShowWorkComponent);

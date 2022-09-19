@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 import { ConceptMapService } from '../conceptMapService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
+import { NodeService } from '../../../services/nodeService';
 
 @Component({
   selector: 'concept-map-show-work',
@@ -22,9 +23,10 @@ export class ConceptMapShowWorkComponent extends ComponentShowWorkDirective {
 
   constructor(
     private ConceptMapService: ConceptMapService,
+    protected nodeService: NodeService,
     protected ProjectService: ProjectService
   ) {
-    super(ProjectService);
+    super(nodeService, ProjectService);
   }
 
   ngOnInit(): void {
