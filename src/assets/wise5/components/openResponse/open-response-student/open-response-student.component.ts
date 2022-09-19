@@ -59,7 +59,6 @@ export class OpenResponseStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-
     if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
       this.handleConnectedComponents();
     } else if (
@@ -74,17 +73,8 @@ export class OpenResponseStudent extends ComponentStudent {
       this.handleConnectedComponents();
     } else if (this.componentState == null) {
       if (this.UtilService.hasConnectedComponent(this.componentContent)) {
-        /*
-         * the student does not have any work and there are connected
-         * components so we will get the work from the connected
-         * components
-         */
         this.handleConnectedComponents();
       } else if (this.componentContent.starterSentence != null) {
-        /*
-         * the student has not done any work and there is a starter sentence
-         * so we will populate the textarea with the starter sentence
-         */
         this.studentResponse = this.componentContent.starterSentence;
       }
     }
@@ -92,9 +82,7 @@ export class OpenResponseStudent extends ComponentStudent {
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.isDisabled = true;
     }
-
     this.disableComponentIfNecessary();
-
     this.isPublicSpaceExist = this.ProjectService.isSpaceExists('public');
     this.registerNotebookItemChosenListener();
     this.isStudentAudioRecordingEnabled = this.componentContent.isStudentAudioRecordingEnabled;
@@ -106,7 +94,6 @@ export class OpenResponseStudent extends ComponentStudent {
         new Function(script).call(this);
       });
     }
-
     this.updateAudioAttachments();
     this.broadcastDoneRenderingComponent();
   }
@@ -122,50 +109,38 @@ export class OpenResponseStudent extends ComponentStudent {
     }
   }
 
-  /**
-   * Populate the student work into the component
-   * @param componentState the component state to populate into the component
-   */
-  setStudentWork(componentState) {
+  setStudentWork(componentState: any): void {
     if (componentState != null) {
       const studentData = componentState.studentData;
-
       if (studentData != null) {
         const response = studentData.response;
-
         if (response != null) {
-          // populate the text the student previously typed
           this.studentResponse = response;
         }
-
         const submitCounter = studentData.submitCounter;
-
         if (submitCounter != null) {
-          // populate the submit counter
           this.submitCounter = submitCounter;
         }
-
         if (studentData.attachments != null) {
           this.attachments = studentData.attachments;
         }
-
         this.processLatestStudentWork();
       }
     }
   }
 
-  hasSubmitMessage() {
+  hasSubmitMessage(): boolean {
     return true;
   }
 
-  hasFeedback() {
+  hasFeedback(): boolean {
     return (
       this.isCRaterEnabled() &&
       (this.componentContent.cRater.showFeedback || this.componentContent.cRater.showScore)
     );
   }
 
-  confirmSubmit(numberOfSubmitsLeft) {
+  confirmSubmit(numberOfSubmitsLeft: number): boolean {
     if (this.hasFeedback()) {
       return this.submitWithFeedback(numberOfSubmitsLeft);
     } else {
@@ -173,7 +148,7 @@ export class OpenResponseStudent extends ComponentStudent {
     }
   }
 
-  submitWithFeedback(numberOfSubmitsLeft) {
+  submitWithFeedback(numberOfSubmitsLeft: number): boolean {
     let isPerformSubmit = false;
     if (numberOfSubmitsLeft <= 0) {
       alert($localize`You do not have any more chances to receive feedback on your answer.`);
@@ -189,7 +164,7 @@ export class OpenResponseStudent extends ComponentStudent {
     return isPerformSubmit;
   }
 
-  submitWithoutFeedback(numberOfSubmitsLeft) {
+  submitWithoutFeedback(numberOfSubmitsLeft: number): boolean {
     let isPerformSubmit = false;
     if (numberOfSubmitsLeft <= 0) {
       alert($localize`You do not have any more chances to receive feedback on your answer.`);
@@ -205,10 +180,7 @@ export class OpenResponseStudent extends ComponentStudent {
     return isPerformSubmit;
   }
 
-  /**
-   * Get the student response
-   */
-  getStudentResponse() {
+  getStudentResponse(): any {
     return this.studentResponse;
   }
 
@@ -218,51 +190,26 @@ export class OpenResponseStudent extends ComponentStudent {
    * e.g. 'submit', 'save', 'change'
    * @return a promise that will return a component state
    */
-  createComponentState(action) {
-    // create a new component state
+  createComponentState(action: any): any {
     const componentState: any = this.NodeService.createNewComponentState();
-
-    // set the response into the component state
     const studentData: any = {};
-
-    // get the text the student typed
     const response = this.getStudentResponse();
-
     studentData.response = response;
     studentData.attachments = this.UtilService.makeCopyOfJSONObject(this.attachments); // create a copy without reference to original array
-
-    // set the submit counter
     studentData.submitCounter = this.submitCounter;
-
     if (this.parentStudentWorkIds != null) {
       studentData.parentStudentWorkIds = this.parentStudentWorkIds;
     }
-
-    // set the flag for whether the student submitted this work
     componentState.isSubmit = this.isSubmit;
-
-    // set the student data into the component state
     componentState.studentData = studentData;
-
-    // set the component type
     componentState.componentType = 'OpenResponse';
-
-    // set the node id
     componentState.nodeId = this.nodeId;
-
-    // set the component id
     componentState.componentId = this.componentId;
-
     componentState.isCompleted = this.OpenResponseService.isCompletedV2(
       this.ProjectService.getNodeById(this.nodeId),
       this.componentContent,
       { componentStates: [componentState], events: [], annotations: [] }
     );
-
-    /*
-     * perform any additional processing that is required before returning
-     * the component state
-     */
     const promise = new Promise((resolve, reject) => {
       this.createComponentStateAdditionalProcessing(
         { resolve: resolve, reject: reject },
@@ -270,12 +217,10 @@ export class OpenResponseStudent extends ComponentStudent {
         action
       );
     });
-
     this.isSubmit = false;
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.isDisabled = true;
     }
-
     return promise;
   }
 
@@ -289,7 +234,7 @@ export class OpenResponseStudent extends ComponentStudent {
    * @param action the action that we are creating the component state for
    * e.g. 'submit', 'save', 'change'
    */
-  createComponentStateAdditionalProcessing(deferred, componentState, action) {
+  createComponentStateAdditionalProcessing(deferred, componentState, action): void {
     if (this.shouldPerformCRaterScoring(componentState, action)) {
       this.performCRaterScoring(deferred, componentState);
     } else if (
@@ -308,14 +253,14 @@ export class OpenResponseStudent extends ComponentStudent {
     }
   }
 
-  private processAdditionalFunctions(deferred: any, componentState: any, action: any) {
+  private processAdditionalFunctions(deferred: any, componentState: any, action: any): void {
     const allPromises = this.createAdditionalProcessingFunctionPromises(componentState, action);
     Promise.all(allPromises).then(() => {
       deferred.resolve(componentState);
     });
   }
 
-  private createAdditionalProcessingFunctionPromises(componentState: any, action: any) {
+  private createAdditionalProcessingFunctionPromises(componentState: any, action: any): any {
     const additionalProcessingFunctions = this.ProjectService.getAdditionalProcessingFunctions(
       this.nodeId,
       this.componentId
@@ -362,7 +307,7 @@ export class OpenResponseStudent extends ComponentStudent {
       );
   }
 
-  private cRaterErrorResponse(componentState: any, deferred: any, dialogRef: any) {
+  private cRaterErrorResponse(componentState: any, deferred: any, dialogRef: any): void {
     alert(
       $localize`There was an issue scoring your work. Please try again.\nIf this problem continues, let your teacher know and move on to the next activity. Your work will still be saved.`
     );
@@ -373,7 +318,12 @@ export class OpenResponseStudent extends ComponentStudent {
     deferred.resolve(componentState);
   }
 
-  private cRaterSuccessResponse(response: any, componentState: any, deferred: any, dialogRef: any) {
+  private cRaterSuccessResponse(
+    response: any,
+    componentState: any,
+    deferred: any,
+    dialogRef: any
+  ): void {
     const cRaterResponse = this.CRaterService.getCRaterResponse(response);
     let score = cRaterResponse.score;
     if (cRaterResponse.scores != null) {
@@ -389,7 +339,7 @@ export class OpenResponseStudent extends ComponentStudent {
     deferred.resolve(componentState);
   }
 
-  private processCRaterSuccessResponse(score: any, data: any, componentState: any) {
+  private processCRaterSuccessResponse(score: any, data: any, componentState: any): void {
     let previousScore = null;
     const autoScoreAnnotationData: any = {
       value: score,
@@ -424,10 +374,7 @@ export class OpenResponseStudent extends ComponentStudent {
     const submitCounter = this.submitCounter;
 
     if (this.componentContent.cRater.enableMultipleAttemptScoringRules && submitCounter > 1) {
-      /*
-       * this step has multiple attempt scoring rules and this is
-       * a subsequent submit
-       */
+      // this step has multiple attempt scoring rules and this is a subsequent submit
       // get the feedback based upon the previous score and current score
       autoComment = this.CRaterService.getMultipleAttemptCRaterFeedbackTextByScore(
         this.componentContent,
@@ -442,7 +389,6 @@ export class OpenResponseStudent extends ComponentStudent {
       const autoCommentAnnotationData: any = {};
       autoCommentAnnotationData.value = autoComment;
       autoCommentAnnotationData.autoGrader = 'cRater';
-
       const autoCommentAnnotation = this.createAutoCommentAnnotation(autoCommentAnnotationData);
       componentState.annotations.push(autoCommentAnnotation);
     }
@@ -481,8 +427,6 @@ export class OpenResponseStudent extends ComponentStudent {
     const nodeId = this.nodeId;
     const componentId = this.componentId;
     const toWorkgroupId = this.ConfigService.getWorkgroupId();
-
-    // create the auto score annotation
     const annotation = this.AnnotationService.createAutoScoreAnnotation(
       runId,
       periodId,
@@ -491,7 +435,6 @@ export class OpenResponseStudent extends ComponentStudent {
       toWorkgroupId,
       data
     );
-
     return annotation;
   }
 
@@ -505,14 +448,12 @@ export class OpenResponseStudent extends ComponentStudent {
    * @param data the annotation data
    * @returns the auto comment annotation
    */
-  createAutoCommentAnnotation(data) {
+  createAutoCommentAnnotation(data: any): any {
     const runId = this.ConfigService.getRunId();
     const periodId = this.ConfigService.getPeriodId();
     const nodeId = this.nodeId;
     const componentId = this.componentId;
     const toWorkgroupId = this.ConfigService.getWorkgroupId();
-
-    // create the auto comment annotation
     const annotation = this.AnnotationService.createAutoCommentAnnotation(
       runId,
       periodId,
@@ -521,11 +462,10 @@ export class OpenResponseStudent extends ComponentStudent {
       toWorkgroupId,
       data
     );
-
     return annotation;
   }
 
-  snipButtonClicked($event) {
+  snipButtonClicked($event: any): void {
     if (this.isDirty) {
       const studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
         (componentState: any) => {
@@ -571,68 +511,20 @@ export class OpenResponseStudent extends ComponentStudent {
     }
   }
 
-  /**
-   * Check if CRater is enabled for this component
-   * @returns whether CRater is enabled for this component
-   */
-  isCRaterEnabled() {
+  isCRaterEnabled(): boolean {
     return this.CRaterService.isCRaterEnabled(this.componentContent);
   }
 
-  /**
-   * Check if CRater is set to score on save
-   * @returns whether CRater is set to score on save
-   */
-  isCRaterScoreOnSave() {
-    let result = false;
-
-    if (this.CRaterService.isCRaterScoreOnSave(this.componentContent)) {
-      result = true;
-    }
-
-    return result;
+  private isCRaterScoreOnSave(): boolean {
+    return this.CRaterService.isCRaterScoreOnEvent(this.componentContent, 'save');
   }
 
-  /**
-   * Check if CRater is set to score on submit
-   * @returns whether CRater is set to score on submit
-   */
-  isCRaterScoreOnSubmit() {
-    let result = false;
-
-    if (this.CRaterService.isCRaterScoreOnSubmit(this.componentContent)) {
-      result = true;
-    }
-
-    return result;
+  private isCRaterScoreOnSubmit(): boolean {
+    return this.CRaterService.isCRaterScoreOnEvent(this.componentContent, 'submit');
   }
 
-  /**
-   * Check if CRater is set to score on change
-   * @returns whether CRater is set to score on change
-   */
-  isCRaterScoreOnChange() {
-    let result = false;
-
-    if (this.CRaterService.isCRaterScoreOnChange(this.componentContent)) {
-      result = true;
-    }
-
-    return result;
-  }
-
-  /**
-   * Check if CRater is set to score when the student exits the step
-   * @returns whether CRater is set to score when the student exits the step
-   */
-  isCRaterScoreOnExit() {
-    let result = false;
-
-    if (this.CRaterService.isCRaterScoreOnExit(this.componentContent)) {
-      result = true;
-    }
-
-    return result;
+  private isCRaterScoreOnChange(): boolean {
+    return this.CRaterService.isCRaterScoreOnEvent(this.componentContent, 'change');
   }
 
   /**
@@ -640,48 +532,34 @@ export class OpenResponseStudent extends ComponentStudent {
    * @param componentStates an array of component states
    * @return a component state with the merged student responses
    */
-  createMergedComponentState(componentStates) {
-    // create a new component state
+  createMergedComponentState(componentStates: any[]): any {
     let mergedComponentState: any = this.NodeService.createNewComponentState();
-
     if (componentStates != null) {
       let mergedResponse = '';
-
-      // loop through all the component state
       for (let c = 0; c < componentStates.length; c++) {
         let componentState = componentStates[c];
-
         if (componentState != null) {
           let studentData = componentState.studentData;
-
           if (studentData != null) {
-            // get the student response
             let response = studentData.response;
-
             if (response != null && response != '') {
               if (mergedResponse != '') {
-                // add a new line between the responses
                 mergedResponse += '\n';
               }
-
-              // append the response
               mergedResponse += response;
             }
           }
         }
       }
-
       if (mergedResponse != null && mergedResponse != '') {
-        // set the merged response into the merged component state
         mergedComponentState.studentData = {};
         mergedComponentState.studentData.response = mergedResponse;
       }
     }
-
     return mergedComponentState;
   }
 
-  studentDataChanged() {
+  studentDataChanged(): void {
     this.setIsDirtyAndBroadcast();
     if (this.studentResponse === '') {
       this.setIsSubmitDirty(false);
@@ -705,11 +583,5 @@ export class OpenResponseStudent extends ComponentStudent {
   private updateAudioAttachments(): void {
     this.audioAttachments = this.attachments.filter((attachment) => attachment.type === 'audio');
     this.changeDetector.detectChanges();
-  }
-
-  mergeObjects(destination: any, source: any): void {
-    Object.keys(source).forEach((key) => {
-      destination[key] = source[key];
-    });
   }
 }
