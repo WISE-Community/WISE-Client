@@ -52,6 +52,7 @@ import { ToolBarComponent } from '../../assets/wise5/classroomMonitor/classroomM
 import { StepToolsComponent } from '../../assets/wise5/common/stepTools/step-tools.component';
 import { NodeGradingViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component';
 import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
+import { MilestoneGradingViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
     ManageTeamsComponent,
     ManageUserComponent,
     MilestonesComponent,
+    MilestoneGradingViewComponent,
     MilestoneReportDataComponent,
     MilestoneWorkgroupItemComponent,
     MoveUserConfirmDialogComponent,
