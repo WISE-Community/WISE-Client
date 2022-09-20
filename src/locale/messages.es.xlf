@@ -12628,11 +12628,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">154</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">195</context>
+          <context context-type="linenumber">170</context>
         </context-group>
         <target state="translated">Agotaste las oportunidades de recibir retroalimentación sobre tu respuesta.</target>
       </trans-unit>
@@ -13266,7 +13266,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">182</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <target state="translated">Te queda solamente 1 intento de recibir retroalimentación de tu respuesta así que debería ser tu mejor trabajo.
 
@@ -16977,7 +16977,7 @@ Calificación actual: <x id="PH_1" equiv-text="currentScore"/></target>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">161</context>
         </context-group>
         <target state="translated">Tiene <x id="PH" equiv-text="numberOfSubmitsLeft"/> posibilidades de recibir comentarios sobre su respuesta, por lo que este debería ser su mejor trabajo.
 
@@ -16989,7 +16989,7 @@ Are you ready to receive feedback on this answer?</source>
 Are you ready to receive feedback on this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">173</context>
         </context-group>
         <target state="translated">Tiene <x id="PH" equiv-text="numberOfSubmitsLeft"/> oportunidad de recibir comentarios sobre su respuesta, por lo que este debería ser su mejor trabajo.
 
@@ -17001,7 +17001,7 @@ Are you ready to receive feedback on this answer?</source>
 Are you ready to submit this answer?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">202</context>
+          <context context-type="linenumber">177</context>
         </context-group>
         <target state="translated">Tiene <x id="PH" equiv-text="numberOfSubmitsLeft"/> posibilidades de enviar su respuesta, por lo que este debería ser su mejor trabajo.
 
@@ -17011,7 +17011,7 @@ Are you ready to submit this answer?</source>
         <source>We are scoring your work...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">344</context>
+          <context context-type="linenumber">291</context>
         </context-group>
         <target state="translated">Estamos calificando tu trabajo...</target>
       </trans-unit>
@@ -17019,7 +17019,7 @@ Are you ready to submit this answer?</source>
         <source>Please Wait</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">345</context>
+          <context context-type="linenumber">292</context>
         </context-group>
         <target state="translated">Por favor esperar</target>
       </trans-unit>
@@ -17028,7 +17028,7 @@ Are you ready to submit this answer?</source>
 If this problem continues, let your teacher know and move on to the next activity. Your work will still be saved.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">367</context>
+          <context context-type="linenumber">314</context>
         </context-group>
         <target state="translated">Hubo un problema al calificar tu trabajo. Intentalo de nuevo.
 Si este problema continúa, informale a tu docente y continuá con la siguiente actividad. Tu trabajo igual se guardará.</target>
