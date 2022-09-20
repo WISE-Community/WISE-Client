@@ -1,5 +1,5 @@
+import { FeedbackRuleComponent } from '../feedbackRule/FeedbackRuleComponent';
 import { CRaterResponse } from './CRaterResponse';
-import { DialogGuidanceStudentComponent } from './dialog-guidance-student/dialog-guidance-student.component';
 import { FeedbackRule } from './FeedbackRule';
 import { HasKIScoreTermEvaluator } from './TermEvaluator/HasKIScoreTermEvaluator';
 import { IdeaCountTermEvaluator } from './TermEvaluator/IdeaCountTermEvaluator';
@@ -9,15 +9,15 @@ import { TermEvaluator } from './TermEvaluator/TermEvaluator';
 export class DialogGuidanceFeedbackRuleEvaluator {
   defaultFeedback = $localize`Thanks for submitting your response.`;
 
-  constructor(private component: DialogGuidanceStudentComponent) {}
+  constructor(private component: FeedbackRuleComponent) {}
 
   getFeedbackRule(response: CRaterResponse): FeedbackRule {
-    for (const feedbackRule of this.component.componentContent.feedbackRules) {
+    for (const feedbackRule of this.component.getFeedbackRules()) {
       if (this.satisfiesRule(response, Object.assign(new FeedbackRule(), feedbackRule))) {
         return feedbackRule;
       }
     }
-    return this.getDefaultRule(this.component.componentContent.feedbackRules);
+    return this.getDefaultRule(this.component.getFeedbackRules());
   }
 
   private satisfiesRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {
@@ -140,7 +140,9 @@ export class DialogGuidanceFeedbackRuleEvaluator {
       feedbackRules.find((rule) => FeedbackRule.isDefaultRule(rule)) ||
       Object.assign(new FeedbackRule(), {
         expression: 'isDefault',
-        feedback: this.component.isVersion1() ? this.defaultFeedback : [this.defaultFeedback]
+        feedback: this.component.isMultipleFeedbackTextsForSameRuleAllowed()
+          ? [this.defaultFeedback]
+          : this.defaultFeedback
       })
     );
   }

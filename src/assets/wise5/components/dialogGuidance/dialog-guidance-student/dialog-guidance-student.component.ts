@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
-import { ComponentStudent } from '../../component-student.component';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
@@ -23,13 +22,14 @@ import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
+import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 
 @Component({
   selector: 'dialog-guidance-student',
   templateUrl: './dialog-guidance-student.component.html',
   styleUrls: ['./dialog-guidance-student.component.scss']
 })
-export class DialogGuidanceStudentComponent extends ComponentStudent {
+export class DialogGuidanceStudentComponent extends FeedbackRuleComponent {
   computerAvatar: ComputerAvatar;
   cRaterTimeout: number = 40000;
   feedbackRuleEvaluator: DialogGuidanceFeedbackRuleEvaluator;
@@ -312,5 +312,13 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   studentResponseChanged(): void {
     this.isSubmitEnabled = this.studentResponse.length > 0;
     this.setIsSubmitDirty(this.isSubmitDirty || this.isSubmitEnabled);
+  }
+
+  getFeedbackRules(): FeedbackRule[] {
+    return this.componentContent.feedbackRules;
+  }
+
+  isMultipleFeedbackTextsForSameRuleAllowed(): boolean {
+    return !this.isVersion1();
   }
 }

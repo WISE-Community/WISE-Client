@@ -12,8 +12,11 @@ import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
-import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
+import { CRaterResponse } from '../../dialogGuidance/CRaterResponse';
+import { DialogGuidanceFeedbackRuleEvaluator } from '../../dialogGuidance/DialogGuidanceFeedbackRuleEvaluator';
+import { FeedbackRule } from '../../dialogGuidance/FeedbackRule';
+import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { OpenResponseService } from '../openResponseService';
 
 @Component({
@@ -21,7 +24,7 @@ import { OpenResponseService } from '../openResponseService';
   templateUrl: 'open-response-student.component.html',
   styleUrls: ['open-response-student.component.scss']
 })
-export class OpenResponseStudent extends ComponentStudent {
+export class OpenResponseStudent extends FeedbackRuleComponent {
   audioAttachments: any[] = [];
   cRaterTimeout: number = 40000;
   isPublicSpaceExist: boolean = false;
@@ -341,18 +344,22 @@ export class OpenResponseStudent extends ComponentStudent {
     deferred.resolve(componentState);
   }
 
-  private processCRaterSuccessResponse(score: any, data: any, componentState: any): void {
+  private processCRaterSuccessResponse(
+    score: any,
+    response: CRaterResponse,
+    componentState: any
+  ): void {
     let previousScore = null;
     const autoScoreAnnotationData: any = {
       value: score,
       maxAutoScore: this.ProjectService.getMaxScoreForComponent(this.nodeId, this.componentId),
       autoGrader: 'cRater'
     };
-    if (data.scores != null) {
-      autoScoreAnnotationData.scores = data.scores;
+    if (response.scores != null) {
+      autoScoreAnnotationData.scores = response.scores;
     }
-    if (data.ideas != null) {
-      autoScoreAnnotationData.ideas = data.ideas;
+    if (response.ideas != null) {
+      autoScoreAnnotationData.ideas = response.ideas;
     }
 
     let autoScoreAnnotation = this.createAutoScoreAnnotation(autoScoreAnnotationData);
@@ -374,6 +381,7 @@ export class OpenResponseStudent extends ComponentStudent {
 
     let autoComment = null;
     const submitCounter = this.submitCounter;
+    let feedbackRuleId = null;
 
     if (this.componentContent.cRater.enableMultipleAttemptScoringRules && submitCounter > 1) {
       // this step has multiple attempt scoring rules and this is a subsequent submit
@@ -384,13 +392,23 @@ export class OpenResponseStudent extends ComponentStudent {
         score
       );
     } else {
-      autoComment = this.CRaterService.getCRaterFeedbackTextByScore(this.componentContent, score);
+      if (this.hasFeedbackRules()) {
+        const feedbackRuleEvaluator = new DialogGuidanceFeedbackRuleEvaluator(this);
+        const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(response);
+        autoComment = this.getFeedbackText(feedbackRule);
+        feedbackRuleId = feedbackRule.id;
+      } else {
+        autoComment = this.CRaterService.getCRaterFeedbackTextByScore(this.componentContent, score);
+      }
     }
 
     if (autoComment != null) {
       const autoCommentAnnotationData: any = {};
       autoCommentAnnotationData.value = autoComment;
       autoCommentAnnotationData.autoGrader = 'cRater';
+      if (feedbackRuleId != null) {
+        autoCommentAnnotationData.feedbackRuleId = feedbackRuleId;
+      }
       const autoCommentAnnotation = this.createAutoCommentAnnotation(autoCommentAnnotationData);
       componentState.annotations.push(autoCommentAnnotation);
     }
@@ -445,6 +463,20 @@ export class OpenResponseStudent extends ComponentStudent {
       data
     );
     return annotation;
+  }
+
+  private hasFeedbackRules(): boolean {
+    return (
+      this.componentContent.cRater.feedbackRules != null &&
+      this.componentContent.cRater.feedbackRules.length > 0
+    );
+  }
+
+  private getFeedbackText(rule: FeedbackRule): string {
+    const annotationsForFeedbackRule = this.AnnotationService.annotations.filter((annotation) => {
+      return this.isForThisComponent(annotation) && annotation.data.feedbackRuleId === rule.id;
+    });
+    return rule.feedback[annotationsForFeedbackRule.length % rule.feedback.length];
   }
 
   snipButtonClicked($event: any): void {
@@ -565,5 +597,13 @@ export class OpenResponseStudent extends ComponentStudent {
   private updateAudioAttachments(): void {
     this.audioAttachments = this.attachments.filter((attachment) => attachment.type === 'audio');
     this.changeDetector.detectChanges();
+  }
+
+  getFeedbackRules(): FeedbackRule[] {
+    return this.componentContent.cRater.feedbackRules;
+  }
+
+  isMultipleFeedbackTextsForSameRuleAllowed(): boolean {
+    return true;
   }
 }
