@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditPasswordComponent } from './edit-password.component';
 import { UserService } from '../../../services/user.service';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -9,8 +9,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { User } from '../../../domain/user';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PasswordService } from '../../../services/password.service';
 const CORRECT_OLD_PASS = 'a';
 const INCORRECT_OLD_PASS = 'b';
+const NEW_PASSWORD_1 = 'Abcd1111';
+const NEW_PASSWORD_2 = 'Abcd2222';
 
 export class MockUserService {
   getUser(): BehaviorSubject<User> {
@@ -58,7 +61,7 @@ describe('EditPasswordComponent', () => {
     TestBed.configureTestingModule({
       declarations: [EditPasswordComponent],
       imports: [BrowserAnimationsModule, ReactiveFormsModule, MatSnackBarModule, MatDialogModule],
-      providers: [{ provide: UserService, useValue: new MockUserService() }],
+      providers: [PasswordService, { provide: UserService, useValue: new MockUserService() }],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(EditPasswordComponent);
@@ -86,7 +89,7 @@ function initialState_disableSubmitButton() {
 
 function validForm_enableSubmitButton() {
   it('should enable submit button when form is valid', () => {
-    setPasswords(CORRECT_OLD_PASS, 'b', 'b');
+    setPasswords(CORRECT_OLD_PASS, NEW_PASSWORD_1, NEW_PASSWORD_1);
     expectSubmitButtonEnabled();
     expect(component.changePasswordFormGroup.valid).toBeTruthy();
   });
@@ -94,7 +97,7 @@ function validForm_enableSubmitButton() {
 
 function passwordMismatch_disableSubmitButtonAndInvalidateForm() {
   it('should disable submit button and invalidate form when new password and confirm new password fields do not match', () => {
-    setPasswords(CORRECT_OLD_PASS, 'a', 'b');
+    setPasswords(CORRECT_OLD_PASS, NEW_PASSWORD_1, NEW_PASSWORD_2);
     expectSubmitButtonDisabled();
     expect(component.changePasswordFormGroup.valid).toBeFalsy();
   });
@@ -102,7 +105,7 @@ function passwordMismatch_disableSubmitButtonAndInvalidateForm() {
 
 function oldPasswordIncorrect_disableSubmitButtonAndShowError() {
   it('should disable submit button and set incorrectPassword error when old password is incorrect', async () => {
-    setPasswords(INCORRECT_OLD_PASS, 'c', 'c');
+    setPasswords(INCORRECT_OLD_PASS, NEW_PASSWORD_1, NEW_PASSWORD_1);
     submitForm();
     expectSubmitButtonDisabled();
     expect(component.changePasswordFormGroup.get('oldPassword').getError('incorrectPassword')).toBe(

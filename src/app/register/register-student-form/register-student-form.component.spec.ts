@@ -12,10 +12,12 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
+import { PasswordService } from '../../services/password.service';
 
 let router: Router;
 let component: RegisterStudentFormComponent;
 let fixture: ComponentFixture<RegisterStudentFormComponent>;
+const PASSWORD: string = 'Abcd1234';
 let studentService: StudentService;
 let snackBar: MatSnackBar;
 
@@ -33,24 +35,27 @@ export class MockStudentService {
 export class MockUserService {}
 
 describe('RegisterStudentFormComponent', () => {
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [RegisterStudentFormComponent],
-      imports: [
-        BrowserAnimationsModule,
-        RouterTestingModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatInputModule,
-        MatSnackBarModule
-      ],
-      providers: [
-        { provide: StudentService, useClass: MockStudentService },
-        { provide: UserService, useClass: MockUserService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [RegisterStudentFormComponent],
+        imports: [
+          BrowserAnimationsModule,
+          RouterTestingModule,
+          ReactiveFormsModule,
+          MatSelectModule,
+          MatInputModule,
+          MatSnackBarModule
+        ],
+        providers: [
+          PasswordService,
+          { provide: StudentService, useClass: MockStudentService },
+          { provide: UserService, useClass: MockUserService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterStudentFormComponent);
@@ -76,8 +81,8 @@ function createAccount() {
           '01',
           'Who lives in a pineapple under the sea?',
           'Spongebob Squarepants',
-          'a',
-          'a'
+          PASSWORD,
+          PASSWORD
         )
       );
       const username = 'PatrickS0101';
@@ -128,8 +133,8 @@ function expectCreateAccountWithInvalidNameToShowError(errorCode: string, errorM
       '01',
       'Who lives in a pineapple under the sea?',
       'Spongebob Squarepants',
-      'a',
-      'a'
+      PASSWORD,
+      PASSWORD
     )
   );
   const response: any = helpers.createAccountErrorResponse(errorCode);

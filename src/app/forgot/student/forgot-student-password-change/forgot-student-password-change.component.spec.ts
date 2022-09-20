@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotStudentPasswordChangeComponent } from './forgot-student-password-change.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StudentService } from '../../../student/student.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/index';
+import { PasswordService } from '../../../services/password.service';
 
 export class MockStudentService {
   changePassword(
@@ -24,6 +25,8 @@ export class MockStudentService {
     });
   }
 }
+
+const PASSWORD = 'Abcd1234';
 
 describe('ForgotStudentPasswordChangeComponent', () => {
   let component: ForgotStudentPasswordChangeComponent;
@@ -62,7 +65,7 @@ describe('ForgotStudentPasswordChangeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ForgotStudentPasswordChangeComponent],
       imports: [RouterTestingModule, BrowserAnimationsModule, ReactiveFormsModule],
-      providers: [{ provide: StudentService, useClass: MockStudentService }],
+      providers: [PasswordService, { provide: StudentService, useClass: MockStudentService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(ForgotStudentPasswordChangeComponent);
@@ -81,8 +84,8 @@ describe('ForgotStudentPasswordChangeComponent', () => {
   });
 
   it('should enable the submit button when the password fields are filled in', () => {
-    component.setControlFieldValue('password', 'newpassword');
-    component.setControlFieldValue('confirmPassword', 'newpassword');
+    component.setControlFieldValue('password', PASSWORD);
+    component.setControlFieldValue('confirmPassword', PASSWORD);
     fixture.detectChanges();
     const submitButton = getSubmitButton();
     expect(submitButton.disabled).toBe(false);

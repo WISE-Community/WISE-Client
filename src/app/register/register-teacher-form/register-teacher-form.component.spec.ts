@@ -13,6 +13,7 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
+import { PasswordService } from '../../services/password.service';
 
 class MockTeacherService {
   registerTeacherAccount() {}
@@ -22,30 +23,34 @@ class MockUserService {}
 
 let component: RegisterTeacherFormComponent;
 let fixture: ComponentFixture<RegisterTeacherFormComponent>;
+const PASSWORD: string = 'Abcd1234';
 let teacherService: TeacherService;
 let router: Router;
 let snackBar: MatSnackBar;
 
 describe('RegisterTeacherFormComponent', () => {
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [RegisterTeacherFormComponent],
-      imports: [
-        BrowserAnimationsModule,
-        RouterTestingModule,
-        ReactiveFormsModule,
-        MatCheckboxModule,
-        MatSelectModule,
-        MatInputModule,
-        MatSnackBarModule
-      ],
-      providers: [
-        { provide: TeacherService, useClass: MockTeacherService },
-        { provide: UserService, useClass: MockUserService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [RegisterTeacherFormComponent],
+        imports: [
+          BrowserAnimationsModule,
+          RouterTestingModule,
+          ReactiveFormsModule,
+          MatCheckboxModule,
+          MatSelectModule,
+          MatInputModule,
+          MatSnackBarModule
+        ],
+        providers: [
+          PasswordService,
+          { provide: TeacherService, useClass: MockTeacherService },
+          { provide: UserService, useClass: MockUserService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterTeacherFormComponent);
@@ -73,8 +78,8 @@ function createAccount() {
           'Boating School',
           'Other',
           '',
-          'a',
-          'a',
+          PASSWORD,
+          PASSWORD,
           true
         )
       );
@@ -128,8 +133,8 @@ function expectCreateAccountWithInvalidNameToShowError(errorCode: string, errorM
       'Boating School',
       'Other',
       '',
-      'a',
-      'a',
+      PASSWORD,
+      PASSWORD,
       true
     )
   );

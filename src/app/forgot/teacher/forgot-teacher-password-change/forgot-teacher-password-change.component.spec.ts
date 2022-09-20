@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherPasswordChangeComponent } from './forgot-teacher-password-change.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { Observable } from 'rxjs/index';
 import { Router } from '@angular/router';
+import { PasswordService } from '../../../services/password.service';
 
 export class MockTeacherService {
   changePassword(
@@ -57,7 +58,7 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ForgotTeacherPasswordChangeComponent],
       imports: [RouterTestingModule, ReactiveFormsModule],
-      providers: [{ provide: TeacherService, useClass: MockTeacherService }],
+      providers: [PasswordService, { provide: TeacherService, useClass: MockTeacherService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(ForgotTeacherPasswordChangeComponent);
