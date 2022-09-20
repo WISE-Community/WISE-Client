@@ -90,7 +90,6 @@ describe('OpenResponseStudent', () => {
   createComponentStateAdditionalProcessing();
   createMergedComponentState();
   hasFeedback();
-  mergeObjects();
   setStudentWork();
   snipButtonClicked();
   submitWithFeedback();
@@ -212,7 +211,7 @@ function createComponentStateAdditionalProcessing() {
       'should perform create component state additional processing',
       waitForAsync(() => {
         spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
-        spyOn(component, 'isCRaterScoreOnSubmit').and.returnValue(true);
+        spyOn(TestBed.inject(CRaterService), 'isCRaterScoreOnEvent').and.returnValue(true);
         spyOn(TestBed.inject(CRaterService), 'makeCRaterScoringRequest').and.returnValue(
           of({
             responses: {
@@ -306,20 +305,6 @@ function hasFeedback() {
 function expectHasFeedbackToBe(isCRaterEnabled: boolean, value: boolean) {
   spyOn(TestBed.inject(CRaterService), 'isCRaterEnabled').and.returnValue(isCRaterEnabled);
   expect(component.hasFeedback()).toEqual(value);
-}
-
-function mergeObjects() {
-  describe('mergeObjects', () => {
-    it('should merge objects', () => {
-      const destination: any = { id: 1, width: 800, height: 600 };
-      const source: any = { id: 2, color: 'blue' };
-      component.mergeObjects(destination, source);
-      expect(destination.id).toEqual(2);
-      expect(destination.width).toEqual(800);
-      expect(destination.height).toEqual(600);
-      expect(destination.color).toEqual('blue');
-    });
-  });
 }
 
 function checkHasFeedbackWhenCRaterIsNotEnabled() {
