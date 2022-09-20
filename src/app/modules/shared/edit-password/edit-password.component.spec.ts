@@ -12,6 +12,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PasswordService } from '../../../services/password.service';
 const CORRECT_OLD_PASS = 'a';
 const INCORRECT_OLD_PASS = 'b';
+const INVALID_PASSWORD_TOO_SHORT = 'Abcd123';
+const INVALID_PASSWORD_PATTERN = 'abcd1234';
 const NEW_PASSWORD_1 = 'Abcd1111';
 const NEW_PASSWORD_2 = 'Abcd2222';
 
@@ -78,6 +80,8 @@ describe('EditPasswordComponent', () => {
   incorrectPassword_showError();
   notGoogleUser_showUnlinkOption();
   unlinkGoogleButtonClick_showDialog();
+  invalidPasswordTooShort_showError();
+  invalidPasswordPattern_showError();
 });
 
 function initialState_disableSubmitButton() {
@@ -96,7 +100,8 @@ function validForm_enableSubmitButton() {
 }
 
 function passwordMismatch_disableSubmitButtonAndInvalidateForm() {
-  it('should disable submit button and invalidate form when new password and confirm new password fields do not match', () => {
+  it(`should disable submit button and invalidate form when new password and confirm new password
+      fields do not match`, () => {
     setPasswords(CORRECT_OLD_PASS, NEW_PASSWORD_1, NEW_PASSWORD_2);
     expectSubmitButtonDisabled();
     expect(component.changePasswordFormGroup.valid).toBeFalsy();
@@ -104,7 +109,8 @@ function passwordMismatch_disableSubmitButtonAndInvalidateForm() {
 }
 
 function oldPasswordIncorrect_disableSubmitButtonAndShowError() {
-  it('should disable submit button and set incorrectPassword error when old password is incorrect', async () => {
+  it(`should disable submit button and set incorrectPassword error when old password is
+      incorrect`, async () => {
     setPasswords(INCORRECT_OLD_PASS, NEW_PASSWORD_1, NEW_PASSWORD_1);
     submitForm();
     expectSubmitButtonDisabled();
@@ -116,14 +122,15 @@ function oldPasswordIncorrect_disableSubmitButtonAndShowError() {
 
 function formSubmit_disableSubmitButton() {
   it('should disable submit button when form is successfully submitted', async () => {
-    setPasswords(CORRECT_OLD_PASS, 'b', 'b');
+    setPasswords(CORRECT_OLD_PASS, NEW_PASSWORD_1, NEW_PASSWORD_1);
     submitForm();
     expectSubmitButtonDisabled();
   });
 }
 
 function passwordChanged_handleResponse() {
-  it('should handle the change password response when the password was successfully changed', () => {
+  it(`should handle the change password response when the password was successfully
+      changed`, () => {
     const resetFormSpy = spyOn(component, 'resetForm');
     const snackBarSpy = spyOn(component.snackBar, 'open');
     const response = {
@@ -161,6 +168,26 @@ function unlinkGoogleButtonClick_showDialog() {
     setGoogleUser();
     getUnlinkGoogleAccountButton().click();
     expect(dialogSpy).toHaveBeenCalled();
+  });
+}
+
+function invalidPasswordTooShort_showError() {
+  it(`should disable submit button and set min length error when new password is too
+      short`, async () => {
+    setPasswords(CORRECT_OLD_PASS, INVALID_PASSWORD_TOO_SHORT, INVALID_PASSWORD_TOO_SHORT);
+    expectSubmitButtonDisabled();
+    expect(component.newPasswordFormGroup.get('newPassword').getError('minlength')).toBeTruthy();
+    expect(component.newPasswordFormGroup.get('newPassword').getError('pattern')).toBeFalsy();
+  });
+}
+
+function invalidPasswordPattern_showError() {
+  it(`should disable submit button and set pattern error when new password does not satisfy the
+      pattern requirements`, async () => {
+    setPasswords(CORRECT_OLD_PASS, INVALID_PASSWORD_PATTERN, INVALID_PASSWORD_PATTERN);
+    expectSubmitButtonDisabled();
+    expect(component.newPasswordFormGroup.get('newPassword').getError('minlength')).toBeFalsy();
+    expect(component.newPasswordFormGroup.get('newPassword').getError('pattern')).toBeTruthy();
   });
 }
 
