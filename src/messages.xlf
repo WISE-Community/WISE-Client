@@ -15220,14 +15220,14 @@ Are you ready to submit this answer?</source>
         <source>We are scoring your work...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">289</context>
+          <context context-type="linenumber">291</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2283191014272031538" datatype="html">
         <source>Please Wait</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">290</context>
+          <context context-type="linenumber">292</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8785209093929133444" datatype="html">
@@ -15235,7 +15235,7 @@ Are you ready to submit this answer?</source>
 If this problem continues, let your teacher know and move on to the next activity. Your work will still be saved.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-student/open-response-student.component.ts</context>
-          <context context-type="linenumber">312</context>
+          <context context-type="linenumber">314</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5623290610025495479" datatype="html">

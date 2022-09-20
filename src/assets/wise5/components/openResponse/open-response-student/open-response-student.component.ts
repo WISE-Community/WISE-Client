@@ -225,16 +225,18 @@ export class OpenResponseStudent extends ComponentStudent {
   }
 
   /**
-   * Perform any additional processing that is required before returning the
-   * component state
-   * Note: this function must call deferred.resolve() otherwise student work
-   * will not be saved
+   * Perform any additional processing that is required before returning the component state
+   * Note: this function must call deferred.resolve() otherwise student work will not be saved
    * @param deferred a deferred object
    * @param componentState the component state
    * @param action the action that we are creating the component state for
    * e.g. 'submit', 'save', 'change'
    */
-  createComponentStateAdditionalProcessing(deferred, componentState, action): void {
+  createComponentStateAdditionalProcessing(
+    deferred: any,
+    componentState: any,
+    action: string
+  ): void {
     if (this.shouldPerformCRaterScoring(componentState, action)) {
       this.performCRaterScoring(deferred, componentState);
     } else if (
@@ -411,17 +413,7 @@ export class OpenResponseStudent extends ComponentStudent {
     }
   }
 
-  /**
-   * Create an auto score annotation
-   * @param runId the run id
-   * @param periodId the period id
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param toWorkgroupId the student workgroup id
-   * @param data the annotation data
-   * @returns the auto score annotation
-   */
-  createAutoScoreAnnotation(data) {
+  createAutoScoreAnnotation(data: any): any {
     const runId = this.ConfigService.getRunId();
     const periodId = this.ConfigService.getPeriodId();
     const nodeId = this.nodeId;
@@ -438,16 +430,6 @@ export class OpenResponseStudent extends ComponentStudent {
     return annotation;
   }
 
-  /**
-   * Create an auto comment annotation
-   * @param runId the run id
-   * @param periodId the period id
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @param toWorkgroupId the student workgroup id
-   * @param data the annotation data
-   * @returns the auto comment annotation
-   */
   createAutoCommentAnnotation(data: any): any {
     const runId = this.ConfigService.getRunId();
     const periodId = this.ConfigService.getPeriodId();
