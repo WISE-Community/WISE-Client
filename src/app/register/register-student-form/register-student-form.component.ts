@@ -7,6 +7,7 @@ import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PasswordService } from '../../services/password.service';
 
 @Component({
   selector: 'app-register-student-form',
@@ -38,7 +39,14 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
   securityQuestions: object;
   passwordsFormGroup = this.fb.group(
     {
-      password: ['', [Validators.required]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(this.passwordService.minLength),
+          Validators.pattern(this.passwordService.pattern)
+        ]
+      ],
       confirmPassword: ['', [Validators.required]]
     },
     { validator: this.passwordMatchValidator }
@@ -53,12 +61,13 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
   processing: boolean = false;
 
   constructor(
+    private fb: FormBuilder,
+    private passwordService: PasswordService,
     private router: Router,
     private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
     private studentService: StudentService,
-    private utilService: UtilService,
-    private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private utilService: UtilService
   ) {
     super();
     this.studentService.retrieveSecurityQuestions().subscribe((response) => {

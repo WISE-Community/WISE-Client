@@ -5,6 +5,7 @@ import { ConfigService } from '../../../../services/configService';
 import { TeacherService } from '../../../../../../app/teacher/teacher.service';
 import { passwordMatchValidator } from '../../../../../../app/modules/shared/validators/password-match.validator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PasswordService } from '../../../../../../app/services/password.service';
 
 @Component({
   selector: 'app-change-student-password-dialog',
@@ -16,7 +17,11 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
   changePasswordForm: FormGroup = new FormGroup(
     {
       teacherPassword: new FormControl(''),
-      newPassword: new FormControl('', Validators.required),
+      newPassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(this.passwordService.minLength),
+        Validators.pattern(this.passwordService.pattern)
+      ]),
       confirmNewPassword: new FormControl('', Validators.required)
     },
     { validators: passwordMatchValidator.bind(this) }
@@ -27,6 +32,7 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
   constructor(
     private ConfigService: ConfigService,
     private dialog: MatDialog,
+    private passwordService: PasswordService,
     private snackBar: MatSnackBar,
     private TeacherService: TeacherService,
     @Inject(MAT_DIALOG_DATA) public user: any
