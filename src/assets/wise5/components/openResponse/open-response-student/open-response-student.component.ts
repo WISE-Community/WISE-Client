@@ -12,6 +12,7 @@ import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
+import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { CRaterResponse } from '../../dialogGuidance/CRaterResponse';
 import { DialogGuidanceFeedbackRuleEvaluator } from '../../dialogGuidance/DialogGuidanceFeedbackRuleEvaluator';
@@ -24,7 +25,7 @@ import { OpenResponseService } from '../openResponseService';
   templateUrl: 'open-response-student.component.html',
   styleUrls: ['open-response-student.component.scss']
 })
-export class OpenResponseStudent extends FeedbackRuleComponent {
+export class OpenResponseStudent extends ComponentStudent implements FeedbackRuleComponent {
   audioAttachments: any[] = [];
   cRaterTimeout: number = 40000;
   isPublicSpaceExist: boolean = false;

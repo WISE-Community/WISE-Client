@@ -23,13 +23,16 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
+import { ComponentStudent } from '../../component-student.component';
 
 @Component({
   selector: 'dialog-guidance-student',
   templateUrl: './dialog-guidance-student.component.html',
   styleUrls: ['./dialog-guidance-student.component.scss']
 })
-export class DialogGuidanceStudentComponent extends FeedbackRuleComponent {
+export class DialogGuidanceStudentComponent
+  extends ComponentStudent
+  implements FeedbackRuleComponent {
   computerAvatar: ComputerAvatar;
   cRaterTimeout: number = 40000;
   feedbackRuleEvaluator: DialogGuidanceFeedbackRuleEvaluator;
