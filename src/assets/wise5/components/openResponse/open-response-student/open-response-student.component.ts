@@ -468,8 +468,8 @@ export class OpenResponseStudent extends ComponentStudent implements FeedbackRul
 
   private hasFeedbackRules(): boolean {
     return (
-      this.componentContent.cRater.feedbackRules?.enabled &&
-      this.componentContent.cRater.feedbackRules.rules.length > 0
+      this.componentContent.cRater.feedback?.enabled &&
+      this.componentContent.cRater.feedback.rules.length > 0
     );
   }
 
@@ -601,7 +601,7 @@ export class OpenResponseStudent extends ComponentStudent implements FeedbackRul
   }
 
   getFeedbackRules(): FeedbackRule[] {
-    return this.componentContent.cRater.feedbackRules.rules;
+    return this.componentContent.cRater.feedback.rules;
   }
 
   isMultipleFeedbackTextsForSameRuleAllowed(): boolean {
