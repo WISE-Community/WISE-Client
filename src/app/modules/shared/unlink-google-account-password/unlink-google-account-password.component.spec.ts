@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Subscription } from 'rxjs';
+import { PasswordService } from '../../../services/password.service';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountPasswordComponent } from './unlink-google-account-password.component';
 
@@ -22,7 +23,7 @@ describe('UnlinkGoogleAccountPasswordComponent', () => {
     TestBed.configureTestingModule({
       declarations: [UnlinkGoogleAccountPasswordComponent],
       imports: [BrowserAnimationsModule, ReactiveFormsModule, MatDialogModule],
-      providers: [{ provide: UserService, useValue: userService }],
+      providers: [PasswordService, { provide: UserService, useValue: userService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(UnlinkGoogleAccountPasswordComponent);
