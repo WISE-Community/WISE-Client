@@ -17,7 +17,7 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
   @Input() feedbackRules: FeedbackRule[] = [];
   inputChanged: Subject<string> = new Subject<string>();
   subscriptions: Subscription = new Subscription();
-  @Input() version: number;
+  @Input() version: number = 2;
 
   constructor(
     private dialog: MatDialog,

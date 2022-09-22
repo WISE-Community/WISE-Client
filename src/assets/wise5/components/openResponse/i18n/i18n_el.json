@@ -2,7 +2,6 @@
   "openResponse.addFile": "Προσθήκη Αρχείου",
   "openResponse.addMultipleAttemptScoringRule": "Προσθήκη Κανόνα Βαθμολόγησης Πολλαπλής Προσπάθειας",
   "openResponse.addNewNotification": "Προσθήκη Νέας Γνωστοποίησης",
-  "openResponse.addScoringRule": "Προσθήκη Κανόνα Βαθμολόγησης",
   "openResponse.areYouSureYouWantToDeleteThisMultipleAttemptScoringRule": "Θέλετε σίγουρα να διαγράψετε αυτό τον κανόνα βαθμολόγησης;\n\nΠροηγούμενη Βαθμολογία: {{previousScore}}\n\nΤρέχουσα Βαθμολογία: {{currentScore}}\n\nΚείμενο Ανατροφοδότησης: {{feedbackText}}",
   "openResponse.areYouSureYouWantToDeleteThisNotification": "Θέλετε σίγουρα να διαγράψετε αυτή τη γνωστοποίηση;\n\nΠροηγούμενη Βαθμολογία: {{previousScore}}\n\nΤρέχουσα Βαθμολογία: {{currentScore}}",
   "openResponse.areYouSureYouWantToDeleteThisScoringRule": "Θέλετε σίγουρα να διαγράψετε αυτό τον κανόνα βαθμολόγησης;\n\nΒαθμολογία: {{score}}\n\nΚείμενο Ανατρφοδότησης: {{feedbackText}}",

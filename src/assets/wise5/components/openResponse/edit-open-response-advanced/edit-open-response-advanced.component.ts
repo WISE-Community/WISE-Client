@@ -14,6 +14,13 @@ import { UtilService } from '../../../services/utilService';
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['OpenResponse'];
   cRaterItemIdIsValid: boolean = null;
+  initialFeedbackRules = [
+    {
+      id: 'isDefault',
+      expression: 'isDefault',
+      feedback: [$localize`Default feedback`]
+    }
+  ];
   isVerifyingCRaterItemId: boolean = false;
   nodeIds: string[] = [];
   useCustomCompletionCriteria: boolean = false;
@@ -55,40 +62,13 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       scoreOn: 'submit',
       showScore: true,
       showFeedback: true,
-      scoringRules: [],
+      feedback: {
+        enabled: false,
+        rules: this.initialFeedbackRules
+      },
       enableMultipleAttemptScoringRules: false,
       multipleAttemptScoringRules: []
     };
-  }
-
-  addScoringRule(): void {
-    if (
-      this.authoringComponentContent.cRater != null &&
-      this.authoringComponentContent.cRater.scoringRules != null
-    ) {
-      this.authoringComponentContent.cRater.scoringRules.push(this.createScoringRule());
-      this.componentChanged();
-    }
-  }
-
-  createScoringRule() {
-    return {
-      score: '',
-      feedbackText: ''
-    };
-  }
-
-  scoringRuleDeleteClicked(index: number): void {
-    const scoringRule = this.authoringComponentContent.cRater.scoringRules[index];
-    const score = scoringRule.score;
-    const feedbackText = scoringRule.feedbackText;
-    const answer = confirm(
-      $localize`Are you sure you want to delete this scoring rule?\n\nScore: ${score}\n\nFeedback Text: ${feedbackText}`
-    );
-    if (answer) {
-      this.authoringComponentContent.cRater.scoringRules.splice(index, 1);
-      this.componentChanged();
-    }
   }
 
   verifyCRaterItemId(itemId: string): void {
@@ -263,5 +243,20 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
 
   getNodePositionAndTitleByNodeId(nodeId: string): string {
     return this.TeacherProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  }
+
+  setFeedbackEnabled(feedbackEnabled: boolean): void {
+    this.initializeFeedback();
+    this.authoringComponentContent.cRater.feedback.enabled = feedbackEnabled;
+    this.componentChanged();
+  }
+
+  private initializeFeedback(): void {
+    if (!this.authoringComponentContent.cRater.feedback) {
+      this.authoringComponentContent.cRater.feedback = {
+        enabled: false,
+        rules: this.initialFeedbackRules
+      };
+    }
   }
 }
