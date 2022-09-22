@@ -123,6 +123,12 @@
                    formControlName="password"
                    required />
             <mat-error *ngIf="passwordsFormGroup.controls['password'].hasError('required')" i18n>Password required</mat-error>
+            <mat-error *ngIf="passwordsFormGroup.controls['password'].hasError('minlength')">
+              {{ passwordService.minLengthErrorMessage }}
+            </mat-error>
+            <mat-error *ngIf="passwordsFormGroup.controls['password'].hasError('pattern')">
+              {{ passwordService.patternErrorMessage }}
+            </mat-error>
           </mat-form-field>
         </p>
         <p>
