@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
 import { PasswordService } from '../../../services/password.service';
+import { passwordMatchValidator } from '../../../modules/shared/validators/password-match.validator';
 
 @Component({
   selector: 'app-forgot-teacher-password-change',
@@ -13,14 +14,17 @@ import { PasswordService } from '../../../services/password.service';
 export class ForgotTeacherPasswordChangeComponent implements OnInit {
   username: string;
   verificationCode: string;
-  changePasswordFormGroup: FormGroup = this.fb.group({
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(this.passwordService.minLength),
-      Validators.pattern(this.passwordService.pattern)
-    ]),
-    confirmPassword: new FormControl('', [Validators.required])
-  });
+  changePasswordFormGroup: FormGroup = this.fb.group(
+    {
+      newPassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(this.passwordService.minLength),
+        Validators.pattern(this.passwordService.pattern)
+      ]),
+      confirmNewPassword: new FormControl('', [Validators.required])
+    },
+    { validator: passwordMatchValidator }
+  );
   message: string = '';
   processing: boolean = false;
   isSubmitButtonEnabled: boolean = true;
@@ -41,54 +45,76 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
 
   submit() {
     this.clearMessage();
-    const password = this.getPassword();
-    const confirmPassword = this.getConfirmPassword();
+    const newPassword = this.getNewPassword();
+    const confirmNewPassword = this.getConfirmNewPassword();
     this.showForgotPasswordLink = false;
-    if (this.isPasswordsMatch(password, confirmPassword)) {
+    if (this.isPasswordsMatch(newPassword, confirmNewPassword)) {
       this.processing = true;
       this.teacherService
-        .changePassword(this.username, this.verificationCode, password, confirmPassword)
+        .changePassword(this.username, this.verificationCode, newPassword, confirmNewPassword)
         .pipe(
           finalize(() => {
             this.processing = false;
           })
         )
-        .subscribe((response) => {
-          if (response.status === 'success') {
-            this.goToSuccessPage();
-          } else {
-            if (response.messageCode === 'tooManyVerificationCodeAttempts') {
-              this.setTooManyVerificationCodeAttemptsMessage();
-              this.disablePasswordInputs();
-              this.disableSubmitButton();
-              this.showForgotPasswordLink = true;
-            } else if (response.messageCode === 'verificationCodeExpired') {
-              this.setVerificationCodeExpiredMessage();
-              this.disablePasswordInputs();
-              this.disableSubmitButton();
-              this.showForgotPasswordLink = true;
-            } else if (response.messageCode === 'verificationCodeIncorrect') {
-              this.setVerificationCodeIncorrectMessage();
-            } else if (response.messageCode === 'passwordIsBlank') {
-              this.setPasswordIsBlankMessage();
-            } else if (response.messageCode === 'passwordsDoNotMatch') {
-              this.setPasswordsDoNotMatchMessage();
-            } else {
-              this.setErrorOccurredMessage();
-            }
+        .subscribe(
+          () => {
+            this.changePasswordSuccess();
+          },
+          (response) => {
+            this.changePasswordError(response.error);
           }
-        });
+        );
     } else {
       this.setPasswordsDoNotMatchMessage();
     }
   }
 
-  getPassword() {
-    return this.getControlFieldValue('password');
+  changePasswordSuccess(): void {
+    this.goToSuccessPage();
   }
 
-  getConfirmPassword() {
-    return this.getControlFieldValue('confirmPassword');
+  changePasswordError(error: any): void {
+    const formError: any = {};
+    switch (error.messageCode) {
+      case 'tooManyVerificationCodeAttempts':
+        this.setTooManyVerificationCodeAttemptsMessage();
+        this.disablePasswordInputs();
+        this.disableSubmitButton();
+        this.showForgotPasswordLink = true;
+        break;
+      case 'verificationCodeExpired':
+        this.setVerificationCodeExpiredMessage();
+        this.disablePasswordInputs();
+        this.disableSubmitButton();
+        this.showForgotPasswordLink = true;
+        break;
+      case 'verificationCodeIncorrect':
+        this.setVerificationCodeIncorrectMessage();
+        break;
+      case 'invalidPasswordLength':
+        formError.minlength = true;
+        this.changePasswordFormGroup.get('newPassword').setErrors(formError);
+        break;
+      case 'invalidPasswordPattern':
+        formError.pattern = true;
+        this.changePasswordFormGroup.get('newPassword').setErrors(formError);
+        break;
+      case 'passwordDoesNotMatch':
+        formError.passwordDoesNotMatch = true;
+        this.changePasswordFormGroup.get('confirmNewPassword').setErrors(formError);
+        break;
+      default:
+        this.setErrorOccurredMessage();
+    }
+  }
+
+  getNewPassword() {
+    return this.getControlFieldValue('newPassword');
+  }
+
+  getConfirmNewPassword() {
+    return this.getControlFieldValue('confirmNewPassword');
   }
 
   getControlField(fieldName) {
@@ -143,8 +169,8 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
   }
 
   disablePasswordInputs() {
-    this.getControlField('password').disable();
-    this.getControlField('confirmPassword').disable();
+    this.getControlField('newPassword').disable();
+    this.getControlField('confirmNewPassword').disable();
   }
 
   disableSubmitButton() {

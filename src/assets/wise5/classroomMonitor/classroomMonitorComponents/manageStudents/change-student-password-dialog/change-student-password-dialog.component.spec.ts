@@ -63,7 +63,6 @@ function changePassword() {
       dialogSpy = spyOn(dialog, 'closeAll');
     });
     afterEach(() => {
-      expect(snackBarSpy).toHaveBeenCalled();
       expect(component.isChangingPassword).toBeFalsy();
     });
     changePassword_success_closeDialog();
@@ -75,6 +74,7 @@ function changePassword_success_closeDialog() {
   it('should close dialog on success', () => {
     spyOn(teacherService, 'changeStudentPassword').and.returnValue(of(''));
     component.changePassword();
+    expect(snackBarSpy).toHaveBeenCalled();
     expect(dialogSpy).toHaveBeenCalled();
   });
 }

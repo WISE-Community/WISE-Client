@@ -4,7 +4,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
-import { Observable } from 'rxjs/index';
+import { Observable, throwError } from 'rxjs/index';
 import { Router } from '@angular/router';
 import { PasswordService } from '../../../services/password.service';
 
@@ -31,7 +31,7 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
 
   const submitAndReceiveResponse = (teacherServiceFunctionName, status, messageCode) => {
     const teacherService = TestBed.get(TeacherService);
-    const observableResponse = createObservableResponse(status, messageCode);
+    const observableResponse = throwError({ error: { messageCode: messageCode } });
     spyOn(teacherService, teacherServiceFunctionName).and.returnValue(observableResponse);
     component.submit();
     fixture.detectChanges();
@@ -87,16 +87,6 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
     expect(getErrorMessage()).toContain('The verification code is invalid');
   });
 
-  it('should display the password cannot be blank message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'passwordIsBlank');
-    expect(getErrorMessage()).toContain('Password cannot be blank');
-  });
-
-  it('should show the passwords do not match message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'passwordsDoNotMatch');
-    expect(getErrorMessage()).toContain('Passwords do not match');
-  });
-
   it('should go to the complete page', () => {
     const router = TestBed.get(Router);
     const navigateSpy = spyOn(router, 'navigate');
@@ -115,8 +105,8 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
     const navigateSpy = spyOn(router, 'navigate');
     component.username = 'SpongebobSquarepants';
     component.verificationCode = '123456';
-    component.setControlFieldValue('password', 'a');
-    component.setControlFieldValue('confirmPassword', 'a');
+    component.setControlFieldValue('newPassword', 'a');
+    component.setControlFieldValue('confirmNewPassword', 'a');
     component.submit();
     fixture.detectChanges();
     const params = {

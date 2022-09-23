@@ -114,22 +114,38 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
       this.populateStudentUser();
       this.studentService.registerStudentAccount(this.studentUser).subscribe(
         (response: any) => {
-          if (response.status === 'success') {
-            this.router.navigate([
-              'join/student/complete',
-              { username: response.username, isUsingGoogleId: this.isUsingGoogleId() }
-            ]);
-          } else {
-            this.snackBar.open(this.translateCreateAccountErrorMessageCode(response.messageCode));
-          }
-          this.processing = false;
+          this.createAccountSuccess(response);
         },
-        (error: HttpErrorResponse) => {
-          this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.error.messageCode));
-          this.processing = false;
+        (response: HttpErrorResponse) => {
+          this.createAccountError(response.error);
         }
       );
     }
+  }
+
+  createAccountSuccess(response: any): void {
+    this.router.navigate([
+      'join/student/complete',
+      { username: response.username, isUsingGoogleId: this.isUsingGoogleId() }
+    ]);
+    this.processing = false;
+  }
+
+  createAccountError(error: any): void {
+    const formError: any = {};
+    switch (error.messageCode) {
+      case 'invalidPasswordLength':
+        formError.minlength = true;
+        this.passwordsFormGroup.get('password').setErrors(formError);
+        break;
+      case 'invalidPasswordPattern':
+        formError.pattern = true;
+        this.passwordsFormGroup.get('password').setErrors(formError);
+        break;
+      default:
+        this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
+    }
+    this.processing = false;
   }
 
   populateStudentUser() {

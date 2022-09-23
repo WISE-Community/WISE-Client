@@ -31,12 +31,12 @@ export class MockUserService {
   changePassword(username, oldPassword, newPassword) {
     if (oldPassword === CORRECT_OLD_PASS) {
       return new Observable((observer) => {
-        observer.next({ status: 'success', messageCode: 'passwordChanged' });
+        observer.next({ messageCode: 'passwordChanged' });
         observer.complete();
       });
     } else {
       return new Observable((observer) => {
-        observer.next({ status: 'error', messageCode: 'incorrectPassword' });
+        observer.error({ error: { messageCode: 'incorrectPassword' } });
         observer.complete();
       });
     }
@@ -76,8 +76,6 @@ describe('EditPasswordComponent', () => {
   passwordMismatch_disableSubmitButtonAndInvalidateForm();
   oldPasswordIncorrect_disableSubmitButtonAndShowError();
   formSubmit_disableSubmitButton();
-  passwordChanged_handleResponse();
-  incorrectPassword_showError();
   notGoogleUser_showUnlinkOption();
   unlinkGoogleButtonClick_showDialog();
   invalidPasswordTooShort_showError();
@@ -124,35 +122,8 @@ function formSubmit_disableSubmitButton() {
   it('should disable submit button when form is successfully submitted', async () => {
     setPasswords(CORRECT_OLD_PASS, NEW_PASSWORD_1, NEW_PASSWORD_1);
     submitForm();
+    const submitButton = getSubmitButton();
     expectSubmitButtonDisabled();
-  });
-}
-
-function passwordChanged_handleResponse() {
-  it(`should handle the change password response when the password was successfully
-      changed`, () => {
-    const resetFormSpy = spyOn(component, 'resetForm');
-    const snackBarSpy = spyOn(component.snackBar, 'open');
-    const response = {
-      status: 'success',
-      messageCode: 'passwordChanged'
-    };
-    component.handleChangePasswordResponse(response);
-    expect(resetFormSpy).toHaveBeenCalled();
-    expect(snackBarSpy).toHaveBeenCalled();
-  });
-}
-
-function incorrectPassword_showError() {
-  it('should handle the change password response when the password was incorrect', () => {
-    const response = {
-      status: 'error',
-      messageCode: 'incorrectPassword'
-    };
-    component.handleChangePasswordResponse(response);
-    expect(component.changePasswordFormGroup.get('oldPassword').getError('incorrectPassword')).toBe(
-      true
-    );
   });
 }
 
