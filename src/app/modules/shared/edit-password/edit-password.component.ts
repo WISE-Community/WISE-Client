@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountConfirmComponent } from '../unlink-google-account-confirm/unlink-google-account-confirm.component';
 import { passwordMatchValidator } from '../validators/password-match.validator';
+import { PasswordService } from '../../../services/password.service';
 
 @Component({
   selector: 'app-edit-password',
@@ -19,7 +20,11 @@ export class EditPasswordComponent {
 
   newPasswordFormGroup: FormGroup = this.fb.group(
     {
-      newPassword: new FormControl('', [Validators.required]),
+      newPassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(this.passwordService.minLength),
+        Validators.pattern(this.passwordService.pattern)
+      ]),
       confirmNewPassword: new FormControl('', [Validators.required])
     },
     { validator: passwordMatchValidator }
@@ -31,10 +36,11 @@ export class EditPasswordComponent {
   });
 
   constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    private fb: FormBuilder,
+    private passwordService: PasswordService,
+    public snackBar: MatSnackBar,
+    private userService: UserService
   ) {}
 
   ngOnInit() {

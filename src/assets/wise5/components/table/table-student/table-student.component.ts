@@ -151,8 +151,6 @@ export class TableStudent extends ComponentStudent {
         this.studentDataChanged();
       }, 1000);
     }
-
-    this.broadcastDoneRenderingComponent();
   }
 
   ngOnDestroy(): void {
@@ -1179,6 +1177,10 @@ export class TableStudent extends ComponentStudent {
     const rowIndex = cell.getRow().getIndex() + 1;
     this.tableData[rowIndex][columnIndex].text = cell.getValue();
     this.studentDataChanged();
+  }
+
+  tabulatorRendered(): void {
+    this.broadcastDoneRenderingComponent();
   }
 
   tabulatorRowSelectionChanged(rows: Tabulator.RowComponent[]): void {

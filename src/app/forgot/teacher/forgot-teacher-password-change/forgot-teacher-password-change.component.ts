@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
+import { PasswordService } from '../../../services/password.service';
 
 @Component({
   selector: 'app-forgot-teacher-password-change',
@@ -13,7 +14,11 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
   username: string;
   verificationCode: string;
   changePasswordFormGroup: FormGroup = this.fb.group({
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(this.passwordService.minLength),
+      Validators.pattern(this.passwordService.pattern)
+    ]),
     confirmPassword: new FormControl('', [Validators.required])
   });
   message: string = '';
@@ -23,6 +28,7 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private passwordService: PasswordService,
     private router: Router,
     private route: ActivatedRoute,
     private teacherService: TeacherService

@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
+import { PasswordService } from '../../../../../../app/services/password.service';
 import { TeacherService } from '../../../../../../app/teacher/teacher.service';
 import { ConfigService } from '../../../../services/configService';
 import { ChangeStudentPasswordDialogComponent } from './change-student-password-dialog.component';
@@ -35,6 +36,7 @@ describe('ChangeStudentPasswordDialogComponent', () => {
       imports: [MatSnackBarModule, MatDialogModule],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
+        PasswordService,
         { provide: TeacherService, useClass: TeacherServiceStub },
         { provide: MAT_DIALOG_DATA, useValue: user }
       ],

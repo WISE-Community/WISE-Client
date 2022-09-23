@@ -39,6 +39,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   @Input() tabData: any[]; // see http://tabulator.info/docs/5.3/data
   @Input() tabOptions: any; // see http://tabulator.info/docs/5.3/options
   @Output() cellChanged = new EventEmitter<Tabulator.CellComponent>();
+  @Output() ready = new EventEmitter<void>();
   @Output() rowSelectionChanged = new EventEmitter<Tabulator.RowComponent>();
   @ViewChild('table', { static: false }) tableContainer: ElementRef;
 
@@ -72,6 +73,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
       if (this.enableRowSelection) {
         this.setupRowSelection();
       }
+      this.ready.emit();
     });
     this.tableContainer.nativeElement.appendChild(this.tableEl);
     this.viewInit$.next();
