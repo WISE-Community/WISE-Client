@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { MatchService } from '../matchService';
@@ -20,8 +21,12 @@ export class MatchShowWorkComponent extends ComponentShowWorkDirective {
   submitCounter: number;
   isLatestComponentStateSubmit: boolean;
 
-  constructor(protected matchService: MatchService, protected projectService: ProjectService) {
-    super(projectService);
+  constructor(
+    protected matchService: MatchService,
+    protected nodeService: NodeService,
+    protected projectService: ProjectService
+  ) {
+    super(nodeService, projectService);
   }
 
   ngOnInit() {

@@ -3,7 +3,6 @@ import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
 import { PeerGroupService } from '../../../services/peerGroupService';
@@ -31,12 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { PeerChatModule } from '../peer-chat.module';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PauseScreenService } from '../../../services/pauseScreenService';
-
-export class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: PeerChatStudentComponent;
 const componentId = 'component1';
@@ -132,14 +126,14 @@ describe('PeerChatStudentComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        PeerChatModule
+        PeerChatModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [ComponentHeader, PeerChatStudentComponent, PossibleScoreComponent],
       providers: [
         AnnotationService,
         ComponentService,
         ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
         NotebookService,
         NotificationService,
         PauseScreenService,
