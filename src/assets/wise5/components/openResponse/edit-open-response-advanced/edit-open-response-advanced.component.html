@@ -89,7 +89,7 @@
         [feedbackRules]="authoringComponentContent.cRater.feedback.rules">
     </edit-dialog-guidance-feedback-rules>
   </div>
-  <div class="section-container">
+  <div class="section-container" *ngIf="!authoringComponentContent.cRater.feedback?.enabled">
     <div fxLayoutGap="10px" class="section-label">
       <span i18n>Scoring Rule</span>
       <button
