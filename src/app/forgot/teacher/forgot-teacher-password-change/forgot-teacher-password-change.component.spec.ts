@@ -29,24 +29,11 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
   let component: ForgotTeacherPasswordChangeComponent;
   let fixture: ComponentFixture<ForgotTeacherPasswordChangeComponent>;
 
-  const submitAndReceiveResponse = (teacherServiceFunctionName, status, messageCode) => {
-    const teacherService = TestBed.get(TeacherService);
+  const submitAndReceiveErrorResponse = (messageCode: string) => {
     const observableResponse = throwError({ error: { messageCode: messageCode } });
-    spyOn(teacherService, teacherServiceFunctionName).and.returnValue(observableResponse);
+    spyOn(TestBed.get(TeacherService), 'changePassword').and.returnValue(observableResponse);
     component.submit();
     fixture.detectChanges();
-  };
-
-  const createObservableResponse = (status, messageCode) => {
-    const observableResponse = Observable.create((observer) => {
-      const response = {
-        status: status,
-        messageCode: messageCode
-      };
-      observer.next(response);
-      observer.complete();
-    });
-    return observableResponse;
   };
 
   const getErrorMessage = () => {
@@ -71,19 +58,19 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
   });
 
   it('should show the too many verification code attempts message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'tooManyVerificationCodeAttempts');
+    submitAndReceiveErrorResponse('tooManyVerificationCodeAttempts');
     expect(getErrorMessage()).toContain(
       'You have submitted an invalid verification code too many times'
     );
   });
 
   it('should show the verification code expired message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'verificationCodeExpired');
+    submitAndReceiveErrorResponse('verificationCodeExpired');
     expect(getErrorMessage()).toContain('The verification code has expired');
   });
 
   it('should show the verification code incorrect message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'verificationCodeIncorrect');
+    submitAndReceiveErrorResponse('verificationCodeIncorrect');
     expect(getErrorMessage()).toContain('The verification code is invalid');
   });
 
