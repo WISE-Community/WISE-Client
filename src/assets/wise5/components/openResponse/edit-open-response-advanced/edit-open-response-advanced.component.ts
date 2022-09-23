@@ -14,6 +14,13 @@ import { UtilService } from '../../../services/utilService';
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['OpenResponse'];
   cRaterItemIdIsValid: boolean = null;
+  initialFeedbackRules = [
+    {
+      id: 'isDefault',
+      expression: 'isDefault',
+      feedback: [$localize`Default feedback`]
+    }
+  ];
   isVerifyingCRaterItemId: boolean = false;
   nodeIds: string[] = [];
   useCustomCompletionCriteria: boolean = false;
@@ -56,6 +63,10 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       showScore: true,
       showFeedback: true,
       scoringRules: [],
+      feedback: {
+        enabled: false,
+        rules: this.initialFeedbackRules
+      },
       enableMultipleAttemptScoringRules: false,
       multipleAttemptScoringRules: []
     };
@@ -263,5 +274,20 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
 
   getNodePositionAndTitleByNodeId(nodeId: string): string {
     return this.TeacherProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  }
+
+  setFeedbackEnabled(feedbackEnabled: boolean): void {
+    this.initializeFeedback();
+    this.authoringComponentContent.cRater.feedback.enabled = feedbackEnabled;
+    this.componentChanged();
+  }
+
+  private initializeFeedback(): void {
+    if (!this.authoringComponentContent.cRater.feedback) {
+      this.authoringComponentContent.cRater.feedback = {
+        enabled: false,
+        rules: this.initialFeedbackRules
+      };
+    }
   }
 }
