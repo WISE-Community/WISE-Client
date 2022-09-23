@@ -68,4 +68,11 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
       this.componentContent.globalCellSize
     );
   }
+
+  tabulatorRendered(): void {
+    this.nodeService.broadcastDoneRenderingComponent({
+      nodeId: this.nodeId,
+      componentId: this.componentId
+    });
+  }
 }
