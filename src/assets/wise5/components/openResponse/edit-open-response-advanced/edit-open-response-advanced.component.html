@@ -90,6 +90,69 @@
     </edit-dialog-guidance-feedback-rules>
   </div>
   <div class="section-container">
+    <div fxLayoutGap="10px" class="section-label">
+      <span i18n>Scoring Rule</span>
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="addScoringRule()"
+          matTooltip="Add Scoring Rule"
+          matTooltipPosition="above"
+          i18n-matTooltip>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div *ngFor="let scoringRule of authoringComponentContent.cRater.scoringRules; index as scoringRuleIndex; first as isFirst; last as isLast"
+        fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px" class="section-item">
+      <mat-form-field class="scoring-rule-score">
+        <mat-label i18n>Score</mat-label>
+        <input matInput
+            type="number"
+            min="0"
+            [(ngModel)]="scoringRule.score"
+            (ngModelChange)="componentChanged()"/>
+      </mat-form-field>
+      <mat-form-field class="scoring-rule-feedback-text">
+        <mat-label i18n>Feedback Text</mat-label>
+        <textarea matInput
+            [(ngModel)]="scoringRule.feedbackText"
+            (ngModelChange)="componentChanged()"
+            cdkTextareaAutosize>
+        </textarea>
+      </mat-form-field>
+      <div fxLayoutGap="10px">
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="moveObjectUp(authoringComponentContent.cRater.scoringRules, scoringRuleIndex)"
+            [disabled]="isFirst"
+            matTooltip="Move Scoring Rule Up"
+            matTooltipPosition="above"
+            i18n-matTooltip>
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="moveObjectDown(authoringComponentContent.cRater.scoringRules, scoringRuleIndex)"
+            [disabled]="isLast"
+            matTooltip="Move Scoring Rule Down"
+            matTooltipPosition="above"
+            i18n-matTooltip>
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
+        <button
+            mat-raised-button
+            color="primary" (click)="scoringRuleDeleteClicked(scoringRuleIndex)"
+            matTooltip="Delete Scoring Rule"
+            matTooltipPosition="above"
+            i18n-matTooltip>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="section-container">
     <div>
       <mat-checkbox
           color="primary"
