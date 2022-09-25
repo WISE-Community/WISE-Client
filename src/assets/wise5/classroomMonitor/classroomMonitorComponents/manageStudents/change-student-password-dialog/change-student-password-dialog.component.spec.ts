@@ -83,7 +83,7 @@ function changePassword_failure_keepDialogOpen() {
   it('should keep dialog open on failure', () => {
     spyOn(teacherService, 'changeStudentPassword').and.returnValue(
       throwError({
-        messageCode: 'invalidPasswordLength'
+        error: { messageCode: 'invalidPasswordLength' }
       })
     );
     component.changePassword();
