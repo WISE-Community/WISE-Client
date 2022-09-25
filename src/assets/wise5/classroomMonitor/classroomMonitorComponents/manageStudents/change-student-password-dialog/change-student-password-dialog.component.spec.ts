@@ -72,7 +72,7 @@ function changePassword() {
 
 function changePassword_success_closeDialog() {
   it('should close dialog on success', () => {
-    spyOn(teacherService, 'changeStudentPassword').and.returnValue(of(''));
+    spyOn(teacherService, 'changeStudentPassword').and.returnValue(of({}));
     component.changePassword();
     expect(snackBarSpy).toHaveBeenCalled();
     expect(dialogSpy).toHaveBeenCalled();
@@ -81,7 +81,11 @@ function changePassword_success_closeDialog() {
 
 function changePassword_failure_keepDialogOpen() {
   it('should keep dialog open on failure', () => {
-    spyOn(teacherService, 'changeStudentPassword').and.returnValue(throwError('error'));
+    spyOn(teacherService, 'changeStudentPassword').and.returnValue(
+      throwError({
+        messageCode: 'invalidPasswordLength'
+      })
+    );
     component.changePassword();
     expect(dialogSpy).not.toHaveBeenCalled();
   });
