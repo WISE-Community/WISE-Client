@@ -11,10 +11,10 @@ import { DialogResponse } from '../DialogResponse';
 import { StudentDialogResponse } from '../StudentDialogResponse';
 import { CRaterService } from '../../../services/cRaterService';
 import { timeout } from 'rxjs/operators';
-import { CRaterResponse } from '../CRaterResponse';
+import { CRaterResponse } from '../../common/cRater/CRaterResponse';
 import { ComputerDialogResponse } from '../ComputerDialogResponse';
-import { FeedbackRule } from '../FeedbackRule';
-import { DialogGuidanceFeedbackRuleEvaluator } from '../DialogGuidanceFeedbackRuleEvaluator';
+import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
+import { FeedbackRuleEvaluator } from '../../common/feedbackRule/FeedbackRuleEvaluator';
 import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseMultipleScores';
 import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
 import { MatDialog } from '@angular/material/dialog';
@@ -35,7 +35,7 @@ export class DialogGuidanceStudentComponent
   implements FeedbackRuleComponent {
   computerAvatar: ComputerAvatar;
   cRaterTimeout: number = 40000;
-  feedbackRuleEvaluator: DialogGuidanceFeedbackRuleEvaluator;
+  feedbackRuleEvaluator: FeedbackRuleEvaluator;
   isShowComputerAvatarSelector: boolean = false;
   isSubmitEnabled: boolean = false;
   isWaitingForComputerResponse: boolean = false;
@@ -84,7 +84,7 @@ export class DialogGuidanceStudentComponent
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     }
-    this.feedbackRuleEvaluator = new DialogGuidanceFeedbackRuleEvaluator(this);
+    this.feedbackRuleEvaluator = new FeedbackRuleEvaluator(this);
     if (this.componentContent.isComputerAvatarEnabled) {
       this.initializeComputerAvatar();
     } else {

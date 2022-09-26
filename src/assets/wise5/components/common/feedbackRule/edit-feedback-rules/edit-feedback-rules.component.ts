@@ -2,18 +2,18 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
+import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { UtilService } from '../../../../services/utilService';
 import { FeedbackRule } from '../FeedbackRule';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogGuidanceFeedbackRuleHelpComponent } from '../dialog-guidance-feedback-rule-help/dialog-guidance-feedback-rule-help.component';
+import { FeedbackRuleHelpComponent } from '../feedback-rule-help/feedback-rule-help.component';
 
 @Component({
-  selector: 'edit-dialog-guidance-feedback-rules',
-  templateUrl: './edit-dialog-guidance-feedback-rules.component.html',
-  styleUrls: ['./edit-dialog-guidance-feedback-rules.component.scss']
+  selector: 'edit-feedback-rules',
+  templateUrl: './edit-feedback-rules.component.html',
+  styleUrls: ['./edit-feedback-rules.component.scss']
 })
-export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
+export class EditFeedbackRulesComponent implements OnInit {
   @Input() feedbackRules: FeedbackRule[] = [];
   inputChanged: Subject<string> = new Subject<string>();
   subscriptions: Subscription = new Subscription();
@@ -96,6 +96,6 @@ export class EditDialogGuidanceFeedbackRulesComponent implements OnInit {
   }
 
   showHelp(): void {
-    this.dialog.open(DialogGuidanceFeedbackRuleHelpComponent);
+    this.dialog.open(FeedbackRuleHelpComponent);
   }
 }

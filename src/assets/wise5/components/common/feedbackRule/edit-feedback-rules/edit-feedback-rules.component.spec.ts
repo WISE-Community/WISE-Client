@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { EditDialogGuidanceFeedbackRulesComponent } from './edit-dialog-guidance-feedback-rules.component';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
+import { EditFeedbackRulesComponent } from './edit-feedback-rules.component';
+import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { UtilService } from '../../../../services/utilService';
 import { FeedbackRule } from '../FeedbackRule';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogGuidanceFeedbackRuleHelpComponent } from '../dialog-guidance-feedback-rule-help/dialog-guidance-feedback-rule-help.component';
+import { FeedbackRuleHelpComponent } from '../feedback-rule-help/feedback-rule-help.component';
 
 class MockTeacherProjectService {
   nodeChanged() {}
@@ -15,19 +15,19 @@ class MockMatDialog {
   open() {}
 }
 
-let component: EditDialogGuidanceFeedbackRulesComponent;
+let component: EditFeedbackRulesComponent;
 const feedbackString1: string = 'you hit idea1';
 const feedbackString2: string = 'you hit idea2';
 let dialogOpenSpy: jasmine.Spy;
 let nodeChangedSpy: jasmine.Spy;
 
-describe('EditDialogGuidanceFeedbackRulesComponent', () => {
-  let fixture: ComponentFixture<EditDialogGuidanceFeedbackRulesComponent>;
+describe('EditFeedbackRulesComponent', () => {
+  let fixture: ComponentFixture<EditFeedbackRulesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [],
-      declarations: [EditDialogGuidanceFeedbackRulesComponent],
+      declarations: [EditFeedbackRulesComponent],
       providers: [
         { provide: MatDialog, useClass: MockMatDialog },
         { provide: TeacherProjectService, useClass: MockTeacherProjectService },
@@ -35,7 +35,7 @@ describe('EditDialogGuidanceFeedbackRulesComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-    fixture = TestBed.createComponent(EditDialogGuidanceFeedbackRulesComponent);
+    fixture = TestBed.createComponent(EditFeedbackRulesComponent);
     component = fixture.componentInstance;
     component.version = 2;
     component.feedbackRules = [
@@ -159,9 +159,9 @@ function deleteFeedbackInRule() {
 
 function showHelp() {
   describe('showHelp()', () => {
-    it('should show DialogGuidanceFeedbackRuleHelpComponent in a dialog', () => {
+    it('should show FeedbackRuleHelpComponent in a dialog', () => {
       component.showHelp();
-      expect(dialogOpenSpy).toHaveBeenCalledOnceWith(DialogGuidanceFeedbackRuleHelpComponent);
+      expect(dialogOpenSpy).toHaveBeenCalledOnceWith(FeedbackRuleHelpComponent);
     });
   });
 }

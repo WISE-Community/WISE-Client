@@ -14,9 +14,9 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
-import { CRaterResponse } from '../../dialogGuidance/CRaterResponse';
-import { DialogGuidanceFeedbackRuleEvaluator } from '../../dialogGuidance/DialogGuidanceFeedbackRuleEvaluator';
-import { FeedbackRule } from '../../dialogGuidance/FeedbackRule';
+import { CRaterResponse } from '../../common/cRater/CRaterResponse';
+import { FeedbackRuleEvaluator } from '../../common/feedbackRule/FeedbackRuleEvaluator';
+import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { OpenResponseService } from '../openResponseService';
 
@@ -394,7 +394,7 @@ export class OpenResponseStudent extends ComponentStudent implements FeedbackRul
       );
     } else {
       if (this.hasFeedbackRules()) {
-        const feedbackRuleEvaluator = new DialogGuidanceFeedbackRuleEvaluator(this);
+        const feedbackRuleEvaluator = new FeedbackRuleEvaluator(this);
         const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(response);
         autoComment = this.getFeedbackText(feedbackRule);
         feedbackRuleId = feedbackRule.id;

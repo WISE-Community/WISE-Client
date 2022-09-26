@@ -1,4 +1,4 @@
-import { CRaterResponse } from '../CRaterResponse';
+import { CRaterResponse } from '../../cRater/CRaterResponse';
 import { TermEvaluator } from './TermEvaluator';
 
 export class IdeaCountTermEvaluator extends TermEvaluator {

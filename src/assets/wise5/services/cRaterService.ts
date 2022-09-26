@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { Observable, of } from 'rxjs';
-import { CRaterIdea } from '../components/dialogGuidance/CRaterIdea';
-import { CRaterScore } from '../components/dialogGuidance/CRaterScore';
-import { CRaterResponse } from '../components/dialogGuidance/CRaterResponse';
+import { CRaterIdea } from '../components/common/cRater/CRaterIdea';
+import { CRaterScore } from '../components/common/cRater/CRaterScore';
+import { CRaterResponse } from '../components/common/cRater/CRaterResponse';
 
 @Injectable()
 export class CRaterService {

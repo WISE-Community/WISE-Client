@@ -7,29 +7,29 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PossibleScoreComponent } from '../../../../app/possible-score/possible-score.component';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { ComponentHeader } from '../../directives/component-header/component-header.component';
-import { AnnotationService } from '../../services/annotationService';
-import { DialogGuidanceFeedbackService } from '../../services/dialogGuidanceFeedbackService';
-import { ProjectService } from '../../services/projectService';
-import { CRaterIdea } from './CRaterIdea';
-import { CRaterResponse } from './CRaterResponse';
-import { CRaterScore } from './CRaterScore';
-import { DialogGuidanceStudentComponent } from './dialog-guidance-student/dialog-guidance-student.component';
-import { DialogResponsesComponent } from './dialog-responses/dialog-responses.component';
-import { DialogGuidanceFeedbackRuleEvaluator } from './DialogGuidanceFeedbackRuleEvaluator';
-import { DialogGuidanceService } from './dialogGuidanceService';
+import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentHeader } from '../../../directives/component-header/component-header.component';
+import { AnnotationService } from '../../../services/annotationService';
+import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
+import { ProjectService } from '../../../services/projectService';
+import { CRaterIdea } from '../cRater/CRaterIdea';
+import { CRaterResponse } from '../cRater/CRaterResponse';
+import { CRaterScore } from '../cRater/CRaterScore';
+import { DialogGuidanceStudentComponent } from '../../dialogGuidance/dialog-guidance-student/dialog-guidance-student.component';
+import { DialogResponsesComponent } from '../../dialogGuidance/dialog-responses/dialog-responses.component';
+import { FeedbackRuleEvaluator } from './FeedbackRuleEvaluator';
+import { DialogGuidanceService } from '../../dialogGuidance/dialogGuidanceService';
 import { FeedbackRule } from './FeedbackRule';
 
 let component: DialogGuidanceStudentComponent;
-let evaluator: DialogGuidanceFeedbackRuleEvaluator;
+let evaluator: FeedbackRuleEvaluator;
 const KI_SCORE_0 = new CRaterScore('ki', 0, 0, 1, 5);
 const KI_SCORE_1 = new CRaterScore('ki', 1, 1, 1, 5);
 const KI_SCORE_3 = new CRaterScore('ki', 3, 3, 1, 5);
 const KI_SCORE_5 = new CRaterScore('ki', 5, 5, 1, 5);
 const KI_SCORE_6 = new CRaterScore('ki', 6, 6, 1, 5);
-describe('DialogGuidanceFeedbackRuleEvaluator', () => {
+describe('FeedbackRuleEvaluator', () => {
   let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
   const defaultFeedbackRules = [
     {
@@ -122,7 +122,7 @@ describe('DialogGuidanceFeedbackRuleEvaluator', () => {
     component.componentContent.feedbackRules = defaultFeedbackRules;
     component.componentContent.maxSubmitCount = 5;
     fixture.detectChanges();
-    evaluator = new DialogGuidanceFeedbackRuleEvaluator(component);
+    evaluator = new FeedbackRuleEvaluator(component);
   });
   matchRule_OneIdea();
   matchRule_MultipleIdeasUsingAnd();
