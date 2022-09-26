@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { DialogGuidanceStudentComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component';
-import { FeedbackRule } from '../../assets/wise5/components/dialogGuidance/FeedbackRule';
+import { FeedbackRule } from '../../assets/wise5/components/common/feedbackRule/FeedbackRule';
 import { DialogGuidanceFeedbackService } from '../../assets/wise5/services/dialogGuidanceFeedbackService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 

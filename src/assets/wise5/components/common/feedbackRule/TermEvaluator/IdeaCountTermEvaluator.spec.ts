@@ -1,5 +1,5 @@
-import { CRaterIdea } from '../CRaterIdea';
-import { CRaterResponse } from '../CRaterResponse';
+import { CRaterIdea } from '../../cRater/CRaterIdea';
+import { CRaterResponse } from '../../cRater/CRaterResponse';
 import { IdeaCountTermEvaluator } from './IdeaCountTermEvaluator';
 
 const evaluator_more_than_2 = new IdeaCountTermEvaluator('ideaCountMoreThan(2)');

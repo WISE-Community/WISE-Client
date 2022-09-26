@@ -1,12 +1,12 @@
-import { FeedbackRuleComponent } from '../feedbackRule/FeedbackRuleComponent';
-import { CRaterResponse } from './CRaterResponse';
+import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
+import { CRaterResponse } from '../cRater/CRaterResponse';
 import { FeedbackRule } from './FeedbackRule';
 import { HasKIScoreTermEvaluator } from './TermEvaluator/HasKIScoreTermEvaluator';
 import { IdeaCountTermEvaluator } from './TermEvaluator/IdeaCountTermEvaluator';
 import { IdeaTermEvaluator } from './TermEvaluator/IdeaTermEvaluator';
 import { TermEvaluator } from './TermEvaluator/TermEvaluator';
 
-export class DialogGuidanceFeedbackRuleEvaluator {
+export class FeedbackRuleEvaluator {
   defaultFeedback = $localize`Thanks for submitting your response.`;
 
   constructor(private component: FeedbackRuleComponent) {}

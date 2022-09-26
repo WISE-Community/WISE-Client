@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DialogGuidanceStudentComponent } from '../components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component';
-import { FeedbackRule } from '../components/dialogGuidance/FeedbackRule';
+import { FeedbackRule } from '../components/common/feedbackRule/FeedbackRule';
 import { StudentDataService } from './studentDataService';
 
 @Injectable()

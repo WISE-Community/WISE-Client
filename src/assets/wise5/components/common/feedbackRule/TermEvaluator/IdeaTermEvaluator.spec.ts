@@ -1,5 +1,5 @@
-import { CRaterIdea } from '../CRaterIdea';
-import { CRaterResponse } from '../CRaterResponse';
+import { CRaterIdea } from '../../cRater/CRaterIdea';
+import { CRaterResponse } from '../../cRater/CRaterResponse';
 import { IdeaTermEvaluator } from './IdeaTermEvaluator';
 
 describe('IdeaTermEvaluator', () => {

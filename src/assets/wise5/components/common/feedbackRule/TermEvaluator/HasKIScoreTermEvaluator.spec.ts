@@ -1,5 +1,5 @@
-import { CRaterResponse } from '../CRaterResponse';
-import { CRaterScore } from '../CRaterScore';
+import { CRaterResponse } from '../../cRater/CRaterResponse';
+import { CRaterScore } from '../../cRater/CRaterScore';
 import { HasKIScoreTermEvaluator } from './HasKIScoreTermEvaluator';
 
 describe('HasKIScoreTermEvaluator', () => {

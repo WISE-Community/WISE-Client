@@ -1,4 +1,4 @@
-import { FeedbackRule } from '../dialogGuidance/FeedbackRule';
+import { FeedbackRule } from '../common/feedbackRule/FeedbackRule';
 
 export interface FeedbackRuleComponent {
   getFeedbackRules(): FeedbackRule[];
