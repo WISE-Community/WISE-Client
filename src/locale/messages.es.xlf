@@ -514,7 +514,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component.html</context>
@@ -1420,7 +1420,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
@@ -1436,7 +1436,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.html</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.html</context>
@@ -1636,7 +1636,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
@@ -1648,7 +1648,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.html</context>
@@ -2272,11 +2272,31 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Confirmar contraseña requerida</target>
       </trans-unit>
+      <trans-unit id="0a9dcaac5aadd48fe716eaff77ab9b21a8bef3af" datatype="html">
+        <source>Passwords do not match</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <target state="translated">Las contraseñas no coinciden</target>
+      </trans-unit>
       <trans-unit id="8017fdbaf670dcefd48842920617824337d762f7" datatype="html">
         <source>Create New Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
@@ -2292,7 +2312,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.html</context>
@@ -2308,39 +2328,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Crear nueva cuenta</target>
       </trans-unit>
-      <trans-unit id="8384809960328910876" datatype="html">
-        <source>Password cannot be blank. Please try again.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.ts</context>
-          <context context-type="linenumber">96</context>
-        </context-group>
-        <target state="translated">La contraseña no puede estar en blanco. Por favor intentar nuevamente.</target>
-      </trans-unit>
-      <trans-unit id="6465250798669251020" datatype="html">
-        <source>Passwords do not match. Please try again.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.ts</context>
-          <context context-type="linenumber">100</context>
-        </context-group>
-        <target state="translated">Las contraseñas no coinciden. Por favor intentar nuevamente.</target>
-      </trans-unit>
-      <trans-unit id="324815643617845517" datatype="html">
-        <source>Password is invalid. Please try a different password.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.ts</context>
-          <context context-type="linenumber">104</context>
-        </context-group>
-        <target state="translated">La contraseña es inválida. Por favor probar con una contraseña diferente.</target>
-      </trans-unit>
       <trans-unit id="7389211279729440739" datatype="html">
         <source>An error occurred. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">101</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">156</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.ts</context>
@@ -2884,7 +2880,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Teacher Forgot Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.html</context>
@@ -2900,7 +2896,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>The verification code has expired. Verification codes are valid for 10 minutes. Please go back to the Teacher Forgot Password page to generate a new one.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
@@ -2912,7 +2908,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>The verification code is invalid. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
@@ -2924,7 +2920,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
@@ -2932,19 +2928,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Ha enviado un código de verificación no válido demasiadas veces. Por razones de seguridad, bloquearemos la posibilidad de cambiar su contraseña durante 10 minutos. Después de 10 minutos, regrese a la página de Docente Olvidó Contraseña para generar un nuevo código de verificación.</target>
       </trans-unit>
-      <trans-unit id="7375295840965754734" datatype="html">
-        <source>Password cannot be blank, please enter a password.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">126</context>
-        </context-group>
-        <target state="translated">La contraseña no puede estar en blanco, ingrese una contraseña.</target>
-      </trans-unit>
       <trans-unit id="4839293263479159850" datatype="html">
         <source>Passwords do not match, please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">152</context>
         </context-group>
         <target state="translated">Las contraseñas no coinciden, intenta nuevamente.</target>
       </trans-unit>
@@ -4892,25 +4880,105 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Ocurrió un error. Por favor refrescar la página e intentar nuevamente.</target>
       </trans-unit>
-      <trans-unit id="050473ed2d269f07090850ebf8f56f635436869e" datatype="html">
-        <source>Your Google User ID was not found in WISE.</source>
+      <trans-unit id="a65de338dc877fb0f19d5335ff1b3d558cc7d420" datatype="html">
+        <source>Sign in With Google</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <target state="needs-translation">Sign in With Google</target>
+      </trans-unit>
+      <trans-unit id="3dc7e5a946cf3b4b076f84ed850b26f6485e3de2" datatype="html">
+        <source>Sorry, your Google User ID was not found in WISE.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <target state="needs-translation">Sorry, your Google User ID was not found in WISE.</target>
+      </trans-unit>
+      <trans-unit id="78c63889b23ad26a16c97c152c6af4b81bcf8858" datatype="html">
+        <source>New to WISE? Join for free!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <target state="needs-translation">New to WISE? Join for free!</target>
+      </trans-unit>
+      <trans-unit id="692e665f8177ee9150169dca0ff15418616cb3cb" datatype="html">
+        <source>Google logo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component.html</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="translated">No se encontró su ID de usuario de Google dentro de WISE.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-success/unlink-google-account-success.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-student-complete/register-student-complete.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-student/register-student.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-teacher/register-teacher.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+        <target state="translated">Logo de Google</target>
       </trans-unit>
-      <trans-unit id="c6c31f501feef87ab274bd3a000b99eeb7434cff" datatype="html">
-        <source>New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+      <trans-unit id="0d798d7aa97544c8a6b4b08567239ea1706af1b7" datatype="html">
+        <source>Sign up as a Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">14</context>
         </context-group>
+        <target state="needs-translation">Sign up as a Student</target>
+      </trans-unit>
+      <trans-unit id="759603ff04389bab3bd4c0240129181d705187a5" datatype="html">
+        <source>Sign up as a Teacher</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
+          <context context-type="linenumber">24</context>
         </context-group>
-        <target state="translated">¿No tienes cuenta en WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Unirse ahora<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <target state="needs-translation">Sign up as a Teacher</target>
       </trans-unit>
       <trans-unit id="263e1717422fe3b5810e9a2e55b87e477b35d1ed" datatype="html">
         <source>Sign in to WISE</source>
@@ -4976,6 +5044,14 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">¿Olvidó su usuario o contraseña?</target>
       </trans-unit>
+      <trans-unit id="c6c31f501feef87ab274bd3a000b99eeb7434cff" datatype="html">
+        <source>New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+        <target state="translated">¿No tienes cuenta en WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Unirse ahora<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+      </trans-unit>
       <trans-unit id="acd82db1a5e5f81b87f6a6b1639f028a4d106d49" datatype="html">
         <source>WISE logo</source>
         <context-group purpose="location">
@@ -5004,11 +5080,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">158</context>
         </context-group>
         <target state="translated">Crear cuenta</target>
       </trans-unit>
@@ -6048,18 +6124,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Confirmar nueva contraseña</target>
       </trans-unit>
-      <trans-unit id="0a9dcaac5aadd48fe716eaff77ab9b21a8bef3af" datatype="html">
-        <source>Passwords do not match</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
-          <context context-type="linenumber">36</context>
-        </context-group>
-        <target state="translated">Las contraseñas no coinciden</target>
-      </trans-unit>
       <trans-unit id="8454739bcb4cf4debfd509a35e466a828ea11363" datatype="html">
         <source><x id="TAG_IMG" ctype="image" equiv-text="&lt;img class=&quot;google-icon&quot; src=&quot;assets/img/icons/google-logo.svg&quot; i18n-alt alt=&quot;Google logo&quot; /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>This account was created using Google and doesn&apos;t use a WISE password.<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
         <context-group purpose="location">
@@ -6067,58 +6131,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">67,68</context>
         </context-group>
         <target state="translated"><x id="TAG_IMG" ctype="image" equiv-text="&lt;img class=&quot;google-icon&quot; src=&quot;assets/img/icons/google-logo.svg&quot; i18n-alt alt=&quot;Google logo&quot; /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Esta cuenta fue creada usando Google y no utiliza una contraseña WISE.<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
-      </trans-unit>
-      <trans-unit id="692e665f8177ee9150169dca0ff15418616cb3cb" datatype="html">
-        <source>Google logo</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-success/unlink-google-account-success.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-student-complete/register-student-complete.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-student/register-student.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-teacher/register-teacher.component.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">64</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">143</context>
-        </context-group>
-        <target state="translated">Logo de Google</target>
       </trans-unit>
       <trans-unit id="47c3500e23cf10b4e86b3c495687d5045fd2305c" datatype="html">
         <source>Unlink Google Account</source>
@@ -9457,6 +9469,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
           <context context-type="linenumber">138</context>
         </context-group>
@@ -10882,11 +10898,19 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Se requiere contraseña del docente</target>
       </trans-unit>
+      <trans-unit id="3f1cf7e18e2551173cb12dedf98f3a48423a7717" datatype="html">
+        <source> Teacher Password is incorrect </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
+          <context context-type="linenumber">18,20</context>
+        </context-group>
+        <target state="needs-translation"> Teacher Password is incorrect </target>
+      </trans-unit>
       <trans-unit id="f1ca7e8784d363977ca2745cb7550fb03ce54d30" datatype="html">
         <source>New Student Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <target state="translated">Nueva contraseña de estudiante</target>
       </trans-unit>
@@ -10894,7 +10918,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>New Student Password required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">26</context>
         </context-group>
         <target state="translated">Se requiere una nueva contraseña de estudiante</target>
       </trans-unit>
@@ -10902,7 +10926,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Confirm New Student Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target state="translated">Confirma nueva contraseña de estudiante</target>
       </trans-unit>
@@ -10910,7 +10934,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Confirm New Student Password required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <target state="translated">Se requiere confirmar la nueva contraseña de estudiante</target>
       </trans-unit>
@@ -10918,7 +10942,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>New student passwords do not match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target state="translated">Las nuevas contraseñas de estudiante no concuerdan</target>
       </trans-unit>
@@ -10926,7 +10950,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Confirm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-team-period-dialog/change-team-period-dialog.component.html</context>
@@ -10938,7 +10962,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Changed password for <x id="PH" equiv-text="this.user.name"/> (<x id="PH_1" equiv-text="this.user.username"/>).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <target state="translated">Cambiar contraseña para <x id="PH" equiv-text="this.user.name"/> (<x id="PH_1" equiv-text="this.user.username"/>).</target>
       </trans-unit>
@@ -10946,17 +10970,9 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Changed password for Student <x id="PH" equiv-text="this.user.id"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target state="translated">Cambiar contraseña para el estudiante <x id="PH" equiv-text="this.user.id"/>.</target>
-      </trans-unit>
-      <trans-unit id="6393419270108352075" datatype="html">
-        <source>Failed to change student password. Check values and try again.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
-        <target state="translated">No se pudo cambiar la contraseña de estudiante. Chequear los valores y probar nuevamente.</target>
       </trans-unit>
       <trans-unit id="4333d62731dc124644ca59e02aabfaa86e730714" datatype="html">
         <source>Change Period</source>
@@ -11190,6 +11206,130 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">*Tenga en cuenta que eliminar a un estudiante no elimina su cuenta WISE, solo su vínculo con esta unidad.</target>
       </trans-unit>
+      <trans-unit id="92988f37377e6c99f3a0af32ad5de1d76154995e" datatype="html">
+        <source>Expand All</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <target state="needs-translation">Expand All</target>
+      </trans-unit>
+      <trans-unit id="a0161b45994d017056833ae5e2fbaccb8f58e847" datatype="html">
+        <source> + Expand All </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">20,22</context>
+        </context-group>
+        <target state="needs-translation"> + Expand All </target>
+      </trans-unit>
+      <trans-unit id="7cc20136d8ae69cbe796d0fd2a6b2e242d2bd061" datatype="html">
+        <source>Collapse All</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <target state="needs-translation">Collapse All</target>
+      </trans-unit>
+      <trans-unit id="ed770f216587fb35c8e9508d1b3fe5204c87797b" datatype="html">
+        <source>Sort by team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+        <target state="translated">Ordenar por equipos</target>
+      </trans-unit>
+      <trans-unit id="764a8a101f8ee5a4b98844e93406182fb078507b" datatype="html">
+        <source>Team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+        <target state="translated">Equipo</target>
+      </trans-unit>
+      <trans-unit id="67b7f7068758d9cd539b9d3b24f0967323a43fe6" datatype="html">
+        <source>Sort by completion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <target state="needs-translation">Sort by completion</target>
+      </trans-unit>
+      <trans-unit id="81b97b8ea996ad1e4f9fca8415021850214884b1" datatype="html">
+        <source>Status</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+        <target state="translated">Estado</target>
+      </trans-unit>
+      <trans-unit id="5a96ffba91e27b989b170eb545cc3bc55c9ada35" datatype="html">
+        <source>Sort by score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+        <target state="translated">Ordenar por puntaje</target>
+      </trans-unit>
+      <trans-unit id="b4c3a4560c25436cae3baeaa862f0e4a9ef6d3b1" datatype="html">
+        <source>Sort by score on Step <x id="INTERPOLATION" equiv-text="{{ firstNodePosition }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+        <target state="needs-translation">Sort by score on Step <x id="INTERPOLATION" equiv-text="{{ firstNodePosition }}"/></target>
+      </trans-unit>
+      <trans-unit id="a262ce07b84721a39fea4de2fb96f664e45fc925" datatype="html">
+        <source>Sort by score on Step <x id="INTERPOLATION" equiv-text="{{ lastNodePosition }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+        <target state="needs-translation">Sort by score on Step <x id="INTERPOLATION" equiv-text="{{ lastNodePosition }}"/></target>
+      </trans-unit>
+      <trans-unit id="746238f199dd62b7e8dcb904e58a662a57f89e0d" datatype="html">
+        <source>Sort by change in score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">134</context>
+        </context-group>
+        <target state="needs-translation">Sort by change in score</target>
+      </trans-unit>
+      <trans-unit id="5c1c0bfa3098ed3b99efd69e5e189da5fe3ffab8" datatype="html">
+        <source>+/-</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+        <target state="needs-translation">+/-</target>
+      </trans-unit>
       <trans-unit id="63ff7016751d1e4b07f4f7724378380cef2e049b" datatype="html">
         <source>Show/hide team&apos;s work for this step</source>
         <context-group purpose="location">
@@ -11226,7 +11366,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Not Assigned</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
@@ -11242,7 +11382,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
@@ -11258,7 +11398,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Partially Completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">151</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
@@ -11274,7 +11414,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Not Completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">156</context>
         </context-group>
         <target state="translated">Incompleto</target>
       </trans-unit>
@@ -11282,7 +11422,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>No Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">158</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
@@ -11398,22 +11538,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated"> Este paso no requiere trabajo de estudiante </target>
       </trans-unit>
-      <trans-unit id="ed770f216587fb35c8e9508d1b3fe5204c87797b" datatype="html">
-        <source>Sort by team</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
-          <context context-type="linenumber">105</context>
-        </context-group>
-        <target state="translated">Ordenar por equipos</target>
-      </trans-unit>
-      <trans-unit id="764a8a101f8ee5a4b98844e93406182fb078507b" datatype="html">
-        <source>Team</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
-          <context context-type="linenumber">106</context>
-        </context-group>
-        <target state="translated">Equipo</target>
-      </trans-unit>
       <trans-unit id="3ca94075fcdfe042f999337b148a33f2912708e4" datatype="html">
         <source>Sorty by completion</source>
         <context-group purpose="location">
@@ -11421,22 +11545,6 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">119</context>
         </context-group>
         <target state="translated">Ordenar por completado</target>
-      </trans-unit>
-      <trans-unit id="81b97b8ea996ad1e4f9fca8415021850214884b1" datatype="html">
-        <source>Status</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
-          <context context-type="linenumber">121</context>
-        </context-group>
-        <target state="translated">Estado</target>
-      </trans-unit>
-      <trans-unit id="5a96ffba91e27b989b170eb545cc3bc55c9ada35" datatype="html">
-        <source>Sort by score</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
-          <context context-type="linenumber">136</context>
-        </context-group>
-        <target state="translated">Ordenar por puntaje</target>
       </trans-unit>
       <trans-unit id="7564665875993875304" datatype="html">
         <source>Visited</source>
