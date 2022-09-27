@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
+import { NodeService } from '../../../services/nodeService';
 import { NotificationService } from '../../../services/notificationService';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
@@ -21,6 +22,7 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
 
   constructor(
     protected configService: ConfigService,
+    protected nodeService: NodeService,
     protected notificationService: NotificationService,
     protected peerChatService: PeerChatService,
     protected peerGroupService: PeerGroupService,
@@ -29,7 +31,7 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
     protected teacherWebSocketService: TeacherWebSocketService,
     protected teacherWorkService: TeacherWorkService
   ) {
-    super(configService, peerChatService, peerGroupService, projectService);
+    super(configService, nodeService, peerChatService, peerGroupService, projectService);
   }
 
   ngOnInit(): void {

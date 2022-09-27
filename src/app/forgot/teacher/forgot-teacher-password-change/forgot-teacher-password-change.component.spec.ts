@@ -1,11 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherPasswordChangeComponent } from './forgot-teacher-password-change.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
-import { Observable } from 'rxjs/index';
+import { Observable, throwError } from 'rxjs/index';
 import { Router } from '@angular/router';
+import { PasswordService } from '../../../services/password.service';
 
 export class MockTeacherService {
   changePassword(
@@ -28,24 +29,11 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
   let component: ForgotTeacherPasswordChangeComponent;
   let fixture: ComponentFixture<ForgotTeacherPasswordChangeComponent>;
 
-  const submitAndReceiveResponse = (teacherServiceFunctionName, status, messageCode) => {
-    const teacherService = TestBed.get(TeacherService);
-    const observableResponse = createObservableResponse(status, messageCode);
-    spyOn(teacherService, teacherServiceFunctionName).and.returnValue(observableResponse);
+  const submitAndReceiveErrorResponse = (messageCode: string) => {
+    const observableResponse = throwError({ error: { messageCode: messageCode } });
+    spyOn(TestBed.get(TeacherService), 'changePassword').and.returnValue(observableResponse);
     component.submit();
     fixture.detectChanges();
-  };
-
-  const createObservableResponse = (status, messageCode) => {
-    const observableResponse = Observable.create((observer) => {
-      const response = {
-        status: status,
-        messageCode: messageCode
-      };
-      observer.next(response);
-      observer.complete();
-    });
-    return observableResponse;
   };
 
   const getErrorMessage = () => {
@@ -57,7 +45,7 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ForgotTeacherPasswordChangeComponent],
       imports: [RouterTestingModule, ReactiveFormsModule],
-      providers: [{ provide: TeacherService, useClass: MockTeacherService }],
+      providers: [PasswordService, { provide: TeacherService, useClass: MockTeacherService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(ForgotTeacherPasswordChangeComponent);
@@ -70,36 +58,26 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
   });
 
   it('should show the too many verification code attempts message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'tooManyVerificationCodeAttempts');
+    submitAndReceiveErrorResponse('tooManyVerificationCodeAttempts');
     expect(getErrorMessage()).toContain(
       'You have submitted an invalid verification code too many times'
     );
   });
 
   it('should show the verification code expired message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'verificationCodeExpired');
+    submitAndReceiveErrorResponse('verificationCodeExpired');
     expect(getErrorMessage()).toContain('The verification code has expired');
   });
 
   it('should show the verification code incorrect message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'verificationCodeIncorrect');
+    submitAndReceiveErrorResponse('verificationCodeIncorrect');
     expect(getErrorMessage()).toContain('The verification code is invalid');
   });
 
-  it('should display the password cannot be blank message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'passwordIsBlank');
-    expect(getErrorMessage()).toContain('Password cannot be blank');
-  });
-
-  it('should show the passwords do not match message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'passwordsDoNotMatch');
-    expect(getErrorMessage()).toContain('Passwords do not match');
-  });
-
-  it('should go to the complete page', () => {
+  it('should submit and navigate to the complete page', () => {
     const router = TestBed.get(Router);
     const navigateSpy = spyOn(router, 'navigate');
-    component.goToSuccessPage();
+    component.submit();
     const params = {
       username: null
     };
@@ -114,8 +92,9 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
     const navigateSpy = spyOn(router, 'navigate');
     component.username = 'SpongebobSquarepants';
     component.verificationCode = '123456';
-    component.setControlFieldValue('password', 'a');
-    component.setControlFieldValue('confirmPassword', 'a');
+    const newPassword = 'Abcd1234';
+    component.changePasswordFormGroup.controls['newPassword'].setValue(newPassword);
+    component.changePasswordFormGroup.controls['confirmNewPassword'].setValue(newPassword);
     component.submit();
     fixture.detectChanges();
     const params = {

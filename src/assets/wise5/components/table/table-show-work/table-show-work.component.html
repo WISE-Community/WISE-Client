@@ -5,7 +5,8 @@
       [selectedRowIndices]="selectedRowIndices"
       [tabColumns]="tabulatorData.columns"
       [tabData]="tabulatorData.data"
-      [tabOptions]="tabulatorData.options"></tabulator-table>
+      [tabOptions]="tabulatorData.options"
+      (ready)="tabulatorRendered()"></tabulator-table>
 </div>
 <ng-container *ngIf="componentContent.isDataExplorerEnabled">
   <br />

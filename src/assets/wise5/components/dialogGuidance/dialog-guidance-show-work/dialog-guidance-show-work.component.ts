@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
+import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { DialogResponse } from '../DialogResponse';
@@ -19,9 +20,10 @@ export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective 
 
   constructor(
     private computerAvatarService: ComputerAvatarService,
+    protected nodeService: NodeService,
     protected projectService: ProjectService
   ) {
-    super(projectService);
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {
