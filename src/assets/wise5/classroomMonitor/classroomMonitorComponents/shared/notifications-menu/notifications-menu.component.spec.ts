@@ -46,7 +46,6 @@ describe('NotificationsMenuComponent', () => {
 
   confirmDismissAllNotifications();
   dismissNotification();
-  dismissNotificationAndVisitNode();
   visitNode();
 });
 
@@ -72,16 +71,6 @@ function dismissNotification() {
     it('should dismiss notification', () => {
       component.dismissNotification(notification1);
       expect(dismissNotificationSpy).toHaveBeenCalledWith(notification1);
-    });
-  });
-}
-
-function dismissNotificationAndVisitNode() {
-  describe('dismissNotificationAndVisitNode', () => {
-    it('should dismiss notification and visit node', () => {
-      component.dismissNotificationAndVisitNode(notification1);
-      expect(dismissNotificationSpy).toHaveBeenCalledWith(notification1);
-      expect(stateGoSpy).toHaveBeenCalledWith(NODE_ROUTE, { nodeId: NODE_ID_1 });
     });
   });
 }

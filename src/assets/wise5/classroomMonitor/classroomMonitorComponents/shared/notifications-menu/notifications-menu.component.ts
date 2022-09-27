@@ -55,11 +55,6 @@ export class NotificationsMenuComponent implements OnInit {
     this.notificationService.dismissNotification(notification);
   }
 
-  dismissNotificationAndVisitNode(notification: Notification): void {
-    this.dismissNotification(notification);
-    this.visitNode(notification);
-  }
-
   visitNode(notification: Notification): void {
     this.state.go('root.cm.unit.node', { nodeId: notification.nodeId });
   }
