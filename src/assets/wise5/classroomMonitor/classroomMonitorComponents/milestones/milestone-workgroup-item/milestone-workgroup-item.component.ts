@@ -1,13 +1,23 @@
 'use strict';
 
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
 @Component({
   selector: 'milestone-workgroup-item',
-  templateUrl: './milestone-workgroup-item.component.html'
+  templateUrl: './milestone-workgroup-item.component.html',
+  styleUrls: ['./milestone-workgroup-item.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MilestoneWorkgroupItemComponent implements OnInit {
   changeInScore: number | '-';

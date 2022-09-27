@@ -8,7 +8,6 @@ import { VLEProjectService } from '../../../../vle/vleProjectService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatListModule } from '@angular/material/list';
-
 import { NodeGradingViewComponent } from './node-grading-view.component';
 import { ConfigService } from '../../../../services/configService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,26 +16,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { NodeGradingViewComponentTestHelper } from '../../nodeGrading/node-grading-view/node-grading-view.component.test.helper';
 
 let component: NodeGradingViewComponent;
 let fixture: ComponentFixture<NodeGradingViewComponent>;
-const workgroupId1: number = 1;
-const workgroupId2: number = 2;
-const workgroupId3: number = 3;
-const workgroupId4: number = 4;
-const workgroupId5: number = 5;
-const statusNoWork = 0;
-const statusPartiallyCompleted = 1;
-const statusCompleted = 2;
-const notVisible = 0;
-const visible = 1;
-const workgroups = [
-  createWorkgroupForTesting(statusCompleted, visible, 1, workgroupId1),
-  createWorkgroupForTesting(statusNoWork, visible, 3, workgroupId2),
-  createWorkgroupForTesting(statusPartiallyCompleted, visible, 5, workgroupId3),
-  createWorkgroupForTesting(statusCompleted, visible, 3, workgroupId4),
-  createWorkgroupForTesting(statusNoWork, notVisible, null, workgroupId5)
-];
+let testHelper: NodeGradingViewComponentTestHelper;
 
 describe('NodeGradingViewComponent', () => {
   beforeEach(async () => {
@@ -79,83 +63,113 @@ describe('NodeGradingViewComponent', () => {
     );
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriodId').and.returnValue(1);
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({ periodId: 1 });
-    component.workgroups = workgroups;
+    testHelper = new NodeGradingViewComponentTestHelper();
+    initializeWorkgroups(component);
     fixture.detectChanges();
   });
 
   setSort();
 });
 
+function initializeWorkgroups(component: NodeGradingViewComponent) {
+  component.workgroups = [
+    createWorkgroupForTesting(
+      testHelper.statusCompleted,
+      testHelper.visible,
+      1,
+      testHelper.workgroupId1
+    ),
+    createWorkgroupForTesting(
+      testHelper.statusNoWork,
+      testHelper.visible,
+      3,
+      testHelper.workgroupId2
+    ),
+    createWorkgroupForTesting(
+      testHelper.statusPartiallyCompleted,
+      testHelper.visible,
+      5,
+      testHelper.workgroupId3
+    ),
+    createWorkgroupForTesting(
+      testHelper.statusCompleted,
+      testHelper.visible,
+      3,
+      testHelper.workgroupId4
+    ),
+    createWorkgroupForTesting(
+      testHelper.statusNoWork,
+      testHelper.notVisible,
+      null,
+      testHelper.workgroupId5
+    )
+  ];
+}
+
 function setSort() {
   it('should sort by workgroup id ascending', () => {
     component.setSort('team');
     component.setSort('team');
-    expectWorkgroupOrder(component.sortedWorkgroups, [
-      workgroupId1,
-      workgroupId2,
-      workgroupId3,
-      workgroupId4,
-      workgroupId5
+    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
+      testHelper.workgroupId1,
+      testHelper.workgroupId2,
+      testHelper.workgroupId3,
+      testHelper.workgroupId4,
+      testHelper.workgroupId5
     ]);
   });
   it('should sort by workgroup id descending', () => {
     component.setSort('team');
-    expectWorkgroupOrder(component.sortedWorkgroups, [
-      workgroupId4,
-      workgroupId3,
-      workgroupId2,
-      workgroupId1,
-      workgroupId5
+    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
+      testHelper.workgroupId4,
+      testHelper.workgroupId3,
+      testHelper.workgroupId2,
+      testHelper.workgroupId1,
+      testHelper.workgroupId5
     ]);
   });
   it('should sort by completion status ascending', () => {
     component.setSort('status');
-    expectWorkgroupOrder(component.sortedWorkgroups, [
-      workgroupId2,
-      workgroupId3,
-      workgroupId1,
-      workgroupId4,
-      workgroupId5
+    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
+      testHelper.workgroupId2,
+      testHelper.workgroupId3,
+      testHelper.workgroupId1,
+      testHelper.workgroupId4,
+      testHelper.workgroupId5
     ]);
   });
   it('should sort by completion status descending', () => {
     component.setSort('status');
     component.setSort('status');
-    expectWorkgroupOrder(component.sortedWorkgroups, [
-      workgroupId1,
-      workgroupId4,
-      workgroupId3,
-      workgroupId2,
-      workgroupId5
+    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
+      testHelper.workgroupId1,
+      testHelper.workgroupId4,
+      testHelper.workgroupId3,
+      testHelper.workgroupId2,
+      testHelper.workgroupId5
     ]);
   });
   it('should sort by score ascending', () => {
     component.setSort('score');
-    expectWorkgroupOrder(component.sortedWorkgroups, [
-      workgroupId1,
-      workgroupId2,
-      workgroupId4,
-      workgroupId3,
-      workgroupId5
+    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
+      testHelper.workgroupId1,
+      testHelper.workgroupId2,
+      testHelper.workgroupId4,
+      testHelper.workgroupId3,
+      testHelper.workgroupId5
     ]);
   });
   it('should sort by score descending', () => {
     component.setSort('score');
     component.setSort('score');
-    expectWorkgroupOrder(component.sortedWorkgroups, [
-      workgroupId3,
-      workgroupId2,
-      workgroupId4,
-      workgroupId1,
-      workgroupId5
+    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
+      testHelper.workgroupId3,
+      testHelper.workgroupId2,
+      testHelper.workgroupId4,
+      testHelper.workgroupId1,
+      testHelper.workgroupId5
     ]);
   });
-}
-
-function expectWorkgroupOrder(workgroups: any[], expectedWorkgroupIdOrder: number[]) {
-  for (let w = 0; w < workgroups.length; w++) {
-    expect(workgroups[w].workgroupId).toEqual(expectedWorkgroupIdOrder[w]);
-  }
 }
 
 function createWorkgroupForTesting(

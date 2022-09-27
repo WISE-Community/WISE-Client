@@ -1,62 +1,60 @@
-import { Directive } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { AnnotationService } from '../../../../services/annotationService';
+import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { NotificationService } from '../../../../services/notificationService';
-import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupService';
-import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
+import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { NodeGradingViewController } from '../../nodeGrading/nodeGradingView/nodeGradingView';
-import * as angular from 'angular';
+import { UtilService } from '../../../../services/utilService';
+import { NodeGradingViewComponent } from '../../nodeGrading/node-grading-view/node-grading-view.component';
 
-@Directive()
-class MilestoneGradingViewController extends NodeGradingViewController {
+@Component({
+  selector: 'milestone-grading-view',
+  templateUrl: './milestone-grading-view.component.html',
+  styleUrls: ['./milestone-grading-view.component.scss']
+})
+export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
+  componentId: string;
   firstNodeId: string;
   firstNodePosition: string;
   lastNodeId: string;
   lastNodePosition: string;
-  milestone: any;
+  @Input() milestone: any;
+  node: any;
   nodeId: string;
-  componentId: string;
 
   constructor(
-    protected $filter: any,
-    protected AnnotationService: AnnotationService,
+    protected annotationService: AnnotationService,
     protected classroomStatusService: ClassroomStatusService,
-    protected ConfigService: ConfigService,
-    protected MilestoneService: MilestoneService,
+    protected configService: ConfigService,
+    protected milestoneService: MilestoneService,
     protected nodeInfoService: NodeInfoService,
-    protected NotificationService: NotificationService,
-    protected PeerGroupService: TeacherPeerGroupService,
-    protected ProjectService: TeacherProjectService,
-    protected TeacherDataService: TeacherDataService
+    protected notificationService: NotificationService,
+    protected peerGroupService: TeacherPeerGroupService,
+    protected projectService: TeacherProjectService,
+    protected teacherDataService: TeacherDataService,
+    protected utilService: UtilService
   ) {
     super(
-      $filter,
-      AnnotationService,
+      annotationService,
       classroomStatusService,
-      ConfigService,
-      MilestoneService,
+      configService,
+      milestoneService,
       nodeInfoService,
-      NotificationService,
-      PeerGroupService,
-      ProjectService,
-      TeacherDataService
+      notificationService,
+      peerGroupService,
+      projectService,
+      teacherDataService,
+      utilService
     );
-    const additionalSortOrder = {
-      initialScore: ['-isVisible', 'initialScore', 'workgroupId'],
-      '-initialScore': ['-isVisible', '-initialScore', 'workgroupId'],
-      changeInScore: ['-isVisible', 'changeInScore', 'workgroupId'],
-      '-changeInScore': ['-isVisible', '-changeInScore', 'workgroupId']
-    };
-    this.sortOrder = { ...this.sortOrder, ...additionalSortOrder };
   }
 
-  $onInit() {
+  ngOnInit(): void {
     this.nodeId = this.milestone.nodeId;
-    this.node = this.ProjectService.getNode(this.nodeId);
+    this.node = this.projectService.getNode(this.nodeId);
     if (this.milestone.report.locations.length > 1) {
       this.firstNodeId = this.milestone.report.locations[0].nodeId;
       this.lastNodeId = this.milestone.report.locations[
@@ -70,11 +68,11 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     this.getNodePositions();
   }
 
-  subscribeToEvents() {
+  protected subscribeToEvents(): void {
     super.subscribeToEvents();
     if (this.milestone.report.locations.length > 1) {
       this.subscriptions.add(
-        this.AnnotationService.annotationReceived$.subscribe(({ annotation }) => {
+        this.annotationService.annotationReceived$.subscribe(({ annotation }) => {
           const workgroupId = annotation.toWorkgroupId;
           if (annotation.nodeId === this.firstNodeId && this.workgroupsById[workgroupId]) {
             this.updateWorkgroup(workgroupId);
@@ -84,35 +82,35 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     }
   }
 
-  retrieveStudentData() {
-    const firstNode = this.ProjectService.getNode(this.firstNodeId);
+  protected retrieveStudentData(): void {
+    const firstNode = this.projectService.getNode(this.firstNodeId);
     super.retrieveStudentData(firstNode);
     if (this.milestone.report.locations.length > 1) {
-      const lastNode = this.ProjectService.getNode(this.lastNodeId);
+      const lastNode = this.projectService.getNode(this.lastNodeId);
       super.retrieveStudentData(lastNode);
     }
   }
 
-  private getNodePositions() {
+  private getNodePositions(): void {
     if (this.milestone.report.locations.length > 1) {
-      this.firstNodePosition = this.ProjectService.getNodePositionById(this.firstNodeId);
-      this.lastNodePosition = this.ProjectService.getNodePositionById(this.lastNodeId);
+      this.firstNodePosition = this.projectService.getNodePositionById(this.firstNodeId);
+      this.lastNodePosition = this.projectService.getNodePositionById(this.lastNodeId);
     }
   }
 
-  getScoreByWorkgroupId(
+  private getScoreByWorkgroupId(
     workgroupId: number,
     nodeId: string = this.nodeId,
     componentId: string = this.componentId
   ): number {
     let score = null;
-    const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
+    const latestScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
       nodeId,
       componentId,
       workgroupId
     );
     if (latestScoreAnnotation) {
-      score = this.AnnotationService.getScoreValueFromScoreAnnotation(latestScoreAnnotation);
+      score = this.annotationService.getScoreValueFromScoreAnnotation(latestScoreAnnotation);
     }
     return score;
   }
@@ -127,14 +125,14 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     this.saveMilestoneStudentWorkExpandCollapseAllEvent('MilestoneStudentWorkCollapseAllClicked');
   }
 
-  saveMilestoneStudentWorkExpandCollapseAllEvent(event) {
+  private saveMilestoneStudentWorkExpandCollapseAllEvent(event: any): void {
     const context = 'ClassroomMonitor',
       nodeId = null,
       componentId = null,
       componentType = null,
       category = 'Navigation',
       data = { milestoneId: this.milestone.id };
-    this.TeacherDataService.saveEvent(
+    this.teacherDataService.saveEvent(
       context,
       nodeId,
       componentId,
@@ -145,12 +143,12 @@ class MilestoneGradingViewController extends NodeGradingViewController {
     );
   }
 
-  onUpdateExpand(workgroupId: number, isExpanded: boolean): void {
-    super.onUpdateExpand(workgroupId, isExpanded);
-    this.saveMilestoneWorkgroupItemViewedEvent(workgroupId, isExpanded);
+  onUpdateExpand({ workgroupId, value }): void {
+    super.onUpdateExpand({ workgroupId: workgroupId, value: value });
+    this.saveMilestoneWorkgroupItemViewedEvent(workgroupId, value);
   }
 
-  updateWorkgroup(workgroupId, init = false) {
+  updateWorkgroup(workgroupId: number, init = false): void {
     super.updateWorkgroup(workgroupId, init);
     const workgroup = this.workgroupsById[workgroupId];
     workgroup.score = this.getScoreByWorkgroupId(workgroupId);
@@ -164,18 +162,18 @@ class MilestoneGradingViewController extends NodeGradingViewController {
       workgroup.changeInScore = this.getChangeInScore(workgroup.initialScore, workgroup.score);
     }
     if (!init) {
-      this.workgroupsById[workgroupId] = angular.copy(workgroup);
+      this.workgroupsById[workgroupId] = this.utilService.makeCopyOfJSONObject(workgroup);
     }
   }
 
-  getChangeInScore(initialScore: number, revisedScore: number): number {
+  private getChangeInScore(initialScore: number, revisedScore: number): number {
     if (initialScore != -1 && revisedScore != -1) {
       return revisedScore - initialScore;
     }
     return -10000; // this hack ensures that this score appears as the lowest score
   }
 
-  saveMilestoneWorkgroupItemViewedEvent(workgroupId, isExpanded) {
+  private saveMilestoneWorkgroupItemViewedEvent(workgroupId: number, isExpanded: boolean): void {
     let event = '';
     if (isExpanded) {
       event = 'MilestoneStudentWorkOpened';
@@ -188,7 +186,7 @@ class MilestoneGradingViewController extends NodeGradingViewController {
       componentType = null,
       category = 'Navigation',
       data = { milestoneId: this.milestone.id, workgroupId: workgroupId };
-    this.TeacherDataService.saveEvent(
+    this.teacherDataService.saveEvent(
       context,
       nodeId,
       componentId,
@@ -198,15 +196,22 @@ class MilestoneGradingViewController extends NodeGradingViewController {
       data
     );
   }
+
+  protected sortWorkgroups(): void {
+    super.sortWorkgroups();
+    switch (this.sort) {
+      case 'initialScore':
+        this.sortedWorkgroups.sort(this.createSortAscendingFunction('initialScore'));
+        break;
+      case '-initialScore':
+        this.sortedWorkgroups.sort(this.createSortDescendingFunction('initialScore'));
+        break;
+      case 'changeInScore':
+        this.sortedWorkgroups.sort(this.createSortAscendingFunction('changeInScore'));
+        break;
+      case '-changeInScore':
+        this.sortedWorkgroups.sort(this.createSortDescendingFunction('changeInScore'));
+        break;
+    }
+  }
 }
-
-const MilestoneGradingView = {
-  bindings: {
-    milestone: '<'
-  },
-  controller: MilestoneGradingViewController,
-  templateUrl:
-    '/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestoneGradingView/milestoneGradingView.html'
-};
-
-export default MilestoneGradingView;
