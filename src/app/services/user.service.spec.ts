@@ -22,7 +22,7 @@ describe('UserService', () => {
 function unlinkGoogleAccount_postToUrl() {
   it('unlinkGoogleAccount() should make POST request to unlink google account', fakeAsync(() => {
     const newPassword = 'my new pass';
-    service.unlinkGoogleUser(newPassword);
+    service.unlinkGoogleUser(newPassword).subscribe();
     const unlinkRequest = http.expectOne({
       url: '/api/google-user/unlink-account',
       method: 'POST'

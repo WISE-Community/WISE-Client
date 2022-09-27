@@ -67,7 +67,7 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.teacherUser.googleUserId = params['gID'];
       if (!this.isUsingGoogleId()) {
@@ -82,40 +82,56 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     });
   }
 
-  isUsingGoogleId() {
+  private isUsingGoogleId(): boolean {
     return this.teacherUser.googleUserId != null;
   }
 
-  setControlFieldValue(name: string, value: string) {
+  private setControlFieldValue(name: string, value: string): void {
     this.createTeacherAccountFormGroup.controls[name].setValue(value);
   }
 
-  createAccount() {
+  createAccount(): void {
     this.isSubmitted = true;
     if (this.createTeacherAccountFormGroup.valid) {
       this.processing = true;
       this.populateTeacherUser();
       this.teacherService.registerTeacherAccount(this.teacherUser).subscribe(
         (response: any) => {
-          if (response.status === 'success') {
-            this.router.navigate([
-              'join/teacher/complete',
-              { username: response.username, isUsingGoogleId: this.isUsingGoogleId() }
-            ]);
-          } else {
-            this.snackBar.open(this.translateCreateAccountErrorMessageCode(response.messageCode));
-          }
-          this.processing = false;
+          this.createAccountSuccess(response);
         },
-        (error: HttpErrorResponse) => {
-          this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.error.messageCode));
-          this.processing = false;
+        (response: HttpErrorResponse) => {
+          this.createAccountError(response.error);
         }
       );
     }
   }
 
-  populateTeacherUser() {
+  private createAccountSuccess(response: any): void {
+    this.router.navigate([
+      'join/teacher/complete',
+      { username: response.username, isUsingGoogleId: this.isUsingGoogleId() }
+    ]);
+    this.processing = false;
+  }
+
+  private createAccountError(error: any): void {
+    const formError: any = {};
+    switch (error.messageCode) {
+      case 'invalidPasswordLength':
+        formError.minlength = true;
+        this.passwordsFormGroup.get('password').setErrors(formError);
+        break;
+      case 'invalidPasswordPattern':
+        formError.pattern = true;
+        this.passwordsFormGroup.get('password').setErrors(formError);
+        break;
+      default:
+        this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
+    }
+    this.processing = false;
+  }
+
+  private populateTeacherUser(): void {
     for (let key of Object.keys(this.createTeacherAccountFormGroup.controls)) {
       this.teacherUser[key] = this.createTeacherAccountFormGroup.get(key).value;
     }
@@ -126,11 +142,11 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     }
   }
 
-  getPassword() {
+  private getPassword(): string {
     return this.passwordsFormGroup.controls['password'].value;
   }
 
-  passwordMatchValidator(passwordsFormGroup: FormGroup) {
+  private passwordMatchValidator(passwordsFormGroup: FormGroup): any {
     const password = passwordsFormGroup.get('password').value;
     const confirmPassword = passwordsFormGroup.get('confirmPassword').value;
     if (password == confirmPassword) {
@@ -142,7 +158,7 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     }
   }
 
-  agreeCheckboxValidator(createTeacherAccountFormGroup: FormGroup) {
+  private agreeCheckboxValidator(createTeacherAccountFormGroup: FormGroup): any {
     const agree = createTeacherAccountFormGroup.get('agree').value;
     if (!agree) {
       const error = { agreeNotChecked: true };

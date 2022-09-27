@@ -31,16 +31,38 @@ export class UnlinkGoogleAccountPasswordComponent {
     private userService: UserService
   ) {}
 
-  submit() {
+  submit(): void {
     this.isSaving = true;
-    this.userService
-      .unlinkGoogleUser(this.newPasswordFormGroup.get('newPassword').value)
-      .add(() => {
-        this.isSaving = false;
-        this.dialog.closeAll();
-        this.dialog.open(UnlinkGoogleAccountSuccessComponent, {
-          panelClass: 'dialog-sm'
-        });
-      });
+    this.userService.unlinkGoogleUser(this.newPasswordFormGroup.get('newPassword').value).subscribe(
+      () => {
+        this.success();
+      },
+      (response: any) => {
+        this.error(response.error);
+      }
+    );
+  }
+
+  private success(): void {
+    this.isSaving = false;
+    this.dialog.closeAll();
+    this.dialog.open(UnlinkGoogleAccountSuccessComponent, {
+      panelClass: 'dialog-sm'
+    });
+  }
+
+  private error(error: any): void {
+    this.isSaving = false;
+    const formError: any = {};
+    switch (error.messageCode) {
+      case 'invalidPasswordLength':
+        formError.minlength = true;
+        this.newPasswordFormGroup.get('newPassword').setErrors(formError);
+        break;
+      case 'invalidPasswordPattern':
+        formError.pattern = true;
+        this.newPasswordFormGroup.get('newPassword').setErrors(formError);
+        break;
+    }
   }
 }
