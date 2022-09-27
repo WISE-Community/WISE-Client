@@ -32,31 +32,6 @@ describe('ForgotStudentPasswordChangeComponent', () => {
   let component: ForgotStudentPasswordChangeComponent;
   let fixture: ComponentFixture<ForgotStudentPasswordChangeComponent>;
 
-  const submitAndReceiveResponse = (studentServiceFunctionName, status, messageCode) => {
-    const studentService = TestBed.get(StudentService);
-    const observableResponse = createObservableResponse(status, messageCode);
-    spyOn(studentService, studentServiceFunctionName).and.returnValue(observableResponse);
-    component.submit();
-    fixture.detectChanges();
-  };
-
-  const createObservableResponse = (status, messageCode) => {
-    const observableResponse = Observable.create((observer) => {
-      const response = {
-        status: status,
-        messageCode: messageCode
-      };
-      observer.next(response);
-      observer.complete();
-    });
-    return observableResponse;
-  };
-
-  const getErrorMessage = () => {
-    const errorMessageDiv = fixture.debugElement.nativeElement.querySelector('.warn');
-    return errorMessageDiv.textContent;
-  };
-
   const getSubmitButton = () => {
     return fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
   };
@@ -84,32 +59,19 @@ describe('ForgotStudentPasswordChangeComponent', () => {
   });
 
   it('should enable the submit button when the password fields are filled in', () => {
-    component.setControlFieldValue('password', PASSWORD);
-    component.setControlFieldValue('confirmPassword', PASSWORD);
+    component.changePasswordFormGroup.controls['newPassword'].setValue(PASSWORD);
+    component.changePasswordFormGroup.controls['confirmNewPassword'].setValue(PASSWORD);
     fixture.detectChanges();
     const submitButton = getSubmitButton();
     expect(submitButton.disabled).toBe(false);
   });
 
-  it('should display the password cannot be blank message', () => {
-    submitAndReceiveResponse('changePassword', 'failure', 'passwordIsBlank');
-    expect(getErrorMessage()).toContain('Password cannot be blank');
-  });
-
-  it('should display the passwords do not match message', () => {
-    component.setControlFieldValue('password', 'a');
-    component.setControlFieldValue('confirmPassword', 'b');
-    component.submit();
-    fixture.detectChanges();
-    expect(getErrorMessage()).toContain('Passwords do not match');
-  });
-
-  it('should navigate to the complete page', () => {
+  it('should submit and navigate to the complete page', () => {
     const router = TestBed.get(Router);
     const navigateSpy = spyOn(router, 'navigate');
     const username = 'SpongebobS0101';
     component.username = username;
-    component.goToSuccessPage();
+    component.submit();
     const params = {
       username: username
     };

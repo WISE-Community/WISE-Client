@@ -71,7 +71,7 @@ export class NodeGradingViewComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  private subscribeToEvents(): void {
+  protected subscribeToEvents(): void {
     this.subscriptions.add(
       this.projectService.projectSaved$.subscribe(() => {
         this.maxScore = this.getMaxScore();
@@ -115,7 +115,7 @@ export class NodeGradingViewComponent implements OnInit {
     );
   }
 
-  private retrieveStudentData(node: Node = this.node): void {
+  protected retrieveStudentData(node: Node = this.node): void {
     this.teacherDataService.retrieveStudentDataForNode(node).then(() => {
       this.teacherWorkgroupId = this.configService.getWorkgroupId();
       this.workgroups = this.configService.getClassmateUserInfos();
@@ -159,7 +159,7 @@ export class NodeGradingViewComponent implements OnInit {
     }
   }
 
-  private sortWorkgroups(): void {
+  protected sortWorkgroups(): void {
     this.sortedWorkgroups = [];
     for (const workgroup of this.workgroups) {
       this.sortedWorkgroups.push(workgroup);
@@ -172,16 +172,16 @@ export class NodeGradingViewComponent implements OnInit {
         this.sortedWorkgroups.sort(this.sortTeamDescending);
         break;
       case 'status':
-        this.sortedWorkgroups.sort(this.sortCompletionStatusAscending);
+        this.sortedWorkgroups.sort(this.createSortAscendingFunction('completionStatus'));
         break;
       case '-status':
-        this.sortedWorkgroups.sort(this.sortCompletionStatusDescending);
+        this.sortedWorkgroups.sort(this.createSortDescendingFunction('completionStatus'));
         break;
       case 'score':
-        this.sortedWorkgroups.sort(this.sortScoreAscending);
+        this.sortedWorkgroups.sort(this.createSortAscendingFunction('score'));
         break;
       case '-score':
-        this.sortedWorkgroups.sort(this.sortScoreDescending);
+        this.sortedWorkgroups.sort(this.createSortDescendingFunction('score'));
         break;
     }
   }
@@ -210,68 +210,32 @@ export class NodeGradingViewComponent implements OnInit {
     }
   }
 
-  /**
-   * Sort using this order hierarchy
-   * isVisible descending, completionStatus ascending, workgroupId ascending
-   */
-  private sortCompletionStatusAscending(workgroupA: any, workgroupB: any): number {
-    if (workgroupA.isVisible === workgroupB.isVisible) {
-      if (workgroupA.completionStatus === workgroupB.completionStatus) {
-        return workgroupA.workgroupId - workgroupB.workgroupId;
+  protected createSortAscendingFunction(fieldName: string): any {
+    return (workgroupA: any, workgroupB: any) => {
+      if (workgroupA.isVisible === workgroupB.isVisible) {
+        if (workgroupA[fieldName] === workgroupB[fieldName]) {
+          return workgroupA.workgroupId - workgroupB.workgroupId;
+        } else {
+          return workgroupA[fieldName] - workgroupB[fieldName];
+        }
       } else {
-        return workgroupA.completionStatus - workgroupB.completionStatus;
+        return workgroupB.isVisible - workgroupA.isVisible;
       }
-    } else {
-      return workgroupB.isVisible - workgroupA.isVisible;
-    }
+    };
   }
 
-  /**
-   * Sort using this order hierarchy
-   * isVisible descending, completionStatus descending, workgroupId ascending
-   */
-  private sortCompletionStatusDescending(workgroupA: any, workgroupB: any): number {
-    if (workgroupA.isVisible === workgroupB.isVisible) {
-      if (workgroupA.completionStatus === workgroupB.completionStatus) {
-        return workgroupA.workgroupId - workgroupB.workgroupId;
+  protected createSortDescendingFunction(fieldName: string): any {
+    return (workgroupA: any, workgroupB: any) => {
+      if (workgroupA.isVisible === workgroupB.isVisible) {
+        if (workgroupA[fieldName] === workgroupB[fieldName]) {
+          return workgroupA.workgroupId - workgroupB.workgroupId;
+        } else {
+          return workgroupB[fieldName] - workgroupA[fieldName];
+        }
       } else {
-        return workgroupB.completionStatus - workgroupA.completionStatus;
+        return workgroupB.isVisible - workgroupA.isVisible;
       }
-    } else {
-      return workgroupB.isVisible - workgroupA.isVisible;
-    }
-  }
-
-  /**
-   * Sort using this order hierarchy
-   * isVisible descending, score ascending, workgroupId ascending
-   */
-  private sortScoreAscending(workgroupA: any, workgroupB: any): number {
-    if (workgroupA.isVisible === workgroupB.isVisible) {
-      if (workgroupA.score === workgroupB.score) {
-        return workgroupA.workgroupId - workgroupB.workgroupId;
-      } else {
-        return workgroupA.score - workgroupB.score;
-      }
-    } else {
-      return workgroupB.isVisible - workgroupA.isVisible;
-    }
-  }
-
-  /**
-   * Sort using this order hierarchy
-   * isVisible descending, score descending, workgroupId ascending
-   */
-  private sortScoreDescending(workgroupA: any, workgroupB: any): number {
-    if (workgroupA.isVisible === workgroupB.isVisible) {
-      if (workgroupA.score === workgroupB.score) {
-        return workgroupA.workgroupId - workgroupB.workgroupId;
-      } else {
-        return workgroupB.score - workgroupA.score;
-      }
-    } else {
-      return workgroupB.isVisible - workgroupA.isVisible;
-    }
+    };
   }
 
   /**
@@ -280,7 +244,7 @@ export class NodeGradingViewComponent implements OnInit {
    * @param workgroupID a workgroup ID number
    * @param init Boolean whether we're in controller initialization or not
    */
-  private updateWorkgroup(workgroupId: number, init = false): void {
+  protected updateWorkgroup(workgroupId: number, init = false): void {
     const workgroup = this.workgroupsById[workgroupId];
     const alertNotifications = this.notificationService.getAlertNotifications({
       nodeId: this.nodeId,

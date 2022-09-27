@@ -203,7 +203,7 @@ const MilestoneDetails = {
             </md-tab>
             <md-tab label="{{ ::'studentWork' | translate }}" md-on-select="$ctrl.saveTabSelectedEvent('MilestoneStudentWorkTabSelected')">
               <div class="milestone-details__section">
-                <milestone-grading-view milestone="$ctrl.milestone"></milestone-grading-view>
+                <milestone-grading-view [milestone]="$ctrl.milestone"></milestone-grading-view>
               </div>
             </md-tab>
           </md-tabs>
@@ -211,7 +211,7 @@ const MilestoneDetails = {
         <div ng-if="!$ctrl.milestone.generatedRecommendations && $ctrl.milestone.isReportAvailable"
             class="milestone-details__section md-whiteframe-1dp">
           <div class="milestone-details__header primary md-body-2 gray-lightest-bg">{{ ::'studentWork' | translate }}</div>
-          <milestone-grading-view milestone="$ctrl.milestone"></milestone-grading-view>
+          <milestone-grading-view [milestone]="$ctrl.milestone"></milestone-grading-view>
         </div>
       </section>
       <section ng-if="!$ctrl.milestone.isReportAvailable"

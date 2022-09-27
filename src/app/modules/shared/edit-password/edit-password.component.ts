@@ -43,13 +43,13 @@ export class EditPasswordComponent {
     private userService: UserService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.userService.getUser().subscribe((user) => {
       this.isGoogleUser = user.isGoogleUser;
     });
   }
 
-  saveChanges() {
+  saveChanges(): void {
     this.isSaving = true;
     const oldPassword: string = this.getControlFieldValue('oldPassword');
     const newPassword: string = this.getControlFieldValue('newPassword');
@@ -60,12 +60,17 @@ export class EditPasswordComponent {
           this.isSaving = false;
         })
       )
-      .subscribe((response) => {
-        this.handleChangePasswordResponse(response);
-      });
+      .subscribe(
+        () => {
+          this.changePasswordSuccess();
+        },
+        (response) => {
+          this.changePasswordError(response.error);
+        }
+      );
   }
 
-  getControlFieldValue(fieldName) {
+  private getControlFieldValue(fieldName: string): string {
     if (fieldName === 'newPassword' || fieldName === 'confirmNewPassword') {
       return this.newPasswordFormGroup.get(fieldName).value;
     } else {
@@ -73,28 +78,36 @@ export class EditPasswordComponent {
     }
   }
 
-  getUsername() {
-    return this.userService.getUser().getValue().username;
+  private changePasswordSuccess(): void {
+    this.resetForm();
+    this.snackBar.open($localize`Password changed.`);
   }
 
-  handleChangePasswordResponse(response) {
-    if (response.status === 'success') {
-      this.resetForm();
-      this.snackBar.open($localize`Password changed.`);
-    } else if (response.status === 'error' && response.messageCode === 'incorrectPassword') {
-      const error = { incorrectPassword: true };
-      const oldPasswordControl = this.changePasswordFormGroup.get('oldPassword');
-      oldPasswordControl.setErrors(error);
+  private changePasswordError(error: any): void {
+    const formError: any = {};
+    switch (error.messageCode) {
+      case 'incorrectPassword':
+        formError.incorrectPassword = true;
+        this.changePasswordFormGroup.get('oldPassword').setErrors(formError);
+        break;
+      case 'invalidPasswordLength':
+        formError.minlength = true;
+        this.newPasswordFormGroup.get('newPassword').setErrors(formError);
+        break;
+      case 'invalidPasswordPattern':
+        formError.pattern = true;
+        this.newPasswordFormGroup.get('newPassword').setErrors(formError);
+        break;
     }
   }
 
-  unlinkGoogleAccount() {
+  unlinkGoogleAccount(): void {
     this.dialog.open(UnlinkGoogleAccountConfirmComponent, {
       panelClass: 'dialog-sm'
     });
   }
 
-  resetForm() {
+  private resetForm(): void {
     this.changePasswordForm.resetForm();
   }
 }

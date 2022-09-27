@@ -112,12 +112,13 @@
                    formControlName="confirmPassword"
                    required />
             <mat-error *ngIf="passwordsFormGroup.controls['confirmPassword'].hasError('required')" i18n>Confirm Password required</mat-error>
-            <mat-error *ngIf="passwordsFormGroup.hasError('passwordDoesNotMatch')" i18n>Password does not match</mat-error>
+            <mat-error *ngIf="passwordsFormGroup.controls['confirmPassword'].hasError('passwordDoesNotMatch')" i18n>Password does not match</mat-error>
           </mat-form-field>
         </p>
       </div>
       <p i18n>By clicking "Create Account", you agree to our <a href="privacy" target="_blank">Privacy Policy & Terms of Use</a></p>
-      <button mat-flat-button color="primary" type="submit" [disabled]="processing">
+      <button mat-flat-button color="primary" type="submit"
+          [disabled]="!createStudentAccountFormGroup.valid || processing">
         <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
         <span i18n>Create Account</span>
       </button>

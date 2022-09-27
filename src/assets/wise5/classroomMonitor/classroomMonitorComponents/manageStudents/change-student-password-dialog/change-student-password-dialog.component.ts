@@ -46,7 +46,7 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
     }
   }
 
-  changePassword() {
+  changePassword(): void {
     this.isChangingPassword = true;
     this.TeacherService.changeStudentPassword(
       this.ConfigService.getRunId(),
@@ -54,21 +54,41 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
       this.changePasswordForm.controls['newPassword'].value,
       this.changePasswordForm.controls['teacherPassword'].value
     ).subscribe(
-      (response) => {
-        this.isChangingPassword = false;
-        this.snackBar.open(
-          this.canViewStudentNames
-            ? $localize`Changed password for ${this.user.name} (${this.user.username}).`
-            : $localize`Changed password for Student ${this.user.id}.`
-        );
-        this.dialog.closeAll();
+      () => {
+        this.changePasswordSuccess();
       },
-      (err) => {
-        this.isChangingPassword = false;
-        this.snackBar.open(
-          $localize`Failed to change student password. Check values and try again.`
-        );
+      (response) => {
+        this.changePasswordError(response.error);
       }
     );
+  }
+
+  private changePasswordSuccess(): void {
+    this.isChangingPassword = false;
+    this.snackBar.open(
+      this.canViewStudentNames
+        ? $localize`Changed password for ${this.user.name} (${this.user.username}).`
+        : $localize`Changed password for Student ${this.user.id}.`
+    );
+    this.dialog.closeAll();
+  }
+
+  private changePasswordError(error: any): void {
+    const formError: any = {};
+    this.isChangingPassword = false;
+    switch (error.messageCode) {
+      case 'incorrectPassword':
+        formError.incorrectPassword = true;
+        this.changePasswordForm.get('teacherPassword').setErrors(formError);
+        break;
+      case 'invalidPasswordLength':
+        formError.minlength = true;
+        this.changePasswordForm.get('newPassword').setErrors(formError);
+        break;
+      case 'invalidPasswordPattern':
+        formError.pattern = true;
+        this.changePasswordForm.get('newPassword').setErrors(formError);
+        break;
+    }
   }
 }
