@@ -43,13 +43,13 @@ export class EditPasswordComponent {
     private userService: UserService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.userService.getUser().subscribe((user) => {
       this.isGoogleUser = user.isGoogleUser;
     });
   }
 
-  saveChanges() {
+  saveChanges(): void {
     this.isSaving = true;
     const oldPassword: string = this.getControlFieldValue('oldPassword');
     const newPassword: string = this.getControlFieldValue('newPassword');
@@ -70,16 +70,12 @@ export class EditPasswordComponent {
       );
   }
 
-  getControlFieldValue(fieldName) {
+  private getControlFieldValue(fieldName: string): string {
     if (fieldName === 'newPassword' || fieldName === 'confirmNewPassword') {
       return this.newPasswordFormGroup.get(fieldName).value;
     } else {
       return this.changePasswordFormGroup.get(fieldName).value;
     }
-  }
-
-  getUsername() {
-    return this.userService.getUser().getValue().username;
   }
 
   private changePasswordSuccess(): void {
@@ -105,13 +101,13 @@ export class EditPasswordComponent {
     }
   }
 
-  unlinkGoogleAccount() {
+  unlinkGoogleAccount(): void {
     this.dialog.open(UnlinkGoogleAccountConfirmComponent, {
       panelClass: 'dialog-sm'
     });
   }
 
-  resetForm() {
+  private resetForm(): void {
     this.changePasswordForm.resetForm();
   }
 }

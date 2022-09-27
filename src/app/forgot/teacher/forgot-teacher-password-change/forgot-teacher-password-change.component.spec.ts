@@ -74,10 +74,10 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
     expect(getErrorMessage()).toContain('The verification code is invalid');
   });
 
-  it('should go to the complete page', () => {
+  it('should submit and navigate to the complete page', () => {
     const router = TestBed.get(Router);
     const navigateSpy = spyOn(router, 'navigate');
-    component.goToSuccessPage();
+    component.submit();
     const params = {
       username: null
     };
@@ -92,8 +92,9 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
     const navigateSpy = spyOn(router, 'navigate');
     component.username = 'SpongebobSquarepants';
     component.verificationCode = '123456';
-    component.setControlFieldValue('newPassword', 'a');
-    component.setControlFieldValue('confirmNewPassword', 'a');
+    const newPassword = 'Abcd1234';
+    component.changePasswordFormGroup.controls['newPassword'].setValue(newPassword);
+    component.changePasswordFormGroup.controls['confirmNewPassword'].setValue(newPassword);
     component.submit();
     fixture.detectChanges();
     const params = {

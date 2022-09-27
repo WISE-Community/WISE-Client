@@ -59,19 +59,19 @@ describe('ForgotStudentPasswordChangeComponent', () => {
   });
 
   it('should enable the submit button when the password fields are filled in', () => {
-    component.setControlFieldValue('newPassword', PASSWORD);
-    component.setControlFieldValue('confirmNewPassword', PASSWORD);
+    component.changePasswordFormGroup.controls['newPassword'].setValue(PASSWORD);
+    component.changePasswordFormGroup.controls['confirmNewPassword'].setValue(PASSWORD);
     fixture.detectChanges();
     const submitButton = getSubmitButton();
     expect(submitButton.disabled).toBe(false);
   });
 
-  it('should navigate to the complete page', () => {
+  it('should submit and navigate to the complete page', () => {
     const router = TestBed.get(Router);
     const navigateSpy = spyOn(router, 'navigate');
     const username = 'SpongebobS0101';
     component.username = username;
-    component.goToSuccessPage();
+    component.submit();
     const params = {
       username: username
     };

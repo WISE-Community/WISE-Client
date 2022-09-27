@@ -43,7 +43,7 @@ export class UnlinkGoogleAccountPasswordComponent {
     );
   }
 
-  success(): void {
+  private success(): void {
     this.isSaving = false;
     this.dialog.closeAll();
     this.dialog.open(UnlinkGoogleAccountSuccessComponent, {
@@ -51,7 +51,7 @@ export class UnlinkGoogleAccountPasswordComponent {
     });
   }
 
-  error(error: any): void {
+  private error(error: any): void {
     this.isSaving = false;
     const formError: any = {};
     switch (error.messageCode) {

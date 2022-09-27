@@ -65,11 +65,11 @@ export class ForgotStudentPasswordChangeComponent implements OnInit {
       );
   }
 
-  changePasswordSuccess(): void {
+  private changePasswordSuccess(): void {
     this.goToSuccessPage();
   }
 
-  changePasswordError(error: any): void {
+  private changePasswordError(error: any): void {
     const formError: any = {};
     switch (error.messageCode) {
       case 'invalidPasswordLength':
@@ -85,35 +85,31 @@ export class ForgotStudentPasswordChangeComponent implements OnInit {
     }
   }
 
-  getNewPassword(): string {
+  private getNewPassword(): string {
     return this.getControlFieldValue('newPassword');
   }
 
-  getConfirmNewPassword(): string {
+  private getConfirmNewPassword(): string {
     return this.getControlFieldValue('confirmNewPassword');
   }
 
-  getControlFieldValue(fieldName: string): string {
+  private getControlFieldValue(fieldName: string): string {
     return this.changePasswordFormGroup.get(fieldName).value;
   }
 
-  setControlFieldValue(name: string, value: string): void {
-    this.changePasswordFormGroup.controls[name].setValue(value);
-  }
-
-  setErrorOccurredMessage(): void {
+  private setErrorOccurredMessage(): void {
     this.setMessage($localize`An error occurred. Please try again.`);
   }
 
-  setMessage(message: string): void {
+  private setMessage(message: string): void {
     this.message = message;
   }
 
-  clearMessage(): void {
+  private clearMessage(): void {
     this.message = '';
   }
 
-  goToSuccessPage(): void {
+  private goToSuccessPage(): void {
     const params = {
       username: this.username
     };

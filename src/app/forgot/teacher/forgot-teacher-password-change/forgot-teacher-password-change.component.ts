@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
 import { PasswordService } from '../../../services/password.service';
@@ -38,12 +38,12 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
     private teacherService: TeacherService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.username = this.route.snapshot.queryParamMap.get('username');
     this.verificationCode = this.route.snapshot.queryParamMap.get('verificationCode');
   }
 
-  submit() {
+  submit(): void {
     this.clearMessage();
     const newPassword = this.getNewPassword();
     const confirmNewPassword = this.getConfirmNewPassword();
@@ -70,11 +70,11 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
     }
   }
 
-  changePasswordSuccess(): void {
+  private changePasswordSuccess(): void {
     this.goToSuccessPage();
   }
 
-  changePasswordError(error: any): void {
+  private changePasswordError(error: any): void {
     const formError: any = {};
     switch (error.messageCode) {
       case 'tooManyVerificationCodeAttempts':
@@ -109,19 +109,19 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
     }
   }
 
-  getNewPassword() {
+  private getNewPassword(): string {
     return this.getControlFieldValue('newPassword');
   }
 
-  getConfirmNewPassword() {
+  private getConfirmNewPassword(): string {
     return this.getControlFieldValue('confirmNewPassword');
   }
 
-  getControlField(fieldName) {
+  private getControlField(fieldName: string): AbstractControl {
     return this.changePasswordFormGroup.get(fieldName);
   }
 
-  getControlFieldValue(fieldName) {
+  private getControlFieldValue(fieldName: string): string {
     return this.getControlField(fieldName).value;
   }
 
@@ -129,55 +129,51 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
     this.changePasswordFormGroup.controls[name].setValue(value);
   }
 
-  isPasswordsMatch(password, confirmPassword) {
+  private isPasswordsMatch(password: string, confirmPassword: string): boolean {
     return password === confirmPassword;
   }
 
-  setVerificationCodeExpiredMessage() {
+  private setVerificationCodeExpiredMessage(): void {
     const message = $localize`The verification code has expired. Verification codes are valid for 10 minutes. Please go back to the Teacher Forgot Password page to generate a new one.`;
     this.setMessage(message);
   }
 
-  setVerificationCodeIncorrectMessage() {
+  private setVerificationCodeIncorrectMessage(): void {
     const message = $localize`The verification code is invalid. Please try again.`;
     this.setMessage(message);
   }
 
-  setTooManyVerificationCodeAttemptsMessage() {
+  private setTooManyVerificationCodeAttemptsMessage(): void {
     const message = $localize`You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.`;
     this.setMessage(message);
   }
 
-  setPasswordIsBlankMessage() {
-    this.setMessage($localize`Password cannot be blank, please enter a password.`);
-  }
-
-  setPasswordsDoNotMatchMessage() {
+  private setPasswordsDoNotMatchMessage(): void {
     this.setMessage($localize`Passwords do not match, please try again.`);
   }
 
-  setErrorOccurredMessage() {
+  private setErrorOccurredMessage(): void {
     this.setMessage($localize`An error occurred. Please try again.`);
   }
 
-  setMessage(message) {
+  private setMessage(message: string): void {
     this.message = message;
   }
 
-  clearMessage() {
+  private clearMessage(): void {
     this.setMessage('');
   }
 
-  disablePasswordInputs() {
+  private disablePasswordInputs(): void {
     this.getControlField('newPassword').disable();
     this.getControlField('confirmNewPassword').disable();
   }
 
-  disableSubmitButton() {
+  private disableSubmitButton(): void {
     this.isSubmitButtonEnabled = false;
   }
 
-  goToSuccessPage() {
+  private goToSuccessPage(): void {
     const params = {
       username: this.username
     };

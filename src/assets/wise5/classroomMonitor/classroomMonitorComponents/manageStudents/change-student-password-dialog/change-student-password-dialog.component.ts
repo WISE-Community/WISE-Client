@@ -46,7 +46,7 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
     }
   }
 
-  changePassword() {
+  changePassword(): void {
     this.isChangingPassword = true;
     this.TeacherService.changeStudentPassword(
       this.ConfigService.getRunId(),
@@ -63,7 +63,7 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
     );
   }
 
-  changePasswordSuccess(): void {
+  private changePasswordSuccess(): void {
     this.isChangingPassword = false;
     this.snackBar.open(
       this.canViewStudentNames
@@ -73,7 +73,7 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  changePasswordError(error: any): void {
+  private changePasswordError(error: any): void {
     const formError: any = {};
     this.isChangingPassword = false;
     switch (error.messageCode) {

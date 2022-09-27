@@ -21,7 +21,7 @@ export class RegisterStudentComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {
       if (config != null) {
         this.isGoogleAuthenticationEnabled = config.googleClientId != null;
@@ -29,14 +29,14 @@ export class RegisterStudentComponent implements OnInit {
     });
   }
 
-  public signUp() {
+  public signUp(): void {
     this.router.navigate([
       'join/student/form',
       { firstName: this.firstName, lastName: this.lastName }
     ]);
   }
 
-  public socialSignIn(socialPlatform: string) {
+  public socialSignIn(socialPlatform: string): void {
     let socialPlatformProvider;
     if (socialPlatform == 'google') {
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
