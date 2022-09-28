@@ -74,7 +74,7 @@ project_name=wise-client-github-actions-project
 branch_name=$1
 
 # Get all builds created by GitHub Actions Pull Requests
-build_ids=$(aws codebuild list-builds-for-project --project-name $project_name |
+build_ids=$(aws codebuild list-builds-for-project --max-items 100 --project-name $project_name |
     jq -c '.ids | join(" ")' | tr -d '"')
 
 if [[ -z "$build_ids" ]]; then
