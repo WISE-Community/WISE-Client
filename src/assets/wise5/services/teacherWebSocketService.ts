@@ -70,7 +70,7 @@ export class TeacherWebSocketService {
 
   subscribeToTeacherWorkgroupTopic() {
     this.rxStomp
-      .watch(`/topic/workgroup/${this.ConfigService.getProjectId()}`)
+      .watch(`/topic/workgroup/${this.ConfigService.getWorkgroupId()}`)
       .subscribe((message: Message) => {
         const body = JSON.parse(message.body);
         if (body.type === 'notification') {
