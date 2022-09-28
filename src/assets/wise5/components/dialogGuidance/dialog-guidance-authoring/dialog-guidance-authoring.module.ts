@@ -20,19 +20,19 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
-import { EditDialogGuidanceFeedbackRulesComponent } from '../edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component';
+import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceService } from '../dialogGuidanceService';
-import { DialogGuidanceFeedbackRuleHelpComponent } from '../dialog-guidance-feedback-rule-help/dialog-guidance-feedback-rule-help.component';
+import { FeedbackRuleHelpComponent } from '../../common/feedbackRule/feedback-rule-help/feedback-rule-help.component';
 
 @NgModule({
   declarations: [
     DialogGuidanceAuthoringComponent,
-    DialogGuidanceFeedbackRuleHelpComponent,
     EditComponentPrompt,
     EditComponentMaxSubmitComponent,
-    EditDialogGuidanceFeedbackRulesComponent
+    EditFeedbackRulesComponent,
+    FeedbackRuleHelpComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +63,7 @@ import { DialogGuidanceFeedbackRuleHelpComponent } from '../dialog-guidance-feed
     DialogGuidanceAuthoringComponent,
     EditComponentPrompt,
     EditComponentMaxSubmitComponent,
-    EditDialogGuidanceFeedbackRulesComponent
+    EditFeedbackRulesComponent
   ]
 })
 export class DialogGuidanceAuthoringModule {}

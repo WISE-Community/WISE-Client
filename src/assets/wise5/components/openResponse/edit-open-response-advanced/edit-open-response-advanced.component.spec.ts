@@ -95,6 +95,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
   useCustomCompletionCriteriaClicked();
   addCompletionCriteria();
   deleteCompletionCriteria();
+  setFeedbackEnabled();
 });
 
 function enableCRaterClicked() {
@@ -359,6 +360,17 @@ function deleteCompletionCriteria() {
       expect(component.authoringComponentContent.completionCriteria.criteria[1]).toEqual(
         completionCriteria3
       );
+    });
+  });
+}
+
+function setFeedbackEnabled() {
+  describe('setFeedbackEnabled()', () => {
+    it('should initialize feedback settings and set enabled field', () => {
+      component.authoringComponentContent.cRater = {};
+      component.setFeedbackEnabled(true);
+      expect(component.authoringComponentContent.cRater.feedback.enabled).toBeTruthy();
+      expect(component.authoringComponentContent.cRater.feedback.rules.length).toEqual(1);
     });
   });
 }

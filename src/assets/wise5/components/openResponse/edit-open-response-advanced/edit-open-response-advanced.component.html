@@ -77,6 +77,20 @@
     Show Feedback
   </mat-checkbox>
   <div class="section-container">
+    <mat-checkbox
+        color="primary"
+        class="checkbox"
+        [ngModel]="authoringComponentContent.cRater.feedback?.enabled"
+        (ngModelChange)="setFeedbackEnabled($event)"
+        i18n>
+      Enable Feedback Rules
+    </mat-checkbox>
+    <edit-feedback-rules *ngIf="authoringComponentContent.cRater.feedback?.enabled"
+        [feedbackRules]="authoringComponentContent.cRater.feedback.rules">
+    </edit-feedback-rules>
+  </div>
+  <div class="section-container"
+      *ngIf="!authoringComponentContent.cRater.feedback?.enabled && authoringComponentContent.cRater.scoringRules.length > 0">
     <div fxLayoutGap="10px" class="section-label">
       <span i18n>Scoring Rule</span>
       <button

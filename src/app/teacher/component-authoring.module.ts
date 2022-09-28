@@ -3,7 +3,7 @@ import { AnimationAuthoring } from '../../assets/wise5/components/animation/anim
 import { AudioOscillatorAuthoring } from '../../assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component';
 import { ConceptMapAuthoring } from '../../assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component';
 import { DialogGuidanceAuthoringComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component';
-import { EditDialogGuidanceFeedbackRulesComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component';
+import { EditFeedbackRulesComponent } from '../../assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { DiscussionAuthoring } from '../../assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component';
 import { DrawAuthoring } from '../../assets/wise5/components/draw/draw-authoring/draw-authoring.component';
 import { EmbeddedAuthoring } from '../../assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component';
@@ -71,7 +71,7 @@ import { EditDialogGuidanceAdvancedComponent } from '../../assets/wise5/componen
 import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
 import { PeerGroupingAuthoringModule } from '../../assets/wise5/authoringTool/peer-grouping/peer-grouping-authoring.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
-import { DialogGuidanceFeedbackRuleHelpComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-feedback-rule-help/dialog-guidance-feedback-rule-help.component';
+import { FeedbackRuleHelpComponent } from '../../assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +81,6 @@ import { DialogGuidanceFeedbackRuleHelpComponent } from '../../assets/wise5/comp
     ConceptMapAuthoring,
     DrawAuthoring,
     DialogGuidanceAuthoringComponent,
-    DialogGuidanceFeedbackRuleHelpComponent,
     DiscussionAuthoring,
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
@@ -111,12 +110,12 @@ import { DialogGuidanceFeedbackRuleHelpComponent } from '../../assets/wise5/comp
     EditConnectedComponentTypeSelectComponent,
     EditDialogGuidanceAdvancedComponent,
     EditDialogGuidanceComputerAvatarComponent,
-    EditDialogGuidanceFeedbackRulesComponent,
     EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,
     EditDrawAdvancedComponent,
     EditDrawConnectedComponentsComponent,
     EditEmbeddedAdvancedComponent,
+    EditFeedbackRulesComponent,
     EditGraphAdvancedComponent,
     EditGraphConnectedComponentsComponent,
     EditLabelAdvancedComponent,
@@ -133,6 +132,7 @@ import { DialogGuidanceFeedbackRuleHelpComponent } from '../../assets/wise5/comp
     EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,
     EmbeddedAuthoring,
+    FeedbackRuleHelpComponent,
     GraphAuthoring,
     HtmlAuthoring,
     LabelAuthoring,

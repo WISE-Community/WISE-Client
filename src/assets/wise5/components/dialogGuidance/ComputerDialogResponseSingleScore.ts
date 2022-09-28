@@ -1,5 +1,5 @@
 import { ComputerDialogResponse } from './ComputerDialogResponse';
-import { CRaterIdea } from './CRaterIdea';
+import { CRaterIdea } from '../common/cRater/CRaterIdea';
 
 export class ComputerDialogResponseSingleScore extends ComputerDialogResponse {
   score: number;
