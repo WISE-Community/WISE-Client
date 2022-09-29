@@ -218,7 +218,6 @@ const TopBar = {
                     <md-menu-content width="5" class="account-menu">
                         <notifications-menu
                             [new-notifications]="$ctrl.newNotifications"
-                            [dismissed-notifications]="$ctrl.dismissedNotifications"
                             [with-pause]="true"
                             [state]="$ctrl.$state">
                         </notifications-menu>

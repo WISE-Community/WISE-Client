@@ -12,8 +12,7 @@ import { Notification } from '../../../../../../app/domain/notification';
   encapsulation: ViewEncapsulation.None
 })
 export class NotificationsMenuComponent implements OnInit {
-  @Input() dismissNotifications: any;
-  @Input() newNotifications: any = [];
+  @Input() newNotifications: Notification[] = [];
   @Input() state: any;
   @Input() withPause: boolean;
 

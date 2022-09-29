@@ -30,6 +30,7 @@
           class="notification md-2-line"
           fxLayoutAlign="start center">
         <div (click)="visitNode(notification)"
+            class="notification-message-div"
             matTooltip="Go to {{ getNodePositionAndTitleByNodeId(notification.nodeId) }}"
             matTooltipPosition="left"
             i18n-matTooltip>
