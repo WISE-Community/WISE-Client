@@ -2,7 +2,6 @@
 
 import { ComponentNewWorkBadgeComponent } from '../../../../../app/classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import { NodeInfoComponent } from './node-info/node-info.component';
-import NotificationsMenu from './notificationsMenu/notificationsMenu';
 import { StatusIconComponent } from '../../../../../app/classroom-monitor/status-icon/status-icon.component';
 import TopBar from './topBar/topBar';
 import { WorkgroupNodeStatusComponent } from '../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
@@ -15,6 +14,7 @@ import { downgradeComponent } from '@angular/upgrade/static';
 import { PauseScreensMenuComponent } from '../pause-screens-menu/pause-screens-menu.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { MainMenuComponent } from '../../../common/main-menu/main-menu.component';
+import { NotificationsMenuComponent } from './notifications-menu/notifications-menu.component';
 
 const Shared = angular
   .module('cmShared', [])
@@ -34,7 +34,10 @@ const Shared = angular
     'nodeInfo',
     downgradeComponent({ component: NodeInfoComponent }) as angular.IDirectiveFactory
   )
-  .component('notificationsMenu', NotificationsMenu)
+  .directive(
+    'notificationsMenu',
+    downgradeComponent({ component: NotificationsMenuComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'pauseScreensMenu',
     downgradeComponent({ component: PauseScreensMenuComponent }) as angular.IDirectiveFactory
