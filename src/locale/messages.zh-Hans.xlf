@@ -1370,6 +1370,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
         <target state="translated">清除</target>
       </trans-unit>
       <trans-unit id="0d06e94bc2e6a3bfbe619c7bd3b4947e2f931607" datatype="html">
@@ -11794,6 +11798,62 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="needs-translation">Item Info</target>
       </trans-unit>
+      <trans-unit id="9fe218829514884cdd0ca2300573a4e0428c324f" datatype="html">
+        <source>Alerts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <target state="needs-translation">Alerts</target>
+      </trans-unit>
+      <trans-unit id="7fd259199909b64d4c113b1581a5a0d41e2fdff5" datatype="html">
+        <source>Clear all notifications</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <target state="needs-translation">Clear all notifications</target>
+      </trans-unit>
+      <trans-unit id="8ef463e66c2b67515dd9708a8fea5c212a5f03af" datatype="html">
+        <source>You have no new alerts at this time.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <target state="needs-translation">You have no new alerts at this time.</target>
+      </trans-unit>
+      <trans-unit id="0ee36ba1b4319ac40a86358e26f17356a3606e8a" datatype="html">
+        <source>Go to <x id="INTERPOLATION" equiv-text="{{ getNodePositionAndTitleByNodeId(notification.nodeId) }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <target state="needs-translation">Go to <x id="INTERPOLATION" equiv-text="{{ getNodePositionAndTitleByNodeId(notification.nodeId) }}"/></target>
+      </trans-unit>
+      <trans-unit id="6853281750146333865" datatype="html">
+        <source>Are you sure you want to clear all your alerts?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to clear all your alerts?</target>
+      </trans-unit>
+      <trans-unit id="1540547702951133575" datatype="html">
+        <source>Clear all alerts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <target state="needs-translation">Clear all alerts</target>
+      </trans-unit>
       <trans-unit id="9c27666f25b547427db4969640222357559f98c6" datatype="html">
         <source>Main Menu</source>
         <context-group purpose="location">
@@ -19462,14 +19522,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">52,54</context>
         </context-group>
         <target state="needs-translation"> Submit </target>
-      </trans-unit>
-      <trans-unit id="9fe218829514884cdd0ca2300573a4e0428c324f" datatype="html">
-        <source>Alerts</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-        <target state="needs-translation">Alerts</target>
       </trans-unit>
       <trans-unit id="e4c201ad39e5fa4658b22a707c94012bc30e0846" datatype="html">
         <source>Dismiss all alerts</source>
