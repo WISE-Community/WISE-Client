@@ -4890,7 +4890,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Sign in With Google</target>
+        <target state="translated">Iniciar sesión con Google</target>
       </trans-unit>
       <trans-unit id="3dc7e5a946cf3b4b076f84ed850b26f6485e3de2" datatype="html">
         <source>Sorry, your Google User ID was not found in WISE.</source>
@@ -4898,7 +4898,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Sorry, your Google User ID was not found in WISE.</target>
+        <target state="translated">Perdón, no se encontró su usuario de Google en WISE.</target>
       </trans-unit>
       <trans-unit id="78c63889b23ad26a16c97c152c6af4b81bcf8858" datatype="html">
         <source>New to WISE? Join for free!</source>
@@ -4906,7 +4906,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">New to WISE? Join for free!</target>
+        <target state="translated">¿No tenés cuenta en WISE? Unite de manera gratuita!</target>
       </trans-unit>
       <trans-unit id="692e665f8177ee9150169dca0ff15418616cb3cb" datatype="html">
         <source>Google logo</source>
@@ -4974,7 +4974,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Sign up as a Student</target>
+        <target state="translated">Registrarme como Estudiante</target>
       </trans-unit>
       <trans-unit id="759603ff04389bab3bd4c0240129181d705187a5" datatype="html">
         <source>Sign up as a Teacher</source>
@@ -4982,7 +4982,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="needs-translation">Sign up as a Teacher</target>
+        <target state="translated">Registrarme como Docente</target>
       </trans-unit>
       <trans-unit id="263e1717422fe3b5810e9a2e55b87e477b35d1ed" datatype="html">
         <source>Sign in to WISE</source>
@@ -7456,7 +7456,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/services/password.service.ts</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Password must be at least 8 characters</target>
+        <target state="translated">La contraseña debe tener al menos 8 caracteres</target>
       </trans-unit>
       <trans-unit id="7292914524782920528" datatype="html">
         <source>Password must have at least one lowercase, one uppercase, and one number character</source>
@@ -7464,7 +7464,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/services/password.service.ts</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="needs-translation">Password must have at least one lowercase, one uppercase, and one number character</target>
+        <target state="translated">La contraseña debe tener al menos un carácter en minúscula, uno en mayúscula y un número</target>
       </trans-unit>
       <trans-unit id="e931f6b80399785ea1647269f43ffeea54327cb6" datatype="html">
         <source>User Name required</source>
@@ -10908,7 +10908,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.html</context>
           <context context-type="linenumber">18,20</context>
         </context-group>
-        <target state="needs-translation"> Teacher Password is incorrect </target>
+        <target state="translated"> La contraseña de docente es incorrecta </target>
       </trans-unit>
       <trans-unit id="f1ca7e8784d363977ca2745cb7550fb03ce54d30" datatype="html">
         <source>New Student Password</source>
@@ -11216,7 +11216,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">Expand All</target>
+        <target state="translated">Expandir todo</target>
       </trans-unit>
       <trans-unit id="a0161b45994d017056833ae5e2fbaccb8f58e847" datatype="html">
         <source> + Expand All </source>
@@ -11224,7 +11224,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">20,22</context>
         </context-group>
-        <target state="needs-translation"> + Expand All </target>
+        <target state="translated"> +Expandir Todo </target>
       </trans-unit>
       <trans-unit id="7cc20136d8ae69cbe796d0fd2a6b2e242d2bd061" datatype="html">
         <source>Collapse All</source>
@@ -11232,7 +11232,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Collapse All</target>
+        <target state="translated">Colapsar todo</target>
       </trans-unit>
       <trans-unit id="ed770f216587fb35c8e9508d1b3fe5204c87797b" datatype="html">
         <source>Sort by team</source>
@@ -11264,7 +11264,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="needs-translation">Sort by completion</target>
+        <target state="translated">Ordenar por completado</target>
       </trans-unit>
       <trans-unit id="81b97b8ea996ad1e4f9fca8415021850214884b1" datatype="html">
         <source>Status</source>
@@ -11300,7 +11300,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">94</context>
         </context-group>
-        <target state="needs-translation">Sort by score on Step <x id="INTERPOLATION" equiv-text="{{ firstNodePosition }}"/></target>
+        <target state="translated">Ordenar por calificación en Paso <x id="INTERPOLATION" equiv-text="{{ firstNodePosition }}"/></target>
       </trans-unit>
       <trans-unit id="a262ce07b84721a39fea4de2fb96f664e45fc925" datatype="html">
         <source>Sort by score on Step <x id="INTERPOLATION" equiv-text="{{ lastNodePosition }}"/></source>
@@ -11312,7 +11312,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">114</context>
         </context-group>
-        <target state="needs-translation">Sort by score on Step <x id="INTERPOLATION" equiv-text="{{ lastNodePosition }}"/></target>
+        <target state="translated">Ordenar por calificación en Paso <x id="INTERPOLATION" equiv-text="{{ lastNodePosition }}"/></target>
       </trans-unit>
       <trans-unit id="746238f199dd62b7e8dcb904e58a662a57f89e0d" datatype="html">
         <source>Sort by change in score</source>
@@ -11324,7 +11324,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">134</context>
         </context-group>
-        <target state="needs-translation">Sort by change in score</target>
+        <target state="translated">Ordenar por cambio en el puntaje</target>
       </trans-unit>
       <trans-unit id="5c1c0bfa3098ed3b99efd69e5e189da5fe3ffab8" datatype="html">
         <source>+/-</source>
@@ -11332,7 +11332,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">137</context>
         </context-group>
-        <target state="needs-translation">+/-</target>
+        <target state="translated">+/-</target>
       </trans-unit>
       <trans-unit id="63ff7016751d1e4b07f4f7724378380cef2e049b" datatype="html">
         <source>Show/hide team&apos;s work for this step</source>
@@ -11820,7 +11820,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Clear all notifications</target>
+        <target state="translated">Borrar todas las notificaciones</target>
       </trans-unit>
       <trans-unit id="8ef463e66c2b67515dd9708a8fea5c212a5f03af" datatype="html">
         <source>You have no new alerts at this time.</source>
@@ -11828,7 +11828,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
-        <target state="needs-translation">You have no new alerts at this time.</target>
+        <target state="translated">No tiene alertas en este momento.</target>
       </trans-unit>
       <trans-unit id="0ee36ba1b4319ac40a86358e26f17356a3606e8a" datatype="html">
         <source>Go to <x id="INTERPOLATION" equiv-text="{{ getNodePositionAndTitleByNodeId(notification.nodeId) }}"/></source>
@@ -11836,7 +11836,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
-        <target state="needs-translation">Go to <x id="INTERPOLATION" equiv-text="{{ getNodePositionAndTitleByNodeId(notification.nodeId) }}"/></target>
+        <target state="translated">Ir a <x id="INTERPOLATION" equiv-text="{{ getNodePositionAndTitleByNodeId(notification.nodeId) }}"/></target>
       </trans-unit>
       <trans-unit id="6853281750146333865" datatype="html">
         <source>Are you sure you want to clear all your alerts?</source>
@@ -11844,7 +11844,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.ts</context>
           <context context-type="linenumber">35</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to clear all your alerts?</target>
+        <target state="translated">¿Seguro que quiere borrar todas las alertas?</target>
       </trans-unit>
       <trans-unit id="1540547702951133575" datatype="html">
         <source>Clear all alerts</source>
@@ -11852,7 +11852,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.ts</context>
           <context context-type="linenumber">36</context>
         </context-group>
-        <target state="needs-translation">Clear all alerts</target>
+        <target state="translated">Borrar todas las alertas</target>
       </trans-unit>
       <trans-unit id="9c27666f25b547427db4969640222357559f98c6" datatype="html">
         <source>Main Menu</source>
@@ -13300,7 +13300,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Feedback Rule Authoring</target>
+        <target state="translated">Creación de reglas de retroalimentación</target>
       </trans-unit>
       <trans-unit id="5499b81e5db6d551e39b1731b360d787148bfea2" datatype="html">
         <source>Introduction</source>
@@ -13308,7 +13308,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Introduction</target>
+        <target state="translated">Introducción</target>
       </trans-unit>
       <trans-unit id="2b697376f40eff0851d7401d0e93b7243059e8ef" datatype="html">
         <source> Rules are evaluated top to bottom. The first rule <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expression<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> that matches the student&apos;s response is used to provide feedback. </source>
@@ -13316,7 +13316,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">4,7</context>
         </context-group>
-        <target state="needs-translation"> Rules are evaluated top to bottom. The first rule <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expression<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> that matches the student's response is used to provide feedback. </target>
+        <target state="translated"> Las reglas son evaluadas de arriba hacia abajo. La primera regla <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expresión<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> que coincide con la respuesta del estudiante es usada para proveer retroalimentación. </target>
       </trans-unit>
       <trans-unit id="c9221bf820334c924a79cbd23f21e521a5bc5a90" datatype="html">
         <source>You can add multiple <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Feedback<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> items per rule. The first time a rule matches, Feedback #1 will be shown to the student.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> If the rule matches a second time (in a subsequent round), Feedback #2 will be shown, and so on. </source>
@@ -13324,7 +13324,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">8,11</context>
         </context-group>
-        <target state="needs-translation">You can add multiple <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Feedback<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> items per rule. The first time a rule matches, Feedback #1 will be shown to the student.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> If the rule matches a second time (in a subsequent round), Feedback #2 will be shown, and so on. </target>
+        <target state="translated">Se pueden agregar múltiples items de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Retroalimentación<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> por regla. La primera vez que una regla coincide, se muestra al estudiante la Retroalimentación #1.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Si la regla coincide una segunda vez (en la ronda siguiente), se muestra la Retroalimentación #2 y así sucesivamente. </target>
       </trans-unit>
       <trans-unit id="f7b73495b143340f88fb636d660bde8a62016d55" datatype="html">
         <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expressions<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> are made up of terms and operators:</source>
@@ -13332,7 +13332,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation"><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expressions<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> are made up of terms and operators:</target>
+        <target state="translated"><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expresiones<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> se componen de términos y operadores:</target>
       </trans-unit>
       <trans-unit id="69580f2c2dbf4edf7096820ba8c393367352d774" datatype="html">
         <source>Terms</source>
@@ -13340,7 +13340,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="needs-translation">Terms</target>
+        <target state="translated">Términos</target>
       </trans-unit>
       <trans-unit id="4386e2f920c44a2d81df324615b6daba105a6d92" datatype="html">
         <source>Terms lets you specify what to look for in a student response.</source>
@@ -13348,7 +13348,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="needs-translation">Terms lets you specify what to look for in a student response.</target>
+        <target state="translated">Los términos permiten especificar qué mirar en la respuesta de un estudiante.</target>
       </trans-unit>
       <trans-unit id="be1c273fc76e686667bff39d321970c9487f9ee7" datatype="html">
         <source>Term</source>
@@ -13356,7 +13356,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">Term</target>
+        <target state="translated">Término</target>
       </trans-unit>
       <trans-unit id="75d2b95268e9105792456110196b6d0959f64682" datatype="html">
         <source>Evaluates to true if idea 1, 2, 18, etc was found in the student’s response.</source>
@@ -13364,7 +13364,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Evaluates to true if idea 1, 2, 18, etc was found in the student’s response.</target>
+        <target state="translated">Se evalúa como verdadero si la idea 1, 2, 18, etc. se encontró en la respuesta del estudiante.</target>
       </trans-unit>
       <trans-unit id="b76eb1dfebc7cbec7f95dae60708804c3eb23e15" datatype="html">
         <source> Evaluates to true if the student received a KI score of X.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student received KI score 3. </source>
@@ -13372,7 +13372,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">23,26</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if the student received a KI score of X.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student received KI score 3. </target>
+        <target state="translated"> Evalúa como verdadero si el estudiante recibe un puntaje de IC de X.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ej: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evalúa como verdadero si el estudiante recibe un puntaje de IC 3. </target>
       </trans-unit>
       <trans-unit id="0d416f044b1ada4a09ca8aeae1f1eda976c755de" datatype="html">
         <source> Evaluates to true if more than X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas. </source>
@@ -13380,7 +13380,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">30,33</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if more than X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas. </target>
+        <target state="translated"> Evalúa como verdadero si el estudiante recibe un puntaje de IC de X.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ej: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evalúa como verdadero si el estudiante recibe un puntaje de IC 2. </target>
       </trans-unit>
       <trans-unit id="1e95f0f9a80f8d69c7161cee29dae19260b0413c" datatype="html">
         <source> Evaluates to true if less than X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas. </source>
@@ -13388,7 +13388,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">37,40</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if less than X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas. </target>
+        <target state="translated"> Evalúa como verdadero si el estudiante recibe un puntaje de IC de X.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ej: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evalúa como verdadero si el estudiante recibe un puntaje de IC 2. </target>
       </trans-unit>
       <trans-unit id="43741e9a8cbb377bc249abc1b62354e7afdc8fa4" datatype="html">
         <source> Evaluates to true if exactly X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas. </source>
@@ -13396,7 +13396,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">44,47</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if exactly X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas. </target>
+        <target state="translated"> Evalúa como verdadero si el estudiante recibe un puntaje de IC de X.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ej: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evalúa como verdadero si el estudiante recibe un puntaje de IC 2. </target>
       </trans-unit>
       <trans-unit id="c2486592cf45d20e09baab39819c38505fad8a6b" datatype="html">
         <source> Evaluates to true if this is the student’s second to last response when the max number of submits is specified. </source>
@@ -13404,7 +13404,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">51,54</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if this is the student’s second to last response when the max number of submits is specified. </target>
+        <target state="translated"> Se evalúa como verdadero si esta es la penúltima respuesta del estudiante cuando se especifica el número máximo de envíos. </target>
       </trans-unit>
       <trans-unit id="2a3efda5e801cb07e2e472eddd138e8f0f3c7443" datatype="html">
         <source> Evaluates to true if this is the student’s final response when the max number of submits is specified. </source>
@@ -13412,7 +13412,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">58,61</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if this is the student’s final response when the max number of submits is specified. </target>
+        <target state="translated"> Se evalúa como verdadero si esta es la respuesta final del alumno cuando se especifica el número máximo de envíos. </target>
       </trans-unit>
       <trans-unit id="b0a572a715e1e342333c536fea0001cf15619361" datatype="html">
         <source>Evaluates to true if the student’s response was not scorable.</source>
@@ -13420,7 +13420,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="needs-translation">Evaluates to true if the student’s response was not scorable.</target>
+        <target state="translated">Se evalúa como verdadera si la respuesta del estudiante no fue puntuable.</target>
       </trans-unit>
       <trans-unit id="288b2a5b903bd5a233bc6dde453ce2cca7f59f06" datatype="html">
         <source> Evaluates to true if no other terms were matched. Add this term as the final rule to specify a default feedback. </source>
@@ -13428,7 +13428,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">69,72</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if no other terms were matched. Add this term as the final rule to specify a default feedback. </target>
+        <target state="translated"> Se evalúa como verdadero si no coincidieron otros términos. Agregar este término como regla final para especificar un comentario predeterminado. </target>
       </trans-unit>
       <trans-unit id="9d4ed1f582fafcfd1035ea83e58a5e1fe8d6a1a5" datatype="html">
         <source>Operators</source>
@@ -13436,7 +13436,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">75</context>
         </context-group>
-        <target state="needs-translation">Operators</target>
+        <target state="translated">Operadores</target>
       </trans-unit>
       <trans-unit id="b2145d0c97ccffaf79c5770f967a429c84af4123" datatype="html">
         <source>Operators let you combine one or more terms together to make a rule.</source>
@@ -13444,7 +13444,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">76</context>
         </context-group>
-        <target state="needs-translation">Operators let you combine one or more terms together to make a rule.</target>
+        <target state="translated">Los operadores permiten combinar uno más términos juntos para crear una regla.</target>
       </trans-unit>
       <trans-unit id="c39d43f18d10f925621abc77ad15de80a9cc7516" datatype="html">
         <source>Operator</source>
@@ -13452,7 +13452,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">79</context>
         </context-group>
-        <target state="needs-translation">Operator</target>
+        <target state="translated">Operador</target>
       </trans-unit>
       <trans-unit id="f8fe51bf6c4939808e8ce9047e067b7fa4fd7a54" datatype="html">
         <source> Evaluates to true if terms on both sides of this operator evaluate to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was found and the student received a KI score of 2. </source>
@@ -13460,7 +13460,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">84,89</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if terms on both sides of this operator evaluate to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was found and the student received a KI score of 2. </target>
+        <target state="translated"> Evalúa a verdadero si los términos a ambos lados de este operador evalúan a verdad.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ej: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evalúa a true si la idea 1 y 2 fueron encontradas.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ej: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evalúa si se encontró la idea 1 y el estudiante recibió una puntuación de KI de 2. </target>
       </trans-unit>
       <trans-unit id="3442eeed9a3956346f4fe2a2f2efb6158c5c54d9" datatype="html">
         <source> Evaluates to true if a term on either side of this operator evaluates to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if either idea 1 or 2 was found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found or idea 3 was found. </source>
@@ -16653,7 +16653,7 @@ Advertencia: Esto eliminará todas las opciones existentes en este componente.</
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/audio-recorder/audio-recorder.component.html</context>
           <context context-type="linenumber">18,20</context>
         </context-group>
-        <target state="needs-translation"> Recording Time Left: <x id="INTERPOLATION" equiv-text="{{ getTimeRemaining() }}"/> </target>
+        <target state="translated"> Tiempo restante de grabación: <x id="INTERPOLATION" equiv-text="{{ getTimeRemaining() }}"/> </target>
       </trans-unit>
       <trans-unit id="00ec5ea7bd8f637d82ec4c16087bf483ba9279aa" datatype="html">
         <source>Delete Recording</source>
@@ -16777,7 +16777,7 @@ Advertencia: Esto eliminará todas las opciones existentes en este componente.</
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">85,87</context>
         </context-group>
-        <target state="needs-translation"> Enable Feedback Rules </target>
+        <target state="translated"> Habilitar reglas de retroalimentación </target>
       </trans-unit>
       <trans-unit id="1af86cf046af1ad99f6148363089317c4711f840" datatype="html">
         <source>Scoring Rule</source>
@@ -17057,7 +17057,7 @@ Advertencia: Esto eliminará todas las opciones existentes en este componente.</
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Default feedback</target>
+        <target state="translated">Retroalimentación por defecto</target>
       </trans-unit>
       <trans-unit id="2839735751687486837" datatype="html">
         <source>Are you sure you want to delete this scoring rule?
