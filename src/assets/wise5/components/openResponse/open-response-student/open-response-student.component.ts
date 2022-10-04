@@ -25,7 +25,7 @@ import { OpenResponseService } from '../openResponseService';
   templateUrl: 'open-response-student.component.html',
   styleUrls: ['open-response-student.component.scss']
 })
-export class OpenResponseStudent extends ComponentStudent implements FeedbackRuleComponent {
+export class OpenResponseStudent extends ComponentStudent {
   audioAttachments: any[] = [];
   cRaterTimeout: number = 40000;
   isPublicSpaceExist: boolean = false;
@@ -394,7 +394,14 @@ export class OpenResponseStudent extends ComponentStudent implements FeedbackRul
       );
     } else {
       if (this.hasFeedbackRules()) {
-        const feedbackRuleEvaluator = new FeedbackRuleEvaluator(this);
+        const feedbackRuleEvaluator = new FeedbackRuleEvaluator(
+          new FeedbackRuleComponent(
+            this.getFeedbackRules(),
+            this.getMaxSubmitCount(),
+            this.isMultipleFeedbackTextsForSameRuleAllowed(),
+            this.submitCounter
+          )
+        );
         const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(response);
         autoComment = this.getFeedbackText(feedbackRule);
         feedbackRuleId = feedbackRule.id;

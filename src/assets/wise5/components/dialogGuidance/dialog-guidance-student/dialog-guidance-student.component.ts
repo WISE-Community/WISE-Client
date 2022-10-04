@@ -30,9 +30,7 @@ import { ComponentStudent } from '../../component-student.component';
   templateUrl: './dialog-guidance-student.component.html',
   styleUrls: ['./dialog-guidance-student.component.scss']
 })
-export class DialogGuidanceStudentComponent
-  extends ComponentStudent
-  implements FeedbackRuleComponent {
+export class DialogGuidanceStudentComponent extends ComponentStudent {
   computerAvatar: ComputerAvatar;
   cRaterTimeout: number = 40000;
   feedbackRuleEvaluator: FeedbackRuleEvaluator;
@@ -84,7 +82,14 @@ export class DialogGuidanceStudentComponent
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     }
-    this.feedbackRuleEvaluator = new FeedbackRuleEvaluator(this);
+    this.feedbackRuleEvaluator = new FeedbackRuleEvaluator(
+      new FeedbackRuleComponent(
+        this.getFeedbackRules(),
+        this.getMaxSubmitCount(),
+        this.isMultipleFeedbackTextsForSameRuleAllowed(),
+        this.submitCounter
+      )
+    );
     if (this.componentContent.isComputerAvatarEnabled) {
       this.initializeComputerAvatar();
     } else {
