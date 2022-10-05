@@ -29,28 +29,32 @@ export class FeedbackRuleEvaluator {
   private satisfiesSpecialRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {
     return (
       this.satisfiesNonScorableRule(response, feedbackRule) ||
-      this.satisfiesFinalSubmitRule(feedbackRule) ||
-      this.satisfiesSecondToLastSubmitRule(feedbackRule)
+      this.satisfiesFinalSubmitRule(response, feedbackRule) ||
+      this.satisfiesSecondToLastSubmitRule(response, feedbackRule)
     );
   }
 
-  private satisfiesFinalSubmitRule(feedbackRule: FeedbackRule): boolean {
+  private satisfiesFinalSubmitRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {
     return (
-      this.component.hasMaxSubmitCountAndUsedAllSubmits() &&
+      this.component.hasMaxSubmitCount() &&
+      this.component.hasMaxSubmitCountAndUsedAllSubmits(response.submitCounter) &&
       FeedbackRule.isFinalSubmitRule(feedbackRule)
     );
   }
 
-  private satisfiesSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {
+  private satisfiesSecondToLastSubmitRule(
+    response: CRaterResponse,
+    feedbackRule: FeedbackRule
+  ): boolean {
     return (
       this.component.hasMaxSubmitCount() &&
-      this.isSecondToLastSubmit() &&
+      this.isSecondToLastSubmit(response.submitCounter) &&
       FeedbackRule.isSecondToLastSubmitRule(feedbackRule)
     );
   }
 
-  private isSecondToLastSubmit(): boolean {
-    return this.component.getNumberOfSubmitsLeft() === 1;
+  private isSecondToLastSubmit(submitCounter: number): boolean {
+    return this.component.getNumberOfSubmitsLeft(submitCounter) === 1;
   }
 
   private satisfiesNonScorableRule(response: CRaterResponse, feedbackRule: FeedbackRule): boolean {

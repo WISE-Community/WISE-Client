@@ -49,12 +49,12 @@ export class DynamicPromptComponent implements OnInit {
     if (latestComponentState != null && latestAutoScoreAnnotation != null) {
       const cRaterResponse = new CRaterResponse({
         ideas: latestAutoScoreAnnotation.data.ideas,
-        scores: latestAutoScoreAnnotation.data.scores
+        scores: latestAutoScoreAnnotation.data.scores,
+        submitCounter: this.getSubmitCounter(latestComponentState)
       });
       const feedbackRuleEvaluator = this.getFeedbackRuleEvaluator(
         this.dynamicPrompt.getRules(),
-        referenceComponent.maxSubmitCount,
-        this.getSubmitCounter(latestComponentState)
+        referenceComponent.maxSubmitCount
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponse);
       this.setPrompt(feedbackRule.prompt);
@@ -77,14 +77,8 @@ export class DynamicPromptComponent implements OnInit {
     );
   }
 
-  private getFeedbackRuleEvaluator(
-    rules: FeedbackRule[],
-    maxSubmitCount: number,
-    submitCount: number
-  ): any {
-    return new FeedbackRuleEvaluator(
-      new FeedbackRuleComponent(rules, maxSubmitCount, false, submitCount)
-    );
+  private getFeedbackRuleEvaluator(rules: FeedbackRule[], maxSubmitCount: number): any {
+    return new FeedbackRuleEvaluator(new FeedbackRuleComponent(rules, maxSubmitCount, false));
   }
 
   private getSubmitCounter(componentState: any): number {

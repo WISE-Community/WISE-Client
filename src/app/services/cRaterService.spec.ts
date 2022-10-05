@@ -196,7 +196,7 @@ function getDataFromResponse() {
           }
         }
       };
-      const cRaterResponse = service.getCRaterResponse(response);
+      const cRaterResponse = service.getCRaterResponse(response, 1);
       expect(cRaterResponse.score).toEqual(score);
       expect(cRaterResponse.ideas).toEqual([new CRaterIdea('1', idea1Detected)]);
     });
@@ -240,7 +240,7 @@ function getDataFromResponse() {
           }
         }
       };
-      const cRaterResponse = service.getCRaterResponse(response);
+      const cRaterResponse = service.getCRaterResponse(response, 1);
       expect(cRaterResponse.scores).toEqual([
         new CRaterScore('ki', kiRawTrimRound, kiRaw, kiScoreRangeMin, kiScoreRangeMax),
         new CRaterScore('dci', dciRawTrimRound, dciRaw, dciScoreRangeMin, dciScoreRangeMax)
@@ -263,7 +263,7 @@ function getDataFromResponse() {
           }
         }
       };
-      const cRaterResponse = service.getCRaterResponse(response);
+      const cRaterResponse = service.getCRaterResponse(response, 1);
       expect(cRaterResponse.score).toEqual(score);
       expect(cRaterResponse.ideas).toEqual([]);
     });

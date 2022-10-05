@@ -86,8 +86,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       new FeedbackRuleComponent(
         this.getFeedbackRules(),
         this.getMaxSubmitCount(),
-        this.isMultipleFeedbackTextsForSameRuleAllowed(),
-        this.submitCounter
+        this.isMultipleFeedbackTextsForSameRuleAllowed()
       )
     );
     if (this.componentContent.isComputerAvatarEnabled) {
@@ -218,7 +217,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       .pipe(timeout(this.cRaterTimeout))
       .subscribe(
         (response: any) => {
-          this.cRaterSuccessResponse(this.CRaterService.getCRaterResponse(response));
+          this.cRaterSuccessResponse(response);
         },
         () => {
           this.cRaterErrorResponse();
@@ -246,10 +245,11 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.studentCanRespond = false;
   }
 
-  cRaterSuccessResponse(response: CRaterResponse): void {
+  cRaterSuccessResponse(response: any): void {
     this.hideWaitingForComputerResponse();
     this.submitButtonClicked();
-    this.addDialogResponse(this.createComputerDialogResponse(response));
+    const cRaterResponse = this.CRaterService.getCRaterResponse(response, this.submitCounter);
+    this.addDialogResponse(this.createComputerDialogResponse(cRaterResponse));
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     } else {

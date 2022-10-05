@@ -330,7 +330,7 @@ export class OpenResponseStudent extends ComponentStudent {
     deferred: any,
     dialogRef: any
   ): void {
-    const cRaterResponse = this.CRaterService.getCRaterResponse(response);
+    const cRaterResponse = this.CRaterService.getCRaterResponse(response, this.submitCounter);
     let score = cRaterResponse.score;
     if (cRaterResponse.scores != null) {
       const maxSoFarFunc = (accumulator, currentValue) => {
@@ -398,8 +398,7 @@ export class OpenResponseStudent extends ComponentStudent {
           new FeedbackRuleComponent(
             this.getFeedbackRules(),
             this.getMaxSubmitCount(),
-            this.isMultipleFeedbackTextsForSameRuleAllowed(),
-            this.submitCounter
+            this.isMultipleFeedbackTextsForSameRuleAllowed()
           )
         );
         const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(response);
