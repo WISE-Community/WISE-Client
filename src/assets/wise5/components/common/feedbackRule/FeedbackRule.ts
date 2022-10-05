@@ -1,7 +1,8 @@
 export class FeedbackRule {
   id?: string;
   expression: string;
-  feedback: string | string[];
+  feedback?: string | string[];
+  prompt?: string;
   static operatorPrecedences = { '!': 2, '&&': 1, '||': 1 };
 
   constructor(jsonObject: any = {}) {

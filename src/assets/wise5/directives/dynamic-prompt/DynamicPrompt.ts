@@ -1,3 +1,5 @@
+import { FeedbackRule } from '../../components/common/feedbackRule/FeedbackRule';
+
 export class DynamicPrompt {
   enabled: boolean;
   postPrompt?: string;
@@ -6,7 +8,7 @@ export class DynamicPrompt {
     componentId: string;
     nodeId: string;
   };
-  rules: any[];
+  rules: FeedbackRule[];
 
   constructor(jsonObject: any = {}) {
     for (const key of Object.keys(jsonObject)) {
@@ -14,5 +16,17 @@ export class DynamicPrompt {
         this[key] = jsonObject[key];
       }
     }
+  }
+
+  getReferenceNodeId(): string {
+    return this.referenceComponent.nodeId;
+  }
+
+  getReferenceComponentId(): string {
+    return this.referenceComponent.componentId;
+  }
+
+  getRules(): FeedbackRule[] {
+    return this.rules;
   }
 }

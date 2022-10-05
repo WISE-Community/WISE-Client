@@ -1,4 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { ProjectService } from '../../services/projectService';
 import { DynamicPromptComponent } from '../dynamic-prompt/dynamic-prompt.component';
 import { DynamicPrompt } from '../dynamic-prompt/DynamicPrompt';
 import { PromptComponent } from './prompt.component';
@@ -6,13 +10,14 @@ import { PromptComponent } from './prompt.component';
 describe('PromptComponent', () => {
   let component: PromptComponent;
   let fixture: ComponentFixture<PromptComponent>;
-  const promptText: string = 'This is the prompt.';
+  const promptText: string = 'This is the regular prompt.';
   const postPromptText: string = 'This is the prompt after the dynamic prompt.';
   const prePromptText: string = 'This is the prompt before the dynamic prompt.';
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PromptComponent, DynamicPromptComponent]
+      declarations: [PromptComponent, DynamicPromptComponent],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
     }).compileComponents();
   });
 
@@ -23,7 +28,14 @@ describe('PromptComponent', () => {
     component.dynamicPrompt = new DynamicPrompt({
       enabled: false,
       postPrompt: postPromptText,
-      prePrompt: prePromptText
+      prePrompt: prePromptText,
+      referenceComponent: {
+        componentId: 'component1',
+        nodeId: 'node1'
+      }
+    });
+    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({
+      type: 'OpenResponse'
     });
     fixture.detectChanges();
   });
@@ -33,11 +45,10 @@ describe('PromptComponent', () => {
     expect(promptElement.textContent).toEqual(promptText);
   });
 
-  it('should display the dynamic prompt', () => {
+  it('should not display the regular prompt2', () => {
     component.dynamicPrompt.enabled = true;
     fixture.detectChanges();
-    const prompts = fixture.debugElement.nativeElement.querySelectorAll('.prompt');
-    expect(prompts[0].textContent).toEqual(prePromptText);
-    expect(prompts[prompts.length - 1].textContent).toEqual(postPromptText);
+    const prompt = fixture.debugElement.nativeElement.querySelector('.prompt');
+    expect(prompt.textContent).not.toEqual(promptText);
   });
 });
