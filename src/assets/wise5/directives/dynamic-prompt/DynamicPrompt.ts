@@ -2,6 +2,7 @@ import { FeedbackRule } from '../../components/common/feedbackRule/FeedbackRule'
 
 export class DynamicPrompt {
   enabled: boolean;
+  peerGroupingTag?: string;
   postPrompt?: string;
   prePrompt?: string;
   referenceComponent: {
@@ -28,5 +29,13 @@ export class DynamicPrompt {
 
   getRules(): FeedbackRule[] {
     return this.rules;
+  }
+
+  getPeerGroupingTag(): string {
+    return this.peerGroupingTag;
+  }
+
+  isPeerGroupingTagSpecified(): boolean {
+    return this.peerGroupingTag != null && this.peerGroupingTag !== '';
   }
 }
