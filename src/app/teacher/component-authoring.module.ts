@@ -72,6 +72,8 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
 import { PeerGroupingAuthoringModule } from '../../assets/wise5/authoringTool/peer-grouping/peer-grouping-authoring.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { FeedbackRuleHelpComponent } from '../../assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component';
+import { EditDynamicPromptComponent } from '../authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component';
+import { EditDynamicPromptRulesComponent } from '../authoring-tool/edit-dynamic-prompt-rules/edit-dynamic-prompt-rules.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +116,8 @@ import { FeedbackRuleHelpComponent } from '../../assets/wise5/components/common/
     EditDiscussionConnectedComponentsComponent,
     EditDrawAdvancedComponent,
     EditDrawConnectedComponentsComponent,
+    EditDynamicPromptComponent,
+    EditDynamicPromptRulesComponent,
     EditEmbeddedAdvancedComponent,
     EditFeedbackRulesComponent,
     EditGraphAdvancedComponent,

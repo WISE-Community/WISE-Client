@@ -20,9 +20,9 @@ export class EditFeedbackRulesComponent implements OnInit {
   @Input() version: number = 2;
 
   constructor(
-    private dialog: MatDialog,
-    private projectService: TeacherProjectService,
-    private utilService: UtilService
+    protected dialog: MatDialog,
+    protected projectService: TeacherProjectService,
+    protected utilService: UtilService
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +64,7 @@ export class EditFeedbackRulesComponent implements OnInit {
     this.projectService.nodeChanged();
   }
 
-  private createNewFeedbackRule(): any {
+  protected createNewFeedbackRule(): any {
     if (this.version === 1) {
       return { expression: '', feedback: '' };
     } else {
