@@ -214,7 +214,7 @@ export class CRaterService {
       });
   }
 
-  getCRaterResponse(response: any): CRaterResponse {
+  getCRaterResponse(response: any, submitCounter: number): CRaterResponse {
     const cRaterResponse: CRaterResponse = new CRaterResponse();
     if (this.isSingleScore(response)) {
       cRaterResponse.score = this.getScore(response);
@@ -222,6 +222,7 @@ export class CRaterService {
       cRaterResponse.scores = this.getScores(response);
     }
     cRaterResponse.ideas = this.getIdeas(response);
+    cRaterResponse.submitCounter = submitCounter;
     return cRaterResponse;
   }
 

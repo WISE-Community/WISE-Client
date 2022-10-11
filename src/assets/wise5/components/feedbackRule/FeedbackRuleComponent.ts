@@ -4,24 +4,23 @@ export class FeedbackRuleComponent {
   constructor(
     private feedbackRules: FeedbackRule[],
     private maxSubmitCount: number,
-    private multipleFeedbackTextsForSameRuleAllowed: boolean,
-    private submitCount: number
+    private multipleFeedbackTextsForSameRuleAllowed: boolean
   ) {}
 
   getFeedbackRules(): FeedbackRule[] {
     return this.feedbackRules;
   }
 
-  getNumberOfSubmitsLeft(): number {
-    return this.maxSubmitCount - this.submitCount;
+  getNumberOfSubmitsLeft(submitCounter: number): number {
+    return this.maxSubmitCount - submitCounter;
   }
 
   hasMaxSubmitCount(): boolean {
     return this.maxSubmitCount != null;
   }
 
-  hasMaxSubmitCountAndUsedAllSubmits(): boolean {
-    return this.hasMaxSubmitCount() && this.getNumberOfSubmitsLeft() <= 0;
+  hasMaxSubmitCountAndUsedAllSubmits(submitCounter: number): boolean {
+    return this.hasMaxSubmitCount() && submitCounter >= this.maxSubmitCount;
   }
 
   isMultipleFeedbackTextsForSameRuleAllowed(): boolean {

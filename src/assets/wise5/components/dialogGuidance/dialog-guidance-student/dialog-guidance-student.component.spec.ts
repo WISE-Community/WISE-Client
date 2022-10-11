@@ -95,10 +95,11 @@ describe('DialogGuidanceStudentComponent', () => {
       'broadcastComponentSubmitTriggered'
     );
     component.setIsSubmitDirty(true);
-    const response = new CRaterResponse();
+    const response = createDummyScoringResponse();
+    expect(component.responses.length).toEqual(0);
     component.cRaterSuccessResponse(response);
     expect(broadcastComponentSubmitTriggeredSpy).toHaveBeenCalled();
-    expect(component.submitCounter).toEqual(1);
+    expect(component.responses.length).toEqual(1);
   });
 
   it('should disable submit button after using all submits', () => {
@@ -205,7 +206,7 @@ describe('DialogGuidanceStudentComponent', () => {
 });
 
 function simulateSubmit(component: DialogGuidanceStudentComponent): void {
-  const response = new CRaterResponse();
+  const response = createDummyScoringResponse();
   component.setIsSubmitDirty(true);
   component.cRaterSuccessResponse(response);
 }
@@ -231,4 +232,17 @@ function expectIsShowComputerAvatarSelector(
   expectedIsShowComputerAvatarSelector: boolean
 ) {
   expect(component.isShowComputerAvatarSelector).toEqual(expectedIsShowComputerAvatarSelector);
+}
+
+function createDummyScoringResponse() {
+  return {
+    responses: {
+      feedback: {
+        ideas: [{ 2: false }, { 3: false }]
+      },
+      trait_scores: {
+        ki: { score: 1 }
+      }
+    }
+  };
 }
