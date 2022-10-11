@@ -163,7 +163,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
       response: this.response,
       submitCounter: this.submitCounter
     };
-    if (this.isDynamicPromptEnabled() && this.dynamicPrompt != null) {
+    if (this.dynamicPrompt != null) {
       componentState.studentData.dynamicPrompt = this.dynamicPrompt;
     }
     componentState.componentType = 'PeerChat';
@@ -249,10 +249,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   private isTeacherWorkgroupId(workgroupId: number): boolean {
     return this.configService.getTeacherWorkgroupIds().includes(workgroupId);
-  }
-
-  private isDynamicPromptEnabled(): boolean {
-    return this.componentContent.dynamicPrompt?.enabled;
   }
 
   onDynamicPromptChanged(feedbackRule: FeedbackRule): void {
