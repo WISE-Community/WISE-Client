@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CRaterResponse } from '../../components/common/cRater/CRaterResponse';
@@ -19,6 +19,7 @@ import { DynamicPrompt } from './DynamicPrompt';
 })
 export class DynamicPromptComponent implements OnInit {
   @Input() dynamicPrompt: DynamicPrompt;
+  @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
   prompt: string;
   constructor(
     private annotationService: AnnotationService,
@@ -66,6 +67,7 @@ export class DynamicPromptComponent implements OnInit {
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponses);
       this.prompt = feedbackRule.prompt;
+      this.dynamicPromptChanged.emit(feedbackRule);
     });
   }
 
@@ -121,6 +123,7 @@ export class DynamicPromptComponent implements OnInit {
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponse);
       this.prompt = feedbackRule.prompt;
+      this.dynamicPromptChanged.emit(feedbackRule);
     }
   }
 
