@@ -44,19 +44,14 @@ export class FeedbackRuleEvaluator {
     response: CRaterResponse | CRaterResponse[],
     feedbackRule: FeedbackRule
   ): boolean {
-    if (response instanceof CRaterResponse) {
-      return (
-        this.hasMaxSubmitAndIsFinalSubmitRule(feedbackRule) &&
-        this.component.hasMaxSubmitCountAndUsedAllSubmits(response.submitCounter)
-      );
-    } else {
-      return (
-        this.hasMaxSubmitAndIsFinalSubmitRule(feedbackRule) &&
-        response.some((response: CRaterResponse) => {
-          return this.component.hasMaxSubmitCountAndUsedAllSubmits(response.submitCounter);
-        })
-      );
-    }
+    return (
+      this.hasMaxSubmitAndIsFinalSubmitRule(feedbackRule) &&
+      (response instanceof CRaterResponse
+        ? this.component.hasMaxSubmitCountAndUsedAllSubmits(response.submitCounter)
+        : response.some((response: CRaterResponse) => {
+            return this.component.hasMaxSubmitCountAndUsedAllSubmits(response.submitCounter);
+          }))
+    );
   }
 
   private hasMaxSubmitAndIsFinalSubmitRule(feedbackRule: FeedbackRule): boolean {
@@ -67,19 +62,14 @@ export class FeedbackRuleEvaluator {
     response: CRaterResponse | CRaterResponse[],
     feedbackRule: FeedbackRule
   ): boolean {
-    if (response instanceof CRaterResponse) {
-      return (
-        this.hasMaxSubmitAndIsSecondToLastSubmitRule(feedbackRule) &&
-        this.isSecondToLastSubmit(response.submitCounter)
-      );
-    } else {
-      return (
-        this.hasMaxSubmitAndIsSecondToLastSubmitRule(feedbackRule) &&
-        response.some((response: CRaterResponse) => {
-          return this.isSecondToLastSubmit(response.submitCounter);
-        })
-      );
-    }
+    return (
+      this.hasMaxSubmitAndIsSecondToLastSubmitRule(feedbackRule) &&
+      (response instanceof CRaterResponse
+        ? this.isSecondToLastSubmit(response.submitCounter)
+        : response.some((response: CRaterResponse) => {
+            return this.isSecondToLastSubmit(response.submitCounter);
+          }))
+    );
   }
 
   private hasMaxSubmitAndIsSecondToLastSubmitRule(feedbackRule: FeedbackRule): boolean {
@@ -96,16 +86,14 @@ export class FeedbackRuleEvaluator {
     response: CRaterResponse | CRaterResponse[],
     feedbackRule: FeedbackRule
   ): boolean {
-    if (response instanceof CRaterResponse) {
-      return feedbackRule.expression === 'isNonScorable' && response.isNonScorable();
-    } else {
-      return (
-        feedbackRule.expression === 'isNonScorable' &&
-        response.some((response: CRaterResponse) => {
-          return response.isNonScorable();
-        })
-      );
-    }
+    return (
+      feedbackRule.expression === 'isNonScorable' &&
+      (response instanceof CRaterResponse
+        ? response.isNonScorable()
+        : response.some((response: CRaterResponse) => {
+            return response.isNonScorable();
+          }))
+    );
   }
 
   private isSpecialRule(feedbackRule: FeedbackRule): boolean {
@@ -185,13 +173,11 @@ export class FeedbackRuleEvaluator {
     } else {
       evaluator = new IdeaTermEvaluator(term);
     }
-    if (response instanceof CRaterResponse) {
-      return evaluator.evaluate(response);
-    } else {
-      return response.some((response: CRaterResponse) => {
-        return evaluator.evaluate(response);
-      });
-    }
+    return response instanceof CRaterResponse
+      ? evaluator.evaluate(response)
+      : response.some((response: CRaterResponse) => {
+          return evaluator.evaluate(response);
+        });
   }
 
   private isHasKIScoreTerm(term: string): boolean {
