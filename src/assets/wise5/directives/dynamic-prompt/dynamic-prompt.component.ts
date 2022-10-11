@@ -40,11 +40,15 @@ export class DynamicPromptComponent implements OnInit {
   private evaluateOpenResponseComponent(referenceComponent: any): void {
     const nodeId = this.dynamicPrompt.getReferenceNodeId();
     const componentId = referenceComponent.id;
-    const latestComponentState = this.getLatestComponentState(nodeId, componentId);
-    const latestAutoScoreAnnotation = this.getLatestAutoScore(
+    const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      nodeId,
+      componentId
+    );
+    const latestAutoScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
       nodeId,
       componentId,
-      this.configService.getWorkgroupId()
+      this.configService.getWorkgroupId(),
+      'autoScore'
     );
     if (latestComponentState != null && latestAutoScoreAnnotation != null) {
       const cRaterResponse = new CRaterResponse({
@@ -57,24 +61,8 @@ export class DynamicPromptComponent implements OnInit {
         referenceComponent.maxSubmitCount
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponse);
-      this.setPrompt(feedbackRule.prompt);
+      this.prompt = feedbackRule.prompt;
     }
-  }
-
-  private getLatestComponentState(nodeId: string, componentId: string): any {
-    return this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      nodeId,
-      componentId
-    );
-  }
-
-  private getLatestAutoScore(nodeId: string, componentId: string, workgroupId: number): any {
-    return this.annotationService.getLatestScoreAnnotation(
-      nodeId,
-      componentId,
-      workgroupId,
-      'autoScore'
-    );
   }
 
   private getFeedbackRuleEvaluator(rules: FeedbackRule[], maxSubmitCount: number): any {
@@ -83,9 +71,5 @@ export class DynamicPromptComponent implements OnInit {
 
   private getSubmitCounter(componentState: any): number {
     return componentState.studentData.submitCounter;
-  }
-
-  private setPrompt(prompt: string): void {
-    this.prompt = prompt;
   }
 }
