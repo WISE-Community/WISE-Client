@@ -6,7 +6,13 @@ export class CRaterResponse {
   score: number;
   scores: CRaterScore[];
 
-  constructor() {}
+  constructor(jsonObject: any = {}) {
+    for (const key of Object.keys(jsonObject)) {
+      if (jsonObject[key] != null) {
+        this[key] = jsonObject[key];
+      }
+    }
+  }
 
   getDetectedIdeaCount(): number {
     return this.getDetectedIdeaNames().length;
