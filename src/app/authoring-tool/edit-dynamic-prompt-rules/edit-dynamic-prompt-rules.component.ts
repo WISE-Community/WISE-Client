@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditFeedbackRulesComponent } from '../../../assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
+import { FeedbackRule } from '../../../assets/wise5/components/common/feedbackRule/FeedbackRule';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { UtilService } from '../../../assets/wise5/services/utilService';
 
@@ -22,7 +23,7 @@ export class EditDynamicPromptRulesComponent extends EditFeedbackRulesComponent 
     super.ngOnInit();
   }
 
-  protected createNewFeedbackRule(): any {
+  protected createNewFeedbackRule(): Partial<FeedbackRule> {
     return { id: this.utilService.generateKey(10), expression: '', prompt: '' };
   }
 

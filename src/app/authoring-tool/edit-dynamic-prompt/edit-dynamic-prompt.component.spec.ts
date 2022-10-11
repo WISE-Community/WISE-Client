@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { DynamicPrompt } from '../../../assets/wise5/directives/dynamic-prompt/DynamicPrompt';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
@@ -65,7 +65,9 @@ function toggleDynamicPrompt() {
 }
 
 function callToggleDynamicPrompt(checked: boolean): void {
-  component.toggleDynamicPrompt({ checked: checked });
+  const event = new MatCheckboxChange();
+  event.checked = checked;
+  component.toggleDynamicPrompt(event);
 }
 
 function referenceComponentNodeIdChanged() {

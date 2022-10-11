@@ -1177,7 +1177,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Are you sure you want to delete this prompt rule?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-dynamic-prompt-rules/edit-dynamic-prompt-rules.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9e17700f2c625176f13493163d00658ebaba13e8" datatype="html">
@@ -1187,32 +1187,39 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">7,9</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="02e27262e5d30648b82464b5bfac2ac0ea084a76" datatype="html">
+        <source>Reference Component:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="865b518ad09c5909b84301e6fd1443519f02795c" datatype="html">
         <source>Pre Prompt (Optional)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="026b02b29a2c0960f70091fb857cf47e224fbf0a" datatype="html">
         <source>Enter Pre Prompt Here</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fecaceb530494e85b70f89e22eb1a490822c69fc" datatype="html">
         <source>Post Prompt (Optional)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8de95d20b566ff69d67c60ee6fea96d6cd5ab9e5" datatype="html">
         <source>Enter Post Prompt Here</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e8c21747e8604f974b3ed6ecf6089306b7cc0aae" datatype="html">
