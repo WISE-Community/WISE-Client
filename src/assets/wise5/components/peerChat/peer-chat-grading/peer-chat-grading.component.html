@@ -1,5 +1,6 @@
 <ng-container *ngIf="isPeerChatWorkgroupsAvailable">
   <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign.gt-md="start start" fxLayoutGap="16px">
+    <div *ngIf="dynamicPrompt != null" [innerHTML]="dynamicPrompt.prompt"></div>
     <div *ngIf="componentContent.questionBank.length > 0"
         fxFlex
         fxFlex.gt-md="40"
