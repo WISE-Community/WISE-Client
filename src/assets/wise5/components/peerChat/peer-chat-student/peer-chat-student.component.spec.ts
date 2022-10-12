@@ -31,6 +31,9 @@ import { PeerChatModule } from '../peer-chat.module';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PauseScreenService } from '../../../services/pauseScreenService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
+import { DynamicPromptComponent } from '../../../directives/dynamic-prompt/dynamic-prompt.component';
+import { PromptComponent } from '../../../directives/prompt/prompt.component';
 
 let component: PeerChatStudentComponent;
 const componentId = 'component1';
@@ -129,7 +132,13 @@ describe('PeerChatStudentComponent', () => {
         PeerChatModule,
         StudentTeacherCommonServicesModule
       ],
-      declarations: [ComponentHeader, PeerChatStudentComponent, PossibleScoreComponent],
+      declarations: [
+        ComponentHeader,
+        DynamicPromptComponent,
+        PeerChatStudentComponent,
+        PossibleScoreComponent,
+        PromptComponent
+      ],
       providers: [
         AnnotationService,
         ComponentService,
@@ -244,6 +253,25 @@ function createComponentState() {
     component.createComponentState('submit').then(() => {
       expect(sendMessageToClassmateSpy).toHaveBeenCalledTimes(2);
       expect(saveNotificationToServerSpy).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  it('should create component state with dynamic prompt', () => {
+    spyOn(
+      TestBed.inject(StudentWebSocketService),
+      'sendStudentWorkToClassmate'
+    ).and.callFake(() => {});
+    spyOn(TestBed.inject(NotificationService), 'saveNotificationToServer').and.callFake(() => {
+      return Promise.resolve({});
+    });
+    const dynamicPrompt = new FeedbackRule({
+      id: 'abcde12345',
+      expression: '2',
+      prompt: 'You got idea 2'
+    });
+    component.dynamicPrompt = dynamicPrompt;
+    component.createComponentState('save').then((componentState) => {
+      expect(componentState.studentData.dynamicPrompt).toEqual(dynamicPrompt);
     });
   });
 }

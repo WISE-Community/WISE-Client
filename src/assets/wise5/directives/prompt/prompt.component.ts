@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FeedbackRule } from '../../components/common/feedbackRule/FeedbackRule';
 import { DynamicPrompt } from '../dynamic-prompt/DynamicPrompt';
 
 @Component({
@@ -9,8 +10,13 @@ import { DynamicPrompt } from '../dynamic-prompt/DynamicPrompt';
 export class PromptComponent implements OnInit {
   @Input() prompt: string;
   @Input() dynamicPrompt: DynamicPrompt;
+  @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  onDynamicPromptChanged(feedbackRule: FeedbackRule): void {
+    this.dynamicPromptChanged.emit(feedbackRule);
+  }
 }

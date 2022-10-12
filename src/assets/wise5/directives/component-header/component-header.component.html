@@ -1,4 +1,6 @@
 <div class="component-header" fxLayout="row wrap" fxLayoutGap="4px">
-  <prompt [prompt]="componentContent.prompt" [dynamicPrompt]="dynamicPrompt"></prompt>
+  <prompt [prompt]="componentContent.prompt" [dynamicPrompt]="dynamicPrompt"
+      (dynamicPromptChanged)="onDynamicPromptChanged($event)">
+  </prompt>
   <possible-score [maxScore]="componentContent.maxScore"></possible-score>
 </div>

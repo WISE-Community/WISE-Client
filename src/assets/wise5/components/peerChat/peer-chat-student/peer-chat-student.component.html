@@ -3,7 +3,9 @@
   <!-- TODO: Show different message when student has not completed required previous component(s) -->
 </div>
 <ng-container *ngIf="isPeerChatWorkgroupsAvailable">
-  <component-header [componentContent]="componentContent"></component-header>
+  <component-header [componentContent]="componentContent"
+      (dynamicPromptChanged)="onDynamicPromptChanged($event)">
+  </component-header>
   <div fxLayout="column"
       fxLayout.gt-sm="row"
       fxLayoutAlign.gt-sm="start start"
