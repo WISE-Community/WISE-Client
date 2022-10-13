@@ -5,8 +5,8 @@
         color="primary"
         matTooltip="Add a new rule"
         i18n-matTooltip
-        matTooltipPosition="above"
-        (click)="addNewRule('beginning')">
+        matTooltipPosition="after"
+        (click)="addNewRule(-1)">
       <mat-icon>add_circle</mat-icon>
     </button>
     <span fxFlex></span>
@@ -14,8 +14,8 @@
   </h5>
   <ul cdkDropList [cdkDropListData]="feedbackRules" (cdkDropListDropped)="drop($event)" cdkScrollable>
     <ng-container *ngFor="let rule of feedbackRules; let ruleIndex = index; let first = first; let last = last">
-      <li cdkDrag>
-        <mat-card class="rule" fxLayout="row wrap" fxLayoutGap="8px">
+      <li class="rule" cdkDrag>
+        <mat-card class="rule-content" fxLayout="row wrap" fxLayoutGap="8px">
           <div class="text-secondary" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="22px">
             <span class="mat-subheading-2">{{ruleIndex + 1}}</span>
             <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
@@ -102,16 +102,17 @@
             </button>
           </div>
         </mat-card>
-      </li>
-    </ng-container>
-  </ul>
-  <button *ngIf="feedbackRules.length > 0"
-      mat-icon-button
-      color="primary"
-      matTooltip="Add a new rule at the end"
-      i18n-matTooltip
-      matTooltipPosition="above"
-      (click)="addNewRule('end')">
-    <mat-icon>add_circle</mat-icon>
-  </button>
+        <div class="add-rule">
+          <button mat-icon-button
+              color="primary"
+              matTooltip="Add a new rule"
+              i18n-matTooltip
+              matTooltipPosition="above"
+              (click)="addNewRule(ruleIndex + 1)">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </div>
+        </li>
+        </ng-container>
+        </ul>
 </div>

@@ -10,7 +10,8 @@ h5 {
 }
 
 ul {
-  padding: 0;
+  margin: 16px 0 0 0;
+  padding: 0 0 16px;
   max-height: 60vh;
   overflow-y: auto;
 }
@@ -20,6 +21,10 @@ li {
 }
 
 .rule {
+  position: relative;
+}
+
+.rule-content {
   width: 100%;
   padding: 8px;
   margin-bottom: 8px;
@@ -47,4 +52,12 @@ li {
 
 .feedback-input {
   width: 100%;
+}
+
+.add-rule {
+  position: absolute;
+  bottom: -24px;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
 }
