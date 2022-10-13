@@ -6,6 +6,7 @@ import { ProjectService } from '../../../services/projectService';
 import { UtilService } from '../../../services/utilService';
 import { AuthorPeerGroupingDialogComponent } from '../author-peer-grouping-dialog/author-peer-grouping-dialog.component';
 import { DIFFERENT_IDEAS_REGEX, DIFFERENT_IDEAS_VALUE } from '../PeerGroupingLogic';
+import { ReferenceComponent } from '../../../../../app/domain/referenceComponent';
 
 @Component({
   selector: 'edit-peer-grouping-dialog',
@@ -15,7 +16,7 @@ import { DIFFERENT_IDEAS_REGEX, DIFFERENT_IDEAS_VALUE } from '../PeerGroupingLog
 export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogComponent {
   allowedReferenceComponentTypes: string[] = ['OpenResponse'];
   logicType: string;
-  referenceComponent: any = {};
+  referenceComponent: ReferenceComponent;
   stepsUsedIn: string[] = [];
 
   constructor(
@@ -38,19 +39,12 @@ export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogCom
   }
 
   private getLogicType(logic: string): string {
-    if (new RegExp(DIFFERENT_IDEAS_REGEX).exec(logic) != null) {
-      return DIFFERENT_IDEAS_VALUE;
-    } else {
-      return logic;
-    }
+    return new RegExp(DIFFERENT_IDEAS_REGEX).exec(logic) != null ? DIFFERENT_IDEAS_VALUE : logic;
   }
 
-  private getDifferentIdeasReferenceComponent(logic: string): any {
+  private getDifferentIdeasReferenceComponent(logic: string): ReferenceComponent {
     const result = new RegExp(DIFFERENT_IDEAS_REGEX).exec(logic);
-    return {
-      nodeId: result[1],
-      componentId: result[2]
-    };
+    return new ReferenceComponent(result[1], result[2]);
   }
 
   referenceComponentNodeIdChanged(event: any): void {
@@ -70,22 +64,17 @@ export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogCom
   }
 
   save(): void {
-    this.injectPeerGroupingLogic(this.peerGrouping);
+    this.updatePeerGroupingLogic();
     this.peerGroupingAuthoringService.updatePeerGrouping(this.peerGrouping).subscribe(() => {
       this.dialogRef.close();
     });
   }
 
-  private injectPeerGroupingLogic(peerGrouping: PeerGrouping): void {
-    if (this.logicType === DIFFERENT_IDEAS_VALUE) {
-      peerGrouping.logic = this.generateDifferentIdeasLogic();
-    } else {
-      peerGrouping.logic = this.logicType;
-    }
-  }
-
-  private generateDifferentIdeasLogic(): string {
-    return `${DIFFERENT_IDEAS_VALUE}("${this.referenceComponent.nodeId}", "${this.referenceComponent.componentId}")`;
+  private updatePeerGroupingLogic(): void {
+    this.peerGrouping.logic =
+      this.logicType === DIFFERENT_IDEAS_VALUE
+        ? `${DIFFERENT_IDEAS_VALUE}("${this.referenceComponent.nodeId}", "${this.referenceComponent.componentId}")`
+        : this.logicType;
   }
 
   delete(): void {
