@@ -31,7 +31,7 @@ describe('DynamicPromptComponent', () => {
   });
 
   beforeEach(() => {
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
       type: 'OpenResponse'
     });
   });

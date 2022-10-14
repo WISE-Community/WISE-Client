@@ -44,7 +44,7 @@ export class DynamicPromptComponent implements OnInit {
   private getReferenceComponent(dynamicPrompt: DynamicPrompt): any {
     const nodeId = dynamicPrompt.getReferenceNodeId();
     const componentId = dynamicPrompt.getReferenceComponentId();
-    return this.projectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    return this.projectService.getComponent(nodeId, componentId);
   }
 
   private evaluateOpenResponseComponent(referenceComponentContent: any): void {

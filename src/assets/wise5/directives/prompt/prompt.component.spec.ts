@@ -34,7 +34,7 @@ describe('PromptComponent', () => {
         nodeId: 'node1'
       }
     });
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
       type: 'OpenResponse'
     });
     fixture.detectChanges();
