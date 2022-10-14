@@ -56,11 +56,7 @@ export class EditFeedbackRulesComponent implements OnInit {
 
   addNewRule(position: number): void {
     const newFeedbackRule = this.createNewFeedbackRule();
-    if (position < 0) {
-      this.feedbackRules.unshift(newFeedbackRule);
-    } else {
-      this.feedbackRules.splice(position, 0, newFeedbackRule);
-    }
+    this.feedbackRules.splice(position, 0, newFeedbackRule);
     this.projectService.nodeChanged();
   }
 

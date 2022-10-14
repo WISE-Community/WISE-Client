@@ -59,7 +59,7 @@ describe('EditFeedbackRulesComponent', () => {
 function addNewRule() {
   describe('addNewRule()', () => {
     it('should add rule at the beginning', () => {
-      component.addNewRule(-1);
+      component.addNewRule(0);
       expectFeedbackExpressions(['', 'idea1', 'idea2']);
       expect(nodeChangedSpy).toHaveBeenCalled();
     });
