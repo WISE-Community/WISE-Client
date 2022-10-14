@@ -74,6 +74,7 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { FeedbackRuleHelpComponent } from '../../assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component';
 import { EditDynamicPromptComponent } from '../authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component';
 import { EditDynamicPromptRulesComponent } from '../authoring-tool/edit-dynamic-prompt-rules/edit-dynamic-prompt-rules.component';
+import { EditPeerGroupingDialogComponent } from '../../assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { EditDynamicPromptRulesComponent } from '../authoring-tool/edit-dynamic-
     EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EditPeerChatAdvancedComponentComponent,
+    EditPeerGroupingDialogComponent,
     EditSummaryAdvancedComponent,
     EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,

@@ -1,7 +1,7 @@
 import { Directive, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
-import { availableLogic, PeerGroupingLogic } from '../PeerGroupingLogic';
+import { AVAILABLE_LOGIC, PeerGroupingLogic } from '../PeerGroupingLogic';
 
 @Directive()
 export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
@@ -9,7 +9,7 @@ export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
   peerGrouping: PeerGrouping;
 
   constructor(protected dialogRef: MatDialogRef<AuthorPeerGroupingDialogComponent>) {
-    this.availableLogic = availableLogic;
+    this.availableLogic = AVAILABLE_LOGIC;
   }
 
   ngOnInit(): void {}
