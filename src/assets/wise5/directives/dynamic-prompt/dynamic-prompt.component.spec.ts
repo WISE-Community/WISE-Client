@@ -1,7 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
+import { PeerGroupStudentData } from '../../../../app/domain/peerGroupStudentData';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../services/annotationService';
 import { PeerGroupService } from '../../services/peerGroupService';
@@ -12,8 +13,6 @@ import { DynamicPrompt } from './DynamicPrompt';
 
 let component: DynamicPromptComponent;
 let fixture: ComponentFixture<DynamicPromptComponent>;
-let getLatestAnnotationSpy: jasmine.Spy;
-let getLatestWorkSpy: jasmine.Spy;
 const postPrompt: string = 'This is the prompt after the dynamic prompt.';
 const prePrompt: string = 'This is the prompt before the dynamic prompt.';
 const promptDefault: string = 'This is the default prompt when no other rules match.';
@@ -35,11 +34,6 @@ describe('DynamicPromptComponent', () => {
     spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({
       type: 'OpenResponse'
     });
-    getLatestWorkSpy = spyOn(
-      TestBed.inject(StudentDataService),
-      'getLatestComponentStateByNodeIdAndComponentId'
-    );
-    getLatestAnnotationSpy = spyOn(TestBed.inject(AnnotationService), 'getLatestScoreAnnotation');
   });
 
   peerGroupingTagDisabled();
@@ -52,8 +46,13 @@ function peerGroupingTagDisabled(): void {
       fixture = TestBed.createComponent(DynamicPromptComponent);
       component = fixture.componentInstance;
       component.dynamicPrompt = createDynamicPrompt();
-      getLatestWorkSpy.and.returnValue(createComponentState(1));
-      getLatestAnnotationSpy.and.returnValue(createAnnotation([], 1));
+      spyOn(
+        TestBed.inject(StudentDataService),
+        'getLatestComponentStateByNodeIdAndComponentId'
+      ).and.returnValue(createComponentState(1));
+      spyOn(TestBed.inject(AnnotationService), 'getLatestScoreAnnotation').and.returnValue(
+        createAnnotation([], 1)
+      );
       fixture.detectChanges();
     });
 
@@ -75,6 +74,7 @@ function peerGroupingTagDisabled(): void {
 }
 
 function peerGroupingTagEnabled(): void {
+  let retrieveStudentDataSpy: jasmine.Spy;
   describe('peerGroupingTagEnabled', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(DynamicPromptComponent);
@@ -82,23 +82,38 @@ function peerGroupingTagEnabled(): void {
       component.dynamicPrompt = createDynamicPrompt();
       component.dynamicPrompt.peerGroupingTag = 'apple';
       spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup').and.returnValue(
-        createPeerGroup()
+        of(createPeerGroup())
       );
-      getLatestWorkSpy.and.returnValue(createComponentState(1));
+      retrieveStudentDataSpy = spyOn(
+        TestBed.inject(PeerGroupService),
+        'retrieveDynamicPromptStudentData'
+      );
     });
 
     it('should display the dynamic prompt when idea 2 and 3 are detected', () => {
-      getLatestAnnotationSpy.and.returnValue(createAnnotation(['2', '3'], 2));
+      retrieveStudentDataSpy.and.returnValue(of([createPeerGroupStudentData(['2', '3'], 2, 1)]));
       fixture.detectChanges();
       expectDynamicPromptToEqual(promptIdea2And3);
     });
 
     it('should display the dynamic prompt when idea 2 or 3 are detected', () => {
-      getLatestAnnotationSpy.and.returnValue(createAnnotation(['2'], 2));
+      retrieveStudentDataSpy.and.returnValue(of([createPeerGroupStudentData(['2'], 2, 1)]));
       fixture.detectChanges();
       expectDynamicPromptToEqual(promptIdea2Or3);
     });
   });
+}
+
+function createPeerGroupStudentData(
+  ideas: string[],
+  score: number,
+  submitCounter: number
+): PeerGroupStudentData {
+  return {
+    annotation: createAnnotation(ideas, score),
+    studentWork: createComponentState(submitCounter),
+    workgroup: {}
+  };
 }
 
 function expectDynamicPromptToEqual(text: string): void {
@@ -125,8 +140,8 @@ function createDynamicPrompt(): DynamicPrompt {
   });
 }
 
-function createPeerGroup(): Observable<any> {
-  return of({
+function createPeerGroup(): any {
+  return {
     id: 1,
     members: [
       { id: 1, periodId: 1 },
@@ -134,7 +149,7 @@ function createPeerGroup(): Observable<any> {
       { id: 3, periodId: 1 }
     ],
     periodId: 1
-  });
+  };
 }
 
 function createComponentState(submitCounter: number): any {

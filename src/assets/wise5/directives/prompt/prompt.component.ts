@@ -8,9 +8,11 @@ import { DynamicPrompt } from '../dynamic-prompt/DynamicPrompt';
   styleUrls: ['./prompt.component.scss']
 })
 export class PromptComponent implements OnInit {
-  @Input() prompt: string;
+  @Input() componentId: string;
   @Input() dynamicPrompt: DynamicPrompt;
   @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
+  @Input() nodeId: string;
+  @Input() prompt: string;
 
   constructor() {}
 
