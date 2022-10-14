@@ -389,7 +389,7 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
 
   getChoiceTypeByNodeIdAndComponentId(nodeId: string, componentId: string): string {
     let choiceType = null;
-    let component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    let component = this.ProjectService.getComponent(nodeId, componentId);
     if (component != null && component.choiceType != null) {
       choiceType = component.choiceType;
     }

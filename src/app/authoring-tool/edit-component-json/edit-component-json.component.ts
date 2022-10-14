@@ -50,7 +50,7 @@ export class EditComponentJsonComponent {
   }
 
   setComponentContentJsonString() {
-    const authoringComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+    const authoringComponentContent = this.ProjectService.getComponent(
       this.nodeId,
       this.componentId
     );

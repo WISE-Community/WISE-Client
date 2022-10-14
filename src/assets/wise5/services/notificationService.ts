@@ -58,7 +58,7 @@ export class NotificationService {
   ): Notification {
     const nodePosition = this.ProjectService.getNodePositionById(nodeId);
     const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.ProjectService.getComponent(nodeId, componentId);
     let componentType = null;
     if (component != null) {
       componentType = component.type;

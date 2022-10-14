@@ -24,7 +24,7 @@ export class VLEProjectService extends ProjectService {
   }
 
   private getConnectedComponentsByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.getComponent(nodeId, componentId);
     if (component != null && component.connectedComponents != null) {
       return component.connectedComponents;
     }
@@ -54,10 +54,7 @@ export class VLEProjectService extends ProjectService {
    * @returns {boolean} whether we need to display the annotation to the student
    */
   displayAnnotation(annotation) {
-    const component = this.getComponentByNodeIdAndComponentId(
-      annotation.nodeId,
-      annotation.componentId
-    );
+    const component = this.getComponent(annotation.nodeId, annotation.componentId);
     const componentService = this.componentServiceLookupService.getService(component.type);
     return componentService.displayAnnotation(component, annotation);
   }

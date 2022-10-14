@@ -218,7 +218,7 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
 
   getChoiceTypeByNodeIdAndComponentId(nodeId, componentId) {
     let choiceType = null;
-    let component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    let component = this.ProjectService.getComponent(nodeId, componentId);
     if (component != null && component.choiceType != null) {
       choiceType = component.choiceType;
     }

@@ -578,7 +578,7 @@ export class MatchStudent extends ComponentStudent {
     componentState.isSubmit = this.isSubmit;
     const studentData: any = {
       buckets: this.cleanBuckets(
-        this.ProjectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId),
+        this.ProjectService.getComponent(this.nodeId, this.componentId),
         this.getDeepCopyOfBuckets()
       ),
       submitCounter: this.submitCounter

@@ -1351,7 +1351,7 @@ export class ProjectService {
    * @param componentId the component id
    * @returns the component or null if the nodeId or componentId are null or does not exist
    */
-  getComponentByNodeIdAndComponentId(nodeId, componentId) {
+  getComponent(nodeId: string, componentId: string): any {
     const components = this.getComponentsByNodeId(nodeId);
     for (const component of components) {
       if (component.id === componentId) {
@@ -1430,8 +1430,8 @@ export class ProjectService {
     return maxScore;
   }
 
-  getMaxScoreForComponent(nodeId: string, componentId: string) {
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
+  getMaxScoreForComponent(nodeId: string, componentId: string): number {
+    const component = this.getComponent(nodeId, componentId);
     if (component != null && !component.excludeFromTotalScore) {
       return component.maxScore;
     }
@@ -1603,8 +1603,8 @@ export class ProjectService {
    * @param componentId The component id.
    * @return The choices from the component.
    */
-  getChoicesByNodeIdAndComponentId(nodeId, componentId) {
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
+  getChoicesByNodeIdAndComponentId(nodeId, componentId): any {
+    const component = this.getComponent(nodeId, componentId);
     return component.choices;
   }
 
@@ -1657,8 +1657,7 @@ export class ProjectService {
 
   shouldIncludeInTotalScore(nodeId: string, componentId: string): boolean {
     return (
-      this.isNodeActive(nodeId) &&
-      !this.getComponentByNodeIdAndComponentId(nodeId, componentId).excludeFromTotalScore
+      this.isNodeActive(nodeId) && !this.getComponent(nodeId, componentId).excludeFromTotalScore
     );
   }
 
@@ -1713,7 +1712,7 @@ export class ProjectService {
   }
 
   getComponentType(nodeId: string, componentId: string): string {
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.getComponent(nodeId, componentId);
     return component.type;
   }
 
@@ -2278,7 +2277,7 @@ export class ProjectService {
   }
 
   componentExists(nodeId: string, componentId: string): boolean {
-    return this.getComponentByNodeIdAndComponentId(nodeId, componentId) != null;
+    return this.getComponent(nodeId, componentId) != null;
   }
 
   broadcastProjectChanged() {

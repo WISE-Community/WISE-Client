@@ -8,12 +8,8 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Directive()
 export abstract class ComponentAuthoring {
-  @Input()
-  nodeId: string;
-
-  @Input()
-  componentId: string;
-
+  @Input() nodeId: string;
+  @Input() componentId: string;
   inputChange: Subject<string> = new Subject<string>();
   promptChange: Subject<string> = new Subject<string>();
   allowedConnectedComponentTypes: string[];
@@ -36,7 +32,7 @@ export abstract class ComponentAuthoring {
   ) {}
 
   ngOnInit() {
-    this.authoringComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+    this.authoringComponentContent = this.ProjectService.getComponent(
       this.nodeId,
       this.componentId
     );
@@ -145,8 +141,8 @@ export abstract class ComponentAuthoring {
     return this.ProjectService.getComponentsByNodeId(nodeId);
   }
 
-  getComponentByNodeIdAndComponentId(nodeId: string, componentId: string) {
-    return this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+  getComponent(nodeId: string, componentId: string): any {
+    return this.ProjectService.getComponent(nodeId, componentId);
   }
 
   reloadPreview() {

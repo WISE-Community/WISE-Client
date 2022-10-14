@@ -42,10 +42,7 @@ describe('ShowGroupWorkAuthoringComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowGroupWorkAuthoringComponent);
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue({});
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({});
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       nodeId1
     ]);

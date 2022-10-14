@@ -53,10 +53,9 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
       new ComputerAvatar('girl', 'Girl', 'girl.png')
     ];
     spyOn(TestBed.inject(ComputerAvatarService), 'getAvatars').and.returnValue(allComputerAvatars);
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue(JSON.parse(JSON.stringify(componentContent)));
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      JSON.parse(JSON.stringify(componentContent))
+    );
     component.computerAvatarSettings = {
       ids: [],
       label: 'Thought Buddy',

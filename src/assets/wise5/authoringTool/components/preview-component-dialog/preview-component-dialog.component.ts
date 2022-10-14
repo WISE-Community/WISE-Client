@@ -6,11 +6,8 @@ import { ProjectService } from '../../../services/projectService';
   styleUrls: ['preview-component-dialog.component.scss']
 })
 export class PreviewComponentDialogComponent implements OnInit {
-  @Input()
-  componentId: string;
-
-  @Input()
-  nodeId: string;
+  @Input() componentId: string;
+  @Input() nodeId: string;
 
   canSaveStarterState: boolean = false;
 
@@ -21,10 +18,7 @@ export class PreviewComponentDialogComponent implements OnInit {
   constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    const component = this.projectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    const component = this.projectService.getComponent(this.nodeId, this.componentId);
     this.canSaveStarterState = this.componentTypesWithStarterStates.includes(component.type);
   }
 

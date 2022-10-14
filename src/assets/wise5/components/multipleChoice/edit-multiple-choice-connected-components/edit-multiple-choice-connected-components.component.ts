@@ -34,7 +34,7 @@ export class EditMultipleChoiceConnectedComponentsComponent extends EditConnecte
   }
 
   copyChoiceTypeFromComponent(nodeId: string, componentId: string): void {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.ProjectService.getComponent(nodeId, componentId);
     this.componentContent.choiceType = component.choiceType;
   }
 
@@ -43,7 +43,7 @@ export class EditMultipleChoiceConnectedComponentsComponent extends EditConnecte
   }
 
   getCopyOfChoicesFromComponent(nodeId: string, componentId: string): void {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.ProjectService.getComponent(nodeId, componentId);
     return this.UtilService.makeCopyOfJSONObject(component.choices);
   }
 }

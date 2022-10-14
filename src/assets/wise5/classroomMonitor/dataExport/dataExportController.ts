@@ -424,7 +424,7 @@ class DataExportController {
         componentState.componentId
       ) + 1;
     row[columnNameToNumber['Component Part Number']] = componentPartNumber;
-    var component = this.ProjectService.getComponentByNodeIdAndComponentId(
+    var component = this.ProjectService.getComponent(
       componentState.nodeId,
       componentState.componentId
     );
@@ -1214,10 +1214,7 @@ class DataExportController {
     const nodeId = data.nodeId;
     const componentId = data.componentId;
     if (nodeId != null && componentId != null) {
-      const component = this.ProjectService.getComponentByNodeIdAndComponentId(
-        data.nodeId,
-        data.componentId
-      );
+      const component = this.ProjectService.getComponent(data.nodeId, data.componentId);
       this.setComponentType(row, columnNameToNumber, component);
       this.setComponentPrompt(row, columnNameToNumber, component);
     }
@@ -1390,7 +1387,7 @@ class DataExportController {
     row[columnNameToNumber['Note Item ID']] = notebookItem.localNotebookItemId;
     row[columnNameToNumber['Node ID']] = notebookItem.nodeId;
     row[columnNameToNumber['Component ID']] = notebookItem.componentId;
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(
+    const component = this.ProjectService.getComponent(
       notebookItem.nodeId,
       notebookItem.componentId
     );
@@ -1501,7 +1498,7 @@ class DataExportController {
     row[columnNameToNumber['ID']] = notification.id;
     row[columnNameToNumber['Node ID']] = notification.nodeId;
     row[columnNameToNumber['Component ID']] = notification.componentId;
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(
+    const component = this.ProjectService.getComponent(
       notification.nodeId,
       notification.componentId
     );

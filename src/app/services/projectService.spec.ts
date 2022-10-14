@@ -44,7 +44,7 @@ describe('ProjectService', () => {
   shouldReturnTheStartNodeOfTheProject();
   shouldReturnTheNodeByNodeId();
   shouldReturnTheNodeTitleByNodeId();
-  shouldGetTheComponentByNodeIdAndComponentId();
+  shouldGetTheComponent();
   shouldGetTheComponentPositionByNodeIdAndComonentId();
   shouldGetTheComponentsByNodeId();
   shouldCheckOrderBetweenStepGroupAndStepGroup();
@@ -214,29 +214,26 @@ function shouldReturnTheNodeTitleByNodeId() {
   });
 }
 
-function shouldGetTheComponentByNodeIdAndComponentId() {
+function shouldGetTheComponent() {
   it('should get the component by node id and component id', () => {
     service.setProject(scootersProjectJSON);
-    const nullNodeIdResult = service.getComponentByNodeIdAndComponentId(null, '57lxhwfp5r');
+    const nullNodeIdResult = service.getComponent(null, '57lxhwfp5r');
     expect(nullNodeIdResult).toBeNull();
 
-    const nullComponentIdResult = service.getComponentByNodeIdAndComponentId('node13', null);
+    const nullComponentIdResult = service.getComponent('node13', null);
     expect(nullComponentIdResult).toBeNull();
 
-    const nodeIdDNEResult = service.getComponentByNodeIdAndComponentId('badNodeId', '57lxhwfp5r');
+    const nodeIdDNEResult = service.getComponent('badNodeId', '57lxhwfp5r');
     expect(nodeIdDNEResult).toBeNull();
 
-    const componentIdDNEResult = service.getComponentByNodeIdAndComponentId(
-      'node13',
-      'badComponentId'
-    );
+    const componentIdDNEResult = service.getComponent('node13', 'badComponentId');
     expect(componentIdDNEResult).toBeNull();
 
-    const componentExists = service.getComponentByNodeIdAndComponentId('node13', '57lxhwfp5r');
+    const componentExists = service.getComponent('node13', '57lxhwfp5r');
     expect(componentExists).not.toBe(null);
     expect(componentExists.type).toEqual('HTML');
 
-    const componentExists2 = service.getComponentByNodeIdAndComponentId('node9', 'mnzx68ix8h');
+    const componentExists2 = service.getComponent('node9', 'mnzx68ix8h');
     expect(componentExists2).not.toBe(null);
     expect(componentExists2.type).toEqual('embedded');
     expect(componentExists2.url).toEqual('NewtonScooters-potential-kinetic.html');
@@ -483,7 +480,7 @@ function getMaxScoreForNode_noExcludedComponents_returnSumOfComponentMaxScores()
 function getMaxScoreForNode_excludeComponentFromTotalScore_returnExcludedScore() {
   it('should return sum of component max scores that are not excluded', () => {
     service.setProject(demoProjectJSON);
-    service.getComponentByNodeIdAndComponentId('node10', '2upmb3om1q').excludeFromTotalScore = true;
+    service.getComponent('node10', '2upmb3om1q').excludeFromTotalScore = true;
     expect(service.getMaxScoreForNode('node10')).toEqual(6);
   });
 }
@@ -497,7 +494,7 @@ function getMaxScoreForComponent() {
 function getMaxScoreForComponent_excludeFromTotalScore_returnNull() {
   it('should return null if component is excluded from total score', () => {
     service.setProject(demoProjectJSON);
-    service.getComponentByNodeIdAndComponentId('node2', '7edwu1p29b').excludeFromTotalScore = true;
+    service.getComponent('node2', '7edwu1p29b').excludeFromTotalScore = true;
     expect(service.getMaxScoreForComponent('node2', '7edwu1p29b')).toBeNull();
   });
 }

@@ -16,7 +16,7 @@ describe('AudioOscillatorShowWorkComponent', () => {
       declarations: [AudioOscillatorShowWorkComponent]
     });
     fixture = TestBed.createComponent(AudioOscillatorShowWorkComponent);
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({});
     component = fixture.componentInstance;
     const audioOscillatorStudentData = {
       amplitudesPlayed: null,

@@ -76,13 +76,12 @@ describe('PeerChatAuthoringComponent', () => {
       'node2',
       'node3'
     ]);
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(
       JSON.parse(JSON.stringify(componentContent))
     );
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue(JSON.parse(JSON.stringify(componentContent)));
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      JSON.parse(JSON.stringify(componentContent))
+    );
     spyOn(component, 'componentChanged').and.callFake(() => {});
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
     fixture.detectChanges();

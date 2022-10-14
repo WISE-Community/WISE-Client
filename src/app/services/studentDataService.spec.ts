@@ -1221,7 +1221,7 @@ function shouldCheckIsCompleted() {
     const nodeEvents = [];
     spyOn(service, 'getEventsByNodeId').and.returnValue(nodeEvents);
     const component = { id: 'component1', type: 'OpenResponse' };
-    spyOn(projectService, 'getComponentByNodeIdAndComponentId').and.returnValue(component);
+    spyOn(projectService, 'getComponent').and.returnValue(component);
     const node = { id: 'node1' };
     spyOn(projectService, 'getNodeById').and.returnValue(node);
     expect(service.isCompleted('node1', 'component1')).toEqual(false);
@@ -1234,7 +1234,7 @@ function shouldCheckIsCompleted() {
     const nodeEvents = [];
     spyOn(service, 'getEventsByNodeId').and.returnValue(nodeEvents);
     const component = { id: 'component1', type: 'OpenResponse' };
-    spyOn(projectService, 'getComponentByNodeIdAndComponentId').and.returnValue(component);
+    spyOn(projectService, 'getComponent').and.returnValue(component);
     const node = { id: 'node1' };
     spyOn(projectService, 'getNodeById').and.returnValue(node);
     expect(service.isCompleted('node1', 'component1')).toEqual(true);

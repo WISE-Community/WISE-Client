@@ -16,7 +16,7 @@ export class PreviewComponentComponent implements OnInit {
 
   ngOnInit() {
     this.componentContent = this.projectService.injectAssetPaths(
-      this.projectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId)
+      this.projectService.getComponent(this.nodeId, this.componentId)
     );
   }
 

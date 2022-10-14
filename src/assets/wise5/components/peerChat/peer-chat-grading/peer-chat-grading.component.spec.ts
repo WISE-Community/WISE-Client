@@ -52,7 +52,7 @@ describe('PeerChatGradingComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerChatGradingComponent);
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({});
     spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(1);
     spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(100);
     spyOn(TestBed.inject(ConfigService), 'getTeacherWorkgroupIds').and.returnValue([
