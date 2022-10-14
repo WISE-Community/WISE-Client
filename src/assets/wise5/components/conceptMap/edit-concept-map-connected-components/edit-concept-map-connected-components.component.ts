@@ -38,10 +38,7 @@ export class EditConceptMapConnectedComponentsComponent extends EditConnectedCom
           $localize`Warning: This will delete all existing nodes and links in this component.`
       )
     ) {
-      const connectedComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-        nodeId,
-        componentId
-      );
+      const connectedComponentContent = this.ProjectService.getComponent(nodeId, componentId);
       this.componentContent.nodes = connectedComponentContent.nodes;
       this.componentContent.links = connectedComponentContent.links;
       this.connectedComponentChanged();

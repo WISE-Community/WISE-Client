@@ -576,10 +576,7 @@ class NodeAuthoringController {
   getComponentObjectsForEventData(componentIds) {
     const componentObjects = [];
     for (const componentId of componentIds) {
-      const component = this.ProjectService.getComponentByNodeIdAndComponentId(
-        this.nodeId,
-        componentId
-      );
+      const component = this.ProjectService.getComponent(this.nodeId, componentId);
       if (component != null) {
         componentObjects.push({
           componentId: component.id,

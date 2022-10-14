@@ -62,10 +62,7 @@ describe('EditConceptMapAdvancedComponent', () => {
   });
 
   beforeEach(() => {
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue({
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({
       rules: []
     });
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);

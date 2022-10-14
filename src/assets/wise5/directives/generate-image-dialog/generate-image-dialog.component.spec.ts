@@ -36,7 +36,7 @@ describe('GenerateImageDialogComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GenerateImageDialogComponent);
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({});
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

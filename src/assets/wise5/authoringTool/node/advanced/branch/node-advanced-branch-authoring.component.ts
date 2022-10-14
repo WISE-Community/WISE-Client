@@ -427,7 +427,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
   }
 
   createBranchUpdateChoiceChosenIds() {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(
+    const component = this.ProjectService.getComponent(
       this.createBranchNodeId,
       this.createBranchComponentId
     );

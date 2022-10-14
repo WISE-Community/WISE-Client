@@ -19,9 +19,7 @@ describe('TableShowWorkComponent', () => {
     const componentContent = {
       isDataExplorerEnabled: false
     };
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-      componentContent
-    );
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(componentContent);
     component = fixture.componentInstance;
     component.componentContent = {};
     component.componentState = { studentData: { tableData: [] } };

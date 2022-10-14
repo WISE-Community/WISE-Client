@@ -51,10 +51,9 @@ describe('DrawAuthoringComponent', () => {
     });
     fixture = TestBed.createComponent(DrawAuthoring);
     component = fixture.componentInstance;
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue(JSON.parse(JSON.stringify(componentContent)));
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      JSON.parse(JSON.stringify(componentContent))
+    );
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
     fixture.detectChanges();
   });

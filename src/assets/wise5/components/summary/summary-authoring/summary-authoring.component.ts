@@ -125,7 +125,7 @@ export class SummaryAuthoring extends ComponentAuthoring {
     componentId: string,
     studentDataType: string
   ): boolean {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.ProjectService.getComponent(nodeId, componentId);
     if (component != null) {
       if (studentDataType === 'scores') {
         return this.SummaryService.isScoresSummaryAvailableForComponentType(component.type);
@@ -140,7 +140,7 @@ export class SummaryAuthoring extends ComponentAuthoring {
     const nodeId = this.authoringComponentContent.summaryNodeId;
     const componentId = this.authoringComponentContent.summaryComponentId;
     if (nodeId != null && componentId != null) {
-      const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+      const component = this.ProjectService.getComponent(nodeId, componentId);
       if (component != null) {
         const componentService = this.componentServiceLookupService.getService(component.type);
         return componentService.componentHasCorrectAnswer(component);
@@ -153,7 +153,7 @@ export class SummaryAuthoring extends ComponentAuthoring {
     const nodeId = this.authoringComponentContent.summaryNodeId;
     const componentId = this.authoringComponentContent.summaryComponentId;
     if (nodeId != null && componentId != null) {
-      const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+      const component = this.ProjectService.getComponent(nodeId, componentId);
       if (component != null) {
         return component.choiceType === 'checkbox';
       }

@@ -5,7 +5,7 @@ import { TeacherProjectService } from '../../assets/wise5/services/teacherProjec
 import { UtilService } from '../../assets/wise5/services/utilService';
 
 class MockProjectService {
-  getComponentByNodeIdAndComponentId() {}
+  getComponent() {}
   getUnusedComponentId() {}
 }
 class MockUtilService {
@@ -37,10 +37,7 @@ describe('CopyComponentService', () => {
 function copyComponents() {
   describe('copyComponents', () => {
     it('should return a copy of the specified components with new ids', () => {
-      spyOn(projectService, 'getComponentByNodeIdAndComponentId').and.returnValues(
-        { id: 'c1' },
-        { id: 'c2' }
-      );
+      spyOn(projectService, 'getComponent').and.returnValues({ id: 'c1' }, { id: 'c2' });
       spyOn(projectService, 'getUnusedComponentId').and.returnValues('c3', 'c4');
       const copies = service.copyComponents('node1', ['c1', 'c2']);
       expect(copies.length).toEqual(2);

@@ -63,10 +63,7 @@ describe('EditGraphAdvancedComponent', () => {
   });
 
   beforeEach(() => {
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue({
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({
       xAxis: {},
       yAxis: {}
     });

@@ -54,9 +54,7 @@ function askIfWantToCopyChoices() {
         ],
         choiceType: 'radio'
       };
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-        componentContent
-      );
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(componentContent);
       connectedComponent = createConnectedComponentObject(nodeId1, componentId1, 'importWork');
     });
     it('should copy choices from connected component', () => {

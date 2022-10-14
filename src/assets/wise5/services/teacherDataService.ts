@@ -180,7 +180,7 @@ export class TeacherDataService extends DataService {
   getConnectedComponentsWithRequiredStudentData(components): any {
     const connectedComponents = [];
     for (const component of components) {
-      const componentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      const componentContent = this.ProjectService.getComponent(
         component.nodeId,
         component.componentId
       );

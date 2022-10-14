@@ -166,9 +166,9 @@ function testDeleteComponent() {
   describe('deleteComponent', () => {
     it('should delete the component from the node', () => {
       service.setProject(demoProjectJSON);
-      expect(service.getComponentByNodeIdAndComponentId('node1', 'zh4h1urdys')).not.toBeNull();
+      expect(service.getComponent('node1', 'zh4h1urdys')).not.toBeNull();
       service.deleteComponent('node1', 'zh4h1urdys');
-      expect(service.getComponentByNodeIdAndComponentId('node1', 'zh4h1urdys')).toBeNull();
+      expect(service.getComponent('node1', 'zh4h1urdys')).toBeNull();
     });
   });
 }

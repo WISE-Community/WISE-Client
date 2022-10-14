@@ -413,7 +413,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div *ngIf="getComponentByNodeIdAndComponentId(object.dataSource.nodeId, object.dataSource.componentId).type === 'Graph'"
+      <div *ngIf="getComponent(object.dataSource.nodeId, object.dataSource.componentId).type === 'Graph'"
            fxLayout="row wrap">
         <mat-form-field class="index-input">
           <mat-label i18n>Trial Index</mat-label>
