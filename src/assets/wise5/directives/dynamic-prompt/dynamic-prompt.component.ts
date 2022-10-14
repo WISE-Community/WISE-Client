@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
+import { PeerGroupStudentData } from '../../../../app/domain/peerGroupStudentData';
 import { CRaterResponse } from '../../components/common/cRater/CRaterResponse';
 import { FeedbackRule } from '../../components/common/feedbackRule/FeedbackRule';
 import { FeedbackRuleEvaluator } from '../../components/common/feedbackRule/FeedbackRuleEvaluator';
@@ -59,8 +60,8 @@ export class DynamicPromptComponent implements OnInit {
       this.dynamicPrompt.getPeerGroupingTag(),
       this.nodeId,
       this.componentId
-    ).subscribe((peerGroupData: any[]) => {
-      const cRaterResponses = peerGroupData.map((peerMemberData: any) => {
+    ).subscribe((peerGroupStudentData: PeerGroupStudentData[]) => {
+      const cRaterResponses = peerGroupStudentData.map((peerMemberData: any) => {
         return new CRaterResponse({
           ideas: peerMemberData.annotation.data.ideas,
           scores: peerMemberData.annotation.data.scores,
@@ -87,8 +88,8 @@ export class DynamicPromptComponent implements OnInit {
         return this.peerGroupService
           .retrieveDynamicPromptStudentData(peerGroup.id, nodeId, componentId)
           .pipe(
-            map((studentData) => {
-              return studentData;
+            map((peerGroupStudentData: PeerGroupStudentData[]) => {
+              return peerGroupStudentData;
             })
           );
       })
@@ -124,7 +125,10 @@ export class DynamicPromptComponent implements OnInit {
     }
   }
 
-  private getFeedbackRuleEvaluator(rules: FeedbackRule[], maxSubmitCount: number): any {
+  private getFeedbackRuleEvaluator(
+    rules: FeedbackRule[],
+    maxSubmitCount: number
+  ): FeedbackRuleEvaluator {
     return new FeedbackRuleEvaluator(new FeedbackRuleComponent(rules, maxSubmitCount, false));
   }
 
