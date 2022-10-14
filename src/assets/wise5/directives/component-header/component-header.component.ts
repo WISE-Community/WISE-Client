@@ -12,6 +12,7 @@ export class ComponentHeader {
   @Input() componentContent: any;
   dynamicPrompt: DynamicPrompt;
   @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
+  @Input() nodeId: string;
   prompt: SafeHtml;
 
   constructor(protected sanitizer: DomSanitizer) {}

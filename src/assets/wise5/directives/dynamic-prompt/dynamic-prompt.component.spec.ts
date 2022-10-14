@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../services/annotationService';
 import { PeerGroupService } from '../../services/peerGroupService';
@@ -75,6 +75,7 @@ function peerGroupingTagDisabled(): void {
 }
 
 function peerGroupingTagEnabled(): void {
+  let retrieveDynamicPromptStudentDataSpy: jasmine.Spy;
   describe('peerGroupingTagEnabled', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(DynamicPromptComponent);
@@ -82,23 +83,36 @@ function peerGroupingTagEnabled(): void {
       component.dynamicPrompt = createDynamicPrompt();
       component.dynamicPrompt.peerGroupingTag = 'apple';
       spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup').and.returnValue(
-        createPeerGroup()
+        of(createPeerGroup())
+      );
+      retrieveDynamicPromptStudentDataSpy = spyOn(
+        TestBed.inject(PeerGroupService),
+        'retrieveDynamicPromptStudentData'
       );
       getLatestWorkSpy.and.returnValue(createComponentState(1));
     });
 
     it('should display the dynamic prompt when idea 2 and 3 are detected', () => {
-      getLatestAnnotationSpy.and.returnValue(createAnnotation(['2', '3'], 2));
+      retrieveDynamicPromptStudentDataSpy.and.returnValue(
+        of([createStudentData(['2', '3'], 2, 1)])
+      );
       fixture.detectChanges();
       expectDynamicPromptToEqual(promptIdea2And3);
     });
 
     it('should display the dynamic prompt when idea 2 or 3 are detected', () => {
-      getLatestAnnotationSpy.and.returnValue(createAnnotation(['2'], 2));
+      retrieveDynamicPromptStudentDataSpy.and.returnValue(of([createStudentData(['2'], 2, 1)]));
       fixture.detectChanges();
       expectDynamicPromptToEqual(promptIdea2Or3);
     });
   });
+}
+
+function createStudentData(ideas: string[], score: number, submitCounter: number): any {
+  return {
+    annotation: createAnnotation(ideas, score),
+    studentWork: createComponentState(submitCounter)
+  };
 }
 
 function expectDynamicPromptToEqual(text: string): void {
@@ -125,8 +139,8 @@ function createDynamicPrompt(): DynamicPrompt {
   });
 }
 
-function createPeerGroup(): Observable<any> {
-  return of({
+function createPeerGroup(): any {
+  return {
     id: 1,
     members: [
       { id: 1, periodId: 1 },
@@ -134,7 +148,7 @@ function createPeerGroup(): Observable<any> {
       { id: 3, periodId: 1 }
     ],
     periodId: 1
-  });
+  };
 }
 
 function createComponentState(submitCounter: number): any {

@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { concatMap, map } from 'rxjs/operators';
 import { CRaterResponse } from '../../components/common/cRater/CRaterResponse';
 import { FeedbackRule } from '../../components/common/feedbackRule/FeedbackRule';
 import { FeedbackRuleEvaluator } from '../../components/common/feedbackRule/FeedbackRuleEvaluator';
 import { FeedbackRuleComponent } from '../../components/feedbackRule/FeedbackRuleComponent';
+import { PeerGroup } from '../../components/peerChat/PeerGroup';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { PeerGroupService } from '../../services/peerGroupService';
@@ -18,9 +19,12 @@ import { DynamicPrompt } from './DynamicPrompt';
   styleUrls: ['./dynamic-prompt.component.scss']
 })
 export class DynamicPromptComponent implements OnInit {
+  @Input() componentId: string;
   @Input() dynamicPrompt: DynamicPrompt;
   @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
+  @Input() nodeId: string;
   prompt: string;
+
   constructor(
     private annotationService: AnnotationService,
     private configService: ConfigService,
@@ -30,9 +34,9 @@ export class DynamicPromptComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const referenceComponent = this.getReferenceComponent(this.dynamicPrompt);
-    if (referenceComponent.type === 'OpenResponse') {
-      this.evaluateOpenResponseComponent(referenceComponent);
+    const referenceComponentContent = this.getReferenceComponent(this.dynamicPrompt);
+    if (referenceComponentContent.type === 'OpenResponse') {
+      this.evaluateOpenResponseComponent(referenceComponentContent);
     }
   }
 
@@ -42,28 +46,30 @@ export class DynamicPromptComponent implements OnInit {
     return this.projectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
   }
 
-  private evaluateOpenResponseComponent(referenceComponent: any): void {
+  private evaluateOpenResponseComponent(referenceComponentContent: any): void {
     if (this.dynamicPrompt.isPeerGroupingTagSpecified()) {
-      this.evaluatePeerGroupOpenResponse(referenceComponent);
+      this.evaluatePeerGroupOpenResponse(referenceComponentContent);
     } else {
-      this.evaluatePersonalOpenResponse(referenceComponent);
+      this.evaluatePersonalOpenResponse(referenceComponentContent);
     }
   }
 
-  private evaluatePeerGroupOpenResponse(referenceComponent: any): void {
-    const nodeId = this.dynamicPrompt.getReferenceNodeId();
-    const componentId = referenceComponent.id;
-    this.getPeerGroupData(nodeId, componentId).subscribe((peerGroupData: any[]) => {
+  private evaluatePeerGroupOpenResponse(referenceComponentContent: any): void {
+    this.getPeerGroupData(
+      this.dynamicPrompt.getPeerGroupingTag(),
+      this.nodeId,
+      this.componentId
+    ).subscribe((peerGroupData: any[]) => {
       const cRaterResponses = peerGroupData.map((peerMemberData: any) => {
         return new CRaterResponse({
           ideas: peerMemberData.annotation.data.ideas,
           scores: peerMemberData.annotation.data.scores,
-          submitCounter: this.getSubmitCounter(peerMemberData.componentState)
+          submitCounter: this.getSubmitCounter(peerMemberData.studentWork)
         });
       });
       const feedbackRuleEvaluator = this.getFeedbackRuleEvaluator(
         this.dynamicPrompt.getRules(),
-        referenceComponent.maxSubmitCount
+        referenceComponentContent.maxSubmitCount
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponses);
       this.prompt = feedbackRule.prompt;
@@ -71,36 +77,27 @@ export class DynamicPromptComponent implements OnInit {
     });
   }
 
-  private getPeerGroupData(nodeId: string, componentId: string): Observable<any[]> {
-    return this.peerGroupService.retrievePeerGroup(this.dynamicPrompt.getPeerGroupingTag()).pipe(
-      map((peerGroup) => {
-        return this.createDummyData(nodeId, componentId, peerGroup);
+  private getPeerGroupData(
+    peerGroupingTag: string,
+    nodeId: string,
+    componentId: string
+  ): Observable<any[]> {
+    return this.peerGroupService.retrievePeerGroup(peerGroupingTag).pipe(
+      concatMap((peerGroup: PeerGroup) => {
+        return this.peerGroupService
+          .retrieveDynamicPromptStudentData(peerGroup.id, nodeId, componentId)
+          .pipe(
+            map((studentData) => {
+              return studentData;
+            })
+          );
       })
     );
   }
 
-  private createDummyData(nodeId: string, componentId: string, peerGroup: any): any[] {
-    const myWorkgroupId = this.configService.getWorkgroupId();
-    return peerGroup.members.map((member: any) => {
-      return {
-        workgroupId: member.id,
-        componentState: this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-          nodeId,
-          componentId
-        ),
-        annotation: this.annotationService.getLatestScoreAnnotation(
-          nodeId,
-          componentId,
-          myWorkgroupId,
-          'autoScore'
-        )
-      };
-    });
-  }
-
-  private evaluatePersonalOpenResponse(referenceComponent: any): void {
+  private evaluatePersonalOpenResponse(referenceComponentContent: any): void {
     const nodeId = this.dynamicPrompt.getReferenceNodeId();
-    const componentId = referenceComponent.id;
+    const componentId = referenceComponentContent.id;
     const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
       nodeId,
       componentId
@@ -119,7 +116,7 @@ export class DynamicPromptComponent implements OnInit {
       });
       const feedbackRuleEvaluator = this.getFeedbackRuleEvaluator(
         this.dynamicPrompt.getRules(),
-        referenceComponent.maxSubmitCount
+        referenceComponentContent.maxSubmitCount
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponse);
       this.prompt = feedbackRule.prompt;

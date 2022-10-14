@@ -69,4 +69,14 @@ export class PeerGroupService {
   removeWorkgroupFromGroup(workgroupId: number, groupId: number): Observable<any> {
     return this.http.delete(`/api/peer-group/membership/${groupId}/${workgroupId}`);
   }
+
+  retrieveDynamicPromptStudentData(
+    peerGroupId: number,
+    nodeId: string,
+    componentId: string
+  ): Observable<any> {
+    return this.http.get(
+      `/api/peer-group/${peerGroupId}/${nodeId}/${componentId}/student-data/dynamic-prompt`
+    );
+  }
 }
