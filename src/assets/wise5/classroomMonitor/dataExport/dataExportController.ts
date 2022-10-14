@@ -419,10 +419,8 @@ class DataExportController {
       componentState.nodeId
     );
     var componentPartNumber =
-      this.ProjectService.getComponentPositionByNodeIdAndComponentId(
-        componentState.nodeId,
-        componentState.componentId
-      ) + 1;
+      this.ProjectService.getComponentPosition(componentState.nodeId, componentState.componentId) +
+      1;
     row[columnNameToNumber['Component Part Number']] = componentPartNumber;
     var component = this.ProjectService.getComponent(
       componentState.nodeId,
@@ -1201,7 +1199,7 @@ class DataExportController {
   }
 
   setComponentPartNumber(row, columnNameToNumber, data) {
-    const componentPartNumber = this.ProjectService.getComponentPositionByNodeIdAndComponentId(
+    const componentPartNumber = this.ProjectService.getComponentPosition(
       data.nodeId,
       data.componentId
     );
@@ -1396,7 +1394,7 @@ class DataExportController {
     }
     row[columnNameToNumber['Step Number']] = this.getNodePositionById(notebookItem.nodeId);
     row[columnNameToNumber['Step Title']] = this.getNodeTitle(notebookItem.nodeId);
-    const position = this.ProjectService.getComponentPositionByNodeIdAndComponentId(
+    const position = this.ProjectService.getComponentPosition(
       notebookItem.nodeId,
       notebookItem.componentId
     );
@@ -1507,7 +1505,7 @@ class DataExportController {
     }
     row[columnNameToNumber['Step Number']] = this.getNodePositionById(notification.nodeId);
     row[columnNameToNumber['Step Title']] = this.getNodeTitle(notification.nodeId);
-    const componentPosition = this.ProjectService.getComponentPositionByNodeIdAndComponentId(
+    const componentPosition = this.ProjectService.getComponentPosition(
       notification.nodeId,
       notification.componentId
     );
@@ -2857,7 +2855,7 @@ class DataExportController {
       nodeId
     );
     row[columnNameToNumber['Component Part Number']] =
-      this.ProjectService.getComponentPositionByNodeIdAndComponentId(nodeId, componentId) + 1;
+      this.ProjectService.getComponentPosition(nodeId, componentId) + 1;
     row[columnNameToNumber['Component ID']] = component.id;
     row[columnNameToNumber['Component Type']] = component.type;
     row[columnNameToNumber['Component Prompt']] = this.UtilService.removeHTMLTags(component.prompt);
@@ -2912,8 +2910,7 @@ class DataExportController {
   generateDiscussionExportFileName(nodeId, componentId) {
     const runId = this.ConfigService.getRunId();
     const stepNumber = this.ProjectService.getNodePositionById(nodeId);
-    const componentNumber =
-      this.ProjectService.getComponentPositionByNodeIdAndComponentId(nodeId, componentId) + 1;
+    const componentNumber = this.ProjectService.getComponentPosition(nodeId, componentId) + 1;
     return runId + '_step_' + stepNumber + '_component_' + componentNumber + '_discussion_work.csv';
   }
 
@@ -3268,8 +3265,7 @@ class DataExportController {
   getComponentExportFileName(nodeId: string, componentId: string, componentType: string): string {
     const runId = this.ConfigService.getRunId();
     const stepNumber = this.ProjectService.getNodePositionById(nodeId);
-    const componentNumber =
-      this.ProjectService.getComponentPositionByNodeIdAndComponentId(nodeId, componentId) + 1;
+    const componentNumber = this.ProjectService.getComponentPosition(nodeId, componentId) + 1;
     let allOrLatest = '';
     if (this.workSelectionType === 'exportAllWork') {
       allOrLatest = 'all';

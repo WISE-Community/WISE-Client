@@ -89,34 +89,34 @@ function moveComponent() {
 
 function moveComponent_MoveOneComponentToBeginning() {
   it('should move one component to the beginning of the node', () => {
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'cjv5kq5290')).toEqual(4);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'm97kyu4d4v')).toEqual(0);
+    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(4);
+    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(0);
     NodeService.moveComponent('node10', ['cjv5kq5290'], null);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'cjv5kq5290')).toEqual(0);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'm97kyu4d4v')).toEqual(1);
+    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(0);
+    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(1);
   });
 }
 
 function moveComponent_MoveMultipleComponentsToBeginning() {
   it('should move multiple components to the beginning of the node', () => {
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', '2upmb3om1q')).toEqual(2);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'cjv5kq5290')).toEqual(4);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'm97kyu4d4v')).toEqual(0);
+    expect(ProjectService.getComponentPosition('node10', '2upmb3om1q')).toEqual(2);
+    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(4);
+    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(0);
     NodeService.moveComponent('node10', ['2upmb3om1q', 'cjv5kq5290'], null);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', '2upmb3om1q')).toEqual(0);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'cjv5kq5290')).toEqual(1);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'm97kyu4d4v')).toEqual(2);
+    expect(ProjectService.getComponentPosition('node10', '2upmb3om1q')).toEqual(0);
+    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(1);
+    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(2);
   });
 }
 
 function moveComponent_MoveMultipleComponentsAfterComponent() {
   it('should move multiple components after another component', () => {
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', '2upmb3om1q')).toEqual(2);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'cjv5kq5290')).toEqual(4);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'm97kyu4d4v')).toEqual(0);
+    expect(ProjectService.getComponentPosition('node10', '2upmb3om1q')).toEqual(2);
+    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(4);
+    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(0);
     NodeService.moveComponent('node10', ['2upmb3om1q', 'cjv5kq5290'], 'm97kyu4d4v');
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', '2upmb3om1q')).toEqual(1);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'cjv5kq5290')).toEqual(2);
-    expect(ProjectService.getComponentPositionByNodeIdAndComponentId('node10', 'm97kyu4d4v')).toEqual(0);
+    expect(ProjectService.getComponentPosition('node10', '2upmb3om1q')).toEqual(1);
+    expect(ProjectService.getComponentPosition('node10', 'cjv5kq5290')).toEqual(2);
+    expect(ProjectService.getComponentPosition('node10', 'm97kyu4d4v')).toEqual(0);
   });
 }

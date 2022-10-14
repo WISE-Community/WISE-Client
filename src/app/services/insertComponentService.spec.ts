@@ -5,7 +5,7 @@ import { TeacherProjectService } from '../../assets/wise5/services/teacherProjec
 
 class MockProjectService {
   getNodeById() {}
-  getComponentPositionByNodeIdAndComponentId() {}
+  getComponentPosition() {}
 }
 let service: InsertComponentService;
 let projectService: TeacherProjectService;
@@ -38,7 +38,7 @@ function insertComponents() {
       expectComponentsMatchIds(node.components, ['c3', 'c4', 'c1', 'c2']);
     });
     it('should insert components after the specified component', () => {
-      spyOn(projectService, 'getComponentPositionByNodeIdAndComponentId').and.returnValue(0);
+      spyOn(projectService, 'getComponentPosition').and.returnValue(0);
       service.insertComponents([{ id: 'c3' }, { id: 'c4' }], 'n1', 'c1');
       expectComponentsMatchIds(node.components, ['c1', 'c3', 'c4', 'c2']);
     });

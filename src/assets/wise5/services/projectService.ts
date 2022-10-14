@@ -1369,7 +1369,7 @@ export class ProjectService {
    * @returns the component's position or -1 if nodeId or componentId are null
    * or doesn't exist in the project.
    */
-  getComponentPositionByNodeIdAndComponentId(nodeId, componentId) {
+  getComponentPosition(nodeId: string, componentId: string): number {
     if (nodeId != null && componentId != null) {
       const components = this.getComponentsByNodeId(nodeId);
       for (let c = 0; c < components.length; c++) {
