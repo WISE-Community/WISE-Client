@@ -45,10 +45,7 @@ export class ComponentComponent {
   }
 
   setComponentContent(): void {
-    let componentContent = this.projectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    let componentContent = this.projectService.getComponent(this.nodeId, this.componentId);
     componentContent = this.projectService.injectAssetPaths(componentContent);
     componentContent = this.configService.replaceStudentNames(componentContent);
     if (

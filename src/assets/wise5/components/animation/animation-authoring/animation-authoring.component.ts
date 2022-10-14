@@ -214,7 +214,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
   dataSourceComponentChanged(authoredObject: any): void {
     const nodeId = authoredObject.dataSource.nodeId;
     const componentId = authoredObject.dataSource.componentId;
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.getComponent(nodeId, componentId);
     authoredObject.dataSource = {
       nodeId: nodeId,
       componentId: componentId
@@ -289,9 +289,9 @@ export class AnimationAuthoring extends ComponentAuthoring {
     });
   }
 
-  getComponentByNodeIdAndComponentId(nodeId: string, componentId: string): any {
+  getComponent(nodeId: string, componentId: string): any {
     if (nodeId != null && componentId != null) {
-      const component = super.getComponentByNodeIdAndComponentId(nodeId, componentId);
+      const component = super.getComponent(nodeId, componentId);
       if (component != null) {
         return component;
       }

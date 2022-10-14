@@ -61,9 +61,7 @@ function askIfWantToCopyChoicesAndBuckets() {
         choices: [createChoice('choice1', 'A Choice')],
         buckets: [createBucket('bucket1', 'A Bucket')]
       };
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-        componentContent
-      );
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(componentContent);
       connectedComponent = createConnectedComponentObject(nodeId1, componentId1, 'importWork');
     });
     it('should copy choices and buckets from the connected component', () => {

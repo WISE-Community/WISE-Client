@@ -100,7 +100,7 @@ function getOtherPrompt() {
   describe('getOtherPrompt', () => {
     it('should get other prompt', () => {
       const prompt = 'Choose your favorite ice cream flavor.';
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
         prompt: prompt
       });
       expect(component.getOtherPrompt('node2', 'component2')).toEqual(prompt);

@@ -23,7 +23,7 @@ export class MockConfigService {}
 
 let component: SummaryAuthoring;
 let fixture: ComponentFixture<SummaryAuthoring>;
-let getComponentByNodeIdAndComponentIdSpy;
+let getComponentSpy;
 
 describe('SummaryAuthoringComponent', () => {
   beforeEach(() => {
@@ -55,11 +55,8 @@ describe('SummaryAuthoringComponent', () => {
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
-    getComponentByNodeIdAndComponentIdSpy = spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    );
-    getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
+    getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
+    getComponentSpy.and.returnValue(componentContent);
     spyOn(component, 'componentChanged');
     fixture.detectChanges();
   });
@@ -158,7 +155,7 @@ function checkIfStudentDataTypeIsAvailableForAComponentWhenTrue() {
       prompt: 'This is hxh43zj46j',
       type: 'OpenResponse'
     };
-    getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
+    getComponentSpy.and.returnValue(componentContent);
     const isAvailable = component.isStudentDataTypeAvailableForComponent(
       'node1',
       'hxh43zj46j',
@@ -175,7 +172,7 @@ function checkIfStudentDataTypeIsAvailableForAComponentWhenFalse() {
       prompt: 'This is hxh43zj46j',
       type: 'OpenResponse'
     };
-    getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
+    getComponentSpy.and.returnValue(componentContent);
     const isAvailable = component.isStudentDataTypeAvailableForComponent(
       'node1',
       'hxh43zj46j',

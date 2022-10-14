@@ -15,7 +15,7 @@ import { AudioOscillatorAuthoring } from './audio-oscillator-authoring.component
 
 let component: AudioOscillatorAuthoring;
 let fixture: ComponentFixture<AudioOscillatorAuthoring>;
-let getComponentByNodeIdAndComponentIdSpy;
+let getComponentSpy;
 
 describe('AudioOscillatorAuthoring', () => {
   beforeEach(() => {
@@ -38,11 +38,8 @@ describe('AudioOscillatorAuthoring', () => {
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     component.componentContent = componentContent;
-    getComponentByNodeIdAndComponentIdSpy = spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    );
-    getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
+    getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
+    getComponentSpy.and.returnValue(componentContent);
     fixture.detectChanges();
   });
 

@@ -2608,7 +2608,7 @@ export class GraphStudent extends ComponentStudent {
           connectedComponent.showClassmateWorkSource
         )
       );
-      let component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+      let component = this.ProjectService.getComponent(nodeId, componentId);
       component = this.ProjectService.injectAssetPaths(component);
       connectedComponentBackgroundImage = component.backgroundImage;
     }
@@ -2651,7 +2651,7 @@ export class GraphStudent extends ComponentStudent {
           connectedComponentBackgroundImage = latestComponentState.studentData.backgroundImage;
         }
         if (connectedComponent.importGraphSettings) {
-          const component = this.ProjectService.getComponentByNodeIdAndComponentId(
+          const component = this.ProjectService.getComponent(
             connectedComponent.nodeId,
             connectedComponent.componentId
           );

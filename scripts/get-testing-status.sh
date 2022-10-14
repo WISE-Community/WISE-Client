@@ -16,7 +16,7 @@ any_pipeline_ready_for_testing=false
 
 function display_pipeline_status() {
   pipeline_name=$1
-  echo "Status for $pipeline_name"
+  echo "- Status for $pipeline_name -"
 
   # Get all the stage names and their statuses in an array of objects
   declare -a statuses=($(aws codepipeline get-pipeline-state --name $pipeline_name |
@@ -47,6 +47,7 @@ function display_pipeline_status() {
 }
 
 testing_pipelines=(
+  "private-wise-api-and-client-pipeline"
   "private-wise-api-pipeline"
   "private-wise-client-github-actions-pipeline"
   "private-wise-client-pipeline"

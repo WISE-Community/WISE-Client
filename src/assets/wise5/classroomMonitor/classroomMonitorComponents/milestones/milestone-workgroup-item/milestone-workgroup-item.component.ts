@@ -65,10 +65,7 @@ export class MilestoneWorkgroupItemComponent implements OnInit {
     const lastLocation = this.locations[this.locations.length - 1];
     this.lastNodeId = lastLocation.nodeId;
     this.lastComponentId = lastLocation.componentId;
-    this.lastComponent = this.projectService.getComponentByNodeIdAndComponentId(
-      this.lastNodeId,
-      this.lastComponentId
-    );
+    this.lastComponent = this.projectService.getComponent(this.lastNodeId, this.lastComponentId);
     this.setLastComponentMaxScore();
   }
 
@@ -76,10 +73,7 @@ export class MilestoneWorkgroupItemComponent implements OnInit {
     const firstLocation = this.locations[0];
     this.firstComponentId = firstLocation.componentId;
     this.firstNodeId = firstLocation.nodeId;
-    this.firstComponent = this.projectService.getComponentByNodeIdAndComponentId(
-      this.firstNodeId,
-      this.firstComponentId
-    );
+    this.firstComponent = this.projectService.getComponent(this.firstNodeId, this.firstComponentId);
     this.setFirstComponentMaxScore();
   }
 

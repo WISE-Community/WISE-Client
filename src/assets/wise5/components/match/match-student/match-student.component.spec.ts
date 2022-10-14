@@ -96,7 +96,7 @@ describe('MatchStudentComponent', () => {
       ]
     };
     component.componentContent = componentContent;
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(
       JSON.parse(JSON.stringify(componentContent))
     );
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});

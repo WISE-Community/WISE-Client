@@ -1247,7 +1247,7 @@ export class StudentDataService extends DataService {
   }
 
   private isComponentCompleted(nodeId: string, componentId: string): boolean {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.ProjectService.getComponent(nodeId, componentId);
     if (component != null) {
       const node = this.ProjectService.getNodeById(nodeId);
       const componentType = component.type;

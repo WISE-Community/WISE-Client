@@ -7,24 +7,12 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
   styleUrls: ['./edit-connected-components.component.scss']
 })
 export class EditConnectedComponentsComponent implements OnInit {
-  @Input()
-  componentContent: any;
-
-  @Input()
-  componentId: string;
-
-  @Input()
-  nodeId: string;
-
-  @Input()
-  allowedConnectedComponentTypes: string[] = [];
-
-  @Input()
-  connectedComponents: any[] = [];
-
-  @Output()
-  connectedComponentsChanged: EventEmitter<any> = new EventEmitter();
-
+  @Input() componentContent: any;
+  @Input() componentId: string;
+  @Input() nodeId: string;
+  @Input() allowedConnectedComponentTypes: string[] = [];
+  @Input() connectedComponents: any[] = [];
+  @Output() connectedComponentsChanged: EventEmitter<any> = new EventEmitter();
   nodeIds: string[];
 
   constructor(protected ProjectService: ProjectService) {}
@@ -126,7 +114,7 @@ export class EditConnectedComponentsComponent implements OnInit {
   }
 
   getConnectedComponentType(connectedComponent: any): string {
-    const component: any = this.ProjectService.getComponentByNodeIdAndComponentId(
+    const component: any = this.ProjectService.getComponent(
       connectedComponent.nodeId,
       connectedComponent.componentId
     );

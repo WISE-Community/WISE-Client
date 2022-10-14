@@ -392,7 +392,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   getStudentChosenRadioChoice(): any[] {
     const studentChoiceObjects = [];
-    const originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+    const originalComponentContent = this.ProjectService.getComponent(
       this.nodeId,
       this.componentId
     );
@@ -409,7 +409,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
 
   getStudentChosenCheckboxChoice(): any[] {
     const studentChoiceObjects = [];
-    const originalComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+    const originalComponentContent = this.ProjectService.getComponent(
       this.nodeId,
       this.componentId
     );

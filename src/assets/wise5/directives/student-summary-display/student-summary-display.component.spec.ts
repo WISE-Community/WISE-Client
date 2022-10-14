@@ -205,9 +205,7 @@ function initializeOtherComponent() {
         id: 'component2',
         type: otherComponentType
       };
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-        otherComponent
-      );
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(otherComponent);
       component.initializeOtherComponent();
       expect(component.otherComponent).toEqual(otherComponent);
       expect(component.otherComponentType).toEqual(otherComponentType);
