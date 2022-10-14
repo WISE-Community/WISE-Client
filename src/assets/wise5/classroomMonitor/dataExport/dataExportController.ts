@@ -415,7 +415,7 @@ class DataExportController {
     }
     row[columnNameToNumber['Node ID']] = componentState.nodeId;
     row[columnNameToNumber['Component ID']] = componentState.componentId;
-    row[columnNameToNumber['Step Title']] = this.ProjectService.getNodePositionAndTitleByNodeId(
+    row[columnNameToNumber['Step Title']] = this.ProjectService.getNodePositionAndTitle(
       componentState.nodeId
     );
     var componentPartNumber =
@@ -1192,7 +1192,7 @@ class DataExportController {
   }
 
   setTitle(row, columnNameToNumber, data) {
-    const stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(data.nodeId);
+    const stepTitle = this.ProjectService.getNodePositionAndTitle(data.nodeId);
     if (stepTitle != null) {
       row[columnNameToNumber['Step Title']] = stepTitle;
     }
@@ -1318,7 +1318,7 @@ class DataExportController {
          */
         if (event.data != null && event.data.toNodeId != null) {
           var toNodeId = event.data.toNodeId;
-          var stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(toNodeId);
+          var stepTitle = this.ProjectService.getNodePositionAndTitle(toNodeId);
           response = stepTitle;
         }
       }
@@ -1942,7 +1942,7 @@ class DataExportController {
                 latestBranchPathTakenEvent.data.toNodeId != null
               ) {
                 toNodeId = latestBranchPathTakenEvent.data.toNodeId;
-                stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(toNodeId);
+                stepTitle = this.ProjectService.getNodePositionAndTitle(toNodeId);
               }
               if (this.includeBranchPathTakenNodeId) {
                 if (toNodeId != null) {
@@ -2147,7 +2147,7 @@ class DataExportController {
     if (nodeIds != null) {
       for (var n = 0; n < nodeIds.length; n++) {
         var nodeId = nodeIds[n];
-        var stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+        var stepTitle = this.ProjectService.getNodePositionAndTitle(nodeId);
         var components = this.ProjectService.getComponentsByNodeId(nodeId);
         if (components != null) {
           for (var c = 0; c < components.length; c++) {
@@ -2851,9 +2851,7 @@ class DataExportController {
     }
 
     row[columnNameToNumber['Node ID']] = nodeId;
-    row[columnNameToNumber['Step Title']] = this.ProjectService.getNodePositionAndTitleByNodeId(
-      nodeId
-    );
+    row[columnNameToNumber['Step Title']] = this.ProjectService.getNodePositionAndTitle(nodeId);
     row[columnNameToNumber['Component Part Number']] =
       this.ProjectService.getComponentPosition(nodeId, componentId) + 1;
     row[columnNameToNumber['Component ID']] = component.id;

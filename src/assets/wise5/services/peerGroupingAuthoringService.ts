@@ -91,7 +91,7 @@ export class PeerGroupingAuthoringService {
     for (const node of this.projectService.getApplicationNodes()) {
       for (const component of node.components) {
         if (component.peerGroupingTag === peerGroupingTag) {
-          stepsUsedIn.push(this.projectService.getNodePositionAndTitleByNodeId(node.id));
+          stepsUsedIn.push(this.projectService.getNodePositionAndTitle(node.id));
           break;
         }
       }

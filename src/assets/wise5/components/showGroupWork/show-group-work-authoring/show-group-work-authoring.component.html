@@ -8,7 +8,7 @@
       <mat-option [value]="''" i18n>(None)</mat-option>
       <ng-container *ngFor="let nodeId of nodeIds">
         <mat-option *ngIf="isApplicationNode(nodeId)" [value]="nodeId">
-          {{ getNodePositionAndTitleByNodeId(nodeId) }}
+          {{ getNodePositionAndTitle(nodeId) }}
         </mat-option>
       </ng-container>
     </mat-select>

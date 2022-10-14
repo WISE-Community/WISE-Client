@@ -125,7 +125,7 @@ class NodeAuthoringController {
     );
 
     const data = {
-      title: this.ProjectService.getNodePositionAndTitleByNodeId(this.nodeId)
+      title: this.ProjectService.getNodePositionAndTitle(this.nodeId)
     };
     if (this.isGroupNode) {
       this.saveEvent('activityViewOpened', 'Navigation', data);

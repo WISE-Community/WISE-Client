@@ -12,21 +12,11 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
   templateUrl: 'notebook-item.component.html'
 })
 export class NotebookItemComponent {
-  @Input()
-  note: any;
-
-  @Input()
-  config: any;
-
-  @Input()
-  itemId: string;
-
-  @Input()
-  group: string;
-
-  @Input()
-  isChooseMode: boolean;
-
+  @Input() note: any;
+  @Input() config: any;
+  @Input() itemId: string;
+  @Input() group: string;
+  @Input() isChooseMode: boolean;
   item: any;
   type: string;
   label: any;
@@ -83,7 +73,7 @@ export class NotebookItemComponent {
     if (this.item == null) {
       return '';
     } else {
-      return this.ProjectService.getNodePositionAndTitleByNodeId(this.item.nodeId);
+      return this.ProjectService.getNodePositionAndTitle(this.item.nodeId);
     }
   }
 

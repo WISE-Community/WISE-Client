@@ -31,12 +31,12 @@
           fxLayoutAlign="start center">
         <div (click)="visitNode(notification)"
             class="notification-message-div"
-            matTooltip="Go to {{ getNodePositionAndTitleByNodeId(notification.nodeId) }}"
+            matTooltip="Go to {{ getNodePositionAndTitle(notification.nodeId) }}"
             matTooltipPosition="left"
             i18n-matTooltip>
           <div class="md-body-1 primary">{{ notification.message }}</div>
           <h4 class="notification-step-title">
-            {{ getNodePositionAndTitleByNodeId(notification.nodeId) }}
+            {{ getNodePositionAndTitle(notification.nodeId) }}
           </h4>
         </div>
         <button mat-icon-button

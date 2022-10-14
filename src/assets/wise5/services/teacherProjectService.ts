@@ -3081,7 +3081,7 @@ export class TeacherProjectService extends ProjectService {
         stepNodeDetails.push({
           nodeId: nodeId,
           order: objectWithOrder.order,
-          nodePositionAndTitle: this.getNodePositionAndTitleByNodeId(nodeId)
+          nodePositionAndTitle: this.getNodePositionAndTitle(nodeId)
         });
       }
     });

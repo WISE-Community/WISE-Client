@@ -187,7 +187,7 @@ export class SummaryStudent extends ComponentStudent {
   }
 
   getOtherStepTitle() {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(this.summaryNodeId);
+    return this.ProjectService.getNodePositionAndTitle(this.summaryNodeId);
   }
 
   setPeriodIdIfNecessary() {

@@ -200,7 +200,7 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
   }
 
   deleteTransition(transition) {
-    const stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(transition.to);
+    const stepTitle = this.ProjectService.getNodePositionAndTitle(transition.to);
     const answer = confirm($localize`Are you sure you want to delete this path to "${stepTitle}"?`);
     if (answer) {
       this.ProjectService.deleteTransition(this.node, transition);

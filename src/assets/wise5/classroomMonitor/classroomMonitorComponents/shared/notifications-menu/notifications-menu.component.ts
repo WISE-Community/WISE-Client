@@ -24,8 +24,8 @@ export class NotificationsMenuComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getNodePositionAndTitleByNodeId(nodeId: string): void {
-    return this.projectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
   confirmDismissAllNotifications(): void {

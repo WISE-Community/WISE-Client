@@ -7,12 +7,8 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
   styleUrls: ['./edit-connected-component-node-select.component.scss']
 })
 export class EditConnectedComponentNodeSelectComponent implements OnInit {
-  @Input()
-  connectedComponent: any;
-
-  @Output()
-  connectedComponentChange: EventEmitter<any> = new EventEmitter();
-
+  @Input() connectedComponent: any;
+  @Output() connectedComponentChange: EventEmitter<any> = new EventEmitter();
   nodeIds: string[] = [];
 
   constructor(private ProjectService: ProjectService) {}
@@ -25,8 +21,8 @@ export class EditConnectedComponentNodeSelectComponent implements OnInit {
     return this.ProjectService.isApplicationNode(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
   connectedComponentNodeIdChanged() {

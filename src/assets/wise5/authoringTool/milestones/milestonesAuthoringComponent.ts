@@ -93,8 +93,8 @@ class MilestonesAuthoringController {
     return this.ProjectService.isApplicationNode(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
   getComponentsByNodeId(nodeId) {

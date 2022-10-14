@@ -10,22 +10,18 @@ export class StepInfoComponent {
   alertIconClass: string;
   alertIconLabel: string;
   alertIconName: string;
-  @Input()
-  hasAlert: boolean;
-  @Input()
-  hasNewAlert: boolean;
-  @Input()
-  hasNewWork: boolean;
+  @Input() hasAlert: boolean;
+  @Input() hasNewAlert: boolean;
+  @Input() hasNewWork: boolean;
   hasRubrics: boolean;
-  @Input()
-  nodeId: string;
+  @Input() nodeId: string;
   rubricIconLabel: string;
   stepTitle: string;
 
   constructor(private ProjectService: TeacherProjectService) {}
 
   ngOnInit() {
-    this.stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(this.nodeId);
+    this.stepTitle = this.ProjectService.getNodePositionAndTitle(this.nodeId);
     if (this.hasAlert) {
       this.alertIconClass = this.hasNewAlert ? 'warn' : 'text-disabled';
       this.alertIconName = 'notifications';

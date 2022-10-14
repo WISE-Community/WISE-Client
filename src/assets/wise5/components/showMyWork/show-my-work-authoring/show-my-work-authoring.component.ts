@@ -46,8 +46,8 @@ export class ShowMyWorkAuthoringComponent extends ComponentAuthoring {
     return this.ProjectService.isApplicationNode(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
   isShowWorkComponentTypeAllowed(componentType: string): boolean {

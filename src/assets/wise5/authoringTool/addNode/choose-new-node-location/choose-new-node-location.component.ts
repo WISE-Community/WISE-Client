@@ -49,7 +49,7 @@ export class ChooseNewNodeLocation {
       this.ProjectService.refreshProject();
       this.saveEvent('stepCreated', 'Authoring', {
         nodeId: newNodeId,
-        title: this.ProjectService.getNodePositionAndTitleByNodeId(newNodeId)
+        title: this.ProjectService.getNodePositionAndTitle(newNodeId)
       });
     });
   }

@@ -109,8 +109,8 @@ export class EditConnectedComponentsComponent implements OnInit {
     return this.ProjectService.getComponentsByNodeId(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
   getConnectedComponentType(connectedComponent: any): string {

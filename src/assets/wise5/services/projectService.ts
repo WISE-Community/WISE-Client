@@ -539,7 +539,7 @@ export class ProjectService {
    * @param nodeId the node id
    * @returns the node position and title, e.g. "1.1 Introduction"
    */
-  getNodePositionAndTitleByNodeId(nodeId) {
+  getNodePositionAndTitle(nodeId: string): string {
     const node = this.getNodeById(nodeId);
     if (node != null) {
       const position = this.getNodePositionById(nodeId);
@@ -1451,7 +1451,7 @@ export class ProjectService {
 
     if (nodeId != null && constraint != null) {
       // get the node title the student is trying to go to
-      const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+      const nodeTitle = this.getNodePositionAndTitle(nodeId);
 
       const removalConditional = constraint.removalConditional;
       const removalCriteria = constraint.removalCriteria;
@@ -1495,19 +1495,19 @@ export class ProjectService {
       if (name === 'isCompleted') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+          const nodeTitle = this.getNodePositionAndTitle(nodeId);
           message += $localize`Complete <b>${nodeTitle}</b>`;
         }
       } else if (name === 'isVisited') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+          const nodeTitle = this.getNodePositionAndTitle(nodeId);
           message += $localize`Visit <b>${nodeTitle}</b>`;
         }
       } else if (name === 'isCorrect') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+          const nodeTitle = this.getNodePositionAndTitle(nodeId);
           message += $localize`Correctly answer <b>${nodeTitle}</b>`;
         }
       } else if (name === 'score') {
@@ -1516,7 +1516,7 @@ export class ProjectService {
         let scoresString = '';
 
         if (nodeId != null) {
-          nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+          nodeTitle = this.getNodePositionAndTitle(nodeId);
         }
 
         const scores = params.scores;
@@ -1528,7 +1528,7 @@ export class ProjectService {
         const nodeId = params.nodeId;
         const componentId = params.componentId;
         const choiceIds = params.choiceIds;
-        let nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+        let nodeTitle = this.getNodePositionAndTitle(nodeId);
         let choices = this.getChoiceTextByNodeIdAndComponentId(nodeId, componentId, choiceIds);
         let choiceText = choices.join(', ');
         message += $localize`You must choose "${choiceText}" on "${nodeTitle}"`;
@@ -1539,7 +1539,7 @@ export class ProjectService {
         const requiredSubmitCount = params.requiredSubmitCount;
 
         if (nodeId != null) {
-          nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+          nodeTitle = this.getNodePositionAndTitle(nodeId);
         }
 
         if (requiredSubmitCount == 1) {
@@ -1549,33 +1549,33 @@ export class ProjectService {
         }
       } else if (name === 'branchPathTaken') {
         const fromNodeId = params.fromNodeId;
-        const fromNodeTitle = this.getNodePositionAndTitleByNodeId(fromNodeId);
+        const fromNodeTitle = this.getNodePositionAndTitle(fromNodeId);
         const toNodeId = params.toNodeId;
-        const toNodeTitle = this.getNodePositionAndTitleByNodeId(toNodeId);
+        const toNodeTitle = this.getNodePositionAndTitle(toNodeId);
         message += $localize`Take the branch path from <b>${fromNodeTitle}</b> to <b>${toNodeTitle}</b>`;
       } else if (name === 'wroteXNumberOfWords') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
           const requiredNumberOfWords = params.requiredNumberOfWords;
-          const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+          const nodeTitle = this.getNodePositionAndTitle(nodeId);
           message += $localize`Write <b>${requiredNumberOfWords}</b> words on <b>${nodeTitle}</b>`;
         }
       } else if (name === 'isVisible') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+          const nodeTitle = this.getNodePositionAndTitle(nodeId);
           message += $localize`"${nodeTitle}" is visible`;
         }
       } else if (name === 'isVisitable') {
         const nodeId = params.nodeId;
         if (nodeId != null) {
-          const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+          const nodeTitle = this.getNodePositionAndTitle(nodeId);
           message += $localize`"${nodeTitle}" is visitable`;
         }
       } else if (name === 'addXNumberOfNotesOnThisStep') {
         const nodeId = params.nodeId;
         const requiredNumberOfNotes = params.requiredNumberOfNotes;
-        const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+        const nodeTitle = this.getNodePositionAndTitle(nodeId);
         if (requiredNumberOfNotes == 1) {
           message += $localize`Add <b>${requiredNumberOfNotes}</b> note on <b>${nodeTitle}</b>`;
         } else {
@@ -1584,7 +1584,7 @@ export class ProjectService {
       } else if (name === 'fillXNumberOfRows') {
         const requiredNumberOfFilledRows = params.requiredNumberOfFilledRows;
         const nodeId = params.nodeId;
-        const nodeTitle = this.getNodePositionAndTitleByNodeId(nodeId);
+        const nodeTitle = this.getNodePositionAndTitle(nodeId);
         if (requiredNumberOfFilledRows == 1) {
           message += $localize`You must fill in <b>${requiredNumberOfFilledRows}</b> row in the <b>Table</b> on <b>${nodeTitle}</b>`;
         } else {

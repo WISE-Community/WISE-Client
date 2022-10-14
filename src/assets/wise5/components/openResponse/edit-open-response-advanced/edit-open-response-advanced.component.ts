@@ -272,8 +272,8 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     return this.TeacherProjectService.isApplicationNode(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.TeacherProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.TeacherProjectService.getNodePositionAndTitle(nodeId);
   }
 
   setFeedbackEnabled(feedbackEnabled: boolean): void {

@@ -345,7 +345,7 @@ export class NodeService {
                   const toNodeId = availableTransition.to;
                   const path = {
                     nodeId: toNodeId,
-                    nodeTitle: this.ProjectService.getNodePositionAndTitleByNodeId(toNodeId),
+                    nodeTitle: this.ProjectService.getNodePositionAndTitle(toNodeId),
                     transition: availableTransition
                   };
                   paths.push(path);

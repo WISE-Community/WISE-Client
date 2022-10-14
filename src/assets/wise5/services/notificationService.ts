@@ -57,7 +57,7 @@ export class NotificationService {
     groupId = null
   ): Notification {
     const nodePosition = this.ProjectService.getNodePositionById(nodeId);
-    const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+    const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitle(nodeId);
     const component = this.ProjectService.getComponent(nodeId, componentId);
     let componentType = null;
     if (component != null) {
@@ -172,7 +172,7 @@ export class NotificationService {
 
   setNotificationNodePositionAndTitle(notification: Notification) {
     notification.nodePosition = this.ProjectService.getNodePositionById(notification.nodeId);
-    notification.nodePositionAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(
+    notification.nodePositionAndTitle = this.ProjectService.getNodePositionAndTitle(
       notification.nodeId
     );
   }

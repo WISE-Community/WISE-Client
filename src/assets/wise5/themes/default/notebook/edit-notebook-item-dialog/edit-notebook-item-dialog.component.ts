@@ -184,9 +184,7 @@ export class EditNotebookItemDialogComponent implements OnInit {
   }
 
   getItemNodeLink(): string {
-    return this.item == null
-      ? ''
-      : this.projectService.getNodePositionAndTitleByNodeId(this.item.nodeId);
+    return this.item == null ? '' : this.projectService.getNodePositionAndTitle(this.item.nodeId);
   }
 
   removeAttachment(attachment: any): void {

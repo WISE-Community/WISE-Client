@@ -93,8 +93,8 @@ export class StepToolsComponent implements OnInit {
     return this.projectService.getNodePositionById(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.projectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
   isGroupNode(nodeId: string): boolean {
