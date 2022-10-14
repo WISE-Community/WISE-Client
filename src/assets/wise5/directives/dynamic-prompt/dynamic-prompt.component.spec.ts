@@ -74,7 +74,7 @@ function peerGroupingTagDisabled(): void {
 }
 
 function peerGroupingTagEnabled(): void {
-  let retrieveDynamicPromptStudentDataSpy: jasmine.Spy;
+  let retrieveStudentDataSpy: jasmine.Spy;
   describe('peerGroupingTagEnabled', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(DynamicPromptComponent);
@@ -84,24 +84,20 @@ function peerGroupingTagEnabled(): void {
       spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup').and.returnValue(
         of(createPeerGroup())
       );
-      retrieveDynamicPromptStudentDataSpy = spyOn(
+      retrieveStudentDataSpy = spyOn(
         TestBed.inject(PeerGroupService),
         'retrieveDynamicPromptStudentData'
       );
     });
 
     it('should display the dynamic prompt when idea 2 and 3 are detected', () => {
-      retrieveDynamicPromptStudentDataSpy.and.returnValue(
-        of([createPeerGroupStudentData(['2', '3'], 2, 1)])
-      );
+      retrieveStudentDataSpy.and.returnValue(of([createPeerGroupStudentData(['2', '3'], 2, 1)]));
       fixture.detectChanges();
       expectDynamicPromptToEqual(promptIdea2And3);
     });
 
     it('should display the dynamic prompt when idea 2 or 3 are detected', () => {
-      retrieveDynamicPromptStudentDataSpy.and.returnValue(
-        of([createPeerGroupStudentData(['2'], 2, 1)])
-      );
+      retrieveStudentDataSpy.and.returnValue(of([createPeerGroupStudentData(['2'], 2, 1)]));
       fixture.detectChanges();
       expectDynamicPromptToEqual(promptIdea2Or3);
     });
