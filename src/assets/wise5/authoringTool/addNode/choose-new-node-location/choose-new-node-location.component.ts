@@ -62,8 +62,8 @@ export class ChooseNewNodeLocation {
     return this.ProjectService.isGroupNode(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId: string) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId: string) {

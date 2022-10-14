@@ -526,7 +526,7 @@ export class ProjectService {
    * Returns the title of the node with the nodeId
    * Return null if nodeId param is null or the specified node does not exist in the project.
    */
-  getNodeTitleByNodeId(nodeId) {
+  getNodeTitle(nodeId: string): string {
     const node = this.getNodeById(nodeId);
     if (node != null) {
       return node.title;

@@ -400,8 +400,8 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
     return this.ProjectService.getComponentsByNodeId(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId: string): string {

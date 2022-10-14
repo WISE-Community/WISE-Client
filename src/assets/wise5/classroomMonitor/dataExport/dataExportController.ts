@@ -1395,7 +1395,7 @@ class DataExportController {
       row[columnNameToNumber['Component Type']] = component.type;
     }
     row[columnNameToNumber['Step Number']] = this.getNodePositionById(notebookItem.nodeId);
-    row[columnNameToNumber['Step Title']] = this.getNodeTitleByNodeId(notebookItem.nodeId);
+    row[columnNameToNumber['Step Title']] = this.getNodeTitle(notebookItem.nodeId);
     const position = this.ProjectService.getComponentPositionByNodeIdAndComponentId(
       notebookItem.nodeId,
       notebookItem.componentId
@@ -1506,7 +1506,7 @@ class DataExportController {
       row[columnNameToNumber['Component Type']] = component.type;
     }
     row[columnNameToNumber['Step Number']] = this.getNodePositionById(notification.nodeId);
-    row[columnNameToNumber['Step Title']] = this.getNodeTitleByNodeId(notification.nodeId);
+    row[columnNameToNumber['Step Title']] = this.getNodeTitle(notification.nodeId);
     const componentPosition = this.ProjectService.getComponentPositionByNodeIdAndComponentId(
       notification.nodeId,
       notification.componentId
@@ -2391,13 +2391,8 @@ class DataExportController {
     return this.ProjectService.getNodePositionById(nodeId);
   }
 
-  /**
-   * Get the node title for a node
-   * @param nodeId the node id
-   * @returns the node title
-   */
-  getNodeTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   /**

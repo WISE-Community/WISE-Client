@@ -87,7 +87,7 @@
                 <span class="red" i18n>Please Choose a Step</span>
               </mat-option>
               <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId">
-                <span i18n>{{ getNodePositionById(nodeId) + ':'}} {{ getNodeTitleByNodeId(nodeId) }} ({{ nodeId }})</span>
+                <span i18n>{{ getNodePositionById(nodeId) + ':'}} {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -125,7 +125,7 @@
               </mat-option>
               <mat-option *ngFor="let nodeId of nodeIds"
                   [value]="nodeId">
-                <span>{{ getNodePositionById(nodeId) + ':'}} {{ getNodeTitleByNodeId(nodeId) }} ({{ nodeId }})</span>
+                <span>{{ getNodePositionById(nodeId) + ':'}} {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -144,7 +144,7 @@
               </mat-option>
               <mat-option *ngFor="let nodeId of nodeIds"
                   [value]="nodeId">
-                <span>{{ getNodePositionById(nodeId) + ':'}} {{ getNodeTitleByNodeId(nodeId) }} ({{ nodeId }})</span>
+                <span>{{ getNodePositionById(nodeId) + ':'}} {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
               </mat-option>
             </mat-select>
           </mat-form-field>

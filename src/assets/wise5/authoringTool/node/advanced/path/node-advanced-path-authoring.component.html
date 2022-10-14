@@ -34,7 +34,7 @@
         <mat-option *ngFor="let nodeId of nodeIds"
             [value]="nodeId">
           <span layout="row" layout-align="start center">
-            <span>{{ getNodePositionById(nodeId)}}: {{ getNodeTitleByNodeId(nodeId) }} ({{ nodeId }})</span>
+            <span>{{ getNodePositionById(nodeId)}}: {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
           </span>
         </mat-option>
       </mat-select>
@@ -92,7 +92,7 @@
             <mat-option *ngFor="let nodeId of nodeIds"
                 [value]="nodeId">
             <span fxLayout="row" fxLayoutAlign="start center">
-              <span>{{ getNodePositionById(nodeId) }}: {{ getNodeTitleByNodeId(nodeId) }} ({{ nodeId }})</span>
+              <span>{{ getNodePositionById(nodeId) }}: {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
             </span>
             </mat-option>
           </mat-select>

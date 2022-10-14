@@ -198,8 +198,8 @@ class ProjectAuthoringController {
     return this.ProjectService.getComponentsByNodeId(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   isGroupNode(nodeId) {

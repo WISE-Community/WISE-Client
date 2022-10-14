@@ -52,7 +52,7 @@ export class EditNotebookItemDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.note == null) {
-      const currentNodeTitle = this.projectService.getNodeTitleByNodeId(this.nodeId);
+      const currentNodeTitle = this.projectService.getNodeTitle(this.nodeId);
 
       this.item = {
         id: null, // null id means we're creating a new notebook item.

@@ -205,11 +205,11 @@ function shouldReturnTheNodeByNodeId() {
 function shouldReturnTheNodeTitleByNodeId() {
   it('should return the node title by nodeId', () => {
     service.setProject(scootersProjectJSON);
-    const node1Title = service.getNodeTitleByNodeId('node1');
+    const node1Title = service.getNodeTitle('node1');
     expect(node1Title).toEqual('Introduction to Newton Scooters');
 
     // Test node that doesn't exist in project and make sure the function returns null
-    const nodeTitleNE = service.getNodeTitleByNodeId('node999');
+    const nodeTitleNE = service.getNodeTitle('node999');
     expect(nodeTitleNE).toBeNull();
   });
 }

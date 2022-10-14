@@ -85,8 +85,8 @@ export class StepToolsComponent implements OnInit {
     return this.projectService.getThemePath() + '/themeComponents/stepTools/stepTools.html';
   }
 
-  getNodeTitleByNodeId(nodeId: string): string {
-    return this.projectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.projectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId: string): string {
