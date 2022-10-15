@@ -212,8 +212,8 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     return this.ProjectService.saveProject();
   }
 
-  getChoicesByNodeIdAndComponentId(nodeId, componentId) {
-    return this.ProjectService.getChoicesByNodeIdAndComponentId(nodeId, componentId);
+  getChoices(nodeId: string, componentId: string): any[] {
+    return this.ProjectService.getChoices(nodeId, componentId);
   }
 
   getChoiceTypeByNodeIdAndComponentId(nodeId, componentId) {

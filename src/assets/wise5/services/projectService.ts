@@ -1603,7 +1603,7 @@ export class ProjectService {
    * @param componentId The component id.
    * @return The choices from the component.
    */
-  getChoicesByNodeIdAndComponentId(nodeId, componentId): any {
+  getChoices(nodeId: string, componentId: string): any[] {
     const component = this.getComponent(nodeId, componentId);
     return component.choices;
   }
@@ -1617,7 +1617,7 @@ export class ProjectService {
    */
   getChoiceText(nodeId: string, componentId: string, choiceIds: string[]): string[] {
     const choicesText = [];
-    for (const choice of this.getChoicesByNodeIdAndComponentId(nodeId, componentId)) {
+    for (const choice of this.getChoices(nodeId, componentId)) {
       if (choiceIds.indexOf(choice.id) != -1) {
         choicesText.push(choice.text);
       }

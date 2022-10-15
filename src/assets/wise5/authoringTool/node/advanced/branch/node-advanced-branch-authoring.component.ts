@@ -101,7 +101,7 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
               }
 
               if (this.createBranchNodeId && this.createBranchComponentId) {
-                const choices = this.ProjectService.getChoicesByNodeIdAndComponentId(
+                const choices = this.ProjectService.getChoices(
                   this.createBranchNodeId,
                   this.createBranchComponentId
                 );

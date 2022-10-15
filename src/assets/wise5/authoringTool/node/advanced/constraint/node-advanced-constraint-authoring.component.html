@@ -186,7 +186,7 @@
                   <span class="red" i18n>Please Select a Choice</span>
                 </span>
               </mat-option>
-              <mat-option *ngFor="let choice of getChoicesByNodeIdAndComponentId(criteria.params.nodeId, criteria.params.componentId)"
+              <mat-option *ngFor="let choice of getChoices(criteria.params.nodeId, criteria.params.componentId)"
                   [value]="choice.id">
                 <span>{{ choice.text }}</span>
               </mat-option>
@@ -203,7 +203,7 @@
                 [(ngModel)]="criteria.params.choiceIds"
                 (ngModelChange)="saveProject()"
                 multiple="{{getChoiceTypeByNodeIdAndComponentId(criteria.params.nodeId, criteria.params.componentId)}}">
-              <mat-option [value]="choice.id" *ngFor="let choice of getChoicesByNodeIdAndComponentId(criteria.params.nodeId, criteria.params.componentId)">{{choice.text}}</mat-option>
+              <mat-option [value]="choice.id" *ngFor="let choice of getChoices(criteria.params.nodeId, criteria.params.componentId)">{{choice.text}}</mat-option>
             </mat-select>
           </mat-form-field>
           <required-error-label *ngIf="criteria.params.choiceIds.length === 0">

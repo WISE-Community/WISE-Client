@@ -383,8 +383,8 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
     }
   }
 
-  getChoicesByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
-    return this.ProjectService.getChoicesByNodeIdAndComponentId(nodeId, componentId);
+  getChoices(nodeId: string, componentId: string): any[] {
+    return this.ProjectService.getChoices(nodeId, componentId);
   }
 
   getChoiceTypeByNodeIdAndComponentId(nodeId: string, componentId: string): string {
