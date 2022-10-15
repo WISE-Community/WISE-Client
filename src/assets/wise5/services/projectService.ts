@@ -1529,7 +1529,7 @@ export class ProjectService {
         const componentId = params.componentId;
         const choiceIds = params.choiceIds;
         let nodeTitle = this.getNodePositionAndTitle(nodeId);
-        let choices = this.getChoiceTextByNodeIdAndComponentId(nodeId, componentId, choiceIds);
+        let choices = this.getChoiceText(nodeId, componentId, choiceIds);
         let choiceText = choices.join(', ');
         message += $localize`You must choose "${choiceText}" on "${nodeTitle}"`;
       } else if (name === 'usedXSubmits') {
@@ -1615,7 +1615,7 @@ export class ProjectService {
    * @param choiceIds An array of choice ids.
    * @return An array of choice text strings.
    */
-  getChoiceTextByNodeIdAndComponentId(nodeId, componentId, choiceIds) {
+  getChoiceText(nodeId: string, componentId: string, choiceIds: string[]): string[] {
     const choicesText = [];
     for (const choice of this.getChoicesByNodeIdAndComponentId(nodeId, componentId)) {
       if (choiceIds.indexOf(choice.id) != -1) {
