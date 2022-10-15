@@ -97,8 +97,8 @@ class MilestonesAuthoringController {
     return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
-  getComponentsByNodeId(nodeId) {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
   isCRaterComponent(component: any): boolean {

@@ -264,8 +264,8 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     }
   }
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.TeacherProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.TeacherProjectService.getComponents(nodeId);
   }
 
   isApplicationNode(nodeId: string): boolean {

@@ -751,8 +751,8 @@ export class NodeAdvancedBranchAuthoringComponent implements OnInit {
     return this.ProjectService.isGroupNode(nodeId);
   }
 
-  getComponentsByNodeId(nodeId) {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
   getNodeTitle(nodeId: string): string {

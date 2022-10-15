@@ -406,7 +406,7 @@
         <mat-select
             [(ngModel)]="object.dataSource.componentId"
             (ngModelChange)="dataSourceComponentChanged(object)">
-          <mat-option *ngFor="let component of getComponentsByNodeId(object.dataSource.nodeId); index as componentIndex"
+          <mat-option *ngFor="let component of getComponents(object.dataSource.nodeId); index as componentIndex"
               value="{{component.id}}"
               [disabled]="!isAvailableDataSourceComponentType(component.type)">
             {{componentIndex + 1}}. {{component.type}}

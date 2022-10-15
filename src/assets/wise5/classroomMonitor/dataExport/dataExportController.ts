@@ -1837,7 +1837,7 @@ class DataExportController {
         workgroupRow[columnIdToColumnIndex['End Date']] = endDate;
         for (var n = 0; n < nodeIds.length; n++) {
           var nodeId = nodeIds[n];
-          var components = this.ProjectService.getComponentsByNodeId(nodeId);
+          var components = this.ProjectService.getComponents(nodeId);
           if (components != null) {
             for (var c = 0; c < components.length; c++) {
               var component = components[c];
@@ -1993,7 +1993,7 @@ class DataExportController {
     if (nodeIds != null) {
       for (var n = 0; n < nodeIds.length; n++) {
         var nodeId = nodeIds[n];
-        var components = this.ProjectService.getComponentsByNodeId(nodeId);
+        var components = this.ProjectService.getComponents(nodeId);
         if (components != null) {
           for (var c = 0; c < components.length; c++) {
             var component = components[c];
@@ -2148,7 +2148,7 @@ class DataExportController {
       for (var n = 0; n < nodeIds.length; n++) {
         var nodeId = nodeIds[n];
         var stepTitle = this.ProjectService.getNodePositionAndTitle(nodeId);
-        var components = this.ProjectService.getComponentsByNodeId(nodeId);
+        var components = this.ProjectService.getComponents(nodeId);
         if (components != null) {
           for (var c = 0; c < components.length; c++) {
             var component = components[c];

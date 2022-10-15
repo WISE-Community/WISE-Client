@@ -396,8 +396,8 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
     return choiceType;
   }
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
   getNodeTitle(nodeId: string): string {

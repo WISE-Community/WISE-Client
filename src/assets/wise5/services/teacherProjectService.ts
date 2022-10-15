@@ -226,7 +226,7 @@ export class TeacherProjectService extends ProjectService {
    * @param component the new component
    */
   replaceComponent(nodeId, componentId, component) {
-    const components = this.getComponentsByNodeId(nodeId);
+    const components = this.getComponents(nodeId);
     for (let c = 0; c < components.length; c++) {
       if (components[c].id === componentId) {
         components[c] = component;
@@ -3086,16 +3086,6 @@ export class TeacherProjectService extends ProjectService {
       }
     });
     return stepNodeDetails.sort(this.sortByOrder);
-  }
-
-  getComponents(): any[] {
-    const components = [];
-    for (const node of this.applicationNodes) {
-      for (const component of node.components) {
-        components.push(component);
-      }
-    }
-    return components;
   }
 
   sortByOrder(a: any, b: any): number {

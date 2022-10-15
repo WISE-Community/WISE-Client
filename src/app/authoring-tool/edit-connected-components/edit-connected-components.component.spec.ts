@@ -70,7 +70,7 @@ function automaticallySetConnectedComponentComponentIdIfPossible() {
     it(`should not automatically set connected component component id there are no acceptable
         component types`, () => {
       const connectedComponent = createConnectedComponentObject(nodeId1, null, null);
-      spyOn(TestBed.inject(ProjectService), 'getComponentsByNodeId').and.returnValue([
+      spyOn(TestBed.inject(ProjectService), 'getComponents').and.returnValue([
         createComponentObject(componentId1, 'Table'),
         createComponentObject(componentId2, 'Graph')
       ]);
@@ -82,7 +82,7 @@ function automaticallySetConnectedComponentComponentIdIfPossible() {
     });
     it('should automatically set connected component component id if possible', () => {
       const connectedComponent = createConnectedComponentObject(nodeId1, null, null);
-      spyOn(TestBed.inject(ProjectService), 'getComponentsByNodeId').and.returnValue([
+      spyOn(TestBed.inject(ProjectService), 'getComponents').and.returnValue([
         createComponentObject(componentId1, 'Table'),
         createComponentObject(componentId2, 'OpenResponse')
       ]);

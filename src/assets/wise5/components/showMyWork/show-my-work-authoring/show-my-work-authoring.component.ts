@@ -55,7 +55,7 @@ export class ShowMyWorkAuthoringComponent extends ComponentAuthoring {
   }
 
   showWorkNodeIdChanged(): void {
-    const components = this.projectService.getComponentsByNodeId(
+    const components = this.projectService.getComponents(
       this.authoringComponentContent.showWorkNodeId
     );
     if (components.length === 1 && this.isAllowedShowWorkComponent(components[0])) {

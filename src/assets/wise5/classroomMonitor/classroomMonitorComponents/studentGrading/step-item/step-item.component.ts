@@ -35,7 +35,7 @@ export class StepItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.components = this.projectService.getComponentsByNodeId(this.nodeId).filter((component) => {
+    this.components = this.projectService.getComponents(this.nodeId).filter((component) => {
       return this.projectService.componentHasWork(component);
     });
   }

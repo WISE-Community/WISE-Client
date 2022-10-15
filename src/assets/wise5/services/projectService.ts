@@ -1352,7 +1352,7 @@ export class ProjectService {
    * @returns the component or null if the nodeId or componentId are null or does not exist
    */
   getComponent(nodeId: string, componentId: string): any {
-    const components = this.getComponentsByNodeId(nodeId);
+    const components = this.getComponents(nodeId);
     for (const component of components) {
       if (component.id === componentId) {
         return component;
@@ -1371,7 +1371,7 @@ export class ProjectService {
    */
   getComponentPosition(nodeId: string, componentId: string): number {
     if (nodeId != null && componentId != null) {
-      const components = this.getComponentsByNodeId(nodeId);
+      const components = this.getComponents(nodeId);
       for (let c = 0; c < components.length; c++) {
         const tempComponent = components[c];
         if (tempComponent != null) {
@@ -1392,7 +1392,7 @@ export class ProjectService {
    * doesn't exist in the project.
    * if the node exists but doesn't have any components, returns an empty array.
    */
-  getComponentsByNodeId(nodeId) {
+  getComponents(nodeId: string): any[] {
     if (nodeId != null) {
       const node = this.getNodeById(nodeId);
       if (node != null) {

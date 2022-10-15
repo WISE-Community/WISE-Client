@@ -10,12 +10,8 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 export class ComponentSelectComponent {
   components: any[];
 
-  @Output()
-  modelChange: EventEmitter<any> = new EventEmitter<any>();
-
-  @Input()
-  nodeId: string;
-
+  @Output() modelChange: EventEmitter<any> = new EventEmitter<any>();
+  @Input() nodeId: string;
   selectedComponents: any[];
 
   constructor(
@@ -24,7 +20,7 @@ export class ComponentSelectComponent {
   ) {}
 
   ngOnInit() {
-    this.components = this.ProjectService.getComponentsByNodeId(this.nodeId).filter((component) => {
+    this.components = this.ProjectService.getComponents(this.nodeId).filter((component) => {
       return this.ProjectService.componentHasWork(component);
     });
     this.selectedComponents = this.components.map((component) => {

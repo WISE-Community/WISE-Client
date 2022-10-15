@@ -41,7 +41,7 @@ export class SummaryAuthoring extends ComponentAuthoring {
 
   summaryNodeIdChanged(): void {
     this.authoringComponentContent.summaryComponentId = null;
-    const components = this.getComponentsByNodeId(this.authoringComponentContent.summaryNodeId);
+    const components = this.getComponents(this.authoringComponentContent.summaryNodeId);
     const allowedComponents = [];
     for (const component of components) {
       if (this.isComponentTypeAllowed(component.type) && component.id != this.componentId) {
@@ -177,7 +177,7 @@ export class SummaryAuthoring extends ComponentAuthoring {
     );
   }
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 }

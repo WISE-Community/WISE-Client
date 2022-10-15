@@ -1247,7 +1247,7 @@ function shouldCheckIsCompleted() {
       { id: 'component1', type: 'OpenResponse' },
       { id: 'component2', type: 'OpenResponse' }
     ];
-    spyOn(projectService, 'getComponentsByNodeId').and.returnValue(components);
+    spyOn(projectService, 'getComponents').and.returnValue(components);
     spyOn(service, 'getComponentStatesByNodeIdAndComponentId').and.callFake(
       (nodeId, componentId) => {
         if (nodeId === 'node1' && componentId === 'component1') {
@@ -1271,7 +1271,7 @@ function shouldCheckIsCompleted() {
       { id: 'component1', type: 'OpenResponse' },
       { id: 'component2', type: 'OpenResponse' }
     ];
-    spyOn(projectService, 'getComponentsByNodeId').and.returnValue(components);
+    spyOn(projectService, 'getComponents').and.returnValue(components);
     spyOn(service, 'getComponentStatesByNodeIdAndComponentId').and.callFake(
       (nodeId, componentId) => {
         if (nodeId === 'node1' && componentId === 'component1') {

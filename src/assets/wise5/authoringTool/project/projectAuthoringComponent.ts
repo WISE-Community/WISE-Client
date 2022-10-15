@@ -194,8 +194,8 @@ class ProjectAuthoringController {
     return this.ProjectService.getNodePositionById(nodeId);
   }
 
-  getComponentsByNodeId(nodeId) {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
   getNodeTitle(nodeId: string): string {

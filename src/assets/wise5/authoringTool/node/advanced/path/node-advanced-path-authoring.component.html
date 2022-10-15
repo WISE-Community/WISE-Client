@@ -103,7 +103,7 @@
           <mat-select
               [(ngModel)]="transitionCriteria.params.componentId"
               (ngModelChange)="transitionCriteriaComponentIdChanged(transitionCriteria)">
-            <mat-option *ngFor="let component of getComponentsByNodeId(transitionCriteria.params.nodeId); index as componentIndex"
+            <mat-option *ngFor="let component of getComponents(transitionCriteria.params.nodeId); index as componentIndex"
                 [disabled]="transitionCriteria.name === 'choiceChosen' && component.type !== 'MultipleChoice'"
                 [value]="component.id">
             <span fxLayout="row" fxLayoutAlign="start center">

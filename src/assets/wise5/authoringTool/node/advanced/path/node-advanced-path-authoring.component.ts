@@ -237,8 +237,8 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     return this.ProjectService.isGroupNode(nodeId);
   }
 
-  getComponentsByNodeId(nodeId) {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
   scoresChanged(value: any, params: any): void {

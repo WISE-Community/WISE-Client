@@ -199,7 +199,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
     authoredObject.dataSource = {
       nodeId: nodeId
     };
-    const components = this.getComponentsByNodeId(nodeId);
+    const components = this.getComponents(nodeId);
     const availableDataSourceComponents = components.filter((component) => {
       return this.availableDataSourceComponentTypes.includes(component.type);
     });
