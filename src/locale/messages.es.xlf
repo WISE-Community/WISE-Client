@@ -1142,7 +1142,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Are you sure you want to delete this connected component?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-connected-components/edit-connected-components.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">98</context>
         </context-group>
         <target state="translated">¿Seguro que quiere eliminar este componente conectado?</target>
       </trans-unit>
@@ -11370,7 +11370,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Not Assigned</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
@@ -11386,7 +11386,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">141</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
@@ -11402,7 +11402,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Partially Completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
@@ -11418,7 +11418,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Not Completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <target state="translated">Incompleto</target>
       </trans-unit>
@@ -11426,7 +11426,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>No Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
-          <context context-type="linenumber">158</context>
+          <context context-type="linenumber">152</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component.ts</context>
@@ -16466,11 +16466,11 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">579</context>
+          <context context-type="linenumber">576</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">689</context>
+          <context context-type="linenumber">686</context>
         </context-group>
         <target state="translated">Correcto</target>
       </trans-unit>
@@ -16482,11 +16482,11 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">579</context>
+          <context context-type="linenumber">576</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">693</context>
+          <context context-type="linenumber">690</context>
         </context-group>
         <target state="translated">Incorrecto</target>
       </trans-unit>
@@ -17067,7 +17067,7 @@ Score: <x id="PH" equiv-text="score"/>
 Feedback Text: <x id="PH_1" equiv-text="feedbackText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <target state="translated">¿Seguro que desea eliminar esta regla de calificación?
 
@@ -17085,7 +17085,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/>
 Feedback Text: <x id="PH_2" equiv-text="feedbackText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">154</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target state="translated">¿Seguro que desea eliminar esta regla de calificación para múltiples intentos?
 
@@ -17099,7 +17099,7 @@ Texto de retroalimentación: <x id="PH_2" equiv-text="feedbackText"/></target>
         <source>you got a score of</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">177</context>
         </context-group>
         <target state="translated">obtuviste una calificación de</target>
       </trans-unit>
@@ -17107,7 +17107,7 @@ Texto de retroalimentación: <x id="PH_2" equiv-text="feedbackText"/></target>
         <source>Please talk to your teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">179</context>
         </context-group>
         <target state="translated">Por favor habla con tu docente</target>
       </trans-unit>
@@ -17115,7 +17115,7 @@ Texto de retroalimentación: <x id="PH_2" equiv-text="feedbackText"/></target>
         <source>got a score of</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">181</context>
         </context-group>
         <target state="translated">obtuviste una calificación de</target>
       </trans-unit>
@@ -17127,7 +17127,7 @@ Previous Score: <x id="PH" equiv-text="previousScore"/>
 Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">204</context>
+          <context context-type="linenumber">195</context>
         </context-group>
         <target state="translated">¿Seguro que desea eliminar esta notificación?
 
@@ -17139,7 +17139,7 @@ Calificación actual: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>Are you sure you want to delete the custom completion criteria?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">229</context>
         </context-group>
         <target state="translated">¿Seguro que desea eliminar este criterio personalizado de finalización?</target>
       </trans-unit>
@@ -17147,7 +17147,7 @@ Calificación actual: <x id="PH_1" equiv-text="currentScore"/></target>
         <source>Are you sure you want to delete this completion criteria?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">270</context>
+          <context context-type="linenumber">261</context>
         </context-group>
         <target state="translated">¿Seguro que desea eliminar este criterio de finalización?</target>
       </trans-unit>
@@ -17855,7 +17855,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>You must submit work on &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <target state="translated">Debes enviar el trabajo en "<x id="PH" equiv-text="this.otherStepTitle"/>" para ver el resumen.</target>
       </trans-unit>
@@ -17863,7 +17863,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>You must complete &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target state="translated">Debes completar "<x id="PH" equiv-text="this.otherStepTitle"/>" para ver el resumen.</target>
       </trans-unit>
@@ -17871,7 +17871,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>You must submit work on &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the class summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">146</context>
         </context-group>
         <target state="translated">Debes enviar tu trabajo en "<x id="PH" equiv-text="this.otherStepTitle"/>" para ver el resumen de la clase.</target>
       </trans-unit>
@@ -17879,7 +17879,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>You must complete &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the class summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">148</context>
         </context-group>
         <target state="translated">Debes completar "<x id="PH" equiv-text="this.otherStepTitle"/>" para ver el resumen de la clase.</target>
       </trans-unit>
@@ -18459,7 +18459,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>The student will see a graph of their individual data here.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">154</context>
         </context-group>
         <target state="translated">El/La estudiante verá un gráfico de su dato individual acá.</target>
       </trans-unit>
@@ -18467,7 +18467,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Your Response</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">713</context>
+          <context context-type="linenumber">710</context>
         </context-group>
         <target state="translated">Tu Respuesta</target>
       </trans-unit>
@@ -18475,7 +18475,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Your Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">715</context>
+          <context context-type="linenumber">712</context>
         </context-group>
         <target state="translated">Tu Calificación</target>
       </trans-unit>
@@ -18483,7 +18483,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Period Responses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">722</context>
+          <context context-type="linenumber">719</context>
         </context-group>
         <target state="translated">Respuestas del Período</target>
       </trans-unit>
@@ -18491,7 +18491,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Period Scores</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">727</context>
+          <context context-type="linenumber">724</context>
         </context-group>
         <target state="translated">Calificaciones del Período</target>
       </trans-unit>
@@ -18499,7 +18499,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Class Responses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">736</context>
+          <context context-type="linenumber">733</context>
         </context-group>
         <target state="translated">Respuestas de la clase</target>
       </trans-unit>
@@ -18507,7 +18507,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Class Scores</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">741</context>
+          <context context-type="linenumber">738</context>
         </context-group>
         <target state="translated">Calificaciones de la clase</target>
       </trans-unit>
@@ -18515,7 +18515,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source><x id="PH" equiv-text="this.percentResponded"/>% Responded (<x id="PH_1" equiv-text="this.numResponses"/>/<x id="PH_2" equiv-text="this.totalWorkgroups"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">752</context>
+          <context context-type="linenumber">749</context>
         </context-group>
         <target state="translated"><x id="PH" equiv-text="this.percentResponded"/>% Respondidas (<x id="PH_1" equiv-text="this.numResponses"/>/<x id="PH_2" equiv-text="this.totalWorkgroups"/>)</target>
       </trans-unit>
@@ -18523,7 +18523,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Count</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">869</context>
+          <context context-type="linenumber">866</context>
         </context-group>
         <target state="translated">Contar</target>
       </trans-unit>
