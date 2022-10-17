@@ -11,6 +11,7 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
 import { UtilService } from '../../../services/utilService';
+import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { PeerChatMessage } from '../PeerChatMessage';
@@ -23,6 +24,7 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-student.component.scss']
 })
 export class PeerChatStudentComponent extends ComponentStudent {
+  dynamicPrompt: FeedbackRule;
   isPeerChatWorkgroupsResponseReceived: boolean;
   isPeerChatWorkgroupsAvailable: boolean;
   myWorkgroupId: number;
@@ -161,6 +163,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
       response: this.response,
       submitCounter: this.submitCounter
     };
+    if (this.dynamicPrompt != null) {
+      componentState.studentData.dynamicPrompt = this.dynamicPrompt;
+    }
     componentState.componentType = 'PeerChat';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
@@ -244,5 +249,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   private isTeacherWorkgroupId(workgroupId: number): boolean {
     return this.configService.getTeacherWorkgroupIds().includes(workgroupId);
+  }
+
+  onDynamicPromptChanged(feedbackRule: FeedbackRule): void {
+    this.dynamicPrompt = feedbackRule;
   }
 }

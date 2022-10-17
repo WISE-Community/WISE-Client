@@ -5,8 +5,15 @@ export class CRaterResponse {
   ideas: CRaterIdea[] = [];
   score: number;
   scores: CRaterScore[];
+  submitCounter: number;
 
-  constructor() {}
+  constructor(jsonObject: any = {}) {
+    for (const key of Object.keys(jsonObject)) {
+      if (jsonObject[key] != null) {
+        this[key] = jsonObject[key];
+      }
+    }
+  }
 
   getDetectedIdeaCount(): number {
     return this.getDetectedIdeaNames().length;

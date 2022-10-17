@@ -1,5 +1,9 @@
-<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+<edit-component-prompt *ngIf="!authoringComponentContent.dynamicPrompt?.enabled"
+    [prompt]="authoringComponentContent.prompt"
     (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
+<edit-dynamic-prompt [authoringComponentContent]="authoringComponentContent"
+    (dynamicPromptChangedEvent)="componentChanged()">
+</edit-dynamic-prompt>
 <edit-component-peer-grouping-tag [authoringComponentContent]="authoringComponentContent">
 </edit-component-peer-grouping-tag>
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="bottom-spacing">

@@ -14,15 +14,15 @@ import { FeedbackRuleHelpComponent } from '../feedback-rule-help/feedback-rule-h
   styleUrls: ['./edit-feedback-rules.component.scss']
 })
 export class EditFeedbackRulesComponent implements OnInit {
-  @Input() feedbackRules: FeedbackRule[] = [];
+  @Input() feedbackRules: Partial<FeedbackRule>[] = [];
   inputChanged: Subject<string> = new Subject<string>();
   subscriptions: Subscription = new Subscription();
   @Input() version: number = 2;
 
   constructor(
-    private dialog: MatDialog,
-    private projectService: TeacherProjectService,
-    private utilService: UtilService
+    protected dialog: MatDialog,
+    protected projectService: TeacherProjectService,
+    protected utilService: UtilService
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +60,7 @@ export class EditFeedbackRulesComponent implements OnInit {
     this.projectService.nodeChanged();
   }
 
-  private createNewFeedbackRule(): any {
+  protected createNewFeedbackRule(): Partial<FeedbackRule> {
     if (this.version === 1) {
       return { expression: '', feedback: '' };
     } else {
@@ -68,7 +68,7 @@ export class EditFeedbackRulesComponent implements OnInit {
     }
   }
 
-  addNewFeedbackToRule(rule: FeedbackRule): void {
+  addNewFeedbackToRule(rule: Partial<FeedbackRule>): void {
     (rule.feedback as string[]).push('');
     this.projectService.nodeChanged();
   }

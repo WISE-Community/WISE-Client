@@ -25,7 +25,7 @@ import { OpenResponseService } from '../openResponseService';
   templateUrl: 'open-response-student.component.html',
   styleUrls: ['open-response-student.component.scss']
 })
-export class OpenResponseStudent extends ComponentStudent implements FeedbackRuleComponent {
+export class OpenResponseStudent extends ComponentStudent {
   audioAttachments: any[] = [];
   cRaterTimeout: number = 40000;
   isPublicSpaceExist: boolean = false;
@@ -330,7 +330,7 @@ export class OpenResponseStudent extends ComponentStudent implements FeedbackRul
     deferred: any,
     dialogRef: any
   ): void {
-    const cRaterResponse = this.CRaterService.getCRaterResponse(response);
+    const cRaterResponse = this.CRaterService.getCRaterResponse(response, this.submitCounter);
     let score = cRaterResponse.score;
     if (cRaterResponse.scores != null) {
       const maxSoFarFunc = (accumulator, currentValue) => {
@@ -394,7 +394,13 @@ export class OpenResponseStudent extends ComponentStudent implements FeedbackRul
       );
     } else {
       if (this.hasFeedbackRules()) {
-        const feedbackRuleEvaluator = new FeedbackRuleEvaluator(this);
+        const feedbackRuleEvaluator = new FeedbackRuleEvaluator(
+          new FeedbackRuleComponent(
+            this.getFeedbackRules(),
+            this.getMaxSubmitCount(),
+            this.isMultipleFeedbackTextsForSameRuleAllowed()
+          )
+        );
         const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(response);
         autoComment = this.getFeedbackText(feedbackRule);
         feedbackRuleId = feedbackRule.id;
