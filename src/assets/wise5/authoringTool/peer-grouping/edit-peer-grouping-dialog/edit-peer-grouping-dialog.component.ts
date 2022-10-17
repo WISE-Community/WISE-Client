@@ -14,19 +14,16 @@ import { ReferenceComponent } from '../../../../../app/domain/referenceComponent
   styleUrls: ['./edit-peer-grouping-dialog.component.scss']
 })
 export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogComponent {
-  allowedReferenceComponentTypes: string[] = ['OpenResponse'];
-  logicType: string;
-  referenceComponent: ReferenceComponent;
   stepsUsedIn: string[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public peerGrouping: PeerGrouping,
     protected dialogRef: MatDialogRef<EditPeerGroupingDialogComponent>,
     private peerGroupingAuthoringService: PeerGroupingAuthoringService,
-    private projectService: ProjectService,
+    protected projectService: ProjectService,
     private utilService: UtilService
   ) {
-    super(dialogRef);
+    super(dialogRef, projectService);
   }
 
   ngOnInit(): void {
@@ -47,34 +44,11 @@ export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogCom
     return new ReferenceComponent(result[1], result[2]);
   }
 
-  referenceComponentNodeIdChanged(event: any): void {
-    let numAllowedComponents = 0;
-    let allowedComponent = null;
-    for (const component of this.projectService.getComponentsByNodeId(event.nodeId)) {
-      if (this.allowedReferenceComponentTypes.includes(component.type)) {
-        numAllowedComponents += 1;
-        allowedComponent = component;
-      }
-    }
-    if (numAllowedComponents === 1) {
-      this.referenceComponent.componentId = allowedComponent.id;
-    } else {
-      this.referenceComponent.componentId = null;
-    }
-  }
-
   save(): void {
     this.updatePeerGroupingLogic();
     this.peerGroupingAuthoringService.updatePeerGrouping(this.peerGrouping).subscribe(() => {
       this.dialogRef.close();
     });
-  }
-
-  private updatePeerGroupingLogic(): void {
-    this.peerGrouping.logic =
-      this.logicType === DIFFERENT_IDEAS_VALUE
-        ? `${DIFFERENT_IDEAS_VALUE}("${this.referenceComponent.nodeId}", "${this.referenceComponent.componentId}")`
-        : this.logicType;
   }
 
   delete(): void {

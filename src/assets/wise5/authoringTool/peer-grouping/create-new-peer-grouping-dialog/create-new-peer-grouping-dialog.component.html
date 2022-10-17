@@ -6,16 +6,26 @@
       <input matInput [(ngModel)]="peerGrouping.name" />
     </mat-form-field>
   </div>
-  <div>
+  <div fxLayoutGap="20px">
     <mat-form-field>
       <mat-label i18n>Logic</mat-label>
-      <mat-select [(ngModel)]="peerGrouping.logic">
+      <mat-select [(ngModel)]="logicType">
         <mat-option *ngFor="let logic of availableLogic"
             [value]="logic.value">
           {{ logic.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <ng-container *ngIf="logicType === 'differentIdeas'">
+      <edit-connected-component-node-select
+          [connectedComponent]="referenceComponent"
+          (connectedComponentChange)="referenceComponentNodeIdChanged($event)">
+      </edit-connected-component-node-select>
+      <edit-connected-component-component-select
+          [connectedComponent]="referenceComponent"
+          [allowedConnectedComponentTypes]="allowedReferenceComponentTypes">
+      </edit-connected-component-component-select>
+    </ng-container>
   </div>
   <!-- <div>
     <mat-form-field>
