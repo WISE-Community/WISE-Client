@@ -34,6 +34,9 @@ describe('DynamicPromptComponent', () => {
     spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
       type: 'OpenResponse'
     });
+    fixture = TestBed.createComponent(DynamicPromptComponent);
+    component = fixture.componentInstance;
+    component.dynamicPrompt = createDynamicPrompt();
   });
 
   peerGroupingTagDisabled();
@@ -43,9 +46,6 @@ describe('DynamicPromptComponent', () => {
 function peerGroupingTagDisabled(): void {
   describe('peerGroupingTagDisabled', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(DynamicPromptComponent);
-      component = fixture.componentInstance;
-      component.dynamicPrompt = createDynamicPrompt();
       spyOn(
         TestBed.inject(StudentDataService),
         'getLatestComponentStateByNodeIdAndComponentId'
@@ -77,9 +77,6 @@ function peerGroupingTagEnabled(): void {
   let retrieveStudentDataSpy: jasmine.Spy;
   describe('peerGroupingTagEnabled', () => {
     beforeEach(() => {
-      fixture = TestBed.createComponent(DynamicPromptComponent);
-      component = fixture.componentInstance;
-      component.dynamicPrompt = createDynamicPrompt();
       component.dynamicPrompt.peerGroupingTag = 'apple';
       spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup').and.returnValue(
         of(createPeerGroup())

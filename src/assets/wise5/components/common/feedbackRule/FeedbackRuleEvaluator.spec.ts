@@ -197,15 +197,23 @@ function matchRule_hasKIScore() {
       ];
       evaluator = new FeedbackRuleEvaluator(new FeedbackRuleComponent(feedbackRules, 5, true));
     });
-    it('should match rule if KI score is in range [1-5]', () => {
-      expectFeedback([], [KI_SCORE_1], 1, 'hasKIScore(1)');
-      expectFeedback([], [KI_SCORE_3], 1, 'hasKIScore(3)');
-      expectFeedback([], [KI_SCORE_5], 1, 'hasKIScore(5)');
-    });
-    it('should not match rule if KI score is out of range [1-5]', () => {
-      expectFeedback([], [KI_SCORE_0], 1, 'isDefault');
-      expectFeedback([], [KI_SCORE_6], 1, 'isDefault');
-    });
+    matchRule_hasKIScoreScoreInRange_ShouldMatchRule();
+    matchRule_hasKIScoreScoreNotInRange_ShouldNotMatchRule();
+  });
+}
+
+function matchRule_hasKIScoreScoreInRange_ShouldMatchRule() {
+  it('should match rule if KI score is in range [1-5]', () => {
+    expectFeedback([], [KI_SCORE_1], 1, 'hasKIScore(1)');
+    expectFeedback([], [KI_SCORE_3], 1, 'hasKIScore(3)');
+    expectFeedback([], [KI_SCORE_5], 1, 'hasKIScore(5)');
+  });
+}
+
+function matchRule_hasKIScoreScoreNotInRange_ShouldNotMatchRule() {
+  it('should not match rule if KI score is out of range [1-5]', () => {
+    expectFeedback([], [KI_SCORE_0], 1, 'isDefault');
+    expectFeedback([], [KI_SCORE_6], 1, 'isDefault');
   });
 }
 
@@ -231,11 +239,15 @@ function matchRule_ideaCount() {
       ];
       evaluator = new FeedbackRuleEvaluator(new FeedbackRuleComponent(feedbackRules, 5, true));
     });
-    it('should match rules based on number of ideas found', () => {
-      expectFeedback(['idea1', 'idea2', 'idea3', 'idea4'], [KI_SCORE_1], 1, 'ideaCountMoreThan(3)');
-      expectFeedback(['idea1', 'idea2', 'idea3'], [KI_SCORE_1], 1, 'ideaCountEquals(3)');
-      expectFeedback(['idea1', 'idea2'], [KI_SCORE_1], 1, 'ideaCountLessThan(3)');
-    });
+    matchRule_ideaCount_MatchRulesBasedOnNumIdeasFound();
+  });
+}
+
+function matchRule_ideaCount_MatchRulesBasedOnNumIdeasFound() {
+  it('should match rules based on number of ideas found', () => {
+    expectFeedback(['idea1', 'idea2', 'idea3', 'idea4'], [KI_SCORE_1], 1, 'ideaCountMoreThan(3)');
+    expectFeedback(['idea1', 'idea2', 'idea3'], [KI_SCORE_1], 1, 'ideaCountEquals(3)');
+    expectFeedback(['idea1', 'idea2'], [KI_SCORE_1], 1, 'ideaCountLessThan(3)');
   });
 }
 
@@ -255,14 +267,12 @@ function matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault() {
 
 function secondToLastSubmit() {
   it('should return second to last submit rule when there is one submit left', () => {
-    evaluator = new FeedbackRuleEvaluator(new FeedbackRuleComponent(defaultFeedbackRules, 5, true));
     expectFeedback(['idea1'], [KI_SCORE_1], 4, 'second to last submission');
   });
 }
 
 function finalSubmit() {
   it('should return final submit rule when no more submits left', () => {
-    evaluator = new FeedbackRuleEvaluator(new FeedbackRuleComponent(defaultFeedbackRules, 5, true));
     expectFeedback(['idea1'], [KI_SCORE_1], 5, 'final submission');
   });
 }

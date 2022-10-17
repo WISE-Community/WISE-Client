@@ -165,15 +165,12 @@ describe('PeerChatStudentComponent', () => {
       score: 0,
       comment: ''
     });
-    spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(studentWorkgroupId1);
-    spyOn(TestBed.inject(ConfigService), 'getTeacherWorkgroupIds').and.returnValue([
-      teacherWorkgroupId
-    ]);
-    spyOn(TestBed.inject(ConfigService), 'isTeacherWorkgroupId').and.callFake(
-      (workgroupId: number) => {
-        return workgroupId === teacherWorkgroupId;
-      }
-    );
+    const configService = TestBed.inject(ConfigService);
+    spyOn(configService, 'getWorkgroupId').and.returnValue(studentWorkgroupId1);
+    spyOn(configService, 'getTeacherWorkgroupIds').and.returnValue([teacherWorkgroupId]);
+    spyOn(configService, 'isTeacherWorkgroupId').and.callFake((workgroupId: number) => {
+      return workgroupId === teacherWorkgroupId;
+    });
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     retrievePeerGroupSpy = spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup');
     retrievePeerGroupSpy.and.callFake(() => {
@@ -236,7 +233,12 @@ function submitStudentResponse() {
 }
 
 function createComponentState() {
-  it('should create component state', () => {
+  createComponentState_WithoutDynamicPrompt_ShouldCreateComponentState();
+  createComponentState_WithDynamicPrompt_ShouldCreateComponentState();
+}
+
+function createComponentState_WithoutDynamicPrompt_ShouldCreateComponentState() {
+  it('should create component state when component does not have dynamic prompt', () => {
     component.peerChatWorkgroupIds = [
       studentWorkgroupId1,
       studentWorkgroupId2,
@@ -255,8 +257,10 @@ function createComponentState() {
       expect(saveNotificationToServerSpy).toHaveBeenCalledTimes(2);
     });
   });
+}
 
-  it('should create component state with dynamic prompt', () => {
+function createComponentState_WithDynamicPrompt_ShouldCreateComponentState() {
+  it('should create component state when component has dynamic prompt', () => {
     spyOn(
       TestBed.inject(StudentWebSocketService),
       'sendStudentWorkToClassmate'

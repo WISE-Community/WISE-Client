@@ -43,23 +43,12 @@ function toggleDynamicPrompt() {
     it('should toggle dynamic prompt on when it does not exist', () => {
       expect(component.authoringComponentContent.dynamicPrompt).toBeUndefined();
       callToggleDynamicPrompt(true);
-      expect(component.authoringComponentContent.dynamicPrompt).not.toBeNull();
+      expect(component.authoringComponentContent.dynamicPrompt.enabled).toBeTrue();
     });
 
     it('should toggle dynamic prompt off', () => {
-      component.authoringComponentContent.dynamicPrompt = {
-        enabled: true
-      };
       callToggleDynamicPrompt(false);
       expect(component.authoringComponentContent.dynamicPrompt.enabled).toBeFalse();
-    });
-
-    it('should toggle dynamic prompt on', () => {
-      component.authoringComponentContent.dynamicPrompt = {
-        enabled: false
-      };
-      callToggleDynamicPrompt(true);
-      expect(component.authoringComponentContent.dynamicPrompt.enabled).toBeTrue();
     });
   });
 }
@@ -71,54 +60,63 @@ function callToggleDynamicPrompt(checked: boolean): void {
 }
 
 function referenceComponentNodeIdChanged() {
-  describe('referenceComponentNodeIdChanged', () => {
+  describe('referenceComponentNodeIdChanged()', () => {
     beforeEach(() => {
       component.authoringComponentContent.dynamicPrompt = new DynamicPrompt({
         referenceComponent: {}
       });
     });
+    referenceComponentNodeIdChanged_NoAllowedComponents_HandleNodeIdChanged();
+    referenceComponentNodeIdChanged_OneAllowedComponent_HandleNodeIdChanged();
+    referenceComponentNodeIdChanged_MultipleAllowedComponents_HandleNodeIdChanged();
+  });
+}
 
-    it('should handle node id changed when there are no allowed components in it', () => {
-      setUpGetComponentsByNodeIdSpy([
-        createComponent(component1Id, 'Draw'),
-        createComponent(component2Id, 'Graph'),
-        createComponent(component3Id, 'Table')
-      ]);
-      changeReferenceComponentNodeId(node1Id);
-      expectReferenceComponentNodeIdAndComponentId(
-        component.authoringComponentContent.dynamicPrompt.referenceComponent,
-        node1Id,
-        null
-      );
-    });
+function referenceComponentNodeIdChanged_NoAllowedComponents_HandleNodeIdChanged() {
+  it('should handle node id changed when there are no allowed components in it', () => {
+    setUpGetComponentsByNodeIdSpy([
+      createComponent(component1Id, 'Draw'),
+      createComponent(component2Id, 'Graph'),
+      createComponent(component3Id, 'Table')
+    ]);
+    changeReferenceComponentNodeId(node1Id);
+    expectReferenceComponentNodeIdAndComponentId(
+      component.authoringComponentContent.dynamicPrompt.referenceComponent,
+      node1Id,
+      null
+    );
+  });
+}
 
-    it('should handle node id changed when there is only one allowed component in it', () => {
-      setUpGetComponentsByNodeIdSpy([
-        createComponent(component1Id, 'Draw'),
-        createComponent(component2Id, 'OpenResponse'),
-        createComponent(component3Id, 'Table')
-      ]);
-      changeReferenceComponentNodeId(node1Id);
-      expectReferenceComponentNodeIdAndComponentId(
-        component.authoringComponentContent.dynamicPrompt.referenceComponent,
-        node1Id,
-        component2Id
-      );
-    });
+function referenceComponentNodeIdChanged_OneAllowedComponent_HandleNodeIdChanged() {
+  it('should handle node id changed when there is only one allowed component in it', () => {
+    setUpGetComponentsByNodeIdSpy([
+      createComponent(component1Id, 'Draw'),
+      createComponent(component2Id, 'OpenResponse'),
+      createComponent(component3Id, 'Table')
+    ]);
+    changeReferenceComponentNodeId(node1Id);
+    expectReferenceComponentNodeIdAndComponentId(
+      component.authoringComponentContent.dynamicPrompt.referenceComponent,
+      node1Id,
+      component2Id
+    );
+  });
+}
 
-    it('should handle node id changed when there are multiple allowed components in it', () => {
-      setUpGetComponentsByNodeIdSpy([
-        createComponent(component1Id, 'Draw'),
-        createComponent(component2Id, 'OpenResponse'),
-        createComponent(component3Id, 'OpenResponse')
-      ]);
-      changeReferenceComponentNodeId(node1Id);
-      expectReferenceComponentNodeIdAndComponentId(
-        component.authoringComponentContent.dynamicPrompt.referenceComponent,
-        node1Id,
-        null
-      );
-    });
+function referenceComponentNodeIdChanged_MultipleAllowedComponents_HandleNodeIdChanged() {
+  it('should handle node id changed when there are multiple allowed components in it', () => {
+    setUpGetComponentsByNodeIdSpy([
+      createComponent(component1Id, 'Draw'),
+      createComponent(component2Id, 'OpenResponse'),
+      createComponent(component3Id, 'OpenResponse')
+    ]);
+    changeReferenceComponentNodeId(node1Id);
+    expectReferenceComponentNodeIdAndComponentId(
+      component.authoringComponentContent.dynamicPrompt.referenceComponent,
+      node1Id,
+      null
+    );
   });
 }
 
