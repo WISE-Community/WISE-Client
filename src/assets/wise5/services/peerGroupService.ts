@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PeerGroupStudentData } from '../../../app/domain/peerGroupStudentData';
 import { Node } from '../common/Node';
 import { PeerGroup } from '../components/peerChat/PeerGroup';
 import { ConfigService } from './configService';
@@ -68,5 +69,15 @@ export class PeerGroupService {
 
   removeWorkgroupFromGroup(workgroupId: number, groupId: number): Observable<any> {
     return this.http.delete(`/api/peer-group/membership/${groupId}/${workgroupId}`);
+  }
+
+  retrieveDynamicPromptStudentData(
+    peerGroupId: number,
+    nodeId: string,
+    componentId: string
+  ): Observable<PeerGroupStudentData[]> {
+    return this.http.get<PeerGroupStudentData[]>(
+      `/api/peer-group/${peerGroupId}/${nodeId}/${componentId}/student-data/dynamic-prompt`
+    );
   }
 }

@@ -5,6 +5,7 @@ import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { AuthorPeerGroupingDialogComponent } from '../author-peer-grouping-dialog/author-peer-grouping-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProjectService } from '../../../services/projectService';
 
 @Component({
   selector: 'create-new-peer-grouping-dialog',
@@ -15,9 +16,10 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDial
   constructor(
     protected dialogRef: MatDialogRef<CreateNewPeerGroupingDialogComponent>,
     private peerGroupingAuthoringService: PeerGroupingAuthoringService,
+    protected projectService: ProjectService,
     private snackBar: MatSnackBar
   ) {
-    super(dialogRef);
+    super(dialogRef, projectService);
   }
 
   ngOnInit(): void {
@@ -26,6 +28,7 @@ export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDial
 
   create(): Subscription {
     this.peerGrouping.tag = this.peerGroupingAuthoringService.getUniqueTag();
+    this.updatePeerGroupingLogic();
     return this.peerGroupingAuthoringService.createNewPeerGrouping(this.peerGrouping).subscribe(
       () => {
         this.dialogRef.close();

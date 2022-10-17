@@ -18,8 +18,6 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-grading.component.scss']
 })
 export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
-  peerGroup: PeerGroup;
-
   constructor(
     protected configService: ConfigService,
     protected nodeService: NodeService,
@@ -32,15 +30,6 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
     protected teacherWorkService: TeacherWorkService
   ) {
     super(configService, nodeService, peerChatService, peerGroupService, projectService);
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
-    this.peerGroupService
-      .retrievePeerGroup(this.componentContent.peerGroupingTag, this.workgroupId)
-      .subscribe((peerGroup) => {
-        this.peerGroup = peerGroup;
-      });
   }
 
   submitTeacherResponse(response: string): void {

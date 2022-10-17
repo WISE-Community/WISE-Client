@@ -72,6 +72,10 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
 import { PeerGroupingAuthoringModule } from '../../assets/wise5/authoringTool/peer-grouping/peer-grouping-authoring.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { FeedbackRuleHelpComponent } from '../../assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component';
+import { EditDynamicPromptComponent } from '../authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component';
+import { EditDynamicPromptRulesComponent } from '../authoring-tool/edit-dynamic-prompt-rules/edit-dynamic-prompt-rules.component';
+import { EditPeerGroupingDialogComponent } from '../../assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
+import { CreateNewPeerGroupingDialogComponent } from '../../assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +83,7 @@ import { FeedbackRuleHelpComponent } from '../../assets/wise5/components/common/
     AudioOscillatorAuthoring,
     AuthorUrlParametersComponent,
     ConceptMapAuthoring,
+    CreateNewPeerGroupingDialogComponent,
     DrawAuthoring,
     DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
@@ -114,6 +119,8 @@ import { FeedbackRuleHelpComponent } from '../../assets/wise5/components/common/
     EditDiscussionConnectedComponentsComponent,
     EditDrawAdvancedComponent,
     EditDrawConnectedComponentsComponent,
+    EditDynamicPromptComponent,
+    EditDynamicPromptRulesComponent,
     EditEmbeddedAdvancedComponent,
     EditFeedbackRulesComponent,
     EditGraphAdvancedComponent,
@@ -128,6 +135,7 @@ import { FeedbackRuleHelpComponent } from '../../assets/wise5/components/common/
     EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
     EditPeerChatAdvancedComponentComponent,
+    EditPeerGroupingDialogComponent,
     EditSummaryAdvancedComponent,
     EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,

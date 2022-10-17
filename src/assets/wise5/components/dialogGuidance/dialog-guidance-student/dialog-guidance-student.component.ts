@@ -30,9 +30,7 @@ import { ComponentStudent } from '../../component-student.component';
   templateUrl: './dialog-guidance-student.component.html',
   styleUrls: ['./dialog-guidance-student.component.scss']
 })
-export class DialogGuidanceStudentComponent
-  extends ComponentStudent
-  implements FeedbackRuleComponent {
+export class DialogGuidanceStudentComponent extends ComponentStudent {
   computerAvatar: ComputerAvatar;
   cRaterTimeout: number = 40000;
   feedbackRuleEvaluator: FeedbackRuleEvaluator;
@@ -84,7 +82,13 @@ export class DialogGuidanceStudentComponent
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     }
-    this.feedbackRuleEvaluator = new FeedbackRuleEvaluator(this);
+    this.feedbackRuleEvaluator = new FeedbackRuleEvaluator(
+      new FeedbackRuleComponent(
+        this.getFeedbackRules(),
+        this.getMaxSubmitCount(),
+        this.isMultipleFeedbackTextsForSameRuleAllowed()
+      )
+    );
     if (this.componentContent.isComputerAvatarEnabled) {
       this.initializeComputerAvatar();
     } else {
@@ -213,7 +217,7 @@ export class DialogGuidanceStudentComponent
       .pipe(timeout(this.cRaterTimeout))
       .subscribe(
         (response: any) => {
-          this.cRaterSuccessResponse(this.CRaterService.getCRaterResponse(response));
+          this.cRaterSuccessResponse(response);
         },
         () => {
           this.cRaterErrorResponse();
@@ -241,10 +245,11 @@ export class DialogGuidanceStudentComponent
     this.studentCanRespond = false;
   }
 
-  cRaterSuccessResponse(response: CRaterResponse): void {
+  cRaterSuccessResponse(response: any): void {
     this.hideWaitingForComputerResponse();
     this.submitButtonClicked();
-    this.addDialogResponse(this.createComputerDialogResponse(response));
+    const cRaterResponse = this.CRaterService.getCRaterResponse(response, this.submitCounter);
+    this.addDialogResponse(this.createComputerDialogResponse(cRaterResponse));
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     } else {
