@@ -79,7 +79,7 @@ function addNewRule() {
     it('should create new rule with feedback version 1', () => {
       component.version = 1;
       component.feedbackRules = [];
-      component.addNewRule(-1);
+      component.addNewRule(0);
       expect(component.feedbackRules.length).toEqual(1);
       const feedbackRule = component.feedbackRules[0];
       expect(feedbackRule.expression).toEqual('');
@@ -90,7 +90,7 @@ function addNewRule() {
     it('should create new rule with feedback version 2', () => {
       component.version = 2;
       component.feedbackRules = [];
-      component.addNewRule(-1);
+      component.addNewRule(0);
       expect(component.feedbackRules.length).toEqual(1);
       const feedbackRule = component.feedbackRules[0];
       expect(typeof feedbackRule.id).toEqual('string');
