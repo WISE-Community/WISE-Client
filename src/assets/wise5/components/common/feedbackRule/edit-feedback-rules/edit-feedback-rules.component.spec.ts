@@ -59,13 +59,19 @@ describe('EditFeedbackRulesComponent', () => {
 function addNewRule() {
   describe('addNewRule()', () => {
     it('should add rule at the beginning', () => {
-      component.addNewRule('beginning');
+      component.addNewRule(0);
       expectFeedbackExpressions(['', 'idea1', 'idea2']);
       expect(nodeChangedSpy).toHaveBeenCalled();
     });
 
+    it('should add rule in the middle', () => {
+      component.addNewRule(1);
+      expectFeedbackExpressions(['idea1', '', 'idea2']);
+      expect(nodeChangedSpy).toHaveBeenCalled();
+    });
+
     it('should add rule at the end', () => {
-      component.addNewRule('end');
+      component.addNewRule(2);
       expectFeedbackExpressions(['idea1', 'idea2', '']);
       expect(nodeChangedSpy).toHaveBeenCalled();
     });
@@ -73,7 +79,7 @@ function addNewRule() {
     it('should create new rule with feedback version 1', () => {
       component.version = 1;
       component.feedbackRules = [];
-      component.addNewRule('beginning');
+      component.addNewRule(0);
       expect(component.feedbackRules.length).toEqual(1);
       const feedbackRule = component.feedbackRules[0];
       expect(feedbackRule.expression).toEqual('');
@@ -84,7 +90,7 @@ function addNewRule() {
     it('should create new rule with feedback version 2', () => {
       component.version = 2;
       component.feedbackRules = [];
-      component.addNewRule('beginning');
+      component.addNewRule(0);
       expect(component.feedbackRules.length).toEqual(1);
       const feedbackRule = component.feedbackRules[0];
       expect(typeof feedbackRule.id).toEqual('string');

@@ -40,7 +40,7 @@ function addNewRule() {
   describe('addNewRule()', () => {
     it('should add new prompt rule', () => {
       expect(component.feedbackRules.length).toEqual(0);
-      component.addNewRule('beginning');
+      component.addNewRule(0);
       expect(component.feedbackRules.length).toEqual(1);
       const newFeedbackRule = component.feedbackRules[0];
       expect(newFeedbackRule.id).not.toEqual('');
