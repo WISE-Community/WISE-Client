@@ -49,12 +49,12 @@ export class ProjectService {
     protected UtilService: UtilService
   ) {}
 
-  setProject(project) {
+  setProject(project: any): void {
     this.project = project;
     this.parseProject();
   }
 
-  clearProjectFields() {
+  clearProjectFields(): void {
     this.transitions = [];
     this.applicationNodes = [];
     this.inactiveStepNodes = [];
@@ -72,28 +72,28 @@ export class ProjectService {
     this.branchService.clearBranchesCache();
   }
 
-  getStyle() {
+  getStyle(): any {
     return this.project.style;
   }
 
-  getFilters() {
+  getFilters(): any[] {
     return this.filters;
   }
 
-  getProjectTitle() {
+  getProjectTitle(): string {
     const name = this.getProjectMetadata().title;
     return name ? name : 'A WISE Project (No name)';
   }
 
-  getProjectMetadata() {
+  getProjectMetadata(): any {
     return this.metadata ? this.metadata : {};
   }
 
-  getNodes() {
+  getNodes(): any {
     return this.project.nodes;
   }
 
-  getChildNodeIdsById(nodeId) {
+  getChildNodeIdsById(nodeId: string): string[] {
     const node = this.getNodeById(nodeId);
     if (node.ids) {
       return node.ids;
@@ -101,11 +101,11 @@ export class ProjectService {
     return [];
   }
 
-  getGroupNodes() {
+  getGroupNodes(): any[] {
     return this.groupNodes;
   }
 
-  addNode(node) {
+  addNode(node: any): void {
     const existingNodes = this.project.nodes;
     let replaced = false;
     if (existingNodes != null) {
@@ -150,21 +150,21 @@ export class ProjectService {
     }
   }
 
-  isGroupNode(id) {
+  isGroupNode(id: string): boolean {
     const node = this.getNodeById(id);
     return node != null && node.type == 'group';
   }
 
-  isApplicationNode(id) {
+  isApplicationNode(id: string): boolean {
     const node = this.getNodeById(id);
     return node != null && node.type !== 'group';
   }
 
-  getGroups() {
+  getGroups(): any[] {
     return this.groupNodes;
   }
 
-  getInactiveGroupNodes() {
+  getInactiveGroupNodes(): any[] {
     return this.inactiveGroupNodes;
   }
 
@@ -173,11 +173,11 @@ export class ProjectService {
    * are in an inactive group.
    * @return An array of inactive step nodes.
    */
-  getInactiveStepNodes() {
+  getInactiveStepNodes(): any[] {
     return this.inactiveStepNodes;
   }
 
-  loadNodes(nodes) {
+  loadNodes(nodes: any[]): void {
     for (const node of nodes) {
       const nodeId = node.id;
       const nodeType = node.type;
@@ -229,7 +229,7 @@ export class ProjectService {
     }
   }
 
-  parseProject() {
+  parseProject(): void {
     this.clearProjectFields();
     this.instantiateDefaults();
     this.metadata = this.project.metadata;
@@ -256,7 +256,7 @@ export class ProjectService {
     this.calculateNodeOrder(this.rootNode);
   }
 
-  calculateNodeOrder(node) {
+  calculateNodeOrder(node: any): void {
     this.idToOrder[node.id] = { order: this.nodeCount };
     this.nodeCount++;
     if (this.isGroupNode(node.id)) {
@@ -277,7 +277,7 @@ export class ProjectService {
    * @return an object containing the idToOrder mapping and also the array
    * of nodes
    */
-  getNodeOrderOfProject(project) {
+  getNodeOrderOfProject(project: any): any {
     const rootNode = this.getNodeById(project.startGroupId, project);
     const idToOrder = {
       nodeCount: 0
@@ -306,7 +306,13 @@ export class ProjectService {
    * @param stepNumber the current step number
    * @param nodes the array of nodes
    */
-  private getNodeOrderOfProjectHelper(project, node, idToOrder, stepNumber, nodes): any {
+  private getNodeOrderOfProjectHelper(
+    project: any,
+    node: any,
+    idToOrder: any,
+    stepNumber: string,
+    nodes: any
+  ): any {
     /*
      * Create the item that we will add to the idToOrder mapping.
      * The 'order' field determines how the project nodes are displayed
@@ -346,14 +352,14 @@ export class ProjectService {
    * @param id String node id
    * @return Number order of the given node id in the project
    */
-  getOrderById(id) {
+  getOrderById(id: string): any {
     if (this.idToOrder[id]) {
       return this.idToOrder[id].order;
     }
     return null;
   }
 
-  getGroupNodesIdToOrder() {
+  getGroupNodesIdToOrder(): any {
     const idToOrder = {};
     const onlyGroupNodes = Object.entries(this.idToOrder).filter((item) => {
       return this.isGroupNode(item[0]);
@@ -364,14 +370,14 @@ export class ProjectService {
     return idToOrder;
   }
 
-  getNodePositionById(id) {
+  getNodePositionById(id: string): any {
     if (id != null) {
       return this.nodeIdToNumber[id];
     }
     return null;
   }
 
-  getNodeIdByOrder(order) {
+  getNodeIdByOrder(order: any): string {
     for (let [nodeId, value] of Object.entries(this.idToOrder)) {
       if ((<any>value).order === order) {
         return nodeId;
@@ -380,11 +386,11 @@ export class ProjectService {
     return null;
   }
 
-  getNodeOrderById(id) {
+  getNodeOrderById(id: string): any {
     return this.idToOrder[id] ? this.idToOrder[id].order : null;
   }
 
-  setIdToNode(id, element) {
+  setIdToNode(id: any, element: any): void {
     this.idToNode[id] = element;
   }
 
@@ -398,7 +404,7 @@ export class ProjectService {
    * @return the same type of object that was passed in as the content
    * but with relative asset paths replaced with absolute paths
    */
-  injectAssetPaths(content) {
+  injectAssetPaths(content: any): any {
     if (content != null) {
       if (typeof content === 'object') {
         let contentString = JSON.stringify(content);
@@ -421,7 +427,7 @@ export class ProjectService {
    * @return the content string with relative asset paths replaced
    * with absolute asset paths
    */
-  replaceAssetPaths(contentString) {
+  replaceAssetPaths(contentString: string): string {
     if (contentString != null) {
       // get the content base url e.g. http://wise.berkeley.edu/curriculum/123456/
       const contentBaseURL = this.ConfigService.getConfigParam('projectBaseURL');
@@ -491,7 +497,7 @@ export class ProjectService {
    * importing a step from another project
    * Return null if nodeId param is null or the specified node does not exist in the project.
    */
-  getNodeById(nodeId, project = null) {
+  getNodeById(nodeId: string, project = null): any {
     if (project == null) {
       if (this.idToNode[nodeId]) {
         return this.idToNode[nodeId];
@@ -589,14 +595,9 @@ export class ProjectService {
     return null;
   }
 
-  getRootNode(nodeId) {
+  getRootNode(nodeId: string): any {
     const parentGroup = this.getParentGroup(nodeId);
-    if (parentGroup == null) {
-      return this.getNodeById(nodeId);
-    } else {
-      return this.getRootNode(parentGroup.id);
-    }
-    return null;
+    return parentGroup == null ? this.getNodeById(nodeId) : this.getRootNode(parentGroup.id);
   }
 
   private isNodeDirectChildOfGroup(node: any, group: any): boolean {
@@ -610,7 +611,7 @@ export class ProjectService {
     return false;
   }
 
-  isNodeDescendentOfGroup(node, group) {
+  isNodeDescendentOfGroup(node: any, group: any): boolean {
     if (node != null && group != null) {
       const descendents = this.getDescendentsOfGroup(group);
       const nodeId = node.id;
@@ -621,7 +622,7 @@ export class ProjectService {
     return false;
   }
 
-  getDescendentsOfGroup(group) {
+  getDescendentsOfGroup(group: any): any {
     let descendents = [];
     if (group != null) {
       const childIds = group.ids;
@@ -639,23 +640,23 @@ export class ProjectService {
     return descendents;
   }
 
-  getStartNodeId() {
+  getStartNodeId(): string {
     return this.project.startNodeId;
   }
 
-  setStartNodeId(nodeId) {
+  setStartNodeId(nodeId: string): void {
     this.project.startNodeId = nodeId;
   }
 
-  getStartGroupId() {
+  getStartGroupId(): string {
     return this.project.startGroupId;
   }
 
-  isStartNodeId(nodeId) {
+  isStartNodeId(nodeId: string): boolean {
     return this.project.startNodeId === nodeId;
   }
 
-  getConstraintsThatAffectNode(node) {
+  getConstraintsThatAffectNode(node: any): any[] {
     const constraints = [];
     const allConstraints = this.activeConstraints;
     for (let constraint of allConstraints) {
@@ -672,7 +673,7 @@ export class ProjectService {
    * @param constraints An array of constraint objects.
    * @return An array of ordered constraints.
    */
-  orderConstraints(constraints) {
+  orderConstraints(constraints: any[]): any[] {
     let orderedNodeIds = this.getFlattenedProjectAsNodeIds();
     return constraints.sort(this.constraintsComparatorGenerator(orderedNodeIds));
   }
@@ -748,7 +749,7 @@ export class ProjectService {
    * @param nodeId2 The node id of a step or group.
    * @returns {boolean} True iff nodeId2 comes after nodeId1.
    */
-  isNodeIdAfter(nodeId1, nodeId2) {
+  isNodeIdAfter(nodeId1: string, nodeId2: string): boolean {
     if (this.isApplicationNode(nodeId1)) {
       if (nodeId1 == nodeId2) {
         return false;
@@ -797,7 +798,7 @@ export class ProjectService {
    * @param fromNodeId the from node id
    * @returns the transition logic object
    */
-  getTransitionLogicByFromNodeId(fromNodeId) {
+  getTransitionLogicByFromNodeId(fromNodeId: string): any {
     const node = this.getNodeById(fromNodeId);
     if (node.transitionLogic == null) {
       node.transitionLogic = {
@@ -823,7 +824,7 @@ export class ProjectService {
    * @returns an array of node objects that transition to the
    * given node id
    */
-  getNodesByToNodeId(toNodeId) {
+  getNodesByToNodeId(toNodeId: string): any {
     const nodesByToNodeId = [];
     if (toNodeId != null) {
       const nodes = this.project.nodes;
@@ -842,7 +843,7 @@ export class ProjectService {
     return nodesByToNodeId;
   }
 
-  getInactiveNodes() {
+  getInactiveNodes(): any {
     return this.project.inactiveNodes;
   }
 
@@ -852,7 +853,7 @@ export class ProjectService {
    * @param toNodeId We are looking for a transition to this node id.
    * @returns Whether the node has a transition to the given nodeId.
    */
-  nodeHasTransitionToNodeId(node, toNodeId) {
+  nodeHasTransitionToNodeId(node: any, toNodeId: string): boolean {
     const transitions = this.getTransitionsByFromNodeId(node.id);
     if (transitions != null) {
       for (let transition of transitions) {
@@ -869,7 +870,7 @@ export class ProjectService {
    * @param toNodeId
    * @returns all the node ids that have a transition to the given node id
    */
-  getNodesWithTransitionToNodeId(toNodeId) {
+  getNodesWithTransitionToNodeId(toNodeId: string): string[] {
     const nodeIds = [];
     const nodes = this.getNodesByToNodeId(toNodeId);
     for (let node of nodes) {
@@ -882,7 +883,7 @@ export class ProjectService {
    * Retrieves the project JSON from Config.projectURL and returns it.
    * If Config.projectURL is undefined, returns null.
    */
-  retrieveProject() {
+  retrieveProject(): any {
     let projectURL = this.ConfigService.getConfigParam('projectURL');
     if (projectURL == null) {
       return null;
@@ -908,7 +909,7 @@ export class ProjectService {
   /**
    * Returns the theme settings for the current project
    */
-  getThemeSettings() {
+  getThemeSettings(): any {
     let themeSettings = {};
     if (this.project.themeSettings) {
       if (this.project.theme) {
@@ -927,7 +928,7 @@ export class ProjectService {
    * @param recalculate Whether to force recalculating the flattened node ids.
    * @return An array of the flattened node ids in the project.
    */
-  getFlattenedProjectAsNodeIds(recalculate = true) {
+  getFlattenedProjectAsNodeIds(recalculate = true): any {
     if (!recalculate && this.flattenedProjectAsNodeIds != null) {
       // use the previously calculated flattened node ids
       return this.flattenedProjectAsNodeIds;
@@ -957,7 +958,7 @@ export class ProjectService {
    * @param includeGroups whether to include the group node ids in the paths
    * @return an array of paths. each path is an array of node ids.
    */
-  getAllPaths(pathSoFar: string[], nodeId: string = '', includeGroups: boolean = false) {
+  getAllPaths(pathSoFar: string[], nodeId: string = '', includeGroups: boolean = false): any[] {
     const allPaths = [];
     if (this.isApplicationNode(nodeId)) {
       const path = [];
@@ -1196,7 +1197,7 @@ export class ProjectService {
    * @param paths an array of paths. each path is an array of node ids.
    * @return an array of node ids that have been properly ordered
    */
-  consolidatePaths(paths = []) {
+  consolidatePaths(paths = []): string[] {
     let consolidatedPath = [];
     /*
      * continue until all the paths are empty. as we consolidate
@@ -1259,7 +1260,7 @@ export class ProjectService {
    * @param nodeId the node id to stop consuming at
    * @return an array of node ids that we have consumed
    */
-  consumePathsUntilNodeId(paths, nodeId) {
+  consumePathsUntilNodeId(paths: any[], nodeId: string): any[] {
     const consumedNodes = [];
     for (const path of paths) {
       if (path.includes(nodeId)) {
@@ -1362,30 +1363,6 @@ export class ProjectService {
   }
 
   /**
-   * Returns the position of the component in the node by node id and
-   * component id, 0-indexed.
-   * @param nodeId the node id
-   * @param componentId the component id
-   * @returns the component's position or -1 if nodeId or componentId are null
-   * or doesn't exist in the project.
-   */
-  getComponentPosition(nodeId: string, componentId: string): number {
-    if (nodeId != null && componentId != null) {
-      const components = this.getComponents(nodeId);
-      for (let c = 0; c < components.length; c++) {
-        const tempComponent = components[c];
-        if (tempComponent != null) {
-          const tempComponentId = tempComponent.id;
-          if (componentId === tempComponentId) {
-            return c;
-          }
-        }
-      }
-    }
-    return -1;
-  }
-
-  /**
    * Get the components in a node
    * @param nodeId the node id
    * @returns an array of components or empty array if nodeId is null or
@@ -1410,7 +1387,7 @@ export class ProjectService {
    * @returns the max score for the node which can be null or a number
    * if null, author/teacher has not set a max score for the node
    */
-  getMaxScoreForNode(nodeId: string) {
+  getMaxScoreForNode(nodeId: string): number {
     let maxScore = null;
     if (!this.isGroupNode(nodeId)) {
       const node = this.getNodeById(nodeId);
@@ -1439,53 +1416,13 @@ export class ProjectService {
   }
 
   /**
-   * Get the message that describes how to disable the constraint
-   * @param nodeId the node the student is trying to go to
-   * @param constraint the constraint that is preventing the student
-   * from going to the node
-   * @returns the message to display to the student that describes how
-   * to disable the constraint
-   */
-  getConstraintMessage(nodeId, constraint) {
-    let message = '';
-
-    if (nodeId != null && constraint != null) {
-      // get the node title the student is trying to go to
-      const nodeTitle = this.getNodePositionAndTitle(nodeId);
-
-      const removalConditional = constraint.removalConditional;
-      const removalCriteria = constraint.removalCriteria;
-
-      if (removalCriteria != null) {
-        let criteriaMessages = '';
-        for (let tempRemovalCriteria of removalCriteria) {
-          if (tempRemovalCriteria != null) {
-            // get the message that describes the criteria that needs to be satisfied
-            const criteriaMessage = this.getCriteriaMessage(tempRemovalCriteria);
-
-            if (criteriaMessage != null && criteriaMessage != '') {
-              // separate criteria messages with a line break
-              if (criteriaMessages != '') {
-                criteriaMessages += '<br/>';
-              }
-              criteriaMessages += criteriaMessage;
-            }
-          }
-        }
-        message += criteriaMessages;
-      }
-    }
-    return message;
-  }
-
-  /**
    * Get the message that describes how to satisfy the criteria
    * TODO: check if the criteria is satisfied
    * @param criteria the criteria object that needs to be satisfied
    * @returns the message to display to the student that describes how to
    * satisfy the criteria
    */
-  getCriteriaMessage(criteria) {
+  getCriteriaMessage(criteria: any): string {
     let message = '';
 
     if (criteria != null) {
@@ -1630,7 +1567,7 @@ export class ProjectService {
    * @param nodeId get the start id of this group
    * @returns the start id of the group
    */
-  getGroupStartId(nodeId) {
+  getGroupStartId(nodeId: string): string {
     return this.getNodeById(nodeId).startId;
   }
 
@@ -1638,7 +1575,7 @@ export class ProjectService {
    * Load the inactive nodes
    * @param nodes the inactive nodes
    */
-  loadInactiveNodes(nodes) {
+  loadInactiveNodes(nodes: any[]): void {
     for (const node of nodes) {
       this.setIdToNode(node.id, node);
       if (node.type === 'group') {
@@ -1649,7 +1586,7 @@ export class ProjectService {
     }
   }
 
-  loadConstraints(constraints) {
+  loadConstraints(constraints: any[]): void {
     for (const constraint of constraints) {
       constraint.active = true;
     }
@@ -1666,7 +1603,7 @@ export class ProjectService {
    * @param target the node id or inactiveNodes/inactiveGroups to check
    * @returns whether the target is active
    */
-  isActive(target) {
+  isActive(target: string): boolean {
     return target !== 'inactiveNodes' && target !== 'inactiveGroups' && this.isNodeActive(target);
   }
 
@@ -1674,7 +1611,7 @@ export class ProjectService {
    * Check if a node is active.
    * @param nodeId the id of the node
    */
-  isNodeActive(nodeId) {
+  isNodeActive(nodeId: string): boolean {
     for (const activeNode of this.project.nodes) {
       if (activeNode.id == nodeId) {
         return true;
@@ -1688,7 +1625,7 @@ export class ProjectService {
    * @param nodeId the node id
    * @return whether the node generates work
    */
-  nodeHasWork(nodeId) {
+  nodeHasWork(nodeId: string): boolean {
     const node = this.getNodeById(nodeId);
     // TODO: remove need for component null check by ensuring that node always has components
     if (node.components != null) {
@@ -1706,7 +1643,7 @@ export class ProjectService {
    * @param component check if this component generates work
    * @return whether the component generates work
    */
-  componentHasWork(component) {
+  componentHasWork(component: any): boolean {
     const componentService = this.componentServiceLookupService.getService(component.type);
     return componentService.componentHasWork(component);
   }
@@ -1750,7 +1687,7 @@ export class ProjectService {
    * If this is a branching step that is called "1.5 B View the Potential Energy", then the
    * node number is 1.5 B
    */
-  calculateNodeNumbers() {
+  calculateNodeNumbers(): void {
     this.nodeIdToNumber = {};
     this.nodeIdToBranchPathLetter = {};
     const startNodeId = this.getStartNodeId();
@@ -1769,11 +1706,11 @@ export class ProjectService {
    * letter e.g. 1=A, 2=B, etc.
    */
   calculateNodeNumbersHelper(
-    nodeId,
-    currentActivityNumber,
-    currentStepNumber,
+    nodeId: string,
+    currentActivityNumber: any,
+    currentStepNumber: number,
     branchLetterCode = null
-  ) {
+  ): void {
     if (nodeId != null) {
       if (this.isApplicationNode(nodeId)) {
         const node = this.getNodeById(nodeId);
@@ -2058,7 +1995,7 @@ export class ProjectService {
     }
   }
 
-  getProjectScript() {
+  getProjectScript(): any {
     return this.project.script;
   }
 
@@ -2067,7 +2004,7 @@ export class ProjectService {
    * @param nodeId get the node id that comes after this one
    * @return the node id that comes after
    */
-  getNextNodeId(nodeId) {
+  getNextNodeId(nodeId: string): string {
     const flattenedNodeIds = this.getFlattenedProjectAsNodeIds();
     if (flattenedNodeIds != null) {
       const indexOfNodeId = flattenedNodeIds.indexOf(nodeId);
@@ -2084,7 +2021,7 @@ export class ProjectService {
    * contains the isEnabled field and an array of items.
    * @return the achievement object
    */
-  getAchievements() {
+  getAchievements(): any {
     if (this.project.achievements == null) {
       this.project.achievements = {
         isEnabled: false,
@@ -2098,7 +2035,7 @@ export class ProjectService {
    * Get the achievement items in the project
    * @return the achievement items
    */
-  getAchievementItems() {
+  getAchievementItems(): any[] {
     const achievements = this.getAchievements();
     if (achievements.items == null) {
       achievements.items = [];
@@ -2111,7 +2048,7 @@ export class ProjectService {
    * @param achievementId the 10 character alphanumeric achievement id
    * @return the achievement with the given achievement id
    */
-  getAchievementByAchievementId(achievementId) {
+  getAchievementByAchievementId(achievementId: string): any {
     if (achievementId != null) {
       const achievements = this.getAchievements();
       if (achievements != null) {
@@ -2134,7 +2071,7 @@ export class ProjectService {
    * @param constraintId the constraint id
    * @param whether the node is affected by the constraint
    */
-  cacheIsNodeAffectedByConstraintResult(nodeId, constraintId, result) {
+  cacheIsNodeAffectedByConstraintResult(nodeId: string, constraintId: string, result: any): void {
     this.isNodeAffectedByConstraintResult[nodeId + '-' + constraintId] = result;
   }
 
@@ -2146,11 +2083,11 @@ export class ProjectService {
    * @return Return the result if we have calculated the result before. If we
    * have not calculated the result before, we will return null
    */
-  getCachedIsNodeAffectedByConstraintResult(nodeId, constraintId) {
+  getCachedIsNodeAffectedByConstraintResult(nodeId: string, constraintId: string): any {
     return this.isNodeAffectedByConstraintResult[nodeId + '-' + constraintId];
   }
 
-  getSpaces() {
+  getSpaces(): any[] {
     if (this.project.spaces != null) {
       return this.project.spaces;
     } else {
@@ -2158,7 +2095,7 @@ export class ProjectService {
     }
   }
 
-  isSpaceExists(id) {
+  isSpaceExists(id: string): boolean {
     const spaces = this.getSpaces();
     for (let space of spaces) {
       if (space.id === id) {
@@ -2175,7 +2112,7 @@ export class ProjectService {
    * @param componentId the component id
    * @returns true/false
    */
-  hasAdditionalProcessingFunctions(nodeId, componentId) {
+  hasAdditionalProcessingFunctions(nodeId: string, componentId: string): boolean {
     return this.getAdditionalProcessingFunctions(nodeId, componentId) != null;
   }
 
@@ -2186,11 +2123,11 @@ export class ProjectService {
    * @param componentId the component id
    * @returns an array of additionalProcessingFunctions
    */
-  getAdditionalProcessingFunctions(nodeId, componentId) {
+  getAdditionalProcessingFunctions(nodeId: string, componentId: string): any {
     return this.additionalProcessingFunctionsMap[`${nodeId}_${componentId}`];
   }
 
-  replaceNode(nodeId, node) {
+  replaceNode(nodeId: string, node: any): void {
     this.setIdToNode(nodeId, node);
     const nodes = this.getNodes();
     for (let n = 0; n < nodes.length; n++) {
@@ -2206,19 +2143,19 @@ export class ProjectService {
     }
   }
 
-  retrieveScript(scriptFilename) {
+  retrieveScript(scriptFilename: string): any {
     return Promise.resolve('');
   }
 
-  getNotificationByScore(component, previousScore, currentScore) {}
+  getNotificationByScore(component: any, previousScore: number, currentScore: number): any {}
 
-  isConnectedComponent(nodeId, componentId, connectedComponentId): boolean {
+  isConnectedComponent(nodeId: string, componentId: string, connectedComponentId: string): boolean {
     return false;
   }
 
-  getConnectedComponentParams(componentContent, componentId) {}
+  getConnectedComponentParams(componentContent: any, componentId: string): any {}
 
-  getTags() {
+  getTags(): any[] {
     let tags = [];
     const nodes = this.getNodes();
     for (const node of nodes) {
@@ -2227,7 +2164,7 @@ export class ProjectService {
     return tags;
   }
 
-  getTagsFromNode(node: any) {
+  getTagsFromNode(node: any): any[] {
     const tags = [];
     const transitions = this.getTransitionsFromNode(node);
     for (const transition of transitions) {
@@ -2242,7 +2179,7 @@ export class ProjectService {
     return tags;
   }
 
-  getTransitionsFromNode(node: any) {
+  getTransitionsFromNode(node: any): any[] {
     const transitionLogic = node.transitionLogic;
     if (transitionLogic == null) {
       return [];
@@ -2251,7 +2188,7 @@ export class ProjectService {
     }
   }
 
-  getCriteriaArrayFromTransition(transition: any) {
+  getCriteriaArrayFromTransition(transition: any): any[] {
     if (transition.criteria == null) {
       return [];
     } else {
@@ -2259,7 +2196,7 @@ export class ProjectService {
     }
   }
 
-  getTagFromSingleCriteria(singleCriteria: any) {
+  getTagFromSingleCriteria(singleCriteria: any): any {
     const params = singleCriteria.params;
     if (params == null) {
       return null;
@@ -2268,7 +2205,7 @@ export class ProjectService {
     }
   }
 
-  getTagFromParams(params: any) {
+  getTagFromParams(params: any): any {
     if (params.tag == null) {
       return null;
     } else {
@@ -2280,7 +2217,7 @@ export class ProjectService {
     return this.getComponent(nodeId, componentId) != null;
   }
 
-  broadcastProjectChanged() {
+  broadcastProjectChanged(): void {
     this.projectChangedSource.next();
   }
 
@@ -2295,7 +2232,7 @@ export class ProjectService {
     return this.getPeerGroupings().find((peerGrouping: PeerGrouping) => peerGrouping.tag === tag);
   }
 
-  getProjectRootNode() {
+  getProjectRootNode(): any {
     return this.rootNode;
   }
 }

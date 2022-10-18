@@ -23,7 +23,7 @@ export class NodeClickLockedService {
         this.projectService.orderConstraints(constraints);
         for (const constraint of constraints) {
           if (!this.studentDataService.evaluateConstraint(constraint)) {
-            message += `<li>${this.projectService.getConstraintMessage(nodeId, constraint)}</li>`;
+            message += `<li>${this.getConstraintMessage(constraint)}</li>`;
           }
         }
         message += `</ul>`;
@@ -35,5 +35,31 @@ export class NodeClickLockedService {
         }
       });
     });
+  }
+
+  /**
+   * Get the message that describes how to disable the constraint
+   * @param constraint the constraint that is preventing the student from going to the node
+   * @returns the message to display to the student that describes how to disable the constraint
+   */
+  private getConstraintMessage(constraint: any): string {
+    let message = '';
+    const removalCriteria = constraint.removalCriteria;
+    if (removalCriteria != null) {
+      let criteriaMessages = '';
+      for (let criterion of removalCriteria) {
+        if (criterion != null) {
+          const criteriaMessage = this.projectService.getCriteriaMessage(criterion);
+          if (criteriaMessage != null && criteriaMessage != '') {
+            if (criteriaMessages != '') {
+              criteriaMessages += '<br/>';
+            }
+            criteriaMessages += criteriaMessage;
+          }
+        }
+      }
+      message = criteriaMessages;
+    }
+    return message;
   }
 }
