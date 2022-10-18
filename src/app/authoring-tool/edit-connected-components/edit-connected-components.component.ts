@@ -37,7 +37,7 @@ export class EditConnectedComponentsComponent implements OnInit {
   automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent: any): void {
     let numberOfAllowedComponents = 0;
     let allowedComponent = null;
-    for (const component of this.ProjectService.getComponentsByNodeId(connectedComponent.nodeId)) {
+    for (const component of this.ProjectService.getComponents(connectedComponent.nodeId)) {
       if (
         this.isConnectedComponentTypeAllowed(component.type) &&
         component.id != this.componentId
@@ -105,12 +105,12 @@ export class EditConnectedComponentsComponent implements OnInit {
     this.connectedComponentsChanged.emit(this.connectedComponents);
   }
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
   getConnectedComponentType(connectedComponent: any): string {

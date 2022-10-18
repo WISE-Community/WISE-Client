@@ -85,7 +85,7 @@ describe('ProjectService', () => {
   // TODO: add test for service.insertNodeInsideInGroups()
   // TODO: add test for service.insertNodeInsideOnlyUpdateTransitions()
   // MARK: Tests for Node and Group Id functions
-  // TODO: add test for service.getNodePositionAndTitleByNodeId()
+  // TODO: add test for service.getNodePositionAndTitle()
   // TODO: add test for service.deconsteNode()
   // TODO: add test for service.removeNodeIdFromTransitions()
   // TODO: add test for service.removeNodeIdFromGroups()
@@ -205,11 +205,11 @@ function shouldReturnTheNodeByNodeId() {
 function shouldReturnTheNodeTitleByNodeId() {
   it('should return the node title by nodeId', () => {
     service.setProject(scootersProjectJSON);
-    const node1Title = service.getNodeTitleByNodeId('node1');
+    const node1Title = service.getNodeTitle('node1');
     expect(node1Title).toEqual('Introduction to Newton Scooters');
 
     // Test node that doesn't exist in project and make sure the function returns null
-    const nodeTitleNE = service.getNodeTitleByNodeId('node999');
+    const nodeTitleNE = service.getNodeTitle('node999');
     expect(nodeTitleNE).toBeNull();
   });
 }
@@ -243,37 +243,22 @@ function shouldGetTheComponent() {
 function shouldGetTheComponentPositionByNodeIdAndComonentId() {
   it('should get the component position by node id and comonent id', () => {
     service.setProject(scootersProjectJSON);
-    const nullNodeIdResult = service.getComponentPositionByNodeIdAndComponentId(null, '57lxhwfp5r');
+    const nullNodeIdResult = service.getComponentPosition(null, '57lxhwfp5r');
     expect(nullNodeIdResult).toEqual(-1);
 
-    const nullComponentIdResult = service.getComponentPositionByNodeIdAndComponentId(
-      'node13',
-      null
-    );
+    const nullComponentIdResult = service.getComponentPosition('node13', null);
     expect(nullComponentIdResult).toEqual(-1);
 
-    const nodeIdDNEResult = service.getComponentPositionByNodeIdAndComponentId(
-      'badNodeId',
-      '57lxhwfp5r'
-    );
+    const nodeIdDNEResult = service.getComponentPosition('badNodeId', '57lxhwfp5r');
     expect(nodeIdDNEResult).toEqual(-1);
 
-    const componentIdDNEResult = service.getComponentPositionByNodeIdAndComponentId(
-      'node13',
-      'badComponentId'
-    );
+    const componentIdDNEResult = service.getComponentPosition('node13', 'badComponentId');
     expect(componentIdDNEResult).toEqual(-1);
 
-    const componentExists = service.getComponentPositionByNodeIdAndComponentId(
-      'node13',
-      '57lxhwfp5r'
-    );
+    const componentExists = service.getComponentPosition('node13', '57lxhwfp5r');
     expect(componentExists).toEqual(0);
 
-    const componentExists2 = service.getComponentPositionByNodeIdAndComponentId(
-      'node9',
-      'mnzx68ix8h'
-    );
+    const componentExists2 = service.getComponentPosition('node9', 'mnzx68ix8h');
     expect(componentExists2).toEqual(1);
   });
 }
@@ -281,18 +266,18 @@ function shouldGetTheComponentPositionByNodeIdAndComonentId() {
 function shouldGetTheComponentsByNodeId() {
   it('should get the components by node id', () => {
     service.setProject(scootersProjectJSON);
-    const nullNodeIdResult = service.getComponentsByNodeId(null);
+    const nullNodeIdResult = service.getComponents(null);
     expect(nullNodeIdResult).toEqual([]);
-    const nodeIdDNEResult = service.getComponentsByNodeId('badNodeId');
+    const nodeIdDNEResult = service.getComponents('badNodeId');
     expect(nodeIdDNEResult).toEqual([]);
-    const nodeWithNullComponentResult = service.getComponentsByNodeId('nodeWithNoComponents');
+    const nodeWithNullComponentResult = service.getComponents('nodeWithNoComponents');
     expect(nodeWithNullComponentResult).toEqual([]);
-    const nodeExistsResult = service.getComponentsByNodeId('node13');
+    const nodeExistsResult = service.getComponents('node13');
     expect(nodeExistsResult).not.toBe(null);
     expect(nodeExistsResult.length).toEqual(1);
     expect(nodeExistsResult[0].id).toEqual('57lxhwfp5r');
 
-    const nodeExistsResult2 = service.getComponentsByNodeId('node9');
+    const nodeExistsResult2 = service.getComponents('node9');
     expect(nodeExistsResult2).not.toBe(null);
     expect(nodeExistsResult2.length).toEqual(7);
     expect(nodeExistsResult2[2].id).toEqual('nm080ntk8e');

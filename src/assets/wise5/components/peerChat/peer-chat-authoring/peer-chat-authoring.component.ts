@@ -43,12 +43,12 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
     return this.ProjectService.isApplicationNode(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
   isComponentTypeAllowed(componentType: string): boolean {
@@ -56,7 +56,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   }
 
   tryUpdateComponentId(object: any, nodeIdFieldName: string, componentIdFieldName: string): void {
-    const components = this.ProjectService.getComponentsByNodeId(object[nodeIdFieldName]);
+    const components = this.ProjectService.getComponents(object[nodeIdFieldName]);
     if (components.length === 0) {
       delete object[componentIdFieldName];
     } else if (components.length === 1) {

@@ -31,7 +31,7 @@ export class EditDynamicPromptComponent implements OnInit {
   referenceComponentNodeIdChanged(event: any): void {
     let numAllowedComponents = 0;
     let allowedComponent = null;
-    for (const component of this.projectService.getComponentsByNodeId(event.nodeId)) {
+    for (const component of this.projectService.getComponents(event.nodeId)) {
       if (this.allowedReferenceComponentTypes.includes(component.type)) {
         numAllowedComponents += 1;
         allowedComponent = component;

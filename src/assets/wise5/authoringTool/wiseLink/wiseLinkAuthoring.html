@@ -22,7 +22,7 @@
       <span layout="row" layout-align="start center">
         <span class="node-select__text">
           {{ ::$ctrl.getNodePositionById(item.$key) + ': '}}
-          {{ ::$ctrl.getNodeTitleByNodeId(item.$key) }}
+          {{ ::$ctrl.getNodeTitle(item.$key) }}
           ({{item.$key}})
         </span>
       </span>
@@ -34,7 +34,7 @@
       placeholder="{{ ::'chooseAComponentOptional' | translate }}"
       style="width:600px">
     <md-option
-        ng-repeat="(componentIndex, component) in $ctrl.getComponentsByNodeId($ctrl.wiseLinkNodeId)"
+        ng-repeat="(componentIndex, component) in $ctrl.getComponents($ctrl.wiseLinkNodeId)"
         value="{{ component.id }}">
       <span layout="row" layout-align="start center">
         <span class="node-select__text">{{componentIndex + 1}}. {{component.type}}</span>

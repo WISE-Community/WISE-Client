@@ -18,7 +18,7 @@ export class NodeClickLockedService {
       const node = this.projectService.getNodeById(nodeId);
       const constraints = this.projectService.getConstraintsThatAffectNode(node);
       if (constraints.length > 0) {
-        const nodeTitle = this.projectService.getNodePositionAndTitleByNodeId(nodeId);
+        const nodeTitle = this.projectService.getNodePositionAndTitle(nodeId);
         message = $localize`<p>To visit <b>${nodeTitle}</b> you need to:</p><ul>`;
         this.projectService.orderConstraints(constraints);
         for (const constraint of constraints) {

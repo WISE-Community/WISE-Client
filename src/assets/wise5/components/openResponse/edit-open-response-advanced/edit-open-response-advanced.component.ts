@@ -264,16 +264,16 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     }
   }
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.TeacherProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.TeacherProjectService.getComponents(nodeId);
   }
 
   isApplicationNode(nodeId: string): boolean {
     return this.TeacherProjectService.isApplicationNode(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.TeacherProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.TeacherProjectService.getNodePositionAndTitle(nodeId);
   }
 
   setFeedbackEnabled(feedbackEnabled: boolean): void {

@@ -22,7 +22,7 @@
       (selectionChange)="nodeChanged()">
     <mat-select-trigger>
       <ng-container *ngIf="nodeId">
-        {{ getNodePositionAndTitleByNodeId(nodeId) }}
+        {{ getNodePositionAndTitle(nodeId) }}
       </ng-container>
       <ng-container *ngIf="!nodeId" i18n>
         Select a Step
@@ -33,7 +33,7 @@
         [ngClass]="{'step': !isGroupNode(nodeId)}">
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
         <node-icon [nodeId]="nodeId" size="18"></node-icon>
-        <span>{{ getNodePositionAndTitleByNodeId(nodeId) }}</span>
+        <span>{{ getNodePositionAndTitle(nodeId) }}</span>
       </div>
     </mat-option>
   </mat-select>

@@ -1637,7 +1637,7 @@ export class GraphStudent extends ComponentStudent {
    */
   getTrialsFromComponentState(nodeId, componentId, componentState) {
     const mergedTrials = [];
-    const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+    const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitle(nodeId);
     const studentData = componentState.studentData;
     if (this.isStudentDataVersion1(studentData.version)) {
       const series = studentData.series;

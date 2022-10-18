@@ -33,7 +33,7 @@ export class WorkgroupItemComponent {
 
   ngOnInit(): void {
     this.nodeHasWork = this.projectService.nodeHasWork(this.nodeId);
-    this.components = this.projectService.getComponentsByNodeId(this.nodeId).filter((component) => {
+    this.components = this.projectService.getComponents(this.nodeId).filter((component) => {
       return this.projectService.componentHasWork(component);
     });
     this.update();

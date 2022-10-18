@@ -12,35 +12,22 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
   templateUrl: 'notebook-item.component.html'
 })
 export class NotebookItemComponent {
-  @Input()
-  note: any;
-
-  @Input()
-  config: any;
-
-  @Input()
-  itemId: string;
-
-  @Input()
-  group: string;
-
-  @Input()
-  isChooseMode: boolean;
-
-  item: any;
-  type: string;
-  label: any;
   color: string;
-
-  @Output()
-  onSelect: EventEmitter<any> = new EventEmitter<any>();
-
+  @Input() config: any;
+  @Input() group: string;
+  @Input() isChooseMode: boolean;
+  item: any;
+  @Input() itemId: string;
+  label: any;
+  @Input() note: any;
   notebookUpdatedSubscription: Subscription;
+  @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
+  type: string;
 
   constructor(
-    private ConfigService: ConfigService,
-    private NotebookService: NotebookService,
-    private ProjectService: ProjectService,
+    private configService: ConfigService,
+    private notebookService: NotebookService,
+    private projectService: ProjectService,
     private dialog: MatDialog
   ) {}
 
@@ -54,7 +41,7 @@ export class NotebookItemComponent {
       this.color = this.label.color;
     }
 
-    this.notebookUpdatedSubscription = this.NotebookService.notebookUpdated$.subscribe(
+    this.notebookUpdatedSubscription = this.notebookService.notebookUpdated$.subscribe(
       ({ notebook }) => {
         if (notebook.items[this.itemId]) {
           this.item = notebook.items[this.itemId].last();
@@ -83,7 +70,7 @@ export class NotebookItemComponent {
     if (this.item == null) {
       return '';
     } else {
-      return this.ProjectService.getNodePositionAndTitleByNodeId(this.item.nodeId);
+      return this.projectService.getNodePositionAndTitle(this.item.nodeId);
     }
   }
 
@@ -91,7 +78,7 @@ export class NotebookItemComponent {
     if (this.item == null) {
       return '';
     } else {
-      return this.ProjectService.getNodePositionById(this.item.nodeId);
+      return this.projectService.getNodePositionById(this.item.nodeId);
     }
   }
 
@@ -107,7 +94,7 @@ export class NotebookItemComponent {
       .afterClosed()
       .subscribe((doDelete: boolean) => {
         if (doDelete) {
-          this.NotebookService.deleteNote(this.item);
+          this.notebookService.deleteNote(this.item);
         }
       });
   }
@@ -124,7 +111,7 @@ export class NotebookItemComponent {
       .afterClosed()
       .subscribe((doRevive: boolean) => {
         if (doRevive) {
-          this.NotebookService.reviveNote(this.item);
+          this.notebookService.reviveNote(this.item);
         }
       });
   }
@@ -137,7 +124,7 @@ export class NotebookItemComponent {
 
   canShareNotebookItem(): boolean {
     return (
-      this.ProjectService.isSpaceExists('public') &&
+      this.projectService.isSpaceExists('public') &&
       this.isMyNotebookItem() &&
       this.item.serverDeleteTime == null &&
       !this.isChooseMode &&
@@ -147,7 +134,7 @@ export class NotebookItemComponent {
 
   canUnshareNotebookItem(): boolean {
     return (
-      this.ProjectService.isSpaceExists('public') &&
+      this.projectService.isSpaceExists('public') &&
       this.isMyNotebookItem() &&
       this.item.serverDeleteTime == null &&
       !this.isChooseMode &&
@@ -163,8 +150,8 @@ export class NotebookItemComponent {
     return this.item.serverDeleteTime != null && !this.isChooseMode;
   }
 
-  isMyNotebookItem(): boolean {
-    return this.item.workgroupId === this.ConfigService.getWorkgroupId();
+  private isMyNotebookItem(): boolean {
+    return this.item.workgroupId === this.configService.getWorkgroupId();
   }
 
   isNotebookItemActive(): boolean {

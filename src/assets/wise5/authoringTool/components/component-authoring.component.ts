@@ -137,8 +137,8 @@ export abstract class ComponentAuthoring {
 
   assetSelected({ nodeId, componentId, assetItem, target }): void {}
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
   getComponent(nodeId: string, componentId: string): any {

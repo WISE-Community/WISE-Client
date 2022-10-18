@@ -691,7 +691,7 @@ function getStepNodesDetailsInOrder() {
       spyOn(service, 'isApplicationNode').and.callFake((nodeId: string): boolean => {
         return nodeId.startsWith('node');
       });
-      spyOn(service, 'getNodePositionAndTitleByNodeId').and.callFake((nodeId: string): string => {
+      spyOn(service, 'getNodePositionAndTitle').and.callFake((nodeId: string): string => {
         return nodeIdToPositionAndTitle[nodeId];
       });
       const stepNodesDetailsInOrder = service.getStepNodesDetailsInOrder();

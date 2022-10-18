@@ -74,9 +74,7 @@ describe('ShowMyWorkAuthoringComponent', () => {
     component.authoringComponentContent.showWorkNodeId = nodeId1;
     component.authoringComponentContent.showWorkComponentId = componentId3;
     const components = [component1, component2];
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponentsByNodeId').and.returnValue(
-      components
-    );
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponents').and.returnValue(components);
     component.showWorkNodeIdChanged();
     expect(component.authoringComponentContent.showWorkNodeId).toEqual(nodeId1);
     expect(component.authoringComponentContent.showWorkComponentId).toEqual('');
@@ -86,9 +84,7 @@ describe('ShowMyWorkAuthoringComponent', () => {
     component.authoringComponentContent.showWorkNodeId = nodeId1;
     component.authoringComponentContent.showWorkComponentId = componentId3;
     const components = [component1];
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponentsByNodeId').and.returnValue(
-      components
-    );
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponents').and.returnValue(components);
     component.showWorkNodeIdChanged();
     expect(component.authoringComponentContent.showWorkNodeId).toEqual(nodeId1);
     expect(component.authoringComponentContent.showWorkComponentId).toEqual(componentId1);

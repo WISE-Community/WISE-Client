@@ -74,7 +74,7 @@ function referenceComponentNodeIdChanged() {
 
 function referenceComponentNodeIdChanged_NoAllowedComponents_HandleNodeIdChanged() {
   it('should handle node id changed when there are no allowed components in it', () => {
-    setUpGetComponentsByNodeIdSpy([
+    setUpGetComponentsSpy([
       createComponent(component1Id, 'Draw'),
       createComponent(component2Id, 'Graph'),
       createComponent(component3Id, 'Table')
@@ -90,7 +90,7 @@ function referenceComponentNodeIdChanged_NoAllowedComponents_HandleNodeIdChanged
 
 function referenceComponentNodeIdChanged_OneAllowedComponent_HandleNodeIdChanged() {
   it('should handle node id changed when there is only one allowed component in it', () => {
-    setUpGetComponentsByNodeIdSpy([
+    setUpGetComponentsSpy([
       createComponent(component1Id, 'Draw'),
       createComponent(component2Id, 'OpenResponse'),
       createComponent(component3Id, 'Table')
@@ -106,7 +106,7 @@ function referenceComponentNodeIdChanged_OneAllowedComponent_HandleNodeIdChanged
 
 function referenceComponentNodeIdChanged_MultipleAllowedComponents_HandleNodeIdChanged() {
   it('should handle node id changed when there are multiple allowed components in it', () => {
-    setUpGetComponentsByNodeIdSpy([
+    setUpGetComponentsSpy([
       createComponent(component1Id, 'Draw'),
       createComponent(component2Id, 'OpenResponse'),
       createComponent(component3Id, 'OpenResponse')
@@ -120,8 +120,8 @@ function referenceComponentNodeIdChanged_MultipleAllowedComponents_HandleNodeIdC
   });
 }
 
-function setUpGetComponentsByNodeIdSpy(components: any[]): void {
-  spyOn(TestBed.inject(ProjectService), 'getComponentsByNodeId').and.returnValue(components);
+function setUpGetComponentsSpy(components: any[]): void {
+  spyOn(TestBed.inject(ProjectService), 'getComponents').and.returnValue(components);
 }
 
 function changeReferenceComponentNodeId(nodeId: string): void {

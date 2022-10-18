@@ -2025,7 +2025,7 @@ function getTrialsFromClassmates() {
     const trial1 = { name: name1, show: true };
     const trials = [trial1];
     const componentState1 = createComponentStateObject(trials);
-    spyOn(TestBed.inject(ProjectService), 'getNodePositionAndTitleByNodeId').and.returnValue(name1);
+    spyOn(TestBed.inject(ProjectService), 'getNodePositionAndTitle').and.returnValue(name1);
     spyOn(TestBed.inject(GraphService), 'getClassmateStudentWork').and.returnValue(
       of([componentState1])
     );

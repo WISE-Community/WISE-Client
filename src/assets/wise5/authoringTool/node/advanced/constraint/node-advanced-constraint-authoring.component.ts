@@ -383,8 +383,8 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
     }
   }
 
-  getChoicesByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
-    return this.ProjectService.getChoicesByNodeIdAndComponentId(nodeId, componentId);
+  getChoices(nodeId: string, componentId: string): any[] {
+    return this.ProjectService.getChoices(nodeId, componentId);
   }
 
   getChoiceTypeByNodeIdAndComponentId(nodeId: string, componentId: string): string {
@@ -396,12 +396,12 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
     return choiceType;
   }
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId: string): string {

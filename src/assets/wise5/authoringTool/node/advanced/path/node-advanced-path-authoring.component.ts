@@ -200,7 +200,7 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
   }
 
   deleteTransition(transition) {
-    const stepTitle = this.ProjectService.getNodePositionAndTitleByNodeId(transition.to);
+    const stepTitle = this.ProjectService.getNodePositionAndTitle(transition.to);
     const answer = confirm($localize`Are you sure you want to delete this path to "${stepTitle}"?`);
     if (answer) {
       this.ProjectService.deleteTransition(this.node, transition);
@@ -212,8 +212,8 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     return this.ProjectService.saveProject();
   }
 
-  getChoicesByNodeIdAndComponentId(nodeId, componentId) {
-    return this.ProjectService.getChoicesByNodeIdAndComponentId(nodeId, componentId);
+  getChoices(nodeId: string, componentId: string): any[] {
+    return this.ProjectService.getChoices(nodeId, componentId);
   }
 
   getChoiceTypeByNodeIdAndComponentId(nodeId, componentId) {
@@ -225,8 +225,8 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     return choiceType;
   }
 
-  getNodeTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId) {
@@ -237,8 +237,8 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     return this.ProjectService.isGroupNode(nodeId);
   }
 
-  getComponentsByNodeId(nodeId) {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
   scoresChanged(value: any, params: any): void {

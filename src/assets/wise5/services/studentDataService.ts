@@ -1265,7 +1265,7 @@ export class StudentDataService extends DataService {
 
   isStepNodeCompleted(nodeId) {
     let result = true;
-    const components = this.ProjectService.getComponentsByNodeId(nodeId);
+    const components = this.ProjectService.getComponents(nodeId);
     for (const component of components) {
       const isComponentCompleted = this.isComponentCompleted(nodeId, component.id);
       result = result && isComponentCompleted;

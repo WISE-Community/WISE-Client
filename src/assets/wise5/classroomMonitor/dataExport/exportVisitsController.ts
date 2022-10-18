@@ -73,9 +73,7 @@ class ExportVisitsController extends ExportController {
       const nodeId = node.node.id;
       this.idToNode[nodeId] = node;
       this.idToStepNumber[nodeId] = this.ProjectService.getNodePositionById(nodeId);
-      this.idToStepNumberAndTitle[nodeId] = this.ProjectService.getNodePositionAndTitleByNodeId(
-        nodeId
-      );
+      this.idToStepNumberAndTitle[nodeId] = this.ProjectService.getNodePositionAndTitle(nodeId);
     }
   }
 

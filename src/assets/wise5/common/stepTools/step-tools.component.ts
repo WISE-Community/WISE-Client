@@ -14,9 +14,7 @@ import { ConfigService } from '../../services/configService';
   encapsulation: ViewEncapsulation.None
 })
 export class StepToolsComponent {
-  @Input()
-  showOnlyStepsWithWork: boolean = false;
-
+  @Input() showOnlyStepsWithWork: boolean = false;
   icons: any;
   nextId: any;
   node: Node;
@@ -103,8 +101,8 @@ export class StepToolsComponent {
     }
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string) {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
   isGroupNode(nodeId: string) {

@@ -40,7 +40,7 @@
               [value]="nodeId">
             <span fxLayout="row" fxLayoutAlign="start center">
               <span>
-                {{ getNodePositionById(nodeId) + ":" }} {{ getNodeTitleByNodeId(nodeId) }} ({{ nodeId }})
+                {{ getNodePositionById(nodeId) + ":" }} {{ getNodeTitle(nodeId) }} ({{ nodeId }})
               </span>
             </span>
           </mat-option>
@@ -53,7 +53,7 @@
         <mat-label i18n>Choose Component</mat-label>
         <mat-select [(ngModel)]="createBranchComponentId"
             (ngModelChange)="createBranchComponentIdChanged()">
-          <mat-option *ngFor="let component of getComponentsByNodeId(createBranchNodeId); index as componentIndex"
+          <mat-option *ngFor="let component of getComponents(createBranchNodeId); index as componentIndex"
               [value]="component.id">
             <span fxLayout="row" fxLayoutAlign="start center">
               <span i18n>
@@ -117,7 +117,7 @@
               class="step-checkbox"
               [(ngModel)]="branch.items[nodeId].checked"
               (ngModelChange)="createBranchStepClicked(branch, branch.items[nodeId])">
-            {{ getNodePositionById(nodeId) }}: {{ getNodeTitleByNodeId(nodeId) }}
+            {{ getNodePositionById(nodeId) }}: {{ getNodeTitle(nodeId) }}
           </mat-checkbox>
         </div>
         <button mat-raised-button
@@ -140,7 +140,7 @@
           (ngModelChange)="createBranchMergePointNodeIdChanged()">
         <mat-option *ngFor="let nodeId of this.nodeIds"
             [value]="nodeId">
-          {{ getNodePositionById(nodeId) + ":" }} {{ getNodeTitleByNodeId(nodeId) }} ({{ nodeId }})
+          {{ getNodePositionById(nodeId) + ":" }} {{ getNodeTitle(nodeId) }} ({{ nodeId }})
         </mat-option>
       </mat-select>
     </mat-form-field>
