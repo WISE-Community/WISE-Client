@@ -5,7 +5,7 @@
     <mat-card-header class="nav-item--card__content" (click)="itemClicked($event)"
         role="button" md-ink-ripple>
       <node-icon mat-card-avatar class="group-icon" [nodeId]="nodeId" size="12"></node-icon>
-      <mat-card-title class="title" style="color: {{icon.color}};" >
+      <mat-card-title class="title" style="color: {{icon.color}}" >
         <span>{{ nodeTitle }}</span>
       </mat-card-title>
       <span fxFlex></span>
@@ -20,8 +20,9 @@
       <mat-list class="nav-contents__list">
         <nav-item *ngFor="let childId of item.ids"
             [ngClass]="{'expanded': itemExpanded, 'prev': isPrevStep}"
-            aria-label="{{ isPrevStep ? $translate('LAST_VIEWED_ITEM') : null }}"
-            [showPosition]="showPosition" [nodeId]="childId" type="list"
+            aria-label="{{ isPrevStep ? 'Last viewed item' : null }}"
+            i18n-aria-label
+            [nodeId]="childId" type="list"
             ng-animate-ref="{{ childId }}" class="nav-item" data-nodeid="{{ childId }}">
         </nav-item>
       </mat-list>

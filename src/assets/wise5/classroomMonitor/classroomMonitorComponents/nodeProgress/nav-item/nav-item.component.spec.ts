@@ -29,6 +29,7 @@ class MockTeacherDataService {
 
 class MockTeacherProjectService {
   idToNode = { node1: {} };
+  nodeIdToNumber = {};
 
   isGroupNode() {}
   nodeHasWork() {}
@@ -70,21 +71,21 @@ describe('NavItemComponent', () => {
 
 function itemClicked() {
   describe('itemClicked', () => {
-    it('click item that is a group that is expanded', () => {
+    it('should set expanded to false when itemClicked() is called on an expanded group', () => {
       component.isGroup = true;
       component.expanded = true;
       component.itemClicked();
       expect(component.expanded).toBeFalse();
     });
 
-    it('click item that is a group that is not expanded', () => {
+    it('should set expanded to true when itemClicked() is called on a collapsed group', () => {
       component.isGroup = true;
       component.expanded = false;
       component.itemClicked();
       expect(component.expanded).toBeTrue();
     });
 
-    it('click item that is not a group', () => {
+    it('should set current node when a step is clicked', () => {
       const endCurrentNodeAndSetCurrentNodeByNodeIdSpy = spyOn(
         TestBed.inject(TeacherDataService),
         'endCurrentNodeAndSetCurrentNodeByNodeId'

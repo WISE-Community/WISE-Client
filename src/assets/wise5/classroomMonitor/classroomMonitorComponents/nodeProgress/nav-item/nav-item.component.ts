@@ -39,7 +39,6 @@ export class NavItemComponent implements OnInit {
   rubricIconClass: string;
   rubricIconLabel: string;
   rubricIconName: string;
-  @Input() showPosition: any;
   subscriptions: Subscription = new Subscription();
   @Input() type: string;
 
@@ -57,9 +56,7 @@ export class NavItemComponent implements OnInit {
     this.item = this.projectService.idToNode[this.nodeId];
     this.isGroup = this.projectService.isGroupNode(this.nodeId);
     this.nodeHasWork = this.projectService.nodeHasWork(this.nodeId);
-    this.nodeTitle = this.showPosition
-      ? this.projectService.nodeIdToNumber[this.nodeId] + ': ' + this.item.title
-      : this.item.title;
+    this.nodeTitle = this.projectService.nodeIdToNumber[this.nodeId] + ': ' + this.item.title;
     this.currentNode = this.teacherDataService.currentNode;
     this.isCurrentNode = this.currentNode.id === this.nodeId;
     if (this.isCurrentNode) {
