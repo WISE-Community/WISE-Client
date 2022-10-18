@@ -11,21 +11,21 @@ export class EditConnectedComponentNodeSelectComponent implements OnInit {
   @Output() connectedComponentChange: EventEmitter<any> = new EventEmitter();
   nodeIds: string[] = [];
 
-  constructor(private ProjectService: ProjectService) {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds();
+    this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
   }
 
   isApplicationNode(nodeId: string): boolean {
-    return this.ProjectService.isApplicationNode(nodeId);
+    return this.projectService.isApplicationNode(nodeId);
   }
 
   getNodePositionAndTitle(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitle(nodeId);
+    return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
-  connectedComponentNodeIdChanged() {
+  connectedComponentNodeIdChanged(): void {
     this.connectedComponentChange.emit(this.connectedComponent);
   }
 }

@@ -7,24 +7,24 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
   styleUrls: ['./edit-connected-component-component-select.component.scss']
 })
 export class EditConnectedComponentComponentSelectComponent implements OnInit {
+  @Input() allowedConnectedComponentTypes: string[];
   @Input() componentId: string;
   @Input() connectedComponent: any;
-  @Input() allowedConnectedComponentTypes: string[];
   @Output() connectedComponentChange: EventEmitter<any> = new EventEmitter();
 
-  constructor(private ProjectService: ProjectService) {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {}
 
   getComponents(nodeId: string): any[] {
-    return this.ProjectService.getComponents(nodeId);
+    return this.projectService.getComponents(nodeId);
   }
 
   isConnectedComponentTypeAllowed(componentType: string): boolean {
     return this.allowedConnectedComponentTypes.includes(componentType);
   }
 
-  connectedComponentComponentIdChanged() {
+  connectedComponentComponentIdChanged(): void {
     this.connectedComponentChange.emit(this.connectedComponent);
   }
 }
