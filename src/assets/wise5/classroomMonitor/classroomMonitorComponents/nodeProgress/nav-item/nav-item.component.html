@@ -1,7 +1,7 @@
 <ng-container [ngSwitch]="type" *ngIf="nodeHasWork || isGroup">
   <div id="nav-item-{{nodeId}}"></div>
   <mat-card *ngSwitchCase="'card'" class="nav-item--card"
-      [ngClass]="{'nav-item--card--group':isGroup, 'expanded md-whiteframe-3dp':expanded}">
+      [ngClass]="{'nav-item--card--group':isGroup, 'expanded mat-elevation-z3':expanded}">
     <mat-card-header class="nav-item--card__content" (click)="itemClicked($event)"
         role="button" md-ink-ripple>
       <node-icon mat-card-avatar class="group-icon" [nodeId]="nodeId" size="12"></node-icon>
@@ -27,7 +27,7 @@
         </nav-item>
       </mat-list>
     </mat-card-content>
-    <mat-card-actions class="nav-item__more md-body-1" fxLayout="row" fxLayoutAlign="start center"
+    <mat-card-actions class="nav-item__more mat-body-1" fxLayout="row" fxLayoutAlign="start center"
         fxLayoutGap="8px">
       <nav-item-progress [nodeCompletion]="getNodeCompletion()" [period]="currentPeriod">
       </nav-item-progress>
@@ -41,16 +41,13 @@
       </a>
     </mat-card-actions>
   </mat-card>
-  <mat-list-item *ngSwitchCase="'list'" (click)="itemClicked()"
-      class="md-long-text noright list-item md-whiteframe-1dp"
+  <mat-list-item *ngSwitchCase="'list'"
+      (click)="itemClicked()"
       aria-label="{{nodeTitle}}"
-      [ngClass]="{'nav-item--list--group': isGroup,
-          'list-item--warn': newAlert,
-          'warn': newAlert,
-          'text-secondary': !nodeHasWork}">
-    <node-icon [nodeId]="nodeId" class="step-icon" custom-class="md-avatar"></node-icon>
+      class="list-item"
+      [ngClass]="{'nav-item--list--group': isGroup, 'text-secondary': !nodeHasWork}">
     <p fxFlex fxLayout="row" fxfxLayoutAlign="start center">
-      <span>{{ nodeTitle }}</span>&nbsp;
+      <span [ngClass]="{'warn': newAlert}">{{ nodeTitle }}</span>&nbsp;
       <span fxFlex fxHide.gt-xs></span>
       <status-icon *ngIf="newAlert" [iconClass]="alertIconClass"
           [iconName]="alertIconName" [iconLabel]="alertIconLabel"
