@@ -15,6 +15,7 @@ import HC_exporting from 'highcharts/modules/exporting';
 import * as covariance from 'compute-covariance';
 import canvg from 'canvg';
 import { MatDialog } from '@angular/material/dialog';
+import { GraphContent } from '../GraphContent';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -2608,7 +2609,7 @@ export class GraphStudent extends ComponentStudent {
           connectedComponent.showClassmateWorkSource
         )
       );
-      let component = this.ProjectService.getComponent(nodeId, componentId);
+      let component = this.ProjectService.getComponent(nodeId, componentId) as GraphContent;
       component = this.ProjectService.injectAssetPaths(component);
       connectedComponentBackgroundImage = component.backgroundImage;
     }

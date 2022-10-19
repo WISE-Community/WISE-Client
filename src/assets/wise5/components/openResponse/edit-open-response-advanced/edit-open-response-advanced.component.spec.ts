@@ -21,6 +21,7 @@ import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/e
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditOpenResponseAdvancedComponent } from './edit-open-response-advanced.component';
@@ -66,7 +67,9 @@ describe('EditOpenResponseAdvancedComponent', () => {
   });
 
   beforeEach(() => {
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({});
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      {} as ComponentContent
+    );
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       'node1',

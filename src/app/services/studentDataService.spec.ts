@@ -8,6 +8,7 @@ import { UtilService } from '../../assets/wise5/services/utilService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { ComponentContent } from '../../assets/wise5/common/ComponentContent';
 
 let $injector, $rootScope;
 let http: HttpTestingController;
@@ -1220,7 +1221,7 @@ function shouldCheckIsCompleted() {
     spyOn(service, 'getEventsByNodeIdAndComponentId').and.returnValue(componentEvents);
     const nodeEvents = [];
     spyOn(service, 'getEventsByNodeId').and.returnValue(nodeEvents);
-    const component = { id: 'component1', type: 'OpenResponse' };
+    const component = { id: 'component1', type: 'OpenResponse' } as ComponentContent;
     spyOn(projectService, 'getComponent').and.returnValue(component);
     const node = { id: 'node1' };
     spyOn(projectService, 'getNodeById').and.returnValue(node);
@@ -1233,7 +1234,7 @@ function shouldCheckIsCompleted() {
     spyOn(service, 'getEventsByNodeIdAndComponentId').and.returnValue(componentEvents);
     const nodeEvents = [];
     spyOn(service, 'getEventsByNodeId').and.returnValue(nodeEvents);
-    const component = { id: 'component1', type: 'OpenResponse' };
+    const component = { id: 'component1', type: 'OpenResponse' } as ComponentContent;
     spyOn(projectService, 'getComponent').and.returnValue(component);
     const node = { id: 'node1' };
     spyOn(projectService, 'getNodeById').and.returnValue(node);
@@ -1246,7 +1247,7 @@ function shouldCheckIsCompleted() {
     const components = [
       { id: 'component1', type: 'OpenResponse' },
       { id: 'component2', type: 'OpenResponse' }
-    ];
+    ] as ComponentContent[];
     spyOn(projectService, 'getComponents').and.returnValue(components);
     spyOn(service, 'getComponentStatesByNodeIdAndComponentId').and.callFake(
       (nodeId, componentId) => {
@@ -1270,7 +1271,7 @@ function shouldCheckIsCompleted() {
     const components = [
       { id: 'component1', type: 'OpenResponse' },
       { id: 'component2', type: 'OpenResponse' }
-    ];
+    ] as ComponentContent[];
     spyOn(projectService, 'getComponents').and.returnValue(components);
     spyOn(service, 'getComponentStatesByNodeIdAndComponentId').and.callFake(
       (nodeId, componentId) => {

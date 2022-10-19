@@ -7,6 +7,7 @@ import { ComponentServiceLookupService } from '../../../services/componentServic
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { MultipleChoiceContent } from '../../multipleChoice/MultipleChoiceContent';
 import { SummaryService } from '../summaryService';
 
 @Component({
@@ -155,7 +156,7 @@ export class SummaryAuthoring extends ComponentAuthoring {
     if (nodeId != null && componentId != null) {
       const component = this.ProjectService.getComponent(nodeId, componentId);
       if (component != null) {
-        return component.choiceType === 'checkbox';
+        return (component as MultipleChoiceContent).choiceType === 'checkbox';
       }
     }
     return false;

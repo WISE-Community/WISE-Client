@@ -10,6 +10,7 @@ import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { SummaryStudent } from './summary-student.component';
+import { ComponentContent } from '../../../common/ComponentContent';
 
 let component: SummaryStudent;
 const componentId = 'component1';
@@ -102,7 +103,7 @@ function getOtherPrompt() {
       const prompt = 'Choose your favorite ice cream flavor.';
       spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
         prompt: prompt
-      });
+      } as ComponentContent);
       expect(component.getOtherPrompt('node2', 'component2')).toEqual(prompt);
     });
   });

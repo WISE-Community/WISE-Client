@@ -11,6 +11,8 @@ import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { Branch } from '../../../app/domain/branch';
 import { BranchService } from './branchService';
 import { PathService } from './pathService';
+import { ComponentContent } from '../common/ComponentContent';
+import { MultipleChoiceContent } from '../components/multipleChoice/MultipleChoiceContent';
 
 @Injectable()
 export class ProjectService {
@@ -1352,7 +1354,7 @@ export class ProjectService {
    * @param componentId the component id
    * @returns the component or null if the nodeId or componentId are null or does not exist
    */
-  getComponent(nodeId: string, componentId: string): any {
+  getComponent(nodeId: string, componentId: string): ComponentContent {
     const components = this.getComponents(nodeId);
     for (const component of components) {
       if (component.id === componentId) {
@@ -1369,13 +1371,11 @@ export class ProjectService {
    * doesn't exist in the project.
    * if the node exists but doesn't have any components, returns an empty array.
    */
-  getComponents(nodeId: string): any[] {
-    if (nodeId != null) {
-      const node = this.getNodeById(nodeId);
-      if (node != null) {
-        if (node.components != null) {
-          return node.components;
-        }
+  getComponents(nodeId: string): ComponentContent[] {
+    const node = this.getNodeById(nodeId);
+    if (node != null) {
+      if (node.components != null) {
+        return node.components;
       }
     }
     return [];
@@ -1541,7 +1541,7 @@ export class ProjectService {
    * @return The choices from the component.
    */
   getChoices(nodeId: string, componentId: string): any[] {
-    const component = this.getComponent(nodeId, componentId);
+    const component = this.getComponent(nodeId, componentId) as MultipleChoiceContent;
     return component.choices;
   }
 

@@ -1,9 +1,9 @@
 <div class="component-header" fxLayout="row wrap" fxLayoutGap="4px">
-  <prompt [prompt]="componentContent.prompt"
-      [nodeId]="nodeId"
-      [componentId]="componentContent.id"
+  <prompt [prompt]="component.content.prompt"
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
       [dynamicPrompt]="dynamicPrompt"
       (dynamicPromptChanged)="onDynamicPromptChanged($event)">
   </prompt>
-  <possible-score [maxScore]="componentContent.maxScore"></possible-score>
+  <possible-score [maxScore]="component.content.maxScore"></possible-score>
 </div>

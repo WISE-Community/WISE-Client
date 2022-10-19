@@ -4,6 +4,7 @@ import { StudentAssetsComponent } from './student-assets.component';
 import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../../common/ComponentContent';
 
 describe('StudentAssetsComponent', () => {
   let component: StudentAssetsComponent;
@@ -72,7 +73,7 @@ describe('StudentAssetsComponent', () => {
   function spyOnGetComponent(componentType: string) {
     return spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
       type: componentType
-    });
+    } as ComponentContent);
   }
 
   function spyOnBroadcastAttachStudentAsset() {

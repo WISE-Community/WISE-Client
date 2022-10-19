@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MultipleChoiceContent } from '../../../../components/multipleChoice/MultipleChoiceContent';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
@@ -218,7 +219,7 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
 
   getChoiceTypeByNodeIdAndComponentId(nodeId, componentId) {
     let choiceType = null;
-    let component = this.ProjectService.getComponent(nodeId, componentId);
+    let component = this.ProjectService.getComponent(nodeId, componentId) as MultipleChoiceContent;
     if (component != null && component.choiceType != null) {
       choiceType = component.choiceType;
     }

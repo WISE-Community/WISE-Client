@@ -23,6 +23,7 @@ import { EditConnectedComponentsComponent } from '../../../../../app/authoring-t
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { GraphContent } from '../GraphContent';
 import { EditGraphAdvancedComponent } from './edit-graph-advanced.component';
 
 let component: EditGraphAdvancedComponent;
@@ -66,7 +67,7 @@ describe('EditGraphAdvancedComponent', () => {
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({
       xAxis: {},
       yAxis: {}
-    });
+    } as GraphContent);
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);
     fixture = TestBed.createComponent(EditGraphAdvancedComponent);
     component = fixture.componentInstance;

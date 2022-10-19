@@ -4,6 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { PeerGroupStudentData } from '../../../../app/domain/peerGroupStudentData';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../common/ComponentContent';
 import { AnnotationService } from '../../services/annotationService';
 import { PeerGroupService } from '../../services/peerGroupService';
 import { ProjectService } from '../../services/projectService';
@@ -33,7 +34,7 @@ describe('DynamicPromptComponent', () => {
   beforeEach(() => {
     spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
       type: 'OpenResponse'
-    });
+    } as ComponentContent);
     fixture = TestBed.createComponent(DynamicPromptComponent);
     component = fixture.componentInstance;
     component.dynamicPrompt = createDynamicPrompt();

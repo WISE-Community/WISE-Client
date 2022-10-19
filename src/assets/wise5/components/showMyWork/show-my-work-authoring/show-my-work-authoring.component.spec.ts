@@ -11,6 +11,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ShowMyWorkAuthoringComponent } from './show-my-work-authoring.component';
 
@@ -51,7 +52,9 @@ describe('ShowMyWorkAuthoringComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowMyWorkAuthoringComponent);
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({});
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      {} as ComponentContent
+    );
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       nodeId1
     ]);
