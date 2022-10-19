@@ -282,10 +282,16 @@ class AuthoringToolController {
 
     this.subscriptions.add(
       this.TeacherDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
-        if (currentNode) {
-          this.$state.go('root.at.project.node', { nodeId: currentNode.id });
-        } else {
-          this.$state.go('root.at.project', { projectId: this.projectId });
+        const currentStateName = this.$state.$current.name;
+        if (
+          currentStateName === 'root.at.project' ||
+          currentStateName.startsWith('root.at.project.node')
+        ) {
+          if (currentNode) {
+            this.$state.go('root.at.project.node', { nodeId: currentNode.id });
+          } else {
+            this.$state.go('root.at.project', { projectId: this.projectId });
+          }
         }
       })
     );
