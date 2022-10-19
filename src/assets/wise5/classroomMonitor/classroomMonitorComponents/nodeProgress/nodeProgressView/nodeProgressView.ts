@@ -15,6 +15,7 @@ class NodeProgressViewController {
   items: any;
   maxScore: any;
   nodeId: string;
+  nodeIdToExpanded: any = {};
   rootNode: any;
   showRubricButton: boolean;
   subscriptions: Subscription = new Subscription();
@@ -244,6 +245,10 @@ class NodeProgressViewController {
       clickOutsideToClose: true,
       escapeToClose: true
     });
+  }
+
+  childExpandedEvent({ nodeId, expanded }): void {
+    this.nodeIdToExpanded[nodeId] = expanded;
   }
 }
 
