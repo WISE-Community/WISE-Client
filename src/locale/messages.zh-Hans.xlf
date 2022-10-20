@@ -1490,6 +1490,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component.ts</context>
           <context context-type="linenumber">38</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
         <target state="translated">有新的提醒</target>
       </trans-unit>
       <trans-unit id="1217086124949795770" datatype="html">
@@ -1509,6 +1513,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/classroom-monitor/step-info/step-info.component.ts</context>
           <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <target state="translated">步骤有量规或教学提示</target>
       </trans-unit>
@@ -9229,6 +9237,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">153</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
+          <context context-type="linenumber">354</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
           <context context-type="linenumber">96</context>
         </context-group>
@@ -11746,6 +11758,60 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="translated">(团队 <x id="INTERPOLATION" equiv-text="{{workgroupId}}"/>)</target>
       </trans-unit>
+      <trans-unit id="fb40aa50481325057e23a6c0b71398ff8e7aab23" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ isPrevStep ? &apos;Last viewed item&apos; : null }}"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ isPrevStep ? 'Last viewed item' : null }}"/></target>
+      </trans-unit>
+      <trans-unit id="4700433797378973817" datatype="html">
+        <source><x id="PH" equiv-text="this.nodeTitle"/> has been locked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
+          <context context-type="linenumber">236</context>
+        </context-group>
+        <target state="needs-translation"><x id="PH" equiv-text="this.nodeTitle"/> has been locked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</target>
+      </trans-unit>
+      <trans-unit id="7788246130452063015" datatype="html">
+        <source><x id="PH" equiv-text="this.nodeTitle"/> has been unlocked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
+          <context context-type="linenumber">238</context>
+        </context-group>
+        <target state="needs-translation"><x id="PH" equiv-text="this.nodeTitle"/> has been unlocked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</target>
+      </trans-unit>
+      <trans-unit id="6933068701447776492" datatype="html">
+        <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
+          <context context-type="linenumber">355</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+        <target state="needs-translation">Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></target>
+      </trans-unit>
+      <trans-unit id="3879089015607419251" datatype="html">
+        <source>Unlock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
+          <context context-type="linenumber">360</context>
+        </context-group>
+        <target state="needs-translation">Unlock for <x id="PH" equiv-text="this.getPeriodLabel()"/></target>
+      </trans-unit>
+      <trans-unit id="2330813372531032088" datatype="html">
+        <source>Lock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
+          <context context-type="linenumber">362</context>
+        </context-group>
+        <target state="needs-translation">Lock for <x id="PH" equiv-text="this.getPeriodLabel()"/></target>
+      </trans-unit>
       <trans-unit id="5411ee1bc7179f254f2db73cf448e995fca45f43" datatype="html">
         <source>Show/hide team&apos;s notebook contents</source>
         <context-group purpose="location">
@@ -11945,14 +12011,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">12</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{period.numWorkgroupsInPeriod}}"/> teams</target>
-      </trans-unit>
-      <trans-unit id="6933068701447776492" datatype="html">
-        <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
-          <context context-type="linenumber">97</context>
-        </context-group>
-        <target state="needs-translation">Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></target>
       </trans-unit>
       <trans-unit id="a69e631bd9a55827a0856f474b879a10d9ee0cd2" datatype="html">
         <source>Item Info</source>
