@@ -104,9 +104,8 @@ class ClassroomMonitorController {
         icon: 'view_list',
         type: 'primary',
         action: () => {
-          let currentView = this.$state.current.name;
-          if (currentView === 'root.cm.unit') {
-            // if we're currently grading a step, close the node when a nodeProgress menu button is clicked
+          if (this.TeacherDataService.getCurrentNode() !== this.ProjectService.rootNode) {
+            // we are not showing the root project view so go to the parent of the current node
             this.NodeService.closeNode();
           }
         },

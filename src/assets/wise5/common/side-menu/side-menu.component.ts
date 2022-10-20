@@ -15,5 +15,11 @@ export class SideMenuComponent implements OnInit {
 
   goToView(view: any): void {
     this.state.go(view.route);
+    if (view.action != null) {
+      // make sure the action is called after this.state.go(view.route) is done changing the route
+      setTimeout(() => {
+        view.action();
+      });
+    }
   }
 }
