@@ -241,7 +241,6 @@ function shouldGetTheComponent() {
 }
 
 function shouldGetTheComponentsByNodeId() {
-  ``;
   it('should get the components by node id', () => {
     service.setProject(scootersProjectJSON);
     const nullNodeIdResult = service.getComponents(null);

@@ -6,7 +6,6 @@ import { ProjectService } from '../../../services/projectService';
 import { EditMultipleChoiceConnectedComponentsComponent } from './edit-multiple-choice-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { ComponentContent } from '../../../common/ComponentContent';
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
 
 let component: EditMultipleChoiceConnectedComponentsComponent;
