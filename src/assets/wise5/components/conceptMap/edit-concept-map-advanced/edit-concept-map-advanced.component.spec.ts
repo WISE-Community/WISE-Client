@@ -22,6 +22,7 @@ import { EditConnectedComponentsComponent } from '../../../../../app/authoring-t
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ConceptMapContent } from '../ConceptMapContent';
 import { EditConceptMapAdvancedComponent } from './edit-concept-map-advanced.component';
 
 let component: EditConceptMapAdvancedComponent;
@@ -64,7 +65,7 @@ describe('EditConceptMapAdvancedComponent', () => {
   beforeEach(() => {
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({
       rules: []
-    });
+    } as ConceptMapContent);
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);
     fixture = TestBed.createComponent(EditConceptMapAdvancedComponent);
     component = fixture.componentInstance;

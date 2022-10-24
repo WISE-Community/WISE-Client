@@ -8,6 +8,7 @@ import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVeh
 import twoStepsProjectJSON_import from './sampleData/curriculum/TwoSteps.project.json';
 import { PeerGrouping } from '../domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { EmbeddedContent } from '../../assets/wise5/components/embedded/EmbeddedContent';
 
 const projectIdDefault = 1;
 const projectBaseURL = 'http://localhost:8080/curriculum/12345/';
@@ -232,7 +233,7 @@ function shouldGetTheComponent() {
     expect(componentExists).not.toBe(null);
     expect(componentExists.type).toEqual('HTML');
 
-    const componentExists2 = service.getComponent('node9', 'mnzx68ix8h');
+    const componentExists2 = service.getComponent('node9', 'mnzx68ix8h') as EmbeddedContent;
     expect(componentExists2).not.toBe(null);
     expect(componentExists2.type).toEqual('embedded');
     expect(componentExists2.url).toEqual('NewtonScooters-potential-kinetic.html');

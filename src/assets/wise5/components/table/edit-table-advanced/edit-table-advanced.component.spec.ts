@@ -21,6 +21,7 @@ import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/e
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditTableConnectedComponentsComponent } from '../edit-table-connected-components/edit-table-connected-components.component';
@@ -98,6 +99,8 @@ describe('EditTableAdvancedComponent', () => {
 function createComponent() {
   return {
     id: '9dbz79h8ge',
+    nodeId: 'node1',
+    rubric: 'rubric text',
     type: 'Table',
     prompt: '',
     showSaveButton: false,
@@ -154,7 +157,7 @@ function createComponent() {
     numDataExplorerSeries: 1,
     isDataExplorerAxisLabelsEditable: false,
     isDataExplorerScatterPlotRegressionLineEnabled: true
-  };
+  } as ComponentContent;
 }
 
 function shouldToggleDataExplorer() {

@@ -2,6 +2,7 @@ import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
+import { Component } from '../common/Component';
 import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
@@ -28,6 +29,7 @@ export abstract class ComponentStudent {
   @Output() starterStateChangedEvent = new EventEmitter<any>();
 
   attachments: any[] = [];
+  component: Component;
   componentId: string;
   componentType: string;
   prompt: SafeHtml;
@@ -64,6 +66,7 @@ export abstract class ComponentStudent {
   ) {}
 
   ngOnInit(): void {
+    this.component = new Component(this.componentContent, this.nodeId);
     this.componentId = this.componentContent.id;
     this.componentType = this.componentContent.type;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;

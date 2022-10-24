@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MultipleChoiceContent } from '../../../../components/multipleChoice/MultipleChoiceContent';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { UtilService } from '../../../../services/utilService';
@@ -389,7 +390,7 @@ export class NodeAdvancedConstraintAuthoringComponent implements OnInit {
 
   getChoiceTypeByNodeIdAndComponentId(nodeId: string, componentId: string): string {
     let choiceType = null;
-    let component = this.ProjectService.getComponent(nodeId, componentId);
+    let component = this.ProjectService.getComponent(nodeId, componentId) as MultipleChoiceContent;
     if (component != null && component.choiceType != null) {
       choiceType = component.choiceType;
     }
