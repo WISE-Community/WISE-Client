@@ -1593,9 +1593,8 @@ export class ProjectService {
   }
 
   shouldIncludeInTotalScore(nodeId: string, componentId: string): boolean {
-    return (
-      this.isNodeActive(nodeId) && !this.getComponent(nodeId, componentId)?.excludeFromTotalScore
-    );
+    const component = this.getComponent(nodeId, componentId);
+    return this.isNodeActive(nodeId) && component != null && !component.excludeFromTotalScore;
   }
 
   /**
