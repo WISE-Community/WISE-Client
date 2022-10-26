@@ -172,7 +172,7 @@ export class StudentDataService extends DataService {
       }
     }
     this.studentData.events = resultData.events;
-    this.studentData.annotations = this.getActiveAnnototations(resultData.annotations);
+    this.studentData.annotations = resultData.annotations;
     this.AnnotationService.setAnnotations(this.studentData.annotations);
     this.populateHistories(this.studentData.events);
     this.updateNodeStatuses();

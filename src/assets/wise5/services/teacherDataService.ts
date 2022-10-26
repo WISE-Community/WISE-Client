@@ -303,9 +303,8 @@ export class TeacherDataService extends DataService {
   }
 
   processAnnotations(annotations) {
-    const activeAnnotations = this.getActiveAnnototations(annotations);
-    this.studentData.annotations = activeAnnotations;
-    for (const annotation of activeAnnotations) {
+    this.studentData.annotations = annotations;
+    for (const annotation of annotations) {
       this.addAnnotationToAnnotationsToWorkgroupId(annotation);
       this.addAnnotationToAnnotationsByNodeId(annotation);
     }
