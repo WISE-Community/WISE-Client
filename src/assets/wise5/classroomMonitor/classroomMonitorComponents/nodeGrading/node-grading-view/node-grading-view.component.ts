@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Node } from '../../../../common/Node';
 import { AnnotationService } from '../../../../services/annotationService';
@@ -56,6 +56,11 @@ export class NodeGradingViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setupNode();
+    this.subscribeToEvents();
+  }
+
+  setupNode(): void {
     this.maxScore = this.getMaxScore();
     this.node = this.projectService.getNode(this.nodeId);
     this.nodeHasWork = this.projectService.nodeHasWork(this.nodeId);
@@ -64,11 +69,17 @@ export class NodeGradingViewComponent implements OnInit {
     this.milestoneReport = this.milestoneService.getMilestoneReportByNodeId(this.nodeId);
     this.peerGroupingTags = Array.from(this.peerGroupService.getPeerGroupingTags(this.node));
     this.retrieveStudentData();
-    this.subscribeToEvents();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.nodeId) {
+      this.nodeId = changes.nodeId.currentValue;
+      this.setupNode();
+    }
   }
 
   protected subscribeToEvents(): void {
@@ -427,5 +438,12 @@ export class NodeGradingViewComponent implements OnInit {
 
   showPeerGroupDetails(peerGroupingTag: string): void {
     this.peerGroupService.showPeerGroupDetails(peerGroupingTag);
+  }
+
+  trackWorkgroup(index: number, workgroup: any) {
+    return (
+      `${workgroup.workgroupId}-${workgroup.completionStatus}-${workgroup.score}-` +
+      `${workgroup.hasAlert}-${workgroup.hasNewAlert}-${workgroup.isVisible}`
+    );
   }
 }

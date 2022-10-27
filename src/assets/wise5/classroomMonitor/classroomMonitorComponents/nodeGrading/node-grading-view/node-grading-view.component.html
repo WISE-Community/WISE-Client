@@ -145,7 +145,7 @@
       </div>
     </mat-list-item>
     <div class="md-whiteframe-1dp" waIntersectionObserver waIntersectionThreshold="0.5">
-      <ng-container *ngFor="let workgroup of sortedWorkgroups">
+      <ng-container *ngFor="let workgroup of sortedWorkgroups; trackBy: trackWorkgroup">
         <ng-container *ngIf="isWorkgroupShown(workgroup)">
           <workgroup-item
               [expanded]="workVisibilityById[workgroup.workgroupId]"

@@ -1,0 +1,23 @@
+<div class="view-content--with-sidemenu" *ngIf="isGroupNode(nodeId)">
+  <div class="l-constrained l-constrained-md nav">
+    <div *ngIf="showRubricButton" class="md-subhead" fxLayout="row" fxLayoutAlign="start center">
+      <span fxFlex></span>
+      <button mat-raised-button (click)="showRubric()" class="info" i18n>
+        <mat-icon class="info">info_outline</mat-icon>
+        Unit Info
+      </button>
+    </div>
+    <div class="nav-contents nav-contents--root">
+      <div fxLayout="row wrap" fxLayoutAlign="center start">
+        <nav-item *ngFor="let id of rootNode.ids" class="nav-item nav-item--root"
+            [ngClass]="{'expanded': nodeIdToExpanded[id] === true}" [nodeId]="id"
+            [type]="'card'" (onExpandedEvent)="childExpandedEvent($event)"
+            fxFlex="100" fxFlex.sm="50" fxFlex.gt-sm="50">
+        </nav-item>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="view-content--with-sidemenu" *ngIf="isApplicationNode(nodeId)">
+  <node-grading-view [nodeId]="nodeId"></node-grading-view>
+</div>
