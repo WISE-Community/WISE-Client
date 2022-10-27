@@ -42,9 +42,11 @@ export class TableStudent extends ComponentStudent {
   notebookConfig: any;
   numDataExplorerSeries: number;
   selectedRowIndices: number[] = [];
+  sortOrder: number[] = [];
   tableData: any;
   tableId: string;
   tabulatorData: TabulatorData;
+  tabulatorSorters: any[] = [];
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -377,6 +379,10 @@ export class TableStudent extends ComponentStudent {
           ? studentData.selectedRowIndices
           : [];
 
+        this.sortOrder = studentData.sortOrder ? studentData.sortOrder : [];
+
+        this.tabulatorSorters = studentData.tabulatorSorters ? studentData.tabulatorSorters : [];
+
         this.processLatestStudentWork();
       }
     }
@@ -393,6 +399,8 @@ export class TableStudent extends ComponentStudent {
     const studentData: any = {};
     studentData.tableData = this.getCopyOfTableData(this.tableData);
     studentData.selectedRowIndices = this.getSelectedRowIndices();
+    studentData.sortOrder = this.sortOrder;
+    studentData.tabulatorSorters = this.tabulatorSorters;
     studentData.isDataExplorerEnabled = this.isDataExplorerEnabled;
     studentData.dataExplorerGraphType = this.dataExplorerGraphType;
     studentData.dataExplorerXAxisLabel = this.dataExplorerXAxisLabel;
@@ -1193,5 +1201,11 @@ export class TableStudent extends ComponentStudent {
 
   private getSelectedRowIndices(): number[] {
     return this.componentContent.enableRowSelection ? this.selectedRowIndices : [];
+  }
+
+  tabulatorRowSortChanged(sortData: any): void {
+    this.sortOrder = sortData.sortOrder;
+    this.tabulatorSorters = sortData.tabSorters;
+    this.studentDataChanged();
   }
 }
