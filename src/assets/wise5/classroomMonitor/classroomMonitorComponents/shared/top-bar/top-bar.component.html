@@ -75,13 +75,16 @@
   </button>
   <mat-menu #accountMenu
       class="account-menu account-menu--fixed-width">
-    <div class="account-menu__info" (click)="$event.stopPropagation();">
-      <div class="account-menu__info__title" fxLayout="row" fxLayoutAlign="start center">
+    <div class="account-menu__info"
+        (click)="$event.stopPropagation();"
+        fxLayout="row"
+        fxLayoutAlign="start center">
+      <div class="account-menu__info__title">
         <div class="account-menu-avatar" fxLayoutAlign="start center">
           <mat-icon style="color: {{avatarColor}}" class="mat-36"> account_circle </mat-icon>
         </div>
       </div>
-      <div>
+      <div class="mat-body-2">
         {{ userInfo.firstName }} {{ userInfo.lastName }}
         <span class="mat-caption">({{ userInfo.username }})</span>
       </div>
