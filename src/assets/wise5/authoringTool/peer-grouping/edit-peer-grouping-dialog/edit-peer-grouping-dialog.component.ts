@@ -5,7 +5,12 @@ import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuth
 import { ProjectService } from '../../../services/projectService';
 import { UtilService } from '../../../services/utilService';
 import { AuthorPeerGroupingDialogComponent } from '../author-peer-grouping-dialog/author-peer-grouping-dialog.component';
-import { DIFFERENT_IDEAS_REGEX, DIFFERENT_IDEAS_VALUE } from '../PeerGroupingLogic';
+import {
+  DIFFERENT_IDEAS_REGEX,
+  DIFFERENT_IDEAS_VALUE,
+  DIFFERENT_SCORES_REGEX,
+  DIFFERENT_SCORES_VALUE
+} from '../PeerGroupingLogic';
 import { ReferenceComponent } from '../../../../../app/domain/referenceComponent';
 
 @Component({
@@ -32,16 +37,35 @@ export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogCom
     this.logicType = this.getLogicType(this.peerGrouping.logic);
     if (this.logicType === DIFFERENT_IDEAS_VALUE) {
       this.referenceComponent = this.getDifferentIdeasReferenceComponent(this.peerGrouping.logic);
+    } else if (this.logicType === DIFFERENT_SCORES_VALUE) {
+      this.referenceComponent = this.getDifferentScoresReferenceComponent(this.peerGrouping.logic);
+      this.mode = this.getDifferentScoresMode(this.peerGrouping.logic);
     }
   }
 
   private getLogicType(logic: string): string {
-    return new RegExp(DIFFERENT_IDEAS_REGEX).exec(logic) != null ? DIFFERENT_IDEAS_VALUE : logic;
+    if (new RegExp(DIFFERENT_IDEAS_REGEX).exec(logic) != null) {
+      return DIFFERENT_IDEAS_VALUE;
+    } else if (new RegExp(DIFFERENT_SCORES_REGEX).exec(logic) != null) {
+      return DIFFERENT_SCORES_VALUE;
+    } else {
+      return logic;
+    }
   }
 
   private getDifferentIdeasReferenceComponent(logic: string): ReferenceComponent {
     const result = new RegExp(DIFFERENT_IDEAS_REGEX).exec(logic);
     return new ReferenceComponent(result[1], result[2]);
+  }
+
+  private getDifferentScoresReferenceComponent(logic: string): ReferenceComponent {
+    const result = new RegExp(DIFFERENT_SCORES_REGEX).exec(logic);
+    return new ReferenceComponent(result[1], result[2]);
+  }
+
+  private getDifferentScoresMode(logic: string): string {
+    const result = new RegExp(DIFFERENT_SCORES_REGEX).exec(logic);
+    return result[4];
   }
 
   save(): void {

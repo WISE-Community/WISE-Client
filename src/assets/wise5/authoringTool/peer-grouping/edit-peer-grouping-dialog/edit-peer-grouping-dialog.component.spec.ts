@@ -55,19 +55,35 @@ function savePeerGrouping() {
   });
 
   it('should save peer grouping with random logic', () => {
-    savePeerGroupingWithLogic('random', 'random');
+    savePeerGroupingWithLogic('random', null, 'random');
   });
 
   it('should save peer grouping with manual logic', () => {
-    savePeerGroupingWithLogic('manual', 'manual');
+    savePeerGroupingWithLogic('manual', null, 'manual');
   });
 
   it('should save peer grouping with different ideas logic', () => {
-    savePeerGroupingWithLogic(DIFFERENT_IDEAS_VALUE, 'differentIdeas("node1", "component1")');
+    savePeerGroupingWithLogic(DIFFERENT_IDEAS_VALUE, null, 'differentIdeas("node1", "component1")');
+  });
+
+  it('should save peer grouping with different scores any logic', () => {
+    savePeerGroupingWithLogic(
+      'differentKIScore',
+      'any',
+      'differentKIScore("node1", "component1", "any")'
+    );
+  });
+
+  it('should save peer grouping with different scores maximize logic', () => {
+    savePeerGroupingWithLogic(
+      'differentKIScore',
+      'maximize',
+      'differentKIScore("node1", "component1", "maximize")'
+    );
   });
 }
 
-function savePeerGroupingWithLogic(logicType: string, expectedLogic: string) {
+function savePeerGroupingWithLogic(logicType: string, mode: string, expectedLogic: string) {
   const peerGrouping = new PeerGrouping();
   component.peerGrouping = peerGrouping;
   component.logicType = logicType;
@@ -75,6 +91,7 @@ function savePeerGroupingWithLogic(logicType: string, expectedLogic: string) {
     nodeId: 'node1',
     componentId: 'component1'
   };
+  component.mode = mode;
   spyOn(TestBed.inject(PeerGroupingAuthoringService), 'updatePeerGrouping').and.returnValue(
     of(peerGrouping)
   );

@@ -4,7 +4,7 @@ import { SelectPeerGroupingOptionComponent } from './select-peer-grouping-option
 import { getDialogOpenSpy } from '../peer-grouping-testing-helper';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { DIFFERENT_IDEAS_NAME } from '../PeerGroupingLogic';
+import { DIFFERENT_IDEAS_NAME, DIFFERENT_SCORES_NAME } from '../PeerGroupingLogic';
 
 let component: SelectPeerGroupingOptionComponent;
 let deleteEventSpy: jasmine.Spy;
@@ -67,6 +67,18 @@ function setPeerGroupingLogicName() {
   });
   it('should set peer grouping logic name when logic is different ideas', () => {
     setAndExpectPeerGroupingLogic('differentIdeas("node1", "componen1")', DIFFERENT_IDEAS_NAME);
+  });
+  it('should set peer grouping logic name when logic is different scores any', () => {
+    setAndExpectPeerGroupingLogic(
+      'differentKIScore("node1", "componen1", "any")',
+      DIFFERENT_SCORES_NAME
+    );
+  });
+  it('should set peer grouping logic name when logic is different scores maximize', () => {
+    setAndExpectPeerGroupingLogic(
+      'differentKIScore("node1", "componen1", "maximize")',
+      DIFFERENT_SCORES_NAME
+    );
   });
 }
 
