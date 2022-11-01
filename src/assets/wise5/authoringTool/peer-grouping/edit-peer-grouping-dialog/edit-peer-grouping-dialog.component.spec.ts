@@ -68,17 +68,17 @@ function savePeerGrouping() {
 
   it('should save peer grouping with different scores any logic', () => {
     savePeerGroupingWithLogic(
-      'differentKIScore',
+      'differentKIScores',
       'any',
-      'differentKIScore("node1", "component1", "any")'
+      'differentKIScores("node1", "component1", "any")'
     );
   });
 
   it('should save peer grouping with different scores maximize logic', () => {
     savePeerGroupingWithLogic(
-      'differentKIScore',
+      'differentKIScores',
       'maximize',
-      'differentKIScore("node1", "component1", "maximize")'
+      'differentKIScores("node1", "component1", "maximize")'
     );
   });
 }

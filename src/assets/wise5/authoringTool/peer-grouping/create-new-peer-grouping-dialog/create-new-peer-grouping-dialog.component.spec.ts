@@ -90,12 +90,12 @@ function create_DifferentScoresMaximizeLogic_ShouldCreatePeerGroup() {
 
 function expectDifferentScoresLogicCreatenewPeerGrouping(mode: string) {
   const newPeerGrouping = new PeerGrouping({
-    logic: `differentKIScore("${REFERENCE_COMPONENT_NODE_ID1}", "${REFERENCE_COMPONENT_COMPONENT_ID1}", "${mode}")`,
+    logic: `differentKIScores("${REFERENCE_COMPONENT_NODE_ID1}", "${REFERENCE_COMPONENT_COMPONENT_ID1}", "${mode}")`,
     maxMembershipCount: 2,
     tag: TAG1
   });
   createNewPeerGroupingSpy.and.returnValue(of(newPeerGrouping));
-  component.logicType = 'differentKIScore';
+  component.logicType = 'differentKIScores';
   component.referenceComponent = new ReferenceComponent(
     REFERENCE_COMPONENT_NODE_ID1,
     REFERENCE_COMPONENT_COMPONENT_ID1

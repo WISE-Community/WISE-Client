@@ -13,7 +13,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <ng-container *ngIf="logicType === 'differentIdeas' || logicType === 'differentKIScore'">
+    <ng-container *ngIf="logicType === 'differentIdeas' || logicType === 'differentKIScores'">
       <edit-connected-component-node-select
           [connectedComponent]="referenceComponent"
           (connectedComponentChange)="referenceComponentNodeIdChanged($event)">
@@ -23,7 +23,7 @@
           [allowedConnectedComponentTypes]="allowedReferenceComponentTypes">
       </edit-connected-component-component-select>
     </ng-container>
-    <ng-container *ngIf="logicType === 'differentKIScore'">
+    <ng-container *ngIf="logicType === 'differentKIScores'">
       <mat-form-field>
         <mat-label i18n>Mode</mat-label>
         <mat-select [(ngModel)]="mode">

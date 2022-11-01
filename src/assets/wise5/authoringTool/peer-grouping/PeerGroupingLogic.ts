@@ -7,8 +7,8 @@ export const DIFFERENT_IDEAS_NAME = $localize`Different Ideas`;
 export const DIFFERENT_IDEAS_REGEX = /differentIdeas\("(\w+)",\s*"(\w+)"\)/g;
 export const DIFFERENT_IDEAS_VALUE = 'differentIdeas';
 export const DIFFERENT_SCORES_NAME = $localize`Different Scores`;
-export const DIFFERENT_SCORES_REGEX = /differentKIScore\("(\w+)",\s*"(\w+)?"(,\s*")?(\w+)?(")?\)/g;
-export const DIFFERENT_SCORES_VALUE = 'differentKIScore';
+export const DIFFERENT_SCORES_REGEX = /differentKIScores\("(\w+)",\s*"(\w+)?"(,\s*")?(\w+)?(")?\)/g;
+export const DIFFERENT_SCORES_VALUE = 'differentKIScores';
 
 export const AVAILABLE_LOGIC: PeerGroupingLogic[] = [
   { name: $localize`Random`, value: 'random' },

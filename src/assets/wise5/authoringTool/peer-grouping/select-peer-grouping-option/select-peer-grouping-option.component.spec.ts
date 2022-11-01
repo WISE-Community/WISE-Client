@@ -70,13 +70,13 @@ function setPeerGroupingLogicName() {
   });
   it('should set peer grouping logic name when logic is different scores any', () => {
     setAndExpectPeerGroupingLogic(
-      'differentKIScore("node1", "componen1", "any")',
+      'differentKIScores("node1", "componen1", "any")',
       DIFFERENT_SCORES_NAME
     );
   });
   it('should set peer grouping logic name when logic is different scores maximize', () => {
     setAndExpectPeerGroupingLogic(
-      'differentKIScore("node1", "componen1", "maximize")',
+      'differentKIScores("node1", "componen1", "maximize")',
       DIFFERENT_SCORES_NAME
     );
   });
