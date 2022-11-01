@@ -1396,6 +1396,14 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step/choose-import-step.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
         <target state="translated">Vista previa de la Unidad</target>
       </trans-unit>
       <trans-unit id="0fb1aad24bc0920a8c5e9d43e320e261dbca3f09" datatype="html">
@@ -1552,7 +1560,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <target state="translated">Limpiar</target>
       </trans-unit>
@@ -5246,6 +5254,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/register/register.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
         <target state="translated">Logo de WISE</target>
       </trans-unit>
       <trans-unit id="e19fcf996343543e13789f17b550ab0c08124b5c" datatype="html">
@@ -8648,6 +8660,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
         <target state="translated">Información de la Unidad</target>
       </trans-unit>
       <trans-unit id="c182679b176fe796dea0ffeba15359edec6fffbc" datatype="html">
@@ -11848,7 +11864,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Pause Student Screens</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <target state="translated">Pausar pantalla de estudiantes</target>
       </trans-unit>
@@ -11856,7 +11876,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Pause student screens (Period: All Periods)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <target state="translated">Pausar pantalla de estudiantes (Período: todos)</target>
       </trans-unit>
@@ -11864,7 +11884,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> All Periods </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
-          <context context-type="linenumber">18,20</context>
+          <context context-type="linenumber">17,19</context>
         </context-group>
         <target state="translated"> Todos los períodos </target>
       </trans-unit>
@@ -11872,7 +11892,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Pause student screens (Period: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <target state="translated">Pausar pantalla de estudiantes (Período: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/>)</target>
       </trans-unit>
@@ -11880,7 +11900,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> Period: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
-          <context context-type="linenumber">28,30</context>
+          <context context-type="linenumber">27,29</context>
         </context-group>
         <target state="translated"> Período: <x id="INTERPOLATION" equiv-text="{{period.periodName}}"/> </target>
       </trans-unit>
@@ -12024,7 +12044,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Alerts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
@@ -12036,11 +12060,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Clear all notifications</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target state="translated">Borrar todas las notificaciones</target>
       </trans-unit>
@@ -12048,7 +12072,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>You have no new alerts at this time.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <target state="translated">No tiene alertas en este momento.</target>
       </trans-unit>
@@ -12056,7 +12080,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Go to <x id="INTERPOLATION" equiv-text="{{ getNodePositionAndTitle(notification.nodeId) }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <target state="needs-translation">Go to <x id="INTERPOLATION" equiv-text="{{ getNodePositionAndTitle(notification.nodeId) }}"/></target>
       </trans-unit>
@@ -12087,6 +12111,62 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="linenumber">8</context>
         </context-group>
         <target state="translated">Menú ppal</target>
+      </trans-unit>
+      <trans-unit id="79121392b27b0dec2b6b93e6c6080d7644adeb5b" datatype="html">
+        <source>Switch to Authoring View</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target state="needs-translation">Switch to Authoring View</target>
+      </trans-unit>
+      <trans-unit id="ffac8783eaf153173408c8a9014a7484fa6a9175" datatype="html">
+        <source>User Menu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+        <target state="needs-translation">User Menu</target>
+      </trans-unit>
+      <trans-unit id="198c48cd09b7766410bfeca2dad7f3fa08bf8e48" datatype="html">
+        <source> Go Home </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">97,99</context>
+        </context-group>
+        <target state="needs-translation"> Go Home </target>
+      </trans-unit>
+      <trans-unit id="d03a265c20b6d1b20ceabc5938d1046689c73891" datatype="html">
+        <source> Sign Out </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
+          <context context-type="linenumber">105,107</context>
+        </context-group>
+        <target state="needs-translation"> Sign Out </target>
+      </trans-unit>
+      <trans-unit id="3275557751683993510" datatype="html">
+        <source>Run ID: <x id="PH" equiv-text="this.runId"/> | Access Code: <x id="PH_1" equiv-text="this.runCode"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <target state="needs-translation">Run ID: <x id="PH" equiv-text="this.runId"/> | Access Code: <x id="PH_1" equiv-text="this.runCode"/></target>
+      </trans-unit>
+      <trans-unit id="3546597756684436742" datatype="html">
+        <source>Warning! You will be editing the content of a classroom unit. If students have already started working, this may result in lost data or other problems.
+
+Are you sure you want to proceed?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+        <target state="needs-translation">Warning! You will be editing the content of a classroom unit. If students have already started working, this may result in lost data or other problems.
+
+Are you sure you want to proceed?</target>
       </trans-unit>
       <trans-unit id="2533bf42152adabc1092cc52494ab0cc211c350a" datatype="html">
         <source>Previous Team</source>
