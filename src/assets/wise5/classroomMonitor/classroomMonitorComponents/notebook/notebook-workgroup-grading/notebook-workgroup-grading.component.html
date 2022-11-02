@@ -1,10 +1,10 @@
 <div class="md-whiteframe-1dp">
-  <div matSubheader class="list-item md-whiteframe-1dp">
+  <div class="list-item md-whiteframe-1dp">
     <button mat-button
-        class="md-button md-ink-ripple list-item__subheader-button row-button"
+        (click)="toggleExpand()"
+        class="md-button md-ink-ripple list-item__subheader-button row-button "
         aria-label="Show/hide team's notebook contents"
-        i18n-aria-label
-        (click)="toggleExpand()">
+        i18n-aria-label>
       <div fxLayout="row" fxFlex>
         <div fxLayout="row" fxLayoutAlign="center center" fxFlex="10">
           {{ workgroup.workgroupId }}

@@ -12,9 +12,10 @@ import './classroomMonitorComponents/notebook/notebook';
 import '../components/component-grading.module';
 import './dataExport/data-export-module';
 import ClassroomMonitorController from './classroomMonitorController';
-import NotebookGradingController from './notebook/notebookGradingController';
 import StudentGradingController from './studentGrading/studentGradingController';
 import StudentProgressController from './studentProgress/studentProgressController';
+import { downgradeComponent } from '@angular/upgrade/static';
+import { NotebookGradingComponent } from './notebook-grading/notebook-grading.component';
 
 export default angular
   .module('classroomMonitor', [
@@ -30,7 +31,7 @@ export default angular
     'studentProgress'
   ])
   .controller('ClassroomMonitorController', ClassroomMonitorController)
-  .controller('NotebookGradingController', NotebookGradingController)
+  .directive('notebookGrading', downgradeComponent({ component: NotebookGradingComponent }))
   .controller('StudentGradingController', StudentGradingController)
   .controller('StudentProgressController', StudentProgressController)
   .config([
@@ -188,9 +189,7 @@ export default angular
         })
         .state('root.cm.notebooks', {
           url: '/notebook',
-          templateUrl: '/assets/wise5/classroomMonitor/notebook/notebookGrading.html',
-          controller: 'NotebookGradingController',
-          controllerAs: 'notebookGradingController'
+          component: 'notebookGrading'
         });
       $translatePartialLoaderProvider.addPart('classroomMonitor/i18n');
       $mdThemingProvider

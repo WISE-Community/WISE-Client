@@ -56,6 +56,7 @@ import { MilestoneGradingViewComponent } from '../../assets/wise5/classroomMonit
 import { NotificationsMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component';
 import { NavItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component';
 import { TopBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component';
+import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { TopBarComponent } from '../../assets/wise5/classroomMonitor/classroomMo
     NavItemProgressComponent,
     NodeInfoComponent,
     NodeGradingViewComponent,
+    NotebookGradingComponent,
     NotebookWorkgroupGradingComponent,
     NotificationsMenuComponent,
     PauseScreensMenuComponent,
