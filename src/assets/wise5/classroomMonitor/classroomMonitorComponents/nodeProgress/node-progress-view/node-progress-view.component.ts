@@ -86,6 +86,12 @@ export class NodeProgressViewComponent implements OnInit {
         this.teacherDataService.endCurrentNodeAndSetCurrentNodeByNodeId(toNodeId);
       }
 
+      if (toNodeId === 'group0') {
+        this.collapseAll();
+      } else {
+        this.nodeIdToExpanded[toNodeId] = true;
+      }
+
       if ($transition.name === 'root.cm.unit.node') {
         if (this.projectService.isApplicationNode(toNodeId)) {
           document.getElementById('content').scrollTop = 0;
@@ -152,9 +158,13 @@ export class NodeProgressViewComponent implements OnInit {
   }
 
   childExpandedEvent({ nodeId, expanded }): void {
+    this.collapseAll();
+    this.nodeIdToExpanded[nodeId] = expanded;
+  }
+
+  collapseAll(): void {
     for (const key of Object.keys(this.nodeIdToExpanded)) {
       this.nodeIdToExpanded[key] = false;
     }
-    this.nodeIdToExpanded[nodeId] = expanded;
   }
 }
