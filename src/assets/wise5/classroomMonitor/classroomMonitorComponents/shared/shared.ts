@@ -15,6 +15,7 @@ import { PauseScreensMenuComponent } from '../pause-screens-menu/pause-screens-m
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { MainMenuComponent } from '../../../common/main-menu/main-menu.component';
 import { NotificationsMenuComponent } from './notifications-menu/notifications-menu.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
 
 const Shared = angular
   .module('cmShared', [])
@@ -50,7 +51,10 @@ const Shared = angular
     'cmToolbar',
     downgradeComponent({ component: ToolBarComponent }) as angular.IDirectiveFactory
   )
-  .component('cmTopBar', TopBar)
+  .directive(
+    'cmTopBar',
+    downgradeComponent({ component: TopBarComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'workgroupNodeScore',
     downgradeComponent({ component: WorkgroupNodeScoreComponent }) as angular.IDirectiveFactory

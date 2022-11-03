@@ -36,6 +36,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.module';
 import { StudentTeacherCommonServicesModule } from './student-teacher-common-services.module';
 import { MathModule } from './math/math.module';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { MathModule } from './math/math.module';
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatRadioModule,
@@ -99,6 +101,7 @@ import { MathModule } from './math/math.module';
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatRadioModule,
