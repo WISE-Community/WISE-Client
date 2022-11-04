@@ -33,33 +33,42 @@ export class NodeProgressViewComponent implements OnInit {
   ngOnInit(): void {
     this.items = this.projectService.idToOrder;
     this.maxScore = this.projectService.getMaxScore();
-    let stateParamNodeId = null;
-
-    const stateParams = this.upgrade.$injector.get('$stateParams');
-    if (stateParams != null) {
-      stateParamNodeId = stateParams.nodeId;
-    }
-
-    if (stateParamNodeId != null && stateParamNodeId !== '') {
-      this.nodeId = stateParamNodeId;
-    }
-
-    if (this.nodeId == null || this.nodeId === '') {
-      this.nodeId = this.projectService.rootNode.id;
-    }
-
+    this.nodeId = this.getNodeId();
     this.teacherDataService.setCurrentNodeByNodeId(this.nodeId);
-    let startNodeId = this.projectService.getStartNodeId();
+    const startNodeId = this.projectService.getStartNodeId();
     this.rootNode = this.projectService.getRootNode(startNodeId);
     this.currentGroup = this.rootNode;
     if (this.currentGroup != null) {
       this.currentGroupId = this.currentGroup.id;
     }
-    this.showRubricButton = false;
-    if (this.projectHasRubric()) {
-      this.showRubricButton = true;
+    this.showRubricButton = this.projectHasRubric();
+    this.subscribeToCurrentNodeChanged();
+    this.subscribeToCurrentWorkgroupChanged();
+    this.listenForTransitions();
+    if (!this.isShowingNodeGradingView()) {
+      this.saveNodeProgressViewDisplayedEvent();
+    }
+  }
+
+  private getNodeId(): string {
+    let nodeId = null;
+
+    const stateParams = this.upgrade.$injector.get('$stateParams');
+    if (stateParams != null) {
+      const stateParamNodeId = stateParams.nodeId;
+      if (stateParamNodeId != null && stateParamNodeId !== '') {
+        nodeId = stateParamNodeId;
+      }
     }
 
+    if (nodeId == null || nodeId === '') {
+      nodeId = this.projectService.rootNode.id;
+    }
+
+    return nodeId;
+  }
+
+  private subscribeToCurrentNodeChanged(): void {
     this.subscriptions.add(
       this.teacherDataService.currentNodeChanged$.subscribe(({ currentNode }) => {
         this.nodeId = currentNode.id;
@@ -71,13 +80,17 @@ export class NodeProgressViewComponent implements OnInit {
         this.upgrade.$injector.get('$state').go('root.cm.unit.node', { nodeId: this.nodeId });
       })
     );
+  }
 
+  private subscribeToCurrentWorkgroupChanged(): void {
     this.subscriptions.add(
       this.teacherDataService.currentWorkgroupChanged$.subscribe(({ currentWorkgroup }) => {
         this.currentWorkgroup = currentWorkgroup;
       })
     );
+  }
 
+  private listenForTransitions(): void {
     this.upgrade.$injector.get('$transitions').onSuccess({}, ($transition) => {
       const toNodeId = $transition.params('to').nodeId;
       const fromNodeId = $transition.params('from').nodeId;
@@ -98,9 +111,6 @@ export class NodeProgressViewComponent implements OnInit {
         }
       }
     });
-    if (!this.isShowingNodeGradingView()) {
-      this.saveNodeProgressViewDisplayedEvent();
-    }
   }
 
   ngOnDestroy(): void {
@@ -139,11 +149,8 @@ export class NodeProgressViewComponent implements OnInit {
   }
 
   private projectHasRubric(): boolean {
-    var projectRubric = this.projectService.getProjectRubric();
-    if (projectRubric != null && projectRubric != '') {
-      return true;
-    }
-    return false;
+    const projectRubric = this.projectService.getProjectRubric();
+    return projectRubric != null && projectRubric != '';
   }
 
   showRubric(): void {
