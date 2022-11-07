@@ -1,8 +1,8 @@
 <div class="md-whiteframe-1dp">
-  <div class="list-item md-whiteframe-1dp">
+  <div class="list-item">
     <button mat-button
         (click)="toggleExpand()"
-        class="md-button md-ink-ripple list-item__subheader-button row-button "
+        class="list-item__subheader-button row-button "
         aria-label="Show/hide team's notebook contents"
         i18n-aria-label>
       <div fxLayout="row" fxFlex>
@@ -32,18 +32,17 @@
       </div>
     </button>
   </div>
-  <mat-list-item *ngIf="expand" class="grading__item-container" style="margin-bottom: 16px">
-    <mat-tab-group class="md-body-2 gray-lightest-bg" md-dynamic-height md-border-bottom fxFlex>
+  <mat-list-item *ngIf="expand" class="grading__item-container">
+    <mat-tab-group class="mat-body-2 app-bg-bg" fxFlex>
       <mat-tab *ngIf="notesEnabled" label="Notes" i18n-label>
-        <notebook-notes class="notebook-grading"
-            [mode]="'classroomMonitor'"
+        <notebook-notes [mode]="'classroomMonitor'"
             [config]="notebookConfig"
             [viewOnly]="true"
             [workgroupId]="workgroup.workgroupId">
         </notebook-notes>
       </mat-tab>
       <mat-tab *ngIf="reportEnabled" label="{{ reportTitle }}">
-        <notebook-report class="notebook-grading md-padding"
+        <notebook-report class="report-grading"
             [mode]="'classroomMonitor'"
             [config]="notebookConfig"
             [workgroupId]="workgroup.workgroupId">

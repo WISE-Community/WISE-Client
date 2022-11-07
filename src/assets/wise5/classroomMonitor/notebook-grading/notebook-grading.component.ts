@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { NotebookService } from '../../services/notebookService';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -7,7 +7,8 @@ import { UtilService } from '../../services/utilService';
 @Component({
   selector: 'notebook-grading',
   templateUrl: './notebook-grading.component.html',
-  styleUrls: ['./notebook-grading.component.scss']
+  styleUrls: ['./notebook-grading.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NotebookGradingComponent implements OnInit {
   canViewStudentNames: boolean;
