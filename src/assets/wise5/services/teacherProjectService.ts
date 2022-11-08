@@ -3,6 +3,12 @@ import * as angular from 'angular';
 import { ProjectService } from './projectService';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { UtilService } from './utilService';
+import { BranchService } from './branchService';
+import { ComponentServiceLookupService } from './componentServiceLookupService';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './configService';
+import { PathService } from './pathService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -22,6 +28,17 @@ export class TeacherProjectService extends ProjectService {
   public projectSaved$: Observable<any> = this.projectSavedSource.asObservable();
   private savingProjectSource: Subject<any> = new Subject<any>();
   public savingProject$: Observable<any> = this.savingProjectSource.asObservable();
+
+  constructor(
+    protected branchService: BranchService,
+    protected componentServiceLookupService: ComponentServiceLookupService,
+    protected http: HttpClient,
+    protected configService: ConfigService,
+    protected pathService: PathService,
+    private utilService: UtilService
+  ) {
+    super(branchService, componentServiceLookupService, http, configService, pathService);
+  }
 
   getNewProjectTemplate() {
     return {
@@ -171,7 +188,7 @@ export class TeacherProjectService extends ProjectService {
     return new Promise((resolve, reject) => {
       if (projectId == null) {
         if (this.project != null) {
-          projectId = this.ConfigService.getProjectId();
+          projectId = this.configService.getProjectId();
         } else {
           resolve({});
         }
@@ -209,7 +226,7 @@ export class TeacherProjectService extends ProjectService {
    */
   registerNewProject(projectName, projectJSONString) {
     return this.http
-      .post(this.ConfigService.getConfigParam('registerNewProjectURL'), {
+      .post(this.configService.getConfigParam('registerNewProjectURL'), {
         projectName: projectName,
         projectJSONString: projectJSONString
       })
@@ -893,11 +910,11 @@ export class TeacherProjectService extends ProjectService {
   }
 
   getAutomatedAssessmentProjectId(): number {
-    return this.ConfigService.getConfigParam('automatedAssessmentProjectId') || -1;
+    return this.configService.getConfigParam('automatedAssessmentProjectId') || -1;
   }
 
   getSimulationProjectId(): number {
-    return this.ConfigService.getConfigParam('simulationProjectId') || -1;
+    return this.configService.getConfigParam('simulationProjectId') || -1;
   }
 
   /**
@@ -995,7 +1012,7 @@ export class TeacherProjectService extends ProjectService {
 
   addTeacherRemovalConstraint(node: any, periodId: number) {
     const lockConstraint = {
-      id: this.UtilService.generateKey(),
+      id: this.utilService.generateKey(),
       action: 'makeThisNodeNotVisitable',
       targetId: node.id,
       removalConditional: 'any',
@@ -1027,7 +1044,7 @@ export class TeacherProjectService extends ProjectService {
    * if Config.saveProjectURL or Config.projectId are undefined, does not save and returns null
    */
   saveProject(): any {
-    if (!this.ConfigService.getConfigParam('canEditProject')) {
+    if (!this.configService.getConfigParam('canEditProject')) {
       this.broadcastNotAllowedToEditThisProject();
       return null;
     }
@@ -1038,7 +1055,7 @@ export class TeacherProjectService extends ProjectService {
     );
     return this.http
       .post(
-        this.ConfigService.getConfigParam('saveProjectURL'),
+        this.configService.getConfigParam('saveProjectURL'),
         angular.toJson(this.project, false)
       )
       .toPromise()
@@ -1052,8 +1069,8 @@ export class TeacherProjectService extends ProjectService {
   }
 
   addCurrentUserToAuthors(authors: any[]): any[] {
-    let userInfo = this.ConfigService.getMyUserInfo();
-    if (this.ConfigService.isClassroomMonitor()) {
+    let userInfo = this.configService.getMyUserInfo();
+    if (this.configService.isClassroomMonitor()) {
       userInfo = {
         id: userInfo.userIds[0],
         firstName: userInfo.firstName,
@@ -1267,7 +1284,7 @@ export class TeacherProjectService extends ProjectService {
         id: this.getNextAvailableConstraintIdForNodeId(node.id),
         action: branchPathTakenConstraint.action,
         targetId: node.id,
-        removalCriteria: this.UtilService.makeCopyOfJSONObject(
+        removalCriteria: this.utilService.makeCopyOfJSONObject(
           branchPathTakenConstraint.removalCriteria
         )
       };
@@ -1814,7 +1831,7 @@ export class TeacherProjectService extends ProjectService {
              * copy the transition logic to the node that comes
              * before it
              */
-            node.transitionLogic = this.UtilService.makeCopyOfJSONObject(
+            node.transitionLogic = this.utilService.makeCopyOfJSONObject(
               nodeToRemoveTransitionLogic
             );
 
@@ -2806,7 +2823,7 @@ export class TeacherProjectService extends ProjectService {
     // we want to make an id with 10 characters
     const idLength = 10;
 
-    let newComponentId = this.UtilService.generateKey(idLength);
+    let newComponentId = this.utilService.generateKey(idLength);
 
     // check if the component id is already used in the project
     if (this.isComponentIdUsed(newComponentId)) {
@@ -2821,7 +2838,7 @@ export class TeacherProjectService extends ProjectService {
        * one that isn't already being used
        */
       while (!alreadyUsed) {
-        newComponentId = this.UtilService.generateKey(idLength);
+        newComponentId = this.utilService.generateKey(idLength);
 
         // check if the id is already being used in the project
         alreadyUsed = this.isComponentIdUsed(newComponentId);
@@ -3068,7 +3085,7 @@ export class TeacherProjectService extends ProjectService {
 
   getFeaturedProjectIcons() {
     return this.http
-      .get(this.ConfigService.getConfigParam('featuredProjectIconsURL'))
+      .get(this.configService.getConfigParam('featuredProjectIconsURL'))
       .toPromise()
       .then((data) => {
         return data;
@@ -3087,8 +3104,8 @@ export class TeacherProjectService extends ProjectService {
 
   setProjectIcon(projectIcon, isCustom) {
     return this.http
-      .post(this.ConfigService.getConfigParam('projectIconURL'), {
-        projectId: this.ConfigService.getProjectId(),
+      .post(this.configService.getConfigParam('projectIconURL'), {
+        projectId: this.configService.getProjectId(),
         projectIcon: projectIcon,
         isCustom: isCustom
       })

@@ -1,7 +1,6 @@
 'use strict';
 
 import { ConfigService } from './configService';
-import { UtilService } from './utilService';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
@@ -46,9 +45,8 @@ export class ProjectService {
     protected branchService: BranchService,
     protected componentServiceLookupService: ComponentServiceLookupService,
     protected http: HttpClient,
-    protected ConfigService: ConfigService,
-    protected pathService: PathService,
-    protected UtilService: UtilService
+    protected configService: ConfigService,
+    protected pathService: PathService
   ) {}
 
   setProject(project: any): void {
@@ -206,8 +204,8 @@ export class ProjectService {
 
       if (constraints != null) {
         if (
-          this.ConfigService.isPreview() == true &&
-          this.ConfigService.getConfigParam('constraints') === false
+          this.configService.isPreview() == true &&
+          this.configService.getConfigParam('constraints') === false
         ) {
           /*
            * if we are in preview mode and constraints are set
@@ -432,7 +430,7 @@ export class ProjectService {
   replaceAssetPaths(contentString: string): string {
     if (contentString != null) {
       // get the content base url e.g. http://wise.berkeley.edu/curriculum/123456/
-      const contentBaseURL = this.ConfigService.getConfigParam('projectBaseURL');
+      const contentBaseURL = this.configService.getConfigParam('projectBaseURL');
 
       // only look for string that starts with ' or " and ends in png, jpg, jpeg, pdf, etc.
       // the string we're looking for can't start with '/ and "/.
@@ -886,7 +884,7 @@ export class ProjectService {
    * If Config.projectURL is undefined, returns null.
    */
   retrieveProject(): any {
-    let projectURL = this.ConfigService.getConfigParam('projectURL');
+    let projectURL = this.configService.getConfigParam('projectURL');
     if (projectURL == null) {
       return null;
     }
@@ -905,7 +903,7 @@ export class ProjectService {
   }
 
   private getDefaultThemePath(): string {
-    return `${this.ConfigService.getWISEBaseURL()}/assets/wise5/themes/default`;
+    return `${this.configService.getWISEBaseURL()}/assets/wise5/themes/default`;
   }
 
   /**
