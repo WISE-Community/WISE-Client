@@ -260,7 +260,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState) {
-    const studentData = this.UtilService.makeCopyOfJSONObject(componentState.studentData);
+    const studentData = componentState.studentData;
     if (studentData.tableData.length > 0) {
       studentData.tableData = this.getFilteredAndSortedTableData(
         studentData.tableData,
