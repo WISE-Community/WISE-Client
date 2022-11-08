@@ -1,15 +1,18 @@
 'use strict';
 
-import NodeProgressView from './nodeProgressView/nodeProgressView';
 import * as angular from 'angular';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { NavItemScoreComponent } from './navItemScore/nav-item-score.component';
 import { NavItemProgressComponent } from '../../../../../app/classroom-monitor/nav-item-progress/nav-item-progress.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
+import { NodeProgressViewComponent } from './node-progress-view/node-progress-view.component';
 
 const NodeProgress = angular
   .module('nodeProgress', [])
-  .component('nodeProgressView', NodeProgressView)
+  .directive(
+    'nodeProgressView',
+    downgradeComponent({ component: NodeProgressViewComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'navItem',
     downgradeComponent({ component: NavItemComponent }) as angular.IDirectiveFactory

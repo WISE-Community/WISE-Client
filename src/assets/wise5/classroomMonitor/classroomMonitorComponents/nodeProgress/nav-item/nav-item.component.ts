@@ -138,6 +138,7 @@ export class NavItemComponent implements OnInit {
               this.zoomToElement();
             }
           } else {
+            this.expanded = false;
             if (!prevNodeIsGroup) {
               if (prevNodeIsDescendant) {
                 this.expanded = true;
