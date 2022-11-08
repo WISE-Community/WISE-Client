@@ -14,7 +14,7 @@
                 color="primary"
                 aria-label="Expand All"
                 i18n-aria-label
-                class="button--small md-primary"
+                class="button--small"
                 (click)="expandAll()"
                 i18n>
               + Expand All
@@ -23,7 +23,7 @@
                 color="primary"
                 aria-label="Collapse All"
                 i18n-aria-label
-                class="button--small md-primary"
+                class="button--small"
                 (click)="collapseAll()"
                 i18n>
               - Collapse All
@@ -40,7 +40,7 @@
               (click)="setSort('team')"
               title="Sort By Team"
               i18n-title
-              fxFlex="12">
+              fxFlex="15">
             <span i18n>Team</span>
             <mat-icon *ngIf="sort === 'team' || sort === '-team'"
                 class="text-light table--list__thead__sort"
@@ -75,7 +75,7 @@
               i18n-title
               fxLayout="row"
               fxLayoutAlign="center center"
-              fxFlex="10">
+              fxFlex="15">
             <span i18n>Notes</span>
             <mat-icon *ngIf="sort === 'notes' || sort === '-notes'"
                 class="text-light table--list__thead__sort"

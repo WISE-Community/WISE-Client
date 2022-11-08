@@ -6,17 +6,17 @@
         aria-label="Show/hide team's notebook contents"
         i18n-aria-label>
       <div fxLayout="row" fxFlex>
-        <div fxLayout="row" fxLayoutAlign="center center" fxFlex="10">
+        <div fxLayout="row" fxLayoutAlign="center center" fxFlex="15">
           {{ workgroup.workgroupId }}
         </div>
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
           {{ workgroup.displayNames }}
         </div>
         <div *ngIf="notesEnabled"
-            class="md-title"
+            class="mat-title"
             fxLayout="row"
             fxLayoutAlign="center center"
-            fxFlex="10">
+            fxFlex="15">
           <span [ngClass]="{ 'text-secondary': getNumActiveNotes() === 0 }">
             {{ getNumActiveNotes() }}
           </span>
