@@ -11,7 +11,10 @@ import { NodeGradingViewComponent } from './node-grading-view/node-grading-view.
 
 const NodeGrading = angular
   .module('nodeGrading', [])
-  .directive('nodeGradingView', downgradeComponent({ component: NodeGradingViewComponent }))
+  .directive(
+    'nodeGradingView',
+    downgradeComponent({ component: NodeGradingViewComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'componentSelect',
     downgradeComponent({ component: ComponentSelectComponent }) as angular.IDirectiveFactory

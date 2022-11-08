@@ -169,13 +169,11 @@ export default angular
         })
         .state('root.cm.unit', {
           url: '',
-          component: 'nodeProgressView',
-          params: { nodeId: null }
+          component: 'nodeProgressView'
         })
         .state('root.cm.unit.node', {
           url: '/node/:nodeId',
-          component: 'nodeProgressView',
-          params: { nodeId: null }
+          component: 'nodeProgressView'
         })
         .state('root.cm.dashboard', {
           url: '/dashboard',
