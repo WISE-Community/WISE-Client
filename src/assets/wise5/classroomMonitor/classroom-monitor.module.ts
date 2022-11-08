@@ -12,10 +12,10 @@ import './classroomMonitorComponents/notebook/notebook';
 import '../components/component-grading.module';
 import './dataExport/data-export-module';
 import ClassroomMonitorController from './classroomMonitorController';
-import StudentGradingController from './studentGrading/studentGradingController';
 import StudentProgressController from './studentProgress/studentProgressController';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { NotebookGradingComponent } from './notebook-grading/notebook-grading.component';
+import { StudentGradingComponent } from './student-grading/student-grading.component';
 
 export default angular
   .module('classroomMonitor', [
@@ -32,7 +32,10 @@ export default angular
   ])
   .controller('ClassroomMonitorController', ClassroomMonitorController)
   .directive('notebookGrading', downgradeComponent({ component: NotebookGradingComponent }))
-  .controller('StudentGradingController', StudentGradingController)
+  .directive(
+    'studentGrading',
+    downgradeComponent({ component: StudentGradingComponent }) as angular.IDirectiveFactory
+  )
   .controller('StudentProgressController', StudentProgressController)
   .config([
     '$stateProvider',
@@ -151,9 +154,7 @@ export default angular
         })
         .state('root.cm.team', {
           url: '/team/:workgroupId',
-          templateUrl: '/assets/wise5/classroomMonitor/studentGrading/studentGrading.html',
-          controller: 'StudentGradingController',
-          controllerAs: 'studentGradingController',
+          component: 'studentGrading',
           resolve: {
             studentData: [
               '$stateParams',

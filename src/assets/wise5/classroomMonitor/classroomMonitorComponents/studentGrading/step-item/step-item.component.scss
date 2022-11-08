@@ -1,7 +1,14 @@
 .grading__item {
-  margin: 0 0 16px;
+  width: 100%;
+  margin: 0;
 }
 
 .list-item {
+  height: auto;
   padding: 0;
+  margin: 0 !important;
+}
+
+.grading__item-container {
+  height: auto;
 }
