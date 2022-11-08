@@ -32,11 +32,15 @@ export class WorkgroupItemComponent {
   ) {}
 
   ngOnInit(): void {
+    this.updateNode();
+    this.updateStatus();
+  }
+
+  updateNode(): void {
     this.nodeHasWork = this.projectService.nodeHasWork(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId).filter((component) => {
       return this.projectService.componentHasWork(component);
     });
-    this.update();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -50,8 +54,11 @@ export class WorkgroupItemComponent {
       this.hasNewAlert = workgroupData.hasNewAlert;
       this.status = workgroupData.completionStatus;
       this.score = workgroupData.score != null ? workgroupData.score : '-';
+      this.updateStatus();
     }
-    this.update();
+    if (changes.nodeId) {
+      this.updateNode();
+    }
   }
 
   isComponentVisible(componentId: string): boolean {
@@ -62,7 +69,7 @@ export class WorkgroupItemComponent {
     return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
-  private update(): void {
+  private updateStatus(): void {
     switch (this.status) {
       case -1:
         this.statusClass = ' ';
