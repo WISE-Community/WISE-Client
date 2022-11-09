@@ -106,7 +106,7 @@ export class VLEProjectService extends ProjectService {
 
   retrieveScript(scriptFilename) {
     return this.http
-      .get(`${this.ConfigService.getProjectAssetsDirectoryPath()}/${scriptFilename}`)
+      .get(`${this.configService.getProjectAssetsDirectoryPath()}/${scriptFilename}`)
       .toPromise()
       .then((result: any) => {
         return result.data;

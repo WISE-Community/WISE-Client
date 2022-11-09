@@ -17046,7 +17046,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7975589013595125523" datatype="html">
@@ -17057,11 +17057,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">105</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5946383547512220582" datatype="html">
@@ -17072,11 +17072,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">106</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3177789104763917185" datatype="html">
@@ -17094,7 +17094,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6590475405017990661" datatype="html">
@@ -17105,7 +17105,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7008439939460403347" datatype="html">
@@ -17116,7 +17116,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4200122564420479235" datatype="html">
@@ -17158,112 +17158,112 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Complete &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1436</context>
+          <context context-type="linenumber">1434</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4750375498606149231" datatype="html">
         <source>Visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1442</context>
+          <context context-type="linenumber">1440</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6126058561630526429" datatype="html">
         <source>Correctly answer &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1448</context>
+          <context context-type="linenumber">1446</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7085241847460263487" datatype="html">
         <source>Obtain a score of &lt;b&gt;<x id="PH" equiv-text="scoresString"/>&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1463</context>
+          <context context-type="linenumber">1461</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5469027549306748048" datatype="html">
         <source>You must choose &quot;<x id="PH" equiv-text="choiceText"/>&quot; on &quot;<x id="PH_1" equiv-text="nodeTitle"/>&quot;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1471</context>
+          <context context-type="linenumber">1469</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6293177000168372990" datatype="html">
         <source>Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; time on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1483</context>
+          <context context-type="linenumber">1481</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4693324974790890133" datatype="html">
         <source>Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; times on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1485</context>
+          <context context-type="linenumber">1483</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8416169412912074869" datatype="html">
         <source>Take the branch path from &lt;b&gt;<x id="PH" equiv-text="fromNodeTitle"/>&lt;/b&gt; to &lt;b&gt;<x id="PH_1" equiv-text="toNodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1492</context>
+          <context context-type="linenumber">1490</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8087029188038414167" datatype="html">
         <source>Write &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfWords"/>&lt;/b&gt; words on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1498</context>
+          <context context-type="linenumber">1496</context>
         </context-group>
       </trans-unit>
       <trans-unit id="22049568725715518" datatype="html">
         <source>&quot;<x id="PH" equiv-text="nodeTitle"/>&quot; is visible</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1504</context>
+          <context context-type="linenumber">1502</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5023130174506669799" datatype="html">
         <source>&quot;<x id="PH" equiv-text="nodeTitle"/>&quot; is visitable</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1510</context>
+          <context context-type="linenumber">1508</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1185133360670447094" datatype="html">
         <source>Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; note on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1517</context>
+          <context context-type="linenumber">1515</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5985921753090789216" datatype="html">
         <source>Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; notes on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1519</context>
+          <context context-type="linenumber">1517</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4560070803879446782" datatype="html">
         <source>You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; row in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1526</context>
+          <context context-type="linenumber">1524</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2804292280751903227" datatype="html">
         <source>You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; rows in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1528</context>
+          <context context-type="linenumber">1526</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4171523921205906508" datatype="html">
         <source>Wait for your teacher to unlock the item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1531</context>
+          <context context-type="linenumber">1529</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8770055323459972095" datatype="html">
@@ -17312,145 +17312,145 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>First Lesson</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2017855920890197640" datatype="html">
         <source>First Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8104421162933956065" datatype="html">
         <source>Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">90</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">132</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5668531960608480573" datatype="html">
-        <source>Final Report</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
           <context context-type="linenumber">107</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8604167983715964004" datatype="html">
-        <source>Final summary report of what you learned in this unit</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">108</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4419148705442508208" datatype="html">
-        <source>Use this space to write your final report using evidence from your notebook.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">109</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2128364009265696768" datatype="html">
-        <source>&lt;h3&gt;This is a heading&lt;/h3&gt;&lt;p&gt;This is a paragraph.&lt;/p&gt;</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">110</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3712572360135341203" datatype="html">
-        <source>Teacher Notebook</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">118</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3422550137142657635" datatype="html">
-        <source>teacher notes</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">140</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">141</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2558301014879118031" datatype="html">
-        <source>Teacher Notes</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">142</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
           <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="5668531960608480573" datatype="html">
+        <source>Final Report</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8604167983715964004" datatype="html">
+        <source>Final summary report of what you learned in this unit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4419148705442508208" datatype="html">
+        <source>Use this space to write your final report using evidence from your notebook.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2128364009265696768" datatype="html">
+        <source>&lt;h3&gt;This is a heading&lt;/h3&gt;&lt;p&gt;This is a paragraph.&lt;/p&gt;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3712572360135341203" datatype="html">
+        <source>Teacher Notebook</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3422550137142657635" datatype="html">
+        <source>teacher notes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">158</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2558301014879118031" datatype="html">
+        <source>Teacher Notes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">159</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
+          <context context-type="linenumber">166</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="2841850575512700640" datatype="html">
         <source>Notes for the teacher as they&apos;re running the WISE unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">167</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4383493915104232758" datatype="html">
         <source>Use this space to take notes for this unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">168</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8373748870534083811" datatype="html">
         <source>&lt;p&gt;Use this space to take notes for this unit&lt;/p&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4358283284933461426" datatype="html">
         <source>All steps after this one will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">977</context>
+          <context context-type="linenumber">994</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5548702737138673668" datatype="html">
         <source>All steps after this one will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">980</context>
+          <context context-type="linenumber">997</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3112051127445790513" datatype="html">
         <source>All other steps will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">983</context>
+          <context context-type="linenumber">1000</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2264443134334419091" datatype="html">
         <source>All other steps will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">986</context>
+          <context context-type="linenumber">1003</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6819040711904864999" datatype="html">
         <source>This step will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">989</context>
+          <context context-type="linenumber">1006</context>
         </context-group>
       </trans-unit>
       <trans-unit id="816962217622004346" datatype="html">
         <source>This step will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">992</context>
+          <context context-type="linenumber">1009</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3124371804165766752" datatype="html">
