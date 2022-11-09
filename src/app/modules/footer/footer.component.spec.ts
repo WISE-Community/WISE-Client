@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FooterComponent } from './footer.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MomentModule } from 'ngx-moment';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -11,7 +10,7 @@ describe('FooterComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [FooterComponent],
-      imports: [RouterTestingModule, MomentModule],
+      imports: [RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));

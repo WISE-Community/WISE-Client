@@ -15,8 +15,7 @@ import { Notification } from '../../domain/notification';
   templateUrl: 'top-bar.component.html'
 })
 export class TopBarComponent {
-  @ViewChild(StudentAccountMenuComponent)
-  accountMenu: StudentAccountMenuComponent;
+  @ViewChild(StudentAccountMenuComponent) accountMenu: StudentAccountMenuComponent;
 
   avatarColor: string;
   completionPercent: number;
@@ -24,8 +23,8 @@ export class TopBarComponent {
   isConstraintsDisabled: boolean = false;
   isPreview: boolean = false;
   logoURL: string;
-  newNotifications: Notification[];
-  notifications: Notification[];
+  newNotifications: Notification[] = [];
+  notifications: Notification[] = [];
   projectName: string;
   subscriptions: Subscription = new Subscription();
 
@@ -97,8 +96,8 @@ export class TopBarComponent {
   }
 
   private setCompletionPercent(): void {
-    this.completionPercent = this.studentDataService.nodeStatuses[
-      this.projectService.rootNode.id
+    this.completionPercent = this.studentDataService.getNodeStatuses()[
+      this.projectService.getProjectRootNode().id
     ].progress.completionPct;
   }
 

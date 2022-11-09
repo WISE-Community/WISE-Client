@@ -7,21 +7,16 @@ import { ProjectService } from '../../../services/projectService';
 })
 export class PreviewComponentComponent implements OnInit {
   componentContent: any;
-
-  @Input()
-  componentId: string;
-
-  @Input()
-  nodeId: string;
-
-  @Output()
-  starterStateChangedEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() componentId: string;
+  @Input() nodeId: string;
+  @Input() periodId: number;
+  @Output() starterStateChangedEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private projectService: ProjectService) {}
 
   ngOnInit() {
     this.componentContent = this.projectService.injectAssetPaths(
-      this.projectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId)
+      this.projectService.getComponent(this.nodeId, this.componentId)
     );
   }
 

@@ -1,5 +1,6 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -9,26 +10,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { Observable, Subject } from 'rxjs';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { EditDialogGuidanceComputerAvatarComponent } from './edit-dialog-guidance-computer-avatar.component';
-
-class MockNodeService {
-  private starterStateResponseSource: Subject<any> = new Subject<any>();
-  public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
-  createNewComponentState() {
-    return {};
-  }
-}
 
 describe('EditDialogGuidanceComputerAvatarComponent', () => {
   let allComputerAvatars: ComputerAvatar[];
@@ -48,19 +35,11 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditDialogGuidanceComputerAvatarComponent],
-      providers: [
-        ComputerAvatarService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        ProjectAssetService,
-        ProjectService,
-        SessionService,
-        TeacherProjectService,
-        UtilService
-      ]
+      providers: [ProjectAssetService, TeacherProjectService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
@@ -68,19 +47,15 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
     fixture = TestBed.createComponent(EditDialogGuidanceComputerAvatarComponent);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
-    );
     allComputerAvatars = [
       new ComputerAvatar('robot', 'Robot', 'robot.png'),
       new ComputerAvatar('monkey', 'Monkey', 'Monkey.png'),
       new ComputerAvatar('girl', 'Girl', 'girl.png')
     ];
     spyOn(TestBed.inject(ComputerAvatarService), 'getAvatars').and.returnValue(allComputerAvatars);
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue(JSON.parse(JSON.stringify(componentContent)));
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      JSON.parse(JSON.stringify(componentContent))
+    );
     component.computerAvatarSettings = {
       ids: [],
       label: 'Thought Buddy',

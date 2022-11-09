@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { UtilService } from '../../../services/utilService';
+import { ComponentTypeService } from '../../../services/componentTypeService';
 
 @Component({
   styleUrls: ['add-your-own-node.component.scss'],
@@ -18,12 +18,12 @@ export class AddYourOwnNode {
 
   constructor(
     private upgrade: UpgradeModule,
-    private UtilService: UtilService,
+    private componentTypeService: ComponentTypeService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
-    this.componentTypes = this.UtilService.getComponentTypes();
+    this.componentTypes = this.componentTypeService.getComponentTypes();
   }
 
   @ViewChild('titleField') titleField: ElementRef;

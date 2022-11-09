@@ -1,12 +1,8 @@
 'use strict';
 
 import { ComponentNewWorkBadgeComponent } from '../../../../../app/classroom-monitor/component-new-work-badge/component-new-work-badge.component';
-import MainMenu from './mainMenu/mainMenu';
-import NodeInfo from './nodeInfo/nodeInfo';
-import NotificationsMenu from './notificationsMenu/notificationsMenu';
-import PauseScreensMenu from './pauseScreensMenu/pauseScreensMenu';
+import { NodeInfoComponent } from './node-info/node-info.component';
 import { StatusIconComponent } from '../../../../../app/classroom-monitor/status-icon/status-icon.component';
-import Toolbar from './toolbar/toolbar';
 import TopBar from './topBar/topBar';
 import { WorkgroupNodeStatusComponent } from '../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { WorkgroupSelectAutocompleteComponent } from '../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
@@ -15,6 +11,11 @@ import { AlertStatusCornerComponent } from '../../../../../app/classroom-monitor
 import * as angular from 'angular';
 import { WorkgroupNodeScoreComponent } from './workgroupNodeScore/workgroup-node-score.component';
 import { downgradeComponent } from '@angular/upgrade/static';
+import { PauseScreensMenuComponent } from '../pause-screens-menu/pause-screens-menu.component';
+import { ToolBarComponent } from './tool-bar/tool-bar.component';
+import { MainMenuComponent } from '../../../common/main-menu/main-menu.component';
+import { NotificationsMenuComponent } from './notifications-menu/notifications-menu.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
 
 const Shared = angular
   .module('cmShared', [])
@@ -26,16 +27,34 @@ const Shared = angular
     'componentNewWorkBadge',
     downgradeComponent({ component: ComponentNewWorkBadgeComponent }) as angular.IDirectiveFactory
   )
-  .component('cmMainMenu', MainMenu)
-  .component('notificationsMenu', NotificationsMenu)
-  .component('nodeInfo', NodeInfo)
-  .component('pauseScreensMenu', PauseScreensMenu)
+  .directive(
+    'cmMainMenu',
+    downgradeComponent({ component: MainMenuComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'nodeInfo',
+    downgradeComponent({ component: NodeInfoComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'notificationsMenu',
+    downgradeComponent({ component: NotificationsMenuComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'pauseScreensMenu',
+    downgradeComponent({ component: PauseScreensMenuComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'statusIcon',
     downgradeComponent({ component: StatusIconComponent }) as angular.IDirectiveFactory
   )
-  .component('cmToolbar', Toolbar)
-  .component('cmTopBar', TopBar)
+  .directive(
+    'cmToolbar',
+    downgradeComponent({ component: ToolBarComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'cmTopBar',
+    downgradeComponent({ component: TopBarComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'workgroupNodeScore',
     downgradeComponent({ component: WorkgroupNodeScoreComponent }) as angular.IDirectiveFactory

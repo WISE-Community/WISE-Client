@@ -107,6 +107,14 @@
                 [workgroupId]="workgroupId"
                 [isRevision]="true">
             </open-response-grading>
+            <peer-chat-grading
+                *ngIf="revision.componentState.componentType === 'PeerChat'"
+                [nodeId]="nodeId"
+                [componentId]="componentId"
+                [componentState]="revision.componentState"
+                [workgroupId]="workgroupId"
+                [isRevision]="true">
+            </peer-chat-grading>
             <table-grading
                 *ngIf="revision.componentState.componentType === 'Table'"
                 [nodeId]="nodeId"
@@ -117,7 +125,7 @@
             </table-grading>
             <span fxFlex></span>
             <div class="component__actions__info component--grading__actions__info md-caption">
-              <component-state-info [componentState]="revision.componentState" [isActive]="false">
+              <component-state-info [componentState]="revision.componentState" [isInactive]="true">
               </component-state-info>
             </div>
           </div>

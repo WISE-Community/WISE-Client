@@ -53,7 +53,9 @@ class MainAuthoringController {
 
   $onInit() {
     this.projects = this.ConfigService.getConfigParam('projects');
-    this.sharedProjects = this.ConfigService.getConfigParam('sharedProjects');
+    this.sharedProjects = this.ConfigService.getConfigParam('sharedProjects').sort(
+      (projectA, projectB) => projectB.id - projectA.id
+    );
     this.is_rtl = $('html').attr('dir') == 'rtl';
     this.icons = { prev: 'arrow_back', next: 'arrow_forward' };
     if (this.is_rtl) {

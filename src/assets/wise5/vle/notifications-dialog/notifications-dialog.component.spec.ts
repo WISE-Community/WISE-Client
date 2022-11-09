@@ -1,21 +1,13 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { AnnotationService } from '../../services/annotationService';
-import { ConfigService } from '../../services/configService';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NotebookService } from '../../services/notebookService';
 import { NotificationService } from '../../services/notificationService';
-import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
-import { TagService } from '../../services/tagService';
-import { UtilService } from '../../services/utilService';
 import { NotificationsDialogComponent } from './notifications-dialog.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 
 describe('NotificationsMenuComponent', () => {
   let component: NotificationsDialogComponent;
@@ -37,20 +29,10 @@ describe('NotificationsMenuComponent', () => {
         MatDialogModule,
         MatIconModule,
         MatToolbarModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [NotificationsDialogComponent],
       providers: [
-        AnnotationService,
-        ConfigService,
-        NotebookService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService,
         {
           provide: MatDialogRef,
           useValue: { close: () => {} }
@@ -134,5 +116,5 @@ describe('NotificationsMenuComponent', () => {
     });
     component.dismissAll();
     expect(dismissNotificationAggregateSpy).toHaveBeenCalledTimes(2);
-  })
+  });
 });

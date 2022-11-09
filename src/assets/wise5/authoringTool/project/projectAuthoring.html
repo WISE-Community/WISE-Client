@@ -233,7 +233,7 @@
                        ng-change='$ctrl.projectItemClicked(item.$key)'
                        class='check'
                        ng-disabled='$ctrl.showCreateGroup || $ctrl.insertNodeMode || $ctrl.insertGroupMode || ($ctrl.isGroupNode(item.$key) && $ctrl.stepNodeSelected) || (!$ctrl.isGroupNode(item.$key) && $ctrl.activityNodeSelected)'
-                       aria-label='{{::$ctrl.getNodePositionById(item.$key)}} {{::$ctrl.getNodeTitleByNodeId(item.$key)}}'>
+                       aria-label='{{::$ctrl.getNodePositionById(item.$key)}} {{::$ctrl.getNodeTitle(item.$key)}}'>
                   </md-checkbox>
                 </div>
                 <div layout='row' class='projectItemTitleDiv' ng-click='$ctrl.insertGroupMode == true || $ctrl.insertNodeMode == true || $ctrl.nodeClicked(item.$key)'>
@@ -241,11 +241,11 @@
                     <node-icon [node-id]="::item.$key" size="18"></node-icon>&nbsp
                     <h6 style='display:inline; cursor:pointer;'
                       ng-if='$ctrl.isGroupNode(item.$key)'>
-                      {{::$ctrl.getNodePositionById(item.$key)}}: {{::$ctrl.getNodeTitleByNodeId(item.$key)}}
+                      {{::$ctrl.getNodePositionById(item.$key)}}: {{::$ctrl.getNodeTitle(item.$key)}}
                     </h6>
                     <p style='display:inline; cursor:pointer;'
                       ng-if='!$ctrl.isGroupNode(item.$key)'>
-                      <span>{{::$ctrl.getNodePositionById(item.$key)}}: {{::$ctrl.getNodeTitleByNodeId(item.$key)}}</span>
+                      <span>{{::$ctrl.getNodePositionById(item.$key)}}: {{::$ctrl.getNodeTitle(item.$key)}}</span>
                       <span><md-icon ng-if='::$ctrl.isBranchPoint(item.$key)' ng-click='$ctrl.branchIconClicked(item.$key); $event.stopPropagation();' style='transform: rotate(180deg);'>call_split</md-icon><md-tooltip md-direction='right'>{{ ::'branchPointTooltip' | translate : '{ numberOfBranchPaths: ' + $ctrl.getNumberOfBranchPaths(item.$key) + ', branchCriteria: "' + $ctrl.getBranchCriteriaDescription(item.$key) + '"}'}}</md-tooltip></span>
                       <span><md-icon ng-if='::$ctrl.nodeHasConstraint(item.$key) && $ctrl.getNumberOfConstraintsOnNode(item.$key) == 1' ng-click='$ctrl.constraintIconClicked(item.$key); $event.stopPropagation();'>block</md-icon><md-tooltip class='multiLineTooltip' md-direction='right'>{{ ::$ctrl.getNumberOfConstraintsOnNode(item.$key) }} {{ ::'constraint' | translate }}<br/>{{ ::$ctrl.getConstraintDescriptions(item.$key) }}</md-tooltip></span>
                       <span><md-icon ng-if='::$ctrl.nodeHasConstraint(item.$key) && $ctrl.getNumberOfConstraintsOnNode(item.$key) > 1' ng-click='$ctrl.constraintIconClicked(item.$key); $event.stopPropagation();'>block</md-icon><md-tooltip class='multiLineTooltip' md-direction='right'>{{ ::$ctrl.getNumberOfConstraintsOnNode(item.$key) }} {{ ::'constraints' | translate }}<br/>{{ ::$ctrl.getConstraintDescriptions(item.$key) }}</md-tooltip></span>
@@ -293,7 +293,7 @@
                          ng-change='$ctrl.projectItemClicked(inactiveNode.id)'
                          class='check'
                          ng-disabled='$ctrl.showCreateGroup || $ctrl.insertNodeMode || $ctrl.insertGroupMode || $ctrl.stepNodeSelected'
-                         aria-label='{{::$ctrl.getNodeTitleByNodeId(inactiveNode.id)}}'>
+                         aria-label='{{::$ctrl.getNodeTitle(inactiveNode.id)}}'>
                     </md-checkbox>
                   </div>
                   <div layout='row'
@@ -303,7 +303,7 @@
                       <node-icon [node-id]="::inactiveNode.id" size="18"></node-icon>&nbsp;
                       <h6
                         style='display:inline; cursor:pointer;'>
-                        {{::$ctrl.getNodeTitleByNodeId(inactiveNode.id)}}
+                        {{::$ctrl.getNodeTitle(inactiveNode.id)}}
                       </h6>
                     </div>
                     <div layout='row'>
@@ -333,7 +333,7 @@
                            ng-change='$ctrl.projectItemClicked(inactiveChildId)'
                            class='check'
                            ng-disabled='$ctrl.showCreateGroup || $ctrl.insertNodeMode || $ctrl.insertGroupMode || $ctrl.activityNodeSelected'
-                           aria-label='{{::$ctrl.getNodeTitleByNodeId(inactiveChildId.id)}}'>
+                           aria-label='{{::$ctrl.getNodeTitle(inactiveChildId.id)}}'>
                       </md-checkbox>
                     </div>
                     <div layout='row'
@@ -342,7 +342,7 @@
                       <div layout='row' layout-align="start center">
                         <node-icon [node-id]="::inactiveChildId" size="18"></node-icon>&nbsp;
                         <p style='display:inline; cursor:pointer;'>
-                          {{::$ctrl.getNodeTitleByNodeId(inactiveChildId)}}
+                          {{::$ctrl.getNodeTitle(inactiveChildId)}}
                         </p>
                       </div>
                       <div layout='row'>
@@ -384,14 +384,14 @@
                          ng-change='$ctrl.projectItemClicked(inactiveNode.id)'
                          class='check'
                          ng-disabled='$ctrl.showCreateGroup || $ctrl.insertNodeMode || $ctrl.insertGroupMode || $ctrl.activityNodeSelected'
-                         aria-label='{{::$ctrl.getNodeTitleByNodeId(inactiveNode.id)}}'>
+                         aria-label='{{::$ctrl.getNodeTitle(inactiveNode.id)}}'>
                     </md-checkbox>
                   </div>
                   <div layout='row' class='projectItemTitleDiv' ng-click='$ctrl.insertGroupMode == true || $ctrl.insertNodeMode == true || $ctrl.nodeClicked(inactiveNode.id)'>
                     <div layout='row' layout-align="start center">
                       <node-icon [node-id]="::inactiveNode.id" size="18"></node-icon>&nbsp;
                       <p style='display:inline; cursor:pointer;'>
-                        {{::$ctrl.getNodeTitleByNodeId(inactiveNode.id)}}
+                        {{::$ctrl.getNodeTitle(inactiveNode.id)}}
                       </p>
                     </div>
                     <div layout='row'>

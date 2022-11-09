@@ -49,7 +49,7 @@ export class ChooseNewNodeLocation {
       this.ProjectService.refreshProject();
       this.saveEvent('stepCreated', 'Authoring', {
         nodeId: newNodeId,
-        title: this.ProjectService.getNodePositionAndTitleByNodeId(newNodeId)
+        title: this.ProjectService.getNodePositionAndTitle(newNodeId)
       });
     });
   }
@@ -62,8 +62,8 @@ export class ChooseNewNodeLocation {
     return this.ProjectService.isGroupNode(nodeId);
   }
 
-  getNodeTitleByNodeId(nodeId: string) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId: string) {

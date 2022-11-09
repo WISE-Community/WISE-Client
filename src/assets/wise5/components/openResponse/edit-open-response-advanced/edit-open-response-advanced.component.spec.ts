@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -7,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { EditComponentExcludeFromTotalScoreComponent } from '../../../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
@@ -20,26 +20,11 @@ import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/ed
 import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { CRaterService } from '../../../services/cRaterService';
-import { NodeService } from '../../../services/nodeService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { EditOpenResponseAdvancedComponent } from './edit-open-response-advanced.component';
-
-export class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: EditOpenResponseAdvancedComponent;
 let fixture: ComponentFixture<EditOpenResponseAdvancedComponent>;
@@ -59,7 +44,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [
         EditComponentAddToNotebookButtonComponent,
@@ -76,29 +61,15 @@ describe('EditOpenResponseAdvancedComponent', () => {
         EditConnectedComponentsComponent,
         EditOpenResponseAdvancedComponent
       ],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        CRaterService,
-        { provide: NodeService, useClass: MockNodeService },
-        NotebookService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        TeacherProjectService,
-        UtilService
-      ]
+      providers: [TeacherProjectService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue({});
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      {} as ComponentContent
+    );
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       'node1',
@@ -114,8 +85,6 @@ describe('EditOpenResponseAdvancedComponent', () => {
 
   enableCRaterClicked();
   addScoringRule();
-  scoringRuleUpClicked();
-  scoringRuleDownClicked();
   scoringRuleDeleteClicked();
   addMultipleAttemptScoringRule();
   multipleAttemptScoringRuleDeleteClicked();
@@ -126,6 +95,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
   useCustomCompletionCriteriaClicked();
   addCompletionCriteria();
   deleteCompletionCriteria();
+  setFeedbackEnabled();
 });
 
 function enableCRaterClicked() {
@@ -152,45 +122,11 @@ function addScoringRule() {
   });
 }
 
-function scoringRuleUpClicked() {
-  describe('scoringRuleUpClicked', () => {
-    it('should handle moving a scoring rule up', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
-      component.authoringComponentContent.cRater.scoringRules = [
-        scoringRule1,
-        scoringRule2,
-        scoringRule3
-      ];
-      component.scoringRuleUpClicked(1);
-      expect(component.authoringComponentContent.cRater.scoringRules[0]).toEqual(scoringRule2);
-      expect(component.authoringComponentContent.cRater.scoringRules[1]).toEqual(scoringRule1);
-      expect(component.authoringComponentContent.cRater.scoringRules[2]).toEqual(scoringRule3);
-    });
-  });
-}
-
 function createScoringRuleObject(score: number, feedbackText: string): any {
   return {
     feedbackText: feedbackText,
     score: score
   };
-}
-
-function scoringRuleDownClicked() {
-  describe('scoringRuleDownClicked', () => {
-    it('should handle moving a scoring rule down', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
-      component.authoringComponentContent.cRater.scoringRules = [
-        scoringRule1,
-        scoringRule2,
-        scoringRule3
-      ];
-      component.scoringRuleDownClicked(1);
-      expect(component.authoringComponentContent.cRater.scoringRules[0]).toEqual(scoringRule1);
-      expect(component.authoringComponentContent.cRater.scoringRules[1]).toEqual(scoringRule3);
-      expect(component.authoringComponentContent.cRater.scoringRules[2]).toEqual(scoringRule2);
-    });
-  });
 }
 
 function scoringRuleDeleteClicked() {
@@ -424,6 +360,17 @@ function deleteCompletionCriteria() {
       expect(component.authoringComponentContent.completionCriteria.criteria[1]).toEqual(
         completionCriteria3
       );
+    });
+  });
+}
+
+function setFeedbackEnabled() {
+  describe('setFeedbackEnabled()', () => {
+    it('should initialize feedback settings and set enabled field', () => {
+      component.authoringComponentContent.cRater = {};
+      component.setFeedbackEnabled(true);
+      expect(component.authoringComponentContent.cRater.feedback.enabled).toBeTruthy();
+      expect(component.authoringComponentContent.cRater.feedback.rules.length).toEqual(1);
     });
   });
 }

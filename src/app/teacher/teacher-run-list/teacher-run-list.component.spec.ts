@@ -1,22 +1,15 @@
-import { Component, Input } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { defer, Observable } from 'rxjs';
-import { MomentModule } from 'ngx-moment';
 import { TeacherRunListComponent } from './teacher-run-list.component';
 import { TeacherService } from '../teacher.service';
 import { Project } from '../../domain/project';
 import { TeacherRun } from '../teacher-run';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
-import { configureTestSuite } from 'ng-bullet';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { UserService } from '../../services/user.service';
 
-@Component({ selector: 'app-teacher-run-list-item', template: '' })
-class TeacherRunListItemStubComponent {
-  @Input()
-  run: TeacherRun = new TeacherRun();
-}
+class TeacherScheduleStubComponent {}
 
 export function fakeAsyncResponse<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -54,14 +47,7 @@ export class MockTeacherService {
       observer.complete();
     });
   }
-  getSharedRuns(): Observable<TeacherRun[]> {
-    const runs: TeacherRun[] = [];
-    return Observable.create((observer) => {
-      observer.next(runs);
-      observer.complete();
-    });
-  }
-  newRunSource$ = fakeAsyncResponse({
+  runs$ = fakeAsyncResponse({
     id: 3,
     name: 'Global Climate Change',
     periods: ['1', '2']
@@ -74,21 +60,34 @@ export class MockConfigService {
   }
 }
 
+export class MockUserService {
+  getUserId(): number {
+    return 1;
+  }
+}
+
 describe('TeacherRunListComponent', () => {
   let component: TeacherRunListComponent;
   let fixture: ComponentFixture<TeacherRunListComponent>;
 
-  configureTestSuite(() => {
-    TestBed.configureTestingModule({
-      declarations: [TeacherRunListComponent],
-      imports: [MomentModule, RouterTestingModule],
-      providers: [
-        { provide: TeacherService, useClass: MockTeacherService },
-        { provide: ConfigService, useClass: MockConfigService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    });
-  });
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TeacherRunListComponent],
+        imports: [
+          RouterTestingModule.withRoutes([
+            { path: 'teacher/home/schedule', component: TeacherScheduleStubComponent }
+          ])
+        ],
+        providers: [
+          { provide: TeacherService, useClass: MockTeacherService },
+          { provide: ConfigService, useClass: MockConfigService },
+          { provide: UserService, useClass: MockUserService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      });
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeacherRunListComponent);

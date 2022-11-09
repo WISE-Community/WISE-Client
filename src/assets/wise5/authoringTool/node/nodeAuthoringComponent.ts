@@ -12,6 +12,8 @@ import { NotificationService } from '../../services/notificationService';
 import { Subscription } from 'rxjs';
 import { Directive } from '@angular/core';
 import { Node } from '../../common/Node';
+import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
+import { ComponentTypeService } from '../../services/componentTypeService';
 
 @Directive()
 class NodeAuthoringController {
@@ -50,13 +52,14 @@ class NodeAuthoringController {
   static $inject = [
     '$anchorScroll',
     '$filter',
-    '$injector',
     '$mdDialog',
     '$state',
     '$stateParams',
     '$timeout',
     'ConfigService',
     'CopyComponentService',
+    'ComponentServiceLookupService',
+    'ComponentTypeService',
     'InsertComponentService',
     'NodeService',
     'NotificationService',
@@ -68,13 +71,14 @@ class NodeAuthoringController {
   constructor(
     private $anchorScroll: any,
     $filter: any,
-    private $injector: any,
     private $mdDialog: any,
     private $state: any,
     private $stateParams: any,
     private $timeout: any,
     private ConfigService: ConfigService,
     private CopyComponentService: CopyComponentService,
+    private componentServiceLookupService: ComponentServiceLookupService,
+    private componentTypeService: ComponentTypeService,
     private InsertComponentService: InsertComponentService,
     private NodeService: NodeService,
     private NotificationService: NotificationService,
@@ -91,7 +95,7 @@ class NodeAuthoringController {
     this.TeacherDataService.setCurrentNodeByNodeId(this.nodeId);
     this.nodeJson = this.ProjectService.getNodeById(this.nodeId);
     this.nodePosition = this.ProjectService.getNodePositionById(this.nodeId);
-    this.components = this.ProjectService.getComponentsByNodeId(this.nodeId);
+    this.components = this.ProjectService.getComponents(this.nodeId);
 
     /*
      * remember a copy of the node at the beginning of this node authoring
@@ -121,7 +125,7 @@ class NodeAuthoringController {
     );
 
     const data = {
-      title: this.ProjectService.getNodePositionAndTitleByNodeId(this.nodeId)
+      title: this.ProjectService.getNodePositionAndTitle(this.nodeId)
     };
     if (this.isGroupNode) {
       this.saveEvent('activityViewOpened', 'Navigation', data);
@@ -183,7 +187,7 @@ class NodeAuthoringController {
 
   hideAllComponentSaveButtons() {
     for (const component of this.components) {
-      const service = this.$injector.get(component.type + 'Service');
+      const service = this.componentServiceLookupService.getService(component.type);
       if (service.componentUsesSaveButton()) {
         component.showSaveButton = false;
       }
@@ -213,7 +217,7 @@ class NodeAuthoringController {
         const nodePreviousVersion = this.undoStack.pop();
         this.ProjectService.replaceNode(this.nodeId, nodePreviousVersion);
         this.nodeJson = this.ProjectService.getNodeById(this.nodeId);
-        this.components = this.ProjectService.getComponentsByNodeId(this.nodeId);
+        this.components = this.ProjectService.getComponents(this.nodeId);
         this.ProjectService.saveProject();
       }
     }
@@ -534,7 +538,7 @@ class NodeAuthoringController {
   }
 
   getComponentTypeLabel(componentType) {
-    return this.UtilService.getComponentTypeLabel(componentType);
+    return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 
   /**
@@ -572,10 +576,7 @@ class NodeAuthoringController {
   getComponentObjectsForEventData(componentIds) {
     const componentObjects = [];
     for (const componentId of componentIds) {
-      const component = this.ProjectService.getComponentByNodeIdAndComponentId(
-        this.nodeId,
-        componentId
-      );
+      const component = this.ProjectService.getComponent(this.nodeId, componentId);
       if (component != null) {
         componentObjects.push({
           componentId: component.id,

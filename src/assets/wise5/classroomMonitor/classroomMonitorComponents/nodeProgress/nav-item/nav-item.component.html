@@ -1,0 +1,66 @@
+<ng-container [ngSwitch]="type" *ngIf="nodeHasWork || isGroup">
+  <div id="nav-item-{{nodeId}}"></div>
+  <mat-card *ngSwitchCase="'card'" class="nav-item--card"
+      [ngClass]="{'nav-item--card--group':isGroup, 'expanded mat-elevation-z3':expanded}">
+    <mat-card-header class="nav-item--card__content" (click)="itemClicked($event)"
+        role="button" md-ink-ripple>
+      <node-icon mat-card-avatar class="group-icon" customClass="mat-24" [nodeId]="nodeId"></node-icon>
+      <mat-card-title class="title" style="color: {{icon.color}}" >
+        <span>{{ nodeTitle }}</span>
+      </mat-card-title>
+      <span fxFlex></span>
+      <mat-icon class="nav-item__collapse" *ngIf="isGroup && expanded" aria-label="collapse">
+        remove
+      </mat-icon>
+      <alert-status-corner [hasAlert]="newAlert" [hasNewAlert]="newAlert"
+          [message]="alertIconLabel">
+      </alert-status-corner>
+    </mat-card-header>
+    <mat-card-content *ngIf="isGroup && expanded" class="nav-contents nav-contents--group">
+      <mat-list class="nav-contents__list">
+        <nav-item *ngFor="let childId of item.ids"
+            [ngClass]="{'expanded': itemExpanded, 'prev': isPrevStep}"
+            aria-label="{{ isPrevStep ? 'Last viewed item' : null }}"
+            i18n-aria-label
+            [nodeId]="childId" type="list"
+            ng-animate-ref="{{ childId }}" class="nav-item" data-nodeid="{{ childId }}">
+        </nav-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions class="nav-item__more mat-body-1" fxLayout="row" fxLayoutAlign="start center"
+        fxLayoutGap="8px">
+      <nav-item-progress [nodeCompletion]="getNodeCompletion()" [period]="currentPeriod">
+      </nav-item-progress>
+      <span fxFlex></span>
+      <a href="#" (click)="toggleLockNode()" aria-label="{{ getNodeLockedText() }}"
+          [matTooltip]="getNodeLockedText()"
+          matTooltipPosition="above">
+        <mat-icon [ngClass]="{'warn': isLocked()}">
+          {{ isLocked() ? 'lock' : 'lock_open' }}
+        </mat-icon>
+      </a>
+    </mat-card-actions>
+  </mat-card>
+  <mat-list-item *ngSwitchCase="'list'"
+      (click)="itemClicked()"
+      aria-label="{{nodeTitle}}"
+      class="list-item"
+      [ngClass]="{'nav-item--list--group': isGroup, 'text-secondary': !nodeHasWork}">
+    <node-icon [nodeId]="nodeId" class="step-icon" customClass="mat-24"></node-icon>
+    <p fxFlex fxLayout="row" fxfxLayoutAlign="start center">
+      <span [ngClass]="{'warn': newAlert}">{{ nodeTitle }}</span>&nbsp;
+      <span fxFlex fxHide.gt-xs></span>
+      <status-icon *ngIf="newAlert" [iconClass]="alertIconClass"
+          [iconName]="alertIconName" [iconLabel]="alertIconLabel"
+          [iconTooltip]="alertIconLabel"></status-icon>
+      <status-icon *ngIf="hasRubrics" [iconClass]="rubricIconClass"
+          [iconName]="rubricIconName" [iconLabel]="rubricIconLabel"
+          [iconTooltip]="rubricIconLabel"></status-icon>
+      <span fxFlex hide-xs></span>
+      <nav-item-score class="nav-item--list__info-item" [maxScore]="maxScore"
+          [averageScore]="getNodeAverageScore()"></nav-item-score>
+      <nav-item-progress [nodeCompletion]="getNodeCompletion()"
+          [period]="currentPeriod"></nav-item-progress>
+    </p>
+  </mat-list-item>
+</ng-container>

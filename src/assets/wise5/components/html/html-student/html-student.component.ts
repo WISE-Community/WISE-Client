@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
 import { WiseLinkService } from '../../../../../app/services/wiseLinkService';
@@ -14,13 +14,18 @@ import { ComponentService } from '../../componentService';
 
 @Component({
   selector: 'html-student',
+  styleUrls: ['html-student.component.scss'],
   templateUrl: 'html-student.component.html'
 })
 export class HtmlStudent extends ComponentStudent {
   html: SafeHtml = '';
-  wiseLinkCommunicatorId: string;
-  wiseLinkCommunicator: any;
   wiseLinkClickedHandler: any;
+  @ViewChild('wiseLinkCommunicator')
+  set aRef(ref: ElementRef) {
+    this.wiseLinkCommunicator = ref.nativeElement;
+  }
+  wiseLinkCommunicator: any;
+  wiseLinkCommunicatorId: string;
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -50,19 +55,18 @@ export class HtmlStudent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     this.wiseLinkCommunicatorId = `wise-link-communicator-html-student-${this.nodeId}-${this.componentId}`;
+    this.html = this.WiseLinkService.generateHtmlWithWiseLink(
+      this.componentContent.html,
+      this.wiseLinkCommunicatorId
+    );
     this.broadcastDoneRenderingComponent();
   }
 
   ngAfterViewInit() {
-    this.wiseLinkCommunicator = document.getElementById(this.wiseLinkCommunicatorId);
     this.wiseLinkClickedHandler = this.WiseLinkService.createWiseLinkClickedHandler(this.nodeId);
     this.WiseLinkService.addWiseLinkClickedListener(
       this.wiseLinkCommunicator,
       this.wiseLinkClickedHandler
-    );
-    this.html = this.WiseLinkService.generateHtmlWithWiseLink(
-      this.componentContent.html,
-      this.wiseLinkCommunicatorId
     );
   }
 

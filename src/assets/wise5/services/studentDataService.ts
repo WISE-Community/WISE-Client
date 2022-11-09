@@ -5,12 +5,12 @@ import { ConfigService } from './configService';
 import { AnnotationService } from './annotationService';
 import { ProjectService } from './projectService';
 import { UtilService } from './utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import * as angular from 'angular';
 import { TagService } from './tagService';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
+import { ComponentServiceLookupService } from './componentServiceLookupService';
+import { NotebookService } from './notebookService';
 
 @Injectable()
 export class StudentDataService extends DataService {
@@ -81,10 +81,6 @@ export class StudentDataService extends DataService {
     }
   };
 
-  $q: any;
-  $translate: any;
-  private deleteKeyPressedSource: Subject<any> = new Subject<any>();
-  public deleteKeyPressed$: Observable<any> = this.deleteKeyPressedSource.asObservable();
   private nodeClickLockedSource: Subject<any> = new Subject<any>();
   public nodeClickLocked$: Observable<any> = this.nodeClickLockedSource.asObservable();
   private componentDirtySource: Subject<boolean> = new Subject<boolean>();
@@ -95,10 +91,6 @@ export class StudentDataService extends DataService {
   public componentSubmitDirty$: Observable<any> = this.componentSubmitDirtySource.asObservable();
   private componentSubmitTriggeredSource: Subject<boolean> = new Subject<boolean>();
   public componentSubmitTriggered$: Observable<any> = this.componentSubmitTriggeredSource.asObservable();
-  private notebookItemAnnotationReceivedSource: Subject<boolean> = new Subject<boolean>();
-  public notebookItemAnnotationReceived$ = this.notebookItemAnnotationReceivedSource.asObservable();
-  private pauseScreenSource: Subject<boolean> = new Subject<boolean>();
-  public pauseScreen$: Observable<any> = this.pauseScreenSource.asObservable();
   private componentStudentDataSource: Subject<any> = new Subject<any>();
   public componentStudentData$: Observable<any> = this.componentStudentDataSource.asObservable();
   private studentWorkSavedToServerSource: Subject<any> = new Subject<any>();
@@ -109,19 +101,19 @@ export class StudentDataService extends DataService {
   public nodeStatusesChanged$: Observable<any> = this.nodeStatusesChangedSource.asObservable();
 
   constructor(
-    upgrade: UpgradeModule,
     public http: HttpClient,
     private AnnotationService: AnnotationService,
+    private componentServiceLookupService: ComponentServiceLookupService,
     private ConfigService: ConfigService,
-    ProjectService: ProjectService,
+    private notebookService: NotebookService,
+    protected ProjectService: ProjectService,
     private TagService: TagService,
     private UtilService: UtilService
   ) {
-    super(upgrade, ProjectService);
-  }
-
-  pauseScreen(doPause: boolean) {
-    this.pauseScreenSource.next(doPause);
+    super(ProjectService);
+    this.notebookService.notebookUpdated$.subscribe(() => {
+      this.updateNodeStatuses();
+    });
   }
 
   broadcastComponentStudentData(componentStudentData: any) {
@@ -180,7 +172,7 @@ export class StudentDataService extends DataService {
       }
     }
     this.studentData.events = resultData.events;
-    this.studentData.annotations = this.getActiveAnnototations(resultData.annotations);
+    this.studentData.annotations = resultData.annotations;
     this.AnnotationService.setAnnotations(this.studentData.annotations);
     this.populateHistories(this.studentData.events);
     this.updateNodeStatuses();
@@ -189,7 +181,9 @@ export class StudentDataService extends DataService {
 
   retrieveRunStatus() {
     if (this.ConfigService.isPreview()) {
-      this.runStatus = {};
+      this.runStatus = {
+        periods: []
+      };
     } else {
       const params = new HttpParams().set('runId', this.ConfigService.getConfigParam('runId'));
       const options = {
@@ -200,6 +194,9 @@ export class StudentDataService extends DataService {
         .toPromise()
         .then((runStatus: any) => {
           this.runStatus = runStatus;
+          if (this.runStatus != null && this.runStatus.periods == null) {
+            this.runStatus.periods = [];
+          }
         });
     }
   }
@@ -547,13 +544,13 @@ export class StudentDataService extends DataService {
     return branchPathTakenEvents;
   }
 
-  evaluateChoiceChosenCriteria(criteria) {
-    const serviceName = 'MultipleChoiceService';
-    if (this.upgrade.$injector.has(serviceName)) {
-      const service = this.upgrade.$injector.get(serviceName);
-      return service.choiceChosen(criteria);
-    }
-    return false;
+  evaluateChoiceChosenCriteria(criteria: any): boolean {
+    const service = this.componentServiceLookupService.getService('MultipleChoice');
+    const latestComponentState = this.getLatestComponentStateByNodeIdAndComponentId(
+      criteria.params.nodeId,
+      criteria.params.componentId
+    );
+    return latestComponentState != null && service.choiceChosen(criteria, latestComponentState);
   }
 
   evaluateScoreCriteria(criteria: any): boolean {
@@ -645,9 +642,8 @@ export class StudentDataService extends DataService {
     const params = criteria.params;
     const nodeId = params.nodeId;
     const requiredNumberOfNotes = params.requiredNumberOfNotes;
-    const notebookService = this.upgrade.$injector.get('NotebookService');
     try {
-      const notebook = notebookService.getNotebookByWorkgroup();
+      const notebook = this.notebookService.getNotebookByWorkgroup();
       const notebookItemsByNodeId = this.getNotebookItemsByNodeId(notebook, nodeId);
       return notebookItemsByNodeId.length >= requiredNumberOfNotes;
     } catch (e) {}
@@ -661,7 +657,7 @@ export class StudentDataService extends DataService {
     const requiredNumberOfFilledRows = params.requiredNumberOfFilledRows;
     const tableHasHeaderRow = params.tableHasHeaderRow;
     const requireAllCellsInARowToBeFilled = params.requireAllCellsInARowToBeFilled;
-    const tableService = this.upgrade.$injector.get('TableService');
+    const tableService = this.componentServiceLookupService.getService('Table');
     const componentState = this.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
     return (
       componentState != null &&
@@ -757,19 +753,6 @@ export class StudentDataService extends DataService {
     this.studentData.annotations.push(annotation);
   }
 
-  handleAnnotationReceived(annotation) {
-    this.studentData.annotations.push(annotation);
-    if (annotation.notebookItemId) {
-      this.broadcastNotebookItemAnnotationReceived({ annotation: annotation });
-    } else {
-      this.AnnotationService.broadcastAnnotationReceived({ annotation: annotation });
-    }
-  }
-
-  broadcastNotebookItemAnnotationReceived(args: any) {
-    this.notebookItemAnnotationReceivedSource.next(args);
-  }
-
   saveComponentEvent(component, category, event, data) {
     if (component == null || category == null || event == null) {
       alert(
@@ -853,9 +836,9 @@ export class StudentDataService extends DataService {
         projectId: this.ConfigService.getProjectId(),
         runId: this.ConfigService.getRunId(),
         workgroupId: this.ConfigService.getWorkgroupId(),
-        studentWorkList: angular.toJson(studentWorkList),
-        events: angular.toJson(events),
-        annotations: angular.toJson(annotations)
+        studentWorkList: JSON.stringify(studentWorkList),
+        events: JSON.stringify(events),
+        annotations: JSON.stringify(annotations)
       };
       return this.http
         .post(this.ConfigService.getConfigParam('studentDataURL'), params)
@@ -905,9 +888,7 @@ export class StudentDataService extends DataService {
     };
     this.copyClientSaveTimeToServerSaveTime(savedStudentDataResponse);
     this.handleSaveToServerSuccess(savedStudentDataResponse);
-    const deferred = this.upgrade.$injector.get('$q').defer();
-    deferred.resolve(savedStudentDataResponse);
-    return deferred.promise;
+    return Promise.resolve(savedStudentDataResponse);
   }
 
   copyClientSaveTimeToServerSaveTime(studentDataResponse: any): void {
@@ -941,9 +922,7 @@ export class StudentDataService extends DataService {
        */
       this.updateNodeStatuses();
     }
-    const deferred = this.upgrade.$injector.get('$q').defer();
-    deferred.resolve(savedStudentDataResponse);
-    return deferred.promise;
+    return Promise.resolve(savedStudentDataResponse);
   }
 
   processSavedStudentWorkList(savedStudentWorkList) {
@@ -1029,9 +1008,7 @@ export class StudentDataService extends DataService {
 
   handleSaveToServerError() {
     this.saveToServerRequestCount -= 1;
-    const deferred = this.upgrade.$injector.get('$q').defer();
-    deferred.resolve();
-    return deferred.promise;
+    return Promise.resolve({});
   }
 
   getLatestComponentState() {
@@ -1168,12 +1145,9 @@ export class StudentDataService extends DataService {
     return this.ProjectService.getNodeById(nodeId) != null && this.ProjectService.isActive(nodeId);
   }
 
-  canVisitNode(nodeId) {
+  canVisitNode(nodeId: string): boolean {
     const nodeStatus = this.getNodeStatusByNodeId(nodeId);
-    if (nodeStatus != null && nodeStatus.isVisitable) {
-      return true;
-    }
-    return false;
+    return nodeStatus != null && nodeStatus.isVisitable;
   }
 
   /**
@@ -1272,23 +1246,26 @@ export class StudentDataService extends DataService {
     return result;
   }
 
-  isComponentCompleted(nodeId, componentId) {
-    const componentStates = this.getComponentStatesByNodeIdAndComponentId(nodeId, componentId);
-    const componentEvents = this.getEventsByNodeIdAndComponentId(nodeId, componentId);
-    const nodeEvents = this.getEventsByNodeId(nodeId);
-    const node = this.ProjectService.getNodeById(nodeId);
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+  private isComponentCompleted(nodeId: string, componentId: string): boolean {
+    const component = this.ProjectService.getComponent(nodeId, componentId);
     if (component != null) {
+      const node = this.ProjectService.getNodeById(nodeId);
       const componentType = component.type;
-      const service = this.upgrade.$injector.get(componentType + 'Service');
-      return service.isCompleted(component, componentStates, componentEvents, nodeEvents, node);
+      const service = this.componentServiceLookupService.getService(componentType);
+      if (['OpenResponse', 'Discussion'].includes(componentType)) {
+        return service.isCompletedV2(node, component, this.studentData);
+      } else {
+        const componentStates = this.getComponentStatesByNodeIdAndComponentId(nodeId, componentId);
+        const nodeEvents = this.getEventsByNodeId(nodeId);
+        return service.isCompleted(component, componentStates, nodeEvents, node);
+      }
     }
     return false;
   }
 
   isStepNodeCompleted(nodeId) {
     let result = true;
-    const components = this.ProjectService.getComponentsByNodeId(nodeId);
+    const components = this.ProjectService.getComponents(nodeId);
     for (const component of components) {
       const isComponentCompleted = this.isComponentCompleted(nodeId, component.id);
       result = result && isComponentCompleted;
@@ -1382,139 +1359,6 @@ export class StudentDataService extends DataService {
     }
   }
 
-  isCompletionCriteriaSatisfied(completionCriteria) {
-    let result = true;
-    if (completionCriteria.inOrder) {
-      result = this.isInOrderCompletionCriteriaSatisfied(completionCriteria);
-    }
-    return result;
-  }
-
-  isInOrderCompletionCriteriaSatisfied(completionCriteria) {
-    let result = true;
-    let tempTimestamp = 0;
-    for (const completionCriterion of completionCriteria.criteria) {
-      const functionName = completionCriterion.name;
-      if (functionName == 'isSubmitted') {
-        const tempComponentState = this.getComponentStateSubmittedAfter(
-          completionCriterion.nodeId,
-          completionCriterion.componentId,
-          tempTimestamp
-        );
-        if (tempComponentState == null) {
-          return false;
-        } else {
-          tempTimestamp = tempComponentState.serverSaveTime;
-        }
-      } else if (functionName == 'isSaved') {
-        const tempComponentState = this.getComponentStateSavedAfter(
-          completionCriterion.nodeId,
-          completionCriterion.componentId,
-          tempTimestamp
-        );
-        if (tempComponentState == null) {
-          return false;
-        } else {
-          tempTimestamp = tempComponentState.serverSaveTime;
-        }
-      } else if (functionName == 'isVisited') {
-        const tempEvent = this.getVisitEventAfter(completionCriterion.nodeId, tempTimestamp);
-        if (tempEvent == null) {
-          return false;
-        } else {
-          tempTimestamp = tempEvent.serverSaveTime;
-        }
-      }
-    }
-    return result;
-  }
-
-  getComponentStateSavedAfter(nodeId, componentId, timestamp) {
-    for (const componentState of this.studentData.componentStates) {
-      if (
-        componentState.nodeId === nodeId &&
-        componentState.componentId === componentId &&
-        componentState.serverSaveTime > timestamp
-      ) {
-        return componentState;
-      }
-    }
-    return null;
-  }
-
-  getComponentStateSubmittedAfter(nodeId, componentId, timestamp) {
-    for (const componentState of this.studentData.componentStates) {
-      if (
-        componentState.nodeId === nodeId &&
-        componentState.componentId === componentId &&
-        componentState.serverSaveTime > timestamp &&
-        componentState.isSubmit
-      ) {
-        return componentState;
-      }
-    }
-    return null;
-  }
-
-  getVisitEventAfter(nodeId, timestamp) {
-    for (const tempEvent of this.studentData.events) {
-      if (
-        tempEvent.nodeId === nodeId &&
-        tempEvent.serverSaveTime > timestamp &&
-        tempEvent.event === 'nodeEntered'
-      ) {
-        return tempEvent;
-      }
-    }
-    return null;
-  }
-
-  getClassmateStudentWork(nodeId, componentId, periodId) {
-    let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('nodeId', nodeId + '')
-      .set('componentId', componentId + '')
-      .set('getStudentWork', true + '')
-      .set('getEvents', false + '')
-      .set('getAnnotations', false + '')
-      .set('onlyGetLatest', true + '');
-    if (periodId != null) {
-      params = params.set('periodId', periodId);
-    }
-    const options = {
-      params: params
-    };
-    return this.http
-      .get(this.ConfigService.getConfigParam('studentDataURL'), options)
-      .toPromise()
-      .then((resultData: any) => {
-        return resultData.studentWorkList;
-      });
-  }
-
-  getClassmateScores(nodeId, componentId, periodId) {
-    let params = new HttpParams()
-      .set('runId', this.ConfigService.getRunId())
-      .set('nodeId', nodeId + '')
-      .set('componentId', componentId + '')
-      .set('getStudentWork', false + '')
-      .set('getEvents', false + '')
-      .set('getAnnotations', true + '')
-      .set('onlyGetLatest', false + '');
-    if (periodId != null) {
-      params = params.set('periodId', periodId);
-    }
-    const options = {
-      params: params
-    };
-    return this.http
-      .get(this.ConfigService.getConfigParam('studentDataURL'), options)
-      .toPromise()
-      .then((resultData: any) => {
-        return resultData.annotations;
-      });
-  }
-
   getStudentWorkById(id) {
     const params = new HttpParams()
       .set('runId', this.ConfigService.getRunId())
@@ -1573,9 +1417,6 @@ export class StudentDataService extends DataService {
   }
   broadcastComponentSubmitTriggered(args: any) {
     this.componentSubmitTriggeredSource.next(args);
-  }
-  broadcastDeleteKeyPressed() {
-    this.deleteKeyPressedSource.next();
   }
   setNavItemExpanded(nodeId: string, isExpanded: boolean) {
     this.navItemIsExpandedSource.next({ nodeId: nodeId, isExpanded: isExpanded });

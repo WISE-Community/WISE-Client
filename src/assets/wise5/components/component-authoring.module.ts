@@ -13,6 +13,9 @@ import './match/matchAuthoringComponentModule';
 import './multipleChoice/multipleChoiceAuthoringComponentModule';
 import './openResponse/openResponseAuthoringComponentModule';
 import './outsideURL/outsideURLAuthoringComponentModule';
+import './peerChat/peerChatAuthoringComponentModule';
+import './showMyWork/show-my-work-authoring/showMyWorkAuthoringAngularJSComponentModule';
+import './showGroupWork/show-group-work-authoring/showGroupWorkAuthoringAngularJSComponentModule';
 import './summary/summaryAuthoringComponentModule';
 import './table/tableAuthoringComponentModule';
 import { downgradeComponent } from '@angular/upgrade/static';
@@ -36,6 +39,7 @@ import { EditConnectedComponentTypeSelectComponent } from '../../../app/authorin
 import { EditConnectedComponentDeleteButtonComponent } from '../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
 import { EditConnectedComponentDefaultSelectsComponent } from '../../../app/authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
 import { EditComponentMaxSubmitComponent } from '../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
+import { EditComponentPeerGroupingTagComponent } from '../../../app/authoring-tool/edit-component-peer-grouping-tag/edit-component-peer-grouping-tag.component';
 
 export default angular
   .module('componentAuthoringModule', [
@@ -53,6 +57,9 @@ export default angular
     'multipleChoiceAuthoringComponentModule',
     'openResponseAuthoringComponentModule',
     'outsideURLAuthoringComponentModule',
+    'peerChatAuthoringComponentModule',
+    'showGroupWorkAuthoringAngularJSComponentModule',
+    'showMyWorkAuthoringAngularJSComponentModule',
     'summaryAuthoringComponentModule',
     'tableAuthoringComponentModule'
   ])
@@ -80,6 +87,12 @@ export default angular
   .directive(
     'editComponentPrompt',
     downgradeComponent({ component: EditComponentPrompt }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'editComponentPeerGroupingTag',
+    downgradeComponent({
+      component: EditComponentPeerGroupingTagComponent
+    }) as angular.IDirectiveFactory
   )
   .directive(
     'editComponentRubric',

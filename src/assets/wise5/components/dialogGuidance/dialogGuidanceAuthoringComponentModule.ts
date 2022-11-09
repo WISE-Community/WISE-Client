@@ -5,7 +5,7 @@ import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static
 import { DialogGuidanceService } from './dialogGuidanceService';
 import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring/dialog-guidance-authoring.component';
 import { EditDialogGuidanceAdvancedComponent } from './edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component';
-import { EditDialogGuidanceFeedbackRulesComponent } from './edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component';
+import { EditFeedbackRulesComponent } from '../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 
 const dialogGuidanceAuthoringComponentModule = angular
   .module('dialogGuidanceAuthoringComponentModule', [])
@@ -14,7 +14,10 @@ const dialogGuidanceAuthoringComponentModule = angular
     'dialogGuidanceAuthoring',
     downgradeComponent({ component: DialogGuidanceAuthoringComponent }) as angular.IDirectiveFactory
   )
-  .component('editDialogGuidanceFeedbackRules', EditDialogGuidanceFeedbackRulesComponent)
-  .component('editDialogGuidanceAdvanced', EditDialogGuidanceAdvancedComponent);
+  .directive(
+    'editDialogGuidanceAdvanced',
+    downgradeComponent({ component: EditDialogGuidanceAdvancedComponent })
+  )
+  .component('editFeedbackRules', EditFeedbackRulesComponent);
 
 export default dialogGuidanceAuthoringComponentModule;

@@ -1,11 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { DrawService } from '../../assets/wise5/components/draw/drawService';
@@ -19,7 +17,7 @@ let drawDataWithObjects: string = '{"canvas":{"objects":[{}]}}';
 describe('DrawService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       providers: [
         AnnotationService,
         ConfigService,
@@ -27,7 +25,6 @@ describe('DrawService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TagService,
         UtilService
       ]
@@ -93,7 +90,7 @@ function isCompleted() {
     componentStates = [createComponentState(defaultDrawDataWithNoObjectsField)];
   });
   function expectIsCompleted(componentStates: any[], node: any, expectedResult: boolean) {
-    expect(service.isCompleted({}, componentStates, [], [], node)).toEqual(expectedResult);
+    expect(service.isCompleted({}, componentStates, [], node)).toEqual(expectedResult);
   }
   it('should check is completed when there are no component states', () => {
     expectIsCompleted([], node, false);
@@ -302,7 +299,7 @@ function setUpTools() {
     for (const expectedValue of expectedValues) {
       tools[expectedValue.name] = expectedValue.isVisible;
     }
-    const drawingToolId = service.getDrawingToolId('node1', 'component1');
+    const drawingToolId = service.getDrawingToolId('node1-component1');
     createDrawingToolDiv(drawingToolId);
     service.initializeDrawingTool(drawingToolId, {});
     service.setUpTools(drawingToolId, tools, false);

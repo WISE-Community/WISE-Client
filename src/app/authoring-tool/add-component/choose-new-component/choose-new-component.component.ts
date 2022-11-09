@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { UtilService } from '../../../../assets/wise5/services/utilService';
+import { ComponentTypeService } from '../../../../assets/wise5/services/componentTypeService';
 
 @Component({
   selector: 'choose-new-component',
@@ -11,10 +11,10 @@ export class ChooseNewComponent {
   componentTypes: any[];
   selectedComponentType: string;
 
-  constructor(private upgrade: UpgradeModule, private UtilService: UtilService) {}
+  constructor(private upgrade: UpgradeModule, private componentTypeService: ComponentTypeService) {}
 
   ngOnInit() {
-    this.componentTypes = this.UtilService.getComponentTypes();
+    this.componentTypes = this.componentTypeService.getComponentTypes();
     this.selectedComponentType = this.upgrade.$injector.get('$stateParams').componentType;
   }
 

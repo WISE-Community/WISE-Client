@@ -2,28 +2,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapStudent } from './concept-map-student.component';
-
-export class MockService {}
-export class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let background1 = 'background1.png';
 let background2 = 'background2.png';
@@ -45,29 +28,12 @@ let nodeInstanceId1 = 'studentNode1';
 let nodeInstanceId2 = 'studentNode2';
 
 describe('ConceptMapStudent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [ConceptMapStudent],
-      providers: [
-        AnnotationService,
-        ComponentService,
-        ConceptMapService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockService },
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ConceptMapStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,

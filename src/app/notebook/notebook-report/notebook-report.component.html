@@ -26,7 +26,7 @@
         (click)="$event.stopPropagation(); toggleCollapse()">
       <mat-icon> arrow_drop_down </mat-icon>
     </button>
-    <button 
+    <button
         *ngIf="collapsed"
         mat-icon-button
         i18n-title title="Restore"
@@ -53,11 +53,7 @@
           [disabled]="!dirty"
           (click)="saveNotebookReportItem()"
           i18n>Save</button>
-      <span *ngIf="saveTime" class="mat-caption secondary-text save-time"
-            matTooltip="{{ saveTime | amDateFormat:'ddd, MMM D YYYY, h:mm a' }}"
-            matTooltipPosition="above">
-        <em i18n>Saved {{ saveTime | amTimeAgo }}</em>
-      </span>
+      <save-time-message *ngIf="saveTime" [saveTime]="saveTime"></save-time-message>
       <div id="{{reportId}}-toolbar"></div>
       <span fxFlex></span>
       <mat-icon *ngIf="reportItem.content.prompt"
@@ -75,5 +71,4 @@
   <p *ngIf="!hasReport" i18n>
     Team hasn't worked on {{ config.itemTypes.report.notes[0].title }} yet.
   </p>
-  <!--<notebook-item-grading notebook-item="$ctrl.reportItem"></notebook-item-grading>-->
 </div>

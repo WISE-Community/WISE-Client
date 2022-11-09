@@ -1,16 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { AnnotationService } from '../../services/annotationService';
-import { ConfigService } from '../../services/configService';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../services/notebookService';
-import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentAssetService } from '../../services/studentAssetService';
 import { StudentDataService } from '../../services/studentDataService';
-import { TagService } from '../../services/tagService';
-import { UtilService } from '../../services/utilService';
 import { WiseLinkComponent } from './wise-link.component';
 
 describe('WiseLinkComponent', () => {
@@ -20,19 +13,8 @@ describe('WiseLinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
-      declarations: [WiseLinkComponent],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
+      declarations: [WiseLinkComponent]
     }).compileComponents();
   });
 
@@ -44,7 +26,7 @@ describe('WiseLinkComponent', () => {
 
   it('should go to step', () => {
     const closeAllSpy = spyOn(TestBed.inject(MatDialog), 'closeAll');
-    const setNotesVisibleSpy = spyOn(TestBed.inject(NotebookService), 'setNotesVisible');
+    const closeNotesSpy = spyOn(TestBed.inject(NotebookService), 'closeNotes');
     const setCurrentNodeByNodeIdSpy = spyOn(
       TestBed.inject(StudentDataService),
       'setCurrentNodeByNodeId'
@@ -52,7 +34,7 @@ describe('WiseLinkComponent', () => {
     component.nodeId = nodeId1;
     component.goToStep();
     expect(closeAllSpy).toHaveBeenCalled();
-    expect(setNotesVisibleSpy).toHaveBeenCalledWith(false);
+    expect(closeNotesSpy).toHaveBeenCalled();
     expect(setCurrentNodeByNodeIdSpy).toHaveBeenCalledWith(nodeId1);
   });
 });

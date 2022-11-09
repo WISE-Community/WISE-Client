@@ -16,6 +16,7 @@ import { NotebookDataExportStrategy } from './strategies/NotebookDataExportStrat
 import { NotificationDataExportStrategy } from './strategies/NotificationDataExportStrategy';
 import { StudentWorkDataExportStrategy } from './strategies/StudentWorkDataExportStrategy';
 import { DiscussionComponentDataExportStrategy } from './strategies/DiscussionComponentDataExportStrategy';
+import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
 
 class DataExportController {
   allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match', 'OpenResponse'];
@@ -97,6 +98,7 @@ class DataExportController {
     '$mdDialog',
     '$state',
     'AnnotationService',
+    'ComponentServiceLookupService',
     'ConfigService',
     'DataExportService',
     'FileSaver',
@@ -111,10 +113,11 @@ class DataExportController {
     private $mdDialog: any,
     private $state: any,
     public AnnotationService: AnnotationService,
+    private componentServiceLookupService: ComponentServiceLookupService,
     public ConfigService: ConfigService,
     public DataExportService: DataExportService,
     public FileSaver: any,
-    public MatchService: MatchService,
+    private MatchService: MatchService,
     public ProjectService: TeacherProjectService,
     public TeacherDataService: TeacherDataService,
     public UtilService: UtilService
@@ -261,16 +264,14 @@ class DataExportController {
     }
     row[columnNameToNumber['Node ID']] = componentState.nodeId;
     row[columnNameToNumber['Component ID']] = componentState.componentId;
-    row[columnNameToNumber['Step Title']] = this.ProjectService.getNodePositionAndTitleByNodeId(
+    row[columnNameToNumber['Step Title']] = this.ProjectService.getNodePositionAndTitle(
       componentState.nodeId
     );
     var componentPartNumber =
-      this.ProjectService.getComponentPositionByNodeIdAndComponentId(
-        componentState.nodeId,
-        componentState.componentId
-      ) + 1;
+      this.ProjectService.getComponentPosition(componentState.nodeId, componentState.componentId) +
+      1;
     row[columnNameToNumber['Component Part Number']] = componentPartNumber;
-    var component = this.ProjectService.getComponentByNodeIdAndComponentId(
+    var component = this.ProjectService.getComponent(
       componentState.nodeId,
       componentState.componentId
     );
@@ -534,7 +535,7 @@ class DataExportController {
      */
     let studentDataString = ' ';
     let componentType = componentState.componentType;
-    let componentService = this.getComponentService(componentType);
+    let componentService = this.componentServiceLookupService.getService(componentType);
     if (componentService != null && componentService.getStudentDataString != null) {
       studentDataString = componentService.getStudentDataString(componentState);
       studentDataString = this.UtilService.removeHTMLTags(studentDataString);
@@ -863,7 +864,7 @@ class DataExportController {
    * @returns the node title
    */
   getNodeTitleByNodeId(nodeId) {
-    return this.ProjectService.getNodeTitleByNodeId(nodeId);
+    return this.ProjectService.getNodeTitle(nodeId);
   }
 
   /**
@@ -1373,8 +1374,7 @@ class DataExportController {
   getComponentExportFileName(nodeId: string, componentId: string, componentType: string): string {
     const runId = this.ConfigService.getRunId();
     const stepNumber = this.ProjectService.getNodePositionById(nodeId);
-    const componentNumber =
-      this.ProjectService.getComponentPositionByNodeIdAndComponentId(nodeId, componentId) + 1;
+    const componentNumber = this.ProjectService.getComponentPosition(nodeId, componentId) + 1;
     let allOrLatest = '';
     if (this.workSelectionType === 'exportAllWork') {
       allOrLatest = 'all';

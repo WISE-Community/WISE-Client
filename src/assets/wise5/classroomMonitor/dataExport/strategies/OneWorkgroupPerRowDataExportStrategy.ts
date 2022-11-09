@@ -107,7 +107,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
         workgroupRow[columnIdToColumnIndex['End Date']] = endDate;
         for (var n = 0; n < nodeIds.length; n++) {
           var nodeId = nodeIds[n];
-          var components = this.projectService.getComponentsByNodeId(nodeId);
+          var components = this.projectService.getComponents(nodeId);
           if (components != null) {
             for (var c = 0; c < components.length; c++) {
               var component = components[c];
@@ -212,7 +212,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
                 latestBranchPathTakenEvent.data.toNodeId != null
               ) {
                 toNodeId = latestBranchPathTakenEvent.data.toNodeId;
-                stepTitle = this.projectService.getNodePositionAndTitleByNodeId(toNodeId);
+                stepTitle = this.projectService.getNodePositionAndTitle(toNodeId);
               }
               if (this.controller.includeBranchPathTakenNodeId) {
                 if (toNodeId != null) {
@@ -278,7 +278,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
     if (nodeIds != null) {
       for (var n = 0; n < nodeIds.length; n++) {
         var nodeId = nodeIds[n];
-        var components = this.projectService.getComponentsByNodeId(nodeId);
+        var components = this.projectService.getComponents(nodeId);
         if (components != null) {
           for (var c = 0; c < components.length; c++) {
             var component = components[c];
@@ -379,8 +379,8 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
     if (nodeIds != null) {
       for (var n = 0; n < nodeIds.length; n++) {
         var nodeId = nodeIds[n];
-        var stepTitle = this.projectService.getNodePositionAndTitleByNodeId(nodeId);
-        var components = this.projectService.getComponentsByNodeId(nodeId);
+        var stepTitle = this.projectService.getNodePositionAndTitle(nodeId);
+        var components = this.projectService.getComponents(nodeId);
         if (components != null) {
           for (var c = 0; c < components.length; c++) {
             var component = components[c];

@@ -7,14 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { AnnotationService } from '../../../assets/wise5/services/annotationService';
-import { ConfigService } from '../../../assets/wise5/services/configService';
-import { NotificationService } from '../../../assets/wise5/services/notificationService';
-import { ProjectService } from '../../../assets/wise5/services/projectService';
-import { SessionService } from '../../../assets/wise5/services/sessionService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
+import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditComponentExcludeFromTotalScoreComponent } from '../edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
 import { EditComponentJsonComponent } from '../edit-component-json/edit-component-json.component';
 import { EditComponentMaxScoreComponent } from '../edit-component-max-score/edit-component-max-score.component';
@@ -25,7 +19,6 @@ import { EditComponentTagsComponent } from '../edit-component-tags/edit-componen
 import { EditComponentWidthComponent } from '../edit-component-width/edit-component-width.component';
 import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
-
 import { EditCommonAdvancedComponent } from './edit-common-advanced.component';
 
 describe('EditCommonAdvancedComponent', () => {
@@ -43,7 +36,7 @@ describe('EditCommonAdvancedComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [
         EditCommonAdvancedComponent,
@@ -58,15 +51,7 @@ describe('EditCommonAdvancedComponent', () => {
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
       ],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        TeacherProjectService,
-        UtilService
-      ]
+      providers: [TeacherProjectService]
     }).compileComponents();
   });
 

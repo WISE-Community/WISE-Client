@@ -1,6 +1,5 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { configureTestSuite } from 'ng-bullet';
 import { ManageStudentsComponent } from './manage-students.component';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 
@@ -18,14 +17,12 @@ let http: HttpTestingController;
 let component: ManageStudentsComponent;
 
 describe('ManageStudentsComponent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ManageStudentsComponent],
       imports: [HttpClientTestingModule],
       providers: [{ provide: TeacherDataService, useClass: TeacherDataServiceStub }]
     });
-  });
-  beforeEach(() => {
     teacherDataService = TestBed.inject(TeacherDataService);
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(ManageStudentsComponent);

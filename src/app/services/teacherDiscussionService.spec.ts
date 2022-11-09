@@ -1,12 +1,10 @@
 import { DiscussionService } from '../../assets/wise5/components/discussion/discussionService';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
@@ -48,7 +46,7 @@ const nodeId = 'node1';
 describe('TeacherDiscussionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       providers: [
         AchievementService,
         AnnotationService,
@@ -59,7 +57,6 @@ describe('TeacherDiscussionService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TagService,
         { provide: TeacherDataService, useClass: MockTeacherDataService },
         TeacherDiscussionService,

@@ -57,7 +57,12 @@ export class DrawStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.drawingToolId = this.DrawService.getDrawingToolId(this.nodeId, this.componentId);
+    const domIdEnding = this.DrawService.getDomIdEnding(
+      this.nodeId,
+      this.componentId,
+      this.componentState
+    );
+    this.drawingToolId = this.DrawService.getDrawingToolId(domIdEnding);
     this.showCopyPublicNotebookItemButton = this.ProjectService.isSpaceExists('public');
     if (this.isDisabled) {
       this.isResetButtonVisible = false;
@@ -338,7 +343,9 @@ export class DrawStudent extends ComponentStudent {
 
   addNoteWithImage(componentStateId: number) {
     const image = this.generateImageFromCanvas();
-    this.NotebookService.addNote(image, null, [componentStateId]);
+    this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), image, null, [
+      componentStateId
+    ]);
   }
 
   generateImageFromCanvas(): any {

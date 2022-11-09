@@ -1,14 +1,12 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
-import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { UtilService } from '../../../services/utilService';
 import { EditMultipleChoiceConnectedComponentsComponent } from './edit-multiple-choice-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { MultipleChoiceContent } from '../MultipleChoiceContent';
 
 let component: EditMultipleChoiceConnectedComponentsComponent;
 let fixture: ComponentFixture<EditMultipleChoiceConnectedComponentsComponent>;
@@ -18,12 +16,11 @@ const nodeId1 = 'nodeId1';
 describe('EditMultipleChoiceConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatIconModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatIconModule, StudentTeacherCommonServicesModule],
       declarations: [
         EditConnectedComponentsAddButtonComponent,
         EditMultipleChoiceConnectedComponentsComponent
-      ],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      ]
     }).compileComponents();
   });
 
@@ -57,10 +54,8 @@ function askIfWantToCopyChoices() {
           createChoiceObject('choice2', 'Patrick')
         ],
         choiceType: 'radio'
-      };
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-        componentContent
-      );
+      } as MultipleChoiceContent;
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(componentContent);
       connectedComponent = createConnectedComponentObject(nodeId1, componentId1, 'importWork');
     });
     it('should copy choices from connected component', () => {

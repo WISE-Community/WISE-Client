@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AnnouncementComponent } from './announcement.component';
-import { configureTestSuite } from 'ng-bullet';
 import { Announcement } from '../domain/announcement';
 import { MatDialog } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
@@ -10,7 +9,7 @@ describe('AnnouncementComponent', () => {
   let component: AnnouncementComponent;
   let fixture: ComponentFixture<AnnouncementComponent>;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AnnouncementComponent],
       providers: [

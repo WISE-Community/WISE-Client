@@ -8,12 +8,8 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Directive()
 export abstract class ComponentAuthoring {
-  @Input()
-  nodeId: string;
-
-  @Input()
-  componentId: string;
-
+  @Input() nodeId: string;
+  @Input() componentId: string;
   inputChange: Subject<string> = new Subject<string>();
   promptChange: Subject<string> = new Subject<string>();
   allowedConnectedComponentTypes: string[];
@@ -36,7 +32,7 @@ export abstract class ComponentAuthoring {
   ) {}
 
   ngOnInit() {
-    this.authoringComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+    this.authoringComponentContent = this.ProjectService.getComponent(
       this.nodeId,
       this.componentId
     );
@@ -141,12 +137,12 @@ export abstract class ComponentAuthoring {
 
   assetSelected({ nodeId, componentId, assetItem, target }): void {}
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
-  getComponentByNodeIdAndComponentId(nodeId: string, componentId: string) {
-    return this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+  getComponent(nodeId: string, componentId: string): any {
+    return this.ProjectService.getComponent(nodeId, componentId);
   }
 
   reloadPreview() {
@@ -156,5 +152,22 @@ export abstract class ComponentAuthoring {
       // remove the field we previously used to trigger the reload
       delete this.authoringComponentContent.reloadTime;
     });
+  }
+
+  confirmAndRemove(message: string, array: any[], index: number): void {
+    if (confirm(message)) {
+      array.splice(index, 1);
+      this.componentChanged();
+    }
+  }
+
+  moveObjectUp(objects: any[], index: number): void {
+    this.ProjectService.moveObjectUp(objects, index);
+    this.componentChanged();
+  }
+
+  moveObjectDown(objects: any[], index: number): void {
+    this.ProjectService.moveObjectDown(objects, index);
+    this.componentChanged();
   }
 }

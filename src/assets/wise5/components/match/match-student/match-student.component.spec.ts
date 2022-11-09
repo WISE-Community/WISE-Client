@@ -2,28 +2,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
+import { ClickToSnipImageService } from '../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
-import { MatchService } from '../matchService';
 import { MatchStudent } from './match-student.component';
-
-class MockService {}
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: MatchStudent;
 let fixture: ComponentFixture<MatchStudent>;
@@ -62,30 +45,13 @@ let notebookItemImageName: string;
 let notebookItemText: string;
 let starterBucketLabel = 'Starter Choices';
 
-describe('MatchStudent', () => {
-  configureTestSuite(() => {
+describe('MatchStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [MatchStudent],
-      providers: [
-        AnnotationService,
-        MatchService,
-        ComponentService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockService },
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(MatchStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,
@@ -96,15 +62,15 @@ describe('MatchStudent', () => {
     choice1 = createChoice(choiceId1, choiceValue1);
     choice2 = createChoice(choiceId2, choiceValue2);
     choice3 = createChoice(choiceId3, choiceValue3);
-    bucket1 = createBucket(bucketId1, bucketValue1, []);
-    bucket2 = createBucket(bucketId2, bucketValue2, []);
-    bucket3 = createBucket(bucketId3, bucketValue3, []);
+    const componentContentBucket1 = createBucket(bucketId1, bucketValue1, []);
+    const componentContentBucket2 = createBucket(bucketId2, bucketValue2, []);
+    const componentContentBucket3 = createBucket(bucketId3, bucketValue3, []);
     const componentContent = {
       id: componentId,
       type: 'Match',
       prompt: 'Put the choices in the buckets.',
       choices: [choice1, choice2, choice3],
-      buckets: [bucket1, bucket2, bucket3],
+      buckets: [componentContentBucket1, componentContentBucket2, componentContentBucket3],
       choicesLabel: starterBucketLabel,
       feedback: [
         createFeedbackForBucket('0', [
@@ -130,7 +96,7 @@ describe('MatchStudent', () => {
       ]
     };
     component.componentContent = componentContent;
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(
       JSON.parse(JSON.stringify(componentContent))
     );
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
@@ -159,6 +125,9 @@ describe('MatchStudent', () => {
     notebookItemImageName = 'my-image.png';
     notebookItem = createNotebookItem(notebookItemId, notebookItemText, notebookItemImageName);
     fixture.detectChanges();
+    bucket1 = component.buckets[1];
+    bucket2 = component.buckets[2];
+    bucket3 = component.buckets[3];
   });
 
   createSourceBucket();
@@ -696,9 +665,9 @@ function getCleanedValue() {
       componentContent.choices[0].value = choiceValue;
       componentContent.buckets[0].value = bucketValue;
       const originalComponentContent = JSON.parse(JSON.stringify(componentContent));
-      component.componentContent = TestBed.inject(ProjectService).injectClickToSnipImage(
-        component.componentContent
-      );
+      component.componentContent = TestBed.inject(
+        ClickToSnipImageService
+      ).injectClickToSnipImageListener(component.componentContent);
       expect(component.componentContent.choices[0].value).toContain('onclick');
       expect(component.componentContent.buckets[0].value).toContain('onclick');
       expect(

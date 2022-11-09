@@ -1,4 +1,4 @@
-<component-header [componentContent]="componentContent"></component-header>
+<component-header [component]="component"></component-header>
 <div class="tools" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
   <button
       mat-button
@@ -30,29 +30,16 @@
     Import Data
   </button>
 </div>
-<div class="table-container">
-  <table [id]="tableId" class="table">
-    <tr *ngFor="let row of getTableDataRows()">
-      <td *ngFor="let cell of row"
-          class="table-cell"
-          style="width: {{cell.size || componentContent.globalCellSize}}em; max-width: {{cell.size || componentContent.globalCellSize}}em">
-        <mat-form-field *ngIf="cell.editable"
-            class="cell-input form-field-no-label form-field-no-hint"
-            appearance="outline">
-          <textarea cdkTextareaAutosize
-              matInput
-              type="text"
-              [(ngModel)]="cell.text"
-              (ngModelChange)="studentDataChanged()"
-              [disabled]="isDisabled"
-              i18n-aria-label
-              aria-label="Cell content"></textarea>
-        </mat-form-field>
-        <ng-container *ngIf="!cell.editable">{{cell.text}}</ng-container>
-      </td>
-    </tr>
-  </table>
-</div>
+<tabulator-table [id]="tableId"
+    [editableCells]="tabulatorData.editableCells"
+    [enableRowSelection]="componentContent.enableRowSelection"
+    [selectedRowIndices]="selectedRowIndices"
+    [tabColumns]="tabulatorData.columns"
+    [tabData]="tabulatorData.data"
+    [tabOptions]="tabulatorData.options"
+    (cellChanged)="tabulatorCellChanged($event)"
+    (rowSelectionChanged)="tabulatorRowSelectionChanged($event)"
+    (ready)="tabulatorRendered()"></tabulator-table>
 <div *ngIf="isDataExplorerEnabled">
   <br/>
   <mat-form-field *ngIf="componentContent.dataExplorerGraphTypes.length > 1" appearance="fill">
@@ -77,11 +64,13 @@
           (ngModelChange)="dataExplorerXColumnChanged(xColumn)"
           [disabled]="dataExplorerColumnToIsDisabled['x']">
         <mat-option [value]="" i18n>(None)</mat-option>
-        <mat-option
-            *ngFor="let columnName of columnNames; index as columnIndex"
-            [value]="columnIndex">
-          <span>{{columnName}}</span>
-        </mat-option>
+        <ng-container *ngFor="let columnName of columnNames; index as columnIndex">
+          <mat-option
+              *ngIf="!columnIndexToIsUsed.get(columnIndex) || columnIndex === dataExplorerXColumn"
+              [value]="columnIndex">
+            <span>{{columnName}}</span>
+          </mat-option>
+        </ng-container>
       </mat-select>
     </mat-form-field>
     <mat-form-field
@@ -94,11 +83,13 @@
           (ngModelChange)="dataExplorerYColumnChanged(seriesIndex)"
           [disabled]="dataExplorerColumnToIsDisabled['y' + (seriesIndex > 0 ? seriesIndex + 1 : '')]">
         <mat-option [value]="" i18n>(None)</mat-option>
-        <mat-option
-            *ngFor="let columnName of columnNames; index as columnIndex"
-            [value]="columnIndex">
-          <span>{{columnName}}</span>
-        </mat-option>
+        <ng-container *ngFor="let columnName of columnNames; index as columnIndex">
+          <mat-option
+              *ngIf="!columnIndexToIsUsed.get(columnIndex) || columnIndex === singleDataExplorerSeries.yColumn"
+              [value]="columnIndex">
+            <span>{{columnName}}</span>
+          </mat-option>
+        </ng-container>
         </mat-select>
     </mat-form-field>
   </div>
@@ -150,13 +141,13 @@
 </div>
 <component-save-submit-buttons
     *ngIf="isSaveOrSubmitButtonVisible"
+    [componentState]="latestComponentState"
     [isDirty]="isDirty"
     [isDisabled]="isDisabled"
     [isSaveButtonVisible]="isSaveButtonVisible"
     [isSubmitButtonDisabled]="isSubmitButtonDisabled"
     [isSubmitButtonVisible]="isSubmitButtonVisible"
     [isSubmitDirty]="isSubmitDirty"
-    [saveMessage]="saveMessage"
     (saveButtonClicked)="saveButtonClicked($event)"
     (submitButtonClicked)="submitButtonClicked($event)">
 </component-save-submit-buttons>

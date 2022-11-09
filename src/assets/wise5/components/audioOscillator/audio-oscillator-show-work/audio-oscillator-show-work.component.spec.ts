@@ -1,11 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
-import { ConfigService } from '../../../services/configService';
+import { MatDialogModule } from '@angular/material/dialog';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { UtilService } from '../../../services/utilService';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
 import { AudioOscillatorShowWorkComponent } from './audio-oscillator-show-work.component';
 
@@ -13,18 +11,13 @@ let component: AudioOscillatorShowWorkComponent;
 let fixture: ComponentFixture<AudioOscillatorShowWorkComponent>;
 
 describe('AudioOscillatorShowWorkComponent', () => {
-  configureTestSuite(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      declarations: [AudioOscillatorShowWorkComponent],
-      providers: [ConfigService, SessionService, ProjectService, UtilService],
-      schemas: []
-    });
-  });
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
+      declarations: [AudioOscillatorShowWorkComponent]
+    });
     fixture = TestBed.createComponent(AudioOscillatorShowWorkComponent);
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({} as ComponentContent);
     component = fixture.componentInstance;
     const audioOscillatorStudentData = {
       amplitudesPlayed: null,

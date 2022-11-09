@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { AngularJSModule } from '../../../../app/common-hybrid-angular.module';
+import { StudentTeacherCommonModule } from '../../../../app/student-teacher-common.module';
 import { StudentComponentModule } from '../../../../app/student/student.component.module';
+import { ComponentStateInfoModule } from '../../common/component-state-info/component-state-info.module';
 import { ClassResponse } from './class-response/class-response.component';
 
 @NgModule({
   declarations: [ClassResponse],
-  imports: [AngularJSModule, StudentComponentModule],
+  imports: [StudentTeacherCommonModule, ComponentStateInfoModule, StudentComponentModule],
   exports: [ClassResponse]
 })
 export class DiscussionCommonModule {}

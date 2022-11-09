@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ComputerAvatar } from '../../common/ComputerAvatar';
 import { DialogGuidanceService } from '../../components/dialogGuidance/dialogGuidanceService';
 import { AnnotationService } from '../../services/annotationService';
@@ -23,7 +22,7 @@ describe('ComputerAvatarSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       declarations: [ComputerAvatarSelectorComponent],
       providers: [
         AnnotationService,

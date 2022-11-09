@@ -64,9 +64,7 @@ export class StepToolsComponent implements OnInit {
   }
 
   toNodeIdChanged(): void {
-    if (!this.projectService.isGroupNode(this.toNodeId)) {
-      this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.toNodeId);
-    }
+    this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(this.toNodeId);
   }
 
   updateModel(): void {
@@ -87,16 +85,16 @@ export class StepToolsComponent implements OnInit {
     return this.projectService.getThemePath() + '/themeComponents/stepTools/stepTools.html';
   }
 
-  getNodeTitleByNodeId(nodeId: string): string {
-    return this.projectService.getNodeTitleByNodeId(nodeId);
+  getNodeTitle(nodeId: string): string {
+    return this.projectService.getNodeTitle(nodeId);
   }
 
   getNodePositionById(nodeId: string): string {
     return this.projectService.getNodePositionById(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.projectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
   isGroupNode(nodeId: string): boolean {

@@ -1,10 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
-import { UtilService } from '../../assets/wise5/services/utilService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 import { DataService } from './data.service';
 
@@ -14,8 +11,7 @@ let projectService: ProjectService;
 describe('DataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
     });
     service = TestBed.inject(DataService);
     projectService = TestBed.inject(ProjectService);

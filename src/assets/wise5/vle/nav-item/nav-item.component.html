@@ -36,14 +36,17 @@
       </div>
     </mat-card-actions>
   </mat-card>
-  <button mat-list-item class="list-item" *ngSwitchCase="'list'" (click)="itemClicked($event)"
-          tabindex="0" i18n-title title="Go to {{nodeTitle}}" [ngClass]="{'group':isGroup}">
-    <node-icon matListAvatar [nodeId]="nodeId" [icon]="nodeStatus.icon"></node-icon>
-    <p matLine>{{ nodeTitle }}</p>
-    <div fxLayoutAlign="center center" fxLayoutGap="8px">
-      <node-status-icon [nodeId]="nodeId"></node-status-icon>
-      <mat-icon *ngIf="!nodeStatus.isVisitable" class="secondary-text" i18n-matTooltip
-                matTooltip="Item is locked" matTooltipPosition="above"> lock </mat-icon>
-    </div>
-  </button>
+  <ng-container *ngSwitchCase="'list'">
+    <button mat-list-item class="list-item" (click)="itemClicked($event)"
+            tabindex="0" i18n-title title="Go to {{nodeTitle}}" [ngClass]="{'group':isGroup}">
+      <node-icon matListAvatar [nodeId]="nodeId" [icon]="nodeStatus.icon"></node-icon>
+      <p matLine>{{ nodeTitle }}</p>
+      <div fxLayoutAlign="center center" fxLayoutGap="8px">
+        <node-status-icon [nodeId]="nodeId"></node-status-icon>
+        <mat-icon *ngIf="!nodeStatus.isVisitable" class="secondary-text" i18n-matTooltip
+                  matTooltip="Item is locked" matTooltipPosition="above"> lock </mat-icon>
+      </div>
+    </button>
+    <mat-divider></mat-divider>
+  </ng-container>
 </ng-container>

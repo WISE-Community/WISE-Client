@@ -1,12 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
-import { ConfigService } from '../../../services/configService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { UtilService } from '../../../services/utilService';
+import { ConceptMapContent } from '../ConceptMapContent';
 import { EditConceptMapConnectedComponentsComponent } from './edit-concept-map-connected-components.component';
 
 let component: EditConceptMapConnectedComponentsComponent;
@@ -17,12 +15,11 @@ const nodeId1 = 'nodeId1';
 describe('EditConceptMapConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatIconModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatIconModule, StudentTeacherCommonServicesModule],
       declarations: [
         EditConnectedComponentsAddButtonComponent,
         EditConceptMapConnectedComponentsComponent
-      ],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      ]
     }).compileComponents();
   });
 
@@ -60,11 +57,11 @@ function createLink(id: string, label: string, color: string = 'blue'): any {
 function askIfWantToCopyNodesAndLinks() {
   describe('askIfWantToCopyNodesAndLinks', () => {
     beforeEach(() => {
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
         id: componentId1,
         nodes: [createNode('node1', 'Tree', 'tree.png')],
         links: [createLink('link1', 'Energy', 'green')]
-      });
+      } as ConceptMapContent);
     });
     it('should copy nodes and links', () => {
       expectNumberOfNodesAndLinks(component.componentContent, 0, 0);

@@ -431,14 +431,14 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
   }
 
   private setTitle(row, columnNameToNumber, data) {
-    const stepTitle = this.projectService.getNodePositionAndTitleByNodeId(data.nodeId);
+    const stepTitle = this.projectService.getNodePositionAndTitle(data.nodeId);
     if (stepTitle != null) {
       row[columnNameToNumber['Step Title']] = stepTitle;
     }
   }
 
   private setComponentPartNumber(row, columnNameToNumber, data) {
-    const componentPartNumber = this.projectService.getComponentPositionByNodeIdAndComponentId(
+    const componentPartNumber = this.projectService.getComponentPosition(
       data.nodeId,
       data.componentId
     );
@@ -465,10 +465,7 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
     const nodeId = data.nodeId;
     const componentId = data.componentId;
     if (nodeId != null && componentId != null) {
-      const component = this.projectService.getComponentByNodeIdAndComponentId(
-        data.nodeId,
-        data.componentId
-      );
+      const component = this.projectService.getComponent(data.nodeId, data.componentId);
       this.setComponentType(row, columnNameToNumber, component);
       this.setComponentPrompt(row, columnNameToNumber, component);
     }
@@ -489,7 +486,7 @@ export class EventDataExportStrategy extends AbstractDataExportStrategy {
          */
         if (event.data != null && event.data.toNodeId != null) {
           var toNodeId = event.data.toNodeId;
-          var stepTitle = this.projectService.getNodePositionAndTitleByNodeId(toNodeId);
+          var stepTitle = this.projectService.getNodePositionAndTitle(toNodeId);
           response = stepTitle;
         }
       }

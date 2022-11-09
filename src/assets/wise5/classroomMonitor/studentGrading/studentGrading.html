@@ -76,10 +76,10 @@
         </div>
       </md-list-item>
       <step-item ng-repeat="node in studentGradingController.nodesById | toArray | orderBy:studentGradingController.getOrderBy()"
-                 ng-if="node.show" expand="studentGradingController.nodeVisibilityById[node.$key]"
-                 max-score="node.maxScore" show-score="node.hasWork" node-id="::node.$key"
-                 step-data="node" workgroup-id="::studentGradingController.workgroupId"
-                 on-update-expand="studentGradingController.onUpdateExpand(nodeId, value)"
+                 ng-if="node.show" [expand]="studentGradingController.nodeVisibilityById[node.$key]"
+                 [max-score]="node.maxScore" [show-score]="node.hasWork" [node-id]="node.$key"
+                 [step-data]="node" [workgroup-id]="studentGradingController.workgroupId"
+                 (on-update-expand)="studentGradingController.onUpdateExpand($event)"
                  in-view="studentGradingController.stepInView(node.$key, $inview)"></step-item>
     </md-list>
   </div>

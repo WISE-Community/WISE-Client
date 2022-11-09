@@ -1,13 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigService } from '../../../assets/wise5/services/configService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
-import { SessionService } from '../../../assets/wise5/services/sessionService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
+import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
-
 import { EditConnectedComponentsComponent } from './edit-connected-components.component';
 
 let component: EditConnectedComponentsComponent;
@@ -22,9 +18,8 @@ const importWorkType = 'importWork';
 describe('EditConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatIconModule, UpgradeModule],
-      declarations: [EditConnectedComponentsAddButtonComponent, EditConnectedComponentsComponent],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      imports: [HttpClientTestingModule, MatIconModule, StudentTeacherCommonServicesModule],
+      declarations: [EditConnectedComponentsAddButtonComponent, EditConnectedComponentsComponent]
     }).compileComponents();
   });
 
@@ -75,7 +70,7 @@ function automaticallySetConnectedComponentComponentIdIfPossible() {
     it(`should not automatically set connected component component id there are no acceptable
         component types`, () => {
       const connectedComponent = createConnectedComponentObject(nodeId1, null, null);
-      spyOn(TestBed.inject(ProjectService), 'getComponentsByNodeId').and.returnValue([
+      spyOn(TestBed.inject(ProjectService), 'getComponents').and.returnValue([
         createComponentObject(componentId1, 'Table'),
         createComponentObject(componentId2, 'Graph')
       ]);
@@ -87,7 +82,7 @@ function automaticallySetConnectedComponentComponentIdIfPossible() {
     });
     it('should automatically set connected component component id if possible', () => {
       const connectedComponent = createConnectedComponentObject(nodeId1, null, null);
-      spyOn(TestBed.inject(ProjectService), 'getComponentsByNodeId').and.returnValue([
+      spyOn(TestBed.inject(ProjectService), 'getComponents').and.returnValue([
         createComponentObject(componentId1, 'Table'),
         createComponentObject(componentId2, 'OpenResponse')
       ]);

@@ -4,13 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
-import { ConfigService } from '../../../../assets/wise5/services/configService';
 import { CopyNodesService } from '../../../../assets/wise5/services/copyNodesService';
-import { SessionService } from '../../../../assets/wise5/services/sessionService';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
-import { UtilService } from '../../../../assets/wise5/services/utilService';
+import { StudentTeacherCommonServicesModule } from '../../../student-teacher-common-services.module';
 import { EditComponentDefaultFeedback } from './edit-component-default-feedback.component';
 
 let component: EditComponentDefaultFeedback;
@@ -20,7 +16,7 @@ let feedback3 = 'Third feedback';
 let fixture: ComponentFixture<EditComponentDefaultFeedback>;
 
 describe('EditComponentDefaultFeedback', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -28,16 +24,10 @@ describe('EditComponentDefaultFeedback', () => {
         MatIconModule,
         MatInputModule,
         NoopAnimationsModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentDefaultFeedback],
-      providers: [
-        ConfigService,
-        CopyNodesService,
-        SessionService,
-        TeacherProjectService,
-        UtilService
-      ]
+      providers: [CopyNodesService, TeacherProjectService]
     });
   });
 

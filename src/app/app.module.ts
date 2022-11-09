@@ -13,7 +13,7 @@ import {
   SocialLoginModule,
   GoogleLoginProvider,
   SocialAuthServiceConfig
-} from 'angularx-social-login';
+} from '@abacritt/angularx-social-login';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +28,6 @@ import { MobileMenuModule } from './modules/mobile-menu/mobile-menu.module';
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementDialogComponent } from './announcement/announcement.component';
 import { TrackScrollDirective } from './track-scroll.directive';
-import { PreviewModule } from './preview/preview.module';
 
 export function initialize(
   configService: ConfigService,
@@ -48,6 +47,7 @@ export function getAuthServiceConfigs(configService: ConfigService) {
     providers: []
   };
   const googleLoginOptions = {
+    scope: 'profile email',
     prompt: 'select_account'
   };
   configService.getConfig().subscribe((config) => {
@@ -80,7 +80,6 @@ export function getAuthServiceConfigs(configService: ConfigService) {
     HeaderModule,
     HomeModule,
     MobileMenuModule,
-    PreviewModule,
     SocialLoginModule,
     MatSidenavModule,
     MatSnackBarModule,

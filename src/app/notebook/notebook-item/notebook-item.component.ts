@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { DialogWithConfirmComponent } from '../../../assets/wise5/directives/dialog-with-confirm/dialog-with-confirm.component';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
@@ -11,36 +12,23 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
   templateUrl: 'notebook-item.component.html'
 })
 export class NotebookItemComponent {
-  @Input()
-  note: any;
-
-  @Input()
-  config: any;
-
-  @Input()
-  itemId: string;
-
-  @Input()
-  group: string;
-
-  @Input()
-  isChooseMode: boolean;
-
-  item: any;
-  type: string;
-  label: any;
   color: string;
-
-  @Output()
-  onSelect: EventEmitter<any> = new EventEmitter<any>();
-
+  @Input() config: any;
+  @Input() group: string;
+  @Input() isChooseMode: boolean;
+  item: any;
+  @Input() itemId: string;
+  label: any;
+  @Input() note: any;
   notebookUpdatedSubscription: Subscription;
+  @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
+  type: string;
 
   constructor(
-    private upgrade: UpgradeModule,
-    private ConfigService: ConfigService,
-    private NotebookService: NotebookService,
-    private ProjectService: ProjectService
+    private configService: ConfigService,
+    private notebookService: NotebookService,
+    private projectService: ProjectService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +41,7 @@ export class NotebookItemComponent {
       this.color = this.label.color;
     }
 
-    this.notebookUpdatedSubscription = this.NotebookService.notebookUpdated$.subscribe(
+    this.notebookUpdatedSubscription = this.notebookService.notebookUpdated$.subscribe(
       ({ notebook }) => {
         if (notebook.items[this.itemId]) {
           this.item = notebook.items[this.itemId].last();
@@ -82,7 +70,7 @@ export class NotebookItemComponent {
     if (this.item == null) {
       return '';
     } else {
-      return this.ProjectService.getNodePositionAndTitleByNodeId(this.item.nodeId);
+      return this.projectService.getNodePositionAndTitle(this.item.nodeId);
     }
   }
 
@@ -90,54 +78,42 @@ export class NotebookItemComponent {
     if (this.item == null) {
       return '';
     } else {
-      return this.ProjectService.getNodePositionById(this.item.nodeId);
+      return this.projectService.getNodePositionById(this.item.nodeId);
     }
   }
 
   doDelete(ev: any): void {
     ev.stopPropagation();
-    const confirm = this.upgrade.$injector
-      .get('$mdDialog')
-      .confirm()
-      .title($localize`Are you sure you want to delete this ${this.label.singular}?`)
-      .ariaLabel($localize`Delete ${this.label.singular} confirmation`)
-      .targetEvent(ev)
-      .ok($localize`Delete`)
-      .cancel($localize`Cancel`);
-    this.upgrade.$injector
-      .get('$mdDialog')
-      .show(confirm)
-      .then(
-        () => {
-          this.NotebookService.deleteNote(this.item);
-        },
-        () => {
-          // they chose not to delete. Do nothing, the dialog will close.
+    this.dialog
+      .open(DialogWithConfirmComponent, {
+        data: {
+          content: $localize`Are you sure you want to delete this ${this.label.singular}:singular term for note in unit:?`,
+          title: $localize`Delete ${this.label.singular}:singular term for note in unit:`
         }
-      );
+      })
+      .afterClosed()
+      .subscribe((doDelete: boolean) => {
+        if (doDelete) {
+          this.notebookService.deleteNote(this.item);
+        }
+      });
   }
 
   doRevive(ev: any): void {
     ev.stopPropagation();
-    const confirm = this.upgrade.$injector
-      .get('$mdDialog')
-      .confirm()
-      .title($localize`Are you sure you want to revive this ${this.label.singular}?`)
-      .ariaLabel($localize`Revive ${this.label.singular} confirmation`)
-      .targetEvent(ev)
-      .ok($localize`revive`)
-      .cancel($localize`cancel`);
-    this.upgrade.$injector
-      .get('$mdDialog')
-      .show(confirm)
-      .then(
-        () => {
-          this.NotebookService.reviveNote(this.item);
-        },
-        () => {
-          // they chose not to revive. Do nothing, the dialog will close.
+    this.dialog
+      .open(DialogWithConfirmComponent, {
+        data: {
+          content: $localize`Are you sure you want to revive this ${this.label.singular}:singular term for note in unit:?`,
+          title: $localize`Revive ${this.label.singular}:singular term for note in unit:`
         }
-      );
+      })
+      .afterClosed()
+      .subscribe((doRevive: boolean) => {
+        if (doRevive) {
+          this.notebookService.reviveNote(this.item);
+        }
+      });
   }
 
   doSelect(event: any): void {
@@ -148,7 +124,7 @@ export class NotebookItemComponent {
 
   canShareNotebookItem(): boolean {
     return (
-      this.ProjectService.isSpaceExists('public') &&
+      this.projectService.isSpaceExists('public') &&
       this.isMyNotebookItem() &&
       this.item.serverDeleteTime == null &&
       !this.isChooseMode &&
@@ -158,7 +134,7 @@ export class NotebookItemComponent {
 
   canUnshareNotebookItem(): boolean {
     return (
-      this.ProjectService.isSpaceExists('public') &&
+      this.projectService.isSpaceExists('public') &&
       this.isMyNotebookItem() &&
       this.item.serverDeleteTime == null &&
       !this.isChooseMode &&
@@ -174,8 +150,8 @@ export class NotebookItemComponent {
     return this.item.serverDeleteTime != null && !this.isChooseMode;
   }
 
-  isMyNotebookItem(): boolean {
-    return this.item.workgroupId === this.ConfigService.getWorkgroupId();
+  private isMyNotebookItem(): boolean {
+    return this.item.workgroupId === this.configService.getWorkgroupId();
   }
 
   isNotebookItemActive(): boolean {

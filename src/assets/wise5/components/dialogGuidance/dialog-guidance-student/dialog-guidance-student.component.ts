@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
-import { ComponentStudent } from '../../component-student.component';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
@@ -12,16 +11,19 @@ import { DialogResponse } from '../DialogResponse';
 import { StudentDialogResponse } from '../StudentDialogResponse';
 import { CRaterService } from '../../../services/cRaterService';
 import { timeout } from 'rxjs/operators';
-import { CRaterResponse } from '../CRaterResponse';
+import { CRaterResponse } from '../../common/cRater/CRaterResponse';
 import { ComputerDialogResponse } from '../ComputerDialogResponse';
-import { FeedbackRule } from '../FeedbackRule';
-import { DialogGuidanceFeedbackRuleEvaluator } from '../DialogGuidanceFeedbackRuleEvaluator';
+import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
+import { FeedbackRuleEvaluator } from '../../common/feedbackRule/FeedbackRuleEvaluator';
 import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseMultipleScores';
 import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
 import { MatDialog } from '@angular/material/dialog';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
+import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
+import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
+import { ComponentStudent } from '../../component-student.component';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -31,7 +33,7 @@ import { StudentStatusService } from '../../../services/studentStatusService';
 export class DialogGuidanceStudentComponent extends ComponentStudent {
   computerAvatar: ComputerAvatar;
   cRaterTimeout: number = 40000;
-  feedbackRuleEvaluator: DialogGuidanceFeedbackRuleEvaluator;
+  feedbackRuleEvaluator: FeedbackRuleEvaluator;
   isShowComputerAvatarSelector: boolean = false;
   isSubmitEnabled: boolean = false;
   isWaitingForComputerResponse: boolean = false;
@@ -47,6 +49,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected ConfigService: ConfigService,
     protected CRaterService: CRaterService,
     protected dialog: MatDialog,
+    protected dialogGuidanceFeedbackService: DialogGuidanceFeedbackService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
@@ -79,7 +82,13 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     }
-    this.feedbackRuleEvaluator = new DialogGuidanceFeedbackRuleEvaluator(this);
+    this.feedbackRuleEvaluator = new FeedbackRuleEvaluator(
+      new FeedbackRuleComponent(
+        this.getFeedbackRules(),
+        this.getMaxSubmitCount(),
+        this.isMultipleFeedbackTextsForSameRuleAllowed()
+      )
+    );
     if (this.componentContent.isComputerAvatarEnabled) {
       this.initializeComputerAvatar();
     } else {
@@ -207,8 +216,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     )
       .pipe(timeout(this.cRaterTimeout))
       .subscribe(
-        (response: CRaterResponse) => {
-          this.cRaterSuccessResponse(Object.assign(new CRaterResponse(), response));
+        (response: any) => {
+          this.cRaterSuccessResponse(response);
         },
         () => {
           this.cRaterErrorResponse();
@@ -236,10 +245,11 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.studentCanRespond = false;
   }
 
-  cRaterSuccessResponse(response: CRaterResponse): void {
+  cRaterSuccessResponse(response: any): void {
     this.hideWaitingForComputerResponse();
     this.submitButtonClicked();
-    this.addDialogResponse(this.createComputerDialogResponse(response));
+    const cRaterResponse = this.CRaterService.getCRaterResponse(response, this.submitCounter);
+    this.addDialogResponse(this.createComputerDialogResponse(cRaterResponse));
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     } else {
@@ -249,19 +259,33 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   createComputerDialogResponse(response: CRaterResponse): ComputerDialogResponse {
     const feedbackRule: FeedbackRule = this.feedbackRuleEvaluator.getFeedbackRule(response);
-    return response.scores != null
-      ? new ComputerDialogResponseMultipleScores(
-          feedbackRule.feedback,
-          response.scores,
-          response.ideas,
-          new Date().getTime()
-        )
-      : new ComputerDialogResponseSingleScore(
-          feedbackRule.feedback,
-          response.score,
-          response.ideas,
-          new Date().getTime()
-        );
+    const feedbackText = this.dialogGuidanceFeedbackService.getFeedbackText(this, feedbackRule);
+    const computerResponse =
+      response.scores != null
+        ? new ComputerDialogResponseMultipleScores(
+            feedbackText,
+            response.scores,
+            response.ideas,
+            new Date().getTime()
+          )
+        : new ComputerDialogResponseSingleScore(
+            feedbackText,
+            response.score,
+            response.ideas,
+            new Date().getTime()
+          );
+    if (this.isVersion2()) {
+      computerResponse.feedbackRuleId = feedbackRule.id;
+    }
+    return computerResponse;
+  }
+
+  isVersion1(): boolean {
+    return this.componentContent.version == null;
+  }
+
+  isVersion2(): boolean {
+    return this.componentContent.version === 2;
   }
 
   cRaterErrorResponse() {
@@ -296,5 +320,13 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   studentResponseChanged(): void {
     this.isSubmitEnabled = this.studentResponse.length > 0;
     this.setIsSubmitDirty(this.isSubmitDirty || this.isSubmitEnabled);
+  }
+
+  getFeedbackRules(): FeedbackRule[] {
+    return this.componentContent.feedbackRules;
+  }
+
+  isMultipleFeedbackTextsForSameRuleAllowed(): boolean {
+    return !this.isVersion1();
   }
 }

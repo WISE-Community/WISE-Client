@@ -1,0 +1,109 @@
+
+@import
+  '~style/abstracts/functions',
+  '~style/abstracts/variables';
+
+$tab-bar-height: 48px;
+
+.mat-drawer-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+step-tools {
+  display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: $toolbar-height;
+  height: $secondary-toolbar-height;
+  z-index: 3;
+}
+
+.vle-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.node-view {
+  top: $toolbar-height + $secondary-toolbar-height;
+
+  &.tabbed {
+    position: absolute;
+    top: $toolbar-height;
+    margin: 0;
+    bottom: 0;
+  }
+}
+
+.tabbed {
+  padding: 0;
+}
+
+group-tabs {
+  position: absolute;
+  width: 100%;
+}
+
+.tab-content {
+  top: $tab-bar-height + 1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding-bottom: 104px;
+}
+
+node, navigation {
+  display: block;
+
+  @media (min-width: breakpoint('sm.min')) {
+    padding: 32px 16px;
+  }
+}
+
+.node-tabbed {
+  padding-bottom: 16px;
+}
+
+node-navigation {
+  display: block;
+}
+
+.node-nav {
+  padding: 0 16px;
+}
+
+.nav-view {
+  top: $toolbar-height;
+}
+
+notebook-launcher {
+  bottom: 24px;
+  position: fixed;
+  right: 28px;
+}
+
+notebook-notes {
+  display: block;
+  width: $notebook-sidebar-width;
+
+  @media (min-width: breakpoint('sm.min')) {
+    width: $notebook-sidebar-width-gt-xs;
+  }
+}
+
+notebook-report {
+  z-index: 10;
+  bottom: 0;
+  position: fixed;
+  right: 96px;
+  transition: right 0.25s;
+}

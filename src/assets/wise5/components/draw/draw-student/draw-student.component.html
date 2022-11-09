@@ -1,4 +1,4 @@
-<component-header [componentContent]="componentContent"></component-header>
+<component-header [component]="component"></component-header>
 <div class="component__actions buttons-div"
     fxLayout="row wrap">
   <button
@@ -41,13 +41,13 @@
 <div id="{{drawingToolId}}" class="drawing-tool-div"></div>
 <component-save-submit-buttons
     *ngIf="isSaveOrSubmitButtonVisible"
+      [componentState]="latestComponentState"
     [isDirty]="isDirty"
     [isDisabled]="isDisabled"
     [isSaveButtonVisible]="isSaveButtonVisible"
     [isSubmitButtonDisabled]="isSubmitButtonDisabled"
     [isSubmitButtonVisible]="isSubmitButtonVisible"
     [isSubmitDirty]="isSubmitDirty"
-    [saveMessage]="saveMessage"
     (saveButtonClicked)="saveButtonClicked($event)"
     (submitButtonClicked)="submitButtonClicked($event)">
 </component-save-submit-buttons>

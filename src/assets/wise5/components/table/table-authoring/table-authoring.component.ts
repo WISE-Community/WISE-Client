@@ -16,6 +16,8 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 })
 export class TableAuthoring extends ComponentAuthoring {
   columnCellSizes: any;
+  frozenColumns: any;
+  frozenColumnsLimitReached: boolean = false;
 
   numColumnsChange: Subject<number> = new Subject<number>();
   numRowsChange: Subject<number> = new Subject<number>();
@@ -48,6 +50,7 @@ export class TableAuthoring extends ComponentAuthoring {
   ngOnInit() {
     super.ngOnInit();
     this.columnCellSizes = this.parseColumnCellSizes(this.componentContent);
+    this.frozenColumns = this.parseFrozenColumns(this.componentContent);
   }
 
   tableNumRowsChanged(): void {
@@ -224,6 +227,7 @@ export class TableAuthoring extends ComponentAuthoring {
     }
     this.authoringComponentContent.numColumns++;
     this.parseColumnCellSizes(this.authoringComponentContent);
+    this.parseFrozenColumns(this.authoringComponentContent);
     this.componentChanged();
   }
 
@@ -237,6 +241,7 @@ export class TableAuthoring extends ComponentAuthoring {
       }
       this.authoringComponentContent.numColumns--;
       this.parseColumnCellSizes(this.authoringComponentContent);
+      this.parseFrozenColumns(this.authoringComponentContent);
       this.componentChanged();
     }
   }
@@ -308,19 +313,60 @@ export class TableAuthoring extends ComponentAuthoring {
     if (cellSize == '') {
       cellSize = null;
     }
-    this.setColumnCellSizes(index, cellSize);
+    this.setColumnCellSize(index, cellSize);
   }
 
-  setColumnCellSizes(column: number, size: number): void {
+  private setColumnCellSize(column: number, size: number): void {
     const tableData = this.authoringComponentContent.tableData;
-    for (let r = 0; r < tableData.length; r++) {
-      const row = tableData[r];
-      const cell = row[column];
+    const firstRow = tableData[0];
+    if (firstRow != null) {
+      const cell = firstRow[column];
       if (cell != null) {
         cell.size = size;
       }
     }
     this.componentChanged();
+  }
+
+  private parseFrozenColumns(componentContent: any): any {
+    const frozenColumns = {};
+    const firstRow = componentContent.tableData[0];
+    if (firstRow != null) {
+      for (const key in firstRow) {
+        const cell = firstRow[key];
+        frozenColumns[key] = cell.frozen;
+      }
+    }
+    this.frozenColumnsLimitReached = this.isfrozenColumnsLimitReached();
+    return frozenColumns;
+  }
+
+  frozenColumnsChanged(index: number): void {
+    let frozen = this.frozenColumns[index];
+    const firstRow = this.authoringComponentContent.tableData[0];
+    if (firstRow != null) {
+      const cell = firstRow[index];
+      if (cell != null) {
+        cell.frozen = frozen;
+      }
+    }
+    this.componentChanged();
+    this.frozenColumnsLimitReached = this.isfrozenColumnsLimitReached();
+  }
+
+  private isfrozenColumnsLimitReached(): boolean {
+    const firstRow = this.authoringComponentContent.tableData[0];
+    if (firstRow == null) {
+      return false;
+    }
+    let count = 0;
+    for (const key in firstRow) {
+      if (firstRow[key].frozen) {
+        count++;
+      }
+    }
+    const maxFrozen = firstRow.length - 1;
+    return count === maxFrozen;
   }
 
   automaticallySetConnectedComponentFieldsIfPossible(connectedComponent) {

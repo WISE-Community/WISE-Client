@@ -1,0 +1,16 @@
+<div class="menu-sidebar">
+  <ng-container *ngFor="let view of views">
+    <button mat-button
+        *ngIf="view.type === 'primary' && view.active"
+        id="{{ view.route }}"
+        aria-label="{{ view.label }}"
+        (click)="goToView(view)"
+        class="md-icon-button menu-sidebar__link"
+        matTooltip="{{ view.name }}"
+        matTooltipPosition="after">
+      <mat-icon [color]="state.$current.name === view.route ? 'primary' : ''">
+        {{ view.icon }}
+      </mat-icon>
+    </button>
+  </ng-container>
+</div>

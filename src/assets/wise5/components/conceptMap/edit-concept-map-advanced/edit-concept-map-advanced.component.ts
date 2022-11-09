@@ -56,16 +56,6 @@ export class EditConceptMapAdvancedComponent extends EditAdvancedComponentCompon
     this.componentChanged();
   }
 
-  moveRuleUpButtonClicked(index: number): void {
-    this.UtilService.moveObjectUp(this.authoringComponentContent.rules, index);
-    this.componentChanged();
-  }
-
-  moveRuleDownButtonClicked(index: number): void {
-    this.UtilService.moveObjectDown(this.authoringComponentContent.rules, index);
-    this.componentChanged();
-  }
-
   ruleDeleteButtonClicked(index: number): void {
     const rule = this.authoringComponentContent.rules[index];
     const ruleName = rule.name;

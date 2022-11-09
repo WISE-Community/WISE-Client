@@ -6,29 +6,17 @@ import 'angular-file-saver';
 import 'ng-file-upload';
 import 'angular-inview';
 import 'angular-material';
-import 'angular-moment';
-import 'ng-onload';
 import 'angular-sanitize';
-import 'ng-stomp';
 import 'angular-toarrayfilter';
 import 'angular-translate';
 import 'angular-translate-loader-partial';
 import 'angular-ui-router';
-import 'angular-ui-scrollpoint';
-import './components/animation/animationComponentModule';
 import { AnnotationService } from './services/annotationService';
-import './components/audioOscillator/audioOscillatorComponentModule';
 import { AudioRecorderService } from './services/audioRecorderService';
-import * as canvg from 'canvg';
-import './components/conceptMap/conceptMapComponentModule';
 import { ConfigService } from './services/configService';
 import { CRaterService } from './services/cRaterService';
 import './directives/components';
 import { ComponentService } from './components/componentService';
-import './components/dialogGuidance/dialogGuidanceStudentComponentModule';
-import './components/discussion/discussionComponentModule';
-import './components/draw/drawComponentModule';
-import './components/embedded/embeddedComponentModule';
 import * as fabric from 'fabric';
 window['fabric'] = fabric.fabric;
 import Filters from './filters/filters';
@@ -40,72 +28,39 @@ import * as covariance from 'compute-covariance';
 window['Highcharts'] = Highcharts;
 window['HighchartsExporting'] = HighchartsExporting;
 window['covariance'] = covariance;
-import './components/graph/graphComponentModule';
-import './components/html/htmlComponentModule';
 import HttpInterceptor from './services/httpInterceptor';
-import './components/label/labelComponentModule';
-import './components/match/matchComponentModule';
-import './components/multipleChoice/multipleChoiceComponentModule';
 import { NodeService } from './services/nodeService';
 import { NotebookService } from './services/notebookService';
 import { NotificationService } from './services/notificationService';
-import './components/openResponse/openResponseComponentModule';
-import './components/outsideURL/outsideURLComponentModule';
 import { SessionService } from './services/sessionService';
 import './vle/studentAsset/studentAsset';
 import { StudentAssetService } from './services/studentAssetService';
 import { StudentDataService } from './services/studentDataService';
-import './components/summary/summaryComponentModule';
-import './components/table/tableComponentModule';
 import { TagService } from './services/tagService';
 import { UtilService } from './services/utilService';
-import * as moment from 'moment';
-import * as SockJS from 'sockjs-client';
-import * as StompJS from '@stomp/stompjs';
-window['SockJS'] = SockJS;
-window['Stomp'] = StompJS.Stomp;
 import './themes/default/theme';
-import SideMenu from './common/sideMenuComponent';
 import { EditorComponent } from '@tinymce/tinymce-angular';
 import { WiseTinymceEditorComponent } from './directives/wise-tinymce-editor/wise-tinymce-editor.component';
-import { NotebookItemComponent } from '../../app/notebook/notebook-item/notebook-item.component';
 import { NotebookNotesComponent } from '../../app/notebook/notebook-notes/notebook-notes.component';
 import { NotebookReportComponent } from '../../app/notebook/notebook-report/notebook-report.component';
 import { NotebookReportAnnotationsComponent } from '../../app/notebook/notebook-report-annotations/notebook-report-annotations.component';
 import { ComputerAvatarService } from './services/computerAvatarService';
+import { ComponentTypeService } from './services/componentTypeService';
+import { SideMenuComponent } from './common/side-menu/side-menu.component';
 
 angular
   .module('common', [
-    'angularMoment',
     'angular-toArrayFilter',
-    'animationComponentModule',
-    'audioOscillatorComponentModule',
     'components',
-    'conceptMapComponentModule',
-    'dialogGuidanceStudentComponentModule',
-    'discussionComponentModule',
-    'drawComponentModule',
-    'embeddedComponentModule',
     'filters',
-    'graphComponentModule',
     'highcharts-ng',
-    'htmlComponentModule',
-    'labelComponentModule',
-    'matchComponentModule',
-    'multipleChoiceComponentModule',
     'ngAria',
     'ngFileUpload',
     'ngMaterial',
     'ngSanitize',
-    'ngStomp',
-    'openResponseComponentModule',
-    'outsideURLComponentModule',
     'pascalprecht.translate',
-    'summaryComponentModule',
-    'tableComponentModule',
     'ui.router'
   ])
-  .service('AchievementService', downgradeInjectable(AchievementService))
   .directive(
     'editor',
     downgradeComponent({ component: EditorComponent }) as angular.IDirectiveFactory
@@ -113,10 +68,6 @@ angular
   .directive(
     'wiseTinymceEditor',
     downgradeComponent({ component: WiseTinymceEditorComponent }) as angular.IDirectiveFactory
-  )
-  .directive(
-    'notebookItem',
-    downgradeComponent({ component: NotebookItemComponent }) as angular.IDirectiveFactory
   )
   .directive(
     'notebookNotes',
@@ -132,11 +83,13 @@ angular
       component: NotebookReportAnnotationsComponent
     }) as angular.IDirectiveFactory
   )
+  .service('AchievementService', downgradeInjectable(AchievementService))
   .factory('AnnotationService', downgradeInjectable(AnnotationService))
   .factory('AudioRecorderService', downgradeInjectable(AudioRecorderService))
   .factory('ConfigService', downgradeInjectable(ConfigService))
   .factory('ComponentService', downgradeInjectable(ComponentService))
   .factory('ComputerAvatarService', downgradeInjectable(ComputerAvatarService))
+  .factory('ComponentTypeService', downgradeInjectable(ComponentTypeService))
   .factory('CRaterService', downgradeInjectable(CRaterService))
   .service('HttpInterceptor', HttpInterceptor)
   .service('NodeService', downgradeInjectable(NodeService))
@@ -147,7 +100,10 @@ angular
   .factory('TagService', downgradeInjectable(TagService))
   .factory('StudentDataService', downgradeInjectable(StudentDataService))
   .factory('UtilService', downgradeInjectable(UtilService))
-  .component('sideMenu', SideMenu)
+  .directive(
+    'sideMenu',
+    downgradeComponent({ component: SideMenuComponent }) as angular.IDirectiveFactory
+  )
   .filter('Filters', Filters)
   .config([
     '$httpProvider',
@@ -229,15 +185,5 @@ angular
       });
       $mdThemingProvider.definePalette('light', lightMap);
       $mdThemingProvider.enableBrowserColor();
-      moment.updateLocale('en', {
-        calendar: {
-          lastDay: '[Yesterday at] LT',
-          sameDay: '[Today at] LT',
-          nextDay: '[Tomorrow at] LT',
-          lastWeek: '[last] dddd [at] LT',
-          nextWeek: 'dddd [at] LT',
-          sameElse: 'll'
-        }
-      });
     }
   ]);

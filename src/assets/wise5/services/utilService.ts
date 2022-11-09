@@ -1,13 +1,11 @@
 'use strict';
 
-import { Injectable } from '@angular/core';
-import * as angular from 'angular';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { formatDate } from '@angular/common';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import '../lib/jquery/jquery-global';
 
 @Injectable()
 export class UtilService {
-  componentTypeToLabel = {};
   CHARS = [
     'a',
     'b',
@@ -47,11 +45,7 @@ export class UtilService {
     '9'
   ];
 
-  constructor(private upgrade: UpgradeModule) {}
-
-  broadcastEventInRootScope(event, data = {}) {
-    this.upgrade.$injector.get('$rootScope').$broadcast(event, data);
-  }
+  constructor(@Inject(LOCALE_ID) private localeID: string) {}
 
   generateKey(length = 10) {
     let key = '';
@@ -68,8 +62,12 @@ export class UtilService {
     return str;
   }
 
-  makeCopyOfJSONObject(jsonObject): any {
-    return angular.fromJson(angular.toJson(jsonObject));
+  makeCopyOfJSONObject(jsonObject: any): any {
+    return this.isUndefined(jsonObject) ? undefined : JSON.parse(JSON.stringify(jsonObject));
+  }
+
+  private isUndefined(value: any): boolean {
+    return typeof value === 'undefined';
   }
 
   getImageObjectFromBase64String(img_b64) {
@@ -391,42 +389,6 @@ export class UtilService {
     return '';
   }
 
-  getComponentTypes(): any[] {
-    return [
-      { type: 'Animation', name: this.getComponentTypeLabel('Animation') },
-      { type: 'AudioOscillator', name: this.getComponentTypeLabel('AudioOscillator') },
-      { type: 'ConceptMap', name: this.getComponentTypeLabel('ConceptMap') },
-      { type: 'DialogGuidance', name: this.getComponentTypeLabel('DialogGuidance') },
-      { type: 'Discussion', name: this.getComponentTypeLabel('Discussion') },
-      { type: 'Draw', name: this.getComponentTypeLabel('Draw') },
-      { type: 'Embedded', name: this.getComponentTypeLabel('Embedded') },
-      { type: 'Graph', name: this.getComponentTypeLabel('Graph') },
-      { type: 'Label', name: this.getComponentTypeLabel('Label') },
-      { type: 'Match', name: this.getComponentTypeLabel('Match') },
-      { type: 'MultipleChoice', name: this.getComponentTypeLabel('MultipleChoice') },
-      { type: 'OpenResponse', name: this.getComponentTypeLabel('OpenResponse') },
-      { type: 'OutsideURL', name: this.getComponentTypeLabel('OutsideURL') },
-      { type: 'HTML', name: this.getComponentTypeLabel('HTML') },
-      { type: 'Summary', name: this.getComponentTypeLabel('Summary') },
-      { type: 'Table', name: this.getComponentTypeLabel('Table') }
-    ];
-  }
-
-  getComponentTypeLabel(componentType) {
-    let label = this.componentTypeToLabel[componentType];
-    if (label == null) {
-      let componentService = this.upgrade.$injector.get(componentType + 'Service');
-      if (componentService != null && componentService.getComponentTypeLabel != null) {
-        label = componentService.getComponentTypeLabel();
-        this.componentTypeToLabel[componentType] = label;
-      }
-    }
-    if (label == null) {
-      label = componentType;
-    }
-    return label;
-  }
-
   /**
    * Check if two arrays contain the same values. This is commonly used to
    * check if two arrays of ids contain the same values. The order of the
@@ -689,22 +651,6 @@ export class UtilService {
     }
   }
 
-  moveObjectUp(objects, index) {
-    if (index !== 0) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index - 1, 0, object);
-    }
-  }
-
-  moveObjectDown(objects, index) {
-    if (index !== objects.length - 1) {
-      const object = objects[index];
-      objects.splice(index, 1);
-      objects.splice(index + 1, 0, object);
-    }
-  }
-
   rgbToHex(color, opacity) {
     let values = color
       .replace(/rgb?\(/, '')
@@ -747,7 +693,7 @@ export class UtilService {
    * can be overriden in the second argument.
    * Source: http://www.bennadel.com/blog/1504-ask-ben-parsing-csv-strings-with-javascript-exec-regular-expression-command.htm
    */
-  CSVToArray(strData, strDelimiter) {
+  CSVToArray(strData: string, strDelimiter: string = ','): string[][] {
     // Check to see if the delimiter is defined. If not,
     // then default to comma.
     strDelimiter = strDelimiter || ',';
@@ -807,7 +753,7 @@ export class UtilService {
       // Now that we have our value string, let's add
       // it to the data array.
       let finalValue = strMatchedValue;
-      const floatVal = parseFloat(strMatchedValue);
+      const floatVal = parseFloat(strMatchedValue.replace(new RegExp(',', 'g'), ''));
       if (!isNaN(floatVal)) {
         finalValue = floatVal;
       }
@@ -838,6 +784,46 @@ export class UtilService {
 
   notEqualTo(a: number, b: number): boolean {
     return a !== b;
+  }
+
+  getSavedMessage(clientSaveTime: number, showFullDate: boolean = false): string {
+    let saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
+    return $localize`Saved ${saveTimeText}:saveTime:`;
+  }
+
+  getAutoSavedMessage(clientSaveTime: number, showFullDate: boolean = false): string {
+    let saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
+    return $localize`Auto Saved ${saveTimeText}:saveTime:`;
+  }
+
+  getSubmittedMessage(clientSaveTime: number, showFullDate: boolean = false): string {
+    let saveTimeText = this.getSaveTimeText(clientSaveTime, showFullDate);
+    return $localize`Submitted ${saveTimeText}:saveTime:`;
+  }
+
+  getSaveTimeMessage(clientSaveTime: number, showFullDate: boolean = false): string {
+    return this.getSaveTimeText(clientSaveTime, showFullDate);
+  }
+
+  getSaveTimeText(saveTime: number, showFullDate: boolean = false): string {
+    const now = new Date();
+    let saveTimeText = '';
+    if (showFullDate) {
+      saveTimeText = `${formatDate(saveTime, 'fullDate', this.localeID)} • ${formatDate(
+        saveTime,
+        'shortTime',
+        this.localeID
+      )}`;
+    } else if (this.isSameDay(now, saveTime)) {
+      saveTimeText = formatDate(saveTime, 'shortTime', this.localeID);
+    } else {
+      saveTimeText = formatDate(saveTime, 'mediumDate', this.localeID);
+    }
+    return saveTimeText;
+  }
+
+  private isSameDay(a: string | number | Date, b: string | number | Date): boolean {
+    return formatDate(a, 'shortDate', this.localeID) === formatDate(b, 'shortDate', this.localeID);
   }
 }
 

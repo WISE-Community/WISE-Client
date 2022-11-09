@@ -139,11 +139,9 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
     }
 
     row[columnNameToNumber['Node ID']] = nodeId;
-    row[columnNameToNumber['Step Title']] = this.projectService.getNodePositionAndTitleByNodeId(
-      nodeId
-    );
+    row[columnNameToNumber['Step Title']] = this.projectService.getNodePositionAndTitle(nodeId);
     row[columnNameToNumber['Component Part Number']] =
-      this.projectService.getComponentPositionByNodeIdAndComponentId(nodeId, componentId) + 1;
+      this.projectService.getComponentPosition(nodeId, componentId) + 1;
     row[columnNameToNumber['Component ID']] = component.id;
     row[columnNameToNumber['Component Type']] = component.type;
     row[columnNameToNumber['Component Prompt']] = this.utilService.removeHTMLTags(component.prompt);
@@ -244,8 +242,7 @@ export class DiscussionComponentDataExportStrategy extends AbstractDataExportStr
   private generateDiscussionExportFileName(nodeId, componentId) {
     const runId = this.configService.getRunId();
     const stepNumber = this.projectService.getNodePositionById(nodeId);
-    const componentNumber =
-      this.projectService.getComponentPositionByNodeIdAndComponentId(nodeId, componentId) + 1;
+    const componentNumber = this.projectService.getComponentPosition(nodeId, componentId) + 1;
     return runId + '_step_' + stepNumber + '_component_' + componentNumber + '_discussion_work.csv';
   }
 }

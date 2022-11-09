@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditProfileComponent } from './edit-profile.component';
 import { User } from '../../../domain/user';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -12,7 +12,6 @@ import { StudentService } from '../../student.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Student } from '../../../domain/student';
-import { configureTestSuite } from 'ng-bullet';
 import { MatDialogModule } from '@angular/material/dialog';
 
 export class MockUserService {
@@ -71,7 +70,7 @@ describe('EditProfileComponent', () => {
     form.triggerEventHandler('submit', null);
   };
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EditProfileComponent],
       imports: [
@@ -88,9 +87,6 @@ describe('EditProfileComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(EditProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

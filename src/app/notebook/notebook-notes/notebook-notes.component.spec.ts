@@ -1,41 +1,17 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
-import { AnnotationService } from '../../../assets/wise5/services/annotationService';
-import { ConfigService } from '../../../assets/wise5/services/configService';
-import { NotebookService } from '../../../assets/wise5/services/notebookService';
-import { ProjectService } from '../../../assets/wise5/services/projectService';
-import { SessionService } from '../../../assets/wise5/services/sessionService';
-import { StudentAssetService } from '../../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
-import { TagService } from '../../../assets/wise5/services/tagService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
+import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { NotebookNotesComponent } from './notebook-notes.component';
 
 let component: NotebookNotesComponent;
 
 describe('NotebookNotesComponent', () => {
-  configureTestSuite(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
-      declarations: [NotebookNotesComponent],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        NotebookService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ]
-    });
-  });
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
+      declarations: [NotebookNotesComponent]
+    });
     const fixture = TestBed.createComponent(NotebookNotesComponent);
     component = fixture.componentInstance;
   });

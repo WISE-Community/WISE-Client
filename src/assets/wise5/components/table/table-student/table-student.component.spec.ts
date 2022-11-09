@@ -4,32 +4,12 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
 import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
-import { TableService } from '../tableService';
+import { TabulatorDataService } from '../tabulatorDataService';
 import { TableStudent } from './table-student.component';
-
-class MockNotebookService {
-  addNote() {}
-  getNotebookConfig() {}
-}
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: TableStudent;
 const componentId = 'component1';
@@ -42,37 +22,19 @@ const testTableData = createTableData([
   ['20', '200', '10']
 ]);
 
-describe('TableStudent', () => {
-  configureTestSuite(() => {
+describe('TableStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
         HttpClientTestingModule,
         MatDialogModule,
         NoopAnimationsModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [TableStudent],
-      providers: [
-        AnnotationService,
-        ComponentService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        TableService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(TableStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,
@@ -210,7 +172,12 @@ function setupTable() {
   describe('setupTable', () => {
     it('should setup table', () => {
       component.tableData = null;
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.setupTable();
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
       expect(component.tableData).toEqual(createTestTableData());
     });
   });
@@ -236,8 +203,13 @@ function resetTable() {
     it('should reset table', () => {
       component.tableData = createTestTableData();
       component.tableData[0][0].text = 'Time2';
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.resetTable();
       expect(component.tableData[0][0].text).toEqual('Time');
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
   });
 }
@@ -606,8 +578,13 @@ function handleConnectedComponents() {
         }
       ]);
       component.tableData = null;
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.handleConnectedComponents();
       expectTableDataEquals(component.tableData, testTableData, true);
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
     it('should handle graph connected component', () => {
       spyOn(component, 'getConnectedComponentsAndTheirComponentStates').and.returnValue([
@@ -620,6 +597,10 @@ function handleConnectedComponents() {
           ])
         }
       ]);
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.handleConnectedComponents();
       const expectedTableData = createTableData([
         ['Time', 'Position', 'Speed'],
@@ -628,6 +609,7 @@ function handleConnectedComponents() {
         ['2', '20', '10']
       ]);
       expectTableDataEquals(component.tableData, expectedTableData, true);
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
     it('should handle embedded connected component', () => {
       const tableData = createTableData([
@@ -640,8 +622,13 @@ function handleConnectedComponents() {
           componentState: createEmbeddedComponentState(tableData)
         }
       ]);
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.handleConnectedComponents();
       expectTableDataEquals(component.tableData, tableData, true);
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
   });
 }

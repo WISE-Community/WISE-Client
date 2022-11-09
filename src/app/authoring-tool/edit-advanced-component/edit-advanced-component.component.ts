@@ -6,10 +6,8 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 @Directive()
 export abstract class EditAdvancedComponentComponent {
   authoringComponentContent: any;
-  @Input()
-  componentId: string;
-  @Input()
-  nodeId: string;
+  @Input() componentId: string;
+  @Input() nodeId: string;
 
   constructor(
     protected NodeService: NodeService,
@@ -18,7 +16,7 @@ export abstract class EditAdvancedComponentComponent {
   ) {}
 
   ngOnInit() {
-    this.authoringComponentContent = this.TeacherProjectService.getComponentByNodeIdAndComponentId(
+    this.authoringComponentContent = this.TeacherProjectService.getComponent(
       this.nodeId,
       this.componentId
     );
@@ -45,5 +43,15 @@ export abstract class EditAdvancedComponentComponent {
 
   componentChanged(): void {
     this.TeacherProjectService.nodeChanged();
+  }
+
+  moveObjectUp(objects: any[], index: number): void {
+    this.TeacherProjectService.moveObjectUp(objects, index);
+    this.componentChanged();
+  }
+
+  moveObjectDown(objects: any[], index: number): void {
+    this.TeacherProjectService.moveObjectDown(objects, index);
+    this.componentChanged();
   }
 }

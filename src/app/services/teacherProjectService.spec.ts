@@ -1,20 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 import scootersProjectJSON_import from './sampleData/curriculum/SelfPropelledVehiclesChallenge.project.json';
 import teacherProjctJSON_import from './sampleData/curriculum/TeacherProjectServiceSpec.project.json';
-import { SessionService } from '../../assets/wise5/services/sessionService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 let service: TeacherProjectService;
 let configService: ConfigService;
-let utilService: UtilService;
 let http: HttpTestingController;
 let demoProjectJSON: any;
 let scootersProjectJSON: any;
 let teacherProjectJSON: any;
+let objects;
 
 const scootersProjectJSONString = JSON.stringify(demoProjectJSON_import);
 const scootersProjectName = 'scooters';
@@ -28,14 +26,12 @@ const wiseBaseURL = '/wise';
 describe('TeacherProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [TeacherProjectService, ConfigService, SessionService, UtilService]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      providers: [TeacherProjectService]
     });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(TeacherProjectService);
     configService = TestBed.inject(ConfigService);
-    utilService = TestBed.inject(UtilService);
-    spyOn(utilService, 'broadcastEventInRootScope');
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
     scootersProjectJSON = JSON.parse(JSON.stringify(scootersProjectJSON_import));
     teacherProjectJSON = JSON.parse(JSON.stringify(teacherProjctJSON_import));
@@ -69,6 +65,7 @@ describe('TeacherProjectService', () => {
   shouldBeAbleToInsertAStepNodeInsideAGroupNode();
   shouldBeAbleToInsertAGroupNodeInsideAGroupNode();
   shouldNotBeAbleToInsertAStepNodeInsideAStepNode();
+  getComponentPosition();
   getUniqueAuthors();
   addCurrentUserToAuthors_CM_shouldAddUserInfo();
   getNodeIds();
@@ -80,6 +77,8 @@ describe('TeacherProjectService', () => {
   getOldToNewIds();
   replaceOldIds();
   replaceIds();
+  moveObjectUp();
+  moveObjectDown();
 });
 
 function createNormalSpy() {
@@ -168,9 +167,9 @@ function testDeleteComponent() {
   describe('deleteComponent', () => {
     it('should delete the component from the node', () => {
       service.setProject(demoProjectJSON);
-      expect(service.getComponentByNodeIdAndComponentId('node1', 'zh4h1urdys')).not.toBeNull();
+      expect(service.getComponent('node1', 'zh4h1urdys')).not.toBeNull();
       service.deleteComponent('node1', 'zh4h1urdys');
-      expect(service.getComponentByNodeIdAndComponentId('node1', 'zh4h1urdys')).toBeNull();
+      expect(service.getComponent('node1', 'zh4h1urdys')).toBeNull();
     });
   });
 }
@@ -481,6 +480,24 @@ function insertNodeAfterInTransitions() {
   });
 }
 
+function getComponentPosition() {
+  it('should get the component position by node id and comonent id', () => {
+    service.setProject(scootersProjectJSON);
+    const nullNodeIdResult = service.getComponentPosition(null, '57lxhwfp5r');
+    expect(nullNodeIdResult).toEqual(-1);
+    const nullComponentIdResult = service.getComponentPosition('node13', null);
+    expect(nullComponentIdResult).toEqual(-1);
+    const nodeIdDNEResult = service.getComponentPosition('badNodeId', '57lxhwfp5r');
+    expect(nodeIdDNEResult).toEqual(-1);
+    const componentIdDNEResult = service.getComponentPosition('node13', 'badComponentId');
+    expect(componentIdDNEResult).toEqual(-1);
+    const componentExists = service.getComponentPosition('node13', '57lxhwfp5r');
+    expect(componentExists).toEqual(0);
+    const componentExists2 = service.getComponentPosition('node9', 'mnzx68ix8h');
+    expect(componentExists2).toEqual(1);
+  });
+}
+
 function getUniqueAuthors() {
   describe('getUniqueAuthors', () => {
     it('should get unique authors when there are no authors', () => {
@@ -615,12 +632,6 @@ function shouldHandleSaveProjectResponse() {
   it('should broadcast project saved', () => {
     shouldHandleSaveProjectResponseSuccessHelper('broadcastProjectSaved');
   });
-  it('should broadcast not logged in project not saved', () => {
-    shouldHandleSaveProjectResponseErrorHelper(
-      'notSignedIn',
-      'broadcastNotLoggedInProjectNotSaved'
-    );
-  });
   it('should broadcast not allowed to edit this project', () => {
     shouldHandleSaveProjectResponseErrorHelper(
       'notAllowedToEditThisProject',
@@ -699,7 +710,7 @@ function getStepNodesDetailsInOrder() {
       spyOn(service, 'isApplicationNode').and.callFake((nodeId: string): boolean => {
         return nodeId.startsWith('node');
       });
-      spyOn(service, 'getNodePositionAndTitleByNodeId').and.callFake((nodeId: string): string => {
+      spyOn(service, 'getNodePositionAndTitle').and.callFake((nodeId: string): string => {
         return nodeIdToPositionAndTitle[nodeId];
       });
       const stepNodesDetailsInOrder = service.getStepNodesDetailsInOrder();
@@ -804,5 +815,53 @@ function replaceIds() {
       const expectedString = '"node10", "node10", "node2", "node10", "node11", "node11"';
       expect(service.replaceIds(string, 'node1', 'node10')).toEqual(expectedString);
     });
+  });
+}
+
+function moveObjectUp() {
+  describe('moveObjectUp()', () => {
+    beforeEach(() => {
+      objects = [1, 2, 3];
+    });
+    moveObjectUpTopElement();
+    moveObjectUpNotTopElement();
+  });
+}
+
+function moveObjectUpTopElement() {
+  it('should not move an object up when the object is the top element', () => {
+    service.moveObjectUp(objects, 0);
+    expect(objects).toEqual([1, 2, 3]);
+  });
+}
+
+function moveObjectUpNotTopElement() {
+  it('should move an object up when the object is not the top element', () => {
+    service.moveObjectUp(objects, 1);
+    expect(objects).toEqual([2, 1, 3]);
+  });
+}
+
+function moveObjectDown() {
+  describe('moveObjectDown()', () => {
+    beforeEach(() => {
+      objects = [1, 2, 3];
+    });
+    moveObjectDownNotBottomElement();
+    moveObjectDownIsBottomElement();
+  });
+}
+
+function moveObjectDownNotBottomElement() {
+  it('should move an object down when the object is not the bottom element', () => {
+    service.moveObjectDown(objects, 1);
+    expect(objects).toEqual([1, 3, 2]);
+  });
+}
+
+function moveObjectDownIsBottomElement() {
+  it('should not move an object down when the object is the bottom element', () => {
+    service.moveObjectDown(objects, 2);
+    expect(objects).toEqual([1, 2, 3]);
   });
 }

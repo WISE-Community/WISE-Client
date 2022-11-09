@@ -1,5 +1,5 @@
 import { fabric } from 'fabric';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -45,6 +45,7 @@ export class LabelStudent extends ComponentStudent {
 
   constructor(
     protected AnnotationService: AnnotationService,
+    private changeDetector: ChangeDetectorRef,
     protected ComponentService: ComponentService,
     protected ConfigService: ConfigService,
     protected dialog: MatDialog,
@@ -71,13 +72,19 @@ export class LabelStudent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     this.enableFabricTextPadding();
-    this.canvasId = `canvas_${this.nodeId}_${this.componentId}`;
+    const domIdEnding = this.LabelService.getDomIdEnding(
+      this.nodeId,
+      this.componentId,
+      this.componentState
+    );
+    this.canvasId = this.LabelService.getCanvasId(domIdEnding);
     this.initializeComponent(this.componentContent);
   }
 
   ngAfterViewInit(): void {
     this.setupCanvas();
     this.broadcastDoneRenderingComponent();
+    this.changeDetector.detectChanges(); // prevents dev-mode change detection error
   }
 
   enableFabricTextPadding(): void {
@@ -703,7 +710,10 @@ export class LabelStudent extends ComponentStudent {
   }
 
   snipImage(): void {
-    this.NotebookService.addNote(this.getStudentDataImageObject());
+    this.NotebookService.addNote(
+      this.StudentDataService.getCurrentNodeId(),
+      this.getStudentDataImageObject()
+    );
   }
 
   deleteLabelButtonClicked(): void {

@@ -1,28 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { VLEProjectService } from '../../assets/wise5/vle/vleProjectService';
-import { ConfigService } from '../../assets/wise5/services/configService';
-import { UtilService } from '../../assets/wise5/services/utilService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 let service: VLEProjectService;
-let configService: ConfigService;
-let sessionService: SessionService;
-let utilService: UtilService;
 let http: HttpTestingController;
 
 describe('VLEProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [VLEProjectService, ConfigService, SessionService, UtilService]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
     });
-    http = TestBed.get(HttpTestingController);
-    service = TestBed.get(VLEProjectService);
-    configService = TestBed.get(ConfigService);
-    sessionService = TestBed.get(SessionService);
-    utilService = TestBed.get(UtilService);
-    spyOn(utilService, 'broadcastEventInRootScope');
+    http = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(VLEProjectService);
   });
   shouldGetTheExpectedPreviousScore();
   shouldGetTheExpectedCurrentScore();

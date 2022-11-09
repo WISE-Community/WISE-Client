@@ -1,4 +1,4 @@
-<component-header [componentContent]="componentContent"></component-header>
+<component-header [component]="component"></component-header>
 <div class="discussion-content">
   <component-annotations
       *ngIf="mode === 'student'"
@@ -41,7 +41,7 @@
                 alt="Image"
                 i18n-alt
                 class="discussion-post__attachment discussion-new__attachment__content" />
-            <button 
+            <button
                 mat-button
                 class="component__attachment__delete"
                 (click)="removeAttachment(attachment)"

@@ -1,33 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { AnnotationService } from '../../assets/wise5/services/annotationService';
-import { ConfigService } from '../../assets/wise5/services/configService';
-import { ProjectService } from '../../assets/wise5/services/projectService';
-import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
-import { TagService } from '../../assets/wise5/services/tagService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 import { AudioOscillatorService } from '../../assets/wise5/components/audioOscillator/audioOscillatorService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 let service: AudioOscillatorService;
 
 describe('AudioOscillatorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [
-        AnnotationService,
-        AudioOscillatorService,
-        ConfigService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
     });
     service = TestBed.get(AudioOscillatorService);
   });
@@ -59,7 +40,7 @@ function createComponent() {
 
 function isCompleted() {
   function expectIsCompleted(componentStates: any, expectedResult: boolean) {
-    expect(service.isCompleted({}, componentStates, [], [], {})).toEqual(expectedResult);
+    expect(service.isCompleted({}, componentStates, [], {})).toEqual(expectedResult);
   }
   it('should check is completed when it is not completed', () => {
     expectIsCompleted([], false);

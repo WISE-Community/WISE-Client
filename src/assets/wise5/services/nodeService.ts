@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 import { DataService } from '../../../app/services/data.service';
 import { Observable, Subject } from 'rxjs';
@@ -19,15 +18,12 @@ export class NodeService {
   public doneRenderingComponent$ = this.doneRenderingComponentSource.asObservable();
   private componentShowSubmitButtonValueChangedSource: Subject<any> = new Subject<any>();
   public componentShowSubmitButtonValueChanged$: Observable<any> = this.componentShowSubmitButtonValueChangedSource.asObservable();
-  private showRubricSource: Subject<string> = new Subject<string>();
-  public showRubric$: Observable<string> = this.showRubricSource.asObservable();
   private starterStateResponseSource: Subject<any> = new Subject<any>();
   public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
   private deleteStarterStateSource: Subject<any> = new Subject<any>();
   public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
 
   constructor(
-    private upgrade: UpgradeModule,
     private dialog: MatDialog,
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
@@ -42,126 +38,6 @@ export class NodeService {
     return {
       clientSaveTime: new Date().getTime()
     };
-  }
-
-  /**
-   * Create a new empty node state
-   * @return a new empty node state
-   */
-  createNewNodeState() {
-    return {
-      runId: this.ConfigService.getRunId(),
-      periodId: this.ConfigService.getPeriodId(),
-      workgroupId: this.ConfigService.getWorkgroupId(),
-      clientSaveTime: new Date().getTime()
-    };
-  }
-
-  /**
-   * Get the node type in camel case
-   * @param nodeType the node type e.g. OpenResponse
-   * @return the node type in camel case
-   * e.g.
-   * openResponse
-   */
-  toCamelCase(nodeType) {
-    if (nodeType != null && nodeType.length > 0) {
-      const firstChar = nodeType.charAt(0);
-      if (firstChar != null) {
-        const firstCharLowerCase = firstChar.toLowerCase();
-        if (firstCharLowerCase != null) {
-          return firstCharLowerCase + nodeType.substr(1);
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Check if the string is in all uppercase
-   * @param str the string to check
-   * @return whether the string is in all uppercase
-   */
-  isStringUpperCase(str) {
-    return str != null && str === str.toUpperCase();
-  }
-
-  getComponentTemplatePath(componentType) {
-    return this.getComponentFolderPath(componentType) + '/index.html';
-  }
-
-  getComponentAuthoringTemplatePath(componentType) {
-    return this.getComponentFolderPath(componentType) + '/authoring.html';
-  }
-
-  /**
-   * Get the html template for the component
-   * @param componentType the component type
-   * @return the path to the html template for the component
-   */
-  getComponentFolderPath(componentType) {
-    if (this.isStringUpperCase(componentType)) {
-      componentType = componentType.toLowerCase();
-    } else {
-      componentType = this.toCamelCase(componentType);
-    }
-    return this.ConfigService.getWISEBaseURL() + '/assets/wise5/components/' + componentType;
-  }
-
-  /**
-   * Get the component content
-   * @param componentContent the component content
-   * @param componentId the component id
-   * @return the component content
-   */
-  getComponentContentById(nodeContent, componentId) {
-    if (nodeContent != null && componentId != null) {
-      const components = nodeContent.components;
-      if (components != null) {
-        for (let tempComponent of components) {
-          if (tempComponent != null) {
-            const tempComponentId = tempComponent.id;
-            if (tempComponentId === componentId) {
-              return tempComponent;
-            }
-          }
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Check if any of the component states were submitted
-   * @param componentStates an array of component states
-   * @return whether any of the component states were submitted
-   */
-  isWorkSubmitted(componentStates) {
-    if (componentStates != null) {
-      for (let componentState of componentStates) {
-        if (componentState != null) {
-          if (componentState.isSubmit) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Check if the node or component is completed
-   * @param functionParams the params that will specify which node or component
-   * to check for completion
-   * @returns whether the specified node or component is completed
-   */
-  isCompleted(functionParams) {
-    if (functionParams != null) {
-      const nodeId = functionParams.nodeId;
-      const componentId = functionParams.componentId;
-      return this.DataService.isCompleted(nodeId, componentId);
-    }
-    return false;
   }
 
   goToNextNode() {
@@ -469,7 +345,7 @@ export class NodeService {
                   const toNodeId = availableTransition.to;
                   const path = {
                     nodeId: toNodeId,
-                    nodeTitle: this.ProjectService.getNodePositionAndTitleByNodeId(toNodeId),
+                    nodeTitle: this.ProjectService.getNodePositionAndTitle(toNodeId),
                     transition: availableTransition
                   };
                   paths.push(path);
@@ -714,82 +590,6 @@ export class NodeService {
     }
   }
 
-  /**
-   * Show the node content in a dialog. We will show the step content
-   * plus the node rubric and all component rubrics.
-   */
-  showNodeInfo(nodeId, $event) {
-    let stepNumberAndTitle = this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
-    let rubricTitle = $localize`Step Info`;
-
-    /*
-     * create the dialog header, actions, and content elements
-     */
-    let dialogHeader = `<md-toolbar>
-                <div class="md-toolbar-tools">
-                    <h2>${stepNumberAndTitle}</h2>
-                </div>
-            </md-toolbar>`;
-
-    let dialogActions = `<md-dialog-actions layout="row" layout-align="end center">
-                <md-button class="md-primary" ng-click="openInNewWindow()" aria-label="{{ 'openInNewWindow' | translate }}">{{ 'openInNewWindow' | translate }}</md-button>
-                <md-button class="md-primary" ng-click="close()" aria-label="{{ 'close' | translate }}">{{ 'close' | translate }}</md-button>
-            </md-dialog-actions>`;
-
-    let dialogContent = `<md-dialog-content class="gray-lighter-bg">
-                <div class="md-dialog-content" id="nodeInfo_${nodeId}">
-                    <node-info node-id="${nodeId}"></node-info>
-                </div>
-            </md-dialog-content>`;
-
-    let dialogString = `<md-dialog class="dialog--wider" aria-label="${stepNumberAndTitle} - ${rubricTitle}">${dialogHeader}${dialogContent}${dialogActions}</md-dialog>`;
-
-    // display the rubric in a popup
-    this.upgrade.$injector.get('$mdDialog').show({
-      template: dialogString,
-      fullscreen: true,
-      multiple: true,
-      controller: [
-        '$scope',
-        '$mdDialog',
-        function DialogController($scope, $mdDialog) {
-          // display the rubric in a new tab
-          $scope.openInNewWindow = function () {
-            // open a new tab
-            let w = window.open('', '_blank');
-
-            /*
-             * create the header for the new window that contains the project title
-             */
-            let windowHeader = `<md-toolbar class="layout-row">
-                                <div class="md-toolbar-tools primary-bg" style="color: #ffffff;">
-                                    <h2>${stepNumberAndTitle}</h2>
-                                </div>
-                            </md-toolbar>`;
-
-            let rubricContent = document.getElementById('nodeInfo_' + nodeId).innerHTML;
-
-            // create the window string
-            let windowString = `<link rel='stylesheet' href='../wise5/themes/default/style/monitor.css'>
-                            <link rel='stylesheet' href='../wise5/themes/default/style/angular-material.css'>
-                            <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic%7CMaterial+Icons" media="all">
-                            <body class="layout-column">
-                                <div class="layout-column">${windowHeader}<md-content class="md-padding">${rubricContent}</div></md-content></div>
-                            </body>`;
-            w.document.write(windowString);
-            $mdDialog.hide();
-          };
-          $scope.close = () => {
-            $mdDialog.hide();
-          };
-        }
-      ],
-      targetEvent: $event,
-      clickOutsideToClose: true,
-      escapeToClose: true
-    });
-  }
-
   broadcastNodeSubmitClicked(args: any) {
     this.nodeSubmitClickedSource.next(args);
   }
@@ -808,10 +608,6 @@ export class NodeService {
 
   respondStarterState(args: any) {
     this.starterStateResponseSource.next(args);
-  }
-
-  showRubric(id: string): void {
-    this.showRubricSource.next(id);
   }
 
   scrollToComponentAndHighlight(componentId: string): void {

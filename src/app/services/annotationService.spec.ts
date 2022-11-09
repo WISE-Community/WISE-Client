@@ -1,11 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
-import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
 import { UtilService } from '../../assets/wise5/services/utilService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import demoProjectJSON_import from './sampleData/curriculum/Demo.project.json';
 
 let service: AnnotationService;
@@ -33,11 +31,9 @@ const annotations = [
 describe('AnnotationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [ProjectService, ConfigService, SessionService, AnnotationService, UtilService]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule]
     });
     utilService = TestBed.inject(UtilService);
-    spyOn(utilService, 'broadcastEventInRootScope').and.callFake(() => {});
     service = TestBed.inject(AnnotationService);
     projectService = TestBed.inject(ProjectService);
     demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
@@ -78,10 +74,7 @@ function getTotalScore_omitInActiveNodes() {
 
 function getTotalScore_omitExcludFromTotalScoreNodes() {
   it('should omit scores for nodes marked as excludeFromTotalScore', () => {
-    projectService.getComponentByNodeIdAndComponentId(
-      'node3',
-      '0sef5ya2wj'
-    ).excludeFromTotalScore = true;
+    projectService.getComponent('node3', '0sef5ya2wj').excludeFromTotalScore = true;
     expect(service.getTotalScore(annotations)).toEqual(1);
   });
 }

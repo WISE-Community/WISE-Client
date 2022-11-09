@@ -1,17 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ProjectAssetService } from '../../../../app/services/projectAssetService';
-import { AnnotationService } from '../../services/annotationService';
-import { ConfigService } from '../../services/configService';
-import { NotebookService } from '../../services/notebookService';
-import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentAssetService } from '../../services/studentAssetService';
-import { StudentDataService } from '../../services/studentDataService';
-import { TagService } from '../../services/tagService';
-import { UtilService } from '../../services/utilService';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { WiseTinymceEditorComponent } from './wise-tinymce-editor.component';
 
 let component: WiseTinymceEditorComponent;
@@ -21,19 +11,7 @@ describe('WiseTinymceEditorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [WiseTinymceEditorComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        NotebookService,
-        ProjectAssetService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
     }).compileComponents();
     fixture = TestBed.createComponent(WiseTinymceEditorComponent);
     component = fixture.componentInstance;

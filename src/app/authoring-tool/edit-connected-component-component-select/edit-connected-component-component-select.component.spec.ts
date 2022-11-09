@@ -4,13 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigService } from '../../../assets/wise5/services/configService';
-import { ProjectService } from '../../../assets/wise5/services/projectService';
-import { SessionService } from '../../../assets/wise5/services/sessionService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
 import { EditConnectedComponentComponentSelectComponent } from './edit-connected-component-component-select.component';
 import { createConnectedComponentObject } from '../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
+import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 
 describe('EditConnectedComponentComponentSelectComponent', () => {
   let component: EditConnectedComponentComponentSelectComponent;
@@ -26,10 +22,9 @@ describe('EditConnectedComponentComponentSelectComponent', () => {
         HttpClientModule,
         MatFormFieldModule,
         MatSelectModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
-      declarations: [EditConnectedComponentComponentSelectComponent],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      declarations: [EditConnectedComponentComponentSelectComponent]
     }).compileComponents();
   });
 

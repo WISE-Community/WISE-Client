@@ -10,17 +10,10 @@ import { StudentDataService } from '../../services/studentDataService';
   styleUrls: ['./wise-link.component.scss']
 })
 export class WiseLinkComponent implements OnInit {
-  @Input()
-  linkClass: string;
-
-  @Input()
-  linkText: string;
-
-  @Input()
-  nodeId: string;
-
-  @Input()
-  type: string;
+  @Input() linkClass: string;
+  @Input() linkText: string;
+  @Input() nodeId: string;
+  @Input() type: string;
 
   constructor(
     private dialog: MatDialog,
@@ -34,13 +27,13 @@ export class WiseLinkComponent implements OnInit {
       this.type = 'link';
     }
     if (this.linkText == null || this.linkText === '') {
-      this.linkText = this.projectService.getNodePositionAndTitleByNodeId(this.nodeId);
+      this.linkText = this.projectService.getNodePositionAndTitle(this.nodeId);
     }
   }
 
   goToStep(): void {
     this.dialog.closeAll();
-    this.notebookService.setNotesVisible(false);
+    this.notebookService.closeNotes();
     this.studentDataService.setCurrentNodeByNodeId(this.nodeId);
   }
 }

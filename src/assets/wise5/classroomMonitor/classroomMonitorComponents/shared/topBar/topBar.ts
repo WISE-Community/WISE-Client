@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { NotificationService } from '../../../../services/notificationService';
 import { Directive } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Notification } from '../../../../../../app/domain/notification';
 
 @Directive()
 class TopBarController {
@@ -14,8 +15,8 @@ class TopBarController {
   avatarColor: any;
   canAuthorProject: boolean;
   contextPath: string;
-  dismissedNotifications: any;
-  newNotifications: any;
+  dismissedNotifications: Notification[] = [];
+  newNotifications: Notification[] = [];
   notifications: any;
   projectId: number;
   runId: number;
@@ -93,19 +94,15 @@ class TopBarController {
    * TODO: move to TeacherDataService?
    */
   setNotifications() {
-    // get all notifications for the logged in teacher
     // TODO: take into account shared teacher users!
-    let userNotifications = this.notifications.filter((notification) => {
-      return notification.toWorkgroupId === this.workgroupId;
-    });
-
-    this.newNotifications = userNotifications.filter((notification) => {
-      return notification.timeDismissed == null;
-    });
-
-    this.dismissedNotifications = userNotifications.filter((notification) => {
-      return notification.timeDismissed != null;
-    });
+    this.newNotifications = this.NotificationService.getLatestActiveNotificationsFromUniqueSource(
+      this.notifications,
+      this.workgroupId
+    );
+    this.dismissedNotifications = this.NotificationService.getDismissedNotificationsForWorkgroup(
+      this.notifications,
+      this.workgroupId
+    );
   }
 
   /**
@@ -219,7 +216,11 @@ const TopBar = {
                         <md-icon md-menu-origin> notifications </md-icon>
                     </md-button>
                     <md-menu-content width="5" class="account-menu">
-                        <notifications-menu new-notifications="$ctrl.newNotifications" dismissed-notifications="$ctrl.dismissedNotifications" with-pause="true"></notifications-menu>
+                        <notifications-menu
+                            [new-notifications]="$ctrl.newNotifications"
+                            [with-pause]="true"
+                            [state]="$ctrl.$state">
+                        </notifications-menu>
                     </md-menu-content>
                 </md-menu>
                 <md-menu md-position-mode="target-right target" md-offset="40 26">

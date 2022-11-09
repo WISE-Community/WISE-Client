@@ -1,30 +1,20 @@
 import { TestBed } from '@angular/core/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ConfigService } from '../../assets/wise5/services/configService';
 import { SpaceService } from '../../assets/wise5/services/spaceService';
-import { UtilService } from '../../assets/wise5/services/utilService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 let service: SpaceService;
 let teacherProjectService: TeacherProjectService;
 
 describe('SpaceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [
-        ConfigService,
-        CopyNodesService,
-        TeacherProjectService,
-        SessionService,
-        SpaceService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      providers: [CopyNodesService, SpaceService, TeacherProjectService]
     });
-    teacherProjectService = TestBed.get(TeacherProjectService);
-    service = TestBed.get(SpaceService);
+    teacherProjectService = TestBed.inject(TeacherProjectService);
+    service = TestBed.inject(SpaceService);
   });
   createSpace();
   addSpace();

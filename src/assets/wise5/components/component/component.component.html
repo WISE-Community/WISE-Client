@@ -1,4 +1,14 @@
-<div [ngSwitch]="type" class="component__wrapper">
+<div *ngIf="showRubric" class="component__rubric">
+  <help-icon
+      [content]="rubric"
+      [pulse]="pulseRubricIcon"
+      (click)="pulseRubricIcon = false"
+      label="Teaching Tips"
+      i18n-label
+      icon="info">
+  </help-icon>
+</div>
+<div [ngSwitch]="componentContent.type" class="component__wrapper">
   <animation-student *ngSwitchCase="'Animation'"
       [nodeId]="nodeId"
       [componentContent]="componentContent"
@@ -103,6 +113,27 @@
       [componentContent]="componentContent"
       mode="student">
   </outside-url-student>
+  <peer-chat-student *ngSwitchCase="'PeerChat'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="componentState"
+      [workgroupId]="workgroupId"
+      [mode]="student">
+  </peer-chat-student>
+  <show-group-work-student *ngSwitchCase="'ShowGroupWork'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="componentState"
+      [workgroupId]="workgroupId"
+      [mode]="student">
+  </show-group-work-student>
+  <show-my-work-student *ngSwitchCase="'ShowMyWork'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      [componentState]="componentState"
+      [workgroupId]="workgroupId"
+      [mode]="student">
+  </show-my-work-student>
   <summary-student *ngSwitchCase="'Summary'"
       [nodeId]="nodeId"
       [componentContent]="componentContent"

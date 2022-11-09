@@ -2,6 +2,7 @@ import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
+import { Component } from '../common/Component';
 import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
@@ -18,28 +19,17 @@ import { ComponentStateWrapper } from './ComponentStateWrapper';
 
 @Directive()
 export abstract class ComponentStudent {
-  @Input()
-  nodeId: string;
-
-  @Input()
-  componentContent: any;
-
-  @Input()
-  componentState: any;
-
-  @Input()
-  mode: string;
-
-  @Input()
-  workgroupId: number;
-
-  @Output()
-  saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
-
-  @Output()
-  starterStateChangedEvent = new EventEmitter<any>();
+  @Input() componentContent: any;
+  @Input() componentState: any;
+  @Input() isDisabled: boolean = false;
+  @Input() mode: string;
+  @Input() nodeId: string;
+  @Input() workgroupId: number;
+  @Output() saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() starterStateChangedEvent = new EventEmitter<any>();
 
   attachments: any[] = [];
+  component: Component;
   componentId: string;
   componentType: string;
   prompt: SafeHtml;
@@ -51,15 +41,11 @@ export abstract class ComponentStudent {
   isSubmitDirty: boolean = false;
   isSubmit: boolean = false;
   isDirty: boolean = false;
-  isDisabled: boolean = false;
   isStudentAttachmentEnabled: boolean = false;
   submitCounter: number = 0;
   latestAnnotations: any;
   parentStudentWorkIds: any[];
-  saveMessage = {
-    text: '',
-    time: null
-  };
+  latestComponentState: any;
   showAddToNotebookButton: boolean;
   requestComponentStateSubscription: Subscription;
   annotationSavedToServerSubscription: Subscription;
@@ -80,6 +66,7 @@ export abstract class ComponentStudent {
   ) {}
 
   ngOnInit(): void {
+    this.component = new Component(this.componentContent, this.nodeId);
     this.componentId = this.componentContent.id;
     this.componentType = this.componentContent.type;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
@@ -183,8 +170,7 @@ export abstract class ComponentStudent {
       if (componentState != null) {
         this.setStudentWork(componentState);
         this.setParentStudentWorkIdToCurrentStudentWork(studentWorkId);
-        this.NotebookService.setNotesVisible(false);
-        this.NotebookService.setInsertMode({ insertMode: false });
+        this.NotebookService.closeNotes();
       }
     });
   }
@@ -199,6 +185,10 @@ export abstract class ComponentStudent {
 
   isForThisComponent(object: any) {
     return this.nodeId === object.nodeId && this.componentId === object.componentId;
+  }
+
+  isWorkFromClassmate(componentState: any): boolean {
+    return componentState.workgroupId !== this.ConfigService.getWorkgroupId();
   }
 
   subscribeToAttachStudentAsset() {
@@ -264,21 +254,11 @@ export abstract class ComponentStudent {
     if (this.isForThisComponent(componentState)) {
       this.setIsDirty(false);
       this.emitComponentDirty(this.getIsDirty());
-      const clientSaveTime = this.ConfigService.convertToClientTimestamp(
-        componentState.serverSaveTime
-      );
+      this.latestComponentState = componentState;
       if (componentState.isSubmit) {
-        this.setSubmittedMessage(clientSaveTime);
         this.lockIfNecessary();
         this.setIsSubmitDirty(false);
-        this.StudentDataService.broadcastComponentSubmitDirty({
-          componentId: this.componentId,
-          isDirty: this.isSubmitDirty
-        });
-      } else if (componentState.isAutoSave) {
-        this.setAutoSavedMessage(clientSaveTime);
-      } else {
-        this.setSavedMessage(clientSaveTime);
+        this.emitComponentSubmitDirty(this.isSubmitDirty);
       }
       this.handleStudentWorkSavedToServerAdditionalProcessing(componentState);
     }
@@ -345,13 +325,17 @@ export abstract class ComponentStudent {
         this.nodeId,
         this.componentId
       );
-      if (this.NodeService.isWorkSubmitted(componentStates)) {
+      if (this.hasAnySubmissions(componentStates)) {
         this.isDisabled = true;
       }
     }
   }
 
-  isLockAfterSubmit(): boolean {
+  private hasAnySubmissions(componentStates: any): boolean {
+    return componentStates.some((componentState) => componentState.isSubmit);
+  }
+
+  private isLockAfterSubmit(): boolean {
     return this.componentContent.lockAfterSubmit;
   }
 
@@ -524,7 +508,7 @@ export abstract class ComponentStudent {
   studentDataChanged(): void {
     this.setIsDirtyAndBroadcast();
     this.setIsSubmitDirtyAndBroadcast();
-    this.clearSaveText();
+    this.clearLatestComponentState();
     const action = 'change';
     this.createComponentStateAndBroadcast(action);
   }
@@ -557,25 +541,8 @@ export abstract class ComponentStudent {
     });
   }
 
-  clearSaveText(): void {
-    this.setSaveText('', null);
-  }
-
-  setSaveText(message: string, time: number): void {
-    this.saveMessage.text = message;
-    this.saveMessage.time = time;
-  }
-
-  setSavedMessage(time: number): void {
-    this.setSaveText($localize`Saved`, time);
-  }
-
-  setAutoSavedMessage(time: number): void {
-    this.setSaveText($localize`Auto Saved`, time);
-  }
-
-  setSubmittedMessage(time: number): void {
-    this.setSaveText($localize`Submitted`, time);
+  clearLatestComponentState(): void {
+    this.latestComponentState = null;
   }
 
   createComponentStateAndBroadcast(action: string): void {
@@ -605,17 +572,13 @@ export abstract class ComponentStudent {
       this.componentId
     );
     if (latestComponentState) {
-      const clientSaveTime = this.ConfigService.convertToClientTimestamp(
-        latestComponentState.serverSaveTime
-      );
+      this.latestComponentState = latestComponentState;
       if (latestComponentState.isSubmit) {
         this.setIsSubmitDirty(false);
         this.emitComponentSubmitDirty(false);
-        this.setSubmittedMessage(clientSaveTime);
       } else {
         this.setIsSubmitDirty(true);
         this.emitComponentSubmitDirty(true);
-        this.setSavedMessage(clientSaveTime);
       }
     }
   }

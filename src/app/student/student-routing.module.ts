@@ -17,9 +17,8 @@ const studentRoutes: Routes = [
       { path: 'profile', redirectTo: '', pathMatch: 'full' },
       { path: 'profile/edit', component: EditComponent },
       {
-        path: '',
-        loadChildren: () =>
-          import('../student-hybrid-angular.module').then((m) => m.StudentVLEAngularJSModule)
+        path: 'unit/:unitId',
+        loadChildren: () => import('./vle/student-vle.module').then((m) => m.StudentVLEModule)
       }
     ]
   }

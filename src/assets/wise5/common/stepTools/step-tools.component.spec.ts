@@ -4,23 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
-import { AchievementService } from '../../services/achievementService';
-import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { NodeService } from '../../services/nodeService';
-import { NotificationService } from '../../services/notificationService';
-import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentDataService } from '../../services/studentDataService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
-import { TagService } from '../../services/tagService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../services/teacherWebSocketService';
-import { UtilService } from '../../services/utilService';
 import { StepToolsComponent } from './step-tools.component';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
@@ -50,7 +41,8 @@ describe('StepTools', () => {
   let component: StepToolsComponent;
   let fixture: ComponentFixture<StepToolsComponent>;
   let getModeSpy: jasmine.Spy;
-  configureTestSuite(() => {
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -58,29 +50,17 @@ describe('StepTools', () => {
         MatDialogModule,
         MatIconModule,
         MatSelectModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [StepToolsComponent],
       providers: [
-        AchievementService,
-        AnnotationService,
         ClassroomStatusService,
-        ConfigService,
         { provide: NodeService, useClass: MockNodeService },
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService,
-        UtilService
+        TeacherWebSocketService
       ]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(StepToolsComponent);
     component = fixture.componentInstance;
     component.nodeId = nodeId3;

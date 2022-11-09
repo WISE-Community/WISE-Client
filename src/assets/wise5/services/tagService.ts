@@ -1,9 +1,7 @@
 'use strict';
 
-import * as angular from 'angular';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { map } from 'rxjs/operators';
 import { ProjectService } from './projectService';

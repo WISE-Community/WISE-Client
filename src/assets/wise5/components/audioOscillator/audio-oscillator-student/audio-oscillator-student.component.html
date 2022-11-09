@@ -1,4 +1,4 @@
-<component-header [componentContent]="componentContent"></component-header>
+<component-header [component]="component"></component-header>
 <div fxLayout="row wrap" fxLayoutAlign="start center" class="interaction-div">
   <mat-form-field *ngIf="oscillatorTypes.length > 1" class="oscillator-type">
     <mat-label i18n>Oscillator Type</mat-label>
@@ -48,13 +48,13 @@
     class="oscillator-canvas">
 </canvas>
 <component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
+    [componentState]="latestComponentState"
     [isDirty]="isDirty"
     [isDisabled]="isDisabled"
     [isSaveButtonVisible]="isSaveButtonVisible"
     [isSubmitButtonDisabled]="isSubmitButtonDisabled"
     [isSubmitButtonVisible]="isSubmitButtonVisible"
     [isSubmitDirty]="isSubmitDirty"
-    [saveMessage]="saveMessage"
     (saveButtonClicked)="saveButtonClicked($event)"
     (submitButtonClicked)="submitButtonClicked($event)">
 </component-save-submit-buttons>

@@ -1,26 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HeaderLinksComponent } from './header-links.component';
 import { User } from '../../../domain/user';
-import { Component } from '@angular/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { configureTestSuite } from 'ng-bullet';
-
-@Component({ selector: 'app-header-signin', template: '' })
-class HeaderSignInStubComponent {}
 
 describe('HeaderLinksComponent', () => {
   let component: HeaderLinksComponent;
   let fixture: ComponentFixture<HeaderLinksComponent>;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HeaderLinksComponent],
       imports: [],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(HeaderLinksComponent);
     component = fixture.componentInstance;
     const user: User = new User();

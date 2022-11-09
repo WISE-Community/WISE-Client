@@ -6,20 +6,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { NodeComponent } from './node.component';
 import { HelpIconModule } from '../../themes/default/themeComponents/helpIcon/help-icon.module';
 import { ComponentStudentModule } from '../../components/component/component-student.module';
-import { MomentModule } from 'ngx-moment';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ComponentStateInfoModule } from '../../common/component-state-info/component-state-info.module';
 
 @NgModule({
   declarations: [NodeComponent],
   imports: [
     CommonModule,
+    ComponentStateInfoModule,
     ComponentStudentModule,
     FlexLayoutModule,
     HelpIconModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule,
-    MomentModule
+    MatTooltipModule
   ],
   exports: [NodeComponent]
 })

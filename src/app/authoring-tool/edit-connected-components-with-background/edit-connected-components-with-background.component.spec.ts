@@ -1,11 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ConfigService } from '../../../assets/wise5/services/configService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
-import { SessionService } from '../../../assets/wise5/services/sessionService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
+import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsWithBackgroundComponent } from './edit-connected-components-with-background.component';
 
@@ -18,12 +15,11 @@ const importWorkType = 'importWork';
 describe('EditConnectedComponentsWithBackgroundComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatIconModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatIconModule, StudentTeacherCommonServicesModule],
       declarations: [
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsWithBackgroundComponent
-      ],
-      providers: [ConfigService, ProjectService, SessionService, UtilService]
+      ]
     }).compileComponents();
   });
 
@@ -47,23 +43,20 @@ function createConnectedComponentObject(nodeId: string, componentId: string, typ
 function afterComponentIdChanged() {
   describe('afterComponentIdChanged', () => {
     let connectedComponent: any;
-    let getComponentByNodeIdAndComponentIdSpy: any;
+    let getComponentSpy: any;
     beforeEach(() => {
       component.componentTypesThatCanImportWorkAsBackground = ['Draw'];
-      getComponentByNodeIdAndComponentIdSpy = spyOn(
-        TestBed.inject(ProjectService),
-        'getComponentByNodeIdAndComponentId'
-      );
+      getComponentSpy = spyOn(TestBed.inject(ProjectService), 'getComponent');
       connectedComponent = createConnectedComponentObject(nodeId1, componentId1, importWorkType);
     });
     it('should set import work as background', () => {
-      setSpyReturnComponentType(getComponentByNodeIdAndComponentIdSpy, 'Draw');
+      setSpyReturnComponentType(getComponentSpy, 'Draw');
       expect(connectedComponent.importWorkAsBackground).toBeUndefined();
       component.afterComponentIdChanged(connectedComponent);
       expect(connectedComponent.importWorkAsBackground).toEqual(true);
     });
     it('should not set import work as background', () => {
-      setSpyReturnComponentType(getComponentByNodeIdAndComponentIdSpy, 'Graph');
+      setSpyReturnComponentType(getComponentSpy, 'Graph');
       expect(connectedComponent.importWorkAsBackground).toBeUndefined();
       component.afterComponentIdChanged(connectedComponent);
       expect(connectedComponent.importWorkAsBackground).toBeUndefined();
@@ -71,8 +64,8 @@ function afterComponentIdChanged() {
   });
 }
 
-function setSpyReturnComponentType(getComponentByNodeIdAndComponentIdSpy: any, type: string): void {
-  getComponentByNodeIdAndComponentIdSpy.and.returnValue({
+function setSpyReturnComponentType(getComponentSpy: any, type: string): void {
+  getComponentSpy.and.returnValue({
     nodeId: nodeId1,
     componentId: componentId1,
     type: type

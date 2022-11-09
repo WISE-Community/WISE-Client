@@ -1,6 +1,5 @@
 'use strict';
 
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
@@ -8,14 +7,13 @@ import { UtilService } from './utilService';
 import { TeacherProjectService } from './teacherProjectService';
 import { TeacherWebSocketService } from './teacherWebSocketService';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { Node } from '../common/Node';
 
 @Injectable()
 export class TeacherDataService extends DataService {
   studentData: any;
-  $rootScope: any;
   currentPeriod = null;
   currentWorkgroup = null;
   currentStep = null;
@@ -31,7 +29,6 @@ export class TeacherDataService extends DataService {
   public currentWorkgroupChanged$: Observable<any> = this.currentWorkgroupChangedSource.asObservable();
 
   constructor(
-    upgrade: UpgradeModule,
     private http: HttpClient,
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
@@ -39,7 +36,7 @@ export class TeacherDataService extends DataService {
     private TeacherWebSocketService: TeacherWebSocketService,
     private UtilService: UtilService
   ) {
-    super(upgrade, ProjectService);
+    super(ProjectService);
     this.studentData = {
       annotationsByNodeId: {},
       annotationsToWorkgroupId: {},
@@ -47,10 +44,7 @@ export class TeacherDataService extends DataService {
       componentStatesByNodeId: {},
       componentStatesByComponentId: {}
     };
-
-    if (this.upgrade.$injector != null) {
-      this.subscribeToEvents();
-    }
+    this.subscribeToEvents();
   }
 
   subscribeToEvents() {
@@ -68,15 +62,10 @@ export class TeacherDataService extends DataService {
     });
 
     this.ConfigService.configRetrieved$.subscribe(() => {
-      this.retrieveRunStatus();
+      if (this.ConfigService.isClassroomMonitor()) {
+        this.retrieveRunStatus();
+      }
     });
-  }
-
-  getRootScope() {
-    if (this.$rootScope == null) {
-      this.$rootScope = this.upgrade.$injector.get('$rootScope');
-    }
-    return this.$rootScope;
   }
 
   handleAnnotationReceived(annotation) {
@@ -191,7 +180,7 @@ export class TeacherDataService extends DataService {
   getConnectedComponentsWithRequiredStudentData(components): any {
     const connectedComponents = [];
     for (const component of components) {
-      const componentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      const componentContent = this.ProjectService.getComponent(
         component.nodeId,
         component.componentId
       );
@@ -314,9 +303,8 @@ export class TeacherDataService extends DataService {
   }
 
   processAnnotations(annotations) {
-    const activeAnnotations = this.getActiveAnnototations(annotations);
-    this.studentData.annotations = activeAnnotations;
-    for (const annotation of activeAnnotations) {
+    this.studentData.annotations = annotations;
+    for (const annotation of annotations) {
       this.addAnnotationToAnnotationsToWorkgroupId(annotation);
       this.addAnnotationToAnnotationsByNodeId(annotation);
     }
@@ -708,6 +696,14 @@ export class TeacherDataService extends DataService {
 
   getRunStatus() {
     return this.runStatus;
+  }
+
+  getVisiblePeriodsById(currentPeriodId: number): any {
+    if (currentPeriodId === -1) {
+      return this.getPeriods().slice(1);
+    } else {
+      return [this.getPeriodById(currentPeriodId)];
+    }
   }
 
   setCurrentWorkgroup(workgroup) {

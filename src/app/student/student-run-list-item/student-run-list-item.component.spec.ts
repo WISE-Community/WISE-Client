@@ -1,17 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentRun } from '../student-run';
 import { StudentRunListItemComponent } from './student-run-list-item.component';
 import { Observable } from 'rxjs';
 import { Config } from '../../domain/config';
 import { ConfigService } from '../../services/config.service';
-import { MomentModule } from 'ngx-moment';
 import { Project } from '../../domain/project';
 import { User } from '../../domain/user';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { StudentService } from '../student.service';
 import { UserService } from '../../services/user.service';
-import { configureTestSuite } from 'ng-bullet';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class MockConfigService {
@@ -42,9 +40,9 @@ describe('StudentRunListItemComponent', () => {
   let component: StudentRunListItemComponent;
   let fixture: ComponentFixture<StudentRunListItemComponent>;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MomentModule, BrowserAnimationsModule, MatDialogModule],
+      imports: [BrowserAnimationsModule, MatDialogModule],
       declarations: [StudentRunListItemComponent],
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
@@ -53,9 +51,6 @@ describe('StudentRunListItemComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(StudentRunListItemComponent);
     component = fixture.componentInstance;
     const run: StudentRun = new StudentRun();
@@ -64,7 +59,6 @@ describe('StudentRunListItemComponent', () => {
     const owner = new User();
     owner.displayName = 'Mr. Happy';
     run.owner = owner;
-    run.projectThumb = 'Happy.png';
     run.startTime = new Date('2018-10-17T00:00:00.0').getTime();
     const project: Project = new Project();
     project.id = 1;

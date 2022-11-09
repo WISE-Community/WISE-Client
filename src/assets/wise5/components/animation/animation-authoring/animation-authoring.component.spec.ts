@@ -8,15 +8,11 @@ import { MatRadioModule } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ConfigService } from '../../../services/configService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { AnimationAuthoring } from './animation-authoring.component';
 
@@ -26,7 +22,7 @@ let component: AnimationAuthoring;
 let fixture: ComponentFixture<AnimationAuthoring>;
 
 describe('AnimationAuthoring', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -38,33 +34,22 @@ describe('AnimationAuthoring', () => {
         MatInputModule,
         MatRadioModule,
         ReactiveFormsModule,
-        UpgradeModule
+        UpgradeModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [AnimationAuthoring, EditComponentPrompt],
       providers: [
-        ConfigService,
         { provide: NodeService, useClass: MockNodeService },
         ProjectAssetService,
-        ProjectService,
-        SessionService,
-        TeacherProjectService,
-        UtilService
-      ],
-      schemas: []
+        TeacherProjectService
+      ]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(AnimationAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       JSON.parse(JSON.stringify(componentContent))
     );
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue(JSON.parse(JSON.stringify(componentContent)));
     spyOn(component, 'componentChanged');
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
     fixture.detectChanges();

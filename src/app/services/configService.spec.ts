@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import sampleConfig1 from './sampleData/sample_config_1.json';
+import { UtilService } from '../../assets/wise5/services/utilService';
 let service: ConfigService;
 let http: HttpTestingController;
 
@@ -19,8 +19,8 @@ const teacherWorkgroupId2 = 102;
 describe('ConfigService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [ConfigService]
+      imports: [HttpClientTestingModule],
+      providers: [ConfigService, UtilService]
     });
     http = TestBed.get(HttpTestingController);
     service = TestBed.get(ConfigService);
@@ -61,6 +61,8 @@ describe('ConfigService', () => {
   getAllUsersInPeriod();
   getUsersNotInWorkgroupInPeriod();
   getTeacherWorkgroupId();
+  getSharedTeacherWorkgroupIds();
+  getTeacherWorkgroupIds();
   getPeriodIdGivenWorkgroupId();
   calculateIsRunActive();
   isEndedAndLocked();
@@ -162,6 +164,20 @@ function getTeacherWorkgroupId() {
   it('should get teacher workgroup id from config', () => {
     service.setConfig(sampleConfig1);
     expect(service.getTeacherWorkgroupId()).toEqual(1);
+  });
+}
+
+function getSharedTeacherWorkgroupIds() {
+  it('should get shared teacher workgroup ids from config', () => {
+    service.setConfig(sampleConfig1);
+    expect(service.getSharedTeacherWorkgroupIds()).toEqual([100, 101]);
+  });
+}
+
+function getTeacherWorkgroupIds() {
+  it('should get shared teacher workgroup ids from config', () => {
+    service.setConfig(sampleConfig1);
+    expect(service.getTeacherWorkgroupIds()).toEqual([1, 100, 101]);
   });
 }
 

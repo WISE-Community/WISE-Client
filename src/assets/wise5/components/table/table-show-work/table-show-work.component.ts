@@ -1,34 +1,41 @@
 import { Component } from '@angular/core';
+import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
+import { TabulatorDataService } from '../tabulatorDataService';
+import { TabulatorData } from '../TabulatorData';
 
 @Component({
   selector: 'table-show-work',
   templateUrl: 'table-show-work.component.html',
-  styleUrls: ['../table-student/table-student.component.scss']
+  styleUrls: ['../table-student/table-student.component.scss', 'table-show-work.component.scss']
 })
 export class TableShowWorkComponent extends ComponentShowWorkDirective {
-  tableData: any[];
+  tableData: any[] = [];
   dataExplorerGraphType: string;
   dataExplorerSeries: any[];
   dataExplorerXAxisLabel: string;
   dataExplorerYAxisLabel: string;
   dataExplorerYAxisLabels: string[];
+  selectedRowIndices: number[];
   xColumnIndex: number;
   columnNames: string[] = [];
-  minCellSize: number = 3;
-  cellSizeToPixelsMultiplier: number = 10;
   noneText: string = $localize`(None)`;
+  tabulatorData: TabulatorData;
 
-  constructor(protected ProjectService: ProjectService) {
-    super(ProjectService);
+  constructor(
+    protected nodeService: NodeService,
+    protected ProjectService: ProjectService,
+    private TabulatorDataService: TabulatorDataService
+  ) {
+    super(nodeService, ProjectService);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
     const studentData = this.componentState.studentData;
     this.tableData = studentData.tableData;
-    this.injectCellWidths(this.tableData);
+    this.selectedRowIndices = studentData.selectedRowIndices ? studentData.selectedRowIndices : [];
     if (studentData.isDataExplorerEnabled) {
       this.dataExplorerGraphType = studentData.dataExplorerGraphType;
       this.dataExplorerSeries = studentData.dataExplorerSeries;
@@ -38,26 +45,7 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
       this.xColumnIndex = this.calculateXColumnIndex(this.componentState);
       this.columnNames = this.calculateColumnNames(this.componentState);
     }
-  }
-
-  injectCellWidths(tableData: any[]): any[] {
-    tableData.forEach((row: any) => {
-      row.forEach((cell: any) => {
-        cell.width = this.calculateCellWidth(cell);
-      });
-    });
-    return tableData;
-  }
-
-  calculateCellWidth(cell: any): number {
-    let size = this.componentContent.globalCellSize;
-    if (cell.size != null) {
-      size = cell.size;
-    }
-    if (size < this.minCellSize) {
-      size = this.minCellSize;
-    }
-    return size * this.cellSizeToPixelsMultiplier;
+    this.setupTable();
   }
 
   calculateXColumnIndex(componentState: any): number {
@@ -72,5 +60,19 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
       columnNames.push(cell.text);
     }
     return columnNames;
+  }
+
+  setupTable(): void {
+    this.tabulatorData = this.TabulatorDataService.convertTableDataToTabulator(
+      this.tableData,
+      this.componentContent.globalCellSize
+    );
+  }
+
+  tabulatorRendered(): void {
+    this.nodeService.broadcastDoneRenderingComponent({
+      nodeId: this.nodeId,
+      componentId: this.componentId
+    });
   }
 }

@@ -1,0 +1,23 @@
+.notebook-grading {
+  .mat-list-item .mat-list-item-content {
+    padding: 0;
+  }
+
+  .mat-list-base {
+    .mat-list-item.user-list-controls {
+      height: auto;
+
+      .mat-list-item-content {
+        padding: 8px;
+      }
+    }
+  }
+
+  .table--list__thead__link {
+    padding: 0 4px;
+  }
+
+  workgroup-select-autocomplete {
+    width: 100%;
+  }
+}

@@ -16,7 +16,7 @@ export class EditAdvancedComponentAngularJSController {
   ) {}
 
   $onInit(): void {
-    this.authoringComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+    this.authoringComponentContent = this.ProjectService.getComponent(
       this.nodeId,
       this.componentId
     );

@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    if (this.userService.isStudent()) {
+    if (this.userService.isStudent() || url.includes('/preview/unit')) {
       return true;
     } else if (this.userService.isAuthenticated) {
       this.router.navigate(['/']);

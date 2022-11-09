@@ -2,22 +2,14 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AchievementService } from '../../../../services/achievementService';
-import { AnnotationService } from '../../../../services/annotationService';
-import { ConfigService } from '../../../../services/configService';
-import { NotificationService } from '../../../../services/notificationService';
-import { ProjectService } from '../../../../services/projectService';
-import { SessionService } from '../../../../services/sessionService';
-import { StudentDataService } from '../../../../services/studentDataService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
-import { TagService } from '../../../../services/tagService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
-import { UtilService } from '../../../../services/utilService';
 import { NodeAdvancedConstraintAuthoringComponent } from './node-advanced-constraint-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 
 describe('NodeAdvancedConstraintAuthoringComponent', () => {
   let component: NodeAdvancedConstraintAuthoringComponent;
@@ -31,23 +23,15 @@ describe('NodeAdvancedConstraintAuthoringComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [NodeAdvancedConstraintAuthoringComponent],
       providers: [
         AchievementService,
-        AnnotationService,
         ClassroomStatusService,
-        ConfigService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService,
-        UtilService
+        TeacherWebSocketService
       ]
     }).compileComponents();
   });

@@ -6,6 +6,11 @@
   max-width: breakpoint('sm.min');
 }
 
+dialog-responses {
+  display: block;
+  margin-bottom: 12px;
+}
+
 .add-response {
   margin-top: 12px;
 }

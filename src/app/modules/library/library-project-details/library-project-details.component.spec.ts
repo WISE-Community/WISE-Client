@@ -8,7 +8,6 @@ import { NGSSStandards } from '../ngssStandards';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../../services/config.service';
 import { ParentProject } from '../../../domain/parentProject';
-import { configureTestSuite } from 'ng-bullet';
 
 export class MockMatDialog {}
 
@@ -39,7 +38,7 @@ describe('LibraryProjectDetailsComponent', () => {
   let component: LibraryProjectDetailsComponent;
   let fixture: ComponentFixture<LibraryProjectDetailsComponent>;
 
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LibraryProjectDetailsComponent],
       providers: [
@@ -51,9 +50,6 @@ describe('LibraryProjectDetailsComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(LibraryProjectDetailsComponent);
     component = fixture.componentInstance;
     const project: Project = new Project();

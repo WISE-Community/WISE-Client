@@ -1,13 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { TagService } from '../../assets/wise5/services/tagService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
+import { MatDialogModule } from '@angular/material/dialog';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { ComponentContent } from '../../assets/wise5/common/ComponentContent';
 
 let $injector, $rootScope;
 let http: HttpTestingController;
@@ -17,32 +18,21 @@ let annotationService: AnnotationService;
 let projectService: ProjectService;
 let tagService: TagService;
 let utilService: UtilService;
-let upgrade: UpgradeModule;
 let criteria1: any;
 let criteria2: any;
 
 describe('StudentDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule]
     });
-    http = TestBed.get(HttpTestingController);
-    service = TestBed.get(StudentDataService);
-    configService = TestBed.get(ConfigService);
-    annotationService = TestBed.get(AnnotationService);
-    projectService = TestBed.get(ProjectService);
-    tagService = TestBed.get(TagService);
-    utilService = TestBed.get(UtilService);
-    upgrade = TestBed.get(UpgradeModule);
+    http = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(StudentDataService);
+    configService = TestBed.inject(ConfigService);
+    annotationService = TestBed.inject(AnnotationService);
+    projectService = TestBed.inject(ProjectService);
+    tagService = TestBed.inject(TagService);
+    utilService = TestBed.inject(UtilService);
     criteria1 = {
       name: 'isCompleted',
       params: {
@@ -112,12 +102,6 @@ describe('StudentDataService', () => {
   shouldCheckIsCompleted();
   shouldGetLatestComponentStatesByNodeId();
   shouldGetLatestComponentStateByNodeId();
-  shouldCheckIsCompletionCriteriaSatisfied();
-  shouldGetComponentStateSavedAfter();
-  shouldGetComponentStateSubmittedAfter();
-  shouldGetVisitEventAfter();
-  shouldGetClassmateStudentWork();
-  shouldGetClassmateScores();
   shouldGetStudentWorkById();
   shouldGetMaxScore();
   shouldEvaluateCriterias();
@@ -1237,8 +1221,8 @@ function shouldCheckIsCompleted() {
     spyOn(service, 'getEventsByNodeIdAndComponentId').and.returnValue(componentEvents);
     const nodeEvents = [];
     spyOn(service, 'getEventsByNodeId').and.returnValue(nodeEvents);
-    const component = { id: 'component1', type: 'OpenResponse' };
-    spyOn(projectService, 'getComponentByNodeIdAndComponentId').and.returnValue(component);
+    const component = { id: 'component1', type: 'OpenResponse' } as ComponentContent;
+    spyOn(projectService, 'getComponent').and.returnValue(component);
     const node = { id: 'node1' };
     spyOn(projectService, 'getNodeById').and.returnValue(node);
     expect(service.isCompleted('node1', 'component1')).toEqual(false);
@@ -1250,8 +1234,8 @@ function shouldCheckIsCompleted() {
     spyOn(service, 'getEventsByNodeIdAndComponentId').and.returnValue(componentEvents);
     const nodeEvents = [];
     spyOn(service, 'getEventsByNodeId').and.returnValue(nodeEvents);
-    const component = { id: 'component1', type: 'OpenResponse' };
-    spyOn(projectService, 'getComponentByNodeIdAndComponentId').and.returnValue(component);
+    const component = { id: 'component1', type: 'OpenResponse' } as ComponentContent;
+    spyOn(projectService, 'getComponent').and.returnValue(component);
     const node = { id: 'node1' };
     spyOn(projectService, 'getNodeById').and.returnValue(node);
     expect(service.isCompleted('node1', 'component1')).toEqual(true);
@@ -1263,8 +1247,8 @@ function shouldCheckIsCompleted() {
     const components = [
       { id: 'component1', type: 'OpenResponse' },
       { id: 'component2', type: 'OpenResponse' }
-    ];
-    spyOn(projectService, 'getComponentsByNodeId').and.returnValue(components);
+    ] as ComponentContent[];
+    spyOn(projectService, 'getComponents').and.returnValue(components);
     spyOn(service, 'getComponentStatesByNodeIdAndComponentId').and.callFake(
       (nodeId, componentId) => {
         if (nodeId === 'node1' && componentId === 'component1') {
@@ -1287,8 +1271,8 @@ function shouldCheckIsCompleted() {
     const components = [
       { id: 'component1', type: 'OpenResponse' },
       { id: 'component2', type: 'OpenResponse' }
-    ];
-    spyOn(projectService, 'getComponentsByNodeId').and.returnValue(components);
+    ] as ComponentContent[];
+    spyOn(projectService, 'getComponents').and.returnValue(components);
     spyOn(service, 'getComponentStatesByNodeIdAndComponentId').and.callFake(
       (nodeId, componentId) => {
         if (nodeId === 'node1' && componentId === 'component1') {
@@ -1370,166 +1354,6 @@ function shouldGetLatestComponentStateByNodeId() {
     };
     const componentState = service.getLatestComponentStateByNodeId('node1');
     expect(componentState.id).toEqual(2);
-  });
-}
-
-function shouldCheckIsCompletionCriteriaSatisfied() {
-  it('should check is completion criteria satisfied submit save false', () => {
-    const completionCriteria = {
-      criteria: [
-        { nodeId: 'node1', componentId: 'component1', name: 'isSubmitted' },
-        { nodeId: 'node1', componentId: 'component1', name: 'isSaved' }
-      ],
-      inOrder: true
-    };
-    const componentState1 = {};
-    spyOn(service, 'getComponentStateSubmittedAfter').and.returnValue(componentState1);
-    spyOn(service, 'getComponentStateSavedAfter').and.returnValue(null);
-    expect(service.isCompletionCriteriaSatisfied(completionCriteria)).toEqual(false);
-  });
-  it('should check is completion criteria satisfied submit save true', () => {
-    const completionCriteria = {
-      criteria: [
-        { nodeId: 'node1', componentId: 'component1', name: 'isSubmitted' },
-        { nodeId: 'node1', componentId: 'component1', name: 'isSaved' }
-      ],
-      inOrder: true
-    };
-    const componentState1 = {};
-    spyOn(service, 'getComponentStateSubmittedAfter').and.returnValue(componentState1);
-    const componentState2 = {};
-    spyOn(service, 'getComponentStateSavedAfter').and.returnValue(componentState2);
-    expect(service.isCompletionCriteriaSatisfied(completionCriteria)).toEqual(true);
-  });
-  it('should check is completion criteria satisfied submit visit false', () => {
-    const completionCriteria = {
-      criteria: [
-        { nodeId: 'node1', componentId: 'component1', name: 'isSubmitted' },
-        { nodeId: 'node1', componentId: 'component1', name: 'isVisited' }
-      ],
-      inOrder: true
-    };
-    const componentState1 = {};
-    spyOn(service, 'getComponentStateSubmittedAfter').and.returnValue(componentState1);
-    spyOn(service, 'getVisitEventAfter').and.returnValue(null);
-    expect(service.isCompletionCriteriaSatisfied(completionCriteria)).toEqual(false);
-  });
-  it('should check is completion criteria satisfied submit visit true', () => {
-    const completionCriteria = {
-      criteria: [
-        { nodeId: 'node1', componentId: 'component1', name: 'isSubmitted' },
-        { nodeId: 'node1', componentId: 'component1', name: 'isVisited' }
-      ],
-      inOrder: true
-    };
-    const componentState1 = {};
-    spyOn(service, 'getComponentStateSubmittedAfter').and.returnValue(componentState1);
-    const visitEvent1 = {};
-    spyOn(service, 'getVisitEventAfter').and.returnValue(visitEvent1);
-    expect(service.isCompletionCriteriaSatisfied(completionCriteria)).toEqual(true);
-  });
-}
-
-function shouldGetComponentStateSavedAfter() {
-  it('should get component state saved after false', () => {
-    service.studentData = {
-      componentStates: [
-        createComponentState(1, 'node1', 'component1', false, null, 1000),
-        createComponentState(2, 'node1', 'component1', false, null, 2000),
-        createComponentState(3, 'node1', 'component1', false, null, 3000)
-      ]
-    };
-    const componentState = service.getComponentStateSavedAfter('node1', 'component1', 4000);
-    expect(componentState).toBeNull();
-  });
-  it('should get component state saved after true', () => {
-    service.studentData = {
-      componentStates: [
-        createComponentState(1, 'node1', 'component1', false, null, 1000),
-        createComponentState(2, 'node1', 'component1', false, null, 2000),
-        createComponentState(3, 'node1', 'component1', false, null, 3000)
-      ]
-    };
-    const componentState = service.getComponentStateSavedAfter('node1', 'component1', 1500);
-    expect(componentState.id).toEqual(2);
-  });
-}
-
-function shouldGetComponentStateSubmittedAfter() {
-  it('should get component state submitted after false', () => {
-    service.studentData = {
-      componentStates: [
-        createComponentState(1, 'node1', 'component1', true, null, 1000),
-        createComponentState(2, 'node1', 'component1', false, null, 2000),
-        createComponentState(3, 'node1', 'component1', false, null, 3000)
-      ]
-    };
-    const componentState = service.getComponentStateSubmittedAfter('node1', 'component1', 1500);
-    expect(componentState).toBeNull();
-  });
-  it('should get component state submitted after true', () => {
-    service.studentData = {
-      componentStates: [
-        createComponentState(1, 'node1', 'component1', true, null, 1000),
-        createComponentState(2, 'node1', 'component1', false, null, 2000),
-        createComponentState(3, 'node1', 'component1', true, null, 3000)
-      ]
-    };
-    const componentState = service.getComponentStateSubmittedAfter('node1', 'component1', 1500);
-    expect(componentState.id).toEqual(3);
-  });
-}
-
-function shouldGetVisitEventAfter() {
-  it('should get visit event after false', () => {
-    service.studentData = {
-      events: [
-        createEvent(1, 'node1', 'component1', 'nodeEntered', null, 1000),
-        createEvent(2, 'node1', 'component1', 'nodeEntered', null, 2000),
-        createEvent(3, 'node1', 'component1', 'nodeEntered', null, 3000)
-      ]
-    };
-    const event = service.getVisitEventAfter('node1', 4000);
-    expect(event).toBeNull();
-  });
-  it('should get visit event after true', () => {
-    service.studentData = {
-      events: [
-        createEvent(1, 'node1', 'component1', 'nodeEntered', null, 1000),
-        createEvent(2, 'node1', 'component1', 'nodeEntered', null, 2000),
-        createEvent(3, 'node1', 'component1', 'nodeEntered', null, 3000)
-      ]
-    };
-    const event = service.getVisitEventAfter('node1', 1500);
-    expect(event.id).toEqual(2);
-  });
-}
-
-function shouldGetClassmateStudentWork() {
-  it('should get classmate student work', () => {
-    spyOn(configService, 'getRunId').and.returnValue(1);
-    spyOn(configService, 'getConfigParam').withArgs('studentDataURL').and.returnValue('/student');
-    service.getClassmateStudentWork('node1', 'component1', 10);
-    http
-      .expectOne(
-        '/student?runId=1&nodeId=node1&componentId=component1&getStudentWork=true&' +
-          'getEvents=false&getAnnotations=false&onlyGetLatest=true&periodId=10'
-      )
-      .flush({});
-  });
-}
-
-function shouldGetClassmateScores() {
-  it('should get classmate scores', () => {
-    spyOn(configService, 'getRunId').and.returnValue(1);
-    spyOn(configService, 'getConfigParam').withArgs('studentDataURL').and.returnValue('/student');
-    service.getClassmateScores('node1', 'component1', 10);
-    http
-      .expectOne(
-        '/student?runId=1&nodeId=node1&componentId=component1&getStudentWork=false&' +
-          'getEvents=false&getAnnotations=true&onlyGetLatest=false&periodId=10'
-      )
-      .flush({});
   });
 }
 

@@ -1,19 +1,13 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { AnnotationService } from '../../services/annotationService';
-import { ConfigService } from '../../services/configService';
-import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
-import { TagService } from '../../services/tagService';
-import { UtilService } from '../../services/utilService';
 import { DismissAmbientNotificationDialogComponent } from './dismiss-ambient-notification-dialog.component';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 
 let component: DismissAmbientNotificationDialogComponent;
 const DISMISS_CODE: string = 'computer';
@@ -33,34 +27,25 @@ describe('DismissAmbientNotificationDialogComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         ReactiveFormsModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [DismissAmbientNotificationDialogComponent],
       providers: [
-        AnnotationService,
-        ConfigService,
-        FormBuilder,
         {
           provide: MAT_DIALOG_DATA,
           useValue: {
             data: { dismissCode: DISMISS_CODE }
           }
         },
-        { provide: MatDialogRef, useValue: { close() {} } },
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService,
-        UtilService
+        { provide: MatDialogRef, useValue: { close() {} } }
       ]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    saveVLEEventSpy = spyOn(
-      TestBed.inject(StudentDataService),
-      'saveVLEEvent'
-    ).and.callFake(() => {});
+    saveVLEEventSpy = spyOn(TestBed.inject(StudentDataService), 'saveVLEEvent').and.callFake(() => {
+      return Promise.resolve({});
+    });
     fixture = TestBed.createComponent(DismissAmbientNotificationDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

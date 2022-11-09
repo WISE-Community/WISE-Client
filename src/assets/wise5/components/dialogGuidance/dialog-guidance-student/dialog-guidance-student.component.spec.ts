@@ -7,30 +7,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { AnnotationService } from '../../../services/annotationService';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
-import { ConfigService } from '../../../services/configService';
-import { CRaterService } from '../../../services/cRaterService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
+import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentStatusService } from '../../../services/studentStatusService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { MockService } from '../../animation/animation-student/animation-student.component.spec';
-import { MockNodeService } from '../../common/MockNodeService';
-import { ComponentService } from '../../componentService';
 import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseMultipleScores';
 import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
-import { CRaterResponse } from '../CRaterResponse';
-import { CRaterScore } from '../CRaterScore';
+import { CRaterResponse } from '../../common/cRater/CRaterResponse';
+import { CRaterScore } from '../../common/cRater/CRaterScore';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { DialogGuidanceStudentComponent } from './dialog-guidance-student.component';
@@ -57,25 +47,9 @@ describe('DialogGuidanceStudentComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
-      providers: [
-        AnnotationService,
-        ComponentService,
-        ComputerAvatarService,
-        CRaterService,
-        ConfigService,
-        DialogGuidanceService,
-        { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockService },
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        StudentStatusService,
-        TagService,
-        UtilService
-      ]
+      providers: [DialogGuidanceFeedbackService]
     }).compileComponents();
   });
 
@@ -109,7 +83,7 @@ describe('DialogGuidanceStudentComponent', () => {
 
   it('should create computer dialog response with multiple scores', () => {
     const response = new CRaterResponse();
-    const scores = [new CRaterScore('ki', 5, 5.0), new CRaterScore('science', 4, 4.1)];
+    const scores = [new CRaterScore('ki', 5, 5.0, 1, 5), new CRaterScore('science', 4, 4.1, 1, 5)];
     response.scores = scores;
     const computerDialogResponse = component.createComputerDialogResponse(response);
     expect((computerDialogResponse as ComputerDialogResponseMultipleScores).scores).toEqual(scores);
@@ -121,10 +95,11 @@ describe('DialogGuidanceStudentComponent', () => {
       'broadcastComponentSubmitTriggered'
     );
     component.setIsSubmitDirty(true);
-    const response = new CRaterResponse();
+    const response = createDummyScoringResponse();
+    expect(component.responses.length).toEqual(0);
     component.cRaterSuccessResponse(response);
     expect(broadcastComponentSubmitTriggeredSpy).toHaveBeenCalled();
-    expect(component.submitCounter).toEqual(1);
+    expect(component.responses.length).toEqual(1);
   });
 
   it('should disable submit button after using all submits', () => {
@@ -231,7 +206,7 @@ describe('DialogGuidanceStudentComponent', () => {
 });
 
 function simulateSubmit(component: DialogGuidanceStudentComponent): void {
-  const response = new CRaterResponse();
+  const response = createDummyScoringResponse();
   component.setIsSubmitDirty(true);
   component.cRaterSuccessResponse(response);
 }
@@ -257,4 +232,17 @@ function expectIsShowComputerAvatarSelector(
   expectedIsShowComputerAvatarSelector: boolean
 ) {
   expect(component.isShowComputerAvatarSelector).toEqual(expectedIsShowComputerAvatarSelector);
+}
+
+function createDummyScoringResponse() {
+  return {
+    responses: {
+      feedback: {
+        ideas: [{ 2: false }, { 3: false }]
+      },
+      trait_scores: {
+        ki: { score: 1 }
+      }
+    }
+  };
 }

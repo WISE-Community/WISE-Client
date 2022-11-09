@@ -1,0 +1,51 @@
+<div fxLayout="column" class="account-menu--fixed-height account-menu--fixed-width">
+  <mat-toolbar class="account-menu__info md-subhead md-whiteframe-1dp"
+      fxLayout="row" fxLayoutAlign="space-between center">
+    <span class="accent account-menu__info__title" fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon class="accent">notifications</mat-icon>
+      &nbsp;
+      <span i18n>Alerts</span>
+    </span>
+    <button mat-icon-button
+        *ngIf="newNotifications.length > 0"
+        (click)="confirmDismissAllNotifications()"
+        [disabled]="newNotifications.length === 0"
+        matTooltip="Clear all notifications"
+        matTooltipPosition="left"
+        i18n-matTooltip
+        aria-label="Clear all notifications"
+        i18n-aria-label>
+      <mat-icon>clear_all</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div class="account-menu__actions" fxFlex>
+    <div *ngIf="newNotifications.length === 0" class="md-padding center">
+      <span i18n>You have no new alerts at this time.</span>
+    </div>
+    <mat-list *ngIf="newNotifications.length > 0">
+      <mat-list-item *ngFor="let notification of newNotifications"
+          class="notification md-2-line"
+          fxLayoutAlign="start center">
+        <div (click)="visitNode(notification)"
+            class="notification-message-div"
+            matTooltip="Go to {{ getNodePositionAndTitle(notification.nodeId) }}"
+            matTooltipPosition="left"
+            i18n-matTooltip>
+          <div class="md-body-1 primary">{{ notification.message }}</div>
+          <h4 class="notification-step-title">
+            {{ getNodePositionAndTitle(notification.nodeId) }}
+          </h4>
+        </div>
+        <div fxFlex></div>
+        <button mat-icon-button
+            (click)="dismissNotification(notification)"
+            fxLayoutAlign="center center"
+            matTooltip="Clear"
+            matTooltipPosition="left"
+            i18n-matTooltip>
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

@@ -1,41 +1,18 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { Subject } from 'rxjs';
-import { ComponentComponent } from '../../components/component/component.component';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../common/ComponentContent';
 import { ConceptMapService } from '../../components/conceptMap/conceptMapService';
 import { DrawService } from '../../components/draw/drawService';
 import { EmbeddedService } from '../../components/embedded/embeddedService';
 import { GraphService } from '../../components/graph/graphService';
 import { LabelService } from '../../components/label/labelService';
 import { TableService } from '../../components/table/tableService';
-import { AnnotationService } from '../../services/annotationService';
-import { ConfigService } from '../../services/configService';
-import { NodeService } from '../../services/nodeService';
-import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentAssetService } from '../../services/studentAssetService';
-import { StudentDataService } from '../../services/studentDataService';
-import { TagService } from '../../services/tagService';
-import { UtilService } from '../../services/utilService';
 import { GenerateImageDialogComponent } from './generate-image-dialog.component';
-
-class MockNodeService {
-  private doneRenderingComponentSource: Subject<any> = new Subject<any>();
-  public doneRenderingComponent$ = this.doneRenderingComponentSource.asObservable();
-}
-
-class MockNotebookService {
-  isNotebookEnabled() {
-    return true;
-  }
-  isStudentNoteClippingEnabled() {
-    return true;
-  }
-}
 
 describe('GenerateImageDialogComponent', () => {
   let component: GenerateImageDialogComponent;
@@ -43,34 +20,24 @@ describe('GenerateImageDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, MatProgressSpinnerModule, UpgradeModule],
-      declarations: [ComponentComponent, GenerateImageDialogComponent],
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        MatProgressSpinnerModule,
+        StudentTeacherCommonServicesModule
+      ],
+      declarations: [GenerateImageDialogComponent],
       providers: [
-        AnnotationService,
-        ConceptMapService,
-        ConfigService,
-        DrawService,
-        EmbeddedService,
-        GraphService,
-        LabelService,
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: MatDialogRef, useValue: { close() {} } },
-        { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TableService,
-        TagService,
-        UtilService
-      ]
+        { provide: MatDialogRef, useValue: { close() {} } }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GenerateImageDialogComponent);
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({} as ComponentContent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

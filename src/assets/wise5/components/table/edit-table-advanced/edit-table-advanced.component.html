@@ -135,6 +135,30 @@
     </div>
   </div>
 </div>
+<div fxLayout fxLayoutAlign="start center">
+  <button mat-raised-button
+      color="primary"
+      class="import-table-button"
+      fxLayoutAlign="center center">
+    <span i18n>Import Table</span>
+    <input type="file"
+        accept=".csv"
+        class="import-table-input"
+        (change)="importTableFile($event)"/>
+  </button>
+  <mat-icon matTooltip="Only .csv (comma separated values) files are allowed"
+      i18n-matTooltip
+      tabindex="0"
+      aria-role="button">
+    help
+  </mat-icon>
+  <mat-progress-spinner *ngIf="isImportingTable"
+      class="import-table-spinner"
+      mode="indeterminate"
+      [diameter]="20">
+  </mat-progress-spinner>
+  <div class="import-table-message">{{importTableMessage}}</div>
+</div>
 <div *ngIf="isNotebookEnabled()">
   <edit-component-add-to-notebook-button [authoringComponentContent]="authoringComponentContent">
   </edit-component-add-to-notebook-button>
@@ -144,6 +168,14 @@
 <br/>
 <edit-component-submit-button [authoringComponentContent]="authoringComponentContent">
 </edit-component-submit-button>
+<div>
+  <mat-checkbox color="primary"
+      [(ngModel)]="authoringComponentContent.enableRowSelection"
+      (ngModelChange)="componentChanged()"
+      i18n>
+    Enable Row Selection
+  </mat-checkbox>
+</div>
 <edit-component-max-submit
     *ngIf="authoringComponentContent.showSubmitButton"
     [(maxSubmitCount)]="authoringComponentContent.maxSubmitCount"

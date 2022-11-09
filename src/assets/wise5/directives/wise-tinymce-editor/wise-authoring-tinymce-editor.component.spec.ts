@@ -3,17 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
-import { AnnotationService } from '../../services/annotationService';
-import { ConfigService } from '../../services/configService';
-import { CopyNodesService } from '../../services/copyNodesService';
-import { NotebookService } from '../../services/notebookService';
-import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentAssetService } from '../../services/studentAssetService';
-import { StudentDataService } from '../../services/studentDataService';
-import { TagService } from '../../services/tagService';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { UtilService } from '../../services/utilService';
 import { WiseAuthoringTinymceEditorComponent } from './wise-authoring-tinymce-editor.component';
 
 let component: WiseAuthoringTinymceEditorComponent;
@@ -23,21 +14,13 @@ describe('WiseAuthoringTinymceEditorComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [WiseAuthoringTinymceEditorComponent],
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        CopyNodesService,
-        NotebookService,
-        ProjectAssetService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        TeacherProjectService,
-        UtilService
-      ]
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        UpgradeModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [ProjectAssetService, TeacherProjectService]
     }).compileComponents();
     fixture = TestBed.createComponent(WiseAuthoringTinymceEditorComponent);
     component = fixture.componentInstance;

@@ -11,30 +11,22 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { MockNodeService } from '../../common/MockNodeService';
-import { SummaryService } from '../summaryService';
 import { SummaryAuthoring } from './summary-authoring.component';
 
 export class MockConfigService {}
 
 let component: SummaryAuthoring;
 let fixture: ComponentFixture<SummaryAuthoring>;
-let getComponentByNodeIdAndComponentIdSpy;
+let getComponentSpy;
 
-describe('SummaryAuthoring', () => {
-  configureTestSuite(() => {
+describe('SummaryAuthoringComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -49,41 +41,22 @@ describe('SummaryAuthoring', () => {
         MatRadioModule,
         MatSelectModule,
         ReactiveFormsModule,
-        UpgradeModule
+        UpgradeModule,
+        StudentTeacherCommonServicesModule
       ],
       declarations: [EditComponentPrompt, SummaryAuthoring],
       providers: [
-        AnnotationService,
-        ConfigService,
         { provide: NodeService, useClass: MockNodeService },
         ProjectAssetService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        SummaryService,
-        TagService,
-        TeacherProjectService,
-        UtilService
-      ],
-      schemas: []
+        TeacherProjectService
+      ]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(SummaryAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
-    getComponentByNodeIdAndComponentIdSpy = spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    );
-    getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponentService').and.returnValue({
-      componentHasCorrectAnswer: () => {
-        return true;
-      }
-    });
+    getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
+    getComponentSpy.and.returnValue(componentContent);
     spyOn(component, 'componentChanged');
     fixture.detectChanges();
   });
@@ -141,7 +114,7 @@ function checkThatTheComponentIdIsNotAutomaticallySetWhenNoComponents() {
   there are no allowed components`, () => {
     const components = [{ id: '4ty89q3hj0', type: 'HTML' }];
     expect(component.authoringComponentContent.summaryComponentId).toEqual('zptq1ndv4h');
-    spyOn(component, 'getComponentsByNodeId').and.returnValue(components);
+    spyOn(component, 'getComponents').and.returnValue(components);
     component.summaryNodeIdChanged();
     expect(component.authoringComponentContent.summaryComponentId).toBe(null);
   });
@@ -155,7 +128,7 @@ function checkThatTheComponentIdIsNotAutomaticallySetWhenMultipleComponents() {
       { id: 'dghm45su45', type: 'MultipleChoice' }
     ];
     expect(component.authoringComponentContent.summaryComponentId).toEqual('zptq1ndv4h');
-    spyOn(component, 'getComponentsByNodeId').and.returnValue(components);
+    spyOn(component, 'getComponents').and.returnValue(components);
     component.summaryNodeIdChanged();
     expect(component.authoringComponentContent.summaryComponentId).toBe(null);
   });
@@ -169,7 +142,7 @@ function checkThatTheComponentIdIsAutomaticallySet() {
       { id: 'dghm45su45', type: 'MultipleChoice' }
     ];
     expect(component.authoringComponentContent.summaryComponentId).toEqual('zptq1ndv4h');
-    spyOn(component, 'getComponentsByNodeId').and.returnValue(components);
+    spyOn(component, 'getComponents').and.returnValue(components);
     component.summaryNodeIdChanged();
     expect(component.authoringComponentContent.summaryComponentId).toBe('dghm45su45');
   });
@@ -182,7 +155,7 @@ function checkIfStudentDataTypeIsAvailableForAComponentWhenTrue() {
       prompt: 'This is hxh43zj46j',
       type: 'OpenResponse'
     };
-    getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
+    getComponentSpy.and.returnValue(componentContent);
     const isAvailable = component.isStudentDataTypeAvailableForComponent(
       'node1',
       'hxh43zj46j',
@@ -199,7 +172,7 @@ function checkIfStudentDataTypeIsAvailableForAComponentWhenFalse() {
       prompt: 'This is hxh43zj46j',
       type: 'OpenResponse'
     };
-    getComponentByNodeIdAndComponentIdSpy.and.returnValue(componentContent);
+    getComponentSpy.and.returnValue(componentContent);
     const isAvailable = component.isStudentDataTypeAvailableForComponent(
       'node1',
       'hxh43zj46j',

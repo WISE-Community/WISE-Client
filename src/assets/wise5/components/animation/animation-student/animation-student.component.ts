@@ -1,3 +1,4 @@
+import SVG from 'svg.js';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
@@ -69,7 +70,12 @@ export class AnimationStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.svgId = this.AnimationService.getSvgId(this.nodeId, this.componentId);
+    const domIdEnding = this.AnimationService.getDomIdEnding(
+      this.nodeId,
+      this.componentId,
+      this.componentState
+    );
+    this.svgId = this.AnimationService.getSvgId(domIdEnding);
     this.initializeCoordinates();
 
     if (this.UtilService.hasShowWorkConnectedComponent(this.componentContent)) {
@@ -918,7 +924,7 @@ export class AnimationStudent extends ComponentStudent {
     this.emitComponentDirty(true);
     this.setIsSubmitDirty(true);
     this.emitComponentSubmitDirty(true);
-    this.clearSaveText();
+    this.clearLatestComponentState();
     this.createComponentStateAndBroadcast('change');
   }
 
@@ -935,6 +941,7 @@ export class AnimationStudent extends ComponentStudent {
       this.isDisabled = true;
       this.isSubmitButtonDisabled = true;
     }
+    componentState.componentType = 'Animation';
     return new Promise((resolve, reject) => {
       this.createComponentStateAdditionalProcessing(
         { resolve: resolve, reject: reject },

@@ -1,0 +1,16 @@
+<mat-card class="mat-elevation-z0 primary-bg ">
+  <div class="dark-theme mat-body-2"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="4px">
+    <mat-icon class="mat-30">help</mat-icon>
+    <span i18n>Question Bank</span>
+  </div>
+  <mat-card-content class="app-bg-bg">
+    <ul>
+      <li *ngFor="let question of questions" class="question">
+        {{ question }}
+      </li>
+    </ul>
+  </mat-card-content>
+</mat-card>

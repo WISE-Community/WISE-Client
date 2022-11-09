@@ -1,6 +1,5 @@
 'use strict';
 
-import * as angular from 'angular';
 import SVG from 'svg.js';
 import { ComponentService } from '../componentService';
 import { ConfigService } from '../../services/configService';
@@ -8,32 +7,36 @@ import { StudentAssetService } from '../../services/studentAssetService';
 import ConceptMapNode from './conceptMapNode';
 import ConceptMapLink from './conceptMapLink';
 import { Injectable } from '@angular/core';
-import { StudentDataService } from '../../services/studentDataService';
 import { UtilService } from '../../services/utilService';
-import { NodeService } from '../../services/nodeService';
 
 @Injectable()
 export class ConceptMapService extends ComponentService {
   constructor(
     private ConfigService: ConfigService,
-    private NodeService: NodeService,
     private StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {
     return $localize`Concept Map`;
   }
 
-  getSVGId(nodeId: string, componentId: string): string {
-    return this.getElementId('svg', nodeId, componentId);
+  getSVGId(domIdEnding: string): string {
+    return this.getElementId('svg', domIdEnding);
   }
 
-  getElementId(prefix: string, nodeId: string, componentId: string): string {
-    return `${prefix}-${nodeId}-${componentId}`;
+  getConceptMapContainerId(domIdEnding: string): string {
+    return this.getElementId('concept-map-container', domIdEnding);
+  }
+
+  getSelectNodeBarId(domIdEnding: string): string {
+    return this.getElementId('select-node-bar', domIdEnding);
+  }
+
+  getFeedbackContainerId(domIdEnding: string): string {
+    return this.getElementId('feedback-container', domIdEnding);
   }
 
   createComponent() {
@@ -55,27 +58,7 @@ export class ConceptMapService extends ComponentService {
     return component;
   }
 
-  createComponentStateObject(): any {
-    const componentState = this.NodeService.createNewComponentState();
-    componentState.studentData = {
-      conceptMapData: {
-        background: null,
-        backgroundPath: null,
-        links: [],
-        nodes: [],
-        stretchBackground: null
-      }
-    };
-    return componentState;
-  }
-
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (componentStates != null && componentStates.length > 0) {
       if (this.isSubmitRequired(node, component)) {
         return this.hasComponentStateWithIsSubmitTrue(componentStates);
@@ -1130,16 +1113,13 @@ export class ConceptMapService extends ComponentService {
   generateImageFromRenderedComponentState(componentState: any) {
     return new Promise((resolve, reject) => {
       // get the svg element. this will obtain an array.
-      let svgElement = angular.element(
-        document.querySelector(
-          `#${this.getSVGId(componentState.nodeId, componentState.componentId)}`
-        )
+      const id = this.getDomIdEnding(
+        componentState.nodeId,
+        componentState.componentId,
+        componentState
       );
-
-      if (svgElement != null && svgElement.length > 0) {
-        // get the svg element
-        svgElement = svgElement[0];
-
+      let svgElement = document.querySelector(`#${this.getSVGId(id)}`);
+      if (svgElement != null) {
         // get the svg element as a string
         const serializer = new XMLSerializer();
         let svgString = serializer.serializeToString(svgElement);

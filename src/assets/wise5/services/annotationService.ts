@@ -1,11 +1,9 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { ProjectService } from './projectService';
 import { ConfigService } from './configService';
 import { UtilService } from './utilService';
-import * as angular from 'angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
@@ -19,7 +17,6 @@ export class AnnotationService {
   public annotationReceived$: Observable<any> = this.annotationReceivedSource.asObservable();
 
   constructor(
-    private upgrade: UpgradeModule,
     private http: HttpClient,
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
@@ -166,14 +163,12 @@ export class AnnotationService {
         annotations: annotations
       };
       let annotation = this.saveToServerSuccess(savedAnnotationDataResponse);
-      let deferred = this.upgrade.$injector.get('$q').defer();
-      deferred.resolve(annotation);
-      return deferred.promise;
+      return Promise.resolve(annotation);
     } else {
       const params = {
         runId: this.ConfigService.getRunId(),
         workgroupId: this.ConfigService.getWorkgroupId(),
-        annotations: angular.toJson(annotations)
+        annotations: JSON.stringify(annotations)
       };
       const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
       return this.http

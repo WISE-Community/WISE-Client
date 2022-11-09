@@ -54,7 +54,7 @@ describe('ShareRunCodeDialogComponent', () => {
           { provide: TeacherService, useClass: MockTeacherService },
           { provide: UserService, useClass: MockUserService },
           { provide: MatDialogRef, useValue: {} },
-          { provide: MAT_DIALOG_DATA, useValue: { run: runObj } }
+          { provide: MAT_DIALOG_DATA, useValue: runObj }
         ],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();

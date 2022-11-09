@@ -1,13 +1,11 @@
 'use strict';
 
-import * as angular from 'angular';
 import { fabric } from 'fabric';
 import SVG from 'svg.js';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../services/utilService';
-import { StudentDataService } from '../../services/studentDataService';
 
 @Injectable()
 export class LabelService extends ComponentService {
@@ -18,14 +16,17 @@ export class LabelService extends ComponentService {
 
   constructor(
     private StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getComponentTypeLabel(): string {
     return $localize`Label`;
+  }
+
+  getCanvasId(domIdEnding: string): string {
+    return this.getElementId('canvas', domIdEnding);
   }
 
   createComponent() {
@@ -45,13 +46,7 @@ export class LabelService extends ComponentService {
     return component;
   }
 
-  isCompleted(
-    component: any,
-    componentStates: any[],
-    componentEvents: any[],
-    nodeEvents: any[],
-    node: any
-  ) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (!this.canEdit(component) && this.UtilService.hasNodeEnteredEvent(nodeEvents)) {
       return true;
     }
@@ -356,7 +351,7 @@ export class LabelService extends ComponentService {
    */
   generateImageFromRenderedComponentState(componentState: any) {
     return new Promise((resolve, reject) => {
-      const canvas = this.getCanvas(componentState.nodeId, componentState.componentId);
+      const canvas = this.getCanvas(componentState);
       const img_b64 = canvas.toDataURL('image/png');
       const imageObject = this.UtilService.getImageObjectFromBase64String(img_b64);
       this.StudentAssetService.uploadAsset(imageObject).then((asset: any) => {
@@ -365,13 +360,10 @@ export class LabelService extends ComponentService {
     });
   }
 
-  getCanvas(nodeId: string, componentId: string) {
-    const canvas = angular.element(document.querySelector('#canvas_' + nodeId + '_' + componentId));
-    if (canvas != null && canvas.length > 0) {
-      return canvas[0];
-    } else {
-      return null;
-    }
+  getCanvas(componentState: any): any {
+    return document.querySelector(
+      `#canvas-${componentState.nodeId}-${componentState.componentId}-${componentState.id}`
+    );
   }
 
   initializeCanvas(canvasId: string, width: number, height: number, isDisabled: boolean): any {

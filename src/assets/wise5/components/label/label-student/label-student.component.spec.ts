@@ -3,51 +3,20 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
-import { LabelService } from '../labelService';
 import { LabelStudent } from './label-student.component';
-
-export class MockService {}
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: LabelStudent;
 let fixture: ComponentFixture<LabelStudent>;
 
-describe('LabelStudent', () => {
-  configureTestSuite(() => {
+describe('LabelStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [LabelStudent],
-      providers: [
-        AnnotationService,
-        LabelService,
-        ComponentService,
-        ConfigService,
-        { provide: NodeService, useClass: MockService },
-        { provide: NotebookService, useClass: MockService },
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(LabelStudent);
     spyOn(TestBed.get(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({});
     component = fixture.componentInstance;

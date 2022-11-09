@@ -3,6 +3,7 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { UtilService } from '../../../services/utilService';
 
 @Component({
   selector: 'edit-table-advanced',
@@ -10,17 +11,22 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   styleUrls: ['edit-table-advanced.component.scss']
 })
 export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
+  MAX_ALLOWED_CELLS_IN_IMPORT = 2000;
+
   allowedConnectedComponentTypes = ['Embedded', 'Graph', 'Table'];
+  columnNames: string[] = [];
   isDataExplorerScatterPlotEnabled: boolean;
   isDataExplorerLineGraphEnabled: boolean;
   isDataExplorerBarGraphEnabled: boolean;
+  isImportingTable: boolean = false;
   numColumns: number;
-  columnNames: string[] = [];
+  importTableMessage: string;
 
   constructor(
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
-    protected TeacherProjectService: TeacherProjectService
+    protected TeacherProjectService: TeacherProjectService,
+    private UtilService: UtilService
   ) {
     super(NodeService, NotebookService, TeacherProjectService);
   }
@@ -176,5 +182,83 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
         params.yAxis = 0;
       }
     }
+  }
+
+  importTableFile(event: any): void {
+    if (confirm($localize`Are you sure you want to overwrite the existing table?`)) {
+      this.showImportingTableDisplay();
+      this.setImportTableMessage($localize`Importing table...`);
+      const reader: FileReader = new FileReader();
+      reader.onload = () => {
+        const fileContent = reader.result as string;
+        const tableContent = this.UtilService.CSVToArray(fileContent);
+        const numCells = this.getNumCells(tableContent);
+        if (numCells > this.MAX_ALLOWED_CELLS_IN_IMPORT) {
+          this.setImportTableMessage(
+            $localize`Error: The table contains more than ${this.MAX_ALLOWED_CELLS_IN_IMPORT} cells`
+          );
+        } else {
+          this.importTable(tableContent);
+          this.setImportTableMessage($localize`Successfully imported table`);
+        }
+        this.hideImportingTableDisplay();
+      };
+      reader.readAsText(event.target.files[0]);
+    }
+    event.target.value = null;
+  }
+
+  getNumCells(tableContent: string[][]): number {
+    let numCells = 0;
+    for (const row of tableContent) {
+      numCells += row.length;
+    }
+    return numCells;
+  }
+
+  importTable(tableContent: string[][]): void {
+    const tableData = this.convertToTableData(tableContent);
+    this.authoringComponentContent.tableData = tableData;
+    this.authoringComponentContent.numRows = this.getNumRows(tableData);
+    this.authoringComponentContent.numColumns = this.getNumColumns(tableData);
+    this.componentChanged();
+  }
+
+  convertToTableData(stringArray: string[][]): any[][] {
+    const table = [];
+    for (const row of stringArray) {
+      const tableRow = [];
+      for (const cell of row) {
+        tableRow.push({ text: cell, editable: true, size: null });
+      }
+      table.push(tableRow);
+    }
+    return table;
+  }
+
+  getNumRows(tableData: any[][]): number {
+    return tableData.length;
+  }
+
+  getNumColumns(tableData: any[][]): number {
+    let maxColumns = 0;
+    for (const row of tableData) {
+      if (row.length > maxColumns) {
+        maxColumns = row.length;
+      }
+    }
+    return maxColumns;
+  }
+
+  showImportingTableDisplay(): void {
+    this.isImportingTable = true;
+  }
+
+  hideImportingTableDisplay(): void {
+    this.isImportingTable = false;
+  }
+
+  setImportTableMessage(message: string): void {
+    this.importTableMessage = message;
   }
 }

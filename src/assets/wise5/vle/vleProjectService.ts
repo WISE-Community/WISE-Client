@@ -1,24 +1,9 @@
 'use strict';
 import { ProjectService } from '../services/projectService';
-import { ConfigService } from '../services/configService';
-import { UtilService } from '../services/utilService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { HttpClient } from '@angular/common/http';
-import { SessionService } from '../services/sessionService';
 
 @Injectable()
 export class VLEProjectService extends ProjectService {
-  constructor(
-    protected upgrade: UpgradeModule,
-    protected http: HttpClient,
-    protected ConfigService: ConfigService,
-    protected SessionService: SessionService,
-    protected UtilService: UtilService
-  ) {
-    super(upgrade, http, ConfigService, SessionService, UtilService);
-  }
-
   /**
    * @param nodeId the node id of the component
    * @param componentId the component that is listening for connected changes
@@ -36,6 +21,14 @@ export class VLEProjectService extends ProjectService {
       }
     }
     return false;
+  }
+
+  private getConnectedComponentsByNodeIdAndComponentId(nodeId: string, componentId: string): any[] {
+    const component = this.getComponent(nodeId, componentId);
+    if (component != null && component.connectedComponents != null) {
+      return component.connectedComponents;
+    }
+    return [];
   }
 
   isMatchingConnectedComponent(connectedComponent, id) {
@@ -61,11 +54,8 @@ export class VLEProjectService extends ProjectService {
    * @returns {boolean} whether we need to display the annotation to the student
    */
   displayAnnotation(annotation) {
-    const component = this.getComponentByNodeIdAndComponentId(
-      annotation.nodeId,
-      annotation.componentId
-    );
-    const componentService = this.upgrade.$injector.get(component.type + 'Service');
+    const component = this.getComponent(annotation.nodeId, annotation.componentId);
+    const componentService = this.componentServiceLookupService.getService(component.type);
     return componentService.displayAnnotation(component, annotation);
   }
 
@@ -115,10 +105,10 @@ export class VLEProjectService extends ProjectService {
   }
 
   retrieveScript(scriptFilename) {
-    return this.upgrade.$injector
-      .get('$http')
-      .get(`${this.ConfigService.getProjectAssetsDirectoryPath()}/${scriptFilename}`)
-      .then((result) => {
+    return this.http
+      .get(`${this.configService.getProjectAssetsDirectoryPath()}/${scriptFilename}`)
+      .toPromise()
+      .then((result: any) => {
         return result.data;
       });
   }

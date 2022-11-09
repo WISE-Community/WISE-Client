@@ -2,33 +2,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
 import { EmbeddedService } from '../embeddedService';
 import { EmbeddedStudent } from './embedded-student.component';
-
-export class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
-
-export class MockNotebookService {
-  getNotebookConfig() {
-    return {};
-  }
-}
 
 let component: EmbeddedStudent;
 const componentId = 'component1';
@@ -49,30 +28,13 @@ const patrickName = 'Patrick';
 const spongebobAge = 34;
 const spongebobName = 'Spongebob';
 
-describe('EmbeddedStudent', () => {
-  configureTestSuite(() => {
+describe('EmbeddedStudentComponent', () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, UpgradeModule],
+      imports: [HttpClientTestingModule, MatDialogModule, StudentTeacherCommonServicesModule],
       declarations: [EmbeddedStudent],
-      providers: [
-        AnnotationService,
-        ComponentService,
-        ConfigService,
-        EmbeddedService,
-        { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(EmbeddedStudent);
     spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
       score: 0,

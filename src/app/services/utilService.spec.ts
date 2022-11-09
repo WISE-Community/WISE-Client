@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { UtilService } from '../../assets/wise5/services/utilService';
-import { UpgradeModule } from '@angular/upgrade/static';
 let service: UtilService;
 
 describe('UtilService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [UpgradeModule],
+      imports: [],
       providers: [UtilService]
     });
     service = TestBed.get(UtilService);
@@ -16,7 +15,6 @@ describe('UtilService', () => {
   convertStringToNumberTests();
   makeCopyOfJSONObjectTests();
   arrayHasNonNullElementTests();
-  moveObjectTests();
   calculateMeanTests();
   getIntersectOfArraysTests();
   isValidJSONStringTests();
@@ -86,6 +84,10 @@ function makeCopyOfJSONObjectTests() {
     it('should return null for null input', () => {
       expect(service.makeCopyOfJSONObject(null)).toEqual(null);
     });
+
+    it('should return undefined for undefined input', () => {
+      expect(service.makeCopyOfJSONObject(undefined)).toEqual(undefined);
+    });
   });
 }
 
@@ -106,54 +108,6 @@ function arrayHasNonNullElementTests() {
       expect(service.arrayHasNonNullElement(arrayToCheck)).toEqual(true);
     });
   });
-}
-
-let myArray;
-function moveObjectTests() {
-  describe('moveObject', () => {
-    beforeEach(() => {
-      myArray = [{ name: 'a' }, { name: 'b' }, { name: 'c' }];
-    });
-    moveObjectUpNotTopElement();
-    moveObjectUpIsTopElement();
-    moveObjectDownNotBottomElement();
-    moveObjectDownIsBottomElement();
-  });
-}
-
-function expectArrayNameOrder(arr, nameOrder) {
-  for (let i = 0; i < arr.length; i++) {
-    expect(arr[i].name).toEqual(nameOrder[i]);
-  }
-}
-
-function moveObjectUpNotTopElement() {
-  it('moveObjectUp should move an object up when the object is not the top element', () => {
-    expectMoveFunctionResult('moveObjectUp', 1, ['b', 'a', 'c']);
-  });
-}
-
-function moveObjectUpIsTopElement() {
-  it('moveObjectUp should not move an object up when the object is the top element', () => {
-    expectMoveFunctionResult('moveObjectUp', 0, ['a', 'b', 'c']);
-  });
-}
-
-function moveObjectDownNotBottomElement() {
-  it('moveObjectDown should move an object down when the object is not the bottom element', () => {
-    expectMoveFunctionResult('moveObjectDown', 1, ['a', 'c', 'b']);
-  });
-}
-
-function moveObjectDownIsBottomElement() {
-  it('moveObjectDown should not move an object down when the object is the bottom element', () => {
-    expectMoveFunctionResult('moveObjectDown', 2, ['a', 'b', 'c']);
-  });
-}
-
-function expectMoveFunctionResult(func, index, expectedResult) {
-  service[func](myArray, index);
-  expectArrayNameOrder(myArray, expectedResult);
 }
 
 function calculateMeanTests() {

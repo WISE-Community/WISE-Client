@@ -21,7 +21,7 @@
     <mat-select
         [(ngModel)]="authoringComponentContent.summaryComponentId"
         (ngModelChange)="summaryComponentIdChanged()">
-      <mat-option *ngFor="let component of getComponentsByNodeId(authoringComponentContent.summaryNodeId); index as componentIndex"
+      <mat-option *ngFor="let component of getComponents(authoringComponentContent.summaryNodeId); index as componentIndex"
           value="{{component.id}}"
           [disabled]="!isComponentTypeAllowed(component.type) || authoringComponentContent.summaryComponentId === componentId">
         {{ componentIndex + 1 }}. {{ component.type }} <span *ngIf="component.id === componentId" i18n>(This Component)</span>
@@ -146,7 +146,7 @@
     <button mat-raised-button
         color="primary"
         class="button"
-        (click)="moveCustomLabelColorUp(customLabelColorIndex)"
+        (click)="moveObjectUp(authoringComponentContent.customLabelColors, customLabelColorIndex)"
         [disabled]="isFirst"
         matTooltip="Move Up"
         matTooltipPosition="above"
@@ -158,7 +158,7 @@
     <button mat-raised-button
         color="primary"
         class="button"
-        (click)="moveCustomLabelColorDown(customLabelColorIndex)"
+        (click)="moveObjectDown(authoringComponentContent.customLabelColors, customLabelColorIndex)"
         [disabled]="isLast"
         matTooltip="Move Down"
         matTooltipPosition="above"

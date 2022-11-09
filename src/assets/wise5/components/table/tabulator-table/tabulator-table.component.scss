@@ -1,0 +1,67 @@
+.tabulator {
+  width: auto;
+  max-width: 100%;
+
+  .tabulator-header {
+    font-weight: 500;
+
+    .tabulator-col .tabulator-col-content .tabulator-col-title {
+      white-space: normal;
+    }
+  }
+}
+
+.tabulator-row {
+  border-bottom: 0 none;
+
+  .tabulator-cell {
+    background-color: #ffffff;
+    min-height: 44px; // temporary hack to fix height for some rows with empty cell values; TODO: investigate and fix
+    border-bottom: 1px solid #dddddd;
+
+    &.tabulator-cell-editable {
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0.25em;
+        bottom: 0.25em;
+        left: 0.2em;
+        right: 0.2em;
+        border: 1px solid #dddddd;
+        border-radius: 4px;
+      }
+
+      &:hover {
+        &:before {
+          border-color: #000000;
+        }
+      }
+    }
+
+    &.tabulator-editing {
+      border: 0 none;
+      padding: 0.5em;
+
+      &:before {
+        border-width: 2px;
+        border-color: #000000;
+      }
+    }
+
+    input[type=checkbox] {
+      vertical-align: middle;
+    }
+  }
+
+  &.tabulator-selected {
+    background-color: transparent !important;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+
+    .tabulator-cell {
+      background-color: #eeeeee;
+    }
+  }
+}

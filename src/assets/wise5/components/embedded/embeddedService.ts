@@ -6,9 +6,7 @@ import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../services/utilService';
-import { StudentDataService } from '../../services/studentDataService';
 import { ConfigService } from '../../services/configService';
-import { AnnotationService } from '../../services/annotationService';
 
 @Injectable()
 export class EmbeddedService extends ComponentService {
@@ -17,13 +15,11 @@ export class EmbeddedService extends ComponentService {
   iframePrefix: string = 'embedded-application-iframe-';
 
   constructor(
-    protected AnnotationService: AnnotationService,
     protected ConfigService: ConfigService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
   ) {
-    super(StudentDataService, UtilService);
+    super(UtilService);
   }
 
   getEmbeddedApplicationIframeId(componentId: string): string {
@@ -42,7 +38,7 @@ export class EmbeddedService extends ComponentService {
     return component;
   }
 
-  isCompleted(component: any, componentStates: any[], componentEvents: any[], nodeEvents: any[]) {
+  isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     if (componentStates != null) {
       if (
         this.hasComponentStateWithIsCompletedField(componentStates) &&
@@ -144,29 +140,6 @@ export class EmbeddedService extends ComponentService {
     const message = {
       messageType: 'parameters',
       parameters: parameters
-    };
-    this.sendMessageToApplication(iframeId, message);
-  }
-
-  handleGetLatestAnnotationsMessage(iframeId: string, nodeId: string, componentId: string): void {
-    const workgroupId = this.ConfigService.getWorkgroupId();
-    const type = 'any';
-    const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
-      nodeId,
-      componentId,
-      workgroupId,
-      type
-    );
-    const latestCommentAnnotation = this.AnnotationService.getLatestCommentAnnotation(
-      nodeId,
-      componentId,
-      workgroupId,
-      type
-    );
-    const message = {
-      messageType: 'latestAnnotations',
-      latestScoreAnnotation: latestScoreAnnotation,
-      latestCommentAnnotation: latestCommentAnnotation
     };
     this.sendMessageToApplication(iframeId, message);
   }

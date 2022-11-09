@@ -71,7 +71,6 @@ export class MatchStudent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     this.autoScroll = require('dom-autoscroller');
-    this.registerAutoScroll();
     this.isChoicesAfter = this.componentContent.choicesAfter;
     this.isHorizontal = this.componentContent.horizontal;
     this.isSaveButtonVisible = this.componentContent.showSaveButton;
@@ -97,6 +96,10 @@ export class MatchStudent extends ComponentStudent {
     this.tryDisableComponent();
     this.disableComponentIfNecessary();
     this.broadcastDoneRenderingComponent();
+  }
+
+  ngAfterContentInit() {
+    this.registerAutoScroll();
   }
 
   importPrivateNotes(): void {
@@ -219,28 +222,23 @@ export class MatchStudent extends ComponentStudent {
     if (latestComponentState == null) {
       return;
     }
-    const clientSaveTime = this.getClientSaveTime(latestComponentState);
+    this.latestComponentState = latestComponentState;
     if (latestComponentState.isSubmit) {
-      this.setGeneralComponentStatus(latestComponentState.isCorrect, false, clientSaveTime);
+      this.setGeneralComponentStatus(latestComponentState.isCorrect, false);
       this.checkAnswer();
     } else {
       const latestSubmitComponentState = this.getLatestSubmitComponentState();
       if (latestSubmitComponentState != null) {
         this.showFeedbackOnUnchangedChoices(latestSubmitComponentState);
       } else {
-        this.setGeneralComponentStatus(null, false, clientSaveTime);
+        this.setGeneralComponentStatus(null, false);
       }
     }
   }
 
-  setGeneralComponentStatus(
-    isCorrect: boolean,
-    isSubmitDirty: boolean,
-    clientSaveTime: number
-  ): void {
+  setGeneralComponentStatus(isCorrect: boolean, isSubmitDirty: boolean): void {
     this.isCorrect = isCorrect;
     this.setIsSubmitDirty(isSubmitDirty);
-    this.setSavedMessage(clientSaveTime);
   }
 
   getLatestComponentState(): any {
@@ -263,7 +261,7 @@ export class MatchStudent extends ComponentStudent {
       if (latestComponentState != null) {
         this.isCorrect = null;
         this.setIsSubmitDirty(true);
-        this.setSavedMessage(latestComponentState.clientSaveTime);
+        this.latestComponentState = latestComponentState;
       }
     }
   }
@@ -282,10 +280,7 @@ export class MatchStudent extends ComponentStudent {
 
   setIsSubmitDirty(isSubmitDirty: boolean): void {
     this.isSubmitDirty = isSubmitDirty;
-    this.StudentDataService.broadcastComponentSubmitDirty({
-      componentId: this.componentId,
-      isDirty: isSubmitDirty
-    });
+    this.emitComponentSubmitDirty(isSubmitDirty);
   }
 
   getBucketIds(): string[] {
@@ -381,7 +376,8 @@ export class MatchStudent extends ComponentStudent {
     this.sourceBucket = this.createSourceBucket();
     this.sourceBucket.items = this.sourceBucket.items.concat(this.choices);
     this.buckets.push(this.sourceBucket);
-    for (const bucket of this.componentContent.buckets) {
+    for (const componentContentBucket of this.componentContent.buckets) {
+      const bucket = JSON.parse(JSON.stringify(componentContentBucket));
       bucket.items = [];
       this.buckets.push(bucket);
     }
@@ -582,7 +578,7 @@ export class MatchStudent extends ComponentStudent {
     componentState.isSubmit = this.isSubmit;
     const studentData: any = {
       buckets: this.cleanBuckets(
-        this.ProjectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId),
+        this.ProjectService.getComponent(this.nodeId, this.componentId),
         this.getDeepCopyOfBuckets()
       ),
       submitCounter: this.submitCounter

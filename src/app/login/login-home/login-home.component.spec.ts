@@ -13,6 +13,9 @@ export class MockUserService {
   isSignedIn(): boolean {
     return false;
   }
+  getRedirectUrl(): string {
+    return '/path/to/redirect';
+  }
 }
 
 export class MockConfigService {
@@ -27,33 +30,45 @@ export class MockConfigService {
       observer.complete();
     });
   }
+  getContextPath(): string {
+    return '/wise';
+  }
   getRecaptchaPublicKey(): string {
     return '';
   }
 }
 
+let component: LoginHomeComponent;
 describe('LoginHomeComponent', () => {
-  let component: LoginHomeComponent;
   let fixture: ComponentFixture<LoginHomeComponent>;
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [LoginHomeComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule, RecaptchaModule],
-      providers: [
-        { provide: UserService, useClass: MockUserService },
-        { provide: ConfigService, useClass: MockConfigService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LoginHomeComponent],
+        imports: [HttpClientTestingModule, RouterTestingModule, RecaptchaModule],
+        providers: [
+          { provide: UserService, useClass: MockUserService },
+          { provide: ConfigService, useClass: MockConfigService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  getRedirectUrl();
 });
+
+function getRedirectUrl() {
+  describe('getRedirectUrl()', () => {
+    it('should add redirectUrl to Google login url', () => {
+      expect(component.getRedirectUrl('google')).toEqual(
+        '/wise/api/google-login?redirectUrl=/path/to/redirect'
+      );
+    });
+  });
+}

@@ -1,0 +1,7 @@
+<div *ngIf="!dynamicPrompt?.enabled" [innerHTML]="prompt" class="prompt"></div>
+<dynamic-prompt *ngIf="dynamicPrompt?.enabled"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [dynamicPrompt]="dynamicPrompt"
+    (dynamicPromptChanged)="onDynamicPromptChanged($event)">
+</dynamic-prompt>

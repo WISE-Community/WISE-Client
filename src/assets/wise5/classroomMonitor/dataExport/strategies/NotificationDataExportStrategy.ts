@@ -56,7 +56,7 @@ export class NotificationDataExportStrategy extends AbstractDataExportStrategy {
     row[columnNameToNumber['ID']] = notification.id;
     row[columnNameToNumber['Node ID']] = notification.nodeId;
     row[columnNameToNumber['Component ID']] = notification.componentId;
-    const component = this.projectService.getComponentByNodeIdAndComponentId(
+    const component = this.projectService.getComponent(
       notification.nodeId,
       notification.componentId
     );
@@ -69,7 +69,7 @@ export class NotificationDataExportStrategy extends AbstractDataExportStrategy {
     row[columnNameToNumber['Step Title']] = this.controller.getNodeTitleByNodeId(
       notification.nodeId
     );
-    const componentPosition = this.projectService.getComponentPositionByNodeIdAndComponentId(
+    const componentPosition = this.projectService.getComponentPosition(
       notification.nodeId,
       notification.componentId
     );

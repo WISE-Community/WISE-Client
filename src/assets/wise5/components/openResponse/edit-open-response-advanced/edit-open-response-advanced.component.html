@@ -77,6 +77,20 @@
     Show Feedback
   </mat-checkbox>
   <div class="section-container">
+    <mat-checkbox
+        color="primary"
+        class="checkbox"
+        [ngModel]="authoringComponentContent.cRater.feedback?.enabled"
+        (ngModelChange)="setFeedbackEnabled($event)"
+        i18n>
+      Enable Feedback Rules
+    </mat-checkbox>
+    <edit-feedback-rules *ngIf="authoringComponentContent.cRater.feedback?.enabled"
+        [feedbackRules]="authoringComponentContent.cRater.feedback.rules">
+    </edit-feedback-rules>
+  </div>
+  <div class="section-container"
+      *ngIf="!authoringComponentContent.cRater.feedback?.enabled && authoringComponentContent.cRater.scoringRules.length > 0">
     <div fxLayoutGap="10px" class="section-label">
       <span i18n>Scoring Rule</span>
       <button
@@ -111,7 +125,7 @@
         <button
             mat-raised-button
             color="primary"
-            (click)="scoringRuleUpClicked(scoringRuleIndex)"
+            (click)="moveObjectUp(authoringComponentContent.cRater.scoringRules, scoringRuleIndex)"
             [disabled]="isFirst"
             matTooltip="Move Scoring Rule Up"
             matTooltipPosition="above"
@@ -121,7 +135,7 @@
         <button
             mat-raised-button
             color="primary"
-            (click)="scoringRuleDownClicked(scoringRuleIndex)"
+            (click)="moveObjectDown(authoringComponentContent.cRater.scoringRules, scoringRuleIndex)"
             [disabled]="isLast"
             matTooltip="Move Scoring Rule Down"
             matTooltipPosition="above"
@@ -191,7 +205,7 @@
           <button
              mat-raised-button
              color="primary"
-             (click)="multipleAttemptScoringRuleUpClicked(multipleAttemptScoringRuleIndex)"
+             (click)="moveObjectUp(authoringComponentContent.cRater.multipleAttemptScoringRules, multipleAttemptScoringRuleIndex)"
              [disabled]="isFirst"
              matTooltip="Move Multiple Attempt Scoring Rule Up"
              matTooltipPosition="above"
@@ -201,7 +215,7 @@
           <button
              mat-raised-button
              color="primary"
-             (click)="multipleAttemptScoringRuleDownClicked(multipleAttemptScoringRuleIndex)"
+             (click)="moveObjectDown(authoringComponentContent.cRater.multipleAttemptScoringRules, multipleAttemptScoringRuleIndex)"
              [disabled]="isLast"
              matTooltip="Move Multiple Attempt Scoring Rule Down"
              matTooltipPosition="above"
@@ -269,7 +283,7 @@
             <button
                 mat-raised-button
                 color="primary"
-                (click)="notificationUpClicked(notificationIndex)"
+                (click)="moveObjectUp(authoringComponentContent.notificationSettings.notifications, notificationIndex)"
                 [disabled]="isFirst"
                 matTooltip="Move Notification Up"
                 matTooltipPosition="above"
@@ -279,7 +293,7 @@
             <button
                 mat-raised-button
                 color="primary"
-                (click)="notificationDownClicked(notificationIndex)"
+                (click)="moveObjectDown(authoringComponentContent.notificationSettings.notifications, notificationIndex)"
                 [disabled]="isLast"
                 matTooltip="Move Notification Down"
                 matTooltipPosition="above"
@@ -318,7 +332,7 @@
           </mat-checkbox>
           <mat-form-field *ngIf="notification.isNotifyStudent" class="notification-feedback">
             <mat-label i18n>Feedback to Student</mat-label>
-            <textarea 
+            <textarea
                 matInput
                 [(ngModel)]="notification.notificationMessageToStudent"
                 (ngModelChange)="componentChanged()"
@@ -381,7 +395,7 @@
             <ng-container *ngFor="let nodeId of nodeIds">
               <mat-option *ngIf="isApplicationNode(nodeId)"
                   [value]="nodeId">
-                {{ getNodePositionAndTitleByNodeId(nodeId) }}
+                {{ getNodePositionAndTitle(nodeId) }}
               </mat-option>
             </ng-container>
           </mat-select>
@@ -390,7 +404,7 @@
           <mat-label i18n>Component</mat-label>
           <mat-select [(ngModel)]="criteria.componentId"
               (ngModelChange)="componentChanged()">
-            <mat-option *ngFor="let component of getComponentsByNodeId(criteria.nodeId); index as componentIndex"
+            <mat-option *ngFor="let component of getComponents(criteria.nodeId); index as componentIndex"
                 [value]="component.id">
               {{ componentIndex + 1 }}. {{ component.type }}
               <span *ngIf="component.id === componentId" i18n>(This Component)</span>
@@ -410,7 +424,7 @@
           <button
               mat-raised-button
               color="primary"
-              (click)="moveCompletionCriteriaUp(criteriaIndex)"
+              (click)="moveObjectUp(authoringComponentContent.completionCriteria.criteria, criteriaIndex)"
               [disabled]="isFirst"
               matTooltip="Move Completion Criteria Up"
               matTooltipPosition="above"
@@ -420,7 +434,7 @@
           <button
               mat-raised-button
               color="primary"
-              (click)="moveCompletionCriteriaDown(criteriaIndex)"
+              (click)="moveObjectDown(authoringComponentContent.completionCriteria.criteria, criteriaIndex)"
               [disabled]="isLast"
               matTooltip="Move Completion Criteria Down"
               matTooltipPosition="above"

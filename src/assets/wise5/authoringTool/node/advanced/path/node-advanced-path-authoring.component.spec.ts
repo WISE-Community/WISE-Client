@@ -2,27 +2,17 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { AchievementService } from '../../../../services/achievementService';
-import { AnnotationService } from '../../../../services/annotationService';
-import { ConfigService } from '../../../../services/configService';
-import { NotificationService } from '../../../../services/notificationService';
-import { ProjectService } from '../../../../services/projectService';
-import { SessionService } from '../../../../services/sessionService';
-import { StudentDataService } from '../../../../services/studentDataService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
-import { TagService } from '../../../../services/tagService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
-import { UtilService } from '../../../../services/utilService';
 import { NodeAdvancedPathAuthoringComponent } from './node-advanced-path-authoring.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 
 describe('NodeAdvancedPathAuthoringComponent', () => {
   let component: NodeAdvancedPathAuthoringComponent;
   let fixture: ComponentFixture<NodeAdvancedPathAuthoringComponent>;
-  const nodeId1 = 'node1';
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,23 +21,14 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
       declarations: [NodeAdvancedPathAuthoringComponent],
       providers: [
-        AchievementService,
-        AnnotationService,
         ClassroomStatusService,
-        ConfigService,
-        NotificationService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService,
         TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService,
-        UtilService
+        TeacherWebSocketService
       ]
     }).compileComponents();
   });

@@ -1,6 +1,6 @@
 import { ComputerDialogResponse } from './ComputerDialogResponse';
-import { CRaterIdea } from './CRaterIdea';
-import { CRaterScore } from './CRaterScore';
+import { CRaterIdea } from '../common/cRater/CRaterIdea';
+import { CRaterScore } from '../common/cRater/CRaterScore';
 
 export class ComputerDialogResponseMultipleScores extends ComputerDialogResponse {
   scores: CRaterScore[];

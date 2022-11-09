@@ -1,5 +1,6 @@
 import { fabric } from 'fabric';
 import { Component } from '@angular/core';
+import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { LabelService } from '../labelService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
@@ -13,8 +14,12 @@ export class LabelShowWorkComponent extends ComponentShowWorkDirective {
   canvasId: string;
   canvas: any;
 
-  constructor(private LabelService: LabelService, protected ProjectService: ProjectService) {
-    super(ProjectService);
+  constructor(
+    private LabelService: LabelService,
+    protected nodeService: NodeService,
+    protected ProjectService: ProjectService
+  ) {
+    super(nodeService, ProjectService);
   }
 
   ngOnInit(): void {

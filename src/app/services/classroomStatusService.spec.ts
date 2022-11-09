@@ -1,12 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ClassroomStatusService } from '../../assets/wise5/services/classroomStatusService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { ProjectService } from '../../assets/wise5/services/projectService';
-import { UtilService } from '../../assets/wise5/services/utilService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 let configService: ConfigService;
 let service: ClassroomStatusService;
@@ -15,15 +11,8 @@ let http: HttpTestingController;
 describe('ClassroomStatusService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        ProjectService,
-        SessionService,
-        ClassroomStatusService,
-        UtilService
-      ]
+      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      providers: [ClassroomStatusService]
     });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ClassroomStatusService);

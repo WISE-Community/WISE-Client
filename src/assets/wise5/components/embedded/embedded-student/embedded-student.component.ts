@@ -186,18 +186,12 @@ export class EmbeddedStudent extends ComponentStudent {
 
   handleComponentDirtyMessage(messageEventData: any): void {
     this.isDirty = messageEventData.isDirty;
-    this.StudentDataService.broadcastComponentDirty({
-      componentId: this.componentId,
-      isDirty: this.isDirty
-    });
+    this.emitComponentDirty(this.isDirty);
   }
 
   handleComponentSubmitDirtyMessage(messageEventData: any): void {
     this.isSubmitDirty = messageEventData.isDirty;
-    this.StudentDataService.broadcastComponentSubmitDirty({
-      componentId: this.componentId,
-      isDirty: this.isSubmitDirty
-    });
+    this.emitComponentSubmitDirty(this.isSubmitDirty);
   }
 
   handleStudentDataChangedMessage(messageEventData: any): void {
@@ -237,11 +231,26 @@ export class EmbeddedStudent extends ComponentStudent {
   }
 
   handleGetLatestAnnotationsMessage(): void {
-    this.EmbeddedService.handleGetLatestAnnotationsMessage(
-      this.embeddedApplicationIFrameId,
+    const workgroupId = this.ConfigService.getWorkgroupId();
+    const type = 'any';
+    const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
       this.nodeId,
-      this.componentId
+      this.componentId,
+      workgroupId,
+      type
     );
+    const latestCommentAnnotation = this.AnnotationService.getLatestCommentAnnotation(
+      this.nodeId,
+      this.componentId,
+      workgroupId,
+      type
+    );
+    const message = {
+      messageType: 'latestAnnotations',
+      latestScoreAnnotation: latestScoreAnnotation,
+      latestCommentAnnotation: latestCommentAnnotation
+    };
+    this.sendMessageToApplication(message);
   }
 
   handleStudentWorkSavedToServerAdditionalProcessing(componentState: any): void {
@@ -253,9 +262,11 @@ export class EmbeddedStudent extends ComponentStudent {
   }
 
   iframeLoaded(): void {
-    (window.document.getElementById(
-      this.embeddedApplicationIFrameId
-    ) as HTMLIFrameElement).contentWindow.addEventListener('message', this.messageEventListener);
+    if (this.embeddedApplicationIFrameId != null) {
+      (window.document.getElementById(
+        this.embeddedApplicationIFrameId
+      ) as HTMLIFrameElement).contentWindow.addEventListener('message', this.messageEventListener);
+    }
   }
 
   setURL(url: string): void {
@@ -331,7 +342,7 @@ export class EmbeddedStudent extends ComponentStudent {
         html2canvas(modelElement).then((canvas) => {
           const base64Image = canvas.toDataURL('image/png');
           const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-          this.NotebookService.addNote(imageObject);
+          this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
         });
       }
     }

@@ -2,7 +2,7 @@
   <mat-label i18n>Component</mat-label>
   <mat-select [(ngModel)]="connectedComponent.componentId"
       (ngModelChange)="connectedComponentComponentIdChanged()">
-    <mat-option *ngFor="let component of getComponentsByNodeId(connectedComponent.nodeId); index as componentIndex"
+    <mat-option *ngFor="let component of getComponents(connectedComponent.nodeId); index as componentIndex"
         [value]="component.id"
         [disabled]="!isConnectedComponentTypeAllowed(component.type) || component.id === componentId">
       <span>{{ componentIndex + 1 }}. {{ component.type }} </span>

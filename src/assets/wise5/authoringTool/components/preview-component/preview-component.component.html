@@ -72,9 +72,25 @@
       [componentContent]="componentContent"
       mode="preview">
   </outside-url-student>
+  <peer-chat-student *ngSwitchCase="'PeerChat'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      mode="preview">
+  </peer-chat-student>
+  <show-group-work-student *ngSwitchCase="'ShowGroupWork'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      mode="preview">
+  </show-group-work-student>
+  <show-my-work-student *ngSwitchCase="'ShowMyWork'"
+      [nodeId]="nodeId"
+      [componentContent]="componentContent"
+      mode="preview">
+  </show-my-work-student>
   <summary-student *ngSwitchCase="'Summary'"
       [nodeId]="nodeId"
       [componentContent]="componentContent"
+      [periodId]="periodId"
       mode="preview">
   </summary-student>
   <table-student *ngSwitchCase="'Table'"

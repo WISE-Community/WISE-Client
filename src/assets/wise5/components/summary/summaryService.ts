@@ -3,18 +3,16 @@
 import { ComponentService } from '../componentService';
 import { UtilService } from '../../services/utilService';
 import { Injectable } from '@angular/core';
-import { StudentDataService } from '../../services/studentDataService';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class SummaryService extends ComponentService {
   componentsWithScoresSummary: string[];
   componentsWithResponsesSummary: string[];
 
-  constructor(
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
-  ) {
-    super(StudentDataService, UtilService);
+  constructor(private http: HttpClient, protected UtilService: UtilService) {
+    super(UtilService);
     this.componentsWithScoresSummary = [
       'Animation',
       'AudioOscillator',
@@ -64,5 +62,39 @@ export class SummaryService extends ComponentService {
 
   isResponsesSummaryAvailableForComponentType(componentType) {
     return this.componentsWithResponsesSummary.indexOf(componentType) != -1;
+  }
+
+  getLatestClassmateStudentWork(
+    runId: number,
+    periodId: number,
+    nodeId: string,
+    componentId: string,
+    source: string
+  ): Observable<any> {
+    if (source === 'period') {
+      return this.http.get(
+        `/api/classmate/summary/student-work/${runId}/${nodeId}/${componentId}/period/${periodId}`
+      );
+    } else {
+      return this.http.get(
+        `/api/classmate/summary/student-work/${runId}/${nodeId}/${componentId}/class`
+      );
+    }
+  }
+
+  getLatestClassmateScores(
+    runId: number,
+    periodId: number,
+    nodeId: string,
+    componentId: string,
+    source: string
+  ): Observable<any> {
+    if (source === 'period') {
+      return this.http.get(
+        `/api/classmate/summary/scores/${runId}/${nodeId}/${componentId}/period/${periodId}`
+      );
+    } else {
+      return this.http.get(`/api/classmate/summary/scores/${runId}/${nodeId}/${componentId}/class`);
+    }
   }
 }

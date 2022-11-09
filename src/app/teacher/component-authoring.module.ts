@@ -3,7 +3,7 @@ import { AnimationAuthoring } from '../../assets/wise5/components/animation/anim
 import { AudioOscillatorAuthoring } from '../../assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component';
 import { ConceptMapAuthoring } from '../../assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component';
 import { DialogGuidanceAuthoringComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component';
-import { EditDialogGuidanceFeedbackRulesComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-feedback-rules/edit-dialog-guidance-feedback-rules.component';
+import { EditFeedbackRulesComponent } from '../../assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { DiscussionAuthoring } from '../../assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component';
 import { DrawAuthoring } from '../../assets/wise5/components/draw/draw-authoring/draw-authoring.component';
 import { EmbeddedAuthoring } from '../../assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component';
@@ -37,7 +37,6 @@ import { EditConnectedComponentDeleteButtonComponent } from '../authoring-tool/e
 import { EditConnectedComponentNodeSelectComponent } from '../authoring-tool/edit-connected-component-node-select/edit-connected-component-node-select.component';
 import { EditConnectedComponentTypeSelectComponent } from '../authoring-tool/edit-connected-component-type-select/edit-connected-component-type-select.component';
 import { EditConnectedComponentsComponent } from '../authoring-tool/edit-connected-components/edit-connected-components.component';
-import { AngularJSModule } from '../common-hybrid-angular.module';
 import { EditConceptMapConnectedComponentsComponent } from '../../assets/wise5/components/conceptMap/edit-concept-map-connected-components/edit-concept-map-connected-components.component';
 import { EditDrawConnectedComponentsComponent } from '../../assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component';
 import { EditConnectedComponentsWithBackgroundComponent } from '../authoring-tool/edit-connected-components-with-background/edit-connected-components-with-background.component';
@@ -63,7 +62,20 @@ import { EditOpenResponseAdvancedComponent } from '../../assets/wise5/components
 import { EditMatchAdvancedComponent } from '../../assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component';
 import { EditSummaryAdvancedComponent } from '../../assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component';
 import { EditTableAdvancedComponent } from '../../assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component';
+import { EditPeerChatAdvancedComponentComponent } from '../../assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component';
+import { PeerChatAuthoringComponent } from '../../assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component';
+import { ShowMyWorkAuthoringComponent } from '../../assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component';
+import { ShowGroupWorkAuthoringComponent } from '../../assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component';
+import { EditComponentPeerGroupingTagComponent } from '../authoring-tool/edit-component-peer-grouping-tag/edit-component-peer-grouping-tag.component';
+import { EditDialogGuidanceAdvancedComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component';
 import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
+import { PeerGroupingAuthoringModule } from '../../assets/wise5/authoringTool/peer-grouping/peer-grouping-authoring.module';
+import { StudentTeacherCommonModule } from '../student-teacher-common.module';
+import { FeedbackRuleHelpComponent } from '../../assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component';
+import { EditDynamicPromptComponent } from '../authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component';
+import { EditDynamicPromptRulesComponent } from '../authoring-tool/edit-dynamic-prompt-rules/edit-dynamic-prompt-rules.component';
+import { EditPeerGroupingDialogComponent } from '../../assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
+import { CreateNewPeerGroupingDialogComponent } from '../../assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +83,7 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     AudioOscillatorAuthoring,
     AuthorUrlParametersComponent,
     ConceptMapAuthoring,
+    CreateNewPeerGroupingDialogComponent,
     DrawAuthoring,
     DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
@@ -83,6 +96,7 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
     EditComponentMaxSubmitComponent,
+    EditComponentPeerGroupingTagComponent,
     EditComponentPrompt,
     EditComponentRubricComponent,
     EditComponentSaveButtonComponent,
@@ -99,13 +113,16 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
+    EditDialogGuidanceAdvancedComponent,
     EditDialogGuidanceComputerAvatarComponent,
-    EditDialogGuidanceFeedbackRulesComponent,
     EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,
     EditDrawAdvancedComponent,
     EditDrawConnectedComponentsComponent,
+    EditDynamicPromptComponent,
+    EditDynamicPromptRulesComponent,
     EditEmbeddedAdvancedComponent,
+    EditFeedbackRulesComponent,
     EditGraphAdvancedComponent,
     EditGraphConnectedComponentsComponent,
     EditLabelAdvancedComponent,
@@ -117,10 +134,13 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     EditMultipleChoiceConnectedComponentsComponent,
     EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
+    EditPeerChatAdvancedComponentComponent,
+    EditPeerGroupingDialogComponent,
     EditSummaryAdvancedComponent,
     EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,
     EmbeddedAuthoring,
+    FeedbackRuleHelpComponent,
     GraphAuthoring,
     HtmlAuthoring,
     LabelAuthoring,
@@ -128,11 +148,14 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     MultipleChoiceAuthoring,
     OpenResponseAuthoring,
     OutsideUrlAuthoring,
+    PeerChatAuthoringComponent,
+    ShowGroupWorkAuthoringComponent,
+    ShowMyWorkAuthoringComponent,
     SummaryAuthoring,
     TableAuthoring,
     WiseAuthoringTinymceEditorComponent
   ],
-  imports: [AngularJSModule],
+  imports: [StudentTeacherCommonModule, PeerGroupingAuthoringModule],
   exports: [
     AnimationAuthoring,
     AudioOscillatorAuthoring,
@@ -148,6 +171,7 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
     EditComponentMaxSubmitComponent,
+    EditComponentPeerGroupingTagComponent,
     EditComponentPrompt,
     EditComponentRubricComponent,
     EditComponentSaveButtonComponent,
@@ -164,6 +188,7 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
+    EditDialogGuidanceAdvancedComponent,
     EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,
     EditDrawAdvancedComponent,
@@ -180,6 +205,7 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     EditMultipleChoiceConnectedComponentsComponent,
     EditOpenResponseAdvancedComponent,
     EditOutsideUrlAdvancedComponent,
+    EditPeerChatAdvancedComponentComponent,
     EditSummaryAdvancedComponent,
     EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,
@@ -191,6 +217,9 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/co
     MultipleChoiceAuthoring,
     OpenResponseAuthoring,
     OutsideUrlAuthoring,
+    PeerChatAuthoringComponent,
+    ShowGroupWorkAuthoringComponent,
+    ShowMyWorkAuthoringComponent,
     SummaryAuthoring,
     TableAuthoring,
     WiseAuthoringTinymceEditorComponent

@@ -4,19 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { NodeIconComponent } from '../../../../classroomMonitor/classroomMonitorComponents/shared/nodeIcon/node-icon.component';
-import { AnnotationService } from '../../../../services/annotationService';
-import { ConfigService } from '../../../../services/configService';
-import { NodeService } from '../../../../services/nodeService';
+import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
 import { ProjectService } from '../../../../services/projectService';
-import { SessionService } from '../../../../services/sessionService';
 import { StudentDataService } from '../../../../services/studentDataService';
-import { TagService } from '../../../../services/tagService';
-import { UtilService } from '../../../../services/utilService';
 import { NodeStatusIcon } from '../nodeStatusIcon/node-status-icon.component';
 
 import { StepToolsComponent } from './step-tools.component';
+import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 
 const nodeId1 = 'node1';
 const nodeId2 = 'node2';
@@ -45,19 +39,9 @@ describe('StepToolsComponent', () => {
         MatDialogModule,
         MatIconModule,
         MatSelectModule,
-        UpgradeModule
+        StudentTeacherCommonServicesModule
       ],
-      declarations: [NodeIconComponent, NodeStatusIcon, StepToolsComponent],
-      providers: [
-        AnnotationService,
-        ConfigService,
-        { provide: NodeService, useClass: MockNodeService },
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ]
+      declarations: [NodeIconComponent, NodeStatusIcon, StepToolsComponent]
     }).compileComponents();
   });
 

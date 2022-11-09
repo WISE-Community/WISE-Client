@@ -121,7 +121,7 @@
                                     ng-class='{"md-primary": true, "groupHeader": dataExportController.isGroupNode(projectItem.node.id), "stepHeader": !dataExportController.isGroupNode(projectItem.node.id), "branchPathStepHeader": dataExportController.isNodeInAnyBranchPath(projectItem.node.id) && !dataExportController.isGroupNode(projectItem.node.id)}'
                                     aria-label='{{ ::"step" | translate }}'>
                             <h6 style='display: inline; cursor: pointer' ng-if='projectItem.order != 0'>
-                                {{::dataExportController.getNodePositionById(projectItem.node.id)}} {{::dataExportController.getNodeTitleByNodeId(projectItem.node.id)}}
+                                {{::dataExportController.getNodePositionById(projectItem.node.id)}} {{::dataExportController.getNodeTitle(projectItem.node.id)}}
                             </h6>
                         </md-checkbox>
                         <span style="cursor:pointer" ng-if='projectItem.node.type != "group"'
@@ -164,7 +164,7 @@
                   <h6 style='display: inline; cursor: pointer'
                       ng-if='projectItem.order != 0'
                       ng-class='{ "stepHeader" : !dataExportController.isGroupNode(projectItem.node.id) }'>
-                      {{::dataExportController.getNodePositionById(projectItem.node.id)}} {{::dataExportController.getNodeTitleByNodeId(projectItem.node.id)}}
+                      {{::dataExportController.getNodePositionById(projectItem.node.id)}} {{::dataExportController.getNodeTitle(projectItem.node.id)}}
                   </h6>
                   <span style="cursor:pointer" ng-if='projectItem.node.type != "group"'
                           ng-click='dataExportController.previewNode(projectItem.node)'>

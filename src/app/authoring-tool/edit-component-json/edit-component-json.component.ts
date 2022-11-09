@@ -50,7 +50,7 @@ export class EditComponentJsonComponent {
   }
 
   setComponentContentJsonString() {
-    const authoringComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+    const authoringComponentContent = this.ProjectService.getComponent(
       this.nodeId,
       this.componentId
     );
@@ -79,7 +79,7 @@ export class EditComponentJsonComponent {
 
   isJSONValid(): boolean {
     try {
-      angular.fromJson(this.componentContentJSONString);
+      JSON.parse(this.componentContentJSONString);
       return true;
     } catch (e) {
       return false;

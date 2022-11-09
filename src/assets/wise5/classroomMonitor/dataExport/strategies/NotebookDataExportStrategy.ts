@@ -69,7 +69,7 @@ export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
     row[columnNameToNumber['Note Item ID']] = notebookItem.localNotebookItemId;
     row[columnNameToNumber['Node ID']] = notebookItem.nodeId;
     row[columnNameToNumber['Component ID']] = notebookItem.componentId;
-    const component = this.projectService.getComponentByNodeIdAndComponentId(
+    const component = this.projectService.getComponent(
       notebookItem.nodeId,
       notebookItem.componentId
     );
@@ -82,7 +82,7 @@ export class NotebookDataExportStrategy extends AbstractDataExportStrategy {
     row[columnNameToNumber['Step Title']] = this.controller.getNodeTitleByNodeId(
       notebookItem.nodeId
     );
-    const position = this.projectService.getComponentPositionByNodeIdAndComponentId(
+    const position = this.projectService.getComponentPosition(
       notebookItem.nodeId,
       notebookItem.componentId
     );

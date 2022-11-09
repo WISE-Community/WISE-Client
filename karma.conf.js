@@ -23,7 +23,7 @@ module.exports = function (config) {
     angularCli: {
       environment: 'dev'
     },
-    reporters: ['spec'],
+    reporters: ['spec', 'coverage-istanbul'],
     specReporter: {
       suppressSkipped: true
     },

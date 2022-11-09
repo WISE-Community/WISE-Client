@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { AngularJSModule } from '../../../../../app/common-hybrid-angular.module';
+import { StudentTeacherCommonModule } from '../../../../../app/student-teacher-common.module';
 import { StudentComponentModule } from '../../../../../app/student/student.component.module';
 import { DrawStudent } from './draw-student.component';
 
 @NgModule({
   declarations: [DrawStudent],
-  imports: [AngularJSModule, StudentComponentModule],
+  imports: [StudentTeacherCommonModule, StudentComponentModule],
   exports: [DrawStudent]
 })
 export class DrawStudentModule {}

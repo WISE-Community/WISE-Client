@@ -39,7 +39,7 @@ export class StudentAccountMenuComponent implements OnInit {
   ngOnInit(): void {
     this.isAuthenticated = this.sessionService.isAuthenticated();
     this.nodeStatuses = this.studentDataService.nodeStatuses;
-    this.rootNode = this.projectService.rootNode;
+    this.rootNode = this.projectService.getProjectRootNode();
     this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
     this.workgroupId = this.configService.getWorkgroupId();
     this.usersInWorkgroup = this.configService.getUsernamesByWorkgroupId(this.workgroupId);

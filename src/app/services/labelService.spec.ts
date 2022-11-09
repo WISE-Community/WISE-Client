@@ -1,10 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { LabelService } from '../../assets/wise5/components/label/labelService';
@@ -40,7 +38,7 @@ let canDeleteBoolean: boolean = true;
 describe('LabelService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, UpgradeModule],
+      imports: [HttpClientTestingModule],
       providers: [
         AnnotationService,
         ConfigService,
@@ -48,7 +46,6 @@ describe('LabelService', () => {
         ProjectService,
         SessionService,
         StudentAssetService,
-        StudentDataService,
         TagService,
         UtilService
       ]
@@ -175,7 +172,7 @@ function isCompleted() {
     node: any,
     expectedResult: boolean
   ) {
-    expect(service.isCompleted(component, componentStates, [], [], node)).toEqual(expectedResult);
+    expect(service.isCompleted(component, componentStates, [], node)).toEqual(expectedResult);
   }
   it('should check if is completed when submit is not required and there are no labels', () => {
     expectIsCompleted(component, componentStates, node, false);

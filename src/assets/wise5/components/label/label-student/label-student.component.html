@@ -1,4 +1,4 @@
-<component-header [componentContent]="componentContent"></component-header>
+<component-header [component]="component"></component-header>
 <div class="input-wrapper" fxLayout="row wrap" fxLayoutAlign="start center">
   <button
       *ngIf="isAddNewLabelButtonVisible"
@@ -80,13 +80,13 @@
   </canvas>
 </div>
 <component-save-submit-buttons *ngIf="isSaveOrSubmitButtonVisible"
+    [componentState]="latestComponentState"
     [isDirty]="isDirty"
     [isDisabled]="isDisabled"
     [isSaveButtonVisible]="isSaveButtonVisible"
     [isSubmitButtonDisabled]="isSubmitButtonDisabled"
     [isSubmitButtonVisible]="isSubmitButtonVisible"
     [isSubmitDirty]="isSubmitDirty"
-    [saveMessage]="saveMessage"
     (saveButtonClicked)="saveButtonClicked($event)"
     (submitButtonClicked)="submitButtonClicked($event)">
 </component-save-submit-buttons>

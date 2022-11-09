@@ -15,7 +15,7 @@
           <ng-container *ngFor="let newsItem of allNewsItems; let i=index">
             <app-timeline-item *ngIf="i < 10 || showAll">
               <app-timeline-item-label>
-                <strong>{{ newsItem.date | amDateFormat:'MMM D, Y' }}</strong>
+                <strong>{{ newsItem.date | date:'mediumDate' }}</strong>
               </app-timeline-item-label>
               <app-timeline-item-content>
                 <mat-card>

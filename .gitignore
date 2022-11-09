@@ -6,6 +6,7 @@ coverage
 .classpath
 .factoryPath
 .vscode
+.angular
 .m2
 .npm
 .v8flags*

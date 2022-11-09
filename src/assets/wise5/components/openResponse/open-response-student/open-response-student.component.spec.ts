@@ -7,36 +7,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { configureTestSuite } from 'ng-bullet';
 import { of } from 'rxjs';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { AnnotationService } from '../../../services/annotationService';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
-import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
-import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
-import { NotificationService } from '../../../services/notificationService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
-import { ComponentService } from '../../componentService';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
-
-class MockNotebookService {
-  addNote() {}
-}
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
 
 let component: OpenResponseStudent;
 const componentId = 'component1';
@@ -45,7 +28,7 @@ const nodeId = 'node1';
 const response = 'Hello World';
 
 describe('OpenResponseStudent', () => {
-  configureTestSuite(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
@@ -56,6 +39,7 @@ describe('OpenResponseStudent', () => {
         MatDialogModule,
         MatIconModule,
         ReactiveFormsModule,
+        StudentTeacherCommonServicesModule,
         UpgradeModule
       ],
       declarations: [
@@ -64,23 +48,7 @@ describe('OpenResponseStudent', () => {
         OpenResponseStudent,
         PossibleScoreComponent
       ],
-      providers: [
-        AnnotationService,
-        AudioRecorderService,
-        ComponentService,
-        ConfigService,
-        CRaterService,
-        { provide: NodeService, useClass: MockNodeService },
-        { provide: NotebookService, useClass: MockNotebookService },
-        NotificationService,
-        OpenResponseService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        TagService,
-        UtilService
-      ],
+      providers: [AudioRecorderService],
       schemas: []
     });
   });
@@ -121,11 +89,7 @@ describe('OpenResponseStudent', () => {
   createComponentState();
   createComponentStateAdditionalProcessing();
   createMergedComponentState();
-  hasAudioResponses();
   hasFeedback();
-  mergeObjects();
-  removeAudioAttachment();
-  removeAudioAttachments();
   setStudentWork();
   snipButtonClicked();
   submitWithFeedback();
@@ -229,7 +193,7 @@ function createComponentState() {
     it(
       'should create component state',
       waitForAsync(() => {
-        spyOn(TestBed.inject(OpenResponseService), 'isCompleted').and.returnValue(true);
+        spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
         component.studentResponse = response;
         component.createComponentState('save').then((componentState: any) => {
           expect(componentState.componentId).toEqual(componentId);
@@ -246,10 +210,19 @@ function createComponentStateAdditionalProcessing() {
     it(
       'should perform create component state additional processing',
       waitForAsync(() => {
-        spyOn(TestBed.inject(OpenResponseService), 'isCompleted').and.returnValue(true);
-        spyOn(component, 'isCRaterScoreOnSubmit').and.returnValue(true);
+        spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
+        spyOn(TestBed.inject(CRaterService), 'isCRaterScoreOnEvent').and.returnValue(true);
         spyOn(TestBed.inject(CRaterService), 'makeCRaterScoringRequest').and.returnValue(
-          of({ score: 1 })
+          of({
+            responses: {
+              feedback: {
+                ideas: {}
+              },
+              scores: {
+                raw_trim_round: 1
+              }
+            }
+          })
         );
         component.isSubmit = true;
         component.createComponentState('submit').then((componentState: any) => {
@@ -279,19 +252,6 @@ function snipButtonClicked() {
   });
 }
 
-function hasAudioResponses() {
-  describe('hasAudioResponses', () => {
-    it('should check if there are audio responses when there are none', () => {
-      component.attachments = [];
-      expect(component.hasAudioResponses()).toEqual(false);
-    });
-    it('should check if there are audio responses when there are some', () => {
-      component.attachments = [{ type: 'audio' }];
-      expect(component.hasAudioResponses()).toEqual(true);
-    });
-  });
-}
-
 function createComponentStateObject(response: string): any {
   return {
     studentData: {
@@ -309,33 +269,6 @@ function createMergedComponentState() {
       ];
       const mergedComponentState = component.createMergedComponentState(componentStates);
       expect(mergedComponentState.studentData.response).toEqual('Hello\nWorld');
-    });
-  });
-}
-
-function removeAudioAttachment() {
-  describe('removeAudioAttachment', () => {
-    it('should remove audio attachment', () => {
-      const audioAttachment = { type: 'audio' };
-      component.attachments = [audioAttachment, { type: 'image' }];
-      spyOn(window, 'confirm').and.returnValue(true);
-      component.removeAudioAttachment(audioAttachment);
-      expect(component.attachments.length).toEqual(1);
-    });
-  });
-}
-
-function removeAudioAttachments() {
-  describe('removeAudioAttachments', () => {
-    it('should remove audio attachments', () => {
-      component.attachments = [
-        { type: 'image' },
-        { type: 'audio' },
-        { type: 'image' },
-        { type: 'audio' }
-      ];
-      component.removeAudioAttachments();
-      expect(component.attachments.length).toEqual(2);
     });
   });
 }
@@ -372,20 +305,6 @@ function hasFeedback() {
 function expectHasFeedbackToBe(isCRaterEnabled: boolean, value: boolean) {
   spyOn(TestBed.inject(CRaterService), 'isCRaterEnabled').and.returnValue(isCRaterEnabled);
   expect(component.hasFeedback()).toEqual(value);
-}
-
-function mergeObjects() {
-  describe('mergeObjects', () => {
-    it('should merge objects', () => {
-      const destination: any = { id: 1, width: 800, height: 600 };
-      const source: any = { id: 2, color: 'blue' };
-      component.mergeObjects(destination, source);
-      expect(destination.id).toEqual(2);
-      expect(destination.width).toEqual(800);
-      expect(destination.height).toEqual(600);
-      expect(destination.color).toEqual('blue');
-    });
-  });
 }
 
 function checkHasFeedbackWhenCRaterIsNotEnabled() {

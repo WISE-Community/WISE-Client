@@ -12,3 +12,29 @@
 .fix-data-to-table-column-label {
   margin-bottom: 10px;
 }
+
+.import-table-button {
+  position: relative;
+  margin: 10px;
+}
+
+.import-table-input {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.import-table-message {
+  margin-left: 10px;
+}
+
+.import-table-spinner {
+  margin-left: 10px;
+}
