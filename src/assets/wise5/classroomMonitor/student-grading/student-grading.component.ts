@@ -85,6 +85,7 @@ export class StudentGradingComponent implements OnInit {
     );
     this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
     this.setNodesById();
+    this.sortedNodes = Object.values(this.nodesById);
     this.sortNodes();
   }
 
@@ -220,10 +221,6 @@ export class StudentGradingComponent implements OnInit {
       }
       node.order = this.projectService.getOrderById(nodeId);
       node.show = this.isNodeShown(nodeId);
-
-      if (!init) {
-        this.nodesById[nodeId] = this.utilService.makeCopyOfJSONObject(node);
-      }
     }
   }
 
@@ -407,7 +404,6 @@ export class StudentGradingComponent implements OnInit {
   }
 
   private sortNodes(): void {
-    this.sortedNodes = Object.values(this.nodesById);
     switch (this.sort) {
       case 'step':
         this.sortedNodes.sort(this.sortStepAscending);
@@ -574,5 +570,9 @@ export class StudentGradingComponent implements OnInit {
         this.nodeVisibilityById[nodeId] = true;
       }
     }
+  }
+
+  trackNode(index: number, node: any): string {
+    return `${node.id}-${node.score}-${node.maxScore}`;
   }
 }

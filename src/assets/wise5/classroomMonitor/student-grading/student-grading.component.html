@@ -89,7 +89,7 @@
         </div>
       </mat-list-item>
       <div waIntersectionObserver waIntersectionThreshold="0.5">
-        <ng-container *ngFor="let node of sortedNodes">
+        <ng-container *ngFor="let node of sortedNodes; trackBy: trackNode">
           <step-item *ngIf="node.show"
               [expand]="nodeVisibilityById[node.id]"
               [maxScore]="node.maxScore"
