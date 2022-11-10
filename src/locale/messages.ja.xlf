@@ -11416,6 +11416,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
         <target state="needs-translation">Expand All</target>
       </trans-unit>
       <trans-unit id="a0161b45994d017056833ae5e2fbaccb8f58e847" datatype="html">
@@ -11431,6 +11435,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component.html</context>
           <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <target state="needs-translation">Collapse All</target>
       </trans-unit>
@@ -11455,6 +11463,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
           <context context-type="linenumber">106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target state="needs-translation">Team</target>
       </trans-unit>
@@ -11840,7 +11852,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Show/hide team&apos;s notebook contents</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <target state="needs-translation">Show/hide team's notebook contents</target>
       </trans-unit>
@@ -11865,6 +11877,14 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component.html</context>
           <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">79</context>
         </context-group>
         <target state="needs-translation">Notes</target>
       </trans-unit>
@@ -12239,6 +12259,66 @@ Are you sure you want to proceed?</target>
           <context context-type="linenumber">99</context>
         </context-group>
         <target state="needs-translation">See revisions</target>
+      </trans-unit>
+      <trans-unit id="24d2ea13091f19a68c4bc99ed75c4d38fd29ac49" datatype="html">
+        <source> + Expand All </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+        <target state="needs-translation"> + Expand All </target>
+      </trans-unit>
+      <trans-unit id="bec9e508c2844ec41396cc217fea073738dee581" datatype="html">
+        <source> - Collapse All </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">28,30</context>
+        </context-group>
+        <target state="needs-translation"> - Collapse All </target>
+      </trans-unit>
+      <trans-unit id="01655f05baf041fe85ff99fdf76efd35d1723d05" datatype="html">
+        <source>Team ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <target state="needs-translation">Team ID</target>
+      </trans-unit>
+      <trans-unit id="f7e865440dc3b9d0424773e70d9adf60dbad1ac6" datatype="html">
+        <source>Sort By Team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <target state="needs-translation">Sort By Team</target>
+      </trans-unit>
+      <trans-unit id="7d1cfd1a605734b6c4b62149691a791dbe41bee9" datatype="html">
+        <source>Names</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <target state="needs-translation">Names</target>
+      </trans-unit>
+      <trans-unit id="ff706bcc195a56a7a24646c6ec75cf22d1e9ce46" datatype="html">
+        <source>Sort By Student</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <target state="needs-translation">Sort By Student</target>
+      </trans-unit>
+      <trans-unit id="c9ed1d80f76bf08f3d6c2020f7c5b460ab7fb0a5" datatype="html">
+        <source>Sort by number of notes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <target state="needs-translation">Sort by number of notes</target>
       </trans-unit>
       <trans-unit id="66abb23ed9adf4aa03eab3e4b75234d32748e44c" datatype="html">
         <source>
@@ -18988,7 +19068,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">93</context>
         </context-group>
         <target state="needs-translation">Notebook</target>
       </trans-unit>
@@ -19000,11 +19080,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">105</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <target state="needs-translation">note</target>
       </trans-unit>
@@ -19016,11 +19096,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">106</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">148</context>
         </context-group>
         <target state="needs-translation">notes</target>
       </trans-unit>
@@ -19040,7 +19120,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <target state="needs-translation">report</target>
       </trans-unit>
@@ -19052,7 +19132,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <target state="needs-translation">reports</target>
       </trans-unit>
@@ -19064,7 +19144,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <target state="needs-translation">Report</target>
       </trans-unit>
@@ -19112,7 +19192,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Complete &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1436</context>
+          <context context-type="linenumber">1434</context>
         </context-group>
         <target state="needs-translation">Complete &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19120,7 +19200,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1442</context>
+          <context context-type="linenumber">1440</context>
         </context-group>
         <target state="needs-translation">Visit &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19128,7 +19208,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Correctly answer &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1448</context>
+          <context context-type="linenumber">1446</context>
         </context-group>
         <target state="needs-translation">Correctly answer &lt;b&gt;<x id="PH" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19136,7 +19216,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Obtain a score of &lt;b&gt;<x id="PH" equiv-text="scoresString"/>&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1463</context>
+          <context context-type="linenumber">1461</context>
         </context-group>
         <target state="needs-translation">Obtain a score of &lt;b&gt;<x id="PH" equiv-text="scoresString"/>&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19144,7 +19224,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You must choose &quot;<x id="PH" equiv-text="choiceText"/>&quot; on &quot;<x id="PH_1" equiv-text="nodeTitle"/>&quot;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1471</context>
+          <context context-type="linenumber">1469</context>
         </context-group>
         <target state="needs-translation">You must choose "<x id="PH" equiv-text="choiceText"/>" on "<x id="PH_1" equiv-text="nodeTitle"/>"</target>
       </trans-unit>
@@ -19152,7 +19232,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; time on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1483</context>
+          <context context-type="linenumber">1481</context>
         </context-group>
         <target state="needs-translation">Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; time on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19160,7 +19240,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; times on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1485</context>
+          <context context-type="linenumber">1483</context>
         </context-group>
         <target state="needs-translation">Submit &lt;b&gt;<x id="PH" equiv-text="requiredSubmitCount"/>&lt;/b&gt; times on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19168,7 +19248,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Take the branch path from &lt;b&gt;<x id="PH" equiv-text="fromNodeTitle"/>&lt;/b&gt; to &lt;b&gt;<x id="PH_1" equiv-text="toNodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1492</context>
+          <context context-type="linenumber">1490</context>
         </context-group>
         <target state="needs-translation">Take the branch path from &lt;b&gt;<x id="PH" equiv-text="fromNodeTitle"/>&lt;/b&gt; to &lt;b&gt;<x id="PH_1" equiv-text="toNodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19176,7 +19256,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Write &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfWords"/>&lt;/b&gt; words on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1498</context>
+          <context context-type="linenumber">1496</context>
         </context-group>
         <target state="needs-translation">Write &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfWords"/>&lt;/b&gt; words on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19184,7 +19264,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>&quot;<x id="PH" equiv-text="nodeTitle"/>&quot; is visible</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1504</context>
+          <context context-type="linenumber">1502</context>
         </context-group>
         <target state="needs-translation">"<x id="PH" equiv-text="nodeTitle"/>" is visible</target>
       </trans-unit>
@@ -19192,7 +19272,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>&quot;<x id="PH" equiv-text="nodeTitle"/>&quot; is visitable</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1510</context>
+          <context context-type="linenumber">1508</context>
         </context-group>
         <target state="needs-translation">"<x id="PH" equiv-text="nodeTitle"/>" is visitable</target>
       </trans-unit>
@@ -19200,7 +19280,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; note on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1517</context>
+          <context context-type="linenumber">1515</context>
         </context-group>
         <target state="needs-translation">Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; note on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19208,7 +19288,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; notes on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1519</context>
+          <context context-type="linenumber">1517</context>
         </context-group>
         <target state="needs-translation">Add &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfNotes"/>&lt;/b&gt; notes on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19216,7 +19296,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; row in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1526</context>
+          <context context-type="linenumber">1524</context>
         </context-group>
         <target state="needs-translation">You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; row in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19224,7 +19304,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; rows in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1528</context>
+          <context context-type="linenumber">1526</context>
         </context-group>
         <target state="needs-translation">You must fill in &lt;b&gt;<x id="PH" equiv-text="requiredNumberOfFilledRows"/>&lt;/b&gt; rows in the &lt;b&gt;Table&lt;/b&gt; on &lt;b&gt;<x id="PH_1" equiv-text="nodeTitle"/>&lt;/b&gt;</target>
       </trans-unit>
@@ -19232,7 +19312,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Wait for your teacher to unlock the item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/projectService.ts</context>
-          <context context-type="linenumber">1531</context>
+          <context context-type="linenumber">1529</context>
         </context-group>
         <target state="needs-translation">Wait for your teacher to unlock the item</target>
       </trans-unit>
@@ -19288,7 +19368,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>First Lesson</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <target state="needs-translation">First Lesson</target>
       </trans-unit>
@@ -19296,7 +19376,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>First Step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target state="needs-translation">First Step</target>
       </trans-unit>
@@ -19304,11 +19384,11 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">149</context>
         </context-group>
         <target state="needs-translation">Notes</target>
       </trans-unit>
@@ -19316,7 +19396,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Final Report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <target state="needs-translation">Final Report</target>
       </trans-unit>
@@ -19324,7 +19404,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Final summary report of what you learned in this unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <target state="needs-translation">Final summary report of what you learned in this unit</target>
       </trans-unit>
@@ -19332,7 +19412,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Use this space to write your final report using evidence from your notebook.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">126</context>
         </context-group>
         <target state="needs-translation">Use this space to write your final report using evidence from your notebook.</target>
       </trans-unit>
@@ -19340,7 +19420,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>&lt;h3&gt;This is a heading&lt;/h3&gt;&lt;p&gt;This is a paragraph.&lt;/p&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">127</context>
         </context-group>
         <target state="needs-translation">&lt;h3&gt;This is a heading&lt;/h3&gt;&lt;p&gt;This is a paragraph.&lt;/p&gt;</target>
       </trans-unit>
@@ -19348,7 +19428,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Teacher Notebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target state="needs-translation">Teacher Notebook</target>
       </trans-unit>
@@ -19356,11 +19436,11 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>teacher notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">158</context>
         </context-group>
         <target state="needs-translation">teacher notes</target>
       </trans-unit>
@@ -19368,11 +19448,11 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Teacher Notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">159</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">166</context>
         </context-group>
         <target state="needs-translation">Teacher Notes</target>
       </trans-unit>
@@ -19380,7 +19460,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Notes for the teacher as they&apos;re running the WISE unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">167</context>
         </context-group>
         <target state="needs-translation">Notes for the teacher as they're running the WISE unit</target>
       </trans-unit>
@@ -19388,7 +19468,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Use this space to take notes for this unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">168</context>
         </context-group>
         <target state="needs-translation">Use this space to take notes for this unit</target>
       </trans-unit>
@@ -19396,7 +19476,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>&lt;p&gt;Use this space to take notes for this unit&lt;/p&gt;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">169</context>
         </context-group>
         <target state="needs-translation">&lt;p&gt;Use this space to take notes for this unit&lt;/p&gt;</target>
       </trans-unit>
@@ -19404,7 +19484,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>All steps after this one will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">977</context>
+          <context context-type="linenumber">994</context>
         </context-group>
         <target state="needs-translation">All steps after this one will not be visitable until </target>
       </trans-unit>
@@ -19412,7 +19492,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>All steps after this one will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">980</context>
+          <context context-type="linenumber">997</context>
         </context-group>
         <target state="needs-translation">All steps after this one will not be visible until </target>
       </trans-unit>
@@ -19420,7 +19500,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>All other steps will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">983</context>
+          <context context-type="linenumber">1000</context>
         </context-group>
         <target state="needs-translation">All other steps will not be visitable until </target>
       </trans-unit>
@@ -19428,7 +19508,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>All other steps will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">986</context>
+          <context context-type="linenumber">1003</context>
         </context-group>
         <target state="needs-translation">All other steps will not be visible until </target>
       </trans-unit>
@@ -19436,7 +19516,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>This step will not be visitable until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">989</context>
+          <context context-type="linenumber">1006</context>
         </context-group>
         <target state="needs-translation">This step will not be visitable until </target>
       </trans-unit>
@@ -19444,7 +19524,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>This step will not be visible until </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectService.ts</context>
-          <context context-type="linenumber">992</context>
+          <context context-type="linenumber">1009</context>
         </context-group>
         <target state="needs-translation">This step will not be visible until </target>
       </trans-unit>
