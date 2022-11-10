@@ -73,10 +73,10 @@ export class OpenResponseStudent extends ComponentStudent {
       )
     ) {
       this.setStudentWork(this.componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
     } else if (this.componentState == null) {
-      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      if (this.component.hasConnectedComponent()) {
         this.handleConnectedComponents();
       } else if (this.componentContent.starterSentence != null) {
         this.studentResponse = this.componentContent.starterSentence;

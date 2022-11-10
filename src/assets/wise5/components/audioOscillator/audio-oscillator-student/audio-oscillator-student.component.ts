@@ -106,7 +106,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
       )
     ) {
       this.setStudentWork(this.componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
     }
 

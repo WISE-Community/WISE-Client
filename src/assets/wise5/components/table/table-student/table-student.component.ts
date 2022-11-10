@@ -108,13 +108,13 @@ export class TableStudent extends ComponentStudent {
     ) {
       // the student has work so we will populate the work into this component
       this.setStudentWork(this.componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       // we will import work from another component
       this.handleConnectedComponents();
     } else if (this.componentState == null) {
       // check if we need to import work
 
-      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      if (this.component.hasConnectedComponent()) {
         /*
          * the student does not have any work and there are connected
          * components so we will get the work from the connected
@@ -319,7 +319,7 @@ export class TableStudent extends ComponentStudent {
    * Reset the table data to its initial state from the component content
    */
   resetTable() {
-    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    if (this.component.hasConnectedComponent()) {
       // this component imports work so we will import the work again
       this.tableData = this.getCopyOfTableData(this.componentContent.tableData);
       this.handleConnectedComponents();

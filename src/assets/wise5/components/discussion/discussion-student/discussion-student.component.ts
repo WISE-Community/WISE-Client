@@ -60,7 +60,7 @@ export class DiscussionStudent extends ComponentStudent {
 
     if (this.ConfigService.isPreview()) {
       let componentStates = [];
-      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      if (this.component.hasConnectedComponent()) {
         for (const connectedComponent of this.componentContent.connectedComponents) {
           componentStates = componentStates.concat(
             this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
@@ -85,7 +85,7 @@ export class DiscussionStudent extends ComponentStudent {
       }
       this.setClassResponses(componentStates);
     } else {
-      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      if (this.component.hasConnectedComponent()) {
         const retrieveWorkFromTheseComponents = [];
         for (const connectedComponent of this.componentContent.connectedComponents) {
           retrieveWorkFromTheseComponents.push({
@@ -128,7 +128,7 @@ export class DiscussionStudent extends ComponentStudent {
   }
 
   isConnectedComponentShowWorkMode() {
-    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    if (this.component.hasConnectedComponent()) {
       let isShowWorkMode = true;
       for (const connectedComponent of this.componentContent.connectedComponents) {
         isShowWorkMode = isShowWorkMode && connectedComponent.type === 'showWork';
@@ -139,7 +139,7 @@ export class DiscussionStudent extends ComponentStudent {
   }
 
   isConnectedComponentImportWorkMode() {
-    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    if (this.component.hasConnectedComponent()) {
       let isImportWorkMode = true;
       for (const connectedComponent of this.componentContent.connectedComponents) {
         isImportWorkMode = isImportWorkMode && connectedComponent.type === 'importWork';
@@ -415,7 +415,7 @@ export class DiscussionStudent extends ComponentStudent {
 
   disableComponentIfNecessary() {
     super.disableComponentIfNecessary();
-    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    if (this.component.hasConnectedComponent()) {
       for (const connectedComponent of this.componentContent.connectedComponents) {
         if (connectedComponent.type === 'showWork') {
           this.isDisabled = true;

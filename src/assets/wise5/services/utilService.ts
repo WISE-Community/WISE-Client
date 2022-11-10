@@ -414,44 +414,6 @@ export class UtilService {
   }
 
   /**
-   * Whether there are any connected components
-   * @param componentContent the component content
-   * @return whether there are any connected components
-   */
-  hasConnectedComponent(componentContent) {
-    if (componentContent != null) {
-      const connectedComponents = componentContent.connectedComponents;
-      if (connectedComponents != null && connectedComponents.length > 0) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * @param componentContent The component content.
-   * @return Whether there are any connected components with a field we always
-   * want to read or write.
-   */
-  hasConnectedComponentAlwaysField(componentContent) {
-    if (componentContent != null) {
-      const connectedComponents = componentContent.connectedComponents;
-      if (connectedComponents != null && connectedComponents.length > 0) {
-        for (let connectedComponent of connectedComponents) {
-          if (connectedComponent.fields != null) {
-            for (let field of connectedComponent.fields) {
-              if (field.when == 'always') {
-                return true;
-              }
-            }
-          }
-        }
-      }
-    }
-    return false;
-  }
-
-  /**
    * Check if an array has any non null elements.
    * @param arrayToCheck An array which may have null and non null elements.
    * @return True if the array has at least one non null element.
@@ -558,15 +520,6 @@ export class UtilService {
    */
   hasShowWorkConnectedComponent(componentContent) {
     return this.hasXConnectedComponent(componentContent, 'showWork');
-  }
-
-  /**
-   * Determine whether the component has been authored to show classmate work.
-   * @param componentContent The component content.
-   * @return Whether to show classmate work in this component.
-   */
-  hasShowClassmateWorkConnectedComponent(componentContent) {
-    return this.hasXConnectedComponent(componentContent, 'showClassmateWork');
   }
 
   /**
