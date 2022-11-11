@@ -1280,7 +1280,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component.html</context>
           <context context-type="linenumber">7,9</context>
         </context-group>
-        <target state="needs-translation"> Enable Dynamic Prompt </target>
+        <target state="translated"> Habilitar mensaje dinámico </target>
       </trans-unit>
       <trans-unit id="02e27262e5d30648b82464b5bfac2ac0ea084a76" datatype="html">
         <source>Reference Component:</source>
@@ -13802,7 +13802,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">93,97</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if a term on either side of this operator evaluates to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if either idea 1 or 2 was found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found or idea 3 was found. </target>
+        <target state="translated"> Se evalúa como verdadero si un término en cualquiera de los lados de este operador se evalúa como verdadero.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> se evalúa como verdadero si se encontró la idea 1 o la 2.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> se evalúa como verdadero si se encontraron ambas ideas 1 y 2 o la idea 3. </target>
       </trans-unit>
       <trans-unit id="414f2fd4ea5c948c6ebbf8417e6afe371bea442d" datatype="html">
         <source> Evaluates to true if a term following this operator evaluates to false.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>!1<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was not found. </source>
@@ -18763,7 +18763,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-open-in-new-window/dialog-with-open-in-new-window.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Open In New Window</target>
+        <target state="translated">Abrir en ventana nueva</target>
       </trans-unit>
       <trans-unit id="e36b49b483ff4b8995838209aa628921c87a6bf3" datatype="html">
         <source>Importing Work...</source>
