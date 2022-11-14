@@ -11048,6 +11048,13 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2288335752546657530" datatype="html">
+        <source>Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/dataExportController.ts</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="24d2ea13091f19a68c4bc99ed75c4d38fd29ac49" datatype="html">
         <source> + Expand All </source>
         <context-group purpose="location">
