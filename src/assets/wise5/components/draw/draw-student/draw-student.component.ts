@@ -129,7 +129,7 @@ export class DrawStudent extends ComponentStudent {
   }
 
   loadConnectedComponentOrStarterDrawDataIfAvailable(): void {
-    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
     } else if (this.isStarterDrawDataAvailable()) {
       this.drawingTool.load(this.componentContent.starterDrawData);

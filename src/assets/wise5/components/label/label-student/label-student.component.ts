@@ -290,7 +290,7 @@ export class LabelStudent extends ComponentStudent {
       this.handleConnectedComponents();
     } else if (this.LabelService.componentStateHasStudentWork(componentState, componentContent)) {
       this.setStudentWork(componentState);
-    } else if (this.UtilService.hasConnectedComponent(componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
       if (this.componentContent.labels != null) {
         this.addLabelsToCanvas(componentContent.labels);
@@ -831,7 +831,7 @@ export class LabelStudent extends ComponentStudent {
       }
       this.unselectAll();
       this.addLabelsToCanvas(this.componentContent.labels);
-      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      if (this.component.hasConnectedComponent()) {
         this.handleConnectedComponents();
       }
       this.studentDataChanged();
