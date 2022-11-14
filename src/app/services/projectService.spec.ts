@@ -49,25 +49,19 @@ describe('ProjectService', () => {
   shouldGetTheComponentsByNodeId();
   shouldCheckOrderBetweenStepGroupAndStepGroup();
   shouldIdentifyBranchStartAndMergePoints();
-  shouldGetPaths();
   calculateNodeOrder();
   getGroupNodesIdToOrder();
   getTags();
   getAllPaths();
-  consolidatePaths();
   getParentGroup();
   getMaxScoreForComponent();
   getMaxScoreForNode();
   getPeerGrouping();
   // TODO: add test for service.getFlattenedProjectAsNodeIds()
-  // TODO: add test for service.consumePathsUntilNodeId()
   // TODO: add test for service.getFirstNodeIdInPathAtIndex()
   // TODO: add test for service.removeNodeIdFromPaths()
   // TODO: add test for service.removeNodeIdFromPath()
   // TODO: add test for service.areFirstNodeIdsInPathsTheSame()
-  // TODO: add test for service.arePathsEmpty()
-  // TODO: add test for service.getPathsThatContainNodeId()
-  // TODO: add test for service.getNonEmptyPathIndex()
   // TODO: add test for service.getBranches()
   // TODO: add test for service.findBranches()
   // TODO: add test for service.findNextCommonNodeId()
@@ -292,31 +286,6 @@ function expectFunctionCallToReturnValue(func, nodeIdArray, expectedValue) {
   });
 }
 
-function shouldGetPaths() {
-  const paths1 = [['node1', 'node2', 'node3', 'node4', 'node5']];
-  const paths2 = [
-    ['node1', 'node2', 'node3', 'node4', 'node5'],
-    ['node1', 'node2', 'node4', 'node3', 'node5']
-  ];
-  it('should get path when nodeId is found', () => {
-    expectPaths(paths1, 'node3', ['node1', 'node2']);
-    expectPaths(paths2, 'node3', ['node1', 'node2', 'node4']);
-  });
-  it('should get path when nodeId is found as first', () => {
-    expectPaths(paths1, 'node1', []);
-    expectPaths(paths2, 'node1', []);
-  });
-  it('should get path when nodeId is not found', () => {
-    expectPaths(paths1, 'node6', []);
-    expectPaths(paths2, 'node6', []);
-  });
-}
-
-function expectPaths(paths, nodeId, expectedPath) {
-  const subPath = service.consumePathsUntilNodeId(paths, nodeId);
-  expect(subPath).toEqual(expectedPath);
-}
-
 function calculateNodeOrder() {
   describe('calculateNodeOrder', () => {
     it('should calculate the node order', () => {
@@ -386,27 +355,6 @@ function getAllPaths() {
       const allPaths2 = service.getAllPaths(['group1', 'node1', 'node2'], 'node5', true);
       expect(allPaths2.length).toEqual(1);
       expect(allPaths2[0]).toEqual(['node5', 'node6', 'node7', 'node8']);
-    });
-  });
-}
-
-function consolidatePaths() {
-  describe('consolidatePaths()', () => {
-    it('should consolidate all the paths into a linear list of node ids', () => {
-      service.setProject(oneBranchTwoPathsProjectJSON);
-      const allPaths = service.getAllPaths([], service.getStartNodeId(), true);
-      const consolidatedPaths = service.consolidatePaths(allPaths);
-      expect(consolidatedPaths).toEqual([
-        'group1',
-        'node1',
-        'node2',
-        'node3',
-        'node4',
-        'node5',
-        'node6',
-        'node7',
-        'node8'
-      ]);
     });
   });
 }
