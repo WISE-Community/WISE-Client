@@ -10,4 +10,24 @@ export class Component {
     this.id = content.id;
     this.nodeId = nodeId;
   }
+
+  hasConnectedComponent(): boolean {
+    return this.content.connectedComponents?.length > 0;
+  }
+
+  hasConnectedComponentAlwaysField(): boolean {
+    const connectedComponents = this.content.connectedComponents;
+    if (connectedComponents != null && connectedComponents.length > 0) {
+      for (const connectedComponent of connectedComponents) {
+        if (connectedComponent.fields != null) {
+          for (const field of connectedComponent.fields) {
+            if (field.when == 'always') {
+              return true;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
 }

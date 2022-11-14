@@ -315,7 +315,7 @@ export class EmbeddedStudent extends ComponentStudent {
 
   sendLatestWorkToApplication(): void {
     let componentState = this.componentState;
-    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    if (this.component.hasConnectedComponent()) {
       componentState = this.handleConnectedComponents();
     }
     const message = {

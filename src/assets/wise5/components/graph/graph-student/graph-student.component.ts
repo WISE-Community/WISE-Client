@@ -188,7 +188,7 @@ export class GraphStudent extends ComponentStudent {
       this.newTrial();
     }
     if (
-      this.UtilService.hasConnectedComponentAlwaysField(this.componentContent) ||
+      this.component.hasConnectedComponentAlwaysField() ||
       this.hasConnectedComponentShowClassmateWork(this.componentContent)
     ) {
       this.handleConnectedComponents();
@@ -196,7 +196,7 @@ export class GraphStudent extends ComponentStudent {
       this.GraphService.componentStateHasStudentWork(componentState, this.componentContent)
     ) {
       this.setStudentWork(componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
     }
   }
@@ -1353,7 +1353,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   resetSeriesHelper() {
-    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    if (this.component.hasConnectedComponent()) {
       this.newTrial();
       const isReset = true;
       this.handleConnectedComponents(isReset);

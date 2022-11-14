@@ -87,7 +87,7 @@ export class MatchStudent extends ComponentStudent {
       this.MatchService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
       this.setStudentWork(this.componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
     }
     if (this.componentState != null && this.componentState.isSubmit) {
