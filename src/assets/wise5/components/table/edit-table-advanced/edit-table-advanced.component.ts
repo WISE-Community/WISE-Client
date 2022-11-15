@@ -4,6 +4,7 @@ import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { TableContent } from '../TableContent';
 
 @Component({
   selector: 'edit-table-advanced',
@@ -14,6 +15,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   MAX_ALLOWED_CELLS_IN_IMPORT = 2000;
 
   allowedConnectedComponentTypes = ['Embedded', 'Graph', 'Table'];
+  authoringComponentContent: TableContent;
   columnNames: string[] = [];
   isDataExplorerScatterPlotEnabled: boolean;
   isDataExplorerLineGraphEnabled: boolean;
@@ -23,12 +25,12 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   importTableMessage: string;
 
   constructor(
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected TeacherProjectService: TeacherProjectService,
-    private UtilService: UtilService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected teacherProjectService: TeacherProjectService,
+    private utilService: UtilService
   ) {
-    super(NodeService, NotebookService, TeacherProjectService);
+    super(nodeService, notebookService, teacherProjectService);
   }
 
   ngOnInit(): void {
@@ -191,7 +193,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
       const reader: FileReader = new FileReader();
       reader.onload = () => {
         const fileContent = reader.result as string;
-        const tableContent = this.UtilService.CSVToArray(fileContent);
+        const tableContent = this.utilService.CSVToArray(fileContent);
         const numCells = this.getNumCells(tableContent);
         if (numCells > this.MAX_ALLOWED_CELLS_IN_IMPORT) {
           this.setImportTableMessage(

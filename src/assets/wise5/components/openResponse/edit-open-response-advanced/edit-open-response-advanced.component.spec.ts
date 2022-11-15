@@ -24,6 +24,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { ComponentContent } from '../../../common/ComponentContent';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { OpenResponseContent } from '../OpenResponseContent';
 import { EditOpenResponseAdvancedComponent } from './edit-open-response-advanced.component';
 
 let component: EditOpenResponseAdvancedComponent;
@@ -313,7 +314,7 @@ function addCompletionCriteria() {
         completionCriteria: {
           criteria: []
         }
-      };
+      } as OpenResponseContent;
       component.addCompletionCriteria();
       expect(component.authoringComponentContent.completionCriteria.criteria.length).toEqual(1);
     });
@@ -350,7 +351,7 @@ function deleteCompletionCriteria() {
         completionCriteria: {
           criteria: [completionCriteria1, completionCriteria2, completionCriteria3]
         }
-      };
+      } as OpenResponseContent;
       spyOn(window, 'confirm').and.returnValue(true);
       component.deleteCompletionCriteria(1);
       expect(component.authoringComponentContent.completionCriteria.criteria.length).toEqual(2);

@@ -3,6 +3,7 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { GraphContent } from '../GraphContent';
 
 @Component({
   template: 'edit-graph-advanced',
@@ -19,13 +20,14 @@ export class EditGraphAdvancedComponent extends EditAdvancedComponentComponent {
     'Label',
     'Table'
   ];
+  authoringComponentContent: GraphContent;
 
   constructor(
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected TeacherProjectService: TeacherProjectService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected teacherProjectService: TeacherProjectService
   ) {
-    super(NodeService, NotebookService, TeacherProjectService);
+    super(nodeService, notebookService, teacherProjectService);
   }
 
   addXAxisPlotLine(): void {

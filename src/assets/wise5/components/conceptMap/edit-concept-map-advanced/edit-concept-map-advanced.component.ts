@@ -3,7 +3,7 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
+import { ConceptMapContent } from '../ConceptMapContent';
 
 @Component({
   selector: 'edit-concept-map-advanced',
@@ -11,15 +11,15 @@ import { UtilService } from '../../../services/utilService';
   styleUrls: ['edit-concept-map-advanced.component.scss']
 })
 export class EditConceptMapAdvancedComponent extends EditAdvancedComponentComponent {
+  authoringComponentContent: ConceptMapContent;
   allowedConnectedComponentTypes = ['ConceptMap', 'Draw', 'Embedded', 'Graph', 'Label', 'Table'];
 
   constructor(
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected projectService: TeacherProjectService
   ) {
-    super(NodeService, NotebookService, ProjectService);
+    super(nodeService, notebookService, projectService);
   }
 
   ruleTypeChanged(ruleIndex: number): void {

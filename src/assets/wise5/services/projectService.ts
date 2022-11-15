@@ -2056,10 +2056,6 @@ export class ProjectService {
     }
   }
 
-  componentExists(nodeId: string, componentId: string): boolean {
-    return this.getComponent(nodeId, componentId) != null;
-  }
-
   broadcastProjectChanged(): void {
     this.projectChangedSource.next();
   }

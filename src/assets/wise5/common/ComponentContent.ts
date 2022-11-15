@@ -8,5 +8,7 @@ export interface ComponentContent {
   maxScore?: number;
   prompt?: string;
   rubric?: string;
+  showSaveButton?: boolean;
+  showSubmitButton?: boolean;
   type: string;
 }
