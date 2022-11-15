@@ -5,8 +5,8 @@ import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
 import { StudentDataService } from './studentDataService';
 import { Injectable } from '@angular/core';
-import { UtilService } from './utilService';
 import { Observable, Subject } from 'rxjs';
+import { RandomKeyService } from './randomKeyService';
 
 @Injectable()
 export class AchievementService {
@@ -21,8 +21,7 @@ export class AchievementService {
     private http: HttpClient,
     private ConfigService: ConfigService,
     private ProjectService: ProjectService,
-    private StudentDataService: StudentDataService,
-    private UtilService: UtilService
+    private StudentDataService: StudentDataService
   ) {}
 
   debugOutput(str) {
@@ -450,29 +449,6 @@ export class AchievementService {
       achievementIdToAchievements[projectAchievement.id] = studentAchievements;
     }
     return achievementIdToAchievements;
-  }
-
-  /**
-   * Get an achievement id that isn't being used
-   * @return an achievement id that isn't being used
-   */
-  getAvailableAchievementId() {
-    let id = null;
-    const achievements = this.ProjectService.getAchievementItems();
-    while (id == null) {
-      id = this.UtilService.generateKey(10);
-      for (const achievement of achievements) {
-        if (achievement.id === id) {
-          /*
-           * the id is already being used so we need to find
-           * a different one
-           */
-          id = null;
-          break;
-        }
-      }
-    }
-    return id;
   }
 
   broadcastAchievementCompleted(args: any) {

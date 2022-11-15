@@ -11,6 +11,7 @@ import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { NotebookService } from './notebookService';
+import { RandomKeyService } from './randomKeyService';
 
 @Injectable()
 export class StudentDataService extends DataService {
@@ -857,7 +858,7 @@ export class StudentDataService extends DataService {
   prepareComponentStatesForSave(componentStates) {
     const studentWorkList = [];
     for (const componentState of componentStates) {
-      componentState.requestToken = this.UtilService.generateKey();
+      componentState.requestToken = RandomKeyService.generate();
       this.addComponentState(componentState);
       studentWorkList.push(componentState);
     }
@@ -866,14 +867,14 @@ export class StudentDataService extends DataService {
 
   prepareEventsForSave(events) {
     for (const event of events) {
-      event.requestToken = this.UtilService.generateKey();
+      event.requestToken = RandomKeyService.generate();
       this.addEvent(event);
     }
   }
 
   prepareAnnotationsForSave(annotations) {
     for (const annotation of annotations) {
-      annotation.requestToken = this.UtilService.generateKey();
+      annotation.requestToken = RandomKeyService.generate();
       if (annotation.id == null) {
         this.addAnnotation(annotation);
       }

@@ -19,6 +19,7 @@ import {
   moveItemInArray,
   transferArrayItem
 } from '@angular/cdk/drag-drop';
+import { RandomKeyService } from '../../../services/randomKeyService';
 
 @Component({
   selector: 'match-student',
@@ -733,7 +734,7 @@ export class MatchStudent extends ComponentStudent {
       .subscribe((result) => {
         if (result) {
           const newChoice = {
-            id: this.UtilService.generateKey(10),
+            id: RandomKeyService.generate(),
             value: result,
             type: 'choice',
             studentCreated: true

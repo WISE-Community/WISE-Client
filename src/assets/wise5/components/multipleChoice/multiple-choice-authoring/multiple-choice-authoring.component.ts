@@ -5,8 +5,8 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { RandomKeyService } from '../../../services/randomKeyService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 
 @Component({
   selector: 'multiple-choice-authoring',
@@ -22,8 +22,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
     this.subscriptions.add(
@@ -58,7 +57,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
 
   addChoice(): void {
     const newChoice = {
-      id: this.UtilService.generateKey(10),
+      id: RandomKeyService.generate(),
       text: '',
       feedback: '',
       isCorrect: false

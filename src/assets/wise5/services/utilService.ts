@@ -6,54 +6,7 @@ import '../lib/jquery/jquery-global';
 
 @Injectable()
 export class UtilService {
-  CHARS = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z',
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9'
-  ];
-
   constructor(@Inject(LOCALE_ID) private localeID: string) {}
-
-  generateKey(length = 10) {
-    let key = '';
-    for (let a = 0; a < length; a++) {
-      key += this.CHARS[Math.floor(Math.random() * (this.CHARS.length - 1))];
-    }
-    return key;
-  }
 
   convertStringToNumber(str) {
     if (str != null && str != '' && !isNaN(Number(str))) {

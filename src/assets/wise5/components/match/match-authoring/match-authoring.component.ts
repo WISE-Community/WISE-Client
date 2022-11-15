@@ -5,8 +5,8 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { RandomKeyService } from '../../../services/randomKeyService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 import { MatchService } from '../matchService';
 
 @Component({
@@ -23,8 +23,7 @@ export class MatchAuthoring extends ComponentAuthoring {
     private MatchService: MatchService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
     this.subscriptions.add(
@@ -43,7 +42,7 @@ export class MatchAuthoring extends ComponentAuthoring {
 
   addChoice(): void {
     const newChoice = {
-      id: this.UtilService.generateKey(10),
+      id: RandomKeyService.generate(),
       value: '',
       type: 'choice'
     };
@@ -54,7 +53,7 @@ export class MatchAuthoring extends ComponentAuthoring {
 
   addBucket(): void {
     const newBucket = {
-      id: this.UtilService.generateKey(10),
+      id: RandomKeyService.generate(),
       value: '',
       type: 'bucket'
     };

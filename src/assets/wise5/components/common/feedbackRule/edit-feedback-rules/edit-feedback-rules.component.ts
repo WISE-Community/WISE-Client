@@ -3,10 +3,10 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UtilService } from '../../../../services/utilService';
 import { FeedbackRule } from '../FeedbackRule';
 import { MatDialog } from '@angular/material/dialog';
 import { FeedbackRuleHelpComponent } from '../feedback-rule-help/feedback-rule-help.component';
+import { RandomKeyService } from '../../../../services/randomKeyService';
 
 @Component({
   selector: 'edit-feedback-rules',
@@ -19,11 +19,7 @@ export class EditFeedbackRulesComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
   @Input() version: number = 2;
 
-  constructor(
-    protected dialog: MatDialog,
-    protected projectService: TeacherProjectService,
-    protected utilService: UtilService
-  ) {}
+  constructor(protected dialog: MatDialog, protected projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -64,7 +60,7 @@ export class EditFeedbackRulesComponent implements OnInit {
     if (this.version === 1) {
       return { expression: '', feedback: '' };
     } else {
-      return { id: this.utilService.generateKey(10), expression: '', feedback: [''] };
+      return { id: RandomKeyService.generate(), expression: '', feedback: [''] };
     }
   }
 

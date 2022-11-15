@@ -9,6 +9,7 @@ import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { PathService } from './pathService';
+import { RandomKeyService } from './randomKeyService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -1012,7 +1013,7 @@ export class TeacherProjectService extends ProjectService {
 
   addTeacherRemovalConstraint(node: any, periodId: number) {
     const lockConstraint = {
-      id: this.utilService.generateKey(),
+      id: RandomKeyService.generate(),
       action: 'makeThisNodeNotVisitable',
       targetId: node.id,
       removalConditional: 'any',
@@ -2820,10 +2821,7 @@ export class TeacherProjectService extends ProjectService {
    * @return a component id that isn't already being used in the project
    */
   getUnusedComponentId(componentIdsToSkip = []) {
-    // we want to make an id with 10 characters
-    const idLength = 10;
-
-    let newComponentId = this.utilService.generateKey(idLength);
+    let newComponentId = RandomKeyService.generate();
 
     // check if the component id is already used in the project
     if (this.isComponentIdUsed(newComponentId)) {
@@ -2838,7 +2836,7 @@ export class TeacherProjectService extends ProjectService {
        * one that isn't already being used
        */
       while (!alreadyUsed) {
-        newComponentId = this.utilService.generateKey(idLength);
+        newComponentId = RandomKeyService.generate();
 
         // check if the id is already being used in the project
         alreadyUsed = this.isComponentIdUsed(newComponentId);
