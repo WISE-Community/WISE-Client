@@ -262,7 +262,7 @@ export class GraphStudent extends ComponentStudent {
   handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState) {
     const studentData = this.UtilService.makeCopyOfJSONObject(componentState.studentData);
     if (studentData.tableData.length > 0) {
-      studentData.tableData = this.getFilteredAndSortedTableData(
+      studentData.tableData = this.processTableData(
         studentData.tableData,
         studentData.sortOrder,
         studentData.selectedRowIndices
@@ -277,19 +277,19 @@ export class GraphStudent extends ComponentStudent {
     this.isDirty = true;
   }
 
-  private getFilteredAndSortedTableData(
+  private processTableData(
     tableData: any[],
     sortOrder: number[] = [],
     selectedRowIndices: number[] = []
   ): any[] {
     if (sortOrder && sortOrder.length > 0) {
-      return this.getSortedTableData(tableData, sortOrder, selectedRowIndices);
+      return this.getSortedAndFilteredTableData(tableData, sortOrder, selectedRowIndices);
     } else {
       return this.getFilteredTableData(tableData, selectedRowIndices);
     }
   }
 
-  private getSortedTableData(
+  private getSortedAndFilteredTableData(
     tableData: any[],
     sortOrder: number[],
     selectedRowIndices: number[]
