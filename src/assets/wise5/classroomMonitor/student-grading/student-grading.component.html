@@ -1,27 +1,25 @@
 <div class="view-content view-content--with-sidemenu">
   <div class="l-constrained grading">
-    <div class="md-subhead content-head" fxLayout="row wrap" fxLayoutAlign="center center"
+    <div class="content-head" fxLayout="row wrap" fxLayoutAlign="center center"
          fxLayoutAlign.gt-sm="start center">
       <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="100">
         <div class="accent-1" fxLayout="row" fxLayoutAlign="center center">
           <h2 class="content-head__item">
             {{ projectCompletion.completionPct }}%
-            <span class="md-subhead" i18n>Completion</span>
+            <span class="content-head-label" i18n>Completion</span>
           </h2>
           <h2 class="content-head__item">
             {{ totalScore }}/{{ maxScore }}
-            <span class="md-subhead" i18n>Total Score</span>
+            <span class="content-head-label" i18n>Total Score</span>
           </h2>
         </div>
       </div>
     </div>
     <mat-list class="user-list">
-      <mat-list-item class="md-whiteframe-1dp md-with-secondary list-item list-item--actions"
+      <mat-list-item class="mat-elevation-z1 list-item list-item--actions"
           fxLayout="row wrap">
         <span fxFlex fxHide.xs fxHide.sm></span>
-        <div class="md-secondary-container" fxFlex.xs="100" fxFlex.sm="100"
-            fxLayout="row"
-            fxLayoutAlign="center center">
+        <span fxFlex.xs="100" fxFlex.sm="100" fxLayout="row" fxLayoutAlign="center center">
           <button mat-button
               color="primary"
               aria-label="Expand all"
@@ -40,11 +38,12 @@
               i18n>
             - Collapse All
           </button>
-        </div>
+        </span>
       </mat-list-item>
       <mat-list-item class="table--list__thead table--list__thead__th md-whiteframe-1dp">
-        <div class="mat-list-item-text table--list__thead__tr" fxLayout="row" fxFlex>
-          <button class="table--list__thead__link"
+        <div class="mat-list-item-text table--list__thead__tr dark-theme" fxLayout="row" fxFlex>
+          <button mat-button
+              class="table--list__thead__link"
               fxFlex="50"
               fxLayout="row"
               fxLayoutAlign="start center"
@@ -58,7 +57,8 @@
               arrow_drop_up
             </mat-icon>
           </button>
-          <button class="table--list__thead__link"
+          <button mat-button
+              class="table--list__thead__link"
               fxFlex="30"
               fxLayout="row"
               fxLayoutAlign="center center"
@@ -72,7 +72,8 @@
               arrow_drop_up
             </mat-icon>
           </button>
-          <button class="table--list__thead__link"
+          <button mat-button
+              class="table--list__thead__link"
               fxFlex="20"
               fxLayout="row"
               fxLayoutAlign="center center"

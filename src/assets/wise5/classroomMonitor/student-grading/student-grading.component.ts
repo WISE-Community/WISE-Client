@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
 import { AnnotationService } from '../../services/annotationService';
@@ -12,8 +12,7 @@ import { UtilService } from '../../services/utilService';
 @Component({
   selector: 'app-student-grading',
   templateUrl: './student-grading.component.html',
-  styleUrls: ['./student-grading.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./student-grading.component.scss']
 })
 export class StudentGradingComponent implements OnInit {
   isExpandAll: boolean;
