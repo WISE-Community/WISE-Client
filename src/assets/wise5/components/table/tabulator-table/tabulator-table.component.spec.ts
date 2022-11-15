@@ -1,8 +1,9 @@
-import { SimpleChange } from '@angular/core';
+import { NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabulatorTableComponent } from './tabulator-table.component';
 import { Tabulator } from 'tabulator-tables';
 import { TabulatorColumn } from '../TabulatorData';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: TabulatorTableComponent;
 let fixture: ComponentFixture<TabulatorTableComponent>;
@@ -23,13 +24,18 @@ const tabData = [
   { 0: '12', 1: '', 2: '' }
 ];
 const tabOptions = {
-  layout: "fitDataTable",
-  maxHeight: "500px",
-  reactiveData: true,
-}
+  layout: 'fitDataTable',
+  maxHeight: '500px',
+  reactiveData: true
+};
 
 describe('TabulatorTableComponent', () => {
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [StudentTeacherCommonServicesModule],
+      declarations: [TabulatorTableComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    });
     fixture = TestBed.createComponent(TabulatorTableComponent);
     component = fixture.componentInstance;
     component.tabColumns = tabColumns;

@@ -22,6 +22,7 @@ import {
   SelectRowModule,
   SortModule
 } from 'tabulator-tables';
+import { UtilService } from '../../../services/utilService';
 import { TabulatorColumn } from '../TabulatorData';
 
 @Component({
@@ -38,9 +39,11 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   @Input() tabColumns: TabulatorColumn[]; // see http://tabulator.info/docs/5.3/columns
   @Input() tabData: any[]; // see http://tabulator.info/docs/5.3/data
   @Input() tabOptions: any; // see http://tabulator.info/docs/5.3/options
+  @Input() tabSorters: any; // see https://tabulator.info/docs/5.4/sort#intial
   @Output() cellChanged = new EventEmitter<Tabulator.CellComponent>();
   @Output() ready = new EventEmitter<void>();
   @Output() rowSelectionChanged = new EventEmitter<Tabulator.RowComponent>();
+  @Output() rowSortChanged = new EventEmitter<{ sortOrder: number[]; tabSorters: [] }>();
   @ViewChild('table', { static: false }) tableContainer: ElementRef;
 
   table: Tabulator;
@@ -48,7 +51,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   subscriptions: Subscription = new Subscription();
   viewInit$ = new ReplaySubject();
 
-  constructor() {
+  constructor(protected UtilService: UtilService) {
     Tabulator.registerModule([
       EditModule,
       FormatModule,
@@ -65,6 +68,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     this.tabOptions.columns = this.setupColumns(this.tabColumns);
     this.initializeRowSelection();
     this.tabOptions.data = this.tabData;
+    this.tabOptions.initialSort = this.UtilService.makeCopyOfJSONObject(this.tabSorters);
     this.table = new Tabulator(this.tableEl, this.tabOptions);
     this.table.on('cellEdited', (cell) => {
       this.cellChanged.emit(cell);
@@ -73,6 +77,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
       if (this.enableRowSelection) {
         this.setupRowSelection();
       }
+      this.setupSorting();
       this.ready.emit();
     });
     this.tableContainer.nativeElement.appendChild(this.tableEl);
@@ -153,5 +158,30 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     this.table.on('rowSelectionChanged', (data, rows) => {
       this.rowSelectionChanged.emit(rows);
     });
+  }
+
+  private setupSorting(): void {
+    this.table.on('dataSorted', (sorters, rows) => {
+      const prevRowIndices: number[] = [];
+      for (const row of rows) {
+        prevRowIndices.push(row.getIndex());
+      }
+      this.rowSortChanged.emit({
+        sortOrder: prevRowIndices,
+        tabSorters: this.sortersToJson(sorters)
+      });
+    });
+  }
+
+  private sortersToJson(sorters: any[]): any {
+    const sortersJson = [];
+    for (const sorter of sorters) {
+      sortersJson.push({
+        column: sorter.field,
+        dir: sorter.dir,
+        params: sorter.params
+      });
+    }
+    return sortersJson;
   }
 }

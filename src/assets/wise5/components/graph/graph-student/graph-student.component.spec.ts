@@ -449,6 +449,51 @@ function handleTableConnectedComponentStudentDataChanged() {
         [20, 40]
       ]);
     });
+    it('should handle table connected component student data changed with sorted rows', () => {
+      const connectedComponent = createTableConnectedComponent();
+      const dataRows: any[] = [
+        [0, 0],
+        [10, 20],
+        [20, 40],
+        [30, 80]
+      ];
+      const tableDataRows: any[] = [['Time', 'Position']].concat(dataRows);
+      const componentState = {
+        studentData: {
+          tableData: createTable(tableDataRows),
+          sortOrder: [2, 1, 0, 3]
+        }
+      };
+      component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+      expect(component.activeTrial.series[0].data).toEqual([
+        [20, 40],
+        [10, 20],
+        [0, 0],
+        [30, 80]
+      ]);
+    });
+    it('should handle table connected component student data changed with selected and sorted rows', () => {
+      const connectedComponent = createTableConnectedComponent();
+      const dataRows: any[] = [
+        [0, 0],
+        [10, 20],
+        [20, 40],
+        [30, 80]
+      ];
+      const tableDataRows: any[] = [['Time', 'Position']].concat(dataRows);
+      const componentState = {
+        studentData: {
+          tableData: createTable(tableDataRows),
+          selectedRowIndices: [0, 2],
+          sortOrder: [2, 1, 0, 3]
+        }
+      };
+      component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+      expect(component.activeTrial.series[0].data).toEqual([
+        [20, 40],
+        [0, 0]
+      ]);
+    });
     it('should handle connected data explorer student data changed', () => {
       const connectedComponent = createTableConnectedComponent();
       const studentData = createDataExplorerStudentData();

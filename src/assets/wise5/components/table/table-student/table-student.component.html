@@ -37,8 +37,10 @@
     [tabColumns]="tabulatorData.columns"
     [tabData]="tabulatorData.data"
     [tabOptions]="tabulatorData.options"
+    [tabSorters]="tabulatorSorters"
     (cellChanged)="tabulatorCellChanged($event)"
     (rowSelectionChanged)="tabulatorRowSelectionChanged($event)"
+    (rowSortChanged)="tabulatorRowSortChanged($event)"
     (ready)="tabulatorRendered()"></tabulator-table>
 <div *ngIf="isDataExplorerEnabled">
   <br/>
