@@ -4,7 +4,7 @@ import { CRaterService } from '../../../services/cRaterService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
+import { OpenResponseContent } from '../OpenResponseContent';
 
 @Component({
   selector: 'edit-open-response-advanced',
@@ -13,6 +13,7 @@ import { UtilService } from '../../../services/utilService';
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['OpenResponse'];
+  authoringComponentContent: OpenResponseContent;
   cRaterItemIdIsValid: boolean = null;
   initialFeedbackRules = [
     {
@@ -26,13 +27,12 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   useCustomCompletionCriteria: boolean = false;
 
   constructor(
-    protected CRaterService: CRaterService,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected TeacherProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected cRaterService: CRaterService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected teacherProjectService: TeacherProjectService
   ) {
-    super(NodeService, NotebookService, TeacherProjectService);
+    super(nodeService, notebookService, teacherProjectService);
   }
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     if (this.authoringComponentContent.completionCriteria != null) {
       this.useCustomCompletionCriteria = true;
     }
-    this.nodeIds = this.TeacherProjectService.getFlattenedProjectAsNodeIds();
+    this.nodeIds = this.teacherProjectService.getFlattenedProjectAsNodeIds();
   }
 
   enableCRaterClicked(): void {
@@ -105,7 +105,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   verifyCRaterItemId(itemId: string): void {
     this.cRaterItemIdIsValid = null;
     this.isVerifyingCRaterItemId = true;
-    this.CRaterService.makeCRaterVerifyRequest(itemId).then((response: any) => {
+    this.cRaterService.makeCRaterVerifyRequest(itemId).then((response: any) => {
       this.isVerifyingCRaterItemId = false;
       this.cRaterItemIdIsValid = response.available;
     });
@@ -265,15 +265,15 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   }
 
   getComponents(nodeId: string): any[] {
-    return this.TeacherProjectService.getComponents(nodeId);
+    return this.teacherProjectService.getComponents(nodeId);
   }
 
   isApplicationNode(nodeId: string): boolean {
-    return this.TeacherProjectService.isApplicationNode(nodeId);
+    return this.teacherProjectService.isApplicationNode(nodeId);
   }
 
   getNodePositionAndTitle(nodeId: string): string {
-    return this.TeacherProjectService.getNodePositionAndTitle(nodeId);
+    return this.teacherProjectService.getNodePositionAndTitle(nodeId);
   }
 
   setFeedbackEnabled(feedbackEnabled: boolean): void {
