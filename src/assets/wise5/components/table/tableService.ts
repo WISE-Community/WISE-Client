@@ -12,7 +12,7 @@ export class TableService extends ComponentService {
     private StudentAssetService: StudentAssetService,
     protected UtilService: UtilService
   ) {
-    super(UtilService);
+    super();
   }
 
   getComponentTypeLabel(): string {

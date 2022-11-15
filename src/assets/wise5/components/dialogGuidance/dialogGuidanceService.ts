@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
-import { UtilService } from '../../services/utilService';
 import { ComponentService } from '../componentService';
 
 @Injectable()
 export class DialogGuidanceService extends ComponentService {
-  constructor(
-    protected computerAvatarService: ComputerAvatarService,
-    protected utilService: UtilService
-  ) {
-    super(utilService);
+  constructor(protected computerAvatarService: ComputerAvatarService) {
+    super();
   }
 
   getComponentTypeLabel(): string {

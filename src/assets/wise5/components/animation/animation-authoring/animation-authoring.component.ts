@@ -7,8 +7,8 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { RandomKeyService } from '../../../services/randomKeyService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 
 @Component({
   selector: 'animation-authoring',
@@ -25,8 +25,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
     this.stepNodesDetails = this.ProjectService.getStepNodesDetailsInOrder();
@@ -42,7 +41,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
       this.authoringComponentContent.objects = [];
     }
     const newObject = {
-      id: this.UtilService.generateKey(10),
+      id: RandomKeyService.generate(),
       type: 'image'
     };
     this.authoringComponentContent.objects.push(newObject);

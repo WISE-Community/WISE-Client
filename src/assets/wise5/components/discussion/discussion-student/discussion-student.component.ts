@@ -5,6 +5,7 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
+import { RandomKeyService } from '../../../services/randomKeyService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
@@ -374,7 +375,7 @@ export class DiscussionStudent extends ComponentStudent {
       (this.ConfigService.isPreview() && !this.componentStateIdReplyingTo) ||
       this.mode === 'authoring'
     ) {
-      componentState.id = this.UtilService.generateKey();
+      componentState.id = RandomKeyService.generate();
     }
     if (this.isSubmit) {
       componentState.studentData.isSubmit = this.isSubmit;

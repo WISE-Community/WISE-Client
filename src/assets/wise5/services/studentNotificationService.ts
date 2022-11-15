@@ -8,7 +8,6 @@ import { Notification } from '../../../app/domain/notification';
 import { NotificationService } from './notificationService';
 import { ProjectService } from './projectService';
 import { StompService } from './stompService';
-import { UtilService } from './utilService';
 import { StudentDataService } from './studentDataService';
 
 @Injectable()
@@ -20,10 +19,9 @@ export class StudentNotificationService extends NotificationService {
     protected configService: ConfigService,
     protected projectService: ProjectService,
     private stompService: StompService,
-    private studentDataService: StudentDataService,
-    protected utilService: UtilService
+    private studentDataService: StudentDataService
   ) {
-    super(annotationService, dialog, http, configService, projectService, utilService);
+    super(annotationService, dialog, http, configService, projectService);
   }
 
   initialize(): void {

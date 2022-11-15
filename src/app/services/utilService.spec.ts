@@ -11,7 +11,6 @@ describe('UtilService', () => {
     service = TestBed.get(UtilService);
   });
 
-  generateKeyTests();
   convertStringToNumberTests();
   makeCopyOfJSONObjectTests();
   arrayHasNonNullElementTests();
@@ -22,32 +21,6 @@ describe('UtilService', () => {
   removeHTMLTags();
   replaceImgTagWithFileName();
 });
-
-function generateKeyTests() {
-  describe('generateKey()', () => {
-    it('should return random keys of length 10 by default', () => {
-      const generatedKey1 = service.generateKey();
-      const generatedKey2 = service.generateKey();
-      expect(generatedKey1.length).toEqual(10);
-      expect(generatedKey2.length).toEqual(10);
-      expect(generatedKey1).not.toEqual(generatedKey2);
-    });
-
-    it('should return random keys of specified length', () => {
-      expect(service.generateKey(5).length).toEqual(5);
-      expect(service.generateKey(23).length).toEqual(23);
-    });
-
-    it('should produce 100 unique random strings', () => {
-      const generatedKeysSoFar = [];
-      for (let i = 0; i < 100; i++) {
-        const generatedKey = service.generateKey();
-        expect(generatedKeysSoFar.includes(generatedKey)).toEqual(false);
-        generatedKeysSoFar.push(generatedKey);
-      }
-    });
-  });
-}
 
 function convertStringToNumberTests() {
   describe('convertStringToNumber()', () => {
