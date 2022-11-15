@@ -22,6 +22,7 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
   columnNames: string[] = [];
   noneText: string = $localize`(None)`;
   tabulatorData: TabulatorData;
+  tabulatorSorters: any[];
 
   constructor(
     protected nodeService: NodeService,
@@ -36,6 +37,7 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
     const studentData = this.componentState.studentData;
     this.tableData = studentData.tableData;
     this.selectedRowIndices = studentData.selectedRowIndices ? studentData.selectedRowIndices : [];
+    this.tabulatorSorters = studentData.tabulatorSorters ? studentData.tabulatorSorters : [];
     if (studentData.isDataExplorerEnabled) {
       this.dataExplorerGraphType = studentData.dataExplorerGraphType;
       this.dataExplorerSeries = studentData.dataExplorerSeries;

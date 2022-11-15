@@ -261,10 +261,12 @@ export class GraphStudent extends ComponentStudent {
 
   handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState) {
     const studentData = this.UtilService.makeCopyOfJSONObject(componentState.studentData);
-    const selectedRowIndices = studentData.selectedRowIndices;
-    const tableData = studentData.tableData;
-    if (tableData.length > 0 && selectedRowIndices != null && selectedRowIndices.length > 0) {
-      studentData.tableData = this.getVisibleRows(studentData.tableData, selectedRowIndices);
+    if (studentData.tableData.length > 0) {
+      studentData.tableData = this.processTableData(
+        studentData.tableData,
+        studentData.sortOrder,
+        studentData.selectedRowIndices
+      );
     }
     if (studentData.isDataExplorerEnabled) {
       this.handleDataExplorer(studentData);
@@ -275,14 +277,46 @@ export class GraphStudent extends ComponentStudent {
     this.isDirty = true;
   }
 
-  private getVisibleRows(tableData: any, selectedRowIndices: number[]): any[] {
-    const visibleRows = [];
-    visibleRows.push(tableData[0]);
-    tableData.forEach((row, index) => {
-      if (selectedRowIndices.includes(index - 1)) {
-        visibleRows.push(row);
+  private processTableData(
+    tableData: any[],
+    sortOrder: number[] = [],
+    selectedRowIndices: number[] = []
+  ): any[] {
+    if (sortOrder && sortOrder.length > 0) {
+      return this.getSortedAndFilteredTableData(tableData, sortOrder, selectedRowIndices);
+    } else {
+      return this.getFilteredTableData(tableData, selectedRowIndices);
+    }
+  }
+
+  private getSortedAndFilteredTableData(
+    tableData: any[],
+    sortOrder: number[],
+    selectedRowIndices: number[]
+  ): any[] {
+    const sortedTableData = [tableData[0]];
+    sortOrder.forEach((rowNumber, index) => {
+      if (this.isRowSelected(rowNumber, selectedRowIndices)) {
+        sortedTableData.push(tableData[rowNumber + 1]);
       }
     });
+    return sortedTableData;
+  }
+
+  private isRowSelected(rowNumber: number, selectedRowIndices: number[]): boolean {
+    return selectedRowIndices.length > 0 ? selectedRowIndices.includes(rowNumber) : true;
+  }
+
+  private getFilteredTableData(tableData: any[], selectedRowIndices: number[]): any[] {
+    let visibleRows = tableData;
+    if (selectedRowIndices && selectedRowIndices.length > 0) {
+      visibleRows = [tableData[0]];
+      tableData.forEach((row, index) => {
+        if (this.isRowSelected(index - 1, selectedRowIndices)) {
+          visibleRows.push(row);
+        }
+      });
+    }
     return visibleRows;
   }
 
