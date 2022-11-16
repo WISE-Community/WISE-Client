@@ -49,13 +49,13 @@ export class TableAuthoring extends ComponentAuthoring {
 
   ngOnInit() {
     super.ngOnInit();
-    this.columnCellSizes = this.parseColumnCellSizes(this.authoringComponentContent);
-    this.frozenColumns = this.parseFrozenColumns(this.authoringComponentContent);
+    this.columnCellSizes = this.parseColumnCellSizes(this.componentContent);
+    this.frozenColumns = this.parseFrozenColumns(this.componentContent);
   }
 
   tableNumRowsChanged(): void {
     const oldValue = this.getNumRowsInTableData();
-    const newValue = this.authoringComponentContent.numRows;
+    const newValue = this.componentContent.numRows;
     if (newValue < oldValue) {
       if (this.areRowsAfterEmpty(newValue)) {
         this.tableSizeChanged();
@@ -63,7 +63,7 @@ export class TableAuthoring extends ComponentAuthoring {
         if (confirm($localize`Are you sure you want to decrease the number of rows?`)) {
           this.tableSizeChanged();
         } else {
-          this.authoringComponentContent.numRows = oldValue;
+          this.componentContent.numRows = oldValue;
         }
       }
     } else {
@@ -82,7 +82,7 @@ export class TableAuthoring extends ComponentAuthoring {
   }
 
   isRowEmpty(rowIndex: number): boolean {
-    const tableData = this.authoringComponentContent.tableData;
+    const tableData = this.componentContent.tableData;
     for (const cell of tableData[rowIndex]) {
       if (!this.isEmpty(cell.text)) {
         return false;
@@ -93,7 +93,7 @@ export class TableAuthoring extends ComponentAuthoring {
 
   tableNumColumnsChanged(): void {
     const oldValue = this.getNumColumnsInTableData();
-    const newValue = this.authoringComponentContent.numColumns;
+    const newValue = this.componentContent.numColumns;
     if (newValue < oldValue) {
       if (this.areColumnsAfterEmpty(newValue)) {
         this.tableSizeChanged();
@@ -101,7 +101,7 @@ export class TableAuthoring extends ComponentAuthoring {
         if (confirm($localize`Are you sure you want to decrease the number of columns?`)) {
           this.tableSizeChanged();
         } else {
-          this.authoringComponentContent.numColumns = oldValue;
+          this.componentContent.numColumns = oldValue;
         }
       }
     } else {
@@ -120,7 +120,7 @@ export class TableAuthoring extends ComponentAuthoring {
   }
 
   isColumnEmpty(columnIndex: number): boolean {
-    for (const row of this.authoringComponentContent.tableData) {
+    for (const row of this.componentContent.tableData) {
       const cell = row[columnIndex];
       if (!this.isEmpty(cell.text)) {
         return false;
@@ -134,9 +134,9 @@ export class TableAuthoring extends ComponentAuthoring {
   }
 
   tableSizeChanged(): void {
-    this.authoringComponentContent.tableData = this.getUpdatedTable(
-      this.authoringComponentContent.numRows,
-      this.authoringComponentContent.numColumns
+    this.componentContent.tableData = this.getUpdatedTable(
+      this.componentContent.numRows,
+      this.componentContent.numColumns
     );
     this.componentChanged();
   }
@@ -171,7 +171,7 @@ export class TableAuthoring extends ComponentAuthoring {
    */
   getCellObjectFromTableData(x: number, y: number): any {
     let cellObject = null;
-    const tableData = this.authoringComponentContent.tableData;
+    const tableData = this.componentContent.tableData;
     if (tableData != null) {
       const row = tableData[y];
       if (row != null) {
@@ -190,9 +190,9 @@ export class TableAuthoring extends ComponentAuthoring {
   }
 
   insertRow(rowIndex: number): void {
-    const tableData = this.authoringComponentContent.tableData;
+    const tableData = this.componentContent.tableData;
     const newRow = [];
-    const numColumns = this.authoringComponentContent.numColumns;
+    const numColumns = this.componentContent.numColumns;
     for (let c = 0; c < numColumns; c++) {
       const newCell = this.createEmptyCell();
       const cellSize = this.columnCellSizes[c];
@@ -202,46 +202,46 @@ export class TableAuthoring extends ComponentAuthoring {
       newRow.push(newCell);
     }
     tableData.splice(rowIndex, 0, newRow);
-    this.authoringComponentContent.numRows++;
+    this.componentContent.numRows++;
     this.componentChanged();
   }
 
   deleteRow(rowIndex: number): void {
     if (confirm($localize`Are you sure you want to delete this row?`)) {
-      const tableData = this.authoringComponentContent.tableData;
+      const tableData = this.componentContent.tableData;
       if (tableData != null) {
         tableData.splice(rowIndex, 1);
-        this.authoringComponentContent.numRows--;
+        this.componentContent.numRows--;
       }
       this.componentChanged();
     }
   }
 
   insertColumn(columnIndex: number): void {
-    const tableData = this.authoringComponentContent.tableData;
-    const numRows = this.authoringComponentContent.numRows;
+    const tableData = this.componentContent.tableData;
+    const numRows = this.componentContent.numRows;
     for (let r = 0; r < numRows; r++) {
       const row = tableData[r];
       const newCell = this.createEmptyCell();
       row.splice(columnIndex, 0, newCell);
     }
-    this.authoringComponentContent.numColumns++;
-    this.parseColumnCellSizes(this.authoringComponentContent);
-    this.parseFrozenColumns(this.authoringComponentContent);
+    this.componentContent.numColumns++;
+    this.parseColumnCellSizes(this.componentContent);
+    this.parseFrozenColumns(this.componentContent);
     this.componentChanged();
   }
 
   deleteColumn(columnIndex: number): void {
     if (confirm($localize`Are you sure you want to delete this column?`)) {
-      const tableData = this.authoringComponentContent.tableData;
-      const numRows = this.authoringComponentContent.numRows;
+      const tableData = this.componentContent.tableData;
+      const numRows = this.componentContent.numRows;
       for (let r = 0; r < numRows; r++) {
         const row = tableData[r];
         row.splice(columnIndex, 1);
       }
-      this.authoringComponentContent.numColumns--;
-      this.parseColumnCellSizes(this.authoringComponentContent);
-      this.parseFrozenColumns(this.authoringComponentContent);
+      this.componentContent.numColumns--;
+      this.parseColumnCellSizes(this.componentContent);
+      this.parseFrozenColumns(this.componentContent);
       this.componentChanged();
     }
   }
@@ -254,7 +254,7 @@ export class TableAuthoring extends ComponentAuthoring {
    * @return {number} The number of rows in the table data.
    */
   getNumRowsInTableData(): number {
-    return this.authoringComponentContent.tableData.length;
+    return this.componentContent.tableData.length;
   }
 
   /**
@@ -265,7 +265,7 @@ export class TableAuthoring extends ComponentAuthoring {
    * @return {number} The number of columns in the table data.
    */
   getNumColumnsInTableData(): number {
-    const tableData = this.authoringComponentContent.tableData;
+    const tableData = this.componentContent.tableData;
     if (tableData.length > 0) {
       return tableData[0].length;
     }
@@ -283,7 +283,7 @@ export class TableAuthoring extends ComponentAuthoring {
   }
 
   setAllCellsIsEditable(isEditable: boolean): void {
-    for (const row of this.authoringComponentContent.tableData) {
+    for (const row of this.componentContent.tableData) {
       for (const cell of row) {
         cell.editable = isEditable;
       }
@@ -317,7 +317,7 @@ export class TableAuthoring extends ComponentAuthoring {
   }
 
   private setColumnCellSize(column: number, size: number): void {
-    const tableData = this.authoringComponentContent.tableData;
+    const tableData = this.componentContent.tableData;
     const firstRow = tableData[0];
     if (firstRow != null) {
       const cell = firstRow[column];
@@ -343,7 +343,7 @@ export class TableAuthoring extends ComponentAuthoring {
 
   frozenColumnsChanged(index: number): void {
     let frozen = this.frozenColumns[index];
-    const firstRow = this.authoringComponentContent.tableData[0];
+    const firstRow = this.componentContent.tableData[0];
     if (firstRow != null) {
       const cell = firstRow[index];
       if (cell != null) {
@@ -355,7 +355,7 @@ export class TableAuthoring extends ComponentAuthoring {
   }
 
   private isfrozenColumnsLimitReached(): boolean {
-    const firstRow = this.authoringComponentContent.tableData[0];
+    const firstRow = this.componentContent.tableData[0];
     if (firstRow == null) {
       return false;
     }

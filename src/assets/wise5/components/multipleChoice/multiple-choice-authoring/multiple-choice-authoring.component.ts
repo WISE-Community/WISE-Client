@@ -47,7 +47,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
   }
 
   componentHasFeedback(): boolean {
-    for (const choice of this.authoringComponentContent.choices) {
+    for (const choice of this.componentContent.choices) {
       if (choice.isCorrect || (choice.feedback != null && choice.feedback !== '')) {
         return true;
       }
@@ -62,13 +62,13 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
       feedback: '',
       isCorrect: false
     };
-    this.authoringComponentContent.choices.push(newChoice);
+    this.componentContent.choices.push(newChoice);
     this.componentChanged();
   }
 
   deleteChoice(choiceId: string): void {
     if (confirm($localize`Are you sure you want to delete this choice?`)) {
-      const choices = this.authoringComponentContent.choices;
+      const choices = this.componentContent.choices;
       for (let c = 0; c < choices.length; c++) {
         if (choices[c].id === choiceId) {
           choices.splice(c, 1);
@@ -80,7 +80,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
   }
 
   moveChoiceUp(choiceId: string): void {
-    const choices = this.authoringComponentContent.choices;
+    const choices = this.componentContent.choices;
     for (let c = 0; c < choices.length; c++) {
       const choice = choices[c];
       if (choice.id === choiceId) {
@@ -95,7 +95,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
   }
 
   moveChoiceDown(choiceId: string): void {
-    const choices = this.authoringComponentContent.choices;
+    const choices = this.componentContent.choices;
     for (let c = 0; c < choices.length; c++) {
       const choice = choices[c];
       if (choice.id === choiceId) {

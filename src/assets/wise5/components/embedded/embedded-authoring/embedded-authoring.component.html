@@ -2,7 +2,7 @@
   <mat-form-field class="model-file">
     <mat-label i18n>Model File Name</mat-label>
     <input matInput
-        [(ngModel)]="authoringComponentContent.url"
+        [(ngModel)]="componentContent.url"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
   <button mat-raised-button
@@ -16,8 +16,8 @@
   </button>
 </div>
 <author-url-parameters
-    [url]="authoringComponentContent.url"
-    [parameters]="authoringComponentContent.urlParameters"
+    [url]="componentContent.url"
+    [parameters]="componentContent.urlParameters"
     (generatedUrl)="updateUrl($event)">
 </author-url-parameters>
 <div fxLayout="row wrap" fxLayoutAlign="start center">
@@ -25,17 +25,17 @@
     <mat-label i18n>Width (px) (optional)</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.width"
+        [(ngModel)]="componentContent.width"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="dimension">
     <mat-label i18n>Height (px)</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.height"
+        [(ngModel)]="componentContent.height"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
-  <mat-checkbox [(ngModel)]="authoringComponentContent.hasWork"
+  <mat-checkbox [(ngModel)]="componentContent.hasWork"
       (ngModelChange)="inputChange.next($event)"
       color="primary"
       i18n>

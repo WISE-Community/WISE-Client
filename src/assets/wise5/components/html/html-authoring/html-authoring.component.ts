@@ -25,11 +25,11 @@ export class HtmlAuthoring extends ComponentAuthoring {
 
   ngOnInit() {
     super.ngOnInit();
-    this.html = this.UtilService.replaceWISELinks(this.authoringComponentContent.html);
+    this.html = this.UtilService.replaceWISELinks(this.componentContent.html);
   }
 
   htmlChanged(): void {
-    this.authoringComponentContent.html = this.UtilService.insertWISELinks(
+    this.componentContent.html = this.UtilService.insertWISELinks(
       this.ConfigService.removeAbsoluteAssetPaths(this.html)
     );
     this.componentChanged();

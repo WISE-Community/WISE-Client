@@ -83,7 +83,7 @@ describe('PeerChatAuthoringComponent', () => {
       JSON.parse(JSON.stringify(componentContent))
     );
     spyOn(component, 'componentChanged').and.callFake(() => {});
-    component.authoringComponentContent = JSON.parse(JSON.stringify(componentContent));
+    component.componentContent = JSON.parse(JSON.stringify(componentContent));
     fixture.detectChanges();
   });
 });

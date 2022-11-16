@@ -9,5 +9,5 @@ import { MatchContent } from '../MatchContent';
 })
 export class EditMatchAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['Match'];
-  authoringComponentContent: MatchContent;
+  componentContent: MatchContent;
 }

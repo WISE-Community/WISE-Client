@@ -2,7 +2,7 @@
   <div>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.showAutoScore"
+        [(ngModel)]="componentContent.showAutoScore"
         (ngModelChange)="componentChanged()"
         i18n>
       Show Auto Score
@@ -11,7 +11,7 @@
   <div>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.showAutoFeedback"
+        [(ngModel)]="componentContent.showAutoFeedback"
         (ngModelChange)="componentChanged()"
         i18n>
       Show Auto Feedback
@@ -22,7 +22,7 @@
     <button mat-raised-button color="primary" (click)="addRule()" i18n>
       <mat-icon>add</mat-icon></button>
   </div>
-  <div *ngFor="let rule of authoringComponentContent.rules; let ruleIndex = index"
+  <div *ngFor="let rule of componentContent.rules; let ruleIndex = index"
       fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px"
       class="rule-container">
     <mat-form-field>
@@ -62,7 +62,7 @@
           (ngModelChange)="componentChanged()">
         <mat-option></mat-option>
         <mat-option value="any" i18n>Any</mat-option>
-        <mat-option *ngFor="let node of authoringComponentContent.nodes"
+        <mat-option *ngFor="let node of componentContent.nodes"
             [value]="node.label">
           {{node.label}}
         </mat-option>
@@ -82,7 +82,7 @@
           (ngModelChange)="componentChanged()">
         <mat-option></mat-option>
         <mat-option value="any" i18n>Any</mat-option>
-        <mat-option *ngFor="let link of authoringComponentContent.links"
+        <mat-option *ngFor="let link of componentContent.links"
             [value]="link.label">
           {{link.label}}
         </mat-option>
@@ -95,7 +95,7 @@
           (ngModelChange)="componentChanged()">
         <mat-option></mat-option>
         <mat-option value="any" i18n>Any</mat-option>
-        <mat-option *ngFor="let node of authoringComponentContent.nodes"
+        <mat-option *ngFor="let node of componentContent.nodes"
             [value]="node.label">
           {{node.label}}
         </mat-option>
@@ -104,7 +104,7 @@
     <div fxLayout="row" fxLayoutGap="10px">
       <button mat-raised-button
           color="primary"
-          (click)="moveObjectUp(authoringComponentContent.rules, ruleIndex)"
+          (click)="moveObjectUp(componentContent.rules, ruleIndex)"
           matTooltip="Move Up"
           matTooltipPosition="above"
           i18n-matTooltip
@@ -113,7 +113,7 @@
       </button>
       <button mat-raised-button
           color="primary"
-          (click)="moveObjectDown(authoringComponentContent.rules, ruleIndex)"
+          (click)="moveObjectDown(componentContent.rules, ruleIndex)"
           matTooltip="Move Down"
           matTooltipPosition="above"
           i18n-matTooltip
@@ -164,14 +164,14 @@
   </div>
   <div i18n>Custom Rule Evaluator</div>
   <div>
-    <textarea [(ngModel)]="authoringComponentContent.customRuleEvaluator"
+    <textarea [(ngModel)]="componentContent.customRuleEvaluator"
         (ngModelChange)="componentChanged()"
         rows="10"
         cols="100">
     </textarea>
   </div>
   <div *ngIf="isNotebookEnabled()">
-    <edit-component-add-to-notebook-button [authoringComponentContent]="authoringComponentContent">
+    <edit-component-add-to-notebook-button [componentContent]="componentContent">
     </edit-component-add-to-notebook-button>
   </div>
 </div>
@@ -179,5 +179,5 @@
     [nodeId]="nodeId"
     [componentId]="componentId"
     [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-    [authoringComponentContent]="authoringComponentContent">
+    [componentContent]="componentContent">
 </edit-common-advanced>

@@ -37,7 +37,7 @@ describe('AudioOscillatorAuthoring', () => {
     fixture = TestBed.createComponent(AudioOscillatorAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    component.authoringComponentContent = componentContent;
+    component.componentContent = componentContent;
     getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     fixture.detectChanges();
@@ -60,7 +60,7 @@ function createComponentContent() {
 
 function populateCheckedOscillatorTypes() {
   it('should populate checked oscillator types', () => {
-    component.authoringComponentContent.oscillatorTypes = ['sine', 'square'];
+    component.componentContent.oscillatorTypes = ['sine', 'square'];
     component.populateCheckedOscillatorTypes();
     expect(component.sineChecked).toEqual(true);
     expect(component.squareChecked).toEqual(true);
@@ -71,9 +71,9 @@ function populateCheckedOscillatorTypes() {
 
 function initializeStartingAmplitude() {
   it('should initialize starting amplitude', () => {
-    delete component.authoringComponentContent.startingAmplitude;
+    delete component.componentContent.startingAmplitude;
     component.initializeStartingAmplitude();
-    expect(component.authoringComponentContent.startingAmplitude).toEqual(
+    expect(component.componentContent.startingAmplitude).toEqual(
       TestBed.inject(AudioOscillatorService).defaultStartingAmplitude
     );
   });
@@ -81,16 +81,16 @@ function initializeStartingAmplitude() {
 
 function showFrequencyInputChanged() {
   it('should handle show frequency input changed', () => {
-    component.authoringComponentContent.canStudentEditFrequency = true;
+    component.componentContent.canStudentEditFrequency = true;
     component.showFrequencyInputChanged();
-    expect(component.authoringComponentContent.canStudentEditFrequency).toEqual(false);
+    expect(component.componentContent.canStudentEditFrequency).toEqual(false);
   });
 }
 
 function showAmplitudeInputChanged() {
   it('should handle show amplitude input changed', () => {
-    component.authoringComponentContent.canStudentEditAmplitude = true;
+    component.componentContent.canStudentEditAmplitude = true;
     component.showAmplitudeInputChanged();
-    expect(component.authoringComponentContent.canStudentEditAmplitude).toEqual(false);
+    expect(component.componentContent.canStudentEditAmplitude).toEqual(false);
   });
 }

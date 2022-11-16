@@ -102,10 +102,10 @@ describe('EditOpenResponseAdvancedComponent', () => {
 function enableCRaterClicked() {
   describe('enableCRaterClicked', () => {
     it('should handle enable CRater clicked', () => {
-      expect(component.authoringComponentContent.cRater).toBeUndefined();
-      component.authoringComponentContent.enableCRater = true;
+      expect(component.componentContent.cRater).toBeUndefined();
+      component.componentContent.enableCRater = true;
       component.enableCRaterClicked();
-      expect(component.authoringComponentContent.cRater).toEqual(component.createCRaterObject());
+      expect(component.componentContent.cRater).toEqual(component.createCRaterObject());
     });
   });
 }
@@ -113,10 +113,10 @@ function enableCRaterClicked() {
 function addScoringRule() {
   describe('addScoringRule', () => {
     it('should add scoring rule', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
+      component.componentContent.cRater = component.createCRaterObject();
       component.addScoringRule();
-      expect(component.authoringComponentContent.cRater.scoringRules.length).toEqual(1);
-      expect(component.authoringComponentContent.cRater.scoringRules[0]).toEqual(
+      expect(component.componentContent.cRater.scoringRules.length).toEqual(1);
+      expect(component.componentContent.cRater.scoringRules[0]).toEqual(
         component.createScoringRule()
       );
     });
@@ -133,17 +133,13 @@ function createScoringRuleObject(score: number, feedbackText: string): any {
 function scoringRuleDeleteClicked() {
   describe('scoringRuleDeleteClicked', () => {
     it('should handle moving a scoring rule down', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
-      component.authoringComponentContent.cRater.scoringRules = [
-        scoringRule1,
-        scoringRule2,
-        scoringRule3
-      ];
+      component.componentContent.cRater = component.createCRaterObject();
+      component.componentContent.cRater.scoringRules = [scoringRule1, scoringRule2, scoringRule3];
       spyOn(window, 'confirm').and.returnValue(true);
       component.scoringRuleDeleteClicked(1);
-      expect(component.authoringComponentContent.cRater.scoringRules.length).toEqual(2);
-      expect(component.authoringComponentContent.cRater.scoringRules[0]).toEqual(scoringRule1);
-      expect(component.authoringComponentContent.cRater.scoringRules[1]).toEqual(scoringRule3);
+      expect(component.componentContent.cRater.scoringRules.length).toEqual(2);
+      expect(component.componentContent.cRater.scoringRules[0]).toEqual(scoringRule1);
+      expect(component.componentContent.cRater.scoringRules[1]).toEqual(scoringRule3);
     });
   });
 }
@@ -151,12 +147,10 @@ function scoringRuleDeleteClicked() {
 function addMultipleAttemptScoringRule() {
   describe('addMultipleAttemptScoringRule', () => {
     it('should add a multiple attempt scoring rule', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
+      component.componentContent.cRater = component.createCRaterObject();
       component.addMultipleAttemptScoringRule();
-      expect(component.authoringComponentContent.cRater.multipleAttemptScoringRules.length).toEqual(
-        1
-      );
-      expect(component.authoringComponentContent.cRater.multipleAttemptScoringRules[0]).toEqual(
+      expect(component.componentContent.cRater.multipleAttemptScoringRules.length).toEqual(1);
+      expect(component.componentContent.cRater.multipleAttemptScoringRules[0]).toEqual(
         component.createMultipleAttemptScoringRule()
       );
     });
@@ -166,7 +160,7 @@ function addMultipleAttemptScoringRule() {
 function multipleAttemptScoringRuleDeleteClicked() {
   describe('multipleAttemptScoringRuleDeleteClicked', () => {
     it('should delete a multiple attempt scoring rule', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
+      component.componentContent.cRater = component.createCRaterObject();
       const multipleAttemptScoringRule1 = createMultipleAttemptScoringRule(
         1,
         1,
@@ -182,20 +176,18 @@ function multipleAttemptScoringRuleDeleteClicked() {
         3,
         'You got a 1 and then a 3'
       );
-      component.authoringComponentContent.cRater.multipleAttemptScoringRules = [
+      component.componentContent.cRater.multipleAttemptScoringRules = [
         multipleAttemptScoringRule1,
         multipleAttemptScoringRule2,
         multipleAttemptScoringRule3
       ];
       spyOn(window, 'confirm').and.returnValue(true);
       component.multipleAttemptScoringRuleDeleteClicked(1);
-      expect(component.authoringComponentContent.cRater.multipleAttemptScoringRules.length).toEqual(
-        2
-      );
-      expect(component.authoringComponentContent.cRater.multipleAttemptScoringRules[0]).toEqual(
+      expect(component.componentContent.cRater.multipleAttemptScoringRules.length).toEqual(2);
+      expect(component.componentContent.cRater.multipleAttemptScoringRules[0]).toEqual(
         multipleAttemptScoringRule1
       );
-      expect(component.authoringComponentContent.cRater.multipleAttemptScoringRules[1]).toEqual(
+      expect(component.componentContent.cRater.multipleAttemptScoringRules[1]).toEqual(
         multipleAttemptScoringRule3
       );
     });
@@ -216,13 +208,11 @@ function createMultipleAttemptScoringRule(
 function enableNotificationsClicked() {
   describe('enableNotificationsClicked', () => {
     it('should enable notifications', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
-      component.authoringComponentContent.enableNotifications = true;
+      component.componentContent.cRater = component.createCRaterObject();
+      component.componentContent.enableNotifications = true;
       component.enableNotificationsClicked();
-      expect(component.authoringComponentContent.notificationSettings).toBeDefined();
-      expect(component.authoringComponentContent.notificationSettings.notifications.length).toEqual(
-        0
-      );
+      expect(component.componentContent.notificationSettings).toBeDefined();
+      expect(component.componentContent.notificationSettings.notifications.length).toEqual(0);
     });
   });
 }
@@ -230,13 +220,11 @@ function enableNotificationsClicked() {
 function enableMultipleAttemptScoringRulesClicked() {
   describe('enableMultipleAttemptScoringRulesClicked', () => {
     it('should enable multiple attempt scoring rules', () => {
-      component.authoringComponentContent.enableNotifications = true;
+      component.componentContent.enableNotifications = true;
       component.enableNotificationsClicked();
-      expect(component.authoringComponentContent.notificationSettings).toBeDefined();
-      expect(component.authoringComponentContent.notificationSettings.notifications).toBeDefined();
-      expect(component.authoringComponentContent.notificationSettings.notifications.length).toEqual(
-        0
-      );
+      expect(component.componentContent.notificationSettings).toBeDefined();
+      expect(component.componentContent.notificationSettings.notifications).toBeDefined();
+      expect(component.componentContent.notificationSettings.notifications.length).toEqual(0);
     });
   });
 }
@@ -244,15 +232,13 @@ function enableMultipleAttemptScoringRulesClicked() {
 function addNotification() {
   describe('addNotification', () => {
     it('should add a notification', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
-      component.authoringComponentContent.notificationSettings = {
+      component.componentContent.cRater = component.createCRaterObject();
+      component.componentContent.notificationSettings = {
         notifications: []
       };
       component.addNotification();
-      expect(component.authoringComponentContent.notificationSettings.notifications.length).toEqual(
-        1
-      );
-      expect(component.authoringComponentContent.notificationSettings.notifications[0]).toEqual(
+      expect(component.componentContent.notificationSettings.notifications.length).toEqual(1);
+      expect(component.componentContent.notificationSettings.notifications[0]).toEqual(
         component.createNotification()
       );
     });
@@ -262,28 +248,26 @@ function addNotification() {
 function notificationDeleteClicked() {
   describe('notificationDeleteClicked', () => {
     it('should delete a notification', () => {
-      component.authoringComponentContent.cRater = component.createCRaterObject();
-      component.authoringComponentContent.notificationSettings = {
+      component.componentContent.cRater = component.createCRaterObject();
+      component.componentContent.notificationSettings = {
         notifications: [
           component.createNotification(),
           component.createNotification(),
           component.createNotification()
         ]
       };
-      component.authoringComponentContent.notificationSettings.notifications[0].dismissCode = 'a';
-      component.authoringComponentContent.notificationSettings.notifications[1].dismissCode = 'b';
-      component.authoringComponentContent.notificationSettings.notifications[2].dismissCode = 'c';
+      component.componentContent.notificationSettings.notifications[0].dismissCode = 'a';
+      component.componentContent.notificationSettings.notifications[1].dismissCode = 'b';
+      component.componentContent.notificationSettings.notifications[2].dismissCode = 'c';
       spyOn(window, 'confirm').and.returnValue(true);
       component.notificationDeleteClicked(1);
-      expect(component.authoringComponentContent.notificationSettings.notifications.length).toEqual(
-        2
+      expect(component.componentContent.notificationSettings.notifications.length).toEqual(2);
+      expect(component.componentContent.notificationSettings.notifications[0].dismissCode).toEqual(
+        'a'
       );
-      expect(
-        component.authoringComponentContent.notificationSettings.notifications[0].dismissCode
-      ).toEqual('a');
-      expect(
-        component.authoringComponentContent.notificationSettings.notifications[1].dismissCode
-      ).toEqual('c');
+      expect(component.componentContent.notificationSettings.notifications[1].dismissCode).toEqual(
+        'c'
+      );
     });
   });
 }
@@ -293,16 +277,16 @@ function useCustomCompletionCriteriaClicked() {
     it('should turn on custom completion criteria', () => {
       component.useCustomCompletionCriteria = false;
       component.useCustomCompletionCriteriaClicked({});
-      expect(component.authoringComponentContent.completionCriteria).toEqual(
+      expect(component.componentContent.completionCriteria).toEqual(
         component.createCompletionCriteria()
       );
     });
     it('should turn off custom completion criteria', () => {
       component.useCustomCompletionCriteria = true;
       spyOn(window, 'confirm').and.returnValue(true);
-      component.authoringComponentContent.completionCriteria = component.createCompletionCriteria();
+      component.componentContent.completionCriteria = component.createCompletionCriteria();
       component.useCustomCompletionCriteriaClicked({});
-      expect(component.authoringComponentContent.completionCriteria).toBeUndefined();
+      expect(component.componentContent.completionCriteria).toBeUndefined();
     });
   });
 }
@@ -310,13 +294,13 @@ function useCustomCompletionCriteriaClicked() {
 function addCompletionCriteria() {
   describe('addCompletionCriteria', () => {
     it('should add a completion criteria', () => {
-      component.authoringComponentContent = {
+      component.componentContent = {
         completionCriteria: {
           criteria: []
         }
       } as OpenResponseContent;
       component.addCompletionCriteria();
-      expect(component.authoringComponentContent.completionCriteria.criteria.length).toEqual(1);
+      expect(component.componentContent.completionCriteria.criteria.length).toEqual(1);
     });
   });
 }
@@ -347,18 +331,18 @@ function deleteCompletionCriteria() {
         'component3',
         'isSubmitted'
       );
-      component.authoringComponentContent = {
+      component.componentContent = {
         completionCriteria: {
           criteria: [completionCriteria1, completionCriteria2, completionCriteria3]
         }
       } as OpenResponseContent;
       spyOn(window, 'confirm').and.returnValue(true);
       component.deleteCompletionCriteria(1);
-      expect(component.authoringComponentContent.completionCriteria.criteria.length).toEqual(2);
-      expect(component.authoringComponentContent.completionCriteria.criteria[0]).toEqual(
+      expect(component.componentContent.completionCriteria.criteria.length).toEqual(2);
+      expect(component.componentContent.completionCriteria.criteria[0]).toEqual(
         completionCriteria1
       );
-      expect(component.authoringComponentContent.completionCriteria.criteria[1]).toEqual(
+      expect(component.componentContent.completionCriteria.criteria[1]).toEqual(
         completionCriteria3
       );
     });
@@ -368,10 +352,10 @@ function deleteCompletionCriteria() {
 function setFeedbackEnabled() {
   describe('setFeedbackEnabled()', () => {
     it('should initialize feedback settings and set enabled field', () => {
-      component.authoringComponentContent.cRater = {};
+      component.componentContent.cRater = {};
       component.setFeedbackEnabled(true);
-      expect(component.authoringComponentContent.cRater.feedback.enabled).toBeTruthy();
-      expect(component.authoringComponentContent.cRater.feedback.rules.length).toEqual(1);
+      expect(component.componentContent.cRater.feedback.enabled).toBeTruthy();
+      expect(component.componentContent.cRater.feedback.rules.length).toEqual(1);
     });
   });
 }

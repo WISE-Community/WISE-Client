@@ -7,14 +7,14 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
   styleUrls: ['./edit-component-peer-grouping-tag.component.scss']
 })
 export class EditComponentPeerGroupingTagComponent {
-  @Input() authoringComponentContent: any;
+  @Input() componentContent: any;
 
   constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {}
 
   peerGroupingTagChanged(tag: string): void {
-    this.authoringComponentContent.peerGroupingTag = tag;
+    this.componentContent.peerGroupingTag = tag;
     this.projectService.componentChanged();
   }
 }

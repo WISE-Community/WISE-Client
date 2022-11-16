@@ -54,7 +54,7 @@ describe('SummaryAuthoringComponent', () => {
     fixture = TestBed.createComponent(SummaryAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    component.authoringComponentContent = JSON.parse(JSON.stringify(componentContent));
+    component.componentContent = JSON.parse(JSON.stringify(componentContent));
     getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     spyOn(component, 'componentChanged');
@@ -113,10 +113,10 @@ function checkThatTheComponentIdIsNotAutomaticallySetWhenNoComponents() {
   it(`should check that the component id is not automatically set when the node id is changed if
   there are no allowed components`, () => {
     const components = [{ id: '4ty89q3hj0', type: 'HTML' }];
-    expect(component.authoringComponentContent.summaryComponentId).toEqual('zptq1ndv4h');
+    expect(component.componentContent.summaryComponentId).toEqual('zptq1ndv4h');
     spyOn(component, 'getComponents').and.returnValue(components);
     component.summaryNodeIdChanged();
-    expect(component.authoringComponentContent.summaryComponentId).toBe(null);
+    expect(component.componentContent.summaryComponentId).toBe(null);
   });
 }
 
@@ -127,10 +127,10 @@ function checkThatTheComponentIdIsNotAutomaticallySetWhenMultipleComponents() {
       { id: '34j45u9w4j', type: 'OpenResponse' },
       { id: 'dghm45su45', type: 'MultipleChoice' }
     ];
-    expect(component.authoringComponentContent.summaryComponentId).toEqual('zptq1ndv4h');
+    expect(component.componentContent.summaryComponentId).toEqual('zptq1ndv4h');
     spyOn(component, 'getComponents').and.returnValue(components);
     component.summaryNodeIdChanged();
-    expect(component.authoringComponentContent.summaryComponentId).toBe(null);
+    expect(component.componentContent.summaryComponentId).toBe(null);
   });
 }
 
@@ -141,10 +141,10 @@ function checkThatTheComponentIdIsAutomaticallySet() {
       { id: '34j45u9w4j', type: 'HTML' },
       { id: 'dghm45su45', type: 'MultipleChoice' }
     ];
-    expect(component.authoringComponentContent.summaryComponentId).toEqual('zptq1ndv4h');
+    expect(component.componentContent.summaryComponentId).toEqual('zptq1ndv4h');
     spyOn(component, 'getComponents').and.returnValue(components);
     component.summaryNodeIdChanged();
-    expect(component.authoringComponentContent.summaryComponentId).toBe('dghm45su45');
+    expect(component.componentContent.summaryComponentId).toBe('dghm45su45');
   });
 }
 
