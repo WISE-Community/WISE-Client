@@ -17,7 +17,7 @@ export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
   availableLogic: PeerGroupingLogic[];
   logicType: string;
   mode: string;
-  availableModes: string[] = AVAILABLE_MODES;
+  availableModes: any[] = AVAILABLE_MODES;
   peerGrouping: PeerGrouping;
   referenceComponent: ReferenceComponent = new ReferenceComponent(null, null);
 
@@ -66,7 +66,7 @@ export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
     referenceComponent: ReferenceComponent,
     mode: string
   ): string {
-    if (this.mode == null) {
+    if (mode == null) {
       return `${DIFFERENT_SCORES_VALUE}("${referenceComponent.nodeId}", "${referenceComponent.componentId}")`;
     } else {
       return `${DIFFERENT_SCORES_VALUE}("${referenceComponent.nodeId}", "${referenceComponent.componentId}", "${mode}")`;

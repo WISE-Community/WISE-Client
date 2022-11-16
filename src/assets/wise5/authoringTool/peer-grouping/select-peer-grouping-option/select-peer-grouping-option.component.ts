@@ -40,7 +40,7 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
     }
   }
 
-  setPeerGroupingLogicName(): void {
+  private setPeerGroupingLogicName(): void {
     if (new RegExp(DIFFERENT_IDEAS_REGEX).exec(this.peerGrouping.logic) != null) {
       this.peerGroupingLogicName = DIFFERENT_IDEAS_NAME;
     } else if (new RegExp(DIFFERENT_SCORES_REGEX).exec(this.peerGrouping.logic) != null) {

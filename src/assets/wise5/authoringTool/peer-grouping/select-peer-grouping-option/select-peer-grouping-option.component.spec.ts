@@ -83,7 +83,10 @@ function setPeerGroupingLogicName() {
 }
 
 function setAndExpectPeerGroupingLogic(logic: string, expectedLogicName: string) {
-  component.peerGrouping.logic = logic;
-  component.setPeerGroupingLogicName();
+  fixture = TestBed.createComponent(SelectPeerGroupingOptionComponent);
+  component = fixture.componentInstance;
+  peerGrouping1 = new PeerGrouping({ tag: tag1, logic: logic });
+  component.peerGrouping = peerGrouping1;
+  fixture.detectChanges();
   expect(component.peerGroupingLogicName).toEqual(expectedLogicName);
 }

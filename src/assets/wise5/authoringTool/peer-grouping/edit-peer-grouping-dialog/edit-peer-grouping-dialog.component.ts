@@ -32,14 +32,14 @@ export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogCom
   }
 
   ngOnInit(): void {
-    this.peerGrouping = this.utilService.makeCopyOfJSONObject(this.peerGrouping);
+    this.peerGrouping = new PeerGrouping(this.utilService.makeCopyOfJSONObject(this.peerGrouping));
     this.stepsUsedIn = this.peerGroupingAuthoringService.getStepsUsedIn(this.peerGrouping.tag);
     this.logicType = this.getLogicType(this.peerGrouping.logic);
     if (this.logicType === DIFFERENT_IDEAS_VALUE) {
-      this.referenceComponent = this.getDifferentIdeasReferenceComponent(this.peerGrouping.logic);
+      this.referenceComponent = this.peerGrouping.getDifferentIdeasReferenceComponent();
     } else if (this.logicType === DIFFERENT_SCORES_VALUE) {
-      this.referenceComponent = this.getDifferentScoresReferenceComponent(this.peerGrouping.logic);
-      this.mode = this.getDifferentScoresMode(this.peerGrouping.logic);
+      this.referenceComponent = this.peerGrouping.getDifferentScoresReferenceComponent();
+      this.mode = this.peerGrouping.getDifferentScoresMode();
     }
   }
 
@@ -51,21 +51,6 @@ export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogCom
     } else {
       return logic;
     }
-  }
-
-  private getDifferentIdeasReferenceComponent(logic: string): ReferenceComponent {
-    const result = new RegExp(DIFFERENT_IDEAS_REGEX).exec(logic);
-    return new ReferenceComponent(result[1], result[2]);
-  }
-
-  private getDifferentScoresReferenceComponent(logic: string): ReferenceComponent {
-    const result = new RegExp(DIFFERENT_SCORES_REGEX).exec(logic);
-    return new ReferenceComponent(result[1], result[2]);
-  }
-
-  private getDifferentScoresMode(logic: string): string {
-    const result = new RegExp(DIFFERENT_SCORES_REGEX).exec(logic);
-    return result[4];
   }
 
   save(): void {

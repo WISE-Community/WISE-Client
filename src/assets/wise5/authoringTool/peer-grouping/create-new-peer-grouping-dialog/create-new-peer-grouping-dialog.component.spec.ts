@@ -78,17 +78,17 @@ function create_DifferentIdeasLogic_ShouldCreatePeerGroup() {
 
 function create_DifferentScoresAnyLogic_ShouldCreatePeerGroup() {
   it('should create peer grouping with different scores any logic', async () => {
-    expectDifferentScoresLogicCreatenewPeerGrouping('any');
+    expectDifferentScoresLogicCreateNewPeerGrouping('any');
   });
 }
 
 function create_DifferentScoresMaximizeLogic_ShouldCreatePeerGroup() {
   it('should create peer grouping with different scores maximize logic', async () => {
-    expectDifferentScoresLogicCreatenewPeerGrouping('maximize');
+    expectDifferentScoresLogicCreateNewPeerGrouping('maximize');
   });
 }
 
-function expectDifferentScoresLogicCreatenewPeerGrouping(mode: string) {
+function expectDifferentScoresLogicCreateNewPeerGrouping(mode: string) {
   const newPeerGrouping = new PeerGrouping({
     logic: `differentKIScores("${REFERENCE_COMPONENT_NODE_ID1}", "${REFERENCE_COMPONENT_COMPONENT_ID1}", "${mode}")`,
     maxMembershipCount: 2,
