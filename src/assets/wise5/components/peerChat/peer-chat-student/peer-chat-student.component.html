@@ -27,4 +27,10 @@
           (onSubmit)="submitStudentResponse($event)"></peer-chat-chat-box>
     </div>
   </div>
+  <component-annotations *ngIf="mode === 'student'"
+      [annotations]="latestAnnotations"
+      [maxScore]="componentContent.maxScore"
+      [nodeId]="nodeId"
+      [componentId]="componentId">
+  </component-annotations>
 </ng-container>
