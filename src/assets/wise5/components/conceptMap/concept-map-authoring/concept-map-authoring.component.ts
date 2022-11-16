@@ -31,10 +31,10 @@ export class ConceptMapAuthoring extends ComponentAuthoring {
 
   ngOnInit() {
     super.ngOnInit();
-    this.availableNodes = this.componentContent.nodes;
-    this.availableLinks = this.componentContent.links;
-    if (this.componentContent.showNodeLabels == null) {
-      this.componentContent.showNodeLabels = true;
+    this.availableNodes = this.authoringComponentContent.nodes;
+    this.availableLinks = this.authoringComponentContent.links;
+    if (this.authoringComponentContent.showNodeLabels == null) {
+      this.authoringComponentContent.showNodeLabels = true;
       this.authoringComponentContent.showNodeLabels = true;
     }
   }

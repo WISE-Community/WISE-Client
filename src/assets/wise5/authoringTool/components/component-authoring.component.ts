@@ -14,14 +14,7 @@ export abstract class ComponentAuthoring {
   promptChange: Subject<string> = new Subject<string>();
   allowedConnectedComponentTypes: string[];
   authoringComponentContent: any;
-  componentContent: any;
   idToOrder: any;
-  isDirty: boolean = false;
-  isSaveButtonVisible: boolean;
-  isSubmitButtonVisible: boolean;
-  isSubmitDirty: boolean = false;
-  showAdvancedAuthoring: boolean = false;
-  submitCounter: number = 0;
   subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -36,7 +29,6 @@ export abstract class ComponentAuthoring {
       this.nodeId,
       this.componentId
     );
-    this.resetUI();
     this.idToOrder = this.ProjectService.idToOrder;
     this.subscriptions.add(
       this.ProjectService.componentChanged$.subscribe(() => {
@@ -81,19 +73,7 @@ export abstract class ComponentAuthoring {
   }
 
   componentChanged(): void {
-    this.resetUI();
     this.ProjectService.nodeChanged();
-  }
-
-  resetUI(): void {
-    this.componentContent = this.ConfigService.replaceStudentNames(
-      this.ProjectService.injectAssetPaths(this.authoringComponentContent)
-    );
-    this.isSaveButtonVisible = this.componentContent.showSaveButton;
-    this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    this.isDirty = false;
-    this.isSubmitDirty = false;
-    this.submitCounter = 0;
   }
 
   isForThisComponent(object: any): boolean {
@@ -143,15 +123,6 @@ export abstract class ComponentAuthoring {
 
   getComponent(nodeId: string, componentId: string): any {
     return this.ProjectService.getComponent(nodeId, componentId);
-  }
-
-  reloadPreview() {
-    // modify the authoringComponentContent to trigger the preview reloading
-    this.authoringComponentContent.reloadTime = new Date();
-    setTimeout(() => {
-      // remove the field we previously used to trigger the reload
-      delete this.authoringComponentContent.reloadTime;
-    });
   }
 
   confirmAndRemove(message: string, array: any[], index: number): void {

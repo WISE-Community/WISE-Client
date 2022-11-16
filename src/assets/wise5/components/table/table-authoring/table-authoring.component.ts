@@ -49,8 +49,8 @@ export class TableAuthoring extends ComponentAuthoring {
 
   ngOnInit() {
     super.ngOnInit();
-    this.columnCellSizes = this.parseColumnCellSizes(this.componentContent);
-    this.frozenColumns = this.parseFrozenColumns(this.componentContent);
+    this.columnCellSizes = this.parseColumnCellSizes(this.authoringComponentContent);
+    this.frozenColumns = this.parseFrozenColumns(this.authoringComponentContent);
   }
 
   tableNumRowsChanged(): void {

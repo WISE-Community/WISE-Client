@@ -34,7 +34,7 @@ describe('DialogGuidanceAuthoringComponent', () => {
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       JSON.parse(JSON.stringify(componentContent))
     );
-    component.componentContent = JSON.parse(JSON.stringify(componentContent));
+    component.authoringComponentContent = JSON.parse(JSON.stringify(componentContent));
     fixture.detectChanges();
   });
   it('should create', () => {

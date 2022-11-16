@@ -56,7 +56,7 @@ export class OutsideUrlAuthoring extends ComponentAuthoring {
   ngOnInit() {
     super.ngOnInit();
     this.outsideURLIFrameId = 'outsideResource_' + this.componentId;
-    this.isShowOERs = this.componentContent.url === '';
+    this.isShowOERs = this.authoringComponentContent.url === '';
     this.searchText = '';
     this.selectedSubjects = [];
     this.OutsideURLService.getOpenEducationalResources().then((openEducationalResources: any) => {

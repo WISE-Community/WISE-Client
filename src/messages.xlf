@@ -15177,17 +15177,6 @@ Warning: This will delete all existing choices in this component.</source>
           <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="dd47639ddf809c34e020cdf44474dd5513bb9387" datatype="html">
-        <source>Reload Preview</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">129</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">132</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="06ce7d94965efa6522f9a9615a9bdc6c163f64b3" datatype="html">
         <source> You have used <x id="INTERPOLATION" equiv-text="{{componentState.studentData.submitCounter}}"/> of <x id="INTERPOLATION_1" equiv-text="{{componentContent.maxSubmitCount}}"/> attempt(s) </source>
         <context-group purpose="location">

@@ -54,7 +54,7 @@ describe('SummaryAuthoringComponent', () => {
     fixture = TestBed.createComponent(SummaryAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    component.componentContent = JSON.parse(JSON.stringify(componentContent));
+    component.authoringComponentContent = JSON.parse(JSON.stringify(componentContent));
     getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     spyOn(component, 'componentChanged');

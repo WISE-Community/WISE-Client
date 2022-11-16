@@ -37,7 +37,7 @@ describe('AudioOscillatorAuthoring', () => {
     fixture = TestBed.createComponent(AudioOscillatorAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    component.componentContent = componentContent;
+    component.authoringComponentContent = componentContent;
     getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     fixture.detectChanges();
