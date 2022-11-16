@@ -1,6 +1,6 @@
-<div class="mat-elevation-z1"
+<div class="mat-elevation-z1 step-item"
     [ngClass]="{ 'list-item--warn': statusClass === 'warn', 'list-item--info': statusClass === 'info' }">
-  <div matSubheader class="list-item">
+  <div class="list-item">
     <button mat-button class="list-item__subheader-button"
         aria-label="Show/hide team's work for this step"
         i18n-aria-label
@@ -30,7 +30,7 @@
       <div id="component_{{component.id}}_{{workgroupId}}"
           class="component component--grading"
           *ngFor='let component of components; let index = index'>
-        <h3 class="accent-1 md-body-2 gray-lightest-bg component__header">
+        <h3 class="accent-1 mat-body-2 gray-lightest-bg component__header">
           {{ index + 1 + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
           <component-new-work-badge [componentId]="component.id"
               [workgroupId]="workgroupId"

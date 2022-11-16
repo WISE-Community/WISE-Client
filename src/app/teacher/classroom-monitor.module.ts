@@ -58,6 +58,7 @@ import { NavItemComponent } from '../../assets/wise5/classroomMonitor/classroomM
 import { NodeProgressViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/node-progress-view/node-progress-view.component';
 import { TopBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component';
 import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component';
+import { StudentGradingComponent } from '../../assets/wise5/classroomMonitor/student-grading/student-grading.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/no
     StepInfoComponent,
     StepItemComponent,
     StepToolsComponent,
+    StudentGradingComponent,
     StudentGradingToolsComponent,
     TeacherSummaryDisplay,
     ToolBarComponent,
