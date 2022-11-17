@@ -15,7 +15,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   MAX_ALLOWED_CELLS_IN_IMPORT = 2000;
 
   allowedConnectedComponentTypes = ['Embedded', 'Graph', 'Table'];
-  authoringComponentContent: TableContent;
+  componentContent: TableContent;
   columnNames: string[] = [];
   isDataExplorerScatterPlotEnabled: boolean;
   isDataExplorerLineGraphEnabled: boolean;
@@ -35,27 +35,27 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    if (this.authoringComponentContent.isDataExplorerEnabled) {
+    if (this.componentContent.isDataExplorerEnabled) {
       this.repopulateDataExplorerGraphTypes();
       this.initializeDataExplorerSeriesParams();
       this.tryInitializeDataExplorerDataToColumn();
     }
-    this.numColumns = this.getNumTableColumns(this.authoringComponentContent);
-    this.columnNames = this.getColumnNames(this.authoringComponentContent);
+    this.numColumns = this.getNumTableColumns(this.componentContent);
+    this.columnNames = this.getColumnNames(this.componentContent);
   }
 
   initializeDataExplorerSeriesParams(): void {
-    if (this.authoringComponentContent.dataExplorerSeriesParams == null) {
-      this.authoringComponentContent.dataExplorerSeriesParams = [];
-      for (let s = 0; s < this.authoringComponentContent.numDataExplorerSeries; s++) {
-        this.authoringComponentContent.dataExplorerSeriesParams.push({});
+    if (this.componentContent.dataExplorerSeriesParams == null) {
+      this.componentContent.dataExplorerSeriesParams = [];
+      for (let s = 0; s < this.componentContent.numDataExplorerSeries; s++) {
+        this.componentContent.dataExplorerSeriesParams.push({});
       }
     }
   }
 
   initializeDataExplorerGraphTypes(): void {
-    this.authoringComponentContent.dataExplorerGraphTypes = [];
-    this.authoringComponentContent.dataExplorerGraphTypes.push(
+    this.componentContent.dataExplorerGraphTypes = [];
+    this.componentContent.dataExplorerGraphTypes.push(
       this.createGraphTypeObject('Scatter Plot', 'scatter')
     );
   }
@@ -64,7 +64,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
     this.isDataExplorerScatterPlotEnabled = false;
     this.isDataExplorerLineGraphEnabled = false;
     this.isDataExplorerBarGraphEnabled = false;
-    for (const graphType of this.authoringComponentContent.dataExplorerGraphTypes) {
+    for (const graphType of this.componentContent.dataExplorerGraphTypes) {
       if (graphType.value === 'scatter') {
         this.isDataExplorerScatterPlotEnabled = true;
       } else if (graphType.value === 'line') {
@@ -76,8 +76,8 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   }
 
   tryInitializeDataExplorerDataToColumn(): void {
-    if (this.authoringComponentContent.dataExplorerDataToColumn == null) {
-      this.authoringComponentContent.dataExplorerDataToColumn = {};
+    if (this.componentContent.dataExplorerDataToColumn == null) {
+      this.componentContent.dataExplorerDataToColumn = {};
     }
   }
 
@@ -96,25 +96,25 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   }
 
   toggleDataExplorer(): void {
-    if (this.authoringComponentContent.isDataExplorerEnabled) {
-      if (this.authoringComponentContent.dataExplorerGraphTypes == null) {
+    if (this.componentContent.isDataExplorerEnabled) {
+      if (this.componentContent.dataExplorerGraphTypes == null) {
         this.initializeDataExplorerGraphTypes();
         this.repopulateDataExplorerGraphTypes();
       }
-      if (this.authoringComponentContent.numDataExplorerSeries == null) {
-        this.authoringComponentContent.numDataExplorerSeries = 1;
+      if (this.componentContent.numDataExplorerSeries == null) {
+        this.componentContent.numDataExplorerSeries = 1;
       }
-      if (this.authoringComponentContent.numDataExplorerYAxis == null) {
-        this.authoringComponentContent.numDataExplorerYAxis = 1;
+      if (this.componentContent.numDataExplorerYAxis == null) {
+        this.componentContent.numDataExplorerYAxis = 1;
       }
-      if (this.authoringComponentContent.isDataExplorerAxisLabelsEditable == null) {
-        this.authoringComponentContent.isDataExplorerAxisLabelsEditable = false;
+      if (this.componentContent.isDataExplorerAxisLabelsEditable == null) {
+        this.componentContent.isDataExplorerAxisLabelsEditable = false;
       }
-      if (this.authoringComponentContent.dataExplorerSeriesParams == null) {
-        this.authoringComponentContent.dataExplorerSeriesParams = [{}];
+      if (this.componentContent.dataExplorerSeriesParams == null) {
+        this.componentContent.dataExplorerSeriesParams = [{}];
       }
-      if (this.authoringComponentContent.dataExplorerDataToColumn == null) {
-        this.authoringComponentContent.dataExplorerDataToColumn = {};
+      if (this.componentContent.dataExplorerDataToColumn == null) {
+        this.componentContent.dataExplorerDataToColumn = {};
       }
     }
     this.componentChanged();
@@ -133,7 +133,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   }
 
   dataExplorerToggleGraphType(name: string, value: string): void {
-    const graphTypes = this.authoringComponentContent.dataExplorerGraphTypes;
+    const graphTypes = this.componentContent.dataExplorerGraphTypes;
     for (let index = 0; index < graphTypes.length; index++) {
       if (graphTypes[index].value === value) {
         graphTypes.splice(index, 1);
@@ -150,24 +150,24 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   }
 
   numDataExplorerSeriesChanged(): void {
-    const count = this.authoringComponentContent.numDataExplorerSeries;
-    if (this.authoringComponentContent.dataExplorerSeriesParams.length < count) {
+    const count = this.componentContent.numDataExplorerSeries;
+    if (this.componentContent.dataExplorerSeriesParams.length < count) {
       this.increaseNumDataExplorerSeries(count);
-    } else if (this.authoringComponentContent.dataExplorerSeriesParams.length > count) {
+    } else if (this.componentContent.dataExplorerSeriesParams.length > count) {
       this.decreaseNumDataExplorerSeries(count);
     }
     this.componentChanged();
   }
 
   increaseNumDataExplorerSeries(count: number): void {
-    const numToAdd = count - this.authoringComponentContent.dataExplorerSeriesParams.length;
+    const numToAdd = count - this.componentContent.dataExplorerSeriesParams.length;
     for (let s = 0; s < numToAdd; s++) {
-      this.authoringComponentContent.dataExplorerSeriesParams.push({});
+      this.componentContent.dataExplorerSeriesParams.push({});
     }
   }
 
   decreaseNumDataExplorerSeries(count: number): void {
-    this.authoringComponentContent.dataExplorerSeriesParams = this.authoringComponentContent.dataExplorerSeriesParams.slice(
+    this.componentContent.dataExplorerSeriesParams = this.componentContent.dataExplorerSeriesParams.slice(
       0,
       count
     );
@@ -179,8 +179,8 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   }
 
   updateDataExplorerSeriesParamsYAxis(): void {
-    for (const params of this.authoringComponentContent.dataExplorerSeriesParams) {
-      if (params.yAxis >= this.authoringComponentContent.numDataExplorerYAxis) {
+    for (const params of this.componentContent.dataExplorerSeriesParams) {
+      if (params.yAxis >= this.componentContent.numDataExplorerYAxis) {
         params.yAxis = 0;
       }
     }
@@ -220,9 +220,9 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
 
   importTable(tableContent: string[][]): void {
     const tableData = this.convertToTableData(tableContent);
-    this.authoringComponentContent.tableData = tableData;
-    this.authoringComponentContent.numRows = this.getNumRows(tableData);
-    this.authoringComponentContent.numColumns = this.getNumColumns(tableData);
+    this.componentContent.tableData = tableData;
+    this.componentContent.numRows = this.getNumRows(tableData);
+    this.componentContent.numColumns = this.getNumColumns(tableData);
     this.componentChanged();
   }
 

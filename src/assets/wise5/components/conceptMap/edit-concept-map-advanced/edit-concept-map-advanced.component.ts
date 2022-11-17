@@ -11,7 +11,7 @@ import { ConceptMapContent } from '../ConceptMapContent';
   styleUrls: ['edit-concept-map-advanced.component.scss']
 })
 export class EditConceptMapAdvancedComponent extends EditAdvancedComponentComponent {
-  authoringComponentContent: ConceptMapContent;
+  componentContent: ConceptMapContent;
   allowedConnectedComponentTypes = ['ConceptMap', 'Draw', 'Embedded', 'Graph', 'Label', 'Table'];
 
   constructor(
@@ -23,7 +23,7 @@ export class EditConceptMapAdvancedComponent extends EditAdvancedComponentCompon
   }
 
   ruleTypeChanged(ruleIndex: number): void {
-    const rule = this.authoringComponentContent.rules[ruleIndex];
+    const rule = this.componentContent.rules[ruleIndex];
     if (rule.type === 'node') {
       /*
        * the rule has been set to 'node' instead of 'link' so we
@@ -46,9 +46,9 @@ export class EditConceptMapAdvancedComponent extends EditAdvancedComponentCompon
       not: false
     };
 
-    this.authoringComponentContent.rules.push(newRule);
+    this.componentContent.rules.push(newRule);
     let showSubmitButton = false;
-    if (this.authoringComponentContent.rules.length > 0) {
+    if (this.componentContent.rules.length > 0) {
       showSubmitButton = true;
     }
 
@@ -57,15 +57,15 @@ export class EditConceptMapAdvancedComponent extends EditAdvancedComponentCompon
   }
 
   ruleDeleteButtonClicked(index: number): void {
-    const rule = this.authoringComponentContent.rules[index];
+    const rule = this.componentContent.rules[index];
     const ruleName = rule.name;
     if (confirm($localize`Are you sure you want to delete this rule?\n\nRule Name: ${ruleName}`)) {
-      this.authoringComponentContent.rules.splice(index, 1);
+      this.componentContent.rules.splice(index, 1);
       this.componentChanged();
     }
 
     let showSubmitButton = false;
-    if (this.authoringComponentContent.rules.length > 0) {
+    if (this.componentContent.rules.length > 0) {
       showSubmitButton = true;
     }
     this.setShowSubmitButtonValue(showSubmitButton);

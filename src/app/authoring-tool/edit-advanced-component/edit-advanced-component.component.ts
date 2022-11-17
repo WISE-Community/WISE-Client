@@ -6,7 +6,7 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 
 @Directive()
 export abstract class EditAdvancedComponentComponent {
-  authoringComponentContent: ComponentContent;
+  componentContent: ComponentContent;
   @Input() componentId: string;
   @Input() nodeId: string;
 
@@ -17,15 +17,12 @@ export abstract class EditAdvancedComponentComponent {
   ) {}
 
   ngOnInit() {
-    this.authoringComponentContent = this.teacherProjectService.getComponent(
-      this.nodeId,
-      this.componentId
-    );
+    this.componentContent = this.teacherProjectService.getComponent(this.nodeId, this.componentId);
   }
 
   setShowSubmitButtonValue(show: boolean = false): void {
-    this.authoringComponentContent.showSaveButton = show;
-    this.authoringComponentContent.showSubmitButton = show;
+    this.componentContent.showSaveButton = show;
+    this.componentContent.showSubmitButton = show;
     this.nodeService.broadcastComponentShowSubmitButtonValueChanged({
       nodeId: this.nodeId,
       componentId: this.componentId,
@@ -38,7 +35,7 @@ export abstract class EditAdvancedComponentComponent {
   }
 
   connectedComponentsChanged(connectedComponents: any[]): void {
-    this.authoringComponentContent.connectedComponents = connectedComponents;
+    this.componentContent.connectedComponents = connectedComponents;
     this.componentChanged();
   }
 

@@ -22,7 +22,7 @@ describe('EditComponentPeerGroupingTagComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditComponentPeerGroupingTagComponent);
     component = fixture.componentInstance;
-    component.authoringComponentContent = { peerGroupingTag: tag1 };
+    component.componentContent = { peerGroupingTag: tag1 };
     projectService = TestBed.inject(TeacherProjectService);
     spyOn(projectService, 'getPeerGroupings').and.returnValue([]);
     fixture.detectChanges();
@@ -34,9 +34,9 @@ describe('EditComponentPeerGroupingTagComponent', () => {
 function peerGroupingTagChanged() {
   it('should handle peer grouping tag changed', () => {
     const componentChangedSpy = spyOn(projectService, 'componentChanged');
-    expect(component.authoringComponentContent.peerGroupingTag).toEqual(tag1);
+    expect(component.componentContent.peerGroupingTag).toEqual(tag1);
     component.peerGroupingTagChanged(tag2);
-    expect(component.authoringComponentContent.peerGroupingTag).toEqual(tag2);
+    expect(component.componentContent.peerGroupingTag).toEqual(tag2);
     expect(componentChangedSpy).toHaveBeenCalled();
   });
 }

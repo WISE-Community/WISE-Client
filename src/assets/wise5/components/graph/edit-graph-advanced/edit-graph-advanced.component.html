@@ -3,14 +3,14 @@
     <mat-form-field class="subtitle">
       <mat-label i18n>Subtitle</mat-label>
       <input matInput
-          [(ngModel)]="authoringComponentContent.subtitle"
+          [(ngModel)]="componentContent.subtitle"
           (ngModelChange)="componentChanged()"/>
     </mat-form-field>
   </div>
   <div>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.showMouseXPlotLine"
+        [(ngModel)]="componentContent.showMouseXPlotLine"
         (ngModelChange)="componentChanged()"
         i18n>
       Show Mouse X Plot Line
@@ -19,8 +19,8 @@
   <div class="highlight-x-range-from-zero">
     <mat-checkbox
         color="primary"
-        [disabled]="!authoringComponentContent.showMouseXPlotLine"
-        [(ngModel)]="authoringComponentContent.highlightXRangeFromZero"
+        [disabled]="!componentContent.showMouseXPlotLine"
+        [(ngModel)]="componentContent.highlightXRangeFromZero"
         (ngModelChange)="componentChanged()"
         i18n>
       Highlight X Range From Zero
@@ -29,7 +29,7 @@
   <div>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.showMouseYPlotLine"
+        [(ngModel)]="componentContent.showMouseYPlotLine"
         (ngModelChange)="componentChanged()"
         i18n>
       Show Mouse Y Plot Line
@@ -38,7 +38,7 @@
   <div>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.saveMouseOverPoints"
+        [(ngModel)]="componentContent.saveMouseOverPoints"
         (ngModelChange)="componentChanged()"
         i18n>
       Save Mouse Over Points
@@ -47,7 +47,7 @@
   <div>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.hideTrialSelect"
+        [(ngModel)]="componentContent.hideTrialSelect"
         (ngModelChange)="componentChanged()"
         i18n>
       Hide Trial Select
@@ -56,18 +56,18 @@
   <div>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.useCustomLegend"
+        [(ngModel)]="componentContent.useCustomLegend"
         (ngModelChange)="componentChanged()"
         i18n>
       Use Custom Legend
     </mat-checkbox>
   </div>
-  <div *ngIf="authoringComponentContent.useCustomLegend">
+  <div *ngIf="componentContent.useCustomLegend">
     <mat-form-field
         class="custom-legend">
       <mat-label i18n>Custom Legend</mat-label>
       <input matInput
-          [(ngModel)]="authoringComponentContent.customLegend"
+          [(ngModel)]="componentContent.customLegend"
           (ngModelChange)="componentChanged()"/>
     </mat-form-field>
   </div>
@@ -82,7 +82,7 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div *ngFor="let plotLine of authoringComponentContent.xAxis.plotLines; index as xAxisPlotLineIndex">
+  <div *ngFor="let plotLine of componentContent.xAxis.plotLines; index as xAxisPlotLineIndex">
     <div fxLayout="row wrap" fxLayoutGap="16px">
       <mat-form-field class="plot-line-text">
         <mat-label i18n>Text</mat-label>
@@ -125,7 +125,7 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div *ngFor="let plotLine of authoringComponentContent.yAxis.plotLines; index as yAxisPlotLineIndex">
+  <div *ngFor="let plotLine of componentContent.yAxis.plotLines; index as yAxisPlotLineIndex">
     <div fxLayout="row wrap" fxLayoutGap="16px">
       <mat-form-field class="plot-line-text">
         <mat-label i18n>Text</mat-label>
@@ -159,40 +159,40 @@
   </div>
 </div>
 <div *ngIf="isNotebookEnabled()">
-  <edit-component-add-to-notebook-button [authoringComponentContent]="authoringComponentContent">
+  <edit-component-add-to-notebook-button [componentContent]="componentContent">
   </edit-component-add-to-notebook-button>
 </div>
-<edit-component-save-button [authoringComponentContent]="authoringComponentContent">
+<edit-component-save-button [componentContent]="componentContent">
 </edit-component-save-button>
 <br/>
-<edit-component-submit-button [authoringComponentContent]="authoringComponentContent">
+<edit-component-submit-button [componentContent]="componentContent">
 </edit-component-submit-button>
 <edit-component-max-submit
-    *ngIf="authoringComponentContent.showSubmitButton"
-    [(maxSubmitCount)]="authoringComponentContent.maxSubmitCount"
+    *ngIf="componentContent.showSubmitButton"
+    [(maxSubmitCount)]="componentContent.maxSubmitCount"
     (maxSubmitCountChange)="maxSubmitCountChanged($event)">
 </edit-component-max-submit>
 <edit-component-default-feedback
-    [authoringComponentContent]="authoringComponentContent">
+    [componentContent]="componentContent">
 </edit-component-default-feedback>
 <div fxLayout="column" fxLayoutAlign="start start">
-  <edit-component-max-score [authoringComponentContent]="authoringComponentContent">
+  <edit-component-max-score [componentContent]="componentContent">
   </edit-component-max-score>
-  <edit-component-exclude-from-total-score [authoringComponentContent]="authoringComponentContent">
+  <edit-component-exclude-from-total-score [componentContent]="componentContent">
   </edit-component-exclude-from-total-score>
-  <edit-component-width [authoringComponentContent]="authoringComponentContent">
+  <edit-component-width [componentContent]="componentContent">
   </edit-component-width>
-  <edit-component-rubric [authoringComponentContent]="authoringComponentContent">
+  <edit-component-rubric [componentContent]="componentContent">
   </edit-component-rubric>
-  <edit-component-tags [authoringComponentContent]="authoringComponentContent">
+  <edit-component-tags [componentContent]="componentContent">
   </edit-component-tags>
 </div>
 <edit-graph-connected-components
     [nodeId]="nodeId"
     [componentId]="componentId"
     [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-    [componentContent]="authoringComponentContent"
-    [connectedComponents]="authoringComponentContent.connectedComponents"
+    [componentContent]="componentContent"
+    [connectedComponents]="componentContent.connectedComponents"
     (connectedComponentsChanged)="connectedComponentsChanged($event)">
 </edit-graph-connected-components>
 <edit-component-json [nodeId]="nodeId" [componentId]="componentId"></edit-component-json>

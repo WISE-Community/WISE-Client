@@ -65,12 +65,12 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   }
 
   deleteLogic(index: number): void {
-    if (this.authoringComponentContent.logic.length === 1) {
+    if (this.componentContent.logic.length === 1) {
       alert(
         $localize`You are not allowed to delete this Grouping Logic because you must have at least one.`
       );
     } else if (confirm($localize`Are you sure you want to delete this Grouping Logic?`)) {
-      this.authoringComponentContent.logic.splice(index, 1);
+      this.componentContent.logic.splice(index, 1);
       this.componentChanged();
     }
   }
@@ -89,14 +89,14 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   }
 
   addQuestion(): void {
-    this.authoringComponentContent.questionBank.push('');
+    this.componentContent.questionBank.push('');
     this.componentChanged();
   }
 
   deleteQuestion(index: number): void {
     this.confirmAndRemove(
       $localize`Are you sure you want to delete this question?`,
-      this.authoringComponentContent.questionBank,
+      this.componentContent.questionBank,
       index
     );
   }

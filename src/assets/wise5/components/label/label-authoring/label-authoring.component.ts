@@ -39,10 +39,10 @@ export class LabelAuthoring extends ComponentAuthoring {
 
   ngOnInit() {
     super.ngOnInit();
-    if (this.authoringComponentContent.enableCircles == null) {
+    if (this.componentContent.enableCircles == null) {
       // If this component was created before enableCircles was implemented, we will default it to
       // true in the authoring so that the "Enable Dots" checkbox is checked.
-      this.authoringComponentContent.enableCircles = true;
+      this.componentContent.enableCircles = true;
     }
   }
 
@@ -57,13 +57,13 @@ export class LabelAuthoring extends ComponentAuthoring {
       canEdit: false,
       canDelete: false
     };
-    this.authoringComponentContent.labels.push(newLabel);
+    this.componentContent.labels.push(newLabel);
     this.componentChanged();
   }
 
   deleteLabel(index: number, label: any): void {
     if (confirm($localize`Are you sure you want to delete this label?\n\n${label.text}`)) {
-      this.authoringComponentContent.labels.splice(index, 1);
+      this.componentContent.labels.splice(index, 1);
       this.componentChanged();
     }
   }
@@ -72,13 +72,13 @@ export class LabelAuthoring extends ComponentAuthoring {
     super.assetSelected({ nodeId, componentId, assetItem, target });
     const fileName = assetItem.fileName;
     if (target === 'background') {
-      this.authoringComponentContent.backgroundImage = fileName;
+      this.componentContent.backgroundImage = fileName;
       this.componentChanged();
     }
   }
 
   saveStarterState(starterState: any): void {
-    this.authoringComponentContent.labels = starterState;
+    this.componentContent.labels = starterState;
     this.componentChanged();
   }
 
@@ -93,7 +93,7 @@ export class LabelAuthoring extends ComponentAuthoring {
   }
 
   deleteStarterState(): void {
-    this.authoringComponentContent.labels = [];
+    this.componentContent.labels = [];
     this.componentChanged();
   }
 

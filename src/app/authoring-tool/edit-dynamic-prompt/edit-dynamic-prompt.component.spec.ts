@@ -30,7 +30,7 @@ describe('EditDynamicPromptComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditDynamicPromptComponent);
     component = fixture.componentInstance;
-    component.authoringComponentContent = {};
+    component.componentContent = {};
     fixture.detectChanges();
   });
 
@@ -41,14 +41,14 @@ describe('EditDynamicPromptComponent', () => {
 function toggleDynamicPrompt() {
   describe('toggleDynamicPrompt()', () => {
     it('should toggle dynamic prompt on when it does not exist', () => {
-      expect(component.authoringComponentContent.dynamicPrompt).toBeUndefined();
+      expect(component.componentContent.dynamicPrompt).toBeUndefined();
       callToggleDynamicPrompt(true);
-      expect(component.authoringComponentContent.dynamicPrompt.enabled).toBeTrue();
+      expect(component.componentContent.dynamicPrompt.enabled).toBeTrue();
     });
 
     it('should toggle dynamic prompt off', () => {
       callToggleDynamicPrompt(false);
-      expect(component.authoringComponentContent.dynamicPrompt.enabled).toBeFalse();
+      expect(component.componentContent.dynamicPrompt.enabled).toBeFalse();
     });
   });
 }
@@ -62,7 +62,7 @@ function callToggleDynamicPrompt(checked: boolean): void {
 function referenceComponentNodeIdChanged() {
   describe('referenceComponentNodeIdChanged()', () => {
     beforeEach(() => {
-      component.authoringComponentContent.dynamicPrompt = new DynamicPrompt({
+      component.componentContent.dynamicPrompt = new DynamicPrompt({
         referenceComponent: {}
       });
     });
@@ -81,7 +81,7 @@ function referenceComponentNodeIdChanged_NoAllowedComponents_HandleNodeIdChanged
     ]);
     changeReferenceComponentNodeId(node1Id);
     expectReferenceComponentNodeIdAndComponentId(
-      component.authoringComponentContent.dynamicPrompt.referenceComponent,
+      component.componentContent.dynamicPrompt.referenceComponent,
       node1Id,
       null
     );
@@ -97,7 +97,7 @@ function referenceComponentNodeIdChanged_OneAllowedComponent_HandleNodeIdChanged
     ]);
     changeReferenceComponentNodeId(node1Id);
     expectReferenceComponentNodeIdAndComponentId(
-      component.authoringComponentContent.dynamicPrompt.referenceComponent,
+      component.componentContent.dynamicPrompt.referenceComponent,
       node1Id,
       component2Id
     );
@@ -113,7 +113,7 @@ function referenceComponentNodeIdChanged_MultipleAllowedComponents_HandleNodeIdC
     ]);
     changeReferenceComponentNodeId(node1Id);
     expectReferenceComponentNodeIdAndComponentId(
-      component.authoringComponentContent.dynamicPrompt.referenceComponent,
+      component.componentContent.dynamicPrompt.referenceComponent,
       node1Id,
       null
     );
@@ -125,7 +125,7 @@ function setUpGetComponentsSpy(components: any[]): void {
 }
 
 function changeReferenceComponentNodeId(nodeId: string): void {
-  const referenceComponent = component.authoringComponentContent.dynamicPrompt.referenceComponent;
+  const referenceComponent = component.componentContent.dynamicPrompt.referenceComponent;
   referenceComponent.nodeId = node1Id;
   component.referenceComponentNodeIdChanged({ nodeId: node1Id, componentId: component0Id });
 }

@@ -58,7 +58,7 @@ describe('EditCommonAdvancedComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditCommonAdvancedComponent);
     component = fixture.componentInstance;
-    component.authoringComponentContent = {};
+    component.componentContent = {};
     fixture.detectChanges();
   });
 

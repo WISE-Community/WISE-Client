@@ -41,8 +41,8 @@ export class SummaryAuthoring extends ComponentAuthoring {
   }
 
   summaryNodeIdChanged(): void {
-    this.authoringComponentContent.summaryComponentId = null;
-    const components = this.getComponents(this.authoringComponentContent.summaryNodeId);
+    this.componentContent.summaryComponentId = null;
+    const components = this.getComponents(this.componentContent.summaryNodeId);
     const allowedComponents = [];
     for (const component of components) {
       if (this.isComponentTypeAllowed(component.type) && component.id != this.componentId) {
@@ -50,7 +50,7 @@ export class SummaryAuthoring extends ComponentAuthoring {
       }
     }
     if (allowedComponents.length === 1) {
-      this.authoringComponentContent.summaryComponentId = allowedComponents[0].id;
+      this.componentContent.summaryComponentId = allowedComponents[0].id;
     }
     this.performUpdatesIfNecessary();
     this.componentChanged();
@@ -79,8 +79,8 @@ export class SummaryAuthoring extends ComponentAuthoring {
   }
 
   updateStudentDataTypeOptionsIfNecessary(): void {
-    const nodeId = this.authoringComponentContent.summaryNodeId;
-    const componentId = this.authoringComponentContent.summaryComponentId;
+    const nodeId = this.componentContent.summaryNodeId;
+    const componentId = this.componentContent.summaryComponentId;
     this.isResponsesOptionAvailable = this.isStudentDataTypeAvailableForComponent(
       nodeId,
       componentId,
@@ -89,35 +89,34 @@ export class SummaryAuthoring extends ComponentAuthoring {
   }
 
   updateStudentDataTypeIfNecessary(): void {
-    const nodeId = this.authoringComponentContent.summaryNodeId;
-    const componentId = this.authoringComponentContent.summaryComponentId;
-    const studentDataType = this.authoringComponentContent.studentDataType;
+    const nodeId = this.componentContent.summaryNodeId;
+    const componentId = this.componentContent.summaryComponentId;
+    const studentDataType = this.componentContent.studentDataType;
     if (!this.isStudentDataTypeAvailableForComponent(nodeId, componentId, studentDataType)) {
       if (this.isStudentDataTypeAvailableForComponent(nodeId, componentId, 'responses')) {
-        this.authoringComponentContent.studentDataType = 'responses';
+        this.componentContent.studentDataType = 'responses';
       } else if (this.isStudentDataTypeAvailableForComponent(nodeId, componentId, 'scores')) {
-        this.authoringComponentContent.studentDataType = 'scores';
+        this.componentContent.studentDataType = 'scores';
       } else {
-        this.authoringComponentContent.studentDataType = null;
+        this.componentContent.studentDataType = null;
       }
     }
   }
 
   updateHasCorrectAnswerIfNecessary(): void {
     this.isHighlightCorrectAnswerAvailable =
-      this.componentHasCorrectAnswer() &&
-      this.authoringComponentContent.studentDataType === 'responses';
+      this.componentHasCorrectAnswer() && this.componentContent.studentDataType === 'responses';
     if (!this.isHighlightCorrectAnswerAvailable) {
-      this.authoringComponentContent.highlightCorrectAnswer = false;
+      this.componentContent.highlightCorrectAnswer = false;
     }
   }
 
   updateChartTypeOptionsIfNecessary(): void {
     this.isPieChartAllowed =
-      this.authoringComponentContent.studentDataType === 'scores' ||
+      this.componentContent.studentDataType === 'scores' ||
       !this.componentAllowsMultipleResponses();
-    if (!this.isPieChartAllowed && this.authoringComponentContent.chartType === 'pie') {
-      this.authoringComponentContent.chartType = 'column';
+    if (!this.isPieChartAllowed && this.componentContent.chartType === 'pie') {
+      this.componentContent.chartType = 'column';
     }
   }
 
@@ -138,8 +137,8 @@ export class SummaryAuthoring extends ComponentAuthoring {
   }
 
   componentHasCorrectAnswer(): boolean {
-    const nodeId = this.authoringComponentContent.summaryNodeId;
-    const componentId = this.authoringComponentContent.summaryComponentId;
+    const nodeId = this.componentContent.summaryNodeId;
+    const componentId = this.componentContent.summaryComponentId;
     if (nodeId != null && componentId != null) {
       const component = this.ProjectService.getComponent(nodeId, componentId);
       if (component != null) {
@@ -151,8 +150,8 @@ export class SummaryAuthoring extends ComponentAuthoring {
   }
 
   componentAllowsMultipleResponses(): boolean {
-    const nodeId = this.authoringComponentContent.summaryNodeId;
-    const componentId = this.authoringComponentContent.summaryComponentId;
+    const nodeId = this.componentContent.summaryNodeId;
+    const componentId = this.componentContent.summaryComponentId;
     if (nodeId != null && componentId != null) {
       const component = this.ProjectService.getComponent(nodeId, componentId);
       if (component != null) {
@@ -163,17 +162,17 @@ export class SummaryAuthoring extends ComponentAuthoring {
   }
 
   addCustomLabelColor(): void {
-    if (this.authoringComponentContent.customLabelColors == null) {
-      this.authoringComponentContent.customLabelColors = [];
+    if (this.componentContent.customLabelColors == null) {
+      this.componentContent.customLabelColors = [];
     }
-    this.authoringComponentContent.customLabelColors.push({ label: '', color: '' });
+    this.componentContent.customLabelColors.push({ label: '', color: '' });
     this.componentChanged();
   }
 
   deleteCustomLabelColor(index: number): void {
     this.confirmAndRemove(
       $localize`Are you sure you want to delete this custom label color?`,
-      this.authoringComponentContent.customLabelColors,
+      this.componentContent.customLabelColors,
       index
     );
   }

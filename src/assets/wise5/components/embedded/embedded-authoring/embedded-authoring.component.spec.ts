@@ -49,7 +49,7 @@ function shouldSelectTheModelFile() {
   it('should select the model file', () => {
     component.nodeId = 'node1';
     component.componentId = 'component1';
-    expect(component.authoringComponentContent.url).toEqual('glucose.html');
+    expect(component.componentContent.url).toEqual('glucose.html');
     spyOn(component, 'componentChanged').and.callFake(() => {});
     const args = {
       nodeId: 'node1',
@@ -61,6 +61,6 @@ function shouldSelectTheModelFile() {
       }
     };
     component.assetSelected(args);
-    expect(component.authoringComponentContent.url).toEqual('thermo.html');
+    expect(component.componentContent.url).toEqual('thermo.html');
   });
 }

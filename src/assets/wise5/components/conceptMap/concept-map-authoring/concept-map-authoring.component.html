@@ -1,11 +1,11 @@
 <div fxLayout="column" fxLayoutGap="16px">
-  <edit-component-prompt [prompt]="authoringComponentContent.prompt"
+  <edit-component-prompt [prompt]="componentContent.prompt"
       (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
   <div fxLayoutGap="16px">
     <mat-form-field class="background">
       <mat-label i18n>Background Image (Optional)</mat-label>
       <input matInput
-          [(ngModel)]="authoringComponentContent.background"
+          [(ngModel)]="componentContent.background"
           (ngModelChange)="inputChange.next($event)" />
     </mat-form-field>
     <button mat-raised-button
@@ -19,7 +19,7 @@
   </div>
   <div>
     <mat-checkbox color="primary"
-        [(ngModel)]="authoringComponentContent.stretchBackground"
+        [(ngModel)]="componentContent.stretchBackground"
         (ngModelChange)="componentChanged()"
         i18n>
       Stretch background to fit
@@ -27,7 +27,7 @@
   </div>
   <div>
     <mat-checkbox color="primary"
-        [(ngModel)]="authoringComponentContent.isStudentAttachmentEnabled"
+        [(ngModel)]="componentContent.isStudentAttachmentEnabled"
         (ngModelChange)="componentChanged()"
         i18n>
       Allow student to upload background image
@@ -37,14 +37,14 @@
     <mat-form-field>
       <mat-label i18n>Canvas Width (Optional)</mat-label>
       <input matInput
-          [(ngModel)]="authoringComponentContent.width"
+          [(ngModel)]="componentContent.width"
           (ngModelChange)="inputChange.next($event)"
           type="number" />
     </mat-form-field>
     <mat-form-field>
       <mat-label i18n>Canvas Height (Optional)</mat-label>
       <input matInput
-          [(ngModel)]="authoringComponentContent.height"
+          [(ngModel)]="componentContent.height"
           (ngModelChange)="inputChange.next($event)"
           type="number" />
     </mat-form-field>
@@ -63,11 +63,11 @@
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <div *ngIf="authoringComponentContent.nodes == null || authoringComponentContent.nodes.length == 0">
+    <div *ngIf="componentContent.nodes == null || componentContent.nodes.length == 0">
       <p i18n>There are no nodes. Click the "Add Node" button to add a node.</p>
     </div>
     <div>
-      <div *ngFor="let node of authoringComponentContent.nodes; index as nodeIndex; first as isFirst; last as isLast"
+      <div *ngFor="let node of componentContent.nodes; index as nodeIndex; first as isFirst; last as isLast"
           class="content-item"
           fxLayout="row wrap"
           fxLayoutAlign="start center">
@@ -121,7 +121,7 @@
           <button mat-raised-button
               color="primary"
               [disabled]="isFirst"
-              (click)="moveObjectUp(authoringComponentContent.nodes, nodeIndex)"
+              (click)="moveObjectUp(componentContent.nodes, nodeIndex)"
               matTooltip="Move Up"
               matTooltipPosition="above"
               i18n-matTooltip
@@ -132,7 +132,7 @@
           <button mat-raised-button
               color="primary"
               [disabled]="isLast"
-              (click)="moveObjectDown(authoringComponentContent.nodes, nodeIndex)"
+              (click)="moveObjectDown(componentContent.nodes, nodeIndex)"
               matTooltip="Move Down"
               matTooltipPosition="above"
               i18n-matTooltip
@@ -155,7 +155,7 @@
     </div>
     <div>
       <mat-checkbox color="primary"
-          [(ngModel)]="authoringComponentContent.showNodeLabels"
+          [(ngModel)]="componentContent.showNodeLabels"
           (ngModelChange)="componentChanged()"
           i18n>
         Show Node Labels
@@ -166,7 +166,7 @@
     <mat-form-field class="links-title">
       <mat-label i18n>Links Title</mat-label>
       <input matInput
-          [(ngModel)]="authoringComponentContent.linksTitle"
+          [(ngModel)]="componentContent.linksTitle"
           (ngModelChange)="inputChange.next($event)"/>
     </mat-form-field>
     <div fxLayoutAlign="start center" fxLayoutGap="16px">
@@ -182,11 +182,11 @@
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <div *ngIf="authoringComponentContent.links == null || authoringComponentContent.links.length == 0">
+    <div *ngIf="componentContent.links == null || componentContent.links.length == 0">
       <p i18n>There are no links. Click the "Add Link" button to add a link.</p>
     </div>
     <div>
-      <div *ngFor="let link of authoringComponentContent.links; index as linkIndex; first as isFirst; last as isLast"
+      <div *ngFor="let link of componentContent.links; index as linkIndex; first as isFirst; last as isLast"
           class="content-item"
           fxLayout="row wrap"
           fxLayoutAlign="start center"
@@ -208,7 +208,7 @@
           <button mat-raised-button
               color="primary"
               [disabled]="isFirst"
-              (click)="moveObjectUp(authoringComponentContent.links, linkIndex)"
+              (click)="moveObjectUp(componentContent.links, linkIndex)"
               matTooltip="Move Up"
               matTooltipPosition="above"
               i18n-matTooltip
@@ -219,7 +219,7 @@
           <button mat-raised-button
               color="primary"
               [disabled]="isLast"
-              (click)="moveObjectDown(authoringComponentContent.links, linkIndex)"
+              (click)="moveObjectDown(componentContent.links, linkIndex)"
               matTooltip="Move Down"
               matTooltipPosition="above"
               i18n-matTooltip

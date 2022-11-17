@@ -10,7 +10,7 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 })
 export class EditDynamicPromptComponent implements OnInit {
   allowedReferenceComponentTypes: string[] = ['OpenResponse'];
-  @Input() authoringComponentContent: any;
+  @Input() componentContent: any;
   @Output() dynamicPromptChangedEvent = new EventEmitter();
 
   constructor(private projectService: ProjectService) {}
@@ -18,13 +18,13 @@ export class EditDynamicPromptComponent implements OnInit {
   ngOnInit(): void {}
 
   toggleDynamicPrompt(event: MatCheckboxChange): void {
-    if (this.authoringComponentContent.dynamicPrompt == null) {
-      this.authoringComponentContent.dynamicPrompt = new DynamicPrompt({
+    if (this.componentContent.dynamicPrompt == null) {
+      this.componentContent.dynamicPrompt = new DynamicPrompt({
         referenceComponent: {},
         rules: []
       });
     }
-    this.authoringComponentContent.dynamicPrompt.enabled = event.checked;
+    this.componentContent.dynamicPrompt.enabled = event.checked;
     this.dynamicPromptChangedEvent.next();
   }
 
@@ -37,7 +37,7 @@ export class EditDynamicPromptComponent implements OnInit {
         allowedComponent = component;
       }
     }
-    const dynamicPrompt = this.authoringComponentContent.dynamicPrompt;
+    const dynamicPrompt = this.componentContent.dynamicPrompt;
     if (numAllowedComponents === 1) {
       dynamicPrompt.referenceComponent.componentId = allowedComponent.id;
     } else {

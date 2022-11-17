@@ -1,10 +1,10 @@
-<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+<edit-component-prompt [prompt]="componentContent.prompt"
    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <div fxLayout="row" fxLayoutAlign="start center">
   <mat-form-field class="background-input-container">
     <mat-label i18n>Background Image (Optional)</mat-label>
     <input matInput
-        [(ngModel)]="authoringComponentContent.background"
+        [(ngModel)]="componentContent.background"
         (ngModelChange)="backgroundImageChange.next($event)"/>
   </mat-form-field>
   <button mat-raised-button
@@ -22,7 +22,7 @@
 <div>
   <mat-checkbox
       color="primary"
-      [(ngModel)]="authoringComponentContent.isStudentAttachmentEnabled"
+      [(ngModel)]="componentContent.isStudentAttachmentEnabled"
       (ngModelChange)="componentChanged()"
       i18n>
     Allow student to upload background image
@@ -33,14 +33,14 @@
     <mat-label>Canvas Width (Optional)</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.width"
+        [(ngModel)]="componentContent.width"
         (ngModelChange)="canvasWidthChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="canvas-dimension-container">
     <mat-label i18n>Canvas Height (Optional)</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.height"
+        [(ngModel)]="componentContent.height"
         (ngModelChange)="canvasHeightChange.next($event)"/>
   </mat-form-field>
 </div>
@@ -70,7 +70,7 @@
   <div class="tools-div">
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.select"
+        [(ngModel)]="componentContent.tools.select"
         (ngModelChange)="toolClicked()"
         i18n>
       Select Tool
@@ -78,7 +78,7 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.line"
+        [(ngModel)]="componentContent.tools.line"
         (ngModelChange)="toolClicked()"
         i18n>
       Line Tool
@@ -86,7 +86,7 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.shape"
+        [(ngModel)]="componentContent.tools.shape"
         (ngModelChange)="toolClicked()"
         i18n>
       Shape Tool
@@ -94,7 +94,7 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.freeHand"
+        [(ngModel)]="componentContent.tools.freeHand"
         (ngModelChange)="toolClicked()"
         i18n>
       Free Hand Tool
@@ -103,7 +103,7 @@
   <div class="tools-div">
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.text"
+        [(ngModel)]="componentContent.tools.text"
         (ngModelChange)="toolClicked()"
         i18n>
       Text Tool
@@ -111,7 +111,7 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.stamp"
+        [(ngModel)]="componentContent.tools.stamp"
         (ngModelChange)="toolClicked()"
         i18n>
       Stamp Tool
@@ -119,7 +119,7 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.clone"
+        [(ngModel)]="componentContent.tools.clone"
         (ngModelChange)="toolClicked()"
         i18n>
       Clone Tool
@@ -127,7 +127,7 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.strokeColor"
+        [(ngModel)]="componentContent.tools.strokeColor"
         (ngModelChange)="toolClicked()"
         i18n>
       Stroke Color Tool
@@ -136,7 +136,7 @@
   <div class="tools-div">
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.fillColor"
+        [(ngModel)]="componentContent.tools.fillColor"
         (ngModelChange)="toolClicked()"
         i18n>
       Fill Color Tool
@@ -144,7 +144,7 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.strokeWidth"
+        [(ngModel)]="componentContent.tools.strokeWidth"
         (ngModelChange)="toolClicked()"
         i18n>
       Stroke Width Tool
@@ -152,7 +152,7 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.sendBack"
+        [(ngModel)]="componentContent.tools.sendBack"
         (ngModelChange)="toolClicked()"
         i18n>
       Send Back Tool
@@ -160,7 +160,7 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.sendForward"
+        [(ngModel)]="componentContent.tools.sendForward"
         (ngModelChange)="toolClicked()"
         i18n>
       Send Forward Tool
@@ -169,7 +169,7 @@
   <div class="tools-div">
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.undo"
+        [(ngModel)]="componentContent.tools.undo"
         (ngModelChange)="toolClicked()"
         i18n>
       Undo Tool
@@ -177,7 +177,7 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.redo"
+        [(ngModel)]="componentContent.tools.redo"
         (ngModelChange)="toolClicked()"
         i18n>
       Redo Tool
@@ -185,14 +185,14 @@
     <br/>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.tools.delete"
+        [(ngModel)]="componentContent.tools.delete"
         (ngModelChange)="toolClicked()"
         i18n>
       Delete Tool
     </mat-checkbox>
   </div>
 </div>
-<div *ngIf="authoringComponentContent.tools.stamp">
+<div *ngIf="componentContent.tools.stamp">
   <div class="add-stamps-container">
     <span i18n>Stamps</span>
     <button mat-raised-button
@@ -207,7 +207,7 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div *ngIf="authoringComponentContent.stamps.Stamps.length == 0">
+  <div *ngIf="componentContent.stamps.Stamps.length == 0">
     There are no stamps. Click the "Add Stamp" button to add a stamp.
   </div>
   <div *ngFor="let stamp of stamps; index as stampIndex; first as isFirst; last as isLast;">

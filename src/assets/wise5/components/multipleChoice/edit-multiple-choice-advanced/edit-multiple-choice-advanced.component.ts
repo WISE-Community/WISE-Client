@@ -9,5 +9,5 @@ import { MultipleChoiceContent } from '../MultipleChoiceContent';
 })
 export class EditMultipleChoiceAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['MultipleChoice'];
-  authoringComponentContent: MultipleChoiceContent;
+  componentContent: MultipleChoiceContent;
 }
