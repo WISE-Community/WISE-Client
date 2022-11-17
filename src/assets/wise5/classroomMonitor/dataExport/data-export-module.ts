@@ -1,18 +1,16 @@
-import { downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import * as angular from 'angular';
 import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
 import { DataExportService } from '../../services/dataExportService';
 import DataExportController from './dataExportController';
-import ExportController from './exportController';
-import ExportVisitsController from './exportVisitsController';
+import { ExportVisitsComponent } from './export-visits/export-visits.component';
 
 export default angular
   .module('dataExport', ['ngFileSaver'])
   .factory('DataExportService', downgradeInjectable(DataExportService))
   .factory('ComponentServiceLookupService', downgradeInjectable(ComponentServiceLookupService))
   .controller('DataExportController', DataExportController)
-  .controller('ExportController', ExportController)
-  .controller('ExportVisitsController', ExportVisitsController)
+  .directive('exportVisits', downgradeComponent({ component: ExportVisitsComponent }))
   .config([
     '$stateProvider',
     ($stateProvider) => {
@@ -25,9 +23,7 @@ export default angular
         })
         .state('root.cm.exportVisits', {
           url: '/export/visits',
-          templateUrl: '/assets/wise5/classroomMonitor/dataExport/exportVisits.html',
-          controller: 'ExportVisitsController',
-          controllerAs: 'exportVisitsController'
+          component: 'exportVisits'
         });
     }
   ]);

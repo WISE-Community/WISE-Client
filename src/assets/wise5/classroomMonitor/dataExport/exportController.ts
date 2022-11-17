@@ -1,14 +1,11 @@
 'use strict';
 
+import * as FileSaver from 'file-saver';
+
 class ExportController {
-  $translate: any;
   maxExcelCellSize: number = 32767;
 
-  static $inject = ['$filter', 'FileSaver'];
-
-  constructor($filter, private FileSaver: any) {
-    this.$translate = $filter('translate');
-  }
+  constructor() {}
 
   /**
    * Generate the csv file and have the client download it
@@ -19,7 +16,7 @@ class ExportController {
   generateCSVFile(rows: any[], fileName: string) {
     const csvString = this.generateCSVString(rows);
     const csvBlob = new Blob([csvString], { type: 'text/csv' });
-    this.FileSaver.saveAs(csvBlob, fileName);
+    FileSaver.saveAs(csvBlob, fileName);
   }
 
   generateCSVString(rows: any[]) {
