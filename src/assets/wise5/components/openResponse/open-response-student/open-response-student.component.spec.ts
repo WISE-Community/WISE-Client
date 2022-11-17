@@ -10,6 +10,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { of } from 'rxjs';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../common/Component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { AnnotationService } from '../../../services/annotationService';
@@ -18,6 +19,7 @@ import { CRaterService } from '../../../services/cRaterService';
 import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentDataService } from '../../../services/studentDataService';
+import { OpenResponseContent } from '../OpenResponseContent';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
 
@@ -55,22 +57,18 @@ describe('OpenResponseStudent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OpenResponseStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
-    component.componentContent = {
+    const componentContent = {
       cRater: {},
       enableCRater: true,
       id: componentId,
       prompt: 'How do plants obtain energy?',
       showSaveButton: true,
       showSubmitButton: true
-    };
+    } as OpenResponseContent;
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {

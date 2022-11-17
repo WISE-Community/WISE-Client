@@ -11,7 +11,6 @@ import { PossibleScoreComponent } from '../../../../../app/possible-score/possib
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComputerAvatar } from '../../../common/ComputerAvatar';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
-import { AnnotationService } from '../../../services/annotationService';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
 import { ProjectService } from '../../../services/projectService';
@@ -24,6 +23,7 @@ import { CRaterScore } from '../../common/cRater/CRaterScore';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { DialogGuidanceStudentComponent } from './dialog-guidance-student.component';
+import { Component } from '../../../common/Component';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
@@ -55,19 +55,16 @@ describe('DialogGuidanceStudentComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogGuidanceStudentComponent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
-    component.componentContent = TestBed.inject(DialogGuidanceService).createComponent();
-    component.componentContent.feedbackRules = [
+    const componentContent = TestBed.inject(DialogGuidanceService).createComponent();
+    componentContent.feedbackRules = [
       {
         expression: 'isDefault',
         feedback: 'Default Feedback'
       }
     ];
+    component.component = new Component(componentContent, null);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     fixture.detectChanges();

@@ -8,8 +8,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../common/Component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
-import { AnnotationService } from '../../../services/annotationService';
 import { ClickToSnipImageService } from '../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../services/projectService';
 import { MultipleChoiceStudent } from './multiple-choice-student.component';
@@ -121,13 +121,8 @@ describe('MultipleChoiceStudentComponent', () => {
       declarations: [ComponentHeader, MultipleChoiceStudent, PossibleScoreComponent]
     });
     fixture = TestBed.createComponent(MultipleChoiceStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
     originalComponentContent = {
       id: componentId,
       type: multipleChoiceType,
@@ -139,7 +134,8 @@ describe('MultipleChoiceStudentComponent', () => {
       ],
       showFeedback: true
     };
-    component.componentContent = JSON.parse(JSON.stringify(originalComponentContent));
+    const componentContent = JSON.parse(JSON.stringify(originalComponentContent));
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
@@ -195,6 +191,7 @@ function testMultipleAnswerComponent() {
   describe('multiple answer component', () => {
     beforeEach(() => {
       component.componentContent = JSON.parse(JSON.stringify(multipleAnswerComponent));
+      component.component = new Component(component.componentContent, nodeId);
       component.ngOnInit();
     });
     multipleAnswerComponentShouldShowCorrectWhenOnlyTheCorrectAnswersAreSubmitted();
@@ -211,6 +208,7 @@ function testSingleAnswerSingleCorrectAnswerComponent() {
       component.componentContent = JSON.parse(
         JSON.stringify(singleAnswerSingleCorrectAnswerComponent)
       );
+      component.component = new Component(component.componentContent, nodeId);
       component.ngOnInit();
     });
     singleAnswerSingleCorrectAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoice();
@@ -225,6 +223,8 @@ function testSingleAnswerMultipleCorrectAnswersComponent() {
       component.componentContent = JSON.parse(
         JSON.stringify(singleAnswerMultipleCorrectAnswersComponent)
       );
+      component.component = new Component(component.componentContent, nodeId);
+
       component.ngOnInit();
     });
     singleAnswerMultipleCorrectAnswersComponentShouldShowCorrect();

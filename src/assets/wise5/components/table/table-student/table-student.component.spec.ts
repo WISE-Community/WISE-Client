@@ -5,6 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../common/Component';
 import { AnnotationService } from '../../../services/annotationService';
 import { ProjectService } from '../../../services/projectService';
 import { UtilService } from '../../../services/utilService';
@@ -36,14 +37,9 @@ describe('TableStudentComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(TableStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
-    component.componentContent = {
+    const componentContent = {
       cRater: {},
       dataExplorerGraphTypes: [{ name: 'Scatter Plot', value: 'scatter' }],
       dataExplorerDataToColumn: {
@@ -72,6 +68,7 @@ describe('TableStudentComponent', () => {
       tableData: createTestTableData(),
       type: 'Table'
     };
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
