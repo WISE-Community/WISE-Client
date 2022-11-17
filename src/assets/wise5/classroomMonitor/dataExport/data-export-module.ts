@@ -3,14 +3,14 @@ import * as angular from 'angular';
 import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
 import { DataExportService } from '../../services/dataExportService';
 import DataExportController from './dataExportController';
-import { ExportVisitsComponent } from './export-visits/export-visits.component';
+import { ExportStepVisitsComponent } from './export-step-visits/export-step-visits.component';
 
 export default angular
   .module('dataExport', ['ngFileSaver'])
   .factory('DataExportService', downgradeInjectable(DataExportService))
   .factory('ComponentServiceLookupService', downgradeInjectable(ComponentServiceLookupService))
   .controller('DataExportController', DataExportController)
-  .directive('exportVisits', downgradeComponent({ component: ExportVisitsComponent }))
+  .directive('exportStepVisits', downgradeComponent({ component: ExportStepVisitsComponent }))
   .config([
     '$stateProvider',
     ($stateProvider) => {
@@ -23,7 +23,7 @@ export default angular
         })
         .state('root.cm.exportVisits', {
           url: '/export/visits',
-          component: 'exportVisits'
+          component: 'exportStepVisits'
         });
     }
   ]);

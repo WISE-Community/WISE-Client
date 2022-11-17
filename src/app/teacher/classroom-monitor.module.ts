@@ -59,7 +59,7 @@ import { NodeProgressViewComponent } from '../../assets/wise5/classroomMonitor/c
 import { TopBarComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component';
 import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component';
 import { StudentGradingComponent } from '../../assets/wise5/classroomMonitor/student-grading/student-grading.component';
-import { ExportVisitsComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-visits/export-visits.component';
+import { ExportStepVisitsComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +73,7 @@ import { ExportVisitsComponent } from '../../assets/wise5/classroomMonitor/dataE
     EditComponentAnnotationsComponent,
     EditComponentCommentComponent,
     EditComponentScoreComponent,
-    ExportVisitsComponent,
+    ExportStepVisitsComponent,
     GradingEditComponentMaxScoreComponent,
     ManagePeriodComponent,
     ManageShowStudentInfoComponent,

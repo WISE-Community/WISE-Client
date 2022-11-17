@@ -7,11 +7,11 @@ import ExportController from '../exportController';
 import { UpgradeModule } from '@angular/upgrade/static';
 
 @Component({
-  selector: 'export-visits',
-  templateUrl: './export-visits.component.html',
-  styleUrls: ['./export-visits.component.scss']
+  selector: 'export-step-visits',
+  templateUrl: './export-step-visits.component.html',
+  styleUrls: ['./export-step-visits.component.scss']
 })
-export class ExportVisitsComponent extends ExportController {
+export class ExportStepVisitsComponent extends ExportController {
   project: any;
   nodes: any[];
   checkedItems: string[] = [];

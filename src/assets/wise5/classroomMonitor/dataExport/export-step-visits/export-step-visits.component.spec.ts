@@ -3,23 +3,22 @@ import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
+import { ExportStepVisitsComponent } from './export-step-visits.component';
 
-import { ExportVisitsComponent } from './export-visits.component';
-
-describe('ExportVisitsComponent', () => {
-  let component: ExportVisitsComponent;
-  let fixture: ComponentFixture<ExportVisitsComponent>;
+describe('ExportStepVisitsComponent', () => {
+  let component: ExportStepVisitsComponent;
+  let fixture: ComponentFixture<ExportStepVisitsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ExportVisitsComponent],
+      declarations: [ExportStepVisitsComponent],
       imports: [ClassroomMonitorTestingModule],
       providers: [DataExportService]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExportVisitsComponent);
+    fixture = TestBed.createComponent(ExportStepVisitsComponent);
     component = fixture.componentInstance;
     spyOn(TestBed.inject(ConfigService), 'getPermissions').and.returnValue({
       canAuthorProject: true,
