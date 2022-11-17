@@ -109,7 +109,7 @@ function createRuleObject(
 function ruleTypeChanged() {
   describe('ruleTypeChanged', () => {
     it('should handle rule type changed to node', () => {
-      component.authoringComponentContent.rules = [rule1];
+      component.componentContent.rules = [rule1];
       rule1.type = 'node';
       component.ruleTypeChanged(0);
       expect(rule1.linkLabel).toBeUndefined();
@@ -121,9 +121,9 @@ function ruleTypeChanged() {
 function addRule() {
   describe('addRule', () => {
     it('should add a rule', () => {
-      expect(component.authoringComponentContent.rules.length).toEqual(0);
+      expect(component.componentContent.rules.length).toEqual(0);
       component.addRule();
-      expect(component.authoringComponentContent.rules.length).toEqual(1);
+      expect(component.componentContent.rules.length).toEqual(1);
     });
   });
 }
@@ -131,10 +131,10 @@ function addRule() {
 function ruleDeleteButtonClicked() {
   describe('ruleDeleteButtonClicked', () => {
     it('should delete a rule', () => {
-      component.authoringComponentContent.rules = [rule1];
+      component.componentContent.rules = [rule1];
       spyOn(window, 'confirm').and.returnValue(true);
       component.ruleDeleteButtonClicked(0);
-      expect(component.authoringComponentContent.rules.length).toEqual(0);
+      expect(component.componentContent.rules.length).toEqual(0);
     });
   });
 }

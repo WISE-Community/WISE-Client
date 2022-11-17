@@ -22,5 +22,5 @@ export class EditEmbeddedAdvancedComponent extends EditAdvancedComponentComponen
     'OpenResponse',
     'Table'
   ];
-  authoringComponentContent: EmbeddedContent;
+  componentContent: EmbeddedContent;
 }

@@ -83,7 +83,7 @@ function createComponentContent() {
 function shouldAddAnAnimationObject() {
   it('should add an animation object', () => {
     component.addObject();
-    expect(component.authoringComponentContent.objects.length).toEqual(1);
+    expect(component.componentContent.objects.length).toEqual(1);
   });
 }
 

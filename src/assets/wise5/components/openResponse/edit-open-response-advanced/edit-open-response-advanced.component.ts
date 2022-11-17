@@ -13,7 +13,7 @@ import { OpenResponseContent } from '../OpenResponseContent';
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['OpenResponse'];
-  authoringComponentContent: OpenResponseContent;
+  componentContent: OpenResponseContent;
   cRaterItemIdIsValid: boolean = null;
   initialFeedbackRules = [
     {
@@ -37,16 +37,16 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
 
   ngOnInit(): void {
     super.ngOnInit();
-    if (this.authoringComponentContent.completionCriteria != null) {
+    if (this.componentContent.completionCriteria != null) {
       this.useCustomCompletionCriteria = true;
     }
     this.nodeIds = this.teacherProjectService.getFlattenedProjectAsNodeIds();
   }
 
   enableCRaterClicked(): void {
-    if (this.authoringComponentContent.enableCRater) {
-      if (this.authoringComponentContent.cRater == null) {
-        this.authoringComponentContent.cRater = this.createCRaterObject();
+    if (this.componentContent.enableCRater) {
+      if (this.componentContent.cRater == null) {
+        this.componentContent.cRater = this.createCRaterObject();
       }
       this.setShowSubmitButtonValue(true);
     } else {
@@ -73,11 +73,8 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   }
 
   addScoringRule(): void {
-    if (
-      this.authoringComponentContent.cRater != null &&
-      this.authoringComponentContent.cRater.scoringRules != null
-    ) {
-      this.authoringComponentContent.cRater.scoringRules.push(this.createScoringRule());
+    if (this.componentContent.cRater != null && this.componentContent.cRater.scoringRules != null) {
+      this.componentContent.cRater.scoringRules.push(this.createScoringRule());
       this.componentChanged();
     }
   }
@@ -90,14 +87,14 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   }
 
   scoringRuleDeleteClicked(index: number): void {
-    const scoringRule = this.authoringComponentContent.cRater.scoringRules[index];
+    const scoringRule = this.componentContent.cRater.scoringRules[index];
     const score = scoringRule.score;
     const feedbackText = scoringRule.feedbackText;
     const answer = confirm(
       $localize`Are you sure you want to delete this scoring rule?\n\nScore: ${score}\n\nFeedback Text: ${feedbackText}`
     );
     if (answer) {
-      this.authoringComponentContent.cRater.scoringRules.splice(index, 1);
+      this.componentContent.cRater.scoringRules.splice(index, 1);
       this.componentChanged();
     }
   }
@@ -113,10 +110,10 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
 
   addMultipleAttemptScoringRule(): void {
     if (
-      this.authoringComponentContent.cRater != null &&
-      this.authoringComponentContent.cRater.multipleAttemptScoringRules != null
+      this.componentContent.cRater != null &&
+      this.componentContent.cRater.multipleAttemptScoringRules != null
     ) {
-      this.authoringComponentContent.cRater.multipleAttemptScoringRules.push(
+      this.componentContent.cRater.multipleAttemptScoringRules.push(
         this.createMultipleAttemptScoringRule()
       );
       this.componentChanged();
@@ -131,8 +128,9 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   }
 
   multipleAttemptScoringRuleDeleteClicked(index: number): void {
-    const multipleAttemptScoringRule = this.authoringComponentContent.cRater
-      .multipleAttemptScoringRules[index];
+    const multipleAttemptScoringRule = this.componentContent.cRater.multipleAttemptScoringRules[
+      index
+    ];
     const scoreSequence = multipleAttemptScoringRule.scoreSequence;
     let previousScore = '';
     let currentScore = '';
@@ -145,19 +143,17 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       $localize`Are you sure you want to delete this multiple attempt scoring rule?\n\nPrevious Score: ${previousScore}\n\nCurrent Score: ${currentScore}\n\nFeedback Text: ${feedbackText}`
     );
     if (answer) {
-      this.authoringComponentContent.cRater.multipleAttemptScoringRules.splice(index, 1);
+      this.componentContent.cRater.multipleAttemptScoringRules.splice(index, 1);
       this.componentChanged();
     }
   }
 
   addNotification(): void {
     if (
-      this.authoringComponentContent.notificationSettings != null &&
-      this.authoringComponentContent.notificationSettings.notifications != null
+      this.componentContent.notificationSettings != null &&
+      this.componentContent.notificationSettings.notifications != null
     ) {
-      this.authoringComponentContent.notificationSettings.notifications.push(
-        this.createNotification()
-      );
+      this.componentContent.notificationSettings.notifications.push(this.createNotification());
       this.componentChanged();
     }
   }
@@ -183,7 +179,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   }
 
   notificationDeleteClicked(index: number): void {
-    const notification = this.authoringComponentContent.notificationSettings.notifications[index];
+    const notification = this.componentContent.notificationSettings.notifications[index];
     const scoreSequence = notification.enableCriteria.scoreSequence;
     let previousScore = '';
     let currentScore = '';
@@ -195,13 +191,13 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       $localize`Are you sure you want to delete this notification?\n\nPrevious Score: ${previousScore}\n\nCurrent Score: ${currentScore}`
     );
     if (answer) {
-      this.authoringComponentContent.notificationSettings.notifications.splice(index, 1);
+      this.componentContent.notificationSettings.notifications.splice(index, 1);
       this.componentChanged();
     }
   }
 
   enableMultipleAttemptScoringRulesClicked(): void {
-    const cRater = this.authoringComponentContent.cRater;
+    const cRater = this.componentContent.cRater;
     if (cRater != null && cRater.multipleAttemptScoringRules == null) {
       cRater.multipleAttemptScoringRules = [];
     }
@@ -209,9 +205,9 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   }
 
   enableNotificationsClicked(): void {
-    if (this.authoringComponentContent.enableNotifications) {
-      if (this.authoringComponentContent.notificationSettings == null) {
-        this.authoringComponentContent.notificationSettings = {
+    if (this.componentContent.enableNotifications) {
+      if (this.componentContent.notificationSettings == null) {
+        this.componentContent.notificationSettings = {
           notifications: []
         };
       }
@@ -227,14 +223,14 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     if (this.useCustomCompletionCriteria) {
       // The completion criteria is currently enabled and the author is trying to disable it
       if (confirm($localize`Are you sure you want to delete the custom completion criteria?`)) {
-        delete this.authoringComponentContent.completionCriteria;
+        delete this.componentContent.completionCriteria;
       } else {
         event.preventDefault();
       }
     } else {
       // The completion criteria is currently disabled and the author is trying to enable it
-      if (this.authoringComponentContent.completionCriteria == null) {
-        this.authoringComponentContent.completionCriteria = this.createCompletionCriteria();
+      if (this.componentContent.completionCriteria == null) {
+        this.componentContent.completionCriteria = this.createCompletionCriteria();
       }
     }
     this.componentChanged();
@@ -253,13 +249,13 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       componentId: this.componentId,
       name: 'isSubmitted'
     };
-    this.authoringComponentContent.completionCriteria.criteria.push(newCompletionCriteria);
+    this.componentContent.completionCriteria.criteria.push(newCompletionCriteria);
     this.componentChanged();
   }
 
   deleteCompletionCriteria(index: number): void {
     if (confirm($localize`Are you sure you want to delete this completion criteria?`)) {
-      this.authoringComponentContent.completionCriteria.criteria.splice(index, 1);
+      this.componentContent.completionCriteria.criteria.splice(index, 1);
       this.componentChanged();
     }
   }
@@ -278,13 +274,13 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
 
   setFeedbackEnabled(feedbackEnabled: boolean): void {
     this.initializeFeedback();
-    this.authoringComponentContent.cRater.feedback.enabled = feedbackEnabled;
+    this.componentContent.cRater.feedback.enabled = feedbackEnabled;
     this.componentChanged();
   }
 
   private initializeFeedback(): void {
-    if (!this.authoringComponentContent.cRater.feedback) {
-      this.authoringComponentContent.cRater.feedback = {
+    if (!this.componentContent.cRater.feedback) {
+      this.componentContent.cRater.feedback = {
         enabled: false,
         rules: this.initialFeedbackRules
       };

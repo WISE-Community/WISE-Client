@@ -37,14 +37,14 @@ export class AnimationAuthoring extends ComponentAuthoring {
   }
 
   addObject(): void {
-    if (this.authoringComponentContent.objects == null) {
-      this.authoringComponentContent.objects = [];
+    if (this.componentContent.objects == null) {
+      this.componentContent.objects = [];
     }
     const newObject = {
       id: RandomKeyService.generate(),
       type: 'image'
     };
-    this.authoringComponentContent.objects.push(newObject);
+    this.componentContent.objects.push(newObject);
     this.componentChanged();
   }
 
@@ -113,7 +113,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
 
   moveAuthoredObjectUp(index: number): void {
     if (this.canMoveUp(index)) {
-      const objects = this.authoringComponentContent.objects;
+      const objects = this.componentContent.objects;
       const object = objects[index];
       objects.splice(index, 1);
       objects.splice(index - 1, 0, object);
@@ -122,7 +122,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
   }
 
   moveAuthoredObjectDown(index: number): void {
-    const objects = this.authoringComponentContent.objects;
+    const objects = this.componentContent.objects;
     if (this.canMoveDown(index, objects.length)) {
       const object = objects[index];
       objects.splice(index, 1);
@@ -146,7 +146,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
   }
 
   deleteAnimationObject(index: number): void {
-    this.authoringComponentContent.objects.splice(index, 1);
+    this.componentContent.objects.splice(index, 1);
     this.componentChanged();
   }
 

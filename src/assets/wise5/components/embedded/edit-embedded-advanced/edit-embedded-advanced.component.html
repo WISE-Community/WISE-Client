@@ -2,17 +2,17 @@
   <mat-form-field class="model-parameters">
     <mat-label i18n>Model Parameters</mat-label>
     <input matInput
-        [(ngModel)]="authoringComponentContent.parameters"
+        [(ngModel)]="componentContent.parameters"
         (ngModelChange)="componentChanged()"/>
   </mat-form-field>
 </div>
 <div *ngIf="isNotebookEnabled()">
-  <edit-component-add-to-notebook-button [authoringComponentContent]="authoringComponentContent">
+  <edit-component-add-to-notebook-button [componentContent]="componentContent">
   </edit-component-add-to-notebook-button>
 </div>
 <edit-common-advanced
     [nodeId]="nodeId"
     [componentId]="componentId"
     [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-    [authoringComponentContent]="authoringComponentContent">
+    [componentContent]="componentContent">
 </edit-common-advanced>

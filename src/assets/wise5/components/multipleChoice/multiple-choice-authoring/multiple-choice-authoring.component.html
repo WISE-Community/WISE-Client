@@ -1,9 +1,9 @@
-<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+<edit-component-prompt [prompt]="componentContent.prompt"
    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <p>
   <label id="selection-type-label">Selection Type:</label>
   <mat-radio-group aria-labelledby="selection-type-label"
-      [(ngModel)]="authoringComponentContent.choiceType"
+      [(ngModel)]="componentContent.choiceType"
       (ngModelChange)="componentChanged()">
     <mat-radio-button
         class="choice-radio-button"
@@ -33,12 +33,12 @@
     aria-label="Add">
   <mat-icon>add</mat-icon>
 </button>
-<div *ngIf="authoringComponentContent.choices == null || authoringComponentContent.choices.length === 0"
+<div *ngIf="componentContent.choices == null || componentContent.choices.length === 0"
     class="info-block"
     i18n>
   There are no choices. Click the "Add Choice" button to add a choice.
 </div>
-<div *ngFor="let choice of authoringComponentContent.choices; first as isFirst; last as isLast"
+<div *ngFor="let choice of componentContent.choices; first as isFirst; last as isLast"
     class="choice-container">
   <div fxLayout="row wrap" fxLayoutAlign="start center">
     <mat-form-field class="choice-text-input-container">
@@ -117,20 +117,4 @@
       <mat-icon>delete</mat-icon>
     </button>
   </div>
-</div>
-<div fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    class="reload-preview-container">
-  <span fxFlex></span>
-  <button mat-raised-button
-      color="primary"
-      class="button"
-      (click)="reloadPreview()"
-      matTooltip="Reload Preview"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Reload Preview"
-      i18n-aria-label>
-    <mat-icon>refresh</mat-icon>
-  </button>
 </div>

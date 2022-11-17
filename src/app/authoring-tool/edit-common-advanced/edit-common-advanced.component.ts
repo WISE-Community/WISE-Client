@@ -11,7 +11,7 @@ export class EditCommonAdvancedComponent implements OnInit {
   allowedConnectedComponentTypes: string[] = [];
 
   @Input()
-  authoringComponentContent: any;
+  componentContent: any;
 
   @Input()
   componentId: string;
@@ -24,7 +24,7 @@ export class EditCommonAdvancedComponent implements OnInit {
   ngOnInit(): void {}
 
   connectedComponentsChanged(connectedComponents: any[]): void {
-    this.authoringComponentContent.connectedComponents = connectedComponents;
+    this.componentContent.connectedComponents = connectedComponents;
     this.componentChanged();
   }
 

@@ -29,7 +29,7 @@ export class HtmlAuthoring extends ComponentAuthoring {
   }
 
   htmlChanged(): void {
-    this.authoringComponentContent.html = this.UtilService.insertWISELinks(
+    this.componentContent.html = this.UtilService.insertWISELinks(
       this.ConfigService.removeAbsoluteAssetPaths(this.html)
     );
     this.componentChanged();

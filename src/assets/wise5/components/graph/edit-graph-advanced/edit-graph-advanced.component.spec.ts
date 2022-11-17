@@ -86,14 +86,10 @@ function addXAxisPlotLine() {
   describe('addXAxisPlotLine', () => {
     it('should add x axis plot line', () => {
       component.addXAxisPlotLine();
-      expect(component.authoringComponentContent.xAxis.plotLines.length).toEqual(1);
-      expect(component.authoringComponentContent.xAxis.plotLines[0].label.text).toEqual('');
-      expect(component.authoringComponentContent.xAxis.plotLines[0].label.verticalAlign).toEqual(
-        'bottom'
-      );
-      expect(component.authoringComponentContent.xAxis.plotLines[0].label.textAlign).toEqual(
-        'right'
-      );
+      expect(component.componentContent.xAxis.plotLines.length).toEqual(1);
+      expect(component.componentContent.xAxis.plotLines[0].label.text).toEqual('');
+      expect(component.componentContent.xAxis.plotLines[0].label.verticalAlign).toEqual('bottom');
+      expect(component.componentContent.xAxis.plotLines[0].label.textAlign).toEqual('right');
     });
   });
 }
@@ -102,8 +98,8 @@ function addYAxisPlotLine() {
   describe('addYAxisPlotLine', () => {
     it('should add y axis plot line', () => {
       component.addYAxisPlotLine();
-      expect(component.authoringComponentContent.yAxis.plotLines.length).toEqual(1);
-      expect(component.authoringComponentContent.yAxis.plotLines[0].label.text).toEqual('');
+      expect(component.componentContent.yAxis.plotLines.length).toEqual(1);
+      expect(component.componentContent.yAxis.plotLines[0].label.text).toEqual('');
     });
   });
 }
@@ -111,9 +107,9 @@ function addYAxisPlotLine() {
 function deleteXAxisPlotLine() {
   describe('deleteXAxisPlotLine', () => {
     it('should delete x axis plot line', () => {
-      component.authoringComponentContent.xAxis.plotLines = [{}, {}];
+      component.componentContent.xAxis.plotLines = [{}, {}];
       component.deleteXAxisPlotLine(0);
-      expect(component.authoringComponentContent.xAxis.plotLines.length).toEqual(1);
+      expect(component.componentContent.xAxis.plotLines.length).toEqual(1);
     });
   });
 }
@@ -121,9 +117,9 @@ function deleteXAxisPlotLine() {
 function deleteYAxisPlotLine() {
   describe('deleteYAxisPlotLine', () => {
     it('should delete y axis plot line', () => {
-      component.authoringComponentContent.yAxis.plotLines = [{}, {}];
+      component.componentContent.yAxis.plotLines = [{}, {}];
       component.deleteYAxisPlotLine(0);
-      expect(component.authoringComponentContent.yAxis.plotLines.length).toEqual(1);
+      expect(component.componentContent.yAxis.plotLines.length).toEqual(1);
     });
   });
 }

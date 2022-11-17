@@ -90,7 +90,7 @@
   <mat-form-field class="url-input-container">
     <mat-label i18n>URL</mat-label>
     <input matInput
-        [(ngModel)]="authoringComponentContent.url"
+        [(ngModel)]="componentContent.url"
         (ngModelChange)="urlChange.next($event)"
         placeholder="Enter URL Here"
         i18n-placeholder />
@@ -101,14 +101,14 @@
     <mat-label i18n>Width (px) (optional)</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.width"
+        [(ngModel)]="componentContent.width"
         (ngModelChange)="widthChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="dimension-input-container">
     <mat-label i18n>Height (px)</mat-label>
     <input matInput
         type="number"
-        [(ngModel)]="authoringComponentContent.height"
+        [(ngModel)]="componentContent.height"
         (ngModelChange)="heightChange.next($event)"/>
   </mat-form-field>
   <span flex></span>

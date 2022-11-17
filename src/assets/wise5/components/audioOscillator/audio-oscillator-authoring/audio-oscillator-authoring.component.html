@@ -1,7 +1,7 @@
-<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+<edit-component-prompt [prompt]="componentContent.prompt"
    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <span i18n>Oscillator Types</span>
-<span *ngIf="authoringComponentContent.oscillatorTypes == null || authoringComponentContent.oscillatorTypes.length === 0"
+<span *ngIf="componentContent.oscillatorTypes == null || componentContent.oscillatorTypes.length === 0"
     class="no-oscillator-type-message"
     i18n>
   (There are no oscillator types selected. Please select at least one oscillator type.)
@@ -53,21 +53,21 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.startingFrequency"
+        [(ngModel)]="componentContent.startingFrequency"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
   <mat-checkbox
       color="primary"
-      [(ngModel)]="authoringComponentContent.canStudentViewFrequencyInput"
+      [(ngModel)]="componentContent.canStudentViewFrequencyInput"
       (ngModelChange)="showFrequencyInputChanged()"
       i18n>
     Show Frequency Input
   </mat-checkbox>
   <mat-checkbox
       color="primary"
-      [(ngModel)]="authoringComponentContent.canStudentEditFrequency"
+      [(ngModel)]="componentContent.canStudentEditFrequency"
       (ngModelChange)="componentChanged()"
-      [disabled]="!authoringComponentContent.canStudentViewFrequencyInput"
+      [disabled]="!componentContent.canStudentViewFrequencyInput"
       i18n>
     Allow Student to Edit Frequency
   </mat-checkbox>
@@ -83,12 +83,12 @@
         type="number"
         min="0"
         [max]="maxAmplitude"
-        [(ngModel)]="authoringComponentContent.startingAmplitude"
+        [(ngModel)]="componentContent.startingAmplitude"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
   <mat-checkbox
       color="primary"
-      [(ngModel)]="authoringComponentContent.canStudentViewAmplitudeInput"
+      [(ngModel)]="componentContent.canStudentViewAmplitudeInput"
       (ngModelChange)="showAmplitudeInputChanged()"
       i18n>
     Show Amplitude Input
@@ -96,9 +96,9 @@
   <div>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.canStudentEditAmplitude"
+        [(ngModel)]="componentContent.canStudentEditAmplitude"
         (ngModelChange)="componentChanged()"
-        [disabled]="!authoringComponentContent.canStudentViewAmplitudeInput"
+        [disabled]="!componentContent.canStudentViewAmplitudeInput"
         i18n>
       Allow Student to Edit Amplitude
     </mat-checkbox>
@@ -114,7 +114,7 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.oscilloscopeWidth"
+        [(ngModel)]="componentContent.oscilloscopeWidth"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="number-input-small">
@@ -122,7 +122,7 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.oscilloscopeHeight"
+        [(ngModel)]="componentContent.oscilloscopeHeight"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="number-input-medium">
@@ -130,7 +130,7 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.gridCellSize"
+        [(ngModel)]="componentContent.gridCellSize"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
 </div>

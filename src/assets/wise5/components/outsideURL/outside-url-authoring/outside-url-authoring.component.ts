@@ -67,8 +67,8 @@ export class OutsideUrlAuthoring extends ComponentAuthoring {
     });
     this.subscriptions.add(
       this.urlChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe((url: string) => {
-        this.authoringComponentContent.url = url;
-        this.authoringComponentContent.info = null;
+        this.componentContent.url = url;
+        this.componentContent.info = null;
         this.componentChanged();
       })
     );
@@ -85,19 +85,19 @@ export class OutsideUrlAuthoring extends ComponentAuthoring {
   }
 
   chooseOpenEducationalResource(openEducationalResource: any): void {
-    this.authoringComponentContent.url = openEducationalResource.url;
-    this.authoringComponentContent.info = openEducationalResource.info;
+    this.componentContent.url = openEducationalResource.url;
+    this.componentContent.info = openEducationalResource.info;
     this.componentChanged();
   }
 
   isResourceSelected(resourceUrl: string): boolean {
-    return resourceUrl === this.authoringComponentContent.url;
+    return resourceUrl === this.componentContent.url;
   }
 
   reloadResource(): void {
     const iframe: any = document.getElementById(this.outsideURLIFrameId);
     iframe.src = '';
-    iframe.src = this.authoringComponentContent.url;
+    iframe.src = this.componentContent.url;
   }
 
   clearFilters(): void {
