@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { ProjectService } from '../../../services/projectService';
-import { UtilService } from '../../../services/utilService';
 import { AuthorPeerGroupingDialogComponent } from '../author-peer-grouping-dialog/author-peer-grouping-dialog.component';
 import {
   DIFFERENT_IDEAS_REGEX,
@@ -11,7 +10,6 @@ import {
   DIFFERENT_SCORES_REGEX,
   DIFFERENT_SCORES_VALUE
 } from '../PeerGroupingLogic';
-import { ReferenceComponent } from '../../../../../app/domain/referenceComponent';
 
 @Component({
   selector: 'edit-peer-grouping-dialog',
@@ -25,14 +23,13 @@ export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogCom
     @Inject(MAT_DIALOG_DATA) public peerGrouping: PeerGrouping,
     protected dialogRef: MatDialogRef<EditPeerGroupingDialogComponent>,
     private peerGroupingAuthoringService: PeerGroupingAuthoringService,
-    protected projectService: ProjectService,
-    private utilService: UtilService
+    protected projectService: ProjectService
   ) {
     super(dialogRef, projectService);
   }
 
   ngOnInit(): void {
-    this.peerGrouping = new PeerGrouping(this.utilService.makeCopyOfJSONObject(this.peerGrouping));
+    this.peerGrouping = new PeerGrouping(this.peerGrouping);
     this.stepsUsedIn = this.peerGroupingAuthoringService.getStepsUsedIn(this.peerGrouping.tag);
     this.logicType = this.getLogicType(this.peerGrouping.logic);
     if (this.logicType === DIFFERENT_IDEAS_VALUE) {
