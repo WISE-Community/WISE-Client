@@ -4,8 +4,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
-import { AnnotationService } from '../../../services/annotationService';
-import { NodeService } from '../../../services/nodeService';
 import { AnimationService } from '../animationService';
 import { AnimationStudent } from './animation-student.component';
 

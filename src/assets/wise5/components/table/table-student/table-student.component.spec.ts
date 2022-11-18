@@ -6,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
-import { AnnotationService } from '../../../services/annotationService';
 import { ProjectService } from '../../../services/projectService';
 import { UtilService } from '../../../services/utilService';
 import { TabulatorDataService } from '../tabulatorDataService';
@@ -119,22 +118,6 @@ describe('TableStudentComponent', () => {
   updateColumnNames();
   updateDataExplorerSeriesNames();
 });
-
-/**
- * Used for debugging.
- */
-function printTable(tableData: any[]): void {
-  for (const row of tableData) {
-    let rowValues = '';
-    for (const cell of row) {
-      if (rowValues !== '') {
-        rowValues += ',';
-      }
-      rowValues += cell.text;
-    }
-    console.log(rowValues);
-  }
-}
 
 function createCellObject(text: string = '', editable: boolean = true, size: number = null) {
   return {

@@ -13,7 +13,6 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { Component } from '../../../common/Component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtons } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
-import { AnnotationService } from '../../../services/annotationService';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { CRaterService } from '../../../services/cRaterService';
 import { NotebookService } from '../../../services/notebookService';
