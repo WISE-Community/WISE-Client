@@ -1,14 +1,11 @@
 'use strict';
 
+import * as FileSaver from 'file-saver';
+
 class ExportController {
-  $translate: any;
   maxExcelCellSize: number = 32767;
 
-  static $inject = ['$filter', 'FileSaver'];
-
-  constructor($filter, private FileSaver: any) {
-    this.$translate = $filter('translate');
-  }
+  constructor() {}
 
   /**
    * Generate the csv file and have the client download it
@@ -16,13 +13,13 @@ class ExportController {
    * inner array contains strings or numbers which represent the cell values in the export.
    * @param fileName the name of the file that will be generated
    */
-  generateCSVFile(rows: any[], fileName: string) {
+  generateCSVFile(rows: any[], fileName: string): void {
     const csvString = this.generateCSVString(rows);
     const csvBlob = new Blob([csvString], { type: 'text/csv' });
-    this.FileSaver.saveAs(csvBlob, fileName);
+    FileSaver.saveAs(csvBlob, fileName);
   }
 
-  generateCSVString(rows: any[]) {
+  private generateCSVString(rows: any[]): string {
     let csvString = '';
     for (const row of rows) {
       csvString += this.createCSVRow(row);
@@ -30,7 +27,7 @@ class ExportController {
     return csvString;
   }
 
-  createCSVRow(row: any[]) {
+  private createCSVRow(row: any[]): string {
     let csvString = '';
     for (const cell of row) {
       csvString += `${this.createCSVCell(cell)},`;
@@ -39,7 +36,7 @@ class ExportController {
     return csvString;
   }
 
-  createCSVCell(cell: any) {
+  private createCSVCell(cell: any): string {
     let csvString = '';
     if (this.isEmpty(cell)) {
       csvString = ' ';
@@ -58,23 +55,23 @@ class ExportController {
     return csvString;
   }
 
-  isEmpty(data: any) {
+  private isEmpty(data: any): boolean {
     return data == null || data === '' || typeof data === 'undefined';
   }
 
-  isObject(data: any) {
+  private isObject(data: any): boolean {
     return typeof data === 'object';
   }
 
-  isString(data: any) {
+  private isString(data: any): boolean {
     return typeof data === 'string';
   }
 
-  wrapInDoubleQuotes(str: string) {
+  private wrapInDoubleQuotes(str: string): string {
     return `"${str}"`;
   }
 
-  isStringTooLarge(str: string) {
+  private isStringTooLarge(str: string): boolean {
     return str.length >= this.maxExcelCellSize;
   }
 }
