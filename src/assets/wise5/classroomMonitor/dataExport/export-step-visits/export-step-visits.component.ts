@@ -397,10 +397,6 @@ export class ExportStepVisitsComponent extends ExportController {
     return event.event === 'nodeExited' && event.nodeId.startsWith('node');
   }
 
-  private isMatchingWorkgroupId(nodeEnteredEvent: any, nodeExitedEvent: any): boolean {
-    return nodeEnteredEvent.workgroupId === nodeExitedEvent.workgroupId;
-  }
-
   private isMatchingNodeId(nodeEnteredEvent: any, nodeExitedEvent: any): boolean {
     return nodeEnteredEvent.nodeId === nodeExitedEvent.nodeId;
   }
