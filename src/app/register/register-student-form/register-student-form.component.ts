@@ -52,8 +52,14 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     { validator: this.passwordMatchValidator }
   );
   createStudentAccountFormGroup: FormGroup = this.fb.group({
-    firstName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
-    lastName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
+    firstName: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$') // Here
+    ]),
+    lastName: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
+    ]),
     gender: new FormControl('', [Validators.required]),
     birthMonth: new FormControl('', [Validators.required]),
     birthDay: new FormControl({ value: '', disabled: true }, [Validators.required])
@@ -102,6 +108,8 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     this.createStudentAccountFormGroup.controls['birthMonth'].valueChanges.subscribe((value) => {
       this.setBirthDayOptions();
     });
+    this.createStudentAccountFormGroup.controls['firstName'].markAsTouched();
+    this.createStudentAccountFormGroup.controls['lastName'].markAsTouched();
   }
 
   isUsingGoogleId() {

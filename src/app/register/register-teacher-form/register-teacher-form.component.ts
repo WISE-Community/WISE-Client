@@ -39,8 +39,14 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   );
   createTeacherAccountFormGroup: FormGroup = this.fb.group(
     {
-      firstName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
-      lastName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
+      firstName: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
+      ]),
+      lastName: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
+      ]),
       email: new FormControl('', [Validators.required, Validators.email]),
       city: new FormControl('', [Validators.required]),
       state: new FormControl('', [Validators.required]),

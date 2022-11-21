@@ -65,9 +65,116 @@ describe('RegisterStudentFormComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+  validateFirstName();
+  validateLastName();
   createAccount();
 });
+
+function validateFirstName() {
+  let firstNameField;
+  beforeEach(() => {
+    firstNameField = component.createStudentAccountFormGroup.get('lastName');
+  });
+  describe('validation', () => {
+    it('should validate last name when it contains lowercase letters', () => {
+      firstNameField.setValue('smith');
+      expect(firstNameField.getError('pattern')).toBeNull();
+    });
+    it('should validate last name when it contains lowercase letters and spaces', () => {
+      firstNameField.setValue('smith star');
+      expect(firstNameField.getError('pattern')).toBeNull();
+    });
+    it('should validate last name when it contains lowercase letters and dashes', () => {
+      firstNameField.setValue('smith-star');
+      expect(firstNameField.getError('pattern')).toBeNull();
+    });
+    it('should validate last name when it contains lowercase letters and spaces and dashes', () => {
+      firstNameField.setValue('sam-smith star');
+      expect(firstNameField.getError('pattern')).toBeNull();
+    });
+    it('should not validate last name when it contains symbols other than a dash', () => {
+      firstNameField.setValue('smith@');
+      expect(firstNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it begins with a space', () => {
+      firstNameField.setValue(' smith');
+      expect(firstNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it begins with a dash', () => {
+      firstNameField.setValue('-smith');
+      expect(firstNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it ends with a space', () => {
+      firstNameField.setValue('smith ');
+      expect(firstNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it ends with a dash', () => {
+      firstNameField.setValue('smith-');
+      expect(firstNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it begins and ends with a dash', () => {
+      firstNameField.setValue('-smith-');
+      expect(firstNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it begins and ends with a space', () => {
+      firstNameField.setValue(' smith ');
+      expect(firstNameField.getError('pattern')).not.toBeNull();
+    });
+  });
+}
+
+function validateLastName() {
+  let lastNameField;
+  beforeEach(() => {
+    lastNameField = component.createStudentAccountFormGroup.get('lastName');
+  });
+  describe('validation', () => {
+    it('should validate last name when it contains lowercase letters', () => {
+      lastNameField.setValue('smith');
+      expect(lastNameField.getError('pattern')).toBeNull();
+    });
+    it('should validate last name when it contains lowercase letters and spaces', () => {
+      lastNameField.setValue('smith star');
+      expect(lastNameField.getError('pattern')).toBeNull();
+    });
+    it('should validate last name when it contains lowercase letters and dashes', () => {
+      lastNameField.setValue('smith-star');
+      expect(lastNameField.getError('pattern')).toBeNull();
+    });
+    it('should validate last name when it contains lowercase letters and spaces and dashes', () => {
+      lastNameField.setValue('sam-smith star');
+      expect(lastNameField.getError('pattern')).toBeNull();
+    });
+    it('should not validate last name when it contains symbols other than a dash', () => {
+      lastNameField.setValue('smith@');
+      expect(lastNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it begins with a space', () => {
+      lastNameField.setValue(' smith');
+      expect(lastNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it begins with a dash', () => {
+      lastNameField.setValue('-smith');
+      expect(lastNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it ends with a space', () => {
+      lastNameField.setValue('smith ');
+      expect(lastNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it ends with a dash', () => {
+      lastNameField.setValue('smith-');
+      expect(lastNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it begins and ends with a dash', () => {
+      lastNameField.setValue('-smith-');
+      expect(lastNameField.getError('pattern')).not.toBeNull();
+    });
+    it('should not validate last name when it begins and ends with a space', () => {
+      lastNameField.setValue(' smith ');
+      expect(lastNameField.getError('pattern')).not.toBeNull();
+    });
+  });
+}
 
 function createAccount() {
   describe('createAccount()', () => {
@@ -103,21 +210,21 @@ function createAccount() {
     it('should show error when invalid first name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidFirstName',
-        'Error: First Name must only contain characters A-Z'
+        'Error: First Name must only contain characters A-Z, spaces, or dashes'
       );
     });
 
     it('should show error when invalid last name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidLastName',
-        'Error: Last Name must only contain characters A-Z'
+        'Error: Last Name must only contain characters A-Z, spaces, or dashes'
       );
     });
 
     it('should show error when invalid first and last name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidFirstAndLastName',
-        'Error: First Name and Last Name must only contain characters A-Z'
+        'Error: First Name and Last Name must only contain characters A-Z, spaces, or dashes'
       );
     });
   });
