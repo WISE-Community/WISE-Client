@@ -28,9 +28,13 @@ export class PeerChatQuestionBankComponent implements OnInit {
   constructor(private peerGroupService: PeerGroupService, private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    const referenceComponent = this.getReferenceComponent(this.content.questionBank);
-    if (referenceComponent.content.type === 'OpenResponse') {
-      this.evaluate(referenceComponent);
+    if (this.displayedQuestionBankRule != null) {
+      this.questions = this.displayedQuestionBankRule.questions;
+    } else {
+      const referenceComponent = this.getReferenceComponent(this.content.questionBank);
+      if (referenceComponent.content.type === 'OpenResponse') {
+        this.evaluate(referenceComponent);
+      }
     }
   }
 
