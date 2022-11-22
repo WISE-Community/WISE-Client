@@ -63,7 +63,7 @@ export class DynamicPromptComponent implements OnInit {
       this.nodeId,
       this.componentId
     ).subscribe((peerGroupStudentData: PeerGroupStudentData[]) => {
-      const cRaterResponses = peerGroupStudentData.map((peerMemberData: any) => {
+      const cRaterResponses = peerGroupStudentData.map((peerMemberData: PeerGroupStudentData) => {
         return new CRaterResponse({
           ideas: peerMemberData.annotation.data.ideas,
           scores: peerMemberData.annotation.data.scores,
@@ -76,7 +76,7 @@ export class DynamicPromptComponent implements OnInit {
       );
       const feedbackRule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule(cRaterResponses);
       this.prompt = feedbackRule.prompt;
-      this.dynamicPromptChanged.emit(feedbackRule);
+      this.dynamicPromptChanged.emit(feedbackRule); // TODO: change to two-way binding variable
     });
   }
 
@@ -84,7 +84,7 @@ export class DynamicPromptComponent implements OnInit {
     peerGroupingTag: string,
     nodeId: string,
     componentId: string
-  ): Observable<any[]> {
+  ): Observable<PeerGroupStudentData[]> {
     return this.peerGroupService.retrievePeerGroup(peerGroupingTag).pipe(
       concatMap((peerGroup: PeerGroup) => {
         return this.peerGroupService
