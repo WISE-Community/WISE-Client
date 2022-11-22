@@ -27,6 +27,7 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-student.component.scss']
 })
 export class PeerChatStudentComponent extends ComponentStudent {
+  displayedQuestionBankRule: QuestionBankRule;
   dynamicPrompt: FeedbackRule;
   isPeerChatWorkgroupsResponseReceived: boolean;
   isPeerChatWorkgroupsAvailable: boolean;
@@ -37,7 +38,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
   peerGroup: PeerGroup;
   peerGroupingTag: string;
   questionBankContent: QuestionBankContent;
-  displayedQuestionBankRule: QuestionBankRule;
   requestTimeout: number = 10000;
   response: string;
 
