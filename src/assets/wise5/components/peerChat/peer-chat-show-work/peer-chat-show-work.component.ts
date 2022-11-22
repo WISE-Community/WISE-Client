@@ -22,6 +22,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   peerChatWorkgroupIds: Set<number> = new Set<number>();
   peerChatWorkgroupInfos: any = {};
   peerGroup: PeerGroup;
+  questionBankRule: string[];
   requestTimeout: number = 10000;
 
   @Input() workgroupId: number;
@@ -84,6 +85,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     this.peerChatMessages = [];
     this.peerChatService.setPeerChatMessages(this.peerChatMessages, componentStates);
     this.dynamicPrompt = this.getDynamicPrompt(componentStates);
+    this.questionBankRule = this.getQuestionBankRule(componentStates);
   }
 
   private getDynamicPrompt(componentStates: any[]): FeedbackRule {
@@ -91,6 +93,16 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
       const dynamicPrompt = componentStates[c].studentData.dynamicPrompt;
       if (dynamicPrompt != null) {
         return dynamicPrompt;
+      }
+    }
+    return null;
+  }
+
+  private getQuestionBankRule(componentStates: any[]): string[] {
+    for (let c = componentStates.length - 1; c >= 0; c--) {
+      const questionBank = componentStates[c].studentData.questionBank;
+      if (questionBank != null) {
+        return questionBank;
       }
     }
     return null;

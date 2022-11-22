@@ -1,41 +1,6 @@
-import { FeedbackRule } from '../../components/common/feedbackRule/FeedbackRule';
+import { ReferenceComponentRules } from '../../components/common/ReferenceComponentRules';
 
-export class DynamicPrompt {
-  enabled: boolean;
-  peerGroupingTag?: string;
+export class DynamicPrompt extends ReferenceComponentRules {
   postPrompt?: string;
   prePrompt?: string;
-  referenceComponent: {
-    componentId: string;
-    nodeId: string;
-  };
-  rules: FeedbackRule[];
-
-  constructor(jsonObject: any = {}) {
-    for (const key of Object.keys(jsonObject)) {
-      if (jsonObject[key] != null) {
-        this[key] = jsonObject[key];
-      }
-    }
-  }
-
-  getReferenceNodeId(): string {
-    return this.referenceComponent.nodeId;
-  }
-
-  getReferenceComponentId(): string {
-    return this.referenceComponent.componentId;
-  }
-
-  getRules(): FeedbackRule[] {
-    return this.rules;
-  }
-
-  getPeerGroupingTag(): string {
-    return this.peerGroupingTag;
-  }
-
-  isPeerGroupingTagSpecified(): boolean {
-    return this.peerGroupingTag != null && this.peerGroupingTag !== '';
-  }
 }

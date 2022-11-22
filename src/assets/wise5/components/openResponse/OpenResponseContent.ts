@@ -6,6 +6,7 @@ export interface OpenResponseContent extends ComponentContent {
   enableCRater: boolean;
   enableNotifications: boolean;
   isStudentAudioRecordingEnabled: boolean;
+  maxSubmitCount?: number;
   notificationSettings: any;
   starterSentence: any;
 }

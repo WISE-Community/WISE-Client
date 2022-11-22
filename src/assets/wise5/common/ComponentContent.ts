@@ -1,3 +1,4 @@
+import { QuestionBank } from '../components/peerChat/peer-chat-question-bank/QuestionBank';
 import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
 
 export interface ComponentContent {
@@ -7,6 +8,7 @@ export interface ComponentContent {
   excludeFromTotalScore?: boolean;
   maxScore?: number;
   prompt?: string;
+  questionBank?: QuestionBank;
   rubric?: string;
   showSaveButton?: boolean;
   showSubmitButton?: boolean;
