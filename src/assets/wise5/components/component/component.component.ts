@@ -18,7 +18,6 @@ export class ComponentComponent {
   @Output() saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
 
   component: WISEComponent;
-  pulseRubricIcon: boolean = true;
   rubric: string;
   showRubric: boolean;
 
@@ -41,8 +40,10 @@ export class ComponentComponent {
       this.componentId = this.componentState.componentId;
     }
     this.setComponent();
-    this.rubric = this.projectService.replaceAssetPaths(this.component.content.rubric);
-    this.showRubric = this.rubric != null && this.rubric != '' && this.configService.isPreview();
+    if (this.configService.isPreview()) {
+      this.rubric = this.projectService.replaceAssetPaths(this.component.content.rubric);
+      this.showRubric = this.rubric != null && this.rubric != '';
+    }
   }
 
   setComponent(): void {
