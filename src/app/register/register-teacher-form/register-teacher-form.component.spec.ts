@@ -14,6 +14,10 @@ import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
 import { PasswordService } from '../../services/password.service';
+import {
+  nameTests,
+  validateAndExpect
+} from '../register-user-form/register-user-form-spec-helpers';
 
 class MockTeacherService {
   registerTeacherAccount() {}
@@ -66,108 +70,30 @@ describe('RegisterTeacherFormComponent', () => {
 });
 
 function validateFirstName() {
-  let firstNameField;
-  beforeEach(() => {
-    firstNameField = component.createTeacherAccountFormGroup.get('lastName');
-  });
-  describe('validation', () => {
-    it('should validate last name when it contains lowercase letters', () => {
-      firstNameField.setValue('smith');
-      expect(firstNameField.getError('pattern')).toBeNull();
-    });
-    it('should validate last name when it contains lowercase letters and spaces', () => {
-      firstNameField.setValue('smith star');
-      expect(firstNameField.getError('pattern')).toBeNull();
-    });
-    it('should validate last name when it contains lowercase letters and dashes', () => {
-      firstNameField.setValue('smith-star');
-      expect(firstNameField.getError('pattern')).toBeNull();
-    });
-    it('should validate last name when it contains lowercase letters and spaces and dashes', () => {
-      firstNameField.setValue('sam-smith star');
-      expect(firstNameField.getError('pattern')).toBeNull();
-    });
-    it('should not validate last name when it contains symbols other than a dash', () => {
-      firstNameField.setValue('smith@');
-      expect(firstNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it begins with a space', () => {
-      firstNameField.setValue(' smith');
-      expect(firstNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it begins with a dash', () => {
-      firstNameField.setValue('-smith');
-      expect(firstNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it ends with a space', () => {
-      firstNameField.setValue('smith ');
-      expect(firstNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it ends with a dash', () => {
-      firstNameField.setValue('smith-');
-      expect(firstNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it begins and ends with a dash', () => {
-      firstNameField.setValue('-smith-');
-      expect(firstNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it begins and ends with a space', () => {
-      firstNameField.setValue(' smith ');
-      expect(firstNameField.getError('pattern')).not.toBeNull();
-    });
+  describe('validate first name', () => {
+    for (const nameTest of nameTests) {
+      it(nameTest.description, () => {
+        validateAndExpect(
+          component.createTeacherAccountFormGroup.get('firstName'),
+          nameTest.name,
+          nameTest.isValid
+        );
+      });
+    }
   });
 }
 
 function validateLastName() {
-  let lastNameField;
-  beforeEach(() => {
-    lastNameField = component.createTeacherAccountFormGroup.get('lastName');
-  });
-  describe('validation', () => {
-    it('should validate last name when it contains lowercase letters', () => {
-      lastNameField.setValue('smith');
-      expect(lastNameField.getError('pattern')).toBeNull();
-    });
-    it('should validate last name when it contains lowercase letters and spaces', () => {
-      lastNameField.setValue('smith star');
-      expect(lastNameField.getError('pattern')).toBeNull();
-    });
-    it('should validate last name when it contains lowercase letters and dashes', () => {
-      lastNameField.setValue('smith-star');
-      expect(lastNameField.getError('pattern')).toBeNull();
-    });
-    it('should validate last name when it contains lowercase letters and spaces and dashes', () => {
-      lastNameField.setValue('sam-smith star');
-      expect(lastNameField.getError('pattern')).toBeNull();
-    });
-    it('should not validate last name when it contains symbols other than a dash', () => {
-      lastNameField.setValue('smith@');
-      expect(lastNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it begins with a space', () => {
-      lastNameField.setValue(' smith');
-      expect(lastNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it begins with a dash', () => {
-      lastNameField.setValue('-smith');
-      expect(lastNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it ends with a space', () => {
-      lastNameField.setValue('smith ');
-      expect(lastNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it ends with a dash', () => {
-      lastNameField.setValue('smith-');
-      expect(lastNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it begins and ends with a dash', () => {
-      lastNameField.setValue('-smith-');
-      expect(lastNameField.getError('pattern')).not.toBeNull();
-    });
-    it('should not validate last name when it begins and ends with a space', () => {
-      lastNameField.setValue(' smith ');
-      expect(lastNameField.getError('pattern')).not.toBeNull();
-    });
+  describe('validate last name', () => {
+    for (const nameTest of nameTests) {
+      it(nameTest.description, () => {
+        validateAndExpect(
+          component.createTeacherAccountFormGroup.get('lastName'),
+          nameTest.name,
+          nameTest.isValid
+        );
+      });
+    }
   });
 }
 function createAccount() {

@@ -54,7 +54,7 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
   createStudentAccountFormGroup: FormGroup = this.fb.group({
     firstName: new FormControl('', [
       Validators.required,
-      Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$') // Here
+      Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
     ]),
     lastName: new FormControl('', [
       Validators.required,
