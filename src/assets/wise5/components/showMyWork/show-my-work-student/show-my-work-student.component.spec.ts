@@ -4,7 +4,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { AnnotationService } from '../../../services/annotationService';
+import { Component } from '../../../common/Component';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { NotebookService } from '../../../services/notebookService';
 
 import { ShowMyWorkStudentComponent } from './show-my-work-student.component';
@@ -36,17 +37,14 @@ describe('ShowMyWorkStudentComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowMyWorkStudentComponent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     component = fixture.componentInstance;
-    component.componentContent = {
+    const componentContent = {
       id: 'abc',
       prompt: '',
       showSaveButton: true,
       showSubmitButton: true
-    };
+    } as ComponentContent;
+    component.component = new Component(componentContent, null);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     fixture.detectChanges();
   });

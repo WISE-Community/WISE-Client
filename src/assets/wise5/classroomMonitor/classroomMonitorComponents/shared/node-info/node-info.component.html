@@ -15,7 +15,7 @@
           class="accent-1 mat-body-2 gray-lightest-bg component-header">
         {{ component.assessmentItemIndex + ". " + component.typeLabel }}&nbsp;
       </h3>
-      <preview-component [nodeId]="nodeId" [componentId]="component.id" [periodId]="periodId">
+      <preview-component [component]="component.component" [periodId]="periodId">
       </preview-component>
       <mat-card *ngIf="component.rubric" class="rubric component-rubric mat-elevation-z0 notice-bg-bg">
         <mat-card-title class="mat-body-2" fxLayoutAlign="start center" fxLayoutGap="8px">

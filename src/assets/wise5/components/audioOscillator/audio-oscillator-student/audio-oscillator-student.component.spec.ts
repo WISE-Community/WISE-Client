@@ -11,11 +11,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
-import { AnnotationService } from '../../../services/annotationService';
 import { ProjectService } from '../../../services/projectService';
 import { AudioOscillatorStudent } from './audio-oscillator-student.component';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../common/Component';
 
 let component: AudioOscillatorStudent;
 let fixture: ComponentFixture<AudioOscillatorStudent>;
@@ -46,14 +46,9 @@ describe('AudioOscillatorStudent', () => {
       declarations: [AudioOscillatorStudent, ComponentHeader, PossibleScoreComponent]
     });
     fixture = TestBed.createComponent(AudioOscillatorStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      comment: '',
-      score: 1
-    });
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
-    component.componentContent = {
+    const componentContent = {
       id: componentId,
       type: 'AudioOscillator',
       prompt: 'Listen to multiple frequencies.',
@@ -66,6 +61,7 @@ describe('AudioOscillatorStudent', () => {
       canStudentEditFrequency: true,
       canStudentViewFrequencyInput: true
     };
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
