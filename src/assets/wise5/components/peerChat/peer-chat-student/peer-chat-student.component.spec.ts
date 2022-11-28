@@ -34,6 +34,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../../app/student-t
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { DynamicPromptComponent } from '../../../directives/dynamic-prompt/dynamic-prompt.component';
 import { PromptComponent } from '../../../directives/prompt/prompt.component';
+import { Component } from '../../../common/Component';
 
 let component: PeerChatStudentComponent;
 const componentId = 'component1';
@@ -160,10 +161,6 @@ describe('PeerChatStudentComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerChatStudentComponent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     const configService = TestBed.inject(ConfigService);
     spyOn(configService, 'getWorkgroupId').and.returnValue(studentWorkgroupId1);
     spyOn(configService, 'getTeacherWorkgroupIds').and.returnValue([teacherWorkgroupId]);
@@ -179,9 +176,7 @@ describe('PeerChatStudentComponent', () => {
       of([componentState1, componentState2])
     );
     component = fixture.componentInstance;
-    component.componentContent = componentContent;
-    component.nodeId = nodeId;
-    component.componentId = componentId;
+    component.component = new Component(componentContent, nodeId);
     component.workgroupId = studentWorkgroupId1;
     component.peerGroup = peerGroup;
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});

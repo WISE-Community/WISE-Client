@@ -4,7 +4,7 @@ import { ConfigService } from '../../services/configService';
 import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
-import { ComponentContent } from '../../common/ComponentContent';
+import { Component as WISEComponent } from '../../common/Component';
 
 @Component({
   selector: 'component',
@@ -17,7 +17,7 @@ export class ComponentComponent {
   @Input() workgroupId: number;
   @Output() saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  componentContent: ComponentContent;
+  component: WISEComponent;
   pulseRubricIcon: boolean = true;
   rubric: string;
   showRubric: boolean;
@@ -40,24 +40,22 @@ export class ComponentComponent {
       this.nodeId = this.componentState.nodeId;
       this.componentId = this.componentState.componentId;
     }
-    this.setComponentContent();
-    this.rubric = this.projectService.replaceAssetPaths(this.componentContent.rubric);
+    this.setComponent();
+    this.rubric = this.projectService.replaceAssetPaths(this.component.content.rubric);
     this.showRubric = this.rubric != null && this.rubric != '' && this.configService.isPreview();
   }
 
-  setComponentContent(): void {
-    let componentContent = this.projectService.getComponent(this.nodeId, this.componentId);
-    componentContent = this.projectService.injectAssetPaths(componentContent);
-    componentContent = this.configService.replaceStudentNames(componentContent);
+  setComponent(): void {
+    let content = this.projectService.getComponent(this.nodeId, this.componentId);
+    content = this.projectService.injectAssetPaths(content);
+    content = this.configService.replaceStudentNames(content);
     if (
       this.notebookService.isNotebookEnabled() &&
       this.notebookService.isStudentNoteClippingEnabled()
     ) {
-      componentContent = this.clickToSnipImageService.injectClickToSnipImageListener(
-        componentContent
-      );
+      content = this.clickToSnipImageService.injectClickToSnipImageListener(content);
     }
-    this.componentContent = componentContent;
+    this.component = new WISEComponent(content, this.nodeId);
   }
 
   saveComponentState($event: any): void {
