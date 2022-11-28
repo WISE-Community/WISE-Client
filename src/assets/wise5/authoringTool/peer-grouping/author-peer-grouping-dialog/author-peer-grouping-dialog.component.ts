@@ -3,13 +3,21 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { ReferenceComponent } from '../../../../../app/domain/referenceComponent';
 import { ProjectService } from '../../../services/projectService';
-import { AVAILABLE_LOGIC, DIFFERENT_IDEAS_VALUE, PeerGroupingLogic } from '../PeerGroupingLogic';
+import {
+  AVAILABLE_LOGIC,
+  AVAILABLE_MODES,
+  DIFFERENT_IDEAS_VALUE,
+  DIFFERENT_SCORES_VALUE,
+  PeerGroupingLogic
+} from '../PeerGroupingLogic';
 
 @Directive()
 export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
   allowedReferenceComponentTypes: string[] = ['OpenResponse'];
   availableLogic: PeerGroupingLogic[];
   logicType: string;
+  mode: string;
+  availableModes: any[] = AVAILABLE_MODES;
   peerGrouping: PeerGrouping;
   referenceComponent: ReferenceComponent = new ReferenceComponent(null, null);
 
@@ -39,10 +47,30 @@ export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
   }
 
   protected updatePeerGroupingLogic(): void {
-    this.peerGrouping.logic =
-      this.logicType === DIFFERENT_IDEAS_VALUE
-        ? `${DIFFERENT_IDEAS_VALUE}("${this.referenceComponent.nodeId}", "${this.referenceComponent.componentId}")`
-        : this.logicType;
+    switch (this.logicType) {
+      case DIFFERENT_IDEAS_VALUE:
+        this.peerGrouping.logic = `${DIFFERENT_IDEAS_VALUE}("${this.referenceComponent.nodeId}", "${this.referenceComponent.componentId}")`;
+        break;
+      case DIFFERENT_SCORES_VALUE:
+        this.peerGrouping.logic = this.generateDifferentScoresLogic(
+          this.referenceComponent,
+          this.mode
+        );
+        break;
+      default:
+        this.peerGrouping.logic = this.logicType;
+    }
+  }
+
+  private generateDifferentScoresLogic(
+    referenceComponent: ReferenceComponent,
+    mode: string
+  ): string {
+    if (mode == null) {
+      return `${DIFFERENT_SCORES_VALUE}("${referenceComponent.nodeId}", "${referenceComponent.componentId}")`;
+    } else {
+      return `${DIFFERENT_SCORES_VALUE}("${referenceComponent.nodeId}", "${referenceComponent.componentId}", "${mode}")`;
+    }
   }
 
   cancel(): void {
