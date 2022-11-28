@@ -24,7 +24,7 @@ export class EditQuestionBankComponent implements OnInit {
       });
     }
     this.componentContent.questionBank.enabled = event.checked;
-    this.projectService.nodeChanged();
+    this.saveChanges();
   }
 
   referenceComponentNodeIdChanged(event: any): void {
@@ -38,6 +38,10 @@ export class EditQuestionBankComponent implements OnInit {
     }
     this.componentContent.questionBank.referenceComponent.componentId =
       numAllowedComponents === 1 ? allowedComponent.id : null;
+    this.saveChanges();
+  }
+
+  saveChanges(): void {
     this.projectService.nodeChanged();
   }
 }

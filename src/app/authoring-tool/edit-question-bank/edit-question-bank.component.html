@@ -22,7 +22,7 @@
           [componentId]="componentId"
           [connectedComponent]="componentContent.questionBank.referenceComponent"
           [allowedConnectedComponentTypes]="allowedReferenceComponentTypes"
-          (connectedComponentChange)="dynamicPromptChangedEvent.next()">
+          (connectedComponentChange)="saveChanges()">
       </edit-connected-component-component-select>
       <edit-component-peer-grouping-tag
           [componentContent]="componentContent.questionBank">
