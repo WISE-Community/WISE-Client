@@ -359,7 +359,7 @@ export class DiscussionStudent extends ComponentStudent {
    * @return a promise that will return a component state
    */
   createComponentState(action) {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     const studentData: any = {
       response: this.studentResponse,
       attachments: this.attachments

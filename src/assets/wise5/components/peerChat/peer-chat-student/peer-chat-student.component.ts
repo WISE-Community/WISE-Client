@@ -170,7 +170,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   createComponentState(action: string): any {
-    const componentState: any = this.nodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.studentData = {
       response: this.response,
       submitCounter: this.submitCounter

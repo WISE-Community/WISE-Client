@@ -25,12 +25,6 @@ class MockNotebookService {
   }
 }
 
-class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
-
 class MockConfigService {
   getRunId() {
     return 1;
@@ -65,7 +59,7 @@ describe('ShowGroupWorkStudentComponent', () => {
         AnnotationService,
         { provide: ConfigService, useClass: MockConfigService },
         { provide: MatDialog, useClass: MockService },
-        { provide: NodeService, useClass: MockNodeService },
+        { provide: NodeService, useClass: MockService },
         { provide: NotebookService, useClass: MockNotebookService }
       ],
       schemas: [NO_ERRORS_SCHEMA]

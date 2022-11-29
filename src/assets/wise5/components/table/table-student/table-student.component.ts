@@ -395,7 +395,7 @@ export class TableStudent extends ComponentStudent {
    * @return a promise that will return a component state
    */
   createComponentState(action) {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     const studentData: any = {};
     studentData.tableData = this.getCopyOfTableData(this.tableData);
     studentData.selectedRowIndices = this.getSelectedRowIndices();
