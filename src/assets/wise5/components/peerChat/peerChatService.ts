@@ -19,7 +19,6 @@ export class PeerChatService extends ComponentService {
     const component: any = super.createComponent();
     component.type = 'PeerChat';
     component.peerGroupingTag = '';
-    component.questionBank = [];
     return component;
   }
 
