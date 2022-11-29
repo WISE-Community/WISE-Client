@@ -34,7 +34,6 @@ const componentContent = {
   logicThresholdCount: 0,
   logicThresholdPercent: 0,
   maxMembershipCount: 2,
-  questionBank: ['What color is the sky?', 'How deep is the ocean?'],
   showWorkNodeId: 'node8',
   showWorkComponentId: 'vau6ihimfk'
 };

@@ -76,6 +76,8 @@ import { EditDynamicPromptComponent } from '../authoring-tool/edit-dynamic-promp
 import { EditDynamicPromptRulesComponent } from '../authoring-tool/edit-dynamic-prompt-rules/edit-dynamic-prompt-rules.component';
 import { EditPeerGroupingDialogComponent } from '../../assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component';
 import { CreateNewPeerGroupingDialogComponent } from '../../assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
+import { EditQuestionBankComponent } from '../authoring-tool/edit-question-bank/edit-question-bank.component';
+import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +138,8 @@ import { CreateNewPeerGroupingDialogComponent } from '../../assets/wise5/authori
     EditOutsideUrlAdvancedComponent,
     EditPeerChatAdvancedComponentComponent,
     EditPeerGroupingDialogComponent,
+    EditQuestionBankComponent,
+    EditQuestionBankRulesComponent,
     EditSummaryAdvancedComponent,
     EditTableAdvancedComponent,
     EditTableConnectedComponentsComponent,

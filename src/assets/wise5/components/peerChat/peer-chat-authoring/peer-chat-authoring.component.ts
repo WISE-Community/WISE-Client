@@ -36,19 +36,19 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.nodeIds = this.ProjectService.getFlattenedProjectAsNodeIds();
+    this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
   }
 
   isApplicationNode(nodeId: string): boolean {
-    return this.ProjectService.isApplicationNode(nodeId);
+    return this.projectService.isApplicationNode(nodeId);
   }
 
   getNodePositionAndTitle(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitle(nodeId);
+    return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
   getComponents(nodeId: string): any[] {
-    return this.ProjectService.getComponents(nodeId);
+    return this.projectService.getComponents(nodeId);
   }
 
   isComponentTypeAllowed(componentType: string): boolean {
@@ -56,7 +56,7 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   }
 
   tryUpdateComponentId(object: any, nodeIdFieldName: string, componentIdFieldName: string): void {
-    const components = this.ProjectService.getComponents(object[nodeIdFieldName]);
+    const components = this.projectService.getComponents(object[nodeIdFieldName]);
     if (components.length === 0) {
       delete object[componentIdFieldName];
     } else if (components.length === 1) {
@@ -86,22 +86,5 @@ export class PeerChatAuthoringComponent extends ComponentAuthoring {
   logicNodeIdChanged(logicObject: any): void {
     this.tryUpdateComponentId(logicObject, 'nodeId', 'componentId');
     this.componentChanged();
-  }
-
-  addQuestion(): void {
-    this.componentContent.questionBank.push('');
-    this.componentChanged();
-  }
-
-  deleteQuestion(index: number): void {
-    this.confirmAndRemove(
-      $localize`Are you sure you want to delete this question?`,
-      this.componentContent.questionBank,
-      index
-    );
-  }
-
-  customTrackBy(index: number): number {
-    return index;
   }
 }
