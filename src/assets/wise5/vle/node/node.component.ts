@@ -29,8 +29,7 @@ export class NodeComponent implements OnInit {
   nodeContent: any;
   nodeId: string;
   nodeStatus: any;
-  pulseRubricIcon: boolean = true;
-  rubric: any;
+  rubric: string;
   latestComponentState: ComponentState;
   showRubric: boolean;
   submit: boolean = false;
@@ -177,8 +176,10 @@ export class NodeComponent implements OnInit {
       eventData
     );
 
-    this.rubric = this.projectService.replaceAssetPaths(this.node.rubric);
-    this.showRubric = this.rubric != null && this.rubric != '' && this.configService.isPreview();
+    if (this.configService.isPreview()) {
+      this.rubric = this.projectService.replaceAssetPaths(this.node.rubric);
+      this.showRubric = this.rubric != null && this.rubric != '';
+    }
 
     const script = this.nodeContent.script;
     if (script != null) {

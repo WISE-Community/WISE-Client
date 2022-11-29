@@ -1847,7 +1847,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6178733511992894634" datatype="html">
@@ -6116,7 +6116,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="70cfd60f574a2e5b823237ac05381d8d488e4c7c" datatype="html">
@@ -10717,7 +10717,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b0298b037a077b5130906e8ae5911a882e9cda04" datatype="html">
@@ -12918,7 +12918,7 @@ Are you ready to receive feedback on this answer?</source>
         <source>Teaching Tips</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/component/component.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="818444ddcd112e756ab725357dcfb238b9257324" datatype="html">
@@ -17951,7 +17951,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">40,42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dc390b4facb4c5f5fb7d88cac9db7fe350393640" datatype="html">
@@ -18008,7 +18008,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Rubric</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/helpIcon/help-icon.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2e1aeaf8d183e6846a0463a08c784f472184fcf0" datatype="html">
@@ -18162,7 +18162,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Submit </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">52,54</context>
+          <context context-type="linenumber">50,52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e4c201ad39e5fa4658b22a707c94012bc30e0846" datatype="html">
