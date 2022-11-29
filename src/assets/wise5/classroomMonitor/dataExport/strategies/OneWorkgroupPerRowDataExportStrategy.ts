@@ -20,6 +20,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
       selectedNodes = this.controller.getSelectedNodesToExport();
       if (selectedNodes == null || selectedNodes.length == 0) {
         alert('Please select a step to export.');
+        this.controller.hideDownloadingExportMessage();
         return;
       } else {
         selectedNodesMap = this.getSelectedNodesMap(selectedNodes);

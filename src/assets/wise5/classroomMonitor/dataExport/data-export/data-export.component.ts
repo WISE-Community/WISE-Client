@@ -1,24 +1,32 @@
-'use strict';
+import { Component, OnInit } from '@angular/core';
+import * as FileSaver from 'file-saver';
+import { DataExportContext } from '../DataExportContext';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../services/configService';
+import { DataExportService } from '../../../services/dataExportService';
+import { MatchService } from '../../../components/match/matchService';
+import { TeacherDataService } from '../../../services/teacherDataService';
+import { UtilService } from '../../../services/utilService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
+import { StudentWorkDataExportStrategy } from '../strategies/StudentWorkDataExportStrategy';
+import { EventDataExportStrategy } from '../strategies/EventDataExportStrategy';
+import { NotebookDataExportStrategy } from '../strategies/NotebookDataExportStrategy';
+import { NotificationDataExportStrategy } from '../strategies/NotificationDataExportStrategy';
+import { StudentAssetDataExportStrategy } from '../strategies/StudentAssetDataExportStrategy';
+import { OneWorkgroupPerRowDataExportStrategy } from '../strategies/OneWorkgroupPerRowDataExportStrategy';
+import { RawDataExportStrategy } from '../strategies/RawDataExportStrategy';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
+import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionComponentDataExportStrategy';
 
-import { AnnotationService } from '../../services/annotationService';
-import { ConfigService } from '../../services/configService';
-import { DataExportService } from '../../services/dataExportService';
-import { MatchService } from '../../components/match/matchService';
-import { TeacherDataService } from '../../services/teacherDataService';
-import { UtilService } from '../../services/utilService';
-import { TeacherProjectService } from '../../services/teacherProjectService';
-import { DataExportContext } from './DataExportContext';
-import { RawDataExportStrategy } from './strategies/RawDataExportStrategy';
-import { OneWorkgroupPerRowDataExportStrategy } from './strategies/OneWorkgroupPerRowDataExportStrategy';
-import { EventDataExportStrategy } from './strategies/EventDataExportStrategy';
-import { StudentAssetDataExportStrategy } from './strategies/StudentAssetDataExportStrategy';
-import { NotebookDataExportStrategy } from './strategies/NotebookDataExportStrategy';
-import { NotificationDataExportStrategy } from './strategies/NotificationDataExportStrategy';
-import { StudentWorkDataExportStrategy } from './strategies/StudentWorkDataExportStrategy';
-import { DiscussionComponentDataExportStrategy } from './strategies/DiscussionComponentDataExportStrategy';
-import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
-
-class DataExportController {
+@Component({
+  selector: 'data-export',
+  templateUrl: './data-export.component.html',
+  styleUrls: ['./data-export.component.scss']
+})
+export class DataExportComponent implements OnInit {
   allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match', 'OpenResponse'];
   allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Match', 'OpenResponse'];
   autoScoreLabel: string = 'Auto Score';
@@ -66,6 +74,8 @@ class DataExportController {
   };
   exportStepSelectionType: string = 'exportAllSteps';
   exportType: string = null; // type of export: [latestWork, allWork, events]
+  exportTypeLabel: string;
+  flattenedProjectAsNodeIds: string[] = [];
   ideaLabel: string = 'Idea';
   includeAnnotations: boolean;
   includeBranchPathTaken: boolean;
@@ -75,17 +85,18 @@ class DataExportController {
   includeCommentTimestamps: boolean;
   includeCorrectnessColumns: boolean;
   includeEvents: boolean;
-  includeOnlySubmits: boolean;
   includeNames: boolean;
+  includeOnlySubmits: boolean;
   includeScores: boolean;
   includeScoreTimestamps: boolean;
-  includeStudentNames: boolean;
   includeStudentEvents: boolean;
-  includeTeacherEvents: boolean;
+  includeStudentNames: boolean;
   includeStudentWork: boolean;
   includeStudentWorkIds: boolean;
   includeStudentWorkTimestamps: boolean;
+  includeTeacherEvents: boolean;
   itemIdLabel: string = 'Item ID';
+  nodes: any[] = [];
   project: any;
   projectIdToOrder: any;
   projectItems: any;
@@ -93,35 +104,20 @@ class DataExportController {
   studentResponseLabel: string = 'Student Response';
   workSelectionType: string;
 
-  static $inject = [
-    '$injector',
-    '$mdDialog',
-    '$state',
-    'AnnotationService',
-    'ComponentServiceLookupService',
-    'ConfigService',
-    'DataExportService',
-    'FileSaver',
-    'MatchService',
-    'ProjectService',
-    'TeacherDataService',
-    'UtilService'
-  ];
-
   constructor(
-    private $injector: any,
-    private $mdDialog: any,
-    private $state: any,
     public AnnotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
     public ConfigService: ConfigService,
     public DataExportService: DataExportService,
-    public FileSaver: any,
+    private dialog: MatDialog,
     private MatchService: MatchService,
     public ProjectService: TeacherProjectService,
     public TeacherDataService: TeacherDataService,
+    private upgrade: UpgradeModule,
     public UtilService: UtilService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.dataExportContext = new DataExportContext(this);
     this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
     this.componentExportTooltips[
@@ -129,9 +125,12 @@ class DataExportController {
     ] = $localize`Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position`;
     this.setDefaultExportSettings();
     this.project = this.ProjectService.project;
-    let nodeOrderOfProject = this.ProjectService.getNodeOrderOfProject(this.project);
+    const nodeOrderOfProject = this.ProjectService.getNodeOrderOfProject(this.project);
     this.projectIdToOrder = nodeOrderOfProject.idToOrder;
     this.projectItems = nodeOrderOfProject.nodes;
+    this.flattenedProjectAsNodeIds = this.ProjectService.getFlattenedProjectAsNodeIds();
+    this.nodes = Object.values(this.projectIdToOrder);
+    this.nodes.sort(this.sortNodesByOrder);
     const context = 'ClassroomMonitor',
       nodeId = null,
       componentId = null,
@@ -150,11 +149,37 @@ class DataExportController {
     );
   }
 
+  sortNodesByOrder(nodeA: any, nodeB: any): number {
+    return nodeA.order - nodeB.order;
+  }
+
+  setExportType(exportType: string): void {
+    this.exportType = exportType;
+    this.exportTypeLabel = this.getExportTypeLabel(this.exportType);
+  }
+
+  getExportTypeLabel(exportType: string): string {
+    switch (exportType) {
+      case 'oneWorkgroupPerRow':
+        return $localize`One Workgroup Per Row`;
+      case 'latestStudentWork':
+        return $localize`Latest Student Work`;
+      case 'allStudentWork':
+        return $localize`All Student Work`;
+      case 'events':
+        return $localize`Events`;
+      case 'rawData':
+        return $localize`Raw Data`;
+      default:
+        return null;
+    }
+  }
+
   /**
    * Export all or latest work for this run in CSV format
    * latestWork, allWork, and events will call this function with a null exportType.
    */
-  export(exportType = this.exportType) {
+  export(exportType = this.exportType): void {
     this.TeacherDataService.saveEvent(
       'ClassroomMonitor',
       null,
@@ -188,7 +213,7 @@ class DataExportController {
    * or studentNameX where X is an integer. The values are the corresponding actual
    * values of user id and student name.
    */
-  extractUserIDsAndStudentNames(users) {
+  extractUserIDsAndStudentNames(users: any[]): any {
     const extractedUserIDsAndStudentNames = {};
     for (let u = 0; u < users.length; u++) {
       let user = users[u];
@@ -215,20 +240,20 @@ class DataExportController {
    * @return an array containing the cells in the row
    */
   createStudentWorkExportRow(
-    columnNames,
-    columnNameToNumber,
-    rowCounter,
-    workgroupId,
-    userId1,
-    userId2,
-    userId3,
-    studentName1,
-    studentName2,
-    studentName3,
-    periodName,
-    componentRevisionCounter,
-    componentState
-  ) {
+    columnNames: string[],
+    columnNameToNumber: any,
+    rowCounter: number,
+    workgroupId: number,
+    userId1: number,
+    userId2: number,
+    userId3: number,
+    studentName1: string,
+    studentName2: string,
+    studentName3: string,
+    periodName: string,
+    componentRevisionCounter: any,
+    componentState: any
+  ): string[] {
     var row = new Array(columnNames.length);
     row.fill('');
     row[columnNameToNumber['#']] = rowCounter;
@@ -498,7 +523,7 @@ class DataExportController {
     studentName2: string,
     userId3: number,
     studentName3: string
-  ) {
+  ): void {
     if (userId1 != null) {
       row[columnNameToNumber['User ID 1']] = userId1;
     }
@@ -524,7 +549,7 @@ class DataExportController {
    * @param componentState {object} A component state that contains the student work.
    * @returns {string} A string that can be placed in a csv cell.
    */
-  getStudentDataString(componentState) {
+  getStudentDataString(componentState: any): string {
     /*
      * In Excel, if there is a cell with a long string and the cell to the
      * right of it is empty, the long string will overlap onto cells to the
@@ -553,7 +578,7 @@ class DataExportController {
    * @param nodeId The node id the component is in.
    * @param componentId The component id of the component.
    */
-  getRevisionCounter(componentRevisionCounter, nodeId, componentId) {
+  getRevisionCounter(componentRevisionCounter: any, nodeId: string, componentId: string): number {
     let nodeIdAndComponentId = nodeId + '_' + componentId;
     if (componentRevisionCounter[nodeIdAndComponentId] == null) {
       componentRevisionCounter[nodeIdAndComponentId] = 1;
@@ -568,12 +593,16 @@ class DataExportController {
    * @param nodeId The node id the component is in.
    * @param componentId The component id of the component.
    */
-  incrementRevisionCounter(componentRevisionCounter, nodeId, componentId) {
-    let nodeIdAndComponentId = nodeId + '_' + componentId;
+  incrementRevisionCounter(
+    componentRevisionCounter: any,
+    nodeId: string,
+    componentId: string
+  ): void {
+    const nodeIdAndComponentId = nodeId + '_' + componentId;
     if (componentRevisionCounter[nodeIdAndComponentId] == null) {
       componentRevisionCounter[nodeIdAndComponentId] = 1;
     }
-    let revisionCounter = componentRevisionCounter[nodeIdAndComponentId];
+    const revisionCounter = componentRevisionCounter[nodeIdAndComponentId];
     componentRevisionCounter[nodeIdAndComponentId] = revisionCounter + 1;
   }
 
@@ -590,7 +619,7 @@ class DataExportController {
    * @param componentId the component id to check
    * @return whether the component is selected
    */
-  isComponentSelected(selectedNodesMap, nodeId, componentId) {
+  isComponentSelected(selectedNodesMap: any, nodeId: string, componentId: string): boolean {
     var result = false;
     if (selectedNodesMap != null) {
       if (
@@ -616,7 +645,7 @@ class DataExportController {
    * @param componentId the component id to check
    * @return whether the node is selected
    */
-  isNodeSelected(selectedNodesMap, nodeId) {
+  isNodeSelected(selectedNodesMap: any, nodeId: string): boolean {
     var result = false;
     if (selectedNodesMap != null) {
       if (nodeId != null && selectedNodesMap[nodeId] == true) {
@@ -633,7 +662,7 @@ class DataExportController {
    * numbers which represent the cell values in the export.
    * @param fileName the name of the file that will be generated
    */
-  generateCSVFile(rows, fileName) {
+  generateCSVFile(rows: any[], fileName: string): void {
     var csvString = '';
     if (rows != null) {
       for (var r = 0; r < rows.length; r++) {
@@ -679,7 +708,7 @@ class DataExportController {
       }
     }
     const csvBlob = new Blob([csvString], { type: 'text/csv; charset=utf-8' });
-    this.FileSaver.saveAs(csvBlob, fileName);
+    FileSaver.saveAs(csvBlob, fileName);
   }
 
   /**
@@ -702,7 +731,7 @@ class DataExportController {
    * ]
    * Note: "node3" means just node3, not components in node2.
    */
-  getSelectedNodesToExport() {
+  getSelectedNodesToExport(): any[] {
     const selectedNodes = [];
     for (let n = 0; n < this.projectItems.length; n++) {
       let item = this.projectItems[n];
@@ -734,7 +763,7 @@ class DataExportController {
    * Handle node item clicked
    * @param nodeItem the item object for a given activity or step
    */
-  nodeItemClicked(nodeItem) {
+  nodeItemClicked(nodeItem: any): void {
     if (nodeItem.node != null) {
       var node = nodeItem.node;
       if (node.ids != null) {
@@ -775,7 +804,7 @@ class DataExportController {
     }
   }
 
-  selectAll(doSelect = true) {
+  selectAll(doSelect: boolean = true): void {
     if (this.projectIdToOrder != null) {
       for (let nodeId in this.projectIdToOrder) {
         let projectItem = this.projectIdToOrder[nodeId];
@@ -797,15 +826,15 @@ class DataExportController {
     }
   }
 
-  deselectAll() {
+  deselectAll(): void {
     this.selectAll(false);
   }
 
-  previewProject() {
+  previewProject(): void {
     window.open(`${this.ConfigService.getConfigParam('previewProjectURL')}`);
   }
 
-  previewNode(node) {
+  previewNode(node: any): void {
     window.open(`${this.ConfigService.getConfigParam('previewProjectURL')}/${node.id}`);
   }
 
@@ -814,14 +843,10 @@ class DataExportController {
    * @param componentType the component type
    * @return the component service or null if it doesn't exist
    */
-  getComponentService(componentType) {
+  getComponentService(componentType: any): any {
     let componentService = null;
     if (componentType != null) {
-      componentService = this.componentTypeToComponentService[componentType];
-      if (componentService == null) {
-        componentService = this.$injector.get(componentType + 'Service');
-        this.componentTypeToComponentService[componentType] = componentService;
-      }
+      componentService = this.componentServiceLookupService.getService(componentType);
     }
     return componentService;
   }
@@ -833,7 +858,7 @@ class DataExportController {
    * @param nodeId the node id
    * @return whether the node was checked
    */
-  exportNode(selectedNodesMap, nodeId) {
+  exportNode(selectedNodesMap: any, nodeId: string): boolean {
     if (selectedNodesMap == null || this.isNodeSelected(selectedNodesMap, nodeId)) {
       return true;
     } else {
@@ -842,19 +867,11 @@ class DataExportController {
   }
 
   /**
-   * The "Export One Workgroup Per Row" button was clicked so we will display the
-   * view for it
-   */
-  exportOneWorkgroupPerRowClicked() {
-    this.exportType = 'oneWorkgroupPerRow';
-  }
-
-  /**
    * Get the node position
    * @param nodeId the node id
    * @returns the node position
    */
-  getNodePositionById(nodeId) {
+  getNodePositionById(nodeId: string): string {
     return this.ProjectService.getNodePositionById(nodeId);
   }
 
@@ -863,7 +880,7 @@ class DataExportController {
    * @param nodeId the node id
    * @returns the node title
    */
-  getNodeTitleByNodeId(nodeId) {
+  getNodeTitleByNodeId(nodeId: string): string {
     return this.ProjectService.getNodeTitle(nodeId);
   }
 
@@ -872,7 +889,7 @@ class DataExportController {
    * @param nodeId
    * @returns whether the node is a group node
    */
-  isGroupNode(nodeId) {
+  isGroupNode(nodeId: string): boolean {
     return this.ProjectService.isGroupNode(nodeId);
   }
 
@@ -881,15 +898,15 @@ class DataExportController {
    * @param nodeId the node id of the node
    * @return whether the node is in any branch path
    */
-  isNodeInAnyBranchPath(nodeId) {
+  isNodeInAnyBranchPath(nodeId: string): boolean {
     return this.ProjectService.isNodeInAnyBranchPath(nodeId);
   }
 
-  defaultClicked() {
+  defaultClicked(): void {
     this.setDefaultExportSettings();
   }
 
-  everythingClicked() {
+  everythingClicked(): void {
     this.includeStudentWork = true;
     this.includeStudentWorkIds = true;
     this.includeStudentNames = true;
@@ -906,7 +923,7 @@ class DataExportController {
     this.includeEvents = true;
   }
 
-  setDefaultExportSettings() {
+  setDefaultExportSettings(): void {
     this.includeStudentWork = true;
     this.includeStudentWorkIds = false;
     if (this.canViewStudentNames) {
@@ -936,15 +953,11 @@ class DataExportController {
     this.ProjectService.cleanupBeforeSave();
   }
 
-  rawDataExportClicked() {
-    this.exportType = 'rawData';
-  }
-
-  canExportAllRevisionsForComponent(component: any) {
+  canExportAllRevisionsForComponent(component: any): boolean {
     return this.canExportForComponent(component, this.allowedComponentTypesForAllRevisions);
   }
 
-  canExportLatestRevisionsForComponent(component: any) {
+  canExportLatestRevisionsForComponent(component: any): boolean {
     return this.canExportForComponent(component, this.allowedComponentTypesForLatestRevisions);
   }
 
@@ -975,7 +988,7 @@ class DataExportController {
   /**
    * Show the page where users can export work for a specific component.
    */
-  showExportComponentDataPage() {
+  showExportComponentDataPage(): void {
     this.workSelectionType = 'exportAllWork';
     this.includeCorrectnessColumns = true;
     this.includeOnlySubmits = false;
@@ -987,7 +1000,7 @@ class DataExportController {
    * @param nodeId The node id.
    * @param component The component content object.
    */
-  exportComponentAllRevisions(nodeId: string, component: any) {
+  exportComponentAllRevisions(nodeId: string, component: any): void {
     this.setAllWorkSelectionType();
     if (component.type === 'Match') {
       this.exportMatchComponent(nodeId, component);
@@ -1010,7 +1023,7 @@ class DataExportController {
    * @param nodeId The node id.
    * @param component The component content object.
    */
-  exportComponentLatestRevisions(nodeId: string, component: any) {
+  exportComponentLatestRevisions(nodeId: string, component: any): void {
     this.setLatestWorkSelectionType();
     if (component.type === 'Match') {
       this.exportMatchComponent(nodeId, component);
@@ -1029,21 +1042,21 @@ class DataExportController {
    * @param nodeId The node id.
    * @param component The component content object.
    */
-  exportMatchComponent(nodeId: string, component: any) {
+  exportMatchComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
     this.DataExportService.retrieveStudentDataExport(components).then((result: any) => {
       this.generateMatchComponentExport(nodeId, component);
     });
   }
 
-  generateMatchComponentExport(nodeId: string, component: any) {
+  generateMatchComponentExport(nodeId: string, component: any): void {
     const rows = this.getExportMatchComponentRows(nodeId, component);
     const fileName = this.getComponentExportFileName(nodeId, component.id, 'match');
     this.generateCSVFile(rows, fileName);
     this.hideDownloadingExportMessage();
   }
 
-  getExportMatchComponentRows(nodeId: string, component: any) {
+  getExportMatchComponentRows(nodeId: string, component: any): any[] {
     const columnNames = [];
     const columnNameToNumber = {};
     let rows = [];
@@ -1062,7 +1075,7 @@ class DataExportController {
    * @param columnNameToNumber An object that we will populate with mappings
    * of column name to column number.
    */
-  populateMatchColumnNames(component, columnNames, columnNameToNumber) {
+  populateMatchColumnNames(component: any, columnNames: string[], columnNameToNumber: any): void {
     /*
      * Add the default column names that contain the information about the
      * student, project, run, node, and component.
@@ -1094,7 +1107,11 @@ class DataExportController {
    * @param columnNameToNumber An object containing the mappings from column
    * name to column number.
    */
-  generateMatchComponentHeaderRow(component, columnNames, columnNameToNumber) {
+  generateMatchComponentHeaderRow(
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any
+  ): string[] {
     this.populateMatchColumnNames(component, columnNames, columnNameToNumber);
     return columnNames;
   }
@@ -1115,21 +1132,21 @@ class DataExportController {
    * @return The row with the student work.
    */
   generateMatchComponentWorkRow(
-    component,
-    columnNames,
-    columnNameToNumber,
-    rowCounter,
-    workgroupId,
-    userId1,
-    userId2,
-    userId3,
-    studentName1,
-    studentName2,
-    studentName3,
-    periodName,
-    componentRevisionCounter,
-    matchComponentState
-  ) {
+    component: any,
+    columnNames: string[],
+    columnNameToNumber: any,
+    rowCounter: number,
+    workgroupId: number,
+    userId1: number,
+    userId2: number,
+    userId3: number,
+    studentName1: string,
+    studentName2: string,
+    studentName3: string,
+    periodName: string,
+    componentRevisionCounter: any,
+    matchComponentState: any
+  ): string[] {
     /*
      * Populate the cells in the row that contain the information about the
      * student, project, run, step, and component.
@@ -1176,7 +1193,7 @@ class DataExportController {
    * @param columnNameToNumber The mapping from column name to column number.
    * @param item The choice object.
    */
-  setCorrectnessValue(row, columnNameToNumber, item) {
+  setCorrectnessValue(row: any[], columnNameToNumber: any, item: any): void {
     const columnName = item.id + '-boolean';
     if (item.isCorrect == null) {
       /*
@@ -2068,33 +2085,24 @@ class DataExportController {
     row[columnNameToNumber[`${device} ${this.embeddedTableKeyToValue[column]}`]] = text;
   }
 
-  showDownloadingExportMessage() {
-    this.$mdDialog.show({
-      template: `
-        <div align="center">
-          <div style="width: 200px; height: 100px; margin: 20px;">
-            <span>{{ 'downloadingExport' | translate }}</span>
-            <br/>
-            <br/>
-            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-          </div>
-        </div>
-      `,
-      clickOutsideToClose: false
+  showDownloadingExportMessage(): void {
+    this.dialog.open(DialogWithSpinnerComponent, {
+      data: {
+        title: $localize`Downloading Export`
+      },
+      disableClose: false
     });
   }
 
-  hideDownloadingExportMessage() {
-    this.$mdDialog.hide();
+  hideDownloadingExportMessage(): void {
+    this.dialog.closeAll();
   }
 
-  exportVisitsClicked() {
-    this.$state.go('root.cm.exportVisits');
+  exportVisitsClicked(): void {
+    this.upgrade.$injector.get('$state').go('root.cm.exportVisits');
   }
 
-  getComponentsParam(nodeId: string, componentId: string) {
+  getComponentsParam(nodeId: string, componentId: string): any[] {
     return [{ nodeId: nodeId, componentId: componentId }];
   }
 }
-
-export default DataExportController;

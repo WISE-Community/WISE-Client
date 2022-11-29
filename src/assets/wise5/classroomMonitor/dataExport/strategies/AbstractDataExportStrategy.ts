@@ -4,13 +4,13 @@ import { DataExportService } from '../../../services/dataExportService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { DataExportComponent } from '../data-export/data-export.component';
 import { DataExportContext } from '../DataExportContext';
-import DataExportController from '../dataExportController';
 import { DataExportStrategy } from './DataExportStrategy';
 
 export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   context: DataExportContext;
-  controller: DataExportController;
+  controller: DataExportComponent;
   annotationService: AnnotationService;
   configService: ConfigService;
   dataExportService: DataExportService;

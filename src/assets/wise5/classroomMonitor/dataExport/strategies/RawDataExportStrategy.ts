@@ -1,5 +1,6 @@
 import * as angular from 'angular';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
+import * as FileSaver from 'file-saver';
 
 export class RawDataExportStrategy extends AbstractDataExportStrategy {
   export() {
@@ -18,6 +19,7 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
       selectedNodes = this.controller.getSelectedNodesToExport();
       if (selectedNodes == null || selectedNodes.length == 0) {
         alert('Please select a step to export.');
+        this.controller.hideDownloadingExportMessage();
         return;
       } else {
         selectedNodesMap = this.getSelectedNodesMap(selectedNodes);
@@ -96,7 +98,7 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
       data.workgroups = workgroups;
       const dataJSONString = angular.toJson(data, 4);
       const blob = new Blob([dataJSONString]);
-      this.controller.FileSaver.saveAs(blob, runId + '_raw_data.json');
+      FileSaver.saveAs(blob, runId + '_raw_data.json');
       this.controller.hideDownloadingExportMessage();
     });
   }
