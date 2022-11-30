@@ -195,7 +195,7 @@ export class OpenResponseStudent extends ComponentStudent {
    * @return a promise that will return a component state
    */
   createComponentState(action: any): any {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     const studentData: any = {};
     const response = this.getStudentResponse();
     studentData.response = response;
@@ -554,7 +554,7 @@ export class OpenResponseStudent extends ComponentStudent {
    * @return a component state with the merged student responses
    */
   createMergedComponentState(componentStates: any[]): any {
-    let mergedComponentState: any = this.NodeService.createNewComponentState();
+    let mergedComponentState: any = this.createNewComponentState();
     if (componentStates != null) {
       let mergedResponse = '';
       for (let c = 0; c < componentStates.length; c++) {

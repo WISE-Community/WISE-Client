@@ -214,7 +214,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
   }
 
   createComponentState(action: string): Promise<any> {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.isSubmit = this.isSubmit;
     componentState.componentType = 'AudioOscillator';
     componentState.nodeId = this.nodeId;
@@ -600,7 +600,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
     for (const componentState of componentStates) {
       this.mergeStudentData(mergedStudentData, componentState.studentData);
     }
-    const mergedComponentState: any = this.NodeService.createNewComponentState();
+    const mergedComponentState: any = this.createNewComponentState();
     mergedComponentState.studentData = mergedStudentData;
     return mergedComponentState;
   }

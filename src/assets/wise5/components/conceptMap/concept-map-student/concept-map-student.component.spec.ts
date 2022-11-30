@@ -4,7 +4,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
-import { NodeService } from '../../../services/nodeService';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapStudent } from './concept-map-student.component';
 
@@ -35,14 +34,6 @@ describe('ConceptMapStudent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(ConceptMapStudent);
-    spyOn(TestBed.inject(NodeService), 'createNewComponentState').and.returnValue({
-      studentData: {
-        conceptMapData: {
-          nodes: [],
-          links: []
-        }
-      }
-    });
     component = fixture.componentInstance;
     const componentContent = TestBed.inject(ConceptMapService).createComponent();
     componentContent.id = componentId;

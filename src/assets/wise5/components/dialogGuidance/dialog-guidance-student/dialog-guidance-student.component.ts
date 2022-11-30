@@ -295,7 +295,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   }
 
   createComponentState(action: string): Promise<any> {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.studentData = {
       responses: this.responses,
       submitCounter: this.submitCounter

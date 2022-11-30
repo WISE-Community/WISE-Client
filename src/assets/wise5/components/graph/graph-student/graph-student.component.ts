@@ -1513,7 +1513,7 @@ export class GraphStudent extends ComponentStudent {
    * @return a promise that will return a component state
    */
   createComponentState(action) {
-    const componentState = this.NodeService.createNewComponentState();
+    const componentState = this.createNewComponentState();
     const studentData: any = {};
     studentData.version = this.studentDataVersion;
     if (this.isStudentDataVersion1()) {
@@ -2743,7 +2743,7 @@ export class GraphStudent extends ComponentStudent {
             activeTrialIndex
           );
         }
-        let newComponentState = this.NodeService.createNewComponentState();
+        let newComponentState = this.createNewComponentState();
         newComponentState.studentData = {
           trials: mergedTrials,
           activeTrialIndex: activeTrialIndex,

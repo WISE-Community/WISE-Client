@@ -414,7 +414,7 @@ export class LabelStudent extends ComponentStudent {
    * @return A promise that will return a component state.
    */
   createComponentState(action: string): Promise<any> {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     const studentData: any = this.createStudentData(
       this.getLabelData(),
       this.backgroundImage,

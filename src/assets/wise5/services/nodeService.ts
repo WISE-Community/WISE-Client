@@ -30,16 +30,6 @@ export class NodeService {
     private DataService: DataService
   ) {}
 
-  /**
-   * Create a new empty node state
-   * @return a new empty node state
-   */
-  createNewComponentState(): any {
-    return {
-      clientSaveTime: new Date().getTime()
-    };
-  }
-
   goToNextNode() {
     return this.getNextNodeId().then((nextNodeId) => {
       if (nextNodeId != null) {

@@ -7,12 +7,6 @@ import { Component } from '../../../common/Component';
 import { AnimationService } from '../animationService';
 import { AnimationStudent } from './animation-student.component';
 
-export class MockNodeService {
-  createNewComponentState() {
-    return {};
-  }
-}
-
 let component: AnimationStudent;
 const componentId = 'component1';
 let fixture: ComponentFixture<AnimationStudent>;

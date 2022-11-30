@@ -340,7 +340,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
    * @return a promise that will return a component state
    */
   createComponentState(action: string): Promise<any> {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     const studentData: any = {
       studentChoices: this.getStudentChoiceObjects()
     };
@@ -468,7 +468,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
    * @return a component state with the merged student responses
    */
   createMergedComponentState(componentStates: any[]): any[] {
-    const mergedComponentState: any = this.NodeService.createNewComponentState();
+    const mergedComponentState: any = this.createNewComponentState();
     if (componentStates != null) {
       let mergedStudentChoices = [];
       for (const componentState of componentStates) {

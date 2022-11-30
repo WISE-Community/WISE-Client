@@ -222,7 +222,7 @@ export class DrawStudent extends ComponentStudent {
   }
 
   createComponentStateObject() {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     const studentData: any = {
       drawData: this.getDrawData(),
       submitCounter: this.submitCounter
@@ -387,7 +387,7 @@ export class DrawStudent extends ComponentStudent {
   createComponentStateWithCanvasObjects(canvasObjects: any[]): any {
     const drawData: any = JSON.parse(this.getDrawData());
     drawData.canvas.objects = canvasObjects;
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.studentData = {
       drawData: JSON.stringify(drawData)
     };

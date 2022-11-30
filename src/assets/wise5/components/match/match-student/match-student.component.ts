@@ -572,7 +572,7 @@ export class MatchStudent extends ComponentStudent {
   }
 
   createComponentStateObject(action: string): any {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.componentType = 'Match';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
@@ -679,7 +679,7 @@ export class MatchStudent extends ComponentStudent {
         this.mergeBucket(mergedBuckets, bucket);
       }
     }
-    const mergedComponentState: any = this.NodeService.createNewComponentState();
+    const mergedComponentState: any = this.createNewComponentState();
     mergedComponentState.studentData = {
       buckets: mergedBuckets
     };

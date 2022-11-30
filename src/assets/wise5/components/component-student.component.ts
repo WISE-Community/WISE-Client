@@ -2,6 +2,7 @@ import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
+import { ComponentState } from '../../../app/domain/componentState';
 import { Component } from '../common/Component';
 import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
@@ -814,5 +815,11 @@ export abstract class ComponentStudent {
     if (submitCounter != null) {
       this.submitCounter = submitCounter;
     }
+  }
+
+  createNewComponentState(): Partial<ComponentState> {
+    return {
+      clientSaveTime: new Date().getTime()
+    };
   }
 }

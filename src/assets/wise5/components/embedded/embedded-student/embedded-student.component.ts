@@ -288,7 +288,7 @@ export class EmbeddedStudent extends ComponentStudent {
   }
 
   createComponentStateObject(): any {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.studentData = this.studentData;
     componentState.componentType = 'Embedded';
     componentState.nodeId = this.nodeId;
@@ -477,7 +477,7 @@ export class EmbeddedStudent extends ComponentStudent {
     let mergedComponentState = this.componentState;
     const firstTime = mergedComponentState == null;
     if (mergedComponentState == null) {
-      mergedComponentState = this.NodeService.createNewComponentState();
+      mergedComponentState = this.createNewComponentState();
       mergedComponentState.studentData = {};
     }
     for (const connectedComponent of this.componentContent.connectedComponents) {
