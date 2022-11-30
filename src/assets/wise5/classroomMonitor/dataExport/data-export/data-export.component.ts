@@ -105,30 +105,30 @@ export class DataExportComponent implements OnInit {
   workSelectionType: string;
 
   constructor(
-    public AnnotationService: AnnotationService,
+    public annotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
-    public ConfigService: ConfigService,
-    public DataExportService: DataExportService,
+    public configService: ConfigService,
+    public dataExportService: DataExportService,
     private dialog: MatDialog,
-    private MatchService: MatchService,
-    public ProjectService: TeacherProjectService,
-    public TeacherDataService: TeacherDataService,
+    private matchService: MatchService,
+    public projectService: TeacherProjectService,
+    public teacherDataService: TeacherDataService,
     private upgrade: UpgradeModule,
-    public UtilService: UtilService
+    public utilService: UtilService
   ) {}
 
   ngOnInit(): void {
     this.dataExportContext = new DataExportContext(this);
-    this.canViewStudentNames = this.ConfigService.getPermissions().canViewStudentNames;
+    this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
     this.componentExportTooltips[
       'Match'
     ] = $localize`Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position`;
     this.setDefaultExportSettings();
-    this.project = this.ProjectService.project;
-    const nodeOrderOfProject = this.ProjectService.getNodeOrderOfProject(this.project);
+    this.project = this.projectService.project;
+    const nodeOrderOfProject = this.projectService.getNodeOrderOfProject(this.project);
     this.projectIdToOrder = nodeOrderOfProject.idToOrder;
     this.projectItems = nodeOrderOfProject.nodes;
-    this.flattenedProjectAsNodeIds = this.ProjectService.getFlattenedProjectAsNodeIds();
+    this.flattenedProjectAsNodeIds = this.projectService.getFlattenedProjectAsNodeIds();
     this.nodes = Object.values(this.projectIdToOrder);
     this.nodes.sort(this.sortNodesByOrder);
     const context = 'ClassroomMonitor',
@@ -138,7 +138,7 @@ export class DataExportComponent implements OnInit {
       category = 'Navigation',
       event = 'dataExportViewDisplayed',
       data = {};
-    this.TeacherDataService.saveEvent(
+    this.teacherDataService.saveEvent(
       context,
       nodeId,
       componentId,
@@ -180,7 +180,7 @@ export class DataExportComponent implements OnInit {
    * latestWork, allWork, and events will call this function with a null exportType.
    */
   export(exportType = this.exportType): void {
-    this.TeacherDataService.saveEvent(
+    this.teacherDataService.saveEvent(
       'ClassroomMonitor',
       null,
       null,
@@ -269,12 +269,12 @@ export class DataExportComponent implements OnInit {
       studentName3
     );
     row[columnNameToNumber['Class Period']] = periodName;
-    row[columnNameToNumber['Project ID']] = this.ConfigService.getProjectId();
-    row[columnNameToNumber['Project Name']] = this.ProjectService.getProjectTitle();
-    row[columnNameToNumber['Run ID']] = this.ConfigService.getRunId();
+    row[columnNameToNumber['Project ID']] = this.configService.getProjectId();
+    row[columnNameToNumber['Project Name']] = this.projectService.getProjectTitle();
+    row[columnNameToNumber['Run ID']] = this.configService.getRunId();
     row[columnNameToNumber['Student Work ID']] = componentState.id;
     if (componentState.serverSaveTime != null) {
-      var formattedDateTime = this.UtilService.convertMillisecondsToFormattedDateTime(
+      var formattedDateTime = this.utilService.convertMillisecondsToFormattedDateTime(
         componentState.serverSaveTime
       );
       row[columnNameToNumber['Server Timestamp']] = formattedDateTime;
@@ -289,35 +289,35 @@ export class DataExportComponent implements OnInit {
     }
     row[columnNameToNumber['Node ID']] = componentState.nodeId;
     row[columnNameToNumber['Component ID']] = componentState.componentId;
-    row[columnNameToNumber['Step Title']] = this.ProjectService.getNodePositionAndTitle(
+    row[columnNameToNumber['Step Title']] = this.projectService.getNodePositionAndTitle(
       componentState.nodeId
     );
     var componentPartNumber =
-      this.ProjectService.getComponentPosition(componentState.nodeId, componentState.componentId) +
+      this.projectService.getComponentPosition(componentState.nodeId, componentState.componentId) +
       1;
     row[columnNameToNumber['Component Part Number']] = componentPartNumber;
-    var component = this.ProjectService.getComponent(
+    var component = this.projectService.getComponent(
       componentState.nodeId,
       componentState.componentId
     );
     if (component != null) {
       row[columnNameToNumber['Component Type']] = component.type;
       if (component.prompt != null) {
-        var prompt = this.UtilService.removeHTMLTags(component.prompt);
+        var prompt = this.utilService.removeHTMLTags(component.prompt);
         prompt = prompt.replace(/"/g, '""');
         row[columnNameToNumber['Component Prompt']] = prompt;
       }
     }
-    var teacherScoreAnnotation = this.AnnotationService.getLatestTeacherScoreAnnotationByStudentWorkId(
+    var teacherScoreAnnotation = this.annotationService.getLatestTeacherScoreAnnotationByStudentWorkId(
       componentState.id
     );
-    var teacherCommentAnnotation = this.AnnotationService.getLatestTeacherCommentAnnotationByStudentWorkId(
+    var teacherCommentAnnotation = this.annotationService.getLatestTeacherCommentAnnotationByStudentWorkId(
       componentState.id
     );
-    var autoScoreAnnotation = this.AnnotationService.getLatestAutoScoreAnnotationByStudentWorkId(
+    var autoScoreAnnotation = this.annotationService.getLatestAutoScoreAnnotationByStudentWorkId(
       componentState.id
     );
-    var autoCommentAnnotation = this.AnnotationService.getLatestAutoCommentAnnotationByStudentWorkId(
+    var autoCommentAnnotation = this.annotationService.getLatestAutoCommentAnnotationByStudentWorkId(
       componentState.id
     );
     if (teacherScoreAnnotation != null) {
@@ -351,7 +351,7 @@ export class DataExportComponent implements OnInit {
         if (score != null) {
           row[columnNameToNumber['Teacher Score']] = score;
         }
-        var maxScore = this.ProjectService.getMaxScoreForComponent(
+        var maxScore = this.projectService.getMaxScoreForComponent(
           componentState.nodeId,
           componentState.componentId
         );
@@ -456,7 +456,7 @@ export class DataExportComponent implements OnInit {
       if (data != null) {
         var autoComment = data.value;
         if (autoComment != null) {
-          row[columnNameToNumber['Auto Comment']] = this.UtilService.removeHTMLTags(autoComment);
+          row[columnNameToNumber['Auto Comment']] = this.utilService.removeHTMLTags(autoComment);
         }
       }
     }
@@ -563,7 +563,7 @@ export class DataExportComponent implements OnInit {
     let componentService = this.componentServiceLookupService.getService(componentType);
     if (componentService != null && componentService.getStudentDataString != null) {
       studentDataString = componentService.getStudentDataString(componentState);
-      studentDataString = this.UtilService.removeHTMLTags(studentDataString);
+      studentDataString = this.utilService.removeHTMLTags(studentDataString);
       studentDataString = studentDataString.replace(/"/g, '""');
     } else {
       studentDataString = componentState.studentData;
@@ -831,11 +831,11 @@ export class DataExportComponent implements OnInit {
   }
 
   previewProject(): void {
-    window.open(`${this.ConfigService.getConfigParam('previewProjectURL')}`);
+    window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
   }
 
   previewNode(node: any): void {
-    window.open(`${this.ConfigService.getConfigParam('previewProjectURL')}/${node.id}`);
+    window.open(`${this.configService.getConfigParam('previewProjectURL')}/${node.id}`);
   }
 
   /**
@@ -872,7 +872,7 @@ export class DataExportComponent implements OnInit {
    * @returns the node position
    */
   getNodePositionById(nodeId: string): string {
-    return this.ProjectService.getNodePositionById(nodeId);
+    return this.projectService.getNodePositionById(nodeId);
   }
 
   /**
@@ -881,7 +881,7 @@ export class DataExportComponent implements OnInit {
    * @returns the node title
    */
   getNodeTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodeTitle(nodeId);
+    return this.projectService.getNodeTitle(nodeId);
   }
 
   /**
@@ -890,7 +890,7 @@ export class DataExportComponent implements OnInit {
    * @returns whether the node is a group node
    */
   isGroupNode(nodeId: string): boolean {
-    return this.ProjectService.isGroupNode(nodeId);
+    return this.projectService.isGroupNode(nodeId);
   }
 
   /**
@@ -899,7 +899,7 @@ export class DataExportComponent implements OnInit {
    * @return whether the node is in any branch path
    */
   isNodeInAnyBranchPath(nodeId: string): boolean {
-    return this.ProjectService.isNodeInAnyBranchPath(nodeId);
+    return this.projectService.isNodeInAnyBranchPath(nodeId);
   }
 
   defaultClicked(): void {
@@ -950,7 +950,7 @@ export class DataExportComponent implements OnInit {
      * remove checked fields that may have been accidentally saved by the
      * authoring tool or grading tool
      */
-    this.ProjectService.cleanupBeforeSave();
+    this.projectService.cleanupBeforeSave();
   }
 
   canExportAllRevisionsForComponent(component: any): boolean {
@@ -1044,7 +1044,7 @@ export class DataExportComponent implements OnInit {
    */
   exportMatchComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.DataExportService.retrieveStudentDataExport(components).then((result: any) => {
+    this.dataExportService.retrieveStudentDataExport(components).then((result: any) => {
       this.generateMatchComponentExport(nodeId, component);
     });
   }
@@ -1091,7 +1091,7 @@ export class DataExportComponent implements OnInit {
       columnNameToNumber[choice.id] = columnNames.length;
       columnNames.push(choice.value);
     }
-    if (this.includeCorrectnessColumns && this.MatchService.hasCorrectAnswer(component)) {
+    if (this.includeCorrectnessColumns && this.matchService.hasCorrectAnswer(component)) {
       for (let choice of component.choices) {
         columnNameToNumber[choice.id + '-boolean'] = columnNames.length;
         columnNames.push(choice.value);
@@ -1169,7 +1169,7 @@ export class DataExportComponent implements OnInit {
     for (const bucket of matchComponentState.studentData.buckets) {
       for (const item of bucket.items) {
         row[columnNameToNumber[item.id]] = this.getBucketValueById(component, bucket.id);
-        if (this.includeCorrectnessColumns && this.MatchService.hasCorrectAnswer(component)) {
+        if (this.includeCorrectnessColumns && this.matchService.hasCorrectAnswer(component)) {
           this.setCorrectnessValue(row, columnNameToNumber, item);
         }
       }
@@ -1225,7 +1225,7 @@ export class DataExportComponent implements OnInit {
 
   exportDialogGuidanceComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.DataExportService.retrieveStudentDataExport(components).then((result: any) => {
+    this.dataExportService.retrieveStudentDataExport(components).then((result: any) => {
       this.generateDialogGuidanceComponentExport(nodeId, component);
     });
   }
@@ -1239,7 +1239,7 @@ export class DataExportComponent implements OnInit {
 
   exportOpenResponseComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.DataExportService.retrieveStudentDataExport(components).then(() => {
+    this.dataExportService.retrieveStudentDataExport(components).then(() => {
       this.generateOpenResponseComponentExport(nodeId, component);
     });
   }
@@ -1295,7 +1295,7 @@ export class DataExportComponent implements OnInit {
       this.studentResponseLabel
     );
     if (this.isCRaterEnabled(component)) {
-      const annotations = this.TeacherDataService.getAnnotationsByNodeIdAndComponentId(
+      const annotations = this.teacherDataService.getAnnotationsByNodeIdAndComponentId(
         nodeId,
         component.id
       );
@@ -1389,9 +1389,9 @@ export class DataExportComponent implements OnInit {
   }
 
   getComponentExportFileName(nodeId: string, componentId: string, componentType: string): string {
-    const runId = this.ConfigService.getRunId();
-    const stepNumber = this.ProjectService.getNodePositionById(nodeId);
-    const componentNumber = this.ProjectService.getComponentPosition(nodeId, componentId) + 1;
+    const runId = this.configService.getRunId();
+    const stepNumber = this.projectService.getNodePositionById(nodeId);
+    const componentNumber = this.projectService.getComponentPosition(nodeId, componentId) + 1;
     let allOrLatest = '';
     if (this.workSelectionType === 'exportAllWork') {
       allOrLatest = 'all';
@@ -1432,7 +1432,7 @@ export class DataExportComponent implements OnInit {
       this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, defaultColumnName);
     }
     this.addColumnNameToColumnDataStructures(columnNameToNumber, columnNames, this.itemIdLabel);
-    const componentStates = this.TeacherDataService.getComponentStatesByComponentId(component.id);
+    const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
     const ideaNames = this.getDialogGuidanceIdeaNames(componentStates);
     const scoreNames = this.getDialogGuidanceScoreNames(componentStates);
     for (let r = 0; r < this.getMaxNumberOfStudentResponses(componentStates); r++) {
@@ -1557,7 +1557,7 @@ export class DataExportComponent implements OnInit {
     const componentId = component.id;
     let rows = [];
     let rowCounter = 1;
-    for (const workgroupId of this.ConfigService.getClassmateWorkgroupIds()) {
+    for (const workgroupId of this.configService.getClassmateWorkgroupIds()) {
       const rowsForWorkgroup = this.generateWorkgroupComponentWorkRows(
         component,
         workgroupId,
@@ -1603,13 +1603,13 @@ export class DataExportComponent implements OnInit {
     rowCounter: number
   ): string[] {
     const rows = [];
-    const userInfo = this.ConfigService.getUserInfoByWorkgroupId(workgroupId);
+    const userInfo = this.configService.getUserInfoByWorkgroupId(workgroupId);
     const extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
 
     // A mapping from component to component revision counter. The key will be
     // {{nodeId}}_{{componentId}} and the value will be a number.
     const componentRevisionCounter = {};
-    const componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
+    const componentStates = this.teacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
       workgroupId,
       componentId
     );
@@ -1892,7 +1892,7 @@ export class DataExportComponent implements OnInit {
     );
     row[columnNameToNumber[this.itemIdLabel]] = component?.cRater?.itemId;
     row[columnNameToNumber[this.studentResponseLabel]] = componentState.studentData.response;
-    const annotation = this.AnnotationService.getLatestAnnotationByStudentWorkIdAndType(
+    const annotation = this.annotationService.getLatestAnnotationByStudentWorkIdAndType(
       componentState.id,
       'autoScore'
     );
@@ -1924,7 +1924,7 @@ export class DataExportComponent implements OnInit {
 
   exportEmbeddedComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.DataExportService.retrieveStudentDataExport(components).then((result: any) => {
+    this.dataExportService.retrieveStudentDataExport(components).then((result: any) => {
       this.generateEmbeddedComponentExport(nodeId, component);
     });
   }
@@ -1968,7 +1968,7 @@ export class DataExportComponent implements OnInit {
         defaultMatchColumnName
       );
     }
-    const componentStates = this.TeacherDataService.getComponentStatesByComponentId(component.id);
+    const componentStates = this.teacherDataService.getComponentStatesByComponentId(component.id);
     const items = this.getEmbeddedTableRowItems(component, componentStates);
     const columnKeys = this.getEmbeddedTableColumnKeys(component);
     if (this.isEmbeddedTableComponentAndCanExport(component)) {
