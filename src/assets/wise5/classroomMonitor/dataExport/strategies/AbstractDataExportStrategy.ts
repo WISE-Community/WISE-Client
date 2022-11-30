@@ -4,13 +4,13 @@ import { DataExportService } from '../../../services/dataExportService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
+import { DataExportComponent } from '../data-export/data-export.component';
 import { DataExportContext } from '../DataExportContext';
-import DataExportController from '../dataExportController';
 import { DataExportStrategy } from './DataExportStrategy';
 
 export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   context: DataExportContext;
-  controller: DataExportController;
+  controller: DataExportComponent;
   annotationService: AnnotationService;
   configService: ConfigService;
   dataExportService: DataExportService;
@@ -21,12 +21,12 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   setDataExportContext(context: DataExportContext) {
     this.context = context;
     this.controller = context.controller;
-    this.annotationService = context.controller.AnnotationService;
-    this.configService = context.controller.ConfigService;
-    this.dataExportService = context.controller.DataExportService;
-    this.projectService = context.controller.ProjectService;
-    this.teacherDataService = context.controller.TeacherDataService;
-    this.utilService = context.controller.UtilService;
+    this.annotationService = context.controller.annotationService;
+    this.configService = context.controller.configService;
+    this.dataExportService = context.controller.dataExportService;
+    this.projectService = context.controller.projectService;
+    this.teacherDataService = context.controller.teacherDataService;
+    this.utilService = context.controller.utilService;
   }
 
   abstract export();
