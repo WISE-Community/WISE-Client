@@ -75,7 +75,7 @@ describe('RegisterStudentFormComponent', () => {
 });
 
 function validateFirstName() {
-  describe('validate first name', () => {
+  describe('validateFirstName()', () => {
     for (const nameTest of nameTests) {
       it(nameTest.description, () => {
         validateAndExpect(
@@ -89,7 +89,7 @@ function validateFirstName() {
 }
 
 function validateLastName() {
-  describe('validate last name', () => {
+  describe('validateLastName()', () => {
     for (const nameTest of nameTests) {
       it(nameTest.description, () => {
         validateAndExpect(
@@ -136,21 +136,21 @@ function createAccount() {
     it('should show error when invalid first name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidFirstName',
-        'Error: First Name must only contain characters A-Z, spaces, or dashes'
+        'Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
       );
     });
 
     it('should show error when invalid last name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidLastName',
-        'Error: Last Name must only contain characters A-Z, spaces, or dashes'
+        'Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
       );
     });
 
     it('should show error when invalid first and last name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidFirstAndLastName',
-        'Error: First Name and Last Name must only contain characters A-Z, spaces, or dashes'
+        'Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
       );
     });
   });
