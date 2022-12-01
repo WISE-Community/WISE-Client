@@ -12,6 +12,7 @@ import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/di
 import { AnnotationService } from '../services/annotationService';
 import { UtilService } from '../services/utilService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { WiseLinkService } from '../../../app/services/wiseLinkService';
 
 @Component({
   selector: 'vle',
@@ -35,6 +36,7 @@ export class VLEComponent implements AfterViewInit {
   runEndedAndLocked: boolean;
   subscriptions: Subscription = new Subscription();
   vleTemplate: TemplateRef<any>;
+  wiseLinkClickedHandler: any;
 
   constructor(
     private annotationService: AnnotationService,
@@ -48,7 +50,8 @@ export class VLEComponent implements AfterViewInit {
     private router: Router,
     private sessionService: SessionService,
     private studentDataService: StudentDataService,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private wiseLinkService: WiseLinkService
   ) {}
 
   ngAfterViewInit(): void {
@@ -58,6 +61,7 @@ export class VLEComponent implements AfterViewInit {
         this.initialized = true;
       }
     });
+    this.wiseLinkService.addWiseLinkClickedListener();
   }
 
   initRestOfVLE() {
@@ -101,6 +105,7 @@ export class VLEComponent implements AfterViewInit {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+    this.wiseLinkService.removeWiseLinkClickedListener();
     this.sessionService.broadcastExit();
   }
 

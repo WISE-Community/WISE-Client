@@ -1,6 +1,6 @@
 'use strict';
 
-import { Component, ElementRef, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { WiseLinkService } from '../../../../app/services/wiseLinkService';
@@ -35,19 +35,12 @@ export class ComponentAnnotationsComponent {
   showComment: boolean = true;
   showScore: boolean = true;
   studentWorkSavedToServerSubscription: Subscription;
-  wiseLinkClickedHandler: any;
-  @ViewChild('wiseLinkCommunicator')
-  set aRef(ref: ElementRef) {
-    this.wiseLinkCommunicator = ref.nativeElement;
-  }
-  wiseLinkCommunicator: any;
-  wiseLinkCommunicatorId: string;
 
   constructor(
     private ConfigService: ConfigService,
     private ProjectService: VLEProjectService,
     private StudentDataService: StudentDataService,
-    private WiseLinkService: WiseLinkService
+    private wiseLinkService: WiseLinkService
   ) {}
 
   ngOnInit() {
@@ -62,28 +55,17 @@ export class ComponentAnnotationsComponent {
         }
       }
     );
-    this.wiseLinkCommunicatorId = `wise-link-communicator-component-annotations-${this.nodeId}-${this.componentId}`;
     this.processAnnotations();
   }
 
   ngAfterViewInit() {
     this.processAnnotations();
-    this.wiseLinkClickedHandler = this.WiseLinkService.createWiseLinkClickedHandler(this.nodeId);
-    this.WiseLinkService.addWiseLinkClickedListener(
-      this.wiseLinkCommunicator,
-      this.wiseLinkClickedHandler
-    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!changes.annotations.isFirstChange()) {
       this.processAnnotations();
     }
-  }
-
-  ngOnDestroy() {
-    this.studentWorkSavedToServerSubscription.unsubscribe();
-    this.wiseLinkCommunicator.removeEventListener('wiselinkclicked', this.wiseLinkClickedHandler);
   }
 
   processAnnotations(): void {
@@ -135,10 +117,7 @@ export class ComponentAnnotationsComponent {
   }
 
   getCommentHtml(commentAnnotation: any): SafeHtml {
-    return this.WiseLinkService.generateHtmlWithWiseLink(
-      commentAnnotation.data.value,
-      this.wiseLinkCommunicatorId
-    );
+    return this.wiseLinkService.generateHtmlWithWiseLink(commentAnnotation.data.value);
   }
 
   getLatestAnnotation() {

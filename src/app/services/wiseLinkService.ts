@@ -13,17 +13,38 @@ export class WiseLinkService {
     private UtilService: UtilService
   ) {}
 
-  createWiseLinkClickedHandler(currentNodeId: string): any {
+  wiseLinkClickedEventName: string = 'wiselinkclicked';
+  wiseLinkClickedHandler: any;
+  wiseLinkCommunicatorId: string = 'wise-link-communicator';
+
+  addWiseLinkClickedListener(): void {
+    this.wiseLinkClickedHandler = this.createWiseLinkClickedHandler();
+    this.getWiseLinkCommunicator().addEventListener(
+      this.wiseLinkClickedEventName,
+      this.wiseLinkClickedHandler
+    );
+  }
+
+  private createWiseLinkClickedHandler(): any {
+    const thisStudentDataService = this.StudentDataService;
     return (event: CustomEvent) => {
+      const currentNodeId = thisStudentDataService.getCurrentNodeId();
       this.followLink(currentNodeId, event.detail.nodeId, event.detail.componentId);
     };
   }
 
-  addWiseLinkClickedListener(wiseLinkCommunicator: any, wiseLinkClickedHandler: any): void {
-    wiseLinkCommunicator.addEventListener('wiselinkclicked', wiseLinkClickedHandler);
+  removeWiseLinkClickedListener(): void {
+    this.getWiseLinkCommunicator().removeEventListener(
+      this.wiseLinkClickedEventName,
+      this.wiseLinkClickedHandler
+    );
   }
 
-  followLink(currentNodeId: string, nodeId: string, componentId: string): void {
+  private getWiseLinkCommunicator(): any {
+    return document.getElementById(this.wiseLinkCommunicatorId);
+  }
+
+  private followLink(currentNodeId: string, nodeId: string, componentId: string): void {
     if (nodeId === currentNodeId) {
       this.NodeService.scrollToComponentAndHighlight(componentId);
     } else {
@@ -31,18 +52,18 @@ export class WiseLinkService {
     }
   }
 
-  goToNode(nodeId: string, componentId: string): void {
+  private goToNode(nodeId: string, componentId: string): void {
     if (componentId !== '') {
       this.NodeService.registerScrollToComponent(componentId);
     }
     this.StudentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nodeId);
   }
 
-  generateHtmlWithWiseLink(html: string, wiseLinkCommunicatorId: string): SafeHtml {
+  generateHtmlWithWiseLink(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(
       this.UtilService.replaceDivReference(
         this.UtilService.replaceWISELinks(html),
-        wiseLinkCommunicatorId
+        this.wiseLinkCommunicatorId
       )
     );
   }
