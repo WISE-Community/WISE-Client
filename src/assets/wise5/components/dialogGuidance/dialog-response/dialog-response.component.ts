@@ -26,15 +26,15 @@ export class DialogResponseComponent implements OnInit {
 
   constructor(
     private computerAvatarService: ComputerAvatarService,
-    private ConfigService: ConfigService,
+    private configService: ConfigService,
     private wiseLinkService: WiseLinkService
   ) {}
 
   ngOnInit(): void {
     this.isStudent = this.response.user === 'Student';
     if (this.isStudent) {
-      this.avatarColor = this.ConfigService.getAvatarColorForWorkgroupId(this.response.workgroupId);
-      const firstNames = this.ConfigService.getStudentFirstNamesByWorkgroupId(
+      this.avatarColor = this.configService.getAvatarColorForWorkgroupId(this.response.workgroupId);
+      const firstNames = this.configService.getStudentFirstNamesByWorkgroupId(
         this.response.workgroupId
       );
       this.displayNames = firstNames.join(', ');

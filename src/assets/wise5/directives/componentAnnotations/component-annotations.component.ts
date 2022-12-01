@@ -37,15 +37,15 @@ export class ComponentAnnotationsComponent {
   studentWorkSavedToServerSubscription: Subscription;
 
   constructor(
-    private ConfigService: ConfigService,
-    private ProjectService: VLEProjectService,
-    private StudentDataService: StudentDataService,
+    private configService: ConfigService,
+    private projectService: VLEProjectService,
+    private studentDataService: StudentDataService,
     private wiseLinkService: WiseLinkService
   ) {}
 
   ngOnInit() {
     this.maxScoreDisplay = parseInt(this.maxScore) > 0 ? '/' + this.maxScore : '';
-    this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
+    this.studentWorkSavedToServerSubscription = this.studentDataService.studentWorkSavedToServer$.subscribe(
       (componentState) => {
         if (
           componentState.nodeId === this.nodeId &&
@@ -97,14 +97,14 @@ export class ComponentAnnotationsComponent {
   isShowScore(annotations: any): boolean {
     return (
       this.hasScoreAnnotation(annotations) &&
-      this.ProjectService.displayAnnotation(annotations.score)
+      this.projectService.displayAnnotation(annotations.score)
     );
   }
 
   isShowComment(annotations: any): boolean {
     return (
       this.hasCommentAnnotation(annotations) &&
-      this.ProjectService.displayAnnotation(this.annotations.comment)
+      this.projectService.displayAnnotation(this.annotations.comment)
     );
   }
 
@@ -137,19 +137,19 @@ export class ComponentAnnotationsComponent {
   getLatestAnnotationTime() {
     const latest = this.getLatestAnnotation();
     if (latest) {
-      return this.ConfigService.convertToClientTimestamp(latest.serverSaveTime);
+      return this.configService.convertToClientTimestamp(latest.serverSaveTime);
     }
     return null;
   }
 
   getLatestVisitTime() {
-    let nodeEvents = this.StudentDataService.getEventsByNodeId(this.nodeId);
+    let nodeEvents = this.studentDataService.getEventsByNodeId(this.nodeId);
     let n = nodeEvents.length - 1;
     let visitTime = null;
     for (let i = n; i > 0; i--) {
       let event = nodeEvents[i];
       if (event.event === 'nodeExited') {
-        visitTime = this.ConfigService.convertToClientTimestamp(event.serverSaveTime);
+        visitTime = this.configService.convertToClientTimestamp(event.serverSaveTime);
         break;
       }
     }
@@ -157,13 +157,13 @@ export class ComponentAnnotationsComponent {
   }
 
   getLatestSaveTime() {
-    const latestState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+    const latestState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
       this.nodeId,
       this.componentId
     );
     let saveTime = null;
     if (latestState) {
-      saveTime = this.ConfigService.convertToClientTimestamp(latestState.serverSaveTime);
+      saveTime = this.configService.convertToClientTimestamp(latestState.serverSaveTime);
     }
     return saveTime;
   }

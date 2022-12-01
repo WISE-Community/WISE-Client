@@ -7,10 +7,10 @@ import { UtilService } from '../../assets/wise5/services/utilService';
 @Injectable()
 export class WiseLinkService {
   constructor(
-    private NodeService: NodeService,
+    private nodeService: NodeService,
     private sanitizer: DomSanitizer,
-    private StudentDataService: StudentDataService,
-    private UtilService: UtilService
+    private studentDataService: StudentDataService,
+    private utilService: UtilService
   ) {}
 
   wiseLinkClickedEventName: string = 'wiselinkclicked';
@@ -26,7 +26,7 @@ export class WiseLinkService {
   }
 
   private createWiseLinkClickedHandler(): any {
-    const thisStudentDataService = this.StudentDataService;
+    const thisStudentDataService = this.studentDataService;
     return (event: CustomEvent) => {
       const currentNodeId = thisStudentDataService.getCurrentNodeId();
       this.followLink(currentNodeId, event.detail.nodeId, event.detail.componentId);
@@ -46,7 +46,7 @@ export class WiseLinkService {
 
   private followLink(currentNodeId: string, nodeId: string, componentId: string): void {
     if (nodeId === currentNodeId) {
-      this.NodeService.scrollToComponentAndHighlight(componentId);
+      this.nodeService.scrollToComponentAndHighlight(componentId);
     } else {
       this.goToNode(nodeId, componentId);
     }
@@ -54,15 +54,15 @@ export class WiseLinkService {
 
   private goToNode(nodeId: string, componentId: string): void {
     if (componentId !== '') {
-      this.NodeService.registerScrollToComponent(componentId);
+      this.nodeService.registerScrollToComponent(componentId);
     }
-    this.StudentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nodeId);
+    this.studentDataService.endCurrentNodeAndSetCurrentNodeByNodeId(nodeId);
   }
 
   generateHtmlWithWiseLink(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(
-      this.UtilService.replaceDivReference(
-        this.UtilService.replaceWISELinks(html),
+      this.utilService.replaceDivReference(
+        this.utilService.replaceWISELinks(html),
         this.wiseLinkCommunicatorId
       )
     );
