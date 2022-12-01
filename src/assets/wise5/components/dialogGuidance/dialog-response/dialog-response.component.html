@@ -25,7 +25,7 @@
   <div fxFlex fxLayoutAlign="{{isStudent ? 'end' : 'start'}}">
     <div class="response-text" [class]="{'notice-bg-bg': !isStudent, 'selected-bg-bg': isStudent}">
       <div class="mat-small secondary-text poster">{{ displayNames }}</div>
-      <div [innerHtml]="response.text"></div>
+      <div [innerHtml]="text"></div>
     </div>
   </div>
 </div>
