@@ -36,7 +36,6 @@ export class VLEComponent implements AfterViewInit {
   runEndedAndLocked: boolean;
   subscriptions: Subscription = new Subscription();
   vleTemplate: TemplateRef<any>;
-  wiseLinkClickedHandler: any;
 
   constructor(
     private annotationService: AnnotationService,

@@ -26,10 +26,8 @@ export class WiseLinkService {
   }
 
   private createWiseLinkClickedHandler(): any {
-    const thisStudentDataService = this.studentDataService;
     return (event: CustomEvent) => {
-      const currentNodeId = thisStudentDataService.getCurrentNodeId();
-      this.followLink(currentNodeId, event.detail.nodeId, event.detail.componentId);
+      this.followLink(event.detail.nodeId, event.detail.componentId);
     };
   }
 
@@ -40,12 +38,12 @@ export class WiseLinkService {
     );
   }
 
-  private getWiseLinkCommunicator(): any {
+  private getWiseLinkCommunicator(): HTMLElement {
     return document.getElementById(this.wiseLinkCommunicatorId);
   }
 
-  private followLink(currentNodeId: string, nodeId: string, componentId: string): void {
-    if (nodeId === currentNodeId) {
+  private followLink(nodeId: string, componentId: string): void {
+    if (nodeId === this.studentDataService.getCurrentNodeId()) {
       this.nodeService.scrollToComponentAndHighlight(componentId);
     } else {
       this.goToNode(nodeId, componentId);
