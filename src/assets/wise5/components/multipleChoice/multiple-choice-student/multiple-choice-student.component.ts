@@ -62,7 +62,6 @@ export class MultipleChoiceStudent extends ComponentStudent {
     super.ngOnInit();
     this.studentChoices = [];
     this.isCorrect = null;
-    this.isLatestComponentStateSubmit = false;
     this.choices = this.component.getChoices();
     this.componentHasCorrectAnswer = this.hasCorrectChoices();
     this.showFeedback = this.component.content.showFeedback;
