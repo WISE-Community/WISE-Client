@@ -550,7 +550,7 @@ export class NodeService {
    * component id. If this argument is null, we will place the new
    * component(s) in the first position.
    */
-  moveComponent(nodeId, componentIds, insertAfterComponentId) {
+  moveComponent(nodeId: string, componentIds: string[], insertAfterComponentId: string): void {
     const node = this.ProjectService.getNodeById(nodeId);
     const components = node.components;
     const extractedComponents = this.extractComponents(components, componentIds);
