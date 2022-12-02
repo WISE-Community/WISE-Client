@@ -5,6 +5,7 @@ import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { Component as WISEComponent } from '../../common/Component';
+import { ComponentFactory } from '../../common/ComponentFactory';
 
 @Component({
   selector: 'component',
@@ -56,7 +57,8 @@ export class ComponentComponent {
     ) {
       content = this.clickToSnipImageService.injectClickToSnipImageListener(content);
     }
-    this.component = new WISEComponent(content, this.nodeId);
+    const factory = new ComponentFactory();
+    this.component = factory.getComponent(content, this.nodeId);
   }
 
   saveComponentState($event: any): void {

@@ -8,10 +8,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { Component } from '../../../common/Component';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
-import { ClickToSnipImageService } from '../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../services/projectService';
+import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 import { MultipleChoiceStudent } from './multiple-choice-student.component';
 
 const choiceId1 = 'choice1';
@@ -135,7 +134,7 @@ describe('MultipleChoiceStudentComponent', () => {
       showFeedback: true
     };
     const componentContent = JSON.parse(JSON.stringify(originalComponentContent));
-    component.component = new Component(componentContent, nodeId);
+    component.component = new MultipleChoiceComponent(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
@@ -146,7 +145,6 @@ describe('MultipleChoiceStudentComponent', () => {
     fixture.detectChanges();
   });
 
-  getChoiceById();
   testMultipleAnswerComponent();
   testSingleAnswerSingleCorrectAnswerComponent();
   testSingleAnswerMultipleCorrectAnswersComponent();
@@ -167,31 +165,11 @@ function createComponentContentChoice(
   };
 }
 
-function getChoiceById() {
-  describe('getChoiceById()', () => {
-    it('should get choice by id', () => {
-      component.componentContent = TestBed.inject(
-        ClickToSnipImageService
-      ).injectClickToSnipImageListener(component.componentContent);
-      expect(component.componentContent.choices[2].text).toContain('onclick');
-      expect(component.getChoiceById(originalComponentContent, choiceId1).text).toEqual(
-        choiceText1
-      );
-      expect(component.getChoiceById(originalComponentContent, choiceId2).text).toEqual(
-        choiceText2
-      );
-      expect(component.getChoiceById(originalComponentContent, choiceId3).text).toEqual(
-        choiceText3
-      );
-    });
-  });
-}
-
 function testMultipleAnswerComponent() {
   describe('multiple answer component', () => {
     beforeEach(() => {
       component.componentContent = JSON.parse(JSON.stringify(multipleAnswerComponent));
-      component.component = new Component(component.componentContent, nodeId);
+      component.component = new MultipleChoiceComponent(component.componentContent, nodeId);
       component.ngOnInit();
     });
     multipleAnswerComponentShouldShowCorrectWhenOnlyTheCorrectAnswersAreSubmitted();
@@ -208,7 +186,7 @@ function testSingleAnswerSingleCorrectAnswerComponent() {
       component.componentContent = JSON.parse(
         JSON.stringify(singleAnswerSingleCorrectAnswerComponent)
       );
-      component.component = new Component(component.componentContent, nodeId);
+      component.component = new MultipleChoiceComponent(component.componentContent, nodeId);
       component.ngOnInit();
     });
     singleAnswerSingleCorrectAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoice();
@@ -223,7 +201,7 @@ function testSingleAnswerMultipleCorrectAnswersComponent() {
       component.componentContent = JSON.parse(
         JSON.stringify(singleAnswerMultipleCorrectAnswersComponent)
       );
-      component.component = new Component(component.componentContent, nodeId);
+      component.component = new MultipleChoiceComponent(component.componentContent, nodeId);
 
       component.ngOnInit();
     });
@@ -248,9 +226,9 @@ function singleAnswerSingleCorrectAnswerComponentShouldShowTheFeedbackOnTheSubmi
   it('should show the feedback on the submitted choice', () => {
     selectSingleAnswerChoice(choiceId1);
     checkAnswer();
-    const choice1 = component.getChoiceById(component, choiceId1);
-    const choice2 = component.getChoiceById(component, choiceId2);
-    const choice3 = component.getChoiceById(component, choiceId3);
+    const choice1 = getChoiceById(choiceId1);
+    const choice2 = getChoiceById(choiceId2);
+    const choice3 = getChoiceById(choiceId3);
     expect(choice1.showFeedback).toBeTruthy();
     expect(choice1.feedbackToShow).toEqual(feedback1);
     expect(choice2.showFeedback).toBeFalsy();
@@ -258,6 +236,10 @@ function singleAnswerSingleCorrectAnswerComponentShouldShowTheFeedbackOnTheSubmi
     expect(choice3.showFeedback).toBeFalsy();
     expect(choice3.feedbackToShow).toBeFalsy();
   });
+}
+
+function getChoiceById(id: string): any {
+  return component.choices.find((choice) => choice.id == id);
 }
 
 function singleAnswerSingleCorrectAnswerComponentShouldShowIncorrect() {
@@ -293,9 +275,9 @@ function multipleAnswerComponentShouldShowTheFeedbackOnTheSubmittedChoices() {
     selectMultipleAnswerChoice(choiceId2);
     selectMultipleAnswerChoice(choiceId3);
     checkAnswer();
-    const choice1 = component.getChoiceById(component, choiceId1);
-    const choice2 = component.getChoiceById(component, choiceId2);
-    const choice3 = component.getChoiceById(component, choiceId3);
+    const choice1 = getChoiceById(choiceId1);
+    const choice2 = getChoiceById(choiceId2);
+    const choice3 = getChoiceById(choiceId3);
     expect(choice1.showFeedback).toBeTruthy();
     expect(choice1.feedbackToShow).toEqual(feedback1);
     expect(choice2.showFeedback).toBeTruthy();

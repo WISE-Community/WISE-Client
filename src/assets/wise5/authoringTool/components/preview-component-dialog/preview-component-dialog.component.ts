@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 import { Component as WISEComponent } from '../../../common/Component';
+import { ComponentFactory } from '../../../common/ComponentFactory';
 
 @Component({
   templateUrl: 'preview-component-dialog.component.html',
@@ -21,7 +22,8 @@ export class PreviewComponentDialogComponent implements OnInit {
       this.projectService.getComponent(this.nodeId, this.componentId)
     );
     this.canSaveStarterState = this.componentTypesWithStarterStates.includes(content.type);
-    this.component = new WISEComponent(content, this.nodeId);
+    const factory = new ComponentFactory();
+    this.component = factory.getComponent(content, this.nodeId);
   }
 
   updateStarterState(starterState: any): void {
