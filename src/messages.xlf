@@ -6529,8 +6529,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="558a4e3546333e209423ef98d8e846c143ba0804" datatype="html">
-        <source>Hi! There is already a WISE user with this Google account.</source>
+      <trans-unit id="a03d22527a786691bf7a0af0f6addf92fe0320c9" datatype="html">
+        <source>Hi! This Google user already has a WISE account.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
           <context context-type="linenumber">4</context>
