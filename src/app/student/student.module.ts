@@ -36,12 +36,14 @@ import { EditComponent } from './account/edit/edit.component';
 import { EditProfileComponent } from './account/edit-profile/edit-profile.component';
 import { TimelineModule } from '../modules/timeline/timeline.module';
 import { TeamSignInDialogComponent } from './team-sign-in-dialog/team-sign-in-dialog.component';
+import { GoogleSignInModule } from '../modules/google-sign-in/google-sign-in.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FlexLayoutModule,
     FormsModule,
+    GoogleSignInModule,
     ReactiveFormsModule,
     materialModules,
     SharedModule,
