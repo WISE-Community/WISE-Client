@@ -25,7 +25,9 @@ export class HtmlAuthoring extends ComponentAuthoring {
 
   ngOnInit() {
     super.ngOnInit();
-    this.html = this.UtilService.replaceWISELinks(this.componentContent.html);
+    this.html = this.ProjectService.replaceAssetPaths(
+      this.UtilService.replaceWISELinks(this.componentContent.html)
+    );
   }
 
   htmlChanged(): void {
