@@ -7386,8 +7386,8 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">Crear Cuenta de Estudiante</target>
       </trans-unit>
-      <trans-unit id="a58e76c28d29e964d039949e807e1e5d3f61170b" datatype="html">
-        <source>First Name must only contain characters A-Z</source>
+      <trans-unit id="50696da5bb62d48b7f2ff0f9d5ff5826bdda74a1" datatype="html">
+        <source>First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
           <context context-type="linenumber">18</context>
@@ -7396,10 +7396,10 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="translated">El nombre debe contener solamente caracteres entre A-Z</target>
+        <target state="needs-translation">First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</target>
       </trans-unit>
-      <trans-unit id="c586e228c3eae79f5425108c9bdc43709ccaead1" datatype="html">
-        <source>Last Name must only contain characters A-Z</source>
+      <trans-unit id="40eb8e18d21baafb6cb98ebb3a9801b3293a481b" datatype="html">
+        <source>Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
           <context context-type="linenumber">30</context>
@@ -7408,7 +7408,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="translated">El apellido debe contener solamente caracteres entre A-Z</target>
+        <target state="needs-translation">Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</target>
       </trans-unit>
       <trans-unit id="003d4f5e4909ccf01b6a204c688fd6dab15c20bd" datatype="html">
         <source>Gender</source>
@@ -7762,29 +7762,29 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated">- o -</target>
       </trans-unit>
-      <trans-unit id="6146214597426616292" datatype="html">
-        <source>Error: First Name and Last Name must only contain characters A-Z</source>
+      <trans-unit id="4000970355844798758" datatype="html">
+        <source>Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="translated">Error: El nombre y apellido solo pueden contener caracteres entre A-Z</target>
+        <target state="needs-translation">Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</target>
       </trans-unit>
-      <trans-unit id="1399509159632381055" datatype="html">
-        <source>Error: First Name must only contain characters A-Z</source>
+      <trans-unit id="1084197907437634069" datatype="html">
+        <source>Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="translated">Error: El nombre solo puede contener caracteres de la A a la Z</target>
+        <target state="needs-translation">Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</target>
       </trans-unit>
-      <trans-unit id="6994102147805455185" datatype="html">
-        <source>Error: Last Name must only contain characters A-Z</source>
+      <trans-unit id="5970926747435723642" datatype="html">
+        <source>Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="translated">Error: El apellido solo puede contener caracteres de la A a la Z</target>
+        <target state="needs-translation">Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</target>
       </trans-unit>
       <trans-unit id="2599853012922890508" datatype="html">
         <source>Password must be at least 8 characters</source>
