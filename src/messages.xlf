@@ -307,7 +307,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-close/dialog-with-close.component.html</context>
@@ -1798,7 +1798,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7491b1ebfc5dd457492a5c481e2d2254216dc1fc" datatype="html">
@@ -13355,74 +13355,81 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">44,47</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="537ad730b1c53ef964861bf24f9eb610bca2ecdc" datatype="html">
+        <source> Evaluates to true if this is the student’s X-th attempt.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>isSubmitNumber(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if this is the student&apos;s third submit. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">51,54</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="c2486592cf45d20e09baab39819c38505fad8a6b" datatype="html">
         <source> Evaluates to true if this is the student’s second to last response when the max number of submits is specified. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">51,54</context>
+          <context context-type="linenumber">58,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2a3efda5e801cb07e2e472eddd138e8f0f3c7443" datatype="html">
         <source> Evaluates to true if this is the student’s final response when the max number of submits is specified. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">58,61</context>
+          <context context-type="linenumber">65,68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b0a572a715e1e342333c536fea0001cf15619361" datatype="html">
         <source>Evaluates to true if the student’s response was not scorable.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="288b2a5b903bd5a233bc6dde453ce2cca7f59f06" datatype="html">
         <source> Evaluates to true if no other terms were matched. Add this term as the final rule to specify a default feedback. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">69,72</context>
+          <context context-type="linenumber">76,79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9d4ed1f582fafcfd1035ea83e58a5e1fe8d6a1a5" datatype="html">
         <source>Operators</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b2145d0c97ccffaf79c5770f967a429c84af4123" datatype="html">
         <source>Operators let you combine one or more terms together to make a rule.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c39d43f18d10f925621abc77ad15de80a9cc7516" datatype="html">
         <source>Operator</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f8fe51bf6c4939808e8ce9047e067b7fa4fd7a54" datatype="html">
         <source> Evaluates to true if terms on both sides of this operator evaluate to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was found and the student received a KI score of 2. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">84,89</context>
+          <context context-type="linenumber">91,96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3442eeed9a3956346f4fe2a2f2efb6158c5c54d9" datatype="html">
         <source> Evaluates to true if a term on either side of this operator evaluates to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if either idea 1 or 2 was found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found or idea 3 was found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">93,97</context>
+          <context context-type="linenumber">100,104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="414f2fd4ea5c948c6ebbf8417e6afe371bea442d" datatype="html">
         <source> Evaluates to true if a term following this operator evaluates to false.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>!1<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was not found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">101,104</context>
+          <context context-type="linenumber">108,111</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dc34bee07a6ceed8f010d89d1fcbda15a5abee8c" datatype="html">
