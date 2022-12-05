@@ -3,12 +3,9 @@ import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExpo
 export class LabelComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
   maxNumLabels: number;
 
-  constructor(private nodeId: string, private component: any, additionalParams: any) {
-    super();
+  constructor(nodeId: string, component: any, additionalParams: any) {
+    super(nodeId, component, additionalParams);
     this.maxNumLabels = 0;
-    this.canViewStudentNames = additionalParams.canViewStudentNames;
-    this.includeOnlySubmits = additionalParams.includeOnlySubmits;
-    this.workSelectionType = additionalParams.workSelectionType;
   }
 
   export(): void {

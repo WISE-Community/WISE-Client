@@ -1052,6 +1052,7 @@ export class DataExportComponent implements OnInit {
       new LabelComponentDataExportStrategy(nodeId, component, {
         canViewStudentNames: this.canViewStudentNames,
         includeOnlySubmits: this.includeOnlySubmits,
+        includeStudentNames: this.includeStudentNames,
         workSelectionType: this.workSelectionType
       })
     );

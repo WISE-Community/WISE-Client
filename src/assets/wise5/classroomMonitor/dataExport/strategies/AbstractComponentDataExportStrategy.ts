@@ -3,7 +3,16 @@ import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 export abstract class AbstractComponentDataExportStrategy extends AbstractDataExportStrategy {
   canViewStudentNames: boolean;
   includeOnlySubmits: boolean;
+  includeStudentNames: boolean;
   workSelectionType: string;
+
+  constructor(protected nodeId: string, protected component: any, additionalParams: any) {
+    super();
+    this.canViewStudentNames = additionalParams.canViewStudentNames;
+    this.includeOnlySubmits = additionalParams.includeOnlySubmits;
+    this.includeStudentNames = additionalParams.includeStudentNames;
+    this.workSelectionType = additionalParams.workSelectionType;
+  }
 
   abstract generateComponentWorkRow(
     component: any,
@@ -339,19 +348,19 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     if (userId1 != null) {
       row[columnNameToNumber['User ID 1']] = userId1;
     }
-    if (studentName1 != null && this.canViewStudentNames) {
+    if (studentName1 != null && this.includeStudentNames) {
       row[columnNameToNumber['Student Name 1']] = studentName1;
     }
     if (userId2 != null) {
       row[columnNameToNumber['User ID 2']] = userId2;
     }
-    if (studentName2 != null && this.canViewStudentNames) {
+    if (studentName2 != null && this.includeStudentNames) {
       row[columnNameToNumber['Student Name 2']] = studentName2;
     }
     if (userId3 != null) {
       row[columnNameToNumber['User ID 3']] = userId3;
     }
-    if (studentName3 != null && this.canViewStudentNames) {
+    if (studentName3 != null && this.includeStudentNames) {
       row[columnNameToNumber['Student Name 3']] = studentName3;
     }
   }
