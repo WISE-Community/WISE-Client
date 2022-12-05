@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="pt-BR">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="fr">
     <body>
       <trans-unit id="847171f94c5e932a67df0c3b4d57e4e10d844b52" datatype="html">
         <source>About Us</source>
@@ -20,7 +20,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="translated">Sobre Nós</target>
+        <target state="needs-translation">About Us</target>
       </trans-unit>
       <trans-unit id="ffc2518d2bc8ccd34f05251329883a6d0642a4ca" datatype="html">
         <source>WISE is the product of more than 25 years of research on teaching and learning with educational technologies</source>
@@ -168,7 +168,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="translated">Faça a Distinção entre Ideias</target>
+        <target state="needs-translation">Distinguish Ideas</target>
       </trans-unit>
       <trans-unit id="cd755b466131777a8842f833087a9aa103d26e89" datatype="html">
         <source>Connect Ideas and Reflect</source>
@@ -2170,7 +2170,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <target state="translated">Experimentos com modelos computacionais</target>
+        <target state="needs-translation">Experiment with computational models</target>
       </trans-unit>
       <trans-unit id="b07d8ea0af45cef781e5d604f6e9c2a7b2f701f0" datatype="html">
         <source>Evaluate and distinguish discrepant information</source>
@@ -2178,7 +2178,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="translated">Avalie e faça distinção de informações discrepantes</target>
+        <target state="needs-translation">Evaluate and distinguish discrepant information</target>
       </trans-unit>
       <trans-unit id="85031434993fe1bad0400c10fb78687a633a21ac" datatype="html">
         <source>Construct explanations through reflection and discussion</source>
@@ -2494,7 +2494,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="translated">Alterar senha</target>
+        <target state="needs-translation">Change Password</target>
       </trans-unit>
       <trans-unit id="c32ef07f8803a223a83ed17024b38e8d82292407" datatype="html">
         <source>Password</source>
@@ -2606,7 +2606,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">143</context>
         </context-group>
-        <target state="translated">É necessário confirmar a senha</target>
+        <target state="needs-translation">Confirm Password required</target>
       </trans-unit>
       <trans-unit id="0a9dcaac5aadd48fe716eaff77ab9b21a8bef3af" datatype="html">
         <source>Passwords do not match</source>
@@ -4982,7 +4982,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="translated">Acrescente Ideias</target>
+        <target state="needs-translation">Add Ideas</target>
       </trans-unit>
       <trans-unit id="6ce56d323684d1af10f44ca44809177cef1412eb" datatype="html">
         <source>Integrated science learning and teaching with technology</source>
@@ -5022,7 +5022,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">59</context>
         </context-group>
-        <target state="translated">Inscreva-se gratuitamente!</target>
+        <target state="needs-translation">Sign up for free!</target>
       </trans-unit>
       <trans-unit id="da6aa9950c74cadd85a3bf26272f34f28d8338c8" datatype="html">
         <source>Connect</source>
@@ -5042,7 +5042,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">24</context>
         </context-group>
-        <target state="translated">WISE no Facebook</target>
+        <target state="needs-translation">WISE on Facebook</target>
       </trans-unit>
       <trans-unit id="0000062f4a98235fac57d3b130730592402b9e05" datatype="html">
         <source>WISE on Twitter</source>
@@ -5054,7 +5054,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
-        <target state="translated">WISE no Twitter</target>
+        <target state="needs-translation">WISE on Twitter</target>
       </trans-unit>
       <trans-unit id="540452d4091ec883af6967b28abf89f2ac0c853d" datatype="html">
         <source>WISE on Github</source>
@@ -5066,7 +5066,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="translated">WISE no Github</target>
+        <target state="needs-translation">WISE on Github</target>
       </trans-unit>
       <trans-unit id="ec2d3a89b366d1ca80be056e9e71f0165ae75c7b" datatype="html">
         <source>Community</source>
@@ -5106,7 +5106,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="translated">Ajuda + Perguntas Frequentes</target>
+        <target state="needs-translation">Help + FAQs</target>
       </trans-unit>
       <trans-unit id="ba44ee280d91539e6c5892dccbb8556bcce235be" datatype="html">
         <source>View tutorials and common questions.</source>
@@ -5126,7 +5126,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="translated">Contato</target>
+        <target state="needs-translation">Contact Us</target>
       </trans-unit>
       <trans-unit id="c2e1e231feb67c7dd4f5e748cce6c1c46fbdf9cf" datatype="html">
         <source>Want to get in touch? Send us a message.</source>
@@ -5426,7 +5426,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">158</context>
         </context-group>
-        <target state="translated">Criar Conta</target>
+        <target state="needs-translation">Create Account</target>
       </trans-unit>
       <trans-unit id="6cdb1fea93d77c07950c0c76c6e0ad79ebbef084" datatype="html">
         <source>Features</source>
@@ -5442,7 +5442,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="translated">Funcionalidades</target>
+        <target state="needs-translation">Features</target>
       </trans-unit>
       <trans-unit id="3d469f0ca2f579eedee96edd4ef40883f65e77aa" datatype="html">
         <source>Privacy + Use</source>
@@ -5450,7 +5450,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-        <target state="translated">Privacidade + Uso</target>
+        <target state="needs-translation">Privacy + Use</target>
       </trans-unit>
       <trans-unit id="99bd2245fef21bb8f1982b5042a459eaebfdb33c" datatype="html">
         <source>Powered by <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://wise-research.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>TELS Research<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://github.com/WISE-Community&quot; target=&quot;_blank&quot;&gt;"/>WISE Open Source Technology<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>. Help us <x id="START_LINK_2" equiv-text="&lt;a href=&quot;https://crowdin.com/project/wise&quot; target=&quot;_blank&quot;&gt;"/>translate<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> WISE!</source>
@@ -5466,7 +5466,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="translated">Este material é baseado no trabalho com apoio financeiro da National Science Foundation. Quaisquer opiniões, descobertas e conclusões ou recomendações expressas neste material são de responsabilidade do (s) autor (es) e não refletem necessariamente as opiniões da National Science Foundation.</target>
+        <target state="needs-translation">This material is based upon work supported by the National Science Foundation. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</target>
       </trans-unit>
       <trans-unit id="0dc5b912bfe8d326a1af3975c6a7d049521eae12" datatype="html">
         <source>National Science Foundation</source>
@@ -5474,7 +5474,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">65</context>
         </context-group>
-        <target state="translated">National Science Foundation (EUA)</target>
+        <target state="needs-translation">National Science Foundation</target>
       </trans-unit>
       <trans-unit id="eb6ec6c4564dfbd4ffc8020d00aa0c48400f629b" datatype="html">
         <source>UC Berkeley</source>
@@ -5482,7 +5482,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">72</context>
         </context-group>
-        <target state="translated">Universidade da Califórnia - Berkeley</target>
+        <target state="needs-translation">UC Berkeley</target>
       </trans-unit>
       <trans-unit id="180dea6fe6590f8a3fb1ff508b793ef0b2feed4b" datatype="html">
         <source>ETS</source>
@@ -5498,7 +5498,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
           <context context-type="linenumber">82</context>
         </context-group>
-        <target state="translated">Concord Consortium</target>
+        <target state="needs-translation">Concord Consortium</target>
       </trans-unit>
       <trans-unit id="f8a12f0f1530051d1bc70b7df85a11832436cf00" datatype="html">
         <source>SAIL (Scalable Architecture for Interactive Learning)</source>
@@ -5666,7 +5666,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="translated">Menu principal</target>
+        <target state="needs-translation">Main menu</target>
       </trans-unit>
       <trans-unit id="481add1796f59f7dfdcfb8e69283dd39230d67e9" datatype="html">
         <source>Community Built</source>
@@ -6410,7 +6410,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
-        <target state="translated">Senha atual</target>
+        <target state="needs-translation">Current Password</target>
       </trans-unit>
       <trans-unit id="9b79b69a1ba8ba29e68a45acd0829da17da704ce" datatype="html">
         <source>Current Password required</source>
@@ -6418,7 +6418,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <target state="translated">Senha atual (obrigatório)</target>
+        <target state="needs-translation">Current Password required</target>
       </trans-unit>
       <trans-unit id="0315d84608647a2d4a2b2e7e509d10ad0ec78536" datatype="html">
         <source>Current Password is incorrect</source>
@@ -6426,7 +6426,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="translated">Senha atual incorreta</target>
+        <target state="needs-translation">Current Password is incorrect</target>
       </trans-unit>
       <trans-unit id="c7014c6360e94b236286b869c3fe0ea9911c0387" datatype="html">
         <source>New Password</source>
@@ -6438,7 +6438,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="translated">Nova Senha</target>
+        <target state="needs-translation">New Password</target>
       </trans-unit>
       <trans-unit id="ae26b4e37fa94304d1fa1b0c46b10ad979bcecfa" datatype="html">
         <source>New Password required</source>
@@ -6462,7 +6462,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="translated">Confirme nova senha</target>
+        <target state="needs-translation">Confirm New Password</target>
       </trans-unit>
       <trans-unit id="8454739bcb4cf4debfd509a35e466a828ea11363" datatype="html">
         <source><x id="TAG_IMG" ctype="image" equiv-text="&lt;img class=&quot;google-icon&quot; src=&quot;assets/img/icons/google-logo.svg&quot; i18n-alt alt=&quot;Google logo&quot; /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>This account was created using Google and doesn&apos;t use a WISE password.<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
@@ -6522,7 +6522,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/modules/shared/select-menu/select-menu.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="translated">Mais</target>
+        <target state="needs-translation">more</target>
       </trans-unit>
       <trans-unit id="213925514828623262" datatype="html">
         <source>Select an option</source>
@@ -13560,7 +13560,7 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">95</context>
         </context-group>
-        <target state="translated">Faça a Distinção entre Ideias</target>
+        <target state="needs-translation">Distinguish Ideas</target>
       </trans-unit>
       <trans-unit id="5284841868972566661" datatype="html">
         <source>Knowledge Integration connect ideas and reflect</source>
