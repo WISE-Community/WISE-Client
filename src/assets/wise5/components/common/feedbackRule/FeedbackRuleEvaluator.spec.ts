@@ -32,6 +32,11 @@ const defaultFeedbackRules = [
     feedback: 'This is a generic response that is shown on the second to last submission'
   }),
   new FeedbackRule({
+    id: 'opzd40hwh9',
+    expression: 'isSubmitNumber(3)',
+    feedback: 'Is third submit'
+  }),
+  new FeedbackRule({
     id: 'w73he0hwwt',
     expression: 'isNonScorable',
     feedback: 'isNonScorable'
@@ -129,6 +134,7 @@ describe('FeedbackRuleEvaluator', () => {
   matchRule_ideaCount();
   matchNoRule_ReturnDefault();
   matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault();
+  thirdSubmit();
   secondToLastSubmit();
   finalSubmit();
   nonScorable();
@@ -262,6 +268,12 @@ function matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault() {
       authored`, () => {
     evaluator = new FeedbackRuleEvaluator(new FeedbackRuleComponent([], 5, true));
     expectFeedback(['idea10', 'idea11'], [KI_SCORE_1], 1, evaluator.defaultFeedback);
+  });
+}
+
+function thirdSubmit() {
+  it('should return third submit rule when this is the third submit', () => {
+    expectFeedback(['idea1'], [KI_SCORE_1], 3, 'Is third submit');
   });
 }
 

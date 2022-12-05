@@ -1,6 +1,7 @@
 import { HasKIScoreTermEvaluator } from './HasKIScoreTermEvaluator';
 import { IdeaCountTermEvaluator } from './IdeaCountTermEvaluator';
 import { IdeaTermEvaluator } from './IdeaTermEvaluator';
+import { IsSubmitNumberEvaluator } from './IsSubmitNumberEvaluator';
 import { TermEvaluator } from './TermEvaluator';
 
 export class TermEvaluatorFactory {
@@ -10,6 +11,8 @@ export class TermEvaluatorFactory {
       evaluator = new HasKIScoreTermEvaluator(term);
     } else if (this.isIdeaCountTerm(term)) {
       evaluator = new IdeaCountTermEvaluator(term);
+    } else if (this.isSubmitNumberTerm(term)) {
+      evaluator = new IsSubmitNumberEvaluator(term);
     } else {
       evaluator = new IdeaTermEvaluator(term);
     }
@@ -22,5 +25,9 @@ export class TermEvaluatorFactory {
 
   private isIdeaCountTerm(term: string): boolean {
     return /ideaCount(MoreThan|Equals|LessThan)\([\d+]\)/.test(term);
+  }
+
+  private isSubmitNumberTerm(term: string): boolean {
+    return /isSubmitNumber\(\d+\)/.test(term);
   }
 }
