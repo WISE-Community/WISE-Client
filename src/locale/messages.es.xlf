@@ -1396,7 +1396,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Question Bank Rules</target>
+        <target state="translated">Reglas del banco de preguntas</target>
       </trans-unit>
       <trans-unit id="2fa3b16b569acf67b1d1a29e8083acc8d07b0595" datatype="html">
         <source>Question</source>
@@ -1420,7 +1420,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <target state="needs-translation">Delete question</target>
+        <target state="translated">Borrar pregunta</target>
       </trans-unit>
       <trans-unit id="567f8db555f6ade1b92a70eb9eb1255b4c4e05ea" datatype="html">
         <source>Add new question</source>
@@ -1428,7 +1428,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="needs-translation">Add new question</target>
+        <target state="translated">Agregar nueva pregunta</target>
       </trans-unit>
       <trans-unit id="48afff4fda3b6d7945c3a52f019ffc40830ca98c" datatype="html">
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add_circle<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
