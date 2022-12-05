@@ -1,7 +1,8 @@
 import { ComponentContent } from '../../common/ComponentContent';
+import { Choice } from './Choice';
 
 export interface MultipleChoiceContent extends ComponentContent {
-  choices: any[];
+  choices: Choice[];
   choiceType: 'checkbox' | 'radio';
   showFeedback: boolean;
 }
