@@ -146,7 +146,7 @@
       <md-checkbox ng-model='$ctrl.componentsToChecked[component.id]'
           ng-disabled='$ctrl.insertComponentMode'
           class='md-primary'>
-        <span style='font-weight:bold; margin-right:10px'>{{($index + 1)}}. {{::$ctrl.getComponentTypeLabel(component.type)}}</span>
+        <span style='font-weight:bold; margin-right:10px'>{{($index + 1)}}. {{$ctrl.getComponentTypeLabel(component.type)}}</span>
       </md-checkbox>
     </div>
     <div ng-if='!$ctrl.insertComponentMode && $ctrl.showComponentAuthoringViews'>
