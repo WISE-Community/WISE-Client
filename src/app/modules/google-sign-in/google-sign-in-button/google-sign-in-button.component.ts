@@ -23,10 +23,10 @@ export class GoogleSignInButtonComponent implements OnInit {
         });
       }
     });
-    google.accounts.id.renderButton(document.getElementById('buttonDiv'), {
+    google.accounts.id.renderButton(document.getElementById('googleButton'), {
       text: this.text,
       theme: 'filled_blue',
-      size: 'medium'
+      size: 'large'
     });
   }
 }

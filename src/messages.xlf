@@ -1717,7 +1717,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f24b47c26f17b04695929c82f78baeafbbd1f599" datatype="html">
@@ -2236,7 +2236,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9b59fedafe883c50e868d884b7a0faeca8f2ccc9" datatype="html">
@@ -6536,32 +6536,32 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3dc7e5a946cf3b4b076f84ed850b26f6485e3de2" datatype="html">
-        <source>Sorry, your Google User ID was not found in WISE.</source>
+      <trans-unit id="996edb960eaf03d890917648e5e21764fda9d0a0" datatype="html">
+        <source> Sorry, your Google User ID was not found in WISE. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="linenumber">2,4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0374570fb5bc65ef42fa03c5923070a11d7f0b5e" datatype="html">
         <source>Create WISE Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="de4f0be5b99420e05b27c9fc347488dd6babca71" datatype="html">
         <source>Students can view and complete WISE lessons offered by teachers.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5d440e046aeae72880c188414cdafa69bf9b4f97" datatype="html">
         <source>Teachers can select, author, and run WISE lessons with their students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="89a4722a9d6828f6aa9e3600033561ffad582c36" datatype="html">
