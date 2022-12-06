@@ -13320,8 +13320,8 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a8ea043c9dd022c74447e7e816841d378138ecd9" datatype="html">
-        <source>Evaluates to true if idea 1, 2, 18, etc was found in the student&apos;s response.</source>
+      <trans-unit id="75d2b95268e9105792456110196b6d0959f64682" datatype="html">
+        <source>Evaluates to true if idea 1, 2, 18, etc was found in the student’s response.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">19</context>
@@ -13334,43 +13334,43 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">23,26</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="e5f60118e592df5cd7aed342976c7b0ecc4da547" datatype="html">
-        <source> Evaluates to true if more than X ideas were found in the student&apos;s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas. </source>
+      <trans-unit id="0d416f044b1ada4a09ca8aeae1f1eda976c755de" datatype="html">
+        <source> Evaluates to true if more than X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">30,33</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6b884914cb98d7d84efe99d0b60f778c30c3a9f3" datatype="html">
-        <source> Evaluates to true if less than X ideas were found in the student&apos;s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas. </source>
+      <trans-unit id="1e95f0f9a80f8d69c7161cee29dae19260b0413c" datatype="html">
+        <source> Evaluates to true if less than X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">37,40</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="c299449835a6844a97d1120d96268ec889e221ee" datatype="html">
-        <source> Evaluates to true if exactly X ideas were found in the student&apos;s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas. </source>
+      <trans-unit id="43741e9a8cbb377bc249abc1b62354e7afdc8fa4" datatype="html">
+        <source> Evaluates to true if exactly X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">44,47</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ee476daed40bb933cf5b304b05c25b0f2e7ae003" datatype="html">
-        <source> Evaluates to true if this is the student&apos;s second to last response when the max number of submits is specified. </source>
+      <trans-unit id="c2486592cf45d20e09baab39819c38505fad8a6b" datatype="html">
+        <source> Evaluates to true if this is the student’s second to last response when the max number of submits is specified. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">51,54</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="bc1cca966f287a319703db89b22d379a6c1455cb" datatype="html">
-        <source> Evaluates to true if this is the student&apos;s final response when the max number of submits is specified. </source>
+      <trans-unit id="2a3efda5e801cb07e2e472eddd138e8f0f3c7443" datatype="html">
+        <source> Evaluates to true if this is the student’s final response when the max number of submits is specified. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">58,61</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3783efe04c66c9d80d09506ec8b7ad29167aacd8" datatype="html">
-        <source>Evaluates to true if the student&apos;s response was not scorable.</source>
+      <trans-unit id="b0a572a715e1e342333c536fea0001cf15619361" datatype="html">
+        <source>Evaluates to true if the student’s response was not scorable.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">65</context>
