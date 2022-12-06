@@ -449,7 +449,7 @@ export abstract class ComponentStudent {
   }
 
   getMaxSubmitCount(): number {
-    return this.componentContent.maxSubmitCount;
+    return this.component.content.maxSubmitCount;
   }
 
   setIsSubmit(isSubmit: boolean): void {
