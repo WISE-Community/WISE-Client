@@ -9,11 +9,6 @@ describe('IsSubmitNumberEvaluator', () => {
       const evaluator_2 = new IsSubmitNumberEvaluator('isSubmitNumber(2)');
       expect(evaluator_2.evaluate(response_2nd_submit)).toBeTrue();
       expect(evaluator_2.evaluate(response_3rd_submit)).toBeFalse();
-
-      const evaluator_10 = new IsSubmitNumberEvaluator('isSubmitNumber(10)');
-      expect(evaluator_10.evaluate(response_2nd_submit)).toBeFalse();
-      const response_10th_submit = createResponseWithSubmitNumber(10);
-      expect(evaluator_10.evaluate(response_10th_submit)).toBeTrue();
     });
   });
 });
