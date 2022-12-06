@@ -1444,7 +1444,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.ts</context>
           <context context-type="linenumber">27</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this question rule?</target>
+        <target state="translated">¿Seguro que desea borrar esta regla?</target>
       </trans-unit>
       <trans-unit id="2774207815872923451" datatype="html">
         <source>Are you sure you want to delete this question?</source>
@@ -1460,7 +1460,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank/edit-question-bank.component.html</context>
           <context context-type="linenumber">7,9</context>
         </context-group>
-        <target state="needs-translation"> Enable Question Bank </target>
+        <target state="translated"> Habilitar banco de preguntas </target>
       </trans-unit>
       <trans-unit id="e8c21747e8604f974b3ed6ecf6089306b7cc0aae" datatype="html">
         <source>Choose a location for the imported steps</source>
@@ -6702,7 +6702,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">213</context>
+          <context context-type="linenumber">192</context>
         </context-group>
         <target state="translated">Feedback del Docente</target>
       </trans-unit>
@@ -7396,7 +7396,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
-        <target state="needs-translation">First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</target>
+        <target state="translated">El nombre solo puede contener caracteres de la A-Z, a-z, espacios o guiones, sin eñes ni tildes y no puede empezar o terminar con espacio o guión</target>
       </trans-unit>
       <trans-unit id="40eb8e18d21baafb6cb98ebb3a9801b3293a481b" datatype="html">
         <source>Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
@@ -7408,7 +7408,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="needs-translation">Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</target>
+        <target state="translated">Apellido solo puede contener caracteres de la A-Z, a-z, espacios o guiones, sin eñes ni tildes y no puede empezar o terminar con espacio o guión</target>
       </trans-unit>
       <trans-unit id="003d4f5e4909ccf01b6a204c688fd6dab15c20bd" datatype="html">
         <source>Gender</source>
@@ -7768,7 +7768,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</target>
+        <target state="translated">Error: Nombre y Apellido solo pueden contener caracteres de la A-Z, a-z, espacios o guiones, sin eñes ni tildes y no pueden empezar o terminar con espacio o guión</target>
       </trans-unit>
       <trans-unit id="1084197907437634069" datatype="html">
         <source>Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
@@ -7776,7 +7776,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</target>
+        <target state="translated">Error: Nombre solo puede contener caracteres de la A-Z, a-z, espacios o guiones, sin eñes ni tildes y no puede empezar o terminar con espacio o guión</target>
       </trans-unit>
       <trans-unit id="5970926747435723642" datatype="html">
         <source>Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
@@ -7784,7 +7784,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</target>
+        <target state="translated">Error: Apellido solo puede contener caracteres de la A-Z, a-z, espacios o guiones, sin eñes ni tildes y no puede empezar o terminar con espacio o guión</target>
       </trans-unit>
       <trans-unit id="2599853012922890508" datatype="html">
         <source>Password must be at least 8 characters</source>
@@ -10864,7 +10864,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/PeerGroupingLogic.ts</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="needs-translation">Different Scores</target>
+        <target state="translated">Puntajes diferentes</target>
       </trans-unit>
       <trans-unit id="2233560223291461480" datatype="html">
         <source>Manual</source>
@@ -10884,7 +10884,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/PeerGroupingLogic.ts</context>
           <context context-type="linenumber">22</context>
         </context-group>
-        <target state="needs-translation">Maximize</target>
+        <target state="translated">Maximizar</target>
       </trans-unit>
       <trans-unit id="1291b18561bc1d5f0fba6f4284001e655ef9c12e" datatype="html">
         <source>Create New Peer Grouping</source>
@@ -10928,7 +10928,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/edit-peer-grouping-dialog/edit-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">Mode</target>
+        <target state="translated">Modo</target>
       </trans-unit>
       <trans-unit id="e36f8349f2cf989ce3bb3b4dbbe679eb8bf192a4" datatype="html">
         <source>Teams Per Group</source>
@@ -12478,7 +12478,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <target state="needs-translation">Export One Workgroup Per Row</target>
+        <target state="translated">Exportar un grupo por fila</target>
       </trans-unit>
       <trans-unit id="a32158501b6e9d92a6087a50ccaf04df43a6a08e" datatype="html">
         <source> Export One Workgroup Per Row </source>
@@ -12486,7 +12486,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">9,11</context>
         </context-group>
-        <target state="needs-translation"> Export One Workgroup Per Row </target>
+        <target state="translated"> Exportar un grupo por fila </target>
       </trans-unit>
       <trans-unit id="ed03ed8cb140a12425bc395708102847fd4e328c" datatype="html">
         <source>Export Latest Work</source>
@@ -12494,7 +12494,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
-        <target state="needs-translation">Export Latest Work</target>
+        <target state="translated">Exportar el último trabajo</target>
       </trans-unit>
       <trans-unit id="d6201c8971184e3fc388844c67c2c1339eed0606" datatype="html">
         <source> Export Latest Work </source>
@@ -12502,7 +12502,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">18,20</context>
         </context-group>
-        <target state="needs-translation"> Export Latest Work </target>
+        <target state="translated"> Exportar el último trabajo </target>
       </trans-unit>
       <trans-unit id="364df18322763bf5943c003e7b452d6201878332" datatype="html">
         <source>Export All Work</source>
@@ -12510,7 +12510,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
-        <target state="needs-translation">Export All Work</target>
+        <target state="translated">Exportar todos los trabajos</target>
       </trans-unit>
       <trans-unit id="970b10ab095c51e939c8085c69c4c3ae42289b98" datatype="html">
         <source> Export All Work </source>
@@ -12518,7 +12518,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">27,29</context>
         </context-group>
-        <target state="needs-translation"> Export All Work </target>
+        <target state="translated"> Exportar todos los trabajos </target>
       </trans-unit>
       <trans-unit id="ec31d635e58a9ba28e645ded7114beddca4908ce" datatype="html">
         <source>Export Events</source>
@@ -12526,7 +12526,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
-        <target state="needs-translation">Export Events</target>
+        <target state="translated">Exportar eventos</target>
       </trans-unit>
       <trans-unit id="e82562586a41f58e396eb8b69b13328eec58ebbc" datatype="html">
         <source> Export Events </source>
@@ -12534,7 +12534,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">36,38</context>
         </context-group>
-        <target state="needs-translation"> Export Events </target>
+        <target state="translated"> Exportar eventos </target>
       </trans-unit>
       <trans-unit id="cf43f0c36b4dc4d67c6cf7f4fcfd5e7a790999ad" datatype="html">
         <source>Export Latest Notebook Items</source>
@@ -12662,7 +12662,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">169</context>
         </context-group>
-        <target state="needs-translation">Default</target>
+        <target state="translated">Por defecto</target>
       </trans-unit>
       <trans-unit id="faa270eed7e5c6e0f37827211ef6c4808ed0032f" datatype="html">
         <source>Everything</source>
@@ -12674,7 +12674,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">170</context>
         </context-group>
-        <target state="needs-translation">Everything</target>
+        <target state="translated">Todo</target>
       </trans-unit>
       <trans-unit id="20bbb22e352d5d032b13110d7fc111db453051ff" datatype="html">
         <source> Include Student Work </source>
@@ -12686,7 +12686,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">173,175</context>
         </context-group>
-        <target state="needs-translation"> Include Student Work </target>
+        <target state="translated"> Incluir trabajo de estudiante </target>
       </trans-unit>
       <trans-unit id="faa7d24183a0fa555bb0439722abdc1321f5a4bf" datatype="html">
         <source> Include Student Work IDs </source>
@@ -12750,7 +12750,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">147,149</context>
         </context-group>
-        <target state="needs-translation"> Include Scores </target>
+        <target state="translated"> Incluir puntajes </target>
       </trans-unit>
       <trans-unit id="1f4ef6a91c4a6736855004fc9865e97de3160440" datatype="html">
         <source> Include Score Timestamps </source>
@@ -12766,7 +12766,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">157,159</context>
         </context-group>
-        <target state="needs-translation"> Include Comments </target>
+        <target state="translated"> Incluir comentarios </target>
       </trans-unit>
       <trans-unit id="90dcd04b22f0a3bf2ec619c9e7ddfd046536552b" datatype="html">
         <source> Include Comment Timestamps </source>
@@ -12782,7 +12782,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">183,185</context>
         </context-group>
-        <target state="needs-translation"> Include Annotations </target>
+        <target state="translated"> Incluir anotaciones </target>
       </trans-unit>
       <trans-unit id="a18dd5aa053f8d7125173bd5cf1ce322e85c924c" datatype="html">
         <source> Include Events </source>
@@ -12790,7 +12790,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">188,190</context>
         </context-group>
-        <target state="needs-translation"> Include Events </target>
+        <target state="translated"> Incluir eventos </target>
       </trans-unit>
       <trans-unit id="3a892dcec67b6c4804309282884f5087f2aa4d0e" datatype="html">
         <source> Include Student Names </source>
@@ -13074,7 +13074,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
-        <target state="needs-translation">Column Name</target>
+        <target state="translated">Nombre de columna</target>
       </trans-unit>
       <trans-unit id="3b63e0028ca65ff108d21111d222e6da43ff4b84" datatype="html">
         <source>Explanation</source>
@@ -13082,7 +13082,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
-        <target state="needs-translation">Explanation</target>
+        <target state="translated">Explicación</target>
       </trans-unit>
       <trans-unit id="0391a458e69a27e09fca47c7125590fb91c8e829" datatype="html">
         <source>Include Student Names</source>
@@ -13090,7 +13090,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
           <context context-type="linenumber">49</context>
         </context-group>
-        <target state="needs-translation">Include Student Names</target>
+        <target state="translated">Incluir nombres de estudiante</target>
       </trans-unit>
       <trans-unit id="5c4b648a9ad87018c9931de0509e42d8cb776f62" datatype="html">
         <source>Choose Steps</source>
@@ -13098,7 +13098,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
           <context context-type="linenumber">51</context>
         </context-group>
-        <target state="needs-translation">Choose Steps</target>
+        <target state="translated">Elegir los pasos</target>
       </trans-unit>
       <trans-unit id="ea05c791aa596633c83dad44a5b326da301e16a6" datatype="html">
         <source>Include Deleted Steps (If Any)</source>
@@ -13106,7 +13106,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
           <context context-type="linenumber">71</context>
         </context-group>
-        <target state="needs-translation">Include Deleted Steps (If Any)</target>
+        <target state="translated">Incluir pasos eliminados (si hay)</target>
       </trans-unit>
       <trans-unit id="35652d03ca8d6a3ba5c06557c917a67961ab598d" datatype="html">
         <source>Back To Top</source>
@@ -13114,7 +13114,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
           <context context-type="linenumber">80</context>
         </context-group>
-        <target state="needs-translation">Back To Top</target>
+        <target state="translated">Volver arriba</target>
       </trans-unit>
       <trans-unit id="3545913114303350794" datatype="html">
         <source>The row number.</source>
@@ -13122,7 +13122,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
           <context context-type="linenumber">120</context>
         </context-group>
-        <target state="needs-translation">The row number.</target>
+        <target state="translated">El número de fila.</target>
       </trans-unit>
       <trans-unit id="6762344227516737409" datatype="html">
         <source>The ID of the group.</source>
@@ -13130,7 +13130,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
           <context context-type="linenumber">121</context>
         </context-group>
-        <target state="needs-translation">The ID of the group.</target>
+        <target state="translated">El ID del grupo.</target>
       </trans-unit>
       <trans-unit id="4865611134297059875" datatype="html">
         <source>The User ID of the first student in the group. This ID follows the student for all runs.</source>
@@ -13186,7 +13186,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
           <context context-type="linenumber">146</context>
         </context-group>
-        <target state="needs-translation">The ID of the run.</target>
+        <target state="translated">El ID de la ejecución.</target>
       </trans-unit>
       <trans-unit id="2553098812333252400" datatype="html">
         <source>The ID of the project.</source>
@@ -13194,7 +13194,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
           <context context-type="linenumber">147</context>
         </context-group>
-        <target state="needs-translation">The ID of the project.</target>
+        <target state="translated">El ID del proyecto.</target>
       </trans-unit>
       <trans-unit id="8554241691493928314" datatype="html">
         <source>The name of the project.</source>
@@ -13202,7 +13202,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
           <context context-type="linenumber">148</context>
         </context-group>
-        <target state="needs-translation">The name of the project.</target>
+        <target state="translated">El nombre del proyecto.</target>
       </trans-unit>
       <trans-unit id="980683300985052358" datatype="html">
         <source>The ID of the period that this student is in.</source>
@@ -13226,7 +13226,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
           <context context-type="linenumber">154</context>
         </context-group>
-        <target state="needs-translation">The start date of the run.</target>
+        <target state="translated">La fecha inicial de la ejecución.</target>
       </trans-unit>
       <trans-unit id="2920338708437937140" datatype="html">
         <source>The end date of the run.</source>
@@ -13234,7 +13234,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
           <context context-type="linenumber">155</context>
         </context-group>
-        <target state="needs-translation">The end date of the run.</target>
+        <target state="translated">La fecha final de la ejecución.</target>
       </trans-unit>
       <trans-unit id="3282378625746052322" datatype="html">
         <source>The ID of the step. Each step in a unit has a unique Node ID.</source>
@@ -13250,7 +13250,7 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.ts</context>
           <context context-type="linenumber">160</context>
         </context-group>
-        <target state="needs-translation">The title of the step.</target>
+        <target state="translated">El título del paso.</target>
       </trans-unit>
       <trans-unit id="3129501014700466003" datatype="html">
         <source>The timestamp when the student entered the step.</source>
@@ -15226,7 +15226,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">210</context>
+          <context context-type="linenumber">189</context>
         </context-group>
         <target state="translated">Retroalimentación</target>
       </trans-unit>
@@ -21000,7 +21000,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>You have been inactive for a long time. Do you want to stay logged in?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <target state="translated">¿Seguir conectado/a?</target>
       </trans-unit>
@@ -21008,7 +21008,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Session Timeout</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <target state="translated">Se acabó el tiempo de la sesión</target>
       </trans-unit>
