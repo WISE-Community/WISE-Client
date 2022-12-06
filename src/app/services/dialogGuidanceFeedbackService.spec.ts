@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { DialogGuidanceStudentComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-student/dialog-guidance-student.component';
 import { FeedbackRule } from '../../assets/wise5/components/common/feedbackRule/FeedbackRule';
 import { DialogGuidanceFeedbackService } from '../../assets/wise5/services/dialogGuidanceFeedbackService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
+import { DialogGuidanceComponent } from '../../assets/wise5/components/dialogGuidance/DialogGuidanceComponent';
+import { DialogGuidanceContent } from '../../assets/wise5/components/dialogGuidance/DialogGuidanceContent';
 
 let service: DialogGuidanceFeedbackService;
 let studentDataService: StudentDataService;
-let component: DialogGuidanceStudentComponent;
 let feedbackRuleV1: FeedbackRule;
 let feedbackRuleV2_1: FeedbackRule;
 
@@ -14,12 +14,8 @@ class StudentDataServiceMock {
   getLatestSubmitComponentState() {}
 }
 
-class DialogGuidanceStudentComponentMock {
-  nodeId = 'node1';
-  componentId = 'componentA';
-  isVersion1() {}
-  isVersion2() {}
-}
+const content = {} as DialogGuidanceContent;
+const component = new DialogGuidanceComponent(content, 'node1');
 
 describe('DialogGuidanceFeedbackService', () => {
   beforeEach(() => {
@@ -27,11 +23,9 @@ describe('DialogGuidanceFeedbackService', () => {
       imports: [],
       providers: [
         DialogGuidanceFeedbackService,
-        { provide: StudentDataService, useClass: StudentDataServiceMock },
-        { provide: DialogGuidanceStudentComponent, useClass: DialogGuidanceStudentComponentMock }
+        { provide: StudentDataService, useClass: StudentDataServiceMock }
       ]
     });
-    component = TestBed.inject(DialogGuidanceStudentComponent);
     service = TestBed.inject(DialogGuidanceFeedbackService);
     studentDataService = TestBed.inject(StudentDataService);
     feedbackRuleV1 = new FeedbackRule();

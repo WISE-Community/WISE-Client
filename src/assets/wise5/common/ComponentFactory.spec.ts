@@ -1,3 +1,4 @@
+import { DialogGuidanceComponent } from '../components/dialogGuidance/DialogGuidanceComponent';
 import { MultipleChoiceComponent } from '../components/multipleChoice/MultipleChoiceComponent';
 import { Component } from './Component';
 import { ComponentContent } from './ComponentContent';
@@ -11,6 +12,11 @@ describe('ComponentFactory', () => {
 function getComponent() {
   describe('getComponent()', () => {
     const componentTypes = [
+      {
+        type: 'DialogGuidance',
+        instance: DialogGuidanceComponent,
+        message: 'should return DialogGuidanceComponent if content.type is DialogGuidance'
+      },
       {
         type: 'MultipleChoice',
         instance: MultipleChoiceComponent,

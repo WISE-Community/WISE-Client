@@ -23,7 +23,7 @@ import { CRaterScore } from '../../common/cRater/CRaterScore';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { DialogGuidanceStudentComponent } from './dialog-guidance-student.component';
-import { Component } from '../../../common/Component';
+import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
@@ -64,7 +64,7 @@ describe('DialogGuidanceStudentComponent', () => {
         feedback: 'Default Feedback'
       }
     ];
-    component.component = new Component(componentContent, null);
+    component.component = new DialogGuidanceComponent(componentContent, null);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     fixture.detectChanges();

@@ -7,6 +7,7 @@ export interface ComponentContent {
   dynamicPrompt?: DynamicPrompt;
   excludeFromTotalScore?: boolean;
   maxScore?: number;
+  maxSubmitCount?: number;
   prompt?: string;
   questionBank?: QuestionBank;
   rubric?: string;
