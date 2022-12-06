@@ -45,42 +45,42 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   workgroupId: number;
 
   constructor(
-    protected AnnotationService: AnnotationService,
-    protected ComponentService: ComponentService,
+    protected annotationService: AnnotationService,
+    protected componentService: ComponentService,
     protected computerAvatarService: ComputerAvatarService,
-    protected ConfigService: ConfigService,
-    protected CRaterService: CRaterService,
+    protected configService: ConfigService,
+    protected cRaterService: CRaterService,
     protected dialog: MatDialog,
     protected dialogGuidanceFeedbackService: DialogGuidanceFeedbackService,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService,
     protected studentStatusService: StudentStatusService,
-    protected UtilService: UtilService
+    protected utilService: UtilService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService,
-      UtilService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService,
+      utilService
     );
   }
 
   ngOnInit(): void {
     super.ngOnInit();
     if (this.componentState != null) {
-      this.responses = this.UtilService.makeCopyOfJSONObject(
+      this.responses = this.utilService.makeCopyOfJSONObject(
         this.componentState.studentData.responses
       );
       this.submitCounter = this.componentState.studentData.submitCounter;
     }
-    this.workgroupId = this.ConfigService.getWorkgroupId();
+    this.workgroupId = this.configService.getWorkgroupId();
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
     }
@@ -203,11 +203,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
 
   private submitToCRater(studentResponse: string): void {
     this.showWaitingForComputerResponse();
-    this.CRaterService.makeCRaterScoringRequest(
-      this.component.getItemId(),
-      new Date().getTime(),
-      studentResponse
-    )
+    this.cRaterService
+      .makeCRaterScoringRequest(this.component.getItemId(), new Date().getTime(), studentResponse)
       .pipe(timeout(this.cRaterTimeout))
       .subscribe(
         (response: any) => {
@@ -242,7 +239,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   cRaterSuccessResponse(response: any): void {
     this.hideWaitingForComputerResponse();
     this.submitButtonClicked();
-    const cRaterResponse = this.CRaterService.getCRaterResponse(response, this.submitCounter);
+    const cRaterResponse = this.cRaterService.getCRaterResponse(response, this.submitCounter);
     this.addDialogResponse(this.createComputerDialogResponse(cRaterResponse));
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableStudentResponse();
