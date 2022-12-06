@@ -48,6 +48,7 @@ export class OutsideUrlStudent extends ComponentStudent {
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.url = this.getURL(this.componentContent);
     this.infoUrl = this.getInfoUrl(this.componentContent);
     this.infoString = this.getInfoString(this.componentContent);
