@@ -39,7 +39,7 @@ export class GoogleSignInButtonComponent implements AfterViewInit {
     google.accounts.id.renderButton(this.googleButton.nativeElement, {
       text: this.text,
       theme: 'filled_blue',
-      size: 'large'
+      size: 'medium'
     });
   }
 }
