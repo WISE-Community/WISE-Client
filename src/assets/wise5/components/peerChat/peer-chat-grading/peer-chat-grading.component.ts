@@ -45,7 +45,7 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
     const notificationType = 'PeerChatMessage';
     const teacherWorkgroupId = this.configService.getWorkgroupId();
     const message = 'Your teacher sent a chat message';
-    for (const workgroupId of this.getPeerGroupWorkgroupIds(peerGroup)) {
+    for (const workgroupId of peerGroup.getWorkgroupIds()) {
       const notification = this.notificationService.createNewNotification(
         runId,
         periodId,
@@ -58,10 +58,6 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
       );
       this.notificationService.saveNotificationToServer(notification);
     }
-  }
-
-  private getPeerGroupWorkgroupIds(peerGroup: PeerGroup): number[] {
-    return peerGroup.members.map((member: any) => member.id);
   }
 
   private createComponentState(response: string): ComponentState {
