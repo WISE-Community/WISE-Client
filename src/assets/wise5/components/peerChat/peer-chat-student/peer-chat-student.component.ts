@@ -14,9 +14,9 @@ import { UtilService } from '../../../services/utilService';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
-import { QuestionBank } from '../peer-chat-question-bank/QuestionBank';
 import { QuestionBankContent } from '../peer-chat-question-bank/QuestionBankContent';
 import { QuestionBankRule } from '../peer-chat-question-bank/QuestionBankRule';
+import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
@@ -27,6 +27,7 @@ import { PeerGroup } from '../PeerGroup';
   styleUrls: ['./peer-chat-student.component.scss']
 })
 export class PeerChatStudentComponent extends ComponentStudent {
+  component: PeerChatComponent;
   displayedQuestionBankRule: QuestionBankRule;
   dynamicPrompt: FeedbackRule;
   isPeerChatWorkgroupsResponseReceived: boolean;
@@ -36,7 +37,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
   peerChatWorkgroupIds: number[] = [];
   peerChatWorkgroupInfos: any = {};
   peerGroup: PeerGroup;
-  peerGroupingTag: string;
   questionBankContent: QuestionBankContent;
   requestTimeout: number = 10000;
   response: string;
@@ -72,16 +72,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     this.myWorkgroupId = this.configService.getWorkgroupId();
-    this.peerGroupingTag = this.componentContent.peerGroupingTag;
     this.requestChatWorkgroups();
     this.registerStudentWorkReceivedListener();
-    if (this.component.content.questionBank != null) {
-      this.questionBankContent = new QuestionBankContent(
-        this.component.nodeId,
-        this.component.id,
-        new QuestionBank(this.component.content.questionBank)
-      );
-    }
+    this.questionBankContent = this.component.getQuestionBankContent();
   }
 
   private registerStudentWorkReceivedListener(): void {
@@ -106,14 +99,14 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   private requestChatWorkgroups(): void {
     this.peerGroupService
-      .retrievePeerGroup(this.peerGroupingTag, this.workgroupId)
+      .retrievePeerGroup(this.component.getPeerGroupingTag(), this.workgroupId)
       .pipe(timeout(this.requestTimeout))
       .subscribe(
         (peerGroup: PeerGroup) => {
           this.isPeerChatWorkgroupsResponseReceived = true;
           if (peerGroup != null) {
             this.peerGroup = peerGroup;
-            const peerGroupWorkgroupIds = this.getPeerGroupWorkgroupIds(peerGroup);
+            const peerGroupWorkgroupIds = peerGroup.getWorkgroupIds();
             this.addTeacherWorkgroupIds(peerGroupWorkgroupIds);
             this.setPeerChatWorkgroups(peerGroupWorkgroupIds);
             this.getPeerChatComponentStates(peerGroup);
@@ -129,13 +122,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
     workgroupIds.push(...this.configService.getTeacherWorkgroupIds());
   }
 
-  private getPeerGroupWorkgroupIds(peerGroup: PeerGroup): number[] {
-    return peerGroup.members.map((member) => member.id);
-  }
-
   private getPeerChatComponentStates(peerGroup: PeerGroup): void {
     this.peerGroupService
-      .retrievePeerGroupWork(peerGroup, this.nodeId, this.componentId)
+      .retrievePeerGroupWork(peerGroup, this.component.nodeId, this.component.id)
       .pipe(timeout(this.requestTimeout))
       .subscribe((componentStates: any[]) => {
         this.setPeerChatMessages(componentStates);
@@ -182,8 +171,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
       componentState.studentData.questionBank = this.displayedQuestionBankRule;
     }
     componentState.componentType = 'PeerChat';
-    componentState.nodeId = this.nodeId;
-    componentState.componentId = this.componentId;
+    componentState.nodeId = this.component.nodeId;
+    componentState.componentId = this.component.id;
     componentState.isSubmit = true;
     componentState.runId = this.configService.getRunId();
     componentState.periodId = this.configService.getPeriodId();
@@ -230,8 +219,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
         runId,
         periodId,
         notificationType,
-        this.nodeId,
-        this.componentId,
+        this.component.nodeId,
+        this.component.id,
         this.workgroupId,
         workgroupId,
         message

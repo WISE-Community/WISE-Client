@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { PeerGroupStudentData } from '../../../app/domain/peerGroupStudentData';
 import { Node } from '../common/Node';
 import { PeerGroup } from '../components/peerChat/PeerGroup';
@@ -27,9 +28,11 @@ export class PeerGroupService {
   retrievePeerGroup(
     peerGroupingTag: string,
     workgroupId = this.configService.getWorkgroupId()
-  ): Observable<any> {
+  ): Observable<PeerGroup> {
     const runId = this.configService.isPreview() ? 1 : this.configService.getRunId();
-    return this.http.get(`/api/peer-group/${runId}/${workgroupId}/${peerGroupingTag}`);
+    return this.http
+      .get<PeerGroup>(`/api/peer-group/${runId}/${workgroupId}/${peerGroupingTag}`)
+      .pipe(map((value) => new PeerGroup(value.id, value.members, value.peerGrouping)));
   }
 
   retrievePeerGroupWork(

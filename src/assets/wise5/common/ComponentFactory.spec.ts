@@ -1,5 +1,6 @@
 import { DialogGuidanceComponent } from '../components/dialogGuidance/DialogGuidanceComponent';
 import { MultipleChoiceComponent } from '../components/multipleChoice/MultipleChoiceComponent';
+import { PeerChatComponent } from '../components/peerChat/PeerChatComponent';
 import { Component } from './Component';
 import { ComponentContent } from './ComponentContent';
 import { ComponentFactory } from './ComponentFactory';
@@ -21,6 +22,11 @@ function getComponent() {
         type: 'MultipleChoice',
         instance: MultipleChoiceComponent,
         message: 'should return MultipleChoiceComponent if content.type is MultipleChoice'
+      },
+      {
+        type: 'PeerChat',
+        instance: PeerChatComponent,
+        message: 'should return PeerChatComponent if content.type is PeerChat'
       },
       {
         type: 'HTML',
