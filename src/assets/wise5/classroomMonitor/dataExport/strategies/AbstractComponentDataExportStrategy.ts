@@ -1,3 +1,4 @@
+import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
 export abstract class AbstractComponentDataExportStrategy extends AbstractDataExportStrategy {
@@ -6,7 +7,11 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   includeStudentNames: boolean;
   workSelectionType: string;
 
-  constructor(protected nodeId: string, protected component: any, additionalParams: any) {
+  constructor(
+    protected nodeId: string,
+    protected component: any,
+    additionalParams: ComponentDataExportParams
+  ) {
     super();
     this.canViewStudentNames = additionalParams.canViewStudentNames;
     this.includeOnlySubmits = additionalParams.includeOnlySubmits;
@@ -15,7 +20,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   }
 
   abstract generateComponentWorkRow(
-    component: any,
     columnNames: string[],
     columnNameToNumber: any,
     rowCounter: number,
@@ -81,7 +85,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     columnNames: string[],
     columnNameToNumber: any,
     nodeId: string
-  ): any[] {
+  ): string[] {
     const componentId = component.id;
     let rows = [];
     let rowCounter = 1;
@@ -125,7 +129,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       const componentState = componentStates[c];
       if (this.shouldExportRow(componentState, c, componentStates.length)) {
         const row = this.generateComponentWorkRow(
-          component,
           columnNames,
           columnNameToNumber,
           rowCounter,
@@ -174,16 +177,24 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     componentStateIndex: number,
     numComponentStates: number
   ): boolean {
-    let exportRow = true;
-    if (this.includeOnlySubmits && !componentState.isSubmit) {
-      exportRow = false;
-    } else if (
+    return !(
+      this.includeOnlySubmitsAndIsNotSubmit(componentState) ||
+      this.exportLatestWorkAndIsNotLatestWork(componentStateIndex, numComponentStates)
+    );
+  }
+
+  private includeOnlySubmitsAndIsNotSubmit(componentState: any): boolean {
+    return this.includeOnlySubmits && !componentState.isSubmit;
+  }
+
+  private exportLatestWorkAndIsNotLatestWork(
+    componentStateIndex: number,
+    numComponentStates: number
+  ): boolean {
+    return (
       this.workSelectionType === 'exportLatestWork' &&
-      componentStateIndex != numComponentStates - 1
-    ) {
-      exportRow = false;
-    }
-    return exportRow;
+      componentStateIndex !== numComponentStates - 1
+    );
   }
 
   private incrementRevisionCounter(
@@ -270,17 +281,11 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       this.projectService.getComponentPosition(componentState.nodeId, componentState.componentId) +
       1;
     row[columnNameToNumber['Component Part Number']] = componentPartNumber;
-    const component = this.projectService.getComponent(
-      componentState.nodeId,
-      componentState.componentId
-    );
-    if (component != null) {
-      row[columnNameToNumber['Component Type']] = component.type;
-      if (component.prompt != null) {
-        let prompt = this.utilService.removeHTMLTags(component.prompt);
-        prompt = prompt.replace(/"/g, '""');
-        row[columnNameToNumber['Component Prompt']] = prompt;
-      }
+    row[columnNameToNumber['Component Type']] = this.component.type;
+    if (this.component.prompt != null) {
+      let prompt = this.utilService.removeHTMLTags(this.component.prompt);
+      prompt = prompt.replace(/"/g, '""');
+      row[columnNameToNumber['Component Prompt']] = prompt;
     }
     const studentData = componentState.studentData;
     if (studentData != null) {

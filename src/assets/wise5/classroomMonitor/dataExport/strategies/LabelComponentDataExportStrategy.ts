@@ -1,9 +1,10 @@
+import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExportStrategy';
 
 export class LabelComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
   maxNumLabels: number;
 
-  constructor(nodeId: string, component: any, additionalParams: any) {
+  constructor(nodeId: string, component: any, additionalParams: ComponentDataExportParams) {
     super(nodeId, component, additionalParams);
     this.maxNumLabels = 0;
   }
@@ -26,7 +27,6 @@ export class LabelComponentDataExportStrategy extends AbstractComponentDataExpor
   }
 
   generateComponentWorkRow(
-    component: any,
     columnNames: string[],
     columnNameToNumber: any,
     rowCounter: number,
