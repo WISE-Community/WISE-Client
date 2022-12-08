@@ -308,7 +308,8 @@ export class LabelStudent extends ComponentStudent {
   }
 
   /**
-   * This is for old Label component content before we had the isStarterLabel field in the labels
+   * Make sure starter labels have isStarterLabel set to true. Starter labels from old Label
+   * component content did not have this field.
    */
   private setIsStarterLabelTrue(labels: any[]): void {
     for (const label of labels) {
@@ -360,11 +361,11 @@ export class LabelStudent extends ComponentStudent {
     this.canvas.getObjects('i-text').forEach((object: any) => {
       labels.push(this.getLabelJSONObjectFromText(object));
     });
-    labels.sort(this.sortByTimestamp);
+    labels.sort(this.sortByTimestampAscending);
     return labels;
   }
 
-  sortByTimestamp(labelA: any, labelB: any): number {
+  private sortByTimestampAscending(labelA: any, labelB: any): number {
     return labelA.timestamp - labelB.timestamp;
   }
 
