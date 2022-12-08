@@ -1,4 +1,5 @@
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
+import { ComponentRevisionCounter } from '../ComponentRevisionCounter';
 import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExportStrategy';
 
 export class LabelComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
@@ -14,7 +15,7 @@ export class LabelComponentDataExportStrategy extends AbstractComponentDataExpor
     const components = [{ nodeId: this.nodeId, componentId: this.component.id }];
     this.dataExportService.retrieveStudentDataExport(components).then((result) => {
       const columnNames = [];
-      const columnNameToNumber = {};
+      const columnNameToNumber = new Map<string, number>();
       let rows = [this.generateComponentHeaderRow(columnNames, columnNameToNumber)];
       rows = rows.concat(
         this.generateComponentWorkRows(this.component, columnNames, columnNameToNumber, this.nodeId)
@@ -28,7 +29,7 @@ export class LabelComponentDataExportStrategy extends AbstractComponentDataExpor
 
   generateComponentWorkRow(
     columnNames: string[],
-    columnNameToNumber: any,
+    columnNameToNumber: Map<string, number>,
     rowCounter: number,
     workgroupId: number,
     userId1: number,
@@ -38,7 +39,7 @@ export class LabelComponentDataExportStrategy extends AbstractComponentDataExpor
     studentName2: string,
     studentName3: string,
     periodName: string,
-    componentRevisionCounter: any,
+    componentRevisionCounter: ComponentRevisionCounter,
     labelComponentState: any
   ): string[] {
     const row = this.createStudentWorkExportRow(
