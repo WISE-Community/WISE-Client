@@ -81,6 +81,12 @@ export class MilestoneReportGraphComponent implements OnInit {
           enabled: false
         }
       },
+      exporting: {
+        enabled: false
+      },
+      credits: {
+        enabled: false
+      },
       series: this.series
     };
   }
