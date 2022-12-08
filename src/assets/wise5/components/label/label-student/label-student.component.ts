@@ -303,14 +303,12 @@ export class LabelStudent extends ComponentStudent {
   }
 
   private setStarterLabels(componentContent: any): void {
+    // Make sure starter labels have isStarterLabel set to true. Starter labels from old Label
+    // component content did not have this field.
     this.setIsStarterLabelTrue(componentContent.labels);
     this.addLabelsToCanvas(componentContent.labels);
   }
 
-  /**
-   * Make sure starter labels have isStarterLabel set to true. Starter labels from old Label
-   * component content did not have this field.
-   */
   private setIsStarterLabelTrue(labels: any[]): void {
     for (const label of labels) {
       label.isStarterLabel = true;
