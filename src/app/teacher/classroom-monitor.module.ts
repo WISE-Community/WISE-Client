@@ -61,6 +61,7 @@ import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/no
 import { StudentGradingComponent } from '../../assets/wise5/classroomMonitor/student-grading/student-grading.component';
 import { ExportStepVisitsComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component';
 import { DataExportComponent } from '../../assets/wise5/classroomMonitor/dataExport/data-export/data-export.component';
+import { MilestoneModule } from './milestone/milestone.module';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { DataExportComponent } from '../../assets/wise5/classroomMonitor/dataExp
     ComponentStudentModule,
     HighchartsChartModule,
     IntersectionObserverModule,
+    MilestoneModule,
     PeerGroupGradingModule,
     PreviewComponentModule,
     SelectPeriodModule
