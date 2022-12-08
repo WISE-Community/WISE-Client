@@ -21,6 +21,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionComponentDataExportStrategy';
 import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
+import { Component as WISEComponent } from '../../../common/Component';
 
 @Component({
   selector: 'data-export',
@@ -1049,7 +1050,7 @@ export class DataExportComponent implements OnInit {
 
   private exportLabelComponent(nodeId: string, component: any): void {
     this.dataExportContext.setStrategy(
-      new LabelComponentDataExportStrategy(nodeId, component, {
+      new LabelComponentDataExportStrategy(new WISEComponent(component, nodeId), {
         canViewStudentNames: this.canViewStudentNames,
         includeOnlySubmits: this.includeOnlySubmits,
         includeStudentNames: this.includeStudentNames,

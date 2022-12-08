@@ -1,3 +1,4 @@
+import { Component } from '../../../common/Component';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { ComponentRevisionCounter } from '../ComponentRevisionCounter';
 import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExportStrategy';
@@ -5,31 +6,29 @@ import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExpo
 export class LabelComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
   maxNumLabels: number;
 
-  constructor(nodeId: string, component: any, additionalParams: ComponentDataExportParams) {
-    super(nodeId, component, additionalParams);
+  constructor(component: Component, additionalParams: ComponentDataExportParams) {
+    super(component, additionalParams);
     this.maxNumLabels = 0;
   }
 
   export(): void {
     this.controller.showDownloadingExportMessage();
-    const components = [{ nodeId: this.nodeId, componentId: this.component.id }];
+    const components = [{ nodeId: this.component.nodeId, componentId: this.component.id }];
     this.dataExportService.retrieveStudentDataExport(components).then((result) => {
-      const columnNames = [];
-      const columnNameToNumber = new Map<string, number>();
-      let rows = [this.generateComponentHeaderRow(columnNames, columnNameToNumber)];
-      rows = rows.concat(
-        this.generateComponentWorkRows(this.component, columnNames, columnNameToNumber, this.nodeId)
-      );
+      let rows = [this.generateComponentHeaderRow(this.columnNames, this.columnNameToNumber)];
+      rows = rows.concat(this.generateComponentWorkRows(this.component, this.component.nodeId));
       this.addLabelHeaders(rows, this.maxNumLabels);
-      const fileName = this.generateExportFileName(this.nodeId, this.component.id, 'label');
+      const fileName = this.generateExportFileName(
+        this.component.nodeId,
+        this.component.id,
+        'label'
+      );
       this.controller.generateCSVFile(rows, fileName);
       this.controller.hideDownloadingExportMessage();
     });
   }
 
   generateComponentWorkRow(
-    columnNames: string[],
-    columnNameToNumber: Map<string, number>,
     rowCounter: number,
     workgroupId: number,
     userId1: number,
@@ -43,8 +42,6 @@ export class LabelComponentDataExportStrategy extends AbstractComponentDataExpor
     labelComponentState: any
   ): string[] {
     const row = this.createStudentWorkExportRow(
-      columnNames,
-      columnNameToNumber,
       rowCounter,
       workgroupId,
       userId1,

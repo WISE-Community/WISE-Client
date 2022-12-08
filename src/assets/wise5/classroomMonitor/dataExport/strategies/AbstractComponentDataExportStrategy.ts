@@ -5,15 +5,13 @@ import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
 export abstract class AbstractComponentDataExportStrategy extends AbstractDataExportStrategy {
   canViewStudentNames: boolean;
+  columnNames: string[] = [];
+  columnNameToNumber: Map<string, number> = new Map<string, number>();
   includeOnlySubmits: boolean;
   includeStudentNames: boolean;
   workSelectionType: string;
 
-  constructor(
-    protected nodeId: string,
-    protected component: Component,
-    additionalParams: ComponentDataExportParams
-  ) {
+  constructor(protected component: Component, additionalParams: ComponentDataExportParams) {
     super();
     this.canViewStudentNames = additionalParams.canViewStudentNames;
     this.includeOnlySubmits = additionalParams.includeOnlySubmits;
@@ -22,8 +20,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   }
 
   abstract generateComponentWorkRow(
-    columnNames: string[],
-    columnNameToNumber: Map<string, number>,
     rowCounter: number,
     workgroupId: number,
     userId1: number,
@@ -88,19 +84,12 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     }
   }
 
-  generateComponentWorkRows(
-    component: Component,
-    columnNames: string[],
-    columnNameToNumber: Map<string, number>,
-    nodeId: string
-  ): string[] {
+  generateComponentWorkRows(component: Component, nodeId: string): string[] {
     let rows = [];
     let rowCounter = 1;
     for (const workgroupId of this.configService.getClassmateWorkgroupIds()) {
       const rowsForWorkgroup = this.generateComponentWorkRowsForWorkgroup(
         workgroupId,
-        columnNames,
-        columnNameToNumber,
         nodeId,
         component.id,
         rowCounter
@@ -113,8 +102,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
 
   private generateComponentWorkRowsForWorkgroup(
     workgroupId: number,
-    columnNames: string[],
-    columnNameToNumber: Map<string, number>,
     nodeId: string,
     componentId: string,
     rowCounter: number
@@ -131,8 +118,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       const componentState = componentStates[c];
       if (this.shouldExportRow(componentState, c, componentStates.length)) {
         const row = this.generateComponentWorkRow(
-          columnNames,
-          columnNameToNumber,
           rowCounter,
           workgroupId,
           extractedUserIDsAndStudentNames['userId1'],
@@ -207,8 +192,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
 
   /**
    * Create the array that will be used as a row in the student work export
-   * @param columnNames all the header column name
-   * @param columnNameToNumber the mapping from column name to column number
    * @param rowCounter the current row number
    * @param workgroupId the workgroup id
    * @param userId1 the User ID 1
@@ -220,8 +203,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
    * @return an array containing the cells in the row
    */
   createStudentWorkExportRow(
-    columnNames: string[],
-    columnNameToNumber: Map<string, number>,
     rowCounter: number,
     workgroupId: number,
     userId1: number,
@@ -234,13 +215,12 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     componentRevisionCounter: ComponentRevisionCounter,
     componentState: any
   ): string[] {
-    const row = new Array(columnNames.length);
+    const row = new Array(this.columnNames.length);
     row.fill('');
-    row[columnNameToNumber.get('#')] = rowCounter;
-    row[columnNameToNumber.get('Workgroup ID')] = workgroupId;
+    row[this.columnNameToNumber.get('#')] = rowCounter;
+    row[this.columnNameToNumber.get('Workgroup ID')] = workgroupId;
     this.setStudentIDsAndNames(
       row,
-      columnNameToNumber,
       userId1,
       studentName1,
       userId2,
@@ -248,45 +228,45 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       userId3,
       studentName3
     );
-    row[columnNameToNumber.get('Class Period')] = periodName;
-    row[columnNameToNumber.get('Project ID')] = this.configService.getProjectId();
-    row[columnNameToNumber.get('Project Name')] = this.projectService.getProjectTitle();
-    row[columnNameToNumber.get('Run ID')] = this.configService.getRunId();
-    row[columnNameToNumber.get('Student Work ID')] = componentState.id;
+    row[this.columnNameToNumber.get('Class Period')] = periodName;
+    row[this.columnNameToNumber.get('Project ID')] = this.configService.getProjectId();
+    row[this.columnNameToNumber.get('Project Name')] = this.projectService.getProjectTitle();
+    row[this.columnNameToNumber.get('Run ID')] = this.configService.getRunId();
+    row[this.columnNameToNumber.get('Student Work ID')] = componentState.id;
     const formattedDateTime = this.utilService.convertMillisecondsToFormattedDateTime(
       componentState.serverSaveTime
     );
-    row[columnNameToNumber.get('Server Timestamp')] = formattedDateTime;
+    row[this.columnNameToNumber.get('Server Timestamp')] = formattedDateTime;
     const clientSaveTime = new Date(componentState.clientSaveTime);
     if (clientSaveTime != null) {
       const clientSaveTimeString =
         clientSaveTime.toDateString() + ' ' + clientSaveTime.toLocaleTimeString();
-      row[columnNameToNumber.get('Client Timestamp')] = clientSaveTimeString;
+      row[this.columnNameToNumber.get('Client Timestamp')] = clientSaveTimeString;
     }
-    row[columnNameToNumber.get('Node ID')] = componentState.nodeId;
-    row[columnNameToNumber.get('Component ID')] = componentState.componentId;
-    row[columnNameToNumber.get('Step Title')] = this.projectService.getNodePositionAndTitle(
+    row[this.columnNameToNumber.get('Node ID')] = componentState.nodeId;
+    row[this.columnNameToNumber.get('Component ID')] = componentState.componentId;
+    row[this.columnNameToNumber.get('Step Title')] = this.projectService.getNodePositionAndTitle(
       componentState.nodeId
     );
     const componentPartNumber =
       this.projectService.getComponentPosition(componentState.nodeId, componentState.componentId) +
       1;
-    row[columnNameToNumber.get('Component Part Number')] = componentPartNumber;
-    row[columnNameToNumber.get('Component Type')] = this.component.content.type;
+    row[this.columnNameToNumber.get('Component Part Number')] = componentPartNumber;
+    row[this.columnNameToNumber.get('Component Type')] = this.component.content.type;
     if (this.component.content.prompt != null) {
       let prompt = this.utilService.removeHTMLTags(this.component.content.prompt);
       prompt = prompt.replace(/"/g, '""');
-      row[columnNameToNumber.get('Component Prompt')] = prompt;
+      row[this.columnNameToNumber.get('Component Prompt')] = prompt;
     }
     const studentData = componentState.studentData;
     if (studentData != null) {
-      row[columnNameToNumber.get('Student Data')] = studentData;
+      row[this.columnNameToNumber.get('Student Data')] = studentData;
       const isCorrect = studentData.isCorrect;
       if (isCorrect != null) {
         if (isCorrect) {
-          row[columnNameToNumber.get('Is Correct')] = 1;
+          row[this.columnNameToNumber.get('Is Correct')] = 1;
         } else {
-          row[columnNameToNumber.get('Is Correct')] = 0;
+          row[this.columnNameToNumber.get('Is Correct')] = 0;
         }
       }
     }
@@ -296,7 +276,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
        * mapping. this case will happen when we are exporting all student
        * work.
        */
-      row[columnNameToNumber.get('Component Revision Counter')] = this.getRevisionCounter(
+      row[this.columnNameToNumber.get('Component Revision Counter')] = this.getRevisionCounter(
         componentRevisionCounter,
         componentState.nodeId,
         componentState.componentId
@@ -308,7 +288,8 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
        * because the revision counter needs to be previously calculated
        * and then set into the component state
        */
-      row[columnNameToNumber.get('Component Revision Counter')] = componentState.revisionCounter;
+      row[this.columnNameToNumber.get('Component Revision Counter')] =
+        componentState.revisionCounter;
     }
     this.incrementRevisionCounter(
       componentRevisionCounter,
@@ -316,22 +297,21 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       componentState.componentId
     );
     if (componentState.isSubmit) {
-      row[columnNameToNumber.get('Is Submit')] = 1;
+      row[this.columnNameToNumber.get('Is Submit')] = 1;
       if (studentData != null) {
         const submitCounter = studentData.submitCounter;
         if (submitCounter != null) {
-          row[columnNameToNumber.get('Submit Count')] = submitCounter;
+          row[this.columnNameToNumber.get('Submit Count')] = submitCounter;
         }
       }
     } else {
-      row[columnNameToNumber.get('Is Submit')] = 0;
+      row[this.columnNameToNumber.get('Is Submit')] = 0;
     }
     return row;
   }
 
   private setStudentIDsAndNames(
     row: any[],
-    columnNameToNumber: Map<string, number>,
     userId1: number,
     studentName1: string,
     userId2: number,
@@ -340,22 +320,22 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     studentName3: string
   ): void {
     if (userId1 != null) {
-      row[columnNameToNumber.get('User ID 1')] = userId1;
+      row[this.columnNameToNumber.get('User ID 1')] = userId1;
     }
     if (studentName1 != null && this.includeStudentNames) {
-      row[columnNameToNumber.get('Student Name 1')] = studentName1;
+      row[this.columnNameToNumber.get('Student Name 1')] = studentName1;
     }
     if (userId2 != null) {
-      row[columnNameToNumber.get('User ID 2')] = userId2;
+      row[this.columnNameToNumber.get('User ID 2')] = userId2;
     }
     if (studentName2 != null && this.includeStudentNames) {
-      row[columnNameToNumber.get('Student Name 2')] = studentName2;
+      row[this.columnNameToNumber.get('Student Name 2')] = studentName2;
     }
     if (userId3 != null) {
-      row[columnNameToNumber.get('User ID 3')] = userId3;
+      row[this.columnNameToNumber.get('User ID 3')] = userId3;
     }
     if (studentName3 != null && this.includeStudentNames) {
-      row[columnNameToNumber.get('Student Name 3')] = studentName3;
+      row[this.columnNameToNumber.get('Student Name 3')] = studentName3;
     }
   }
 
