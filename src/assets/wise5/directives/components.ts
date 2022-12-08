@@ -4,7 +4,6 @@ import * as angular from 'angular';
 import Compile from './compile/compile';
 import DisableDeleteKeypress from './disableDeleteKeypress/disableDeleteKeypress';
 import Draggable from './draggable/draggable';
-import MilestoneReportGraph from './milestoneReportGraph/milestoneReportGraph';
 import Sticky from './sticky/sticky';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { MilestoneReportDataComponent } from '../../../app/teacher/milestone/milestone-report-data/milestone-report-data.component';
@@ -12,6 +11,7 @@ import { PossibleScoreComponent } from '../../../app/possible-score/possible-sco
 import { ComponentComponent } from '../components/component/component.component';
 import { TeacherSummaryDisplay } from './teacher-summary-display/teacher-summary-display.component';
 import { TeacherNodeIconComponent } from '../authoringTool/teacher-node-icon/teacher-node-icon.component';
+import { MilestoneReportGraphComponent } from '../../../app/teacher/milestone/milestone-report-graph/milestone-report-graph.component';
 
 const Components = angular.module('components', []);
 
@@ -26,7 +26,10 @@ Components.directive(
   'milestoneReportData',
   downgradeComponent({ component: MilestoneReportDataComponent }) as angular.IDirectiveFactory
 );
-Components.component('milestoneReportGraph', MilestoneReportGraph);
+Components.directive(
+  'milestoneReportGraph',
+  downgradeComponent({ component: MilestoneReportGraphComponent }) as angular.IDirectiveFactory
+);
 Components.directive(
   'nodeIcon',
   downgradeComponent({ component: TeacherNodeIconComponent }) as angular.IDirectiveFactory
