@@ -338,7 +338,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-close/dialog-with-close.component.html</context>
@@ -486,7 +486,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
@@ -1880,7 +1880,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <target state="translated">Insegnante</target>
       </trans-unit>
@@ -1944,7 +1944,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">87</context>
         </context-group>
         <target state="translated">Descrizione</target>
       </trans-unit>
@@ -2460,7 +2460,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <target state="translated">Studente</target>
       </trans-unit>
@@ -5216,106 +5216,6 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">An error occurred. Please refresh this page and try again.</target>
       </trans-unit>
-      <trans-unit id="a65de338dc877fb0f19d5335ff1b3d558cc7d420" datatype="html">
-        <source>Sign in With Google</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-        <target state="needs-translation">Sign in With Google</target>
-      </trans-unit>
-      <trans-unit id="3dc7e5a946cf3b4b076f84ed850b26f6485e3de2" datatype="html">
-        <source>Sorry, your Google User ID was not found in WISE.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <target state="needs-translation">Sorry, your Google User ID was not found in WISE.</target>
-      </trans-unit>
-      <trans-unit id="78c63889b23ad26a16c97c152c6af4b81bcf8858" datatype="html">
-        <source>New to WISE? Join for free!</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-        <target state="needs-translation">New to WISE? Join for free!</target>
-      </trans-unit>
-      <trans-unit id="692e665f8177ee9150169dca0ff15418616cb3cb" datatype="html">
-        <source>Google logo</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-success/unlink-google-account-success.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-student-complete/register-student-complete.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-student/register-student.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-teacher/register-teacher.component.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">64</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">143</context>
-        </context-group>
-        <target state="needs-translation">Google logo</target>
-      </trans-unit>
-      <trans-unit id="0d798d7aa97544c8a6b4b08567239ea1706af1b7" datatype="html">
-        <source>Sign up as a Student</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <target state="needs-translation">Sign up as a Student</target>
-      </trans-unit>
-      <trans-unit id="759603ff04389bab3bd4c0240129181d705187a5" datatype="html">
-        <source>Sign up as a Teacher</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/login/login-google-user-not-found/login-google-user-not-found.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-        <target state="needs-translation">Sign up as a Teacher</target>
-      </trans-unit>
       <trans-unit id="263e1717422fe3b5810e9a2e55b87e477b35d1ed" datatype="html">
         <source>Sign in to WISE</source>
         <context-group purpose="location">
@@ -5365,10 +5265,6 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
           <context context-type="linenumber">14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
-          <context context-type="linenumber">60</context>
         </context-group>
         <target state="translated">Accedi con Google</target>
       </trans-unit>
@@ -6472,6 +6368,46 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation"><x id="TAG_IMG" ctype="image" equiv-text="&lt;img class=&quot;google-icon&quot; src=&quot;assets/img/icons/google-logo.svg&quot; i18n-alt alt=&quot;Google logo&quot; /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>This account was created using Google and doesn't use a WISE password.<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
       </trans-unit>
+      <trans-unit id="692e665f8177ee9150169dca0ff15418616cb3cb" datatype="html">
+        <source>Google logo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-success/unlink-google-account-success.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-student-complete/register-student-complete.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+        <target state="needs-translation">Google logo</target>
+      </trans-unit>
       <trans-unit id="47c3500e23cf10b4e86b3c495687d5045fd2305c" datatype="html">
         <source>Unlink Google Account</source>
         <context-group purpose="location">
@@ -7298,19 +7234,27 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Berkeley, CA 94720-1670</target>
       </trans-unit>
-      <trans-unit id="558a4e3546333e209423ef98d8e846c143ba0804" datatype="html">
-        <source>Hi! There is already a WISE user with this Google account.</source>
+      <trans-unit id="a03d22527a786691bf7a0af0f6addf92fe0320c9" datatype="html">
+        <source>Hi! This Google user already has a WISE account.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Hi! There is already a WISE user with this Google account.</target>
+        <target state="needs-translation">Hi! This Google user already has a WISE account.</target>
+      </trans-unit>
+      <trans-unit id="996edb960eaf03d890917648e5e21764fda9d0a0" datatype="html">
+        <source> Sorry, your Google User ID was not found in WISE. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
+          <context context-type="linenumber">2,4</context>
+        </context-group>
+        <target state="needs-translation"> Sorry, your Google User ID was not found in WISE. </target>
       </trans-unit>
       <trans-unit id="0374570fb5bc65ef42fa03c5923070a11d7f0b5e" datatype="html">
         <source>Create WISE Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">1</context>
+          <context context-type="linenumber">5</context>
         </context-group>
         <target state="needs-translation">Create WISE Account</target>
       </trans-unit>
@@ -7318,7 +7262,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Students can view and complete WISE lessons offered by teachers.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target state="needs-translation">Students can view and complete WISE lessons offered by teachers.</target>
       </trans-unit>
@@ -7326,7 +7270,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Teachers can select, author, and run WISE lessons with their students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <target state="needs-translation">Teachers can select, author, and run WISE lessons with their students.</target>
       </trans-unit>
@@ -7513,18 +7457,6 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">18</context>
         </context-group>
         <target state="needs-translation">Sign Up</target>
-      </trans-unit>
-      <trans-unit id="49ddce3277c9c81865f8d2278255426cdc9e94f2" datatype="html">
-        <source>Sign up with Google</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-student/register-student.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-teacher/register-teacher.component.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-        <target state="needs-translation">Sign up with Google</target>
       </trans-unit>
       <trans-unit id="b6c571f49a9876275382c366aabd8aac85dbbd8f" datatype="html">
         <source>You should receive an email with your account details shortly.</source>
@@ -8194,7 +8126,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Launch Unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="needs-translation">Launch Unit</target>
       </trans-unit>
@@ -8202,11 +8134,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>A teacher cannot be added as a team member.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <target state="needs-translation">A teacher cannot be added as a team member.</target>
       </trans-unit>
@@ -8214,11 +8146,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source><x id="studentName" equiv-text="this.getNameDisplay(                     response                   )"/> is already in a team that is full</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">111,113</context>
+          <context context-type="linenumber">110,112</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">181,183</context>
+          <context context-type="linenumber">173,175</context>
         </context-group>
         <target state="needs-translation"><x id="studentName" equiv-text="this.getNameDisplay(                     response                   )"/> is already in a team that is full</target>
       </trans-unit>
@@ -8226,11 +8158,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source><x id="studentName" equiv-text="this.getNameDisplay(response)"/> is already in the team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">179</context>
         </context-group>
         <target state="needs-translation"><x id="studentName" equiv-text="this.getNameDisplay(response)"/> is already in the team</target>
       </trans-unit>
@@ -8238,11 +8170,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source><x id="studentName" equiv-text="this.getNameDisplay(                     response                   )"/> is already on another team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">125,127</context>
+          <context context-type="linenumber">124,126</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">191,193</context>
+          <context context-type="linenumber">183,185</context>
         </context-group>
         <target state="needs-translation"><x id="studentName" equiv-text="this.getNameDisplay(                     response                   )"/> is already on another team</target>
       </trans-unit>
@@ -8250,7 +8182,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Invalid username. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <target state="needs-translation">Invalid username. Please try again.</target>
       </trans-unit>
@@ -8258,7 +8190,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Invalid password. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target state="needs-translation">Invalid password. Please try again.</target>
       </trans-unit>
@@ -8266,7 +8198,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Incorrect Google user. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">155</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <target state="needs-translation">Incorrect Google user. Please try again.</target>
       </trans-unit>
@@ -8274,7 +8206,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>No WISE user with this Google ID found.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">190</context>
         </context-group>
         <target state="needs-translation">No WISE user with this Google ID found.</target>
       </trans-unit>
@@ -8282,7 +8214,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source><x id="studentName" equiv-text="this.getNameDisplay(                 targetMember               )"/> is already in a team with <x id="studentNames" equiv-text="teamMatesDisplay"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.ts</context>
-          <context context-type="linenumber">302,304</context>
+          <context context-type="linenumber">293,295</context>
         </context-group>
         <target state="needs-translation"><x id="studentName" equiv-text="this.getNameDisplay(                 targetMember               )"/> is already in a team with <x id="studentNames" equiv-text="teamMatesDisplay"/></target>
       </trans-unit>
@@ -14656,7 +14588,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Thanks for submitting your response.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/FeedbackRuleEvaluator.ts</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <target state="needs-translation">Thanks for submitting your response.</target>
       </trans-unit>
@@ -14800,13 +14732,13 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <target state="needs-translation">Term</target>
       </trans-unit>
-      <trans-unit id="75d2b95268e9105792456110196b6d0959f64682" datatype="html">
-        <source>Evaluates to true if idea 1, 2, 18, etc was found in the student’s response.</source>
+      <trans-unit id="a8ea043c9dd022c74447e7e816841d378138ecd9" datatype="html">
+        <source>Evaluates to true if idea 1, 2, 18, etc was found in the student&apos;s response.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
-        <target state="needs-translation">Evaluates to true if idea 1, 2, 18, etc was found in the student’s response.</target>
+        <target state="needs-translation">Evaluates to true if idea 1, 2, 18, etc was found in the student's response.</target>
       </trans-unit>
       <trans-unit id="b76eb1dfebc7cbec7f95dae60708804c3eb23e15" datatype="html">
         <source> Evaluates to true if the student received a KI score of X.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student received KI score 3. </source>
@@ -14816,59 +14748,67 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <target state="needs-translation"> Evaluates to true if the student received a KI score of X.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>hasKIScore(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student received KI score 3. </target>
       </trans-unit>
-      <trans-unit id="0d416f044b1ada4a09ca8aeae1f1eda976c755de" datatype="html">
-        <source> Evaluates to true if more than X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas. </source>
+      <trans-unit id="e5f60118e592df5cd7aed342976c7b0ecc4da547" datatype="html">
+        <source> Evaluates to true if more than X ideas were found in the student&apos;s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">30,33</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if more than X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas. </target>
+        <target state="needs-translation"> Evaluates to true if more than X ideas were found in the student's response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountMoreThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had more than 2 ideas. </target>
       </trans-unit>
-      <trans-unit id="1e95f0f9a80f8d69c7161cee29dae19260b0413c" datatype="html">
-        <source> Evaluates to true if less than X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas. </source>
+      <trans-unit id="6b884914cb98d7d84efe99d0b60f778c30c3a9f3" datatype="html">
+        <source> Evaluates to true if less than X ideas were found in the student&apos;s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">37,40</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if less than X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas. </target>
+        <target state="needs-translation"> Evaluates to true if less than X ideas were found in the student's response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountLessThan(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had less than 2 ideas. </target>
       </trans-unit>
-      <trans-unit id="43741e9a8cbb377bc249abc1b62354e7afdc8fa4" datatype="html">
-        <source> Evaluates to true if exactly X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas. </source>
+      <trans-unit id="c299449835a6844a97d1120d96268ec889e221ee" datatype="html">
+        <source> Evaluates to true if exactly X ideas were found in the student&apos;s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">44,47</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if exactly X ideas were found in the student’s response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas. </target>
+        <target state="needs-translation"> Evaluates to true if exactly X ideas were found in the student's response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>ideaCountEquals(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if the student had exactly 2 ideas. </target>
       </trans-unit>
-      <trans-unit id="c2486592cf45d20e09baab39819c38505fad8a6b" datatype="html">
-        <source> Evaluates to true if this is the student’s second to last response when the max number of submits is specified. </source>
+      <trans-unit id="acb957d799796d719108eeb1d0ed9ca4880c9f0c" datatype="html">
+        <source> Evaluates to true if this is the student&apos;s X-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>isSubmitNumber(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if this is the student&apos;s third response. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">51,54</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if this is the student’s second to last response when the max number of submits is specified. </target>
+        <target state="needs-translation"> Evaluates to true if this is the student's X-th response.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>isSubmitNumber(3)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if this is the student's third response. </target>
       </trans-unit>
-      <trans-unit id="2a3efda5e801cb07e2e472eddd138e8f0f3c7443" datatype="html">
-        <source> Evaluates to true if this is the student’s final response when the max number of submits is specified. </source>
+      <trans-unit id="ee476daed40bb933cf5b304b05c25b0f2e7ae003" datatype="html">
+        <source> Evaluates to true if this is the student&apos;s second to last response when the max number of submits is specified. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">58,61</context>
         </context-group>
-        <target state="needs-translation"> Evaluates to true if this is the student’s final response when the max number of submits is specified. </target>
+        <target state="needs-translation"> Evaluates to true if this is the student's second to last response when the max number of submits is specified. </target>
       </trans-unit>
-      <trans-unit id="b0a572a715e1e342333c536fea0001cf15619361" datatype="html">
-        <source>Evaluates to true if the student’s response was not scorable.</source>
+      <trans-unit id="bc1cca966f287a319703db89b22d379a6c1455cb" datatype="html">
+        <source> Evaluates to true if this is the student&apos;s final response when the max number of submits is specified. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">65,68</context>
         </context-group>
-        <target state="needs-translation">Evaluates to true if the student’s response was not scorable.</target>
+        <target state="needs-translation"> Evaluates to true if this is the student's final response when the max number of submits is specified. </target>
+      </trans-unit>
+      <trans-unit id="3783efe04c66c9d80d09506ec8b7ad29167aacd8" datatype="html">
+        <source>Evaluates to true if the student&apos;s response was not scorable.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <target state="needs-translation">Evaluates to true if the student's response was not scorable.</target>
       </trans-unit>
       <trans-unit id="288b2a5b903bd5a233bc6dde453ce2cca7f59f06" datatype="html">
         <source> Evaluates to true if no other terms were matched. Add this term as the final rule to specify a default feedback. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">69,72</context>
+          <context context-type="linenumber">76,79</context>
         </context-group>
         <target state="needs-translation"> Evaluates to true if no other terms were matched. Add this term as the final rule to specify a default feedback. </target>
       </trans-unit>
@@ -14876,7 +14816,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Operators</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">82</context>
         </context-group>
         <target state="needs-translation">Operators</target>
       </trans-unit>
@@ -14884,7 +14824,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Operators let you combine one or more terms together to make a rule.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <target state="needs-translation">Operators let you combine one or more terms together to make a rule.</target>
       </trans-unit>
@@ -14892,7 +14832,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Operator</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">86</context>
         </context-group>
         <target state="needs-translation">Operator</target>
       </trans-unit>
@@ -14900,7 +14840,7 @@ Are you ready to receive feedback on this answer?</target>
         <source> Evaluates to true if terms on both sides of this operator evaluate to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was found and the student received a KI score of 2. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">84,89</context>
+          <context context-type="linenumber">91,96</context>
         </context-group>
         <target state="needs-translation"> Evaluates to true if terms on both sides of this operator evaluate to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; hasKIScore(2)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was found and the student received a KI score of 2. </target>
       </trans-unit>
@@ -14908,7 +14848,7 @@ Are you ready to receive feedback on this answer?</target>
         <source> Evaluates to true if a term on either side of this operator evaluates to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if either idea 1 or 2 was found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found or idea 3 was found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">93,97</context>
+          <context context-type="linenumber">100,104</context>
         </context-group>
         <target state="needs-translation"> Evaluates to true if a term on either side of this operator evaluates to true.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 || 2<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if either idea 1 or 2 was found.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>1 &amp;&amp; 2 || 3<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if both idea 1 and 2 were found or idea 3 was found. </target>
       </trans-unit>
@@ -14916,7 +14856,7 @@ Are you ready to receive feedback on this answer?</target>
         <source> Evaluates to true if a term following this operator evaluates to false.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>!1<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was not found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">101,104</context>
+          <context context-type="linenumber">108,111</context>
         </context-group>
         <target state="needs-translation"> Evaluates to true if a term following this operator evaluates to false.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>!1<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was not found. </target>
       </trans-unit>
@@ -18888,7 +18828,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You have new chat messages</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.ts</context>
-          <context context-type="linenumber">227</context>
+          <context context-type="linenumber">216</context>
         </context-group>
         <target state="needs-translation">You have new chat messages</target>
       </trans-unit>
