@@ -1,3 +1,4 @@
+import { Component } from '../../../common/Component';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { ComponentRevisionCounter } from '../ComponentRevisionCounter';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
@@ -10,7 +11,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
 
   constructor(
     protected nodeId: string,
-    protected component: any,
+    protected component: Component,
     additionalParams: ComponentDataExportParams
   ) {
     super();
@@ -88,12 +89,11 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   }
 
   generateComponentWorkRows(
-    component: any,
+    component: Component,
     columnNames: string[],
     columnNameToNumber: Map<string, number>,
     nodeId: string
   ): string[] {
-    const componentId = component.id;
     let rows = [];
     let rowCounter = 1;
     for (const workgroupId of this.configService.getClassmateWorkgroupIds()) {
@@ -102,7 +102,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
         columnNames,
         columnNameToNumber,
         nodeId,
-        componentId,
+        component.id,
         rowCounter
       );
       rows = rows.concat(rowsForWorkgroup);
@@ -122,9 +122,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     const rows = [];
     const userInfo = this.configService.getUserInfoByWorkgroupId(workgroupId);
     const extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
-
-    // A mapping from component to component revision counter. The key will be
-    // {{nodeId}}_{{componentId}} and the value will be a number.
     const componentRevisionCounter = new ComponentRevisionCounter();
     const componentStates = this.teacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
       workgroupId,
@@ -151,8 +148,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
         rows.push(row);
         rowCounter++;
       } else {
-        // We do not want to add this component state as a row in the export but we still want to
-        // increment the revision counter.
         this.incrementRevisionCounter(componentRevisionCounter, nodeId, componentId);
       }
     }
@@ -258,19 +253,15 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     row[columnNameToNumber.get('Project Name')] = this.projectService.getProjectTitle();
     row[columnNameToNumber.get('Run ID')] = this.configService.getRunId();
     row[columnNameToNumber.get('Student Work ID')] = componentState.id;
-    if (componentState.serverSaveTime != null) {
-      const formattedDateTime = this.utilService.convertMillisecondsToFormattedDateTime(
-        componentState.serverSaveTime
-      );
-      row[columnNameToNumber.get('Server Timestamp')] = formattedDateTime;
-    }
-    if (componentState.clientSaveTime != null) {
-      const clientSaveTime = new Date(componentState.clientSaveTime);
-      if (clientSaveTime != null) {
-        const clientSaveTimeString =
-          clientSaveTime.toDateString() + ' ' + clientSaveTime.toLocaleTimeString();
-        row[columnNameToNumber.get('Client Timestamp')] = clientSaveTimeString;
-      }
+    const formattedDateTime = this.utilService.convertMillisecondsToFormattedDateTime(
+      componentState.serverSaveTime
+    );
+    row[columnNameToNumber.get('Server Timestamp')] = formattedDateTime;
+    const clientSaveTime = new Date(componentState.clientSaveTime);
+    if (clientSaveTime != null) {
+      const clientSaveTimeString =
+        clientSaveTime.toDateString() + ' ' + clientSaveTime.toLocaleTimeString();
+      row[columnNameToNumber.get('Client Timestamp')] = clientSaveTimeString;
     }
     row[columnNameToNumber.get('Node ID')] = componentState.nodeId;
     row[columnNameToNumber.get('Component ID')] = componentState.componentId;
@@ -281,9 +272,9 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       this.projectService.getComponentPosition(componentState.nodeId, componentState.componentId) +
       1;
     row[columnNameToNumber.get('Component Part Number')] = componentPartNumber;
-    row[columnNameToNumber.get('Component Type')] = this.component.type;
-    if (this.component.prompt != null) {
-      let prompt = this.utilService.removeHTMLTags(this.component.prompt);
+    row[columnNameToNumber.get('Component Type')] = this.component.content.type;
+    if (this.component.content.prompt != null) {
+      let prompt = this.utilService.removeHTMLTags(this.component.content.prompt);
       prompt = prompt.replace(/"/g, '""');
       row[columnNameToNumber.get('Component Prompt')] = prompt;
     }
@@ -299,18 +290,17 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
         }
       }
     }
-    const revisionCounter = this.getRevisionCounter(
-      componentRevisionCounter,
-      componentState.nodeId,
-      componentState.componentId
-    );
     if (componentState.revisionCounter == null) {
       /*
        * use the revision counter obtained from the componentRevisionCounter
        * mapping. this case will happen when we are exporting all student
        * work.
        */
-      row[columnNameToNumber.get('Component Revision Counter')] = revisionCounter;
+      row[columnNameToNumber.get('Component Revision Counter')] = this.getRevisionCounter(
+        componentRevisionCounter,
+        componentState.nodeId,
+        componentState.componentId
+      );
     } else {
       /*
        * use the revision counter from the value in the component state.
@@ -325,8 +315,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       componentState.nodeId,
       componentState.componentId
     );
-    const isSubmit = componentState.isSubmit;
-    if (isSubmit) {
+    if (componentState.isSubmit) {
       row[columnNameToNumber.get('Is Submit')] = 1;
       if (studentData != null) {
         const submitCounter = studentData.submitCounter;
