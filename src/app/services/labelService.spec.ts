@@ -135,7 +135,9 @@ function createFabricLabel() {
     pointSize,
     fontSize,
     labelWidth,
-    studentDataVersion
+    studentDataVersion,
+    1,
+    false
   );
 }
 

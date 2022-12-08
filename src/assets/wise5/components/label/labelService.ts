@@ -402,6 +402,7 @@ export class LabelService extends ComponentService {
   ): any[] {
     const fabricLabels: any[] = [];
     labels.forEach((label) => {
+      const timestamp = label.timestamp ? label.timestamp : this.getTimestamp();
       const fabricLabel = this.createLabel(
         label.pointX,
         label.pointY,
@@ -416,7 +417,9 @@ export class LabelService extends ComponentService {
         pointSize,
         fontSize,
         labelWidth,
-        studentDataVersion
+        studentDataVersion,
+        timestamp,
+        label.isStarterLabel
       );
       this.addLabelToCanvas(canvas, fabricLabel, enableCircles);
       fabricLabels.push(fabricLabel);
@@ -438,7 +441,9 @@ export class LabelService extends ComponentService {
     pointSize: number = 5,
     fontSize: number = 20,
     labelWidth: number,
-    studentDataVersion: number = 2
+    studentDataVersion: number = 2,
+    timestamp: number,
+    isStarterLabel: boolean
   ): any {
     // get the position of the point
     let x1: number = pointX;
@@ -525,7 +530,9 @@ export class LabelService extends ComponentService {
       text: text,
       textString: textString,
       canEdit: canEdit,
-      canDelete: canDelete
+      canDelete: canDelete,
+      timestamp: timestamp,
+      isStarterLabel: isStarterLabel
     };
   }
 
@@ -556,5 +563,9 @@ export class LabelService extends ComponentService {
 
   setBackgroundImage(canvas: any, backgroundPath: string): void {
     canvas.setBackgroundImage(backgroundPath, canvas.renderAll.bind(canvas));
+  }
+
+  getTimestamp(): number {
+    return new Date().getTime();
   }
 }
