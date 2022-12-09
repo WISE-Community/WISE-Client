@@ -292,13 +292,26 @@ export class LabelStudent extends ComponentStudent {
       this.setStudentWork(componentState);
     } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
-      if (this.componentContent.labels != null) {
-        this.addLabelsToCanvas(componentContent.labels);
+      if (componentContent.labels != null) {
+        this.setStarterLabels(componentContent);
       }
     } else if (this.LabelService.componentStateIsSameAsStarter(componentState, componentContent)) {
       this.setStudentWork(componentState);
     } else if (componentState == null && componentContent.labels != null) {
-      this.addLabelsToCanvas(componentContent.labels);
+      this.setStarterLabels(componentContent);
+    }
+  }
+
+  private setStarterLabels(componentContent: any): void {
+    // Make sure starter labels have isStarterLabel set to true. Starter labels from old Label
+    // component content did not have this field.
+    this.setIsStarterLabelTrue(componentContent.labels);
+    this.addLabelsToCanvas(componentContent.labels);
+  }
+
+  private setIsStarterLabelTrue(labels: any[]): void {
+    for (const label of labels) {
+      label.isStarterLabel = true;
     }
   }
 
@@ -346,7 +359,12 @@ export class LabelStudent extends ComponentStudent {
     this.canvas.getObjects('i-text').forEach((object: any) => {
       labels.push(this.getLabelJSONObjectFromText(object));
     });
+    labels.sort(this.sortByTimestampAscending);
     return labels;
+  }
+
+  private sortByTimestampAscending(labelA: any, labelB: any): number {
+    return labelA.timestamp - labelB.timestamp;
   }
 
   /**
@@ -403,7 +421,9 @@ export class LabelStudent extends ComponentStudent {
       text: label.textString,
       color: label.text.backgroundColor,
       canEdit: label.canEdit,
-      canDelete: label.canDelete
+      canDelete: label.canDelete,
+      timestamp: label.timestamp,
+      isStarterLabel: label.isStarterLabel
     };
   }
 
@@ -457,6 +477,7 @@ export class LabelStudent extends ComponentStudent {
     const newLabelLocation = this.getNewLabelLocation();
     const canEdit = true;
     const canDelete = true;
+    const isStarterLabel = false;
     const newLabel = this.LabelService.createLabel(
       newLabelLocation.pointX,
       newLabelLocation.pointY,
@@ -471,7 +492,9 @@ export class LabelStudent extends ComponentStudent {
       this.componentContent.pointSize,
       this.componentContent.fontSize,
       this.componentContent.labelWidth,
-      this.studentDataVersion
+      this.studentDataVersion,
+      this.LabelService.getTimestamp(),
+      isStarterLabel
     );
     this.LabelService.addLabelToCanvas(this.canvas, newLabel, this.enableCircles);
     this.addListenersToLabel(newLabel);
@@ -830,7 +853,7 @@ export class LabelStudent extends ComponentStudent {
         this.setBackgroundImage(this.componentContent.backgroundImage);
       }
       this.unselectAll();
-      this.addLabelsToCanvas(this.componentContent.labels);
+      this.setStarterLabels(this.componentContent);
       if (this.component.hasConnectedComponent()) {
         this.handleConnectedComponents();
       }

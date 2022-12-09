@@ -55,7 +55,8 @@ export class LabelAuthoring extends ComponentAuthoring {
       textX: 200,
       textY: 200,
       canEdit: false,
-      canDelete: false
+      canDelete: false,
+      isStarterLabel: true
     };
     this.componentContent.labels.push(newLabel);
     this.componentChanged();
