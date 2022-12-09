@@ -1,12 +1,12 @@
-import { FeedbackRule } from './FeedbackRule';
+import { FeedbackRuleExpression } from './FeedbackRuleExpression';
 
-describe('FeedbackRule', () => {
-  getPostfixExpression();
+describe('FeedbackRuleExpression', () => {
+  getPostfix();
 });
 
-function getPostfixExpression() {
-  describe('getPostfixRule()', () => {
-    it('should convert rule to postfix format', () => {
+function getPostfix() {
+  describe('getPostfix()', () => {
+    it('should convert text to array in postfix order', () => {
       expectPostfixExpression('1 && 2 && 3', ['1', '2', '&&', '3', '&&']);
       expectPostfixExpression('1 || 2 && 3', ['1', '2', '||', '3', '&&']);
       expectPostfixExpression('!1 && !2', ['1', '!', '2', '!', '&&']);
@@ -18,8 +18,7 @@ function getPostfixExpression() {
   });
 }
 
-function expectPostfixExpression(expression: string, expectedResult: string[]) {
-  const feedbackRule = new FeedbackRule();
-  feedbackRule.expression = expression;
-  expect(feedbackRule.getPostfixExpression()).toEqual(expectedResult);
+function expectPostfixExpression(text: string, expectedResult: string[]) {
+  const expression = new FeedbackRuleExpression(text);
+  expect(expression.getPostfix()).toEqual(expectedResult);
 }
