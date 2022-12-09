@@ -1,0 +1,18 @@
+.table--list {
+  width: 100%;
+}
+
+.user-list {
+  &.mat-list-base {
+    .mat-list-item .mat-list-item-content {
+      padding: 0 8px;
+    }
+  }
+}
+
+.workgroup-row {
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(158,158,158,0.2);
+  }
+}
