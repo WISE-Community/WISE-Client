@@ -43,6 +43,15 @@ export class FeedbackRule {
           }
         }
         operatorStack.push(symbol);
+      } else if (FeedbackRule.isLeftParenthesis(symbol)) {
+        operatorStack.push(symbol);
+      } else if (FeedbackRule.isRightParenthesis(symbol)) {
+        let topOperatorOnStack = operatorStack[operatorStack.length - 1];
+        while (!FeedbackRule.isLeftParenthesis(topOperatorOnStack)) {
+          result.push(operatorStack.pop());
+          topOperatorOnStack = operatorStack[operatorStack.length - 1];
+        }
+        operatorStack.pop(); // discard left parenthesis
       } else {
         result.push(symbol);
       }
@@ -56,8 +65,18 @@ export class FeedbackRule {
   private getExpressionAsArray(): string[] {
     return this.expression
       .replace(/ /g, '')
-      .split(/(&&|\|\||!)/g)
+      .split(
+        /(hasKIScore\(\d\)|ideaCountEquals\(\d\)|ideaCountLessThan\(\d\)|ideaCountMoreThan\(\d\)|isSubmitNumber\(\d+\)|&&|\|\||!|\(|\))/g
+      )
       .filter((el) => el !== '');
+  }
+
+  static isLeftParenthesis(symbol: string): boolean {
+    return symbol === '(';
+  }
+
+  static isRightParenthesis(symbol: string): boolean {
+    return symbol === ')';
   }
 
   static isOperator(symbol: string): boolean {

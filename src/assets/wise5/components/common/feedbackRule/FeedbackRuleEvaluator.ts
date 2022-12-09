@@ -104,9 +104,8 @@ export class FeedbackRuleEvaluator {
     response: CRaterResponse | CRaterResponse[],
     feedbackRule: FeedbackRule
   ): boolean {
-    const postfixExpression = feedbackRule.getPostfixExpression();
     const termStack = [];
-    for (const term of postfixExpression) {
+    for (const term of feedbackRule.getPostfixExpression()) {
       if (FeedbackRule.isOperand(term)) {
         termStack.push(term);
       } else {

@@ -7,9 +7,13 @@ describe('FeedbackRule', () => {
 function getPostfixExpression() {
   describe('getPostfixRule()', () => {
     it('should convert rule to postfix format', () => {
-      expectPostfixExpression('idea1 && idea2 && idea3', ['idea1', 'idea2', '&&', 'idea3', '&&']);
-      expectPostfixExpression('idea1 || idea2 && idea3', ['idea1', 'idea2', '||', 'idea3', '&&']);
-      expectPostfixExpression('!idea1 && !idea2', ['idea1', '!', 'idea2', '!', '&&']);
+      expectPostfixExpression('1 && 2 && 3', ['1', '2', '&&', '3', '&&']);
+      expectPostfixExpression('1 || 2 && 3', ['1', '2', '||', '3', '&&']);
+      expectPostfixExpression('!1 && !2', ['1', '!', '2', '!', '&&']);
+      expectPostfixExpression('1 && isSubmitNumber(2)', ['1', 'isSubmitNumber(2)', '&&']);
+      expectPostfixExpression('(1 && 2) || (3 && 4)', ['1', '2', '&&', '3', '4', '&&', '||']);
+      expectPostfixExpression('!(1 || 2) && 3', ['1', '2', '||', '!', '3', '&&']);
+      expectPostfixExpression('(!1 || (2 && 3)) || 4', ['1', '!', '2', '3', '&&', '||', '4', '||']);
     });
   });
 }
