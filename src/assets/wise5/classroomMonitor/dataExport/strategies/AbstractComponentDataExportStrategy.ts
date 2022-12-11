@@ -1,6 +1,7 @@
 import { Component } from '../../../common/Component';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { ComponentRevisionCounter } from '../ComponentRevisionCounter';
+import { UserIdsAndStudentNames } from '../UserIdsAndStudentNames';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
 export abstract class AbstractComponentDataExportStrategy extends AbstractDataExportStrategy {
@@ -33,22 +34,11 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     componentState: any
   ): string[];
 
-  generateComponentHeaderRow(
-    columnNames: string[],
-    columnNameToNumber: Map<string, number>
-  ): string[] {
-    this.populateColumnNames(columnNames, columnNameToNumber);
-    const headerRow = [];
-    for (const columnName of columnNames) {
-      headerRow.push(columnName);
-    }
-    return headerRow;
+  generateComponentHeaderRow(columnNames: string[]): string[] {
+    return [...columnNames];
   }
 
-  private populateColumnNames(
-    columnNames: string[],
-    columnNameToNumber: Map<string, number>
-  ): void {
+  populateColumnNames(columnNames: string[], columnNameToNumber: Map<string, number>): void {
     const defaultColumnNames = [
       '#',
       'Workgroup ID',
@@ -108,7 +98,10 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   ): string[] {
     const rows = [];
     const userInfo = this.configService.getUserInfoByWorkgroupId(workgroupId);
-    const extractedUserIDsAndStudentNames = this.extractUserIDsAndStudentNames(userInfo.users);
+    const extractedUserIdsAndStudentNames = new UserIdsAndStudentNames(
+      userInfo.users,
+      this.canViewStudentNames
+    );
     const componentRevisionCounter = new ComponentRevisionCounter();
     const componentStates = this.teacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
       workgroupId,
@@ -120,12 +113,12 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
         const row = this.generateComponentWorkRow(
           rowCounter,
           workgroupId,
-          extractedUserIDsAndStudentNames['userId1'],
-          extractedUserIDsAndStudentNames['userId2'],
-          extractedUserIDsAndStudentNames['userId3'],
-          extractedUserIDsAndStudentNames['studentName1'],
-          extractedUserIDsAndStudentNames['studentName2'],
-          extractedUserIDsAndStudentNames['studentName3'],
+          extractedUserIdsAndStudentNames.getUserId(1),
+          extractedUserIdsAndStudentNames.getUserId(2),
+          extractedUserIdsAndStudentNames.getUserId(3),
+          extractedUserIdsAndStudentNames.getStudentName(1),
+          extractedUserIdsAndStudentNames.getStudentName(2),
+          extractedUserIdsAndStudentNames.getStudentName(3),
           userInfo.periodName,
           componentRevisionCounter,
           componentState
@@ -133,28 +126,10 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
         rows.push(row);
         rowCounter++;
       } else {
-        this.incrementRevisionCounter(componentRevisionCounter, nodeId, componentId);
+        componentRevisionCounter.incrementCounter(nodeId, componentId);
       }
     }
     return rows;
-  }
-
-  /**
-   * @param users An array of user objects. Each user object contains an id and name.
-   * @returns {object} An object that contains key/value pairs. The key is userIdX
-   * or studentNameX where X is an integer. The values are the corresponding actual
-   * values of user id and student name.
-   */
-  private extractUserIDsAndStudentNames(users: any[]): any {
-    const extractedUserIDsAndStudentNames = {};
-    for (let u = 0; u < users.length; u++) {
-      const user = users[u];
-      extractedUserIDsAndStudentNames['userId' + (u + 1)] = user.id;
-      if (this.canViewStudentNames) {
-        extractedUserIDsAndStudentNames['studentName' + (u + 1)] = user.name;
-      }
-    }
-    return extractedUserIDsAndStudentNames;
   }
 
   private shouldExportRow(
@@ -180,14 +155,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       this.workSelectionType === 'exportLatestWork' &&
       componentStateIndex !== numComponentStates - 1
     );
-  }
-
-  private incrementRevisionCounter(
-    componentRevisionCounter: ComponentRevisionCounter,
-    nodeId: string,
-    componentId: string
-  ): void {
-    componentRevisionCounter.incrementCounter(`${nodeId}_${componentId}`);
   }
 
   /**
@@ -233,16 +200,13 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     row[this.columnNameToNumber.get('Project Name')] = this.projectService.getProjectTitle();
     row[this.columnNameToNumber.get('Run ID')] = this.configService.getRunId();
     row[this.columnNameToNumber.get('Student Work ID')] = componentState.id;
-    const formattedDateTime = this.utilService.convertMillisecondsToFormattedDateTime(
-      componentState.serverSaveTime
-    );
-    row[this.columnNameToNumber.get('Server Timestamp')] = formattedDateTime;
+    row[
+      this.columnNameToNumber.get('Server Timestamp')
+    ] = this.utilService.convertMillisecondsToFormattedDateTime(componentState.serverSaveTime);
     const clientSaveTime = new Date(componentState.clientSaveTime);
-    if (clientSaveTime != null) {
-      const clientSaveTimeString =
-        clientSaveTime.toDateString() + ' ' + clientSaveTime.toLocaleTimeString();
-      row[this.columnNameToNumber.get('Client Timestamp')] = clientSaveTimeString;
-    }
+    const clientSaveTimeString =
+      clientSaveTime.toDateString() + ' ' + clientSaveTime.toLocaleTimeString();
+    row[this.columnNameToNumber.get('Client Timestamp')] = clientSaveTimeString;
     row[this.columnNameToNumber.get('Node ID')] = componentState.nodeId;
     row[this.columnNameToNumber.get('Component ID')] = componentState.componentId;
     row[this.columnNameToNumber.get('Step Title')] = this.projectService.getNodePositionAndTitle(
@@ -276,11 +240,9 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
        * mapping. this case will happen when we are exporting all student
        * work.
        */
-      row[this.columnNameToNumber.get('Component Revision Counter')] = this.getRevisionCounter(
-        componentRevisionCounter,
-        componentState.nodeId,
-        componentState.componentId
-      );
+      row[
+        this.columnNameToNumber.get('Component Revision Counter')
+      ] = componentRevisionCounter.getCounter(componentState.nodeId, componentState.componentId);
     } else {
       /*
        * use the revision counter from the value in the component state.
@@ -291,11 +253,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       row[this.columnNameToNumber.get('Component Revision Counter')] =
         componentState.revisionCounter;
     }
-    this.incrementRevisionCounter(
-      componentRevisionCounter,
-      componentState.nodeId,
-      componentState.componentId
-    );
+    componentRevisionCounter.incrementCounter(componentState.nodeId, componentState.componentId);
     if (componentState.isSubmit) {
       row[this.columnNameToNumber.get('Is Submit')] = 1;
       if (studentData != null) {
@@ -337,25 +295,6 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     if (studentName3 != null && this.includeStudentNames) {
       row[this.columnNameToNumber.get('Student Name 3')] = studentName3;
     }
-  }
-
-  /**
-   * Get the revision number for the next component state revision.
-   * @param componentRevisionCounter The mapping from component to revision
-   * counter.
-   * @param nodeId The node id the component is in.
-   * @param componentId The component id of the component.
-   */
-  private getRevisionCounter(
-    componentRevisionCounter: ComponentRevisionCounter,
-    nodeId: string,
-    componentId: string
-  ): number {
-    const nodeIdAndComponentId = `${nodeId}_${componentId}`;
-    if (!componentRevisionCounter.has(nodeIdAndComponentId)) {
-      componentRevisionCounter.set(nodeIdAndComponentId, 1);
-    }
-    return componentRevisionCounter.get(nodeIdAndComponentId);
   }
 
   generateExportFileName(nodeId: string, componentId: string, componentType: string): string {
