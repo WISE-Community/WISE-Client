@@ -1,6 +1,7 @@
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { CRaterResponse } from '../cRater/CRaterResponse';
 import { FeedbackRule } from './FeedbackRule';
+import { FeedbackRuleExpression } from './FeedbackRuleExpression';
 import { TermEvaluator } from './TermEvaluator/TermEvaluator';
 import { TermEvaluatorFactory } from './TermEvaluator/TermEvaluatorFactory';
 
@@ -104,10 +105,9 @@ export class FeedbackRuleEvaluator {
     response: CRaterResponse | CRaterResponse[],
     feedbackRule: FeedbackRule
   ): boolean {
-    const postfixExpression = feedbackRule.getPostfixExpression();
     const termStack = [];
-    for (const term of postfixExpression) {
-      if (FeedbackRule.isOperand(term)) {
+    for (const term of feedbackRule.getPostfixExpression()) {
+      if (FeedbackRuleExpression.isOperand(term)) {
         termStack.push(term);
       } else {
         this.evaluateOperator(term, termStack, response);

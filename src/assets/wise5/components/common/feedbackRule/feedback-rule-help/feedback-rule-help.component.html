@@ -9,7 +9,7 @@
     #1 will be shown to the student.<br />
     If the rule matches a second time (in a subsequent round), Feedback #2 will be shown, and so on.
   </p>
-  <p i18n><b>Expressions</b> are made up of terms and operators:</p>
+  <p i18n><b>Expressions</b> are made up of terms, operators, and parentheses:</p>
   <h3 i18n>Terms</h3>
   <p i18n>Terms lets you specify what to look for in a student response.</p>
   <table class="app-bg-bg">
@@ -109,6 +109,27 @@
         Evaluates to true if a term following this operator evaluates to false.<br />
         Ex: <b>!1</b> evaluates to true if idea 1 was not found.
       </td>
+    </tr>
+  </table>
+  <h3 i18n>Parentheses</h3>
+  <p i18n>Parentheses let you group expressions and prioritize evaluation.</p>
+  <p i18n>You can add multiple parentheses in an expression. You can even nest parentheses.</p>
+  <table class="app-bg-bg">
+    <tr>
+      <th i18n>Example</th>
+      <th i18n>Description</th>
+    </tr>
+    <tr>
+      <td class="operator">!(4a || 12)</td>
+      <td i18n>Evaluates to true if neither idea 4a nor idea 12 were found.</td>
+    </tr>
+    <tr>
+      <td class="operator">5a && (4a || 12)</td>
+      <td i18n>Evaluates to true if idea 5a and either idea 4a or idea 12 was found.</td>
+    </tr>
+    <tr>
+      <td class="operator">(5a && (4a || 12)) && hasKIScore(3)</td>
+      <td i18n>Evaluates to true if idea 5a and either idea 4a or idea 12 was found, and the student received a KI score of 3.</td>
     </tr>
   </table>
 </mat-dialog-content>
