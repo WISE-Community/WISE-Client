@@ -20,7 +20,6 @@ export class ProjectService {
   additionalProcessingFunctionsMap: any = {};
   allPaths: string[] = [];
   applicationNodes: any = [];
-  filters: any[] = [{ name: 'all', label: 'All' }];
   flattenedProjectAsNodeIds: any = null;
   groupNodes: any[] = [];
   idToNode: any = {};
@@ -74,10 +73,6 @@ export class ProjectService {
 
   getStyle(): any {
     return this.project.style;
-  }
-
-  getFilters(): any[] {
-    return this.filters;
   }
 
   getProjectTitle(): string {
