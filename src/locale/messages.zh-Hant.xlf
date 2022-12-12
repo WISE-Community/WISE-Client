@@ -338,7 +338,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-close/dialog-with-close.component.html</context>
@@ -1945,6 +1945,10 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">87</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">120</context>
         </context-group>
         <target state="translated">描述</target>
       </trans-unit>
@@ -14596,7 +14600,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Thanks for submitting your response.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/FeedbackRuleEvaluator.ts</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <target state="needs-translation">Thanks for submitting your response.</target>
       </trans-unit>
@@ -14708,13 +14712,13 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <target state="needs-translation">You can add multiple <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Feedback<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> items per rule. The first time a rule matches, Feedback #1 will be shown to the student.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> If the rule matches a second time (in a subsequent round), Feedback #2 will be shown, and so on. </target>
       </trans-unit>
-      <trans-unit id="f7b73495b143340f88fb636d660bde8a62016d55" datatype="html">
-        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expressions<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> are made up of terms and operators:</source>
+      <trans-unit id="d8b6142c3d02b165711db70e94cc65d49a2dfabe" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expressions<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> are made up of terms, operators, and parentheses:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <target state="needs-translation"><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expressions<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> are made up of terms and operators:</target>
+        <target state="needs-translation"><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expressions<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> are made up of terms, operators, and parentheses:</target>
       </trans-unit>
       <trans-unit id="69580f2c2dbf4edf7096820ba8c393367352d774" datatype="html">
         <source>Terms</source>
@@ -14867,6 +14871,62 @@ Are you ready to receive feedback on this answer?</target>
           <context context-type="linenumber">108,111</context>
         </context-group>
         <target state="needs-translation"> Evaluates to true if a term following this operator evaluates to false.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Ex: <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>!1<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> evaluates to true if idea 1 was not found. </target>
+      </trans-unit>
+      <trans-unit id="46b1ed215e53246db19c5bde05ea87e08a5c2705" datatype="html">
+        <source>Parentheses</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+        <target state="needs-translation">Parentheses</target>
+      </trans-unit>
+      <trans-unit id="8df5a6f6a83598ccc0f22b86f8ca75661ef5a302" datatype="html">
+        <source>Parentheses let you group expressions and prioritize evaluation.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+        <target state="needs-translation">Parentheses let you group expressions and prioritize evaluation.</target>
+      </trans-unit>
+      <trans-unit id="dae69adfd569cdbaa366470ec24471bf01c7db66" datatype="html">
+        <source>You can add multiple parentheses in an expression. You can even nest parentheses.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+        <target state="needs-translation">You can add multiple parentheses in an expression. You can even nest parentheses.</target>
+      </trans-unit>
+      <trans-unit id="6db909a826f1878ad78bf853a62b6cc5cbda3d3f" datatype="html">
+        <source>Example</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+        <target state="needs-translation">Example</target>
+      </trans-unit>
+      <trans-unit id="f5d726bee0fd8a545258990d929f39b68549dd87" datatype="html">
+        <source>Evaluates to true if neither idea 4a nor idea 12 were found.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+        <target state="needs-translation">Evaluates to true if neither idea 4a nor idea 12 were found.</target>
+      </trans-unit>
+      <trans-unit id="a8eebb4afda178aca31b3fdc61eb0f6d91837041" datatype="html">
+        <source>Evaluates to true if idea 5a and either idea 4a or idea 12 was found.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+        <target state="needs-translation">Evaluates to true if idea 5a and either idea 4a or idea 12 was found.</target>
+      </trans-unit>
+      <trans-unit id="8dd00a754ebd92878be379ef601abcaccde63b44" datatype="html">
+        <source>Evaluates to true if idea 5a and either idea 4a or idea 12 was found, and the student received a KI score of 3.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+        <target state="needs-translation">Evaluates to true if idea 5a and either idea 4a or idea 12 was found, and the student received a KI score of 3.</target>
       </trans-unit>
       <trans-unit id="dc34bee07a6ceed8f010d89d1fcbda15a5abee8c" datatype="html">
         <source>Teaching Tips</source>
