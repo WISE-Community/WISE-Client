@@ -5,8 +5,8 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { RandomKeyService } from '../../../services/randomKeyService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 
 @Component({
   selector: 'multiple-choice-authoring',
@@ -22,8 +22,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
     this.subscriptions.add(
@@ -48,7 +47,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
   }
 
   componentHasFeedback(): boolean {
-    for (const choice of this.authoringComponentContent.choices) {
+    for (const choice of this.componentContent.choices) {
       if (choice.isCorrect || (choice.feedback != null && choice.feedback !== '')) {
         return true;
       }
@@ -58,18 +57,18 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
 
   addChoice(): void {
     const newChoice = {
-      id: this.UtilService.generateKey(10),
+      id: RandomKeyService.generate(),
       text: '',
       feedback: '',
       isCorrect: false
     };
-    this.authoringComponentContent.choices.push(newChoice);
+    this.componentContent.choices.push(newChoice);
     this.componentChanged();
   }
 
   deleteChoice(choiceId: string): void {
     if (confirm($localize`Are you sure you want to delete this choice?`)) {
-      const choices = this.authoringComponentContent.choices;
+      const choices = this.componentContent.choices;
       for (let c = 0; c < choices.length; c++) {
         if (choices[c].id === choiceId) {
           choices.splice(c, 1);
@@ -81,7 +80,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
   }
 
   moveChoiceUp(choiceId: string): void {
-    const choices = this.authoringComponentContent.choices;
+    const choices = this.componentContent.choices;
     for (let c = 0; c < choices.length; c++) {
       const choice = choices[c];
       if (choice.id === choiceId) {
@@ -96,7 +95,7 @@ export class MultipleChoiceAuthoring extends ComponentAuthoring {
   }
 
   moveChoiceDown(choiceId: string): void {
-    const choices = this.authoringComponentContent.choices;
+    const choices = this.componentContent.choices;
     for (let c = 0; c < choices.length; c++) {
       const choice = choices[c];
       if (choice.id === choiceId) {

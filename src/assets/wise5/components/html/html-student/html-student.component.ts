@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
 import { WiseLinkService } from '../../../../../app/services/wiseLinkService';
@@ -19,13 +19,6 @@ import { ComponentService } from '../../componentService';
 })
 export class HtmlStudent extends ComponentStudent {
   html: SafeHtml = '';
-  wiseLinkClickedHandler: any;
-  @ViewChild('wiseLinkCommunicator')
-  set aRef(ref: ElementRef) {
-    this.wiseLinkCommunicator = ref.nativeElement;
-  }
-  wiseLinkCommunicator: any;
-  wiseLinkCommunicatorId: string;
 
   constructor(
     protected AnnotationService: AnnotationService,
@@ -37,7 +30,7 @@ export class HtmlStudent extends ComponentStudent {
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService,
-    private WiseLinkService: WiseLinkService
+    private wiseLinkService: WiseLinkService
   ) {
     super(
       AnnotationService,
@@ -54,25 +47,7 @@ export class HtmlStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.wiseLinkCommunicatorId = `wise-link-communicator-html-student-${this.nodeId}-${this.componentId}`;
-    this.html = this.WiseLinkService.generateHtmlWithWiseLink(
-      this.componentContent.html,
-      this.wiseLinkCommunicatorId
-    );
+    this.html = this.wiseLinkService.generateHtmlWithWiseLink(this.componentContent.html);
     this.broadcastDoneRenderingComponent();
-  }
-
-  ngAfterViewInit() {
-    this.wiseLinkClickedHandler = this.WiseLinkService.createWiseLinkClickedHandler(this.nodeId);
-    this.WiseLinkService.addWiseLinkClickedListener(
-      this.wiseLinkCommunicator,
-      this.wiseLinkClickedHandler
-    );
-  }
-
-  ngOnDestroy(): void {
-    if (this.wiseLinkClickedHandler != null) {
-      this.wiseLinkCommunicator.removeEventListener('wiselinkclicked', this.wiseLinkClickedHandler);
-    }
   }
 }

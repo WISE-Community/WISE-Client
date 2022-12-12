@@ -3,9 +3,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AnnotationService } from '../../../services/annotationService';
 import { LabelStudent } from './label-student.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../common/Component';
 
 let component: LabelStudent;
 let fixture: ComponentFixture<LabelStudent>;
@@ -18,16 +18,15 @@ describe('LabelStudentComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(LabelStudent);
-    spyOn(TestBed.get(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({});
     component = fixture.componentInstance;
-    component.nodeId = 'node1';
-    component.componentContent = {
+    const componentContent = {
       id: 'component1',
       type: 'Label',
       prompt: 'Create some labels.',
       width: 800,
       height: 600
     };
+    component.component = new Component(componentContent, null);
     spyOn(component, 'giveFocusToLabelTextInput').and.callFake(() => {});
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});

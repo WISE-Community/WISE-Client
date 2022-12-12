@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { MultipleChoiceContent } from '../MultipleChoiceContent';
 
 @Component({
   template: 'edit-multiple-choice-advanced',
@@ -8,4 +9,5 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 })
 export class EditMultipleChoiceAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['MultipleChoice'];
+  componentContent: MultipleChoiceContent;
 }

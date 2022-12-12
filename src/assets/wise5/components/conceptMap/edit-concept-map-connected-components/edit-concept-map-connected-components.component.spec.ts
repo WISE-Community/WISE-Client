@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ProjectService } from '../../../services/projectService';
+import { ConceptMapContent } from '../ConceptMapContent';
 import { EditConceptMapConnectedComponentsComponent } from './edit-concept-map-connected-components.component';
 
 let component: EditConceptMapConnectedComponentsComponent;
@@ -56,11 +57,11 @@ function createLink(id: string, label: string, color: string = 'blue'): any {
 function askIfWantToCopyNodesAndLinks() {
   describe('askIfWantToCopyNodesAndLinks', () => {
     beforeEach(() => {
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
         id: componentId1,
         nodes: [createNode('node1', 'Tree', 'tree.png')],
         links: [createLink('link1', 'Energy', 'green')]
-      });
+      } as ConceptMapContent);
     });
     it('should copy nodes and links', () => {
       expectNumberOfNodesAndLinks(component.componentContent, 0, 0);

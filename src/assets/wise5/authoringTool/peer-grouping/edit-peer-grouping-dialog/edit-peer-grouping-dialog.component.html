@@ -4,15 +4,37 @@
     <mat-label i18n>Grouping Name</mat-label>
     <input matInput [(ngModel)]="peerGrouping.name" />
   </mat-form-field>
-  <div>
+  <div fxLayoutGap="20px">
     <mat-form-field>
       <mat-label i18n>Logic</mat-label>
-      <mat-select [(ngModel)]="peerGrouping.logic">
+      <mat-select [(ngModel)]="logicType">
         <mat-option *ngFor="let logic of availableLogic" [value]="logic.value">
           {{ logic.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <ng-container *ngIf="logicType === 'differentIdeas' || logicType === 'differentKIScores'">
+      <edit-connected-component-node-select
+          [connectedComponent]="referenceComponent"
+          (connectedComponentChange)="referenceComponentNodeIdChanged($event)">
+      </edit-connected-component-node-select>
+      <edit-connected-component-component-select
+          [connectedComponent]="referenceComponent"
+          [allowedConnectedComponentTypes]="allowedReferenceComponentTypes">
+      </edit-connected-component-component-select>
+    </ng-container>
+    <ng-container *ngIf="logicType === 'differentKIScores'">
+      <mat-form-field>
+        <mat-label i18n>Mode</mat-label>
+        <mat-select [(ngModel)]="mode">
+          <ng-container *ngFor="let mode of availableModes">
+            <mat-option [value]="mode.value">
+              {{ mode.name }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
   </div>
   <div>
     <mat-form-field>

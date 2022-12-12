@@ -1,24 +1,24 @@
 <div fxLayout="column" fxLayoutGap="16px">
-  <edit-component-prompt [prompt]="authoringComponentContent.prompt"
+  <edit-component-prompt [prompt]="componentContent.prompt"
       (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
   <mat-form-field>
     <mat-label i18n>Item ID</mat-label>
     <input matInput
-        [(ngModel)]="authoringComponentContent.itemId"
+        [(ngModel)]="componentContent.itemId"
         (ngModelChange)="inputChange.next($event)"
         type="text" />
   </mat-form-field>
-  <edit-component-max-submit [(maxSubmitCount)]="authoringComponentContent.maxSubmitCount"
+  <edit-component-max-submit [(maxSubmitCount)]="componentContent.maxSubmitCount"
       (maxSubmitCountChange)="componentChanged()"></edit-component-max-submit>
   <mat-checkbox color="primary"
-      [(ngModel)]="authoringComponentContent.isComputerAvatarEnabled"
+      [(ngModel)]="componentContent.isComputerAvatarEnabled"
       (ngModelChange)="componentChanged()"
       i18n>Enable Computer Avatar</mat-checkbox>
-  <edit-dialog-guidance-computer-avatar *ngIf="authoringComponentContent.isComputerAvatarEnabled"
-      [computerAvatarSettings]="authoringComponentContent.computerAvatarSettings">
+  <edit-dialog-guidance-computer-avatar *ngIf="componentContent.isComputerAvatarEnabled"
+      [computerAvatarSettings]="componentContent.computerAvatarSettings">
   </edit-dialog-guidance-computer-avatar>
-  <edit-dialog-guidance-feedback-rules
-      [feedbackRules]="authoringComponentContent.feedbackRules"
-      [version]="authoringComponentContent.version">
-  </edit-dialog-guidance-feedback-rules>
+  <edit-feedback-rules
+      [feedbackRules]="componentContent.feedbackRules"
+      [version]="componentContent.version">
+  </edit-feedback-rules>
 </div>

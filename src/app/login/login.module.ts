@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
-import { LoginGoogleUserNotFoundComponent } from './login-google-user-not-found/login-google-user-not-found.component';
 import { LoginHomeComponent } from './login-home/login-home.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -13,6 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { GoogleSignInModule } from '../modules/google-sign-in/google-sign-in.module';
 
 const materialModules = [
   MatButtonModule,
@@ -28,18 +28,14 @@ const materialModules = [
     CommonModule,
     FlexLayoutModule,
     FormsModule,
+    GoogleSignInModule,
     LoginRoutingModule,
     ReactiveFormsModule,
     materialModules,
     RecaptchaModule,
     RecaptchaFormsModule
   ],
-  declarations: [
-    LoginComponent,
-    LoginHomeComponent,
-    LoginGoogleUserNotFoundComponent,
-    LoginComponent
-  ],
+  declarations: [LoginComponent, LoginHomeComponent, LoginComponent],
   exports: [LoginComponent]
 })
 export class LoginModule {}

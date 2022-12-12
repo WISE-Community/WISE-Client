@@ -12,10 +12,16 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
+import { PasswordService } from '../../services/password.service';
+import {
+  nameTests,
+  validateAndExpect
+} from '../register-user-form/register-user-form-spec-helpers';
 
 let router: Router;
 let component: RegisterStudentFormComponent;
 let fixture: ComponentFixture<RegisterStudentFormComponent>;
+const PASSWORD: string = 'Abcd1234';
 let studentService: StudentService;
 let snackBar: MatSnackBar;
 
@@ -33,24 +39,27 @@ export class MockStudentService {
 export class MockUserService {}
 
 describe('RegisterStudentFormComponent', () => {
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [RegisterStudentFormComponent],
-      imports: [
-        BrowserAnimationsModule,
-        RouterTestingModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatInputModule,
-        MatSnackBarModule
-      ],
-      providers: [
-        { provide: StudentService, useClass: MockStudentService },
-        { provide: UserService, useClass: MockUserService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [RegisterStudentFormComponent],
+        imports: [
+          BrowserAnimationsModule,
+          RouterTestingModule,
+          ReactiveFormsModule,
+          MatSelectModule,
+          MatInputModule,
+          MatSnackBarModule
+        ],
+        providers: [
+          PasswordService,
+          { provide: StudentService, useClass: MockStudentService },
+          { provide: UserService, useClass: MockUserService }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterStudentFormComponent);
@@ -60,9 +69,38 @@ describe('RegisterStudentFormComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+  validateFirstName();
+  validateLastName();
   createAccount();
 });
+
+function validateFirstName() {
+  describe('validateFirstName()', () => {
+    for (const nameTest of nameTests) {
+      it(nameTest.description, () => {
+        validateAndExpect(
+          component.createStudentAccountFormGroup.get('firstName'),
+          nameTest.name,
+          nameTest.isValid
+        );
+      });
+    }
+  });
+}
+
+function validateLastName() {
+  describe('validateLastName()', () => {
+    for (const nameTest of nameTests) {
+      it(nameTest.description, () => {
+        validateAndExpect(
+          component.createStudentAccountFormGroup.get('lastName'),
+          nameTest.name,
+          nameTest.isValid
+        );
+      });
+    }
+  });
+}
 
 function createAccount() {
   describe('createAccount()', () => {
@@ -76,8 +114,8 @@ function createAccount() {
           '01',
           'Who lives in a pineapple under the sea?',
           'Spongebob Squarepants',
-          'a',
-          'a'
+          PASSWORD,
+          PASSWORD
         )
       );
       const username = 'PatrickS0101';
@@ -98,21 +136,21 @@ function createAccount() {
     it('should show error when invalid first name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidFirstName',
-        'Error: First Name must only contain characters A-Z'
+        'Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
       );
     });
 
     it('should show error when invalid last name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidLastName',
-        'Error: Last Name must only contain characters A-Z'
+        'Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
       );
     });
 
     it('should show error when invalid first and last name is sent to server', () => {
       expectCreateAccountWithInvalidNameToShowError(
         'invalidFirstAndLastName',
-        'Error: First Name and Last Name must only contain characters A-Z'
+        'Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash'
       );
     });
   });
@@ -128,8 +166,8 @@ function expectCreateAccountWithInvalidNameToShowError(errorCode: string, errorM
       '01',
       'Who lives in a pineapple under the sea?',
       'Spongebob Squarepants',
-      'a',
-      'a'
+      PASSWORD,
+      PASSWORD
     )
   );
   const response: any = helpers.createAccountErrorResponse(errorCode);

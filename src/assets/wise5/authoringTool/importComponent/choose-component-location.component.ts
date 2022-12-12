@@ -33,7 +33,7 @@ class ChooseComponentLocationController {
 
   $onInit() {
     this.nodeId = this.TeacherDataService.getCurrentNodeId();
-    this.components = this.ProjectService.getComponentsByNodeId(this.nodeId);
+    this.components = this.ProjectService.getComponents(this.nodeId);
   }
 
   getComponentTypeLabel(componentType) {

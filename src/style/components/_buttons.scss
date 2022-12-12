@@ -51,9 +51,9 @@
   }
 
   img {
-    width: 18px;
+    width: 16px;
     height: auto;
-    margin: 0 16px 0 -15px;
+    margin: 0 16px 0 -14px;
     padding: 8px;
     background-color: #fff;
     border-radius: 2px;
@@ -61,5 +61,6 @@
 }
 
 .button--google {
-  background-color: #4285F4 !important;
+  background-color: #1a73e8 !important;
+  text-transform: none;
 }

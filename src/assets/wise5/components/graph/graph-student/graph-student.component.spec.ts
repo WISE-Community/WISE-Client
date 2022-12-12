@@ -6,12 +6,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Point } from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { AnnotationService } from '../../../services/annotationService';
 import { ProjectService } from '../../../services/projectService';
 import { GraphService } from '../graphService';
 import { GraphStudent } from './graph-student.component';
 import { of } from 'rxjs';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../common/Component';
 
 let component: GraphStudent;
 const componentId = 'component1';
@@ -38,14 +38,10 @@ describe('GraphStudentComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(GraphStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
-    component.componentContent = createComponentContent();
+    const componentContent = createComponentContent();
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
@@ -73,10 +69,6 @@ describe('GraphStudentComponent', () => {
   checkIfYAxisIsLockedWithMultipleYAxesTrue();
   checkIfYAxisIsLockedWithOneYAxisFalse();
   checkIfYAxisIsLockedWithOneYAxisTrue();
-  checkIfYAxisLabelIsBlankWithSingleYAxisFalse();
-  checkIfYAxisLabelIsBlankWithSingleYAxisTrue();
-  checkIfYAxisLabelIsBlankWithMultipleYAxesFalse();
-  checkIfYAxisLabelIsBlankWithMultipleYAxesTrue();
   clearSeriesIds();
   clickUndo();
   convertDataExplorerDataToSeriesData();
@@ -115,8 +107,6 @@ describe('GraphStudentComponent', () => {
   getTheYValueFromDataPoint();
   getTrialNumbers();
   getValuesInColumn();
-  getYAxisColor();
-  handleDataExplorer();
   handleDeleteKeyPressed();
   handleTableConnectedComponentStudentDataChanged();
   handleTrialIdsToShowChanged();
@@ -138,14 +128,9 @@ describe('GraphStudentComponent', () => {
   readCSVIntoActiveSeries();
   readTheConnectedComponentField();
   removeDefaultTrialIfNecessary();
-  removePointFromSeries();
-  resetGraph();
   resetSeriesHelper();
   setActiveTrialAndSeriesByTrialIdsToShow();
-  setAllSeriesColorsToMatchYAxes();
   setSeriesYIndex();
-  setSingleSeriesColorsToMatchYAxisWhenYAxisIsNotSet();
-  setSingleSeriesColorsToMatchYAxisWhenYAxisIsSet();
   setStudentWork();
   setTheDefaultActiveSeries();
   setTheTrialIdsToShow();
@@ -401,15 +386,35 @@ function createChartConfig() {
   });
 }
 
+function createTableConnectedComponent(): any {
+  return {
+    skipFirstRow: true,
+    xColumn: 0,
+    yColumn: 1
+  };
+}
+
+function createDataExplorerStudentData(): any {
+  return {
+    isDataExplorerEnabled: true,
+    dataExplorerGraphType: 'scatter',
+    tableData: [
+      [{ text: 'ID' }, { text: 'Age' }, { text: 'Score' }],
+      [{ text: '1' }, { text: '10' }, { text: '100' }],
+      [{ text: '2' }, { text: '20' }, { text: '200' }],
+      [{ text: '3' }, { text: '30' }, { text: '300' }]
+    ],
+    dataExplorerSeries: [{ xColumn: 0, yColumn: 1, name: 'The series name' }],
+    dataExplorerXAxisLabel: 'Hello',
+    dataExplorerYAxisLabel: 'World'
+  };
+}
+
 function handleTableConnectedComponentStudentDataChanged() {
   describe('handleTableConnectedComponentStudentDataChanged', () => {
     it('should handle table connected component student data changed', () => {
-      const connectedComponent = {
-        skipFirstRow: true,
-        xColumn: 0,
-        yColumn: 1
-      };
-      const dataRows: any[] = [sampleData];
+      const connectedComponent = createTableConnectedComponent();
+      const dataRows: any[] = sampleData;
       const tableDataRows: any[] = [['Time', 'Position']].concat(dataRows);
       const componentState = {
         studentData: {
@@ -418,6 +423,109 @@ function handleTableConnectedComponentStudentDataChanged() {
       };
       component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
       expect(component.activeTrial.series[0].data).toEqual(dataRows);
+    });
+    it('should handle table connected component student data changed with selected rows', () => {
+      const connectedComponent = createTableConnectedComponent();
+      const dataRows: any[] = [
+        [0, 0],
+        [10, 20],
+        [20, 40],
+        [30, 80]
+      ];
+      const tableDataRows: any[] = [['Time', 'Position']].concat(dataRows);
+      const componentState = {
+        studentData: {
+          tableData: createTable(tableDataRows),
+          selectedRowIndices: [0, 2]
+        }
+      };
+      component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+      expect(component.activeTrial.series[0].data).toEqual([
+        [0, 0],
+        [20, 40]
+      ]);
+    });
+    it('should handle table connected component student data changed with sorted rows', () => {
+      const connectedComponent = createTableConnectedComponent();
+      const dataRows: any[] = [
+        [0, 0],
+        [10, 20],
+        [20, 40],
+        [30, 80]
+      ];
+      const tableDataRows: any[] = [['Time', 'Position']].concat(dataRows);
+      const componentState = {
+        studentData: {
+          tableData: createTable(tableDataRows),
+          sortOrder: [2, 1, 0, 3]
+        }
+      };
+      component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+      expect(component.activeTrial.series[0].data).toEqual([
+        [20, 40],
+        [10, 20],
+        [0, 0],
+        [30, 80]
+      ]);
+    });
+    it('should handle table connected component student data changed with selected and sorted rows', () => {
+      const connectedComponent = createTableConnectedComponent();
+      const dataRows: any[] = [
+        [0, 0],
+        [10, 20],
+        [20, 40],
+        [30, 80]
+      ];
+      const tableDataRows: any[] = [['Time', 'Position']].concat(dataRows);
+      const componentState = {
+        studentData: {
+          tableData: createTable(tableDataRows),
+          selectedRowIndices: [0, 2],
+          sortOrder: [2, 1, 0, 3]
+        }
+      };
+      component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+      expect(component.activeTrial.series[0].data).toEqual([
+        [20, 40],
+        [0, 0]
+      ]);
+    });
+    it('should handle connected data explorer student data changed', () => {
+      const connectedComponent = createTableConnectedComponent();
+      const studentData = createDataExplorerStudentData();
+      const componentState = {
+        studentData: studentData
+      };
+      component.activeTrial = {};
+      component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+      expect(component.xAxis.title.text).toEqual('Hello');
+      expect(component.yAxis.title.text).toEqual('World');
+      expect(component.activeTrial.series.length).toEqual(1);
+      const series = component.activeTrial.series[0];
+      expect(series.type).toEqual('scatter');
+      expect(series.name).toEqual('The series name');
+      expect(series.color).toEqual('blue');
+      expect(series.data[0][0]).toEqual(1);
+      expect(series.data[1][1]).toEqual(20);
+    });
+    it('should handle connected data explorer student data changed with selected rows', () => {
+      const connectedComponent = createTableConnectedComponent();
+      const studentData = createDataExplorerStudentData();
+      studentData.selectedRowIndices = [0, 2];
+      const componentState = {
+        studentData: studentData
+      };
+      component.activeTrial = {};
+      component.handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState);
+      expect(component.xAxis.title.text).toEqual('Hello');
+      expect(component.yAxis.title.text).toEqual('World');
+      expect(component.activeTrial.series.length).toEqual(1);
+      const series = component.activeTrial.series[0];
+      expect(series.type).toEqual('scatter');
+      expect(series.name).toEqual('The series name');
+      expect(series.color).toEqual('blue');
+      expect(series.data[0][0]).toEqual(1);
+      expect(series.data[1][1]).toEqual(30);
     });
   });
 }
@@ -520,28 +628,6 @@ function handleDeleteKeyPressed() {
   });
 }
 
-function resetGraph() {
-  describe('resetGraph', () => {
-    it('should reset graph', () => {
-      component.series = [
-        {
-          data: [
-            [0, 0],
-            [10, 20],
-            [20, 40]
-          ]
-        }
-      ];
-      component.xAxis.max = 200;
-      component.yAxis.max = 50;
-      component.resetGraph();
-      expect(component.series[0].data).toEqual([]);
-      expect(component.xAxis.max).toEqual(100);
-      expect(component.yAxis.max).toEqual(100);
-    });
-  });
-}
-
 function resetSeriesHelper() {
   describe('resetSeriesHelper', () => {
     it('should reset series', () => {
@@ -637,22 +723,6 @@ function makePointsUnique() {
       expect(uniquePoints[0]).toEqual([0, 0]);
       expect(uniquePoints[1]).toEqual([10, 20]);
       expect(uniquePoints[2]).toEqual([20, 40]);
-    });
-  });
-}
-
-function removePointFromSeries() {
-  describe('removePointFromSeries', () => {
-    it('should remove point from series', () => {
-      const series = createSeries('series1', [
-        [0, 0],
-        [10, 20],
-        [20, 40]
-      ]);
-      component.removePointFromSeries(series, 10);
-      expect(series.data.length).toEqual(2);
-      expect(series.data[0]).toEqual([0, 0]);
-      expect(series.data[1]).toEqual([20, 40]);
     });
   });
 }
@@ -1588,34 +1658,6 @@ function notSetTheActiveTrialAndSeriesIfTheTrialCanNotBeEdited() {
   });
 }
 
-function handleDataExplorer() {
-  it('should handle data explorer', () => {
-    const studentData = {
-      dataExplorerGraphType: 'scatter',
-      tableData: [
-        [{ text: 'ID' }, { text: 'Age' }, { text: 'Score' }],
-        [{ text: '1' }, { text: '10' }, { text: '100' }],
-        [{ text: '2' }, { text: '20' }, { text: '200' }],
-        [{ text: '3' }, { text: '30' }, { text: '300' }]
-      ],
-      dataExplorerSeries: [{ xColumn: 0, yColumn: 1, name: 'The series name' }],
-      dataExplorerXAxisLabel: 'Hello',
-      dataExplorerYAxisLabel: 'World'
-    };
-    component.activeTrial = {};
-    component.handleDataExplorer(studentData);
-    expect(component.xAxis.title.text).toEqual('Hello');
-    expect(component.yAxis.title.text).toEqual('World');
-    expect(component.activeTrial.series.length).toEqual(1);
-    const series = component.activeTrial.series[0];
-    expect(series.type).toEqual('scatter');
-    expect(series.name).toEqual('The series name');
-    expect(series.color).toEqual('blue');
-    expect(series.data[0][0]).toEqual(1);
-    expect(series.data[0][1]).toEqual(10);
-  });
-}
-
 function generateDataExplorerSeries() {
   it('should generate data explorer series', () => {
     const tableData = [
@@ -1877,90 +1919,6 @@ function setSeriesYIndex() {
   });
 }
 
-function checkIfYAxisLabelIsBlankWithSingleYAxisFalse() {
-  it('should check if Y Axis label is blank with single y axis false', () => {
-    const yAxis = {
-      title: {
-        text: 'Count'
-      },
-      min: 0,
-      max: 100,
-      units: '',
-      locked: false
-    };
-    expect(component.isYAxisLabelBlank(yAxis, null)).toEqual(false);
-  });
-}
-
-function checkIfYAxisLabelIsBlankWithSingleYAxisTrue() {
-  it('should check if Y Axis label is blank with single Y axis true', () => {
-    const yAxis = {
-      title: {
-        text: ''
-      },
-      min: 0,
-      max: 100,
-      units: '',
-      locked: false
-    };
-    expect(component.isYAxisLabelBlank(yAxis, null)).toEqual(true);
-  });
-}
-
-function checkIfYAxisLabelIsBlankWithMultipleYAxesFalse() {
-  it('should check if Y Axis label is blank with multiple y axes false', () => {
-    const firstYAxis = {
-      title: {
-        text: 'Count'
-      },
-      min: 0,
-      max: 100,
-      units: '',
-      locked: false
-    };
-    const secondYAxis = {
-      title: {
-        text: 'Price'
-      },
-      min: 0,
-      max: 1000,
-      units: '',
-      locked: false,
-      opposite: true
-    };
-    const yAxis = [firstYAxis, secondYAxis];
-    expect(component.isYAxisLabelBlank(yAxis, 0)).toEqual(false);
-    expect(component.isYAxisLabelBlank(yAxis, 1)).toEqual(false);
-  });
-}
-
-function checkIfYAxisLabelIsBlankWithMultipleYAxesTrue() {
-  it('should check if Y Axis label is blank with multiple y axes true', () => {
-    const firstYAxis = {
-      title: {
-        text: ''
-      },
-      min: 0,
-      max: 100,
-      units: '',
-      locked: false
-    };
-    const secondYAxis = {
-      title: {
-        text: ''
-      },
-      min: 0,
-      max: 1000,
-      units: '',
-      locked: false,
-      opposite: true
-    };
-    const yAxis = [firstYAxis, secondYAxis];
-    expect(component.isYAxisLabelBlank(yAxis, 0)).toEqual(true);
-    expect(component.isYAxisLabelBlank(yAxis, 1)).toEqual(true);
-  });
-}
-
 function getEventYValueWhenThereIsOneYAxis() {
   it('should get event y value when there is one y axis', () => {
     const event = {
@@ -2102,73 +2060,13 @@ function importGraphSettings() {
   });
 }
 
-function getYAxisColor() {
-  it('should get y axis color', () => {
-    component.yAxis = [
-      createYAxis('blue'),
-      createYAxis('red'),
-      createYAxis('green'),
-      createYAxis('orange')
-    ];
-    expect(component.getYAxisColor(0)).toEqual('blue');
-    expect(component.getYAxisColor(1)).toEqual('red');
-    expect(component.getYAxisColor(2)).toEqual('green');
-    expect(component.getYAxisColor(3)).toEqual('orange');
-  });
-}
-
-function setSingleSeriesColorsToMatchYAxisWhenYAxisIsNotSet() {
-  it('should set single series colors to match y axis when y axis is not set', () => {
-    component.yAxis = [
-      createYAxis('blue'),
-      createYAxis('red'),
-      createYAxis('green'),
-      createYAxis('orange')
-    ];
-    const series: any = {};
-    component.setSinglSeriesColorsToMatchYAxis(series);
-    expect(series.color).toEqual('blue');
-  });
-}
-
-function setSingleSeriesColorsToMatchYAxisWhenYAxisIsSet() {
-  it('should set single series colors to match y axis when y axis is set', () => {
-    component.yAxis = [
-      createYAxis('blue'),
-      createYAxis('red'),
-      createYAxis('green'),
-      createYAxis('orange')
-    ];
-    const series: any = { yAxis: 1 };
-    component.setSinglSeriesColorsToMatchYAxis(series);
-    expect(series.color).toEqual('red');
-  });
-}
-
-function setAllSeriesColorsToMatchYAxes() {
-  it('should set all series colors to match y axes', () => {
-    component.yAxis = [
-      createYAxis('blue'),
-      createYAxis('red'),
-      createYAxis('green'),
-      createYAxis('orange')
-    ];
-    const series: any[] = [{ yAxis: 0 }, { yAxis: 1 }, { yAxis: 2 }, { yAxis: 3 }];
-    component.setAllSeriesColorsToMatchYAxes(series);
-    expect(series[0].color).toEqual('blue');
-    expect(series[1].color).toEqual('red');
-    expect(series[2].color).toEqual('green');
-    expect(series[3].color).toEqual('orange');
-  });
-}
-
 function getTrialsFromClassmates() {
   it('should get trials from classmates', fakeAsync(() => {
     const name1 = 'Step 1';
     const trial1 = { name: name1, show: true };
     const trials = [trial1];
     const componentState1 = createComponentStateObject(trials);
-    spyOn(TestBed.inject(ProjectService), 'getNodePositionAndTitleByNodeId').and.returnValue(name1);
+    spyOn(TestBed.inject(ProjectService), 'getNodePositionAndTitle').and.returnValue(name1);
     spyOn(TestBed.inject(GraphService), 'getClassmateStudentWork').and.returnValue(
       of([componentState1])
     );

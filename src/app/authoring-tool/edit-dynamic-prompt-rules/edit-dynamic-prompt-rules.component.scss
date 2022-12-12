@@ -1,0 +1,50 @@
+@import '~style/abstracts/variables';
+
+.feedback-rules {
+  padding: 16px;
+  border-radius: $card-border-radius;
+}
+
+h5 {
+  margin-top: 0;
+}
+
+ul {
+  padding: 0;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+li {
+  list-style-type: none;
+}
+
+.rule {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.rule-input {
+  width: 100%;
+}
+
+.cdk-drag-handle {
+  cursor: move;
+}
+
+.cdk-drag-placeholder {
+  opacity: .4;
+}
+
+.mat-subheading-2 {
+  margin: 0;
+}
+
+.feedback-item {
+  width: 100%;
+}
+
+.feedback-input {
+  width: 100%;
+}

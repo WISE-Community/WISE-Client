@@ -7,6 +7,7 @@ import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PasswordService } from '../../services/password.service';
 
 @Component({
   selector: 'app-register-student-form',
@@ -38,14 +39,27 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
   securityQuestions: object;
   passwordsFormGroup = this.fb.group(
     {
-      password: ['', [Validators.required]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(this.passwordService.minLength),
+          Validators.pattern(this.passwordService.pattern)
+        ]
+      ],
       confirmPassword: ['', [Validators.required]]
     },
     { validator: this.passwordMatchValidator }
   );
   createStudentAccountFormGroup: FormGroup = this.fb.group({
-    firstName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
-    lastName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
+    firstName: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
+    ]),
+    lastName: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
+    ]),
     gender: new FormControl('', [Validators.required]),
     birthMonth: new FormControl('', [Validators.required]),
     birthDay: new FormControl({ value: '', disabled: true }, [Validators.required])
@@ -53,12 +67,13 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
   processing: boolean = false;
 
   constructor(
+    private fb: FormBuilder,
+    private passwordService: PasswordService,
     private router: Router,
     private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
     private studentService: StudentService,
-    private utilService: UtilService,
-    private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private utilService: UtilService
   ) {
     super();
     this.studentService.retrieveSecurityQuestions().subscribe((response) => {
@@ -93,6 +108,8 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     this.createStudentAccountFormGroup.controls['birthMonth'].valueChanges.subscribe((value) => {
       this.setBirthDayOptions();
     });
+    this.createStudentAccountFormGroup.controls['firstName'].markAsTouched();
+    this.createStudentAccountFormGroup.controls['lastName'].markAsTouched();
   }
 
   isUsingGoogleId() {
@@ -105,22 +122,38 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
       this.populateStudentUser();
       this.studentService.registerStudentAccount(this.studentUser).subscribe(
         (response: any) => {
-          if (response.status === 'success') {
-            this.router.navigate([
-              'join/student/complete',
-              { username: response.username, isUsingGoogleId: this.isUsingGoogleId() }
-            ]);
-          } else {
-            this.snackBar.open(this.translateCreateAccountErrorMessageCode(response.messageCode));
-          }
-          this.processing = false;
+          this.createAccountSuccess(response);
         },
-        (error: HttpErrorResponse) => {
-          this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.error.messageCode));
-          this.processing = false;
+        (response: HttpErrorResponse) => {
+          this.createAccountError(response.error);
         }
       );
     }
+  }
+
+  createAccountSuccess(response: any): void {
+    this.router.navigate([
+      'join/student/complete',
+      { username: response.username, isUsingGoogleId: this.isUsingGoogleId() }
+    ]);
+    this.processing = false;
+  }
+
+  createAccountError(error: any): void {
+    const formError: any = {};
+    switch (error.messageCode) {
+      case 'invalidPasswordLength':
+        formError.minlength = true;
+        this.passwordsFormGroup.get('password').setErrors(formError);
+        break;
+      case 'invalidPasswordPattern':
+        formError.pattern = true;
+        this.passwordsFormGroup.get('password').setErrors(formError);
+        break;
+      default:
+        this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
+    }
+    this.processing = false;
   }
 
   populateStudentUser() {

@@ -1,4 +1,4 @@
-<component-header [componentContent]="componentContent"></component-header>
+<component-header [component]="component"></component-header>
 <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
   <button
       mat-button
@@ -54,56 +54,12 @@
     </div>
   </div>
 </div>
-<div *ngIf="isStudentAudioRecordingEnabled"
-    class="recording-div"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="20px">
-  <button
-      mat-button
-      color="primary"
-      *ngIf="!isRecordingAudio"
-      (click)="startRecordingAudio($event, componentId, isDisabled)"
-      [disabled]="isDisabled">
-    <mat-icon>mic</mat-icon>
-    <span i18n>Record Response</span>
-  </button>
-  <button
-      mat-button
-      color="primary"
-      *ngIf="isRecordingAudio"
-      (click)="stopRecordingAudio($event, componentId, isDisabled)"
-      [disabled]="isDisabled">
-    <mat-icon>stop</mat-icon>
-    <span i18n>Stop Recording</span>
-  </button>
-  <span
-      *ngIf="isRecordingAudio"
-      class="text-secondary"
-      i18n>
-    Recording Time Left: {{ getAudioRecordingTimeLeft() }}
-  </span>
-  <div *ngFor="let attachment of attachments"
-       fxLayout="row" fxLayoutAlign="start center">
-    <div *ngIf="attachment.type === 'audio'" fxLayout="row" fxLayoutAlign="start center">
-      <audio controls>
-        <source [src]="attachment.url" type="audio/webm">
-      </audio>
-      <button
-          mat-button
-          color="primary"
-          (click)="removeAudioAttachment(attachment)"
-          aria-label="Delete Recording"
-          i18n-aria-label
-          [disabled]="isDisabled"
-          matTooltip="Delete Recording"
-          matTooltipPosition="above"
-          i18n-matTooltip>
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </div>
-  </div>
-</div>
+<audio-recorder *ngIf="isStudentAudioRecordingEnabled"
+    [audioAttachments]="audioAttachments"
+    (attachAudioRecording)="attachAudioRecording($event)"
+    [componentId]="componentId"
+    [nodeId]="nodeId"
+    (removeAttachment)="removeAttachment($event)"></audio-recorder>
 <component-save-submit-buttons
     *ngIf="isSaveOrSubmitButtonVisible"
     [componentState]="latestComponentState"

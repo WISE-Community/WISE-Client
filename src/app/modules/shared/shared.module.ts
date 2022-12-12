@@ -31,6 +31,7 @@ import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { UnlinkGoogleAccountConfirmComponent } from './unlink-google-account-confirm/unlink-google-account-confirm.component';
 import { UnlinkGoogleAccountPasswordComponent } from './unlink-google-account-password/unlink-google-account-password.component';
 import { UnlinkGoogleAccountSuccessComponent } from './unlink-google-account-success/unlink-google-account-success.component';
+import { PasswordService } from '../../services/password.service';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { UnlinkGoogleAccountSuccessComponent } from './unlink-google-account-suc
     UnlinkGoogleAccountConfirmComponent,
     UnlinkGoogleAccountPasswordComponent,
     UnlinkGoogleAccountSuccessComponent
-  ]
+  ],
+  providers: [PasswordService]
 })
 export class SharedModule {}

@@ -3,8 +3,14 @@
   '~style/abstracts/functions',
   '~style/abstracts/variables';
 
+$tab-bar-height: 48px;
+
 .mat-drawer-container {
-  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 step-tools {
@@ -18,24 +24,71 @@ step-tools {
 }
 
 .vle-content {
-  top: 0;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   overflow: auto;
+}
+
+.node-view {
+  top: $toolbar-height + $secondary-toolbar-height;
+
+  &.tabbed {
+    position: absolute;
+    top: $toolbar-height;
+    margin: 0;
+    bottom: 0;
+  }
+}
+
+.tabbed {
   padding: 0;
+}
+
+group-tabs {
+  position: absolute;
+  width: 100%;
+}
+
+.tab-content {
+  top: $tab-bar-height + 1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding-bottom: 104px;
+}
+
+node, navigation {
+  display: block;
 
   @media (min-width: breakpoint('sm.min')) {
     padding: 32px 16px;
   }
 }
 
-.node-view {
-  margin-top: $toolbar-height + $secondary-toolbar-height;
+.node-tabbed {
+  padding-bottom: 16px;
+}
+
+node-navigation {
+  display: block;
+}
+
+.node-nav {
+  padding: 0 16px;
 }
 
 .nav-view {
-  margin-top: $toolbar-height;
+  top: $toolbar-height;
+}
+
+notebook-launcher {
+  bottom: 24px;
+  position: fixed;
+  right: 28px;
 }
 
 notebook-notes {
@@ -49,20 +102,12 @@ notebook-notes {
 
 notebook-report {
   z-index: 10;
+  bottom: 0;
+  position: fixed;
+  right: 96px;
+  transition: right 0.25s;
 }
 
-.ended-and-locked-div {
-  color: red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-}
-
-.ended-and-locked-message {
-  border: 1px solid black;
-  border-radius: 3px;
-  padding-left: 8px;
-  padding-right: 8px;
-  background-color: white;
+.wise-link-communicator {
+  visibility: hidden;
 }

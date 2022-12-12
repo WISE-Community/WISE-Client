@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../common/ComponentContent';
 import { ConceptMapService } from '../../components/conceptMap/conceptMapService';
 import { DrawService } from '../../components/draw/drawService';
 import { EmbeddedService } from '../../components/embedded/embeddedService';
@@ -36,7 +37,7 @@ describe('GenerateImageDialogComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GenerateImageDialogComponent);
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue({});
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({} as ComponentContent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

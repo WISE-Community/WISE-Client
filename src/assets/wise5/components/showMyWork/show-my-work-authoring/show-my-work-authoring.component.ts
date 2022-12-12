@@ -46,8 +46,8 @@ export class ShowMyWorkAuthoringComponent extends ComponentAuthoring {
     return this.ProjectService.isApplicationNode(nodeId);
   }
 
-  getNodePositionAndTitleByNodeId(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(nodeId);
+  getNodePositionAndTitle(nodeId: string): string {
+    return this.ProjectService.getNodePositionAndTitle(nodeId);
   }
 
   isShowWorkComponentTypeAllowed(componentType: string): boolean {
@@ -55,13 +55,11 @@ export class ShowMyWorkAuthoringComponent extends ComponentAuthoring {
   }
 
   showWorkNodeIdChanged(): void {
-    const components = this.projectService.getComponentsByNodeId(
-      this.authoringComponentContent.showWorkNodeId
-    );
+    const components = this.projectService.getComponents(this.componentContent.showWorkNodeId);
     if (components.length === 1 && this.isAllowedShowWorkComponent(components[0])) {
-      this.authoringComponentContent.showWorkComponentId = components[0].id;
+      this.componentContent.showWorkComponentId = components[0].id;
     } else {
-      this.authoringComponentContent.showWorkComponentId = '';
+      this.componentContent.showWorkComponentId = '';
     }
     this.componentChanged();
   }

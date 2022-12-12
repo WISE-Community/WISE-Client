@@ -3,8 +3,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { AnnotationService } from '../../../services/annotationService';
-import { NodeService } from '../../../services/nodeService';
+import { Component } from '../../../common/Component';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapStudent } from './concept-map-student.component';
 
@@ -35,23 +34,11 @@ describe('ConceptMapStudent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(ConceptMapStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
-    spyOn(TestBed.inject(NodeService), 'createNewComponentState').and.returnValue({
-      studentData: {
-        conceptMapData: {
-          nodes: [],
-          links: []
-        }
-      }
-    });
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
-    component.componentContent = TestBed.inject(ConceptMapService).createComponent();
-    component.componentContent.id = componentId;
-    component.componentContent.prompt = 'Create nodes and links.';
+    const componentContent = TestBed.inject(ConceptMapService).createComponent();
+    componentContent.id = componentId;
+    componentContent.prompt = 'Create nodes and links.';
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {

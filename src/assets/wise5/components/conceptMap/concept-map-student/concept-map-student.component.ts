@@ -160,7 +160,7 @@ export class ConceptMapStudent extends ComponentStudent {
     } else if (this.componentStateHasStudentWork(this.componentState, this.componentContent)) {
       this.componentState = this.ProjectService.injectAssetPaths(this.componentState);
       this.setStudentWork(this.componentState);
-    } else if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
     } else if (this.componentContentHasStarterConceptMap()) {
       this.populateConceptMapData(this.componentContent.starterConceptMap);
@@ -435,7 +435,7 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   createComponentStateObject(): any {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.componentType = 'ConceptMap';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
@@ -1413,7 +1413,7 @@ export class ConceptMapStudent extends ComponentStudent {
     const message = $localize`Are you sure you want to reset your work?`;
     if (confirm(message)) {
       this.clearConceptMap();
-      if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+      if (this.component.hasConnectedComponent()) {
         this.handleConnectedComponents();
       } else if (this.componentContent.starterConceptMap != null) {
         const conceptMapData = this.componentContent.starterConceptMap;
@@ -1475,7 +1475,7 @@ export class ConceptMapStudent extends ComponentStudent {
    * @return a component state with the merged student responses
    */
   createMergedComponentState(componentStates: any[]): any {
-    let componentStateToMergeInto: any = this.NodeService.createNewComponentState();
+    let componentStateToMergeInto: any = this.createNewComponentState();
     componentStateToMergeInto.studentData = {
       conceptMapData: {
         background: null,

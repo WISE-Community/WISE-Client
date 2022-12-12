@@ -6,6 +6,7 @@ import { ProjectService } from '../../../services/projectService';
 import { EditMultipleChoiceConnectedComponentsComponent } from './edit-multiple-choice-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { MultipleChoiceContent } from '../MultipleChoiceContent';
 
 let component: EditMultipleChoiceConnectedComponentsComponent;
 let fixture: ComponentFixture<EditMultipleChoiceConnectedComponentsComponent>;
@@ -53,10 +54,8 @@ function askIfWantToCopyChoices() {
           createChoiceObject('choice2', 'Patrick')
         ],
         choiceType: 'radio'
-      };
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-        componentContent
-      );
+      } as MultipleChoiceContent;
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(componentContent);
       connectedComponent = createConnectedComponentObject(nodeId1, componentId1, 'importWork');
     });
     it('should copy choices from connected component', () => {

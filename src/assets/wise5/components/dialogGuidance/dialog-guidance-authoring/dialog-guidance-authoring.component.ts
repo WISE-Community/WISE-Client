@@ -24,8 +24,8 @@ export class DialogGuidanceAuthoringComponent extends ComponentAuthoring {
 
   ngOnInit() {
     super.ngOnInit();
-    if (this.authoringComponentContent.computerAvatarSettings == null) {
-      this.authoringComponentContent.computerAvatarSettings = this.dialogGuidanceService.getDefaultComputerAvatarSettings();
+    if (this.componentContent.computerAvatarSettings == null) {
+      this.componentContent.computerAvatarSettings = this.dialogGuidanceService.getDefaultComputerAvatarSettings();
     }
   }
 }

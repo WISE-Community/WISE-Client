@@ -8,13 +8,11 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TableService extends ComponentService {
-  $translate: any;
-
   constructor(
     private StudentAssetService: StudentAssetService,
     protected UtilService: UtilService
   ) {
-    super(UtilService);
+    super();
   }
 
   getComponentTypeLabel(): string {
@@ -149,28 +147,39 @@ export class TableService extends ComponentService {
     if (componentState != null) {
       const studentData = componentState.studentData;
       if (studentData != null) {
-        const studentTableData = studentData.tableData;
-        const componentContentTableData = componentContent.tableData;
-        if (studentTableData != null) {
-          const studentRows = studentTableData;
-          for (let r = 0; r < studentRows.length; r++) {
-            const studentRow = studentRows[r];
-            if (studentRow != null) {
-              for (let c = 0; c < studentRow.length; c++) {
-                const studentCell = this.getTableDataCellValue(r, c, studentTableData);
-                const componentContentCell = this.getTableDataCellValue(
-                  r,
-                  c,
-                  componentContentTableData
-                );
-                if (studentCell !== componentContentCell) {
-                  /*
-                   * the cell values are not the same which means
-                   * the student has changed the table
-                   */
-                  return true;
-                }
-              }
+        return (
+          this.studentDataHasSelectedRows(studentData) ||
+          this.studentDataHasTableData(studentData, componentContent)
+        );
+      }
+    }
+  }
+
+  private studentDataHasSelectedRows(studentData: any): boolean {
+    return studentData.selectedRowIndices != null;
+  }
+
+  private studentDataHasTableData(studentData: any, componentContent: any): boolean {
+    const studentTableData = studentData.tableData;
+    if (studentTableData != null) {
+      const componentContentTableData = componentContent.tableData;
+      const studentRows = studentTableData;
+      for (let r = 0; r < studentRows.length; r++) {
+        const studentRow = studentRows[r];
+        if (studentRow != null) {
+          for (let c = 0; c < studentRow.length; c++) {
+            const studentCell = this.getTableDataCellValue(r, c, studentTableData);
+            const componentContentCell = this.getTableDataCellValue(
+              r,
+              c,
+              componentContentTableData
+            );
+            if (studentCell !== componentContentCell) {
+              /*
+               * the cell values are not the same which means
+               * the student has changed the table
+               */
+              return true;
             }
           }
         }

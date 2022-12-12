@@ -1,11 +1,14 @@
 <ng-container *ngIf="isPeerChatWorkgroupsAvailable">
+  <div *ngIf="dynamicPrompt != null" [innerHTML]="dynamicPrompt.prompt" class="dynamic-prompt">
+  </div>
   <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign.gt-md="start start" fxLayoutGap="16px">
-    <div *ngIf="componentContent.questionBank.length > 0"
+    <div *ngIf="questionBankRule != null"
         fxFlex
         fxFlex.gt-md="40"
         fxFlexOrder="1"
         fxFlexOrder.gt-md="2">
-      <peer-chat-question-bank [questions]="componentContent.questionBank"></peer-chat-question-bank>
+        <peer-chat-question-bank *ngIf="componentContent.questionBank?.enabled"
+            [displayedQuestionBankRule]="questionBankRule"></peer-chat-question-bank>
     </div>
     <div fxFlex
         [fxFlex.gt-md]="componentContent.questionBank.length > 0 ? 60 : 100"

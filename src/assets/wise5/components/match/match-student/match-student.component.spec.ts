@@ -3,7 +3,8 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { AnnotationService } from '../../../services/annotationService';
+import { Component } from '../../../common/Component';
+import { ClickToSnipImageService } from '../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../services/projectService';
 import { MatchStudent } from './match-student.component';
 
@@ -52,12 +53,7 @@ describe('MatchStudentComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(MatchStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
     choice1 = createChoice(choiceId1, choiceValue1);
     choice2 = createChoice(choiceId2, choiceValue2);
     choice3 = createChoice(choiceId3, choiceValue3);
@@ -94,8 +90,8 @@ describe('MatchStudentComponent', () => {
         ])
       ]
     };
-    component.componentContent = componentContent;
-    spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
+    component.component = new Component(componentContent, nodeId);
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(
       JSON.parse(JSON.stringify(componentContent))
     );
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
@@ -664,9 +660,9 @@ function getCleanedValue() {
       componentContent.choices[0].value = choiceValue;
       componentContent.buckets[0].value = bucketValue;
       const originalComponentContent = JSON.parse(JSON.stringify(componentContent));
-      component.componentContent = TestBed.inject(ProjectService).injectClickToSnipImage(
-        component.componentContent
-      );
+      component.componentContent = TestBed.inject(
+        ClickToSnipImageService
+      ).injectClickToSnipImageListener(component.componentContent);
       expect(component.componentContent.choices[0].value).toContain('onclick');
       expect(component.componentContent.buckets[0].value).toContain('onclick');
       expect(

@@ -1,6 +1,6 @@
 'use strict';
 
-import { Component, ElementRef, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { WiseLinkService } from '../../../../app/services/wiseLinkService';
@@ -35,24 +35,17 @@ export class ComponentAnnotationsComponent {
   showComment: boolean = true;
   showScore: boolean = true;
   studentWorkSavedToServerSubscription: Subscription;
-  wiseLinkClickedHandler: any;
-  @ViewChild('wiseLinkCommunicator')
-  set aRef(ref: ElementRef) {
-    this.wiseLinkCommunicator = ref.nativeElement;
-  }
-  wiseLinkCommunicator: any;
-  wiseLinkCommunicatorId: string;
 
   constructor(
-    private ConfigService: ConfigService,
-    private ProjectService: VLEProjectService,
-    private StudentDataService: StudentDataService,
-    private WiseLinkService: WiseLinkService
+    private configService: ConfigService,
+    private projectService: VLEProjectService,
+    private studentDataService: StudentDataService,
+    private wiseLinkService: WiseLinkService
   ) {}
 
   ngOnInit() {
     this.maxScoreDisplay = parseInt(this.maxScore) > 0 ? '/' + this.maxScore : '';
-    this.studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
+    this.studentWorkSavedToServerSubscription = this.studentDataService.studentWorkSavedToServer$.subscribe(
       (componentState) => {
         if (
           componentState.nodeId === this.nodeId &&
@@ -62,28 +55,17 @@ export class ComponentAnnotationsComponent {
         }
       }
     );
-    this.wiseLinkCommunicatorId = `wise-link-communicator-component-annotations-${this.nodeId}-${this.componentId}`;
     this.processAnnotations();
   }
 
   ngAfterViewInit() {
     this.processAnnotations();
-    this.wiseLinkClickedHandler = this.WiseLinkService.createWiseLinkClickedHandler(this.nodeId);
-    this.WiseLinkService.addWiseLinkClickedListener(
-      this.wiseLinkCommunicator,
-      this.wiseLinkClickedHandler
-    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!changes.annotations.isFirstChange()) {
       this.processAnnotations();
     }
-  }
-
-  ngOnDestroy() {
-    this.studentWorkSavedToServerSubscription.unsubscribe();
-    this.wiseLinkCommunicator.removeEventListener('wiselinkclicked', this.wiseLinkClickedHandler);
   }
 
   processAnnotations(): void {
@@ -115,14 +97,14 @@ export class ComponentAnnotationsComponent {
   isShowScore(annotations: any): boolean {
     return (
       this.hasScoreAnnotation(annotations) &&
-      this.ProjectService.displayAnnotation(annotations.score)
+      this.projectService.displayAnnotation(annotations.score)
     );
   }
 
   isShowComment(annotations: any): boolean {
     return (
       this.hasCommentAnnotation(annotations) &&
-      this.ProjectService.displayAnnotation(this.annotations.comment)
+      this.projectService.displayAnnotation(this.annotations.comment)
     );
   }
 
@@ -135,10 +117,7 @@ export class ComponentAnnotationsComponent {
   }
 
   getCommentHtml(commentAnnotation: any): SafeHtml {
-    return this.WiseLinkService.generateHtmlWithWiseLink(
-      commentAnnotation.data.value,
-      this.wiseLinkCommunicatorId
-    );
+    return this.wiseLinkService.generateHtmlWithWiseLink(commentAnnotation.data.value);
   }
 
   getLatestAnnotation() {
@@ -158,19 +137,19 @@ export class ComponentAnnotationsComponent {
   getLatestAnnotationTime() {
     const latest = this.getLatestAnnotation();
     if (latest) {
-      return this.ConfigService.convertToClientTimestamp(latest.serverSaveTime);
+      return this.configService.convertToClientTimestamp(latest.serverSaveTime);
     }
     return null;
   }
 
   getLatestVisitTime() {
-    let nodeEvents = this.StudentDataService.getEventsByNodeId(this.nodeId);
+    let nodeEvents = this.studentDataService.getEventsByNodeId(this.nodeId);
     let n = nodeEvents.length - 1;
     let visitTime = null;
     for (let i = n; i > 0; i--) {
       let event = nodeEvents[i];
       if (event.event === 'nodeExited') {
-        visitTime = this.ConfigService.convertToClientTimestamp(event.serverSaveTime);
+        visitTime = this.configService.convertToClientTimestamp(event.serverSaveTime);
         break;
       }
     }
@@ -178,13 +157,13 @@ export class ComponentAnnotationsComponent {
   }
 
   getLatestSaveTime() {
-    const latestState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+    const latestState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
       this.nodeId,
       this.componentId
     );
     let saveTime = null;
     if (latestState) {
-      saveTime = this.ConfigService.convertToClientTimestamp(latestState.serverSaveTime);
+      saveTime = this.configService.convertToClientTimestamp(latestState.serverSaveTime);
     }
     return saveTime;
   }

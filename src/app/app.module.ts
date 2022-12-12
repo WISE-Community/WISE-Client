@@ -9,12 +9,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
-import {
-  SocialLoginModule,
-  GoogleLoginProvider,
-  SocialAuthServiceConfig
-} from '@abacritt/angularx-social-login';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ConfigService } from './services/config.service';
@@ -42,27 +36,6 @@ export function initialize(
   };
 }
 
-export function getAuthServiceConfigs(configService: ConfigService) {
-  const authServiceConfig: SocialAuthServiceConfig = {
-    providers: []
-  };
-  const googleLoginOptions = {
-    scopes: ['profile', 'email'],
-    prompt: 'select_account'
-  };
-  configService.getConfig().subscribe((config) => {
-    if (config != null) {
-      if (configService.getGoogleClientId() != null) {
-        authServiceConfig.providers.push({
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider(configService.getGoogleClientId(), googleLoginOptions)
-        });
-      }
-    }
-  });
-  return authServiceConfig;
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +53,6 @@ export function getAuthServiceConfigs(configService: ConfigService) {
     HeaderModule,
     HomeModule,
     MobileMenuModule,
-    SocialLoginModule,
     MatSidenavModule,
     MatSnackBarModule,
     MatDialogModule,
@@ -100,11 +72,6 @@ export function getAuthServiceConfigs(configService: ConfigService) {
       useFactory: initialize,
       deps: [ConfigService, UserService],
       multi: true
-    },
-    {
-      provide: 'SocialAuthServiceConfig',
-      useFactory: getAuthServiceConfigs,
-      deps: [ConfigService]
     },
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,

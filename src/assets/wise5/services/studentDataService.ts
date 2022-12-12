@@ -11,6 +11,7 @@ import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { NotebookService } from './notebookService';
+import { RandomKeyService } from './randomKeyService';
 
 @Injectable()
 export class StudentDataService extends DataService {
@@ -81,8 +82,6 @@ export class StudentDataService extends DataService {
     }
   };
 
-  private deleteKeyPressedSource: Subject<void> = new Subject<void>();
-  public deleteKeyPressed$: Observable<void> = this.deleteKeyPressedSource.asObservable();
   private nodeClickLockedSource: Subject<any> = new Subject<any>();
   public nodeClickLocked$: Observable<any> = this.nodeClickLockedSource.asObservable();
   private componentDirtySource: Subject<boolean> = new Subject<boolean>();
@@ -93,8 +92,6 @@ export class StudentDataService extends DataService {
   public componentSubmitDirty$: Observable<any> = this.componentSubmitDirtySource.asObservable();
   private componentSubmitTriggeredSource: Subject<boolean> = new Subject<boolean>();
   public componentSubmitTriggered$: Observable<any> = this.componentSubmitTriggeredSource.asObservable();
-  private pauseScreenSource: Subject<boolean> = new Subject<boolean>();
-  public pauseScreen$: Observable<any> = this.pauseScreenSource.asObservable();
   private componentStudentDataSource: Subject<any> = new Subject<any>();
   public componentStudentData$: Observable<any> = this.componentStudentDataSource.asObservable();
   private studentWorkSavedToServerSource: Subject<any> = new Subject<any>();
@@ -118,10 +115,6 @@ export class StudentDataService extends DataService {
     this.notebookService.notebookUpdated$.subscribe(() => {
       this.updateNodeStatuses();
     });
-  }
-
-  pauseScreen(doPause: boolean) {
-    this.pauseScreenSource.next(doPause);
   }
 
   broadcastComponentStudentData(componentStudentData: any) {
@@ -180,7 +173,7 @@ export class StudentDataService extends DataService {
       }
     }
     this.studentData.events = resultData.events;
-    this.studentData.annotations = this.getActiveAnnototations(resultData.annotations);
+    this.studentData.annotations = resultData.annotations;
     this.AnnotationService.setAnnotations(this.studentData.annotations);
     this.populateHistories(this.studentData.events);
     this.updateNodeStatuses();
@@ -865,7 +858,7 @@ export class StudentDataService extends DataService {
   prepareComponentStatesForSave(componentStates) {
     const studentWorkList = [];
     for (const componentState of componentStates) {
-      componentState.requestToken = this.UtilService.generateKey();
+      componentState.requestToken = RandomKeyService.generate();
       this.addComponentState(componentState);
       studentWorkList.push(componentState);
     }
@@ -874,14 +867,14 @@ export class StudentDataService extends DataService {
 
   prepareEventsForSave(events) {
     for (const event of events) {
-      event.requestToken = this.UtilService.generateKey();
+      event.requestToken = RandomKeyService.generate();
       this.addEvent(event);
     }
   }
 
   prepareAnnotationsForSave(annotations) {
     for (const annotation of annotations) {
-      annotation.requestToken = this.UtilService.generateKey();
+      annotation.requestToken = RandomKeyService.generate();
       if (annotation.id == null) {
         this.addAnnotation(annotation);
       }
@@ -1153,12 +1146,9 @@ export class StudentDataService extends DataService {
     return this.ProjectService.getNodeById(nodeId) != null && this.ProjectService.isActive(nodeId);
   }
 
-  canVisitNode(nodeId) {
+  canVisitNode(nodeId: string): boolean {
     const nodeStatus = this.getNodeStatusByNodeId(nodeId);
-    if (nodeStatus != null && nodeStatus.isVisitable) {
-      return true;
-    }
-    return false;
+    return nodeStatus != null && nodeStatus.isVisitable;
   }
 
   /**
@@ -1258,7 +1248,7 @@ export class StudentDataService extends DataService {
   }
 
   private isComponentCompleted(nodeId: string, componentId: string): boolean {
-    const component = this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.ProjectService.getComponent(nodeId, componentId);
     if (component != null) {
       const node = this.ProjectService.getNodeById(nodeId);
       const componentType = component.type;
@@ -1276,7 +1266,7 @@ export class StudentDataService extends DataService {
 
   isStepNodeCompleted(nodeId) {
     let result = true;
-    const components = this.ProjectService.getComponentsByNodeId(nodeId);
+    const components = this.ProjectService.getComponents(nodeId);
     for (const component of components) {
       const isComponentCompleted = this.isComponentCompleted(nodeId, component.id);
       result = result && isComponentCompleted;
@@ -1428,9 +1418,6 @@ export class StudentDataService extends DataService {
   }
   broadcastComponentSubmitTriggered(args: any) {
     this.componentSubmitTriggeredSource.next(args);
-  }
-  broadcastDeleteKeyPressed() {
-    this.deleteKeyPressedSource.next();
   }
   setNavItemExpanded(nodeId: string, isExpanded: boolean) {
     this.navItemIsExpandedSource.next({ nodeId: nodeId, isExpanded: isExpanded });

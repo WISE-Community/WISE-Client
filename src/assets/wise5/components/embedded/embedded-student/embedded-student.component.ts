@@ -186,18 +186,12 @@ export class EmbeddedStudent extends ComponentStudent {
 
   handleComponentDirtyMessage(messageEventData: any): void {
     this.isDirty = messageEventData.isDirty;
-    this.StudentDataService.broadcastComponentDirty({
-      componentId: this.componentId,
-      isDirty: this.isDirty
-    });
+    this.emitComponentDirty(this.isDirty);
   }
 
   handleComponentSubmitDirtyMessage(messageEventData: any): void {
     this.isSubmitDirty = messageEventData.isDirty;
-    this.StudentDataService.broadcastComponentSubmitDirty({
-      componentId: this.componentId,
-      isDirty: this.isSubmitDirty
-    });
+    this.emitComponentSubmitDirty(this.isSubmitDirty);
   }
 
   handleStudentDataChangedMessage(messageEventData: any): void {
@@ -294,7 +288,7 @@ export class EmbeddedStudent extends ComponentStudent {
   }
 
   createComponentStateObject(): any {
-    const componentState: any = this.NodeService.createNewComponentState();
+    const componentState: any = this.createNewComponentState();
     componentState.studentData = this.studentData;
     componentState.componentType = 'Embedded';
     componentState.nodeId = this.nodeId;
@@ -321,7 +315,7 @@ export class EmbeddedStudent extends ComponentStudent {
 
   sendLatestWorkToApplication(): void {
     let componentState = this.componentState;
-    if (this.UtilService.hasConnectedComponent(this.componentContent)) {
+    if (this.component.hasConnectedComponent()) {
       componentState = this.handleConnectedComponents();
     }
     const message = {
@@ -483,7 +477,7 @@ export class EmbeddedStudent extends ComponentStudent {
     let mergedComponentState = this.componentState;
     const firstTime = mergedComponentState == null;
     if (mergedComponentState == null) {
-      mergedComponentState = this.NodeService.createNewComponentState();
+      mergedComponentState = this.createNewComponentState();
       mergedComponentState.studentData = {};
     }
     for (const connectedComponent of this.componentContent.connectedComponents) {

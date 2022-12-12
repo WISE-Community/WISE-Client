@@ -8,28 +8,33 @@ import { PeerChatService } from '../peerChatService';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { PeerGroup } from '../PeerGroup';
 import { PeerGroupMember } from '../PeerGroupMember';
+import { NodeService } from '../../../services/nodeService';
+import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 
 @Component({
   selector: 'peer-chat-show-work',
   templateUrl: 'peer-chat-show-work.component.html'
 })
 export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
+  dynamicPrompt: FeedbackRule;
   isPeerChatWorkgroupsAvailable: boolean = false;
   peerChatMessages: PeerChatMessage[] = [];
   peerChatWorkgroupIds: Set<number> = new Set<number>();
   peerChatWorkgroupInfos: any = {};
+  peerGroup: PeerGroup;
+  questionBankRule: string[];
   requestTimeout: number = 10000;
 
-  @Input()
-  workgroupId: number;
+  @Input() workgroupId: number;
 
   constructor(
     protected configService: ConfigService,
+    protected nodeService: NodeService,
     protected peerChatService: PeerChatService,
     protected peerGroupService: PeerGroupService,
     protected projectService: ProjectService
   ) {
-    super(projectService);
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {
@@ -47,6 +52,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   }
 
   private requestChatWorkgroupsSuccess(peerGroup: PeerGroup): void {
+    this.peerGroup = peerGroup;
     this.addWorkgroupIdsFromPeerGroup(this.peerChatWorkgroupIds, peerGroup);
     this.addTeacherWorkgroupIds(this.peerChatWorkgroupIds);
     this.retrievePeerChatComponentStates();
@@ -78,6 +84,28 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   private setPeerChatMessages(componentStates: any[]): void {
     this.peerChatMessages = [];
     this.peerChatService.setPeerChatMessages(this.peerChatMessages, componentStates);
+    this.dynamicPrompt = this.getDynamicPrompt(componentStates);
+    this.questionBankRule = this.getQuestionBankRule(componentStates);
+  }
+
+  private getDynamicPrompt(componentStates: any[]): FeedbackRule {
+    for (let c = componentStates.length - 1; c >= 0; c--) {
+      const dynamicPrompt = componentStates[c].studentData.dynamicPrompt;
+      if (dynamicPrompt != null) {
+        return dynamicPrompt;
+      }
+    }
+    return null;
+  }
+
+  private getQuestionBankRule(componentStates: any[]): string[] {
+    for (let c = componentStates.length - 1; c >= 0; c--) {
+      const questionBank = componentStates[c].studentData.questionBank;
+      if (questionBank != null) {
+        return questionBank;
+      }
+    }
+    return null;
   }
 
   private addWorkgroupIdsFromPeerChatMessages(

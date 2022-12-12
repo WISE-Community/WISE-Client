@@ -12,14 +12,14 @@
    <mat-icon>add</mat-icon>
  </button>
 </div>
-<div *ngFor="let singleDefaultFeedback of authoringComponentContent.defaultFeedback; let i = index; first as isFirst; last as isLast; trackBy: customTrackBy"
+<div *ngFor="let singleDefaultFeedback of componentContent.defaultFeedback; let i = index; first as isFirst; last as isLast; trackBy: customTrackBy"
     class="feedback-row">
   <mat-form-field class="feedback-input">
     <mat-label i18n>Default Feedback on Submit {{ i + 1 }}</mat-label>
     <input
         matInput
         type="text"
-        [(ngModel)]="authoringComponentContent.defaultFeedback[i]"
+        [(ngModel)]="componentContent.defaultFeedback[i]"
         (ngModelChange)="feedbackChanged.next($event)"/>
   </mat-form-field>
   <button

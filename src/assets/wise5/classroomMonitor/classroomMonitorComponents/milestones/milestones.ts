@@ -3,8 +3,8 @@
 import { downgradeComponent } from '@angular/upgrade/static';
 import * as angular from 'angular';
 import MilestoneDetails from './milestoneDetails/milestoneDetails';
-import MilestoneGradingView from './milestoneGradingView/milestoneGradingView';
 import { MilestonesComponent } from '../../../../../app/classroom-monitor/milestones/milestones.component';
+import { MilestoneGradingViewComponent } from './milestone-grading-view/milestone-grading-view.component';
 
 export default angular
   .module('milestones', [])
@@ -13,4 +13,7 @@ export default angular
     downgradeComponent({ component: MilestonesComponent }) as angular.IDirectiveFactory
   )
   .component('milestoneDetails', MilestoneDetails)
-  .component('milestoneGradingView', MilestoneGradingView);
+  .directive(
+    'milestoneGradingView',
+    downgradeComponent({ component: MilestoneGradingViewComponent })
+  );

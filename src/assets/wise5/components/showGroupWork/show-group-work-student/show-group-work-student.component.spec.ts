@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { Component } from '../../../common/Component';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -21,12 +22,6 @@ class MockNotebookService {
 
   isNotebookEnabled() {
     return false;
-  }
-}
-
-class MockNodeService {
-  createNewComponentState() {
-    return {};
   }
 }
 
@@ -64,7 +59,7 @@ describe('ShowGroupWorkStudentComponent', () => {
         AnnotationService,
         { provide: ConfigService, useClass: MockConfigService },
         { provide: MatDialog, useClass: MockService },
-        { provide: NodeService, useClass: MockNodeService },
+        { provide: NodeService, useClass: MockService },
         { provide: NotebookService, useClass: MockNotebookService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -73,22 +68,20 @@ describe('ShowGroupWorkStudentComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowGroupWorkStudentComponent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     componentState1 = createComponentState(1);
     componentState2 = createComponentState(2);
     studentWork = [componentState1, componentState2];
     component = fixture.componentInstance;
-    component.componentContent = {
+    const componentContent = {
       id: 'abc',
       prompt: '',
       showSaveButton: true,
       showSubmitButton: true,
       isShowMyWork: true,
-      layout: 'row'
+      layout: 'row',
+      type: 'ShowGroupWork'
     };
+    component.component = new Component(componentContent, null);
     spyOn(TestBed.inject(ProjectService), 'injectAssetPaths').and.returnValue({
       type: 'OpenResponse'
     });

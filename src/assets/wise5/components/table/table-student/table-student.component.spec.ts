@@ -5,9 +5,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { AnnotationService } from '../../../services/annotationService';
+import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
 import { UtilService } from '../../../services/utilService';
+import { TabulatorDataService } from '../tabulatorDataService';
 import { TableStudent } from './table-student.component';
 
 let component: TableStudent;
@@ -35,14 +36,9 @@ describe('TableStudentComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(TableStudent);
-    spyOn(TestBed.inject(AnnotationService), 'getLatestComponentAnnotations').and.returnValue({
-      score: 0,
-      comment: ''
-    });
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     component = fixture.componentInstance;
-    component.nodeId = nodeId;
-    component.componentContent = {
+    const componentContent = {
       cRater: {},
       dataExplorerGraphTypes: [{ name: 'Scatter Plot', value: 'scatter' }],
       dataExplorerDataToColumn: {
@@ -71,6 +67,7 @@ describe('TableStudentComponent', () => {
       tableData: createTestTableData(),
       type: 'Table'
     };
+    component.component = new Component(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
@@ -122,22 +119,6 @@ describe('TableStudentComponent', () => {
   updateDataExplorerSeriesNames();
 });
 
-/**
- * Used for debugging.
- */
-function printTable(tableData: any[]): void {
-  for (const row of tableData) {
-    let rowValues = '';
-    for (const cell of row) {
-      if (rowValues !== '') {
-        rowValues += ',';
-      }
-      rowValues += cell.text;
-    }
-    console.log(rowValues);
-  }
-}
-
 function createCellObject(text: string = '', editable: boolean = true, size: number = null) {
   return {
     editable: editable,
@@ -171,7 +152,12 @@ function setupTable() {
   describe('setupTable', () => {
     it('should setup table', () => {
       component.tableData = null;
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.setupTable();
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
       expect(component.tableData).toEqual(createTestTableData());
     });
   });
@@ -197,8 +183,13 @@ function resetTable() {
     it('should reset table', () => {
       component.tableData = createTestTableData();
       component.tableData[0][0].text = 'Time2';
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.resetTable();
       expect(component.tableData[0][0].text).toEqual('Time');
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
   });
 }
@@ -567,8 +558,13 @@ function handleConnectedComponents() {
         }
       ]);
       component.tableData = null;
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.handleConnectedComponents();
       expectTableDataEquals(component.tableData, testTableData, true);
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
     it('should handle graph connected component', () => {
       spyOn(component, 'getConnectedComponentsAndTheirComponentStates').and.returnValue([
@@ -581,6 +577,10 @@ function handleConnectedComponents() {
           ])
         }
       ]);
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.handleConnectedComponents();
       const expectedTableData = createTableData([
         ['Time', 'Position', 'Speed'],
@@ -589,6 +589,7 @@ function handleConnectedComponents() {
         ['2', '20', '10']
       ]);
       expectTableDataEquals(component.tableData, expectedTableData, true);
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
     it('should handle embedded connected component', () => {
       const tableData = createTableData([
@@ -601,8 +602,13 @@ function handleConnectedComponents() {
           componentState: createEmbeddedComponentState(tableData)
         }
       ]);
+      const convertTableDataToTabulatorSpy = spyOn(
+        TestBed.inject(TabulatorDataService),
+        'convertTableDataToTabulator'
+      );
       component.handleConnectedComponents();
       expectTableDataEquals(component.tableData, tableData, true);
+      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
   });
 }

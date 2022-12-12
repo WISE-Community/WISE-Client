@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 
@@ -21,8 +22,8 @@ export class AudioOscillatorShowWorkComponent extends ComponentShowWorkDirective
   numberOfUniqueAmplitudesPlayed: number;
   numberOfUniqueFrequenciesPlayed: number;
 
-  constructor(protected ProjectService: ProjectService) {
-    super(ProjectService);
+  constructor(protected nodeService: NodeService, protected ProjectService: ProjectService) {
+    super(nodeService, ProjectService);
   }
 
   ngOnInit(): void {

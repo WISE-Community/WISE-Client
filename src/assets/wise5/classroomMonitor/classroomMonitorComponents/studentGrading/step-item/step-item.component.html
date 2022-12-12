@@ -1,0 +1,47 @@
+<div class="mat-elevation-z1 step-item"
+    [ngClass]="{ 'list-item--warn': statusClass === 'warn', 'list-item--info': statusClass === 'info' }">
+  <div class="list-item">
+    <button mat-button class="list-item__subheader-button"
+        aria-label="Show/hide team's work for this step"
+        i18n-aria-label
+        [ngClass]="{ 'list-item--noclick': !showScore || disabled }"
+        (click)="toggleExpand()"
+        [disabled]="disabled">
+      <div fxLayout="row">
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <step-info [hasAlert]="hasAlert"
+              [hasNewAlert]="hasNewAlert"
+              [hasNewWork]="hasNewWork"
+              [nodeId]="nodeId">
+          </step-info>
+        </div>
+        <div fxFlex="{{ showScore ? 30 : 20 }}" fxLayout="row" fxLayoutAlign="center center">
+          <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass">
+          </workgroup-node-status>
+        </div>
+        <div *ngIf="showScore" fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+          <workgroup-node-score [score]="score" [maxScore]="maxScore"></workgroup-node-score>
+        </div>
+      </div>
+    </button>
+  </div>
+  <mat-list-item *ngIf="expand && !disabled" class="grading__item-container">
+    <div class="grading__item">
+      <div id="component_{{component.id}}_{{workgroupId}}"
+          class="component component--grading"
+          *ngFor='let component of components; let index = index'>
+        <h3 class="accent-1 mat-body-2 gray-lightest-bg component__header">
+          {{ index + 1 + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
+          <component-new-work-badge [componentId]="component.id"
+              [workgroupId]="workgroupId"
+              [nodeId]="nodeId">
+          </component-new-work-badge>
+        </h3>
+        <workgroup-component-grading [componentId]="component.id"
+            [workgroupId]="workgroupId"
+            [nodeId]="nodeId">
+        </workgroup-component-grading>
+      </div>
+    </div>
+  </mat-list-item>
+</div>

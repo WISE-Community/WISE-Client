@@ -1,24 +1,13 @@
 <div class="table-container">
-  <table class="table">
-    <tbody>
-      <tr *ngFor="let row of tableData">
-        <td *ngFor="let cell of row"
-          class="table-cell"
-          style="width: {{cell.size || componentContent.globalCellSize}}em; max-width: {{cell.size || componentContent.globalCellSize}}em">
-          <mat-form-field *ngIf="cell.editable"
-              class="cell-input form-field-no-label form-field-no-hint"
-              appearance="outline">
-            <input matInput
-                [ngModel]="cell.text"
-                [disabled]="true"
-                i18n-aria-label
-                aria-label="Cell content"/>
-          </mat-form-field>
-          <ng-container *ngIf="!cell.editable">{{cell.text}}</ng-container>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <tabulator-table [editableCells]="tabulatorData.editableCells"
+      [disabled]="true"
+      [enableRowSelection]="componentContent.enableRowSelection"
+      [selectedRowIndices]="selectedRowIndices"
+      [tabColumns]="tabulatorData.columns"
+      [tabData]="tabulatorData.data"
+      [tabOptions]="tabulatorData.options"
+      [tabSorters]="tabulatorSorters"
+      (ready)="tabulatorRendered()"></tabulator-table>
 </div>
 <ng-container *ngIf="componentContent.isDataExplorerEnabled">
   <br />

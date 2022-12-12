@@ -47,10 +47,9 @@ describe('GraphAuthoringComponent', () => {
     fixture = TestBed.createComponent(GraphAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
-    spyOn(
-      TestBed.inject(TeacherProjectService),
-      'getComponentByNodeIdAndComponentId'
-    ).and.returnValue(JSON.parse(JSON.stringify(componentContent)));
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      JSON.parse(JSON.stringify(componentContent))
+    );
     spyOn(component, 'componentChanged').and.callFake(() => {});
     component.componentContent = JSON.parse(JSON.stringify(componentContent));
     fixture.detectChanges();
@@ -128,10 +127,10 @@ function convertSingleYAxisToMultipleYAxes() {
       units: '',
       locked: true
     };
-    component.authoringComponentContent.yAxis = firstYAxis;
+    component.componentContent.yAxis = firstYAxis;
     component.convertSingleYAxisToMultipleYAxes();
-    expect(Array.isArray(component.authoringComponentContent.yAxis)).toBe(true);
-    const yAxis = component.authoringComponentContent.yAxis;
+    expect(Array.isArray(component.componentContent.yAxis)).toBe(true);
+    const yAxis = component.componentContent.yAxis;
     expect(yAxis.length).toEqual(2);
     expect(yAxis[0]).toEqual(firstYAxis);
     expect(yAxis[1].title.text).toEqual('');
@@ -160,37 +159,37 @@ function convertMultipleYAxesToSingleYAxis() {
       locked: true,
       opposite: true
     };
-    component.authoringComponentContent.yAxis = [firstYAxis, secondYAxis];
+    component.componentContent.yAxis = [firstYAxis, secondYAxis];
     component.convertMultipleYAxesToSingleYAxis();
-    expect(Array.isArray(component.authoringComponentContent.yAxis)).toBe(false);
-    expect(component.authoringComponentContent.yAxis).toEqual(firstYAxis);
+    expect(Array.isArray(component.componentContent.yAxis)).toBe(false);
+    expect(component.componentContent.yAxis).toEqual(firstYAxis);
   });
 }
 
 function addYAxisToAllSeries() {
   it('should add y axis to all series', () => {
-    component.authoringComponentContent.series = [{ name: 'Prediction' }, { name: 'Actual' }];
+    component.componentContent.series = [{ name: 'Prediction' }, { name: 'Actual' }];
     component.addYAxisToAllSeries();
-    expect(component.authoringComponentContent.series[0].yAxis).toEqual(0);
-    expect(component.authoringComponentContent.series[1].yAxis).toEqual(0);
+    expect(component.componentContent.series[0].yAxis).toEqual(0);
+    expect(component.componentContent.series[1].yAxis).toEqual(0);
   });
 }
 
 function removeYAxisToAllSeries() {
   it('should remove y axes from all series', () => {
-    component.authoringComponentContent.series = [
+    component.componentContent.series = [
       { name: 'Prediction', yAxis: 0 },
       { name: 'Actual', yAxis: 1 }
     ];
     component.removeYAxisFromAllSeries();
-    expect(component.authoringComponentContent.series[0].yAxis).toBeUndefined();
-    expect(component.authoringComponentContent.series[1].yAxis).toBeUndefined();
+    expect(component.componentContent.series[0].yAxis).toBeUndefined();
+    expect(component.componentContent.series[1].yAxis).toBeUndefined();
   });
 }
 
 function increaseYAxes() {
   it('should increase y axes', () => {
-    component.authoringComponentContent.yAxis = [
+    component.componentContent.yAxis = [
       {
         title: { text: 'Y Axis 1' }
       },
@@ -199,7 +198,7 @@ function increaseYAxes() {
       }
     ];
     component.increaseYAxes(4);
-    const yAxis = component.authoringComponentContent.yAxis;
+    const yAxis = component.componentContent.yAxis;
     expect(yAxis.length).toEqual(4);
     expect(yAxis[0].title.text).toEqual('Y Axis 1');
     expect(yAxis[1].title.text).toEqual('Y Axis 2');
@@ -210,7 +209,7 @@ function increaseYAxes() {
 
 function decreaseYAxes() {
   it('should decrease y axes', () => {
-    component.authoringComponentContent.yAxis = [
+    component.componentContent.yAxis = [
       {
         title: { text: 'Y Axis 1' }
       },
@@ -222,7 +221,7 @@ function decreaseYAxes() {
       }
     ];
     component.decreaseYAxes(2);
-    const yAxis = component.authoringComponentContent.yAxis;
+    const yAxis = component.componentContent.yAxis;
     expect(yAxis.length).toEqual(2);
     expect(yAxis[0].title.text).toEqual('Y Axis 1');
     expect(yAxis[1].title.text).toEqual('Y Axis 2');
@@ -232,8 +231,8 @@ function decreaseYAxes() {
 function updateYAxisTitleColor() {
   it('should update y axis title color', () => {
     const yAxis = createYAxis('red');
-    component.authoringComponentContent.yAxis = [yAxis];
-    component.authoringComponentContent.series = [];
+    component.componentContent.yAxis = [yAxis];
+    component.componentContent.series = [];
     yAxis.labels.style.color = 'blue';
     component.yAxisColorChanged(0);
     expect(yAxis.title.style.color).toEqual('blue');
@@ -277,14 +276,9 @@ function addAnyMissingYAxisFieldsToAllYAxesWithMultipleYAxes() {
 
 function addColorToYAxes() {
   it('should add color to y axes', () => {
-    component.authoringComponentContent.yAxis = [
-      createYAxis(),
-      createYAxis(),
-      createYAxis(),
-      createYAxis()
-    ];
+    component.componentContent.yAxis = [createYAxis(), createYAxis(), createYAxis(), createYAxis()];
     component.addColorToYAxes();
-    const yAxis = component.authoringComponentContent.yAxis;
+    const yAxis = component.componentContent.yAxis;
     expect(yAxis[0].title.style.color).toEqual('blue');
     expect(yAxis[0].labels.style.color).toEqual('blue');
     expect(yAxis[1].title.style.color).toEqual('red');
@@ -298,17 +292,17 @@ function addColorToYAxes() {
 
 function addColorToSeries() {
   it('should add color to series', () => {
-    component.authoringComponentContent.yAxis = [createYAxis('blue'), createYAxis('red')];
-    component.authoringComponentContent.series = [{ yAxis: 0 }, { yAxis: 1 }];
+    component.componentContent.yAxis = [createYAxis('blue'), createYAxis('red')];
+    component.componentContent.series = [{ yAxis: 0 }, { yAxis: 1 }];
     component.addColorToSeries();
-    expect(component.authoringComponentContent.series[0].color).toEqual('blue');
-    expect(component.authoringComponentContent.series[1].color).toEqual('red');
+    expect(component.componentContent.series[0].color).toEqual('blue');
+    expect(component.componentContent.series[1].color).toEqual('red');
   });
 }
 
 function setSeriesColorToMatchYAxisColor() {
   it('should set series color to match y axis color', () => {
-    component.authoringComponentContent.yAxis = [createYAxis('blue'), createYAxis('red')];
+    component.componentContent.yAxis = [createYAxis('blue'), createYAxis('red')];
     const series: any = {
       yAxis: 0
     };
@@ -322,7 +316,7 @@ function setSeriesColorToMatchYAxisColor() {
 
 function getYAxisColor() {
   it('should get y axis color', () => {
-    component.authoringComponentContent.yAxis = [createYAxis('blue'), createYAxis('red')];
+    component.componentContent.yAxis = [createYAxis('blue'), createYAxis('red')];
     expect(component.getYAxisColor(0)).toEqual('blue');
     expect(component.getYAxisColor(1)).toEqual('red');
   });
@@ -334,7 +328,7 @@ function updateSeriesColorsToMatchYAxisColor() {
     const series2 = { yAxis: 1, color: 'blue' };
     const series3 = { yAxis: 2, color: 'blue' };
     const series4 = { yAxis: 0, color: 'blue' };
-    component.authoringComponentContent.series = [series1, series2, series3, series4];
+    component.componentContent.series = [series1, series2, series3, series4];
     component.updateSeriesColors(0, 'green');
     expect(series1.color).toEqual('green');
     expect(series2.color).toEqual('blue');
@@ -345,7 +339,7 @@ function updateSeriesColorsToMatchYAxisColor() {
 
 function handleSeriesYAxisChanged() {
   it('should handle series y axis changed', () => {
-    component.authoringComponentContent.yAxis = [createYAxis('blue'), createYAxis('red')];
+    component.componentContent.yAxis = [createYAxis('blue'), createYAxis('red')];
     const series: any = {
       yAxis: 1
     };
@@ -356,42 +350,42 @@ function handleSeriesYAxisChanged() {
 
 function setTheNewSeriesColorToMatchYAxis() {
   it('should set the new series color to match y axis', () => {
-    component.authoringComponentContent.yAxis = [createYAxis('black'), createYAxis('red')];
+    component.componentContent.yAxis = [createYAxis('black'), createYAxis('red')];
     component.enableMultipleYAxes = true;
-    component.authoringComponentContent.series = [];
+    component.componentContent.series = [];
     component.addSeriesClicked();
-    expect(component.authoringComponentContent.series[0].color).toEqual('black');
+    expect(component.componentContent.series[0].color).toEqual('black');
   });
 }
 
 function turnOnMultipleYAxes() {
   it('should turn on multiple y axes', () => {
-    component.authoringComponentContent.yAxis = createYAxis('black');
+    component.componentContent.yAxis = createYAxis('black');
     component.enableMultipleYAxes = true;
-    component.authoringComponentContent.series = [{}];
+    component.componentContent.series = [{}];
     component.enableMultipleYAxesChanged();
-    expect(component.authoringComponentContent.yAxis.length).toEqual(2);
-    expect(component.authoringComponentContent.series[0].color).toEqual('black');
+    expect(component.componentContent.yAxis.length).toEqual(2);
+    expect(component.componentContent.series[0].color).toEqual('black');
   });
 }
 
 function turnOffMultipleYAxes() {
   it('should turn off multiple y axes', () => {
-    component.authoringComponentContent.yAxis = [createYAxis('black')];
+    component.componentContent.yAxis = [createYAxis('black')];
     component.enableMultipleYAxes = false;
-    component.authoringComponentContent.series = [{}];
+    component.componentContent.series = [{}];
     spyOn(window, 'confirm').and.returnValue(true);
     component.enableMultipleYAxesChanged();
-    expect(Array.isArray(component.authoringComponentContent.yAxis)).toEqual(false);
-    expect(component.authoringComponentContent.series[0].yAxis).toBeUndefined();
+    expect(Array.isArray(component.componentContent.yAxis)).toEqual(false);
+    expect(component.componentContent.series[0].yAxis).toBeUndefined();
   });
 }
 
 function increaseNumYAxes() {
   it('should increase num y axes', () => {
-    component.authoringComponentContent.yAxis = [createYAxis('blue'), createYAxis('red')];
+    component.componentContent.yAxis = [createYAxis('blue'), createYAxis('red')];
     component.numYAxesChanged(4, 2);
-    const yAxis = component.authoringComponentContent.yAxis;
+    const yAxis = component.componentContent.yAxis;
     expect(yAxis.length).toEqual(4);
     expect(yAxis[0].labels.style.color).toEqual('blue');
     expect(yAxis[1].labels.style.color).toEqual('red');
@@ -402,16 +396,16 @@ function increaseNumYAxes() {
 
 function decreaseNumYAxes() {
   it('should decrease num y axes', () => {
-    component.authoringComponentContent.yAxis = [
+    component.componentContent.yAxis = [
       createYAxis('blue'),
       createYAxis('red'),
       createYAxis('green'),
       createYAxis('orange')
     ];
-    component.authoringComponentContent.series = [];
+    component.componentContent.series = [];
     spyOn(window, 'confirm').and.returnValue(true);
     component.numYAxesChanged(2, 4);
-    const yAxis = component.authoringComponentContent.yAxis;
+    const yAxis = component.componentContent.yAxis;
     expect(yAxis.length).toEqual(2);
     expect(yAxis[0].labels.style.color).toEqual('blue');
     expect(yAxis[1].labels.style.color).toEqual('red');
@@ -420,12 +414,12 @@ function decreaseNumYAxes() {
 
 function updateSeriesYAxisAndColorWhenYAxisIsRemoved() {
   it('should update series y axis and color when y axis is removed', () => {
-    component.authoringComponentContent.yAxis = [
+    component.componentContent.yAxis = [
       createYAxis('blue'),
       createYAxis('red'),
       createYAxis('green')
     ];
-    component.authoringComponentContent.series = [
+    component.componentContent.series = [
       {
         yAxis: 2,
         color: 'green'
@@ -433,7 +427,7 @@ function updateSeriesYAxisAndColorWhenYAxisIsRemoved() {
     ];
     spyOn(window, 'confirm').and.returnValue(true);
     component.numYAxesChanged(2, 3);
-    const singleSeries = component.authoringComponentContent.series[0];
+    const singleSeries = component.componentContent.series[0];
     expect(singleSeries.yAxis).toEqual(0);
     expect(singleSeries.color).toEqual('blue');
   });

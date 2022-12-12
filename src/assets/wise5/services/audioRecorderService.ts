@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable()
@@ -9,7 +8,7 @@ export class AudioRecorderService {
   private audioRecordedSource: Subject<any> = new Subject<any>();
   public audioRecorded$: Observable<any> = this.audioRecordedSource.asObservable();
 
-  constructor(private upgrade: UpgradeModule) {}
+  constructor() {}
 
   async init(constraints) {
     try {

@@ -24,16 +24,28 @@ import { DataService } from '../../services/data.service';
 import { StudentComponentModule } from '../student.component.module';
 import { TopBarModule } from '../top-bar/top-bar.module';
 import { StudentVLERoutingModule } from './student-vle-routing.module';
+import { PauseScreenService } from '../../../assets/wise5/services/pauseScreenService';
+import { StudentNotificationService } from '../../../assets/wise5/services/studentNotificationService';
+import { NotificationService } from '../../../assets/wise5/services/notificationService';
+import { VLEParentComponent } from '../../../assets/wise5/vle/vle-parent/vle-parent.component';
+import { RunEndedAndLockedMessageComponent } from '../../../assets/wise5/vle/run-ended-and-locked-message/run-ended-and-locked-message.component';
+import { NodeClickLockedService } from '../../../assets/wise5/services/nodeClickLockedService';
+import { NodeNavigationComponent } from '../../../assets/wise5/directives/node-navigation/node-navigation.component';
+import { GroupTabsComponent } from '../../../assets/wise5/directives/group-tabs/group-tabs.component';
 
 @NgModule({
   declarations: [
     ChooseBranchPathDialogComponent,
     GenerateImageDialogComponent,
+    GroupTabsComponent,
     NavigationComponent,
     NavItemComponent,
+    NodeNavigationComponent,
+    RunEndedAndLockedMessageComponent,
     SafeUrl,
     StepToolsComponent,
-    VLEComponent
+    VLEComponent,
+    VLEParentComponent
   ],
   imports: [
     StudentTeacherCommonModule,
@@ -50,10 +62,14 @@ import { StudentVLERoutingModule } from './student-vle-routing.module';
   ],
   providers: [
     InitializeVLEService,
+    NodeClickLockedService,
+    PauseScreenService,
     { provide: DataService, useExisting: StudentDataService },
+    { provide: NotificationService, useExisting: StudentNotificationService },
     { provide: ProjectService, useExisting: VLEProjectService },
+    StudentNotificationService,
     VLEProjectService
   ],
-  exports: [CommonModule, MatButtonModule, MatDialogModule, MatListModule, VLEComponent]
+  exports: [CommonModule, MatButtonModule, MatDialogModule, MatListModule]
 })
 export class StudentVLEModule {}

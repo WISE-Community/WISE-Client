@@ -1,9 +1,9 @@
-<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+<edit-component-prompt [prompt]="componentContent.prompt"
    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <p>
   <mat-checkbox color="primary"
       class="checkbox"
-      [(ngModel)]="authoringComponentContent.horizontal"
+      [(ngModel)]="componentContent.horizontal"
       (ngModelChange)="componentChanged()"
       i18n>
     Show Source and Target Buckets Side-by-Side
@@ -12,7 +12,7 @@
 <p>
   <mat-checkbox color="primary"
       class="checkbox"
-      [(ngModel)]="authoringComponentContent.choicesAfter"
+      [(ngModel)]="componentContent.choicesAfter"
       (ngModelChange)="componentChanged()"
       i18n>
     Show Choices After Target Buckets
@@ -31,10 +31,10 @@
       i18n-aria-label>
     <mat-icon>add</mat-icon>
   </button>
-  <div *ngIf="authoringComponentContent.choices.length === 0" i18n>
+  <div *ngIf="componentContent.choices.length === 0" i18n>
       There are no choices. Click the "Add Choice" button to add a choice.
   </div>
-  <div *ngFor="let choice of authoringComponentContent.choices; index as choiceIndex; first as isFirst; last as isLast"
+  <div *ngFor="let choice of componentContent.choices; index as choiceIndex; first as isFirst; last as isLast"
        fxLayout="row" fxLayoutAlign="start center">
     <mat-form-field class="name">
       <mat-label i18n>Choice Name</mat-label>
@@ -96,7 +96,7 @@
   <mat-form-field class="name">
     <mat-label i18n>Source Bucket Name</mat-label>
     <input matInput
-        [(ngModel)]="authoringComponentContent.choicesLabel"
+        [(ngModel)]="componentContent.choicesLabel"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
   <br/>
@@ -112,10 +112,10 @@
       i18n-aria-label>
     <mat-icon>add</mat-icon>
   </button>
-  <div *ngIf="authoringComponentContent.buckets.length === 0" i18n>
+  <div *ngIf="componentContent.buckets.length === 0" i18n>
     There are no target buckets. Click the "Add Target Bucket" button to add a bucket.
   </div>
-  <div *ngFor="let bucket of authoringComponentContent.buckets; index as bucketIndex; first as isFirst; last as isLast"
+  <div *ngFor="let bucket of componentContent.buckets; index as bucketIndex; first as isFirst; last as isLast"
       fxLayout="row" fxLayoutAlign="start center">
     <mat-form-field class="name">
       <mat-label i18n>Target Bucket Name</mat-label>
@@ -178,13 +178,13 @@
     <p i18n>Feedback</p>
     <mat-checkbox
         color="primary"
-        [(ngModel)]="authoringComponentContent.ordered"
+        [(ngModel)]="componentContent.ordered"
         (ngModelChange)="componentChanged()"
         i18n>
       Choices need to be ordered within buckets
     </mat-checkbox>
   </div>
-  <div *ngFor="let bucketFeedback of authoringComponentContent.feedback"
+  <div *ngFor="let bucketFeedback of componentContent.feedback"
       class="section">
     <p i18n>
       Bucket Name: {{getBucketNameById(bucketFeedback.bucketId)}}
@@ -211,7 +211,7 @@
           Is Correct
         </mat-checkbox>
       </div>
-      <div *ngIf="authoringComponentContent.ordered && choiceFeedback.isCorrect" fxLayout="row">
+      <div *ngIf="componentContent.ordered && choiceFeedback.isCorrect" fxLayout="row">
         <mat-form-field class="position">
           <mat-label i18n>Position</mat-label>
           <input matInput

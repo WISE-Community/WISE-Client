@@ -1,4 +1,4 @@
-<edit-component-prompt [prompt]="authoringComponentContent.prompt"
+<edit-component-prompt [prompt]="componentContent.prompt"
    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
 <div fxLayout="row">
   <mat-form-field class="dimension-input">
@@ -6,7 +6,7 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.widthInPixels"
+        [(ngModel)]="componentContent.widthInPixels"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="dimension-input">
@@ -14,7 +14,7 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.heightInPixels"
+        [(ngModel)]="componentContent.heightInPixels"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
 </div>
@@ -24,7 +24,7 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.widthInUnits"
+        [(ngModel)]="componentContent.widthInUnits"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="dimension-input">
@@ -32,7 +32,7 @@
     <input matInput
         type="number"
         min="1"
-        [(ngModel)]="authoringComponentContent.heightInUnits"
+        [(ngModel)]="componentContent.heightInUnits"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
 </div>
@@ -42,7 +42,7 @@
     <input matInput
         type="number"
         min="0"
-        [(ngModel)]="authoringComponentContent.dataXOriginInPixels"
+        [(ngModel)]="componentContent.dataXOriginInPixels"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
   <mat-form-field class="data-origin-input">
@@ -50,13 +50,13 @@
     <input matInput
         type="number"
         min="0"
-        [(ngModel)]="authoringComponentContent.dataYOriginInPixels"
+        [(ngModel)]="componentContent.dataYOriginInPixels"
         (ngModelChange)="inputChange.next($event)"/>
   </mat-form-field>
 </div>
 <div>
   <mat-radio-group
-      [(ngModel)]="authoringComponentContent.coordinateSystem"
+      [(ngModel)]="componentContent.coordinateSystem"
       (ngModelChange)="componentChanged()"
       fxLayout="column">
     <mat-radio-button
@@ -88,7 +88,7 @@
     <mat-icon>add</mat-icon>
   </button>
 </div>
-<div *ngFor="let object of authoringComponentContent.objects; index as objectIndex; first as isFirst; last as isLast"
+<div *ngFor="let object of componentContent.objects; index as objectIndex; first as isFirst; last as isLast"
     class="object-container">
   <div fxLayout="row" fxLayoutAlign="start center">
     <div>
@@ -406,14 +406,14 @@
         <mat-select
             [(ngModel)]="object.dataSource.componentId"
             (ngModelChange)="dataSourceComponentChanged(object)">
-          <mat-option *ngFor="let component of getComponentsByNodeId(object.dataSource.nodeId); index as componentIndex"
+          <mat-option *ngFor="let component of getComponents(object.dataSource.nodeId); index as componentIndex"
               value="{{component.id}}"
               [disabled]="!isAvailableDataSourceComponentType(component.type)">
             {{componentIndex + 1}}. {{component.type}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div *ngIf="getComponentByNodeIdAndComponentId(object.dataSource.nodeId, object.dataSource.componentId).type === 'Graph'"
+      <div *ngIf="getComponent(object.dataSource.nodeId, object.dataSource.componentId).type === 'Graph'"
            fxLayout="row wrap">
         <mat-form-field class="index-input">
           <mat-label i18n>Trial Index</mat-label>

@@ -8,24 +8,13 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Directive()
 export abstract class ComponentAuthoring {
-  @Input()
-  nodeId: string;
-
-  @Input()
-  componentId: string;
-
+  @Input() nodeId: string;
+  @Input() componentId: string;
   inputChange: Subject<string> = new Subject<string>();
   promptChange: Subject<string> = new Subject<string>();
   allowedConnectedComponentTypes: string[];
-  authoringComponentContent: any;
   componentContent: any;
   idToOrder: any;
-  isDirty: boolean = false;
-  isSaveButtonVisible: boolean;
-  isSubmitButtonVisible: boolean;
-  isSubmitDirty: boolean = false;
-  showAdvancedAuthoring: boolean = false;
-  submitCounter: number = 0;
   subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -36,11 +25,7 @@ export abstract class ComponentAuthoring {
   ) {}
 
   ngOnInit() {
-    this.authoringComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
-    this.resetUI();
+    this.componentContent = this.ProjectService.getComponent(this.nodeId, this.componentId);
     this.idToOrder = this.ProjectService.idToOrder;
     this.subscriptions.add(
       this.ProjectService.componentChanged$.subscribe(() => {
@@ -65,7 +50,7 @@ export abstract class ComponentAuthoring {
       this.promptChange
         .pipe(debounceTime(1000), distinctUntilChanged())
         .subscribe((prompt: string) => {
-          this.authoringComponentContent.prompt = prompt;
+          this.componentContent.prompt = prompt;
           this.componentChanged();
         })
     );
@@ -85,19 +70,7 @@ export abstract class ComponentAuthoring {
   }
 
   componentChanged(): void {
-    this.resetUI();
     this.ProjectService.nodeChanged();
-  }
-
-  resetUI(): void {
-    this.componentContent = this.ConfigService.replaceStudentNames(
-      this.ProjectService.injectAssetPaths(this.authoringComponentContent)
-    );
-    this.isSaveButtonVisible = this.componentContent.showSaveButton;
-    this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
-    this.isDirty = false;
-    this.isSubmitDirty = false;
-    this.submitCounter = 0;
   }
 
   isForThisComponent(object: any): boolean {
@@ -110,11 +83,11 @@ export abstract class ComponentAuthoring {
 
   setShowSubmitButtonValue(show: boolean): void {
     if (show == null || show == false) {
-      this.authoringComponentContent.showSaveButton = false;
-      this.authoringComponentContent.showSubmitButton = false;
+      this.componentContent.showSaveButton = false;
+      this.componentContent.showSubmitButton = false;
     } else {
-      this.authoringComponentContent.showSaveButton = true;
-      this.authoringComponentContent.showSubmitButton = true;
+      this.componentContent.showSaveButton = true;
+      this.componentContent.showSubmitButton = true;
     }
     this.NodeService.broadcastComponentShowSubmitButtonValueChanged({
       nodeId: this.nodeId,
@@ -141,21 +114,12 @@ export abstract class ComponentAuthoring {
 
   assetSelected({ nodeId, componentId, assetItem, target }): void {}
 
-  getComponentsByNodeId(nodeId: string): any[] {
-    return this.ProjectService.getComponentsByNodeId(nodeId);
+  getComponents(nodeId: string): any[] {
+    return this.ProjectService.getComponents(nodeId);
   }
 
-  getComponentByNodeIdAndComponentId(nodeId: string, componentId: string) {
-    return this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId);
-  }
-
-  reloadPreview() {
-    // modify the authoringComponentContent to trigger the preview reloading
-    this.authoringComponentContent.reloadTime = new Date();
-    setTimeout(() => {
-      // remove the field we previously used to trigger the reload
-      delete this.authoringComponentContent.reloadTime;
-    });
+  getComponent(nodeId: string, componentId: string): any {
+    return this.ProjectService.getComponent(nodeId, componentId);
   }
 
   confirmAndRemove(message: string, array: any[], index: number): void {

@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { NotificationService } from '../../../../services/notificationService';
 import { Directive } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Notification } from '../../../../../../app/domain/notification';
 
 @Directive()
 class TopBarController {
@@ -14,8 +15,8 @@ class TopBarController {
   avatarColor: any;
   canAuthorProject: boolean;
   contextPath: string;
-  dismissedNotifications: any;
-  newNotifications: any;
+  dismissedNotifications: Notification[] = [];
+  newNotifications: Notification[] = [];
   notifications: any;
   projectId: number;
   runId: number;
@@ -215,7 +216,11 @@ const TopBar = {
                         <md-icon md-menu-origin> notifications </md-icon>
                     </md-button>
                     <md-menu-content width="5" class="account-menu">
-                        <notifications-menu new-notifications="$ctrl.newNotifications" dismissed-notifications="$ctrl.dismissedNotifications" with-pause="true"></notifications-menu>
+                        <notifications-menu
+                            [new-notifications]="$ctrl.newNotifications"
+                            [with-pause]="true"
+                            [state]="$ctrl.$state">
+                        </notifications-menu>
                     </md-menu-content>
                 </md-menu>
                 <md-menu md-position-mode="target-right target" md-offset="40 26">

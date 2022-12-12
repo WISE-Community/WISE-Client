@@ -88,10 +88,7 @@ export class SummaryStudent extends ComponentStudent {
   }
 
   getOtherPrompt(nodeId, componentId) {
-    const otherComponent = this.ProjectService.getComponentByNodeIdAndComponentId(
-      nodeId,
-      componentId
-    );
+    const otherComponent = this.ProjectService.getComponent(nodeId, componentId);
     if (otherComponent != null) {
       return otherComponent.prompt;
     }
@@ -190,7 +187,7 @@ export class SummaryStudent extends ComponentStudent {
   }
 
   getOtherStepTitle() {
-    return this.ProjectService.getNodePositionAndTitleByNodeId(this.summaryNodeId);
+    return this.ProjectService.getNodePositionAndTitle(this.summaryNodeId);
   }
 
   setPeriodIdIfNecessary() {

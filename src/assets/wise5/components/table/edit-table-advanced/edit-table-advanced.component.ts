@@ -3,6 +3,8 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { UtilService } from '../../../services/utilService';
+import { TableContent } from '../TableContent';
 
 @Component({
   selector: 'edit-table-advanced',
@@ -10,44 +12,50 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   styleUrls: ['edit-table-advanced.component.scss']
 })
 export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
+  MAX_ALLOWED_CELLS_IN_IMPORT = 2000;
+
   allowedConnectedComponentTypes = ['Embedded', 'Graph', 'Table'];
+  componentContent: TableContent;
+  columnNames: string[] = [];
   isDataExplorerScatterPlotEnabled: boolean;
   isDataExplorerLineGraphEnabled: boolean;
   isDataExplorerBarGraphEnabled: boolean;
+  isImportingTable: boolean = false;
   numColumns: number;
-  columnNames: string[] = [];
+  importTableMessage: string;
 
   constructor(
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected TeacherProjectService: TeacherProjectService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected teacherProjectService: TeacherProjectService,
+    private utilService: UtilService
   ) {
-    super(NodeService, NotebookService, TeacherProjectService);
+    super(nodeService, notebookService, teacherProjectService);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    if (this.authoringComponentContent.isDataExplorerEnabled) {
+    if (this.componentContent.isDataExplorerEnabled) {
       this.repopulateDataExplorerGraphTypes();
       this.initializeDataExplorerSeriesParams();
       this.tryInitializeDataExplorerDataToColumn();
     }
-    this.numColumns = this.getNumTableColumns(this.authoringComponentContent);
-    this.columnNames = this.getColumnNames(this.authoringComponentContent);
+    this.numColumns = this.getNumTableColumns(this.componentContent);
+    this.columnNames = this.getColumnNames(this.componentContent);
   }
 
   initializeDataExplorerSeriesParams(): void {
-    if (this.authoringComponentContent.dataExplorerSeriesParams == null) {
-      this.authoringComponentContent.dataExplorerSeriesParams = [];
-      for (let s = 0; s < this.authoringComponentContent.numDataExplorerSeries; s++) {
-        this.authoringComponentContent.dataExplorerSeriesParams.push({});
+    if (this.componentContent.dataExplorerSeriesParams == null) {
+      this.componentContent.dataExplorerSeriesParams = [];
+      for (let s = 0; s < this.componentContent.numDataExplorerSeries; s++) {
+        this.componentContent.dataExplorerSeriesParams.push({});
       }
     }
   }
 
   initializeDataExplorerGraphTypes(): void {
-    this.authoringComponentContent.dataExplorerGraphTypes = [];
-    this.authoringComponentContent.dataExplorerGraphTypes.push(
+    this.componentContent.dataExplorerGraphTypes = [];
+    this.componentContent.dataExplorerGraphTypes.push(
       this.createGraphTypeObject('Scatter Plot', 'scatter')
     );
   }
@@ -56,7 +64,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
     this.isDataExplorerScatterPlotEnabled = false;
     this.isDataExplorerLineGraphEnabled = false;
     this.isDataExplorerBarGraphEnabled = false;
-    for (const graphType of this.authoringComponentContent.dataExplorerGraphTypes) {
+    for (const graphType of this.componentContent.dataExplorerGraphTypes) {
       if (graphType.value === 'scatter') {
         this.isDataExplorerScatterPlotEnabled = true;
       } else if (graphType.value === 'line') {
@@ -68,8 +76,8 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   }
 
   tryInitializeDataExplorerDataToColumn(): void {
-    if (this.authoringComponentContent.dataExplorerDataToColumn == null) {
-      this.authoringComponentContent.dataExplorerDataToColumn = {};
+    if (this.componentContent.dataExplorerDataToColumn == null) {
+      this.componentContent.dataExplorerDataToColumn = {};
     }
   }
 
@@ -88,25 +96,25 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   }
 
   toggleDataExplorer(): void {
-    if (this.authoringComponentContent.isDataExplorerEnabled) {
-      if (this.authoringComponentContent.dataExplorerGraphTypes == null) {
+    if (this.componentContent.isDataExplorerEnabled) {
+      if (this.componentContent.dataExplorerGraphTypes == null) {
         this.initializeDataExplorerGraphTypes();
         this.repopulateDataExplorerGraphTypes();
       }
-      if (this.authoringComponentContent.numDataExplorerSeries == null) {
-        this.authoringComponentContent.numDataExplorerSeries = 1;
+      if (this.componentContent.numDataExplorerSeries == null) {
+        this.componentContent.numDataExplorerSeries = 1;
       }
-      if (this.authoringComponentContent.numDataExplorerYAxis == null) {
-        this.authoringComponentContent.numDataExplorerYAxis = 1;
+      if (this.componentContent.numDataExplorerYAxis == null) {
+        this.componentContent.numDataExplorerYAxis = 1;
       }
-      if (this.authoringComponentContent.isDataExplorerAxisLabelsEditable == null) {
-        this.authoringComponentContent.isDataExplorerAxisLabelsEditable = false;
+      if (this.componentContent.isDataExplorerAxisLabelsEditable == null) {
+        this.componentContent.isDataExplorerAxisLabelsEditable = false;
       }
-      if (this.authoringComponentContent.dataExplorerSeriesParams == null) {
-        this.authoringComponentContent.dataExplorerSeriesParams = [{}];
+      if (this.componentContent.dataExplorerSeriesParams == null) {
+        this.componentContent.dataExplorerSeriesParams = [{}];
       }
-      if (this.authoringComponentContent.dataExplorerDataToColumn == null) {
-        this.authoringComponentContent.dataExplorerDataToColumn = {};
+      if (this.componentContent.dataExplorerDataToColumn == null) {
+        this.componentContent.dataExplorerDataToColumn = {};
       }
     }
     this.componentChanged();
@@ -125,7 +133,7 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   }
 
   dataExplorerToggleGraphType(name: string, value: string): void {
-    const graphTypes = this.authoringComponentContent.dataExplorerGraphTypes;
+    const graphTypes = this.componentContent.dataExplorerGraphTypes;
     for (let index = 0; index < graphTypes.length; index++) {
       if (graphTypes[index].value === value) {
         graphTypes.splice(index, 1);
@@ -142,24 +150,24 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   }
 
   numDataExplorerSeriesChanged(): void {
-    const count = this.authoringComponentContent.numDataExplorerSeries;
-    if (this.authoringComponentContent.dataExplorerSeriesParams.length < count) {
+    const count = this.componentContent.numDataExplorerSeries;
+    if (this.componentContent.dataExplorerSeriesParams.length < count) {
       this.increaseNumDataExplorerSeries(count);
-    } else if (this.authoringComponentContent.dataExplorerSeriesParams.length > count) {
+    } else if (this.componentContent.dataExplorerSeriesParams.length > count) {
       this.decreaseNumDataExplorerSeries(count);
     }
     this.componentChanged();
   }
 
   increaseNumDataExplorerSeries(count: number): void {
-    const numToAdd = count - this.authoringComponentContent.dataExplorerSeriesParams.length;
+    const numToAdd = count - this.componentContent.dataExplorerSeriesParams.length;
     for (let s = 0; s < numToAdd; s++) {
-      this.authoringComponentContent.dataExplorerSeriesParams.push({});
+      this.componentContent.dataExplorerSeriesParams.push({});
     }
   }
 
   decreaseNumDataExplorerSeries(count: number): void {
-    this.authoringComponentContent.dataExplorerSeriesParams = this.authoringComponentContent.dataExplorerSeriesParams.slice(
+    this.componentContent.dataExplorerSeriesParams = this.componentContent.dataExplorerSeriesParams.slice(
       0,
       count
     );
@@ -171,10 +179,88 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   }
 
   updateDataExplorerSeriesParamsYAxis(): void {
-    for (const params of this.authoringComponentContent.dataExplorerSeriesParams) {
-      if (params.yAxis >= this.authoringComponentContent.numDataExplorerYAxis) {
+    for (const params of this.componentContent.dataExplorerSeriesParams) {
+      if (params.yAxis >= this.componentContent.numDataExplorerYAxis) {
         params.yAxis = 0;
       }
     }
+  }
+
+  importTableFile(event: any): void {
+    if (confirm($localize`Are you sure you want to overwrite the existing table?`)) {
+      this.showImportingTableDisplay();
+      this.setImportTableMessage($localize`Importing table...`);
+      const reader: FileReader = new FileReader();
+      reader.onload = () => {
+        const fileContent = reader.result as string;
+        const tableContent = this.utilService.CSVToArray(fileContent);
+        const numCells = this.getNumCells(tableContent);
+        if (numCells > this.MAX_ALLOWED_CELLS_IN_IMPORT) {
+          this.setImportTableMessage(
+            $localize`Error: The table contains more than ${this.MAX_ALLOWED_CELLS_IN_IMPORT} cells`
+          );
+        } else {
+          this.importTable(tableContent);
+          this.setImportTableMessage($localize`Successfully imported table`);
+        }
+        this.hideImportingTableDisplay();
+      };
+      reader.readAsText(event.target.files[0]);
+    }
+    event.target.value = null;
+  }
+
+  getNumCells(tableContent: string[][]): number {
+    let numCells = 0;
+    for (const row of tableContent) {
+      numCells += row.length;
+    }
+    return numCells;
+  }
+
+  importTable(tableContent: string[][]): void {
+    const tableData = this.convertToTableData(tableContent);
+    this.componentContent.tableData = tableData;
+    this.componentContent.numRows = this.getNumRows(tableData);
+    this.componentContent.numColumns = this.getNumColumns(tableData);
+    this.componentChanged();
+  }
+
+  convertToTableData(stringArray: string[][]): any[][] {
+    const table = [];
+    for (const row of stringArray) {
+      const tableRow = [];
+      for (const cell of row) {
+        tableRow.push({ text: cell, editable: true, size: null });
+      }
+      table.push(tableRow);
+    }
+    return table;
+  }
+
+  getNumRows(tableData: any[][]): number {
+    return tableData.length;
+  }
+
+  getNumColumns(tableData: any[][]): number {
+    let maxColumns = 0;
+    for (const row of tableData) {
+      if (row.length > maxColumns) {
+        maxColumns = row.length;
+      }
+    }
+    return maxColumns;
+  }
+
+  showImportingTableDisplay(): void {
+    this.isImportingTable = true;
+  }
+
+  hideImportingTableDisplay(): void {
+    this.isImportingTable = false;
+  }
+
+  setImportTableMessage(message: string): void {
+    this.importTableMessage = message;
   }
 }

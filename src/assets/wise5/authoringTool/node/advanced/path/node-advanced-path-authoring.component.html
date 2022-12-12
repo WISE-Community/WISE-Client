@@ -34,7 +34,7 @@
         <mat-option *ngFor="let nodeId of nodeIds"
             [value]="nodeId">
           <span layout="row" layout-align="start center">
-            <span>{{ getNodePositionById(nodeId)}}: {{ getNodeTitleByNodeId(nodeId) }} ({{ nodeId }})</span>
+            <span>{{ getNodePositionById(nodeId)}}: {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
           </span>
         </mat-option>
       </mat-select>
@@ -92,7 +92,7 @@
             <mat-option *ngFor="let nodeId of nodeIds"
                 [value]="nodeId">
             <span fxLayout="row" fxLayoutAlign="start center">
-              <span>{{ getNodePositionById(nodeId) }}: {{ getNodeTitleByNodeId(nodeId) }} ({{ nodeId }})</span>
+              <span>{{ getNodePositionById(nodeId) }}: {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
             </span>
             </mat-option>
           </mat-select>
@@ -103,7 +103,7 @@
           <mat-select
               [(ngModel)]="transitionCriteria.params.componentId"
               (ngModelChange)="transitionCriteriaComponentIdChanged(transitionCriteria)">
-            <mat-option *ngFor="let component of getComponentsByNodeId(transitionCriteria.params.nodeId); index as componentIndex"
+            <mat-option *ngFor="let component of getComponents(transitionCriteria.params.nodeId); index as componentIndex"
                 [disabled]="transitionCriteria.name === 'choiceChosen' && component.type !== 'MultipleChoice'"
                 [value]="component.id">
             <span fxLayout="row" fxLayoutAlign="start center">
@@ -130,7 +130,7 @@
           <mat-select
               [(ngModel)]="transitionCriteria.params.choiceIds[0]"
               (ngModelChange)="saveProject()">
-            <mat-option *ngFor="let choice of getChoicesByNodeIdAndComponentId(transitionCriteria.params.nodeId, transitionCriteria.params.componentId)"
+            <mat-option *ngFor="let choice of getChoices(transitionCriteria.params.nodeId, transitionCriteria.params.componentId)"
                 [value]="choice.id">
               {{ choice.text }}
             </mat-option>
@@ -143,7 +143,7 @@
               [(ngModel)]="transitionCriteria.params.choiceIds"
               (ngModelChange)="saveProject()"
               multiple>
-            <mat-option *ngFor="let choice of getChoicesByNodeIdAndComponentId(transitionCriteria.params.nodeId, transitionCriteria.params.componentId)"
+            <mat-option *ngFor="let choice of getChoices(transitionCriteria.params.nodeId, transitionCriteria.params.componentId)"
                 [value]="choice.id">
               {{choice.text}}
             </mat-option>

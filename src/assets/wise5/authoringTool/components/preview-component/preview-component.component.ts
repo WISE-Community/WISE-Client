@@ -1,32 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ProjectService } from '../../../services/projectService';
+import { Component as WISEComponent } from '../../../common/Component';
 
 @Component({
   selector: 'preview-component',
   templateUrl: 'preview-component.component.html'
 })
 export class PreviewComponentComponent implements OnInit {
-  componentContent: any;
+  @Input() component: WISEComponent;
+  @Input() periodId: number;
+  @Output() starterStateChangedEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  @Input()
-  componentId: string;
+  constructor() {}
 
-  @Input()
-  nodeId: string;
-
-  @Input()
-  periodId: number;
-
-  @Output()
-  starterStateChangedEvent: EventEmitter<any> = new EventEmitter<any>();
-
-  constructor(private projectService: ProjectService) {}
-
-  ngOnInit() {
-    this.componentContent = this.projectService.injectAssetPaths(
-      this.projectService.getComponentByNodeIdAndComponentId(this.nodeId, this.componentId)
-    );
-  }
+  ngOnInit() {}
 
   updateStarterState(starterState: any) {
     this.starterStateChangedEvent.emit(starterState);

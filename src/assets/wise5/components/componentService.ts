@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { UtilService } from '../services/utilService';
+import { RandomKeyService } from '../services/randomKeyService';
 import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
 
@@ -15,7 +15,7 @@ export class ComponentService {
   private notifyConnectedComponentSource = new Subject<any>();
   public notifyConnectedComponentSource$ = this.notifyConnectedComponentSource.asObservable();
 
-  constructor(protected UtilService: UtilService) {}
+  constructor() {}
 
   getDomIdEnding(nodeId: string, componentId: string, componentState: any): string {
     if (componentState == null) {
@@ -67,7 +67,7 @@ export class ComponentService {
    */
   createComponent() {
     return {
-      id: this.UtilService.generateKey(),
+      id: RandomKeyService.generate(),
       type: '',
       prompt: '',
       showSaveButton: false,

@@ -45,6 +45,10 @@ import { ComponentServiceLookupService } from '../assets/wise5/services/componen
 import { ComponentTypeService } from '../assets/wise5/services/componentTypeService';
 import { BranchService } from '../assets/wise5/services/branchService';
 import { PathService } from '../assets/wise5/services/pathService';
+import { TabulatorDataService } from '../assets/wise5/components/table/tabulatorDataService';
+import { StompService } from '../assets/wise5/services/stompService';
+import { ClickToSnipImageService } from '../assets/wise5/services/clickToSnipImageService';
+import { PasswordService } from './services/password.service';
 
 @NgModule({
   providers: [
@@ -54,6 +58,7 @@ import { PathService } from '../assets/wise5/services/pathService';
     AudioOscillatorService,
     AudioRecorderService,
     BranchService,
+    ClickToSnipImageService,
     ConceptMapService,
     ComponentService,
     ComponentServiceLookupService,
@@ -76,6 +81,7 @@ import { PathService } from '../assets/wise5/services/pathService';
     OutsideURLService,
     OpenResponseCompletionCriteriaService,
     OpenResponseService,
+    PasswordService,
     PathService,
     PeerChatService,
     PeerGroupService,
@@ -84,12 +90,14 @@ import { PathService } from '../assets/wise5/services/pathService';
     SessionService,
     ShowGroupWorkService,
     ShowMyWorkService,
+    StompService,
     StudentAssetService,
     StudentDataService,
     StudentStatusService,
     StudentWebSocketService,
     SummaryService,
     TableService,
+    TabulatorDataService,
     TagService,
     UtilService,
     VLEProjectService,

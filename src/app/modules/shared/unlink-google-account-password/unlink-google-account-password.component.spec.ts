@@ -3,13 +3,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Subscription } from 'rxjs';
+import { of } from 'rxjs';
+import { PasswordService } from '../../../services/password.service';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountPasswordComponent } from './unlink-google-account-password.component';
 
 class MockUserService {
   unlinkGoogleUser(newPassword: string) {
-    return new Subscription();
+    return of({});
   }
 }
 
@@ -22,7 +23,7 @@ describe('UnlinkGoogleAccountPasswordComponent', () => {
     TestBed.configureTestingModule({
       declarations: [UnlinkGoogleAccountPasswordComponent],
       imports: [BrowserAnimationsModule, ReactiveFormsModule, MatDialogModule],
-      providers: [{ provide: UserService, useValue: userService }],
+      providers: [PasswordService, { provide: UserService, useValue: userService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(UnlinkGoogleAccountPasswordComponent);
@@ -34,10 +35,8 @@ describe('UnlinkGoogleAccountPasswordComponent', () => {
 
 function formSubmit_callUserServiceUnlinkGoogleUserFunction() {
   it('should call UserService.UnlinkGoogleUserFunction when form is submitted', () => {
-    const unlinkFunctionSpy = spyOn(userService, 'unlinkGoogleUser').and.returnValue(
-      new Subscription()
-    );
-    const newPassword = 'aloha';
+    const unlinkFunctionSpy = spyOn(userService, 'unlinkGoogleUser').and.returnValue(of({}));
+    const newPassword = 'Abcd1234';
     component.newPasswordFormGroup.setValue({
       newPassword: newPassword,
       confirmNewPassword: newPassword

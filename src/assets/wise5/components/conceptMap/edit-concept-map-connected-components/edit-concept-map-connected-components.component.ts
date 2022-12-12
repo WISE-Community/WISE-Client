@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../app/authoring-tool/edit-connected-components-with-background/edit-connected-components-with-background.component';
+import { ConceptMapContent } from '../ConceptMapContent';
 
 @Component({
   selector: 'app-edit-concept-map-connected-components',
@@ -38,12 +39,12 @@ export class EditConceptMapConnectedComponentsComponent extends EditConnectedCom
           $localize`Warning: This will delete all existing nodes and links in this component.`
       )
     ) {
-      const connectedComponentContent = this.ProjectService.getComponentByNodeIdAndComponentId(
+      const connectedComponent = this.ProjectService.getComponent(
         nodeId,
         componentId
-      );
-      this.componentContent.nodes = connectedComponentContent.nodes;
-      this.componentContent.links = connectedComponentContent.links;
+      ) as ConceptMapContent;
+      this.componentContent.nodes = connectedComponent.nodes;
+      this.componentContent.links = connectedComponent.links;
       this.connectedComponentChanged();
     }
   }

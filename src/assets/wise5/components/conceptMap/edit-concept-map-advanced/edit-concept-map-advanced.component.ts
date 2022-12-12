@@ -3,7 +3,7 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
+import { ConceptMapContent } from '../ConceptMapContent';
 
 @Component({
   selector: 'edit-concept-map-advanced',
@@ -11,19 +11,19 @@ import { UtilService } from '../../../services/utilService';
   styleUrls: ['edit-concept-map-advanced.component.scss']
 })
 export class EditConceptMapAdvancedComponent extends EditAdvancedComponentComponent {
+  componentContent: ConceptMapContent;
   allowedConnectedComponentTypes = ['ConceptMap', 'Draw', 'Embedded', 'Graph', 'Label', 'Table'];
 
   constructor(
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected projectService: TeacherProjectService
   ) {
-    super(NodeService, NotebookService, ProjectService);
+    super(nodeService, notebookService, projectService);
   }
 
   ruleTypeChanged(ruleIndex: number): void {
-    const rule = this.authoringComponentContent.rules[ruleIndex];
+    const rule = this.componentContent.rules[ruleIndex];
     if (rule.type === 'node') {
       /*
        * the rule has been set to 'node' instead of 'link' so we
@@ -46,9 +46,9 @@ export class EditConceptMapAdvancedComponent extends EditAdvancedComponentCompon
       not: false
     };
 
-    this.authoringComponentContent.rules.push(newRule);
+    this.componentContent.rules.push(newRule);
     let showSubmitButton = false;
-    if (this.authoringComponentContent.rules.length > 0) {
+    if (this.componentContent.rules.length > 0) {
       showSubmitButton = true;
     }
 
@@ -57,15 +57,15 @@ export class EditConceptMapAdvancedComponent extends EditAdvancedComponentCompon
   }
 
   ruleDeleteButtonClicked(index: number): void {
-    const rule = this.authoringComponentContent.rules[index];
+    const rule = this.componentContent.rules[index];
     const ruleName = rule.name;
     if (confirm($localize`Are you sure you want to delete this rule?\n\nRule Name: ${ruleName}`)) {
-      this.authoringComponentContent.rules.splice(index, 1);
+      this.componentContent.rules.splice(index, 1);
       this.componentChanged();
     }
 
     let showSubmitButton = false;
-    if (this.authoringComponentContent.rules.length > 0) {
+    if (this.componentContent.rules.length > 0) {
       showSubmitButton = true;
     }
     this.setShowSubmitButtonValue(showSubmitButton);

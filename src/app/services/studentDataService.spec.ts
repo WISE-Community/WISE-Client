@@ -8,6 +8,7 @@ import { UtilService } from '../../assets/wise5/services/utilService';
 import { TagService } from '../../assets/wise5/services/tagService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { ComponentContent } from '../../assets/wise5/common/ComponentContent';
 
 let $injector, $rootScope;
 let http: HttpTestingController;
@@ -1220,8 +1221,8 @@ function shouldCheckIsCompleted() {
     spyOn(service, 'getEventsByNodeIdAndComponentId').and.returnValue(componentEvents);
     const nodeEvents = [];
     spyOn(service, 'getEventsByNodeId').and.returnValue(nodeEvents);
-    const component = { id: 'component1', type: 'OpenResponse' };
-    spyOn(projectService, 'getComponentByNodeIdAndComponentId').and.returnValue(component);
+    const component = { id: 'component1', type: 'OpenResponse' } as ComponentContent;
+    spyOn(projectService, 'getComponent').and.returnValue(component);
     const node = { id: 'node1' };
     spyOn(projectService, 'getNodeById').and.returnValue(node);
     expect(service.isCompleted('node1', 'component1')).toEqual(false);
@@ -1233,8 +1234,8 @@ function shouldCheckIsCompleted() {
     spyOn(service, 'getEventsByNodeIdAndComponentId').and.returnValue(componentEvents);
     const nodeEvents = [];
     spyOn(service, 'getEventsByNodeId').and.returnValue(nodeEvents);
-    const component = { id: 'component1', type: 'OpenResponse' };
-    spyOn(projectService, 'getComponentByNodeIdAndComponentId').and.returnValue(component);
+    const component = { id: 'component1', type: 'OpenResponse' } as ComponentContent;
+    spyOn(projectService, 'getComponent').and.returnValue(component);
     const node = { id: 'node1' };
     spyOn(projectService, 'getNodeById').and.returnValue(node);
     expect(service.isCompleted('node1', 'component1')).toEqual(true);
@@ -1246,8 +1247,8 @@ function shouldCheckIsCompleted() {
     const components = [
       { id: 'component1', type: 'OpenResponse' },
       { id: 'component2', type: 'OpenResponse' }
-    ];
-    spyOn(projectService, 'getComponentsByNodeId').and.returnValue(components);
+    ] as ComponentContent[];
+    spyOn(projectService, 'getComponents').and.returnValue(components);
     spyOn(service, 'getComponentStatesByNodeIdAndComponentId').and.callFake(
       (nodeId, componentId) => {
         if (nodeId === 'node1' && componentId === 'component1') {
@@ -1270,8 +1271,8 @@ function shouldCheckIsCompleted() {
     const components = [
       { id: 'component1', type: 'OpenResponse' },
       { id: 'component2', type: 'OpenResponse' }
-    ];
-    spyOn(projectService, 'getComponentsByNodeId').and.returnValue(components);
+    ] as ComponentContent[];
+    spyOn(projectService, 'getComponents').and.returnValue(components);
     spyOn(service, 'getComponentStatesByNodeIdAndComponentId').and.callFake(
       (nodeId, componentId) => {
         if (nodeId === 'node1' && componentId === 'component1') {

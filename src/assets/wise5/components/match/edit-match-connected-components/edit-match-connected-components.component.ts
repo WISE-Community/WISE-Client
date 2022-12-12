@@ -29,7 +29,7 @@ export class EditMatchConnectedComponentsComponent extends EditConnectedComponen
       )
     ) {
       const connectedComponentContent = this.UtilService.makeCopyOfJSONObject(
-        this.ProjectService.getComponentByNodeIdAndComponentId(nodeId, componentId)
+        this.ProjectService.getComponent(nodeId, componentId)
       );
       this.componentContent.choices = connectedComponentContent.choices;
       this.componentContent.buckets = connectedComponentContent.buckets;

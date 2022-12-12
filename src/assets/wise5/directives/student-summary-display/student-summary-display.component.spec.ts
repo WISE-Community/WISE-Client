@@ -3,6 +3,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../common/ComponentContent';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
 import { StudentSummaryDisplay } from './student-summary-display.component';
@@ -204,10 +205,8 @@ function initializeOtherComponent() {
       const otherComponent = {
         id: 'component2',
         type: otherComponentType
-      };
-      spyOn(TestBed.inject(ProjectService), 'getComponentByNodeIdAndComponentId').and.returnValue(
-        otherComponent
-      );
+      } as ComponentContent;
+      spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(otherComponent);
       component.initializeOtherComponent();
       expect(component.otherComponent).toEqual(otherComponent);
       expect(component.otherComponentType).toEqual(otherComponentType);

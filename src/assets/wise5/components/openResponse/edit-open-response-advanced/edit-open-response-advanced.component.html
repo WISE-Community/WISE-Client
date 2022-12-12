@@ -2,7 +2,7 @@
   <mat-label i18n>Starter Sentence (Optional)</mat-label>
   <textarea
       matInput
-      [(ngModel)]="authoringComponentContent.starterSentence"
+      [(ngModel)]="componentContent.starterSentence"
       (ngModelChange)="componentChanged()"
       cdkTextareaAutosize>
   </textarea>
@@ -11,7 +11,7 @@
   <mat-checkbox
       color="primary"
       class="checkbox"
-      [(ngModel)]="authoringComponentContent.isStudentAudioRecordingEnabled"
+      [(ngModel)]="componentContent.isStudentAudioRecordingEnabled"
       (ngModelChange)="componentChanged()"
       i18n>
     Allow students to record audio response
@@ -21,24 +21,24 @@
   <mat-checkbox
       color="primary"
       class="checkbox"
-      [(ngModel)]="authoringComponentContent.enableCRater"
+      [(ngModel)]="componentContent.enableCRater"
       (ngModelChange)="enableCRaterClicked()"
       i18n>
     Enable CRater
   </mat-checkbox>
 </div>
-<div *ngIf="authoringComponentContent.enableCRater">
+<div *ngIf="componentContent.enableCRater">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <mat-form-field>
       <mat-label i18n>Item Id</mat-label>
       <input matInput
-          [(ngModel)]="authoringComponentContent.cRater.itemId"
+          [(ngModel)]="componentContent.cRater.itemId"
           (ngModelChange)="componentChanged()"/>
     </mat-form-field>
     <div>
       <button mat-raised-button
           color="primary"
-          (click)="verifyCRaterItemId(authoringComponentContent.cRater.itemId)"
+          (click)="verifyCRaterItemId(componentContent.cRater.itemId)"
           i18n>
         Verify
       </button>
@@ -50,7 +50,7 @@
   <div>
     <mat-form-field>
       <mat-label i18n>Score On</mat-label>
-      <mat-select [(ngModel)]="authoringComponentContent.cRater.scoreOn"
+      <mat-select [(ngModel)]="componentContent.cRater.scoreOn"
           (ngModelChange)="componentChanged()">
         <mat-option value="submit" i18n>Submit</mat-option>
         <mat-option value="save" i18n>Save</mat-option>
@@ -62,7 +62,7 @@
     <mat-checkbox
         color="primary"
         class="checkbox"
-        [(ngModel)]="authoringComponentContent.cRater.showScore"
+        [(ngModel)]="componentContent.cRater.showScore"
         (ngModelChange)="componentChanged()"
         i18n>
       Show Score
@@ -71,12 +71,26 @@
   <mat-checkbox
       color="primary"
       class="checkbox"
-      [(ngModel)]="authoringComponentContent.cRater.showFeedback"
+      [(ngModel)]="componentContent.cRater.showFeedback"
       (ngModelChange)="componentChanged()"
       i18n>
     Show Feedback
   </mat-checkbox>
   <div class="section-container">
+    <mat-checkbox
+        color="primary"
+        class="checkbox"
+        [ngModel]="componentContent.cRater.feedback?.enabled"
+        (ngModelChange)="setFeedbackEnabled($event)"
+        i18n>
+      Enable Feedback Rules
+    </mat-checkbox>
+    <edit-feedback-rules *ngIf="componentContent.cRater.feedback?.enabled"
+        [feedbackRules]="componentContent.cRater.feedback.rules">
+    </edit-feedback-rules>
+  </div>
+  <div class="section-container"
+      *ngIf="!componentContent.cRater.feedback?.enabled && componentContent.cRater.scoringRules.length > 0">
     <div fxLayoutGap="10px" class="section-label">
       <span i18n>Scoring Rule</span>
       <button
@@ -89,7 +103,7 @@
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <div *ngFor="let scoringRule of authoringComponentContent.cRater.scoringRules; index as scoringRuleIndex; first as isFirst; last as isLast"
+    <div *ngFor="let scoringRule of componentContent.cRater.scoringRules; index as scoringRuleIndex; first as isFirst; last as isLast"
         fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px" class="section-item">
       <mat-form-field class="scoring-rule-score">
         <mat-label i18n>Score</mat-label>
@@ -111,7 +125,7 @@
         <button
             mat-raised-button
             color="primary"
-            (click)="moveObjectUp(authoringComponentContent.cRater.scoringRules, scoringRuleIndex)"
+            (click)="moveObjectUp(componentContent.cRater.scoringRules, scoringRuleIndex)"
             [disabled]="isFirst"
             matTooltip="Move Scoring Rule Up"
             matTooltipPosition="above"
@@ -121,7 +135,7 @@
         <button
             mat-raised-button
             color="primary"
-            (click)="moveObjectDown(authoringComponentContent.cRater.scoringRules, scoringRuleIndex)"
+            (click)="moveObjectDown(componentContent.cRater.scoringRules, scoringRuleIndex)"
             [disabled]="isLast"
             matTooltip="Move Scoring Rule Down"
             matTooltipPosition="above"
@@ -144,13 +158,13 @@
       <mat-checkbox
           color="primary"
           class="checkbox"
-          [(ngModel)]="authoringComponentContent.cRater.enableMultipleAttemptScoringRules"
+          [(ngModel)]="componentContent.cRater.enableMultipleAttemptScoringRules"
           (click)="enableMultipleAttemptScoringRulesClicked()"
           i18n>
         Enable Multiple Attempt Feedback
       </mat-checkbox>
     </div>
-    <div *ngIf="authoringComponentContent.cRater.enableMultipleAttemptScoringRules">
+    <div *ngIf="componentContent.cRater.enableMultipleAttemptScoringRules">
       <div fxLayoutGap="10px" class="section-label">
         <span i18n>Multiple Attempt Scoring Rules</span>
         <button
@@ -163,7 +177,7 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div *ngFor="let multipleAttemptScoringRule of authoringComponentContent.cRater.multipleAttemptScoringRules; index as multipleAttemptScoringRuleIndex; first as isFirst; last as isLast"
+      <div *ngFor="let multipleAttemptScoringRule of componentContent.cRater.multipleAttemptScoringRules; index as multipleAttemptScoringRuleIndex; first as isFirst; last as isLast"
           fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px" class="section-item">
         <mat-form-field class="previous-score">
           <mat-label i18n>Previous Score</mat-label>
@@ -191,7 +205,7 @@
           <button
              mat-raised-button
              color="primary"
-             (click)="moveObjectUp(authoringComponentContent.cRater.multipleAttemptScoringRules, multipleAttemptScoringRuleIndex)"
+             (click)="moveObjectUp(componentContent.cRater.multipleAttemptScoringRules, multipleAttemptScoringRuleIndex)"
              [disabled]="isFirst"
              matTooltip="Move Multiple Attempt Scoring Rule Up"
              matTooltipPosition="above"
@@ -201,7 +215,7 @@
           <button
              mat-raised-button
              color="primary"
-             (click)="moveObjectDown(authoringComponentContent.cRater.multipleAttemptScoringRules, multipleAttemptScoringRuleIndex)"
+             (click)="moveObjectDown(componentContent.cRater.multipleAttemptScoringRules, multipleAttemptScoringRuleIndex)"
              [disabled]="isLast"
              matTooltip="Move Multiple Attempt Scoring Rule Down"
              matTooltipPosition="above"
@@ -226,13 +240,13 @@
       <mat-checkbox
           color="primary"
           class="checkbox"
-          [(ngModel)]="authoringComponentContent.enableNotifications"
+          [(ngModel)]="componentContent.enableNotifications"
           (ngModelChange)="enableNotificationsClicked()"
           i18n>
         Enable Notifications
       </mat-checkbox>
     </div>
-    <div *ngIf="authoringComponentContent.enableNotifications">
+    <div *ngIf="componentContent.enableNotifications">
       <div fxLayoutGap="10px" class="section-label">
         <span i18n>Notifications</span>
         <button
@@ -245,7 +259,7 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div *ngFor="let notification of authoringComponentContent.notificationSettings.notifications; index as notificationIndex; first as isFirst; last as isLast"
+      <div *ngFor="let notification of componentContent.notificationSettings.notifications; index as notificationIndex; first as isFirst; last as isLast"
           class="section-item">
         <div fxLayoutGap="20px">
           <mat-form-field class="notification-score">
@@ -269,7 +283,7 @@
             <button
                 mat-raised-button
                 color="primary"
-                (click)="moveObjectUp(authoringComponentContent.notificationSettings.notifications, notificationIndex)"
+                (click)="moveObjectUp(componentContent.notificationSettings.notifications, notificationIndex)"
                 [disabled]="isFirst"
                 matTooltip="Move Notification Up"
                 matTooltipPosition="above"
@@ -279,7 +293,7 @@
             <button
                 mat-raised-button
                 color="primary"
-                (click)="moveObjectDown(authoringComponentContent.notificationSettings.notifications, notificationIndex)"
+                (click)="moveObjectDown(componentContent.notificationSettings.notifications, notificationIndex)"
                 [disabled]="isLast"
                 matTooltip="Move Notification Down"
                 matTooltipPosition="above"
@@ -356,7 +370,7 @@
         i18n>
       Use Custom Completion Criteria
     </mat-checkbox>
-    <div *ngIf="useCustomCompletionCriteria && authoringComponentContent.completionCriteria != null">
+    <div *ngIf="useCustomCompletionCriteria && componentContent.completionCriteria != null">
       <div fxLayoutGap="10px" class="section-label">
         <span i18n>Custom Completion Criteria</span>
         <button
@@ -369,7 +383,7 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div *ngFor="let criteria of authoringComponentContent.completionCriteria.criteria; index as criteriaIndex; first as isFirst; last as isLast"
+      <div *ngFor="let criteria of componentContent.completionCriteria.criteria; index as criteriaIndex; first as isFirst; last as isLast"
           fxLayout="row wrap"
           fxLayoutAlign="start center"
           fxLayoutGap="20px"
@@ -381,7 +395,7 @@
             <ng-container *ngFor="let nodeId of nodeIds">
               <mat-option *ngIf="isApplicationNode(nodeId)"
                   [value]="nodeId">
-                {{ getNodePositionAndTitleByNodeId(nodeId) }}
+                {{ getNodePositionAndTitle(nodeId) }}
               </mat-option>
             </ng-container>
           </mat-select>
@@ -390,7 +404,7 @@
           <mat-label i18n>Component</mat-label>
           <mat-select [(ngModel)]="criteria.componentId"
               (ngModelChange)="componentChanged()">
-            <mat-option *ngFor="let component of getComponentsByNodeId(criteria.nodeId); index as componentIndex"
+            <mat-option *ngFor="let component of getComponents(criteria.nodeId); index as componentIndex"
                 [value]="component.id">
               {{ componentIndex + 1 }}. {{ component.type }}
               <span *ngIf="component.id === componentId" i18n>(This Component)</span>
@@ -410,7 +424,7 @@
           <button
               mat-raised-button
               color="primary"
-              (click)="moveObjectUp(authoringComponentContent.completionCriteria.criteria, criteriaIndex)"
+              (click)="moveObjectUp(componentContent.completionCriteria.criteria, criteriaIndex)"
               [disabled]="isFirst"
               matTooltip="Move Completion Criteria Up"
               matTooltipPosition="above"
@@ -420,7 +434,7 @@
           <button
               mat-raised-button
               color="primary"
-              (click)="moveObjectDown(authoringComponentContent.completionCriteria.criteria, criteriaIndex)"
+              (click)="moveObjectDown(componentContent.completionCriteria.criteria, criteriaIndex)"
               [disabled]="isLast"
               matTooltip="Move Completion Criteria Down"
               matTooltipPosition="above"
@@ -442,12 +456,12 @@
   </div>
 </div>
 <div *ngIf="isNotebookEnabled()">
-  <edit-component-add-to-notebook-button [authoringComponentContent]="authoringComponentContent">
+  <edit-component-add-to-notebook-button [componentContent]="componentContent">
   </edit-component-add-to-notebook-button>
 </div>
 <edit-common-advanced
     [nodeId]="nodeId"
     [componentId]="componentId"
     [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-    [authoringComponentContent]="authoringComponentContent">
+    [componentContent]="componentContent">
 </edit-common-advanced>

@@ -7,8 +7,8 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { ComponentAuthoring } from '../../../authoringTool/components/component-authoring.component';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
+import { RandomKeyService } from '../../../services/randomKeyService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { UtilService } from '../../../services/utilService';
 
 @Component({
   selector: 'animation-authoring',
@@ -25,8 +25,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
     protected ConfigService: ConfigService,
     protected NodeService: NodeService,
     protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected ProjectService: TeacherProjectService
   ) {
     super(ConfigService, NodeService, ProjectAssetService, ProjectService);
     this.stepNodesDetails = this.ProjectService.getStepNodesDetailsInOrder();
@@ -38,14 +37,14 @@ export class AnimationAuthoring extends ComponentAuthoring {
   }
 
   addObject(): void {
-    if (this.authoringComponentContent.objects == null) {
-      this.authoringComponentContent.objects = [];
+    if (this.componentContent.objects == null) {
+      this.componentContent.objects = [];
     }
     const newObject = {
-      id: this.UtilService.generateKey(10),
+      id: RandomKeyService.generate(),
       type: 'image'
     };
-    this.authoringComponentContent.objects.push(newObject);
+    this.componentContent.objects.push(newObject);
     this.componentChanged();
   }
 
@@ -114,7 +113,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
 
   moveAuthoredObjectUp(index: number): void {
     if (this.canMoveUp(index)) {
-      const objects = this.authoringComponentContent.objects;
+      const objects = this.componentContent.objects;
       const object = objects[index];
       objects.splice(index, 1);
       objects.splice(index - 1, 0, object);
@@ -123,7 +122,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
   }
 
   moveAuthoredObjectDown(index: number): void {
-    const objects = this.authoringComponentContent.objects;
+    const objects = this.componentContent.objects;
     if (this.canMoveDown(index, objects.length)) {
       const object = objects[index];
       objects.splice(index, 1);
@@ -147,7 +146,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
   }
 
   deleteAnimationObject(index: number): void {
-    this.authoringComponentContent.objects.splice(index, 1);
+    this.componentContent.objects.splice(index, 1);
     this.componentChanged();
   }
 
@@ -199,7 +198,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
     authoredObject.dataSource = {
       nodeId: nodeId
     };
-    const components = this.getComponentsByNodeId(nodeId);
+    const components = this.getComponents(nodeId);
     const availableDataSourceComponents = components.filter((component) => {
       return this.availableDataSourceComponentTypes.includes(component.type);
     });
@@ -214,7 +213,7 @@ export class AnimationAuthoring extends ComponentAuthoring {
   dataSourceComponentChanged(authoredObject: any): void {
     const nodeId = authoredObject.dataSource.nodeId;
     const componentId = authoredObject.dataSource.componentId;
-    const component = this.getComponentByNodeIdAndComponentId(nodeId, componentId);
+    const component = this.getComponent(nodeId, componentId);
     authoredObject.dataSource = {
       nodeId: nodeId,
       componentId: componentId
@@ -289,9 +288,9 @@ export class AnimationAuthoring extends ComponentAuthoring {
     });
   }
 
-  getComponentByNodeIdAndComponentId(nodeId: string, componentId: string): any {
+  getComponent(nodeId: string, componentId: string): any {
     if (nodeId != null && componentId != null) {
-      const component = super.getComponentByNodeIdAndComponentId(nodeId, componentId);
+      const component = super.getComponent(nodeId, componentId);
       if (component != null) {
         return component;
       }

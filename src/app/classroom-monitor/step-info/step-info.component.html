@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="start center">
   <node-icon [nodeId]="nodeId" size="18" fxHide.xs></node-icon>
   <span fxHide.xs>&nbsp;&nbsp;</span>
-  <div class="heavy">
+  <div>
     {{ stepTitle }}
     <status-icon *ngIf="hasAlert"
         [iconClass]="alertIconClass"

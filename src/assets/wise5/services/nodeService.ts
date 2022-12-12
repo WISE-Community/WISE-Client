@@ -18,8 +18,6 @@ export class NodeService {
   public doneRenderingComponent$ = this.doneRenderingComponentSource.asObservable();
   private componentShowSubmitButtonValueChangedSource: Subject<any> = new Subject<any>();
   public componentShowSubmitButtonValueChanged$: Observable<any> = this.componentShowSubmitButtonValueChangedSource.asObservable();
-  private showRubricSource: Subject<string> = new Subject<string>();
-  public showRubric$: Observable<string> = this.showRubricSource.asObservable();
   private starterStateResponseSource: Subject<any> = new Subject<any>();
   public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
   private deleteStarterStateSource: Subject<any> = new Subject<any>();
@@ -31,136 +29,6 @@ export class NodeService {
     private ProjectService: ProjectService,
     private DataService: DataService
   ) {}
-
-  /**
-   * Create a new empty node state
-   * @return a new empty node state
-   */
-  createNewComponentState(): any {
-    return {
-      clientSaveTime: new Date().getTime()
-    };
-  }
-
-  /**
-   * Create a new empty node state
-   * @return a new empty node state
-   */
-  createNewNodeState() {
-    return {
-      runId: this.ConfigService.getRunId(),
-      periodId: this.ConfigService.getPeriodId(),
-      workgroupId: this.ConfigService.getWorkgroupId(),
-      clientSaveTime: new Date().getTime()
-    };
-  }
-
-  /**
-   * Get the node type in camel case
-   * @param nodeType the node type e.g. OpenResponse
-   * @return the node type in camel case
-   * e.g.
-   * openResponse
-   */
-  toCamelCase(nodeType) {
-    if (nodeType != null && nodeType.length > 0) {
-      const firstChar = nodeType.charAt(0);
-      if (firstChar != null) {
-        const firstCharLowerCase = firstChar.toLowerCase();
-        if (firstCharLowerCase != null) {
-          return firstCharLowerCase + nodeType.substr(1);
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Check if the string is in all uppercase
-   * @param str the string to check
-   * @return whether the string is in all uppercase
-   */
-  isStringUpperCase(str) {
-    return str != null && str === str.toUpperCase();
-  }
-
-  getComponentTemplatePath(componentType) {
-    return this.getComponentFolderPath(componentType) + '/index.html';
-  }
-
-  getComponentAuthoringTemplatePath(componentType) {
-    return this.getComponentFolderPath(componentType) + '/authoring.html';
-  }
-
-  /**
-   * Get the html template for the component
-   * @param componentType the component type
-   * @return the path to the html template for the component
-   */
-  getComponentFolderPath(componentType) {
-    if (this.isStringUpperCase(componentType)) {
-      componentType = componentType.toLowerCase();
-    } else {
-      componentType = this.toCamelCase(componentType);
-    }
-    return this.ConfigService.getWISEBaseURL() + '/assets/wise5/components/' + componentType;
-  }
-
-  /**
-   * Get the component content
-   * @param componentContent the component content
-   * @param componentId the component id
-   * @return the component content
-   */
-  getComponentContentById(nodeContent, componentId) {
-    if (nodeContent != null && componentId != null) {
-      const components = nodeContent.components;
-      if (components != null) {
-        for (let tempComponent of components) {
-          if (tempComponent != null) {
-            const tempComponentId = tempComponent.id;
-            if (tempComponentId === componentId) {
-              return tempComponent;
-            }
-          }
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Check if any of the component states were submitted
-   * @param componentStates an array of component states
-   * @return whether any of the component states were submitted
-   */
-  isWorkSubmitted(componentStates) {
-    if (componentStates != null) {
-      for (let componentState of componentStates) {
-        if (componentState != null) {
-          if (componentState.isSubmit) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Check if the node or component is completed
-   * @param functionParams the params that will specify which node or component
-   * to check for completion
-   * @returns whether the specified node or component is completed
-   */
-  isCompleted(functionParams) {
-    if (functionParams != null) {
-      const nodeId = functionParams.nodeId;
-      const componentId = functionParams.componentId;
-      return this.DataService.isCompleted(nodeId, componentId);
-    }
-    return false;
-  }
 
   goToNextNode() {
     return this.getNextNodeId().then((nextNodeId) => {
@@ -467,7 +335,7 @@ export class NodeService {
                   const toNodeId = availableTransition.to;
                   const path = {
                     nodeId: toNodeId,
-                    nodeTitle: this.ProjectService.getNodePositionAndTitleByNodeId(toNodeId),
+                    nodeTitle: this.ProjectService.getNodePositionAndTitle(toNodeId),
                     transition: availableTransition
                   };
                   paths.push(path);
@@ -682,7 +550,7 @@ export class NodeService {
    * component id. If this argument is null, we will place the new
    * component(s) in the first position.
    */
-  moveComponent(nodeId, componentIds, insertAfterComponentId) {
+  moveComponent(nodeId: string, componentIds: string[], insertAfterComponentId: string): void {
     const node = this.ProjectService.getNodeById(nodeId);
     const components = node.components;
     const extractedComponents = this.extractComponents(components, componentIds);
@@ -730,10 +598,6 @@ export class NodeService {
 
   respondStarterState(args: any) {
     this.starterStateResponseSource.next(args);
-  }
-
-  showRubric(id: string): void {
-    this.showRubricSource.next(id);
   }
 
   scrollToComponentAndHighlight(componentId: string): void {
