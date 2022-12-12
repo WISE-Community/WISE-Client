@@ -1,7 +1,7 @@
 @import
-  '~style/abstracts/variables',
-  '~style/abstracts/functions',
-  '~style/abstracts/mixins';
+  'style/abstracts/variables',
+  'style/abstracts/functions',
+  'style/abstracts/mixins';
 
 .mat-icon-button {
   @include mat-icon-button-size(36px);

@@ -1,8 +1,8 @@
 @import
-  '~@angular/material/theming',
-  '~style/abstracts/variables',
-  '~style/abstracts/mixins',
-  '~style/abstracts/functions';
+  '@angular/material/theming',
+  'style/abstracts/variables',
+  'style/abstracts/mixins',
+  'style/abstracts/functions';
 
 .library {
   text-align: left;
@@ -40,7 +40,7 @@
   .mat-paginator {
     background: transparent;
   }
-  
+
   .mat-paginator-range-label {
     margin: 0 8px;
   }

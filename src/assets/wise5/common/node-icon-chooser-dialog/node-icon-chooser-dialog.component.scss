@@ -1,7 +1,7 @@
 @import
-  '~@angular/material/theming',
-  '~style/abstracts/functions',
-  '~style/abstracts/variables';
+  '@angular/material/theming',
+  'style/abstracts/functions',
+  'style/abstracts/variables';
 
 @mixin selected {
   background-color: #000000;
