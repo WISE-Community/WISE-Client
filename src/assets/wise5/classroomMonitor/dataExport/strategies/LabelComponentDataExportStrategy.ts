@@ -4,27 +4,22 @@ import { ComponentRevisionCounter } from '../ComponentRevisionCounter';
 import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExportStrategy';
 
 export class LabelComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
-  maxNumLabels: number;
+  COMPONENT_TYPE = 'label';
+  maxNumLabels: number = 0;
 
   constructor(component: Component, additionalParams: ComponentDataExportParams) {
     super(component, additionalParams);
-    this.maxNumLabels = 0;
+    this.populateColumnNames();
   }
 
   export(): void {
     this.controller.showDownloadingExportMessage();
     const components = [{ nodeId: this.component.nodeId, componentId: this.component.id }];
     this.dataExportService.retrieveStudentDataExport(components).then((result) => {
-      this.populateColumnNames(this.columnNames, this.columnNameToNumber);
       let rows = [this.generateComponentHeaderRow(this.columnNames)];
-      rows = rows.concat(this.generateComponentWorkRows(this.component, this.component.nodeId));
+      rows = rows.concat(this.generateComponentWorkRows(this.component));
       this.addLabelHeaders(rows, this.maxNumLabels);
-      const fileName = this.generateExportFileName(
-        this.component.nodeId,
-        this.component.id,
-        'label'
-      );
-      this.controller.generateCSVFile(rows, fileName);
+      this.controller.generateCSVFile(rows, this.generateExportFileName());
       this.controller.hideDownloadingExportMessage();
     });
   }
@@ -69,7 +64,7 @@ export class LabelComponentDataExportStrategy extends AbstractComponentDataExpor
     }
   }
 
-  private addLabelHeaders(rows: any[], maxNumLabels: number): void {
+  private addLabelHeaders(rows: string[][], maxNumLabels: number): void {
     for (let i = 1; i <= maxNumLabels; i++) {
       rows[0].push(`Label ${i}`);
     }

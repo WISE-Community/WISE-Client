@@ -5,6 +5,8 @@ import { UserIdsAndStudentNames } from '../UserIdsAndStudentNames';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 
 export abstract class AbstractComponentDataExportStrategy extends AbstractDataExportStrategy {
+  abstract COMPONENT_TYPE: string;
+
   canViewStudentNames: boolean;
   columnNames: string[] = [];
   columnNameToNumber: Map<string, number> = new Map<string, number>();
@@ -38,7 +40,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     return [...columnNames];
   }
 
-  populateColumnNames(columnNames: string[], columnNameToNumber: Map<string, number>): void {
+  populateColumnNames(): void {
     const defaultColumnNames = [
       '#',
       'Workgroup ID',
@@ -69,18 +71,18 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     ];
     for (let c = 0; c < defaultColumnNames.length; c++) {
       const defaultColumnName = defaultColumnNames[c];
-      columnNameToNumber.set(defaultColumnName, c);
-      columnNames.push(defaultColumnName);
+      this.columnNameToNumber.set(defaultColumnName, c);
+      this.columnNames.push(defaultColumnName);
     }
   }
 
-  generateComponentWorkRows(component: Component, nodeId: string): string[] {
+  generateComponentWorkRows(component: Component): string[] {
     let rows = [];
     let rowCounter = 1;
     for (const workgroupId of this.configService.getClassmateWorkgroupIds()) {
       const rowsForWorkgroup = this.generateComponentWorkRowsForWorkgroup(
         workgroupId,
-        nodeId,
+        component.nodeId,
         component.id,
         rowCounter
       );
@@ -98,7 +100,7 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   ): string[] {
     const rows = [];
     const userInfo = this.configService.getUserInfoByWorkgroupId(workgroupId);
-    const extractedUserIdsAndStudentNames = new UserIdsAndStudentNames(
+    const userIdsAndStudentNames = new UserIdsAndStudentNames(
       userInfo.users,
       this.canViewStudentNames
     );
@@ -113,12 +115,12 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
         const row = this.generateComponentWorkRow(
           rowCounter,
           workgroupId,
-          extractedUserIdsAndStudentNames.getUserId(1),
-          extractedUserIdsAndStudentNames.getUserId(2),
-          extractedUserIdsAndStudentNames.getUserId(3),
-          extractedUserIdsAndStudentNames.getStudentName(1),
-          extractedUserIdsAndStudentNames.getStudentName(2),
-          extractedUserIdsAndStudentNames.getStudentName(3),
+          userIdsAndStudentNames.getUserId(1),
+          userIdsAndStudentNames.getUserId(2),
+          userIdsAndStudentNames.getUserId(3),
+          userIdsAndStudentNames.getStudentName(1),
+          userIdsAndStudentNames.getStudentName(2),
+          userIdsAndStudentNames.getStudentName(3),
           userInfo.periodName,
           componentRevisionCounter,
           componentState
@@ -297,10 +299,11 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     }
   }
 
-  generateExportFileName(nodeId: string, componentId: string, componentType: string): string {
+  generateExportFileName(): string {
     const runId = this.configService.getRunId();
-    const stepNumber = this.projectService.getNodePositionById(nodeId);
-    const componentNumber = this.projectService.getComponentPosition(nodeId, componentId) + 1;
-    return `${runId}_step_${stepNumber}_component_${componentNumber}_${componentType}_work.csv`;
+    const stepNumber = this.projectService.getNodePositionById(this.component.nodeId);
+    const componentNumber =
+      this.projectService.getComponentPosition(this.component.nodeId, this.component.id) + 1;
+    return `${runId}_step_${stepNumber}_component_${componentNumber}_${this.COMPONENT_TYPE}_work.csv`;
   }
 }
