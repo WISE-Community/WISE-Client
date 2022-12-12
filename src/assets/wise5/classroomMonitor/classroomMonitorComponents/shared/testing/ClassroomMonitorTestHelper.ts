@@ -1,4 +1,4 @@
-export class StudentProgressComponentTestHelper {
+export class ClassroomMonitorTestHelper {
   workgroupId1: number = 1;
   workgroupId2: number = 2;
   workgroupId3: number = 3;

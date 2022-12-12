@@ -8,12 +8,12 @@ import { WorkgroupSelectAutocompleteComponent } from '../../../../app/classroom-
 import { ConfigService } from '../../services/configService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { ClassroomMonitorTestingModule } from '../classroom-monitor-testing.module';
+import { ClassroomMonitorTestHelper } from '../classroomMonitorComponents/shared/testing/ClassroomMonitorTestHelper';
 import { StudentProgressComponent } from './student-progress.component';
-import { StudentProgressComponentTestHelper } from './student-progress.component.test.helper';
 
 let component: StudentProgressComponent;
 let fixture: ComponentFixture<StudentProgressComponent>;
-let testHelper: StudentProgressComponentTestHelper;
+let testHelper: ClassroomMonitorTestHelper;
 
 describe('StudentProgressComponent', () => {
   beforeEach(async () => {
@@ -41,7 +41,7 @@ describe('StudentProgressComponent', () => {
     });
     spyOn(TestBed.inject(ConfigService), 'getClassmateUserInfos').and.returnValue([]);
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({ periodId: 1 });
-    testHelper = new StudentProgressComponentTestHelper();
+    testHelper = new ClassroomMonitorTestHelper();
     fixture.detectChanges();
   });
 
