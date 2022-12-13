@@ -1,3 +1,5 @@
+import { TransitionLogic } from './TransitionLogic';
+
 export class Node {
   components: any[] = [];
   icons: any;
@@ -7,6 +9,7 @@ export class Node {
   showSaveButton: boolean;
   showSubmitButton: boolean;
   title: string;
+  transitionLogic?: TransitionLogic;
   type: string;
 
   getIcon(): any {
@@ -52,5 +55,14 @@ export class Node {
 
   hasComponent(componentId: string): boolean {
     return this.components.some((component) => component.id === componentId);
+  }
+
+  getTransitionLogic(): TransitionLogic {
+    if (this.transitionLogic == null) {
+      this.transitionLogic = {
+        transitions: []
+      };
+    }
+    return this.transitionLogic;
   }
 }
