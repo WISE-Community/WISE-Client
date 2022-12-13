@@ -14,6 +14,8 @@ import { Directive } from '@angular/core';
 import { Node } from '../../common/Node';
 import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
 import { ComponentTypeService } from '../../services/componentTypeService';
+import { ComponentContent } from '../../common/ComponentContent';
+import { Component } from '../../common/Component';
 
 @Directive()
 class NodeAuthoringController {
@@ -587,7 +589,8 @@ class NodeAuthoringController {
     return componentObjects;
   }
 
-  showComponentAdvancedAuthoring(component: any) {
+  showComponentAdvancedAuthoring(componentContent: ComponentContent) {
+    const component = new Component(componentContent, this.nodeId);
     this.$mdDialog.show({
       templateUrl: 'assets/wise5/authoringTool/components/edit-component-advanced.html',
       controller: [
