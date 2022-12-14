@@ -1,6 +1,7 @@
 import { Component } from '../../../common/Component';
 import { ComponentDataExportParams } from '../ComponentDataExportParams';
 import { ComponentRevisionCounter } from '../ComponentRevisionCounter';
+import { UserIdsAndStudentNames } from '../UserIdsAndStudentNames';
 import { AbstractComponentDataExportStrategy } from './AbstractComponentDataExportStrategy';
 
 export class LabelComponentDataExportStrategy extends AbstractComponentDataExportStrategy {
@@ -25,27 +26,15 @@ export class LabelComponentDataExportStrategy extends AbstractComponentDataExpor
   }
 
   generateComponentWorkRow(
-    rowCounter: number,
     workgroupId: number,
-    userId1: number,
-    userId2: number,
-    userId3: number,
-    studentName1: string,
-    studentName2: string,
-    studentName3: string,
+    userIdsAndStudentNames: UserIdsAndStudentNames,
     periodName: string,
     componentRevisionCounter: ComponentRevisionCounter,
     labelComponentState: any
   ): string[] {
     const row = this.createStudentWorkExportRow(
-      rowCounter,
       workgroupId,
-      userId1,
-      userId2,
-      userId3,
-      studentName1,
-      studentName2,
-      studentName3,
+      userIdsAndStudentNames,
       periodName,
       componentRevisionCounter,
       labelComponentState

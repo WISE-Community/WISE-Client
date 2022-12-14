@@ -8,10 +8,38 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   abstract COMPONENT_TYPE: string;
 
   canViewStudentNames: boolean;
-  columnNames: string[] = [];
+  columnNames: string[] = [
+    '#',
+    'Workgroup ID',
+    'User ID 1',
+    'Student Name 1',
+    'User ID 2',
+    'Student Name 2',
+    'User ID 3',
+    'Student Name 3',
+    'Class Period',
+    'Project ID',
+    'Project Name',
+    'Run ID',
+    'Start Date',
+    'End Date',
+    'Server Timestamp',
+    'Client Timestamp',
+    'Node ID',
+    'Component ID',
+    'Component Part Number',
+    'Step Title',
+    'Component Type',
+    'Component Prompt',
+    'Student Data',
+    'Component Revision Counter',
+    'Is Submit',
+    'Submit Count'
+  ];
   columnNameToNumber: Map<string, number> = new Map<string, number>();
   includeOnlySubmits: boolean;
   includeStudentNames: boolean;
+  rowCounter: number;
   workSelectionType: string;
 
   constructor(protected component: Component, additionalParams: ComponentDataExportParams) {
@@ -23,14 +51,8 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   }
 
   abstract generateComponentWorkRow(
-    rowCounter: number,
     workgroupId: number,
-    userId1: number,
-    userId2: number,
-    userId3: number,
-    studentName1: string,
-    studentName2: string,
-    studentName3: string,
+    userIdsAndStudentNames: UserIdsAndStudentNames,
     periodName: string,
     componentRevisionCounter: ComponentRevisionCounter,
     componentState: any
@@ -41,62 +63,24 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
   }
 
   populateColumnNames(): void {
-    const defaultColumnNames = [
-      '#',
-      'Workgroup ID',
-      'User ID 1',
-      'Student Name 1',
-      'User ID 2',
-      'Student Name 2',
-      'User ID 3',
-      'Student Name 3',
-      'Class Period',
-      'Project ID',
-      'Project Name',
-      'Run ID',
-      'Start Date',
-      'End Date',
-      'Server Timestamp',
-      'Client Timestamp',
-      'Node ID',
-      'Component ID',
-      'Component Part Number',
-      'Step Title',
-      'Component Type',
-      'Component Prompt',
-      'Student Data',
-      'Component Revision Counter',
-      'Is Submit',
-      'Submit Count'
-    ];
-    for (let c = 0; c < defaultColumnNames.length; c++) {
-      const defaultColumnName = defaultColumnNames[c];
-      this.columnNameToNumber.set(defaultColumnName, c);
-      this.columnNames.push(defaultColumnName);
+    for (let c = 0; c < this.columnNames.length; c++) {
+      this.columnNameToNumber.set(this.columnNames[c], c);
     }
   }
 
   generateComponentWorkRows(component: Component): string[] {
     let rows = [];
-    let rowCounter = 1;
+    this.rowCounter = 1;
     for (const workgroupId of this.configService.getClassmateWorkgroupIds()) {
-      const rowsForWorkgroup = this.generateComponentWorkRowsForWorkgroup(
-        workgroupId,
-        component.nodeId,
-        component.id,
-        rowCounter
-      );
+      const rowsForWorkgroup = this.generateComponentWorkRowsForWorkgroup(workgroupId, component);
       rows = rows.concat(rowsForWorkgroup);
-      rowCounter += rowsForWorkgroup.length;
     }
     return rows;
   }
 
   private generateComponentWorkRowsForWorkgroup(
     workgroupId: number,
-    nodeId: string,
-    componentId: string,
-    rowCounter: number
+    component: Component
   ): string[] {
     const rows = [];
     const userInfo = this.configService.getUserInfoByWorkgroupId(workgroupId);
@@ -107,28 +91,22 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     const componentRevisionCounter = new ComponentRevisionCounter();
     const componentStates = this.teacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
       workgroupId,
-      componentId
+      component.id
     );
     for (let c = 0; c < componentStates.length; c++) {
       const componentState = componentStates[c];
       if (this.shouldExportRow(componentState, c, componentStates.length)) {
         const row = this.generateComponentWorkRow(
-          rowCounter,
           workgroupId,
-          userIdsAndStudentNames.getUserId(1),
-          userIdsAndStudentNames.getUserId(2),
-          userIdsAndStudentNames.getUserId(3),
-          userIdsAndStudentNames.getStudentName(1),
-          userIdsAndStudentNames.getStudentName(2),
-          userIdsAndStudentNames.getStudentName(3),
+          userIdsAndStudentNames,
           userInfo.periodName,
           componentRevisionCounter,
           componentState
         );
         rows.push(row);
-        rowCounter++;
+        this.rowCounter++;
       } else {
-        componentRevisionCounter.incrementCounter(nodeId, componentId);
+        componentRevisionCounter.incrementCounter(component.nodeId, component.id);
       }
     }
     return rows;
@@ -172,31 +150,17 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
    * @return an array containing the cells in the row
    */
   createStudentWorkExportRow(
-    rowCounter: number,
     workgroupId: number,
-    userId1: number,
-    userId2: number,
-    userId3: number,
-    studentName1: string,
-    studentName2: string,
-    studentName3: string,
+    userIdsAndStudentNames: UserIdsAndStudentNames,
     periodName: string,
     componentRevisionCounter: ComponentRevisionCounter,
     componentState: any
   ): string[] {
     const row = new Array(this.columnNames.length);
     row.fill('');
-    row[this.columnNameToNumber.get('#')] = rowCounter;
+    row[this.columnNameToNumber.get('#')] = this.rowCounter;
     row[this.columnNameToNumber.get('Workgroup ID')] = workgroupId;
-    this.setStudentIDsAndNames(
-      row,
-      userId1,
-      studentName1,
-      userId2,
-      studentName2,
-      userId3,
-      studentName3
-    );
+    this.setStudentIDsAndNames(row, userIdsAndStudentNames);
     row[this.columnNameToNumber.get('Class Period')] = periodName;
     row[this.columnNameToNumber.get('Project ID')] = this.configService.getProjectId();
     row[this.columnNameToNumber.get('Project Name')] = this.projectService.getProjectTitle();
@@ -225,16 +189,10 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
       row[this.columnNameToNumber.get('Component Prompt')] = prompt;
     }
     const studentData = componentState.studentData;
-    if (studentData != null) {
-      row[this.columnNameToNumber.get('Student Data')] = studentData;
-      const isCorrect = studentData.isCorrect;
-      if (isCorrect != null) {
-        if (isCorrect) {
-          row[this.columnNameToNumber.get('Is Correct')] = 1;
-        } else {
-          row[this.columnNameToNumber.get('Is Correct')] = 0;
-        }
-      }
+    row[this.columnNameToNumber.get('Student Data')] = studentData;
+    const isCorrect = studentData.isCorrect;
+    if (isCorrect != null) {
+      row[this.columnNameToNumber.get('Is Correct')] = isCorrect ? 1 : 0;
     }
     if (componentState.revisionCounter == null) {
       /*
@@ -258,11 +216,9 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     componentRevisionCounter.incrementCounter(componentState.nodeId, componentState.componentId);
     if (componentState.isSubmit) {
       row[this.columnNameToNumber.get('Is Submit')] = 1;
-      if (studentData != null) {
-        const submitCounter = studentData.submitCounter;
-        if (submitCounter != null) {
-          row[this.columnNameToNumber.get('Submit Count')] = submitCounter;
-        }
+      const submitCounter = studentData.submitCounter;
+      if (submitCounter != null) {
+        row[this.columnNameToNumber.get('Submit Count')] = submitCounter;
       }
     } else {
       row[this.columnNameToNumber.get('Is Submit')] = 0;
@@ -270,32 +226,32 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     return row;
   }
 
-  private setStudentIDsAndNames(
+  private setStudentIDsAndNames(row: any[], userIdsAndStudentNames: UserIdsAndStudentNames): void {
+    for (let s = 1; s <= 3; s++) {
+      this.setUserIdIfAvailable(row, userIdsAndStudentNames, s);
+      this.setStudentNameIfAvailable(row, userIdsAndStudentNames, s);
+    }
+  }
+
+  private setUserIdIfAvailable(
     row: any[],
-    userId1: number,
-    studentName1: string,
-    userId2: number,
-    studentName2: string,
-    userId3: number,
-    studentName3: string
+    userIdsAndStudentNames: UserIdsAndStudentNames,
+    studentNumber: number
   ): void {
-    if (userId1 != null) {
-      row[this.columnNameToNumber.get('User ID 1')] = userId1;
+    const userId = userIdsAndStudentNames.getUserId(studentNumber);
+    if (userId != null) {
+      row[this.columnNameToNumber.get(`User ID ${studentNumber}`)] = userId;
     }
-    if (studentName1 != null && this.includeStudentNames) {
-      row[this.columnNameToNumber.get('Student Name 1')] = studentName1;
-    }
-    if (userId2 != null) {
-      row[this.columnNameToNumber.get('User ID 2')] = userId2;
-    }
-    if (studentName2 != null && this.includeStudentNames) {
-      row[this.columnNameToNumber.get('Student Name 2')] = studentName2;
-    }
-    if (userId3 != null) {
-      row[this.columnNameToNumber.get('User ID 3')] = userId3;
-    }
-    if (studentName3 != null && this.includeStudentNames) {
-      row[this.columnNameToNumber.get('Student Name 3')] = studentName3;
+  }
+
+  private setStudentNameIfAvailable(
+    row: any[],
+    userIdsAndStudentNames: UserIdsAndStudentNames,
+    studentNumber: number
+  ): void {
+    const studentName = userIdsAndStudentNames.getStudentName(studentNumber);
+    if (studentName != null && this.includeStudentNames) {
+      row[this.columnNameToNumber.get(`Student Name ${studentNumber}`)] = studentName;
     }
   }
 
