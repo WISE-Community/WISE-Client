@@ -20,6 +20,8 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionComponentDataExportStrategy';
+import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
+import { Component as WISEComponent } from '../../../common/Component';
 
 @Component({
   selector: 'data-export',
@@ -27,8 +29,14 @@ import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionC
   styleUrls: ['./data-export.component.scss']
 })
 export class DataExportComponent implements OnInit {
-  allowedComponentTypesForAllRevisions = ['DialogGuidance', 'Discussion', 'Match', 'OpenResponse'];
-  allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Match', 'OpenResponse'];
+  allowedComponentTypesForAllRevisions = [
+    'DialogGuidance',
+    'Discussion',
+    'Label',
+    'Match',
+    'OpenResponse'
+  ];
+  allowedComponentTypesForLatestRevisions = ['DialogGuidance', 'Label', 'Match', 'OpenResponse'];
   autoScoreLabel: string = 'Auto Score';
   componentExportTooltips = {};
   componentExportDefaultColumnNames = [
@@ -1015,6 +1023,8 @@ export class DataExportComponent implements OnInit {
       this.exportOpenResponseComponent(nodeId, component);
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
+    } else if (component.type === 'Label') {
+      this.exportLabelComponent(nodeId, component);
     }
   }
 
@@ -1033,7 +1043,21 @@ export class DataExportComponent implements OnInit {
       this.exportOpenResponseComponent(nodeId, component);
     } else if (this.isEmbeddedTableComponentAndCanExport(component)) {
       this.exportEmbeddedComponent(nodeId, component);
+    } else if (component.type === 'Label') {
+      this.exportLabelComponent(nodeId, component);
     }
+  }
+
+  private exportLabelComponent(nodeId: string, component: any): void {
+    this.dataExportContext.setStrategy(
+      new LabelComponentDataExportStrategy(new WISEComponent(component, nodeId), {
+        canViewStudentNames: this.canViewStudentNames,
+        includeOnlySubmits: this.includeOnlySubmits,
+        includeStudentNames: this.includeStudentNames,
+        workSelectionType: this.workSelectionType
+      })
+    );
+    this.dataExportContext.export();
   }
 
   /**
