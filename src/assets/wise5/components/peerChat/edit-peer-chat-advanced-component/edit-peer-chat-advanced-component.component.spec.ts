@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { PeerChatContent } from '../PeerChatContent';
 import { EditPeerChatAdvancedComponentComponent } from './edit-peer-chat-advanced-component.component';
 
 describe('EditPeerChatAdvancedComponentComponent', () => {
@@ -18,6 +19,9 @@ describe('EditPeerChatAdvancedComponentComponent', () => {
   });
 
   beforeEach(() => {
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
+      {} as PeerChatContent
+    );
     fixture = TestBed.createComponent(EditPeerChatAdvancedComponentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

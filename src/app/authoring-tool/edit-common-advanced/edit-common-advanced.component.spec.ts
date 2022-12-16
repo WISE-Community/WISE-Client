@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Component } from '../../../assets/wise5/common/Component';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditComponentExcludeFromTotalScoreComponent } from '../edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
@@ -58,7 +59,7 @@ describe('EditCommonAdvancedComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditCommonAdvancedComponent);
     component = fixture.componentInstance;
-    component.componentContent = {};
+    component.component = { content: {} } as Component;
     fixture.detectChanges();
   });
 

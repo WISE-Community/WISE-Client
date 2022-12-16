@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Component as WISEComponent } from '../../../assets/wise5/common/Component';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
@@ -7,24 +8,15 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
   styleUrls: ['./edit-common-advanced.component.scss']
 })
 export class EditCommonAdvancedComponent implements OnInit {
-  @Input()
-  allowedConnectedComponentTypes: string[] = [];
+  @Input() allowedConnectedComponentTypes: string[] = [];
+  @Input() component: WISEComponent;
 
-  @Input()
-  componentContent: any;
-
-  @Input()
-  componentId: string;
-
-  @Input()
-  nodeId: string;
-
-  constructor(protected ProjectService: TeacherProjectService) {}
+  constructor(protected projectService: TeacherProjectService) {}
 
   ngOnInit(): void {}
 
   connectedComponentsChanged(connectedComponents: any[]): void {
-    this.componentContent.connectedComponents = connectedComponents;
+    this.component.content.connectedComponents = connectedComponents;
     this.componentChanged();
   }
 
@@ -33,6 +25,6 @@ export class EditCommonAdvancedComponent implements OnInit {
   }
 
   componentChanged(): void {
-    this.ProjectService.nodeChanged();
+    this.projectService.nodeChanged();
   }
 }
