@@ -128,116 +128,108 @@ export class StudentProgressComponent implements OnInit {
     }
     switch (this.sort) {
       case 'team':
-        this.sortedTeams.sort(this.sortTeamAscending);
+        this.sortedTeams.sort(this.createSortTeam('asc'));
         break;
       case '-team':
-        this.sortedTeams.sort(this.sortTeamDescending);
+        this.sortedTeams.sort(this.createSortTeam('desc'));
         break;
       case 'student':
-        this.sortedTeams.sort(this.sortStudentAscending);
+        this.sortedTeams.sort(this.createSortStudent('asc'));
         break;
       case '-student':
-        this.sortedTeams.sort(this.sortStudentDescending);
+        this.sortedTeams.sort(this.createSortStudent('desc'));
         break;
       case 'score':
-        this.sortedTeams.sort(this.sortScoreAscending);
+        this.sortedTeams.sort(this.createSortScore('asc'));
         break;
       case '-score':
-        this.sortedTeams.sort(this.sortScoreDescending);
+        this.sortedTeams.sort(this.createSortScore('desc'));
         break;
       case 'completion':
-        this.sortedTeams.sort(this.sortCompletionAscending);
+        this.sortedTeams.sort(this.createSortCompletion('asc'));
         break;
       case '-completion':
-        this.sortedTeams.sort(this.sortCompletionDescending);
+        this.sortedTeams.sort(this.createSortCompletion('desc'));
         break;
       case 'location':
-        this.sortedTeams.sort(this.sortLocationAscending);
+        this.sortedTeams.sort(this.createSortLocation('asc'));
         break;
       case '-location':
-        this.sortedTeams.sort(this.sortLocationDescending);
+        this.sortedTeams.sort(this.createSortLocation('desc'));
         break;
     }
   }
 
-  private sortTeamAscending(workgroupA: any, workgroupB: any): number {
-    return workgroupA.workgroupId - workgroupB.workgroupId;
+  private createSortTeam(direction: string): any {
+    return (workgroupA: any, workgroupB: any) => {
+      if (direction === 'asc') {
+        return workgroupA.workgroupId - workgroupB.workgroupId;
+      } else {
+        return workgroupB.workgroupId - workgroupA.workgroupId;
+      }
+    };
   }
 
-  private sortTeamDescending(workgroupA: any, workgroupB: any): number {
-    return workgroupB.workgroupId - workgroupA.workgroupId;
+  private createSortStudent(direction: string): any {
+    return (workgroupA: any, workgroupB: any) => {
+      let localeCompare: number;
+      if (direction === 'asc') {
+        localeCompare = workgroupA.username.localeCompare(workgroupB.username);
+      } else {
+        localeCompare = workgroupB.username.localeCompare(workgroupA.username);
+      }
+      if (localeCompare === 0) {
+        return workgroupA.workgroupId - workgroupB.workgroupId;
+      } else {
+        return localeCompare;
+      }
+    };
   }
 
-  private sortStudentAscending(workgroupA: any, workgroupB: any): number {
-    const localeCompare = workgroupA.username.localeCompare(workgroupB.username);
-    if (localeCompare === 0) {
-      return workgroupA.workgroupId - workgroupB.workgroupId;
-    } else {
-      return localeCompare;
-    }
+  private createSortScore(direction: string): any {
+    return (workgroupA: any, workgroupB: any) => {
+      if (workgroupA.scorePct === workgroupB.scorePct) {
+        return workgroupA.username.localeCompare(workgroupB.username);
+      } else {
+        if (direction === 'asc') {
+          return workgroupA.scorePct - workgroupB.scorePct;
+        } else {
+          return workgroupB.scorePct - workgroupA.scorePct;
+        }
+      }
+    };
   }
 
-  private sortStudentDescending(workgroupA: any, workgroupB: any): number {
-    const localeCompare = workgroupB.username.localeCompare(workgroupA.username);
-    if (localeCompare === 0) {
-      return workgroupB.workgroupId - workgroupA.workgroupId;
-    } else {
-      return localeCompare;
-    }
+  private createSortCompletion(direction: string): any {
+    return (workgroupA: any, workgroupB: any) => {
+      const completionA = workgroupA.completion.completionPct;
+      const completionB = workgroupB.completion.completionPct;
+      if (completionA === completionB) {
+        return workgroupA.username.localeCompare(workgroupB.username);
+      } else {
+        if (direction === 'asc') {
+          return completionA - completionB;
+        } else {
+          return completionB - completionA;
+        }
+      }
+    };
   }
 
-  private sortScoreAscending(workgroupA: any, workgroupB: any): number {
-    if (workgroupA.scorePct === workgroupB.scorePct) {
-      return workgroupA.username.localeCompare(workgroupB.username);
-    } else {
-      return workgroupA.scorePct - workgroupB.scorePct;
-    }
-  }
-
-  private sortScoreDescending(workgroupA: any, workgroupB: any): number {
-    if (workgroupA.scorePct === workgroupB.scorePct) {
-      return workgroupA.username.localeCompare(workgroupB.username);
-    } else {
-      return workgroupB.scorePct - workgroupA.scorePct;
-    }
-  }
-
-  private sortCompletionAscending(workgroupA: any, workgroupB: any): number {
-    const completionA = workgroupA.completion.completionPct;
-    const completionB = workgroupB.completion.completionPct;
-    if (completionA === completionB) {
-      return workgroupA.username.localeCompare(workgroupB.username);
-    } else {
-      return completionA - completionB;
-    }
-  }
-
-  private sortCompletionDescending(workgroupA: any, workgroupB: any): number {
-    const completionA = workgroupA.completion.completionPct;
-    const completionB = workgroupB.completion.completionPct;
-    if (completionA === completionB) {
-      return workgroupA.username.localeCompare(workgroupB.username);
-    } else {
-      return completionB - completionA;
-    }
-  }
-
-  private sortLocationAscending(workgroupA: any, workgroupB: any): number {
-    const localeCompare = workgroupA.location.localeCompare(workgroupB.location);
-    if (localeCompare === 0) {
-      return workgroupA.username.localeCompare(workgroupB.username);
-    } else {
-      return localeCompare;
-    }
-  }
-
-  private sortLocationDescending(workgroupA: any, workgroupB: any): number {
-    const localeCompare = workgroupB.location.localeCompare(workgroupA.location);
-    if (localeCompare === 0) {
-      return workgroupA.username.localeCompare(workgroupB.username);
-    } else {
-      return localeCompare;
-    }
+  private createSortLocation(direction: string): any {
+    return (workgroupA: any, workgroupB: any) => {
+      let localeCompare: number;
+      if (direction === 'asc') {
+        localeCompare = workgroupA.location.localeCompare(workgroupB.location);
+      } else {
+        localeCompare = workgroupB.location.localeCompare(workgroupA.location);
+      }
+      if (localeCompare === 0) {
+        return workgroupA.username.localeCompare(workgroupB.username);
+      } else {
+        return localeCompare;
+      }
+    };
   }
 
   isWorkgroupShown(workgroup: number): boolean {
