@@ -161,7 +161,7 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private createSortTeam(direction: string): any {
-    return (workgroupA: any, workgroupB: any) => {
+    return (workgroupA: any, workgroupB: any): number => {
       if (direction === 'asc') {
         return workgroupA.workgroupId - workgroupB.workgroupId;
       } else {
@@ -171,7 +171,7 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private createSortStudent(direction: string): any {
-    return (workgroupA: any, workgroupB: any) => {
+    return (workgroupA: any, workgroupB: any): number => {
       let localeCompare: number;
       if (direction === 'asc') {
         localeCompare = workgroupA.username.localeCompare(workgroupB.username);
@@ -187,7 +187,7 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private createSortScore(direction: string): any {
-    return (workgroupA: any, workgroupB: any) => {
+    return (workgroupA: any, workgroupB: any): number => {
       if (workgroupA.scorePct === workgroupB.scorePct) {
         return workgroupA.username.localeCompare(workgroupB.username);
       } else {
@@ -201,7 +201,7 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private createSortCompletion(direction: string): any {
-    return (workgroupA: any, workgroupB: any) => {
+    return (workgroupA: any, workgroupB: any): number => {
       const completionA = workgroupA.completion.completionPct;
       const completionB = workgroupB.completion.completionPct;
       if (completionA === completionB) {
@@ -217,7 +217,7 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private createSortLocation(direction: string): any {
-    return (workgroupA: any, workgroupB: any) => {
+    return (workgroupA: any, workgroupB: any): number => {
       let localeCompare: number;
       if (direction === 'asc') {
         localeCompare = workgroupA.location.localeCompare(workgroupB.location);
