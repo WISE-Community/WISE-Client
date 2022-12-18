@@ -27,7 +27,7 @@ export class OneWorkgroupPerRowDataExportStrategy extends AbstractDataExportStra
       }
     }
 
-    this.dataExportService.retrieveOneWorkgroupPerRowExport(selectedNodes).then((result) => {
+    this.dataExportService.retrieveStudentDataExport(selectedNodes).then((result) => {
       var rows = [];
       var projectId = this.configService.getProjectId();
       var projectTitle = this.projectService.getProjectTitle();

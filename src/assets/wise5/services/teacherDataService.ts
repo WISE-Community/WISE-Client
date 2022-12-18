@@ -10,6 +10,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { Node } from '../common/Node';
+import { compressToEncodedURIComponent } from 'lz-string';
 
 @Injectable()
 export class TeacherDataService extends DataService {
@@ -166,8 +167,9 @@ export class TeacherDataService extends DataService {
       .set('getStudentWork', 'true')
       .set('getAnnotations', 'false')
       .set('getEvents', 'false');
-    for (const component of this.getAllRelatedComponents(node)) {
-      params = params.append('components', JSON.stringify(component));
+    const components = this.getAllRelatedComponents(node);
+    if (components.length > 0) {
+      params = params.set('components', compressToEncodedURIComponent(JSON.stringify(components)));
     }
     return this.retrieveStudentData(params);
   }
