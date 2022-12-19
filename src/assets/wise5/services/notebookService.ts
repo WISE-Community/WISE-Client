@@ -60,7 +60,7 @@ export class NotebookService {
   public notebookUpdated$ = this.notebookUpdatedSource.asObservable();
   private publicNotebookItemsRetrievedSource: Subject<any> = new Subject<any>();
   public publicNotebookItemsRetrieved$ = this.publicNotebookItemsRetrievedSource.asObservable();
-  private showReportAnnotationsSource: Subject<any> = new Subject<any>();
+  private showReportAnnotationsSource: Subject<void> = new Subject<void>();
   public showReportAnnotations$ = this.showReportAnnotationsSource.asObservable();
   private notesVisibleSource: Subject<boolean> = new Subject<boolean>();
   public notesVisible$ = this.notesVisibleSource.asObservable();

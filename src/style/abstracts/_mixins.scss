@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 
 // Define a custom mixin for common styles
 @mixin common-setup() {
@@ -113,7 +113,7 @@
     cursor: pointer;
     border-radius: $button-border-radius;
     @include mat-elevation(3);
-  
+
     &:hover, &:focus {
       @include mat-elevation(4);
     }
@@ -147,7 +147,7 @@
 
     &:not(.mat-expanded) {
       border-radius: $button-border-radius;
-      
+
       .mat-expansion-panel-header {
         border-radius: $button-border-radius;
       }

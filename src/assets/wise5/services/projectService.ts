@@ -39,8 +39,8 @@ export class ProjectService {
   project: any = null;
   rootNode: any = null;
   transitions: Transition[] = [];
-  private projectChangedSource: Subject<any> = new Subject<any>();
-  public projectChanged$: Observable<any> = this.projectChangedSource.asObservable();
+  private projectChangedSource: Subject<void> = new Subject<void>();
+  public projectChanged$: Observable<void> = this.projectChangedSource.asObservable();
 
   constructor(
     protected branchService: BranchService,

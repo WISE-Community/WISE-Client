@@ -13,22 +13,22 @@ import { RandomKeyService } from './randomKeyService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
-  private componentChangedSource: Subject<boolean> = new Subject<boolean>();
-  public componentChanged$: Observable<boolean> = this.componentChangedSource.asObservable();
+  private componentChangedSource: Subject<void> = new Subject<void>();
+  public componentChanged$: Observable<void> = this.componentChangedSource.asObservable();
   private nodeChangedSource: Subject<boolean> = new Subject<boolean>();
   public nodeChanged$: Observable<boolean> = this.nodeChangedSource.asObservable();
   private refreshProjectSource: Subject<void> = new Subject<void>();
   public refreshProject$ = this.refreshProjectSource.asObservable();
   private scrollToBottomOfPageSource: Subject<void> = new Subject<void>();
   public scrollToBottomOfPage$ = this.scrollToBottomOfPageSource.asObservable();
-  private errorSavingProjectSource: Subject<any> = new Subject<any>();
-  public errorSavingProject$: Observable<any> = this.errorSavingProjectSource.asObservable();
-  private notAllowedToEditThisProjectSource: Subject<any> = new Subject<any>();
-  public notAllowedToEditThisProject$: Observable<any> = this.notAllowedToEditThisProjectSource.asObservable();
-  private projectSavedSource: Subject<any> = new Subject<any>();
-  public projectSaved$: Observable<any> = this.projectSavedSource.asObservable();
-  private savingProjectSource: Subject<any> = new Subject<any>();
-  public savingProject$: Observable<any> = this.savingProjectSource.asObservable();
+  private errorSavingProjectSource: Subject<void> = new Subject<void>();
+  public errorSavingProject$: Observable<void> = this.errorSavingProjectSource.asObservable();
+  private notAllowedToEditThisProjectSource: Subject<void> = new Subject<void>();
+  public notAllowedToEditThisProject$: Observable<void> = this.notAllowedToEditThisProjectSource.asObservable();
+  private projectSavedSource: Subject<void> = new Subject<void>();
+  public projectSaved$: Observable<void> = this.projectSavedSource.asObservable();
+  private savingProjectSource: Subject<void> = new Subject<void>();
+  public savingProject$: Observable<void> = this.savingProjectSource.asObservable();
 
   constructor(
     protected branchService: BranchService,

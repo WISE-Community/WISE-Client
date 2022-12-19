@@ -1,4 +1,4 @@
-@import '~style/abstracts/variables';
+@import 'style/abstracts/variables';
 
 .mat-card {
   padding: 8px;
@@ -22,7 +22,7 @@ ul {
 
 li {
   margin-bottom: 8px;
-  
+
   &:last-of-type {
     margin-bottom: 0;
   }

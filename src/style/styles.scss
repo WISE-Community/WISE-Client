@@ -45,7 +45,7 @@
 
 // 7. Themes
 // Angular Material themes
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 
 // always include only once per project
 @include mat-core();
