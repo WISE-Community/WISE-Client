@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { ConfigService } from '../../../../services/configService';

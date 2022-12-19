@@ -1,13 +1,7 @@
 export class MilestoneDetailsDialog {
   title: string;
 
-  static $inject = [
-    '$state',
-    '$mdDialog',
-    '$event',
-    'milestone',
-    'TeacherDataService'
-  ];
+  static $inject = ['$state', '$mdDialog', '$event', 'milestone', 'TeacherDataService'];
 
   constructor(
     private $state,
@@ -34,15 +28,9 @@ export class MilestoneDetailsDialog {
     });
   }
 
-  onShowWorkgroup(workgroup: any) {
-    this.saveMilestoneClosedEvent();
+  onVisitNodeGrading(nodeId: string): void {
     this.$mdDialog.hide();
-    this.TeacherDataService.setCurrentWorkgroup(workgroup);
-    this.$state.go('root.nodeProgress');
-  }
-
-  onVisitNodeGrading() {
-    this.$mdDialog.hide();
+    this.$state.go('root.cm.node', { nodeId: nodeId });
   }
 
   saveMilestoneOpenedEvent() {
