@@ -9,5 +9,5 @@ export class AddChoiceButton {
   isDisabled: boolean;
 
   @Output()
-  onClick = new EventEmitter();
+  onClick = new EventEmitter<void>();
 }

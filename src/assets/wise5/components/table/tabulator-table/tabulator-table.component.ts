@@ -49,7 +49,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   table: Tabulator;
   tableEl = document.createElement('div');
   subscriptions: Subscription = new Subscription();
-  viewInit$ = new ReplaySubject();
+  viewInit$ = new ReplaySubject<void>();
 
   constructor(protected UtilService: UtilService) {
     Tabulator.registerModule([

@@ -16,7 +16,7 @@ export class DeleteChoiceButton {
   item: any;
 
   @Output()
-  onItemDeleted = new EventEmitter();
+  onItemDeleted = new EventEmitter<void>();
 
   deleteChoice(): void {
     if (confirm($localize`Are you sure you want to delete this item?`)) {

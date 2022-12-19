@@ -32,7 +32,7 @@ export class MathService {
     this.signal = new ReplaySubject<boolean>();
     void this.registerMathJaxAsync(this.mathJax)
       .then(() => {
-        this.signal.next();
+        this.signal.next(true);
       })
       .catch((error) => console.error(error));
     this.nodeService.doneRenderingComponent$.subscribe(() => this.renderPage());

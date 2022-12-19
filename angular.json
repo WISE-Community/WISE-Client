@@ -235,7 +235,6 @@
       }
     }
   },
-  "defaultProject": "wise",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

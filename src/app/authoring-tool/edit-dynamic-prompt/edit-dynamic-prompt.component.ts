@@ -11,7 +11,7 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 export class EditDynamicPromptComponent implements OnInit {
   allowedReferenceComponentTypes: string[] = ['OpenResponse'];
   @Input() componentContent: any;
-  @Output() dynamicPromptChangedEvent = new EventEmitter();
+  @Output() dynamicPromptChangedEvent = new EventEmitter<void>();
 
   constructor(private projectService: ProjectService) {}
 
