@@ -1068,9 +1068,11 @@ export class DataExportComponent implements OnInit {
    */
   exportMatchComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService.retrieveStudentDataExport(components).then((result: any) => {
-      this.generateMatchComponentExport(nodeId, component);
-    });
+    this.dataExportService
+      .retrieveStudentData(components, true, false, true)
+      .then((result: any) => {
+        this.generateMatchComponentExport(nodeId, component);
+      });
   }
 
   generateMatchComponentExport(nodeId: string, component: any): void {
@@ -1249,9 +1251,11 @@ export class DataExportComponent implements OnInit {
 
   exportDialogGuidanceComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService.retrieveStudentDataExport(components).then((result: any) => {
-      this.generateDialogGuidanceComponentExport(nodeId, component);
-    });
+    this.dataExportService
+      .retrieveStudentData(components, true, false, true)
+      .then((result: any) => {
+        this.generateDialogGuidanceComponentExport(nodeId, component);
+      });
   }
 
   generateDialogGuidanceComponentExport(nodeId: string, component: any): void {
@@ -1263,7 +1267,7 @@ export class DataExportComponent implements OnInit {
 
   exportOpenResponseComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService.retrieveStudentDataExport(components).then(() => {
+    this.dataExportService.retrieveStudentData(components, true, false, true).then(() => {
       this.generateOpenResponseComponentExport(nodeId, component);
     });
   }
@@ -1948,9 +1952,11 @@ export class DataExportComponent implements OnInit {
 
   exportEmbeddedComponent(nodeId: string, component: any): void {
     const components = this.getComponentsParam(nodeId, component.id);
-    this.dataExportService.retrieveStudentDataExport(components).then((result: any) => {
-      this.generateEmbeddedComponentExport(nodeId, component);
-    });
+    this.dataExportService
+      .retrieveStudentData(components, true, false, true)
+      .then((result: any) => {
+        this.generateEmbeddedComponentExport(nodeId, component);
+      });
   }
 
   generateEmbeddedComponentExport(nodeId: string, component: any): void {

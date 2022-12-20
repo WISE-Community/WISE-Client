@@ -12,8 +12,13 @@ export class DataExportService {
     private TeacherDataService: TeacherDataService
   ) {}
 
-  retrieveStudentDataExport(selectedNodes = []): Promise<any> {
-    let params = this.createHttpParams('true', 'false', 'true');
+  retrieveStudentData(
+    selectedNodes = [],
+    includeStudentWork: boolean,
+    includeEvents: boolean,
+    includeAnnotations: boolean
+  ): Promise<any> {
+    let params = this.createHttpParams(includeStudentWork, includeEvents, includeAnnotations);
     if (selectedNodes.length > 0) {
       params = params.set(
         'components',
@@ -97,12 +102,16 @@ export class DataExportService {
     });
   }
 
-  private createHttpParams(studentWork: string, events: string, annotations: string): HttpParams {
+  private createHttpParams(
+    includeStudentWork: boolean,
+    includeEvents: boolean,
+    includeAnnotations: boolean
+  ): HttpParams {
     return new HttpParams()
       .set('runId', this.ConfigService.getRunId())
-      .set('getStudentWork', studentWork)
-      .set('getEvents', events)
-      .set('getAnnotations', annotations);
+      .set('getStudentWork', includeStudentWork)
+      .set('getEvents', includeEvents)
+      .set('getAnnotations', includeAnnotations);
   }
 
   getExportURL(runId: number, exportType: string): string {
