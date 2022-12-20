@@ -13,7 +13,12 @@ import { StudentProgressComponent } from './student-progress.component';
 
 let component: StudentProgressComponent;
 let fixture: ComponentFixture<StudentProgressComponent>;
-let testHelper: ClassroomMonitorTestHelper;
+const testHelper: ClassroomMonitorTestHelper = new ClassroomMonitorTestHelper();
+const workgroupId1 = testHelper.workgroupId1;
+const workgroupId2 = testHelper.workgroupId2;
+const workgroupId3 = testHelper.workgroupId3;
+const workgroupId4 = testHelper.workgroupId4;
+const workgroupId5 = testHelper.workgroupId5;
 
 describe('StudentProgressComponent', () => {
   beforeEach(async () => {
@@ -41,7 +46,6 @@ describe('StudentProgressComponent', () => {
     });
     spyOn(TestBed.inject(ConfigService), 'getClassmateUserInfos').and.returnValue([]);
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({ periodId: 1 });
-    testHelper = new ClassroomMonitorTestHelper();
     fixture.detectChanges();
   });
 
@@ -50,11 +54,11 @@ describe('StudentProgressComponent', () => {
 
 function initializeWorkgroups(component: StudentProgressComponent) {
   component.teams = [
-    createWorkgroupForTesting(testHelper.workgroupId1, 'Spongebob', '1.2: Open Response', 30, 0.8),
-    createWorkgroupForTesting(testHelper.workgroupId5, 'Patrick', '1.1: Open Response', 10, 0.6),
-    createWorkgroupForTesting(testHelper.workgroupId3, 'Squidward', '1.5: Open Response', 20, 0.4),
-    createWorkgroupForTesting(testHelper.workgroupId2, 'Sandy', '1.9: Open Response', 50, 0.8),
-    createWorkgroupForTesting(testHelper.workgroupId4, 'Plankton', '1.5: Open Response', 20, 0.8)
+    createWorkgroupForTesting(workgroupId1, 'Spongebob', '1.2: Open Response', 30, 0.8),
+    createWorkgroupForTesting(workgroupId5, 'Patrick', '1.1: Open Response', 10, 0.6),
+    createWorkgroupForTesting(workgroupId3, 'Squidward', '1.5: Open Response', 20, 0.4),
+    createWorkgroupForTesting(workgroupId2, 'Sandy', '1.9: Open Response', 50, 0.8),
+    createWorkgroupForTesting(workgroupId4, 'Plankton', '1.5: Open Response', 20, 0.8)
   ];
 }
 
@@ -81,120 +85,105 @@ function setSort() {
     beforeEach(() => {
       initializeWorkgroups(component);
     });
-    it('should sort by team ascending', () => {
-      component.sort = '';
-      component.setSort('team');
-      testHelper.expectWorkgroupOrder(component.sortedTeams, [
-        testHelper.workgroupId1,
-        testHelper.workgroupId2,
-        testHelper.workgroupId3,
-        testHelper.workgroupId4,
-        testHelper.workgroupId5
-      ]);
-    });
-    it('should sort by team descending', () => {
-      component.sort = '';
-      component.setSort('team');
-      component.setSort('team');
-      testHelper.expectWorkgroupOrder(component.sortedTeams, [
-        testHelper.workgroupId5,
-        testHelper.workgroupId4,
-        testHelper.workgroupId3,
-        testHelper.workgroupId2,
-        testHelper.workgroupId1
-      ]);
-    });
-    it('should sort by student ascending', () => {
-      component.sort = '';
-      component.setSort('student');
-      testHelper.expectWorkgroupOrder(component.sortedTeams, [
-        testHelper.workgroupId5,
-        testHelper.workgroupId4,
-        testHelper.workgroupId2,
-        testHelper.workgroupId1,
-        testHelper.workgroupId3
-      ]);
-    });
-    it('should sort by student descending', () => {
-      component.sort = '';
-      component.setSort('student');
-      component.setSort('student');
-      testHelper.expectWorkgroupOrder(component.sortedTeams, [
-        testHelper.workgroupId3,
-        testHelper.workgroupId1,
-        testHelper.workgroupId2,
-        testHelper.workgroupId4,
-        testHelper.workgroupId5
-      ]);
-    });
-    it('should sort by score ascending', () => {
-      component.sort = '';
-      component.setSort('score');
-      testHelper.expectWorkgroupOrder(component.sortedTeams, [
-        testHelper.workgroupId3,
-        testHelper.workgroupId5,
-        testHelper.workgroupId4,
-        testHelper.workgroupId2,
-        testHelper.workgroupId1
-      ]);
-    });
-    it('should sort by score descending', () => {
-      component.sort = '';
-      component.setSort('score');
-      component.setSort('-score');
-      testHelper.expectWorkgroupOrder(component.sortedTeams, [
-        testHelper.workgroupId4,
-        testHelper.workgroupId2,
-        testHelper.workgroupId1,
-        testHelper.workgroupId5,
-        testHelper.workgroupId3
-      ]);
-    });
-    it('should sort by completion ascending', () => {
-      component.sort = '';
-      component.setSort('completion');
-      testHelper.expectWorkgroupOrder(component.sortedTeams, [
-        testHelper.workgroupId5,
-        testHelper.workgroupId4,
-        testHelper.workgroupId3,
-        testHelper.workgroupId1,
-        testHelper.workgroupId2
-      ]);
-    });
-    it('should sort by completion descending', () => {
-      component.sort = '';
-      component.setSort('completion');
-      component.setSort('completion');
-      testHelper.expectWorkgroupOrder(component.sortedTeams, [
-        testHelper.workgroupId2,
-        testHelper.workgroupId1,
-        testHelper.workgroupId4,
-        testHelper.workgroupId3,
-        testHelper.workgroupId5
-      ]);
-    });
-    it('should sort by location ascending', () => {
-      component.sort = '';
-      component.setSort('location');
-      testHelper.expectWorkgroupOrder(component.sortedTeams, [
-        testHelper.workgroupId5,
-        testHelper.workgroupId1,
-        testHelper.workgroupId4,
-        testHelper.workgroupId3,
-        testHelper.workgroupId2
-      ]);
-    });
-    it('should sort by location descending', () => {
-      component.sort = '';
-      component.setSort('location');
-      component.setSort('location');
-      testHelper.expectWorkgroupOrder(component.sortedTeams, [
-        testHelper.workgroupId2,
-        testHelper.workgroupId4,
-        testHelper.workgroupId3,
-        testHelper.workgroupId1,
-        testHelper.workgroupId5
-      ]);
-    });
+    const sortTests = [
+      createSortTestParams('should sort by team ascending', 'team', 'asc', [
+        workgroupId1,
+        workgroupId2,
+        workgroupId3,
+        workgroupId4,
+        workgroupId5
+      ]),
+      createSortTestParams('should sort by team descending', 'team', 'desc', [
+        workgroupId5,
+        workgroupId4,
+        workgroupId3,
+        workgroupId2,
+        workgroupId1
+      ]),
+      createSortTestParams('should sort by student ascending', 'student', 'asc', [
+        workgroupId5,
+        workgroupId4,
+        workgroupId2,
+        workgroupId1,
+        workgroupId3
+      ]),
+      createSortTestParams('should sort by student descending', 'student', 'desc', [
+        workgroupId3,
+        workgroupId1,
+        workgroupId2,
+        workgroupId4,
+        workgroupId5
+      ]),
+      createSortTestParams('should sort by score ascending', 'score', 'asc', [
+        workgroupId3,
+        workgroupId5,
+        workgroupId4,
+        workgroupId2,
+        workgroupId1
+      ]),
+      createSortTestParams('should sort by score descending', 'score', 'desc', [
+        workgroupId4,
+        workgroupId2,
+        workgroupId1,
+        workgroupId5,
+        workgroupId3
+      ]),
+      createSortTestParams('should sort by completion ascending', 'completion', 'asc', [
+        workgroupId5,
+        workgroupId4,
+        workgroupId3,
+        workgroupId1,
+        workgroupId2
+      ]),
+      createSortTestParams('should sort by completion descending', 'completion', 'desc', [
+        workgroupId2,
+        workgroupId1,
+        workgroupId4,
+        workgroupId3,
+        workgroupId5
+      ]),
+      createSortTestParams('should sort by location ascending', 'location', 'asc', [
+        workgroupId5,
+        workgroupId1,
+        workgroupId4,
+        workgroupId3,
+        workgroupId2
+      ]),
+      createSortTestParams('should sort by location descending', 'location', 'desc', [
+        workgroupId2,
+        workgroupId4,
+        workgroupId3,
+        workgroupId1,
+        workgroupId5
+      ])
+    ];
+    for (const sortTest of sortTests) {
+      it(sortTest.testDescription, () => {
+        setSortAndDirection(sortTest.sortField, sortTest.sortDirection);
+        testHelper.expectWorkgroupOrder(component.sortedTeams, sortTest.expectedWorkgroupIdOrder);
+      });
+    }
   });
+}
+
+function createSortTestParams(
+  testDescription: string,
+  sortField: string,
+  sortDirection: string,
+  expectedWorkgroupIdOrder: number[]
+) {
+  return {
+    testDescription: testDescription,
+    sortField: sortField,
+    sortDirection: sortDirection,
+    expectedWorkgroupIdOrder: expectedWorkgroupIdOrder
+  };
+}
+
+function setSortAndDirection(field: string, direction: string) {
+  component.sort = '';
+  component.setSort(field);
+  if (direction === 'desc') {
+    component.setSort(field);
+  }
 }
