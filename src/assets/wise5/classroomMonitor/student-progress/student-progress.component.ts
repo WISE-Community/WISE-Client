@@ -122,10 +122,7 @@ export class StudentProgressComponent implements OnInit {
   }
 
   private sortWorkgroups(): void {
-    this.sortedTeams = [];
-    for (const team of this.teams) {
-      this.sortedTeams.push(team);
-    }
+    this.sortedTeams = [...this.teams];
     switch (this.sort) {
       case 'team':
         this.sortedTeams.sort(this.createSortTeam('asc'));
@@ -174,11 +171,7 @@ export class StudentProgressComponent implements OnInit {
         direction === 'asc'
           ? workgroupA.username.localeCompare(workgroupB.username)
           : workgroupB.username.localeCompare(workgroupA.username);
-      if (localeCompare === 0) {
-        return workgroupA.workgroupId - workgroupB.workgroupId;
-      } else {
-        return localeCompare;
-      }
+      return localeCompare === 0 ? workgroupA.workgroupId - workgroupB.workgroupId : localeCompare;
     };
   }
 
@@ -210,11 +203,9 @@ export class StudentProgressComponent implements OnInit {
         direction === 'asc'
           ? workgroupA.location.localeCompare(workgroupB.location)
           : workgroupB.location.localeCompare(workgroupA.location);
-      if (localeCompare === 0) {
-        return workgroupA.username.localeCompare(workgroupB.username);
-      } else {
-        return localeCompare;
-      }
+      return localeCompare === 0
+        ? workgroupA.username.localeCompare(workgroupB.username)
+        : localeCompare;
     };
   }
 
