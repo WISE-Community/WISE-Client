@@ -9777,6 +9777,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">109</context>
         </context-group>
@@ -11592,6 +11600,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
           <context context-type="linenumber">105</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
         <target state="needs-translation">Sort by team</target>
       </trans-unit>
       <trans-unit id="764a8a101f8ee5a4b98844e93406182fb078507b" datatype="html">
@@ -11608,6 +11620,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
         <target state="needs-translation">Team</target>
       </trans-unit>
       <trans-unit id="67b7f7068758d9cd539b9d3b24f0967323a43fe6" datatype="html">
@@ -11619,6 +11635,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
           <context context-type="linenumber">66</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <target state="needs-translation">Sort by completion</target>
       </trans-unit>
@@ -11651,6 +11671,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
           <context context-type="linenumber">81</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">93</context>
         </context-group>
         <target state="needs-translation">Sort by score</target>
       </trans-unit>
@@ -13290,6 +13314,10 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
           <context context-type="linenumber">38</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
         <target state="needs-translation">Team ID</target>
       </trans-unit>
       <trans-unit id="f7e865440dc3b9d0424773e70d9adf60dbad1ac6" datatype="html">
@@ -13309,6 +13337,14 @@ Are you sure you want to proceed?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
           <context context-type="linenumber">60</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <target state="needs-translation">Names</target>
       </trans-unit>
@@ -13371,6 +13407,54 @@ Are you sure you want to proceed?</target>
           <context context-type="linenumber">51</context>
         </context-group>
         <target state="needs-translation">Sort by step</target>
+      </trans-unit>
+      <trans-unit id="cb914728a3b7e341fda25f3c040d3498737334e4" datatype="html">
+        <source>Sort by names</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <target state="needs-translation">Sort by names</target>
+      </trans-unit>
+      <trans-unit id="6e8bcf34d728e5d0a52321c4d27b8ba2aaf6e18f" datatype="html">
+        <source>Current Location</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <target state="needs-translation">Current Location</target>
+      </trans-unit>
+      <trans-unit id="7caf244c4c8c15f20fe70f5c995feeb78f5277cb" datatype="html">
+        <source>Sort by location</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <target state="needs-translation">Sort by location</target>
+      </trans-unit>
+      <trans-unit id="d4c86ab7df1ba303ea3371b3976f15e1fac85e6f" datatype="html">
+        <source>Project Completion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <target state="needs-translation">Project Completion</target>
+      </trans-unit>
+      <trans-unit id="1bda3502b1b8833d88448e87041c252aff841379" datatype="html">
+        <source>Unit Completion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <target state="needs-translation">Unit Completion</target>
       </trans-unit>
       <trans-unit id="66abb23ed9adf4aa03eab3e4b75234d32748e44c" datatype="html">
         <source>
@@ -20946,14 +21030,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">7</context>
         </context-group>
         <target state="needs-translation">(Team <x id="INTERPOLATION" equiv-text="{{ workgroupId }}"/>)</target>
-      </trans-unit>
-      <trans-unit id="1bda3502b1b8833d88448e87041c252aff841379" datatype="html">
-        <source>Unit Completion</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-        <target state="needs-translation">Unit Completion</target>
       </trans-unit>
       <trans-unit id="eb3a473d4253ef87e2c5d0bbe874da4c82bcf666" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ rootNodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ rootNodeStatus.progress.totalItems }}"/> items </source>
