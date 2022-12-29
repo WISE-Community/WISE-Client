@@ -692,7 +692,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">151</context>
         </context-group>
-        <target state="needs-translation">Move Up</target>
+        <target state="translated">Aufwärts</target>
       </trans-unit>
       <trans-unit id="3a12bd96093f8972cbd9d52a68fb9178aaee4388" datatype="html">
         <source>Move Down</source>
@@ -752,7 +752,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">163</context>
         </context-group>
-        <target state="needs-translation">Move Down</target>
+        <target state="translated">Abwärts</target>
       </trans-unit>
       <trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
         <source>Delete</source>
@@ -868,7 +868,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
           <context context-type="linenumber">95</context>
         </context-group>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">Löschen</target>
       </trans-unit>
       <trans-unit id="2671031157428687170" datatype="html">
         <source>Are you sure you want to delete this default feedback?</source>
@@ -876,7 +876,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component.ts</context>
           <context context-type="linenumber">52</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this default feedback?</target>
+        <target state="translated">Möchten Sie diese Standardrückmeldung wirklich löschen?</target>
       </trans-unit>
       <trans-unit id="45229448ecf72c5acf7c79694e3fee30466771e1" datatype="html">
         <source> Show Add to Notebook Button
