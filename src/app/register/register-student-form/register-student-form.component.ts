@@ -52,14 +52,8 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     { validator: this.passwordMatchValidator }
   );
   createStudentAccountFormGroup: FormGroup = this.fb.group({
-    firstName: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
-    ]),
-    lastName: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^(?![ -])[a-zA-Z -]+(?<![ -])$')
-    ]),
+    firstName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
+    lastName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
     gender: new FormControl('', [Validators.required]),
     birthMonth: new FormControl('', [Validators.required]),
     birthDay: new FormControl({ value: '', disabled: true }, [Validators.required])

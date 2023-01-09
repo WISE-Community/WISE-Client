@@ -1,4 +1,6 @@
 export class RegisterUserFormComponent {
+  NAME_REGEX = '^[a-zA-Z]+([ -]?[a-zA-Z]+)*$';
+
   translateCreateAccountErrorMessageCode(messageCode: string) {
     switch (messageCode) {
       case 'invalidFirstAndLastName':
