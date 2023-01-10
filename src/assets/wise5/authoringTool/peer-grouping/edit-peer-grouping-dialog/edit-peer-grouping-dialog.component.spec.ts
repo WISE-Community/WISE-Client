@@ -6,11 +6,15 @@ import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
 import { EditPeerGroupingDialogComponent } from './edit-peer-grouping-dialog.component';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { DIFFERENT_IDEAS_VALUE } from '../PeerGroupingLogic';
+import { DIFFERENT_IDEAS_VALUE, DIFFERENT_SCORES_VALUE } from '../PeerGroupingLogic';
 
 let component: EditPeerGroupingDialogComponent;
+const componentId1 = 'component1';
 let dialogCloseSpy: jasmine.Spy;
 let fixture: ComponentFixture<EditPeerGroupingDialogComponent>;
+const modeAny: string = 'any';
+const modeMaximize: string = 'maximize';
+const nodeId1 = 'node1';
 
 describe('EditPeerGroupingDialogComponent', () => {
   beforeEach(async () => {
@@ -62,23 +66,35 @@ function savePeerGrouping() {
     savePeerGroupingWithLogic('manual', null, 'manual');
   });
 
-  it('should save peer grouping with different ideas logic', () => {
-    savePeerGroupingWithLogic(DIFFERENT_IDEAS_VALUE, null, 'differentIdeas("node1", "component1")');
+  it('should save peer grouping with different ideas any logic', () => {
+    savePeerGroupingWithLogic(
+      DIFFERENT_IDEAS_VALUE,
+      modeAny,
+      `${DIFFERENT_IDEAS_VALUE}("${nodeId1}", "${componentId1}", "${modeAny}")`
+    );
+  });
+
+  it('should save peer grouping with different ideas maximize logic', () => {
+    savePeerGroupingWithLogic(
+      DIFFERENT_IDEAS_VALUE,
+      modeMaximize,
+      `${DIFFERENT_IDEAS_VALUE}("${nodeId1}", "${componentId1}", "${modeMaximize}")`
+    );
   });
 
   it('should save peer grouping with different scores any logic', () => {
     savePeerGroupingWithLogic(
-      'differentKIScores',
-      'any',
-      'differentKIScores("node1", "component1", "any")'
+      DIFFERENT_SCORES_VALUE,
+      modeAny,
+      `${DIFFERENT_SCORES_VALUE}("${nodeId1}", "${componentId1}", "${modeAny}")`
     );
   });
 
   it('should save peer grouping with different scores maximize logic', () => {
     savePeerGroupingWithLogic(
-      'differentKIScores',
-      'maximize',
-      'differentKIScores("node1", "component1", "maximize")'
+      DIFFERENT_SCORES_VALUE,
+      modeMaximize,
+      `${DIFFERENT_SCORES_VALUE}("${nodeId1}", "${componentId1}", "${modeMaximize}")`
     );
   });
 }
