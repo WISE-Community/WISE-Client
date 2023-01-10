@@ -22,32 +22,32 @@ import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent'
 
 const defaultFeedbackRules = [
   new FeedbackRule({
-    id: '14ha07sykh',
+    id: 'finalSubmit',
     expression: 'isFinalSubmit',
     feedback: 'This is a generic response that is shown on a final submission'
   }),
   new FeedbackRule({
-    id: '57vmi2nn9r',
+    id: 'secondToLastSubmit',
     expression: 'isSecondToLastSubmit',
     feedback: 'This is a generic response that is shown on the second to last submission'
   }),
   new FeedbackRule({
-    id: 'opzd40hwh9',
+    id: 'thirdSubmit',
     expression: 'isSubmitNumber(3)',
     feedback: 'Is third submit'
   }),
   new FeedbackRule({
-    id: 'w73he0hwwt',
+    id: 'isNonScorable',
     expression: 'isNonScorable',
     feedback: 'isNonScorable'
   }),
   new FeedbackRule({
-    id: 'ig6xhcv0if',
+    id: 'idea1 && idea2',
     expression: 'idea1 && idea2',
     feedback: 'You hit idea1 and idea2'
   }),
   new FeedbackRule({
-    id: 'a9dck3r00h',
+    id: 'idea2 && idea3 && idea4',
     expression: 'idea2 && idea3 && idea4',
     feedback: 'You hit idea2, idea3 and idea4'
   }),
@@ -57,37 +57,37 @@ const defaultFeedbackRules = [
     feedback: 'You hit idea5 or idea6'
   }),
   new FeedbackRule({
-    id: '08cffyudvd',
+    id: 'idea7 || idea8 && idea9',
     expression: 'idea7 || idea8 && idea9',
     feedback: 'You hit idea7 or idea8 and idea9'
   }),
   new FeedbackRule({
-    id: 'wron2aclbi',
+    id: 'idea7 && idea8 || idea9',
     expression: 'idea7 && idea8 || idea9',
     feedback: 'You hit idea7 and idea8 or idea9'
   }),
   new FeedbackRule({
-    id: 'enj6k184y7',
+    id: 'idea1',
     expression: 'idea1',
     feedback: 'You hit idea1'
   }),
   new FeedbackRule({
-    id: 'th3xlzbab2',
+    id: '!idea10',
     expression: '!idea10',
     feedback: '!idea10'
   }),
   new FeedbackRule({
-    id: 'd3plb1ki1t',
+    id: 'idea10 && !idea11',
     expression: 'idea10 && !idea11',
     feedback: 'idea10 && !idea11'
   }),
   new FeedbackRule({
-    id: '322szvaki6',
+    id: '!idea11 || idea12',
     expression: '!idea11 || idea12',
     feedback: '!idea11 || idea12'
   }),
   new FeedbackRule({
-    id: 'vm4o1ms080',
+    id: 'default',
     expression: 'isDefault',
     feedback: 'This is a default feedback'
   })
@@ -126,6 +126,7 @@ describe('FeedbackRuleEvaluator', () => {
     evaluator = new FeedbackRuleEvaluator(new FeedbackRuleComponent(defaultFeedbackRules, 5, true));
   });
   matchRule_OneIdea();
+  matchRules_OneIdea();
   matchRule_MultipleIdeasUsingAnd();
   matchRule_MultipleIdeasUsingOr();
   matchRule_MultipleIdeasUsingAndOr();
@@ -143,6 +144,15 @@ describe('FeedbackRuleEvaluator', () => {
 function matchRule_OneIdea() {
   it('should find first rule matching one idea', () => {
     expectFeedback(['idea1'], [KI_SCORE_1], 1, 'You hit idea1');
+  });
+}
+
+function matchRules_OneIdea() {
+  it('should find all rules matching one idea', () => {
+    expectRules(
+      [createCRaterResponse(['idea1'], [KI_SCORE_1], 1)],
+      ['idea1', '!idea10', '!idea11 || idea12', 'default']
+    );
   });
 }
 
@@ -181,22 +191,22 @@ function matchRule_hasKIScore() {
     beforeEach(() => {
       const feedbackRules = [
         new FeedbackRule({
-          id: 'y4khoby3th',
+          id: 'hasKIScore(1)',
           expression: 'hasKIScore(1)',
           feedback: 'hasKIScore(1)'
         }),
         new FeedbackRule({
-          id: '58vuvj4o2m',
+          id: 'hasKIScore(3)',
           expression: 'hasKIScore(3)',
           feedback: 'hasKIScore(3)'
         }),
         new FeedbackRule({
-          id: '82xd4w3x34',
+          id: 'hasKIScore(5)',
           expression: 'hasKIScore(5)',
           feedback: 'hasKIScore(5)'
         }),
         new FeedbackRule({
-          id: 'mf6gt64j3i',
+          id: 'default',
           expression: 'isDefault',
           feedback: 'isDefault'
         })
@@ -204,6 +214,7 @@ function matchRule_hasKIScore() {
       evaluator = new FeedbackRuleEvaluator(new FeedbackRuleComponent(feedbackRules, 5, true));
     });
     matchRule_hasKIScoreScoreInRange_ShouldMatchRule();
+    matchRules_hasKIScoreScoreInRange_ShouldMatchRule();
     matchRule_hasKIScoreScoreNotInRange_ShouldNotMatchRule();
   });
 }
@@ -216,10 +227,19 @@ function matchRule_hasKIScoreScoreInRange_ShouldMatchRule() {
   });
 }
 
+function matchRules_hasKIScoreScoreInRange_ShouldMatchRule() {
+  it('should match all rules if KI score is in range [1-5]', () => {
+    expectRules([createCRaterResponse([], [KI_SCORE_1], 1)], ['hasKIScore(1)', 'default']);
+    expectRules([createCRaterResponse([], [KI_SCORE_3], 1)], ['hasKIScore(3)', 'default']);
+    expectRules([createCRaterResponse([], [KI_SCORE_5], 1)], ['hasKIScore(5)', 'default']);
+  });
+}
+
 function matchRule_hasKIScoreScoreNotInRange_ShouldNotMatchRule() {
   it('should not match rule if KI score is out of range [1-5]', () => {
     expectFeedback([], [KI_SCORE_0], 1, 'isDefault');
     expectFeedback([], [KI_SCORE_6], 1, 'isDefault');
+    expectRules([createCRaterResponse([], [KI_SCORE_6], 1)], ['default']);
   });
 }
 
@@ -268,24 +288,29 @@ function matchNoRule_NoDefaultFeedbackAuthored_ReturnApplicationDefault() {
       authored`, () => {
     evaluator = new FeedbackRuleEvaluator(new FeedbackRuleComponent([], 5, true));
     expectFeedback(['idea10', 'idea11'], [KI_SCORE_1], 1, evaluator.defaultFeedback);
+    expectRules([createCRaterResponse(['idea10', 'idea11'], [KI_SCORE_1], 1)], ['default']);
   });
 }
 
 function thirdSubmit() {
   it('should return third submit rule when this is the third submit', () => {
-    expectFeedback(['idea1'], [KI_SCORE_1], 3, 'Is third submit');
+    expectFeedback([], [KI_SCORE_1], 3, 'Is third submit');
+    expectRules(
+      [createCRaterResponse([], [KI_SCORE_1], 3)],
+      ['thirdSubmit', '!idea10', '!idea11 || idea12', 'default']
+    );
   });
 }
 
 function secondToLastSubmit() {
   it('should return second to last submit rule when there is one submit left', () => {
-    expectFeedback(['idea1'], [KI_SCORE_1], 4, 'second to last submission');
+    expectFeedback([], [KI_SCORE_1], 4, 'second to last submission');
   });
 }
 
 function finalSubmit() {
   it('should return final submit rule when no more submits left', () => {
-    expectFeedback(['idea1'], [KI_SCORE_1], 5, 'final submission');
+    expectFeedback([], [KI_SCORE_1], 5, 'final submission');
   });
 }
 
@@ -295,22 +320,19 @@ function nonScorable() {
   });
 }
 
+function expectRules(response: CRaterResponse[], expectedRuleIds: string[]): void {
+  const matchedRules = evaluator.getFeedbackRules(response);
+  expect(matchedRules.map((rule) => rule.id)).toEqual(expectedRuleIds);
+}
+
 function expectFeedback(
   ideas: string[],
   scores: CRaterScore[],
   submitCounter: number,
   expectedFeedback: string
 ) {
-  const rule = getFeedbackRule(ideas, scores, submitCounter);
+  const rule = evaluator.getFeedbackRule(createCRaterResponse(ideas, scores, submitCounter));
   expect(rule.feedback).toContain(expectedFeedback);
-}
-
-function getFeedbackRule(
-  ideas: string[],
-  scores: CRaterScore[],
-  submitCounter: number
-): FeedbackRule {
-  return evaluator.getFeedbackRule(createCRaterResponse(ideas, scores, submitCounter));
 }
 
 function createCRaterResponse(

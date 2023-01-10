@@ -21,20 +21,20 @@ import { QuestionBankContent } from './QuestionBankContent';
 })
 export class PeerChatQuestionBankComponent implements OnInit {
   @Input() content: QuestionBankContent;
-  @Input() displayedQuestionBankRule: QuestionBankRule;
-  @Output() displayedQuestionBankRuleChange = new EventEmitter<QuestionBankRule>();
+  @Input() displayedQuestionBankRules: QuestionBankRule[];
+  @Output() displayedQuestionBankRulesChange = new EventEmitter<QuestionBankRule[]>();
   questions: string[];
 
   constructor(private peerGroupService: PeerGroupService, private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    if (this.displayedQuestionBankRule != null) {
-      this.questions = this.displayedQuestionBankRule.questions;
-    } else {
+    if (this.displayedQuestionBankRules == null) {
       const referenceComponent = this.getReferenceComponent(this.content.questionBank);
       if (referenceComponent.content.type === 'OpenResponse') {
         this.evaluate(referenceComponent);
       }
+    } else {
+      this.setQuestions();
     }
   }
 
@@ -56,26 +56,55 @@ export class PeerChatQuestionBankComponent implements OnInit {
       this.content.nodeId,
       this.content.componentId
     ).subscribe((peerGroupStudentData: PeerGroupStudentData[]) => {
-      const cRaterResponses = peerGroupStudentData.map((peerMemberData: PeerGroupStudentData) => {
-        return new CRaterResponse({
-          ideas: peerMemberData.annotation.data.ideas,
-          scores: peerMemberData.annotation.data.scores,
-          submitCounter: peerMemberData.studentWork.studentData.submitCounter
-        });
-      });
-      const feedbackRuleEvaluator = new FeedbackRuleEvaluator(
-        new FeedbackRuleComponent(
-          this.content.questionBank.getRules(),
-          (referenceComponent.content as OpenResponseContent).maxSubmitCount,
-          false
-        )
+      const questionBankRules = this.chooseQuestionBankRulesToDisplay(
+        referenceComponent,
+        peerGroupStudentData
       );
-      const feedbackRule: QuestionBankRule = feedbackRuleEvaluator.getFeedbackRule(
-        cRaterResponses
-      ) as QuestionBankRule;
-      this.questions = feedbackRule.questions;
-      this.displayedQuestionBankRuleChange.emit(feedbackRule);
+      this.displayedQuestionBankRules = questionBankRules;
+      this.displayedQuestionBankRulesChange.emit(questionBankRules);
+      this.setQuestions();
     });
+  }
+
+  private chooseQuestionBankRulesToDisplay(
+    referenceComponent: WISEComponent,
+    peerGroupStudentData: PeerGroupStudentData[]
+  ): QuestionBankRule[] {
+    const cRaterResponses = peerGroupStudentData.map((peerMemberData: PeerGroupStudentData) => {
+      return new CRaterResponse({
+        ideas: peerMemberData.annotation.data.ideas,
+        scores: peerMemberData.annotation.data.scores,
+        submitCounter: peerMemberData.studentWork.studentData.submitCounter
+      });
+    });
+    const feedbackRuleEvaluator = new FeedbackRuleEvaluator(
+      new FeedbackRuleComponent(
+        this.content.questionBank.getRules(),
+        (referenceComponent.content as OpenResponseContent).maxSubmitCount,
+        false
+      )
+    );
+    return this.filterQuestions(
+      feedbackRuleEvaluator.getFeedbackRules(cRaterResponses) as QuestionBankRule[]
+    );
+  }
+
+  private filterQuestions(questionBankRules: QuestionBankRule[]): QuestionBankRule[] {
+    const filteredRules: QuestionBankRule[] = JSON.parse(JSON.stringify(questionBankRules));
+    filteredRules.forEach((rule) => (rule.questions = []));
+    let numAdded = 0;
+    let ruleIndex = 0;
+    const totalNumQuestions = questionBankRules.map((rule) => rule.questions).flat().length;
+    const maxQuestionsToShow = this.content.questionBank.maxQuestionsToShow;
+    while (numAdded < maxQuestionsToShow && numAdded != totalNumQuestions) {
+      if (questionBankRules[ruleIndex].questions.length > 0) {
+        const question = questionBankRules[ruleIndex].questions.shift();
+        filteredRules[ruleIndex].questions.push(question);
+        numAdded++;
+      }
+      ruleIndex = (ruleIndex + 1) % questionBankRules.length;
+    }
+    return filteredRules.filter((rule) => rule.questions.length > 0);
   }
 
   private getPeerGroupData(
@@ -94,5 +123,9 @@ export class PeerChatQuestionBankComponent implements OnInit {
           );
       })
     );
+  }
+
+  private setQuestions(): void {
+    this.questions = this.displayedQuestionBankRules.flatMap((rule) => rule.questions);
   }
 }
