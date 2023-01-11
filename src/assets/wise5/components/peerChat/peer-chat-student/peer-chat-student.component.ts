@@ -28,7 +28,7 @@ import { PeerGroup } from '../PeerGroup';
 })
 export class PeerChatStudentComponent extends ComponentStudent {
   component: PeerChatComponent;
-  displayedQuestionBankRule: QuestionBankRule;
+  displayedQuestionBankRules: QuestionBankRule[];
   dynamicPrompt: FeedbackRule;
   isPeerChatWorkgroupsResponseReceived: boolean;
   isPeerChatWorkgroupsAvailable: boolean;
@@ -167,8 +167,8 @@ export class PeerChatStudentComponent extends ComponentStudent {
     if (this.dynamicPrompt != null) {
       componentState.studentData.dynamicPrompt = this.dynamicPrompt;
     }
-    if (this.displayedQuestionBankRule != null) {
-      componentState.studentData.questionBank = this.displayedQuestionBankRule;
+    if (this.displayedQuestionBankRules != null) {
+      componentState.studentData.questionBank = this.displayedQuestionBankRules;
     }
     componentState.componentType = 'PeerChat';
     componentState.nodeId = this.component.nodeId;

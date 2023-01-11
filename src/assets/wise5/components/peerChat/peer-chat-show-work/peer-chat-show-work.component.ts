@@ -10,6 +10,7 @@ import { PeerGroup } from '../PeerGroup';
 import { PeerGroupMember } from '../PeerGroupMember';
 import { NodeService } from '../../../services/nodeService';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
+import { QuestionBankRule } from '../peer-chat-question-bank/QuestionBankRule';
 
 @Component({
   selector: 'peer-chat-show-work',
@@ -22,7 +23,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   peerChatWorkgroupIds: Set<number> = new Set<number>();
   peerChatWorkgroupInfos: any = {};
   peerGroup: PeerGroup;
-  questionBankRule: string[];
+  questionBankRules: QuestionBankRule[];
   requestTimeout: number = 10000;
 
   @Input() workgroupId: number;
@@ -85,7 +86,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     this.peerChatMessages = [];
     this.peerChatService.setPeerChatMessages(this.peerChatMessages, componentStates);
     this.dynamicPrompt = this.getDynamicPrompt(componentStates);
-    this.questionBankRule = this.getQuestionBankRule(componentStates);
+    this.questionBankRules = this.getQuestionBankRule(componentStates);
   }
 
   private getDynamicPrompt(componentStates: any[]): FeedbackRule {
@@ -98,7 +99,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     return null;
   }
 
-  private getQuestionBankRule(componentStates: any[]): string[] {
+  private getQuestionBankRule(componentStates: any[]): QuestionBankRule[] {
     for (let c = componentStates.length - 1; c >= 0; c--) {
       const questionBank = componentStates[c].studentData.questionBank;
       if (questionBank != null) {
