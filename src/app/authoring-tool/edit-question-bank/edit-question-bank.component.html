@@ -9,6 +9,12 @@
     </mat-checkbox>
   </div>
   <div *ngIf="componentContent.questionBank?.enabled">
+    <div class="max-questions-to-show-div">
+      <mat-form-field class="form-field-no-hint" appearance="fill">
+        <mat-label i18n>Number of Questions to Show</mat-label>
+        <input matInput [(ngModel)]="componentContent.questionBank.maxQuestionsToShow" (ngModelChange)='saveChanges()' />
+      </mat-form-field>
+    </div>
     <div class="reference-component-div"
         fxLayout="row wrap"
         fxLayoutAlign="start center"
