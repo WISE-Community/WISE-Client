@@ -30,8 +30,11 @@ export class PeerChatQuestionBankComponent implements OnInit {
   ngOnInit(): void {
     if (this.displayedQuestionBankRules == null) {
       const referenceComponent = this.getReferenceComponent(this.content.questionBank);
-      if (referenceComponent.content.type === 'OpenResponse') {
-        this.evaluate(referenceComponent);
+      if (
+        this.content.questionBank.isPeerGroupingTagSpecified() &&
+        referenceComponent.content.type === 'OpenResponse'
+      ) {
+        this.evaluatePeerGroup(referenceComponent);
       }
     } else {
       this.setQuestions();
@@ -42,12 +45,6 @@ export class PeerChatQuestionBankComponent implements OnInit {
     const nodeId = questionBank.getReferenceNodeId();
     const componentId = questionBank.getReferenceComponentId();
     return new WISEComponent(this.projectService.getComponent(nodeId, componentId), nodeId);
-  }
-
-  private evaluate(referenceComponent: WISEComponent): void {
-    if (this.content.questionBank.isPeerGroupingTagSpecified()) {
-      this.evaluatePeerGroup(referenceComponent);
-    }
   }
 
   private evaluatePeerGroup(referenceComponent: WISEComponent): void {
