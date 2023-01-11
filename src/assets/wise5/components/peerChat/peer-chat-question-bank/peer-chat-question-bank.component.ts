@@ -96,7 +96,8 @@ export class PeerChatQuestionBankComponent implements OnInit {
     let numAdded = 0;
     let ruleIndex = 0;
     const totalNumQuestions = questionBankRules.map((rule) => rule.questions).flat().length;
-    while (numAdded < maxQuestionsToShow && numAdded != totalNumQuestions) {
+    const maxQuestions = maxQuestionsToShow ?? totalNumQuestions;
+    while (numAdded < maxQuestions && numAdded != totalNumQuestions) {
       if (questionBankRules[ruleIndex].questions.length > 0) {
         const question = questionBankRules[ruleIndex].questions.shift();
         filteredRules[ruleIndex].questions.push(question);

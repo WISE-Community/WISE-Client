@@ -13,6 +13,7 @@
       <mat-form-field appearance="fill">
         <mat-label i18n>Max Number of Questions</mat-label>
         <input matInput
+            type="number"
             [(ngModel)]="componentContent.questionBank.maxQuestionsToShow"
             (ngModelChange)='saveChanges()' />
       </mat-form-field>
