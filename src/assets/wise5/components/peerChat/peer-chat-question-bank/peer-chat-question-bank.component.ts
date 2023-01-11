@@ -37,7 +37,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
         this.evaluatePeerGroup(referenceComponent);
       }
     } else {
-      this.setQuestions();
+      this.setQuestions(this.displayedQuestionBankRules);
     }
   }
 
@@ -59,7 +59,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
       );
       this.displayedQuestionBankRules = questionBankRules;
       this.displayedQuestionBankRulesChange.emit(questionBankRules);
-      this.setQuestions();
+      this.setQuestions(questionBankRules);
     });
   }
 
@@ -82,17 +82,20 @@ export class PeerChatQuestionBankComponent implements OnInit {
       )
     );
     return this.filterQuestions(
-      feedbackRuleEvaluator.getFeedbackRules(cRaterResponses) as QuestionBankRule[]
+      feedbackRuleEvaluator.getFeedbackRules(cRaterResponses) as QuestionBankRule[],
+      this.content.questionBank.maxQuestionsToShow
     );
   }
 
-  private filterQuestions(questionBankRules: QuestionBankRule[]): QuestionBankRule[] {
+  private filterQuestions(
+    questionBankRules: QuestionBankRule[],
+    maxQuestionsToShow: number
+  ): QuestionBankRule[] {
     const filteredRules: QuestionBankRule[] = JSON.parse(JSON.stringify(questionBankRules));
     filteredRules.forEach((rule) => (rule.questions = []));
     let numAdded = 0;
     let ruleIndex = 0;
     const totalNumQuestions = questionBankRules.map((rule) => rule.questions).flat().length;
-    const maxQuestionsToShow = this.content.questionBank.maxQuestionsToShow;
     while (numAdded < maxQuestionsToShow && numAdded != totalNumQuestions) {
       if (questionBankRules[ruleIndex].questions.length > 0) {
         const question = questionBankRules[ruleIndex].questions.shift();
@@ -122,7 +125,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
     );
   }
 
-  private setQuestions(): void {
-    this.questions = this.displayedQuestionBankRules.flatMap((rule) => rule.questions);
+  private setQuestions(rules: QuestionBankRule[]): void {
+    this.questions = rules.flatMap((rule) => rule.questions);
   }
 }
