@@ -23,8 +23,9 @@ export class FeedbackRuleEvaluator {
     const matchedRules = this.component
       .getFeedbackRules()
       .filter((rule) => this.satisfiesRule(response, Object.assign(new FeedbackRule(), rule)));
-    matchedRules.push(this.getDefaultRule(this.component.getFeedbackRules()));
-    return matchedRules;
+    return matchedRules.length > 0
+      ? matchedRules
+      : [this.getDefaultRule(this.component.getFeedbackRules())];
   }
 
   private satisfiesRule(

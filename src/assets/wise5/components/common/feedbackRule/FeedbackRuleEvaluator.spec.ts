@@ -151,7 +151,7 @@ function matchRules_OneIdea() {
   it('should find all rules matching one idea', () => {
     expectRules(
       [createCRaterResponse(['idea1'], [KI_SCORE_1], 1)],
-      ['idea1', '!idea10', '!idea11 || idea12', 'default']
+      ['idea1', '!idea10', '!idea11 || idea12']
     );
   });
 }
@@ -229,9 +229,9 @@ function matchRule_hasKIScoreScoreInRange_ShouldMatchRule() {
 
 function matchRules_hasKIScoreScoreInRange_ShouldMatchRule() {
   it('should match all rules if KI score is in range [1-5]', () => {
-    expectRules([createCRaterResponse([], [KI_SCORE_1], 1)], ['hasKIScore(1)', 'default']);
-    expectRules([createCRaterResponse([], [KI_SCORE_3], 1)], ['hasKIScore(3)', 'default']);
-    expectRules([createCRaterResponse([], [KI_SCORE_5], 1)], ['hasKIScore(5)', 'default']);
+    expectRules([createCRaterResponse([], [KI_SCORE_1], 1)], ['hasKIScore(1)']);
+    expectRules([createCRaterResponse([], [KI_SCORE_3], 1)], ['hasKIScore(3)']);
+    expectRules([createCRaterResponse([], [KI_SCORE_5], 1)], ['hasKIScore(5)']);
   });
 }
 
@@ -280,6 +280,7 @@ function matchRule_ideaCount_MatchRulesBasedOnNumIdeasFound() {
 function matchNoRule_ReturnDefault() {
   it('should return default idea when no rule is matched', () => {
     expectFeedback(['idea10', 'idea11'], [KI_SCORE_1], 1, 'default feedback');
+    expectRules([createCRaterResponse(['idea10', 'idea11'], [KI_SCORE_1], 1)], ['default']);
   });
 }
 
@@ -297,7 +298,7 @@ function thirdSubmit() {
     expectFeedback([], [KI_SCORE_1], 3, 'Is third submit');
     expectRules(
       [createCRaterResponse([], [KI_SCORE_1], 3)],
-      ['thirdSubmit', '!idea10', '!idea11 || idea12', 'default']
+      ['thirdSubmit', '!idea10', '!idea11 || idea12']
     );
   });
 }
