@@ -1357,8 +1357,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">7,9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="04246ddceb217efd6b3ba918d84e609ca92a1594" datatype="html">
-        <source>Max Number of Questions to Show</source>
+      <trans-unit id="896589cbf4473a405f00a4068706375829758d92" datatype="html">
+        <source>Max Number of Questions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank/edit-question-bank.component.html</context>
           <context context-type="linenumber">14</context>
