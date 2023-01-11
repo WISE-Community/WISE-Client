@@ -14,6 +14,11 @@ let component: PeerChatQuestionBankComponent;
 let fixture: ComponentFixture<PeerChatQuestionBankComponent>;
 let peerGroupService: PeerGroupService;
 let projectService: ProjectService;
+const defaultQuestionBankRule = {
+  id: 'default',
+  expression: 'isDefault',
+  questions: ['default question']
+} as QuestionBankRule;
 describe('PeerChatQuestionBankComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -28,9 +33,10 @@ describe('PeerChatQuestionBankComponent', () => {
       componentId: 'def',
       nodeId: 'node2',
       questionBank: new QuestionBank({
+        maxQuestionsToShow: null,
         peerGroupingTag: 'tag1',
         referenceComponent: { nodeId: 'node1', componentId: 'abc' },
-        rules: []
+        rules: [defaultQuestionBankRule]
       })
     };
   });
@@ -74,7 +80,7 @@ function ngOnInit_displayedQuestionBankRulesNotSet_EvaluatePeerGroupDataAndSetQu
       expect(getComponentSpy).toHaveBeenCalledWith('node1', 'abc');
       expect(retrievePeerGroupSpy).toHaveBeenCalledWith('tag1');
       expect(retrieveStudentDataSpy).toHaveBeenCalledWith(1, 'node2', 'def');
-      expect(component.displayedQuestionBankRules).toEqual([]);
+      expect(component.displayedQuestionBankRules).toEqual([defaultQuestionBankRule]);
     });
   });
 }

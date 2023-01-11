@@ -91,19 +91,20 @@ export class PeerChatQuestionBankComponent implements OnInit {
     questionBankRules: QuestionBankRule[],
     maxQuestionsToShow: number
   ): QuestionBankRule[] {
-    const filteredRules: QuestionBankRule[] = JSON.parse(JSON.stringify(questionBankRules));
+    const rules = JSON.parse(JSON.stringify(questionBankRules));
+    const filteredRules: QuestionBankRule[] = JSON.parse(JSON.stringify(rules));
     filteredRules.forEach((rule) => (rule.questions = []));
     let numAdded = 0;
     let ruleIndex = 0;
-    const totalNumQuestions = questionBankRules.map((rule) => rule.questions).flat().length;
+    const totalNumQuestions = rules.map((rule) => rule.questions).flat().length;
     const maxQuestions = maxQuestionsToShow ?? totalNumQuestions;
     while (numAdded < maxQuestions && numAdded != totalNumQuestions) {
-      if (questionBankRules[ruleIndex].questions.length > 0) {
-        const question = questionBankRules[ruleIndex].questions.shift();
+      if (rules[ruleIndex].questions.length > 0) {
+        const question = rules[ruleIndex].questions.shift();
         filteredRules[ruleIndex].questions.push(question);
         numAdded++;
       }
-      ruleIndex = (ruleIndex + 1) % questionBankRules.length;
+      ruleIndex = (ruleIndex + 1) % rules.length;
     }
     return filteredRules.filter((rule) => rule.questions.length > 0);
   }
