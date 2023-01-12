@@ -21,6 +21,7 @@ import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { PreviewComponentModule } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
+import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
     NodeAdvancedJsonAuthoringComponent,
     NodeAdvancedPathAuthoringComponent,
     NodeIconChooserDialog,
+    RecoveryAuthoringComponent,
     RequiredErrorLabelComponent,
     RubricAuthoringComponent
   ],

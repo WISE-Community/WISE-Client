@@ -11,6 +11,7 @@ import { ProjectAssetService } from '../../../../app/services/projectAssetServic
 import { ProjectAuthoringComponent } from '../../authoringTool/project/projectAuthoringComponent';
 import { ProjectInfoAuthoringComponent } from '../../authoringTool/info/projectInfoAuthoringComponent';
 import { RubricAuthoringComponent } from '../../authoringTool/rubric/rubric-authoring.component';
+import { RecoveryAuthoringComponent } from '../recovery-authoring/recovery-authoring.component';
 
 export default angular
   .module('projectAuthoringModule', [])
@@ -29,6 +30,10 @@ export default angular
   .directive(
     'rubricAuthoringComponent',
     downgradeComponent({ component: RubricAuthoringComponent }) as angular.IDirectiveFactory
+  )
+  .directive(
+    'recoveryAuthoringComponent',
+    downgradeComponent({ component: RecoveryAuthoringComponent })
   )
   .factory('ProjectAssetService', downgradeInjectable(ProjectAssetService))
   .config([
@@ -106,6 +111,31 @@ export default angular
         .state('root.at.project.milestones', {
           url: '/milestones',
           component: 'milestonesAuthoringComponent'
+        })
+        .state('root.at.recovery', {
+          url: '/unit/:projectId/recovery',
+          component: 'recoveryAuthoringComponent',
+          resolve: {
+            projectConfig: [
+              'ConfigService',
+              'SessionService',
+              '$stateParams',
+              (ConfigService, SessionService, $stateParams) => {
+                return ConfigService.retrieveConfig(
+                  `/api/author/config/${$stateParams.projectId}`
+                ).then(() => {
+                  SessionService.initializeSession();
+                });
+              }
+            ],
+            project: [
+              'ProjectService',
+              'projectConfig',
+              (ProjectService, projectConfig) => {
+                return ProjectService.retrieveProject(false);
+              }
+            ]
+          }
         });
     }
   ]);
