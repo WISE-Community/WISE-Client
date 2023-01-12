@@ -67,7 +67,7 @@ export class MilestoneReportGraphComponent implements OnInit {
       },
       tooltip: {
         formatter: function () {
-          return `<b>${this.series.name}<br/>${$localize`teams`}: ${this.point.count}</b>`;
+          return `<b>${this.series.name}<br/>${$localize`Teams`}: ${this.point.count}</b>`;
         }
       },
       xAxis: {

@@ -1,37 +1,38 @@
 
 <div class="milestone-details">
-<section class="milestone-details__section md-whiteframe-1dp">
+<section class="milestone-details__section mat-elevation-z1">
   <div fxLayout="row" fxLayoutAlign="start center">
     <select-period></select-period>
-    <span flex></span>
+    <span fxFlex></span>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-progress-bar class="milestone-details__progress" mode="determinate" value="{{ milestone.percentageCompleted }}"></mat-progress-bar>
-      <span class="md-body-2 text-secondary ng-binding">
+      <span class="mat-body-2 text-secondary ng-binding">
         {{ milestone.percentageCompleted }}%
       </span>
     </div>
   </div>
   <p *ngIf="milestone.description">
-    <span class="heavy" i18n>Description: </span>
-    <span [innerHTML]="milestoneDescription"></span>
+    <span class="mat-body-2" i18n>Description: </span>
+    <span [innerHTML]="milestone.description"></span>
   </p>
   <p *ngIf="requiredNodeIds.length">
-    <span class="heavy" i18n>Requirements: </span>
+    <span class="mat-body-2" i18n>Requirements: </span>
     <a *ngFor="let nodeId of requiredNodeIds; let last = last" (click)="visitNodeGrading(nodeId)">
       {{ getNodeNumberByNodeId(nodeId) }}: {{ getNodeTitle(nodeId) }}<span *ngIf="!$last">, </span>
     </a>
   </p>
   <p *ngIf="milestone.type === 'milestoneReport'">
-    <span class="heavy" i18n>Item Location: </span>
+    <span class="mat-body-2" i18n>Item Location: </span>
       {{ getNodeNumberAndTitleByNodeId(milestone.nodeId) }}
     (<a (click)="showMilestoneStepInfo($event)" i18n>Step Info</a>)
   </p>
 </section>
 <section *ngIf="milestone.type === 'milestoneReport'"
-    class="milestone-details__section md-whiteframe-1dp">
-  <div class="milestone-details__header primary md-body-2 gray-lightest-bg" i18n>Class Report</div>
+    class="milestone-details__section mat-elevation-z1">
+  <div class="milestone-details__header mat-body-2 notice-bg-bg" i18n>Class Report</div>
   <div *ngIf="!milestone.isReportAvailable" class="center">
-    <p><ng-container i18n>This milestone includes automated reports that analyze student progress.</ng-container> <ng-container i18n>Reports become available for each period once the following conditions are met:</ng-container></p>
+    <p i18n>This milestone includes automated reports that analyze student progress. Reports become
+      available for each period once the following conditions are met:</p>
     <p class="bold" *ngIf="milestone.satisfyConditional === 'any'" i18n>
       At least {{ milestone.satisfyMinNumWorkgroups }} team(s) or {{ milestone.satisfyMinPercentage }}% of the class have completed the milestone
     </p>
@@ -41,9 +42,9 @@
   </div>
   <div *ngIf="milestone.isReportAvailable" [innerHTML]="report"></div>
 </section>
-<section class="md-whiteframe-1dp gray-lightest-bg">
+<section class="mat-elevation-z1 app-bg-bg">
   <div *ngIf="milestone.generatedRecommendations && milestone.isReportAvailable">
-    <mat-tab-group (selectedTabChange)="saveTabSelectedEvent($event)">
+    <mat-tab-group (selectedTabChange)="saveTabSelectedEvent($event)" class="notice-bg-bg">
       <mat-tab label="Recommendation" i18n-label>
         <div class="milestone-details__section" [innerHTML]="recommendations"></div>
       </mat-tab>
@@ -55,32 +56,40 @@
     </mat-tab-group>
   </div>
   <div *ngIf="!milestone.generatedRecommendations && milestone.isReportAvailable"
-      class="milestone-details__section md-whiteframe-1dp">
-    <div class="milestone-details__header primary md-body-2 gray-lightest-bg" i18n>Student Work</div>
+      class="milestone-details__section mat-elevation-z1">
+    <div class="milestone-details__header mat-body-2 notice-bg-bg" i18n>Student Work</div>
     <milestone-grading-view [milestone]="milestone"></milestone-grading-view>
   </div>
 </section>
-<section *ngIf="!milestone.isReportAvailable" class="milestone-details__section md-whiteframe-1dp">
-  <div class="milestone-details__header primary md-body-2 gray-lightest-bg" i18n>Student Completion</div>
+<section *ngIf="!milestone.isReportAvailable" class="milestone-details__section mat-elevation-z1">
+  <div class="milestone-details__header mat-body-2 notice-bg-bg" i18n>Student Completion
+  </div>
   <ng-container *ngTemplateOutlet="completion"></ng-container>
 </section>
 <ng-template #completion>
-  <mat-list class="user-list md-whiteframe-1dp">
-    <mat-list-item class="thead md-with-secondary gray-lightest-bg md-body-1">
-      <p i18n>Team</p>
-      <div class="md-secondary-container" i18n>Completed</div>
+  <mat-list class="user-list mat-elevation-z1">
+    <mat-list-item class="notice-bg-bg mat-body-2">
+      <span i18n>Team</span>
+      <span fxFlex></span>
+      <span i18n>Completed</span>
     </mat-list-item>
-    <mat-list-item class="list-item md-with-secondary" *ngFor="let workgroup of sortAchievementTimeDescending(milestone.workgroups)">
-      <div class="md-avatar" hide-xs>
-        <mat-icon class="md-36" style="color: {{ getAvatarColorForWorkgroupId(workgroup.workgroupId) }}"> account_circle </mat-icon>
-      </div>
-      <p class="heavy">{{ getDisplayNamesByWorkgroupId(workgroup.workgroupId) }}</p>
-      <div class="md-secondary-container heavy">
+    <mat-list-item class="list-item"
+        *ngFor="let workgroup of sortAchievementTimeDescending(milestone.workgroups)">
+      <span fxLayoutGap="8px">
+        <span class="mat-avatar" fxHide.xs>
+          <mat-icon class="md-36"
+              style="color: {{ getAvatarColorForWorkgroupId(workgroup.workgroupId) }}">
+            account_circle </mat-icon>
+        </span>
+        <span class="mat-body-2">{{ getDisplayNamesByWorkgroupId(workgroup.workgroupId) }}</span>
+      </span>
+      <span fxFlex></span>
+      <span class="mat-body-2">
         <span *ngIf="workgroup.achievementTime !== null" class="success">
           {{ workgroup.achievementTime | date: 'mediumDate' }}
         </span>
         <span *ngIf="workgroup.achievementTime === null" class="warn" i18n>Not Completed</span>
-      </div>
+      </span>
     </mat-list-item>
   </mat-list>
 </ng-template>

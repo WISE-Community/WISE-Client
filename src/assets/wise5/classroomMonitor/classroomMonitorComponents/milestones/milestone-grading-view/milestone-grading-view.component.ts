@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { ConfigService } from '../../../../services/configService';
@@ -14,7 +14,8 @@ import { NodeGradingViewComponent } from '../../nodeGrading/node-grading-view/no
 @Component({
   selector: 'milestone-grading-view',
   templateUrl: './milestone-grading-view.component.html',
-  styleUrls: ['./milestone-grading-view.component.scss']
+  styleUrls: ['./milestone-grading-view.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
   componentId: string;

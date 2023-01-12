@@ -8,6 +8,7 @@ import { ConfigService } from '../../../../services/configService';
 
 @Component({
   selector: 'milestone-details',
+  styleUrls: ['./milestone-details.component.scss'],
   templateUrl: './milestone-details.component.html'
 })
 export class MilestoneDetailsComponent implements OnInit {
