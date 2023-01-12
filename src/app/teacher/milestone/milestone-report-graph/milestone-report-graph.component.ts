@@ -4,6 +4,7 @@ import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'milestone-report-graph',
+  styleUrls: ['./milestone-report-graph.component.scss'],
   template:
     '<highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig"></highcharts-chart>'
 })
@@ -36,8 +37,7 @@ export class MilestoneReportGraphComponent implements OnInit {
     this.chartConfig = {
       chart: {
         type: 'column',
-        height: 200,
-        width: 200,
+        height: 248,
         style: {
           fontFamily: 'Roboto,Helvetica Neue,sans-serif'
         }
