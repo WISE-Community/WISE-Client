@@ -26,7 +26,7 @@
           [allowedConnectedComponentTypes]="allowedReferenceComponentTypes">
       </edit-connected-component-component-select>
     </ng-container>
-    <ng-container *ngIf="logicType === 'differentKIScores'">
+    <ng-container *ngIf="logicTypesWithModes.includes(logicType)">
       <mat-form-field>
         <mat-label i18n>Mode</mat-label>
         <mat-select [(ngModel)]="mode">

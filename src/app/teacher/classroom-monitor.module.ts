@@ -64,6 +64,7 @@ import { DataExportComponent } from '../../assets/wise5/classroomMonitor/dataExp
 import { createCustomElement } from '@angular/elements';
 import { MilestoneReportGraphComponent } from './milestone/milestone-report-graph/milestone-report-graph.component';
 import { MilestoneDetailsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component';
+import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/student-progress/student-progress.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { MilestoneDetailsComponent } from '../../assets/wise5/classroomMonitor/c
     StepToolsComponent,
     StudentGradingComponent,
     StudentGradingToolsComponent,
+    StudentProgressComponent,
     TeacherSummaryDisplay,
     ToolBarComponent,
     TopBarComponent,

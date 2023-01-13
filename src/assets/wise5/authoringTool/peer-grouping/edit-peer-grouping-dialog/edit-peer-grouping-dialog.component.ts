@@ -34,6 +34,7 @@ export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogCom
     this.logicType = this.getLogicType(this.peerGrouping.logic);
     if (this.logicType === DIFFERENT_IDEAS_VALUE) {
       this.referenceComponent = this.peerGrouping.getDifferentIdeasReferenceComponent();
+      this.mode = this.peerGrouping.getDifferentIdeasMode();
     } else if (this.logicType === DIFFERENT_SCORES_VALUE) {
       this.referenceComponent = this.peerGrouping.getDifferentScoresReferenceComponent();
       this.mode = this.peerGrouping.getDifferentScoresMode();

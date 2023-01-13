@@ -19,6 +19,15 @@ export class FeedbackRuleEvaluator {
     return this.getDefaultRule(this.component.getFeedbackRules());
   }
 
+  getFeedbackRules(response: CRaterResponse[]): FeedbackRule[] {
+    const matchedRules = this.component
+      .getFeedbackRules()
+      .filter((rule) => this.satisfiesRule(response, Object.assign(new FeedbackRule(), rule)));
+    return matchedRules.length > 0
+      ? matchedRules
+      : [this.getDefaultRule(this.component.getFeedbackRules())];
+  }
+
   private satisfiesRule(
     response: CRaterResponse | CRaterResponse[],
     feedbackRule: FeedbackRule
@@ -176,6 +185,7 @@ export class FeedbackRuleEvaluator {
     return (
       feedbackRules.find((rule) => FeedbackRule.isDefaultRule(rule)) ||
       Object.assign(new FeedbackRule(), {
+        id: 'default',
         expression: 'isDefault',
         feedback: this.component.isMultipleFeedbackTextsForSameRuleAllowed()
           ? [this.defaultFeedback]
