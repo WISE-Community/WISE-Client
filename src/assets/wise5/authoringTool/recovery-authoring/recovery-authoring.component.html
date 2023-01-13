@@ -3,13 +3,21 @@
     <div class="node-content md-whiteframe-1dp main-box">
       <div class="top-div">
         <div class="save-bar" fxLayout="row" fxLayoutAlign="space-between center">
-          <button mat-raised-button
-              color="primary"
-              (click)="save()"
-              [disabled]="!saveButtonEnabled"
-              i18n>
-            Save
-          </button>
+          <div fxLayoutGap="20px">
+            <button mat-raised-button
+                color="primary"
+                (click)="save()"
+                [disabled]="!saveButtonEnabled"
+                i18n>
+              Save
+            </button>
+            <button mat-raised-button
+                color="primary"
+                (click)="goToAuthoringView()"
+                i18n>
+              Go to Authoring View
+            </button>
+          </div>
           <div fxLayout="row">
             <div *ngIf="jsonIsValid" class="valid" i18n>JSON Valid</div>
             <div *ngIf="!jsonIsValid" class="invalid" i18n>JSON Invalid</div>
