@@ -67,15 +67,13 @@ describe('RecoveryAuthoringComponent', () => {
 function projectJSONChanged() {
   describe('projectJSONChanged', () => {
     it('should detect json is invalid and disable save button', () => {
-      component.projectJSONString = 'abc';
-      component.projectJSONChanged();
+      setProjectJSONStringAndTriggerChange('abc');
       expect(component.jsonIsValid).toBeFalsy();
       expect(component.saveButtonEnabled).toBeFalsy();
     });
 
     it('should detect json is valid and enable save button', () => {
-      component.projectJSONString = '{ "nodes": [] }';
-      component.projectJSONChanged();
+      setProjectJSONStringAndTriggerChange('{ "nodes": [] }');
       expect(component.jsonIsValid).toBeTruthy();
       expect(component.saveButtonEnabled).toBeTruthy();
     });
@@ -84,8 +82,7 @@ function projectJSONChanged() {
       const projectJSON = {
         nodes: [new Node(nodeId1, null, [{ to: null }])]
       };
-      component.projectJSONString = JSON.stringify(projectJSON);
-      component.projectJSONChanged();
+      setProjectJSONStringAndTriggerChange(JSON.stringify(projectJSON));
       expect(component.badNodes.length).toEqual(1);
       expect(component.badNodes[0].hasTransitionToNull).toEqual(true);
     });
@@ -94,8 +91,7 @@ function projectJSONChanged() {
       const projectJSON = {
         nodes: [new Node(groupId1, [nodeId1, nodeId2], []), new Node(nodeId1, null, [])]
       };
-      component.projectJSONString = JSON.stringify(projectJSON);
-      component.projectJSONChanged();
+      setProjectJSONStringAndTriggerChange(JSON.stringify(projectJSON));
       expect(component.badNodes.length).toEqual(1);
       expect(component.badNodes[0].referencedIdsThatDoNotExist).toEqual([nodeId2]);
     });
@@ -108,12 +104,16 @@ function projectJSONChanged() {
           new Node(nodeId2, null, [])
         ]
       };
-      component.projectJSONString = JSON.stringify(projectJSON);
-      component.projectJSONChanged();
+      setProjectJSONStringAndTriggerChange(JSON.stringify(projectJSON));
       expect(component.badNodes.length).toEqual(1);
       expect(component.badNodes[0].referencedIdsThatAreDuplicated).toEqual([nodeId1]);
     });
   });
+}
+
+function setProjectJSONStringAndTriggerChange(jsonString: string): void {
+  component.projectJSONString = jsonString;
+  component.projectJSONChanged();
 }
 
 function save() {

@@ -76,19 +76,27 @@ export class RecoveryAuthoringComponent implements OnInit {
   private getNodeRecoveryAnalysis(node: any, nodeIdsFound: string[]): NodeRecoveryAnalysis {
     const nodeRecoveryAnalysis = new NodeRecoveryAnalysis(node.id);
     if (node.ids != null) {
-      const nodesReferencesInGroup = new Map();
-      for (const referencedId of node.ids) {
-        if (!nodeIdsFound.includes(referencedId)) {
-          nodeRecoveryAnalysis.addReferencedIdThatDoesNotExist(referencedId);
-        }
-        if (nodesReferencesInGroup.get(referencedId)) {
-          nodeRecoveryAnalysis.addReferencedIdThatIsDuplicated(referencedId);
-        }
-        nodesReferencesInGroup.set(referencedId, true);
-      }
+      this.analyzeGroupChildIds(node, nodeIdsFound, nodeRecoveryAnalysis);
     }
     nodeRecoveryAnalysis.setHasTransitionToNull(this.hasTransitionToNull(node));
     return nodeRecoveryAnalysis;
+  }
+
+  private analyzeGroupChildIds(
+    node: any,
+    nodeIdsFound: string[],
+    nodeRecoveryAnalysis: NodeRecoveryAnalysis
+  ): void {
+    const nodesReferencesInGroup = new Map();
+    for (const referencedId of node.ids) {
+      if (!nodeIdsFound.includes(referencedId)) {
+        nodeRecoveryAnalysis.addReferencedIdThatDoesNotExist(referencedId);
+      }
+      if (nodesReferencesInGroup.get(referencedId)) {
+        nodeRecoveryAnalysis.addReferencedIdThatIsDuplicated(referencedId);
+      }
+      nodesReferencesInGroup.set(referencedId, true);
+    }
   }
 
   private hasTransitionToNull(node: any): boolean {
