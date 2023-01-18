@@ -65,49 +65,58 @@ describe('RecoveryAuthoringComponent', () => {
 });
 
 function projectJSONChanged() {
-  describe('projectJSONChanged', () => {
-    it('should detect json is invalid and disable save button', () => {
-      setProjectJSONStringAndTriggerChange('abc');
-      expect(component.jsonIsValid).toBeFalsy();
-      expect(component.saveButtonEnabled).toBeFalsy();
-    });
+  describe('projectJSONChanged()', () => {
+    detectJSONValidity();
+    detectPotentialProblems();
+  });
+}
 
-    it('should detect json is valid and enable save button', () => {
-      setProjectJSONStringAndTriggerChange('{ "nodes": [] }');
-      expect(component.jsonIsValid).toBeTruthy();
-      expect(component.saveButtonEnabled).toBeTruthy();
-    });
+function detectJSONValidity() {
+  it('should detect json is invalid and disable save button', () => {
+    setJSONAndExpect('abc', false, false);
+  });
 
-    it('should detect potential problem transition to null', () => {
-      const projectJSON = {
-        nodes: [new Node(nodeId1, null, [{ to: null }])]
-      };
-      setProjectJSONStringAndTriggerChange(JSON.stringify(projectJSON));
-      expect(component.badNodes.length).toEqual(1);
-      expect(component.badNodes[0].hasTransitionToNull).toEqual(true);
-    });
+  it('should detect json is valid and enable save button', () => {
+    setJSONAndExpect('{ "nodes": [] }', true, true);
+  });
+}
 
-    it('should detect potential problem reference to node id that does not exist', () => {
-      const projectJSON = {
-        nodes: [new Node(groupId1, [nodeId1, nodeId2], []), new Node(nodeId1, null, [])]
-      };
-      setProjectJSONStringAndTriggerChange(JSON.stringify(projectJSON));
-      expect(component.badNodes.length).toEqual(1);
-      expect(component.badNodes[0].referencedIdsThatDoNotExist).toEqual([nodeId2]);
-    });
+function setJSONAndExpect(json: string, jsonIsValid: boolean, saveButtonEnabled: boolean) {
+  setProjectJSONStringAndTriggerChange(json);
+  expect(component.jsonIsValid).toEqual(jsonIsValid);
+  expect(component.saveButtonEnabled).toEqual(saveButtonEnabled);
+}
 
-    it('should detect potential problem reference to node id duplicate', () => {
-      const projectJSON = {
-        nodes: [
-          new Node(groupId1, [nodeId1, nodeId1], []),
-          new Node(nodeId1, null, [{ to: nodeId2 }]),
-          new Node(nodeId2, null, [])
-        ]
-      };
-      setProjectJSONStringAndTriggerChange(JSON.stringify(projectJSON));
-      expect(component.badNodes.length).toEqual(1);
-      expect(component.badNodes[0].referencedIdsThatAreDuplicated).toEqual([nodeId1]);
-    });
+function detectPotentialProblems() {
+  it('should detect potential problem transition to null', () => {
+    const projectJSON = {
+      nodes: [new Node(nodeId1, null, [{ to: null }])]
+    };
+    setProjectJSONStringAndTriggerChange(JSON.stringify(projectJSON));
+    expect(component.badNodes.length).toEqual(1);
+    expect(component.badNodes[0].hasTransitionToNull).toEqual(true);
+  });
+
+  it('should detect potential problem reference to node id that does not exist', () => {
+    const projectJSON = {
+      nodes: [new Node(groupId1, [nodeId1, nodeId2], []), new Node(nodeId1, null, [])]
+    };
+    setProjectJSONStringAndTriggerChange(JSON.stringify(projectJSON));
+    expect(component.badNodes.length).toEqual(1);
+    expect(component.badNodes[0].referencedIdsThatDoNotExist).toEqual([nodeId2]);
+  });
+
+  it('should detect potential problem reference to node id duplicate', () => {
+    const projectJSON = {
+      nodes: [
+        new Node(groupId1, [nodeId1, nodeId1], []),
+        new Node(nodeId1, null, [{ to: nodeId2 }]),
+        new Node(nodeId2, null, [])
+      ]
+    };
+    setProjectJSONStringAndTriggerChange(JSON.stringify(projectJSON));
+    expect(component.badNodes.length).toEqual(1);
+    expect(component.badNodes[0].referencedIdsThatAreDuplicated).toEqual([nodeId1]);
   });
 }
 
@@ -117,7 +126,7 @@ function setProjectJSONStringAndTriggerChange(jsonString: string): void {
 }
 
 function save() {
-  describe('save', () => {
+  describe('save()', () => {
     it('should save and disable save button', () => {
       component.saveButtonEnabled = true;
       component.save();
