@@ -5,6 +5,7 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ConfigService } from '../../../../services/configService';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'milestone-details',
@@ -18,6 +19,7 @@ export class MilestoneDetailsComponent implements OnInit {
   recommendations: SafeHtml;
   report: SafeHtml;
   requiredNodeIds: string[];
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     private configService: ConfigService,
@@ -28,6 +30,16 @@ export class MilestoneDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.processMilestone();
+    this.subscriptions.add(
+      this.dataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
+        this.processMilestone();
+        this.saveMilestoneCurrentPeriodSelectedEvent(currentPeriod);
+      })
+    );
+  }
+
+  private processMilestone(): void {
     if (this.milestone.description) {
       this.description = this.sanitizer.bypassSecurityTrustHtml(this.milestone.description);
     }
@@ -40,6 +52,10 @@ export class MilestoneDetailsComponent implements OnInit {
       this.report = this.sanitizer.bypassSecurityTrustHtml(this.milestone.generatedReport);
     }
     this.requiredNodeIds = this.getRequirements();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   getAvatarColorForWorkgroupId(workgroupId: number): string {
@@ -81,6 +97,21 @@ export class MilestoneDetailsComponent implements OnInit {
       category = 'Navigation',
       data = { milestoneId: this.milestone.id };
     this.dataService.saveEvent(context, nodeId, componentId, componentType, category, name, data);
+  }
+
+  private saveMilestoneCurrentPeriodSelectedEvent(currentPeriod: any): void {
+    const context = 'ClassroomMonitor',
+      nodeId = null,
+      componentId = null,
+      componentType = null,
+      category = 'Navigation',
+      data = {
+        milestoneId: this.milestone.id,
+        periodId: currentPeriod.periodId,
+        periodName: currentPeriod.periodName
+      },
+      event = 'MilestonePeriodSelected';
+    this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 
   showMilestoneStepInfo($event: Event): void {
