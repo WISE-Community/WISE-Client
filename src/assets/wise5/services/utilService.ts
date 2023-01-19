@@ -2,6 +2,7 @@
 
 import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { copy } from '../common/object/object';
 import '../lib/jquery/jquery-global';
 
 @Injectable()
@@ -13,14 +14,6 @@ export class UtilService {
       return Number(str);
     }
     return str;
-  }
-
-  makeCopyOfJSONObject(jsonObject: any): any {
-    return this.isUndefined(jsonObject) ? undefined : JSON.parse(JSON.stringify(jsonObject));
-  }
-
-  private isUndefined(value: any): boolean {
-    return typeof value === 'undefined';
   }
 
   getImageObjectFromBase64String(img_b64) {
@@ -358,10 +351,10 @@ export class UtilService {
    * @param array2 an array of strings, numbers, or booleans
    * @return whether the arrays contain the same values
    */
-  arraysContainSameValues(array1, array2) {
-    const array1Copy = this.makeCopyOfJSONObject(array1);
+  arraysContainSameValues(array1, array2): boolean {
+    const array1Copy = copy(array1);
     array1Copy.sort();
-    const array2Copy = this.makeCopyOfJSONObject(array2);
+    const array2Copy = copy(array2);
     array2Copy.sort();
     return JSON.stringify(array1Copy) == JSON.stringify(array2Copy);
   }

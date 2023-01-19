@@ -1,10 +1,9 @@
-import { Component, Input, Pipe, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
 
 @Component({
@@ -14,8 +13,7 @@ import { NotebookParentComponent } from '../notebook-parent/notebook-parent.comp
   encapsulation: ViewEncapsulation.None
 })
 export class NotebookNotesComponent extends NotebookParentComponent {
-  @Input()
-  viewOnly: boolean;
+  @Input() viewOnly: boolean;
 
   groups = [];
   groupNameToGroup = {};
@@ -32,10 +30,9 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     ConfigService: ConfigService,
     NotebookService: NotebookService,
     private ProjectService: ProjectService,
-    private studentDataService: StudentDataService,
-    UtilService: UtilService
+    private studentDataService: StudentDataService
   ) {
-    super(ConfigService, NotebookService, UtilService);
+    super(ConfigService, NotebookService);
   }
 
   ngOnInit(): void {

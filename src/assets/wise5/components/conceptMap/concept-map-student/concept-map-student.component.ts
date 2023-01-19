@@ -14,6 +14,7 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { ConceptMapService } from '../conceptMapService';
 import { DialogWithCloseComponent } from '../../../directives/dialog-with-close/dialog-with-close.component';
+import { copy } from '../../../common/object/object';
 
 @Component({
   selector: 'concept-map-student',
@@ -1502,9 +1503,7 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   mergeConceptMapComponentState(componentStateToMergeInto: any, componentStateToMerge: any): any {
-    const componentStateToMergeCopy = this.makeIdsUnique(
-      this.UtilService.makeCopyOfJSONObject(componentStateToMerge)
-    );
+    const componentStateToMergeCopy = this.makeIdsUnique(copy(componentStateToMerge));
     const studentData = componentStateToMergeCopy.studentData;
     const conceptMapData = studentData.conceptMapData;
     const nodes = conceptMapData.nodes;

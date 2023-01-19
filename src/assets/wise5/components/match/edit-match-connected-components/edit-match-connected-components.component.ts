@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
+import { copy } from '../../../common/object/object';
 import { ProjectService } from '../../../services/projectService';
-import { UtilService } from '../../../services/utilService';
 
 @Component({
   selector: 'edit-match-connected-components',
@@ -12,7 +12,7 @@ import { UtilService } from '../../../services/utilService';
   ]
 })
 export class EditMatchConnectedComponentsComponent extends EditConnectedComponentsComponent {
-  constructor(protected ProjectService: ProjectService, private UtilService: UtilService) {
+  constructor(protected ProjectService: ProjectService) {
     super(ProjectService);
   }
 
@@ -28,9 +28,7 @@ export class EditMatchConnectedComponentsComponent extends EditConnectedComponen
         $localize`Do you want to copy the choices and buckets from the connected component?\n\nWarning: This will delete all existing choices and buckets in this component.`
       )
     ) {
-      const connectedComponentContent = this.UtilService.makeCopyOfJSONObject(
-        this.ProjectService.getComponent(nodeId, componentId)
-      );
+      const connectedComponentContent = copy(this.ProjectService.getComponent(nodeId, componentId));
       this.componentContent.choices = connectedComponentContent.choices;
       this.componentContent.buckets = connectedComponentContent.buckets;
       this.componentContent.feedback = connectedComponentContent.feedback;

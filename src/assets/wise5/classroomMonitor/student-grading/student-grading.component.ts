@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
+import { copy } from '../../common/object/object';
 import { AnnotationService } from '../../services/annotationService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { ConfigService } from '../../services/configService';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { UtilService } from '../../services/utilService';
 
 @Component({
   selector: 'app-student-grading',
@@ -38,7 +38,6 @@ export class StudentGradingComponent implements OnInit {
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
     private upgrade: UpgradeModule,
-    private utilService: UtilService,
     private teacherDataService: TeacherDataService
   ) {}
 
@@ -157,9 +156,7 @@ export class StudentGradingComponent implements OnInit {
         let periodId = currentPeriod.periodId;
         let currentWorkgroup = this.teacherDataService.getCurrentWorkgroup();
         if (!currentWorkgroup) {
-          let workgroups = this.utilService.makeCopyOfJSONObject(
-            this.configService.getClassmateUserInfos()
-          );
+          let workgroups = copy(this.configService.getClassmateUserInfos());
           let n = workgroups.length;
           for (let i = 0; i < n; i++) {
             let workgroup = workgroups[i];
