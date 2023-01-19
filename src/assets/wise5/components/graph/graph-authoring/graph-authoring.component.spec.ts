@@ -15,6 +15,7 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphAuthoring } from './graph-authoring.component';
 
@@ -48,10 +49,10 @@ describe('GraphAuthoringComponent', () => {
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
-      JSON.parse(JSON.stringify(componentContent))
+      copy(componentContent)
     );
     spyOn(component, 'componentChanged').and.callFake(() => {});
-    component.componentContent = JSON.parse(JSON.stringify(componentContent));
+    component.componentContent = copy(componentContent);
     fixture.detectChanges();
   });
 

@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PossibleScoreComponent } from '../../../../../app/possible-score/possible-score.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { copy } from '../../../common/object/object';
 import { ComponentHeader } from '../../../directives/component-header/component-header.component';
 import { ProjectService } from '../../../services/projectService';
 import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
@@ -133,7 +134,7 @@ describe('MultipleChoiceStudentComponent', () => {
       ],
       showFeedback: true
     };
-    const componentContent = JSON.parse(JSON.stringify(originalComponentContent));
+    const componentContent = copy(originalComponentContent);
     component.component = new MultipleChoiceComponent(componentContent, nodeId);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
@@ -168,7 +169,7 @@ function createComponentContentChoice(
 function testMultipleAnswerComponent() {
   describe('multiple answer component', () => {
     beforeEach(() => {
-      component.componentContent = JSON.parse(JSON.stringify(multipleAnswerComponent));
+      component.componentContent = copy(multipleAnswerComponent);
       component.component = new MultipleChoiceComponent(component.componentContent, nodeId);
       component.ngOnInit();
     });

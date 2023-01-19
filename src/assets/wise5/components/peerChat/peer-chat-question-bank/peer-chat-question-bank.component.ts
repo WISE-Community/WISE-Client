@@ -13,6 +13,7 @@ import { QuestionBankRule } from './QuestionBankRule';
 import { concatMap, map } from 'rxjs/operators';
 import { PeerGroup } from '../PeerGroup';
 import { QuestionBankContent } from './QuestionBankContent';
+import { copy } from '../../../common/object/object';
 
 @Component({
   selector: 'peer-chat-question-bank',
@@ -91,8 +92,8 @@ export class PeerChatQuestionBankComponent implements OnInit {
     questionBankRules: QuestionBankRule[],
     maxQuestionsToShow: number
   ): QuestionBankRule[] {
-    const rules = JSON.parse(JSON.stringify(questionBankRules));
-    const filteredRules: QuestionBankRule[] = JSON.parse(JSON.stringify(rules));
+    const rules = copy(questionBankRules);
+    const filteredRules: QuestionBankRule[] = copy(rules);
     filteredRules.forEach((rule) => (rule.questions = []));
     let numAdded = 0;
     let ruleIndex = 0;

@@ -9,6 +9,7 @@ import twoStepsProjectJSON_import from './sampleData/curriculum/TwoSteps.project
 import { PeerGrouping } from '../domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { EmbeddedContent } from '../../assets/wise5/components/embedded/EmbeddedContent';
+import { copy } from '../../assets/wise5/common/object/object';
 
 const projectIdDefault = 1;
 const projectBaseURL = 'http://localhost:8080/curriculum/12345/';
@@ -22,7 +23,6 @@ let demoProjectJSON: any;
 let oneBranchTwoPathsProjectJSON: any;
 let scootersProjectJSON: any;
 let twoStepsProjectJSON: any;
-
 describe('ProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -31,10 +31,10 @@ describe('ProjectService', () => {
     http = TestBed.inject(HttpTestingController);
     configService = TestBed.inject(ConfigService);
     service = TestBed.inject(ProjectService);
-    demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
-    oneBranchTwoPathsProjectJSON = JSON.parse(JSON.stringify(oneBranchTwoPathsProjectJSON_import));
-    scootersProjectJSON = JSON.parse(JSON.stringify(scootersProjectJSON_import));
-    twoStepsProjectJSON = JSON.parse(JSON.stringify(twoStepsProjectJSON_import));
+    demoProjectJSON = copy(demoProjectJSON_import);
+    oneBranchTwoPathsProjectJSON = copy(oneBranchTwoPathsProjectJSON_import);
+    scootersProjectJSON = copy(scootersProjectJSON_import);
+    twoStepsProjectJSON = copy(twoStepsProjectJSON_import);
   });
   shouldReplaceAssetPathsInNonHtmlComponentContent();
   shouldReplaceAssetPathsInHtmlComponentContent();
