@@ -5,9 +5,8 @@
     </div>
   </md-toolbar>
   <md-dialog-content class="gray-lighter-bg md-dialog-content">
-    <milestone-details milestone="$ctrl.milestone"
-                       on-show-workgroup="$ctrl.onShowWorkgroup(value)"
-                       on-visit-node-grading="$ctrl.onVisitNodeGrading()"></milestone-details>
+    <milestone-details [milestone]="$ctrl.milestone"
+        (on-visit-node-grading)="$ctrl.onVisitNodeGrading($event)"></milestone-details>
   </md-dialog-content>
   <md-dialog-actions layout="row" layout-align="start center">
     <span flex></span>

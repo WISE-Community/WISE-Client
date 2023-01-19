@@ -1,0 +1,40 @@
+.milestone-details {
+  section {
+    &:not(:first-child) {
+      margin-top: 8px;
+    }
+  }
+}
+
+.milestone-details__section {
+  background-color: #ffffff;
+  padding: 16px;
+
+  > p {
+    margin-top: 16px;
+    margin-bottom: 0;
+  }
+}
+
+.milestone-details__header {
+  padding: 12px 16px;
+  margin: -16px -16px 16px;
+  font-weight: 500;
+}
+
+.milestone-details__progress {
+  width: 48px;
+  margin-right: 8px;
+}
+
+mat-progress-bar {
+  height: 14px;
+}
+
+.mat-list {
+  padding: 0;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}

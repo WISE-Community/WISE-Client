@@ -14,7 +14,8 @@ import { NodeGradingViewComponent } from '../../nodeGrading/node-grading-view/no
 @Component({
   selector: 'milestone-grading-view',
   templateUrl: './milestone-grading-view.component.html',
-  styleUrls: ['./milestone-grading-view.component.scss']
+  styleUrls: ['./milestone-grading-view.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
   componentId: string;
