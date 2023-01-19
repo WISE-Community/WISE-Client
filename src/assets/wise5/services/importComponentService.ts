@@ -3,7 +3,7 @@ import { ConfigService } from './configService';
 import { CopyNodesService } from './copyNodesService';
 import { InsertComponentService } from './insertComponentService';
 import { TeacherProjectService } from './teacherProjectService';
-import { UtilService } from './utilService';
+import { ObjectService } from './objectService';
 
 @Injectable()
 export class ImportComponentService {
@@ -11,8 +11,8 @@ export class ImportComponentService {
     protected ConfigService: ConfigService,
     protected CopyNodesService: CopyNodesService,
     protected InsertComponentService: InsertComponentService,
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected objectService: ObjectService,
+    protected ProjectService: TeacherProjectService
   ) {}
 
   /**
@@ -33,7 +33,7 @@ export class ImportComponentService {
     const newComponents = [];
     const newComponentIds = [];
     for (const component of components) {
-      const newComponent = this.UtilService.makeCopyOfJSONObject(component);
+      const newComponent = this.objectService.copy(component);
       let newComponentId = newComponent.id;
       if (this.ProjectService.isComponentIdUsed(newComponentId)) {
         newComponentId = this.ProjectService.getUnusedComponentId(newComponentIds);

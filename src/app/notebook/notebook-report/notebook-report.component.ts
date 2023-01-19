@@ -5,8 +5,8 @@ import { AnnotationService } from '../../../assets/wise5/services/annotationServ
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
-import { UtilService } from '../../../assets/wise5/services/utilService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
+import { ObjectService } from '../../../assets/wise5/services/objectService';
 
 @Component({
   selector: 'notebook-report',
@@ -35,11 +35,11 @@ export class NotebookReportComponent extends NotebookParentComponent {
     private AnnotationService: AnnotationService,
     ConfigService: ConfigService,
     NotebookService: NotebookService,
+    objectService: ObjectService,
     private ProjectService: ProjectService,
-    UtilService: UtilService,
     private mediaObserver: MediaObserver
   ) {
-    super(ConfigService, NotebookService, UtilService);
+    super(ConfigService, NotebookService, objectService);
   }
 
   ngOnInit(): void {

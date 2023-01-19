@@ -4,6 +4,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
+import { ObjectService } from '../../../services/objectService';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
@@ -36,6 +37,7 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
     protected dialog: MatDialog,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
+    protected objectService: ObjectService,
     protected peerGroupService: PeerGroupService,
     protected projectService: ProjectService,
     protected studentAssetService: StudentAssetService,
@@ -49,6 +51,7 @@ export class ShowGroupWorkStudentComponent extends ComponentStudent {
       dialog,
       nodeService,
       notebookService,
+      objectService,
       studentAssetService,
       studentDataService,
       utilService

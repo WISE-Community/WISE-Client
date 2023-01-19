@@ -1,6 +1,6 @@
 import '../lib/jquery/jquery-global';
 import * as angular from 'angular';
-import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
+import { downgradeInjectable } from '@angular/upgrade/static';
 import '../common-angular-js-module';
 import { CopyComponentService } from '../services/copyComponentService';
 import { CopyNodesService } from '../services/copyNodesService';
@@ -11,6 +11,7 @@ import { InsertComponentService } from '../services/insertComponentService';
 import { MilestoneService } from '../services/milestoneService';
 import { MoveNodesService } from '../services/moveNodesService';
 import { NodeInfoService } from '../services/nodeInfoService';
+import { ObjectService } from '../services/objectService';
 import { PeerGroupService } from '../services/peerGroupService';
 import { TeacherPeerGroupService } from '../services/teacherPeerGroupService';
 import { TeacherProjectService } from '../services/teacherProjectService';
@@ -18,7 +19,6 @@ import { SpaceService } from '../services/spaceService';
 import { ClassroomStatusService } from '../services/classroomStatusService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherWebSocketService } from '../services/teacherWebSocketService';
-import { StepToolsComponent } from '../common/stepTools/step-tools.component';
 import { PeerGroupingAuthoringService } from '../../../../src/assets/wise5/services/peerGroupingAuthoringService';
 
 import '../classroomMonitor/classroom-monitor.module';
@@ -36,6 +36,7 @@ angular
   .factory('MilestoneService', downgradeInjectable(MilestoneService))
   .factory('MoveNodesService', downgradeInjectable(MoveNodesService))
   .factory('NodeInfoService', downgradeInjectable(NodeInfoService))
+  .factory('ObjectService', downgradeInjectable(ObjectService))
   .factory('PeerGroupingAuthoringService', downgradeInjectable(PeerGroupingAuthoringService))
   .factory('PeerGroupService', downgradeInjectable(PeerGroupService))
   .factory('TeacherPeerGroupService', downgradeInjectable(TeacherPeerGroupService))

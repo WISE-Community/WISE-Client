@@ -8,6 +8,7 @@ import { UtilService } from '../../services/utilService';
 import { SummaryService } from '../../components/summary/summaryService';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ObjectService } from '../../services/objectService';
 
 @Component({
   selector: 'summary-display',
@@ -67,6 +68,7 @@ export abstract class SummaryDisplay {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
+    protected objectService: ObjectService,
     protected projectService: ProjectService,
     protected summaryService: SummaryService,
     protected utilService: UtilService
@@ -398,7 +400,7 @@ export abstract class SummaryDisplay {
       this.componentId
     );
     if (componentState != null) {
-      tableData = this.utilService.makeCopyOfJSONObject(componentState.studentData.tableData);
+      tableData = this.objectService.copy(componentState.studentData.tableData);
       for (let r = 1; r < tableData.length; r++) {
         tableData[r][1].text = this.getRandomSimilarNumber(tableData[r][1].text);
       }

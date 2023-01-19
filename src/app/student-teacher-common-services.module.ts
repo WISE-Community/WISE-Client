@@ -49,6 +49,7 @@ import { TabulatorDataService } from '../assets/wise5/components/table/tabulator
 import { StompService } from '../assets/wise5/services/stompService';
 import { ClickToSnipImageService } from '../assets/wise5/services/clickToSnipImageService';
 import { PasswordService } from './services/password.service';
+import { ObjectService } from '../assets/wise5/services/objectService';
 
 @NgModule({
   providers: [
@@ -78,6 +79,7 @@ import { PasswordService } from './services/password.service';
     NodeService,
     NotebookService,
     NotificationService,
+    ObjectService,
     OutsideURLService,
     OpenResponseCompletionCriteriaService,
     OpenResponseService,

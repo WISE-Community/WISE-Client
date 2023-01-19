@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
+import { ObjectService } from './objectService';
 import { TeacherProjectService } from './teacherProjectService';
-import { UtilService } from './utilService';
 
 @Injectable()
 export class CopyComponentService {
   constructor(
-    protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected objectService: ObjectService,
+    protected ProjectService: TeacherProjectService
   ) {}
 
   copyComponents(nodeId: string, componentIds: string[]): any[] {
@@ -22,7 +22,7 @@ export class CopyComponentService {
 
   private copyComponent(nodeId: string, componentId: string, componentIdsToSkip: string[]): any {
     const component = this.ProjectService.getComponent(nodeId, componentId);
-    const newComponent = this.UtilService.makeCopyOfJSONObject(component);
+    const newComponent = this.objectService.copy(component);
     newComponent.id = this.ProjectService.getUnusedComponentId(componentIdsToSkip);
     return newComponent;
   }

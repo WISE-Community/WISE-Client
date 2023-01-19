@@ -12,6 +12,7 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { DrawService } from '../drawService';
 import { MatDialog } from '@angular/material/dialog';
+import { ObjectService } from '../../../services/objectService';
 
 @Component({
   selector: 'draw-student',
@@ -37,6 +38,7 @@ export class DrawStudent extends ComponentStudent {
     private DrawService: DrawService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    protected objectService: ObjectService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
@@ -49,6 +51,7 @@ export class DrawStudent extends ComponentStudent {
       dialog,
       NodeService,
       NotebookService,
+      objectService,
       StudentAssetService,
       StudentDataService,
       UtilService
@@ -250,7 +253,7 @@ export class DrawStudent extends ComponentStudent {
       if (this.isUpdateImmediately(connectedComponent, componentState) && this.isPerformUpdate()) {
         switch (componentState.componentType) {
           case 'Draw':
-            componentState = this.UtilService.makeCopyOfJSONObject(componentState);
+            componentState = this.objectService.copy(componentState);
             this.setDrawData(componentState);
             this.setAuthoredBackgroundIfAvailable(true);
             break;

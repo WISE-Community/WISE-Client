@@ -11,6 +11,7 @@ import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { AnimationService } from '../animationService';
+import { ObjectService } from '../../../services/objectService';
 
 @Component({
   selector: 'animation-student',
@@ -51,6 +52,7 @@ export class AnimationStudent extends ComponentStudent {
     protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    protected objectService: ObjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -62,6 +64,7 @@ export class AnimationStudent extends ComponentStudent {
       dialog,
       NodeService,
       NotebookService,
+      objectService,
       StudentAssetService,
       StudentDataService,
       UtilService

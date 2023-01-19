@@ -5,6 +5,7 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
+import { ObjectService } from '../../../services/objectService';
 import { RandomKeyService } from '../../../services/randomKeyService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
@@ -39,6 +40,7 @@ export class DiscussionStudent extends ComponentStudent {
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private NotificationService: NotificationService,
+    protected objectService: ObjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -50,6 +52,7 @@ export class DiscussionStudent extends ComponentStudent {
       dialog,
       NodeService,
       NotebookService,
+      objectService,
       StudentAssetService,
       StudentDataService,
       UtilService

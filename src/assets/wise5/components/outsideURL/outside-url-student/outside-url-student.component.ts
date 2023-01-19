@@ -5,6 +5,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
+import { ObjectService } from '../../../services/objectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
@@ -29,6 +30,7 @@ export class OutsideUrlStudent extends ComponentStudent {
     protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    protected objectService: ObjectService,
     protected sanitizer: DomSanitizer,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
@@ -41,6 +43,7 @@ export class OutsideUrlStudent extends ComponentStudent {
       dialog,
       NodeService,
       NotebookService,
+      objectService,
       StudentAssetService,
       StudentDataService,
       UtilService

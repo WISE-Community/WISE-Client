@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
+import { ObjectService } from '../../../../services/objectService';
 import { ProjectService } from '../../../../services/projectService';
 import { RandomKeyService } from '../../../../services/randomKeyService';
 import { StudentAssetService } from '../../../../services/studentAssetService';
-import { UtilService } from '../../../../services/utilService';
 
 @Component({
   selector: 'edit-notebook-item-dialog',
@@ -37,9 +37,9 @@ export class EditNotebookItemDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<EditNotebookItemDialogComponent>,
     private fb: FormBuilder,
+    private objectService: ObjectService,
     private projectService: ProjectService,
-    private studentAssetService: StudentAssetService,
-    private utilService: UtilService
+    private studentAssetService: StudentAssetService
   ) {
     this.nodeId = this.data.nodeId;
     this.file = this.data.file;
@@ -67,7 +67,7 @@ export class EditNotebookItemDialogComponent implements OnInit {
         }
       };
     } else {
-      this.item = this.utilService.makeCopyOfJSONObject(this.note);
+      this.item = this.objectService.copy(this.note);
       this.itemId = this.item.id;
       // Set to null so we're creating a new notebook item.
       // An edit to a notebook item results in a new entry in the db.

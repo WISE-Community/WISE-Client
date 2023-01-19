@@ -16,6 +16,7 @@ import { ComponentServiceLookupService } from '../../services/componentServiceLo
 import { ComponentTypeService } from '../../services/componentTypeService';
 import { ComponentContent } from '../../common/ComponentContent';
 import { Component } from '../../common/Component';
+import { ObjectService } from '../../services/objectService';
 
 @Directive()
 class NodeAuthoringController {
@@ -65,6 +66,7 @@ class NodeAuthoringController {
     'InsertComponentService',
     'NodeService',
     'NotificationService',
+    'ObjectService',
     'ProjectService',
     'TeacherDataService',
     'UtilService'
@@ -84,6 +86,7 @@ class NodeAuthoringController {
     private InsertComponentService: InsertComponentService,
     private NodeService: NodeService,
     private NotificationService: NotificationService,
+    private objectService: ObjectService,
     private ProjectService: TeacherProjectService,
     private TeacherDataService: TeacherDataService,
     private UtilService: UtilService
@@ -104,8 +107,8 @@ class NodeAuthoringController {
      * session in case we need to roll back if the user decides to
      * cancel/revert all the changes.
      */
-    this.originalNodeCopy = this.UtilService.makeCopyOfJSONObject(this.nodeJson);
-    this.currentNodeCopy = this.UtilService.makeCopyOfJSONObject(this.nodeJson);
+    this.originalNodeCopy = this.objectService.copy(this.nodeJson);
+    this.currentNodeCopy = this.objectService.copy(this.nodeJson);
 
     this.subscriptions.add(
       this.NodeService.componentShowSubmitButtonValueChanged$.subscribe(({ showSubmitButton }) => {
@@ -203,7 +206,7 @@ class NodeAuthoringController {
    */
   authoringViewNodeChanged(parseProject = false) {
     this.undoStack.push(this.currentNodeCopy);
-    this.currentNodeCopy = this.UtilService.makeCopyOfJSONObject(this.nodeJson);
+    this.currentNodeCopy = this.objectService.copy(this.nodeJson);
     if (parseProject) {
       this.ProjectService.parseProject();
       this.items = this.ProjectService.idToOrder;

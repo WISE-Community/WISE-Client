@@ -1,6 +1,7 @@
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
+import { ObjectService } from '../../../services/objectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { UtilService } from '../../../services/utilService';
@@ -14,6 +15,7 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   annotationService: AnnotationService;
   configService: ConfigService;
   dataExportService: DataExportService;
+  objectService: ObjectService;
   projectService: TeacherProjectService;
   teacherDataService: TeacherDataService;
   utilService: UtilService;
@@ -24,6 +26,7 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
     this.annotationService = context.controller.annotationService;
     this.configService = context.controller.configService;
     this.dataExportService = context.controller.dataExportService;
+    this.objectService = context.controller.objectService;
     this.projectService = context.controller.projectService;
     this.teacherDataService = context.controller.teacherDataService;
     this.utilService = context.controller.utilService;

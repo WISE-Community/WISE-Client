@@ -22,6 +22,7 @@ import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spin
 import { DiscussionComponentDataExportStrategy } from '../strategies/DiscussionComponentDataExportStrategy';
 import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
 import { Component as WISEComponent } from '../../../common/Component';
+import { ObjectService } from '../../../services/objectService';
 
 @Component({
   selector: 'data-export',
@@ -119,6 +120,7 @@ export class DataExportComponent implements OnInit {
     public dataExportService: DataExportService,
     private dialog: MatDialog,
     private matchService: MatchService,
+    public objectService: ObjectService,
     public projectService: TeacherProjectService,
     public teacherDataService: TeacherDataService,
     private upgrade: UpgradeModule,

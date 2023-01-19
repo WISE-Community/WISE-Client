@@ -5,9 +5,9 @@ import { AnnotationService } from '../../services/annotationService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { ConfigService } from '../../services/configService';
 import { NotificationService } from '../../services/notificationService';
+import { ObjectService } from '../../services/objectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { UtilService } from '../../services/utilService';
 
 @Component({
   selector: 'app-student-grading',
@@ -36,9 +36,9 @@ export class StudentGradingComponent implements OnInit {
     private classroomStatusService: ClassroomStatusService,
     private configService: ConfigService,
     private notificationService: NotificationService,
+    private objectService: ObjectService,
     private projectService: TeacherProjectService,
     private upgrade: UpgradeModule,
-    private utilService: UtilService,
     private teacherDataService: TeacherDataService
   ) {}
 
@@ -157,9 +157,7 @@ export class StudentGradingComponent implements OnInit {
         let periodId = currentPeriod.periodId;
         let currentWorkgroup = this.teacherDataService.getCurrentWorkgroup();
         if (!currentWorkgroup) {
-          let workgroups = this.utilService.makeCopyOfJSONObject(
-            this.configService.getClassmateUserInfos()
-          );
+          let workgroups = this.objectService.copy(this.configService.getClassmateUserInfos());
           let n = workgroups.length;
           for (let i = 0; i < n; i++) {
             let workgroup = workgroups[i];

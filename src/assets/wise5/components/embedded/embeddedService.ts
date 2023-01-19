@@ -7,6 +7,7 @@ import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../services/utilService';
 import { ConfigService } from '../../services/configService';
+import { ObjectService } from '../../services/objectService';
 
 @Injectable()
 export class EmbeddedService extends ComponentService {
@@ -16,6 +17,7 @@ export class EmbeddedService extends ComponentService {
 
   constructor(
     protected ConfigService: ConfigService,
+    protected objectService: ObjectService,
     protected StudentAssetService: StudentAssetService,
     protected UtilService: UtilService
   ) {
@@ -133,7 +135,7 @@ export class EmbeddedService extends ComponentService {
   ): void {
     let parameters: any = {};
     if (componentContent.parameters != null) {
-      parameters = this.UtilService.makeCopyOfJSONObject(componentContent.parameters);
+      parameters = this.objectService.copy(componentContent.parameters);
     }
     parameters.nodeId = nodeId;
     parameters.componentId = componentId;

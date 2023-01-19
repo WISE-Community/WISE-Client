@@ -15,6 +15,7 @@ import { ComponentService } from '../../componentService';
 import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 import { MultipleChoiceService } from '../multipleChoiceService';
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
+import { ObjectService } from '../../../services/objectService';
 
 @Component({
   selector: 'multiple-choice-student',
@@ -40,6 +41,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
     private multipleChoiceService: MultipleChoiceService,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
+    protected objectService: ObjectService,
     private projectService: ProjectService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService,
@@ -52,6 +54,7 @@ export class MultipleChoiceStudent extends ComponentStudent {
       dialog,
       nodeService,
       notebookService,
+      objectService,
       studentAssetService,
       studentDataService,
       utilService

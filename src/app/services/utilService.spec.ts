@@ -1,18 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { UtilService } from '../../assets/wise5/services/utilService';
-let service: UtilService;
 
+let service: UtilService;
 describe('UtilService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
       providers: [UtilService]
     });
-    service = TestBed.get(UtilService);
+    service = TestBed.inject(UtilService);
   });
 
   convertStringToNumberTests();
-  makeCopyOfJSONObjectTests();
   arrayHasNonNullElementTests();
   calculateMeanTests();
   getIntersectOfArraysTests();
@@ -36,30 +34,6 @@ function convertStringToNumberTests() {
     it('should return non-null number string as is', () => {
       expect(service.convertStringToNumber('abc')).toEqual('abc');
       expect(service.convertStringToNumber('')).toEqual('');
-    });
-  });
-}
-
-function makeCopyOfJSONObjectTests() {
-  describe('makeCopyOfJSONObject()', () => {
-    it('should copy an array object', () => {
-      const array1 = [1, 2, 3];
-      const copiedArray = service.makeCopyOfJSONObject(array1);
-      expect(copiedArray).toEqual(array1);
-    });
-
-    it('should copy an object', () => {
-      const obj = { name: 'WISE', address: 'Berkeley' };
-      const copiedObj = service.makeCopyOfJSONObject(obj);
-      expect(copiedObj).toEqual(obj);
-    });
-
-    it('should return null for null input', () => {
-      expect(service.makeCopyOfJSONObject(null)).toEqual(null);
-    });
-
-    it('should return undefined for undefined input', () => {
-      expect(service.makeCopyOfJSONObject(undefined)).toEqual(undefined);
     });
   });
 }

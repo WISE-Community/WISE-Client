@@ -8,8 +8,8 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
+import { ObjectService } from '../../../../services/objectService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UtilService } from '../../../../services/utilService';
 
 @Component({
   selector: 'step-item',
@@ -39,8 +39,8 @@ export class StepItemComponent implements OnInit {
 
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
-    private projectService: TeacherProjectService,
-    private utilService: UtilService
+    private objectService: ObjectService,
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +55,7 @@ export class StepItemComponent implements OnInit {
         typeof changesObj.maxScore.currentValue === 'number' ? changesObj.maxScore.currentValue : 0;
     }
     if (changesObj.stepData) {
-      const stepData = this.utilService.makeCopyOfJSONObject(changesObj.stepData.currentValue);
+      const stepData = this.objectService.copy(changesObj.stepData.currentValue);
       this.title = stepData.title;
       this.hasAlert = stepData.hasAlert;
       this.hasNewAlert = stepData.hasNewAlert;

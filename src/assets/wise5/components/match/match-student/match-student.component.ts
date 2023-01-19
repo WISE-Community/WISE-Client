@@ -20,6 +20,7 @@ import {
   transferArrayItem
 } from '@angular/cdk/drag-drop';
 import { RandomKeyService } from '../../../services/randomKeyService';
+import { ObjectService } from '../../../services/objectService';
 
 @Component({
   selector: 'match-student',
@@ -51,6 +52,7 @@ export class MatchStudent extends ComponentStudent {
     private MatchService: MatchService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    protected objectService: ObjectService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
@@ -63,6 +65,7 @@ export class MatchStudent extends ComponentStudent {
       dialog,
       NodeService,
       NotebookService,
+      objectService,
       StudentAssetService,
       StudentDataService,
       UtilService

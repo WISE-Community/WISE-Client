@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
 import { TeacherProjectService } from './teacherProjectService';
-import { UtilService } from './utilService';
+import { ObjectService } from './objectService';
 
 @Injectable()
 export class CopyNodesService {
@@ -11,7 +11,7 @@ export class CopyNodesService {
     protected http: HttpClient,
     protected ConfigService: ConfigService,
     protected ProjectService: TeacherProjectService,
-    protected UtilService: UtilService
+    protected objectService: ObjectService
   ) {}
 
   /**
@@ -43,14 +43,9 @@ export class CopyNodesService {
     return newNodes;
   }
 
-  /**
-   * Copy the node with the specified nodeId
-   * @param nodeId the node id to copy
-   * @return copied node
-   */
   private copyNode(nodeId: string): any {
     const node = this.ProjectService.getNodeById(nodeId);
-    const nodeCopy = this.UtilService.makeCopyOfJSONObject(node);
+    const nodeCopy = this.objectService.copy(node);
     nodeCopy.id = this.ProjectService.getNextAvailableNodeId();
     nodeCopy.transitionLogic = {};
     nodeCopy.constraints = [];

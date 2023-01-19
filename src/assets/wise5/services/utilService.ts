@@ -15,14 +15,6 @@ export class UtilService {
     return str;
   }
 
-  makeCopyOfJSONObject(jsonObject: any): any {
-    return this.isUndefined(jsonObject) ? undefined : JSON.parse(JSON.stringify(jsonObject));
-  }
-
-  private isUndefined(value: any): boolean {
-    return typeof value === 'undefined';
-  }
-
   getImageObjectFromBase64String(img_b64) {
     const blob = this.dataURItoBlob(img_b64);
     const now = new Date().getTime();
@@ -358,12 +350,10 @@ export class UtilService {
    * @param array2 an array of strings, numbers, or booleans
    * @return whether the arrays contain the same values
    */
-  arraysContainSameValues(array1, array2) {
-    const array1Copy = this.makeCopyOfJSONObject(array1);
-    array1Copy.sort();
-    const array2Copy = this.makeCopyOfJSONObject(array2);
-    array2Copy.sort();
-    return JSON.stringify(array1Copy) == JSON.stringify(array2Copy);
+  arraysContainSameValues(array1: any[], array2: any[]): boolean {
+    array1.sort();
+    array2.sort();
+    return JSON.stringify(array1) == JSON.stringify(array2);
   }
 
   /**

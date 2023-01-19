@@ -2,8 +2,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { CopyNodesService } from '../../assets/wise5/services/copyNodesService';
+import { ObjectService } from '../../assets/wise5/services/objectService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
-import { UtilService } from '../../assets/wise5/services/utilService';
 
 class ConfigServiceStub {}
 
@@ -22,17 +22,9 @@ class ProjectServiceStub {
   parseProject() {}
 }
 
-class UtilServiceStub {
-  makeCopyOfJSONObject(obj) {
-    return JSON.parse(JSON.stringify(obj));
-  }
-}
-
 let service: CopyNodesService;
 let projectService: TeacherProjectService;
-let utilService: UtilService;
 let createNodeAfterSpy, createNodeInsideSpy, getUnusedComponentIdSpy, parseProjectSpy;
-
 describe('CopyNodesService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -40,13 +32,12 @@ describe('CopyNodesService', () => {
       providers: [
         CopyNodesService,
         { provide: ConfigService, useClass: ConfigServiceStub },
-        { provide: TeacherProjectService, useClass: ProjectServiceStub },
-        { provide: UtilService, useClass: UtilServiceStub }
+        ObjectService,
+        { provide: TeacherProjectService, useClass: ProjectServiceStub }
       ]
     });
     service = TestBed.inject(CopyNodesService);
     projectService = TestBed.inject(TeacherProjectService);
-    utilService = TestBed.inject(UtilService);
     createNodeAfterSpy = spyOn(projectService, 'createNodeAfter');
     createNodeInsideSpy = spyOn(projectService, 'createNodeInside');
     getUnusedComponentIdSpy = spyOn(projectService, 'getUnusedComponentId');
@@ -67,7 +58,7 @@ function copyNodeInside() {
 }
 
 function copyNodesAfter() {
-  describe('copyNodesAfter', () => {
+  describe('copyNodesAfter()', () => {
     it('should copy and create a node after specified node id', () => {
       const newNodes = service.copyNodesAfter(['n1'], 'n2');
       expect(newNodes.length).toEqual(1);

@@ -6,6 +6,7 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
+import { ObjectService } from '../../../services/objectService';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
@@ -49,6 +50,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     private notificationService: NotificationService,
+    protected objectService: ObjectService,
     private peerGroupService: PeerGroupService,
     private peerChatService: PeerChatService,
     protected studentAssetService: StudentAssetService,
@@ -63,6 +65,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
       dialog,
       nodeService,
       notebookService,
+      objectService,
       studentAssetService,
       studentDataService,
       utilService

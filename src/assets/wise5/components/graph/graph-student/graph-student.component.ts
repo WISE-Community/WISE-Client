@@ -17,6 +17,7 @@ import canvg from 'canvg';
 import { MatDialog } from '@angular/material/dialog';
 import { GraphContent } from '../GraphContent';
 import { RandomKeyService } from '../../../services/randomKeyService';
+import { ObjectService } from '../../../services/objectService';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -88,6 +89,7 @@ export class GraphStudent extends ComponentStudent {
     private GraphService: GraphService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    protected objectService: ObjectService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
@@ -100,6 +102,7 @@ export class GraphStudent extends ComponentStudent {
       dialog,
       NodeService,
       NotebookService,
+      objectService,
       StudentAssetService,
       StudentDataService,
       UtilService
@@ -145,8 +148,8 @@ export class GraphStudent extends ComponentStudent {
     this.subtitle = this.componentContent.subtitle;
     this.width = this.componentContent.width;
     this.height = this.componentContent.height;
-    this.xAxis = this.UtilService.makeCopyOfJSONObject(this.componentContent.xAxis);
-    this.yAxis = this.UtilService.makeCopyOfJSONObject(this.componentContent.yAxis);
+    this.xAxis = this.objectService.copy(this.componentContent.xAxis);
+    this.yAxis = this.objectService.copy(this.componentContent.yAxis);
     this.graphType = this.componentContent.graphType;
     if (this.graphType == null) {
       this.graphType = 'line';
@@ -261,7 +264,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState) {
-    const studentData = this.UtilService.makeCopyOfJSONObject(componentState.studentData);
+    const studentData = this.objectService.copy(componentState.studentData);
     if (studentData.tableData.length > 0) {
       studentData.tableData = this.processTableData(
         studentData.tableData,
@@ -553,7 +556,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   handleEmbeddedConnectedComponentStudentDataChanged(connectedComponent, componentState) {
-    componentState = this.UtilService.makeCopyOfJSONObject(componentState);
+    componentState = this.objectService.copy(componentState);
     const studentData = componentState.studentData;
     this.processConnectedComponentStudentData(studentData, connectedComponent);
     this.studentDataChanged();
@@ -869,7 +872,7 @@ export class GraphStudent extends ComponentStudent {
     // problem. I think this problem occurs because highcharts-chart was expecting two series so
     // when we hide the first trial (and the first series), it moves the second series (from the
     // second trial) to the first series.
-    series = this.UtilService.makeCopyOfJSONObject(series);
+    series = this.objectService.copy(series);
     this.chartConfig = this.createChartConfig(
       resolve,
       this.title,
@@ -1347,7 +1350,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   setXAxis(xAxis) {
-    this.xAxis = this.UtilService.makeCopyOfJSONObject(xAxis);
+    this.xAxis = this.objectService.copy(xAxis);
   }
 
   getXAxis() {
@@ -1355,7 +1358,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   setYAxis(yAxis) {
-    this.yAxis = this.UtilService.makeCopyOfJSONObject(yAxis);
+    this.yAxis = this.objectService.copy(yAxis);
   }
 
   getYAxis() {
@@ -1396,7 +1399,7 @@ export class GraphStudent extends ComponentStudent {
       const activeSeriesIndex = this.getSeriesIndex(this.activeSeries);
       let originalSeries = this.componentContent.series[activeSeriesIndex];
       if (originalSeries != null) {
-        originalSeries = this.UtilService.makeCopyOfJSONObject(originalSeries);
+        originalSeries = this.objectService.copy(originalSeries);
         this.setSeriesByIndex(originalSeries, activeSeriesIndex);
         this.setActiveSeriesByIndex(activeSeriesIndex);
         if (this.componentContent.xAxis != null) {
@@ -1416,11 +1419,11 @@ export class GraphStudent extends ComponentStudent {
     const studentData = componentState.studentData;
     if (this.isStudentDataVersion1(studentData.version)) {
       this.studentDataVersion = 1;
-      this.setSeries(this.UtilService.makeCopyOfJSONObject(studentData.series));
+      this.setSeries(this.objectService.copy(studentData.series));
     } else {
       this.studentDataVersion = studentData.version;
       if (studentData.trials != null && studentData.trials.length > 0) {
-        const trialsCopy = this.UtilService.makeCopyOfJSONObject(studentData.trials);
+        const trialsCopy = this.objectService.copy(studentData.trials);
         this.setTrials(trialsCopy);
         const activeTrialIndex = studentData.activeTrialIndex;
         if (activeTrialIndex == null) {
@@ -1517,15 +1520,15 @@ export class GraphStudent extends ComponentStudent {
     const studentData: any = {};
     studentData.version = this.studentDataVersion;
     if (this.isStudentDataVersion1()) {
-      studentData.series = this.UtilService.makeCopyOfJSONObject(this.getSeries());
+      studentData.series = this.objectService.copy(this.getSeries());
     } else {
       if (this.trials != null) {
-        studentData.trials = this.UtilService.makeCopyOfJSONObject(this.trials);
+        studentData.trials = this.objectService.copy(this.trials);
         const activeTrialIndex = this.getTrialIndex(this.activeTrial);
         studentData.activeTrialIndex = activeTrialIndex;
       }
     }
-    studentData.xAxis = this.UtilService.makeCopyOfJSONObject(this.getXAxis());
+    studentData.xAxis = this.objectService.copy(this.getXAxis());
     delete studentData.xAxis.plotBands;
     if (this.componentContent.xAxis != null && this.componentContent.xAxis.plotBands != null) {
       studentData.xAxis.plotBands = this.componentContent.xAxis.plotBands;
@@ -1688,7 +1691,7 @@ export class GraphStudent extends ComponentStudent {
       const trials = studentData.trials;
       if (trials != null) {
         for (const trial of trials) {
-          const newTrial = this.UtilService.makeCopyOfJSONObject(trial);
+          const newTrial = this.objectService.copy(trial);
           newTrial.name = nodePositionAndTitle;
           newTrial.show = true;
           mergedTrials.push(newTrial);
@@ -1931,7 +1934,7 @@ export class GraphStudent extends ComponentStudent {
         trial.show = false;
       }
     }
-    const series = this.UtilService.makeCopyOfJSONObject(this.componentContent.series);
+    const series = this.objectService.copy(this.componentContent.series);
     const trial = {
       name: $localize`Trial` + ' ' + (maxTrialNumber + 1),
       series: series,
@@ -2050,7 +2053,10 @@ export class GraphStudent extends ComponentStudent {
     if (
       this.previousTrialIdsToShow != null &&
       this.trialIdsToShow != null &&
-      !this.UtilService.arraysContainSameValues(this.previousTrialIdsToShow, this.trialIdsToShow)
+      !this.UtilService.arraysContainSameValues(
+        this.objectService.copy(this.previousTrialIdsToShow),
+        this.objectService.copy(this.trialIdsToShow)
+      )
     ) {
       this.trialIdsToShow = this.trialIdsToShow;
       this.studentDataChanged();
@@ -2060,7 +2066,7 @@ export class GraphStudent extends ComponentStudent {
      * trialIdsToShow actually change the next time trialIdsToShowChanged()
      * is called.
      */
-    this.previousTrialIdsToShow = this.UtilService.makeCopyOfJSONObject(this.trialIdsToShow);
+    this.previousTrialIdsToShow = this.objectService.copy(this.trialIdsToShow);
   }
 
   showOrHideTrials(trialIdsToShow) {
@@ -2674,7 +2680,7 @@ export class GraphStudent extends ComponentStudent {
         }
       } else {
         if (connectedComponent.type === 'showWork') {
-          latestComponentState = this.UtilService.makeCopyOfJSONObject(latestComponentState);
+          latestComponentState = this.objectService.copy(latestComponentState);
           const canEdit = false;
           this.setCanEditForAllSeriesInComponentState(latestComponentState, canEdit);
         }
@@ -2769,7 +2775,7 @@ export class GraphStudent extends ComponentStudent {
     if (this.componentContent.series.length > 0) {
       const trial = this.createNewTrial(RandomKeyService.generate());
       trial.name = $localize`Trial` + ' ' + trialCount;
-      trial.series = this.UtilService.makeCopyOfJSONObject(this.componentContent.series);
+      trial.series = this.objectService.copy(this.componentContent.series);
       mergedTrials.push(trial);
       if (this.canEditTrial(trial)) {
         activeTrialIndex = trialCount;
@@ -2876,7 +2882,7 @@ export class GraphStudent extends ComponentStudent {
     if (mergeFields == null) {
       if (connectedComponentState.componentType === 'Graph' && firstTime) {
         // there are no merge fields specified so we will get all of the fields
-        baseComponentState.studentData = this.UtilService.makeCopyOfJSONObject(
+        baseComponentState.studentData = this.objectService.copy(
           connectedComponentState.studentData
         );
       }

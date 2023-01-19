@@ -9,6 +9,7 @@ import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NodeService } from '../services/nodeService';
 import { NotebookService } from '../services/notebookService';
+import { ObjectService } from '../services/objectService';
 import { StudentAssetService } from '../services/studentAssetService';
 import { StudentDataService } from '../services/studentDataService';
 import { UtilService } from '../services/utilService';
@@ -61,6 +62,7 @@ export abstract class ComponentStudent {
     protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    protected objectService: ObjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -351,7 +353,7 @@ export abstract class ComponentStudent {
           connectedComponent.componentId
         );
         if (componentState != null) {
-          componentStates.push(this.UtilService.makeCopyOfJSONObject(componentState));
+          componentStates.push(this.objectService.copy(componentState));
         }
         if (connectedComponent.type === 'showWork') {
           this.isDisabled = true;

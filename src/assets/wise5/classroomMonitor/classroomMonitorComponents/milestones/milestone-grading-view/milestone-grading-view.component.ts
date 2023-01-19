@@ -5,10 +5,10 @@ import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { NotificationService } from '../../../../services/notificationService';
+import { ObjectService } from '../../../../services/objectService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UtilService } from '../../../../services/utilService';
 import { NodeGradingViewComponent } from '../../nodeGrading/node-grading-view/node-grading-view.component';
 
 @Component({
@@ -33,10 +33,10 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
     protected milestoneService: MilestoneService,
     protected nodeInfoService: NodeInfoService,
     protected notificationService: NotificationService,
+    protected objectService: ObjectService,
     protected peerGroupService: TeacherPeerGroupService,
     protected projectService: TeacherProjectService,
-    protected teacherDataService: TeacherDataService,
-    protected utilService: UtilService
+    protected teacherDataService: TeacherDataService
   ) {
     super(
       annotationService,
@@ -45,10 +45,10 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
       milestoneService,
       nodeInfoService,
       notificationService,
+      objectService,
       peerGroupService,
       projectService,
-      teacherDataService,
-      utilService
+      teacherDataService
     );
   }
 
@@ -162,7 +162,7 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
       workgroup.changeInScore = this.getChangeInScore(workgroup.initialScore, workgroup.score);
     }
     if (!init) {
-      this.workgroupsById[workgroupId] = this.utilService.makeCopyOfJSONObject(workgroup);
+      this.workgroupsById[workgroupId] = this.objectService.copy(workgroup);
     }
   }
 

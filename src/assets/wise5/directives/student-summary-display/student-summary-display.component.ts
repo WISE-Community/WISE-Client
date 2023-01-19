@@ -6,6 +6,7 @@ import { UtilService } from '../../services/utilService';
 import { SummaryService } from '../../components/summary/summaryService';
 import { SummaryDisplay } from '../summary-display/summary-display.component';
 import { StudentDataService } from '../../services/studentDataService';
+import { ObjectService } from '../../services/objectService';
 
 @Component({
   selector: 'student-summary-display',
@@ -16,12 +17,20 @@ export class StudentSummaryDisplay extends SummaryDisplay {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
+    protected objectService: ObjectService,
     protected projectService: ProjectService,
     private studentDataService: StudentDataService,
     protected summaryService: SummaryService,
     protected utilService: UtilService
   ) {
-    super(annotationService, configService, projectService, summaryService, utilService);
+    super(
+      annotationService,
+      configService,
+      objectService,
+      projectService,
+      summaryService,
+      utilService
+    );
   }
 
   ngOnInit() {

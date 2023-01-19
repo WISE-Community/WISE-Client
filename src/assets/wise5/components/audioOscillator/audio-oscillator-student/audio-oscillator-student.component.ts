@@ -4,6 +4,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
+import { ObjectService } from '../../../services/objectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { UtilService } from '../../../services/utilService';
@@ -69,6 +70,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
     protected dialog: MatDialog,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
+    protected objectService: ObjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
     protected UtilService: UtilService
@@ -80,6 +82,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
       dialog,
       NodeService,
       NotebookService,
+      objectService,
       StudentAssetService,
       StudentDataService,
       UtilService
@@ -251,9 +254,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
 
   addFrequencyDataToStudentData(studentData: any): void {
     studentData.frequenciesPlayed = this.frequenciesPlayed;
-    studentData.frequenciesPlayedSorted = this.UtilService.makeCopyOfJSONObject(
-      this.frequenciesPlayed
-    ).sort();
+    studentData.frequenciesPlayedSorted = this.objectService.copy(this.frequenciesPlayed).sort();
     studentData.numberOfFrequenciesPlayed = this.frequenciesPlayed.length;
     studentData.numberOfUniqueFrequenciesPlayed = [...new Set(this.frequenciesPlayed)].length;
     studentData.minFrequencyPlayed = Math.min(...this.frequenciesPlayed);
@@ -262,9 +263,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
 
   addAmplitudeDataToStudentData(studentData: any): void {
     studentData.amplitudesPlayed = this.amplitudesPlayed;
-    studentData.amplitudesPlayedSorted = this.UtilService.makeCopyOfJSONObject(
-      this.amplitudesPlayed
-    ).sort();
+    studentData.amplitudesPlayedSorted = this.objectService.copy(this.amplitudesPlayed).sort();
     studentData.numberOfAmplitudesPlayed = this.amplitudesPlayed.length;
     studentData.numberOfUniqueAmplitudesPlayed = [...new Set(this.amplitudesPlayed)].length;
     studentData.minAmplitudePlayed = Math.min(...this.amplitudesPlayed);

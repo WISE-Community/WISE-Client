@@ -29,7 +29,7 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
       var runId = this.configService.getRunId();
       var data: any = {};
       var workgroups = this.configService.getClassmateUserInfosSortedByWorkgroupId();
-      workgroups = this.utilService.makeCopyOfJSONObject(workgroups);
+      workgroups = this.objectService.copy(workgroups);
       for (var w = 0; w < workgroups.length; w++) {
         var workgroup = workgroups[w];
         if (workgroup != null) {

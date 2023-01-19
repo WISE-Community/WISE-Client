@@ -3,13 +3,13 @@ import * as angular from 'angular';
 import { ProjectService } from './projectService';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { UtilService } from './utilService';
 import { BranchService } from './branchService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { PathService } from './pathService';
 import { RandomKeyService } from './randomKeyService';
+import { ObjectService } from './objectService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -33,10 +33,10 @@ export class TeacherProjectService extends ProjectService {
   constructor(
     protected branchService: BranchService,
     protected componentServiceLookupService: ComponentServiceLookupService,
-    protected http: HttpClient,
     protected configService: ConfigService,
-    protected pathService: PathService,
-    private utilService: UtilService
+    protected http: HttpClient,
+    private objectService: ObjectService,
+    protected pathService: PathService
   ) {
     super(branchService, componentServiceLookupService, http, configService, pathService);
   }
@@ -1285,9 +1285,7 @@ export class TeacherProjectService extends ProjectService {
         id: this.getNextAvailableConstraintIdForNodeId(node.id),
         action: branchPathTakenConstraint.action,
         targetId: node.id,
-        removalCriteria: this.utilService.makeCopyOfJSONObject(
-          branchPathTakenConstraint.removalCriteria
-        )
+        removalCriteria: this.objectService.copy(branchPathTakenConstraint.removalCriteria)
       };
       this.addConstraintToNode(node, newConstraint);
     }
@@ -1832,9 +1830,7 @@ export class TeacherProjectService extends ProjectService {
              * copy the transition logic to the node that comes
              * before it
              */
-            node.transitionLogic = this.utilService.makeCopyOfJSONObject(
-              nodeToRemoveTransitionLogic
-            );
+            node.transitionLogic = this.objectService.copy(nodeToRemoveTransitionLogic);
 
             /*
              * set the transitions for the node that comes before

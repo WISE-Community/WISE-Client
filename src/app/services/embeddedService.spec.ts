@@ -8,6 +8,7 @@ import { TagService } from '../../assets/wise5/services/tagService';
 import { UtilService } from '../../assets/wise5/services/utilService';
 import { EmbeddedService } from '../../assets/wise5/components/embedded/embeddedService';
 import { SessionService } from '../../assets/wise5/services/sessionService';
+import { ObjectService } from '../../assets/wise5/services/objectService';
 
 let service: EmbeddedService;
 
@@ -19,6 +20,7 @@ describe('EmbeddedService', () => {
         AnnotationService,
         ConfigService,
         EmbeddedService,
+        ObjectService,
         ProjectService,
         SessionService,
         StudentAssetService,
@@ -26,7 +28,7 @@ describe('EmbeddedService', () => {
         UtilService
       ]
     });
-    service = TestBed.get(EmbeddedService);
+    service = TestBed.inject(EmbeddedService);
   });
   createComponent();
   isCompleted();

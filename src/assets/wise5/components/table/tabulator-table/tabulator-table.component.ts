@@ -22,7 +22,7 @@ import {
   SelectRowModule,
   SortModule
 } from 'tabulator-tables';
-import { UtilService } from '../../../services/utilService';
+import { ObjectService } from '../../../services/objectService';
 import { TabulatorColumn } from '../TabulatorData';
 
 @Component({
@@ -51,7 +51,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   subscriptions: Subscription = new Subscription();
   viewInit$ = new ReplaySubject<void>();
 
-  constructor(protected UtilService: UtilService) {
+  constructor(protected objectService: ObjectService) {
     Tabulator.registerModule([
       EditModule,
       FormatModule,
@@ -68,7 +68,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
     this.tabOptions.columns = this.setupColumns(this.tabColumns);
     this.initializeRowSelection();
     this.tabOptions.data = this.tabData;
-    this.tabOptions.initialSort = this.UtilService.makeCopyOfJSONObject(this.tabSorters);
+    this.tabOptions.initialSort = this.objectService.copy(this.tabSorters);
     this.table = new Tabulator(this.tableEl, this.tabOptions);
     this.table.on('cellEdited', (cell) => {
       this.cellChanged.emit(cell);
