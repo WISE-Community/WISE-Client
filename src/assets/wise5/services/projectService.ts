@@ -870,7 +870,7 @@ export class ProjectService {
    * Retrieves the project JSON from Config.projectURL and returns it.
    * If Config.projectURL is undefined, returns null.
    */
-  retrieveProject(): any {
+  retrieveProject(parseProject: boolean = true): any {
     let projectURL = this.configService.getConfigParam('projectURL');
     if (projectURL == null) {
       return null;
@@ -879,8 +879,13 @@ export class ProjectService {
     return this.http
       .get(projectURL, { headers: headers })
       .toPromise()
-      .then((projectJSON) => {
-        this.setProject(projectJSON);
+      .then((projectJSON: any) => {
+        if (parseProject) {
+          this.setProject(projectJSON);
+        } else {
+          this.project = projectJSON;
+          this.metadata = projectJSON.metadata;
+        }
         return projectJSON;
       });
   }
