@@ -13,11 +13,11 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
-import { PasswordService } from '../../services/password.service';
 import {
   nameTests,
   validateAndExpect
 } from '../register-user-form/register-user-form-spec-helpers';
+import { PasswordModule } from '../../password/password.module';
 
 class MockTeacherService {
   registerTeacherAccount() {}
@@ -44,10 +44,10 @@ describe('RegisterTeacherFormComponent', () => {
           MatCheckboxModule,
           MatSelectModule,
           MatInputModule,
-          MatSnackBarModule
+          MatSnackBarModule,
+          PasswordModule
         ],
         providers: [
-          PasswordService,
           { provide: TeacherService, useClass: MockTeacherService },
           { provide: UserService, useClass: MockUserService }
         ],
@@ -202,8 +202,8 @@ function createAccountFormValue(
     schoolLevel: schoolLevel,
     howDidYouHearAboutUs: howDidYouHearAboutUs,
     passwords: {
-      password: password,
-      confirmPassword: confirmPassword
+      newPassword: password,
+      confirmNewPassword: confirmPassword
     },
     agree: agree
   };

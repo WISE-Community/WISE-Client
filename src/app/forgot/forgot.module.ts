@@ -21,6 +21,7 @@ import { ForgotTeacherUsernameCompleteComponent } from './teacher/forgot-teacher
 import { ForgotTeacherPasswordChangeComponent } from './teacher/forgot-teacher-password-change/forgot-teacher-password-change.component';
 import { ForgotTeacherPasswordCompleteComponent } from './teacher/forgot-teacher-password-complete/forgot-teacher-password-complete.component';
 import { ForgotTeacherPasswordVerifyComponent } from './teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component';
+import { PasswordModule } from '../password/password.module';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { ForgotTeacherPasswordVerifyComponent } from './teacher/forgot-teacher-p
     FormsModule,
     MatDividerModule,
     MatProgressBarModule,
+    PasswordModule,
     ReactiveFormsModule,
     SharedModule
   ],

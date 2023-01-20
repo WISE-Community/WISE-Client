@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Student } from '../../domain/student';
 import { StudentService } from '../../student/student.service';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -7,15 +7,22 @@ import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PasswordService } from '../../services/password.service';
+import { NewPasswordComponent } from '../../password/new-password/new-password.component';
 
 @Component({
-  selector: 'app-register-student-form',
+  selector: 'register-student-form',
   templateUrl: './register-student-form.component.html',
   styleUrls: ['./register-student-form.component.scss']
 })
 export class RegisterStudentFormComponent extends RegisterUserFormComponent implements OnInit {
-  studentUser: Student = new Student();
+  createStudentAccountFormGroup: FormGroup = this.fb.group({
+    firstName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
+    lastName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
+    gender: new FormControl('', [Validators.required]),
+    birthMonth: new FormControl('', [Validators.required]),
+    birthDay: new FormControl({ value: '', disabled: true }, [Validators.required])
+  });
+  days: string[] = [];
   genders: any[] = [
     { code: 'FEMALE', label: $localize`Female` },
     { code: 'MALE', label: $localize`Male` },
@@ -35,34 +42,14 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     { code: '11', label: $localize`11 (Nov)` },
     { code: '12', label: $localize`12 (Dec)` }
   ];
-  days: string[] = [];
-  securityQuestions: object;
-  passwordsFormGroup = this.fb.group(
-    {
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(this.passwordService.minLength),
-          Validators.pattern(this.passwordService.pattern)
-        ]
-      ],
-      confirmPassword: ['', [Validators.required]]
-    },
-    { validator: this.passwordMatchValidator }
-  );
-  createStudentAccountFormGroup: FormGroup = this.fb.group({
-    firstName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
-    lastName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
-    gender: new FormControl('', [Validators.required]),
-    birthMonth: new FormControl('', [Validators.required]),
-    birthDay: new FormControl({ value: '', disabled: true }, [Validators.required])
-  });
+  passwordsFormGroup: FormGroup = this.fb.group({});
   processing: boolean = false;
+  securityQuestions: object;
+  studentUser: Student = new Student();
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
-    private passwordService: PasswordService,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
@@ -106,6 +93,10 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     this.createStudentAccountFormGroup.controls['lastName'].markAsTouched();
   }
 
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
+  }
+
   isUsingGoogleId() {
     return this.studentUser.googleUserId != null;
   }
@@ -138,11 +129,11 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
     switch (error.messageCode) {
       case 'invalidPasswordLength':
         formError.minlength = true;
-        this.passwordsFormGroup.get('password').setErrors(formError);
+        this.passwordsFormGroup.get(NewPasswordComponent.FORM_CONTROL_NAME).setErrors(formError);
         break;
       case 'invalidPasswordPattern':
         formError.pattern = true;
-        this.passwordsFormGroup.get('password').setErrors(formError);
+        this.passwordsFormGroup.get(NewPasswordComponent.FORM_CONTROL_NAME).setErrors(formError);
         break;
       default:
         this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
@@ -166,19 +157,7 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
   }
 
   getPassword() {
-    return this.passwordsFormGroup.controls['password'].value;
-  }
-
-  passwordMatchValidator(passwordsFormGroup: FormGroup) {
-    const password = passwordsFormGroup.get('password').value;
-    const confirmPassword = passwordsFormGroup.get('confirmPassword').value;
-    if (password == confirmPassword) {
-      return null;
-    } else {
-      const error = { passwordDoesNotMatch: true };
-      passwordsFormGroup.controls['confirmPassword'].setErrors(error);
-      return error;
-    }
+    return this.passwordsFormGroup.controls[NewPasswordComponent.FORM_CONTROL_NAME].value;
   }
 
   setControlFieldValue(name: string, value: string) {

@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
-import { PasswordService } from '../../../services/password.service';
-import { passwordMatchValidator } from '../../../modules/shared/validators/password-match.validator';
 
 @Component({
   selector: 'app-forgot-teacher-password-change',
@@ -14,25 +12,15 @@ import { passwordMatchValidator } from '../../../modules/shared/validators/passw
 export class ForgotTeacherPasswordChangeComponent implements OnInit {
   username: string;
   verificationCode: string;
-  changePasswordFormGroup: FormGroup = this.fb.group(
-    {
-      newPassword: new FormControl('', [
-        Validators.required,
-        Validators.minLength(this.passwordService.minLength),
-        Validators.pattern(this.passwordService.pattern)
-      ]),
-      confirmNewPassword: new FormControl('', [Validators.required])
-    },
-    { validator: passwordMatchValidator }
-  );
+  changePasswordFormGroup: FormGroup = this.fb.group({});
   message: string = '';
   processing: boolean = false;
   isSubmitButtonEnabled: boolean = true;
   showForgotPasswordLink = false;
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
-    private passwordService: PasswordService,
     private router: Router,
     private route: ActivatedRoute,
     private teacherService: TeacherService
@@ -41,6 +29,10 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
   ngOnInit(): void {
     this.username = this.route.snapshot.queryParamMap.get('username');
     this.verificationCode = this.route.snapshot.queryParamMap.get('verificationCode');
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   submit(): void {

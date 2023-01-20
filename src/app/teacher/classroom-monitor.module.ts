@@ -65,6 +65,7 @@ import { createCustomElement } from '@angular/elements';
 import { MilestoneReportGraphComponent } from './milestone/milestone-report-graph/milestone-report-graph.component';
 import { MilestoneDetailsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component';
 import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/student-progress/student-progress.component';
+import { PasswordModule } from '../password/password.module';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/st
     ComponentStudentModule,
     HighchartsChartModule,
     IntersectionObserverModule,
+    PasswordModule,
     PeerGroupGradingModule,
     PreviewComponentModule,
     SelectPeriodModule
