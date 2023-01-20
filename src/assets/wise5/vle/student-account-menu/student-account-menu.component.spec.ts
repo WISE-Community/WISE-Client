@@ -22,7 +22,7 @@ class MockProjectService {
   }
 }
 
-fdescribe('StudentAccountMenuComponent', () => {
+describe('StudentAccountMenuComponent', () => {
   let component: StudentAccountMenuComponent;
   let fixture: ComponentFixture<StudentAccountMenuComponent>;
 
