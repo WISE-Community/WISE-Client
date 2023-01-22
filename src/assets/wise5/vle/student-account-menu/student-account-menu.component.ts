@@ -23,6 +23,7 @@ export class StudentAccountMenuComponent implements OnInit, OnDestroy {
   rootNode: any;
   rootNodeStatus: any;
   scorePercentage: number;
+  showScore: boolean;
   subscriptions: Subscription = new Subscription();
   themeSettings: any;
   totalScoreNum: number;
@@ -46,8 +47,10 @@ export class StudentAccountMenuComponent implements OnInit, OnDestroy {
     this.workgroupId = this.configService.getWorkgroupId();
     this.usersInWorkgroup = this.configService.getUsernamesByWorkgroupId(this.workgroupId);
     this.usernamesDisplay = this.getUsernamesDisplay(this.usersInWorkgroup);
-    this.updateScores();
-    if (this.maxScore != null) {
+    this.maxScore = this.studentDataService.maxScore;
+    this.showScore = this.maxScore != null;
+    if (this.showScore) {
+      this.updateScores();
       this.subscriptions.add(
         this.studentDataService.nodeStatusesChanged$.subscribe(() => {
           this.updateScores();
