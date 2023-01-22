@@ -174,12 +174,6 @@ export default angular
           url: '/node/:nodeId',
           component: 'nodeProgressView'
         })
-        .state('root.cm.dashboard', {
-          url: '/dashboard',
-          templateUrl: '/assets/wise5/classroomMonitor/dashboard/dashboard.html',
-          controller: 'DashboardController',
-          controllerAs: 'dashboardController'
-        })
         .state('root.cm.milestones', {
           url: '/milestones',
           component: 'milestones'
