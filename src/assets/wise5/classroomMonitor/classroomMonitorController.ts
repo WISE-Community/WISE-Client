@@ -85,13 +85,6 @@ class ClassroomMonitorController {
     this.enableProjectAchievements = this.ProjectService.getAchievements().isEnabled;
     this.views = [
       {
-        route: 'root.cm.dashboard',
-        name: this.$translate('dashboard'),
-        icon: 'dashboard',
-        type: 'primary',
-        active: false
-      },
-      {
         route: 'root.cm.milestones',
         name: this.$translate('milestones'),
         icon: 'flag',
