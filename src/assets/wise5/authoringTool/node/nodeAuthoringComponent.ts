@@ -161,8 +161,7 @@ class NodeAuthoringController {
     const data = { constraints: false };
     this.saveEvent('stepPreviewed', 'Navigation', data);
     window.open(
-      `${this.ConfigService.getConfigParam('previewProjectURL')}/${this.nodeId}` +
-        `?constraints=false`
+      `${this.ConfigService.getConfigParam('previewProjectURL')}/${this.nodeId}?constraints=false`
     );
   }
 
