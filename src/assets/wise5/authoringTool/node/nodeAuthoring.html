@@ -86,13 +86,13 @@
       <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'undo' | translate }}</md-tooltip>
     </md-button>
     <span flex></span>
-    <md-button id='stepPreviewButton' class='topButton md-raised md-primary' ng-click='$ctrl.previewStepInNewWindow()'
+    <md-button id='stepPreviewButton' class='topButton md-raised md-primary' ng-click='$ctrl.previewStepInNewWindow(true)'
         ng-if='!$ctrl.isGroupNode'
         ng-disabled='$ctrl.showEditTransitions || $ctrl.insertComponentMode'>
       <md-icon>visibility</md-icon>
       <md-tooltip md-direction='top' class='projectButtonTooltip'>{{ ::'previewStep' | translate }}</md-tooltip>
     </md-button>
-    <md-button id='stepPreviewWithouConstraintsButton' class='topButton md-raised md-primary' ng-click="$ctrl.previewStepWithoutConstraintsInNewWindow()"
+    <md-button id='stepPreviewWithouConstraintsButton' class='topButton md-raised md-primary' ng-click="$ctrl.previewStepInNewWindow(false)"
         ng-if='!$ctrl.isGroupNode'
         ng-disabled='$ctrl.showEditTransitions || $ctrl.insertComponentMode'>
       <md-icon>visibility_off</md-icon>
