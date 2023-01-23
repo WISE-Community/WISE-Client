@@ -17,8 +17,9 @@ import { VLEParentComponent } from './vle-parent.component';
 let component: VLEParentComponent;
 let fixture: ComponentFixture<VLEParentComponent>;
 let initializeVLEService: InitializeVLEService;
-const nodeId1 = 'node1';
+const nodeId1: string = 'node1';
 let router: Router;
+const runId1: string = '1';
 
 describe('VLEParentComponent', () => {
   beforeEach(async () => {
@@ -50,32 +51,34 @@ describe('VLEParentComponent', () => {
 function ngOnInit() {
   describe('ngOnInit()', () => {
     initialize();
-    setStartingNode();
+    previewConstraints();
   });
 }
 
 function initialize() {
   it('preview route should initialize preview', () => {
-    setRouterUrl('/preview/unit/123');
-    const initPreviewSpy = spyOn(initializeVLEService, 'initializePreview');
-    fixture.detectChanges();
-    expect(initPreviewSpy).toHaveBeenCalledWith('123');
+    setRouterUrl(`/preview/unit/${runId1}`);
+    expectInitialize('initializePreview', runId1);
   });
   it('student route should initialize student', () => {
-    setRouterUrl('/student/unit/123');
-    const initStudentSpy = spyOn(initializeVLEService, 'initializeStudent');
-    fixture.detectChanges();
-    expect(initStudentSpy).toHaveBeenCalledWith('123');
+    setRouterUrl(`/student/unit/${runId1}`);
+    expectInitialize('initializeStudent', runId1);
   });
 }
 
-function setStartingNode() {
+function expectInitialize(functionName: any, runId: string): void {
+  const initPreviewSpy = spyOn(initializeVLEService, functionName);
+  fixture.detectChanges();
+  expect(initPreviewSpy).toHaveBeenCalledWith(runId);
+}
+
+function previewConstraints() {
   it('should set the starting node id when constraints are enabled', () => {
-    setRouterUrl(`/preview/unit/123/${nodeId1}`);
+    setRouterUrl(`/preview/unit/${runId1}/${nodeId1}`);
     expectSetCurrentNode(nodeId1);
   });
   it('should set the starting node id when constraints are disabled', () => {
-    setRouterUrl(`/preview/unit/123/${nodeId1}?constraints=false`);
+    setRouterUrl(`/preview/unit/${runId1}/${nodeId1}?constraints=false`);
     expectSetCurrentNode(nodeId1);
   });
 }
