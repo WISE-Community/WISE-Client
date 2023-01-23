@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatMenu } from '@angular/material/menu';
+import { Subscription } from 'rxjs';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
@@ -11,7 +12,7 @@ import { StudentDataService } from '../../services/studentDataService';
   styleUrls: ['./student-account-menu.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class StudentAccountMenuComponent implements OnInit {
+export class StudentAccountMenuComponent implements OnInit, OnDestroy {
   @ViewChild(MatMenu, { static: true })
   menu: MatMenu;
 
@@ -22,6 +23,8 @@ export class StudentAccountMenuComponent implements OnInit {
   rootNode: any;
   rootNodeStatus: any;
   scorePercentage: number;
+  showScore: boolean;
+  subscriptions: Subscription = new Subscription();
   themeSettings: any;
   totalScoreNum: number;
   totalScore: string;
@@ -43,11 +46,28 @@ export class StudentAccountMenuComponent implements OnInit {
     this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
     this.workgroupId = this.configService.getWorkgroupId();
     this.usersInWorkgroup = this.configService.getUsernamesByWorkgroupId(this.workgroupId);
+    this.usernamesDisplay = this.getUsernamesDisplay(this.usersInWorkgroup);
+    this.maxScore = this.studentDataService.maxScore;
+    this.showScore = this.maxScore != null;
+    if (this.showScore) {
+      this.updateScores();
+      this.subscriptions.add(
+        this.studentDataService.nodeStatusesChanged$.subscribe(() => {
+          this.updateScores();
+        })
+      );
+    }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
+  updateScores(): void {
     this.totalScoreNum = this.studentDataService.getTotalScore();
     this.totalScore = typeof this.totalScoreNum === 'number' ? this.totalScoreNum.toString() : '-';
     this.maxScore = this.studentDataService.maxScore;
     this.scorePercentage = Math.ceil((100 * this.totalScoreNum) / this.maxScore);
-    this.usernamesDisplay = this.getUsernamesDisplay(this.usersInWorkgroup);
   }
 
   getUsernamesDisplay(users: any[]): string {
