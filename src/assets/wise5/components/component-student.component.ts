@@ -4,6 +4,7 @@ import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { ComponentState } from '../../../app/domain/componentState';
 import { Component } from '../common/Component';
+import { copy } from '../common/object/object';
 import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
@@ -351,7 +352,7 @@ export abstract class ComponentStudent {
           connectedComponent.componentId
         );
         if (componentState != null) {
-          componentStates.push(this.UtilService.makeCopyOfJSONObject(componentState));
+          componentStates.push(copy(componentState));
         }
         if (connectedComponent.type === 'showWork') {
           this.isDisabled = true;

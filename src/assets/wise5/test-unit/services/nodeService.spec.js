@@ -18,7 +18,7 @@ describe('NodeService', () => {
     ProjectService = _ProjectService_;
     StudentDataService = _StudentDataService_;
     StudentDataService.studentData = { events: [] };
-    demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSONOriginal));
+    demoProjectJSON = copy(demoProjectJSONOriginal);
     ProjectService.setProject(demoProjectJSON);
   }));
   getNextNodeId();

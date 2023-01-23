@@ -1,6 +1,7 @@
 import * as angular from 'angular';
 import { AbstractDataExportStrategy } from './AbstractDataExportStrategy';
 import * as FileSaver from 'file-saver';
+import { copy } from '../../../common/object/object';
 
 export class RawDataExportStrategy extends AbstractDataExportStrategy {
   export() {
@@ -29,7 +30,7 @@ export class RawDataExportStrategy extends AbstractDataExportStrategy {
       var runId = this.configService.getRunId();
       var data: any = {};
       var workgroups = this.configService.getClassmateUserInfosSortedByWorkgroupId();
-      workgroups = this.utilService.makeCopyOfJSONObject(workgroups);
+      workgroups = copy(workgroups);
       for (var w = 0; w < workgroups.length; w++) {
         var workgroup = workgroups[w];
         if (workgroup != null) {

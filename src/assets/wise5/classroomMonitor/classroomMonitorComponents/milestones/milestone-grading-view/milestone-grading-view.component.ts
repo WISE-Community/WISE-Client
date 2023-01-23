@@ -1,4 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { copy } from '../../../../common/object/object';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { ConfigService } from '../../../../services/configService';
@@ -8,7 +9,6 @@ import { NotificationService } from '../../../../services/notificationService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UtilService } from '../../../../services/utilService';
 import { NodeGradingViewComponent } from '../../nodeGrading/node-grading-view/node-grading-view.component';
 
 @Component({
@@ -36,8 +36,7 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
     protected notificationService: NotificationService,
     protected peerGroupService: TeacherPeerGroupService,
     protected projectService: TeacherProjectService,
-    protected teacherDataService: TeacherDataService,
-    protected utilService: UtilService
+    protected teacherDataService: TeacherDataService
   ) {
     super(
       annotationService,
@@ -48,8 +47,7 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
       notificationService,
       peerGroupService,
       projectService,
-      teacherDataService,
-      utilService
+      teacherDataService
     );
   }
 
@@ -163,7 +161,7 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
       workgroup.changeInScore = this.getChangeInScore(workgroup.initialScore, workgroup.score);
     }
     if (!init) {
-      this.workgroupsById[workgroupId] = this.utilService.makeCopyOfJSONObject(workgroup);
+      this.workgroupsById[workgroupId] = copy(workgroup);
     }
   }
 

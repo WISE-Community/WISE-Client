@@ -19,6 +19,7 @@ import { FeedbackRuleEvaluator } from '../../common/feedbackRule/FeedbackRuleEva
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { OpenResponseService } from '../openResponseService';
+import { copy } from '../../../common/object/object';
 
 @Component({
   selector: 'open-response-student',
@@ -199,7 +200,7 @@ export class OpenResponseStudent extends ComponentStudent {
     const studentData: any = {};
     const response = this.getStudentResponse();
     studentData.response = response;
-    studentData.attachments = this.UtilService.makeCopyOfJSONObject(this.attachments); // create a copy without reference to original array
+    studentData.attachments = copy(this.attachments); // create a copy without reference to original array
     studentData.submitCounter = this.submitCounter;
     if (this.parentStudentWorkIds != null) {
       studentData.parentStudentWorkIds = this.parentStudentWorkIds;

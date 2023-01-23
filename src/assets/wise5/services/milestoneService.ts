@@ -10,6 +10,7 @@ import { UtilService } from './utilService';
 import { Injectable } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { MilestoneDetailsDialog } from '../classroomMonitor/classroomMonitorComponents/milestones/milestoneDetailsDialog/milestoneDetailsDialog';
+import { copy } from '../common/object/object';
 
 @Injectable()
 export class MilestoneService {
@@ -115,7 +116,7 @@ export class MilestoneService {
   }
 
   insertMilestoneItems(milestone: any) {
-    milestone.items = this.UtilService.makeCopyOfJSONObject(this.ProjectService.idToOrder);
+    milestone.items = copy(this.ProjectService.idToOrder);
     if (milestone.params != null && milestone.params.nodeIds != null) {
       for (const nodeId of milestone.params.nodeIds) {
         if (milestone.items[nodeId] != null) {

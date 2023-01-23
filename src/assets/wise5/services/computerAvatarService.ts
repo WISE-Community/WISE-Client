@@ -2,6 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { ComputerAvatar } from '../common/ComputerAvatar';
+import { copy } from '../common/object/object';
 
 @Injectable()
 export class ComputerAvatarService {
@@ -24,7 +25,7 @@ export class ComputerAvatarService {
   }
 
   getAvatars(): ComputerAvatar[] {
-    return JSON.parse(JSON.stringify(this.avatars));
+    return copy(this.avatars);
   }
 
   getAvatarsPath(): string {

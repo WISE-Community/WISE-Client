@@ -12,6 +12,7 @@ import { ComponentService } from '../../componentService';
 import { EmbeddedService } from '../embeddedService';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
+import { copy } from '../../../common/object/object';
 
 @Component({
   selector: 'embedded-student',
@@ -498,7 +499,7 @@ export class EmbeddedStudent extends ComponentStudent {
       componentId
     );
     if (componentState != null) {
-      componentStates.push(this.UtilService.makeCopyOfJSONObject(componentState));
+      componentStates.push(copy(componentState));
     }
     this.isDisabled = true;
   }
@@ -545,9 +546,7 @@ export class EmbeddedStudent extends ComponentStudent {
     if (mergeFields == null) {
       // there are no merge fields specified so we will get all of the fields
       if (fromComponentState.componentType === 'Embedded') {
-        toComponentState.studentData = this.UtilService.makeCopyOfJSONObject(
-          fromComponentState.studentData
-        );
+        toComponentState.studentData = copy(fromComponentState.studentData);
       }
     } else {
       for (const mergeField of mergeFields) {

@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { copy } from '../../../../common/object/object';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
-import { UtilService } from '../../../../services/utilService';
 
 class Workgroup {
   periodId: number;
@@ -28,8 +28,7 @@ export class StudentGradingToolsComponent implements OnInit {
   constructor(
     private configService: ConfigService,
     private dataService: TeacherDataService,
-    private upgrade: UpgradeModule,
-    private utilService: UtilService
+    private upgrade: UpgradeModule
   ) {}
 
   ngOnInit(): void {
@@ -64,9 +63,9 @@ export class StudentGradingToolsComponent implements OnInit {
   }
 
   private filterWorkgroupsForPeriod(): void {
-    this.workgroups = this.utilService
-      .makeCopyOfJSONObject(this.configService.getClassmateUserInfos())
-      .filter((workgroup) => this.periodId === -1 || workgroup.periodId === this.periodId);
+    this.workgroups = copy(this.configService.getClassmateUserInfos()).filter(
+      (workgroup) => this.periodId === -1 || workgroup.periodId === this.periodId
+    );
   }
 
   private setNextAndPrev(): void {

@@ -25,6 +25,7 @@ import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceF
 import { FeedbackRuleComponent } from '../../feedbackRule/FeedbackRuleComponent';
 import { ComponentStudent } from '../../component-student.component';
 import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
+import { copy } from '../../../common/object/object';
 
 @Component({
   selector: 'dialog-guidance-student',
@@ -75,9 +76,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   ngOnInit(): void {
     super.ngOnInit();
     if (this.componentState != null) {
-      this.responses = this.utilService.makeCopyOfJSONObject(
-        this.componentState.studentData.responses
-      );
+      this.responses = copy(this.componentState.studentData.responses);
       this.submitCounter = this.componentState.studentData.submitCounter;
     }
     this.workgroupId = this.configService.getWorkgroupId();

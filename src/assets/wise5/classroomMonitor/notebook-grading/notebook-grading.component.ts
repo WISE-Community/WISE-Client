@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { copy } from '../../common/object/object';
 import { ConfigService } from '../../services/configService';
 import { NotebookService } from '../../services/notebookService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { UtilService } from '../../services/utilService';
 
 @Component({
   selector: 'notebook-grading',
@@ -30,15 +30,12 @@ export class NotebookGradingComponent implements OnInit {
   constructor(
     private configService: ConfigService,
     private notebookService: NotebookService,
-    private teacherDataService: TeacherDataService,
-    private utilService: UtilService
+    private teacherDataService: TeacherDataService
   ) {}
 
   ngOnInit(): void {
     this.teacherWorkgroupId = this.configService.getWorkgroupId();
-    this.workgroups = this.utilService.makeCopyOfJSONObject(
-      this.configService.getClassmateUserInfos()
-    );
+    this.workgroups = copy(this.configService.getClassmateUserInfos());
     this.notebookConfig = this.notebookService.getStudentNotebookConfig();
     this.notesEnabled = this.notebookConfig.itemTypes.note.enabled;
     this.reportEnabled = this.notebookConfig.itemTypes.report.enabled;

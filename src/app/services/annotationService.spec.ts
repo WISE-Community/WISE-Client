@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { copy } from '../../assets/wise5/common/object/object';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { UtilService } from '../../assets/wise5/services/utilService';
@@ -36,7 +37,7 @@ describe('AnnotationService', () => {
     utilService = TestBed.inject(UtilService);
     service = TestBed.inject(AnnotationService);
     projectService = TestBed.inject(ProjectService);
-    demoProjectJSON = JSON.parse(JSON.stringify(demoProjectJSON_import));
+    demoProjectJSON = copy(demoProjectJSON_import);
     projectService.setProject(demoProjectJSON);
   });
   getTotalScore();
