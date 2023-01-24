@@ -1941,7 +1941,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
@@ -2342,11 +2342,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>An error occurred. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">100</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.ts</context>
@@ -2673,7 +2673,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4169826993694069540" datatype="html">
@@ -2684,7 +2684,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7397319183527150382" datatype="html">
@@ -2695,7 +2695,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4401053003272735439" datatype="html">
@@ -2706,7 +2706,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6130957074030941355" datatype="html">
@@ -2717,7 +2717,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3119348605846865468" datatype="html">
@@ -2728,7 +2728,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1295628669066090543" datatype="html">
@@ -2739,7 +2739,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3813724417684413959" datatype="html">
@@ -2750,7 +2750,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7039612753083856396" datatype="html">
@@ -2761,7 +2761,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5206495968805205248" datatype="html">
@@ -2772,7 +2772,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5271095457941077047" datatype="html">
@@ -2783,7 +2783,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7367027577282611263" datatype="html">
@@ -2794,7 +2794,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8342090111716136539" datatype="html">
@@ -2893,7 +2893,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>The verification code has expired. Verification codes are valid for 10 minutes. Please go back to the Teacher Forgot Password page to generate a new one.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
@@ -2904,7 +2904,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>The verification code is invalid. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
@@ -2915,7 +2915,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Teacher Forgot Password page to generate a new verification code.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">148</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
@@ -2926,7 +2926,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Passwords do not match, please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a4d0068934144e3f61b8e981a62e014ab0a90ebe" datatype="html">
@@ -5750,7 +5750,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Password changed.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4580988005648117665" datatype="html">
@@ -5985,60 +5985,53 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">71,73</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="736fa500549254d2c8fedc613de2510a2e847c03" datatype="html">
-        <source> Confirm Password required </source>
+      <trans-unit id="a8d79c94172b18dbceadb046a6f53999bd5684f6" datatype="html">
+        <source> Password required </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password/confirm-new-password/confirm-new-password.component.html</context>
-          <context context-type="linenumber">9,11</context>
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">10,12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a6d0bd2f329efa83e7c004272fa887e363a40085" datatype="html">
+      <trans-unit id="20ffc38442c2312b51df57f07de1154bc0ac6005" datatype="html">
+        <source> Password must be at least 8 characters </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">13,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e0ec4c4460849c90579b7bf68cdde586ce2e8ad9" datatype="html">
+        <source> Password must have at least one lowercase, one uppercase, and one number character </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">16,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d6d75c1f8f4457d4a266a8818d8cdd8f8b1dd4d6" datatype="html">
+        <source> Confirm Password required </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">29,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="639218489d72a890a5bed2c090a8ead0ad973d9d" datatype="html">
         <source> Password does not match </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password/confirm-new-password/confirm-new-password.component.html</context>
-          <context context-type="linenumber">12,14</context>
+          <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.html</context>
+          <context context-type="linenumber">32,34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="911145468998987410" datatype="html">
         <source>Confirm New Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.ts</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1221596867309460035" datatype="html">
         <source>New Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/new-password-and-confirm/new-password-and-confirm.component.ts</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4f8b454722a2bba14ed946866b9d66957ffd38fa" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ label }}"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password/new-password/new-password.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3dc710d923f8263bb292eb0bc0655b30d8ec02ff" datatype="html">
-        <source> Password required </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password/new-password/new-password.component.html</context>
-          <context context-type="linenumber">9,11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ffb054bee79eceec12b3b83697ca50a92d966059" datatype="html">
-        <source> Password must be at least 8 characters </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password/new-password/new-password.component.html</context>
-          <context context-type="linenumber">12,14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ca0bc88f33008109aa1537259690341b879fce56" datatype="html">
-        <source> Password must have at least one lowercase, one uppercase, and one number character </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password/new-password/new-password.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1cde0ecb1655843b8b682674d1ed9ff8138073b2" datatype="html">
@@ -6660,39 +6653,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3241357959735682038" datatype="html">
-        <source>Confirm Password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="5667840900782067941" datatype="html">
         <source>Female</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8012344910054029733" datatype="html">
         <source>Male</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5848285129051061802" datatype="html">
         <source>No Answer/Other</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1431416938026210429" datatype="html">
-        <source>Password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="28629af803ab8b5f6e995b17d486e6a1527e2a96" datatype="html">
@@ -6873,7 +6852,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Elementary School</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
@@ -6884,7 +6863,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Middle School</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
@@ -6895,7 +6874,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>High School</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
@@ -6906,7 +6885,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>College</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.ts</context>
@@ -6920,25 +6899,39 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3241357959735682038" datatype="html">
+        <source>Confirm Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4000970355844798758" datatype="html">
         <source>Error: First Name and Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1084197907437634069" datatype="html">
         <source>Error: First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5970926747435723642" datatype="html">
         <source>Error: Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e931f6b80399785ea1647269f43ffeea54327cb6" datatype="html">
@@ -10159,18 +10152,32 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6726159975238623949" datatype="html">
+        <source>Confirm New Student Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9191239269288594982" datatype="html">
+        <source>New Student Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="876701614714648932" datatype="html">
         <source>Changed password for <x id="PH" equiv-text="this.user.name"/> (<x id="PH_1" equiv-text="this.user.username"/>).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="194071757642374963" datatype="html">
         <source>Changed password for Student <x id="PH" equiv-text="this.user.id"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/change-student-password-dialog/change-student-password-dialog.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4333d62731dc124644ca59e02aabfaa86e730714" datatype="html">

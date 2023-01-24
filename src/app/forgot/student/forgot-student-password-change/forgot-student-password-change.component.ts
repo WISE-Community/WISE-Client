@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../../../student/student.service';
 import { finalize } from 'rxjs/operators';
+import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
 
 @Component({
-  selector: 'app-forgot-student-password-change',
+  selector: 'forgot-student-password-change',
   templateUrl: './forgot-student-password-change.component.html',
   styleUrls: ['./forgot-student-password-change.component.scss']
 })
@@ -66,11 +67,15 @@ export class ForgotStudentPasswordChangeComponent implements OnInit {
     switch (error.messageCode) {
       case 'invalidPasswordLength':
         formError.minlength = true;
-        this.changePasswordFormGroup.get('newPassword').setErrors(formError);
+        this.changePasswordFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       case 'invalidPasswordPattern':
         formError.pattern = true;
-        this.changePasswordFormGroup.get('newPassword').setErrors(formError);
+        this.changePasswordFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       default:
         this.setErrorOccurredMessage();
@@ -78,11 +83,13 @@ export class ForgotStudentPasswordChangeComponent implements OnInit {
   }
 
   private getNewPassword(): string {
-    return this.getControlFieldValue('newPassword');
+    return this.getControlFieldValue(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME);
   }
 
   private getConfirmNewPassword(): string {
-    return this.getControlFieldValue('confirmNewPassword');
+    return this.getControlFieldValue(
+      NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME
+    );
   }
 
   private getControlFieldValue(fieldName: string): string {

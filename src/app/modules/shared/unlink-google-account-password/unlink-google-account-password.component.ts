@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { NewPasswordComponent } from '../../../password/new-password/new-password.component';
+import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountSuccessComponent } from '../unlink-google-account-success/unlink-google-account-success.component';
 
@@ -27,7 +27,10 @@ export class UnlinkGoogleAccountPasswordComponent {
   submit(): void {
     this.isSaving = true;
     this.userService
-      .unlinkGoogleUser(this.newPasswordFormGroup.get(NewPasswordComponent.FORM_CONTROL_NAME).value)
+      .unlinkGoogleUser(
+        this.newPasswordFormGroup.get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .value
+      )
       .subscribe(
         () => {
           this.success();
@@ -52,11 +55,15 @@ export class UnlinkGoogleAccountPasswordComponent {
     switch (error.messageCode) {
       case 'invalidPasswordLength':
         formError.minlength = true;
-        this.newPasswordFormGroup.get(NewPasswordComponent.FORM_CONTROL_NAME).setErrors(formError);
+        this.newPasswordFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       case 'invalidPasswordPattern':
         formError.pattern = true;
-        this.newPasswordFormGroup.get(NewPasswordComponent.FORM_CONTROL_NAME).setErrors(formError);
+        this.newPasswordFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
     }
   }

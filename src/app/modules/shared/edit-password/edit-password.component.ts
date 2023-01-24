@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountConfirmComponent } from '../unlink-google-account-confirm/unlink-google-account-confirm.component';
+import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
 
 @Component({
   selector: 'app-edit-password',
@@ -43,7 +44,9 @@ export class EditPasswordComponent {
   saveChanges(): void {
     this.isSaving = true;
     const oldPassword: string = this.getControlFieldValue('oldPassword');
-    const newPassword: string = this.getControlFieldValue('newPassword');
+    const newPassword: string = this.getControlFieldValue(
+      NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
+    );
     this.userService
       .changePassword(oldPassword, newPassword)
       .pipe(
@@ -62,7 +65,10 @@ export class EditPasswordComponent {
   }
 
   private getControlFieldValue(fieldName: string): string {
-    if (fieldName === 'newPassword' || fieldName === 'confirmNewPassword') {
+    if (
+      fieldName === NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME ||
+      fieldName === NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME
+    ) {
       return this.newPasswordFormGroup.get(fieldName).value;
     } else {
       return this.changePasswordFormGroup.get(fieldName).value;
@@ -83,11 +89,15 @@ export class EditPasswordComponent {
         break;
       case 'invalidPasswordLength':
         formError.minlength = true;
-        this.newPasswordFormGroup.get('newPassword').setErrors(formError);
+        this.newPasswordFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       case 'invalidPasswordPattern':
         formError.pattern = true;
-        this.newPasswordFormGroup.get('newPassword').setErrors(formError);
+        this.newPasswordFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
     }
   }

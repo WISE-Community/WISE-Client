@@ -7,7 +7,7 @@ import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { NewPasswordComponent } from '../../password/new-password/new-password.component';
+import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 
 @Component({
   selector: 'register-teacher-form',
@@ -31,7 +31,6 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     { validator: this.agreeCheckboxValidator }
   );
   isSubmitted = false;
-  newPasswordFormControlName: string = NewPasswordComponent.FORM_CONTROL_NAME;
   passwordsFormGroup = this.fb.group({});
   processing: boolean = false;
   schoolLevels: any[] = [
@@ -111,11 +110,15 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     switch (error.messageCode) {
       case 'invalidPasswordLength':
         formError.minlength = true;
-        this.passwordsFormGroup.get(this.newPasswordFormControlName).setErrors(formError);
+        this.passwordsFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       case 'invalidPasswordPattern':
         formError.pattern = true;
-        this.passwordsFormGroup.get(this.newPasswordFormControlName).setErrors(formError);
+        this.passwordsFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       default:
         this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
@@ -135,7 +138,9 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   }
 
   private getPassword(): string {
-    return this.passwordsFormGroup.controls[this.newPasswordFormControlName].value;
+    return this.passwordsFormGroup.controls[
+      NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
+    ].value;
   }
 
   private agreeCheckboxValidator(createTeacherAccountFormGroup: FormGroup): any {

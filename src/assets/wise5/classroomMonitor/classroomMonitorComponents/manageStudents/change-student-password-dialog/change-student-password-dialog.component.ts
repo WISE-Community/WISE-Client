@@ -4,6 +4,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherService } from '../../../../../../app/teacher/teacher.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NewPasswordAndConfirmComponent } from '../../../../../../app/password/new-password-and-confirm/new-password-and-confirm.component';
 
 @Component({
   selector: 'app-change-student-password-dialog',
@@ -15,8 +16,10 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
   changePasswordForm: FormGroup = new FormGroup({
     teacherPassword: new FormControl('')
   });
+  confirmPasswordLabel: string = $localize`Confirm New Student Password`;
   isChangingPassword: boolean;
   isTeacherGoogleUser: boolean;
+  passwordLabel: string = $localize`New Student Password`;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -44,7 +47,9 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
     this.TeacherService.changeStudentPassword(
       this.ConfigService.getRunId(),
       this.user.id,
-      this.changePasswordForm.controls['newPassword'].value,
+      this.changePasswordForm.controls[
+        NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
+      ].value,
       this.changePasswordForm.controls['teacherPassword'].value
     ).subscribe(
       () => {
@@ -76,11 +81,15 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
         break;
       case 'invalidPasswordLength':
         formError.minlength = true;
-        this.changePasswordForm.get('newPassword').setErrors(formError);
+        this.changePasswordForm
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       case 'invalidPasswordPattern':
         formError.pattern = true;
-        this.changePasswordForm.get('newPassword').setErrors(formError);
+        this.changePasswordForm
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
     }
   }

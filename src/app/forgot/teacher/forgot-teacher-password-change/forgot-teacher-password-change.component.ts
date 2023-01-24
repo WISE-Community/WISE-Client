@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
+import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
 
 @Component({
   selector: 'app-forgot-teacher-password-change',
@@ -10,13 +11,13 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./forgot-teacher-password-change.component.scss']
 })
 export class ForgotTeacherPasswordChangeComponent implements OnInit {
-  username: string;
-  verificationCode: string;
   changePasswordFormGroup: FormGroup = this.fb.group({});
+  isSubmitButtonEnabled: boolean = true;
   message: string = '';
   processing: boolean = false;
-  isSubmitButtonEnabled: boolean = true;
   showForgotPasswordLink = false;
+  username: string;
+  verificationCode: string;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -86,15 +87,21 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
         break;
       case 'invalidPasswordLength':
         formError.minlength = true;
-        this.changePasswordFormGroup.get('newPassword').setErrors(formError);
+        this.changePasswordFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       case 'invalidPasswordPattern':
         formError.pattern = true;
-        this.changePasswordFormGroup.get('newPassword').setErrors(formError);
+        this.changePasswordFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       case 'passwordDoesNotMatch':
         formError.passwordDoesNotMatch = true;
-        this.changePasswordFormGroup.get('confirmNewPassword').setErrors(formError);
+        this.changePasswordFormGroup
+          .get(NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       default:
         this.setErrorOccurredMessage();
@@ -102,11 +109,13 @@ export class ForgotTeacherPasswordChangeComponent implements OnInit {
   }
 
   private getNewPassword(): string {
-    return this.getControlFieldValue('newPassword');
+    return this.getControlFieldValue(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME);
   }
 
   private getConfirmNewPassword(): string {
-    return this.getControlFieldValue('confirmNewPassword');
+    return this.getControlFieldValue(
+      NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME
+    );
   }
 
   private getControlField(fieldName: string): AbstractControl {
