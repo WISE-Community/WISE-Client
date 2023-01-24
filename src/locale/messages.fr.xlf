@@ -28,7 +28,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
-        <target state="needs-translation">WISE is the product of more than 25 years of research on teaching and learning with educational technologies</target>
+        <target state="translated">WISE est le produit de plus de 25 ans de recherche sur l'enseignement et l'apprentissage avec les technologies éducatives</target>
       </trans-unit>
       <trans-unit id="876f7d4b1a4c8c619cbe4c0b32d0d1bf3219d4e8" datatype="html">
         <source>WISE teacher workshop 2018</source>
@@ -1476,7 +1476,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-step-location/choose-import-step-location.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-        <target state="needs-translation">Choose a location for the imported steps</target>
+        <target state="translated">Choisissez un emplacement pour les étapes importées</target>
       </trans-unit>
       <trans-unit id="2487b6259288414268ebb0273e79a0dbd975205b" datatype="html">
         <source>Insert As First Step</source>
