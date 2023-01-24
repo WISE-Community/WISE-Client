@@ -7,9 +7,9 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./new-password-and-confirm.component.scss']
 })
 export class NewPasswordAndConfirmComponent implements OnInit {
-  @Input() confirmPasswordLabel: string = 'Confirm New Password';
+  @Input() confirmPasswordLabel: string = $localize`Confirm New Password`;
   @Input() formGroup: FormGroup;
-  @Input() passwordLabel: string = 'New Password';
+  @Input() passwordLabel: string = $localize`New Password`;
 
   constructor() {}
 

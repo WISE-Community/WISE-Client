@@ -86,8 +86,8 @@
       <div *ngIf="studentUser.googleUserId == null" formGroupName="passwords">
         <new-password-and-confirm
             [formGroup]="passwordsFormGroup"
-            [passwordLabel]="'Password'"
-            [confirmPasswordLabel]="'Confirm Password'">
+            [passwordLabel]="passwordLabel"
+            [confirmPasswordLabel]="confirmPasswordLabel">
         </new-password-and-confirm>
       </div>
       <p i18n>By clicking "Create Account", you agree to our <a href="privacy" target="_blank">Privacy Policy & Terms of Use</a></p>

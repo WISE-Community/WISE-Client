@@ -115,8 +115,8 @@
       <div *ngIf="teacherUser.googleUserId == null" formGroupName="passwords">
         <new-password-and-confirm
             [formGroup]="passwordsFormGroup"
-            [passwordLabel]="'Password'"
-            [confirmPasswordLabel]="'Confirm Password'">
+            [passwordLabel]="passwordLabel"
+            [confirmPasswordLabel]="confirmPasswordLabel">
         </new-password-and-confirm>
       </div>
       <div class="form-field-extra-sub">
