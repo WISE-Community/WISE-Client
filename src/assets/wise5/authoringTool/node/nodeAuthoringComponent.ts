@@ -152,19 +152,22 @@ class NodeAuthoringController {
     this.subscriptions.unsubscribe();
   }
 
-  previewStepInNewWindow() {
-    const data = { constraints: true };
-    this.saveEvent('stepPreviewed', 'Navigation', data);
-    window.open(`${this.ConfigService.getConfigParam('previewProjectURL')}/${this.nodeId}`);
+  protected previewStepInNewWindow(constraints: boolean): void {
+    this.saveStepPreviewedEvent(constraints);
+    window.open(this.createPreviewURL(this.nodeId, constraints));
   }
 
-  previewStepWithoutConstraintsInNewWindow() {
-    const data = { constraints: false };
+  private saveStepPreviewedEvent(constraints: boolean): void {
+    const data = { constraints: constraints };
     this.saveEvent('stepPreviewed', 'Navigation', data);
-    window.open(
-      `${this.ConfigService.getConfigParam('previewProjectURL')}/${this.nodeId}` +
-        `?constraints=false`
-    );
+  }
+
+  private createPreviewURL(nodeId: string, constraints: boolean): string {
+    let previewURL = `${this.ConfigService.getConfigParam('previewProjectURL')}/${nodeId}`;
+    if (!constraints) {
+      previewURL += '?constraints=false';
+    }
+    return previewURL;
   }
 
   close() {
