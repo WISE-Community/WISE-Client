@@ -652,9 +652,9 @@ export abstract class ComponentStudent {
   }
 
   importWorkAsBackground(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     if (connectedComponent.importWorkAsBackground) {
       this.setComponentStateAsBackgroundImage(componentState);

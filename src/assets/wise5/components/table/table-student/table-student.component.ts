@@ -1139,9 +1139,9 @@ export class TableStudent extends ComponentStudent {
   }
 
   processConnectedComponentState(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     const componentType = this.ProjectService.getComponentType(
       connectedComponent.nodeId,
