@@ -10,7 +10,7 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
-  selector: 'app-student-grading',
+  selector: 'student-grading',
   templateUrl: './student-grading.component.html',
   styleUrls: ['./student-grading.component.scss']
 })

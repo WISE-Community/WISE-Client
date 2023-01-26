@@ -11,11 +11,11 @@ import './classroomMonitorComponents/shared/shared';
 import './classroomMonitorComponents/notebook/notebook';
 import '../components/component-grading.module';
 import './dataExport/data-export-module';
-import ClassroomMonitorController from './classroomMonitorController';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { NotebookGradingComponent } from './notebook-grading/notebook-grading.component';
 import { StudentGradingComponent } from './student-grading/student-grading.component';
 import { StudentProgressComponent } from './student-progress/student-progress.component';
+import { ClassroomMonitorComponent } from './classroom-monitor.component';
 
 export default angular
   .module('classroomMonitor', [
@@ -30,7 +30,7 @@ export default angular
     'studentGrading',
     'studentProgress'
   ])
-  .controller('ClassroomMonitorController', ClassroomMonitorController)
+  .directive('classroomMonitor', downgradeComponent({ component: ClassroomMonitorComponent }))
   .directive('notebookGrading', downgradeComponent({ component: NotebookGradingComponent }))
   .directive(
     'studentGrading',
@@ -45,9 +45,7 @@ export default angular
       $stateProvider
         .state('root.cm', {
           url: '/manage/unit/:runId',
-          templateUrl: '/assets/wise5/classroomMonitor/classroomMonitor.html',
-          controller: 'ClassroomMonitorController',
-          controllerAs: 'classroomMonitorController',
+          component: 'classroomMonitor',
           abstract: true,
           resolve: {
             config: [

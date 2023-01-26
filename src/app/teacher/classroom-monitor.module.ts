@@ -66,6 +66,9 @@ import { MilestoneReportGraphComponent } from './milestone/milestone-report-grap
 import { MilestoneDetailsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component';
 import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/student-progress/student-progress.component';
 import { PasswordModule } from '../password/password.module';
+import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/classroom-monitor.component';
+import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
+import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,7 @@ import { PasswordModule } from '../password/password.module';
     AlertStatusCornerComponent,
     ChangeStudentPasswordDialogComponent,
     ChangeTeamPeriodDialogComponent,
+    ClassroomMonitorComponent,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
     DataExportComponent,
@@ -82,6 +86,7 @@ import { PasswordModule } from '../password/password.module';
     EditComponentScoreComponent,
     ExportStepVisitsComponent,
     GradingEditComponentMaxScoreComponent,
+    MainMenuComponent,
     ManagePeriodComponent,
     ManageShowStudentInfoComponent,
     ManageStudentsComponent,
@@ -107,6 +112,7 @@ import { PasswordModule } from '../password/password.module';
     ProjectProgressComponent,
     RemoveUserConfirmDialogComponent,
     ShowStudentInfoComponent,
+    SideMenuComponent,
     StatusIconComponent,
     StepInfoComponent,
     StepItemComponent,
