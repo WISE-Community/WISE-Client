@@ -60,11 +60,28 @@ export class ClassroomMonitorComponent implements OnInit {
     this.projectTitle = this.projectService.getProjectTitle();
     this.runCode = this.configService.getRunCode();
     this.runId = this.configService.getRunId();
+    this.initializeNotebook();
+    this.initializeViews();
+    this.subscribeToServerConnectionStatus();
+    this.subscribeToSessionWarning();
+    this.subscribeToNotebookFullScreen();
+    this.subscribeToTransitions();
+    this.processUI();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  private initializeNotebook(): void {
     if (this.notebookService.isNotebookEnabled('teacherNotebook')) {
       this.notebookConfig = this.notebookService.getTeacherNotebookConfig();
       this.reportEnabled =
         this.notebookConfig.enabled && this.notebookConfig.itemTypes.report.enabled;
     }
+  }
+
+  private initializeViews(): void {
     this.views = [
       {
         route: 'root.cm.milestones',
@@ -115,13 +132,17 @@ export class ClassroomMonitorComponent implements OnInit {
         active: true
       }
     ];
+  }
 
+  private subscribeToServerConnectionStatus(): void {
     this.subscriptions.add(
       this.notificationService.serverConnectionStatus$.subscribe((isConnected: boolean) => {
         this.toggleServerDisconnectError(!isConnected);
       })
     );
+  }
 
+  private subscribeToSessionWarning(): void {
     this.subscriptions.add(
       this.sessionService.showSessionWarning$.subscribe(() => {
         this.dialog
@@ -141,22 +162,21 @@ export class ClassroomMonitorComponent implements OnInit {
           });
       })
     );
+  }
 
+  private subscribeToNotebookFullScreen(): void {
     this.subscriptions.add(
       this.notebookService.reportFullScreen$.subscribe((full: boolean) => {
         this.reportFullscreen = full;
       })
     );
+  }
 
-    this.processUI();
+  private subscribeToTransitions(): void {
     this.upgrade.$injector.get('$transitions').onSuccess({}, () => {
       this.menuOpen = false;
       this.processUI();
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
   }
 
   /**
