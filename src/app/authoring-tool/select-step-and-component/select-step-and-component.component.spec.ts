@@ -68,27 +68,18 @@ function selectComponent() {
 function stepChanged() {
   describe('stepChanged()', () => {
     it('should handle step changed when there are no allowed components', () => {
-      setUpThreeComponentsSpy('Draw', 'Graph', 'Table');
-      component.referenceComponent.nodeId = nodeId1;
-      component.stepChanged(nodeId1);
-      expect(component.referenceComponent.nodeId).toEqual(nodeId1);
-      expect(component.referenceComponent.componentId).toEqual(null);
+      setComponentsAndCallStepChanged('Draw', 'Graph', 'Table');
+      expectReferenceComponentValues(nodeId1, null);
     });
 
     it('should handle step changed when there is one allowed component', () => {
-      setUpThreeComponentsSpy('Draw', 'OpenResponse', 'Table');
-      component.referenceComponent.nodeId = nodeId1;
-      component.stepChanged(nodeId1);
-      expect(component.referenceComponent.nodeId).toEqual(nodeId1);
-      expect(component.referenceComponent.componentId).toEqual(componentId2);
+      setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'Table');
+      expectReferenceComponentValues(nodeId1, componentId2);
     });
 
     it('should handle step changed when there are multiple allowed components', () => {
-      setUpThreeComponentsSpy('Draw', 'OpenResponse', 'OpenResponse');
-      component.referenceComponent.nodeId = nodeId1;
-      component.stepChanged(nodeId1);
-      expect(component.referenceComponent.nodeId).toEqual(nodeId1);
-      expect(component.referenceComponent.componentId).toEqual(null);
+      setComponentsAndCallStepChanged('Draw', 'OpenResponse', 'OpenResponse');
+      expectReferenceComponentValues(nodeId1, null);
     });
   });
 }
@@ -98,12 +89,11 @@ function setUpThreeComponentsSpy(
   componentType2: string,
   componentType3: string
 ): void {
-  const components = [
+  setUpGetComponentsSpy([
     createComponent(componentId1, componentType1),
     createComponent(componentId2, componentType2),
     createComponent(componentId3, componentType3)
-  ];
-  setUpGetComponentsSpy(components);
+  ]);
 }
 
 function createComponent(id: string, type: string): any {
@@ -112,4 +102,19 @@ function createComponent(id: string, type: string): any {
 
 function setUpGetComponentsSpy(components: any[]): void {
   spyOn(TestBed.inject(ProjectService), 'getComponents').and.returnValue(components);
+}
+
+function setComponentsAndCallStepChanged(
+  componentType1: string,
+  componentType2: string,
+  componentType3: string
+): void {
+  setUpThreeComponentsSpy(componentType1, componentType2, componentType3);
+  component.referenceComponent.nodeId = nodeId1;
+  component.stepChanged(nodeId1);
+}
+
+function expectReferenceComponentValues(nodeId: string, componentId: string): void {
+  expect(component.referenceComponent.nodeId).toEqual(nodeId);
+  expect(component.referenceComponent.componentId).toEqual(componentId);
 }
