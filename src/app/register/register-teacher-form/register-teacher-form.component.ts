@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Teacher } from '../../domain/teacher';
 import { TeacherService } from '../../teacher/teacher.service';
@@ -7,36 +7,14 @@ import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PasswordService } from '../../services/password.service';
+import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 
 @Component({
-  selector: 'app-register-teacher-form',
+  selector: 'register-teacher-form',
   templateUrl: './register-teacher-form.component.html',
   styleUrls: ['./register-teacher-form.component.scss']
 })
 export class RegisterTeacherFormComponent extends RegisterUserFormComponent implements OnInit {
-  teacherUser: Teacher = new Teacher();
-  schoolLevels: any[] = [
-    { code: 'ELEMENTARY_SCHOOL', label: $localize`Elementary School` },
-    { code: 'MIDDLE_SCHOOL', label: $localize`Middle School` },
-    { code: 'HIGH_SCHOOL', label: $localize`High School` },
-    { code: 'COLLEGE', label: $localize`College` },
-    { code: 'OTHER', label: $localize`Other` }
-  ];
-  passwordsFormGroup = this.fb.group(
-    {
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(this.passwordService.minLength),
-          Validators.pattern(this.passwordService.pattern)
-        ]
-      ],
-      confirmPassword: ['', [Validators.required]]
-    },
-    { validator: this.passwordMatchValidator }
-  );
   createTeacherAccountFormGroup: FormGroup = this.fb.group(
     {
       firstName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
@@ -53,11 +31,20 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     { validator: this.agreeCheckboxValidator }
   );
   isSubmitted = false;
+  passwordsFormGroup = this.fb.group({});
   processing: boolean = false;
+  schoolLevels: any[] = [
+    { code: 'ELEMENTARY_SCHOOL', label: $localize`Elementary School` },
+    { code: 'MIDDLE_SCHOOL', label: $localize`Middle School` },
+    { code: 'HIGH_SCHOOL', label: $localize`High School` },
+    { code: 'COLLEGE', label: $localize`College` },
+    { code: 'OTHER', label: $localize`Other` }
+  ];
+  teacherUser: Teacher = new Teacher();
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
-    private passwordService: PasswordService,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
@@ -80,6 +67,10 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
       }
       this.setControlFieldValue('email', params['email']);
     });
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   private isUsingGoogleId(): boolean {
@@ -119,11 +110,15 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
     switch (error.messageCode) {
       case 'invalidPasswordLength':
         formError.minlength = true;
-        this.passwordsFormGroup.get('password').setErrors(formError);
+        this.passwordsFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       case 'invalidPasswordPattern':
         formError.pattern = true;
-        this.passwordsFormGroup.get('password').setErrors(formError);
+        this.passwordsFormGroup
+          .get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
+          .setErrors(formError);
         break;
       default:
         this.snackBar.open(this.translateCreateAccountErrorMessageCode(error.messageCode));
@@ -143,19 +138,9 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   }
 
   private getPassword(): string {
-    return this.passwordsFormGroup.controls['password'].value;
-  }
-
-  private passwordMatchValidator(passwordsFormGroup: FormGroup): any {
-    const password = passwordsFormGroup.get('password').value;
-    const confirmPassword = passwordsFormGroup.get('confirmPassword').value;
-    if (password == confirmPassword) {
-      return null;
-    } else {
-      const error = { passwordDoesNotMatch: true };
-      passwordsFormGroup.controls['confirmPassword'].setErrors(error);
-      return error;
-    }
+    return this.passwordsFormGroup.controls[
+      NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
+    ].value;
   }
 
   private agreeCheckboxValidator(createTeacherAccountFormGroup: FormGroup): any {

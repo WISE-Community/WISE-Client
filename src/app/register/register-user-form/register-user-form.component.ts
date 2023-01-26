@@ -1,6 +1,9 @@
 export class RegisterUserFormComponent {
   NAME_REGEX = '^[a-zA-Z]+([ -]?[a-zA-Z]+)*$';
 
+  confirmPasswordLabel: string = $localize`Confirm Password`;
+  passwordLabel: string = $localize`Password`;
+
   translateCreateAccountErrorMessageCode(messageCode: string) {
     switch (messageCode) {
       case 'invalidFirstAndLastName':

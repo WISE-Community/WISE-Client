@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StudentService } from '../../../student/student.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PasswordService } from '../../../services/password.service';
+import { PasswordModule } from '../../../password/password.module';
 
 export class MockStudentService {
   changePassword(
@@ -39,8 +39,14 @@ describe('ForgotStudentPasswordChangeComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotStudentPasswordChangeComponent],
-      imports: [RouterTestingModule, BrowserAnimationsModule, ReactiveFormsModule],
-      providers: [PasswordService, { provide: StudentService, useClass: MockStudentService }],
+      imports: [
+        BrowserAnimationsModule,
+        PasswordModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule
+      ],
+      providers: [{ provide: StudentService, useClass: MockStudentService }],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(ForgotStudentPasswordChangeComponent);

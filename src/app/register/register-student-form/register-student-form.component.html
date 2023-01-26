@@ -84,37 +84,11 @@
         </p>
       </div>
       <div *ngIf="studentUser.googleUserId == null" formGroupName="passwords">
-        <p>
-          <mat-form-field appearance="fill" fxFlex>
-            <mat-label i18n>Password</mat-label>
-            <input matInput
-                   id="password"
-                   type="password"
-                   name="password"
-                   formControlName="password"
-                   required />
-            <mat-error *ngIf="passwordsFormGroup.controls['password'].hasError('required')" i18n>Password required</mat-error>
-            <mat-error *ngIf="passwordsFormGroup.controls['password'].hasError('minlength')">
-              {{ passwordService.minLengthErrorMessage }}
-            </mat-error>
-            <mat-error *ngIf="passwordsFormGroup.controls['password'].hasError('pattern')">
-              {{ passwordService.patternErrorMessage }}
-            </mat-error>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field appearance="fill" fxFlex>
-            <mat-label i18n>Confirm Password</mat-label>
-            <input matInput
-                   id="confirmPassword"
-                   type="password"
-                   name="confirmPassword"
-                   formControlName="confirmPassword"
-                   required />
-            <mat-error *ngIf="passwordsFormGroup.controls['confirmPassword'].hasError('required')" i18n>Confirm Password required</mat-error>
-            <mat-error *ngIf="passwordsFormGroup.controls['confirmPassword'].hasError('passwordDoesNotMatch')" i18n>Password does not match</mat-error>
-          </mat-form-field>
-        </p>
+        <new-password-and-confirm
+            [formGroup]="passwordsFormGroup"
+            [passwordLabel]="passwordLabel"
+            [confirmPasswordLabel]="confirmPasswordLabel">
+        </new-password-and-confirm>
       </div>
       <p i18n>By clicking "Create Account", you agree to our <a href="privacy" target="_blank">Privacy Policy & Terms of Use</a></p>
       <button mat-flat-button color="primary" type="submit"
