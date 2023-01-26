@@ -17,14 +17,10 @@
       </mat-select>
     </mat-form-field>
     <ng-container *ngIf="logicType === 'differentIdeas' || logicType === 'differentKIScores'">
-      <edit-connected-component-node-select
-          [connectedComponent]="referenceComponent"
-          (connectedComponentChange)="referenceComponentNodeIdChanged($event)">
-      </edit-connected-component-node-select>
-      <edit-connected-component-component-select
-          [connectedComponent]="referenceComponent"
-          [allowedConnectedComponentTypes]="allowedReferenceComponentTypes">
-      </edit-connected-component-component-select>
+      <select-step-and-component
+          [referenceComponent]="referenceComponent"
+          [allowedComponentTypes]="allowedReferenceComponentTypes">
+      </select-step-and-component>
     </ng-container>
     <ng-container *ngIf="logicTypesWithModes.includes(logicType)">
       <mat-form-field>
