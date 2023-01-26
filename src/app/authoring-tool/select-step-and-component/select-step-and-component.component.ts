@@ -32,7 +32,7 @@ export class SelectStepAndComponentComponent implements OnInit {
     return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
-  protected stepChanged(nodeId: string): void {
+  stepChanged(nodeId: string): void {
     this.referenceComponent.componentId = null;
     this.automaticallySetComponentIfPossible(nodeId);
     this.stepChange.emit(this.referenceComponent);

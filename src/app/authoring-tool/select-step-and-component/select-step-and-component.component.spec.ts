@@ -53,11 +53,7 @@ describe('SelectStepAndComponentComponent', () => {
 
 function selectComponent() {
   it('should disable certain options in the select component', async () => {
-    setUpGetComponentsSpy([
-      createComponent(componentId1, 'OpenResponse'),
-      createComponent(componentId2, 'Graph'),
-      createComponent(componentId3, 'OpenResponse')
-    ]);
+    setUpThreeComponentsSpy('OpenResponse', 'Graph', 'OpenResponse');
     component.thisComponentId = componentId1;
     const selects = await loader.getAllHarnesses(MatSelectHarness);
     const selectComponent = selects[1];
@@ -72,11 +68,7 @@ function selectComponent() {
 function stepChanged() {
   describe('stepChanged()', () => {
     it('should handle step changed when there are no allowed components', () => {
-      setUpGetComponentsSpy([
-        createComponent(componentId1, 'Draw'),
-        createComponent(componentId2, 'Graph'),
-        createComponent(componentId3, 'Table')
-      ]);
+      setUpThreeComponentsSpy('Draw', 'Graph', 'Table');
       component.referenceComponent.nodeId = nodeId1;
       component.stepChanged(nodeId1);
       expect(component.referenceComponent.nodeId).toEqual(nodeId1);
@@ -84,11 +76,7 @@ function stepChanged() {
     });
 
     it('should handle step changed when there is one allowed component', () => {
-      setUpGetComponentsSpy([
-        createComponent(componentId1, 'Draw'),
-        createComponent(componentId2, 'OpenResponse'),
-        createComponent(componentId3, 'Table')
-      ]);
+      setUpThreeComponentsSpy('Draw', 'OpenResponse', 'Table');
       component.referenceComponent.nodeId = nodeId1;
       component.stepChanged(nodeId1);
       expect(component.referenceComponent.nodeId).toEqual(nodeId1);
@@ -96,11 +84,7 @@ function stepChanged() {
     });
 
     it('should handle step changed when there are multiple allowed components', () => {
-      setUpGetComponentsSpy([
-        createComponent(componentId1, 'Draw'),
-        createComponent(componentId2, 'OpenResponse'),
-        createComponent(componentId3, 'OpenResponse')
-      ]);
+      setUpThreeComponentsSpy('Draw', 'OpenResponse', 'OpenResponse');
       component.referenceComponent.nodeId = nodeId1;
       component.stepChanged(nodeId1);
       expect(component.referenceComponent.nodeId).toEqual(nodeId1);
@@ -109,10 +93,23 @@ function stepChanged() {
   });
 }
 
-function setUpGetComponentsSpy(components: any[]): void {
-  spyOn(TestBed.inject(ProjectService), 'getComponents').and.returnValue(components);
+function setUpThreeComponentsSpy(
+  componentType1: string,
+  componentType2: string,
+  componentType3: string
+): void {
+  const components = [
+    createComponent(componentId1, componentType1),
+    createComponent(componentId2, componentType2),
+    createComponent(componentId3, componentType3)
+  ];
+  setUpGetComponentsSpy(components);
 }
 
 function createComponent(id: string, type: string): any {
   return { id: id, type: type };
+}
+
+function setUpGetComponentsSpy(components: any[]): void {
+  spyOn(TestBed.inject(ProjectService), 'getComponents').and.returnValue(components);
 }
