@@ -1,7 +1,9 @@
 <mat-form-field>
   <mat-label i18n>Type</mat-label>
-  <mat-select [(ngModel)]="connectedComponent.type"
-      (ngModelChange)="connectedComponentTypeChanged()">
+  <mat-select
+    [(ngModel)]="connectedComponent.type"
+    (ngModelChange)="connectedComponentTypeChanged()"
+  >
     <mat-option value="importWork" i18n>Import Work</mat-option>
     <mat-option value="showWork" i18n>Show Work</mat-option>
   </mat-select>

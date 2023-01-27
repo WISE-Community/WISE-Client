@@ -4,10 +4,12 @@
   <select-period></select-period>
 </h2>
 <div mat-dialog-content class="dialog-content-scroll">
-    <p class="info" i18n>Tip: Drag students to change groups for this peer grouping.</p>
-    <peer-group-period *ngFor="let period of periods"
-        [peerGroupingTag]="peerGroupingTag"
-        [period]="period"></peer-group-period>
+  <p class="info" i18n>Tip: Drag students to change groups for this peer grouping.</p>
+  <peer-group-period
+    *ngFor="let period of periods"
+    [peerGroupingTag]="peerGroupingTag"
+    [period]="period"
+  ></peer-group-period>
 </div>
 <div mat-dialog-actions fxLayoutAlign="end center">
   <button mat-button mat-dialog-close i18n>Close</button>

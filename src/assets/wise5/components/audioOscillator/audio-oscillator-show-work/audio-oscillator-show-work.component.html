@@ -1,44 +1,44 @@
 <div fxLayout="column">
   <h5 i18n>Frequencies (Hz)</h5>
   <div>
-    <span i18n>Frequencies Played</span>: <span>{{frequenciesPlayed}}</span>
+    <span i18n>Frequencies Played</span>: <span>{{ frequenciesPlayed }}</span>
   </div>
   <div>
-    <span i18n>Frequencies Played Sorted</span>: <span>{{frequenciesPlayedSorted}}</span>
+    <span i18n>Frequencies Played Sorted</span>: <span>{{ frequenciesPlayedSorted }}</span>
   </div>
   <div>
-    <span i18n>Number of Frequencies Played</span>: <span>{{numberOfFrequenciesPlayed}}</span>
+    <span i18n>Number of Frequencies Played</span>: <span>{{ numberOfFrequenciesPlayed }}</span>
   </div>
   <div *ngIf="numberOfUniqueFrequenciesPlayed != null">
     <span i18n>Number of Unique Frequencies Played</span>:
-    <span>{{numberOfUniqueFrequenciesPlayed}}</span>
+    <span>{{ numberOfUniqueFrequenciesPlayed }}</span>
   </div>
   <div>
-    <span i18n>Minimum Frequency Played</span>: <span>{{minFrequencyPlayed}}</span>
+    <span i18n>Minimum Frequency Played</span>: <span>{{ minFrequencyPlayed }}</span>
   </div>
   <div>
-    <span i18n>Maximum Frequency Played</span>: <span>{{maxFrequencyPlayed}}</span>
+    <span i18n>Maximum Frequency Played</span>: <span>{{ maxFrequencyPlayed }}</span>
   </div>
   <ng-container *ngIf="amplitudesPlayed != null">
     <h5 i18n>Amplitudes (dB)</h5>
     <div>
-      <span i18n>Amplitudes Played</span>: <span>{{amplitudesPlayed}}</span>
+      <span i18n>Amplitudes Played</span>: <span>{{ amplitudesPlayed }}</span>
     </div>
     <div>
-      <span i18n>Amplitudes Played Sorted</span>: <span>{{amplitudesPlayedSorted}}</span>
+      <span i18n>Amplitudes Played Sorted</span>: <span>{{ amplitudesPlayedSorted }}</span>
     </div>
     <div>
-      <span i18n>Number of Amplitudes Played</span>: <span>{{numberOfAmplitudesPlayed}}</span>
+      <span i18n>Number of Amplitudes Played</span>: <span>{{ numberOfAmplitudesPlayed }}</span>
     </div>
     <div>
       <span i18n>Number of Unique Amplitudes Played</span>:
-      <span>{{numberOfUniqueAmplitudesPlayed}}</span>
+      <span>{{ numberOfUniqueAmplitudesPlayed }}</span>
     </div>
     <div>
-      <span i18n>Min Amplitude Played</span>: <span>{{minAmplitudePlayed}}</span>
+      <span i18n>Min Amplitude Played</span>: <span>{{ minAmplitudePlayed }}</span>
     </div>
     <div>
-      <span i18n>Max Amplitude Played</span>: <span>{{maxAmplitudePlayed}}</span>
+      <span i18n>Max Amplitude Played</span>: <span>{{ maxAmplitudePlayed }}</span>
     </div>
   </ng-container>
 </div>

@@ -1,49 +1,62 @@
 <mat-card class="class-response">
   <div class="contents">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-      <mat-icon class="md-48"
-        style="color: {{getAvatarColorForWorkgroupId(response.workgroupId)}};">
+      <mat-icon
+        class="md-48"
+        style="color: {{ getAvatarColorForWorkgroupId(response.workgroupId) }};"
+      >
         account_circle
       </mat-icon>
       <div>
         <div class="mat-body-2">{{ response.usernames }}</div>
         <div class="mat-caption secondary-text">
-          <save-time-message [saveTime]="adjustClientSaveTime(response.serverSaveTime)"
-              [timeOnly]="true"
-              tooltipPosition="after"></save-time-message>
+          <save-time-message
+            [saveTime]="adjustClientSaveTime(response.serverSaveTime)"
+            [timeOnly]="true"
+            tooltipPosition="after"
+          ></save-time-message>
         </div>
       </div>
     </div>
-    <div class="post"
-      [innerHTML]="response.studentData.responseTextHTML">
-    </div>
-    <img *ngFor="let attachment of response.studentData.attachments"
-        [src]="attachment.iconURL"
-        i18n-alt
-        alt="Post attachment"
-        class="attachment" />
+    <div class="post" [innerHTML]="response.studentData.responseTextHTML"></div>
+    <img
+      *ngFor="let attachment of response.studentData.attachments"
+      [src]="attachment.iconURL"
+      i18n-alt
+      alt="Post attachment"
+      class="attachment"
+    />
     <div fxLayoutAlign="end center" *ngIf="mode === 'grading' || mode === 'gradingRevision'">
       <br />
       <button
-          *ngIf="response.latestInappropriateFlagAnnotation == null || response.latestInappropriateFlagAnnotation.data == null || response.latestInappropriateFlagAnnotation.data.action != 'Delete'"
-          mat-raised-button
-          class="warn"
-          (click)="delete(response)"
-          matTooltip="Delete this post so students will not see it"
-          matTooltipPosition="above"
-          i18n-matTooltip
-          i18n>
+        *ngIf="
+          response.latestInappropriateFlagAnnotation == null ||
+          response.latestInappropriateFlagAnnotation.data == null ||
+          response.latestInappropriateFlagAnnotation.data.action != 'Delete'
+        "
+        mat-raised-button
+        class="warn"
+        (click)="delete(response)"
+        matTooltip="Delete this post so students will not see it"
+        matTooltipPosition="above"
+        i18n-matTooltip
+        i18n
+      >
         Delete
       </button>
       <button
-          *ngIf="response.latestInappropriateFlagAnnotation != null && response.latestInappropriateFlagAnnotation.data.action === 'Delete'"
-          mat-raised-button
-          class="warn"
-          (click)="undoDelete(response)"
-          matTooltip="Make this post viewable to students"
-          matTooltipPosition="above"
-          i18n-matTooltip
-          i18n>
+        *ngIf="
+          response.latestInappropriateFlagAnnotation != null &&
+          response.latestInappropriateFlagAnnotation.data.action === 'Delete'
+        "
+        mat-raised-button
+        class="warn"
+        (click)="undoDelete(response)"
+        matTooltip="Make this post viewable to students"
+        matTooltipPosition="above"
+        i18n-matTooltip
+        i18n
+      >
         Undo Delete
       </button>
     </div>
@@ -54,60 +67,80 @@
       <span *ngIf="response.replies.length === 1" i18n>
         Comments ({{ response.replies.length }})
       </span>
-      <a *ngIf="response.replies.length > 1"
-          [routerLink]=""
-          (click)="toggleExpanded()"
-          fxLayoutAlign="start center">
+      <a
+        *ngIf="response.replies.length > 1"
+        [routerLink]=""
+        (click)="toggleExpanded()"
+        fxLayoutAlign="start center"
+      >
         <span i18n>Comments ({{ response.replies.length }})</span>
-        <mat-icon>{{expanded ? "expand_less" : "expand_more"}}</mat-icon>
+        <mat-icon>{{ expanded ? 'expand_less' : 'expand_more' }}</mat-icon>
       </a>
     </div>
     <mat-list class="comments">
-      <mat-list-item [ngClass]="{'animate-show': !isLast}"
-          *ngFor="let reply of repliesToShow">
-        <mat-icon matListAvatar
+      <mat-list-item [ngClass]="{ 'animate-show': !isLast }" *ngFor="let reply of repliesToShow">
+        <mat-icon
+          matListAvatar
           class="mat-40"
-          style="color: {{getAvatarColorForWorkgroupId(reply.workgroupId)}}">
+          style="color: {{ getAvatarColorForWorkgroupId(reply.workgroupId) }}"
+        >
           account_circle
-        </mat-icon> 
+        </mat-icon>
         <h3 matLine>
-          <span class="mat-body-2">{{ reply.usernames }}</span>&nbsp;
-          <save-time-message [saveTime]="adjustClientSaveTime(reply.serverSaveTime)"
-              [timeOnly]="true"
-              tooltipPosition="after"></save-time-message>
+          <span class="mat-body-2">{{ reply.usernames }}</span
+          >&nbsp;
+          <save-time-message
+            [saveTime]="adjustClientSaveTime(reply.serverSaveTime)"
+            [timeOnly]="true"
+            tooltipPosition="after"
+          ></save-time-message>
         </h3>
         <p matLine [innerHTML]="reply.studentData.responseHTML"></p>
         <div fxFlex></div>
         <div *ngIf="mode === 'grading' || mode === 'gradingRevision'">
           <button
-              *ngIf="(response.latestInappropriateFlagAnnotation == null || response.latestInappropriateFlagAnnotation.data.action !== 'Delete') && (reply.latestInappropriateFlagAnnotation == null || reply.latestInappropriateFlagAnnotation.data.action != 'Delete')"
-              mat-raised-button
-              class="warn"
-              (click)="delete(reply)"
-              i18n-matTooltip
-              matTooltip="Delete this post so students will not see it"
-              matTooltipPosition="above"
-              i18n>
+            *ngIf="
+              (response.latestInappropriateFlagAnnotation == null ||
+                response.latestInappropriateFlagAnnotation.data.action !== 'Delete') &&
+              (reply.latestInappropriateFlagAnnotation == null ||
+                reply.latestInappropriateFlagAnnotation.data.action != 'Delete')
+            "
+            mat-raised-button
+            class="warn"
+            (click)="delete(reply)"
+            i18n-matTooltip
+            matTooltip="Delete this post so students will not see it"
+            matTooltipPosition="above"
+            i18n
+          >
             Delete
           </button>
           <span
-              *ngIf="response.latestInappropriateFlagAnnotation != null && response.latestInappropriateFlagAnnotation.data.action === 'Delete'"
-              class="warn"
-              i18n-matTooltip
-              matTooltip="Students will not see this post"
-              matTooltipPosition="above"
-              i18n>
+            *ngIf="
+              response.latestInappropriateFlagAnnotation != null &&
+              response.latestInappropriateFlagAnnotation.data.action === 'Delete'
+            "
+            class="warn"
+            i18n-matTooltip
+            matTooltip="Students will not see this post"
+            matTooltipPosition="above"
+            i18n
+          >
             Parent Deleted
           </span>
           <button
-              *ngIf="reply.latestInappropriateFlagAnnotation != null && reply.latestInappropriateFlagAnnotation.data.action === 'Delete'"
-              mat-raised-button
-              class="warn"
-              (click)="undoDelete(reply)"
-              i18n-matTooltip
-              matTooltip="Make this post viewable to students"
-              matTooltipPosition="above"
-              i18n>
+            *ngIf="
+              reply.latestInappropriateFlagAnnotation != null &&
+              reply.latestInappropriateFlagAnnotation.data.action === 'Delete'
+            "
+            mat-raised-button
+            class="warn"
+            (click)="undoDelete(reply)"
+            i18n-matTooltip
+            matTooltip="Make this post viewable to students"
+            matTooltipPosition="above"
+            i18n
+          >
             Undo Delete
           </button>
         </div>
@@ -116,14 +149,16 @@
     <mat-divider></mat-divider>
   </div>
   <div class="new-reply" fxLayout="row" *ngIf="mode === 'student' && !isDisabled">
-    <textarea class="new-reply-input"
-        [(ngModel)]="response.replyText"
-        (keyup)="replyEntered($event)"
-        placeholder="Add Comment"
-        i18n-placeholder
-        aria-label="Add Comment"
-        i18n-aria-label
-        cdkTextareaAutosize>
+    <textarea
+      class="new-reply-input"
+      [(ngModel)]="response.replyText"
+      (keyup)="replyEntered($event)"
+      placeholder="Add Comment"
+      i18n-placeholder
+      aria-label="Add Comment"
+      i18n-aria-label
+      cdkTextareaAutosize
+    >
     </textarea>
   </div>
 </mat-card>
