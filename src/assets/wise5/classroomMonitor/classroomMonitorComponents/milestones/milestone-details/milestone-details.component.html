@@ -23,7 +23,7 @@
   <p *ngIf="milestone.type === 'milestoneReport'">
     <span class="mat-body-2" i18n>Item Location: </span>
       {{ getNodeNumberAndTitleByNodeId(milestone.nodeId) }}
-    (<a (click)="showMilestoneStepInfo($event)" i18n>Step Info</a>)
+    (<a (click)="showMilestoneStepInfo()" i18n>Step Info</a>)
   </p>
 </section>
 <section *ngIf="milestone.type === 'milestoneReport'"

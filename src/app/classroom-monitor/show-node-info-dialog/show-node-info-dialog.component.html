@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <h1 mat-dialog-title>{{ stepNumberAndTitle }}</h1>
+</mat-toolbar>
+<div mat-dialog-content #nodeInfoDiv>
+  <node-info [nodeId]="nodeId"></node-info>
+</div>
+<div mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-button color="primary" (click)="openInNewWindow()" i18n>Open in Window</button>
+  <button mat-button color="primary" (click)="close()" i18n>Close</button>
+</div>
