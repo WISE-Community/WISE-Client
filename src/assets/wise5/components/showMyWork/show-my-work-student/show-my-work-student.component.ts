@@ -7,7 +7,6 @@ import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 
@@ -31,8 +30,7 @@ export class ShowMyWorkStudentComponent extends ComponentStudent {
     protected notebookService: NotebookService,
     protected projectService: ProjectService,
     protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService,
-    protected utilService: UtilService
+    protected studentDataService: StudentDataService
   ) {
     super(
       annotationService,
@@ -42,8 +40,7 @@ export class ShowMyWorkStudentComponent extends ComponentStudent {
       nodeService,
       notebookService,
       studentAssetService,
-      studentDataService,
-      utilService
+      studentDataService
     );
   }
 

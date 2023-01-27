@@ -102,8 +102,7 @@ export class GraphStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -213,9 +212,9 @@ export class GraphStudent extends ComponentStudent {
   }
 
   processConnectedComponentState(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     const componentType = this.ProjectService.getComponentType(
       connectedComponent.nodeId,
@@ -2666,9 +2665,9 @@ export class GraphStudent extends ComponentStudent {
         latestComponentState.componentType === 'Draw' ||
         latestComponentState.componentType === 'Label'
       ) {
-        let connectedComponentOfComponentState = this.UtilService.getConnectedComponentByComponentState(
-          this.componentContent,
-          latestComponentState
+        const connectedComponentOfComponentState = this.component.getConnectedComponent(
+          latestComponentState.nodeId,
+          latestComponentState.componentId
         );
         if (connectedComponentOfComponentState.importWorkAsBackground === true) {
           promises.push(this.setComponentStateAsBackgroundImage(latestComponentState));

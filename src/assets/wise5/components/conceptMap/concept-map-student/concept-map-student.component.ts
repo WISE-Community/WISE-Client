@@ -85,8 +85,7 @@ export class ConceptMapStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -1534,9 +1533,9 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   mergeOtherComponentState(componentState: any): any {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     if (connectedComponent.importWorkAsBackground === true) {
       this.setComponentStateAsBackgroundImage(componentState);

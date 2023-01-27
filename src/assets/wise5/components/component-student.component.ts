@@ -12,7 +12,6 @@ import { NodeService } from '../services/nodeService';
 import { NotebookService } from '../services/notebookService';
 import { StudentAssetService } from '../services/studentAssetService';
 import { StudentDataService } from '../services/studentDataService';
-import { UtilService } from '../services/utilService';
 import { StudentAssetsDialogComponent } from '../vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
 import { StudentAssetRequest } from '../vle/studentAsset/StudentAssetRequest';
 import { ComponentService } from './componentService';
@@ -63,8 +62,7 @@ export abstract class ComponentStudent {
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {}
 
   ngOnInit(): void {
@@ -652,9 +650,9 @@ export abstract class ComponentStudent {
   }
 
   importWorkAsBackground(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     if (connectedComponent.importWorkAsBackground) {
       this.setComponentStateAsBackgroundImage(componentState);

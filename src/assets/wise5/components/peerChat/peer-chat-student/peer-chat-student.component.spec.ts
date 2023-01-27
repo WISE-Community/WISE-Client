@@ -12,7 +12,6 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
 import { TagService } from '../../../services/tagService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
@@ -153,8 +152,7 @@ describe('PeerChatStudentComponent', () => {
         StudentAssetService,
         StudentDataService,
         StudentWebSocketService,
-        TagService,
-        UtilService
+        TagService
       ]
     }).compileComponents();
   });
