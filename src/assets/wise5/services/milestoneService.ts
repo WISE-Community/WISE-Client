@@ -566,22 +566,22 @@ export class MilestoneService {
     projectAchievement.isReportAvailable = reportAvailable;
   }
 
-  showMilestoneDetails(milestone: any, $event: any) {
-    this.upgrade.$injector.get('$mdDialog').show({
-      parent: angular.element(document.body),
-      templateUrl:
-        'assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestoneDetailsDialog/milestoneDetailsDialog.html',
-      controller: MilestoneDetailsDialog,
-      controllerAs: '$ctrl',
-      fullscreen: true,
-      multiple: true,
-      targetEvent: $event,
-      clickOutsideToClose: true,
-      escapeToClose: true,
-      locals: {
-        $event: $event,
-        milestone: milestone
-      }
-    });
-  }
+  // showMilestoneDetails(milestone: any, $event: any) {
+  //   this.upgrade.$injector.get('$mdDialog').show({
+  //     parent: angular.element(document.body),
+  //     templateUrl:
+  //       'assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestoneDetailsDialog/milestoneDetailsDialog.html',
+  //     controller: MilestoneDetailsDialog,
+  //     controllerAs: '$ctrl',
+  //     fullscreen: true,
+  //     multiple: true,
+  //     targetEvent: $event,
+  //     clickOutsideToClose: true,
+  //     escapeToClose: true,
+  //     locals: {
+  //       $event: $event,
+  //       milestone: milestone
+  //     }
+  //   });
+  // }
 }

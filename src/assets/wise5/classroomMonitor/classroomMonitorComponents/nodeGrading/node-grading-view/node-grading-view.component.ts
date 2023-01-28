@@ -13,6 +13,8 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { Notification } from '../../../../../../app/domain/notification';
 import { CompletionStatus } from '../../shared/CompletionStatus';
 import { copy } from '../../../../common/object/object';
+import { MatDialog } from '@angular/material/dialog';
+import { MilestoneDetailsDialogComponent } from '../../milestones/milestone-details-dialog/milestone-details-dialog.component';
 
 @Component({
   selector: 'node-grading-view',
@@ -46,6 +48,7 @@ export class NodeGradingViewComponent implements OnInit {
     protected annotationService: AnnotationService,
     protected classroomStatusService: ClassroomStatusService,
     protected configService: ConfigService,
+    protected dialog: MatDialog,
     protected milestoneService: MilestoneService,
     protected nodeInfoService: NodeInfoService,
     protected notificationService: NotificationService,
@@ -428,8 +431,13 @@ export class NodeGradingViewComponent implements OnInit {
     }
   }
 
-  showReport($event: any): void {
-    this.milestoneService.showMilestoneDetails(this.milestoneReport, $event);
+  showReport(): void {
+    // this.milestoneService.showMilestoneDetails(this.milestoneReport, $event);
+    this.dialog.open(MilestoneDetailsDialogComponent, {
+      data: {
+        milestone: this.milestoneReport
+      }
+    });
   }
 
   showPeerGroupDetails(peerGroupingTag: string): void {

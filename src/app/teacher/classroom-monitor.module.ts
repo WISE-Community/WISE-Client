@@ -66,6 +66,7 @@ import { MilestoneReportGraphComponent } from './milestone/milestone-report-grap
 import { MilestoneDetailsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component';
 import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/student-progress/student-progress.component';
 import { PasswordModule } from '../password/password.module';
+import { MilestoneDetailsDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details-dialog/milestone-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { PasswordModule } from '../password/password.module';
     ManageUserComponent,
     MilestonesComponent,
     MilestoneDetailsComponent,
+    MilestoneDetailsDialogComponent,
     MilestoneGradingViewComponent,
     MilestoneReportDataComponent,
     MilestoneReportGraphComponent,

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { MilestoneDetailsDialogComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details-dialog/milestone-details-dialog.component';
 import { AchievementService } from '../../../assets/wise5/services/achievementService';
 import { AnnotationService } from '../../../assets/wise5/services/annotationService';
 import { MilestoneService } from '../../../assets/wise5/services/milestoneService';
@@ -18,6 +20,7 @@ export class MilestonesComponent {
     private AchievementService: AchievementService,
     private AnnotationService: AnnotationService,
     private MilestoneService: MilestoneService,
+    private dialog: MatDialog,
     private TeacherDataService: TeacherDataService
   ) {}
 
@@ -78,7 +81,13 @@ export class MilestonesComponent {
     return {};
   }
 
-  showMilestoneDetails(milestone, $event) {
-    this.MilestoneService.showMilestoneDetails(milestone, $event);
+  showMilestoneDetails(milestone: any): void {
+    // this.MilestoneService.showMilestoneDetails(milestone, $event);
+    this.dialog.open(MilestoneDetailsDialogComponent, {
+      data: {
+        milestone: milestone
+      },
+      width: '1280px'
+    });
   }
 }
