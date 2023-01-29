@@ -1179,6 +1179,12 @@ export class ProjectService {
     return allPaths;
   }
 
+  getStepNodeIds(): string[] {
+    return this.getFlattenedProjectAsNodeIds().filter((nodeId: string) => {
+      return this.isApplicationNode(nodeId);
+    });
+  }
+
   /**
    * Get the component by node id and component id
    * @param nodeId the node id

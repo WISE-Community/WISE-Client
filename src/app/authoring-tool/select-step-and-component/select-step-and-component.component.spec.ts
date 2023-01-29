@@ -54,7 +54,9 @@ describe('SelectStepAndComponentComponent', () => {
 function selectComponent() {
   it('should disable certain options in the select component', async () => {
     setUpThreeComponentsSpy('OpenResponse', 'Graph', 'OpenResponse');
+    component.referenceComponent.nodeId = nodeId1;
     component.thisComponentId = componentId1;
+    component.ngOnInit();
     const selects = await loader.getAllHarnesses(MatSelectHarness);
     const selectComponent = selects[1];
     await selectComponent.open();

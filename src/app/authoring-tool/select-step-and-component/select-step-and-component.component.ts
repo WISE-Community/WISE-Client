@@ -9,41 +9,49 @@ import { ReferenceComponent } from '../../domain/referenceComponent';
 })
 export class SelectStepAndComponentComponent implements OnInit {
   @Input() allowedComponentTypes: string[] = [];
-  @Output() componentChange: EventEmitter<any> = new EventEmitter();
+  @Output() componentChange: EventEmitter<ReferenceComponent> = new EventEmitter();
+  protected components: any[] = [];
+  protected componentToIsAllowed: Map<string, boolean> = new Map<string, boolean>();
   protected nodeIds: string[] = [];
+  protected nodeToPositionAndTitle: Map<string, string> = new Map<string, string>();
   @Input() referenceComponent: ReferenceComponent;
-  @Output() stepChange: EventEmitter<any> = new EventEmitter();
+  @Output() stepChange: EventEmitter<ReferenceComponent> = new EventEmitter();
   @Input() thisComponentId: string;
 
   constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds();
-    if (this.referenceComponent.nodeId != null && this.referenceComponent.componentId == null) {
-      this.automaticallySetComponentIfPossible(this.referenceComponent.nodeId);
+    this.nodeIds = this.projectService.getStepNodeIds();
+    this.calculateNodePositionAndTitles(this.nodeIds);
+    if (this.referenceComponent.nodeId != null) {
+      this.calculateComponents(this.referenceComponent.nodeId);
+      if (this.referenceComponent.componentId == null) {
+        this.automaticallySetComponentIfPossible(this.referenceComponent.nodeId);
+      }
     }
   }
 
-  protected isApplicationNode(nodeId: string): boolean {
-    return this.projectService.isApplicationNode(nodeId);
+  private calculateNodePositionAndTitles(nodeIds: string[]): void {
+    for (const nodeId of nodeIds) {
+      this.nodeToPositionAndTitle.set(nodeId, this.projectService.getNodePositionAndTitle(nodeId));
+    }
   }
 
-  protected getNodePositionAndTitle(nodeId: string): string {
-    return this.projectService.getNodePositionAndTitle(nodeId);
+  private calculateComponents(nodeId: string): void {
+    this.components = this.projectService.getComponents(nodeId);
+    for (const component of this.components) {
+      this.componentToIsAllowed.set(
+        component.id,
+        this.allowedComponentTypes.includes(component.type)
+      );
+    }
   }
 
   stepChanged(nodeId: string): void {
     this.referenceComponent.componentId = null;
     this.automaticallySetComponentIfPossible(nodeId);
+    this.calculateComponents(nodeId);
     this.stepChange.emit(this.referenceComponent);
-  }
-
-  protected getComponents(nodeId: string): any[] {
-    return this.projectService.getComponents(nodeId);
-  }
-
-  protected isComponentTypeAllowed(componentType: string): boolean {
-    return this.allowedComponentTypes.includes(componentType);
   }
 
   protected componentChanged(): void {
