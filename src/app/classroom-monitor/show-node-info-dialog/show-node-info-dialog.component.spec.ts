@@ -74,7 +74,7 @@ describe('ShowNodeInfoDialogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should render the step', () => {
+  it('should render the step content in the dialog', () => {
     expect(fixture.debugElement.nativeElement.innerHTML).toContain(component.stepNumberAndTitle);
     expect(fixture.debugElement.nativeElement.innerHTML).toContain(prompt);
     expect(fixture.debugElement.nativeElement.innerHTML).toContain(stepRubric);

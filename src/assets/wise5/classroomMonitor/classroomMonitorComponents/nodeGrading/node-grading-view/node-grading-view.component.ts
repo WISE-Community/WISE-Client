@@ -380,7 +380,8 @@ export class NodeGradingViewComponent implements OnInit {
 
   showRubric() {
     this.dialog.open(ShowNodeInfoDialogComponent, {
-      data: this.nodeId
+      data: this.nodeId,
+      width: '100%'
     });
   }
 

@@ -117,7 +117,8 @@ export class MilestoneDetailsComponent implements OnInit {
 
   showMilestoneStepInfo(): void {
     this.dialog.open(ShowNodeInfoDialogComponent, {
-      data: this.milestone.nodeId
+      data: this.milestone.nodeId,
+      width: '100%'
     });
   }
 
