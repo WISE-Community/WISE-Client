@@ -115,7 +115,7 @@ export class MilestoneDetailsComponent implements OnInit {
     this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 
-  showMilestoneStepInfo(): void {
+  protected showMilestoneStepInfo(): void {
     this.dialog.open(ShowNodeInfoDialogComponent, {
       data: this.milestone.nodeId,
       width: '100%'

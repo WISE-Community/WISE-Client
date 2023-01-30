@@ -378,7 +378,7 @@ export class NodeGradingViewComponent implements OnInit {
     return this.teacherDataService.isWorkgroupShown(workgroup);
   }
 
-  showRubric() {
+  protected showRubric(): void {
     this.dialog.open(ShowNodeInfoDialogComponent, {
       data: this.nodeId,
       width: '100%'
