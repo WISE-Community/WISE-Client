@@ -15,6 +15,7 @@ import { ComponentService } from '../../componentService';
 import { ConceptMapService } from '../conceptMapService';
 import { DialogWithCloseComponent } from '../../../directives/dialog-with-close/dialog-with-close.component';
 import { copy } from '../../../common/object/object';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
 
 @Component({
   selector: 'concept-map-student',
@@ -1456,15 +1457,13 @@ export class ConceptMapStudent extends ComponentStudent {
     const domURL: any = self.URL || (self as any).webkitURL || self;
     const url = domURL.createObjectURL(svg);
     const image = new Image();
-    const thisUtilService = this.UtilService;
     image.onload = (event) => {
       const image: any = event.target;
       myCanvas.width = image.width;
       myCanvas.height = image.height;
       ctx.drawImage(image, 0, 0);
-      const base64Image = myCanvas.toDataURL('image/png');
-      const imageObject = thisUtilService.getImageObjectFromBase64String(base64Image);
-      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
+      const pngFile = convertToPNGFile(myCanvas);
+      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
     };
     image.src = url;
   }

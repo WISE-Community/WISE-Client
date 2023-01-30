@@ -13,6 +13,7 @@ import { ComponentService } from '../../componentService';
 import { DrawService } from '../drawService';
 import { MatDialog } from '@angular/material/dialog';
 import { copy } from '../../../common/object/object';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
 
 @Component({
   selector: 'draw-student',
@@ -342,15 +343,10 @@ export class DrawStudent extends ComponentStudent {
   }
 
   addNoteWithImage(componentStateId: number) {
-    const image = this.generateImageFromCanvas();
-    this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), image, null, [
+    const pngFile = convertToPNGFile(this.getCanvas());
+    this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile, null, [
       componentStateId
     ]);
-  }
-
-  generateImageFromCanvas(): any {
-    const canvasBase64Image = this.getCanvas().toDataURL('image/png');
-    return this.UtilService.getImageObjectFromBase64String(canvasBase64Image);
   }
 
   getCanvas(): any {

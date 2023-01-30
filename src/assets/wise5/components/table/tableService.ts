@@ -3,15 +3,12 @@
 import * as html2canvas from 'html2canvas';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { UtilService } from '../../services/utilService';
 import { Injectable } from '@angular/core';
+import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class TableService extends ComponentService {
-  constructor(
-    private StudentAssetService: StudentAssetService,
-    protected UtilService: UtilService
-  ) {
+  constructor(private StudentAssetService: StudentAssetService) {
     super();
   }
 
@@ -223,14 +220,8 @@ export class TableService extends ComponentService {
       if (tableElement != null) {
         // convert the table element to a canvas element
         html2canvas(tableElement).then((canvas) => {
-          // get the canvas as a base64 string
-          const img_b64 = canvas.toDataURL('image/png');
-
-          // get the image object
-          const imageObject = this.UtilService.getImageObjectFromBase64String(img_b64);
-
-          // add the image to the student assets
-          this.StudentAssetService.uploadAsset(imageObject).then((asset) => {
+          const pngFile = convertToPNGFile(canvas);
+          this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
             resolve(asset);
           });
         });
