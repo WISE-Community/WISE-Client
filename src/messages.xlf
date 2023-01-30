@@ -1520,8 +1520,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="04469c2b5a0697c49ec690be6a05f13ffce5e433" datatype="html">
-        <source>Open in Window</source>
+      <trans-unit id="3eb9e904dff3582a205be637ccac976a038fb4b3" datatype="html">
+        <source>Open in New Window</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component.html</context>
           <context context-type="linenumber">8</context>
