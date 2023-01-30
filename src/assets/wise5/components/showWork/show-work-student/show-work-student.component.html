@@ -1,75 +1,103 @@
 <ng-container [ngSwitch]="studentWork.componentType">
-  <animation-show-work *ngSwitchCase="'Animation'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork">
+  <animation-show-work
+    *ngSwitchCase="'Animation'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  >
   </animation-show-work>
-  <audio-oscillator-show-work *ngSwitchCase="'AudioOscillator'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork">
+  <audio-oscillator-show-work
+    *ngSwitchCase="'AudioOscillator'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  >
   </audio-oscillator-show-work>
-  <concept-map-show-work *ngSwitchCase="'ConceptMap'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork">
+  <concept-map-show-work
+    *ngSwitchCase="'ConceptMap'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  >
   </concept-map-show-work>
-  <dialog-guidance-show-work *ngSwitchCase="'DialogGuidance'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork">
+  <dialog-guidance-show-work
+    *ngSwitchCase="'DialogGuidance'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  >
   </dialog-guidance-show-work>
-  <discussion-student *ngSwitchCase="'Discussion'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      [componentState]="studentWork"
-      [isDisabled]="true"
-      [workgroupId]="studentWork.workgroupId"
-      [mode]="student">
+  <discussion-student
+    *ngSwitchCase="'Discussion'"
+    [nodeId]="nodeId"
+    [componentContent]="componentContent"
+    [componentState]="studentWork"
+    [isDisabled]="true"
+    [workgroupId]="studentWork.workgroupId"
+    [mode]="student"
+  >
   </discussion-student>
-  <draw-show-work *ngSwitchCase="'Draw'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork">
+  <draw-show-work
+    *ngSwitchCase="'Draw'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  >
   </draw-show-work>
-  <embedded-show-work *ngSwitchCase="'Embedded'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork">
+  <embedded-show-work
+    *ngSwitchCase="'Embedded'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  >
   </embedded-show-work>
-  <graph-show-work *ngSwitchCase="'Graph'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork">
+  <graph-show-work
+    *ngSwitchCase="'Graph'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  >
   </graph-show-work>
-  <label-show-work *ngSwitchCase="'Label'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork">
+  <label-show-work
+    *ngSwitchCase="'Label'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  >
   </label-show-work>
-  <match-show-work *ngSwitchCase="'Match'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork"></match-show-work>
-  <multiple-choice-show-work *ngSwitchCase="'MultipleChoice'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork">
+  <match-show-work
+    *ngSwitchCase="'Match'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  ></match-show-work>
+  <multiple-choice-show-work
+    *ngSwitchCase="'MultipleChoice'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  >
   </multiple-choice-show-work>
-  <open-response-show-work *ngSwitchCase="'OpenResponse'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork"></open-response-show-work>
-  <peer-chat-student *ngSwitchCase="'PeerChat'"
-      [nodeId]="nodeId"
-      [componentContent]="componentContent"
-      [componentState]="studentWork"
-      [workgroupId]="studentWork.workgroupId"
-      [mode]="student">
+  <open-response-show-work
+    *ngSwitchCase="'OpenResponse'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  ></open-response-show-work>
+  <peer-chat-student
+    *ngSwitchCase="'PeerChat'"
+    [nodeId]="nodeId"
+    [componentContent]="componentContent"
+    [componentState]="studentWork"
+    [workgroupId]="studentWork.workgroupId"
+    [mode]="student"
+  >
   </peer-chat-student>
-  <table-show-work *ngSwitchCase="'Table'"
-      [nodeId]="nodeId"
-      [componentId]="componentId"
-      [componentState]="studentWork">
+  <table-show-work
+    *ngSwitchCase="'Table'"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="studentWork"
+  >
   </table-show-work>
 </ng-container>

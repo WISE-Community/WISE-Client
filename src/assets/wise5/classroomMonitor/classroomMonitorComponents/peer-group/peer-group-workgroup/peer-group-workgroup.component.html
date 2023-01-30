@@ -1,6 +1,14 @@
-<div [ngClass]="{'empty-workgroup': isEmptyWorkgroup}" class="team control-bg-bg mat-elevation-z1" fxLayoutAlign="start center" fxLayoutGap="4px">
-  <mat-icon class="mat-24 secondary-text avatar" [ngStyle]="{'color': avatarColor}">account_circle</mat-icon>
+<div
+  [ngClass]="{ 'empty-workgroup': isEmptyWorkgroup }"
+  class="team control-bg-bg mat-elevation-z1"
+  fxLayoutAlign="start center"
+  fxLayoutGap="4px"
+>
+  <mat-icon class="mat-24 secondary-text avatar" [ngStyle]="{ color: avatarColor }"
+    >account_circle</mat-icon
+  >
   <div>
-    <strong>{{ workgroupUsernames }}</strong>&nbsp;<span i18n>(Team {{ workgroup.id }})</span>
+    <strong>{{ workgroupUsernames }}</strong
+    >&nbsp;<span i18n>(Team {{ workgroup.id }})</span>
   </div>
 </div>

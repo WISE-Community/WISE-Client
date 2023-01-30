@@ -1,40 +1,47 @@
 <div fxLayoutGap="16px">
   <mat-label i18n>Paths</mat-label>
-  <button mat-raised-button
-      color="primary"
-      (click)="addNewTransition()"
-      matTooltip="Add a path"
-      matTooltipPosition="above"
-      i18n-matTooltip>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="addNewTransition()"
+    matTooltip="Add a path"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
     <mat-icon>add</mat-icon>
   </button>
 </div>
 <div *ngIf="node.transitionLogic == null || node.transitionLogic.transitions === 0" i18n>
   There are no paths out of this step
 </div>
-<div *ngFor="let transition of node.transitionLogic.transitions; index as transitionIndex"
-    class="transition-div" fxLayout="column" fxLayoutGap="16px">
+<div
+  *ngFor="let transition of node.transitionLogic.transitions; index as transitionIndex"
+  class="transition-div"
+  fxLayout="column"
+  fxLayoutGap="16px"
+>
   <div fxLayoutGap="16px">
     <mat-label i18n>Path {{ transitionIndex + 1 }}</mat-label>
-    <button mat-raised-button
-        color="primary"
-        (click)="deleteTransition(transition)"
-        matTooltip="Delete path"
-        matTooltipPosition="above"
-        i18n-matTooltip>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="deleteTransition(transition)"
+      matTooltip="Delete path"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </div>
   <div>
     <mat-form-field class="common-width">
       <mat-label i18n>Which step this path leads to</mat-label>
-      <mat-select
-          [(ngModel)]="transition.to"
-          (ngModelChange)="transitionToNodeIdChanged()">
-        <mat-option *ngFor="let nodeId of nodeIds"
-            [value]="nodeId">
+      <mat-select [(ngModel)]="transition.to" (ngModelChange)="transitionToNodeIdChanged()">
+        <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId">
           <span layout="row" layout-align="start center">
-            <span>{{ getNodePositionById(nodeId)}}: {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
+            <span
+              >{{ getNodePositionById(nodeId) }}: {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span
+            >
           </span>
         </mat-option>
       </mat-select>
@@ -43,132 +50,192 @@
   <div fxLayout="column" fxLayoutGap="16px">
     <div fxLayoutGap="16px">
       <mat-label i18n>Requirements</mat-label>
-      <button mat-raised-button
-          color="primary"
-          (click)="addNewTransitionCriteria(transition)"
-          matTooltip="Add a requirement for this path"
-          matTooltipPosition="above"
-          i18n-matTooltip>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="addNewTransitionCriteria(transition)"
+        matTooltip="Add a requirement for this path"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
         <mat-icon>add</mat-icon>
       </button>
     </div>
     <div *ngIf="transition.criteria == null || transition.criteria.length === 0" i18n>
       There are no requirements for this transition
     </div>
-    <div *ngFor="let transitionCriteria of transition.criteria; index as criteriaIndex"
-        class="requirement">
+    <div
+      *ngFor="let transitionCriteria of transition.criteria; index as criteriaIndex"
+      class="requirement"
+    >
       <div fxLayoutGap="16px">
         <mat-form-field class="common-width">
           <mat-label i18n>The student needs to</mat-label>
-          <mat-select [(ngModel)]="transitionCriteria.name"
-              (ngModelChange)="transitionCriteriaNameChanged(transitionCriteria)">
-            <mat-option *ngFor="let availableTransitionCriteriaName of transitionCriterias"
-                [value]="availableTransitionCriteriaName.value">
-            <span fxLayout="row" fxLayoutAlign="start center">
-              <span>{{ availableTransitionCriteriaName.text }}</span>
-            </span>
+          <mat-select
+            [(ngModel)]="transitionCriteria.name"
+            (ngModelChange)="transitionCriteriaNameChanged(transitionCriteria)"
+          >
+            <mat-option
+              *ngFor="let availableTransitionCriteriaName of transitionCriterias"
+              [value]="availableTransitionCriteriaName.value"
+            >
+              <span fxLayout="row" fxLayoutAlign="start center">
+                <span>{{ availableTransitionCriteriaName.text }}</span>
+              </span>
             </mat-option>
           </mat-select>
         </mat-form-field>
         <div fxFlex></div>
         <div>
-          <button mat-raised-button
-              color="primary"
-              (click)="deleteTransitionCriteria(transition, criteriaIndex)"
-              matTooltip="Delete this requirement"
-              matTooltipPosition="above"
-              i18n-matTooltip>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="deleteTransitionCriteria(transition, criteriaIndex)"
+            matTooltip="Delete this requirement"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </div>
       </div>
       <div *ngFor="let param of getTransitionCriteriaParamsByName(transitionCriteria.name)">
-        <mat-form-field *ngIf="param.value === 'nodeId'"
-            class="common-width">
+        <mat-form-field *ngIf="param.value === 'nodeId'" class="common-width">
           <mat-label>{{ param.text }}</mat-label>
           <mat-select
-              [(ngModel)]="transitionCriteria.params.nodeId"
-              (ngModelChange)="transitionCriteriaNodeIdChanged(transitionCriteria)">
-            <mat-option *ngFor="let nodeId of nodeIds"
-                [value]="nodeId">
-            <span fxLayout="row" fxLayoutAlign="start center">
-              <span>{{ getNodePositionById(nodeId) }}: {{ getNodeTitle(nodeId) }} ({{ nodeId }})</span>
-            </span>
+            [(ngModel)]="transitionCriteria.params.nodeId"
+            (ngModelChange)="transitionCriteriaNodeIdChanged(transitionCriteria)"
+          >
+            <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId">
+              <span fxLayout="row" fxLayoutAlign="start center">
+                <span
+                  >{{ getNodePositionById(nodeId) }}: {{ getNodeTitle(nodeId) }} ({{
+                    nodeId
+                  }})</span
+                >
+              </span>
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field *ngIf="param.value === 'componentId'"
-            class="common-width">
+        <mat-form-field *ngIf="param.value === 'componentId'" class="common-width">
           <mat-label>{{ param.text }}</mat-label>
           <mat-select
-              [(ngModel)]="transitionCriteria.params.componentId"
-              (ngModelChange)="transitionCriteriaComponentIdChanged(transitionCriteria)">
-            <mat-option *ngFor="let component of getComponents(transitionCriteria.params.nodeId); index as componentIndex"
-                [disabled]="transitionCriteria.name === 'choiceChosen' && component.type !== 'MultipleChoice'"
-                [value]="component.id">
-            <span fxLayout="row" fxLayoutAlign="start center">
-              <span>{{ (componentIndex + 1) }}. {{ component.type }} ({{ component.id }})</span>
-            </span>
+            [(ngModel)]="transitionCriteria.params.componentId"
+            (ngModelChange)="transitionCriteriaComponentIdChanged(transitionCriteria)"
+          >
+            <mat-option
+              *ngFor="
+                let component of getComponents(transitionCriteria.params.nodeId);
+                index as componentIndex
+              "
+              [disabled]="
+                transitionCriteria.name === 'choiceChosen' && component.type !== 'MultipleChoice'
+              "
+              [value]="component.id"
+            >
+              <span fxLayout="row" fxLayoutAlign="start center">
+                <span>{{ componentIndex + 1 }}. {{ component.type }} ({{ component.id }})</span>
+              </span>
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field *ngIf="param.value === 'scores'">
           <mat-label>{{ param.text }}</mat-label>
-          <input matInput
-              [(ngModel)]="transitionCriteria.params.scores"
-              (ngModelChange)="scoresChanged($event, transitionCriteria.params)"/>
+          <input
+            matInput
+            [(ngModel)]="transitionCriteria.params.scores"
+            (ngModelChange)="scoresChanged($event, transitionCriteria.params)"
+          />
         </mat-form-field>
         <mat-form-field *ngIf="param.value === 'scoreId'">
           <mat-label>{{ param.text }}</mat-label>
-          <input matInput
-              [(ngModel)]="transitionCriteria.params.scoreId"
-              (ngModelChange)="scoreIdChanged(transitionCriteria)"/>
+          <input
+            matInput
+            [(ngModel)]="transitionCriteria.params.scoreId"
+            (ngModelChange)="scoreIdChanged(transitionCriteria)"
+          />
         </mat-form-field>
-        <mat-form-field *ngIf="param.value === 'choiceIds' && getChoiceTypeByNodeIdAndComponentId(transitionCriteria.params.nodeId, transitionCriteria.params.componentId) === 'radio'"
-            class="common-width">
+        <mat-form-field
+          *ngIf="
+            param.value === 'choiceIds' &&
+            getChoiceTypeByNodeIdAndComponentId(
+              transitionCriteria.params.nodeId,
+              transitionCriteria.params.componentId
+            ) === 'radio'
+          "
+          class="common-width"
+        >
           <mat-label i18n>The student needs to choose this choice</mat-label>
           <mat-select
-              [(ngModel)]="transitionCriteria.params.choiceIds[0]"
-              (ngModelChange)="saveProject()">
-            <mat-option *ngFor="let choice of getChoices(transitionCriteria.params.nodeId, transitionCriteria.params.componentId)"
-                [value]="choice.id">
+            [(ngModel)]="transitionCriteria.params.choiceIds[0]"
+            (ngModelChange)="saveProject()"
+          >
+            <mat-option
+              *ngFor="
+                let choice of getChoices(
+                  transitionCriteria.params.nodeId,
+                  transitionCriteria.params.componentId
+                )
+              "
+              [value]="choice.id"
+            >
               {{ choice.text }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field *ngIf="param.value === 'choiceIds' && getChoiceTypeByNodeIdAndComponentId(transitionCriteria.params.nodeId, transitionCriteria.params.componentId) === 'checkbox'"
-            class="common-width">
+        <mat-form-field
+          *ngIf="
+            param.value === 'choiceIds' &&
+            getChoiceTypeByNodeIdAndComponentId(
+              transitionCriteria.params.nodeId,
+              transitionCriteria.params.componentId
+            ) === 'checkbox'
+          "
+          class="common-width"
+        >
           <mat-label i18n>The student needs to choose these choices</mat-label>
           <mat-select
-              [(ngModel)]="transitionCriteria.params.choiceIds"
-              (ngModelChange)="saveProject()"
-              multiple>
-            <mat-option *ngFor="let choice of getChoices(transitionCriteria.params.nodeId, transitionCriteria.params.componentId)"
-                [value]="choice.id">
-              {{choice.text}}
+            [(ngModel)]="transitionCriteria.params.choiceIds"
+            (ngModelChange)="saveProject()"
+            multiple
+          >
+            <mat-option
+              *ngFor="
+                let choice of getChoices(
+                  transitionCriteria.params.nodeId,
+                  transitionCriteria.params.componentId
+                )
+              "
+              [value]="choice.id"
+            >
+              {{ choice.text }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field *ngIf="param.value === 'tag'">
           <mat-label i18n>Tag</mat-label>
-          <input matInput
-              [(ngModel)]="transitionCriteria.params.tag"
-              (ngModelChange)="saveProject()"/>
+          <input
+            matInput
+            [(ngModel)]="transitionCriteria.params.tag"
+            (ngModelChange)="saveProject()"
+          />
         </mat-form-field>
       </div>
     </div>
   </div>
 </div>
-<div *ngIf="node.transitionLogic.transitions.length > 1"
-    fxLayout="column" fxLayoutAlign="16px">
+<div *ngIf="node.transitionLogic.transitions.length > 1" fxLayout="column" fxLayoutAlign="16px">
   <mat-form-field class="small-width">
     <mat-label i18n>How to choose among available paths</mat-label>
     <mat-select
-        [disabled]="node.transitionLogic.transitions.length <= 1"
-        [(ngModel)]="node.transitionLogic.howToChooseAmongAvailablePaths"
-        (ngModelChange)="saveProject()">
-      <mat-option *ngFor="let howToChooseAmongAvailablePathsOption of howToChooseAmongAvailablePathsOptions"
-          [value]="howToChooseAmongAvailablePathsOption.value">
+      [disabled]="node.transitionLogic.transitions.length <= 1"
+      [(ngModel)]="node.transitionLogic.howToChooseAmongAvailablePaths"
+      (ngModelChange)="saveProject()"
+    >
+      <mat-option
+        *ngFor="let howToChooseAmongAvailablePathsOption of howToChooseAmongAvailablePathsOptions"
+        [value]="howToChooseAmongAvailablePathsOption.value"
+      >
         <span fxLayout="row" fxLayoutAlign="start center">
           <span>{{ howToChooseAmongAvailablePathsOption.text }}</span>
         </span>
@@ -178,11 +245,14 @@
   <mat-form-field class="small-width">
     <mat-label i18n>When to choose path</mat-label>
     <mat-select
-        [disabled]="node.transitionLogic.transitions.length <= 1"
-        [(ngModel)]="node.transitionLogic.whenToChoosePath"
-        (ngModelChange)="saveProject()">
-      <mat-option *ngFor="let whenToChoosePathOption of whenToChoosePathOptions"
-          [value]="whenToChoosePathOption.value">
+      [disabled]="node.transitionLogic.transitions.length <= 1"
+      [(ngModel)]="node.transitionLogic.whenToChoosePath"
+      (ngModelChange)="saveProject()"
+    >
+      <mat-option
+        *ngFor="let whenToChoosePathOption of whenToChoosePathOptions"
+        [value]="whenToChoosePathOption.value"
+      >
         <span fxLayout="row" fxLayoutAlign="start center">
           <span>{{ whenToChoosePathOption.text }}</span>
         </span>
@@ -192,11 +262,14 @@
   <mat-form-field class="small-width">
     <mat-label i18n>Can change path</mat-label>
     <mat-select
-        [disabled]="node.transitionLogic.transitions.length <= 1"
-        [(ngModel)]="node.transitionLogic.canChangePath"
-        (ngModelChange)="saveProject()">
-      <mat-option *ngFor="let canChangePathOption of canChangePathOptions"
-          [value]="canChangePathOption.value">
+      [disabled]="node.transitionLogic.transitions.length <= 1"
+      [(ngModel)]="node.transitionLogic.canChangePath"
+      (ngModelChange)="saveProject()"
+    >
+      <mat-option
+        *ngFor="let canChangePathOption of canChangePathOptions"
+        [value]="canChangePathOption.value"
+      >
         <span fxLayout="row" fxLayoutAlign="start center">
           <span>{{ canChangePathOption.text }}</span>
         </span>
@@ -206,12 +279,14 @@
   <div>
     <mat-form-field>
       <mat-label i18n>Max paths visitable</mat-label>
-      <input matInput
-          type="number"
-          [min]="1"
-          [disabled]="node.transitionLogic.transitions.length <= 1"
-          [(ngModel)]="node.transitionLogic.maxPathsVisitable"
-          (ngModelChange)="saveProject()"/>
+      <input
+        matInput
+        type="number"
+        [min]="1"
+        [disabled]="node.transitionLogic.transitions.length <= 1"
+        [(ngModel)]="node.transitionLogic.maxPathsVisitable"
+        (ngModelChange)="saveProject()"
+      />
     </mat-form-field>
   </div>
 </div>
