@@ -15,6 +15,7 @@ import { TeacherProjectService } from '../services/teacherProjectService';
 
 @Component({
   selector: 'classroom-monitor',
+  styleUrls: ['./classroom-monitor.component.scss'],
   templateUrl: './classroom-monitor.component.html'
 })
 export class ClassroomMonitorComponent implements OnInit {
