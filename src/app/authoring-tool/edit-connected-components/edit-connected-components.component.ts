@@ -24,46 +24,19 @@ export class EditConnectedComponentsComponent implements OnInit {
   }
 
   addConnectedComponent(): void {
-    this.addConnectedComponentAndSetComponentIdIfPossible();
+    this.connectedComponents.push(this.createConnectedComponent());
     this.connectedComponentChanged();
   }
 
-  addConnectedComponentAndSetComponentIdIfPossible(): void {
-    const connectedComponent = this.createConnectedComponent();
-    this.connectedComponents.push(connectedComponent);
-    this.automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent);
-  }
-
-  automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent: any): void {
-    let numberOfAllowedComponents = 0;
-    let allowedComponent = null;
-    for (const component of this.ProjectService.getComponents(connectedComponent.nodeId)) {
-      if (
-        this.isConnectedComponentTypeAllowed(component.type) &&
-        component.id != this.componentId
-      ) {
-        numberOfAllowedComponents += 1;
-        allowedComponent = component;
-      }
-    }
-    if (numberOfAllowedComponents === 1) {
-      connectedComponent.componentId = allowedComponent.id;
-      connectedComponent.type = 'importWork';
-    }
-    this.afterComponentIdChanged(connectedComponent);
-    this.automaticallySetConnectedComponentTypeIfPossible(connectedComponent);
-  }
-
-  afterComponentIdChanged(connectedComponent: any): void {}
-
-  connectedComponentTypeChanged(connectedComponent: any): void {
-    this.connectedComponentChanged();
+  createConnectedComponent(): any {
+    return {
+      nodeId: this.nodeId,
+      componentId: null,
+      type: null
+    };
   }
 
   connectedComponentNodeIdChanged(connectedComponent: any): void {
-    connectedComponent.componentId = null;
-    connectedComponent.type = null;
-    this.automaticallySetConnectedComponentComponentIdIfPossible(connectedComponent);
     this.connectedComponentChanged();
   }
 
@@ -73,26 +46,24 @@ export class EditConnectedComponentsComponent implements OnInit {
     this.connectedComponentChanged();
   }
 
-  isConnectedComponentTypeAllowed(componentType: string): boolean {
-    return this.allowedConnectedComponentTypes.includes(componentType);
-  }
-
   automaticallySetConnectedComponentTypeIfPossible(connectedComponent: any): void {
-    if (connectedComponent.componentId != null) {
+    if (connectedComponent.componentId != null && connectedComponent.type == null) {
       connectedComponent.type = 'importWork';
     }
     this.automaticallySetConnectedComponentFieldsIfPossible(connectedComponent);
   }
 
-  automaticallySetConnectedComponentFieldsIfPossible(connectedComponent: any): void {}
+  afterComponentIdChanged(connectedComponent: any): void {}
 
-  createConnectedComponent(): any {
-    return {
-      nodeId: this.nodeId,
-      componentId: null,
-      type: null
-    };
+  connectedComponentTypeChanged(connectedComponent: any): void {
+    this.connectedComponentChanged();
   }
+
+  isConnectedComponentTypeAllowed(componentType: string): boolean {
+    return this.allowedConnectedComponentTypes.includes(componentType);
+  }
+
+  automaticallySetConnectedComponentFieldsIfPossible(connectedComponent: any): void {}
 
   deleteConnectedComponent(index: number): void {
     if (confirm($localize`Are you sure you want to delete this connected component?`)) {

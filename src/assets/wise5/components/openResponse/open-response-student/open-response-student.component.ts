@@ -57,8 +57,7 @@ export class OpenResponseStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 

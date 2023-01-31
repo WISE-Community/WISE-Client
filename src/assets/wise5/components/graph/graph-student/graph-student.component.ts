@@ -18,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GraphContent } from '../GraphContent';
 import { RandomKeyService } from '../../../services/randomKeyService';
 import { copy } from '../../../common/object/object';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -102,8 +103,7 @@ export class GraphStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -213,9 +213,9 @@ export class GraphStudent extends ComponentStudent {
   }
 
   processConnectedComponentState(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     const componentType = this.ProjectService.getComponentType(
       connectedComponent.nodeId,
@@ -2509,9 +2509,8 @@ export class GraphStudent extends ComponentStudent {
     const hiddenCanvas: any = document.getElementById(this.hiddenCanvasId);
     canvg(hiddenCanvas, svgString, {
       renderCallback: () => {
-        const base64Image = hiddenCanvas.toDataURL('image/png');
-        const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-        this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
+        const pngFile = convertToPNGFile(hiddenCanvas);
+        this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
       }
     });
   }
@@ -2666,9 +2665,9 @@ export class GraphStudent extends ComponentStudent {
         latestComponentState.componentType === 'Draw' ||
         latestComponentState.componentType === 'Label'
       ) {
-        let connectedComponentOfComponentState = this.UtilService.getConnectedComponentByComponentState(
-          this.componentContent,
-          latestComponentState
+        const connectedComponentOfComponentState = this.component.getConnectedComponent(
+          latestComponentState.nodeId,
+          latestComponentState.componentId
         );
         if (connectedComponentOfComponentState.importWorkAsBackground === true) {
           promises.push(this.setComponentStateAsBackgroundImage(latestComponentState));

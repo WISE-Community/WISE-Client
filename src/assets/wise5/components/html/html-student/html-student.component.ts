@@ -8,7 +8,6 @@ import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 
@@ -29,7 +28,6 @@ export class HtmlStudent extends ComponentStudent {
     protected NotebookService: NotebookService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService,
     private wiseLinkService: WiseLinkService
   ) {
     super(
@@ -40,8 +38,7 @@ export class HtmlStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 

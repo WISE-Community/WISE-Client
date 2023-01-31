@@ -1,36 +1,46 @@
 <edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()">
 </edit-connected-components-add-button>
-<div *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
-    class="connected-components-div">
+<div
+  *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
+  class="connected-components-div"
+>
   <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
     <edit-connected-component-default-selects
-        [connectedComponent]="connectedComponent"
-        [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-        (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"
-        (connectedComponentComponentIdChange)="connectedComponentComponentIdChanged(connectedComponent)"
-        (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)">
+      [connectedComponent]="connectedComponent"
+      [componentId]="componentId"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"
+      (connectedComponentComponentIdChange)="
+        connectedComponentComponentIdChanged(connectedComponent)
+      "
+      (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)"
+    >
     </edit-connected-component-default-selects>
-    <mat-form-field *ngIf='connectedComponent.nodeId === nodeId'>
+    <mat-form-field *ngIf="connectedComponent.nodeId === nodeId">
       <mat-label i18n>Update On</mat-label>
-      <mat-select [(ngModel)]='connectedComponent.updateOn'
-          (ngModelChange)='connectedComponentChanged()'>
-        <mat-option value='submit' i18n>Submit</mat-option>
-        <mat-option value='save' i18n>Save</mat-option>
+      <mat-select
+        [(ngModel)]="connectedComponent.updateOn"
+        (ngModelChange)="connectedComponentChanged()"
+      >
+        <mat-option value="submit" i18n>Submit</mat-option>
+        <mat-option value="save" i18n>Save</mat-option>
       </mat-select>
     </mat-form-field>
-    <div *ngIf='canConnectedComponentTypeImportWorkAsBackground(connectedComponent)'>
+    <div *ngIf="canConnectedComponentTypeImportWorkAsBackground(connectedComponent)">
       <mat-checkbox
-          [(ngModel)]='connectedComponent.importWorkAsBackground'
-          (ngModelChange)='connectedComponentChanged()'
-          [disabled]='true'
-          i18n>
+        [(ngModel)]="connectedComponent.importWorkAsBackground"
+        (ngModelChange)="connectedComponentChanged()"
+        [disabled]="true"
+        i18n
+      >
         Import Work As Background
       </mat-checkbox>
     </div>
     <span fxFlex></span>
     <edit-connected-component-delete-button
-        [connectedComponentIndex]="connectedComponentIndex"
-        (connectedComponentChange)="deleteConnectedComponent(index)">
+      [connectedComponentIndex]="connectedComponentIndex"
+      (connectedComponentChange)="deleteConnectedComponent(index)"
+    >
     </edit-connected-component-delete-button>
   </div>
 </div>

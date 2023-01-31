@@ -5,9 +5,9 @@ import * as html2canvas from 'html2canvas';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
-import { UtilService } from '../../services/utilService';
 import { ConfigService } from '../../services/configService';
 import { copy } from '../../common/object/object';
+import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class EmbeddedService extends ComponentService {
@@ -17,8 +17,7 @@ export class EmbeddedService extends ComponentService {
 
   constructor(
     protected ConfigService: ConfigService,
-    protected StudentAssetService: StudentAssetService,
-    protected UtilService: UtilService
+    protected StudentAssetService: StudentAssetService
   ) {
     super();
   }
@@ -98,9 +97,8 @@ export class EmbeddedService extends ComponentService {
     const modelElement = this.getModelElement(componentState.componentId);
     return new Promise((resolve, reject) => {
       html2canvas(modelElement).then((canvas) => {
-        const base64Image = canvas.toDataURL('image/png');
-        const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-        this.StudentAssetService.uploadAsset(imageObject).then((asset) => {
+        const pngFile = convertToPNGFile(canvas);
+        this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
           resolve(asset);
         });
       });

@@ -5,7 +5,6 @@ import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { ComponentService } from '../../componentService';
 import { DialogResponse } from '../DialogResponse';
 import { StudentDialogResponse } from '../StudentDialogResponse';
@@ -57,8 +56,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected notebookService: NotebookService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService,
-    protected studentStatusService: StudentStatusService,
-    protected utilService: UtilService
+    protected studentStatusService: StudentStatusService
   ) {
     super(
       annotationService,
@@ -68,8 +66,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       nodeService,
       notebookService,
       studentAssetService,
-      studentDataService,
-      utilService
+      studentDataService
     );
   }
 

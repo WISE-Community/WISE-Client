@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TabulatorData } from '../TabulatorData';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { copy } from '../../../common/object/object';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
 
 @Component({
   selector: 'table-student',
@@ -72,8 +73,7 @@ export class TableStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 
@@ -898,9 +898,8 @@ export class TableStudent extends ComponentStudent {
       true
     );
     html2canvas(tableElement).then((canvas: any) => {
-      const base64Image = canvas.toDataURL('image/png');
-      const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
+      const pngFile = convertToPNGFile(canvas);
+      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
     });
   }
 
@@ -1139,9 +1138,9 @@ export class TableStudent extends ComponentStudent {
   }
 
   processConnectedComponentState(componentState: any): void {
-    const connectedComponent = this.UtilService.getConnectedComponentByComponentState(
-      this.componentContent,
-      componentState
+    const connectedComponent = this.component.getConnectedComponent(
+      componentState.nodeId,
+      componentState.componentId
     );
     const componentType = this.ProjectService.getComponentType(
       connectedComponent.nodeId,

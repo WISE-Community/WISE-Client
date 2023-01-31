@@ -2,6 +2,7 @@
 
 import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { convertToPNGFile } from '../common/canvas/canvas';
 import { copy } from '../common/object/object';
 import '../lib/jquery/jquery-global';
 
@@ -16,34 +17,6 @@ export class UtilService {
     return str;
   }
 
-  getImageObjectFromBase64String(img_b64) {
-    const blob = this.dataURItoBlob(img_b64);
-    const now = new Date().getTime();
-    const filename = encodeURIComponent('picture_' + now + '.png');
-    const pngFile = new File([blob], filename, {
-      lastModified: now, // optional - default = now
-      type: 'image/png' // optional - default = ''
-    });
-    return pngFile;
-  }
-
-  /**
-   * Convert base64/URLEncoded data component to raw binary data held in a string
-   * @param dataURI base64/URLEncoded data
-   * @returns a Blob object
-   */
-  dataURItoBlob(dataURI) {
-    let byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0) byteString = atob(dataURI.split(',')[1]);
-    else byteString = unescape(dataURI.split(',')[1]);
-    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    const ia = new Uint8Array(byteString.length);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ia], { type: mimeString });
-  }
-
   /**
    * Get an image object from an image element
    * @param imageElement an image element (<img src='abc.jpg'/>)
@@ -55,8 +28,7 @@ export class UtilService {
     canvas.height = imageElement.naturalHeight;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(imageElement, 0, 0);
-    const dataURL = canvas.toDataURL('image/png');
-    return this.getImageObjectFromBase64String(dataURL);
+    return convertToPNGFile(canvas);
   }
 
   isImage(fileName: string): boolean {
@@ -521,24 +493,6 @@ export class UtilService {
         });
       }, 2000);
     }, duration);
-  }
-
-  /**
-   * Get the connected component associated with the component state.
-   * @param componentContent The component content.
-   * @param componentState The component state.
-   * @return A connected component object or null.
-   */
-  getConnectedComponentByComponentState(componentContent, componentState) {
-    let nodeId = componentState.nodeId;
-    let componentId = componentState.componentId;
-    let connectedComponents = componentContent.connectedComponents;
-    for (let connectedComponent of connectedComponents) {
-      if (connectedComponent.nodeId == nodeId && connectedComponent.componentId == componentId) {
-        return connectedComponent;
-      }
-    }
-    return null;
   }
 
   isValidJSONString(jsonString) {
