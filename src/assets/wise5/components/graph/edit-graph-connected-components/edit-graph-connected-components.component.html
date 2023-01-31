@@ -5,18 +5,14 @@
   class="connected-components-div"
 >
   <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
-    <edit-connected-component-node-select
-      [connectedComponent]="connectedComponent"
-      (connectedComponentChange)="connectedComponentNodeIdChanged(connectedComponent)"
+    <select-step-and-component
+      [referenceComponent]="connectedComponent"
+      [thisComponentId]="componentId"
+      [allowedComponentTypes]="allowedConnectedComponentTypes"
+      (stepChange)="connectedComponentNodeIdChanged(connectedComponent)"
+      (componentChange)="connectedComponentComponentIdChanged(connectedComponent)"
     >
-    </edit-connected-component-node-select>
-    <edit-connected-component-component-select
-      [componentId]="componentId"
-      [connectedComponent]="connectedComponent"
-      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-      (connectedComponentChange)="connectedComponentComponentIdChanged(connectedComponent)"
-    >
-    </edit-connected-component-component-select>
+    </select-step-and-component>
     <mat-form-field>
       <mat-label i18n>Type</mat-label>
       <mat-select

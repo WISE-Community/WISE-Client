@@ -28,18 +28,14 @@
       fxLayoutGap="20px"
     >
       <mat-label class="bold" i18n>Reference Component:</mat-label>
-      <edit-connected-component-node-select
-        [connectedComponent]="componentContent.questionBank.referenceComponent"
-        (connectedComponentChange)="referenceComponentNodeIdChanged($event)"
+      <select-step-and-component
+        [referenceComponent]="componentContent.questionBank.referenceComponent"
+        [thisComponentId]="componentId"
+        [allowedComponentTypes]="allowedReferenceComponentTypes"
+        (stepChange)="saveChanges()"
+        (componentChange)="saveChanges()"
       >
-      </edit-connected-component-node-select>
-      <edit-connected-component-component-select
-        [componentId]="componentId"
-        [connectedComponent]="componentContent.questionBank.referenceComponent"
-        [allowedConnectedComponentTypes]="allowedReferenceComponentTypes"
-        (connectedComponentChange)="saveChanges()"
-      >
-      </edit-connected-component-component-select>
+      </select-step-and-component>
       <edit-component-peer-grouping-tag [componentContent]="componentContent.questionBank">
       </edit-component-peer-grouping-tag>
     </div>

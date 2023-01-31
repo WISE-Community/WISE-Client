@@ -17,18 +17,14 @@
       fxLayoutGap="20px"
     >
       <mat-label class="bold" i18n>Reference Component:</mat-label>
-      <edit-connected-component-node-select
-        [connectedComponent]="componentContent.dynamicPrompt.referenceComponent"
-        (connectedComponentChange)="referenceComponentNodeIdChanged($event)"
+      <select-step-and-component
+        [referenceComponent]="componentContent.dynamicPrompt.referenceComponent"
+        [thisComponentId]="componentId"
+        [allowedComponentTypes]="allowedReferenceComponentTypes"
+        (stepChange)="dynamicPromptChangedEvent.next()"
+        (componentChange)="dynamicPromptChangedEvent.next()"
       >
-      </edit-connected-component-node-select>
-      <edit-connected-component-component-select
-        [componentId]="componentId"
-        [connectedComponent]="componentContent.dynamicPrompt.referenceComponent"
-        [allowedConnectedComponentTypes]="allowedReferenceComponentTypes"
-        (connectedComponentChange)="dynamicPromptChangedEvent.next()"
-      >
-      </edit-connected-component-component-select>
+      </select-step-and-component>
       <edit-component-peer-grouping-tag [componentContent]="componentContent.dynamicPrompt">
       </edit-component-peer-grouping-tag>
     </div>
