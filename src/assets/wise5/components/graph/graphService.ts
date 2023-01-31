@@ -7,6 +7,7 @@ import { StudentAssetService } from '../../services/studentAssetService';
 import { UtilService } from '../../services/utilService';
 import { ConfigService } from '../../services/configService';
 import { HttpClient } from '@angular/common/http';
+import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class GraphService extends ComponentService {
@@ -306,9 +307,8 @@ export class GraphService extends ComponentService {
     return new Promise((resolve, reject) => {
       const highchartsDiv = this.getHighchartsDiv(componentState.componentId);
       html2canvas(highchartsDiv).then((canvas) => {
-        const base64Image = canvas.toDataURL('image/png');
-        const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-        this.StudentAssetService.uploadAsset(imageObject).then((asset) => {
+        const pngFile = convertToPNGFile(canvas);
+        this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
           resolve(asset);
         });
       });
