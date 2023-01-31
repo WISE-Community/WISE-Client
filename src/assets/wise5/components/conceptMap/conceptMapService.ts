@@ -7,15 +7,13 @@ import { StudentAssetService } from '../../services/studentAssetService';
 import ConceptMapNode from './conceptMapNode';
 import ConceptMapLink from './conceptMapLink';
 import { Injectable } from '@angular/core';
-import { UtilService } from '../../services/utilService';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class ConceptMapService extends ComponentService {
   constructor(
     private ConfigService: ConfigService,
-    private StudentAssetService: StudentAssetService,
-    protected UtilService: UtilService
+    private StudentAssetService: StudentAssetService
   ) {
     super();
   }
@@ -798,12 +796,6 @@ export class ConceptMapService extends ComponentService {
           const domURL: any = self.URL || (self as any).webkitURL || self;
           const url = domURL.createObjectURL(svg);
           const image = new Image();
-
-          /*
-           * set the UtilService in a local variable so we can access it
-           * in the onload callback function
-           */
-          const thisUtilService = this.UtilService;
 
           // the function that is called after the image is fully loaded
           image.onload = (event) => {
