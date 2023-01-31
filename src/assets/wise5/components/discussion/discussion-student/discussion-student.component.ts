@@ -8,7 +8,6 @@ import { NotificationService } from '../../../services/notificationService';
 import { RandomKeyService } from '../../../services/randomKeyService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
-import { UtilService } from '../../../services/utilService';
 import { StudentAssetRequest } from '../../../vle/studentAsset/StudentAssetRequest';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
@@ -40,8 +39,7 @@ export class DiscussionStudent extends ComponentStudent {
     protected NotebookService: NotebookService,
     private NotificationService: NotificationService,
     protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    protected UtilService: UtilService
+    protected StudentDataService: StudentDataService
   ) {
     super(
       AnnotationService,
@@ -51,8 +49,7 @@ export class DiscussionStudent extends ComponentStudent {
       NodeService,
       NotebookService,
       StudentAssetService,
-      StudentDataService,
-      UtilService
+      StudentDataService
     );
   }
 

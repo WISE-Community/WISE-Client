@@ -7,7 +7,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
-import { UtilService } from '../../../services/utilService';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { TableStudent } from './table-student.component';
 
@@ -652,7 +651,7 @@ function isAllDataExplorerSeriesSpecified() {
 function processConnectedComponentState() {
   describe('processConnectedComponentState', () => {
     beforeEach(() => {
-      spyOn(TestBed.inject(UtilService), 'getConnectedComponentByComponentState').and.returnValue({
+      spyOn(component.component, 'getConnectedComponent').and.returnValue({
         nodeId: nodeId,
         componentId: componentId
       });

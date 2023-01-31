@@ -1,13 +1,15 @@
 <div fxLayout="row wrap" fxLayoutGap="20px">
   <select-step-and-component
-      [referenceComponent]="connectedComponent"
-      [thisComponentId]="componentId"
-      [allowedComponentTypes]="allowedConnectedComponentTypes"
-      (stepChange)="connectedComponentNodeIdChanged()"
-      (componentChange)="connectedComponentComponentIdChanged()">
+    [referenceComponent]="connectedComponent"
+    [thisComponentId]="componentId"
+    [allowedComponentTypes]="allowedConnectedComponentTypes"
+    (stepChange)="connectedComponentNodeIdChanged()"
+    (componentChange)="connectedComponentComponentIdChanged()"
+  >
   </select-step-and-component>
   <edit-connected-component-type-select
-      [connectedComponent]="connectedComponent"
-      (connectedComponentChange)="connectedComponentTypeChanged()">
+    [connectedComponent]="connectedComponent"
+    (connectedComponentChange)="connectedComponentTypeChanged()"
+  >
   </edit-connected-component-type-select>
 </div>

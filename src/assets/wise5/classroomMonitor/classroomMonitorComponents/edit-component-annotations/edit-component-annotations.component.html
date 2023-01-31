@@ -1,110 +1,143 @@
 <div *ngIf="!showAllAnnotations" class="annotations--grading">
-  <div class="annotations--grading__score annotations--grading__item" fxLayout="row" fxLayoutAlign="start center">
-      <edit-component-score
-          [componentId]="componentId"
-          [componentStateId]="componentStateId"
-          [disabled]="isDisabled || !canGradeStudentWork"
-          [fromWorkgroupId]="fromWorkgroupId"
-          [latestAnnotationScore]="latestAnnotations.score"
-          [nodeId]="nodeId"
-          [periodId]="periodId"
-          [runId]="runId"
-          [toWorkgroupId]="toWorkgroupId"></edit-component-score>
-      <span> / </span>
-      <grading-edit-component-max-score [componentId]="componentId"
-          [disabled]="isDisabled || !canAuthorProject"
-          [nodeId]="nodeId"></grading-edit-component-max-score>
+  <div
+    class="annotations--grading__score annotations--grading__item"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+  >
+    <edit-component-score
+      [componentId]="componentId"
+      [componentStateId]="componentStateId"
+      [disabled]="isDisabled || !canGradeStudentWork"
+      [fromWorkgroupId]="fromWorkgroupId"
+      [latestAnnotationScore]="latestAnnotations.score"
+      [nodeId]="nodeId"
+      [periodId]="periodId"
+      [runId]="runId"
+      [toWorkgroupId]="toWorkgroupId"
+    ></edit-component-score>
+    <span> / </span>
+    <grading-edit-component-max-score
+      [componentId]="componentId"
+      [disabled]="isDisabled || !canAuthorProject"
+      [nodeId]="nodeId"
+    ></grading-edit-component-max-score>
   </div>
   <div *ngIf="edit || !showAutoComment()" class="annotations--grading__item">
-      <edit-component-comment
-          [comment]="comment"
-          [componentId]="componentId"
-          [componentStateId]="componentStateId"
-          [disabled]="isDisabled || !canGradeStudentWork"
-          [fromWorkgroupId]="fromWorkgroupId"
-          [nodeId]="nodeId"
-          [periodId]="periodId"
-          [runId]="runId"
-          [toWorkgroupId]="toWorkgroupId"></edit-component-comment>
+    <edit-component-comment
+      [comment]="comment"
+      [componentId]="componentId"
+      [componentStateId]="componentStateId"
+      [disabled]="isDisabled || !canGradeStudentWork"
+      [fromWorkgroupId]="fromWorkgroupId"
+      [nodeId]="nodeId"
+      [periodId]="periodId"
+      [runId]="runId"
+      [toWorkgroupId]="toWorkgroupId"
+    ></edit-component-comment>
   </div>
-  <div *ngIf="showAutoComment()" class="annotations--grading__item annotations--grading__auto-comment">
-      <div class="heavy" fxLayout="row" fxLayoutGap="4px">
-          <span class="md-no-float" i18n>Auto Comment</span>
-          <span *ngIf="!isDisabled">(<a (click)="toggleEditComment()" i18n>Edit</a>)</span>:
-      </div>
-      <div class="annotations--grading__auto-comment__content">
-          <span [innerHTML]="latestAnnotations.comment.data.value"></span>
-      </div>
+  <div
+    *ngIf="showAutoComment()"
+    class="annotations--grading__item annotations--grading__auto-comment"
+  >
+    <div class="heavy" fxLayout="row" fxLayoutGap="4px">
+      <span class="md-no-float" i18n>Auto Comment</span>
+      <span *ngIf="!isDisabled">(<a (click)="toggleEditComment()" i18n>Edit</a>)</span>:
+    </div>
+    <div class="annotations--grading__auto-comment__content">
+      <span [innerHTML]="latestAnnotations.comment.data.value"></span>
+    </div>
   </div>
 </div>
 
 <div *ngIf="showAllAnnotations">
-  <div *ngIf="hasNoAnnotations()"
-       class="annotations--grading annotations--grading__item text-secondary"
-       i18n>No feedback given for this version</div>
-
-  <div *ngIf="hasTeacherAnnotations()" class="annotations--grading">
-      <div *ngIf="latestAnnotations.score"
-           class="annotations--grading__item annotations--grading__score"
-           fxLayout="row" fxLayoutAlign="start center">
-          <edit-component-score
-              [componentId]="componentId"
-              [componentStateId]="componentStateId"
-              [disabled]="true"
-              [fromWorkgroupId]="fromWorkgroupId"
-              [latestAnnotationScore]="latestAnnotations.score"
-              [nodeId]="nodeId"
-              [periodId]="periodId"
-              [runId]="runId"
-              [toWorkgroupId]="toWorkgroupId"></edit-component-score>
-          <span> / </span>
-          <grading-edit-component-max-score [componentId]="componentId"
-              [disabled]="true"
-              [nodeId]="nodeId"></grading-edit-component-max-score>
-      </div>
-      <div *ngIf="latestAnnotations.comment" class="annotations--grading__item">
-          <edit-component-comment
-              [comment]="latestAnnotations.comment.data.value"
-              [componentId]="componentId"
-              [componentStateId]="componentStateId"
-              [disabled]="true"
-              [fromWorkgroupId]="fromWorkgroupId"
-              [nodeId]="nodeId"
-              [periodId]="periodId"
-              [runId]="runId"
-              [toWorkgroupId]="toWorkgroupId"></edit-component-comment>
-      </div>
+  <div
+    *ngIf="hasNoAnnotations()"
+    class="annotations--grading annotations--grading__item text-secondary"
+    i18n
+  >
+    No feedback given for this version
   </div>
 
-  <div class="component--grading__annotations__divider"
-       *ngIf="hasTeacherAndAutoAnnotations()"></div>
+  <div *ngIf="hasTeacherAnnotations()" class="annotations--grading">
+    <div
+      *ngIf="latestAnnotations.score"
+      class="annotations--grading__item annotations--grading__score"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+    >
+      <edit-component-score
+        [componentId]="componentId"
+        [componentStateId]="componentStateId"
+        [disabled]="true"
+        [fromWorkgroupId]="fromWorkgroupId"
+        [latestAnnotationScore]="latestAnnotations.score"
+        [nodeId]="nodeId"
+        [periodId]="periodId"
+        [runId]="runId"
+        [toWorkgroupId]="toWorkgroupId"
+      ></edit-component-score>
+      <span> / </span>
+      <grading-edit-component-max-score
+        [componentId]="componentId"
+        [disabled]="true"
+        [nodeId]="nodeId"
+      ></grading-edit-component-max-score>
+    </div>
+    <div *ngIf="latestAnnotations.comment" class="annotations--grading__item">
+      <edit-component-comment
+        [comment]="latestAnnotations.comment.data.value"
+        [componentId]="componentId"
+        [componentStateId]="componentStateId"
+        [disabled]="true"
+        [fromWorkgroupId]="fromWorkgroupId"
+        [nodeId]="nodeId"
+        [periodId]="periodId"
+        [runId]="runId"
+        [toWorkgroupId]="toWorkgroupId"
+      ></edit-component-comment>
+    </div>
+  </div>
+
+  <div
+    class="component--grading__annotations__divider"
+    *ngIf="hasTeacherAndAutoAnnotations()"
+  ></div>
 
   <div *ngIf="hasAutoAnnotations()" class="annotations--grading">
-      <div *ngIf="latestAnnotations.autoScore"
-           class="annotations--grading__item annotations--grading__score"
-           fxLayout="row" fxLayoutAlign="start center">
-          <edit-component-score
-              [componentId]="componentId"
-              [componentStateId]="componentStateId"
-              [disabled]="true"
-              [fromWorkgroupId]="fromWorkgroupId"
-              [latestAnnotationScore]="latestAnnotations.autoScore"
-              [nodeId]="nodeId"
-              [periodId]="periodId"
-              [runId]="runId"
-              [toWorkgroupId]="toWorkgroupId"></edit-component-score>
-          <span> / </span>
-          <grading-edit-component-max-score [nodeId]="nodeId"
-              [componentId]="componentId"
-              [disabled]="true"></grading-edit-component-max-score>
+    <div
+      *ngIf="latestAnnotations.autoScore"
+      class="annotations--grading__item annotations--grading__score"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+    >
+      <edit-component-score
+        [componentId]="componentId"
+        [componentStateId]="componentStateId"
+        [disabled]="true"
+        [fromWorkgroupId]="fromWorkgroupId"
+        [latestAnnotationScore]="latestAnnotations.autoScore"
+        [nodeId]="nodeId"
+        [periodId]="periodId"
+        [runId]="runId"
+        [toWorkgroupId]="toWorkgroupId"
+      ></edit-component-score>
+      <span> / </span>
+      <grading-edit-component-max-score
+        [nodeId]="nodeId"
+        [componentId]="componentId"
+        [disabled]="true"
+      ></grading-edit-component-max-score>
+    </div>
+    <div
+      class="annotations--grading__item annotations--grading__auto-comment"
+      *ngIf="latestAnnotations.autoComment"
+    >
+      <div class="heavy" fxLayout="row" fxLayoutGap="4px">
+        <span class="md-no-float" i18n>Auto Comment</span>:
       </div>
-      <div class="annotations--grading__item annotations--grading__auto-comment" *ngIf="latestAnnotations.autoComment">
-          <div class="heavy" fxLayout="row" fxLayoutGap="4px">
-            <span class="md-no-float" i18n>Auto Comment</span>:
-          </div>
-          <div class="annotations--grading__auto-comment__content disabled-text">
-              <span [innerHTML]="latestAnnotations.autoComment.data.value"></span>
-          </div>
+      <div class="annotations--grading__auto-comment__content disabled-text">
+        <span [innerHTML]="latestAnnotations.autoComment.data.value"></span>
       </div>
+    </div>
   </div>
 </div>

@@ -1,162 +1,183 @@
 <component-header [component]="component"></component-header>
 <div class="tools" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
   <button
-      mat-button
-      color="accent"
-      *ngIf="showResetTableButton()"
-      (click)="resetTable()"
-      [disabled]="isDisabled">
+    mat-button
+    color="accent"
+    *ngIf="showResetTableButton()"
+    (click)="resetTable()"
+    [disabled]="isDisabled"
+  >
     <mat-icon>restore</mat-icon>
     Reset
   </button>
   <button
-      mat-button
-      color="accent"
-      *ngIf="isAddToNotebookEnabled()"
-      (click)="snipTable()"
-      [disabled]="isDisabled"
-      i18n>
+    mat-button
+    color="accent"
+    *ngIf="isAddToNotebookEnabled()"
+    (click)="snipTable()"
+    [disabled]="isDisabled"
+    i18n
+  >
     <mat-icon>note_add</mat-icon>
     Add to Notebook
   </button>
   <button
-      mat-button
-      color="accent"
-      *ngIf="isStudentAttachmentEnabled"
-      (click)="showStudentAssets()"
-      [disabled]="isDisabled"
-      i18n>
+    mat-button
+    color="accent"
+    *ngIf="isStudentAttachmentEnabled"
+    (click)="showStudentAssets()"
+    [disabled]="isDisabled"
+    i18n
+  >
     <mat-icon>image</mat-icon>
     Import Data
   </button>
 </div>
-<tabulator-table [id]="tableId"
-    [editableCells]="tabulatorData.editableCells"
-    [enableRowSelection]="componentContent.enableRowSelection"
-    [selectedRowIndices]="selectedRowIndices"
-    [tabColumns]="tabulatorData.columns"
-    [tabData]="tabulatorData.data"
-    [tabOptions]="tabulatorData.options"
-    [tabSorters]="tabulatorSorters"
-    (cellChanged)="tabulatorCellChanged($event)"
-    (rowSelectionChanged)="tabulatorRowSelectionChanged($event)"
-    (rowSortChanged)="tabulatorRowSortChanged($event)"
-    (ready)="tabulatorRendered()"></tabulator-table>
+<tabulator-table
+  [id]="tableId"
+  [editableCells]="tabulatorData.editableCells"
+  [enableRowSelection]="componentContent.enableRowSelection"
+  [selectedRowIndices]="selectedRowIndices"
+  [tabColumns]="tabulatorData.columns"
+  [tabData]="tabulatorData.data"
+  [tabOptions]="tabulatorData.options"
+  [tabSorters]="tabulatorSorters"
+  (cellChanged)="tabulatorCellChanged($event)"
+  (rowSelectionChanged)="tabulatorRowSelectionChanged($event)"
+  (rowSortChanged)="tabulatorRowSortChanged($event)"
+  (ready)="tabulatorRendered()"
+></tabulator-table>
 <div *ngIf="isDataExplorerEnabled">
-  <br/>
+  <br />
   <mat-form-field *ngIf="componentContent.dataExplorerGraphTypes.length > 1" appearance="fill">
     <mat-label i18n>Graph Type</mat-label>
-    <mat-select
-        [(ngModel)]="dataExplorerGraphType"
-        (ngModelChange)="studentDataChanged()">
+    <mat-select [(ngModel)]="dataExplorerGraphType" (ngModelChange)="studentDataChanged()">
       <mat-option
-          *ngFor="let dataExplorerGraphType of dataExplorerGraphTypes"
-          [value]="dataExplorerGraphType.value">
-        <span>{{dataExplorerGraphType.name}}</span>
+        *ngFor="let dataExplorerGraphType of dataExplorerGraphTypes"
+        [value]="dataExplorerGraphType.value"
+      >
+        <span>{{ dataExplorerGraphType.name }}</span>
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <br/>
+  <br />
   <p i18n>Choose the table data you want to graph:</p>
   <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
     <mat-form-field class="data-explorer-select" appearance="fill">
       <mat-label i18n>X Data</mat-label>
       <mat-select
-          [(ngModel)]="dataExplorerXColumn"
-          (ngModelChange)="dataExplorerXColumnChanged(xColumn)"
-          [disabled]="dataExplorerColumnToIsDisabled['x']">
+        [(ngModel)]="dataExplorerXColumn"
+        (ngModelChange)="dataExplorerXColumnChanged(xColumn)"
+        [disabled]="dataExplorerColumnToIsDisabled['x']"
+      >
         <mat-option [value]="" i18n>(None)</mat-option>
         <ng-container *ngFor="let columnName of columnNames; index as columnIndex">
           <mat-option
-              *ngIf="!columnIndexToIsUsed.get(columnIndex) || columnIndex === dataExplorerXColumn"
-              [value]="columnIndex">
-            <span>{{columnName}}</span>
+            *ngIf="!columnIndexToIsUsed.get(columnIndex) || columnIndex === dataExplorerXColumn"
+            [value]="columnIndex"
+          >
+            <span>{{ columnName }}</span>
           </mat-option>
         </ng-container>
       </mat-select>
     </mat-form-field>
     <mat-form-field
-        *ngFor="let singleDataExplorerSeries of dataExplorerSeries; index as seriesIndex"
-        class="data-explorer-select"
-        appearance="fill">
-      <mat-label i18n>Y Data {{ dataExplorerSeries.length > 1 ? seriesIndex + 1 : ""}}</mat-label>
+      *ngFor="let singleDataExplorerSeries of dataExplorerSeries; index as seriesIndex"
+      class="data-explorer-select"
+      appearance="fill"
+    >
+      <mat-label i18n>Y Data {{ dataExplorerSeries.length > 1 ? seriesIndex + 1 : '' }}</mat-label>
       <mat-select
-          [(ngModel)]="singleDataExplorerSeries.yColumn"
-          (ngModelChange)="dataExplorerYColumnChanged(seriesIndex)"
-          [disabled]="dataExplorerColumnToIsDisabled['y' + (seriesIndex > 0 ? seriesIndex + 1 : '')]">
+        [(ngModel)]="singleDataExplorerSeries.yColumn"
+        (ngModelChange)="dataExplorerYColumnChanged(seriesIndex)"
+        [disabled]="dataExplorerColumnToIsDisabled['y' + (seriesIndex > 0 ? seriesIndex + 1 : '')]"
+      >
         <mat-option [value]="" i18n>(None)</mat-option>
         <ng-container *ngFor="let columnName of columnNames; index as columnIndex">
           <mat-option
-              *ngIf="!columnIndexToIsUsed.get(columnIndex) || columnIndex === singleDataExplorerSeries.yColumn"
-              [value]="columnIndex">
-            <span>{{columnName}}</span>
+            *ngIf="
+              !columnIndexToIsUsed.get(columnIndex) ||
+              columnIndex === singleDataExplorerSeries.yColumn
+            "
+            [value]="columnIndex"
+          >
+            <span>{{ columnName }}</span>
           </mat-option>
         </ng-container>
-        </mat-select>
+      </mat-select>
     </mat-form-field>
   </div>
   <div
-      *ngIf="componentContent.isDataExplorerAxisLabelsEditable"
-      fxLayout="row wrap"
-      fxLayoutAlign="start center"
-      fxLayoutGap="16px">
+    *ngIf="componentContent.isDataExplorerAxisLabelsEditable"
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="16px"
+  >
     <mat-form-field class="data-explorer-select" appearance="fill">
       <mat-label i18n>X Axis Label</mat-label>
       <input
-          matInput
-          [(ngModel)]="dataExplorerXAxisLabel"
-          (ngModelChange)="studentDataChanged()"
-          placeholder="Enter Text Here"
-          i18n-placeholder/>
+        matInput
+        [(ngModel)]="dataExplorerXAxisLabel"
+        (ngModelChange)="studentDataChanged()"
+        placeholder="Enter Text Here"
+        i18n-placeholder
+      />
     </mat-form-field>
     <mat-form-field
-        *ngFor="componentContent.numDataExplorerYAxis === 1"
-        class="data-explorer-select"
-        appearance="fill">
+      *ngFor="componentContent.numDataExplorerYAxis === 1"
+      class="data-explorer-select"
+      appearance="fill"
+    >
       <mat-label i18n>Y Axis Label</mat-label>
       <input
-          matInput
-          [(ngModel)]="dataExplorerYAxisLabel"
-          (ngModelChange)="studentDataChanged()"
-          placeholder="Enter Text Here"
-          i18n-placeholder/>
+        matInput
+        [(ngModel)]="dataExplorerYAxisLabel"
+        (ngModelChange)="studentDataChanged()"
+        placeholder="Enter Text Here"
+        i18n-placeholder
+      />
     </mat-form-field>
     <div
-        *ngIf="componentContent.numDataExplorerYAxis > 1"
-        fxLayout="row wrap"
-        fxLayoutAlign="start center"
-        fxLayoutGap="16px">
+      *ngIf="componentContent.numDataExplorerYAxis > 1"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      fxLayoutGap="16px"
+    >
       <mat-form-field
-          *ngFor="let x of [].constructor(dataExplorerYAxisLabels.length); index as yAxisIndex"
-          class="data-explorer-select"
-          appearance="fill">
-        <mat-label i18n>Y Axis {{yAxisIndex + 1}} Label</mat-label>
+        *ngFor="let x of [].constructor(dataExplorerYAxisLabels.length); index as yAxisIndex"
+        class="data-explorer-select"
+        appearance="fill"
+      >
+        <mat-label i18n>Y Axis {{ yAxisIndex + 1 }} Label</mat-label>
         <input
-            matInput
-            [(ngModel)]="dataExplorerYAxisLabels[yAxisIndex]"
-            (ngModelChange)="studentDataChanged()"
-            placeholder="Enter Text Here"
-            i18n-placeholder/>
+          matInput
+          [(ngModel)]="dataExplorerYAxisLabels[yAxisIndex]"
+          (ngModelChange)="studentDataChanged()"
+          placeholder="Enter Text Here"
+          i18n-placeholder
+        />
       </mat-form-field>
     </div>
   </div>
 </div>
 <component-save-submit-buttons
-    *ngIf="isSaveOrSubmitButtonVisible"
-    [componentState]="latestComponentState"
-    [isDirty]="isDirty"
-    [isDisabled]="isDisabled"
-    [isSaveButtonVisible]="isSaveButtonVisible"
-    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-    [isSubmitButtonVisible]="isSubmitButtonVisible"
-    [isSubmitDirty]="isSubmitDirty"
-    (saveButtonClicked)="saveButtonClicked($event)"
-    (submitButtonClicked)="submitButtonClicked($event)">
+  *ngIf="isSaveOrSubmitButtonVisible"
+  [componentState]="latestComponentState"
+  [isDirty]="isDirty"
+  [isDisabled]="isDisabled"
+  [isSaveButtonVisible]="isSaveButtonVisible"
+  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+  [isSubmitButtonVisible]="isSubmitButtonVisible"
+  [isSubmitDirty]="isSubmitDirty"
+  (saveButtonClicked)="saveButtonClicked($event)"
+  (submitButtonClicked)="submitButtonClicked($event)"
+>
 </component-save-submit-buttons>
 <component-annotations
-    *ngIf="mode === 'student'"
-    [annotations]="latestAnnotations"
-    [maxScore]="componentContent.maxScore"
-    [nodeId]="nodeId"
-    [componentId]="componentId">
+  *ngIf="mode === 'student'"
+  [annotations]="latestAnnotations"
+  [maxScore]="componentContent.maxScore"
+  [nodeId]="nodeId"
+  [componentId]="componentId"
+>
 </component-annotations>

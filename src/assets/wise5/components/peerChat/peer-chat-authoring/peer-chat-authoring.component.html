@@ -1,11 +1,17 @@
-<edit-component-prompt *ngIf="!componentContent.dynamicPrompt?.enabled"
-    [prompt]="componentContent.prompt"
-    (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
-<edit-dynamic-prompt [componentContent]="componentContent"
-    (dynamicPromptChangedEvent)="componentChanged()">
+<edit-component-prompt
+  *ngIf="!componentContent.dynamicPrompt?.enabled"
+  [prompt]="componentContent.prompt"
+  (promptChangedEvent)="promptChanged($event)"
+></edit-component-prompt>
+<edit-dynamic-prompt
+  [componentContent]="componentContent"
+  (dynamicPromptChangedEvent)="componentChanged()"
+>
 </edit-dynamic-prompt>
-<edit-question-bank [componentContent]="componentContent"
-    (dynamicPromptChangedEvent)="componentChanged()">
+<edit-question-bank
+  [componentContent]="componentContent"
+  (dynamicPromptChangedEvent)="componentChanged()"
+>
 </edit-question-bank>
 <edit-component-peer-grouping-tag [componentContent]="componentContent">
 </edit-component-peer-grouping-tag>
