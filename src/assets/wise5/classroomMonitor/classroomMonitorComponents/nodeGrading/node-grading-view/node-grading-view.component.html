@@ -18,7 +18,7 @@
           fxLayoutGap.gt-sm="4px"
         >
           <ng-template #averageIsNumber>
-            <span>{{ getNodeAverageScore() | number : '1.1' }}</span>
+            <span>{{ getNodeAverageScore() | number: '1.1' }}</span>
           </ng-template>
           <ng-template #avergeIsNa>
             <span i18n>N/A</span>
@@ -61,7 +61,7 @@
           <span class="info" i18n>Peer Groups</span>
         </div>
       </button>
-      <button mat-stroked-button (click)="showRubric($event)" class="info">
+      <button mat-stroked-button (click)="showRubric()" class="info">
         <div fxLayoutAlign="center center" fxLayoutGap="4px">
           <mat-icon class="info">info_outline</mat-icon>
           <span *ngIf="!numRubrics" i18n>Step Info</span>

@@ -1,10 +1,10 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { copy } from '../../../../common/object/object';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
-import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { NotificationService } from '../../../../services/notificationService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupService';
@@ -31,8 +31,8 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
     protected annotationService: AnnotationService,
     protected classroomStatusService: ClassroomStatusService,
     protected configService: ConfigService,
+    protected dialog: MatDialog,
     protected milestoneService: MilestoneService,
-    protected nodeInfoService: NodeInfoService,
     protected notificationService: NotificationService,
     protected peerGroupService: TeacherPeerGroupService,
     protected projectService: TeacherProjectService,
@@ -42,8 +42,8 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
       annotationService,
       classroomStatusService,
       configService,
+      dialog,
       milestoneService,
-      nodeInfoService,
       notificationService,
       peerGroupService,
       projectService,
