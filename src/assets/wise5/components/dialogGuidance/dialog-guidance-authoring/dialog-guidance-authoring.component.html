@@ -1,24 +1,36 @@
 <div fxLayout="column" fxLayoutGap="16px">
-  <edit-component-prompt [prompt]="componentContent.prompt"
-      (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
+  <edit-component-prompt
+    [prompt]="componentContent.prompt"
+    (promptChangedEvent)="promptChanged($event)"
+  ></edit-component-prompt>
   <mat-form-field>
     <mat-label i18n>Item ID</mat-label>
-    <input matInput
-        [(ngModel)]="componentContent.itemId"
-        (ngModelChange)="inputChange.next($event)"
-        type="text" />
+    <input
+      matInput
+      [(ngModel)]="componentContent.itemId"
+      (ngModelChange)="inputChange.next($event)"
+      type="text"
+    />
   </mat-form-field>
-  <edit-component-max-submit [(maxSubmitCount)]="componentContent.maxSubmitCount"
-      (maxSubmitCountChange)="componentChanged()"></edit-component-max-submit>
-  <mat-checkbox color="primary"
-      [(ngModel)]="componentContent.isComputerAvatarEnabled"
-      (ngModelChange)="componentChanged()"
-      i18n>Enable Computer Avatar</mat-checkbox>
-  <edit-dialog-guidance-computer-avatar *ngIf="componentContent.isComputerAvatarEnabled"
-      [computerAvatarSettings]="componentContent.computerAvatarSettings">
+  <edit-component-max-submit
+    [(maxSubmitCount)]="componentContent.maxSubmitCount"
+    (maxSubmitCountChange)="componentChanged()"
+  ></edit-component-max-submit>
+  <mat-checkbox
+    color="primary"
+    [(ngModel)]="componentContent.isComputerAvatarEnabled"
+    (ngModelChange)="componentChanged()"
+    i18n
+    >Enable Computer Avatar</mat-checkbox
+  >
+  <edit-dialog-guidance-computer-avatar
+    *ngIf="componentContent.isComputerAvatarEnabled"
+    [computerAvatarSettings]="componentContent.computerAvatarSettings"
+  >
   </edit-dialog-guidance-computer-avatar>
   <edit-feedback-rules
-      [feedbackRules]="componentContent.feedbackRules"
-      [version]="componentContent.version">
+    [feedbackRules]="componentContent.feedbackRules"
+    [version]="componentContent.version"
+  >
   </edit-feedback-rules>
 </div>

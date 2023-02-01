@@ -25,22 +25,6 @@ export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  referenceComponentNodeIdChanged(event: any): void {
-    let numAllowedComponents = 0;
-    let allowedComponent = null;
-    for (const component of this.projectService.getComponents(event.nodeId)) {
-      if (this.allowedReferenceComponentTypes.includes(component.type)) {
-        numAllowedComponents += 1;
-        allowedComponent = component;
-      }
-    }
-    if (numAllowedComponents === 1) {
-      this.referenceComponent.componentId = allowedComponent.id;
-    } else {
-      this.referenceComponent.componentId = null;
-    }
-  }
-
   protected updatePeerGroupingLogic(): void {
     if (this.logicTypesWithModes.includes(this.logicType)) {
       this.peerGrouping.logic = this.generateLogicString(

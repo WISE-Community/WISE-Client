@@ -1,19 +1,23 @@
 <h2 mat-dialog-title fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-  <div *ngIf="newNodeIcon.type === 'font'"
-      style="background-color: {{ newNodeIcon.color }}"
-      class="avatar preview-icon"
-      aria-label="Selected icon"
-      i18n-aria-label
-      [ngClass]="{ 'avatar--square': node.isGroup() }">
+  <div
+    *ngIf="newNodeIcon.type === 'font'"
+    style="background-color: {{ newNodeIcon.color }}"
+    class="avatar preview-icon"
+    aria-label="Selected icon"
+    i18n-aria-label
+    [ngClass]="{ 'avatar--square': node.isGroup() }"
+  >
     <mat-icon class="mat-24 material-icons">{{ newNodeIcon.fontName }}</mat-icon>
   </div>
-  <img *ngIf="newNodeIcon.type === 'img'"
-      class="mat-24 avatar"
-      [ngClass]="{ 'avatar--square': node.isGroup() }"
-      [src]="newNodeIcon.imgSrc"
-      alt="newNodeIcon.imgAlt"
-      aria-label="Selected icon"
-      i18n-aria-label />
+  <img
+    *ngIf="newNodeIcon.type === 'img'"
+    class="mat-24 avatar"
+    [ngClass]="{ 'avatar--square': node.isGroup() }"
+    [src]="newNodeIcon.imgSrc"
+    alt="newNodeIcon.imgAlt"
+    aria-label="Selected icon"
+    i18n-aria-label
+  />
   <span i18n>Choose an Icon</span>
 </h2>
 <mat-dialog-content class="dialog-content-scroll">
@@ -21,15 +25,17 @@
     <div>
       <h3 i18n>Icon:</h3>
       <mat-chip-list aria-label="Select an icon" i18n-aria-label>
-        <mat-chip *ngFor="let fontName of fontNames"
-            #chip="matChip"
-            class="icon-choice"
-            color="null"
-            [value]="fontName"
-            [ariaLabel]="fontName"
-            [selected]="newNodeIcon.type === 'font' && fontName === newNodeIcon.fontName"
-            (selectionChange)="chooseFontName($event)"
-            (click)="chip.select()">
+        <mat-chip
+          *ngFor="let fontName of fontNames"
+          #chip="matChip"
+          class="icon-choice"
+          color="null"
+          [value]="fontName"
+          [ariaLabel]="fontName"
+          [selected]="newNodeIcon.type === 'font' && fontName === newNodeIcon.fontName"
+          (selectionChange)="chooseFontName($event)"
+          (click)="chip.select()"
+        >
           <mat-icon>{{ fontName }}</mat-icon>
         </mat-chip>
       </mat-chip-list>
@@ -37,41 +43,47 @@
     <div fxFlex.gt-sm="18">
       <h3 i18n>Color:</h3>
       <mat-chip-list aria-label="Select a color" i18n-aria-label>
-        <mat-chip *ngFor="let color of colors"
-            class="color-choice icon-choice"
-            #chip="matChip"
-            [value]="color"
-            [ariaLabel]="color"
-            [selected]="newNodeIcon.type === 'font' && color === newNodeIcon.color"
-            (selectionChange)="chooseFontColor($event)"
-            (click)="chip.select()"
-            style="background-color: {{color}}"></mat-chip>
+        <mat-chip
+          *ngFor="let color of colors"
+          class="color-choice icon-choice"
+          #chip="matChip"
+          [value]="color"
+          [ariaLabel]="color"
+          [selected]="newNodeIcon.type === 'font' && color === newNodeIcon.color"
+          (selectionChange)="chooseFontColor($event)"
+          (click)="chip.select()"
+          style="background-color: {{ color }}"
+        ></mat-chip>
       </mat-chip-list>
     </div>
   </div>
   <mat-divider></mat-divider>
   <h3 fxLayout="row" fxLayoutAlign="start center">
     <span i18n>Or use a Knowledge Integration (KI) icon:</span>
-    <a mat-icon-button
-        class="info"
-        matTooltip="More about WISE and Knowledge Integration"
-        i18n-matTooltip
-        matTooltipPosition="after"
-        [routerLink]="['/about']"
-        target="_blank">
+    <a
+      mat-icon-button
+      class="info"
+      matTooltip="More about WISE and Knowledge Integration"
+      i18n-matTooltip
+      matTooltipPosition="after"
+      [routerLink]="['/about']"
+      target="_blank"
+    >
       <mat-icon>info</mat-icon>
     </a>
   </h3>
   <mat-chip-list aria-label="Select a KI icon" i18n-aria-label>
-    <mat-chip *ngFor="let kiIcon of kiIcons"
-        #chip="matChip"
-        class="ki-choice"
-        color="null"
-        [value]="kiIcon"
-        [selected]="newNodeIcon.type === 'img' && kiIcon.imgSrc === newNodeIcon.imgSrc"
-        (selectionChange)="chooseKIIcon($event)"
-        (click)="chip.select()"
-        style="background-color: {{color}}">
+    <mat-chip
+      *ngFor="let kiIcon of kiIcons"
+      #chip="matChip"
+      class="ki-choice"
+      color="null"
+      [value]="kiIcon"
+      [selected]="newNodeIcon.type === 'img' && kiIcon.imgSrc === newNodeIcon.imgSrc"
+      (selectionChange)="chooseKIIcon($event)"
+      (click)="chip.select()"
+      style="background-color: {{ color }}"
+    >
       <mat-chip-avatar>
         <img class="ki-icon" [src]="kiIcon.imgSrc" [alt]="kiIcon.imgAlt" />
       </mat-chip-avatar>

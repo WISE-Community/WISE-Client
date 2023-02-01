@@ -1,51 +1,70 @@
 <edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()">
 </edit-connected-components-add-button>
-<div *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
-    class="connected-components-div">
+<div
+  *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
+  class="connected-components-div"
+>
   <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
     <edit-connected-component-default-selects
-        [connectedComponent]="connectedComponent"
-        [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-        (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"
-        (connectedComponentComponentIdChange)="connectedComponentComponentIdChanged(connectedComponent)"
-        (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)">
+      [connectedComponent]="connectedComponent"
+      [componentId]="componentId"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"
+      (connectedComponentComponentIdChange)="
+        connectedComponentComponentIdChanged(connectedComponent)
+      "
+      (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)"
+    >
     </edit-connected-component-default-selects>
     <div *ngIf="canConnectedComponentTypeImportWorkAsBackground(connectedComponent)">
       <mat-checkbox
-          [(ngModel)]="connectedComponent.importWorkAsBackground"
-          (ngModelChange)="connectedComponentChanged()"
-          [disabled]="true"
-          i18n>
+        [(ngModel)]="connectedComponent.importWorkAsBackground"
+        (ngModelChange)="connectedComponentChanged()"
+        [disabled]="true"
+        i18n
+      >
         Import Work As Background
       </mat-checkbox>
     </div>
-    <ng-container *ngIf="getConnectedComponentType(connectedComponent) === 'OpenResponse' && connectedComponent.importWorkAsBackground">
+    <ng-container
+      *ngIf="
+        getConnectedComponentType(connectedComponent) === 'OpenResponse' &&
+        connectedComponent.importWorkAsBackground
+      "
+    >
       <mat-form-field>
         <mat-label i18n>Characters Per Line</mat-label>
-        <input matInput
-            [(ngModel)]="connectedComponent.charactersPerLine"
-            (ngModelChange)="connectedComponentChanged()"
-            type="number"/>
+        <input
+          matInput
+          [(ngModel)]="connectedComponent.charactersPerLine"
+          (ngModelChange)="connectedComponentChanged()"
+          type="number"
+        />
       </mat-form-field>
       <mat-form-field>
         <mat-label i18n>Space Inbetween Lines</mat-label>
-        <input matInput
-            [(ngModel)]="connectedComponent.spaceInbetweenLines"
-            (ngModelChange)="connectedComponentChanged()"
-            type="number"/>
+        <input
+          matInput
+          [(ngModel)]="connectedComponent.spaceInbetweenLines"
+          (ngModelChange)="connectedComponentChanged()"
+          type="number"
+        />
       </mat-form-field>
       <mat-form-field>
         <mat-label i18n>Font Size</mat-label>
-        <input matInput
-            [(ngModel)]="connectedComponent.fontSize"
-            (ngModelChange)="connectedComponentChanged()"
-            type="number"/>
+        <input
+          matInput
+          [(ngModel)]="connectedComponent.fontSize"
+          (ngModelChange)="connectedComponentChanged()"
+          type="number"
+        />
       </mat-form-field>
     </ng-container>
     <span fxFlex></span>
     <edit-connected-component-delete-button
-        [connectedComponentIndex]="connectedComponentIndex"
-        (connectedComponentChange)="deleteConnectedComponent(index)">
+      [connectedComponentIndex]="connectedComponentIndex"
+      (connectedComponentChange)="deleteConnectedComponent(index)"
+    >
     </edit-connected-component-delete-button>
   </div>
 </div>

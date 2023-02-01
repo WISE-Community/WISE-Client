@@ -27,20 +27,6 @@ export class EditQuestionBankComponent implements OnInit {
     this.saveChanges();
   }
 
-  referenceComponentNodeIdChanged(event: any): void {
-    let numAllowedComponents = 0;
-    let allowedComponent = null;
-    for (const component of this.projectService.getComponents(event.nodeId)) {
-      if (this.allowedReferenceComponentTypes.includes(component.type)) {
-        numAllowedComponents += 1;
-        allowedComponent = component;
-      }
-    }
-    this.componentContent.questionBank.referenceComponent.componentId =
-      numAllowedComponents === 1 ? allowedComponent.id : null;
-    this.saveChanges();
-  }
-
   saveChanges(): void {
     this.projectService.nodeChanged();
   }

@@ -1,22 +1,30 @@
-<div *ngFor="let parameter of parameters"
-    fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+<div
+  *ngFor="let parameter of parameters"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="10px"
+>
   <div *ngIf="parameter.type === 'select'">
     <mat-form-field>
-      <mat-label>{{parameter.name}}</mat-label>
-      <mat-select [(value)]="parameterValues[parameter.key]"
-          (selectionChange)="generateUrlParameters()">
+      <mat-label>{{ parameter.name }}</mat-label>
+      <mat-select
+        [(value)]="parameterValues[parameter.key]"
+        (selectionChange)="generateUrlParameters()"
+      >
         <mat-option *ngFor="let option of parameter.options" [value]="option.value">
-          {{option.name}}
+          {{ option.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <div *ngIf="parameter.type === 'input'">
     <mat-form-field>
-      <mat-label>{{parameter.name}}</mat-label>
-      <input matInput
-          [(ngModel)]="parameterValues[parameter.key]"
-          (ngModelChange)="inputChanged.next($event)"/>
+      <mat-label>{{ parameter.name }}</mat-label>
+      <input
+        matInput
+        [(ngModel)]="parameterValues[parameter.key]"
+        (ngModelChange)="inputChanged.next($event)"
+      />
     </mat-form-field>
   </div>
   <div *ngIf="parameter.description != null && parameter.description !== ''">

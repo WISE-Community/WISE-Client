@@ -1,7 +1,9 @@
 <mat-form-field>
   <mat-label i18n>Step</mat-label>
-  <mat-select [(ngModel)]="connectedComponent.nodeId"
-      (ngModelChange)="connectedComponentNodeIdChanged()">
+  <mat-select
+    [(ngModel)]="connectedComponent.nodeId"
+    (ngModelChange)="connectedComponentNodeIdChanged()"
+  >
     <ng-container *ngFor="let nodeId of nodeIds">
       <mat-option *ngIf="isApplicationNode(nodeId)" [value]="nodeId">
         {{ getNodePositionAndTitle(nodeId) }}
