@@ -55,9 +55,7 @@ function insertWiseLinkElements(html: string, regex: RegExp, type: string): stri
  * @return the node id from the node id parameter in the element
  */
 export function getWiseLinkNodeId(html: string = ''): string {
-  const nodeIdRegEx = new RegExp(/node-id=["'b](.*?)["']/, 'g');
-  const nodeIdRegExResult = nodeIdRegEx.exec(html);
-  return nodeIdRegExResult == null ? '' : nodeIdRegExResult[1];
+  return getWiseLinkId(html, /node-id=["'b](.*?)["']/g);
 }
 
 /**
@@ -67,7 +65,17 @@ export function getWiseLinkNodeId(html: string = ''): string {
  * @return the component id from the component id parameter in the element
  */
 export function getWiseLinkComponentId(html: string = ''): string {
-  const componentIdRegEx = new RegExp(/component-id=["'b](.*?)["']/, 'g');
+  return getWiseLinkId(html, /component-id=["'b](.*?)["']/g);
+}
+
+/**
+ * Get an id from the wiselink element
+ * @param html the html for the element
+ * @param regex the regex to extract the id
+ * @return the id extracted from the regex
+ */
+function getWiseLinkId(html: string, regex: RegExp): string {
+  const componentIdRegEx = new RegExp(regex);
   const componentIdRegExResult = componentIdRegEx.exec(html);
   return componentIdRegExResult == null ? '' : componentIdRegExResult[1];
 }
