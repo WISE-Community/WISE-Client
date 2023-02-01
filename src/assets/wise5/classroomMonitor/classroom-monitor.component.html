@@ -32,7 +32,10 @@
         <milestones *ngIf="$state.$current.name == 'root.cm.milestones'"></milestones>
         <notebook-grading *ngIf="$state.$current.name == 'root.cm.notebooks'"></notebook-grading>
         <student-progress *ngIf="$state.$current.name == 'root.cm.teamLanding'"></student-progress>
-        <student-grading *ngIf="$state.$current.name == 'root.cm.team'"></student-grading>
+        <student-grading
+          *ngIf="$state.$current.name == 'root.cm.team'"
+          [workgroupId]="workgroupId"
+        ></student-grading>
         <manage-students *ngIf="$state.$current.name == 'root.cm.manageStudents'"></manage-students>
         <data-export *ngIf="$state.$current.name == 'root.cm.export'"></data-export>
         <export-step-visits
