@@ -9,7 +9,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MilestoneService } from '../services/milestoneService';
-import { NodeInfoService } from '../services/nodeInfoService';
 import { TeacherPeerGroupService } from '../services/teacherPeerGroupService';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -25,7 +24,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   providers: [
     ClassroomStatusService,
     MilestoneService,
-    NodeInfoService,
     TeacherDataService,
     TeacherPeerGroupService,
     TeacherProjectService,

@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ConfigService } from '../../../../services/configService';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
 
 @Component({
   selector: 'milestone-details',
@@ -24,7 +25,7 @@ export class MilestoneDetailsComponent implements OnInit {
   constructor(
     private configService: ConfigService,
     private dataService: TeacherDataService,
-    private nodeInfoService: NodeInfoService,
+    private dialog: MatDialog,
     private projectService: TeacherProjectService,
     private sanitizer: DomSanitizer
   ) {}
@@ -114,8 +115,11 @@ export class MilestoneDetailsComponent implements OnInit {
     this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 
-  showMilestoneStepInfo($event: Event): void {
-    this.nodeInfoService.showNodeInfo(this.milestone.nodeId, $event);
+  protected showMilestoneStepInfo(): void {
+    this.dialog.open(ShowNodeInfoDialogComponent, {
+      data: this.milestone.nodeId,
+      width: '100%'
+    });
   }
 
   sortAchievementTimeDescending(workgroup: any[]): any[] {

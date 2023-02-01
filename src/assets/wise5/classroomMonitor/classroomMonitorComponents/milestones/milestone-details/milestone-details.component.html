@@ -28,7 +28,7 @@
     <p *ngIf="milestone.type === 'milestoneReport'">
       <span class="mat-body-2" i18n>Item Location: </span>
       {{ getNodeNumberAndTitleByNodeId(milestone.nodeId) }}
-      (<a (click)="showMilestoneStepInfo($event)" i18n>Step Info</a>)
+      (<a (click)="showMilestoneStepInfo()" i18n>Step Info</a>)
     </p>
   </section>
   <section
@@ -102,7 +102,7 @@
         <span fxFlex></span>
         <span class="mat-body-2">
           <span *ngIf="workgroup.achievementTime !== null" class="success">
-            {{ workgroup.achievementTime | date : 'mediumDate' }}
+            {{ workgroup.achievementTime | date: 'mediumDate' }}
           </span>
           <span *ngIf="workgroup.achievementTime === null" class="warn" i18n>Not Completed</span>
         </span>
