@@ -4,6 +4,7 @@ import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { convertToPNGFile } from '../common/canvas/canvas';
 import { copy } from '../common/object/object';
+import { getWiseLinkComponentId, getWiseLinkNodeId } from '../common/wise-link/wise-link';
 import '../lib/jquery/jquery-global';
 
 @Injectable()
@@ -44,119 +45,6 @@ export class UtilService {
   isAudio(fileName: string): boolean {
     const videoExtensionsRegEx = new RegExp('.*.(mp3|flac|m4a|ogg|wav|webm)');
     return fileName.toLowerCase().match(videoExtensionsRegEx) != null;
-  }
-
-  /**
-   * Replace <a> and <button> elements with <wiselink> elements
-   * @param html the html
-   * @return the modified html with <wiselink> elements
-   */
-  insertWISELinks(html) {
-    html = this.insertWISELinkAnchors(html);
-    html = this.insertWISELinkButtons(html);
-    return html;
-  }
-
-  /**
-   * Replace <a> elements that have the parameter wiselink=true with
-   * <wiselink> elements
-   * @param html the html
-   * @return the modified html with certain <a> elements replaced with
-   * <wiselink> elements
-   */
-  insertWISELinkAnchors(html) {
-    let wiseLinkRegEx = new RegExp(/<a.*?wiselink="true".*?>(.*?)<\/a>/);
-    let wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
-    while (wiseLinkRegExMatchResult != null) {
-      let anchorHTML = wiseLinkRegExMatchResult[0];
-      let anchorText = wiseLinkRegExMatchResult[1];
-      let nodeId = this.getWISELinkNodeId(anchorHTML);
-      if (nodeId == null) {
-        nodeId = '';
-      }
-      let componentIdAttr = '';
-      let componentId = this.getWISELinkComponentId(anchorHTML);
-      if (componentId != null) {
-        componentIdAttr = "component-id='" + componentId + "'";
-      }
-      let wiselinkHtml =
-        "<wiselink type='link' link-text='" +
-        anchorText +
-        "' node-id='" +
-        nodeId +
-        "' " +
-        componentIdAttr +
-        '/>';
-      html = html.replace(wiseLinkRegExMatchResult[0], wiselinkHtml);
-      wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
-    }
-    return html;
-  }
-
-  /**
-   * Replace <button> elements that have the parameter wiselink=true
-   * with <wiselink> elements
-   * @param html the html
-   * @return the modified html with certain <button> elements replaced with
-   * <wiselink> elements
-   */
-  insertWISELinkButtons(html) {
-    const wiseLinkRegEx = new RegExp(/<button.*?wiselink="true".*?>(.*?)<\/button>/);
-    let wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
-    while (wiseLinkRegExMatchResult != null) {
-      const buttonHTML = wiseLinkRegExMatchResult[0];
-      const buttonText = wiseLinkRegExMatchResult[1];
-      let nodeId = this.getWISELinkNodeId(buttonHTML);
-      if (nodeId == null) {
-        nodeId = '';
-      }
-      let componentIdAttr = '';
-      let componentId = this.getWISELinkComponentId(buttonHTML);
-      if (componentId != null) {
-        componentIdAttr = "component-id='" + componentId + "'";
-      }
-      const wiselinkHtml =
-        "<wiselink type='button' link-text='" +
-        buttonText +
-        "' node-id='" +
-        nodeId +
-        "' " +
-        componentIdAttr +
-        '/>';
-      html = html.replace(wiseLinkRegExMatchResult[0], wiselinkHtml);
-      wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
-    }
-    return html;
-  }
-
-  /**
-   * Get the node id from the wiselink element
-   * e.g. for input <wiselink node-id='node5'/>, returns 'node5'
-   * @param html the html for the element
-   * @return the node id from the node id parameter in the element
-   */
-  getWISELinkNodeId(html = '') {
-    let nodeIdRegEx = new RegExp(/node-id=["'b](.*?)["']/, 'g');
-    let nodeIdRegExResult = nodeIdRegEx.exec(html);
-    if (nodeIdRegExResult != null) {
-      return nodeIdRegExResult[1];
-    }
-    return '';
-  }
-
-  /**
-   * Get the component id from the wiselink element
-   * e.g. for input <wiselink node-id='node5' component-id='xyzabc' /> returns 'xyzabc'
-   * @param html the html for the element
-   * @return the component id from the component id parameter in the element
-   */
-  getWISELinkComponentId(html = '') {
-    let componentIdRegEx = new RegExp(/component-id=["'b](.*?)["']/, 'g');
-    let componentIdRegExResult = componentIdRegEx.exec(html);
-    if (componentIdRegExResult != null) {
-      return componentIdRegExResult[1];
-    }
-    return '';
   }
 
   /**
@@ -205,8 +93,8 @@ export class UtilService {
     let wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
     while (wiseLinkRegExMatchResult != null) {
       const wiseLinkHTML = wiseLinkRegExMatchResult[0];
-      const nodeId = this.getWISELinkNodeId(wiseLinkHTML);
-      const componentId = this.getWISELinkComponentId(wiseLinkHTML);
+      const nodeId = getWiseLinkNodeId(wiseLinkHTML);
+      const componentId = getWiseLinkComponentId(wiseLinkHTML);
       const type = this.getWISELinkType(wiseLinkHTML);
       const linkText = this.getWISELinkLinkText(wiseLinkHTML);
       let newElement = '';

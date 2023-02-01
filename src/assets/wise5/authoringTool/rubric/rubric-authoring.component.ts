@@ -1,8 +1,8 @@
 import { ConfigService } from '../../services/configService';
-import { UtilService } from '../../services/utilService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Component } from '@angular/core';
+import { insertWiseLinks } from '../../common/wise-link/wise-link';
 
 @Component({
   templateUrl: 'rubric-authoring.component.html'
@@ -13,8 +13,7 @@ export class RubricAuthoringComponent {
   constructor(
     private upgrade: UpgradeModule,
     private ConfigService: ConfigService,
-    private ProjectService: TeacherProjectService,
-    private UtilService: UtilService
+    private ProjectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
@@ -22,9 +21,7 @@ export class RubricAuthoringComponent {
   }
 
   rubricChanged(): void {
-    const html = this.UtilService.insertWISELinks(
-      this.ConfigService.removeAbsoluteAssetPaths(this.rubric)
-    );
+    const html = insertWiseLinks(this.ConfigService.removeAbsoluteAssetPaths(this.rubric));
     this.ProjectService.setProjectRubric(html);
     this.ProjectService.saveProject();
   }
