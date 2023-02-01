@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { Subscription } from 'rxjs';
 import { copy } from '../../common/object/object';
@@ -10,7 +10,7 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
-  selector: 'app-student-grading',
+  selector: 'student-grading',
   templateUrl: './student-grading.component.html',
   styleUrls: ['./student-grading.component.scss']
 })
@@ -29,7 +29,7 @@ export class StudentGradingComponent implements OnInit {
   sortedNodes: any[];
   subscriptions: Subscription = new Subscription();
   totalScore: number;
-  workgroupId: number;
+  @Input() workgroupId: number;
 
   constructor(
     private annotationService: AnnotationService,
@@ -42,14 +42,23 @@ export class StudentGradingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const stateParams = this.upgrade.$injector.get('$stateParams');
     this.subscribeToProjectSaved();
     this.subscribeToNotificationChanged();
     this.subscribeToAnnotationReceived();
     this.subscribeToStudentWorkReceived();
     this.subscribeToCurrentWorkgroupChanged();
     this.subscribeToCurrentPeriodChanged();
+    this.initialize();
+  }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.workgroupId && !changes.workgroupId.isFirstChange()) {
+      this.initialize();
+    }
+  }
+
+  private initialize(): void {
+    const stateParams = this.upgrade.$injector.get('$stateParams');
     const context = 'ClassroomMonitor',
       nodeId = null,
       componentId = null,
@@ -85,6 +94,8 @@ export class StudentGradingComponent implements OnInit {
     this.setNodesById();
     this.sortedNodes = Object.values(this.nodesById);
     this.sortNodes();
+    this.collapseAll();
+    document.querySelector('.view-content').scrollIntoView();
   }
 
   private subscribeToProjectSaved(): void {
@@ -179,10 +190,11 @@ export class StudentGradingComponent implements OnInit {
    * Build the nodesById object; don't include group nodes
    */
   private setNodesById(): void {
+    this.nodesById = {};
     for (let i = 0; i < this.nodeIds.length; i++) {
       const id = this.nodeIds[i];
       if (this.projectService.isApplicationNode(id)) {
-        let node = this.projectService.getNodeById(id);
+        let node = copy(this.projectService.getNodeById(id));
         this.nodesById[id] = node;
         this.updateNode(id, true);
       }

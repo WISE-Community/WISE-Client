@@ -10,12 +10,14 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MilestoneService } from '../services/milestoneService';
 import { TeacherPeerGroupService } from '../services/teacherPeerGroupService';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     HttpClientTestingModule,
     MatDialogModule,
+    MatSnackBarModule,
     StudentTeacherCommonServicesModule,
     UpgradeModule
   ],
