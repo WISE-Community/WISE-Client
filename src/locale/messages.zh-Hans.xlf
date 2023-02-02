@@ -11054,6 +11054,94 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="translated">编辑项目量规</target>
       </trans-unit>
+      <trans-unit id="8633038537118051284" datatype="html">
+        <source>Classroom Monitor</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <target state="needs-translation">Classroom Monitor</target>
+      </trans-unit>
+      <trans-unit id="1354846446306331186" datatype="html">
+        <source>Milestones</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+        <target state="needs-translation">Milestones</target>
+      </trans-unit>
+      <trans-unit id="755402291781489816" datatype="html">
+        <source>Grade by Step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+        <target state="needs-translation">Grade by Step</target>
+      </trans-unit>
+      <trans-unit id="4221507970327052966" datatype="html">
+        <source>Grade by Team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+        <target state="needs-translation">Grade by Team</target>
+      </trans-unit>
+      <trans-unit id="522592988166207236" datatype="html">
+        <source>Manage Students</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+        <target state="needs-translation">Manage Students</target>
+      </trans-unit>
+      <trans-unit id="6214570507413724176" datatype="html">
+        <source>Student Notebooks</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+        <target state="needs-translation">Student Notebooks</target>
+      </trans-unit>
+      <trans-unit id="5889478446673459195" datatype="html">
+        <source>Data Export</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+        <target state="needs-translation">Data Export</target>
+      </trans-unit>
+      <trans-unit id="2304476742154607725" datatype="html">
+        <source>You have been inactive for a long time. Do you want to stay logged in?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+        <target state="needs-translation">You have been inactive for a long time. Do you want to stay logged in?</target>
+      </trans-unit>
+      <trans-unit id="537022937435161177" datatype="html">
+        <source>Session Timeout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+        <target state="needs-translation">Session Timeout</target>
+      </trans-unit>
+      <trans-unit id="3023661788238273336" datatype="html">
+        <source>Error: Data is not being saved! Check your internet connection.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroom-monitor.component.ts</context>
+          <context context-type="linenumber">215</context>
+        </context-group>
+        <target state="needs-translation">Error: Data is not being saved! Check your internet connection.</target>
+      </trans-unit>
       <trans-unit id="694e14160d51abf2460c07f4d2592dac127e1f2f" datatype="html">
         <source>Auto Comment</source>
         <context-group purpose="location">
@@ -21170,22 +21258,6 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation"> The student assets will appear here once you set up a classroom run.
 </target>
-      </trans-unit>
-      <trans-unit id="2304476742154607725" datatype="html">
-        <source>You have been inactive for a long time. Do you want to stay logged in?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">137</context>
-        </context-group>
-        <target state="needs-translation">You have been inactive for a long time. Do you want to stay logged in?</target>
-      </trans-unit>
-      <trans-unit id="537022937435161177" datatype="html">
-        <source>Session Timeout</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">138</context>
-        </context-group>
-        <target state="needs-translation">Session Timeout</target>
       </trans-unit>
     </body>
   </file>
