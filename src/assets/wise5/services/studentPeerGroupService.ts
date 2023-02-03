@@ -28,16 +28,26 @@ export class StudentPeerGroupService extends PeerGroupService {
     peerGroupingTag: string,
     workgroupId = this.configService.getWorkgroupId()
   ): Observable<PeerGroup> {
-    if (this.configService.isPreview() || this.configService.isSignedInUserATeacher()) {
+    if (
+      this.configService.isPreview() ||
+      this.configService.isAuthoring() ||
+      this.configService.isSignedInUserATeacher()
+    ) {
       return of(this.getPreviewPeerGroup());
     }
     return super.retrievePeerGroup(peerGroupingTag, workgroupId);
   }
 
   private getPreviewPeerGroup(): PeerGroup {
+    let workgroupId = this.configService.getWorkgroupId();
+    let periodId = this.configService.getPeriodId();
+    if (this.configService.isAuthoring()) {
+      workgroupId = 1;
+      periodId = 1;
+    }
     return new PeerGroup(
       StudentPeerGroupService.PREVIEW_PEER_GROUP_ID,
-      [new PeerGroupMember(this.configService.getWorkgroupId(), this.configService.getPeriodId())],
+      [new PeerGroupMember(workgroupId, periodId)],
       null
     );
   }
@@ -51,7 +61,7 @@ export class StudentPeerGroupService extends PeerGroupService {
       return of(
         this.studentDataService.getComponentStatesByNodeIdAndComponentId(nodeId, componentId)
       );
-    } else if (this.configService.isSignedInUserATeacher()) {
+    } else if (this.configService.isAuthoring() || this.configService.isSignedInUserATeacher()) {
       return of([]);
     } else {
       return this.http.get(`/api/peer-group/${peerGroup.id}/${nodeId}/${componentId}/student-work`);
@@ -95,7 +105,7 @@ export class StudentPeerGroupService extends PeerGroupService {
   ): Observable<PeerGroupStudentData[]> {
     if (this.configService.isPreview()) {
       return this.getPreviewPeerGroupStudentData(nodeId, componentId, fieldName);
-    } else if (this.configService.isSignedInUserATeacher()) {
+    } else if (this.configService.isAuthoring() || this.configService.isSignedInUserATeacher()) {
       return of([]);
     } else {
       return this.http.get<PeerGroupStudentData[]>(

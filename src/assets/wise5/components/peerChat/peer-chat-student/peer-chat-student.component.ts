@@ -69,7 +69,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.myWorkgroupId = this.configService.getWorkgroupId();
+    this.myWorkgroupId = this.configService.isAuthoring() ? 1 : this.configService.getWorkgroupId();
     this.requestChatWorkgroups();
     this.registerStudentWorkReceivedListener();
     this.questionBankContent = this.component.getQuestionBankContent();
@@ -146,11 +146,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   }
 
   submitStudentResponse(response: string): void {
-    const peerChatMessage = new PeerChatMessage(
-      this.configService.getWorkgroupId(),
-      response,
-      new Date().getTime()
-    );
+    const peerChatMessage = new PeerChatMessage(this.myWorkgroupId, response, new Date().getTime());
     this.addPeerChatMessage(peerChatMessage);
     this.response = response;
     this.emitComponentSubmitTriggered();
@@ -178,7 +174,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
     componentState.isSubmit = true;
     componentState.runId = this.configService.getRunId();
     componentState.periodId = this.configService.getPeriodId();
-    componentState.workgroupId = this.configService.getWorkgroupId();
+    componentState.workgroupId = this.myWorkgroupId;
     componentState.peerGroupId = this.peerGroup.id;
     const promise = new Promise((resolve, reject) => {
       return this.createComponentStateAdditionalProcessing(
