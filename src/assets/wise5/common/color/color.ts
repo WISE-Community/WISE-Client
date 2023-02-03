@@ -1,4 +1,10 @@
-export function rgbToHex(color: string, opacity?: any): string {
+/**
+ * Convert an rgb color string and opacity to hex string
+ * @param color rgb string (e.g. 'rgb(0,0,0)')
+ * @param opacity number between 0 and 1
+ * @returns 6-digit hex string (e.g. '#000000')
+ */
+export function rgbToHex(color: string, opacity: number = 1): string {
   let hex = '#000000';
   let values = ['0', '0', '0'];
   if (isRGB(color)) {
@@ -8,10 +14,9 @@ export function rgbToHex(color: string, opacity?: any): string {
       .replace(/[\s+]/g, '')
       .split(',');
   }
-  const a = parseFloat(opacity || 1),
-    r = Math.floor(a * parseInt(values[0]) + (1 - a) * 255),
-    g = Math.floor(a * parseInt(values[1]) + (1 - a) * 255),
-    b = Math.floor(a * parseInt(values[2]) + (1 - a) * 255);
+  const r = Math.floor(opacity * parseInt(values[0]) + (1 - opacity) * 255),
+    g = Math.floor(opacity * parseInt(values[1]) + (1 - opacity) * 255),
+    b = Math.floor(opacity * parseInt(values[2]) + (1 - opacity) * 255);
   hex =
     '#' +
     ('0' + r.toString(16)).slice(-2) +
