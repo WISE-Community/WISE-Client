@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { timeout } from 'rxjs/operators';
 import { AnnotationService } from '../../../services/annotationService';
@@ -6,7 +6,7 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
-import { PeerGroupService } from '../../../services/peerGroupService';
+import { StudentPeerGroupService } from '../../../services/studentPeerGroupService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
@@ -42,13 +42,14 @@ export class PeerChatStudentComponent extends ComponentStudent {
 
   constructor(
     protected annotationService: AnnotationService,
+    private changeDetectorRef: ChangeDetectorRef,
     protected componentService: ComponentService,
     protected configService: ConfigService,
     protected dialog: MatDialog,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     private notificationService: NotificationService,
-    private peerGroupService: PeerGroupService,
+    private peerGroupService: StudentPeerGroupService,
     private peerChatService: PeerChatService,
     protected studentAssetService: StudentAssetService,
     protected studentDataService: StudentDataService,
@@ -72,6 +73,10 @@ export class PeerChatStudentComponent extends ComponentStudent {
     this.requestChatWorkgroups();
     this.registerStudentWorkReceivedListener();
     this.questionBankContent = this.component.getQuestionBankContent();
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   private registerStudentWorkReceivedListener(): void {

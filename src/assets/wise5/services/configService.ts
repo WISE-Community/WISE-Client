@@ -614,6 +614,10 @@ export class ConfigService {
     return !this.isRunOwner(workgroupId) && !this.isRunSharedTeacher();
   }
 
+  isSignedInUserATeacher(): boolean {
+    return this.isRunOwner() || this.isRunSharedTeacher();
+  }
+
   isTeacherWorkgroupId(workgroupId: number): boolean {
     return this.isTeacherIdentifyingId('workgroupId', workgroupId);
   }
