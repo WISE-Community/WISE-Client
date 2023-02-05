@@ -392,14 +392,6 @@ export class UtilService {
     }
   }
 
-  isMatchingPeriods(periodId1, periodId2) {
-    return this.isAllPeriods(periodId1) || this.isAllPeriods(periodId2) || periodId1 == periodId2;
-  }
-
-  isAllPeriods(periodId) {
-    return periodId == null || periodId === -1;
-  }
-
   calculateMean(values) {
     return values.reduce((a, b) => a + b) / values.length;
   }
