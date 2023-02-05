@@ -3,13 +3,8 @@
 import * as angular from 'angular';
 import './classroomMonitorComponents/manageStudents/manageStudentsModule';
 import './classroomMonitorComponents/milestones/milestones';
-import './classroomMonitorComponents/nodeGrading/nodeGrading';
 import './classroomMonitorComponents/nodeProgress/nodeProgress';
-import './classroomMonitorComponents/studentGrading/studentGrading';
 import './classroomMonitorComponents/studentProgress/studentProgress';
-import './classroomMonitorComponents/shared/shared';
-import './classroomMonitorComponents/notebook/notebook';
-import '../components/component-grading.module';
 import './dataExport/data-export-module';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { NotebookGradingComponent } from './notebook-grading/notebook-grading.component';
@@ -19,15 +14,10 @@ import { ClassroomMonitorComponent } from './classroom-monitor.component';
 
 export default angular
   .module('classroomMonitor', [
-    'componentGrading',
-    'cmShared',
     'dataExport',
     'manageStudents',
     'milestones',
-    'nodeGrading',
     'nodeProgress',
-    'notebookGrading',
-    'studentGrading',
     'studentProgress'
   ])
   .directive('classroomMonitor', downgradeComponent({ component: ClassroomMonitorComponent }))
