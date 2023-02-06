@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { replaceWiseLinks } from '../../assets/wise5/common/wise-link/wise-link';
 import { NodeService } from '../../assets/wise5/services/nodeService';
 import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 import { UtilService } from '../../assets/wise5/services/utilService';
@@ -59,10 +60,7 @@ export class WiseLinkService {
 
   generateHtmlWithWiseLink(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(
-      this.utilService.replaceDivReference(
-        this.utilService.replaceWISELinks(html),
-        this.wiseLinkCommunicatorId
-      )
+      this.utilService.replaceDivReference(replaceWiseLinks(html), this.wiseLinkCommunicatorId)
     );
   }
 }

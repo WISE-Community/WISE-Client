@@ -1,6 +1,6 @@
 'use strict';
 
-import { insertWiseLinks } from '../../common/wise-link/wise-link';
+import { insertWiseLinks, replaceWiseLinks } from '../../common/wise-link/wise-link';
 import { ConfigService } from '../../services/configService';
 import { SpaceService } from '../../services/spaceService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -70,7 +70,7 @@ class NotebookAuthoringController {
 
   initializeNoteAuthoring(note) {
     const authoringReportNote = {
-      html: this.UtilService.replaceWISELinks(this.ProjectService.replaceAssetPaths(note.content))
+      html: replaceWiseLinks(this.ProjectService.replaceAssetPaths(note.content))
     };
     this.setReportIdToAuthoringNote(note.reportId, authoringReportNote);
   }
