@@ -119,7 +119,7 @@ function replaceWiseLinksHelper(html: string, regex: string): string {
  * @param html the html for the element
  * @return the link type from the type parameter in the element
  */
-function getWiseLinkType(html = '') {
+function getWiseLinkType(html = ''): string {
   let typeRegEx = new RegExp(/type=["'b](.*?)["']/, 'g');
   let typeRegExResult = typeRegEx.exec(html);
   if (typeRegExResult != null) {
@@ -134,7 +134,7 @@ function getWiseLinkType(html = '') {
  * @param html the html for the element
  * @return the link text from the link text parameter in the element
  */
-function getWiseLinkLinkText(html = '') {
+function getWiseLinkLinkText(html = ''): string {
   let linkTextRegEx = new RegExp(/link-text=["'b](.*?)["']/, 'g');
   let linkTextRegExResult = linkTextRegEx.exec(html);
   if (linkTextRegExResult != null) {
