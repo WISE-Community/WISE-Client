@@ -8377,7 +8377,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherDataService.ts</context>
-          <context context-type="linenumber">636</context>
+          <context context-type="linenumber">637</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d9b2ffb3e1ce1ca42a3db04d00ea072777898eb3" datatype="html">
@@ -18213,7 +18213,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Student <x id="PH" equiv-text="id"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/configService.ts</context>
-          <context context-type="linenumber">573</context>
+          <context context-type="linenumber">574</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3178064088723974543" datatype="html">
@@ -18656,21 +18656,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">626</context>
+          <context context-type="linenumber">506</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5275881069346355759" datatype="html">
         <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">631</context>
+          <context context-type="linenumber">511</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2692433425768915750" datatype="html">
         <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">636</context>
+          <context context-type="linenumber">516</context>
         </context-group>
       </trans-unit>
       <trans-unit id="846fecebb7756c6127955bc2c08d2111dce64c3c" datatype="html">

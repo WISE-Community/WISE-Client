@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { UtilService } from './utilService';
+import { isMatchingPeriods } from '../common/period/period';
 
 @Injectable()
 export class ConfigService {
@@ -440,11 +441,11 @@ export class ConfigService {
   getWorkgroupsByPeriod(periodId) {
     const workgroupsInPeriod = [];
     const myUserInfo = this.getMyUserInfo();
-    if (this.isStudent() && this.utilService.isMatchingPeriods(myUserInfo.periodId, periodId)) {
+    if (this.isStudent() && isMatchingPeriods(myUserInfo.periodId, periodId)) {
       workgroupsInPeriod.push(myUserInfo);
     }
     for (const classmateUserInfo of this.getClassmateUserInfos()) {
-      if (this.utilService.isMatchingPeriods(classmateUserInfo.periodId, periodId)) {
+      if (isMatchingPeriods(classmateUserInfo.periodId, periodId)) {
         workgroupsInPeriod.push(classmateUserInfo);
       }
     }

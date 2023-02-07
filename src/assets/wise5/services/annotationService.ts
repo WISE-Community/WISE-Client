@@ -3,10 +3,10 @@
 import { Injectable } from '@angular/core';
 import { ProjectService } from './projectService';
 import { ConfigService } from './configService';
-import { UtilService } from './utilService';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { RandomKeyService } from './randomKeyService';
+import { isMatchingPeriods } from '../common/period/period';
 
 @Injectable()
 export class AnnotationService {
@@ -20,8 +20,7 @@ export class AnnotationService {
   constructor(
     private http: HttpClient,
     private ConfigService: ConfigService,
-    private ProjectService: ProjectService,
-    private UtilService: UtilService
+    private ProjectService: ProjectService
   ) {}
 
   getAnnotations() {
@@ -591,7 +590,7 @@ export class AnnotationService {
       if (
         annotation.nodeId === nodeId &&
         annotation.componentId === componentId &&
-        this.UtilService.isMatchingPeriods(annotation.periodId, periodId) &&
+        isMatchingPeriods(annotation.periodId, periodId) &&
         this.isScoreOrAutoScore(annotation)
       ) {
         return true;
