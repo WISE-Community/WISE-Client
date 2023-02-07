@@ -9246,7 +9246,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherDataService.ts</context>
-          <context context-type="linenumber">636</context>
+          <context context-type="linenumber">637</context>
         </context-group>
         <target state="translated">Todos los períodos</target>
       </trans-unit>
@@ -20355,7 +20355,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Student <x id="PH" equiv-text="id"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/configService.ts</context>
-          <context context-type="linenumber">573</context>
+          <context context-type="linenumber">574</context>
         </context-group>
         <target state="translated">Estudiante <x id="PH" equiv-text="id"/></target>
       </trans-unit>
@@ -20855,7 +20855,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">626</context>
+          <context context-type="linenumber">506</context>
         </context-group>
         <target state="translated">Guardado <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20863,7 +20863,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">631</context>
+          <context context-type="linenumber">511</context>
         </context-group>
         <target state="translated">Auto Guardado <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20871,7 +20871,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">636</context>
+          <context context-type="linenumber">516</context>
         </context-group>
         <target state="translated">Enviado <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
