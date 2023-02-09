@@ -48,6 +48,7 @@ import { PathService } from '../assets/wise5/services/pathService';
 import { TabulatorDataService } from '../assets/wise5/components/table/tabulatorDataService';
 import { StompService } from '../assets/wise5/services/stompService';
 import { ClickToSnipImageService } from '../assets/wise5/services/clickToSnipImageService';
+import { StudentPeerGroupService } from '../assets/wise5/services/studentPeerGroupService';
 
 @NgModule({
   providers: [
@@ -91,6 +92,7 @@ import { ClickToSnipImageService } from '../assets/wise5/services/clickToSnipIma
     StompService,
     StudentAssetService,
     StudentDataService,
+    StudentPeerGroupService,
     StudentStatusService,
     StudentWebSocketService,
     SummaryService,

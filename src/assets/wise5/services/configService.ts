@@ -290,7 +290,10 @@ export class ConfigService {
 
   getTeacherWorkgroupIds(): number[] {
     const teacherWorkgroupIds = [];
-    teacherWorkgroupIds.push(this.getTeacherWorkgroupId());
+    const teacherWorkgroupId = this.getTeacherWorkgroupId();
+    if (teacherWorkgroupId != null) {
+      teacherWorkgroupIds.push(teacherWorkgroupId);
+    }
     teacherWorkgroupIds.push(...this.getSharedTeacherWorkgroupIds());
     return teacherWorkgroupIds;
   }
@@ -333,7 +336,7 @@ export class ConfigService {
         return myClassInfo.sharedTeacherUserInfos;
       }
     }
-    return null;
+    return [];
   }
 
   getClassmateWorkgroupIds(includeSelf = false) {
@@ -615,6 +618,10 @@ export class ConfigService {
     return !this.isRunOwner(workgroupId) && !this.isRunSharedTeacher();
   }
 
+  isSignedInUserATeacher(): boolean {
+    return this.isRunOwner() || this.isRunSharedTeacher();
+  }
+
   isTeacherWorkgroupId(workgroupId: number): boolean {
     return this.isTeacherIdentifyingId('workgroupId', workgroupId);
   }
@@ -625,6 +632,9 @@ export class ConfigService {
 
   isTeacherIdentifyingId(fieldName: string, value: number): boolean {
     const teacherUserInfo = this.getTeacherUserInfo();
+    if (teacherUserInfo == null) {
+      return false;
+    }
     if (teacherUserInfo[fieldName] === value) {
       return true;
     }
