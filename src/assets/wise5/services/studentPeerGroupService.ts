@@ -39,11 +39,11 @@ export class StudentPeerGroupService extends PeerGroupService {
   }
 
   private getPreviewPeerGroup(): PeerGroup {
-    let workgroupId = this.configService.getWorkgroupId();
-    let periodId = this.configService.getPeriodId();
-    if (this.configService.isAuthoring()) {
-      workgroupId = 1;
-      periodId = 1;
+    let workgroupId = 1;
+    let periodId = 1;
+    if (!this.configService.isAuthoring()) {
+      workgroupId = this.configService.getWorkgroupId();
+      periodId = this.configService.getPeriodId();
     }
     return new PeerGroup(
       StudentPeerGroupService.PREVIEW_PEER_GROUP_ID,
