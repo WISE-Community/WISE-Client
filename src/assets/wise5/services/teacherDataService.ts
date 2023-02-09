@@ -11,6 +11,7 @@ import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { Node } from '../common/Node';
 import { compressToEncodedURIComponent } from 'lz-string';
+import { isMatchingPeriods } from '../common/period/period';
 
 @Injectable()
 export class TeacherDataService extends DataService {
@@ -603,7 +604,7 @@ export class TeacherDataService extends DataService {
     const annotationsByNodeId = this.studentData.annotationsByNodeId[nodeId];
     if (annotationsByNodeId != null) {
       return annotationsByNodeId.filter((annotation) => {
-        return this.UtilService.isMatchingPeriods(annotation.periodId, periodId);
+        return isMatchingPeriods(annotation.periodId, periodId);
       });
     } else {
       return [];

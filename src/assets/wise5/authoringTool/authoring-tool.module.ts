@@ -16,6 +16,7 @@ import { ProjectLibraryService } from '../services/projectLibraryService';
 import { AuthoringToolComponent } from '../authoringTool/authoringToolComponent';
 import { MainAuthoringComponent } from '../authoringTool/main/mainAuthoringComponent';
 import { WiseAuthoringTinymceEditorComponent } from '../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
+import { StepToolsComponent } from '../common/stepTools/step-tools.component';
 
 export default angular
   .module('authoringTool', [
@@ -31,6 +32,10 @@ export default angular
     'structureAuthoringModule',
     'ui.router'
   ])
+  .directive(
+    'stepTools',
+    downgradeComponent({ component: StepToolsComponent }) as angular.IDirectiveFactory
+  )
   .directive(
     'wiseAuthoringTinymceEditor',
     downgradeComponent({
