@@ -79,3 +79,66 @@ function getWiseLinkId(html: string, regex: RegExp): string {
   const componentIdRegExResult = componentIdRegEx.exec(html);
   return componentIdRegExResult == null ? '' : componentIdRegExResult[1];
 }
+
+/**
+ * Replace <wiselink> elements with <a> and <button> elements
+ * @param html the html
+ * @return the modified html without <wiselink> elements
+ */
+export function replaceWiseLinks(html: string): string {
+  html = replaceWiseLinksHelper(html, '<wiselink.*?/>');
+  html = replaceWiseLinksHelper(html, '<wiselink.*?>.*?</wiselink>');
+  return html;
+}
+
+function replaceWiseLinksHelper(html: string, regex: string): string {
+  const wiseLinkRegEx = new RegExp(regex);
+  let wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
+  while (wiseLinkRegExMatchResult != null) {
+    const wiseLinkHTML = wiseLinkRegExMatchResult[0];
+    const nodeId = getWiseLinkNodeId(wiseLinkHTML);
+    const componentId = getWiseLinkComponentId(wiseLinkHTML);
+    const type = getWiseLinkType(wiseLinkHTML);
+    const linkText = getWiseLinkLinkText(wiseLinkHTML);
+    let newElement = '';
+    const onclickString = `document.getElementById('replace-with-unique-id').dispatchEvent(new CustomEvent('wiselinkclicked', { detail: { nodeId: '${nodeId}', componentId: '${componentId}' } })); return false;`;
+    if (type === 'button') {
+      newElement = `<button wiselink="true" onclick="${onclickString}">${linkText}</button>`;
+    } else {
+      newElement = `<a wiselink="true" onclick="${onclickString}">${linkText}</a>`;
+    }
+    html = html.replace(wiseLinkHTML, newElement);
+    wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
+  }
+  return html;
+}
+
+/**
+ * Get the link type from the wiselink element
+ * e.g. for input <wiselink type='button'/> return 'button'
+ * @param html the html for the element
+ * @return the link type from the type parameter in the element
+ */
+function getWiseLinkType(html = ''): string {
+  let typeRegEx = new RegExp(/type=["'b](.*?)["']/, 'g');
+  let typeRegExResult = typeRegEx.exec(html);
+  if (typeRegExResult != null) {
+    return typeRegExResult[1];
+  }
+  return null;
+}
+
+/**
+ * Get the link text from the wiselink element
+ * e.g. for input <wiselink link-text='Go to here'/> return 'Go to here'
+ * @param html the html for the element
+ * @return the link text from the link text parameter in the element
+ */
+function getWiseLinkLinkText(html = ''): string {
+  let linkTextRegEx = new RegExp(/link-text=["'b](.*?)["']/, 'g');
+  let linkTextRegExResult = linkTextRegEx.exec(html);
+  if (linkTextRegExResult != null) {
+    return linkTextRegExResult[1];
+  }
+  return null;
+}
