@@ -11,6 +11,7 @@ import { PeerGroupMember } from '../PeerGroupMember';
 import { NodeService } from '../../../services/nodeService';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { QuestionBankRule } from '../peer-chat-question-bank/QuestionBankRule';
+import { forkJoin, Observable } from 'rxjs';
 
 @Component({
   selector: 'peer-chat-show-work',
@@ -56,7 +57,15 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     this.peerGroup = peerGroup;
     this.addWorkgroupIdsFromPeerGroup(this.peerChatWorkgroupIds, peerGroup);
     this.addTeacherWorkgroupIds(this.peerChatWorkgroupIds);
-    this.retrievePeerChatComponentStates();
+    forkJoin([
+      this.retrievePeerChatComponentStates(),
+      this.retrievePeerChatAnnotations()
+    ]).subscribe(([componentStates, annotations]) => {
+      this.setPeerChatMessages(componentStates);
+      this.addWorkgroupIdsFromPeerChatMessages(this.peerChatWorkgroupIds, componentStates);
+      this.setPeerChatWorkgroupInfos(Array.from(this.peerChatWorkgroupIds));
+      this.processIsDeletedAnnotations(annotations);
+    });
   }
 
   private addWorkgroupIdsFromPeerGroup(workgroupIds: Set<number>, peerGroup: PeerGroup): void {
@@ -71,15 +80,36 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
     });
   }
 
-  private retrievePeerChatComponentStates(): void {
-    this.peerChatService
-      .retrievePeerChatComponentStates(this.nodeId, this.componentId, this.workgroupId)
-      .pipe(timeout(this.requestTimeout))
-      .subscribe((componentStates: any[]) => {
-        this.setPeerChatMessages(componentStates);
-        this.addWorkgroupIdsFromPeerChatMessages(this.peerChatWorkgroupIds, componentStates);
-        this.setPeerChatWorkgroupInfos(Array.from(this.peerChatWorkgroupIds));
-      });
+  private retrievePeerChatComponentStates(): Observable<any> {
+    return this.peerChatService.retrievePeerChatComponentStates(
+      this.nodeId,
+      this.componentId,
+      this.workgroupId
+    );
+  }
+
+  private retrievePeerChatAnnotations(): Observable<any> {
+    return this.peerChatService.retrievePeerChatAnnotations(
+      this.nodeId,
+      this.componentId,
+      this.workgroupId
+    );
+  }
+
+  private processIsDeletedAnnotations(annotations: any[]): void {
+    const componentStateIdToIsDeleted = {};
+    for (const annotation of annotations) {
+      if (annotation.type === 'inappropriateFlag') {
+        if (annotation.data.action === 'Delete') {
+          componentStateIdToIsDeleted[annotation.studentWorkId] = true;
+        } else if (annotation.data.action === 'Undo Delete') {
+          componentStateIdToIsDeleted[annotation.studentWorkId] = false;
+        }
+      }
+    }
+    for (const peerChatMessage of this.peerChatMessages) {
+      peerChatMessage.isDeleted = componentStateIdToIsDeleted[peerChatMessage.componentStateId];
+    }
   }
 
   private setPeerChatMessages(componentStates: any[]): void {

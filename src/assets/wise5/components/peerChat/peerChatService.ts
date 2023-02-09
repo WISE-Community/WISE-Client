@@ -38,11 +38,25 @@ export class PeerChatService extends ComponentService {
     );
   }
 
+  retrievePeerChatAnnotations(
+    nodeId: string,
+    componentId: string,
+    workgroupId: number
+  ): Observable<any> {
+    const runId = this.configService.getRunId();
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(
+      `/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}/annotations`,
+      { headers: headers }
+    );
+  }
+
   convertComponentStateToPeerChatMessage(componentState: any): PeerChatMessage {
     return new PeerChatMessage(
       componentState.workgroupId,
       componentState.studentData.response,
-      componentState.serverSaveTime
+      componentState.serverSaveTime,
+      componentState.id
     );
   }
 
