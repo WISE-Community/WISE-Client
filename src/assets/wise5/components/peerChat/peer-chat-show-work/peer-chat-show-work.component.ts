@@ -64,7 +64,7 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
       this.setPeerChatMessages(componentStates);
       this.addWorkgroupIdsFromPeerChatMessages(this.peerChatWorkgroupIds, componentStates);
       this.setPeerChatWorkgroupInfos(Array.from(this.peerChatWorkgroupIds));
-      this.processIsDeletedAnnotations(annotations);
+      this.peerChatService.processIsDeletedAnnotations(annotations, this.peerChatMessages);
     });
   }
 
@@ -94,22 +94,6 @@ export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
       this.componentId,
       this.workgroupId
     );
-  }
-
-  private processIsDeletedAnnotations(annotations: any[]): void {
-    const componentStateIdToIsDeleted = {};
-    for (const annotation of annotations) {
-      if (annotation.type === 'inappropriateFlag') {
-        if (annotation.data.action === 'Delete') {
-          componentStateIdToIsDeleted[annotation.studentWorkId] = true;
-        } else if (annotation.data.action === 'Undo Delete') {
-          componentStateIdToIsDeleted[annotation.studentWorkId] = false;
-        }
-      }
-    }
-    for (const peerChatMessage of this.peerChatMessages) {
-      peerChatMessage.isDeleted = componentStateIdToIsDeleted[peerChatMessage.componentStateId];
-    }
   }
 
   private setPeerChatMessages(componentStates: any[]): void {

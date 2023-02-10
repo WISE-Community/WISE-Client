@@ -117,7 +117,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
               this.getPeerChatAnnotations(peerGroup)
             ]).subscribe(([componentStates, annotations]) => {
               this.setPeerChatMessages(componentStates);
-              this.processIsDeletedAnnotations(annotations);
+              this.peerChatService.processIsDeletedAnnotations(annotations, this.peerChatMessages);
             });
           }
         },
@@ -142,22 +142,6 @@ export class PeerChatStudentComponent extends ComponentStudent {
   private setPeerChatMessages(componentStates: any = []): void {
     this.peerChatMessages = [];
     this.peerChatService.setPeerChatMessages(this.peerChatMessages, componentStates);
-  }
-
-  private processIsDeletedAnnotations(annotations: any[]): void {
-    const componentStateIdToIsDeleted = {};
-    for (const annotation of annotations) {
-      if (annotation.type === 'inappropriateFlag') {
-        if (annotation.data.action === 'Delete') {
-          componentStateIdToIsDeleted[annotation.studentWorkId] = true;
-        } else if (annotation.data.action === 'Undo Delete') {
-          componentStateIdToIsDeleted[annotation.studentWorkId] = false;
-        }
-      }
-    }
-    for (const peerChatMessage of this.peerChatMessages) {
-      peerChatMessage.isDeleted = componentStateIdToIsDeleted[peerChatMessage.componentStateId];
-    }
   }
 
   private getPeerChatAnnotations(peerGroup: PeerGroup): Observable<any> {

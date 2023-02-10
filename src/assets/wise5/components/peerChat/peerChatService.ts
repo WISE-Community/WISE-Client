@@ -81,4 +81,20 @@ export class PeerChatService extends ComponentService {
   isCompleted(component: any, componentStates: any[], nodeEvents: any[], node: any) {
     return componentStates.length > 0;
   }
+
+  processIsDeletedAnnotations(annotations: any[], peerChatMessages: PeerChatMessage[]): void {
+    const componentStateIdToIsDeleted = {};
+    for (const annotation of annotations) {
+      if (annotation.type === 'inappropriateFlag') {
+        if (annotation.data.action === 'Delete') {
+          componentStateIdToIsDeleted[annotation.studentWorkId] = true;
+        } else if (annotation.data.action === 'Undo Delete') {
+          componentStateIdToIsDeleted[annotation.studentWorkId] = false;
+        }
+      }
+    }
+    for (const peerChatMessage of peerChatMessages) {
+      peerChatMessage.isDeleted = componentStateIdToIsDeleted[peerChatMessage.componentStateId];
+    }
+  }
 }
