@@ -14,6 +14,7 @@ import { ComponentContent } from '../common/ComponentContent';
 import { MultipleChoiceContent } from '../components/multipleChoice/MultipleChoiceContent';
 import { TransitionLogic } from '../common/TransitionLogic';
 import { Transition } from '../common/Transition';
+import { ReferenceComponent } from '../../../app/domain/referenceComponent';
 
 @Injectable()
 export class ProjectService {
@@ -1179,6 +1180,12 @@ export class ProjectService {
     return allPaths;
   }
 
+  getStepNodeIds(): string[] {
+    return this.getFlattenedProjectAsNodeIds().filter((nodeId: string) => {
+      return this.isApplicationNode(nodeId);
+    });
+  }
+
   /**
    * Get the component by node id and component id
    * @param nodeId the node id
@@ -2060,5 +2067,31 @@ export class ProjectService {
 
   getProjectRootNode(): any {
     return this.rootNode;
+  }
+
+  /**
+   * Get the reference component from a field in the component content
+   * @param nodeId the node id
+   * @param componentId the component id
+   * @param fieldName the name of the object that contains a referenceComponent object
+   * In this example the fieldName would be 'dynamicPrompt'
+   * {
+   *   id: 'component2',
+   *   dynamicPrompt: {
+   *     referenceComponent: {
+   *       nodeId: 'node1',
+   *       componentId: 'component1'
+   *     }
+   *   }
+   * }
+   * @returns the referenceComponent object from a component
+   */
+  getReferenceComponent(
+    nodeId: string,
+    componentId: string,
+    fieldName: string
+  ): ReferenceComponent {
+    const component = this.getComponent(nodeId, componentId);
+    return component[fieldName]?.referenceComponent;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PeerGroupService } from '../../../services/peerGroupService';
+import { StudentPeerGroupService } from '../../../services/studentPeerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { OpenResponseContent } from '../../openResponse/OpenResponseContent';
 import { QuestionBank } from './QuestionBank';
@@ -26,7 +26,10 @@ export class PeerChatQuestionBankComponent implements OnInit {
   @Output() displayedQuestionBankRulesChange = new EventEmitter<QuestionBankRule[]>();
   questions: string[];
 
-  constructor(private peerGroupService: PeerGroupService, private projectService: ProjectService) {}
+  constructor(
+    private peerGroupService: StudentPeerGroupService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit(): void {
     if (this.displayedQuestionBankRules == null) {

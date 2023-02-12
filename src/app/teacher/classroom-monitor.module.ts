@@ -66,6 +66,10 @@ import { MilestoneReportGraphComponent } from './milestone/milestone-report-grap
 import { MilestoneDetailsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component';
 import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/student-progress/student-progress.component';
 import { PasswordModule } from '../password/password.module';
+import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/classroom-monitor.component';
+import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
+import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
+import { ShowNodeInfoDialogComponent } from '../classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
 import { MilestoneDetailsDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details-dialog/milestone-details-dialog.component';
 
 @NgModule({
@@ -75,6 +79,7 @@ import { MilestoneDetailsDialogComponent } from '../../assets/wise5/classroomMon
     AlertStatusCornerComponent,
     ChangeStudentPasswordDialogComponent,
     ChangeTeamPeriodDialogComponent,
+    ClassroomMonitorComponent,
     ComponentNewWorkBadgeComponent,
     ComponentSelectComponent,
     DataExportComponent,
@@ -83,6 +88,7 @@ import { MilestoneDetailsDialogComponent } from '../../assets/wise5/classroomMon
     EditComponentScoreComponent,
     ExportStepVisitsComponent,
     GradingEditComponentMaxScoreComponent,
+    MainMenuComponent,
     ManagePeriodComponent,
     ManageShowStudentInfoComponent,
     ManageStudentsComponent,
@@ -108,7 +114,9 @@ import { MilestoneDetailsDialogComponent } from '../../assets/wise5/classroomMon
     PauseScreensMenuComponent,
     ProjectProgressComponent,
     RemoveUserConfirmDialogComponent,
+    ShowNodeInfoDialogComponent,
     ShowStudentInfoComponent,
+    SideMenuComponent,
     StatusIconComponent,
     StepInfoComponent,
     StepItemComponent,

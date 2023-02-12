@@ -18,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GraphContent } from '../GraphContent';
 import { RandomKeyService } from '../../../services/randomKeyService';
 import { copy } from '../../../common/object/object';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -2508,9 +2509,8 @@ export class GraphStudent extends ComponentStudent {
     const hiddenCanvas: any = document.getElementById(this.hiddenCanvasId);
     canvg(hiddenCanvas, svgString, {
       renderCallback: () => {
-        const base64Image = hiddenCanvas.toDataURL('image/png');
-        const imageObject = this.UtilService.getImageObjectFromBase64String(base64Image);
-        this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), imageObject);
+        const pngFile = convertToPNGFile(hiddenCanvas);
+        this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
       }
     });
   }

@@ -6,13 +6,16 @@ import { ProjectService } from '../../../services/projectService';
 import { QuestionBank } from './QuestionBank';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { QuestionBankRule } from './QuestionBankRule';
-import { PeerGroupService } from '../../../services/peerGroupService';
+import { StudentPeerGroupService } from '../../../services/studentPeerGroupService';
 import { PeerGroup } from '../PeerGroup';
 import { of } from 'rxjs';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 let component: PeerChatQuestionBankComponent;
 let fixture: ComponentFixture<PeerChatQuestionBankComponent>;
-let peerGroupService: PeerGroupService;
+let peerGroupService: StudentPeerGroupService;
 let projectService: ProjectService;
 const defaultQuestionBankRule = {
   id: 'default',
@@ -22,11 +25,17 @@ const defaultQuestionBankRule = {
 describe('PeerChatQuestionBankComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, StudentTeacherCommonServicesModule],
+      imports: [
+        HttpClientTestingModule,
+        MatCardModule,
+        MatDialogModule,
+        MatIconModule,
+        StudentTeacherCommonServicesModule
+      ],
       declarations: [PeerChatQuestionBankComponent]
     }).compileComponents();
     fixture = TestBed.createComponent(PeerChatQuestionBankComponent);
-    peerGroupService = TestBed.inject(PeerGroupService);
+    peerGroupService = TestBed.inject(StudentPeerGroupService);
     projectService = TestBed.inject(ProjectService);
     component = fixture.componentInstance;
     component.content = {

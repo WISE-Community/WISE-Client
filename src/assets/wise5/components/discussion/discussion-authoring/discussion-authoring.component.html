@@ -1,20 +1,24 @@
-<edit-component-prompt [prompt]="componentContent.prompt"
-   (promptChangedEvent)="promptChanged($event)"></edit-component-prompt>
+<edit-component-prompt
+  [prompt]="componentContent.prompt"
+  (promptChangedEvent)="promptChanged($event)"
+></edit-component-prompt>
 <div class="checkbox-container">
   <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.isStudentAttachmentEnabled"
-      (ngModelChange)="componentChanged()"
-      i18n>
+    color="primary"
+    [(ngModel)]="componentContent.isStudentAttachmentEnabled"
+    (ngModelChange)="componentChanged()"
+    i18n
+  >
     Students can upload and use images in their posts
   </mat-checkbox>
 </div>
 <div class="checkbox-container">
   <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.gateClassmateResponses"
-      (ngModelChange)="componentChanged()"
-      i18n>
+    color="primary"
+    [(ngModel)]="componentContent.gateClassmateResponses"
+    (ngModelChange)="componentChanged()"
+    i18n
+  >
     Students must create a post before viewing classmates' posts
   </mat-checkbox>
 </div>

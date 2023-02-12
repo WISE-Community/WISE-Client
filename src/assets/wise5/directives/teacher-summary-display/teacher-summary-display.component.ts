@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
-import { UtilService } from '../../services/utilService';
 import { SummaryService } from '../../components/summary/summaryService';
 import { SummaryDisplay } from '../summary-display/summary-display.component';
 import { TeacherDataService } from '../../services/teacherDataService';
@@ -18,10 +17,9 @@ export class TeacherSummaryDisplay extends SummaryDisplay {
     protected configService: ConfigService,
     protected projectService: ProjectService,
     protected summaryService: SummaryService,
-    private teacherDataService: TeacherDataService,
-    protected utilService: UtilService
+    private teacherDataService: TeacherDataService
   ) {
-    super(annotationService, configService, projectService, summaryService, utilService);
+    super(annotationService, configService, projectService, summaryService);
   }
 
   initializeDataService() {

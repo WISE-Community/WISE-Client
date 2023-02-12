@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
-import { UtilService } from '../../services/utilService';
 import { SummaryService } from '../../components/summary/summaryService';
 import { SummaryDisplay } from '../summary-display/summary-display.component';
 import { StudentDataService } from '../../services/studentDataService';
@@ -18,10 +17,9 @@ export class StudentSummaryDisplay extends SummaryDisplay {
     protected configService: ConfigService,
     protected projectService: ProjectService,
     private studentDataService: StudentDataService,
-    protected summaryService: SummaryService,
-    protected utilService: UtilService
+    protected summaryService: SummaryService
   ) {
-    super(annotationService, configService, projectService, summaryService, utilService);
+    super(annotationService, configService, projectService, summaryService);
   }
 
   ngOnInit() {

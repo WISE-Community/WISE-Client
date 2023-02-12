@@ -11,6 +11,7 @@ import { ComponentService } from '../../componentService';
 import { LabelService } from '../labelService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { MatDialog } from '@angular/material/dialog';
+import { convertToPNGFile } from '../../../common/canvas/canvas';
 
 @Component({
   selector: 'label-student',
@@ -726,15 +727,10 @@ export class LabelStudent extends ComponentStudent {
     canvas.remove(label.text);
   }
 
-  getStudentDataImageObject(): any {
-    const base64String = this.canvas.toDataURL('image/png');
-    return this.UtilService.getImageObjectFromBase64String(base64String);
-  }
-
   snipImage(): void {
     this.NotebookService.addNote(
       this.StudentDataService.getCurrentNodeId(),
-      this.getStudentDataImageObject()
+      convertToPNGFile(this.canvas)
     );
   }
 

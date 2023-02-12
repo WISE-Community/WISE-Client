@@ -5,7 +5,6 @@ import { AnnotationService } from '../../../../services/annotationService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { ConfigService } from '../../../../services/configService';
 import { MilestoneService } from '../../../../services/milestoneService';
-import { NodeInfoService } from '../../../../services/nodeInfoService';
 import { NotificationService } from '../../../../services/notificationService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupService';
@@ -34,7 +33,6 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
     protected configService: ConfigService,
     protected dialog: MatDialog,
     protected milestoneService: MilestoneService,
-    protected nodeInfoService: NodeInfoService,
     protected notificationService: NotificationService,
     protected peerGroupService: TeacherPeerGroupService,
     protected projectService: TeacherProjectService,
@@ -46,7 +44,6 @@ export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
       configService,
       dialog,
       milestoneService,
-      nodeInfoService,
       notificationService,
       peerGroupService,
       projectService,

@@ -1,31 +1,37 @@
 <div fxLayout="column" class="account-menu--fixed-height">
-  <mat-toolbar mat-theme="light"
-      class="account-menu__info md-subhead md-whiteframe-1dp"
-      fxLayout="row"
-      fxLayoutAlign="start center">
+  <mat-toolbar
+    mat-theme="light"
+    class="account-menu__info md-subhead md-whiteframe-1dp"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+  >
     <div class="accent account-menu__info__title" fxLayout="row" fxLayoutAlign="start center">
       <mat-icon class="accent"> pause_circle_filled </mat-icon>&nbsp;
       <span i18n>Pause Student Screens</span>
     </div>
   </mat-toolbar>
   <div fxFlex>
-    <mat-slide-toggle class="mat-primary account-menu__control"
-        aria-label="Pause student screens (Period: All Periods)"
-        i18n-aria-label
-        [(ngModel)]="allPeriodsPaused"
-        (ngModelChange)="toggleAllPeriods()"
-        i18n>
+    <mat-slide-toggle
+      class="mat-primary account-menu__control"
+      aria-label="Pause student screens (Period: All Periods)"
+      i18n-aria-label
+      [(ngModel)]="allPeriodsPaused"
+      (ngModelChange)="toggleAllPeriods()"
+      i18n
+    >
       All Periods
     </mat-slide-toggle>
     <mat-divider></mat-divider>
-    <mat-slide-toggle *ngFor="let period of periods"
-        class="mat-primary account-menu__control"
-        aria-label="Pause student screens (Period: {{period.periodName}})"
-        i18n-aria-label
-        [(ngModel)]="period.paused"
-        (ngModelChange)="togglePeriod(period)"
-        i18n>
-      Period: {{period.periodName}}
+    <mat-slide-toggle
+      *ngFor="let period of periods"
+      class="mat-primary account-menu__control"
+      aria-label="Pause student screens (Period: {{ period.periodName }})"
+      i18n-aria-label
+      [(ngModel)]="period.paused"
+      (ngModelChange)="togglePeriod(period)"
+      i18n
+    >
+      Period: {{ period.periodName }}
     </mat-slide-toggle>
   </div>
 </div>

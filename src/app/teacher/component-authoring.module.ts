@@ -32,9 +32,7 @@ import { EditComponentTagsComponent } from '../authoring-tool/edit-component-tag
 import { EditComponentWidthComponent } from '../authoring-tool/edit-component-width/edit-component-width.component';
 import { EditConnectedComponentDefaultSelectsComponent } from '../authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
 import { EditConnectedComponentsAddButtonComponent } from '../authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
-import { EditConnectedComponentComponentSelectComponent } from '../authoring-tool/edit-connected-component-component-select/edit-connected-component-component-select.component';
 import { EditConnectedComponentDeleteButtonComponent } from '../authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
-import { EditConnectedComponentNodeSelectComponent } from '../authoring-tool/edit-connected-component-node-select/edit-connected-component-node-select.component';
 import { EditConnectedComponentTypeSelectComponent } from '../authoring-tool/edit-connected-component-type-select/edit-connected-component-type-select.component';
 import { EditConnectedComponentsComponent } from '../authoring-tool/edit-connected-components/edit-connected-components.component';
 import { EditConceptMapConnectedComponentsComponent } from '../../assets/wise5/components/conceptMap/edit-concept-map-connected-components/edit-concept-map-connected-components.component';
@@ -78,6 +76,7 @@ import { EditPeerGroupingDialogComponent } from '../../assets/wise5/authoringToo
 import { CreateNewPeerGroupingDialogComponent } from '../../assets/wise5/authoringTool/peer-grouping/create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
 import { EditQuestionBankComponent } from '../authoring-tool/edit-question-bank/edit-question-bank.component';
 import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component';
+import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-and-component/select-step-and-component.component';
 
 @NgModule({
   declarations: [
@@ -111,9 +110,7 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
     EditConnectedComponentsAddButtonComponent,
     EditConnectedComponentsComponent,
     EditConnectedComponentsWithBackgroundComponent,
-    EditConnectedComponentComponentSelectComponent,
     EditConnectedComponentDeleteButtonComponent,
-    EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
     EditDialogGuidanceAdvancedComponent,
     EditDialogGuidanceComputerAvatarComponent,
@@ -155,6 +152,7 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
     PeerChatAuthoringComponent,
     ShowGroupWorkAuthoringComponent,
     ShowMyWorkAuthoringComponent,
+    SelectStepAndComponentComponent,
     SummaryAuthoring,
     TableAuthoring,
     WiseAuthoringTinymceEditorComponent
@@ -188,9 +186,7 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
     EditConnectedComponentsAddButtonComponent,
     EditConnectedComponentsComponent,
     EditConnectedComponentsWithBackgroundComponent,
-    EditConnectedComponentComponentSelectComponent,
     EditConnectedComponentDeleteButtonComponent,
-    EditConnectedComponentNodeSelectComponent,
     EditConnectedComponentTypeSelectComponent,
     EditDialogGuidanceAdvancedComponent,
     EditDiscussionAdvancedComponent,
@@ -224,6 +220,7 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
     PeerChatAuthoringComponent,
     ShowGroupWorkAuthoringComponent,
     ShowMyWorkAuthoringComponent,
+    SelectStepAndComponentComponent,
     SummaryAuthoring,
     TableAuthoring,
     WiseAuthoringTinymceEditorComponent

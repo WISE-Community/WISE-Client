@@ -1,20 +1,22 @@
 <div class="summary">
   <div *ngIf="componentContent.prompt" [innerHTML]="prompt" class="prompt"></div>
-  <div *ngIf="componentContent.showPromptFromOtherComponent"
-      [innerHTML]="otherPrompt"
-      class="prompt">
-  </div>
+  <div
+    *ngIf="componentContent.showPromptFromOtherComponent"
+    [innerHTML]="otherPrompt"
+    class="prompt"
+  ></div>
   <student-summary-display
-      [nodeId]="summaryNodeId"
-      [componentId]="summaryComponentId"
-      [studentDataType]="studentDataType"
-      [source]="source"
-      [periodId]="periodId"
-      [chartType]="chartType"
-      [highlightCorrectAnswer]="highlightCorrectAnswer"
-      [hasWarning]="!isShowDisplay"
-      [warningMessage]="warningMessage"
-      [customLabelColors]="customLabelColors"
-      [doRender]="isShowDisplay">
+    [nodeId]="summaryNodeId"
+    [componentId]="summaryComponentId"
+    [studentDataType]="studentDataType"
+    [source]="source"
+    [periodId]="periodId"
+    [chartType]="chartType"
+    [highlightCorrectAnswer]="highlightCorrectAnswer"
+    [hasWarning]="!isShowDisplay"
+    [warningMessage]="warningMessage"
+    [customLabelColors]="customLabelColors"
+    [doRender]="isShowDisplay"
+  >
   </student-summary-display>
 </div>

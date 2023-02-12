@@ -2,7 +2,9 @@
 
 import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { convertToPNGFile } from '../common/canvas/canvas';
 import { copy } from '../common/object/object';
+import { getWiseLinkComponentId, getWiseLinkNodeId } from '../common/wise-link/wise-link';
 import '../lib/jquery/jquery-global';
 
 @Injectable()
@@ -16,34 +18,6 @@ export class UtilService {
     return str;
   }
 
-  getImageObjectFromBase64String(img_b64) {
-    const blob = this.dataURItoBlob(img_b64);
-    const now = new Date().getTime();
-    const filename = encodeURIComponent('picture_' + now + '.png');
-    const pngFile = new File([blob], filename, {
-      lastModified: now, // optional - default = now
-      type: 'image/png' // optional - default = ''
-    });
-    return pngFile;
-  }
-
-  /**
-   * Convert base64/URLEncoded data component to raw binary data held in a string
-   * @param dataURI base64/URLEncoded data
-   * @returns a Blob object
-   */
-  dataURItoBlob(dataURI) {
-    let byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0) byteString = atob(dataURI.split(',')[1]);
-    else byteString = unescape(dataURI.split(',')[1]);
-    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    const ia = new Uint8Array(byteString.length);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ia], { type: mimeString });
-  }
-
   /**
    * Get an image object from an image element
    * @param imageElement an image element (<img src='abc.jpg'/>)
@@ -55,8 +29,7 @@ export class UtilService {
     canvas.height = imageElement.naturalHeight;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(imageElement, 0, 0);
-    const dataURL = canvas.toDataURL('image/png');
-    return this.getImageObjectFromBase64String(dataURL);
+    return convertToPNGFile(canvas);
   }
 
   isImage(fileName: string): boolean {
@@ -72,182 +45,6 @@ export class UtilService {
   isAudio(fileName: string): boolean {
     const videoExtensionsRegEx = new RegExp('.*.(mp3|flac|m4a|ogg|wav|webm)');
     return fileName.toLowerCase().match(videoExtensionsRegEx) != null;
-  }
-
-  /**
-   * Replace <a> and <button> elements with <wiselink> elements
-   * @param html the html
-   * @return the modified html with <wiselink> elements
-   */
-  insertWISELinks(html) {
-    html = this.insertWISELinkAnchors(html);
-    html = this.insertWISELinkButtons(html);
-    return html;
-  }
-
-  /**
-   * Replace <a> elements that have the parameter wiselink=true with
-   * <wiselink> elements
-   * @param html the html
-   * @return the modified html with certain <a> elements replaced with
-   * <wiselink> elements
-   */
-  insertWISELinkAnchors(html) {
-    let wiseLinkRegEx = new RegExp(/<a.*?wiselink="true".*?>(.*?)<\/a>/);
-    let wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
-    while (wiseLinkRegExMatchResult != null) {
-      let anchorHTML = wiseLinkRegExMatchResult[0];
-      let anchorText = wiseLinkRegExMatchResult[1];
-      let nodeId = this.getWISELinkNodeId(anchorHTML);
-      if (nodeId == null) {
-        nodeId = '';
-      }
-      let componentIdAttr = '';
-      let componentId = this.getWISELinkComponentId(anchorHTML);
-      if (componentId != null) {
-        componentIdAttr = "component-id='" + componentId + "'";
-      }
-      let wiselinkHtml =
-        "<wiselink type='link' link-text='" +
-        anchorText +
-        "' node-id='" +
-        nodeId +
-        "' " +
-        componentIdAttr +
-        '/>';
-      html = html.replace(wiseLinkRegExMatchResult[0], wiselinkHtml);
-      wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
-    }
-    return html;
-  }
-
-  /**
-   * Replace <button> elements that have the parameter wiselink=true
-   * with <wiselink> elements
-   * @param html the html
-   * @return the modified html with certain <button> elements replaced with
-   * <wiselink> elements
-   */
-  insertWISELinkButtons(html) {
-    const wiseLinkRegEx = new RegExp(/<button.*?wiselink="true".*?>(.*?)<\/button>/);
-    let wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
-    while (wiseLinkRegExMatchResult != null) {
-      const buttonHTML = wiseLinkRegExMatchResult[0];
-      const buttonText = wiseLinkRegExMatchResult[1];
-      let nodeId = this.getWISELinkNodeId(buttonHTML);
-      if (nodeId == null) {
-        nodeId = '';
-      }
-      let componentIdAttr = '';
-      let componentId = this.getWISELinkComponentId(buttonHTML);
-      if (componentId != null) {
-        componentIdAttr = "component-id='" + componentId + "'";
-      }
-      const wiselinkHtml =
-        "<wiselink type='button' link-text='" +
-        buttonText +
-        "' node-id='" +
-        nodeId +
-        "' " +
-        componentIdAttr +
-        '/>';
-      html = html.replace(wiseLinkRegExMatchResult[0], wiselinkHtml);
-      wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
-    }
-    return html;
-  }
-
-  /**
-   * Get the node id from the wiselink element
-   * e.g. for input <wiselink node-id='node5'/>, returns 'node5'
-   * @param html the html for the element
-   * @return the node id from the node id parameter in the element
-   */
-  getWISELinkNodeId(html = '') {
-    let nodeIdRegEx = new RegExp(/node-id=["'b](.*?)["']/, 'g');
-    let nodeIdRegExResult = nodeIdRegEx.exec(html);
-    if (nodeIdRegExResult != null) {
-      return nodeIdRegExResult[1];
-    }
-    return '';
-  }
-
-  /**
-   * Get the component id from the wiselink element
-   * e.g. for input <wiselink node-id='node5' component-id='xyzabc' /> returns 'xyzabc'
-   * @param html the html for the element
-   * @return the component id from the component id parameter in the element
-   */
-  getWISELinkComponentId(html = '') {
-    let componentIdRegEx = new RegExp(/component-id=["'b](.*?)["']/, 'g');
-    let componentIdRegExResult = componentIdRegEx.exec(html);
-    if (componentIdRegExResult != null) {
-      return componentIdRegExResult[1];
-    }
-    return '';
-  }
-
-  /**
-   * Get the link type from the wiselink element
-   * e.g. for input <wiselink type='button'/> return 'button'
-   * @param html the html for the element
-   * @return the link type from the type parameter in the element
-   */
-  getWISELinkType(html = '') {
-    let typeRegEx = new RegExp(/type=["'b](.*?)["']/, 'g');
-    let typeRegExResult = typeRegEx.exec(html);
-    if (typeRegExResult != null) {
-      return typeRegExResult[1];
-    }
-    return null;
-  }
-
-  /**
-   * Get the link text from the wiselink element
-   * e.g. for input <wiselink link-text='Go to here'/> return 'Go to here'
-   * @param html the html for the element
-   * @return the link text from the link text parameter in the element
-   */
-  getWISELinkLinkText(html = '') {
-    let linkTextRegEx = new RegExp(/link-text=["'b](.*?)["']/, 'g');
-    let linkTextRegExResult = linkTextRegEx.exec(html);
-    if (linkTextRegExResult != null) {
-      return linkTextRegExResult[1];
-    }
-    return null;
-  }
-
-  /**
-   * Replace <wiselink> elements with <a> and <button> elements
-   * @param html the html
-   * @return the modified html without <wiselink> elements
-   */
-  replaceWISELinks(html) {
-    html = this.replaceWISELinksHelper(html, '<wiselink.*?/>');
-    html = this.replaceWISELinksHelper(html, '<wiselink.*?>.*?</wiselink>');
-    return html;
-  }
-
-  replaceWISELinksHelper(html: string, regex: string): string {
-    const wiseLinkRegEx = new RegExp(regex);
-    let wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
-    while (wiseLinkRegExMatchResult != null) {
-      const wiseLinkHTML = wiseLinkRegExMatchResult[0];
-      const nodeId = this.getWISELinkNodeId(wiseLinkHTML);
-      const componentId = this.getWISELinkComponentId(wiseLinkHTML);
-      const type = this.getWISELinkType(wiseLinkHTML);
-      const linkText = this.getWISELinkLinkText(wiseLinkHTML);
-      let newElement = '';
-      const onclickString = `document.getElementById('replace-with-unique-id').dispatchEvent(new CustomEvent('wiselinkclicked', { detail: { nodeId: '${nodeId}', componentId: '${componentId}' } })); return false;`;
-      if (type === 'button') {
-        newElement = `<button wiselink="true" onclick="${onclickString}">${linkText}</button>`;
-      } else {
-        newElement = `<a wiselink="true" onclick="${onclickString}">${linkText}</a>`;
-      }
-      html = html.replace(wiseLinkHTML, newElement);
-      wiseLinkRegExMatchResult = wiseLinkRegEx.exec(html);
-    }
-    return html;
   }
 
   replaceDivReference(html: string, newString: string): string {
@@ -530,32 +327,6 @@ export class UtilService {
     } catch (e) {
       return false;
     }
-  }
-
-  rgbToHex(color, opacity) {
-    let values = color
-      .replace(/rgb?\(/, '')
-      .replace(/\)/, '')
-      .replace(/[\s+]/g, '')
-      .split(',');
-    let a = parseFloat(opacity || 1),
-      r = Math.floor(a * parseInt(values[0]) + (1 - a) * 255),
-      g = Math.floor(a * parseInt(values[1]) + (1 - a) * 255),
-      b = Math.floor(a * parseInt(values[2]) + (1 - a) * 255);
-    return (
-      '#' +
-      ('0' + r.toString(16)).slice(-2) +
-      ('0' + g.toString(16)).slice(-2) +
-      ('0' + b.toString(16)).slice(-2)
-    );
-  }
-
-  isMatchingPeriods(periodId1, periodId2) {
-    return this.isAllPeriods(periodId1) || this.isAllPeriods(periodId2) || periodId1 == periodId2;
-  }
-
-  isAllPeriods(periodId) {
-    return periodId == null || periodId === -1;
   }
 
   calculateMean(values) {

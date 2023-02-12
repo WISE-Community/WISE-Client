@@ -1,42 +1,41 @@
 <component-header [component]="component"></component-header>
 <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
   <button
-      mat-button
-      color="primary"
-      (click)="snipButtonClicked($event)"
-      *ngIf="isAddToNotebookEnabled()"
-      [disabled]="isDisabled"
-      i18n>
+    mat-button
+    color="primary"
+    (click)="snipButtonClicked($event)"
+    *ngIf="isAddToNotebookEnabled()"
+    [disabled]="isDisabled"
+    i18n
+  >
     <mat-icon>note_add</mat-icon>
     Add to Notebook
   </button>
   <button
-      mat-button
-      color="primary"
-      (click)="copyPublicNotebookItemButtonClicked()"
-      *ngIf="isPublicSpaceExist"
-      [disabled]="isDisabled"
-      i18n>
+    mat-button
+    color="primary"
+    (click)="copyPublicNotebookItemButtonClicked()"
+    *ngIf="isPublicSpaceExist"
+    [disabled]="isDisabled"
+    i18n
+  >
     <mat-icon>file_download</mat-icon>
     Import Classmate Work
   </button>
 </div>
 <div class="student-response-wrapper">
   <textarea
-      class="student-response"
-      [(ngModel)]="studentResponse"
-      (ngModelChange)="studentDataChanged()"
-      [disabled]="isDisabled"
-      cdkTextareaAutosize>
+    class="student-response"
+    [(ngModel)]="studentResponse"
+    (ngModelChange)="studentDataChanged()"
+    [disabled]="isDisabled"
+    cdkTextareaAutosize
+  >
   </textarea>
 </div>
 <div *ngIf="isStudentAttachmentEnabled" fxLayout="row wrap" fxLayoutAlign="start center">
   <div>
-    <button
-        mat-button
-        color="primary"
-        (click)="showStudentAssets()"
-        [disabled]="isDisabled">
+    <button mat-button color="primary" (click)="showStudentAssets()" [disabled]="isDisabled">
       <mat-icon>image</mat-icon>
       <span i18n>Add File</span>
     </button>
@@ -45,36 +44,43 @@
     <div *ngIf="attachment.type !== 'audio'">
       <img [src]="attachment.iconURL" />
       <button
-          mat-button
-          color="primary"
-          (click)="removeAttachment(attachment)" title="Remove file"
-          [disabled]="isDisabled">
+        mat-button
+        color="primary"
+        (click)="removeAttachment(attachment)"
+        title="Remove file"
+        [disabled]="isDisabled"
+      >
         <mat-icon>cancel</mat-icon>
       </button>
     </div>
   </div>
 </div>
-<audio-recorder *ngIf="isStudentAudioRecordingEnabled"
-    [audioAttachments]="audioAttachments"
-    (attachAudioRecording)="attachAudioRecording($event)"
-    [componentId]="componentId"
-    [nodeId]="nodeId"
-    (removeAttachment)="removeAttachment($event)"></audio-recorder>
+<audio-recorder
+  *ngIf="isStudentAudioRecordingEnabled"
+  [audioAttachments]="audioAttachments"
+  (attachAudioRecording)="attachAudioRecording($event)"
+  [componentId]="componentId"
+  [nodeId]="nodeId"
+  (removeAttachment)="removeAttachment($event)"
+></audio-recorder>
 <component-save-submit-buttons
-    *ngIf="isSaveOrSubmitButtonVisible"
-    [componentState]="latestComponentState"
-    [isDirty]="isDirty"
-    [isDisabled]="isDisabled"
-    [isSaveButtonVisible]="isSaveButtonVisible"
-    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-    [isSubmitButtonVisible]="isSubmitButtonVisible"
-    [isSubmitDirty]="isSubmitDirty"
-    (saveButtonClicked)="saveButtonClicked($event)"
-    (submitButtonClicked)="submitButtonClicked($event)">
+  *ngIf="isSaveOrSubmitButtonVisible"
+  [componentState]="latestComponentState"
+  [isDirty]="isDirty"
+  [isDisabled]="isDisabled"
+  [isSaveButtonVisible]="isSaveButtonVisible"
+  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+  [isSubmitButtonVisible]="isSubmitButtonVisible"
+  [isSubmitDirty]="isSubmitDirty"
+  (saveButtonClicked)="saveButtonClicked($event)"
+  (submitButtonClicked)="submitButtonClicked($event)"
+>
 </component-save-submit-buttons>
-<component-annotations *ngIf="mode === 'student'"
-    [annotations]="latestAnnotations"
-    [maxScore]="componentContent.maxScore"
-    [nodeId]="nodeId"
-    [componentId]="componentId">
+<component-annotations
+  *ngIf="mode === 'student'"
+  [annotations]="latestAnnotations"
+  [maxScore]="componentContent.maxScore"
+  [nodeId]="nodeId"
+  [componentId]="componentId"
+>
 </component-annotations>

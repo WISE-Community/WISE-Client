@@ -3,56 +3,69 @@
   <p i18n>Select "Browse Units" to find titles to use with your students.</p>
 </div>
 <div class="content-block" *ngIf="runs.length">
-  <div class="content-block__header controls dark-theme primary-bg"
-      fxLayout="row"
-      fxLayout.xs="column"
-      fxLayoutGap.sm="16px">
-    <app-search-bar fxFlex="0 0 auto"
-        fxFlex.xs="0 0 100%"
-        fxFlex.sm="0 0 calc(50%-8px)"
-        i18n-placeholderText
-        placeholderText="Search"
-        [disable]="!loaded"
-        [value]="searchValue"
-        (update)="searchChanged($event)"></app-search-bar>
+  <div
+    class="content-block__header controls dark-theme primary-bg"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutGap.sm="16px"
+  >
+    <app-search-bar
+      fxFlex="0 0 auto"
+      fxFlex.xs="0 0 100%"
+      fxFlex.sm="0 0 calc(50%-8px)"
+      i18n-placeholderText
+      placeholderText="Search"
+      [disable]="!loaded"
+      [value]="searchValue"
+      (update)="searchChanged($event)"
+    ></app-search-bar>
     <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
-    <app-select-menu fxFlex="0 0 auto"
-        fxFlex.sm="0 0 calc(50%-8px)"
-        [options]="filterOptions"
-        i18n-placeholderText
-        placeholderText="Filter By Period"
-        [disable]="!loaded"
-        [value]="filterValue"
-        (update)="filterChanged($event)"
-        [valueProp]="'value'"
-        [viewValueProp]="'label'">
+    <app-select-menu
+      fxFlex="0 0 auto"
+      fxFlex.sm="0 0 calc(50%-8px)"
+      [options]="filterOptions"
+      i18n-placeholderText
+      placeholderText="Filter By Period"
+      [disable]="!loaded"
+      [value]="filterValue"
+      (update)="filterChanged($event)"
+      [valueProp]="'value'"
+      [viewValueProp]="'label'"
+    >
     </app-select-menu>
   </div>
   <div class="notice">
-    <p [ngStyle]="{'visibility':loaded ? 'visible' : 'hidden'}">
-      <ng-container *ngIf="searchValue || filterValue" i18n>Units found: {{ filteredRuns.length }}</ng-container>
-      <ng-container *ngIf="!searchValue && !filterValue" i18n>Total classroom units: {{ filteredRuns.length }}</ng-container>
+    <p [ngStyle]="{ visibility: loaded ? 'visible' : 'hidden' }">
+      <ng-container *ngIf="searchValue || filterValue" i18n
+        >Units found: {{ filteredRuns.length }}</ng-container
+      >
+      <ng-container *ngIf="!searchValue && !filterValue" i18n
+        >Total classroom units: {{ filteredRuns.length }}</ng-container
+      >
       <span class="mat-caption" *ngIf="filteredRuns.length">
-        (<ng-container *ngIf="scheduledTotal()"><span i18n>{{ scheduledTotal() }} scheduled</span>, </ng-container>
-        <ng-container><span i18n>{{ activeTotal() }} active</span></ng-container>)
+        (<ng-container *ngIf="scheduledTotal()"
+          ><span i18n>{{ scheduledTotal() }} scheduled</span>,
+        </ng-container>
+        <ng-container
+          ><span i18n>{{ activeTotal() }} active</span></ng-container
+        >)
       </span>
       <ng-container *ngIf="searchValue || filterValue">
-        | <a [routerLink]=""
-            (click)="reset()"
-            (keyup.enter)="reset()"
-            tabindex="0"
-            i18n>Clear filters</a>
+        |
+        <a [routerLink]="" (click)="reset()" (keyup.enter)="reset()" tabindex="0" i18n
+          >Clear filters</a
+        >
       </ng-container>
     </p>
   </div>
 
   <app-timeline>
-    <ng-container *ngFor="let run of filteredRuns.sort(sortByStartTimeDesc); let i=index">
-      <app-timeline-item [active]="isRunActive(run)" *ngIf="i < 10 || showAll" id="run{{run.id}}">
+    <ng-container *ngFor="let run of filteredRuns.sort(sortByStartTimeDesc); let i = index">
+      <app-timeline-item [active]="isRunActive(run)" *ngIf="i < 10 || showAll" id="run{{ run.id }}">
         <app-timeline-item-label>
-          <strong>{{ run.startTime | date:'mediumDate' }}</strong>
+          <strong>{{ run.startTime | date : 'mediumDate' }}</strong>
           <ng-container *ngIf="run.endTime && runSpansDays(run)">
-            - <strong>{{ run.endTime | date:'mediumDate' }}</strong>
+            - <strong>{{ run.endTime | date : 'mediumDate' }}</strong>
           </ng-container>
         </app-timeline-item-label>
         <app-timeline-item-content>

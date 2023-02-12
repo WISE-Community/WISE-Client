@@ -8,10 +8,16 @@
     </div>
     <div class="nav-contents nav-contents--root">
       <div fxLayout="row wrap" fxLayoutAlign="center start">
-        <nav-item *ngFor="let id of rootNode.ids" class="nav-item nav-item--root"
-            [ngClass]="{'expanded': nodeIdToExpanded[id] === true}" [nodeId]="id"
-            [type]="'card'" (onExpandedEvent)="childExpandedEvent($event)"
-            fxFlex="100" fxFlex.gt-xs="50">
+        <nav-item
+          *ngFor="let id of rootNode.ids"
+          class="nav-item nav-item--root"
+          [ngClass]="{ expanded: nodeIdToExpanded[id] === true }"
+          [nodeId]="id"
+          [type]="'card'"
+          (onExpandedEvent)="childExpandedEvent($event)"
+          fxFlex="100"
+          fxFlex.gt-xs="50"
+        >
         </nav-item>
       </div>
     </div>
