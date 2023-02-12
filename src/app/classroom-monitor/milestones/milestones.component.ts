@@ -82,11 +82,8 @@ export class MilestonesComponent {
   }
 
   showMilestoneDetails(milestone: any): void {
-    // this.MilestoneService.showMilestoneDetails(milestone, $event);
     this.dialog.open(MilestoneDetailsDialogComponent, {
-      data: {
-        milestone: milestone
-      },
+      data: milestone,
       width: '1280px'
     });
   }

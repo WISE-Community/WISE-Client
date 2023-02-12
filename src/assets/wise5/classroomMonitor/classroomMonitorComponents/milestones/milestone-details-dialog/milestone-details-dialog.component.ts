@@ -9,56 +9,42 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
   styleUrls: ['./milestone-details-dialog.component.scss']
 })
 export class MilestoneDetailsDialogComponent implements OnInit {
-  milestone: any;
-
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public milestone: any,
     private dialogRef: MatDialogRef<MilestoneDetailsDialogComponent>,
     private teacherDataService: TeacherDataService,
     private upgrade: UpgradeModule
-  ) {
-    this.milestone = data.milestone;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.saveMilestoneOpenedEvent();
   }
 
-  close() {
+  protected close(): void {
     this.saveMilestoneClosedEvent();
-    // this.$mdDialog.hide();
     this.dialogRef.close();
   }
 
-  // edit() {
-  //   this.$mdDialog.hide({
-  //     milestone: this.milestone,
-  //     action: 'edit',
-  //     $event: this.$event
-  //   });
-  // }
-
-  onVisitNodeGrading(nodeId: string): void {
-    // this.$mdDialog.hide();
+  protected onVisitNodeGrading(nodeId: string): void {
     this.dialogRef.close();
     this.upgrade.$injector.get('$state').go('root.cm.node', { nodeId: nodeId });
   }
 
-  saveMilestoneOpenedEvent() {
+  private saveMilestoneOpenedEvent(): void {
     this.saveMilestoneEvent('MilestoneOpened');
   }
 
-  saveMilestoneClosedEvent() {
+  private saveMilestoneClosedEvent(): void {
     this.saveMilestoneEvent('MilestoneClosed');
   }
 
-  saveMilestoneEvent(event: any) {
+  private saveMilestoneEvent(event: any): void {
     const context = 'ClassroomMonitor',
       nodeId = null,
       componentId = null,
       componentType = null,
       category = 'Navigation',
-      data = { milestoneId: this.data.milestone.id },
+      data = { milestoneId: this.milestone.id },
       projectId = null;
     this.teacherDataService.saveEvent(
       context,

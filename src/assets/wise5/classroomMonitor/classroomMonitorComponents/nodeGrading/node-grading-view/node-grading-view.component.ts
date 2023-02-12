@@ -434,11 +434,8 @@ export class NodeGradingViewComponent implements OnInit {
   }
 
   showReport(): void {
-    // this.milestoneService.showMilestoneDetails(this.milestoneReport, $event);
     this.dialog.open(MilestoneDetailsDialogComponent, {
-      data: {
-        milestone: this.milestoneReport
-      }
+      data: this.milestoneReport
     });
   }
 
