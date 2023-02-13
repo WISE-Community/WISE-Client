@@ -146,4 +146,30 @@ export class StudentPeerGroupService extends PeerGroupService {
       return of([peerGroupStudentData]);
     }
   }
+
+  retrieveStudentWork(
+    peerGroup: PeerGroup,
+    nodeId: string,
+    componentId: string,
+    showWorkNodeId: string,
+    showWorkComponentId: string
+  ): Observable<any> {
+    if (this.configService.isPreview()) {
+      const studentWork = [];
+      const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+        showWorkNodeId,
+        showWorkComponentId
+      );
+      if (latestComponentState != null) {
+        studentWork.push(latestComponentState);
+      }
+      return of(studentWork);
+    } else if (this.configService.isAuthoring() || this.configService.isSignedInUserATeacher()) {
+      return of([]);
+    } else {
+      return this.http.get(
+        `/api/classmate/peer-group-work/${peerGroup.id}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}`
+      );
+    }
+  }
 }

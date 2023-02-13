@@ -11,6 +11,7 @@ import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
+import { StudentDataService } from '../../../services/studentDataService';
 import { PeerGroup } from '../../peerChat/PeerGroup';
 import { PeerGroupMember } from '../../peerChat/PeerGroupMember';
 import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
@@ -26,14 +27,23 @@ class MockNotebookService {
 }
 
 class MockConfigService {
+  getPeriodId() {
+    return periodId;
+  }
   getRunId() {
     return 1;
+  }
+  isAuthoring() {
+    return false;
   }
   isPreview() {
     return false;
   }
+  isSignedInUserATeacher() {
+    return false;
+  }
   getWorkgroupId() {
-    return 1;
+    return workgroupId;
   }
   getAvatarColorForWorkgroupId(workgroupId: any) {
     return '#000000';
@@ -48,7 +58,9 @@ let componentState1;
 let componentState2;
 let componentState3;
 let fixture: ComponentFixture<ShowGroupWorkStudentComponent>;
+const periodId = 100;
 let studentWork;
+const workgroupId: number = 1000;
 
 describe('ShowGroupWorkStudentComponent', () => {
   beforeEach(async () => {
@@ -98,6 +110,7 @@ describe('ShowGroupWorkStudentComponent', () => {
   setStudentWorkFromGroupMembers();
   setLayout();
   setWidths();
+  showGroupWorkInPreview();
 });
 
 function createComponentState(workgroupId: number): any {
@@ -157,6 +170,29 @@ function setWidths() {
       component.setWidths();
       expect(component.widthMd).toEqual(50);
       expect(component.widthLg).toEqual(33.33);
+    });
+  });
+}
+
+function showGroupWorkInPreview() {
+  describe('ngOnInit', () => {
+    it('show group work in preview', () => {
+      spyOn(TestBed.inject(ConfigService), 'isPreview').and.returnValue(true);
+      spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(workgroupId);
+      spyOn(TestBed.inject(ConfigService), 'getPeriodId').and.returnValue(periodId);
+      const latestComponentState = {
+        id: 100,
+        studentData: {
+          response: 'Hello'
+        },
+        workgroupId: workgroupId
+      };
+      spyOn(
+        TestBed.inject(StudentDataService),
+        'getLatestComponentStateByNodeIdAndComponentId'
+      ).and.returnValue(latestComponentState);
+      component.ngOnInit();
+      expect(component.workgroupIdToWork.get(workgroupId)).toEqual(latestComponentState);
     });
   });
 }

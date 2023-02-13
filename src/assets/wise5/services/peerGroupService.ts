@@ -34,18 +34,6 @@ export class PeerGroupService {
       .pipe(map((value) => new PeerGroup(value.id, value.members, value.peerGrouping)));
   }
 
-  retrieveStudentWork(
-    peerGroup: PeerGroup,
-    nodeId: string,
-    componentId: string,
-    showWorkNodeId: string,
-    showWorkComponentId: string
-  ): Observable<any> {
-    return this.http.get(
-      `/api/classmate/peer-group-work/${peerGroup.id}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}`
-    );
-  }
-
   retrievePeerGroupInfo(peerGroupingTag: string): Observable<any> {
     return this.http.get(`/api/teacher/peer-group-info/${this.runId}/${peerGroupingTag}`);
   }
