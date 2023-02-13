@@ -149,13 +149,17 @@ import { ShowNodeInfoDialogComponent } from '../classroom-monitor/show-node-info
 })
 export class ClassroomMonitorModule {
   constructor(private injector: Injector) {
-    customElements.define(
-      'milestone-report-data',
-      createCustomElement(MilestoneReportDataComponent, { injector: this.injector })
-    );
-    customElements.define(
-      'milestone-report-graph',
-      createCustomElement(MilestoneReportGraphComponent, { injector: this.injector })
-    );
+    if (!customElements.get('milestone-report-data')) {
+      customElements.define(
+        'milestone-report-data',
+        createCustomElement(MilestoneReportDataComponent, { injector: this.injector })
+      );
+    }
+    if (!customElements.get('milestone-report-graph')) {
+      customElements.define(
+        'milestone-report-graph',
+        createCustomElement(MilestoneReportGraphComponent, { injector: this.injector })
+      );
+    }
   }
 }
