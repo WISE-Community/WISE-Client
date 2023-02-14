@@ -333,6 +333,10 @@
           <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details-dialog/milestone-details-dialog.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-dialog/peer-group-dialog.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
@@ -11606,6 +11610,14 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation"> *Note that removing a student does not delete their WISE account, only their association with this unit. </target>
       </trans-unit>
+      <trans-unit id="0322ea5bf9b0ca07d31505f1b70b6ca4b4347306" datatype="html">
+        <source>Milestone: <x id="INTERPOLATION" equiv-text="{{ milestone.name }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details-dialog/milestone-details-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <target state="needs-translation">Milestone: <x id="INTERPOLATION" equiv-text="{{ milestone.name }}"/></target>
+      </trans-unit>
       <trans-unit id="e6c3861796ecd9b8d67af1af8781df03121e5225" datatype="html">
         <source>Description: </source>
         <context-group purpose="location">
@@ -20856,7 +20868,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">506</context>
+          <context context-type="linenumber">443</context>
         </context-group>
         <target state="needs-translation">Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20864,7 +20876,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">511</context>
+          <context context-type="linenumber">448</context>
         </context-group>
         <target state="needs-translation">Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20872,7 +20884,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">516</context>
+          <context context-type="linenumber">453</context>
         </context-group>
         <target state="needs-translation">Submitted <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
