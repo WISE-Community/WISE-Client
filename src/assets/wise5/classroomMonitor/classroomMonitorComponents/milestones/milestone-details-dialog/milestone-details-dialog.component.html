@@ -1,0 +1,8 @@
+<h1 mat-dialog-title i18n>Milestone: {{ milestone.name }}</h1>
+<div mat-dialog-content>
+  <milestone-details [milestone]="milestone" (onVisitNodeGrading)="onVisitNodeGrading($event)">
+  </milestone-details>
+</div>
+<div mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-button color="primary" (click)="close()" i18n>Close</button>
+</div>
