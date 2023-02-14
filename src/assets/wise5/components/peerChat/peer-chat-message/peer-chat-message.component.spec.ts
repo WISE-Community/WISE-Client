@@ -52,13 +52,13 @@ function shouldNotShowDeleteButtonWhenNotGrading() {
 
 function shouldShowDeleteButtonInGrading() {
   it('should show delete button', () => {
-    expectWhichDeleteButton(false, 'report');
+    expectWhichDeleteButton(false, 'visibility');
   });
 }
 
 function shouldShowUndeleteButtonInGrading() {
   it('should show undelete button', () => {
-    expectWhichDeleteButton(true, 'report_off');
+    expectWhichDeleteButton(true, 'visibility_off');
   });
 }
 
