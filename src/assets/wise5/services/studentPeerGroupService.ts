@@ -155,15 +155,11 @@ export class StudentPeerGroupService extends PeerGroupService {
     showWorkComponentId: string
   ): Observable<any> {
     if (this.configService.isPreview()) {
-      const studentWork = [];
       const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
         showWorkNodeId,
         showWorkComponentId
       );
-      if (latestComponentState != null) {
-        studentWork.push(latestComponentState);
-      }
-      return of(studentWork);
+      return latestComponentState != null ? of([latestComponentState]) : of([]);
     } else if (this.configService.isAuthoring() || this.configService.isSignedInUserATeacher()) {
       return of([]);
     } else {
