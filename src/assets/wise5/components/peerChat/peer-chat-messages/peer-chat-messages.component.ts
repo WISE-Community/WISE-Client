@@ -20,10 +20,10 @@ export class PeerChatMessagesComponent implements OnInit {
   workgroupInfos: any = {};
 
   @Output()
-  deleteClickedEvent: EventEmitter<any> = new EventEmitter<any>();
+  deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
 
   @Output()
-  undeleteClickedEvent: EventEmitter<any> = new EventEmitter<any>();
+  undeleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
 
   constructor() {}
 

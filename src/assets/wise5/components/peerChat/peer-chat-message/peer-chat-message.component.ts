@@ -27,10 +27,10 @@ export class PeerChatMessageComponent implements OnInit {
   isTeacher: boolean;
 
   @Output()
-  deleteClickedEvent: EventEmitter<any> = new EventEmitter<any>();
+  deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
 
   @Output()
-  undeleteClickedEvent: EventEmitter<any> = new EventEmitter<any>();
+  undeleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
 
   isMyMessage: boolean;
   text: string;

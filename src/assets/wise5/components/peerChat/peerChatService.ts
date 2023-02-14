@@ -28,13 +28,11 @@ export class PeerChatService extends ComponentService {
     workgroupId: number
   ): Observable<any> {
     const runId = this.configService.getRunId();
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     if (this.configService.isPreview()) {
       this.configService.config.runId = 1;
     }
     return this.http.get(
-      `/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}/student-work`,
-      { headers: headers }
+      `/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}/student-work`
     );
   }
 
@@ -44,10 +42,8 @@ export class PeerChatService extends ComponentService {
     workgroupId: number
   ): Observable<any> {
     const runId = this.configService.getRunId();
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get(
-      `/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}/annotations`,
-      { headers: headers }
+      `/api/peer-group/${runId}/${workgroupId}/${nodeId}/${componentId}/annotations`
     );
   }
 

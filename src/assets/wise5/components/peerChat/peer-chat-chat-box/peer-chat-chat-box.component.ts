@@ -25,13 +25,13 @@ export class PeerChatChatBoxComponent implements OnInit {
   workgroupInfosWithoutTeachers: any[];
 
   @Output()
-  deleteClickedEvent: EventEmitter<any> = new EventEmitter<any>();
+  deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
 
   @Output('onSubmit')
   submit: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
-  undeleteClickedEvent: EventEmitter<any> = new EventEmitter<any>();
+  undeleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
 
   ngOnInit(): void {
     this.workgroupInfosWithoutTeachers = this.filterOutTeachers(this.workgroupInfos);
