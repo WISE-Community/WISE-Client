@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { UtilService } from '../../services/utilService';
 import { NodeRecoveryAnalysis } from '../../../../app/domain/nodeRecoveryAnalysis';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { ConfigService } from '../../services/configService';
+import { isValidJSONString } from '../../common/string/string';
 
 @Component({
   selector: 'recovery-authoring',
@@ -24,8 +24,7 @@ export class RecoveryAuthoringComponent implements OnInit {
     private configService: ConfigService,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
-    private upgrade: UpgradeModule,
-    private utilService: UtilService
+    private upgrade: UpgradeModule
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +47,7 @@ export class RecoveryAuthoringComponent implements OnInit {
   }
 
   private checkProjectJSONValidity(): void {
-    this.jsonIsValid = this.utilService.isValidJSONString(this.projectJSONString);
+    this.jsonIsValid = isValidJSONString(this.projectJSONString);
   }
 
   private subscribeToGlobalMessage(): void {
