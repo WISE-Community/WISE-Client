@@ -1,6 +1,5 @@
 'use strict';
 
-import * as angular from 'angular';
 import { AchievementService } from './achievementService';
 import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
@@ -8,8 +7,6 @@ import { ProjectService } from './projectService';
 import { TeacherDataService } from './teacherDataService';
 import { UtilService } from './utilService';
 import { Injectable } from '@angular/core';
-import { UpgradeModule } from '@angular/upgrade/static';
-import { MilestoneDetailsDialog } from '../classroomMonitor/classroomMonitorComponents/milestones/milestoneDetailsDialog/milestoneDetailsDialog';
 import { copy } from '../common/object/object';
 
 @Injectable()
@@ -67,7 +64,6 @@ export class MilestoneService {
   };
 
   constructor(
-    private upgrade: UpgradeModule,
     private AchievementService: AchievementService,
     private AnnotationService: AnnotationService,
     private ConfigService: ConfigService,
@@ -564,24 +560,5 @@ export class MilestoneService {
 
   setReportAvailable(projectAchievement: any, reportAvailable: boolean) {
     projectAchievement.isReportAvailable = reportAvailable;
-  }
-
-  showMilestoneDetails(milestone: any, $event: any) {
-    this.upgrade.$injector.get('$mdDialog').show({
-      parent: angular.element(document.body),
-      templateUrl:
-        'assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestoneDetailsDialog/milestoneDetailsDialog.html',
-      controller: MilestoneDetailsDialog,
-      controllerAs: '$ctrl',
-      fullscreen: true,
-      multiple: true,
-      targetEvent: $event,
-      clickOutsideToClose: true,
-      escapeToClose: true,
-      locals: {
-        $event: $event,
-        milestone: milestone
-      }
-    });
   }
 }
