@@ -14,6 +14,7 @@ import { CompletionStatus } from '../../shared/CompletionStatus';
 import { copy } from '../../../../common/object/object';
 import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MilestoneDetailsDialogComponent } from '../../milestones/milestone-details-dialog/milestone-details-dialog.component';
 
 @Component({
   selector: 'node-grading-view',
@@ -432,8 +433,10 @@ export class NodeGradingViewComponent implements OnInit {
     }
   }
 
-  showReport($event: any): void {
-    this.milestoneService.showMilestoneDetails(this.milestoneReport, $event);
+  showReport(): void {
+    this.dialog.open(MilestoneDetailsDialogComponent, {
+      data: this.milestoneReport
+    });
   }
 
   showPeerGroupDetails(peerGroupingTag: string): void {

@@ -1,11 +1,11 @@
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { UtilService } from '../../services/utilService';
 import * as angular from 'angular';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { NotificationService } from '../../services/notificationService';
 import { Component } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { isValidJSONString } from '../../common/string/string';
 
 @Component({
   selector: 'advanced-project-authoring',
@@ -22,8 +22,7 @@ export class AdvancedProjectAuthoringComponent {
     private ConfigService: ConfigService,
     private NotificationService: NotificationService,
     private ProjectAssetService: ProjectAssetService,
-    private ProjectService: TeacherProjectService,
-    private UtilService: UtilService
+    private ProjectService: TeacherProjectService
   ) {
     this.projectId = this.ConfigService.getProjectId();
   }
@@ -41,7 +40,7 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   hideJSON() {
-    if (this.UtilService.isValidJSONString(this.projectJSONString)) {
+    if (isValidJSONString(this.projectJSONString)) {
       this.isJSONDisplayed = false;
       this.NotificationService.hideJSONValidMessage();
     } else if (
