@@ -12,7 +12,6 @@ describe('UtilService', () => {
   convertStringToNumberTests();
   arrayHasNonNullElementTests();
   calculateMeanTests();
-  getIntersectOfArraysTests();
   trimToLength();
   removeHTMLTags();
   replaceImgTagWithFileName();
@@ -65,34 +64,6 @@ function calculateMeanTests() {
     it('should calculate the mean when there are multiple values', () => {
       const values = [1, 2, 3, 4, 10];
       expect(service.calculateMean(values)).toEqual(4);
-    });
-  });
-}
-
-function getIntersectOfArraysTests() {
-  describe('getIntersectOfArrays()', () => {
-    const obj1 = {};
-    const obj2 = {};
-    const obj3 = {};
-    it('should find the intersect of arrays when there are no common items', () => {
-      const array1 = [obj1, obj2];
-      const array2 = [obj3];
-      const intersect = service.getIntersectOfArrays(array1, array2);
-      expect(intersect.length).toEqual(0);
-    });
-
-    it('should find the intersect of arrays when there are some common items', () => {
-      const array1 = [obj1, obj2];
-      const array2 = [obj2, obj3];
-      const intersect = service.getIntersectOfArrays(array1, array2);
-      expect(intersect.length).toEqual(1);
-    });
-
-    it('should find the intersect of arrays when all are common items', () => {
-      const array1 = [obj1, obj2, obj3];
-      const array2 = [obj1, obj2, obj3];
-      const intersect = service.getIntersectOfArrays(array1, array2);
-      expect(intersect.length).toEqual(3);
     });
   });
 }

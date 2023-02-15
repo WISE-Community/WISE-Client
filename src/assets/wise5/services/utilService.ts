@@ -323,12 +323,6 @@ export class UtilService {
     return values.reduce((a, b) => a + b) / values.length;
   }
 
-  getIntersectOfArrays(array1, array2) {
-    return array1.filter((n) => {
-      return array2.indexOf(n) != -1;
-    });
-  }
-
   /**
    * This will parse a delimited string into an array of
    * arrays. The default delimiter is the comma, but this
