@@ -19,6 +19,7 @@ import { GraphContent } from '../GraphContent';
 import { RandomKeyService } from '../../../services/randomKeyService';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
+import { CSVToArray } from '../../../common/array/array';
 
 const Draggable = require('highcharts/modules/draggable-points.js');
 Draggable(Highcharts);
@@ -1706,7 +1707,7 @@ export class GraphStudent extends ComponentStudent {
   attachStudentAsset(studentAsset) {
     this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
       this.StudentAssetService.getAssetContent(copiedAsset).then((assetContent: string) => {
-        const rowData = this.UtilService.CSVToArray(assetContent, ',');
+        const rowData = CSVToArray(assetContent, ',');
         const params = {
           skipFirstRow: true,
           xColumn: 0,
