@@ -912,7 +912,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <target state="needs-translation">The JSON is invalid. Invalid JSON will not be saved.
 Click "OK" to revert back to the last valid JSON.
@@ -19152,7 +19152,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> This Peer Chat activity is not yet available. Please check back later or wait for a notification to return. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-grading/peer-chat-grading.component.html</context>
-          <context context-type="linenumber">35,38</context>
+          <context context-type="linenumber">38,41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-show-work/peer-chat-show-work.component.html</context>
@@ -19180,6 +19180,22 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation"> Send </target>
       </trans-unit>
+      <trans-unit id="81a5df0547de12ef2c96486e6618669b3bdd704f" datatype="html">
+        <source>Make this message viewable to students again</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-message/peer-chat-message.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <target state="needs-translation">Make this message viewable to students again</target>
+      </trans-unit>
+      <trans-unit id="680c74303553491ab505cd6a97baf59e13150168" datatype="html">
+        <source>Delete this message so students won&apos;t see it</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-message/peer-chat-message.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <target state="needs-translation">Delete this message so students won't see it</target>
+      </trans-unit>
       <trans-unit id="69890220efa72f501c096cd863f5f9dcf16fd321" datatype="html">
         <source>Question Bank</source>
         <context-group purpose="location">
@@ -19192,7 +19208,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You have new chat messages</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.ts</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">228</context>
         </context-group>
         <target state="needs-translation">You have new chat messages</target>
       </trans-unit>
@@ -19208,7 +19224,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peerChatService.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <target state="translated">Insegnante</target>
       </trans-unit>
@@ -20868,7 +20884,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">443</context>
+          <context context-type="linenumber">433</context>
         </context-group>
         <target state="needs-translation">Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20876,7 +20892,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">448</context>
+          <context context-type="linenumber">438</context>
         </context-group>
         <target state="needs-translation">Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20884,7 +20900,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">453</context>
+          <context context-type="linenumber">443</context>
         </context-group>
         <target state="needs-translation">Submitted <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
