@@ -5,6 +5,9 @@
     [peerChatMessages]="messages"
     [myWorkgroupId]="myWorkgroupId"
     [workgroupInfos]="workgroupInfos"
+    [isGrading]="isGrading"
+    (deleteClickedEvent)="deleteClicked($event)"
+    (undeleteClickedEvent)="undeleteClicked($event)"
   ></peer-chat-messages>
   <peer-chat-message-input
     *ngIf="isEnabled"
