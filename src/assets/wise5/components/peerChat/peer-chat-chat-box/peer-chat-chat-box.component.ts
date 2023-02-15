@@ -11,6 +11,9 @@ export class PeerChatChatBoxComponent implements OnInit {
   isEnabled: boolean = true;
 
   @Input()
+  isGrading: boolean = false;
+
+  @Input()
   messages: PeerChatMessage[] = [];
 
   @Input()
@@ -21,8 +24,14 @@ export class PeerChatChatBoxComponent implements OnInit {
 
   workgroupInfosWithoutTeachers: any[];
 
+  @Output()
+  deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
+
   @Output('onSubmit')
   submit: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
+  undeleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
 
   ngOnInit(): void {
     this.workgroupInfosWithoutTeachers = this.filterOutTeachers(this.workgroupInfos);
@@ -30,5 +39,13 @@ export class PeerChatChatBoxComponent implements OnInit {
 
   private filterOutTeachers(workgroupInfos: any): any[] {
     return Object.values(workgroupInfos).filter((workgroupInfo: any) => !workgroupInfo.isTeacher);
+  }
+
+  protected deleteClicked(peerChatMessage: PeerChatMessage): void {
+    this.deleteClickedEvent.emit(peerChatMessage);
+  }
+
+  protected undeleteClicked(peerChatMessage: PeerChatMessage): void {
+    this.undeleteClickedEvent.emit(peerChatMessage);
   }
 }

@@ -12,7 +12,6 @@ describe('UtilService', () => {
   convertStringToNumberTests();
   arrayHasNonNullElementTests();
   calculateMeanTests();
-  isValidJSONStringTests();
   trimToLength();
   removeHTMLTags();
   replaceImgTagWithFileName();
@@ -65,22 +64,6 @@ function calculateMeanTests() {
     it('should calculate the mean when there are multiple values', () => {
       const values = [1, 2, 3, 4, 10];
       expect(service.calculateMean(values)).toEqual(4);
-    });
-  });
-}
-
-function isValidJSONStringTests() {
-  describe('isValidJSONString()', () => {
-    it('should return true if json string is valid', () => {
-      const validJSON = '{"a":1,"b":2}';
-      expect(service.isValidJSONString(validJSON)).toBeTruthy();
-      const validJSON2 = '[{"a":1},{"b":2}]';
-      expect(service.isValidJSONString(validJSON2)).toBeTruthy();
-    });
-
-    it('should return false for invalid json strings', () => {
-      const invalidJSON = '{"a":1,"b":2';
-      expect(service.isValidJSONString(invalidJSON)).toBeFalsy();
     });
   });
 }

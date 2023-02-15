@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
 import { PeerChatMessage } from '../PeerChatMessage';
 
@@ -13,7 +13,10 @@ export class PeerChatMessageComponent implements OnInit {
 
   @Input()
   displayNames: string;
-  
+
+  @Input()
+  isGrading: boolean;
+
   @Input()
   myWorkgroupId: number;
 
@@ -22,6 +25,12 @@ export class PeerChatMessageComponent implements OnInit {
 
   @Input()
   isTeacher: boolean;
+
+  @Output()
+  deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
+
+  @Output()
+  undeleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
 
   isMyMessage: boolean;
   text: string;
@@ -35,5 +44,15 @@ export class PeerChatMessageComponent implements OnInit {
     this.timestamp = new Date(this.peerChatMessage.timestamp);
     this.workgroupId = this.peerChatMessage.workgroupId;
     this.isMyMessage = this.myWorkgroupId === this.workgroupId;
+  }
+
+  protected delete(): void {
+    this.peerChatMessage.isDeleted = true;
+    this.deleteClickedEvent.emit(this.peerChatMessage);
+  }
+
+  protected undelete(): void {
+    this.peerChatMessage.isDeleted = false;
+    this.undeleteClickedEvent.emit(this.peerChatMessage);
   }
 }

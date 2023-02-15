@@ -46,6 +46,14 @@ export class PeerGroupService {
     );
   }
 
+  retrievePeerGroupAnnotations(
+    peerGroup: PeerGroup,
+    nodeId: string,
+    componentId: string
+  ): Observable<any> {
+    return this.http.get(`/api/peer-group/${peerGroup.id}/${nodeId}/${componentId}/annotations`);
+  }
+
   retrievePeerGroupInfo(peerGroupingTag: string): Observable<any> {
     return this.http.get(`/api/teacher/peer-group-info/${this.runId}/${peerGroupingTag}`);
   }

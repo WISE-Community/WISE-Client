@@ -270,9 +270,16 @@ export class TeacherDataService extends DataService {
   }
 
   processComponentStates(componentStates) {
+    this.initializeComponentStatesDataStructures();
     for (const componentState of componentStates) {
       this.addOrUpdateComponentState(componentState);
     }
+  }
+
+  initializeComponentStatesDataStructures(): void {
+    this.studentData.componentStatesByWorkgroupId = {};
+    this.studentData.componentStatesByNodeId = {};
+    this.studentData.componentStatesByComponentId = {};
   }
 
   processEvents(events) {
@@ -307,12 +314,18 @@ export class TeacherDataService extends DataService {
   }
 
   processAnnotations(annotations) {
+    this.initializeAnnotationsDataStructures();
     this.studentData.annotations = annotations;
     for (const annotation of annotations) {
       this.addAnnotationToAnnotationsToWorkgroupId(annotation);
       this.addAnnotationToAnnotationsByNodeId(annotation);
     }
     this.AnnotationService.setAnnotations(this.studentData.annotations);
+  }
+
+  initializeAnnotationsDataStructures(): void {
+    this.studentData.annotationsByNodeId = {};
+    this.studentData.annotationsToWorkgroupId = {};
   }
 
   addAnnotationToAnnotationsToWorkgroupId(annotation) {
