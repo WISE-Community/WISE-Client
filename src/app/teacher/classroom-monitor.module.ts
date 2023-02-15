@@ -70,6 +70,7 @@ import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/c
 import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
 import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
 import { ShowNodeInfoDialogComponent } from '../classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
+import { MilestoneDetailsDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details-dialog/milestone-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { ShowNodeInfoDialogComponent } from '../classroom-monitor/show-node-info
     ManageUserComponent,
     MilestonesComponent,
     MilestoneDetailsComponent,
+    MilestoneDetailsDialogComponent,
     MilestoneGradingViewComponent,
     MilestoneReportDataComponent,
     MilestoneReportGraphComponent,
