@@ -76,14 +76,19 @@ export class ClassroomStatusService {
     return null;
   }
 
-  setStudentStatus(studentStatus) {
+  setStudentStatus(studentStatus: any): void {
+    let isStudentStatusFound = false;
     const studentStatuses = this.getStudentStatuses();
     for (let x = 0; x < studentStatuses.length; x++) {
       const aStudentStatus = studentStatuses[x];
       if (aStudentStatus.workgroupId === studentStatus.workgroupId) {
         studentStatuses.splice(x, 1, studentStatus);
+        isStudentStatusFound = true;
         break;
       }
+    }
+    if (!isStudentStatusFound) {
+      studentStatuses.push(studentStatus);
     }
   }
 

@@ -70,6 +70,7 @@ import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/c
 import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
 import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
 import { ShowNodeInfoDialogComponent } from '../classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
+import { MilestoneDetailsDialogComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details-dialog/milestone-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { ShowNodeInfoDialogComponent } from '../classroom-monitor/show-node-info
     ManageUserComponent,
     MilestonesComponent,
     MilestoneDetailsComponent,
+    MilestoneDetailsDialogComponent,
     MilestoneGradingViewComponent,
     MilestoneReportDataComponent,
     MilestoneReportGraphComponent,
@@ -149,13 +151,17 @@ import { ShowNodeInfoDialogComponent } from '../classroom-monitor/show-node-info
 })
 export class ClassroomMonitorModule {
   constructor(private injector: Injector) {
-    customElements.define(
-      'milestone-report-data',
-      createCustomElement(MilestoneReportDataComponent, { injector: this.injector })
-    );
-    customElements.define(
-      'milestone-report-graph',
-      createCustomElement(MilestoneReportGraphComponent, { injector: this.injector })
-    );
+    if (!customElements.get('milestone-report-data')) {
+      customElements.define(
+        'milestone-report-data',
+        createCustomElement(MilestoneReportDataComponent, { injector: this.injector })
+      );
+    }
+    if (!customElements.get('milestone-report-graph')) {
+      customElements.define(
+        'milestone-report-graph',
+        createCustomElement(MilestoneReportGraphComponent, { injector: this.injector })
+      );
+    }
   }
 }

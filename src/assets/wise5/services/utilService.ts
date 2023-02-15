@@ -4,7 +4,6 @@ import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { convertToPNGFile } from '../common/canvas/canvas';
 import { copy } from '../common/object/object';
-import { getWiseLinkComponentId, getWiseLinkNodeId } from '../common/wise-link/wise-link';
 import '../lib/jquery/jquery-global';
 
 @Injectable()
@@ -318,15 +317,6 @@ export class UtilService {
         });
       }, 2000);
     }, duration);
-  }
-
-  isValidJSONString(jsonString) {
-    try {
-      JSON.parse(jsonString);
-      return true;
-    } catch (e) {
-      return false;
-    }
   }
 
   calculateMean(values) {

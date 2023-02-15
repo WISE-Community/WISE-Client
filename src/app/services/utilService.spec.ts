@@ -13,7 +13,6 @@ describe('UtilService', () => {
   arrayHasNonNullElementTests();
   calculateMeanTests();
   getIntersectOfArraysTests();
-  isValidJSONStringTests();
   trimToLength();
   removeHTMLTags();
   replaceImgTagWithFileName();
@@ -94,22 +93,6 @@ function getIntersectOfArraysTests() {
       const array2 = [obj1, obj2, obj3];
       const intersect = service.getIntersectOfArrays(array1, array2);
       expect(intersect.length).toEqual(3);
-    });
-  });
-}
-
-function isValidJSONStringTests() {
-  describe('isValidJSONString()', () => {
-    it('should return true if json string is valid', () => {
-      const validJSON = '{"a":1,"b":2}';
-      expect(service.isValidJSONString(validJSON)).toBeTruthy();
-      const validJSON2 = '[{"a":1},{"b":2}]';
-      expect(service.isValidJSONString(validJSON2)).toBeTruthy();
-    });
-
-    it('should return false for invalid json strings', () => {
-      const invalidJSON = '{"a":1,"b":2';
-      expect(service.isValidJSONString(invalidJSON)).toBeFalsy();
     });
   });
 }

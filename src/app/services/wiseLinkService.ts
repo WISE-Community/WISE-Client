@@ -33,7 +33,7 @@ export class WiseLinkService {
   }
 
   removeWiseLinkClickedListener(): void {
-    this.getWiseLinkCommunicator().removeEventListener(
+    this.getWiseLinkCommunicator()?.removeEventListener(
       this.wiseLinkClickedEventName,
       this.wiseLinkClickedHandler
     );

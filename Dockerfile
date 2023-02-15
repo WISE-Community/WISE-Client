@@ -1,15 +1,7 @@
-FROM node:14.17-alpine
-RUN apk add chromium
-ENV CHROME_BIN='/usr/bin/chromium-browser'
-RUN apk --no-cache add --virtual native-deps \
-    g++ gcc libgcc libstdc++ linux-headers make python3 && \
-    npm install --quiet node-gyp -g
-
+FROM node:18
+RUN apt-get update && apt-get install build-essential \
+    chromium libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev -y
+ENV CHROME_BIN='/usr/bin/chromium'
 WORKDIR /app
-
-COPY package*.json ./
-RUN npm install --prefer-dedupe
-
-COPY . .
 
 CMD ["npm", "run", "serve-dev"]
