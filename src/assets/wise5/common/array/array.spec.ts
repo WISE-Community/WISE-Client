@@ -11,7 +11,7 @@ describe('getIntersectOfArrays()', () => {
 });
 
 function noCommonItems_returnNoItems() {
-  it('should get the intersect of arrays when there are no common items', () => {
+  it('should return an empty array when there are no common items', () => {
     const array1 = [obj1, obj2];
     const array2 = [obj3];
     const intersect = getIntersectOfArrays(array1, array2);
@@ -20,7 +20,7 @@ function noCommonItems_returnNoItems() {
 }
 
 function someCommonItems_returnSomeItems() {
-  it('should get the intersect of arrays when there are some common items', () => {
+  it('should return an array with common items when there are some common items', () => {
     const array1 = [obj1, obj2];
     const array2 = [obj2, obj3];
     const intersect = getIntersectOfArrays(array1, array2);
@@ -30,7 +30,7 @@ function someCommonItems_returnSomeItems() {
 }
 
 function allCommonItems_returnAllItems() {
-  it('should get the intersect of arrays when all are common items', () => {
+  it('should return an array with all items when all items are in common', () => {
     const array1 = [obj1, obj2, obj3];
     const array2 = [obj1, obj2, obj3];
     const intersect = getIntersectOfArrays(array1, array2);
