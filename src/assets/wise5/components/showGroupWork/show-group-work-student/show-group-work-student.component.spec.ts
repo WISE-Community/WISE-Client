@@ -10,8 +10,10 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
 import { NotebookService } from '../../../services/notebookService';
+import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { StudentDataService } from '../../../services/studentDataService';
+import { StudentPeerGroupService } from '../../../services/studentPeerGroupService';
 import { PeerGroup } from '../../peerChat/PeerGroup';
 import { PeerGroupMember } from '../../peerChat/PeerGroupMember';
 import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
@@ -59,6 +61,11 @@ let componentState2;
 let componentState3;
 let fixture: ComponentFixture<ShowGroupWorkStudentComponent>;
 const periodId = 100;
+const peerGroup = new PeerGroup(
+  1,
+  [new PeerGroupMember(1, 1), new PeerGroupMember(2, 1), new PeerGroupMember(3, 1)],
+  new PeerGrouping()
+);
 let studentWork;
 const workgroupId: number = 1000;
 
@@ -72,7 +79,8 @@ describe('ShowGroupWorkStudentComponent', () => {
         { provide: ConfigService, useClass: MockConfigService },
         { provide: MatDialog, useClass: MockService },
         { provide: NodeService, useClass: MockService },
-        { provide: NotebookService, useClass: MockNotebookService }
+        { provide: NotebookService, useClass: MockNotebookService },
+        { provide: PeerGroupService, useClass: StudentPeerGroupService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -97,11 +105,7 @@ describe('ShowGroupWorkStudentComponent', () => {
     spyOn(TestBed.inject(ProjectService), 'injectAssetPaths').and.returnValue({
       type: 'OpenResponse'
     });
-    component.peerGroup = new PeerGroup(
-      1,
-      [new PeerGroupMember(1, 1), new PeerGroupMember(2, 1), new PeerGroupMember(3, 1)],
-      new PeerGrouping()
-    );
+    component.peerGroup = peerGroup;
     component.setWorkgroupInfos();
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     fixture.detectChanges();
@@ -175,11 +179,12 @@ function setWidths() {
 }
 
 function showGroupWorkInPreview() {
-  describe('ngOnInit', () => {
-    it('show group work in preview', () => {
+  describe('ngOnInit()', () => {
+    it('should show group work in preview', () => {
       spyOn(TestBed.inject(ConfigService), 'isPreview').and.returnValue(true);
       spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(workgroupId);
       spyOn(TestBed.inject(ConfigService), 'getPeriodId').and.returnValue(periodId);
+      spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup').and.returnValue(of(peerGroup));
       const latestComponentState = {
         id: 100,
         studentData: {

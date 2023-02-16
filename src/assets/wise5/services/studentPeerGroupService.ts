@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { PeerGroupStudentData } from '../../../app/domain/peerGroupStudentData';
 import { PeerGroup } from '../components/peerChat/PeerGroup';
-import { PeerGroupMember } from '../components/peerChat/PeerGroupMember';
 import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
 import { PeerGroupService } from './peerGroupService';
@@ -12,8 +11,6 @@ import { ProjectService } from './projectService';
 
 @Injectable()
 export class StudentPeerGroupService extends PeerGroupService {
-  static readonly PREVIEW_PEER_GROUP_ID = 1;
-
   constructor(
     private annotationService: AnnotationService,
     protected configService: ConfigService,
@@ -28,28 +25,10 @@ export class StudentPeerGroupService extends PeerGroupService {
     peerGroupingTag: string,
     workgroupId = this.configService.getWorkgroupId()
   ): Observable<PeerGroup> {
-    if (
-      this.configService.isPreview() ||
-      this.configService.isAuthoring() ||
-      this.configService.isSignedInUserATeacher()
-    ) {
+    if (this.configService.isPreview()) {
       return of(this.getPreviewPeerGroup());
     }
     return super.retrievePeerGroup(peerGroupingTag, workgroupId);
-  }
-
-  private getPreviewPeerGroup(): PeerGroup {
-    let workgroupId = 1;
-    let periodId = 1;
-    if (!this.configService.isAuthoring()) {
-      workgroupId = this.configService.getWorkgroupId();
-      periodId = this.configService.getPeriodId();
-    }
-    return new PeerGroup(
-      StudentPeerGroupService.PREVIEW_PEER_GROUP_ID,
-      [new PeerGroupMember(workgroupId, periodId)],
-      null
-    );
   }
 
   retrievePeerGroupWork(
@@ -61,11 +40,8 @@ export class StudentPeerGroupService extends PeerGroupService {
       return of(
         this.studentDataService.getComponentStatesByNodeIdAndComponentId(nodeId, componentId)
       );
-    } else if (this.configService.isAuthoring() || this.configService.isSignedInUserATeacher()) {
-      return of([]);
-    } else {
-      return this.http.get(`/api/peer-group/${peerGroup.id}/${nodeId}/${componentId}/student-work`);
     }
+    return super.retrievePeerGroupWork(peerGroup, nodeId, componentId);
   }
 
   retrieveQuestionBankStudentData(
@@ -105,13 +81,10 @@ export class StudentPeerGroupService extends PeerGroupService {
   ): Observable<PeerGroupStudentData[]> {
     if (this.configService.isPreview()) {
       return this.getPreviewPeerGroupStudentData(nodeId, componentId, fieldName);
-    } else if (this.configService.isAuthoring() || this.configService.isSignedInUserATeacher()) {
-      return of([]);
-    } else {
-      return this.http.get<PeerGroupStudentData[]>(
-        `/api/peer-group/${peerGroupId}/${nodeId}/${componentId}/student-data/${urlEnding}`
-      );
     }
+    return this.http.get<PeerGroupStudentData[]>(
+      `/api/peer-group/${peerGroupId}/${nodeId}/${componentId}/student-data/${urlEnding}`
+    );
   }
 
   private getPreviewPeerGroupStudentData(
@@ -160,12 +133,13 @@ export class StudentPeerGroupService extends PeerGroupService {
         showWorkComponentId
       );
       return latestComponentState != null ? of([latestComponentState]) : of([]);
-    } else if (this.configService.isAuthoring() || this.configService.isSignedInUserATeacher()) {
-      return of([]);
-    } else {
-      return this.http.get(
-        `/api/classmate/peer-group-work/${peerGroup.id}/${nodeId}/${componentId}/${showWorkNodeId}/${showWorkComponentId}`
-      );
     }
+    return super.retrieveStudentWork(
+      peerGroup,
+      nodeId,
+      componentId,
+      showWorkNodeId,
+      showWorkComponentId
+    );
   }
 }
