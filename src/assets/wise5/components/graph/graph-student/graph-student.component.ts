@@ -1701,38 +1701,6 @@ export class GraphStudent extends ComponentStudent {
   }
 
   /**
-   * Handle importing external data (we only support csv for now)
-   * @param studentAsset CSV file student asset
-   */
-  attachStudentAsset(studentAsset) {
-    this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
-      this.StudentAssetService.getAssetContent(copiedAsset).then((assetContent: string) => {
-        const rowData = CSVToArray(assetContent, ',');
-        const params = {
-          skipFirstRow: true,
-          xColumn: 0,
-          yColumn: 1
-        };
-        const seriesData = this.convertRowDataToSeriesData(rowData, params);
-        const newSeriesIndex = this.series.length;
-        const series: any = {
-          name: copiedAsset.fileName,
-          color: this.GraphService.getSeriesColor(newSeriesIndex),
-          marker: {
-            symbol: this.seriesMarkers[newSeriesIndex]
-          },
-          canEdit: false
-        };
-        this.series[newSeriesIndex] = series;
-        series.data = seriesData;
-        this.isDirty = true;
-        this.addNextComponentStateToUndoStack = true;
-        this.studentDataChanged();
-      });
-    });
-  }
-
-  /**
    * Convert the table data into series data
    * @param componentState the component state to get table data from
    * @param params (optional) the params to specify what columns
