@@ -27,7 +27,10 @@
         [messages]="peerChatMessages"
         [myWorkgroupId]="workgroupId"
         [workgroupInfos]="peerChatWorkgroupInfos"
+        [isGrading]="true"
         (onSubmit)="submitTeacherResponse($event)"
+        (deleteClickedEvent)="deleteClicked($event)"
+        (undeleteClickedEvent)="undeleteClicked($event)"
       ></peer-chat-chat-box>
     </div>
   </div>
