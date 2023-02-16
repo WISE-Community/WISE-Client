@@ -1,4 +1,13 @@
+import { CSVToArray } from './array';
+import csvArraySample from './arraySample';
 import { getIntersectOfArrays } from './array';
+
+describe('CSVToArray()', () => {
+  it('should convert a delimited string to an array of arrays', () => {
+    const arrayData = CSVToArray(csvArraySample.delimitedString);
+    expect(arrayData).toEqual(csvArraySample.convertedArray);
+  });
+});
 
 const obj1 = { id: 1 };
 const obj2 = { id: 2 };
