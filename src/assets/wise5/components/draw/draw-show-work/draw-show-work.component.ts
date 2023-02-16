@@ -32,19 +32,18 @@ export class DrawShowWorkComponent extends ComponentShowWorkDirective {
     this.setStudentWork();
   }
 
-  getDrawingToolId(): string {
-    return this.getDrawingToolIdPrefix() + this.componentState.id;
+  ngOnDestroy(): void {
+    $(`#${this.drawingToolId}`).remove();
   }
 
-  getDrawingToolIdPrefix(): string {
-    if (this.isRevision) {
-      return 'drawing-tool-revision-';
-    } else {
-      return 'drawing-tool-';
-    }
+  private getDrawingToolId(): string {
+    const componentStateId = this.componentState.id;
+    return this.isRevision
+      ? `drawing-tool-revision-${componentStateId}`
+      : `drawing-tool-${componentStateId}`;
   }
 
-  initializeDrawingTool(): void {
+  private initializeDrawingTool(): void {
     this.drawingTool = this.DrawService.initializeDrawingTool(
       this.drawingToolId,
       this.componentContent.stamps,
@@ -55,7 +54,7 @@ export class DrawShowWorkComponent extends ComponentShowWorkDirective {
     this.drawingTool.canvas.removeListeners();
   }
 
-  setStudentWork(): void {
+  private setStudentWork(): void {
     this.drawingTool.load(this.componentState.studentData.drawData);
   }
 }
