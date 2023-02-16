@@ -31,6 +31,10 @@ export class Component {
     return false;
   }
 
+  isGradeable(): boolean {
+    return true;
+  }
+
   getConnectedComponent(nodeId: string, componentId: string): any {
     return this.content.connectedComponents.find(
       (connectedComponent) =>
