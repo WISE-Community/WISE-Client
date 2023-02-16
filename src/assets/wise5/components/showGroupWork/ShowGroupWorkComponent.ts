@@ -1,7 +1,7 @@
 import { Component } from '../../common/Component';
 
 export class ShowGroupWorkComponent extends Component {
-  isGradeable(): boolean {
+  isGradable(): boolean {
     return false;
   }
 }

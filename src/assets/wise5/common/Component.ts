@@ -31,7 +31,7 @@ export class Component {
     return false;
   }
 
-  isGradeable(): boolean {
+  isGradable(): boolean {
     return true;
   }
 

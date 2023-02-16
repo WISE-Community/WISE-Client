@@ -20,7 +20,7 @@ export class WorkgroupComponentGradingComponent {
 
   component: ComponentContent;
   componentStates: any[];
-  isGradeable: boolean;
+  isGradable: boolean;
   latestComponentState: any;
   latestComponentStateId: number;
   teacherWorkgroupId: number;
@@ -37,7 +37,7 @@ export class WorkgroupComponentGradingComponent {
     this.component = this.ProjectService.getComponent(this.nodeId, this.componentId);
     const factory = new ComponentFactory();
     const component = factory.getComponent(this.component, this.nodeId);
-    this.isGradeable = component.isGradeable();
+    this.isGradable = component.isGradable();
     this.componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
       this.workgroupId,
       this.componentId
