@@ -24,43 +24,15 @@ export class TeacherPeerGroupService extends PeerGroupService {
     });
   }
 
-  retrievePeerGroup(
-    peerGroupingTag: string,
-    workgroupId = this.configService.getWorkgroupId()
-  ): Observable<PeerGroup> {
-    if (this.configService.isAuthoring() || this.configService.isSignedInUserATeacher()) {
-      return of(this.getPreviewPeerGroup());
-    }
-    return super.retrievePeerGroup(peerGroupingTag, workgroupId);
+  retrievePeerGroup(): Observable<PeerGroup> {
+    return of(this.getPreviewPeerGroup());
   }
 
-  retrievePeerGroupWork(
-    peerGroup: PeerGroup,
-    nodeId: string,
-    componentId: string
-  ): Observable<any> {
-    if (this.configService.isAuthoring() || this.configService.isSignedInUserATeacher()) {
-      return of([]);
-    }
-    return super.retrievePeerGroupWork(peerGroup, nodeId, componentId);
+  retrievePeerGroupWork(): Observable<any> {
+    return of([]);
   }
 
-  retrieveStudentWork(
-    peerGroup: PeerGroup,
-    nodeId: string,
-    componentId: string,
-    showWorkNodeId: string,
-    showWorkComponentId: string
-  ): Observable<any> {
-    if (this.configService.isAuthoring() || this.configService.isSignedInUserATeacher()) {
-      return of([]);
-    }
-    return super.retrieveStudentWork(
-      peerGroup,
-      nodeId,
-      componentId,
-      showWorkNodeId,
-      showWorkComponentId
-    );
+  retrieveStudentWork(): Observable<any> {
+    return of([]);
   }
 }
