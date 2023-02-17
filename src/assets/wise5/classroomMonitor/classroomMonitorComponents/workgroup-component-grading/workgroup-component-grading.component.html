@@ -1,5 +1,5 @@
-<div class="component__content" fxLayout="row wrap">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="66" class="component--grading__response">
+<div class="component__content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+  <div fxLayout="column" fxFlex="100" [fxFlex.gt-sm]="isGradable ? 66 : 100">
     <ng-container *ngIf="latestComponentState != null">
       <animation-grading
         *ngIf="component.type === 'Animation'"
