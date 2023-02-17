@@ -12,6 +12,7 @@ import { LabelService } from '../labelService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { MatDialog } from '@angular/material/dialog';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
+import { wordWrap } from '../../../common/string/string';
 
 @Component({
   selector: 'label-student',
@@ -711,7 +712,7 @@ export class LabelStudent extends ComponentStudent {
   wrapTextIfNecessary(text: string): string {
     let wrappedText = text;
     if (this.componentContent.labelWidth != null && this.componentContent.labelWidth !== '') {
-      wrappedText = this.UtilService.wordWrap(text, this.componentContent.labelWidth);
+      wrappedText = wordWrap(text, this.componentContent.labelWidth);
     }
     return wrappedText;
   }
