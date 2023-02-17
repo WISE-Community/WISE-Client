@@ -2,7 +2,6 @@
 
 import * as angular from 'angular';
 import './classroomMonitorComponents/manageStudents/manageStudentsModule';
-import './classroomMonitorComponents/milestones/milestones';
 import './classroomMonitorComponents/nodeProgress/nodeProgress';
 import './classroomMonitorComponents/studentProgress/studentProgress';
 import './dataExport/data-export-module';
@@ -13,13 +12,7 @@ import { StudentProgressComponent } from './student-progress/student-progress.co
 import { ClassroomMonitorComponent } from './classroom-monitor.component';
 
 export default angular
-  .module('classroomMonitor', [
-    'dataExport',
-    'manageStudents',
-    'milestones',
-    'nodeProgress',
-    'studentProgress'
-  ])
+  .module('classroomMonitor', ['dataExport', 'manageStudents', 'nodeProgress', 'studentProgress'])
   .directive('classroomMonitor', downgradeComponent({ component: ClassroomMonitorComponent }))
   .directive('notebookGrading', downgradeComponent({ component: NotebookGradingComponent }))
   .directive(
