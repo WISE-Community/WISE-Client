@@ -658,6 +658,9 @@ export class ProjectService {
   }
 
   getConstraintsThatAffectNode(node: any): any[] {
+    if (!this.configService.getConfigParam('constraints')) {
+      return [];
+    }
     const constraints = [];
     const allConstraints = this.activeConstraints;
     for (let constraint of allConstraints) {

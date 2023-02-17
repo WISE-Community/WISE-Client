@@ -102,11 +102,11 @@ export class ConstraintService {
     ].includes(action);
   }
 
-  evaluateConstraint(constraintForNode): any {
+  evaluateConstraint(constraintForNode: any): any {
     return this.evaluateNodeConstraint(constraintForNode);
   }
 
-  evaluateNodeConstraint(constraintForNode): any {
+  evaluateNodeConstraint(constraintForNode: any): any {
     const removalCriteria = constraintForNode.removalCriteria;
     const removalConditional = constraintForNode.removalConditional;
     if (removalCriteria == null) {
@@ -116,7 +116,10 @@ export class ConstraintService {
     }
   }
 
-  private evaluateMultipleRemovalCriteria(multipleRemovalCriteria, removalConditional): any {
+  private evaluateMultipleRemovalCriteria(
+    multipleRemovalCriteria: any,
+    removalConditional: any
+  ): any {
     let result = false;
     for (let c = 0; c < multipleRemovalCriteria.length; c++) {
       const singleCriteriaResult = this.evaluateCriteria(multipleRemovalCriteria[c]);
@@ -170,12 +173,12 @@ export class ConstraintService {
     return nodeStatus.isVisible;
   }
 
-  evaluateIsVisitableCriteria(criteria) {
+  evaluateIsVisitableCriteria(criteria: any): boolean {
     const nodeStatus = this.dataService.getNodeStatusByNodeId(criteria.params.nodeId);
     return nodeStatus.isVisitable;
   }
 
-  evaluateIsVisitedCriteria(criteria) {
+  evaluateIsVisitedCriteria(criteria: any): boolean {
     const events = this.dataService.getEvents();
     for (const event of events) {
       if (event.nodeId === criteria.params.nodeId && event.event === 'nodeEntered') {
@@ -185,7 +188,7 @@ export class ConstraintService {
     return false;
   }
 
-  evaluateIsVisitedAfterCriteria(criteria) {
+  evaluateIsVisitedAfterCriteria(criteria: any): boolean {
     const isVisitedAfterNodeId = criteria.params.isVisitedAfterNodeId;
     const criteriaCreatedTimestamp = criteria.params.criteriaCreatedTimestamp;
     const events = this.dataService.getEvents();
@@ -201,7 +204,7 @@ export class ConstraintService {
     return false;
   }
 
-  evaluateIsRevisedAfterCriteria(criteria) {
+  evaluateIsRevisedAfterCriteria(criteria: any): boolean {
     const isRevisedAfterNodeId = criteria.params.isRevisedAfterNodeId;
     const isRevisedAfterComponentId = criteria.params.isRevisedAfterComponentId;
     const criteriaCreatedTimestamp = criteria.params.criteriaCreatedTimestamp;
@@ -215,7 +218,7 @@ export class ConstraintService {
     );
   }
 
-  evaluateIsVisitedAndRevisedAfterCriteria(criteria) {
+  evaluateIsVisitedAndRevisedAfterCriteria(criteria: any): boolean {
     const isVisitedAfterNodeId = criteria.params.isVisitedAfterNodeId;
     const isRevisedAfterNodeId = criteria.params.isRevisedAfterNodeId;
     const isRevisedAfterComponentId = criteria.params.isRevisedAfterComponentId;
@@ -293,16 +296,16 @@ export class ConstraintService {
     return false;
   }
 
-  evaluateTeacherRemovalCriteria(criteria: any) {
+  evaluateTeacherRemovalCriteria(criteria: any): boolean {
     return criteria.params.periodId !== this.configService.getPeriodId();
   }
 
-  evaluateUsedXSubmitsCriteria(criteria) {
+  evaluateUsedXSubmitsCriteria(criteria: any): boolean {
     const params = criteria.params;
     return this.getSubmitCount(params.nodeId, params.componentId) >= params.requiredSubmitCount;
   }
 
-  getSubmitCount(nodeId, componentId) {
+  getSubmitCount(nodeId: string, componentId: string): number {
     // counter for manually counting the component states with isSubmit=true
     let manualSubmitCounter = 0;
 
@@ -330,7 +333,7 @@ export class ConstraintService {
     return Math.max(manualSubmitCounter, highestSubmitCounter);
   }
 
-  evaluateNumberOfWordsWrittenCriteria(criteria) {
+  evaluateNumberOfWordsWrittenCriteria(criteria: any): boolean {
     const params = criteria.params;
     const nodeId = params.nodeId;
     const componentId = params.componentId;
@@ -350,7 +353,7 @@ export class ConstraintService {
     return false;
   }
 
-  evaluateAddXNumberOfNotesOnThisStepCriteria(criteria) {
+  evaluateAddXNumberOfNotesOnThisStepCriteria(criteria: any): boolean {
     const params = criteria.params;
     const nodeId = params.nodeId;
     const requiredNumberOfNotes = params.requiredNumberOfNotes;
@@ -362,7 +365,7 @@ export class ConstraintService {
     return false;
   }
 
-  evaluateFillXNumberOfRowsCriteria(criteria) {
+  evaluateFillXNumberOfRowsCriteria(criteria: any): boolean {
     const params = criteria.params;
     const nodeId = params.nodeId;
     const componentId = params.componentId;
@@ -385,7 +388,7 @@ export class ConstraintService {
     );
   }
 
-  evaluateHasTagCriteria(criteria) {
+  evaluateHasTagCriteria(criteria: any): boolean {
     return this.tagService.hasTagName(criteria.params.tag);
   }
 }

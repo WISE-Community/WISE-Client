@@ -8,7 +8,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
-import { NotebookService } from './notebookService';
 import { RandomKeyService } from './randomKeyService';
 
 @Injectable()
@@ -45,19 +44,17 @@ export class StudentDataService extends DataService {
   public navItemIsExpanded$: Observable<any> = this.navItemIsExpandedSource.asObservable();
   private nodeStatusesChangedSource: Subject<void> = new Subject<void>();
   public nodeStatusesChanged$: Observable<void> = this.nodeStatusesChangedSource.asObservable();
+  private updateNodeStatusesSource: Subject<void> = new Subject<void>();
+  public updateNodeStatuses$: Observable<void> = this.updateNodeStatusesSource.asObservable();
 
   constructor(
     public http: HttpClient,
     private AnnotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private ConfigService: ConfigService,
-    private notebookService: NotebookService,
     protected ProjectService: ProjectService
   ) {
     super(ProjectService);
-    this.notebookService.notebookUpdated$.subscribe(() => {
-      this.updateNodeStatuses();
-    });
   }
 
   broadcastComponentStudentData(componentStudentData: any) {
@@ -84,6 +81,14 @@ export class StudentDataService extends DataService {
     this.AnnotationService.setAnnotations(this.studentData.annotations);
     this.populateHistories(this.studentData.events);
     this.updateNodeStatuses();
+  }
+
+  updateNodeStatuses(): void {
+    this.updateNodeStatusesSource.next();
+  }
+
+  getNodeStatusByNodeId(nodeId: string): any {
+    return this.nodeStatuses[nodeId];
   }
 
   retrieveStudentDataForSignedInStudent() {
@@ -145,139 +150,9 @@ export class StudentDataService extends DataService {
     }
   }
 
-  getNodeStatuses() {
-    return this.nodeStatuses;
-  }
-
-  setNodeStatusByNodeId(nodeId, nodeStatus) {
-    this.nodeStatuses[nodeId] = nodeStatus;
-  }
-
-  getNodeStatusByNodeId(nodeId) {
-    return this.nodeStatuses[nodeId];
-  }
-
-  updateNodeStatuses() {
-    this.constraintService.evaluate();
-    this.updateStepNodeStatuses();
-    this.updateGroupNodeStatuses();
-    this.maxScore = this.getMaxScore();
-    this.broadcastNodeStatusesChanged();
-  }
-
   broadcastNodeStatusesChanged() {
+    this.maxScore = this.getMaxScore();
     this.nodeStatusesChangedSource.next();
-  }
-
-  updateStepNodeStatuses() {
-    const nodes = this.ProjectService.getNodes();
-    for (const node of nodes) {
-      if (!this.ProjectService.isGroupNode(node.id)) {
-        this.updateNodeStatusByNode(node);
-      }
-    }
-  }
-
-  updateGroupNodeStatuses() {
-    const groups = this.ProjectService.getGroups();
-    for (const group of groups) {
-      group.depth = this.ProjectService.getNodeDepth(group.id, 0);
-    }
-    groups.sort(function (a, b) {
-      return b.depth - a.depth;
-    });
-    for (const group of groups) {
-      this.updateNodeStatusByNode(group);
-    }
-  }
-
-  updateNodeStatusByNode(node) {
-    const nodeId = node.id;
-    const nodeStatus = this.calculateNodeStatus(node);
-    this.updateNodeStatus(nodeId, nodeStatus);
-    this.updateNodeStatusProgress(nodeId);
-    this.updateNodeStatusIcon(nodeId);
-    this.updateNodeStatusTimestamps(nodeId);
-  }
-
-  calculateNodeStatus(node) {
-    const nodeId = node.id;
-    const nodeStatus: any = this.createNodeStatus(nodeId);
-    const constraintsForNode = this.getConstraintsThatAffectNode(node);
-    const constraintResults = this.constraintService.evaluate(constraintsForNode);
-    nodeStatus.isVisible = constraintResults.isVisible;
-    nodeStatus.isVisitable = constraintResults.isVisitable;
-    this.setNotVisibleIfRequired(nodeId, constraintsForNode, nodeStatus);
-    nodeStatus.isCompleted = this.isCompleted(nodeId);
-    nodeStatus.isVisited = this.isNodeVisited(nodeId);
-    return nodeStatus;
-  }
-
-  createNodeStatus(nodeId) {
-    return {
-      nodeId: nodeId,
-      isVisible: true,
-      isVisitable: true,
-      isCompleted: true
-    };
-  }
-
-  getConstraintsThatAffectNode(node) {
-    if (!this.ConfigService.getConfigParam('constraints')) {
-      // constraints have been disabled which is allowed in preview mode
-      return [];
-    } else {
-      return this.ProjectService.getConstraintsThatAffectNode(node);
-    }
-  }
-
-  setNotVisibleIfRequired(nodeId, constraintsForNode, nodeStatus) {
-    if (
-      constraintsForNode.length == 0 &&
-      this.ProjectService.getFlattenedProjectAsNodeIds().indexOf(nodeId) == -1 &&
-      !this.ProjectService.isGroupNode(nodeId)
-    ) {
-      nodeStatus.isVisible = false;
-    }
-  }
-
-  updateNodeStatus(nodeId, nodeStatus) {
-    const oldNodeStatus = this.getNodeStatusByNodeId(nodeId);
-    if (oldNodeStatus == null) {
-      this.setNodeStatusByNodeId(nodeId, nodeStatus);
-    } else {
-      const previousIsCompletedValue = this.nodeStatuses[nodeId].isCompleted;
-      this.nodeStatuses[nodeId].isVisited = nodeStatus.isVisited;
-      this.nodeStatuses[nodeId].isVisible = nodeStatus.isVisible;
-      this.nodeStatuses[nodeId].isVisitable = nodeStatus.isVisitable;
-      this.nodeStatuses[nodeId].isCompleted = nodeStatus.isCompleted;
-    }
-  }
-
-  updateNodeStatusProgress(nodeId) {
-    this.nodeStatuses[nodeId].progress = this.getNodeProgressById(nodeId);
-  }
-
-  updateNodeStatusIcon(nodeId) {
-    this.nodeStatuses[nodeId].icon = this.ProjectService.getNode(nodeId).getIcon();
-  }
-
-  updateNodeStatusTimestamps(nodeId) {
-    const latestComponentStatesForNode = this.getLatestComponentStateByNodeId(nodeId);
-    if (latestComponentStatesForNode != null) {
-      this.updateNodeStatusClientSaveTime(nodeId, latestComponentStatesForNode);
-      this.updateNodeStatusServerSaveTime(nodeId, latestComponentStatesForNode);
-    }
-  }
-
-  updateNodeStatusClientSaveTime(nodeId, latestComponentStatesForNode) {
-    this.nodeStatuses[nodeId].latestComponentStateClientSaveTime =
-      latestComponentStatesForNode.clientSaveTime;
-  }
-
-  updateNodeStatusServerSaveTime(nodeId, latestComponentStatesForNode) {
-    this.nodeStatuses[nodeId].latestComponentStateServerSaveTime =
-      latestComponentStatesForNode.serverSaveTime;
   }
 
   isNodeVisitedAfterTimestamp(event, nodeId, timestamp) {
@@ -785,11 +660,6 @@ export class StudentDataService extends DataService {
 
   isNodeExistAndActive(nodeId) {
     return this.ProjectService.getNodeById(nodeId) != null && this.ProjectService.isActive(nodeId);
-  }
-
-  canVisitNode(nodeId: string): boolean {
-    const nodeStatus = this.getNodeStatusByNodeId(nodeId);
-    return nodeStatus != null && nodeStatus.isVisitable;
   }
 
   /**
