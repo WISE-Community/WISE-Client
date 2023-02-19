@@ -12,6 +12,7 @@ import { DataService } from '../../../app/services/data.service';
 import { Node } from '../common/Node';
 import { compressToEncodedURIComponent } from 'lz-string';
 import { isMatchingPeriods } from '../common/period/period';
+import { getIntersectOfArrays } from '../common/array/array';
 
 @Injectable()
 export class TeacherDataService extends DataService {
@@ -542,19 +543,13 @@ export class TeacherDataService extends DataService {
   getComponentStatesByWorkgroupIdAndNodeId(workgroupId, nodeId) {
     const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
     const componentStatesByNodeId = this.getComponentStatesByNodeId(nodeId);
-    return this.UtilService.getIntersectOfArrays(
-      componentStatesByWorkgroupId,
-      componentStatesByNodeId
-    );
+    return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByNodeId);
   }
 
   getComponentStatesByWorkgroupIdAndComponentId(workgroupId, componentId) {
     const componentStatesByWorkgroupId = this.getComponentStatesByWorkgroupId(workgroupId);
     const componentStatesByComponentId = this.getComponentStatesByComponentId(componentId);
-    return this.UtilService.getIntersectOfArrays(
-      componentStatesByWorkgroupId,
-      componentStatesByComponentId
-    );
+    return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByComponentId);
   }
 
   getComponentStatesByWorkgroupIdAndComponentIds(workgroupId, componentIds) {
@@ -565,10 +560,7 @@ export class TeacherDataService extends DataService {
         this.getComponentStatesByComponentId(componentId)
       );
     }
-    return this.UtilService.getIntersectOfArrays(
-      componentStatesByWorkgroupId,
-      componentStatesByComponentId
-    );
+    return getIntersectOfArrays(componentStatesByWorkgroupId, componentStatesByComponentId);
   }
 
   getEventsByWorkgroupId(workgroupId) {
@@ -577,12 +569,6 @@ export class TeacherDataService extends DataService {
 
   getEventsByNodeId(nodeId) {
     return this.studentData.eventsByNodeId[nodeId] || [];
-  }
-
-  getEventsByWorkgroupIdAndNodeId(workgroupId, nodeId) {
-    const eventsByWorkgroupId = this.getEventsByWorkgroupId(workgroupId);
-    const eventsByNodeId = this.getEventsByNodeId(nodeId);
-    return this.UtilService.getIntersectOfArrays(eventsByWorkgroupId, eventsByNodeId);
   }
 
   getLatestEventByWorkgroupIdAndNodeIdAndType(workgroupId, nodeId, eventType) {
@@ -622,12 +608,6 @@ export class TeacherDataService extends DataService {
     } else {
       return [];
     }
-  }
-
-  getAnnotationsToWorkgroupIdAndNodeId(workgroupId, nodeId) {
-    const annotationsToWorkgroupId = this.getAnnotationsToWorkgroupId(workgroupId);
-    const annotationsByNodeId = this.getAnnotationsByNodeId(nodeId);
-    return this.UtilService.getIntersectOfArrays(annotationsToWorkgroupId, annotationsByNodeId);
   }
 
   initializePeriods() {

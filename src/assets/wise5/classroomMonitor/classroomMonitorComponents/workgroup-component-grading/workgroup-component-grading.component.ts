@@ -2,6 +2,8 @@
 
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ComponentContent } from '../../../common/ComponentContent';
+import { ComponentFactory } from '../../../common/ComponentFactory';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -16,8 +18,9 @@ export class WorkgroupComponentGradingComponent {
   @Input() nodeId: string;
   @Input() workgroupId: number;
 
-  component: any;
+  component: ComponentContent;
   componentStates: any[];
+  isGradable: boolean;
   latestComponentState: any;
   latestComponentStateId: number;
   teacherWorkgroupId: number;
@@ -32,6 +35,9 @@ export class WorkgroupComponentGradingComponent {
   ngOnInit() {
     this.teacherWorkgroupId = this.ConfigService.getWorkgroupId();
     this.component = this.ProjectService.getComponent(this.nodeId, this.componentId);
+    const factory = new ComponentFactory();
+    const component = factory.getComponent(this.component, this.nodeId);
+    this.isGradable = component.isGradable();
     this.componentStates = this.TeacherDataService.getComponentStatesByWorkgroupIdAndComponentId(
       this.workgroupId,
       this.componentId
