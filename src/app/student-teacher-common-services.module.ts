@@ -37,7 +37,6 @@ import { DialogGuidanceService } from '../assets/wise5/components/dialogGuidance
 import { PeerChatService } from '../assets/wise5/components/peerChat/peerChatService';
 import { ShowMyWorkService } from '../assets/wise5/components/showMyWork/showMyWorkService';
 import { ShowGroupWorkService } from '../assets/wise5/components/showGroupWork/showGroupWorkService';
-import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 import { ComputerAvatarService } from '../assets/wise5/services/computerAvatarService';
 import { StudentStatusService } from '../assets/wise5/services/studentStatusService';
 import { OpenResponseCompletionCriteriaService } from '../assets/wise5/components/openResponse/openResponseCompletionCriteriaService';
@@ -83,7 +82,6 @@ import { StudentPeerGroupService } from '../assets/wise5/services/studentPeerGro
     OpenResponseService,
     PathService,
     PeerChatService,
-    PeerGroupService,
     ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,

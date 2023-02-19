@@ -4,10 +4,13 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Node } from '../common/Node';
 import { PeerGroup } from '../components/peerChat/PeerGroup';
+import { PeerGroupMember } from '../components/peerChat/PeerGroupMember';
 import { ConfigService } from './configService';
 
 @Injectable()
 export class PeerGroupService {
+  static readonly PREVIEW_PEER_GROUP_ID = 1;
+
   runId: number;
 
   constructor(protected configService: ConfigService, protected http: HttpClient) {
@@ -32,6 +35,28 @@ export class PeerGroupService {
     return this.http
       .get<PeerGroup>(`/api/peer-group/${runId}/${workgroupId}/${peerGroupingTag}`)
       .pipe(map((value) => new PeerGroup(value.id, value.members, value.peerGrouping)));
+  }
+
+  retrievePeerGroupWork(
+    peerGroup: PeerGroup,
+    nodeId: string,
+    componentId: string
+  ): Observable<any> {
+    return this.http.get(`/api/peer-group/${peerGroup.id}/${nodeId}/${componentId}/student-work`);
+  }
+
+  protected getPreviewPeerGroup(): PeerGroup {
+    let workgroupId = 1;
+    let periodId = 1;
+    if (!this.configService.isAuthoring()) {
+      workgroupId = this.configService.getWorkgroupId();
+      periodId = this.configService.getPeriodId();
+    }
+    return new PeerGroup(
+      PeerGroupService.PREVIEW_PEER_GROUP_ID,
+      [new PeerGroupMember(workgroupId, periodId)],
+      null
+    );
   }
 
   retrieveStudentWork(
