@@ -5,7 +5,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
-import { StudentPeerGroupService } from '../../../services/studentPeerGroupService';
+import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentAssetService } from '../../../services/studentAssetService';
@@ -150,7 +150,6 @@ describe('PeerChatStudentComponent', () => {
         SessionService,
         StudentAssetService,
         StudentDataService,
-        StudentPeerGroupService,
         StudentWebSocketService,
         TagService
       ]
@@ -166,16 +165,14 @@ describe('PeerChatStudentComponent', () => {
       return workgroupId === teacherWorkgroupId;
     });
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
-    retrievePeerGroupSpy = spyOn(TestBed.inject(StudentPeerGroupService), 'retrievePeerGroup');
+    retrievePeerGroupSpy = spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroup');
     retrievePeerGroupSpy.and.callFake(() => {
       return of(peerGroup);
     });
-    spyOn(TestBed.inject(StudentPeerGroupService), 'retrievePeerGroupWork').and.returnValue(
+    spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroupWork').and.returnValue(
       of([componentState1, componentState2])
     );
-    spyOn(TestBed.inject(StudentPeerGroupService), 'retrievePeerGroupAnnotations').and.returnValue(
-      of([])
-    );
+    spyOn(TestBed.inject(PeerGroupService), 'retrievePeerGroupAnnotations').and.returnValue(of([]));
     component = fixture.componentInstance;
     component.component = new PeerChatComponent(componentContent, nodeId);
     component.workgroupId = studentWorkgroupId1;

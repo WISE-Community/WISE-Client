@@ -142,4 +142,20 @@ export class StudentPeerGroupService extends PeerGroupService {
       showWorkComponentId
     );
   }
+
+  retrievePeerGroupAnnotations(
+    peerGroup: PeerGroup,
+    nodeId: string,
+    componentId: string
+  ): Observable<any> {
+    if (this.configService.isPreview()) {
+      const latestScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
+        nodeId,
+        componentId,
+        this.configService.getWorkgroupId()
+      );
+      return latestScoreAnnotation != null ? of([latestScoreAnnotation]) : of([]);
+    }
+    return this.http.get(`/api/peer-group/${peerGroup.id}/${nodeId}/${componentId}/annotations`);
+  }
 }

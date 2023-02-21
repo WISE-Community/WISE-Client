@@ -48,6 +48,7 @@ import { TabulatorDataService } from '../assets/wise5/components/table/tabulator
 import { StompService } from '../assets/wise5/services/stompService';
 import { ClickToSnipImageService } from '../assets/wise5/services/clickToSnipImageService';
 import { StudentPeerGroupService } from '../assets/wise5/services/studentPeerGroupService';
+import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
 
 @NgModule({
   providers: [
@@ -82,6 +83,7 @@ import { StudentPeerGroupService } from '../assets/wise5/services/studentPeerGro
     OpenResponseService,
     PathService,
     PeerChatService,
+    PeerGroupService,
     ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,
