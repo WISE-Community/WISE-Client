@@ -17808,7 +17808,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">739</context>
+          <context context-type="linenumber">740</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this label?
 
@@ -17834,7 +17834,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>A New Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">486</context>
+          <context context-type="linenumber">487</context>
         </context-group>
         <target state="needs-translation">A New Label</target>
       </trans-unit>
@@ -17842,7 +17842,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset to the initial state?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">845</context>
+          <context context-type="linenumber">846</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to reset to the initial state?</target>
       </trans-unit>
@@ -17850,7 +17850,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to delete the background image?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">906</context>
+          <context context-type="linenumber">907</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete the background image?</target>
       </trans-unit>
@@ -17858,7 +17858,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/labelService.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <target state="needs-translation">Label</target>
       </trans-unit>
@@ -20884,7 +20884,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">352</context>
+          <context context-type="linenumber">303</context>
         </context-group>
         <target state="needs-translation">Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20892,7 +20892,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">357</context>
+          <context context-type="linenumber">308</context>
         </context-group>
         <target state="needs-translation">Auto Saved <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
@@ -20900,7 +20900,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Submitted <x id="saveTime" equiv-text="saveTimeText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/utilService.ts</context>
-          <context context-type="linenumber">362</context>
+          <context context-type="linenumber">313</context>
         </context-group>
         <target state="needs-translation">Submitted <x id="saveTime" equiv-text="saveTimeText"/></target>
       </trans-unit>
