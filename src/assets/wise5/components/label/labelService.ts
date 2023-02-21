@@ -7,6 +7,7 @@ import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
 import { UtilService } from '../../services/utilService';
 import { convertToPNGFile } from '../../common/canvas/canvas';
+import { wordWrap } from '../../common/string/string';
 
 @Injectable()
 export class LabelService extends ComponentService {
@@ -233,7 +234,7 @@ export class LabelService extends ComponentService {
      * Line wrap the text so that each line does not exceed the max number of
      * characters.
      */
-    const textWrapped = this.UtilService.wordWrap(text, maxCharactersPerLine);
+    const textWrapped = wordWrap(text, maxCharactersPerLine);
 
     // create a div to draw the SVG in
     const svgElement = document.createElement('div');
@@ -487,7 +488,7 @@ export class LabelService extends ComponentService {
 
     let wrappedTextString = textString;
     if (labelWidth != null) {
-      wrappedTextString = this.UtilService.wordWrap(textString, labelWidth);
+      wrappedTextString = wordWrap(textString, labelWidth);
     }
 
     // create an editable text element
