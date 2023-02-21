@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { AnnotationService } from './annotationService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { ConfigService } from './configService';
@@ -6,6 +7,7 @@ import { StudentDataService } from './studentDataService';
 import { TagService } from './tagService';
 import { UtilService } from './utilService';
 
+@Injectable()
 export class ConstraintService {
   criteriaFunctionNameToFunction = {
     branchPathTaken: (criteria) => {
